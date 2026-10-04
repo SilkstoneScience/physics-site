@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 250" font-family="Arial, sans-serif" font-size="13" fill="#1c2430">
+  <!-- light grid -->
+  <g stroke="#e3e7ee" stroke-width="1">
+    <line x1="95" y1="50" x2="95" y2="200"/><line x1="140" y1="50" x2="140" y2="200"/>
+    <line x1="185" y1="50" x2="185" y2="200"/><line x1="230" y1="50" x2="230" y2="200"/>
+    <line x1="275" y1="50" x2="275" y2="200"/><line x1="320" y1="50" x2="320" y2="200"/>
+    <line x1="50" y1="150" x2="330" y2="150"/><line x1="50" y1="100" x2="330" y2="100"/>
+    <line x1="50" y1="50" x2="330" y2="50"/>
+  </g>
+  <!-- axes -->
+  <g stroke="#1c2430" stroke-width="1.5" fill="none">
+    <line x1="50" y1="200" x2="340" y2="200"/>
+    <line x1="50" y1="200" x2="50" y2="25"/>
+    <path d="M335 195 L343 200 L335 205"/>
+    <path d="M45 30 L50 22 L55 30"/>
+  </g>
+  <!-- graph line -->
+  <polyline points="50,200 230,50 320,50" fill="none" stroke="#1f5fbf" stroke-width="3" stroke-linejoin="round"/>
+  <!-- x-axis numbers -->
+  <g text-anchor="middle">
+    <text x="50" y="218">0</text><text x="95" y="218">1</text><text x="140" y="218">2</text>
+    <text x="185" y="218">3</text><text x="230" y="218">4</text><text x="275" y="218">5</text>
+    <text x="320" y="218">6</text>
+    <text x="195" y="242">time / s</text>
+  </g>
+  <!-- y-axis numbers -->
+  <g text-anchor="end">
+    <text x="42" y="204">0</text><text x="42" y="154">4</text>
+    <text x="42" y="104">8</text><text x="42" y="54">12</text>
+  </g>
+  <text x="58" y="18">velocity / m s⁻¹</text>
+</svg>

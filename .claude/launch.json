@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "physics-site",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "tools/preview.ps1"],
+      "env": { "NO_BROWSER": "1" },
+      "port": 8000
+    }
+  ]
+}

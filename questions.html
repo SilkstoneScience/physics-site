@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Question Bank · DP Physics</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/site.js"></script>
+  <script defer src="js/questions.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body data-root="" data-section="questions">
+  <header id="site-header"></header>
+  <main>
+    <h1>Question bank</h1>
+    <p class="lead">Multiple-choice questions are marked straight away. For structured questions, write your answer,
+      check the mark scheme, then record the marks you earned. Your progress is saved in this browser only.</p>
+
+    <div class="filters">
+      <label>Theme <select id="f-theme"></select></label>
+      <label>Topic <select id="f-topic"></select></label>
+      <label>Paper
+        <select id="f-paper">
+          <option value="">All papers</option>
+          <option value="1A">Paper 1A (multiple choice)</option>
+          <option value="1B">Paper 1B (data-based)</option>
+          <option value="2">Paper 2 (structured)</option>
+        </select>
+      </label>
+      <label>Difficulty
+        <select id="f-difficulty">
+          <option value="">All</option>
+          <option value="1">Foundation</option>
+          <option value="2">Standard</option>
+          <option value="3">Challenging</option>
+        </select>
+      </label>
+      <label>Level
+        <select id="f-level">
+          <option value="">SL and HL</option>
+          <option value="SL">SL only</option>
+        </select>
+      </label>
+      <label>My progress
+        <select id="f-status">
+          <option value="">All questions</option>
+          <option value="new">Not tried yet</option>
+          <option value="started">In progress</option>
+          <option value="review">Needs another look</option>
+          <option value="done">Fully correct</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="summary">
+      <span id="q-summary">Loading questions…</span>
+      <button class="link-btn" id="q-reset">Reset my progress</button>
+    </div>
+
+    <div id="q-list"></div>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
