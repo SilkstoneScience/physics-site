@@ -196,6 +196,50 @@ window.DATA_BOOKLET = {
     note: 'Potential divider (not in the booklet): $V_{\\text{out}} = V_{\\text{in}}\\frac{R_2}{R_1 + R_2}$. Terminal p.d.: $V = \\varepsilon - Ir$. Ideal ammeters have zero resistance; ideal voltmeters have infinite resistance.',
     constants: ['e'],
   },
+  'D.1': {
+    equations: [
+      ["Newton's law of gravitation", 'F = G\\frac{m_1m_2}{r^2}'],
+      ['Gravitational field strength', 'g = \\frac{F}{m} = G\\frac{M}{r^2}'],
+      ['Gravitational potential energy', 'E_p = -\\frac{Gm_1m_2}{r}', true],
+      ['Gravitational potential', 'V_g = -\\frac{GM}{r}', true],
+      ['Field strength and potential gradient', 'g = -\\frac{\\Delta V_g}{\\Delta r}', true],
+      ['Work done moving a mass', 'W = m\\Delta V_g', true],
+      ['Escape speed', 'v_{\\text{esc}} = \\sqrt{\\frac{2GM}{r}}', true],
+      ['Orbital speed', 'v_{\\text{orbital}} = \\sqrt{\\frac{GM}{r}}', true],
+    ],
+    note: 'Measure $r$ from the centre of the mass. Kepler\'s third law, $T^2 = \\frac{4\\pi^2}{GM}r^3$, is not in the booklet: derive it from $\\frac{GMm}{r^2} = \\frac{mv^2}{r}$. HL: orbital energy $E = -\\frac{GMm}{2r}$.',
+    constants: ['G', 'g'],
+  },
+  'D.2': {
+    equations: [
+      ["Coulomb's law", 'F = k\\frac{q_1q_2}{r^2}, \\quad k = \\frac{1}{4\\pi\\varepsilon_0}'],
+      ['Electric field strength', 'E = \\frac{F}{q}'],
+      ['Uniform field between parallel plates', 'E = \\frac{V}{d}'],
+      ['Electric potential energy', 'E_p = k\\frac{q_1q_2}{r}', true],
+      ['Electric potential', 'V_e = \\frac{kQ}{r}', true],
+      ['Field strength and potential gradient', 'E = -\\frac{\\Delta V_e}{\\Delta r}', true],
+      ['Work done moving a charge', 'W = q\\Delta V_e', true],
+    ],
+    note: 'Field from a point charge: $E = \\frac{kQ}{r^2}$. In a material, replace $\\varepsilon_0$ by its permittivity $\\varepsilon$. $1\\ \\text{eV} = 1.60 \\times 10^{-19}$ J.',
+    constants: ['k', 'eps0', 'e'],
+  },
+  'D.3': {
+    equations: [
+      ['Force on a moving charge', 'F = qvB\\sin\\theta'],
+      ['Force on a current-carrying conductor', 'F = BIL\\sin\\theta'],
+      ['Force per unit length between parallel wires', '\\frac{F}{L} = \\mu_0\\frac{I_1I_2}{2\\pi r}'],
+    ],
+    note: 'Not in the booklet but derived from it: radius in a magnetic field $r = \\frac{mv}{qB}$; velocity selector $v = \\frac{E}{B}$; accelerating through a p.d. $\\frac{1}{2}mv^2 = qV$.',
+    constants: ['e', 'me', 'mp', 'mu0'],
+  },
+  'D.4': {
+    equations: [
+      ['Magnetic flux', '\\Phi = BA\\cos\\theta', true],
+      ["Faraday's law of induction", '\\varepsilon = -N\\frac{\\Delta\\Phi}{\\Delta t}', true],
+      ['Emf induced in a moving straight conductor', '\\varepsilon = BvL', true],
+    ],
+    note: 'All of D.4 is HL. θ is the angle between B and the normal to the area. The minus sign is Lenz\'s law: the induced emf opposes the change of flux.',
+  },
   // A third item `true` marks an equation as HL only (shown with an HL tag).
   'C.1': {
     equations: [
@@ -257,6 +301,12 @@ window.CONSTANTS = {
   R: ['Gas constant', 'R = 8.31\\ \\text{J K}^{-1}\\,\\text{mol}^{-1}'],
   e: ['Elementary charge', 'e = 1.60 \\times 10^{-19}\\ \\text{C}'],
   S: ['Solar constant', 'S = 1.36 \\times 10^{3}\\ \\text{W m}^{-2}'],
+  G: ['Gravitational constant', 'G = 6.67 \\times 10^{-11}\\ \\text{N m}^2\\,\\text{kg}^{-2}'],
+  k: ['Coulomb constant', 'k = 8.99 \\times 10^{9}\\ \\text{N m}^2\\,\\text{C}^{-2}'],
+  eps0: ['Permittivity of free space', '\\varepsilon_0 = 8.85 \\times 10^{-12}\\ \\text{C}^2\\,\\text{N}^{-1}\\,\\text{m}^{-2}'],
+  mu0: ['Permeability of free space', '\\mu_0 = 4\\pi \\times 10^{-7}\\ \\text{T m A}^{-1}'],
+  me: ['Electron rest mass', 'm_e = 9.110 \\times 10^{-31}\\ \\text{kg}'],
+  mp: ['Proton rest mass', 'm_p = 1.673 \\times 10^{-27}\\ \\text{kg}'],
 };
 
 (function () {
