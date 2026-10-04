@@ -102,7 +102,7 @@
     <div class="worked">
       <h3>Worked example: the Earth and the Moon</h3>
       <p>The Earth's mass is $5.97 \times 10^{24}$ kg, the Moon's is $7.35 \times 10^{22}$ kg, and their centres are $3.84 \times 10^8$ m apart. Find the gravitational force between them.</p>
-      <p>$F = \dfrac{Gm_1m_2}{r^2} = \dfrac{6.67 \times 10^{-11} \times 5.97 \times 10^{24} \times 7.35 \times 10^{22}}{(3.84 \times 10^8)^2} = 2.0 \times 10^{20}$ N.</p>
+      <p>Top of the fraction: $Gm_1m_2 = 6.67 \times 10^{-11} \times 5.97 \times 10^{24} \times 7.35 \times 10^{22} = 2.93 \times 10^{37}$. Bottom: $r^2 = (3.84 \times 10^8)^2 = 1.47 \times 10^{17}$.</p><p>$F = \dfrac{Gm_1m_2}{r^2} = \dfrac{2.93 \times 10^{37}}{1.47 \times 10^{17}} = 2.0 \times 10^{20}$ N.</p>
       <p>The Moon pulls on the Earth with exactly the same force. It gives the Earth a much smaller acceleration, because the Earth is 81 times more massive. That pull also raises the tides.</p>
     </div>
 
@@ -184,7 +184,7 @@
     <div class="worked">
       <h3>Worked example: a geostationary orbit</h3>
       <p>A geostationary satellite orbits above the equator once every 24 hours, so it stays above the same point on the ground. Find its orbital radius and its height above the surface. ($M_E = 5.97 \times 10^{24}$ kg, $R_E = 6.37 \times 10^6$ m.)</p>
-      <p>$T = 24 \times 3600 = 86\,400$ s. &nbsp; $r^3 = \dfrac{GMT^2}{4\pi^2} = \dfrac{6.67 \times 10^{-11} \times 5.97 \times 10^{24} \times 86\,400^2}{4\pi^2} = 7.53 \times 10^{22}\ \text{m}^3$.</p>
+      <p>$T = 24 \times 3600 = 86\,400$ s. &nbsp; With $GM = 6.67 \times 10^{-11} \times 5.97 \times 10^{24} = 3.98 \times 10^{14}$: $r^3 = \dfrac{GMT^2}{4\pi^2} = \dfrac{3.98 \times 10^{14} \times (86\,400)^2}{4\pi^2} = 7.53 \times 10^{22}\ \text{m}^3$.</p>
       <p>$r = 4.22 \times 10^7$ m. Height $= 4.22 \times 10^7 - 6.37 \times 10^6 = 3.6 \times 10^7$ m, about 36&nbsp;000 km.</p>
       <p>TV and weather satellites use this orbit, so dishes on the ground can point at a fixed spot in the sky.</p>
     </div>
@@ -240,7 +240,7 @@
     <div class="worked">
       <h3>Worked example: the Earth–Moon system <span class="tag hl">HL</span></h3>
       <p>Find the gravitational potential energy of the Earth–Moon system (data in section 1).</p>
-      <p>$E_p = -\dfrac{Gm_1m_2}{r} = -\dfrac{6.67 \times 10^{-11} \times 5.97 \times 10^{24} \times 7.35 \times 10^{22}}{3.84 \times 10^8} = -7.6 \times 10^{28}$ J.</p>
+      <p>From section 1, $Gm_1m_2 = 2.93 \times 10^{37}$, so $E_p = -\dfrac{Gm_1m_2}{r} = -\dfrac{2.93 \times 10^{37}}{3.84 \times 10^8} = -7.6 \times 10^{28}$ J.</p>
       <p>This much work would be needed to separate the Earth and the Moon completely (ignoring their motion).</p>
     </div>
 
@@ -320,7 +320,7 @@
       <h3>Worked example: escaping the Earth and the Moon <span class="tag hl">HL</span></h3>
       <p>Find the escape speed from the surface of (a) the Earth and (b) the Moon ($M = 7.35 \times 10^{22}$ kg, $R = 1.74 \times 10^6$ m).</p>
       <p>(a) $v_{\text{esc}} = \sqrt{\dfrac{2 \times 3.98 \times 10^{14}}{6.37 \times 10^6}} = 1.12 \times 10^4\ \text{m s}^{-1}$ (11.2 km/s).</p>
-      <p>(b) $v_{\text{esc}} = \sqrt{\dfrac{2 \times 6.67 \times 10^{-11} \times 7.35 \times 10^{22}}{1.74 \times 10^6}} = 2.4 \times 10^3\ \text{m s}^{-1}$.</p>
+      <p>(b) For the Moon, $GM = 6.67 \times 10^{-11} \times 7.35 \times 10^{22} = 4.90 \times 10^{12}$, so $v_{\text{esc}} = \sqrt{\dfrac{2 \times 4.90 \times 10^{12}}{1.74 \times 10^6}} = 2.4 \times 10^3\ \text{m s}^{-1}$.</p>
       <p>The Moon's low escape speed is one reason it has no atmosphere: fast-moving gas molecules escape.</p>
     </div>
 
@@ -355,7 +355,7 @@
       <p>A 1000 kg satellite is launched from the surface of a non-rotating Earth into a circular orbit at $r_1 = 6.77 \times 10^6$ m (400 km up), and later moved to a geostationary orbit at $r_2 = 4.22 \times 10^7$ m. Find (a) its orbital speed in the low orbit, (b) the energy needed to reach the low orbit, and (c) the extra energy needed to move it to geostationary orbit.</p>
       <p>(a) $v = \sqrt{\dfrac{GM}{r_1}} = \sqrt{\dfrac{3.98 \times 10^{14}}{6.77 \times 10^6}} = 7.67 \times 10^3\ \text{m s}^{-1}$.</p>
       <p>(b) On the ground it has only potential energy, $-\dfrac{GMm}{R}$. In orbit its total energy is $-\dfrac{GMm}{2r_1}$. The energy needed is the difference:</p>
-      <p>$GMm\left(\dfrac{1}{R} - \dfrac{1}{2r_1}\right) = 3.98 \times 10^{17} \times \left(\dfrac{1}{6.37 \times 10^6} - \dfrac{1}{1.354 \times 10^7}\right) = 3.3 \times 10^{10}$ J.</p>
+      <p>The bracket is $\dfrac{1}{6.37 \times 10^6} - \dfrac{1}{1.354 \times 10^7} = 8.31 \times 10^{-8}\ \text{m}^{-1}$, so $GMm\left(\dfrac{1}{R} - \dfrac{1}{2r_1}\right) = 3.98 \times 10^{17} \times 8.31 \times 10^{-8} = 3.3 \times 10^{10}$ J.</p>
       <p>(c) $\Delta E = \dfrac{GMm}{2}\left(\dfrac{1}{r_1} - \dfrac{1}{r_2}\right) = 1.99 \times 10^{17} \times (1.48 \times 10^{-7} - 2.37 \times 10^{-8}) = 2.5 \times 10^{10}$ J.</p>
     </div>
 
