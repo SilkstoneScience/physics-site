@@ -113,6 +113,22 @@ window.DATA_BOOKLET = {
     note: 'All of A.4 is HL. Angles in radians. Moments of inertia of particular shapes (disc, sphere, rod…) are given in the question when needed.',
     constants: ['g'],
   },
+  'A.5': {
+    equations: [
+      ['Galilean transformation', "x' = x - vt \\qquad t' = t", true],
+      ['Galilean velocity addition', "u' = u - v", true],
+      ['Lorentz factor', '\\gamma = \\frac{1}{\\sqrt{1 - \\frac{v^2}{c^2}}}', true],
+      ['Lorentz transformation (position)', "x' = \\gamma(x - vt)", true],
+      ['Lorentz transformation (time)', "t' = \\gamma\\left(t - \\frac{vx}{c^2}\\right)", true],
+      ['Relativistic velocity addition', "u' = \\frac{u - v}{1 - \\frac{uv}{c^2}}", true],
+      ['Space-time interval (invariant)', '(\\Delta s)^2 = (c\\Delta t)^2 - (\\Delta x)^2', true],
+      ['Time dilation', '\\Delta t = \\gamma\\,\\Delta t_0', true],
+      ['Length contraction', 'L = \\frac{L_0}{\\gamma}', true],
+      ['World line angle on a space-time diagram', '\\tan\\theta = \\frac{v}{c}', true],
+    ],
+    note: 'All of A.5 is HL. $\\Delta t_0$ is the proper time (both events at the same place); $L_0$ is the proper length (measured at rest). The Lorentz equations also hold for intervals: $\\Delta x\' = \\gamma(\\Delta x - v\\Delta t)$.',
+    constants: ['c'],
+  },
   // A third item `true` marks an equation as HL only (shown with an HL tag).
   'C.1': {
     equations: [
