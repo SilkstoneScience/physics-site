@@ -4,15 +4,294 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>C.5 Doppler effect · DP Physics</title>
+  <meta name="description" content="IB DP Physics C.5 Doppler effect: wavefront diagrams for moving sources and observers, the Doppler effect for light, redshift and blueshift, uses in astronomy, medicine and radar, and (HL) the Doppler equations for sound.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="C.5">
+</head>
+<body data-root="../" data-section="themes" data-topic="C.5">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+        <linearGradient id="spectrum" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stop-color="#7b3fbf"/><stop offset="0.2" stop-color="#2f6fdc"/><stop offset="0.42" stop-color="#2aa37a"/>
+          <stop offset="0.6" stop-color="#e3c62b"/><stop offset="0.8" stop-color="#e8872a"/><stop offset="1" stop-color="#cf3a2a"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="c.html">Theme C Wave behaviour</a></p>
-    <h1><span class="code">C.5</span>Doppler effect</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <h1><span class="code">C.5</span>Doppler effect <span class="tag hl">+ HL extra</span></h1>
+    <p class="lead">An ambulance siren sounds higher as it races towards you and lower as it moves away. This change in frequency, caused by motion, is the <strong>Doppler effect</strong>. The same idea lets doctors measure blood flow, police measure your speed, and astronomers discover that the universe is expanding. Sections 1–6 are for everyone. Sections 7–8 (the equations for sound) are <strong>HL only</strong> and clearly marked.</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Hypotheses</span><span class="tag">Experiments</span><span class="tag">Evidence</span><span class="tag">Global impact of science</span></div>
+          <p><strong>Hypotheses.</strong> In 1842 Christian Doppler predicted that the motion of a source would change the frequency of its waves. He hoped this would explain the colours of double stars. That example turned out to be wrong, because stars don't move nearly fast enough, but the effect itself was real.</p>
+          <p><strong>Experiments.</strong> In 1845 Christophorus Buys Ballot tested the idea for sound. He put trumpeters on an open train carriage near Utrecht and asked musicians with good pitch on the platform to name the notes they heard as the train went past.</p>
+          <p><strong>Evidence.</strong> In the 1920s Edwin Hubble and others found that the light from almost every distant galaxy is redshifted, and more so for more distant galaxies. This is key evidence that the universe is expanding (E.5).</p>
+          <p><strong>Global impact.</strong> Doppler radar tracks storms and aircraft, and Doppler ultrasound shows blood flow without surgery.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>How far can we trust our senses?</strong> We can <em>hear</em> the Doppler effect for sound, but nobody can see a galaxy's redshift with their eyes. How does knowledge based on instruments compare with knowledge based on direct experience?</li>
+            <li><strong>Can a theory be right for the wrong reasons?</strong> Doppler's example of coloured double stars was wrong, but his principle was correct. How should we judge a scientist whose idea is right but whose evidence is not?</li>
+            <li><strong>What does "moving" mean?</strong> For sound, it matters whether the source or the observer moves through the air. For light, only the relative motion matters. Why should two kinds of wave behave so differently?</li>
+            <li><strong>How do we know what we can't visit?</strong> The expansion of the universe is inferred from tiny shifts in spectral lines. How confident can we be in conclusions drawn about places we can never go?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <p style="margin:8px 0 0"><strong>SL and HL</strong></p>
+      <ol>
+        <li><a href="#what">What is the Doppler effect?</a></li>
+        <li><a href="#source">Wavefronts: a moving source</a></li>
+        <li><a href="#observer">Wavefronts: a moving observer</a></li>
+        <li><a href="#light">The Doppler effect for light</a></li>
+        <li><a href="#space">Redshift, blueshift and astronomy</a></li>
+        <li><a href="#uses">Uses on Earth: medicine and radar</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><a href="#hl"><strong>HL only</strong></a> <span class="tag hl">HL</span></p>
+      <ol start="7">
+        <li><a href="#moving-source">Equation for a moving source</a></li>
+        <li><a href="#moving-observer">Equation for a moving observer</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><strong>Review</strong></p>
+      <ol start="9">
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="what">1. What is the Doppler effect?</h2>
+    <div class="key"><strong>The Doppler effect</strong> is the change in the observed frequency (and wavelength) of a wave when the source and the observer are moving relative to each other.</div>
+    <ul>
+      <li>When the source and the observer get <strong>closer together</strong>, the observed frequency is <strong>higher</strong> (and the wavelength shorter).</li>
+      <li>When they <strong>move apart</strong>, the observed frequency is <strong>lower</strong> (and the wavelength longer).</li>
+      <li>The <strong>source itself doesn't change</strong>: the siren still vibrates at the same frequency. Only what the observer receives changes.</li>
+      <li>Only motion <strong>along the line</strong> joining the source and observer matters. A source moving across your line of sight, at right angles, gives no shift at that moment.</li>
+    </ul>
+    <p>The Doppler effect happens for <strong>all waves</strong>: sound, water waves and electromagnetic waves. But sound and light behave differently in one important way. Sound travels through a medium (air), so it matters whether the source or the observer is moving through the air. Light needs no medium, so only their relative motion matters.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="source">2. Wavefronts: a moving source</h2>
+    <p>A source emits a wavefront once every period $T$. Each wavefront spreads out from the point where it was emitted at the wave speed $v$. If the source is <strong>still</strong>, the wavefronts are concentric circles, equally spaced in every direction. If the source is <strong>moving</strong>, it emits each new wavefront from a slightly different place:</p>
+    <figure class="diagram">
+      <svg viewBox="0 -6 380 278" role="img" aria-labelledby="c5at">
+        <title id="c5at">Wavefronts from a source moving to the right at half the wave speed. The circles are not concentric: each one is centred where the source was when it was emitted. In front of the source, to the right, the wavefronts are bunched close together. Behind it, to the left, they are spread far apart. Observer A, in front, hears a higher frequency. Observer B, behind, hears a lower frequency.</title>
+        <g class="l1 thin">
+          <circle cx="160" cy="130" r="130"/><circle cx="173" cy="130" r="104"/><circle cx="186" cy="130" r="78"/><circle cx="199" cy="130" r="52"/><circle cx="212" cy="130" r="26"/>
+        </g>
+        <circle cx="225" cy="130" r="6" class="f2"/>
+        <line class="l2" x1="232" y1="130" x2="262" y2="130" marker-end="url(#ah2)"/>
+        <g class="f3"><circle cx="160" cy="130" r="2.5"/><circle cx="173" cy="130" r="2.5"/><circle cx="186" cy="130" r="2.5"/><circle cx="199" cy="130" r="2.5"/><circle cx="212" cy="130" r="2.5"/></g>
+        <circle cx="345" cy="130" r="6" class="f3"/>
+        <text x="345" y="112" text-anchor="middle">A</text>
+        <text x="345" y="156" text-anchor="middle" style="font-size:13px">higher f</text>
+        <circle cx="14" cy="130" r="6" class="f3"/>
+        <text x="14" y="112" text-anchor="middle">B</text>
+        <text x="4" y="156" style="font-size:13px">lower f</text>
+      </svg>
+      <figcaption>A <span class="key-2">source moving right</span> at half the wave speed. The small dots show where it was when it emitted each <span class="key-1">wavefront</span>. Ahead of it, the wavefronts are squashed together; behind it, they are stretched apart.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>In front of the source</strong> (observer A), the wavefronts are closer together: a <strong>shorter wavelength</strong>. They still travel at the same speed $v$, so more of them arrive each second: a <strong>higher frequency</strong>.</li>
+      <li><strong>Behind the source</strong> (observer B), the wavefronts are further apart: a <strong>longer wavelength</strong> and a <strong>lower frequency</strong>.</li>
+      <li>The <strong>wave speed doesn't change</strong>. Sound travels at the speed set by the air, however fast the source moves.</li>
+    </ul>
+    <p>So an approaching siren sounds higher than its true pitch, and a receding one sounds lower. As it passes you, the pitch drops suddenly, from above the true frequency to below it.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="observer">3. Wavefronts: a moving observer</h2>
+    <p>Now the source is still, so its wavefronts are evenly spaced circles. The wavelength in the air is the normal wavelength. But an observer moving <strong>towards</strong> the source runs into the wavefronts more often than an observer standing still:</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 200" role="img" aria-labelledby="c5bt">
+        <title id="c5bt">Evenly spaced circular wavefronts from a stationary source on the left. An observer on the right moves towards the source, so the observer meets the wavefronts more often than if standing still.</title>
+        <g class="l1 thin"><circle cx="90" cy="100" r="24"/><circle cx="90" cy="100" r="48"/><circle cx="90" cy="100" r="72"/><circle cx="90" cy="100" r="96"/></g>
+        <circle cx="90" cy="100" r="6" class="f3"/>
+        <text x="90" y="128" text-anchor="middle" style="font-size:13px">source</text>
+        <circle cx="290" cy="100" r="9" class="f2"/>
+        <line class="l2" x1="278" y1="100" x2="236" y2="100" marker-end="url(#ah2)"/>
+        <text class="t2" x="290" y="132" text-anchor="middle">observer</text>
+      </svg>
+      <figcaption>The source is still, so the <span class="key-1">wavefronts</span> are evenly spaced. The <span class="key-2">observer</span> moving towards it meets them more often, so they hear a higher frequency.</figcaption>
+    </figure>
+    <ul>
+      <li>Moving <strong>towards</strong> the source: the waves pass the observer faster, relative to the observer, so they hear a <strong>higher frequency</strong>.</li>
+      <li>Moving <strong>away</strong>: the waves pass more slowly, relative to the observer, so they hear a <strong>lower frequency</strong>.</li>
+      <li>The <strong>wavelength in the air is unchanged</strong>. Only the rate at which the observer meets the wavefronts changes. That's the key difference from a moving source.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="light">4. The Doppler effect for light</h2>
+    <p>Light from a moving source is also Doppler-shifted. When the relative speed $v$ between source and observer is <strong>much smaller than the speed of light</strong> ($v \ll c$), the fractional change in frequency or wavelength is:</p>
+    <div class="key">
+      $$\frac{\Delta f}{f} = \frac{\Delta\lambda}{\lambda} \approx \frac{v}{c}$$
+      <p style="margin:0">$\Delta f$ and $\Delta\lambda$ are the changes (shifts); $f$ and $\lambda$ are the values emitted by the source; $v$ is the relative speed along the line of sight. Use the <strong>sizes</strong> of the changes, and decide the direction from the situation.</p>
+    </div>
+    <ul>
+      <li>Source and observer moving <strong>apart</strong>: the wavelength increases, so the light is shifted towards the red end of the spectrum. This is a <strong>redshift</strong>.</li>
+      <li>Moving <strong>together</strong>: the wavelength decreases. This is a <strong>blueshift</strong>.</li>
+      <li>The <strong>speed of light doesn't change</strong>: it is $c$ for every observer. It is the frequency and wavelength that shift.</li>
+      <li>For everyday speeds, $\frac{v}{c}$ is tiny. A car at 30 $\text{m s}^{-1}$ shifts light by only one part in ten million. That's why we don't see colours change in traffic. Astronomers measure the much larger shifts from stars and galaxies.</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: how fast is the galaxy moving?</h3>
+      <p>Hydrogen in a laboratory emits a red spectral line of wavelength 656.3 nm. In the light from a distant galaxy, the same line is observed at 662.9 nm. Find the galaxy's speed and say whether it is moving towards or away from us.</p>
+      <p>$\Delta\lambda = 662.9 - 656.3 = 6.6$ nm. The wavelength has <strong>increased</strong> (redshift), so the galaxy is moving <strong>away</strong> from us.</p>
+      <p>$v = c\,\dfrac{\Delta\lambda}{\lambda} = 3.00\times10^{8} \times \dfrac{6.6}{656.3} = 3.0\times10^{6}\ \text{m s}^{-1}$. This is 1% of the speed of light, so $v \ll c$ and the formula is valid.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="space">5. Redshift, blueshift and astronomy</h2>
+    <p>Each element absorbs and emits light at its own set of exact wavelengths (E.1), so its <strong>spectral lines</strong> act like a fingerprint. Astronomers compare the lines in starlight with the same lines measured in a laboratory. If the whole pattern is shifted, the star or galaxy is moving.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 170" role="img" aria-labelledby="c5ct">
+        <title id="c5ct">Two spectra, from violet on the left to red on the right, each with four dark absorption lines. In the laboratory spectrum the lines are at their normal positions. In the galaxy spectrum the same pattern of lines is shifted to the right, towards the red end.</title>
+        <text x="10" y="22" style="font-size:14px">laboratory</text>
+        <rect x="10" y="30" width="360" height="40" style="fill:url(#spectrum)"/>
+        <g style="stroke:#111;stroke-width:3"><line x1="86" y1="30" x2="86" y2="70"/><line x1="120" y1="30" x2="120" y2="70"/><line x1="182" y1="30" x2="182" y2="70"/><line x1="300" y1="30" x2="300" y2="70"/></g>
+        <text x="10" y="102" style="font-size:14px">distant galaxy</text>
+        <rect x="10" y="110" width="360" height="40" style="fill:url(#spectrum)"/>
+        <g style="stroke:#111;stroke-width:3"><line x1="108.2" y1="110" x2="108.2" y2="150"/><line x1="143.6" y1="110" x2="143.6" y2="150"/><line x1="208.1" y1="110" x2="208.1" y2="150"/><line x1="330.8" y1="110" x2="330.8" y2="150"/></g>
+        <line class="l2 thin" x1="300" y1="76" x2="328.8" y2="104" marker-end="url(#ah2)"/>
+        <text x="10" y="166" style="font-size:13px">violet</text><text x="370" y="166" text-anchor="end" style="font-size:13px">red</text>
+      </svg>
+      <figcaption>The same pattern of absorption lines, <span class="key-2">shifted towards the red</span> in light from a receding galaxy. Every line shifts by the same <em>fraction</em> of its wavelength.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>The expanding universe:</strong> light from almost every distant galaxy is redshifted, and the further away the galaxy is, the bigger the redshift. So galaxies are moving apart. This is strong evidence that the universe is expanding (E.5).</li>
+      <li><strong>Rotating stars and galaxies:</strong> as a star or galaxy spins, one edge moves towards us and the opposite edge moves away. Light from one edge is blueshifted and light from the other is redshifted. The difference tells astronomers how fast it rotates.</li>
+      <li><strong>Binary stars and exoplanets:</strong> a star orbiting a companion, or being tugged by a planet, moves alternately towards and away from us. Its spectral lines shift back and forth regularly. Many planets around other stars were discovered this way.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="uses">6. Uses on Earth: medicine and radar</h2>
+    <p>In these uses, a wave is sent out, reflects off a moving object, and comes back. The frequency of the reflected wave is compared with the frequency that was sent. The bigger the frequency shift, the faster the object is moving towards or away from the detector.</p>
+    <ul>
+      <li><strong>Doppler ultrasound:</strong> ultrasound reflects off red blood cells. The frequency shift shows how fast, and in which direction, blood flows through an artery or vein. Doctors use it to find narrowed arteries or blood clots, and to check a baby's heartbeat before birth.</li>
+      <li><strong>Radar speed guns:</strong> police aim microwaves at a car. Waves reflected from an approaching car come back at a higher frequency, and the shift gives the car's speed.</li>
+      <li><strong>Weather radar:</strong> microwaves reflect off raindrops. The shift shows how fast rain is moving towards or away from the radar, which reveals the winds and rotation inside storms.</li>
+      <li><strong>Air traffic control and satellites:</strong> radar uses the Doppler shift to measure aircraft speeds, and the GPS system corrects for the Doppler shift of satellite signals.</li>
+    </ul>
+    <p>For reflected waves, the shift is roughly <em>twice</em> as big as for a single trip. The moving object first receives a shifted wave, then sends it back as a moving source, which shifts it again.</p>
+
+    <!-- ===================================================== -->
+    <div class="part-banner hl" id="hl"><span class="code">HL only</span><p>Sections 7 and 8 are additional higher level content. SL students can stop here and go to <a href="#mistakes" style="color:inherit;text-decoration:underline">Common mistakes</a>.</p></div>
+    <div class="hl-zone">
+    <h2 id="moving-source">7. Equation for a moving source <span class="tag hl">HL</span></h2>
+    <p>For sound and other mechanical waves, the wave speed $v$ is fixed relative to the medium. A source with frequency $f$ (period $T$) moves directly towards an observer at speed $u_s$:</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 150" role="img" aria-labelledby="c5dt">
+        <title id="c5dt">A source emits wavefront 1, then moves forward a distance u-s times T before emitting wavefront 2, one period later. By then wavefront 1 has travelled a distance v times T. The gap between the two wavefronts, the observed wavelength, is v times T minus u-s times T.</title>
+        <line class="grid" x1="20" y1="80" x2="360" y2="80"/>
+        <circle cx="60" cy="80" r="6" class="axis"/><text x="60" y="108" text-anchor="middle" style="font-size:13px">t = 0</text>
+        <circle cx="130" cy="80" r="6" class="f2"/><text class="t2" x="130" y="108" text-anchor="middle" style="font-size:13px">t = T</text>
+        <path class="l1" d="M300 40 Q 312 80 300 120"/>
+        <text class="t1" x="318" y="52">1</text>
+        <path class="l1 dash" d="M136 62 Q 141 80 136 98"/>
+        <text class="t1" x="146" y="64">2</text>
+        <line class="l3 thin" x1="62" y1="128" x2="304" y2="128" marker-start="url(#ah3)" marker-end="url(#ah3)"/>
+        <text x="183" y="146" text-anchor="middle">λ = vT</text>
+        <line class="l2 thin" x1="62" y1="22" x2="128" y2="22" marker-start="url(#ah2)" marker-end="url(#ah2)"/>
+        <text class="t2" x="95" y="16" text-anchor="middle">u<tspan dy="4" font-size="12">s</tspan><tspan dy="-4">T</tspan></text>
+        <line class="l1 thin" x1="140" y1="22" x2="302" y2="22" marker-start="url(#ah1)" marker-end="url(#ah1)"/>
+        <text class="t1" x="220" y="16" text-anchor="middle">λ′</text>
+      </svg>
+      <figcaption>In one period, wavefront 1 (emitted at $t = 0$) travels $vT$, but the <span class="key-2">source</span> moves $u_sT$ after it. Wavefront 2 is emitted at $t = T$, so the gap between wavefronts ahead of the source is the <span class="key-1">shorter wavelength</span> $\lambda' = (v - u_s)T$.</figcaption>
+    </figure>
+    <p>The observer receives waves of wavelength $\lambda' = (v - u_s)T$, still travelling at speed $v$. So the observed frequency is:</p>
+    $$f' = \frac{v}{\lambda'} = \frac{v}{(v - u_s)T} = f\,\frac{v}{v - u_s}$$
+    <p>For a source moving <em>away</em>, the gap is $(v + u_s)T$ instead. The data booklet combines both cases:</p>
+    <div class="key">
+      $$f' = f\,\frac{v}{v \pm u_s}$$
+      <p style="margin:0"><strong>Moving source.</strong> Use $-$ when the source <strong>approaches</strong> (smaller denominator, so $f'$ is higher) and $+$ when it <strong>recedes</strong>. $v$ is the wave speed in the medium; $u_s$ is the speed of the source.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: an ambulance <span class="tag hl">HL</span></h3>
+      <p>An ambulance siren emits sound of frequency 700 Hz. The ambulance travels at 25 $\text{m s}^{-1}$ along a straight road past a pedestrian. The speed of sound is 340 $\text{m s}^{-1}$. Find the frequency the pedestrian hears (a) as it approaches and (b) after it has passed.</p>
+      <p>(a) Approaching, so use $-$: &nbsp; $f' = 700 \times \dfrac{340}{340 - 25} = 700 \times \dfrac{340}{315} = 756$ Hz.</p>
+      <p>(b) Receding, so use $+$: &nbsp; $f' = 700 \times \dfrac{340}{365} = 652$ Hz.</p>
+      <p>The pitch drops by about 100 Hz as the ambulance passes. Check: approaching should give a frequency <em>above</em> 700 Hz and receding one <em>below</em>, which it does.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: finding the speed of a train <span class="tag hl">HL</span></h3>
+      <p>A train's horn has a frequency of 400 Hz. A person on a platform hears 420 Hz as the train approaches. The speed of sound is 340 $\text{m s}^{-1}$. How fast is the train moving?</p>
+      <p>$420 = 400 \times \dfrac{340}{340 - u_s}$, so $340 - u_s = \dfrac{400 \times 340}{420} = 323.8$, giving $u_s = 16\ \text{m s}^{-1}$ (about 58 km/h).</p>
+    </div>
+
+    <h2 id="moving-observer">8. Equation for a moving observer <span class="tag hl">HL</span></h2>
+    <p>Now the source is still and the observer moves directly towards it at speed $u_o$. The wavelength in the air is the normal $\lambda = \frac{v}{f}$, but the waves pass the observer at a relative speed of $v + u_o$. So the observer meets $\frac{v + u_o}{\lambda}$ wavefronts per second:</p>
+    $$f' = \frac{v + u_o}{\lambda} = f\,\frac{v + u_o}{v}$$
+    <div class="key">
+      $$f' = f\,\frac{v \pm u_o}{v}$$
+      <p style="margin:0"><strong>Moving observer.</strong> Use $+$ when the observer <strong>approaches</strong> the source (so $f'$ is higher) and $-$ when they <strong>move away</strong>. $u_o$ is the speed of the observer.</p>
+    </div>
+    <p><strong>Choosing the sign:</strong> don't memorise it. Ask yourself whether the source and observer are getting closer (frequency up) or further apart (frequency down), then choose the sign that makes $f'$ go the right way. IB questions never have the source and the observer moving at the same time.</p>
+    <div class="worked">
+      <h3>Worked example: a cyclist and a siren <span class="tag hl">HL</span></h3>
+      <p>A stationary fire alarm emits a 500 Hz tone. A cyclist rides towards it at 8.0 $\text{m s}^{-1}$, then away from it at the same speed. The speed of sound is 340 $\text{m s}^{-1}$. What frequencies does the cyclist hear?</p>
+      <p>Towards: &nbsp; $f' = 500 \times \dfrac{340 + 8.0}{340} = 512$ Hz. &nbsp; Away: &nbsp; $f' = 500 \times \dfrac{340 - 8.0}{340} = 488$ Hz.</p>
+    </div>
+    <p><strong>Why are the two equations different?</strong> For sound, the air is a special frame of reference: the waves always travel at $v$ relative to the air. A moving source changes the <em>wavelength in the air</em>; a moving observer changes the <em>speed of the waves relative to them</em>. At the same speed, these give slightly different answers. At 25 $\text{m s}^{-1}$ towards a 700 Hz source, a moving <em>observer</em> hears 751 Hz, while a moving <em>source</em> (above) gives 756 Hz. For light there is no medium, so only the relative speed matters, and the simple formula $\frac{\Delta f}{f} \approx \frac{v}{c}$ applies.</p>
+    <aside class="maths-link">
+      <h3>Maths link: why the light formula is an approximation <span class="tag">AA HL 5.19</span> <span class="tag hl">HL</span></h3>
+      <p>For a slowly approaching source, write the sound equation as $f' = f\left(1 - \frac{u_s}{v}\right)^{-1}$. The binomial (Maclaurin) series $(1 + x)^{p} \approx 1 + px$, for small $x$, gives:</p>
+      $$f' \approx f\left(1 + \frac{u_s}{v}\right)$$
+      $$\frac{\Delta f}{f} \approx \frac{u_s}{v}$$
+      <p>This has the same form as the light equation $\frac{\Delta f}{f} \approx \frac{v}{c}$. The moving-observer equation gives exactly $\frac{\Delta f}{f} = \frac{u_o}{v}$. So, for speeds much smaller than the wave speed, both sound equations agree with each other and with the simple light formula. The differences only matter when the source is fast compared with the wave.</p>
+    </aside>
+    <p class="hl-end">End of the HL-only content for C.5.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">9. Common mistakes</h2>
+    <ul>
+      <li><strong>Saying the source's frequency changes.</strong> The source emits the same frequency all the time. Only the <em>observed</em> frequency changes.</li>
+      <li><strong>Saying the wave speed changes.</strong> Sound travels at the speed set by the air, and light at $c$, whatever the source does.</li>
+      <li><strong>Thinking the pitch keeps rising as a source approaches.</strong> For a source moving at a steady speed straight towards you, the observed frequency is constant (and higher than normal). It drops suddenly as the source passes.</li>
+      <li><strong>Mixing up redshift and blueshift.</strong> Moving <em>apart</em> means a longer wavelength: <em>red</em>shift.</li>
+      <li><strong>Using $\frac{\Delta f}{f} \approx \frac{v}{c}$ for sound.</strong> That formula is for light (with $v \ll c$). <span class="tag hl">HL</span> For sound, use the moving-source or moving-observer equation.</li>
+      <li><span class="tag hl">HL</span> <strong>Using the wrong equation.</strong> Ask who is moving through the air: the source ($u_s$ in the denominator) or the observer ($u_o$ in the numerator).</li>
+      <li><span class="tag hl">HL</span> <strong>Choosing the sign by habit.</strong> Always check that approaching gives a higher frequency and receding a lower one.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">10. Check your understanding</h2>
+    <details class="check">
+      <summary>A car sounds its horn as it drives past you. Describe what you hear.</summary>
+      <p>As it approaches, a constant note higher than the horn's true frequency. As it passes, the pitch drops quickly. As it drives away, a constant note lower than the true frequency.</p>
+    </details>
+    <details class="check">
+      <summary>Why don't we see the colour of a car change as it drives towards us?</summary>
+      <p>The shift is $\frac{\Delta\lambda}{\lambda} \approx \frac{v}{c}$. For a car, $v/c$ is about $10^{-7}$, far too small for our eyes to notice.</p>
+    </details>
+    <details class="check">
+      <summary>A spectral line from a star appears at a <em>shorter</em> wavelength than in the laboratory. What does this tell you?</summary>
+      <p>It is blueshifted, so the star is moving <strong>towards</strong> us. The size of the shift gives its speed along our line of sight: $v \approx c\,\frac{\Delta\lambda}{\lambda}$.</p>
+    </details>
+    <details class="check">
+      <summary>How can the Doppler effect show that a galaxy is rotating?</summary>
+      <p>One side of the galaxy is moving towards us and the other side away. Light from one edge is blueshifted and light from the other is redshifted. The difference in the shifts gives the rotation speed.</p>
+    </details>
+    <details class="check">
+      <summary><span class="tag hl">HL</span> A source and an observer approach each other at the same speed in two separate experiments: once with the source moving, once with the observer moving. Which gives the higher frequency for sound, and why are they different?</summary>
+      <p>The moving source gives a slightly higher frequency ($\frac{v}{v - u}$ is bigger than $\frac{v + u}{v}$). They differ because sound travels at a fixed speed relative to the air: a moving source changes the wavelength in the air, while a moving observer changes the speed of the waves relative to themselves.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=C.5">Practise C.5 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>
