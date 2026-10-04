@@ -100,7 +100,7 @@ This folder (`physics-site`) is a static website for IB DP Physics students, hos
 - The question bank shows one question at a time by default, with Previous/Next, a "Next question" button after answering, and a Back link to the page the student came from. "All on one page" is an option. Link to a set with `questions.html?topic=A.1`, or to one question with `&q=A1-004`.
 
 ## Home page and About page
-- **Joke of the day** (`index.html`): the jokes are in `js/jokes.js` as `{ q, a }` pairs; `js/site.js` picks a random one on each load (never the same as last time on that device) and the "Reveal the answer" button shows the punchline. Jokes must be science (ideally physics) puns that are safe for school: no romance, alcohol, unkind or rude jokes.
+- **Joke of the day** (`index.html`): the jokes are in `js/jokes.js` as `{ q, a }` pairs; `js/site.js` picks a random one on each load (never the same as last time on that device) and the "Reveal the answer" button shows the punchline. Use well-known published jokes (the teacher's choice), mostly physics. Keep them safe for school: no flirting, alcohol, rude or unkind jokes.
 - **About page** (`about.html`): the teacher's photo is `images/about/mark-silkstone.jpg` (resized, metadata removed). Only general professional details: never phone, email, date of birth, address, QTS number or referees.
 
 ## Previewing
