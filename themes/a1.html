@@ -116,6 +116,12 @@
       <li>the <strong>average velocity</strong> between two times is the gradient of the straight line (chord) joining the two points;</li>
       <li>the <strong>instantaneous velocity</strong> at one time is the gradient of the <strong>tangent</strong> to the curve at that point.</li>
     </ul>
+    <aside class="maths-link">
+      <h3>Maths link: differentiation <span class="tag">AA SL 5.1, 5.4, 5.9</span></h3>
+      <p>In maths, the gradient of the tangent is the <strong>derivative</strong>. So velocity is the derivative of displacement, and acceleration is the derivative of velocity:</p>
+      $$v = \frac{ds}{dt} \qquad a = \frac{dv}{dt} = \frac{d^2s}{dt^2}$$
+      <p><em>Example:</em> if $s = 4t^2$, the power rule gives $v = \dfrac{ds}{dt} = 8t$ and $a = \dfrac{dv}{dt} = 8\ \text{m s}^{-2}$. Drawing a tangent on a graph is the "by hand" way of differentiating.</p>
+    </aside>
 
     <figure class="diagram">
       <svg viewBox="0 0 380 260" role="img" aria-labelledby="fig2t">
@@ -203,6 +209,13 @@
       $$v^{2} = u^{2} + 2as \qquad\qquad s = \frac{(u + v)}{2}\,t$$
     </div>
     <p><strong>Where do they come from?</strong> Rearranging the definition of acceleration gives $v = u + at$. On the straight-line $v$–$t$ graph, the area under the line is a trapezium, so $s = \frac{(u+v)}{2}t$. Substituting $v = u + at$ into this gives $s = ut + \frac{1}{2}at^2$. Eliminating $t$ between the first two gives $v^2 = u^2 + 2as$.</p>
+    <aside class="maths-link">
+      <h3>Maths link: integration <span class="tag">AA SL 5.5, 5.9</span></h3>
+      <p>Integration undoes differentiation, and it finds the area under a graph. So displacement is the integral of velocity, $s = \int v\,dt$. With calculus, the equations of motion take two lines. Start from a constant acceleration $a$ and integrate twice:</p>
+      $$v = \int a\,dt = u + at$$
+      $$s = \int (u + at)\,dt = ut + \tfrac{1}{2}at^2$$
+      <p>Each constant of integration is fixed by the starting values: $v = u$ and $s = 0$ when $t = 0$.</p>
+    </aside>
     <p><strong>A reliable method:</strong></p>
     <ol>
       <li>Draw a quick sketch and choose a positive direction.</li>
@@ -214,6 +227,20 @@
     <div class="worked">
       <h3>Worked example: a braking train</h3>
       <p>A train travelling at 24 $\text{m s}^{-1}$ brakes with constant deceleration and stops in a distance of 160 m. Find (a) its acceleration and (b) how long it takes to stop.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 240 190" class="small" role="img" aria-labelledby="wtraint">
+          <title id="wtraint">Velocity–time graph for the braking train: a straight line falling from 24 metres per second to zero at an unknown time t. The triangle under the line is shaded; its area is the stopping distance.</title>
+          <polygon class="area" points="40,40 40,160 200,160"/>
+          <line class="axis" x1="40" y1="160" x2="228" y2="160" marker-end="url(#ah3)"/>
+          <line class="axis" x1="40" y1="160" x2="40" y2="14" marker-end="url(#ah3)"/>
+          <text x="222" y="150">t</text><text x="22" y="24">v</text>
+          <line class="l1" x1="40" y1="40" x2="200" y2="160"/>
+          <text x="34" y="46" text-anchor="end">24</text>
+          <text class="t2" x="200" y="180" text-anchor="middle">t = ?</text>
+          <text x="80" y="146">area = s</text>
+        </svg>
+        <figcaption>The <span class="key-1">gradient</span> is the acceleration. The shaded area is the 160 m stopping distance.</figcaption>
+      </figure>
       <p>Take the direction of motion as positive. Known: $u = 24$ $\text{m s}^{-1}$, $v = 0$, $s = 160$ m.</p>
       <p>(a) $t$ is not known, so use $v^2 = u^2 + 2as$: &nbsp; $0 = 24^2 + 2a(160)$, so $a = -\dfrac{576}{320} = -1.8$ $\text{m s}^{-2}$.<br>
       The negative sign shows the acceleration is opposite to the motion: the train is slowing down.</p>
@@ -229,12 +256,35 @@
     <div class="worked">
       <h3>Worked example: a stone thrown from a cliff</h3>
       <p>A stone is thrown vertically upwards at 12 $\text{m s}^{-1}$ from the edge of a cliff 25 m above the sea. Find (a) the time until it hits the sea and (b) its speed as it hits the water.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 360 260" role="img" aria-labelledby="wcliff">
+          <title id="wcliff">A cliff 25 metres high above the sea. A stone is thrown straight up at 12 metres per second from the edge. Its path goes up, then falls past the cliff edge into the sea. An arrow shows that up is taken as positive.</title>
+          <polygon class="area" points="10,60 150,60 150,232 10,232"/>
+          <polyline class="axis" points="10,60 150,60 150,232"/>
+          <path class="axis" d="M150 232 q 12 -6 24 0 t 24 0 t 24 0 t 24 0 t 24 0 t 24 0 t 24 0 t 24 0"/>
+          <text x="300" y="254">sea</text>
+          <circle cx="164" cy="56" r="5" class="f3"/>
+          <line class="l1" x1="164" y1="48" x2="164" y2="12" marker-end="url(#ah1)"/>
+          <text class="t1" x="156" y="30" text-anchor="end">12 m s⁻¹</text>
+          <path class="l3 thin dash" d="M172 52 C 172 6, 184 6, 184 226" marker-end="url(#ah3)"/>
+          <line class="grid dash" x1="150" y1="60" x2="262" y2="60"/>
+          <line class="l2 thin" x1="250" y1="64" x2="250" y2="226" marker-start="url(#ah2)" marker-end="url(#ah2)"/>
+          <text class="t2" x="258" y="150">25 m</text>
+          <line class="l3 thin" x1="330" y1="130" x2="330" y2="80" marker-end="url(#ah3)"/>
+          <text x="330" y="150" text-anchor="middle">+</text>
+        </svg>
+        <figcaption>Up is positive. The stone goes up first, then falls 25 m <em>below</em> its starting point, so the <span class="key-2">displacement</span> is $s = -25$ m.</figcaption>
+      </figure>
       <p>Take up as positive. Known: $u = +12$ $\text{m s}^{-1}$, $a = -9.8$ $\text{m s}^{-2}$, $s = -25$ m (the stone finishes 25 m <em>below</em> where it started).</p>
       <p>(a) $s = ut + \frac{1}{2}at^2$: &nbsp; $-25 = 12t - 4.9t^2$, so $4.9t^2 - 12t - 25 = 0$.<br>
       Using the quadratic formula and taking the positive root:</p>
       $$t = \frac{12 + \sqrt{12^2 + 4(4.9)(25)}}{2(4.9)} = 3.8 \text{ s}$$
       <p>(b) $v^2 = u^2 + 2as$ $= 12^2 + 2(-9.8)(-25)$ $= 634$, so $v = -25$ $\text{m s}^{-1}$. The speed is 25 $\text{m s}^{-1}$, and the negative sign shows it is moving downwards.</p>
     </div>
+    <aside class="maths-link">
+      <h3>Maths link: quadratic equations <span class="tag">AA SL 2.7</span></h3>
+      <p>$s = ut + \frac{1}{2}at^2$ is a quadratic in $t$, so it can have two solutions. In the cliff example, the other root is $t = -1.3$ s. It describes an imaginary stone thrown up from the sea 1.3 s <em>earlier</em>, which passes the cliff edge at 12 $\text{m s}^{-1}$ just as ours is thrown. That isn't our stone, so we reject that root. Always ask which root makes physical sense.</p>
+    </aside>
 
     <h3>Determining <em>g</em> experimentally</h3>
     <p>A common school method:</p>
@@ -292,6 +342,10 @@
       <li>Repeat each height several times and find the mean time. Then repeat for 5–8 different heights.</li>
       <li>Since $u = 0$, $h = \frac{1}{2}gt^2$. Plot $h$ against $t^2$. This should be a straight line through the origin with gradient $\frac{g}{2}$, so $g = 2 \times \text{gradient}$.</li>
     </ol>
+    <aside class="maths-link">
+      <h3>Maths link: straight-line graphs <span class="tag">AA SL 2.1</span></h3>
+      <p>Compare $h = \frac{g}{2}t^2$ with $y = mx + c$. Plotting $y = h$ against $x = t^2$ gives gradient $m = \frac{g}{2}$ and intercept $c = 0$. Choosing what to plot so that the graph is a straight line is called <strong>linearising</strong>. You'll use this trick in many experiments.</p>
+    </aside>
     <p>Video analysis is another good method. Film a falling object next to a metre rule, track its position frame by frame, and find $g$ from the gradient of the velocity–time graph. Air resistance and reaction time are the main sources of error. Using a dense, small ball and electronic timing reduces both.</p>
 
     <!-- ===================================================== -->
@@ -339,10 +393,35 @@
       <li>For a launch at an angle <strong>below the horizontal</strong> (for example, a ball thrown downwards off a cliff), the method is the same. With up as positive, $u_y = -u\sin\theta$ is negative from the start, and there is no "highest point" after launch.</li>
       <li>To find the speed at any moment, combine the components: $v = \sqrt{v_x^2 + v_y^2}$, at angle $\tan^{-1}(v_y/v_x)$ to the horizontal.</li>
     </ul>
+    <aside class="maths-link">
+      <h3>Maths link: why the path is a parabola <span class="tag">AA SL 2.6</span></h3>
+      <p>Eliminate $t$ using $t = \dfrac{x}{u\cos\theta}$. The height $y$ then depends on the horizontal distance $x$ like this:</p>
+      $$y = (\tan\theta)\,x - \frac{g}{2u^2\cos^2\theta}\,x^2$$
+      <p>This is a quadratic $y = ax^2 + bx$ with $a$ negative, so the path is an upside-down parabola. Its axis of symmetry, $x = -\frac{b}{2a}$, is where the projectile is highest: exactly halfway along the range.</p>
+    </aside>
 
     <div class="worked">
       <h3>Worked example: a football kicked from the ground</h3>
       <p>A football is kicked at 18 $\text{m s}^{-1}$ at 35° above horizontal ground. Ignore air resistance. Find (a) the maximum height, (b) the time of flight and (c) the range.</p>
+      <figure class="diagram">
+        <svg viewBox="0 100 360 115" role="img" aria-labelledby="wfoot">
+          <title id="wfoot">The football's path, drawn to scale: a wide, low parabola. The launch velocity of 18 metres per second at 35 degrees is split into a horizontal component and a vertical component. The maximum height h and the range are marked with double arrows.</title>
+          <line class="axis" x1="10" y1="180" x2="350" y2="180"/>
+          <polyline class="l3 thin dash" points="30,180 37.5,174.9 45,170 52.5,165.4 60,161.1 67.5,157 75,153.2 82.5,149.7 90,146.4 97.5,143.4 105,140.6 112.5,138.1 120,135.9 127.5,133.9 135,132.2 142.5,130.8 150,129.6 157.5,128.7 165,128 172.5,127.6 180,127.5 187.5,127.6 195,128 202.5,128.7 210,129.6 217.5,130.8 225,132.2 232.5,133.9 240,135.9 247.5,138.1 255,140.6 262.5,143.4 270,146.4 277.5,149.7 285,153.2 292.5,157 300,161.1 307.5,165.4 315,170 322.5,174.9 330,180"/>
+          <line class="l3" x1="30" y1="180" x2="87.3" y2="139.8" marker-end="url(#ah3)"/>
+          <text x="52" y="126">18 m s⁻¹</text>
+          <line class="l1 thin" x1="30" y1="180" x2="85" y2="180" marker-end="url(#ah1)"/>
+          <line class="l2 thin" x1="30" y1="180" x2="30" y2="142" marker-end="url(#ah2)"/>
+          <path class="axis" d="M58 180 A 28 28 0 0 0 52.9 164"/>
+          <text x="62" y="174">35°</text>
+          <line class="grid dash" x1="180" y1="127.5" x2="180" y2="180"/>
+          <line class="l2 thin" x1="200" y1="131" x2="200" y2="176" marker-start="url(#ah2)" marker-end="url(#ah2)"/>
+          <text class="t2" x="208" y="160">h</text>
+          <line class="l1 thin" x1="33" y1="205" x2="327" y2="205" marker-start="url(#ah1)" marker-end="url(#ah1)"/>
+          <text class="t1" x="180" y="198" text-anchor="middle">range</text>
+        </svg>
+        <figcaption>Drawn to scale. Split the launch velocity into a <span class="key-1">horizontal component</span>, which stays the same for the whole flight, and a <span class="key-2">vertical component</span>, which falls to zero at the top.</figcaption>
+      </figure>
       <p>Components: $u_x = 18\cos 35° = 14.7$ $\text{m s}^{-1}$, &nbsp; $u_y = 18\sin 35° = 10.3$ $\text{m s}^{-1}$.</p>
       <p>(a) At the top, $v_y = 0$. Use $v_y^2 = u_y^2 - 2gh$: &nbsp; $h = \dfrac{10.3^2}{2 \times 9.8} = 5.4$ m.</p>
       <p>(b) Time to the top: $0 = 10.3 - 9.8t$, so $t = 1.05$ s. The flight is symmetrical, so the total time is $2.1$ s.</p>

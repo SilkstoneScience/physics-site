@@ -6,6 +6,7 @@
   <title>DP Physics Study Guide</title>
   <meta name="description" content="A study guide for IB Diploma Programme Physics: notes by theme, an interactive question bank, and help with practicals, the IA and the extended essay.">
   <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/jokes.js"></script>
   <script defer src="js/site.js"></script>
 </head>
 <body data-root="" data-section="home">
@@ -13,6 +14,17 @@
   <main>
     <h1>DP Physics Study Guide</h1>
     <p class="lead">Notes, practice questions and guidance for IB Diploma Programme Physics (SL and HL).</p>
+
+    <!-- Filled in by js/site.js from the list in js/jokes.js -->
+    <section class="joke" id="joke" aria-labelledby="joke-title" hidden>
+      <h2 id="joke-title"><span aria-hidden="true">😄</span> Joke of the day</h2>
+      <p class="joke-q"></p>
+      <p class="joke-a" id="joke-answer" hidden></p>
+      <div class="joke-buttons">
+        <button type="button" class="primary joke-reveal" aria-controls="joke-answer" aria-expanded="false">Reveal the answer</button>
+        <button type="button" class="secondary joke-next">Another joke</button>
+      </div>
+    </section>
 
     <h2>Syllabus themes</h2>
     <div data-theme-list></div>
@@ -24,6 +36,7 @@
       <li><a class="card" href="ee/index.html"><h3>Extended essay</h3><p>Planning and writing a physics EE.</p></a></li>
       <li><a class="card" href="tok.html"><h3>ToK and the nature of science</h3><p>How physics produces knowledge, and the big questions it raises.</p></a></li>
       <li><a class="card" href="resources.html"><h3>Resources</h3><p>Lesson slides and documents on Google Drive.</p></a></li>
+      <li><a class="card" href="about.html"><h3>About me</h3><p>Who writes this guide, and why.</p></a></li>
     </ul>
   </main>
   <footer id="site-footer"></footer>

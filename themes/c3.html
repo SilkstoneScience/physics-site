@@ -142,6 +142,24 @@
     <div class="worked">
       <h3>Worked example: light entering water</h3>
       <p>A ray of light in air hits a water surface at 50° to the normal. Find the angle of refraction and the speed of light in water ($n = 1.33$).</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 380 220" role="img" aria-labelledby="wrefrt">
+          <title id="wrefrt">A ray of light in air hits a water surface at 50 degrees to the normal. In the water it bends towards the normal, to 35 degrees.</title>
+          <rect x="0" y="110" width="380" height="110" class="area"/>
+          <line class="axis" x1="0" y1="110" x2="380" y2="110"/>
+          <line class="axis dash" x1="190" y1="18" x2="190" y2="205"/>
+          <text x="198" y="30">normal</text>
+          <line class="l1" x1="113.4" y1="45.7" x2="190" y2="110" marker-end="url(#ah1)"/>
+          <line class="l2" x1="190" y1="110" x2="247.4" y2="191.9" marker-end="url(#ah2)"/>
+          <path class="axis" d="M190 70 A 40 40 0 0 0 159.4 84.3"/>
+          <text class="t1" x="184" y="60" text-anchor="end" style="font-size:14px">50°</text>
+          <path class="axis" d="M190 150 A 40 40 0 0 0 212.9 142.8"/>
+          <text class="t2" x="214" y="186" text-anchor="middle" style="font-size:14px">35°</text>
+          <text x="12" y="30">air, n = 1.00</text>
+          <text x="12" y="206">water, n = 1.33</text>
+        </svg>
+        <figcaption>Measure both angles from the <strong>normal</strong>. The light slows down in water, so the <span class="key-2">refracted ray</span> bends towards the normal.</figcaption>
+      </figure>
       <p>$1.00 \sin 50° = 1.33 \sin\theta_2$, so $\sin\theta_2 = 0.576$ and $\theta_2 = 35°$, bent towards the normal.<br>
       $v = \dfrac{c}{n} = \dfrac{3.00\times10^{8}}{1.33} = 2.26 \times 10^{8}\ \text{m s}^{-1}$.</p>
     </div>
@@ -151,6 +169,10 @@
     <p>When light goes from a medium with a <strong>higher</strong> refractive index into one with a <strong>lower</strong> index (glass to air, for example), it bends away from the normal. As the angle of incidence increases, the refracted ray gets closer to the boundary. At the <strong>critical angle</strong> $\theta_c$, the refracted ray runs along the boundary ($\theta_2 = 90°$). Snell's law then gives:</p>
     <div class="key">$$\sin\theta_c = \frac{n_2}{n_1} \qquad (n_1 &gt; n_2)$$</div>
     <p>For any angle larger than $\theta_c$, no light escapes: it is all reflected. This is <strong>total internal reflection</strong> (TIR). It can only happen going into a medium with a <em>lower</em> refractive index.</p>
+    <aside class="maths-link">
+      <h3>Maths link: when an equation has no solution <span class="tag">AA SL 3.5</span></h3>
+      <p>Try Snell's law for light leaving glass ($n = 1.50$) at 60°: $\sin\theta_2 = 1.50 \sin 60° = 1.30$. The sine of an angle can never be bigger than 1, so there is no angle $\theta_2$ and your calculator gives an error. The maths is telling you the physics: no refracted ray exists, and all the light is reflected.</p>
+    </aside>
     <figure class="diagram">
       <svg viewBox="0 0 380 220" role="img" aria-labelledby="c3ct">
         <title id="c3ct">Three rays from a point inside glass hitting the glass–air surface. A ray at a small angle refracts out into the air, bending away from the normal. A ray at the critical angle refracts along the surface. A ray at a larger angle is totally reflected back into the glass.</title>
@@ -224,6 +246,24 @@
     <div class="worked">
       <h3>Worked example: loud or quiet?</h3>
       <p>Two loudspeakers connected to the same signal generator emit sound of wavelength 0.50 m. A student stands 3.25 m from one speaker and 4.00 m from the other. Is it loud or quiet there?</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 380 258" role="img" aria-labelledby="wspkt">
+          <title id="wspkt">Two loudspeakers, S1 and S2, one above the other, are both connected to a signal generator. A student at point P is 3.25 metres from S1 and 4.00 metres from S2.</title>
+          <rect x="30" y="58" width="14" height="24" class="f3"/><polygon class="f3" points="44,62 58,52 58,88 44,78"/>
+          <rect x="30" y="218" width="14" height="24" class="f3"/><polygon class="f3" points="44,222 58,212 58,248 44,238"/>
+          <text x="66" y="92">S₁</text><text x="68" y="254">S₂</text>
+          <rect x="2" y="134" width="44" height="32" rx="4" class="axis"/>
+          <text x="24" y="156" text-anchor="middle" style="font-size:13px">signal</text>
+          <polyline class="axis" points="24,134 24,70 30,70"/><polyline class="axis" points="24,166 24,230 30,230"/>
+          <line class="l1" x1="58" y1="70" x2="308" y2="41"/>
+          <line class="l2" x1="58" y1="230" x2="308" y2="41"/>
+          <circle cx="308" cy="41" r="6" class="f3"/>
+          <text x="318" y="46">P</text>
+          <text class="t1" x="176" y="46" text-anchor="middle">3.25 m</text>
+          <text class="t2" x="200" y="160">4.00 m</text>
+        </svg>
+        <figcaption>Drawn to scale. The path difference is the <span class="key-2">longer path</span> minus the <span class="key-1">shorter path</span>.</figcaption>
+      </figure>
       <p>Path difference $= 4.00 - 3.25 = 0.75$ m $= 1.5\lambda$. This is $(n + \tfrac{1}{2})\lambda$ with $n = 1$, so the interference is <strong>destructive</strong> and it's quiet there. (It's rarely perfectly silent, because of reflections from walls and unequal amplitudes.)</p>
     </div>
 
@@ -286,8 +326,12 @@
       <h3>Worked example: width of the central maximum <span class="tag hl">HL</span></h3>
       <p>Light of wavelength 600 nm passes through a slit 0.12 mm wide onto a screen 3.0 m away. How wide is the central maximum?</p>
       <p>$\theta = \dfrac{\lambda}{b} = \dfrac{600\times10^{-9}}{0.12\times10^{-3}} = 5.0\times10^{-3}$ rad.<br>
-      For small angles, distance from the centre to the first minimum $\approx D\theta = 3.0 \times 5.0\times10^{-3} = 15$ mm. The central maximum is twice this: <strong>30 mm</strong> wide.</p>
+      For small angles, distance from the centre to the first minimum $\approx D\theta$ $= 3.0 \times 5.0\times10^{-3} = 15$ mm. The central maximum is twice this: <strong>30 mm</strong> wide.</p>
     </div>
+    <aside class="maths-link">
+      <h3>Maths link: arcs and small angles <span class="tag">AA SL 3.4</span> <span class="tag hl">HL</span></h3>
+      <p>Why is the distance on the screen $D\theta$? It is the arc length formula $l = r\theta$ with $r = D$. For a small angle, the arc is almost the same as the straight line across the screen. This only works with $\theta$ in <strong>radians</strong>. Check on your calculator: for $\theta = 0.0050$ rad, $\sin\theta$ and $\tan\theta$ both equal $0.0050$ to 2 significant figures.</p>
+    </aside>
 
     <h2 id="modulation">10. The double-slit pattern revisited <span class="tag hl">HL</span></h2>
     <p>Each slit in a double-slit experiment has a width, so each one produces its own single-slit diffraction pattern. The two-slit interference fringes are still equally spaced ($s = \lambda D/d$), but their brightness follows the single-slit pattern. We say the single-slit pattern <strong>modulates</strong> the double-slit pattern, acting as an "envelope".</p>
@@ -332,6 +376,25 @@
     <div class="worked">
       <h3>Worked example: a diffraction grating <span class="tag hl">HL</span></h3>
       <p>Green light of wavelength 550 nm falls normally on a grating with 500 lines per mm. Find the angles of the maxima, and the highest order visible.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 380 235" role="img" aria-labelledby="wgratt">
+          <title id="wgratt">Green light hits a diffraction grating from the left. Beams leave the grating at the angles of the maxima: straight through for n equals 0, then 16, 33 and 56 degrees for orders 1, 2 and 3. Only the upper half is drawn; the pattern is the same below the central beam.</title>
+          <line class="l3" x1="10" y1="210" x2="54" y2="210" marker-end="url(#ah3)"/>
+          <text x="6" y="196" style="font-size:13px">550 nm</text>
+          <line class="l3" style="stroke-width:4" x1="60" y1="120" x2="60" y2="228"/>
+          <g class="l1 thin">
+            <line x1="60" y1="210" x2="260" y2="210"/>
+            <line x1="60" y1="210" x2="252.3" y2="154.9"/>
+            <line x1="60" y1="210" x2="227.7" y2="101.1"/>
+            <line x1="60" y1="210" x2="171.8" y2="44.2"/>
+          </g>
+          <text class="t1" x="268" y="215">n = 0</text>
+          <text class="t1" x="260" y="153">n = 1, 16°</text>
+          <text class="t1" x="235" y="99">n = 2, 33°</text>
+          <text class="t1" x="179" y="42">n = 3, 56°</text>
+        </svg>
+        <figcaption>The <span class="key-1">bright maxima</span> above the central beam. The same pattern appears below it. There is no fourth order, because $\sin\theta$ can't be bigger than 1.</figcaption>
+      </figure>
       <p>$d = \dfrac{1}{500\times10^{3}} = 2.0\times10^{-6}$ m.<br>
       $n = 1$: $\sin\theta = \dfrac{550\times10^{-9}}{2.0\times10^{-6}} = 0.275$, so $\theta = 16°$. &nbsp; $n = 2$: $\sin\theta = 0.55$, so $\theta = 33°$. &nbsp; $n = 3$: $\sin\theta = 0.825$, so $\theta = 56°$.<br>
       $n = 4$ would need $\sin\theta = 1.1$, which is impossible. So the <strong>highest order is 3</strong> ($d/\lambda = 3.6$).</p>

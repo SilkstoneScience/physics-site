@@ -153,6 +153,7 @@ window.CONSTANTS = {
     ['experimental', 'experimental/index.html', 'Experimental programme'],
     ['ee', 'ee/index.html', 'Extended essay'],
     ['resources', 'resources.html', 'Resources'],
+    ['about', 'about.html', 'About'],
   ];
   const header = document.getElementById('site-header');
   if (header) {
@@ -213,6 +214,41 @@ window.CONSTANTS = {
     topicNav.innerHTML =
       (prev ? `<a class="card" href="${topicFile(prev.id)}">← ${prev.id} ${prev.title}</a>` : '<span></span>') +
       (next ? `<a class="card next" href="${topicFile(next.id)}">${next.id} ${next.title} →</a>` : '');
+  }
+
+  // ----- "Joke of the day" box on the home page: <section id="joke">, jokes from js/jokes.js -----
+  const jokeBox = document.getElementById('joke');
+  if (jokeBox && window.JOKES && JOKES.length) {
+    const q = jokeBox.querySelector('.joke-q');
+    const a = jokeBox.querySelector('.joke-a');
+    const reveal = jokeBox.querySelector('.joke-reveal');
+    let current = -1;
+    // Remember the last joke shown (on this device only), so a refresh never repeats it.
+    try {
+      const last = localStorage.getItem('lastJoke');
+      if (last !== null) current = Number(last);
+    } catch (e) { /* storage blocked: that's fine */ }
+    function showJoke() {
+      let i;
+      do { i = Math.floor(Math.random() * JOKES.length); } while (JOKES.length > 1 && i === current);
+      current = i;
+      try { localStorage.setItem('lastJoke', i); } catch (e) { /* ignore */ }
+      q.textContent = JOKES[i].q;
+      a.textContent = JOKES[i].a;
+      a.hidden = true;
+      reveal.hidden = false;
+      reveal.setAttribute('aria-expanded', 'false');
+    }
+    reveal.addEventListener('click', () => {
+      a.hidden = false;
+      reveal.hidden = true;
+      reveal.setAttribute('aria-expanded', 'true');
+      a.focus();
+    });
+    jokeBox.querySelector('.joke-next').addEventListener('click', showJoke);
+    a.tabIndex = -1;
+    showJoke();
+    jokeBox.hidden = false;
   }
 
   // ----- Data booklet card on the Resources page uses DATA_BOOKLET_URL -----

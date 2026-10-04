@@ -152,6 +152,10 @@
       <li>The acceleration graph is the displacement graph turned upside down. That's the minus sign in $a = -\omega^2 x$.</li>
       <li>The velocity is the gradient of the displacement–time graph. The acceleration is the gradient of the velocity–time graph, just as in A.1.</li>
     </ul>
+    <aside class="maths-link">
+      <h3>Maths link: the gradient of a sine curve <span class="tag">AA SL 5.6, 5.7</span></h3>
+      <p>Taking the gradient is differentiating. In maths you learn that the derivative of $\sin x$ is $\cos x$, and the derivative of $\cos x$ is $-\sin x$. That's why each graph above has the same shape as the one before it, shifted by a quarter of a cycle. Differentiating twice gives back the starting curve with a minus sign, which is exactly what $a = -\omega^2 x$ says. HL students: see the full derivation in <a href="#phase">section 6</a>.</p>
+    </aside>
 
     <!-- ===================================================== -->
     <h2 id="systems">4. The mass–spring system and the simple pendulum</h2>
@@ -237,12 +241,44 @@
       <li>$\phi = 0$: the motion starts at equilibrium, moving in the positive direction.</li>
       <li>$\phi = \frac{\pi}{2}$: it starts at $+x_0$ (since $\sin(\omega t + \frac{\pi}{2}) = \cos\omega t$).</li>
       <li>The maximum speed is $v_{\max} = \omega x_0$, at $x = 0$.</li>
+    </ul>
+    <aside class="maths-link">
+      <h3>Maths link: deriving the SHM equations by differentiation <span class="tag">AA SL 5.6, 5.7</span> <span class="tag hl">HL</span></h3>
+      <p>With calculus, all of these equations come from the displacement equation. Velocity is $\dfrac{dx}{dt}$. Use the derivative of $\sin$ and the <strong>chain rule</strong>: the inside function $\omega t + \phi$ has derivative $\omega$.</p>
+      $$x = x_0\sin(\omega t + \phi)$$
+      $$v = \frac{dx}{dt} = \omega x_0\cos(\omega t + \phi)$$
+      <p>Differentiate again. The derivative of $\cos$ is $-\sin$, and the chain rule gives another factor of $\omega$:</p>
+      $$a = \frac{dv}{dt} = -\omega^2 x_0\sin(\omega t + \phi)$$
+      <p>The bracket $x_0\sin(\omega t + \phi)$ is just $x$, so $a = -\omega^2 x$. That's the defining equation of SHM, so this displacement equation really does describe SHM.</p>
+      <p><strong>The third equation</strong> uses the identity $\cos^2\theta + \sin^2\theta = 1$ (AA SL 3.6). Write $\theta = \omega t + \phi$. Then $\cos\theta = \pm\sqrt{1 - \sin^2\theta}$, and $\sin\theta = \dfrac{x}{x_0}$, so:</p>
+      $$v = \pm\,\omega x_0\sqrt{1 - \frac{x^2}{x_0^2}}$$
+      $$v = \pm\,\omega\sqrt{x_0^2 - x^2}$$
+    </aside>
+    <ul>
       <li>Two identical oscillators a quarter of a cycle apart have a <strong>phase difference</strong> of $\frac{\pi}{2}$; half a cycle apart, $\pi$. A phase difference $\Delta\phi$ corresponds to a time difference $\Delta t = \frac{\Delta\phi}{2\pi}T$.</li>
     </ul>
     <p><strong>Set your calculator to radians</strong> for these equations. It's the most common source of wrong answers.</p>
     <div class="worked">
       <h3>Worked example: using the SHM equations <span class="tag hl">HL</span></h3>
       <p>An object oscillates with amplitude 0.050 m and frequency 2.0 Hz. At $t = 0$ it passes through equilibrium moving in the positive direction. Find its displacement and velocity at $t = 0.10$ s, and its maximum speed.</p>
+      <figure class="diagram">
+        <svg viewBox="-20 0 360 185" role="img" aria-labelledby="wshmt">
+          <title id="wshmt">Graph of x equals 0.050 sine of 4 pi t over one period of 0.50 seconds. The curve starts at zero and rises. The point at t equals 0.10 seconds is marked, where x is 0.048 metres, just below the peak of 0.050 metres at 0.125 seconds.</title>
+          <line class="axis" x1="40" y1="100" x2="330" y2="100" marker-end="url(#ah3)"/>
+          <line class="axis" x1="40" y1="175" x2="40" y2="20" marker-end="url(#ah3)"/>
+          <text x="322" y="122">t</text><text x="20" y="30">x</text>
+          <line class="grid dash" x1="40" y1="40" x2="250" y2="40"/>
+          <line class="grid dash" x1="40" y1="160" x2="250" y2="160"/>
+          <text x="34" y="45" text-anchor="end" style="font-size:13px">0.050</text>
+          <text x="34" y="165" text-anchor="end" style="font-size:13px">−0.050</text>
+          <polyline class="l1" points="40,100 42.8,96.2 45.6,92.5 48.4,88.8 51.2,85.1 54,81.5 56.8,77.9 59.6,74.5 62.4,71.1 65.2,67.9 68,64.7 70.8,61.8 73.6,58.9 76.4,56.3 79.2,53.8 82,51.5 84.8,49.3 87.6,47.4 90.4,45.7 93.2,44.2 96,42.9 98.8,41.9 101.6,41.1 104.4,40.5 107.2,40.1 110,40 112.8,40.1 115.6,40.5 118.4,41.1 121.2,41.9 124,42.9 126.8,44.2 129.6,45.7 132.4,47.4 135.2,49.3 138,51.5 140.8,53.8 143.6,56.3 146.4,58.9 149.2,61.8 152,64.7 154.8,67.9 157.6,71.1 160.4,74.5 163.2,77.9 166,81.5 168.8,85.1 171.6,88.8 174.4,92.5 177.2,96.2 180,100 182.8,103.8 185.6,107.5 188.4,111.2 191.2,114.9 194,118.5 196.8,122.1 199.6,125.5 202.4,128.9 205.2,132.1 208,135.3 210.8,138.2 213.6,141.1 216.4,143.7 219.2,146.2 222,148.5 224.8,150.7 227.6,152.6 230.4,154.3 233.2,155.8 236,157.1 238.8,158.1 241.6,158.9 244.4,159.5 247.2,159.9 250,160 252.8,159.9 255.6,159.5 258.4,158.9 261.2,158.1 264,157.1 266.8,155.8 269.6,154.3 272.4,152.6 275.2,150.7 278,148.5 280.8,146.2 283.6,143.7 286.4,141.1 289.2,138.2 292,135.3 294.8,132.1 297.6,128.9 300.4,125.5 303.2,122.1 306,118.5 308.8,114.9 311.6,111.2 314.4,107.5 317.2,103.8 320,100"/>
+          <line class="l2 thin dash" x1="96" y1="42.9" x2="96" y2="100"/>
+          <circle cx="96" cy="42.9" r="5" class="f2"/>
+          <text class="t2" x="96" y="120" text-anchor="middle">0.10 s</text>
+          <text x="320" y="92" text-anchor="middle" style="font-size:13px">0.50 s</text>
+        </svg>
+        <figcaption>$x = 0.050\sin(4\pi t)$ over one period ($T = 0.50$ s). At <span class="key-2">t = 0.10 s</span> the object is still moving outwards, just before it reaches the amplitude at $t = T/4 = 0.125$ s.</figcaption>
+      </figure>
       <p>$\omega = 2\pi f = 4\pi = 12.6\ \text{rad s}^{-1}$ and $\phi = 0$, so $x = 0.050\sin(4\pi t)$.<br>
       At $t = 0.10$ s: $x = 0.050\sin(1.26\ \text{rad}) = 0.048$ m.<br>
       $v = \omega x_0\cos(\omega t) = 12.6 \times 0.050 \times \cos(1.26) = 0.19\ \text{m s}^{-1}$.<br>

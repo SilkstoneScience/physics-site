@@ -101,6 +101,12 @@
     </ul>
     <h3>Work from a force–displacement graph</h3>
     <p>When the force changes, the work done is the <strong>area under the force–displacement graph</strong>. For a spring obeying Hooke's law, the graph is a straight line through the origin, so the area is a triangle: $W = \frac{1}{2}F x = \frac{1}{2}kx^2$. That's where the elastic potential energy formula comes from (see <a href="#potential">section 4</a>).</p>
+    <aside class="maths-link">
+      <h3>Maths link: integration <span class="tag">AA SL 5.5, 5.11</span></h3>
+      <p>The area under a graph is an integral, so the work done by a changing force is $W = \displaystyle\int F\,dx$. For a spring, $F = kx$, and the power rule for integration gives:</p>
+      $$W = \int_0^{\Delta x} kx\,dx = \tfrac{1}{2}k(\Delta x)^2$$
+      <p>That's the same answer as the triangle. Integration also works when the graph is curved and there is no simple shape to measure.</p>
+    </aside>
     <div class="worked">
       <h3>Worked example: pulling a sledge</h3>
       <p>A child pulls a 20 kg sledge 25 m across flat snow with a force of 80 N along a rope at 30° above the horizontal. Friction on the sledge is 50 N. The sledge starts at rest.</p>
@@ -166,6 +172,22 @@
     <div class="worked">
       <h3>Worked example: a skateboard ramp</h3>
       <p>A 50 kg skateboarder starts from rest at the top of a curved ramp 3.2 m high.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 360 215" role="img" aria-labelledby="wrampt">
+          <title id="wrampt">A curved ramp. The skateboarder starts at rest at the top, 3.2 metres above the ground, and rolls down the curve to the flat ground at the bottom, where the speed is v.</title>
+          <path class="area" d="M40 40 Q 80 180 300 180 L 40 180 Z"/>
+          <line class="axis" x1="10" y1="180" x2="350" y2="180"/>
+          <path class="l3" d="M40 40 Q 80 180 300 180"/>
+          <circle cx="46" cy="30" r="8" class="f1"/>
+          <text x="62" y="35">start: at rest</text>
+          <line class="grid dash" x1="40" y1="40" x2="335" y2="40"/>
+          <line class="l2 thin" x1="322" y1="44" x2="322" y2="176" marker-start="url(#ah2)" marker-end="url(#ah2)"/>
+          <text class="t2" x="314" y="116" text-anchor="end">3.2 m</text>
+          <line class="l1" x1="220" y1="166" x2="280" y2="166" marker-end="url(#ah1)"/>
+          <text class="t1" x="250" y="156" text-anchor="middle">v</text>
+        </svg>
+        <figcaption>Without friction, the speed at the bottom depends only on the <span class="key-2">height</span> dropped, not on the shape of the ramp.</figcaption>
+      </figure>
       <p>(a) Ignoring friction: $mg\Delta h = \tfrac{1}{2}mv^2$, so $v = \sqrt{2 \times 9.8 \times 3.2} = 7.9\ \text{m s}^{-1}$.</p>
       <p>(b) In fact her speed at the bottom is 7.0 $\text{m s}^{-1}$, and the ramp is 8.0 m long. Find the average resistive force.<br>
       $E_p$ lost $= 50 \times 9.8 \times 3.2 = 1570$ J. &nbsp; $E_k$ gained $= \tfrac{1}{2}(50)(7.0)^2 = 1230$ J.<br>
