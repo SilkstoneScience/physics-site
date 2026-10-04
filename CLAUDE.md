@@ -46,7 +46,7 @@ This folder (`physics-site`) is a static website for IB DP Physics students, hos
 
 ## Progress (update as topics are finished)
 - Done: A.1 Kinematics (notes and 19 Paper 1A questions), A.2 Forces and momentum (notes, 22 Paper 1A and 2 Paper 2 questions), A.3 Work, energy and power (notes, 20 Paper 1A and 2 Paper 2 questions), C.1 SHM (notes with HL part; 16 Paper 1A and 2 Paper 2, 6 of them HL), C.2 Wave model (notes; 12 Paper 1A and 1 Paper 2), C.3 Wave phenomena (notes with HL part; 21 Paper 1A and 2 Paper 2, 8 of them HL), C.4 Standing waves and resonance (notes, no HL content; 16 Paper 1A and 2 Paper 2), C.5 Doppler effect (notes with HL part; 14 Paper 1A and 2 Paper 2, 5 of them HL).
-- Everything else: placeholder pages. Not yet done: A.4, A.5, Theme B, Theme D, Theme E, and a Skills page (from `A.0 - Essential Skills.pptx`).
+- Everything else: placeholder pages. Not yet done: A.4, A.5, Theme B, Theme D, Theme E.
 
 ## Working from Google Drive (cloud sessions)
 - The teacher's lessons are also on Google Drive, which cloud sessions can read with the Google Drive tools: `Unit A - Space Time and Motion`, `Unit C - Wave Behaviour` (and other `Unit …` folders), `Curriculum` (contains `DP Physics Guide 2025.pdf`), `Books` (textbooks, including the `Oxford` folder) and `Daily Questions`.
@@ -80,6 +80,7 @@ This folder (`physics-site`) is a static website for IB DP Physics students, hos
   - `experimental/`: `index.html`, `practicals.html`, `csp.html`, `ia.html`.
   - `ee/index.html`: Extended Essay guidance.
   - `tok.html`: explains NoS and ToK and how to use the topic boxes.
+  - `skills.html`: Physics skills (Tool 3): units, accuracy and precision, significant figures, uncertainties, graphs and gradient uncertainty, vectors. Written from `A.0 - Essential Skills.pptx`, whose numbered examples come from a textbook, so all examples on the page are new.
   - `resources.html`: Google Drive links. The data booklet link lives in **one place**, `window.DATA_BOOKLET_URL` near the top of `js/site.js`. Both the equations panel and the Resources `#data-booklet` card use it. While it's empty, they say the link is "coming soon". Link to the PDF on Drive, and never put the IB PDF itself in this public folder.
 - Equations use MathJax: `$...$` inline, `$$...$$` displayed. Inside JSON files every backslash must be doubled, e.g. `"$v = u + at$"` but `"$\\Delta x$"`.
 - Pages load **MathJax 4** (`https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js`), which wraps long *inline* equations on phones. *Displayed* `$$...$$` equations don't wrap, so keep each one short. Put long chains on separate `$$` lines.
