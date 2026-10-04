@@ -4,15 +4,302 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>C.1 Simple harmonic motion · DP Physics</title>
+  <meta name="description" content="IB DP Physics C.1 Simple harmonic motion: conditions for SHM, a = −ω²x, period, mass–spring and pendulum, energy, and (HL) phase and the SHM equations.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="C.1">
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
+</head>
+<body data-root="../" data-section="themes" data-topic="C.1">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="c.html">Theme C Wave behaviour</a></p>
-    <h1><span class="code">C.1</span>Simple harmonic motion</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <h1><span class="code">C.1</span>Simple harmonic motion <span class="tag hl">+ HL extra</span></h1>
+    <p class="lead">Oscillations are everywhere: a swing, a guitar string, a heartbeat, the atoms in a solid, the quartz crystal in a watch. One special kind, simple harmonic motion (SHM), is both very common and mathematically simple. It is also the building block for all of wave physics. Sections 1–5 are for everyone. Sections 6–7 are <strong>HL only</strong> and clearly marked.</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Models</span><span class="tag">Observations</span><span class="tag">Measurement</span><span class="tag">Science as a shared endeavour</span></div>
+          <p><strong>Models.</strong> Real oscillations are messy, but SHM is a model that captures their essentials. Even complicated repeating motions can be built by adding together simple sine-shaped oscillations, an idea developed by Joseph Fourier in the early 1800s.</p>
+          <p><strong>Observations.</strong> Galileo is said to have noticed that a swinging cathedral lamp took the same time for each swing, however far it swung. He timed it against his own pulse. Oscillations whose period doesn't depend on amplitude are called <em>isochronous</em>. They made accurate pendulum clocks possible.</p>
+          <p><strong>Measurement and a shared endeavour.</strong> Time itself is now defined by an oscillation: the second is a fixed number of cycles of radiation from caesium atoms. Countries agree on this standard, which keeps GPS, power grids and the internet in sync.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>When is a simple model good enough?</strong> A pendulum is only simple harmonic for small swings, but we use the SHM model anyway. How do scientists decide when a simple model is no longer detailed enough?</li>
+            <li><strong>What counts as proof?</strong> Fourier's work was criticised because parts of it relied on intuition and had gaps in the logic, and publication was delayed for years. It is now fundamental to physics and engineering. Should incomplete reasoning ever be accepted if the results work?</li>
+            <li><strong>Is nature made of sine waves, or is that just our mathematics?</strong> If any oscillation <em>can</em> be described as a sum of sine waves, does that mean it really <em>is</em> made of them?</li>
+            <li><strong>Can a definition be wrong?</strong> The second is defined by an atomic oscillation. If we define time this way, what would it even mean to say an atomic clock is "inaccurate"?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <p style="margin:8px 0 0"><strong>SL and HL</strong></p>
+      <ol>
+        <li><a href="#describing">Describing oscillations</a></li>
+        <li><a href="#shm">The conditions for SHM</a></li>
+        <li><a href="#graphs">Graphs of SHM</a></li>
+        <li><a href="#systems">The mass–spring system and the simple pendulum</a></li>
+        <li><a href="#energy">Energy in SHM</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><a href="#hl"><strong>HL only</strong></a> <span class="tag hl">HL</span></p>
+      <ol start="6">
+        <li><a href="#phase">Phase and the equations of SHM</a></li>
+        <li><a href="#energy-hl">Energy in SHM: calculations</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><strong>Review</strong></p>
+      <ol start="8">
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="describing">1. Describing oscillations</h2>
+    <p>An <strong>oscillation</strong> is a repeated motion back and forth about an <strong>equilibrium position</strong>: the position where the object would rest if undisturbed.</p>
+    <figure class="diagram">
+      <svg viewBox="0 -10 400 170" role="img" aria-labelledby="c1at">
+        <title id="c1at">A block on a smooth surface attached to a spring. A dashed line marks the equilibrium position. The block oscillates between plus x-nought and minus x-nought on either side of it.</title>
+        <rect x="10" y="30" width="10" height="72" class="f3"/>
+        <line class="axis" x1="10" y1="102" x2="390" y2="102"/>
+        <polyline class="l3 thin" points="20,77 35,77 45,62 60,92 75,62 90,92 105,62 120,92 135,62 150,92 165,62 175,77 190,77"/>
+        <rect x="190" y="52" width="60" height="50" rx="4" class="axis" style="fill:var(--accent-soft)"/>
+        <line class="axis dash" x1="220" y1="25" x2="220" y2="150"/>
+        <text x="220" y="18" text-anchor="middle">equilibrium</text>
+        <line class="l2 thin" x1="222" y1="130" x2="318" y2="130" marker-end="url(#ah2)"/>
+        <line class="l2 thin" x1="218" y1="130" x2="122" y2="130" marker-end="url(#ah2)"/>
+        <text class="t2" x="270" y="152" text-anchor="middle">+x₀</text>
+        <text class="t2" x="170" y="152" text-anchor="middle">−x₀</text>
+      </svg>
+      <figcaption>A mass on a spring oscillates between <span class="key-2">+x₀ and −x₀</span> about the equilibrium position.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>Displacement</strong> $x$: the distance and direction from equilibrium. It can be positive or negative.</li>
+      <li><strong>Amplitude</strong> $x_0$: the <em>maximum</em> displacement. It is half the distance between the two extremes, not the whole distance.</li>
+      <li><strong>Time period</strong> $T$: the time for one complete oscillation (there and back).</li>
+      <li><strong>Frequency</strong> $f$: the number of oscillations per second, in hertz (Hz).</li>
+      <li><strong>Angular frequency</strong> $\omega$: $2\pi$ radians per cycle, in rad s$^{-1}$. It links SHM to circular motion (A.2).</li>
+    </ul>
+    <div class="key">$$T = \frac{1}{f} = \frac{2\pi}{\omega}$$</div>
+    <p><em>Example:</em> a child's swing with a period of 3.2 s has $f = 1/3.2 = 0.31$ Hz and $\omega = 2\pi/3.2 = 2.0\ \text{rad s}^{-1}$.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="shm">2. The conditions for SHM</h2>
+    <p>An object moves with <strong>simple harmonic motion</strong> when the resultant force on it (and so its acceleration):</p>
+    <ol>
+      <li>is <strong>proportional to its displacement</strong> from the equilibrium position, and</li>
+      <li>always points <strong>towards the equilibrium position</strong>, opposite to the displacement.</li>
+    </ol>
+    <p>A force like this is called a <strong>restoring force</strong>. Written as an equation, this is the defining equation of SHM:</p>
+    <div class="key">$$a = -\omega^2 x$$</div>
+    <p><strong>The minus sign matters.</strong> It shows that the acceleration is always opposite to the displacement. When the object is to the right of equilibrium ($x$ positive), it accelerates to the left, and vice versa. That's what keeps pulling it back. A graph of $a$ against $x$ is a straight line through the origin with gradient $-\omega^2$.</p>
+    <div class="diagram-row">
+      <figure class="diagram">
+        <svg viewBox="0 0 220 190" class="small" role="img" aria-labelledby="c1bt">
+          <title id="c1bt">Graph of acceleration against displacement for SHM: a straight line through the origin with a negative gradient, between minus x-nought and plus x-nought.</title>
+          <line class="axis" x1="20" y1="95" x2="208" y2="95" marker-end="url(#ah3)"/>
+          <line class="axis" x1="110" y1="180" x2="110" y2="10" marker-end="url(#ah3)"/>
+          <text x="194" y="118">x</text><text x="118" y="24">a</text>
+          <line class="l1" x1="45" y1="150" x2="175" y2="40"/>
+          <line class="axis" x1="45" y1="90" x2="45" y2="100"/><line class="axis" x1="175" y1="90" x2="175" y2="100"/>
+          <text x="45" y="82" text-anchor="middle">−x₀</text><text x="175" y="118" text-anchor="middle">x₀</text>
+        </svg>
+        <figcaption>For SHM, $a$ against $x$ is a straight line through the origin with <span class="key-1">gradient</span> $-\omega^2$.</figcaption>
+      </figure>
+    </div>
+    <p><strong>Why a mass on a spring does SHM:</strong> Hooke's law gives $F = -kx$, and Newton's second law gives $F = ma$. So $ma = -kx$, which means $a = -\frac{k}{m}x$. This has exactly the form $a = -\omega^2 x$, with $\omega^2 = \frac{k}{m}$.</p>
+    <p>A consequence of SHM is that the period <strong>doesn't depend on the amplitude</strong>: the motion is isochronous. A bigger swing has further to go, but it moves faster.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="graphs">3. Graphs of SHM</h2>
+    <p>If you attach a pen to an oscillating mass and pull paper past it at a steady speed, it draws a perfect sine-shaped curve. The displacement, velocity and acceleration all vary sinusoidally with the same period, but they are out of step with each other.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 300" role="img" aria-labelledby="c1ct">
+        <title id="c1ct">Three graphs against time for a mass released from rest at maximum displacement. Displacement is a cosine curve starting at its maximum. Velocity starts at zero and becomes negative first. Acceleration is a mirror image of the displacement, starting at its most negative value.</title>
+        <g class="axis">
+          <line x1="40" y1="50" x2="348" y2="50"/><line x1="40" y1="150" x2="348" y2="150"/><line x1="40" y1="250" x2="348" y2="250"/>
+          <line x1="40" y1="12" x2="40" y2="88"/><line x1="40" y1="112" x2="40" y2="188"/><line x1="40" y1="212" x2="40" y2="288"/>
+        </g>
+        <line class="grid dash" x1="90" y1="12" x2="90" y2="288"/>
+        <line class="grid dash" x1="140" y1="12" x2="140" y2="288"/>
+        <text x="14" y="56">x</text><text x="14" y="156">v</text><text x="14" y="256">a</text>
+        <text x="338" y="72">t</text><text x="338" y="172">t</text><text x="338" y="272">t</text>
+        <polyline class="l1" points="40,20 45,20.4 50,21.5 55,23.3 60,25.7 65,28.8 70,32.4 75,36.4 80,40.7 85,45.3 90,50 95,54.7 100,59.3 105,63.6 110,67.6 115,71.2 120,74.3 125,76.7 130,78.5 135,79.6 140,80 145,79.6 150,78.5 155,76.7 160,74.3 165,71.2 170,67.6 175,63.6 180,59.3 185,54.7 190,50 195,45.3 200,40.7 205,36.4 210,32.4 215,28.8 220,25.7 225,23.3 230,21.5 235,20.4 240,20 245,20.4 250,21.5 255,23.3 260,25.7 265,28.8 270,32.4 275,36.4 280,40.7 285,45.3 290,50 295,54.7 300,59.3 305,63.6 310,67.6 315,71.2 320,74.3 325,76.7 330,78.5 335,79.6 340,80"/>
+        <polyline class="l2" points="40,150 45,154.7 50,159.3 55,163.6 60,167.6 65,171.2 70,174.3 75,176.7 80,178.5 85,179.6 90,180 95,179.6 100,178.5 105,176.7 110,174.3 115,171.2 120,167.6 125,163.6 130,159.3 135,154.7 140,150 145,145.3 150,140.7 155,136.4 160,132.4 165,128.8 170,125.7 175,123.3 180,121.5 185,120.4 190,120 195,120.4 200,121.5 205,123.3 210,125.7 215,128.8 220,132.4 225,136.4 230,140.7 235,145.3 240,150 245,154.7 250,159.3 255,163.6 260,167.6 265,171.2 270,174.3 275,176.7 280,178.5 285,179.6 290,180 295,179.6 300,178.5 305,176.7 310,174.3 315,171.2 320,167.6 325,163.6 330,159.3 335,154.7 340,150"/>
+        <polyline class="l3" points="40,280 45,279.6 50,278.5 55,276.7 60,274.3 65,271.2 70,267.6 75,263.6 80,259.3 85,254.7 90,250 95,245.3 100,240.7 105,236.4 110,232.4 115,228.8 120,225.7 125,223.3 130,221.5 135,220.4 140,220 145,220.4 150,221.5 155,223.3 160,225.7 165,228.8 170,232.4 175,236.4 180,240.7 185,245.3 190,250 195,254.7 200,259.3 205,263.6 210,267.6 215,271.2 220,274.3 225,276.7 230,278.5 235,279.6 240,280 245,279.6 250,278.5 255,276.7 260,274.3 265,271.2 270,267.6 275,263.6 280,259.3 285,254.7 290,250 295,245.3 300,240.7 305,236.4 310,232.4 315,228.8 320,225.7 325,223.3 330,221.5 335,220.4 340,220"/>
+      </svg>
+      <figcaption><span class="key-1">Displacement</span>, <span class="key-2">velocity</span> and acceleration (black) for a mass released from rest at $+x_0$. The dashed lines mark a quarter and a half of a cycle.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>At the extremes</strong> ($x = \pm x_0$): the velocity is <strong>zero</strong>, and the acceleration is at its <strong>maximum</strong> (pointing back towards equilibrium).</li>
+      <li><strong>At equilibrium</strong> ($x = 0$): the speed is at its <strong>maximum</strong> and the acceleration is <strong>zero</strong>.</li>
+      <li>The acceleration graph is the displacement graph turned upside down. That's the minus sign in $a = -\omega^2 x$.</li>
+      <li>The velocity is the gradient of the displacement–time graph. The acceleration is the gradient of the velocity–time graph, just as in A.1.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="systems">4. The mass–spring system and the simple pendulum</h2>
+    <h3>Mass–spring system</h3>
+    <p>Using $\omega^2 = \frac{k}{m}$ and $T = \frac{2\pi}{\omega}$:</p>
+    <div class="key">$$T = 2\pi\sqrt{\frac{m}{k}}$$</div>
+    <p>A heavier mass oscillates more slowly, and a stiffer spring (larger $k$) more quickly. The period doesn't depend on the amplitude, or on $g$: the same spring and mass would oscillate at the same rate on the Moon.</p>
+    <div class="worked">
+      <h3>Worked example: a mass on a spring</h3>
+      <p>A 0.40 kg mass hangs on a spring with $k = 25\ \text{N m}^{-1}$ and is set oscillating. Find the period and the frequency. What happens to the period if the mass is quadrupled?</p>
+      <p>$T = 2\pi\sqrt{\dfrac{0.40}{25}} = 2\pi \times 0.126 = 0.79$ s, so $f = \dfrac{1}{0.79} = 1.3$ Hz.<br>
+      $T \propto \sqrt{m}$, so four times the mass gives $\sqrt{4} = 2$ times the period: 1.6 s.</p>
+    </div>
+    <h3>Simple pendulum</h3>
+    <p>A small mass (the bob) on a light string of length $l$ does SHM, but <strong>only for small swings</strong> (less than about 10°). For larger angles the restoring force is no longer proportional to the displacement.</p>
+    <div class="key">$$T = 2\pi\sqrt{\frac{l}{g}}$$</div>
+    <p>The period depends only on the length and on $g$, <strong>not on the mass</strong> of the bob or the (small) amplitude.</p>
+    <div class="worked">
+      <h3>Worked example: a pendulum clock</h3>
+      <p>(a) Find the period of a pendulum 0.80 m long. (b) What length gives a period of exactly 2.0 s, one second for each swing across?</p>
+      <p>(a) $T = 2\pi\sqrt{\dfrac{0.80}{9.8}} = 1.8$ s.<br>
+      (b) Rearranging, $l = g\left(\dfrac{T}{2\pi}\right)^2 = 9.8 \times \left(\dfrac{2.0}{2\pi}\right)^2 = 0.99$ m. Almost exactly a metre.</p>
+    </div>
+    <p><strong>Measuring <em>g</em> with a pendulum:</strong> time 20 oscillations and divide by 20, to reduce the effect of reaction time. Repeat for several lengths and plot $T^2$ against $l$. Squaring $T = 2\pi\sqrt{l/g}$ gives $T^2 = \frac{4\pi^2}{g}l$, a straight line through the origin with gradient $\frac{4\pi^2}{g}$.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="energy">5. Energy in SHM</h2>
+    <p>As an oscillator moves, energy is continually transferred between <strong>kinetic energy</strong> and <strong>potential energy</strong>: elastic for a spring, gravitational for a pendulum.</p>
+    <ul>
+      <li>At the <strong>extremes</strong>: the object is momentarily at rest, so $E_k = 0$ and the potential energy is at its maximum.</li>
+      <li>At <strong>equilibrium</strong>: the speed is greatest, so $E_k$ is at its maximum and the potential energy is at its minimum.</li>
+      <li>With no friction or air resistance (no <em>damping</em>), the <strong>total energy stays constant</strong>.</li>
+      <li>During one period, $E_k$ and $E_p$ each reach their maximum <strong>twice</strong>, once on each side. So the energies vary with time at <em>twice</em> the frequency of the oscillation.</li>
+    </ul>
+    <div class="diagram-row">
+      <figure class="diagram">
+        <svg viewBox="0 0 240 190" class="small" role="img" aria-labelledby="c1dt">
+          <title id="c1dt">Graph of energy against displacement for SHM. Potential energy is a U-shaped parabola, zero at the centre and maximum at plus and minus x-nought. Kinetic energy is an upside-down parabola, maximum at the centre and zero at the extremes. The total energy is a horizontal dashed line.</title>
+          <line class="axis" x1="30" y1="160" x2="225" y2="160" marker-end="url(#ah3)"/>
+          <line class="axis" x1="120" y1="172" x2="120" y2="15" marker-end="url(#ah3)"/>
+          <text x="128" y="26">E</text><text x="212" y="182">x</text>
+          <line class="l3 dash" x1="40" y1="40" x2="200" y2="40"/>
+          <polyline class="l2" points="40,40 44,51.7 48,62.8 52,73.3 56,83.2 60,92.5 64,101.2 68,109.3 72,116.8 76,123.7 80,130 84,135.7 88,140.8 92,145.3 96,149.2 100,152.5 104,155.2 108,157.3 112,158.8 116,159.7 120,160 124,159.7 128,158.8 132,157.3 136,155.2 140,152.5 144,149.2 148,145.3 152,140.8 156,135.7 160,130 164,123.7 168,116.8 172,109.3 176,101.2 180,92.5 184,83.2 188,73.3 192,62.8 196,51.7 200,40"/>
+          <polyline class="l1" points="40,160 44,148.3 48,137.2 52,126.7 56,116.8 60,107.5 64,98.8 68,90.7 72,83.2 76,76.3 80,70 84,64.3 88,59.2 92,54.7 96,50.8 100,47.5 104,44.8 108,42.7 112,41.2 116,40.3 120,40 124,40.3 128,41.2 132,42.7 136,44.8 140,47.5 144,50.8 148,54.7 152,59.2 156,64.3 160,70 164,76.3 168,83.2 172,90.7 176,98.8 180,107.5 184,116.8 188,126.7 192,137.2 196,148.3 200,160"/>
+          <text x="40" y="182" text-anchor="middle">−x₀</text><text x="200" y="182" text-anchor="middle">x₀</text>
+        </svg>
+        <figcaption><span class="key-1">Kinetic energy</span> is greatest at the centre, <span class="key-2">potential energy</span> at the extremes, and the total (dashed) is constant.</figcaption>
+      </figure>
+    </div>
+    <p>At SL you need to describe these energy changes in words and sketches. HL students also calculate them (section 7).</p>
+
+    <!-- ===================================================== -->
+    <div class="part-banner hl" id="hl"><span class="code">HL only</span><p>Sections 6 and 7 are additional higher level content. SL students can stop here and go to <a href="#mistakes" style="color:inherit;text-decoration:underline">Common mistakes</a>.</p></div>
+    <div class="hl-zone">
+    <h2 id="phase">6. Phase and the equations of SHM <span class="tag hl">HL</span></h2>
+    <p>Imagine a ball moving round a circle at constant angular velocity $\omega$, lit from the side so that its shadow falls on a wall. The shadow moves back and forth in SHM. The ball's angle at any moment, $\omega t$ plus its starting angle, tells you where the shadow is in its cycle. That angle is called the <strong>phase</strong>.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 230" role="img" aria-labelledby="c1et">
+        <title id="c1et">A point moving round a circle of radius x-nought. Its horizontal position, projected onto a horizontal line, moves in simple harmonic motion. The angle of the radius from the horizontal is omega t.</title>
+        <circle cx="110" cy="115" r="80" class="axis dash" style="opacity:0.5"/>
+        <line class="axis" x1="15" y1="115" x2="215" y2="115"/>
+        <line class="l3" x1="110" y1="115" x2="161.4" y2="53.7"/>
+        <circle cx="161.4" cy="53.7" r="6" class="f3"/>
+        <line class="l2 thin dash" x1="161.4" y1="53.7" x2="161.4" y2="115"/>
+        <circle cx="161.4" cy="115" r="6" class="f1"/>
+        <path class="axis" d="M140 115 A 30 30 0 0 0 129.3 92"/>
+        <text x="124" y="108">ωt</text>
+        <text x="122" y="70">x₀</text>
+        <line class="l1 thin" x1="110" y1="150" x2="159" y2="150" marker-end="url(#ah1)"/>
+        <text class="t1" x="135" y="175" text-anchor="middle">x</text>
+        <text x="235" y="100">the shadow</text>
+        <text x="235" y="122">moves in SHM</text>
+      </svg>
+      <figcaption>A point moving in a circle at constant $\omega$. Its <span class="key-1">projection</span> on a line moves in SHM with displacement $x = x_0\cos\omega t$ (measuring the angle from the horizontal).</figcaption>
+    </figure>
+    <p>The data booklet gives the general equations, where $\phi$ is the <strong>phase angle</strong> at $t = 0$ (in <strong>radians</strong>):</p>
+    <div class="key">
+      $$x = x_0\sin(\omega t + \phi)$$
+      $$v = \omega x_0\cos(\omega t + \phi)$$
+      $$v = \pm\,\omega\sqrt{x_0^2 - x^2}$$
+    </div>
+    <ul>
+      <li>$\phi = 0$: the motion starts at equilibrium, moving in the positive direction.</li>
+      <li>$\phi = \frac{\pi}{2}$: it starts at $+x_0$ (since $\sin(\omega t + \frac{\pi}{2}) = \cos\omega t$).</li>
+      <li>The maximum speed is $v_{\max} = \omega x_0$, at $x = 0$.</li>
+      <li>Two identical oscillators a quarter of a cycle apart have a <strong>phase difference</strong> of $\frac{\pi}{2}$; half a cycle apart, $\pi$. A phase difference $\Delta\phi$ corresponds to a time difference $\Delta t = \frac{\Delta\phi}{2\pi}T$.</li>
+    </ul>
+    <p><strong>Set your calculator to radians</strong> for these equations. It's the most common source of wrong answers.</p>
+    <div class="worked">
+      <h3>Worked example: using the SHM equations <span class="tag hl">HL</span></h3>
+      <p>An object oscillates with amplitude 0.050 m and frequency 2.0 Hz. At $t = 0$ it passes through equilibrium moving in the positive direction. Find its displacement and velocity at $t = 0.10$ s, and its maximum speed.</p>
+      <p>$\omega = 2\pi f = 4\pi = 12.6\ \text{rad s}^{-1}$ and $\phi = 0$, so $x = 0.050\sin(4\pi t)$.<br>
+      At $t = 0.10$ s: $x = 0.050\sin(1.26\ \text{rad}) = 0.048$ m.<br>
+      $v = \omega x_0\cos(\omega t) = 12.6 \times 0.050 \times \cos(1.26) = 0.19\ \text{m s}^{-1}$.<br>
+      Check with $v = \omega\sqrt{x_0^2 - x^2} = 12.6\sqrt{0.050^2 - 0.0476^2} = 0.19\ \text{m s}^{-1}$ ✓. &nbsp; $v_{\max} = \omega x_0 = 0.63\ \text{m s}^{-1}$.</p>
+    </div>
+
+    <h2 id="energy-hl">7. Energy in SHM: calculations <span class="tag hl">HL</span></h2>
+    <p>Combining $E_k = \frac{1}{2}mv^2$ with $v = \omega\sqrt{x_0^2 - x^2}$ gives the energies at any displacement:</p>
+    <div class="key">
+      $$E_T = \tfrac{1}{2}m\omega^2 x_0^2 \qquad E_p = \tfrac{1}{2}m\omega^2 x^2$$
+      $$E_k = E_T - E_p = \tfrac{1}{2}m\omega^2(x_0^2 - x^2)$$
+    </div>
+    <p>The total energy is proportional to the <strong>square of the amplitude</strong>: doubling the amplitude stores four times the energy. For a spring, $m\omega^2 = k$, so $E_p = \frac{1}{2}kx^2$, the same elastic energy as in A.3.</p>
+    <div class="worked">
+      <h3>Worked example: energy of an oscillator <span class="tag hl">HL</span></h3>
+      <p>A 0.20 kg mass oscillates with amplitude 0.050 m and $\omega = 12.6\ \text{rad s}^{-1}$. Find the total energy, and the kinetic and potential energy when $x = 0.025$ m.</p>
+      <p>$E_T = \tfrac{1}{2}(0.20)(12.6)^2(0.050)^2 = 0.040$ J.<br>
+      At half the amplitude: $E_p = \tfrac{1}{2}(0.20)(12.6)^2(0.025)^2 = 0.010$ J, which is a <em>quarter</em> of the total, because $E_p \propto x^2$.<br>
+      So $E_k = 0.040 - 0.010 = 0.030$ J. At half the amplitude, three-quarters of the energy is still kinetic.</p>
+    </div>
+    <p class="hl-end">End of the HL-only content for C.1.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">8. Common mistakes</h2>
+    <ul>
+      <li><strong>Confusing the amplitude with the distance between the extremes,</strong> which is $2x_0$.</li>
+      <li><strong>Forgetting the minus sign</strong> in $a = -\omega^2 x$, or not being able to explain it.</li>
+      <li><strong>Saying the velocity is greatest at the extremes.</strong> It's zero there. The <em>acceleration</em> is greatest there.</li>
+      <li><strong>Thinking a heavier pendulum bob swings more slowly.</strong> The period of a pendulum doesn't depend on its mass. For a mass–spring system it does.</li>
+      <li><strong>Using $T = 2\pi\sqrt{l/g}$ for large swings.</strong> It only holds for small angles.</li>
+      <li><span class="tag hl">HL</span> <strong>Calculator in degrees</strong> when using $\sin(\omega t + \phi)$. Use radians.</li>
+      <li><span class="tag hl">HL</span> <strong>Assuming $E_k$ and $E_p$ are equal at half the amplitude.</strong> At $x = x_0/2$, $E_p$ is only a quarter of the total.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">9. Check your understanding</h2>
+    <details class="check">
+      <summary>An astronaut takes a pendulum clock and a mass–spring clock to the Moon. Which one keeps the right time?</summary>
+      <p>The mass–spring clock. Its period, $2\pi\sqrt{m/k}$, doesn't involve $g$. The pendulum's period, $2\pi\sqrt{l/g}$, gets longer where $g$ is smaller, so the pendulum clock runs slow on the Moon.</p>
+    </details>
+    <details class="check">
+      <summary>Where in its oscillation is a mass on a spring when its acceleration is zero?</summary>
+      <p>At the equilibrium position, $x = 0$, since $a = -\omega^2 x$. That's also where its speed is greatest.</p>
+    </details>
+    <details class="check">
+      <summary>Why must the defining equation of SHM have a minus sign?</summary>
+      <p>The restoring force, and so the acceleration, must point back towards equilibrium, opposite to the displacement. Without the minus sign, the acceleration would push the object further away, and it would never return.</p>
+    </details>
+    <details class="check">
+      <summary>A pendulum's length is increased by a factor of 4. What happens to its period?</summary>
+      <p>$T \propto \sqrt{l}$, so the period doubles.</p>
+    </details>
+    <details class="check">
+      <summary><span class="tag hl">HL</span> An oscillator's amplitude is halved. What happens to its total energy and its maximum speed?</summary>
+      <p>$E_T \propto x_0^2$, so the energy falls to a quarter. $v_{\max} = \omega x_0$, so the maximum speed halves (the period is unchanged).</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=C.1">Practise C.1 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>

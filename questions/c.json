@@ -1,1 +1,681 @@
-[]
+[
+  {
+    "id": "C1-001", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>Which condition defines simple harmonic motion?</p>",
+    "options": [
+      "The acceleration is proportional to the displacement and directed towards the equilibrium position.",
+      "The acceleration is constant and directed towards the equilibrium position.",
+      "The velocity is proportional to the displacement from the equilibrium position.",
+      "The force is proportional to the displacement and directed away from the equilibrium position."
+    ],
+    "answer": 0,
+    "explanation": "SHM is defined by $a = -\\omega^2 x$: the acceleration is proportional to the displacement and opposite to it, so it always points back towards equilibrium. Option B describes a constant (not proportional) acceleration. Option D would push the object further away, so it would never oscillate."
+  },
+  {
+    "id": "C1-002", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>An object oscillates with a period of 0.25 s.</p><p>What is its frequency?</p>",
+    "options": ["0.25 Hz", "0.64 Hz", "4.0 Hz", "25 Hz"],
+    "answer": 2,
+    "explanation": "$f = \\dfrac{1}{T} = \\dfrac{1}{0.25} = 4.0$ Hz. Option D is the angular frequency $\\omega = 2\\pi/T$ (in rad s$^{-1}$), not the frequency. Option A confuses frequency with period. Option B divides by $2\\pi$ instead of multiplying."
+  },
+  {
+    "id": "C1-003", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>A mass on a spring oscillates with simple harmonic motion.</p><p>Which describes the mass when it is at its maximum displacement?</p>",
+    "options": [
+      "Speed: maximum &nbsp;·&nbsp; Acceleration: zero",
+      "Speed: maximum &nbsp;·&nbsp; Acceleration: maximum",
+      "Speed: zero &nbsp;·&nbsp; Acceleration: zero",
+      "Speed: zero &nbsp;·&nbsp; Acceleration: maximum"
+    ],
+    "answer": 3,
+    "explanation": "At the extremes the mass momentarily stops before turning back, so its speed is zero. The restoring force, and so the acceleration ($a = -\\omega^2 x$), is greatest where the displacement is greatest. At equilibrium it's the other way round: maximum speed and zero acceleration."
+  },
+  {
+    "id": "C1-004", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>The mass attached to a spring is replaced with one that is <strong>four</strong> times heavier. The spring is unchanged.</p><p>By what factor does the period of oscillation change?</p>",
+    "options": ["× ½", "× 2", "× 4", "× 16"],
+    "answer": 1,
+    "explanation": "$T = 2\\pi\\sqrt{\\dfrac{m}{k}}$, so $T \\propto \\sqrt{m}$. Four times the mass gives $\\sqrt{4} = 2$ times the period. Option C assumes $T \\propto m$. Option A has the relationship upside down: a heavier mass oscillates more slowly, not faster."
+  },
+  {
+    "id": "C1-005", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>A simple pendulum has a length of 2.5 m.</p><p>What is its period on Earth?</p>",
+    "options": ["0.51 s", "1.6 s", "3.2 s", "31 s"],
+    "answer": 2,
+    "explanation": "$T = 2\\pi\\sqrt{\\dfrac{l}{g}} = 2\\pi\\sqrt{\\dfrac{2.5}{9.8}} = 3.2$ s. Option A leaves out $2\\pi$. Option B uses $\\pi$ instead of $2\\pi$. Option D uses $\\sqrt{lg}$ instead of $\\sqrt{l/g}$."
+  },
+  {
+    "id": "C1-006", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>A pendulum clock is taken to the Moon, where the gravitational field strength is one-sixth of its value on Earth.</p><p>How does the period of the pendulum on the Moon compare with its period on Earth?</p>",
+    "options": [
+      "It is the same.",
+      "It is $\\dfrac{1}{\\sqrt{6}}$ times as long.",
+      "It is $\\sqrt{6}$ times as long.",
+      "It is 6 times as long."
+    ],
+    "answer": 2,
+    "explanation": "$T = 2\\pi\\sqrt{l/g}$, so $T \\propto \\dfrac{1}{\\sqrt{g}}$. Dividing $g$ by 6 multiplies $T$ by $\\sqrt{6} \\approx 2.4$, so the clock runs slow. Option A would be true for a mass–spring system, whose period doesn't depend on $g$. Option D forgets the square root."
+  },
+  {
+    "id": "C1-007", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>For an object performing simple harmonic motion, a graph of acceleration $a$ against displacement $x$ is a straight line through the origin with a gradient of $-16\\ \\text{s}^{-2}$.</p><p>What is the period of the oscillation?</p>",
+    "options": ["0.39 s", "1.6 s", "4.0 s", "25 s"],
+    "answer": 1,
+    "explanation": "Comparing with $a = -\\omega^2 x$: $\\omega^2 = 16$, so $\\omega = 4.0\\ \\text{rad s}^{-1}$. Then $T = \\dfrac{2\\pi}{\\omega} = \\dfrac{2\\pi}{4.0} = 1.6$ s. Option C is $\\omega$ itself. Option A uses $2\\pi/16$, forgetting the square root. Option D multiplies $\\omega$ by $2\\pi$ instead of dividing."
+  },
+  {
+    "id": "C1-008", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>A mass moves back and forth between two points 12 cm apart in simple harmonic motion.</p><p>What is the amplitude of the oscillation?</p>",
+    "options": ["3.0 cm", "6.0 cm", "12 cm", "24 cm"],
+    "answer": 1,
+    "explanation": "The amplitude is the maximum displacement <em>from equilibrium</em>. Equilibrium is halfway between the two extremes, so the amplitude is $12/2 = 6.0$ cm. Option C is the distance between the extremes, which is twice the amplitude."
+  },
+  {
+    "id": "C1-009", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>An oscillator performs simple harmonic motion with frequency $f$. There is no damping.</p><p>With what frequency does its kinetic energy vary?</p>",
+    "options": ["$\\dfrac{f}{4}$", "$\\dfrac{f}{2}$", "$f$", "$2f$"],
+    "answer": 3,
+    "explanation": "The kinetic energy is greatest each time the object passes through equilibrium. That happens twice per oscillation (once in each direction), so the kinetic energy reaches its maximum twice per cycle and varies at frequency $2f$. Option C assumes the energy has the same frequency as the motion."
+  },
+  {
+    "id": "C1-010", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>What is the significance of the minus sign in the equation $a = -\\omega^2 x$?</p>",
+    "options": [
+      "The acceleration is always negative.",
+      "The acceleration is always directed opposite to the displacement.",
+      "The acceleration decreases as time increases.",
+      "The oscillation is damped."
+    ],
+    "answer": 1,
+    "explanation": "The minus sign shows that the acceleration points the opposite way to the displacement, towards equilibrium. When $x$ is negative, $a$ is positive, so option A is wrong. The equation describes undamped SHM and says nothing about how $a$ changes with time directly."
+  },
+  {
+    "id": "C1-011", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>A simple pendulum oscillates with small amplitude. Air resistance is negligible.</p><p>Which statement about its energy is correct?</p>",
+    "options": [
+      "The kinetic energy is greatest at the extremes of the swing.",
+      "The gravitational potential energy is greatest at the lowest point.",
+      "The total energy is greatest at the lowest point.",
+      "The kinetic energy is zero at the extremes of the swing."
+    ],
+    "answer": 3,
+    "explanation": "At the extremes the bob is momentarily at rest, so $E_k = 0$, and it is at its highest, so $E_p$ is at its maximum. At the lowest point it's the other way round. With no air resistance the total energy is constant throughout, so option C is wrong."
+  },
+  {
+    "id": "C1-012", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 2, "level": "HL",
+    "stem": "<p>An object oscillates in simple harmonic motion with amplitude 0.040 m and frequency 5.0 Hz.</p><p>What is its maximum speed?</p>",
+    "options": [
+      "$0.20\\ \\text{m s}^{-1}$",
+      "$0.25\\ \\text{m s}^{-1}$",
+      "$1.3\\ \\text{m s}^{-1}$",
+      "$39\\ \\text{m s}^{-1}$"
+    ],
+    "answer": 2,
+    "explanation": "$v_{\\max} = \\omega x_0 = 2\\pi f x_0 = 2\\pi \\times 5.0 \\times 0.040 = 1.3\\ \\text{m s}^{-1}$. Option A uses $f$ instead of $\\omega$. Option B is $2\\pi x_0$, which leaves out the frequency. Option D is $\\omega^2 x_0$, the maximum <em>acceleration</em> (in $\\text{m s}^{-2}$)."
+  },
+  {
+    "id": "C1-013", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 3, "level": "HL",
+    "stem": "<p>An object performs simple harmonic motion with maximum speed $v_{\\max}$.</p><p>What is its speed when its displacement is half the amplitude?</p>",
+    "options": [
+      "$0.25\\,v_{\\max}$",
+      "$0.50\\,v_{\\max}$",
+      "$0.71\\,v_{\\max}$",
+      "$0.87\\,v_{\\max}$"
+    ],
+    "answer": 3,
+    "explanation": "$v = \\omega\\sqrt{x_0^2 - x^2}$. With $x = x_0/2$: $v = \\omega\\sqrt{x_0^2 - x_0^2/4} = \\omega x_0\\sqrt{3/4} = 0.87\\,v_{\\max}$. Option B assumes speed falls in proportion to displacement. In fact the object is still moving quite fast halfway out."
+  },
+  {
+    "id": "C1-014", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 2, "level": "HL",
+    "stem": "<p>An undamped oscillator performs simple harmonic motion.</p><p>What fraction of the total energy is kinetic energy when the displacement is half the amplitude?</p>",
+    "options": ["$\\dfrac{1}{4}$", "$\\dfrac{1}{2}$", "$\\dfrac{3}{4}$", "1"],
+    "answer": 2,
+    "explanation": "$E_p = \\tfrac{1}{2}m\\omega^2 x^2$ is proportional to $x^2$. At $x = x_0/2$ it is $\\left(\\tfrac{1}{2}\\right)^2 = \\tfrac{1}{4}$ of the total, so the kinetic energy is $1 - \\tfrac{1}{4} = \\tfrac{3}{4}$ of it. Option A is the potential-energy fraction. Option B wrongly assumes energy is shared equally at half the amplitude."
+  },
+  {
+    "id": "C1-015", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 3, "level": "HL",
+    "stem": "<p>The displacement of an oscillating object is given by $x = 0.10\\sin\\left(4\\pi t + \\dfrac{\\pi}{2}\\right)$, where $x$ is in metres and $t$ in seconds.</p><p>Which describes the object at $t = 0$?</p>",
+    "options": [
+      "at its maximum positive displacement and momentarily at rest",
+      "at the equilibrium position, moving in the positive direction",
+      "at the equilibrium position, moving in the negative direction",
+      "at its maximum negative displacement and momentarily at rest"
+    ],
+    "answer": 0,
+    "explanation": "At $t = 0$: $x = 0.10\\sin(\\pi/2) = +0.10$ m, the maximum positive displacement. The velocity $v = \\omega x_0\\cos(\\pi/2) = 0$, so the object is momentarily at rest. A phase angle of $\\pi/2$ shifts the start from equilibrium (which is where $\\phi = 0$ starts) to the positive extreme."
+  },
+  {
+    "id": "C1-016", "theme": "C", "topic": "C.1", "paper": "1A", "difficulty": 2, "level": "HL",
+    "stem": "<p>The amplitude of an undamped oscillator is doubled. Its period is unchanged.</p><p>By what factor does its total energy change?</p>",
+    "options": ["× 2", "× 4", "× 8", "× 16"],
+    "answer": 1,
+    "explanation": "$E_T = \\tfrac{1}{2}m\\omega^2 x_0^2$, so the total energy is proportional to the square of the amplitude. Doubling $x_0$ multiplies the energy by 4. Option A assumes energy is proportional to amplitude."
+  },
+  {
+    "id": "C1-017", "theme": "C", "topic": "C.1", "paper": "2", "difficulty": 2, "level": "SL",
+    "stem": "<p>A 0.25 kg mass hangs from a spring of spring constant 40 N m$^{-1}$. It is pulled down a short distance and released, and oscillates vertically with simple harmonic motion. Air resistance is negligible.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Show that the period of oscillation is about 0.50 s.",
+        "marks": 1,
+        "markscheme": ["$T = 2\\pi\\sqrt{\\dfrac{0.25}{40}} = 0.497$ s ✓ (answer to at least 3 s.f., or the working clearly shown)"]
+      },
+      {
+        "label": "b",
+        "question": "State where in its oscillation the mass has its maximum speed, and explain why.",
+        "marks": 2,
+        "markscheme": [
+          "At the equilibrium position / centre of the oscillation ✓",
+          "There the potential energy is a minimum, so the kinetic energy is a maximum / it has been accelerating towards this point and starts decelerating after it ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Describe the energy changes of the system during one complete oscillation, starting from the lowest point.",
+        "marks": 2,
+        "markscheme": [
+          "Potential energy (elastic and gravitational) is converted to kinetic energy as the mass moves towards equilibrium, then back to potential energy as it moves to the top ✓",
+          "This repeats on the way back down. The total energy stays constant (no damping); the kinetic energy is maximum twice per cycle ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "The 0.25 kg mass is replaced by a 1.0 kg mass. Determine the new frequency of oscillation.",
+        "marks": 2,
+        "markscheme": [
+          "$T \\propto \\sqrt{m}$, so the period doubles to about 1.0 s (or $T = 2\\pi\\sqrt{1.0/40} = 0.99$ s) ✓",
+          "$f = 1/T = 1.0$ Hz ✓ (allow ECF from the new period)"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "C1-018", "theme": "C", "topic": "C.1", "paper": "2", "difficulty": 3, "level": "HL",
+    "stem": "<p>A 0.50 kg object oscillates horizontally with simple harmonic motion. Its amplitude is 0.080 m and its period is 0.40 s. At $t = 0$ it is at its maximum positive displacement.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the angular frequency of the motion.",
+        "marks": 1,
+        "markscheme": ["$\\omega = \\dfrac{2\\pi}{T} = \\dfrac{2\\pi}{0.40} = 16\\ \\text{rad s}^{-1}$ (15.7) ✓"]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the total energy of the oscillator.",
+        "marks": 2,
+        "markscheme": [
+          "$E_T = \\tfrac{1}{2}m\\omega^2 x_0^2 = \\tfrac{1}{2}(0.50)(15.7)^2(0.080)^2$ ✓",
+          "$E_T = 0.39$ J ✓ (allow ECF from (a))"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Determine the speed of the object when its displacement is 0.040 m.",
+        "marks": 2,
+        "markscheme": [
+          "$v = \\omega\\sqrt{x_0^2 - x^2} = 15.7\\sqrt{0.080^2 - 0.040^2}$ ✓",
+          "$v = 1.1\\ \\text{m s}^{-1}$ ✓ (allow an energy method: $E_k = E_T - \\tfrac{1}{2}m\\omega^2x^2$)"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Write an equation for the displacement $x$ of the object as a function of time, and use it to find $x$ at $t = 0.10$ s.",
+        "marks": 2,
+        "markscheme": [
+          "$x = 0.080\\sin\\left(15.7t + \\dfrac{\\pi}{2}\\right)$ or $x = 0.080\\cos(15.7t)$ ✓",
+          "At $t = 0.10$ s (a quarter of a period), $x = 0$: the object is at the equilibrium position ✓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "C2-001", "theme": "C", "topic": "C.2", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>Which of these is a longitudinal wave?</p>",
+    "options": ["light", "sound in air", "a wave on a guitar string", "microwaves"],
+    "answer": 1,
+    "explanation": "In a sound wave the air particles oscillate back and forth along the direction the wave travels, forming compressions and rarefactions, so it is longitudinal. Light and microwaves are electromagnetic waves, which are always transverse, and a wave on a string is transverse too."
+  },
+  {
+    "id": "C2-002", "theme": "C", "topic": "C.2", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>A loudspeaker emits sound of frequency 250 Hz. The wavelength of the sound is 1.4 m.</p><p>What is the speed of the sound?</p>",
+    "options": [
+      "$5.6 \\times 10^{-3}\\ \\text{m s}^{-1}$",
+      "$180\\ \\text{m s}^{-1}$",
+      "$350\\ \\text{m s}^{-1}$",
+      "$3.5 \\times 10^{4}\\ \\text{m s}^{-1}$"
+    ],
+    "answer": 2,
+    "explanation": "$v = f\\lambda = 250 \\times 1.4 = 350\\ \\text{m s}^{-1}$. Option A is $\\lambda/f$, and option B is $f/\\lambda$. Option D treats the wavelength as if it were in cm."
+  },
+  {
+    "id": "C2-003", "theme": "C", "topic": "C.2", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>A sound wave passes from air into water, where it travels faster.</p><p>What happens to the frequency and the wavelength of the wave?</p>",
+    "options": [
+      "Frequency: unchanged &nbsp;·&nbsp; Wavelength: increases",
+      "Frequency: unchanged &nbsp;·&nbsp; Wavelength: decreases",
+      "Frequency: increases &nbsp;·&nbsp; Wavelength: unchanged",
+      "Frequency: decreases &nbsp;·&nbsp; Wavelength: increases"
+    ],
+    "answer": 0,
+    "explanation": "The frequency is set by the source and doesn't change at a boundary. Since $v = f\\lambda$, a higher speed with the same frequency means a longer wavelength. Option C wrongly assumes the frequency changes to match the new speed."
+  },
+  {
+    "id": "C2-004", "theme": "C", "topic": "C.2", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>For a travelling wave, a displacement–distance graph shows a wavelength of 0.40 m. A displacement–time graph for one particle of the medium shows a period of 0.050 s.</p><p>What is the speed of the wave?</p>",
+    "options": [
+      "$0.020\\ \\text{m s}^{-1}$",
+      "$0.13\\ \\text{m s}^{-1}$",
+      "$8.0\\ \\text{m s}^{-1}$",
+      "$20\\ \\text{m s}^{-1}$"
+    ],
+    "answer": 2,
+    "explanation": "$v = \\dfrac{\\lambda}{T} = \\dfrac{0.40}{0.050} = 8.0\\ \\text{m s}^{-1}$. Option A multiplies $\\lambda$ and $T$. Option B is $T/\\lambda$. Option D is just the frequency, $1/T$ (in Hz)."
+  },
+  {
+    "id": "C2-005", "theme": "C", "topic": "C.2", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>Which list shows parts of the electromagnetic spectrum in order of <strong>increasing</strong> wavelength?</p>",
+    "options": [
+      "radio, microwaves, infrared, visible",
+      "visible, ultraviolet, X-rays, gamma",
+      "gamma, ultraviolet, infrared, microwaves",
+      "infrared, visible, X-rays, radio"
+    ],
+    "answer": 2,
+    "explanation": "From shortest to longest wavelength: gamma, X-rays, ultraviolet, visible, infrared, microwaves, radio. Only C is in increasing order. Options A and B are in decreasing order, and D is jumbled."
+  },
+  {
+    "id": "C2-006", "theme": "C", "topic": "C.2", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>A radio wave in a vacuum has a wavelength of 2.0 m.</p><p>What is its frequency?</p>",
+    "options": [
+      "$6.7 \\times 10^{-9}$ Hz",
+      "$1.5 \\times 10^{8}$ Hz",
+      "$3.0 \\times 10^{8}$ Hz",
+      "$6.0 \\times 10^{8}$ Hz"
+    ],
+    "answer": 1,
+    "explanation": "$f = \\dfrac{c}{\\lambda} = \\dfrac{3.00\\times10^{8}}{2.0} = 1.5\\times10^{8}$ Hz. Option D multiplies by $\\lambda$ instead of dividing. Option C is just $c$. Option A is $\\lambda/c$."
+  },
+  {
+    "id": "C2-007", "theme": "C", "topic": "C.2", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>Which statement describes <strong>all</strong> travelling waves?</p>",
+    "options": [
+      "They transfer matter from one place to another.",
+      "They need a medium to travel through.",
+      "They are transverse.",
+      "They transfer energy without a net transfer of matter."
+    ],
+    "answer": 3,
+    "explanation": "Every travelling wave transfers energy while the medium (if there is one) only oscillates about fixed positions. Electromagnetic waves need no medium (not B), and sound is longitudinal (not C)."
+  },
+  {
+    "id": "C2-008", "theme": "C", "topic": "C.2", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>Which property do sound waves have but light waves do <strong>not</strong>?</p>",
+    "options": [
+      "They can be reflected.",
+      "They obey $v = f\\lambda$.",
+      "They transfer energy.",
+      "They need a medium to travel."
+    ],
+    "answer": 3,
+    "explanation": "Sound is a mechanical wave and can't travel through a vacuum. Light, an electromagnetic wave, can. All waves can be reflected, obey $v = f\\lambda$ and transfer energy."
+  },
+  {
+    "id": "C2-009", "theme": "C", "topic": "C.2", "paper": "1A", "difficulty": 3, "level": "SL",
+    "stem": "<p>The graph is a snapshot of a transverse wave on a string, travelling to the <strong>right</strong>. Point P is on the string just to the right of a crest.</p><p>In which direction is P moving at this instant?</p>",
+    "diagram": "questions/diagrams/c2-particle-direction.svg",
+    "diagramAlt": "Snapshot of a sine-shaped transverse wave travelling to the right. Point P is on the falling side of a crest, just to the right of the top.",
+    "options": ["upwards", "downwards", "to the right", "to the left"],
+    "answer": 0,
+    "explanation": "Imagine the whole wave shifted slightly to the right. The crest, which is just to the left of P, moves towards P, so P's displacement is about to increase: P is moving <em>upwards</em>. Particles of a transverse wave only move perpendicular to the direction of travel, so options C and D are impossible."
+  },
+  {
+    "id": "C2-010", "theme": "C", "topic": "C.2", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>A displacement–time graph is drawn for one particle of a medium as a wave passes through it.</p><p>Which quantities can be determined from this graph alone?</p>",
+    "options": [
+      "amplitude and wavelength",
+      "amplitude and period",
+      "wavelength and wave speed",
+      "period and wave speed"
+    ],
+    "answer": 1,
+    "explanation": "A displacement–<em>time</em> graph shows how one particle moves: its maximum displacement (the amplitude) and the time for one oscillation (the period). The wavelength needs a displacement–<em>distance</em> graph, and the wave speed needs both $\\lambda$ and $T$."
+  },
+  {
+    "id": "C2-011", "theme": "C", "topic": "C.2", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>Two particles on a string carrying a travelling wave are half a wavelength apart.</p><p>Which statement about their motion is correct?</p>",
+    "options": [
+      "They always move in the same direction.",
+      "They always move in opposite directions.",
+      "One is always at rest when the other is moving.",
+      "They have different frequencies."
+    ],
+    "answer": 1,
+    "explanation": "Points half a wavelength apart are half a cycle ($\\pi$ rad) out of phase. When one is at a crest, the other is at a trough, and their velocities are always equal and opposite. All particles of the wave oscillate at the same frequency, so D is wrong."
+  },
+  {
+    "id": "C2-012", "theme": "C", "topic": "C.2", "paper": "1A", "difficulty": 3, "level": "SL",
+    "stem": "<p>A longitudinal wave travels through air.</p><p>What is the displacement of an air particle at the centre of a compression?</p>",
+    "options": [
+      "zero",
+      "maximum, in the direction the wave travels",
+      "maximum, opposite to the direction the wave travels",
+      "equal to half the amplitude"
+    ],
+    "answer": 0,
+    "explanation": "A compression forms where particles on <em>both</em> sides are displaced <em>towards</em> the same point. The particle at the centre itself is not displaced: its displacement is zero. The particles with maximum displacement are halfway between a compression and a rarefaction. This is a common trap."
+  },
+  {
+    "id": "C2-013", "theme": "C", "topic": "C.2", "paper": "2", "difficulty": 2, "level": "SL",
+    "stem": "<p>A loudspeaker produces a sound of frequency 680 Hz in air, where the speed of sound is 340 m s$^{-1}$.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Distinguish between a transverse wave and a longitudinal wave.",
+        "marks": 2,
+        "markscheme": [
+          "Transverse: particles/oscillations are perpendicular to the direction of energy transfer/wave travel ✓",
+          "Longitudinal: particles/oscillations are parallel to the direction of energy transfer/wave travel ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the wavelength of the sound in air.",
+        "marks": 1,
+        "markscheme": ["$\\lambda = \\dfrac{v}{f} = \\dfrac{340}{680} = 0.50$ m ✓"]
+      },
+      {
+        "label": "c",
+        "question": "The sound enters water, where its speed is 1500 m s$^{-1}$. State its frequency in the water and calculate its wavelength there.",
+        "marks": 2,
+        "markscheme": [
+          "Frequency is unchanged: 680 Hz ✓",
+          "$\\lambda = \\dfrac{1500}{680} = 2.2$ m ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Explain why the sound from the loudspeaker could not travel through a vacuum, but light from a lamp beside it could.",
+        "marks": 2,
+        "markscheme": [
+          "Sound is a mechanical wave: it needs particles of a medium to oscillate/pass on the vibration, and a vacuum has none ✓",
+          "Light is an electromagnetic wave: oscillating electric and magnetic fields, which need no medium ✓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "C3-001", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>A ray of light hits a flat mirror. The angle between the incident ray and the <strong>surface</strong> of the mirror is 30°.</p><p>What is the angle of reflection?</p>",
+    "options": ["30°", "60°", "90°", "120°"],
+    "answer": 1,
+    "explanation": "Angles are measured from the <em>normal</em>. The angle of incidence is $90° - 30° = 60°$, and the angle of reflection equals the angle of incidence, so it is 60°. Option A measures from the surface instead of the normal."
+  },
+  {
+    "id": "C3-002", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>A wave is refracted as it passes from one medium into another.</p><p>Which quantities change?</p>",
+    "options": [
+      "speed and frequency only",
+      "frequency and wavelength only",
+      "speed and wavelength only",
+      "speed, frequency and wavelength"
+    ],
+    "answer": 2,
+    "explanation": "Refraction happens because the wave's speed changes. The frequency is fixed by the source, so it stays the same, and from $v = f\\lambda$ the wavelength must change in proportion to the speed."
+  },
+  {
+    "id": "C3-003", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>A ray of light in air strikes a glass block of refractive index 1.50 at an angle of incidence of 40°.</p><p>What is the angle of refraction?</p>",
+    "options": ["25°", "27°", "60°", "75°"],
+    "answer": 0,
+    "explanation": "$1.00\\sin 40° = 1.50\\sin\\theta_2$, so $\\sin\\theta_2 = 0.429$ and $\\theta_2 = 25°$. The ray bends towards the normal, entering a slower medium. Option B divides the angle (instead of its sine) by 1.50. Option D multiplies $\\sin 40°$ by 1.50 instead of dividing."
+  },
+  {
+    "id": "C3-004", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>A type of glass has a refractive index of 1.6.</p><p>What is the speed of light in this glass?</p>",
+    "options": [
+      "$5.3 \\times 10^{-9}\\ \\text{m s}^{-1}$",
+      "$1.9 \\times 10^{8}\\ \\text{m s}^{-1}$",
+      "$3.0 \\times 10^{8}\\ \\text{m s}^{-1}$",
+      "$4.8 \\times 10^{8}\\ \\text{m s}^{-1}$"
+    ],
+    "answer": 1,
+    "explanation": "$n = c/v$, so $v = \\dfrac{c}{n} = \\dfrac{3.0\\times10^{8}}{1.6} = 1.9\\times10^{8}\\ \\text{m s}^{-1}$. Option D multiplies by $n$; light travels <em>slower</em> in glass, never faster than $c$. Option A is $n/c$. Option C is the speed in a vacuum."
+  },
+  {
+    "id": "C3-005", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>The refractive index of water is 1.33.</p><p>What is the critical angle for light travelling from water into air?</p>",
+    "options": ["37°", "41°", "49°", "90°"],
+    "answer": 2,
+    "explanation": "$\\sin\\theta_c = \\dfrac{n_2}{n_1} = \\dfrac{1.00}{1.33} = 0.752$, so $\\theta_c = 49°$. Option B uses $\\cos^{-1}$ instead of $\\sin^{-1}$. Option A uses $\\tan^{-1}$. Option D is the angle of refraction <em>at</em> the critical angle, not the critical angle itself."
+  },
+  {
+    "id": "C3-006", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>Which conditions are both needed for total internal reflection to occur?</p>",
+    "options": [
+      "Light travels into a medium of higher refractive index, at an angle of incidence greater than the critical angle.",
+      "Light travels into a medium of higher refractive index, at an angle of incidence less than the critical angle.",
+      "Light travels into a medium of lower refractive index, at an angle of incidence less than the critical angle.",
+      "Light travels into a medium of lower refractive index, at an angle of incidence greater than the critical angle."
+    ],
+    "answer": 3,
+    "explanation": "TIR only happens when light tries to pass into a medium with a <em>lower</em> refractive index (where it would bend away from the normal), and only if the angle of incidence exceeds the critical angle. Light entering a higher-index medium always refracts in, bending towards the normal."
+  },
+  {
+    "id": "C3-007", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>Plane water waves of wavelength 2.0 cm pass through a gap in a barrier.</p><p>For which gap width will the waves spread out (diffract) the most?</p>",
+    "options": ["2.0 cm", "10 cm", "20 cm", "50 cm"],
+    "answer": 0,
+    "explanation": "Diffraction is most noticeable when the gap is similar in size to the wavelength. A 2.0 cm gap, equal to $\\lambda$, makes the waves spread out as nearly circular wavefronts. Much wider gaps let the waves through with little spreading."
+  },
+  {
+    "id": "C3-008", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>To produce a steady interference pattern, two wave sources must be coherent.</p><p>What does <em>coherent</em> mean?</p>",
+    "options": [
+      "The sources have the same amplitude.",
+      "The sources are close together.",
+      "The sources emit waves of the same speed.",
+      "The sources have the same frequency and a constant phase difference."
+    ],
+    "answer": 3,
+    "explanation": "Coherent sources have the same frequency and a constant phase difference, so the pattern of constructive and destructive interference stays in fixed places. Equal amplitudes (option A) make the dark fringes darker but aren't required for a steady pattern."
+  },
+  {
+    "id": "C3-009", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>Two coherent sources oscillate in phase and emit waves of wavelength 0.20 m. Point P is 1.50 m from one source and 1.80 m from the other.</p><p>What is observed at P?</p>",
+    "options": [
+      "a maximum, because the path difference is a whole number of wavelengths",
+      "a minimum, because the path difference is a whole number of wavelengths",
+      "a maximum, because the path difference is an odd number of half-wavelengths",
+      "a minimum, because the path difference is an odd number of half-wavelengths"
+    ],
+    "answer": 3,
+    "explanation": "Path difference $= 1.80 - 1.50 = 0.30$ m $= 1.5\\lambda = (1 + \\tfrac{1}{2})\\lambda$. The waves arrive half a cycle out of step, so they interfere destructively and there is a minimum at P."
+  },
+  {
+    "id": "C3-010", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>In a double-slit experiment, light of wavelength 500 nm passes through two slits 0.20 mm apart. The screen is 1.5 m from the slits.</p><p>What is the separation of the bright fringes?</p>",
+    "options": ["0.38 mm", "3.8 mm", "7.5 mm", "38 mm"],
+    "answer": 1,
+    "explanation": "$s = \\dfrac{\\lambda D}{d} = \\dfrac{500\\times10^{-9} \\times 1.5}{0.20\\times10^{-3}} = 3.75\\times10^{-3}$ m, about 3.8 mm. Options A and D come from errors of a factor of 10 when converting mm or nm to m. Option C uses half the slit separation."
+  },
+  {
+    "id": "C3-011", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>In a double-slit experiment, the slit separation is doubled and the distance to the screen is halved. The wavelength is unchanged.</p><p>By what factor does the fringe separation change?</p>",
+    "options": ["× ¼", "× 1", "× 2", "× 4"],
+    "answer": 0,
+    "explanation": "$s = \\dfrac{\\lambda D}{d}$. Halving $D$ halves $s$, and doubling $d$ halves it again, so $s$ becomes a quarter of its original value. Option B assumes the two changes cancel, but they both <em>reduce</em> $s$."
+  },
+  {
+    "id": "C3-012", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 1, "level": "SL",
+    "stem": "<p>Two pulses travel towards each other along a string. One has a displacement of +3.0 cm and the other −1.0 cm.</p><p>What is the displacement of the string at the instant the two pulses exactly overlap?</p>",
+    "options": ["−4.0 cm", "−2.0 cm", "+2.0 cm", "+4.0 cm"],
+    "answer": 2,
+    "explanation": "By the principle of superposition, the displacements add, including their signs: $+3.0 + (-1.0) = +2.0$ cm. Option D ignores the minus sign. After overlapping, each pulse carries on unchanged."
+  },
+  {
+    "id": "C3-013", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>Water waves travel from deep water into shallow water, where they move more slowly. They meet the boundary at an angle.</p><p>Which describes the waves in the shallow water?</p>",
+    "options": [
+      "longer wavelength, bent away from the normal",
+      "longer wavelength, bent towards the normal",
+      "shorter wavelength, bent away from the normal",
+      "shorter wavelength, bent towards the normal"
+    ],
+    "answer": 3,
+    "explanation": "The frequency stays the same, so a lower speed means a shorter wavelength ($v = f\\lambda$). A wave that slows down bends towards the normal, as Snell's law shows ($\\sin\\theta_2 &lt; \\sin\\theta_1$ when $v_2 &lt; v_1$)."
+  },
+  {
+    "id": "C3-014", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "SL",
+    "stem": "<p>You can hear a person talking in the next room through an open doorway, but you can't see them.</p><p>What is the best explanation?</p>",
+    "options": [
+      "Sound waves travel faster than light waves.",
+      "Sound waves are longitudinal and light waves are transverse.",
+      "Sound wavelengths are similar to the width of the doorway, so sound diffracts much more than light.",
+      "Light is absorbed by the walls but sound is not."
+    ],
+    "answer": 2,
+    "explanation": "Diffraction is significant when the gap is similar in size to the wavelength. Speech has wavelengths of around a metre, similar to a doorway, so it spreads around the edges. Light's wavelength (about $5\\times10^{-7}$ m) is far smaller, so it hardly diffracts. Option A is false: light is about a million times faster."
+  },
+  {
+    "id": "C3-015", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "HL",
+    "stem": "<p>Light of wavelength 600 nm is incident normally on a single slit of width 0.30 mm.</p><p>What is the angle between the centre of the diffraction pattern and the first minimum?</p>",
+    "options": [
+      "$2.0 \\times 10^{-3}$ rad",
+      "$4.0 \\times 10^{-3}$ rad",
+      "0.11 rad",
+      "500 rad"
+    ],
+    "answer": 0,
+    "explanation": "$\\theta = \\dfrac{\\lambda}{b} = \\dfrac{600\\times10^{-9}}{0.30\\times10^{-3}} = 2.0\\times10^{-3}$ rad. Option B is the full angular width of the central maximum, $2\\lambda/b$. Option C is the same angle in degrees, wrongly labelled as radians. Option D is $b/\\lambda$."
+  },
+  {
+    "id": "C3-016", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "HL",
+    "stem": "<p>The width of a single slit is reduced. The wavelength of the light is unchanged.</p><p>What happens to the central maximum of the diffraction pattern?</p>",
+    "options": [
+      "It becomes narrower and brighter.",
+      "It becomes narrower and dimmer.",
+      "It becomes wider and brighter.",
+      "It becomes wider and dimmer."
+    ],
+    "answer": 3,
+    "explanation": "$\\theta = \\lambda/b$, so a smaller slit width $b$ gives a larger angle: the pattern spreads out. A narrower slit also lets less light through, and that light is spread over a wider area, so the pattern is dimmer."
+  },
+  {
+    "id": "C3-017", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "HL",
+    "stem": "<p>Monochromatic light of wavelength 600 nm is incident normally on a diffraction grating with 300 lines per millimetre.</p><p>What is the angle of the first-order maximum?</p>",
+    "options": ["0.18°", "10°", "21°", "34°"],
+    "answer": 1,
+    "explanation": "$d = \\dfrac{1}{300\\times10^{3}} = 3.33\\times10^{-6}$ m. For $n = 1$: $\\sin\\theta = \\dfrac{600\\times10^{-9}}{3.33\\times10^{-6}} = 0.18$, so $\\theta = 10°$. Option A gives $\\sin\\theta$ as if it were the angle. Option C is the second-order angle."
+  },
+  {
+    "id": "C3-018", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 3, "level": "HL",
+    "stem": "<p>Light of wavelength 650 nm is incident normally on a grating with 400 lines per millimetre.</p><p>What is the highest order of maximum that can be observed?</p>",
+    "options": ["2", "3", "4", "7"],
+    "answer": 1,
+    "explanation": "$d = 2.5\\times10^{-6}$ m, and $\\sin\\theta = n\\lambda/d$ can't be more than 1, so $n \\le d/\\lambda = 3.8$. The highest whole-number order is 3. Option C rounds up to 4, which would need $\\sin\\theta &gt; 1$. Option D is the total number of bright maxima ($3 + 3 + 1$), not the highest order."
+  },
+  {
+    "id": "C3-019", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "HL",
+    "stem": "<p>A double slit is replaced by a grating with many slits of the same spacing. The wavelength is unchanged.</p><p>How do the principal maxima of the grating compare with the bright fringes of the double slit?</p>",
+    "options": [
+      "same positions, wider and dimmer",
+      "further apart, narrower and brighter",
+      "same positions, narrower and brighter",
+      "closer together, wider and brighter"
+    ],
+    "answer": 2,
+    "explanation": "The positions of the principal maxima depend only on $d$ and $\\lambda$ ($n\\lambda = d\\sin\\theta$), so they don't move. With many slits, the light from all of them is exactly in phase only at those angles, so the maxima become very sharp and bright, with almost no light in between."
+  },
+  {
+    "id": "C3-020", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 2, "level": "HL",
+    "stem": "<p>In a real double-slit interference pattern, the bright fringes are equally spaced but become dimmer further from the centre.</p><p>What causes this variation in brightness?</p>",
+    "options": [
+      "The light is not coherent.",
+      "The intensity is modulated by single-slit diffraction from each slit.",
+      "The path difference increases further from the centre.",
+      "The wavelength changes across the screen."
+    ],
+    "answer": 1,
+    "explanation": "Each slit has a finite width, so each produces a single-slit diffraction pattern. The double-slit fringes stay equally spaced, but their brightness follows the single-slit 'envelope', which falls away from the centre. Option C explains why there are fringes at all, not why they fade."
+  },
+  {
+    "id": "C3-021", "theme": "C", "topic": "C.3", "paper": "1A", "difficulty": 3, "level": "HL",
+    "stem": "<p>White light is incident normally on a diffraction grating.</p><p>Which colour is diffracted through the <strong>largest</strong> angle in the first-order spectrum?</p>",
+    "options": ["violet", "blue", "green", "red"],
+    "answer": 3,
+    "explanation": "$\\sin\\theta = \\lambda/d$ for $n = 1$, so a longer wavelength gives a larger angle. Red has the longest wavelength of visible light (about 700 nm), so it is diffracted most. This is the opposite order to a prism, where violet is deviated most."
+  },
+  {
+    "id": "C3-022", "theme": "C", "topic": "C.3", "paper": "2", "difficulty": 2, "level": "SL",
+    "stem": "<p>In a Young's double-slit experiment, light of wavelength 590 nm from a laser passes through two slits 0.30 mm apart. An interference pattern forms on a screen 2.4 m away.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "State what is meant by coherent sources.",
+        "marks": 1,
+        "markscheme": ["Sources with the same frequency and a constant phase difference ✓"]
+      },
+      {
+        "label": "b",
+        "question": "Explain why bright fringes form at some points on the screen and dark fringes at others.",
+        "marks": 2,
+        "markscheme": [
+          "Bright fringes: the path difference from the two slits is a whole number of wavelengths, so the waves arrive in phase / interfere constructively ✓",
+          "Dark fringes: the path difference is an odd number of half-wavelengths, so the waves arrive in antiphase / interfere destructively ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Calculate the separation of the bright fringes.",
+        "marks": 1,
+        "markscheme": ["$s = \\dfrac{\\lambda D}{d} = \\dfrac{590\\times10^{-9}\\times 2.4}{0.30\\times10^{-3}} = 4.7\\times10^{-3}$ m ✓"]
+      },
+      {
+        "label": "d",
+        "question": "The whole apparatus is placed under water (refractive index 1.33). Determine the new fringe separation.",
+        "marks": 2,
+        "markscheme": [
+          "The wavelength in water is $\\dfrac{590}{1.33} = 444$ nm (the frequency is unchanged and the speed falls) ✓",
+          "$s = \\dfrac{444\\times10^{-9}\\times 2.4}{0.30\\times10^{-3}} = 3.5\\times10^{-3}$ m, so the fringes get closer together ✓ (allow ECF from (c): $s$ divided by 1.33)"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "C3-023", "theme": "C", "topic": "C.3", "paper": "2", "difficulty": 3, "level": "HL",
+    "stem": "<p>White light, containing wavelengths from 400 nm to 700 nm, is incident normally on a diffraction grating with 600 lines per millimetre.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the spacing of the lines on the grating.",
+        "marks": 1,
+        "markscheme": ["$d = \\dfrac{1}{600\\times10^{3}} = 1.67\\times10^{-6}$ m ✓"]
+      },
+      {
+        "label": "b",
+        "question": "Determine the angular width of the first-order spectrum.",
+        "marks": 2,
+        "markscheme": [
+          "Violet: $\\sin\\theta = \\dfrac{400\\times10^{-9}}{1.67\\times10^{-6}} = 0.24$, so $\\theta = 13.9°$; red: $\\sin\\theta = 0.42$, so $\\theta = 24.8°$ ✓",
+          "Angular width $\\approx 11°$ ✓ (allow ECF from (a))"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Show that the second-order and third-order spectra overlap.",
+        "marks": 2,
+        "markscheme": [
+          "Second-order red: $\\sin\\theta = \\dfrac{2 \\times 700\\times10^{-9}}{1.67\\times10^{-6}} = 0.84$, so $\\theta = 57°$ ✓",
+          "Third-order violet: $\\sin\\theta = \\dfrac{3 \\times 400\\times10^{-9}}{1.67\\times10^{-6}} = 0.72$, so $\\theta = 46°$. This is less than 57°, so the third-order spectrum starts before the second-order one ends ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Suggest one reason why a diffraction grating is preferred to a double slit for measuring wavelengths.",
+        "marks": 1,
+        "markscheme": ["The maxima are much sharper/narrower and brighter, so their angles can be measured more precisely ✓ (accept: larger angles, so smaller percentage uncertainty)"]
+      }
+    ]
+  }
+]

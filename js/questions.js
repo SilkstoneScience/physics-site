@@ -1,14 +1,17 @@
 // Question bank: loads questions from the JSON files listed in questions/index.json,
 // filters them, marks multiple choice instantly, reveals mark schemes for structured
 // questions, and saves each student's progress in their own browser (localStorage).
+// Questions are shown one at a time (with Previous / Next) or all on one page.
 (function () {
   const STORE_KEY = 'dpphys-progress-v1';
+  const VIEW_KEY = 'dpphys-view';
   const PAPERS = { '1A': 'Paper 1A', '1B': 'Paper 1B', '2': 'Paper 2' };
   const DIFFICULTY = { 1: 'Foundation', 2: 'Standard', 3: 'Challenging' };
   const LETTERS = 'ABCDEFG';
 
   const listEl = document.getElementById('q-list');
   const summaryEl = document.getElementById('q-summary');
+  const viewSel = document.getElementById('f-view');
   const f = {
     theme: document.getElementById('f-theme'),
     topic: document.getElementById('f-topic'),
@@ -19,6 +22,8 @@
   };
 
   let questions = [];
+  let shown = [];    // the questions that matched the filters when the list was last drawn
+  let current = 0;   // position in `shown` (one-at-a-time view)
   let progress = loadProgress();
 
   // ----- Saving progress (wrapped in try, because some browsers block storage) -----
@@ -28,6 +33,13 @@
   function saveProgress() {
     try { localStorage.setItem(STORE_KEY, JSON.stringify(progress)); } catch (e) { /* progress just won't be kept */ }
   }
+  function loadView() {
+    try { return localStorage.getItem(VIEW_KEY) || 'one'; } catch (e) { return 'one'; }
+  }
+  function saveView(v) {
+    try { localStorage.setItem(VIEW_KEY, v); } catch (e) { /* ignore */ }
+  }
+  const oneAtATime = () => viewSel.value === 'one';
 
   // ----- Loading questions -----
   async function getJSON(url) {
@@ -37,6 +49,8 @@
   }
 
   async function init() {
+    setUpBackLink();
+    viewSel.value = loadView();
     try {
       const index = await getJSON('questions/index.json');
       const sets = await Promise.all(index.files.map((file) => getJSON('questions/' + file)));
@@ -51,8 +65,35 @@
     applyUrlParams();
     fillTopicFilter();
     Object.values(f).forEach((el) => el.addEventListener('change', onFilterChange));
+    viewSel.addEventListener('change', () => { saveView(viewSel.value); render(true); });
     document.getElementById('q-reset').addEventListener('click', resetProgress);
-    render();
+    document.addEventListener('keydown', onKey);
+    render(true);
+  }
+
+  // ----- "Back" link: returns to the page the student came from -----
+  function setUpBackLink() {
+    const back = document.getElementById('q-back');
+    if (!back) return;
+    const params = new URLSearchParams(location.search);
+    const topic = params.get('topic');
+    let cameFromSite = false;
+    try {
+      const ref = new URL(document.referrer);
+      cameFromSite = ref.origin === location.origin && ref.pathname !== location.pathname;
+    } catch (e) { /* no referrer */ }
+
+    if (topic) {
+      back.href = 'themes/' + topicFile(topic);
+      back.textContent = `← Back to ${topic} ${topicTitle(topic)}`;
+    } else if (params.get('theme')) {
+      back.href = 'themes/' + params.get('theme').toLowerCase() + '.html';
+      back.textContent = `← Back to Theme ${params.get('theme')}`;
+    }
+    if (cameFromSite) {
+      // Prefer the browser's own "back", so the student returns to the same scroll position.
+      back.addEventListener('click', (e) => { e.preventDefault(); history.back(); });
+    }
   }
 
   // ----- Filters -----
@@ -70,7 +111,8 @@
     delete f.topic.dataset.wanted;
   }
 
-  // Lets topic pages link straight to filtered questions, e.g. questions.html?topic=A.1
+  // Lets pages link straight to filtered questions, e.g. questions.html?topic=A.1
+  // and to one question, e.g. questions.html?topic=A.1&q=A1-004
   function applyUrlParams() {
     const p = new URLSearchParams(location.search);
     const topic = p.get('topic');
@@ -80,11 +122,12 @@
     } else if (p.get('theme')) {
       f.theme.value = p.get('theme');
     }
+    listEl.dataset.wantedQuestion = p.get('q') || '';
   }
 
   function onFilterChange(e) {
     if (e.target === f.theme) fillTopicFilter();
-    render();
+    render(true);
   }
 
   function matches(q) {
@@ -126,22 +169,95 @@
     return m.allMarked ? `${m.got} / ${m.total} marks` : 'In progress';
   }
 
-  // ----- Drawing the list -----
-  function render() {
+  // ----- Drawing -----
+  // refilter = true: apply the filters again and go back to the first question.
+  // refilter = false: keep the same list and position (used after answering or moving).
+  function render(refilter) {
+    if (refilter) {
+      shown = questions.filter(matches);
+      current = 0;
+      const wanted = listEl.dataset.wantedQuestion;
+      if (wanted) {
+        const i = shown.findIndex((q) => q.id === wanted);
+        if (i >= 0) current = i;
+        listEl.dataset.wantedQuestion = '';
+      }
+    }
     typesetClear(listEl);
-    const shown = questions.filter(matches);
-    listEl.innerHTML = shown.length ? '' : '<p class="notice">No questions match these filters yet.</p>';
-    shown.forEach((q) => listEl.appendChild(buildCard(q)));
+    listEl.innerHTML = '';
+    if (!shown.length) {
+      listEl.innerHTML = '<p class="notice">No questions match these filters yet.</p>';
+    } else if (oneAtATime()) {
+      current = Math.min(Math.max(current, 0), shown.length - 1);
+      listEl.appendChild(buildNav());
+      listEl.appendChild(buildCard(shown[current]));
+      updateUrl();
+    } else {
+      shown.forEach((q) => listEl.appendChild(buildCard(q)));
+    }
     typeset(listEl);
-    updateSummary(shown.length);
+    updateSummary();
+    // Keep the "Σ Equations" panel on the topic of the question being shown.
+    const topicNow = oneAtATime() && shown.length ? shown[current].topic : (f.topic.value || (shown[0] && shown[0].topic) || '');
+    if (window.setEquationTopic && topicNow) window.setEquationTopic(topicNow);
+  }
+
+  function goTo(i) {
+    if (i < 0 || i >= shown.length) return;
+    current = i;
+    render(false);
+    // Bring the question into view if the student had scrolled down.
+    if (listEl.getBoundingClientRect().top < 0) listEl.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function buildNav() {
+    const nav = document.createElement('div');
+    nav.className = 'q-nav';
+    nav.innerHTML = `
+      <button class="secondary" data-go="prev" ${current === 0 ? 'disabled' : ''}>← Previous</button>
+      <span class="q-count">Question ${current + 1} of ${shown.length}</span>
+      <button class="secondary" data-go="next" ${current === shown.length - 1 ? 'disabled' : ''}>Next →</button>`;
+    nav.querySelector('[data-go="prev"]').addEventListener('click', () => goTo(current - 1));
+    nav.querySelector('[data-go="next"]').addEventListener('click', () => goTo(current + 1));
+    return nav;
+  }
+
+  // Shown under a question once it has been answered (one-at-a-time view only).
+  function nextButtonHtml() {
+    if (!oneAtATime()) return '';
+    if (current < shown.length - 1) {
+      return '<p class="next-row"><button class="primary" data-action="next">Next question →</button></p>';
+    }
+    return `<p class="next-row"><span>That's the last question in this set.</span>
+      <button class="secondary" data-action="first">Back to question 1</button></p>`;
+  }
+  function wireNextButtons(area) {
+    const next = area.querySelector('[data-action="next"]');
+    if (next) next.addEventListener('click', () => goTo(current + 1));
+    const first = area.querySelector('[data-action="first"]');
+    if (first) first.addEventListener('click', () => goTo(0));
   }
 
   function refreshCard(q, card) {
+    if (oneAtATime()) { render(false); return; }
     typesetClear(card);
     const fresh = buildCard(q);
     card.replaceWith(fresh);
     typeset(fresh);
-    updateSummary(listEl.querySelectorAll('.question').length);
+    updateSummary();
+  }
+
+  function onKey(e) {
+    if (!oneAtATime() || e.altKey || e.ctrlKey || e.metaKey) return;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) return;
+    if (e.key === 'ArrowRight') goTo(current + 1);
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+  }
+
+  function updateUrl() {
+    const p = new URLSearchParams(location.search);
+    p.set('q', shown[current].id);
+    history.replaceState(null, '', '?' + p.toString());
   }
 
   function topicTitle(id) {
@@ -169,7 +285,7 @@
         <span class="q-status ${status}">${statusLabel(q)}</span>
       </div>
       <div class="stem">${q.stem}</div>
-      ${q.diagram ? `<figure><img src="${q.diagram}" alt="${escapeAttr(q.diagramAlt || 'Diagram for this question')}" loading="lazy"></figure>` : ''}
+      ${q.diagram ? `<figure><img src="${q.diagram}" alt="${escapeAttr(q.diagramAlt || 'Diagram for this question')}"></figure>` : ''}
       <div class="answer-area"></div>`;
 
     const area = card.querySelector('.answer-area');
@@ -194,7 +310,8 @@
           <strong>${p.correct ? 'Correct!' : `Not quite. The answer is ${LETTERS[q.answer]}.`}</strong>
           ${q.explanation ? `<p>${q.explanation}</p>` : ''}
         </div>
-        <button class="link-btn" data-action="retry">Clear and try again</button>` : ''}`;
+        <button class="link-btn" data-action="retry">Clear and try again</button>
+        ${nextButtonHtml()}` : ''}`;
 
     area.querySelectorAll('.option').forEach((btn) => btn.addEventListener('click', () => {
       const choice = Number(btn.dataset.i);
@@ -208,6 +325,7 @@
       saveProgress();
       refreshCard(q, card);
     });
+    wireNextButtons(area);
   }
 
   // ----- Structured (Paper 1B and 2): reveal mark scheme, then self-mark -----
@@ -238,7 +356,9 @@
                 out of ${pt.marks}</label>
             </div>` : '<button class="secondary" data-action="reveal">Show mark scheme</button>'}
         </div>`;
-    }).join('') + '<p><button class="link-btn" data-action="clear">Clear my answers to this question</button></p>';
+    }).join('') +
+      '<p><button class="link-btn" data-action="clear">Clear my answers to this question</button></p>' +
+      (marksOf(q).allMarked ? nextButtonHtml() : '');
 
     area.querySelectorAll('.part').forEach((partEl) => {
       const label = partEl.dataset.part;
@@ -266,13 +386,14 @@
       saveProgress();
       refreshCard(q, card);
     });
+    wireNextButtons(area);
   }
 
   // ----- Progress summary -----
-  function updateSummary(shownCount) {
-    const done = questions.filter((q) => statusOf(q) === 'done').length;
-    const attempted = questions.filter((q) => statusOf(q) !== 'new').length;
-    summaryEl.innerHTML = `Showing <strong>${shownCount}</strong> of ${questions.length} questions ·
+  function updateSummary() {
+    const done = shown.filter((q) => statusOf(q) === 'done').length;
+    const attempted = shown.filter((q) => statusOf(q) !== 'new').length;
+    summaryEl.innerHTML = `<strong>${shown.length}</strong> question${shown.length === 1 ? '' : 's'} in this set ·
       attempted <strong>${attempted}</strong> · fully correct <strong>${done}</strong>`;
   }
 
@@ -280,7 +401,7 @@
     if (!confirm('Clear all your saved answers and scores on this device?')) return;
     progress = {};
     saveProgress();
-    render();
+    render(true);
   }
 
   // ----- Helpers -----

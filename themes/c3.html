@@ -4,15 +4,381 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>C.3 Wave phenomena · DP Physics</title>
+  <meta name="description" content="IB DP Physics C.3 Wave phenomena: wavefronts and rays, reflection, refraction, Snell's law, total internal reflection, diffraction, superposition, interference, Young's double slit and (HL) single-slit diffraction and gratings.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="C.3">
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
+</head>
+<body data-root="../" data-section="themes" data-topic="C.3">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="c.html">Theme C Wave behaviour</a></p>
-    <h1><span class="code">C.3</span>Wave phenomena</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <h1><span class="code">C.3</span>Wave phenomena <span class="tag hl">+ HL extra</span></h1>
+    <p class="lead">What happens when waves meet a boundary, squeeze through a gap, or meet each other? Reflection, refraction, diffraction and interference explain rainbows, optical fibres, noise-cancelling headphones and the colours on a soap bubble. They also gave the first strong evidence that light is a wave. Sections 1–8 are for everyone. Sections 9–11 are <strong>HL only</strong> and clearly marked.</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Theories</span><span class="tag">Evidence</span><span class="tag">Falsification</span><span class="tag">Experiments</span></div>
+          <p><strong>Competing theories.</strong> In the 1600s, Isaac Newton thought light was a stream of tiny particles, while Christiaan Huygens argued it was a wave. Both theories explained reflection and refraction, and Newton's enormous reputation kept the particle view dominant for a century.</p>
+          <p><strong>Evidence.</strong> Around 1801 Thomas Young showed that light through two narrow slits makes a pattern of bright and dark fringes. This is interference, which particles couldn't easily explain.</p>
+          <p><strong>Falsification.</strong> In 1818 Siméon Poisson tried to <em>disprove</em> Augustin Fresnel's wave theory. He showed it predicted an absurd result: a bright spot at the centre of the shadow of a round disc. François Arago did the experiment, and the spot was there. An attempted refutation became famous support for the theory.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>How does a community choose between theories?</strong> Both the particle and the wave theories of light explained some observations. What made scientists finally change their minds, and how much did reputation matter?</li>
+            <li><strong>Can trying to disprove a theory prove it right?</strong> Poisson's "absurd" prediction ended up confirming the wave theory. What does this say about how evidence supports a theory?</li>
+            <li><strong>How simple is too simple?</strong> Young's double-slit formula ignores the effect of each slit's width (HL). When is it acceptable to leave parts out of a model for clarity?</li>
+            <li><strong>Can something be two things at once?</strong> Here light behaves as a wave. In E.2 it behaves as particles (photons). Is light "really" one or the other, or are both just models?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <p style="margin:8px 0 0"><strong>SL and HL</strong></p>
+      <ol>
+        <li><a href="#wavefronts">Wavefronts and rays</a></li>
+        <li><a href="#reflection">Reflection and transmission</a></li>
+        <li><a href="#refraction">Refraction and Snell's law</a></li>
+        <li><a href="#tir">Critical angle and total internal reflection</a></li>
+        <li><a href="#diffraction">Diffraction</a></li>
+        <li><a href="#superposition">Superposition</a></li>
+        <li><a href="#interference">Two-source interference</a></li>
+        <li><a href="#young">Young's double-slit experiment</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><a href="#hl"><strong>HL only</strong></a> <span class="tag hl">HL</span></p>
+      <ol start="9">
+        <li><a href="#single">Single-slit diffraction</a></li>
+        <li><a href="#modulation">The double-slit pattern revisited</a></li>
+        <li><a href="#grating">Multiple slits and diffraction gratings</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><strong>Review</strong></p>
+      <ol start="12">
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="wavefronts">1. Wavefronts and rays</h2>
+    <p>Waves spreading out in two or three dimensions are described with two kinds of line:</p>
+    <ul>
+      <li>A <strong>wavefront</strong> joins neighbouring points that are in phase, such as a line along each crest. Neighbouring wavefronts are one wavelength apart.</li>
+      <li>A <strong>ray</strong> shows the direction the wave (and its energy) travels. Rays are always <strong>perpendicular</strong> to wavefronts.</li>
+    </ul>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 180" role="img" aria-labelledby="c3at">
+        <title id="c3at">Left: plane wavefronts drawn as parallel straight lines, with parallel rays crossing them at right angles. Right: circular wavefronts spreading from a point source, with rays pointing radially outwards.</title>
+        <g class="l1 thin"><line x1="40" y1="30" x2="40" y2="150"/><line x1="65" y1="30" x2="65" y2="150"/><line x1="90" y1="30" x2="90" y2="150"/><line x1="115" y1="30" x2="115" y2="150"/><line x1="140" y1="30" x2="140" y2="150"/></g>
+        <line class="l3 thin" x1="20" y1="60" x2="165" y2="60" marker-end="url(#ah3)"/>
+        <line class="l3 thin" x1="20" y1="90" x2="165" y2="90" marker-end="url(#ah3)"/>
+        <line class="l3 thin" x1="20" y1="120" x2="165" y2="120" marker-end="url(#ah3)"/>
+        <circle cx="275" cy="90" r="4" class="f3"/>
+        <g class="l1 thin"><circle cx="275" cy="90" r="22"/><circle cx="275" cy="90" r="44"/><circle cx="275" cy="90" r="66"/></g>
+        <g class="l3 thin">
+          <line x1="275" y1="90" x2="358" y2="90" marker-end="url(#ah3)"/><line x1="275" y1="90" x2="192" y2="90" marker-end="url(#ah3)"/>
+          <line x1="275" y1="90" x2="275" y2="12" marker-end="url(#ah3)"/><line x1="275" y1="90" x2="275" y2="168" marker-end="url(#ah3)"/>
+          <line x1="275" y1="90" x2="333" y2="32" marker-end="url(#ah3)"/><line x1="275" y1="90" x2="217" y2="148" marker-end="url(#ah3)"/>
+        </g>
+      </svg>
+      <figcaption><span class="key-1">Wavefronts</span> and rays (black). Left: plane waves. Right: circular waves from a point source. Far from the source, circular wavefronts become almost straight.</figcaption>
+    </figure>
+
+    <!-- ===================================================== -->
+    <h2 id="reflection">2. Reflection and transmission</h2>
+    <p>When a wave reaches a boundary between two media, part of it is usually <strong>reflected</strong> and part <strong>transmitted</strong> into the new medium. A pane of glass, for example, reflects a little light and transmits most of it.</p>
+    <ul>
+      <li>All angles are measured from the <strong>normal</strong>, a line perpendicular to the boundary.</li>
+      <li><strong>Law of reflection:</strong> angle of incidence = angle of reflection.</li>
+      <li>On reflection, the speed, frequency and wavelength are all unchanged. Only the direction changes.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="refraction">3. Refraction and Snell's law</h2>
+    <p><strong>Refraction</strong> is the change in direction of a wave as it crosses a boundary, because its <strong>speed changes</strong>. The frequency is fixed by the source, so the wavelength changes in proportion to the speed. A wave that slows down bends <strong>towards</strong> the normal; one that speeds up bends <strong>away</strong> from it. A wave meeting the boundary along the normal doesn't change direction, but it still changes speed and wavelength.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 220" role="img" aria-labelledby="c3bt">
+        <title id="c3bt">Plane wavefronts crossing a horizontal boundary into a slower medium. Above the boundary the wavefronts are further apart. Below it they are closer together, so the wavelength is shorter, and they are bent so that the ray turns towards the normal.</title>
+        <rect x="0" y="110" width="380" height="110" class="area"/>
+        <line class="axis" x1="0" y1="110" x2="380" y2="110"/>
+        <line class="l1 thin" x1="70" y1="110" x2="123.6" y2="65"/>
+        <line class="l2 thin" x1="70" y1="110" x2="6.8" y2="140"/>
+        <line class="l1 thin" x1="116.7" y1="110" x2="170.3" y2="65"/>
+        <line class="l2 thin" x1="116.7" y1="110" x2="53.4" y2="140"/>
+        <line class="l1 thin" x1="163.3" y1="110" x2="217" y2="65"/>
+        <line class="l2 thin" x1="163.3" y1="110" x2="100.1" y2="140"/>
+        <line class="l1 thin" x1="210" y1="110" x2="263.6" y2="65"/>
+        <line class="l2 thin" x1="210" y1="110" x2="146.8" y2="140"/>
+        <line class="l1 thin" x1="256.7" y1="110" x2="310.3" y2="65"/>
+        <line class="l2 thin" x1="256.7" y1="110" x2="193.4" y2="140"/>
+        <line class="l1 thin" x1="303.4" y1="110" x2="357" y2="65"/>
+        <line class="l2 thin" x1="303.4" y1="110" x2="240.1" y2="140"/>
+        <line class="axis dash" x1="186.7" y1="25" x2="186.7" y2="205"/>
+        <line class="l3" x1="125.6" y1="37.2" x2="186.7" y2="110" marker-end="url(#ah3)"/>
+        <line class="l3" x1="186.7" y1="110" x2="227.4" y2="195.8" marker-end="url(#ah3)"/>
+        <text x="10" y="24">faster medium</text>
+        <text x="10" y="210">slower medium</text>
+      </svg>
+      <figcaption><span class="key-1">Wavefronts</span> in the faster medium, <span class="key-2">wavefronts</span> in the slower medium, and the ray (black) bending towards the normal (dashed). The wavelength is shorter where the wave is slower.</figcaption>
+    </figure>
+    <p>For light, the <strong>refractive index</strong> of a material is $n = \dfrac{c}{v}$: how many times slower light travels in it than in a vacuum. For air, $n \approx 1.00$; water, 1.33; glass, about 1.5. <strong>Snell's law</strong> links the angles (from the normal) to the indices and speeds:</p>
+    <div class="key">$$\frac{n_1}{n_2} = \frac{\sin\theta_2}{\sin\theta_1} = \frac{v_2}{v_1}$$
+      <p style="margin:0">Equivalently, $n_1\sin\theta_1 = n_2\sin\theta_2$. Medium 1 is the one the wave comes from.</p></div>
+    <div class="worked">
+      <h3>Worked example: light entering water</h3>
+      <p>A ray of light in air hits a water surface at 50° to the normal. Find the angle of refraction and the speed of light in water ($n = 1.33$).</p>
+      <p>$1.00 \sin 50° = 1.33 \sin\theta_2$, so $\sin\theta_2 = 0.576$ and $\theta_2 = 35°$, bent towards the normal.<br>
+      $v = \dfrac{c}{n} = \dfrac{3.00\times10^{8}}{1.33} = 2.26 \times 10^{8}\ \text{m s}^{-1}$.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="tir">4. Critical angle and total internal reflection</h2>
+    <p>When light goes from a medium with a <strong>higher</strong> refractive index into one with a <strong>lower</strong> index (glass to air, for example), it bends away from the normal. As the angle of incidence increases, the refracted ray gets closer to the boundary. At the <strong>critical angle</strong> $\theta_c$, the refracted ray runs along the boundary ($\theta_2 = 90°$). Snell's law then gives:</p>
+    <div class="key">$$\sin\theta_c = \frac{n_2}{n_1} \qquad (n_1 &gt; n_2)$$</div>
+    <p>For any angle larger than $\theta_c$, no light escapes: it is all reflected. This is <strong>total internal reflection</strong> (TIR). It can only happen going into a medium with a <em>lower</em> refractive index.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 220" role="img" aria-labelledby="c3ct">
+        <title id="c3ct">Three rays from a point inside glass hitting the glass–air surface. A ray at a small angle refracts out into the air, bending away from the normal. A ray at the critical angle refracts along the surface. A ray at a larger angle is totally reflected back into the glass.</title>
+        <rect x="0" y="110" width="380" height="110" class="area"/>
+        <line class="axis" x1="0" y1="110" x2="380" y2="110"/>
+        <text x="10" y="30">air</text><text x="10" y="210">glass</text>
+        <circle cx="100" cy="200" r="4" class="f3"/>
+        <g class="axis dash" style="opacity:0.6"><line x1="142" y1="60" x2="142" y2="160"/><line x1="180.5" y1="60" x2="180.5" y2="160"/><line x1="255.9" y1="60" x2="255.9" y2="160"/></g>
+        <line class="l1" x1="100" y1="200" x2="142" y2="110"/><line class="l1" x1="142" y1="110" x2="192.7" y2="48.1" marker-end="url(#ah1)"/>
+        <line class="l2" x1="100" y1="200" x2="180.5" y2="110"/><line class="l2" x1="180.5" y1="108" x2="300" y2="108" marker-end="url(#ah2)"/>
+        <line class="l3" x1="100" y1="200" x2="255.9" y2="110"/><line class="l3" x1="255.9" y1="110" x2="325.2" y2="150" marker-end="url(#ah3)"/>
+      </svg>
+      <figcaption>Light leaving glass ($n = 1.5$): <span class="key-1">below the critical angle</span> it refracts out; <span class="key-2">at the critical angle</span> (42°) it runs along the surface; above it (black) it is totally internally reflected.</figcaption>
+    </figure>
+    <p><strong>Uses:</strong> <strong>optical fibres</strong> carry internet data as pulses of light trapped in thin glass fibres by repeated TIR. Medical endoscopes use bundles of fibres to see inside the body. Diamonds sparkle because their high refractive index (2.4) gives a small critical angle, so light reflects around inside them many times.</p>
+    <div class="worked">
+      <h3>Worked example: critical angles</h3>
+      <p>Find the critical angle for glass ($n = 1.50$) in air, and in water ($n = 1.33$).</p>
+      <p>In air: $\sin\theta_c = \dfrac{1.00}{1.50}$, so $\theta_c = 41.8°$. &nbsp; In water: $\sin\theta_c = \dfrac{1.33}{1.50} = 0.887$, so $\theta_c = 62.5°$.<br>
+      Surrounding the glass with water makes TIR harder to achieve. That's why optical fibres have a "cladding" with a carefully chosen lower refractive index.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="diffraction">5. Diffraction</h2>
+    <p><strong>Diffraction</strong> is the spreading of a wave as it passes through a gap (aperture) or around the edge of an obstacle. The wavelength, frequency and speed don't change, only the shape of the wavefronts.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 200" role="img" aria-labelledby="c3dt">
+        <title id="c3dt">Left: plane waves passing through a gap much wider than the wavelength. They carry on almost straight, with only slight curving at the edges. Right: plane waves passing through a gap about one wavelength wide. They spread out as semicircular wavefronts.</title>
+        <g class="l3" style="stroke-width:5"><line x1="70" y1="5" x2="70" y2="50"/><line x1="70" y1="150" x2="70" y2="195"/><line x1="255" y1="5" x2="255" y2="92"/><line x1="255" y1="108" x2="255" y2="195"/></g>
+        <g class="l1 thin">
+          <line x1="15" y1="20" x2="15" y2="180"/><line x1="35" y1="20" x2="35" y2="180"/><line x1="55" y1="20" x2="55" y2="180"/>
+          <path d="M87.3 40 A 20 20 0 0 1 90 50 L 90 150 A 20 20 0 0 1 87.3 160"/>
+          <path d="M104.6 30 A 40 40 0 0 1 110 50 L 110 150 A 40 40 0 0 1 104.6 170"/>
+          <path d="M122 20 A 60 60 0 0 1 130 50 L 130 150 A 60 60 0 0 1 122 180"/>
+          <path d="M139.3 10 A 80 80 0 0 1 150 50 L 150 150 A 80 80 0 0 1 139.3 190"/>
+          <line x1="200" y1="20" x2="200" y2="180"/><line x1="220" y1="20" x2="220" y2="180"/><line x1="240" y1="20" x2="240" y2="180"/>
+          <path d="M255 80 A 20 20 0 0 1 255 120"/>
+          <path d="M255 60 A 40 40 0 0 1 255 140"/>
+          <path d="M255 40 A 60 60 0 0 1 255 160"/>
+          <path d="M255 20 A 80 80 0 0 1 255 180"/>
+          <path d="M255 0 A 100 100 0 0 1 255 200"/>
+        </g>
+      </svg>
+      <figcaption>Left: a gap much wider than $\lambda$, so there is little diffraction. Right: a gap about as wide as $\lambda$, so the waves spread out strongly.</figcaption>
+    </figure>
+    <ul>
+      <li>Diffraction is most noticeable when the gap or obstacle is <strong>similar in size to the wavelength</strong>. A much wider gap gives very little spreading.</li>
+      <li>That's why you can <em>hear</em> round a corner but not <em>see</em> round it. Sound wavelengths (about 1 m) are similar to doorways, while light wavelengths (about $5\times10^{-7}$ m) are far smaller.</li>
+      <li>Long-wavelength radio waves diffract around hills, so they can be received in valleys where shorter-wavelength signals can't reach.</li>
+      <li><strong>Huygens' principle</strong> explains diffraction: every point on a wavefront acts as a source of new wavelets. A narrow gap lets through only a small part of the wavefront, which behaves like a point source.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="superposition">6. Superposition</h2>
+    <p>When two or more waves meet, they pass through each other. Where they overlap, the total displacement is the sum of the individual displacements. This is the <strong>principle of superposition</strong>. After meeting, each wave carries on unchanged.</p>
+    <ul>
+      <li>Two crests (or two troughs) meeting give a bigger displacement: <strong>constructive interference</strong>.</li>
+      <li>A crest meeting an equal trough cancels it: <strong>destructive interference</strong>.</li>
+      <li>Displacements have signs, so add them as signed numbers. Two pulses of $+3$ cm and $-1$ cm give $+2$ cm where they overlap.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="interference">7. Two-source interference</h2>
+    <p>To produce a steady interference pattern, the two sources must be <strong>coherent</strong>: the same frequency, with a <strong>constant phase difference</strong>. Two speakers driven by the same signal generator are coherent. Two separate light bulbs aren't, because their phases change randomly millions of times a second. So for light, both "sources" are made from the <em>same</em> source, for example by passing a laser beam through two slits.</p>
+    <p>At any point, what happens depends on the <strong>path difference</strong>: how much further the wave from one source has travelled than the wave from the other. For two sources in phase:</p>
+    <div class="key">
+      $$\text{constructive: path difference} = n\lambda$$
+      $$\text{destructive: path difference} = \left(n + \tfrac{1}{2}\right)\lambda$$
+      <p style="margin:0">where $n = 0, 1, 2, \ldots$ Waves arriving in step reinforce each other. Waves arriving half a cycle out of step cancel.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: loud or quiet?</h3>
+      <p>Two loudspeakers connected to the same signal generator emit sound of wavelength 0.50 m. A student stands 3.25 m from one speaker and 4.00 m from the other. Is it loud or quiet there?</p>
+      <p>Path difference $= 4.00 - 3.25 = 0.75$ m $= 1.5\lambda$. This is $(n + \tfrac{1}{2})\lambda$ with $n = 1$, so the interference is <strong>destructive</strong> and it's quiet there. (It's rarely perfectly silent, because of reflections from walls and unequal amplitudes.)</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="young">8. Young's double-slit experiment</h2>
+    <p>Light from a single source (today, usually a laser) passes through two narrow, closely spaced slits. The two slits act as coherent sources, and an interference pattern of equally spaced bright and dark <strong>fringes</strong> appears on a distant screen.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 230" role="img" aria-labelledby="c3et">
+        <title id="c3et">Young's double-slit experiment. A laser beam hits a barrier with two slits a distance d apart. A screen a distance D away shows equally spaced bright fringes, separated by s.</title>
+        <rect x="10" y="100" width="40" height="20" rx="3" style="fill:var(--accent)"/>
+        <line class="l1" x1="50" y1="110" x2="108" y2="110"/>
+        <g class="l3" style="stroke-width:4"><line x1="110" y1="20" x2="110" y2="94"/><line x1="110" y1="100" x2="110" y2="120"/><line x1="110" y1="126" x2="110" y2="200"/></g>
+        <g class="axis dash" style="opacity:0.6"><line x1="110" y1="97" x2="340" y2="60"/><line x1="110" y1="123" x2="340" y2="60"/></g>
+        <line class="axis" x1="340" y1="15" x2="340" y2="205" style="stroke-width:3"/>
+        <g style="fill:var(--accent)">
+          <rect x="344" y="31" width="14" height="8"/><rect x="344" y="56" width="14" height="8"/><rect x="344" y="81" width="14" height="8"/><rect x="344" y="106" width="14" height="8"/>
+          <rect x="344" y="131" width="14" height="8"/><rect x="344" y="156" width="14" height="8"/><rect x="344" y="181" width="14" height="8"/>
+        </g>
+        <text x="100" y="116" text-anchor="end">d</text>
+        <line class="l2 thin" x1="112" y1="214" x2="338" y2="214" marker-start="url(#ah2)" marker-end="url(#ah2)"/>
+        <text class="t2" x="225" y="208" text-anchor="middle">D</text>
+        <line class="l2 thin" x1="330" y1="112" x2="330" y2="133" marker-start="url(#ah2)" marker-end="url(#ah2)"/>
+        <text class="t2" x="318" y="128" text-anchor="end">s</text>
+      </svg>
+      <figcaption>Slit separation $d$, slit-to-screen distance $D$, and <span class="key-1">bright fringes</span> separated by $s$. Not to scale: in reality $D$ is thousands of times bigger than $d$.</figcaption>
+    </figure>
+    <div class="key">$$s = \frac{\lambda D}{d}$$</div>
+    <p>The fringes are further apart for a longer wavelength (red more than blue), a more distant screen, or slits closer together. To measure $\lambda$, measure across several fringes and divide, to reduce the percentage uncertainty in $s$.</p>
+    <div class="worked">
+      <h3>Worked example: measuring a laser's wavelength</h3>
+      <p>Red laser light passes through two slits 0.50 mm apart. On a screen 2.0 m away, the distance across 10 fringe spacings is 25 mm. Find the wavelength.</p>
+      <p>$s = 25/10 = 2.5$ mm. &nbsp; $\lambda = \dfrac{sd}{D} = \dfrac{2.5\times10^{-3} \times 0.50\times10^{-3}}{2.0} = 6.3\times10^{-7}$ m $= 630$ nm, which is red, as expected.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <div class="part-banner hl" id="hl"><span class="code">HL only</span><p>Sections 9–11 are additional higher level content. SL students can stop here and go to <a href="#mistakes" style="color:inherit;text-decoration:underline">Common mistakes</a>.</p></div>
+    <div class="hl-zone">
+    <h2 id="single">9. Single-slit diffraction <span class="tag hl">HL</span></h2>
+    <p>Light diffracting through a <em>single</em> slit of width $b$ also produces a pattern of bright and dark bands. Waves from different parts of the slit interfere with each other (Huygens' wavelets).</p>
+    <ul>
+      <li>There is a <strong>wide, bright central maximum</strong>, with much dimmer side maxima. The first side maximum is only about 5% as bright as the centre, and the next is under 2%.</li>
+      <li>The central maximum is <strong>twice as wide</strong> as each side maximum.</li>
+      <li>The angle from the centre to the <strong>first minimum</strong> is given by the formula below, where $\theta$ is in <strong>radians</strong> and is small:</li>
+    </ul>
+    <div class="key">$$\theta = \frac{\lambda}{b}$$</div>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 200" role="img" aria-labelledby="c3ft">
+        <title id="c3ft">Intensity against angle for single-slit diffraction: a tall, wide central peak with its first zeros at plus and minus lambda over b, and much smaller side peaks.</title>
+        <line class="axis" x1="10" y1="170" x2="372" y2="170" marker-end="url(#ah3)"/>
+        <line class="axis" x1="190" y1="176" x2="190" y2="12" marker-end="url(#ah3)"/>
+        <text x="198" y="24">I</text><text x="356" y="192">θ</text>
+        <polyline class="l1" points="10,170 12,170 14,169.9 16,169.8 18,169.7 20,169.6 22,169.4 24,169.2 26,169 28,168.7 30,168.5 32,168.3 34,168.1 36,167.9 38,167.8 40,167.7 42,167.7 44,167.7 46,167.8 48,167.9 50,168 52,168.2 54,168.5 56,168.7 58,169 60,169.2 62,169.5 64,169.7 66,169.9 68,170 70,170 72,170 74,169.8 76,169.6 78,169.3 80,168.9 82,168.5 84,168 86,167.4 88,166.8 90,166.2 92,165.6 94,165 96,164.5 98,164 100,163.7 102,163.5 104,163.4 106,163.5 108,163.7 110,164 112,164.5 114,165.1 116,165.8 118,166.6 120,167.4 122,168.2 124,168.9 126,169.5 128,169.9 130,170 132,169.8 134,169.3 136,168.3 138,166.9 140,164.9 142,162.3 144,159.2 146,155.4 148,151.1 150,146.1 152,140.5 154,134.4 156,127.7 158,120.7 160,113.3 162,105.6 164,97.7 166,89.8 168,81.9 170,74.3 172,66.8 174,59.8 176,53.3 178,47.5 180,42.3 182,38 184,34.5 186,32 188,30.5 190,30 192,30.5 194,32 196,34.5 198,38 200,42.3 202,47.5 204,53.3 206,59.8 208,66.8 210,74.3 212,81.9 214,89.8 216,97.7 218,105.6 220,113.3 222,120.7 224,127.7 226,134.4 228,140.5 230,146.1 232,151.1 234,155.4 236,159.2 238,162.3 240,164.9 242,166.9 244,168.3 246,169.3 248,169.8 250,170 252,169.9 254,169.5 256,168.9 258,168.2 260,167.4 262,166.6 264,165.8 266,165.1 268,164.5 270,164 272,163.7 274,163.5 276,163.4 278,163.5 280,163.7 282,164 284,164.5 286,165 288,165.6 290,166.2 292,166.8 294,167.4 296,168 298,168.5 300,168.9 302,169.3 304,169.6 306,169.8 308,170 310,170 312,170 314,169.9 316,169.7 318,169.5 320,169.2 322,169 324,168.7 326,168.5 328,168.2 330,168 332,167.9 334,167.8 336,167.7 338,167.7 340,167.7 342,167.8 344,167.9 346,168.1 348,168.3 350,168.5 352,168.7 354,169 356,169.2 358,169.4 360,169.6 362,169.7 364,169.8 366,169.9 368,170 370,170"/>
+        <line class="axis" x1="130" y1="165" x2="130" y2="175"/><line class="axis" x1="250" y1="165" x2="250" y2="175"/>
+        <text x="130" y="192" text-anchor="middle">−λ/b</text><text x="250" y="192" text-anchor="middle">λ/b</text>
+      </svg>
+      <figcaption>Single-slit <span class="key-1">intensity pattern</span>. The central maximum spans from $-\lambda/b$ to $+\lambda/b$.</figcaption>
+    </figure>
+    <p><strong>Effect of slit width and wavelength:</strong> a <em>narrower</em> slit (smaller $b$) or a <em>longer</em> wavelength gives a <strong>wider</strong> pattern. The narrower slit also lets through less light, so the pattern is dimmer. With white light, the central maximum is white (every colour is bright there), with coloured edges: blue on the inside and red on the outside, because red has the longest wavelength and spreads most.</p>
+    <div class="worked">
+      <h3>Worked example: width of the central maximum <span class="tag hl">HL</span></h3>
+      <p>Light of wavelength 600 nm passes through a slit 0.12 mm wide onto a screen 3.0 m away. How wide is the central maximum?</p>
+      <p>$\theta = \dfrac{\lambda}{b} = \dfrac{600\times10^{-9}}{0.12\times10^{-3}} = 5.0\times10^{-3}$ rad.<br>
+      For small angles, distance from the centre to the first minimum $\approx D\theta = 3.0 \times 5.0\times10^{-3} = 15$ mm. The central maximum is twice this: <strong>30 mm</strong> wide.</p>
+    </div>
+
+    <h2 id="modulation">10. The double-slit pattern revisited <span class="tag hl">HL</span></h2>
+    <p>Each slit in a double-slit experiment has a width, so each one produces its own single-slit diffraction pattern. The two-slit interference fringes are still equally spaced ($s = \lambda D/d$), but their brightness follows the single-slit pattern. We say the single-slit pattern <strong>modulates</strong> the double-slit pattern, acting as an "envelope".</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 200" role="img" aria-labelledby="c3gt">
+        <title id="c3gt">Intensity pattern for a real double slit: equally spaced narrow fringes whose heights follow the shape of a single-slit diffraction pattern, shown as a dashed envelope.</title>
+        <line class="axis" x1="10" y1="170" x2="372" y2="170" marker-end="url(#ah3)"/>
+        <line class="axis" x1="190" y1="176" x2="190" y2="12" marker-end="url(#ah3)"/>
+        <text x="198" y="24">I</text><text x="356" y="192">θ</text>
+        <polyline class="l2 thin dash" points="10,170 12,170 14,169.9 16,169.8 18,169.7 20,169.6 22,169.4 24,169.2 26,169 28,168.7 30,168.5 32,168.3 34,168.1 36,167.9 38,167.8 40,167.7 42,167.7 44,167.7 46,167.8 48,167.9 50,168 52,168.2 54,168.5 56,168.7 58,169 60,169.2 62,169.5 64,169.7 66,169.9 68,170 70,170 72,170 74,169.8 76,169.6 78,169.3 80,168.9 82,168.5 84,168 86,167.4 88,166.8 90,166.2 92,165.6 94,165 96,164.5 98,164 100,163.7 102,163.5 104,163.4 106,163.5 108,163.7 110,164 112,164.5 114,165.1 116,165.8 118,166.6 120,167.4 122,168.2 124,168.9 126,169.5 128,169.9 130,170 132,169.8 134,169.3 136,168.3 138,166.9 140,164.9 142,162.3 144,159.2 146,155.4 148,151.1 150,146.1 152,140.5 154,134.4 156,127.7 158,120.7 160,113.3 162,105.6 164,97.7 166,89.8 168,81.9 170,74.3 172,66.8 174,59.8 176,53.3 178,47.5 180,42.3 182,38 184,34.5 186,32 188,30.5 190,30 192,30.5 194,32 196,34.5 198,38 200,42.3 202,47.5 204,53.3 206,59.8 208,66.8 210,74.3 212,81.9 214,89.8 216,97.7 218,105.6 220,113.3 222,120.7 224,127.7 226,134.4 228,140.5 230,146.1 232,151.1 234,155.4 236,159.2 238,162.3 240,164.9 242,166.9 244,168.3 246,169.3 248,169.8 250,170 252,169.9 254,169.5 256,168.9 258,168.2 260,167.4 262,166.6 264,165.8 266,165.1 268,164.5 270,164 272,163.7 274,163.5 276,163.4 278,163.5 280,163.7 282,164 284,164.5 286,165 288,165.6 290,166.2 292,166.8 294,167.4 296,168 298,168.5 300,168.9 302,169.3 304,169.6 306,169.8 308,170 310,170 312,170 314,169.9 316,169.7 318,169.5 320,169.2 322,169 324,168.7 326,168.5 328,168.2 330,168 332,167.9 334,167.8 336,167.7 338,167.7 340,167.7 342,167.8 344,167.9 346,168.1 348,168.3 350,168.5 352,168.7 354,169 356,169.2 358,169.4 360,169.6 362,169.7 364,169.8 366,169.9 368,170 370,170"/>
+        <polyline class="l1" points="10,170 11,170 12,170 13,170 14,170 15,169.9 16,169.9 17,170 18,170 19,170 20,170 21,170 22,169.9 23,169.9 24,169.7 25,169.5 26,169.3 27,169.1 28,168.8 29,168.6 30,168.5 31,168.4 32,168.5 33,168.6 34,168.8 35,169 36,169.3 37,169.6 38,169.8 39,169.9 40,170 41,169.9 42,169.8 43,169.5 44,169.2 45,168.9 46,168.5 47,168.3 48,168.1 49,168 50,168 51,168.2 52,168.4 53,168.7 54,169 55,169.3 56,169.6 57,169.8 58,169.9 59,170 60,170 61,170 62,170 63,169.9 64,169.9 65,169.9 66,169.9 67,169.9 68,170 69,170 70,170 71,170 72,170 73,169.9 74,169.9 75,169.9 76,169.9 77,169.9 78,169.9 79,170 80,170 81,170 82,169.9 83,169.6 84,169.3 85,168.8 86,168.3 87,167.7 88,167.1 89,166.6 90,166.2 91,166 92,166 93,166.2 94,166.7 95,167.4 96,168.1 97,168.8 98,169.4 99,169.8 100,170 101,169.8 102,169.4 103,168.6 104,167.7 105,166.7 106,165.7 107,164.9 108,164.3 109,164 110,164 111,164.4 112,165 113,165.9 114,166.8 115,167.7 116,168.6 117,169.2 118,169.7 119,169.9 120,170 121,169.9 122,169.8 123,169.7 124,169.6 125,169.6 126,169.6 127,169.8 128,169.9 129,170 130,170 131,170 132,169.8 133,169.7 134,169.5 135,169.4 136,169.4 137,169.5 138,169.7 139,169.9 140,170 141,169.8 142,169.3 143,168.1 144,166.3 145,163.7 146,160.5 147,156.8 148,152.9 149,149.2 150,146.1 151,144 152,143.3 153,144.2 154,146.7 155,150.6 156,155.4 157,160.6 158,165.3 159,168.7 160,170 161,168.5 162,163.8 163,155.9 164,145 165,131.9 166,117.5 167,103.2 168,90.4 169,80.3 170,74.3 171,72.9 172,76.7 173,85.3 174,97.9 175,113.3 176,129.7 177,145.3 178,158.3 179,166.9 180,170 181,166.8 182,157.4 183,142.4 184,123.2 185,101.6 186,79.7 187,59.8 188,43.8 189,33.6 190,30 191,33.6 192,43.8 193,59.8 194,79.7 195,101.6 196,123.2 197,142.4 198,157.4 199,166.8 200,170 201,166.9 202,158.3 203,145.3 204,129.7 205,113.3 206,97.9 207,85.3 208,76.7 209,72.9 210,74.3 211,80.3 212,90.4 213,103.2 214,117.5 215,131.9 216,145 217,155.9 218,163.8 219,168.5 220,170 221,168.7 222,165.3 223,160.6 224,155.4 225,150.6 226,146.7 227,144.2 228,143.3 229,144 230,146.1 231,149.2 232,152.9 233,156.8 234,160.5 235,163.7 236,166.3 237,168.1 238,169.3 239,169.8 240,170 241,169.9 242,169.7 243,169.5 244,169.4 245,169.4 246,169.5 247,169.7 248,169.8 249,170 250,170 251,170 252,169.9 253,169.8 254,169.6 255,169.6 256,169.6 257,169.7 258,169.8 259,169.9 260,170 261,169.9 262,169.7 263,169.2 264,168.6 265,167.7 266,166.8 267,165.9 268,165 269,164.4 270,164 271,164 272,164.3 273,164.9 274,165.7 275,166.7 276,167.7 277,168.6 278,169.4 279,169.8 280,170 281,169.8 282,169.4 283,168.8 284,168.1 285,167.4 286,166.7 287,166.2 288,166 289,166 290,166.2 291,166.6 292,167.1 293,167.7 294,168.3 295,168.8 296,169.3 297,169.6 298,169.9 299,170 300,170 301,170 302,169.9 303,169.9 304,169.9 305,169.9 306,169.9 307,169.9 308,170 309,170 310,170 311,170 312,170 313,169.9 314,169.9 315,169.9 316,169.9 317,169.9 318,170 319,170 320,170 321,170 322,169.9 323,169.8 324,169.6 325,169.3 326,169 327,168.7 328,168.4 329,168.2 330,168 331,168 332,168.1 333,168.3 334,168.5 335,168.9 336,169.2 337,169.5 338,169.8 339,169.9 340,170 341,169.9 342,169.8 343,169.6 344,169.3 345,169 346,168.8 347,168.6 348,168.5 349,168.4 350,168.5 351,168.6 352,168.8 353,169.1 354,169.3 355,169.5 356,169.7 357,169.9 358,169.9 359,170 360,170 361,170 362,170 363,170 364,169.9 365,169.9 366,170 367,170 368,170 369,170 370,170" style="stroke-width:2"/>
+      </svg>
+      <figcaption>Double-slit <span class="key-1">fringes</span> inside the single-slit <span class="key-2">envelope</span> (dashed). Fringes that fall where the envelope is zero are missing.</figcaption>
+    </figure>
+    <ul>
+      <li>The fringes near the centre are brightest. Further out they fade, following the envelope.</li>
+      <li>Where a double-slit bright fringe would fall on a single-slit minimum, it is <strong>missing</strong>.</li>
+      <li>Narrower slits make a wider envelope, so more fringes are clearly visible.</li>
+    </ul>
+
+    <h2 id="grating">11. Multiple slits and diffraction gratings <span class="tag hl">HL</span></h2>
+    <p>With more equally spaced slits (spacing $d$), the bright maxima stay in the <strong>same positions</strong> as for two slits. But they become much <strong>narrower and brighter</strong>, with very faint secondary maxima between them. A <strong>diffraction grating</strong> has hundreds of lines per millimetre, so its maxima are extremely sharp. That makes it ideal for measuring wavelengths precisely.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 200" role="img" aria-labelledby="c3ht">
+        <title id="c3ht">Comparison of interference patterns. Two slits give broad maxima, drawn dashed. Six slits with the same spacing give maxima at the same positions, but much narrower, with tiny secondary maxima between them.</title>
+        <line class="axis" x1="10" y1="170" x2="372" y2="170" marker-end="url(#ah3)"/>
+        <line class="axis" x1="190" y1="176" x2="190" y2="12" marker-end="url(#ah3)"/>
+        <text x="198" y="24">I</text><text x="356" y="192">θ</text>
+        <polyline class="l2 thin dash" points="10,30 11,30.4 12,31.5 13,33.4 14,36.1 15,39.4 16,43.4 17,48 18,53.2 19,58.9 20,65 21,71.5 22,78.4 23,85.4 24,92.7 25,100 26,107.3 27,114.6 28,121.6 29,128.5 30,135 31,141.1 32,146.8 33,152 34,156.6 35,160.6 36,163.9 37,166.6 38,168.5 39,169.6 40,170 41,169.6 42,168.5 43,166.6 44,163.9 45,160.6 46,156.6 47,152 48,146.8 49,141.1 50,135 51,128.5 52,121.6 53,114.6 54,107.3 55,100 56,92.7 57,85.4 58,78.4 59,71.5 60,65 61,58.9 62,53.2 63,48 64,43.4 65,39.4 66,36.1 67,33.4 68,31.5 69,30.4 70,30 71,30.4 72,31.5 73,33.4 74,36.1 75,39.4 76,43.4 77,48 78,53.2 79,58.9 80,65 81,71.5 82,78.4 83,85.4 84,92.7 85,100 86,107.3 87,114.6 88,121.6 89,128.5 90,135 91,141.1 92,146.8 93,152 94,156.6 95,160.6 96,163.9 97,166.6 98,168.5 99,169.6 100,170 101,169.6 102,168.5 103,166.6 104,163.9 105,160.6 106,156.6 107,152 108,146.8 109,141.1 110,135 111,128.5 112,121.6 113,114.6 114,107.3 115,100 116,92.7 117,85.4 118,78.4 119,71.5 120,65 121,58.9 122,53.2 123,48 124,43.4 125,39.4 126,36.1 127,33.4 128,31.5 129,30.4 130,30 131,30.4 132,31.5 133,33.4 134,36.1 135,39.4 136,43.4 137,48 138,53.2 139,58.9 140,65 141,71.5 142,78.4 143,85.4 144,92.7 145,100 146,107.3 147,114.6 148,121.6 149,128.5 150,135 151,141.1 152,146.8 153,152 154,156.6 155,160.6 156,163.9 157,166.6 158,168.5 159,169.6 160,170 161,169.6 162,168.5 163,166.6 164,163.9 165,160.6 166,156.6 167,152 168,146.8 169,141.1 170,135 171,128.5 172,121.6 173,114.6 174,107.3 175,100 176,92.7 177,85.4 178,78.4 179,71.5 180,65 181,58.9 182,53.2 183,48 184,43.4 185,39.4 186,36.1 187,33.4 188,31.5 189,30.4 190,30 191,30.4 192,31.5 193,33.4 194,36.1 195,39.4 196,43.4 197,48 198,53.2 199,58.9 200,65 201,71.5 202,78.4 203,85.4 204,92.7 205,100 206,107.3 207,114.6 208,121.6 209,128.5 210,135 211,141.1 212,146.8 213,152 214,156.6 215,160.6 216,163.9 217,166.6 218,168.5 219,169.6 220,170 221,169.6 222,168.5 223,166.6 224,163.9 225,160.6 226,156.6 227,152 228,146.8 229,141.1 230,135 231,128.5 232,121.6 233,114.6 234,107.3 235,100 236,92.7 237,85.4 238,78.4 239,71.5 240,65 241,58.9 242,53.2 243,48 244,43.4 245,39.4 246,36.1 247,33.4 248,31.5 249,30.4 250,30 251,30.4 252,31.5 253,33.4 254,36.1 255,39.4 256,43.4 257,48 258,53.2 259,58.9 260,65 261,71.5 262,78.4 263,85.4 264,92.7 265,100 266,107.3 267,114.6 268,121.6 269,128.5 270,135 271,141.1 272,146.8 273,152 274,156.6 275,160.6 276,163.9 277,166.6 278,168.5 279,169.6 280,170 281,169.6 282,168.5 283,166.6 284,163.9 285,160.6 286,156.6 287,152 288,146.8 289,141.1 290,135 291,128.5 292,121.6 293,114.6 294,107.3 295,100 296,92.7 297,85.4 298,78.4 299,71.5 300,65 301,58.9 302,53.2 303,48 304,43.4 305,39.4 306,36.1 307,33.4 308,31.5 309,30.4 310,30 311,30.4 312,31.5 313,33.4 314,36.1 315,39.4 316,43.4 317,48 318,53.2 319,58.9 320,65 321,71.5 322,78.4 323,85.4 324,92.7 325,100 326,107.3 327,114.6 328,121.6 329,128.5 330,135 331,141.1 332,146.8 333,152 334,156.6 335,160.6 336,163.9 337,166.6 338,168.5 339,169.6 340,170 341,169.6 342,168.5 343,166.6 344,163.9 345,160.6 346,156.6 347,152 348,146.8 349,141.1 350,135 351,128.5 352,121.6 353,114.6 354,107.3 355,100 356,92.7 357,85.4 358,78.4 359,71.5 360,65 361,58.9 362,53.2 363,48 364,43.4 365,39.4 366,36.1 367,33.4 368,31.5 369,30.4 370,30"/>
+        <polyline class="l1" points="10,30 10.5,31.1 11,34.4 11.5,39.8 12,47 12.5,55.9 13,66 13.5,77 14,88.6 14.5,100.4 15,111.9 15.5,123 16,133.2 16.5,142.3 17,150.2 17.5,156.7 18,161.9 18.5,165.7 19,168.2 19.5,169.6 20,170 20.5,169.7 21,168.7 21.5,167.5 22,166.1 22.5,164.8 23,163.6 23.5,162.7 24,162.1 24.5,162 25,162.2 25.5,162.8 26,163.6 26.5,164.7 27,165.8 27.5,166.9 28,167.9 28.5,168.8 29,169.5 29.5,169.9 30,170 30.5,169.9 31,169.5 31.5,169 32,168.4 32.5,167.7 33,167.1 33.5,166.5 34,166.1 34.5,165.9 35,165.8 35.5,166 36,166.3 36.5,166.8 37,167.4 37.5,168 38,168.6 38.5,169.2 39,169.6 39.5,169.9 40,170 40.5,169.9 41,169.6 41.5,169.2 42,168.6 42.5,168 43,167.4 43.5,166.8 44,166.3 44.5,166 45,165.8 45.5,165.9 46,166.1 46.5,166.5 47,167.1 47.5,167.7 48,168.4 48.5,169 49,169.5 49.5,169.9 50,170 50.5,169.9 51,169.5 51.5,168.8 52,167.9 52.5,166.9 53,165.8 53.5,164.7 54,163.6 54.5,162.8 55,162.2 55.5,162 56,162.1 56.5,162.7 57,163.6 57.5,164.8 58,166.1 58.5,167.5 59,168.7 59.5,169.7 60,170 60.5,169.6 61,168.2 61.5,165.7 62,161.9 62.5,156.7 63,150.2 63.5,142.3 64,133.2 64.5,123 65,111.9 65.5,100.4 66,88.6 66.5,77 67,66 67.5,55.9 68,47 68.5,39.8 69,34.4 69.5,31.1 70,30 70.5,31.1 71,34.4 71.5,39.8 72,47 72.5,55.9 73,66 73.5,77 74,88.6 74.5,100.4 75,111.9 75.5,123 76,133.2 76.5,142.3 77,150.2 77.5,156.7 78,161.9 78.5,165.7 79,168.2 79.5,169.6 80,170 80.5,169.7 81,168.7 81.5,167.5 82,166.1 82.5,164.8 83,163.6 83.5,162.7 84,162.1 84.5,162 85,162.2 85.5,162.8 86,163.6 86.5,164.7 87,165.8 87.5,166.9 88,167.9 88.5,168.8 89,169.5 89.5,169.9 90,170 90.5,169.9 91,169.5 91.5,169 92,168.4 92.5,167.7 93,167.1 93.5,166.5 94,166.1 94.5,165.9 95,165.8 95.5,166 96,166.3 96.5,166.8 97,167.4 97.5,168 98,168.6 98.5,169.2 99,169.6 99.5,169.9 100,170 100.5,169.9 101,169.6 101.5,169.2 102,168.6 102.5,168 103,167.4 103.5,166.8 104,166.3 104.5,166 105,165.8 105.5,165.9 106,166.1 106.5,166.5 107,167.1 107.5,167.7 108,168.4 108.5,169 109,169.5 109.5,169.9 110,170 110.5,169.9 111,169.5 111.5,168.8 112,167.9 112.5,166.9 113,165.8 113.5,164.7 114,163.6 114.5,162.8 115,162.2 115.5,162 116,162.1 116.5,162.7 117,163.6 117.5,164.8 118,166.1 118.5,167.5 119,168.7 119.5,169.7 120,170 120.5,169.6 121,168.2 121.5,165.7 122,161.9 122.5,156.7 123,150.2 123.5,142.3 124,133.2 124.5,123 125,111.9 125.5,100.4 126,88.6 126.5,77 127,66 127.5,55.9 128,47 128.5,39.8 129,34.4 129.5,31.1 130,30 130.5,31.1 131,34.4 131.5,39.8 132,47 132.5,55.9 133,66 133.5,77 134,88.6 134.5,100.4 135,111.9 135.5,123 136,133.2 136.5,142.3 137,150.2 137.5,156.7 138,161.9 138.5,165.7 139,168.2 139.5,169.6 140,170 140.5,169.7 141,168.7 141.5,167.5 142,166.1 142.5,164.8 143,163.6 143.5,162.7 144,162.1 144.5,162 145,162.2 145.5,162.8 146,163.6 146.5,164.7 147,165.8 147.5,166.9 148,167.9 148.5,168.8 149,169.5 149.5,169.9 150,170 150.5,169.9 151,169.5 151.5,169 152,168.4 152.5,167.7 153,167.1 153.5,166.5 154,166.1 154.5,165.9 155,165.8 155.5,166 156,166.3 156.5,166.8 157,167.4 157.5,168 158,168.6 158.5,169.2 159,169.6 159.5,169.9 160,170 160.5,169.9 161,169.6 161.5,169.2 162,168.6 162.5,168 163,167.4 163.5,166.8 164,166.3 164.5,166 165,165.8 165.5,165.9 166,166.1 166.5,166.5 167,167.1 167.5,167.7 168,168.4 168.5,169 169,169.5 169.5,169.9 170,170 170.5,169.9 171,169.5 171.5,168.8 172,167.9 172.5,166.9 173,165.8 173.5,164.7 174,163.6 174.5,162.8 175,162.2 175.5,162 176,162.1 176.5,162.7 177,163.6 177.5,164.8 178,166.1 178.5,167.5 179,168.7 179.5,169.7 180,170 180.5,169.6 181,168.2 181.5,165.7 182,161.9 182.5,156.7 183,150.2 183.5,142.3 184,133.2 184.5,123 185,111.9 185.5,100.4 186,88.6 186.5,77 187,66 187.5,55.9 188,47 188.5,39.8 189,34.4 189.5,31.1 190,30 190.5,31.1 191,34.4 191.5,39.8 192,47 192.5,55.9 193,66 193.5,77 194,88.6 194.5,100.4 195,111.9 195.5,123 196,133.2 196.5,142.3 197,150.2 197.5,156.7 198,161.9 198.5,165.7 199,168.2 199.5,169.6 200,170 200.5,169.7 201,168.7 201.5,167.5 202,166.1 202.5,164.8 203,163.6 203.5,162.7 204,162.1 204.5,162 205,162.2 205.5,162.8 206,163.6 206.5,164.7 207,165.8 207.5,166.9 208,167.9 208.5,168.8 209,169.5 209.5,169.9 210,170 210.5,169.9 211,169.5 211.5,169 212,168.4 212.5,167.7 213,167.1 213.5,166.5 214,166.1 214.5,165.9 215,165.8 215.5,166 216,166.3 216.5,166.8 217,167.4 217.5,168 218,168.6 218.5,169.2 219,169.6 219.5,169.9 220,170 220.5,169.9 221,169.6 221.5,169.2 222,168.6 222.5,168 223,167.4 223.5,166.8 224,166.3 224.5,166 225,165.8 225.5,165.9 226,166.1 226.5,166.5 227,167.1 227.5,167.7 228,168.4 228.5,169 229,169.5 229.5,169.9 230,170 230.5,169.9 231,169.5 231.5,168.8 232,167.9 232.5,166.9 233,165.8 233.5,164.7 234,163.6 234.5,162.8 235,162.2 235.5,162 236,162.1 236.5,162.7 237,163.6 237.5,164.8 238,166.1 238.5,167.5 239,168.7 239.5,169.7 240,170 240.5,169.6 241,168.2 241.5,165.7 242,161.9 242.5,156.7 243,150.2 243.5,142.3 244,133.2 244.5,123 245,111.9 245.5,100.4 246,88.6 246.5,77 247,66 247.5,55.9 248,47 248.5,39.8 249,34.4 249.5,31.1 250,30 250.5,31.1 251,34.4 251.5,39.8 252,47 252.5,55.9 253,66 253.5,77 254,88.6 254.5,100.4 255,111.9 255.5,123 256,133.2 256.5,142.3 257,150.2 257.5,156.7 258,161.9 258.5,165.7 259,168.2 259.5,169.6 260,170 260.5,169.7 261,168.7 261.5,167.5 262,166.1 262.5,164.8 263,163.6 263.5,162.7 264,162.1 264.5,162 265,162.2 265.5,162.8 266,163.6 266.5,164.7 267,165.8 267.5,166.9 268,167.9 268.5,168.8 269,169.5 269.5,169.9 270,170 270.5,169.9 271,169.5 271.5,169 272,168.4 272.5,167.7 273,167.1 273.5,166.5 274,166.1 274.5,165.9 275,165.8 275.5,166 276,166.3 276.5,166.8 277,167.4 277.5,168 278,168.6 278.5,169.2 279,169.6 279.5,169.9 280,170 280.5,169.9 281,169.6 281.5,169.2 282,168.6 282.5,168 283,167.4 283.5,166.8 284,166.3 284.5,166 285,165.8 285.5,165.9 286,166.1 286.5,166.5 287,167.1 287.5,167.7 288,168.4 288.5,169 289,169.5 289.5,169.9 290,170 290.5,169.9 291,169.5 291.5,168.8 292,167.9 292.5,166.9 293,165.8 293.5,164.7 294,163.6 294.5,162.8 295,162.2 295.5,162 296,162.1 296.5,162.7 297,163.6 297.5,164.8 298,166.1 298.5,167.5 299,168.7 299.5,169.7 300,170 300.5,169.6 301,168.2 301.5,165.7 302,161.9 302.5,156.7 303,150.2 303.5,142.3 304,133.2 304.5,123 305,111.9 305.5,100.4 306,88.6 306.5,77 307,66 307.5,55.9 308,47 308.5,39.8 309,34.4 309.5,31.1 310,30 310.5,31.1 311,34.4 311.5,39.8 312,47 312.5,55.9 313,66 313.5,77 314,88.6 314.5,100.4 315,111.9 315.5,123 316,133.2 316.5,142.3 317,150.2 317.5,156.7 318,161.9 318.5,165.7 319,168.2 319.5,169.6 320,170 320.5,169.7 321,168.7 321.5,167.5 322,166.1 322.5,164.8 323,163.6 323.5,162.7 324,162.1 324.5,162 325,162.2 325.5,162.8 326,163.6 326.5,164.7 327,165.8 327.5,166.9 328,167.9 328.5,168.8 329,169.5 329.5,169.9 330,170 330.5,169.9 331,169.5 331.5,169 332,168.4 332.5,167.7 333,167.1 333.5,166.5 334,166.1 334.5,165.9 335,165.8 335.5,166 336,166.3 336.5,166.8 337,167.4 337.5,168 338,168.6 338.5,169.2 339,169.6 339.5,169.9 340,170 340.5,169.9 341,169.6 341.5,169.2 342,168.6 342.5,168 343,167.4 343.5,166.8 344,166.3 344.5,166 345,165.8 345.5,165.9 346,166.1 346.5,166.5 347,167.1 347.5,167.7 348,168.4 348.5,169 349,169.5 349.5,169.9 350,170 350.5,169.9 351,169.5 351.5,168.8 352,167.9 352.5,166.9 353,165.8 353.5,164.7 354,163.6 354.5,162.8 355,162.2 355.5,162 356,162.1 356.5,162.7 357,163.6 357.5,164.8 358,166.1 358.5,167.5 359,168.7 359.5,169.7 360,170 360.5,169.6 361,168.2 361.5,165.7 362,161.9 362.5,156.7 363,150.2 363.5,142.3 364,133.2 364.5,123 365,111.9 365.5,100.4 366,88.6 366.5,77 367,66 367.5,55.9 368,47 368.5,39.8 369,34.4 369.5,31.1 370,30" style="stroke-width:2"/>
+      </svg>
+      <figcaption>Same slit spacing: <span class="key-2">2 slits</span> (dashed, broad maxima) and <span class="key-1">6 slits</span> (sharp maxima in the same places). Heights are scaled to match. In reality, more slits also means much brighter maxima.</figcaption>
+    </figure>
+    <p>For a grating at normal incidence, the bright maxima are at angles $\theta$ given by:</p>
+    <div class="key">$$n\lambda = d\sin\theta$$
+      <p style="margin:0">$n$ is the order (0 for the straight-through central maximum, then 1, 2, …) and $d$ is the line spacing. A grating with $N$ lines per metre has $d = 1/N$.</p></div>
+    <ul>
+      <li>This formula doesn't use the small-angle approximation. Grating angles are often large.</li>
+      <li>Since $\sin\theta \le 1$, the highest possible order is the largest whole number with $n \le d/\lambda$.</li>
+      <li><strong>White light</strong> gives a white central maximum ($n = 0$, where all wavelengths are in phase). Each other order is a full <strong>spectrum</strong>, violet nearest the centre and red furthest out. Higher orders can overlap. Gratings are used in spectrometers to identify elements from the light they emit (E.1).</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: a diffraction grating <span class="tag hl">HL</span></h3>
+      <p>Green light of wavelength 550 nm falls normally on a grating with 500 lines per mm. Find the angles of the maxima, and the highest order visible.</p>
+      <p>$d = \dfrac{1}{500\times10^{3}} = 2.0\times10^{-6}$ m.<br>
+      $n = 1$: $\sin\theta = \dfrac{550\times10^{-9}}{2.0\times10^{-6}} = 0.275$, so $\theta = 16°$. &nbsp; $n = 2$: $\sin\theta = 0.55$, so $\theta = 33°$. &nbsp; $n = 3$: $\sin\theta = 0.825$, so $\theta = 56°$.<br>
+      $n = 4$ would need $\sin\theta = 1.1$, which is impossible. So the <strong>highest order is 3</strong> ($d/\lambda = 3.6$).</p>
+    </div>
+    <p class="hl-end">End of the HL-only content for C.3.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">12. Common mistakes</h2>
+    <ul>
+      <li><strong>Measuring angles from the surface</strong> instead of from the normal.</li>
+      <li><strong>Thinking frequency changes on refraction.</strong> Speed and wavelength change; frequency doesn't.</li>
+      <li><strong>Saying total internal reflection can happen going into a denser medium.</strong> It only happens going into a medium with a lower refractive index.</li>
+      <li><strong>Saying diffraction changes the wavelength.</strong> Only the shape and direction of the wavefronts change.</li>
+      <li><strong>Forgetting the coherence condition</strong> for a steady interference pattern.</li>
+      <li><strong>Mixing up $d$ and $D$</strong> in $s = \lambda D/d$, or forgetting to convert mm and nm to m.</li>
+      <li><span class="tag hl">HL</span> <strong>Using degrees in $\theta = \lambda/b$.</strong> It gives $\theta$ in radians.</li>
+      <li><span class="tag hl">HL</span> <strong>Using the slit <em>width</em> $b$ in $n\lambda = d\sin\theta$,</strong> or the spacing $d$ in $\theta = \lambda/b$.</li>
+      <li><span class="tag hl">HL</span> <strong>Giving an order where $\sin\theta &gt; 1$.</strong> Always check that the order exists.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">13. Check your understanding</h2>
+    <details class="check">
+      <summary>Why does a straw in a glass of water look bent?</summary>
+      <p>Light from the underwater part of the straw refracts away from the normal as it leaves the water. Your brain assumes light travels in straight lines, so it traces the rays back to a point that appears higher than where the straw really is.</p>
+    </details>
+    <details class="check">
+      <summary>Why can you hear someone talking in the next room through an open door, but not see them?</summary>
+      <p>Sound wavelengths (around 1 m) are similar to the width of the door, so sound diffracts strongly around it. Light wavelengths are about a million times smaller than the door, so light barely diffracts and travels in straight lines.</p>
+    </details>
+    <details class="check">
+      <summary>In a double-slit experiment, what happens to the fringe spacing if the red laser is swapped for a blue one?</summary>
+      <p>Blue light has a shorter wavelength, and $s = \lambda D/d$, so the fringes get closer together.</p>
+    </details>
+    <details class="check">
+      <summary>Why can't two separate torches produce a visible interference pattern?</summary>
+      <p>They aren't coherent. The phase difference between them changes randomly and very rapidly, so any pattern shifts too fast to see and averages out to even illumination.</p>
+    </details>
+    <details class="check">
+      <summary><span class="tag hl">HL</span> A single slit is made narrower. What happens to the diffraction pattern?</summary>
+      <p>It gets wider ($\theta = \lambda/b$, so a smaller $b$ gives a larger $\theta$) and dimmer, because less light gets through.</p>
+    </details>
+    <details class="check">
+      <summary><span class="tag hl">HL</span> Why are diffraction gratings better than double slits for measuring wavelengths?</summary>
+      <p>With many slits, the maxima are much narrower and brighter, so their positions (angles) can be measured far more precisely.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=C.3">Practise C.3 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>

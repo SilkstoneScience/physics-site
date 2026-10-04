@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" font-family="Arial, sans-serif" font-size="15" fill="#1c2430">
+  <defs>
+    <marker id="h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1f5fbf"/></marker>
+    <marker id="hk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1c2430"/></marker>
+  </defs>
+  <!-- circle, viewed from above -->
+  <circle cx="150" cy="150" r="90" fill="none" stroke="#b9c1cc" stroke-width="2" stroke-dasharray="6 5"/>
+  <circle cx="150" cy="150" r="4" fill="#1c2430"/>
+  <line x1="150" y1="150" x2="240" y2="150" stroke="#b9c1cc" stroke-width="1.5"/>
+  <!-- direction of motion (anticlockwise) -->
+  <path d="M 90 83 A 90 90 0 0 0 70 115" fill="none" stroke="#1c2430" stroke-width="2" marker-end="url(#hk)"/>
+  <text x="34" y="92">motion</text>
+  <!-- ball at P -->
+  <circle cx="240" cy="150" r="9" fill="#c2561a"/>
+  <text x="250" y="176">P</text>
+  <!-- options -->
+  <line x1="240" y1="140" x2="240" y2="45" stroke="#1f5fbf" stroke-width="2.5" marker-end="url(#h)"/>
+  <text x="248" y="52" font-weight="bold">A</text>
+  <line x1="250" y1="150" x2="340" y2="150" stroke="#1f5fbf" stroke-width="2.5" marker-end="url(#h)"/>
+  <text x="330" y="140" font-weight="bold">B</text>
+  <path d="M 246 140 Q 300 90 330 50" fill="none" stroke="#1f5fbf" stroke-width="2.5" marker-end="url(#h)"/>
+  <text x="322" y="78" font-weight="bold">C</text>
+  <line x1="230" y1="150" x2="175" y2="150" stroke="#1f5fbf" stroke-width="2.5" marker-end="url(#h)"/>
+  <text x="196" y="140" font-weight="bold">D</text>
+</svg>

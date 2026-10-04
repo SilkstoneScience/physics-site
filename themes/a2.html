@@ -4,15 +4,514 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>A.2 Forces and momentum · DP Physics</title>
+  <meta name="description" content="IB DP Physics A.2 Forces and momentum: Newton's laws, free-body diagrams, contact and field forces, momentum, impulse, collisions, explosions and circular motion.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="A.2">
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
+</head>
+<body data-root="../" data-section="themes" data-topic="A.2">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="a.html">Theme A Space, time and motion</a></p>
     <h1><span class="code">A.2</span>Forces and momentum</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <p class="lead">A.1 described motion. A.2 explains it: forces change motion, Newton's three laws tell us how, and momentum lets us predict what happens when objects collide or explode. The topic ends with circular motion, where a force changes an object's direction rather than its speed.</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Theories</span><span class="tag">Falsification</span><span class="tag">Models</span><span class="tag">Science as a shared endeavour</span><span class="tag">Global impact of science</span></div>
+          <p><strong>Theories and paradigm shifts.</strong> Aristotle taught that a force is needed to keep something moving. Galileo and Newton replaced this with a new idea: force <em>changes</em> motion. Newton's laws explained everything from falling apples to the orbits of planets, using one set of rules.</p>
+          <p><strong>Falsification.</strong> Over 200 years later, experiments showed that Newton's laws break down at speeds close to the speed of light (relativity) and at the scale of atoms (quantum physics). They are still used for almost all engineering. Their limits are now simply known.</p>
+          <p><strong>A shared endeavour.</strong> Newton built on the work of Galileo, Kepler, Descartes and others. He famously wrote of "standing on the shoulders of giants", a phrase he borrowed from writers centuries older.</p>
+          <p><strong>Models and impact.</strong> Point particles, frictionless surfaces and light strings are deliberate simplifications. Momentum and impulse are behind crumple zones, airbags and seatbelts, which save many lives every year.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>Can a law be useful without being true?</strong> Newton's laws were treated as certain for two centuries before their limits were found, and space agencies still use them to steer spacecraft. In what sense are they "knowledge" if we know they aren't exactly right?</li>
+            <li><strong>Who owns a discovery?</strong> Laws are named after single people, like Newton and Hooke, but every discovery builds on others' work. Is scientific knowledge made by individuals or by communities?</li>
+            <li><strong>Can we know the future?</strong> In the 1700s some thinkers argued that if every particle obeys Newton's laws, a clever enough mind could calculate the whole future from the present. What limits are there on what science can predict?</li>
+            <li><strong>Should we trust our senses?</strong> In a car turning a corner you feel thrown outwards, yet physics says no outward force acts on you. When experience and theory disagree, how do we decide which to believe?</li>
+            <li><strong>Can we know what we can't perceive?</strong> We can't feel the Earth spinning, but a long, freely swinging pendulum (Foucault's pendulum) slowly changes direction and reveals it. How can we have knowledge of things we can't observe directly?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong> (in the same order as the three lesson presentations)
+      <p style="margin:8px 0 0"><a href="#a2a"><strong>A.2a Forces</strong></a></p>
+      <ol>
+        <li><a href="#forces">Forces and free-body diagrams</a></li>
+        <li><a href="#first">Newton's first law and equilibrium</a></li>
+        <li><a href="#second">Newton's second law</a></li>
+        <li><a href="#contact">Contact forces</a></li>
+        <li><a href="#field">Field forces</a></li>
+        <li><a href="#third">Newton's third law</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><a href="#a2b"><strong>A.2b Momentum</strong></a></p>
+      <ol start="7">
+        <li><a href="#momentum">Momentum and impulse</a></li>
+        <li><a href="#conservation">Conservation of momentum, collisions and explosions</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><a href="#a2c"><strong>A.2c Circular motion</strong></a></p>
+      <ol start="9">
+        <li><a href="#circular">Circular motion</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><strong>Review</strong></p>
+      <ol start="10">
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <div class="part-banner" id="a2a"><span class="code">A.2a</span>Forces<p>Newton's laws, free-body diagrams, and the contact and field forces you need to know.</p></div>
+
+    <!-- ===================================================== -->
+    <h2 id="forces">1. Forces and free-body diagrams</h2>
+    <p>A <strong>force</strong> is an interaction between two bodies: a push or a pull. Forces are <strong>vectors</strong> and are measured in newtons (N). Every force has a <em>cause</em>: something else must be doing the pushing or pulling.</p>
+    <p>A <strong>free-body diagram</strong> shows a single object, often drawn as a dot or a box, with every force acting <em>on it</em> drawn as a labelled arrow. The length of each arrow shows the size of the force.</p>
+    <ul>
+      <li>Draw only forces acting <strong>on</strong> the object, never forces the object exerts on other things.</li>
+      <li>Weight acts from the centre of mass, straight down.</li>
+      <li>The normal force acts perpendicular to the surface. Friction acts parallel to the surface.</li>
+      <li>Use standard labels: $F_g$ or $mg$ (weight), $F_N$ (normal), $F_f$ (friction), $T$ (tension), $F_d$ (drag), $F_b$ (buoyancy).</li>
+    </ul>
+    <figure class="diagram">
+      <svg viewBox="0 0 400 270" role="img" aria-labelledby="f1t">
+        <title id="f1t">Free-body diagram of a box on a rough floor pulled by a rope at 30 degrees above the horizontal. Weight acts down, the normal force acts up and is shorter than the weight, friction acts to the left, and tension acts up and to the right along the rope.</title>
+        <line class="axis" x1="20" y1="200" x2="380" y2="200"/>
+        <rect x="150" y="130" width="100" height="70" class="axis"/>
+        <line class="l2" x1="200" y1="165" x2="200" y2="255" marker-end="url(#ah2)"/>
+        <text class="t2" x="210" y="252">mg</text>
+        <line class="l1" x1="200" y1="165" x2="200" y2="102" marker-end="url(#ah1)"/>
+        <text class="t1" x="172" y="98">F<tspan dy="5" font-size="13">N</tspan></text>
+        <line class="l1" x1="200" y1="165" x2="112" y2="165" marker-end="url(#ah1)"/>
+        <text class="t1" x="100" y="152">F<tspan dy="5" font-size="13">f</tspan></text>
+        <line class="l3" x1="200" y1="165" x2="298" y2="108" marker-end="url(#ah3)"/>
+        <text x="305" y="104">T</text>
+        <path class="axis" d="M240 165 A 40 40 0 0 0 234.6 145"/>
+        <text x="252" y="150">30°</text>
+      </svg>
+      <figcaption>A box pulled by a rope at 30°. <span class="key-1">Contact forces</span> (normal and friction) act at the surface. <span class="key-2">Weight</span> is a field force. The normal force is <em>less</em> than the weight here, because the rope also pulls partly upwards.</figcaption>
+    </figure>
+    <h3>Finding the resultant force</h3>
+    <p>The <strong>resultant</strong> (net) force is the vector sum of all the forces. In two dimensions, <strong>resolve</strong> each force into perpendicular components, add the components in each direction, and then combine them:</p>
+    <div class="key">
+      $$F_x = F\cos\theta \qquad F_y = F\sin\theta$$
+      $$F_{\text{net}} = \sqrt{F_{x,\text{net}}^2 + F_{y,\text{net}}^2}$$
+    </div>
+    <p>Choose axes that make the problem easy. On a slope, use axes parallel and perpendicular to the slope. The weight then has components $mg\sin\theta$ down the slope and $mg\cos\theta$ into the slope.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="first">2. Newton's first law and translational equilibrium</h2>
+    <div class="key"><strong>Newton's first law:</strong> a body stays at rest, or keeps moving at constant velocity, unless a resultant external force acts on it.</div>
+    <p>This means a force is needed to <em>change</em> motion, not to keep it going. A hockey puck slides a long way on ice because there is very little friction to slow it. The tendency of a body to resist changes to its motion is called <strong>inertia</strong>, and mass is a measure of it.</p>
+    <p>A body with zero resultant force is in <strong>translational equilibrium</strong>. It is either at rest or moving at constant velocity, and the forces in every direction balance: $\sum F_x = 0$ and $\sum F_y = 0$.</p>
+    <div class="worked">
+      <h3>Worked example: a hanging lamp</h3>
+      <p>A lamp of mass 4.0 kg hangs from two identical cables. Each cable makes an angle of 30° with the horizontal. Find the tension in each cable.</p>
+      <p>The lamp is in equilibrium. Horizontally, the two tensions' components cancel by symmetry. Vertically, the upward components balance the weight:</p>
+      $$2T\sin 30° = mg$$
+      $$T = \frac{4.0 \times 9.8}{2 \times 0.50} = 39 \text{ N}$$
+      <p>Each cable carries the full weight of the lamp, even though there are two cables. The flatter the cables, the larger the tension. A washing line pulled perfectly straight would need an infinite tension.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="second">3. Newton's second law</h2>
+    <div class="key"><strong>Newton's second law:</strong> the resultant force on a body is proportional to its rate of change of momentum. For a body of constant mass:
+      $$F = ma$$
+      where $F$ is the <strong>resultant</strong> force and $a$ is in the same direction as $F$. (The momentum form, $F = \dfrac{\Delta p}{\Delta t}$, is in <a href="#momentum">section 7</a>.)</div>
+    <p>One newton is the resultant force that gives a 1 kg mass an acceleration of 1 m s$^{-2}$. The first law is just the special case $F = 0 \Rightarrow a = 0$.</p>
+    <div class="worked">
+      <h3>Worked example: pulling a box against friction</h3>
+      <p>A 12 kg box is pulled across a horizontal floor by a horizontal force of 60 N. The coefficient of dynamic friction is 0.30. Find the acceleration.</p>
+      <p>Vertically there is no acceleration, so $F_N = mg = 12 \times 9.8 = 118$ N.<br>
+      Friction: $F_f = \mu_d F_N = 0.30 \times 118 = 35$ N, opposing the motion.<br>
+      Resultant force: $60 - 35 = 25$ N, so $a = \dfrac{F}{m} = \dfrac{25}{12} = 2.1\ \text{m s}^{-2}$.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: a person in a lift</h3>
+      <p>A 55 kg student stands on bathroom scales in a lift that accelerates <em>upwards</em> at 1.5 $\text{m s}^{-2}$. What do the scales read?</p>
+      <p>The scales read the normal force $F_N$. Take up as positive: $F_N - mg = ma$, so $F_N = m(g + a) = 55(9.8 + 1.5) = 620$ N.<br>
+      This is more than the student's weight (540 N), so they feel heavier. When accelerating downwards, the scales would read $m(g - a)$, and the student would feel lighter.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: sliding down a slope</h3>
+      <p>A sledge is released from rest at the top of a smooth (frictionless) icy slope at 20° to the horizontal. The slope is 15 m long. Find its acceleration and its speed at the bottom.</p>
+      <p>Use axes along and perpendicular to the slope. The normal force is perpendicular to the slope, so only the weight component $mg\sin 20°$ acts along it:<br>
+      $ma = mg\sin 20°$, so $a = 9.8 \times 0.342 = 3.4\ \text{m s}^{-2}$. The mass cancels.<br>
+      From A.1: $v^2 = u^2 + 2as = 0 + 2(3.35)(15)$, so $v = 10\ \text{m s}^{-1}$.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="contact">4. Contact forces</h2>
+    <h3>Normal force</h3>
+    <p>The <strong>normal force</strong> $F_N$ is the component of the contact force perpendicular to a surface. It pushes back on a body that presses on the surface. It adjusts its size to whatever is needed, up to the point where the surface breaks. It is not always equal to the weight: think of the lift, a slope, or a rope pulling upwards.</p>
+
+    <h3>Tension</h3>
+    <p><strong>Tension</strong> $T$ is the pulling force in a stretched string, rope or cable. It acts along the string, away from the body it is attached to. A string can only pull, never push. For a light (massless) string over a frictionless pulley, the tension is the same all the way along.</p>
+
+    <h3>Elastic restoring force: Hooke's law</h3>
+    <p>When a spring is stretched or compressed by $x$, it pulls or pushes back with a <strong>restoring force</strong>:</p>
+    <div class="key">$$F_H = -kx$$</div>
+    <p>$k$ is the <strong>spring constant</strong> (N m$^{-1}$): a stiff spring has a large $k$. The minus sign shows the force is opposite to the displacement, always trying to return the spring to its natural length. Hooke's law only holds up to the <em>limit of proportionality</em>. In C.1 this restoring force leads to simple harmonic motion.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 220 190" class="small" role="img" aria-labelledby="f4t">
+        <title id="f4t">Graph of force against extension for a spring obeying Hooke's law: a straight line through the origin whose gradient is the spring constant k.</title>
+        <line class="axis" x1="35" y1="160" x2="210" y2="160" marker-end="url(#ah3)"/>
+        <line class="axis" x1="35" y1="160" x2="35" y2="15" marker-end="url(#ah3)"/>
+        <text x="196" y="182">x</text><text x="14" y="28">F</text>
+        <line class="l1" x1="35" y1="160" x2="185" y2="40"/>
+      </svg>
+      <figcaption>A spring that obeys Hooke's law: force against extension is a straight line with <span class="key-1">gradient</span> $k$.</figcaption>
+    </figure>
+    <p><em>Example:</em> a spring with $k = 40\ \text{N m}^{-1}$ stretched by 0.15 m pulls back with $40 \times 0.15 = 6.0$ N.</p>
+
+    <h3>Density, pressure and buoyancy</h3>
+    <p><strong>Density</strong> is mass per unit volume: $\rho = \dfrac{m}{V}$, in kg m$^{-3}$. Water has a density of about 1000 kg m$^{-3}$, so 1 litre of water has a mass of 1 kg.</p>
+    <p>A fluid presses on everything in it, and the <strong>pressure</strong> increases with depth because there is more fluid above pushing down. At depth $h$, the extra pressure is $P = \rho g h$. (You'll meet pressure properly in B.3. Here it simply explains where buoyancy comes from.)</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 300 230" class="small" role="img" aria-labelledby="fbt">
+        <title id="fbt">A block fully under water. Short arrows push down on its top surface; longer arrows push up on its bottom surface, because the pressure is greater at greater depth. The difference is an upward buoyancy force.</title>
+        <rect x="10" y="20" width="280" height="200" class="area"/>
+        <line class="axis" x1="10" y1="20" x2="290" y2="20"/>
+        <rect x="100" y="85" width="100" height="70" class="axis" style="fill:var(--surface)"/>
+        <line class="l2 thin" x1="120" y1="58" x2="120" y2="82" marker-end="url(#ah2)"/>
+        <line class="l2 thin" x1="150" y1="58" x2="150" y2="82" marker-end="url(#ah2)"/>
+        <line class="l2 thin" x1="180" y1="58" x2="180" y2="82" marker-end="url(#ah2)"/>
+        <line class="l1 thin" x1="120" y1="205" x2="120" y2="159" marker-end="url(#ah1)"/>
+        <line class="l1 thin" x1="150" y1="205" x2="150" y2="159" marker-end="url(#ah1)"/>
+        <line class="l1 thin" x1="180" y1="205" x2="180" y2="159" marker-end="url(#ah1)"/>
+      </svg>
+      <figcaption>Water pushes <span class="key-2">down on the top</span> of the block less than it pushes <span class="key-1">up on the bottom</span>, because the bottom is deeper. The difference is the buoyancy force.</figcaption>
+    </figure>
+    <p>For a block of height $h$ and top area $A$, the pressure difference between its bottom and top is $\rho g h$. So the net upward force is $\rho g h \times A = \rho g V$, which is the weight of the fluid the block displaces (<strong>Archimedes' principle</strong>):</p>
+    <div class="key">$$F_b = \rho V g$$</div>
+    <p>Here $\rho$ is the density of the <strong>fluid</strong> (not the object) and $V$ is the volume of fluid <strong>displaced</strong>. That is the volume of the object below the surface.</p>
+    <ul>
+      <li>If $F_b$ is less than the weight when the body is fully submerged, it sinks. This happens when the body is denser than the fluid.</li>
+      <li>A floating body sinks until it has displaced just enough fluid for $F_b = mg$.</li>
+    </ul>
+    <p><em>Example:</em> a 2.0 × 10$^{-3}$ m$^3$ block held fully under water feels $F_b = 1000 \times 2.0\times10^{-3} \times 9.8 = 20$ N upwards.</p>
+
+    <h3>Friction</h3>
+    <p><strong>Friction</strong> $F_f$ acts parallel to the surface and opposes sliding, or the tendency to slide.</p>
+    <ul>
+      <li><strong>Static friction</strong> acts when the surfaces are not sliding. It matches the applied force, up to a maximum value: $F_f \le \mu_s F_N$.</li>
+      <li><strong>Dynamic (kinetic) friction</strong> acts once sliding starts, and is roughly constant: $F_f = \mu_d F_N$.</li>
+      <li>$\mu_s$ and $\mu_d$ are the coefficients of static and dynamic friction. They have no units, and usually $\mu_d &lt; \mu_s$. That's why it is harder to start something sliding than to keep it sliding.</li>
+    </ul>
+    <figure class="diagram">
+      <svg viewBox="0 0 220 190" class="small" role="img" aria-labelledby="f3t">
+        <title id="f3t">Graph of friction force against applied force. Friction rises in a straight line equal to the applied force until it reaches a maximum, then drops to a lower constant value once sliding begins.</title>
+        <line class="axis" x1="35" y1="160" x2="210" y2="160" marker-end="url(#ah3)"/>
+        <line class="axis" x1="35" y1="160" x2="35" y2="15" marker-end="url(#ah3)"/>
+        <text x="196" y="182">F</text><text x="8" y="28">F<tspan dy="5" font-size="13">f</tspan></text>
+        <line class="grid dash" x1="35" y1="60" x2="125" y2="60"/>
+        <line class="l1" x1="35" y1="160" x2="125" y2="60"/>
+        <line class="l2" x1="125" y1="60" x2="125" y2="85"/>
+        <line class="l2" x1="125" y1="85" x2="205" y2="85"/>
+      </svg>
+      <figcaption>Friction against applied force. <span class="key-1">Static</span>: matches the push, up to $\mu_s F_N$. <span class="key-2">Dynamic</span>: constant at $\mu_d F_N$ once sliding.</figcaption>
+    </figure>
+    <h3>Measuring the coefficient of friction</h3>
+    <p>A neat way to measure $\mu_s$: put a block on a board and slowly raise one end until the block <em>just</em> starts to slip, at angle $\theta$. At that moment, static friction is at its maximum and balances the component of the weight down the slope:</p>
+    $$mg\sin\theta = \mu_s\, mg\cos\theta \quad\Rightarrow\quad \mu_s = \tan\theta$$
+    <p>For example, a block that starts to slip at 22° gives $\mu_s = \tan 22° = 0.40$. Lower the board until the block slides down at <em>constant velocity</em> (zero acceleration, so the forces balance again). The tangent of that smaller angle gives $\mu_d$.</p>
+    <div class="worked">
+      <h3>Worked example: will it move?</h3>
+      <p>A 20 kg crate rests on a floor where $\mu_s = 0.50$ and $\mu_d = 0.40$. A student pushes it horizontally with 80 N. Does it move?</p>
+      <p>Maximum static friction: $\mu_s F_N = 0.50 \times 20 \times 9.8 = 98$ N. The push (80 N) is less than this, so the crate <strong>stays still</strong>. The static friction is exactly 80 N, matching the push, not 98 N.<br>
+      To get it moving needs just over 98 N. Once it slides, friction drops to $0.40 \times 196 = 78$ N.</p>
+    </div>
+
+    <h3>Viscous drag</h3>
+    <p>A body moving through a fluid (a liquid or gas) experiences a <strong>drag force</strong> opposing its motion. A fluid's resistance to flowing is its <strong>viscosity</strong> $\eta$ (unit Pa s). Honey has a high viscosity and air a very low one. For a <strong>small sphere</strong> moving <strong>slowly</strong> (smooth, non-turbulent flow), Stokes' law gives:</p>
+    <div class="key">$$F_d = 6\pi\eta r v$$</div>
+    <p>So the drag is proportional to the radius and to the speed. A small sphere falling through oil speeds up until $F_d + F_b = mg$, and then falls at terminal speed. Measuring that speed is a standard way to find a fluid's viscosity.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="field">5. Field forces</h2>
+    <p>Some forces act at a distance, with no contact needed:</p>
+    <ul>
+      <li><strong>Gravitational force (weight):</strong> $F_g = mg$. Mass (kg) is the amount of matter and is the same everywhere. Weight (N) is a force and depends on $g$. On the Moon your mass is unchanged, but your weight is about one-sixth.</li>
+      <li><strong>Electric force</strong> $F_e$: between charged bodies. Like charges repel and unlike charges attract.</li>
+      <li><strong>Magnetic force</strong> $F_m$: on magnets, and on moving charges and currents in a magnetic field.</li>
+    </ul>
+    <p>You only need to recognise electric and magnetic forces and include them in free-body diagrams here. You'll calculate them in Theme D (Fields).</p>
+
+    <!-- ===================================================== -->
+    <h2 id="third">6. Newton's third law</h2>
+    <div class="key"><strong>Newton's third law:</strong> if body A exerts a force on body B, then body B exerts a force on body A that is equal in size and opposite in direction.</div>
+    <p>The two forces in a third-law pair:</p>
+    <ul>
+      <li>act on <strong>different</strong> bodies, so they never cancel each other out;</li>
+      <li>are always the <strong>same type</strong> of force (both gravitational, both contact, and so on);</li>
+      <li>act at the same time, for the same length of time.</li>
+    </ul>
+    <figure class="diagram">
+      <svg viewBox="0 0 400 200" role="img" aria-labelledby="f2t">
+        <title id="f2t">Two ice skaters, A and B, push each other apart. Skater A feels a push from B to the left. Skater B feels a push from A to the right. The two forces are equal in size.</title>
+        <circle cx="150" cy="100" r="50" class="axis"/><circle cx="250" cy="100" r="50" class="axis"/>
+        <text x="150" y="106" text-anchor="middle">A</text><text x="250" y="106" text-anchor="middle">B</text>
+        <line class="l2" x1="135" y1="100" x2="45" y2="100" marker-end="url(#ah2)"/>
+        <line class="l1" x1="265" y1="100" x2="355" y2="100" marker-end="url(#ah1)"/>
+        <text class="t2" x="105" y="182" text-anchor="middle">B pushes A</text>
+        <text class="t1" x="295" y="182" text-anchor="middle">A pushes B</text>
+      </svg>
+      <figcaption>Two skaters push apart. The forces are equal and opposite but act on <em>different</em> skaters, so each skater accelerates. The lighter skater has the larger acceleration.</figcaption>
+    </figure>
+    <p><strong>A classic trap:</strong> a book resting on a table has its weight (Earth pulls book down) and a normal force (table pushes book up). These are equal and opposite, but they are <strong>not</strong> a third-law pair. They act on the same body and are different types of force. They balance because of the <em>first</em> law. The real pairs are:</p>
+    <ul>
+      <li>Earth pulls book down ↔ book pulls Earth up (gravitational);</li>
+      <li>table pushes book up ↔ book pushes table down (contact).</li>
+    </ul>
+
+    <div class="part-banner" id="a2b"><span class="code">A.2b</span>Momentum<p>Momentum, impulse, and what is conserved in collisions and explosions.</p></div>
+
+    <!-- ===================================================== -->
+    <h2 id="momentum">7. Momentum and impulse</h2>
+    <p>The <strong>linear momentum</strong> of a body is its mass times its velocity. It is a vector, in the direction of the velocity:</p>
+    <div class="key">$$p = mv \qquad \text{unit: kg m s}^{-1}\ \text{(or N s)}$$</div>
+    <p>Newton actually wrote his second law in terms of momentum: the resultant force equals the rate of change of momentum.</p>
+    <div class="key">$$F = \frac{\Delta p}{\Delta t}$$
+      <p style="margin:0">$F = ma$ assumes the mass is constant. $F = \dfrac{\Delta p}{\Delta t}$ also works when the mass changes, for example a rocket burning fuel, sand pouring onto a conveyor belt, or water leaving a hose.</p></div>
+
+    <h3>Impulse</h3>
+    <p>A resultant force acting for a time gives an <strong>impulse</strong>, which equals the change in momentum:</p>
+    <div class="key">$$J = F\,\Delta t = \Delta p$$</div>
+    <p>Here $F$ is the <em>average</em> resultant force during the contact time $\Delta t$. In a real collision the force changes, and the impulse is the <strong>area under the force–time graph</strong>.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 230" role="img" aria-labelledby="f5t">
+        <title id="f5t">Force–time graph for a collision: the force rises from zero to a peak and falls back to zero. The area under the curve is the impulse. A dashed horizontal line shows the average force, which would give the same area over the same time.</title>
+        <path class="area" d="M60 195 C 120 195, 140 40, 200 40 C 260 40, 280 195, 340 195 Z"/>
+        <line class="axis" x1="50" y1="195" x2="360" y2="195" marker-end="url(#ah3)"/>
+        <line class="axis" x1="50" y1="195" x2="50" y2="15" marker-end="url(#ah3)"/>
+        <text x="352" y="218">t</text><text x="28" y="28">F</text>
+        <path class="l1" d="M60 195 C 120 195, 140 40, 200 40 C 260 40, 280 195, 340 195"/>
+        <line class="l2 dash" x1="60" y1="117" x2="340" y2="117"/>
+        <text x="200" y="168" text-anchor="middle">area = impulse</text>
+      </svg>
+      <figcaption>A collision force rises and falls. The shaded <span class="key-1">area</span> is the impulse $J = \Delta p$. The <span class="key-2">average force</span> (dashed) acting for the same time gives the same area.</figcaption>
+    </figure>
+    <p><strong>Why it matters for safety:</strong> for a given change in momentum, making the collision last longer makes the average force smaller ($F = \Delta p / \Delta t$). That is how airbags, crumple zones, bike helmets, crash mats and bending your knees when you land all protect you.</p>
+    <div class="worked">
+      <h3>Worked example: a ball bouncing off a wall</h3>
+      <p>A 0.058 kg tennis ball hits a wall at 20 $\text{m s}^{-1}$ and rebounds along the same line at 15 $\text{m s}^{-1}$. It is in contact with the wall for 5.0 ms. Find the impulse on the ball and the average force on it.</p>
+      <p>Take the rebound direction as positive, so $u = -20\ \text{m s}^{-1}$ and $v = +15\ \text{m s}^{-1}$.<br>
+      $J = \Delta p = m(v - u) = 0.058(15 - (-20)) = 2.0$ N s (away from the wall).<br>
+      $F = \dfrac{J}{\Delta t} = \dfrac{2.03}{5.0\times10^{-3}} = 410$ N.<br>
+      The momentum changes <em>direction</em>, so the change is $20 + 15 = 35$ (× 0.058), not $20 - 15$.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: a changing mass</h3>
+      <p>Sand falls vertically onto a conveyor belt at a rate of 12 kg s$^{-1}$. The belt moves at a constant 1.5 $\text{m s}^{-1}$. What extra horizontal force must the motor supply?</p>
+      <p>Each second, 12 kg of sand must be given a horizontal velocity of 1.5 $\text{m s}^{-1}$:<br>
+      $F = \dfrac{\Delta p}{\Delta t} = \dfrac{\Delta m}{\Delta t}\,v = 12 \times 1.5 = 18$ N. Here $F = ma$ doesn't help, because the moving mass keeps changing.</p>
+    </div>
+    <h3>Rockets and jet engines</h3>
+    <p>A rocket pushes exhaust gas backwards, giving the gas momentum. By Newton's third law, the gas pushes the rocket forwards with an equal force, called the <strong>thrust</strong>. If gas of mass $\Delta m$ is ejected in time $\Delta t$ at speed $v$ relative to the rocket:</p>
+    <div class="key">$$F = \frac{\Delta p}{\Delta t} = v\,\frac{\Delta m}{\Delta t}$$</div>
+    <p><em>Example:</em> an engine that ejects 250 kg of gas per second at 2.0 km s$^{-1}$ produces a thrust of $2000 \times 250 = 5.0 \times 10^{5}$ N. The rocket needs no air to push against, which is why rockets work in space. The nozzle is shaped so that the gas leaves in one direction, straight backwards, to make the thrust as large as possible.</p>
+    <p>A <strong>jet engine</strong> is similar, but it takes in air at the plane's speed $u$ and blasts it out faster, at $v$. The thrust is $\dfrac{\Delta m}{\Delta t}(v - u)$.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="conservation">8. Conservation of momentum, collisions and explosions</h2>
+    <div class="key"><strong>Conservation of momentum:</strong> the total momentum of a system stays constant, as long as no resultant <em>external</em> force acts on it.</div>
+    <p>Why? In a collision, the forces the bodies exert on each other are a Newton's third-law pair: equal, opposite, and acting for the same time. So the impulses are equal and opposite. Whatever momentum one body gains, the other loses. These internal forces always cancel for the system as a whole.</p>
+
+    <h3>Types of collision</h3>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Type</th><th>Momentum</th><th>Kinetic energy</th><th>Example</th></tr>
+        <tr><td>Elastic</td><td>conserved</td><td>conserved</td><td>gas molecules; nearly true for snooker balls</td></tr>
+        <tr><td>Inelastic</td><td>conserved</td><td>decreases (becomes thermal energy, sound, deformation)</td><td>most real collisions</td></tr>
+        <tr><td>Perfectly inelastic</td><td>conserved</td><td>largest possible decrease; bodies stick together</td><td>train coupling, a dart hitting a board</td></tr>
+        <tr><td>Explosion</td><td>conserved (often zero total)</td><td>increases (from chemical or elastic potential energy)</td><td>firing a gun, skaters pushing apart</td></tr>
+      </table>
+    </div>
+    <p><strong>Total energy</strong> is always conserved. In an inelastic collision, kinetic energy is transferred to other stores, mainly thermal. Momentum is conserved in <em>every</em> type of collision, as long as there is no external force.</p>
+    <p>A useful link: $E_k = \dfrac{p^2}{2m}$. When two bodies fly apart from rest with equal and opposite momenta, the <strong>lighter</strong> one gets more of the kinetic energy.</p>
+
+    <div class="worked">
+      <h3>Worked example: trolleys that stick together</h3>
+      <p>A 1.2 kg trolley moving at 3.0 $\text{m s}^{-1}$ hits a stationary 0.80 kg trolley, and they stick together. Find their common velocity and the kinetic energy lost.</p>
+      <p>Momentum before $=$ momentum after: $1.2 \times 3.0 + 0 = (1.2 + 0.80)v$, so $v = \dfrac{3.6}{2.0} = 1.8\ \text{m s}^{-1}$.<br>
+      $E_k$ before $= \tfrac{1}{2}(1.2)(3.0)^2 = 5.4$ J. &nbsp; $E_k$ after $= \tfrac{1}{2}(2.0)(1.8)^2 = 3.2$ J.<br>
+      Kinetic energy lost $= 2.2$ J (about 40%), mostly to thermal energy and sound.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: an explosion</h3>
+      <p>Two ice skaters, of mass 60 kg and 40 kg, stand still and push apart. The 40 kg skater moves off at 1.5 $\text{m s}^{-1}$. Find the velocity of the 60 kg skater.</p>
+      <p>Total momentum before $= 0$, so after: $40(1.5) + 60v = 0$, giving $v = -1.0\ \text{m s}^{-1}$ (1.0 $\text{m s}^{-1}$ in the opposite direction).<br>
+      Kinetic energy after: $\tfrac{1}{2}(40)(1.5)^2 + \tfrac{1}{2}(60)(1.0)^2 = 45 + 30 = 75$ J. All of it came from chemical energy in the skaters' muscles. Notice that the lighter skater has more of it.</p>
+    </div>
+
+    <h3>Collisions in two dimensions <span class="tag hl">HL</span></h3>
+    <p>Momentum is a vector, so it is conserved separately in each direction. Resolve every momentum into $x$ and $y$ components and apply conservation to each.</p>
+    <div class="worked">
+      <h3>Worked example <span class="tag hl">HL</span></h3>
+      <p>A 2.0 kg puck moving east at 3.0 $\text{m s}^{-1}$ hits a stationary 2.0 kg puck. Afterwards, the first puck moves at 2.0 $\text{m s}^{-1}$ at 30° north of east. Find the velocity of the second puck.</p>
+      <p>East ($x$): $2.0(3.0) = 2.0(2.0\cos 30°) + 2.0v_x$, so $v_x = 3.0 - 1.73 = 1.27\ \text{m s}^{-1}$.<br>
+      North ($y$): $0 = 2.0(2.0\sin 30°) + 2.0v_y$, so $v_y = -1.0\ \text{m s}^{-1}$ (that is, south).<br>
+      $v = \sqrt{1.27^2 + 1.0^2} = 1.6\ \text{m s}^{-1}$ at $\tan^{-1}(1.0/1.27) = 38°$ south of east.<br>
+      Check: $E_k$ goes from 9.0 J to 6.6 J, so the collision is inelastic, which is possible. A result where $E_k$ increased with no energy source would be a sign of an error.</p>
+    </div>
+
+    <div class="part-banner" id="a2c"><span class="code">A.2c</span>Circular motion<p>Why moving in a circle at a steady speed still needs a force, and how big that force must be.</p></div>
+
+    <!-- ===================================================== -->
+    <h2 id="circular">9. Circular motion</h2>
+    <p>An object moving in a circle at <strong>constant speed</strong> is still <strong>accelerating</strong>, because the direction of its velocity is always changing. The velocity is always along the tangent to the circle, and the acceleration points towards the <strong>centre</strong>. This is called <strong>centripetal</strong> acceleration ("centre-seeking").</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 300" role="img" aria-labelledby="f6t">
+        <title id="f6t">An object moving clockwise in a circle. At three points the velocity arrow is tangent to the circle, and the centripetal force and acceleration arrow points to the centre.</title>
+        <circle cx="180" cy="150" r="100" class="axis dash" style="opacity:0.45"/>
+        <circle cx="180" cy="150" r="4" class="f3"/>
+        <line class="axis dash" x1="180" y1="150" x2="280" y2="150"/>
+        <text x="228" y="142">r</text>
+        <!-- top -->
+        <circle cx="180" cy="50" r="7" class="f3"/>
+        <line class="l1" x1="186" y1="50" x2="266" y2="50" marker-end="url(#ah1)"/>
+        <line class="l2" x1="180" y1="57" x2="180" y2="112" marker-end="url(#ah2)"/>
+        <text class="t1" x="272" y="55">v</text>
+        <!-- right -->
+        <circle cx="280" cy="150" r="7" class="f3"/>
+        <line class="l1" x1="280" y1="157" x2="280" y2="237" marker-end="url(#ah1)"/>
+        <line class="l2" x1="273" y1="150" x2="226" y2="150" marker-end="url(#ah2)"/>
+        <text class="t1" x="290" y="232">v</text>
+        <!-- lower left -->
+        <circle cx="109" cy="221" r="7" class="f3"/>
+        <line class="l1" x1="104" y1="216" x2="50" y2="162" marker-end="url(#ah1)"/>
+        <line class="l2" x1="114" y1="216" x2="148" y2="182" marker-end="url(#ah2)"/>
+        <text class="t1" x="30" y="160">v</text>
+      </svg>
+      <figcaption><span class="key-1">Velocity</span>: along the tangent. <span class="key-2">Centripetal force and acceleration</span>: towards the centre, perpendicular to the velocity.</figcaption>
+    </figure>
+
+    <h3>Describing circular motion</h3>
+    <ul>
+      <li><strong>Period</strong> $T$: the time for one complete revolution (s). <strong>Frequency</strong> $f = 1/T$ (Hz).</li>
+      <li><strong>Radians:</strong> in circular motion, angles are measured in radians. An angle $\theta$ in radians is the arc length $s$ divided by the radius $r$, so $s = r\theta$. A full circle has arc length $2\pi r$, so $360° = 2\pi$ rad, and 1 rad ≈ 57.3°.</li>
+      <li><strong>Angular velocity</strong> $\omega$: the angle swept out per second, $\omega = \dfrac{\Delta\theta}{\Delta t}$, in rad s$^{-1}$. One revolution is $2\pi$ rad, so $\omega = \dfrac{2\pi}{T} = 2\pi f$. <em>Example:</em> a fairground ride that turns through 120° in 4.0 s has $\theta = \frac{2\pi}{3} = 2.09$ rad and $\omega = 2.09 / 4.0 = 0.52\ \text{rad s}^{-1}$.</li>
+      <li>Linear speed: one circumference $2\pi r$ per period, so:</li>
+    </ul>
+    <div class="key">$$v = \frac{2\pi r}{T} = \omega r$$</div>
+    <p>Every point on a rotating rigid object, such as a wheel or a turntable, has the <strong>same</strong> $\omega$. But points further from the centre have a larger speed $v$.</p>
+
+    <h3>Centripetal acceleration and force</h3>
+    <div class="key">
+      $$a = \frac{v^2}{r} = \omega^2 r = \frac{4\pi^2 r}{T^2}$$
+      $$F = ma = \frac{mv^2}{r}$$
+    </div>
+    <p>The <strong>centripetal force</strong> is not a new kind of force. It is the name for the resultant force towards the centre, and some real force has to provide it:</p>
+    <ul>
+      <li>a car on a flat bend: <strong>friction</strong> between the tyres and the road;</li>
+      <li>a ball whirled on a string: <strong>tension</strong>;</li>
+      <li>a planet or satellite in orbit: <strong>gravity</strong>;</li>
+      <li>an electron moving in a magnetic field: the <strong>magnetic force</strong>;</li>
+      <li>a plane turning, or a car on a banked track: a horizontal component of the <strong>lift</strong> or <strong>normal</strong> force. You only need to describe banking, not calculate it.</li>
+    </ul>
+    <p>The centripetal force is always perpendicular to the velocity, so it changes the <em>direction</em> of motion but not the speed, and it does no work. If it suddenly disappears (the string breaks), the object carries on in a <strong>straight line along the tangent</strong> (Newton's first law). It does <em>not</em> fly outwards along the radius.</p>
+    <div class="worked">
+      <h3>Worked example: a car on a bend</h3>
+      <p>A 1200 kg car drives round a flat bend of radius 50 m at 15 $\text{m s}^{-1}$. Find the centripetal force needed, and the minimum coefficient of static friction between the tyres and the road.</p>
+      <p>$F = \dfrac{mv^2}{r} = \dfrac{1200 \times 15^2}{50} = 5400$ N, provided by friction.<br>
+      Friction is limited to $\mu_s mg$, so we need $\mu_s mg \ge \dfrac{mv^2}{r}$, which gives $\mu_s \ge \dfrac{v^2}{gr} = \dfrac{225}{9.8 \times 50} = 0.46$.<br>
+      The mass cancels: a lorry and a bicycle need the same grip at the same speed. On an icy road ($\mu_s$ small), the safe speed is much lower.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: a spin dryer</h3>
+      <p>A washing-machine drum of radius 0.25 m spins at 1200 revolutions per minute. Find $\omega$, the speed of the drum wall, and its centripetal acceleration.</p>
+      <p>$f = 1200/60 = 20$ Hz, so $\omega = 2\pi f = 126\ \text{rad s}^{-1}$.<br>
+      $v = \omega r = 126 \times 0.25 = 31\ \text{m s}^{-1}$. &nbsp; $a = \omega^2 r = 126^2 \times 0.25 = 3.9 \times 10^3\ \text{m s}^{-2}$, about 400 times $g$!<br>
+      The holes in the drum let water escape along the tangent, because nothing provides the force needed to keep the water moving in a circle.</p>
+    </div>
+
+    <h3>Circles in a vertical plane</h3>
+    <p>For a ball on a string, a bucket swung overhead or a roller-coaster loop, gravity helps at the top and works against you at the bottom. The <strong>resultant</strong> force towards the centre must always equal $\dfrac{mv^2}{r}$. The speed usually changes around a vertical circle (non-uniform circular motion), but you only need to analyse the top and bottom.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 340" role="img" aria-labelledby="f7t">
+        <title id="f7t">A ball on a string moving in a vertical circle. At the top, the weight and the tension both point down, towards the centre. At the bottom, the tension points up, towards the centre, and the weight points down, away from it.</title>
+        <circle cx="190" cy="165" r="110" class="axis dash" style="opacity:0.45"/>
+        <circle cx="190" cy="165" r="4" class="f3"/>
+        <circle cx="190" cy="55" r="8" class="f3"/>
+        <line class="l2" x1="202" y1="55" x2="202" y2="115" marker-end="url(#ah2)"/>
+        <line class="l1" x1="178" y1="55" x2="178" y2="100" marker-end="url(#ah1)"/>
+        <text class="t2" x="210" y="100">mg</text><text class="t1" x="152" y="95">T</text>
+        <text x="190" y="30" text-anchor="middle">top</text>
+        <circle cx="190" cy="275" r="8" class="f3"/>
+        <line class="l1" x1="178" y1="275" x2="178" y2="185" marker-end="url(#ah1)"/>
+        <line class="l2" x1="202" y1="275" x2="202" y2="330" marker-end="url(#ah2)"/>
+        <text class="t1" x="152" y="215">T</text><text class="t2" x="210" y="325">mg</text>
+        <text x="300" y="285">bottom</text>
+      </svg>
+      <figcaption>Forces on a ball whirled on a string in a vertical circle: <span class="key-1">tension</span> and <span class="key-2">weight</span>.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>At the top:</strong> $T + mg = \dfrac{mv^2}{r}$. Tension is smallest here. The slowest possible speed is when $T = 0$ and gravity alone provides the centripetal force: $mg = \dfrac{mv^2}{r}$, so $v_{\min} = \sqrt{gr}$. Any slower and the string goes slack (or the water falls out of the bucket).</li>
+      <li><strong>At the bottom:</strong> $T - mg = \dfrac{mv^2}{r}$. Tension is largest here. The string is most likely to snap at the bottom, and on a roller coaster you feel heaviest at the bottom of a dip.</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: do you weigh less at the equator?</h3>
+      <p>The Earth turns once a day, so a person standing on the equator moves in a circle of radius $6.4 \times 10^6$ m. Find the reading on bathroom scales for a 70 kg person there, compared with their true weight $mg$.</p>
+      <p>$\omega = \dfrac{2\pi}{T} = \dfrac{2\pi}{24 \times 3600} = 7.3 \times 10^{-5}\ \text{rad s}^{-1}$, so $a = \omega^2 r = (7.3\times10^{-5})^2 \times 6.4\times10^6 = 0.034\ \text{m s}^{-2}$.<br>
+      The resultant force must point towards the Earth's centre: $mg - F_N = ma$, so $F_N = m(g - a) = 70(9.8 - 0.034) = 684$ N.<br>
+      The true weight is $70 \times 9.8 = 686$ N, so the scales read about 2 N (0.3%) less. Part of the gravitational force is "used" to keep you moving in a circle. At the poles you aren't moving in a circle, so there's no such effect.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">10. Common mistakes</h2>
+    <ul>
+      <li><strong>Thinking a force is needed to keep something moving.</strong> A force is needed to <em>change</em> its velocity.</li>
+      <li><strong>Calling weight and the normal force a third-law pair.</strong> Third-law pairs act on different bodies and are the same type of force.</li>
+      <li><strong>Assuming $F_N = mg$.</strong> That's only true on a level surface with no other vertical forces and no vertical acceleration.</li>
+      <li><strong>Using $F_f = \mu_s F_N$ for something that isn't moving.</strong> Static friction is only as big as it needs to be, up to $\mu_s F_N$.</li>
+      <li><strong>Forgetting the direction change in rebounds.</strong> $\Delta p = m(v - u)$ with signs, so a bounce gives a <em>bigger</em> change than stopping.</li>
+      <li><strong>Saying kinetic energy is conserved in every collision.</strong> Momentum always is (with no external force); kinetic energy is only conserved in elastic collisions.</li>
+      <li><strong>Drawing "centrifugal force" outwards on a free-body diagram,</strong> or adding centripetal force as an extra force. Centripetal force is the resultant of the real forces, and it points inwards.</li>
+      <li><strong>Using degrees instead of radians</strong> in $v = \omega r$.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">11. Check your understanding</h2>
+    <details class="check">
+      <summary>A parachutist falls at a constant velocity. Is there a resultant force on them?</summary>
+      <p>No. Constant velocity means zero acceleration, so (Newton's first law) the resultant force is zero: the air resistance exactly balances the weight. Forces <em>are</em> acting, but they balance.</p>
+    </details>
+    <details class="check">
+      <summary>A horse pulls a cart. By Newton's third law, the cart pulls back on the horse equally. So how can they ever move?</summary>
+      <p>The two forces act on <em>different</em> bodies, so they don't cancel. To decide whether the <strong>horse</strong> accelerates, look only at the forces on the horse: the forward push of the ground on its hooves (friction) versus the backward pull of the cart. If the ground's push is bigger, the horse accelerates forward.</p>
+    </details>
+    <details class="check">
+      <summary>Why do gymnasts land on thick mats rather than a hard floor?</summary>
+      <p>The change in momentum on landing is the same either way. The mat makes the stopping time $\Delta t$ longer, so the average force $F = \Delta p / \Delta t$ on the gymnast is smaller.</p>
+    </details>
+    <details class="check">
+      <summary>A block slides down a frictionless slope at 25° to the horizontal. What is its acceleration?</summary>
+      <p>The component of the weight down the slope is $mg\sin 25°$, and the normal force is perpendicular to the slope. So $a = g\sin 25° = 9.8 \times 0.423 = 4.1\ \text{m s}^{-2}$. The mass doesn't matter.</p>
+    </details>
+    <details class="check">
+      <summary>A stone on a string is whirled in a horizontal circle. The speed is doubled but the radius stays the same. What happens to the tension needed?</summary>
+      <p>$F = mv^2/r$, so doubling $v$ makes the centripetal force <strong>four</strong> times larger.</p>
+    </details>
+    <details class="check">
+      <summary>A gun recoils when it fires a bullet. Why does the bullet have far more kinetic energy than the gun, even though their momenta are equal in size?</summary>
+      <p>$E_k = \dfrac{p^2}{2m}$. With the same $p$, the body with the much smaller mass (the bullet) has a much larger kinetic energy.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=A.2">Practise A.2 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>

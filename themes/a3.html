@@ -4,15 +4,288 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>A.3 Work, energy and power · DP Physics</title>
+  <meta name="description" content="IB DP Physics A.3 Work, energy and power: conservation of energy, work, kinetic and potential energy, power, efficiency, Sankey diagrams and energy density of fuels.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="A.3">
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
+</head>
+<body data-root="../" data-section="themes" data-topic="A.3">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="a.html">Theme A Space, time and motion</a></p>
     <h1><span class="code">A.3</span>Work, energy and power</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <p class="lead">Energy is the most useful idea in physics. It can't be created or destroyed, only moved between stores. Work is how forces move energy around, power is how fast that happens, and efficiency tells us how much of it ends up where we want it. Energy methods often solve in one line problems that would take a page with forces.</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Theories</span><span class="tag">Experiments</span><span class="tag">Falsification</span><span class="tag">Global impact of science</span></div>
+          <p><strong>Theories.</strong> Conservation of energy is one of the most powerful ideas in science. One rule links mechanics, heat, electricity, light and nuclear physics. It explains what we see and predicts the outcome of situations nobody has tried before.</p>
+          <p><strong>Experiments.</strong> In the 1840s James Joule showed that a falling weight turning paddles in water warms the water by a predictable amount. Mechanical work and heat were the same thing, measured in the same unit. The unit of energy is named after him.</p>
+          <p><strong>Falsification (or not).</strong> In the 1920s, some radioactive decays seemed to <em>lose</em> energy. Rather than give up energy conservation, Wolfgang Pauli proposed an unseen particle carrying the missing energy. The neutrino was finally detected 26 years later.</p>
+          <p><strong>Global impact.</strong> How we choose to supply energy (fossil fuels, nuclear, renewables) shapes economies, health and the climate. Physics informs these decisions, but doesn't make them on its own.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>Is energy real, or just bookkeeping?</strong> Nobody has ever seen "energy". We only calculate a number that stays constant. Is energy something that exists, or a useful accounting rule we invented?</li>
+            <li><strong>How fundamental is a fundamental idea?</strong> Einstein showed that mass itself is a store of energy, changing what "energy" meant. What happens to the rest of our knowledge when a basic concept is redefined?</li>
+            <li><strong>When should a theory be defended rather than abandoned?</strong> Pauli rescued energy conservation by inventing a particle nobody could detect. When is it reasonable to save a theory this way, and when is it just avoiding the evidence?</li>
+            <li><strong>Does language shape knowledge?</strong> Holding a heavy bag still is hard "work" in everyday language, but zero work in physics. How do specialist meanings of ordinary words help or hinder understanding?</li>
+            <li><strong>Who should decide?</strong> Physics can calculate the energy density of uranium or the efficiency of a wind turbine. Should energy policy be decided by scientists, politicians or the public, and what other kinds of knowledge are needed?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <ol>
+        <li><a href="#conservation">Energy and its conservation</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#kinetic">Kinetic energy and the work–energy principle</a></li>
+        <li><a href="#potential">Gravitational and elastic potential energy</a></li>
+        <li><a href="#mechanical">Conservation of mechanical energy</a></li>
+        <li><a href="#power">Power</a></li>
+        <li><a href="#efficiency">Efficiency and Sankey diagrams</a></li>
+        <li><a href="#fuels">Energy sources and energy density</a></li>
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="conservation">1. Energy and its conservation</h2>
+    <p>Energy is measured in <strong>joules</strong> (J). It can be stored in different ways (stores), such as kinetic, gravitational, elastic, thermal, chemical and nuclear. It is transferred between stores by forces doing work, by heating, by electrical currents and by waves.</p>
+    <div class="key"><strong>The principle of conservation of energy:</strong> energy cannot be created or destroyed. The total energy of an isolated system stays constant. It can only be transferred from one store to another, or from one place to another.</div>
+    <p>So when a car brakes, its kinetic energy hasn't "gone". It has been transferred to thermal energy in the brakes and the surroundings. Energy problems are bookkeeping: everything that goes in must come out somewhere.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="work">2. Work</h2>
+    <p>A force does <strong>work</strong> when it moves its point of application. Work done by a force is a <strong>transfer of energy</strong>: 1 J of work transfers 1 J of energy. For a constant force $F$ acting at angle $\theta$ to the displacement $s$:</p>
+    <div class="key">$$W = Fs\cos\theta$$
+      <p style="margin:0">Only the component of the force <em>along</em> the displacement, $F\cos\theta$, does work. Work is a scalar.</p></div>
+    <figure class="diagram">
+      <svg viewBox="0 0 400 210" role="img" aria-labelledby="w1t">
+        <title id="w1t">A sledge pulled by a rope at angle theta above the horizontal. The force F acts along the rope. Its horizontal component, F cos theta, is drawn as a dashed arrow along the direction of the displacement s.</title>
+        <line class="axis" x1="10" y1="150" x2="390" y2="150"/>
+        <rect x="60" y="105" width="90" height="45" rx="6" class="axis"/>
+        <line class="l3" x1="150" y1="118" x2="290" y2="38" marker-end="url(#ah3)"/>
+        <text x="296" y="36">F</text>
+        <line class="l1 dash" x1="150" y1="118" x2="285" y2="118" marker-end="url(#ah1)"/>
+        <text class="t1" x="292" y="124">F cos θ</text>
+        <path class="axis" d="M195 118 A 45 45 0 0 0 189 96"/>
+        <text x="200" y="106">θ</text>
+        <line class="l2" x1="60" y1="182" x2="240" y2="182" marker-end="url(#ah2)"/>
+        <text class="t2" x="130" y="204">displacement s</text>
+      </svg>
+      <figcaption>Only the <span class="key-1">component along the displacement</span> does work.</figcaption>
+    </figure>
+    <ul>
+      <li>$\theta = 0°$ (force along the motion): $W = Fs$. Positive work, and energy is transferred <em>to</em> the body.</li>
+      <li>$\theta = 180°$ (force against the motion, like friction or braking): $W = -Fs$. Negative work, and energy is transferred <em>from</em> the body.</li>
+      <li>$\theta = 90°$: $W = 0$. A force perpendicular to the motion does no work. Examples: the normal force on a car driving along a flat road, or the centripetal force in circular motion.</li>
+      <li>No displacement means no work. Holding a heavy bag still is tiring (your muscles use energy internally), but the force on the bag does no work on it.</li>
+    </ul>
+    <h3>Work from a force–displacement graph</h3>
+    <p>When the force changes, the work done is the <strong>area under the force–displacement graph</strong>. For a spring obeying Hooke's law, the graph is a straight line through the origin, so the area is a triangle: $W = \frac{1}{2}F x = \frac{1}{2}kx^2$. That's where the elastic potential energy formula comes from (see <a href="#potential">section 4</a>).</p>
+    <div class="worked">
+      <h3>Worked example: pulling a sledge</h3>
+      <p>A child pulls a 20 kg sledge 25 m across flat snow with a force of 80 N along a rope at 30° above the horizontal. Friction on the sledge is 50 N. The sledge starts at rest.</p>
+      <p>Work done by the pull: $W = Fs\cos\theta$ $= 80 \times 25 \times \cos 30°$ $= 1730$ J.<br>
+      Work done by friction (opposite to the motion): $W = 50 \times 25 \times \cos 180° = -1250$ J.<br>
+      The weight and the normal force are perpendicular to the motion, so they do no work.<br>
+      Net work $= 1730 - 1250 = 480$ J. This becomes kinetic energy (section 3): $\tfrac{1}{2}(20)v^2 = 480$, so $v = 6.9\ \text{m s}^{-1}$.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="kinetic">3. Kinetic energy and the work–energy principle</h2>
+    <p>A moving body has <strong>kinetic energy</strong>. Using $p = mv$ from A.2, it can also be written in terms of momentum:</p>
+    <div class="key">$$E_k = \tfrac{1}{2}mv^2 = \frac{p^2}{2m}$$</div>
+    <p>Because of the $v^2$, doubling the speed <strong>quadruples</strong> the kinetic energy.</p>
+    <p><strong>Where does $\frac{1}{2}mv^2$ come from?</strong> Push a mass $m$ from rest with a constant resultant force $F$ through a distance $s$. From A.1, $v^2 = 2as$, and from A.2, $a = F/m$. So the work done is $Fs = ma \cdot s = m \cdot \frac{v^2}{2} = \frac{1}{2}mv^2$.</p>
+    <div class="key"><strong>Work–energy principle:</strong> the work done by the <strong>resultant</strong> force on a body equals the change in its kinetic energy: $W_{\text{net}} = \Delta E_k$.</div>
+    <div class="worked">
+      <h3>Worked example: braking distance</h3>
+      <p>A 1500 kg car travelling at 20 $\text{m s}^{-1}$ brakes with a constant force of 6000 N. How far does it travel before stopping?</p>
+      <p>$\Delta E_k = 0 - \tfrac{1}{2}(1500)(20)^2 = -3.0\times10^5$ J. This equals the work done by the brakes, $-Fs$:<br>
+      $-6000\,s = -3.0\times10^5$, so $s = 50$ m.<br>
+      At double the speed (40 $\text{m s}^{-1}$) the kinetic energy is four times larger, so the braking distance is <strong>200 m</strong>, four times as far. This is why speed limits matter so much.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="potential">4. Gravitational and elastic potential energy</h2>
+    <h3>Gravitational potential energy</h3>
+    <p>Lifting a body of mass $m$ at constant speed needs a force $mg$ through a height $\Delta h$. The work done, $mg\Delta h$, is stored as <strong>gravitational potential energy</strong>:</p>
+    <div class="key">$$\Delta E_p = mg\Delta h$$</div>
+    <p>Only <em>changes</em> in gravitational potential energy matter, so you can choose any level as zero. This formula assumes $g$ is constant, which is only true close to the Earth's surface. Far from the Earth, $g$ gets smaller, and you need the method in D.1.</p>
+    <h3>Elastic potential energy</h3>
+    <p>A stretched or compressed spring stores <strong>elastic potential energy</strong>. It equals the work done deforming it, which is the triangle under the force–extension graph:</p>
+    <div class="key">$$E_H = \tfrac{1}{2}k(\Delta x)^2$$</div>
+    <p>Here $k$ is the spring constant and $\Delta x$ is the extension or compression. Doubling the extension stores <em>four</em> times the energy.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="mechanical">5. Conservation of mechanical energy</h2>
+    <p><strong>Mechanical energy</strong> is the sum of kinetic, gravitational potential and elastic potential energy. If there is <strong>no friction or air resistance</strong>, mechanical energy is conserved: energy just moves between these stores.</p>
+    <div class="key">
+      $$E_k + E_p + E_H = \text{constant}$$
+      <p style="margin:0;text-align:center">or, in terms of changes,</p>
+      $$\Delta E_k + \Delta E_p + \Delta E_H = 0$$
+    </div>
+    <div class="diagram-row">
+      <figure class="diagram">
+        <svg viewBox="0 0 220 190" class="small" role="img" aria-labelledby="m1t">
+          <title id="m1t">Graph of energy against distance fallen for a falling object with no air resistance. Gravitational potential energy falls in a straight line, kinetic energy rises in a straight line, and their total stays constant.</title>
+          <line class="axis" x1="35" y1="160" x2="210" y2="160" marker-end="url(#ah3)"/>
+          <line class="axis" x1="35" y1="160" x2="35" y2="15" marker-end="url(#ah3)"/>
+          <text x="14" y="28">E</text><text x="186" y="182">d</text>
+          <line class="l3 dash" x1="35" y1="45" x2="195" y2="45"/>
+          <line class="l2" x1="35" y1="45" x2="195" y2="158"/>
+          <line class="l1" x1="35" y1="158" x2="195" y2="45"/>
+        </svg>
+        <figcaption>An object falling a distance $d$: <span class="key-2">$E_p$</span> falls, <span class="key-1">$E_k$</span> rises, and the total (dashed) stays the same.</figcaption>
+      </figure>
+    </div>
+    <p>This makes many problems easy. The speed at the bottom of a frictionless slope or ramp depends only on the <strong>height</strong> dropped, not on the shape of the path or the mass: $mg\Delta h = \frac{1}{2}mv^2$, so $v = \sqrt{2g\Delta h}$. A curved track, where the acceleration keeps changing, would be very hard to analyse with forces, but it's one line with energy.</p>
+    <h3>When friction or drag act</h3>
+    <p>Friction and air resistance are <strong>non-conservative forces</strong>. They transfer mechanical energy to thermal energy, which spreads out into the surroundings and can't easily be recovered. The change in total mechanical energy equals the work done by these forces:</p>
+    <div class="key">$$\Delta E_{\text{mech}} = W_{\text{friction, drag}}$$
+      <p style="margin:0">The work done by friction and drag is negative, so the mechanical energy decreases.</p></div>
+    <div class="worked">
+      <h3>Worked example: a skateboard ramp</h3>
+      <p>A 50 kg skateboarder starts from rest at the top of a curved ramp 3.2 m high.</p>
+      <p>(a) Ignoring friction: $mg\Delta h = \tfrac{1}{2}mv^2$, so $v = \sqrt{2 \times 9.8 \times 3.2} = 7.9\ \text{m s}^{-1}$.</p>
+      <p>(b) In fact her speed at the bottom is 7.0 $\text{m s}^{-1}$, and the ramp is 8.0 m long. Find the average resistive force.<br>
+      $E_p$ lost $= 50 \times 9.8 \times 3.2 = 1570$ J. &nbsp; $E_k$ gained $= \tfrac{1}{2}(50)(7.0)^2 = 1230$ J.<br>
+      Energy transferred to thermal energy $= 1570 - 1230 = 340$ J $=$ (resistive force) × (8.0 m), so the force is about 43 N.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: a spring launcher</h3>
+      <p>A toy launcher has a spring with $k = 400\ \text{N m}^{-1}$, compressed by 0.10 m. It fires a 0.050 kg ball straight up. How high does the ball rise? Ignore air resistance.</p>
+      <p>Elastic energy stored: $E_H = \tfrac{1}{2}(400)(0.10)^2 = 2.0$ J. At the top, all of it has become gravitational potential energy:<br>
+      $mg\Delta h = 2.0$, so $\Delta h = \dfrac{2.0}{0.050 \times 9.8} = 4.1$ m.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="power">6. Power</h2>
+    <p><strong>Power</strong> is the rate of doing work, or the rate of transferring energy. It is measured in watts: 1 W = 1 J s$^{-1}$.</p>
+    <div class="key">$$P = \frac{\Delta W}{\Delta t} = Fv$$</div>
+    <p>The form $P = Fv$ comes from $\frac{\Delta W}{\Delta t} = F\frac{\Delta s}{\Delta t}$. It gives the power needed to keep something moving at speed $v$ against a force $F$. Electricity bills use the <strong>kilowatt-hour</strong> (kWh), the energy transferred by 1 kW in one hour: 1 kWh = 3.6 MJ.</p>
+    <div class="worked">
+      <h3>Worked example: driving faster costs much more</h3>
+      <p>A car moves at a constant 25 $\text{m s}^{-1}$ against a total resistive force of 600 N.</p>
+      <p>At constant speed, the driving force equals the resistive force, so $P = Fv = 600 \times 25 = 15$ kW.<br>
+      Air resistance is roughly proportional to $v^2$. At 50 $\text{m s}^{-1}$ the drag is about 4 times larger, so $P = Fv$ is about $4 \times 2 = 8$ times larger, roughly 120 kW. Doubling your speed needs about eight times the power to overcome air resistance.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="efficiency">7. Efficiency and Sankey diagrams</h2>
+    <p>No real machine transfers all its input energy to where we want it. Some is always "wasted", usually as thermal energy in the surroundings. <strong>Efficiency</strong> $\eta$ compares the useful output with the total input. It has no unit and is often given as a percentage:</p>
+    <div class="key">
+      $$\eta = \frac{\text{useful work out}}{\text{total work in}}$$
+      $$\eta = \frac{\text{useful power out}}{\text{total power in}}$$
+    </div>
+    <p>A <strong>Sankey diagram</strong> shows energy transfers as arrows whose <strong>widths are proportional to the amount of energy</strong>. Input arrives from the left, useful output continues to the right, and wasted energy bends away. Because energy is conserved, the widths of the arrows out always add up to the width of the arrow in.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 400 360" role="img" aria-labelledby="s1t">
+        <title id="s1t">Sankey diagram for a car engine. 100 joules of chemical energy enters from the left. 25 joules leaves to the right as useful kinetic energy. 65 joules bends downwards as thermal energy, and 10 joules bends downwards as sound.</title>
+        <rect x="20" y="40" width="150" height="200" style="fill:var(--accent)"/>
+        <polygon points="170,40 350,40 350,30 390,65 350,100 350,90 170,90" style="fill:var(--accent)"/>
+        <polygon points="170,90 330,90 330,300 265,345 200,300 200,220 170,220" style="fill:var(--theme-b)"/>
+        <polygon points="170,220 190,220 190,300 198,300 180,332 162,300 170,300" style="fill:var(--theme-b)"/>
+        <text x="95" y="132" text-anchor="middle" style="fill:var(--surface);font-weight:700">chemical</text>
+        <text x="95" y="156" text-anchor="middle" style="fill:var(--surface)">100 J</text>
+        <text x="262" y="71" text-anchor="middle" style="fill:var(--surface);font-weight:700">kinetic 25 J</text>
+        <text x="265" y="200" text-anchor="middle" style="fill:var(--surface);font-weight:700">thermal</text>
+        <text x="265" y="224" text-anchor="middle" style="fill:var(--surface)">65 J</text>
+        <text x="154" y="318" text-anchor="end">sound 10 J</text>
+      </svg>
+      <figcaption>A car engine: of every 100 J of chemical energy in the fuel, about 25 J becomes <span class="key-1">useful</span> kinetic energy. The rest is <span class="key-2">wasted</span>. Efficiency $= 25/100 = 25\%$.</figcaption>
+    </figure>
+    <p>Wasted energy is not destroyed. It is <strong>degraded</strong>: spread thinly as thermal energy in the surroundings, where it can't do useful work any more. Mechanical energy can be turned completely into thermal energy (a block sliding to a stop), but thermal energy can never be turned completely back into work. That's why every heat engine, from car engines to power stations, has an efficiency well below 100%. You'll study this in B.4.</p>
+    <div class="worked">
+      <h3>Worked example: a lift motor</h3>
+      <p>An electric motor raises an 800 kg lift through 30 m at constant speed in 20 s. The motor draws 16 kW of electrical power. Find its efficiency.</p>
+      <p>Useful power out $= \dfrac{mg\Delta h}{t} = \dfrac{800 \times 9.8 \times 30}{20} = 11.8$ kW.<br>
+      $\eta = \dfrac{11.8}{16} = 0.74$, or 74%. The other 4.2 kW is wasted, mostly as thermal energy in the motor's wires and as friction.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="fuels">8. Energy sources and energy density</h2>
+    <p>A <strong>primary</strong> energy source is found in nature: coal, oil, gas, uranium, wind, sunlight, flowing water, biomass. A <strong>secondary</strong> source, such as electricity or hydrogen, has been produced from a primary one and is easier to transport and use. Sources are <strong>renewable</strong> if they are replaced naturally as fast as we use them (sunlight, wind, tides), and <strong>non-renewable</strong> if they will run out (fossil fuels, uranium).</p>
+    <p>To compare fuels, we ask how much energy we get from a given amount of fuel:</p>
+    <div class="key">
+      <p style="margin:0"><strong>Energy density</strong> = energy released per unit <strong>volume</strong> of fuel, in J m$^{-3}$.</p>
+      <p style="margin:6px 0 0"><strong>Specific energy</strong> = energy released per unit <strong>mass</strong> of fuel, in J kg$^{-1}$.</p>
+      <p style="margin:6px 0 0">These two are easy to mix up, so always check the units. For a fuel of density $\rho$: energy density = specific energy × $\rho$.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Fuel</th><th>Specific energy / MJ kg$^{-1}$ (approx.)</th><th>Notes</th></tr>
+        <tr><td>Wood (dry)</td><td>16</td><td>renewable (biomass) if replanted</td></tr>
+        <tr><td>Coal</td><td>25–33</td><td>fossil fuel; high CO<sub>2</sub> per joule</td></tr>
+        <tr><td>Petrol / diesel</td><td>45</td><td>fossil fuel; very high energy density as a liquid</td></tr>
+        <tr><td>Natural gas (methane)</td><td>55</td><td>high specific energy, but a gas, so low energy density unless compressed</td></tr>
+        <tr><td>Hydrogen</td><td>140</td><td>highest specific energy of any fuel, but very low energy density</td></tr>
+        <tr><td>Lithium-ion battery</td><td>0.5–0.9</td><td>a store, not a fuel; much lower than petrol</td></tr>
+        <tr><td>Uranium-235 (fission)</td><td>about $8 \times 10^{7}$</td><td>about a million times more than chemical fuels</td></tr>
+      </table>
+    </div>
+    <p>The huge specific energy of nuclear fuel is why a nuclear power station uses a few tonnes of uranium a year, while a coal station of the same output burns thousands of tonnes a day. It's also why nuclear submarines can stay at sea for months.</p>
+    <div class="worked">
+      <h3>Worked example: fuelling a power station</h3>
+      <p>A coal-fired power station delivers 500 MW of electrical power with an efficiency of 35%. Coal has a specific energy of 30 MJ kg$^{-1}$. How much coal does it burn each day?</p>
+      <p>Input power $= \dfrac{500}{0.35} = 1430$ MW. Energy needed per day $= 1.43\times10^{9} \times 86\,400 = 1.2 \times 10^{14}$ J.<br>
+      Mass of coal $= \dfrac{1.2\times10^{14}}{3.0\times10^{7}} = 4.1 \times 10^{6}$ kg, about 4000 tonnes every day.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">9. Common mistakes</h2>
+    <ul>
+      <li><strong>Forgetting $\cos\theta$</strong>, or using the wrong angle. $\theta$ is the angle between the force and the <em>displacement</em>.</li>
+      <li><strong>Thinking any force on a moving object does work.</strong> Forces perpendicular to the motion do none.</li>
+      <li><strong>Doubling $E_k$ when the speed doubles.</strong> It quadruples ($v^2$). The same goes for $E_H$ when the extension doubles.</li>
+      <li><strong>Using $mg\Delta h$ far from the Earth's surface,</strong> where $g$ is not constant.</li>
+      <li><strong>Assuming mechanical energy is conserved</strong> when the question mentions friction, drag or a speed that's lower than expected.</li>
+      <li><strong>Saying energy is "lost" or "used up".</strong> It's transferred, usually to thermal energy in the surroundings.</li>
+      <li><strong>Inverting efficiency</strong>, which gives answers over 100%. Always check that $\eta \le 1$.</li>
+      <li><strong>Mixing up energy density (per m$^3$) and specific energy (per kg).</strong></li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">10. Check your understanding</h2>
+    <details class="check">
+      <summary>A satellite moves in a circular orbit at constant speed. How much work does gravity do on it?</summary>
+      <p>None. Gravity acts towards the centre, perpendicular to the velocity ($\theta = 90°$), so $W = Fs\cos 90° = 0$. That's why the satellite's speed and kinetic energy stay constant.</p>
+    </details>
+    <details class="check">
+      <summary>Two balls of different mass slide down the same frictionless slope from rest. Which is faster at the bottom?</summary>
+      <p>Neither. $mg\Delta h = \tfrac{1}{2}mv^2$ gives $v = \sqrt{2g\Delta h}$, and the mass cancels.</p>
+    </details>
+    <details class="check">
+      <summary>A ball is dropped and bounces back up to only 70% of its original height. What happened to the "missing" energy?</summary>
+      <p>30% of its mechanical energy was transferred to other stores, mainly thermal energy in the ball and the floor (from deforming), plus a little sound and air resistance. The total energy is still conserved.</p>
+    </details>
+    <details class="check">
+      <summary>Why is it more efficient to boil only the water you need in a kettle?</summary>
+      <p>Energy used to heat water you don't use is wasted. It ends up as thermal energy in the surroundings when that water cools. The useful output is the energy given to the water you actually drink, so heating extra water lowers the efficiency.</p>
+    </details>
+    <details class="check">
+      <summary>A cyclist pedals at a constant speed of 8.0 $\text{m s}^{-1}$ against resistive forces of 25 N. What power is the cyclist supplying to the bike?</summary>
+      <p>At constant speed, the driving force equals the resistive force, so $P = Fv = 25 \times 8.0 = 200$ W. (The cyclist's body uses more than this, because muscles are only about 25% efficient.)</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=A.3">Practise A.3 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>

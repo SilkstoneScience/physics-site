@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PDF text extractor</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+<p id="status">Starting…</p>
+<script>
+// Extracts the text of the PDF served at /source.pdf and sends it back to the local server to be saved.
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+(async () => {
+  const status = document.getElementById('status');
+  try {
+    const pdf = await pdfjsLib.getDocument('/source.pdf').promise;
+    const pages = [];
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      let text = '';
+      for (const item of content.items) text += item.str + (item.hasEOL ? '\n' : ' ');
+      pages.push(`=== PAGE ${i} ===\n${text}`);
+      status.textContent = `Read page ${i} of ${pdf.numPages}`;
+    }
+    const res = await fetch('/save', { method: 'POST', body: pages.join('\n\n') });
+    status.textContent = res.ok ? `DONE: ${pdf.numPages} pages saved` : 'Save failed';
+  } catch (e) {
+    status.textContent = 'ERROR: ' + e.message;
+  }
+})();
+</script>
+</body>
+</html>

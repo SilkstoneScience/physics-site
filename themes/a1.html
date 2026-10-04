@@ -4,23 +4,473 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>A.1 Kinematics · DP Physics</title>
+  <meta name="description" content="IB DP Physics A.1 Kinematics: displacement, velocity, acceleration, motion graphs, equations of motion, free fall, projectiles, relative velocity and fluid resistance.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="A.1">
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
+</head>
+<body data-root="../" data-section="themes" data-topic="A.1">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="a.html">Theme A Space, time and motion</a></p>
     <h1><span class="code">A.1</span>Kinematics</h1>
-    <div class="notice">Full notes for this topic are coming soon.</div>
+    <p class="lead">Kinematics is the description of motion: where something is, how fast it moves and how its velocity changes. It does not ask <em>why</em> things move. That comes in A.2 Forces and momentum.</p>
 
-    <h2>Key equations: constant acceleration</h2>
-    <p>For an object moving in a straight line with constant acceleration $a$, starting with velocity $u$ and reaching velocity $v$ after time $t$, with displacement $s$:</p>
-    <div class="box">
-      $$v = u + at \qquad s = ut + \tfrac{1}{2}at^{2}$$
-      $$v^{2} = u^{2} + 2as \qquad s = \frac{(u + v)}{2}\,t$$
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Observations</span><span class="tag">Measurement</span><span class="tag">Models</span></div>
+          <p><strong>Observations.</strong> For nearly 2000 years, people accepted Aristotle's idea that heavy objects fall faster than light ones. It matches everyday experience with stones and feathers. Galileo tested it by timing balls rolling down ramps and found that, without air resistance, everything falls with the same acceleration. Careful observation beat "common sense".</p>
+          <p><strong>Measurement.</strong> Light gates, data loggers and high-speed video now let us measure motion far more precisely than a stopwatch. Better measurements let us test ideas more strictly.</p>
+          <p><strong>Models.</strong> The equations of motion are a model. They assume constant acceleration and no air resistance. Within those limits they predict brilliantly, and outside them they fail. Knowing a model's limits is part of using it well.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>If a model is never exactly right, why trust it?</strong> Real accelerations are never perfectly constant, yet engineers rely on the equations of motion every day. When is a "wrong" model good enough, and who decides?</li>
+            <li><strong>Should we trust our intuition?</strong> Most people expect a ball fired horizontally to land after one dropped at the same moment, but they land together. If intuition can mislead us this badly, what role should it play in science?</li>
+            <li><strong>Does it matter if the story is true?</strong> The famous tale of Galileo dropping balls from the Leaning Tower of Pisa may never have happened. Does the history of <em>how</em> we came to know something matter, or only the knowledge itself?</li>
+            <li><strong>Can motion be captured in symbols?</strong> Four short equations can predict the flight of a ball or a space probe. What, if anything, is lost when we describe the world in mathematics?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <ol>
+        <li><a href="#describing">Distance and displacement</a></li>
+        <li><a href="#velocity">Speed and velocity</a></li>
+        <li><a href="#acceleration">Acceleration</a></li>
+        <li><a href="#graphs">Motion graphs</a></li>
+        <li><a href="#suvat">Equations of motion</a></li>
+        <li><a href="#freefall">Free fall and measuring <em>g</em></a></li>
+        <li><a href="#projectiles">Projectile motion</a></li>
+        <li><a href="#relative">Relative velocity: an introduction</a></li>
+        <li><a href="#drag">Fluid resistance and terminal speed</a></li>
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="describing">1. Distance and displacement</h2>
+    <p>To describe where an object is, we choose a reference point (the origin) and a positive direction. The object's <strong>position</strong> $x$ is how far it is from the origin, with a sign to show which side it is on.</p>
+    <ul>
+      <li><strong>Distance</strong> is the total length of the path travelled. It is a <strong>scalar</strong>: it has size only, and it can never decrease.</li>
+      <li><strong>Displacement</strong> $s$ is the change in position, measured in a straight line from start to finish. It is a <strong>vector</strong>: it has size and direction, shown by its sign.</li>
+    </ul>
+    <div class="key">$$s = \Delta x = x_{\text{final}} - x_{\text{initial}}$$</div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 520 170" role="img" aria-labelledby="fig1t">
+        <title id="fig1t">A student walks 8 m in the positive direction and then 5 m back. The distance is 13 m but the displacement is +3 m.</title>
+        <line class="axis" x1="40" y1="105" x2="505" y2="105" marker-end="url(#ah3)"/>
+        <g class="axis">
+          <line x1="80" y1="99" x2="80" y2="111"/><line x1="120" y1="99" x2="120" y2="111"/><line x1="160" y1="99" x2="160" y2="111"/>
+          <line x1="200" y1="99" x2="200" y2="111"/><line x1="240" y1="99" x2="240" y2="111"/><line x1="280" y1="99" x2="280" y2="111"/>
+          <line x1="320" y1="99" x2="320" y2="111"/><line x1="360" y1="99" x2="360" y2="111"/><line x1="400" y1="99" x2="400" y2="111"/>
+          <line x1="440" y1="99" x2="440" y2="111"/>
+        </g>
+        <g text-anchor="middle">
+          <text x="80" y="128">0</text><text x="120" y="128">1</text><text x="160" y="128">2</text><text x="200" y="128">3</text>
+          <text x="240" y="128">4</text><text x="280" y="128">5</text><text x="320" y="128">6</text><text x="360" y="128">7</text>
+          <text x="400" y="128">8</text><text x="440" y="128">9</text>
+        </g>
+        <text x="505" y="92" text-anchor="end">x / m</text>
+        <line class="l1" x1="80" y1="40" x2="398" y2="40" marker-end="url(#ah1)"/>
+        <text class="t1" x="240" y="30" text-anchor="middle">walks 8 m forward</text>
+        <line class="l2" x1="400" y1="75" x2="202" y2="75" marker-end="url(#ah2)"/>
+        <text class="t2" x="300" y="66" text-anchor="middle">then 5 m back</text>
+        <line class="l3 thin dash" x1="80" y1="150" x2="198" y2="150" marker-end="url(#ah3)"/>
+        <text x="212" y="156">displacement = +3 m</text>
+      </svg>
+      <figcaption>The same journey has a distance of 13 m but a displacement of only +3 m.</figcaption>
+    </figure>
+
+    <!-- ===================================================== -->
+    <h2 id="velocity">2. Speed and velocity</h2>
+    <p><strong>Velocity</strong> is the rate of change of position (displacement per unit time). It is a vector. <strong>Speed</strong> is distance per unit time, and it is a scalar. Both are measured in $\text{m s}^{-1}$.</p>
+    <div class="key">
+      $$\text{average velocity} = \frac{\Delta x}{\Delta t} = \frac{s}{t}$$
+      $$\text{average speed} = \frac{\text{distance}}{\text{time}}$$
     </div>
-    <p>Only use these when the acceleration is constant. If the acceleration changes, use the gradient of a velocity–time graph and the area under it instead.</p>
+    <p>For the walk above, if it took 10 s, the average speed is $13 \div 10 = 1.3$ $\text{m s}^{-1}$, but the average velocity is only $+3 \div 10 = +0.3$ $\text{m s}^{-1}$.</p>
+
+    <h3>Average and instantaneous values</h3>
+    <p>An <strong>average</strong> value is taken over a time interval. An <strong>instantaneous</strong> value is the value at one moment, like the reading on a car's speedometer. If you measure over shorter and shorter time intervals, the average velocity gets closer and closer to the instantaneous velocity.</p>
+    <p>On a displacement–time graph:</p>
+    <ul>
+      <li>the <strong>average velocity</strong> between two times is the gradient of the straight line (chord) joining the two points;</li>
+      <li>the <strong>instantaneous velocity</strong> at one time is the gradient of the <strong>tangent</strong> to the curve at that point.</li>
+    </ul>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 380 260" role="img" aria-labelledby="fig2t">
+        <title id="fig2t">A curved displacement–time graph of an object speeding up. A chord joins points P and Q; its gradient is the average velocity. A tangent touches the curve at P; its gradient is the instantaneous velocity at P.</title>
+        <line class="axis" x1="50" y1="225" x2="345" y2="225" marker-end="url(#ah3)"/>
+        <line class="axis" x1="50" y1="225" x2="50" y2="15" marker-end="url(#ah3)"/>
+        <text x="350" y="230">t</text><text x="34" y="24">s</text>
+        <path class="l3" d="M50 220 Q185 220 320 40"/>
+        <line class="l2 thin" x1="115" y1="219.4" x2="300" y2="75.6"/>
+        <line class="l1 thin dash" x1="95" y1="220" x2="270" y2="142"/>
+        <circle cx="140" cy="200" r="5" class="f3"/><circle cx="275" cy="95" r="5" class="f3"/>
+        <text x="140" y="190" text-anchor="end">P</text><text x="286" y="118">Q</text>
+      </svg>
+      <figcaption>The curve gets steeper, so the object is speeding up.<br>
+        <span class="key-2">Chord PQ</span>: gradient = average velocity between P and Q.<br>
+        <span class="key-1">Tangent at P</span> (dashed): gradient = instantaneous velocity at P.</figcaption>
+    </figure>
+
+    <!-- ===================================================== -->
+    <h2 id="acceleration">3. Acceleration</h2>
+    <p><strong>Acceleration</strong> is the rate of change of velocity. It is a vector, measured in $\text{m s}^{-2}$. Using $u$ for the initial velocity and $v$ for the final velocity:</p>
+    <div class="key">$$a = \frac{\Delta v}{\Delta t} = \frac{v - u}{t}$$</div>
+    <ul>
+      <li>A negative acceleration doesn't always mean "slowing down". It means the acceleration points in the negative direction. An object moving in the negative direction with negative acceleration is <em>speeding up</em>.</li>
+      <li><strong>Uniform</strong> (constant) acceleration: the velocity changes by the same amount every second. The velocity–time graph is a straight line.</li>
+      <li><strong>Non-uniform</strong> acceleration: the rate of change of velocity itself changes, for example a falling object affected by air resistance. The velocity–time graph is curved.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="graphs">4. Motion graphs</h2>
+    <p>Graphs are one of the most important tools in kinematics. Learn what the <strong>gradient</strong> and the <strong>area under the graph</strong> mean for each type:</p>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Graph</th><th>Gradient gives</th><th>Area under graph gives</th></tr>
+        <tr><td>displacement–time ($s$–$t$)</td><td>velocity</td><td>(nothing useful)</td></tr>
+        <tr><td>velocity–time ($v$–$t$)</td><td>acceleration</td><td>displacement</td></tr>
+        <tr><td>acceleration–time ($a$–$t$)</td><td>(not needed)</td><td>change in velocity</td></tr>
+      </table>
+    </div>
+    <p>Here are the three graphs for an object that starts from rest with constant acceleration:</p>
+
+    <div class="diagram-row">
+      <figure class="diagram">
+        <svg viewBox="0 0 200 170" class="small" role="img" aria-labelledby="fig3at">
+          <title id="fig3at">Displacement–time graph: a curve getting steeper, starting flat at the origin.</title>
+          <line class="axis" x1="30" y1="140" x2="190" y2="140" marker-end="url(#ah3)"/>
+          <line class="axis" x1="30" y1="140" x2="30" y2="12" marker-end="url(#ah3)"/>
+          <text x="182" y="160">t</text><text x="14" y="22">s</text>
+          <path class="l1" d="M30 140 Q105 140 180 25"/>
+        </svg>
+        <figcaption>$s$–$t$: curve, getting steeper</figcaption>
+      </figure>
+      <figure class="diagram">
+        <svg viewBox="0 0 200 170" class="small" role="img" aria-labelledby="fig3bt">
+          <title id="fig3bt">Velocity–time graph: a straight line rising from the origin, with the triangle under it shaded to show the area, which equals the displacement.</title>
+          <polygon class="area" points="30,140 180,40 180,140"/>
+          <line class="axis" x1="30" y1="140" x2="190" y2="140" marker-end="url(#ah3)"/>
+          <line class="axis" x1="30" y1="140" x2="30" y2="12" marker-end="url(#ah3)"/>
+          <text x="182" y="160">t</text><text x="14" y="22">v</text>
+          <line class="l1" x1="30" y1="140" x2="180" y2="40"/>
+          <text x="125" y="125" text-anchor="middle">area = s</text>
+        </svg>
+        <figcaption>$v$–$t$: straight line, gradient = $a$</figcaption>
+      </figure>
+      <figure class="diagram">
+        <svg viewBox="0 0 200 170" class="small" role="img" aria-labelledby="fig3ct">
+          <title id="fig3ct">Acceleration–time graph: a horizontal line, with the rectangle under it shaded to show the area, which equals the change in velocity.</title>
+          <rect class="area" x="30" y="80" width="150" height="60"/>
+          <line class="axis" x1="30" y1="140" x2="190" y2="140" marker-end="url(#ah3)"/>
+          <line class="axis" x1="30" y1="140" x2="30" y2="12" marker-end="url(#ah3)"/>
+          <text x="182" y="160">t</text><text x="14" y="22">a</text>
+          <line class="l1" x1="30" y1="80" x2="180" y2="80"/>
+          <text x="105" y="115" text-anchor="middle">area = Δv</text>
+        </svg>
+        <figcaption>$a$–$t$: horizontal line</figcaption>
+      </figure>
+    </div>
+    <p>Graph areas can be negative. On a velocity–time graph, area <em>below</em> the time axis is displacement in the negative direction. To find the <strong>distance</strong>, add the sizes of all the areas. To find the <strong>displacement</strong>, add them with their signs.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="suvat">5. Equations of motion for uniform acceleration</h2>
+    <p>When the acceleration is <strong>constant</strong>, five quantities describe the motion: $s$ (displacement), $u$ (initial velocity), $v$ (final velocity), $a$ (acceleration) and $t$ (time). These four equations, given in the data booklet, link them:</p>
+    <div class="key">
+      $$v = u + at \qquad\qquad s = ut + \tfrac{1}{2}at^{2}$$
+      $$v^{2} = u^{2} + 2as \qquad\qquad s = \frac{(u + v)}{2}\,t$$
+    </div>
+    <p><strong>Where do they come from?</strong> Rearranging the definition of acceleration gives $v = u + at$. On the straight-line $v$–$t$ graph, the area under the line is a trapezium, so $s = \frac{(u+v)}{2}t$. Substituting $v = u + at$ into this gives $s = ut + \frac{1}{2}at^2$. Eliminating $t$ between the first two gives $v^2 = u^2 + 2as$.</p>
+    <p><strong>A reliable method:</strong></p>
+    <ol>
+      <li>Draw a quick sketch and choose a positive direction.</li>
+      <li>List the values you know for $s, u, v, a, t$ (with signs) and the one you want.</li>
+      <li>Pick the equation that contains your three known values and the one you want, and leaves out the quantity you neither know nor need.</li>
+      <li>Substitute, solve, and give the answer with a unit, a sensible number of significant figures, and a direction if it's a vector.</li>
+    </ol>
+
+    <div class="worked">
+      <h3>Worked example: a braking train</h3>
+      <p>A train travelling at 24 $\text{m s}^{-1}$ brakes with constant deceleration and stops in a distance of 160 m. Find (a) its acceleration and (b) how long it takes to stop.</p>
+      <p>Take the direction of motion as positive. Known: $u = 24$ $\text{m s}^{-1}$, $v = 0$, $s = 160$ m.</p>
+      <p>(a) $t$ is not known, so use $v^2 = u^2 + 2as$: &nbsp; $0 = 24^2 + 2a(160)$, so $a = -\dfrac{576}{320} = -1.8$ $\text{m s}^{-2}$.<br>
+      The negative sign shows the acceleration is opposite to the motion: the train is slowing down.</p>
+      <p>(b) $v = u + at$: &nbsp; $0 = 24 + (-1.8)t$, so $t = 13$ s (13.3 s).</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="freefall">6. Free fall and measuring <em>g</em></h2>
+    <p>An object in <strong>free fall</strong> moves under gravity alone, with no air resistance. Near the Earth's surface, all objects in free fall have the same downward acceleration, whatever their mass:</p>
+    <div class="key">$$g = 9.8 \text{ m s}^{-2} \text{ (downwards)}$$</div>
+    <p>If you take <em>up</em> as positive, then $a = -9.8$ $\text{m s}^{-2}$ for the whole flight: on the way up, at the top and on the way down. At the highest point the velocity is momentarily zero, but the acceleration is <strong>not</strong> zero.</p>
+
+    <div class="worked">
+      <h3>Worked example: a stone thrown from a cliff</h3>
+      <p>A stone is thrown vertically upwards at 12 $\text{m s}^{-1}$ from the edge of a cliff 25 m above the sea. Find (a) the time until it hits the sea and (b) its speed as it hits the water.</p>
+      <p>Take up as positive. Known: $u = +12$ $\text{m s}^{-1}$, $a = -9.8$ $\text{m s}^{-2}$, $s = -25$ m (the stone finishes 25 m <em>below</em> where it started).</p>
+      <p>(a) $s = ut + \frac{1}{2}at^2$: &nbsp; $-25 = 12t - 4.9t^2$, so $4.9t^2 - 12t - 25 = 0$.<br>
+      Using the quadratic formula and taking the positive root:</p>
+      $$t = \frac{12 + \sqrt{12^2 + 4(4.9)(25)}}{2(4.9)} = 3.8 \text{ s}$$
+      <p>(b) $v^2 = u^2 + 2as$ $= 12^2 + 2(-9.8)(-25)$ $= 634$, so $v = -25$ $\text{m s}^{-1}$. The speed is 25 $\text{m s}^{-1}$, and the negative sign shows it is moving downwards.</p>
+    </div>
+
+    <h3>Determining <em>g</em> experimentally</h3>
+    <p>A common school method:</p>
+    <div class="diagram-row">
+      <figure class="diagram">
+        <svg viewBox="0 0 400 330" role="img" aria-labelledby="figgt">
+          <title id="figgt">Apparatus for measuring g. A steel ball hangs from an electromagnet on a clamp stand. A trapdoor sits a height h below the bottom of the ball. Both are wired to an electronic timer, which starts when the electromagnet is switched off and stops when the ball hits the trapdoor.</title>
+          <!-- stand -->
+          <line class="l3" x1="60" y1="25" x2="60" y2="300"/>
+          <line class="l3" x1="25" y1="300" x2="250" y2="300"/>
+          <line class="l3" x1="60" y1="40" x2="185" y2="40"/>
+          <!-- electromagnet and ball -->
+          <rect x="180" y="32" width="40" height="28" rx="3" class="f3"/>
+          <circle cx="200" cy="72" r="11" class="f1"/>
+          <text x="228" y="30">electromagnet</text>
+          <text x="216" y="80">steel ball</text>
+          <!-- fall path -->
+          <line class="l1 thin dash" x1="200" y1="88" x2="200" y2="248" marker-end="url(#ah1)"/>
+          <!-- trapdoor -->
+          <line class="l3" x1="150" y1="262" x2="185" y2="262"/>
+          <line class="l3" x1="185" y1="262" x2="232" y2="270"/>
+          <circle cx="185" cy="262" r="3" class="f3"/>
+          <line class="l3 thin" x1="150" y1="262" x2="150" y2="300"/>
+          <text x="190" y="318" text-anchor="middle">trapdoor</text>
+          <!-- height -->
+          <line class="l2 thin" x1="122" y1="85" x2="122" y2="258" marker-start="url(#ah2)" marker-end="url(#ah2)"/>
+          <line class="grid" x1="112" y1="83" x2="200" y2="83"/>
+          <line class="grid" x1="112" y1="262" x2="150" y2="262"/>
+          <text class="t2" x="100" y="178" text-anchor="end">h</text>
+          <!-- timer -->
+          <rect x="290" y="135" width="100" height="58" rx="6" class="axis"/>
+          <text x="340" y="157" text-anchor="middle">timer</text>
+          <text class="t1" x="340" y="182" text-anchor="middle">0.452 s</text>
+          <polyline class="axis" points="220,46 310,46 310,135"/>
+          <polyline class="axis" points="232,270 232,286 340,286 340,193"/>
+        </svg>
+        <figcaption>The timer <span class="key-1">starts</span> when the electromagnet releases the ball and <span class="key-1">stops</span> when the ball opens the trapdoor.</figcaption>
+      </figure>
+      <figure class="diagram">
+        <svg viewBox="0 0 220 190" class="small" role="img" aria-labelledby="figght">
+          <title id="figght">Graph of drop height h against time squared. The points lie on a straight line through the origin, whose gradient equals g divided by 2.</title>
+          <line class="axis" x1="40" y1="155" x2="210" y2="155" marker-end="url(#ah3)"/>
+          <line class="axis" x1="40" y1="155" x2="40" y2="12" marker-end="url(#ah3)"/>
+          <text x="186" y="178">t²</text><text x="18" y="26">h</text>
+          <line class="l1" x1="40" y1="155" x2="195" y2="35"/>
+          <circle cx="70" cy="133" r="4" class="f3"/><circle cx="96" cy="111" r="4" class="f3"/>
+          <circle cx="124" cy="92" r="4" class="f3"/><circle cx="150" cy="68" r="4" class="f3"/>
+          <circle cx="178" cy="49" r="4" class="f3"/>
+        </svg>
+        <figcaption>Plot $h$ against $t^2$: a straight line through the origin with <span class="key-1">gradient</span> $= \dfrac{g}{2}$.</figcaption>
+      </figure>
+    </div>
+    <ol>
+      <li>Drop a small steel ball from rest from a measured height $h$, using an electromagnet release and a trapdoor or light gate to time the fall $t$.</li>
+      <li>Repeat each height several times and find the mean time. Then repeat for 5–8 different heights.</li>
+      <li>Since $u = 0$, $h = \frac{1}{2}gt^2$. Plot $h$ against $t^2$. This should be a straight line through the origin with gradient $\frac{g}{2}$, so $g = 2 \times \text{gradient}$.</li>
+    </ol>
+    <p>Video analysis is another good method. Film a falling object next to a metre rule, track its position frame by frame, and find $g$ from the gradient of the velocity–time graph. Air resistance and reaction time are the main sources of error. Using a dense, small ball and electronic timing reduces both.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="projectiles">7. Projectile motion</h2>
+    <p>A <strong>projectile</strong> is an object that is launched and then moves under gravity alone, like a thrown ball. The key idea:</p>
+    <div class="key"><strong>The horizontal and vertical motions are independent.</strong> With no air resistance:
+      <ul>
+        <li><strong>Horizontally:</strong> no force, so no acceleration. The horizontal velocity $u_x$ stays constant, and $x = u_x t$.</li>
+        <li><strong>Vertically:</strong> constant acceleration $g$ downwards. Use the equations of motion with $a = -g$.</li>
+        <li><strong>Time</strong> $t$ is the only quantity the two directions share.</li>
+      </ul>
+    </div>
+    <p>Start by resolving the launch velocity $u$ at angle $\theta$ above the horizontal:</p>
+    <div class="key">$$u_x = u\cos\theta \qquad\qquad u_y = u\sin\theta$$</div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 520 260" role="img" aria-labelledby="fig4t">
+        <title id="fig4t">The parabolic path of a projectile. Its horizontal velocity component, shown as equal blue arrows, is the same everywhere. Its vertical component, shown as orange arrows, points up and gets smaller on the way up, is zero at the top, and points down and gets larger on the way down.</title>
+        <line class="axis" x1="20" y1="242" x2="505" y2="242"/>
+        <path class="l3 dash" d="M40 230 Q260 -110 480 230"/>
+        <!-- launch -->
+        <line class="l1 thin" x1="40" y1="230" x2="100" y2="230" marker-end="url(#ah1)"/>
+        <line class="l2 thin" x1="40" y1="230" x2="40" y2="137" marker-end="url(#ah2)"/>
+        <!-- rising -->
+        <line class="l1 thin" x1="150" y1="102" x2="210" y2="102" marker-end="url(#ah1)"/>
+        <line class="l2 thin" x1="150" y1="102" x2="150" y2="56" marker-end="url(#ah2)"/>
+        <!-- top -->
+        <line class="l1 thin" x1="260" y1="60" x2="320" y2="60" marker-end="url(#ah1)"/>
+        <text x="260" y="32" text-anchor="middle">vertical velocity = 0</text>
+        <!-- falling -->
+        <line class="l1 thin" x1="370" y1="102" x2="430" y2="102" marker-end="url(#ah1)"/>
+        <line class="l2 thin" x1="370" y1="102" x2="370" y2="148" marker-end="url(#ah2)"/>
+      </svg>
+      <figcaption>With no air resistance the path is a symmetrical parabola.<br>
+        <span class="key-1">Horizontal component</span>: the same everywhere.
+        <span class="key-2">Vertical component</span>: decreases going up, zero at the top, increases going down.</figcaption>
+    </figure>
+
+    <p>Useful facts for a projectile launched from and landing on level ground:</p>
+    <ul>
+      <li>At the <strong>highest point</strong>, $v_y = 0$, but $v_x = u_x$ is not zero.</li>
+      <li>The time to go up equals the time to come down.</li>
+      <li>The <strong>range</strong> is $u_x \times$ (total time of flight).</li>
+      <li>For a <strong>horizontal launch</strong> (for example, off a table), $u_y = 0$. The time to fall depends only on the height, not on the horizontal speed.</li>
+      <li>For a launch at an angle <strong>below the horizontal</strong> (for example, a ball thrown downwards off a cliff), the method is the same. With up as positive, $u_y = -u\sin\theta$ is negative from the start, and there is no "highest point" after launch.</li>
+      <li>To find the speed at any moment, combine the components: $v = \sqrt{v_x^2 + v_y^2}$, at angle $\tan^{-1}(v_y/v_x)$ to the horizontal.</li>
+    </ul>
+
+    <div class="worked">
+      <h3>Worked example: a football kicked from the ground</h3>
+      <p>A football is kicked at 18 $\text{m s}^{-1}$ at 35° above horizontal ground. Ignore air resistance. Find (a) the maximum height, (b) the time of flight and (c) the range.</p>
+      <p>Components: $u_x = 18\cos 35° = 14.7$ $\text{m s}^{-1}$, &nbsp; $u_y = 18\sin 35° = 10.3$ $\text{m s}^{-1}$.</p>
+      <p>(a) At the top, $v_y = 0$. Use $v_y^2 = u_y^2 - 2gh$: &nbsp; $h = \dfrac{10.3^2}{2 \times 9.8} = 5.4$ m.</p>
+      <p>(b) Time to the top: $0 = 10.3 - 9.8t$, so $t = 1.05$ s. The flight is symmetrical, so the total time is $2.1$ s.</p>
+      <p>(c) Range $= u_x t = 14.7 \times 2.10 = 31$ m.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="relative">8. Relative velocity: an introduction</h2>
+    <p>Every velocity is measured <strong>relative to something</strong>, called a <strong>frame of reference</strong>. Usually that's the ground, but it doesn't have to be. Sitting on a moving train, you are at rest relative to the train but moving at 30 $\text{m s}^{-1}$ relative to the platform. Both statements are correct.</p>
+    <p>The velocity of object A <em>as seen by an observer moving with</em> object B is:</p>
+    <div class="key">$$v_{AB} = v_A - v_B$$
+      <p style="margin:0">Here $v_A$ and $v_B$ are both measured relative to the ground. Read $v_{AB}$ as "the velocity of A relative to B".</p>
+    </div>
+
+    <h3>In one dimension</h3>
+    <p>Choose a positive direction and give each velocity a sign. On a straight road, take east as positive:</p>
+    <ul>
+      <li>Car A drives east at 30 $\text{m s}^{-1}$ and car B drives east at 25 $\text{m s}^{-1}$. Then $v_{AB} = 30 - 25 = +5$ $\text{m s}^{-1}$. To the driver of B, car A seems to creep slowly forward.</li>
+      <li>Car C drives <em>west</em> at 25 $\text{m s}^{-1}$, so $v_C = -25$ $\text{m s}^{-1}$. Then $v_{AC} = 30 - (-25) = +55$ $\text{m s}^{-1}$. Vehicles moving in opposite directions pass each other very fast, which is why head-on collisions are so serious.</li>
+    </ul>
+
+    <h3>In two dimensions</h3>
+    <p>The same equation works, but now the velocities are vectors, so the subtraction is done with a vector diagram. Subtracting a vector is the same as adding the vector reversed: $v_A - v_B = v_A + (-v_B)$.</p>
+
+    <div class="worked">
+      <h3>Worked example: two cars at a crossroads</h3>
+      <p>Car A travels east at 20 $\text{m s}^{-1}$. Car B travels north at 15 $\text{m s}^{-1}$. Find the velocity of A relative to B.</p>
+      <p>Draw $v_A$ (east), then add $-v_B$ (15 $\text{m s}^{-1}$ <em>south</em>) tip-to-tail. The resultant is $v_{AB}$:</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 400 230" role="img" aria-labelledby="figrvt">
+          <title id="figrvt">Left: car A's velocity of 20 metres per second east and car B's velocity of 15 metres per second north. Right: a vector triangle. The velocity of A, east, is followed by minus the velocity of B, pointing south. The resultant, the velocity of A relative to B, points east and south.</title>
+          <line class="l1" x1="20" y1="50" x2="128" y2="50" marker-end="url(#ah1)"/>
+          <text class="t1" x="40" y="38">v<tspan dy="5" font-size="13">A</tspan></text>
+          <line class="l2" x1="40" y1="200" x2="40" y2="113" marker-end="url(#ah2)"/>
+          <text class="t2" x="50" y="165">v<tspan dy="5" font-size="13">B</tspan></text>
+          <line class="grid" x1="160" y1="20" x2="160" y2="215"/>
+          <line class="l1" x1="200" y1="50" x2="318" y2="50" marker-end="url(#ah1)"/>
+          <text class="t1" x="245" y="38">v<tspan dy="5" font-size="13">A</tspan></text>
+          <line class="l2 dash" x1="320" y1="50" x2="320" y2="138" marker-end="url(#ah2)"/>
+          <text class="t2" x="328" y="100">−v<tspan dy="5" font-size="13">B</tspan></text>
+          <line class="l3" x1="200" y1="50" x2="318" y2="139" marker-end="url(#ah3)"/>
+          <text x="214" y="135">v<tspan dy="5" font-size="13">AB</tspan></text>
+        </svg>
+      </figure>
+      <p>Size: $|v_{AB}| = \sqrt{20^2 + 15^2} = 25$ $\text{m s}^{-1}$. &nbsp; Direction: $\tan^{-1}\!\left(\dfrac{15}{20}\right) = 37°$ south of east.</p>
+      <p>So, to the driver of car B, car A seems to be moving at 25 $\text{m s}^{-1}$ in a direction 37° south of east.</p>
+    </div>
+    <p><span class="tag hl">HL</span> In A.5 you will build on this idea with Galilean transformations and then special relativity. There, the same idea is written $u' = u - v$, where $u'$ is a velocity measured in a frame of reference that moves at velocity $v$.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="drag">9. Fluid resistance and terminal speed</h2>
+    <p>Air and water push back on moving objects. This <strong>fluid resistance</strong> (drag) always acts opposite to the velocity, and it gets larger as the speed increases. In this topic you only need to describe its effects, not calculate them.</p>
+
+    <h3>Falling objects and terminal speed</h3>
+    <ol>
+      <li>When an object is released, its speed is zero, so there is no drag. Its acceleration is $g$.</li>
+      <li>As it speeds up, the drag increases, so the resultant (net) downward force decreases. The object still speeds up, but its acceleration gets smaller.</li>
+      <li>Eventually the drag becomes equal in size to the weight. The resultant force is zero, so the acceleration is zero and the velocity stays constant. This constant velocity is the <strong>terminal speed</strong>.</li>
+    </ol>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 240" role="img" aria-labelledby="fig5t">
+        <title id="fig5t">Velocity–time graph for an object falling through air. It starts with gradient g, then curves and levels off at the terminal speed. A dashed straight line shows how it would continue with no air resistance.</title>
+        <line class="axis" x1="50" y1="205" x2="350" y2="205" marker-end="url(#ah3)"/>
+        <line class="axis" x1="50" y1="205" x2="50" y2="15" marker-end="url(#ah3)"/>
+        <text x="355" y="210">t</text><text x="30" y="26">v</text>
+        <line class="l2 thin dash" x1="50" y1="205" x2="125" y2="55"/>
+        <line class="grid dash" x1="50" y1="80" x2="340" y2="80"/>
+        <path class="l1" d="M50 205 C 105 95, 170 82, 340 80"/>
+        <text class="t1" x="340" y="108" text-anchor="end">terminal speed</text>
+      </svg>
+      <figcaption><span class="key-1">With air resistance</span> the gradient (acceleration) decreases to zero as the object reaches terminal speed.
+        <span class="key-2">Dashed line</span>: free fall with no air resistance.</figcaption>
+    </figure>
+
+    <h3>Effect on projectiles</h3>
+    <p>Compared with the same launch in a vacuum, a projectile moving through air:</p>
+    <ul>
+      <li>reaches a <strong>lower maximum height</strong>, and reaches it <strong>sooner</strong>;</li>
+      <li>has a <strong>shorter range</strong>, and usually a shorter time of flight;</li>
+      <li>has a horizontal velocity that <strong>decreases</strong> instead of staying constant;</li>
+      <li>follows a path that is <strong>no longer symmetrical</strong>: it comes down more steeply than it went up;</li>
+      <li>has an acceleration that is not constant, and not simply $g$.</li>
+    </ul>
+    <figure class="diagram">
+      <svg viewBox="0 0 520 230" role="img" aria-labelledby="fig6t">
+        <title id="fig6t">Two trajectories with the same launch velocity. Without air resistance the path is a tall symmetrical parabola. With air resistance the path is lower and shorter, with a steeper descent.</title>
+        <line class="axis" x1="15" y1="211" x2="505" y2="211"/>
+        <path class="l1" d="M30 210 Q250 -70 470 210"/>
+        <path class="l2 dash" d="M30 210 C 130 83, 265 60, 335 210"/>
+      </svg>
+      <figcaption><span class="key-1">Without air resistance</span>: tall, symmetrical parabola.
+        <span class="key-2">With air resistance</span> (dashed): lower, earlier peak, shorter range and a steeper fall.</figcaption>
+    </figure>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">10. Common mistakes</h2>
+    <ul>
+      <li><strong>Mixing up distance and displacement</strong>, or speed and velocity. If the question says "velocity", give a direction or sign.</li>
+      <li><strong>Inconsistent signs.</strong> Choose a positive direction at the start and stick to it. If up is positive, then $g$ is negative.</li>
+      <li><strong>Using the equations of motion when the acceleration isn't constant.</strong> Use graphs instead.</li>
+      <li><strong>Saying the acceleration is zero at the top of a throw.</strong> Only the vertical velocity is zero there.</li>
+      <li><strong>Mixing horizontal and vertical quantities</strong> in one projectile equation. Only time links them.</li>
+      <li><strong>Using the gradient of a curve between two points</strong> when the question asks for an instantaneous value. Draw a tangent.</li>
+      <li><strong>Leaving the calculator in radians</strong> when resolving velocities.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">11. Check your understanding</h2>
+    <details class="check">
+      <summary>A cyclist rides once around a circular track of radius 50 m in 40 s. What are the average speed and the average velocity?</summary>
+      <p>Distance $= 2\pi \times 50 = 314$ m, so the average speed $= 314 \div 40 = 7.9$ $\text{m s}^{-1}$. The cyclist ends where they started, so the displacement is zero and the average velocity is <strong>zero</strong>.</p>
+    </details>
+    <details class="check">
+      <summary>A ball is thrown straight up. What is its acceleration at the highest point?</summary>
+      <p>$9.8$ $\text{m s}^{-2}$ downwards, the same as everywhere else in the flight. The velocity is zero at that instant, but it is still changing.</p>
+    </details>
+    <details class="check">
+      <summary>Two identical balls leave a table at the same moment. One is dropped and the other is pushed off horizontally at 3 $\text{m s}^{-1}$. Which lands first?</summary>
+      <p>They land <strong>at the same time</strong>. Both start with zero vertical velocity and have the same vertical acceleration $g$, so their vertical motions are identical. The horizontal motion doesn't affect the vertical motion.</p>
+    </details>
+    <details class="check">
+      <summary>A boat points straight across a river and moves at 3.0 $\text{m s}^{-1}$ relative to the water. The river flows at 2.0 $\text{m s}^{-1}$. What is the boat's velocity relative to the riverbank?</summary>
+      <p>Add the two velocities as vectors, at right angles: $\sqrt{3.0^2 + 2.0^2} = 3.6$ $\text{m s}^{-1}$, at $\tan^{-1}(2.0/3.0) = 34°$ downstream from the "straight across" direction. The boat drifts downstream as it crosses.</p>
+    </details>
+    <details class="check">
+      <summary>On a velocity–time graph, how do you find the distance travelled if part of the graph is below the time axis?</summary>
+      <p>Work out each area separately and add their sizes, ignoring the signs. (Adding them <em>with</em> their signs gives the displacement instead.)</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=A.1">Practise A.1 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>

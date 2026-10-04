@@ -7,11 +7,12 @@
   <link rel="stylesheet" href="css/style.css">
   <script defer src="js/site.js"></script>
   <script defer src="js/questions.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
 </head>
 <body data-root="" data-section="questions">
   <header id="site-header"></header>
   <main>
+    <p class="crumbs"><a id="q-back" href="themes/index.html">← Back to themes</a></p>
     <h1>Question bank</h1>
     <p class="lead">Multiple-choice questions are marked straight away. For structured questions, write your answer,
       check the mark scheme, then record the marks you earned. Your progress is saved in this browser only.</p>
@@ -48,6 +49,12 @@
           <option value="started">In progress</option>
           <option value="review">Needs another look</option>
           <option value="done">Fully correct</option>
+        </select>
+      </label>
+      <label>Show
+        <select id="f-view">
+          <option value="one">One at a time</option>
+          <option value="all">All on one page</option>
         </select>
       </label>
     </div>
