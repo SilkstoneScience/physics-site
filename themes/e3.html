@@ -4,15 +4,389 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>E.3 Radioactive decay · DP Physics</title>
+  <meta name="description" content="IB DP Physics E.3 Radioactive decay: the strong nuclear force, mass defect and binding energy, the binding energy per nucleon curve, alpha, beta and gamma decay equations, neutrinos, penetration and ionization, activity, half-life and background radiation; HL: neutron–proton ratio, nuclear energy levels, the beta spectrum, the decay constant and the exponential decay law.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="E.3">
+</head>
+<body data-root="../" data-section="themes" data-topic="E.3">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="e.html">Theme E Nuclear and quantum physics</a></p>
-    <h1><span class="code">E.3</span>Radioactive decay</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <h1><span class="code">E.3</span>Radioactive decay <span class="tag hl">+ HL extra</span></h1>
+    <p class="lead">What holds a nucleus together, and why do some nuclei fall apart? This topic covers the <strong>strong nuclear force</strong>, <strong>binding energy</strong> and $E = mc^2$, the three kinds of radioactive decay (alpha, beta and gamma), and how <strong>half-life</strong> lets us make precise predictions about a completely random process. HL students go further, with the stability of nuclei, nuclear energy levels, the neutrino, and the exponential decay law (sections 11–16).</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Serendipity</span><span class="tag">Conservation laws</span><span class="tag">Risk</span><span class="tag">Patterns</span></div>
+          <p><strong>Serendipity.</strong> In 1896 Henri Becquerel left uranium salts on a wrapped photographic plate in a drawer, and found the plate fogged. Marie and Pierre Curie went on to discover polonium and radium, and Marie Curie coined the word "radioactivity".</p>
+          <p><strong>Conservation laws.</strong> Beta particles come out with a range of energies, which seemed to break the conservation of energy. In 1930 Wolfgang Pauli proposed an unseen particle to carry the missing energy. The neutrino was finally detected in 1956.</p>
+          <p><strong>Risk.</strong> Early workers handled radium with bare hands, and radium paint was used on watch dials and sold in "health" tonics. The harm it caused led to the first radiation safety rules. Today the same radiation treats cancer.</p>
+          <p><strong>Patterns.</strong> Each individual decay is random, yet a large sample decays in a completely predictable way. Physics often finds simple laws in the behaviour of huge numbers of random events.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>Can a random process be a law of nature?</strong> No one can say when a particular nucleus will decay, yet half-lives are known to many decimal places. What kind of knowledge is a probability?</li>
+            <li><strong>Should we believe in what we can't detect?</strong> Pauli's neutrino was accepted by many physicists for over 20 years before anyone detected it. What justified that belief?</li>
+            <li><strong>Who decides what risk is acceptable?</strong> Radioactive sources are used in hospitals, smoke detectors and power stations. Should the public or experts decide how much risk is worth the benefit?</li>
+            <li><strong>How far can we extrapolate?</strong> Radioactive dating assumes that half-lives have never changed. How do we know that this was true millions of years ago?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <p style="margin:8px 0 0"><strong>SL and HL</strong></p>
+      <ol>
+        <li><a href="#strong">Isotopes and the strong nuclear force</a></li>
+        <li><a href="#binding">Mass defect and binding energy</a></li>
+        <li><a href="#curve">Binding energy per nucleon</a></li>
+        <li><a href="#random">Random and spontaneous decay</a></li>
+        <li><a href="#types">Alpha, beta and gamma decay</a></li>
+        <li><a href="#neutrino">Neutrinos and antineutrinos</a></li>
+        <li><a href="#penetration">Penetration and ionization</a></li>
+        <li><a href="#halflife">Activity, count rate and half-life</a></li>
+        <li><a href="#background">Background radiation</a></li>
+        <li><a href="#uses">Using radioactivity</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><a href="#hl"><strong>HL only</strong></a></p>
+      <ol start="11">
+        <li><a href="#evidence">Evidence for the strong nuclear force</a></li>
+        <li><a href="#stability">Stability and the neutron–proton ratio</a></li>
+        <li><a href="#levels">Nuclear energy levels</a></li>
+        <li><a href="#betaspec">The beta spectrum and the neutrino</a></li>
+        <li><a href="#law">The decay constant and the decay law</a></li>
+        <li><a href="#activity">Activity and half-life</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><strong>Review</strong></p>
+      <ol start="17">
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="strong">1. Isotopes and the strong nuclear force</h2>
+    <p><strong>Isotopes</strong> are nuclei with the same number of protons but different numbers of neutrons (E.1). Carbon-12, carbon-13 and carbon-14 all have 6 protons, with 6, 7 and 8 neutrons. Some isotopes are stable; others, like carbon-14, are radioactive.</p>
+    <p>Protons repel each other electrically, and at nuclear distances that repulsion is enormous, about 230 N between two protons $10^{-15}$ m apart. Gravity is far too weak to hold them together. Something else must.</p>
+    <div class="key">
+      <p style="margin:0">The <strong>strong nuclear force</strong> acts between all nucleons (proton–proton, proton–neutron and neutron–neutron). It is <strong>attractive</strong> and very strong, but <strong>short-range</strong>: it acts only up to about $3 \times 10^{-15}$ m, roughly the distance between neighbouring nucleons. At even smaller distances (under about $0.5 \times 10^{-15}$ m) it becomes repulsive, which stops nucleons merging.</p>
+    </div>
+    <p>Because it is short-range, each nucleon is only held by its nearest neighbours. The electric repulsion, though, acts between <em>every</em> pair of protons in the nucleus. This is why large nuclei need extra neutrons, which add strong-force "glue" without adding repulsion.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="binding">2. Mass defect and binding energy</h2>
+    <p>The mass of a nucleus is always <strong>less</strong> than the total mass of its separate protons and neutrons. The difference is the <strong>mass defect</strong>, $\Delta m$.</p>
+    <div class="key">
+      $$E = mc^2$$
+      <p style="margin:0">Mass and energy are equivalent. The <strong>binding energy</strong> of a nucleus is the energy needed to separate it completely into its individual nucleons. It equals the energy released when the nucleus forms, and is given by $E = \Delta m\,c^2$.</p>
+    </div>
+    <p>Nuclear masses are given in three units:</p>
+    <ul>
+      <li>kilograms;</li>
+      <li>unified atomic mass units: $1\ \text{u} = 1.661 \times 10^{-27}$ kg, one-twelfth of the mass of a carbon-12 atom;</li>
+      <li>$\text{MeV}\,c^{-2}$: $1\ \text{u} = 931.5\ \text{MeV}\,c^{-2}$. Using this, a mass in u converts directly into an energy: multiply by 931.5 to get MeV.</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: binding energy of helium-4</h3>
+      <p>A helium-4 nucleus has a mass of 4.001506 u. A proton is 1.007276 u and a neutron 1.008665 u. Find its binding energy and binding energy per nucleon.</p>
+      <p>Separate nucleons: $2 \times 1.007276 + 2 \times 1.008665 = 4.031882$ u.</p>
+      <p>Mass defect: $\Delta m = 4.031882 - 4.001506 = 0.030376$ u.</p>
+      <p>Binding energy: $0.030376 \times 931.5 = 28.3$ MeV. In joules: $28.3 \times 10^{6} \times 1.60 \times 10^{-19} = 4.53 \times 10^{-12}$ J.</p>
+      <p>Per nucleon: $\dfrac{28.3}{4} = 7.07$ MeV.</p>
+    </div>
+    <p>In every nuclear reaction, the energy released is $\Delta m\,c^2$, where $\Delta m$ is the total mass before minus the total mass after. Energy is released only if the products have <strong>less</strong> mass (and so more binding energy) than the starting nuclei.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="curve">3. Binding energy per nucleon</h2>
+    <p>The <strong>binding energy per nucleon</strong> measures how tightly each nucleon is held. The higher it is, the more stable the nucleus.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 232" role="img" aria-labelledby="e3at">
+        <title id="e3at">Binding energy per nucleon against nucleon number. It rises steeply for light nuclei, with helium-4 unusually high at about 7 MeV, reaches a broad peak of about 8.8 MeV near iron-56, then falls slowly to about 7.6 MeV for uranium-235.</title>
+        <line class="axis" x1="52.0" y1="205.0" x2="372.0" y2="205.0" marker-end="url(#ah3)"/><line class="axis" x1="52.0" y1="209.0" x2="52.0" y2="12.0" marker-end="url(#ah3)"/><line class="axis" x1="48.0" y1="167.0" x2="52.0" y2="167.0"/><text x="44.0" y="171.0" text-anchor="end" style="font-size:12px">2</text><line class="grid" x1="52.0" y1="167.0" x2="365.0" y2="167.0"/><line class="axis" x1="48.0" y1="129.0" x2="52.0" y2="129.0"/><text x="44.0" y="133.0" text-anchor="end" style="font-size:12px">4</text><line class="grid" x1="52.0" y1="129.0" x2="365.0" y2="129.0"/><line class="axis" x1="48.0" y1="91.0" x2="52.0" y2="91.0"/><text x="44.0" y="95.0" text-anchor="end" style="font-size:12px">6</text><line class="grid" x1="52.0" y1="91.0" x2="365.0" y2="91.0"/><line class="axis" x1="48.0" y1="53.0" x2="52.0" y2="53.0"/><text x="44.0" y="57.0" text-anchor="end" style="font-size:12px">8</text><line class="grid" x1="52.0" y1="53.0" x2="365.0" y2="53.0"/><line class="axis" x1="114.5" y1="205.0" x2="114.5" y2="209.0"/><text x="114.5" y="224.0" text-anchor="middle" style="font-size:12px">50</text><line class="axis" x1="177.0" y1="205.0" x2="177.0" y2="209.0"/><text x="177.0" y="224.0" text-anchor="middle" style="font-size:12px">100</text><line class="axis" x1="239.5" y1="205.0" x2="239.5" y2="209.0"/><text x="239.5" y="224.0" text-anchor="middle" style="font-size:12px">150</text><line class="axis" x1="302.0" y1="205.0" x2="302.0" y2="209.0"/><text x="302.0" y="224.0" text-anchor="middle" style="font-size:12px">200</text><text x="372.0" y="197.0" text-anchor="end" style="font-size:14px">A</text><text x="58.0" y="16.0" style="font-size:12px">binding energy per nucleon / MeV</text><polyline class="l1" fill="none" points="54.5,183.9 55.8,151.2 57.0,70.7 59.5,103.7 60.8,98.4 63.2,82.3 65.8,73.3 67.0,59.1 69.5,62.9 72.0,53.4 77.0,52.4 82.0,47.2 87.0,44.2 92.0,42.0 97.0,40.3 102.0,39.1 107.0,38.3 112.0,37.7 117.0,37.3 122.0,37.1 127.0,37.0 132.0,37.0 137.0,37.2 142.0,37.3 147.0,37.6 152.0,37.9 157.0,38.3 162.0,38.6 167.0,39.1 172.0,39.5 177.0,40.0 182.0,40.5 187.0,41.0 192.0,41.5 197.0,42.1 202.0,42.6 207.0,43.2 212.0,43.8 217.0,44.4 222.0,45.0 227.0,45.5 232.0,46.1 237.0,46.7 242.0,47.3 247.0,47.9 252.0,48.5 257.0,49.1 262.0,49.8 267.0,50.4 272.0,51.0 277.0,51.6 282.0,52.2 287.0,52.8 292.0,53.4 297.0,54.0 302.0,54.6 307.0,55.2 312.0,55.8 317.0,56.4 322.0,57.0 327.0,57.6 332.0,58.1 337.0,58.7 342.0,59.3 347.0,59.9 352.0,60.5"/><circle cx="54.5" cy="183.9" r="2.5" class="f1"/><circle cx="55.8" cy="151.2" r="2.5" class="f1"/><circle cx="57.0" cy="70.7" r="2.5" class="f1"/><circle cx="59.5" cy="103.7" r="2.5" class="f1"/><circle cx="60.8" cy="98.4" r="2.5" class="f1"/><circle cx="63.2" cy="82.3" r="2.5" class="f1"/><circle cx="65.8" cy="73.3" r="2.5" class="f1"/><circle cx="67.0" cy="59.1" r="2.5" class="f1"/><circle cx="69.5" cy="62.9" r="2.5" class="f1"/><circle cx="72.0" cy="53.4" r="2.5" class="f1"/><circle cx="77.0" cy="52.4" r="2.5" class="f1"/><circle cx="122.0" cy="38.0" r="3.5" class="f2"/><text class="t2" x="122.0" y="58.0" text-anchor="middle" style="font-size:12px">Fe-56</text><text x="64.0" y="74.7" style="font-size:12px">He-4</text><circle cx="345.8" cy="59.7" r="3.5" class="f2"/><text class="t2" x="345.8" y="77.7" text-anchor="end" style="font-size:12px">U-235</text>
+      </svg>
+      <figcaption>Binding energy per nucleon against nucleon number A. Iron-56 is near the peak (about 8.8 MeV). Helium-4 is unusually stable for such a light nucleus.</figcaption>
+    </figure>
+    <ul>
+      <li>For light nuclei it rises steeply, because each new nucleon has more neighbours to bond with.</li>
+      <li>It peaks near iron and nickel ($A \approx 56$–62). These are the most tightly bound nuclei.</li>
+      <li>It falls gradually for heavier nuclei, because the electric repulsion of all the protons grows.</li>
+    </ul>
+    <p>Any reaction that moves nuclei <strong>up</strong> the curve releases energy. That is why joining light nuclei (<strong>fusion</strong>, E.5) and splitting heavy ones (<strong>fission</strong>, E.4) both release energy.</p>
+    <div class="worked">
+      <h3>Worked example: reading the curve</h3>
+      <p>Uranium-235 has a binding energy per nucleon of about 7.6 MeV. Find its total binding energy.</p>
+      <p>$235 \times 7.6 \approx 1800$ MeV, about $2.9 \times 10^{-10}$ J. That is the energy needed to pull one uranium nucleus completely apart.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="random">4. Random and spontaneous decay</h2>
+    <p>An unstable nucleus can <strong>decay</strong>, emitting radiation and becoming a different nucleus (often of a different element). Radioactive decay is:</p>
+    <ul>
+      <li><strong>random</strong>: it is impossible to predict when a particular nucleus will decay, or which nucleus in a sample will decay next. Every nucleus of that kind has the same chance of decaying in a given time;</li>
+      <li><strong>spontaneous</strong>: it is not affected by outside conditions such as temperature, pressure or chemical reactions.</li>
+    </ul>
+    <p>A Geiger counter near a source clicks irregularly, and repeated counts in equal times vary. With large numbers of nuclei, though, the <em>fraction</em> that decays in a given time is very predictable, like tossing millions of coins.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="types">5. Alpha, beta and gamma decay</h2>
+    <p>In every decay equation, <strong>nucleon number</strong> (top numbers) and <strong>charge</strong> (bottom numbers) are both conserved.</p>
+    <h3>Alpha (α) decay</h3>
+    <p>The nucleus emits an <strong>alpha particle</strong>, a helium-4 nucleus: two protons and two neutrons. $A$ falls by 4 and $Z$ by 2. It happens mostly in heavy nuclei.</p>
+    $$^{210}_{\;84}\text{Po} \rightarrow\, ^{206}_{\;82}\text{Pb} + {}^{4}_{2}\alpha$$
+    <h3>Beta-minus (β⁻) decay</h3>
+    <p>A <strong>neutron</strong> in the nucleus turns into a proton, and the nucleus emits an <strong>electron</strong> and an <strong>antineutrino</strong>. $A$ stays the same and $Z$ rises by 1. It happens in nuclei with too many neutrons.</p>
+    $$^{14}_{\;6}\text{C} \rightarrow\, ^{14}_{\;7}\text{N} + {}^{\;\;0}_{-1}\text{e} + \bar{\nu}_e$$
+    <h3>Beta-plus (β⁺) decay</h3>
+    <p>A <strong>proton</strong> turns into a neutron, and the nucleus emits a <strong>positron</strong> (the antiparticle of the electron) and a <strong>neutrino</strong>. $A$ stays the same and $Z$ falls by 1. It happens in nuclei with too many protons.</p>
+    $$^{18}_{\;9}\text{F} \rightarrow\, ^{18}_{\;8}\text{O} + {}^{\;\;0}_{+1}\text{e} + \nu_e$$
+    <h3>Gamma (γ) decay</h3>
+    <p>A nucleus in an <strong>excited state</strong> (often left that way after an alpha or beta decay) drops to a lower energy state and emits a <strong>gamma-ray photon</strong>. $A$ and $Z$ don't change: it is the same nuclide, with less energy. An asterisk marks the excited nucleus.</p>
+    $$^{60}_{28}\text{Ni}^{*} \rightarrow\, ^{60}_{28}\text{Ni} + \gamma$$
+    <div class="worked">
+      <h3>Worked example: finding the missing nucleus</h3>
+      <p>Thorium-232 ($Z = 90$) undergoes alpha decay, and the product then undergoes β⁻ decay. Find the final nucleus.</p>
+      <p>Alpha: $A = 232 - 4 = 228$, $Z = 90 - 2 = 88$ (radium-228).</p>
+      <p>Beta-minus: $A = 228$, $Z = 88 + 1 = 89$. The final nucleus is $^{228}_{\;89}\text{Ac}$ (actinium-228). You don't need to know the chemical symbols; they would be given.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: energy of an alpha decay</h3>
+      <p>Using atomic masses, polonium-210 is 209.982874 u, lead-206 is 205.974465 u and helium-4 is 4.002603 u. Find the energy released when polonium-210 alpha-decays.</p>
+      <p>$\Delta m = 209.982874 - (205.974465 + 4.002603) = 0.005806$ u, so $E = 0.005806 \times 931.5 = 5.41$ MeV.</p>
+      <p>Almost all of this is carried by the alpha particle as kinetic energy. Using atomic masses is fine here: the electrons balance on both sides.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="neutrino">6. Neutrinos and antineutrinos</h2>
+    <p>The <strong>neutrino</strong> ($\nu_e$) and <strong>antineutrino</strong> ($\bar{\nu}_e$) have no charge and almost no mass, and they hardly interact with matter at all: billions pass through your body every second, mostly from the Sun, without any effect.</p>
+    <ul>
+      <li>β⁻ decay emits an electron and an <strong>antineutrino</strong>.</li>
+      <li>β⁺ decay emits a positron and a <strong>neutrino</strong>.</li>
+    </ul>
+    <p>They are needed to conserve energy and momentum in beta decay (see section 14 for the evidence).</p>
+
+    <!-- ===================================================== -->
+    <h2 id="penetration">7. Penetration and ionization</h2>
+    <p>As radiation passes through matter it knocks electrons out of atoms, <strong>ionizing</strong> them. The more strongly a radiation ionizes, the faster it loses its energy, and so the less far it gets.</p>
+    <div class="key">
+      <p><strong>Alpha (α):</strong> a helium nucleus, charge $+2e$. <strong>Strongly</strong> ionizing. Range a few cm in air; stopped by a sheet of paper or the outer layer of skin. Deflected slightly by electric and magnetic fields.</p>
+      <p><strong>Beta (β):</strong> an electron (β⁻) or positron (β⁺), charge $\mp e$. <strong>Medium</strong> ionizing. Range up to about 1 m in air; stopped by a few mm of aluminium. Deflected strongly by fields (β⁻ the opposite way to α).</p>
+      <p style="margin:0"><strong>Gamma (γ):</strong> a high-energy photon, no charge. <strong>Weakly</strong> ionizing. Very long range in air (its intensity falls with distance); never completely stopped, but reduced greatly by several cm of lead or thick concrete. Not deflected by fields.</p>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 200" role="img" aria-labelledby="e3bt">
+        <title id="e3bt">Penetrating power: alpha radiation is stopped by paper, beta radiation by a few millimetres of aluminium, and gamma radiation is reduced but not completely stopped by several centimetres of lead.</title>
+        <rect x="12" y="20" width="26" height="140" rx="5" class="f3" opacity="0.7"/><text x="25.0" y="176.0" text-anchor="middle" style="font-size:12px">source</text><rect x="108" y="20" width="4" height="140" class="f3" opacity="0.55"/><rect x="196" y="20" width="10" height="140" class="f3" opacity="0.35"/><rect x="282" y="20" width="26" height="140" class="f3" opacity="0.8"/><line class="l2" x1="40.0" y1="45.0" x2="104.0" y2="45.0" marker-end="url(#ah2)"/><text class="t2" x="60.0" y="38.0" text-anchor="middle" style="font-size:15px">α</text><line class="l1" x1="40.0" y1="90.0" x2="192.0" y2="90.0" marker-end="url(#ah1)"/><text class="t1" x="60.0" y="83.0" text-anchor="middle" style="font-size:15px">β</text><line class="l3" x1="40.0" y1="135.0" x2="280.0" y2="135.0"/><line class="l3 thin dash" x1="310.0" y1="135.0" x2="368.0" y2="135.0" marker-end="url(#ah3)"/><text x="60.0" y="128.0" text-anchor="middle" style="font-size:15px">γ</text><text x="110.0" y="178.0" text-anchor="middle" style="font-size:12px">paper</text><text x="201.0" y="178.0" text-anchor="middle" style="font-size:12px">aluminium,</text><text x="201.0" y="192.0" text-anchor="middle" style="font-size:12px">a few mm</text><text x="295.0" y="178.0" text-anchor="middle" style="font-size:12px">lead,</text><text x="295.0" y="192.0" text-anchor="middle" style="font-size:12px">several cm</text>
+      </svg>
+      <figcaption><span class="key-2">Alpha</span> is stopped by paper, <span class="key-1">beta</span> by a few millimetres of aluminium, and gamma is only reduced by thick lead.</figcaption>
+    </figure>
+    <p>Outside the body, alpha is the least dangerous, because it can't get through the skin. Inside the body (if swallowed or breathed in) it is the most dangerous, because all its ionization happens in a small volume of living cells.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="halflife">8. Activity, count rate and half-life</h2>
+    <ul>
+      <li>The <strong>activity</strong> $A$ of a sample is the number of nuclei decaying per second. Its unit is the <strong>becquerel</strong>: 1 Bq = 1 decay per second.</li>
+      <li>The <strong>count rate</strong> is the number of decays a detector actually records per second (or per minute). It is always less than the activity, because radiation goes off in all directions and not all of it is detected.</li>
+    </ul>
+    <p>As a sample decays, there are fewer undecayed nuclei left, so the activity falls. The time taken is described by the half-life:</p>
+    <div class="key">
+      <p style="margin:0">The <strong>half-life</strong> $T_{1/2}$ is the time taken for the number of undecayed nuclei, or the activity, to fall to half its value. It is the same whatever amount you start with, and it is fixed for each nuclide: from fractions of a second to billions of years.</p>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 225" role="img" aria-labelledby="e3ct">
+        <title id="e3ct">Exponential decay curve: the number of parent nuclei falls from N0 to N0 over 2 after one half-life, N0 over 4 after two and N0 over 8 after three. The number of daughter nuclei rises so that the two always add up to N0.</title>
+        <line class="axis" x1="45.0" y1="200.0" x2="372.0" y2="200.0" marker-end="url(#ah3)"/><line class="axis" x1="45.0" y1="204.0" x2="45.0" y2="12.0" marker-end="url(#ah3)"/><polyline class="l1" fill="none" points="45.0,35.0 48.1,40.6 51.2,46.0 54.3,51.3 57.4,56.4 60.5,61.3 63.6,66.0 66.7,70.5 69.8,75.0 72.9,79.2 76.0,83.3 79.1,87.3 82.2,91.1 85.3,94.8 88.4,98.4 91.5,101.9 94.6,105.2 97.7,108.5 100.8,111.6 103.9,114.6 107.0,117.5 110.1,120.3 113.2,123.0 116.3,125.6 119.4,128.2 122.5,130.6 125.6,133.0 128.7,135.3 131.8,137.5 134.9,139.6 138.0,141.7 141.1,143.7 144.2,145.6 147.3,147.4 150.4,149.2 153.5,150.9 156.6,152.6 159.7,154.2 162.8,155.8 165.9,157.3 169.0,158.8 172.1,160.2 175.2,161.5 178.3,162.8 181.4,164.1 184.5,165.3 187.6,166.5 190.7,167.6 193.8,168.7 196.9,169.8 200.0,170.8 203.1,171.8 206.2,172.8 209.3,173.7 212.4,174.6 215.5,175.5 218.6,176.3 221.7,177.1 224.8,177.9 227.9,178.6 231.0,179.4 234.1,180.1 237.2,180.8 240.3,181.4 243.4,182.0 246.5,182.7 249.6,183.2 252.7,183.8 255.8,184.4 258.9,184.9 262.0,185.4 265.1,185.9 268.2,186.4 271.3,186.9 274.4,187.3 277.5,187.7 280.6,188.2 283.7,188.6 286.8,188.9 289.9,189.3 293.0,189.7 296.1,190.0 299.2,190.4 302.3,190.7 305.4,191.0 308.5,191.3 311.6,191.6 314.7,191.9 317.8,192.2 320.9,192.5 324.0,192.7 327.1,193.0 330.2,193.2 333.3,193.4 336.4,193.7 339.5,193.9 342.6,194.1 345.7,194.3 348.8,194.5 351.9,194.7 355.0,194.8"/><polyline class="l2 thin dash" fill="none" points="45.0,200.0 48.1,194.4 51.2,189.0 54.3,183.7 57.4,178.6 60.5,173.7 63.6,169.0 66.7,164.5 69.8,160.0 72.9,155.8 76.0,151.7 79.1,147.7 82.2,143.9 85.3,140.2 88.4,136.6 91.5,133.1 94.6,129.8 97.7,126.5 100.8,123.4 103.9,120.4 107.0,117.5 110.1,114.7 113.2,112.0 116.3,109.4 119.4,106.8 122.5,104.4 125.6,102.0 128.7,99.7 131.8,97.5 134.9,95.4 138.0,93.3 141.1,91.3 144.2,89.4 147.3,87.6 150.4,85.8 153.5,84.1 156.6,82.4 159.7,80.8 162.8,79.2 165.9,77.7 169.0,76.2 172.1,74.8 175.2,73.5 178.3,72.2 181.4,70.9 184.5,69.7 187.6,68.5 190.7,67.4 193.8,66.3 196.9,65.2 200.0,64.2 203.1,63.2 206.2,62.2 209.3,61.3 212.4,60.4 215.5,59.5 218.6,58.7 221.7,57.9 224.8,57.1 227.9,56.4 231.0,55.6 234.1,54.9 237.2,54.2 240.3,53.6 243.4,53.0 246.5,52.3 249.6,51.8 252.7,51.2 255.8,50.6 258.9,50.1 262.0,49.6 265.1,49.1 268.2,48.6 271.3,48.1 274.4,47.7 277.5,47.3 280.6,46.8 283.7,46.4 286.8,46.1 289.9,45.7 293.0,45.3 296.1,45.0 299.2,44.6 302.3,44.3 305.4,44.0 308.5,43.7 311.6,43.4 314.7,43.1 317.8,42.8 320.9,42.5 324.0,42.3 327.1,42.0 330.2,41.8 333.3,41.6 336.4,41.3 339.5,41.1 342.6,40.9 345.7,40.7 348.8,40.5 351.9,40.3 355.0,40.2"/><polyline class="grid dash" fill="none" points="45.0,117.5 107.0,117.5 107.0,200.0"/><text x="107.0" y="218.0" text-anchor="middle" style="font-size:13px">1</text><text x="40.0" y="121.5" text-anchor="end" style="font-size:12px">N₀/2</text><polyline class="grid dash" fill="none" points="45.0,158.8 169.0,158.8 169.0,200.0"/><text x="169.0" y="218.0" text-anchor="middle" style="font-size:13px">2</text><text x="40.0" y="162.8" text-anchor="end" style="font-size:12px">N₀/4</text><polyline class="grid dash" fill="none" points="45.0,179.4 231.0,179.4 231.0,200.0"/><text x="231.0" y="218.0" text-anchor="middle" style="font-size:13px">3</text><text x="40.0" y="183.4" text-anchor="end" style="font-size:12px">N₀/8</text><text x="293.0" y="218.0" text-anchor="middle" style="font-size:13px">4</text><text x="355.0" y="218.0" text-anchor="middle" style="font-size:13px">5</text><text x="40.0" y="39.0" text-anchor="end" style="font-size:13px">N₀</text><text x="372.0" y="192.0" text-anchor="end" style="font-size:13px">t / half-lives</text><text x="53.0" y="22.0" style="font-size:14px">N</text><text class="t1" x="255.8" y="168.9" style="font-size:13px">parent</text><text class="t2" x="255.8" y="69.8" style="font-size:13px">daughter</text>
+      </svg>
+      <figcaption>The number of <span class="key-1">parent</span> nuclei halves every half-life, while the number of <span class="key-2">daughter</span> nuclei grows. The total stays $N_0$.</figcaption>
+    </figure>
+    <p>After $n$ half-lives, the fraction left is $\left(\tfrac{1}{2}\right)^n$. At SL you only need whole numbers of half-lives.</p>
+    <div class="worked">
+      <h3>Worked example: a medical tracer</h3>
+      <p>A sample of a tracer with a half-life of 6.0 hours has an activity of 800 MBq. (a) What is its activity after 24 hours? (b) What fraction of the original nuclei has decayed by then?</p>
+      <p>(a) $24 \div 6.0 = 4$ half-lives: $800 \rightarrow 400 \rightarrow 200 \rightarrow 100 \rightarrow 50$ MBq.</p>
+      <p>(b) The fraction left is $\left(\frac{1}{2}\right)^4 = \frac{1}{16}$, so $\frac{15}{16}$ has decayed.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: finding a half-life</h3>
+      <p>The count rate from a sample falls from 640 to 40 counts per minute in 12 days (after correcting for background). Find the half-life.</p>
+      <p>$640 \rightarrow 320 \rightarrow 160 \rightarrow 80 \rightarrow 40$: four half-lives in 12 days, so $T_{1/2} = 3.0$ days.</p>
+    </div>
+    <p><strong>Measuring a half-life.</strong> Record the count rate at regular intervals, subtract the background, and plot a graph of corrected count rate against time. Read off the time for the count rate to halve, several times from different starting points, and average. (HL: a graph of $\ln(\text{count rate})$ against time is a straight line with gradient $-\lambda$.)</p>
+
+    <!-- ===================================================== -->
+    <h2 id="background">9. Background radiation</h2>
+    <p>A Geiger counter registers counts even with no source nearby. This <strong>background radiation</strong> comes from radon gas from rocks, cosmic rays, rocks and building materials, food and drink, and medical sources. It is random and fairly constant in one place.</p>
+    <ul>
+      <li>Measure the background count rate first, with no source present, over a long time to reduce the random variation.</li>
+      <li>Subtract it from every reading to get the <strong>corrected count rate</strong> due to the source.</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: correcting for background</h3>
+      <p>A detector records 245 counts per minute near a source; the background is 25 counts per minute. The half-life is 2.0 hours. What will the detector record 4.0 hours later?</p>
+      <p>Source alone: $245 - 25 = 220$ counts per minute. After 2 half-lives: $\frac{220}{4} = 55$. The detector records $55 + 25 = 80$ counts per minute. Halving 245 twice (to 61) would be wrong, because the background doesn't decay.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="uses">10. Using radioactivity</h2>
+    <p>The choice of isotope depends on what radiation it emits (how penetrating it is) and its half-life (how long it stays active).</p>
+    <ul>
+      <li><strong>Medical tracers:</strong> a gamma emitter (it must get out of the body to be detected) with a half-life of a few hours, long enough to do the scan but short enough not to keep irradiating the patient. Technetium-99m (half-life 6 hours) is the most common.</li>
+      <li><strong>Finding leaks in underground pipes:</strong> a little gamma emitter with a short half-life is added to the fluid. Radiation builds up in the soil above the leak, and is detected from the surface.</li>
+      <li><strong>Controlling the thickness of materials:</strong> a source on one side of a sheet and a detector on the other. Beta is used for paper and thin plastic (alpha would be stopped completely; gamma would hardly change). Gamma is used for thick steel. The source needs a long half-life so the count rate only changes when the thickness does.</li>
+      <li><strong>Radioactive dating:</strong> living things take in carbon-14 from the air; after death it decays with a half-life of 5730 years, so the remaining activity gives the age of wood, bone or cloth up to about 50 000 years old. Rocks are dated using isotopes with half-lives of billions of years, such as uranium-238 and potassium-40.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <div class="part-banner hl" id="hl">HL only<p>Sections 11–16 are for HL students. SL students can skip to <a href="#mistakes" style="color:inherit;text-decoration:underline">Common mistakes</a>.</p></div>
+    <div class="hl-zone">
+
+    <h2 id="evidence">11. Evidence for the strong nuclear force <span class="tag hl">HL</span></h2>
+    <ul>
+      <li><strong>Nuclei exist.</strong> Protons are packed together despite enormous electric repulsion, and gravity is about $10^{36}$ times too weak to help. A strong attractive force must act.</li>
+      <li><strong>Deviations from Rutherford scattering</strong> (E.1). High-energy alpha particles that reach a nucleus scatter differently from the prediction for the electric force alone.</li>
+      <li><strong>Constant density and binding energy.</strong> All nuclei have the same density (E.1), and above $A \approx 60$ the binding energy per nucleon is roughly constant, at 7.5–8.8 MeV. If every nucleon attracted every other, the binding energy per nucleon would keep rising with $A$. Instead, each nucleon only feels its nearest neighbours, which shows the force is short-range.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="stability">12. Stability and the neutron–proton ratio <span class="tag hl">HL</span></h2>
+    <p>Plotting the neutron number $N$ against the proton number $Z$ of all the stable nuclides gives a narrow band.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 260" role="img" aria-labelledby="e3dt">
+        <title id="e3dt">Neutron number against proton number for stable nuclides. The band of stability follows the N = Z line for light nuclei, then curves above it, reaching about 1.5 neutrons per proton by Z = 83. Nuclides above the band decay by beta minus, below it by beta plus, and very heavy ones by alpha decay.</title>
+        <line class="axis" x1="50.0" y1="232.0" x2="372.0" y2="232.0" marker-end="url(#ah3)"/><line class="axis" x1="50.0" y1="236.0" x2="50.0" y2="10.0" marker-end="url(#ah3)"/><line class="axis" x1="110.0" y1="232.0" x2="110.0" y2="236.0"/><text x="110.0" y="250.0" text-anchor="middle" style="font-size:12px">20</text><line class="axis" x1="170.0" y1="232.0" x2="170.0" y2="236.0"/><text x="170.0" y="250.0" text-anchor="middle" style="font-size:12px">40</text><line class="axis" x1="230.0" y1="232.0" x2="230.0" y2="236.0"/><text x="230.0" y="250.0" text-anchor="middle" style="font-size:12px">60</text><line class="axis" x1="290.0" y1="232.0" x2="290.0" y2="236.0"/><text x="290.0" y="250.0" text-anchor="middle" style="font-size:12px">80</text><line class="axis" x1="350.0" y1="232.0" x2="350.0" y2="236.0"/><text x="350.0" y="250.0" text-anchor="middle" style="font-size:12px">100</text><line class="axis" x1="46.0" y1="180.0" x2="50.0" y2="180.0"/><text x="42.0" y="184.0" text-anchor="end" style="font-size:12px">40</text><line class="axis" x1="46.0" y1="128.0" x2="50.0" y2="128.0"/><text x="42.0" y="132.0" text-anchor="end" style="font-size:12px">80</text><line class="axis" x1="46.0" y1="76.0" x2="50.0" y2="76.0"/><text x="42.0" y="80.0" text-anchor="end" style="font-size:12px">120</text><line class="axis" x1="46.0" y1="24.0" x2="50.0" y2="24.0"/><text x="42.0" y="28.0" text-anchor="end" style="font-size:12px">160</text><text x="372.0" y="224.0" text-anchor="end" style="font-size:14px">Z</text><text x="58.0" y="20.0" style="font-size:14px">N</text><line class="grid dash" x1="50.0" y1="232.0" x2="365.0" y2="95.5"/><text x="361.0" y="111.5" text-anchor="end" style="font-size:12px">N = Z</text><polyline class="l1" fill="none" points="53.0,230.7 54.5,230.0 55.9,229.4 57.4,228.7 58.9,228.0 60.3,227.4 61.8,226.7 63.2,226.0 64.6,225.3 66.0,224.7 67.5,224.0 68.9,223.3 70.3,222.6 71.7,221.9 73.1,221.2 74.5,220.5 75.9,219.8 77.3,219.1 78.7,218.4 80.0,217.7 81.4,217.0 82.8,216.3 84.1,215.6 85.5,214.9 86.9,214.2 88.2,213.5 89.6,212.7 90.9,212.0 92.3,211.3 93.6,210.6 94.9,209.9 96.3,209.2 97.6,208.4 98.9,207.7 100.3,207.0 101.6,206.3 102.9,205.5 104.2,204.8 105.5,204.1 106.8,203.3 108.1,202.6 109.4,201.9 110.7,201.1 112.0,200.4 113.3,199.6 114.6,198.9 115.9,198.2 117.2,197.4 118.5,196.7 119.8,195.9 121.0,195.2 122.3,194.4 123.6,193.7 124.9,192.9 126.1,192.2 127.4,191.4 128.7,190.7 129.9,189.9 131.2,189.2 132.4,188.4 133.7,187.7 134.9,186.9 136.2,186.1 137.4,185.4 138.7,184.6 139.9,183.9 141.1,183.1 142.4,182.3 143.6,181.6 144.8,180.8 146.1,180.0 147.3,179.3 148.5,178.5 149.7,177.7 151.0,177.0 152.2,176.2 153.4,175.4 154.6,174.6 155.8,173.9 157.0,173.1 158.2,172.3 159.5,171.5 160.7,170.8 161.9,170.0 163.1,169.2 164.3,168.4 165.5,167.6 166.6,166.8 167.8,166.1 169.0,165.3 170.2,164.5 171.4,163.7 172.6,162.9 173.8,162.1 174.9,161.3 176.1,160.6 177.3,159.8 178.5,159.0 179.6,158.2 180.8,157.4 182.0,156.6 183.2,155.8 184.3,155.0 185.5,154.2 186.6,153.4 187.8,152.6 189.0,151.8 190.1,151.0 191.3,150.2 192.4,149.4 193.6,148.6 194.7,147.8 195.9,147.0 197.0,146.2 198.2,145.4 199.3,144.6 200.5,143.8 201.6,143.0 202.7,142.2 203.9,141.4 205.0,140.6 206.1,139.8 207.3,138.9 208.4,138.1 209.5,137.3 210.6,136.5 211.8,135.7 212.9,134.9 214.0,134.1 215.1,133.3 216.3,132.4 217.4,131.6 218.5,130.8 219.6,130.0 220.7,129.2 221.8,128.4 222.9,127.5 224.0,126.7 225.2,125.9 226.3,125.1 227.4,124.3 228.5,123.4 229.6,122.6 230.7,121.8 231.8,121.0 232.9,120.1 234.0,119.3 235.0,118.5 236.1,117.7 237.2,116.8 238.3,116.0 239.4,115.2 240.5,114.3 241.6,113.5 242.7,112.7 243.7,111.9 244.8,111.0 245.9,110.2 247.0,109.4 248.1,108.5 249.1,107.7 250.2,106.9 251.3,106.0 252.3,105.2 253.4,104.3 254.5,103.5 255.6,102.7 256.6,101.8 257.7,101.0 258.7,100.2 259.8,99.3 260.9,98.5 261.9,97.6 263.0,96.8 264.0,96.0 265.1,95.1 266.2,94.3 267.2,93.4 268.3,92.6 269.3,91.7 270.4,90.9 271.4,90.0 272.5,89.2 273.5,88.3 274.5,87.5 275.6,86.7 276.6,85.8 277.7,85.0 278.7,84.1 279.7,83.3 280.8,82.4 281.8,81.6 282.9,80.7 283.9,79.9 284.9,79.0 285.9,78.1 287.0,77.3 288.0,76.4 289.0,75.6 290.1,74.7 291.1,73.9 292.1,73.0 293.1,72.2 294.2,71.3 295.2,70.4 296.2,69.6 297.2,68.7 298.2,67.9" style="stroke-width:12;opacity:0.3;stroke-linecap:round"/><polyline class="l1 thin" fill="none" points="53.0,230.7 54.5,230.0 55.9,229.4 57.4,228.7 58.9,228.0 60.3,227.4 61.8,226.7 63.2,226.0 64.6,225.3 66.0,224.7 67.5,224.0 68.9,223.3 70.3,222.6 71.7,221.9 73.1,221.2 74.5,220.5 75.9,219.8 77.3,219.1 78.7,218.4 80.0,217.7 81.4,217.0 82.8,216.3 84.1,215.6 85.5,214.9 86.9,214.2 88.2,213.5 89.6,212.7 90.9,212.0 92.3,211.3 93.6,210.6 94.9,209.9 96.3,209.2 97.6,208.4 98.9,207.7 100.3,207.0 101.6,206.3 102.9,205.5 104.2,204.8 105.5,204.1 106.8,203.3 108.1,202.6 109.4,201.9 110.7,201.1 112.0,200.4 113.3,199.6 114.6,198.9 115.9,198.2 117.2,197.4 118.5,196.7 119.8,195.9 121.0,195.2 122.3,194.4 123.6,193.7 124.9,192.9 126.1,192.2 127.4,191.4 128.7,190.7 129.9,189.9 131.2,189.2 132.4,188.4 133.7,187.7 134.9,186.9 136.2,186.1 137.4,185.4 138.7,184.6 139.9,183.9 141.1,183.1 142.4,182.3 143.6,181.6 144.8,180.8 146.1,180.0 147.3,179.3 148.5,178.5 149.7,177.7 151.0,177.0 152.2,176.2 153.4,175.4 154.6,174.6 155.8,173.9 157.0,173.1 158.2,172.3 159.5,171.5 160.7,170.8 161.9,170.0 163.1,169.2 164.3,168.4 165.5,167.6 166.6,166.8 167.8,166.1 169.0,165.3 170.2,164.5 171.4,163.7 172.6,162.9 173.8,162.1 174.9,161.3 176.1,160.6 177.3,159.8 178.5,159.0 179.6,158.2 180.8,157.4 182.0,156.6 183.2,155.8 184.3,155.0 185.5,154.2 186.6,153.4 187.8,152.6 189.0,151.8 190.1,151.0 191.3,150.2 192.4,149.4 193.6,148.6 194.7,147.8 195.9,147.0 197.0,146.2 198.2,145.4 199.3,144.6 200.5,143.8 201.6,143.0 202.7,142.2 203.9,141.4 205.0,140.6 206.1,139.8 207.3,138.9 208.4,138.1 209.5,137.3 210.6,136.5 211.8,135.7 212.9,134.9 214.0,134.1 215.1,133.3 216.3,132.4 217.4,131.6 218.5,130.8 219.6,130.0 220.7,129.2 221.8,128.4 222.9,127.5 224.0,126.7 225.2,125.9 226.3,125.1 227.4,124.3 228.5,123.4 229.6,122.6 230.7,121.8 231.8,121.0 232.9,120.1 234.0,119.3 235.0,118.5 236.1,117.7 237.2,116.8 238.3,116.0 239.4,115.2 240.5,114.3 241.6,113.5 242.7,112.7 243.7,111.9 244.8,111.0 245.9,110.2 247.0,109.4 248.1,108.5 249.1,107.7 250.2,106.9 251.3,106.0 252.3,105.2 253.4,104.3 254.5,103.5 255.6,102.7 256.6,101.8 257.7,101.0 258.7,100.2 259.8,99.3 260.9,98.5 261.9,97.6 263.0,96.8 264.0,96.0 265.1,95.1 266.2,94.3 267.2,93.4 268.3,92.6 269.3,91.7 270.4,90.9 271.4,90.0 272.5,89.2 273.5,88.3 274.5,87.5 275.6,86.7 276.6,85.8 277.7,85.0 278.7,84.1 279.7,83.3 280.8,82.4 281.8,81.6 282.9,80.7 283.9,79.9 284.9,79.0 285.9,78.1 287.0,77.3 288.0,76.4 289.0,75.6 290.1,74.7 291.1,73.9 292.1,73.0 293.1,72.2 294.2,71.3 295.2,70.4 296.2,69.6 297.2,68.7 298.2,67.9"/><text class="t2" x="92.0" y="141.0" style="font-size:12px">too many neutrons:</text><text class="t2" x="92.0" y="156.0" style="font-size:12px">β⁻ decay</text><text class="t2" x="224.0" y="177.4" style="font-size:12px">too many protons:</text><text class="t2" x="224.0" y="192.4" style="font-size:12px">β⁺ decay</text><text class="t2" x="290.0" y="37.0" text-anchor="end" style="font-size:12px">very heavy:</text><text class="t2" x="290.0" y="52.0" text-anchor="end" style="font-size:12px">α decay</text><text class="t1" x="218.0" y="86.4" text-anchor="end" style="font-size:12px">stable</text>
+      </svg>
+      <figcaption>The <span class="key-1">band of stability</span>. Light stable nuclei have N ≈ Z; heavy ones need more neutrons than protons. Nothing beyond Z = 83 (bismuth) is stable.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>Light nuclei</strong> are stable with about equal numbers: $\frac{N}{Z} \approx 1$ (for example, $^{12}_{\;6}\text{C}$, $^{16}_{\;8}\text{O}$).</li>
+      <li><strong>Heavier nuclei</strong> need more neutrons, to dilute the electric repulsion: $\frac{N}{Z} \approx 1.5$ for lead-208.</li>
+      <li>Nuclides <strong>above</strong> the band (too many neutrons) undergo β⁻ decay, which turns a neutron into a proton and moves them towards the band.</li>
+      <li>Nuclides <strong>below</strong> the band (too many protons) undergo β⁺ decay.</li>
+      <li><strong>Very heavy</strong> nuclides (beyond $Z = 83$) undergo alpha decay, which removes nucleons fastest.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="levels">13. Nuclear energy levels <span class="tag hl">HL</span></h2>
+    <p>Just like atoms (E.1), nuclei have <strong>discrete energy levels</strong>. The evidence:</p>
+    <ul>
+      <li><strong>Alpha particles</strong> from a particular nuclide all have one of a few definite energies, not a spread. Each value corresponds to the daughter nucleus being left in a different energy level.</li>
+      <li><strong>Gamma rays</strong> from a nuclide have a few definite photon energies (a line spectrum), each equal to the difference between two nuclear energy levels.</li>
+    </ul>
+    <p>Nuclear energy levels are spaced by MeV, about a million times more than atomic levels (eV). That is why nuclear photons are gamma rays rather than visible light.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 212" role="img" aria-labelledby="e3et">
+        <title id="e3et">Energy spectra. Alpha particles from one nuclide have a few sharp, discrete kinetic energies. Beta particles have a continuous range of energies from zero up to a maximum E-max.</title>
+        <line class="axis" x1="20.0" y1="150.0" x2="180.0" y2="150.0" marker-end="url(#ah3)"/><line class="axis" x1="20.0" y1="154.0" x2="20.0" y2="20.0" marker-end="url(#ah3)"/><text x="100.0" y="184.0" text-anchor="middle" style="font-size:12px">kinetic energy</text><text x="26.0" y="30.0" style="font-size:12px">number</text><text class="t1" x="100.0" y="204.0" text-anchor="middle" style="font-size:13px">α particles</text><line class="axis" x1="205.0" y1="150.0" x2="365.0" y2="150.0" marker-end="url(#ah3)"/><line class="axis" x1="205.0" y1="154.0" x2="205.0" y2="20.0" marker-end="url(#ah3)"/><text x="285.0" y="184.0" text-anchor="middle" style="font-size:12px">kinetic energy</text><text x="211.0" y="30.0" style="font-size:12px">number</text><text class="t2" x="285.0" y="204.0" text-anchor="middle" style="font-size:13px">β particles</text><line class="l1" x1="120.0" y1="150.0" x2="120.0" y2="40.0" style="stroke-width:4"/><line class="l1" x1="135.0" y1="150.0" x2="135.0" y2="110.0" style="stroke-width:4"/><polyline class="l2" fill="none" points="205.0,150.0 206.3,117.7 207.7,105.2 209.1,96.2 210.4,89.2 211.8,83.4 213.1,78.6 214.4,74.5 215.8,71.0 217.2,68.0 218.5,65.5 219.8,63.3 221.2,61.5 222.6,59.9 223.9,58.7 225.2,57.7 226.6,56.9 227.9,56.3 229.3,55.9 230.7,55.6 232.0,55.5 233.3,55.6 234.7,55.8 236.1,56.2 237.4,56.6 238.8,57.2 240.1,57.9 241.4,58.6 242.8,59.5 244.2,60.4 245.5,61.4 246.8,62.5 248.2,63.7 249.6,64.9 250.9,66.2 252.2,67.5 253.6,68.9 254.9,70.3 256.3,71.8 257.6,73.3 259.0,74.9 260.4,76.4 261.7,78.1 263.1,79.7 264.4,81.4 265.8,83.0 267.1,84.7 268.4,86.5 269.8,88.2 271.1,89.9 272.5,91.7 273.9,93.4 275.2,95.2 276.6,96.9 277.9,98.7 279.2,100.4 280.6,102.2 281.9,103.9 283.3,105.7 284.6,107.4 286.0,109.1 287.4,110.8 288.7,112.5 290.1,114.1 291.4,115.8 292.8,117.4 294.1,119.0 295.4,120.6 296.8,122.1 298.1,123.7 299.5,125.2 300.9,126.6 302.2,128.0 303.6,129.4 304.9,130.8 306.2,132.1 307.6,133.4 308.9,134.7 310.3,135.9 311.6,137.1 313.0,138.2 314.4,139.3 315.7,140.3 317.1,141.3 318.4,142.3 319.8,143.2 321.1,144.0 322.4,144.8 323.8,145.5 325.1,146.2 326.5,146.9 327.9,147.5 329.2,148.0 330.6,148.4 331.9,148.8 333.2,149.2 334.6,149.5 335.9,149.7 337.3,149.9 338.6,150.0 340.0,150.0"/><line class="axis" x1="340.0" y1="150.0" x2="340.0" y2="156.0"/><text class="t2" x="340.0" y="168.0" text-anchor="middle" style="font-size:12px">E</text><text class="t2" x="347.0" y="172.0" style="font-size:9px">max</text>
+      </svg>
+      <figcaption><span class="key-1">Alpha</span> particles come out with discrete energies; <span class="key-2">beta</span> particles have a continuous spread up to a maximum.</figcaption>
+    </figure>
+
+    <!-- ===================================================== -->
+    <h2 id="betaspec">14. The beta spectrum and the neutrino <span class="tag hl">HL</span></h2>
+    <p>In beta decay, the energy released is fixed by the masses before and after, just as in alpha decay. If only two particles (the nucleus and the electron) came out, momentum conservation would give the electron the same energy every time. Instead, beta particles have a <strong>continuous spectrum</strong> of energies, from almost zero up to a maximum $E_{\max}$, equal to the energy released.</p>
+    <p>The explanation: a third particle, the (anti)neutrino, shares the energy. In each decay the energy is split differently between the electron and the antineutrino, and only rarely does the electron get almost all of it. The continuous beta spectrum is the evidence for the neutrino.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="law">15. The decay constant and the decay law <span class="tag hl">HL</span></h2>
+    <p>The number of decays per second is proportional to the number of undecayed nuclei, $N$. The constant of proportionality is the <strong>decay constant</strong> $\lambda$ (unit $\text{s}^{-1}$, or $\text{h}^{-1}$, $\text{y}^{-1}$ and so on). This leads to exponential decay:</p>
+    <div class="key">
+      $$N = N_0e^{-\lambda t}$$
+      <p style="margin:0">$N_0$ is the number of undecayed nuclei at $t = 0$. A large $\lambda$ means fast decay. This works for any time, not just whole half-lives.</p>
+    </div>
+    <p><strong>What $\lambda$ means.</strong> For a short time $\Delta t$, the probability that a given nucleus decays is about $\lambda\Delta t$. This approximation only holds when $\lambda\Delta t$ is small. For example, if $\lambda\Delta t = 0.01$, the exact probability is $1 - e^{-0.01} = 0.00995$, very close. Over one half-life, $\lambda t = 0.693$, but the probability is 0.5. So "$\lambda$ is the probability of decay per unit time" is only approximately true, for $\lambda t \ll 1$.</p>
+    <aside class="maths-link">
+      <h3>Maths link: exponentials and logarithms <span class="tag">AA SL 1.7, 2.9</span></h3>
+      <p>To find $t$ from $N = N_0e^{-\lambda t}$, take natural logs: $\ln\frac{N}{N_0} = -\lambda t$, so $t = \frac{1}{\lambda}\ln\frac{N_0}{N}$. Taking logs also gives $\ln N = \ln N_0 - \lambda t$: a graph of $\ln N$ (or $\ln A$) against $t$ is a straight line with gradient $-\lambda$. This is the most accurate way to find $\lambda$ from experimental data.</p>
+    </aside>
+
+    <!-- ===================================================== -->
+    <h2 id="activity">16. Activity and half-life <span class="tag hl">HL</span></h2>
+    <div class="key">
+      $$A = \lambda N = \lambda N_0e^{-\lambda t}$$
+      $$T_{1/2} = \frac{\ln 2}{\lambda}$$
+      <p style="margin:0">Activity decays exponentially in the same way as $N$. The half-life formula comes from setting $N = \frac{N_0}{2}$: $\frac{1}{2} = e^{-\lambda T_{1/2}}$, so $\lambda T_{1/2} = \ln 2 \approx 0.693$.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: iodine-131</h3>
+      <p>Iodine-131 has a half-life of 8.02 days. A sample contains 1.0 μg of it. Find (a) the decay constant in $\text{s}^{-1}$, (b) the activity and (c) the percentage left after 20 days.</p>
+      <p>(a) $\lambda = \dfrac{\ln 2}{8.02 \times 24 \times 3600} = 1.00 \times 10^{-6}\ \text{s}^{-1}$.</p>
+      <p>(b) Mass of one nucleus $\approx 131u = 131 \times 1.661 \times 10^{-27} = 2.18 \times 10^{-25}$ kg. $N = \dfrac{1.0 \times 10^{-9}}{2.18 \times 10^{-25}} = 4.6 \times 10^{15}$. $A = \lambda N = 4.6 \times 10^{9}$ Bq.</p>
+      <p>(c) In days, $\lambda = \dfrac{0.693}{8.02} = 0.0864\ \text{d}^{-1}$. $\dfrac{N}{N_0} = e^{-0.0864 \times 20} = e^{-1.73} = 0.18$, so 18% is left. Check: 20 days is 2.5 half-lives, and $\left(\frac{1}{2}\right)^{2.5} = 0.18$.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: carbon dating</h3>
+      <p>Living wood has a carbon-14 activity of 0.25 Bq per gram of carbon. An ancient wooden tool has 0.080 Bq per gram. How old is it? ($T_{1/2} = 5730$ y)</p>
+      <p>$\lambda = \dfrac{0.693}{5730} = 1.21 \times 10^{-4}\ \text{y}^{-1}$. From $A = A_0e^{-\lambda t}$: $t = \dfrac{1}{\lambda}\ln\dfrac{A_0}{A} = \dfrac{\ln(0.25/0.080)}{1.21 \times 10^{-4}} = \dfrac{1.14}{1.21 \times 10^{-4}} \approx 9400$ years.</p>
+    </div>
+
+    <h3>Common mistakes (HL) <span class="tag hl">HL</span></h3>
+    <ul>
+      <li><strong>Mixing time units.</strong> $\lambda$ and $t$ must use the same unit. For an activity in Bq, $\lambda$ must be in $\text{s}^{-1}$.</li>
+      <li><strong>Using $\log_{10}$ instead of $\ln$.</strong> The decay law uses $e$, so use natural logs.</li>
+      <li><strong>Confusing the decay constant with the half-life.</strong> They are inversely related: a large $\lambda$ means a short half-life.</li>
+      <li><strong>Saying the beta spectrum shows energy is not conserved.</strong> It shows a third particle, the neutrino, shares the energy.</li>
+      <li><strong>Saying β⁺ decay happens in neutron-rich nuclei.</strong> Neutron-rich nuclei undergo β⁻ decay.</li>
+    </ul>
+    <p class="hl-end">End of the HL-only content. Everyone continues below.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">17. Common mistakes</h2>
+    <ul>
+      <li><strong>Thinking binding energy is energy stored in the nucleus.</strong> It is the energy you would have to <em>supply</em> to pull the nucleus apart. More binding energy means a more stable nucleus with less mass.</li>
+      <li><strong>Forgetting the (anti)neutrino</strong> in beta decay equations, or putting the antineutrino in β⁺ decay. β⁻: antineutrino; β⁺: neutrino.</li>
+      <li><strong>Changing $A$ or $Z$ in gamma decay.</strong> Gamma emission changes only the energy of the nucleus.</li>
+      <li><strong>Thinking the sample loses half its mass in one half-life.</strong> Half of the <em>radioactive nuclei</em> become daughter nuclei, which are still there.</li>
+      <li><strong>Halving the measured count rate without removing background first.</strong> Only the source's count rate halves.</li>
+      <li><strong>Saying a half-life of 5 days means it is all gone in 10 days.</strong> After 10 days a quarter is left.</li>
+      <li><strong>Saying decay speeds up when a source is heated.</strong> It is spontaneous: temperature has no effect.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">18. Check your understanding</h2>
+    <details class="check">
+      <summary>Why does a helium-4 nucleus have less mass than two protons and two neutrons?</summary>
+      <p>Energy is released when the nucleons bind together, and by $E = mc^2$ the loss of energy means a loss of mass. The difference is the mass defect.</p>
+    </details>
+    <details class="check">
+      <summary>What happens to $A$ and $Z$ in β⁻ decay, and why?</summary>
+      <p>$A$ stays the same and $Z$ goes up by 1, because a neutron becomes a proton.</p>
+    </details>
+    <details class="check">
+      <summary>Which radiation would you use to monitor the thickness of aluminium foil, and why?</summary>
+      <p>Beta: alpha would be completely stopped, and gamma would pass through almost unchanged, so only beta's count rate changes noticeably with small changes in thickness.</p>
+    </details>
+    <details class="check">
+      <summary>A sample's activity falls from 1200 Bq to 150 Bq in 45 minutes. What is the half-life?</summary>
+      <p>$1200 \to 600 \to 300 \to 150$ is three half-lives, so $T_{1/2} = 15$ minutes.</p>
+    </details>
+    <details class="check">
+      <summary>Why do both fusion and fission release energy?</summary>
+      <p>Both produce nuclei with a higher binding energy per nucleon (closer to the iron peak), so the products have less mass than the reactants and the difference is released.</p>
+    </details>
+    <details class="check">
+      <summary>HL: A nuclide has a decay constant of $0.035\ \text{s}^{-1}$. What is its half-life?</summary>
+      <p>$T_{1/2} = \frac{0.693}{0.035} = 20$ s.</p>
+    </details>
+    <details class="check">
+      <summary>HL: Why does the continuous spectrum of beta particles suggest a third particle is emitted?</summary>
+      <p>The decay releases a fixed amount of energy. If only the electron and the nucleus shared it, the electron would always get the same energy. A range of energies means another particle (the antineutrino) takes a varying share.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=E.3">Practise E.3 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>

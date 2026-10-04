@@ -240,6 +240,53 @@ window.DATA_BOOKLET = {
     ],
     note: 'All of D.4 is HL. θ is the angle between B and the normal to the area. The minus sign is Lenz\'s law: the induced emf opposes the change of flux.',
   },
+  'E.1': {
+    equations: [
+      ['Photon energy', 'E = hf'],
+      ['Nuclear radius', 'R = R_0A^{1/3}', true],
+      ['Energy levels of hydrogen (Bohr model)', 'E = -\\frac{13.6}{n^2}\\ \\text{eV}', true],
+      ['Quantization of angular momentum', 'mvr = \\frac{nh}{2\\pi}', true],
+    ],
+    note: 'Also $c = f\\lambda$, so $E = \\frac{hc}{\\lambda}$. Photon energy equals the difference between two energy levels. $1\\ \\text{eV} = 1.60 \\times 10^{-19}$ J. HL closest approach (not in the booklet): $d = \\frac{k(2e)(Ze)}{E_k}$.',
+    constants: ['h', 'c', 'e', 'R0'],
+  },
+  'E.2': {
+    equations: [
+      ['Photoelectric equation', 'E_{\\max} = hf - \\Phi', true],
+      ['de Broglie wavelength', '\\lambda = \\frac{h}{p}', true],
+      ['Compton shift', '\\Delta\\lambda = \\frac{h}{m_ec}(1 - \\cos\\theta)', true],
+    ],
+    note: 'All of E.2 is HL. Threshold frequency $f_0 = \\frac{\\Phi}{h}$. Stopping voltage: $eV_s = E_{\\max}$. For a particle accelerated through p.d. $V$: $p = \\sqrt{2meV}$. First diffraction minimum: $\\sin\\theta \\approx \\frac{\\lambda}{D}$.',
+    constants: ['h', 'c', 'e', 'me'],
+  },
+  'E.3': {
+    equations: [
+      ['Mass–energy equivalence', 'E = mc^2'],
+      ['Radioactive decay law', 'N = N_0e^{-\\lambda t}', true],
+      ['Activity', 'A = \\lambda N = \\lambda N_0e^{-\\lambda t}', true],
+      ['Half-life and decay constant', 'T_{1/2} = \\frac{\\ln 2}{\\lambda}', true],
+    ],
+    note: '$1\\ \\text{u} = 931.5\\ \\text{MeV}\\,c^{-2}$, so mass defect in u × 931.5 gives the binding energy in MeV. After $n$ half-lives the fraction left is $(\\frac{1}{2})^n$. Subtract background before halving a count rate.',
+    constants: ['c', 'u', 'mp', 'mn', 'me', 'e'],
+  },
+  'E.4': {
+    equations: [
+      ['Mass–energy equivalence', 'E = mc^2'],
+    ],
+    note: 'Energy released $= \\Delta m\\,c^2$, where $\\Delta m$ = mass before − mass after (include every neutron). With masses in u, multiply $\\Delta m$ by 931.5 to get MeV. Power = energy per fission × fissions per second; efficiency = electrical ÷ thermal power.',
+    constants: ['c', 'u', 'mn', 'e'],
+  },
+  'E.5': {
+    equations: [
+      ['Parallax distance', 'd\\,(\\text{parsec}) = \\frac{1}{p\\,(\\text{arc-second})}'],
+      ['Stefan–Boltzmann law (luminosity)', 'L = \\sigma AT^4'],
+      ['Apparent brightness', 'b = \\frac{L}{4\\pi d^2}'],
+      ["Wien's displacement law", '\\lambda_{\\max} T = 2.9 \\times 10^{-3}\\ \\text{m K}'],
+      ['Mass–energy equivalence', 'E = mc^2'],
+    ],
+    note: 'For a sphere $A = 4\\pi R^2$, so $R = \\sqrt{\\frac{L}{4\\pi\\sigma T^4}}$. Comparing with the Sun: $\\frac{R}{R_\\odot} = \\sqrt{\\frac{L}{L_\\odot}}\\left(\\frac{T_\\odot}{T}\\right)^2$. Use kelvin.',
+    constants: ['sigma', 'c', 'u', 'au', 'ly', 'pc'],
+  },
   // A third item `true` marks an equation as HL only (shown with an HL tag).
   'C.1': {
     equations: [
@@ -307,6 +354,13 @@ window.CONSTANTS = {
   mu0: ['Permeability of free space', '\\mu_0 = 4\\pi \\times 10^{-7}\\ \\text{T m A}^{-1}'],
   me: ['Electron rest mass', 'm_e = 9.110 \\times 10^{-31}\\ \\text{kg}'],
   mp: ['Proton rest mass', 'm_p = 1.673 \\times 10^{-27}\\ \\text{kg}'],
+  mn: ['Neutron rest mass', 'm_n = 1.675 \\times 10^{-27}\\ \\text{kg}'],
+  h: ['Planck constant', 'h = 6.63 \\times 10^{-34}\\ \\text{J s}'],
+  u: ['Unified atomic mass unit', '1\\ \\text{u} = 1.661 \\times 10^{-27}\\ \\text{kg} = 931.5\\ \\text{MeV}\\,c^{-2}'],
+  R0: ['Fermi radius', 'R_0 = 1.20 \\times 10^{-15}\\ \\text{m}'],
+  au: ['Astronomical unit', '1\\ \\text{AU} = 1.50 \\times 10^{11}\\ \\text{m}'],
+  ly: ['Light year', '1\\ \\text{ly} = 9.46 \\times 10^{15}\\ \\text{m}'],
+  pc: ['Parsec', '1\\ \\text{pc} = 3.26\\ \\text{ly}'],
 };
 
 (function () {

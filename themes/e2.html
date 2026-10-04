@@ -4,15 +4,273 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>E.2 Quantum physics · DP Physics</title>
+  <meta name="description" content="IB DP Physics E.2 Quantum physics (HL): the photoelectric effect, threshold frequency, work function and Einstein's equation, why the wave model fails, electron diffraction and the de Broglie wavelength, wave–particle duality, and Compton scattering.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="E.2">
+</head>
+<body data-root="../" data-section="themes" data-topic="E.2">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="e.html">Theme E Nuclear and quantum physics</a></p>
-    <h1><span class="code">E.2</span>Quantum physics <span class="tag hl">HL</span></h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <h1><span class="code">E.2</span>Quantum physics <span class="tag hl">HL only</span></h1>
+    <p class="lead">Is light a wave or a stream of particles? Is an electron a particle or a wave? The answer to both is "it depends on the experiment". This topic covers the <strong>photoelectric effect</strong>, which shows light behaving as particles (photons); <strong>electron diffraction</strong>, which shows matter behaving as waves; and <strong>Compton scattering</strong>, where photons bounce off electrons like billiard balls. It builds on E.1 and C.3. <strong>The whole of E.2 is HL only.</strong></p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Paradigm shift</span><span class="tag">Falsification</span><span class="tag">Experiments</span><span class="tag">Creativity</span></div>
+          <p><strong>Paradigm shift.</strong> By 1900, Young's interference experiment and Maxwell's theory had made the wave model of light seem certain. Max Planck (1900) and Albert Einstein (1905) then proposed that light energy comes in packets. Many physicists, including Planck himself, resisted the idea for years.</p>
+          <p><strong>Falsification.</strong> Philipp Lenard's measurements of photoelectrons (1902) could not be explained by the wave model. Robert Millikan spent ten years trying to disprove Einstein's equation, and ended up confirming it precisely (1916).</p>
+          <p><strong>Creativity.</strong> In 1924 Louis de Broglie suggested, mostly from a sense of symmetry, that if waves can behave like particles, particles might behave like waves. Davisson and Germer (and separately G. P. Thomson) observed electron diffraction in 1927.</p>
+          <p><strong>Experiments.</strong> Arthur Compton (1923) showed that X-rays scattered by electrons lose energy exactly as colliding particles would, which convinced many doubters that photons are real.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>Can two contradictory models both be true?</strong> Light is described as a wave in C.3 and as particles here. Is this a failure of our language, or a genuine feature of nature?</li>
+            <li><strong>Does an experiment decide what we see?</strong> Diffraction experiments show waves; photoelectric experiments show particles. What does that say about the link between what we observe and what really exists?</li>
+            <li><strong>Why do scientists resist new ideas?</strong> Planck called his own quantum idea "an act of desperation". When is resistance to a radical idea healthy scepticism, and when is it stubbornness?</li>
+            <li><strong>What counts as understanding?</strong> Quantum physics predicts results to many decimal places, yet physicists still disagree about what it means. Can you understand a theory you can use but can't picture?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <p style="margin:8px 0 0"><a href="#photoelectric"><strong>HL only</strong></a></p>
+      <ol>
+        <li><a href="#photoelectric">The photoelectric effect</a></li>
+        <li><a href="#classical">Why the wave model fails</a></li>
+        <li><a href="#einstein">Einstein's photon explanation</a></li>
+        <li><a href="#stopping">Measuring the maximum kinetic energy</a></li>
+        <li><a href="#graph">The $E_{\max}$ against $f$ graph</a></li>
+        <li><a href="#debroglie">Matter waves: the de Broglie wavelength</a></li>
+        <li><a href="#diffraction">Electron diffraction</a></li>
+        <li><a href="#compton">Compton scattering</a></li>
+        <li><a href="#duality">Wave–particle duality</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><strong>Review</strong></p>
+      <ol start="10">
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="photoelectric">1. The photoelectric effect <span class="tag hl">HL</span></h2>
+    <p>When light of high enough frequency shines on a clean metal surface, electrons are emitted. These are called <strong>photoelectrons</strong>. It can be shown with a zinc plate on a charged electroscope: ultraviolet light makes a negatively charged plate lose its charge, but even very bright visible light does nothing.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 205" role="img" aria-labelledby="e2at">
+        <title id="e2at">A photocell: light falls on a curved metal cathode inside a vacuum tube, and emitted electrons travel across to a straight anode. The circuit contains a variable supply, a voltmeter across it and an ammeter.</title>
+        <rect x="110" y="18" width="170" height="92" rx="40" class="axis"/><path class="l3" d="M150 38 Q132 64 150 90" fill="none"/><line class="l3" x1="250.0" y1="46.0" x2="250.0" y2="82.0"/><line class="l1 thin" x1="156.0" y1="50.0" x2="236.0" y2="50.0" marker-end="url(#ah1)"/><line class="l1 thin" x1="156.0" y1="64.0" x2="236.0" y2="64.0" marker-end="url(#ah1)"/><line class="l1 thin" x1="156.0" y1="78.0" x2="236.0" y2="78.0" marker-end="url(#ah1)"/><text class="t1" x="196.0" y="45.0" text-anchor="middle" style="font-size:12px">e⁻</text><polyline class="l2 thin" fill="none" points="40.0,4.0 40.2,7.2 41.4,8.3 43.7,6.8 46.4,4.6 48.3,4.0 49.1,6.0 49.1,9.5 49.6,12.1 51.2,12.1 53.8,10.1 56.3,8.2 57.8,8.6 58.2,11.4 58.3,14.9 59.1,16.6 61.2,15.6 63.9,13.4 66.1,12.2 67.2,13.6 67.3,16.9 67.6,20.0 68.9,20.7 71.3,19.0 74.0,16.8 75.8,16.5 76.4,18.8 76.4,22.4 77.0,24.7 78.8,24.4 81.5,22.2 83.9,20.6 85.2,21.3 85.5,24.3 85.6,27.7 86.6,29.1 88.8,27.8 91.5,25.6 93.6,24.6 94.5,26.4 94.6,29.8 95.0,32.7 96.4,33.0 99.0,31.1 101.5,29.1 103.2,29.1 103.7,31.7 103.7,35.2 104.5,37.3 106.4,36.6 109.1,34.4 111.4,33.0 112.6,34.0 112.8,37.2 113.0,40.4 114.1,41.5 116.5,40.0 119.2,37.8 121.1,37.2 121.8,39.2 121.9,42.7 122.4,45.3 125.1,42.9 126.5,43.5 127.9,44.1 129.3,44.7 130.6,45.4 132.0,46.0" marker-end="url(#ah2)"/><polyline class="l2 thin" fill="none" points="56.0,8.0 55.9,11.2 57.0,12.4 59.5,11.1 62.4,9.1 64.3,8.7 64.9,10.8 64.6,14.3 64.9,16.9 66.6,17.0 69.4,15.1 72.0,13.5 73.4,14.1 73.5,17.1 73.3,20.5 74.1,22.1 76.4,21.2 79.3,19.2 81.5,18.3 82.3,20.0 82.1,23.5 82.2,26.4 83.6,26.9 86.3,25.3 89.1,23.5 90.7,23.6 91.0,26.2 90.8,29.7 91.3,31.8 93.3,31.3 96.2,29.3 98.6,28.1 99.7,29.3 99.6,32.6 99.5,35.8 100.7,36.8 103.2,35.5 106.0,33.5 108.0,33.2 108.5,35.4 108.2,38.9 108.5,41.4 110.3,41.4 113.1,39.5 115.7,37.9 117.0,38.7 117.1,41.7 116.9,45.1 117.8,46.6 120.1,45.6 123.0,43.6 125.2,42.8 125.9,44.6 125.7,48.0 125.8,50.9 127.3,51.4 130.0,49.7 131.4,50.3 132.7,51.0 134.0,51.8 135.4,52.5 136.7,53.3 138.0,54.0" marker-end="url(#ah2)"/><polyline class="l2 thin" fill="none" points="72.0,12.0 71.6,15.2 72.6,16.4 75.1,15.4 78.2,13.7 80.2,13.4 80.6,15.6 80.0,19.1 80.0,21.7 81.6,22.0 84.6,20.4 87.4,19.0 88.7,19.7 88.6,22.6 88.1,26.0 88.6,27.8 90.9,27.2 93.9,25.4 96.3,24.7 97.0,26.3 96.5,29.7 96.3,32.7 97.5,33.5 100.3,32.3 103.2,30.6 105.0,30.7 105.1,33.2 104.5,36.7 104.8,39.0 106.7,38.9 109.7,37.3 112.3,36.1 113.4,37.1 113.1,40.2 112.7,43.5 113.5,45.0 116.0,44.1 119.0,42.3 121.2,41.9 121.6,43.8 121.1,47.3 121.0,50.1 122.5,50.6 125.4,49.1 128.2,47.6 129.8,48.1 129.7,50.8 129.1,54.3 129.6,56.3 131.7,55.8 134.8,54.1 137.2,53.2 138.1,54.6 137.8,57.7 139.0,58.6 140.3,59.4 141.5,60.3 142.8,61.1 144.0,62.0" marker-end="url(#ah2)"/><text class="t2" x="14.0" y="30.0" style="font-size:13px">light</text><polyline class="axis" fill="none" points="141.0,90.0 141.0,180.0 175.0,180.0"/><polyline class="axis" fill="none" points="250.0,82.0 250.0,120.0 320.0,120.0 320.0,180.0 280.0,180.0"/><line class="axis" x1="175.0" y1="168.0" x2="175.0" y2="192.0"/><line class="axis" x1="185.0" y1="174.0" x2="185.0" y2="186.0" style="stroke-width:3"/><line class="axis" x1="185.0" y1="180.0" x2="230.0" y2="180.0"/><line class="axis" x1="168.0" y1="196.0" x2="194.0" y2="164.0" marker-end="url(#ah3)"/><circle cx="255" cy="180" r="13" class="axis"/><text x="255.0" y="185.0" text-anchor="middle" style="font-size:13px">A</text><line class="axis" x1="230.0" y1="180.0" x2="242.0" y2="180.0"/><line class="axis" x1="268.0" y1="180.0" x2="280.0" y2="180.0"/><polyline class="axis" fill="none" points="158.0,180.0 158.0,150.0 168.0,150.0"/><polyline class="axis" fill="none" points="196.0,150.0 210.0,150.0 210.0,180.0"/><circle cx="182" cy="150" r="13" class="axis"/><text x="182.0" y="155.0" text-anchor="middle" style="font-size:13px">V</text><text x="350.0" y="70.0" text-anchor="middle" style="font-size:12px">vacuum</text><text x="350.0" y="84.0" text-anchor="middle" style="font-size:12px">tube</text>
+      </svg>
+      <figcaption>A photocell. <span class="key-2">Light</span> releases <span class="key-1">photoelectrons</span> from the curved metal cathode (left), which cross the vacuum to the anode (right). The ammeter measures the photocurrent; the variable supply can be reversed to slow the electrons down.</figcaption>
+    </figure>
+    <p>Experiments like this give four key results:</p>
+    <ol>
+      <li>Below a certain <strong>threshold frequency</strong> $f_0$, no electrons are emitted at all, however bright the light.</li>
+      <li>Above $f_0$, electrons are emitted <strong>instantly</strong>, even when the light is very dim.</li>
+      <li>The <strong>maximum kinetic energy</strong> of the electrons depends on the light's frequency, not its intensity. Higher frequency gives more energetic electrons.</li>
+      <li>Brighter light (above $f_0$) releases <strong>more electrons</strong> per second, so a bigger current, but not faster ones.</li>
+    </ol>
+    <p>The threshold frequency is different for each metal. For zinc it is in the ultraviolet; for caesium and sodium it is in the visible.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="classical">2. Why the wave model fails <span class="tag hl">HL</span></h2>
+    <p>In the wave model, the energy of light is spread evenly across the wavefront, and it depends on intensity (amplitude), not frequency. That leads to the wrong predictions:</p>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Wave model predicts</th><th>Experiment shows</th></tr>
+        <tr><td>Any frequency works if the light is bright enough</td><td>Nothing below $f_0$, however bright</td></tr>
+        <tr><td>Dim light needs time to build up enough energy in an electron</td><td>Emission is instant</td></tr>
+        <tr><td>Brighter light gives faster electrons</td><td>Maximum $E_k$ depends only on frequency</td></tr>
+      </table>
+    </div>
+    <p>Only the last result in section 1 (brighter light gives more electrons) fits the wave model.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="einstein">3. Einstein's photon explanation <span class="tag hl">HL</span></h2>
+    <p>Einstein proposed that light is a stream of <strong>photons</strong>, each with energy $E = hf$. Each photon gives <strong>all</strong> its energy to <strong>one</strong> electron. To escape, an electron needs at least the metal's <strong>work function</strong> $\Phi$: the minimum energy needed to remove an electron from the surface. Whatever is left over becomes kinetic energy:</p>
+    <div class="key">
+      $$E_{\max} = hf - \Phi$$
+      <p style="margin:0">$E_{\max}$ is the maximum kinetic energy of the photoelectrons, for the electrons nearest the surface. Electrons from deeper down lose extra energy getting out, so they are slower. At the threshold, $hf_0 = \Phi$, so $f_0 = \dfrac{\Phi}{h}$.</p>
+    </div>
+    <p>This explains everything. A photon below $f_0$ doesn't have enough energy, and an electron can't collect energy from two photons. One photon is enough above $f_0$, so emission is instant. A higher frequency means more energy per photon, so faster electrons. Brighter light means more photons per second, so more electrons.</p>
+    <div class="worked">
+      <h3>Worked example: violet light on sodium</h3>
+      <p>Light of wavelength 420 nm falls on sodium, whose work function is 2.28 eV. Find (a) the threshold frequency, (b) the maximum kinetic energy of the photoelectrons and (c) their maximum speed.</p>
+      <p>(a) $f_0 = \dfrac{\Phi}{h} = \dfrac{2.28 \times 1.60 \times 10^{-19}}{6.63 \times 10^{-34}} = 5.50 \times 10^{14}$ Hz (a wavelength of 545 nm, green light).</p>
+      <p>(b) Photon energy $hf = \dfrac{hc}{\lambda} = \dfrac{6.63 \times 10^{-34} \times 3.00 \times 10^{8}}{4.20 \times 10^{-7}} = 4.74 \times 10^{-19}$ J $= 2.96$ eV. So $E_{\max} = 2.96 - 2.28 = 0.68$ eV $= 1.09 \times 10^{-19}$ J.</p>
+      <p>(c) $v = \sqrt{\dfrac{2E_{\max}}{m_e}} = \sqrt{\dfrac{2 \times 1.09 \times 10^{-19}}{9.11 \times 10^{-31}}} = 4.9 \times 10^{5}\ \text{m s}^{-1}$.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="stopping">4. Measuring the maximum kinetic energy <span class="tag hl">HL</span></h2>
+    <p>If the supply in the photocell is reversed, the anode becomes negative and repels the photoelectrons. As this reverse p.d. is increased, fewer electrons make it across. At the <strong>stopping voltage</strong> $V_s$, even the fastest ones are turned back and the current falls to zero:</p>
+    <div class="key">
+      $$eV_s = E_{\max} \quad\Rightarrow\quad eV_s = hf - \Phi$$
+      <p style="margin:0">In electronvolts this is very simple: a stopping voltage of 0.68 V means $E_{\max} = 0.68$ eV.</p>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 210" role="img" aria-labelledby="e2bt">
+        <title id="e2bt">Photocurrent against p.d. for a photocell. For light of frequency f1, bright and dim curves reach different saturation currents but fall to zero at the same stopping voltage minus V1. For a higher frequency f2 the current falls to zero at a larger reverse voltage minus V2.</title>
+        <line class="axis" x1="15.0" y1="185.0" x2="372.0" y2="185.0" marker-end="url(#ah3)"/><line class="axis" x1="240.0" y1="200.0" x2="240.0" y2="14.0" marker-end="url(#ah3)"/><text x="372.0" y="177.0" text-anchor="end" style="font-size:14px">V</text><text x="248.0" y="24.0" style="font-size:14px">I</text><polyline class="l1" fill="none" points="120.0,185.0 122.3,179.9 124.7,174.9 127.0,170.1 129.3,165.3 131.7,160.6 134.0,156.0 136.3,151.6 138.7,147.2 141.0,142.9 143.3,138.7 145.7,134.7 148.0,130.7 150.3,126.8 152.7,123.0 155.0,119.3 157.3,115.8 159.7,112.3 162.0,108.9 164.3,105.6 166.7,102.4 169.0,99.3 171.3,96.3 173.7,93.3 176.0,90.5 178.3,87.8 180.7,85.1 183.0,82.6 185.3,80.1 187.7,77.7 190.0,75.5 192.3,73.3 194.7,71.2 197.0,69.2 199.3,67.2 201.7,65.4 204.0,63.6 206.3,62.0 208.7,60.4 211.0,58.9 213.3,57.5 215.7,56.2 218.0,54.9 220.3,53.7 222.7,52.6 225.0,51.6 227.3,50.7 229.7,49.8 232.0,49.1 234.3,48.4 236.7,47.7 239.0,47.2 241.3,46.7 243.7,46.2 246.0,45.9 248.3,45.6 250.7,45.4 253.0,45.2 255.3,45.1 257.7,45.0 260.0,45.0 365.0,45.0"/><polyline class="l1 thin dash" fill="none" points="120.0,185.0 122.3,182.5 124.7,180.0 127.0,177.5 129.3,175.1 131.7,172.8 134.0,170.5 136.3,168.3 138.7,166.1 141.0,164.0 143.3,161.9 145.7,159.8 148.0,157.8 150.3,155.9 152.7,154.0 155.0,152.2 157.3,150.4 159.7,148.6 162.0,146.9 164.3,145.3 166.7,143.7 169.0,142.1 171.3,140.6 173.7,139.2 176.0,137.8 178.3,136.4 180.7,135.1 183.0,133.8 185.3,132.6 187.7,131.4 190.0,130.2 192.3,129.1 194.7,128.1 197.0,127.1 199.3,126.1 201.7,125.2 204.0,124.3 206.3,123.5 208.7,122.7 211.0,122.0 213.3,121.2 215.7,120.6 218.0,120.0 220.3,119.4 222.7,118.8 225.0,118.3 227.3,117.8 229.7,117.4 232.0,117.0 234.3,116.7 236.7,116.4 239.0,116.1 241.3,115.8 243.7,115.6 246.0,115.4 248.3,115.3 250.7,115.2 253.0,115.1 255.3,115.0 257.7,115.0 260.0,115.0 365.0,115.0"/><polyline class="l2" fill="none" points="70.0,185.0 73.2,181.2 76.3,177.5 79.5,173.8 82.7,170.2 85.8,166.7 89.0,163.3 92.2,159.9 95.3,156.6 98.5,153.4 101.7,150.3 104.8,147.2 108.0,144.3 111.2,141.4 114.3,138.5 117.5,135.8 120.7,133.1 123.8,130.5 127.0,127.9 130.2,125.4 133.3,123.0 136.5,120.7 139.7,118.4 142.8,116.2 146.0,114.1 149.2,112.1 152.3,110.1 155.5,108.2 158.7,106.3 161.8,104.6 165.0,102.9 168.2,101.2 171.3,99.6 174.5,98.1 177.7,96.7 180.8,95.3 184.0,94.0 187.2,92.7 190.3,91.6 193.5,90.4 196.7,89.4 199.8,88.4 203.0,87.4 206.2,86.6 209.3,85.7 212.5,85.0 215.7,84.3 218.8,83.6 222.0,83.0 225.2,82.5 228.3,82.0 231.5,81.6 234.7,81.2 237.8,80.9 241.0,80.7 244.2,80.4 247.3,80.3 250.5,80.1 253.7,80.1 256.8,80.0 260.0,80.0 365.0,80.0"/><text class="t1" x="120.0" y="203.0" text-anchor="middle" style="font-size:13px">−V₁</text><text class="t2" x="70.0" y="203.0" text-anchor="middle" style="font-size:13px">−V₂</text><text class="t1" x="305.0" y="37.0" text-anchor="middle" style="font-size:12px">bright, f₁</text><text class="t1" x="305.0" y="107.0" text-anchor="middle" style="font-size:12px">dim, f₁</text><text class="t2" x="305.0" y="72.0" text-anchor="middle" style="font-size:12px">higher f₂</text><text x="234.0" y="203.0" text-anchor="end" style="font-size:13px">0</text>
+      </svg>
+      <figcaption>Brighter light of the same frequency <span class="key-1">f₁</span> gives a bigger current but the same stopping voltage. A <span class="key-2">higher frequency f₂</span> needs a bigger stopping voltage. At large positive p.d. the current levels off, because every emitted electron is already being collected.</figcaption>
+    </figure>
+
+    <!-- ===================================================== -->
+    <h2 id="graph">5. The $E_{\max}$ against $f$ graph <span class="tag hl">HL</span></h2>
+    <p>Plotting $E_{\max}$ (or $eV_s$) against frequency gives a straight line, because $E_{\max} = hf - \Phi$ has the form $y = mx + c$:</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 230" role="img" aria-labelledby="e2ct">
+        <title id="e2ct">Maximum kinetic energy against frequency for two metals. Both are parallel straight lines with gradient h. Each crosses the frequency axis at its threshold frequency f0 and, extended back, meets the energy axis at minus the work function. Metal 2 has the larger work function, so its line is lower.</title>
+        <line class="axis" x1="40.0" y1="120.0" x2="372.0" y2="120.0" marker-end="url(#ah3)"/><line class="axis" x1="40.0" y1="222.0" x2="40.0" y2="12.0" marker-end="url(#ah3)"/><text x="372.0" y="138.0" text-anchor="end" style="font-size:14px">f</text><text x="46.0" y="22.0" style="font-size:14px">E</text><text x="56.0" y="26.0" style="font-size:10px">max</text><line class="l1 thin dash" x1="40.0" y1="152.2" x2="128.9" y2="120.0"/><line class="l1" x1="128.9" y1="120.0" x2="360.0" y2="36.3"/><text class="t1" x="128.9" y="138.0" text-anchor="middle" style="font-size:13px">f₀</text><text class="t1" x="35.0" y="157.2" text-anchor="end" style="font-size:13px">−Φ</text><line class="l2 thin dash" x1="40.0" y1="183.0" x2="213.9" y2="120.0"/><line class="l2" x1="213.9" y1="120.0" x2="360.0" y2="67.1"/><text class="t2" x="213.9" y="138.0" text-anchor="middle" style="font-size:13px">f₀</text><text class="t2" x="35.0" y="188.0" text-anchor="end" style="font-size:13px">−Φ</text><text class="t1" x="240.0" y="67.8" text-anchor="end" style="font-size:12px">metal 1</text><text x="296.0" y="45.0" text-anchor="end" style="font-size:12px">gradient = h</text><text class="t2" x="328.0" y="100.7" style="font-size:12px">metal 2</text>
+      </svg>
+      <figcaption>Every metal gives a line with the same gradient, $h$. A metal with a bigger work function (<span class="key-2">metal 2</span>) has a higher threshold frequency. The dashed parts don't happen; they just show where the intercept $-\Phi$ is.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>Gradient</strong> = Planck constant $h$ (the same for every metal).</li>
+      <li><strong>Intercept on the $f$ axis</strong> = threshold frequency $f_0$.</li>
+      <li><strong>Intercept on the $E$ axis</strong> (extended) = $-\Phi$.</li>
+    </ul>
+    <p>If you plot $V_s$ instead, the gradient is $\dfrac{h}{e}$. This is how Millikan measured $h$.</p>
+    <aside class="maths-link">
+      <h3>Maths link: gradient and intercepts of a line <span class="tag">AA SL 2.1</span></h3>
+      <p>For $y = mx + c$, the gradient is $m$ and the $y$-intercept is $c$. Setting $y = 0$ gives the $x$-intercept, $x = -\frac{c}{m}$. Here $m = h$ and $c = -\Phi$, so the $f$-intercept is $\frac{\Phi}{h} = f_0$. Two points on the line are enough to find both $h$ and $\Phi$.</p>
+    </aside>
+
+    <!-- ===================================================== -->
+    <h2 id="debroglie">6. Matter waves: the de Broglie wavelength <span class="tag hl">HL</span></h2>
+    <p>De Broglie proposed that every moving particle has a wavelength linked to its momentum $p$:</p>
+    <div class="key">
+      $$\lambda = \frac{h}{p} = \frac{h}{mv}$$
+      <p style="margin:0">The larger the momentum, the shorter the wavelength. Photons obey the same rule, so a photon has momentum $p = \dfrac{h}{\lambda}$ even though it has no mass.</p>
+    </div>
+    <p>Everyday objects have so much momentum that their wavelengths are far too small to detect. A 0.15 kg ball at 30 m s⁻¹ has $\lambda = \dfrac{6.63 \times 10^{-34}}{4.5} = 1.5 \times 10^{-34}$ m, far smaller than a nucleus. Only tiny particles like electrons have wavelengths big enough to measure.</p>
+    <div class="worked">
+      <h3>Worked example: an accelerated electron</h3>
+      <p>An electron is accelerated from rest through a p.d. of 150 V. Find its de Broglie wavelength.</p>
+      <p>Kinetic energy: $E_k = eV = 1.60 \times 10^{-19} \times 150 = 2.40 \times 10^{-17}$ J.</p>
+      <p>Momentum: $E_k = \dfrac{p^2}{2m}$, so $p = \sqrt{2mE_k} = \sqrt{2 \times 9.11 \times 10^{-31} \times 2.40 \times 10^{-17}} = 6.61 \times 10^{-24}\ \text{kg m s}^{-1}$.</p>
+      <p>$\lambda = \dfrac{h}{p} = \dfrac{6.63 \times 10^{-34}}{6.61 \times 10^{-24}} = 1.0 \times 10^{-10}$ m, about the spacing of atoms in a crystal.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="diffraction">7. Electron diffraction <span class="tag hl">HL</span></h2>
+    <p>Waves diffract noticeably when they pass through a gap, or round an object, about the same size as their wavelength (C.3). Electrons with $\lambda \approx 10^{-10}$ m are diffracted by the regularly spaced atoms in a crystal.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 210" role="img" aria-labelledby="e2dt">
+        <title id="e2dt">An electron diffraction tube. Electrons from an electron gun pass through a thin graphite target and spread out into cones, producing bright concentric rings on a fluorescent screen.</title>
+        <rect x="20" y="10" width="300" height="180" rx="24" class="axis"/><rect x="30" y="88" width="34" height="24" class="f3" opacity="0.7"/><text x="47.0" y="132.0" text-anchor="middle" style="font-size:12px">electron gun</text><line class="l1 thin" x1="64.0" y1="100.0" x2="150.0" y2="100.0" marker-end="url(#ah1)"/><text class="t1" x="105.0" y="92.0" text-anchor="middle" style="font-size:12px">e⁻</text><line class="l3" x1="156.0" y1="78.0" x2="156.0" y2="122.0"/><text x="156.0" y="72.0" text-anchor="middle" style="font-size:12px">graphite</text><text x="156.0" y="60.0" text-anchor="middle" style="font-size:12px">thin</text><line class="l1 thin dash" x1="156.0" y1="100.0" x2="297.0" y2="59.7"/><line class="l1 thin dash" x1="156.0" y1="100.0" x2="297.0" y2="140.3"/><line class="l1 thin dash" x1="156.0" y1="100.0" x2="297.0" y2="25.1"/><line class="l1 thin dash" x1="156.0" y1="100.0" x2="297.0" y2="174.9"/><ellipse cx="300" cy="100" rx="10" ry="85" class="l3 thin" fill="none"/><ellipse cx="300" cy="100" rx="4.8" ry="40.0" class="l1" fill="none"/><ellipse cx="300" cy="100" rx="9.0" ry="75.0" class="l1" fill="none"/><circle cx="300" cy="100" r="4" class="f1"/><text x="300.0" y="204.0" text-anchor="middle" style="font-size:12px">screen</text>
+      </svg>
+      <figcaption>An electron diffraction tube. <span class="key-1">Electrons</span> passing through thin graphite produce bright rings on the screen, exactly like X-rays of the same wavelength would. Increasing the accelerating voltage makes the rings smaller, because faster electrons have shorter wavelengths.</figcaption>
+    </figure>
+    <p>Rings are a pattern of maxima and minima produced by waves interfering, so this is direct evidence for the <strong>wave nature of matter</strong>. Particles in the classical sense would just make a fuzzy spot.</p>
+    <h3>Scattering off a nucleus</h3>
+    <p>High-energy electrons fired at a thin target are diffracted by individual nuclei, like light passing round a small disc. The intensity of the scattered electrons, against angle, shows a central maximum and then a <strong>first minimum</strong> at:</p>
+    <div class="key">
+      $$\sin\theta \approx \frac{\lambda}{D}$$
+      <p style="margin:0">$D$ is the diameter of the nucleus and $\lambda$ the de Broglie wavelength of the electrons. Measuring $\theta$ gives the size of the nucleus. This is how the relation $R = R_0A^{1/3}$ (E.1) was established.</p>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 210" role="img" aria-labelledby="e2et">
+        <title id="e2et">Intensity of scattered electrons against scattering angle, with a central maximum, a first minimum at angle theta-min where sine theta is about lambda over D, and smaller maxima beyond.</title>
+        <line class="axis" x1="20.0" y1="175.0" x2="365.0" y2="175.0" marker-end="url(#ah3)"/><line class="axis" x1="190.0" y1="180.0" x2="190.0" y2="14.0" marker-end="url(#ah3)"/><polyline class="l1" fill="none" points="25.0,173.1 25.6,173.1 26.1,173.0 26.7,173.0 27.2,172.9 27.8,172.9 28.3,172.9 28.8,172.8 29.4,172.8 29.9,172.8 30.5,172.8 31.1,172.7 31.6,172.7 32.2,172.7 32.7,172.7 33.2,172.7 33.8,172.7 34.3,172.7 34.9,172.7 35.4,172.7 36.0,172.7 36.6,172.7 37.1,172.7 37.7,172.8 38.2,172.8 38.8,172.8 39.3,172.9 39.8,172.9 40.4,172.9 40.9,173.0 41.5,173.0 42.1,173.1 42.6,173.1 43.2,173.2 43.7,173.2 44.2,173.3 44.8,173.3 45.3,173.4 45.9,173.4 46.4,173.5 47.0,173.6 47.6,173.6 48.1,173.7 48.7,173.8 49.2,173.8 49.8,173.9 50.3,174.0 50.8,174.0 51.4,174.1 51.9,174.2 52.5,174.2 53.1,174.3 53.6,174.4 54.2,174.4 54.7,174.5 55.2,174.6 55.8,174.6 56.3,174.7 56.9,174.7 57.4,174.8 58.0,174.8 58.6,174.8 59.1,174.9 59.7,174.9 60.2,174.9 60.8,175.0 61.3,175.0 61.8,175.0 62.4,175.0 63.0,175.0 63.5,175.0 64.0,175.0 64.6,175.0 65.2,175.0 65.7,174.9 66.2,174.9 66.8,174.9 67.3,174.8 67.9,174.8 68.5,174.7 69.0,174.7 69.5,174.6 70.1,174.5 70.7,174.5 71.2,174.4 71.8,174.3 72.3,174.2 72.8,174.1 73.4,174.0 74.0,173.9 74.5,173.8 75.0,173.7 75.6,173.5 76.2,173.4 76.7,173.3 77.2,173.1 77.8,173.0 78.3,172.8 78.9,172.7 79.5,172.5 80.0,172.4 80.5,172.2 81.1,172.1 81.7,171.9 82.2,171.8 82.8,171.6 83.3,171.4 83.8,171.3 84.4,171.1 85.0,171.0 85.5,170.8 86.0,170.6 86.6,170.5 87.2,170.3 87.7,170.2 88.2,170.0 88.8,169.9 89.3,169.8 89.9,169.6 90.5,169.5 91.0,169.4 91.5,169.3 92.1,169.1 92.7,169.0 93.2,168.9 93.8,168.9 94.3,168.8 94.8,168.7 95.4,168.6 96.0,168.6 96.5,168.5 97.0,168.5 97.6,168.4 98.2,168.4 98.7,168.4 99.2,168.4 99.8,168.4 100.3,168.4 100.9,168.4 101.5,168.5 102.0,168.5 102.5,168.6 103.1,168.6 103.7,168.7 104.2,168.8 104.8,168.9 105.3,169.0 105.8,169.1 106.4,169.2 107.0,169.4 107.5,169.5 108.0,169.7 108.6,169.8 109.2,170.0 109.7,170.1 110.2,170.3 110.8,170.5 111.3,170.7 111.9,170.9 112.5,171.1 113.0,171.3 113.5,171.5 114.1,171.7 114.7,171.9 115.2,172.1 115.8,172.3 116.3,172.5 116.8,172.7 117.4,172.9 118.0,173.1 118.5,173.3 119.0,173.5 119.6,173.7 120.2,173.9 120.7,174.0 121.2,174.2 121.8,174.3 122.3,174.5 122.9,174.6 123.5,174.7 124.0,174.8 124.5,174.9 125.1,174.9 125.7,175.0 126.2,175.0 126.8,175.0 127.3,175.0 127.8,174.9 128.4,174.9 128.9,174.8 129.5,174.7 130.1,174.5 130.6,174.4 131.2,174.2 131.7,173.9 132.2,173.7 132.8,173.4 133.3,173.1 133.9,172.7 134.4,172.3 135.0,171.9 135.6,171.4 136.1,170.9 136.7,170.4 137.2,169.8 137.8,169.2 138.3,168.5 138.8,167.8 139.4,167.1 139.9,166.3 140.5,165.5 141.1,164.7 141.6,163.8 142.2,162.8 142.7,161.9 143.2,160.8 143.8,159.8 144.3,158.7 144.9,157.5 145.4,156.3 146.0,155.1 146.6,153.8 147.1,152.5 147.7,151.2 148.2,149.8 148.8,148.3 149.3,146.9 149.8,145.4 150.4,143.8 150.9,142.2 151.5,140.6 152.1,139.0 152.6,137.3 153.2,135.6 153.7,133.8 154.2,132.0 154.8,130.2 155.3,128.4 155.9,126.5 156.4,124.7 157.0,122.7 157.6,120.8 158.1,118.9 158.7,116.9 159.2,114.9 159.8,112.9 160.3,110.9 160.8,108.9 161.4,106.8 161.9,104.8 162.5,102.7 163.1,100.7 163.6,98.6 164.2,96.6 164.7,94.5 165.2,92.4 165.8,90.4 166.3,88.4 166.9,86.3 167.4,84.3 168.0,82.3 168.6,80.3 169.1,78.3 169.7,76.4 170.2,74.5 170.8,72.6 171.3,70.7 171.8,68.8 172.4,67.0 172.9,65.2 173.5,63.5 174.1,61.8 174.6,60.1 175.2,58.5 175.7,56.9 176.2,55.3 176.8,53.8 177.3,52.4 177.9,51.0 178.4,49.6 179.0,48.3 179.6,47.1 180.1,45.9 180.7,44.7 181.2,43.6 181.8,42.6 182.3,41.7 182.8,40.7 183.4,39.9 183.9,39.1 184.5,38.4 185.1,37.8 185.6,37.2 186.2,36.7 186.7,36.2 187.2,35.9 187.8,35.6 188.3,35.3 188.9,35.1 189.4,35.0 190.0,35.0 190.6,35.0 191.1,35.1 191.7,35.3 192.2,35.6 192.8,35.9 193.3,36.2 193.8,36.7 194.4,37.2 194.9,37.8 195.5,38.4 196.1,39.1 196.6,39.9 197.2,40.7 197.7,41.7 198.2,42.6 198.8,43.6 199.3,44.7 199.9,45.9 200.4,47.1 201.0,48.3 201.6,49.6 202.1,51.0 202.7,52.4 203.2,53.8 203.8,55.3 204.3,56.9 204.8,58.5 205.4,60.1 205.9,61.8 206.5,63.5 207.1,65.2 207.6,67.0 208.2,68.8 208.7,70.7 209.2,72.6 209.8,74.5 210.3,76.4 210.9,78.3 211.4,80.3 212.0,82.3 212.6,84.3 213.1,86.3 213.7,88.4 214.2,90.4 214.8,92.4 215.3,94.5 215.8,96.6 216.4,98.6 216.9,100.7 217.5,102.7 218.1,104.8 218.6,106.8 219.2,108.9 219.7,110.9 220.2,112.9 220.8,114.9 221.3,116.9 221.9,118.9 222.4,120.8 223.0,122.7 223.6,124.7 224.1,126.5 224.7,128.4 225.2,130.2 225.8,132.0 226.3,133.8 226.8,135.6 227.4,137.3 227.9,139.0 228.5,140.6 229.1,142.2 229.6,143.8 230.2,145.4 230.7,146.9 231.2,148.3 231.8,149.8 232.3,151.2 232.9,152.5 233.4,153.8 234.0,155.1 234.6,156.3 235.1,157.5 235.7,158.7 236.2,159.8 236.8,160.8 237.3,161.9 237.8,162.8 238.4,163.8 238.9,164.7 239.5,165.5 240.1,166.3 240.6,167.1 241.2,167.8 241.7,168.5 242.2,169.2 242.8,169.8 243.3,170.4 243.9,170.9 244.4,171.4 245.0,171.9 245.6,172.3 246.1,172.7 246.7,173.1 247.2,173.4 247.8,173.7 248.3,173.9 248.8,174.2 249.4,174.4 249.9,174.5 250.5,174.7 251.1,174.8 251.6,174.9 252.2,174.9 252.7,175.0 253.2,175.0 253.8,175.0 254.3,175.0 254.9,174.9 255.4,174.9 256.0,174.8 256.6,174.7 257.1,174.6 257.6,174.5 258.2,174.3 258.8,174.2 259.3,174.0 259.9,173.9 260.4,173.7 260.9,173.5 261.5,173.3 262.1,173.1 262.6,172.9 263.1,172.7 263.7,172.5 264.2,172.3 264.8,172.1 265.4,171.9 265.9,171.7 266.4,171.5 267.0,171.3 267.6,171.1 268.1,170.9 268.6,170.7 269.2,170.5 269.8,170.3 270.3,170.1 270.9,170.0 271.4,169.8 271.9,169.7 272.5,169.5 273.1,169.4 273.6,169.2 274.1,169.1 274.7,169.0 275.2,168.9 275.8,168.8 276.4,168.7 276.9,168.6 277.4,168.6 278.0,168.5 278.6,168.5 279.1,168.4 279.6,168.4 280.2,168.4 280.8,168.4 281.3,168.4 281.9,168.4 282.4,168.4 282.9,168.5 283.5,168.5 284.1,168.6 284.6,168.6 285.1,168.7 285.7,168.8 286.2,168.9 286.8,168.9 287.4,169.0 287.9,169.1 288.4,169.3 289.0,169.4 289.6,169.5 290.1,169.6 290.6,169.8 291.2,169.9 291.8,170.0 292.3,170.2 292.9,170.3 293.4,170.5 293.9,170.6 294.5,170.8 295.1,171.0 295.6,171.1 296.1,171.3 296.7,171.4 297.2,171.6 297.8,171.8 298.4,171.9 298.9,172.1 299.4,172.2 300.0,172.4 300.6,172.5 301.1,172.7 301.6,172.8 302.2,173.0 302.8,173.1 303.3,173.3 303.9,173.4 304.4,173.5 304.9,173.7 305.5,173.8 306.1,173.9 306.6,174.0 307.1,174.1 307.7,174.2 308.2,174.3 308.8,174.4 309.4,174.5 309.9,174.5 310.4,174.6 311.0,174.7 311.6,174.7 312.1,174.8 312.6,174.8 313.2,174.9 313.8,174.9 314.3,174.9 314.9,175.0 315.4,175.0 315.9,175.0 316.5,175.0 317.1,175.0 317.6,175.0 318.1,175.0 318.7,175.0 319.2,175.0 319.8,174.9 320.4,174.9 320.9,174.9 321.4,174.8 322.0,174.8 322.6,174.8 323.1,174.7 323.6,174.7 324.2,174.6 324.8,174.6 325.3,174.5 325.9,174.4 326.4,174.4 326.9,174.3 327.5,174.2 328.1,174.2 328.6,174.1 329.1,174.0 329.7,174.0 330.2,173.9 330.8,173.8 331.4,173.8 331.9,173.7 332.4,173.6 333.0,173.6 333.6,173.5 334.1,173.4 334.6,173.4 335.2,173.3 335.8,173.3 336.3,173.2 336.9,173.2 337.4,173.1 337.9,173.1 338.5,173.0 339.1,173.0 339.6,172.9 340.1,172.9 340.7,172.9 341.2,172.8 341.8,172.8 342.4,172.8 342.9,172.7 343.4,172.7 344.0,172.7 344.6,172.7 345.1,172.7 345.6,172.7 346.2,172.7 346.8,172.7 347.3,172.7 347.9,172.7 348.4,172.7 348.9,172.7 349.5,172.8 350.1,172.8 350.6,172.8 351.1,172.8 351.7,172.9 352.2,172.9 352.8,172.9 353.4,173.0 353.9,173.0 354.4,173.1 355.0,173.1"/><line class="axis" x1="253.5" y1="175.0" x2="253.5" y2="181.0"/><text class="t1" x="253.5" y="197.0" text-anchor="middle" style="font-size:14px">θ</text><text class="t1" x="261.5" y="201.0" style="font-size:10px">min</text><text x="365.0" y="197.0" text-anchor="end" style="font-size:13px">angle</text><text x="198.0" y="26.0" style="font-size:13px">intensity</text><text class="t1" x="261.5" y="125.0" style="font-size:12px">sin θ</text><text x="261.5" y="125.0" style="font-size:12px"></text><text class="t1" x="261.5" y="141.0" style="font-size:12px">≈ λ / D</text>
+      </svg>
+      <figcaption>Electrons scattered by nuclei show a diffraction pattern. The angle of the <span class="key-1">first minimum</span> depends on λ/D.</figcaption>
+    </figure>
+    <div class="worked">
+      <h3>Worked example: sizing an oxygen nucleus</h3>
+      <p>Electrons with momentum $2.0 \times 10^{-19}\ \text{kg m s}^{-1}$ are scattered by oxygen-16 nuclei. The first minimum is observed at 33°. Estimate the diameter of an oxygen nucleus.</p>
+      <p>$\lambda = \dfrac{h}{p} = \dfrac{6.63 \times 10^{-34}}{2.0 \times 10^{-19}} = 3.3 \times 10^{-15}$ m. Then $D \approx \dfrac{\lambda}{\sin\theta} = \dfrac{3.3 \times 10^{-15}}{\sin 33°} = 6.1 \times 10^{-15}$ m.</p>
+      <p>Check with E.1: $2R_0A^{1/3} = 2 \times 1.20 \times 10^{-15} \times 16^{1/3} = 6.0 \times 10^{-15}$ m.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="compton">8. Compton scattering <span class="tag hl">HL</span></h2>
+    <p>When X-rays or gamma rays hit electrons (loosely held in a target, so effectively free), some photons are scattered with a <strong>longer wavelength</strong>. A wave would come off with the same wavelength. Compton explained it by treating each photon as a particle with energy and momentum, colliding with one electron: the electron recoils, carrying away some energy, so the scattered photon has less energy and a longer wavelength.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 210" role="img" aria-labelledby="e2ft">
+        <title id="e2ft">Compton scattering: an incident photon of wavelength lambda hits an electron at rest. The photon is scattered through angle theta with a longer wavelength lambda-prime, and the electron recoils at an angle below the original direction.</title>
+        <polyline class="l2 thin" fill="none" points="15.0,125.0 16.5,128.8 18.0,130.9 19.5,130.4 21.0,127.5 22.6,123.5 24.1,120.2 25.6,119.0 27.1,120.4 28.6,123.9 30.1,127.8 31.6,130.5 33.1,130.8 34.6,128.5 36.1,124.6 37.7,120.9 39.2,119.1 40.7,119.8 42.2,122.9 43.7,126.8 45.2,130.0 46.7,131.0 48.2,129.3 49.7,125.7 51.2,121.8 52.8,119.3 54.3,119.4 55.8,121.9 57.3,125.8 58.8,129.3 60.3,131.0 61.8,130.0 63.3,126.8 64.8,122.8 66.3,119.8 67.9,119.1 69.4,121.0 70.9,124.7 72.4,128.5 73.9,130.8 75.4,130.5 76.9,127.8 78.4,123.9 79.9,120.4 81.4,119.0 83.0,120.2 84.5,123.6 86.0,127.6 87.5,130.4 89.0,130.8 90.5,128.7 92.0,124.9 93.5,121.2 95.0,119.1 96.6,119.7 98.1,122.5 99.6,126.5 101.1,129.8 102.6,131.0 104.1,129.5 105.6,126.0 107.1,122.1 108.6,119.4 110.1,119.2 111.7,121.6 113.2,125.4 114.7,129.1 116.2,130.9 117.7,130.2 119.2,127.1 120.7,123.1 122.2,120.0 123.7,119.0 125.2,120.7 126.8,124.3 128.3,128.2 129.8,130.7 131.3,130.6 132.8,128.1 134.3,124.2 135.8,120.6 137.3,119.0 138.8,120.0 140.3,123.3 141.9,127.3 143.4,130.2 144.9,130.9 146.4,129.0 147.9,125.3 149.4,121.5 150.9,119.2 152.4,119.5 153.9,122.2 155.4,125.0 157.0,125.0 158.5,125.0 160.0,125.0 161.5,125.0 163.0,125.0" marker-end="url(#ah2)"/><text class="t2" x="20.0" y="109.0" style="font-size:13px">incident photon, λ</text><circle cx="175" cy="125" r="7" class="f1"/><polyline class="l2 thin" fill="none" points="180.7,116.8 183.6,117.0 186.2,117.0 188.0,116.4 189.0,115.3 189.2,113.6 188.6,111.3 187.5,108.7 186.2,106.0 185.3,103.5 184.9,101.4 185.3,99.9 186.6,98.9 188.7,98.6 191.4,98.6 194.3,98.9 197.2,99.0 199.5,98.8 201.1,98.1 201.8,96.8 201.7,94.8 200.8,92.4 199.7,89.8 198.5,87.1 197.7,84.7 197.5,82.8 198.2,81.5 199.8,80.7 202.2,80.5 205.0,80.7 207.9,80.9 210.6,81.0 212.7,80.6 214.0,79.7 214.5,78.2 214.1,76.1 213.1,73.5 211.9,70.9 210.8,68.3 210.2,66.0 210.3,64.3 211.3,63.1 213.2,62.6 215.7,62.5 218.6,62.7 221.5,62.9 224.0,62.9 225.9,62.4 226.9,61.2 227.0,59.5 226.4,57.2 225.3,54.6 224.1,51.9 223.1,49.4 222.7,47.3 223.1,45.8 224.4,44.9 226.6,44.5 229.3,44.6 232.2,44.8 235.0,44.9 237.4,44.8 238.9,44.0 239.7,42.7 239.5,40.8 238.7,38.4 237.5,35.7 236.3,33.1 235.5,30.7 235.4,28.7 236.1,27.4 237.7,26.7 240.0,26.5 242.8,26.6 245.8,26.9 245.3,24.7 246.1,23.4 247.0,22.2 247.8,21.0 248.7,19.7 249.6,18.5" marker-end="url(#ah2)"/><text class="t2" x="259.6" y="24.5" style="font-size:13px">scattered</text><text class="t2" x="259.6" y="40.5" style="font-size:13px">photon, λ′ > λ</text><line class="grid dash" x1="175.0" y1="125.0" x2="360.0" y2="125.0"/><line class="l1" x1="181.6" y1="129.6" x2="252.8" y2="179.5" marker-end="url(#ah1)"/><text class="t1" x="262.9" y="186.4" style="font-size:13px">recoiling</text><text class="t1" x="262.9" y="202.4" style="font-size:13px">electron</text><path class="l3 thin" fill="none" d="M217.0 125 A42 42 0 0 0 199.1 90.6"/><text x="221.1" y="106.0" style="font-size:15px">θ</text><text class="t1" x="161.0" y="149.0" text-anchor="middle" style="font-size:12px">electron at rest</text>
+      </svg>
+      <figcaption>A <span class="key-2">photon</span> scatters off an <span class="key-1">electron</span>, which recoils. Energy and momentum are both conserved, just as in a collision between two balls (A.2).</figcaption>
+    </figure>
+    <div class="key">
+      $$\Delta\lambda = \lambda_f - \lambda_i = \frac{h}{m_ec}(1 - \cos\theta)$$
+      <p style="margin:0">$\theta$ is the angle through which the photon is scattered. $\dfrac{h}{m_ec} = 2.43 \times 10^{-12}$ m (the "Compton wavelength"). The shift is zero for $\theta = 0$ and greatest, $2\dfrac{h}{m_ec}$, for a photon bounced straight back ($\theta = 180°$). You don't need to derive this.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: X-rays scattered at 90°</h3>
+      <p>X-rays of wavelength $2.00 \times 10^{-11}$ m are scattered through 90° by electrons. Find (a) the scattered wavelength and (b) the kinetic energy given to the electron.</p>
+      <p>(a) $\Delta\lambda = 2.43 \times 10^{-12} \times (1 - \cos 90°) = 2.43 \times 10^{-12}$ m, so $\lambda_f = 2.00 \times 10^{-11} + 0.243 \times 10^{-11} = 2.24 \times 10^{-11}$ m.</p>
+      <p>(b) Photon energies: $E_i = \dfrac{hc}{\lambda_i} = 9.95 \times 10^{-15}$ J and $E_f = \dfrac{hc}{\lambda_f} = 8.87 \times 10^{-15}$ J. By energy conservation, the electron gains $1.1 \times 10^{-15}$ J (about 7 keV).</p>
+    </div>
+    <p>The shift is only noticeable when $\lambda$ is comparable to $2.43 \times 10^{-12}$ m, so Compton scattering is seen with X-rays and gamma rays, not visible light. It is <strong>stronger evidence</strong> for photons than the photoelectric effect: it shows that photons carry <strong>momentum</strong> as well as energy, and the whole collision follows the rules for particles.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="duality">9. Wave–particle duality <span class="tag hl">HL</span></h2>
+    <p>Both light and matter show wave properties in some experiments and particle properties in others:</p>
+    <ul>
+      <li><strong>Light as a wave:</strong> interference, diffraction, polarization.</li>
+      <li><strong>Light as particles:</strong> the photoelectric effect, Compton scattering, line spectra.</li>
+      <li><strong>Electrons as waves:</strong> electron diffraction.</li>
+      <li><strong>Electrons as particles:</strong> deflection by fields, a definite charge and mass, tracks in detectors.</li>
+    </ul>
+    <p>Neither picture alone is complete. Waves describe how light and matter <em>travel</em> (and where they are likely to be found); particles describe how they <em>interact</em>, in single, indivisible events. The two are linked by $E = hf$ and $p = \dfrac{h}{\lambda}$, which connect particle quantities (energy, momentum) to wave quantities (frequency, wavelength).</p>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">10. Common mistakes</h2>
+    <ul>
+      <li><strong>Saying brighter light gives faster photoelectrons.</strong> Intensity changes the number of electrons, not their maximum kinetic energy.</li>
+      <li><strong>Confusing threshold frequency with work function.</strong> $\Phi$ is an energy; $f_0 = \frac{\Phi}{h}$ is a frequency.</li>
+      <li><strong>Mixing eV and J</strong> in $E_{\max} = hf - \Phi$. Convert everything to the same unit first.</li>
+      <li><strong>Saying all photoelectrons have $E_{\max}$.</strong> It is the <em>maximum</em>; most electrons have less.</li>
+      <li><strong>Using $\lambda = \frac{h}{p}$ with the kinetic energy instead of the momentum.</strong> Find $p = \sqrt{2mE_k}$ first.</li>
+      <li><strong>Thinking the Compton shift depends on the incident wavelength.</strong> $\Delta\lambda$ depends only on the angle; the <em>fractional</em> change is bigger for short wavelengths.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">11. Check your understanding</h2>
+    <details class="check">
+      <summary>Light below the threshold frequency is made 100 times more intense. What happens?</summary>
+      <p>Nothing: still no electrons are emitted. Each photon still has too little energy, and an electron can't combine energy from two photons.</p>
+    </details>
+    <details class="check">
+      <summary>A metal has a work function of 3.0 eV. Will light of wavelength 500 nm release electrons?</summary>
+      <p>Photon energy $= \frac{hc}{\lambda} = 3.98 \times 10^{-19}$ J $= 2.5$ eV, less than 3.0 eV, so no.</p>
+    </details>
+    <details class="check">
+      <summary>The stopping voltage for a metal is 1.2 V. What is the maximum kinetic energy of the photoelectrons?</summary>
+      <p>1.2 eV, which is $1.9 \times 10^{-19}$ J.</p>
+    </details>
+    <details class="check">
+      <summary>An electron and a proton have the same speed. Which has the longer de Broglie wavelength?</summary>
+      <p>The electron: it has less momentum, and $\lambda = \frac{h}{mv}$.</p>
+    </details>
+    <details class="check">
+      <summary>At what scattering angle is the Compton shift equal to $\frac{h}{m_ec}$?</summary>
+      <p>When $1 - \cos\theta = 1$, so $\theta = 90°$.</p>
+    </details>
+    <details class="check">
+      <summary>Why is electron diffraction evidence that electrons are waves?</summary>
+      <p>The rings are maxima and minima caused by interference, which only waves produce, and the ring size matches the de Broglie wavelength.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=E.2">Practise E.2 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>

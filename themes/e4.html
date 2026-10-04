@@ -4,15 +4,220 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>E.4 Fission · DP Physics</title>
+  <meta name="description" content="IB DP Physics E.4 Fission: spontaneous and neutron-induced fission, energy released in fission, chain reactions and critical mass, the nuclear power station (moderator, control rods, coolant, heat exchanger, shielding), and fission products and nuclear waste.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="E.4">
+</head>
+<body data-root="../" data-section="themes" data-topic="E.4">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="e.html">Theme E Nuclear and quantum physics</a></p>
     <h1><span class="code">E.4</span>Fission</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <p class="lead">Splitting one uranium nucleus releases about 200 MeV, millions of times more energy than burning one molecule of fuel. This topic explains where that energy comes from, how a <strong>chain reaction</strong> keeps it going, how a nuclear power station controls it safely, and what happens to the radioactive waste. It builds on the binding energy curve in E.3. There is no extra HL content in E.4.</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Collaboration</span><span class="tag">Interpretation</span><span class="tag">Ethics</span><span class="tag">Risk</span></div>
+          <p><strong>Interpretation.</strong> In 1938 Otto Hahn and Fritz Strassmann found barium among the products of uranium bombarded with neutrons, and couldn't explain it. Lise Meitner and her nephew Otto Frisch worked out that the nucleus had split in two, and named the process "fission". Only Hahn received the Nobel Prize.</p>
+          <p><strong>Collaboration.</strong> In 1942 Enrico Fermi's team built the first nuclear reactor, Chicago Pile-1, under a sports stadium, and produced the first controlled chain reaction.</p>
+          <p><strong>Ethics.</strong> The same physics led within three years to the atomic bombs used on Hiroshima and Nagasaki in 1945. Many of the scientists involved later campaigned against nuclear weapons.</p>
+          <p><strong>Risk.</strong> The accidents at Chernobyl (1986) and Fukushima (2011) shaped public opinion for decades. Yet, per unit of electricity, nuclear power has caused far fewer deaths than coal.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>Are scientists responsible for how their discoveries are used?</strong> Meitner refused to work on the bomb; others chose to. Should scientists stop research that could be misused?</li>
+            <li><strong>How do we compare risks?</strong> Nuclear accidents are rare but dramatic; air pollution from fossil fuels kills quietly every day. Why do people often judge these risks so differently from the statistics?</li>
+            <li><strong>Can we make decisions for 10 000 years ahead?</strong> Some nuclear waste stays dangerous for longer than human civilization has existed. How can we know what future people will understand or need?</li>
+            <li><strong>Who gets the credit?</strong> Meitner's role in explaining fission was overlooked for years. What does this say about how scientific knowledge is credited?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <p style="margin:8px 0 0"><strong>SL and HL</strong></p>
+      <ol>
+        <li><a href="#fission">What is fission?</a></li>
+        <li><a href="#energy">The energy released</a></li>
+        <li><a href="#chain">Chain reactions and critical mass</a></li>
+        <li><a href="#reactor">Inside a nuclear power station</a></li>
+        <li><a href="#calc">Power station calculations</a></li>
+        <li><a href="#waste">Fission products and nuclear waste</a></li>
+        <li><a href="#debate">Fission and climate change</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><strong>Review</strong></p>
+      <ol start="8">
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="fission">1. What is fission?</h2>
+    <p><strong>Nuclear fission</strong> is the splitting of a heavy nucleus into two smaller nuclei of roughly similar size (the <strong>fission fragments</strong>), together with two or three neutrons and a large release of energy.</p>
+    <ul>
+      <li><strong>Neutron-induced fission:</strong> a nucleus absorbs a neutron, becomes unstable and splits. This is what happens in reactors. Uranium-235 splits most easily when it absorbs a <strong>slow</strong> ("thermal") neutron, with a kinetic energy of about 0.025 eV.</li>
+      <li><strong>Spontaneous fission:</strong> some very heavy nuclei split on their own, without absorbing anything. It is very rare for uranium, but californium-252 does it often enough to be used as a neutron source.</li>
+    </ul>
+    <p>A typical neutron-induced fission of uranium-235:</p>
+    $$^{1}_{0}\text{n} + {}^{235}_{\;92}\text{U} \rightarrow {}^{236}_{\;92}\text{U}^{*} \rightarrow {}^{141}_{\;56}\text{Ba} + {}^{92}_{36}\text{Kr} + 3\,{}^{1}_{0}\text{n}$$
+    <p>Nucleon number and charge are conserved: $1 + 235 = 141 + 92 + 3 = 236$, and $92 = 56 + 36$. The fragments vary from one fission to the next; barium and krypton are just one possibility.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="energy">2. The energy released</h2>
+    <p>On the binding energy curve (E.3), uranium has about 7.6 MeV per nucleon, but medium-sized fragments have about 8.5 MeV per nucleon. The fragments are more tightly bound, so they have less mass, and the difference is released.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 232" role="img" aria-labelledby="e4at">
+        <title id="e4at">Binding energy per nucleon against nucleon number, with an arrow from uranium-235 at about 7.6 MeV towards the middle of the curve labelled fission, and an arrow from the light nuclei up towards the peak labelled fusion.</title>
+        <line class="axis" x1="52.0" y1="205.0" x2="372.0" y2="205.0" marker-end="url(#ah3)"/><line class="axis" x1="52.0" y1="209.0" x2="52.0" y2="12.0" marker-end="url(#ah3)"/><line class="axis" x1="48.0" y1="167.0" x2="52.0" y2="167.0"/><text x="44.0" y="171.0" text-anchor="end" style="font-size:12px">2</text><line class="grid" x1="52.0" y1="167.0" x2="365.0" y2="167.0"/><line class="axis" x1="48.0" y1="129.0" x2="52.0" y2="129.0"/><text x="44.0" y="133.0" text-anchor="end" style="font-size:12px">4</text><line class="grid" x1="52.0" y1="129.0" x2="365.0" y2="129.0"/><line class="axis" x1="48.0" y1="91.0" x2="52.0" y2="91.0"/><text x="44.0" y="95.0" text-anchor="end" style="font-size:12px">6</text><line class="grid" x1="52.0" y1="91.0" x2="365.0" y2="91.0"/><line class="axis" x1="48.0" y1="53.0" x2="52.0" y2="53.0"/><text x="44.0" y="57.0" text-anchor="end" style="font-size:12px">8</text><line class="grid" x1="52.0" y1="53.0" x2="365.0" y2="53.0"/><line class="axis" x1="114.5" y1="205.0" x2="114.5" y2="209.0"/><text x="114.5" y="224.0" text-anchor="middle" style="font-size:12px">50</text><line class="axis" x1="177.0" y1="205.0" x2="177.0" y2="209.0"/><text x="177.0" y="224.0" text-anchor="middle" style="font-size:12px">100</text><line class="axis" x1="239.5" y1="205.0" x2="239.5" y2="209.0"/><text x="239.5" y="224.0" text-anchor="middle" style="font-size:12px">150</text><line class="axis" x1="302.0" y1="205.0" x2="302.0" y2="209.0"/><text x="302.0" y="224.0" text-anchor="middle" style="font-size:12px">200</text><text x="372.0" y="197.0" text-anchor="end" style="font-size:14px">A</text><text x="58.0" y="16.0" style="font-size:12px">binding energy per nucleon / MeV</text><polyline class="l1" fill="none" points="54.5,183.9 55.8,151.2 57.0,70.7 59.5,103.7 60.8,98.4 63.2,82.3 65.8,73.3 67.0,59.1 69.5,62.9 72.0,53.4 77.0,52.4 82.0,47.2 87.0,44.2 92.0,42.0 97.0,40.3 102.0,39.1 107.0,38.3 112.0,37.7 117.0,37.3 122.0,37.1 127.0,37.0 132.0,37.0 137.0,37.2 142.0,37.3 147.0,37.6 152.0,37.9 157.0,38.3 162.0,38.6 167.0,39.1 172.0,39.5 177.0,40.0 182.0,40.5 187.0,41.0 192.0,41.5 197.0,42.1 202.0,42.6 207.0,43.2 212.0,43.8 217.0,44.4 222.0,45.0 227.0,45.5 232.0,46.1 237.0,46.7 242.0,47.3 247.0,47.9 252.0,48.5 257.0,49.1 262.0,49.8 267.0,50.4 272.0,51.0 277.0,51.6 282.0,52.2 287.0,52.8 292.0,53.4 297.0,54.0 302.0,54.6 307.0,55.2 312.0,55.8 317.0,56.4 322.0,57.0 327.0,57.6 332.0,58.1 337.0,58.7 342.0,59.3 347.0,59.9 352.0,60.5"/><circle cx="54.5" cy="183.9" r="2.5" class="f1"/><circle cx="55.8" cy="151.2" r="2.5" class="f1"/><circle cx="57.0" cy="70.7" r="2.5" class="f1"/><circle cx="59.5" cy="103.7" r="2.5" class="f1"/><circle cx="60.8" cy="98.4" r="2.5" class="f1"/><circle cx="63.2" cy="82.3" r="2.5" class="f1"/><circle cx="65.8" cy="73.3" r="2.5" class="f1"/><circle cx="67.0" cy="59.1" r="2.5" class="f1"/><circle cx="69.5" cy="62.9" r="2.5" class="f1"/><circle cx="72.0" cy="53.4" r="2.5" class="f1"/><circle cx="77.0" cy="52.4" r="2.5" class="f1"/><circle cx="122.0" cy="38.0" r="3.5" class="f2"/><text class="t2" x="122.0" y="58.0" text-anchor="middle" style="font-size:12px">Fe-56</text><text x="64.0" y="74.7" style="font-size:12px">He-4</text><circle cx="345.8" cy="59.7" r="3.5" class="f2"/><text class="t2" x="345.8" y="77.7" text-anchor="end" style="font-size:12px">U-235</text><line class="l2 thin" x1="64.5" y1="125.2" x2="104.5" y2="72.0" marker-end="url(#ah2)"/><text class="t2" x="84.5" y="129.0" style="font-size:13px">fusion</text><line class="l2 thin" x1="333.2" y1="81.5" x2="227.0" y2="57.8" marker-end="url(#ah2)"/><text class="t2" x="258.2" y="91.0" style="font-size:13px">fission</text>
+      </svg>
+      <figcaption>Splitting a heavy nucleus (<span class="key-2">fission</span>) moves the nucleons up the curve, towards iron, so energy is released.</figcaption>
+    </figure>
+    <div class="worked">
+      <h3>Worked example: estimate from the curve</h3>
+      <p>Each of the 236 nucleons gains about $8.5 - 7.6 = 0.9$ MeV of binding energy, so the energy released is about $236 \times 0.9 \approx 200$ MeV per fission.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: calculate from masses</h3>
+      <p>For the reaction in section 1, the masses are: uranium-235 235.043930 u, neutron 1.008665 u, barium-141 140.914411 u, krypton-92 91.926156 u. Find the energy released.</p>
+      <p>Before: $235.043930 + 1.008665 = 236.052595$ u.</p>
+      <p>After: $140.914411 + 91.926156 + 3 \times 1.008665 = 235.866562$ u.</p>
+      <p>$\Delta m = 0.186033$ u, so $E = 0.186033 \times 931.5 = 173$ MeV $= 2.77 \times 10^{-11}$ J.</p>
+    </div>
+    <p>Most of this energy appears as the <strong>kinetic energy of the fission fragments</strong>, which fly apart because of their electric repulsion. The rest goes to the neutrons, gamma rays, and the later decay of the radioactive fragments. In a reactor, the fragments collide with the surrounding atoms, and their kinetic energy becomes thermal energy.</p>
+    <div class="worked">
+      <h3>Worked example: energy from 1 kg</h3>
+      <p>How much energy would 1.0 kg of uranium-235 release, at 173 MeV per fission?</p>
+      <p>Number of nuclei: $N = \dfrac{1.0}{235 \times 1.661 \times 10^{-27}} = 2.56 \times 10^{24}$.</p>
+      <p>Energy: $2.56 \times 10^{24} \times 2.77 \times 10^{-11} = 7.1 \times 10^{13}$ J. Burning 1 kg of coal releases about $3 \times 10^7$ J, so this is over 2 million times more.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="chain">3. Chain reactions and critical mass</h2>
+    <p>Each fission is triggered by one neutron but releases two or three more. If at least one of these goes on to cause another fission, the process keeps itself going: a <strong>chain reaction</strong>.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 222" role="img" aria-labelledby="e4bt">
+        <title id="e4bt">A chain reaction. One neutron causes a uranium nucleus to split into two fragments and two neutrons, each of which splits another nucleus, giving 1, then 2, then 4 fissions, doubling each generation.</title>
+        <circle cx="12" cy="110" r="3.5" class="f3"/><line class="l3 thin" x1="16.0" y1="110.0" x2="48.0" y2="110.0" marker-end="url(#ah3)"/><circle cx="60.0" cy="110.0" r="10" class="f1" opacity="0.85"/><circle cx="66.0" cy="97.0" r="5" class="f2" opacity="0.8"/><circle cx="66.0" cy="123.0" r="5" class="f2" opacity="0.8"/><line class="l3 thin" x1="73.0" y1="103.5" x2="153.0" y2="66.5" marker-end="url(#ah3)"/><line class="l3 thin" x1="73.0" y1="116.5" x2="153.0" y2="153.5" marker-end="url(#ah3)"/><circle cx="165.0" cy="60.0" r="10" class="f1" opacity="0.85"/><circle cx="171.0" cy="47.0" r="5" class="f2" opacity="0.8"/><circle cx="171.0" cy="73.0" r="5" class="f2" opacity="0.8"/><line class="l3 thin" x1="178.0" y1="56.8" x2="258.0" y2="38.2" marker-end="url(#ah3)"/><line class="l3 thin" x1="178.0" y1="63.2" x2="258.0" y2="81.8" marker-end="url(#ah3)"/><circle cx="165.0" cy="160.0" r="10" class="f1" opacity="0.85"/><circle cx="171.0" cy="147.0" r="5" class="f2" opacity="0.8"/><circle cx="171.0" cy="173.0" r="5" class="f2" opacity="0.8"/><line class="l3 thin" x1="178.0" y1="156.8" x2="258.0" y2="138.2" marker-end="url(#ah3)"/><line class="l3 thin" x1="178.0" y1="163.2" x2="258.0" y2="181.8" marker-end="url(#ah3)"/><circle cx="270.0" cy="35.0" r="10" class="f1" opacity="0.85"/><circle cx="276.0" cy="22.0" r="5" class="f2" opacity="0.8"/><circle cx="276.0" cy="48.0" r="5" class="f2" opacity="0.8"/><line class="l3 thin" x1="283.0" y1="31.0" x2="360.0" y2="25.0" marker-end="url(#ah3)"/><line class="l3 thin" x1="283.0" y1="39.0" x2="360.0" y2="45.0" marker-end="url(#ah3)"/><circle cx="270.0" cy="85.0" r="10" class="f1" opacity="0.85"/><circle cx="276.0" cy="72.0" r="5" class="f2" opacity="0.8"/><circle cx="276.0" cy="98.0" r="5" class="f2" opacity="0.8"/><line class="l3 thin" x1="283.0" y1="81.0" x2="360.0" y2="75.0" marker-end="url(#ah3)"/><line class="l3 thin" x1="283.0" y1="89.0" x2="360.0" y2="95.0" marker-end="url(#ah3)"/><circle cx="270.0" cy="135.0" r="10" class="f1" opacity="0.85"/><circle cx="276.0" cy="122.0" r="5" class="f2" opacity="0.8"/><circle cx="276.0" cy="148.0" r="5" class="f2" opacity="0.8"/><line class="l3 thin" x1="283.0" y1="131.0" x2="360.0" y2="125.0" marker-end="url(#ah3)"/><line class="l3 thin" x1="283.0" y1="139.0" x2="360.0" y2="145.0" marker-end="url(#ah3)"/><circle cx="270.0" cy="185.0" r="10" class="f1" opacity="0.85"/><circle cx="276.0" cy="172.0" r="5" class="f2" opacity="0.8"/><circle cx="276.0" cy="198.0" r="5" class="f2" opacity="0.8"/><line class="l3 thin" x1="283.0" y1="181.0" x2="360.0" y2="175.0" marker-end="url(#ah3)"/><line class="l3 thin" x1="283.0" y1="189.0" x2="360.0" y2="195.0" marker-end="url(#ah3)"/><text x="12.0" y="100.0" text-anchor="middle" style="font-size:12px">n</text><text x="60.0" y="214.0" text-anchor="middle" style="font-size:12px">1 fission</text><text x="165.0" y="214.0" text-anchor="middle" style="font-size:12px">2 fissions</text><text x="270.0" y="214.0" text-anchor="middle" style="font-size:12px">4 fissions</text>
+      </svg>
+      <figcaption>If two neutrons from each fission cause further fissions, the number of fissions doubles each generation: an uncontrolled chain reaction. <span class="key-1">Uranium nuclei</span> split into <span class="key-2">fragments</span> and neutrons.</figcaption>
+    </figure>
+    <ul>
+      <li>In a <strong>reactor</strong>, on average exactly <strong>one</strong> neutron from each fission causes another. The rate stays steady.</li>
+      <li>In a <strong>bomb</strong>, more than one does, so the rate grows exponentially and the energy is released in a fraction of a second.</li>
+    </ul>
+    <p>Neutrons can be lost: they escape through the surface, or are absorbed without causing fission. A small lump of fuel has a large surface compared with its volume, so too many neutrons escape. The <strong>critical mass</strong> is the minimum mass of fuel needed for a self-sustaining chain reaction.</p>
+    <p>Natural uranium is 99.3% uranium-238, which rarely fissions with slow neutrons, and only 0.7% uranium-235. Most reactors use <strong>enriched</strong> uranium, with 3–5% uranium-235.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="reactor">4. Inside a nuclear power station</h2>
+    <p>A nuclear power station is a thermal power station: the reactor is just a heat source, replacing the furnace of a coal-fired station.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 236" role="img" aria-labelledby="e4ct">
+        <title id="e4ct">A pressurized-water nuclear power station. The reactor core, inside thick shielding, contains fuel rods in a moderator, with control rods that can be lowered in from above. Hot coolant flows to a heat exchanger and back. In the heat exchanger it boils water in a separate circuit; the steam drives a turbine connected to a generator, then is condensed back to water and returns.</title>
+        <rect x="10" y="40" width="130" height="160" rx="6" class="grid" style="stroke-width:9" fill="none"/><rect x="22" y="52" width="106" height="136" rx="4" class="area"/><rect x="22" y="52" width="106" height="136" rx="4" class="axis"/><rect x="35" y="92" width="6" height="88" class="f2" opacity="0.85"/><rect x="63" y="92" width="6" height="88" class="f2" opacity="0.85"/><rect x="91" y="92" width="6" height="88" class="f2" opacity="0.85"/><rect x="113" y="92" width="6" height="88" class="f2" opacity="0.85"/><rect x="49" y="30" width="6" height="96" class="f3" opacity="0.8"/><rect x="77" y="30" width="6" height="96" class="f3" opacity="0.8"/><rect x="105" y="30" width="6" height="96" class="f3" opacity="0.8"/><text x="75.0" y="24.0" text-anchor="middle" style="font-size:12px">control rods</text><text x="75.0" y="216.0" text-anchor="middle" style="font-size:12px">fuel rods in moderator</text><polyline class="l2" fill="none" points="128.0,70.0 175.0,70.0" marker-end="url(#ah2)"/><polyline class="l2" fill="none" points="175.0,170.0 128.0,170.0" marker-end="url(#ah2)"/><text class="t2" x="152.0" y="62.0" text-anchor="middle" style="font-size:11px">hot</text><text class="t2" x="152.0" y="186.0" text-anchor="middle" style="font-size:11px">cooler</text><rect x="178" y="50" width="54" height="140" rx="6" class="axis"/><path class="l2 thin" fill="none" d="M178 70 L222 70 L190 95 L222 120 L190 145 L222 170 L178 170"/><text x="205.0" y="206.0" text-anchor="middle" style="font-size:12px">heat</text><text x="205.0" y="220.0" text-anchor="middle" style="font-size:12px">exchanger</text><polyline class="l1" fill="none" points="232.0,62.0 270.0,62.0 270.0,78.0" marker-end="url(#ah1)"/><text class="t1" x="250.0" y="54.0" text-anchor="middle" style="font-size:11px">steam</text><path class="axis" d="M258 82 L284 74 L284 116 L258 108 Z"/><text x="271.0" y="132.0" text-anchor="middle" style="font-size:12px">turbine</text><line class="axis" x1="284.0" y1="95.0" x2="312.0" y2="95.0" style="stroke-width:3"/><circle cx="334" cy="95" r="20" class="axis"/><text x="334.0" y="100.0" text-anchor="middle" style="font-size:14px">G</text><text x="334.0" y="132.0" text-anchor="middle" style="font-size:12px">generator</text><polyline class="l1 thin dash" fill="none" points="271.0,112.0 271.0,160.0"/><rect x="250" y="160" width="44" height="26" rx="4" class="axis"/><text x="272.0" y="204.0" text-anchor="middle" style="font-size:12px">condenser</text><polyline class="l1" fill="none" points="250.0,176.0 232.0,176.0" marker-end="url(#ah1)"/>
+      </svg>
+      <figcaption>A pressurized-water reactor. The core sits inside thick concrete <strong>shielding</strong> (grey). The <span class="key-2">coolant</span> loop and the <span class="key-1">steam</span> loop are separate, so the water that reaches the turbine is never radioactive.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>Fuel rods</strong> hold the enriched uranium, usually as pellets of uranium oxide.</li>
+      <li><strong>Moderator</strong> slows the fast neutrons from fission (about 2 MeV) down to thermal speeds, so that they are much more likely to cause fission in uranium-235. Neutrons lose energy by colliding with light nuclei, such as hydrogen in water or carbon in graphite. The lighter the nucleus, the more energy a neutron loses in each collision.</li>
+      <li><strong>Control rods</strong> absorb neutrons (they contain boron or cadmium). Lowering them further into the core absorbs more neutrons and slows the reaction; raising them speeds it up. Dropping them in fully shuts the reactor down.</li>
+      <li><strong>Coolant</strong> (usually water under high pressure, sometimes carbon dioxide gas or liquid sodium) is pumped through the core to carry the thermal energy away.</li>
+      <li><strong>Heat exchanger</strong> transfers thermal energy from the coolant to water in a separate circuit, turning it to steam to drive the turbine. Keeping the circuits separate stops radioactive material reaching the turbine.</li>
+      <li><strong>Shielding:</strong> a steel pressure vessel and a thick concrete building around the core absorb neutrons and gamma rays, protecting workers and the environment.</li>
+    </ul>
+    <p>The energy chain is: nuclear energy → kinetic energy of fragments → thermal energy of the coolant → kinetic energy of steam and turbine → electrical energy. Overall efficiency is about 33%; most of the energy is lost as heat at the condenser, which is why power stations have cooling towers or are built by the sea.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="calc">5. Power station calculations</h2>
+    <div class="worked">
+      <h3>Worked example: fuel use</h3>
+      <p>A nuclear power station produces 1.0 GW of electrical power with an efficiency of 33%. Each fission releases 200 MeV. Estimate the mass of uranium-235 used each day.</p>
+      <p>Thermal power from the reactor: $\dfrac{1.0 \times 10^9}{0.33} = 3.0 \times 10^9$ W.</p>
+      <p>Energy per fission: $200 \times 10^6 \times 1.60 \times 10^{-19} = 3.2 \times 10^{-11}$ J. Fissions per second: $\dfrac{3.0 \times 10^9}{3.2 \times 10^{-11}} = 9.4 \times 10^{19}$.</p>
+      <p>Per day: $9.4 \times 10^{19} \times 86\,400 = 8.1 \times 10^{24}$ nuclei, with mass $8.1 \times 10^{24} \times 235 \times 1.661 \times 10^{-27} = 3.2$ kg.</p>
+      <p>A coal-fired station of the same power burns about 8000 tonnes of coal a day.</p>
+    </div>
+    <aside class="maths-link">
+      <h3>Maths link: rates and unit conversions <span class="tag">AA SL 1.1</span></h3>
+      <p>Power station problems are chains of conversions: watts are joules per second, so divide by the energy per event to get events per second, then multiply by the seconds in the time you want. Write the units at each step: $\frac{\text{J s}^{-1}}{\text{J}} = \text{s}^{-1}$. If the units come out right, the method is usually right.</p>
+    </aside>
+
+    <!-- ===================================================== -->
+    <h2 id="waste">6. Fission products and nuclear waste</h2>
+    <p>The fission fragments have too many neutrons for their size (E.3), so they are <strong>highly radioactive</strong>, mostly β⁻ and gamma emitters. Some have short half-lives and are intensely active at first; others, such as caesium-137 (30 years), last for decades. Some uranium-238 in the fuel absorbs neutrons and becomes plutonium-239 (half-life 24 000 years), an alpha emitter.</p>
+    <p>Spent fuel is the most dangerous waste. It is managed in stages:</p>
+    <ol>
+      <li><strong>Cooling ponds:</strong> spent fuel rods are stored under water for several years. The water absorbs the radiation and removes the heat that the decaying products keep producing.</li>
+      <li><strong>Reprocessing (in some countries):</strong> unused uranium and plutonium are separated out and can be reused as fuel.</li>
+      <li><strong>Vitrification:</strong> the high-level waste is mixed into glass and sealed in steel containers, so it can't dissolve or leak.</li>
+      <li><strong>Long-term storage:</strong> the plan in several countries is a deep geological repository, hundreds of metres underground in stable rock, where the waste can stay isolated for many thousands of years.</li>
+    </ol>
+    <p>Less dangerous waste, such as contaminated clothing and tools, is compacted and stored in shallower sites. The long-term problems are keeping waste secure and isolated from groundwater for longer than any human institution has existed, and preventing plutonium being used for weapons.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="debate">7. Fission and climate change</h2>
+    <p>Fission doesn't burn anything, so a nuclear power station emits almost no carbon dioxide while running. Including mining, building and decommissioning, its lifetime emissions per unit of electricity are similar to wind power and far below coal or gas.</p>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>For nuclear power</th><th>Against nuclear power</th></tr>
+        <tr><td>Very low carbon emissions</td><td>Long-lived radioactive waste</td></tr>
+        <tr><td>Reliable, steady output whatever the weather</td><td>Rare but serious accidents</td></tr>
+        <tr><td>Tiny amounts of fuel needed; uses little land</td><td>Very expensive and slow to build and to decommission</td></tr>
+        <tr><td>Fuel reserves will last a long time</td><td>Risk that materials could be used for weapons</td></tr>
+      </table>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">8. Common mistakes</h2>
+    <ul>
+      <li><strong>Saying fission releases energy because "bonds break".</strong> Energy is released because the products have a higher binding energy per nucleon, so less mass.</li>
+      <li><strong>Saying the moderator absorbs neutrons.</strong> It slows them down. The control rods absorb them.</li>
+      <li><strong>Thinking fast neutrons are better at causing fission.</strong> In uranium-235, slow neutrons are far more likely to be absorbed and cause fission.</li>
+      <li><strong>Forgetting the neutrons</strong> when balancing a fission equation, or when adding up the masses after fission.</li>
+      <li><strong>Saying a reactor can explode like a bomb.</strong> Reactor fuel is not enriched enough, and the reaction can't grow fast enough. Accidents involve overheating, fires and steam explosions.</li>
+      <li><strong>Mixing up electrical and thermal power</strong> in efficiency calculations. The reactor produces the thermal power; the station outputs the electrical power.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">9. Check your understanding</h2>
+    <details class="check">
+      <summary>Balance this fission: $^{1}_{0}\text{n} + {}^{235}_{\;92}\text{U} \rightarrow {}^{144}_{\;55}\text{Cs} + {}^{90}_{37}\text{Rb} + x\,{}^{1}_{0}\text{n}$. What is $x$?</summary>
+      <p>Nucleons: $236 = 144 + 90 + x$, so $x = 2$. Charge: $92 = 55 + 37$. ✓</p>
+    </details>
+    <details class="check">
+      <summary>Why is water a good moderator?</summary>
+      <p>It contains hydrogen nuclei (protons), which have almost the same mass as a neutron, so a neutron loses a large fraction of its energy in each collision.</p>
+    </details>
+    <details class="check">
+      <summary>An operator wants to reduce the power of a reactor. What should they do, and why does it work?</summary>
+      <p>Lower the control rods further into the core. They absorb more neutrons, so fewer fissions happen each second.</p>
+    </details>
+    <details class="check">
+      <summary>Why must there be a heat exchanger between the reactor and the turbine?</summary>
+      <p>The coolant passing through the core becomes radioactive. The heat exchanger passes on its thermal energy without the coolant itself leaving the shielded area.</p>
+    </details>
+    <details class="check">
+      <summary>Why are fission fragments radioactive?</summary>
+      <p>They have too many neutrons for their size (they lie above the band of stability), so they undergo β⁻ decay.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=E.4">Practise E.4 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>

@@ -4,15 +4,271 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>E.5 Fusion and stars · DP Physics</title>
+  <meta name="description" content="IB DP Physics E.5 Fusion and stars: conditions for fusion, energy released in fusion, the equilibrium of stars, astronomical units, light years and parsecs, stellar parallax, stellar spectra, determining stellar radii, the Hertzsprung–Russell diagram and the evolution of stars of different masses.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="E.5">
+</head>
+<body data-root="../" data-section="themes" data-topic="E.5">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="e.html">Theme E Nuclear and quantum physics</a></p>
     <h1><span class="code">E.5</span>Fusion and stars</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <p class="lead">Every star is a giant fusion reactor, held together by its own gravity. This topic explains how <strong>fusion</strong> powers stars, why a star stays stable for billions of years, how we measure the distances and sizes of stars we can never visit, and how the <strong>Hertzsprung–Russell diagram</strong> sorts them and reveals their life stories. It brings together E.3, B.1 (black-body radiation) and D.1 (gravity). There is no extra HL content in E.5.</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Measurement</span><span class="tag">Patterns</span><span class="tag">Collaboration</span><span class="tag">Technology</span></div>
+          <p><strong>Measurement.</strong> Stellar parallax is so small that it was first measured only in 1838, by Friedrich Bessel, for the star 61 Cygni: about a third of an arcsecond. Its absence had long been used as an argument that the Earth doesn't move.</p>
+          <p><strong>Collaboration.</strong> At Harvard, Annie Jump Cannon classified the spectra of around 350 000 stars by hand, creating the O B A F G K M sequence. Cecilia Payne-Gaposchkin showed in 1925 that stars are mostly hydrogen and helium; at first, senior astronomers persuaded her to call the result "almost certainly not real".</p>
+          <p><strong>Patterns.</strong> Around 1910 Ejnar Hertzsprung and Henry Norris Russell each plotted the luminosity of stars against their temperature, and found the stars fell into a few distinct groups.</p>
+          <p><strong>Technology.</strong> The Gaia space telescope (2013–2025) measured the parallax of over a billion stars, with a precision hundreds of times better than is possible from the ground.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>Can we understand what we can't imagine?</strong> The nearest star is 40 trillion km away. Do numbers like this give us knowledge, or just the feeling of it?</li>
+            <li><strong>How can we study a process we can't watch?</strong> A star's life lasts millions or billions of years, but we only ever see each star at one moment. How do snapshots of many stars become a story about one?</li>
+            <li><strong>Who decides what is "real"?</strong> Payne-Gaposchkin's correct result was doubted because it went against expert opinion. When should a new result overturn a consensus?</li>
+            <li><strong>Is the light we see the star we think it is?</strong> Light from distant stars left them long ago. Some may no longer exist. What does it mean to observe the past?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <p style="margin:8px 0 0"><strong>SL and HL</strong></p>
+      <ol>
+        <li><a href="#fusion">Nuclear fusion</a></li>
+        <li><a href="#conditions">Conditions for fusion</a></li>
+        <li><a href="#equilibrium">The equilibrium of a star</a></li>
+        <li><a href="#units">Astronomical distances</a></li>
+        <li><a href="#parallax">Stellar parallax</a></li>
+        <li><a href="#spectra">What starlight tells us</a></li>
+        <li><a href="#radius">Finding the radius of a star</a></li>
+        <li><a href="#hr">The Hertzsprung–Russell diagram</a></li>
+        <li><a href="#evolution">How stars evolve</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><strong>Review</strong></p>
+      <ol start="10">
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="fusion">1. Nuclear fusion</h2>
+    <p><strong>Nuclear fusion</strong> is the joining of two light nuclei to form a heavier one. Light nuclei are on the steep left side of the binding energy curve (E.3), so fusing them increases the binding energy per nucleon and releases energy. Per kilogram of fuel, fusion releases even more energy than fission.</p>
+    <p>The main process in the Sun is the <strong>proton–proton chain</strong>. Its overall effect is to turn four protons into one helium-4 nucleus:</p>
+    $$4\,{}^{1}_{1}\text{p} \rightarrow {}^{4}_{2}\text{He} + 2\,{}^{\;\;0}_{+1}\text{e} + 2\nu_e$$
+    <p>The positrons quickly annihilate with electrons, releasing more energy as gamma rays.</p>
+    <div class="worked">
+      <h3>Worked example: energy from the proton–proton chain</h3>
+      <p>Using atomic masses (hydrogen-1 = 1.007825 u, helium-4 = 4.002603 u), find the energy released when four hydrogen atoms become one helium atom.</p>
+      <p>$\Delta m = 4 \times 1.007825 - 4.002603 = 0.028697$ u, so $E = 0.028697 \times 931.5 = 26.7$ MeV.</p>
+      <p>Using atomic masses automatically includes the energy from the positrons annihilating. About 0.7% of the original mass becomes energy.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: deuterium–tritium fusion</h3>
+      <p>Fusion reactors on Earth aim to use $^{2}_{1}\text{H} + {}^{3}_{1}\text{H} \rightarrow {}^{4}_{2}\text{He} + {}^{1}_{0}\text{n}$. The masses are 2.014102 u, 3.016049 u, 4.002603 u and 1.008665 u. Find the energy released.</p>
+      <p>$\Delta m = (2.014102 + 3.016049) - (4.002603 + 1.008665) = 0.018883$ u, so $E = 17.6$ MeV.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: how fast is the Sun losing mass?</h3>
+      <p>The Sun's luminosity is $3.83 \times 10^{26}$ W. $\dfrac{\Delta m}{\Delta t} = \dfrac{L}{c^2} = \dfrac{3.83 \times 10^{26}}{(3.00 \times 10^8)^2} = 4.3 \times 10^9\ \text{kg s}^{-1}$: over four million tonnes every second. Even so, in its whole lifetime the Sun will turn less than 0.1% of its mass into energy.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="conditions">2. Conditions for fusion</h2>
+    <p>Nuclei are positive, so they repel. To fuse, they must get close enough (about $10^{-15}$ m) for the strong force to take over. That needs:</p>
+    <ul>
+      <li><strong>Very high temperature</strong> (about $10^7$ K in the Sun's core), so the nuclei move fast enough to overcome the electric repulsion. At these temperatures atoms are completely ionized into a <strong>plasma</strong> of nuclei and electrons.</li>
+      <li><strong>Very high density</strong>, so collisions are frequent enough for a useful rate of fusion.</li>
+    </ul>
+    <p>In a star, both come from gravity: as a cloud of gas collapses, its gravitational potential energy becomes thermal energy, and the core becomes hot and dense. On Earth, reactors such as tokamaks hold a plasma at over $10^8$ K with strong magnetic fields, because no material container could survive. Getting more energy out than is put in, for long periods, is still being worked on.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="equilibrium">3. The equilibrium of a star</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 212" role="img" aria-labelledby="e5at">
+        <title id="e5at">A star in equilibrium. Gravity pulls all its layers inwards; the pressure of the hot gas and of radiation from fusion in the core pushes outwards. The two balance.</title>
+        <circle cx="190" cy="105" r="78" class="area"/><circle cx="190" cy="105" r="78" class="axis"/><circle cx="190" cy="105" r="20" class="f2" opacity="0.6"/><text x="190.0" y="110.0" text-anchor="middle" style="font-size:12px">core</text><line class="l3" x1="280.5" y1="142.5" x2="265.8" y2="136.4" marker-end="url(#ah3)"/><line class="l2 thin" x1="218.0" y1="105.0" x2="256.0" y2="105.0" marker-end="url(#ah2)"/><line class="l3" x1="227.5" y1="195.5" x2="221.4" y2="180.8" marker-end="url(#ah3)"/><line class="l2 thin" x1="209.8" y1="124.8" x2="236.7" y2="151.7" marker-end="url(#ah2)"/><line class="l3" x1="152.5" y1="195.5" x2="158.6" y2="180.8" marker-end="url(#ah3)"/><line class="l2 thin" x1="190.0" y1="133.0" x2="190.0" y2="171.0" marker-end="url(#ah2)"/><line class="l3" x1="99.5" y1="142.5" x2="114.2" y2="136.4" marker-end="url(#ah3)"/><line class="l2 thin" x1="170.2" y1="124.8" x2="143.3" y2="151.7" marker-end="url(#ah2)"/><line class="l3" x1="99.5" y1="67.5" x2="114.2" y2="73.6" marker-end="url(#ah3)"/><line class="l2 thin" x1="162.0" y1="105.0" x2="124.0" y2="105.0" marker-end="url(#ah2)"/><line class="l3" x1="152.5" y1="14.5" x2="158.6" y2="29.2" marker-end="url(#ah3)"/><line class="l2 thin" x1="170.2" y1="85.2" x2="143.3" y2="58.3" marker-end="url(#ah2)"/><line class="l3" x1="227.5" y1="14.5" x2="221.4" y2="29.2" marker-end="url(#ah3)"/><line class="l2 thin" x1="190.0" y1="77.0" x2="190.0" y2="39.0" marker-end="url(#ah2)"/><line class="l3" x1="280.5" y1="67.5" x2="265.8" y2="73.6" marker-end="url(#ah3)"/><line class="l2 thin" x1="209.8" y1="85.2" x2="236.7" y2="58.3" marker-end="url(#ah2)"/><text x="300.0" y="30.0" style="font-size:13px">gravity</text><text x="300.0" y="46.0" style="font-size:12px">(inwards)</text><text class="t2" x="10.0" y="190.0" style="font-size:13px">radiation + gas</text><text class="t2" x="10.0" y="206.0" style="font-size:13px">pressure (outwards)</text>
+      </svg>
+      <figcaption>A stable star: gravity pulls inwards; the <span class="key-2">pressure of radiation and hot gas</span>, kept up by fusion in the core, pushes outwards.</figcaption>
+    </figure>
+    <p>A main-sequence star is stable because two effects balance at every layer:</p>
+    <ul>
+      <li><strong>Gravity</strong> pulls all the star's matter inwards.</li>
+      <li><strong>Radiation pressure</strong> (from the photons produced by fusion) and <strong>gas pressure</strong> (from the hot plasma) push outwards.</li>
+    </ul>
+    <p>The balance is self-correcting. If the core contracts slightly, it heats up, fusion speeds up, the pressure rises and pushes it back out. If it expands, it cools, fusion slows, and gravity pulls it back. When the fuel in the core runs out, the balance is lost and the star changes (section 9).</p>
+
+    <!-- ===================================================== -->
+    <h2 id="units">4. Astronomical distances</h2>
+    <p>Metres are inconveniently small for astronomy, so three larger units are used:</p>
+    <ul>
+      <li><strong>Astronomical unit (AU):</strong> the mean distance from the Earth to the Sun. $1\ \text{AU} = 1.50 \times 10^{11}$ m.</li>
+      <li><strong>Light year (ly):</strong> the distance light travels in a vacuum in one year. $1\ \text{ly} = 9.46 \times 10^{15}$ m.</li>
+      <li><strong>Parsec (pc):</strong> the distance at which a star has a parallax angle of one arcsecond (section 5). $1\ \text{pc} = 3.26\ \text{ly} = 3.09 \times 10^{16}$ m.</li>
+    </ul>
+    <p>An arcsecond is $\frac{1}{3600}$ of a degree. The light year is a distance, not a time: $3.00 \times 10^8 \times 365.25 \times 24 \times 3600 = 9.46 \times 10^{15}$ m.</p>
+    <div class="worked">
+      <h3>Worked example: converting units</h3>
+      <p>A star is 8.6 ly away (about the distance of Sirius). Express this in metres, parsecs and AU.</p>
+      <p>Metres: $8.6 \times 9.46 \times 10^{15} = 8.1 \times 10^{16}$ m.</p>
+      <p>Parsecs: $\dfrac{8.6}{3.26} = 2.6$ pc.</p>
+      <p>AU: $\dfrac{8.1 \times 10^{16}}{1.50 \times 10^{11}} = 5.4 \times 10^{5}$ AU.</p>
+    </div>
+    <p>For scale: light takes about 8 minutes to reach us from the Sun, the nearest other star is about 4.2 ly away, and our galaxy is about 100 000 ly across.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="parallax">5. Stellar parallax</h2>
+    <p>Hold up a finger and look at it with one eye, then the other: it seems to jump against the background. This is <strong>parallax</strong>. As the Earth orbits the Sun, a nearby star seems to move slightly against much more distant background stars, and returns to the same place every year.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 210" role="img" aria-labelledby="e5bt">
+        <title id="e5bt">Stellar parallax. The Earth is shown in January and in July, on opposite sides of its orbit around the Sun, 1 AU from the Sun each time. Lines from each position to a nearby star point to different places on the distant background stars. The parallax angle p is the angle at the star between the line to the Sun and the line to the Earth; d is the distance from the Sun to the star.</title>
+        <circle cx="70" cy="110" r="45" class="grid dash" fill="none"/><circle cx="70" cy="110" r="9" class="f2"/><text class="t2" x="70.0" y="136.0" text-anchor="middle" style="font-size:12px">Sun</text><circle cx="70" cy="65" r="5" class="f1"/><text class="t1" x="70.0" y="55.0" text-anchor="middle" style="font-size:12px">Earth in January</text><circle cx="70" cy="155" r="5" class="f1"/><text class="t1" x="70.0" y="175.0" text-anchor="middle" style="font-size:12px">Earth in July</text><circle cx="290" cy="110" r="4" class="f3"/><text x="290.0" y="132.0" text-anchor="middle" style="font-size:12px">nearby star</text><line class="l1 thin" x1="70.0" y1="65.0" x2="290.0" y2="110.0"/><line class="l1 thin dash" x1="290.0" y1="110.0" x2="370.0" y2="126.4"/><line class="l1 thin" x1="70.0" y1="155.0" x2="290.0" y2="110.0"/><line class="l1 thin dash" x1="290.0" y1="110.0" x2="370.0" y2="93.6"/><line class="axis dash" x1="70.0" y1="110.0" x2="290.0" y2="110.0"/><text x="180.0" y="100.0" text-anchor="middle" style="font-size:14px">d</text><line class="l3 thin" x1="52.0" y1="65.0" x2="52.0" y2="110.0" marker-start="url(#ah3)" marker-end="url(#ah3)"/><text x="46.0" y="92.0" text-anchor="end" style="font-size:12px">1 AU</text><path class="l3 thin" fill="none" d="M240.0 110 A50 50 0 0 1 241.0 100.0"/><text x="232.0" y="106.0" text-anchor="end" style="font-size:14px">p</text><text x="368.0" y="40.0" text-anchor="end" style="font-size:12px" opacity="0.6">✦</text><text x="368.0" y="76.0" text-anchor="end" style="font-size:12px" opacity="0.6">✦</text><text x="368.0" y="150.0" text-anchor="end" style="font-size:12px" opacity="0.6">✦</text><text x="368.0" y="184.0" text-anchor="end" style="font-size:12px" opacity="0.6">✦</text>
+      </svg>
+      <figcaption>Six months apart, the nearby star is seen in different directions against the distant stars. The <strong>parallax angle</strong> p is half the total angle the star appears to shift. The diagram is hugely exaggerated: real parallax angles are under one arcsecond.</figcaption>
+    </figure>
+    <p>In the right-angled triangle Sun–Earth–star, $\tan p = \dfrac{1\ \text{AU}}{d}$. Because $p$ is tiny, $\tan p \approx p$ in radians, so $d = \dfrac{1\ \text{AU}}{p}$. Measuring $p$ in arcseconds and $d$ in parsecs makes this simple:</p>
+    <div class="key">
+      $$d\,(\text{parsec}) = \frac{1}{p\,(\text{arcsecond})}$$
+      <p style="margin:0">The smaller the parallax angle, the further away the star.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: a nearby star</h3>
+      <p>A star has a parallax angle of 0.25 arcseconds. How far away is it, in parsecs, light years and metres?</p>
+      <p>$d = \dfrac{1}{0.25} = 4.0$ pc $= 4.0 \times 3.26 = 13$ ly $= 13 \times 9.46 \times 10^{15} = 1.2 \times 10^{17}$ m.</p>
+    </div>
+    <p><strong>Limits.</strong> From the ground, the atmosphere blurs images, so angles below about 0.01″ can't be measured: parallax works only up to about 100 pc. Space telescopes like Gaia reach thousands of parsecs, but that is still only a small part of our galaxy. Other methods are used further away.</p>
+    <aside class="maths-link">
+      <h3>Maths link: small angles <span class="tag">AA SL 3.4</span></h3>
+      <p>For a small angle $\theta$ in radians, $\sin\theta \approx \tan\theta \approx \theta$. Even at 0.1 rad (about 6°) the error is under 1%, and parallax angles are millions of times smaller. To convert arcseconds to radians, multiply by $\frac{\pi}{180 \times 3600}$. Then $1\ \text{pc} = \frac{1\ \text{AU}}{4.85 \times 10^{-6}} = 3.09 \times 10^{16}$ m.</p>
+    </aside>
+
+    <!-- ===================================================== -->
+    <h2 id="spectra">6. What starlight tells us</h2>
+    <ul>
+      <li><strong>Temperature:</strong> a star is close to a black body (B.1). The wavelength of its peak emission gives its surface temperature by Wien's law, $\lambda_{\max}T = 2.9 \times 10^{-3}$ m K. Hot stars look blue-white; cool stars look red.</li>
+      <li><strong>Composition:</strong> the cooler outer layers of a star absorb particular wavelengths, giving dark absorption lines (E.1). Matching them to laboratory spectra shows which elements are present. Most stars are about 73% hydrogen and 25% helium by mass.</li>
+      <li><strong>Spectral class:</strong> stars are classified by their spectra into classes O, B, A, F, G, K, M, from hottest (above 30 000 K, blue) to coolest (below about 3500 K, red). The Sun is a G star, about 5800 K. Which lines are strongest depends mostly on temperature, not on composition.</li>
+      <li><strong>Luminosity:</strong> the apparent brightness $b$ we measure and the distance $d$ give the luminosity, from $b = \dfrac{L}{4\pi d^2}$ (B.1).</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="radius">7. Finding the radius of a star</h2>
+    <p>Stars are too far away to measure their size directly. But a star's luminosity depends on its surface area and temperature, by the Stefan–Boltzmann law (B.1):</p>
+    <div class="key">
+      $$L = \sigma AT^4 = 4\pi R^2\sigma T^4 \quad\Rightarrow\quad R = \sqrt{\frac{L}{4\pi\sigma T^4}}$$
+      <p style="margin:0">The method: find $T$ from the peak wavelength (Wien's law), find $L$ from the apparent brightness and distance, then find $R$.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: a hot star</h3>
+      <p>A star's spectrum peaks at 290 nm, and its luminosity is $1.5 \times 10^{28}$ W (about 40 times the Sun's). Find its radius.</p>
+      <p>$T = \dfrac{2.9 \times 10^{-3}}{2.90 \times 10^{-7}} = 1.0 \times 10^4$ K.</p>
+      <p>$R = \sqrt{\dfrac{1.5 \times 10^{28}}{4\pi \times 5.67 \times 10^{-8} \times (1.0 \times 10^4)^4}} = \sqrt{2.1 \times 10^{18}} = 1.5 \times 10^9$ m, about twice the Sun's radius.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: comparing with the Sun</h3>
+      <p>A red giant is 100 times as luminous as the Sun, with a surface temperature of 4000 K (the Sun's is 5800 K). How many times bigger is it?</p>
+      <p>From $L \propto R^2T^4$: $\dfrac{R}{R_\odot} = \sqrt{\dfrac{L}{L_\odot}} \times \left(\dfrac{T_\odot}{T}\right)^2 = \sqrt{100} \times \left(\dfrac{5800}{4000}\right)^2 = 10 \times 2.1 = 21$.</p>
+      <p>It is cooler than the Sun but much brighter, so it must be much bigger.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="hr">8. The Hertzsprung–Russell diagram</h2>
+    <p>The <strong>HR diagram</strong> plots each star's luminosity (vertical axis, usually relative to the Sun) against its surface temperature (horizontal axis). Both scales are logarithmic, and temperature <strong>increases to the left</strong>.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 292" role="img" aria-labelledby="e5ct">
+        <title id="e5ct">A Hertzsprung–Russell diagram: luminosity relative to the Sun, from 10 to the minus 4 up to 10 to the 6, against surface temperature from 40 000 K on the left to 2500 K on the right. The main sequence runs diagonally from hot, bright stars at the top left to cool, dim stars at the bottom right, passing through the Sun. Red giants are above the main sequence on the right, supergiants across the top, and white dwarfs below it on the left. The instability strip is a nearly vertical band crossing the main sequence near 6000 to 7500 K. Dashed lines of constant radius, 0.01, 1 and 100 solar radii, slope down to the right.</title>
+        <line class="axis" x1="62.0" y1="250.0" x2="372.0" y2="250.0"/><line class="axis" x1="62.0" y1="250.0" x2="62.0" y2="12.0" marker-end="url(#ah3)"/><line class="axis" x1="58.0" y1="250.0" x2="62.0" y2="250.0"/><text x="54.0" y="254.0" text-anchor="end" style="font-size:12px">10<tspan baseline-shift="super" style="font-size:9px">-4</tspan></text><line class="axis" x1="58.0" y1="204.0" x2="62.0" y2="204.0"/><text x="54.0" y="208.0" text-anchor="end" style="font-size:12px">10<tspan baseline-shift="super" style="font-size:9px">-2</tspan></text><line class="axis" x1="58.0" y1="158.0" x2="62.0" y2="158.0"/><text x="54.0" y="162.0" text-anchor="end" style="font-size:12px">1</text><line class="axis" x1="58.0" y1="112.0" x2="62.0" y2="112.0"/><text x="54.0" y="116.0" text-anchor="end" style="font-size:12px">10<tspan baseline-shift="super" style="font-size:9px">2</tspan></text><line class="axis" x1="58.0" y1="66.0" x2="62.0" y2="66.0"/><text x="54.0" y="70.0" text-anchor="end" style="font-size:12px">10<tspan baseline-shift="super" style="font-size:9px">4</tspan></text><line class="axis" x1="58.0" y1="20.0" x2="62.0" y2="20.0"/><text x="54.0" y="24.0" text-anchor="end" style="font-size:12px">10<tspan baseline-shift="super" style="font-size:9px">6</tspan></text><line class="axis" x1="62.0" y1="250.0" x2="62.0" y2="254.0"/><text x="62.0" y="268.0" text-anchor="middle" style="font-size:11px">40 000</text><line class="axis" x1="137.0" y1="250.0" x2="137.0" y2="254.0"/><text x="137.0" y="268.0" text-anchor="middle" style="font-size:11px">20 000</text><line class="axis" x1="212.0" y1="250.0" x2="212.0" y2="254.0"/><text x="212.0" y="268.0" text-anchor="middle" style="font-size:11px">10 000</text><line class="axis" x1="287.0" y1="250.0" x2="287.0" y2="254.0"/><text x="287.0" y="268.0" text-anchor="middle" style="font-size:11px">5 000</text><line class="axis" x1="362.0" y1="250.0" x2="362.0" y2="254.0"/><text x="362.0" y="268.0" text-anchor="middle" style="font-size:11px">2 500</text><text x="217.0" y="285.0" text-anchor="middle" style="font-size:12px">surface temperature / K (hotter on the left)</text><text x="70.0" y="18.0" style="font-size:12px">L / L☉</text><polyline class="grid dash" fill="none" points="62.0,172.8 69.5,175.6 77.0,178.4 84.5,181.2 92.0,183.9 99.5,186.7 107.0,189.5 114.5,192.2 122.0,195.0 129.5,197.8 137.0,200.5 144.5,203.3 152.0,206.1 159.5,208.8 167.0,211.6 174.5,214.4 182.0,217.2 189.5,219.9 197.0,222.7 204.5,225.5 212.0,228.2 219.5,231.0 227.0,233.8 234.5,236.5 242.0,239.3 249.5,242.1 257.0,244.9 264.5,247.6" style="stroke-width:1.5"/><text x="171.0" y="205.6" style="font-size:11px" opacity="0.75">0.01 R☉</text><polyline class="grid dash" fill="none" points="62.0,80.8 69.5,83.6 77.0,86.4 84.5,89.2 92.0,91.9 99.5,94.7 107.0,97.5 114.5,100.2 122.0,103.0 129.5,105.8 137.0,108.5 144.5,111.3 152.0,114.1 159.5,116.8 167.0,119.6 174.5,122.4 182.0,125.2 189.5,127.9 197.0,130.7 204.5,133.5 212.0,136.2 219.5,139.0 227.0,141.8 234.5,144.5 242.0,147.3 249.5,150.1 257.0,152.9 264.5,155.6 272.0,158.4 279.5,161.2 287.0,163.9 294.5,166.7 302.0,169.5 309.5,172.2 317.0,175.0 324.5,177.8 332.0,180.5 339.5,183.3 347.0,186.1 354.5,188.9 362.0,191.6" style="stroke-width:1.5"/><text x="66.0" y="96.0" style="font-size:11px" opacity="0.75">1 R☉</text><polyline class="grid dash" fill="none" points="152.0,22.1 159.5,24.8 167.0,27.6 174.5,30.4 182.0,33.2 189.5,35.9 197.0,38.7 204.5,41.5 212.0,44.2 219.5,47.0 227.0,49.8 234.5,52.5 242.0,55.3 249.5,58.1 257.0,60.9 264.5,63.6 272.0,66.4 279.5,69.2 287.0,71.9 294.5,74.7 302.0,77.5 309.5,80.2 317.0,83.0 324.5,85.8 332.0,88.5 339.5,91.3 347.0,94.1 354.5,96.9 362.0,99.6" style="stroke-width:1.5"/><text x="372.0" y="118.0" text-anchor="end" style="font-size:11px" opacity="0.75">100 R☉</text><polygon class="f2" opacity="0.25" points="243.1,135.0 265.5,43.0 282.8,43.0 262.0,135.0"/><text class="t2" x="267.0" y="89.0" text-anchor="middle" style="font-size:11px" transform="rotate(-76.8 267.0 89.0)">instability strip</text><polyline class="l1" fill="none" points="67.6,36.1 93.1,49.9 137.0,72.9 168.1,90.1 212.0,118.9 243.1,138.6 267.3,155.4 282.8,166.0 300.8,176.9 316.7,186.1 338.7,206.2 353.7,227.0" style="stroke-width:16;opacity:0.22;stroke-linecap:round;stroke-linejoin:round"/><polyline class="l1 thin" fill="none" points="67.6,36.1 93.1,49.9 137.0,72.9 168.1,90.1 212.0,118.9 243.1,138.6 267.3,155.4 282.8,166.0 300.8,176.9 316.7,186.1 338.7,206.2 353.7,227.0"/><text class="t1" x="154.6" y="123.0" text-anchor="end" style="font-size:12px">main sequence</text><ellipse cx="298.4" cy="101.0" rx="24" ry="18" class="f2" opacity="0.35"/><text class="t2" x="298.4" y="133.0" text-anchor="middle" style="font-size:12px">red giants</text><rect x="112.9" y="25.1" width="222.4" height="34.0" rx="10" class="f2" opacity="0.25"/><text class="t2" x="223.4" y="41.2" text-anchor="middle" style="font-size:12px">supergiants</text><ellipse cx="175.6" cy="222.9" rx="34" ry="12" class="f3" opacity="0.3"/><text x="175.6" y="248.9" text-anchor="middle" style="font-size:12px">white dwarfs</text><circle cx="270.9" cy="158.0" r="4.5" class="f3"/><text x="278.9" y="173.0" style="font-size:12px">Sun</text>
+      </svg>
+      <figcaption>The HR diagram. Dashed lines join stars of the same radius: radius increases towards the top right. The <span class="key-2">instability strip</span> holds pulsating stars whose brightness varies regularly.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>Main sequence:</strong> about 90% of stars, including the Sun. They fuse hydrogen into helium in their cores. Hot ones at the top left are massive, large and very luminous; cool ones at the bottom right are small, low-mass red dwarfs.</li>
+      <li><strong>Red giants:</strong> cool (red) but luminous, so they must be large: 10–100 times the Sun's radius. They are stars that have used up the hydrogen in their cores.</li>
+      <li><strong>Supergiants:</strong> extremely luminous, up to about $10^6 L_\odot$, and enormous: up to 1000 times the Sun's radius. They evolve from massive stars, and can be red (cool) or blue (hot).</li>
+      <li><strong>White dwarfs:</strong> hot (white) but very dim, so they must be tiny, about the size of the Earth. They are the exposed cores of dead low-mass stars, with no fusion, slowly cooling.</li>
+      <li><strong>Instability strip:</strong> a narrow, nearly vertical band crossing the main sequence. Stars in it pulsate, their outer layers expanding and contracting, so their luminosity varies with a regular period.</li>
+    </ul>
+    <p><strong>Lines of constant radius.</strong> From $L = 4\pi R^2\sigma T^4$, stars of the same radius lie along a straight line on the log–log plot, sloping down to the right. Moving up and to the right means bigger stars.</p>
+    <p>The HR diagram also lets us estimate the distance of a main-sequence star too far away for parallax: its spectrum gives its temperature, the diagram gives its luminosity, and its apparent brightness then gives its distance.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="evolution">9. How stars evolve</h2>
+    <p>Every star begins as a cloud of gas and dust (a <strong>nebula</strong>), which collapses under gravity. As it shrinks it heats up, forming a <strong>protostar</strong>. When the core reaches about $10^7$ K, hydrogen fusion starts and the star joins the <strong>main sequence</strong>, where it spends about 90% of its life. What happens next depends on its <strong>mass</strong>.</p>
+    <p><strong>More massive stars burn out faster.</strong> A massive star has much more fuel, but its core is hotter and denser, so it fuses far faster and is enormously more luminous. The Sun will spend about 10 billion years on the main sequence; a star of 25 solar masses only about 7 million years.</p>
+    <h3>Low-mass stars (up to about 8 solar masses), like the Sun</h3>
+    <ol>
+      <li>Hydrogen in the core runs out. The core contracts and heats up; hydrogen fuses in a shell around it, and the outer layers swell and cool. The star becomes a <strong>red giant</strong>.</li>
+      <li>The core becomes hot enough to fuse helium into carbon and oxygen.</li>
+      <li>The outer layers drift away as a glowing shell of gas, a <strong>planetary nebula</strong>.</li>
+      <li>The carbon–oxygen core is left as a <strong>white dwarf</strong>. It is held up against gravity by <strong>electron degeneracy pressure</strong>: electrons resist being squeezed into the same states. A white dwarf can only exist if its mass is below about 1.4 solar masses (the <strong>Chandrasekhar limit</strong>).</li>
+    </ol>
+    <h3>High-mass stars (above about 8 solar masses)</h3>
+    <ol>
+      <li>The star becomes a <strong>red supergiant</strong>. Its core is hot enough to fuse heavier and heavier elements in layers, like an onion: carbon, neon, oxygen, silicon, and finally iron.</li>
+      <li>Iron is at the peak of the binding energy curve, so fusing it releases no energy. The core can no longer support itself and collapses in less than a second.</li>
+      <li>The outer layers rebound off the collapsed core in a <strong>supernova</strong>, which can briefly outshine a whole galaxy. Elements heavier than iron are made in the explosion and scattered into space.</li>
+      <li>The core is left as a <strong>neutron star</strong> (held up by neutron degeneracy pressure, with the density of a nucleus) if its mass is below about 2–3 solar masses (the <strong>Oppenheimer–Volkoff limit</strong>). Above that, nothing can stop the collapse, and it becomes a <strong>black hole</strong>.</li>
+    </ol>
+    <p>On the HR diagram, the Sun will move from the main sequence up and to the right to the red giants, then across and down to the white dwarfs.</p>
+    <p>The elements in your body were made in stars: the hydrogen in the Big Bang, the carbon and oxygen in red giants, and heavier elements in supernovae (and in collisions between neutron stars).</p>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">10. Common mistakes</h2>
+    <ul>
+      <li><strong>Reading the temperature axis the wrong way.</strong> On the HR diagram, temperature increases to the <em>left</em>.</li>
+      <li><strong>Saying a light year is a time.</strong> It is a distance.</li>
+      <li><strong>Using the full angle of shift</strong> as the parallax angle. $p$ is half of it, measured using a baseline of 1 AU.</li>
+      <li><strong>Forgetting to square $R$ or raise $T$ to the fourth power</strong> in $L = 4\pi R^2\sigma T^4$; using °C instead of K.</li>
+      <li><strong>Saying stars are held up by their fusion "explosion".</strong> They are in equilibrium: gravity inwards, gas and radiation pressure outwards.</li>
+      <li><strong>Thinking massive stars live longer because they have more fuel.</strong> They use it far faster, so they live much shorter lives.</li>
+      <li><strong>Saying white dwarfs are hot because fusion still happens.</strong> They are just cooling down; they have no fusion.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">11. Check your understanding</h2>
+    <details class="check">
+      <summary>Why does fusion need such a high temperature?</summary>
+      <p>Nuclei are positively charged and repel. Only very fast nuclei can get close enough (about $10^{-15}$ m) for the strong force to bind them, and high temperature means high kinetic energy.</p>
+    </details>
+    <details class="check">
+      <summary>A star has a parallax angle of 0.050″. How far away is it in light years?</summary>
+      <p>$d = \frac{1}{0.050} = 20$ pc $= 20 \times 3.26 = 65$ ly.</p>
+    </details>
+    <details class="check">
+      <summary>Two stars have the same surface temperature, but star X is 16 times as luminous as star Y. Compare their radii.</summary>
+      <p>$L \propto R^2$ at fixed $T$, so $R_X = \sqrt{16}\,R_Y = 4R_Y$.</p>
+    </details>
+    <details class="check">
+      <summary>Where on the HR diagram are stars that are very hot but very dim, and what are they?</summary>
+      <p>Bottom left: white dwarfs. Being hot but dim means they must be very small.</p>
+    </details>
+    <details class="check">
+      <summary>Why can't a star produce energy by fusing iron?</summary>
+      <p>Iron has the highest binding energy per nucleon (near the peak of the curve), so fusing it into heavier nuclei would absorb energy, not release it.</p>
+    </details>
+    <details class="check">
+      <summary>What decides whether a star ends as a white dwarf, a neutron star or a black hole?</summary>
+      <p>Its mass. Low-mass stars leave white dwarf cores below 1.4 solar masses. High-mass stars explode as supernovae, leaving a neutron star or, if the core is above about 2–3 solar masses, a black hole.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=E.5">Practise E.5 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>
