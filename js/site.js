@@ -97,6 +97,22 @@ window.DATA_BOOKLET = {
     note: '$\\theta$ is the angle between the force and the displacement. 1 kWh = 3.6 MJ.',
     constants: ['g'],
   },
+  'A.4': {
+    equations: [
+      ['Torque', '\\tau = Fr\\sin\\theta', true],
+      ['Angular displacement (constant α)', '\\Delta\\theta = \\frac{\\omega_f + \\omega_i}{2}\\,t', true],
+      ['Final angular velocity', '\\omega_f = \\omega_i + \\alpha t', true],
+      ['Angular displacement after time t', '\\Delta\\theta = \\omega_i t + \\tfrac{1}{2}\\alpha t^2', true],
+      ['Linking ω and Δθ (no t)', '\\omega_f^2 = \\omega_i^2 + 2\\alpha\\Delta\\theta', true],
+      ['Moment of inertia (point masses)', 'I = \\sum mr^2', true],
+      ["Newton's second law for rotation", '\\tau = I\\alpha', true],
+      ['Angular momentum', 'L = I\\omega', true],
+      ['Angular impulse', '\\Delta L = \\tau\\Delta t = \\Delta(I\\omega)', true],
+      ['Rotational kinetic energy', 'E_k = \\tfrac{1}{2}I\\omega^2 = \\frac{L^2}{2I}', true],
+    ],
+    note: 'All of A.4 is HL. Angles in radians. Moments of inertia of particular shapes (disc, sphere, rod…) are given in the question when needed.',
+    constants: ['g'],
+  },
   // A third item `true` marks an equation as HL only (shown with an HL tag).
   'C.1': {
     equations: [
