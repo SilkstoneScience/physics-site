@@ -129,6 +129,20 @@ window.DATA_BOOKLET = {
     note: 'All of A.5 is HL. $\\Delta t_0$ is the proper time (both events at the same place); $L_0$ is the proper length (measured at rest). The Lorentz equations also hold for intervals: $\\Delta x\' = \\gamma(\\Delta x - v\\Delta t)$.',
     constants: ['c'],
   },
+  'B.1': {
+    equations: [
+      ['Density', '\\rho = \\frac{m}{V}'],
+      ['Average kinetic energy of a particle', '\\overline{E}_k = \\tfrac{3}{2}k_B T'],
+      ['Specific heat capacity', 'Q = mc\\Delta T'],
+      ['Specific latent heat', 'Q = mL'],
+      ['Rate of thermal energy transfer by conduction', '\\frac{\\Delta Q}{\\Delta t} = -kA\\frac{\\Delta T}{\\Delta x}'],
+      ['Stefan–Boltzmann law (luminosity)', 'L = \\sigma A T^4'],
+      ['Apparent brightness', 'b = \\frac{L}{4\\pi d^2}'],
+      ["Wien's displacement law", '\\lambda_{\\max} T = 2.9 \\times 10^{-3}\\ \\text{m K}'],
+    ],
+    note: 'Always use kelvin in $\\overline{E}_k$, $L = \\sigma AT^4$ and Wien\'s law: $T/\\text{K} = \\theta/{}^\\circ\\text{C} + 273$. A temperature <em>change</em> $\\Delta T$ is the same in K and °C. The minus sign in the conduction equation just shows that energy flows towards the colder side.',
+    constants: ['kB', 'sigma'],
+  },
   // A third item `true` marks an equation as HL only (shown with an HL tag).
   'C.1': {
     equations: [

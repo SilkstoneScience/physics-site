@@ -35,5 +35,336 @@
         ]
       }
     ]
+  },
+  {
+    "id": "B1-001",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>The temperature of a liquid rises from 15 °C to 40 °C. What is the change in its temperature in kelvin?</p>",
+    "options": [
+      "25 K",
+      "288 K",
+      "298 K",
+      "313 K"
+    ],
+    "answer": 0,
+    "explanation": "One kelvin is the same size as one degree Celsius, so a temperature <em>change</em> is the same on both scales: 25 K. 288 K and 313 K are the starting and final temperatures in kelvin, and 298 K comes from adding 273 to the change."
+  },
+  {
+    "id": "B1-002",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>What is the average kinetic energy of a molecule in a gas at 127 °C?</p>",
+    "options": [
+      "$2.6 \\times 10^{-21}$ J",
+      "$5.5 \\times 10^{-21}$ J",
+      "$8.3 \\times 10^{-21}$ J",
+      "$1.7 \\times 10^{-20}$ J"
+    ],
+    "answer": 2,
+    "explanation": "Convert to kelvin first: $T = 127 + 273 = 400$ K. Then $\\overline{E}_k = \\tfrac{3}{2}k_BT = 1.5 \\times 1.38 \\times 10^{-23} \\times 400 = 8.3 \\times 10^{-21}$ J. Using 127 instead of 400 gives $2.6 \\times 10^{-21}$ J, and leaving out the $\\tfrac{3}{2}$ gives $5.5 \\times 10^{-21}$ J."
+  },
+  {
+    "id": "B1-003",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A gas is heated from 27 °C to 327 °C. What is $\\dfrac{\\text{new average kinetic energy of the molecules}}{\\text{original average kinetic energy of the molecules}}$?</p>",
+    "options": [
+      "$\\sqrt{2}$",
+      "2",
+      "4",
+      "12"
+    ],
+    "answer": 1,
+    "explanation": "$\\overline{E}_k \\propto T$ in kelvin. $T$ goes from 300 K to 600 K, so the average kinetic energy doubles. The ratio of the Celsius values, $327/27 \\approx 12$, is meaningless because 0 °C isn't absolute zero. $\\sqrt{2}$ is the ratio of the average <em>speeds</em>, not energies."
+  },
+  {
+    "id": "B1-004",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>Which of the following is the internal energy of a substance?</p>",
+    "options": [
+      "The total random kinetic energy of its molecules",
+      "The total random kinetic energy of its molecules plus the total intermolecular potential energy",
+      "The average random kinetic energy of one of its molecules",
+      "The total intermolecular potential energy of its molecules"
+    ],
+    "answer": 1,
+    "explanation": "Internal energy is the <em>total</em> of both kinds of energy of all the particles: random kinetic energy and intermolecular potential energy. The average kinetic energy of one molecule is what temperature measures, which is a different thing."
+  },
+  {
+    "id": "B1-005",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A solid is melting at its melting point. What happens to the average kinetic energy and the average potential energy of its particles?</p>",
+    "options": [
+      "Both increase",
+      "Kinetic energy increases, potential energy is unchanged",
+      "Kinetic energy is unchanged, potential energy increases",
+      "Both are unchanged"
+    ],
+    "answer": 2,
+    "explanation": "The temperature stays constant during a phase change, so the average kinetic energy doesn't change. The energy supplied does work against the attractive forces as the particles move apart, so their potential energy increases. Option D forgets that energy is still being supplied."
+  },
+  {
+    "id": "B1-006",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>A 0.40 kg aluminium block is heated from 20 °C to 70 °C. The specific heat capacity of aluminium is 900 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$. How much energy is transferred to the block?</p>",
+    "options": [
+      "$7.2 \\times 10^3$ J",
+      "$1.8 \\times 10^4$ J",
+      "$2.5 \\times 10^4$ J",
+      "$1.2 \\times 10^5$ J"
+    ],
+    "answer": 1,
+    "explanation": "$Q = mc\\Delta T = 0.40 \\times 900 \\times 50 = 1.8 \\times 10^4$ J. Using 70 °C instead of the change gives $2.5 \\times 10^4$ J, and using the final temperature in kelvin (343 K) gives $1.2 \\times 10^5$ J."
+  },
+  {
+    "id": "B1-007",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A 60 W heater is placed in 0.50 kg of a liquid. After 4.0 minutes the temperature of the liquid has risen by 12 K. Assuming no energy is lost, what is the specific heat capacity of the liquid?</p>",
+    "options": [
+      "40 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$",
+      "600 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$",
+      "1200 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$",
+      "2400 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$"
+    ],
+    "answer": 3,
+    "explanation": "Energy supplied $Q = Pt = 60 \\times 240 = 14\\,400$ J (time in seconds). $c = \\dfrac{Q}{m\\Delta T} = \\dfrac{14\\,400}{0.50 \\times 12} = 2400\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$. Using 4.0 minutes as 4 s gives 40, forgetting the mass gives 1200, and multiplying by the mass instead of dividing gives 600."
+  },
+  {
+    "id": "B1-008",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>How much energy is needed to change 0.20 kg of ice at 0 °C into water at 20 °C?</p><p>Specific latent heat of fusion of ice = $3.34 \\times 10^5\\ \\text{J kg}^{-1}$<br>Specific heat capacity of water = 4200 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$</p>",
+    "options": [
+      "$1.7 \\times 10^4$ J",
+      "$6.7 \\times 10^4$ J",
+      "$8.4 \\times 10^4$ J",
+      "$3.5 \\times 10^5$ J"
+    ],
+    "answer": 2,
+    "explanation": "Two stages. Melting: $mL = 0.20 \\times 3.34 \\times 10^5 = 6.68 \\times 10^4$ J. Warming: $mc\\Delta T = 0.20 \\times 4200 \\times 20 = 1.68 \\times 10^4$ J. Total $8.4 \\times 10^4$ J. The first two options are just one stage each; $3.5 \\times 10^5$ J forgets to multiply the latent heat by the mass."
+  },
+  {
+    "id": "B1-009",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A beaker of ice is heated at a constant rate until all of it has turned to steam. On a graph of temperature against time, the flat section at the boiling point is much longer than the flat section at the melting point. Why?</p>",
+    "options": [
+      "The specific latent heat of vaporization is larger than the specific latent heat of fusion.",
+      "The specific heat capacity of water is larger than that of ice.",
+      "The boiling point is higher than the melting point.",
+      "More energy is lost to the surroundings at higher temperatures."
+    ],
+    "answer": 0,
+    "explanation": "With constant power, the length of each flat section is proportional to the energy needed, $mL$. The mass is the same, so boiling takes longer because $L_v$ is much larger than $L_f$: separating the particles completely needs far more energy than loosening them. Specific heat capacities affect the sloping sections, not the flat ones."
+  },
+  {
+    "id": "B1-010",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Which statement about evaporation is correct?</p>",
+    "options": [
+      "It happens only at the boiling point of the liquid.",
+      "It happens throughout the volume of the liquid.",
+      "It raises the temperature of the liquid that is left behind.",
+      "It happens at the surface at any temperature, and lowers the average kinetic energy of the liquid left behind."
+    ],
+    "answer": 3,
+    "explanation": "Only the fastest molecules at the surface escape, at any temperature. The molecules left behind have a lower average kinetic energy, so the liquid cools. A and B describe boiling, not evaporation."
+  },
+  {
+    "id": "B1-011",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A copper rod has a cross-sectional area of $2.0 \\times 10^{-4}\\ \\text{m}^2$ and a length of 0.50 m. Its sides are insulated. One end is kept at 100 °C and the other at 20 °C. The thermal conductivity of copper is 400 $\\text{W m}^{-1}\\,\\text{K}^{-1}$. What is the rate of energy transfer along the rod?</p>",
+    "options": [
+      "3.2 W",
+      "13 W",
+      "16 W",
+      "19 W"
+    ],
+    "answer": 1,
+    "explanation": "$\\dfrac{\\Delta Q}{\\Delta t} = kA\\dfrac{\\Delta T}{\\Delta x} = 400 \\times 2.0 \\times 10^{-4} \\times \\dfrac{80}{0.50} = 13$ W. Multiplying by the length instead of dividing gives 3.2 W. Using 100 K or adding the two temperatures (120 K) instead of their difference gives 16 W or 19 W."
+  },
+  {
+    "id": "B1-012",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "SL",
+    "stem": "<p>Star X and star Y have the same radius. The peak wavelength of the spectrum of X is 300 nm and that of Y is 600 nm. What is $\\dfrac{\\text{luminosity of X}}{\\text{luminosity of Y}}$?</p>",
+    "options": [
+      "2",
+      "4",
+      "8",
+      "16"
+    ],
+    "answer": 3,
+    "explanation": "By Wien's law, $T \\propto \\dfrac{1}{\\lambda_{\\max}}$, so X is twice as hot as Y. With the same radius, $L \\propto T^4$, so $\\dfrac{L_X}{L_Y} = 2^4 = 16$. Answer 2 compares only the temperatures; 4 uses $T^2$."
+  },
+  {
+    "id": "B1-013",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "SL",
+    "stem": "<p>Two black-body spheres P and Q are at temperatures of 300 K and 600 K. The radius of Q is half the radius of P. What is $\\dfrac{\\text{power radiated by P}}{\\text{power radiated by Q}}$?</p>",
+    "options": [
+      "0.25",
+      "0.5",
+      "2",
+      "4"
+    ],
+    "answer": 0,
+    "explanation": "$L = \\sigma(4\\pi R^2)T^4$. Q has $\\tfrac{1}{4}$ of P's area but $2^4 = 16$ times P's power per square metre, so Q radiates $16 \\times \\tfrac{1}{4} = 4$ times as much as P. The ratio P : Q is therefore $\\tfrac{1}{4} = 0.25$. Answer 4 is Q : P, the wrong way round."
+  },
+  {
+    "id": "B1-014",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A star at distance $d$ from the Earth has an apparent brightness $b$. A second star has four times the luminosity of the first and is at distance $2d$. What is the apparent brightness of the second star?</p>",
+    "options": [
+      "$b$",
+      "$2b$",
+      "$4b$",
+      "$16b$"
+    ],
+    "answer": 0,
+    "explanation": "$b = \\dfrac{L}{4\\pi d^2}$. Four times the luminosity multiplies $b$ by 4, and twice the distance divides it by $2^2 = 4$. The two effects cancel, so the brightness is $b$. Answer $2b$ treats the distance as an inverse (not inverse-square) relationship."
+  },
+  {
+    "id": "B1-015",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A student cools 0.30 kg of lemonade at 25 °C by adding 0.050 kg of ice at 0 °C to it in an insulated cup.</p><p>Specific heat capacity of lemonade and of water = 4200 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$<br>Specific latent heat of fusion of ice = $3.34 \\times 10^5\\ \\text{J kg}^{-1}$</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "While the ice is melting, its temperature stays at 0 °C. Explain this in terms of the energy of its particles.",
+        "marks": 2,
+        "markscheme": [
+          "Energy supplied increases the (intermolecular) potential energy of the particles / does work against the attractive forces between them ✓",
+          "The average (random) kinetic energy of the particles does not change, so the temperature stays constant ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the energy needed to melt all the ice.",
+        "marks": 1,
+        "markscheme": [
+          "$Q = mL = 0.050 \\times 3.34 \\times 10^5 = 1.67 \\times 10^4$ J ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Determine the final temperature of the drink, assuming no energy is exchanged with the surroundings.",
+        "marks": 3,
+        "markscheme": [
+          "Energy lost by lemonade $= 0.30 \\times 4200 \\times (25 - T)$ ✓",
+          "Energy gained by ice $= 1.67 \\times 10^4 + 0.050 \\times 4200 \\times T$ (melting <em>and</em> warming the melted water) ✓",
+          "Equating gives $T = 10$ °C ✓ (allow ECF from (b); award 2 marks max for 12 °C, which leaves out the warming of the melted ice)"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "In practice the cup is not perfectly insulated and the room is at 22 °C. State and explain whether the actual final temperature would be higher or lower than your answer to (c).",
+        "marks": 2,
+        "markscheme": [
+          "Higher ✓",
+          "Energy is transferred from the warmer room into the colder drink (from higher to lower temperature) ✓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "B1-016",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "SL",
+    "stem": "<p>The spectrum of a star has its peak at a wavelength of 410 nm. The star is $2.5 \\times 10^{17}$ m from the Earth, and its apparent brightness at the Earth is $3.0 \\times 10^{-9}\\ \\text{W m}^{-2}$. Treat the star as a black body.</p><p>Luminosity of the Sun $L_\\odot = 3.8 \\times 10^{26}$ W</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Show that the surface temperature of the star is about 7100 K.",
+        "marks": 1,
+        "markscheme": [
+          "$T = \\dfrac{2.9 \\times 10^{-3}}{410 \\times 10^{-9}} = 7070$ K ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the luminosity of the star.",
+        "marks": 2,
+        "markscheme": [
+          "$L = 4\\pi d^2 b$ ✓",
+          "$L = 4\\pi \\times (2.5 \\times 10^{17})^2 \\times 3.0 \\times 10^{-9} = 2.4 \\times 10^{27}$ W ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Determine the radius of the star.",
+        "marks": 3,
+        "markscheme": [
+          "$A = \\dfrac{L}{\\sigma T^4}$ ✓",
+          "$A = \\dfrac{2.4 \\times 10^{27}}{5.67 \\times 10^{-8} \\times 7100^4} = 1.7 \\times 10^{19}\\ \\text{m}^2$ ✓",
+          "$R = \\sqrt{\\dfrac{A}{4\\pi}} = 1.1 \\times 10^9$ m ✓ (allow ECF from (b); award 2 marks max if $A = \\pi R^2$ is used, giving $2.3 \\times 10^9$ m)"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Express the luminosity of the star in terms of the luminosity of the Sun.",
+        "marks": 1,
+        "markscheme": [
+          "$\\dfrac{2.4 \\times 10^{27}}{3.8 \\times 10^{26}} \\approx 6\\,L_\\odot$ ✓ (allow ECF from (b))"
+        ]
+      }
+    ]
   }
 ]
