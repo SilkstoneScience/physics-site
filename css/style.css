@@ -267,3 +267,12 @@ select, textarea, input { font: inherit; color: var(--text); background: var(--b
 .timeline-day { border-left: 5px solid var(--accent); padding: 2px 0 2px 14px; margin: 18px 0; }
 .timeline-day h3 { margin: 4px 0; }
 .due { display: inline-block; font-size: 0.8rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; background: var(--theme-b); color: var(--surface); margin-left: 4px; }
+
+/* Stacked tables on narrow screens (class added by site.js when a table is too wide) */
+table.notes.stacked, table.notes.stacked tbody, table.notes.stacked tr, table.notes.stacked th, table.notes.stacked td { display: block; width: 100%; }
+table.notes.stacked { border: 0; }
+table.notes.stacked .stack-head { display: none; }
+table.notes.stacked tr { border: 1px solid var(--border); border-radius: var(--radius); margin: 0 0 10px; padding: 6px 12px; background: var(--surface); }
+table.notes.stacked th, table.notes.stacked td { border: 0; padding: 3px 0; background: none; }
+table.notes.stacked tr > :first-child { font-weight: 700; color: var(--accent); }
+table.notes.stacked td[data-label]:not(:first-child)::before, table.notes.stacked th[data-label]:not(:first-child)::before { content: attr(data-label) ": "; font-weight: 600; color: var(--muted); }

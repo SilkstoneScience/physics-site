@@ -4,6 +4,8 @@
 // MathJax settings: $...$ for inline maths, $$...$$ for displayed equations.
 window.MathJax = {
   tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+  // On narrow screens, break long displayed equations onto a new line instead of making them scroll.
+  output: { displayOverflow: 'linebreak', linebreaks: { inline: true } },
 };
 
 // The syllabus. Edit here to rename a topic; menus and topic lists update everywhere.
@@ -612,4 +614,33 @@ window.CONSTANTS = {
       if (!panel.hidden) render();
     };
   }
+})();
+
+// Tables that are too wide for the screen (usually on phones) switch to a stacked layout:
+// one block per row, with each cell labelled by its column heading.
+(function () {
+  function label(table) {
+    if (table.dataset.labelled) return;
+    const rows = [...table.rows];
+    const head = rows.find((r) => r.cells.length && [...r.cells].every((c) => c.tagName === 'TH'));
+    if (!head) return;
+    const names = [...head.cells].map((c) => c.textContent.trim());
+    head.classList.add('stack-head');
+    rows.forEach((r) => { if (r !== head) [...r.cells].forEach((c, i) => { if (names[i]) c.dataset.label = names[i]; }); });
+    table.dataset.labelled = '1';
+  }
+  function check() {
+    document.querySelectorAll('main table.notes').forEach((t) => {
+      t.classList.remove('stacked');
+      const box = t.parentElement;
+      if (t.scrollWidth > box.clientWidth + 2) { label(t); t.classList.add('stacked'); }
+    });
+  }
+  function start() {
+    check();
+    if (window.MathJax && MathJax.startup && MathJax.startup.promise) MathJax.startup.promise.then(check);
+    let timer;
+    window.addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(check, 200); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
