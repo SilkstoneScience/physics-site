@@ -4,15 +4,335 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>A.5 Galilean and special relativity · DP Physics</title>
+  <meta name="description" content="IB DP Physics A.5 Galilean and special relativity (HL): reference frames, Galilean transformations, Einstein's postulates, Lorentz transformations, relativistic velocity addition, the space-time interval, time dilation, length contraction, simultaneity, space-time diagrams and muon decay.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="A.5">
+</head>
+<body data-root="../" data-section="themes" data-topic="A.5">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="a.html">Theme A Space, time and motion</a></p>
-    <h1><span class="code">A.5</span>Galilean and special relativity <span class="tag hl">HL</span></h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <h1><span class="code">A.5</span>Galilean and special relativity <span class="tag hl">HL only</span></h1>
+    <p class="lead">Is time the same for everyone? For centuries the obvious answer was yes. In 1905 Albert Einstein showed that if the speed of light is the same for every observer, then moving clocks run slow, moving objects shrink, and two events that are simultaneous for you may not be for someone else. This topic builds on relative velocity from A.1. <strong>The whole of A.5 is HL only.</strong></p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Theories</span><span class="tag">Falsification</span><span class="tag">Models</span><span class="tag">Evidence</span></div>
+          <p><strong>Theories.</strong> Newton's absolute space and time went unchallenged for over 200 years. Special relativity didn't throw them away: at everyday speeds, Einstein's equations reduce to Newton's and Galileo's. This is a paradigm shift that still contains the old theory as a special case.</p>
+          <p><strong>Falsification.</strong> In 1887 Albert Michelson and Edward Morley tried to measure the Earth's speed through the "ether" that light supposedly travelled through. They found nothing. This null result was a serious problem for the ether idea.</p>
+          <p><strong>Models.</strong> Einstein started from just two postulates and deduced everything else mathematically. Hermann Minkowski then showed that the theory could be drawn as geometry, using space-time diagrams.</p>
+          <p><strong>Evidence.</strong> Muons from cosmic rays reach the ground in far greater numbers than they could without time dilation. Atomic clocks flown on aircraft and carried by GPS satellites confirm the predictions every day.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>Can reasoning alone tell us about the world?</strong> Einstein deduced time dilation from two postulates years before anyone measured it. What makes a conclusion reached by pure reasoning trustworthy?</li>
+            <li><strong>Is common sense a reliable guide?</strong> Absolute time feels obvious, yet it is wrong. Is "common sense" just the physics of slow speeds?</li>
+            <li><strong>What does it mean to say something "really" happened first?</strong> If two observers disagree about the order of events and both are right, is there a fact of the matter?</li>
+            <li><strong>Why did it take a paradigm shift?</strong> Lorentz and FitzGerald had found the right equations before Einstein, but explained them using the ether. What makes one interpretation of the same equations better than another?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <ol>
+        <li><a href="#frames">Reference frames</a></li>
+        <li><a href="#galilean">Galilean relativity</a></li>
+        <li><a href="#light">The problem with light</a></li>
+        <li><a href="#postulates">Einstein's two postulates</a></li>
+        <li><a href="#lorentz">The Lorentz transformations</a></li>
+        <li><a href="#velocity">Relativistic velocity addition</a></li>
+        <li><a href="#interval">The space-time interval</a></li>
+        <li><a href="#dilation">Proper time and time dilation</a></li>
+        <li><a href="#contraction">Proper length and length contraction</a></li>
+        <li><a href="#simultaneity">The relativity of simultaneity</a></li>
+        <li><a href="#diagrams">Space-time diagrams</a></li>
+        <li><a href="#muons">Evidence: muon decay</a></li>
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="frames">1. Reference frames</h2>
+    <p>A <strong>reference frame</strong> is a coordinate system, with rulers and synchronised clocks, that an observer uses to give each <strong>event</strong> a position $x$ and a time $t$. An event is something that happens at a particular place and instant, like a flash of light or a ball hitting the ground.</p>
+    <ul>
+      <li>An <strong>inertial reference frame</strong> is one that is <strong>not accelerating</strong>: it is at rest or moving at constant velocity. In an inertial frame, Newton's first law holds. An object with no resultant force on it stays at rest or keeps moving in a straight line.</li>
+      <li>In an accelerating (non-inertial) frame, objects seem to accelerate with no force on them. Think of being thrown forward in a braking bus. Special relativity deals only with inertial frames.</li>
+    </ul>
+    <p>We usually call one frame S (for example, the ground) and a second frame S′ that moves at constant velocity $v$ along the $x$-direction relative to S (for example, a train). Both start their clocks at $t = t' = 0$ at the moment their origins pass each other.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="galilean">2. Galilean relativity</h2>
+    <p>Galileo and Newton assumed that time is <strong>absolute</strong>, the same for everyone, and that lengths are the same in every frame. Then an event at position $x$ in S is at $x'$ in S′, where:</p>
+    <div class="key">
+      $$x' = x - vt \qquad t' = t$$
+      <p style="margin:0">These are the <strong>Galilean transformations</strong>. Dividing by time gives the Galilean <strong>velocity addition</strong> rule for an object with velocity $u$ in S and $u'$ in S′:</p>
+      $$u' = u - v$$
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 190" role="img" aria-labelledby="a5at">
+        <title id="a5at">Frame S is fixed to the ground and frame S prime is fixed to a train moving right at speed v. At time t, the train's origin is a distance v t from the ground's origin. An event at position x in S is at position x prime equals x minus v t in S prime.</title>
+        <line class="axis" x1="10" y1="150" x2="370" y2="150"/>
+        <line class="l1" x1="30" y1="150" x2="30" y2="70" marker-end="url(#ah1)"/><text class="t1" x="38" y="80">S</text>
+        <rect x="150" y="98" width="140" height="44" rx="6" class="axis" style="fill:var(--warn-soft)"/>
+        <circle cx="175" cy="146" r="5" class="f3"/><circle cx="265" cy="146" r="5" class="f3"/>
+        <line class="l2" x1="160" y1="142" x2="160" y2="60" marker-end="url(#ah2)"/><text class="t2" x="168" y="70">S′</text>
+        <line class="l2" x1="230" y1="80" x2="276" y2="80" marker-end="url(#ah2)"/><text class="t2" x="252" y="72" text-anchor="middle">v</text>
+        <circle cx="330" cy="150" r="6" class="f3"/><text x="330" y="134" text-anchor="middle" style="font-size:14px">event</text>
+        <line class="l3 thin" x1="32" y1="168" x2="328" y2="168" marker-start="url(#ah3)" marker-end="url(#ah3)"/><text x="180" y="186" text-anchor="middle">x</text>
+        <line class="l1 thin" x1="32" y1="40" x2="158" y2="40" marker-start="url(#ah1)" marker-end="url(#ah1)"/><text class="t1" x="95" y="32" text-anchor="middle">vt</text>
+        <line class="l2 thin" x1="162" y1="40" x2="328" y2="40" marker-start="url(#ah2)" marker-end="url(#ah2)"/><text class="t2" x="245" y="32" text-anchor="middle">x′</text>
+      </svg>
+      <figcaption>The <span class="key-2">train frame S′</span> has moved $vt$ from the origin of the <span class="key-1">ground frame S</span>, so $x' = x - vt$.</figcaption>
+    </figure>
+    <div class="worked">
+      <h3>Worked example: on a train</h3>
+      <p>A train moves at 30 $\text{m s}^{-1}$ relative to the ground. A passenger walks towards the front at 1.5 $\text{m s}^{-1}$ relative to the train. (a) What is the passenger's velocity relative to the ground? (b) A bird lands on a post 200 m from the platform's origin, 4.0 s after the train's origin passes it. Where is the bird in the train's frame?</p>
+      <p>(a) $u' = u - v$, so $u = u' + v = 1.5 + 30 = 31.5\ \text{m s}^{-1}$.</p>
+      <p>(b) $x' = x - vt = 200 - 30 \times 4.0 = 80$ m ahead of the train's origin, at $t' = t = 4.0$ s.</p>
+    </div>
+    <p><strong>Galilean relativity:</strong> differentiating $u' = u - v$ (with $v$ constant) shows that both frames measure the <strong>same acceleration</strong>. So they measure the same forces, and <strong>Newton's laws are the same in all inertial frames</strong>. No mechanics experiment inside a smoothly moving, windowless train can tell you how fast it is going.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="light">3. The problem with light</h2>
+    <p>In the 1860s James Clerk Maxwell showed that light is an electromagnetic wave whose speed is fixed by constants of nature: $c = \dfrac{1}{\sqrt{\mu_0\varepsilon_0}} = 3.00\times10^{8}\ \text{m s}^{-1}$. But this raised a puzzle: fixed relative to <em>what</em>?</p>
+    <ul>
+      <li>Galilean addition says a train moving at $0.5c$ that switches on its headlight should see the light leave at $c$, while someone on the ground sees it at $1.5c$.</li>
+      <li>Physicists assumed light travelled through an invisible medium, the "ether", and that $c$ was its speed relative to the ether. Then the Earth's motion through the ether should change the measured speed of light.</li>
+      <li>The <strong>Michelson–Morley experiment</strong> (1887) used interference (C.3) to look for this change. However the apparatus was turned, and whatever the season, it found <strong>no change at all</strong>.</li>
+    </ul>
+    <p>Either Maxwell's electromagnetism was wrong, or Galilean relativity was. Einstein chose to trust Maxwell.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="postulates">4. Einstein's two postulates</h2>
+    <div class="key">
+      <p style="margin:0"><strong>1.</strong> The laws of physics are the same in all inertial reference frames.</p>
+      <p style="margin:8px 0 0"><strong>2.</strong> The speed of light in a vacuum, $c$, is the same for all inertial observers, whatever the motion of the source or the observer.</p>
+    </div>
+    <p>The first postulate extends Galilean relativity to <em>all</em> of physics, including electromagnetism and optics. The second is the startling one. If someone moving at $0.5c$ shines a torch forwards, both they and an observer on the ground measure the light's speed as exactly $c$. For that to be true, distances and times must be different in different frames. There is no ether and no absolute frame of reference.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="lorentz">5. The Lorentz transformations</h2>
+    <p>The postulates lead (the derivation isn't required) to the <strong>Lorentz transformations</strong>, which replace the Galilean ones:</p>
+    <div class="key">
+      $$x' = \gamma(x - vt) \qquad t' = \gamma\left(t - \frac{vx}{c^2}\right)$$
+      $$\gamma = \frac{1}{\sqrt{1 - \dfrac{v^2}{c^2}}}$$
+      <p style="margin:0">$\gamma$ is the <strong>Lorentz factor</strong>. For intervals between two events, the same equations apply with $\Delta$s: $\Delta x' = \gamma(\Delta x - v\Delta t)$ and $\Delta t' = \gamma\left(\Delta t - \frac{v\Delta x}{c^2}\right)$. To go from S′ back to S, swap the primes and change the sign of $v$.</p>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 300 220" class="small" role="img" aria-labelledby="a5bt">
+        <title id="a5bt">Graph of the Lorentz factor gamma against v over c. Gamma is 1 at v equals zero and stays close to 1 until about half the speed of light, then rises steeply towards infinity as v approaches c. A dashed vertical asymptote is drawn at v over c equals 1.</title>
+        <line class="axis" x1="40" y1="190" x2="290" y2="190" marker-end="url(#ah3)"/>
+        <line class="axis" x1="40" y1="190" x2="40" y2="10" marker-end="url(#ah3)"/>
+        <line class="grid dash" x1="260" y1="15" x2="260" y2="190"/>
+        <polyline class="l1" points="40,170 42.8,170 45.5,170 48.2,170 51,169.9 53.8,169.9 56.5,169.9 59.2,169.8 62,169.8 64.8,169.7 67.5,169.7 70.2,169.6 73,169.5 75.8,169.5 78.5,169.4 81.2,169.3 84,169.2 86.8,169.1 89.5,168.9 92.3,168.8 95,168.7 97.8,168.5 100.5,168.4 103.3,168.2 106,168.1 108.8,167.9 111.5,167.7 114.3,167.5 117,167.3 119.8,167.1 122.5,166.9 125.3,166.6 128,166.4 130.8,166.1 133.5,165.8 136.3,165.5 139,165.2 141.8,164.9 144.5,164.5 147.3,164.2 150,163.8 152.8,163.4 155.5,163 158.2,162.6 161,162.1 163.8,161.6 166.5,161.1 169.2,160.6 172,160 174.7,159.4 177.5,158.8 180.2,158.1 183,157.4 185.7,156.6 188.5,155.8 191.2,154.9 194,154 196.7,153 199.5,151.9 202.2,150.8 205,149.5 207.7,148.2 210.5,146.7 213.2,145.1 216,143.3 218.7,141.4 219.8,140.5 220.9,139.7 222,138.8 223.1,137.8 224.2,136.8 225.3,135.7 226.4,134.6 227.5,133.5 228.6,132.3 229.7,131 230.8,129.6 231.9,128.1 233,126.6 234.1,125 235.2,123.2 236.3,121.3 237.4,119.3 238.5,117.1 239.6,114.8 240.7,112.2 241.8,109.4 242.9,106.4 244,103 245.1,99.2 246.2,95.1 247.3,90.3 248.4,84.9 249.5,78.7 250.6,71.3 251.7,62.6 252.8,51.8 253.9,38.3"/>
+        <g style="font-size:13px"><text x="40" y="206" text-anchor="middle">0</text><text x="150" y="206" text-anchor="middle">0.5</text><text x="260" y="206" text-anchor="middle">1</text><text x="292" y="182" text-anchor="end">v/c</text>
+        <text x="34" y="174" text-anchor="end">1</text><text x="34" y="134" text-anchor="end">2</text><text x="34" y="94" text-anchor="end">3</text><text x="34" y="54" text-anchor="end">4</text><text x="46" y="18">γ</text></g>
+        <g class="grid"><line x1="40" y1="170" x2="260" y2="170"/><line x1="40" y1="130" x2="260" y2="130"/><line x1="40" y1="90" x2="260" y2="90"/><line x1="40" y1="50" x2="260" y2="50"/></g>
+      </svg>
+      <figcaption>The <span class="key-1">Lorentz factor</span> $\gamma$ is always at least 1. It is only noticeably bigger than 1 at a large fraction of $c$, and it grows without limit as $v \to c$.</figcaption>
+    </figure>
+    <ul>
+      <li>At everyday speeds, $\gamma \approx 1$ and $\frac{vx}{c^2} \approx 0$, so the Lorentz transformations become the Galilean ones. Newton isn't "wrong", just a very good approximation.</li>
+      <li>$\gamma$ only makes sense when $v &lt; c$: nothing with mass can reach the speed of light.</li>
+      <li>Useful values: $v = 0.60c$ gives $\gamma = 1.25$; $v = 0.80c$ gives $\gamma = 1.67$; $v = 0.866c$ gives $\gamma = 2.0$.</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: transforming an event</h3>
+      <p>Frame S′ moves at $v = 0.60c$ relative to S, and the origins coincide at $t = t' = 0$. In S, an event happens at $x = 900$ m and $t = 2.0\ \mu\text{s}$. Find its coordinates in S′.</p>
+      <p>$\gamma = \dfrac{1}{\sqrt{1 - 0.60^2}} = 1.25$. &nbsp; $vt = 0.60 \times 3.00\times10^{8} \times 2.0\times10^{-6} = 360$ m.</p>
+      <p>$x' = \gamma(x - vt) = 1.25(900 - 360) = 675$ m.</p>
+      <p>$\dfrac{vx}{c^2} = \dfrac{0.60 \times 900}{3.00\times10^{8}} = 1.8\ \mu\text{s}$, so $t' = \gamma\left(t - \dfrac{vx}{c^2}\right) = 1.25(2.0 - 1.8) = 0.25\ \mu\text{s}$.</p>
+      <p>Galilean relativity would give $x' = 540$ m and $t' = 2.0\ \mu\text{s}$. Both are wrong at this speed.</p>
+    </div>
+    <aside class="maths-link">
+      <h3>Maths link: why Newton works at low speeds <span class="tag">AA HL 5.19</span></h3>
+      <p>Write $\gamma = \left(1 - \frac{v^2}{c^2}\right)^{-1/2}$. The binomial series $(1 + x)^p \approx 1 + px$ for small $x$ gives:</p>
+      $$\gamma \approx 1 + \frac{1}{2}\frac{v^2}{c^2}$$
+      <p>For a jet airliner at 250 $\text{m s}^{-1}$, $\frac{v^2}{c^2} \approx 7\times10^{-13}$, so $\gamma$ differs from 1 by less than one part in a trillion. That's why relativity went unnoticed for so long.</p>
+    </aside>
+
+    <!-- ===================================================== -->
+    <h2 id="velocity">6. Relativistic velocity addition</h2>
+    <p>Because space and time both transform, velocities don't simply add. An object moving at velocity $u$ in S has velocity $u'$ in S′:</p>
+    <div class="key">
+      $$u' = \frac{u - v}{1 - \dfrac{uv}{c^2}}$$
+      <p style="margin:0">Use signs: velocities in the $+x$ direction are positive. For $uv \ll c^2$ this becomes the Galilean $u' = u - v$.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: two spacecraft approaching each other</h3>
+      <p>Two spacecraft approach each other head-on, each moving at $0.60c$ relative to the Earth. How fast does one move relative to the other?</p>
+      <p>Let S be the Earth and S′ the left-hand spacecraft, so $v = +0.60c$. The right-hand craft has $u = -0.60c$ in S. Then:</p>
+      <p>$u' = \dfrac{-0.60c - 0.60c}{1 - \dfrac{(-0.60c)(0.60c)}{c^2}} = \dfrac{-1.20c}{1 + 0.36} = -0.88c$.</p>
+      <p>The other craft approaches at $0.88c$, not the Galilean $1.20c$. Relativistic velocity addition never gives a result faster than light.</p>
+    </div>
+    <p><strong>Check with light:</strong> if $u = c$, then $u' = \dfrac{c - v}{1 - v/c} = c$ for every $v$. The formula builds in the second postulate.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="interval">7. The space-time interval</h2>
+    <p>Observers in different frames disagree about the time between two events and the distance between them. But they all agree on one combination, the <strong>space-time interval</strong> $\Delta s$:</p>
+    <div class="key">
+      $$(\Delta s)^2 = (c\Delta t)^2 - (\Delta x)^2$$
+      <p style="margin:0">$(\Delta s)^2$ has the same value in every inertial frame: it is <strong>invariant</strong>. So $(c\Delta t)^2 - (\Delta x)^2 = (c\Delta t')^2 - (\Delta x')^2$.</p>
+    </div>
+    <p>Check this with the worked example in section 5, measuring from the origin (event 0 at $x = t = 0$). In S: $c\Delta t = 600$ m and $\Delta x = 900$ m, so $(\Delta s)^2 = 600^2 - 900^2 = -4.5\times10^{5}\ \text{m}^2$. In S′: $c\Delta t' = 75$ m and $\Delta x' = 675$ m, so $(\Delta s)^2 = 75^2 - 675^2 = -4.5\times10^{5}\ \text{m}^2$. They agree, as they must.</p>
+    <p>The sign tells you how the events can be related. If $(\Delta s)^2 &gt; 0$, a signal slower than light could travel from one event to the other, so one could cause the other, and all observers agree on their order. If $(\Delta s)^2 &lt; 0$, as here, nothing could travel between them, and different observers can disagree about which happened first.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="dilation">8. Proper time and time dilation</h2>
+    <p>The <strong>proper time</strong> $\Delta t_0$ between two events is the time measured in the frame where both events happen <strong>at the same place</strong>. For example, two ticks of a clock, measured by an observer moving with the clock. Any other observer measures a <em>longer</em> time:</p>
+    <div class="key">
+      $$\Delta t = \gamma\,\Delta t_0$$
+      <p style="margin:0"><strong>Time dilation:</strong> a clock moving relative to you runs slow. Since $\gamma \ge 1$, the proper time is always the <strong>shortest</strong> time between the events.</p>
+    </div>
+    <details class="check">
+      <summary>Where does time dilation come from? (A light clock: interesting, but the derivation is not required)</summary>
+      <p>Imagine a clock in which a pulse of light bounces between two mirrors a distance $L$ apart. For someone moving with the clock, each tick takes $\Delta t_0 = \frac{2L}{c}$. For someone watching it move past at speed $v$, the light travels a longer, zigzag path. Light still travels at $c$ (postulate 2), so each tick takes longer. Using Pythagoras on the zigzag: $(c\Delta t)^2 = (c\Delta t_0)^2 + (v\Delta t)^2$, which rearranges to $\Delta t = \gamma\,\Delta t_0$.</p>
+    </details>
+    <div class="worked">
+      <h3>Worked example: a journey to a star</h3>
+      <p>A spacecraft travels to a star at $0.80c$. The astronaut's clock shows that the journey takes 3.0 years. How long does it take according to clocks on the Earth?</p>
+      <p>The departure and the arrival both happen at the astronaut's position, so 3.0 years is the proper time. $\gamma = \dfrac{1}{\sqrt{1 - 0.80^2}} = 1.67$.</p>
+      <p>$\Delta t = \gamma\,\Delta t_0 = 1.67 \times 3.0 = 5.0$ years. The astronaut ages two years less than people on the Earth during the trip.</p>
+    </div>
+    <p><strong>The "twin paradox":</strong> if one twin travels to a star and back at high speed, they return younger than the twin who stayed home. Each twin sees the other's clock running slow during the steady parts of the journey, so who is "really" younger? The situations are not symmetrical: only the travelling twin changes inertial frame when turning round to come home. The stay-at-home twin remains in one inertial frame throughout and ages more.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="contraction">9. Proper length and length contraction</h2>
+    <p>The <strong>proper length</strong> $L_0$ of an object is its length measured in the frame where it is <strong>at rest</strong>. An observer for whom it is moving measures a <em>shorter</em> length, along the direction of motion only:</p>
+    <div class="key">
+      $$L = \frac{L_0}{\gamma}$$
+      <p style="margin:0"><strong>Length contraction:</strong> moving objects are shortened in the direction of motion. Lengths at right angles to the motion are unchanged.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: a passing spacecraft</h3>
+      <p>A spacecraft is 120 m long when measured at rest. It flies past a space station at $0.60c$. How long is it according to the station?</p>
+      <p>$\gamma = 1.25$, so $L = \dfrac{L_0}{\gamma} = \dfrac{120}{1.25} = 96$ m. The crew still measure their own craft as 120 m. For them, the <em>station</em> is moving and contracted.</p>
+    </div>
+    <p>Time dilation and length contraction always go together. In the star-journey example, Earth observers say the trip takes 5.0 years because the astronaut's clock runs slow. The astronaut says it takes only 3.0 years because, in their frame, the distance to the star is length-contracted. Both descriptions agree about what the astronaut's clock reads on arrival.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="simultaneity">10. The relativity of simultaneity</h2>
+    <p>Two events that happen <strong>at the same time but in different places</strong> in one frame are <strong>not simultaneous</strong> in a frame moving relative to it. This follows directly from the $\frac{vx}{c^2}$ term in the Lorentz transformation for time.</p>
+    <p><strong>A thought experiment:</strong> lightning strikes both ends of a moving train at the same instant, according to an observer standing on the platform at the midpoint. The light from both strikes reaches her together. A passenger at the middle of the train is moving towards the front strike and away from the rear one, so light from the front reaches her first. Light travels at $c$ in her frame too (postulate 2), and she is at the midpoint of her train. So she concludes that the front strike happened <em>first</em>. Neither observer is wrong.</p>
+    <div class="worked">
+      <h3>Worked example: simultaneous in one frame, not in another</h3>
+      <p>In frame S, two lamps flash at the same time, $t = 0$: one at $x = 0$ and one at $x = 600$ m. Frame S′ moves at $0.60c$ in the $+x$ direction. When does each flash happen in S′?</p>
+      <p>Lamp at $x = 0$: $t' = \gamma(0 - 0) = 0$.</p>
+      <p>Lamp at $x = 600$ m: $t' = \gamma\left(0 - \dfrac{vx}{c^2}\right) = -1.25 \times \dfrac{0.60 \times 600}{3.00\times10^{8}} = -1.5\ \mu\text{s}$.</p>
+      <p>In S′, the far lamp flashes 1.5 µs <em>before</em> the near one. The flashes are simultaneous in S but not in S′.</p>
+    </div>
+    <p>Events that happen at the <em>same place</em> and the same time (a collision, say) are simultaneous for everyone. Only events separated in space can disagree.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="diagrams">11. Space-time diagrams</h2>
+    <p>A <strong>space-time diagram</strong> plots position $x$ horizontally and $ct$ vertically, so that both axes are in metres. Each event is a point. The path of an object through space-time is its <strong>world line</strong>:</p>
+    <ul>
+      <li>An object <strong>at rest</strong> has a vertical world line: it stays at the same $x$ as time passes.</li>
+      <li>An object moving at <strong>constant velocity</strong> has a straight world line tilted from the $ct$ axis by an angle $\theta$, where:</li>
+    </ul>
+    <div class="key">$$\tan\theta = \frac{v}{c}$$</div>
+    <ul>
+      <li><strong>Light</strong> has $v = c$, so its world line is at 45°. Nothing with mass can have a world line closer to the $x$-axis than this.</li>
+    </ul>
+    <h3>Two frames on one diagram</h3>
+    <p>For a frame S′ moving at speed $v$, the $ct'$ axis is the world line of the origin of S′, tilted at $\theta$ from $ct$. The $x'$ axis, which is the set of events at $t' = 0$, is tilted by the <strong>same angle</strong> $\theta$ up from the $x$ axis. The light line stays at 45°, halfway between the two axes, so light has speed $c$ in both frames.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 260" role="img" aria-labelledby="a5ct">
+        <title id="a5ct">Space-time diagram with x and ct axes for frame S, and tilted x prime and ct prime axes for a frame S prime moving at 0.6 c, each tilted by 31 degrees towards the 45 degree light line. Events A and B are at the same height, so they are simultaneous in S. Dashed lines through A and B parallel to the x prime axis cross the ct prime axis at different points, marked with dots: B's crossing is lower, so in S prime, B happens before A.</title>
+        <line class="axis" x1="60" y1="230" x2="372" y2="230" marker-end="url(#ah3)"/>
+        <line class="axis" x1="60" y1="230" x2="60" y2="12" marker-end="url(#ah3)"/>
+        <text x="362" y="250">x</text><text x="68" y="22">ct</text>
+        <line class="l2" x1="60" y1="230" x2="186" y2="20" marker-end="url(#ah2)"/>
+        <text class="t2" x="190" y="34">ct′</text>
+        <line class="l2" x1="60" y1="230" x2="362" y2="49" marker-end="url(#ah2)"/>
+        <text class="t2" x="346" y="44">x′</text>
+        <line class="axis dash" x1="60" y1="230" x2="270" y2="20" style="opacity:0.6"/>
+        <text x="274" y="28" style="font-size:13px">light</text>
+        <path class="axis" d="M60 190 A 40 40 0 0 1 80.6 195.7"/><text x="72" y="182" style="font-size:13px">θ</text>
+        <path class="axis" d="M100 230 A 40 40 0 0 0 94.3 209.4"/><text x="104" y="222" style="font-size:13px">θ</text>
+        <line class="grid dash" x1="60" y1="80" x2="300" y2="80"/>
+        <line class="l1 thin dash" x1="60" y1="110" x2="190" y2="32"/>
+        <line class="l1 thin dash" x1="88.1" y1="183.1" x2="360" y2="20"/>
+        <circle cx="172.5" cy="42.5" r="4" class="f1"/><circle cx="88.1" cy="183.1" r="4" class="f1"/>
+        <circle cx="110" cy="80" r="6" class="f3"/><text x="104" y="72" text-anchor="end">A</text>
+        <circle cx="260" cy="80" r="6" class="f3"/><text x="268" y="100">B</text>
+      </svg>
+      <figcaption>Frame S′ moving at $0.60c$ ($\theta = 31°$). A and B lie on a horizontal line, so they are simultaneous in S. <span class="key-1">Lines of equal $t'$</span> are parallel to the $x'$ axis. The one through B meets the $ct'$ axis lower down (dots), so in S′, B happens first.</figcaption>
+    </figure>
+    <ul>
+      <li>To read an event's coordinates in S′, draw lines through it <strong>parallel</strong> to the $x'$ and $ct'$ axes, and see where they cross the other axis.</li>
+      <li><strong>Simultaneity:</strong> events on a line parallel to the $x$ axis are simultaneous in S. Events on a line parallel to the $x'$ axis are simultaneous in S′. These are different lines, so simultaneity depends on the frame.</li>
+      <li><strong>Scales:</strong> the units along the tilted axes are <em>not</em> the same length as on the $x$ and $ct$ axes. They are fixed by lines of constant space-time interval (hyperbolas, $(ct)^2 - x^2 = \text{constant}$). This is how time dilation and length contraction show up on the diagram.</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: angle of a world line</h3>
+      <p>A spacecraft moves at $0.50c$. At what angle to the $ct$ axis is its world line?</p>
+      <p>$\tan\theta = \dfrac{v}{c} = 0.50$, so $\theta = 27°$. (For light, $\tan\theta = 1$ and $\theta = 45°$.)</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="muons">12. Evidence: muon decay</h2>
+    <p><strong>Muons</strong> are unstable particles made when cosmic rays hit the upper atmosphere, about 10 km up. At rest, a muon's average lifetime is about 2.2 µs. Typical cosmic-ray muons travel at about $0.995c$, so $\gamma \approx 10$.</p>
+    <div class="worked">
+      <h3>Worked example: how do muons reach the ground?</h3>
+      <p><strong>Without relativity:</strong> in 2.2 µs, a muon at $0.995c$ travels $0.995 \times 3.00\times10^{8} \times 2.2\times10^{-6} = 660$ m. Very few should survive the 10 km trip to the ground. But large numbers are detected at sea level.</p>
+      <p><strong>In the Earth's frame (time dilation):</strong> the muon's clock runs slow. Its lifetime becomes $\gamma\,\Delta t_0 = 10 \times 2.2 = 22\ \mu\text{s}$, long enough to travel about 6.6 km on average, so many reach the ground.</p>
+      <p><strong>In the muon's frame (length contraction):</strong> its lifetime is the normal 2.2 µs, but the atmosphere is rushing past at $0.995c$. The 10 km of atmosphere is contracted to $\frac{10}{10} = 1.0$ km, so many muons cross it before decaying.</p>
+      <p>Both explanations give the same prediction, and experiments counting muons at different altitudes confirm it. This is strong evidence for both time dilation and length contraction.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">13. Common mistakes</h2>
+    <ul>
+      <li><strong>Getting proper time the wrong way round.</strong> Proper time is measured where the two events happen at the same place, and it is the <em>shortest</em> time. Then $\Delta t = \gamma\,\Delta t_0$ is longer.</li>
+      <li><strong>Getting proper length the wrong way round.</strong> Proper length is measured in the object's own rest frame, and it is the <em>longest</em> length. Then $L = L_0/\gamma$ is shorter.</li>
+      <li><strong>Adding velocities the Galilean way at high speeds,</strong> giving answers above $c$.</li>
+      <li><strong>Forgetting the signs</strong> in the velocity addition formula, especially for objects moving towards each other.</li>
+      <li><strong>Mixing units</strong> in $\frac{vx}{c^2}$. Use metres, seconds and $\text{m s}^{-1}$, and watch out for µs.</li>
+      <li><strong>Thinking only one observer is "right".</strong> Each observer's measurements are correct in their own frame. They agree on $c$ and on the space-time interval.</li>
+      <li><strong>Drawing the $x'$ axis tilted downwards.</strong> On a space-time diagram, both the $ct'$ and $x'$ axes tilt <em>towards</em> the 45° light line.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">14. Check your understanding</h2>
+    <details class="check">
+      <summary>Is a car accelerating away from traffic lights an inertial reference frame?</summary>
+      <p>No. An inertial frame is non-accelerating. In the car, a loose object seems to slide backwards with no force pushing it, so Newton's first law doesn't hold in that frame.</p>
+    </details>
+    <details class="check">
+      <summary>Find $\gamma$ for $v = 0.80c$, and say what it tells you about a clock moving at this speed.</summary>
+      <p>$\gamma = \frac{1}{\sqrt{1 - 0.64}} = \frac{1}{0.6} = 1.67$. The moving clock runs slow: 1 s on it takes 1.67 s according to a stationary observer.</p>
+    </details>
+    <details class="check">
+      <summary>A rocket moving at $0.80c$ fires a probe forwards at $0.50c$ relative to the rocket. How fast is the probe moving relative to the Earth?</summary>
+      <p>Take S′ as the rocket ($v = 0.80c$) and use the inverse formula, $u = \frac{u' + v}{1 + u'v/c^2} = \frac{1.30c}{1 + 0.40} = 0.93c$. Not $1.30c$.</p>
+    </details>
+    <details class="check">
+      <summary>Two events happen at the same place in frame S, 4.0 µs apart. In frame S′ they are 5.0 µs apart. Which time is the proper time, and what is $\gamma$?</summary>
+      <p>4.0 µs is the proper time (same place, shortest time). $\gamma = \frac{5.0}{4.0} = 1.25$, so S′ moves at $0.60c$ relative to S.</p>
+    </details>
+    <details class="check">
+      <summary>On a space-time diagram, what does a world line at 20° to the $ct$ axis represent?</summary>
+      <p>An object moving at constant velocity with $v = c\tan 20° = 0.36c$.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=A.5">Practise A.5 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>

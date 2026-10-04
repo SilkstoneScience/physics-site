@@ -1350,5 +1350,308 @@
         ]
       }
     ]
+  },
+  {
+    "id": "A5-001",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "HL",
+    "stem": "<p>Which describes an inertial frame of reference?</p>",
+    "options": [
+      "A frame that is at rest relative to the Earth",
+      "A frame that is at rest or moving with constant velocity",
+      "A frame that moves at the speed of light",
+      "A frame in which no forces act on any object"
+    ],
+    "answer": 1,
+    "explanation": "An inertial frame is simply one that isn't accelerating: at rest or moving at constant velocity, relative to any other inertial frame. The Earth's surface (A) is only approximately inertial, and there's nothing special about it. Forces can act on objects in an inertial frame (D); what matters is that Newton's first law holds there."
+  },
+  {
+    "id": "A5-002",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "HL",
+    "stem": "<p>Which of the following is one of the two postulates of special relativity?</p>",
+    "options": [
+      "The speed of light in a vacuum is the same for all inertial observers.",
+      "Time passes at the same rate for all observers.",
+      "Nothing can travel faster than the speed of light.",
+      "Moving objects are shorter than when they are at rest."
+    ],
+    "answer": 0,
+    "explanation": "Einstein's postulates are (1) the laws of physics are the same in all inertial frames and (2) the speed of light is the same for all inertial observers. C and D are <em>consequences</em> of the postulates, not postulates themselves. B is Newton's assumption, which special relativity shows is wrong."
+  },
+  {
+    "id": "A5-003",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>On a straight road, car A travels east at 25 $\\text{m s}^{-1}$ and truck B travels west at 15 $\\text{m s}^{-1}$. Taking east as positive, what is the velocity of B relative to A, according to Galilean relativity?</p>",
+    "options": [
+      "−40 $\\text{m s}^{-1}$",
+      "−10 $\\text{m s}^{-1}$",
+      "+10 $\\text{m s}^{-1}$",
+      "+40 $\\text{m s}^{-1}$"
+    ],
+    "answer": 0,
+    "explanation": "Use $u' = u - v$, with A's frame moving at $v = +25\\ \\text{m s}^{-1}$ and B's velocity $u = -15\\ \\text{m s}^{-1}$: $u' = -15 - 25 = -40\\ \\text{m s}^{-1}$. B approaches A at 40 $\\text{m s}^{-1}$, heading west. −10 comes from forgetting that B's velocity is negative."
+  },
+  {
+    "id": "A5-004",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>What is the Lorentz factor $\\gamma$ for an object moving at $0.60c$?</p>",
+    "options": [
+      "0.80",
+      "1.25",
+      "1.56",
+      "1.67"
+    ],
+    "answer": 1,
+    "explanation": "$\\gamma = \\frac{1}{\\sqrt{1 - 0.60^2}} = \\frac{1}{\\sqrt{0.64}} = \\frac{1}{0.80} = 1.25$. 0.80 is $\\sqrt{1 - v^2/c^2}$, before taking the reciprocal; $\\gamma$ can never be less than 1. 1.56 forgets the square root ($1/0.64$). 1.67 is $\\gamma$ for $0.80c$."
+  },
+  {
+    "id": "A5-005",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>An unstable particle has a lifetime of 2.0 µs when at rest. It moves through a laboratory at $0.80c$. What is its lifetime measured in the laboratory?</p>",
+    "options": [
+      "1.2 µs",
+      "2.0 µs",
+      "3.3 µs",
+      "5.6 µs"
+    ],
+    "answer": 2,
+    "explanation": "The 2.0 µs lifetime is the proper time, measured in the particle's own frame. $\\gamma = 1.67$ at $0.80c$, so the laboratory measures $\\Delta t = \\gamma\\,\\Delta t_0 = 1.67 \\times 2.0 = 3.3\\ \\mu\\text{s}$. 1.2 µs divides by $\\gamma$ instead of multiplying: a moving clock runs <em>slow</em>, so the lab sees it live longer."
+  },
+  {
+    "id": "A5-006",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A rod has a length of 2.0 m when at rest. It moves along its length at $0.866c$, where $\\gamma = 2.0$. What length does a stationary observer measure?</p>",
+    "options": [
+      "1.0 m",
+      "1.7 m",
+      "2.0 m",
+      "4.0 m"
+    ],
+    "answer": 0,
+    "explanation": "2.0 m is the proper length. Moving objects are contracted along their motion: $L = \\frac{L_0}{\\gamma} = \\frac{2.0}{2.0} = 1.0$ m. 4.0 m multiplies by $\\gamma$ (the time-dilation pattern), which gives a length longer than the proper length: impossible. 1.7 m multiplies by $\\frac{v}{c}$."
+  },
+  {
+    "id": "A5-007",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A rocket moves away from the Earth at $0.50c$. It fires a probe straight ahead at $0.50c$ relative to the rocket. What is the speed of the probe relative to the Earth?</p>",
+    "options": [
+      "0.25c",
+      "0.50c",
+      "0.80c",
+      "1.0c"
+    ],
+    "answer": 2,
+    "explanation": "Relativistic velocity addition: $u = \\frac{u' + v}{1 + u'v/c^2} = \\frac{0.50c + 0.50c}{1 + 0.25} = \\frac{1.0c}{1.25} = 0.80c$. 1.0c is the Galilean answer, which is far too high at these speeds. 0.25c comes from multiplying the two speeds."
+  },
+  {
+    "id": "A5-008",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A lamp fixed inside a spacecraft flashes twice. An astronaut in the spacecraft and an observer on the Earth both measure the time between the flashes. Which statement is correct?</p>",
+    "options": [
+      "The Earth observer measures the proper time, which is shorter.",
+      "The astronaut measures the proper time, which is longer.",
+      "They both measure the same time.",
+      "The astronaut measures the proper time, which is shorter."
+    ],
+    "answer": 3,
+    "explanation": "Both flashes happen at the same place in the spacecraft's frame, so the astronaut measures the proper time. The proper time is always the shortest: the Earth observer measures $\\gamma$ times longer. Option B gets the frame right but the comparison wrong."
+  },
+  {
+    "id": "A5-009",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>On a space-time diagram, the world line of a spacecraft makes an angle of 37° with the $ct$ axis. What is the speed of the spacecraft?</p>",
+    "options": [
+      "0.60c",
+      "0.75c",
+      "0.80c",
+      "1.33c"
+    ],
+    "answer": 1,
+    "explanation": "$\\tan\\theta = \\frac{v}{c}$, so $v = c\\tan 37° = 0.75c$. 0.60c uses $\\sin 37°$ and 0.80c uses $\\cos 37°$. 1.33c measures the angle from the $x$ axis instead of the $ct$ axis, which gives an impossible speed above $c$."
+  },
+  {
+    "id": "A5-010",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>In frame S, two events are separated by a distance of 400 m and a time of 2.0 µs. What is the square of the space-time interval, $(\\Delta s)^2$, between them?</p>",
+    "options": [
+      "$-5.2\\times10^{5}\\ \\text{m}^2$",
+      "$-2.0\\times10^{5}\\ \\text{m}^2$",
+      "$+2.0\\times10^{5}\\ \\text{m}^2$",
+      "$+5.2\\times10^{5}\\ \\text{m}^2$"
+    ],
+    "answer": 2,
+    "explanation": "$c\\Delta t = 3.00\\times10^{8} \\times 2.0\\times10^{-6} = 600$ m. $(\\Delta s)^2 = (c\\Delta t)^2 - (\\Delta x)^2 = 600^2 - 400^2 = 2.0\\times10^{5}\\ \\text{m}^2$. The negative answer swaps the order of the terms. $5.2\\times10^{5}$ adds the squares, as Pythagoras would, but the space-time interval has a minus sign."
+  },
+  {
+    "id": "A5-011",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>Two events happen at the same time in frame S, at different positions on the $x$-axis. Frame S′ moves along the $x$-axis relative to S. Which statement is correct for an observer in S′?</p>",
+    "options": [
+      "The events are also simultaneous in S′.",
+      "The events are simultaneous in S′ only if S′ moves slowly.",
+      "The events happen at the same place in S′.",
+      "The events are not simultaneous in S′."
+    ],
+    "answer": 3,
+    "explanation": "From $t' = \\gamma\\left(t - \\frac{vx}{c^2}\\right)$, events with the same $t$ but different $x$ have different $t'$. So they are not simultaneous in S′. At low speeds the difference is tiny, but it isn't zero (B). Only events at the same place <em>and</em> the same time are simultaneous in every frame."
+  },
+  {
+    "id": "A5-012",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>Muons travel towards the ground at $0.98c$, where $\\gamma = 5.0$. Their mean lifetime at rest is 2.2 µs. In the Earth's frame, how far does a muon travel in one mean lifetime?</p>",
+    "options": [
+      "0.13 km",
+      "0.65 km",
+      "1.1 km",
+      "3.2 km"
+    ],
+    "answer": 3,
+    "explanation": "In the Earth's frame, the muon's lifetime is dilated: $\\gamma\\,\\Delta t_0 = 5.0 \\times 2.2 = 11\\ \\mu\\text{s}$. Distance $= 0.98 \\times 3.00\\times10^{8} \\times 11\\times10^{-6} = 3.2$ km. 0.65 km ignores time dilation; that's the answer Newtonian physics would give. 0.13 km wrongly divides by $\\gamma$."
+  },
+  {
+    "id": "A5-013",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>Frame S′ moves at $0.80c$ in the $+x$ direction relative to frame S. The origins coincide at $t = t' = 0$. In frame S, an event E happens at $x = 1500$ m and $t = 10\\ \\mu\\text{s}$.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the Lorentz factor $\\gamma$.",
+        "marks": 1,
+        "markscheme": [
+          "$\\gamma = \\dfrac{1}{\\sqrt{1 - 0.80^2}} = 1.67$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the position $x'$ of event E in frame S′.",
+        "marks": 2,
+        "markscheme": [
+          "$vt = 0.80 \\times 3.00\\times10^{8} \\times 10\\times10^{-6} = 2400$ m ✓",
+          "$x' = 1.67(1500 - 2400) = -1500$ m ✓ (allow ECF from (a))"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Calculate the time $t'$ of event E in frame S′.",
+        "marks": 2,
+        "markscheme": [
+          "$\\dfrac{vx}{c^2} = \\dfrac{0.80 \\times 1500}{3.00\\times10^{8}} = 4.0\\ \\mu\\text{s}$ ✓",
+          "$t' = 1.67(10 - 4.0) = 10\\ \\mu\\text{s}$ ✓ (allow ECF)"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Show that the space-time interval between the origin event ($x = t = 0$) and event E is the same in both frames.",
+        "marks": 2,
+        "markscheme": [
+          "In S: $(\\Delta s)^2 = (3.00\\times10^{8} \\times 10\\times10^{-6})^2 - 1500^2 = 3000^2 - 1500^2 = 6.75\\times10^{6}\\ \\text{m}^2$ ✓",
+          "In S′: $(\\Delta s)^2 = 3000^2 - (-1500)^2 = 6.75\\times10^{6}\\ \\text{m}^2$, the same ✓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "A5-014",
+    "theme": "A",
+    "topic": "A.5",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A star is 6.0 light-years from the Earth, measured in the Earth's frame. A spacecraft travels from the Earth to the star at a constant speed of $0.60c$.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the time taken for the journey according to observers on the Earth.",
+        "marks": 1,
+        "markscheme": [
+          "$\\Delta t = \\dfrac{6.0\\ \\text{ly}}{0.60c} = 10$ years ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "State which observer measures the proper time for the journey. Give a reason.",
+        "marks": 1,
+        "markscheme": [
+          "The crew / an observer in the spacecraft, because the departure and the arrival both happen at the spacecraft's position ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Calculate the time taken for the journey according to the crew.",
+        "marks": 2,
+        "markscheme": [
+          "$\\gamma = 1.25$ ✓",
+          "$\\Delta t_0 = \\dfrac{10}{1.25} = 8.0$ years ✓ (allow ECF)"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Calculate the distance from the Earth to the star in the crew's frame, and show that it is consistent with your answer to (c).",
+        "marks": 2,
+        "markscheme": [
+          "$L = \\dfrac{L_0}{\\gamma} = \\dfrac{6.0}{1.25} = 4.8$ ly ✓",
+          "Time $= \\dfrac{4.8\\ \\text{ly}}{0.60c} = 8.0$ years, which agrees with (c) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "On a space-time diagram for the Earth's frame, the spacecraft's world line is a straight line. Calculate the angle between this line and the $ct$ axis.",
+        "marks": 1,
+        "markscheme": [
+          "$\\theta = \\tan^{-1}(0.60) = 31°$ ✓"
+        ]
+      }
+    ]
   }
 ]
