@@ -677,5 +677,373 @@
         "markscheme": ["The maxima are much sharper/narrower and brighter, so their angles can be measured more precisely ✓ (accept: larger angles, so smaller percentage uncertainty)"]
       }
     ]
+  },
+  {
+    "id": "C4-001",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>How is a standing wave formed?</p>",
+    "options": [
+      "Two identical waves travelling in the same direction superpose.",
+      "Two identical waves travelling in opposite directions superpose.",
+      "A single wave travels back and forth between two points without reflecting.",
+      "Two waves of different frequencies travelling in opposite directions superpose."
+    ],
+    "answer": 1,
+    "explanation": "A standing wave is the superposition of two waves with the same frequency, wavelength and amplitude travelling in <em>opposite</em> directions, usually a wave and its reflection. Waves in the same direction (A) just add to make another travelling wave. Different frequencies (D) give a pattern that keeps changing, not a steady standing wave."
+  },
+  {
+    "id": "C4-002",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>A standing wave has wavelength $\\lambda$. What is the distance between two neighbouring nodes?</p>",
+    "options": [
+      "$\\dfrac{\\lambda}{4}$",
+      "$\\dfrac{\\lambda}{2}$",
+      "$\\lambda$",
+      "$2\\lambda$"
+    ],
+    "answer": 1,
+    "explanation": "Neighbouring nodes are separated by one loop, which is half a wavelength. $\\frac{\\lambda}{4}$ is the distance from a node to the nearest antinode. $\\lambda$ is a common slip: it is the distance between nodes two loops apart."
+  },
+  {
+    "id": "C4-003",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Which statement about a standing wave on a string is correct?</p>",
+    "options": [
+      "All points on the string oscillate with the same amplitude.",
+      "Energy is transferred along the string from one end to the other.",
+      "Points between two neighbouring nodes oscillate in phase.",
+      "Antinodes are points where the string is always at zero displacement."
+    ],
+    "answer": 2,
+    "explanation": "All the points in one loop move up and down together, so they are in phase (with different amplitudes). A describes a travelling wave. B is wrong: the two travelling waves carry equal energy in opposite directions, so there is no net transfer. D describes nodes, not antinodes."
+  },
+  {
+    "id": "C4-004",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>The diagram shows a standing wave on a string fixed at both ends, at two different moments. Points P and Q are on the string.</p><p>What is the phase difference between the oscillations of P and Q?</p>",
+    "diagram": "questions/diagrams/c4-loops-pq.svg",
+    "diagramAlt": "A string fixed at both ends vibrating with two loops, shown at both extreme positions. Point P is in the left loop and point Q is in the right loop.",
+    "options": [
+      "0",
+      "$\\dfrac{\\pi}{4}$",
+      "$\\dfrac{\\pi}{2}$",
+      "$\\pi$"
+    ],
+    "answer": 3,
+    "explanation": "P and Q are in neighbouring loops, which always move in opposite directions. So they are in antiphase: a phase difference of $\\pi$. The phase difference does not depend on how far apart they are within the loops, so answers based on distance, such as $\\frac{\\pi}{4}$ or $\\frac{\\pi}{2}$, are wrong. 0 would be correct for two points in the <em>same</em> loop."
+  },
+  {
+    "id": "C4-005",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A string of length 1.2 m is fixed at both ends. What is the wavelength of its third harmonic?</p>",
+    "options": [
+      "0.40 m",
+      "0.80 m",
+      "1.2 m",
+      "3.6 m"
+    ],
+    "answer": 1,
+    "explanation": "The third harmonic has three loops, so $L = 3 \\times \\frac{\\lambda}{2}$ and $\\lambda = \\frac{2L}{3} = \\frac{2 \\times 1.2}{3} = 0.80$ m. 0.40 m is the length of one loop ($\\frac{L}{3}$), which is only half a wavelength. 3.6 m comes from multiplying instead of dividing."
+  },
+  {
+    "id": "C4-006",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>The first harmonic of a string fixed at both ends has a frequency of 120 Hz. What is the frequency of its third harmonic?</p>",
+    "options": [
+      "40 Hz",
+      "240 Hz",
+      "360 Hz",
+      "480 Hz"
+    ],
+    "answer": 2,
+    "explanation": "For a string fixed at both ends, $f_n = nf_1$, so $f_3 = 3 \\times 120 = 360$ Hz. 40 Hz divides instead of multiplying. 240 Hz is the second harmonic. 480 Hz comes from counting the four nodes of the third harmonic instead of its three loops."
+  },
+  {
+    "id": "C4-007",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A pipe of length 0.50 m is closed at one end and open at the other. The speed of sound in air is 340 $\\text{m s}^{-1}$. What is the frequency of the first harmonic?</p>",
+    "options": [
+      "170 Hz",
+      "340 Hz",
+      "510 Hz",
+      "680 Hz"
+    ],
+    "answer": 0,
+    "explanation": "With a node at the closed end and an antinode at the open end, the first harmonic fits a quarter of a wavelength: $\\lambda = 4L = 2.0$ m, so $f = \\frac{v}{\\lambda} = \\frac{340}{2.0} = 170$ Hz. 340 Hz is the answer for a pipe open at both ends ($\\lambda = 2L$). 510 Hz is the third harmonic of the closed pipe."
+  },
+  {
+    "id": "C4-008",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "SL",
+    "stem": "<p>A pipe closed at one end has a first harmonic of 200 Hz. Which of the following is <strong>not</strong> a frequency at which the pipe can resonate?</p>",
+    "options": [
+      "200 Hz",
+      "600 Hz",
+      "1000 Hz",
+      "1200 Hz"
+    ],
+    "answer": 3,
+    "explanation": "A pipe closed at one end only has odd harmonics: $f_1, 3f_1, 5f_1, \\ldots$ = 200, 600, 1000, 1400 Hz and so on. 1200 Hz is $6f_1$, an even harmonic, so it can't occur. Students who think all harmonics are possible would find no correct answer here."
+  },
+  {
+    "id": "C4-009",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A pipe of length $L$ is open at both ends. What is the wavelength of the first harmonic?</p>",
+    "options": [
+      "$\\dfrac{L}{2}$",
+      "$L$",
+      "$2L$",
+      "$4L$"
+    ],
+    "answer": 2,
+    "explanation": "Both open ends are antinodes. The simplest pattern has one node in the middle, so the pipe holds half a wavelength: $L = \\frac{\\lambda}{2}$, giving $\\lambda = 2L$. $4L$ is the answer for a pipe closed at one end. $L$ is the wavelength of the <em>second</em> harmonic."
+  },
+  {
+    "id": "C4-010",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>Which statement describes a critically damped oscillator after it is displaced and released?</p>",
+    "options": [
+      "It keeps oscillating, with an amplitude that slowly decreases.",
+      "It oscillates with a constant amplitude.",
+      "It returns to equilibrium slowly, without oscillating.",
+      "It returns to equilibrium in the shortest possible time, without oscillating."
+    ],
+    "answer": 3,
+    "explanation": "Critical damping returns the system to equilibrium as fast as possible without overshooting. A describes light damping. C describes heavy damping, which also doesn't oscillate but is slower. B describes an undamped oscillator."
+  },
+  {
+    "id": "C4-011",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>The damping of a driven oscillator is increased. How does the graph of amplitude against driving frequency change?</p>",
+    "options": [
+      "The peak becomes lower and broader, and moves to a slightly lower frequency.",
+      "The peak becomes lower and broader, because the natural frequency of the system decreases.",
+      "The peak becomes higher and narrower, and stays at the natural frequency.",
+      "The peak becomes lower and narrower, and moves to a slightly higher frequency."
+    ],
+    "answer": 0,
+    "explanation": "More damping removes more energy each cycle, so the maximum amplitude falls and the response is spread over a wider range of frequencies. The peak (resonant) frequency shifts slightly below the natural frequency. B is tempting, but the natural frequency depends only on the system (for example its mass and stiffness), not on the damping."
+  },
+  {
+    "id": "C4-012",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>When does resonance occur in a driven system?</p>",
+    "options": [
+      "When the driving frequency equals the natural frequency of the system.",
+      "When the driving force is as large as possible.",
+      "When the system has no damping at all.",
+      "When the driving frequency is twice the natural frequency of the system."
+    ],
+    "answer": 0,
+    "explanation": "Resonance happens when the driving frequency matches the natural frequency: the pushes are always in step with the motion, so energy is transferred most efficiently and the amplitude is greatest. A large force (B) gives a bigger amplitude at any frequency, but that isn't resonance. Damping (C) reduces the peak but doesn't stop resonance."
+  },
+  {
+    "id": "C4-013",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "SL",
+    "stem": "<p>A tuning fork of frequency 440 Hz is held above a tube of water. The water level is lowered. The air column resonates at two lengths that differ by 0.39 m. What is the speed of sound in the air?</p>",
+    "options": [
+      "86 $\\text{m s}^{-1}$",
+      "172 $\\text{m s}^{-1}$",
+      "343 $\\text{m s}^{-1}$",
+      "686 $\\text{m s}^{-1}$"
+    ],
+    "answer": 2,
+    "explanation": "Neighbouring resonances of a pipe closed at one end ($\\frac{\\lambda}{4}$, $\\frac{3\\lambda}{4}$, …) differ by half a wavelength. So $\\lambda = 2 \\times 0.39 = 0.78$ m and $v = f\\lambda = 440 \\times 0.78 = 343\\ \\text{m s}^{-1}$. 172 $\\text{m s}^{-1}$ treats 0.39 m as a whole wavelength. 686 $\\text{m s}^{-1}$ treats it as a quarter-wavelength."
+  },
+  {
+    "id": "C4-014",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "SL",
+    "stem": "<p>A string is fixed at one end and attached to a light ring that slides freely on a rod at the other end. Its first harmonic has a frequency of 50 Hz. What is the next higher frequency at which it forms a standing wave?</p>",
+    "options": [
+      "100 Hz",
+      "150 Hz",
+      "200 Hz",
+      "250 Hz"
+    ],
+    "answer": 1,
+    "explanation": "With a node at the fixed end and an antinode at the free end, only odd numbers of quarter-wavelengths fit, so only odd harmonics exist: 50, 150, 250 Hz, … The next one after 50 Hz is the third harmonic, 150 Hz. 100 Hz would be the second harmonic of a string fixed at both ends."
+  },
+  {
+    "id": "C4-015",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Which statement about the energy in a standing wave on a string is correct?</p>",
+    "options": [
+      "There is no net transfer of energy along the string.",
+      "Energy is transferred from the nodes to the antinodes.",
+      "Energy is transferred along the string at the wave speed.",
+      "Every point on the string has the same energy."
+    ],
+    "answer": 0,
+    "explanation": "The standing wave is made of two travelling waves carrying equal energy in opposite directions, so the net energy transfer is zero. The energy is stored in the oscillating string. Points have different amplitudes, so they have different energies (D is wrong). Nodes don't move at all, so they have no energy to transfer (B)."
+  },
+  {
+    "id": "C4-016",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>A standing sound wave is set up in a pipe. What is the displacement of the air at a <strong>closed</strong> end of the pipe?</p>",
+    "options": [
+      "It is always at a maximum.",
+      "It equals the amplitude of the sound source.",
+      "It is half of the maximum displacement.",
+      "It is always zero."
+    ],
+    "answer": 3,
+    "explanation": "Air touching a closed end is pressed against a solid wall and can't move, so the closed end is a displacement node: its displacement is always zero. Open ends are displacement antinodes, which is where the displacement is greatest (A)."
+  },
+  {
+    "id": "C4-017",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A string of length 0.80 m is fixed at both ends. Waves travel along the string at 240 $\\text{m s}^{-1}$.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Outline how a standing wave forms on the string when it is plucked.",
+        "marks": 2,
+        "markscheme": [
+          "Waves travel to the ends of the string and are reflected ✓",
+          "The reflected and incident waves (same frequency, wavelength and amplitude, opposite directions) superpose to give a standing wave ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the frequency of the first harmonic.",
+        "marks": 2,
+        "markscheme": [
+          "$\\lambda = 2L = 1.60$ m ✓",
+          "$f = \\dfrac{v}{\\lambda} = \\dfrac{240}{1.60} = 150$ Hz ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Sketch the shape of the string for the third harmonic, and label the positions of all the nodes and antinodes.",
+        "marks": 2,
+        "markscheme": [
+          "Three loops between the fixed ends ✓",
+          "Four nodes labelled (including both ends) and three antinodes labelled at the middle of each loop ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "The string is plucked exactly at its midpoint. Suggest why the second harmonic is not produced.",
+        "marks": 2,
+        "markscheme": [
+          "Plucking at the midpoint makes the midpoint move with a large displacement / makes it an antinode ✓",
+          "The second harmonic has a node at the midpoint, so it cannot be set up / it would need that point to stay still ✓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "C4-018",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A mass on a spring has a natural frequency of 2.0 Hz. It is attached to a vibrator whose frequency can be changed, and its amplitude of oscillation is measured.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "State what is meant by the natural frequency of the system.",
+        "marks": 1,
+        "markscheme": [
+          "The frequency at which the system oscillates freely when displaced and released / with no driving force ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Describe how the amplitude of oscillation changes as the driving frequency is increased slowly from 0.5 Hz to 4.0 Hz.",
+        "marks": 2,
+        "markscheme": [
+          "The amplitude increases to a maximum (resonance) at about 2.0 Hz ✓",
+          "then decreases at higher frequencies (towards zero) ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "The mass is now placed in a beaker of water and the experiment is repeated. State and explain <strong>two</strong> changes to the graph of amplitude against driving frequency.",
+        "marks": 3,
+        "markscheme": [
+          "The water increases the damping / removes more energy each cycle ✓",
+          "The maximum amplitude is smaller ✓",
+          "The peak is broader / the resonant frequency is slightly lower than before ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "State what is meant by critical damping, and give one situation in which it is useful.",
+        "marks": 2,
+        "markscheme": [
+          "The system returns to equilibrium in the shortest possible time without oscillating ✓",
+          "e.g. car shock absorbers / door closers / measuring instruments with a pointer ✓"
+        ]
+      }
+    ]
   }
 ]
