@@ -143,6 +143,59 @@ window.DATA_BOOKLET = {
     note: 'Always use kelvin in $\\overline{E}_k$, $L = \\sigma AT^4$ and Wien\'s law: $T/\\text{K} = \\theta/{}^\\circ\\text{C} + 273$. A temperature <em>change</em> $\\Delta T$ is the same in K and °C. The minus sign in the conduction equation just shows that energy flows towards the colder side.',
     constants: ['kB', 'sigma'],
   },
+  'B.2': {
+    equations: [
+      ['Emissivity', 'e = \\frac{\\text{power radiated per unit area}}{\\sigma T^4}'],
+      ['Albedo', '\\alpha = \\frac{\\text{total scattered power}}{\\text{total incident power}}'],
+      ['Power radiated (from the emissivity)', 'P = e\\sigma AT^4'],
+      ['Mean incoming solar intensity over the Earth', '\\frac{S}{4}'],
+      ['Stefan–Boltzmann law (from B.1)', 'L = \\sigma AT^4'],
+    ],
+    note: 'Energy balance per square metre: $(1 - \\alpha)\\frac{S}{4} = e\\sigma T^4$. Only the first two equations are printed under B.2 in the data booklet; the others follow from them. Temperatures in kelvin.',
+    constants: ['S', 'sigma'],
+  },
+  'B.3': {
+    equations: [
+      ['Pressure', 'P = \\frac{F}{A}'],
+      ['Amount of substance', 'n = \\frac{N}{N_A}'],
+      ['Fixed amount of gas', '\\frac{PV}{T} = \\text{constant}'],
+      ['Ideal gas equation', 'PV = nRT = Nk_BT'],
+      ['Pressure from molecular motion', 'P = \\tfrac{1}{3}\\rho\\overline{v^2}'],
+      ['Internal energy of an ideal monatomic gas', 'U = \\tfrac{3}{2}Nk_BT = \\tfrac{3}{2}nRT'],
+    ],
+    note: 'Temperatures in kelvin, volumes in $\\text{m}^3$ ($1\\ \\text{litre} = 10^{-3}\\ \\text{m}^3$). Use $R$ with moles and $k_B$ with numbers of molecules.',
+    constants: ['NA', 'R', 'kB'],
+  },
+  'B.4': {
+    equations: [
+      ['First law of thermodynamics', 'Q = \\Delta U + W', true],
+      ['Work done by a gas (constant pressure)', 'W = P\\Delta V', true],
+      ['Change in internal energy (monatomic ideal gas)', '\\Delta U = \\tfrac{3}{2}nR\\Delta T = \\tfrac{3}{2}Nk_B\\Delta T', true],
+      ['Entropy change', '\\Delta S = \\frac{\\Delta Q}{T}', true],
+      ['Entropy from microstates', 'S = k_B\\ln\\Omega', true],
+      ['Adiabatic change (monatomic ideal gas)', 'PV^{\\frac{5}{3}} = \\text{constant}', true],
+      ['Efficiency', '\\eta = \\frac{\\text{useful work}}{\\text{energy input}}', true],
+      ['Carnot efficiency', '\\eta_{\\text{Carnot}} = 1 - \\frac{T_c}{T_h}', true],
+    ],
+    note: 'All of B.4 is HL. $Q$ is energy supplied <em>to</em> the gas; $W$ is work done <em>by</em> the gas (negative for a compression). Work done is the area under a p–V graph; the net work in a cycle is the area enclosed. Temperatures in kelvin.',
+    constants: ['R', 'kB'],
+  },
+  'B.5': {
+    equations: [
+      ['Current', 'I = \\frac{\\Delta q}{\\Delta t}'],
+      ['Potential difference', 'V = \\frac{W}{q}'],
+      ['Resistance', 'R = \\frac{V}{I}'],
+      ['Resistivity', '\\rho = \\frac{RA}{L}'],
+      ['Electrical power', 'P = IV = I^2R = \\frac{V^2}{R}'],
+      ['Series: current and p.d.', 'I = I_1 = I_2 = \\ldots \\quad V = V_1 + V_2 + \\ldots'],
+      ['Series: resistance', 'R_s = R_1 + R_2 + \\ldots'],
+      ['Parallel: current and p.d.', 'I = I_1 + I_2 + \\ldots \\quad V = V_1 = V_2 = \\ldots'],
+      ['Parallel: resistance', '\\frac{1}{R_p} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\ldots'],
+      ['Emf and internal resistance', '\\varepsilon = I(R + r)'],
+    ],
+    note: 'Potential divider (not in the booklet): $V_{\\text{out}} = V_{\\text{in}}\\frac{R_2}{R_1 + R_2}$. Terminal p.d.: $V = \\varepsilon - Ir$. Ideal ammeters have zero resistance; ideal voltmeters have infinite resistance.',
+    constants: ['e'],
+  },
   // A third item `true` marks an equation as HL only (shown with an HL tag).
   'C.1': {
     equations: [
@@ -198,6 +251,12 @@ window.DATA_BOOKLET = {
 window.CONSTANTS = {
   g: ["Acceleration of free fall (Earth's surface)", 'g = 9.8\\ \\text{m s}^{-2}'],
   c: ['Speed of light in a vacuum', 'c = 3.00 \\times 10^{8}\\ \\text{m s}^{-1}'],
+  kB: ['Boltzmann constant', 'k_B = 1.38 \\times 10^{-23}\\ \\text{J K}^{-1}'],
+  sigma: ['Stefan–Boltzmann constant', '\\sigma = 5.67 \\times 10^{-8}\\ \\text{W m}^{-2}\\,\\text{K}^{-4}'],
+  NA: ['Avogadro constant', 'N_A = 6.02 \\times 10^{23}\\ \\text{mol}^{-1}'],
+  R: ['Gas constant', 'R = 8.31\\ \\text{J K}^{-1}\\,\\text{mol}^{-1}'],
+  e: ['Elementary charge', 'e = 1.60 \\times 10^{-19}\\ \\text{C}'],
+  S: ['Solar constant', 'S = 1.36 \\times 10^{3}\\ \\text{W m}^{-2}'],
 };
 
 (function () {
@@ -421,7 +480,7 @@ window.CONSTANTS = {
         out.innerHTML = d.equations.map(([label, tex, hl]) =>
           `<div class="eq-item"><div class="eq-label">${label}${hl ? ' <span class="tag hl">HL</span>' : ''}</div>$$${tex}$$</div>`).join('') +
           (d.note ? `<p class="eq-note">${d.note}</p>` : '') +
-          (d.constants && d.constants.length ? `<h4>Constants</h4>` + d.constants.map((c) =>
+          (d.constants && d.constants.length ? `<h4>Constants</h4>` + d.constants.filter((c) => CONSTANTS[c]).map((c) =>
             `<div class="eq-item"><div class="eq-label">${CONSTANTS[c][0]}</div>$$${CONSTANTS[c][1]}$$</div>`).join('') : '');
       }
       if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([out]).catch(console.error);

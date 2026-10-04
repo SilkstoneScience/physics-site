@@ -4,15 +4,411 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>B.5 Current and circuits · DP Physics</title>
+  <meta name="description" content="IB DP Physics B.5 Current and circuits: charge, current, potential difference, circuit symbols, resistance and resistivity, Ohm's law, ohmic and non-ohmic conductors, power, series and parallel circuits, potential dividers, thermistors and LDRs, emf and internal resistance, chemical and solar cells.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="B.5">
+</head>
+<body data-root="../" data-section="themes" data-topic="B.5">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="b.html">Theme B The particulate nature of matter</a></p>
     <h1><span class="code">B.5</span>Current and circuits</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <p class="lead">Every phone, torch and car depends on charge flowing round a circuit. This topic explains what current and potential difference really are, why materials resist the flow of charge, how to work out currents and voltages in series and parallel circuits, and how cells supply the energy. It follows the two lesson decks: <strong>B.5a Electric circuits</strong> and <strong>B.5b Cells</strong>. There is no additional HL content in B.5.</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Models</span><span class="tag">Measurement</span><span class="tag">Patterns and trends</span><span class="tag">Global impact of science</span></div>
+          <p><strong>Models.</strong> We picture a current as a flow of tiny charged particles, and resistance as those particles bumping into vibrating ions. The same particle model explains thermal conduction in B.1: metals conduct both heat and electricity well because of their free electrons.</p>
+          <p><strong>Conventions.</strong> Benjamin Franklin chose to call one kind of charge "positive" long before electrons were discovered. Conventional current, from + to −, is still used, even though in metals the electrons actually move the other way. A convention doesn't have to match nature, as long as everyone uses it consistently.</p>
+          <p><strong>Measurement and patterns.</strong> In the 1820s Georg Ohm measured currents through wires of different lengths and found that, at constant temperature, current is proportional to potential difference. His results were at first dismissed, partly because good meters hardly existed.</p>
+          <p><strong>Global impact.</strong> Better batteries make electric cars and phones possible, and cheaper solar cells are changing how the world generates electricity.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>Does it matter that conventional current is "backwards"?</strong> Physics still works perfectly with Franklin's choice. What does that tell us about the role of conventions in knowledge?</li>
+            <li><strong>Can we know what we can't observe?</strong> Nobody has watched an electron drift through a wire. How do we come to trust models of things we infer only from meter readings?</li>
+            <li><strong>When is a "law" not a law?</strong> Ohm's law only holds for some components, and only at constant temperature. Should it be called a law at all?</li>
+            <li><strong>Who decides which energy source is best?</strong> Comparing batteries, solar cells and fossil fuels involves cost, safety and environmental damage as well as physics. Which of these can science measure?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <p style="margin:8px 0 0"><a href="#b5a"><strong>B.5a Electric circuits</strong></a></p>
+      <ol>
+        <li><a href="#charge">Charge, conductors and insulators</a></li>
+        <li><a href="#current">Electric current</a></li>
+        <li><a href="#pd">Potential difference</a></li>
+        <li><a href="#symbols">Circuit diagrams and meters</a></li>
+        <li><a href="#resistance">Resistance and resistivity</a></li>
+        <li><a href="#ohm">Ohm's law: ohmic and non-ohmic conductors</a></li>
+        <li><a href="#power">Electrical power</a></li>
+        <li><a href="#combos">Series and parallel circuits</a></li>
+        <li><a href="#divider">Variable resistors and potential dividers</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><a href="#b5b"><strong>B.5b Cells</strong></a></p>
+      <ol start="10">
+        <li><a href="#emf">Cells and emf</a></li>
+        <li><a href="#internal">Internal resistance</a></li>
+        <li><a href="#solar">Solar cells</a></li>
+        <li><a href="#sources">Comparing sources of electrical energy</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><strong>Review</strong></p>
+      <ol start="14">
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <div class="part-banner" id="b5a"><span class="code">B.5a</span>Electric circuits<p>Current, potential difference, resistance, power, and how to analyse series and parallel circuits.</p></div>
+
+    <!-- ===================================================== -->
+    <h2 id="charge">1. Charge, conductors and insulators</h2>
+    <p>Electric charge comes in two kinds, positive and negative. <strong>Like charges repel; unlike charges attract.</strong> Charge is measured in coulombs (C).</p>
+    <ul>
+      <li>The smallest free charge is the <strong>elementary charge</strong>, $e = 1.60 \times 10^{-19}$ C. An electron has charge $-e$ and a proton $+e$. Every charge is a whole number of $e$: charge is <strong>quantised</strong>.</li>
+      <li>Charge is <strong>conserved</strong>: it can't be created or destroyed, only moved. Rubbing a balloon on wool moves electrons from the wool to the balloon, leaving the wool positive by exactly as much as the balloon is negative.</li>
+    </ul>
+    <p>Whether a material conducts depends on its <strong>charge carriers</strong>, charged particles that are free to move (are <strong>mobile</strong>):</p>
+    <ul>
+      <li><strong>Conductors</strong>, such as metals, have huge numbers of <strong>free electrons</strong> that can drift through the material. In salt solutions and molten salts the charge carriers are ions.</li>
+      <li><strong>Insulators</strong>, such as plastic, rubber and glass, have almost no mobile charge carriers: their electrons are tightly bound to their atoms.</li>
+      <li><strong>Semiconductors</strong>, such as silicon, have far fewer free charge carriers than metals, and the number rises with temperature or light. They are used in thermistors, LDRs, LEDs and solar cells.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="current">2. Electric current</h2>
+    <p><strong>Direct current</strong> (dc) is a flow of charge carriers in one direction. The <strong>current</strong> $I$ is the <strong>rate of flow of charge</strong> past a point:</p>
+    <div class="key">
+      $$I = \frac{\Delta q}{\Delta t}$$
+      <p style="margin:0">$I$ in amperes (A), $\Delta q$ in coulombs, $\Delta t$ in seconds. $1\ \text{A} = 1\ \text{C s}^{-1}$.</p>
+    </div>
+    <p>By convention, current is drawn from the <strong>positive</strong> terminal round to the <strong>negative</strong> terminal: <strong>conventional current</strong> is the direction positive charge would flow. In a metal wire, the electrons actually drift the opposite way. Both descriptions give the same answers.</p>
+    <p>The electrons in a wire drift surprisingly slowly, typically less than a millimetre per second. A lamp still lights almost instantly because the wire is full of electrons already: when the circuit is completed, they all start moving at once, like water in a pipe that is already full.</p>
+    <div class="worked">
+      <h3>Worked example: charging a phone</h3>
+      <p>A phone charges with a current of 2.0 A for 30 minutes. How much charge flows, and how many electrons is that?</p>
+      <p>$\Delta q = I\Delta t = 2.0 \times 30 \times 60 = 3600$ C.</p>
+      <p>Number of electrons $= \dfrac{3600}{1.60 \times 10^{-19}} = 2.3 \times 10^{22}$.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="pd">3. Potential difference</h2>
+    <p>As charge flows round a circuit it carries energy from the cell to the components. The <strong>potential difference</strong> (p.d.) $V$ between two points is the <strong>work done per unit charge</strong> on moving a positive charge between those points:</p>
+    <div class="key">
+      $$V = \frac{W}{q}$$
+      <p style="margin:0">$V$ in volts (V), $W$ in joules, $q$ in coulombs. $1\ \text{V} = 1\ \text{J C}^{-1}$. A lamp with 6 V across it transfers 6 J of energy for every coulomb that passes through it.</p>
+    </div>
+    <p>"Voltage" is the everyday word for p.d. Potential difference is always measured <strong>between two points</strong>: it makes no sense to talk about the p.d. "at" a single point or "through" a component.</p>
+    <div class="worked">
+      <h3>Worked example: energy from a battery</h3>
+      <p>The 3600 C in the phone example passes through a 5.0 V charger. How much energy is transferred?</p>
+      <p>$W = qV = 3600 \times 5.0 = 1.8 \times 10^4$ J.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="symbols">4. Circuit diagrams and meters</h2>
+    <p>Circuit diagrams use standard symbols, which are listed in the data booklet:</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 390 400" role="img" aria-labelledby="b5at">
+        <title id="b5at">The circuit symbols from the data booklet. Cell: a long thin line and a short thick line. Battery: two or more cells joined. Switch: a break with a hinged line. Voltmeter: a circle containing V. Ammeter: a circle containing A. Resistor: a rectangle. Variable resistor: a rectangle with a diagonal arrow through it. Light-dependent resistor: a rectangle in a circle with two arrows pointing at it. Thermistor: a rectangle with a diagonal line that bends at one end. Potentiometer: a rectangle with an arrow pointing onto its side. Lamp: a circle with a cross. Light-emitting diode: a triangle and bar with two arrows pointing outwards. Heating element: a rectangle divided into sections. Motor: a circle containing M. Earth: a vertical line ending in three horizontal lines of decreasing length.</title>
+        <line class="axis" x1="20" y1="48" x2="60.0" y2="48.0"/><line class="axis" x1="70.0" y1="48.0" x2="110" y2="48"/><g><line class="axis" x1="60.0" y1="34.0" x2="60.0" y2="62.0"/><line class="axis" style="stroke-width:4" x1="70.0" y1="41.0" x2="70.0" y2="55.0"/></g><text x="65" y="84" text-anchor="middle" style="font-size:13px">cell</text><line class="axis" x1="150" y1="48" x2="182.0" y2="48.0"/><line class="axis" x1="208.0" y1="48.0" x2="240" y2="48"/><g><line class="axis" x1="182.0" y1="34.0" x2="182.0" y2="62.0"/><line class="axis" style="stroke-width:4" x1="188.0" y1="41.0" x2="188.0" y2="55.0"/><line class="axis" x1="202.0" y1="34.0" x2="202.0" y2="62.0"/><line class="axis" style="stroke-width:4" x1="208.0" y1="41.0" x2="208.0" y2="55.0"/><line class="axis dash" style="stroke-dasharray:3 3" x1="188.0" y1="48.0" x2="202.0" y2="48.0"/></g><text x="195" y="84" text-anchor="middle" style="font-size:13px">battery</text><line class="axis" x1="280" y1="48" x2="311.0" y2="48.0"/><line class="axis" x1="339.0" y1="48.0" x2="370" y2="48"/><g><circle cx="313.0" cy="48.0" r="2.5" class="f3"/><circle cx="337.0" cy="48.0" r="2.5" class="f3"/><line class="axis" x1="313.0" y1="48.0" x2="336.0" y2="36.0"/><line class="axis" x1="311.0" y1="48.0" x2="313.0" y2="48.0"/><line class="axis" x1="337.0" y1="48.0" x2="339.0" y2="48.0"/></g><text x="325" y="84" text-anchor="middle" style="font-size:13px">switch</text><line class="axis" x1="20" y1="124" x2="54.0" y2="124.0"/><line class="axis" x1="76.0" y1="124.0" x2="110" y2="124"/><circle cx="65.0" cy="124.0" r="11" class="axis"/><text x="65.0" y="129.0" text-anchor="middle" style="font-size:14px">V</text><text x="65" y="160" text-anchor="middle" style="font-size:13px">voltmeter</text><line class="axis" x1="150" y1="124" x2="184.0" y2="124.0"/><line class="axis" x1="206.0" y1="124.0" x2="240" y2="124"/><circle cx="195.0" cy="124.0" r="11" class="axis"/><text x="195.0" y="129.0" text-anchor="middle" style="font-size:14px">A</text><text x="195" y="160" text-anchor="middle" style="font-size:13px">ammeter</text><line class="axis" x1="280" y1="124" x2="309.0" y2="124.0"/><line class="axis" x1="341.0" y1="124.0" x2="370" y2="124"/><g><rect x="309.0" y="117.0" width="32" height="14" class="axis"/></g><text x="325" y="160" text-anchor="middle" style="font-size:13px">resistor</text><line class="axis" x1="20" y1="200" x2="49.0" y2="200.0"/><line class="axis" x1="81.0" y1="200.0" x2="110" y2="200"/><g><rect x="49.0" y="193.0" width="32" height="14" class="axis"/><line class="axis" x1="51.0" y1="211.0" x2="78.0" y2="188.0" marker-end="url(#ah3)"/></g><text x="65" y="236" text-anchor="middle" style="font-size:13px">variable resistor</text><line class="axis" x1="150" y1="200" x2="176.0" y2="200.0"/><line class="axis" x1="214.0" y1="200.0" x2="240" y2="200"/><g><rect x="183.0" y="194.0" width="24" height="12" class="axis"/><circle cx="195.0" cy="200.0" r="19" class="axis"/><line class="axis" x1="169.0" y1="170.0" x2="183.0" y2="184.0" marker-end="url(#ah3)"/><line class="axis" x1="179.0" y1="166.0" x2="193.0" y2="180.0" marker-end="url(#ah3)"/></g><text x="195" y="236" text-anchor="middle" style="font-size:13px">LDR</text><line class="axis" x1="280" y1="200" x2="309.0" y2="200.0"/><line class="axis" x1="341.0" y1="200.0" x2="370" y2="200"/><g><rect x="309.0" y="193.0" width="32" height="14" class="axis"/><polyline class="axis" points="309.0,211.0 337.0,189.0 345.0,189.0"/></g><text x="325" y="236" text-anchor="middle" style="font-size:13px">thermistor</text><line class="axis" x1="20" y1="276" x2="49.0" y2="276.0"/><line class="axis" x1="81.0" y1="276.0" x2="110" y2="276"/><g><rect x="49.0" y="269.0" width="32" height="14" class="axis"/><line class="axis" x1="65.0" y1="254.0" x2="65.0" y2="267.0" marker-end="url(#ah3)"/></g><text x="65" y="312" text-anchor="middle" style="font-size:13px">potentiometer</text><line class="axis" x1="150" y1="276" x2="185.0" y2="276.0"/><line class="axis" x1="205.0" y1="276.0" x2="240" y2="276"/><g><circle cx="195.0" cy="276.0" r="10" class="axis"/><line class="axis" x1="187.93" y1="268.93" x2="202.07" y2="283.07"/><line class="axis" x1="187.93" y1="283.07" x2="202.07" y2="268.93"/></g><text x="195" y="312" text-anchor="middle" style="font-size:13px">lamp</text><line class="axis" x1="280" y1="276" x2="316.0" y2="276.0"/><line class="axis" x1="334.0" y1="276.0" x2="370" y2="276"/><g><polygon class="axis" points="316.0,267.0 316.0,285.0 332.0,276.0"/><line class="axis" x1="333.0" y1="267.0" x2="333.0" y2="285.0"/><line class="axis" x1="326.0" y1="264.0" x2="337.0" y2="253.0" marker-end="url(#ah3)"/><line class="axis" x1="333.0" y1="268.0" x2="344.0" y2="257.0" marker-end="url(#ah3)"/></g><text x="325" y="312" text-anchor="middle" style="font-size:13px">LED</text><line class="axis" x1="20" y1="352" x2="47.0" y2="352.0"/><line class="axis" x1="83.0" y1="352.0" x2="110" y2="352"/><g><rect x="47.0" y="345.0" width="36" height="14" class="axis"/><line class="axis" x1="56.0" y1="345.0" x2="56.0" y2="359.0"/><line class="axis" x1="65.0" y1="345.0" x2="65.0" y2="359.0"/><line class="axis" x1="74.0" y1="345.0" x2="74.0" y2="359.0"/></g><text x="65" y="388" text-anchor="middle" style="font-size:13px">heating element</text><line class="axis" x1="150" y1="352" x2="184.0" y2="352.0"/><line class="axis" x1="206.0" y1="352.0" x2="240" y2="352"/><circle cx="195.0" cy="352.0" r="11" class="axis"/><text x="195.0" y="357.0" text-anchor="middle" style="font-size:14px">M</text><text x="195" y="388" text-anchor="middle" style="font-size:13px">motor</text><line class="axis" x1="325" y1="330" x2="325" y2="352"/><line class="axis" x1="307" y1="352" x2="343" y2="352"/><line class="axis" x1="313" y1="358" x2="337" y2="358"/><line class="axis" x1="319" y1="364" x2="331" y2="364"/><text x="325" y="388" text-anchor="middle" style="font-size:13px">earth</text>
+      </svg>
+      <figcaption>The circuit symbols you need. The long line of a cell is its <span class="key-1">positive</span> terminal.</figcaption>
+    </figure>
+    <ul>
+      <li>An <strong>ammeter</strong> measures current, so it goes <strong>in series</strong>: the current must flow through it. An ideal ammeter has <strong>zero resistance</strong>, so it doesn't reduce the current it measures.</li>
+      <li>A <strong>voltmeter</strong> measures the p.d. between two points, so it goes <strong>in parallel</strong>, across the component. An ideal voltmeter has <strong>infinite resistance</strong>, so no current is diverted through it.</li>
+    </ul>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 190" role="img" aria-labelledby="b5bt">
+        <title id="b5bt">A cell, a lamp and an ammeter connected in a single loop. A voltmeter is connected across the lamp, in parallel with it.</title>
+        <line class="axis" x1="60" y1="100" x2="170.0" y2="100.0"/><line class="axis" x1="190.0" y1="100.0" x2="300" y2="100"/><g><circle cx="180.0" cy="100.0" r="10" class="axis"/><line class="axis" x1="172.93" y1="92.93" x2="187.07" y2="107.07"/><line class="axis" x1="172.93" y1="107.07" x2="187.07" y2="92.93"/></g><line class="axis" x1="300" y1="100" x2="300.0" y2="124.0"/><line class="axis" x1="300.0" y1="146.0" x2="300" y2="170"/><circle cx="300.0" cy="135.0" r="11" class="l1" style="stroke-width:2"/><text x="300.0" y="140.0" text-anchor="middle" style="font-size:14px">A</text><line class="axis" x1="300" y1="170" x2="60" y2="170"/><line class="axis" x1="60" y1="170" x2="60.0" y2="140.0"/><line class="axis" x1="60.0" y1="130.0" x2="60" y2="100"/><g transform="rotate(90 60.0 135.0)"><line class="axis" x1="55.0" y1="121.0" x2="55.0" y2="149.0"/><line class="axis" style="stroke-width:4" x1="65.0" y1="128.0" x2="65.0" y2="142.0"/></g><line class="axis" x1="130" y1="100" x2="130" y2="45"/><line class="axis" x1="130" y1="45" x2="169.0" y2="45.0"/><line class="axis" x1="191.0" y1="45.0" x2="230" y2="45"/><circle cx="180.0" cy="45.0" r="11" class="l2" style="stroke-width:2"/><text x="180.0" y="50.0" text-anchor="middle" style="font-size:14px">V</text><line class="axis" x1="230" y1="45" x2="230" y2="100"/><circle cx="130" cy="100" r="3.5" class="f3"/><circle cx="230" cy="100" r="3.5" class="f3"/>
+      </svg>
+      <figcaption>Measuring a lamp: <span class="key-1">ammeter in series</span>, <span class="key-2">voltmeter in parallel</span> across the lamp.</figcaption>
+    </figure>
+    <p>Unless a question says otherwise, treat meters as ideal. If a non-ideal meter is used, its resistance is given and stays constant: include it in the circuit like any other resistor.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="resistance">5. Resistance and resistivity</h2>
+    <p>The <strong>resistance</strong> $R$ of a component is the ratio of the p.d. across it to the current through it:</p>
+    <div class="key">
+      $$R = \frac{V}{I}$$
+      <p style="margin:0">$R$ in ohms (Ω). $1\ \Omega = 1\ \text{V A}^{-1}$.</p>
+    </div>
+    <p><strong>Where resistance comes from:</strong> as free electrons drift through a metal, they keep colliding with the positive ions of the metal lattice, which vibrate about fixed positions. Each collision transfers some of the electrons' kinetic energy to the lattice, so the ions vibrate more: the metal gets <strong>hotter</strong>. This is the <strong>heating effect</strong> of a current. In a hotter metal the ions vibrate more, collisions happen more often, and the resistance <strong>increases</strong>.</p>
+    <p>The resistance of a wire depends on its material, its length $L$ and its cross-sectional area $A$:</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 120" role="img" aria-labelledby="b5ct">
+        <title id="b5ct">A cylindrical wire of length L with a circular cross-section of area A at one end.</title>
+        <path class="area" d="M60 30 L320 30 A16 30 0 0 1 320 90 L60 90 Z"/>
+        <path class="axis" d="M60 30 L320 30 M60 90 L320 90 M320 30 A16 30 0 0 1 320 90 A16 30 0 0 1 320 30"/>
+        <ellipse cx="60" cy="60" rx="16" ry="30" class="f1" opacity="0.6"/>
+        <ellipse cx="60" cy="60" rx="16" ry="30" class="axis"/>
+        <text class="t1" x="20" y="64">A</text>
+        <line class="l3 thin" x1="60" y1="106" x2="320" y2="106" marker-start="url(#ah3)" marker-end="url(#ah3)"/>
+        <text x="190" y="100" text-anchor="middle" style="font-size:14px">L</text>
+      </svg>
+      <figcaption>A wire of length L and <span class="key-1">cross-sectional area A</span>.</figcaption>
+    </figure>
+    <div class="key">
+      $$\rho = \frac{RA}{L} \qquad\text{so}\qquad R = \frac{\rho L}{A}$$
+      <p style="margin:0">$\rho$ is the <strong>resistivity</strong> of the material, in Ω m. It is a property of the material alone (at a given temperature). A longer wire has more resistance; a thicker wire has less.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Material</th><th>Resistivity at 20 °C / Ω m</th></tr>
+        <tr><td>copper</td><td>$1.7 \times 10^{-8}$</td></tr>
+        <tr><td>aluminium</td><td>$2.8 \times 10^{-8}$</td></tr>
+        <tr><td>tungsten</td><td>$5.6 \times 10^{-8}$</td></tr>
+        <tr><td>nichrome</td><td>$1.1 \times 10^{-6}$</td></tr>
+        <tr><td>silicon (pure)</td><td>about $10^3$</td></tr>
+        <tr><td>glass</td><td>about $10^{12}$</td></tr>
+      </table>
+    </div>
+    <div class="worked">
+      <h3>Worked example: a heater element</h3>
+      <p>A heater element is made of nichrome wire of diameter 0.40 mm. It needs a resistance of 24 Ω. What length of wire is needed?</p>
+      <p>$A = \pi r^2 = \pi \times (0.20 \times 10^{-3})^2 = 1.26 \times 10^{-7}\ \text{m}^2$. (Use the <em>radius</em>, in metres.)</p>
+      <p>$L = \dfrac{RA}{\rho} = \dfrac{24 \times 1.26 \times 10^{-7}}{1.1 \times 10^{-6}} = 2.7$ m.</p>
+      <p>A copper wire of the same size would need to be over 170 m long, which is why heaters use high-resistivity alloys.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="ohm">6. Ohm's law: ohmic and non-ohmic conductors</h2>
+    <div class="key"><strong>Ohm's law:</strong> the current through a conductor is directly proportional to the potential difference across it, provided the temperature (and other physical conditions) stay constant. A component that obeys Ohm's law has a <strong>constant resistance</strong> and is called <strong>ohmic</strong>.</div>
+    <p>$R = \dfrac{V}{I}$ is the <em>definition</em> of resistance and works for any component at any instant. Ohm's law is the extra claim that $R$ stays the same as $V$ changes. A metal wire at constant temperature is ohmic.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 225" role="img" aria-labelledby="b5dt">
+        <title id="b5dt">Current against potential difference for two components, for both positive and negative values. An ohmic resistor gives a straight line through the origin. A filament lamp gives a curve through the origin that gets less steep as the potential difference increases in either direction.</title>
+        <line class="axis" x1="30" y1="110" x2="368" y2="110" marker-end="url(#ah3)"/>
+        <line class="axis" x1="190" y1="210" x2="190" y2="12" marker-end="url(#ah3)"/>
+        <text x="198" y="24">I</text><text x="352" y="132">V</text>
+        <polyline class="l1" points="40.0,190.0 340.0,30.0"/>
+        <polyline class="l2" points="40.0,189.9 45.0,189.1 50.0,188.1 55.0,187.2 60.0,186.2 65.0,185.1 70.0,184.0 75.0,182.8 80.0,181.5 85.0,180.2 90.0,178.8 95.0,177.4 100.0,175.8 105.0,174.1 110.0,172.3 115.0,170.4 120.0,168.4 125.0,166.2 130.0,163.9 135.0,161.3 140.0,158.6 145.0,155.6 150.0,152.4 155.0,148.8 160.0,144.9 165.0,140.6 170.0,135.8 175.0,130.5 180.0,124.5 185.0,117.7 190.0,110.0 195.0,102.3 200.0,95.5 205.0,89.5 210.0,84.2 215.0,79.4 220.0,75.1 225.0,71.2 230.0,67.6 235.0,64.4 240.0,61.4 245.0,58.7 250.0,56.1 255.0,53.8 260.0,51.6 265.0,49.6 270.0,47.7 275.0,45.9 280.0,44.2 285.0,42.6 290.0,41.2 295.0,39.8 300.0,38.5 305.0,37.2 310.0,36.0 315.0,34.9 320.0,33.8 325.0,32.8 330.0,31.9 335.0,30.9 340.0,30.1"/>
+        <text class="t1" x="275" y="94" style="font-size:15px">resistor</text>
+        <text class="t2" x="178" y="40" text-anchor="end" style="font-size:15px">filament lamp</text>
+      </svg>
+      <figcaption>I–V graphs. <span class="key-1">Ohmic resistor</span>: a straight line through the origin, so R is constant. <span class="key-2">Filament lamp</span>: non-ohmic. As V rises, the gradient falls, so R = V/I increases.</figcaption>
+    </figure>
+    <p><strong>Why a filament lamp is non-ohmic:</strong> a bigger current heats the tungsten filament (to over 2000 °C). The lattice ions vibrate more, the electrons collide more often, and the resistance increases. Equal increases in $V$ therefore give smaller and smaller increases in $I$. Reversing the p.d. gives the same shape upside down.</p>
+    <p>On an I–V graph, the resistance at any point is $\dfrac{V}{I}$ for that point, <strong>not</strong> the inverse of the gradient of the curve.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="power">7. Electrical power</h2>
+    <p>Power is the rate of energy transfer. Combining $V = \dfrac{W}{q}$ and $I = \dfrac{\Delta q}{\Delta t}$ gives:</p>
+    <div class="key">
+      $$P = IV = I^2R = \frac{V^2}{R}$$
+      <p style="margin:0">$P$ in watts. Use whichever form contains the quantities you know. In a resistor, all this power is dissipated as thermal energy.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: a kettle</h3>
+      <p>A kettle is rated 2.3 kW at 230 V. Find the current, the resistance of its element, and the energy used in 4.0 minutes, in joules and in kilowatt-hours.</p>
+      <p>$I = \dfrac{P}{V} = \dfrac{2300}{230} = 10$ A, &nbsp; $R = \dfrac{V}{I} = 23\ \Omega$.</p>
+      <p>Energy $= Pt = 2300 \times 240 = 5.5 \times 10^5$ J. In kWh: $2.3\ \text{kW} \times \dfrac{4.0}{60}\ \text{h} = 0.15$ kWh. Electricity companies charge per kWh ($1\ \text{kWh} = 3.60 \times 10^6$ J).</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="combos">8. Series and parallel circuits</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 185" role="img" aria-labelledby="b5et">
+        <title id="b5et">Left: a series circuit, with a cell and two resistors one after the other in a single loop. Right: a parallel circuit, with a cell and two resistors on separate branches, each connected across the cell.</title>
+        <line class="axis" x1="20" y1="40" x2="41.5" y2="40.0"/><line class="axis" x1="73.5" y1="40.0" x2="95" y2="40"/><g><rect x="41.5" y="33.0" width="32" height="14" class="axis"/></g><text x="57.5" y="18.0" text-anchor="middle" style="font-size:14px">R₁</text><line class="axis" x1="95" y1="40" x2="116.5" y2="40.0"/><line class="axis" x1="148.5" y1="40.0" x2="170" y2="40"/><g><rect x="116.5" y="33.0" width="32" height="14" class="axis"/></g><text x="132.5" y="18.0" text-anchor="middle" style="font-size:14px">R₂</text><line class="axis" x1="170" y1="40" x2="170" y2="150"/><line class="axis" x1="170" y1="150" x2="100.0" y2="150.0"/><line class="axis" x1="90.0" y1="150.0" x2="20" y2="150"/><g><line class="axis" x1="90.0" y1="136.0" x2="90.0" y2="164.0"/><line class="axis" style="stroke-width:4" x1="100.0" y1="143.0" x2="100.0" y2="157.0"/></g><line class="axis" x1="20" y1="150" x2="20" y2="40"/><line class="axis" x1="210" y1="40" x2="269.0" y2="40.0"/><line class="axis" x1="301.0" y1="40.0" x2="360" y2="40"/><g><rect x="269.0" y="33.0" width="32" height="14" class="axis"/></g><text x="285.0" y="18.0" text-anchor="middle" style="font-size:14px">R₁</text><line class="axis" x1="210" y1="95" x2="269.0" y2="95.0"/><line class="axis" x1="301.0" y1="95.0" x2="360" y2="95"/><g><rect x="269.0" y="88.0" width="32" height="14" class="axis"/></g><text x="285.0" y="73.0" text-anchor="middle" style="font-size:14px">R₂</text><line class="axis" x1="210" y1="40" x2="210" y2="150"/><line class="axis" x1="360" y1="40" x2="360" y2="150"/><line class="axis" x1="360" y1="150" x2="290.0" y2="150.0"/><line class="axis" x1="280.0" y1="150.0" x2="210" y2="150"/><g><line class="axis" x1="280.0" y1="136.0" x2="280.0" y2="164.0"/><line class="axis" style="stroke-width:4" x1="290.0" y1="143.0" x2="290.0" y2="157.0"/></g><circle cx="210" cy="95" r="3.5" class="f3"/><circle cx="360" cy="95" r="3.5" class="f3"/><text class="t1" x="95" y="180" text-anchor="middle">series</text><text class="t2" x="285" y="180" text-anchor="middle">parallel</text>
+      </svg>
+      <figcaption>Left: resistors in <span class="key-1">series</span> (one path). Right: resistors in <span class="key-2">parallel</span> (separate branches).</figcaption>
+    </figure>
+    <div class="key">
+      <p style="margin:0 0 4px"><strong>Series</strong> (one path)</p>
+      $$I = I_1 = I_2 = \ldots \qquad V = V_1 + V_2 + \ldots$$
+      $$R_s = R_1 + R_2 + \ldots$$
+      <p style="margin:8px 0 4px"><strong>Parallel</strong> (separate branches)</p>
+      $$I = I_1 + I_2 + \ldots \qquad V = V_1 = V_2 = \ldots$$
+      $$\frac{1}{R_p} = \frac{1}{R_1} + \frac{1}{R_2} + \ldots$$
+    </div>
+    <p>These rules come from two conservation laws:</p>
+    <ul>
+      <li><strong>Conservation of charge:</strong> charge can't pile up or vanish, so the current into a junction equals the current out of it.</li>
+      <li><strong>Conservation of energy:</strong> round any complete loop, the energy given to each coulomb by the cell equals the energy it transfers to the components, so the p.d.s add up to the emf.</li>
+    </ul>
+    <p>Useful checks: adding a resistor in series always <strong>increases</strong> the total resistance; adding a resistor in parallel always <strong>decreases</strong> it (there's an extra path for the current). The total resistance of a parallel combination is always <strong>smaller than its smallest resistor</strong>. Two equal resistors in parallel give half the resistance of one.</p>
+    <div class="worked">
+      <h3>Worked example: a combination circuit</h3>
+      <p>A 12 V battery (no internal resistance) is connected to a 4.0 Ω resistor in series with a parallel pair of 6.0 Ω and 12 Ω resistors. Find the current from the battery, and the current in each branch.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 360 190" role="img" aria-labelledby="b5ft">
+          <title id="b5ft">A battery connected to a 4.0 ohm resistor, followed by a 6.0 ohm resistor and a 12 ohm resistor connected in parallel with each other.</title>
+          <line class="axis" x1="30" y1="40" x2="64.0" y2="40.0"/><line class="axis" x1="96.0" y1="40.0" x2="130" y2="40"/><g><rect x="64.0" y="33.0" width="32" height="14" class="l1" style="stroke-width:2"/></g><text x="80.0" y="18.0" text-anchor="middle" style="font-size:14px">4.0 Ω</text><line class="axis" x1="130" y1="40" x2="170" y2="40"/><line class="axis" x1="170" y1="40" x2="214.0" y2="40.0"/><line class="axis" x1="246.0" y1="40.0" x2="290" y2="40"/><g><rect x="214.0" y="33.0" width="32" height="14" class="l2" style="stroke-width:2"/></g><text x="230.0" y="18.0" text-anchor="middle" style="font-size:14px">6.0 Ω</text><line class="axis" x1="170" y1="95" x2="214.0" y2="95.0"/><line class="axis" x1="246.0" y1="95.0" x2="290" y2="95"/><g><rect x="214.0" y="88.0" width="32" height="14" class="l2" style="stroke-width:2"/></g><text x="230.0" y="73.0" text-anchor="middle" style="font-size:14px">12 Ω</text><line class="axis" x1="170" y1="40" x2="170" y2="95"/><line class="axis" x1="290" y1="40" x2="290" y2="95"/><line class="axis" x1="290" y1="40" x2="330" y2="40"/><line class="axis" x1="330" y1="40" x2="330" y2="150"/><line class="axis" x1="330" y1="150" x2="193.0" y2="150.0"/><line class="axis" x1="167.0" y1="150.0" x2="30" y2="150"/><g><line class="axis" x1="167.0" y1="136.0" x2="167.0" y2="164.0"/><line class="axis" style="stroke-width:4" x1="173.0" y1="143.0" x2="173.0" y2="157.0"/><line class="axis" x1="187.0" y1="136.0" x2="187.0" y2="164.0"/><line class="axis" style="stroke-width:4" x1="193.0" y1="143.0" x2="193.0" y2="157.0"/><line class="axis dash" style="stroke-dasharray:3 3" x1="173.0" y1="150.0" x2="187.0" y2="150.0"/></g><line class="axis" x1="30" y1="150" x2="30" y2="40"/><circle cx="170" cy="40" r="3.5" class="f3"/><circle cx="290" cy="40" r="3.5" class="f3"/><text x="180" y="184" text-anchor="middle" style="font-size:14px">12 V</text>
+        </svg>
+        <figcaption>The <span class="key-1">4.0 Ω</span> resistor is in series with the <span class="key-2">parallel pair</span>.</figcaption>
+      </figure>
+      <p>Parallel pair: $\dfrac{1}{R_p} = \dfrac{1}{6.0} + \dfrac{1}{12} = \dfrac{3}{12}$, so $R_p = 4.0\ \Omega$.</p>
+      <p>Total: $R = 4.0 + 4.0 = 8.0\ \Omega$, so $I = \dfrac{12}{8.0} = 1.5$ A from the battery.</p>
+      <p>p.d. across the 4.0 Ω resistor: $1.5 \times 4.0 = 6.0$ V, which leaves $12 - 6.0 = 6.0$ V across the parallel pair.</p>
+      <p>Branch currents: $\dfrac{6.0}{6.0} = 1.0$ A and $\dfrac{6.0}{12} = 0.50$ A. Check: $1.0 + 0.50 = 1.5$ A ✓.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="divider">9. Variable resistors and potential dividers</h2>
+    <p>Some resistors are designed to change their resistance:</p>
+    <ul>
+      <li>A <strong>thermistor</strong> (the IB uses the common "NTC" type) is made of a semiconductor. As its temperature <strong>rises</strong>, more charge carriers are freed, so its resistance <strong>falls</strong>.</li>
+      <li>A <strong>light-dependent resistor</strong> (LDR) is also a semiconductor. As the light on it gets <strong>brighter</strong>, its resistance <strong>falls</strong>.</li>
+      <li>A <strong>potentiometer</strong> has a sliding contact that can be moved along a resistor, giving any fraction of the total p.d.</li>
+    </ul>
+    <p>A <strong>potential divider</strong> is two (or more) resistors in series across a supply. The supply p.d. is shared between them in proportion to their resistances, so the output p.d. across one of them is a fraction of the input:</p>
+    <div class="key">
+      $$V_{\text{out}} = V_{\text{in}} \times \frac{R_2}{R_1 + R_2}$$
+      <p style="margin:0">where $V_{\text{out}}$ is the p.d. across $R_2$. This follows from the series rules: the current is the same in both resistors, so $V \propto R$. It isn't in the data booklet, so be ready to derive it.</p>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 215" role="img" aria-labelledby="b5gt">
+        <title id="b5gt">A potential divider. A 9.0 volt supply is connected across a thermistor, R1, in series with a fixed resistor, R2. The output p.d. is taken across R2.</title>
+        <line class="axis" x1="60" y1="190" x2="60.0" y2="123.0"/><line class="axis" x1="60.0" y1="97.0" x2="60" y2="30"/><g transform="rotate(90 60.0 110.0)"><line class="axis" x1="47.0" y1="96.0" x2="47.0" y2="124.0"/><line class="axis" style="stroke-width:4" x1="53.0" y1="103.0" x2="53.0" y2="117.0"/><line class="axis" x1="67.0" y1="96.0" x2="67.0" y2="124.0"/><line class="axis" style="stroke-width:4" x1="73.0" y1="103.0" x2="73.0" y2="117.0"/><line class="axis dash" style="stroke-dasharray:3 3" x1="53.0" y1="110.0" x2="67.0" y2="110.0"/></g><line class="axis" x1="60" y1="30" x2="200" y2="30"/><line class="axis" x1="200" y1="30" x2="200.0" y2="54.0"/><line class="axis" x1="200.0" y1="86.0" x2="200" y2="110"/><g transform="rotate(90 200.0 70.0)"><rect x="184.0" y="63.0" width="32" height="14" class="axis"/><polyline class="axis" points="184.0,81.0 212.0,59.0 220.0,59.0"/></g><line class="axis" x1="200" y1="110" x2="200.0" y2="134.0"/><line class="axis" x1="200.0" y1="166.0" x2="200" y2="190"/><g transform="rotate(90 200.0 150.0)"><rect x="184.0" y="143.0" width="32" height="14" class="axis"/></g><line class="axis" x1="200" y1="190" x2="60" y2="190"/><line class="axis" x1="200" y1="110" x2="290" y2="110"/><line class="axis" x1="200" y1="190" x2="290" y2="190"/><circle cx="200" cy="110" r="3.5" class="f3"/><circle cx="200" cy="190" r="3.5" class="f3"/><circle cx="290" cy="110" r="4" class="axis" style="fill:none"/><circle cx="290" cy="190" r="4" class="axis" style="fill:none"/><line class="l1 thin" x1="306" y1="118" x2="306" y2="182" marker-start="url(#ah1)" marker-end="url(#ah1)"/><text class="t1" x="314" y="156" style="font-size:14px">V<tspan baseline-shift="sub" style="font-size:10px">out</tspan></text><text class="t2" x="228" y="75" style="font-size:14px">R₁</text><text x="228" y="155" style="font-size:14px">R₂</text><text x="44" y="115" text-anchor="end" style="font-size:14px">9.0 V</text>
+      </svg>
+      <figcaption>A temperature sensor: <span class="key-2">thermistor R<sub>1</sub></span> in series with a fixed resistor R<sub>2</sub>; the <span class="key-1">output</span> is the p.d. across R<sub>2</sub>.</figcaption>
+    </figure>
+    <div class="worked">
+      <h3>Worked example: a fire alarm sensor</h3>
+      <p>In the circuit above, $V_{\text{in}} = 9.0$ V and $R_2 = 2.0$ kΩ. The thermistor's resistance is 18 kΩ at room temperature and 1.0 kΩ in a fire. Find $V_{\text{out}}$ in each case. The alarm switches on when $V_{\text{out}}$ exceeds 5.0 V. Does it work?</p>
+      <p>Room temperature: $V_{\text{out}} = 9.0 \times \dfrac{2.0}{18 + 2.0} = 0.90$ V.</p>
+      <p>Fire: $V_{\text{out}} = 9.0 \times \dfrac{2.0}{1.0 + 2.0} = 6.0$ V.</p>
+      <p>Yes: in a fire the thermistor's resistance falls, it takes a smaller share of the p.d., so $V_{\text{out}}$ rises above 5.0 V. If the thermistor and the fixed resistor were swapped, $V_{\text{out}}$ would <em>fall</em> when it got hot, which would suit a circuit that switches on a heater in the cold.</p>
+    </div>
+
+    <div class="part-banner" id="b5b"><span class="code">B.5b</span>Cells<p>Where the energy in a circuit comes from: emf, internal resistance, chemical cells and solar cells.</p></div>
+
+    <!-- ===================================================== -->
+    <h2 id="emf">10. Cells and emf</h2>
+    <p>A <strong>cell</strong> is a source of electrical energy. Inside it, energy from another form does work on the charges, moving positive charge from the negative terminal to the positive terminal (to a higher potential). The charges then transfer that energy to the external circuit.</p>
+    <div class="key">The <strong>emf</strong> $\varepsilon$ (electromotive force) of a source is the <strong>work done per unit charge</strong> by the source in moving charge round the complete circuit: the energy converted to electrical energy per coulomb. Like p.d., it is measured in volts. (Despite the name, it is not a force.)</div>
+    <ul>
+      <li>In a <strong>chemical cell</strong>, chemical reactions between two different electrodes and an electrolyte convert chemical energy into electrical energy. A <strong>primary cell</strong> (such as an alkaline battery) is used once and thrown away; a <strong>secondary cell</strong> (such as a lithium-ion battery) can be recharged by pushing current through it backwards, reversing the reactions.</li>
+      <li>A <strong>battery</strong> is strictly several cells connected in series. Their emfs add: three 1.5 V cells make a 4.5 V battery.</li>
+    </ul>
+    <p>The difference between emf and p.d. is the direction of the energy transfer: emf is energy converted <em>into</em> electrical energy (in a source); p.d. is electrical energy converted <em>into</em> other forms (in a component).</p>
+
+    <!-- ===================================================== -->
+    <h2 id="internal">11. Internal resistance</h2>
+    <p>Real cells aren't perfect. The charges also have to pass through the materials inside the cell, which have some resistance: the <strong>internal resistance</strong> $r$. Some of the emf is used up driving current through $r$, so less is available for the external circuit. This energy warms the cell, which is why batteries get hot when they deliver large currents.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 200" role="img" aria-labelledby="b5ht">
+        <title id="b5ht">A cell drawn with its internal resistance r inside a dashed box. It is connected through an ammeter to an external variable resistor R. A voltmeter is connected across the external resistor, which measures the terminal potential difference.</title>
+        <line class="axis" x1="60" y1="170" x2="60.0" y2="142.5"/><line class="axis" x1="60.0" y1="132.5" x2="60" y2="105"/><g transform="rotate(90 60.0 137.5)"><line class="axis" x1="55.0" y1="123.5" x2="55.0" y2="151.5"/><line class="axis" style="stroke-width:4" x1="65.0" y1="130.5" x2="65.0" y2="144.5"/></g><line class="axis" x1="60" y1="105" x2="60.0" y2="88.5"/><line class="axis" x1="60.0" y1="56.5" x2="60" y2="40"/><g transform="rotate(90 60.0 72.5)"><rect x="44.0" y="65.5" width="32" height="14" class="axis"/></g><line class="axis" x1="60" y1="40" x2="139.0" y2="40.0"/><line class="axis" x1="161.0" y1="40.0" x2="240" y2="40"/><circle cx="150.0" cy="40.0" r="11" class="axis"/><text x="150.0" y="45.0" text-anchor="middle" style="font-size:14px">A</text><line class="axis" x1="240" y1="40" x2="240.0" y2="89.0"/><line class="axis" x1="240.0" y1="121.0" x2="240" y2="170"/><g transform="rotate(90 240.0 105.0)"><rect x="224.0" y="98.0" width="32" height="14" class="axis"/><line class="axis" x1="226.0" y1="116.0" x2="253.0" y2="93.0" marker-end="url(#ah3)"/></g><line class="axis" x1="240" y1="170" x2="60" y2="170"/><line class="axis" x1="240" y1="60" x2="320" y2="60"/><line class="axis" x1="320" y1="60" x2="320.0" y2="94.0"/><line class="axis" x1="320.0" y1="116.0" x2="320" y2="150"/><circle cx="320.0" cy="105.0" r="11" class="l1" style="stroke-width:2"/><text x="320.0" y="110.0" text-anchor="middle" style="font-size:14px">V</text><line class="axis" x1="320" y1="150" x2="240" y2="150"/><circle cx="240" cy="60" r="3.5" class="f3"/><circle cx="240" cy="150" r="3.5" class="f3"/><rect x="28" y="50" width="64" height="112" class="axis dash" style="stroke:var(--theme-b)"/><text class="t2" x="80" y="78" style="font-size:14px">r</text><text x="80" y="143" style="font-size:14px">ε</text><text x="212" y="110" text-anchor="end" style="font-size:14px">R</text>
+      </svg>
+      <figcaption>A real cell: emf ε with <span class="key-2">internal resistance r</span> (inside the dashed box), driving current through an external resistance R. The <span class="key-1">voltmeter</span> reads the terminal p.d.</figcaption>
+    </figure>
+    <p>By conservation of energy, the emf equals the sum of the p.d.s round the circuit:</p>
+    <div class="key">
+      $$\varepsilon = I(R + r)$$
+      <p style="margin:0">The p.d. across the external resistance is the <strong>terminal p.d.</strong>, $V = IR = \varepsilon - Ir$. The part $Ir$ is sometimes called the "lost volts". When no current flows, $V = \varepsilon$: a high-resistance voltmeter connected straight across a cell reads (almost exactly) its emf.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: finding the internal resistance</h3>
+      <p>A 9.0 V battery is connected to a 12 Ω resistor. The terminal p.d. is then 8.4 V. Find the current, the internal resistance, and the power wasted inside the battery.</p>
+      <p>$I = \dfrac{V}{R} = \dfrac{8.4}{12} = 0.70$ A.</p>
+      <p>Lost volts: $9.0 - 8.4 = 0.6$ V, so $r = \dfrac{0.6}{0.70} = 0.86\ \Omega$.</p>
+      <p>Power wasted in the battery: $I^2r = 0.70^2 \times 0.86 = 0.42$ W.</p>
+    </div>
+    <h3>Measuring emf and internal resistance</h3>
+    <p>Vary the external resistance $R$ and record pairs of values of $I$ and the terminal p.d. $V$. Rearranging gives $V = -rI + \varepsilon$, so a graph of $V$ against $I$ is a straight line:</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 210" role="img" aria-labelledby="b5it">
+        <title id="b5it">A graph of terminal potential difference against current, a straight line sloping downwards. It meets the potential difference axis at the emf. Its gradient is minus the internal resistance.</title>
+        <line class="axis" x1="50" y1="180" x2="370" y2="180" marker-end="url(#ah3)"/>
+        <line class="axis" x1="50" y1="188" x2="50" y2="12" marker-end="url(#ah3)"/>
+        <text x="28" y="24">V</text><text x="356" y="200">I</text>
+        <line class="l1" x1="50" y1="40" x2="340" y2="150"/>
+        <g class="f1"><circle cx="90" cy="55.2" r="4"/><circle cx="140" cy="74" r="4"/><circle cx="190" cy="93" r="4"/><circle cx="240" cy="112" r="4"/><circle cx="290" cy="131" r="4"/></g>
+        <text class="t2" x="24" y="46">ε</text>
+        <polyline class="axis dash" points="190,93 290,93 290,131"/>
+        <text x="240" y="168" text-anchor="middle" style="font-size:14px">gradient = −r</text>
+      </svg>
+      <figcaption>Terminal p.d. against current. The <span class="key-2">intercept on the V axis is ε</span>, and the gradient is −r.</figcaption>
+    </figure>
+    <aside class="maths-link">
+      <h3>Maths link: the equation of a straight line <span class="tag">AA SL 2.1</span></h3>
+      <p>Compare $V = -rI + \varepsilon$ with $y = mx + c$. Plotting $V$ on the $y$-axis and $I$ on the $x$-axis makes the gradient $m = -r$ and the $y$-intercept $c = \varepsilon$. Choosing what to plot so that a relationship becomes a straight line is one of the most useful tricks in experimental physics.</p>
+    </aside>
+
+    <!-- ===================================================== -->
+    <h2 id="solar">12. Solar cells</h2>
+    <p>A <strong>solar cell</strong> (photovoltaic cell) converts light energy <strong>directly</strong> into electrical energy. It is made of layers of a semiconductor, usually silicon with small amounts of other elements added. Absorbed photons free electrons, which are pushed through the external circuit. Many cells are connected together to make a solar panel.</p>
+    <ul>
+      <li>Its output depends on the <strong>intensity</strong> of the light reaching it, so it changes with the weather, the time of day, the season and the angle of the panel. It produces nothing at night.</li>
+      <li>Typical panels convert about 20% of the incident light energy into electrical energy.</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: a solar panel</h3>
+      <p>A solar panel of area 1.6 $\text{m}^2$ has an efficiency of 20%. Sunlight of intensity 800 $\text{W m}^{-2}$ falls on it at right angles. Find its electrical power output.</p>
+      <p>Input power $= 800 \times 1.6 = 1280$ W. &nbsp; Output $= 0.20 \times 1280 = 260$ W.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="sources">13. Comparing sources of electrical energy</h2>
+    <ul>
+      <li><strong>Primary chemical cells.</strong> <em>For:</em> portable, cheap, give a steady p.d. and work anywhere at any time. <em>Against:</em> store little energy, can't be recharged, and contain chemicals that harm the environment if thrown away.</li>
+      <li><strong>Secondary (rechargeable) cells.</strong> <em>For:</em> portable, reusable hundreds of times, and can store energy from renewable sources for later. <em>Against:</em> expensive, slow to recharge, lose capacity over time, and mining lithium and cobalt has environmental and human costs.</li>
+      <li><strong>Solar cells.</strong> <em>For:</em> renewable, no fuel or emissions while running, little maintenance, useful in remote places. <em>Against:</em> nothing at night and less on cloudy days, need large areas, and their manufacture uses energy and materials.</li>
+      <li><strong>Mains electricity from power stations.</strong> <em>For:</em> a large, continuous supply that is cheap per kWh. <em>Against:</em> not portable, and often generated from fossil fuels, which add to the enhanced greenhouse effect (B.2).</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">14. Common mistakes</h2>
+    <ul>
+      <li><strong>Saying current is "used up" in a component.</strong> Current is the same before and after a component in series. It is <em>energy</em> that is transferred.</li>
+      <li><strong>Connecting meters the wrong way.</strong> Ammeters in series, voltmeters in parallel.</li>
+      <li><strong>Forgetting to invert</strong> when using $\frac{1}{R_p} = \frac{1}{R_1} + \frac{1}{R_2}$. The answer is $R_p$, not $\frac{1}{R_p}$.</li>
+      <li><strong>Using the diameter instead of the radius</strong> in $A = \pi r^2$, or forgetting to convert mm to m.</li>
+      <li><strong>Finding resistance from the gradient of a curved I–V graph.</strong> Use $R = \frac{V}{I}$ at the point.</li>
+      <li><strong>Saying Ohm's law is $V = IR$.</strong> $V = IR$ defines resistance. Ohm's law says $R$ is constant (at constant temperature).</li>
+      <li><strong>Confusing emf and terminal p.d.</strong> They are equal only when no current flows. With current, $V = \varepsilon - Ir$.</li>
+      <li><strong>Getting thermistors and LDRs backwards.</strong> Hotter thermistor or brighter LDR means <em>lower</em> resistance.</li>
+      <li><strong>Mixing up conventional current and electron flow.</strong> Conventional current goes from + to − outside the cell.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">15. Check your understanding</h2>
+    <details class="check">
+      <summary>Three 6.0 Ω resistors are connected in parallel. What is their total resistance? What if they are in series?</summary>
+      <p>Parallel: $\frac{1}{R} = 3 \times \frac{1}{6.0} = \frac{1}{2.0}$, so $R = 2.0\ \Omega$. Series: $18\ \Omega$.</p>
+    </details>
+    <details class="check">
+      <summary>A wire is stretched to twice its length, and its volume stays the same. By what factor does its resistance change?</summary>
+      <p>The length doubles and, because the volume is fixed, the area halves. $R = \frac{\rho L}{A}$ is multiplied by $2 \times 2 = 4$.</p>
+    </details>
+    <details class="check">
+      <summary>Why does a filament lamp have a lower resistance just after it is switched on?</summary>
+      <p>The filament is still cold, so its lattice ions vibrate less and the electrons collide less often. As it heats up, its resistance rises. (That's why lamps most often fail at the moment they're switched on: the current is briefly large.)</p>
+    </details>
+    <details class="check">
+      <summary>An LDR and a fixed resistor form a potential divider, with $V_{\text{out}}$ taken across the fixed resistor. What happens to $V_{\text{out}}$ when it gets darker?</summary>
+      <p>The LDR's resistance increases, so it takes a bigger share of the supply p.d. The p.d. across the fixed resistor, $V_{\text{out}}$, decreases.</p>
+    </details>
+    <details class="check">
+      <summary>A cell of emf 1.5 V and internal resistance 0.50 Ω is short-circuited with a thick copper wire of negligible resistance. What current flows, and why is this dangerous?</summary>
+      <p>$I = \frac{\varepsilon}{R + r} = \frac{1.5}{0 + 0.50} = 3.0$ A. All the power ($I^2r = 4.5$ W) is dissipated inside the cell, which heats up quickly and can leak, or even catch fire for larger batteries.</p>
+    </details>
+    <details class="check">
+      <summary>Why does the terminal p.d. of a battery fall when it supplies a larger current?</summary>
+      <p>$V = \varepsilon - Ir$. A larger current means more "lost volts" across the internal resistance, so less p.d. is left for the external circuit.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=B.5">Practise B.5 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>
