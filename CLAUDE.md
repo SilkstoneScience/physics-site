@@ -45,8 +45,14 @@ This folder (`physics-site`) is a static website for IB DP Physics students, hos
   4. Search the cached text rather than re-extracting it. Large textbooks can be extracted the same way, then searched for the relevant section.
 
 ## Progress (update as topics are finished)
-- Done: A.1 Kinematics (notes and 19 Paper 1A questions), A.2 Forces and momentum (notes, 22 Paper 1A and 2 Paper 2 questions), A.3 Work, energy and power (notes, 20 Paper 1A and 2 Paper 2 questions), C.1 SHM (notes with HL part; 16 Paper 1A and 2 Paper 2, 6 of them HL), C.2 Wave model (notes; 12 Paper 1A and 1 Paper 2), C.3 Wave phenomena (notes with HL part; 21 Paper 1A and 2 Paper 2, 8 of them HL).
-- Everything else: placeholder pages. Not yet done: A.4, A.5, Theme B, C.4, C.5, Theme D, Theme E.
+- Done: A.1 Kinematics (notes and 19 Paper 1A questions), A.2 Forces and momentum (notes, 22 Paper 1A and 2 Paper 2 questions), A.3 Work, energy and power (notes, 20 Paper 1A and 2 Paper 2 questions), C.1 SHM (notes with HL part; 16 Paper 1A and 2 Paper 2, 6 of them HL), C.2 Wave model (notes; 12 Paper 1A and 1 Paper 2), C.3 Wave phenomena (notes with HL part; 21 Paper 1A and 2 Paper 2, 8 of them HL), C.4 Standing waves and resonance (notes, no HL content; 16 Paper 1A and 2 Paper 2).
+- Everything else: placeholder pages. Not yet done: A.4, A.5, Theme B, C.5, Theme D, Theme E, and a Skills page (from `A.0 - Essential Skills.pptx`).
+
+## Working from Google Drive (cloud sessions)
+- The teacher's lessons are also on Google Drive, which cloud sessions can read with the Google Drive tools: `Unit A - Space Time and Motion`, `Unit C - Wave Behaviour` (and other `Unit …` folders), `Curriculum` (contains `DP Physics Guide 2025.pdf`), `Books` (textbooks, including the `Oxford` folder) and `Daily Questions`.
+- Drive gives slide **text** only, not images. Very large PDFs (the Oxford books, 70–190 MB) come back empty from Drive; read those on the teacher's computer with `tools/pdf-extract` instead.
+- Many lesson slides are adapted from Tim Lund's materials and credit Pearson or Hodder, and their practice questions are often IB past-paper items. Use the ideas only; write everything, including questions, in your own words with new numbers.
+- Formative tests (`… Formative.doc`) aren't used as class assessments, but they aren't IB style. They can inspire questions, rewritten in IB style.
 
 ## Copyright rules (IMPORTANT)
 - **Reference only, never copy:** `copyrighted-reference/` and everything in it, especially the `Books`, `Daily Questions` and `Past Papers` subfolders. Apply the same rule to any folder named books, daily questions or past papers anywhere in physics-source.

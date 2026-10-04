@@ -120,6 +120,12 @@ window.DATA_BOOKLET = {
     note: 'Visible light: about 400 nm (violet) to 700 nm (red). The data booklet shows the wavelength range of each part of the EM spectrum.',
     constants: ['c'],
   },
+  'C.4': {
+    equations: [
+      ['Wave speed (from C.2)', 'v = f\\lambda'],
+    ],
+    note: 'The data booklet has <strong>no</strong> standing-wave formulas. Work them out from a sketch: a whole number of half-wavelengths fits when both ends are the same (both nodes or both antinodes), and an odd number of quarter-wavelengths fits when one end is a node and the other an antinode.',
+  },
   'C.3': {
     equations: [
       ["Snell's law", '\\frac{n_1}{n_2} = \\frac{\\sin\\theta_2}{\\sin\\theta_1} = \\frac{v_2}{v_1}'],
