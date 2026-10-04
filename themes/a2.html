@@ -114,6 +114,12 @@
       $$F_{\text{net}} = \sqrt{F_{x,\text{net}}^2 + F_{y,\text{net}}^2}$$
     </div>
     <p>Choose axes that make the problem easy. On a slope, use axes parallel and perpendicular to the slope. The weight then has components $mg\sin\theta$ down the slope and $mg\cos\theta$ into the slope.</p>
+    <aside class="maths-link">
+      <h3>Maths link: trigonometry <span class="tag">AA SL 3.2</span></h3>
+      <p>Resolving uses right-angled trigonometry (SOH CAH TOA). If three forces balance, you can also draw them tip-to-tail as a closed <strong>triangle of forces</strong>. When that triangle has no right angle, solve it with the <strong>sine rule</strong> or the <strong>cosine rule</strong>:</p>
+      $$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$$
+      $$c^2 = a^2 + b^2 - 2ab\cos C$$
+    </aside>
 
     <!-- ===================================================== -->
     <h2 id="first">2. Newton's first law and translational equilibrium</h2>
@@ -123,6 +129,26 @@
     <div class="worked">
       <h3>Worked example: a hanging lamp</h3>
       <p>A lamp of mass 4.0 kg hangs from two identical cables. Each cable makes an angle of 30° with the horizontal. Find the tension in each cable.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 400 225" role="img" aria-labelledby="wlampt">
+          <title id="wlampt">A lamp hangs from the middle of two cables fixed to a ceiling. Each cable makes 30 degrees with the horizontal. A tension T acts along each cable, away from the lamp, and the weight mg acts straight down.</title>
+          <line class="l3" style="stroke-width:5" x1="30" y1="38" x2="370" y2="38"/>
+          <line class="axis" x1="60" y1="40" x2="200" y2="120.8"/>
+          <line class="axis" x1="340" y1="40" x2="200" y2="120.8"/>
+          <line class="l1" x1="200" y1="120.8" x2="122" y2="75.8" marker-end="url(#ah1)"/>
+          <line class="l1" x1="200" y1="120.8" x2="278" y2="75.8" marker-end="url(#ah1)"/>
+          <text class="t1" x="132" y="62" text-anchor="middle">T</text>
+          <text class="t1" x="268" y="62" text-anchor="middle">T</text>
+          <line class="grid dash" x1="200" y1="120.8" x2="290" y2="120.8"/>
+          <path class="axis" d="M240 120.8 A 40 40 0 0 0 234.6 100.8"/>
+          <text x="246" y="114">30°</text>
+          <line class="axis" x1="200" y1="120.8" x2="200" y2="132"/>
+          <polygon class="f3" style="opacity:0.85" points="186,132 214,132 226,154 174,154"/>
+          <line class="l2" x1="200" y1="145" x2="200" y2="212" marker-end="url(#ah2)"/>
+          <text class="t2" x="210" y="206">mg</text>
+        </svg>
+        <figcaption>Forces on the lamp: <span class="key-1">tension</span> along each cable and the <span class="key-2">weight</span>. Only the vertical parts of the tensions hold the lamp up.</figcaption>
+      </figure>
       <p>The lamp is in equilibrium. Horizontally, the two tensions' components cancel by symmetry. Vertically, the upward components balance the weight:</p>
       $$2T\sin 30° = mg$$
       $$T = \frac{4.0 \times 9.8}{2 \times 0.50} = 39 \text{ N}$$
@@ -138,6 +164,24 @@
     <div class="worked">
       <h3>Worked example: pulling a box against friction</h3>
       <p>A 12 kg box is pulled across a horizontal floor by a horizontal force of 60 N. The coefficient of dynamic friction is 0.30. Find the acceleration.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 400 230" role="img" aria-labelledby="wboxt">
+          <title id="wboxt">Free-body diagram of a 12 kilogram box on a horizontal floor. A 60 newton pull acts to the right. Friction acts to the left and is shorter. The normal force acts up and the weight acts down, equal in length. The acceleration a is to the right.</title>
+          <line class="axis" x1="20" y1="170" x2="380" y2="170"/>
+          <rect x="150" y="105" width="100" height="65" class="axis"/>
+          <line class="l3" x1="200" y1="137" x2="338" y2="137" marker-end="url(#ah3)"/>
+          <text x="346" y="143">60 N</text>
+          <line class="l1" x1="200" y1="137" x2="122" y2="137" marker-end="url(#ah1)"/>
+          <text class="t1" x="114" y="143" text-anchor="end">F<tspan dy="5" font-size="13">f</tspan></text>
+          <line class="l1" x1="200" y1="137" x2="200" y2="58" marker-end="url(#ah1)"/>
+          <text class="t1" x="210" y="66">F<tspan dy="5" font-size="13">N</tspan></text>
+          <line class="l2" x1="200" y1="137" x2="200" y2="216" marker-end="url(#ah2)"/>
+          <text class="t2" x="210" y="212">mg</text>
+          <line class="l3 thin dash" x1="260" y1="40" x2="330" y2="40" marker-end="url(#ah3)"/>
+          <text x="295" y="30" text-anchor="middle">a</text>
+        </svg>
+        <figcaption>Draw the free-body diagram first. Vertically, the <span class="key-1">normal force</span> balances the <span class="key-2">weight</span>. Horizontally, the 60 N pull is bigger than the <span class="key-1">friction</span>, so the box accelerates to the right.</figcaption>
+      </figure>
       <p>Vertically there is no acceleration, so $F_N = mg = 12 \times 9.8 = 118$ N.<br>
       Friction: $F_f = \mu_d F_N = 0.30 \times 118 = 35$ N, opposing the motion.<br>
       Resultant force: $60 - 35 = 25$ N, so $a = \dfrac{F}{m} = \dfrac{25}{12} = 2.1\ \text{m s}^{-2}$.</p>
@@ -145,12 +189,45 @@
     <div class="worked">
       <h3>Worked example: a person in a lift</h3>
       <p>A 55 kg student stands on bathroom scales in a lift that accelerates <em>upwards</em> at 1.5 $\text{m s}^{-2}$. What do the scales read?</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 400 230" class="small" role="img" aria-labelledby="wliftt">
+          <title id="wliftt">A student, drawn as a block, stands on scales on the floor of a lift. The normal force from the scales acts up and is longer than the weight, which acts down. The lift's acceleration a is upwards.</title>
+          <rect x="110" y="15" width="180" height="200" class="axis"/>
+          <rect x="165" y="165" width="70" height="10" class="f3"/>
+          <rect x="172" y="95" width="56" height="70" class="axis" style="fill:var(--accent-soft)"/>
+          <line class="l1" x1="200" y1="130" x2="200" y2="38" marker-end="url(#ah1)"/>
+          <text class="t1" x="210" y="50">F<tspan dy="5" font-size="13">N</tspan></text>
+          <line class="l2" x1="200" y1="130" x2="200" y2="208" marker-end="url(#ah2)"/>
+          <text class="t2" x="210" y="204">mg</text>
+          <line class="l3 thin dash" x1="335" y1="160" x2="335" y2="80" marker-end="url(#ah3)"/>
+          <text x="345" y="125">a</text>
+        </svg>
+        <figcaption>The lift accelerates upwards, so the resultant force is upwards: the <span class="key-1">normal force</span> must be bigger than the <span class="key-2">weight</span>.</figcaption>
+      </figure>
       <p>The scales read the normal force $F_N$. Take up as positive: $F_N - mg = ma$, so $F_N = m(g + a) = 55(9.8 + 1.5) = 620$ N.<br>
       This is more than the student's weight (540 N), so they feel heavier. When accelerating downwards, the scales would read $m(g - a)$, and the student would feel lighter.</p>
     </div>
     <div class="worked">
       <h3>Worked example: sliding down a slope</h3>
       <p>A sledge is released from rest at the top of a smooth (frictionless) icy slope at 20° to the horizontal. The slope is 15 m long. Find its acceleration and its speed at the bottom.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 400 235" role="img" aria-labelledby="wslopet">
+          <title id="wslopet">A sledge on a smooth slope at 20 degrees to the horizontal. The weight mg acts straight down. The normal force acts perpendicular to the slope, away from it. A dashed arrow down the slope shows the component of the weight along the slope, mg sin 20 degrees.</title>
+          <polygon class="area" points="30,76 370,200 30,200"/>
+          <line class="axis" x1="10" y1="200" x2="390" y2="200"/>
+          <line class="axis" x1="30" y1="76" x2="370" y2="200"/>
+          <g transform="translate(170 127) rotate(20)"><rect x="-22" y="-24" width="44" height="24" rx="3" class="axis" style="fill:var(--surface)"/></g>
+          <line class="l2" x1="174.1" y1="115.7" x2="174.1" y2="225" marker-end="url(#ah2)"/>
+          <text class="t2" x="182" y="222">mg</text>
+          <line class="l1" x1="174.1" y1="115.7" x2="209.5" y2="18.5" marker-end="url(#ah1)"/>
+          <text class="t1" x="218" y="30">F<tspan dy="5" font-size="13">N</tspan></text>
+          <line class="l2 thin dash" x1="174.1" y1="115.7" x2="209.4" y2="128.6" marker-end="url(#ah2)"/>
+          <text class="t2" x="222" y="124">mg sin 20°</text>
+          <path class="axis" d="M320 200 A 50 50 0 0 1 323 182.9"/>
+          <text x="306" y="197" text-anchor="end">20°</text>
+        </svg>
+        <figcaption>The <span class="key-1">normal force</span> is perpendicular to the slope, so it has no part along the slope. Only the <span class="key-2">component of the weight</span> along the slope, $mg\sin 20°$, makes the sledge accelerate.</figcaption>
+      </figure>
       <p>Use axes along and perpendicular to the slope. The normal force is perpendicular to the slope, so only the weight component $mg\sin 20°$ acts along it:<br>
       $ma = mg\sin 20°$, so $a = 9.8 \times 0.342 = 3.4\ \text{m s}^{-2}$. The mass cancels.<br>
       From A.1: $v^2 = u^2 + 2as = 0 + 2(3.35)(15)$, so $v = 10\ \text{m s}^{-1}$.</p>
@@ -294,6 +371,10 @@
     <p>A resultant force acting for a time gives an <strong>impulse</strong>, which equals the change in momentum:</p>
     <div class="key">$$J = F\,\Delta t = \Delta p$$</div>
     <p>Here $F$ is the <em>average</em> resultant force during the contact time $\Delta t$. In a real collision the force changes, and the impulse is the <strong>area under the force–time graph</strong>.</p>
+    <aside class="maths-link">
+      <h3>Maths link: rates and areas <span class="tag">AA SL 5.9, 5.11</span></h3>
+      <p>"Rate of change" means a derivative, so Newton's second law is $F = \dfrac{dp}{dt}$. Going the other way, an area under a graph is an integral, so the impulse from a changing force is $J = \displaystyle\int F\,dt$.</p>
+    </aside>
     <figure class="diagram">
       <svg viewBox="0 0 380 230" role="img" aria-labelledby="f5t">
         <title id="f5t">Force–time graph for a collision: the force rises from zero to a peak and falls back to zero. The area under the curve is the impulse. A dashed horizontal line shows the average force, which would give the same area over the same time.</title>
@@ -311,6 +392,23 @@
     <div class="worked">
       <h3>Worked example: a ball bouncing off a wall</h3>
       <p>A 0.058 kg tennis ball hits a wall at 20 $\text{m s}^{-1}$ and rebounds along the same line at 15 $\text{m s}^{-1}$. It is in contact with the wall for 5.0 ms. Find the impulse on the ball and the average force on it.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 400 200" role="img" aria-labelledby="wwallt">
+          <title id="wwallt">Before: the ball moves right towards a wall at 20 metres per second. After: it moves left, away from the wall, at 15 metres per second. The positive direction is to the left, the rebound direction.</title>
+          <rect x="320" y="10" width="16" height="170" class="f3" style="opacity:0.8"/>
+          <text x="20" y="66">before</text>
+          <circle cx="230" cy="60" r="12" class="axis" style="fill:var(--accent-soft)"/>
+          <line class="l1" x1="244" y1="60" x2="306" y2="60" marker-end="url(#ah1)"/>
+          <text class="t1" x="276" y="45" text-anchor="middle">20 m s⁻¹</text>
+          <text x="20" y="146">after</text>
+          <circle cx="230" cy="140" r="12" class="axis" style="fill:var(--accent-soft)"/>
+          <line class="l2" x1="216" y1="140" x2="170" y2="140" marker-end="url(#ah2)"/>
+          <text class="t2" x="192" y="125" text-anchor="middle">15 m s⁻¹</text>
+          <line class="l3 thin" x1="140" y1="186" x2="80" y2="186" marker-end="url(#ah3)"/>
+          <text x="148" y="191">positive</text>
+        </svg>
+        <figcaption>The velocity <em>reverses</em>. With the rebound direction as positive, $u$ = <span class="key-1">−20</span> and $v$ = <span class="key-2">+15</span> $\text{m s}^{-1}$.</figcaption>
+      </figure>
       <p>Take the rebound direction as positive, so $u = -20\ \text{m s}^{-1}$ and $v = +15\ \text{m s}^{-1}$.<br>
       $J = \Delta p = m(v - u) = 0.058(15 - (-20)) = 2.0$ N s (away from the wall).<br>
       $F = \dfrac{J}{\Delta t} = \dfrac{2.03}{5.0\times10^{-3}} = 410$ N.<br>
@@ -349,6 +447,32 @@
     <div class="worked">
       <h3>Worked example: trolleys that stick together</h3>
       <p>A 1.2 kg trolley moving at 3.0 $\text{m s}^{-1}$ hits a stationary 0.80 kg trolley, and they stick together. Find their common velocity and the kinetic energy lost.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 400 190" role="img" aria-labelledby="wtrolt">
+          <title id="wtrolt">Before: a 1.2 kilogram trolley moves right at 3.0 metres per second towards a stationary 0.80 kilogram trolley. After: the two trolleys are joined and move right together at an unknown velocity v.</title>
+          <text x="10" y="22">before</text>
+          <line class="grid" x1="10" y1="80" x2="390" y2="80"/>
+          <rect x="40" y="40" width="80" height="32" rx="3" class="axis" style="fill:var(--accent-soft)"/>
+          <circle cx="58" cy="76" r="4" class="f3"/><circle cx="102" cy="76" r="4" class="f3"/>
+          <text x="80" y="62" text-anchor="middle">1.2 kg</text>
+          <line class="l1" x1="126" y1="56" x2="190" y2="56" marker-end="url(#ah1)"/>
+          <text class="t1" x="170" y="28" text-anchor="middle">3.0 m s⁻¹</text>
+          <rect x="250" y="40" width="80" height="32" rx="3" class="axis"/>
+          <circle cx="268" cy="76" r="4" class="f3"/><circle cx="312" cy="76" r="4" class="f3"/>
+          <text x="290" y="62" text-anchor="middle">0.80 kg</text>
+          <text x="290" y="30" text-anchor="middle">at rest</text>
+          <text x="10" y="112">after</text>
+          <line class="grid" x1="10" y1="172" x2="390" y2="172"/>
+          <rect x="120" y="132" width="80" height="32" rx="3" class="axis" style="fill:var(--accent-soft)"/>
+          <rect x="200" y="132" width="80" height="32" rx="3" class="axis"/>
+          <circle cx="138" cy="168" r="4" class="f3"/><circle cx="182" cy="168" r="4" class="f3"/>
+          <circle cx="218" cy="168" r="4" class="f3"/><circle cx="262" cy="168" r="4" class="f3"/>
+          <text x="200" y="125" text-anchor="middle">2.0 kg</text>
+          <line class="l2" x1="286" y1="148" x2="346" y2="148" marker-end="url(#ah2)"/>
+          <text class="t2" x="316" y="136" text-anchor="middle">v</text>
+        </svg>
+        <figcaption>Before and after sketches make momentum problems much clearer. The <span class="key-1">initial velocity</span> is known; the <span class="key-2">common velocity</span> $v$ is what we want.</figcaption>
+      </figure>
       <p>Momentum before $=$ momentum after: $1.2 \times 3.0 + 0 = (1.2 + 0.80)v$, so $v = \dfrac{3.6}{2.0} = 1.8\ \text{m s}^{-1}$.<br>
       $E_k$ before $= \tfrac{1}{2}(1.2)(3.0)^2 = 5.4$ J. &nbsp; $E_k$ after $= \tfrac{1}{2}(2.0)(1.8)^2 = 3.2$ J.<br>
       Kinetic energy lost $= 2.2$ J (about 40%), mostly to thermal energy and sound.</p>
@@ -365,6 +489,24 @@
     <div class="worked">
       <h3>Worked example <span class="tag hl">HL</span></h3>
       <p>A 2.0 kg puck moving east at 3.0 $\text{m s}^{-1}$ hits a stationary 2.0 kg puck. Afterwards, the first puck moves at 2.0 $\text{m s}^{-1}$ at 30° north of east. Find the velocity of the second puck.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 360 200" role="img" aria-labelledby="wpuckt">
+          <title id="wpuckt">Top view of the collision. The first puck arrives from the west moving east at 3.0 metres per second. After the collision it moves off at 2.0 metres per second at 30 degrees north of east. The second puck moves off south of east at an unknown velocity, which turns out to be 38 degrees south of east.</title>
+          <line class="l3" x1="30" y1="110" x2="146" y2="110" marker-end="url(#ah3)"/>
+          <text x="88" y="98" text-anchor="middle">3.0 m s⁻¹</text>
+          <circle cx="150" cy="110" r="5" class="f3"/>
+          <line class="grid dash" x1="150" y1="110" x2="300" y2="110"/>
+          <line class="l1" x1="150" y1="110" x2="219.3" y2="70" marker-end="url(#ah1)"/>
+          <text class="t1" x="226" y="64">2.0 m s⁻¹</text>
+          <line class="l2" x1="150" y1="110" x2="200.4" y2="149.4" marker-end="url(#ah2)"/>
+          <text class="t2" x="208" y="165">v = ?</text>
+          <path class="axis" d="M190 110 A 40 40 0 0 0 184.6 90"/>
+          <text x="196" y="100">30°</text>
+          <text x="330" y="30" text-anchor="middle">N</text>
+          <line class="l3 thin" x1="330" y1="70" x2="330" y2="38" marker-end="url(#ah3)"/>
+        </svg>
+        <figcaption>Seen from above. Resolve each momentum into east and north components. The <span class="key-2">second puck</span> must move south of east so that the north–south momentum still adds up to zero.</figcaption>
+      </figure>
       <p>East ($x$): $2.0(3.0) = 2.0(2.0\cos 30°) + 2.0v_x$, so $v_x = 3.0 - 1.73 = 1.27\ \text{m s}^{-1}$.<br>
       North ($y$): $0 = 2.0(2.0\sin 30°) + 2.0v_y$, so $v_y = -1.0\ \text{m s}^{-1}$ (that is, south).<br>
       $v = \sqrt{1.27^2 + 1.0^2} = 1.6\ \text{m s}^{-1}$ at $\tan^{-1}(1.0/1.27) = 38°$ south of east.<br>
@@ -410,6 +552,10 @@
       <li>Linear speed: one circumference $2\pi r$ per period, so:</li>
     </ul>
     <div class="key">$$v = \frac{2\pi r}{T} = \omega r$$</div>
+    <aside class="maths-link">
+      <h3>Maths link: radians <span class="tag">AA SL 3.4</span></h3>
+      <p>The arc length formula $l = r\theta$ (with $\theta$ in radians) is where $v = \omega r$ comes from. Divide both sides by the time taken: arc length per second is the speed $v$, and angle per second is $\omega$. The formula only works in radians, which is why physics uses them for anything that rotates.</p>
+    </aside>
     <p>Every point on a rotating rigid object, such as a wheel or a turntable, has the <strong>same</strong> $\omega$. But points further from the centre have a larger speed $v$.</p>
 
     <h3>Centripetal acceleration and force</h3>
@@ -429,6 +575,23 @@
     <div class="worked">
       <h3>Worked example: a car on a bend</h3>
       <p>A 1200 kg car drives round a flat bend of radius 50 m at 15 $\text{m s}^{-1}$. Find the centripetal force needed, and the minimum coefficient of static friction between the tyres and the road.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 320 225" class="small" role="img" aria-labelledby="wbendt">
+          <title id="wbendt">Top view of a car on a curved road, part of a circle of radius 50 metres. The car's velocity is along the tangent to the road. The friction force from the road points towards the centre of the circle.</title>
+          <path class="axis" d="M60 65 A 135 135 0 0 1 195 200"/>
+          <path class="axis" d="M60 35 A 165 165 0 0 1 225 200"/>
+          <line class="axis dash" x1="60" y1="200" x2="166.1" y2="93.9"/>
+          <circle cx="60" cy="200" r="4" class="f3"/>
+          <text x="66" y="218">centre</text>
+          <text x="118" y="170">r</text>
+          <g transform="translate(166.1 93.9) rotate(45)"><rect x="-14" y="-8" width="28" height="16" rx="4" class="f3"/></g>
+          <line class="l1" x1="166.1" y1="93.9" x2="208.5" y2="136.3" marker-end="url(#ah1)"/>
+          <text class="t1" x="222" y="130">v</text>
+          <line class="l2" x1="166.1" y1="93.9" x2="128" y2="132" marker-end="url(#ah2)"/>
+          <text class="t2" x="126" y="116" text-anchor="end">F<tspan dy="5" font-size="13">f</tspan></text>
+        </svg>
+        <figcaption>Seen from above. The <span class="key-1">velocity</span> is along the tangent. <span class="key-2">Friction</span> from the road points towards the centre and provides the centripetal force.</figcaption>
+      </figure>
       <p>$F = \dfrac{mv^2}{r} = \dfrac{1200 \times 15^2}{50} = 5400$ N, provided by friction.<br>
       Friction is limited to $\mu_s mg$, so we need $\mu_s mg \ge \dfrac{mv^2}{r}$, which gives $\mu_s \ge \dfrac{v^2}{gr} = \dfrac{225}{9.8 \times 50} = 0.46$.<br>
       The mass cancels: a lorry and a bicycle need the same grip at the same speed. On an icy road ($\mu_s$ small), the safe speed is much lower.</p>

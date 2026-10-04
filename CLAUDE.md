@@ -81,6 +81,8 @@ This folder (`physics-site`) is a static website for IB DP Physics students, hos
 - Long chains of working inside one `$...$` can't wrap on phones. Split them into several `$...$` pieces or use a displayed `$$...$$` equation.
 - In SVG diagrams, keep in-picture labels short. Put longer explanations in a colour-coded `<figcaption>` using `key-1` (blue) and `key-2` (orange). Give small graphs `class="small"`.
 - Pages must work well on phones. Check new layouts at 375 px wide.
+- **Worked-example diagrams:** give a worked example an inline SVG diagram whenever a sketch helps (free-body diagrams, before/after collision sketches, ray diagrams, set-ups). Put it inside the `.worked` box, after the question, as a `figure.diagram` with a `<title>` and a colour-coded caption. Calculate exact curves (parabolas, sine waves) with a script.
+- **Maths links:** where a physics idea uses DP Mathematics, add an `<aside class="maths-link">` box with an `h3` "Maths link: …" and a `<span class="tag">AA SL x.y</span>` naming the Maths: analysis and approaches SL syllabus section (numbers taken from the AA SL formula booklet: 2.1 straight lines, 2.6/2.7 quadratics, 3.1 sphere area, 3.2 sine/cosine rule, 3.4 radians and arcs, 3.6 Pythagorean identity, 5.3 power rule, 5.5 integration, 5.6 derivatives of sin/cos and the chain rule, 5.9 kinematics, 5.11 areas). Add an HL tag if the box is in HL content. Keep them short and optional, and never let the physics depend on them.
 
 ## Question bank format
 - `questions/index.json` lists the question files. Each file (e.g. `questions/a.json`) is a JSON array of questions.
@@ -96,6 +98,10 @@ This folder (`physics-site`) is a static website for IB DP Physics students, hos
   - For "which graph" questions, put the four graphs in one SVG labelled A–D and use options like "Graph A".
   - Use $g = 9.8$ m s⁻² everywhere (notes and questions). This is the value in the 2025 data booklet.
 - The question bank shows one question at a time by default, with Previous/Next, a "Next question" button after answering, and a Back link to the page the student came from. "All on one page" is an option. Link to a set with `questions.html?topic=A.1`, or to one question with `&q=A1-004`.
+
+## Home page and About page
+- **Joke of the day** (`index.html`): the jokes are in `js/jokes.js` as `{ q, a }` pairs; `js/site.js` picks a random one on each load (never the same as last time on that device) and the "Reveal the answer" button shows the punchline. Jokes must be science (ideally physics) puns that are safe for school: no romance, alcohol, unkind or rude jokes.
+- **About page** (`about.html`): the teacher's photo is `images/about/mark-silkstone.jpg` (resized, metadata removed). Only general professional details: never phone, email, date of birth, address, QTS number or referees.
 
 ## Previewing
 - Double-click `preview.bat` (or run `powershell -ExecutionPolicy Bypass -File tools/preview.ps1`), then open http://localhost:8000. A preview server is needed because browsers block the question bank from loading JSON files when a page is opened straight from disk.
