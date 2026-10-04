@@ -4,15 +4,357 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>B.2 Greenhouse effect · DP Physics</title>
+  <meta name="description" content="IB DP Physics B.2 Greenhouse effect: energy balance, emissivity, albedo, the solar constant and S/4, equilibrium temperature, greenhouse gases, the resonance and energy-level models, surface–atmosphere energy flows and the enhanced greenhouse effect.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="B.2">
+</head>
+<body data-root="../" data-section="themes" data-topic="B.2">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="b.html">Theme B The particulate nature of matter</a></p>
     <h1><span class="code">B.2</span>Greenhouse effect</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <p class="lead">Without its atmosphere, the Earth's average surface temperature would be about −18 °C, and most of its water would be frozen. This topic uses the radiation laws from B.1 to model the Earth as a system: energy arrives from the Sun, some is reflected, and the rest must eventually be radiated back to space. Greenhouse gases slow that escape, keeping us warm, and human activity is strengthening the effect. There is no additional HL content in B.2.</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Models</span><span class="tag">Evidence</span><span class="tag">Science as a shared endeavour</span><span class="tag">Global impact of science</span></div>
+          <p><strong>Models.</strong> On this page we treat the Earth as a single black or grey body with one temperature. Real climate models split the atmosphere, oceans and ice into millions of cells and run on supercomputers. Both are models: the simple one shows the main idea, and the complex ones make detailed predictions that are tested against new observations.</p>
+          <p><strong>Evidence.</strong> In 1856 Eunice Foote showed that a glass cylinder of carbon dioxide warmed more in sunlight than one of ordinary air, and in 1859 John Tyndall measured how strongly different gases absorb infrared. Since 1958, careful measurements at Mauna Loa in Hawaii have recorded a steady rise in atmospheric CO<sub>2</sub>.</p>
+          <p><strong>Shared endeavour.</strong> The Intergovernmental Panel on Climate Change (IPCC) brings together thousands of scientists from around the world to review the evidence. Its reports are checked line by line before they are published.</p>
+          <p><strong>Global impact.</strong> Rising temperatures, melting ice and rising seas affect every country, but not equally. Decisions about energy and emissions now involve physics, economics, politics and ethics together.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>When scientists disagree, how do we decide?</strong> Climate scientists agree that human activity is warming the planet, but they still debate how fast and by how much. How should the public judge between competing predictions?</li>
+            <li><strong>How far can we trust a model of the future?</strong> A prediction for the year 2100 can't be checked until 2100. What makes a model believable before its predictions can be tested?</li>
+            <li><strong>Is a simple model wrong, or just incomplete?</strong> Treating molecules as balls on springs explains why CO<sub>2</sub> absorbs infrared, but the "real" explanation uses quantum energy levels. Can two different models both be valid?</li>
+            <li><strong>Who should decide what to do?</strong> Physics can predict the effects of emissions, but it can't say how to share the cost of cutting them. Where does scientific knowledge end and ethical or political judgement begin?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <ol>
+        <li><a href="#balance">Energy balance</a></li>
+        <li><a href="#emissivity">Emissivity</a></li>
+        <li><a href="#albedo">Albedo</a></li>
+        <li><a href="#solar">The solar constant and the S/4 rule</a></li>
+        <li><a href="#equilibrium">Equilibrium temperature of a planet</a></li>
+        <li><a href="#greenhouse">The greenhouse effect</a></li>
+        <li><a href="#gases">Greenhouse gases</a></li>
+        <li><a href="#models">Why greenhouse gases absorb infrared</a></li>
+        <li><a href="#flows">Energy flows between the surface and the atmosphere</a></li>
+        <li><a href="#enhanced">The enhanced greenhouse effect</a></li>
+        <li><a href="#modelling">Modelling a changing climate</a></li>
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="balance">1. Energy balance</h2>
+    <p>The principle behind this whole topic is the <strong>conservation of energy</strong>. A planet is constantly receiving energy from its star and constantly radiating energy into space.</p>
+    <ul>
+      <li>If it absorbs energy faster than it radiates it, its internal energy increases and it warms up.</li>
+      <li>As it warms, it radiates more (remember $L = \sigma AT^4$), until the outgoing power equals the incoming power.</li>
+      <li>The planet is then in <strong>radiative equilibrium</strong>, and its temperature stays constant.</li>
+    </ul>
+    <div class="key"><strong>Energy balance:</strong> at a constant temperature, power absorbed = power emitted. To solve energy-balance problems, write down both sides and set them equal.</div>
+
+    <!-- ===================================================== -->
+    <h2 id="emissivity">2. Emissivity</h2>
+    <p>A black body (B.1) is a perfect emitter. Real surfaces emit less than a black body at the same temperature. We compare them with a black body using the <strong>emissivity</strong> $e$:</p>
+    <div class="key">
+      $$e = \frac{\text{power radiated per unit area}}{\sigma T^4}$$
+      <p style="margin:0">So the power radiated by a surface of area $A$ is $P = e\sigma AT^4$. Emissivity has no units and lies between 0 and 1: $e = 1$ for a black body, and a surface that emits less than a black body is sometimes called a <strong>grey body</strong>.</p>
+    </div>
+    <p>Good emitters are also good absorbers, so a surface's emissivity also tells you what fraction of incoming radiation it absorbs (at the same wavelengths). Typical values: polished silver about 0.02, white paint about 0.9 in the infrared, human skin about 0.98, and soot or charcoal about 0.95.</p>
+    <div class="worked">
+      <h3>Worked example: a radiator panel</h3>
+      <p>A painted radiator panel has a surface area of 1.2 $\text{m}^2$, a temperature of 60 °C and an emissivity of 0.90. Find the power it radiates.</p>
+      <p>$T = 60 + 273 = 333$ K.</p>
+      <p>$P = e\sigma AT^4 = 0.90 \times 5.67 \times 10^{-8} \times 1.2 \times 333^4 = 750$ W.</p>
+      <p>It also absorbs radiation from the room around it, so the <em>net</em> power it loses by radiation is smaller than this.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="albedo">3. Albedo</h2>
+    <p>When sunlight reaches a planet, some of it is reflected or scattered straight back into space without warming anything. The <strong>albedo</strong> $\alpha$ measures how much:</p>
+    <div class="key">
+      $$\alpha = \frac{\text{total scattered power}}{\text{total incident power}}$$
+      <p style="margin:0">Albedo has no units and lies between 0 (absorbs everything) and 1 (reflects everything). The fraction absorbed is $1 - \alpha$.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Surface</th><th>Typical albedo</th></tr>
+        <tr><td>fresh snow</td><td>0.8–0.9</td></tr>
+        <tr><td>thick cloud</td><td>0.6–0.8</td></tr>
+        <tr><td>sea ice</td><td>0.5–0.7</td></tr>
+        <tr><td>desert sand</td><td>0.4</td></tr>
+        <tr><td>grassland</td><td>0.25</td></tr>
+        <tr><td>forest</td><td>0.1–0.15</td></tr>
+        <tr><td>ocean (Sun high in the sky)</td><td>0.06</td></tr>
+      </table>
+    </div>
+    <p>The Earth's average albedo is about <strong>0.30</strong>. It isn't fixed: it changes from day to day with <strong>cloud cover</strong>, and it depends on <strong>latitude</strong> (polar ice and snow reflect strongly, and sunlight arriving at a low angle reflects more from water), on the season, and on the type of land.</p>
+    <div class="worked">
+      <h3>Worked example: snow and sea</h3>
+      <p>Sunlight of intensity 900 $\text{W m}^{-2}$ falls on 50 $\text{m}^2$ of fresh snow (albedo 0.85) and on 50 $\text{m}^2$ of open sea (albedo 0.06). Find the power absorbed by each.</p>
+      <p>Incident power on each: $900 \times 50 = 45\,000$ W.</p>
+      <p>Snow absorbs $(1 - 0.85) \times 45\,000 = 6800$ W. &nbsp; Sea absorbs $(1 - 0.06) \times 45\,000 = 42\,000$ W.</p>
+      <p>The sea absorbs about six times as much. When Arctic ice melts and exposes dark sea, more sunlight is absorbed, which melts more ice. This <strong>ice–albedo feedback</strong> makes warming faster near the poles.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="solar">4. The solar constant and the S/4 rule</h2>
+    <p>The <strong>solar constant</strong> $S$ is the intensity of the Sun's radiation arriving at the Earth's distance from the Sun, measured above the atmosphere on a surface at right angles to the rays. It is the apparent brightness of the Sun from the Earth (B.1):</p>
+    <div class="key">$$S = 1.36 \times 10^3\ \text{W m}^{-2}$$</div>
+    <p>Not every square metre of the Earth receives this much. The Earth intercepts sunlight over a flat disc of area $\pi R^2$ (the size of its shadow), but that energy is shared out over its whole surface of area $4\pi R^2$, day side and night side, as the planet spins:</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 210" role="img" aria-labelledby="b2at">
+        <title id="b2at">Parallel rays of sunlight arriving from the left hit a spherical Earth. Behind the Earth is its shadow, a cylinder whose cross-section is a disc of area pi R squared. The Earth's total surface area is 4 pi R squared.</title>
+        <g class="l2 thin" marker-end="url(#ah2)">
+          <line x1="8" y1="55" x2="84" y2="55"/><line x1="8" y1="80" x2="56" y2="80"/><line x1="8" y1="110" x2="48" y2="110"/><line x1="8" y1="140" x2="56" y2="140"/><line x1="8" y1="165" x2="84" y2="165"/>
+        </g>
+        <g class="axis dash"><line x1="110" y1="50" x2="330" y2="50"/><line x1="110" y1="170" x2="330" y2="170"/></g>
+        <ellipse cx="300" cy="110" rx="13" ry="60" class="area"/>
+        <ellipse cx="300" cy="110" rx="13" ry="60" class="axis" fill="none"/>
+        <circle cx="110" cy="110" r="60" class="f1" opacity="0.85"/>
+        <text x="110" y="200" text-anchor="middle">surface 4πR²</text>
+        <text x="300" y="200" text-anchor="middle">disc πR²</text>
+        <text class="t2" x="8" y="40">sunlight, S</text>
+      </svg>
+      <figcaption>The Earth catches the same sunlight as a <span class="key-1">disc</span> of area πR² facing the Sun, but spreads it over a sphere of area 4πR², four times larger.</figcaption>
+    </figure>
+    <div class="key">
+      $$\text{mean incoming intensity} = \frac{S \times \pi R^2}{4\pi R^2} = \frac{S}{4} = 340\ \text{W m}^{-2}$$
+    </div>
+    <p>Latitude matters too. Near the equator the Sun is high in the sky, and a beam of sunlight falls on a small area. Near the poles the same beam arrives at a low angle and is spread over a much larger area, so the intensity on the ground is lower. It also passes through more atmosphere on the way. That's why the poles are cold.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 200" role="img" aria-labelledby="b2bt">
+        <title id="b2bt">Two beams of sunlight of the same width arrive from the left at a spherical Earth. Beam A hits near the equator, where the surface faces the Sun, and covers a short stretch of surface. Beam B hits at high latitude, where the surface is tilted, and is spread over a much longer stretch.</title>
+        <circle cx="230" cy="110" r="80" class="area"/>
+        <circle cx="230" cy="110" r="80" class="axis" fill="none"/>
+        <line class="grid dash" x1="150" y1="110" x2="310" y2="110"/>
+        <g class="l2 thin"><line x1="40" y1="100" x2="150.6" y2="100"/><line x1="40" y1="120" x2="150.6" y2="120"/><line x1="40" y1="40" x2="191.3" y2="40"/><line x1="40" y1="60" x2="167.6" y2="60"/></g>
+        <path class="l1" style="stroke-width:5" fill="none" d="M150.6 100 A80 80 0 0 0 150.6 120"/>
+        <path class="l1" style="stroke-width:5" fill="none" d="M191.3 40 A80 80 0 0 0 167.6 60"/>
+        <text class="t2" x="20" y="115">A</text><text class="t2" x="20" y="55">B</text>
+        <text x="255" y="105" style="font-size:13px">equator</text>
+      </svg>
+      <figcaption>Two <span class="key-2">beams of equal power</span>. Beam B, at high latitude, is spread over a <span class="key-1">longer stretch of surface</span> than beam A, so each square metre receives less.</figcaption>
+    </figure>
+
+    <!-- ===================================================== -->
+    <h2 id="equilibrium">5. Equilibrium temperature of a planet</h2>
+    <p>Now we can predict a planet's temperature. Per square metre of the surface, on average:</p>
+    <ul>
+      <li><strong>power absorbed</strong> = $(1 - \alpha)\dfrac{S}{4}$;</li>
+      <li><strong>power emitted</strong> = $e\sigma T^4$ (with $e = 1$ for a black body).</li>
+    </ul>
+    <p>At equilibrium these are equal:</p>
+    <div class="key">$$(1 - \alpha)\frac{S}{4} = e\sigma T^4$$</div>
+    <div class="worked">
+      <h3>Worked example: the Earth without greenhouse gases</h3>
+      <p>Treat the Earth as a black body ($e = 1$) with an albedo of 0.30. Estimate its equilibrium surface temperature.</p>
+      <p>Absorbed: $(1 - 0.30) \times \dfrac{1360}{4} = 238\ \text{W m}^{-2}$.</p>
+      <p>$\sigma T^4 = 238$, &nbsp; so &nbsp; $T^4 = \dfrac{238}{5.67 \times 10^{-8}} = 4.20 \times 10^9\ \text{K}^4$.</p>
+      <p>$T = \sqrt[4]{4.20 \times 10^9} = 255$ K, about −18 °C.</p>
+      <p>The real average surface temperature is about <strong>288 K (15 °C)</strong>, 33 K warmer. The difference is the <strong>greenhouse effect</strong>.</p>
+    </div>
+    <p>One way to include the atmosphere in this simple model is to give the Earth an <strong>effective emissivity</strong> less than 1: the atmosphere stops some of the surface's radiation from escaping to space.</p>
+    <div class="worked">
+      <h3>Worked example: effective emissivity</h3>
+      <p>What effective emissivity would give the Earth its real average temperature of 288 K, with the same absorbed intensity of 238 $\text{W m}^{-2}$?</p>
+      <p>$e = \dfrac{238}{\sigma T^4} = \dfrac{238}{5.67 \times 10^{-8} \times 288^4} = \dfrac{238}{390} = 0.61$.</p>
+      <p>So the surface radiates 390 $\text{W m}^{-2}$, but only about 61% of that power's worth escapes to space. The rest is held back by the atmosphere.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="greenhouse">6. The greenhouse effect</h2>
+    <p>The key is that the Sun and the Earth emit at very different wavelengths (Wien's law, B.1):</p>
+    <ul>
+      <li>The Sun's surface is about 5800 K, so its radiation peaks at about 500 nm: mostly <strong>visible</strong> light and near infrared. The atmosphere is almost transparent to it, so much of it reaches the ground.</li>
+      <li>The Earth's surface is about 288 K, so it radiates mostly <strong>infrared</strong>, peaking at about 10 µm.</li>
+      <li><strong>Greenhouse gases</strong> in the atmosphere absorb much of this infrared. The excited molecules then re-emit infrared radiation in <strong>all directions</strong>. Some escapes to space, but a large part is sent back down to the surface.</li>
+      <li>The surface therefore receives energy from both the Sun and the atmosphere, and it settles at a higher temperature than it would without greenhouse gases.</li>
+    </ul>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 232" role="img" aria-labelledby="b2ct">
+        <title id="b2ct">Sunlight, mostly visible, passes through the atmosphere and reaches the ground. The warm ground emits infrared radiation. Some infrared escapes to space. Some is absorbed by a greenhouse gas molecule in the atmosphere, which re-emits infrared in all directions, including back down to the ground.</title>
+        <rect x="0" y="70" width="380" height="70" class="area" opacity="0.7"/>
+        <rect x="0" y="200" width="380" height="24" class="f3" opacity="0.25"/>
+        <circle cx="38" cy="28" r="18" class="f2"/>
+        <line class="l2" x1="58" y1="42" x2="150" y2="196" marker-end="url(#ah2)"/>
+        <text class="t2" x="66" y="30">sunlight</text>
+        <line class="l1" x1="185" y1="198" x2="205" y2="12" marker-end="url(#ah1)"/>
+        <line class="l1" x1="236" y1="198" x2="248" y2="108" marker-end="url(#ah1)"/>
+        <circle cx="250" cy="100" r="6" class="f3"/>
+        <g class="l1 thin" marker-end="url(#ah1)">
+          <line x1="252" y1="93" x2="266" y2="22"/><line x1="255" y1="106" x2="300" y2="194"/><line x1="257" y1="99" x2="330" y2="92"/><line x1="244" y1="96" x2="212" y2="80"/>
+        </g>
+        <text class="t1" x="290" y="40">infrared</text>
+        <text x="262" y="128" style="font-size:13px">greenhouse gas</text>
+        <text x="8" y="132" style="font-size:13px">atmosphere</text>
+        <text x="8" y="217" style="font-size:13px">ground</text>
+      </svg>
+      <figcaption><span class="key-2">Sunlight</span> passes through the atmosphere and warms the ground. The ground emits <span class="key-1">infrared</span>. A greenhouse gas molecule (black) absorbs infrared and re-emits it in all directions, some of it back to the ground.</figcaption>
+    </figure>
+    <p>The name comes from greenhouses, but a real greenhouse works mostly by stopping warm air from rising away (convection). The physics of the atmosphere is different: it is all about absorbing and re-emitting radiation.</p>
+    <p>The natural greenhouse effect is essential for life. Without it, the Earth would be about 33 K colder, and most of its water would be ice.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="gases">7. Greenhouse gases</h2>
+    <p>The four main greenhouse gases each have both <strong>natural</strong> and <strong>human</strong> (anthropogenic) sources:</p>
+    <ul>
+      <li><strong>Water vapour, H<sub>2</sub>O.</strong> Natural: evaporation from oceans, lakes and plants. Human: very little directly, but a warmer atmosphere holds more water vapour, which amplifies warming caused by other gases.</li>
+      <li><strong>Carbon dioxide, CO<sub>2</sub>.</strong> Natural: respiration, volcanoes, decay and forest fires. Human: burning fossil fuels, deforestation and cement making.</li>
+      <li><strong>Methane, CH<sub>4</sub>.</strong> Natural: wetlands, termites and decay without oxygen. Human: cattle and rice farming, landfill sites, and leaks from gas and coal extraction.</li>
+      <li><strong>Nitrous oxide, N<sub>2</sub>O.</strong> Natural: bacteria in soils and oceans. Human: nitrogen fertilisers and some industrial processes.</li>
+    </ul>
+    <p>Water vapour contributes most to the natural greenhouse effect. Nitrogen (N<sub>2</sub>) and oxygen (O<sub>2</sub>), which make up 99% of dry air, hardly absorb infrared at all.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="models">8. Why greenhouse gases absorb infrared</h2>
+    <p>The IB expects you to explain the absorption with two models.</p>
+    <h3>The resonance model</h3>
+    <p>Picture a molecule as atoms joined by springs (the bonds). Like any mass–spring system (C.1), it has <strong>natural frequencies</strong> of vibration. For molecules such as CO<sub>2</sub>, H<sub>2</sub>O and CH<sub>4</sub>, these natural frequencies are in the <strong>infrared</strong> range, about $10^{13}$–$10^{14}$ Hz.</p>
+    <p>Infrared radiation is an oscillating electric field. When its frequency matches a natural frequency of the molecule, it drives the vibration at <strong>resonance</strong> (C.4), and energy is absorbed strongly. The molecule then passes the energy on to other molecules in collisions (warming the air) or re-emits it as infrared in a random direction.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 220" role="img" aria-labelledby="b2dt">
+        <title id="b2dt">A carbon dioxide molecule drawn as an oxygen atom, a carbon atom and another oxygen atom joined by springs, shown vibrating in three ways. Symmetric stretch: both oxygen atoms move outwards together. Asymmetric stretch: both oxygen atoms move one way while the carbon atom moves the other way. Bend: the oxygen atoms move up while the carbon atom moves down.</title>
+        <polyline class="axis thin" fill="none" points="70,45 76.8,39 82.5,51 88.2,39 93.8,51 99.5,39 105.2,51 112,45"/><polyline class="axis thin" fill="none" points="128,45 134.8,39 140.5,51 146.2,39 151.8,51 157.5,39 163.2,51 170,45"/><polyline class="axis thin" fill="none" points="70,115 76.8,109 82.5,121 88.2,109 93.8,121 99.5,109 105.2,121 112,115"/><polyline class="axis thin" fill="none" points="128,115 134.8,109 140.5,121 146.2,109 151.8,121 157.5,109 163.2,121 170,115"/><polyline class="axis thin" fill="none" points="70,185 76.8,179 82.5,191 88.2,179 93.8,191 99.5,179 105.2,191 112,185"/><polyline class="axis thin" fill="none" points="128,185 134.8,179 140.5,191 146.2,179 151.8,191 157.5,179 163.2,191 170,185"/>
+        <g class="f2"><circle cx="60" cy="45" r="10"/><circle cx="180" cy="45" r="10"/><circle cx="60" cy="115" r="10"/><circle cx="180" cy="115" r="10"/><circle cx="60" cy="185" r="10"/><circle cx="180" cy="185" r="10"/></g>
+        <g class="f3"><circle cx="120" cy="45" r="8"/><circle cx="120" cy="115" r="8"/><circle cx="120" cy="185" r="8"/></g>
+        <g class="l3 thin" marker-end="url(#ah3)">
+          <line x1="68" y1="27" x2="46" y2="27"/><line x1="172" y1="27" x2="194" y2="27"/>
+          <line x1="50" y1="97" x2="72" y2="97"/><line x1="132" y1="97" x2="108" y2="97"/><line x1="170" y1="97" x2="192" y2="97"/>
+          <line x1="60" y1="173" x2="60" y2="151"/><line x1="180" y1="173" x2="180" y2="151"/><line x1="120" y1="195" x2="120" y2="215"/>
+        </g>
+        <text x="210" y="50" style="font-size:15px">symmetric stretch</text>
+        <text x="210" y="120" style="font-size:15px">asymmetric stretch</text>
+        <text x="210" y="190" style="font-size:15px">bend</text>
+      </svg>
+      <figcaption>CO<sub>2</sub> as <span class="key-2">oxygen</span> and carbon (black) atoms joined by springs. Arrows show three ways it can vibrate. The bending and asymmetric stretching vibrations have natural frequencies in the infrared, and these are the ones that absorb.</figcaption>
+    </figure>
+    <h3>The molecular energy-level model</h3>
+    <p>Quantum physics (E.1, E.2) says a molecule can only have certain <strong>discrete</strong> amounts of vibrational (and rotational) energy, its <strong>energy levels</strong>. A photon is absorbed only if its energy $E = hf$ exactly matches the difference between two levels. For greenhouse gases, these gaps match the energies of <strong>infrared</strong> photons. Visible photons from the Sun don't match, so they pass through.</p>
+    <p>After absorbing a photon, the molecule drops back to a lower level and emits an infrared photon in a <strong>random direction</strong>, or it shares the energy with neighbouring molecules in collisions.</p>
+    <p>The two models describe the same thing in different languages: the natural frequency in the resonance model corresponds to the energy gap $\Delta E = hf$ in the energy-level model. The resonance model is easier to picture, but it can't explain why only certain sharp frequencies are absorbed. That needs the energy-level model.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="flows">9. Energy flows between the surface and the atmosphere</h2>
+    <p>A better model treats the <strong>surface</strong> and the <strong>atmosphere</strong> as two separate systems that exchange energy. Each one is in equilibrium when its energy in equals its energy out. The diagram shows average flows, in $\text{W m}^{-2}$, for a simplified model of the Earth.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 400 278" role="img" aria-labelledby="b2et">
+        <title id="b2et">Average energy flows in watts per square metre. Of 340 arriving from the Sun, 100 is reflected to space, 75 is absorbed by the atmosphere and 165 is absorbed by the surface. The surface emits 395 as infrared: 35 escapes directly to space and 360 is absorbed by the atmosphere. The surface also transfers 105 to the atmosphere by convection and evaporation. The atmosphere radiates 335 back down to the surface and 205 out to space.</title>
+        <rect x="0" y="95" width="400" height="70" class="area" opacity="0.7"/>
+        <rect x="0" y="248" width="400" height="22" class="f3" opacity="0.25"/>
+        <line class="l2" x1="20" y1="18" x2="20" y2="246" marker-end="url(#ah2)"/>
+        <line class="l2 dash" x1="58" y1="246" x2="58" y2="18" marker-end="url(#ah2)"/>
+        <line class="l2" x1="96" y1="18" x2="96" y2="128" marker-end="url(#ah2)"/>
+        <line class="l1" x1="140" y1="246" x2="140" y2="132" marker-end="url(#ah1)"/>
+        <line class="l1" x1="178" y1="246" x2="178" y2="18" marker-end="url(#ah1)"/>
+        <line class="l3" x1="216" y1="246" x2="216" y2="132" marker-end="url(#ah3)"/>
+        <line class="l1" x1="256" y1="132" x2="256" y2="246" marker-end="url(#ah1)"/>
+        <line class="l1" x1="296" y1="128" x2="296" y2="18" marker-end="url(#ah1)"/>
+        <g style="font-size:14px">
+          <text style="font-size:14px" class="t2" x="24" y="62">340</text><text style="font-size:14px" class="t2" x="62" y="62">100</text><text style="font-size:14px" class="t2" x="100" y="62">75</text>
+          <text style="font-size:14px" class="t1" x="182" y="62">35</text><text style="font-size:14px" class="t1" x="300" y="62">205</text>
+          <text style="font-size:14px" class="t1" x="144" y="210">360</text><text style="font-size:14px" x="220" y="210">105</text><text style="font-size:14px" class="t1" x="260" y="210">335</text>
+        </g>
+        <g text-anchor="end" style="font-size:14px"><text style="font-size:14px" x="396" y="40">space</text><text style="font-size:14px" x="396" y="135">atmosphere</text><text style="font-size:14px" x="396" y="264">surface</text></g>
+      </svg>
+      <figcaption><span class="key-2">Solar radiation</span> (dashed: reflected), <span class="key-1">infrared radiation</span>, and convection and evaporation (black). The surface absorbs 340 − 100 − 75 = 165 of sunlight.</figcaption>
+    </figure>
+    <div class="worked">
+      <h3>Worked example: checking the balance</h3>
+      <p>Show that the surface, the atmosphere and the Earth as a whole are each in equilibrium, and find the surface temperature, treating it as a black body.</p>
+      <p><strong>Surface.</strong> In: $165 + 335 = 500$. &nbsp; Out: $395 + 105 = 500$. ✓</p>
+      <p><strong>Atmosphere.</strong> In: $75 + 360 + 105 = 540$. &nbsp; Out: $335 + 205 = 540$. ✓</p>
+      <p><strong>Top of the atmosphere.</strong> In: 340. &nbsp; Out: $100 + 35 + 205 = 340$. ✓</p>
+      <p><strong>Surface temperature.</strong> $\sigma T^4 = 395$, so $T = \sqrt[4]{\dfrac{395}{5.67 \times 10^{-8}}} = 289$ K.</p>
+      <p>Notice that the surface receives more energy from the atmosphere (335) than from the Sun (165). That back-radiation is the greenhouse effect in numbers.</p>
+    </div>
+    <p>If more greenhouse gas is added, less infrared escapes directly and more is sent back down. The surface then gains more than it loses, and it warms until a new balance is reached at a higher temperature.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="enhanced">10. The enhanced greenhouse effect</h2>
+    <p>The <strong>enhanced greenhouse effect</strong> is the strengthening of the natural greenhouse effect by human activities, which add greenhouse gases to the atmosphere. The main cause is the <strong>burning of fossil fuels</strong> (coal, oil and gas), which releases carbon that was stored underground for millions of years as CO<sub>2</sub>.</p>
+    <ul>
+      <li>Before the industrial revolution the atmosphere held about 280 parts per million (ppm) of CO<sub>2</sub>. It is now over 420 ppm, the highest for hundreds of thousands of years (measured from air bubbles trapped in ancient ice).</li>
+      <li>The Earth's average surface temperature has risen by more than 1 °C since the late 1800s.</li>
+    </ul>
+    <p><strong>Feedbacks</strong> can make warming larger: warmer air holds more water vapour (another greenhouse gas), melting ice lowers the albedo, and thawing permafrost can release methane.</p>
+    <p><strong>Possible consequences</strong> include warmer oceans and air, rising sea levels (from melting land ice and thermal expansion of water), more frequent extreme weather, changes to rainfall and local climates, and oceans becoming more acidic as they absorb CO<sub>2</sub>.</p>
+    <p><strong>Ways to reduce it</strong> include generating electricity from renewable and nuclear sources instead of fossil fuels, using energy more efficiently, electric transport, protecting and replanting forests, and capturing CO<sub>2</sub> from power stations.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="modelling">11. Modelling a changing climate</h2>
+    <p>Real climate models are huge, but the core idea can be shown with a simple model that a spreadsheet can run step by step. Think of a bath with the tap running and the plug half out:</p>
+    <ul>
+      <li>The tap adds 10 litres every minute (like the steady power from the Sun).</li>
+      <li>The plug hole drains 5% of whatever water is in the bath every minute (like radiation to space, which grows as the planet warms).</li>
+    </ul>
+    <p>Each minute, the new amount is $M_{\text{new}} = 0.95\,M_{\text{old}} + 10$. At first the bath fills quickly, but as it fills the drain removes more, until 5% of the water equals the 10 litres added: $0.05M = 10$, so $M = 200$ litres. This is the <strong>equilibrium</strong>.</p>
+    <p>Adding greenhouse gases is like making the plug hole smaller: with the same input, the level rises to a new, higher equilibrium. The model also shows why the response takes time: the bath gets 95% of the way to its new level only after about an hour.</p>
+    <aside class="maths-link">
+      <h3>Maths link: infinite geometric series <span class="tag">AA SL 1.8</span></h3>
+      <p>Starting from an empty bath, after $n$ minutes $M_n = 10(1 + 0.95 + 0.95^2 + \ldots + 0.95^{n-1})$, a geometric series with common ratio $r = 0.95$. Since $|r| &lt; 1$, it converges to $\dfrac{10}{1 - 0.95} = 200$ litres, the equilibrium. Solving $0.95^n = 0.05$ with logarithms gives $n \approx 58$ minutes to get within 5% of it.</p>
+    </aside>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">12. Common mistakes</h2>
+    <ul>
+      <li><strong>Forgetting the factor of 4.</strong> The mean intensity over the whole Earth is $S/4$, not $S$, because a sphere has four times the area of its shadow disc.</li>
+      <li><strong>Forgetting the albedo</strong>, or using $\alpha S$ for the absorbed power. The absorbed fraction is $1 - \alpha$.</li>
+      <li><strong>Mixing up albedo and emissivity.</strong> Albedo is about reflecting incoming (mostly visible) sunlight. Emissivity is about how well a surface emits (and absorbs) compared with a black body.</li>
+      <li><strong>Saying greenhouse gases trap sunlight.</strong> They let most sunlight through. They absorb the <em>infrared</em> emitted by the Earth.</li>
+      <li><strong>Saying the absorbed infrared is re-emitted downwards.</strong> It is re-emitted in all directions; on average, part goes back down.</li>
+      <li><strong>Confusing the greenhouse effect with the ozone hole.</strong> Ozone depletion lets in more ultraviolet; it is a separate problem.</li>
+      <li><strong>Calling the greenhouse effect bad.</strong> The natural effect keeps the Earth habitable. The problem is the <em>enhanced</em> effect.</li>
+      <li><strong>Forgetting to take the fourth root</strong>, or using °C in $\sigma T^4$.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">13. Check your understanding</h2>
+    <details class="check">
+      <summary>Mars is 1.52 times as far from the Sun as the Earth and has an albedo of 0.25. Estimate its equilibrium temperature, treating it as a black body.</summary>
+      <p>Intensity at Mars: $\dfrac{1360}{1.52^2} = 589\ \text{W m}^{-2}$ (inverse-square law). Absorbed: $0.75 \times \dfrac{589}{4} = 110\ \text{W m}^{-2}$. $T = \sqrt[4]{\dfrac{110}{5.67 \times 10^{-8}}} = 210$ K. This is close to the measured average, because Mars has a very thin atmosphere and almost no greenhouse effect.</p>
+    </details>
+    <details class="check">
+      <summary>Why does the atmosphere absorb much of the radiation emitted by the Earth but little of the radiation from the Sun?</summary>
+      <p>The Sun (about 5800 K) emits mostly visible light, while the Earth (about 288 K) emits mostly infrared. Greenhouse gas molecules have natural vibration frequencies (energy gaps) that match infrared, not visible, radiation.</p>
+    </details>
+    <details class="check">
+      <summary>If the Earth's albedo increased because of more cloud cover, what would happen to the equilibrium temperature, all else being equal?</summary>
+      <p>It would fall: a higher albedo means less sunlight is absorbed, so the planet would cool until it emits less. (In reality clouds also absorb and emit infrared, so their overall effect is complicated.)</p>
+    </details>
+    <details class="check">
+      <summary>A surface at 300 K radiates 410 $\text{W m}^{-2}$. What is its emissivity?</summary>
+      <p>$e = \dfrac{410}{5.67 \times 10^{-8} \times 300^4} = \dfrac{410}{459} = 0.89$.</p>
+    </details>
+    <details class="check">
+      <summary>Explain how melting sea ice can speed up global warming.</summary>
+      <p>Ice has a high albedo and reflects most sunlight. The open sea that replaces it has a low albedo and absorbs most sunlight. More energy is absorbed, causing more warming and more melting: a positive feedback.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=B.2">Practise B.2 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>

@@ -4,15 +4,315 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>B.3 Gas laws · DP Physics</title>
+  <meta name="description" content="IB DP Physics B.3 Gas laws: pressure, the mole and the Avogadro constant, the kinetic model of an ideal gas, Boyle's law, Charles's law and the pressure law, the ideal gas equation, P = ρv²/3, internal energy of an ideal gas, p–V diagrams and real gases.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="B.3">
+</head>
+<body data-root="../" data-section="themes" data-topic="B.3">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="b.html">Theme B The particulate nature of matter</a></p>
     <h1><span class="code">B.3</span>Gas laws</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <p class="lead">Squeeze a balloon and it pushes back harder; leave a ball in the cold and it goes soft. Gases follow simple, exact laws that link their pressure, volume and temperature. This topic finds those laws by experiment, combines them into one equation, and then explains them with a model of tiny molecules bouncing around. There is no additional HL content in B.3, but B.4 (HL) builds directly on it.</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Experiments</span><span class="tag">Patterns and trends</span><span class="tag">Models</span><span class="tag">Science as a shared endeavour</span></div>
+          <p><strong>Experiments and patterns.</strong> Robert Boyle (1662) found that squeezing trapped air into half the space doubled its pressure. Jacques Charles and Joseph Gay-Lussac later found how volume and pressure change with temperature. These "empirical" laws came from measurements, before anyone could explain them.</p>
+          <p><strong>Models.</strong> In the 1800s, Maxwell and Boltzmann showed that the same laws follow from a model of molecules as tiny, hard, randomly moving particles obeying Newton's laws. The empirical route and the theoretical route arrive at the same equation, which gives us more confidence in both.</p>
+          <p><strong>Shared endeavour.</strong> Many scientists in different countries contributed: Avogadro in Italy, Clapeyron and Gay-Lussac in France, Boltzmann in Austria and Maxwell in Scotland. Some of them stated the same laws in different but equivalent ways.</p>
+          <p><strong>Ideal and real.</strong> No real gas is perfectly ideal. Physicists use the ideal model because it is simple and works well under the right conditions, and they know when it breaks down.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>When is an idealised model "good enough" to count as knowledge?</strong> The ideal gas law is never exactly true, yet engineers rely on it every day. Is knowledge about an imaginary gas real knowledge?</li>
+            <li><strong>Can we know that something exists before we can see it?</strong> Around 1900, some respected scientists still doubted that atoms were real, even though the kinetic theory worked so well. What finally counts as evidence for something invisible?</li>
+            <li><strong>Do two routes to the same answer make it more certain?</strong> The gas laws were found by experiment and also derived from a theory. Does agreement between reason and observation prove anything?</li>
+            <li><strong>Is a "law" in science the same as a law in society?</strong> Boyle's "law" is broken by every real gas at high pressure. What do scientists mean when they call something a law?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <ol>
+        <li><a href="#pressure">Pressure</a></li>
+        <li><a href="#mole">The mole and the Avogadro constant</a></li>
+        <li><a href="#kinetic">The kinetic model of an ideal gas</a></li>
+        <li><a href="#laws">The empirical gas laws</a></li>
+        <li><a href="#ideal">The ideal gas equation</a></li>
+        <li><a href="#molecular">Pressure from molecular collisions</a></li>
+        <li><a href="#energy">Temperature, speed and internal energy</a></li>
+        <li><a href="#pv">Pressure–volume diagrams</a></li>
+        <li><a href="#real">Real gases and ideal gases</a></li>
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="pressure">1. Pressure</h2>
+    <div class="key">
+      $$P = \frac{F}{A}$$
+      <p style="margin:0">$P$ is the pressure in pascals (Pa), $F$ is the force acting <strong>perpendicular</strong> (at right angles) to a surface in N, and $A$ is the area in $\text{m}^2$. $1\ \text{Pa} = 1\ \text{N m}^{-2}$.</p>
+    </div>
+    <p>Pressure is a scalar: a gas pushes equally in all directions on every surface it touches. Normal air pressure at sea level is about $1.0 \times 10^5$ Pa (100 kPa). That's the weight of about 10 tonnes on every square metre, but we don't notice it because the air inside our bodies and homes pushes back just as hard.</p>
+    <div class="worked">
+      <h3>Worked example: why a can collapses</h3>
+      <p>A sealed metal box has one face of area $0.050\ \text{m}^2$. Air is pumped out until the pressure inside is $2.0 \times 10^4$ Pa. The air outside is at $1.0 \times 10^5$ Pa. Find the resultant force on the face.</p>
+      <p>Pressure difference: $1.0 \times 10^5 - 2.0 \times 10^4 = 8.0 \times 10^4$ Pa.</p>
+      <p>$F = PA = 8.0 \times 10^4 \times 0.050 = 4000$ N, pushing inwards. That's about the weight of a 400 kg object, which is why thin cans crush when the air inside is removed.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="mole">2. The mole and the Avogadro constant</h2>
+    <p>Gases contain enormous numbers of molecules, so we count them in <strong>moles</strong>. One mole is $6.02 \times 10^{23}$ particles: the <strong>Avogadro constant</strong> $N_A$.</p>
+    <div class="key">
+      $$n = \frac{N}{N_A}$$
+      <p style="margin:0">$n$ is the <strong>amount of substance</strong> in mol, $N$ is the number of particles, and $N_A = 6.02 \times 10^{23}\ \text{mol}^{-1}$.</p>
+    </div>
+    <p>The <strong>molar mass</strong> $M$ is the mass of one mole. In grams, it equals the relative molecular mass from the periodic table: about 4 g for helium, 18 g for water, 28 g for nitrogen (N<sub>2</sub>) and 44 g for CO<sub>2</sub>. So the number of moles in a mass $m$ is $n = \dfrac{m}{M}$. Remember to convert grams to kilograms when you need SI units.</p>
+    <div class="worked">
+      <h3>Worked example: molecules in a glass of water</h3>
+      <p>How many molecules are there in 0.25 kg of water? (Molar mass of water = 18 g $\text{mol}^{-1}$.)</p>
+      <p>$n = \dfrac{250\ \text{g}}{18\ \text{g mol}^{-1}} = 13.9$ mol.</p>
+      <p>$N = nN_A = 13.9 \times 6.02 \times 10^{23} = 8.4 \times 10^{24}$ molecules.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="kinetic">3. The kinetic model of an ideal gas</h2>
+    <p>An <strong>ideal gas</strong> is a model: an imaginary gas whose molecules obey these assumptions.</p>
+    <ul>
+      <li>The gas contains a very large number of identical molecules, moving <strong>randomly</strong> in all directions with a range of speeds.</li>
+      <li>The molecules are tiny: their total volume is <strong>negligible</strong> compared with the volume of the container.</li>
+      <li>There are <strong>no forces between molecules</strong>, except during collisions. So between collisions they move in straight lines at constant speed.</li>
+      <li>All collisions, with each other and with the walls, are <strong>perfectly elastic</strong>: no kinetic energy is lost.</li>
+      <li>Collisions last a negligible time compared with the time between them.</li>
+      <li>The molecules obey Newton's laws of motion.</li>
+    </ul>
+    <p>With no intermolecular forces, an ideal gas has <strong>no intermolecular potential energy</strong>: all its internal energy is the kinetic energy of its molecules.</p>
+    <h3>Explaining gas behaviour with molecules</h3>
+    <ul>
+      <li><strong>Pressure:</strong> each molecule that hits a wall bounces back, so its momentum changes. By Newton's second and third laws, the wall exerts a force on the molecule and the molecule exerts an equal force on the wall. Billions of collisions every second add up to a steady force on each square metre: the pressure.</li>
+      <li><strong>Heating at constant volume:</strong> the molecules move faster, so they hit the walls more often and with a bigger change in momentum each time. The pressure rises.</li>
+      <li><strong>Compressing at constant temperature:</strong> the molecules have less distance to travel between walls, so they hit each square metre more often. The pressure rises, although each collision is just as hard as before.</li>
+      <li><strong>Heating at constant pressure:</strong> faster molecules would hit harder and more often, so the gas must expand (spreading the collisions over more area and making them less frequent) to keep the pressure the same.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="laws">4. The empirical gas laws</h2>
+    <p>For a <strong>fixed mass</strong> of gas, keep one of $P$, $V$ and $T$ constant and investigate how the other two are related:</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 390 165" role="img" aria-labelledby="b3at">
+        <title id="b3at">Three graphs. Left: pressure against volume at constant temperature, a curve that falls steeply and then levels off, with pressure inversely proportional to volume. Middle: volume against kelvin temperature at constant pressure, a straight line through the origin. Right: pressure against kelvin temperature at constant volume, a straight line through the origin.</title>
+        <line class="axis" x1="28" y1="125" x2="130" y2="125" marker-end="url(#ah3)"/><line class="axis" x1="28" y1="125" x2="28" y2="12" marker-end="url(#ah3)"/><text x="14" y="24" style="font-size:13px">P</text><text x="118" y="142" style="font-size:13px">V</text><text x="74" y="160" text-anchor="middle" style="font-size:13px">constant T</text><polyline class="l1" points="43.2,26.6 45.2,38.0 47.2,47.0 49.2,54.4 51.2,60.5 53.2,65.6 55.2,69.9 57.2,73.7 59.2,77.0 61.2,79.9 63.1,82.4 65.1,84.7 67.1,86.8 69.1,88.6 71.1,90.3 73.1,91.8 75.1,93.2 77.1,94.5 79.1,95.7 81.1,96.8 83.1,97.8 85.1,98.8 87.1,99.7 89.1,100.5 91.1,101.3 93.1,102.0 95.1,102.7 97.1,103.3 99.1,103.9 101.1,104.5 103.0,105.1 105.0,105.6 107.0,106.1 109.0,106.5 111.0,107.0 113.0,107.4 115.0,107.8 117.0,108.2 119.0,108.6 121.0,108.9 123.0,109.2"/><line class="axis" x1="156" y1="125" x2="258" y2="125" marker-end="url(#ah3)"/><line class="axis" x1="156" y1="125" x2="156" y2="12" marker-end="url(#ah3)"/><text x="142" y="24" style="font-size:13px">V</text><text x="246" y="142" style="font-size:13px">T</text><text x="202" y="160" text-anchor="middle" style="font-size:13px">constant P</text><line class="l2" x1="156" y1="125" x2="246" y2="30"/><line class="axis" x1="284" y1="125" x2="386" y2="125" marker-end="url(#ah3)"/><line class="axis" x1="284" y1="125" x2="284" y2="12" marker-end="url(#ah3)"/><text x="270" y="24" style="font-size:13px">P</text><text x="374" y="142" style="font-size:13px">T</text><text x="330" y="160" text-anchor="middle" style="font-size:13px">constant V</text><line class="l2" x1="284" y1="125" x2="374" y2="30"/>
+      </svg>
+      <figcaption>Graphs for a fixed mass of gas. Left: <span class="key-1">Boyle's law</span>. Middle and right: <span class="key-2">Charles's law</span> and the pressure law, with temperature in kelvin.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>Boyle's law</strong> (constant temperature): $P \propto \dfrac{1}{V}$, so $PV = \text{constant}$.</li>
+      <li><strong>Charles's law</strong> (constant pressure): $V \propto T$, so $\dfrac{V}{T} = \text{constant}$.</li>
+      <li><strong>The pressure law</strong> (constant volume): $P \propto T$, so $\dfrac{P}{T} = \text{constant}$.</li>
+    </ul>
+    <p>The temperature must be in <strong>kelvin</strong>. Plotted against °C, the lines in the middle and right graphs don't pass through the origin; extended backwards they cross the axis at −273 °C (absolute zero, see B.1).</p>
+    <p>In the lab, you take each reading only after waiting for the gas to settle: compressing a gas warms it slightly, and Boyle's law needs the temperature to return to its original value.</p>
+    <aside class="maths-link">
+      <h3>Maths link: the reciprocal function <span class="tag">AA SL 2.8</span></h3>
+      <p>Boyle's law, $P = \dfrac{k}{V}$, has the shape of the reciprocal function $y = \dfrac{1}{x}$. The axes are asymptotes: as $V$ gets very large, $P$ approaches zero, and as $V$ approaches zero, $P$ grows without limit. A curve is hard to test by eye, so we plot $P$ against $\dfrac{1}{V}$ instead. If Boyle's law holds, that graph is a straight line through the origin with gradient $k$.</p>
+    </aside>
+
+    <!-- ===================================================== -->
+    <h2 id="ideal">5. The ideal gas equation</h2>
+    <p>The three laws combine into one, for a fixed amount of gas:</p>
+    <div class="key">$$\frac{PV}{T} = \text{constant} \qquad\text{so}\qquad \frac{P_1V_1}{T_1} = \frac{P_2V_2}{T_2}$$</div>
+    <p>Experiments show that the constant is proportional to the amount of gas, and is the same for every gas that behaves ideally. This gives the <strong>ideal gas equation</strong>:</p>
+    <div class="key">
+      $$PV = nRT = Nk_BT$$
+      <p style="margin:0">$P$ in Pa, $V$ in $\text{m}^3$, $T$ in K. $n$ is the number of moles and $R = 8.31\ \text{J K}^{-1}\,\text{mol}^{-1}$ is the <strong>gas constant</strong>. $N$ is the number of molecules and $k_B = 1.38 \times 10^{-23}\ \text{J K}^{-1}$ is the Boltzmann constant. The two forms agree because $N = nN_A$ and $R = N_Ak_B$.</p>
+    </div>
+    <p>Units trap: volumes are often given in litres or cm³. $1\ \text{litre} = 1000\ \text{cm}^3 = 10^{-3}\ \text{m}^3$.</p>
+    <div class="worked">
+      <h3>Worked example: the air in a classroom</h3>
+      <p>A classroom measures 8.0 m × 6.0 m × 3.0 m. The air is at $1.0 \times 10^5$ Pa and 20 °C. Find the amount of air in moles, the number of molecules, and the mass of the air (molar mass of air = 29 g $\text{mol}^{-1}$).</p>
+      <p>$V = 8.0 \times 6.0 \times 3.0 = 144\ \text{m}^3$ and $T = 293$ K.</p>
+      <p>$n = \dfrac{PV}{RT} = \dfrac{1.0 \times 10^5 \times 144}{8.31 \times 293} = 5.9 \times 10^3$ mol.</p>
+      <p>$N = nN_A = 5.9 \times 10^3 \times 6.02 \times 10^{23} = 3.6 \times 10^{27}$ molecules.</p>
+      <p>Mass $= nM = 5.9 \times 10^3 \times 0.029 = 170$ kg. The air in your classroom weighs about as much as two adults.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: a weather balloon</h3>
+      <p>A weather balloon holds $5.0\ \text{m}^3$ of helium at $1.0 \times 10^5$ Pa and 290 K at ground level. It rises to a height where the pressure is $2.5 \times 10^4$ Pa and the temperature is 230 K. Find its new volume (assume no helium escapes).</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 360 170" role="img" aria-labelledby="b3bt">
+          <title id="b3bt">A small balloon at ground level and a much larger balloon high in the atmosphere, where the pressure and temperature are lower.</title>
+          <line class="axis" x1="10" y1="160" x2="350" y2="160"/>
+          <circle cx="80" cy="118" r="22" class="f1" opacity="0.8"/>
+          <line class="axis thin" x1="80" y1="140" x2="80" y2="160"/>
+          <circle cx="260" cy="62" r="44" class="f1" opacity="0.8"/>
+          <line class="axis thin" x1="260" y1="106" x2="260" y2="128"/>
+          <line class="l3 thin" x1="115" y1="110" x2="205" y2="70" marker-end="url(#ah3)"/>
+          <text x="80" y="82" text-anchor="middle" style="font-size:13px">5.0 m³</text>
+          <text x="260" y="66" text-anchor="middle" style="font-size:13px">V₂ = ?</text>
+          <text x="20" y="20" style="font-size:13px">ground: 100 kPa, 290 K</text>
+          <text x="200" y="150" style="font-size:13px">high: 25 kPa, 230 K</text>
+        </svg>
+        <figcaption>As the balloon rises, the falling pressure lets it <span class="key-1">expand</span>, while the falling temperature makes it shrink a little.</figcaption>
+      </figure>
+      <p>$V_2 = V_1 \times \dfrac{P_1}{P_2} \times \dfrac{T_2}{T_1} = 5.0 \times \dfrac{1.0 \times 10^5}{2.5 \times 10^4} \times \dfrac{230}{290} = 16\ \text{m}^3$.</p>
+      <p>Quartering the pressure would make it four times bigger, but the cooling reduces this a little. Weather balloons are only partly filled at launch, so they have room to grow.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="molecular">6. Pressure from molecular collisions</h2>
+    <p>The kinetic model doesn't only explain the gas laws: it predicts the pressure from the motion of the molecules.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 192" role="img" aria-labelledby="b3ct">
+        <title id="b3ct">A cube-shaped box of side L. A molecule of mass m moves towards the right-hand wall with velocity u, bounces off it elastically and moves back with velocity minus u. Its momentum changes by 2 m u.</title>
+        <rect x="60" y="20" width="140" height="140" class="axis" fill="none"/>
+        <circle cx="140" cy="80" r="8" class="f2"/>
+        <line class="l2" x1="150" y1="80" x2="190" y2="80" marker-end="url(#ah2)"/>
+        <text class="t2" x="160" y="72">u</text>
+        <circle cx="160" cy="115" r="8" class="f2" opacity="0.5"/>
+        <line class="l1" x1="150" y1="115" x2="110" y2="115" marker-end="url(#ah1)"/>
+        <text class="t1" x="112" y="138">−u</text>
+        <line class="l3 thin" x1="60" y1="166" x2="200" y2="166" marker-start="url(#ah3)" marker-end="url(#ah3)"/>
+        <text x="130" y="186" text-anchor="middle" style="font-size:14px">L</text>
+        <text x="215" y="70" style="font-size:14px">before: mu</text>
+        <text x="215" y="95" style="font-size:14px">after: −mu</text>
+        <text x="215" y="120" style="font-size:14px">change: 2mu</text>
+      </svg>
+      <figcaption>A molecule <span class="key-2">hits the wall</span> and <span class="key-1">bounces back</span> elastically. Its change of momentum is 2mu each time.</figcaption>
+    </figure>
+    <p>Here is the outline of the argument (you need the result and the idea, not the full derivation):</p>
+    <ol>
+      <li>A molecule of mass $m$ moving at speed $u$ towards a wall bounces back at the same speed. Its momentum changes by $2mu$.</li>
+      <li>It travels $2L$ (there and back) before hitting the same wall again, so it hits it every $\dfrac{2L}{u}$ seconds.</li>
+      <li>The average force on the wall is the rate of change of momentum: $\dfrac{2mu}{2L/u} = \dfrac{mu^2}{L}$.</li>
+      <li>Add up the forces from all $N$ molecules. On average a third of the motion is in each of the three directions, so the total force is $\dfrac{Nm\overline{v^2}}{3L}$, where $\overline{v^2}$ is the <strong>mean of the squares</strong> of the speeds.</li>
+      <li>Divide by the wall's area $L^2$, and note that $\dfrac{Nm}{L^3}$ is the density $\rho$ of the gas.</li>
+    </ol>
+    <div class="key">
+      $$P = \frac{1}{3}\rho\overline{v^2}$$
+      <p style="margin:0">$\rho$ is the density of the gas in $\text{kg m}^{-3}$ and $\overline{v^2}$ is the mean square speed of its molecules in $\text{m}^2\,\text{s}^{-2}$. The square root of $\overline{v^2}$ is called the <strong>root-mean-square (rms) speed</strong>, $v_{\text{rms}}$.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: how fast are air molecules?</h3>
+      <p>Air at $1.0 \times 10^5$ Pa has a density of 1.2 $\text{kg m}^{-3}$. Find the rms speed of its molecules.</p>
+      <p>$\overline{v^2} = \dfrac{3P}{\rho} = \dfrac{3 \times 1.0 \times 10^5}{1.2} = 2.5 \times 10^5\ \text{m}^2\,\text{s}^{-2}$, so $v_{\text{rms}} = 500\ \text{m s}^{-1}$.</p>
+      <p>That's faster than the speed of sound (340 $\text{m s}^{-1}$), which makes sense: sound is passed on by the molecules themselves.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="energy">7. Temperature, speed and internal energy</h2>
+    <p>Put the two descriptions of a gas together. From $P = \frac{1}{3}\rho\overline{v^2}$ with $\rho = \dfrac{Nm}{V}$, we get $PV = \frac{1}{3}Nm\overline{v^2}$. The ideal gas equation says $PV = Nk_BT$. So:</p>
+    $$\tfrac{1}{3}m\overline{v^2} = k_BT \qquad\Rightarrow\qquad \tfrac{1}{2}m\overline{v^2} = \tfrac{3}{2}k_BT$$
+    <p>This is the result from B.1: the average kinetic energy of a molecule is $\frac{3}{2}k_BT$. The kinetic model <em>explains</em> why kelvin temperature measures the average kinetic energy of the molecules.</p>
+    <div class="worked">
+      <h3>Worked example: helium atoms</h3>
+      <p>Find the rms speed of helium atoms at 300 K. The mass of a helium atom is $6.6 \times 10^{-27}$ kg.</p>
+      <p>$\overline{v^2} = \dfrac{3k_BT}{m} = \dfrac{3 \times 1.38 \times 10^{-23} \times 300}{6.6 \times 10^{-27}} = 1.9 \times 10^6\ \text{m}^2\,\text{s}^{-2}$, so $v_{\text{rms}} = 1.4 \times 10^3\ \text{m s}^{-1}$.</p>
+      <p>At the same temperature, all gases have the same average kinetic energy, so lighter molecules move faster. Helium atoms move nearly three times faster than nitrogen molecules.</p>
+    </div>
+    <h3>Internal energy of an ideal gas</h3>
+    <p>An ideal gas has no intermolecular potential energy, so its internal energy $U$ is just the total kinetic energy of its molecules. For a <strong>monatomic</strong> gas (single atoms, such as helium, neon or argon):</p>
+    <div class="key">
+      $$U = \frac{3}{2}Nk_BT = \frac{3}{2}nRT$$
+      <p style="margin:0">The internal energy of a fixed amount of ideal gas depends <strong>only on its temperature</strong>, not on its pressure or volume.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: internal energy of a helium balloon</h3>
+      <p>A party balloon contains 0.50 mol of helium at 20 °C. Find its internal energy.</p>
+      <p>$U = \tfrac{3}{2}nRT = 1.5 \times 0.50 \times 8.31 \times 293 = 1.8 \times 10^3$ J.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="pv">8. Pressure–volume diagrams</h2>
+    <p>The state of a fixed amount of gas is described by its pressure, volume and temperature. Because $PV = nRT$, we only need two of them: a point on a graph of $P$ against $V$ fixes the third. A change of state is drawn as a line or curve on this <strong>p–V diagram</strong>.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 215" role="img" aria-labelledby="b3dt">
+        <title id="b3dt">A pressure–volume diagram with three isotherms, curves of constant temperature; hotter isotherms lie further from the origin. A gas goes from state A to B along a horizontal line at constant pressure, then from B to C along a vertical line at constant volume, then from C to D along an isotherm.</title>
+        <line class="axis" x1="40" y1="190" x2="372" y2="190" marker-end="url(#ah3)"/>
+        <line class="axis" x1="40" y1="198" x2="40" y2="12" marker-end="url(#ah3)"/>
+        <text x="20" y="24">P</text><text x="356" y="210">V</text>
+        <polyline class="axis thin dash" points="72.0,20.0 76.8,42.2 81.6,59.2 86.4,72.8 91.2,83.8 96.0,92.9 100.8,100.5 105.6,107.1 110.4,112.7 115.2,117.7 120.0,122.0 124.8,125.8 129.6,129.3 134.4,132.4 139.2,135.2 144.0,137.7 148.8,140.0 153.6,142.1 158.4,144.1 163.2,145.8 168.0,147.5 172.8,149.0 177.6,150.5 182.4,151.8 187.2,153.0 192.0,154.2 196.8,155.3 201.6,156.3 206.4,157.3 211.2,158.2 216.0,159.1 220.8,159.9 225.6,160.7 230.4,161.4 235.2,162.1 240.0,162.8 244.8,163.4 249.6,164.0 254.4,164.6 259.2,165.2 264.0,165.7 268.8,166.2 273.6,166.7 278.4,167.2 283.2,167.6 288.0,168.1 292.8,168.5 297.6,168.9 302.4,169.3 307.2,169.6 312.0,170.0 316.8,170.3 321.6,170.7 326.4,171.0 331.2,171.3 336.0,171.6 340.8,171.9 345.6,172.2 350.4,172.5 355.2,172.7 360.0,173.0"/>
+        <polyline class="axis thin dash" points="104.0,20.0 108.3,30.6 112.5,40.0 116.8,48.3 121.1,55.8 125.3,62.5 129.6,68.6 133.9,74.1 138.1,79.1 142.4,83.8 146.7,88.0 150.9,91.9 155.2,95.6 159.5,98.9 163.7,102.1 168.0,105.0 172.3,107.7 176.5,110.3 180.8,112.7 185.1,115.0 189.3,117.1 193.6,119.2 197.9,121.1 202.1,122.9 206.4,124.6 210.7,126.2 214.9,127.8 219.2,129.3 223.5,130.7 227.7,132.0 232.0,133.3 236.3,134.6 240.5,135.7 244.8,136.9 249.1,138.0 253.3,139.0 257.6,140.0 261.9,141.0 266.1,141.9 270.4,142.8 274.7,143.6 278.9,144.5 283.2,145.3 287.5,146.0 291.7,146.8 296.0,147.5 300.3,148.2 304.5,148.9 308.8,149.5 313.1,150.2 317.3,150.8 321.6,151.4 325.9,151.9 330.1,152.5 334.4,153.0 338.7,153.6 342.9,154.1 347.2,154.6 351.5,155.1 355.7,155.5 360.0,156.0"/>
+        <polyline class="axis thin dash" points="168.0,20.0 171.2,24.1 174.4,28.1 177.6,31.9 180.8,35.5 184.0,38.9 187.2,42.2 190.4,45.3 193.6,48.3 196.8,51.2 200.0,54.0 203.2,56.7 206.4,59.2 209.6,61.7 212.8,64.1 216.0,66.4 219.2,68.6 222.4,70.7 225.6,72.8 228.8,74.7 232.0,76.7 235.2,78.5 238.4,80.3 241.6,82.1 244.8,83.8 248.0,85.4 251.2,87.0 254.4,88.5 257.6,90.0 260.8,91.4 264.0,92.9 267.2,94.2 270.4,95.6 273.6,96.8 276.8,98.1 280.0,99.3 283.2,100.5 286.4,101.7 289.6,102.8 292.8,103.9 296.0,105.0 299.2,106.0 302.4,107.1 305.6,108.1 308.8,109.0 312.0,110.0 315.2,110.9 318.4,111.8 321.6,112.7 324.8,113.6 328.0,114.4 331.2,115.3 334.4,116.1 337.6,116.9 340.8,117.7 344.0,118.4 347.2,119.2 350.4,119.9 353.6,120.6 356.8,121.3 360.0,122.0"/>
+        <text x="80" y="34" style="font-size:14px">T₁</text><text x="114" y="34" style="font-size:14px">T₂</text><text x="184" y="34" style="font-size:14px">T₃</text>
+        <line class="l2" x1="120" y1="122" x2="198" y2="122" marker-end="url(#ah2)"/>
+        <line class="l1" x1="200" y1="122" x2="200" y2="57" marker-end="url(#ah1)"/>
+        <polyline class="l3" points="200.0,54.0 202.7,56.2 205.3,58.4 208.0,60.5 210.7,62.5 213.3,64.5 216.0,66.4 218.7,68.2 221.3,70.0 224.0,71.7 226.7,73.4 229.3,75.1 232.0,76.7 234.7,78.2 237.3,79.7 240.0,81.2 242.7,82.6 245.3,84.0 248.0,85.4 250.7,86.7 253.3,88.0 256.0,89.3 258.7,90.5 261.3,91.7 264.0,92.9 266.7,94.0 269.3,95.1 272.0,96.2 274.7,97.3 277.3,98.3 280.0,99.3 282.7,100.3 285.3,101.3 288.0,102.3 290.7,103.2 293.3,104.1 296.0,105.0 298.7,105.9 301.3,106.7 304.0,107.6 306.7,108.4 309.3,109.2 312.0,110.0 314.7,110.8 317.3,111.5 320.0,112.3 322.7,113.0 325.3,113.7 328.0,114.4 330.7,115.1 333.3,115.8 336.0,116.5 338.7,117.1 341.3,117.8 344.0,118.4 346.7,119.0 349.3,119.7 352.0,120.3 354.7,120.8 357.3,121.4 360.0,122.0"/>
+        <g class="f3"><circle cx="120" cy="122" r="4"/><circle cx="200" cy="122" r="4"/><circle cx="200" cy="54" r="4"/><circle cx="360" cy="122" r="4"/></g>
+        <text x="108" y="116">A</text><text x="206" y="138">B</text><text x="206" y="48">C</text><text x="350" y="114">D</text>
+      </svg>
+      <figcaption>Dashed curves are isotherms ($T_1 &lt; T_2 &lt; T_3$). <span class="key-2">A → B</span>: constant pressure. <span class="key-1">B → C</span>: constant volume. C → D (black): constant temperature.</figcaption>
+    </figure>
+    <ul>
+      <li><strong>Constant pressure</strong> (isobaric): a horizontal line. Expanding at constant pressure needs the temperature to rise ($V \propto T$).</li>
+      <li><strong>Constant volume</strong> (isovolumetric or isochoric): a vertical line.</li>
+      <li><strong>Constant temperature</strong> (isothermal): a curve $PV = \text{constant}$, called an <strong>isotherm</strong>. Isotherms at higher temperatures lie further from the origin, because $PV = nRT$ is bigger.</li>
+    </ul>
+    <p>In HL B.4 you'll also meet the area under a p–V graph, which is the work done by the gas, and a fourth kind of change, the adiabatic process.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="real">9. Real gases and ideal gases</h2>
+    <p>Real gases break two of the ideal-gas assumptions: their molecules <strong>do</strong> have some volume, and they <strong>do</strong> attract each other slightly. This matters when the molecules are close together and moving slowly. That's why real gases can be turned into liquids, while an ideal gas never could.</p>
+    <p>A real gas behaves almost ideally at:</p>
+    <ul>
+      <li><strong>low pressure</strong> and <strong>low density</strong>: the molecules are far apart, so their own volume is tiny compared with the container and they rarely feel each other's attraction;</li>
+      <li><strong>high temperature</strong> (well above the temperature at which it would liquefy): the molecules are so fast that the weak attractions barely affect them.</li>
+    </ul>
+    <p>Air at room temperature and normal pressure is close to ideal. Gases at very high pressure, or cooled close to their boiling point, are not.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">10. Common mistakes</h2>
+    <ul>
+      <li><strong>Using °C in any gas equation.</strong> Always convert to kelvin. Doubling the Celsius temperature doesn't double the pressure.</li>
+      <li><strong>Leaving volumes in litres or cm³.</strong> Convert to $\text{m}^3$ before using $PV = nRT$. (In $\dfrac{P_1V_1}{T_1} = \dfrac{P_2V_2}{T_2}$, any units work as long as both sides match, except temperature, which must be in kelvin.)</li>
+      <li><strong>Mixing up $n$ and $N$.</strong> Use $R$ with moles ($n$) and $k_B$ with numbers of molecules ($N$).</li>
+      <li><strong>Saying compressing a gas at constant temperature makes the molecules hit harder.</strong> Their speed is unchanged; they hit each part of the wall more often.</li>
+      <li><strong>Treating $\overline{v^2}$ as the square of the mean speed.</strong> It is the mean of the squared speeds.</li>
+      <li><strong>Using $U = \frac{3}{2}nRT$ for real gases or for gases such as O<sub>2</sub>.</strong> It's for ideal monatomic gases only.</li>
+      <li><strong>Forgetting that the gas laws need a fixed mass of gas.</strong> A leaking tyre doesn't obey $PV/T = \text{constant}$.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">11. Check your understanding</h2>
+    <details class="check">
+      <summary>The air in a car tyre is at $3.2 \times 10^5$ Pa and 10 °C. After a long drive it reaches 40 °C. Assuming the volume is constant, find the new pressure.</summary>
+      <p>$P_2 = P_1 \times \dfrac{T_2}{T_1} = 3.2 \times 10^5 \times \dfrac{313}{283} = 3.5 \times 10^5$ Pa.</p>
+    </details>
+    <details class="check">
+      <summary>A gas is compressed slowly to a third of its volume at constant temperature. Explain, using the kinetic model, what happens to its pressure.</summary>
+      <p>The pressure triples. The molecules' speeds are unchanged (same temperature), but in a third of the volume they hit each square metre of the walls three times as often.</p>
+    </details>
+    <details class="check">
+      <summary>The kelvin temperature of a gas is doubled. By what factor does the rms speed of its molecules change?</summary>
+      <p>$\overline{v^2} \propto T$, so $\overline{v^2}$ doubles and $v_{\text{rms}}$ increases by a factor of $\sqrt{2} \approx 1.4$.</p>
+    </details>
+    <details class="check">
+      <summary>Two containers hold different ideal gases at the same temperature. Which of these is the same for both: the average kinetic energy of the molecules, or their rms speed?</summary>
+      <p>The average kinetic energy, $\frac{3}{2}k_BT$, depends only on temperature. The rms speed also depends on the mass of the molecules, so lighter molecules are faster.</p>
+    </details>
+    <details class="check">
+      <summary>Under what conditions does a real gas deviate most from ideal behaviour, and why?</summary>
+      <p>At high pressure (high density) and low temperature. The molecules are then close together and slow, so their own volume and the attractive forces between them are no longer negligible.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=B.3">Practise B.3 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>
