@@ -1058,5 +1058,297 @@
         ]
       }
     ]
+  },
+  {
+    "id": "A4-001",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "HL",
+    "stem": "<p>What is the SI unit of torque?</p>",
+    "options": [
+      "J",
+      "N m",
+      "N m$^{-1}$",
+      "kg m$^{2}$"
+    ],
+    "answer": 1,
+    "explanation": "Torque is force × perpendicular distance, so its unit is the newton metre (N m). Although N m has the same base units as the joule, torque is not energy, so it is never written in joules. kg m$^2$ is the unit of moment of inertia."
+  },
+  {
+    "id": "A4-002",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A force of 30 N acts at the end of a rod, 0.40 m from the axis of rotation. The force makes an angle of 30° with the rod. What is the torque about the axis?</p>",
+    "options": [
+      "6.0 N m",
+      "10 N m",
+      "12 N m",
+      "75 N m"
+    ],
+    "answer": 0,
+    "explanation": "$\\tau = Fr\\sin\\theta = 30 \\times 0.40 \\times \\sin 30° = 6.0$ N m. 10 N m uses $\\cos 30°$ instead of $\\sin 30°$. 12 N m ignores the angle completely, which is only right if the force is perpendicular to the rod. 75 N m divides by $r$ instead of multiplying."
+  },
+  {
+    "id": "A4-003",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A light rod rotates about an axis at one end. A 1.0 kg mass is fixed 0.20 m from the axis and a 3.0 kg mass is fixed 0.10 m from the axis. What is the moment of inertia of the system about the axis?</p>",
+    "options": [
+      "0.070 kg m$^{2}$",
+      "0.090 kg m$^{2}$",
+      "0.16 kg m$^{2}$",
+      "0.50 kg m$^{2}$"
+    ],
+    "answer": 0,
+    "explanation": "$I = \\sum mr^2 = 1.0(0.20)^2 + 3.0(0.10)^2 = 0.040 + 0.030 = 0.070\\ \\text{kg m}^2$. 0.50 kg m$^2$ uses $\\sum mr$, forgetting to square $r$. 0.090 kg m$^2$ treats the total mass as if it were at the average distance (0.15 m), which doesn't work because $I$ depends on $r^2$."
+  },
+  {
+    "id": "A4-004",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "HL",
+    "stem": "<p>Which conditions must both be true for a rigid body to be in equilibrium?</p>",
+    "options": [
+      "The resultant force is zero and the body is at rest.",
+      "The resultant torque is zero and the body is at rest.",
+      "The resultant force is zero and the forces all act through the centre of mass.",
+      "The resultant force is zero and the resultant torque about any axis is zero."
+    ],
+    "answer": 3,
+    "explanation": "Equilibrium needs both translational equilibrium ($\\sum F = 0$) and rotational equilibrium ($\\sum \\tau = 0$). A body in equilibrium need not be at rest: it can move at constant velocity and rotate at a constant rate. Forces don't have to pass through the centre of mass, as long as their torques balance (C)."
+  },
+  {
+    "id": "A4-005",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A skater spinning on ice pulls her arms in towards her body. Friction is negligible. What happens to her angular momentum and her rotational kinetic energy?</p>",
+    "options": [
+      "Angular momentum stays the same; kinetic energy stays the same.",
+      "Angular momentum increases; kinetic energy stays the same.",
+      "Angular momentum decreases; kinetic energy increases.",
+      "Angular momentum stays the same; kinetic energy increases."
+    ],
+    "answer": 3,
+    "explanation": "With no external torque, $L = I\\omega$ is conserved. Her moment of inertia falls, so $\\omega$ rises. Since $E_k = \\frac{L^2}{2I}$ with $L$ constant, a smaller $I$ means a larger $E_k$. The extra energy comes from the work her muscles do pulling her arms in. A is tempting, but kinetic energy is not conserved here."
+  },
+  {
+    "id": "A4-006",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A wheel's angular velocity increases uniformly from 4.0 $\\text{rad s}^{-1}$ to 10 $\\text{rad s}^{-1}$ in 3.0 s. What is its angular displacement in this time?</p>",
+    "options": [
+      "21 rad",
+      "30 rad",
+      "42 rad",
+      "48 rad"
+    ],
+    "answer": 0,
+    "explanation": "$\\Delta\\theta = \\frac{\\omega_f + \\omega_i}{2}\\,t = \\frac{10 + 4.0}{2} \\times 3.0 = 21$ rad. 42 rad forgets to divide by 2. 30 rad uses only the final angular velocity, as if the wheel had been at 10 $\\text{rad s}^{-1}$ the whole time."
+  },
+  {
+    "id": "A4-007",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A resultant torque of 12 N m acts on a wheel with a moment of inertia of 4.0 $\\text{kg m}^{2}$. What is its angular acceleration?</p>",
+    "options": [
+      "0.33 $\\text{rad s}^{-2}$",
+      "3.0 $\\text{rad s}^{-2}$",
+      "16 $\\text{rad s}^{-2}$",
+      "48 $\\text{rad s}^{-2}$"
+    ],
+    "answer": 1,
+    "explanation": "$\\tau = I\\alpha$, so $\\alpha = \\frac{\\tau}{I} = \\frac{12}{4.0} = 3.0\\ \\text{rad s}^{-2}$. 48 multiplies instead of dividing, and 0.33 divides the wrong way round."
+  },
+  {
+    "id": "A4-008",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A hoop, a solid disc and a solid sphere have the same mass and the same radius. They are released together from rest at the top of a slope and roll down it without slipping. In what order do they reach the bottom?</p>",
+    "options": [
+      "All three arrive at the same time.",
+      "Hoop first, then disc, then sphere",
+      "Disc first, then sphere, then hoop",
+      "Sphere first, then disc, then hoop"
+    ],
+    "answer": 3,
+    "explanation": "Each loses the same gravitational potential energy, which is shared between translation and rotation. The more of its mass is far from the axis (the larger $\\frac{I}{mR^2}$: sphere 0.4, disc 0.5, hoop 1), the more energy goes into spinning and the slower it moves. So the sphere is fastest and the hoop slowest. A would be right for objects sliding without friction."
+  },
+  {
+    "id": "A4-009",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A disc with a moment of inertia of 0.50 $\\text{kg m}^{2}$ rotates at 2.0 revolutions per second. What is its angular momentum?</p>",
+    "options": [
+      "1.0 $\\text{kg m}^{2}\\,\\text{s}^{-1}$",
+      "3.1 $\\text{kg m}^{2}\\,\\text{s}^{-1}$",
+      "6.3 $\\text{kg m}^{2}\\,\\text{s}^{-1}$",
+      "39 $\\text{kg m}^{2}\\,\\text{s}^{-1}$"
+    ],
+    "answer": 2,
+    "explanation": "First convert to rad s$^{-1}$: $\\omega = 2.0 \\times 2\\pi = 12.6\\ \\text{rad s}^{-1}$. Then $L = I\\omega = 0.50 \\times 12.6 = 6.3\\ \\text{kg m}^2\\,\\text{s}^{-1}$. 1.0 forgets to convert from revolutions. 39 is the rotational kinetic energy in joules, $\\frac{1}{2}I\\omega^2$."
+  },
+  {
+    "id": "A4-010",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A disc with moment of inertia 0.20 $\\text{kg m}^{2}$ spins freely at 6.0 $\\text{rad s}^{-1}$. A second disc, with moment of inertia 0.10 $\\text{kg m}^{2}$ and not rotating, is dropped onto it so that they rotate together about the same axis. What is their common angular velocity?</p>",
+    "options": [
+      "2.0 $\\text{rad s}^{-1}$",
+      "3.0 $\\text{rad s}^{-1}$",
+      "4.0 $\\text{rad s}^{-1}$",
+      "4.9 $\\text{rad s}^{-1}$"
+    ],
+    "answer": 2,
+    "explanation": "Angular momentum is conserved: $0.20 \\times 6.0 = (0.20 + 0.10)\\,\\omega$, so $\\omega = \\frac{1.2}{0.30} = 4.0\\ \\text{rad s}^{-1}$. 4.9 $\\text{rad s}^{-1}$ comes from wrongly conserving kinetic energy; some energy is in fact lost as the discs slip against each other. 3.0 $\\text{rad s}^{-1}$ just averages the two angular velocities."
+  },
+  {
+    "id": "A4-011",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A torque of 6.0 N m acts for 0.50 s on a wheel of moment of inertia 0.25 $\\text{kg m}^{2}$, which starts at rest. What is the final angular velocity of the wheel?</p>",
+    "options": [
+      "0.75 $\\text{rad s}^{-1}$",
+      "12 $\\text{rad s}^{-1}$",
+      "24 $\\text{rad s}^{-1}$",
+      "48 $\\text{rad s}^{-1}$"
+    ],
+    "answer": 1,
+    "explanation": "Angular impulse $= \\tau\\Delta t = 6.0 \\times 0.50 = 3.0$ N m s $= I\\Delta\\omega$, so $\\omega = \\frac{3.0}{0.25} = 12\\ \\text{rad s}^{-1}$. 24 is the angular acceleration $\\frac{\\tau}{I}$ in $\\text{rad s}^{-2}$, not the angular velocity. 0.75 multiplies by $I$ instead of dividing."
+  },
+  {
+    "id": "A4-012",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A solid cylinder of mass 2.0 kg ($I = \\tfrac{1}{2}MR^2$) rolls without slipping along a level floor. The speed of its centre is 3.0 $\\text{m s}^{-1}$. What is its total kinetic energy?</p>",
+    "options": [
+      "4.5 J",
+      "9.0 J",
+      "13.5 J",
+      "18 J"
+    ],
+    "answer": 2,
+    "explanation": "Translational: $\\frac{1}{2}mv^2 = \\frac{1}{2}(2.0)(3.0)^2 = 9.0$ J. Rotational: $\\frac{1}{2}I\\omega^2 = \\frac{1}{2}\\left(\\frac{1}{2}mR^2\\right)\\left(\\frac{v}{R}\\right)^2 = \\frac{1}{4}mv^2 = 4.5$ J. Total: 13.5 J. 9.0 J forgets the rotation; 4.5 J is the rotational part only."
+  },
+  {
+    "id": "A4-013",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A uniform horizontal beam of length 2.0 m and weight 80 N is hinged to a wall at one end. It is held horizontal by a cable attached to its other end, at 30° to the beam. A lamp of weight 50 N hangs from the end of the beam.</p>",
+    "diagram": "questions/diagrams/a4-beam-cable.svg",
+    "diagramAlt": "A horizontal beam 2.0 metres long, hinged to a wall at its left end. A cable runs from the right end of the beam up to the wall, making 30 degrees with the beam. A lamp hangs from the right end of the beam.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Explain why it is useful to take torques about the hinge.",
+        "marks": 1,
+        "markscheme": [
+          "The (unknown) force from the hinge acts through that point, so it has zero torque about it / it does not appear in the equation ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the tension in the cable.",
+        "marks": 3,
+        "markscheme": [
+          "Clockwise torques: $80 \\times 1.0 + 50 \\times 2.0 = 180$ N m ✓",
+          "Anticlockwise torque: $T\\sin 30° \\times 2.0$ ✓",
+          "$T = \\dfrac{180}{2.0 \\times 0.50} = 180$ N ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Determine the horizontal and vertical components of the force exerted by the hinge on the beam.",
+        "marks": 3,
+        "markscheme": [
+          "Horizontal: $T\\cos 30° = 180 \\times 0.866 = 156$ N, directed away from the wall (it balances the cable's horizontal pull towards the wall) ✓",
+          "Vertical: $80 + 50 - T\\sin 30° = 130 - 90$ ✓",
+          "$= 40$ N (upwards) ✓ (allow ECF from (b))"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "A4-014",
+    "theme": "A",
+    "topic": "A.4",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A flywheel is a solid disc of mass 12 kg and radius 0.25 m. Its moment of inertia is given by $I = \\tfrac{1}{2}MR^2$. A motor applies a constant resultant torque of 3.0 N m to the flywheel, which starts from rest.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the moment of inertia of the flywheel.",
+        "marks": 1,
+        "markscheme": [
+          "$I = \\tfrac{1}{2} \\times 12 \\times 0.25^2 = 0.375\\ \\text{kg m}^2$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the time taken for the flywheel to reach an angular velocity of 60 $\\text{rad s}^{-1}$.",
+        "marks": 2,
+        "markscheme": [
+          "$\\alpha = \\dfrac{\\tau}{I} = \\dfrac{3.0}{0.375} = 8.0\\ \\text{rad s}^{-2}$ ✓",
+          "$t = \\dfrac{\\omega}{\\alpha} = \\dfrac{60}{8.0} = 7.5$ s ✓ (allow ECF)"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Calculate the rotational kinetic energy of the flywheel at 60 $\\text{rad s}^{-1}$.",
+        "marks": 1,
+        "markscheme": [
+          "$E_k = \\tfrac{1}{2} \\times 0.375 \\times 60^2 = 675$ J ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "The motor is switched off. A constant frictional torque of 0.50 N m brings the flywheel to rest. Determine the time taken to stop and the number of revolutions it makes while stopping.",
+        "marks": 4,
+        "markscheme": [
+          "$L = I\\omega = 0.375 \\times 60 = 22.5\\ \\text{kg m}^2\\,\\text{s}^{-1}$ ✓",
+          "$\\Delta t = \\dfrac{\\Delta L}{\\tau} = \\dfrac{22.5}{0.50} = 45$ s ✓",
+          "$\\Delta\\theta = \\dfrac{60 + 0}{2} \\times 45 = 1350$ rad ✓",
+          "$\\dfrac{1350}{2\\pi} = 215$ revolutions ✓ (accept alternative method: energy, $0.50 \\times \\Delta\\theta = 675$ J)"
+        ]
+      }
+    ]
   }
 ]

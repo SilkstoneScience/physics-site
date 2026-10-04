@@ -4,15 +4,382 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>A.4 Rigid body mechanics · DP Physics</title>
+  <meta name="description" content="IB DP Physics A.4 Rigid body mechanics (HL): torque, rotational equilibrium, angular displacement, velocity and acceleration, moment of inertia, Newton's second law for rotation, angular momentum and its conservation, angular impulse, rotational kinetic energy and rolling.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="A.4">
+</head>
+<body data-root="../" data-section="themes" data-topic="A.4">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="a.html">Theme A Space, time and motion</a></p>
-    <h1><span class="code">A.4</span>Rigid body mechanics <span class="tag hl">HL</span></h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <h1><span class="code">A.4</span>Rigid body mechanics <span class="tag hl">HL only</span></h1>
+    <p class="lead">Until now we have treated objects as points. Real objects have size and shape, and they can <strong>rotate</strong>. This topic extends Newton's laws, momentum and energy to spinning wheels, swinging doors and figure skaters. Almost every idea has a linear "twin" you already know from A.1–A.3. <strong>The whole of A.4 is HL only.</strong></p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Models</span><span class="tag">Patterns and trends</span><span class="tag">Global impact of science</span></div>
+          <p><strong>Models.</strong> The point-particle model works brilliantly for a thrown ball or a planet's orbit. To design a gearbox or a wind turbine, engineers need a better model: the <strong>rigid body</strong>, which has size and shape but doesn't bend.</p>
+          <p><strong>Patterns.</strong> Rotation follows the same pattern as straight-line motion. Torque plays the part of force, moment of inertia plays the part of mass, and angular velocity plays the part of velocity. Spotting this analogy means you already know most of this topic.</p>
+          <p><strong>Global impact.</strong> Levers, cranes, flywheels that store energy, gyroscopes that stabilise ships and satellites, and turbines in every power station all rely on rotational mechanics.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>Is any model permanent?</strong> The point particle was "replaced" by the rigid body, but we still use it every day. Are there any models in science, or in any area of knowledge, that never need changing?</li>
+            <li><strong>Does an analogy explain anything?</strong> Rotation mirrors linear motion almost exactly. Is that a deep fact about nature, or just a convenient way to organise our equations?</li>
+            <li><strong>What does "rigid" mean?</strong> No real object is perfectly rigid. When is it reasonable to build knowledge on an idealisation that is never exactly true?</li>
+            <li><strong>Who owns an idea?</strong> Archimedes explained the lever over 2000 years ago. How much of today's physics is really the refinement of very old ideas?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <ol>
+        <li><a href="#rigid">Rigid bodies and the centre of mass</a></li>
+        <li><a href="#torque">Torque</a></li>
+        <li><a href="#equilibrium">Rotational equilibrium</a></li>
+        <li><a href="#angular">Describing rotation</a></li>
+        <li><a href="#inertia">Moment of inertia</a></li>
+        <li><a href="#second-law">Newton's second law for rotation</a></li>
+        <li><a href="#momentum">Angular momentum and its conservation</a></li>
+        <li><a href="#impulse">Angular impulse</a></li>
+        <li><a href="#energy">Rotational kinetic energy and rolling</a></li>
+        <li><a href="#analogy">Summary: linear and rotational motion</a></li>
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="rigid">1. Rigid bodies and the centre of mass</h2>
+    <p>A <strong>rigid body</strong> is an extended object whose shape never changes: the distance between any two of its points stays the same. It can move in two ways:</p>
+    <ul>
+      <li><strong>Translation:</strong> every point moves in the same direction at the same speed. The whole body shifts along.</li>
+      <li><strong>Rotation:</strong> every point moves in a circle around an <strong>axis</strong>. All points turn through the same angle, but points further from the axis move faster.</li>
+    </ul>
+    <p>Many real motions are a combination of the two, such as a rolling wheel. For linear motion (A.1–A.3) we can treat the whole mass of a body as if it were concentrated at one point, its <strong>centre of mass</strong>. A resultant force through the centre of mass gives the body linear acceleration without rotating it. A force whose line of action misses the centre of mass also makes it rotate. You don't need to calculate where the centre of mass is: for a uniform, symmetrical object, it's at the centre.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="torque">2. Torque</h2>
+    <p>The turning effect of a force is called its <strong>torque</strong> $\tau$ (also called its moment). It depends on the size of the force <em>and</em> on where and in what direction it acts:</p>
+    <div class="key">
+      $$\tau = Fr\sin\theta$$
+      <p style="margin:0">$F$ is the force, $r$ is the distance from the axis to the point where the force acts, and $\theta$ is the angle between the force and the line $r$. The unit is the <strong>newton metre</strong> (N m). Don't write it as joules, even though N m = J: torque is not energy.</p>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 228" role="img" aria-labelledby="a4at">
+        <title id="a4at">A spanner turning a bolt. A force F pushes down on the end of the spanner, a distance r from the bolt, at an angle theta to the spanner. The line of action of the force is extended backwards as a dashed line. The perpendicular distance from the bolt to this line is r sin theta.</title>
+        <rect x="40" y="138" width="270" height="22" rx="10" class="axis" style="fill:var(--accent-soft)"/>
+        <circle cx="60" cy="149" r="18" class="axis" style="fill:var(--surface)"/>
+        <circle cx="60" cy="149" r="5" class="f3"/>
+        <text x="60" y="190" text-anchor="middle" style="font-size:14px">axis (bolt)</text>
+        <line class="axis dash" x1="290" y1="149" x2="226" y2="38" style="opacity:0.6"/>
+        <line class="l1 thin dash" x1="60" y1="149" x2="232.5" y2="49.4"/>
+        <path class="axis" d="M232.5 49.4 l -6.9 4 l 4 6.9 l 6.9 -4"/>
+        <text class="t1" x="112" y="86">r sin θ</text>
+        <line class="l2" x1="290" y1="149" x2="325" y2="209.6" marker-end="url(#ah2)"/>
+        <text class="t2" x="332" y="214">F</text>
+        <path class="axis" d="M318 149 A 28 28 0 0 1 304 173.2"/>
+        <text x="324" y="172">θ</text>
+        <line class="l3 thin" x1="60" y1="210" x2="290" y2="210" marker-start="url(#ah3)" marker-end="url(#ah3)"/>
+        <text x="175" y="205" text-anchor="middle">r</text>
+      </svg>
+      <figcaption>Only the part of the force at right angles to the spanner turns the bolt. Equivalently, torque = force × the <span class="key-1">perpendicular distance</span> from the axis to the force's line of action, $r\sin\theta$.</figcaption>
+    </figure>
+    <ul>
+      <li>The torque is largest when the force is <strong>perpendicular</strong> to $r$ ($\theta = 90°$, so $\sin\theta = 1$). That's why you push a door at right angles to it.</li>
+      <li>A force whose line of action passes <strong>through the axis</strong> ($\theta = 0$) has no torque, however large it is. Pushing on the hinge side of a door doesn't open it.</li>
+      <li>A long spanner gives a larger torque for the same force, because $r$ is bigger.</li>
+      <li>Torques have a <strong>sense</strong>: clockwise or anticlockwise. Choose one as positive, as you choose a positive direction for forces.</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: opening a door</h3>
+      <p>A student pushes a door with a force of 40 N, 0.80 m from the hinges, at 60° to the plane of the door. Find the torque.</p>
+      <p>$\tau = Fr\sin\theta = 40 \times 0.80 \times \sin 60° = 28$ N m. Pushing at right angles would give the maximum, $40 \times 0.80 = 32$ N m.</p>
+    </div>
+    <p>Two equal and opposite forces whose lines of action don't coincide form a <strong>couple</strong>, like your hands turning a steering wheel. A couple has no resultant force, so it causes no linear acceleration, but it does produce a resultant torque, so it causes rotation.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="equilibrium">3. Rotational equilibrium</h2>
+    <p>A rigid body is in <strong>equilibrium</strong> (at rest, or moving and rotating steadily) only if both conditions hold:</p>
+    <div class="key">
+      <p style="margin:0"><strong>1. Translational equilibrium:</strong> the resultant force is zero, $\sum F = 0$, in every direction.</p>
+      <p style="margin:8px 0 0"><strong>2. Rotational equilibrium:</strong> the resultant torque about <strong>any</strong> axis is zero, $\sum \tau = 0$. In other words, total clockwise torque = total anticlockwise torque.</p>
+    </div>
+    <p><strong>Choosing the axis:</strong> for a body in equilibrium, the torques balance about every point, so you can take torques about whichever point you like. Choose a point that an unknown force passes through. That force then has zero torque and drops out of the equation.</p>
+    <div class="worked">
+      <h3>Worked example: a plank on two supports</h3>
+      <p>A uniform plank 3.0 m long, weighing 120 N, rests on supports at each end. A person weighing 500 N stands 1.0 m from the left end. Find the force from each support.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 380 190" role="img" aria-labelledby="a4bt">
+          <title id="a4bt">A horizontal plank 3.0 metres long rests on supports at each end. The upward reaction forces at the ends are labelled R left and R right. The person's weight of 500 newtons acts downwards 1.0 metre from the left end, and the plank's weight of 120 newtons acts downwards at the middle, 1.5 metres from the left end.</title>
+          <rect x="40" y="80" width="300" height="14" class="axis" style="fill:var(--accent-soft)"/>
+          <polygon class="axis" points="40,94 28,118 52,118"/><polygon class="axis" points="340,94 328,118 352,118"/>
+          <line class="l1" x1="40" y1="80" x2="40" y2="22" marker-end="url(#ah1)"/>
+          <line class="l1" x1="340" y1="80" x2="340" y2="30" marker-end="url(#ah1)"/>
+          <text class="t1" x="50" y="30">R<tspan dy="5" font-size="12">L</tspan></text>
+          <text class="t1" x="300" y="38">R<tspan dy="5" font-size="12">R</tspan></text>
+          <line class="l2" x1="140" y1="94" x2="140" y2="164" marker-end="url(#ah2)"/>
+          <text class="t2" x="148" y="160">500 N</text>
+          <line class="l2" x1="190" y1="94" x2="190" y2="138" marker-end="url(#ah2)"/>
+          <text class="t2" x="198" y="134">120 N</text>
+          <line class="l3 thin" x1="42" y1="178" x2="138" y2="178" marker-start="url(#ah3)" marker-end="url(#ah3)"/>
+          <text x="90" y="174" text-anchor="middle" style="font-size:13px">1.0 m</text>
+          <text x="250" y="72" style="font-size:13px">3.0 m long</text>
+        </svg>
+        <figcaption>Forces on the plank: two <span class="key-1">reaction forces</span> and two <span class="key-2">weights</span>. The plank's own weight acts at its centre.</figcaption>
+      </figure>
+      <p>Take torques about the <strong>left end</strong>, so $R_L$ has no torque. Clockwise torques: $500 \times 1.0 + 120 \times 1.5 = 680$ N m. Anticlockwise torque: $R_R \times 3.0$.</p>
+      <p>$R_R \times 3.0 = 680$, so $R_R = 227$ N, which rounds to 230 N.</p>
+      <p>Then, from $\sum F = 0$: $R_L = 500 + 120 - 227 = 393$ N, which rounds to 390 N. The left support carries more, because the person stands nearer to it.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="angular">4. Describing rotation</h2>
+    <p>As a rigid body turns, every point on it turns through the same angle. So we describe rotation with angles measured in <strong>radians</strong>:</p>
+    <ul>
+      <li><strong>Angular displacement</strong> $\Delta\theta$ (rad): the angle turned through. One revolution is $2\pi$ rad.</li>
+      <li><strong>Angular velocity</strong> $\omega$ ($\text{rad s}^{-1}$): the rate of change of angle, $\omega = \dfrac{\Delta\theta}{\Delta t}$. (We use it as a speed, with a sense of clockwise or anticlockwise; the vector treatment isn't needed.)</li>
+      <li><strong>Angular acceleration</strong> $\alpha$ ($\text{rad s}^{-2}$): the rate of change of angular velocity, $\alpha = \dfrac{\Delta\omega}{\Delta t}$.</li>
+    </ul>
+    <p>A point at distance $r$ from the axis has linear speed $v = \omega r$ (A.2), and a tangential acceleration $a = \alpha r$. Every point has the same $\omega$ and $\alpha$, but points further out move and speed up faster.</p>
+    <p><strong>Equations of motion:</strong> for <strong>constant</strong> angular acceleration, the four equations of A.1 carry straight over, with $s \to \Delta\theta$, $u \to \omega_i$, $v \to \omega_f$ and $a \to \alpha$:</p>
+    <div class="key">
+      $$\Delta\theta = \frac{\omega_f + \omega_i}{2}\,t \qquad \omega_f = \omega_i + \alpha t$$
+      $$\Delta\theta = \omega_i t + \tfrac{1}{2}\alpha t^2 \qquad \omega_f^2 = \omega_i^2 + 2\alpha\Delta\theta$$
+    </div>
+    <p><strong>Graphs</strong> work in the same way as in A.1. The gradient of a $\theta$–$t$ graph is $\omega$. The gradient of an $\omega$–$t$ graph is $\alpha$, and the area under it is $\Delta\theta$.</p>
+    <div class="worked">
+      <h3>Worked example: a spinning wheel</h3>
+      <p>A bicycle wheel is spun from rest with a constant angular acceleration of 3.0 $\text{rad s}^{-2}$ for 4.0 s. Find its final angular velocity and the number of revolutions it makes.</p>
+      <p>$\omega_f = \omega_i + \alpha t = 0 + 3.0 \times 4.0 = 12\ \text{rad s}^{-1}$.</p>
+      <p>$\Delta\theta = \omega_i t + \tfrac{1}{2}\alpha t^2 = \tfrac{1}{2} \times 3.0 \times 4.0^2 = 24$ rad. &nbsp; Revolutions: $\dfrac{24}{2\pi} = 3.8$.</p>
+    </div>
+    <aside class="maths-link">
+      <h3>Maths link: rates of change <span class="tag">AA SL 5.1, 5.9</span></h3>
+      <p>With calculus, the angular quantities are derivatives, exactly like $v = \frac{ds}{dt}$ and $a = \frac{dv}{dt}$ in kinematics:</p>
+      $$\omega = \frac{d\theta}{dt} \qquad \alpha = \frac{d\omega}{dt} = \frac{d^2\theta}{dt^2}$$
+      <p>Areas under graphs are integrals: $\Delta\theta = \int \omega\,dt$, and later in this topic, angular impulse $= \int \tau\,dt$.</p>
+    </aside>
+
+    <!-- ===================================================== -->
+    <h2 id="inertia">5. Moment of inertia</h2>
+    <p>In linear motion, mass measures how hard it is to change an object's velocity. The rotational version is the <strong>moment of inertia</strong> $I$: it measures how hard it is to change an object's angular velocity. It depends not only on the mass, but on how that mass is <strong>distributed around the axis</strong>. Mass far from the axis counts much more than mass close to it.</p>
+    <div class="key">
+      $$I = \sum m r^2$$
+      <p style="margin:0">For a set of point masses: add up mass × (distance from the axis)² for every mass. The unit is $\text{kg m}^2$.</p>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 150" role="img" aria-labelledby="a4ct">
+        <title id="a4ct">Two light rods, each with two identical masses, spinning about the centre. On the left the masses are close to the axis. On the right they are twice as far out, so the moment of inertia is four times larger.</title>
+        <line class="axis" x1="40" y1="70" x2="160" y2="70"/>
+        <circle cx="100" cy="70" r="4" class="f3"/>
+        <circle cx="75" cy="70" r="11" class="f1"/><circle cx="125" cy="70" r="11" class="f1"/>
+        <line class="axis dash" x1="100" y1="25" x2="100" y2="115"/>
+        <text x="100" y="140" text-anchor="middle" style="font-size:14px">small I</text>
+        <line class="axis" x1="210" y1="70" x2="370" y2="70"/>
+        <circle cx="290" cy="70" r="4" class="f3"/>
+        <circle cx="240" cy="70" r="11" class="f2"/><circle cx="340" cy="70" r="11" class="f2"/>
+        <line class="axis dash" x1="290" y1="25" x2="290" y2="115"/>
+        <text x="290" y="140" text-anchor="middle" style="font-size:14px">I four times larger</text>
+      </svg>
+      <figcaption>The same masses, <span class="key-1">close to the axis</span> and <span class="key-2">twice as far out</span>. Because $I$ depends on $r^2$, doubling the distance makes $I$ four times bigger, so it is much harder to start or stop spinning.</figcaption>
+    </figure>
+    <p>For solid shapes, the formula comes from adding up all the tiny pieces of mass. You don't need to learn these: an exam question will give you the one you need. Some common results, for a body of mass $M$:</p>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Body (axis through the centre unless stated)</th><th>$I$</th></tr>
+        <tr><td>thin ring or hoop, radius $R$</td><td>$MR^2$</td></tr>
+        <tr><td>solid disc or cylinder, radius $R$</td><td>$\tfrac{1}{2}MR^2$</td></tr>
+        <tr><td>solid sphere, radius $R$</td><td>$\tfrac{2}{5}MR^2$</td></tr>
+        <tr><td>thin rod, length $L$, axis through the centre</td><td>$\tfrac{1}{12}ML^2$</td></tr>
+        <tr><td>thin rod, length $L$, axis through one end</td><td>$\tfrac{1}{3}ML^2$</td></tr>
+      </table>
+    </div>
+    <p>A ring has all its mass at the rim, so it has the largest $I$ for its mass and radius. The same rod has a bigger $I$ about its end than about its centre, because more of its mass is far from the axis.</p>
+    <div class="worked">
+      <h3>Worked example: point masses</h3>
+      <p>Two 2.0 kg masses are fixed to a light rod, one on each side of the axis, each 0.50 m from it. Find the moment of inertia, then find it again when both masses are moved to 0.25 m from the axis.</p>
+      <p>$I = \sum mr^2 = 2.0(0.50)^2 + 2.0(0.50)^2 = 1.0\ \text{kg m}^2$. &nbsp; At 0.25 m: $I = 2 \times 2.0 \times 0.25^2 = 0.25\ \text{kg m}^2$, a quarter as much.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="second-law">6. Newton's second law for rotation</h2>
+    <p>A resultant force gives a mass a linear acceleration ($F = ma$). In the same way, a resultant (unbalanced) <strong>torque</strong> gives a rigid body an <strong>angular acceleration</strong>:</p>
+    <div class="key">
+      $$\tau = I\alpha$$
+      <p style="margin:0">$\tau$ is the resultant torque about the axis; $I$ is the moment of inertia about that same axis.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: a falling mass and a pulley</h3>
+      <p>A string is wrapped around a pulley of radius 0.10 m and moment of inertia 0.020 $\text{kg m}^2$, which turns freely on its axle. A 0.50 kg mass hangs from the string and is released. Find the acceleration of the mass and the tension in the string.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 300 220" class="small" role="img" aria-labelledby="a4dt">
+          <title id="a4dt">A pulley wheel on a fixed axle, with a string wrapped around it. A mass hangs from the string. The tension T acts upwards on the mass and downwards on the rim of the pulley. The weight mg acts downwards on the mass.</title>
+          <line class="l3" x1="100" y1="20" x2="200" y2="20" style="stroke-width:5"/>
+          <line class="axis" x1="150" y1="20" x2="150" y2="70"/>
+          <circle cx="150" cy="70" r="40" class="axis" style="fill:var(--accent-soft)"/>
+          <circle cx="150" cy="70" r="4" class="f3"/>
+          <line class="axis" x1="190" y1="70" x2="190" y2="160"/>
+          <rect x="172" y="160" width="36" height="30" class="axis" style="fill:var(--surface)"/>
+          <line class="l1" x1="200" y1="160" x2="200" y2="122" marker-end="url(#ah1)"/>
+          <text class="t1" x="208" y="138">T</text>
+          <line class="l1" x1="200" y1="80" x2="200" y2="112" marker-end="url(#ah1)"/>
+          <text class="t1" x="208" y="102">T</text>
+          <line class="l2" x1="190" y1="190" x2="190" y2="216" marker-end="url(#ah2)"/>
+          <text class="t2" x="198" y="214">mg</text>
+          <path class="l3 thin" d="M120 104 A 46 46 0 0 1 104 64" marker-end="url(#ah3)"/>
+          <text x="84" y="110">α</text>
+        </svg>
+        <figcaption>The <span class="key-1">tension</span> pulls up on the mass and down on the pulley's rim, giving the pulley a torque $TR$. The mass's <span class="key-2">weight</span> drives the system.</figcaption>
+      </figure>
+      <p>For the mass (down positive): $mg - T = ma$. &nbsp; For the pulley: $TR = I\alpha$, and the string doesn't slip, so $a = \alpha R$. That gives $T = \dfrac{Ia}{R^2}$.</p>
+      <p>Substitute: $mg - \dfrac{Ia}{R^2} = ma$, so $a = \dfrac{mg}{m + I/R^2} = \dfrac{0.50 \times 9.8}{0.50 + 0.020/0.010} = \dfrac{4.9}{2.5} = 2.0\ \text{m s}^{-2}$.</p>
+      <p>$T = m(g - a) = 0.50(9.8 - 1.96) = 3.9$ N. The tension is less than the weight (4.9 N) because the mass accelerates downwards. The pulley's inertia acts like an extra 2.0 kg of mass that must also be accelerated.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="momentum">7. Angular momentum and its conservation</h2>
+    <p>A rotating body has <strong>angular momentum</strong>, the rotational twin of linear momentum $p = mv$:</p>
+    <div class="key">
+      $$L = I\omega \qquad \text{unit: kg m}^2\,\text{s}^{-1}$$
+      <p style="margin:0"><strong>Conservation of angular momentum:</strong> the total angular momentum of a system stays constant unless a resultant external torque acts on it.</p>
+    </div>
+    <p>If the moment of inertia of a spinning body changes, its angular velocity must change too, so that $I\omega$ stays the same:</p>
+    <ul>
+      <li>A <strong>figure skater</strong> spinning with arms out pulls them in. $I$ decreases, so $\omega$ increases and they spin much faster. Spreading their arms again slows the spin.</li>
+      <li>A <strong>diver</strong> tucks into a ball to spin quickly, then straightens out to slow down before entering the water.</li>
+      <li>A <strong>collapsing star</strong> shrinks enormously, so it spins up. Neutron stars can rotate hundreds of times a second.</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: a spinning skater</h3>
+      <p>A skater spins at 2.0 $\text{rad s}^{-1}$ with arms outstretched, where $I = 3.2\ \text{kg m}^2$. She pulls her arms in, reducing $I$ to 1.0 $\text{kg m}^2$. Find her new angular velocity, and compare the kinetic energies.</p>
+      <p>$I_1\omega_1 = I_2\omega_2$: &nbsp; $3.2 \times 2.0 = 1.0\,\omega_2$, so $\omega_2 = 6.4\ \text{rad s}^{-1}$.</p>
+      <p>$E_k$ before: $\tfrac{1}{2}(3.2)(2.0)^2 = 6.4$ J. &nbsp; After: $\tfrac{1}{2}(1.0)(6.4)^2 = 20$ J. The kinetic energy has <strong>increased</strong>: the extra energy comes from the work her muscles do pulling her arms inwards. Angular momentum is conserved; kinetic energy is not.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: coupled bodies</h3>
+      <p>A turntable with $I = 0.12\ \text{kg m}^2$ spins freely at 3.0 $\text{rad s}^{-1}$. A disc with $I = 0.060\ \text{kg m}^2$, not rotating, is dropped onto it, centred on the axis, and they turn together. Find their final angular velocity and the kinetic energy lost.</p>
+      <p>$0.12 \times 3.0 + 0 = (0.12 + 0.060)\,\omega$, so $\omega = \dfrac{0.36}{0.18} = 2.0\ \text{rad s}^{-1}$.</p>
+      <p>$E_k$: before $\tfrac{1}{2}(0.12)(3.0)^2 = 0.54$ J; after $\tfrac{1}{2}(0.18)(2.0)^2 = 0.36$ J. So 0.18 J is lost as thermal energy while the surfaces slip against each other, just like a perfectly inelastic collision (A.2).</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="impulse">8. Angular impulse</h2>
+    <p>A resultant force acting for a time gives an impulse, which changes linear momentum. In the same way, a resultant torque acting for a time gives an <strong>angular impulse</strong>, which changes angular momentum:</p>
+    <div class="key">
+      $$\Delta L = \tau\Delta t = \Delta(I\omega)$$
+      <p style="margin:0">When the torque changes, the angular impulse is the <strong>area under the torque–time graph</strong>.</p>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 210" class="small" role="img" aria-labelledby="a4et">
+        <title id="a4et">Torque against time. The torque rises steadily from zero to 8 newton metres in 2 seconds, stays at 8 newton metres for 3 seconds, then falls steadily to zero over 1 second. The area under the graph is shaded.</title>
+        <polygon class="area" points="50,170 100,50 175,50 200,170"/>
+        <line class="axis" x1="50" y1="170" x2="345" y2="170" marker-end="url(#ah3)"/>
+        <line class="axis" x1="50" y1="170" x2="50" y2="15" marker-end="url(#ah3)"/>
+        <polyline class="l1" points="50,170 100,50 175,50 200,170"/>
+        <g style="font-size:13px" text-anchor="middle"><text x="50" y="188">0</text><text x="100" y="188">2</text><text x="175" y="188">5</text><text x="200" y="188">6</text><text x="300" y="188">t / s</text></g>
+        <text x="44" y="55" text-anchor="end" style="font-size:13px">8</text>
+        <text x="58" y="22" style="font-size:13px">τ / N m</text>
+        <line class="grid dash" x1="50" y1="50" x2="100" y2="50"/>
+      </svg>
+      <figcaption>A varying torque. The shaded <span class="key-1">area</span> is the angular impulse.</figcaption>
+    </figure>
+    <div class="worked">
+      <h3>Worked example: area under a torque–time graph</h3>
+      <p>The torque in the graph above acts on a wheel with $I = 1.5\ \text{kg m}^2$, initially at rest. Find the angular impulse and the final angular velocity.</p>
+      <p>Area: rising triangle $\tfrac{1}{2} \times 2 \times 8 = 8$, rectangle $3 \times 8 = 24$, falling triangle $\tfrac{1}{2} \times 1 \times 8 = 4$. Total angular impulse $= 36$ N m s.</p>
+      <p>$\Delta L = I\Delta\omega$, so $\omega = \dfrac{36}{1.5} = 24\ \text{rad s}^{-1}$.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="energy">9. Rotational kinetic energy and rolling</h2>
+    <p>A rotating body has kinetic energy even if its centre isn't moving, because every part of it is moving in a circle:</p>
+    <div class="key">
+      $$E_k = \tfrac{1}{2}I\omega^2 = \frac{L^2}{2I}$$
+      <p style="margin:0">This mirrors $E_k = \frac{1}{2}mv^2 = \frac{p^2}{2m}$. Work done by a torque, $\tau\Delta\theta$, changes the rotational kinetic energy.</p>
+    </div>
+    <h3>Rolling without slipping</h3>
+    <p>A wheel or ball that rolls without slipping both <strong>translates</strong> and <strong>rotates</strong>. Its centre moves at speed $v = \omega R$, and its total kinetic energy has two parts:</p>
+    <div class="key">$$E_k = \tfrac{1}{2}mv^2 + \tfrac{1}{2}I\omega^2$$</div>
+    <p>When an object rolls down a slope, the gravitational potential energy it loses is shared between translation and rotation. So a rolling object reaches the bottom <strong>more slowly</strong> than one sliding without friction. Objects with more of their mass far from the centre (larger $I$ for their mass and radius) put more energy into spinning, and roll down more slowly. In a race down a ramp, a solid sphere beats a solid cylinder, which beats a hoop, whatever their masses and sizes.</p>
+    <div class="worked">
+      <h3>Worked example: a ball rolling down a ramp</h3>
+      <p>A solid ball ($I = \tfrac{2}{5}mR^2$) rolls without slipping from rest down a ramp, dropping a height of 1.2 m. Find its speed at the bottom, and compare it with a block sliding down a frictionless ramp.</p>
+      <p>Energy: $mgh = \tfrac{1}{2}mv^2 + \tfrac{1}{2}\left(\tfrac{2}{5}mR^2\right)\left(\tfrac{v}{R}\right)^2 = \tfrac{1}{2}mv^2 + \tfrac{1}{5}mv^2 = \tfrac{7}{10}mv^2$.</p>
+      <p>So $v = \sqrt{\tfrac{10}{7}gh} = \sqrt{\tfrac{10}{7} \times 9.8 \times 1.2} = 4.1\ \text{m s}^{-1}$. The mass and radius cancel.</p>
+      <p>A sliding block gets $v = \sqrt{2gh} = 4.8\ \text{m s}^{-1}$. The ball is slower because $\tfrac{2}{7}$ of its kinetic energy is rotational.</p>
+    </div>
+    <p>Friction is needed for rolling: it stops the ball from slipping. But for rolling without slipping, the point touching the ramp is momentarily at rest, so this static friction does no work and no energy is lost.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="analogy">10. Summary: linear and rotational motion</h2>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Linear motion</th><th>Rotational motion</th></tr>
+        <tr><td>displacement $s$</td><td>angular displacement $\Delta\theta$</td></tr>
+        <tr><td>velocity $v$</td><td>angular velocity $\omega$ ($v = \omega r$)</td></tr>
+        <tr><td>acceleration $a$</td><td>angular acceleration $\alpha$ ($a = \alpha r$)</td></tr>
+        <tr><td>mass $m$</td><td>moment of inertia $I = \sum mr^2$</td></tr>
+        <tr><td>force $F$</td><td>torque $\tau = Fr\sin\theta$</td></tr>
+        <tr><td>$F = ma$</td><td>$\tau = I\alpha$</td></tr>
+        <tr><td>momentum $p = mv$</td><td>angular momentum $L = I\omega$</td></tr>
+        <tr><td>impulse $F\Delta t = \Delta p$</td><td>angular impulse $\tau\Delta t = \Delta L$</td></tr>
+        <tr><td>$E_k = \frac{1}{2}mv^2 = \frac{p^2}{2m}$</td><td>$E_k = \frac{1}{2}I\omega^2 = \frac{L^2}{2I}$</td></tr>
+      </table>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">11. Common mistakes</h2>
+    <ul>
+      <li><strong>Using the distance along the object</strong> instead of the perpendicular distance to the line of action. Remember the $\sin\theta$.</li>
+      <li><strong>Writing torque in joules.</strong> Use N m.</li>
+      <li><strong>Forgetting the weight of the beam or plank itself</strong>, which acts at its centre of mass.</li>
+      <li><strong>Checking only one condition for equilibrium.</strong> You need both $\sum F = 0$ and $\sum\tau = 0$.</li>
+      <li><strong>Using $r$ instead of $r^2$</strong> in $I = \sum mr^2$, or measuring $r$ from the wrong point. Measure from the <em>axis</em>.</li>
+      <li><strong>Using degrees</strong> in $v = \omega r$ or the rotational equations of motion. Use radians.</li>
+      <li><strong>Assuming kinetic energy is conserved</strong> when a skater pulls in their arms or bodies couple together. Angular momentum is conserved; kinetic energy changes.</li>
+      <li><strong>Leaving out the rotational kinetic energy</strong> of a rolling object in an energy calculation.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">12. Check your understanding</h2>
+    <details class="check">
+      <summary>Why are door handles placed far from the hinges?</summary>
+      <p>Torque $= Fr\sin\theta$. A larger distance $r$ from the axis (the hinges) gives a bigger torque for the same force, so the door is easier to open.</p>
+    </details>
+    <details class="check">
+      <summary>A force acts on a wheel, directed straight through its axle. What torque does it produce?</summary>
+      <p>Zero. The line of action passes through the axis, so the perpendicular distance is zero ($\theta = 0$, $\sin\theta = 0$).</p>
+    </details>
+    <details class="check">
+      <summary>A solid disc and a hoop have the same mass and radius. Which has the larger moment of inertia, and which would win a race rolling down a ramp?</summary>
+      <p>The hoop has the larger $I$ ($MR^2$ against $\tfrac{1}{2}MR^2$), because all its mass is at the rim. The disc wins the race, because less of its energy goes into rotation.</p>
+    </details>
+    <details class="check">
+      <summary>A spinning skater halves her moment of inertia. What happens to her angular velocity and her rotational kinetic energy?</summary>
+      <p>$L = I\omega$ is conserved, so $\omega$ doubles. $E_k = \frac{L^2}{2I}$ with $L$ constant, so halving $I$ doubles the kinetic energy. The extra energy comes from her muscles.</p>
+    </details>
+    <details class="check">
+      <summary>A torque of 5.0 N m acts on a flywheel of moment of inertia 2.5 $\text{kg m}^2$ for 4.0 s, starting from rest. What is its final angular velocity?</summary>
+      <p>Angular impulse $= \tau\Delta t = 20$ N m s $= I\omega$, so $\omega = \frac{20}{2.5} = 8.0\ \text{rad s}^{-1}$. (Or: $\alpha = \frac{\tau}{I} = 2.0\ \text{rad s}^{-2}$, then $\omega = \alpha t = 8.0\ \text{rad s}^{-1}$.)</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=A.4">Practise A.4 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>
