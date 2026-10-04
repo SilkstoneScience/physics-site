@@ -165,6 +165,7 @@ window.CONSTANTS = {
   const links = [
     ['themes', 'themes/index.html', 'Themes'],
     ['questions', 'questions.html', 'Question bank'],
+    ['skills', 'skills.html', 'Skills'],
     ['experimental', 'experimental/index.html', 'Experimental programme'],
     ['ee', 'ee/index.html', 'Extended essay'],
     ['resources', 'resources.html', 'Resources'],
