@@ -126,6 +126,15 @@ window.DATA_BOOKLET = {
     ],
     note: 'The data booklet has <strong>no</strong> standing-wave formulas. Work them out from a sketch: a whole number of half-wavelengths fits when both ends are the same (both nodes or both antinodes), and an odd number of quarter-wavelengths fits when one end is a node and the other an antinode.',
   },
+  'C.5': {
+    equations: [
+      ['Doppler effect for light (v ≪ c)', '\\frac{\\Delta f}{f} = \\frac{\\Delta\\lambda}{\\lambda} \\approx \\frac{v}{c}'],
+      ['Moving source (sound)', "f' = f\\left(\\frac{v}{v \\pm u_s}\\right)", true],
+      ['Moving observer (sound)', "f' = f\\left(\\frac{v \\pm u_o}{v}\\right)", true],
+    ],
+    note: 'For light, $v$ is the relative speed of source and observer. For sound (HL), $v$ is the wave speed and $u_s$, $u_o$ are the speeds of the source and observer. Choose the sign that makes $f\'$ higher when they approach and lower when they separate.',
+    constants: ['c'],
+  },
   'C.3': {
     equations: [
       ["Snell's law", '\\frac{n_1}{n_2} = \\frac{\\sin\\theta_2}{\\sin\\theta_1} = \\frac{v_2}{v_1}'],
