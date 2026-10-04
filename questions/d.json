@@ -36,5 +36,1400 @@
         ]
       }
     ]
+  },
+  {
+    "id": "D1-002",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>The distance between the centres of two masses is tripled. The gravitational force between them was $F$. What is it now?</p>",
+    "options": [
+      "$\\dfrac{F}{9}$",
+      "$\\dfrac{F}{3}$",
+      "$3F$",
+      "$9F$"
+    ],
+    "answer": 0,
+    "explanation": "Gravitation is an inverse-square law: $F \\propto \\frac{1}{r^2}$, so tripling $r$ divides the force by $3^2 = 9$. $\\frac{F}{3}$ treats it as $\\frac{1}{r}$."
+  },
+  {
+    "id": "D1-003",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>The gravitational field strength at the Earth's surface is 9.8 $\\text{N kg}^{-1}$. What is it at a height above the surface equal to the Earth's radius?</p>",
+    "options": [
+      "1.1 $\\text{N kg}^{-1}$",
+      "2.5 $\\text{N kg}^{-1}$",
+      "4.9 $\\text{N kg}^{-1}$",
+      "9.8 $\\text{N kg}^{-1}$"
+    ],
+    "answer": 1,
+    "explanation": "At a height of one radius, the distance from the <em>centre</em> is $2R$, so $g = \\frac{9.8}{2^2} = 2.5$ $\\text{N kg}^{-1}$. 4.9 uses $\\frac{1}{r}$; 1.1 uses $3R$ (adding the height to the diameter)."
+  },
+  {
+    "id": "D1-004",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A planet has 4 times the mass of the Earth and twice its radius. The gravitational field strength at the Earth's surface is 9.8 $\\text{N kg}^{-1}$. What is it at the planet's surface?</p>",
+    "options": [
+      "2.5 $\\text{N kg}^{-1}$",
+      "4.9 $\\text{N kg}^{-1}$",
+      "9.8 $\\text{N kg}^{-1}$",
+      "20 $\\text{N kg}^{-1}$"
+    ],
+    "answer": 2,
+    "explanation": "$g = \\frac{GM}{R^2}$: $9.8 \\times \\frac{4}{2^2} = 9.8$ $\\text{N kg}^{-1}$. The larger mass and larger radius cancel out. 20 forgets to square the radius."
+  },
+  {
+    "id": "D1-005",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>Which of the following is equivalent to the unit of gravitational field strength, $\\text{N kg}^{-1}$?</p>",
+    "options": [
+      "$\\text{kg m s}^{-2}$",
+      "$\\text{J kg}^{-1}$",
+      "$\\text{N m}^2\\,\\text{kg}^{-2}$",
+      "$\\text{m s}^{-2}$"
+    ],
+    "answer": 3,
+    "explanation": "$1\\ \\text{N} = 1\\ \\text{kg m s}^{-2}$, so $1\\ \\text{N kg}^{-1} = 1\\ \\text{m s}^{-2}$: field strength is the acceleration of free fall. $\\text{J kg}^{-1}$ is the unit of gravitational potential, and $\\text{N m}^2\\,\\text{kg}^{-2}$ is the unit of $G$."
+  },
+  {
+    "id": "D1-006",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>According to Kepler's second law, a planet in an elliptical orbit</p>",
+    "options": [
+      "moves fastest when it is closest to the Sun.",
+      "moves fastest when it is furthest from the Sun.",
+      "moves at a constant speed.",
+      "sweeps out equal angles in equal times."
+    ],
+    "answer": 0,
+    "explanation": "The line from the Sun to the planet sweeps out equal <em>areas</em> in equal times. Near the Sun the line is short, so the planet must cover a longer stretch of orbit in the same time: it moves fastest there."
+  },
+  {
+    "id": "D1-007",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Planet X orbits a star at four times the orbital radius of planet Y. Both orbits are circular. What is $\\dfrac{\\text{period of X}}{\\text{period of Y}}$?</p>",
+    "options": [
+      "2",
+      "4",
+      "8",
+      "16"
+    ],
+    "answer": 2,
+    "explanation": "Kepler's third law: $T^2 \\propto r^3$, so $T \\propto r^{3/2} = 4^{3/2} = 8$. 16 uses $T \\propto r^2$; 4 treats $T \\propto r$."
+  },
+  {
+    "id": "D1-008",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Two satellites, of mass $m$ and $2m$, are in the same circular orbit around the Earth. Which statement is correct?</p>",
+    "options": [
+      "The heavier satellite moves faster.",
+      "Both satellites have the same speed and period.",
+      "The heavier satellite has the longer period.",
+      "The lighter satellite has twice the centripetal acceleration."
+    ],
+    "answer": 1,
+    "explanation": "From $\\frac{GMm}{r^2} = \\frac{mv^2}{r}$, the satellite's mass cancels: $v = \\sqrt{\\frac{GM}{r}}$. Both have the same speed, period and acceleration; the heavier one simply feels twice the force."
+  },
+  {
+    "id": "D1-009",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>Astronauts on an orbiting space station feel weightless. Why?</p>",
+    "options": [
+      "There is no gravity at the height of the station.",
+      "The gravitational pull of the Moon cancels the Earth's.",
+      "The station is outside the Earth's atmosphere.",
+      "The astronauts and the station are falling freely together."
+    ],
+    "answer": 3,
+    "explanation": "Gravity at the station is still about 90% of its value on the ground; it provides the centripetal force for the orbit. Everything in the station falls with the same acceleration, so there is no contact force between the astronauts and the floor."
+  },
+  {
+    "id": "D1-010",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "SL",
+    "stem": "<p>Two stars of mass $M$ and $\\dfrac{M}{16}$ are a distance $d$ apart. At what distance from the more massive star is the resultant gravitational field strength zero?</p>",
+    "options": [
+      "$0.20d$",
+      "$0.50d$",
+      "$0.80d$",
+      "$0.94d$"
+    ],
+    "answer": 2,
+    "explanation": "$\\frac{GM}{x^2} = \\frac{GM/16}{(d - x)^2}$ gives $\\frac{x}{d - x} = \\sqrt{16} = 4$, so $x = 0.80d$. The null point is closer to the smaller mass. $0.94d$ uses $\\frac{x}{d - x} = 16$ (forgetting the square root)."
+  },
+  {
+    "id": "D1-011",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "SL",
+    "stem": "<p>A satellite orbits the Earth at a radius of $7.0 \\times 10^6$ m. $GM_E = 4.0 \\times 10^{14}\\ \\text{N m}^2\\,\\text{kg}^{-1}$. What is its orbital period?</p>",
+    "options": [
+      "15 min",
+      "49 min",
+      "84 min",
+      "97 min"
+    ],
+    "answer": 3,
+    "explanation": "$T = 2\\pi\\sqrt{\\frac{r^3}{GM}} = 2\\pi\\sqrt{\\frac{(7.0 \\times 10^6)^3}{4.0 \\times 10^{14}}} = 5.8 \\times 10^3$ s $= 97$ min. Leaving out the $2\\pi$ gives 15 min, using $\\pi$ gives 49 min, and using the Earth's radius instead of the orbital radius gives 84 min."
+  },
+  {
+    "id": "D1-012",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>The gravitational potential at the surface of a planet of radius $R$ is $V_0$. What is the gravitational potential at a distance $2R$ from the centre?</p>",
+    "options": [
+      "$\\dfrac{V_0}{4}$",
+      "$\\dfrac{V_0}{2}$",
+      "$2V_0$",
+      "$4V_0$"
+    ],
+    "answer": 1,
+    "explanation": "$V_g = -\\frac{GM}{r} \\propto \\frac{1}{r}$, so at $2R$ it is $\\frac{V_0}{2}$ (less negative). $\\frac{V_0}{4}$ confuses potential with field strength, which falls as $\\frac{1}{r^2}$."
+  },
+  {
+    "id": "D1-013",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>The gravitational potential at the Earth's surface is $-6.3 \\times 10^7\\ \\text{J kg}^{-1}$. What is the minimum energy needed to move a 100 kg probe from the surface to infinity (ignoring the Earth's rotation and the atmosphere)?</p>",
+    "options": [
+      "$6.3 \\times 10^7$ J",
+      "$3.1 \\times 10^9$ J",
+      "$6.3 \\times 10^9$ J",
+      "$1.3 \\times 10^{10}$ J"
+    ],
+    "answer": 2,
+    "explanation": "$W = m\\Delta V_g = 100 \\times (0 - (-6.3 \\times 10^7)) = 6.3 \\times 10^9$ J. $6.3 \\times 10^7$ J is the energy per kilogram, and $3.1 \\times 10^9$ J is the energy to reach a low orbit, not to escape."
+  },
+  {
+    "id": "D1-014",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>The escape speed from the Earth is 11.2 km/s. A planet has twice the Earth's mass and half its radius. What is the escape speed from its surface?</p>",
+    "options": [
+      "5.6 km/s",
+      "11.2 km/s",
+      "15.8 km/s",
+      "22.4 km/s"
+    ],
+    "answer": 3,
+    "explanation": "$v_{\\text{esc}} = \\sqrt{\\frac{2GM}{R}} \\propto \\sqrt{\\frac{M}{R}} = \\sqrt{\\frac{2}{0.5}} = 2$, so $2 \\times 11.2 = 22.4$ km/s. 15.8 km/s forgets the change in radius ($\\sqrt{2}$)."
+  },
+  {
+    "id": "D1-015",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A satellite of mass $m$ is in a circular orbit of radius $r$ around a planet of mass $M$. What is its total energy?</p>",
+    "options": [
+      "$-\\dfrac{GMm}{r}$",
+      "$-\\dfrac{GMm}{2r}$",
+      "$+\\dfrac{GMm}{2r}$",
+      "$+\\dfrac{GMm}{r}$"
+    ],
+    "answer": 1,
+    "explanation": "$E_k = \\frac{GMm}{2r}$ and $E_p = -\\frac{GMm}{r}$, so $E = -\\frac{GMm}{2r}$. $-\\frac{GMm}{r}$ is the potential energy alone, and $+\\frac{GMm}{2r}$ is the kinetic energy alone."
+  },
+  {
+    "id": "D1-016",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A satellite in a low orbit experiences a small drag force from the upper atmosphere. What happens to its orbital radius and its speed?</p>",
+    "options": [
+      "The radius decreases and the speed increases.",
+      "The radius decreases and the speed decreases.",
+      "The radius increases and the speed decreases.",
+      "The radius stays the same and the speed decreases."
+    ],
+    "answer": 0,
+    "explanation": "Drag removes energy, so $E = -\\frac{GMm}{2r}$ becomes more negative and $r$ decreases. In the lower orbit, $v = \\sqrt{\\frac{GM}{r}}$ is larger. The potential energy falls by twice as much as the kinetic energy rises."
+  },
+  {
+    "id": "D1-017",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "HL",
+    "stem": "<p>Which statement about gravitational equipotential surfaces is correct?</p>",
+    "options": [
+      "Field lines cross them at right angles, and no work is done moving a mass along one.",
+      "Field lines run along them, and no work is done moving a mass along one.",
+      "Field lines cross them at right angles, and work must be done moving a mass along one.",
+      "They are equally spaced around a planet when drawn at equal steps of potential."
+    ],
+    "answer": 0,
+    "explanation": "Along an equipotential $\\Delta V_g = 0$, so $W = m\\Delta V_g = 0$, and the field (which points down the potential gradient) is perpendicular to it. Around a planet, equipotentials at equal steps of potential get further apart with distance, because the field weakens."
+  },
+  {
+    "id": "D1-018",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Phobos, a moon of Mars, moves in a circular orbit of radius $9.38 \\times 10^6$ m with a period of 7.65 hours. The radius of Mars is $3.39 \\times 10^6$ m.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Show that the period $T$ of a circular orbit of radius $r$ around a planet of mass $M$ is given by $T^2 = \\dfrac{4\\pi^2}{GM}r^3$.",
+        "marks": 3,
+        "markscheme": [
+          "Gravitational force provides the centripetal force: $\\dfrac{GMm}{r^2} = \\dfrac{mv^2}{r}$ ✓",
+          "$v = \\dfrac{2\\pi r}{T}$ ✓",
+          "Substitutes and rearranges to $T^2 = \\dfrac{4\\pi^2}{GM}r^3$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Determine the mass of Mars.",
+        "marks": 2,
+        "markscheme": [
+          "$T = 7.65 \\times 3600 = 2.75 \\times 10^4$ s ✓",
+          "$M = \\dfrac{4\\pi^2r^3}{GT^2} = 6.4 \\times 10^{23}$ kg ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Calculate the gravitational field strength at the surface of Mars.",
+        "marks": 2,
+        "markscheme": [
+          "$g = \\dfrac{GM}{R^2} = \\dfrac{6.67 \\times 10^{-11} \\times 6.4 \\times 10^{23}}{(3.39 \\times 10^6)^2}$ ✓",
+          "$g = 3.7\\ \\text{N kg}^{-1}$ ✓ (allow ECF from (b))"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "A spacecraft orbits Mars. Explain why astronauts inside it appear weightless.",
+        "marks": 2,
+        "markscheme": [
+          "The astronauts and spacecraft are both in free fall / accelerating towards Mars at the same rate ✓",
+          "So there is no (normal) contact force between the astronauts and the spacecraft ✓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "D1-019",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A 500 kg satellite is in a circular orbit of radius $1.2 \\times 10^7$ m around the Earth. $GM_E = 3.98 \\times 10^{14}\\ \\text{N m}^2\\,\\text{kg}^{-1}$; radius of the Earth $= 6.37 \\times 10^6$ m.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Show that the orbital speed of the satellite is about $5.8\\ \\text{km s}^{-1}$.",
+        "marks": 1,
+        "markscheme": [
+          "$v = \\sqrt{\\dfrac{GM}{r}} = \\sqrt{\\dfrac{3.98 \\times 10^{14}}{1.2 \\times 10^7}} = 5.76 \\times 10^3\\ \\text{m s}^{-1}$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the total energy of the satellite in its orbit.",
+        "marks": 2,
+        "markscheme": [
+          "$E = -\\dfrac{GMm}{2r}$ ✓",
+          "$E = -\\dfrac{3.98 \\times 10^{14} \\times 500}{2 \\times 1.2 \\times 10^7} = -8.3 \\times 10^9$ J ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Determine the minimum energy that was needed to put the satellite into this orbit from rest on the surface of a non-rotating Earth.",
+        "marks": 2,
+        "markscheme": [
+          "Energy on the surface $= -\\dfrac{GMm}{R} = -3.12 \\times 10^{10}$ J ✓",
+          "Energy needed $= -8.3 \\times 10^9 - (-3.12 \\times 10^{10}) = 2.3 \\times 10^{10}$ J ✓ (allow ECF from (b))"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "State the minimum energy needed for the satellite to escape from this orbit to infinity.",
+        "marks": 1,
+        "markscheme": [
+          "$8.3 \\times 10^9$ J (to raise its total energy to zero) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "A different satellite in a much lower orbit experiences a small atmospheric drag force. Explain what happens to its orbital radius and its kinetic energy.",
+        "marks": 2,
+        "markscheme": [
+          "Drag reduces the total energy, so the orbital radius decreases ✓",
+          "$E_k = \\dfrac{GMm}{2r}$ increases as $r$ decreases ✓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "D2-001",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Two point charges exert a force $F$ on each other. Each charge is doubled and the distance between them is tripled. What is the new force?</p>",
+    "options": [
+      "$\\dfrac{4F}{9}$",
+      "$\\dfrac{2F}{3}$",
+      "$\\dfrac{4F}{3}$",
+      "$12F$"
+    ],
+    "answer": 0,
+    "explanation": "$F \\propto \\frac{q_1q_2}{r^2}$: doubling both charges multiplies by 4, and tripling $r$ divides by 9, giving $\\frac{4F}{9}$. $\\frac{4F}{3}$ forgets to square the distance."
+  },
+  {
+    "id": "D2-002",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>A $+2.0\\ \\mu$C charge and a $+3.0\\ \\mu$C charge are 0.10 m apart in a vacuum. What is the force between them?</p>",
+    "options": [
+      "0.54 N",
+      "5.4 N",
+      "54 N",
+      "540 N"
+    ],
+    "answer": 1,
+    "explanation": "$F = \\frac{kq_1q_2}{r^2} = \\frac{8.99 \\times 10^9 \\times 2.0 \\times 10^{-6} \\times 3.0 \\times 10^{-6}}{0.10^2} = 5.4$ N (repulsive). 0.54 N forgets to square $r$."
+  },
+  {
+    "id": "D2-003",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>In an oil-drop experiment, the charges on four drops are measured. Which value could <strong>not</strong> be correct?</p>",
+    "options": [
+      "$1.6 \\times 10^{-19}$ C",
+      "$2.4 \\times 10^{-19}$ C",
+      "$3.2 \\times 10^{-19}$ C",
+      "$8.0 \\times 10^{-19}$ C"
+    ],
+    "answer": 1,
+    "explanation": "Charge is quantised in multiples of $e = 1.6 \\times 10^{-19}$ C. $2.4 \\times 10^{-19}$ C would be $1.5e$, which is impossible. The others are $e$, $2e$ and $5e$."
+  },
+  {
+    "id": "D2-004",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>What is the electric field strength 0.30 m from a point charge of $+5.0$ nC?</p>",
+    "options": [
+      "50 $\\text{N C}^{-1}$",
+      "150 $\\text{N C}^{-1}$",
+      "500 $\\text{N C}^{-1}$",
+      "1500 $\\text{N C}^{-1}$"
+    ],
+    "answer": 2,
+    "explanation": "$E = \\frac{kQ}{r^2} = \\frac{8.99 \\times 10^9 \\times 5.0 \\times 10^{-9}}{0.30^2} = 500$ $\\text{N C}^{-1}$. 150 $\\text{N C}^{-1}$ uses $r$ instead of $r^2$ (that would be the potential in volts)."
+  },
+  {
+    "id": "D2-005",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>Two parallel plates 4.0 mm apart have a potential difference of 200 V between them. What is the electric field strength between the plates?</p>",
+    "options": [
+      "$0.80\\ \\text{V m}^{-1}$",
+      "$5.0 \\times 10^2\\ \\text{V m}^{-1}$",
+      "$5.0 \\times 10^4\\ \\text{V m}^{-1}$",
+      "$5.0 \\times 10^5\\ \\text{V m}^{-1}$"
+    ],
+    "answer": 2,
+    "explanation": "$E = \\frac{V}{d} = \\frac{200}{4.0 \\times 10^{-3}} = 5.0 \\times 10^4\\ \\text{V m}^{-1}$. Multiplying instead of dividing gives 0.80; using 0.40 (the separation in cm) gives $5.0 \\times 10^2$; using $4.0 \\times 10^{-4}$ m gives $5.0 \\times 10^5$."
+  },
+  {
+    "id": "D2-006",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>Which statement about electric field lines is correct?</p>",
+    "options": [
+      "They show the direction of the force on a negative test charge.",
+      "They can cross where two fields meet.",
+      "They are further apart where the field is stronger.",
+      "They start on positive charges and end on negative charges."
+    ],
+    "answer": 3,
+    "explanation": "Field lines show the direction of the force on a <em>positive</em> charge, so they leave positive charges and arrive at negative ones. They never cross (the field has one direction at each point) and are closer together where the field is stronger."
+  },
+  {
+    "id": "D2-007",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A positively charged rod is held near an uncharged metal sphere on an insulating stand. The sphere is briefly connected to earth, then the earth connection is removed, and then the rod is taken away. What is the final charge on the sphere?</p>",
+    "options": [
+      "Negative",
+      "Positive",
+      "Zero",
+      "Positive on one side and negative on the other"
+    ],
+    "answer": 0,
+    "explanation": "The positive rod attracts electrons to the near side of the sphere. While the sphere is earthed, more electrons flow up from the Earth. With the earth removed first, those extra electrons are trapped, so the sphere is left negative (the opposite sign to the rod)."
+  },
+  {
+    "id": "D2-008",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>An electron is placed in a uniform electric field that points to the right. In which direction is the force on the electron?</p>",
+    "options": [
+      "To the right",
+      "Upwards",
+      "Downwards",
+      "To the left"
+    ],
+    "answer": 3,
+    "explanation": "The field direction is the direction of the force on a <em>positive</em> charge. An electron is negative, so the force on it is opposite to the field: to the left."
+  },
+  {
+    "id": "D2-009",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Two ions are a fixed distance apart. They are moved from a vacuum into water, which has a permittivity of about $80\\varepsilon_0$. How does the force between them change?</p>",
+    "options": [
+      "It becomes 80 times larger.",
+      "It becomes 9 times smaller.",
+      "It stays the same.",
+      "It becomes 80 times smaller."
+    ],
+    "answer": 3,
+    "explanation": "$F = \\frac{q_1q_2}{4\\pi\\varepsilon r^2} \\propto \\frac{1}{\\varepsilon}$, so increasing the permittivity by a factor of 80 reduces the force by a factor of 80. (9 is roughly $\\sqrt{80}$, which doesn't apply.)"
+  },
+  {
+    "id": "D2-010",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>A long straight wire carries a current vertically upwards. Which describes the magnetic field lines around it, seen from above?</p>",
+    "options": [
+      "Anticlockwise circles centred on the wire",
+      "Clockwise circles centred on the wire",
+      "Straight lines pointing away from the wire",
+      "Straight lines parallel to the wire"
+    ],
+    "answer": 0,
+    "explanation": "Right-hand grip rule: thumb up along the current, fingers curl anticlockwise when seen from above. The field lines are concentric circles, further apart further from the wire."
+  },
+  {
+    "id": "D2-011",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>Equal and opposite point charges $+Q$ and $-Q$ are a distance $d$ apart. At the point midway between them, what are the electric potential $V$ and the electric field strength $E$?</p>",
+    "options": [
+      "$V = 0$ and $E = 0$",
+      "$V = 0$ and $E \\neq 0$",
+      "$V \\neq 0$ and $E = 0$",
+      "$V \\neq 0$ and $E \\neq 0$"
+    ],
+    "answer": 1,
+    "explanation": "Potentials are scalars: $\\frac{kQ}{r} + \\frac{k(-Q)}{r} = 0$. Fields are vectors: both point from $+Q$ towards $-Q$ at the midpoint, so they add and $E \\neq 0$. A zero potential doesn't mean a zero field."
+  },
+  {
+    "id": "D2-012",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>What is the electric potential energy of two $+2.0\\ \\mu$C charges 0.10 m apart?</p>",
+    "options": [
+      "−0.36 J",
+      "0.036 J",
+      "0.36 J",
+      "3.6 J"
+    ],
+    "answer": 2,
+    "explanation": "$E_p = \\frac{kq_1q_2}{r} = \\frac{8.99 \\times 10^9 \\times (2.0 \\times 10^{-6})^2}{0.10} = 0.36$ J. It is positive because like charges repel: work had to be done to bring them together. 3.6 J uses $r^2$."
+  },
+  {
+    "id": "D2-013",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A $+3.0\\ \\mu$C charge is moved from a point where the potential is 20 V to a point where it is 50 V. How much work is done on the charge?</p>",
+    "options": [
+      "$6.0 \\times 10^{-5}$ J",
+      "$9.0 \\times 10^{-5}$ J",
+      "$1.5 \\times 10^{-4}$ J",
+      "$2.1 \\times 10^{-4}$ J"
+    ],
+    "answer": 1,
+    "explanation": "$W = q\\Delta V_e = 3.0 \\times 10^{-6} \\times (50 - 20) = 9.0 \\times 10^{-5}$ J. Using one of the potentials instead of the difference gives $6.0 \\times 10^{-5}$ or $1.5 \\times 10^{-4}$ J; adding them gives $2.1 \\times 10^{-4}$ J."
+  },
+  {
+    "id": "D2-014",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>Equipotential lines in a region are drawn every 10 V and are 2.0 cm apart. What is the electric field strength in the region?</p>",
+    "options": [
+      "$0.20\\ \\text{V m}^{-1}$",
+      "$5.0\\ \\text{V m}^{-1}$",
+      "$200\\ \\text{V m}^{-1}$",
+      "$500\\ \\text{V m}^{-1}$"
+    ],
+    "answer": 3,
+    "explanation": "$E = \\frac{\\Delta V}{\\Delta r} = \\frac{10}{0.020} = 500\\ \\text{V m}^{-1}$. Using 2.0 instead of 0.020 m gives 5.0, and dividing the wrong way gives 0.20 or 200."
+  },
+  {
+    "id": "D2-015",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A hollow metal sphere of radius $R$ carries a charge $Q$. What are the field strength and the potential at its centre?</p>",
+    "options": [
+      "$E = 0$ and $V = 0$",
+      "$E = \\dfrac{kQ}{R^2}$ and $V = 0$",
+      "$E = 0$ and $V = \\dfrac{kQ}{R}$",
+      "$E = \\dfrac{kQ}{R^2}$ and $V = \\dfrac{kQ}{R}$"
+    ],
+    "answer": 2,
+    "explanation": "The charge sits on the outer surface, and its field cancels everywhere inside: $E = 0$. With no field inside, no work is needed to move a charge around inside, so the potential is the same as at the surface, $\\frac{kQ}{R}$."
+  },
+  {
+    "id": "D2-016",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "HL",
+    "stem": "<p>Which statement about electric potential is correct?</p>",
+    "options": [
+      "It is a scalar, and it is negative near a negative point charge.",
+      "It is a vector that points away from a positive charge.",
+      "It is zero at the surface of every charged sphere.",
+      "It is always negative, like gravitational potential."
+    ],
+    "answer": 0,
+    "explanation": "$V_e = \\frac{kQ}{r}$ is a scalar that takes the sign of $Q$: negative near a negative charge, positive near a positive one, and zero only at infinity. Gravitational potential is always negative because mass is always positive and gravity only attracts."
+  },
+  {
+    "id": "D2-017",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>In a Millikan-type experiment, an oil drop of mass $2.0 \\times 10^{-15}$ kg is held stationary between two horizontal plates 6.0 mm apart when the potential difference between them is 368 V.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the electric field strength between the plates.",
+        "marks": 1,
+        "markscheme": [
+          "$E = \\dfrac{V}{d} = \\dfrac{368}{6.0 \\times 10^{-3}} = 6.1 \\times 10^4\\ \\text{V m}^{-1}$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Determine the charge on the drop.",
+        "marks": 2,
+        "markscheme": [
+          "$qE = mg$ ✓",
+          "$q = \\dfrac{2.0 \\times 10^{-15} \\times 9.8}{6.13 \\times 10^4} = 3.2 \\times 10^{-19}$ C ✓ (allow ECF from (a))"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "The upper plate is positive. State the sign of the charge on the drop and the number of elementary charges it carries.",
+        "marks": 1,
+        "markscheme": [
+          "Negative, 2 extra electrons ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Explain how measurements on many drops provide evidence that charge is quantised.",
+        "marks": 1,
+        "markscheme": [
+          "Every measured charge is a whole-number multiple of the same smallest value, $1.6 \\times 10^{-19}$ C ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "The potential difference is now increased. Describe and explain the motion of the drop.",
+        "marks": 2,
+        "markscheme": [
+          "The electric force is now greater than the weight, so the drop accelerates upwards ✓",
+          "It soon reaches a constant (terminal) speed as air resistance increases ✓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "D2-018",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>An isolated metal sphere of radius 0.20 m is charged until the potential at its surface is $3.0 \\times 10^4$ V.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the charge on the sphere.",
+        "marks": 2,
+        "markscheme": [
+          "$V = \\dfrac{kQ}{R}$ so $Q = \\dfrac{VR}{k}$ ✓",
+          "$Q = \\dfrac{3.0 \\times 10^4 \\times 0.20}{8.99 \\times 10^9} = 6.7 \\times 10^{-7}$ C ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the electric field strength at the surface of the sphere.",
+        "marks": 1,
+        "markscheme": [
+          "$E = \\dfrac{kQ}{R^2} = \\dfrac{V}{R} = 1.5 \\times 10^5\\ \\text{V m}^{-1}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "State the potential at the centre of the sphere, and explain your answer.",
+        "marks": 2,
+        "markscheme": [
+          "$3.0 \\times 10^4$ V ✓",
+          "The field inside a conductor is zero, so no work is done moving a charge inside: the potential is the same everywhere inside as at the surface ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "A proton is brought from far away to the surface of the sphere. Calculate the work done on it, in eV and in J.",
+        "marks": 2,
+        "markscheme": [
+          "$W = q\\Delta V = e \\times 3.0 \\times 10^4\\ \\text{V} = 3.0 \\times 10^4$ eV ✓",
+          "$= 3.0 \\times 10^4 \\times 1.60 \\times 10^{-19} = 4.8 \\times 10^{-15}$ J ✓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "D3-001",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>An electron moves at $2.0 \\times 10^6\\ \\text{m s}^{-1}$ at an angle of 30° to a uniform magnetic field of 0.50 T. What is the magnitude of the magnetic force on it?</p>",
+    "options": [
+      "$8.0 \\times 10^{-14}$ N",
+      "$1.4 \\times 10^{-13}$ N",
+      "$1.6 \\times 10^{-13}$ N",
+      "$3.2 \\times 10^{-13}$ N"
+    ],
+    "answer": 0,
+    "explanation": "$F = qvB\\sin\\theta = 1.60 \\times 10^{-19} \\times 2.0 \\times 10^6 \\times 0.50 \\times \\sin 30^\\circ = 8.0 \\times 10^{-14}$ N. Using $\\cos 30^\\circ$ gives $1.4 \\times 10^{-13}$ N; ignoring the angle gives $1.6 \\times 10^{-13}$ N."
+  },
+  {
+    "id": "D3-002",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>A charged particle moves at right angles to a uniform magnetic field. Which quantity stays constant?</p>",
+    "options": [
+      "Its velocity",
+      "Its kinetic energy",
+      "Its momentum",
+      "Its acceleration"
+    ],
+    "answer": 1,
+    "explanation": "The magnetic force is always perpendicular to the velocity, so it does no work: the speed and kinetic energy stay constant. The direction of the velocity, momentum and acceleration all keep changing as the particle goes round its circle."
+  },
+  {
+    "id": "D3-003",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A proton and an alpha particle (twice the charge and four times the mass of a proton) enter the same uniform magnetic field at the same speed, at right angles to it. The radius of the proton's path is $r$. What is the radius of the alpha particle's path?</p>",
+    "options": [
+      "$\\dfrac{r}{2}$",
+      "$r$",
+      "$2r$",
+      "$4r$"
+    ],
+    "answer": 2,
+    "explanation": "$r = \\frac{mv}{qB} \\propto \\frac{m}{q} = \\frac{4}{2} = 2$, so the alpha particle's radius is $2r$. $4r$ forgets the larger charge."
+  },
+  {
+    "id": "D3-004",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A charged particle moves in a circle in a uniform magnetic field. Its speed is doubled. What happens to the time it takes to complete one circle?</p>",
+    "options": [
+      "It doubles.",
+      "It halves.",
+      "It quadruples.",
+      "It stays the same."
+    ],
+    "answer": 3,
+    "explanation": "$T = \\frac{2\\pi r}{v}$ and $r = \\frac{mv}{qB}$, so $T = \\frac{2\\pi m}{qB}$, which doesn't depend on the speed. Doubling the speed doubles the radius, and the longer path is covered twice as fast."
+  },
+  {
+    "id": "D3-005",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>In a velocity selector, the electric field strength is $6.0 \\times 10^3\\ \\text{V m}^{-1}$ and the magnetic field strength is 0.020 T. What speed of particle passes through undeflected?</p>",
+    "options": [
+      "$1.2 \\times 10^2\\ \\text{m s}^{-1}$",
+      "$3.3 \\times 10^{-6}\\ \\text{m s}^{-1}$",
+      "$3.0 \\times 10^5\\ \\text{m s}^{-1}$",
+      "$3.0 \\times 10^7\\ \\text{m s}^{-1}$"
+    ],
+    "answer": 2,
+    "explanation": "$qE = qvB$, so $v = \\frac{E}{B} = \\frac{6.0 \\times 10^3}{0.020} = 3.0 \\times 10^5\\ \\text{m s}^{-1}$. Multiplying gives 120; dividing the wrong way gives $3.3 \\times 10^{-6}$."
+  },
+  {
+    "id": "D3-006",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>An electron is accelerated from rest through a potential difference of 500 V. What is its final speed? ($m_e = 9.11 \\times 10^{-31}$ kg)</p>",
+    "options": [
+      "$4.2 \\times 10^6\\ \\text{m s}^{-1}$",
+      "$9.4 \\times 10^6\\ \\text{m s}^{-1}$",
+      "$1.3 \\times 10^7\\ \\text{m s}^{-1}$",
+      "$1.8 \\times 10^{14}\\ \\text{m s}^{-1}$"
+    ],
+    "answer": 2,
+    "explanation": "$\\tfrac{1}{2}mv^2 = eV$, so $v = \\sqrt{\\frac{2eV}{m}} = \\sqrt{\\frac{2 \\times 1.60 \\times 10^{-19} \\times 500}{9.11 \\times 10^{-31}}} = 1.3 \\times 10^7\\ \\text{m s}^{-1}$. Forgetting the 2 gives $9.4 \\times 10^6$; forgetting the square root gives $1.8 \\times 10^{14}$."
+  },
+  {
+    "id": "D3-007",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>A 0.50 m length of wire carrying 4.0 A is at right angles to a uniform magnetic field of 0.30 T. What is the force on the wire?</p>",
+    "options": [
+      "0.15 N",
+      "0.60 N",
+      "2.4 N",
+      "6.7 N"
+    ],
+    "answer": 1,
+    "explanation": "$F = BIL\\sin\\theta = 0.30 \\times 4.0 \\times 0.50 \\times 1 = 0.60$ N."
+  },
+  {
+    "id": "D3-008",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>Two long parallel wires carry currents in opposite directions. The current in wire X is twice the current in wire Y. Which statement is correct?</p>",
+    "options": [
+      "The wires repel with forces of equal size.",
+      "The wires attract with forces of equal size.",
+      "The wires repel, and the force on Y is twice the force on X.",
+      "The wires attract, and the force on X is twice the force on Y."
+    ],
+    "answer": 0,
+    "explanation": "Currents in opposite directions repel. The forces form a Newton's third law pair, so they are equal in size whatever the currents: $\\frac{F}{L} = \\mu_0\\frac{I_1I_2}{2\\pi r}$ is the same for both wires."
+  },
+  {
+    "id": "D3-009",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Two long parallel wires 2.0 cm apart each carry a current of 10 A. What is the force per metre on each wire? ($\\mu_0 = 4\\pi \\times 10^{-7}\\ \\text{T m A}^{-1}$)</p>",
+    "options": [
+      "$1.0 \\times 10^{-5}\\ \\text{N m}^{-1}$",
+      "$1.0 \\times 10^{-3}\\ \\text{N m}^{-1}$",
+      "$2.0 \\times 10^{-3}\\ \\text{N m}^{-1}$",
+      "$6.3 \\times 10^{-3}\\ \\text{N m}^{-1}$"
+    ],
+    "answer": 1,
+    "explanation": "$\\frac{F}{L} = \\frac{4\\pi \\times 10^{-7} \\times 10 \\times 10}{2\\pi \\times 0.020} = 1.0 \\times 10^{-3}\\ \\text{N m}^{-1}$. Leaving out the $2\\pi$ gives $6.3 \\times 10^{-3}$; using 2.0 m gives $1.0 \\times 10^{-5}$."
+  },
+  {
+    "id": "D3-010",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A positive ion moves due east through a magnetic field that points vertically upwards. In which direction is the magnetic force on it?</p>",
+    "options": [
+      "North",
+      "South",
+      "Upwards",
+      "Downwards"
+    ],
+    "answer": 1,
+    "explanation": "Fleming's left-hand rule: first finger up (field), second finger east (current, for a positive charge), thumb points south. The force is horizontal, perpendicular to both the velocity and the field, so it can't be up or down."
+  },
+  {
+    "id": "D3-011",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>An electron enters the uniform electric field between two parallel plates, moving at right angles to the field. What is the shape of its path between the plates?</p>",
+    "options": [
+      "A parabola",
+      "A circular arc",
+      "A straight line",
+      "A helix"
+    ],
+    "answer": 0,
+    "explanation": "The force $eE$ is constant in size and direction, so the electron has a constant acceleration across the plates while its velocity along the plates stays the same: a parabola, like a projectile. Circles happen in magnetic fields, where the force is always perpendicular to the velocity."
+  },
+  {
+    "id": "D3-012",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 3,
+    "level": "SL",
+    "stem": "<p>Electrons accelerated through 200 V travel in a circle of radius 4.8 cm in a uniform magnetic field of 1.0 mT. What is the charge-to-mass ratio of the electron given by these results?</p>",
+    "options": [
+      "$1.7 \\times 10^8\\ \\text{C kg}^{-1}$",
+      "$8.3 \\times 10^9\\ \\text{C kg}^{-1}$",
+      "$8.7 \\times 10^{10}\\ \\text{C kg}^{-1}$",
+      "$1.7 \\times 10^{11}\\ \\text{C kg}^{-1}$"
+    ],
+    "answer": 3,
+    "explanation": "$\\frac{e}{m} = \\frac{2V}{B^2r^2} = \\frac{2 \\times 200}{(1.0 \\times 10^{-3})^2 \\times 0.048^2} = 1.7 \\times 10^{11}\\ \\text{C kg}^{-1}$. Leaving out the 2 gives $8.7 \\times 10^{10}$; not squaring $r$ gives $8.3 \\times 10^9$; not squaring $B$ gives $1.7 \\times 10^8$."
+  },
+  {
+    "id": "D3-013",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A charged particle enters a uniform magnetic field with its velocity at an angle of 45° to the field. What is the shape of its path?</p>",
+    "options": [
+      "A straight line",
+      "A circle",
+      "A parabola",
+      "A helix"
+    ],
+    "answer": 3,
+    "explanation": "The velocity component along the field is unaffected, while the component perpendicular to the field produces circular motion. Together they give a spiral (helix) along the field lines."
+  },
+  {
+    "id": "D3-014",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "stem": "<p>A wire carrying a current lies in a uniform magnetic field. When is the force on the wire zero?</p>",
+    "options": [
+      "When the wire is parallel to the field",
+      "When the wire is at right angles to the field",
+      "When the wire is at 45° to the field",
+      "Never, as long as a current flows"
+    ],
+    "answer": 0,
+    "explanation": "$F = BIL\\sin\\theta$, and $\\sin 0^\\circ = 0$: a wire parallel to the field feels no force. The force is greatest at right angles."
+  },
+  {
+    "id": "D3-015",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "SL",
+    "stem": "<p>Positive ions, each of charge $+e$, pass through a velocity selector in which the electric field strength is $4.0 \\times 10^4\\ \\text{V m}^{-1}$ and the magnetic field strength is 0.25 T. The ions that emerge then enter a region where there is only a uniform magnetic field of 0.25 T, at right angles to their velocity. They move in a semicircle of radius 0.20 m.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Explain why only ions of one particular speed pass through the velocity selector undeflected.",
+        "marks": 2,
+        "markscheme": [
+          "The electric and magnetic forces are in opposite directions ✓",
+          "They are equal only when $qE = qvB$, i.e. for one speed $v = \\dfrac{E}{B}$; faster or slower ions are deflected ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the speed of the ions that emerge.",
+        "marks": 1,
+        "markscheme": [
+          "$v = \\dfrac{E}{B} = \\dfrac{4.0 \\times 10^4}{0.25} = 1.6 \\times 10^5\\ \\text{m s}^{-1}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Explain why the ions move in a circle in the second region.",
+        "marks": 2,
+        "markscheme": [
+          "The magnetic force is always perpendicular to the velocity ✓",
+          "It has constant size (constant speed), so it provides a centripetal force ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Determine the mass of each ion.",
+        "marks": 2,
+        "markscheme": [
+          "$r = \\dfrac{mv}{qB}$, so $m = \\dfrac{qBr}{v}$ ✓",
+          "$m = \\dfrac{1.60 \\times 10^{-19} \\times 0.25 \\times 0.20}{1.6 \\times 10^5} = 5.0 \\times 10^{-26}$ kg ✓ (allow ECF from (b))"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "Ions of a second isotope have a mass 10% larger. Determine the distance between the points where the two kinds of ion land after travelling a semicircle.",
+        "marks": 2,
+        "markscheme": [
+          "The radius is proportional to the mass, so $r = 0.22$ m ✓",
+          "The landing points are a diameter apart from the entry point, so they are separated by $2 \\times (0.22 - 0.20) = 0.040$ m ✓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "D3-016",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Two long, straight, parallel wires P and Q are 4.0 cm apart. P carries a current of 8.0 A and Q carries 5.0 A in the same direction.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "State and explain whether the wires attract or repel.",
+        "marks": 2,
+        "markscheme": [
+          "They attract ✓",
+          "Each wire is in the magnetic field of the other, and the force (by the left-hand rule) on each points towards the other wire, as for any currents in the same direction ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the force per unit length on wire Q.",
+        "marks": 2,
+        "markscheme": [
+          "$\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1I_2}{2\\pi r} = \\dfrac{4\\pi \\times 10^{-7} \\times 8.0 \\times 5.0}{2\\pi \\times 0.040}$ ✓",
+          "$= 2.0 \\times 10^{-4}\\ \\text{N m}^{-1}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Calculate the force on a 0.50 m length of wire P.",
+        "marks": 1,
+        "markscheme": [
+          "$1.0 \\times 10^{-4}$ N (the same force per unit length as on Q) ✓ (allow ECF from (b))"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Explain why the force on P is the same as the force on Q, even though the currents are different.",
+        "marks": 1,
+        "markscheme": [
+          "The forces are a Newton's third law pair, so they are equal and opposite ✓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "D4-001",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "HL",
+    "stem": "<p>A flat coil of area 0.020 $\\text{m}^2$ is in a uniform magnetic field of 0.40 T. The normal to the coil makes an angle of 60° with the field. What is the magnetic flux through the coil?</p>",
+    "options": [
+      "$4.0 \\times 10^{-3}$ Wb",
+      "$6.9 \\times 10^{-3}$ Wb",
+      "$8.0 \\times 10^{-3}$ Wb",
+      "0.40 Wb"
+    ],
+    "answer": 0,
+    "explanation": "$\\Phi = BA\\cos\\theta = 0.40 \\times 0.020 \\times \\cos 60^\\circ = 4.0 \\times 10^{-3}$ Wb. Using $\\sin 60^\\circ$ gives $6.9 \\times 10^{-3}$; ignoring the angle gives $8.0 \\times 10^{-3}$."
+  },
+  {
+    "id": "D4-002",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>The magnetic flux through each turn of a 500-turn coil changes steadily by $2.0 \\times 10^{-3}$ Wb in 0.050 s. What is the magnitude of the induced emf?</p>",
+    "options": [
+      "0.040 V",
+      "2.0 V",
+      "20 V",
+      "200 V"
+    ],
+    "answer": 2,
+    "explanation": "$\\varepsilon = N\\frac{\\Delta\\Phi}{\\Delta t} = 500 \\times \\frac{2.0 \\times 10^{-3}}{0.050} = 20$ V. Forgetting $N$ gives 0.040 V."
+  },
+  {
+    "id": "D4-003",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "HL",
+    "stem": "<p>A straight rod of length 0.50 m moves at 4.0 $\\text{m s}^{-1}$ at right angles to a uniform magnetic field of 0.20 T. What emf is induced between its ends?</p>",
+    "options": [
+      "0.025 V",
+      "0.10 V",
+      "0.40 V",
+      "1.6 V"
+    ],
+    "answer": 2,
+    "explanation": "$\\varepsilon = BvL = 0.20 \\times 4.0 \\times 0.50 = 0.40$ V."
+  },
+  {
+    "id": "D4-004",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "HL",
+    "stem": "<p>The north pole of a magnet is pushed towards one end of a coil connected to a meter. What does the induced current make that end of the coil?</p>",
+    "options": [
+      "A south pole, which attracts the magnet",
+      "A north pole, which repels the magnet",
+      "Neither pole, because the current is too small",
+      "A north pole, which attracts the magnet"
+    ],
+    "answer": 1,
+    "explanation": "Lenz's law: the induced current opposes the change, here the approach of the north pole. So the near end of the coil becomes a north pole, which repels the magnet. (Like poles repel, so option D is impossible.)"
+  },
+  {
+    "id": "D4-005",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "HL",
+    "stem": "<p>Lenz's law is a consequence of the conservation of</p>",
+    "options": [
+      "momentum.",
+      "charge.",
+      "mass.",
+      "energy."
+    ],
+    "answer": 3,
+    "explanation": "If the induced current helped the change instead of opposing it, the effect would grow by itself and create energy from nothing. Opposing the change means work must be done, and that work becomes the electrical energy."
+  },
+  {
+    "id": "D4-006",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A rectangular coil moves at constant velocity through a region of uniform magnetic field. While the whole coil is inside the field region, what is the induced emf?</p>",
+    "options": [
+      "Zero, because the flux through the coil is constant",
+      "Constant and non-zero, because the coil is moving",
+      "Increasing, because more of the coil is cutting field lines",
+      "Alternating, because the coil is moving"
+    ],
+    "answer": 0,
+    "explanation": "With the whole coil inside a uniform field, the flux through it doesn't change, so $\\varepsilon = -N\\frac{\\Delta\\Phi}{\\Delta t} = 0$. The emfs in the leading and trailing sides are equal and cancel around the coil."
+  },
+  {
+    "id": "D4-007",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A coil rotates at a steady rate in a uniform magnetic field, producing an alternating emf. The rate of rotation is doubled. What happens to the peak emf and to the period of the emf?</p>",
+    "options": [
+      "The peak is unchanged and the period halves.",
+      "The peak doubles and the period halves.",
+      "The peak doubles and the period doubles.",
+      "The peak halves and the period halves."
+    ],
+    "answer": 1,
+    "explanation": "Rotating twice as fast makes the flux linkage change twice as fast, so the peak emf doubles; each cycle takes half as long, so the period halves. A common mistake is to think only the frequency changes."
+  },
+  {
+    "id": "D4-008",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>For a coil rotating in a uniform magnetic field, when is the induced emf zero?</p>",
+    "options": [
+      "When the plane of the coil is parallel to the field",
+      "When the flux through the coil is zero",
+      "When the coil is moving fastest",
+      "When the plane of the coil is at right angles to the field"
+    ],
+    "answer": 3,
+    "explanation": "When the coil faces the field (its plane at right angles to $B$), the flux is at a maximum and, for an instant, not changing, so the emf is zero. When the plane is parallel to the field, the flux is zero but changing fastest, so the emf is maximum."
+  },
+  {
+    "id": "D4-009",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A graph shows the flux linkage of a coil against time. At which point on the graph is the magnitude of the induced emf greatest?</p>",
+    "options": [
+      "Where the graph is steepest",
+      "Where the flux linkage is greatest",
+      "Where the flux linkage is zero",
+      "Where the graph is flat"
+    ],
+    "answer": 0,
+    "explanation": "The emf equals the rate of change of flux linkage, which is the gradient of the graph. It is largest where the graph is steepest and zero where it is flat, whatever the value of the flux linkage itself."
+  },
+  {
+    "id": "D4-010",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "HL",
+    "stem": "<p>Which change would <strong>not</strong> increase the peak emf of a generator?</p>",
+    "options": [
+      "Using more turns of wire on the coil",
+      "Using a stronger magnet",
+      "Rotating the coil faster",
+      "Using a coil of smaller area"
+    ],
+    "answer": 3,
+    "explanation": "The peak emf depends on the number of turns, the field strength, the area of the coil and the rotation rate ($\\varepsilon_0 = NBA\\omega$). A smaller area means less flux, so a smaller emf."
+  },
+  {
+    "id": "D4-011",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A switch in a circuit containing a large coil is opened, and a spark jumps across the switch. Why?</p>",
+    "options": [
+      "The coil stores charge, which is released as a spark.",
+      "The battery's emf increases when the current stops.",
+      "The rapidly falling current induces a large emf in the coil itself, which tries to keep the current flowing.",
+      "The resistance of the coil suddenly falls to zero."
+    ],
+    "answer": 2,
+    "explanation": "Self-induction: the collapsing magnetic field of the coil changes the flux linking the coil itself, inducing an emf that (by Lenz's law) opposes the fall in current. Because the change is very fast, this emf can be large enough to make a spark."
+  },
+  {
+    "id": "D4-012",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A strong magnet is dropped down a vertical copper tube and falls much more slowly than it would through a plastic tube. What is the reason?</p>",
+    "options": [
+      "Copper is attracted to magnets.",
+      "Currents induced in the copper create magnetic fields that oppose the magnet's motion.",
+      "Air is trapped between the magnet and the copper.",
+      "The copper becomes a permanent magnet."
+    ],
+    "answer": 1,
+    "explanation": "Copper is not magnetic, but it is a good conductor. The falling magnet changes the flux through the tube walls, inducing currents (eddy currents) whose fields oppose its motion (Lenz's law). Plastic is an insulator, so no currents flow."
+  },
+  {
+    "id": "D4-013",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A metal rod rests across two horizontal parallel rails 0.40 m apart, which are connected at one end by a 0.50 Ω resistor. A uniform vertical magnetic field of 0.25 T acts through the arrangement. The rod is pulled along the rails at a constant speed of 2.0 $\\text{m s}^{-1}$. Ignore the resistance of the rod and rails, and friction.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the emf induced in the rod.",
+        "marks": 1,
+        "markscheme": [
+          "$\\varepsilon = BvL = 0.25 \\times 2.0 \\times 0.40 = 0.20$ V ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the current in the resistor.",
+        "marks": 1,
+        "markscheme": [
+          "$I = \\dfrac{0.20}{0.50} = 0.40$ A ✓ (allow ECF)"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Determine the force needed to keep the rod moving at constant speed.",
+        "marks": 2,
+        "markscheme": [
+          "Force on the current-carrying rod $F = BIL = 0.25 \\times 0.40 \\times 0.40$ ✓",
+          "$F = 0.040$ N (equal and opposite to the magnetic force) ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Show that the rate of work done by the pulling force equals the rate at which energy is dissipated in the resistor.",
+        "marks": 2,
+        "markscheme": [
+          "$Fv = 0.040 \\times 2.0 = 0.080$ W ✓",
+          "$I^2R = 0.40^2 \\times 0.50 = 0.080$ W ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "Explain, with reference to Lenz's law, why a force is needed to keep the rod moving.",
+        "marks": 2,
+        "markscheme": [
+          "The induced current opposes the change in flux that causes it ✓",
+          "So the force on the current in the rod opposes its motion, and work must be done against it ✓"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "D4-014",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A rectangular coil of 80 turns, measuring 5.0 cm by 4.0 cm, rotates at 25 revolutions per second about an axis at right angles to a uniform magnetic field of 0.15 T.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the maximum flux linkage of the coil.",
+        "marks": 1,
+        "markscheme": [
+          "$N\\Phi_{\\max} = NBA = 80 \\times 0.15 \\times 2.0 \\times 10^{-3} = 0.024$ Wb ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "State the orientation of the coil when the induced emf is zero.",
+        "marks": 1,
+        "markscheme": [
+          "When the plane of the coil is perpendicular to the field (flux linkage at a maximum) ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Explain why the induced emf alternates in direction.",
+        "marks": 2,
+        "markscheme": [
+          "The flux linkage increases and decreases (and reverses) as the coil rotates ✓",
+          "When the flux is increasing the emf has one sign; when it is decreasing it has the opposite sign (Lenz's law) ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Calculate the average emf induced during the quarter turn from the position of maximum flux linkage to the position of zero flux linkage.",
+        "marks": 2,
+        "markscheme": [
+          "Time for a quarter turn $= \\dfrac{1}{4 \\times 25} = 0.010$ s ✓",
+          "$\\varepsilon = \\dfrac{0.024}{0.010} = 2.4$ V ✓ (allow ECF from (a))"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "The rotation rate is increased to 50 revolutions per second. Describe the effect on the graph of emf against time.",
+        "marks": 2,
+        "markscheme": [
+          "The peak emf doubles ✓",
+          "The period halves (frequency doubles) ✓"
+        ]
+      }
+    ]
   }
 ]

@@ -4,15 +4,281 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>D.3 Motion in electromagnetic fields · DP Physics</title>
+  <meta name="description" content="IB DP Physics D.3 Motion in electromagnetic fields: charged particles in uniform electric fields, the magnetic force F = qvB sin θ, circular motion in a magnetic field, charge-to-mass ratio, crossed fields and velocity selectors, the force on a current-carrying wire, and the force between parallel wires.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="D.3">
+</head>
+<body data-root="../" data-section="themes" data-topic="D.3">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="d.html">Theme D Fields</a></p>
     <h1><span class="code">D.3</span>Motion in electromagnetic fields</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <p class="lead">Old TV screens, particle accelerators, mass spectrometers and the northern lights all depend on how charged particles move in electric and magnetic fields. An electric field speeds particles up or bends them into parabolas; a magnetic field bends them into circles without changing their speed. This topic works out both, and the forces on wires carrying currents. There is no additional HL content in D.3.</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Experiments</span><span class="tag">Models</span><span class="tag">Measurement</span><span class="tag">Global impact of science</span></div>
+          <p><strong>Experiments.</strong> In 1897 J.J. Thomson bent beams of "cathode rays" with electric and magnetic fields and measured their charge-to-mass ratio. It was about 2000 times larger than for hydrogen ions, so the rays had to be tiny particles: he had discovered the electron.</p>
+          <p><strong>Models.</strong> Magnetic field lines give a picture of an invisible field. Combined with the rule $F = qvB\sin\theta$, they let us predict exactly how a particle will curve.</p>
+          <p><strong>Measurement.</strong> Until 2019 the ampere was defined by the force between two parallel wires. Today it is defined by fixing the value of the elementary charge $e$.</p>
+          <p><strong>Global impact.</strong> Magnetic fields steer particles in cancer-treatment accelerators and in the Large Hadron Collider, and mass spectrometers identify substances from drug tests to space missions.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>Is a field pattern like a map?</strong> A map simplifies the land to make it useful. In what ways are field lines a simplified "map" of reality, and what do they leave out?</li>
+            <li><strong>How do we know about particles we can't see?</strong> Thomson never saw an electron; he inferred it from the bending of a beam. How much can be known from indirect evidence?</li>
+            <li><strong>Why so many hand rules?</strong> Different countries and textbooks teach Fleming's left-hand rule, a right-hand slap rule or a vector cross product, all for the same physics. Does it matter which convention we learn?</li>
+            <li><strong>Who owns discoveries made with huge machines?</strong> Modern particle physics needs thousands of scientists from many countries. How does knowledge production change when no single person can understand the whole experiment?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <ol>
+        <li><a href="#efield">Charged particles in a uniform electric field</a></li>
+        <li><a href="#force">The magnetic force on a moving charge</a></li>
+        <li><a href="#circle">Circular motion in a magnetic field</a></li>
+        <li><a href="#qm">Measuring the charge-to-mass ratio</a></li>
+        <li><a href="#crossed">Crossed electric and magnetic fields</a></li>
+        <li><a href="#wire">The force on a current-carrying wire</a></li>
+        <li><a href="#parallel">The force between parallel wires</a></li>
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="efield">1. Charged particles in a uniform electric field</h2>
+    <p>In a uniform field $E$ (for example between parallel plates, D.2), a charge $q$ feels a <strong>constant force</strong> $F = qE$, in the direction of the field for a positive charge and opposite to it for a negative one. A constant force gives a constant acceleration $a = \dfrac{qE}{m}$, so the kinematics equations of A.1 apply.</p>
+    <h3>Accelerating from rest</h3>
+    <p>A charge accelerated from rest through a potential difference $V$ gains kinetic energy equal to the work done on it:</p>
+    <div class="key">$$\tfrac{1}{2}mv^2 = qV$$</div>
+    <div class="worked">
+      <h3>Worked example: an electron gun</h3>
+      <p>Electrons are accelerated from rest through a p.d. of 2000 V. Find their final speed. ($m_e = 9.11 \times 10^{-31}$ kg.)</p>
+      <p>$v = \sqrt{\dfrac{2qV}{m}} = \sqrt{\dfrac{2 \times 1.60 \times 10^{-19} \times 2000}{9.11 \times 10^{-31}}} = 2.7 \times 10^7\ \text{m s}^{-1}$, about 9% of the speed of light.</p>
+    </div>
+    <h3>Entering a field at right angles</h3>
+    <p>A particle entering the field at right angles to it keeps its original velocity along the plates, but accelerates steadily across them. Its path is a <strong>parabola</strong>, exactly like a ball thrown horizontally in a gravitational field (A.1). After leaving the field it travels in a straight line.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 210" role="img" aria-labelledby="d3at">
+        <title id="d3at">An electron enters the space between two horizontal parallel plates, moving to the right. The top plate is positive. Between the plates the electron follows a parabola curving upwards towards the positive plate. After leaving the plates it moves in a straight line.</title>
+        <rect x="80" y="20" width="200" height="8" class="f2" opacity="0.8"/>
+        <rect x="80" y="192" width="200" height="8" class="f1" opacity="0.8"/>
+        <text x="288" y="30" style="font-size:15px">+</text><text x="288" y="202" style="font-size:15px">−</text>
+        <g class="grid" marker-end="url(#ah3)"><line x1="110" y1="34" x2="110" y2="184"/><line x1="180" y1="34" x2="180" y2="184"/><line x1="250" y1="34" x2="250" y2="184"/></g>
+        <line class="l1" x1="10" y1="110" x2="80" y2="110"/>
+        <polyline class="l1" points="80.0,110.0 84.0,110.0 88.0,109.9 92.0,109.8 96.0,109.6 100.0,109.4 104.0,109.1 108.0,108.8 112.0,108.5 116.0,108.1 120.0,107.6 124.0,107.1 128.0,106.5 132.0,105.9 136.0,105.3 140.0,104.6 144.0,103.9 148.0,103.1 152.0,102.2 156.0,101.3 160.0,100.4 164.0,99.4 168.0,98.4 172.0,97.3 176.0,96.2 180.0,95.0 184.0,93.8 188.0,92.5 192.0,91.2 196.0,89.8 200.0,88.4 204.0,86.9 208.0,85.4 212.0,83.9 216.0,82.3 220.0,80.6 224.0,78.9 228.0,77.1 232.0,75.3 236.0,73.5 240.0,71.6 244.0,69.7 248.0,67.7 252.0,65.6 256.0,63.5 260.0,61.4 264.0,59.2 268.0,57.0 272.0,54.7 276.0,52.4 280.0,50.0"/>
+        <polyline class="l1" points="280,50 360,2"/>
+        <circle cx="30" cy="110" r="5" class="f1"/>
+        <line class="l1 thin" x1="38" y1="124" x2="66" y2="124" marker-end="url(#ah1)"/>
+        <text class="t1" x="40" y="142" style="font-size:14px">u</text>
+        <text x="258" y="170" style="font-size:14px">E</text>
+      </svg>
+      <figcaption>An <span class="key-1">electron</span> entering a uniform field at right angles follows a parabola towards the positive plate. (Grey arrows: field direction, from + to −.)</figcaption>
+    </figure>
+    <div class="worked">
+      <h3>Worked example: deflecting an electron beam</h3>
+      <p>The electrons from the previous example ($u = 2.65 \times 10^7\ \text{m s}^{-1}$) enter a uniform field of $1.0 \times 10^4\ \text{V m}^{-1}$ at right angles. The plates are 5.0 cm long. How far are the electrons deflected sideways by the time they leave the plates?</p>
+      <p>Time between the plates: $t = \dfrac{0.050}{2.65 \times 10^7} = 1.89 \times 10^{-9}$ s.</p>
+      <p>Acceleration across the plates: $a = \dfrac{eE}{m} = \dfrac{1.60 \times 10^{-19} \times 1.0 \times 10^4}{9.11 \times 10^{-31}} = 1.76 \times 10^{15}\ \text{m s}^{-2}$.</p>
+      <p>Deflection: $y = \tfrac{1}{2}at^2 = 0.5 \times 1.76 \times 10^{15} \times (1.89 \times 10^{-9})^2 = 3.1 \times 10^{-3}$ m, about 3 mm.</p>
+    </div>
+    <aside class="maths-link">
+      <h3>Maths link: the parabola <span class="tag">AA SL 2.6</span></h3>
+      <p>Along the plates $x = ut$; across them $y = \tfrac{1}{2}at^2$. Eliminating $t$ gives $y = \dfrac{a}{2u^2}x^2$: a quadratic function, so the path is a parabola with its vertex where the particle enters. Doubling the entry speed makes the parabola four times flatter.</p>
+    </aside>
+
+    <!-- ===================================================== -->
+    <h2 id="force">2. The magnetic force on a moving charge</h2>
+    <p>A magnetic field exerts a force on a charge only if the charge is <strong>moving</strong>, and not moving parallel to the field:</p>
+    <div class="key">
+      $$F = qvB\sin\theta$$
+      <p style="margin:0">$B$ is the magnetic field strength in tesla (T), $v$ the speed and $\theta$ the angle between the velocity and the field. The force is greatest when $v$ is at right angles to $B$, and zero when they are parallel. A stationary charge feels no magnetic force at all.</p>
+    </div>
+    <p><strong>Direction:</strong> the force is <strong>perpendicular to both</strong> $v$ and $B$. Use Fleming's left-hand rule: hold the thumb, first finger and second finger of your <strong>left</strong> hand at right angles. The <strong>F</strong>irst finger points along the <strong>F</strong>ield, the se<strong>C</strong>ond finger along the <strong>C</strong>urrent (the direction a <em>positive</em> charge moves), and the thu<strong>M</strong>b gives the force (the <strong>M</strong>otion). For a negative charge such as an electron, the "current" is opposite to its velocity, so the force is reversed.</p>
+    <p>Because the force is always at right angles to the velocity, it <strong>does no work</strong>. The magnetic force changes the particle's direction but never its speed, so its <strong>kinetic energy stays constant</strong>.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="circle">3. Circular motion in a magnetic field</h2>
+    <p>When a charged particle moves at right angles to a uniform magnetic field, the force has a constant size and is always perpendicular to the velocity. That is exactly the condition for <strong>uniform circular motion</strong> (A.2). The magnetic force provides the centripetal force:</p>
+    $$qvB = \frac{mv^2}{r} \qquad\Rightarrow\qquad r = \frac{mv}{qB}$$
+    <figure class="diagram">
+      <svg viewBox="0 0 380 230" role="img" aria-labelledby="d3bt">
+        <title id="d3bt">A uniform magnetic field pointing out of the page, shown by a grid of dots. A positive particle at the top of a circle moves to the right. The magnetic force on it points down towards the centre of the circle, so it moves clockwise in a circle.</title>
+        <circle cx="30" cy="20" r="2.2" class="f3" opacity="0.5"/><circle cx="30" cy="60" r="2.2" class="f3" opacity="0.5"/><circle cx="30" cy="100" r="2.2" class="f3" opacity="0.5"/><circle cx="30" cy="140" r="2.2" class="f3" opacity="0.5"/><circle cx="30" cy="180" r="2.2" class="f3" opacity="0.5"/><circle cx="70" cy="20" r="2.2" class="f3" opacity="0.5"/><circle cx="70" cy="60" r="2.2" class="f3" opacity="0.5"/><circle cx="70" cy="100" r="2.2" class="f3" opacity="0.5"/><circle cx="70" cy="140" r="2.2" class="f3" opacity="0.5"/><circle cx="70" cy="180" r="2.2" class="f3" opacity="0.5"/><circle cx="110" cy="20" r="2.2" class="f3" opacity="0.5"/><circle cx="110" cy="60" r="2.2" class="f3" opacity="0.5"/><circle cx="110" cy="100" r="2.2" class="f3" opacity="0.5"/><circle cx="110" cy="140" r="2.2" class="f3" opacity="0.5"/><circle cx="110" cy="180" r="2.2" class="f3" opacity="0.5"/><circle cx="150" cy="20" r="2.2" class="f3" opacity="0.5"/><circle cx="150" cy="60" r="2.2" class="f3" opacity="0.5"/><circle cx="150" cy="100" r="2.2" class="f3" opacity="0.5"/><circle cx="150" cy="140" r="2.2" class="f3" opacity="0.5"/><circle cx="150" cy="180" r="2.2" class="f3" opacity="0.5"/><circle cx="190" cy="20" r="2.2" class="f3" opacity="0.5"/><circle cx="190" cy="60" r="2.2" class="f3" opacity="0.5"/><circle cx="190" cy="100" r="2.2" class="f3" opacity="0.5"/><circle cx="190" cy="140" r="2.2" class="f3" opacity="0.5"/><circle cx="190" cy="180" r="2.2" class="f3" opacity="0.5"/><circle cx="230" cy="20" r="2.2" class="f3" opacity="0.5"/><circle cx="230" cy="60" r="2.2" class="f3" opacity="0.5"/><circle cx="230" cy="100" r="2.2" class="f3" opacity="0.5"/><circle cx="230" cy="140" r="2.2" class="f3" opacity="0.5"/><circle cx="230" cy="180" r="2.2" class="f3" opacity="0.5"/><circle cx="270" cy="20" r="2.2" class="f3" opacity="0.5"/><circle cx="270" cy="60" r="2.2" class="f3" opacity="0.5"/><circle cx="270" cy="100" r="2.2" class="f3" opacity="0.5"/><circle cx="270" cy="140" r="2.2" class="f3" opacity="0.5"/><circle cx="270" cy="180" r="2.2" class="f3" opacity="0.5"/><circle cx="310" cy="20" r="2.2" class="f3" opacity="0.5"/><circle cx="310" cy="60" r="2.2" class="f3" opacity="0.5"/><circle cx="310" cy="100" r="2.2" class="f3" opacity="0.5"/><circle cx="310" cy="140" r="2.2" class="f3" opacity="0.5"/><circle cx="310" cy="180" r="2.2" class="f3" opacity="0.5"/><circle cx="350" cy="20" r="2.2" class="f3" opacity="0.5"/><circle cx="350" cy="60" r="2.2" class="f3" opacity="0.5"/><circle cx="350" cy="100" r="2.2" class="f3" opacity="0.5"/><circle cx="350" cy="140" r="2.2" class="f3" opacity="0.5"/><circle cx="350" cy="180" r="2.2" class="f3" opacity="0.5"/>
+        <circle cx="190" cy="120" r="80" class="l1 thin" fill="none"/>
+        <circle cx="190" cy="40" r="7" class="f2"/>
+        <line class="l2" x1="198" y1="40" x2="250" y2="40" marker-end="url(#ah2)"/>
+        <line class="l3" x1="190" y1="49" x2="190" y2="92" marker-end="url(#ah3)"/>
+        <text class="t2" x="254" y="36" style="font-size:14px">v</text><text x="196" y="80" style="font-size:14px">F</text>
+        <line class="l1 thin" x1="269" y1="114" x2="270" y2="128" marker-end="url(#ah1)"/>
+        <line class="grid" x1="190" y1="120" x2="133.4" y2="176.6"/>
+        <text x="150" y="146" style="font-size:14px">r</text>
+        <text x="20" y="222" style="font-size:13px">B out of the page</text>
+      </svg>
+      <figcaption>A <span class="key-2">positive particle</span> in a field out of the page (dots). The magnetic force always points to the centre, so the particle moves round a <span class="key-1">circle</span>, clockwise.</figcaption>
+    </figure>
+    <ul>
+      <li>Faster or heavier particles move in <strong>bigger</strong> circles; a stronger field or a bigger charge makes the circle <strong>smaller</strong>.</li>
+      <li>Particles with opposite charges curve in opposite directions.</li>
+      <li>The time for one orbit is $T = \dfrac{2\pi r}{v} = \dfrac{2\pi m}{qB}$, which doesn't depend on the speed: faster particles go round bigger circles in the same time.</li>
+      <li>If the velocity has a component along the field, that component is unaffected, and the particle spirals along the field lines in a <strong>helix</strong>. That's how charged particles from the Sun are funnelled towards the Earth's poles, where they make the air glow as the aurora.</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: a proton in a magnetic field</h3>
+      <p>A proton moving at $3.0 \times 10^6\ \text{m s}^{-1}$ enters a uniform magnetic field of 0.20 T at right angles. Find the radius of its path and the time for one orbit. ($m_p = 1.67 \times 10^{-27}$ kg.)</p>
+      <p>$r = \dfrac{mv}{qB} = \dfrac{1.67 \times 10^{-27} \times 3.0 \times 10^6}{1.60 \times 10^{-19} \times 0.20} = 0.16$ m.</p>
+      <p>$T = \dfrac{2\pi m}{qB} = \dfrac{2\pi \times 1.67 \times 10^{-27}}{1.60 \times 10^{-19} \times 0.20} = 3.3 \times 10^{-7}$ s.</p>
+      <p>An electron at the same speed would curve the other way, in a circle about 1800 times smaller (because its mass is 1800 times smaller).</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="qm">4. Measuring the charge-to-mass ratio</h2>
+    <p>Rearranging $r = \dfrac{mv}{qB}$ gives $\dfrac{q}{m} = \dfrac{v}{Br}$. So measuring the radius of a particle's path in a known field, and its speed, gives its <strong>charge-to-mass ratio</strong>, which identifies the particle.</p>
+    <p>In a common school experiment, electrons are accelerated through a p.d. $V$ and then bent into a circle by the field of a pair of coils. Combining $\tfrac{1}{2}mv^2 = eV$ with $v = \dfrac{eBr}{m}$:</p>
+    <div class="key">$$\frac{e}{m} = \frac{2V}{B^2r^2}$$</div>
+    <div class="worked">
+      <h3>Worked example: measuring e/m</h3>
+      <p>Electrons accelerated through 250 V move in a circle of radius 4.5 cm in a field of 1.2 mT. Find $\dfrac{e}{m}$ and compare it with the accepted value, $1.76 \times 10^{11}\ \text{C kg}^{-1}$.</p>
+      <p>$\dfrac{e}{m} = \dfrac{2 \times 250}{(1.2 \times 10^{-3})^2 \times (0.045)^2} = 1.7 \times 10^{11}\ \text{C kg}^{-1}$.</p>
+      <p>That's within about 3% of the accepted value. The radius is hard to measure precisely, and since it is squared, its percentage uncertainty is doubled.</p>
+    </div>
+    <p>A <strong>mass spectrometer</strong> uses the same idea. Ions with the same charge and speed curve by different amounts according to their mass, so they land in different places. This separates isotopes and identifies molecules.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="crossed">5. Crossed electric and magnetic fields</h2>
+    <p>If a uniform electric field and a uniform magnetic field are at right angles to each other and to the particle's velocity, the two forces can point in <strong>opposite</strong> directions. When they are equal in size, the particle passes straight through, undeflected:</p>
+    $$qE = qvB \qquad\Rightarrow\qquad v = \frac{E}{B}$$
+    <figure class="diagram">
+      <svg viewBox="0 0 380 200" role="img" aria-labelledby="d3ct">
+        <title id="d3ct">A velocity selector. A positive particle moves to the right between horizontal plates; the top plate is positive, so the electric field points down. A magnetic field points into the page, shown by crosses. The electric force on the particle is downwards and the magnetic force upwards. When they are equal, the particle goes straight through.</title>
+        <rect x="60" y="22" width="260" height="8" class="f2" opacity="0.8"/>
+        <rect x="60" y="170" width="260" height="8" class="f1" opacity="0.8"/>
+        <text x="328" y="32" style="font-size:15px">+</text><text x="328" y="180" style="font-size:15px">−</text>
+        <path class="axis" style="opacity:0.6" d="M80 54 L88 62 M80 62 L88 54"/><path class="axis" style="opacity:0.6" d="M80 138 L88 146 M80 146 L88 138"/><path class="axis" style="opacity:0.6" d="M124 54 L132 62 M124 62 L132 54"/><path class="axis" style="opacity:0.6" d="M124 138 L132 146 M124 146 L132 138"/><path class="axis" style="opacity:0.6" d="M256 54 L264 62 M256 62 L264 54"/><path class="axis" style="opacity:0.6" d="M256 138 L264 146 M256 146 L264 138"/><path class="axis" style="opacity:0.6" d="M300 54 L308 62 M300 62 L308 54"/><path class="axis" style="opacity:0.6" d="M300 138 L308 146 M300 146 L308 138"/>
+        <line class="l1" x1="10" y1="100" x2="370" y2="100"/>
+        <circle cx="190" cy="100" r="7" class="f2"/>
+        <line class="l2" x1="190" y1="91" x2="190" y2="52" marker-end="url(#ah2)"/>
+        <line class="l3" x1="190" y1="109" x2="190" y2="148" marker-end="url(#ah3)"/>
+        <text class="t2" x="198" y="62" style="font-size:14px">qvB</text><text x="198" y="146" style="font-size:14px">qE</text>
+        <line class="l1 thin" x1="330" y1="88" x2="364" y2="88" marker-end="url(#ah1)"/><text class="t1" x="338" y="80" style="font-size:14px">v</text>
+      </svg>
+      <figcaption>A velocity selector: E down (plates), B into the page (crosses). For a positive particle, the electric force qE is down and the <span class="key-2">magnetic force qvB</span> is up. Only particles with speed $v = E/B$ go <span class="key-1">straight through</span>.</figcaption>
+    </figure>
+    <p>Slower particles feel a weaker magnetic force and are pushed towards the electric force's direction; faster ones are bent the other way. This arrangement, a <strong>velocity selector</strong>, picks out particles of a single speed, for example before a mass spectrometer. Notice that the result doesn't depend on the charge or mass.</p>
+    <div class="worked">
+      <h3>Worked example: choosing the speed</h3>
+      <p>A velocity selector has $E = 3.0 \times 10^4\ \text{V m}^{-1}$ and $B = 0.15$ T. What speed of particle passes straight through? What happens to an alpha particle moving twice as fast?</p>
+      <p>$v = \dfrac{E}{B} = \dfrac{3.0 \times 10^4}{0.15} = 2.0 \times 10^5\ \text{m s}^{-1}$.</p>
+      <p>At twice this speed the magnetic force is twice the electric force, so the (positive) alpha particle is deflected in the direction of the magnetic force.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="wire">6. The force on a current-carrying wire</h2>
+    <p>A current is a flow of moving charges, so a wire carrying a current in a magnetic field feels a force (the <strong>motor effect</strong>):</p>
+    <div class="key">
+      $$F = BIL\sin\theta$$
+      <p style="margin:0">$I$ is the current, $L$ the length of wire in the field and $\theta$ the angle between the wire and the field. The direction comes from Fleming's left-hand rule, with the second finger along the current. There's no force if the wire is parallel to the field.</p>
+    </div>
+    <p>This follows from $F = qvB\sin\theta$: in a time $t$, charge $q = It$ moves a distance $L = vt$, so $qv = IL$.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 180" role="img" aria-labelledby="d3dt">
+        <title id="d3dt">A wire, seen end-on and carrying current into the page, sits between the north pole of a magnet on the left and the south pole on the right. The magnetic field points from left to right. The force on the wire is downwards.</title>
+        <rect x="20" y="40" width="70" height="100" class="f2" opacity="0.85"/><rect x="290" y="40" width="70" height="100" class="f1" opacity="0.85"/>
+        <text x="55" y="96" text-anchor="middle" style="fill:#fff;font-size:18px">N</text><text x="325" y="96" text-anchor="middle" style="fill:#fff;font-size:18px">S</text>
+        <g class="grid" marker-end="url(#ah3)"><line x1="96" y1="60" x2="284" y2="60"/><line x1="96" y1="120" x2="284" y2="120"/></g>
+        <circle cx="190" cy="90" r="10" class="axis" style="fill:var(--surface)"/><path class="axis" d="M184 84 L196 96 M184 96 L196 84"/>
+        <line class="l3" x1="190" y1="102" x2="190" y2="160" marker-end="url(#ah3)"/>
+        <text x="198" y="152" style="font-size:14px">F</text><text x="250" y="54" style="font-size:14px">B</text>
+      </svg>
+      <figcaption>Current into the page (⊗) in a field from N to S: by Fleming's left-hand rule the force is downwards. Reverse the current or the field and the force reverses.</figcaption>
+    </figure>
+    <div class="worked">
+      <h3>Worked example: a wire at an angle</h3>
+      <p>A 0.25 m length of wire carries 3.0 A in a uniform field of 0.40 T. The wire makes an angle of 30° with the field. Find the force on it.</p>
+      <p>$F = BIL\sin\theta = 0.40 \times 3.0 \times 0.25 \times \sin 30^\circ = 0.15$ N.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="parallel">7. The force between parallel wires</h2>
+    <p>Each current-carrying wire sits in the magnetic field of the other, so two parallel wires exert forces on each other:</p>
+    <div class="key">
+      $$\frac{F}{L} = \mu_0\frac{I_1I_2}{2\pi r}$$
+      <p style="margin:0">$\frac{F}{L}$ is the force per metre of wire, $r$ the separation and $\mu_0 = 4\pi \times 10^{-7}\ \text{T m A}^{-1}$ the permeability of free space. Currents in the <strong>same</strong> direction <strong>attract</strong>; currents in <strong>opposite</strong> directions <strong>repel</strong>. By Newton's third law, the forces on the two wires are equal and opposite, even if the currents are different.</p>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 190" role="img" aria-labelledby="d3et">
+        <title id="d3et">Two parallel wires seen end-on, both carrying current out of the page. Each is surrounded by circular field lines. At each wire, the field of the other wire points vertically, and the resulting forces point towards each other: the wires attract.</title>
+        <g class="l1 thin" fill="none"><circle cx="120" cy="95" r="26"/><circle cx="120" cy="95" r="52"/><circle cx="260" cy="95" r="26"/><circle cx="260" cy="95" r="52"/></g>
+        <circle cx="120" cy="95" r="8" class="axis" style="fill:var(--surface)"/><circle cx="120" cy="95" r="2.4" class="f3"/>
+        <circle cx="260" cy="95" r="8" class="axis" style="fill:var(--surface)"/><circle cx="260" cy="95" r="2.4" class="f3"/>
+        <line class="l2" x1="130" y1="95" x2="170" y2="95" marker-end="url(#ah2)"/>
+        <line class="l2" x1="250" y1="95" x2="210" y2="95" marker-end="url(#ah2)"/>
+        <text class="t2" x="144" y="86" style="font-size:14px">F</text><text class="t2" x="222" y="86" style="font-size:14px">F</text>
+        <text x="120" y="180" text-anchor="middle" style="font-size:14px">I₁</text><text x="260" y="180" text-anchor="middle" style="font-size:14px">I₂</text>
+      </svg>
+      <figcaption>Two currents out of the page, each in the other's <span class="key-1">magnetic field</span>. The <span class="key-2">forces</span> pull them together.</figcaption>
+    </figure>
+    <div class="worked">
+      <h3>Worked example: power cables</h3>
+      <p>Two long parallel wires 5.0 cm apart carry currents of 20 A and 15 A in the same direction. Find the force on each 1.0 m length of wire, and its direction.</p>
+      <p>$\dfrac{F}{L} = \dfrac{4\pi \times 10^{-7} \times 20 \times 15}{2\pi \times 0.050} = 1.2 \times 10^{-3}\ \text{N m}^{-1}$, so 1.2 mN on each metre, attracting the wires towards each other.</p>
+      <p>The forces are small for ordinary currents, but the huge currents in a short circuit can make cables jump violently.</p>
+    </div>
+    <p>The old definition of the ampere was based on this: two long wires 1 m apart, each carrying 1 A, attract with a force of $2 \times 10^{-7}$ N per metre.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">8. Common mistakes</h2>
+    <ul>
+      <li><strong>Saying a magnetic field speeds a charge up.</strong> The magnetic force is perpendicular to the velocity: it changes the direction only, and the kinetic energy stays constant. (An electric field <em>can</em> change the speed.)</li>
+      <li><strong>Forgetting to reverse the force for negative charges</strong> when using Fleming's left-hand rule.</li>
+      <li><strong>Using $\sin\theta$ with the wrong angle.</strong> $\theta$ is between the velocity (or current) and the field. Parallel means zero force.</li>
+      <li><strong>Treating motion in an electric field as circular</strong>, or in a magnetic field as a parabola. Uniform $E$: constant force, parabola. Uniform $B$ (perpendicular): circle.</li>
+      <li><strong>Saying the bigger current feels the bigger force</strong> between parallel wires. The forces are equal and opposite (Newton's third law).</li>
+      <li><strong>Getting attraction and repulsion the wrong way round.</strong> Same direction attracts; opposite directions repel (the opposite of the rule for charges).</li>
+      <li><strong>Forgetting to convert</strong> mT to T and cm to m.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">9. Check your understanding</h2>
+    <details class="check">
+      <summary>An electron and a proton enter the same magnetic field at the same speed, at right angles to it. Compare their paths.</summary>
+      <p>They curve in opposite directions (opposite charges). The electron's radius is about 1800 times smaller, because $r = \frac{mv}{qB}$ and its mass is 1800 times smaller.</p>
+    </details>
+    <details class="check">
+      <summary>The speed of a charged particle moving in a circle in a magnetic field is doubled. What happens to the radius and to the time for one orbit?</summary>
+      <p>The radius doubles ($r \propto v$). The period stays the same ($T = \frac{2\pi m}{qB}$).</p>
+    </details>
+    <details class="check">
+      <summary>Why does a magnetic field do no work on a moving charge?</summary>
+      <p>The magnetic force is always perpendicular to the velocity, so there is no component of force in the direction of motion. Work = force × displacement in the direction of the force = 0.</p>
+    </details>
+    <details class="check">
+      <summary>A wire carrying current due north lies in a vertical magnetic field pointing downwards. In which direction is the force on the wire?</summary>
+      <p>West. Fleming's left-hand rule: first finger down (field), second finger north (current), thumb points west.</p>
+    </details>
+    <details class="check">
+      <summary>The current in both of two parallel wires is doubled, and their separation is halved. By what factor does the force per metre change?</summary>
+      <p>$\frac{F}{L} \propto \frac{I_1I_2}{r}$: $\frac{2 \times 2}{0.5} = 8$ times larger.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=D.3">Practise D.3 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>
