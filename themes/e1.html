@@ -4,15 +4,321 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>E.1 Structure of the atom · DP Physics</title>
+  <meta name="description" content="IB DP Physics E.1 Structure of the atom: the Geiger–Marsden–Rutherford experiment, nuclear notation, emission and absorption spectra, energy levels and E = hf; HL: nuclear radius and density, closest approach, deviations from Rutherford scattering and the Bohr model of hydrogen.">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
-</head><body data-root="../" data-section="themes" data-topic="E.1">
+</head>
+<body data-root="../" data-section="themes" data-topic="E.1">
   <header id="site-header"></header>
   <main>
+    <!-- Arrowheads shared by all the diagrams on this page -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="e.html">Theme E Nuclear and quantum physics</a></p>
-    <h1><span class="code">E.1</span>Structure of the atom</h1>
-    <div class="notice">Notes for this topic are coming soon.</div>
+    <h1><span class="code">E.1</span>Structure of the atom <span class="tag hl">+ HL extra</span></h1>
+    <p class="lead">Every atom has a tiny, dense, positive <strong>nucleus</strong> with electrons around it, and those electrons can only have certain energies. This topic covers the experiment that found the nucleus, the notation for describing nuclei, and how the light given out or absorbed by atoms reveals their <strong>energy levels</strong> and tells us what distant stars are made of. HL students go further, with the size and density of nuclei, the closest approach of an alpha particle, and the Bohr model of hydrogen (sections 8–11).</p>
+
+    <section class="tok" aria-labelledby="tok-title">
+      <h2 id="tok-title">Knowledge and science</h2>
+      <div class="tok-grid">
+        <div>
+          <h3>Nature of science</h3>
+          <div class="tok-tags"><span class="tag">Evidence</span><span class="tag">Models</span><span class="tag">Falsification</span><span class="tag">Observations</span></div>
+          <p><strong>Evidence.</strong> Around 1909 Hans Geiger and Ernest Marsden, working in Ernest Rutherford's lab, fired alpha particles at thin gold foil. About 1 in 8000 bounced back. Rutherford said it was as if a shell fired at tissue paper had come back and hit you.</p>
+          <p><strong>Models.</strong> J. J. Thomson's "plum pudding" model (1904) had electrons dotted through a spread-out positive charge. It explained the atom being neutral, but not the bounce-backs. Rutherford's nuclear model (1911) replaced it.</p>
+          <p><strong>Falsification.</strong> Rutherford's model had its own problem: an orbiting electron should radiate energy and spiral into the nucleus in a fraction of a second. Niels Bohr (1913) simply <em>assumed</em> that certain orbits were stable, and his model matched the hydrogen spectrum.</p>
+          <p><strong>Observations.</strong> Helium was first identified in 1868 from an unexplained yellow line in the spectrum of the Sun, decades before it was found on Earth. Spectra let us analyse matter we can never touch.</p>
+        </div>
+        <div>
+          <h3>ToK: questions to think about</h3>
+          <ul class="tok-q">
+            <li><strong>Can we know what we can't see?</strong> Nobody has seen a nucleus directly. Our knowledge of it comes from how particles bounce off it. How much confidence should indirect evidence give us?</li>
+            <li><strong>Is an old model wrong, or just limited?</strong> The Bohr model fails for atoms with more than one electron, yet it is still taught and still gives the right hydrogen energy levels. When is a "wrong" model worth keeping?</li>
+            <li><strong>How important are surprises?</strong> Geiger and Marsden only looked for large-angle scattering because Rutherford asked them to check. Would the nucleus have been found if no one had looked for the unexpected?</li>
+            <li><strong>Are pictures of the atom misleading?</strong> The familiar "planets orbiting a Sun" drawing is not how quantum physics describes electrons. Do simple images help or hinder understanding?</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
+    </section>
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <p style="margin:8px 0 0"><strong>SL and HL</strong></p>
+      <ol>
+        <li><a href="#gmr">The Geiger–Marsden–Rutherford experiment</a></li>
+        <li><a href="#model">The nuclear model of the atom</a></li>
+        <li><a href="#notation">Nuclear notation and isotopes</a></li>
+        <li><a href="#spectra">Emission and absorption spectra</a></li>
+        <li><a href="#levels">Energy levels and photons</a></li>
+        <li><a href="#hydrogen">The hydrogen spectrum</a></li>
+        <li><a href="#composition">Spectra and chemical composition</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><a href="#hl"><strong>HL only</strong></a></p>
+      <ol start="8">
+        <li><a href="#radius">Nuclear radius and density</a></li>
+        <li><a href="#approach">Distance of closest approach</a></li>
+        <li><a href="#deviations">Deviations from Rutherford scattering</a></li>
+        <li><a href="#bohr">The Bohr model of hydrogen</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><strong>Review</strong></p>
+      <ol start="12">
+        <li><a href="#mistakes">Common mistakes</a></li>
+        <li><a href="#check">Check your understanding</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================================================== -->
+    <h2 id="gmr">1. The Geiger–Marsden–Rutherford experiment</h2>
+    <p>Alpha particles (helium nuclei, charge $+2e$) from a radioactive source were aimed at a very thin sheet of gold foil, in a vacuum. A zinc sulfide screen gave a tiny flash of light wherever an alpha particle hit it, and the flashes were counted through a microscope at different angles. The results were:</p>
+    <ul>
+      <li><strong>Most</strong> alpha particles went straight through, or were deflected by only a small angle.</li>
+      <li><strong>A few</strong> were deflected through large angles.</li>
+      <li><strong>A very small number</strong> (about 1 in 8000) bounced back, deflected by more than 90°.</li>
+    </ul>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 220" role="img" aria-labelledby="e1at">
+        <title id="e1at">Paths of alpha particles passing a gold nucleus, calculated for a repulsive inverse-square force. Paths far from the nucleus are barely deflected; paths that pass close are deflected through large angles, and a nearly head-on alpha particle bounces back.</title>
+        <circle cx="255" cy="110" r="95" class="grid dash" fill="none"/><polyline class="l1 thin" fill="none" points="0.0,30.0 0.2,30.0 2.2,30.0 4.2,30.0 6.2,30.0 8.2,30.0 10.2,30.0 12.2,30.0 14.2,30.0 16.2,30.0 18.2,30.0 20.2,30.0 22.2,30.0 24.2,30.0 26.2,30.0 28.2,30.0 30.2,30.0 32.2,30.0 34.2,30.0 36.2,30.0 38.2,30.0 40.1,30.0 42.1,30.0 44.1,30.0 46.1,30.0 48.1,29.9 50.1,29.9 52.1,29.9 54.0,29.9 56.0,29.9 58.0,29.9 60.0,29.9 62.0,29.9 64.0,29.9 65.9,29.9 67.9,29.9 69.9,29.9 71.9,29.9 73.9,29.9 75.8,29.8 77.8,29.8 79.8,29.8 81.7,29.8 83.7,29.8 85.7,29.8 87.7,29.8 89.6,29.8 91.6,29.8 93.6,29.7 95.5,29.7 97.5,29.7 99.5,29.7 101.4,29.7 103.4,29.7 105.4,29.7 107.3,29.6 109.3,29.6 111.2,29.6 113.2,29.6 115.1,29.6 117.1,29.6 119.1,29.5 121.0,29.5 123.0,29.5 124.9,29.5 126.9,29.4 128.8,29.4 130.7,29.4 132.7,29.4 134.6,29.3 136.6,29.3 138.5,29.3 140.5,29.2 142.4,29.2 144.3,29.2 146.3,29.2 148.2,29.1 150.1,29.1 152.1,29.0 154.0,29.0 155.9,29.0 157.8,28.9 159.8,28.9 161.7,28.8 163.6,28.8 165.5,28.7 167.4,28.7 169.3,28.6 171.2,28.6 173.2,28.5 175.1,28.5 177.0,28.4 178.9,28.4 180.8,28.3 182.7,28.2 184.6,28.2 186.5,28.1 188.4,28.0 190.3,28.0 192.1,27.9 194.0,27.8 195.9,27.7 197.8,27.6 199.7,27.5 201.6,27.5 203.4,27.4 205.3,27.3 207.2,27.2 209.1,27.1 210.9,27.0 212.8,26.8 214.7,26.7 216.5,26.6 218.4,26.5 220.3,26.4 222.1,26.2 224.0,26.1 225.8,26.0 227.7,25.8 229.5,25.7 231.4,25.5 233.2,25.4 235.1,25.2 236.9,25.0 238.8,24.9 240.6,24.7 242.5,24.5 244.3,24.3 246.2,24.1 248.0,23.9 249.8,23.7 251.7,23.5 253.5,23.3 255.4,23.1 257.2,22.9 259.1,22.7 260.9,22.4 262.7,22.2 264.6,22.0 266.4,21.7 268.3,21.5 270.1,21.2 272.0,21.0 273.8,20.7 275.7,20.5 277.5,20.2 279.4,19.9 281.2,19.6 283.1,19.4 284.9,19.1 286.8,18.8 288.6,18.5 290.5,18.2 292.3,17.9 294.2,17.6 296.1,17.3 297.9,17.0 299.8,16.7 301.6,16.4 303.5,16.1 305.4,15.7 307.2,15.4 309.1,15.1 311.0,14.8 312.9,14.4 314.7,14.1 316.6,13.8 318.5,13.4 320.4,13.1 322.3,12.8 324.1,12.4 326.0,12.1 327.9,11.7 329.8,11.4 331.7,11.0 333.6,10.7 335.5,10.3 337.4,9.9 339.3,9.6 341.2,9.2 343.1,8.9 344.9,8.5 346.8,8.1 348.7,7.8 350.7,7.4 352.6,7.0 354.5,6.7 356.4,6.3 358.3,5.9 360.2,5.6 362.1,5.2 364.0,4.8 365.9,4.4 367.8,4.0" marker-end="url(#ah1)"/><polyline class="l1 thin" fill="none" points="0.0,74.0 0.2,74.0 2.2,74.0 4.2,74.0 6.2,74.0 8.2,74.0 10.2,74.0 12.2,74.0 14.2,74.0 16.2,74.0 18.2,74.0 20.2,74.0 22.2,74.0 24.2,74.0 26.2,74.0 28.2,74.0 30.2,74.0 32.2,74.0 34.2,74.0 36.2,74.0 38.1,74.0 40.1,74.0 42.1,74.0 44.1,74.0 46.1,74.0 48.1,74.0 50.1,74.0 52.0,74.0 54.0,74.0 56.0,74.0 58.0,74.0 60.0,74.0 61.9,74.0 63.9,73.9 65.9,73.9 67.9,73.9 69.8,73.9 71.8,73.9 73.8,73.9 75.8,73.9 77.7,73.9 79.7,73.9 81.7,73.9 83.6,73.9 85.6,73.9 87.6,73.9 89.5,73.9 91.5,73.9 93.5,73.9 95.4,73.9 97.4,73.9 99.3,73.8 101.3,73.8 103.2,73.8 105.2,73.8 107.2,73.8 109.1,73.8 111.0,73.8 113.0,73.8 114.9,73.8 116.9,73.8 118.8,73.7 120.8,73.7 122.7,73.7 124.6,73.7 126.6,73.7 128.5,73.7 130.4,73.7 132.4,73.7 134.3,73.6 136.2,73.6 138.1,73.6 140.1,73.6 142.0,73.6 143.9,73.5 145.8,73.5 147.7,73.5 149.6,73.5 151.5,73.5 153.4,73.4 155.3,73.4 157.2,73.4 159.1,73.4 161.0,73.3 162.9,73.3 164.8,73.3 166.7,73.2 168.5,73.2 170.4,73.2 172.3,73.1 174.1,73.1 176.0,73.0 177.9,73.0 179.7,73.0 181.6,72.9 183.4,72.9 185.2,72.8 187.1,72.7 188.9,72.7 190.7,72.6 192.5,72.6 194.3,72.5 196.1,72.4 197.9,72.4 199.7,72.3 201.5,72.2 203.3,72.1 205.1,72.0 206.8,71.9 208.6,71.8 210.3,71.7 212.1,71.6 213.8,71.4 215.5,71.3 217.2,71.2 219.0,71.0 220.7,70.9 222.3,70.7 224.0,70.5 225.7,70.3 227.4,70.1 229.0,69.9 230.7,69.7 232.3,69.4 233.9,69.2 235.5,68.9 237.2,68.6 238.8,68.3 240.4,68.0 242.0,67.6 243.6,67.3 245.1,66.9 246.7,66.5 248.3,66.1 249.9,65.7 251.4,65.2 253.0,64.7 254.6,64.3 256.2,63.8 257.7,63.3 259.3,62.7 260.9,62.2 262.4,61.6 264.0,61.0 265.6,60.4 267.2,59.8 268.8,59.2 270.4,58.6 272.0,57.9 273.5,57.3 275.1,56.6 276.8,55.9 278.4,55.2 280.0,54.6 281.6,53.8 283.2,53.1 284.8,52.4 286.5,51.7 288.1,50.9 289.7,50.2 291.4,49.5 293.0,48.7 294.7,47.9 296.3,47.2 298.0,46.4 299.6,45.6 301.3,44.8 302.9,44.1 304.6,43.3 306.3,42.5 308.0,41.7 309.6,40.9 311.3,40.1 313.0,39.2 314.7,38.4 316.4,37.6 318.1,36.8 319.7,36.0 321.4,35.1 323.1,34.3 324.8,33.5 326.5,32.7 328.2,31.8 329.9,31.0 331.7,30.1 333.4,29.3 335.1,28.5 336.8,27.6 338.5,26.8 340.2,25.9 341.9,25.1 343.7,24.2 345.4,23.3 347.1,22.5 348.8,21.6 350.6,20.8 352.3,19.9 354.0,19.1 355.8,18.2 357.5,17.3 359.2,16.5 361.0,15.6 362.7,14.7 364.4,13.8 366.2,13.0 367.9,12.1 369.7,11.2 371.4,10.4 373.2,9.5 374.9,8.6" marker-end="url(#ah1)"/><polyline class="l1 thin" fill="none" points="0.0,96.0 0.2,96.0 2.2,96.0 4.2,96.0 6.2,96.0 8.2,96.0 10.2,96.0 12.2,96.0 14.2,96.0 16.2,96.0 18.2,96.0 20.2,96.0 22.2,96.0 24.2,96.0 26.2,96.0 28.2,96.0 30.2,96.0 32.2,96.0 34.2,96.0 36.1,96.0 38.1,96.0 40.1,96.0 42.1,96.0 44.1,96.0 46.1,96.0 48.1,96.0 50.0,96.0 52.0,96.0 54.0,96.0 56.0,96.0 58.0,96.0 60.0,96.0 61.9,96.0 63.9,96.0 65.9,96.0 67.9,96.0 69.8,96.0 71.8,96.0 73.8,96.0 75.7,96.0 77.7,96.0 79.7,96.0 81.7,96.0 83.6,96.0 85.6,96.0 87.5,96.0 89.5,96.0 91.5,95.9 93.4,95.9 95.4,95.9 97.3,95.9 99.3,95.9 101.3,95.9 103.2,95.9 105.2,95.9 107.1,95.9 109.1,95.9 111.0,95.9 112.9,95.9 114.9,95.9 116.8,95.9 118.8,95.9 120.7,95.9 122.6,95.9 124.6,95.9 126.5,95.9 128.4,95.9 130.4,95.9 132.3,95.9 134.2,95.9 136.1,95.8 138.0,95.8 140.0,95.8 141.9,95.8 143.8,95.8 145.7,95.8 147.6,95.8 149.5,95.8 151.4,95.8 153.3,95.8 155.2,95.8 157.1,95.7 158.9,95.7 160.8,95.7 162.7,95.7 164.6,95.7 166.4,95.7 168.3,95.7 170.2,95.6 172.0,95.6 173.9,95.6 175.7,95.6 177.5,95.6 179.4,95.6 181.2,95.5 183.0,95.5 184.8,95.5 186.6,95.5 188.4,95.4 190.2,95.4 192.0,95.4 193.8,95.3 195.6,95.3 197.3,95.3 199.1,95.2 200.8,95.2 202.5,95.1 204.2,95.1 205.9,95.0 207.6,95.0 209.3,94.9 211.0,94.9 212.6,94.8 214.2,94.7 215.8,94.6 217.4,94.5 219.0,94.4 220.6,94.3 222.1,94.2 223.6,94.1 225.1,93.9 226.5,93.8 227.9,93.6 229.3,93.4 230.7,93.2 232.0,93.0 233.3,92.7 234.5,92.4 235.8,92.1 236.9,91.7 238.1,91.3 239.2,90.9 240.2,90.4 241.3,89.9 242.2,89.3 243.2,88.6 244.1,87.9 245.0,87.2 245.9,86.4 246.8,85.6 247.6,84.7 248.5,83.7 249.3,82.7 250.1,81.7 250.9,80.6 251.7,79.5 252.5,78.3 253.3,77.1 254.0,75.9 254.8,74.6 255.6,73.3 256.4,72.0 257.2,70.7 258.0,69.3 258.8,67.9 259.5,66.5 260.3,65.1 261.1,63.6 261.9,62.2 262.7,60.7 263.5,59.2 264.3,57.7 265.1,56.2 265.9,54.7 266.8,53.1 267.6,51.6 268.4,50.0 269.2,48.4 270.0,46.9 270.8,45.3 271.7,43.7 272.5,42.1 273.3,40.5 274.1,38.9 275.0,37.2 275.8,35.6 276.6,34.0 277.5,32.3 278.3,30.7 279.1,29.0 280.0,27.4 280.8,25.7 281.7,24.1 282.5,22.4 283.4,20.7 284.2,19.1 285.0,17.4 285.9,15.7 286.7,14.0 287.6,12.3 288.4,10.6 289.3,8.9 290.2,7.2 291.0,5.5 291.9,3.8" marker-end="url(#ah1)"/><polyline class="l1 thin" fill="none" points="0.0,107.0 0.2,107.0 2.2,107.0 4.2,107.0 6.2,107.0 8.2,107.0 10.2,107.0 12.2,107.0 14.2,107.0 16.2,107.0 18.2,107.0 20.2,107.0 22.2,107.0 24.2,107.0 26.2,107.0 28.2,107.0 30.2,107.0 32.2,107.0 34.2,107.0 36.1,107.0 38.1,107.0 40.1,107.0 42.1,107.0 44.1,107.0 46.1,107.0 48.1,107.0 50.0,107.0 52.0,107.0 54.0,107.0 56.0,107.0 58.0,107.0 60.0,107.0 61.9,107.0 63.9,107.0 65.9,107.0 67.9,107.0 69.8,107.0 71.8,107.0 73.8,107.0 75.7,107.0 77.7,107.0 79.7,107.0 81.6,107.0 83.6,107.0 85.6,107.0 87.5,107.0 89.5,107.0 91.5,107.0 93.4,107.0 95.4,107.0 97.3,107.0 99.3,107.0 101.2,107.0 103.2,107.0 105.2,107.0 107.1,107.0 109.0,107.0 111.0,107.0 112.9,107.0 114.9,107.0 116.8,107.0 118.8,107.0 120.7,107.0 122.6,107.0 124.6,107.0 126.5,107.0 128.4,107.0 130.3,107.0 132.3,107.0 134.2,107.0 136.1,107.0 138.0,107.0 139.9,107.0 141.9,107.0 143.8,107.0 145.7,107.0 147.6,107.0 149.5,107.0 151.4,107.0 153.3,106.9 155.1,106.9 157.0,106.9 158.9,106.9 160.8,106.9 162.7,106.9 164.5,106.9 166.4,106.9 168.3,106.9 170.1,106.9 172.0,106.9 173.8,106.9 175.6,106.9 177.5,106.9 179.3,106.9 181.1,106.9 182.9,106.9 184.8,106.9 186.6,106.9 188.4,106.9 190.1,106.9 191.9,106.9 193.7,106.9 195.4,106.8 197.2,106.8 198.9,106.8 200.7,106.8 202.4,106.8 204.1,106.8 205.8,106.8 207.4,106.8 209.1,106.8 210.7,106.7 212.3,106.7 214.0,106.7 215.5,106.7 217.1,106.7 218.6,106.6 220.1,106.6 221.6,106.6 223.1,106.6 224.5,106.5 225.8,106.5 227.2,106.4 228.5,106.4 229.7,106.3 230.9,106.3 232.0,106.2 233.0,106.1 234.0,106.0 234.9,105.9 235.8,105.8 236.5,105.6 237.1,105.4 237.7,105.2 238.1,105.0 238.4,104.7 238.6,104.4 238.7,104.1 238.7,103.7 238.5,103.3 238.3,102.9 238.0,102.3 237.5,101.8 237.0,101.2 236.4,100.6 235.7,99.9 235.0,99.2 234.2,98.5 233.3,97.7 232.4,96.9 231.5,96.1 230.5,95.3 229.4,94.4 228.3,93.5 227.2,92.6 226.1,91.7 225.0,90.7 223.8,89.8 222.6,88.8 221.4,87.8 220.1,86.8 218.9,85.8 217.6,84.8 216.3,83.8 215.0,82.7 213.7,81.7 212.4,80.6 211.0,79.6 209.7,78.5 208.3,77.4 206.9,76.4 205.6,75.3 204.2,74.2 202.8,73.1 201.4,72.0 200.0,70.9 198.6,69.8 197.2,68.6 195.7,67.5 194.3,66.4 192.9,65.3 191.4,64.1 190.0,63.0 188.6,61.9 187.1,60.7 185.6,59.6 184.2,58.4 182.7,57.3 181.3,56.1 179.8,55.0 178.3,53.8 176.8,52.6 175.4,51.5 173.9,50.3 172.4,49.1 170.9,48.0 169.4,46.8 167.9,45.6 166.4,44.4 164.9,43.3 163.4,42.1 161.9,40.9 160.4,39.7 158.9,38.5 157.4,37.4 155.9,36.2 154.3,35.0 152.8,33.8 151.3,32.6 149.8,31.4 148.3,30.2 146.8,29.0 145.2,27.8 143.7,26.6 142.2,25.4 140.6,24.2 139.1,23.0 137.6,21.8 136.1,20.6 134.5,19.4 133.0,18.2 131.4,17.0 129.9,15.8 128.4,14.6 126.8,13.4 125.3,12.2 123.7,11.0 122.2,9.8 120.7,8.6 119.1,7.3 117.6,6.1 116.0,4.9" marker-end="url(#ah1)"/><polyline class="l1 thin" fill="none" points="0.0,124.0 0.2,124.0 2.2,124.0 4.2,124.0 6.2,124.0 8.2,124.0 10.2,124.0 12.2,124.0 14.2,124.0 16.2,124.0 18.2,124.0 20.2,124.0 22.2,124.0 24.2,124.0 26.2,124.0 28.2,124.0 30.2,124.0 32.2,124.0 34.2,124.0 36.1,124.0 38.1,124.0 40.1,124.0 42.1,124.0 44.1,124.0 46.1,124.0 48.1,124.0 50.0,124.0 52.0,124.0 54.0,124.0 56.0,124.0 58.0,124.0 60.0,124.0 61.9,124.0 63.9,124.0 65.9,124.0 67.9,124.0 69.8,124.0 71.8,124.0 73.8,124.0 75.7,124.0 77.7,124.0 79.7,124.0 81.7,124.0 83.6,124.0 85.6,124.0 87.5,124.0 89.5,124.0 91.5,124.1 93.4,124.1 95.4,124.1 97.3,124.1 99.3,124.1 101.3,124.1 103.2,124.1 105.2,124.1 107.1,124.1 109.1,124.1 111.0,124.1 112.9,124.1 114.9,124.1 116.8,124.1 118.8,124.1 120.7,124.1 122.6,124.1 124.6,124.1 126.5,124.1 128.4,124.1 130.4,124.1 132.3,124.1 134.2,124.1 136.1,124.2 138.0,124.2 140.0,124.2 141.9,124.2 143.8,124.2 145.7,124.2 147.6,124.2 149.5,124.2 151.4,124.2 153.3,124.2 155.2,124.2 157.1,124.3 158.9,124.3 160.8,124.3 162.7,124.3 164.6,124.3 166.4,124.3 168.3,124.3 170.2,124.4 172.0,124.4 173.9,124.4 175.7,124.4 177.5,124.4 179.4,124.4 181.2,124.5 183.0,124.5 184.8,124.5 186.6,124.5 188.4,124.6 190.2,124.6 192.0,124.6 193.8,124.7 195.6,124.7 197.3,124.7 199.1,124.8 200.8,124.8 202.5,124.9 204.2,124.9 205.9,125.0 207.6,125.0 209.3,125.1 211.0,125.1 212.6,125.2 214.2,125.3 215.8,125.4 217.4,125.5 219.0,125.6 220.6,125.7 222.1,125.8 223.6,125.9 225.1,126.1 226.5,126.2 227.9,126.4 229.3,126.6 230.7,126.8 232.0,127.0 233.3,127.3 234.5,127.6 235.8,127.9 236.9,128.3 238.1,128.7 239.2,129.1 240.2,129.6 241.3,130.1 242.2,130.7 243.2,131.4 244.1,132.1 245.0,132.8 245.9,133.6 246.8,134.4 247.6,135.3 248.5,136.3 249.3,137.3 250.1,138.3 250.9,139.4 251.7,140.5 252.5,141.7 253.3,142.9 254.0,144.1 254.8,145.4 255.6,146.7 256.4,148.0 257.2,149.3 258.0,150.7 258.8,152.1 259.5,153.5 260.3,154.9 261.1,156.4 261.9,157.8 262.7,159.3 263.5,160.8 264.3,162.3 265.1,163.8 265.9,165.3 266.8,166.9 267.6,168.4 268.4,170.0 269.2,171.6 270.0,173.1 270.8,174.7 271.7,176.3 272.5,177.9 273.3,179.5 274.1,181.1 275.0,182.8 275.8,184.4 276.6,186.0 277.5,187.7 278.3,189.3 279.1,191.0 280.0,192.6 280.8,194.3 281.7,195.9 282.5,197.6 283.4,199.3 284.2,200.9 285.0,202.6 285.9,204.3 286.7,206.0 287.6,207.7 288.4,209.4 289.3,211.1 290.2,212.8 291.0,214.5 291.9,216.2" marker-end="url(#ah1)"/><polyline class="l1 thin" fill="none" points="0.0,146.0 0.2,146.0 2.2,146.0 4.2,146.0 6.2,146.0 8.2,146.0 10.2,146.0 12.2,146.0 14.2,146.0 16.2,146.0 18.2,146.0 20.2,146.0 22.2,146.0 24.2,146.0 26.2,146.0 28.2,146.0 30.2,146.0 32.2,146.0 34.2,146.0 36.2,146.0 38.1,146.0 40.1,146.0 42.1,146.0 44.1,146.0 46.1,146.0 48.1,146.0 50.1,146.0 52.0,146.0 54.0,146.0 56.0,146.0 58.0,146.0 60.0,146.0 61.9,146.0 63.9,146.1 65.9,146.1 67.9,146.1 69.8,146.1 71.8,146.1 73.8,146.1 75.8,146.1 77.7,146.1 79.7,146.1 81.7,146.1 83.6,146.1 85.6,146.1 87.6,146.1 89.5,146.1 91.5,146.1 93.5,146.1 95.4,146.1 97.4,146.1 99.3,146.2 101.3,146.2 103.2,146.2 105.2,146.2 107.2,146.2 109.1,146.2 111.0,146.2 113.0,146.2 114.9,146.2 116.9,146.2 118.8,146.3 120.8,146.3 122.7,146.3 124.6,146.3 126.6,146.3 128.5,146.3 130.4,146.3 132.4,146.3 134.3,146.4 136.2,146.4 138.1,146.4 140.1,146.4 142.0,146.4 143.9,146.5 145.8,146.5 147.7,146.5 149.6,146.5 151.5,146.5 153.4,146.6 155.3,146.6 157.2,146.6 159.1,146.6 161.0,146.7 162.9,146.7 164.8,146.7 166.7,146.8 168.5,146.8 170.4,146.8 172.3,146.9 174.1,146.9 176.0,147.0 177.9,147.0 179.7,147.0 181.6,147.1 183.4,147.1 185.2,147.2 187.1,147.3 188.9,147.3 190.7,147.4 192.5,147.4 194.3,147.5 196.1,147.6 197.9,147.6 199.7,147.7 201.5,147.8 203.3,147.9 205.1,148.0 206.8,148.1 208.6,148.2 210.3,148.3 212.1,148.4 213.8,148.6 215.5,148.7 217.2,148.8 219.0,149.0 220.7,149.1 222.3,149.3 224.0,149.5 225.7,149.7 227.4,149.9 229.0,150.1 230.7,150.3 232.3,150.6 233.9,150.8 235.5,151.1 237.2,151.4 238.8,151.7 240.4,152.0 242.0,152.4 243.6,152.7 245.1,153.1 246.7,153.5 248.3,153.9 249.9,154.3 251.4,154.8 253.0,155.3 254.6,155.7 256.2,156.2 257.7,156.7 259.3,157.3 260.9,157.8 262.4,158.4 264.0,159.0 265.6,159.6 267.2,160.2 268.8,160.8 270.4,161.4 272.0,162.1 273.5,162.7 275.1,163.4 276.8,164.1 278.4,164.8 280.0,165.4 281.6,166.2 283.2,166.9 284.8,167.6 286.5,168.3 288.1,169.1 289.7,169.8 291.4,170.5 293.0,171.3 294.7,172.1 296.3,172.8 298.0,173.6 299.6,174.4 301.3,175.2 302.9,175.9 304.6,176.7 306.3,177.5 308.0,178.3 309.6,179.1 311.3,179.9 313.0,180.8 314.7,181.6 316.4,182.4 318.1,183.2 319.7,184.0 321.4,184.9 323.1,185.7 324.8,186.5 326.5,187.3 328.2,188.2 329.9,189.0 331.7,189.9 333.4,190.7 335.1,191.5 336.8,192.4 338.5,193.2 340.2,194.1 341.9,194.9 343.7,195.8 345.4,196.7 347.1,197.5 348.8,198.4 350.6,199.2 352.3,200.1 354.0,200.9 355.8,201.8 357.5,202.7 359.2,203.5 361.0,204.4 362.7,205.3 364.4,206.2 366.2,207.0 367.9,207.9 369.7,208.8 371.4,209.6 373.2,210.5 374.9,211.4" marker-end="url(#ah1)"/><polyline class="l1 thin" fill="none" points="0.0,190.0 0.2,190.0 2.2,190.0 4.2,190.0 6.2,190.0 8.2,190.0 10.2,190.0 12.2,190.0 14.2,190.0 16.2,190.0 18.2,190.0 20.2,190.0 22.2,190.0 24.2,190.0 26.2,190.0 28.2,190.0 30.2,190.0 32.2,190.0 34.2,190.0 36.2,190.0 38.2,190.0 40.1,190.0 42.1,190.0 44.1,190.0 46.1,190.0 48.1,190.1 50.1,190.1 52.1,190.1 54.0,190.1 56.0,190.1 58.0,190.1 60.0,190.1 62.0,190.1 64.0,190.1 65.9,190.1 67.9,190.1 69.9,190.1 71.9,190.1 73.9,190.1 75.8,190.2 77.8,190.2 79.8,190.2 81.7,190.2 83.7,190.2 85.7,190.2 87.7,190.2 89.6,190.2 91.6,190.2 93.6,190.3 95.5,190.3 97.5,190.3 99.5,190.3 101.4,190.3 103.4,190.3 105.4,190.3 107.3,190.4 109.3,190.4 111.2,190.4 113.2,190.4 115.1,190.4 117.1,190.4 119.1,190.5 121.0,190.5 123.0,190.5 124.9,190.5 126.9,190.6 128.8,190.6 130.7,190.6 132.7,190.6 134.6,190.7 136.6,190.7 138.5,190.7 140.5,190.8 142.4,190.8 144.3,190.8 146.3,190.8 148.2,190.9 150.1,190.9 152.1,191.0 154.0,191.0 155.9,191.0 157.8,191.1 159.8,191.1 161.7,191.2 163.6,191.2 165.5,191.3 167.4,191.3 169.3,191.4 171.2,191.4 173.2,191.5 175.1,191.5 177.0,191.6 178.9,191.6 180.8,191.7 182.7,191.8 184.6,191.8 186.5,191.9 188.4,192.0 190.3,192.0 192.1,192.1 194.0,192.2 195.9,192.3 197.8,192.4 199.7,192.5 201.6,192.5 203.4,192.6 205.3,192.7 207.2,192.8 209.1,192.9 210.9,193.0 212.8,193.2 214.7,193.3 216.5,193.4 218.4,193.5 220.3,193.6 222.1,193.8 224.0,193.9 225.8,194.0 227.7,194.2 229.5,194.3 231.4,194.5 233.2,194.6 235.1,194.8 236.9,195.0 238.8,195.1 240.6,195.3 242.5,195.5 244.3,195.7 246.2,195.9 248.0,196.1 249.8,196.3 251.7,196.5 253.5,196.7 255.4,196.9 257.2,197.1 259.1,197.3 260.9,197.6 262.7,197.8 264.6,198.0 266.4,198.3 268.3,198.5 270.1,198.8 272.0,199.0 273.8,199.3 275.7,199.5 277.5,199.8 279.4,200.1 281.2,200.4 283.1,200.6 284.9,200.9 286.8,201.2 288.6,201.5 290.5,201.8 292.3,202.1 294.2,202.4 296.1,202.7 297.9,203.0 299.8,203.3 301.6,203.6 303.5,203.9 305.4,204.3 307.2,204.6 309.1,204.9 311.0,205.2 312.9,205.6 314.7,205.9 316.6,206.2 318.5,206.6 320.4,206.9 322.3,207.2 324.1,207.6 326.0,207.9 327.9,208.3 329.8,208.6 331.7,209.0 333.6,209.3 335.5,209.7 337.4,210.1 339.3,210.4 341.2,210.8 343.1,211.1 344.9,211.5 346.8,211.9 348.7,212.2 350.7,212.6 352.6,213.0 354.5,213.3 356.4,213.7 358.3,214.1 360.2,214.4 362.1,214.8 364.0,215.2 365.9,215.6 367.8,216.0" marker-end="url(#ah1)"/><circle cx="255" cy="110" r="5" class="f2"/><text class="t2" x="263.0" y="132.0" style="font-size:13px">nucleus</text><text class="t1" x="8.0" y="14.0" style="font-size:13px">α particles</text>
+      </svg>
+      <figcaption>Calculated paths of <span class="key-1">alpha particles</span> past a single gold <span class="key-2">nucleus</span>. The dashed circle shows roughly where the atom would end if the nucleus were drawn this big. In reality the atom is about 10 000 times wider than the nucleus.</figcaption>
+    </figure>
+    <p>The paths are curves, not sharp bounces, because the alpha particle is repelled by the electric force, which grows gradually as it gets closer. Only a qualitative description is needed at SL.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="model">2. The nuclear model of the atom</h2>
+    <p>Rutherford explained each result in turn:</p>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Observation</th><th>Conclusion</th></tr>
+        <tr><td>Most alpha particles pass straight through</td><td>Most of the atom is empty space</td></tr>
+        <tr><td>Some are deflected through large angles</td><td>The positive charge is concentrated in a tiny region: the <strong>nucleus</strong></td></tr>
+        <tr><td>A very few bounce back</td><td>The nucleus also contains almost all the mass of the atom</td></tr>
+      </table>
+    </div>
+    <p>In the plum pudding model the positive charge is spread through the whole atom, so its electric field is never strong enough to turn an alpha particle round. Only a tiny, massive, concentrated charge can do that. The nucleus is about $10^{-15}$ m across, compared with about $10^{-10}$ m for the whole atom.</p>
+    <div class="key">
+      <p style="margin:0"><strong>The nuclear model:</strong> a tiny, dense, positively charged nucleus made of <strong>protons</strong> and <strong>neutrons</strong> (together called <strong>nucleons</strong>) contains nearly all the mass. Negatively charged <strong>electrons</strong> occupy the much larger space around it.</p>
+    </div>
+    <p>The neutron, with no charge, was not discovered until 1932, by James Chadwick. Before then, physicists knew nuclei were heavier than their protons alone could explain.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="notation">3. Nuclear notation and isotopes</h2>
+    <p>A nucleus (or <strong>nuclide</strong>) is written $^{A}_{Z}\text{X}$, where:</p>
+    <ul>
+      <li>$A$ is the <strong>nucleon number</strong> (mass number): the number of protons plus neutrons;</li>
+      <li>$Z$ is the <strong>proton number</strong> (atomic number), which decides the element and its charge, $+Ze$;</li>
+      <li>X is the chemical symbol. You don't need to remember symbols.</li>
+    </ul>
+    <p>The number of neutrons is $N = A - Z$. A neutral atom has $Z$ electrons as well.</p>
+    <div class="worked">
+      <h3>Worked example: what's inside?</h3>
+      <p>State the numbers of protons, neutrons and electrons in a neutral atom of $^{23}_{11}\text{Na}$.</p>
+      <p>Protons: $Z = 11$. Neutrons: $A - Z = 23 - 11 = 12$. Electrons: 11, the same as the protons, because the atom is neutral.</p>
+    </div>
+    <p><strong>Isotopes</strong> are nuclides of the same element (same $Z$) with different numbers of neutrons (different $A$). For example, $^{35}_{17}\text{Cl}$ and $^{37}_{17}\text{Cl}$. Isotopes have the same number of electrons, so their chemistry is almost the same, but their masses are different and some are radioactive (E.3).</p>
+    <p>The same notation works for particles: a proton is $^{1}_{1}\text{p}$, a neutron $^{1}_{0}\text{n}$, an electron $^{\;\,0}_{-1}\text{e}$ and an alpha particle $^{4}_{2}\alpha$ (the same as $^{4}_{2}\text{He}$).</p>
+
+    <!-- ===================================================== -->
+    <h2 id="spectra">4. Emission and absorption spectra</h2>
+    <p>A <strong>spectroscope</strong> (or diffraction grating, C.3) spreads light out into its different wavelengths.</p>
+    <ul>
+      <li>A hot, dense object such as a lamp filament gives a <strong>continuous spectrum</strong>: all wavelengths are present.</li>
+      <li>A hot, low-pressure gas (for example, in a discharge tube with a high voltage across it) gives an <strong>emission line spectrum</strong>: bright lines at a few particular wavelengths, on a dark background.</li>
+      <li>White light passed through a cool gas gives an <strong>absorption line spectrum</strong>: a continuous spectrum with dark lines missing, at exactly the wavelengths of that gas's emission lines.</li>
+    </ul>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 222" role="img" aria-labelledby="e1bt">
+        <title id="e1bt">Three spectra from 400 to 700 nanometres. A continuous rainbow spectrum; the emission spectrum of hydrogen with four bright lines at 410, 434, 486 and 656 nanometres on black; and an absorption spectrum with dark lines at the same four wavelengths.</title>
+        <defs><linearGradient id="specgrad" x1="0" x2="1" y1="0" y2="0"><stop offset="0.000" stop-color="#6e00a5"/><stop offset="0.033" stop-color="#6900d2"/><stop offset="0.067" stop-color="#5500ff"/><stop offset="0.100" stop-color="#2a00ff"/><stop offset="0.133" stop-color="#0000ff"/><stop offset="0.167" stop-color="#0033ff"/><stop offset="0.200" stop-color="#0066ff"/><stop offset="0.233" stop-color="#0099ff"/><stop offset="0.267" stop-color="#00ccff"/><stop offset="0.300" stop-color="#00ffff"/><stop offset="0.333" stop-color="#00ff7f"/><stop offset="0.367" stop-color="#00ff00"/><stop offset="0.400" stop-color="#24ff00"/><stop offset="0.433" stop-color="#48ff00"/><stop offset="0.467" stop-color="#6dff00"/><stop offset="0.500" stop-color="#91ff00"/><stop offset="0.533" stop-color="#b6ff00"/><stop offset="0.567" stop-color="#daff00"/><stop offset="0.600" stop-color="#ffff00"/><stop offset="0.633" stop-color="#ffd700"/><stop offset="0.667" stop-color="#ffb000"/><stop offset="0.700" stop-color="#ff8900"/><stop offset="0.733" stop-color="#ff6200"/><stop offset="0.767" stop-color="#ff3a00"/><stop offset="0.800" stop-color="#ff1300"/><stop offset="0.833" stop-color="#ff0000"/><stop offset="0.867" stop-color="#ff0000"/><stop offset="0.900" stop-color="#ff0000"/><stop offset="0.933" stop-color="#ff0000"/><stop offset="0.967" stop-color="#a50000"/><stop offset="1.000" stop-color="#4c0000"/></linearGradient></defs><text x="20.0" y="18.0" style="font-size:13px">Continuous spectrum (hot solid)</text><rect x="20" y="24" width="340" height="28" fill="url(#specgrad)"/><text x="20.0" y="70.0" style="font-size:13px">Emission spectrum of hydrogen</text><rect x="20" y="76" width="340" height="28" fill="#111"/><rect x="30.1" y="76" width="3" height="28" fill="#6800d3"/><rect x="57.0" y="76" width="3" height="28" fill="#1900ff"/><rect x="116.1" y="76" width="3" height="28" fill="#00ebff"/><rect x="309.0" y="76" width="3" height="28" fill="#ff0000"/><text x="20.0" y="122.0" style="font-size:13px">Absorption spectrum of hydrogen</text><rect x="20" y="128" width="340" height="28" fill="url(#specgrad)"/><rect x="30.1" y="128" width="3" height="28" fill="#111"/><rect x="57.0" y="128" width="3" height="28" fill="#111"/><rect x="116.1" y="128" width="3" height="28" fill="#111"/><rect x="309.0" y="128" width="3" height="28" fill="#111"/><line class="axis" x1="20.0" y1="178.0" x2="20.0" y2="183.0"/><text x="20.0" y="198.0" text-anchor="middle" style="font-size:12px">400</text><line class="axis" x1="133.3" y1="178.0" x2="133.3" y2="183.0"/><text x="133.3" y="198.0" text-anchor="middle" style="font-size:12px">500</text><line class="axis" x1="246.7" y1="178.0" x2="246.7" y2="183.0"/><text x="246.7" y="198.0" text-anchor="middle" style="font-size:12px">600</text><line class="axis" x1="360.0" y1="178.0" x2="360.0" y2="183.0"/><text x="360.0" y="198.0" text-anchor="middle" style="font-size:12px">700</text><text x="190.0" y="214.0" text-anchor="middle" style="font-size:12px">wavelength / nm</text>
+      </svg>
+      <figcaption>The visible lines of hydrogen (410, 434, 486 and 656 nm). The dark absorption lines are at exactly the same wavelengths as the bright emission lines.</figcaption>
+    </figure>
+    <p>Each element has its own pattern of lines, like a fingerprint. The fact that only <strong>certain wavelengths</strong> appear is the evidence that atoms have <strong>discrete energy levels</strong>.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="levels">5. Energy levels and photons</h2>
+    <p>The electrons in an atom can only have certain energies, called <strong>energy levels</strong>. The lowest is the <strong>ground state</strong>; higher ones are <strong>excited states</strong>. Light is made of <strong>photons</strong>, each carrying energy $E = hf$.</p>
+    <ul>
+      <li><strong>Emission:</strong> when an electron drops from a higher level to a lower one, the atom emits one photon whose energy equals the difference between the levels.</li>
+      <li><strong>Absorption:</strong> an electron can jump up only by absorbing a photon whose energy <em>exactly</em> matches the gap between two levels. Photons of other energies pass straight through.</li>
+    </ul>
+    <div class="key">
+      $$E = hf = \frac{hc}{\lambda}$$
+      <p style="margin:0">$E$ is the energy difference between the levels (and the photon's energy), $h = 6.63 \times 10^{-34}$ J s is the Planck constant, $f$ the frequency and $\lambda$ the wavelength. A bigger drop gives a higher frequency and a shorter wavelength.</p>
+    </div>
+    <p>Energy levels are usually given in <strong>electronvolts</strong>: $1\ \text{eV} = 1.60 \times 10^{-19}$ J. The levels are <strong>negative</strong>, because zero is defined as the energy of an electron that has just escaped from the atom. The energy needed to free an electron from the ground state is the <strong>ionization energy</strong>.</p>
+    <p>An absorbed photon's energy is soon re-emitted, but in random directions and possibly as several smaller photons. So fewer photons of that wavelength continue in the original direction, which is why absorption lines look dark.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="hydrogen">6. The hydrogen spectrum</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 262" role="img" aria-labelledby="e1ct">
+        <title id="e1ct">Energy level diagram for hydrogen: n = 1 at minus 13.6 eV, n = 2 at minus 3.40, n = 3 at minus 1.51, n = 4 at minus 0.85, n = 5 at minus 0.54, and zero at n = infinity. Downward arrows to n = 1 form the Lyman series in the ultraviolet; arrows to n = 2 form the Balmer series in the visible; arrows to n = 3 form the Paschen series in the infrared.</title>
+        <line class="l3 thin" x1="110.0" y1="235.0" x2="330.0" y2="235.0"/><text x="104.0" y="239.0" text-anchor="end" style="font-size:13px">−13.6</text><text x="336.0" y="239.0" style="font-size:13px">n = 1</text><line class="l3 thin" x1="110.0" y1="125.0" x2="330.0" y2="125.0"/><text x="104.0" y="129.0" text-anchor="end" style="font-size:13px">−3.40</text><text x="336.0" y="129.0" style="font-size:13px">n = 2</text><line class="l3 thin" x1="110.0" y1="82.0" x2="330.0" y2="82.0"/><text x="104.0" y="86.0" text-anchor="end" style="font-size:13px">−1.51</text><text x="336.0" y="86.0" style="font-size:13px">n = 3</text><line class="l3 thin" x1="110.0" y1="60.0" x2="330.0" y2="60.0"/><text x="104.0" y="64.0" text-anchor="end" style="font-size:11px">−0.85</text><text x="336.0" y="64.0" style="font-size:11px">n = 4</text><line class="l3 thin" x1="110.0" y1="46.0" x2="330.0" y2="46.0"/><text x="104.0" y="50.0" text-anchor="end" style="font-size:11px">−0.54</text><text x="336.0" y="50.0" style="font-size:11px">n = 5</text><line class="axis dash" x1="110.0" y1="24.0" x2="330.0" y2="24.0"/><text x="104.0" y="28.0" text-anchor="end" style="font-size:13px">0</text><text x="336.0" y="28.0" style="font-size:13px">n = ∞</text><text x="104.0" y="14.0" text-anchor="end" style="font-size:12px">E / eV</text><line class="l1 thin" x1="135.0" y1="125.0" x2="135.0" y2="233.0" marker-end="url(#ah1)"/><line class="l1 thin" x1="150.0" y1="82.0" x2="150.0" y2="233.0" marker-end="url(#ah1)"/><line class="l1 thin" x1="165.0" y1="60.0" x2="165.0" y2="233.0" marker-end="url(#ah1)"/><line class="l2 thin" x1="210.0" y1="82.0" x2="210.0" y2="123.0" marker-end="url(#ah2)"/><line class="l2 thin" x1="225.0" y1="60.0" x2="225.0" y2="123.0" marker-end="url(#ah2)"/><line class="l2 thin" x1="240.0" y1="46.0" x2="240.0" y2="123.0" marker-end="url(#ah2)"/><line class="l3 thin" x1="285.0" y1="60.0" x2="285.0" y2="80.0" marker-end="url(#ah3)"/><line class="l3 thin" x1="300.0" y1="46.0" x2="300.0" y2="80.0" marker-end="url(#ah3)"/><text class="t1" x="150.0" y="252.0" text-anchor="middle" style="font-size:13px">Lyman: UV</text><text class="t2" x="225.0" y="142.0" text-anchor="middle" style="font-size:13px">Balmer: visible</text><text x="292.0" y="99.0" text-anchor="middle" style="font-size:13px">Paschen: IR</text>
+      </svg>
+      <figcaption>Energy levels of hydrogen (not to scale). Drops to n = 1 give the <span class="key-1">Lyman series</span> (ultraviolet), drops to n = 2 the <span class="key-2">Balmer series</span> (visible) and drops to n = 3 the Paschen series (infrared).</figcaption>
+    </figure>
+    <div class="worked">
+      <h3>Worked example: a blue-green line</h3>
+      <p>Find the wavelength of the photon emitted when an electron in hydrogen drops from $n = 4$ to $n = 2$.</p>
+      <p>$\Delta E = -0.85 - (-3.40) = 2.55$ eV $= 2.55 \times 1.60 \times 10^{-19} = 4.08 \times 10^{-19}$ J.</p>
+      <p>$\lambda = \dfrac{hc}{\Delta E} = \dfrac{6.63 \times 10^{-34} \times 3.00 \times 10^{8}}{4.08 \times 10^{-19}} = 4.88 \times 10^{-7}$ m $\approx 488$ nm.</p>
+      <p>This is the blue-green line in the diagram in section 4 (measured as 486 nm; the small difference comes from rounding the levels).</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: absorption from the ground state</h3>
+      <p>What is the longest wavelength that hydrogen in its ground state can absorb?</p>
+      <p>The smallest jump up from $n = 1$ is to $n = 2$: $\Delta E = 13.6 - 3.40 = 10.2$ eV $= 1.63 \times 10^{-18}$ J. So $\lambda = \dfrac{hc}{\Delta E} = 1.22 \times 10^{-7}$ m $= 122$ nm, in the ultraviolet. Cool hydrogen gas is transparent to visible light, because no visible photon has enough energy for this jump.</p>
+    </div>
+    <p>Counting transitions: an atom excited to level $n$ can drop back in several steps. From $n = 4$ there are 6 possible downward jumps (4→3, 4→2, 4→1, 3→2, 3→1, 2→1), so up to 6 different lines.</p>
+    <aside class="maths-link">
+      <h3>Maths link: standard form and units <span class="tag">AA SL 1.1</span></h3>
+      <p>Photon calculations mix very large and very small numbers. Keep everything in standard form, $a \times 10^n$, and convert eV to J (multiply by $1.60 \times 10^{-19}$) before using $E = hf$ with $h$ in J s. A useful shortcut: $hc = 1.99 \times 10^{-25}$ J m, so $\lambda$ in nm $\approx \dfrac{1240}{E \text{ in eV}}$.</p>
+    </aside>
+
+    <!-- ===================================================== -->
+    <h2 id="composition">7. Spectra and chemical composition</h2>
+    <p>Because every element has its own set of lines, spectra tell us which elements are present, even in a sample we cannot touch.</p>
+    <ul>
+      <li><strong>Stars:</strong> light from a star's hot interior passes through its cooler outer layers, which absorb particular wavelengths. Matching the dark lines in a star's spectrum to laboratory spectra shows which elements are in its atmosphere (E.5).</li>
+      <li><strong>Laboratories:</strong> flame tests and emission spectroscopy identify elements in tiny samples.</li>
+      <li><strong>Moving sources:</strong> if a whole pattern of lines is shifted to longer wavelengths, the source is moving away (the Doppler effect, C.5).</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <div class="part-banner hl" id="hl">HL only<p>Sections 8–11 are for HL students. SL students can skip to <a href="#mistakes" style="color:inherit;text-decoration:underline">Common mistakes</a>.</p></div>
+    <div class="hl-zone">
+
+    <h2 id="radius">8. Nuclear radius and density <span class="tag hl">HL</span></h2>
+    <p>Scattering experiments show that the radius of a nucleus depends on its nucleon number:</p>
+    <div class="key">
+      $$R = R_0A^{1/3}$$
+      <p style="margin:0">$R_0 = 1.20 \times 10^{-15}$ m (the Fermi radius, roughly the radius of one nucleon). $A$ is the nucleon number. Doubling $A$ only increases the radius by a factor of $2^{1/3} \approx 1.26$.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: the size of a gold nucleus</h3>
+      <p>Gold-197: $R = 1.20 \times 10^{-15} \times 197^{1/3} = 1.20 \times 10^{-15} \times 5.82 = 7.0 \times 10^{-15}$ m.</p>
+    </div>
+    <p><strong>All nuclei have the same density.</strong> The volume of a nucleus is $\tfrac{4}{3}\pi R^3 = \tfrac{4}{3}\pi R_0^3A$, which is proportional to $A$. Its mass is about $A \times u$. So:</p>
+    $$\rho = \frac{Au}{\tfrac{4}{3}\pi R_0^3A} = \frac{3u}{4\pi R_0^3}$$
+    <p>The $A$ cancels. With $u = 1.661 \times 10^{-27}$ kg, $\rho = \dfrac{3 \times 1.661 \times 10^{-27}}{4\pi \times (1.20 \times 10^{-15})^3} = 2.3 \times 10^{17}\ \text{kg m}^{-3}$. A teaspoon of nuclear matter would have a mass of about a billion tonnes. Neutron stars (E.5) are made of matter this dense. This shows nucleons are packed together like marbles in a bag, each taking up the same space.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="approach">9. Distance of closest approach <span class="tag hl">HL</span></h2>
+    <p>An alpha particle fired straight at a nucleus slows down as it is repelled, stops for an instant, and comes back. At the turning point all its kinetic energy has become electric potential energy (D.2):</p>
+    <div class="key">
+      $$E_k = \frac{kq_\alpha Q}{d} \quad\Rightarrow\quad d = \frac{k(2e)(Ze)}{E_k}$$
+      <p style="margin:0">$d$ is the <strong>distance of closest approach</strong> for a head-on collision. It is an <strong>upper limit</strong> for the radius of the nucleus: the alpha particle didn't touch it, so the nucleus must be smaller than $d$.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: alpha particles and gold</h3>
+      <p>An alpha particle with kinetic energy 5.0 MeV approaches a gold nucleus ($Z = 79$) head-on. Find its distance of closest approach.</p>
+      <p>$E_k = 5.0 \times 10^6 \times 1.60 \times 10^{-19} = 8.0 \times 10^{-13}$ J.</p>
+      <p>$d = \dfrac{8.99 \times 10^{9} \times (2 \times 1.60 \times 10^{-19}) \times (79 \times 1.60 \times 10^{-19})}{8.0 \times 10^{-13}} = 4.5 \times 10^{-14}$ m.</p>
+      <p>This is about six times the radius of the gold nucleus from section 8, so the alpha particle never gets close enough to touch it. Rutherford's alpha particles told him the upper limit, not the actual size.</p>
+    </div>
+    <p>We assume the gold nucleus doesn't recoil. That is reasonable because it is about 50 times more massive than the alpha particle.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="deviations">10. Deviations from Rutherford scattering <span class="tag hl">HL</span></h2>
+    <p>Rutherford's formula assumes that only the electric force acts. It predicts how many alpha particles are scattered at each angle, and it matches experiments well at low energies.</p>
+    <p>At <strong>high energies</strong>, the alpha particles get close enough to touch the nucleus. Then the short-range <strong>strong nuclear force</strong> (E.3) also acts, and the number scattered at large angles falls below Rutherford's prediction. The energy at which this starts tells us the size of the nucleus:</p>
+    <div class="worked">
+      <h3>Worked example: when does the deviation begin?</h3>
+      <p>Estimate the alpha-particle energy at which deviations begin for (a) gold-197 and (b) aluminium-27 ($Z = 13$).</p>
+      <p>(a) $R = 7.0 \times 10^{-15}$ m. $E_k = \dfrac{k(2e)(79e)}{R} = 5.2 \times 10^{-12}$ J $\approx 33$ MeV.</p>
+      <p>(b) $R = 1.20 \times 10^{-15} \times 27^{1/3} = 3.6 \times 10^{-15}$ m. $E_k = \dfrac{k(2e)(13e)}{R} = 1.7 \times 10^{-12}$ J $\approx 10$ MeV.</p>
+      <p>Aluminium has a smaller charge, so the alpha particles can reach its surface at a much lower energy, and deviations appear sooner.</p>
+    </div>
+    <p>Deviations from Rutherford scattering are one piece of evidence for the strong nuclear force. In exam questions the energies are kept low, so only the electric force needs to be considered.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="bohr">11. The Bohr model of hydrogen <span class="tag hl">HL</span></h2>
+    <p>Niels Bohr pictured hydrogen's electron moving in a circular orbit around the proton, held by the electric force. His key idea was that the electron's <strong>angular momentum is quantized</strong>:</p>
+    <div class="key">
+      $$mvr = \frac{nh}{2\pi}$$
+      <p style="margin:0">$m$ is the electron's mass, $v$ its speed, $r$ the orbit radius and $n = 1, 2, 3, \ldots$ the <strong>principal quantum number</strong>. Only orbits that fit this rule are allowed, and in these orbits the electron does not radiate.</p>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 200" role="img" aria-labelledby="e1dt">
+        <title id="e1dt">Bohr orbits n = 1, 2 and 3 around a proton, with radii in the ratio 1 to 4 to 9. An electron jumping from the n = 3 orbit to the n = 2 orbit emits a photon.</title>
+        <circle cx="190" cy="100" r="10" class="l3 thin" fill="none" opacity="0.6"/><circle cx="190" cy="100" r="36" class="l3 thin" fill="none" opacity="0.6"/><circle cx="190" cy="100" r="81" class="l3 thin" fill="none" opacity="0.6"/><circle cx="190" cy="100" r="4" class="f2"/><text x="202.0" y="118.0" style="font-size:11px">n=1</text><text x="220.0" y="138.0" style="font-size:12px">n=2</text><text x="252.0" y="166.0" style="font-size:12px">n=3</text><circle cx="113.9" cy="72.3" r="5" class="f1"/><line class="l1 thin" x1="117.9" y1="73.8" x2="151.4" y2="85.9" marker-end="url(#ah1)"/><polyline class="l2 thin" fill="none" points="107.9,78.3 104.2,77.5 103.3,78.7 105.2,81.9 107.1,85.2 106.3,86.4 102.6,85.6 98.9,84.7 98.0,86.0 99.9,89.2 101.8,92.5 100.9,93.7 97.2,92.8 93.6,92.0 92.7,93.2 94.6,96.5 96.5,99.8 95.6,100.9 91.9,100.1 88.2,99.3 87.4,100.5 89.4,103.8 91.2,107.0 90.3,108.2 86.6,107.4 82.9,106.5 82.1,107.8 84.1,111.1 85.9,114.3 85.0,115.5 81.3,114.6 77.6,113.8 76.8,115.1 78.8,118.4 80.6,121.6 79.7,122.7 75.9,121.9 72.3,121.1 71.5,122.4 73.5,125.7 75.3,128.9 74.3,130.0 70.6,129.1 67.0,128.4 66.2,129.7 68.2,132.9 70.0,136.2 69.0,137.3 65.3,136.4 61.7,135.6 60.9,136.9 62.9,140.2 64.7,143.4 63.7,144.5 59.9,143.7 56.3,142.9 55.6,144.2 57.6,147.5 59.4,150.7 58.4,151.8 54.6,150.9 51.0,150.2 50.3,151.5 52.3,154.8 54.1,158.0 53.1,159.1 49.3,158.2 45.7,157.4 45.0,158.8 47.0,162.1 48.8,165.3 47.7,166.4 44.0,165.5 40.4,164.7 39.7,166.1 41.7,169.4 43.5,172.6 42.4,173.6 38.6,172.7 35.1,172.0 34.4,173.3 36.4,176.7 38.2,179.8 34.4,178.9 33.5,180.1 32.7,181.4 31.8,182.6 30.9,183.8 30.0,185.0" marker-end="url(#ah2)"/><text class="t2" x="22.0" y="178.0" style="font-size:13px">photon</text><text class="t1" x="101.9" y="62.3" text-anchor="end" style="font-size:13px">e⁻</text>
+      </svg>
+      <figcaption>Bohr orbits have radii proportional to $n^2$. An <span class="key-1">electron</span> dropping to a lower orbit emits a <span class="key-2">photon</span>.</figcaption>
+    </figure>
+    <p>Combining this rule with the electric force providing the centripetal force, $\dfrac{ke^2}{r^2} = \dfrac{mv^2}{r}$, gives allowed radii $r \propto n^2$ and energies:</p>
+    <div class="key">
+      $$E = -\frac{13.6}{n^2}\ \text{eV}$$
+      <p style="margin:0">$n = 1$: −13.6 eV; $n = 2$: −3.40 eV; $n = 3$: −1.51 eV, exactly matching the hydrogen spectrum in section 6. You don't need to derive this.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: the speed of the electron</h3>
+      <p>In the ground state the orbit radius is $5.29 \times 10^{-11}$ m. Find the electron's speed.</p>
+      <p>$v = \dfrac{nh}{2\pi mr} = \dfrac{1 \times 6.63 \times 10^{-34}}{2\pi \times 9.11 \times 10^{-31} \times 5.29 \times 10^{-11}} = 2.19 \times 10^{6}\ \text{m s}^{-1}$, under 1% of the speed of light.</p>
+    </div>
+    <div class="worked">
+      <h3>Worked example: ionizing excited hydrogen</h3>
+      <p>How much energy is needed to ionize a hydrogen atom whose electron is in the $n = 3$ level?</p>
+      <p>$E_3 = -\dfrac{13.6}{3^2} = -1.51$ eV, so 1.51 eV ($2.42 \times 10^{-19}$ J) lifts it to zero energy.</p>
+    </div>
+    <p><strong>Where the Bohr model fails.</strong> It works only for hydrogen and other one-electron ions such as He⁺. It can't predict the spectra of atoms with more electrons, can't explain why some lines are brighter than others, and treats the electron as a particle on a definite path. Quantum mechanics replaced it with a picture of electron "clouds", but kept its energy levels.</p>
+
+    <h3>Common mistakes (HL) <span class="tag hl">HL</span></h3>
+    <ul>
+      <li><strong>Using the mass number $A$ for the charge</strong> in closest-approach calculations. The charge is $Ze$; the alpha particle's is $2e$.</li>
+      <li><strong>Forgetting to convert MeV to joules</strong> before using $d = \dfrac{kqQ}{E_k}$.</li>
+      <li><strong>Cubing instead of cube-rooting</strong> in $R = R_0A^{1/3}$. A nucleus with 8 times as many nucleons is only twice as wide.</li>
+      <li><strong>Treating the closest approach as the nuclear radius.</strong> It is only an upper limit.</li>
+      <li><strong>Dropping the minus sign</strong> in $E = -\dfrac{13.6}{n^2}$, then getting energy differences wrong.</li>
+    </ul>
+    <p class="hl-end">End of the HL-only content. Everyone continues below.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="mistakes">12. Common mistakes</h2>
+    <ul>
+      <li><strong>Saying "most alpha particles bounced back".</strong> Most went straight through; only a tiny fraction bounced back.</li>
+      <li><strong>Mixing up $A$ and $Z$.</strong> $A$ (top) counts all nucleons; $Z$ (bottom) counts only protons. Neutrons $= A - Z$.</li>
+      <li><strong>Using a single energy level instead of the difference.</strong> The photon energy is $E_{\text{upper}} - E_{\text{lower}}$.</li>
+      <li><strong>Leaving energies in eV</strong> when using $E = hf$ with $h$ in J s. Multiply by $1.60 \times 10^{-19}$ first.</li>
+      <li><strong>Thinking absorption lines contain no light at all.</strong> They are dimmer, not black: the absorbed energy is re-emitted in all directions.</li>
+      <li><strong>Saying an atom can absorb any photon with enough energy.</strong> For a jump between levels, the photon energy must match the gap exactly. (A photon with more than the ionization energy can free the electron, though.)</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="check">13. Check your understanding</h2>
+    <details class="check">
+      <summary>Why did the bounce-back of a few alpha particles rule out the plum pudding model?</summary>
+      <p>In the plum pudding model the positive charge is spread out, so the electric force on an alpha particle is always weak. Only a tiny region holding concentrated charge and most of the mass can produce a force strong enough to turn an alpha particle round.</p>
+    </details>
+    <details class="check">
+      <summary>How many protons and neutrons are in $^{238}_{\;92}\text{U}$?</summary>
+      <p>92 protons and $238 - 92 = 146$ neutrons.</p>
+    </details>
+    <details class="check">
+      <summary>A hydrogen atom drops from $n = 3$ to $n = 1$. What is the energy of the emitted photon, in eV?</summary>
+      <p>$-1.51 - (-13.6) = 12.1$ eV, in the ultraviolet (Lyman series).</p>
+    </details>
+    <details class="check">
+      <summary>Why are the dark lines in the Sun's spectrum at the same wavelengths as the emission lines of the elements in its atmosphere?</summary>
+      <p>An atom can only absorb photons whose energy matches the gap between two of its levels, and these are exactly the photon energies it emits when it drops between the same levels.</p>
+    </details>
+    <details class="check">
+      <summary>HL: Nucleus X has 27 times as many nucleons as nucleus Y. How do their radii and densities compare?</summary>
+      <p>$R \propto A^{1/3}$, so X has $27^{1/3} = 3$ times the radius. Their densities are the same.</p>
+    </details>
+    <details class="check">
+      <summary>HL: If the kinetic energy of an alpha particle is doubled, what happens to its distance of closest approach to a given nucleus?</summary>
+      <p>$d = \frac{kqQ}{E_k}$, so it halves.</p>
+    </details>
 
     <p><a class="button" href="../questions.html?topic=E.1">Practise E.1 questions</a></p>
     <nav id="topic-nav" aria-label="Other topics"></nav>
