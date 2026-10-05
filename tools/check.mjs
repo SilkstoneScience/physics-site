@@ -1,4 +1,5 @@
 // Site checker: run with `node tools/check.mjs` from the physics-site folder.
+// `node tools/check.mjs --sitemap` also rewrites sitemap.xml from the list of pages.
 // Checks the question bank, the links between pages, each page's basic set-up, the
 // syllabus/equation data in js/site.js, and the marking of typed numerical answers.
 // Errors (✗) must be fixed; warnings (!) are worth a look. Exit code 1 if there are errors.
@@ -11,6 +12,7 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const SITE = 'https://physics.silkstone.xyz/';
 const SKIP_DIRS = new Set(['.git', '.github', '.claude', 'tools', 'node_modules', 'docs']);
 const errors = [];
 const warnings = [];
@@ -158,10 +160,26 @@ for (const page of pages) {
   if (!/<html lang="/.test(html)) err(page, 'missing <html lang="en">');
   if (!/<title>[^<]+<\/title>/.test(html)) err(page, 'missing <title>');
   if (!/name="viewport"/.test(html)) err(page, 'missing the viewport meta tag (needed for phones)');
-  if (!/name="description"/.test(html)) warn(page, 'no meta description');
+  const title = (html.match(/<title>([^<]*)<\/title>/) || [])[1];
+  const description = (html.match(/<meta name="description" content="([^"]*)">/) || [])[1];
+  if (!description) err(page, 'no meta description (the summary search engines show)');
+  // The 404 page is shown at any missing address, so it links from the top level ("/").
+  const wantRoot = page === '404.html' ? '/' : '../'.repeat(depth);
   const root = (html.match(/<body[^>]*data-root="([^"]*)"/) || [])[1];
   if (root === undefined) err(page, '<body> has no data-root');
-  else if (root !== '../'.repeat(depth)) err(page, `data-root should be "${'../'.repeat(depth)}", not "${root}"`);
+  else if (root !== wantRoot) err(page, `data-root should be "${wantRoot}", not "${root}"`);
+  if (page !== '404.html') {
+    // Canonical address, icons and link-preview (Open Graph) tags, which must match the title and description.
+    const url = pageUrl(page);
+    const meta = (prop) => (html.match(new RegExp(`<meta property="og:${prop}" content="([^"]*)">`)) || [])[1];
+    const canonical = (html.match(/<link rel="canonical" href="([^"]*)">/) || [])[1];
+    if (canonical !== url) err(page, `canonical link should be ${url}`);
+    if (meta('url') !== url) err(page, `og:url should be ${url}`);
+    if (meta('title') !== title?.replace(/"/g, '&quot;')) err(page, 'og:title must be the same as the <title>');
+    if (meta('description') !== description) err(page, 'og:description must be the same as the meta description');
+    if (!meta('image')) err(page, 'missing og:image (the link-preview picture)');
+    if (!html.includes(`href="${root}favicon.svg"`)) err(page, 'missing the favicon link');
+  }
   // MathJax must be pinned to one exact version everywhere (e.g. mathjax@4.1.3), so a new release can't change pages unannounced.
   for (const m of html.matchAll(/npm\/mathjax@([^/"]+)\//g)) {
     if (!/^\d+\.\d+\.\d+$/.test(m[1])) err(page, `MathJax version "${m[1]}" isn't pinned: use an exact version such as 4.1.3`);
@@ -176,7 +194,9 @@ for (const page of pages) {
     if (!link || /^(https?:|mailto:|tel:|data:|javascript:|\$\{)/.test(link)) continue;
     const [beforeHash, hash] = link.split('#');
     const [file, query] = beforeHash.split('?');
-    const target = file ? path.posix.normalize(path.posix.join(path.posix.dirname(page), file)) : page;
+    const target = !file ? page
+      : file.startsWith('/') ? path.posix.normalize(file.slice(1) || '.')
+        : path.posix.normalize(path.posix.join(path.posix.dirname(page), file));
     if (target.startsWith('..')) { err(page, `link goes outside the site: ${link}`); continue; }
     const targetFile = target.endsWith('/') || target === '.' ? path.posix.join(target, 'index.html') : target;
     if (!exists(targetFile)) { err(page, `broken link: ${link}`); continue; }
@@ -187,6 +207,18 @@ for (const page of pages) {
       if (p.get('q') && !questionIds.has(p.get('q'))) err(page, `question link to unknown question: ${link}`);
     }
   }
+}
+
+// sitemap.xml must list every page except 404.html (it tells search engines what exists).
+function pageUrl(page) { return SITE + page.replace(/(^|\/)index\.html$/, '$1'); }
+const wantedUrls = pages.filter((p) => p !== '404.html').map(pageUrl).sort();
+const sitemapXml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+  + wantedUrls.map((u) => `  <url><loc>${u}</loc></url>\n`).join('') + '</urlset>\n';
+if (process.argv.includes('--sitemap')) {
+  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemapXml);
+  console.log(`Wrote sitemap.xml (${wantedUrls.length} pages).`);
+} else if (!exists('sitemap.xml') || read('sitemap.xml').replace(/\r/g, '') !== sitemapXml) {
+  err('sitemap.xml', 'is missing or out of date: run `node tools/check.mjs --sitemap` to rewrite it');
 }
 
 if (mathjaxVersions.size > 1) {
