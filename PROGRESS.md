@@ -47,8 +47,29 @@ This file is not published on the website (see `_config.yml`).
 - 404 page, robots.txt, sitemap.xml, favicon, link-preview (Open Graph) tags and descriptions on every page.
 
 ## Still to do
-- Paper 1B (data-based) questions: only one so far (in B.3).
-- Practicals page: placeholder with three cards.
-- Extended essay page: placeholder.
-- Resources page: the Drive links for the slides are still "coming soon".
-- Teacher question sets by link and a print view: the user will decide later.
+From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
+Ask the user before starting any item marked "decide".
+
+### P1: content
+- **Paper 1B (data-based) questions.** Only one so far (in B.3). Paper 1B is new in the 2025 exams and practises analysing experimental data.
+- **Practicals page.** Still a placeholder with three cards. Build from `experimental-programme/practicals` in physics-source.
+- **Extended essay page.** Still a placeholder. Build from `EE/` in physics-source.
+- **Resources page Drive links.** All still "coming soon"; needs the folder links from the user.
+
+### P2: useful
+- **Teacher question sets by link and a print view** (decide). E.g. `questions.html?ids=A1-003,A2-010` for homework sets, and a clean printed worksheet with or without mark schemes. The user will decide the details.
+- **Graph and uncertainty tool.** One page where students paste data, linearise it and see error bars, a best-fit line and steepest/shallowest gradients. Serves the IA, Paper 1B and Tool 3 at once. Needs tests for its maths.
+- **Progress export/import, random quick quiz, spaced review.** All possible without accounts, using the progress already saved in the browser. Export lets students move progress between devices or hand it in; quizzes and spaced review support retrieval practice.
+- **Guiding questions on topic pages.** Show each topic's guiding questions from the IB guide (in our own words) near the top, linking the notes to the guide's framing.
+- **Tools 1–2 and the Inquiry process.** Link the practicals to the guide's Tool 1 (experimental techniques), Tool 2 (technology) and Inquiry 1–3; only Tool 3 (Skills page) is covered now.
+- **PhET simulations.** Link or embed free, openly licensed PhET simulations on the relevant topic pages, instead of building our own.
+- **Layout checks.** The menu at 768 px (tablets) may wrap onto two lines (consider raising the 760 px breakpoint); check the "Σ Equations" button never covers the question bank's "Next" button on small phones.
+
+### P3: future/optional
+- **Site search.** A small search index of page headings and question stems, searched in the browser. Worth it once students revise across many topics.
+- **Split question files by topic.** Only needed past about 1,500 questions, when loading every file at once gets slow on phones. Keep all question ids unchanged.
+- **No-JavaScript message.** A `<noscript>` line with a home link, since the menu is drawn by JavaScript.
+
+### Not planned (agreed in the audit)
+- No framework, build step, backend, accounts or student analytics without a concrete teaching need and school approval.
+- No student-facing AI chatbot. No custom-built physics simulations where PhET exists.
