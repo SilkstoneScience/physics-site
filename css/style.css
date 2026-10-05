@@ -190,16 +190,9 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
 .joke-buttons button[hidden] { display: none; }
 
 /* ===== About page ===== */
-.about-grid { display: grid; grid-template-columns: 240px 1fr; gap: 24px; align-items: start; margin-top: 12px; }
-.about-photo { margin: 0; }
-.about-photo img { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); display: block; }
 .about-dogs { margin: 12px 0 0; max-width: 320px; }
 .about-dogs img { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--border); display: block; }
 .about-dogs figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 6px; }
-@media (max-width: 640px) {
-  .about-grid { grid-template-columns: 1fr; }
-  .about-photo { max-width: 220px; }
-}
 
 /* ===== Knowledge and science (NoS + ToK) box at the start of topic pages ===== */
 .tok { background: var(--surface); border: 1px solid var(--border); border-top: 5px solid var(--theme-d); border-radius: var(--radius); padding: 6px 18px 12px; margin: 20px 0; }
