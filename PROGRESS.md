@@ -54,7 +54,7 @@ From the October 2026 site audit, in priority order (P1 = high value, P2 = usefu
 Ask the user before starting any item marked "decide".
 
 ### P1: content
-- **Paper 1B (data-based) questions.** Only one so far (in B.3). Paper 1B is new in the 2025 exams and practises analysing experimental data.
+- **Paper 1B (data-based) questions.** Infrastructure built (October 2026, branch `paper-1b`): generator, validator, graphs, diagram components and tests in `tools/1b/` (see its README). Three prototype datasets: D3-B01 current balance, B5-B01 internal resistance, E3-B01 half-life; plus the older hand-written B3-001 (now level `SL_HL`). Next: the user reviews the prototypes; then the agreed pilots (A.1 spring launcher with repeat readings, C.4 standing waves on a string), then the 20-topic coverage plan. Still to build when needed: repeated trials (mean ± half-range), more diagram components (launcher, string and pulley), and an interactive "draw a line" tool (later).
 - **Practicals page.** Still a placeholder with three cards. Build from `experimental-programme/practicals` in physics-source.
 - **Extended essay page.** Still a placeholder. Build from `EE/` in physics-source.
 - **Resources page Drive links.** All still "coming soon"; needs the folder links from the user.

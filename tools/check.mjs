@@ -72,15 +72,17 @@ function checkQuestion(q, file) {
   if (typeof q.id !== 'string' || !q.id) { err(where, 'missing id'); return; }
   if (questionIds.has(q.id)) err(where, 'duplicate id');
   questionIds.set(q.id, q.topic);
-  if (!/^[A-E]\d-\d{3}$/.test(q.id)) warn(where, 'id doesn\'t follow the pattern A1-001');
+  if (!/^[A-E]\d-(\d{3}|B\d{2})$/.test(q.id)) warn(where, 'id doesn\'t follow the pattern A1-001 (or D3-B01 for a generated Paper 1B dataset)');
   const topic = TOPICS.get(q.topic);
   if (!topic) err(where, `unknown topic "${q.topic}"`);
   if (q.theme !== (topic ? topic.theme : q.theme)) err(where, `theme "${q.theme}" doesn't match topic ${q.topic}`);
   if (topic && q.id.slice(0, 2) !== q.topic.replace('.', '')) warn(where, `id doesn't start with its topic (${q.topic})`);
   if (!['1A', '1B', '2'].includes(q.paper)) err(where, `paper must be "1A", "1B" or "2", not ${JSON.stringify(q.paper)}`);
   if (![1, 2, 3].includes(q.difficulty)) err(where, 'difficulty must be 1, 2 or 3');
-  if (!['SL', 'HL'].includes(q.level)) err(where, 'level must be "SL" or "HL"');
-  if (topic && topic.hl && q.level !== 'HL') err(where, `${q.topic} is HL only, so level must be "HL"`);
+  // Paper 1B is the same paper for SL and HL students, so it uses SL material only: level "SL_HL".
+  if (!['SL', 'HL', 'SL_HL'].includes(q.level)) err(where, 'level must be "SL", "HL" or "SL_HL"');
+  if ((q.paper === '1B') !== (q.level === 'SL_HL')) err(where, 'Paper 1B questions (and only those) have level "SL_HL": Paper 1B is common to SL and HL');
+  if (topic && topic.hl && q.level !== 'HL') err(where, `${q.topic} is HL only, so level must be "HL"${q.paper === '1B' ? ' (and Paper 1B can\'t use HL-only topics)' : ''}`);
   checkText(where, q.stem, 'stem');
   if (q.diagram) {
     if (!exists(q.diagram)) err(where, `diagram file not found: ${q.diagram}`);
@@ -136,6 +138,20 @@ try {
 } catch (e) {
   err('questions/index.json', e.message);
 }
+
+// ---------- 2b. Paper 1B datasets (tools/1b) ----------
+// Rebuilds every dataset in memory: each must pass the validator, questions/1b.json must be
+// exactly what the generator produces (so nobody has edited it by hand or forgotten to rebuild),
+// and the generator/validator's own tests must pass.
+const p1b = await import('./1b/build.mjs');
+const { formatDiag } = await import('./1b/validate.mjs');
+const built1b = p1b.buildAll(await p1b.loadDatasets(), TOPICS);
+for (const x of built1b.diags) (x.level === 'error' ? err : warn)(`Paper 1B ${x.dataset}`, formatDiag(x).split('\n').slice(1, -1).map((s) => s.trim()).join(' | '));
+if (!exists(p1b.OUTPUT) || read(p1b.OUTPUT).replace(/\r/g, '') !== built1b.json) {
+  err(p1b.OUTPUT, 'is out of date or edited by hand: run `node tools/1b/build.mjs` to rebuild it from tools/1b/datasets');
+}
+const tests1b = await (await import('./1b/test.mjs')).runTests();
+for (const f of tests1b.failures) err('tools/1b/test.mjs', f);
 
 // ---------- 3. Pages: set-up and links ----------
 function htmlFiles(dir = '') {
@@ -253,7 +269,7 @@ for (const [n, text, want] of markCases) {
 if (checkNumeric({ answer: 10, mistakes: [{ value: 20, feedback: 'x' }] }, '20').mistake !== 0) err('js/numeric.js', 'a listed mistake value should be recognised');
 
 // ---------- Report ----------
-console.log(`Checked ${pages.length} pages, ${questionCount} questions and ${parseCases.length + markCases.length} marking tests.`);
+console.log(`Checked ${pages.length} pages, ${questionCount} questions (${built1b.questions.length} generated Paper 1B datasets), ${parseCases.length + markCases.length} marking tests and ${tests1b.count} Paper 1B tests.`);
 if (warnings.length) console.log(`\n${warnings.length} warning(s):\n` + warnings.map((w) => '  ! ' + w).join('\n'));
 if (errors.length) {
   console.log(`\n${errors.length} error(s):\n` + errors.map((e) => '  ✗ ' + e).join('\n'));

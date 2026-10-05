@@ -154,6 +154,7 @@
     } else if (p.get('theme')) {
       f.theme.value = p.get('theme');
     }
+    if (PAPERS[p.get('paper')]) f.paper.value = p.get('paper'); // e.g. questions.html?topic=D.3&paper=1B
     listEl.dataset.wantedQuestion = p.get('q') || '';
   }
 
@@ -167,7 +168,7 @@
       (!f.topic.value || q.topic === f.topic.value) &&
       (!f.paper.value || q.paper === f.paper.value) &&
       (!f.difficulty.value || String(q.difficulty) === f.difficulty.value) &&
-      (!f.level.value || q.level === 'SL') &&
+      (!f.level.value || q.level !== 'HL') && // "SL only" keeps SL and the common Paper 1B (SL_HL)
       (!f.status.value || statusOf(q) === f.status.value);
   }
 
@@ -336,17 +337,28 @@
         <span class="tag">${PAPERS[q.paper] || q.paper}</span>
         <span class="tag">${DIFFICULTY[q.difficulty] || ''}</span>
         ${q.level === 'HL' ? '<span class="tag hl">HL</span>' : ''}
+        ${q.level === 'SL_HL' ? '<span class="tag">SL &amp; HL</span>' : ''}
         <span class="tag">${totalMarks} mark${totalMarks === 1 ? '' : 's'}</span>
         <span class="q-status ${status}">${statusLabel(q)}</span>
       </div>
       <div class="stem">${q.stem}</div>
       ${q.diagram ? `<figure><img src="${q.diagram}" alt="${escapeAttr(q.diagramAlt || 'Diagram for this question')}"></figure>` : ''}
+      ${Array.isArray(q.data) ? `<div class="q-data" id="data-${q.id}">${q.data.map(dataItemHtml).join('')}</div>` : ''}
       <div class="answer-area"></div>`;
 
     const area = card.querySelector('.answer-area');
     if (q.paper === '1A') buildMultipleChoice(q, area, card);
     else buildStructured(q, area, card);
     return card;
+  }
+
+  // ----- Paper 1B data: tables, graphs and diagrams made by tools/1b/build.mjs -----
+  // The SVGs are inline (not <img>) so they follow light/dark mode; each has its own aria-label.
+  function dataItemHtml(item) {
+    if (item.kind === 'table') {
+      return `<figure class="q-table">${item.caption ? `<figcaption>${item.caption}</figcaption>` : ''}${item.html}</figure>`;
+    }
+    return `<figure class="diagram q-fig">${item.svg}${item.caption ? `<figcaption>${item.caption}</figcaption>` : ''}</figure>`;
   }
 
   // ----- Multiple choice: marked instantly -----
@@ -406,12 +418,14 @@
       return `
         <div class="part" data-part="${pt.label}">
           <p><span class="part-label">(${pt.label})</span>${pt.question}
-             <span class="marks">[${pt.marks}]</span></p>
+             <span class="marks">[${pt.marks}]</span>
+             ${Array.isArray(q.data) ? `<a class="data-link" href="#data-${q.id}">↑ Data</a>` : ''}</p>
           ${pt.numeric ? numericHtml(pt, s) : `<textarea rows="3" aria-label="Your answer to part (${pt.label})" placeholder="Write your answer here, then check the mark scheme.">${escapeHtml(s.answer || '')}</textarea>`}
           ${s.revealed ? `
             <div class="markscheme">
               <strong>Mark scheme</strong>
               <ul>${pt.markscheme.map((m) => `<li>${m}</li>`).join('')}</ul>
+              ${pt.msFigure ? dataItemHtml(pt.msFigure) : ''}
               ${markLine}
             </div>` : '<button class="secondary" data-action="reveal">Show mark scheme</button>'}
         </div>`;
