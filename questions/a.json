@@ -642,6 +642,7 @@
         "label": "a",
         "question": "Calculate the velocity of Q after the collision.",
         "marks": 2,
+        "numeric": { "answer": 2, "unit": "$\\text{m s}^{-1}$", "mistakes": [{ "value": 1.667, "feedback": "P moves backwards after the collision, so its final momentum is negative: $0.60 \\times (-0.50)$." }, { "value": 1.333, "feedback": "Check the signs: P's final velocity is $-0.50\\ \\text{m s}^{-1}$, so its final momentum must be subtracted from the total, not added." }] },
         "markscheme": [
           "Conservation of momentum with correct signs: $0.60 \\times 2.5 = 0.60 \\times (-0.50) + 0.90\\,v$ ✓",
           "$v = 2.0\\ \\text{m s}^{-1}$ in the original direction of P ✓"
@@ -689,6 +690,7 @@
         "label": "b",
         "question": "Calculate the centripetal force on the car.",
         "marks": 2,
+        "numeric": { "answer": 3960, "unit": "N", "mistakes": [{ "value": 330, "feedback": "Square the speed: $F = \\dfrac{mv^2}{r}$." }] },
         "markscheme": [
           "$F = \\dfrac{mv^2}{r} = \\dfrac{1100 \\times 12^2}{40}$ ✓",
           "$F = 4.0 \\times 10^{3}$ N ✓ (accept 3960 N)"
@@ -1016,6 +1018,7 @@
         "label": "a",
         "question": "Calculate the gravitational potential energy lost by the skier between A and B.",
         "marks": 1,
+        "numeric": { "answer": 11466, "unit": "J", "mistakes": [{ "value": 1170, "feedback": "Include $g$: $\\Delta E_p = mg\\Delta h$." }] },
         "markscheme": [
           "$\\Delta E_p = mg\\Delta h = 65 \\times 9.8 \\times 18 = 1.1 \\times 10^{4}$ J (accept 11 500 J) ✓"
         ]
@@ -1024,6 +1027,7 @@
         "label": "b",
         "question": "Calculate the kinetic energy of the skier at B.",
         "marks": 1,
+        "numeric": { "answer": 8320, "unit": "J", "mistakes": [{ "value": 520, "feedback": "Square the speed: $E_k = \\tfrac{1}{2}mv^2$." }] },
         "markscheme": [
           "$E_k = \\tfrac{1}{2} \\times 65 \\times 16^2 = 8.3 \\times 10^{3}$ J (accept 8320 J) ✓"
         ]
@@ -1032,6 +1036,7 @@
         "label": "c",
         "question": "Determine the average resistive force on the skier between A and B.",
         "marks": 2,
+        "numeric": { "answer": 26, "range": [25, 27], "unit": "N", "mistakes": [{ "value": 95.5, "feedback": "The resistive force only accounts for the energy that did <em>not</em> become kinetic energy. Subtract $E_k$ from the $E_p$ lost first." }] },
         "markscheme": [
           "Energy transferred by resistive forces $= 11\\,500 - 8300 \\approx 3.1 \\times 10^{3}$ J ✓ (allow ECF from (a) and (b))",
           "$F = \\dfrac{3.1 \\times 10^{3}}{120} = 26$ N ✓ (accept 25–27 N)"
@@ -1061,6 +1066,7 @@
         "label": "a",
         "question": "Calculate the useful power needed to keep the car moving at this speed.",
         "marks": 1,
+        "numeric": { "answer": 11250, "unit": "W" },
         "markscheme": [
           "$P = Fv = 450 \\times 25 = 1.1 \\times 10^{4}$ W (accept 11 250 W) ✓"
         ]
@@ -1077,6 +1083,7 @@
         "label": "c",
         "question": "Determine the maximum distance the car can travel at this speed on one full charge.",
         "marks": 2,
+        "numeric": { "answer": 540000, "unit": "m", "mistakes": [{ "value": 600000, "feedback": "Only 90% of the battery's energy is useful, so the power drawn from the battery is 12 500 W, not 11 250 W." }] },
         "markscheme": [
           "Time $= \\dfrac{2.7 \\times 10^{8}}{12\\,500} = 2.16 \\times 10^{4}$ s ✓",
           "Distance $= 25 \\times 2.16 \\times 10^{4} = 5.4 \\times 10^{5}$ m (540 km) ✓ (allow ECF from (b); accept a direct method using energy available × efficiency ÷ resistive force)"
@@ -1337,6 +1344,7 @@
         "label": "b",
         "question": "Calculate the tension in the cable.",
         "marks": 3,
+        "numeric": { "answer": 180, "unit": "N", "mistakes": [{ "value": 90, "feedback": "Only the vertical component of the tension, $T\\sin 30°$, has a moment about the hinge." }, { "value": 103.9, "feedback": "The component of the tension perpendicular to the beam is $T\\sin 30°$, not $T\\cos 30°$." }] },
         "markscheme": [
           "Clockwise torques: $80 \\times 1.0 + 50 \\times 2.0 = 180$ N m ✓",
           "Anticlockwise torque: $T\\sin 30° \\times 2.0$ ✓",
@@ -1368,6 +1376,7 @@
         "label": "a",
         "question": "Calculate the moment of inertia of the flywheel.",
         "marks": 1,
+        "numeric": { "answer": 0.375, "unit": "$\\text{kg m}^2$", "mistakes": [{ "value": 0.75, "feedback": "Don't forget the $\\tfrac{1}{2}$ in $I = \\tfrac{1}{2}MR^2$." }] },
         "markscheme": [
           "$I = \\tfrac{1}{2} \\times 12 \\times 0.25^2 = 0.375\\ \\text{kg m}^2$ ✓"
         ]
@@ -1376,6 +1385,7 @@
         "label": "b",
         "question": "Calculate the time taken for the flywheel to reach an angular velocity of 60 $\\text{rad s}^{-1}$.",
         "marks": 2,
+        "numeric": { "answer": 7.5, "unit": "s" },
         "markscheme": [
           "$\\alpha = \\dfrac{\\tau}{I} = \\dfrac{3.0}{0.375} = 8.0\\ \\text{rad s}^{-2}$ ✓",
           "$t = \\dfrac{\\omega}{\\alpha} = \\dfrac{60}{8.0} = 7.5$ s ✓ (allow ECF)"
@@ -1385,6 +1395,7 @@
         "label": "c",
         "question": "Calculate the rotational kinetic energy of the flywheel at 60 $\\text{rad s}^{-1}$.",
         "marks": 1,
+        "numeric": { "answer": 675, "unit": "J", "mistakes": [{ "value": 1350, "feedback": "Rotational kinetic energy is $\\tfrac{1}{2}I\\omega^2$: don't forget the $\\tfrac{1}{2}$." }] },
         "markscheme": [
           "$E_k = \\tfrac{1}{2} \\times 0.375 \\times 60^2 = 675$ J ✓"
         ]
@@ -1636,6 +1647,7 @@
         "label": "a",
         "question": "Calculate the Lorentz factor $\\gamma$.",
         "marks": 1,
+        "numeric": { "answer": 1.667, "mistakes": [{ "value": 0.6, "feedback": "$\\sqrt{1 - v^2/c^2} = 0.60$, but $\\gamma$ is its reciprocal, so it is always at least 1." }] },
         "markscheme": [
           "$\\gamma = \\dfrac{1}{\\sqrt{1 - 0.80^2}} = 1.67$ ✓"
         ]
@@ -1644,6 +1656,7 @@
         "label": "b",
         "question": "Calculate the position $x'$ of event E in frame S′.",
         "marks": 2,
+        "numeric": { "answer": -1500, "unit": "m", "mistakes": [{ "value": -900, "feedback": "Multiply by $\\gamma$: $x' = \\gamma(x - vt)$." }, { "value": 1500, "feedback": "Check the sign: $x - vt = 1500 - 2400$ is negative." }] },
         "markscheme": [
           "$vt = 0.80 \\times 3.00\\times10^{8} \\times 10\\times10^{-6} = 2400$ m ✓",
           "$x' = 1.67(1500 - 2400) = -1500$ m ✓ (allow ECF from (a))"
@@ -1653,6 +1666,7 @@
         "label": "c",
         "question": "Calculate the time $t'$ of event E in frame S′.",
         "marks": 2,
+        "numeric": { "answer": 10, "unit": "µs", "mistakes": [{ "value": 16.67, "feedback": "You need the $\\dfrac{vx}{c^2}$ term: $t' = \\gamma\\left(t - \\dfrac{vx}{c^2}\\right)$." }, { "value": 6, "feedback": "Multiply by $\\gamma$ at the end." }] },
         "markscheme": [
           "$\\dfrac{vx}{c^2} = \\dfrac{0.80 \\times 1500}{3.00\\times10^{8}} = 4.0\\ \\mu\\text{s}$ ✓",
           "$t' = 1.67(10 - 4.0) = 10\\ \\mu\\text{s}$ ✓ (allow ECF)"
@@ -1682,6 +1696,7 @@
         "label": "a",
         "question": "Calculate the time taken for the journey according to observers on the Earth.",
         "marks": 1,
+        "numeric": { "answer": 10, "unit": "years" },
         "markscheme": [
           "$\\Delta t = \\dfrac{6.0\\ \\text{ly}}{0.60c} = 10$ years ✓"
         ]
@@ -1698,6 +1713,7 @@
         "label": "c",
         "question": "Calculate the time taken for the journey according to the crew.",
         "marks": 2,
+        "numeric": { "answer": 8, "unit": "years", "mistakes": [{ "value": 12.5, "feedback": "The crew measure the proper time, which is the <em>shorter</em> time: divide by $\\gamma$." }] },
         "markscheme": [
           "$\\gamma = 1.25$ ✓",
           "$\\Delta t_0 = \\dfrac{10}{1.25} = 8.0$ years ✓ (allow ECF)"

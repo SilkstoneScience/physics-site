@@ -193,6 +193,7 @@
         "label": "b",
         "question": "Calculate the wavelength of the photon emitted when an electron drops from the n = 3 level to the n = 2 level.",
         "marks": 3,
+        "numeric": { "answer": 6.22E-07, "unit": "m" },
         "markscheme": [
           "$\\Delta E = 4.6 - 2.6 = 2.0$ eV ✓",
           "$= 2.0 \\times 1.60 \\times 10^{-19} = 3.2 \\times 10^{-19}$ J ✓",
@@ -329,6 +330,7 @@
         "label": "b",
         "question": "Calculate the radius of the silver nucleus.",
         "marks": 1,
+        "numeric": { "answer": 5.71E-15, "unit": "m" },
         "markscheme": [
           "$R = 1.20 \\times 10^{-15} \\times 108^{1/3} = 5.7 \\times 10^{-15}$ m ✓"
         ]
@@ -578,6 +580,7 @@
         "label": "b",
         "question": "Use the data to determine a value for the Planck constant.",
         "marks": 3,
+        "numeric": { "answer": 6.61E-34, "range": [6.4E-34, 6.8E-34], "unit": "J s" },
         "markscheme": [
           "$eV_s = hf - \\Phi$, so the gradient of $V_s$ against $f$ is $\\dfrac{h}{e}$ ✓",
           "Gradient $= \\dfrac{1.53 - 0.29}{(9.0 - 6.0) \\times 10^{14}} = 4.13 \\times 10^{-15}$ V s ✓",
@@ -588,6 +591,7 @@
         "label": "c",
         "question": "Determine the work function of the metal, in eV.",
         "marks": 2,
+        "numeric": { "answer": 2.19, "range": [2.1, 2.3], "unit": "eV" },
         "markscheme": [
           "$\\Phi = hf - eV_s$; at $6.0 \\times 10^{14}$ Hz, $hf = \\dfrac{6.6 \\times 10^{-34} \\times 6.0 \\times 10^{14}}{1.60 \\times 10^{-19}} = 2.48$ eV ✓",
           "$\\Phi = 2.48 - 0.29 = 2.2$ eV (allow ecf from (b)) ✓"
@@ -618,6 +622,7 @@
         "label": "a",
         "question": "Calculate the wavelength of the scattered photon.",
         "marks": 2,
+        "numeric": { "answer": 1.3645E-11, "unit": "m", "mistakes": [{ "value": 3.645E-12, "feedback": "That's the change in wavelength. Add it to the original wavelength." }] },
         "markscheme": [
           "$\\Delta\\lambda = 2.43 \\times 10^{-12} \\times (1 - \\cos 120°) = 2.43 \\times 10^{-12} \\times 1.5 = 3.64 \\times 10^{-12}$ m ✓",
           "$\\lambda_f = 1.00 \\times 10^{-11} + 0.364 \\times 10^{-11} = 1.36 \\times 10^{-11}$ m ✓"
@@ -627,6 +632,7 @@
         "label": "b",
         "question": "Calculate the kinetic energy of the recoiling electron, in keV.",
         "marks": 3,
+        "numeric": { "answer": 33.2, "range": [32, 34], "unit": "keV" },
         "markscheme": [
           "$E_i = \\dfrac{hc}{\\lambda_i} = 1.99 \\times 10^{-14}$ J and $E_f = \\dfrac{hc}{\\lambda_f} = 1.46 \\times 10^{-14}$ J ✓",
           "Electron gains $E_i - E_f = 5.3 \\times 10^{-15}$ J ✓",
@@ -666,6 +672,7 @@
         "label": "b",
         "question": "Calculate the de Broglie wavelength of the electrons.",
         "marks": 3,
+        "numeric": { "answer": 2.456E-11, "unit": "m" },
         "markscheme": [
           "$E_k = eV = 1.60 \\times 10^{-19} \\times 2500 = 4.0 \\times 10^{-16}$ J ✓",
           "$p = \\sqrt{2mE_k} = \\sqrt{2 \\times 9.11 \\times 10^{-31} \\times 4.0 \\times 10^{-16}} = 2.7 \\times 10^{-23}\\ \\text{kg m s}^{-1}$ ✓",
@@ -972,6 +979,7 @@
         "label": "b",
         "question": "Determine the half-life of the source.",
         "marks": 3,
+        "numeric": { "answer": 8, "range": [7.5, 8.5], "unit": "minutes" },
         "markscheme": [
           "Corrected initial count rate $= 420 - 20 = 400$ counts per minute ✓",
           "Time for the corrected count rate to fall to 200, i.e. for the measured rate to reach 220 ✓",
@@ -1114,6 +1122,7 @@
         "label": "a",
         "question": "Calculate the decay constant of sodium-24 in $\\text{s}^{-1}$.",
         "marks": 1,
+        "numeric": { "answer": 1.284E-05, "unit": "$\\text{s}^{-1}$", "mistakes": [{ "value": 0.0462, "feedback": "That's per hour. Convert the half-life to seconds first." }] },
         "markscheme": [
           "$\\lambda = \\dfrac{\\ln 2}{15.0 \\times 3600} = 1.28 \\times 10^{-5}\\ \\text{s}^{-1}$ ✓"
         ]
@@ -1122,6 +1131,7 @@
         "label": "b",
         "question": "Calculate the number of sodium-24 nuclei in the sample initially.",
         "marks": 1,
+        "numeric": { "answer": 389500000000 },
         "markscheme": [
           "$N = \\dfrac{A}{\\lambda} = \\dfrac{5.0 \\times 10^{6}}{1.28 \\times 10^{-5}} = 3.9 \\times 10^{11}$ ✓"
         ]
@@ -1130,6 +1140,7 @@
         "label": "c",
         "question": "Calculate the activity of the sample after 40.0 hours.",
         "marks": 2,
+        "numeric": { "answer": 0.788, "unit": "MBq" },
         "markscheme": [
           "$\\lambda = 0.0462\\ \\text{h}^{-1}$ and $A = A_0e^{-\\lambda t} = 5.0 \\times e^{-0.0462 \\times 40.0}$ ✓",
           "$= 0.79$ MBq ✓"
@@ -1401,6 +1412,7 @@
         "label": "d",
         "question": "Calculate the mass of uranium-235 used in one year ($3.16 \\times 10^{7}$ s).",
         "marks": 2,
+        "numeric": { "answer": 1114, "unit": "kg" },
         "markscheme": [
           "Number of nuclei $= 9.0 \\times 10^{19} \\times 3.16 \\times 10^{7} = 2.8 \\times 10^{27}$ ✓",
           "Mass $= 2.8 \\times 10^{27} \\times 235 \\times 1.661 \\times 10^{-27} \\approx 1.1 \\times 10^{3}$ kg ✓"
@@ -1697,6 +1709,7 @@
         "label": "a",
         "question": "Calculate the distance to the star in metres.",
         "marks": 2,
+        "numeric": { "answer": 1.542E+18, "unit": "m", "mistakes": [{ "value": 50, "feedback": "That's the distance in parsecs. Convert to metres." }] },
         "markscheme": [
           "$d = \\dfrac{1}{0.0200} = 50$ pc ✓",
           "$= 50 \\times 3.26 \\times 9.46 \\times 10^{15} = 1.54 \\times 10^{18}$ m ✓"
@@ -1715,6 +1728,7 @@
         "label": "c",
         "question": "Calculate the surface temperature of the star.",
         "marks": 1,
+        "numeric": { "answer": 4000, "unit": "K" },
         "markscheme": [
           "$T = \\dfrac{2.9 \\times 10^{-3}}{7.25 \\times 10^{-7}} = 4.0 \\times 10^{3}$ K ✓"
         ]
@@ -1723,6 +1737,7 @@
         "label": "d",
         "question": "Calculate the radius of the star, as a multiple of the Sun’s radius.",
         "marks": 3,
+        "numeric": { "answer": 11.7, "mistakes": [{ "value": 8100000000, "feedback": "That's the radius in metres. Divide by the Sun's radius." }] },
         "markscheme": [
           "$R = \\sqrt{\\dfrac{L}{4\\pi\\sigma T^4}} = \\sqrt{\\dfrac{1.2 \\times 10^{28}}{4\\pi \\times 5.67 \\times 10^{-8} \\times (4.0 \\times 10^{3})^4}}$ ✓",
           "$= 8.1 \\times 10^{9}$ m ✓",

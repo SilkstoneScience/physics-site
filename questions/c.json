@@ -198,12 +198,14 @@
         "label": "a",
         "question": "Calculate the angular frequency of the motion.",
         "marks": 1,
+        "numeric": { "answer": 15.71, "unit": "$\\text{rad s}^{-1}$" },
         "markscheme": ["$\\omega = \\dfrac{2\\pi}{T} = \\dfrac{2\\pi}{0.40} = 16\\ \\text{rad s}^{-1}$ (15.7) ✓"]
       },
       {
         "label": "b",
         "question": "Calculate the total energy of the oscillator.",
         "marks": 2,
+        "numeric": { "answer": 0.395, "unit": "J" },
         "markscheme": [
           "$E_T = \\tfrac{1}{2}m\\omega^2 x_0^2 = \\tfrac{1}{2}(0.50)(15.7)^2(0.080)^2$ ✓",
           "$E_T = 0.39$ J ✓ (allow ECF from (a))"
@@ -213,6 +215,7 @@
         "label": "c",
         "question": "Determine the speed of the object when its displacement is 0.040 m.",
         "marks": 2,
+        "numeric": { "answer": 1.088, "unit": "$\\text{m s}^{-1}$" },
         "markscheme": [
           "$v = \\omega\\sqrt{x_0^2 - x^2} = 15.7\\sqrt{0.080^2 - 0.040^2}$ ✓",
           "$v = 1.1\\ \\text{m s}^{-1}$ ✓ (allow an energy method: $E_k = E_T - \\tfrac{1}{2}m\\omega^2x^2$)"
@@ -399,6 +402,7 @@
         "label": "b",
         "question": "Calculate the wavelength of the sound in air.",
         "marks": 1,
+        "numeric": { "answer": 0.5, "unit": "m", "mistakes": [{ "value": 2, "feedback": "$\\lambda = \\dfrac{v}{f}$: divide the speed by the frequency." }] },
         "markscheme": ["$\\lambda = \\dfrac{v}{f} = \\dfrac{340}{680} = 0.50$ m ✓"]
       },
       {
@@ -663,6 +667,7 @@
         "label": "c",
         "question": "Calculate the separation of the bright fringes.",
         "marks": 1,
+        "numeric": { "answer": 0.00472, "unit": "m", "mistakes": [{ "value": 4.72, "feedback": "That looks like millimetres. The answer box is in metres." }] },
         "markscheme": ["$s = \\dfrac{\\lambda D}{d} = \\dfrac{590\\times10^{-9}\\times 2.4}{0.30\\times10^{-3}} = 4.7\\times10^{-3}$ m ✓"]
       },
       {
@@ -684,12 +689,14 @@
         "label": "a",
         "question": "Calculate the spacing of the lines on the grating.",
         "marks": 1,
+        "numeric": { "answer": 1.667E-06, "unit": "m", "mistakes": [{ "value": 0.001667, "feedback": "That's the spacing in millimetres. 600 lines per mm is $6.00 \\times 10^5$ lines per metre." }] },
         "markscheme": ["$d = \\dfrac{1}{600\\times10^{3}} = 1.67\\times10^{-6}$ m ✓"]
       },
       {
         "label": "b",
         "question": "Determine the angular width of the first-order spectrum.",
         "marks": 2,
+        "numeric": { "answer": 10.95, "unit": "°" },
         "markscheme": [
           "Violet: $\\sin\\theta = \\dfrac{400\\times10^{-9}}{1.67\\times10^{-6}} = 0.24$, so $\\theta = 13.9°$; red: $\\sin\\theta = 0.42$, so $\\theta = 24.8°$ ✓",
           "Angular width $\\approx 11°$ ✓ (allow ECF from (a))"
@@ -1027,6 +1034,7 @@
         "label": "b",
         "question": "Calculate the frequency of the first harmonic.",
         "marks": 2,
+        "numeric": { "answer": 150, "unit": "Hz", "mistakes": [{ "value": 300, "feedback": "For the first harmonic the string holds half a wavelength, so $\\lambda = 2L$." }] },
         "markscheme": [
           "$\\lambda = 2L = 1.60$ m ✓",
           "$f = \\dfrac{v}{\\lambda} = \\dfrac{240}{1.60} = 150$ Hz ✓"
@@ -1378,6 +1386,7 @@
         "label": "b",
         "question": "Calculate the speed of the galaxy relative to the Earth.",
         "marks": 2,
+        "numeric": { "answer": 3020000, "unit": "$\\text{m s}^{-1}$" },
         "markscheme": [
           "$\\Delta\\lambda = 4.9$ nm ✓",
           "$v = c\\,\\dfrac{\\Delta\\lambda}{\\lambda} = 3.00\\times10^{8} \\times \\dfrac{4.9}{486.1} = 3.0\\times10^{6}\\ \\text{m s}^{-1}$ ✓"
@@ -1424,6 +1433,7 @@
         "label": "b",
         "question": "Calculate the frequency heard by the observer as the car approaches.",
         "marks": 2,
+        "numeric": { "answer": 485.7, "tolerance": 0.003, "unit": "Hz", "mistakes": [{ "value": 483.1, "feedback": "That's the moving-<em>observer</em> equation. Here the source moves: $f' = f\\dfrac{v}{v - u_s}$." }, { "value": 419.2, "feedback": "The car is approaching, so the frequency must be higher than 450 Hz: use $v - u_s$." }] },
         "markscheme": [
           "$f' = 450 \\times \\dfrac{340}{340 - 25}$ ✓",
           "$f' = 486$ Hz ✓"
@@ -1433,6 +1443,7 @@
         "label": "c",
         "question": "Calculate the frequency heard after the car has passed the observer.",
         "marks": 1,
+        "numeric": { "answer": 419.2, "tolerance": 0.003, "unit": "Hz", "mistakes": [{ "value": 416.9, "feedback": "That's the moving-<em>observer</em> equation. Here the source moves: $f' = f\\dfrac{v}{v + u_s}$." }] },
         "markscheme": [
           "$f' = 450 \\times \\dfrac{340}{365} = 419$ Hz ✓"
         ]

@@ -12,6 +12,7 @@
         "label": "a",
         "question": "Use the data to determine the gradient of a graph of $p$ against $\\theta$.",
         "marks": 2,
+        "numeric": { "answer": 0.36, "range": [0.35, 0.38], "unit": "kPa °C$^{-1}$" },
         "markscheme": [
           "Uses two well-separated points, e.g. $\\dfrac{129 - 100}{80 - 0}$ ✓",
           "Gradient $\\approx 0.36$ kPa °C$^{-1}$ (accept 0.35 to 0.38) ✓"
@@ -296,6 +297,7 @@
         "label": "b",
         "question": "Calculate the energy needed to melt all the ice.",
         "marks": 1,
+        "numeric": { "answer": 16700, "unit": "J" },
         "markscheme": [
           "$Q = mL = 0.050 \\times 3.34 \\times 10^5 = 1.67 \\times 10^4$ J ✓"
         ]
@@ -304,6 +306,7 @@
         "label": "c",
         "question": "Determine the final temperature of the drink, assuming no energy is exchanged with the surroundings.",
         "marks": 3,
+        "numeric": { "answer": 10.07, "unit": "°C", "mistakes": [{ "value": 11.7, "feedback": "The melted ice becomes water at 0 °C, and that water must also warm up to the final temperature. Include $0.050 \\times 4200 \\times T$." }] },
         "markscheme": [
           "Energy lost by lemonade $= 0.30 \\times 4200 \\times (25 - T)$ ✓",
           "Energy gained by ice $= 1.67 \\times 10^4 + 0.050 \\times 4200 \\times T$ (melting <em>and</em> warming the melted water) ✓",
@@ -342,6 +345,7 @@
         "label": "b",
         "question": "Calculate the luminosity of the star.",
         "marks": 2,
+        "numeric": { "answer": 2.356E+27, "unit": "W" },
         "markscheme": [
           "$L = 4\\pi d^2 b$ ✓",
           "$L = 4\\pi \\times (2.5 \\times 10^{17})^2 \\times 3.0 \\times 10^{-9} = 2.4 \\times 10^{27}$ W ✓"
@@ -351,6 +355,7 @@
         "label": "c",
         "question": "Determine the radius of the star.",
         "marks": 3,
+        "numeric": { "answer": 1150000000, "unit": "m", "mistakes": [{ "value": 2300000000, "feedback": "The surface area of a sphere is $4\\pi R^2$, not $\\pi R^2$." }] },
         "markscheme": [
           "$A = \\dfrac{L}{\\sigma T^4}$ ✓",
           "$A = \\dfrac{2.4 \\times 10^{27}}{5.67 \\times 10^{-8} \\times 7100^4} = 1.7 \\times 10^{19}\\ \\text{m}^2$ ✓",
@@ -618,6 +623,7 @@
         "label": "c",
         "question": "Determine the effective emissivity of the Earth that gives a mean surface temperature of 288 K.",
         "marks": 2,
+        "numeric": { "answer": 0.61 },
         "markscheme": [
           "$e\\sigma T^4 = 238$ ✓",
           "$e = \\dfrac{238}{5.67 \\times 10^{-8} \\times 288^4} = 0.61$ ✓ (allow ECF from (b))"
@@ -648,6 +654,7 @@
         "label": "a",
         "question": "Calculate $B$, assuming the surface is in equilibrium.",
         "marks": 2,
+        "numeric": { "answer": 320, "unit": "$\\text{W m}^{-2}$" },
         "markscheme": [
           "Energy in = energy out: $170 + B = 390 + 100$ ✓",
           "$B = 320$ $\\text{W m}^{-2}$ ✓"
@@ -657,6 +664,7 @@
         "label": "b",
         "question": "Calculate the power per unit area radiated by the atmosphere to space, assuming the atmosphere is in equilibrium.",
         "marks": 2,
+        "numeric": { "answer": 200, "unit": "$\\text{W m}^{-2}$" },
         "markscheme": [
           "Atmosphere in $= 70 + 350 + 100 = 520$ ✓",
           "To space $= 520 - 320 = 200$ $\\text{W m}^{-2}$ ✓ (allow ECF from (a))"
@@ -666,6 +674,7 @@
         "label": "c",
         "question": "Determine the albedo of the Earth in this model.",
         "marks": 2,
+        "numeric": { "answer": 0.294, "range": [0.29, 0.3] },
         "markscheme": [
           "Reflected $= 340 - 170 - 70 = 100$ $\\text{W m}^{-2}$ ✓",
           "Albedo $= \\dfrac{100}{340} = 0.29$ ✓"
@@ -950,6 +959,7 @@
         "label": "a",
         "question": "Calculate the amount of helium in the cylinder.",
         "marks": 2,
+        "numeric": { "answer": 311.2, "unit": "mol" },
         "markscheme": [
           "$n = \\dfrac{PV}{RT} = \\dfrac{1.5 \\times 10^7 \\times 0.050}{8.31 \\times 290}$ ✓",
           "$n = 310$ mol ✓"
@@ -959,6 +969,7 @@
         "label": "b",
         "question": "Calculate the mass of helium in the cylinder.",
         "marks": 1,
+        "numeric": { "answer": 1.245, "unit": "kg", "mistakes": [{ "value": 1245, "feedback": "That's in grams. Molar mass in kg $\\text{mol}^{-1}$ is 0.0040." }] },
         "markscheme": [
           "$m = 310 \\times 0.0040 = 1.2$ kg ✓ (allow ECF from (a))"
         ]
@@ -977,6 +988,7 @@
         "label": "d",
         "question": "Calculate the internal energy of the helium in the full cylinder.",
         "marks": 2,
+        "numeric": { "answer": 1125000, "unit": "J" },
         "markscheme": [
           "$U = \\tfrac{3}{2}nRT$ ✓",
           "$U = 1.5 \\times 310 \\times 8.31 \\times 290 = 1.1 \\times 10^6$ J ✓ (allow ECF from (a))"
@@ -1266,6 +1278,7 @@
         "label": "a",
         "question": "Calculate the work done by the gas from A to B.",
         "marks": 1,
+        "numeric": { "answer": 400, "unit": "J" },
         "markscheme": [
           "$W = P\\Delta V = 2.0 \\times 10^5 \\times 2.0 \\times 10^{-3} = 400$ J ✓"
         ]
@@ -1274,6 +1287,7 @@
         "label": "b",
         "question": "Calculate the thermal energy supplied to the gas from A to B.",
         "marks": 2,
+        "numeric": { "answer": 1000, "unit": "J", "mistakes": [{ "value": 600, "feedback": "That's only $\\Delta U$. From $Q = \\Delta U + W$, add the 400 J of work done by the gas." }] },
         "markscheme": [
           "$\\Delta U = \\tfrac{3}{2}P\\Delta V = 600$ J ✓",
           "$Q = \\Delta U + W = 1000$ J ✓ (allow ECF from (a))"
@@ -1283,6 +1297,7 @@
         "label": "c",
         "question": "Determine the work done by the gas from C to A.",
         "marks": 2,
+        "numeric": { "answer": -300, "unit": "J", "mistakes": [{ "value": 300, "feedback": "From C to A the gas is compressed, so the work done <em>by</em> the gas is negative." }] },
         "markscheme": [
           "Area under the line $= \\dfrac{(1.0 + 2.0) \\times 10^5}{2} \\times 2.0 \\times 10^{-3} = 300$ J ✓",
           "The gas is compressed, so $W = -300$ J ✓"
@@ -1292,6 +1307,7 @@
         "label": "d",
         "question": "Determine the efficiency of this cycle. Thermal energy is only taken in during A → B.",
         "marks": 2,
+        "numeric": { "answer": 0.1, "mistakes": [{ "value": 0.4, "feedback": "Use the <em>net</em> work done per cycle (the enclosed area, 100 J), not the work done from A to B." }] },
         "markscheme": [
           "Net work $= 400 - 300 = 100$ J (or the area enclosed) ✓",
           "$\\eta = \\dfrac{100}{1000} = 0.10$ ✓ (allow ECF)"
@@ -1329,6 +1345,7 @@
         "label": "b",
         "question": "Calculate the total change in entropy of the two bodies.",
         "marks": 3,
+        "numeric": { "answer": 4, "unit": "$\\text{J K}^{-1}$", "mistakes": [{ "value": 12, "feedback": "The hot body <em>loses</em> energy, so its entropy change is negative: $-\\dfrac{2000}{500}$." }, { "value": -4, "feedback": "Check the signs: the hot body's change is $-4.0$ and the cold body's is $+8.0\\ \\text{J K}^{-1}$." }] },
         "markscheme": [
           "Hot body: $\\Delta S = -\\dfrac{2000}{500} = -4.0\\ \\text{J K}^{-1}$ ✓",
           "Cold body: $\\Delta S = +\\dfrac{2000}{250} = +8.0\\ \\text{J K}^{-1}$ ✓",
@@ -1669,6 +1686,7 @@
         "label": "b",
         "question": "Calculate the current from the battery.",
         "marks": 2,
+        "numeric": { "answer": 1.2, "unit": "A", "mistakes": [{ "value": 1.5, "feedback": "Include the internal resistance: $I = \\dfrac{\\varepsilon}{R + r}$." }] },
         "markscheme": [
           "$I = \\dfrac{\\varepsilon}{R + r} = \\dfrac{9.0}{6.0 + 1.5}$ ✓",
           "$I = 1.2$ A ✓"
@@ -1678,6 +1696,7 @@
         "label": "c",
         "question": "Calculate the terminal p.d. of the battery.",
         "marks": 1,
+        "numeric": { "answer": 7.2, "unit": "V" },
         "markscheme": [
           "$V = IR = 1.2 \\times 6.0 = 7.2$ V (or $9.0 - 1.2 \\times 1.5$) ✓ (allow ECF from (b))"
         ]
@@ -1686,6 +1705,7 @@
         "label": "d",
         "question": "Calculate the current in the 3.0 Ω resistor.",
         "marks": 2,
+        "numeric": { "answer": 0.8, "unit": "A", "mistakes": [{ "value": 0.4, "feedback": "That's the current in the 6.0 Ω resistor. Divide the p.d. across the pair by 3.0 Ω." }] },
         "markscheme": [
           "p.d. across the parallel pair $= 1.2 \\times 2.0 = 2.4$ V ✓",
           "$I = \\dfrac{2.4}{3.0} = 0.80$ A ✓ (allow ECF)"
@@ -1715,6 +1735,7 @@
         "label": "a",
         "question": "Calculate the resistance of the element.",
         "marks": 2,
+        "numeric": { "answer": 23.3, "unit": "Ω", "mistakes": [{ "value": 5.84, "feedback": "Use the radius (0.15 mm), not the diameter, in $A = \\pi r^2$." }] },
         "markscheme": [
           "$A = \\pi(0.15 \\times 10^{-3})^2 = 7.1 \\times 10^{-8}\\ \\text{m}^2$ ✓",
           "$R = \\dfrac{\\rho L}{A} = \\dfrac{1.1 \\times 10^{-6} \\times 1.5}{7.1 \\times 10^{-8}} = 23\\ \\Omega$ ✓ (award 1 mark max if the diameter is used as the radius, giving 5.8 Ω)"
