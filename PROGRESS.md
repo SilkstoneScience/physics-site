@@ -46,6 +46,9 @@ This file is not published on the website (see `_config.yml`).
 - MathJax pinned to 4.1.3.
 - 404 page, robots.txt, sitemap.xml, favicon, link-preview (Open Graph) tags and descriptions on every page.
 
+## XYZ visual identity (October 2026)
+- Light-orange XYZ motif: home-page hero ("The XYZ of DP Physics") with animated axes and orbit, category cards with line icons, section-heading accents, a small axes mark in the header on every page, and an orange underline for the current menu item. Styles are in the "XYZ motif" section at the end of `css/style.css`.
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".
@@ -68,6 +71,8 @@ Ask the user before starting any item marked "decide".
 ### P3: future/optional
 - **Site search.** A small search index of page headings and question stems, searched in the browser. Worth it once students revise across many topics.
 - **Split question files by topic.** Only needed past about 1,500 questions, when loading every file at once gets slow on phones. Keep all question ids unchanged.
+- **XYZ favicon and social card** (decide). The browser-tab icon and the link-preview image are still the old blue design.
+- **More XYZ motif uses** (decide). Possible later: topic-page headers, the question bank's empty or loading states. Keep it subtle.
 - **No-JavaScript message.** A `<noscript>` line with a home link, since the menu is drawn by JavaScript.
 
 ### Not planned (agreed in the audit)
