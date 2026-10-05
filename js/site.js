@@ -387,7 +387,7 @@ window.CONSTANTS = {
     header.className = 'site-header';
     header.innerHTML = `
       <div class="inner">
-        <a class="brand" href="${root}index.html">DP Physics <span>Study Guide</span></a>
+        <a class="brand" href="${root}index.html">Mr Silkstone's <span>Physics</span></a>
         <button class="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
         <nav class="site-nav" id="site-nav" aria-label="Main">
           <ul>${links.map(([key, href, label]) =>
