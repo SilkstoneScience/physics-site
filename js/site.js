@@ -398,7 +398,7 @@ window.CONSTANTS = {
     header.className = 'site-header';
     header.innerHTML = `
       <div class="inner">
-        <a class="brand" href="${root}index.html">Mr Silkstone's <span>Physics</span></a>
+        <a class="brand" href="${root}index.html"><svg class="xyz-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 14V3M12 14L22 17M12 14L3 20"/><circle cx="12" cy="14" r="2.6"/></svg>Mr Silkstone's <span>Physics</span></a>
         <button class="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
         <nav class="site-nav" id="site-nav" aria-label="Main">
           <ul>${links.map(([key, href, label]) =>

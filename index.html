@@ -23,8 +23,41 @@
 <body data-root="" data-section="home">
   <header id="site-header"></header>
   <main>
-    <h1>Mr Silkstone's Physics</h1>
-    <p class="lead">Your XYZ of DP Physics (SL and HL): notes, practice questions and guidance.</p>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-text">
+        <h1 id="hero-title">The <span class="xyz-word">XYZ</span> of DP&nbsp;Physics</h1>
+        <p class="lead">Clear notes, exam-style practice and guidance for IB Physics SL and HL, from your first lesson to the final exam.</p>
+        <p class="hero-buttons">
+          <a class="button xyz-btn" href="themes/index.html">Start with the themes <span aria-hidden="true">→</span></a>
+          <a class="button ghost" href="questions.html">Practise questions</a>
+        </p>
+      </div>
+      <!-- The XYZ motif: decorative, so hidden from screen readers. Coordinates calculated, not sketched. -->
+      <svg class="xyz-hero" viewBox="0 0 380 290" aria-hidden="true" focusable="false">
+        <defs>
+          <radialGradient id="xyz-fade"><stop offset="0.35" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          <mask id="xyz-mask"><rect width="380" height="290" fill="url(#xyz-fade)"/></mask>
+        </defs>
+        <path class="xyz-grid" mask="url(#xyz-mask)" d="M152.6 103.5L384.8 164.4M127.8 120.3L359.9 181.2M102.9 137.2L335.1 198M78.1 154L310.3 214.9M53.3 170.9L285.4 231.7M28.4 187.7L260.6 248.5M3.6 204.5L235.8 265.4M152.6 103.5L3.6 204.5M181.6 111.1L32.6 212.1M210.6 118.7L61.7 219.7M239.7 126.3L90.7 227.3M268.7 133.9L119.7 234.9M297.7 141.5L148.7 242.5M326.7 149.1L177.7 250.2M355.7 156.8L206.8 257.8M384.8 164.4L235.8 265.4"/>
+        <path class="xyz-orbit2" d="M281.6 217.2A108 74 32 1 1 98.4 102.8A108 74 32 1 1 281.6 217.2"/>
+        <circle class="xyz-orbit2-dot" cx="91.1" cy="141.8" r="4"/>
+        <circle class="xyz-point" cx="269.8" cy="134.3" r="4"/>
+        <path class="xyz-orbit" pathLength="1" d="M332.8 134.8A145 44 -10 1 1 47.2 185.2A145 44 -10 1 1 332.8 134.8"/>
+        <g class="xyz-axes">
+          <path class="xyz-axis xyz-axis-z" pathLength="1" d="M190 160V39"/>
+          <path class="xyz-axis xyz-axis-x" pathLength="1" d="M190 160L324.4 195.3"/>
+          <path class="xyz-axis" pathLength="1" d="M190 160L81.1 233.9"/>
+          <polygon class="xyz-head xyz-head-o" points="190,28 194.5,39 185.5,39"/>
+          <polygon class="xyz-head xyz-head-o" points="335,198 323.2,199.6 325.5,190.9"/>
+          <polygon class="xyz-head" points="72,240 78.6,230.1 83.6,237.6"/>
+          <text class="xyz-label" x="203" y="44" font-size="22">z</text>
+          <text class="xyz-label" x="340" y="226" font-size="22">x</text>
+          <text class="xyz-label" x="56" y="234" font-size="22">y</text>
+        </g>
+        <circle class="xyz-origin" cx="190" cy="160" r="9"/>
+        <circle class="xyz-particle" r="5"/>
+      </svg>
+    </section>
 
     <!-- Filled in by js/site.js from the list in js/jokes.js -->
     <section class="joke" id="joke" aria-labelledby="joke-title" hidden>
@@ -37,19 +70,44 @@
       </div>
     </section>
 
-    <h2>Syllabus themes</h2>
+    <h2 class="xyz-h"><span class="eyebrow"><svg class="eyebrow-icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 11C15 8 9 8 5 9V32C9 31 15 31 20 34C25 31 31 31 35 32V9C31 8 25 8 20 11Z"/><path class="o" d="M20 11V34"/></svg>Learn</span>Syllabus themes</h2>
     <div data-theme-list></div>
 
-    <h2>Practise and investigate</h2>
-    <ul class="card-grid">
-      <li><a class="card" href="questions.html"><h3>Question bank</h3><p>Exam-style questions by topic, paper and difficulty. Your progress is saved on this device.</p></a></li>
-      <li><a class="card" href="skills.html"><h3>Physics skills</h3><p>Units, significant figures, uncertainties, graphs and vectors: the tools you need in every topic.</p></a></li>
-      <li><a class="card" href="experimental/index.html"><h3>Experimental programme</h3><p>Practicals, the Collaborative Sciences Project and the Internal Assessment.</p></a></li>
-      <li><a class="card" href="ee/index.html"><h3>Extended essay</h3><p>Planning and writing a physics EE.</p></a></li>
-      <li><a class="card" href="tok.html"><h3>ToK and the nature of science</h3><p>How physics produces knowledge, and the big questions it raises.</p></a></li>
-      <li><a class="card" href="resources.html"><h3>Resources</h3><p>Lesson slides and documents on Google Drive.</p></a></li>
-      <li><a class="card" href="about.html"><h3>About me</h3><p>Who writes this guide, and why.</p></a></li>
+    <h2 class="xyz-h">Practise and investigate</h2>
+    <!-- Category cards: each icon is decorative; the label and heading carry the meaning -->
+    <ul class="cat-grid">
+      <li><a class="cat-card" href="questions.html">
+        <svg class="cat-icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M5 4V35H37"/><path class="o" d="M8 32Q21 -12 34 32"/><circle class="of" cx="34" cy="32" r="2.6"/></svg>
+        <span class="cat-label">Practise</span>
+        <h3>Question bank</h3>
+        <p>Exam-style questions by topic, paper and difficulty. Your progress is saved on this device.</p>
+        <span class="cat-go" aria-hidden="true">→</span></a></li>
+      <li><a class="cat-card" href="experimental/index.html">
+        <svg class="cat-icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M6 35H22M11 35V6M11 8H30"/><path class="dash" d="M27 8V30"/><path class="o" d="M27 8L33 27"/><circle class="of" cx="33.8" cy="29.6" r="3"/></svg>
+        <span class="cat-label">Investigate</span>
+        <h3>Experimental programme</h3>
+        <p>Practicals, the Collaborative Sciences Project and the Internal Assessment.</p>
+        <span class="cat-go" aria-hidden="true">→</span></a></li>
+      <li><a class="cat-card" href="skills.html">
+        <svg class="cat-icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M5 4V35H37"/><path d="M12 23V31M10 27H14M21 17V25M19 21H23M30 9V19M28 14H32"/><path class="o" d="M8 31L35 10"/></svg>
+        <span class="cat-label">Measure</span>
+        <h3>Physics skills</h3>
+        <p>Units, significant figures, uncertainties, graphs and vectors: the tools you need in every topic.</p>
+        <span class="cat-go" aria-hidden="true">→</span></a></li>
+      <li><a class="cat-card" href="ee/index.html">
+        <svg class="cat-icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="4"/><ellipse class="dash" cx="20" cy="20" rx="16" ry="7" transform="rotate(-25 20 20)"/><ellipse class="o" cx="20" cy="20" rx="11" ry="15" transform="rotate(30 20 20)"/><circle class="of" cx="28.5" cy="8" r="2.6"/></svg>
+        <span class="cat-label">Write</span>
+        <h3>Extended essay</h3>
+        <p>Planning and writing a physics EE.</p>
+        <span class="cat-go" aria-hidden="true">→</span></a></li>
+      <li><a class="cat-card" href="tok.html">
+        <svg class="cat-icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="15" cy="16" r="9.5"/><circle cx="25" cy="16" r="9.5"/><circle class="o" cx="20" cy="25" r="9.5"/><circle class="of" cx="20" cy="19.5" r="2.4"/></svg>
+        <span class="cat-label">Reflect</span>
+        <h3>ToK and the nature of science</h3>
+        <p>How physics produces knowledge, and the big questions it raises.</p>
+        <span class="cat-go" aria-hidden="true">→</span></a></li>
     </ul>
+    <p class="more-links">Also: <a href="resources.html">Resources</a> (lesson slides and documents on Google Drive) · <a href="about.html">About me</a> (who writes this guide, and why)</p>
   </main>
   <footer id="site-footer"></footer>
 </body>
