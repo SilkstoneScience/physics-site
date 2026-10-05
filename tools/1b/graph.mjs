@@ -9,6 +9,12 @@
 import { fmtNum, escapeAttr } from './lib.mjs';
 
 export const BOX = { W: 560, H: 400, l: 86, r: 24, t: 20, b: 66 };
+// Point markers are small, and error bars are drawn ON TOP of them, so a short error bar (a small
+// uncertainty) is never hidden inside its point. Radius 3.2 units ≈ 6 px across at full size and
+// about 3.5 px on a 375 px phone. Caps are wider than a marker so the ends of every bar show.
+// These change only how the graph looks: positions and bar lengths come from the data.
+export const MARKER_R = 3.2;
+export const CAP = 5;
 const r1 = (n) => Math.round(n * 10) / 10;
 const tidy = (n) => Number(n.toPrecision(12));
 
@@ -93,18 +99,18 @@ export function renderGraph(spec) {
     }
     out.push(`<polyline class="${cv.cls} fit" data-fit="curve" points="${pts.join(' ')}"/>`);
   }
-  // Error bars (with short caps), then the points.
+  // Points first, then their error bars on top (so no bar is hidden behind its point).
+  for (const p of points) out.push(`<circle class="f1 pt" cx="${X(p.x)}" cy="${Y(p.y)}" r="${MARKER_R}" data-row="${p.row}"/>`);
   for (const p of points) {
     if (p.ey) {
       const [x0, y1, y2] = [X(p.x), Y(p.y + p.ey), Y(p.y - p.ey)];
-      out.push(`<path class="ebar" data-row="${p.row}" data-axis="y" d="M${x0} ${y1}V${y2}M${r1(x0 - 4)} ${y1}H${r1(x0 + 4)}M${r1(x0 - 4)} ${y2}H${r1(x0 + 4)}"/>`);
+      out.push(`<path class="ebar" data-row="${p.row}" data-axis="y" d="M${x0} ${y1}V${y2}M${r1(x0 - CAP)} ${y1}H${r1(x0 + CAP)}M${r1(x0 - CAP)} ${y2}H${r1(x0 + CAP)}"/>`);
     }
     if (p.ex) {
       const [y0, x1, x2] = [Y(p.y), X(p.x - p.ex), X(p.x + p.ex)];
-      out.push(`<path class="ebar" data-row="${p.row}" data-axis="x" d="M${x1} ${y0}H${x2}M${x1} ${r1(y0 - 4)}V${r1(y0 + 4)}M${x2} ${r1(y0 - 4)}V${r1(y0 + 4)}"/>`);
+      out.push(`<path class="ebar" data-row="${p.row}" data-axis="x" d="M${x1} ${y0}H${x2}M${x1} ${r1(y0 - CAP)}V${r1(y0 + CAP)}M${x2} ${r1(y0 - CAP)}V${r1(y0 + CAP)}"/>`);
     }
   }
-  for (const p of points) out.push(`<circle class="f1 pt" cx="${X(p.x)}" cy="${Y(p.y)}" r="4.5" data-row="${p.row}"/>`);
   out.push('</svg>');
   return out.join('');
 }

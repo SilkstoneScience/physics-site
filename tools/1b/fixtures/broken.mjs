@@ -51,7 +51,7 @@ export default [
 
   // ----- Graphs -----
   { name: 'graph point moved by 6 pixels', expect: 'graph-point', def: D3,
-    mutate: (q) => editFigure(q, 'graph', (s) => s.replace(/(<circle class="f1 pt" cx="[\d.]+" cy=")([\d.]+)(" r="4.5" data-row="2")/, (m, a, y, b) => a + (Number(y) - 6) + b)) },
+    mutate: (q) => editFigure(q, 'graph', (s) => s.replace(/(<circle class="f1 pt" cx="[\d.]+" cy=")([\d.]+)(" r="[\d.]+" data-row="2")/, (m, a, y, b) => a + (Number(y) - 6) + b)) },
   { name: 'wrong unit on the y-axis', expect: 'graph-axis', def: D3,
     mutate: (q) => editFigure(q, 'graph', (s) => s.replace('</tspan> / g</text>', '</tspan> / kg</text>')) },
   { name: 'error bar too short', expect: 'graph-errorbar', def: D3,
