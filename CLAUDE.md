@@ -108,6 +108,7 @@ This folder (`physics-site`) is a static website for IB DP Physics students, hos
   - Plausible distractors based on real misconceptions. The `explanation` says why the common wrong answers are tempting.
   - Spread the correct letters roughly evenly across A–D within each topic.
   - For "which graph" questions, put the four graphs in one SVG labelled A–D and use options like "Graph A".
+  - "I, II and III" questions (as in the 2025 papers): stem `<p>Three statements about … are:</p><p>I. …<br>II. …<br>III. …</p><p>Which statements are correct?</p>`, options always "I and II only", "I and III only", "II and III only", "I, II and III" in that order. The explanation says why each statement is true or false. Every topic has at least one.
   - Use $g = 9.8$ m s⁻² everywhere (notes and questions). This is the value in the 2025 data booklet.
 - The question bank shows one question at a time by default, with Previous/Next, a "Next question" button after answering, and a Back link to the page the student came from. "All on one page" is an option. Link to a set with `questions.html?topic=A.1`, or to one question with `&q=A1-004`.
 
