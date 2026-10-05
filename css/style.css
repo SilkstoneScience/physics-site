@@ -257,6 +257,11 @@ select, textarea, input { font: inherit; color: var(--text); background: var(--b
 .markscheme ul { margin: 6px 0; padding-left: 1.2em; }
 .markscheme label { display: flex; align-items: center; gap: 8px; font-weight: 600; margin: 8px 0 4px; }
 .markscheme select { width: auto; }
+.num-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 6px 0 4px; }
+.num-row input { width: 11em; max-width: 100%; }
+.num-row .unit { font-weight: 600; }
+.num-hint { font-size: 0.85rem; color: var(--muted); margin: 0 0 6px; }
+.auto-mark { font-weight: 600; margin: 8px 0 4px; }
 .q-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 16px 0 -4px; }
 .q-nav button { padding: 8px 14px; border-radius: 8px; font: inherit; font-weight: 600; cursor: pointer; }
 .q-nav button:disabled { opacity: 0.4; cursor: default; }

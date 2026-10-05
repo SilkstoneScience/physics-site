@@ -238,13 +238,15 @@
     if (first) first.addEventListener('click', () => goTo(0));
   }
 
+  // Redraws one question's card and returns the new card element.
   function refreshCard(q, card) {
-    if (oneAtATime()) { render(false); return; }
+    if (oneAtATime()) { render(false); return listEl.querySelector('.question'); }
     typesetClear(card);
     const fresh = buildCard(q);
     card.replaceWith(fresh);
     typeset(fresh);
     updateSummary();
+    return fresh;
   }
 
   function onKey(e) {
@@ -342,18 +344,21 @@
       const s = saved[pt.label] || {};
       const scoreOptions = Array.from({ length: pt.marks + 1 }, (_, n) =>
         `<option value="${n}" ${s.score === n ? 'selected' : ''}>${n}</option>`).join('');
+      const markLine = s.auto
+        ? `<p class="auto-mark">Marks: ${pt.marks} out of ${pt.marks} (your answer was checked automatically)</p>`
+        : `<label>Marks you earned:
+                <select><option value="" ${typeof s.score === 'number' ? '' : 'selected'}>choose</option>${scoreOptions}</select>
+                out of ${pt.marks}</label>`;
       return `
         <div class="part" data-part="${pt.label}">
           <p><span class="part-label">(${pt.label})</span>${pt.question}
              <span class="marks">[${pt.marks}]</span></p>
-          <textarea rows="3" placeholder="Write your answer here, then check the mark scheme.">${escapeHtml(s.answer || '')}</textarea>
+          ${pt.numeric ? numericHtml(pt, s) : `<textarea rows="3" placeholder="Write your answer here, then check the mark scheme.">${escapeHtml(s.answer || '')}</textarea>`}
           ${s.revealed ? `
             <div class="markscheme">
               <strong>Mark scheme</strong>
               <ul>${pt.markscheme.map((m) => `<li>${m}</li>`).join('')}</ul>
-              <label>Marks you earned:
-                <select><option value="" ${typeof s.score === 'number' ? '' : 'selected'}>choose</option>${scoreOptions}</select>
-                out of ${pt.marks}</label>
+              ${markLine}
             </div>` : '<button class="secondary" data-action="reveal">Show mark scheme</button>'}
         </div>`;
     }).join('') +
@@ -362,11 +367,31 @@
 
     area.querySelectorAll('.part').forEach((partEl) => {
       const label = partEl.dataset.part;
+      const pt = q.parts.find((x) => x.label === label);
       // Save typed answers as the student writes (no redraw, so typing isn't interrupted).
-      partEl.querySelector('textarea').addEventListener('input', (e) => {
+      const box = partEl.querySelector('textarea, input');
+      box.addEventListener('input', (e) => {
         partState(q, label).answer = e.target.value;
         saveProgress();
       });
+      if (pt.numeric) {
+        const check = () => {
+          const st = partState(q, label);
+          const res = checkNumeric(pt.numeric, box.value);
+          st.answer = box.value;
+          st.check = res.status;
+          st.mistake = res.mistake;
+          if (res.status === 'right') { st.score = pt.marks; st.revealed = true; st.auto = true; }
+          saveProgress();
+          const fresh = refreshCard(q, card);
+          // After a wrong answer, put the cursor back in the box so the student can try again.
+          const again = fresh && fresh.querySelector(`[data-part="${label}"] input:not(:disabled)`);
+          if (again) again.focus();
+        };
+        const btn = partEl.querySelector('[data-action="check"]');
+        if (btn) btn.addEventListener('click', check);
+        box.addEventListener('keydown', (e) => { if (e.key === 'Enter') check(); });
+      }
       const reveal = partEl.querySelector('[data-action="reveal"]');
       if (reveal) reveal.addEventListener('click', () => {
         partState(q, label).revealed = true;
@@ -387,6 +412,92 @@
       refreshCard(q, card);
     });
     wireNextButtons(area);
+  }
+
+  // ----- Typed numerical answers (parts with a "numeric" field) -----
+  // A part can have: "numeric": { "answer": 517, "unit": "$\\text{m s}^{-1}$",
+  //   "tolerance": 0.02, "range": [500, 530], "anySign": true,
+  //   "mistakes": [{ "value": 39, "feedback": "..." }] }. Only "answer" is required.
+  // A right answer earns the part's full marks automatically. A wrong one can be retried,
+  // or the student can open the mark scheme and award themselves method marks.
+  function numericHtml(pt, s) {
+    const n = pt.numeric;
+    const locked = !!s.revealed;
+    let feedback = '';
+    if (s.check === 'right') {
+      feedback = `<div class="feedback good"><strong>Correct!</strong> ${pt.marks} mark${pt.marks === 1 ? '' : 's'}.</div>`;
+    } else if (s.check === 'unreadable') {
+      feedback = `<div class="feedback bad"><strong>That isn't a number I can read.</strong>
+        Type just the number, for example 0.047, 4.7e-2 or 4.7×10^-2. The unit is already given.</div>`;
+    } else if (s.check === 'wrong') {
+      const tip = typeof s.mistake === 'number' && n.mistakes && n.mistakes[s.mistake]
+        ? n.mistakes[s.mistake].feedback
+        : 'Check your working and try again, or look at the mark scheme.';
+      feedback = `<div class="feedback bad"><strong>Not quite.</strong> ${tip}</div>`;
+    }
+    return `
+      <div class="num-row">
+        <input type="text" autocomplete="off" spellcheck="false" placeholder="Your answer"
+          aria-label="Your answer to part (${pt.label})" value="${escapeAttr(s.answer || '')}" ${locked ? 'disabled' : ''}>
+        ${n.unit ? `<span class="unit">${n.unit}</span>` : ''}
+        ${locked ? '' : '<button class="primary" data-action="check">Check</button>'}
+      </div>
+      ${locked ? '' : '<p class="num-hint">Type a number, such as 0.047, 4.7e-2 or 4.7×10^-2.</p>'}
+      ${feedback}`;
+  }
+
+  // Marks a typed answer: { status: 'right' | 'wrong' | 'unreadable', mistake: index or null }.
+  function checkNumeric(n, text) {
+    const got = parseNumber(text);
+    if (!got) return { status: 'unreadable', mistake: null };
+    const sign = (x) => (n.anySign ? Math.abs(x) : x);
+    const v = sign(got.value);
+    let right;
+    if (n.range) right = v >= Math.min(...n.range) && v <= Math.max(...n.range);
+    else right = closeTo(v, sign(n.answer), n.tolerance, got.sf);
+    if (right) return { status: 'right', mistake: null };
+    const m = (n.mistakes || []).findIndex((x) => closeTo(v, sign(x.value), n.tolerance, got.sf));
+    return { status: 'wrong', mistake: m >= 0 ? m : null };
+  }
+
+  // True if `typed` is within the tolerance (2% unless the question says otherwise) of
+  // `target`, or is `target` correctly rounded to the student's (2 or more) significant figures.
+  function closeTo(typed, target, tolerance, sf) {
+    const tol = typeof tolerance === 'number' ? tolerance : 0.02;
+    if (Math.abs(typed - target) <= tol * Math.abs(target) + 1e-300) return true;
+    if (sf >= 2 && typed !== 0 && Math.sign(typed) === Math.sign(target)) {
+      const halfStep = 0.5 * Math.pow(10, Math.floor(Math.log10(Math.abs(typed))) - sf + 1);
+      return Math.abs(typed - target) <= halfStep * (1 + 1e-9);
+    }
+    return false;
+  }
+
+  // Reads what a student typed: "0.047", "4.7e-2", "4.7×10^-2", "4.7 x 10-2", "4.7×10⁻²",
+  // "12 000", "12,000" or "2,5" (decimal comma). Returns { value, sf } or null.
+  function parseNumber(text) {
+    const sup = { '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9', '⁻': '-', '⁺': '+' };
+    let t = String(text).trim()
+      .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+/g, (m) => '^' + [...m].map((c) => sup[c]).join(''))
+      .replace(/[−–]/g, '-')
+      .replace(/\s+/g, '')
+      .replace(/[×xX*·]/g, 'x');
+    const power = t.match(/^([+-]?)10\^\(?\{?([+-]?\d+)\}?\)?$/);
+    if (power) return { value: Number(power[1] + '1') * Math.pow(10, Number(power[2])), sf: 1 };
+    let mant = t;
+    let exp = 0;
+    const sci = t.match(/^(.*?)(?:[eE]([+-]?\d+)|x10\^?\(?\{?([+-]?\d+)\}?\)?)$/);
+    if (sci) { mant = sci[1] === '' ? '1' : sci[1]; exp = Number(sci[2] !== undefined ? sci[2] : sci[3]); }
+    if (/^[+-]?\d{1,3}(,\d{3})+(\.\d+)?$/.test(mant)) mant = mant.replace(/,/g, '');
+    else if (/^[+-]?\d*,\d+$/.test(mant)) mant = mant.replace(',', '.');
+    if (!/^[+-]?(\d+\.?\d*|\.\d+)$/.test(mant)) return null;
+    const value = Number(mant) * Math.pow(10, exp);
+    if (!isFinite(value)) return null;
+    // Significant figures: ignore the sign and leading zeros; trailing zeros only count after a decimal point.
+    let digits = mant.replace(/^[+-]/, '');
+    const hasPoint = digits.includes('.');
+    digits = digits.replace('.', '').replace(/^0+/, '');
+    if (!hasPoint) digits = digits.replace(/0+$/, '');
+    return { value, sf: Math.max(digits.length, 1) };
   }
 
   // ----- Progress summary -----
