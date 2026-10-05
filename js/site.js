@@ -372,6 +372,17 @@ window.CONSTANTS = {
   const hlTag = '<span class="tag hl">HL only</span>';
   const hlExtraTag = '<span class="tag hl">+ HL extra</span>';
 
+  // ----- "Skip to content" link: hidden until a keyboard user presses Tab -----
+  const mainEl = document.querySelector('main');
+  if (mainEl) {
+    if (!mainEl.id) mainEl.id = 'main';
+    const skip = document.createElement('a');
+    skip.className = 'skip-link';
+    skip.href = '#' + mainEl.id;
+    skip.textContent = 'Skip to content';
+    body.prepend(skip);
+  }
+
   // ----- Header and menu -----
   const links = [
     ['themes', 'themes/index.html', 'Themes'],
@@ -531,6 +542,9 @@ window.CONSTANTS = {
     e.preventDefault();
     target.scrollIntoView();
     history.replaceState(null, '', '#' + id);
+    // Move the keyboard focus too, so Tab carries on from the section the student jumped to.
+    if (!target.matches('a[href], button, input, select, textarea, summary') && !target.hasAttribute('tabindex')) target.tabIndex = -1;
+    target.focus({ preventScroll: true });
   });
 
   // ----- "Σ Equations" button and panel (topic pages and the question bank) -----

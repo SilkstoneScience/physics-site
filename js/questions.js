@@ -50,6 +50,7 @@
 
   async function init() {
     setUpBackLink();
+    announce(''); // create the screen-reader message area early, so later messages are read
     viewSel.value = loadView();
     // Each file loads on its own, so one broken file doesn't stop the others,
     // and a question with missing pieces is left out instead of breaking the page.
@@ -238,7 +239,15 @@
     current = i;
     render(false);
     // Bring the question into view if the student had scrolled down.
-    if (listEl.getBoundingClientRect().top < 0) listEl.scrollIntoView({ behavior: 'smooth' });
+    const reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (listEl.getBoundingClientRect().top < 0) listEl.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+  // Moves to another question and puts the keyboard focus where the student expects it:
+  // on the same Previous/Next button, or on "Question n of m" for the "Next question" button.
+  function goToAndFocus(i, selector) {
+    goTo(i);
+    const btn = selector && listEl.querySelector(selector);
+    if (btn && !btn.disabled) btn.focus(); else focusIn(listEl, '.q-count');
   }
 
   function buildNav() {
@@ -248,8 +257,8 @@
       <button class="secondary" data-go="prev" ${current === 0 ? 'disabled' : ''}>← Previous</button>
       <span class="q-count">Question ${current + 1} of ${shown.length}</span>
       <button class="secondary" data-go="next" ${current === shown.length - 1 ? 'disabled' : ''}>Next →</button>`;
-    nav.querySelector('[data-go="prev"]').addEventListener('click', () => goTo(current - 1));
-    nav.querySelector('[data-go="next"]').addEventListener('click', () => goTo(current + 1));
+    nav.querySelector('[data-go="prev"]').addEventListener('click', () => goToAndFocus(current - 1, '[data-go="prev"]'));
+    nav.querySelector('[data-go="next"]').addEventListener('click', () => goToAndFocus(current + 1, '[data-go="next"]'));
     return nav;
   }
 
@@ -264,9 +273,9 @@
   }
   function wireNextButtons(area) {
     const next = area.querySelector('[data-action="next"]');
-    if (next) next.addEventListener('click', () => goTo(current + 1));
+    if (next) next.addEventListener('click', () => goToAndFocus(current + 1));
     const first = area.querySelector('[data-action="first"]');
-    if (first) first.addEventListener('click', () => goTo(0));
+    if (first) first.addEventListener('click', () => goToAndFocus(0));
   }
 
   // Redraws one question's card and returns the new card element.
@@ -363,13 +372,14 @@
       const choice = Number(btn.dataset.i);
       progress[q.id] = { choice, correct: choice === q.answer, time: Date.now() };
       saveProgress();
-      refreshCard(q, card);
+      // Moving focus to the feedback keeps keyboard users in place and makes screen readers read it.
+      focusIn(refreshCard(q, card), '.feedback');
     }));
     const retry = area.querySelector('[data-action="retry"]');
     if (retry) retry.addEventListener('click', () => {
       delete progress[q.id];
       saveProgress();
-      refreshCard(q, card);
+      focusIn(refreshCard(q, card), '.option');
     });
     wireNextButtons(area);
   }
@@ -397,7 +407,7 @@
         <div class="part" data-part="${pt.label}">
           <p><span class="part-label">(${pt.label})</span>${pt.question}
              <span class="marks">[${pt.marks}]</span></p>
-          ${pt.numeric ? numericHtml(pt, s) : `<textarea rows="3" placeholder="Write your answer here, then check the mark scheme.">${escapeHtml(s.answer || '')}</textarea>`}
+          ${pt.numeric ? numericHtml(pt, s) : `<textarea rows="3" aria-label="Your answer to part (${pt.label})" placeholder="Write your answer here, then check the mark scheme.">${escapeHtml(s.answer || '')}</textarea>`}
           ${s.revealed ? `
             <div class="markscheme">
               <strong>Mark scheme</strong>
@@ -428,9 +438,16 @@
           if (res.status === 'right') { st.score = pt.marks; st.revealed = true; st.auto = true; }
           saveProgress();
           const fresh = refreshCard(q, card);
-          // After a wrong answer, put the cursor back in the box so the student can try again.
+          // After a wrong answer, put the cursor back in the box so the student can try again,
+          // and have screen readers read the feedback. After a right one, go to the feedback.
           const again = fresh && fresh.querySelector(`[data-part="${label}"] input:not(:disabled)`);
-          if (again) again.focus();
+          if (again) {
+            again.focus();
+            const fb = fresh.querySelector(`[data-part="${label}"] .feedback`);
+            if (fb) announce(fb.textContent);
+          } else {
+            focusIn(fresh, `[data-part="${label}"] .feedback`);
+          }
         };
         const btn = partEl.querySelector('[data-action="check"]');
         if (btn) btn.addEventListener('click', check);
@@ -440,20 +457,20 @@
       if (reveal) reveal.addEventListener('click', () => {
         partState(q, label).revealed = true;
         saveProgress();
-        refreshCard(q, card);
+        focusIn(refreshCard(q, card), `[data-part="${label}"] .markscheme`);
       });
       const select = partEl.querySelector('.markscheme select');
       if (select) select.addEventListener('change', () => {
         const st = partState(q, label);
         if (select.value === '') delete st.score; else st.score = Number(select.value);
         saveProgress();
-        refreshCard(q, card);
+        focusIn(refreshCard(q, card), `[data-part="${label}"] .markscheme select`);
       });
     });
     area.querySelector('[data-action="clear"]').addEventListener('click', () => {
       delete progress[q.id];
       saveProgress();
-      refreshCard(q, card);
+      focusIn(refreshCard(q, card), 'textarea, input');
     });
     wireNextButtons(area);
   }
@@ -515,6 +532,28 @@
   function escapeAttr(s) {
     return escapeHtml(s).replace(/"/g, '&quot;');
   }
+  // Puts the keyboard focus on the first match inside `container` (making it focusable if needed).
+  // Screen readers read out whatever receives focus.
+  function focusIn(container, selector) {
+    const el = container && container.querySelector(selector);
+    if (!el) return;
+    if (!el.matches('a[href], button, input, select, textarea') && !el.hasAttribute('tabindex')) el.tabIndex = -1;
+    el.focus();
+  }
+  // Has screen readers read a message without moving the focus (a hidden "live region").
+  function announce(text) {
+    let live = document.getElementById('q-announce');
+    if (!live) {
+      live = document.createElement('p');
+      live.id = 'q-announce';
+      live.className = 'visually-hidden';
+      live.setAttribute('aria-live', 'polite');
+      document.querySelector('main').appendChild(live);
+    }
+    live.textContent = '';
+    setTimeout(() => { live.textContent = text.replace(/\s+/g, ' ').trim(); }, 50);
+  }
+
   // Ask MathJax to draw the equations inside an element (if MathJax has loaded yet;
   // if not, MathJax draws the whole page itself when it finishes loading).
   function typeset(el) {
