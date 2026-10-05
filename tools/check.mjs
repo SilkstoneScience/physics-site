@@ -144,6 +144,7 @@ function htmlFiles(dir = '') {
   });
 }
 const pages = htmlFiles();
+const mathjaxVersions = new Map(); // version -> pages using it
 const idsCache = new Map();
 function idsIn(rel) {
   if (!idsCache.has(rel)) idsCache.set(rel, new Set([...read(rel).matchAll(/\sid="([^"]+)"/g)].map((m) => m[1])));
@@ -161,6 +162,11 @@ for (const page of pages) {
   const root = (html.match(/<body[^>]*data-root="([^"]*)"/) || [])[1];
   if (root === undefined) err(page, '<body> has no data-root');
   else if (root !== '../'.repeat(depth)) err(page, `data-root should be "${'../'.repeat(depth)}", not "${root}"`);
+  // MathJax must be pinned to one exact version everywhere (e.g. mathjax@4.1.3), so a new release can't change pages unannounced.
+  for (const m of html.matchAll(/npm\/mathjax@([^/"]+)\//g)) {
+    if (!/^\d+\.\d+\.\d+$/.test(m[1])) err(page, `MathJax version "${m[1]}" isn't pinned: use an exact version such as 4.1.3`);
+    mathjaxVersions.set(m[1], [...(mathjaxVersions.get(m[1]) || []), page]);
+  }
   for (const m of html.matchAll(/<img\b[^>]*>/g)) if (!/\salt="/.test(m[0])) err(page, `image without alt text: ${m[0].slice(0, 80)}`);
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
   for (const id of new Set(ids.filter((x, i) => ids.indexOf(x) !== i))) err(page, `id="${id}" is used more than once`);
@@ -181,6 +187,10 @@ for (const page of pages) {
       if (p.get('q') && !questionIds.has(p.get('q'))) err(page, `question link to unknown question: ${link}`);
     }
   }
+}
+
+if (mathjaxVersions.size > 1) {
+  err('pages', 'different MathJax versions are used: ' + [...mathjaxVersions].map(([v, p]) => `${v} (${p.length} page${p.length === 1 ? '' : 's'}, e.g. ${p[0]})`).join(', '));
 }
 
 // ---------- 4. Marking of typed numerical answers ----------
