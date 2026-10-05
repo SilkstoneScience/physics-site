@@ -51,15 +51,34 @@
   async function init() {
     setUpBackLink();
     viewSel.value = loadView();
+    // Each file loads on its own, so one broken file doesn't stop the others,
+    // and a question with missing pieces is left out instead of breaking the page.
+    let failedFiles = [];
+    let skipped = 0;
     try {
       const index = await getJSON('questions/index.json');
-      const sets = await Promise.all(index.files.map((file) => getJSON('questions/' + file)));
-      questions = sets.flat();
+      const results = await Promise.allSettled(index.files.map((file) => getJSON('questions/' + file)));
+      results.forEach((r, i) => {
+        if (r.status === 'fulfilled' && Array.isArray(r.value)) questions.push(...r.value);
+        else { failedFiles.push(index.files[i]); console.error(index.files[i], r.reason || 'not a list of questions'); }
+      });
+      const usable = questions.filter(isUsable);
+      skipped = questions.length - usable.length;
+      questions = usable;
     } catch (err) {
       console.error(err);
+    }
+    if (!questions.length) {
       listEl.innerHTML = `<p class="notice">Sorry, the questions could not be loaded.
         (If you opened this page straight from your computer, use the preview server instead.)</p>`;
+      summaryEl.textContent = '';
       return;
+    }
+    if (failedFiles.length || skipped) {
+      const note = document.createElement('p');
+      note.className = 'notice';
+      note.textContent = 'Some questions could not be loaded, so they are missing from the list below. Everything else works as normal.';
+      listEl.before(note);
     }
     fillThemeFilter();
     applyUrlParams();
@@ -69,6 +88,18 @@
     document.getElementById('q-reset').addEventListener('click', resetProgress);
     document.addEventListener('keydown', onKey);
     render(true);
+  }
+
+  // True if a question has everything needed to show and mark it.
+  // (tools/check.mjs checks the files much more thoroughly before they are published.)
+  function isUsable(q) {
+    const ok = q && typeof q.id === 'string' && typeof q.topic === 'string' && typeof q.stem === 'string' && (
+      q.paper === '1A'
+        ? Array.isArray(q.options) && q.options.length >= 2 && Number.isInteger(q.answer) && q.answer >= 0 && q.answer < q.options.length
+        : Array.isArray(q.parts) && q.parts.length > 0 && q.parts.every((pt) =>
+          pt && pt.label && Number.isInteger(pt.marks) && pt.marks > 0 && Array.isArray(pt.markscheme)));
+    if (!ok) console.error('Question left out because it is incomplete:', q && q.id);
+    return ok;
   }
 
   // ----- "Back" link: returns to the page the student came from -----
@@ -270,7 +301,20 @@
     return '';
   }
 
+  // If a question still fails to draw, show a short note in its place instead of breaking the page.
   function buildCard(q) {
+    try {
+      return buildCardInner(q);
+    } catch (err) {
+      console.error('Could not show question', q.id, err);
+      const card = document.createElement('article');
+      card.className = 'question';
+      card.innerHTML = '<p class="notice">Sorry, this question could not be shown. Please try the next one.</p>';
+      return card;
+    }
+  }
+
+  function buildCardInner(q) {
     const card = document.createElement('article');
     card.className = 'question';
     card.dataset.theme = q.theme;
