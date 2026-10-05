@@ -76,6 +76,26 @@ export default [
       return s.replace(new RegExp(`<line class="wire" x1="[\\d.]+" y1="[\\d.]+" x2="${x}" y2="${y}"/>`), '');
     }) },
 
+  // ----- Physics model -----
+  // The audit's E3 error: counts over an interval modelled as the count RATE at one instant.
+  // The rate law gives s⁻¹ but the column is a number of counts, so units refuse it.
+  { name: 'counts modelled as an instantaneous rate (the audit\'s E3 error)', expect: 'physics-units',
+    def: { ...E3, columns: { ...E3.columns, N: { ...E3.columns.N, model: { law: 'count-rate', inputs: { R0: 'p.R0', t: 'row.t', T: 'p.T' } } } } } },
+  { name: 'model written as a formula instead of a vetted law', expect: 'physics-meta',
+    def: { ...D3, columns: { ...D3.columns, m: { ...D3.columns.m, model: (row, p) => p.B * row.I } } } },
+  { name: 'model input with the wrong unit (current used as the field)', expect: 'physics-units',
+    def: { ...D3, columns: { ...D3.columns, m: { ...D3.columns.m, model: { law: 'balance-reading', inputs: { F: { law: 'force-on-wire', inputs: { B: 'row.I', I: 'row.I', L: 'p.L' } }, g: 'p.g' } } } } } },
+  { name: 'analysis formula that isn\'t the inverse of the model (forgets ×g)', expect: 'physics-inversion',
+    def: { ...D3, results: { ...D3.results, B: { ...D3.results.B, value: (d) => (d.r.gradient.value * 1e-3) / d.p.L } } } },
+  { name: 'implausible parameter (a 5 T school magnet)', expect: 'physics-range',
+    def: { ...D3, physics: { ...D3.physics, params: { ...D3.physics.params, B: { ...D3.physics.params.B, value: 5 } } } } },
+  { name: 'model gives values outside the expected magnitude', expect: 'physics-magnitude',
+    def: { ...B5, columns: { ...B5.columns, V: { ...B5.columns.V, expect: [5, 10] } } } },
+  { name: 'no stated cause for the random scatter', expect: 'physics-meta',
+    def: { ...B5, columns: { ...B5.columns, V: { ...B5.columns.V, measurement: { instrument: 'voltmeter', reading: 'V' } } } } },
+  { name: 'assumptions not stated', expect: 'physics-meta',
+    def: { ...B5, physics: { ...B5.physics, assumptions: [] } } },
+
   // ----- Identity and level -----
   { name: 'Paper 1B dataset on an HL-only topic', expect: 'level-topic', def: { ...D3, id: 'A4-B01', topic: 'A.4' } },
 ];

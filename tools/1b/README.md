@@ -19,6 +19,7 @@ questions/1b.json              generated: never edit by hand (the checker would 
 |---|---|
 | `node tools/1b/build.mjs` | Generates and validates every dataset. Writes `questions/1b.json` only if there are no errors. |
 | `node tools/1b/build.mjs --report` | The same, and prints each dataset's fit and results (useful while writing one). |
+| `node tools/1b/build.mjs --audit` | The same, and prints each dataset's physics (scenario, principles, assumptions, derivation, laws, parameters, measurement models, expected magnitudes, and the noise-free check) for the teacher to review. |
 | `node tools/1b/test.mjs` | Runs the generator/validator tests, including the deliberately broken datasets. |
 | `node tools/check.mjs` | The whole-site checker: also runs the two above and fails if `1b.json` is out of date. |
 
@@ -26,6 +27,7 @@ questions/1b.json              generated: never edit by hand (the checker would 
 
 | File | Job |
 |---|---|
+| `laws.mjs` | **Vetted physics laws**: each with SI units, hand-worked reference values and limiting cases (all tested, including dimensional consistency). Every dataset's model is built from these. |
 | `lib.mjs` | Seeded random numbers, rounding, significant figures, units, line fits, max/min gradient lines |
 | `generate.mjs` | Model → measurements (seeded noise, rounded to the instrument) → derived columns → fits → results → table/graph/question |
 | `graph.mjs` | Draws graphs from the data (axes, grid, points, error bars, fit lines/curves) |
@@ -43,20 +45,30 @@ Copy the closest existing dataset and change it. The parts, in order:
    The seed fixes the "random" scatter: the same seed always gives the same data. Changing it gives a new
    version of the experiment. **Never change the seed or the id of a published dataset**: students' saved
    answers would no longer match the data.
-2. **Physics model**: `params` (SI units) and, for each measured column, `model: (row, p) => …`.
+2. **Physics model** (required, and written out by `--audit` for the teacher to check): a `physics` block with
+   `scenario`, `principles`, `assumptions`, `derivation` (the steps from the principles to the relationship),
+   `relationship`, and `params`, each `{ value, unit, range: [min, max] for a real experiment, note }`.
    `vectors` (x right, y up, z out of the page) when a diagram shows directions; `['cross', 'I', 'B']` works out I × B.
    `circuit` (a netlist) when a diagram shows a circuit.
+   **Models are built only from vetted laws** in `laws.mjs`, never from a formula typed into the dataset:
+   `model: { law: 'force-on-wire', inputs: { B: 'p.B', I: 'row.I', L: 'p.L' } }`, where inputs are parameters (`p.`),
+   columns (`row.`), single readings (`s.`), fixed values (`{ value, unit }`) or another law. Units are converted and
+   checked at every step, so a quantity with the wrong unit (for example a count *rate* where a *count* is needed)
+   is refused. If the physics needs a law that isn't there, add it to `laws.mjs` with reference values and limiting cases.
 3. **Measurements**: `columns`, each `kind: 'set'` (the independent variable, with `values`), `'measured'`
-   (with `model`, `noise`, `resolution`, `uncertainty`, optional `anomaly`) or `'derived'` (calculated from the
-   other columns, with `value` and `dp`). An uncertainty is a number (the same for every row), a function
-   (for example √N), or `null`. `hide: [row]` leaves a calculated cell for students to fill in.
-   `singles` are single readings such as a background count.
+   (with `model`, `expect: [min, max]` expected magnitude, `measurement: { instrument, reading, noise }` saying how the
+   reading is made and what physically causes its scatter, `noise`, `resolution`, `uncertainty`, optional `anomaly`)
+   or `'derived'` (calculated from the other columns, with `value` and `dp`). An uncertainty is a number (the same for
+   every row), a function (for example √N), or `null`. `hide: [row]` leaves a calculated cell for students to fill in.
+   `singles` are single readings such as a background count (same fields as a measured column).
 4. **Graph**: `graph: { x, y, fit: 'linear' | 'exponential', band: true (max/min lines), exclude: [anomaly rows],
    omit: [rows students plot themselves], zero: { x, y } }`.
 5. **Results**: every number an answer needs, each worked out from `d` (the data): `d.fit`, `d.band`,
    `d.rows`, `d.r` (earlier results). Give a `unit`, the `dims` it should have (for example `{ of: 'y/x' }`
    for a gradient), and `check: 'gradient' | 'minusGradient' | 'intercept' | 'halfLife'` so the validator
    compares it with its own fit. Use `range` for answers read from a graph (`d.widen(d.gradientRange(), v, 0.04)`).
+   A result that measures a model parameter says so with `estimates: 'B'`: run on noise-free data, it must give
+   back exactly that parameter, which proves the analysis is the true inverse of the physics model.
 6. **Claims**: what the questions say is true (`linear`, `throughOrigin`, `agrees`, `anomaly`, `trend`).
    The validator checks each one against the data, so a question can't claim something the data don't show.
 7. **Presentation**: `figures` (diagrams), `intro` (the question text), and `parts`. In parts, write every
@@ -69,6 +81,14 @@ at 375 px and in dark mode, and get the teacher's approval before it goes live.
 ## What the validator checks
 
 - **Identity**: id pattern, topic exists and is not HL-only, level `SL_HL`, marks.
+- **Physics**: the physics block is complete; parameters are in their plausible ranges; every model is built from
+  vetted laws with consistent units; noise-free model values are in the expected magnitude range; every measured
+  quantity says how it is measured and what causes its scatter; and each result marked `estimates` recovers its
+  parameter from noise-free data (within 0.5 %). The laws themselves are tested in `test.mjs` (reference values,
+  limiting cases, dimensional consistency).
+- **What it still can't check**: whether the *chosen* law and measurement model describe the experiment in the
+  question text, and whether the wording and reasoning are good. That needs a person: read the `--audit` report
+  alongside the question.
 - **Table**: headings show `symbol / unit ± uncertainty`; every value has the column's decimal places and is a
   reading the instrument can show; measured values are within 5 standard deviations of the model (catches typing
   errors) unless marked as the anomaly; calculated columns match their inputs; uncertainties follow their rule,

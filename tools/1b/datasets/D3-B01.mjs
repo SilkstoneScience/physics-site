@@ -16,9 +16,33 @@ export default {
   skills: ['force-direction', 'gradient', 'proportionality', 'uncertainty-propagation'],
   seed: 7,
 
-  // ----- 1. Physics model (SI units) -----
-  // The balance reading changes by F/g; the column is in grams.
-  params: { B: 0.064, L: 0.050, g: 9.8 },
+  // ----- 1. Physics model -----
+  physics: {
+    scenario: 'A magnet stands on a top-pan balance. A straight, stiff wire of length L, held by a clamp so that it cannot move, '
+      + 'runs between the poles at right angles to the magnetic field. With a current I in the wire, the balance reading changes by Δm.',
+    principles: [
+      'Force on a current-carrying conductor in a magnetic field: F = BIL sin θ, in the direction of IL × B (D.3)',
+      'Newton\'s third law: the wire exerts an equal and opposite force on the magnet',
+      'A top-pan balance shows the normal force divided by g, as a mass',
+    ],
+    assumptions: [
+      'The field is uniform along the length L of wire between the poles and zero outside it (fringing neglected)',
+      'The wire is at right angles to the field (θ = 90°)',
+      'Forces on the supply leads are negligible',
+      'The balance is zeroed with no current, and there is no drift, heating or convection',
+    ],
+    derivation: [
+      'Force on the wire: F = BIL (θ = 90°). With I out of the page and B to the right, IL × B points up',
+      'Newton\'s third law: the wire pushes the magnet down with force F, so the balance reading increases',
+      'Change in reading: Δm = F/g = BIL/g, so Δm ∝ I with gradient BL/g; B = gradient × g / L',
+    ],
+    relationship: 'Δm = (BL/g) I',
+    params: {
+      B: { value: 0.064, unit: 'T', range: [0.02, 0.2], note: 'school magnet set on a steel yoke' },
+      L: { value: 0.05, unit: 'm', range: [0.02, 0.1], note: 'length of wire between the poles, stated as (5.0 ± 0.2) cm' },
+      g: { value: 9.8, unit: 'm s^-2', range: [9.8, 9.8], note: 'data booklet value' },
+    },
+  },
   // Directions (x to the right, y up, z out of the page). F is worked out as I × B.
   vectors: { B: [1, 0, 0], I: [0, 0, 1], F: ['cross', 'I', 'B'] },
 
@@ -27,8 +51,14 @@ export default {
     I: { kind: 'set', name: 'current', symbol: 'I', unit: 'A', values: [0.5, 1.0, 1.5, 2.0, 2.5, 3.0], resolution: 0.01, uncertainty: 0.01 },
     m: {
       kind: 'measured', name: 'change in reading', symbol: '\\Delta m', symbolText: 'Δm', unit: 'g',
-      model: (row, p) => ((p.B * row.I * p.L) / p.g) * 1000,
-      noise: { type: 'gauss', sd: 0.007 }, resolution: 0.01, uncertainty: 0.02, // the reading flickers by about ±0.02 g
+      model: { law: 'balance-reading', inputs: { F: { law: 'force-on-wire', inputs: { B: 'p.B', I: 'row.I', L: 'p.L' } }, g: 'p.g' } },
+      expect: [0.1, 2],
+      measurement: {
+        instrument: 'top-pan balance, resolution 0.01 g',
+        reading: 'change in the reading after the current is switched on (the balance was zeroed with no current)',
+        noise: 'the reading flickers by about ±0.02 g because of air currents and vibration: modelled as normal scatter with standard deviation 0.007 g',
+      },
+      noise: { type: 'gauss', sd: 0.007 }, resolution: 0.01, uncertainty: 0.02,
     },
   },
   graph: { x: 'I', y: 'm', fit: 'linear', band: true, zero: { x: true, y: true } },
@@ -41,7 +71,7 @@ export default {
       range: (d, v) => d.widen(d.gradientRange(), v, 0.04),
     },
     B: {
-      unit: 'T', dims: { of: 'y/x', times: 'm s^-2 m^-1' },
+      unit: 'T', dims: { of: 'y/x', times: 'm s^-2 m^-1' }, estimates: 'B',
       value: (d) => (d.r.gradient.value * 1e-3 * d.p.g) / d.p.L,
       range: (d) => d.r.gradient.range.map((m) => (m * 1e-3 * d.p.g) / d.p.L),
     },

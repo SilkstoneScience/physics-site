@@ -29,7 +29,30 @@ export default {
   seed: 3,
 
   // ----- 1. Physics model -----
-  params: { emf: 1.52, r: 0.75 },
+  physics: {
+    scenario: 'A cell with emf ε and internal resistance r is connected in series with an ammeter and a variable resistor R. '
+      + 'A voltmeter measures the potential difference V across the cell\'s terminals as R is changed.',
+    principles: [
+      'Conservation of energy around the circuit (Kirchhoff\'s voltage law): ε = I(R + r) (B.5)',
+      'The terminal potential difference is the p.d. across the external resistance: V = IR',
+      'Conservation of charge: with an ideal voltmeter, the ammeter current is the cell current',
+    ],
+    assumptions: [
+      'ε and r stay constant during the experiment (no heating or running down between readings)',
+      'Ideal meters: the ammeter has no resistance and the voltmeter draws no current',
+      'The resistance of the connecting wires is negligible',
+    ],
+    derivation: [
+      'ε = I(R + r) = IR + Ir',
+      'V = IR, so V = ε − Ir',
+      'A graph of V against I is a straight line with gradient −r and intercept ε on the V axis',
+    ],
+    relationship: 'V = ε − Ir',
+    params: {
+      emf: { value: 1.52, unit: 'V', range: [1.2, 1.7], note: 'a 1.5 V cell' },
+      r: { value: 0.75, unit: 'Ω', range: [0.05, 2], note: 'a zinc–carbon or partly used cell' },
+    },
+  },
   circuit: { components: COMPONENTS, figure: 'diagram' },
 
   // ----- 2. Measurements -----
@@ -37,7 +60,13 @@ export default {
     I: { kind: 'set', name: 'current', symbol: 'I', unit: 'A', values: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8], resolution: 0.01, uncertainty: 0.01 },
     V: {
       kind: 'measured', name: 'terminal p.d.', symbol: 'V', unit: 'V',
-      model: (row, p) => p.emf - row.I * p.r,
+      model: { law: 'terminal-pd', inputs: { emf: 'p.emf', I: 'row.I', r: 'p.r' } },
+      expect: [0.5, 1.7],
+      measurement: {
+        instrument: 'digital voltmeter, resolution 0.01 V',
+        reading: 'p.d. across the cell\'s terminals once the current has been set',
+        noise: 'the last digit fluctuates slightly as contact resistance at the cell terminals changes: modelled as normal scatter with standard deviation 0.004 V',
+      },
       noise: { type: 'gauss', sd: 0.004 }, resolution: 0.01, uncertainty: 0.01,
       anomaly: { row: 4, shift: -0.1 },
     },
@@ -47,12 +76,12 @@ export default {
   // ----- 3. Results -----
   results: {
     emf: {
-      unit: 'V', dims: { of: 'y' }, check: 'intercept',
+      unit: 'V', dims: { of: 'y' }, check: 'intercept', estimates: 'emf',
       value: (d) => d.fit.c,
       range: (d, v) => d.widen(d.interceptRange(), v, 0.01),
     },
     r: {
-      unit: 'Ω', dims: { of: 'y/x' }, check: 'minusGradient',
+      unit: 'Ω', dims: { of: 'y/x' }, check: 'minusGradient', estimates: 'r',
       value: (d) => -d.fit.m,
       range: (d, v) => { const g = d.gradientRange(); return d.widen(g && [-g[1], -g[0]], v, 0.05); },
     },

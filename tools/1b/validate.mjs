@@ -7,7 +7,8 @@ import {
   parseNum, dpOf, sigFigsIn, onGrid, roundTo, fmtNum, sigFig, parseUnit, sameDim, addDim,
   linearFit, stripTags, cross, decimalsOf,
 } from './lib.mjs';
-import { generateRows, makeContext, uncertaintyOf, columnDp } from './generate.mjs';
+import { generateRows, makeContext, uncertaintyOf, columnDp, paramValues, modelValue, evalModel } from './generate.mjs';
+import { LAWS } from './laws.mjs';
 import { createRequire } from 'node:module';
 
 const { checkNumeric } = createRequire(import.meta.url)('../../js/numeric.js');
@@ -42,8 +43,11 @@ function run(def, q, topics, fail, warn) {
   const marks = (q.parts || []).reduce((s, pt) => s + (pt.marks || 0), 0);
   if (marks < 4 || marks > 12) warn('meta', 'marks', `${marks} marks in total; IB Paper 1B questions are usually 6–10`);
 
+  // ---------- 1b. The physics model (stops here if it is unusable) ----------
+  if (!checkPhysics(def, fail)) return;
+
   // ---------- 2. The table, read back cell by cell ----------
-  const p = def.params || {};
+  const p = paramValues(def);
   const gen = generateRows(def);
   const table = (q.data || []).find((x) => x.kind === 'table');
   if (!table) { fail('table-header', 'table', 'no data table'); return; }
@@ -106,7 +110,7 @@ function run(def, q, topics, fail, warn) {
       }
       if (c.kind === 'measured') {
         if (!onGrid(v, c.resolution)) fail('table-dp', where, `"${cell.text}" isn't a reading the instrument can show (resolution ${c.resolution})`);
-        const model = c.model(row, p, gen.singles);
+        const model = modelValue(def, c, { params: p, row, singles: gen.singles }, `column ${k}`);
         const noise = c.noise || {};
         const tol = noise.type === 'gauss' ? 5 * noise.sd + c.resolution : noise.type === 'poisson' ? 5 * Math.sqrt(model) + 1 : c.resolution;
         const isAnomaly = c.anomaly && c.anomaly.row === i;
@@ -264,6 +268,79 @@ function run(def, q, topics, fail, warn) {
   // ---------- 7. Diagrams and all SVG ----------
   for (const fig of figures) checkSvg(fig, def, fail);
   if (def.circuit) checkCircuit(def, figures.find((f) => f.figure === (def.circuit.figure || 'diagram')), fail);
+}
+
+// ---------- The physics model ----------
+// The model must be stated explicitly (scenario, principles, assumptions, derivation, relationship),
+// built only from vetted laws with units checked at every step, use plausible parameter values,
+// give the expected magnitudes, and each result that estimates a parameter must recover that
+// parameter exactly from noise-free data (so the analysis really is the inverse of the physics).
+const isText = (s) => typeof s === 'string' && s.trim().length > 0;
+const isList = (a) => Array.isArray(a) && a.length > 0 && a.every(isText);
+
+function checkPhysics(def, fail) {
+  const ph = def.physics;
+  let ok = true;
+  const bad = (code, where, message, extra) => { ok = false; fail(code, where, message, extra); };
+  if (!ph) { bad('physics-meta', 'physics', 'the dataset needs a "physics" block (see tools/1b/README.md)'); return false; }
+  if (!isText(ph.scenario)) bad('physics-meta', 'physics.scenario', 'describe the physical situation');
+  for (const k of ['principles', 'assumptions', 'derivation']) if (!isList(ph[k])) bad('physics-meta', `physics.${k}`, `list the ${k} (at least one, as text)`);
+  if (!isText(ph.relationship)) bad('physics-meta', 'physics.relationship', 'state the relationship the data should follow');
+  for (const [k, prm] of Object.entries(ph.params || {})) {
+    const where = `physics.params.${k}`;
+    if (!prm || !Number.isFinite(prm.value)) { bad('physics-meta', where, 'needs a numerical value'); continue; }
+    try { parseUnit(prm.unit || ''); } catch (e) { bad('physics-units', where, e.message); }
+    if (!Array.isArray(prm.range) || prm.range.length !== 2) bad('physics-meta', where, 'needs a plausible range [min, max] for a real experiment');
+    else if (prm.value < prm.range[0] || prm.value > prm.range[1]) fail('physics-range', where, `value ${prm.value} ${prm.unit} is outside the plausible range`, { expected: `${prm.range[0]} to ${prm.range[1]} ${prm.unit}`, got: prm.value });
+  }
+  const measured = [
+    ...Object.entries(def.columns).filter(([, c]) => c.kind === 'measured').map(([k, c]) => [`column ${k}`, c]),
+    ...Object.entries(def.singles || {}).map(([k, s]) => [`single ${k}`, s]),
+  ];
+  for (const [where, c] of measured) {
+    const m = c.measurement || {};
+    if (!isText(m.instrument) || !isText(m.reading) || !isText(m.noise)) {
+      bad('physics-meta', `${where}.measurement`, 'say which instrument is used, how the reading is formed, and what physically causes its scatter (instrument, reading, noise)');
+    }
+    if (c.noise && c.noise.type && !isText(m.noise)) bad('physics-meta', `${where}.measurement.noise`, 'random scatter must have a stated physical cause');
+    if (!Array.isArray(c.expect) || c.expect.length !== 2) bad('physics-meta', `${where}.expect`, 'give the expected range of values [min, max] (expected magnitude), in the column\'s unit');
+    if (!c.model || !c.model.law) bad('physics-meta', `${where}.model`, 'the model must be built from a vetted law in laws.mjs ({ law, inputs })');
+  }
+  if (!ok) return false;
+
+  // Evaluate the model on noise-free data: units, magnitude, and the analysis recovering the parameters.
+  // (Only an unusable model stops validation; a wrong magnitude, range or inversion is reported and the other checks still run.)
+  let ideal;
+  try {
+    ideal = generateRows(def, { ideal: true });
+  } catch (e) {
+    fail(e.code || 'physics-units', 'physics model', e.message);
+    return false;
+  }
+  for (const [where, c] of measured) {
+    const key = where.split(' ')[1];
+    const vals = where.startsWith('single') ? [ideal.singles[key]] : ideal.rows.map((r) => r[key]);
+    const [lo, hi] = c.expect;
+    const out = vals.filter((v) => v < lo || v > hi);
+    if (out.length) fail('physics-magnitude', where, 'the model gives values outside the expected magnitude: check the parameters and units', { expected: `${lo} to ${hi} ${c.unit || ''}`.trim(), got: out.map((v) => sigFig(v, 3)).join(', ') });
+  }
+  try {
+    const d = makeContext(def, ideal.rows, ideal.singles);
+    const p = paramValues(def);
+    for (const [name, res] of Object.entries(def.results || {})) {
+      if (!res.estimates) continue;
+      const truth = p[res.estimates];
+      const tol = res.tolerance || 0.005;
+      if (truth === undefined) { bad('physics-meta', `result ${name}`, `estimates "${res.estimates}", which isn't a parameter`); continue; }
+      if (Math.abs(d.r[name].value - truth) > tol * Math.abs(truth)) {
+        fail('physics-inversion', `result ${name}`, `with noise-free data, the analysis should recover ${res.estimates} exactly, so the analysis formula isn't the inverse of the physics model`,
+          { expected: `${sigFig(truth, 4)} ${parseUnit(def.physics.params[res.estimates].unit).text}`.trim(), got: `${sigFig(d.r[name].value, 4)} ${parseUnit(res.unit || '').text}`.trim() });
+      }
+    }
+  } catch (e) {
+    fail('physics-inversion', 'results', `the analysis couldn't be run on noise-free data: ${e.message}`);
+  }
+  return ok;
 }
 
 // ---------- Graph reading ----------

@@ -1,13 +1,15 @@
 // Builds questions/1b.json from the dataset files in tools/1b/datasets/.
 //   node tools/1b/build.mjs            generate, validate, and write questions/1b.json if everything passes
 //   node tools/1b/build.mjs --report   also print each dataset's key values
+//   node tools/1b/build.mjs --audit    also print each dataset's physics (for a teacher to check)
 // tools/check.mjs runs the same build in memory and fails if questions/1b.json is out of date,
 // so the published file always matches the datasets exactly.
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { buildQuestion } from './generate.mjs';
+import { buildQuestion, generateRows, makeContext, paramValues } from './generate.mjs';
+import { LAWS } from './laws.mjs';
 import { validateDataset, formatDiag } from './validate.mjs';
 import { sigFig, parseUnit } from './lib.mjs';
 
@@ -58,7 +60,7 @@ export function buildAll(datasets, topics) {
       built = buildQuestion(def);
       if (JSON.stringify(buildQuestion(def).question) !== JSON.stringify(built.question)) fail('determinism', 'building twice gave different results');
     } catch (e) {
-      fail('crash', `couldn't be generated: ${e.message}`);
+      fail(e.code || 'crash', `couldn't be generated: ${e.message}`);
       continue;
     }
     const found = validateDataset(def, built.question, { topics });
@@ -69,8 +71,64 @@ export function buildAll(datasets, topics) {
   return { questions, diags, reports, json: JSON.stringify(questions, null, 2) + '\n' };
 }
 
+// --audit: each dataset's physics written out for a teacher to check: scenario, principles,
+// assumptions, derivation, the vetted laws used, parameters, measurement models, expected
+// magnitudes against the noise-free model, and whether the analysis recovers the parameters.
+function lawsIn(expr, out = new Set()) {
+  if (expr && typeof expr === 'object' && expr.law) {
+    out.add(expr.law);
+    Object.values(expr.inputs || {}).forEach((x) => lawsIn(x, out));
+  }
+  return out;
+}
+function printAudit(datasets) {
+  for (const { def } of datasets) {
+    const ph = def.physics;
+    console.log(`\n================ ${def.id} (${def.topic}) ================`);
+    if (!ph) { console.log('  NO PHYSICS BLOCK'); continue; }
+    console.log(`Scenario: ${ph.scenario}`);
+    for (const [title, list] of [['Principles', ph.principles], ['Assumptions', ph.assumptions], ['Derivation', ph.derivation]]) {
+      console.log(`${title}:`);
+      (list || []).forEach((x, i) => console.log(`  ${i + 1}. ${x}`));
+    }
+    console.log(`Relationship: ${ph.relationship}`);
+    console.log('Parameters:');
+    for (const [k, prm] of Object.entries(ph.params || {})) console.log(`  ${k} = ${prm.value} ${prm.unit}  (plausible ${prm.range.join(' to ')} ${prm.unit}; ${prm.note || ''})`);
+    const measured = [...Object.entries(def.columns).filter(([, c]) => c.kind === 'measured'), ...Object.entries(def.singles || {})];
+    const used = new Set();
+    let ideal = null;
+    try { ideal = generateRows(def, { ideal: true }); } catch (e) { console.log(`  MODEL ERROR: ${e.message}`); }
+    console.log('Measurements:');
+    for (const [k, c] of measured) {
+      lawsIn(c.model, used);
+      const m = c.measurement || {};
+      const vals = ideal ? (def.columns[k] ? ideal.rows.map((r) => r[k]) : [ideal.singles[k]]) : [];
+      console.log(`  ${k} [${parseUnit(c.unit || '').text || 'no unit'}]: ${m.instrument}; ${m.reading}`);
+      console.log(`     scatter: ${m.noise}`);
+      if (vals.length) console.log(`     noise-free model: ${sigFig(Math.min(...vals), 3)} to ${sigFig(Math.max(...vals), 3)}  (expected ${c.expect.join(' to ')})`);
+    }
+    console.log('Vetted laws used (each tested for reference values, limiting cases and units):');
+    for (const name of used) {
+      const law = LAWS[name];
+      console.log(`  ${name} (${law.syllabus}): ${law.statement}`);
+      console.log(`     limiting cases: ${law.limits.map((l) => l.name).join('; ')}`);
+    }
+    if (ideal) {
+      const d = makeContext(def, ideal.rows, ideal.singles);
+      const p = paramValues(def);
+      console.log('Analysis on noise-free data (must recover the parameters):');
+      for (const [name, res] of Object.entries(def.results || {})) {
+        if (res.estimates) console.log(`  ${name} = ${sigFig(d.r[name].value, 5)} ${parseUnit(res.unit || '').text}; model ${res.estimates} = ${p[res.estimates]}`);
+      }
+    }
+  }
+  console.log('');
+}
+
 async function main() {
-  const { questions, diags, reports, json } = buildAll(await loadDatasets(), loadTopics());
+  const datasets = await loadDatasets();
+  if (process.argv.includes('--audit')) printAudit(datasets);
+  const { questions, diags, reports, json } = buildAll(datasets, loadTopics());
   const errors = diags.filter((x) => x.level === 'error');
   if (process.argv.includes('--report')) {
     for (const { id, d } of reports) {

@@ -6,7 +6,8 @@ import {
   makeRng, decimalsOf, roundTo, fmtNum, sigFig, parseNum, sigFigsIn, parseUnit, sameDim, linearFit, gradientBand, cross,
 } from './lib.mjs';
 import { renderGraph, niceScale } from './graph.mjs';
-import { buildQuestion, generateRows } from './generate.mjs';
+import { buildQuestion, generateRows, evalModel } from './generate.mjs';
+import { LAWS } from './laws.mjs';
 import { validateDataset, parseGraph, scaleFromTicks } from './validate.mjs';
 import { buildAll, loadDatasets, loadTopics } from './build.mjs';
 import broken from './fixtures/broken.mjs';
@@ -63,6 +64,41 @@ export async function runTests() {
     check('cross product: z × x = y', JSON.stringify(cross([0, 0, 1], [1, 0, 0])) === JSON.stringify([0, 1, 0]));
   }
 
+  // ----- Vetted physics laws: reference values, limiting cases, dimensional consistency -----
+  for (const [name, law] of Object.entries(LAWS)) {
+    const f = (inputs) => law.f({ ...(law.defaults || {}), ...inputs });
+    for (const ref of law.reference) {
+      check(`law ${name}: reference value (${ref.note})`, near(f(ref.inputs), ref.output, 1e-9), `got ${f(ref.inputs)}`);
+    }
+    for (const lim of law.limits) {
+      const ok = lim.check ? lim.check(f) : Math.abs(f(lim.inputs) - lim.output) <= 1e-9 * Math.max(1, Math.abs(lim.output));
+      check(`law ${name}: limiting case "${lim.name}"`, ok);
+    }
+    // Dimensional consistency: changing the size of each base unit (m, kg, s, A, K) by a factor k
+    // multiplies every input by k^(its power of that unit); the output must scale by k^(its own power).
+    const base = law.reference[0].inputs;
+    const outDim = parseUnit(law.output).dim;
+    for (let i = 0; i < 5; i++) {
+      const k = 3;
+      const scaled = Object.fromEntries(Object.entries({ ...(law.defaults || {}), ...base }).map(([key, v]) => [key, v * k ** parseUnit(law.inputs[key]).dim[i]]));
+      const want = f(base) * k ** outDim[i];
+      check(`law ${name}: dimensionally consistent in ${['length', 'mass', 'time', 'current', 'temperature'][i]}`, near(f(scaled), want, 1e-9), `got ${f(scaled)}, expected ${want}`);
+    }
+  }
+  {
+    // The unit-checked model evaluator: units convert automatically, and wrong units are refused.
+    const def = { physics: { params: { B: { value: 64, unit: 'mT' }, L: { value: 5, unit: 'cm' }, I: { value: 2, unit: 'A' } } }, columns: {}, singles: {} };
+    const env = { def, params: { B: 64, L: 5, I: 2 }, row: {}, singles: {} };
+    const F = evalModel({ law: 'force-on-wire', inputs: { B: 'p.B', I: 'p.I', L: 'p.L' } }, env, 'test');
+    check('model evaluator converts mT and cm to SI', near(F.si, 0.064 * 2 * 0.05), `got ${F.si}`);
+    let code = null;
+    try { evalModel({ law: 'force-on-wire', inputs: { B: 'p.I', I: 'p.B', L: 'p.L' } }, env, 'test'); } catch (e) { code = e.code; }
+    check('model evaluator refuses a current where a field is needed', code === 'physics-units', `got ${code}`);
+    code = null;
+    try { evalModel({ law: 'made-up-law', inputs: {} }, env, 'test'); } catch (e) { code = e.code; }
+    check('model evaluator refuses a law that is not in laws.mjs', code === 'physics-meta', `got ${code}`);
+  }
+
   // ----- Graph: the drawing reads back as the data -----
   {
     const s = niceScale(0, 0.93, true);
@@ -99,7 +135,7 @@ export async function runTests() {
       if (fx.mutate) fx.mutate(q);
       codes = validateDataset(fx.def, q, { topics }).filter((x) => x.level === 'error').map((x) => x.code);
     } catch (e) {
-      codes = [`crash: ${e.message}`];
+      codes = [e.code || `crash: ${e.message}`];
     }
     check(`broken dataset "${fx.name}" is caught as ${fx.expect}`, codes.includes(fx.expect), `got ${codes.length ? [...new Set(codes)].join(', ') : 'no errors'}`);
   }
