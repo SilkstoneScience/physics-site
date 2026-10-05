@@ -80,6 +80,7 @@ function measureOnce(spec, trueValue, rng, ideal) {
   const noise = spec.noise || {};
   let v = trueValue;
   if (noise.type === 'gauss') v += noise.sd * rng.gauss();
+  else if (noise.type === 'gauss-relative') v *= 1 + noise.sd * rng.gauss(); // sd is a fraction, e.g. 0.012 = 1.2 %
   else if (noise.type === 'poisson') v = rng.poisson(trueValue);
   else if (noise.type) throw new Error(`unknown noise type "${noise.type}"`);
   return roundTo(v, spec.resolution);
@@ -105,7 +106,15 @@ export function generateRows(def, { ideal = false } = {}) {
     for (const [k, c] of cols) {
       if (c.kind === 'set') row[k] = ideal ? c.values[i] : roundTo(c.values[i], c.resolution);
       else if (c.kind === 'measured') {
-        row[k] = measureOnce(c, modelValue(def, c, { params: p, row, singles }, `column ${k}`), rng, ideal);
+        const model = modelValue(def, c, { params: p, row, singles }, `column ${k}`);
+        if (c.trials) {
+          // Repeated readings: the column shows their mean (rounded like one reading); the readings
+          // are kept in row[k + '__trials'] for the uncertainty (half the range) and the trials table.
+          const readings = Array.from({ length: c.trials }, () => measureOnce(c, model, rng, ideal));
+          row[k + '__trials'] = readings;
+          const mean = readings.reduce((a, b) => a + b, 0) / readings.length;
+          row[k] = ideal ? mean : roundTo(mean, c.resolution);
+        } else row[k] = measureOnce(c, model, rng, ideal);
         if (!ideal && c.anomaly && c.anomaly.row === i) row[k] = roundTo(row[k] + c.anomaly.shift, c.resolution);
       } else if (c.kind === 'derived') {
         const v = c.value(row, p, singles);
@@ -117,13 +126,18 @@ export function generateRows(def, { ideal = false } = {}) {
   return { rows, singles };
 }
 
+export const halfRange = (a) => (Math.max(...a) - Math.min(...a)) / 2;
+// Uncertainty given separately for each row (a column of its own in the table) rather than one value for the whole column.
+export const perRowUncertainty = (col) => typeof col.uncertainty === 'function' || col.uncertainty === 'halfRange';
+
 // Absolute uncertainty of one value: a constant, or a rule such as √N (rounded like the column).
-export function uncertaintyOf(col, row, p, singles) {
+export function uncertaintyOf(col, row, p, singles, key) {
   const u = col.uncertainty;
   if (u == null) return null;
   if (typeof u === 'number') return u;
   if (typeof u === 'function') return roundTo(u(row, p, singles), 10 ** -columnDp(col));
-  throw new Error('uncertainty must be a number, a function or null');
+  if (u === 'halfRange') return roundTo(halfRange(row[key + '__trials']), 10 ** -columnDp(col));
+  throw new Error('uncertainty must be a number, a function, "halfRange" or null');
 }
 
 // ---------- 2. Analysis: fits and results ----------
@@ -133,7 +147,7 @@ export function makeContext(def, rows, singles) {
   const p = paramValues(def);
   const g = def.graph;
   const d = { def, p, rows, singles };
-  d.unc = (k, i) => uncertaintyOf(def.columns[k], rows[i], p, singles);
+  d.unc = (k, i) => uncertaintyOf(def.columns[k], rows[i], p, singles, k);
   d.text = (k, i) => fmtNum(rows[i][k], columnDp(def.columns[k]));
   d.sf = (x, n) => sigFig(x, n);
   d.dp = (x, n) => fmtNum(x, n);
@@ -178,16 +192,29 @@ export function tableHtml(def, d) {
     const u = parseUnit(c.unit || '');
     const pm = typeof c.uncertainty === 'number' ? ` ± ${fmtNum(c.uncertainty, columnDp(c))}` : '';
     head.push(`<th scope="col" data-col="${k}"><span class="h-name">${c.name}</span>$${c.symbol}$${u.text ? ' / ' + u.text : ''}${pm}</th>`);
-    if (typeof c.uncertainty === 'function') {
-      head.push(`<th scope="col" data-col="${k}" data-unc="1"><span class="h-name">uncertainty</span>$\\Delta ${c.symbol}$${u.text ? ' / ' + u.text : ''}</th>`);
+    if (perRowUncertainty(c)) {
+      head.push(`<th scope="col" data-col="${k}" data-unc="1"><span class="h-name">uncertainty</span>$${c.uncSymbol || '\\Delta ' + c.symbol}$${u.text ? ' / ' + u.text : ''}</th>`);
     }
   }
   const body = d.rows.map((row, i) => '<tr>' + shown.map(([k, c]) => {
     const hidden = (c.hide || []).includes(i);
     const cell = (unc) => `<td data-col="${k}" data-row="${i}"${unc ? ' data-unc="1"' : ''}${hidden ? ' class="blank"' : ''}>${hidden ? '?' : unc ? fmtNum(d.unc(k, i), columnDp(c)) : d.text(k, i)}</td>`;
-    return cell(false) + (typeof c.uncertainty === 'function' ? cell(true) : '');
+    return cell(false) + (perRowUncertainty(c) ? cell(true) : '');
   }).join('') + '</tr>').join('');
   return `<div class="table-wrap"><table class="data-table"><thead><tr>${head.join('')}</tr></thead><tbody>${body}</tbody></table></div>`;
+}
+
+// The individual readings of one row of a repeated measurement, for students to process
+// (def.trialsTable: { column, row, caption }). Drawn as a narrow two-column table so it fits on phones.
+export function trialsTableHtml(def, d) {
+  const { column: k, row: i } = def.trialsTable;
+  const c = def.columns[k];
+  const u = parseUnit(c.unit || '');
+  const readings = d.rows[i][k + '__trials'];
+  if (!readings) throw new Error(`${def.id}: trialsTable needs column ${k} to have repeated readings (trials)`);
+  const body = readings.map((v, j) => `<tr><td>${j + 1}</td><td data-trial="${j}">${fmtNum(v, columnDp(c))}</td></tr>`).join('');
+  return `<div class="table-wrap"><table class="data-table trials" data-col="${k}" data-row="${i}"><thead><tr><th scope="col">trial</th>`
+    + `<th scope="col">$${c.symbol}$${u.text ? ' / ' + u.text : ''}</th></tr></thead><tbody>${body}</tbody></table></div>`;
 }
 
 export function graphFigure(def, d, kind) {
@@ -237,9 +264,11 @@ export function buildQuestion(def) {
     figures['graph-ms'] = graphFigure(def, d, 'examiner');
   }
   const order = def.present || ['diagram', 'table', 'graph'];
-  const data = order.filter((k) => k === 'table' || figures[k]).map((k) => (k === 'table'
-    ? { kind: 'table', caption: def.tableCaption || '', html: tableHtml(def, d) }
-    : figures[k]));
+  const data = order.filter((k) => k === 'table' || k === 'trials' || figures[k]).map((k) => {
+    if (k === 'table') return { kind: 'table', caption: def.tableCaption || '', html: tableHtml(def, d) };
+    if (k === 'trials') return { kind: 'table', figure: 'trials', caption: def.trialsTable.caption || '', html: trialsTableHtml(def, d) };
+    return figures[k];
+  });
   const parts = def.parts(d).map((pt) => {
     const { msFigure, ...rest } = pt;
     if (msFigure && !figures[msFigure]) throw new Error(`${def.id} part (${pt.label}): no figure called "${msFigure}"`);

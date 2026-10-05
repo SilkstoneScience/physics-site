@@ -5,6 +5,8 @@
 import D3 from '../datasets/D3-B01.mjs';
 import B5 from '../datasets/B5-B01.mjs';
 import E3 from '../datasets/E3-B01.mjs';
+import A1 from '../datasets/A1-B01.mjs';
+import C4 from '../datasets/C4-B01.mjs';
 
 const editPart = (def, label, change) => ({ ...def, parts: (d) => def.parts(d).map((pt) => (pt.label === label ? change(pt, d) : pt)) });
 const editFigure = (q, name, change) => {
@@ -95,6 +97,20 @@ export default [
     def: { ...B5, columns: { ...B5.columns, V: { ...B5.columns.V, measurement: { instrument: 'voltmeter', reading: 'V' } } } } },
   { name: 'assumptions not stated', expect: 'physics-meta',
     def: { ...B5, physics: { ...B5.physics, assumptions: [] } } },
+
+  // ----- Repeated readings (A1-B01) -----
+  { name: 'a trial reading edited after generation (answers no longer match)', expect: 'answer', def: A1,
+    mutate: (q) => { const t = q.data.find((x) => x.figure === 'trials'); t.html = t.html.replace(/(<td data-trial="0">)([\d.]+)/, (m, a, v) => a + (Number(v) + 0.004).toFixed(3)); } },
+  { name: 'trials table for a row whose blank mean then can\'t be calculated', expect: 'table-value',
+    def: { ...A1, trialsTable: { ...A1.trialsTable, row: 3 } } },
+  { name: 'launch velocity drawn the wrong way', expect: 'vector',
+    def: { ...A1, vectors: { ...A1.vectors, u: [-1, 0, 0] } } },
+
+  // ----- Standing waves (C4-B01) -----
+  { name: 'diagram said to show the 2nd harmonic but drawn with 3 loops', expect: 'diagram',
+    def: { ...C4, diagramChecks: [{ figure: 'diagram-ms', harmonic: 2 }] } },
+  { name: 'wave drawn without a node at the fixed end', expect: 'diagram', def: C4,
+    mutate: (q) => editFigure(q, 'diagram', (s) => s.replace(/(<polyline class="l1 thin wave" points=")100,120/, '$1100,110')) },
 
   // ----- Identity and level -----
   { name: 'Paper 1B dataset on an HL-only topic', expect: 'level-topic', def: { ...D3, id: 'A4-B01', topic: 'A.4' } },

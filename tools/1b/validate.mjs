@@ -7,7 +7,7 @@ import {
   parseNum, dpOf, sigFigsIn, onGrid, roundTo, fmtNum, sigFig, parseUnit, sameDim, addDim,
   linearFit, stripTags, cross, decimalsOf,
 } from './lib.mjs';
-import { generateRows, makeContext, uncertaintyOf, columnDp, paramValues, modelValue, evalModel } from './generate.mjs';
+import { generateRows, makeContext, uncertaintyOf, columnDp, paramValues, modelValue, evalModel, perRowUncertainty } from './generate.mjs';
 import { LAWS } from './laws.mjs';
 import { createRequire } from 'node:module';
 
@@ -49,7 +49,7 @@ function run(def, q, topics, fail, warn) {
   // ---------- 2. The table, read back cell by cell ----------
   const p = paramValues(def);
   const gen = generateRows(def);
-  const table = (q.data || []).find((x) => x.kind === 'table');
+  const table = (q.data || []).find((x) => x.kind === 'table' && x.figure !== 'trials');
   if (!table) { fail('table-header', 'table', 'no data table'); return; }
   const heads = [...table.html.matchAll(/<th scope="col" data-col="(\w+)"( data-unc="1")?>(.*?)<\/th>/g)]
     .map((m) => ({ col: m[1], unc: !!m[2], html: m[3] }));
@@ -83,6 +83,35 @@ function run(def, q, topics, fail, warn) {
     } else if (pm) fail('table-header', where, 'the heading gives an uncertainty, but the dataset defines none');
   }
 
+  // Repeated readings shown in the trials table (one row of one column), read back like the main table.
+  const tt = def.trialsTable;
+  let trialReadings = null;
+  if (tt) {
+    const t = (q.data || []).find((x) => x.figure === 'trials');
+    const tc = def.columns[tt.column];
+    if (!t || !tc || !tc.trials) fail('trials', 'trials table', 'trialsTable needs a column with repeated readings, shown as a table');
+    else {
+      const where = `trials table (row ${tt.row + 1})`;
+      if (!t.html.includes(`data-col="${tt.column}" data-row="${tt.row}"`)) fail('trials', where, 'the trials table is for a different row or column than the dataset says');
+      const label = `$${tc.symbol}$${parseUnit(tc.unit || '').text ? ' / ' + parseUnit(tc.unit || '').text : ''}`;
+      if (!t.html.includes(label)) fail('trials', where, `the heading should show "${label}"`);
+      const texts = [...t.html.matchAll(/<td data-trial="\d+">(.*?)<\/td>/g)].map((m) => m[1]);
+      if (texts.length !== tc.trials) fail('trials', where, `shows ${texts.length} readings, but the dataset takes ${tc.trials}`);
+      texts.forEach((x, j) => {
+        if (dpOf(x) !== columnDp(tc)) fail('table-dp', `${where}, reading ${j + 1}`, `"${x}" has ${dpOf(x)} decimal places, but readings use ${columnDp(tc)}`);
+        if (!onGrid(parseNum(x), tc.resolution)) fail('table-dp', `${where}, reading ${j + 1}`, `"${x}" isn't a reading the instrument can show (resolution ${tc.resolution})`);
+      });
+      trialReadings = texts.map(parseNum);
+    }
+  }
+  const tolFor = (c, model) => {
+    const noise = c.noise || {};
+    if (noise.type === 'gauss') return 5 * noise.sd + c.resolution;
+    if (noise.type === 'gauss-relative') return 5 * noise.sd * Math.abs(model) + c.resolution;
+    if (noise.type === 'poisson') return 5 * Math.sqrt(model) + 1;
+    return c.resolution;
+  };
+
   const setCol = cols.find(([, c]) => c.kind === 'set');
   const n = setCol[1].values.length;
   const rows = [];
@@ -90,15 +119,27 @@ function run(def, q, topics, fail, warn) {
     const row = {};
     for (const [k, c] of cols) {
       const where = `table row ${i + 1}, ${c.symbolText || c.symbol}`;
+      // Repeated readings: the published ones for the trials-table row, otherwise the generated ones.
+      const isTrialRow = tt && tt.column === k && tt.row === i && trialReadings;
+      if (c.trials) {
+        const readings = isTrialRow ? trialReadings : gen.rows[i][k + '__trials'];
+        row[k + '__trials'] = readings;
+        const model = modelValue(def, c, { params: p, row, singles: gen.singles }, `column ${k}`);
+        readings.forEach((x, j) => {
+          if (Math.abs(x - model) > tolFor(c, model)) fail('model', `${where}, reading ${j + 1}`, 'reading is too far from the physics model to be measurement scatter', { expected: fmtNum(model, columnDp(c) + 1), got: fmtNum(x, columnDp(c)) });
+        });
+      }
       if (c.show === false) { row[k] = gen.rows[i][k]; continue; }
       const cell = cells.get(`${k}|${i}|`);
       const hidden = (c.hide || []).includes(i);
+      const meanOf = (a) => roundTo(a.reduce((x, y) => x + y, 0) / a.length, c.resolution);
       if (!cell) { fail('table-value', where, 'cell missing'); row[k] = gen.rows[i][k]; continue; }
       if (cell.blank || hidden) {
         if (!hidden) fail('table-value', where, 'cell is blank but not listed in "hide"');
         if (!cell.blank) fail('table-value', where, 'cell should be blank (listed in "hide")');
-        if (c.kind !== 'derived') fail('table-value', where, 'only calculated (derived) columns can be left for students to fill in');
-        row[k] = c.kind === 'derived' ? roundTo(c.value(row, p, gen.singles), 10 ** -c.dp) : gen.rows[i][k];
+        const calculable = c.kind === 'derived' || (c.trials && isTrialRow);
+        if (!calculable) fail('table-value', where, 'only values students can calculate (a derived column, or the mean of the readings in the trials table) can be left blank');
+        row[k] = c.kind === 'derived' ? roundTo(c.value(row, p, gen.singles), 10 ** -c.dp) : c.trials ? meanOf(row[k + '__trials']) : gen.rows[i][k];
         continue;
       }
       const v = parseNum(cell.text);
@@ -111,10 +152,11 @@ function run(def, q, topics, fail, warn) {
       if (c.kind === 'measured') {
         if (!onGrid(v, c.resolution)) fail('table-dp', where, `"${cell.text}" isn't a reading the instrument can show (resolution ${c.resolution})`);
         const model = modelValue(def, c, { params: p, row, singles: gen.singles }, `column ${k}`);
-        const noise = c.noise || {};
-        const tol = noise.type === 'gauss' ? 5 * noise.sd + c.resolution : noise.type === 'poisson' ? 5 * Math.sqrt(model) + 1 : c.resolution;
         const isAnomaly = c.anomaly && c.anomaly.row === i;
-        if (!isAnomaly && Math.abs(v - model) > tol) {
+        if (c.trials && fmtNum(meanOf(row[k + '__trials']), dp) !== cell.text) {
+          fail('trials', where, 'the mean doesn\'t match the repeated readings', { expected: fmtNum(meanOf(row[k + '__trials']), dp), got: cell.text });
+        }
+        if (!isAnomaly && Math.abs(v - model) > tolFor(c, model)) {
           fail('model', where, 'value is too far from the physics model to be measurement scatter (typing error, or wrong model?)',
             { expected: fmtNum(model, dp + 1), got: cell.text });
         }
@@ -127,12 +169,12 @@ function run(def, q, topics, fail, warn) {
     }
     // Uncertainty columns (one value per row)
     for (const [k, c] of cols) {
-      if (typeof c.uncertainty !== 'function' || c.show === false) continue;
+      if (!perRowUncertainty(c) || c.show === false) continue;
       const where = `table row ${i + 1}, Δ${c.symbolText || c.symbol}`;
       const cell = cells.get(`${k}|${i}|u`);
       if (!cell) { fail('uncertainty', where, 'uncertainty cell missing'); continue; }
       if (cell.blank) continue;
-      const want = fmtNum(uncertaintyOf(c, row, p, gen.singles), columnDp(c));
+      const want = fmtNum(uncertaintyOf(c, row, p, gen.singles, k), columnDp(c));
       if (cell.text !== want) fail('uncertainty', where, 'uncertainty doesn\'t follow the dataset\'s rule', { expected: want, got: cell.text });
       if (!(parseNum(cell.text) > 0)) fail('uncertainty', where, 'uncertainty must be greater than zero (at this number of decimal places)');
       else if (sigFigsIn(cell.text) > 2) fail('uncertainty', where, `uncertainty ${cell.text} has more than 2 significant figures`);
@@ -267,6 +309,11 @@ function run(def, q, topics, fail, warn) {
 
   // ---------- 7. Diagrams and all SVG ----------
   for (const fig of figures) checkSvg(fig, def, fail);
+  for (const chk of def.diagramChecks || []) {
+    const fig = figures.find((f) => f.figure === chk.figure);
+    if (!fig) { fail('diagram', `figure ${chk.figure}`, 'diagram check names a figure that the question doesn\'t show'); continue; }
+    if (chk.harmonic) checkStandingWave(fig, chk.harmonic, fail);
+  }
   if (def.circuit) checkCircuit(def, figures.find((f) => f.figure === (def.circuit.figure || 'diagram')), fail);
 }
 
@@ -332,7 +379,10 @@ function checkPhysics(def, fail) {
       const truth = p[res.estimates];
       const tol = res.tolerance || 0.005;
       if (truth === undefined) { bad('physics-meta', `result ${name}`, `estimates "${res.estimates}", which isn't a parameter`); continue; }
-      if (Math.abs(d.r[name].value - truth) > tol * Math.abs(truth)) {
+      // Compare in SI units (a result may be in g m⁻¹ while the parameter is in kg m⁻¹), with the same dimensions.
+      const [ru, pu] = [parseUnit(res.unit || ''), parseUnit(def.physics.params[res.estimates].unit || '')];
+      if (!sameDim(ru.dim, pu.dim)) { fail('physics-units', `result ${name}`, `is in ${ru.text || 'no unit'}, which can't be compared with ${res.estimates} in ${pu.text || 'no unit'}`); continue; }
+      if (Math.abs(d.r[name].value * ru.scale - truth * pu.scale) > tol * Math.abs(truth * pu.scale)) {
         fail('physics-inversion', `result ${name}`, `with noise-free data, the analysis should recover ${res.estimates} exactly, so the analysis formula isn't the inverse of the physics model`,
           { expected: `${sigFig(truth, 4)} ${parseUnit(def.physics.params[res.estimates].unit).text}`.trim(), got: `${sigFig(d.r[name].value, 4)} ${parseUnit(res.unit || '').text}`.trim() });
       }
@@ -480,6 +530,33 @@ function checkSvg(fig, def, fail) {
     const out = m[2].includes('<circle class="f3"');
     if (Math.hypot(v[0], v[1]) > 1e-9 || v[2] === 0) fail('vector', `${where}, ${m[1]}`, 'drawn into/out of the page, but the vector lies in the page');
     else if (out !== v[2] > 0) fail('vector', `${where}, ${m[1]}`, 'wrong way through the page', { expected: v[2] > 0 ? 'out of the page (dot)' : 'into the page (cross)', got: out ? 'dot' : 'cross' });
+  }
+}
+
+// ---------- Standing waves: a string fixed at both ends in its nth harmonic ----------
+// Reads the drawn string (<line class="string" …/>) and the wave envelope (<polyline class="… wave" …/>).
+// The envelope must start and end on the string (nodes at the fixed ends) and cross it exactly n − 1 times
+// in between, so the drawing shows n loops: the physics of the nth harmonic, not just a label.
+function checkStandingWave(fig, n, fail) {
+  const where = `figure ${fig.figure}`;
+  const s = fig.svg.match(/<line class="[^"]*\bstring\b[^"]*" x1="([-\d.]+)" y1="([-\d.]+)" x2="([-\d.]+)" y2="([-\d.]+)"/);
+  const waves = [...fig.svg.matchAll(/<polyline class="[^"]*\bwave\b[^"]*" points="([^"]+)"/g)];
+  if (!s || !waves.length) { fail('diagram', where, 'no string or standing-wave envelope found'); return; }
+  const [x1, y0, x2] = [+s[1], +s[2], +s[3]];
+  for (const w of waves) {
+    const pts = w[1].trim().split(/\s+/).map((pq) => pq.split(',').map(Number));
+    const [first, last] = [pts[0], pts[pts.length - 1]];
+    if (Math.abs(first[0] - x1) > 0.6 || Math.abs(last[0] - x2) > 0.6 || Math.abs(first[1] - y0) > 0.6 || Math.abs(last[1] - y0) > 0.6) {
+      fail('diagram', where, 'the wave must have nodes at both fixed ends of the string');
+    }
+    let crossings = 0;
+    let prev = 0;
+    for (const [, y] of pts.slice(1, -1)) {
+      const side = Math.abs(y - y0) < 0.3 ? 0 : Math.sign(y - y0);
+      if (side && prev && side !== prev) crossings++;
+      if (side) prev = side;
+    }
+    if (crossings + 1 !== n) fail('diagram', where, `the drawing shows ${crossings + 1} loop(s), but harmonic ${n} has ${n}`, { expected: `${n} loops`, got: `${crossings + 1}` });
   }
 }
 

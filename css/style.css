@@ -296,6 +296,10 @@ select, textarea, input { font: inherit; color: var(--text); background: var(--b
 .question table.data-table td { padding: 4px 14px; }
 table.data-table .h-name { display: block; font-weight: 400; font-size: 0.78rem; color: var(--muted); }
 table.data-table td.blank { font-weight: 700; color: var(--accent); }
+@media (max-width: 420px) {
+  .question table.data-table th, .question table.data-table td { padding: 4px 5px; }
+  table.data-table .h-name { font-size: 0.7rem; }
+}
 .data-link { font-size: 0.85rem; margin-left: 6px; white-space: nowrap; }
 .markscheme .q-fig { margin: 10px 0 6px; }
 .diagram .grid-minor { stroke: var(--border); stroke-width: 0.6; opacity: 0.55; }

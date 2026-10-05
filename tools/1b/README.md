@@ -61,6 +61,14 @@ Copy the closest existing dataset and change it. The parts, in order:
    or `'derived'` (calculated from the other columns, with `value` and `dp`). An uncertainty is a number (the same for
    every row), a function (for example √N), or `null`. `hide: [row]` leaves a calculated cell for students to fill in.
    `singles` are single readings such as a background count (same fields as a measured column).
+   Noise types: `gauss` (`sd` in the column's unit), `gauss-relative` (`sd` as a fraction, for scatter proportional
+   to the value, e.g. shot-to-shot variation in launch speed) and `poisson` (counts).
+   **Repeated readings**: `trials: 5` on a measured column takes five readings per row; the column shows their mean and
+   `uncertainty: 'halfRange'` gives half their range. `trialsTable: { column, row, caption }` shows one row's readings
+   (add `'trials'` to `present`); that row's mean may then be left blank (`hide`) for students to calculate.
+   `uncSymbol` sets the heading of a per-row uncertainty column (for example `'\\Delta(1/L)'`).
+   `diagramChecks: [{ figure, harmonic: n }]` makes the validator check that a standing-wave diagram shows n loops
+   with nodes at both fixed ends.
 4. **Graph**: `graph: { x, y, fit: 'linear' | 'exponential', band: true (max/min lines), exclude: [anomaly rows],
    omit: [rows students plot themselves], zero: { x, y } }`.
 5. **Results**: every number an answer needs, each worked out from `d` (the data): `d.fit`, `d.band`,

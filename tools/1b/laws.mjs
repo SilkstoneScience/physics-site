@@ -95,6 +95,50 @@ export const LAWS = {
     ],
   },
 
+  'projectile-horizontal-range': {
+    title: 'Horizontal distance travelled by a projectile launched horizontally (no air resistance)',
+    statement: 'R = u√(2h/g), from h = ½gt² (vertical) and R = ut (horizontal)',
+    syllabus: 'A.1',
+    inputs: { u: 'm s^-1', h: 'm', g: 'm s^-2' },
+    output: 'm',
+    f: ({ u, h, g }) => u * Math.sqrt((2 * h) / g),
+    reference: [{ inputs: { u: 3, h: 4.9, g: 9.8 }, output: 3, note: 't = √(2 × 4.9 / 9.8) = 1 s, so R = 3 × 1 = 3 m' }],
+    limits: [
+      { name: 'launched from floor level (h = 0): no horizontal distance', inputs: { u: 3, h: 0, g: 9.8 }, output: 0 },
+      { name: 'dropped (u = 0): lands directly below', inputs: { u: 0, h: 1, g: 9.8 }, output: 0 },
+      { name: 'four times the height doubles the range', check: (f) => near(f({ u: 3, h: 4, g: 9.8 }), 2 * f({ u: 3, h: 1, g: 9.8 })) },
+      { name: 'range is proportional to launch speed', check: (f) => near(f({ u: 6, h: 1, g: 9.8 }), 2 * f({ u: 3, h: 1, g: 9.8 })) },
+    ],
+  },
+
+  'weight': {
+    title: 'Weight of a mass in a uniform gravitational field (for example the tension from a hanging mass)',
+    statement: 'F = mg',
+    syllabus: 'A.2',
+    inputs: { m: 'kg', g: 'm s^-2' },
+    output: 'N',
+    f: ({ m, g }) => m * g,
+    reference: [{ inputs: { m: 0.2, g: 9.8 }, output: 1.96, note: '0.2 × 9.8' }],
+    limits: [{ name: 'no mass, no weight', inputs: { m: 0, g: 9.8 }, output: 0 }],
+  },
+
+  'string-harmonic': {
+    title: 'Frequency of the nth harmonic of a string fixed at both ends',
+    statement: 'f = n v / 2L with v = √(T/μ): nodes at both ends, so L = nλ/2',
+    syllabus: 'C.4',
+    inputs: { n: '', T: 'N', mu: 'kg m^-1', L: 'm' },
+    output: 'Hz',
+    f: ({ n, T, mu, L }) => (n / (2 * L)) * Math.sqrt(T / mu),
+    reference: [{ inputs: { n: 1, T: 1.6, mu: 0.001, L: 1 }, output: 20, note: 'v = √(1.6/0.001) = 40 m s⁻¹, λ = 2 m, f = 20 Hz' }],
+    limits: [
+      { name: 'the third harmonic is three times the first', check: (f) => near(f({ n: 3, T: 1.6, mu: 0.001, L: 1 }), 3 * f({ n: 1, T: 1.6, mu: 0.001, L: 1 })) },
+      { name: 'doubling the length halves the frequency', check: (f) => near(f({ n: 1, T: 1.6, mu: 0.001, L: 2 }), f({ n: 1, T: 1.6, mu: 0.001, L: 1 }) / 2) },
+      { name: 'four times the tension doubles the frequency', check: (f) => near(f({ n: 1, T: 6.4, mu: 0.001, L: 1 }), 2 * f({ n: 1, T: 1.6, mu: 0.001, L: 1 })) },
+      { name: 'a heavier string (4μ) halves the frequency', check: (f) => near(f({ n: 1, T: 1.6, mu: 0.004, L: 1 }), f({ n: 1, T: 1.6, mu: 0.001, L: 1 }) / 2) },
+      { name: 'no tension, no wave: f = 0', inputs: { n: 1, T: 0, mu: 0.001, L: 1 }, output: 0 },
+    ],
+  },
+
   'uniform-counts': {
     title: 'Counts at a constant count rate (for example background radiation)',
     statement: 'N = R Δt',

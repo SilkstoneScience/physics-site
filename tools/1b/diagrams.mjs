@@ -70,6 +70,90 @@ export function currentBalance(alt, { north = 'left', currentOut = true, showFor
   return svg(520, 380, alt, body.join(''));
 }
 
+// ----- Horizontal launcher (side view) -----
+// The path is the real projectile path for this launch speed and height (same scale both ways):
+// drop below the launch point = g x² / 2u². opts: { u, g, h } in SI units (h = the height drawn).
+export function launcher(alt, { u, g, h }) {
+  const [x0, y0, yFloor] = [150, 100, 330];
+  const s = (yFloor - y0) / h; // pixels per metre
+  const R = u * Math.sqrt((2 * h) / g);
+  const xLand = x0 + R * s;
+  const path = [];
+  for (let i = 0; i <= 40; i++) {
+    const x = (R * i) / 40;
+    path.push(`${r1(x0 + x * s)},${r1(y0 + ((g * x * x) / (2 * u * u)) * s)}`);
+  }
+  const body = [
+    // stand, clamp and launcher; the ball at the launch point
+    '<path class="l3 thin" d="M60 330V40M28 330H110"/>',
+    `<line class="l3 thin" x1="60" y1="${y0}" x2="82" y2="${y0}"/>`,
+    `<rect class="l3 thin" x="82" y="${y0 - 10}" width="60" height="20" rx="3" fill="none"/>`,
+    `<circle class="f3" cx="${x0}" cy="${y0}" r="6"/>`,
+    label(112, y0 - 22, 'launcher'),
+    // floor, carbon paper, plumb line and the ball's path
+    `<line class="l3" x1="20" y1="${yFloor}" x2="520" y2="${yFloor}"/>`,
+    `<rect class="l3 thin" x="${r1(xLand - 26)}" y="${yFloor - 5}" width="52" height="5" fill="none"/>`,
+    label(xLand - 30, yFloor - 12, 'carbon paper', { anchor: 'end' }),
+    `<line class="l3 thin dash" x1="${x0}" y1="${y0 + 8}" x2="${x0}" y2="${yFloor}"/>`,
+    `<polyline class="l2 thin dash" points="${path.join(' ')}" fill="none"/>`,
+    // launch velocity (drawn just above the path) and gravity
+    arrow(x0, y0 - 24, x0 + 62, y0 - 24, { cls: 'l1', vec: 'u' }),
+    label(x0 + 70, y0 - 18, 'u', { anchor: 'start', italic: true, cls: 't1' }),
+    arrow(495, 150, 495, 205, { cls: 'l3 thin', vec: 'g', head: 9, half: 4.5 }),
+    label(505, 185, 'g', { anchor: 'start', italic: true }),
+    // dimensions h (along the plumb line) and R (along the floor)
+    arrow(x0 + 14, (y0 + yFloor) / 2, x0 + 14, y0 + 2, { cls: 'l3 thin', head: 8, half: 4 }),
+    arrow(x0 + 14, (y0 + yFloor) / 2, x0 + 14, yFloor - 2, { cls: 'l3 thin', head: 8, half: 4 }),
+    label(x0 + 24, (y0 + yFloor) / 2 + 6, 'h', { anchor: 'start', italic: true }),
+    arrow((x0 + xLand) / 2, yFloor + 16, x0, yFloor + 16, { cls: 'l3 thin', head: 8, half: 4 }),
+    arrow((x0 + xLand) / 2, yFloor + 16, xLand, yFloor + 16, { cls: 'l3 thin', head: 8, half: 4 }),
+    label((x0 + xLand) / 2, yFloor + 40, 'R', { italic: true }),
+  ];
+  return svg(540, 380, alt, body.join(''));
+}
+
+// ----- String vibrating in a standing wave, between a vibration generator and a pulley -----
+// The envelope is y = ±A sin(nπx/L): nodes at both fixed ends and n loops (checked by the validator).
+export function vibratingString(alt, { n = 1, labelNodes = false } = {}) {
+  const [xa, xb, y0, A] = [100, 470, 120, 24];
+  const env = (sign) => {
+    const pts = [];
+    for (let i = 0; i <= 60 * n; i++) {
+      const x = xa + ((xb - xa) * i) / (60 * n);
+      pts.push(`${r1(x)},${r1(y0 - sign * A * Math.sin((n * Math.PI * (x - xa)) / (xb - xa)))}`);
+    }
+    return `<polyline class="l1 thin wave" points="${pts.join(' ')}" fill="none"/>`;
+  };
+  const body = [
+    // bench, vibration generator (labelled above, with a leader line) and its driving rod
+    '<line class="l3" x1="20" y1="200" x2="476" y2="200"/>',
+    '<rect class="l3 thin" x="40" y="150" width="60" height="50" rx="4" fill="none"/>',
+    `<line class="l3 thin" x1="${xa}" y1="150" x2="${xa}" y2="${y0}"/>`,
+    label(20, 56, 'vibration generator', { anchor: 'start', size: 15 }),
+    '<line class="l3 thin" x1="48" y1="64" x2="62" y2="148"/>',
+    // pulley on a bracket; the string drops from the pulley's edge to the hanging mass below it
+    `<line class="l3 thin" x1="${xb}" y1="${y0 + 14}" x2="${xb}" y2="200"/>`,
+    `<circle class="l3 thin" cx="${xb}" cy="${y0 + 14}" r="14" fill="none"/>`,
+    `<line class="l3 thin" x1="${xb + 14}" y1="${y0 + 14}" x2="${xb + 14}" y2="214"/>`,
+    `<rect class="l3 thin" x="${xb + 4}" y="214" width="20" height="34" fill="none"/>`,
+    label(xb + 14, 237, 'M', { italic: true, size: 15 }),
+    // the string at rest, and the envelope of its vibration
+    `<line class="l3 thin dash string" x1="${xa}" y1="${y0}" x2="${xb}" y2="${y0}"/>`,
+    env(1), env(-1),
+    // length L between the fixed ends, marked below the bench
+    `<line class="l3 thin dash" x1="${xa}" y1="204" x2="${xa}" y2="262"/>`,
+    `<line class="l3 thin dash" x1="${xb}" y1="204" x2="${xb}" y2="262"/>`,
+    arrow((xa + xb) / 2, 256, xa, 256, { cls: 'l3 thin', head: 8, half: 4 }),
+    arrow((xa + xb) / 2, 256, xb, 256, { cls: 'l3 thin', head: 8, half: 4 }),
+    label((xa + xb) / 2, 248, 'L', { italic: true }),
+  ];
+  if (labelNodes) {
+    for (let k = 0; k <= n; k++) body.push(label(xa + ((xb - xa) * k) / n, y0 - A - 10, 'N', { size: 15, cls: 't2' }));
+    for (let k = 0; k < n; k++) body.push(label(xa + ((xb - xa) * (k + 0.5)) / n, y0 + A + 24, 'A', { size: 15, cls: 't2' }));
+  }
+  return svg(560, 272, alt, body.join(''));
+}
+
 // ----- Circuits drawn from a netlist and a simple layout -----
 // layout: { top: [ids left→right], bottom: [ids right→left], across: [{ id, from: [id, 't1'|'t2'], to: [id, 't1'|'t2'] }],
 //           box: { around: [ids], label } }   Components on the loop are drawn horizontally.
