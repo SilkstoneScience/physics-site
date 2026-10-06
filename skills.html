@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Physics skills · Mr Silkstone's Physics</title>
-  <meta name="description" content="Essential skills for IB DP Physics: SI units and prefixes, accuracy and precision, significant figures, recording and propagating uncertainties, graphs and uncertainty in gradients, and vectors.">
+  <meta name="description" content="Essential skills for IB DP Physics (Tool 3): SI and non-SI units, estimation, the maths you need, recording and propagating uncertainties, tables and charts, reading and linearising graphs, logarithms, gradient uncertainty and vectors.">
   <link rel="canonical" href="https://physics.silkstone.xyz/skills.html">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Mr Silkstone's Physics">
   <meta property="og:title" content="Physics skills · Mr Silkstone's Physics">
-  <meta property="og:description" content="Essential skills for IB DP Physics: SI units and prefixes, accuracy and precision, significant figures, recording and propagating uncertainties, graphs and uncertainty in gradients, and vectors.">
+  <meta property="og:description" content="Essential skills for IB DP Physics (Tool 3): SI and non-SI units, estimation, the maths you need, recording and propagating uncertainties, tables and charts, reading and linearising graphs, logarithms, gradient uncertainty and vectors.">
   <meta property="og:url" content="https://physics.silkstone.xyz/skills.html">
   <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     </svg>
 
     <h1>Physics skills</h1>
-    <p class="lead">The skills you use in every topic, every practical and the Internal Assessment: units, significant figures, uncertainties, graphs and vectors. In the IB guide they are part of the "Tools" (especially Tool 3: Mathematics). Exam questions test them throughout Papers 1 and 2, so it's worth getting them right early.</p>
+    <p class="lead">The skills you use in every topic, every practical and the Internal Assessment: units, estimation, the maths you need, uncertainties, tables and graphs, and vectors. In the IB guide they are the "Tools", and this page covers Tool 3 (Mathematics) in full. Exam questions test these skills throughout Papers 1 and 2, so it's worth getting them right early. The page is long: use the contents list to jump to what you need.</p>
 
     <section class="tok" aria-labelledby="tok-title">
       <h2 id="tok-title">Knowledge and science</h2>
@@ -60,19 +60,39 @@
 
     <nav class="toc" aria-label="On this page">
       <strong>On this page</strong>
+      <p style="margin:8px 0 0"><a href="#part-numbers"><strong>Part 1: Numbers, units and maths</strong></a></p>
       <ol>
         <li><a href="#units">SI units, prefixes and scientific notation</a></li>
+        <li><a href="#estimation">Orders of magnitude, estimates and assumptions</a></li>
+        <li><a href="#maths">The maths you need</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><a href="#part-uncertainty"><strong>Part 2: Measurement and uncertainty</strong></a></p>
+      <ol start="4">
         <li><a href="#accuracy">Accuracy, precision and errors</a></li>
         <li><a href="#sigfigs">Significant figures</a></li>
         <li><a href="#recording">Recording uncertainties</a></li>
         <li><a href="#propagating">Propagating uncertainties</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><a href="#part-graphs"><strong>Part 3: Tables and graphs</strong></a></p>
+      <ol start="8">
+        <li><a href="#tables">Tables and charts</a></li>
         <li><a href="#graphs">Graphs and best-fit lines</a></li>
+        <li><a href="#reading">Reading a graph: gradient, area and intercepts</a></li>
+        <li><a href="#linearising">Linearising and logarithms</a></li>
         <li><a href="#gradient-uncertainty">Uncertainty in the gradient and intercept</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><a href="#part-vectors"><strong>Part 4: Vectors</strong></a></p>
+      <ol start="13">
         <li><a href="#vectors">Vectors</a></li>
+      </ol>
+      <p style="margin:8px 0 0"><strong>Review</strong></p>
+      <ol start="14">
         <li><a href="#mistakes">Common mistakes</a></li>
         <li><a href="#check">Check your understanding</a></li>
       </ol>
     </nav>
+
+    <div class="part-banner" id="part-numbers"><span class="code">Part 1</span> Numbers, units and maths<p>Units and how to convert them, estimating, and the mathematics physics uses all the time.</p></div>
 
     <!-- ===================================================== -->
     <h2 id="units">1. SI units, prefixes and scientific notation</h2>
@@ -89,11 +109,33 @@
         <tr><td>luminous intensity</td><td>candela</td><td>cd</td></tr>
       </table>
     </div>
-    <p><strong>Derived units</strong> are combinations of base units. For example, the newton comes from $F = ma$: $1\ \text{N} = 1\ \text{kg m s}^{-2}$. The joule comes from $W = Fs$: $1\ \text{J} = 1\ \text{N m} = 1\ \text{kg m}^{2}\,\text{s}^{-2}$. Checking that both sides of an equation have the same units is a quick way to catch mistakes.</p>
+    <p><strong>Derived units</strong> are combinations of base units. For example, the newton comes from $F = ma$: $1\ \text{N} = 1\ \text{kg m s}^{-2}$. The joule comes from $W = Fs$: $1\ \text{J} = 1\ \text{N m} = 1\ \text{kg m}^{2}\,\text{s}^{-2}$. You can work out any derived unit the same way, from an equation that defines it:</p>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Unit</th><th>Comes from</th><th>In base units</th></tr>
+        <tr><td>newton, N</td><td>$F = ma$</td><td>$\text{kg m s}^{-2}$</td></tr>
+        <tr><td>joule, J</td><td>$W = Fs$</td><td>$\text{kg m}^{2}\,\text{s}^{-2}$</td></tr>
+        <tr><td>watt, W</td><td>$P = \frac{W}{t}$</td><td>$\text{kg m}^{2}\,\text{s}^{-3}$</td></tr>
+        <tr><td>pascal, Pa</td><td>$p = \frac{F}{A}$</td><td>$\text{kg m}^{-1}\,\text{s}^{-2}$</td></tr>
+        <tr><td>coulomb, C</td><td>$q = It$</td><td>$\text{A s}$</td></tr>
+        <tr><td>volt, V</td><td>$V = \frac{W}{q}$</td><td>$\text{kg m}^{2}\,\text{s}^{-3}\,\text{A}^{-1}$</td></tr>
+        <tr><td>ohm, Ω</td><td>$R = \frac{V}{I}$</td><td>$\text{kg m}^{2}\,\text{s}^{-3}\,\text{A}^{-2}$</td></tr>
+        <tr><td>hertz, Hz</td><td>$f = \frac{1}{T}$</td><td>$\text{s}^{-1}$</td></tr>
+      </table>
+    </div>
+    <h3>Checking an equation with its units</h3>
+    <p>Every term in a correct equation has the same units. Checking this catches many mistakes, such as a formula remembered upside down. You only need this simple check; the formal method (dimensional analysis) isn't assessed.</p>
+    <div class="worked">
+      <h3>Worked example: is the formula possible?</h3>
+      <p>A student remembers the period of a pendulum as $T = 2\pi\sqrt{\dfrac{g}{l}}$. Check the units.</p>
+      <p>Right-hand side: $\sqrt{\dfrac{\text{m s}^{-2}}{\text{m}}} = \sqrt{\text{s}^{-2}} = \text{s}^{-1}$. A period is in seconds, so the formula is wrong. With $\dfrac{l}{g}$ instead, the units come out as $\sqrt{\text{s}^{2}} = \text{s}$, as they should.</p>
+      <p>A units check can't find a missing number, though: $T = \pi\sqrt{\dfrac{l}{g}}$ has the right units but is still wrong.</p>
+    </div>
     <p><strong>Prefixes</strong> (given in the data booklet) make very large and very small numbers easier to handle:</p>
     <div class="table-wrap">
       <table class="notes">
         <tr><th>Prefix</th><th>Symbol</th><th>Factor</th></tr>
+        <tr><td>peta</td><td>P</td><td>$10^{15}$</td></tr>
         <tr><td>tera</td><td>T</td><td>$10^{12}$</td></tr>
         <tr><td>giga</td><td>G</td><td>$10^{9}$</td></tr>
         <tr><td>mega</td><td>M</td><td>$10^{6}$</td></tr>
@@ -103,17 +145,160 @@
         <tr><td>micro</td><td>µ</td><td>$10^{-6}$</td></tr>
         <tr><td>nano</td><td>n</td><td>$10^{-9}$</td></tr>
         <tr><td>pico</td><td>p</td><td>$10^{-12}$</td></tr>
+        <tr><td>femto</td><td>f</td><td>$10^{-15}$</td></tr>
       </table>
     </div>
-    <p><strong>Scientific notation</strong> writes a number as $a \times 10^{n}$ with $1 \le a &lt; 10$. For example, $0.000\,47 = 4.7\times10^{-4}$ and $93\,000\,000 = 9.3\times10^{7}$. It also makes the number of significant figures clear (section 3).</p>
-    <p><strong>Orders of magnitude:</strong> the power of ten closest to a value. A person's mass (about 70 kg) is of order $10^{2}$ kg; the diameter of an atom is of order $10^{-10}$ m. Comparing orders of magnitude is a quick way to check whether an answer is sensible.</p>
+    <p><strong>Scientific notation</strong> writes a number as $a \times 10^{n}$ with $1 \le a &lt; 10$. For example, $0.000\,47 = 4.7\times10^{-4}$ and $93\,000\,000 = 9.3\times10^{7}$. It also makes the number of significant figures clear (section 5).</p>
+    <h3>Useful non-SI units</h3>
+    <p>Some topics use units that aren't SI because the SI value would be awkwardly large or small. Convert them to SI before you substitute into an equation. The conversions are in the data booklet.</p>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Unit</th><th>Value in SI</th><th>Used for</th></tr>
+        <tr><td>electronvolt, eV</td><td>$1.60\times10^{-19}$ J</td><td>energies of electrons, photons and nuclei (E.1–E.4)</td></tr>
+        <tr><td>MeV c<sup>−2</sup></td><td>a mass: $m = \frac{E}{c^2}$, with $E$ in MeV</td><td>masses of particles and nuclei (E.3)</td></tr>
+        <tr><td>kilowatt-hour, kWh</td><td>$3.60\times10^{6}$ J</td><td>electrical energy bought from the mains</td></tr>
+        <tr><td>astronomical unit, AU</td><td>$1.50\times10^{11}$ m</td><td>distances in the Solar System</td></tr>
+        <tr><td>light year, ly</td><td>$9.46\times10^{15}$ m</td><td>distances to stars (E.5)</td></tr>
+        <tr><td>parsec, pc</td><td>3.26 ly</td><td>distances to stars (E.5)</td></tr>
+        <tr><td>hour, day, year</td><td>3600 s, 86 400 s, about $3.16\times10^{7}$ s</td><td>half-lives, orbits, energy use</td></tr>
+      </table>
+    </div>
+    <div class="worked">
+      <h3>Worked example: converting units</h3>
+      <p>(a) An alpha particle has 5.3 MeV of kinetic energy. Convert this to joules.<br>
+      $5.3\ \text{MeV} = 5.3\times10^{6} \times 1.60\times10^{-19} = 8.5\times10^{-13}$ J.</p>
+      <p>(b) A 1.8 kW kettle is on for 4.0 minutes. How much energy does it transfer, in kWh?<br>
+      $E = Pt = 1.8\ \text{kW} \times \dfrac{4.0}{60}\ \text{h} = 0.12$ kWh, which is $0.12 \times 3.60\times10^{6} = 4.3\times10^{5}$ J.</p>
+    </div>
     <aside class="maths-link">
       <h3>Maths link: scientific notation <span class="tag">AA SL 1.1</span></h3>
       <p>Your calculator's "E" button enters powers of ten: <code>4.7E-4</code> means $4.7\times10^{-4}$. Use it instead of typing "× 10 ^", which can upset the order of operations. For example, dividing by $2\times10^{3}$ typed as "÷ 2 × 10 ^ 3" divides by 2 and then <em>multiplies</em> by 1000, giving an answer a million times too big.</p>
     </aside>
 
     <!-- ===================================================== -->
-    <h2 id="accuracy">2. Accuracy, precision and errors</h2>
+    <h2 id="estimation">2. Orders of magnitude, estimates and assumptions</h2>
+    <p>The <strong>order of magnitude</strong> of a value is the power of ten closest to it. Write the value in scientific notation, $a\times10^{n}$. If $a$ is less than about 3 (strictly $\sqrt{10} \approx 3.16$), the order of magnitude is $10^{n}$; otherwise round up to $10^{n+1}$.</p>
+    <ul>
+      <li>A person's mass, 70 kg $= 7\times10^{1}$ kg, is of order $10^{2}$ kg.</li>
+      <li>The diameter of an atom, about $1\times10^{-10}$ m, is of order $10^{-10}$ m.</li>
+    </ul>
+    <p>Two values that differ by <strong>$n$ orders of magnitude</strong> have a ratio of about $10^{n}$. An atom ($10^{-10}$ m) is five orders of magnitude bigger than its nucleus ($10^{-15}$ m): about 100 000 times bigger. Comparing orders of magnitude is a quick way to check whether an answer is sensible.</p>
+    <p>A few values worth knowing, to check your answers against:</p>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Quantity</th><th>Typical value</th><th>Order of magnitude</th></tr>
+        <tr><td>diameter of a nucleus</td><td>a few × $10^{-15}$ m</td><td>$10^{-15}$ m</td></tr>
+        <tr><td>diameter of an atom</td><td>$1\times10^{-10}$ m</td><td>$10^{-10}$ m</td></tr>
+        <tr><td>wavelength of visible light</td><td>400–700 nm</td><td>$10^{-7}$ m</td></tr>
+        <tr><td>mass of an apple; its weight</td><td>0.1 kg; about 1 N</td><td>$10^{-1}$ kg; $10^{0}$ N</td></tr>
+        <tr><td>walking speed; a car on a highway</td><td>1.4 m s⁻¹; 30 m s⁻¹</td><td>$10^{0}$ m s⁻¹; $10^{1}$ m s⁻¹</td></tr>
+        <tr><td>speed of sound in air</td><td>340 m s⁻¹</td><td>$10^{2}$ m s⁻¹</td></tr>
+        <tr><td>atmospheric pressure</td><td>$1.0\times10^{5}$ Pa</td><td>$10^{5}$ Pa</td></tr>
+        <tr><td>radius of the Earth</td><td>$6.4\times10^{6}$ m</td><td>$10^{7}$ m</td></tr>
+        <tr><td>one year</td><td>$3.2\times10^{7}$ s</td><td>$10^{7}$ s</td></tr>
+      </table>
+    </div>
+    <h3>Making an estimate</h3>
+    <p>An estimate uses rounded values and simple physics to get an answer to within a factor of about ten. State each value you assume, round it to 1 significant figure, and give the answer as an order of magnitude.</p>
+    <div class="worked">
+      <h3>Worked example: the air in a classroom</h3>
+      <p>Estimate the mass of air in your classroom.</p>
+      <p>Assume the room is 8 m × 7 m × 3 m, so its volume is about $170\ \text{m}^3$. The density of air is about $1.2\ \text{kg m}^{-3}$.</p>
+      <p>$m = \rho V \approx 1.2 \times 170 \approx 200$ kg, so the order of magnitude is $10^{2}$ kg. That's about the mass of three students, which surprises most people.</p>
+    </div>
+    <h3>Assumptions: when can an effect be neglected?</h3>
+    <p>Real situations are complicated, so physicists leave out effects that are too small to change the answer much. This makes the maths possible and shows the main physics clearly. A good answer says <strong>which</strong> effect is neglected and <strong>why</strong> it is small, and checks afterwards whether that was reasonable.</p>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Assumption</th><th>Reasonable when…</th><th>Breaks down when…</th></tr>
+        <tr><td>no air resistance</td><td>a dense ball falls a few metres</td><td>a feather or a parachute falls, or speeds are high</td></tr>
+        <tr><td>the object is a point particle</td><td>its size is tiny compared with the distances involved, such as a planet in orbit</td><td>it rotates or its shape matters (A.4)</td></tr>
+        <tr><td>no energy lost to the surroundings</td><td>a quick heating experiment with good insulation</td><td>the experiment is slow, or much hotter than the room</td></tr>
+        <tr><td>ideal meters (ammeter with no resistance, voltmeter with infinite resistance)</td><td>the meters' resistances are very different from the circuit's</td><td>you measure a very small or a very large resistance</td></tr>
+        <tr><td>a light, inextensible string</td><td>its mass is much less than the masses it connects</td><td>it is a heavy rope or a stretchy cord</td></tr>
+        <tr><td>an ideal gas</td><td>the gas is at low pressure and well above its boiling point</td><td>the gas is compressed hard or close to condensing</td></tr>
+        <tr><td>a cell with no internal resistance</td><td>the current is small</td><td>the current is large, such as a car's starter motor</td></tr>
+      </table>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="maths">3. The maths you need</h2>
+    <p>Physics uses mathematics as a language. Most of it is algebra you already know; this section collects the parts you will use again and again.</p>
+    <h3>Rearranging equations</h3>
+    <p>Rearrange the symbols to make the quantity you want the subject <strong>before</strong> you put in numbers: it's faster, you make fewer slips, and you can check the units. Do the same thing to both sides each time.</p>
+    <div class="worked">
+      <h3>Worked example: making $r$ the subject</h3>
+      <p>Rearrange $F = \dfrac{GMm}{r^{2}}$ to find $r$.</p>
+      <p>Multiply both sides by $r^{2}$: $\ Fr^{2} = GMm$. &nbsp; Divide by $F$: $\ r^{2} = \dfrac{GMm}{F}$. &nbsp; Take the square root: $\ r = \sqrt{\dfrac{GMm}{F}}$.</p>
+    </div>
+    <h3>Areas and volumes</h3>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Shape</th><th>Area or volume</th></tr>
+        <tr><td>rectangle; triangle</td><td>area $= lw$; area $= \frac{1}{2}bh$</td></tr>
+        <tr><td>circle of radius $r$</td><td>area $= \pi r^{2}$; circumference $= 2\pi r$</td></tr>
+        <tr><td>cuboid</td><td>volume $= lwh$</td></tr>
+        <tr><td>cylinder of radius $r$, height $h$</td><td>volume $= \pi r^{2}h$; curved surface area $= 2\pi rh$</td></tr>
+        <tr><td>sphere of radius $r$</td><td>volume $= \frac{4}{3}\pi r^{3}$; surface area $= 4\pi r^{2}$</td></tr>
+      </table>
+    </div>
+    <p>The sphere's surface area, $4\pi r^{2}$, is behind every inverse-square law in the course: light, sound and gravitational fields spread their effect over a sphere whose area grows as $r^{2}$.</p>
+    <h3>Percentages</h3>
+    <p>Four percentages turn up often. Make sure you know which one a question is asking for.</p>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Percentage</th><th>Calculation</th><th>Use it for</th></tr>
+        <tr><td>percentage change</td><td>$\dfrac{\text{new} - \text{old}}{\text{old}}\times100\%$</td><td>how much a quantity has changed (negative for a decrease)</td></tr>
+        <tr><td>percentage difference</td><td>$\dfrac{|a - b|}{\text{mean of } a \text{ and } b}\times100\%$</td><td>comparing two values when neither is the "right" one, such as two groups' results</td></tr>
+        <tr><td>percentage error</td><td>$\dfrac{|\text{experimental} - \text{accepted}|}{\text{accepted}}\times100\%$</td><td>comparing your result with an accepted value</td></tr>
+        <tr><td>percentage uncertainty</td><td>$\dfrac{\Delta x}{x}\times100\%$</td><td>how precise a measurement is (section 6)</td></tr>
+      </table>
+    </div>
+    <p>For example, if a resistor's resistance rises from 12.0 Ω to 13.5 Ω as it warms up, the percentage change is $\dfrac{13.5 - 12.0}{12.0}\times100\% = +12.5\%$.</p>
+    <h3>Relationships between variables</h3>
+    <ul>
+      <li><strong>Continuous</strong> variables can take any value in a range: length, time, temperature. <strong>Discrete</strong> variables can only take certain values, usually counts: the number of coils on a spring, the number of sheets of paper, the number of slits in a grating.</li>
+      <li><strong>Directly proportional</strong>, $y \propto x$, means $y = kx$: doubling $x$ doubles $y$, and the graph is a straight line <strong>through the origin</strong>. A straight line that misses the origin, $y = mx + c$, is <strong>linear</strong> but not proportional.</li>
+      <li><strong>Inversely proportional</strong>, $y \propto \frac{1}{x}$, means $y = \frac{k}{x}$: doubling $x$ halves $y$, and $xy$ stays constant. A graph of $y$ against $\frac{1}{x}$ is a straight line through the origin.</li>
+      <li>A <strong>positive correlation</strong> means $y$ tends to increase as $x$ increases; a <strong>negative correlation</strong> means $y$ tends to decrease. A correlation on its own doesn't prove that one variable causes the change in the other, and it doesn't tell you the relationship is proportional.</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: what happens if a variable changes?</h3>
+      <p>The intensity of light from a small lamp is inversely proportional to the square of the distance, $I \propto \dfrac{1}{d^{2}}$. A light sensor is moved from 2.0 m to 5.0 m from the lamp. By what factor does the intensity change?</p>
+      <p>The distance is multiplied by $\dfrac{5.0}{2.0} = 2.5$, so the intensity is divided by $2.5^{2} = 6.25$. The new intensity is about $\dfrac{1}{6}$ of the old one. There's no need to know the lamp's power.</p>
+    </div>
+    <h3>Rates of change</h3>
+    <p>A rate of change tells you how fast one quantity changes compared with another, usually time. The <strong>average</strong> rate over an interval is $\dfrac{\Delta y}{\Delta t}$. For example, a cup of coffee cooling from 80 °C to 62 °C in 6.0 minutes cools at an average rate of $\dfrac{62 - 80}{6.0} = -3.0$ °C per minute. The <strong>instantaneous</strong> rate at one moment is the gradient of the tangent to the graph at that moment (section 10).</p>
+    <h3>Angles in radians</h3>
+    <p>An angle in <strong>radians</strong> is the arc length divided by the radius, $\theta = \dfrac{s}{r}$. A full circle is $\dfrac{2\pi r}{r} = 2\pi$ rad, so $2\pi\ \text{rad} = 360°$.</p>
+    <div class="key">
+      <p style="margin:0">To convert: &nbsp; radians $=$ degrees $\times\dfrac{\pi}{180}$ &nbsp; and &nbsp; degrees $=$ radians $\times\dfrac{180}{\pi}$.</p>
+      <p style="margin:8px 0 0">For example, $45° = \dfrac{\pi}{4} = 0.785$ rad, and $1$ rad $= 57.3°$.</p>
+    </div>
+    <p>Circular motion (A.2), simple harmonic motion (C.1) and diffraction (C.3) use radians. For small angles in radians, $\sin\theta \approx \tan\theta \approx \theta$: for 0.10 rad, $\sin\theta = 0.0998$. Check your calculator's mode before every calculation with angles.</p>
+    <h3>Logarithms and exponentials</h3>
+    <p>A logarithm answers the question "what power?". $\log_{10} x$ is the power of 10 that gives $x$: $\log_{10} 1000 = 3$. The <strong>natural logarithm</strong> $\ln x$ is the power of $e$ $(= 2.718\ldots)$ that gives $x$: if $x = e^{n}$, then $\ln x = n$. Natural logs appear wherever something changes at a rate proportional to its size, such as radioactive decay (E.3).</p>
+    <div class="key">
+      <p style="margin:0">The rules work for any base:</p>
+      $$\ln(ab) = \ln a + \ln b \qquad \ln\left(\frac{a}{b}\right) = \ln a - \ln b$$
+      $$\ln\left(a^{n}\right) = n\ln a \qquad \ln\left(e^{x}\right) = x$$
+    </div>
+    <div class="worked">
+      <h3>Worked example: solving an exponential equation</h3>
+      <p>The activity of a sample falls as $A = A_0 e^{-0.35t}$, with $t$ in minutes. How long does it take to fall to a quarter of its starting value?</p>
+      <p>$\dfrac{A}{A_0} = 0.25 = e^{-0.35t}$. &nbsp; Take natural logs: $\ \ln 0.25 = -0.35t$.</p>
+      <p>$t = \dfrac{\ln 0.25}{-0.35} = \dfrac{-1.386}{-0.35} = 4.0$ minutes.</p>
+    </div>
+    <p>You can only take the logarithm of a pure number. On a graph, label the axis with the quantity divided by its unit, such as $\ln(A / \text{Bq})$; the log itself has no unit.</p>
+    <aside class="maths-link">
+      <h3>Maths link: exponents, logarithms and radians <span class="tag">AA SL 1.5, 1.7</span> <span class="tag">AA SL 3.4</span></h3>
+      <p>The laws of logarithms are in AA SL 1.7, and exponential equations like the one above are solved the same way in maths. Radians and arc length $s = r\theta$ are in AA SL 3.4. If you take Maths AI, you meet logarithms too, but this section has all the rules you need for physics.</p>
+    </aside>
+
+    <div class="part-banner" id="part-uncertainty"><span class="code">Part 2</span> Measurement and uncertainty<p>How good is a measurement, how to record its uncertainty, and how uncertainties carry through a calculation.</p></div>
+
+    <!-- ===================================================== -->
+    <h2 id="accuracy">4. Accuracy, precision and errors</h2>
     <ul>
       <li>A measurement is <strong>accurate</strong> if it is close to the true (or accepted) value.</li>
       <li>A set of measurements is <strong>precise</strong> if the readings are close to each other, whether or not they are close to the true value.</li>
@@ -149,9 +334,16 @@
       <li>Reduce them by zeroing or recalibrating the instrument, or by improving the method. <strong>Repeating doesn't help.</strong></li>
     </ul>
     <p>On a graph, a systematic error often shows up as an <strong>unexpected intercept</strong>: a straight line that should pass through the origin but doesn't. Random errors show up as <strong>scatter</strong> of the points about the line.</p>
+    <h3>Reliability and validity</h3>
+    <ul>
+      <li>A result is <strong>reliable</strong> if you get similar values when you repeat it (<strong>repeatable</strong>) and when someone else repeats it with different equipment (<strong>reproducible</strong>).</li>
+      <li>A method is <strong>valid</strong> if it really measures what the question asks, with the other variables controlled. A precise measurement of the wrong thing isn't valid.</li>
+    </ul>
+    <h3>Outliers</h3>
+    <p>An <strong>outlier</strong> is a reading that lies far from the pattern of the others. Look for a reason first: a misread scale, a wrong setting, a trial that went wrong. If you find one, repeat the reading if you can. Leave out an outlier only when you can justify it, say that you did, and keep it in your table. Never remove a point just because it spoils your line. On a graph, plot it, label it, and draw the best-fit line without it.</p>
 
     <!-- ===================================================== -->
-    <h2 id="sigfigs">3. Significant figures</h2>
+    <h2 id="sigfigs">5. Significant figures</h2>
     <h3>Counting significant figures</h3>
     <ul>
       <li>Non-zero digits always count: 472 has 3 s.f.</li>
@@ -168,14 +360,31 @@
     <p>Keep extra digits in your calculator during a calculation, and round only at the end. Rounding at every step builds up errors. A long string of digits copied from the calculator claims a precision your data doesn't have.</p>
 
     <!-- ===================================================== -->
-    <h2 id="recording">4. Recording uncertainties</h2>
+    <h2 id="recording">6. Recording uncertainties</h2>
     <p>Every measurement is written as a <strong>best value ± absolute uncertainty</strong>, with a unit: for example $l = (24.5 \pm 0.1)$ cm.</p>
+    <h3>A single reading</h3>
     <ul>
-      <li><strong>Analogue scale</strong> (a ruler or a thermometer): the uncertainty is usually <strong>half the smallest division</strong>, so ± 0.5 mm for a millimetre ruler. Measuring a length with a ruler involves reading both ends, so some teachers use ± 1 mm.</li>
-      <li><strong>Digital instrument:</strong> the uncertainty is at least <strong>± 1 in the last digit</strong>, so ± 0.01 g for a balance reading 12.34 g.</li>
-      <li><strong>Repeated readings:</strong> use the <strong>mean</strong>, $\bar{x}$, as the best value and <strong>half the range</strong> as the uncertainty: $\Delta x = \dfrac{x_{\max} - x_{\min}}{2}$. If this is smaller than the instrument's uncertainty, use the instrument's uncertainty instead.</li>
-      <li>Sometimes the method matters more than the instrument. A stopwatch reads to 0.01 s, but human reaction time adds an uncertainty of about 0.1–0.2 s.</li>
+      <li><strong>Analogue scale</strong> (a ruler, a thermometer, a measuring cylinder, a meter with a pointer): <strong>± half the smallest division</strong>. A thermometer marked every 1 °C gives ±0.5 °C; a measuring cylinder marked every 2 cm³ gives ±1 cm³.</li>
+      <li><strong>Two readings on an analogue scale:</strong> some measurements need you to judge <em>two</em> positions. A length on a ruler needs the zero end <em>and</em> the far end, each ±0.5 mm on a millimetre ruler. The two half-divisions add, so the length is ± one full division, <strong>±1 mm</strong>. (This is the adding rule of section 7: a length is the difference between two positions.)</li>
+      <li><strong>Digital display</strong> (a balance, a digital meter, a stopwatch): <strong>± the smallest division</strong>, one in the last digit. A balance reading 12.34 g gives ±0.01 g.</li>
     </ul>
+    <div class="worked">
+      <h3>Worked example: three single readings</h3>
+      <p>A student measures a spring's length with a millimetre ruler (152 mm), the water temperature with a thermometer marked every 1 °C (24 °C), and a mass on a balance that reads to 0.1 g (48.6 g). Record each with its uncertainty.</p>
+      <p>Length: two ends, each ±0.5 mm, so $L = (152 \pm 1)$ mm.<br>
+      Temperature: one reading, half a division, so $T = (24.0 \pm 0.5)$ °C. The value now has one decimal place, to match its uncertainty.<br>
+      Mass: digital, so $m = (48.6 \pm 0.1)$ g.</p>
+    </div>
+    <h3>Make the uncertainty realistic</h3>
+    <p>The scale only sets the <em>smallest</em> uncertainty a reading can have. Always ask: <strong>how precisely could I really judge this reading?</strong> If the honest answer is "less precisely than the scale", use a bigger uncertainty and explain why.</p>
+    <ul>
+      <li>A stopwatch reads to 0.01 s, but your reaction time adds an uncertainty of about 0.1–0.2 s.</li>
+      <li>A digital meter whose last digit keeps flickering between 4.31 and 4.36 V is uncertain by about ±0.03 V, not ±0.01 V.</li>
+      <li>In <strong>video analysis</strong>, the scale in the picture may read to 1 mm, but that doesn't mean you can judge a position to 1 mm. To find how high a basketball rebounds, you have to choose the frame where it is highest and judge where its blurred bottom edge is, and each pixel may cover several millimetres. A realistic uncertainty might be ±1 cm.</li>
+    </ul>
+    <p>In your IA, say how you chose each uncertainty and why it is realistic. An uncertainty that is too small is just as wrong as one that is too big.</p>
+    <h3>Repeated readings</h3>
+    <p>Use the <strong>mean</strong>, $\bar{x}$, as the best value, and <strong>half the range</strong> as the uncertainty: $\Delta x = \dfrac{x_{\max} - x_{\min}}{2}$. If half the range is smaller than the uncertainty of a single reading, use the single-reading uncertainty instead: the uncertainty can never be smaller than what the instrument allows.</p>
     <div class="worked">
       <h3>Worked example: repeated timings</h3>
       <p>Five students time the same falling ball: 2.31 s, 2.45 s, 2.38 s, 2.29 s and 2.42 s. Give the result with its uncertainty.</p>
@@ -190,11 +399,17 @@
         <li><strong>percentage</strong> uncertainty: $3.4\%$.</li>
       </ul>
     </div>
-    <p><strong>Quoting uncertainties:</strong> round the absolute uncertainty to <strong>1 significant figure</strong> (2 is sometimes acceptable), and give the best value to the <strong>same decimal place</strong>. Write $(9.7 \pm 0.3)\ \text{m s}^{-2}$, not $(9.748 \pm 0.278)\ \text{m s}^{-2}$ or $(9.748 \pm 0.3)\ \text{m s}^{-2}$.</p>
+    <h3>How many significant figures in an uncertainty?</h3>
+    <p>Round the absolute uncertainty to <strong>1 or 2 significant figures</strong>, then give the best value to the <strong>same decimal place</strong>. Which one depends on how well you know the uncertainty itself:</p>
+    <ul>
+      <li><strong>1 s.f.</strong> when the uncertainty is a rough estimate, which is almost always: half a scale division, half the range of a few repeats, a guess at reaction time. A second figure would claim a precision you don't have. Write $(9.7 \pm 0.3)\ \text{m s}^{-2}$. <strong>Exam mark schemes usually use 1 s.f.</strong></li>
+      <li><strong>2 s.f.</strong> when the uncertainty itself is known well, and rounding it to 1 s.f. would change it a lot. For example, a calibrated thermometer whose certificate states ±0.15 °C: rounding to ±0.2 °C would change it by a third, so write $(21.37 \pm 0.15)$ °C.</li>
+    </ul>
+    <p>Either way, never write $(9.748 \pm 0.278)\ \text{m s}^{-2}$ or $(9.748 \pm 0.3)\ \text{m s}^{-2}$: the value must stop at the same decimal place as its uncertainty.</p>
     <p><strong>Percentage error</strong> is different from percentage uncertainty. It compares your result with an accepted value: $\dfrac{|\text{experimental} - \text{accepted}|}{\text{accepted}} \times 100\%$. If the percentage error is bigger than the percentage uncertainty, there is probably a systematic error.</p>
 
     <!-- ===================================================== -->
-    <h2 id="propagating">5. Propagating uncertainties</h2>
+    <h2 id="propagating">7. Propagating uncertainties</h2>
     <p>When you calculate a result from measured values, their uncertainties carry through to the result. The data booklet gives three rules:</p>
     <div class="key">
       <p style="margin:0"><strong>Adding or subtracting:</strong> add the <strong>absolute</strong> uncertainties.</p>
@@ -228,39 +443,189 @@
       <p>$\dfrac{\Delta g}{g} = \dfrac{\Delta l}{l} + 2\,\dfrac{\Delta T}{T} = \dfrac{0.005}{0.800} + 2 \times \dfrac{0.02}{1.80} = 0.006 + 0.022 = 0.028$. The $T$ term is doubled because $T$ is squared; $4\pi^2$ is exact.</p>
       <p>$\Delta g = 0.028 \times 9.75 = 0.3\ \text{m s}^{-2}$, so $g = (9.7 \pm 0.3)\ \text{m s}^{-2}$. The accepted value, 9.8, lies inside this range, so the result agrees with it.</p>
     </div>
+    <h3>Other functions: use the highest and lowest values</h3>
+    <p>The three rules don't cover functions such as $\sin\theta$ or $\ln x$. For these, work out the result for the <strong>largest</strong> and <strong>smallest</strong> possible input, and take half the difference as the uncertainty. This method works for any calculation, so you can also use it to check the rules.</p>
+    <div class="worked">
+      <h3>Worked example: the sine of an angle</h3>
+      <p>An angle is measured as $\theta = (30 \pm 2)°$. Find $\sin\theta$ with its uncertainty.</p>
+      <p>Best value: $\sin 30° = 0.500$. &nbsp; Largest: $\sin 32° = 0.530$. &nbsp; Smallest: $\sin 28° = 0.469$.</p>
+      <p>$\Delta(\sin\theta) = \dfrac{0.530 - 0.469}{2} = 0.03$, so $\sin\theta = 0.50 \pm 0.03$.</p>
+    </div>
+
+    <div class="part-banner" id="part-graphs"><span class="code">Part 3</span> Tables and graphs<p>Recording data clearly, choosing the right chart, and getting physics out of a graph.</p></div>
 
     <!-- ===================================================== -->
-    <h2 id="graphs">6. Graphs and best-fit lines</h2>
+    <h2 id="tables">8. Tables and charts</h2>
+    <h3>Recording data in a table</h3>
+    <ul>
+      <li>Each column heading gives the <strong>quantity</strong>, its <strong>unit</strong> and its <strong>uncertainty</strong>, for example "Extension $x$ / mm ±1". The numbers in the column are then just numbers.</li>
+      <li>Every value in a column has the same number of decimal places, matching its uncertainty.</li>
+      <li>Record <strong>every</strong> reading, not just the mean. Keep raw data (what you read) and processed data (what you calculated, such as means) in separate, clearly headed columns.</li>
+    </ul>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Mass $m$ / g<br>±0.1</th><th>$x_1$ / mm<br>±1</th><th>$x_2$ / mm<br>±1</th><th>$x_3$ / mm<br>±1</th><th>Mean $\bar{x}$ / mm</th><th>$\Delta\bar{x}$ / mm</th></tr>
+        <tr><td>100.0</td><td>12</td><td>13</td><td>12</td><td>12</td><td>1</td></tr>
+        <tr><td>200.0</td><td>25</td><td>24</td><td>26</td><td>25</td><td>1</td></tr>
+        <tr><td>300.0</td><td>37</td><td>39</td><td>36</td><td>37</td><td>2</td></tr>
+      </table>
+    </div>
+    <p>In the first row, half the range is only 0.5 mm, less than the ruler's ±1 mm, so the uncertainty is ±1 mm. In the last row, half the range, 1.5 mm, rounds up to ±2 mm.</p>
+    <h3>Choosing a chart</h3>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Chart</th><th>Use it for</th><th>Example</th></tr>
+        <tr><td>scatter graph (an $x$–$y$ graph)</td><td>two continuous variables: the usual physics graph, with a best-fit line or curve</td><td>extension against load</td></tr>
+        <tr><td>line graph</td><td>one quantity measured at regular times, with the points joined</td><td>the daily maximum temperature over a month</td></tr>
+        <tr><td>bar chart</td><td>values for separate categories; the bars have gaps and can go in any order</td><td>the specific heat capacity of four metals</td></tr>
+        <tr><td>histogram</td><td>how often values of a continuous quantity fall in each interval; the bars touch, on a number scale</td><td>the spread of 50 reaction times</td></tr>
+        <tr><td>pie chart</td><td>parts of a whole, as percentages</td><td>the sources of a country's electricity</td></tr>
+      </table>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 200" role="img" aria-labelledby="sk5t">
+        <title id="sk5t">Left: a bar chart of the specific heat capacity of aluminium, copper, iron and lead, with separate bars and gaps between them. Right: a histogram of 50 reaction times between 0.15 and 0.40 seconds, with touching bars on a number scale; the tallest bar is between 0.25 and 0.30 seconds.</title>
+        <line class="axis" x1="30" y1="150" x2="190" y2="150"/>
+        <line class="axis" x1="30" y1="150" x2="30" y2="20"/>
+        <g class="f1"><rect x="40" y="42" width="26" height="108"/><rect x="80" y="103.8" width="26" height="46.2"/><rect x="120" y="96" width="26" height="54"/><rect x="160" y="134.4" width="26" height="15.6"/></g>
+        <g text-anchor="middle"><text x="53" y="168" style="font-size:13px">Al</text><text x="93" y="168" style="font-size:13px">Cu</text><text x="133" y="168" style="font-size:13px">Fe</text><text x="173" y="168" style="font-size:13px">Pb</text></g>
+        <text x="110" y="192" text-anchor="middle" style="font-size:13px">bar chart</text>
+        <line class="axis" x1="220" y1="150" x2="365" y2="150"/>
+        <line class="axis" x1="220" y1="150" x2="220" y2="20"/>
+        <g class="f2" style="stroke:var(--surface);stroke-width:1"><rect x="225" y="128" width="26" height="22"/><rect x="251" y="67.5" width="26" height="82.5"/><rect x="277" y="40" width="26" height="110"/><rect x="303" y="100.5" width="26" height="49.5"/><rect x="329" y="139" width="26" height="11"/></g>
+        <g text-anchor="middle"><text x="225" y="168" style="font-size:12px">0.15</text><text x="277" y="168" style="font-size:12px">0.25</text><text x="329" y="168" style="font-size:12px">0.35</text></g>
+        <text x="290" y="192" text-anchor="middle" style="font-size:13px">histogram (time / s)</text>
+      </svg>
+      <figcaption>A <span class="key-1">bar chart</span> compares separate categories, so its bars have gaps. A <span class="key-2">histogram</span> groups a continuous quantity into intervals, so its bars touch.</figcaption>
+    </figure>
+    <h3>Sketching or plotting?</h3>
+    <p>A <strong>sketch</strong> shows the <em>shape</em> of a relationship: labelled axes but no scale, with the important features clear (through the origin or not, curving up or down, levelling off). When a question says "sketch", that's all it wants. A <strong>plot</strong> uses real data on scaled axes, and is what you draw in a practical.</p>
+
+    <!-- ===================================================== -->
+    <h2 id="graphs">9. Graphs and best-fit lines</h2>
     <ul>
       <li>Put the <strong>independent variable</strong> (the one you change) on the $x$-axis and the <strong>dependent variable</strong> (the one you measure) on the $y$-axis.</li>
       <li>Label each axis with the quantity <strong>and its unit</strong>, for example "extension / cm".</li>
       <li>Choose scales so that the points fill most of the graph area, and use easy steps (1, 2 or 5 per division).</li>
-      <li>Draw <strong>uncertainty bars</strong> on each point, showing $\pm\Delta y$ (and $\pm\Delta x$ if it is big enough to see).</li>
+      <li>Draw <strong>uncertainty bars</strong> on every point, showing $\pm\Delta y$ (and $\pm\Delta x$ if it is big enough to see).</li>
       <li>Draw a single smooth <strong>line or curve of best fit</strong>, with the points scattered evenly either side. It should pass through as many uncertainty bars as possible. Don't join the dots, and don't force it through the origin.</li>
       <li>Find the <strong>gradient</strong> from a large triangle drawn on the <em>line</em>, using two points far apart. Don't use two data points.</li>
     </ul>
-    <h3>Linearising: making a straight line</h3>
-    <p>Straight-line graphs are the easiest to analyse. Compare your equation with $y = mx + c$ and choose what to plot so that you get a straight line. The gradient and intercept then give physical quantities.</p>
-    <div class="table-wrap">
-      <table class="notes">
-        <tr><th>Relationship</th><th>Plot</th><th>Gradient</th></tr>
-        <tr><td>$F = kx$ (spring)</td><td>$F$ against $x$</td><td>$k$</td></tr>
-        <tr><td>$s = \frac{1}{2}gt^2$ (falling from rest)</td><td>$s$ against $t^2$</td><td>$\frac{g}{2}$</td></tr>
-        <tr><td>$T = 2\pi\sqrt{\frac{l}{g}}$ (pendulum)</td><td>$T^2$ against $l$</td><td>$\frac{4\pi^2}{g}$</td></tr>
-        <tr><td>$v = u + at$</td><td>$v$ against $t$</td><td>$a$ (intercept $u$)</td></tr>
-      </table>
-    </div>
-    <p>In the first three, the line should pass through the origin. An <strong>intercept that should be zero but isn't</strong> usually means a systematic error (such as a zero error) or a missing effect (such as friction). That's useful information, not a failure.</p>
     <aside class="maths-link">
       <h3>Maths link: straight lines <span class="tag">AA SL 2.1</span></h3>
       <p>The gradient of a straight line is $m = \dfrac{y_2 - y_1}{x_2 - x_1}$. In physics, the gradient has <strong>units</strong>: the units of $y$ divided by the units of $x$. For a graph of force in N against extension in m, the gradient is in $\text{N m}^{-1}$.</p>
     </aside>
 
     <!-- ===================================================== -->
-    <h2 id="gradient-uncertainty">7. Uncertainty in the gradient and intercept</h2>
+    <h2 id="reading">10. Reading a graph: gradient, area and intercepts</h2>
+    <ul>
+      <li><strong>Gradient:</strong> $\dfrac{\Delta y}{\Delta x}$, with units. It is a <em>rate</em> only when $x$ is time. On a curve, the gradient at a point is the gradient of the <strong>tangent</strong>: a straight line that just touches the curve there.</li>
+      <li><strong>Changes in gradient:</strong> a curve that gets steeper means the rate is increasing. Where the tangent is horizontal (gradient zero), the graph has a <strong>maximum</strong> or <strong>minimum</strong>.</li>
+      <li><strong>Area under the graph:</strong> the $y$-quantity multiplied by the $x$-quantity, with units to match. The area under a velocity–time graph is the displacement; under a force–extension graph, the work done; under a power–time graph, the energy. Split straight-line shapes into rectangles and triangles; for a curve, count squares and multiply by what one square represents.</li>
+      <li><strong>Intercepts:</strong> where the line crosses an axis. The $y$-intercept is the value of $y$ when $x = 0$, and it often has a physical meaning (section 11).</li>
+      <li><strong>Interpolation</strong> means reading a value <em>between</em> your data points, which is usually reliable. <strong>Extrapolation</strong> means extending the line <em>beyond</em> your data. It is less reliable, because the relationship may change: a spring stretched past its elastic limit no longer follows Hooke's law.</li>
+    </ul>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 215" role="img" aria-labelledby="sk6t">
+        <title id="sk6t">Left: a displacement–time curve that gets steeper, with a tangent drawn at t equals 3 seconds. The tangent crosses the time axis at 1.5 seconds and reaches 8.4 metres at 5 seconds. Right: a velocity–time graph rising in a straight line from 2 metres per second at time zero to 6 metres per second at 5 seconds, with the area under it shaded.</title>
+        <g class="grid"><line x1="40" y1="105" x2="170" y2="105"/><line x1="40" y1="30" x2="170" y2="30"/><line x1="92" y1="30" x2="92" y2="180"/><line x1="144" y1="30" x2="144" y2="180"/></g>
+        <line class="axis" x1="40" y1="180" x2="178" y2="180" marker-end="url(#ah3)"/>
+        <line class="axis" x1="40" y1="180" x2="40" y2="20" marker-end="url(#ah3)"/>
+        <polyline class="l3" points="40,180 46.5,179.6 53,178.5 59.5,176.6 66,174 72.5,170.6 79,166.5 85.5,161.6 92,156 98.5,149.6 105,142.5 111.5,134.6 118,126 124.5,116.6 131,106.5 137.5,95.6 144,84 150.5,71.6 157,58.5 163.5,44.6 170,30"/>
+        <line class="l2 thin" x1="79" y1="180" x2="170" y2="54"/>
+        <circle class="f2" cx="118" cy="126" r="4"/>
+        <g text-anchor="middle"><text x="40" y="196" style="font-size:12px">0</text><text x="92" y="196" style="font-size:12px">2</text><text x="144" y="196" style="font-size:12px">4</text></g>
+        <g text-anchor="end"><text x="35" y="184" style="font-size:12px">0</text><text x="35" y="109" style="font-size:12px">5</text><text x="35" y="34" style="font-size:12px">10</text></g>
+        <text x="46" y="16" style="font-size:13px">s / m</text>
+        <text x="170" y="212" text-anchor="end" style="font-size:13px">t / s</text>
+        <polygon class="area" points="225,180 225,142.5 355,67.5 355,180"/>
+        <g class="grid"><line x1="225" y1="105" x2="355" y2="105"/><line x1="225" y1="30" x2="355" y2="30"/><line x1="277" y1="30" x2="277" y2="180"/><line x1="329" y1="30" x2="329" y2="180"/></g>
+        <line class="axis" x1="225" y1="180" x2="363" y2="180" marker-end="url(#ah3)"/>
+        <line class="axis" x1="225" y1="180" x2="225" y2="20" marker-end="url(#ah3)"/>
+        <line class="l1" x1="225" y1="142.5" x2="355" y2="67.5"/>
+        <g text-anchor="middle"><text x="225" y="196" style="font-size:12px">0</text><text x="277" y="196" style="font-size:12px">2</text><text x="329" y="196" style="font-size:12px">4</text></g>
+        <g text-anchor="end"><text x="220" y="184" style="font-size:12px">0</text><text x="220" y="109" style="font-size:12px">4</text><text x="220" y="34" style="font-size:12px">8</text></g>
+        <text x="231" y="16" style="font-size:13px">v / m s⁻¹</text>
+        <text x="355" y="212" text-anchor="end" style="font-size:13px">t / s</text>
+      </svg>
+      <figcaption>Left: the <span class="key-2">tangent</span> at $t = 3.0$ s gives the velocity at that instant. Right: the <span class="key-1">shaded area</span> under the velocity–time graph is the displacement.</figcaption>
+    </figure>
+    <div class="worked">
+      <h3>Worked example: tangent and area</h3>
+      <p>(a) Use the tangent on the left-hand graph to find the velocity at $t = 3.0$ s.<br>
+      The tangent passes through $(1.5\ \text{s}, 0)$ and $(5.0\ \text{s}, 8.4\ \text{m})$, so $v = \dfrac{8.4 - 0}{5.0 - 1.5} = 2.4\ \text{m s}^{-1}$.</p>
+      <p>(b) Use the right-hand graph to find the displacement in the first 5.0 s.<br>
+      The area is a trapezium: $\dfrac{1}{2}(2.0 + 6.0) \times 5.0 = 20$ m. The units are $\text{m s}^{-1} \times \text{s} = \text{m}$.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="linearising">11. Linearising and logarithms</h2>
+    <p>Straight-line graphs are the easiest to analyse: you can see at a glance whether the data fit, and the gradient and intercept are easy to measure. Compare your equation with $y = mx + c$ and choose what to plot so that you get a straight line. The gradient and intercept then give physical quantities.</p>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Relationship</th><th>Plot</th><th>Gradient</th></tr>
+        <tr><td>$F = kx$ (spring)</td><td>$F$ against $x$</td><td>$k$</td></tr>
+        <tr><td>$s = \frac{1}{2}gt^2$ (falling from rest)</td><td>$s$ against $t^2$</td><td>$\frac{g}{2}$</td></tr>
+        <tr><td>$T = 2\pi\sqrt{\frac{l}{g}}$ (pendulum)</td><td>$T^2$ against $l$</td><td>$\frac{4\pi^2}{g}$</td></tr>
+        <tr><td>$pV = nRT$ at constant $T$ (gas)</td><td>$p$ against $\frac{1}{V}$</td><td>$nRT$</td></tr>
+        <tr><td>$v = u + at$</td><td>$v$ against $t$</td><td>$a$ (intercept $u$)</td></tr>
+      </table>
+    </div>
+    <p>In the first four, the line should pass through the origin. An <strong>intercept that should be zero but isn't</strong> usually means a systematic error (such as a zero error) or a missing effect (such as friction). That's useful information, not a failure.</p>
+    <h3>Exponentials: plot the natural log</h3>
+    <p>An exponential decrease, such as $A = A_0e^{-\lambda t}$ for radioactive decay, gives a curve. Taking natural logs of both sides turns it into a straight line:</p>
+    $$\ln A = \ln A_0 - \lambda t$$
+    <p>This matches $y = c + mx$, so a graph of $\ln A$ against $t$ is a straight line with gradient $-\lambda$ and $y$-intercept $\ln A_0$.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 215" role="img" aria-labelledby="sk7t">
+        <title id="sk7t">Left: activity against time, a curve falling from 800 becquerels at time zero towards zero, with points every minute. Right: the natural log of activity against time for the same data, a straight line falling from 6.68 at time zero to 3.89 at 8 minutes.</title>
+        <line class="axis" x1="40" y1="180" x2="178" y2="180" marker-end="url(#ah3)"/>
+        <line class="axis" x1="40" y1="180" x2="40" y2="20" marker-end="url(#ah3)"/>
+        <polyline class="l3 thin" points="40,30 44.1,42.6 48.1,54.1 52.2,64.6 56.3,74.3 60.3,83.2 64.4,91.3 68.4,98.7 72.5,105.5 76.6,111.8 80.6,117.5 84.7,122.7 88.8,127.5 92.8,131.9 96.9,135.9 100.9,139.6 105,143 109.1,146.1 113.1,148.9 117.2,151.6 121.3,153.9 125.3,156.1 129.4,158.1 133.4,160 137.5,161.6 141.6,163.2 145.6,164.6 149.7,165.9 153.8,167.1 157.8,168.1 161.9,169.1 165.9,170 170,170.9"/>
+        <g class="f1"><circle cx="40" cy="30" r="3.5"/><circle cx="56.3" cy="74.3" r="3.5"/><circle cx="72.5" cy="105.5" r="3.5"/><circle cx="88.8" cy="127.5" r="3.5"/><circle cx="105" cy="143" r="3.5"/><circle cx="121.3" cy="153.9" r="3.5"/><circle cx="137.5" cy="161.6" r="3.5"/><circle cx="153.8" cy="167.1" r="3.5"/><circle cx="170" cy="170.9" r="3.5"/></g>
+        <g text-anchor="middle"><text x="40" y="196" style="font-size:12px">0</text><text x="105" y="196" style="font-size:12px">4</text><text x="170" y="196" style="font-size:12px">8</text></g>
+        <g text-anchor="end"><text x="35" y="184" style="font-size:12px">0</text><text x="35" y="109" style="font-size:12px">400</text><text x="35" y="34" style="font-size:12px">800</text></g>
+        <text x="46" y="16" style="font-size:13px">A / Bq</text>
+        <text x="170" y="212" text-anchor="end" style="font-size:13px">t / min</text>
+        <line class="axis" x1="225" y1="180" x2="363" y2="180" marker-end="url(#ah3)"/>
+        <line class="axis" x1="225" y1="180" x2="225" y2="20" marker-end="url(#ah3)"/>
+        <line class="l2 thin" x1="225" y1="43.5" x2="355" y2="163.5"/>
+        <g class="f1"><circle cx="225" cy="43.5" r="3.5"/><circle cx="241.3" cy="58.5" r="3.5"/><circle cx="257.5" cy="73.5" r="3.5"/><circle cx="273.8" cy="88.5" r="3.5"/><circle cx="290" cy="103.5" r="3.5"/><circle cx="306.3" cy="118.5" r="3.5"/><circle cx="322.5" cy="133.5" r="3.5"/><circle cx="338.8" cy="148.5" r="3.5"/><circle cx="355" cy="163.5" r="3.5"/></g>
+        <g text-anchor="middle"><text x="225" y="196" style="font-size:12px">0</text><text x="290" y="196" style="font-size:12px">4</text><text x="355" y="196" style="font-size:12px">8</text></g>
+        <g text-anchor="end"><text x="220" y="162.6" style="font-size:12px">4</text><text x="220" y="119.7" style="font-size:12px">5</text><text x="220" y="76.9" style="font-size:12px">6</text><text x="220" y="34" style="font-size:12px">7</text></g>
+        <text x="231" y="16" style="font-size:13px">ln(A / Bq)</text>
+        <text x="355" y="212" text-anchor="end" style="font-size:13px">t / min</text>
+      </svg>
+      <figcaption>The same <span class="key-1">data</span> plotted two ways. The curve on the left becomes a <span class="key-2">straight line</span> when you plot $\ln A$ against $t$. The $\ln A$ axis starts at 3.5, not 0.</figcaption>
+    </figure>
+    <div class="worked">
+      <h3>Worked example: the decay constant from a log graph</h3>
+      <p>The straight line on the right-hand graph goes from $\ln A = 6.68$ at $t = 0$ to $\ln A = 3.89$ at $t = 8.0$ min. Find the decay constant and the starting activity.</p>
+      <p>Gradient $= \dfrac{3.89 - 6.68}{8.0 - 0} = -0.35\ \text{min}^{-1}$, so $\lambda = 0.35\ \text{min}^{-1}$.</p>
+      <p>Intercept: $\ln A_0 = 6.68$, so $A_0 = e^{6.68} = 8.0\times10^{2}$ Bq.</p>
+    </div>
+    <h3>Power laws: plot log against log</h3>
+    <p>If you suspect $y = kx^{n}$ but don't know $n$, take logs of both sides:</p>
+    $$\ln y = \ln k + n\ln x$$
+    <p>A graph of $\ln y$ against $\ln x$ is a straight line with gradient $n$ and intercept $\ln k$. Measuring the gradient tells you the power.</p>
+    <div class="worked">
+      <h3>Worked example: finding a power</h3>
+      <p>The period $T$ of a mass $m$ on a spring is thought to follow $T = km^{n}$. A log–log graph of the data is a straight line through $(\ln 0.10, \ln 0.63)$ and $(\ln 0.40, \ln 1.26)$, with $m$ in kg and $T$ in s. Find $n$.</p>
+      <p>$n = \dfrac{\ln 1.26 - \ln 0.63}{\ln 0.40 - \ln 0.10} = \dfrac{0.231 - (-0.462)}{-0.916 - (-2.303)} = \dfrac{0.693}{1.386} = 0.50$.</p>
+      <p>So $T \propto \sqrt{m}$, as the theory for a mass on a spring predicts (C.1).</p>
+    </div>
+    <h3>Logarithmic scales</h3>
+    <p>On a <strong>logarithmic scale</strong>, each equal step on the axis multiplies the value by the same factor, usually 10: the marks read 1, 10, 100, 1000 rather than 1, 2, 3, 4. Use one when your data cover several orders of magnitude, such as the luminosities of stars on a Hertzsprung–Russell diagram (E.5), which range from about $10^{-4}$ to $10^{6}$ times the Sun's. A power law plotted on log scales on both axes appears as a straight line.</p>
+    <aside class="maths-link">
+      <h3>Maths link: linearising with logs <span class="tag">AA SL 1.5, 1.7</span></h3>
+      <p>Taking logs uses the rules $\ln(ab) = \ln a + \ln b$ and $\ln(a^{n}) = n\ln a$. In maths, the same idea is used to find the parameters of exponential and power models from data.</p>
+    </aside>
+
+    <!-- ===================================================== -->
+    <h2 id="gradient-uncertainty">12. Uncertainty in the gradient and intercept</h2>
     <p>To find the uncertainty in a gradient:</p>
     <ol>
-      <li>Draw the line of best fit, and find its gradient and intercept.</li>
+      <li>Draw uncertainty bars on <strong>every</strong> point, then the line of best fit. Find its gradient and intercept.</li>
       <li>Draw the <strong>steepest</strong> line that still passes through <strong>every</strong> uncertainty bar, and the <strong>shallowest</strong> such line. These are the lines of maximum and minimum gradient.</li>
       <li>Find the gradient and intercept of each.</li>
       <li>The uncertainty is half the difference: $\Delta m = \dfrac{m_{\max} - m_{\min}}{2}$ and $\Delta c = \dfrac{c_{\max} - c_{\min}}{2}$.</li>
@@ -299,8 +664,10 @@
       <p>Intercept: $\Delta c = \dfrac{0.16 - (-0.13)}{2} = 0.1$ N, so $c = (0.0 \pm 0.1)$ N. The intercept is consistent with zero, as Hooke's law predicts. There's no sign of a zero error.</p>
     </div>
 
+    <div class="part-banner" id="part-vectors"><span class="code">Part 4</span> Vectors<p>Quantities with a direction: how to draw them, add them and split them into components.</p></div>
+
     <!-- ===================================================== -->
-    <h2 id="vectors">8. Vectors</h2>
+    <h2 id="vectors">13. Vectors</h2>
     <p>A <strong>scalar</strong> has size (magnitude) only. A <strong>vector</strong> has magnitude <strong>and direction</strong>.</p>
     <div class="table-wrap">
       <table class="notes">
@@ -332,7 +699,16 @@
       </svg>
       <figcaption><strong>Adding:</strong> draw the vectors tip to tail; the resultant joins the start of the first to the end of the last. <strong>Subtracting:</strong> reverse the vector you subtract, then add: $\mathbf{a} - \mathbf{b} = \mathbf{a} + (-\mathbf{b})$.</figcaption>
     </figure>
-    <p>For two perpendicular vectors, use Pythagoras for the magnitude and trigonometry for the direction. For other angles, draw an accurate scale diagram, or resolve each vector into components (below), add the components, and recombine.</p>
+    <p>For two perpendicular vectors, use Pythagoras for the magnitude and trigonometry for the direction. For other angles, draw an accurate scale diagram (below), or resolve each vector into components, add the components, and recombine. Both methods work for three or more vectors: just keep adding tip to tail.</p>
+
+    <h3>Scale diagrams</h3>
+    <p>A scale diagram solves a vector problem by accurate drawing:</p>
+    <ol>
+      <li>Choose a scale that makes the diagram large, and write it down, for example "1 cm represents 10 N".</li>
+      <li>Draw each vector to scale, tip to tail, using a ruler and a protractor for the angles.</li>
+      <li>Draw the resultant from the start of the first vector to the end of the last. Measure its length and convert with the scale; measure its angle with the protractor.</li>
+    </ol>
+    <p>A careful drawing is accurate to within a few per cent, which is often good enough and is a useful check on a calculation.</p>
 
     <h3>Resolving a vector into components</h3>
     <p>Any vector can be split into two perpendicular <strong>components</strong>. For a vector $A$ at angle $\theta$ to the $x$-axis:</p>
@@ -367,31 +743,76 @@
       $F = \sqrt{3.0^2 + 4.0^2} = 5.0$ N. &nbsp; $\tan\theta = \dfrac{4.0}{3.0}$, so $\theta = 53°$.<br>
       $F_x$ is negative and $F_y$ is positive, so the force points up and to the <em>left</em>: 53° above the negative $x$-axis.</p>
     </div>
+
+    <h3>Free-body diagrams</h3>
+    <p>A <strong>free-body diagram</strong> shows <strong>one</strong> object and <strong>every force acting on it</strong>, and nothing else:</p>
+    <ul>
+      <li>Draw each force as an arrow starting at its <strong>point of application</strong>: weight from the centre of mass, the normal force and friction where the surfaces touch, tension where the rope is attached. For a particle, all the arrows can start from one point.</li>
+      <li>Make the lengths roughly show the sizes, and label each force with its name or symbol.</li>
+      <li>Leave out forces the object exerts on other things.</li>
+    </ul>
+    <figure class="diagram">
+      <svg viewBox="0 0 380 225" role="img" aria-labelledby="sk8t">
+        <title id="sk8t">A crate on a rough floor, pulled by a rope at an angle above the horizontal to the right. Four forces act on it: the weight W down from the centre of the crate, the normal force N up from the floor, friction F to the left along the bottom of the crate, and the tension T along the rope from the top right corner.</title>
+        <line class="axis" x1="20" y1="160" x2="360" y2="160"/>
+        <rect x="130" y="100" width="100" height="60" style="fill:var(--surface);stroke:var(--text);stroke-width:1.5"/>
+        <circle class="f3" cx="180" cy="130" r="3"/>
+        <line class="l3" x1="180" y1="130" x2="180" y2="214" marker-end="url(#ah3)"/>
+        <text x="188" y="210" style="font-size:15px">W</text>
+        <line class="l1" x1="155" y1="160" x2="155" y2="62" marker-end="url(#ah1)"/>
+        <text class="t1" x="138" y="76" style="font-size:15px">N</text>
+        <line class="l2" x1="130" y1="160" x2="68" y2="160" marker-end="url(#ah2)"/>
+        <text class="t2" x="78" y="152" style="font-size:15px">F</text>
+        <line class="l1" x1="230" y1="100" x2="302" y2="58" marker-end="url(#ah1)"/>
+        <text class="t1" x="306" y="62" style="font-size:15px">T</text>
+      </svg>
+      <figcaption>A crate pulled along a rough floor. <span class="key-1">Normal force N and tension T</span> are contact forces; <span class="key-2">friction F</span> acts along the surface, opposing the sliding. Weight W acts from the centre of mass. See <a href="themes/a2.html#forces">A.2 Forces</a> for more.</figcaption>
+    </figure>
     <aside class="maths-link">
       <h3>Maths link: trigonometry <span class="tag">AA SL 3.2, 3.3</span></h3>
       <p>Resolving and recombining vectors is right-angled trigonometry (SOH CAH TOA) and Pythagoras. Adding two vectors that aren't at right angles means solving a non-right-angled triangle, which you can do with the cosine rule $c^2 = a^2 + b^2 - 2ab\cos C$ and the sine rule. Make sure your calculator is in <strong>degrees</strong> for angles given in degrees, and in <strong>radians</strong> for circular motion and SHM.</p>
     </aside>
 
     <!-- ===================================================== -->
-    <h2 id="mistakes">9. Common mistakes</h2>
+    <h2 id="mistakes">14. Common mistakes</h2>
     <ul>
       <li><strong>Leaving out units</strong>, or the uncertainty, from a final answer.</li>
-      <li><strong>Copying every digit from the calculator.</strong> Round the uncertainty to 1 s.f. and match the value to it.</li>
+      <li><strong>Forgetting to convert non-SI units</strong> (eV, kWh, minutes, cm) before substituting into an equation.</li>
+      <li><strong>Copying every digit from the calculator.</strong> Round the uncertainty to 1 s.f. (2 only if you know it that well) and match the value to it.</li>
+      <li><strong>Quoting an uncertainty smaller than you could really judge,</strong> such as ±1 mm for a position read from blurry video, or ±0.01 s for hand timing.</li>
       <li><strong>Subtracting uncertainties</strong> when the quantities are subtracted. Absolute uncertainties always add.</li>
       <li><strong>Adding absolute uncertainties when multiplying or dividing.</strong> Use fractional or percentage uncertainties instead.</li>
       <li><strong>Forgetting to multiply by the power,</strong> for example doubling the fractional uncertainty for $T^2$.</li>
       <li><strong>Thinking repeats remove a systematic error.</strong> They only reduce random errors.</li>
+      <li><strong>Calling a straight line that misses the origin "proportional".</strong> Proportional means a straight line <em>through</em> the origin.</li>
       <li><strong>Finding a gradient from two data points</strong> rather than from the best-fit line, or using a small triangle.</li>
       <li><strong>Forcing a best-fit line through the origin.</strong> Let the data decide; the intercept is information.</li>
+      <li><strong>Extrapolating far beyond your data</strong> as if the relationship must carry on.</li>
       <li><strong>Mixing up accuracy and precision.</strong> Accurate means close to the true value; precise means close together.</li>
       <li><strong>Losing the sign of a vector component,</strong> or having the calculator in the wrong angle mode.</li>
     </ul>
 
     <!-- ===================================================== -->
-    <h2 id="check">10. Check your understanding</h2>
+    <h2 id="check">15. Check your understanding</h2>
     <details class="check">
       <summary>How many significant figures are there in 0.003 050?</summary>
       <p>Four: 3, 0, 5 and the final 0. The leading zeros don't count. In scientific notation it's $3.050\times10^{-3}$.</p>
+    </details>
+    <details class="check">
+      <summary>Estimate the number of seconds in a human lifetime of 80 years, to the nearest order of magnitude.</summary>
+      <p>$80 \times 3.2\times10^{7}\ \text{s} \approx 2.5\times10^{9}$ s. Since 2.5 is less than about 3, the order of magnitude is $10^{9}$ s.</p>
+    </details>
+    <details class="check">
+      <summary>A gamma photon has an energy of 2.5 MeV. What is its energy in joules?</summary>
+      <p>$2.5\times10^{6} \times 1.60\times10^{-19} = 4.0\times10^{-13}$ J.</p>
+    </details>
+    <details class="check">
+      <summary>The current through a lamp rises from 0.20 A to 0.26 A. What is the percentage change?</summary>
+      <p>$\dfrac{0.26 - 0.20}{0.20}\times100\% = +30\%$.</p>
+    </details>
+    <details class="check">
+      <summary>A measuring cylinder is marked every 2 cm³, and the liquid level is at 46 cm³. Record the volume with its uncertainty.</summary>
+      <p>One reading on an analogue scale: half the smallest division, so $V = (46 \pm 1)\ \text{cm}^3$.</p>
     </details>
     <details class="check">
       <summary>A length is measured as (50.0 ± 0.2) cm. A second length is (48.5 ± 0.2) cm. What is the difference between them, with its percentage uncertainty?</summary>
@@ -404,6 +825,14 @@
     <details class="check">
       <summary>Every reading on a newton-meter is 0.3 N too high. Is this a random or a systematic error, and will repeating the measurements help?</summary>
       <p>Systematic (a zero error). Repeating won't help, because every reading is shifted the same way. Zero the meter before use, or subtract 0.3 N from every reading.</p>
+    </details>
+    <details class="check">
+      <summary>A graph of $\ln A$ against $t$ (in hours) for a radioactive sample is a straight line with gradient $-0.12\ \text{h}^{-1}$. What is the decay constant?</summary>
+      <p>The gradient is $-\lambda$, so $\lambda = 0.12\ \text{h}^{-1}$.</p>
+    </details>
+    <details class="check">
+      <summary>What are the units of the area under a graph of power (in W) against time (in s), and what does the area represent?</summary>
+      <p>$\text{W} \times \text{s} = \text{J}$: the area is the energy transferred.</p>
     </details>
     <details class="check">
       <summary>A vector has components $A_x = -6.0$ and $A_y = -8.0$. Find its magnitude, and describe its direction.</summary>
