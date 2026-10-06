@@ -18,19 +18,32 @@ Related documents (all in this repository):
 Every question is generated from an explicit, audited physics model; nothing reaches students without an explicit
 teacher decision.
 
+### Current production
+
 | Item | State (6 October 2026) |
 |---|---|
-| Development branch | `paper-1b` |
-| Last commit on `paper-1b` | `253dce0` "Paper 1B handoff for the next session" (also on GitHub as `origin/paper-1b`) |
-| `main` (the live site) | `55295b2` "Record the XYZ identity decisions and progress": **unchanged by all Paper 1B work** |
-| Approved Paper 1B datasets | **13**: 5 original pilots + 8 Batch 1 datasets |
-| Production file | `questions/1b.json` on `paper-1b` lists all 13 (plus one data file each in `questions/1b/`) |
-| Working tree | **Not clean.** All work since `253dce0` (specification, matrix, retrospective, this file, the review/batch/AO tools, validator and generator changes, Batch 1 datasets and their approvals) is **uncommitted** on this computer |
-| Pushed | Nothing since `253dce0` |
-| Published | **Nothing.** The live site serves `main`, which has no Paper 1B datasets. Batch 1 and the pilots are only on `paper-1b`, and the latest work only in this computer's working tree |
+| Production | **`main` is production.** GitHub Pages publishes `main` |
+| `main` | `a9f8c58` "Merge paper-1b: Paper 1B pilots, Batch 1 and review pipeline", **pushed** (local = GitHub) |
+| Batch 1 | **Live.** Merged into `main` and pushed |
+| Approved and published Paper 1B datasets | **13**: 5 original pilots + 8 Batch 1 datasets, all in `questions/1b.json` on `main` |
+| Tests / checker at the merge | 460 of 460 Paper 1B tests pass; site checker: no errors |
 
-**Important:** until the work is committed and pushed, it exists only on the computer where it was done. The first
-item in NEXT ACTION (end of this file) is to verify and commit it.
+### Development branches
+
+| Branch | Commit | Role |
+|---|---|---|
+| `main` | `a9f8c58` | Production. Never develop on it directly |
+| `paper-1b` | `a3fa896` (local = GitHub) | **Historical** Batch 1 development branch. Its work is fully contained in `main`. Keep it; don't develop on it any more |
+| `paper1b-batch2` | created from `main` at `a9f8c58` | **Current** branch for Batch 2 development. Created locally on 6 October 2026; push it to GitHub with its first commit (`git push -u origin paper1b-batch2`) |
+
+### Batch 2 status
+
+- **Batch 2 has NOT been generated.**
+- No Batch 2 datasets exist, none is approved, and none is in production.
+- Batch 2 development begins from the current production `main` (`a9f8c58`), on `paper1b-batch2`.
+- Before generating, the agreed plan is to implement the MUST FIX tooling from `docs/PAPER1B_BATCH1_RETROSPECTIVE.md` (section 7).
+
+For a short, step-by-step resume guide, see **`docs/PAPER1B_CONTINUATION.md`**.
 
 ---
 
@@ -172,14 +185,14 @@ There are **no npm dependencies** (no `package.json`): Node.js alone runs everyt
 Assumes the repository is cloned, Node.js is installed (`winget install OpenJS.NodeJS.LTS` on Windows), and the
 `physics-site` folder is open in a terminal.
 
-1. **Get the latest work and the right branch:**
+1. **Get the latest work and the right branch** (full commands in `docs/PAPER1B_CONTINUATION.md`):
    ```
    git fetch
-   git checkout paper-1b
+   git checkout paper1b-batch2
    git pull
    ```
-   Check the branch with `git branch --show-current` (it must say `paper-1b`). If the Batch 1 work was merged into
-   `main` already (see NEXT ACTION), follow whatever development branch that step created instead.
+   Check the branch with `git branch --show-current` (it must say `paper1b-batch2`). If `paper1b-batch2` doesn't exist
+   on GitHub yet (it is pushed with its first commit), create it from production: `git checkout -b paper1b-batch2 origin/main`.
 2. **Per-computer setup:** create `CLAUDE.local.md` (not in git) recording where `physics-source` and the reference cache are on that computer (see `CLAUDE.md`).
 3. **Dependencies:** none to install.
 4. **Run the tests:** `node tools/1b/test.mjs` (expect "All 460 Paper 1B tests passed", or more if tests were added).
@@ -196,7 +209,7 @@ Assumes the repository is cloned, Node.js is installed (`winget install OpenJS.N
     - run `review.mjs batch batch-2`;
     - the teacher inspects the AMBER and sample datasets, then decides on `accept-batch`.
 11. **Avoid modifying `main`:**
-    - work only on `paper-1b` (or a new development branch);
+    - work only on `paper1b-batch2` (not on `main`, and no longer on the historical `paper-1b`);
     - check `git branch --show-current` before committing;
     - never run `git checkout main` followed by edits or commits;
     - merging into `main` is a separate, explicit teacher decision.
@@ -254,8 +267,11 @@ Batch 2 work.
 ## 8. Safety rules
 
 - **`main` is production.** GitHub Pages publishes `main`. Never edit, commit to or push `main` without the teacher's explicit instruction at that time.
-- **Development happens on `paper-1b`** (or a new development branch made from it for Batch 2).
+- **Never generate directly on `main`.** Batch 2 development happens on `paper1b-batch2`; `paper-1b` is historical.
 - **Never generate directly into production.** New datasets go to the local preview only; `questions/1b.json` is written only by `build.mjs` and contains only APPROVED, unchanged datasets.
+- **Never populate production from development without approval.** A development branch reaches `main` only after its datasets are APPROVED (individually or by batch acceptance) and the full QA pipeline passes, on the teacher's instruction.
+- **Use batch acceptance for qualifying uninspected datasets:** GREEN datasets (and AMBER datasets the teacher waives with a written reason) are approved only through `review.mjs accept-batch`, which records `inspected: false`.
+- **Run the complete QA pipeline before production:** tests, build (validation and independent physics audit), `review.mjs batch <batch>`, `ao.mjs --batch <batch>`, the site checker, then teacher sampling and batch acceptance.
 - **Never approve automatically.** APPROVED, TEACHER-REVIEWED and batch acceptance always name a person; Claude records them only on the teacher's explicit instruction, with `--recorded-by`.
 - **Never label a dataset TEACHER-REVIEWED unless the teacher actually inspected it.** Uninspected datasets are approved only through batch acceptance, with `inspected: false`.
 - **Never merge without validation:** `node tools/1b/test.mjs`, `node tools/1b/build.mjs` and `node tools/check.mjs` must all pass first.
@@ -290,21 +306,18 @@ Batch 2 work.
 
 # NEXT ACTION
 
-When you return, in this order:
+**Done on 6 October 2026:** Batch 1 verified, committed (`a3fa896`), merged into `main` (`a9f8c58`) and pushed;
+`paper-1b` pushed (`a3fa896`); `paper1b-batch2` created from `main`.
 
-1. **Verify the Batch 1 production checkpoint** on the computer that holds the work:
-   - `git branch --show-current` → `paper-1b`;
-   - `node tools/1b/test.mjs` → all pass;
-   - `node tools/1b/build.mjs` → "13 APPROVED dataset(s)";
-   - `node tools/check.mjs` → "No errors";
-   - `node tools/1b/review.mjs status` → 13 APPROVED.
-2. **Commit Batch 1** on `paper-1b` (all the uncommitted files listed by `git status`).
-3. **Merge Batch 1 into `main`.** This is a teacher decision: only on the teacher's explicit instruction, after step 1 passes.
-4. **Push `main`.** This publishes Paper 1B on the live site. Afterwards check the GitHub Actions result and the live question bank.
-5. **Create or continue the development branch for Batch 2** (for example, continue `paper-1b` after updating it from `main`, or create `paper-1b-batch2`).
-6. **Review** this file and `docs/PAPER1B_BATCH1_RETROSPECTIVE.md`. Decide on the MUST FIX tooling and the rule-change proposals C1–C6, and implement the agreed fixes.
-7. **Generate Batch 2** using the controlled batch process (about 8 datasets, `batch: 'batch-2'`).
-8. **Run automated QA and the independent physics audit** (build, tests, `review.mjs batch batch-2`, `ao.mjs --batch batch-2`).
-9. **Teacher sampling:** inspect the AMBER datasets (or waive with reasons) and the GREEN sample in the preview.
-10. **Accept Batch 2** (`review.mjs accept-batch batch-2 …`, the teacher's decision).
-11. **Merge into production** only after the step-1 verification passes again, and only on the teacher's instruction.
+When you return, in this order (detailed commands in `docs/PAPER1B_CONTINUATION.md`):
+
+1. **Check out `paper1b-batch2`** and verify it: tests pass, the build reports 13 APPROVED datasets, the checker reports no errors, and `git log -1 main` shows the production commit.
+2. **Read** this file, `docs/PAPER1B_SPECIFICATION.md`, `docs/PAPER1B_ARCHETYPE_MATRIX.md` and `docs/PAPER1B_BATCH1_RETROSPECTIVE.md`.
+3. **Decide** (teacher) on the retrospective's MUST FIX tooling and the rule-change proposals C1–C6.
+4. **Implement the agreed tooling fixes** on `paper1b-batch2`, with tests; commit and push the branch.
+5. **Plan Batch 2:** choose about 8 datasets following the retrospective's priorities (section 9); record the plan in the repository before generating.
+6. **Generate Batch 2** on `paper1b-batch2` (`batch: 'batch-2'`).
+7. **Run automated QA and the independent physics audit:** build, tests, `review.mjs batch batch-2`, `ao.mjs --batch batch-2`, site checker.
+8. **Teacher sampling:** inspect the AMBER datasets (or waive with reasons) and the GREEN sample in the preview.
+9. **Accept Batch 2** (`review.mjs accept-batch batch-2 …`, the teacher's decision).
+10. **Merge into `main` and push** only after the full verification passes again, and only on the teacher's instruction.
