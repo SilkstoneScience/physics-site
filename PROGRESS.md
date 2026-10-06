@@ -31,6 +31,7 @@ This file is not published on the website (see `_config.yml`).
 
 ## Resources page
 - Lesson slides (October 2026): the Resources page keeps its tiles; each theme tile opens a slides page (resources/a.html … e.html) with that theme's Teacher decks from Drive (33 in all), each with a click-to-load viewer and an Open in Google Drive link (school accounts only). Each topic page has a Lesson slides button beside its guiding questions; the home page has a Resources card.
+- YouTube channels, Apps and software, and Simulations pages (October 2026): a General section, then by topic; 127 links, all checked. Started from a curated list (PhET, oPhysics, Walter Fendt, Falstad, phyphox, Tracker, well-known channels); the teacher will add favourites, including IB-specific YouTube channels.
 
 ## Guiding and linking questions
 - Added to all 24 topic pages (October 2026): 68 guiding questions after the ToK boxes and 121 linking questions, quoted exactly from the IB guide (credited on the About page), plus 8 extra linking questions of our own; each linking question links to the related section.
