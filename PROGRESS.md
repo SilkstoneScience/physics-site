@@ -32,6 +32,9 @@ This file is not published on the website (see `_config.yml`).
 ## Images
 - Creative Commons / public-domain photos on A.1, B.1, C.3, C.4, D.2, D.3, E.1, E.3 and E.5, each credited in its caption and on the About page.
 - E.5 HR diagrams: ESO's diagram (CC BY 4.0) and AstroOgier's diagram with lines of constant radius (CC0). These replaced the CSIRO ATNF diagram, whose terms allow only personal use.
+- More photos (October 2026): A.4 skater spin, B.2 Keeling curve, C.5 Hubble Ultra Deep Field, D.1 astronauts floating on the ISS, E.4 Cherenkov glow in a research reactor, each credited in its caption and on the About page.
+- B.5: the teacher's own class I–V data (three resistors and a filament lamp, from the B.5 deck) redrawn as SVG graphs in section 6.
+- Remaining photo ideas (not added yet): A.2 rocket launch / crash test, A.3 dam or wind farm, A.5 muon detector, B.3 hot-air balloon, B.4 steam engine, C.1 Foucault pendulum, C.2 slinky / ripple tank, C.5 Doppler weather radar, D.4 generator hall, E.2 electron-diffraction rings, E.4 cooling towers, Skills vernier caliper and micrometer. Only six decks have been checked for the teacher's own images (most deck images are third-party, e.g. Hewitt Next-Time Questions).
 
 ## Other pages
 - Skills page (Tool 3), ToK page, About page with joke of the day.
