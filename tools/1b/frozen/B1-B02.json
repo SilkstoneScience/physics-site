@@ -1,0 +1,278 @@
+{
+  "id": "B1-B02",
+  "topic": "B.1",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 3,
+  "skills": [
+    "evidence-of-heat-loss",
+    "systematic-error-direction",
+    "reducing-a-systematic-error",
+    "precision-vs-accuracy",
+    "accepted-value"
+  ],
+  "context": "experimental",
+  "seed": 71,
+  "physics": {
+    "scenario": "An electric immersion heater warms 0.400 kg of water in an uninsulated glass beaker with no lid. The p.d. and current are constant. The water is stirred and a digital thermometer is read every 150 s for 900 s.",
+    "principles": [
+      "Electrical power P = VI (B.5); energy supplied E = VIt",
+      "Q = mcΔT for the energy that stays in the water (B.1)",
+      "Energy is lost from the beaker to the surroundings at a rate that increases with the temperature excess (conduction, convection, evaporation)"
+    ],
+    "assumptions": [
+      "The rate of energy loss is h(θ − θ_r) with a constant h (Newton's law of cooling, an empirical model)",
+      "The beaker, heater and thermometer have negligible heat capacity",
+      "The water starts at room temperature θ_r"
+    ],
+    "derivation": [
+      "mc dθ/dt = P − h(θ − θ_r)",
+      "Solution with θ = θ_r at t = 0: θ = θ_r + (P/h)(1 − e^(−ht/(mc)))",
+      "The rate dθ/dt = (P/mc)e^(−ht/(mc)) falls as the water warms, so ΔT is less than Pt/(mc) and c = VIt/(mΔT) is too large",
+      "Near t = 0 the loss is small, so the early rate of rise gives c closest to the true value"
+    ],
+    "relationship": "θ = θ_r + (P/h)(1 − e^(−ht/(mc)))",
+    "params": {
+      "V": {
+        "value": 12,
+        "unit": "V",
+        "range": [
+          6,
+          15
+        ],
+        "note": "supply p.d."
+      },
+      "I": {
+        "value": 3.5,
+        "unit": "A",
+        "range": [
+          1,
+          6
+        ],
+        "note": "heater current"
+      },
+      "m": {
+        "value": 0.4,
+        "unit": "kg",
+        "range": [
+          0.1,
+          1
+        ],
+        "note": "mass of water"
+      },
+      "c": {
+        "value": 4180,
+        "unit": "J kg^-1 ΔK^-1",
+        "range": [
+          4170,
+          4190
+        ],
+        "note": "water at 20–45 °C"
+      },
+      "h": {
+        "value": 0.4,
+        "unit": "W ΔK^-1",
+        "range": [
+          0.05,
+          1
+        ],
+        "note": "loss coefficient of an open, uninsulated beaker (about 8 W lost at 20 K above the room)"
+      },
+      "thetaR": {
+        "value": 20,
+        "unit": "°C",
+        "range": [
+          15,
+          25
+        ],
+        "note": "room temperature"
+      }
+    }
+  },
+  "models": {
+    "t": {
+      "kind": "set",
+      "unit": "s",
+      "values": [
+        0,
+        150,
+        300,
+        450,
+        600,
+        750,
+        900
+      ],
+      "resolution": 1
+    },
+    "theta": {
+      "kind": "measured",
+      "unit": "°C",
+      "model": {
+        "law": "heating-with-loss",
+        "inputs": {
+          "thetaR": "p.thetaR",
+          "P": {
+            "law": "electrical-power",
+            "inputs": {
+              "V": "p.V",
+              "I": "p.I"
+            }
+          },
+          "h": "p.h",
+          "m": "p.m",
+          "c": "p.c",
+          "t": "row.t"
+        }
+      },
+      "noise": {
+        "type": "gauss",
+        "sd": 0.05
+      },
+      "resolution": 0.1,
+      "uncertainty": 0.1
+    }
+  },
+  "laws": {
+    "electrical-power": {
+      "statement": "P = VI",
+      "inputs": {
+        "V": "V",
+        "I": "A"
+      },
+      "output": "W",
+      "f": "({ V, I }) => V * I"
+    },
+    "heating-with-loss": {
+      "statement": "θ = θ_r + (P/h)(1 − e^(−ht/(mc))), from mc dθ/dt = P − h(θ − θ_r) with θ = θ_r at t = 0 (an empirical loss model, Newton's law of cooling, beyond the syllabus; it reduces to θ = θ_r + Pt/(mc) when h → 0)",
+      "inputs": {
+        "thetaR": "K",
+        "P": "W",
+        "h": "W ΔK^-1",
+        "m": "kg",
+        "c": "J kg^-1 ΔK^-1",
+        "t": "s"
+      },
+      "output": "K",
+      "f": "({ thetaR, P, h, m, c, t }) => (h === 0 ? thetaR + (P * t) / (m * c) : thetaR + (P / h) * -Math.expm1((-h * t) / (m * c)))"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "t": 0,
+        "theta": 20
+      },
+      {
+        "t": 150,
+        "theta": 23.7
+      },
+      {
+        "t": 300,
+        "theta": 27.3
+      },
+      {
+        "t": 450,
+        "theta": 30.7
+      },
+      {
+        "t": 600,
+        "theta": 34
+      },
+      {
+        "t": 750,
+        "theta": 37.2
+      },
+      {
+        "t": 900,
+        "theta": 40.3
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "theta": [
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student determines the specific heat capacity $c$ of water. An electric immersion heater is placed in $(0.400 \\pm 0.001)\\ \\text{kg}$ of water in a glass beaker with no lid and no insulation. The p.d. across the heater is $V = (12.0 \\pm 0.1)\\ \\text{V}$ and the current in it is $I = (3.50 \\pm 0.05)\\ \\text{A}$; both stay constant. The heater is switched on at $t = 0$ and the stirred water's temperature $\\theta$ is recorded. Times are measured to $\\pm 1\\ \\text{s}$.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"t\"><span class=\"h-name\">time</span>$t$ / s</th><th scope=\"col\" data-col=\"theta\"><span class=\"h-name\">temperature</span>$\\theta$ / °C ± 0.1</th></tr></thead><tbody><tr><td data-col=\"t\" data-row=\"0\">0</td><td data-col=\"theta\" data-row=\"0\">20.0</td></tr><tr><td data-col=\"t\" data-row=\"1\">150</td><td data-col=\"theta\" data-row=\"1\">23.7</td></tr><tr><td data-col=\"t\" data-row=\"2\">300</td><td data-col=\"theta\" data-row=\"2\">27.3</td></tr><tr><td data-col=\"t\" data-row=\"3\">450</td><td data-col=\"theta\" data-row=\"3\">30.7</td></tr><tr><td data-col=\"t\" data-row=\"4\">600</td><td data-col=\"theta\" data-row=\"4\">34.0</td></tr><tr><td data-col=\"t\" data-row=\"5\">750</td><td data-col=\"theta\" data-row=\"5\">37.2</td></tr><tr><td data-col=\"t\" data-row=\"6\">900</td><td data-col=\"theta\" data-row=\"6\">40.3</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {}
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Use the data to show that the rate at which the temperature of the water rises decreases during the heating.",
+      "marks": 2,
+      "markscheme": [
+        "In the first 150 s the temperature rises by 3.7 °C ✓",
+        "In the last 150 s it rises by only 3.1 °C, although the energy supplied in each interval is the same ✓"
+      ]
+    },
+    {
+      "label": "b",
+      "question": "Calculate $c$ using the readings at $t = 0$ and $t = 900\\ \\text{s}$.",
+      "marks": 2,
+      "markscheme": [
+        "$E = VIt = 12.0 \\times 3.50 \\times 900$ J and $\\Delta T = 40.3 - 20.0$ °C ✓",
+        "$c = \\dfrac{E}{m\\Delta T} = 4660\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ ✓"
+      ],
+      "numeric": {
+        "answer": 4655.172413793104,
+        "unit": "$\\text{J}\\,\\text{kg}^{-1}\\,\\text{K}^{-1}$",
+        "source": "cWhole"
+      }
+    },
+    {
+      "label": "c",
+      "question": "The accepted value of $c$ for water is $4180\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$. Explain, with reference to your answer to (a), why the value in (b) is larger than the accepted value.",
+      "marks": 2,
+      "markscheme": [
+        "The falling rate of rise shows that energy is lost to the surroundings, at a greater rate as the water gets hotter ✓",
+        "So less than $VIt$ goes into the water and $\\Delta T$ is smaller than it would be with no losses; $c = \\dfrac{VIt}{m\\Delta T}$ is therefore too large ✓"
+      ]
+    },
+    {
+      "label": "d",
+      "question": "Calculate $c$ using only the first 150 s of heating.",
+      "marks": 1,
+      "markscheme": [
+        "$c = \\dfrac{VI \\times 150}{m\\,(23.7 - 20.0)} = 4260\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ ✓"
+      ],
+      "numeric": {
+        "answer": 4256.756756756758,
+        "unit": "$\\text{J}\\,\\text{kg}^{-1}\\,\\text{K}^{-1}$",
+        "source": "cFirst"
+      }
+    },
+    {
+      "label": "e",
+      "question": "Explain why using only the first 150 s reduces the effect of the energy losses.",
+      "marks": 1,
+      "markscheme": [
+        "At the start the water is close to room temperature, so the rate of energy loss is small and almost all of $VIt$ goes into the water ✓"
+      ]
+    },
+    {
+      "label": "f",
+      "question": "The uncertainty in the value from (b) is about $\\pm 170\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ and in the value from (d) about $\\pm 370\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$. Discuss which value is the better estimate of $c$.",
+      "marks": 2,
+      "markscheme": [
+        "(b) is more precise (smaller uncertainty), but its range, about 4490 to 4820, does not include 4180: it has a systematic error ✓",
+        "(d) has a larger uncertainty (small $\\Delta T$), but its range, about 3890 to 4620, includes 4180: it is more accurate, so (d) is the better estimate (award for a conclusion consistent with the candidate's own values) ✓"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1295 @@
+[
+  {
+    "id": "A1-B01",
+    "theme": "A",
+    "topic": "A.1",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "repeated-readings",
+      "mean-and-uncertainty",
+      "linearisation",
+      "gradient",
+      "evaluate-claim"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates how the horizontal range of a ball depends on the height from which it is launched. A spring launcher is clamped horizontally to a tall stand and fires a small steel ball, which lands on carbon paper on the floor.</p><p>The student measures the height $h$ of the launch point above the floor and the range $R$ from the point directly below the launch point (found with a plumb line) to each mark. The ball is fired five times at each height. The table gives the mean range and its uncertainty (half the range of the five readings), and $R^2$. The five readings for $h = 0.700\\ \\text{m}$ are given separately.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 1,
+        "question": "Identify one variable that the student must control so that the launch speed is the same for every shot.",
+        "markscheme": [
+          "Any one of: how far the spring is compressed / the same ball / the launcher kept horizontal ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 1,
+        "question": "Calculate the mean range for $h = 0.700\\ \\text{m}$.",
+        "numeric": {
+          "answer": 0.9193999999999999,
+          "range": [
+            0.9188999999999999,
+            0.9198999999999998
+          ],
+          "unit": "$\\text{m}$",
+          "source": "Rmean"
+        },
+        "markscheme": [
+          "Mean $= \\dfrac{0.925 + 0.909 + 0.920 + 0.920 + 0.923}{5} = 0.919\\ \\text{m}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 1,
+        "question": "Determine the absolute uncertainty in this mean range.",
+        "numeric": {
+          "answer": 0.008000000000000007,
+          "range": [
+            0.007500000000000007,
+            0.008500000000000008
+          ],
+          "unit": "$\\text{m}$",
+          "source": "dR"
+        },
+        "markscheme": [
+          "Half the range of the readings: $\\dfrac{0.925 - 0.909}{2} = 0.0080\\ \\text{m}$ (accept 0.0080 m or 0.00800 m) ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 2,
+        "question": "Show that, if air resistance is negligible, $R^2 = \\dfrac{2u^2}{g}h$, where $u$ is the launch speed.",
+        "markscheme": [
+          "Vertical motion: $h = \\tfrac12 g t^2$, so $t = \\sqrt{\\dfrac{2h}{g}}$ ✓",
+          "Horizontal motion at constant speed: $R = ut$, so $R^2 = u^2 \\times \\dfrac{2h}{g}$ ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "Determine the gradient of the graph of $R^2$ against $h$.",
+        "numeric": {
+          "answer": 1.1954285714285715,
+          "range": [
+            1.1476114285714287,
+            1.2568181818181818
+          ],
+          "unit": "$\\text{m}$",
+          "source": "gradient"
+        },
+        "markscheme": [
+          "Draws a line of best fit and uses two well-separated points on it ✓",
+          "Gradient $= 1.20\\ \\text{m}$ (accept 1.15 to 1.26) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "f",
+        "marks": 2,
+        "question": "Determine the launch speed $u$.",
+        "numeric": {
+          "answer": 2.4202479211849353,
+          "range": [
+            2.3713489831739234,
+            2.48161421073242
+          ],
+          "unit": "$\\text{m}\\,\\text{s}^{-1}$",
+          "source": "u",
+          "mistakes": [
+            {
+              "value": 3.422747434445025,
+              "feedback": "Check the factor of 2: the gradient is $2u^2/g$."
+            },
+            {
+              "value": 5.857600000000001,
+              "feedback": "That is $u^2$: take the square root."
+            }
+          ]
+        },
+        "markscheme": [
+          "Gradient $= \\dfrac{2u^2}{g}$, so $u = \\sqrt{\\dfrac{g \\times \\text{gradient}}{2}}$ ✓",
+          "$u = 2.42\\ \\text{m s}^{-1}$ (accept 2.37 to 2.48; allow ECF from (e)) ✓"
+        ]
+      },
+      {
+        "label": "g",
+        "marks": 2,
+        "question": "The manufacturer states that the launch speed is $2.60\\ \\text{m s}^{-1}$. Discuss whether the data support this statement.",
+        "markscheme": [
+          "Uses the steepest and shallowest lines through the error bars (their own lines, or the uncertainty in the gradient) to find a range for $u$: the lines shown give about 2.38 to 2.48 $\\text{m s}^{-1}$ ✓",
+          "2.60 $\\text{m s}^{-1}$ is above this range, so the data do not support the statement (the launcher is slower than stated). Award this mark for a conclusion consistent with the candidate's own range ✓"
+        ],
+        "msFigure": "graph-ms"
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 5
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/A1-B01.json"
+  },
+  {
+    "id": "A1-B02",
+    "theme": "A",
+    "topic": "A.1",
+    "paper": "1B",
+    "difficulty": 1,
+    "level": "SL_HL",
+    "skills": [
+      "outlier",
+      "repeated-readings",
+      "mean-and-half-range",
+      "speed",
+      "effect-of-an-outlier"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student releases a trolley from rest at a mark on a ramp. The trolley runs down the ramp and through a light gate. A card of length $L = (10.0 \\pm 0.1)\\ \\text{cm}$ fixed to the trolley blocks the light beam, and a timer records the time $t$ for which the beam is blocked.</p><p>The student repeats the run seven times. The results are shown in the table.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Identify the trial that should not be used in the analysis. Justify your answer using the data.",
+        "markscheme": [
+          "Trial 5 ($t = 0.180\\ \\text{s}$) ✓",
+          "It is about 0.025 s shorter than the mean of the other trials, much more than their spread (they lie within about $\\pm 0.002\\ \\text{s}$ of each other) ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 1,
+        "question": "Suggest one cause of this reading that is consistent with its value.",
+        "markscheme": [
+          "The time is too short, so the trolley was moving faster than in the other runs: for example it was released from above the mark, or it was pushed as it was released ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 1,
+        "question": "Calculate the mean time $\\bar{t}$ of the remaining trials.",
+        "numeric": {
+          "answer": 0.20450000000000002,
+          "unit": "$\\text{s}$",
+          "source": "tMean"
+        },
+        "markscheme": [
+          "$\\bar{t} = 0.205\\ \\text{s}$ ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 1,
+        "question": "Determine the absolute uncertainty in $\\bar{t}$, using the spread of the remaining readings.",
+        "numeric": {
+          "answer": 0.001999999999999988,
+          "range": [
+            0.0014999999999999879,
+            0.002499999999999988
+          ],
+          "unit": "$\\text{s}$",
+          "source": "dtHalf"
+        },
+        "markscheme": [
+          "Half the range of the remaining readings: $\\pm 0.0020\\ \\text{s}$ (accept 0.002 s) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "Determine the speed $v$ of the trolley as it passes through the light gate.",
+        "numeric": {
+          "answer": 0.4889975550122249,
+          "unit": "$\\text{m}\\,\\text{s}^{-1}$",
+          "source": "v",
+          "mistakes": [
+            {
+              "value": 48.899755501222494,
+              "feedback": "Convert the card length to metres before dividing."
+            }
+          ]
+        },
+        "markscheme": [
+          "$v = \\dfrac{L}{\\bar{t}}$ with $L$ in metres ✓",
+          "$v = 0.489\\ \\text{m s}^{-1}$ (allow ECF from (c)) ✓"
+        ]
+      },
+      {
+        "label": "f",
+        "marks": 1,
+        "question": "State and explain the effect on the value of $v$ if trial 5 had been included.",
+        "markscheme": [
+          "The mean time would be smaller, so $v$ would be larger (by about 2 %) and would not represent a release from the mark ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 31
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/A1-B02.json"
+  },
+  {
+    "id": "A2-B01",
+    "theme": "A",
+    "topic": "A.2",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "systematic-offset",
+      "not-proportional",
+      "gradient",
+      "intercept-meaning",
+      "single-reading-vs-gradient"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates how the extension $x$ of a spring depends on the load $F$ on it. The spring hangs from a clamp beside a vertical metre rule. Slotted masses are added to a hanger attached to the spring.</p><p>The student measures the extension from the position of the end of the spring with nothing attached. The student records as $F$ the weight of the slotted masses only.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Hooke's law suggests that $x$ is proportional to $F$. Explain how the graph shows that the student's values of $x$ are not proportional to $F$.",
+        "markscheme": [
+          "The points lie on a straight line, within their error bars ✓",
+          "No straight line through all the error bars passes through the origin: the line meets the extension axis (at $F = 0$) at about 19 mm ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "Determine the spring constant $k$ of the spring.",
+        "numeric": {
+          "answer": 24.822695035460992,
+          "range": [
+            23.86797599563557,
+            25.856973995271865
+          ],
+          "unit": "$\\text{N}\\,\\text{m}^{-1}$",
+          "source": "k"
+        },
+        "markscheme": [
+          "Gradient $= \\dfrac{1}{k}$: about 40.3 $\\text{mm N}^{-1}$, converted to $\\text{m N}^{-1}$ ✓",
+          "$k = 24.8\\ \\text{N m}^{-1}$ (accept 23.9 to 25.9) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Explain how leaving out the weight of the hanger accounts for the shape of the graph.",
+        "markscheme": [
+          "The hanger's weight stretches the spring even when the recorded load is zero, so every extension is larger by the same amount ✓",
+          "The line is shifted up by a constant amount ($m_h g/k$) but its gradient is unchanged ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 2,
+        "question": "Use the graph to determine the mass $m_h$ of the hanger.",
+        "numeric": {
+          "answer": 0.047281323877068564,
+          "range": [
+            0.040916530278232416,
+            0.054176516942474384
+          ],
+          "unit": "$\\text{kg}$",
+          "source": "mh"
+        },
+        "markscheme": [
+          "The intercept on the extension axis (at $F = 0$) is the extension caused by the hanger alone: about 19 mm $= \\dfrac{m_h g}{k}$ ✓",
+          "$m_h = 0.047\\ \\text{kg}$ (accept 0.041 to 0.054; allow ECF from (b)) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "Another student calculates $k$ as $\\dfrac{F}{x}$ using only the last row of the table. Calculate this value, and explain why it differs from your answer to (b).",
+        "markscheme": [
+          "$\\dfrac{F}{x} = \\dfrac{3.00}{140 \\times 10^{-3}} = 21.4\\ \\text{N m}^{-1}$ ✓",
+          "It is too small: $x$ includes the extension caused by the hanger but $F$ does not include its weight. The gradient method is not affected by a constant offset ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 42
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/A2-B01.json"
+  },
+  {
+    "id": "A2-B02",
+    "theme": "A",
+    "topic": "A.2",
+    "paper": "1B",
+    "difficulty": 3,
+    "level": "SL_HL",
+    "skills": [
+      "model-validity-range",
+      "gradient",
+      "evidence-against-a-model",
+      "limit-of-proportionality-vs-elastic-limit",
+      "reference-wire"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates how the extension $x$ of a long, thin copper wire depends on the load $F$ on it. The wire hangs from a beam beside a second, identical reference wire, which carries a constant small load. Masses are added to the test wire, and a vernier scale fixed between the two wires measures the extension of the test wire.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Hooke's law predicts that $x$ is proportional to $F$. Use the graph to identify the range of loads for which the data are consistent with Hooke's law. Justify your answer.",
+        "markscheme": [
+          "A straight line through the origin passes through the error bars of the points up to about 49.0 N (accept up to 58.8 N) ✓",
+          "For larger loads the points lie above any such line by more than their error bars ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "Determine $k$, the load per unit extension, in the region where Hooke's law holds.",
+        "numeric": {
+          "answer": 9468.599033816425,
+          "range": [
+            9104.422147900408,
+            9863.123993558776
+          ],
+          "unit": "$\\text{N}\\,\\text{m}^{-1}$",
+          "source": "k"
+        },
+        "markscheme": [
+          "Gradient of the straight part of the graph $= \\dfrac{1}{k}$, converted to $\\text{m N}^{-1}$ ✓",
+          "$k = 9470\\ \\text{N m}^{-1}$ (accept 9100 to 9860) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Calculate the extension that Hooke's law predicts for a load of 78.4 N, using your value of $k$. Compare it with the measured extension.",
+        "markscheme": [
+          "$x = \\dfrac{F}{k} = 8.28\\ \\text{mm}$ (allow ECF from (b)) ✓",
+          "The measured value, 9.15 mm, is about 0.87 mm larger, far more than its uncertainty of $\\pm 0.05\\ \\text{mm}$: the wire stretches more than Hooke's law predicts ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 2,
+        "question": "A student concludes that the wire passed its elastic limit at about 50 N. Explain why these data alone cannot show this.",
+        "markscheme": [
+          "The elastic limit is the largest load after which the wire returns to its original length when the load is removed; it is not the same as the limit of proportionality, where the graph stops being straight ✓",
+          "All the readings were taken while loading: the student would need to remove the load and check for a permanent extension ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 1,
+        "question": "Suggest why the extension is measured relative to a reference wire hanging from the same beam.",
+        "markscheme": [
+          "Changes in room temperature (thermal expansion) and any sagging of the beam affect both wires equally, so they do not change the measured extension ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 91
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/A2-B02.json"
+  },
+  {
+    "id": "B1-B01",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1B",
+    "difficulty": 1,
+    "level": "SL_HL",
+    "skills": [
+      "temperature-change",
+      "uncertainty-of-a-difference",
+      "propagation",
+      "largest-uncertainty",
+      "value-and-uncertainty",
+      "improvement"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student determines the specific heat capacity $c$ of aluminium. An electric heater is placed in a hole in an aluminium block of mass $m = (1.000 \\pm 0.001)\\ \\text{kg}$. A thermometer in a second hole, filled with oil, measures the temperature $\\theta$ of the block. The block is wrapped in insulation.</p><p>The heater is connected to a supply. The p.d. across it is $V = (12.0 \\pm 0.1)\\ \\text{V}$ and the current in it is $I = (4.20 \\pm 0.05)\\ \\text{A}$; both stay constant. The heater is switched on at $t = 0$. The table shows the temperature at different times. Each time is measured with an uncertainty of $\\pm 1\\ \\text{s}$.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 1,
+        "question": "Determine the temperature change $\\Delta T$ of the block during the 600 s of heating.",
+        "numeric": {
+          "answer": 33.5,
+          "unit": "${}^{\\circ}\\text{C}$",
+          "source": "dT"
+        },
+        "markscheme": [
+          "$\\Delta T = 53.5 - 20.0 = 33.5\\ {}^{\\circ}\\text{C}$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 1,
+        "question": "State the absolute uncertainty in $\\Delta T$.",
+        "numeric": {
+          "answer": 1,
+          "unit": "${}^{\\circ}\\text{C}$",
+          "source": "dTunc"
+        },
+        "markscheme": [
+          "Each temperature reading is uncertain by $\\pm 0.5\\ {}^{\\circ}\\text{C}$; for a difference the absolute uncertainties add, so $\\Delta T$ is uncertain by $\\pm 1.0\\ {}^{\\circ}\\text{C}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Calculate the specific heat capacity of aluminium from these data.",
+        "numeric": {
+          "answer": 902.6865671641792,
+          "unit": "$\\text{J}\\,\\text{kg}^{-1}\\,\\text{K}^{-1}$",
+          "source": "c"
+        },
+        "markscheme": [
+          "Energy supplied $E = VIt = 12.0 \\times 4.20 \\times 600 = 30240\\ \\text{J}$ ✓",
+          "$c = \\dfrac{E}{m\\Delta T} = 903\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ (allow ECF from (a)) ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 2,
+        "question": "Identify, by comparing percentage uncertainties, the measured quantity that contributes most to the uncertainty in $c$.",
+        "markscheme": [
+          "Percentage uncertainties: $V$: 0.83 %; $I$: 1.2 %; $t$: 0.2 %; $m$: 0.1 %; $\\Delta T$: 3.0 % (at least three correct) ✓",
+          "$\\Delta T$ contributes most ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "Determine the absolute uncertainty in $c$. Hence state $c$ with its uncertainty, to an appropriate number of significant figures.",
+        "markscheme": [
+          "Adds the percentage uncertainties: 5.3 %, so $\\Delta c = 48\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ (allow ECF) ✓",
+          "$c = (900 \\pm 50)\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$: uncertainty to 1 significant figure and $c$ rounded to the same place ✓"
+        ]
+      },
+      {
+        "label": "f",
+        "marks": 1,
+        "question": "Suggest one change to the method that would reduce the percentage uncertainty in $\\Delta T$.",
+        "markscheme": [
+          "Any one of: heat for longer (or use a more powerful heater) so that $\\Delta T$ is larger / use a thermometer with a smaller division (for example a digital thermometer reading to $0.1\\ {}^{\\circ}\\text{C}$) ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 21
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/B1-B01.json"
+  },
+  {
+    "id": "B1-B02",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1B",
+    "difficulty": 3,
+    "level": "SL_HL",
+    "skills": [
+      "evidence-of-heat-loss",
+      "systematic-error-direction",
+      "reducing-a-systematic-error",
+      "precision-vs-accuracy",
+      "accepted-value"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student determines the specific heat capacity $c$ of water. An electric immersion heater is placed in $(0.400 \\pm 0.001)\\ \\text{kg}$ of water in a glass beaker with no lid and no insulation. The p.d. across the heater is $V = (12.0 \\pm 0.1)\\ \\text{V}$ and the current in it is $I = (3.50 \\pm 0.05)\\ \\text{A}$; both stay constant. The heater is switched on at $t = 0$ and the stirred water's temperature $\\theta$ is recorded. Times are measured to $\\pm 1\\ \\text{s}$.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Use the data to show that the rate at which the temperature of the water rises decreases during the heating.",
+        "markscheme": [
+          "In the first 150 s the temperature rises by 3.7 °C ✓",
+          "In the last 150 s it rises by only 3.1 °C, although the energy supplied in each interval is the same ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "Calculate $c$ using the readings at $t = 0$ and $t = 900\\ \\text{s}$.",
+        "numeric": {
+          "answer": 4655.172413793104,
+          "unit": "$\\text{J}\\,\\text{kg}^{-1}\\,\\text{K}^{-1}$",
+          "source": "cWhole"
+        },
+        "markscheme": [
+          "$E = VIt = 12.0 \\times 3.50 \\times 900$ J and $\\Delta T = 40.3 - 20.0$ °C ✓",
+          "$c = \\dfrac{E}{m\\Delta T} = 4660\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "The accepted value of $c$ for water is $4180\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$. Explain, with reference to your answer to (a), why the value in (b) is larger than the accepted value.",
+        "markscheme": [
+          "The falling rate of rise shows that energy is lost to the surroundings, at a greater rate as the water gets hotter ✓",
+          "So less than $VIt$ goes into the water and $\\Delta T$ is smaller than it would be with no losses; $c = \\dfrac{VIt}{m\\Delta T}$ is therefore too large ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 1,
+        "question": "Calculate $c$ using only the first 150 s of heating.",
+        "numeric": {
+          "answer": 4256.756756756758,
+          "unit": "$\\text{J}\\,\\text{kg}^{-1}\\,\\text{K}^{-1}$",
+          "source": "cFirst"
+        },
+        "markscheme": [
+          "$c = \\dfrac{VI \\times 150}{m\\,(23.7 - 20.0)} = 4260\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 1,
+        "question": "Explain why using only the first 150 s reduces the effect of the energy losses.",
+        "markscheme": [
+          "At the start the water is close to room temperature, so the rate of energy loss is small and almost all of $VIt$ goes into the water ✓"
+        ]
+      },
+      {
+        "label": "f",
+        "marks": 2,
+        "question": "The uncertainty in the value from (b) is about $\\pm 170\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ and in the value from (d) about $\\pm 370\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$. Discuss which value is the better estimate of $c$.",
+        "markscheme": [
+          "(b) is more precise (smaller uncertainty), but its range, about 4490 to 4820, does not include 4180: it has a systematic error ✓",
+          "(d) has a larger uncertainty (small $\\Delta T$), but its range, about 3890 to 4620, includes 4180: it is more accurate, so (d) is the better estimate (award for a conclusion consistent with the candidate's own values) ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 71
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/B1-B02.json"
+  },
+  {
+    "id": "B3-B01",
+    "theme": "B",
+    "topic": "B.3",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "proportionality-from-table",
+      "extrapolation",
+      "intercept-meaning",
+      "intercept-uncertainty",
+      "accepted-value",
+      "prediction"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates how the pressure $p$ of a fixed mass of air at constant volume depends on its temperature $\\theta$. A sealed flask of air is held in a water bath and connected by a short tube to a Bourdon pressure gauge. The bath is heated in steps, and at each step the student waits until the reading is steady.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Show, using two rows of the table, that $p$ is not proportional to $\\theta$.",
+        "markscheme": [
+          "$\\dfrac{p}{\\theta}$ is 8.13 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 12.0 °C but 1.54 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 78.5 °C (or any two non-adjacent rows) ✓",
+          "The ratio is not constant, so $p$ is not proportional to $\\theta$ (equivalently: increasing $\\theta$ by a factor does not increase $p$ by the same factor) ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 3,
+        "question": "Draw the line of best fit and extend it to $p = 0$. Hence determine the temperature at which the pressure of the air would be zero, according to these data.",
+        "numeric": {
+          "answer": -271.9221443235077,
+          "range": [
+            -285.2857142857143,
+            -254.90540540540542
+          ],
+          "unit": "${}^{\\circ}\\text{C}$",
+          "source": "absZeroAnswer"
+        },
+        "markscheme": [
+          "Line of best fit drawn through the error bars and extended to the $\\theta$ axis ✓",
+          "Reads the intercept, or calculates it from the gradient and the intercept on the $p$ axis ✓",
+          "About −272 °C (accept −285 to −255 °C) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Explain why the uncertainty in your answer to (b) is much larger than the uncertainty in each temperature reading.",
+        "markscheme": [
+          "The line is extended a long way beyond the data (from 12.0 °C to about −272 °C) ✓",
+          "A small change of gradient, still within the error bars, moves the intercept a long way: the steepest and shallowest lines give about −285 °C to −255 °C ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "d",
+        "marks": 1,
+        "question": "Comment on whether the result is consistent with the accepted value of absolute zero, $−273\\ {}^{\\circ}\\text{C}$.",
+        "markscheme": [
+          "−273 °C lies within the range −285 °C to −255 °C given by the steepest and shallowest lines, so the result is consistent with it (award for a conclusion consistent with the candidate's own range) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "The flask is then placed in boiling water at 100 °C. Predict the reading of the pressure gauge.",
+        "numeric": {
+          "answer": 127.4663675344157,
+          "range": [
+            126.82903569674362,
+            128.74019607843138
+          ],
+          "unit": "$\\text{kPa}$",
+          "source": "pred"
+        },
+        "markscheme": [
+          "Extends the line to 100 °C, or uses $p = (\\text{gradient})\\,\\theta + (\\text{intercept})$ ✓",
+          "$p = 127\\ \\text{kPa}$ (accept 127 to 129) ✓"
+        ],
+        "msFigure": "graph-ms"
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 51
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/B3-B01.json"
+  },
+  {
+    "id": "B5-B01",
+    "theme": "B",
+    "topic": "B.5",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "anomaly",
+      "intercept",
+      "gradient",
+      "percentage-uncertainty",
+      "evaluate-method"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates the internal resistance of a cell using the circuit shown. The student changes the resistance of the variable resistor $R$ and records the current $I$ and the potential difference $V$ across the terminals of the cell.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Identify the anomalous reading and suggest one possible cause of it.",
+        "markscheme": [
+          "The reading at $I = 0.50\\ \\text{A}$, $V = 1.04\\ \\text{V}$ ✓",
+          "Any plausible cause, e.g. the voltmeter was misread / a poor connection / the reading was taken before the meters settled ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "Determine the emf $\\varepsilon$ of the cell.",
+        "numeric": {
+          "answer": 1.521472602739726,
+          "range": [
+            1.506257876712329,
+            1.5366873287671232
+          ],
+          "unit": "$\\text{V}$",
+          "source": "emf"
+        },
+        "markscheme": [
+          "Extends the line of best fit to $I = 0$: the emf is the intercept on the $V$ axis ✓",
+          "$\\varepsilon = 1.52\\ \\text{V}$ (accept 1.51 to 1.54) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Determine the internal resistance $r$ of the cell.",
+        "numeric": {
+          "answer": 0.7517123287671232,
+          "range": [
+            0.7141267123287671,
+            0.7892979452054794
+          ],
+          "unit": "$\\text{Ω}$",
+          "source": "r"
+        },
+        "markscheme": [
+          "From $V = \\varepsilon - Ir$, the gradient of the graph is $-r$ ✓",
+          "$r = 0.75\\ \\Omega$ (accept 0.71 to 0.79) ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 1,
+        "question": "Calculate the percentage uncertainty in the reading of $V$ when $I = 0.80\\ \\text{A}$.",
+        "numeric": {
+          "answer": 1.0869565217391304,
+          "unit": "$\\%$",
+          "source": "pctV"
+        },
+        "markscheme": [
+          "$\\dfrac{0.01}{0.92} \\times 100 = 1.1\\ \\%$ ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "Suggest why the student should disconnect the circuit between readings.",
+        "markscheme": [
+          "A current makes the cell warm up / makes the cell run down ✓",
+          "This would change $r$ (or $\\varepsilon$) during the experiment, so the readings would not all describe the same cell ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 3
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/B5-B01.json"
+  },
+  {
+    "id": "C1-B01",
+    "theme": "C",
+    "topic": "C.1",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "not-linear",
+      "choose-transformation",
+      "gradient",
+      "intercept-meaning",
+      "model-assumption",
+      "unit-base-si"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates how the period $T$ of a mass oscillating on a spring depends on the mass $m$. For each mass, the student times 10 oscillations with a stopwatch and divides by 10. The uncertainty in each value of $T$ is shown in the table. The graph shows $T$ against $m$.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Explain how the graph of $T$ against $m$ shows that $T$ is not proportional to $m$.",
+        "markscheme": [
+          "No straight line can be drawn through all the error bars: the points lie on a curve ✓",
+          "The gradient decreases as $m$ increases (equal increases in $m$ give smaller increases in $T$) ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "For a spring of negligible mass, $T = 2\\pi\\sqrt{\\dfrac{m}{k}}$, where $k$ is the spring constant. State the quantity that should be plotted against $m$ to give a straight line, and the gradient that line is expected to have.",
+        "markscheme": [
+          "$T^2$ ✓",
+          "Gradient $= \\dfrac{4\\pi^2}{k}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 1,
+        "question": "State the unit of the gradient of a graph of $T^2$ against $m$, in SI base units.",
+        "markscheme": [
+          "$\\text{kg}^{-1}\\,\\text{s}^{2}$ ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 2,
+        "question": "The student plots a graph of $T^2$ against $m$, shown below. Determine $k$.",
+        "numeric": {
+          "answer": 12.079243082022117,
+          "range": [
+            11.614656809636651,
+            12.582544877106372
+          ],
+          "unit": "$\\text{N}\\,\\text{m}^{-1}$",
+          "source": "k"
+        },
+        "markscheme": [
+          "Gradient of the line of best fit $= 3.27\\ \\text{s}^2\\,\\text{kg}^{-1}$ ✓",
+          "$k = \\dfrac{4\\pi^2}{\\text{gradient}} = 12.1\\ \\text{N m}^{-1}$ (accept 11.6 to 12.6) ✓"
+        ],
+        "figure": "graph",
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "The line of best fit on the graph of $T^2$ against $m$ does not pass through the origin. Explain what this suggests about the assumption that the spring has negligible mass.",
+        "markscheme": [
+          "$T^2$ is not zero when $m = 0$: something else is oscillating, the spring itself, so its mass is not negligible ✓",
+          "The intercept on the $T^2$ axis is about 0.086 $\\text{s}^2$; extended, the line would cross the $m$ axis at $m = -\\dfrac{\\text{intercept}}{\\text{gradient}} \\approx −0.026\\ \\text{kg}$: the spring behaves like an extra mass of about 0.026 kg added to $m$ ✓"
+        ],
+        "msFigure": "graph-ms"
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 61
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/C1-B01.json"
+  },
+  {
+    "id": "C4-B01",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "linearisation",
+      "gradient",
+      "given-equation",
+      "percentage-uncertainty",
+      "prediction"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates standing waves on a string. The string is attached to a vibration generator, passes over a pulley and supports a hanging mass $M = 0.200\\ \\text{kg}$, which keeps the tension $T$ in the string constant.</p><p>For different lengths $L$ of string between the vibration generator and the pulley, the student adjusts the frequency $f$ until the string vibrates in its first harmonic.</p><p>The speed of a wave on a string is $v = \\sqrt{\\dfrac{T}{\\mu}}$, where $\\mu$ is the mass per unit length of the string.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 1,
+        "question": "Identify one variable that the student must keep constant so that the wave speed is the same for every length.",
+        "markscheme": [
+          "The tension / the hanging mass (or: the same string, so the same $\\mu$) ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "Show that the frequency of the first harmonic is $f = \\dfrac{1}{2L}\\sqrt{\\dfrac{T}{\\mu}}$.",
+        "markscheme": [
+          "There are nodes at both ends, so the first harmonic is half a wavelength: $\\lambda = 2L$ ✓",
+          "$f = \\dfrac{v}{\\lambda} = \\dfrac{1}{2L}\\sqrt{\\dfrac{T}{\\mu}}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Determine the gradient of the graph of $f$ against $1/L$.",
+        "numeric": {
+          "answer": 20.719542953471823,
+          "range": [
+            19.577308120133484,
+            21.786197564276048
+          ],
+          "unit": "$\\text{m}\\,\\text{s}^{-1}$",
+          "source": "gradient"
+        },
+        "markscheme": [
+          "Draws a line of best fit and uses two well-separated points on it ✓",
+          "Gradient $= 20.7\\ \\text{m s}^{-1}$ (accept 19.6 to 21.8) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "d",
+        "marks": 2,
+        "question": "Determine the mass per unit length $\\mu$ of the string.",
+        "numeric": {
+          "answer": 0.001141394400474786,
+          "range": [
+            0.001032364839319471,
+            0.0012784687822830578
+          ],
+          "unit": "$\\text{kg}\\,\\text{m}^{-1}$",
+          "source": "mu",
+          "mistakes": [
+            {
+              "value": 0.004565577601899144,
+              "feedback": "The gradient is $\\tfrac12\\sqrt{T/\\mu}$, not $\\sqrt{T/\\mu}$: check the factor of 4."
+            }
+          ]
+        },
+        "markscheme": [
+          "Gradient $= \\tfrac12\\sqrt{\\dfrac{T}{\\mu}}$ with $T = Mg = 1.96\\ \\text{N}$, so $\\mu = \\dfrac{T}{4 \\times \\text{gradient}^2}$ ✓",
+          "$\\mu = 0.0011\\ \\text{kg m}^{-1}$ (accept 0.0010 to 0.0013; allow ECF from (c)) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 1,
+        "question": "Calculate the percentage uncertainty in $1/L$ for $L = 0.500\\ \\text{m}$.",
+        "numeric": {
+          "answer": 0.4,
+          "unit": "$\\%$",
+          "source": "pctInvL"
+        },
+        "markscheme": [
+          "The percentage uncertainty in $1/L$ equals that in $L$: $\\dfrac{0.002}{0.500} \\times 100 = 0.40\\ \\%$ ✓"
+        ]
+      },
+      {
+        "label": "f",
+        "marks": 2,
+        "question": "The student sets $L = 0.800\\ \\text{m}$ and increases the frequency until the string vibrates in its third harmonic. Use the graph to predict this frequency.",
+        "numeric": {
+          "answer": 75.63569869676371,
+          "range": [
+            73.3666277358608,
+            77.90476965766662
+          ],
+          "unit": "$\\text{Hz}$",
+          "source": "f3",
+          "mistakes": [
+            {
+              "value": 25.211899565587903,
+              "feedback": "That is the first harmonic. The third harmonic has three loops, so its frequency is three times larger."
+            }
+          ]
+        },
+        "markscheme": [
+          "Reads $f_1 \\approx 25.2\\ \\text{Hz}$ at $1/L = 1.25\\ \\text{m}^{-1}$ ✓",
+          "Third harmonic: $f_3 = 3f_1 = 75.6\\ \\text{Hz}$ (accept 73.4 to 77.9) ✓"
+        ],
+        "msFigure": "diagram-ms"
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 9
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/C4-B01.json"
+  },
+  {
+    "id": "D1-B01",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1B",
+    "difficulty": 3,
+    "level": "SL_HL",
+    "skills": [
+      "database-data",
+      "log-log",
+      "power-law-exponent",
+      "kepler-third-law",
+      "value-from-a-graph",
+      "evaluate-data"
+    ],
+    "context": "observational",
+    "stem": "<p>The table gives the semi-major axis $a$ (the mean orbital radius) and the orbital period $T$ of eight moons of Jupiter, taken from a NASA database. A student investigates whether the moons obey Kepler's third law, $T^2 \\propto a^3$.</p><p>The graph shows $\\lg(T/\\text{day})$ against $\\lg(a/\\text{km})$. The point for Europa has not been plotted.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Calculate the two missing values for Europa.",
+        "markscheme": [
+          "$\\lg(a/\\text{km}) = \\lg(671100) = 5.827$ ✓",
+          "$\\lg(T/\\text{day}) = \\lg(3.551) = 0.550$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "Suggest two reasons why a graph of $\\lg T$ against $\\lg a$ is used for these data, rather than a graph of $T$ against $a$.",
+        "markscheme": [
+          "The values cover a very wide range ($a$ by a factor of about 90, $T$ by about 850): on ordinary axes most points would be crowded near the origin ✓",
+          "If $T = ka^n$, then $\\lg T = n\\lg a + \\lg k$: a straight line whose gradient is the power $n$, which can be tested directly ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Determine the gradient of the graph.",
+        "numeric": {
+          "answer": 1.5005156760649005,
+          "range": [
+            1.4705053625436026,
+            1.5305259895861985
+          ],
+          "source": "gradient"
+        },
+        "markscheme": [
+          "Line of best fit; gradient from two well-separated points on the line ✓",
+          "Gradient $= 1.50$ (accept 1.47 to 1.53) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "d",
+        "marks": 2,
+        "question": "Deduce whether the data support Kepler's third law.",
+        "markscheme": [
+          "$T^2 \\propto a^3$ means $T \\propto a^{3/2}$, so the gradient should be 1.5 ✓",
+          "The gradient found is equal to this, within the precision of reading the graph, so the data support the law ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 3,
+        "question": "For a circular orbit, $T^2 = \\dfrac{4\\pi^2a^3}{GM}$, where $M$ is the mass of Jupiter and $G = 6.67 \\times 10^{-11}\\ \\text{N m}^2\\,\\text{kg}^{-2}$. Use a point on the line of best fit to determine $M$.",
+        "numeric": {
+          "answer": 1.9033412023888918e+27,
+          "range": [
+            1.7510739061977803e+27,
+            2.0556084985800032e+27
+          ],
+          "unit": "$\\text{kg}$",
+          "source": "M"
+        },
+        "markscheme": [
+          "Reads a point on the line, for example $\\lg(a/\\text{km}) = 6.000$ gives $\\lg(T/\\text{day}) = 0.810$ ✓",
+          "Converts to SI: $a = 1.0 \\times 10^{9}\\ \\text{m}$ and $T = 558000\\ \\text{s}$ ✓",
+          "$M = \\dfrac{4\\pi^2a^3}{GT^2} = 1.9 \\times 10^{27}\\ \\text{kg}$ (accept $1.8 \\times 10^{27}$ to $2.1 \\times 10^{27}\\ \\text{kg}$; allow ECF from the point read) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "f",
+        "marks": 1,
+        "question": "The data come from a database, so the graph has no error bars. Suggest one reason why the gradient could still differ slightly from the value predicted by Kepler's third law.",
+        "markscheme": [
+          "Any one of: the orbits are not perfect circles (Himalia's eccentricity is about 0.16) / the moons pull on each other / Jupiter is not a perfect sphere, so it does not act exactly as a point mass ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 81
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/D1-B01.json"
+  },
+  {
+    "id": "D3-B01",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "force-direction",
+      "gradient",
+      "proportionality",
+      "uncertainty-propagation"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates the force on a current-carrying wire in a magnetic field. A magnet stands on a top-pan balance. A stiff, horizontal wire, held by a clamp, passes between the poles without touching the magnet. The length of wire in the field is $L = (5.0 \\pm 0.2)\\ \\text{cm}$.</p><p>The balance is set to zero with no current in the wire. The student then measures the change in the balance reading, $\\Delta m$, for different currents $I$.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "State the direction of the magnetic force on the wire. Explain why the balance reading increases when there is a current in the wire.",
+        "markscheme": [
+          "The force on the wire is upwards (from a hand rule, or the direction of $I\\vec{L} \\times \\vec{B}$) ✓",
+          "By Newton's third law, the wire exerts an equal and opposite (downward) force on the magnet, so the reading increases ✓"
+        ],
+        "msFigure": "diagram-ms"
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "Determine the gradient of the graph of $\\Delta m$ against $I$.",
+        "numeric": {
+          "answer": 0.3251428571428571,
+          "range": [
+            0.31213714285714284,
+            0.3400000000000001
+          ],
+          "unit": "$\\text{g}\\,\\text{A}^{-1}$",
+          "source": "gradient"
+        },
+        "markscheme": [
+          "Draws a line of best fit and uses two well-separated points on it ✓",
+          "Gradient $= 0.325\\ \\text{g A}^{-1}$ (accept 0.312 to 0.340) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Determine the magnetic flux density $B$ between the poles.",
+        "numeric": {
+          "answer": 0.063728,
+          "range": [
+            0.06117887999999999,
+            0.06664000000000002
+          ],
+          "unit": "$\\text{T}$",
+          "source": "B"
+        },
+        "markscheme": [
+          "Uses $F = \\Delta m\\, g$ with $\\Delta m$ in kg, so $B = \\dfrac{\\text{gradient} \\times 10^{-3} \\times 9.8}{L}$ ✓",
+          "$B = 0.064\\ \\text{T}$ (accept 0.061 to 0.067; allow ECF from (b)) ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 2,
+        "question": "Discuss whether the data support the hypothesis that the force on the wire is proportional to the current.",
+        "markscheme": [
+          "The points lie on a straight line, within their error bars ✓",
+          "A straight line through all the error bars can pass through the origin, so the data support $F \\propto I$ ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "The percentage uncertainty in the gradient is 4 %. Determine the absolute uncertainty in your value of $B$.",
+        "numeric": {
+          "answer": 0.00509824,
+          "range": [
+            0.004894310399999999,
+            0.005331200000000001
+          ],
+          "unit": "$\\text{T}$",
+          "source": "dB",
+          "mistakes": [
+            {
+              "value": 0.00254912,
+              "feedback": "That uses only the 4 % from the gradient. The length $L$ is uncertain too: add the percentage uncertainties."
+            }
+          ]
+        },
+        "markscheme": [
+          "Percentage uncertainty in $L$ $= \\dfrac{0.2}{5.0} \\times 100 = 4\\ \\%$ ✓",
+          "Adds percentages: 4 % + 4 % = 8 %, so $\\Delta B = 0.0051\\ \\text{T}$ (allow ECF from (c)) ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 7
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/D3-B01.json"
+  },
+  {
+    "id": "E3-B01",
+    "theme": "E",
+    "topic": "E.3",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "background-correction",
+      "complete-table",
+      "read-graph",
+      "half-life",
+      "random-uncertainty"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student measures the count rate from a short-lived radioactive source with a Geiger–Müller tube and a counter. Every 30 s, starting at $t = 0$, the student records the number of counts $N$ in the 10 s interval that begins at time $t$.</p><p>With the source removed, the counter recorded 118 counts in 300 s. The corrected count rate $R$ is the mean count rate due to the source alone during each interval. One value of $R$ has been left for you to calculate.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 1,
+        "question": "Outline why the student measured the background count.",
+        "markscheme": [
+          "The counter also detects background radiation, which must be subtracted to find the count rate due to the source alone ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "Calculate the corrected count rate $R$ at $t = 210\\ \\text{s}$.",
+        "numeric": {
+          "answer": 6.206666666666667,
+          "unit": "$\\text{s}^{-1}$",
+          "source": "Rmissing",
+          "mistakes": [
+            {
+              "value": 6.6,
+              "feedback": "Remember to subtract the background count first."
+            }
+          ]
+        },
+        "markscheme": [
+          "Background counts in 10 s $= \\dfrac{118}{30} = 3.9$ ✓",
+          "$R = \\dfrac{66 - 3.9}{10} = 6.21\\ \\text{s}^{-1}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Use the graph to determine the half-life of the source.",
+        "numeric": {
+          "answer": 74.43929872303157,
+          "range": [
+            65.50658287626779,
+            83.37201456979535
+          ],
+          "unit": "$\\text{s}$",
+          "source": "halfLife"
+        },
+        "markscheme": [
+          "Draws a smooth curve of best fit and reads the time for $R$ to halve (from any starting value) ✓",
+          "Half-life $= 74\\ \\text{s}$ (accept 66 to 83) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "d",
+        "marks": 2,
+        "question": "Explain why the percentage uncertainty in $R$ increases as $t$ increases.",
+        "markscheme": [
+          "Decay is random, so the uncertainty in a count $N$ is about $\\sqrt{N}$ ✓",
+          "The fractional uncertainty $\\dfrac{\\sqrt{N}}{N} = \\dfrac{1}{\\sqrt{N}}$ increases as $N$ falls ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 1,
+        "question": "Suggest one change to the method that would reduce the uncertainty in the later values of $R$.",
+        "markscheme": [
+          "Count for a longer interval (or repeat the experiment and average), so more counts are recorded ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 32
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/E3-B01.json"
+  }
+]

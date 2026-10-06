@@ -63,6 +63,14 @@
         if (r.status === 'fulfilled' && Array.isArray(r.value)) questions.push(...r.value);
         else { failedFiles.push(index.files[i]); console.error(index.files[i], r.reason || 'not a list of questions'); }
       });
+      // On the teacher's own computer only, also show Paper 1B datasets that aren't approved yet.
+      // (questions/1b-preview.json is made by tools/1b/build.mjs and is never published.)
+      if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) {
+        try {
+          const extra = await getJSON('questions/1b-preview.json');
+          if (Array.isArray(extra)) questions.push(...extra);
+        } catch (e) { /* no preview file: nothing to add */ }
+      }
       const usable = questions.filter(isUsable);
       skipped = questions.length - usable.length;
       questions = usable;
@@ -154,6 +162,7 @@
     } else if (p.get('theme')) {
       f.theme.value = p.get('theme');
     }
+    if (PAPERS[p.get('paper')]) f.paper.value = p.get('paper'); // e.g. questions.html?topic=D.3&paper=1B
     listEl.dataset.wantedQuestion = p.get('q') || '';
   }
 
@@ -167,7 +176,7 @@
       (!f.topic.value || q.topic === f.topic.value) &&
       (!f.paper.value || q.paper === f.paper.value) &&
       (!f.difficulty.value || String(q.difficulty) === f.difficulty.value) &&
-      (!f.level.value || q.level === 'SL') &&
+      (!f.level.value || q.level !== 'HL') && // "SL only" keeps SL and the common Paper 1B (SL_HL)
       (!f.status.value || statusOf(q) === f.status.value);
   }
 
@@ -327,6 +336,7 @@
     const card = document.createElement('article');
     card.className = 'question';
     card.dataset.theme = q.theme;
+    card.dataset.qid = q.id;
     const status = statusOf(q);
     const totalMarks = q.paper === '1A' ? 1 : q.parts.reduce((sum, pt) => sum + pt.marks, 0);
 
@@ -336,17 +346,66 @@
         <span class="tag">${PAPERS[q.paper] || q.paper}</span>
         <span class="tag">${DIFFICULTY[q.difficulty] || ''}</span>
         ${q.level === 'HL' ? '<span class="tag hl">HL</span>' : ''}
+        ${q.level === 'SL_HL' ? '<span class="tag">SL &amp; HL</span>' : ''}
+        ${q.review && q.review.status !== 'APPROVED' ? `<span class="tag preview">Preview only: ${q.review.status}</span>` : ''}
         <span class="tag">${totalMarks} mark${totalMarks === 1 ? '' : 's'}</span>
         <span class="q-status ${status}">${statusLabel(q)}</span>
       </div>
       <div class="stem">${q.stem}</div>
       ${q.diagram ? `<figure><img src="${q.diagram}" alt="${escapeAttr(q.diagramAlt || 'Diagram for this question')}"></figure>` : ''}
+      ${dataBlockHtml(q)}
       <div class="answer-area"></div>`;
 
     const area = card.querySelector('.answer-area');
     if (q.paper === '1A') buildMultipleChoice(q, area, card);
     else buildStructured(q, area, card);
     return card;
+  }
+
+  // ----- Paper 1B data: tables, graphs and diagrams made by tools/1b/build.mjs -----
+  // The SVGs are inline (not <img>) so they follow light/dark mode; each has its own aria-label.
+  // The tables and figures live in a separate file per question (q.dataFile), loaded only when the
+  // question is shown; each figure is stored once by name (item.ref, or a part's msFigure name).
+  const dataCache = {}; // question id -> its data, or 'loading' / 'error'
+  const hasData = (q) => Array.isArray(q.data) || !!q.dataFile;
+  function dataOf(q) {
+    if (Array.isArray(q.data)) return { figures: q.figures || {}, data: q.data };
+    const c = dataCache[q.id];
+    return c && typeof c === 'object' ? c : null;
+  }
+  async function loadData(q) {
+    if (dataCache[q.id]) return;
+    dataCache[q.id] = 'loading';
+    try {
+      dataCache[q.id] = await getJSON(q.dataFile);
+    } catch (e) {
+      console.error('Could not load the data for', q.id, e);
+      dataCache[q.id] = 'error';
+    }
+    const card = listEl.querySelector(`.question[data-qid="${q.id}"]`);
+    if (card) refreshCard(q, card);
+  }
+  function dataBlockHtml(q) {
+    if (!hasData(q)) return '';
+    const dd = dataOf(q);
+    let inner;
+    if (dd) inner = dd.data.map((item) => dataItemHtml(item, dd.figures)).join('');
+    else if (dataCache[q.id] === 'error') inner = '<p class="notice">Sorry, the data for this question couldn\'t be loaded. Please try reloading the page.</p>';
+    else { loadData(q); inner = '<p class="notice">Loading the data…</p>'; }
+    return `<div class="q-data" id="data-${q.id}">${inner}</div>`;
+  }
+  function msFigureHtml(q, ms) {
+    if (typeof ms === 'object') return dataItemHtml(ms, {});
+    const dd = dataOf(q);
+    return dd && dd.figures[ms] ? dataItemHtml({ kind: 'figure', ref: ms }, dd.figures) : '';
+  }
+  function dataItemHtml(item, figures) {
+    if (item.kind === 'table') {
+      return `<figure class="q-table">${item.caption ? `<figcaption>${item.caption}</figcaption>` : ''}${item.html}</figure>`;
+    }
+    const fig = item.ref ? figures[item.ref] : item;
+    if (!fig) return '';
+    return `<figure class="diagram q-fig">${fig.svg}${fig.caption ? `<figcaption>${fig.caption}</figcaption>` : ''}</figure>`;
   }
 
   // ----- Multiple choice: marked instantly -----
@@ -406,12 +465,15 @@
       return `
         <div class="part" data-part="${pt.label}">
           <p><span class="part-label">(${pt.label})</span>${pt.question}
-             <span class="marks">[${pt.marks}]</span></p>
+             <span class="marks">[${pt.marks}]</span>
+             ${hasData(q) ? `<a class="data-link" href="#data-${q.id}">↑ Data</a>` : ''}</p>
+          ${pt.figure ? msFigureHtml(q, pt.figure) : ''}
           ${pt.numeric ? numericHtml(pt, s) : `<textarea rows="3" aria-label="Your answer to part (${pt.label})" placeholder="Write your answer here, then check the mark scheme.">${escapeHtml(s.answer || '')}</textarea>`}
           ${s.revealed ? `
             <div class="markscheme">
               <strong>Mark scheme</strong>
               <ul>${pt.markscheme.map((m) => `<li>${m}</li>`).join('')}</ul>
+              ${pt.msFigure ? msFigureHtml(q, pt.msFigure) : ''}
               ${markLine}
             </div>` : '<button class="secondary" data-action="reveal">Show mark scheme</button>'}
         </div>`;

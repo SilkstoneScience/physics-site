@@ -1,0 +1,334 @@
+{
+  "id": "E3-B01",
+  "topic": "E.3",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 2,
+  "skills": [
+    "background-correction",
+    "complete-table",
+    "read-graph",
+    "half-life",
+    "random-uncertainty"
+  ],
+  "context": "experimental",
+  "seed": 32,
+  "physics": {
+    "scenario": "A Geiger–Müller tube and counter record the counts from a short-lived radioactive source in a 10 s interval starting at t = 0, 30 s, 60 s, … . The background count is measured separately, with the source removed, for 300 s.",
+    "principles": [
+      "Radioactive decay: the count rate from the source halves every half-life, R = R₀ 2^(−t/T½) (E.3)",
+      "The number of counts in an interval is the count rate added up over that interval",
+      "Decay is random: a count N has an uncertainty of about √N (Poisson statistics)",
+      "Background radiation adds a constant count rate"
+    ],
+    "assumptions": [
+      "The source contains a single radioactive isotope with no radioactive daughter",
+      "The detector efficiency is constant, and dead time is negligible below about 60 counts per second",
+      "The background count rate is constant",
+      "The corrected count rate R is the mean rate during each interval and is plotted at the interval's start time t. This places every point 5 s earlier than its mid-interval time, which shifts the curve but does not change the half-life"
+    ],
+    "derivation": [
+      "Counts from the source in the interval t to t + Δt: (R₀T½/ln 2)(2^(−t/T½) − 2^(−(t+Δt)/T½)); background adds bΔt",
+      "Corrected mean rate: R = (N − bΔt)/Δt = R₀ × [T½(1 − 2^(−Δt/T½)) / (Δt ln 2)] × 2^(−t/T½)",
+      "The bracket is a constant (0.955 for Δt = 10 s, T½ = 75 s), so R still halves every T½: the half-life read from the graph is T½"
+    ],
+    "relationship": "R = 0.955 R₀ 2^(−t/T½), so R halves every T½",
+    "params": {
+      "R0": {
+        "value": 48,
+        "unit": "s^-1",
+        "range": [
+          5,
+          500
+        ],
+        "note": "count rate from the source at t = 0"
+      },
+      "T": {
+        "value": 75,
+        "unit": "s",
+        "range": [
+          10,
+          600
+        ],
+        "note": "half-life of a short-lived school source (protactinium-234m: 70 s)"
+      },
+      "bg": {
+        "value": 0.4,
+        "unit": "s^-1",
+        "range": [
+          0.1,
+          1.5
+        ],
+        "note": "typical background for a Geiger–Müller tube"
+      },
+      "dt": {
+        "value": 10,
+        "unit": "s",
+        "range": [
+          5,
+          60
+        ],
+        "note": "counting interval"
+      },
+      "tb": {
+        "value": 300,
+        "unit": "s",
+        "range": [
+          60,
+          1800
+        ],
+        "note": "time for the background measurement"
+      }
+    }
+  },
+  "models": {
+    "t": {
+      "kind": "set",
+      "unit": "s",
+      "values": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210,
+        240,
+        270,
+        300
+      ],
+      "resolution": 1,
+      "uncertainty": null
+    },
+    "N": {
+      "kind": "measured",
+      "unit": "",
+      "model": {
+        "law": "counts-in-interval",
+        "inputs": {
+          "R0": "p.R0",
+          "T": "p.T",
+          "b": "p.bg",
+          "t": "row.t",
+          "dt": "p.dt"
+        }
+      },
+      "noise": {
+        "type": "poisson"
+      },
+      "resolution": 1,
+      "uncertainty": null
+    },
+    "R": {
+      "kind": "derived",
+      "unit": "s^-1",
+      "dp": 1,
+      "hide": [
+        7
+      ],
+      "uncertainty": "rule"
+    },
+    "single:Nb": {
+      "kind": "single",
+      "unit": "",
+      "model": {
+        "law": "uniform-counts",
+        "inputs": {
+          "rate": "p.bg",
+          "dt": "p.tb"
+        }
+      },
+      "noise": {
+        "type": "poisson"
+      },
+      "resolution": 1
+    }
+  },
+  "laws": {
+    "counts-in-interval": {
+      "statement": "N = (R₀T½/ln 2)(2^(−t/T½) − 2^(−(t+Δt)/T½)) + bΔt (the count rate added up over the interval)",
+      "inputs": {
+        "R0": "s^-1",
+        "T": "s",
+        "b": "s^-1",
+        "t": "s",
+        "dt": "s"
+      },
+      "output": "",
+      "f": "({ R0, T, b, t, dt }) => ((R0 * T) / Math.LN2) * 2 ** (-t / T) * -Math.expm1((-Math.LN2 * dt) / T) + b * dt"
+    },
+    "uniform-counts": {
+      "statement": "N = R Δt",
+      "inputs": {
+        "rate": "s^-1",
+        "dt": "s"
+      },
+      "output": "",
+      "f": "({ rate, dt }) => rate * dt"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "t": 0,
+        "N": 480,
+        "R": 47.6
+      },
+      {
+        "t": 30,
+        "N": 343,
+        "R": 33.9
+      },
+      {
+        "t": 60,
+        "N": 257,
+        "R": 25.3
+      },
+      {
+        "t": 90,
+        "N": 182,
+        "R": 17.8
+      },
+      {
+        "t": 120,
+        "N": 172,
+        "R": 16.8
+      },
+      {
+        "t": 150,
+        "N": 123,
+        "R": 11.9
+      },
+      {
+        "t": 180,
+        "N": 79,
+        "R": 7.5
+      },
+      {
+        "t": 210,
+        "N": 66,
+        "R": 6.2
+      },
+      {
+        "t": 240,
+        "N": 46,
+        "R": 4.2
+      },
+      {
+        "t": 270,
+        "N": 47,
+        "R": 4.3
+      },
+      {
+        "t": 300,
+        "N": 32,
+        "R": 2.8
+      }
+    ],
+    "singles": {
+      "Nb": 118
+    },
+    "uncertainties": {
+      "R": [
+        2.2,
+        1.9,
+        1.6,
+        1.3,
+        1.3,
+        1.1,
+        0.9,
+        0.8,
+        0.7,
+        0.7,
+        0.6
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student measures the count rate from a short-lived radioactive source with a Geiger–Müller tube and a counter. Every 30 s, starting at $t = 0$, the student records the number of counts $N$ in the 10 s interval that begins at time $t$.</p><p>With the source removed, the counter recorded 118 counts in 300 s. The corrected count rate $R$ is the mean count rate due to the source alone during each interval. One value of $R$ has been left for you to calculate.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"t\"><span class=\"h-name\">time</span>$t$ / s</th><th scope=\"col\" data-col=\"N\"><span class=\"h-name\">counts in 10 s</span>$N$</th><th scope=\"col\" data-col=\"R\"><span class=\"h-name\">corrected count rate</span>$R$ / s⁻¹</th><th scope=\"col\" data-col=\"R\" data-unc=\"1\"><span class=\"h-name\">uncertainty</span>$\\Delta R$ / s⁻¹</th></tr></thead><tbody><tr><td data-col=\"t\" data-row=\"0\">0</td><td data-col=\"N\" data-row=\"0\">480</td><td data-col=\"R\" data-row=\"0\">47.6</td><td data-col=\"R\" data-row=\"0\" data-unc=\"1\">2.2</td></tr><tr><td data-col=\"t\" data-row=\"1\">30</td><td data-col=\"N\" data-row=\"1\">343</td><td data-col=\"R\" data-row=\"1\">33.9</td><td data-col=\"R\" data-row=\"1\" data-unc=\"1\">1.9</td></tr><tr><td data-col=\"t\" data-row=\"2\">60</td><td data-col=\"N\" data-row=\"2\">257</td><td data-col=\"R\" data-row=\"2\">25.3</td><td data-col=\"R\" data-row=\"2\" data-unc=\"1\">1.6</td></tr><tr><td data-col=\"t\" data-row=\"3\">90</td><td data-col=\"N\" data-row=\"3\">182</td><td data-col=\"R\" data-row=\"3\">17.8</td><td data-col=\"R\" data-row=\"3\" data-unc=\"1\">1.3</td></tr><tr><td data-col=\"t\" data-row=\"4\">120</td><td data-col=\"N\" data-row=\"4\">172</td><td data-col=\"R\" data-row=\"4\">16.8</td><td data-col=\"R\" data-row=\"4\" data-unc=\"1\">1.3</td></tr><tr><td data-col=\"t\" data-row=\"5\">150</td><td data-col=\"N\" data-row=\"5\">123</td><td data-col=\"R\" data-row=\"5\">11.9</td><td data-col=\"R\" data-row=\"5\" data-unc=\"1\">1.1</td></tr><tr><td data-col=\"t\" data-row=\"6\">180</td><td data-col=\"N\" data-row=\"6\">79</td><td data-col=\"R\" data-row=\"6\">7.5</td><td data-col=\"R\" data-row=\"6\" data-unc=\"1\">0.9</td></tr><tr><td data-col=\"t\" data-row=\"7\">210</td><td data-col=\"N\" data-row=\"7\">66</td><td data-col=\"R\" data-row=\"7\" class=\"blank\">?</td><td data-col=\"R\" data-row=\"7\" data-unc=\"1\" class=\"blank\">?</td></tr><tr><td data-col=\"t\" data-row=\"8\">240</td><td data-col=\"N\" data-row=\"8\">46</td><td data-col=\"R\" data-row=\"8\">4.2</td><td data-col=\"R\" data-row=\"8\" data-unc=\"1\">0.7</td></tr><tr><td data-col=\"t\" data-row=\"9\">270</td><td data-col=\"N\" data-row=\"9\">47</td><td data-col=\"R\" data-row=\"9\">4.3</td><td data-col=\"R\" data-row=\"9\" data-unc=\"1\">0.7</td></tr><tr><td data-col=\"t\" data-row=\"10\">300</td><td data-col=\"N\" data-row=\"10\">32</td><td data-col=\"R\" data-row=\"10\">2.8</td><td data-col=\"R\" data-row=\"10\" data-unc=\"1\">0.6</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "graph": {
+        "alt": "Graph of corrected count rate against time, with 10 plotted points and error bars. The values are in the data table.",
+        "caption": "Graph of corrected count rate against time. The error bars show the uncertainties."
+      },
+      "graph-ms": {
+        "alt": "Graph of corrected count rate against time, with 11 plotted points and error bars, and the curve of best fit. The values are in the data table.",
+        "caption": "<span class=\"key-1\">Blue</span>: curve of best fit."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Outline why the student measured the background count.",
+      "marks": 1,
+      "markscheme": [
+        "The counter also detects background radiation, which must be subtracted to find the count rate due to the source alone ✓"
+      ]
+    },
+    {
+      "label": "b",
+      "question": "Calculate the corrected count rate $R$ at $t = 210\\ \\text{s}$.",
+      "marks": 2,
+      "markscheme": [
+        "Background counts in 10 s $= \\dfrac{118}{30} = 3.9$ ✓",
+        "$R = \\dfrac{66 - 3.9}{10} = 6.21\\ \\text{s}^{-1}$ ✓"
+      ],
+      "numeric": {
+        "answer": 6.206666666666667,
+        "unit": "$\\text{s}^{-1}$",
+        "source": "Rmissing",
+        "mistakes": [
+          {
+            "value": 6.6,
+            "feedback": "Remember to subtract the background count first."
+          }
+        ]
+      }
+    },
+    {
+      "label": "c",
+      "question": "Use the graph to determine the half-life of the source.",
+      "marks": 2,
+      "markscheme": [
+        "Draws a smooth curve of best fit and reads the time for $R$ to halve (from any starting value) ✓",
+        "Half-life $= 74\\ \\text{s}$ (accept 66 to 83) ✓"
+      ],
+      "numeric": {
+        "answer": 74.43929872303157,
+        "range": [
+          65.50658287626779,
+          83.37201456979535
+        ],
+        "unit": "$\\text{s}$",
+        "source": "halfLife"
+      },
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "d",
+      "question": "Explain why the percentage uncertainty in $R$ increases as $t$ increases.",
+      "marks": 2,
+      "markscheme": [
+        "Decay is random, so the uncertainty in a count $N$ is about $\\sqrt{N}$ ✓",
+        "The fractional uncertainty $\\dfrac{\\sqrt{N}}{N} = \\dfrac{1}{\\sqrt{N}}$ increases as $N$ falls ✓"
+      ]
+    },
+    {
+      "label": "e",
+      "question": "Suggest one change to the method that would reduce the uncertainty in the later values of $R$.",
+      "marks": 1,
+      "markscheme": [
+        "Count for a longer interval (or repeat the experiment and average), so more counts are recorded ✓"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "id": "C1-B01",
+  "topic": "C.1",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 2,
+  "skills": [
+    "not-linear",
+    "choose-transformation",
+    "gradient",
+    "intercept-meaning",
+    "model-assumption",
+    "unit-base-si"
+  ],
+  "context": "experimental",
+  "seed": 61,
+  "physics": {
+    "scenario": "A mass m hangs from a spring and oscillates vertically. For each m, the student times 10 oscillations with a stopwatch and divides by 10 to find the period T. The spring itself has a mass of about 75 g, which also moves.",
+    "principles": [
+      "Simple harmonic motion of a mass on a spring: T = 2π√(m/k) for a light spring (C.1)"
+    ],
+    "assumptions": [
+      "The oscillations are small, so the spring obeys Hooke's law and the motion is simple harmonic",
+      "The moving spring adds an effective mass mₑ (about one third of its own mass) to the oscillating mass",
+      "Air resistance is negligible over 10 oscillations"
+    ],
+    "derivation": [
+      "With the spring's effective mass: T = 2π√((m + mₑ)/k)",
+      "So T² = (4π²/k)m + 4π²mₑ/k: a straight line of gradient 4π²/k",
+      "T² is not zero when m = 0; the line crosses the m axis at m = −mₑ"
+    ],
+    "relationship": "T² = (4π²/k)(m + mₑ)",
+    "params": {
+      "k": {
+        "value": 12,
+        "unit": "N m^-1",
+        "range": [
+          2,
+          50
+        ],
+        "note": "school spring"
+      },
+      "me": {
+        "value": 0.025,
+        "unit": "kg",
+        "range": [
+          0,
+          0.1
+        ],
+        "note": "effective mass of the moving spring (about a third of its 75 g)"
+      }
+    }
+  },
+  "models": {
+    "m": {
+      "kind": "set",
+      "unit": "kg",
+      "values": [
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6
+      ],
+      "resolution": 0.001
+    },
+    "T": {
+      "kind": "measured",
+      "unit": "s",
+      "model": {
+        "law": "mass-spring-period",
+        "inputs": {
+          "m": "row.m",
+          "me": "p.me",
+          "k": "p.k"
+        }
+      },
+      "noise": {
+        "type": "gauss",
+        "sd": 0.004
+      },
+      "resolution": 0.001,
+      "uncertainty": 0.01
+    },
+    "T2": {
+      "kind": "derived",
+      "unit": "s^2",
+      "dp": 3,
+      "uncertainty": "rule"
+    }
+  },
+  "laws": {
+    "mass-spring-period": {
+      "statement": "T = 2π√((m + mₑ)/k): the SL result T = 2π√(m/k), with mₑ an effective extra mass for the moving spring itself (about one third of the spring's mass; mₑ = 0 for an ideal, massless spring)",
+      "inputs": {
+        "m": "kg",
+        "me": "kg",
+        "k": "N m^-1"
+      },
+      "defaults": {
+        "me": 0
+      },
+      "output": "s",
+      "f": "({ m, me, k }) => 2 * Math.PI * Math.sqrt((m + me) / k)"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "m": 0.1,
+        "T": 0.64,
+        "T2": 0.41
+      },
+      {
+        "m": 0.2,
+        "T": 0.86,
+        "T2": 0.74
+      },
+      {
+        "m": 0.3,
+        "T": 1.037,
+        "T2": 1.075
+      },
+      {
+        "m": 0.4,
+        "T": 1.179,
+        "T2": 1.39
+      },
+      {
+        "m": 0.5,
+        "T": 1.309,
+        "T2": 1.713
+      },
+      {
+        "m": 0.6,
+        "T": 1.432,
+        "T2": 2.051
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "T": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01
+      ],
+      "T2": [
+        0.013,
+        0.017,
+        0.021,
+        0.024,
+        0.026,
+        0.029
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student investigates how the period $T$ of a mass oscillating on a spring depends on the mass $m$. For each mass, the student times 10 oscillations with a stopwatch and divides by 10. The uncertainty in each value of $T$ is shown in the table. The graph shows $T$ against $m$.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"m\"><span class=\"h-name\">mass</span>$m$ / kg</th><th scope=\"col\" data-col=\"T\"><span class=\"h-name\">period</span>$T$ / s ± 0.010</th></tr></thead><tbody><tr><td data-col=\"m\" data-row=\"0\">0.100</td><td data-col=\"T\" data-row=\"0\">0.640</td></tr><tr><td data-col=\"m\" data-row=\"1\">0.200</td><td data-col=\"T\" data-row=\"1\">0.860</td></tr><tr><td data-col=\"m\" data-row=\"2\">0.300</td><td data-col=\"T\" data-row=\"2\">1.037</td></tr><tr><td data-col=\"m\" data-row=\"3\">0.400</td><td data-col=\"T\" data-row=\"3\">1.179</td></tr><tr><td data-col=\"m\" data-row=\"4\">0.500</td><td data-col=\"T\" data-row=\"4\">1.309</td></tr><tr><td data-col=\"m\" data-row=\"5\">0.600</td><td data-col=\"T\" data-row=\"5\">1.432</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "graph-raw": {
+        "alt": "Graph of period against mass, with 6 plotted points and error bars. The values are in the data table.",
+        "caption": "Graph of period against mass. The error bars show the uncertainties."
+      },
+      "graph-ms": {
+        "alt": "Graph of period squared against mass, with 6 plotted points and error bars, the line of best fit and the steepest and shallowest lines. The values are in the data table.",
+        "caption": "<span class=\"key-1\">Blue</span>: line of best fit. <span class=\"key-2\">Orange, dashed</span>: steepest and shallowest lines through the error bars."
+      },
+      "graph": {
+        "alt": "Graph of period squared against mass, with 6 plotted points and error bars. The values are in the data table.",
+        "caption": "Graph of period squared against mass. The error bars show the uncertainties."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Explain how the graph of $T$ against $m$ shows that $T$ is not proportional to $m$.",
+      "marks": 2,
+      "markscheme": [
+        "No straight line can be drawn through all the error bars: the points lie on a curve ✓",
+        "The gradient decreases as $m$ increases (equal increases in $m$ give smaller increases in $T$) ✓"
+      ]
+    },
+    {
+      "label": "b",
+      "question": "For a spring of negligible mass, $T = 2\\pi\\sqrt{\\dfrac{m}{k}}$, where $k$ is the spring constant. State the quantity that should be plotted against $m$ to give a straight line, and the gradient that line is expected to have.",
+      "marks": 2,
+      "markscheme": [
+        "$T^2$ ✓",
+        "Gradient $= \\dfrac{4\\pi^2}{k}$ ✓"
+      ]
+    },
+    {
+      "label": "c",
+      "question": "State the unit of the gradient of a graph of $T^2$ against $m$, in SI base units.",
+      "marks": 1,
+      "markscheme": [
+        "$\\text{kg}^{-1}\\,\\text{s}^{2}$ ✓"
+      ]
+    },
+    {
+      "label": "d",
+      "question": "The student plots a graph of $T^2$ against $m$, shown below. Determine $k$.",
+      "marks": 2,
+      "markscheme": [
+        "Gradient of the line of best fit $= 3.27\\ \\text{s}^2\\,\\text{kg}^{-1}$ ✓",
+        "$k = \\dfrac{4\\pi^2}{\\text{gradient}} = 12.1\\ \\text{N m}^{-1}$ (accept 11.6 to 12.6) ✓"
+      ],
+      "numeric": {
+        "answer": 12.079243082022117,
+        "range": [
+          11.614656809636651,
+          12.582544877106372
+        ],
+        "unit": "$\\text{N}\\,\\text{m}^{-1}$",
+        "source": "k"
+      },
+      "msFigure": "graph-ms",
+      "figure": "graph"
+    },
+    {
+      "label": "e",
+      "question": "The line of best fit on the graph of $T^2$ against $m$ does not pass through the origin. Explain what this suggests about the assumption that the spring has negligible mass.",
+      "marks": 2,
+      "markscheme": [
+        "$T^2$ is not zero when $m = 0$: something else is oscillating, the spring itself, so its mass is not negligible ✓",
+        "The intercept on the $T^2$ axis is about 0.086 $\\text{s}^2$; extended, the line would cross the $m$ axis at $m = -\\dfrac{\\text{intercept}}{\\text{gradient}} \\approx −0.026\\ \\text{kg}$: the spring behaves like an extra mass of about 0.026 kg added to $m$ ✓"
+      ],
+      "msFigure": "graph-ms"
+    }
+  ]
+}

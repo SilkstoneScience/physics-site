@@ -1,0 +1,244 @@
+{
+  "id": "A2-B02",
+  "topic": "A.2",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 3,
+  "skills": [
+    "model-validity-range",
+    "gradient",
+    "evidence-against-a-model",
+    "limit-of-proportionality-vs-elastic-limit",
+    "reference-wire"
+  ],
+  "context": "experimental",
+  "seed": 91,
+  "physics": {
+    "scenario": "A long, thin hard-drawn copper wire hangs from a beam beside an identical reference wire that carries a constant small load. Masses of 1.0 kg are added one at a time to the test wire, and a vernier scale between the two wires measures the extension x of the test wire. The loads are taken beyond the limit of proportionality.",
+    "principles": [
+      "Hooke's law: F = kx up to the limit of proportionality (A.2)",
+      "Beyond the limit of proportionality the extension grows faster than the load as the metal begins to yield",
+      "The elastic limit is the largest load after which the wire returns to its original length when unloaded; it is a different limit"
+    ],
+    "assumptions": [
+      "Below F_p the wire obeys Hooke's law, with k = EA/L for its dimensions (about 9.4 kN m⁻¹)",
+      "Beyond F_p the extra extension is modelled empirically as β(F − F_p)², a smooth start to yielding (beyond the syllabus)",
+      "The reference wire cancels changes in temperature and any sagging of the support"
+    ],
+    "derivation": [
+      "For F ≤ F_p: x = F/k, a straight line through the origin",
+      "For F > F_p: x = F/k + β(F − F_p)², which lies above the straight line by an increasing amount"
+    ],
+    "relationship": "x = F/k for F ≤ F_p; x = F/k + β(F − F_p)² for F > F_p",
+    "params": {
+      "k": {
+        "value": 9420,
+        "unit": "N m^-1",
+        "range": [
+          3000,
+          30000
+        ],
+        "note": "2.50 m of 0.50 mm diameter hard-drawn copper (E ≈ 120 GPa)"
+      },
+      "Fp": {
+        "value": 50,
+        "unit": "N",
+        "range": [
+          30,
+          80
+        ],
+        "note": "limit of proportionality: about 250 MPa for hard-drawn copper"
+      },
+      "beta": {
+        "value": 0.000001,
+        "unit": "m N^-2",
+        "range": [
+          2e-7,
+          0.000005
+        ],
+        "note": "empirical: about 1.5 mm extra extension 40 N beyond F_p"
+      }
+    }
+  },
+  "models": {
+    "F": {
+      "kind": "set",
+      "unit": "N",
+      "values": [
+        9.8,
+        19.6,
+        29.4,
+        39.2,
+        49,
+        58.8,
+        68.6,
+        78.4,
+        88.2
+      ],
+      "resolution": 0.1
+    },
+    "x": {
+      "kind": "measured",
+      "unit": "mm",
+      "model": {
+        "law": "wire-extension-beyond-limit",
+        "inputs": {
+          "F": "row.F",
+          "k": "p.k",
+          "Fp": "p.Fp",
+          "beta": "p.beta"
+        }
+      },
+      "noise": {
+        "type": "gauss",
+        "sd": 0.02
+      },
+      "resolution": 0.05,
+      "uncertainty": 0.05
+    }
+  },
+  "laws": {
+    "wire-extension-beyond-limit": {
+      "statement": "x = F/k for F ≤ F_p; x = F/k + β(F − F_p)² for F > F_p (Hooke's law up to the limit of proportionality F_p; beyond it an empirical extra extension as the metal starts to yield; beyond the syllabus)",
+      "inputs": {
+        "F": "N",
+        "k": "N m^-1",
+        "Fp": "N",
+        "beta": "m N^-2"
+      },
+      "output": "m",
+      "f": "({ F, k, Fp, beta }) => F / k + (F > Fp ? beta * (F - Fp) ** 2 : 0)"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "F": 9.8,
+        "x": 1.05
+      },
+      {
+        "F": 19.6,
+        "x": 2.1
+      },
+      {
+        "F": 29.4,
+        "x": 3.15
+      },
+      {
+        "F": 39.2,
+        "x": 4.15
+      },
+      {
+        "F": 49,
+        "x": 5.2
+      },
+      {
+        "F": 58.8,
+        "x": 6.3
+      },
+      {
+        "F": 68.6,
+        "x": 7.65
+      },
+      {
+        "F": 78.4,
+        "x": 9.15
+      },
+      {
+        "F": 88.2,
+        "x": 10.8
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "x": [
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student investigates how the extension $x$ of a long, thin copper wire depends on the load $F$ on it. The wire hangs from a beam beside a second, identical reference wire, which carries a constant small load. Masses are added to the test wire, and a vernier scale fixed between the two wires measures the extension of the test wire.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"F\"><span class=\"h-name\">load</span>$F$ / N</th><th scope=\"col\" data-col=\"x\"><span class=\"h-name\">extension</span>$x$ / mm ± 0.05</th></tr></thead><tbody><tr><td data-col=\"F\" data-row=\"0\">9.8</td><td data-col=\"x\" data-row=\"0\">1.05</td></tr><tr><td data-col=\"F\" data-row=\"1\">19.6</td><td data-col=\"x\" data-row=\"1\">2.10</td></tr><tr><td data-col=\"F\" data-row=\"2\">29.4</td><td data-col=\"x\" data-row=\"2\">3.15</td></tr><tr><td data-col=\"F\" data-row=\"3\">39.2</td><td data-col=\"x\" data-row=\"3\">4.15</td></tr><tr><td data-col=\"F\" data-row=\"4\">49.0</td><td data-col=\"x\" data-row=\"4\">5.20</td></tr><tr><td data-col=\"F\" data-row=\"5\">58.8</td><td data-col=\"x\" data-row=\"5\">6.30</td></tr><tr><td data-col=\"F\" data-row=\"6\">68.6</td><td data-col=\"x\" data-row=\"6\">7.65</td></tr><tr><td data-col=\"F\" data-row=\"7\">78.4</td><td data-col=\"x\" data-row=\"7\">9.15</td></tr><tr><td data-col=\"F\" data-row=\"8\">88.2</td><td data-col=\"x\" data-row=\"8\">10.80</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "graph": {
+        "alt": "Graph of extension against load, with 9 plotted points and error bars. The values are in the data table.",
+        "caption": "Graph of extension against load. The error bars show the uncertainties."
+      },
+      "graph-ms": {
+        "alt": "Graph of extension against load, with 9 plotted points and error bars, the line of best fit and the steepest and shallowest lines. The values are in the data table.",
+        "caption": "<span class=\"key-1\">Blue</span>: line of best fit. <span class=\"key-2\">Orange, dashed</span>: steepest and shallowest lines through the error bars."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Hooke's law predicts that $x$ is proportional to $F$. Use the graph to identify the range of loads for which the data are consistent with Hooke's law. Justify your answer.",
+      "marks": 2,
+      "markscheme": [
+        "A straight line through the origin passes through the error bars of the points up to about 49.0 N (accept up to 58.8 N) ✓",
+        "For larger loads the points lie above any such line by more than their error bars ✓"
+      ],
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "b",
+      "question": "Determine $k$, the load per unit extension, in the region where Hooke's law holds.",
+      "marks": 2,
+      "markscheme": [
+        "Gradient of the straight part of the graph $= \\dfrac{1}{k}$, converted to $\\text{m N}^{-1}$ ✓",
+        "$k = 9470\\ \\text{N m}^{-1}$ (accept 9100 to 9860) ✓"
+      ],
+      "numeric": {
+        "answer": 9468.599033816425,
+        "range": [
+          9104.422147900408,
+          9863.123993558776
+        ],
+        "unit": "$\\text{N}\\,\\text{m}^{-1}$",
+        "source": "k"
+      },
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "c",
+      "question": "Calculate the extension that Hooke's law predicts for a load of 78.4 N, using your value of $k$. Compare it with the measured extension.",
+      "marks": 2,
+      "markscheme": [
+        "$x = \\dfrac{F}{k} = 8.28\\ \\text{mm}$ (allow ECF from (b)) ✓",
+        "The measured value, 9.15 mm, is about 0.87 mm larger, far more than its uncertainty of $\\pm 0.05\\ \\text{mm}$: the wire stretches more than Hooke's law predicts ✓"
+      ]
+    },
+    {
+      "label": "d",
+      "question": "A student concludes that the wire passed its elastic limit at about 50 N. Explain why these data alone cannot show this.",
+      "marks": 2,
+      "markscheme": [
+        "The elastic limit is the largest load after which the wire returns to its original length when the load is removed; it is not the same as the limit of proportionality, where the graph stops being straight ✓",
+        "All the readings were taken while loading: the student would need to remove the load and check for a permanent extension ✓"
+      ]
+    },
+    {
+      "label": "e",
+      "question": "Suggest why the extension is measured relative to a reference wire hanging from the same beam.",
+      "marks": 1,
+      "markscheme": [
+        "Changes in room temperature (thermal expansion) and any sagging of the beam affect both wires equally, so they do not change the measured extension ✓"
+      ]
+    }
+  ]
+}

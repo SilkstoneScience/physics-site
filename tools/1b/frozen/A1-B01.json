@@ -1,0 +1,370 @@
+{
+  "id": "A1-B01",
+  "topic": "A.1",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 2,
+  "skills": [
+    "repeated-readings",
+    "mean-and-uncertainty",
+    "linearisation",
+    "gradient",
+    "evaluate-claim"
+  ],
+  "context": "experimental",
+  "seed": 5,
+  "physics": {
+    "scenario": "A spring launcher, clamped horizontally to a stand, fires a small steel ball horizontally from a height h above the floor. The ball lands on carbon paper. The horizontal distance R from the point below the launch point (found with a plumb line) to each mark is measured, five times at each of six heights.",
+    "principles": [
+      "Projectile motion: horizontal and vertical motion are independent (A.1)",
+      "Horizontally there is no force, so the horizontal velocity u is constant: R = ut",
+      "Vertically the ball starts from rest and accelerates at g: h = ½gt²"
+    ],
+    "assumptions": [
+      "Air resistance is negligible (for a small steel ball at about 2 m s⁻¹, drag is about 0.2 % of the weight)",
+      "The ball leaves the launcher horizontally, with the same mean speed u at every height",
+      "h is measured from the floor to the launch point (the centre of the ball as it leaves the launcher)",
+      "The shot-to-shot spread comes from small variations in the launch speed (the ball seating and the spring release)"
+    ],
+    "derivation": [
+      "Vertical: h = ½gt², so the time of flight is t = √(2h/g)",
+      "Horizontal: R = ut = u√(2h/g)",
+      "Squaring: R² = (2u²/g) h, a straight line through the origin with gradient k = 2u²/g",
+      "So u = √(gk/2)"
+    ],
+    "relationship": "R² = (2u²/g) h",
+    "params": {
+      "u": {
+        "value": 2.4,
+        "unit": "m s^-1",
+        "range": [
+          1,
+          6
+        ],
+        "note": "school spring launcher"
+      },
+      "g": {
+        "value": 9.8,
+        "unit": "m s^-2",
+        "range": [
+          9.8,
+          9.8
+        ],
+        "note": "data booklet value"
+      }
+    }
+  },
+  "vectors": {
+    "u": [
+      1,
+      0,
+      0
+    ],
+    "g": [
+      0,
+      -1,
+      0
+    ]
+  },
+  "models": {
+    "h": {
+      "kind": "set",
+      "unit": "m",
+      "values": [
+        0.4,
+        0.55,
+        0.7,
+        0.85,
+        1,
+        1.15
+      ],
+      "resolution": 0.001,
+      "uncertainty": 0.005
+    },
+    "R": {
+      "kind": "measured",
+      "unit": "m",
+      "model": {
+        "law": "projectile-horizontal-range",
+        "inputs": {
+          "u": "p.u",
+          "h": "row.h",
+          "g": "p.g"
+        }
+      },
+      "noise": {
+        "type": "gauss-relative",
+        "sd": 0.012
+      },
+      "resolution": 0.001,
+      "trials": 5,
+      "hide": [
+        2
+      ],
+      "uncertainty": "halfRange"
+    },
+    "R2": {
+      "kind": "derived",
+      "unit": "m^2",
+      "dp": 3,
+      "hide": [
+        2
+      ],
+      "uncertainty": "rule"
+    }
+  },
+  "laws": {
+    "projectile-horizontal-range": {
+      "statement": "R = u√(2h/g), from h = ½gt² (vertical) and R = ut (horizontal)",
+      "inputs": {
+        "u": "m s^-1",
+        "h": "m",
+        "g": "m s^-2"
+      },
+      "output": "m",
+      "f": "({ u, h, g }) => u * Math.sqrt((2 * h) / g)"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "h": 0.4,
+        "R__trials": [
+          0.687,
+          0.675,
+          0.67,
+          0.679,
+          0.686
+        ],
+        "R": 0.679,
+        "R2": 0.461
+      },
+      {
+        "h": 0.55,
+        "R__trials": [
+          0.804,
+          0.813,
+          0.8,
+          0.803,
+          0.803
+        ],
+        "R": 0.805,
+        "R2": 0.648
+      },
+      {
+        "h": 0.7,
+        "R__trials": [
+          0.925,
+          0.909,
+          0.92,
+          0.92,
+          0.923
+        ],
+        "R": 0.919,
+        "R2": 0.845
+      },
+      {
+        "h": 0.85,
+        "R__trials": [
+          0.997,
+          1.016,
+          0.985,
+          1.014,
+          1.007
+        ],
+        "R": 1.004,
+        "R2": 1.008
+      },
+      {
+        "h": 1,
+        "R__trials": [
+          1.089,
+          1.092,
+          1.073,
+          1.088,
+          1.097
+        ],
+        "R": 1.088,
+        "R2": 1.184
+      },
+      {
+        "h": 1.15,
+        "R__trials": [
+          1.16,
+          1.177,
+          1.173,
+          1.161,
+          1.163
+        ],
+        "R": 1.167,
+        "R2": 1.362
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "h": [
+        0.005,
+        0.005,
+        0.005,
+        0.005,
+        0.005,
+        0.005
+      ],
+      "R": [
+        0.009,
+        0.006,
+        0.008,
+        0.016,
+        0.012,
+        0.009
+      ],
+      "R2": [
+        0.012,
+        0.01,
+        0.015,
+        0.032,
+        0.026,
+        0.021
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student investigates how the horizontal range of a ball depends on the height from which it is launched. A spring launcher is clamped horizontally to a tall stand and fires a small steel ball, which lands on carbon paper on the floor.</p><p>The student measures the height $h$ of the launch point above the floor and the range $R$ from the point directly below the launch point (found with a plumb line) to each mark. The ball is fired five times at each height. The table gives the mean range and its uncertainty (half the range of the five readings), and $R^2$. The five readings for $h = 0.700\\ \\text{m}$ are given separately.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"h\"><span class=\"h-name\">launch height</span>$h$ / m ± 0.005</th><th scope=\"col\" data-col=\"R\"><span class=\"h-name\">mean range</span>$R$ / m</th><th scope=\"col\" data-col=\"R\" data-unc=\"1\"><span class=\"h-name\">uncertainty</span>$\\Delta R$ / m</th><th scope=\"col\" data-col=\"R2\"><span class=\"h-name\">mean range squared</span>$R^2$ / m²</th><th scope=\"col\" data-col=\"R2\" data-unc=\"1\"><span class=\"h-name\">uncertainty</span>$\\Delta R^2$ / m²</th></tr></thead><tbody><tr><td data-col=\"h\" data-row=\"0\">0.400</td><td data-col=\"R\" data-row=\"0\">0.679</td><td data-col=\"R\" data-row=\"0\" data-unc=\"1\">0.009</td><td data-col=\"R2\" data-row=\"0\">0.461</td><td data-col=\"R2\" data-row=\"0\" data-unc=\"1\">0.012</td></tr><tr><td data-col=\"h\" data-row=\"1\">0.550</td><td data-col=\"R\" data-row=\"1\">0.805</td><td data-col=\"R\" data-row=\"1\" data-unc=\"1\">0.006</td><td data-col=\"R2\" data-row=\"1\">0.648</td><td data-col=\"R2\" data-row=\"1\" data-unc=\"1\">0.010</td></tr><tr><td data-col=\"h\" data-row=\"2\">0.700</td><td data-col=\"R\" data-row=\"2\" class=\"blank\">?</td><td data-col=\"R\" data-row=\"2\" data-unc=\"1\" class=\"blank\">?</td><td data-col=\"R2\" data-row=\"2\" class=\"blank\">?</td><td data-col=\"R2\" data-row=\"2\" data-unc=\"1\" class=\"blank\">?</td></tr><tr><td data-col=\"h\" data-row=\"3\">0.850</td><td data-col=\"R\" data-row=\"3\">1.004</td><td data-col=\"R\" data-row=\"3\" data-unc=\"1\">0.016</td><td data-col=\"R2\" data-row=\"3\">1.008</td><td data-col=\"R2\" data-row=\"3\" data-unc=\"1\">0.032</td></tr><tr><td data-col=\"h\" data-row=\"4\">1.000</td><td data-col=\"R\" data-row=\"4\">1.088</td><td data-col=\"R\" data-row=\"4\" data-unc=\"1\">0.012</td><td data-col=\"R2\" data-row=\"4\">1.184</td><td data-col=\"R2\" data-row=\"4\" data-unc=\"1\">0.026</td></tr><tr><td data-col=\"h\" data-row=\"5\">1.150</td><td data-col=\"R\" data-row=\"5\">1.167</td><td data-col=\"R\" data-row=\"5\" data-unc=\"1\">0.009</td><td data-col=\"R2\" data-row=\"5\">1.362</td><td data-col=\"R2\" data-row=\"5\" data-unc=\"1\">0.021</td></tr></tbody></table></div>"
+      },
+      {
+        "figure": "trials",
+        "caption": "The five ranges for h = 0.700 m.",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table trials\" data-col=\"R\" data-row=\"2\"><thead><tr><th scope=\"col\">trial</th><th scope=\"col\">$R$ / m</th></tr></thead><tbody><tr><td>1</td><td data-trial=\"0\">0.925</td></tr><tr><td>2</td><td data-trial=\"1\">0.909</td></tr><tr><td>3</td><td data-trial=\"2\">0.920</td></tr><tr><td>4</td><td data-trial=\"3\">0.920</td></tr><tr><td>5</td><td data-trial=\"4\">0.923</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "diagram": {
+        "alt": "Side view. A spring launcher is clamped horizontally to a tall stand. A ball leaves it horizontally with speed u and follows a curved path down to carbon paper on the floor. A plumb line hangs from the launch point. The height h is from the floor to the launch point; the range R is along the floor from the plumb line to where the ball lands.",
+        "caption": "The path is drawn to scale for $h = 0.700\\ \\text{m}$. <span class=\"key-1\">Blue</span>: launch velocity. <span class=\"key-2\">Orange</span>: path of the ball."
+      },
+      "graph": {
+        "alt": "Graph of mean range squared against launch height, with 6 plotted points and error bars. The values are in the data table.",
+        "caption": "Graph of mean range squared against launch height. The error bars show the uncertainties."
+      },
+      "graph-ms": {
+        "alt": "Graph of mean range squared against launch height, with 6 plotted points and error bars, the line of best fit and the steepest and shallowest lines. The values are in the data table.",
+        "caption": "<span class=\"key-1\">Blue</span>: line of best fit. <span class=\"key-2\">Orange, dashed</span>: steepest and shallowest lines through the error bars."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Identify one variable that the student must control so that the launch speed is the same for every shot.",
+      "marks": 1,
+      "markscheme": [
+        "Any one of: how far the spring is compressed / the same ball / the launcher kept horizontal ✓"
+      ]
+    },
+    {
+      "label": "b",
+      "question": "Calculate the mean range for $h = 0.700\\ \\text{m}$.",
+      "marks": 1,
+      "markscheme": [
+        "Mean $= \\dfrac{0.925 + 0.909 + 0.920 + 0.920 + 0.923}{5} = 0.919\\ \\text{m}$ ✓"
+      ],
+      "numeric": {
+        "answer": 0.9193999999999999,
+        "range": [
+          0.9188999999999999,
+          0.9198999999999998
+        ],
+        "unit": "$\\text{m}$",
+        "source": "Rmean"
+      }
+    },
+    {
+      "label": "c",
+      "question": "Determine the absolute uncertainty in this mean range.",
+      "marks": 1,
+      "markscheme": [
+        "Half the range of the readings: $\\dfrac{0.925 - 0.909}{2} = 0.0080\\ \\text{m}$ (accept 0.0080 m or 0.00800 m) ✓"
+      ],
+      "numeric": {
+        "answer": 0.008000000000000007,
+        "range": [
+          0.007500000000000007,
+          0.008500000000000008
+        ],
+        "unit": "$\\text{m}$",
+        "source": "dR"
+      }
+    },
+    {
+      "label": "d",
+      "question": "Show that, if air resistance is negligible, $R^2 = \\dfrac{2u^2}{g}h$, where $u$ is the launch speed.",
+      "marks": 2,
+      "markscheme": [
+        "Vertical motion: $h = \\tfrac12 g t^2$, so $t = \\sqrt{\\dfrac{2h}{g}}$ ✓",
+        "Horizontal motion at constant speed: $R = ut$, so $R^2 = u^2 \\times \\dfrac{2h}{g}$ ✓"
+      ]
+    },
+    {
+      "label": "e",
+      "question": "Determine the gradient of the graph of $R^2$ against $h$.",
+      "marks": 2,
+      "markscheme": [
+        "Draws a line of best fit and uses two well-separated points on it ✓",
+        "Gradient $= 1.20\\ \\text{m}$ (accept 1.15 to 1.26) ✓"
+      ],
+      "numeric": {
+        "answer": 1.1954285714285715,
+        "range": [
+          1.1476114285714287,
+          1.2568181818181818
+        ],
+        "unit": "$\\text{m}$",
+        "source": "gradient"
+      },
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "f",
+      "question": "Determine the launch speed $u$.",
+      "marks": 2,
+      "markscheme": [
+        "Gradient $= \\dfrac{2u^2}{g}$, so $u = \\sqrt{\\dfrac{g \\times \\text{gradient}}{2}}$ ✓",
+        "$u = 2.42\\ \\text{m s}^{-1}$ (accept 2.37 to 2.48; allow ECF from (e)) ✓"
+      ],
+      "numeric": {
+        "answer": 2.4202479211849353,
+        "range": [
+          2.3713489831739234,
+          2.48161421073242
+        ],
+        "unit": "$\\text{m}\\,\\text{s}^{-1}$",
+        "source": "u",
+        "mistakes": [
+          {
+            "value": 3.422747434445025,
+            "feedback": "Check the factor of 2: the gradient is $2u^2/g$."
+          },
+          {
+            "value": 5.857600000000001,
+            "feedback": "That is $u^2$: take the square root."
+          }
+        ]
+      }
+    },
+    {
+      "label": "g",
+      "question": "The manufacturer states that the launch speed is $2.60\\ \\text{m s}^{-1}$. Discuss whether the data support this statement.",
+      "marks": 2,
+      "markscheme": [
+        "Uses the steepest and shallowest lines through the error bars (their own lines, or the uncertainty in the gradient) to find a range for $u$: the lines shown give about 2.38 to 2.48 $\\text{m s}^{-1}$ ✓",
+        "2.60 $\\text{m s}^{-1}$ is above this range, so the data do not support the statement (the launcher is slower than stated). Award this mark for a conclusion consistent with the candidate's own range ✓"
+      ],
+      "msFigure": "graph-ms"
+    }
+  ]
+}
