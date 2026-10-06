@@ -23,6 +23,9 @@ const PAGES = {
     ['oPhysics', 'https://ophysics.com/', 'Tom Walsh', 'Hundreds of short simulations, sorted by area of physics.'],
     ['Physics apps by Walter Fendt', 'https://www.walter-fendt.de/html5/phen/', 'Walter Fendt', 'Simple, clear simulations of classic experiments.'],
     ['Physics Interactives', 'https://www.physicsclassroom.com/Physics-Interactives', 'The Physics Classroom', 'Simulations with short tasks to work through.'],
+    ['The Physics Aviary', 'https://www.thephysicsaviary.com/', 'Frank Lee', 'Virtual labs and practice problems: take measurements from a simulation and analyse them.'],
+    ['myPhysicsLab', 'https://www.myphysicslab.com/', 'Erik Neumann', 'Simulations of springs, pendulums, collisions and rolling, with the equations behind them.'],
+    ['Physion', 'https://physion.net/', 'Physion', 'Draw your own 2D physics simulations with shapes, springs and joints. Editing needs a computer.'],
     ['Vector Addition', PHET('vector-addition'), 'PhET', 'Add and resolve vectors (see Skills: vectors).']],
    a1: [
     ['Projectile Motion', PHET('projectile-motion'), 'PhET', 'Change the launch angle, speed and air resistance, and watch the trajectory.'],
@@ -135,15 +138,29 @@ const PAGES = {
   },
  },
  apps: {
-  title: 'Apps and software', sub: 'Tools for experiments and data',
-  lead: 'Free apps and software for doing physics: measuring with your phone, analysing video, and plotting data.',
-  note: 'phyphox experiments open inside the free phyphox app. Each link below explains the experiment and how to set it up.',
+  title: 'Software and tools', sub: 'For experiments, data and maths',
+  lead: 'Software and tools for doing physics: logging and measuring, analysing video, images and sound, plotting graphs, and modelling. Most are free.',
+  note: 'phyphox experiments open inside the free phyphox app. Logger Pro downloads from the school Google Drive, so sign in with your school Google account first. MATLAB and Mathematica are paid, but have student licences.',
   sections: {
-   general: [
-    ['phyphox', 'https://phyphox.org/', 'RWTH Aachen University', 'Turns your phone into a lab: its accelerometer, microphone, light sensor and more become measuring instruments. Free for Android and iPhone.'],
-    ['Tracker', 'https://opensourcephysics.github.io/tracker-website/', 'Open Source Physics', 'Free video analysis: film a motion, then track it frame by frame to get position–time data.'],
-    ['Desmos Graphing Calculator', 'https://www.desmos.com/calculator', 'Desmos', 'Plot data, add a best-fit line and test a relationship.'],
-    ['Algodoo', 'https://www.algodoo.com/', 'Algoryx', 'A free 2D physics sandbox: build machines and see forces and energy in action.']],
+   general: {
+    'Measuring and data logging': [
+     ['Logger Pro 3.16.2 for Windows', 'https://drive.google.com/file/d/1g9yeF65Tz8ziQCT6BeIVwX6rOt7b5TTa/view', 'Vernier · school Google Drive', 'The data-logging and graph software we use with the lab sensors. Installer (.exe, 480 MB).'],
+     ['Logger Pro 3.16.2 for Mac', 'https://drive.google.com/file/d/1gAzCKKFS6sjbyv0WQMl-6mRVW0RzLi9R/view', 'Vernier · school Google Drive', 'The same software for Mac. Installer (.dmg, 189 MB).'],
+     ['Vernier', 'https://www.vernier.com/', 'Vernier', 'Makers of our lab sensors and Logger Pro: user guides and experiment ideas.'],
+     ['phyphox', 'https://phyphox.org/', 'RWTH Aachen University', 'Turns your phone into a lab: its accelerometer, microphone, light sensor and more become measuring instruments. Free for Android and iPhone.']],
+    'Analysing video, images and sound': [
+     ['Tracker', 'https://opensourcephysics.github.io/tracker-website/', 'Open Source Physics', 'Free video analysis: film a motion, then track it frame by frame to get position–time data.'],
+     ['ImageJ / Fiji', 'https://imagej.net/software/fiji/', 'ImageJ', 'Free image analysis: measure lengths, angles and brightness in photos, e.g. the spacing of an interference pattern. Fiji is ImageJ with useful extras already installed.'],
+     ['Audacity', 'https://www.audacityteam.org/', 'Audacity', 'Free audio recorder and editor: see the waveform of a sound, and its spectrum of frequencies.']],
+    'Graphs and maths': [
+     ['plot45', 'https://plot45.com/app/', 'plot45', 'Free in the browser: plot data with error bars, add a best-fit line, and read off the gradient and intercept. Made for IB and A-level science.'],
+     ['Desmos Graphing Calculator', 'https://www.desmos.com/calculator', 'Desmos', 'Plot data and functions, add a best-fit line and test a relationship.'],
+     ['GeoGebra', 'https://www.geogebra.org/', 'GeoGebra', 'Free graphing, geometry and 3D tools, useful for vectors and graphs.'],
+     ['MATLAB', 'https://www.mathworks.com/products/matlab.html', 'MathWorks · paid', 'Professional software for calculations, data analysis and modelling, used widely at university.'],
+     ['Mathematica', 'https://www.wolfram.com/mathematica/', 'Wolfram · paid', 'Professional software for symbolic maths, calculations and visualisation.']],
+    'Modelling and simulation': [
+     ['LTspice', 'https://www.analog.com/en/resources/design-tools-and-calculators/ltspice-simulator.html', 'Analog Devices', 'A free, professional circuit simulator for Windows and Mac: build a circuit and plot its currents and voltages.'],
+     ['Algodoo', 'https://www.algodoo.com/', 'Algoryx', 'A free 2D physics sandbox: build machines and see forces and energy in action.']]},
    a1: [
     ['Free Fall', PX('free-fall-2'), 'phyphox', 'Time a fall with the acoustic stopwatch and find g.'],
     ['Tracker: projectile motion', 'https://opensourcephysics.github.io/tracker-website/', 'Open Source Physics', 'Film a thrown ball and analyse its horizontal and vertical motion.']],
@@ -179,13 +196,6 @@ const PAGES = {
   note: 'Channels from other courses (A level, AP) use some different words and symbols, but the physics is the same. Check with the data booklet if in doubt.',
   sections: {
    general: {
-    "Learning and problem solving": [
-     ['Physics Online', YT('PhysicsOnline'), 'A level lessons', 'Clear lessons and worked examples covering most of the course: good for relearning a topic from scratch.'],
-     ['Flipping Physics', YT('FlippingPhysics'), 'AP Physics lessons', 'Concepts explained step by step, then worked problems, especially in mechanics (A.1–A.4).'],
-     ['Michel van Biezen', YT('MichelvanBiezen'), 'Worked examples', 'Thousands of short worked examples, one problem at a time.'],
-     ['Khan Academy', YT('khanacademy'), 'Lessons', 'Short lessons on core ideas, with worked examples: search the channel for your topic.'],
-     ['The Organic Chemistry Tutor', YT('TheOrganicChemistryTutor'), 'Worked examples', 'Despite the name, many physics videos: each works through a type of problem step by step. The channel also covers maths and chemistry, so search for your topic.'],
-     ['Crash Course Physics', 'https://www.youtube.com/playlist?list=PL8dPuuaLjXtN0ge7yDk_UA0ldZJdhwkoV', 'Lesson series', 'A 46-episode series giving a quick, clear overview of each area of physics.']],
     "General interest": [
      ['Veritasium', YT('veritasium'), 'Science', 'Experiments, misconceptions and how we know what we know.'],
      ['3Blue1Brown', YT('3blue1brown'), 'Maths', 'Beautiful visual explanations of maths and the physics that uses it.'],
@@ -193,7 +203,14 @@ const PAGES = {
      ['Sixty Symbols', YT('sixtysymbols'), 'Physics and astronomy', 'Physicists at the University of Nottingham explain the ideas behind the symbols.'],
      ['Physics Girl', YT('physicsgirl'), 'Physics', 'Experiments and demonstrations that explore surprising physics.'],
      ['Steve Mould', YT('SteveMould'), 'Science', 'Surprising experiments, explained carefully.'],
-     ['Kurzgesagt – In a Nutshell', YT('kurzgesagt'), 'Science', 'Animated big-picture videos on space, energy and the universe.']]},
+     ['Kurzgesagt – In a Nutshell', YT('kurzgesagt'), 'Science', 'Animated big-picture videos on space, energy and the universe.']],
+    "Learning and problem solving": [
+     ['Physics Online', YT('PhysicsOnline'), 'A level lessons', 'Clear lessons and worked examples covering most of the course: good for relearning a topic from scratch.'],
+     ['Flipping Physics', YT('FlippingPhysics'), 'AP Physics lessons', 'Concepts explained step by step, then worked problems, especially in mechanics (A.1–A.4).'],
+     ['Michel van Biezen', YT('MichelvanBiezen'), 'Worked examples', 'Thousands of short worked examples, one problem at a time.'],
+     ['Khan Academy', YT('khanacademy'), 'Lessons', 'Short lessons on core ideas, with worked examples: search the channel for your topic.'],
+     ['The Organic Chemistry Tutor', YT('TheOrganicChemistryTutor'), 'Worked examples', 'Despite the name, many physics videos: each works through a type of problem step by step. The channel also covers maths and chemistry, so search for your topic.'],
+     ['Crash Course Physics', 'https://www.youtube.com/playlist?list=PL8dPuuaLjXtN0ge7yDk_UA0ldZJdhwkoV', 'Lesson series', 'A 46-episode series giving a quick, clear overview of each area of physics.']]},
    a5: [
     ['PBS Space Time', YT('pbsspacetime'), 'Explore', 'Relativity and space-time in depth: goes well beyond the course.']],
    d1: [
