@@ -36,6 +36,7 @@ This file is not published on the website (see `_config.yml`).
 ## Other pages
 - Skills page (Tool 3), ToK page, About page with joke of the day.
 - IA page (`experimental/ia.html`): built from the Physics guide, the IA Introduction slides (embedded from Drive), `IA/Teacher Created Gudance/2026 - Student IA Workbook.docx` (main source), the IA Clarifications notes, Tsokos's "The Scientific Investigation" and the 2025 subject reports. Links (Drive "Guidance" folder, school accounts only): Student IA Workbook, Draft Self-Review, Final Submission Check, Exemplar A and B reports, Exemplar B with margin notes, comment sheets for both exemplars. The three exemplar PDFs were re-saved as fresh files on 2026-10-05 to remove student names left in older saved versions.
+- EE page (`ee/index.html`, October 2026, for first assessment 2027): built from `EE/Physics EE Student Guide 2026.docx` (main source), the Physics EE Student Overview slides (embedded from Drive), the 2027 EE assessment criteria and the IB subject-specific guidance (physics section, for checking only). Links (Drive, school accounts only): Student Guide, assessment criteria, overview slides. No student EEs used yet.
 - CSP page (Survival on a Tropical Island; written for any year as Day 1–3): embeds the Session Briefings Google Slides and links the Student Guide, Session Worksheets and Colony Pitch Guide (school accounts only); physics toolkit.
 
 ## Site technical work (October 2026 audit)
