@@ -178,20 +178,22 @@ const PAGES = {
   lead: 'YouTube channels worth your time, for learning a topic or for going beyond the course.',
   note: 'Channels from other courses (A level, AP) use some different words and symbols, but the physics is the same. Check with the data booklet if in doubt.',
   sections: {
-   general: [
-    ['Physics Online', YT('PhysicsOnline'), 'A level', 'Clear lessons covering most of the course: good for relearning a topic from scratch.'],
-    ['Flipping Physics', YT('FlippingPhysics'), 'AP Physics', 'Mechanics explained step by step, with worked problems (A.1–A.4).'],
-    ['Michel van Biezen', YT('MichelvanBiezen'), 'Worked examples', 'Thousands of short worked examples, one problem at a time.'],
-    ['Khan Academy', YT('khanacademy'), 'Lessons', 'Short lessons on core ideas: search the channel for your topic.'],
-    ['CrashCourse', YT('crashcourse'), 'Overviews', 'The Physics series gives a fast overview of each area.'],
-    ['Veritasium', YT('veritasium'), 'Explore', 'Experiments, misconceptions and how we know what we know.'],
-    ['minutephysics', YT('minutephysics'), 'Explore', 'Big ideas explained in a few minutes, with simple animations.'],
-    ['Sixty Symbols', YT('sixtysymbols'), 'Explore', 'Physicists at the University of Nottingham explain the ideas behind the symbols.'],
-    ['Steve Mould', YT('SteveMould'), 'Explore', 'Surprising experiments, explained carefully.'],
-    ['The Science Asylum', YT('ScienceAsylum'), 'Explore', 'Lively explanations of tricky ideas, especially in electromagnetism and relativity.'],
-    ['The Royal Institution', 'https://www.youtube.com/TheRoyalInstitution', 'Explore', 'Lectures and demonstrations, including the famous Christmas Lectures.'],
-    ['Kurzgesagt – In a Nutshell', YT('kurzgesagt'), 'Explore', 'Animated big-picture videos on space, energy and the universe.'],
-    ['3Blue1Brown', YT('3blue1brown'), 'Maths', 'Beautiful visual explanations of the maths physics uses, such as vectors and calculus.']],
+   general: {
+    "Learning and problem solving": [
+     ['Physics Online', YT('PhysicsOnline'), 'A level lessons', 'Clear lessons and worked examples covering most of the course: good for relearning a topic from scratch.'],
+     ['Flipping Physics', YT('FlippingPhysics'), 'AP Physics lessons', 'Concepts explained step by step, then worked problems, especially in mechanics (A.1–A.4).'],
+     ['Michel van Biezen', YT('MichelvanBiezen'), 'Worked examples', 'Thousands of short worked examples, one problem at a time.'],
+     ['Khan Academy', YT('khanacademy'), 'Lessons', 'Short lessons on core ideas, with worked examples: search the channel for your topic.'],
+     ['The Organic Chemistry Tutor', YT('TheOrganicChemistryTutor'), 'Worked examples', 'Despite the name, many physics videos: each works through a type of problem step by step. The channel also covers maths and chemistry, so search for your topic.'],
+     ['Crash Course Physics', 'https://www.youtube.com/playlist?list=PL8dPuuaLjXtN0ge7yDk_UA0ldZJdhwkoV', 'Lesson series', 'A 46-episode series giving a quick, clear overview of each area of physics.']],
+    "General interest": [
+     ['Veritasium', YT('veritasium'), 'Science', 'Experiments, misconceptions and how we know what we know.'],
+     ['3Blue1Brown', YT('3blue1brown'), 'Maths', 'Beautiful visual explanations of maths and the physics that uses it.'],
+     ['SmarterEveryDay', YT('smartereveryday'), 'Science and engineering', 'Exploring how things work, often with high-speed cameras.'],
+     ['Sixty Symbols', YT('sixtysymbols'), 'Physics and astronomy', 'Physicists at the University of Nottingham explain the ideas behind the symbols.'],
+     ['Physics Girl', YT('physicsgirl'), 'Physics', 'Experiments and demonstrations that explore surprising physics.'],
+     ['Steve Mould', YT('SteveMould'), 'Science', 'Surprising experiments, explained carefully.'],
+     ['Kurzgesagt – In a Nutshell', YT('kurzgesagt'), 'Science', 'Animated big-picture videos on space, energy and the universe.']]},
    a5: [
     ['PBS Space Time', YT('pbsspacetime'), 'Explore', 'Relativity and space-time in depth: goes well beyond the course.']],
    d1: [
@@ -248,7 +250,8 @@ for (const [key, pg] of Object.entries(PAGES)) {
     o.push(`    <section class="deck-group res-group" id="${id}"${L ? ` data-theme="${L}"` : ''}>`);
     o.push(`      <h2>${heading}</h2>`, '      <ul class="res-list">', ...items.map(item), '      </ul>', '    </section>');
   };
-  group('general', 'General', pg.sections.general);
+  if (Array.isArray(pg.sections.general)) group('general', 'General', pg.sections.general);
+  else Object.entries(pg.sections.general).forEach(([h, items], i) => group(i ? 'general-' + (i + 1) : 'general', h, items));
   for (const L of themesUsed) {
     o.push(`    <h2 class="res-theme" id="theme-${L.toLowerCase()}" data-theme="${L}">Theme ${L}: ${THEMES[L]}</h2>`);
     for (const [id, items] of Object.entries(pg.sections)) {
