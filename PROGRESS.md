@@ -29,6 +29,9 @@ This file is not published on the website (see `_config.yml`).
 - E.4 Fission (no HL content): notes, 11 Paper 1A and 2 Paper 2.
 - E.5 Fusion and stars (no HL content): notes, 13 Paper 1A and 2 Paper 2.
 
+## Guiding and linking questions
+- Added to all 24 topic pages (October 2026): 68 guiding questions after the ToK boxes and 122 linking questions (the guide's, reworded, plus about a dozen of our own), each linking to the related section.
+
 ## Images
 - Creative Commons / public-domain photos on A.1, B.1, C.3, C.4, D.2, D.3, E.1, E.3 and E.5, each credited in its caption and on the About page.
 - E.5 HR diagrams: ESO's diagram (CC BY 4.0) and AstroOgier's diagram with lines of constant radius (CC0). These replaced the CSIRO ATNF diagram, whose terms allow only personal use.
