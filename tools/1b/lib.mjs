@@ -73,8 +73,19 @@ export function sigFigsIn(text) {
 }
 
 // ---------- Units ----------
-// Each unit: [size in SI units, powers of the SI base units m, kg, s, A, K].
+// Each unit: [size in SI units, powers of the SI base units m, kg, s, A, K], plus a sixth "angle"
+// power (see below).
+//
+// Temperatures: "K" and "°C" are temperatures (°C is converted to K by adding 273.15).
+// Temperature DIFFERENCES are "ΔK" and "Δ°C" (no offset: a change of 1 °C is a change of 1 K).
+// A temperature can't be used where a difference is needed, or the other way round, and °C can't
+// appear inside a compound unit (write J kg^-1 Δ°C^-1, for example).
+// Angles: "rad" and "°". Angles carry their own dimension, so a value in degrees is always converted
+// (60° → π/3 rad) and a plain number is never mistaken for an angle (or an angle for a plain number).
+const ANGLE = [0, 0, 0, 0, 0, 1];
 const BASE_UNITS = {
+  ΔK: [1, [0, 0, 0, 0, 1]], 'Δ°C': [1, [0, 0, 0, 0, 1]], '°C': [1, [0, 0, 0, 0, 1]],
+  rad: [1, ANGLE], '°': [Math.PI / 180, ANGLE],
   m: [1, [1, 0, 0, 0, 0]], cm: [1e-2, [1, 0, 0, 0, 0]], mm: [1e-3, [1, 0, 0, 0, 0]],
   kg: [1, [0, 1, 0, 0, 0]], g: [1e-3, [0, 1, 0, 0, 0]],
   s: [1, [0, 0, 1, 0, 0]], ms: [1e-3, [0, 0, 1, 0, 0]], min: [60, [0, 0, 1, 0, 0]],
@@ -99,18 +110,30 @@ export function parseUnit(expr = '') {
     return [m[1], m[2] ? Number(m[2]) : 1];
   }) : [];
   let scale = 1;
-  const dim = [0, 0, 0, 0, 0];
+  const dim = [0, 0, 0, 0, 0, 0];
   for (const [u, p] of factors) {
     const [s, d] = BASE_UNITS[u];
     scale *= s ** p;
     d.forEach((x, i) => { dim[i] += x * p; });
   }
-  const text = factors.map(([u, p]) => u + (p === 1 ? '' : [...String(p)].map((c) => SUPERSCRIPT[c]).join(''))).join(' ');
+  const single = factors.length === 1 && factors[0][1] === 1 ? factors[0][0] : null;
+  if (factors.some(([u]) => u === '°C') && single !== '°C') {
+    throw new Error(`"${expr}": °C is a temperature, so it can't be part of a compound unit: use Δ°C (a temperature difference) or K`);
+  }
+  // A lone K/°C is a temperature; a lone ΔK/Δ°C is a temperature difference; anything else is neither.
+  const tempKind = ['K', '°C'].includes(single) ? 'absolute' : ['ΔK', 'Δ°C'].includes(single) ? 'difference' : null;
+  const offset = single === '°C' ? 273.15 : 0;
+  const shown = (u) => (u === 'Δ°C' ? '°C' : u === 'ΔK' ? 'K' : u); // the Δ is shown in the quantity's symbol, not its unit
+  const text = factors.map(([u, p]) => shown(u) + (p === 1 ? '' : [...String(p)].map((c) => SUPERSCRIPT[c]).join(''))).join(' ');
+  const texOf = (u) => (u === '%' ? '\\%' : u === '°' ? '{}^{\\circ}' : ['°C', 'Δ°C'].includes(u) ? '{}^{\\circ}\\text{C}' : `\\text{${shown(u)}}`);
   const tex = factors.length
-    ? '$' + factors.map(([u, p]) => (u === '%' ? '\\%' : `\\text{${u}}`) + (p === 1 ? '' : `^{${p}}`)).join('\\,') + '$'
+    ? '$' + factors.map(([u, p]) => texOf(u) + (p === 1 ? '' : `^{${p}}`)).join('\\,') + '$'
     : '';
-  return { expr, scale, dim, text, tex };
+  return { expr, scale, dim, text, tex, offset, tempKind };
 }
+// Converting a value to SI units and back, including the 273.15 offset for °C.
+export const toSI = (value, u) => value * u.scale + u.offset;
+export const fromSI = (si, u) => (si - u.offset) / u.scale;
 export const sameDim = (a, b) => a.every((x, i) => Math.abs(x - b[i]) < 1e-9);
 export const addDim = (a, b, k = 1) => a.map((x, i) => x + k * b[i]);
 

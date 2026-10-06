@@ -3,8 +3,10 @@
 //   physics model → measurements (seeded noise, rounded to the instrument) → derived columns
 //   → fits → results → table, graph, diagrams and the question/mark-scheme text.
 // See tools/1b/README.md for how to write a dataset.
-import { makeRng, roundTo, decimalsOf, fmtNum, sigFig, parseUnit, sameDim, linearFit, gradientBand } from './lib.mjs';
+import { makeRng, roundTo, decimalsOf, fmtNum, sigFig, parseUnit, sameDim, linearFit, gradientBand, toSI, fromSI } from './lib.mjs';
 import { renderGraph } from './graph.mjs';
+import { propagate } from './uncertainty.mjs';
+import { applySystematic } from './systematic.mjs';
 import { LAWS } from './laws.mjs';
 
 export const GENERATOR_VERSION = 2;
@@ -19,7 +21,7 @@ export class PhysicsError extends Error {
   constructor(message, code = 'physics-units') { super(message); this.code = code; }
 }
 const dimText = (dim) => {
-  const names = ['m', 'kg', 's', 'A', 'K'];
+  const names = ['m', 'kg', 's', 'A', 'K', 'angle'];
   const parts = dim.map((p, i) => (p ? names[i] + (p === 1 ? '' : '^' + p) : '')).filter(Boolean);
   return parts.length ? parts.join(' ') : 'no unit';
 };
@@ -36,11 +38,11 @@ export function evalModel(expr, env, where) {
     if (!table || !(name in table)) throw new PhysicsError(`${where}: "${expr}" doesn't name a parameter (p.), column (row.) or single reading (s.)`);
     const unitExpr = src === 'p' ? env.def.physics.params[name].unit : src === 'row' ? env.def.columns[name].unit : env.def.singles[name].unit;
     const u = parseUnit(unitExpr || '');
-    return { si: table[name] * u.scale, dim: u.dim };
+    return { si: toSI(table[name], u), dim: u.dim, tempKind: u.tempKind };
   }
   if (expr && typeof expr === 'object' && 'value' in expr) {
     const u = parseUnit(expr.unit || '');
-    return { si: expr.value * u.scale, dim: u.dim };
+    return { si: toSI(expr.value, u), dim: u.dim, tempKind: u.tempKind };
   }
   if (expr && typeof expr === 'object' && expr.law) {
     const law = LAWS[expr.law];
@@ -57,9 +59,13 @@ export function evalModel(expr, env, where) {
       if (!sameDim(got.dim, want.dim)) {
         throw new PhysicsError(`${where}: input "${k}" of ${expr.law} must be in ${unit || 'no unit'} (${dimText(want.dim)}), but the value given is in ${dimText(got.dim)}`);
       }
+      if (want.tempKind && got.tempKind && want.tempKind !== got.tempKind) {
+        throw new PhysicsError(`${where}: input "${k}" of ${expr.law} needs a ${want.tempKind === 'absolute' ? 'temperature' : 'temperature difference'}, but the value given is a ${got.tempKind === 'absolute' ? 'temperature' : 'temperature difference'}`);
+      }
       args[k] = got.si;
     }
-    return { si: law.f(args), dim: parseUnit(law.output).dim };
+    const outUnit = parseUnit(law.output);
+    return { si: law.f(args), dim: outUnit.dim, tempKind: outUnit.tempKind };
   }
   throw new PhysicsError(`${where}: the model must be built from a vetted law in laws.mjs ({ law, inputs }), not a formula`, 'physics-meta');
 }
@@ -71,7 +77,10 @@ export function modelValue(def, spec, env, where) {
   if (!sameDim(out.dim, u.dim)) {
     throw new PhysicsError(`${where}: the model gives ${dimText(out.dim)}, but the column is in ${spec.unit || 'no unit'} (${dimText(u.dim)})`);
   }
-  return out.si / u.scale;
+  if (u.tempKind && out.tempKind && u.tempKind !== out.tempKind) {
+    throw new PhysicsError(`${where}: the model gives a ${out.tempKind === 'absolute' ? 'temperature' : 'temperature difference'}, but the column holds a ${u.tempKind === 'absolute' ? 'temperature' : 'temperature difference'}`);
+  }
+  return fromSI(out.si, u);
 }
 
 // ---------- 1. Data ----------
@@ -106,7 +115,10 @@ export function generateRows(def, { ideal = false } = {}) {
     for (const [k, c] of cols) {
       if (c.kind === 'set') row[k] = ideal ? c.values[i] : roundTo(c.values[i], c.resolution);
       else if (c.kind === 'measured') {
-        const model = modelValue(def, c, { params: p, row, singles }, `column ${k}`);
+        // Systematic effects (if any) change the true value deterministically, before random scatter;
+        // the ideal (noise-free) data are the pure physics, without them.
+        const physics = modelValue(def, c, { params: p, row, singles }, `column ${k}`);
+        const model = ideal ? physics : applySystematic(c.systematic, physics, row);
         if (c.trials) {
           // Repeated readings: the column shows their mean (rounded like one reading); the readings
           // are kept in row[k + '__trials'] for the uncertainty (half the range) and the trials table.
@@ -128,10 +140,24 @@ export function generateRows(def, { ideal = false } = {}) {
 
 export const halfRange = (a) => (Math.max(...a) - Math.min(...a)) / 2;
 // Uncertainty given separately for each row (a column of its own in the table) rather than one value for the whole column.
-export const perRowUncertainty = (col) => typeof col.uncertainty === 'function' || col.uncertainty === 'halfRange';
+export const perRowUncertainty = (col) => typeof col.uncertainty === 'function' || col.uncertainty === 'halfRange' || !!col.propagation;
 
 // Absolute uncertainty of one value: a constant, or a rule such as √N (rounded like the column).
-export function uncertaintyOf(col, row, p, singles, key) {
+// def is needed for declared propagation (to find the input columns and their uncertainties).
+export function uncertaintyOf(col, row, p, singles, key, def) {
+  if (col.propagation) {
+    const input = (t) => {
+      const value = t.of !== undefined ? row[t.of] : singles[t.single];
+      let unc;
+      if (t.unc === 'poisson') unc = Math.sqrt(value);
+      else if (typeof t.unc === 'number') unc = t.unc;
+      else if (t.of !== undefined) unc = uncertaintyOf(def.columns[t.of], row, p, singles, t.of, def);
+      else unc = def.singles[t.single].uncertainty;
+      if (!(unc >= 0)) throw new Error(`propagation in column ${key}: no uncertainty for ${t.of || t.single}`);
+      return { value, unc };
+    };
+    return roundTo(propagate(col.propagation, col.value(row, p, singles), input, p), 10 ** -columnDp(col));
+  }
   const u = col.uncertainty;
   if (u == null) return null;
   if (typeof u === 'number') return u;
@@ -147,10 +173,21 @@ export function makeContext(def, rows, singles) {
   const p = paramValues(def);
   const g = def.graph;
   const d = { def, p, rows, singles };
-  d.unc = (k, i) => uncertaintyOf(def.columns[k], rows[i], p, singles, k);
-  d.text = (k, i) => fmtNum(rows[i][k], columnDp(def.columns[k]));
-  d.sf = (x, n) => sigFig(x, n);
-  d.dp = (x, n) => fmtNum(x, n);
+  d.unc = (k, i) => uncertaintyOf(def.columns[k], rows[i], p, singles, k, def);
+  // Every number a template prints goes through one of these, which records it (d.traced), so the
+  // validator can tell numbers that come from the data from numbers typed into the text.
+  d.traced = new Set();
+  const rec = (s) => { d.traced.add(s); return s; };
+  d.text = (k, i) => rec(fmtNum(rows[i][k], columnDp(def.columns[k])));
+  d.sf = (x, n) => rec(sigFig(x, n));
+  d.dp = (x, n) => rec(fmtNum(x, n));
+  d.int = (x) => rec(fmtNum(x, 0));
+  // A stated constant: a number the question gives that isn't in the data (def.stated), with its source.
+  d.stated = (name) => {
+    const st = (def.stated || {})[name];
+    if (!st) throw new Error(`${def.id}: no stated constant called "${name}"`);
+    return rec(fmtNum(st.value, st.dp));
+  };
   d.unit = (expr) => parseUnit(expr).text;
   // Accepted range: the max/min-line range, widened to at least ±pct of the value (for reading a graph).
   d.widen = (range, v, pct) => [Math.min(range ? range[0] : v, v - Math.abs(v) * pct), Math.max(range ? range[1] : v, v + Math.abs(v) * pct)];
@@ -288,5 +325,5 @@ export function buildQuestion(def) {
     parts,
     generated: { version: GENERATOR_VERSION, seed: def.seed },
   };
-  return { question, d };
+  return { question, d, traced: [...d.traced] };
 }

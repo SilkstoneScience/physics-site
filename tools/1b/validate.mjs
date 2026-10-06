@@ -5,18 +5,21 @@
 // A dataset with any error is not written to questions/1b.json (see build.mjs).
 import {
   parseNum, dpOf, sigFigsIn, onGrid, roundTo, fmtNum, sigFig, parseUnit, sameDim, addDim,
-  linearFit, stripTags, cross, decimalsOf,
+  linearFit, stripTags, cross, decimalsOf, toSI,
 } from './lib.mjs';
-import { generateRows, makeContext, uncertaintyOf, columnDp, paramValues, modelValue, evalModel, perRowUncertainty } from './generate.mjs';
+import { generateRows, makeContext, uncertaintyOf, columnDp, paramValues, modelValue, evalModel, perRowUncertainty, buildQuestion } from './generate.mjs';
 import { LAWS } from './laws.mjs';
 import { createRequire } from 'node:module';
+import { applySystematic, checkSystematic } from './systematic.mjs';
+
+const generateRowsSafe = (def) => { try { return generateRows(def, { ideal: true }).rows; } catch (e) { return []; } };
 
 const { checkNumeric } = createRequire(import.meta.url)('../../js/numeric.js');
 
 const CONTEXTS = ['experimental', 'observational', 'unfamiliar'];
 const rel = (a, b) => Math.abs(a - b) / Math.max(Math.abs(a), Math.abs(b), 1e-300);
 
-export function validateDataset(def, q, { topics } = {}) {
+export function validateDataset(def, q, { topics, traced } = {}) {
   const diags = [];
   const fail = (code, where, message, extra = {}) => diags.push({ level: 'error', code, dataset: def.id, where, message, ...extra });
   const warn = (code, where, message, extra = {}) => diags.push({ level: 'warning', code, dataset: def.id, where, message, ...extra });
@@ -24,6 +27,12 @@ export function validateDataset(def, q, { topics } = {}) {
     run(def, q, topics, fail, warn);
   } catch (e) {
     fail('crash', 'dataset', `the validator stopped: ${e.message}`);
+  }
+  // Numbers in the text: the generator records what its helpers printed (rebuilt here if not passed in).
+  try {
+    checkTextNumbers(def, q, traced || buildQuestion(def).traced, fail);
+  } catch (e) {
+    fail('crash', 'text numbers', `couldn't trace the numbers in the text: ${e.message}`);
   }
   return diags;
 }
@@ -124,7 +133,7 @@ function run(def, q, topics, fail, warn) {
       if (c.trials) {
         const readings = isTrialRow ? trialReadings : gen.rows[i][k + '__trials'];
         row[k + '__trials'] = readings;
-        const model = modelValue(def, c, { params: p, row, singles: gen.singles }, `column ${k}`);
+        const model = applySystematic(c.systematic, modelValue(def, c, { params: p, row, singles: gen.singles }, `column ${k}`), row);
         readings.forEach((x, j) => {
           if (Math.abs(x - model) > tolFor(c, model)) fail('model', `${where}, reading ${j + 1}`, 'reading is too far from the physics model to be measurement scatter', { expected: fmtNum(model, columnDp(c) + 1), got: fmtNum(x, columnDp(c)) });
         });
@@ -151,7 +160,7 @@ function run(def, q, topics, fail, warn) {
       }
       if (c.kind === 'measured') {
         if (!onGrid(v, c.resolution)) fail('table-dp', where, `"${cell.text}" isn't a reading the instrument can show (resolution ${c.resolution})`);
-        const model = modelValue(def, c, { params: p, row, singles: gen.singles }, `column ${k}`);
+        const model = applySystematic(c.systematic, modelValue(def, c, { params: p, row, singles: gen.singles }, `column ${k}`), row);
         const isAnomaly = c.anomaly && c.anomaly.row === i;
         if (c.trials && fmtNum(meanOf(row[k + '__trials']), dp) !== cell.text) {
           fail('trials', where, 'the mean doesn\'t match the repeated readings', { expected: fmtNum(meanOf(row[k + '__trials']), dp), got: cell.text });
@@ -174,8 +183,9 @@ function run(def, q, topics, fail, warn) {
       const cell = cells.get(`${k}|${i}|u`);
       if (!cell) { fail('uncertainty', where, 'uncertainty cell missing'); continue; }
       if (cell.blank) continue;
-      const want = fmtNum(uncertaintyOf(c, row, p, gen.singles, k), columnDp(c));
+      const want = fmtNum(uncertaintyOf(c, row, p, gen.singles, k, def), columnDp(c));
       if (cell.text !== want) fail('uncertainty', where, 'uncertainty doesn\'t follow the dataset\'s rule', { expected: want, got: cell.text });
+      if (c.propagation) checkPropagation(def, c, k, i, row, p, { ...gen.singles }, cell.text, fail);
       if (!(parseNum(cell.text) > 0)) fail('uncertainty', where, 'uncertainty must be greater than zero (at this number of decimal places)');
       else if (sigFigsIn(cell.text) > 2) fail('uncertainty', where, `uncertainty ${cell.text} has more than 2 significant figures`);
     }
@@ -317,6 +327,117 @@ function run(def, q, topics, fail, warn) {
   if (def.circuit) checkCircuit(def, figures.find((f) => f.figure === (def.circuit.figure || 'diagram')), fail);
 }
 
+// ---------- Numbers in the text must be traceable ----------
+// Every number in the question text, mark scheme, captions and alt text must be one of:
+//   • printed by a template helper (d.sf, d.dp, d.text, d.int, d.stated), so it comes from the data, a
+//     parameter, a result or a declared stated constant;
+//   • a value shown in the data tables (including the ± uncertainties in the headings);
+//   • a small whitelisted integer: 0–12 (counting, part numbers, small coefficients such as the 2 in 2u²/g,
+//     harmonic numbers, powers of ten) or 100 (percentages).
+// Exponents (^{−1}), subscripts (f_3) and \tfrac12 are not numbers in this sense and are ignored.
+export const TEXT_NUMBER_WHITELIST = 'integers 0 to 12, and 100';
+const whitelisted = (tok) => /^\d+$/.test(tok) && (Number(tok) <= 12 || tok === '100');
+
+export function numbersIn(text) {
+  const t = stripTags(String(text))
+    .replace(/\^\{[^}]*\}/g, ' ').replace(/\^[−-]?\d+(\.\d+)?/g, ' ')
+    .replace(/_\{[^}]*\}/g, ' ').replace(/_\d+/g, ' ')
+    .replace(/\\[dt]?frac(\d)(\d)/g, ' ')
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻₀₁₂₃₄₅₆₇₈₉]+/g, ' ');
+  return [...t.matchAll(/(?<![A-Za-z\d.])[−-]?\d+(?:\.\d+)?/g)].map((m) => ({ tok: m[0].replace('−', '-').replace(/^-/, ''), at: m.index, text: t }));
+}
+
+function checkTextNumbers(def, q, traced, fail) {
+  const allowed = new Set([...traced].map((s) => s.replace('−', '')));
+  for (const item of q.data || []) {
+    if (item.kind === 'table') for (const m of item.html.matchAll(/>([−\d.]+)<|± ([−\d.]+)/g)) allowed.add((m[1] || m[2]).replace('−', ''));
+  }
+  for (const [name, st] of Object.entries(def.stated || {})) {
+    if (typeof st.source !== 'string' || !st.source.trim()) fail('text-number', `stated constant ${name}`, 'needs a source (where the number comes from)');
+    if (st.from && Math.abs(st.from(paramValues(def)) - st.value) > 1e-9 * Math.max(1, Math.abs(st.value))) {
+      fail('text-number', `stated constant ${name}`, 'doesn\'t match the parameter it is said to come from', { expected: st.from(paramValues(def)), got: st.value });
+    }
+  }
+  const texts = [['the question text', q.stem]];
+  for (const item of q.data || []) {
+    if (item.caption) texts.push([`caption of ${item.figure || 'the table'}`, item.caption]);
+    if (item.alt) texts.push([`description (alt) of ${item.figure}`, item.alt]);
+  }
+  for (const pt of q.parts || []) {
+    texts.push([`part (${pt.label}) question`, pt.question]);
+    (pt.markscheme || []).forEach((m, j) => texts.push([`part (${pt.label}) mark scheme point ${j + 1}`, m]));
+    if (pt.msFigure && typeof pt.msFigure === 'object') {
+      if (pt.msFigure.caption) texts.push([`caption of ${pt.msFigure.figure}`, pt.msFigure.caption]);
+      if (pt.msFigure.alt) texts.push([`description (alt) of ${pt.msFigure.figure}`, pt.msFigure.alt]);
+    }
+  }
+  for (const [where, text] of texts) {
+    for (const n of numbersIn(text)) {
+      if (allowed.has(n.tok) || whitelisted(n.tok)) continue;
+      fail('text-number', where, `the number ${n.tok} isn't traceable to the data, a parameter, a result or a stated constant (print it with d.sf, d.dp, d.text, d.int or d.stated)`,
+        { got: `…${n.text.slice(Math.max(0, n.at - 30), n.at + n.tok.length + 20).trim()}…` });
+    }
+  }
+}
+
+// ---------- Uncertainty propagation, recomputed independently ----------
+// Instead of trusting the declared rule, differentiate the column's own formula numerically with respect
+// to every column and single reading, and combine |∂y/∂x|·Δx as a worst-case sum (the IB convention).
+// This catches a declaration that doesn't match the formula (e.g. a power of 1 declared for R²), a formula
+// that depends on something the declaration ignores, and a "neglected" term that isn't actually small.
+function checkPropagation(def, c, k, i, row, p, singles, shown, fail) {
+  const spec = c.propagation;
+  const where = `table row ${i + 1}, Δ${c.symbolText || c.symbol}`;
+  const y0 = c.value(row, p, singles);
+  const declared = new Map(spec.terms.map((t) => [t.of !== undefined ? `col:${t.of}` : `single:${t.single}`, t]));
+  const neglected = new Map((spec.neglect || []).map((t) => [t.of !== undefined ? `col:${t.of}` : `single:${t.single}`, t]));
+  const inputs = [
+    ...Object.keys(def.columns).filter((x) => x !== k && Number.isFinite(row[x])).map((x) => ({ key: `col:${x}`, name: x, get: () => row[x], set: (v) => { row[x] = v; } })),
+    ...Object.keys(singles).map((x) => ({ key: `single:${x}`, name: x, get: () => singles[x], set: (v) => { singles[x] = v; } })),
+  ];
+  const uncOf = (inp, t) => {
+    if (t && t.unc === 'poisson') return Math.sqrt(inp.get());
+    if (t && typeof t.unc === 'number') return t.unc;
+    if (inp.key.startsWith('col:')) return uncertaintyOf(def.columns[inp.name], row, p, singles, inp.name, def);
+    return (def.singles[inp.name] || {}).uncertainty;
+  };
+  let total = 0;
+  const small = [];
+  for (const inp of inputs) {
+    const x = inp.get();
+    const h = 1e-6 * Math.max(Math.abs(x), 1e-6);
+    inp.set(x + h); const yp = c.value(row, p, singles);
+    inp.set(x - h); const ym = c.value(row, p, singles);
+    inp.set(x);
+    const deriv = (yp - ym) / (2 * h);
+    const depends = Math.abs(deriv) * Math.max(Math.abs(x), 1e-6) > 1e-9 * Math.max(Math.abs(y0), 1e-12);
+    const t = declared.get(inp.key);
+    if (depends && !t && !neglected.has(inp.key)) {
+      fail('propagation', where, `the formula depends on ${inp.name}, but the declared propagation leaves it out (add it, or list it in neglect with a reason)`);
+    }
+    if (!depends && t) fail('propagation', where, `the propagation includes ${inp.name}, but the formula doesn't depend on it`);
+    if (depends && t) {
+      const u = uncOf(inp, t);
+      if (!(u >= 0)) { fail('propagation', where, `no uncertainty for ${inp.name}`); continue; }
+      total += Math.abs(deriv) * u;
+    }
+    if (depends && neglected.has(inp.key)) {
+      const nt = neglected.get(inp.key);
+      if (!nt.reason) fail('propagation', where, `neglecting ${inp.name} needs a reason`);
+      const u = uncOf(inp, nt);
+      if (u >= 0) small.push({ name: inp.name, size: Math.abs(deriv) * u });
+    }
+  }
+  for (const s of small) {
+    if (s.size > total / 3) fail('propagation', where, `the neglected uncertainty in ${s.name} is not small (${sigFig(s.size, 2)} against ${sigFig(total, 2)} from the rest)`);
+  }
+  const step = 10 ** -columnDp(c);
+  if (Math.abs(parseNum(shown) - total) > step / 2 + 1e-9) {
+    fail('propagation', where, 'the uncertainty shown doesn\'t match an independent first-order propagation of the column\'s own formula (does the declared propagation match the formula?)',
+      { expected: fmtNum(roundTo(total, step), columnDp(c)), got: shown });
+  }
+}
+
 // ---------- The physics model ----------
 // The model must be stated explicitly (scenario, principles, assumptions, derivation, relationship),
 // built only from vetted laws with units checked at every step, use plausible parameter values,
@@ -352,6 +473,7 @@ function checkPhysics(def, fail) {
     if (c.noise && c.noise.type && !isText(m.noise)) bad('physics-meta', `${where}.measurement.noise`, 'random scatter must have a stated physical cause');
     if (!Array.isArray(c.expect) || c.expect.length !== 2) bad('physics-meta', `${where}.expect`, 'give the expected range of values [min, max] (expected magnitude), in the column\'s unit');
     if (!c.model || !c.model.law) bad('physics-meta', `${where}.model`, 'the model must be built from a vetted law in laws.mjs ({ law, inputs })');
+    if (c.systematic) for (const msg of checkSystematic(c.systematic, generateRowsSafe(def))) bad('physics-meta', `${where}.systematic`, msg);
   }
   if (!ok) return false;
 
@@ -382,7 +504,7 @@ function checkPhysics(def, fail) {
       // Compare in SI units (a result may be in g m⁻¹ while the parameter is in kg m⁻¹), with the same dimensions.
       const [ru, pu] = [parseUnit(res.unit || ''), parseUnit(def.physics.params[res.estimates].unit || '')];
       if (!sameDim(ru.dim, pu.dim)) { fail('physics-units', `result ${name}`, `is in ${ru.text || 'no unit'}, which can't be compared with ${res.estimates} in ${pu.text || 'no unit'}`); continue; }
-      if (Math.abs(d.r[name].value * ru.scale - truth * pu.scale) > tol * Math.abs(truth * pu.scale)) {
+      if (Math.abs(toSI(d.r[name].value, ru) - toSI(truth, pu)) > tol * Math.abs(toSI(truth, pu))) {
         fail('physics-inversion', `result ${name}`, `with noise-free data, the analysis should recover ${res.estimates} exactly, so the analysis formula isn't the inverse of the physics model`,
           { expected: `${sigFig(truth, 4)} ${parseUnit(def.physics.params[res.estimates].unit).text}`.trim(), got: `${sigFig(d.r[name].value, 4)} ${parseUnit(res.unit || '').text}`.trim() });
       }

@@ -13,6 +13,28 @@ tools/1b/datasets/D3-B01.mjs   one file per dataset (this is what you edit)
 questions/1b.json              generated: never edit by hand (the checker would fail)
 ```
 
+## Review status and the freeze (read this first)
+
+Every dataset has a status: **DRAFT → AUTO-VALIDATED → PHYSICS-REVIEWED → TEACHER-REVIEWED → APPROVED**.
+**Only APPROVED datasets are published** in `questions/1b.json` (plus one data file each in `questions/1b/`).
+Everything else that passes the checks goes into `questions/1b-preview.json` and `questions/1b-preview/`,
+which are never committed or published; the question bank shows them only on `localhost`, marked
+"Preview only: STATUS". Passing the automatic checks is AUTO-VALIDATED, never a review.
+
+Reviews are recorded in `tools/1b/reviews.json` with the reviewer, date and the dataset's **fingerprint**
+(a hash of its physics model and laws, data, uncertainties, wording, answers, ranges and mark scheme, but not
+its drawings). A snapshot is kept in `tools/1b/frozen/`. If a reviewed dataset would change, for example
+because shared code changed, `node tools/check.mjs` **fails**, saying which fields changed, with the old and
+new fingerprints. Then either undo the change, or reset the dataset and review it again:
+
+```
+node tools/1b/review.mjs status
+node tools/1b/review.mjs set D3-B01 APPROVED --by "Mr Silkstone (teacher)" --note "…"
+node tools/1b/review.mjs reset D3-B01 --by "…" --note "why it changed"
+```
+Reviews go in order (no skipping); TEACHER-REVIEWED and APPROVED must name a person, not an assistant or a
+script. If someone records a review on the reviewer's behalf, add `--recorded-by "<who>"`.
+
 ## Commands (run from the physics-site folder)
 
 | Command | What it does |
@@ -27,6 +49,11 @@ questions/1b.json              generated: never edit by hand (the checker would 
 
 | File | Job |
 |---|---|
+| `independent.mjs` | **Independent physics audit**: each dataset's physics written again from first principles, with its own units, fits and table reading (it imports none of the generator's physics or maths). Every dataset needs an entry here. |
+| `registry.mjs`, `review.mjs`, `reviews.json`, `frozen/` | Review status, the review tool, the review records and fingerprint snapshots |
+| `fingerprint.mjs` | What is frozen, the fingerprint, and the field-by-field difference report |
+| `uncertainty.mjs` | Propagation of uncertainties (IB worst-case sums) |
+| `systematic.mjs` | Systematic effects (zero offset, calibration, drift, heat loss) |
 | `laws.mjs` | **Vetted physics laws**: each with SI units, hand-worked reference values and limiting cases (all tested, including dimensional consistency). Every dataset's model is built from these. |
 | `lib.mjs` | Seeded random numbers, rounding, significant figures, units, line fits, max/min gradient lines |
 | `generate.mjs` | Model → measurements (seeded noise, rounded to the instrument) → derived columns → fits → results → table/graph/question |
@@ -69,6 +96,17 @@ Copy the closest existing dataset and change it. The parts, in order:
    `uncSymbol` sets the heading of a per-row uncertainty column (for example `'\\Delta(1/L)'`).
    `diagramChecks: [{ figure, harmonic: n }]` makes the validator check that a standing-wave diagram shows n loops
    with nodes at both fixed ends.
+   **Derived uncertainties are declared, not written as formulas**: `propagation: { form: 'product', terms: [{ of: 'R', n: 2 }] }`
+   or `{ form: 'sum', terms: [{ of: 'N', coef: (p) => 1 / p.dt, unc: 'poisson' }], neglect: [{ single: 'Nb', reason: '…' }] }`
+   (see `uncertainty.mjs`: IB worst-case sums). The validator recomputes every derived uncertainty independently by
+   differentiating the column's own formula, so a declaration that doesn't match the formula, a missing input or a
+   "neglected" term that isn't small is caught.
+   **Systematic effects** go on a measured column: `systematic: [{ type: 'zero-offset' | 'calibration' | 'drift' | 'heat-loss', …, cause, justification }]`
+   (see `systematic.mjs`). They are deterministic, need a physical cause and justification, appear in `--audit`, and
+   are not a way of adding noise.
+   **Units**: temperatures `K`, `°C` (offset 273.15) and temperature differences `ΔK`, `Δ°C`; angles `rad`, `°`.
+   A difference can't be used as a temperature (or the reverse), °C can't appear in a compound unit (use Δ°C), and a
+   plain number is never taken as an angle.
 4. **Graph**: `graph: { x, y, fit: 'linear' | 'exponential', band: true (max/min lines), exclude: [anomaly rows],
    omit: [rows students plot themselves], zero: { x, y } }`.
 5. **Results**: every number an answer needs, each worked out from `d` (the data): `d.fit`, `d.band`,
@@ -82,6 +120,14 @@ Copy the closest existing dataset and change it. The parts, in order:
 7. **Presentation**: `figures` (diagrams), `intro` (the question text), and `parts`. In parts, write every
    number with a template (`${d.sf(d.r.B.value, 2)}`) and every typed answer as `numeric: d.num('B')`.
    `msFigure: 'graph-ms'` shows the examiner's graph (with the fit lines) inside the mark scheme.
+   **Every number in the text must be traceable**: print it with `d.sf`, `d.dp`, `d.text`, `d.int` or `d.stated`.
+   A number the question states that isn't in the data (a manufacturer's claim, a length given in cm) is a
+   **stated constant**: `stated: { L_cm: { value: 5.0, dp: 1, unit: 'cm', source: '…', from: (p) => p.L * 100 } }`
+   (`from` is checked against the parameter when there is one). Only integers 0–12 and 100 may appear untraced.
+8. **Independent audit**: add an entry for the dataset to `AUDITS` in `independent.mjs`: its physics derived again
+   from first principles (in SI units), the dimensions of each term, limiting cases, the expected magnitude, and
+   how to recover the parameters and answers from the published table. Don't copy the formula from `laws.mjs`:
+   derive it again, so that a mistake in one shows up as a disagreement.
 
 Then run `node tools/1b/build.mjs --report` and fix anything it reports. Look at the question in the preview
 at 375 px and in dark mode, and get the teacher's approval before it goes live.

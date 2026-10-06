@@ -74,7 +74,13 @@ export default {
     R: {
       kind: 'derived', name: 'corrected count rate', symbol: 'R', unit: 's^-1', dp: 1,
       value: (row, p, s) => (row.N - (s.Nb * p.dt) / p.tb) / p.dt,
-      uncertainty: (row, p) => Math.sqrt(row.N) / p.dt,
+      // R = (N − Nb·Δt/t_b)/Δt: the uncertainty comes from the count N (√N); the background count's own
+      // uncertainty is neglected (√118 × 10/300 ≈ 0.4 counts in 10 s, under a fifth of √N even for the smallest N).
+      propagation: {
+        form: 'sum',
+        terms: [{ of: 'N', coef: (p) => 1 / p.dt, unc: 'poisson' }],
+        neglect: [{ single: 'Nb', unc: 'poisson', reason: 'the background is counted for 300 s, so its uncertainty per 10 s interval is small compared with √N' }],
+      },
       hide: [7],
     },
   },
@@ -98,8 +104,8 @@ export default {
 
   // ----- 5. Presentation -----
   intro: (d) => '<p>A student measures the count rate from a short-lived radioactive source with a Geiger–Müller tube and a counter. '
-    + `Every 30 s, starting at $t = 0$, the student records the number of counts $N$ in the ${d.p.dt} s interval that begins at time $t$.</p>`
-    + `<p>With the source removed, the counter recorded ${d.singles.Nb} counts in ${d.p.tb} s. `
+    + `Every 30 s, starting at $t = 0$, the student records the number of counts $N$ in the ${d.int(d.p.dt)} s interval that begins at time $t$.</p>`
+    + `<p>With the source removed, the counter recorded ${d.int(d.singles.Nb)} counts in ${d.int(d.p.tb)} s. `
     + 'The corrected count rate $R$ is the mean count rate due to the source alone during each interval. One value of $R$ has been left for you to calculate.</p>',
 
   parts: (d) => {
@@ -118,8 +124,8 @@ export default {
           mistakes: [{ value: d.rows[7].N / d.p.dt, feedback: 'Remember to subtract the background count first.' }],
         }),
         markscheme: [
-          `Background counts in ${d.p.dt} s $= \\dfrac{${d.singles.Nb}}{${d.p.tb / d.p.dt}} = ${d.dp(bgCounts, 1)}$ ✓`,
-          `$R = \\dfrac{${d.text('N', 7)} - ${d.dp(bgCounts, 1)}}{${d.p.dt}} = ${d.sf(d.r.Rmissing.value, 3)}\\ \\text{s}^{-1}$ ✓`,
+          `Background counts in ${d.int(d.p.dt)} s $= \\dfrac{${d.int(d.singles.Nb)}}{${d.int(d.p.tb / d.p.dt)}} = ${d.dp(bgCounts, 1)}$ ✓`,
+          `$R = \\dfrac{${d.text('N', 7)} - ${d.dp(bgCounts, 1)}}{${d.int(d.p.dt)}} = ${d.sf(d.r.Rmissing.value, 3)}\\ \\text{s}^{-1}$ ✓`,
         ],
       },
       {

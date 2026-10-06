@@ -147,8 +147,17 @@ const p1b = await import('./1b/build.mjs');
 const { formatDiag } = await import('./1b/validate.mjs');
 const built1b = p1b.buildAll(await p1b.loadDatasets(), TOPICS);
 for (const x of built1b.diags) (x.level === 'error' ? err : warn)(`Paper 1B ${x.dataset}`, formatDiag(x).split('\n').slice(1, -1).map((s) => s.trim()).join(' | '));
-if (!exists(p1b.OUTPUT) || read(p1b.OUTPUT).replace(/\r/g, '') !== built1b.json) {
-  err(p1b.OUTPUT, 'is out of date or edited by hand: run `node tools/1b/build.mjs` to rebuild it from tools/1b/datasets');
+// Published files: the cards (questions/1b.json) and one data file per APPROVED dataset (questions/1b/<id>.json).
+const split1b = p1b.splitForPublish(built1b.questions, p1b.DATA_DIR);
+const rebuild = 'is out of date or edited by hand: run `node tools/1b/build.mjs` to rebuild it from tools/1b/datasets';
+if (!exists(p1b.OUTPUT) || read(p1b.OUTPUT).replace(/\r/g, '') !== split1b.cards) err(p1b.OUTPUT, rebuild);
+for (const [file, text] of Object.entries(split1b.files)) {
+  if (!exists(file) || read(file).replace(/\r/g, '') !== text) err(file, rebuild);
+}
+if (exists(p1b.DATA_DIR)) {
+  for (const f of fs.readdirSync(path.join(ROOT, p1b.DATA_DIR))) {
+    if (!split1b.files[`${p1b.DATA_DIR}/${f}`]) err(`${p1b.DATA_DIR}/${f}`, 'is not an APPROVED dataset: delete it (or run node tools/1b/build.mjs)');
+  }
 }
 const tests1b = await (await import('./1b/test.mjs')).runTests();
 for (const f of tests1b.failures) err('tools/1b/test.mjs', f);

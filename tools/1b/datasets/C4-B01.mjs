@@ -57,7 +57,7 @@ export default {
     invL: {
       kind: 'derived', name: 'reciprocal of length', symbol: '1/L', symbolText: '1/L', unit: 'm^-1', dp: 3, uncSymbol: '\\Delta(1/L)',
       value: (row) => 1 / row.L,
-      uncertainty: (row) => 0.002 / row.L ** 2, // Δ(1/L) = ΔL / L²
+      propagation: { form: 'product', terms: [{ of: 'L', n: -1 }] }, // Δ(1/L)/(1/L) = ΔL/L, so Δ(1/L) = ΔL/L²
     },
     f: {
       kind: 'measured', name: 'frequency', symbol: 'f', unit: 'Hz',
@@ -116,7 +116,7 @@ export default {
     }),
   },
   intro: (d) => '<p>A student investigates standing waves on a string. The string is attached to a vibration generator, passes over a pulley '
-    + `and supports a hanging mass $M = ${d.p.M.toFixed(3)}\\ \\text{kg}$, which keeps the tension $T$ in the string constant.</p>`
+    + `and supports a hanging mass $M = ${d.dp(d.p.M, 3)}\\ \\text{kg}$, which keeps the tension $T$ in the string constant.</p>`
     + '<p>For different lengths $L$ of string between the vibration generator and the pulley, the student adjusts the frequency $f$ '
     + 'until the string vibrates in its first harmonic.</p>'
     + '<p>The speed of a wave on a string is $v = \\sqrt{\\dfrac{T}{\\mu}}$, where $\\mu$ is the mass per unit length of the string.</p>',
@@ -157,7 +157,7 @@ export default {
           mistakes: [{ value: T / d.r.gradient.value ** 2, feedback: 'The gradient is $\\tfrac12\\sqrt{T/\\mu}$, not $\\sqrt{T/\\mu}$: check the factor of 4.' }],
         }),
         markscheme: [
-          `Gradient $= \\tfrac12\\sqrt{\\dfrac{T}{\\mu}}$ with $T = Mg = ${T.toFixed(2)}\\ \\text{N}$, so $\\mu = \\dfrac{T}{4 \\times \\text{gradient}^2}$ ✓`,
+          `Gradient $= \\tfrac12\\sqrt{\\dfrac{T}{\\mu}}$ with $T = Mg = ${d.dp(T, 2)}\\ \\text{N}$, so $\\mu = \\dfrac{T}{4 \\times \\text{gradient}^2}$ ✓`,
           `$\\mu = ${d.sf(d.r.mu.value, 2)}\\ \\text{kg m}^{-1}$ (accept ${d.sf(mLo, 2)} to ${d.sf(mHi, 2)}; allow ECF from (c)) ✓`,
         ],
       },
@@ -169,12 +169,12 @@ export default {
       },
       {
         label: 'f', marks: 2, msFigure: 'diagram-ms',
-        question: `The student sets $L = ${L_PREDICT.toFixed(3)}\\ \\text{m}$ and increases the frequency until the string vibrates in its third harmonic. Use the graph to predict this frequency.`,
+        question: `The student sets $L = ${d.dp(L_PREDICT, 3)}\\ \\text{m}$ and increases the frequency until the string vibrates in its third harmonic. Use the graph to predict this frequency.`,
         numeric: d.num('f3', {
           mistakes: [{ value: f1, feedback: 'That is the first harmonic. The third harmonic has three loops, so its frequency is three times larger.' }],
         }),
         markscheme: [
-          `Reads $f_1 \\approx ${d.sf(f1, 3)}\\ \\text{Hz}$ at $1/L = ${(1 / L_PREDICT).toFixed(2)}\\ \\text{m}^{-1}$ ✓`,
+          `Reads $f_1 \\approx ${d.sf(f1, 3)}\\ \\text{Hz}$ at $1/L = ${d.dp(1 / L_PREDICT, 2)}\\ \\text{m}^{-1}$ ✓`,
           `Third harmonic: $f_3 = 3f_1 = ${d.sf(d.r.f3.value, 3)}\\ \\text{Hz}$ (accept ${d.sf(fLo, 3)} to ${d.sf(fHi, 3)}) ✓`,
         ],
       },

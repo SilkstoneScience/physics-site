@@ -3,14 +3,18 @@
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import {
-  makeRng, decimalsOf, roundTo, fmtNum, sigFig, parseNum, sigFigsIn, parseUnit, sameDim, linearFit, gradientBand, cross,
+  makeRng, decimalsOf, roundTo, fmtNum, sigFig, parseNum, sigFigsIn, parseUnit, sameDim, linearFit, gradientBand, cross, toSI, fromSI,
 } from './lib.mjs';
 import { renderGraph, niceScale } from './graph.mjs';
 import { buildQuestion, generateRows, evalModel } from './generate.mjs';
 import { LAWS } from './laws.mjs';
-import { validateDataset, parseGraph, scaleFromTicks } from './validate.mjs';
+import { propagate } from './uncertainty.mjs';
+import { applySystematic, checkSystematic } from './systematic.mjs';
+import { independentAudit } from './independent.mjs';
+import { validateDataset, parseGraph, scaleFromTicks, numbersIn } from './validate.mjs';
 import { buildAll, loadDatasets, loadTopics } from './build.mjs';
 import broken from './fixtures/broken.mjs';
+import { canonicalContent, fingerprintOf } from './fingerprint.mjs';
 
 export async function runTests() {
   const failures = [];
@@ -99,6 +103,81 @@ export async function runTests() {
     check('model evaluator refuses a law that is not in laws.mjs', code === 'physics-meta', `got ${code}`);
   }
 
+  // ----- Uncertainty propagation (IB worst-case sums), checked against hand-worked values -----
+  {
+    const P = (spec, y, vals) => propagate(spec, y, (t) => vals[t.of], {});
+    check('difference: (5 ± 0.1) − (3 ± 0.2) has uncertainty 0.3', near(P({ form: 'sum', terms: [{ of: 'a', coef: 1 }, { of: 'b', coef: -1 }] }, 2, { a: { value: 5, unc: 0.1 }, b: { value: 3, unc: 0.2 } }), 0.3));
+    check('product: (2 ± 5 %) × (4 ± 5 %) = 8 ± 0.8', near(P({ form: 'product', terms: [{ of: 'a', n: 1 }, { of: 'b', n: 1 }] }, 8, { a: { value: 2, unc: 0.1 }, b: { value: 4, unc: 0.2 } }), 0.8));
+    check('quotient: (2 ± 5 %) ÷ (4 ± 5 %) = 0.5 ± 0.05', near(P({ form: 'product', terms: [{ of: 'a', n: 1 }, { of: 'b', n: -1 }] }, 0.5, { a: { value: 2, unc: 0.1 }, b: { value: 4, unc: 0.2 } }), 0.05));
+    check('power: (3 ± 0.1)² = 9 ± 0.6', near(P({ form: 'product', terms: [{ of: 'x', n: 2 }] }, 9, { x: { value: 3, unc: 0.1 } }), 0.6));
+    check('reciprocal: 1/(0.5 ± 0.002) = 2 ± 0.008', near(P({ form: 'product', terms: [{ of: 'x', n: -1 }] }, 2, { x: { value: 0.5, unc: 0.002 } }), 0.008));
+    check('square root: √(4 ± 0.4) = 2 ± 0.1', near(P({ form: 'product', terms: [{ of: 'x', n: 0.5 }] }, 2, { x: { value: 4, unc: 0.4 } }), 0.1));
+    check('a sum with a coefficient: (N ± √N)/10 for N = 100 gives ± 1', near(P({ form: 'sum', terms: [{ of: 'N', coef: 0.1 }] }, 10, { N: { value: 100, unc: 10 } }), 1));
+  }
+
+  // ----- Finding the numbers in text -----
+  {
+    const toks = (s) => numbersIn(s).map((n) => n.tok).join(' ');
+    check('numbers are found in prose and MathJax', toks('The mean is $0.919\\ \\text{m}$ at h = 0.700 m.') === '0.919 0.700');
+    check('exponents, subscripts and ½ are not numbers', toks('$\\text{m s}^{-1}$, $f_3$, $\\tfrac12$, s⁻¹, 10^{-3}') === '10', toks('$\\text{m s}^{-1}$, $f_3$, $\\tfrac12$, s⁻¹, 10^{-3}'));
+    check('labels like D3-B01 are not numbers', toks('Dataset D3-B01, part (b)') === '');
+    check('a minus sign is read as part of the number', toks('a change of −0.25 V') === '0.25');
+  }
+
+  // ----- Systematic effects (deterministic, physically justified) -----
+  {
+    const row = { t: 60 };
+    const off = { type: 'zero-offset', offset: 0.03, cause: 'c', justification: 'j' };
+    const cal = { type: 'calibration', factor: 1.02, cause: 'c', justification: 'j' };
+    const dri = { type: 'drift', rate: 0.001, driver: 'row.t', cause: 'c', justification: 'j' };
+    const loss = { type: 'heat-loss', k: 0.002, driver: 'row.t', cause: 'c', justification: 'j' };
+    check('zero offset adds a constant', near(applySystematic([off], 1, row), 1.03));
+    check('calibration multiplies by a factor', near(applySystematic([cal], 1, row), 1.02));
+    check('drift grows with its driver', near(applySystematic([dri], 1, row), 1.06));
+    check('heat loss removes a growing fraction', near(applySystematic([loss], 10, row), 10 * (1 - 0.12)));
+    check('no effects, no change', applySystematic(undefined, 1.234, row) === 1.234);
+    check('an effect without a cause is refused', checkSystematic([{ type: 'zero-offset', offset: 0.1, justification: 'j' }], [row]).length > 0);
+    check('an unknown effect type is refused', checkSystematic([{ type: 'gremlins', cause: 'c', justification: 'j' }], [row]).length > 0);
+    check('a heat loss of half the energy or more is refused', checkSystematic([{ ...loss, k: 0.01 }], [row]).length > 0);
+    check('a calibration factor of 1.5 is refused as implausible', checkSystematic([{ ...cal, factor: 1.5 }], [row]).length > 0);
+    // In a real dataset: D3 with an un-zeroed balance (+0.05 g) shifts every reading by 0.05 g (same random scatter),
+    // keeps the physics checks happy, and makes the "line through the origin" claim fail, as it should.
+    const d3 = (await loadDatasets()).find((x) => x.def.id === 'D3-B01').def;
+    const offsetDef = { ...d3, columns: { ...d3.columns, m: { ...d3.columns.m, systematic: [{ type: 'zero-offset', offset: 0.05, cause: 'the balance was zeroed before the magnet was placed on it… (test)', justification: 'test' }] } } };
+    const a = generateRows(d3).rows.map((r) => r.m);
+    const b = generateRows(offsetDef).rows.map((r) => r.m);
+    check('a zero offset shifts every reading by the offset (deterministically)', a.every((v, i) => Math.abs(b[i] - v - 0.05) <= 0.0100001), `${a} vs ${b}`);
+    check('systematic effects are deterministic', JSON.stringify(generateRows(offsetDef).rows) === JSON.stringify(generateRows(offsetDef).rows));
+    const codes = validateDataset(offsetDef, buildQuestion(offsetDef).question, { topics: loadTopics() }).filter((x) => x.level === 'error').map((x) => x.code);
+    check('the validator expects the offset (no "model" error) and the origin claim now fails', !codes.includes('model') && codes.includes('claim'), codes.join(', '));
+  }
+
+  // ----- Temperatures (°C, K, differences) and angles (°, rad) -----
+  {
+    const C = parseUnit('°C');
+    check('20 °C is 293.15 K', near(toSI(20, C), 293.15));
+    check('373.15 K is 100 °C', near(fromSI(373.15, C), 100));
+    check('a temperature difference of 5 °C is 5 K (no offset)', near(toSI(5, parseUnit('Δ°C')), 5) && parseUnit('Δ°C').text === '°C');
+    let refused = false;
+    try { parseUnit('J kg^-1 °C^-1'); } catch (e) { refused = true; }
+    check('°C inside a compound unit is refused (use Δ°C)', refused);
+    check('J kg⁻¹ Δ°C⁻¹ has the same dimensions as J kg⁻¹ ΔK⁻¹', sameDim(parseUnit('J kg^-1 Δ°C^-1').dim, parseUnit('J kg^-1 ΔK^-1').dim));
+    check('30° is π/6 rad', near(toSI(30, parseUnit('°')), Math.PI / 6));
+    const env = { def: { physics: { params: {} }, columns: {}, singles: {} }, params: {}, row: {}, singles: {} };
+    const ev = (expr) => { try { return { v: evalModel(expr, env, 'test').si }; } catch (e) { return { code: e.code }; } };
+    const gas = (T) => ({ law: 'pressure-law', inputs: { p0: { value: 1e5, unit: 'Pa' }, T0: { value: 300, unit: 'K' }, T } });
+    check('a temperature in °C is converted to kelvin for the pressure law', near(ev(gas({ value: 150, unit: '°C' })).v, (1e5 * 423.15) / 300));
+    check('a temperature DIFFERENCE is refused where a temperature is needed', ev(gas({ value: 150, unit: 'Δ°C' })).code === 'physics-units');
+    const heat = (dT) => ({ law: 'thermal-energy', inputs: { m: { value: 0.5, unit: 'kg' }, c: { value: 4200, unit: 'J kg^-1 ΔK^-1' }, dT } });
+    check('a temperature difference in Δ°C works in Q = mcΔT', near(ev(heat({ value: 10, unit: 'Δ°C' })).v, 21000));
+    check('a temperature (not a difference) is refused in Q = mcΔT', ev(heat({ value: 10, unit: '°C' })).code === 'physics-units');
+    const comp = (theta) => ({ law: 'force-component', inputs: { F: { value: 10, unit: 'N' }, theta } });
+    check('an angle in degrees is converted to radians', near(ev(comp({ value: 60, unit: '°' })).v, 5));
+    check('an angle in radians is used as it is', near(ev(comp({ value: Math.PI / 3, unit: 'rad' })).v, 5));
+    check('a plain number is never taken as an angle', ev(comp({ value: 60, unit: '' })).code === 'physics-units');
+    check('an angle is refused where a plain number is needed', ev({ law: 'force-on-wire', inputs: { B: { value: 0.1, unit: 'T' }, I: { value: 2, unit: 'A' }, L: { value: 0.05, unit: 'm' }, theta: { value: 90, unit: '°' } } }).code === 'physics-units');
+  }
+
   // ----- Graph: the drawing reads back as the data -----
   {
     const s = niceScale(0, 0.93, true);
@@ -133,7 +212,7 @@ export async function runTests() {
     try {
       const q = JSON.parse(JSON.stringify(buildQuestion(fx.def).question));
       if (fx.mutate) fx.mutate(q);
-      codes = validateDataset(fx.def, q, { topics }).filter((x) => x.level === 'error').map((x) => x.code);
+      codes = [...validateDataset(fx.def, q, { topics }), ...independentAudit(fx.def, q)].filter((x) => x.level === 'error').map((x) => x.code);
     } catch (e) {
       codes = [e.code || `crash: ${e.message}`];
     }
@@ -144,9 +223,51 @@ export async function runTests() {
   {
     const d3 = datasets.find((x) => x.def.id === 'D3-B01');
     const dup = buildAll([d3, { ...d3 }], topics);
-    check('duplicate ids are rejected', dup.diags.some((x) => x.code === 'duplicate-id') && dup.questions.length === 1);
+    check('duplicate ids are rejected', dup.diags.some((x) => x.code === 'duplicate-id') && dup.questions.length + dup.preview.length === 1);
     const bad = buildAll([{ file: 'D3-B01.mjs', def: broken.find((f) => f.expect === 'claim').def }], topics);
-    check('a failing dataset is left out of questions/1b.json', bad.questions.length === 0);
+    check('a failing dataset is left out of questions/1b.json and the preview', bad.questions.length === 0 && bad.preview.length === 0);
+  }
+  // ----- Freeze (fingerprints) and the review gate -----
+  {
+    const d3 = datasets.find((x) => x.def.id === 'D3-B01');
+    const base = buildQuestion(d3.def);
+    const fp = fingerprintOf(canonicalContent(d3.def, base));
+    const reg = (status) => ({ datasets: { 'D3-B01': { status, fingerprint: fp, history: [{ status, by: 'test reviewer', date: '2026-10-06', fingerprint: fp }] } } });
+    // Drawings are presentation: changing an SVG must not change the fingerprint.
+    const redrawn = JSON.parse(JSON.stringify(base.question));
+    for (const f of redrawn.data) if (f.svg) f.svg = f.svg.replace('r="3.2"', 'r="2.9"');
+    check('changing only a drawing keeps the fingerprint', fingerprintOf(canonicalContent(d3.def, { ...base, question: redrawn })) === fp);
+    // Wording, data and physics are frozen once reviewed.
+    const reworded = { ...d3.def, intro: (dd) => d3.def.intro(dd).replace('A student investigates', 'A student studies') };
+    const r1 = buildAll([{ file: 'D3-B01.mjs', def: reworded }], topics, { registry: reg('TEACHER-REVIEWED') });
+    const f1 = r1.diags.find((x) => x.code === 'frozen-changed');
+    check('a reworded reviewed dataset fails the freeze, naming the field and both fingerprints',
+      f1 && f1.changes.some((c) => c.path === 'text.stem') && f1.expected.includes(fp.slice(0, 16)) && !f1.got.includes(fp.slice(0, 16)), f1 ? f1.message : 'no freeze error');
+    const shifted = { ...d3.def, physics: { ...d3.def.physics, params: { ...d3.def.physics.params, B: { ...d3.def.physics.params.B, value: 0.07 } } } };
+    const f2 = buildAll([{ file: 'D3-B01.mjs', def: shifted }], topics, { registry: reg('APPROVED') }).diags.find((x) => x.code === 'frozen-changed');
+    check('a physics change to an approved dataset fails the freeze (data and answers listed)',
+      f2 && f2.changes.some((c) => c.path.startsWith('data.rows')) && f2.changes.some((c) => c.path.includes('numeric.answer')));
+    const coarser = { ...d3.def, columns: { ...d3.def.columns, m: { ...d3.def.columns.m, resolution: 0.1, uncertainty: 0.1 } } };
+    check('a rounding change to a reviewed dataset fails the freeze',
+      buildAll([{ file: 'D3-B01.mjs', def: coarser }], topics, { registry: reg('PHYSICS-REVIEWED') }).diags.some((x) => x.code === 'frozen-changed'));
+    // A change to SHARED code (here, a vetted law made 1 % stronger) must also break the freeze.
+    const original = LAWS['force-on-wire'].f;
+    LAWS['force-on-wire'].f = ({ B, I, L, theta }) => 1.01 * B * I * L * Math.sin(theta);
+    let f3;
+    try { f3 = buildAll([d3], topics, { registry: reg('APPROVED') }).diags.find((x) => x.code === 'frozen-changed'); } finally { LAWS['force-on-wire'].f = original; }
+    check('a change to shared physics code breaks the freeze of an approved dataset (law and data listed)',
+      f3 && f3.changes.some((c) => c.path.startsWith('laws.force-on-wire')) && f3.changes.some((c) => c.path.startsWith('data.rows')));
+    // Only APPROVED (and unchanged) datasets are published; everything else is preview only.
+    const approved = buildAll([d3], topics, { registry: reg('APPROVED') });
+    check('an APPROVED dataset is published', approved.questions.length === 1 && approved.preview.length === 0);
+    const reviewed = buildAll([d3], topics, { registry: reg('TEACHER-REVIEWED') });
+    check('a TEACHER-REVIEWED dataset is preview only', reviewed.questions.length === 0 && reviewed.preview.length === 1 && reviewed.preview[0].review.status === 'TEACHER-REVIEWED');
+    const unreviewed = buildAll([d3], topics, { registry: { datasets: {} } });
+    check('an unreviewed dataset is AUTO-VALIDATED and preview only', unreviewed.questions.length === 0 && unreviewed.results[0].state.status === 'AUTO-VALIDATED');
+    const changedApproved = buildAll([{ file: 'D3-B01.mjs', def: reworded }], topics, { registry: reg('APPROVED') });
+    check('an APPROVED dataset that changed is not published', changedApproved.questions.length === 0);
+    const broken = buildAll([{ file: 'D3-B01.mjs', def: { ...d3.def, claims: [{ type: 'throughOrigin', expect: false }] } }], topics, { registry: reg('APPROVED') });
+    check('an APPROVED dataset that fails validation is not published (status DRAFT)', broken.questions.length === 0 && broken.results[0].state.status === 'DRAFT');
   }
   return { count, failures };
 }

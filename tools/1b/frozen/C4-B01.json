@@ -1,0 +1,328 @@
+{
+  "id": "C4-B01",
+  "topic": "C.4",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 2,
+  "skills": [
+    "linearisation",
+    "gradient",
+    "given-equation",
+    "percentage-uncertainty",
+    "prediction"
+  ],
+  "context": "experimental",
+  "seed": 9,
+  "physics": {
+    "scenario": "A string is driven by a vibration generator at one end and passes over a pulley to a hanging mass, which sets the tension. For each length L between the vibration generator and the pulley, the frequency is adjusted until the string vibrates in its first harmonic.",
+    "principles": [
+      "A standing wave on a string fixed at both ends has nodes at both ends (C.4)",
+      "Wave equation: v = fλ (C.2)",
+      "Wave speed on a stretched string: v = √(T/μ), given in the question (not on the syllabus)",
+      "The tension equals the weight of the hanging mass: T = Mg (frictionless pulley, mass at rest)"
+    ],
+    "assumptions": [
+      "The ends at the vibration generator and at the pulley are nodes (the generator's own movement is negligible)",
+      "The pulley is frictionless, so the tension is Mg all along the string",
+      "The string is uniform and does not stretch noticeably, so μ is constant",
+      "The first harmonic is identified as the frequency of largest amplitude with a single loop"
+    ],
+    "derivation": [
+      "Nodes at both ends: the first harmonic is half a wavelength, so λ = 2L",
+      "f = v/λ = (1/2L)√(T/μ), with T = Mg",
+      "A graph of f against 1/L is a straight line through the origin with gradient k = ½√(T/μ), so μ = T/(4k²)",
+      "The nth harmonic has L = nλ/2, so f_n = n f₁: at a given length the third harmonic is 3 f₁"
+    ],
+    "relationship": "f₁ = (1/2L)√(Mg/μ)",
+    "params": {
+      "M": {
+        "value": 0.2,
+        "unit": "kg",
+        "range": [
+          0.05,
+          1
+        ],
+        "note": "hanging mass"
+      },
+      "g": {
+        "value": 9.8,
+        "unit": "m s^-2",
+        "range": [
+          9.8,
+          9.8
+        ],
+        "note": "data booklet value"
+      },
+      "mu": {
+        "value": 0.0012,
+        "unit": "kg m^-1",
+        "range": [
+          0.0002,
+          0.005
+        ],
+        "note": "thin elastic cord"
+      }
+    }
+  },
+  "models": {
+    "L": {
+      "kind": "set",
+      "unit": "m",
+      "values": [
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1
+      ],
+      "resolution": 0.001,
+      "uncertainty": 0.002
+    },
+    "invL": {
+      "kind": "derived",
+      "unit": "m^-1",
+      "dp": 3,
+      "uncertainty": "rule"
+    },
+    "f": {
+      "kind": "measured",
+      "unit": "Hz",
+      "model": {
+        "law": "string-harmonic",
+        "inputs": {
+          "n": {
+            "value": 1,
+            "unit": ""
+          },
+          "T": {
+            "law": "weight",
+            "inputs": {
+              "m": "p.M",
+              "g": "p.g"
+            }
+          },
+          "mu": "p.mu",
+          "L": "row.L"
+        }
+      },
+      "noise": {
+        "type": "gauss",
+        "sd": 0.25
+      },
+      "resolution": 0.1,
+      "uncertainty": 0.5
+    }
+  },
+  "laws": {
+    "string-harmonic": {
+      "statement": "f = n v / 2L with v = √(T/μ): nodes at both ends, so L = nλ/2",
+      "inputs": {
+        "n": "",
+        "T": "N",
+        "mu": "kg m^-1",
+        "L": "m"
+      },
+      "output": "Hz",
+      "f": "({ n, T, mu, L }) => (n / (2 * L)) * Math.sqrt(T / mu)"
+    },
+    "weight": {
+      "statement": "F = mg",
+      "inputs": {
+        "m": "kg",
+        "g": "m s^-2"
+      },
+      "output": "N",
+      "f": "({ m, g }) => m * g"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "L": 0.5,
+        "invL": 2,
+        "f": 40.7
+      },
+      {
+        "L": 0.6,
+        "invL": 1.667,
+        "f": 33.9
+      },
+      {
+        "L": 0.7,
+        "invL": 1.429,
+        "f": 28.8
+      },
+      {
+        "L": 0.8,
+        "invL": 1.25,
+        "f": 25.6
+      },
+      {
+        "L": 0.9,
+        "invL": 1.111,
+        "f": 22.1
+      },
+      {
+        "L": 1,
+        "invL": 1,
+        "f": 20
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "L": [
+        0.002,
+        0.002,
+        0.002,
+        0.002,
+        0.002,
+        0.002
+      ],
+      "invL": [
+        0.008,
+        0.006,
+        0.004,
+        0.003,
+        0.002,
+        0.002
+      ],
+      "f": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student investigates standing waves on a string. The string is attached to a vibration generator, passes over a pulley and supports a hanging mass $M = 0.200\\ \\text{kg}$, which keeps the tension $T$ in the string constant.</p><p>For different lengths $L$ of string between the vibration generator and the pulley, the student adjusts the frequency $f$ until the string vibrates in its first harmonic.</p><p>The speed of a wave on a string is $v = \\sqrt{\\dfrac{T}{\\mu}}$, where $\\mu$ is the mass per unit length of the string.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"L\"><span class=\"h-name\">length</span>$L$ / m ± 0.002</th><th scope=\"col\" data-col=\"invL\"><span class=\"h-name\">reciprocal of length</span>$1/L$ / m⁻¹</th><th scope=\"col\" data-col=\"invL\" data-unc=\"1\"><span class=\"h-name\">uncertainty</span>$\\Delta(1/L)$ / m⁻¹</th><th scope=\"col\" data-col=\"f\"><span class=\"h-name\">frequency</span>$f$ / Hz ± 0.5</th></tr></thead><tbody><tr><td data-col=\"L\" data-row=\"0\">0.500</td><td data-col=\"invL\" data-row=\"0\">2.000</td><td data-col=\"invL\" data-row=\"0\" data-unc=\"1\">0.008</td><td data-col=\"f\" data-row=\"0\">40.7</td></tr><tr><td data-col=\"L\" data-row=\"1\">0.600</td><td data-col=\"invL\" data-row=\"1\">1.667</td><td data-col=\"invL\" data-row=\"1\" data-unc=\"1\">0.006</td><td data-col=\"f\" data-row=\"1\">33.9</td></tr><tr><td data-col=\"L\" data-row=\"2\">0.700</td><td data-col=\"invL\" data-row=\"2\">1.429</td><td data-col=\"invL\" data-row=\"2\" data-unc=\"1\">0.004</td><td data-col=\"f\" data-row=\"2\">28.8</td></tr><tr><td data-col=\"L\" data-row=\"3\">0.800</td><td data-col=\"invL\" data-row=\"3\">1.250</td><td data-col=\"invL\" data-row=\"3\" data-unc=\"1\">0.003</td><td data-col=\"f\" data-row=\"3\">25.6</td></tr><tr><td data-col=\"L\" data-row=\"4\">0.900</td><td data-col=\"invL\" data-row=\"4\">1.111</td><td data-col=\"invL\" data-row=\"4\" data-unc=\"1\">0.002</td><td data-col=\"f\" data-row=\"4\">22.1</td></tr><tr><td data-col=\"L\" data-row=\"5\">1.000</td><td data-col=\"invL\" data-row=\"5\">1.000</td><td data-col=\"invL\" data-row=\"5\" data-unc=\"1\">0.002</td><td data-col=\"f\" data-row=\"5\">20.0</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "diagram": {
+        "alt": "A string runs horizontally from a vibration generator on the left, over a pulley on the right, to a hanging mass M. The length L of string between the vibration generator and the pulley vibrates as a standing wave. It is shown in its first harmonic: one loop.",
+        "caption": "The string vibrating in its first harmonic."
+      },
+      "graph": {
+        "alt": "Graph of frequency against reciprocal of length, with 6 plotted points and error bars. The values are in the data table.",
+        "caption": "Graph of frequency against reciprocal of length. The error bars show the uncertainties."
+      },
+      "graph-ms": {
+        "alt": "Graph of frequency against reciprocal of length, with 6 plotted points and error bars, the line of best fit and the steepest and shallowest lines. The values are in the data table.",
+        "caption": "<span class=\"key-1\">Blue</span>: line of best fit. <span class=\"key-2\">Orange, dashed</span>: steepest and shallowest lines through the error bars."
+      },
+      "diagram-ms": {
+        "alt": "A string runs horizontally from a vibration generator on the left, over a pulley on the right, to a hanging mass M. The length L of string between the vibration generator and the pulley vibrates as a standing wave. It is shown in its third harmonic: three loops, with nodes N and antinodes A.",
+        "caption": "Third harmonic: three loops, <span class=\"key-2\">N</span> nodes and <span class=\"key-2\">A</span> antinodes."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Identify one variable that the student must keep constant so that the wave speed is the same for every length.",
+      "marks": 1,
+      "markscheme": [
+        "The tension / the hanging mass (or: the same string, so the same $\\mu$) ✓"
+      ]
+    },
+    {
+      "label": "b",
+      "question": "Show that the frequency of the first harmonic is $f = \\dfrac{1}{2L}\\sqrt{\\dfrac{T}{\\mu}}$.",
+      "marks": 2,
+      "markscheme": [
+        "There are nodes at both ends, so the first harmonic is half a wavelength: $\\lambda = 2L$ ✓",
+        "$f = \\dfrac{v}{\\lambda} = \\dfrac{1}{2L}\\sqrt{\\dfrac{T}{\\mu}}$ ✓"
+      ]
+    },
+    {
+      "label": "c",
+      "question": "Determine the gradient of the graph of $f$ against $1/L$.",
+      "marks": 2,
+      "markscheme": [
+        "Draws a line of best fit and uses two well-separated points on it ✓",
+        "Gradient $= 20.7\\ \\text{m s}^{-1}$ (accept 19.6 to 21.8) ✓"
+      ],
+      "numeric": {
+        "answer": 20.719542953471823,
+        "range": [
+          19.577308120133484,
+          21.786197564276048
+        ],
+        "unit": "$\\text{m}\\,\\text{s}^{-1}$",
+        "source": "gradient"
+      },
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "d",
+      "question": "Determine the mass per unit length $\\mu$ of the string.",
+      "marks": 2,
+      "markscheme": [
+        "Gradient $= \\tfrac12\\sqrt{\\dfrac{T}{\\mu}}$ with $T = Mg = 1.96\\ \\text{N}$, so $\\mu = \\dfrac{T}{4 \\times \\text{gradient}^2}$ ✓",
+        "$\\mu = 0.0011\\ \\text{kg m}^{-1}$ (accept 0.0010 to 0.0013; allow ECF from (c)) ✓"
+      ],
+      "numeric": {
+        "answer": 0.001141394400474786,
+        "range": [
+          0.001032364839319471,
+          0.0012784687822830578
+        ],
+        "unit": "$\\text{kg}\\,\\text{m}^{-1}$",
+        "source": "mu",
+        "mistakes": [
+          {
+            "value": 0.004565577601899144,
+            "feedback": "The gradient is $\\tfrac12\\sqrt{T/\\mu}$, not $\\sqrt{T/\\mu}$: check the factor of 4."
+          }
+        ]
+      }
+    },
+    {
+      "label": "e",
+      "question": "Calculate the percentage uncertainty in $1/L$ for $L = 0.500\\ \\text{m}$.",
+      "marks": 1,
+      "markscheme": [
+        "The percentage uncertainty in $1/L$ equals that in $L$: $\\dfrac{0.002}{0.500} \\times 100 = 0.40\\ \\%$ ✓"
+      ],
+      "numeric": {
+        "answer": 0.4,
+        "unit": "$\\%$",
+        "source": "pctInvL"
+      }
+    },
+    {
+      "label": "f",
+      "question": "The student sets $L = 0.800\\ \\text{m}$ and increases the frequency until the string vibrates in its third harmonic. Use the graph to predict this frequency.",
+      "marks": 2,
+      "markscheme": [
+        "Reads $f_1 \\approx 25.2\\ \\text{Hz}$ at $1/L = 1.25\\ \\text{m}^{-1}$ ✓",
+        "Third harmonic: $f_3 = 3f_1 = 75.6\\ \\text{Hz}$ (accept 73.4 to 77.9) ✓"
+      ],
+      "numeric": {
+        "answer": 75.63569869676371,
+        "range": [
+          73.3666277358608,
+          77.90476965766662
+        ],
+        "unit": "$\\text{Hz}$",
+        "source": "f3",
+        "mistakes": [
+          {
+            "value": 25.211899565587903,
+            "feedback": "That is the first harmonic. The third harmonic has three loops, so its frequency is three times larger."
+          }
+        ]
+      },
+      "msFigure": "diagram-ms"
+    }
+  ]
+}

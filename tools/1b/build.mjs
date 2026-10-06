@@ -12,10 +12,15 @@ import { buildQuestion, generateRows, makeContext, paramValues } from './generat
 import { LAWS } from './laws.mjs';
 import { validateDataset, formatDiag } from './validate.mjs';
 import { sigFig, parseUnit } from './lib.mjs';
+import { canonicalContent, fingerprintOf } from './fingerprint.mjs';
+import { loadRegistry, stateFor, freezeDiagnostic } from './registry.mjs';
+import { SYSTEMATIC_TYPES } from './systematic.mjs';
+import { independentAudit } from './independent.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.resolve(HERE, '../..');
 export const OUTPUT = 'questions/1b.json';
+export const PREVIEW = 'questions/1b-preview.json'; // local only: never committed or published
 
 export async function loadDatasets(dir = path.join(HERE, 'datasets')) {
   const files = fs.readdirSync(dir).filter((f) => f.endsWith('.mjs')).sort();
@@ -42,12 +47,15 @@ export function loadTopics() {
   return new Map(sandbox.SYLLABUS.flatMap((t) => t.topics.map((s) => [s.id, { ...s, theme: t.id }])));
 }
 
-// Builds every dataset twice (to prove it's deterministic) and validates it.
-// Only datasets with no errors go into the output.
-export function buildAll(datasets, topics) {
+// Builds every dataset twice (to prove it's deterministic), validates it, works out its review status
+// and checks the freeze. Only APPROVED datasets (unchanged since approval) go into questions/1b.json;
+// every other dataset that passes validation goes into the local-only preview file.
+export function buildAll(datasets, topics, { registry = loadRegistry() } = {}) {
   const questions = [];
+  const preview = [];
   const diags = [];
   const reports = [];
+  const results = [];
   const ids = new Set();
   for (const { file, def } of datasets) {
     const id = (def && def.id) || file;
@@ -61,14 +69,31 @@ export function buildAll(datasets, topics) {
       if (JSON.stringify(buildQuestion(def).question) !== JSON.stringify(built.question)) fail('determinism', 'building twice gave different results');
     } catch (e) {
       fail(e.code || 'crash', `couldn't be generated: ${e.message}`);
+      results.push({ id, def, valid: false, state: stateFor(id, false, null, registry) });
       continue;
     }
-    const found = validateDataset(def, built.question, { topics });
+    const found = validateDataset(def, built.question, { topics, traced: built.traced });
     diags.push(...found);
-    if (!found.some((x) => x.level === 'error') && !diags.some((x) => x.dataset === id && x.level === 'error')) questions.push(built.question);
+    // The independent physics audit (tools/1b/independent.mjs): its own physics, units and fits.
+    diags.push(...independentAudit(def, built.question));
+    const valid = !diags.some((x) => x.dataset === id && x.level === 'error');
+    const content = canonicalContent(def, built);
+    const fingerprint = fingerprintOf(content);
+    const state = stateFor(id, valid, fingerprint, registry);
+    if (state.changed) diags.push(freezeDiagnostic(id, state.rec, content, fingerprint));
+    const out = { ...built.question, review: { status: state.status } };
+    if (valid && !state.changed) (state.status === 'APPROVED' ? questions : preview).push(out);
     reports.push({ id, d: built.d });
+    results.push({ id, def, built, valid, content, fingerprint, state });
   }
-  return { questions, diags, reports, json: JSON.stringify(questions, null, 2) + '\n' };
+  for (const id of Object.keys(registry.datasets)) {
+    if (!ids.has(id)) diags.push({ level: 'error', code: 'registry', dataset: id, where: 'tools/1b/reviews.json', message: 'has a review record, but there is no dataset file with this id' });
+  }
+  return {
+    questions, preview, diags, reports, results,
+    json: JSON.stringify(questions, null, 2) + '\n',
+    previewJson: JSON.stringify(preview, null, 2) + '\n',
+  };
 }
 
 // --audit: each dataset's physics written out for a teacher to check: scenario, principles,
@@ -85,6 +110,9 @@ function printAudit(datasets) {
   for (const { def } of datasets) {
     const ph = def.physics;
     console.log(`\n================ ${def.id} (${def.topic}) ================`);
+    const rec = loadRegistry().datasets[def.id];
+    const last = rec && rec.history.length ? rec.history[rec.history.length - 1] : null;
+    console.log(`REVIEW STATUS: ${rec ? rec.status : 'no review recorded (AUTO-VALIDATED if it passes the checks)'}${last ? ` (last: ${last.status} by ${last.by}, ${last.date})` : ''}`);
     if (!ph) { console.log('  NO PHYSICS BLOCK'); continue; }
     console.log(`Scenario: ${ph.scenario}`);
     for (const [title, list] of [['Principles', ph.principles], ['Assumptions', ph.assumptions], ['Derivation', ph.derivation]]) {
@@ -105,6 +133,12 @@ function printAudit(datasets) {
       const vals = ideal ? (def.columns[k] ? ideal.rows.map((r) => r[k]) : [ideal.singles[k]]) : [];
       console.log(`  ${k} [${parseUnit(c.unit || '').text || 'no unit'}]: ${m.instrument}; ${m.reading}`);
       console.log(`     scatter: ${m.noise}`);
+      for (const eff of c.systematic || []) {
+        const params = Object.entries(eff).filter(([key]) => !['type', 'cause', 'justification'].includes(key)).map(([key, val]) => `${key} = ${val}`).join(', ');
+        console.log(`     SYSTEMATIC ${eff.type} (${SYSTEMATIC_TYPES[eff.type] ? SYSTEMATIC_TYPES[eff.type].effect : '?'}): ${params}`);
+        console.log(`        cause: ${eff.cause}`);
+        console.log(`        justification: ${eff.justification}`);
+      }
       if (vals.length) console.log(`     noise-free model: ${sigFig(Math.min(...vals), 3)} to ${sigFig(Math.max(...vals), 3)}  (expected ${c.expect.join(' to ')})`);
     }
     console.log('Vetted laws used (each tested for reference values, limiting cases and units):');
@@ -128,7 +162,7 @@ function printAudit(datasets) {
 async function main() {
   const datasets = await loadDatasets();
   if (process.argv.includes('--audit')) printAudit(datasets);
-  const { questions, diags, reports, json } = buildAll(datasets, loadTopics());
+  const { questions, preview, diags, reports, results, json, previewJson } = buildAll(datasets, loadTopics());
   const errors = diags.filter((x) => x.level === 'error');
   if (process.argv.includes('--report')) {
     for (const { id, d } of reports) {
@@ -142,12 +176,55 @@ async function main() {
     console.log('');
   }
   for (const x of diags) console.log(formatDiag(x) + '\n');
+  printStatus(results);
   if (errors.length) {
     console.log(`✗ ${errors.length} error(s). ${OUTPUT} was NOT changed: fix the datasets above first.`);
     process.exit(1);
   }
-  fs.writeFileSync(path.join(ROOT, OUTPUT), json);
-  console.log(`✓ ${questions.length} dataset(s) passed validation. Wrote ${OUTPUT}.`);
+  writeOutputs({ questions, preview });
+  console.log(`✓ Production (${OUTPUT}): ${questions.length} APPROVED dataset(s). Local preview (${PREVIEW}, never published): ${preview.length} dataset(s).`);
+}
+
+// Publishing layout (smaller downloads): the question bank loads only light "cards" (wording, parts,
+// answers) for every question; each dataset's tables, graphs and diagrams are in a file of their own
+// (questions/1b/<id>.json), loaded only when that question is shown. Each figure is stored once, by
+// name, and referred to from the data list and from mark schemes (no duplicated SVG).
+export function splitForPublish(questions, dir) {
+  const files = {};
+  const cards = questions.map((q) => {
+    const figures = {};
+    const keep = (f) => { if (f && !figures[f.figure]) figures[f.figure] = { svg: f.svg, alt: f.alt, caption: f.caption }; return f.figure; };
+    const data = q.data.map((item) => (item.kind === 'figure' ? { kind: 'figure', ref: keep(item) } : item));
+    const parts = q.parts.map((pt) => (pt.msFigure ? { ...pt, msFigure: keep(pt.msFigure) } : pt));
+    files[`${dir}/${q.id}.json`] = JSON.stringify({ id: q.id, figures, data }) + '\n';
+    const { data: _d, ...card } = q;
+    return { ...card, parts, dataFile: `${dir}/${q.id}.json` };
+  });
+  return { cards: JSON.stringify(cards, null, 2) + '\n', files };
+}
+export const DATA_DIR = 'questions/1b';
+export const PREVIEW_DIR = 'questions/1b-preview';
+
+export function writeOutputs({ questions, preview }) {
+  for (const [list, file, dir] of [[questions, OUTPUT, DATA_DIR], [preview, PREVIEW, PREVIEW_DIR]]) {
+    const out = splitForPublish(list, dir);
+    fs.writeFileSync(path.join(ROOT, file), out.cards);
+    fs.rmSync(path.join(ROOT, dir), { recursive: true, force: true }); // no stale files left behind
+    if (Object.keys(out.files).length) fs.mkdirSync(path.join(ROOT, dir), { recursive: true });
+    for (const [f, text] of Object.entries(out.files)) fs.writeFileSync(path.join(ROOT, f), text);
+  }
+}
+
+// The review status of every dataset, so it is always obvious what students can and can't see.
+export function printStatus(results) {
+  console.log('Dataset   Status             Fingerprint       Last review');
+  for (const r of results) {
+    const rec = r.state.rec;
+    const last = rec && rec.history && rec.history[rec.history.length - 1];
+    const flag = r.state.changed ? '  ✗ CHANGED SINCE REVIEW' : '';
+    console.log(`${r.id.padEnd(10)}${r.state.status.padEnd(19)}${(r.fingerprint || '-').slice(0, 16).padEnd(18)}${last ? `${last.status} by ${last.by}, ${last.date}` : '(none: automatic checks only)'}${flag}`);
+  }
+  console.log('Only APPROVED datasets are published. Change a status with: node tools/1b/review.mjs set <id> <STATUS> --by "<name>"\n');
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

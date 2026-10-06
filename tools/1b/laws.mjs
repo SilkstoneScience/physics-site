@@ -75,6 +75,20 @@ export const LAWS = {
     ],
   },
 
+  'count-rate-with-background': {
+    title: 'Count rate recorded from a decaying source plus background, at an instant',
+    statement: 'R = R₀ 2^(−t/T½) + b',
+    syllabus: 'E.3',
+    inputs: { R0: 's^-1', t: 's', T: 's', b: 's^-1' },
+    output: 's^-1',
+    f: ({ R0, t, T, b }) => R0 * 2 ** (-t / T) + b,
+    reference: [{ inputs: { R0: 40, t: 150, T: 75, b: 0.4 }, output: 10.4, note: '40 → 20 → 10, plus 0.4 background' }],
+    limits: [
+      { name: 'long after: only the background', check: (f) => Math.abs(f({ R0: 40, t: 1e6, T: 75, b: 0.4 }) - 0.4) < 1e-12 },
+      { name: 'no background: the source rate', inputs: { R0: 40, t: 75, T: 75, b: 0 }, output: 20 },
+    ],
+  },
+
   'counts-in-interval': {
     title: 'Counts recorded from a decaying source plus background in the interval from t to t + Δt',
     statement: 'N = (R₀T½/ln 2)(2^(−t/T½) − 2^(−(t+Δt)/T½)) + bΔt (the count rate added up over the interval)',
@@ -136,6 +150,50 @@ export const LAWS = {
       { name: 'four times the tension doubles the frequency', check: (f) => near(f({ n: 1, T: 6.4, mu: 0.001, L: 1 }), 2 * f({ n: 1, T: 1.6, mu: 0.001, L: 1 })) },
       { name: 'a heavier string (4μ) halves the frequency', check: (f) => near(f({ n: 1, T: 1.6, mu: 0.004, L: 1 }), f({ n: 1, T: 1.6, mu: 0.001, L: 1 }) / 2) },
       { name: 'no tension, no wave: f = 0', inputs: { n: 1, T: 0, mu: 0.001, L: 1 }, output: 0 },
+    ],
+  },
+
+  'thermal-energy': {
+    title: 'Energy transferred in changing the temperature of a substance',
+    statement: 'Q = mcΔT (ΔT is a temperature difference)',
+    syllabus: 'B.1',
+    inputs: { m: 'kg', c: 'J kg^-1 ΔK^-1', dT: 'ΔK' },
+    output: 'J',
+    f: ({ m, c, dT }) => m * c * dT,
+    reference: [{ inputs: { m: 0.5, c: 4200, dT: 10 }, output: 21000, note: '0.5 × 4200 × 10' }],
+    limits: [
+      { name: 'no temperature change, no energy', inputs: { m: 0.5, c: 4200, dT: 0 }, output: 0 },
+      { name: 'cooling (negative ΔT) releases energy', check: (f) => f({ m: 0.5, c: 4200, dT: -10 }) < 0 },
+      { name: 'twice the mass needs twice the energy', check: (f) => near(f({ m: 1, c: 4200, dT: 10 }), 2 * f({ m: 0.5, c: 4200, dT: 10 })) },
+    ],
+  },
+
+  'pressure-law': {
+    title: 'Pressure of a fixed mass of ideal gas at constant volume',
+    statement: 'p = p₀T / T₀ (p/T is constant; T in kelvin, an absolute temperature)',
+    syllabus: 'B.3',
+    inputs: { p0: 'Pa', T0: 'K', T: 'K' },
+    output: 'Pa',
+    f: ({ p0, T0, T }) => (p0 * T) / T0,
+    reference: [{ inputs: { p0: 100000, T0: 300, T: 450 }, output: 150000, note: '100 kPa × 450/300' }],
+    limits: [
+      { name: 'at the starting temperature, the starting pressure', inputs: { p0: 100000, T0: 300, T: 300 }, output: 100000 },
+      { name: 'at absolute zero the pressure is zero', inputs: { p0: 100000, T0: 300, T: 0 }, output: 0 },
+      { name: 'doubling the absolute temperature doubles the pressure', check: (f) => near(f({ p0: 1e5, T0: 300, T: 600 }), 2e5) },
+    ],
+  },
+
+  'force-component': {
+    title: 'Component of a force along a direction at angle θ to it',
+    statement: 'F∥ = F cos θ',
+    syllabus: 'A.2',
+    inputs: { F: 'N', theta: 'rad' },
+    output: 'N',
+    f: ({ F, theta }) => F * Math.cos(theta),
+    reference: [{ inputs: { F: 10, theta: Math.PI / 3 }, output: 5, note: 'cos 60° = 0.5' }],
+    limits: [
+      { name: 'along the force (θ = 0): the whole force', inputs: { F: 10, theta: 0 }, output: 10 },
+      { name: 'at right angles (θ = 90°): no component', check: (f) => Math.abs(f({ F: 10, theta: Math.PI / 2 })) < 1e-12 },
     ],
   },
 

@@ -1,0 +1,304 @@
+{
+  "id": "D3-B01",
+  "topic": "D.3",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 2,
+  "skills": [
+    "force-direction",
+    "gradient",
+    "proportionality",
+    "uncertainty-propagation"
+  ],
+  "context": "experimental",
+  "seed": 7,
+  "physics": {
+    "scenario": "A magnet stands on a top-pan balance. A straight, stiff wire of length L, held by a clamp so that it cannot move, runs between the poles at right angles to the magnetic field. With a current I in the wire, the balance reading changes by Δm.",
+    "principles": [
+      "Force on a current-carrying conductor in a magnetic field: F = BIL sin θ, in the direction of IL × B (D.3)",
+      "Newton's third law: the wire exerts an equal and opposite force on the magnet",
+      "A top-pan balance shows the normal force divided by g, as a mass"
+    ],
+    "assumptions": [
+      "The field is uniform along the length L of wire between the poles and zero outside it (fringing neglected)",
+      "The wire is at right angles to the field (θ = 90°)",
+      "Forces on the supply leads are negligible",
+      "The balance is zeroed with no current, and there is no drift, heating or convection"
+    ],
+    "derivation": [
+      "Force on the wire: F = BIL (θ = 90°). With I out of the page and B to the right, IL × B points up",
+      "Newton's third law: the wire pushes the magnet down with force F, so the balance reading increases",
+      "Change in reading: Δm = F/g = BIL/g, so Δm ∝ I with gradient BL/g; B = gradient × g / L"
+    ],
+    "relationship": "Δm = (BL/g) I",
+    "params": {
+      "B": {
+        "value": 0.064,
+        "unit": "T",
+        "range": [
+          0.02,
+          0.2
+        ],
+        "note": "school magnet set on a steel yoke"
+      },
+      "L": {
+        "value": 0.05,
+        "unit": "m",
+        "range": [
+          0.02,
+          0.1
+        ],
+        "note": "length of wire between the poles, stated as (5.0 ± 0.2) cm"
+      },
+      "g": {
+        "value": 9.8,
+        "unit": "m s^-2",
+        "range": [
+          9.8,
+          9.8
+        ],
+        "note": "data booklet value"
+      }
+    }
+  },
+  "vectors": {
+    "B": [
+      1,
+      0,
+      0
+    ],
+    "I": [
+      0,
+      0,
+      1
+    ],
+    "F": [
+      "cross",
+      "I",
+      "B"
+    ]
+  },
+  "models": {
+    "I": {
+      "kind": "set",
+      "unit": "A",
+      "values": [
+        0.5,
+        1,
+        1.5,
+        2,
+        2.5,
+        3
+      ],
+      "resolution": 0.01,
+      "uncertainty": 0.01
+    },
+    "m": {
+      "kind": "measured",
+      "unit": "g",
+      "model": {
+        "law": "balance-reading",
+        "inputs": {
+          "F": {
+            "law": "force-on-wire",
+            "inputs": {
+              "B": "p.B",
+              "I": "row.I",
+              "L": "p.L"
+            }
+          },
+          "g": "p.g"
+        }
+      },
+      "noise": {
+        "type": "gauss",
+        "sd": 0.007
+      },
+      "resolution": 0.01,
+      "uncertainty": 0.02
+    }
+  },
+  "laws": {
+    "balance-reading": {
+      "statement": "Δm = F / g (a balance shows the normal force divided by g, as a mass)",
+      "inputs": {
+        "F": "N",
+        "g": "m s^-2"
+      },
+      "output": "kg",
+      "f": "({ F, g }) => F / g"
+    },
+    "force-on-wire": {
+      "statement": "F = BIL sin θ, in the direction of IL × B",
+      "inputs": {
+        "B": "T",
+        "I": "A",
+        "L": "m",
+        "theta": ""
+      },
+      "defaults": {
+        "theta": 1.5707963267948966
+      },
+      "output": "N",
+      "f": "({ B, I, L, theta }) => B * I * L * Math.sin(theta)"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "I": 0.5,
+        "m": 0.18
+      },
+      {
+        "I": 1,
+        "m": 0.33
+      },
+      {
+        "I": 1.5,
+        "m": 0.48
+      },
+      {
+        "I": 2,
+        "m": 0.65
+      },
+      {
+        "I": 2.5,
+        "m": 0.82
+      },
+      {
+        "I": 3,
+        "m": 0.99
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "I": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01
+      ],
+      "m": [
+        0.02,
+        0.02,
+        0.02,
+        0.02,
+        0.02,
+        0.02
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student investigates the force on a current-carrying wire in a magnetic field. A magnet stands on a top-pan balance. A stiff, horizontal wire, held by a clamp, passes between the poles without touching the magnet. The length of wire in the field is $L = (5.0 \\pm 0.2)\\ \\text{cm}$.</p><p>The balance is set to zero with no current in the wire. The student then measures the change in the balance reading, $\\Delta m$, for different currents $I$.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"I\"><span class=\"h-name\">current</span>$I$ / A ± 0.01</th><th scope=\"col\" data-col=\"m\"><span class=\"h-name\">change in reading</span>$\\Delta m$ / g ± 0.02</th></tr></thead><tbody><tr><td data-col=\"I\" data-row=\"0\">0.50</td><td data-col=\"m\" data-row=\"0\">0.18</td></tr><tr><td data-col=\"I\" data-row=\"1\">1.00</td><td data-col=\"m\" data-row=\"1\">0.33</td></tr><tr><td data-col=\"I\" data-row=\"2\">1.50</td><td data-col=\"m\" data-row=\"2\">0.48</td></tr><tr><td data-col=\"I\" data-row=\"3\">2.00</td><td data-col=\"m\" data-row=\"3\">0.65</td></tr><tr><td data-col=\"I\" data-row=\"4\">2.50</td><td data-col=\"m\" data-row=\"4\">0.82</td></tr><tr><td data-col=\"I\" data-row=\"5\">3.00</td><td data-col=\"m\" data-row=\"5\">0.99</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "diagram": {
+        "alt": "Front view of the apparatus. A U-shaped magnet stands on a top-pan balance, with its north pole on the left and its south pole on the right. A stiff wire, held by a clamp, runs between the poles at right angles to the page. The current in the wire is out of the page. The magnetic field between the poles points from left to right.",
+        "caption": "The wire is seen end-on: the dot shows that the current is out of the page. <span class=\"key-1\">Blue</span> arrows: magnetic field."
+      },
+      "graph": {
+        "alt": "Graph of change in reading against current, with 6 plotted points and error bars. The values are in the data table.",
+        "caption": "Graph of change in reading against current. The error bars show the uncertainties."
+      },
+      "diagram-ms": {
+        "alt": "Front view of the apparatus. A U-shaped magnet stands on a top-pan balance, with its north pole on the left and its south pole on the right. A stiff wire, held by a clamp, runs between the poles at right angles to the page. The current in the wire is out of the page. The magnetic field between the poles points from left to right. An arrow shows the force on the wire, upwards.",
+        "caption": "<span class=\"key-2\">Orange</span>: the magnetic force on the wire is upwards."
+      },
+      "graph-ms": {
+        "alt": "Graph of change in reading against current, with 6 plotted points and error bars, the line of best fit and the steepest and shallowest lines. The values are in the data table.",
+        "caption": "<span class=\"key-1\">Blue</span>: line of best fit. <span class=\"key-2\">Orange, dashed</span>: steepest and shallowest lines through the error bars."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "State the direction of the magnetic force on the wire. Explain why the balance reading increases when there is a current in the wire.",
+      "marks": 2,
+      "markscheme": [
+        "The force on the wire is upwards (from a hand rule, or the direction of $I\\vec{L} \\times \\vec{B}$) ✓",
+        "By Newton's third law, the wire exerts an equal and opposite (downward) force on the magnet, so the reading increases ✓"
+      ],
+      "msFigure": "diagram-ms"
+    },
+    {
+      "label": "b",
+      "question": "Determine the gradient of the graph of $\\Delta m$ against $I$.",
+      "marks": 2,
+      "markscheme": [
+        "Draws a line of best fit and uses two well-separated points on it ✓",
+        "Gradient $= 0.325\\ \\text{g A}^{-1}$ (accept 0.312 to 0.340) ✓"
+      ],
+      "numeric": {
+        "answer": 0.3251428571428571,
+        "range": [
+          0.31213714285714284,
+          0.3400000000000001
+        ],
+        "unit": "$\\text{g}\\,\\text{A}^{-1}$",
+        "source": "gradient"
+      },
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "c",
+      "question": "Determine the magnetic flux density $B$ between the poles.",
+      "marks": 2,
+      "markscheme": [
+        "Uses $F = \\Delta m\\, g$ with $\\Delta m$ in kg, so $B = \\dfrac{\\text{gradient} \\times 10^{-3} \\times 9.8}{L}$ ✓",
+        "$B = 0.064\\ \\text{T}$ (accept 0.061 to 0.067; allow ECF from (b)) ✓"
+      ],
+      "numeric": {
+        "answer": 0.063728,
+        "range": [
+          0.06117887999999999,
+          0.06664000000000002
+        ],
+        "unit": "$\\text{T}$",
+        "source": "B"
+      }
+    },
+    {
+      "label": "d",
+      "question": "Discuss whether the data support the hypothesis that the force on the wire is proportional to the current.",
+      "marks": 2,
+      "markscheme": [
+        "The points lie on a straight line, within their error bars ✓",
+        "A straight line through all the error bars can pass through the origin, so the data support $F \\propto I$ ✓"
+      ],
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "e",
+      "question": "The percentage uncertainty in the gradient is 4 %. Determine the absolute uncertainty in your value of $B$.",
+      "marks": 2,
+      "markscheme": [
+        "Percentage uncertainty in $L$ $= \\dfrac{0.2}{5.0} \\times 100 = 4\\ \\%$ ✓",
+        "Adds percentages: 4 % + 4 % = 8 %, so $\\Delta B = 0.0051\\ \\text{T}$ (allow ECF from (c)) ✓"
+      ],
+      "numeric": {
+        "answer": 0.00509824,
+        "range": [
+          0.004894310399999999,
+          0.005331200000000001
+        ],
+        "unit": "$\\text{T}$",
+        "source": "dB",
+        "mistakes": [
+          {
+            "value": 0.00254912,
+            "feedback": "That uses only the 4 % from the gradient. The length $L$ is uncertain too: add the percentage uncertainties."
+          }
+        ]
+      }
+    }
+  ]
+}

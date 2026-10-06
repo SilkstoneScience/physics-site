@@ -1,0 +1,307 @@
+{
+  "id": "B5-B01",
+  "topic": "B.5",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 2,
+  "skills": [
+    "anomaly",
+    "intercept",
+    "gradient",
+    "percentage-uncertainty",
+    "evaluate-method"
+  ],
+  "context": "experimental",
+  "seed": 3,
+  "physics": {
+    "scenario": "A cell with emf ε and internal resistance r is connected in series with an ammeter and a variable resistor R. A voltmeter measures the potential difference V across the cell's terminals as R is changed.",
+    "principles": [
+      "Conservation of energy around the circuit (Kirchhoff's voltage law): ε = I(R + r) (B.5)",
+      "The terminal potential difference is the p.d. across the external resistance: V = IR",
+      "Conservation of charge: with an ideal voltmeter, the ammeter current is the cell current"
+    ],
+    "assumptions": [
+      "ε and r stay constant during the experiment (no heating or running down between readings)",
+      "Ideal meters: the ammeter has no resistance and the voltmeter draws no current",
+      "The resistance of the connecting wires is negligible"
+    ],
+    "derivation": [
+      "ε = I(R + r) = IR + Ir",
+      "V = IR, so V = ε − Ir",
+      "A graph of V against I is a straight line with gradient −r and intercept ε on the V axis"
+    ],
+    "relationship": "V = ε − Ir",
+    "params": {
+      "emf": {
+        "value": 1.52,
+        "unit": "V",
+        "range": [
+          1.2,
+          1.7
+        ],
+        "note": "a 1.5 V cell"
+      },
+      "r": {
+        "value": 0.75,
+        "unit": "Ω",
+        "range": [
+          0.05,
+          2
+        ],
+        "note": "a zinc–carbon or partly used cell"
+      }
+    }
+  },
+  "circuit": {
+    "components": {
+      "cell": {
+        "type": "cell",
+        "nodes": [
+          "a",
+          "b"
+        ]
+      },
+      "r": {
+        "type": "resistor",
+        "nodes": [
+          "b",
+          "c"
+        ],
+        "label": "r"
+      },
+      "A": {
+        "type": "ammeter",
+        "nodes": [
+          "c",
+          "d"
+        ]
+      },
+      "R": {
+        "type": "variable-resistor",
+        "nodes": [
+          "d",
+          "a"
+        ],
+        "label": "R"
+      },
+      "V": {
+        "type": "voltmeter",
+        "nodes": [
+          "a",
+          "c"
+        ],
+        "measures": [
+          "cell",
+          "r"
+        ]
+      }
+    },
+    "figure": "diagram"
+  },
+  "models": {
+    "I": {
+      "kind": "set",
+      "unit": "A",
+      "values": [
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8
+      ],
+      "resolution": 0.01,
+      "uncertainty": 0.01
+    },
+    "V": {
+      "kind": "measured",
+      "unit": "V",
+      "model": {
+        "law": "terminal-pd",
+        "inputs": {
+          "emf": "p.emf",
+          "I": "row.I",
+          "r": "p.r"
+        }
+      },
+      "noise": {
+        "type": "gauss",
+        "sd": 0.004
+      },
+      "resolution": 0.01,
+      "anomaly": {
+        "row": 4,
+        "shift": -0.1
+      },
+      "uncertainty": 0.01
+    }
+  },
+  "laws": {
+    "terminal-pd": {
+      "statement": "V = ε − Ir (from ε = I(R + r) and V = IR)",
+      "inputs": {
+        "emf": "V",
+        "I": "A",
+        "r": "Ω"
+      },
+      "output": "V",
+      "f": "({ emf, I, r }) => emf - I * r"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "I": 0.1,
+        "V": 1.45
+      },
+      {
+        "I": 0.2,
+        "V": 1.37
+      },
+      {
+        "I": 0.3,
+        "V": 1.29
+      },
+      {
+        "I": 0.4,
+        "V": 1.22
+      },
+      {
+        "I": 0.5,
+        "V": 1.04
+      },
+      {
+        "I": 0.6,
+        "V": 1.08
+      },
+      {
+        "I": 0.7,
+        "V": 0.99
+      },
+      {
+        "I": 0.8,
+        "V": 0.92
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "I": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01
+      ],
+      "V": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student investigates the internal resistance of a cell using the circuit shown. The student changes the resistance of the variable resistor $R$ and records the current $I$ and the potential difference $V$ across the terminals of the cell.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"I\"><span class=\"h-name\">current</span>$I$ / A ± 0.01</th><th scope=\"col\" data-col=\"V\"><span class=\"h-name\">terminal p.d.</span>$V$ / V ± 0.01</th></tr></thead><tbody><tr><td data-col=\"I\" data-row=\"0\">0.10</td><td data-col=\"V\" data-row=\"0\">1.45</td></tr><tr><td data-col=\"I\" data-row=\"1\">0.20</td><td data-col=\"V\" data-row=\"1\">1.37</td></tr><tr><td data-col=\"I\" data-row=\"2\">0.30</td><td data-col=\"V\" data-row=\"2\">1.29</td></tr><tr><td data-col=\"I\" data-row=\"3\">0.40</td><td data-col=\"V\" data-row=\"3\">1.22</td></tr><tr><td data-col=\"I\" data-row=\"4\">0.50</td><td data-col=\"V\" data-row=\"4\">1.04</td></tr><tr><td data-col=\"I\" data-row=\"5\">0.60</td><td data-col=\"V\" data-row=\"5\">1.08</td></tr><tr><td data-col=\"I\" data-row=\"6\">0.70</td><td data-col=\"V\" data-row=\"6\">0.99</td></tr><tr><td data-col=\"I\" data-row=\"7\">0.80</td><td data-col=\"V\" data-row=\"7\">0.92</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "diagram": {
+        "alt": "Circuit diagram. A cell, drawn with its internal resistance r inside a dashed box, is connected in series with an ammeter and a variable resistor R. A voltmeter is connected across the terminals of the cell.",
+        "caption": "The dashed box represents the cell: an emf $\\varepsilon$ in series with its internal resistance $r$."
+      },
+      "graph": {
+        "alt": "Graph of terminal p.d. against current, with 8 plotted points and error bars. The values are in the data table.",
+        "caption": "Graph of terminal p.d. against current. The error bars show the uncertainties."
+      },
+      "graph-ms": {
+        "alt": "Graph of terminal p.d. against current, with 8 plotted points and error bars, the line of best fit and the steepest and shallowest lines. The values are in the data table.",
+        "caption": "<span class=\"key-1\">Blue</span>: line of best fit. <span class=\"key-2\">Orange, dashed</span>: steepest and shallowest lines through the error bars."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Identify the anomalous reading and suggest one possible cause of it.",
+      "marks": 2,
+      "markscheme": [
+        "The reading at $I = 0.50\\ \\text{A}$, $V = 1.04\\ \\text{V}$ ✓",
+        "Any plausible cause, e.g. the voltmeter was misread / a poor connection / the reading was taken before the meters settled ✓"
+      ],
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "b",
+      "question": "Determine the emf $\\varepsilon$ of the cell.",
+      "marks": 2,
+      "markscheme": [
+        "Extends the line of best fit to $I = 0$: the emf is the intercept on the $V$ axis ✓",
+        "$\\varepsilon = 1.52\\ \\text{V}$ (accept 1.51 to 1.54) ✓"
+      ],
+      "numeric": {
+        "answer": 1.521472602739726,
+        "range": [
+          1.506257876712329,
+          1.5366873287671232
+        ],
+        "unit": "$\\text{V}$",
+        "source": "emf"
+      },
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "c",
+      "question": "Determine the internal resistance $r$ of the cell.",
+      "marks": 2,
+      "markscheme": [
+        "From $V = \\varepsilon - Ir$, the gradient of the graph is $-r$ ✓",
+        "$r = 0.75\\ \\Omega$ (accept 0.71 to 0.79) ✓"
+      ],
+      "numeric": {
+        "answer": 0.7517123287671232,
+        "range": [
+          0.7141267123287671,
+          0.7892979452054794
+        ],
+        "unit": "$\\text{Ω}$",
+        "source": "r"
+      }
+    },
+    {
+      "label": "d",
+      "question": "Calculate the percentage uncertainty in the reading of $V$ when $I = 0.80\\ \\text{A}$.",
+      "marks": 1,
+      "markscheme": [
+        "$\\dfrac{0.01}{0.92} \\times 100 = 1.1\\ \\%$ ✓"
+      ],
+      "numeric": {
+        "answer": 1.0869565217391304,
+        "unit": "$\\%$",
+        "source": "pctV"
+      }
+    },
+    {
+      "label": "e",
+      "question": "Suggest why the student should disconnect the circuit between readings.",
+      "marks": 2,
+      "markscheme": [
+        "A current makes the cell warm up / makes the cell run down ✓",
+        "This would change $r$ (or $\\varepsilon$) during the experiment, so the readings would not all describe the same cell ✓"
+      ]
+    }
+  ]
+}

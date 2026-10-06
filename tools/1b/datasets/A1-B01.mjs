@@ -2,7 +2,6 @@
 // R = u√(2h/g), so R² = (2u²/g) h: a straight line through the origin; u from the gradient.
 // Skills: mean and uncertainty of repeated readings, linearising, gradient, testing a manufacturer's claim.
 import { launcher } from '../diagrams.mjs';
-import { roundTo } from '../lib.mjs';
 
 const halfRangeOf = (a) => (Math.max(...a) - Math.min(...a)) / 2;
 const meanOf = (a) => a.reduce((x, y) => x + y, 0) / a.length;
@@ -70,7 +69,7 @@ export default {
     R2: {
       kind: 'derived', name: 'mean range squared', symbol: 'R^2', symbolText: 'R²', unit: 'm^2', dp: 3,
       value: (row) => row.R ** 2,
-      uncertainty: (row) => 2 * row.R * roundTo(halfRangeOf(row.R__trials), 0.001), // Δ(R²) = 2RΔR
+      propagation: { form: 'product', terms: [{ of: 'R', n: 2 }] }, // Δ(R²)/R² = 2ΔR/R, so Δ(R²) = 2RΔR
       hide: [ROW],
     },
   },
@@ -92,6 +91,11 @@ export default {
       value: (d) => Math.sqrt((d.p.g * d.r.gradient.value) / 2),
       range: (d) => d.r.gradient.range.map((k) => Math.sqrt((d.p.g * k) / 2)),
     },
+  },
+
+  // Numbers the question states that aren't in the data (traced by the validator).
+  stated: {
+    claimedU: { value: CLAIMED_U, dp: 2, unit: 'm s^-1', source: 'the manufacturer\'s stated launch speed: part of the scenario; the claim that the data do not support it is checked above' },
   },
 
   // ----- 4. Claims -----
@@ -174,10 +178,10 @@ export default {
       },
       {
         label: 'g', marks: 2, msFigure: 'graph-ms',
-        question: `The manufacturer states that the launch speed is $${CLAIMED_U.toFixed(2)}\\ \\text{m s}^{-1}$. Discuss whether the data support this statement.`,
+        question: `The manufacturer states that the launch speed is $${d.stated('claimedU')}\\ \\text{m s}^{-1}$. Discuss whether the data support this statement.`,
         markscheme: [
           `The steepest and shallowest lines through the error bars give $u$ between about ${d.sf(uLo, 3)} and ${d.sf(uHi, 3)} $\\text{m s}^{-1}$ ✓`,
-          `${CLAIMED_U.toFixed(2)} $\\text{m s}^{-1}$ is outside this range, so the data do not support the statement (the launcher is slower than stated) ✓`,
+          `${d.stated('claimedU')} $\\text{m s}^{-1}$ is outside this range, so the data do not support the statement (the launcher is slower than stated) ✓`,
         ],
       },
     ];

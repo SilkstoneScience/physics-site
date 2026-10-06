@@ -112,6 +112,44 @@ export default [
   { name: 'wave drawn without a node at the fixed end', expect: 'diagram', def: C4,
     mutate: (q) => editFigure(q, 'diagram', (s) => s.replace(/(<polyline class="l1 thin wave" points=")100,120/, '$1100,110')) },
 
+  // ----- Uncertainty propagation (checked independently from each column's own formula) -----
+  { name: 'propagation declared as a power of 1 for R² (should be 2)', expect: 'propagation',
+    def: { ...A1, columns: { ...A1.columns, R2: { ...A1.columns.R2, propagation: { form: 'product', terms: [{ of: 'R', n: 1 }] } } } } },
+  { name: 'propagation leaves out a quantity the formula depends on', expect: 'propagation',
+    def: { ...E3, columns: { ...E3.columns, R: { ...E3.columns.R, propagation: { form: 'sum', terms: [] } } } } },
+  { name: '"neglected" uncertainty that is actually the main one', expect: 'propagation',
+    def: { ...E3, columns: { ...E3.columns, R: { ...E3.columns.R, propagation: { form: 'sum', terms: [{ single: 'Nb', coef: (p) => -1 / p.tb, unc: 'poisson' }], neglect: [{ of: 'N', unc: 'poisson', reason: 'test' }] } } } } },
+  { name: 'propagation includes a quantity the formula doesn\'t use', expect: 'propagation',
+    def: { ...C4, columns: { ...C4.columns, invL: { ...C4.columns.invL, propagation: { form: 'product', terms: [{ of: 'L', n: -1 }, { of: 'f', n: 1 }] } } } } },
+  { name: 'propagated uncertainty edited in the table', expect: 'propagation', def: C4,
+    mutate: (q) => editTable(q, (h) => h.replace(/(<td data-col="invL" data-row="0" data-unc="1">)([\d.]+)/, '$10.080')) },
+
+  // ----- Independent physics audit (generator vs independently derived physics) -----
+  // The audit's original E3 error, written with valid units (a rate × a time), so only physics catches it.
+  { name: 'E3 counts as instantaneous rate × Δt (the original error): caught by the independent physics', expect: 'independent-model',
+    def: { ...E3, columns: { ...E3.columns, N: { ...E3.columns.N, model: { law: 'uniform-counts', inputs: { rate: { law: 'count-rate-with-background', inputs: { R0: 'p.R0', t: 'row.t', T: 'p.T', b: 'p.bg' } }, dt: 'p.dt' } } } } } },
+  { name: 'generator model with the wire at 30° to the field (the physics says 90°)', expect: 'independent-model',
+    def: { ...D3, columns: { ...D3.columns, m: { ...D3.columns.m, model: { law: 'balance-reading', inputs: { F: { law: 'force-on-wire', inputs: { B: 'p.B', I: 'row.I', L: 'p.L', theta: { value: Math.PI / 6, unit: '' } } }, g: 'p.g' } } } } } },
+  { name: 'a dataset with no independent audit', expect: 'independent-missing', def: { ...D3, id: 'D3-B09' } },
+  { name: 'published answer disagrees with the independent recalculation', expect: 'independent-answer', def: C4,
+    mutate: (q) => { q.parts.find((p) => p.label === 'd').numeric.answer *= 1.05; } },
+  { name: 'published data biased against the independent physics', expect: 'independent-data', def: D3,
+    mutate: (q) => editTable(q, (h) => h.replace(/(<td data-col="m" data-row="\d+">)([\d.]+)/g, (m, a, v) => a + (Number(v) + 0.04).toFixed(2))) },
+
+  // ----- Numbers in the text must be traceable -----
+  { name: 'a number typed into the question text', expect: 'text-number', def: D3,
+    mutate: (q) => { q.stem = q.stem.replace('for different currents', 'for currents up to 3.25 A'); } },
+  { name: 'a number typed into a mark scheme', expect: 'text-number', def: B5,
+    mutate: (q) => { q.parts[1].markscheme[1] += ' (or 1.49 V)'; } },
+  { name: 'a stated constant that disagrees with its parameter', expect: 'text-number',
+    def: { ...D3, stated: { ...D3.stated, L_cm: { ...D3.stated.L_cm, value: 6.0 } } } },
+  { name: 'a stated constant with no source', expect: 'text-number',
+    def: { ...A1, stated: { claimedU: { value: 2.5, dp: 2 } } } },
+
+  // ----- Systematic effects -----
+  { name: 'a systematic effect with no stated physical cause', expect: 'physics-meta',
+    def: { ...D3, columns: { ...D3.columns, m: { ...D3.columns.m, systematic: [{ type: 'zero-offset', offset: 0.05, justification: 'looks realistic' }] } } } },
+
   // ----- Identity and level -----
   { name: 'Paper 1B dataset on an HL-only topic', expect: 'level-topic', def: { ...D3, id: 'A4-B01', topic: 'A.4' } },
 ];

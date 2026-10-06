@@ -108,9 +108,14 @@ export default {
       caption: '<span class="key-2">Orange</span>: the magnetic force on the wire is upwards.',
     }),
   },
-  intro: () => '<p>A student investigates the force on a current-carrying wire in a magnetic field. '
+  // Numbers the question states that aren't in the data (traced by the validator).
+  stated: {
+    L_cm: { value: 5.0, dp: 1, unit: 'cm', source: 'physics.params.L (0.050 m), written in centimetres', from: (p) => p.L * 100 },
+    dL_cm: { value: 0.2, dp: 1, unit: 'cm', source: 'uncertainty in measuring L with a ruler (±2 mm), given in the question' },
+  },
+  intro: (d) => '<p>A student investigates the force on a current-carrying wire in a magnetic field. '
     + 'A magnet stands on a top-pan balance. A stiff, horizontal wire, held by a clamp, passes between the poles without touching the magnet. '
-    + 'The length of wire in the field is $L = (5.0 \\pm 0.2)\\ \\text{cm}$.</p>'
+    + `The length of wire in the field is $L = (${d.stated('L_cm')} \\pm ${d.stated('dL_cm')})\\ \\text{cm}$.</p>`
     + '<p>The balance is set to zero with no current in the wire. The student then measures the change in the balance reading, $\\Delta m$, for different currents $I$.</p>',
 
   parts: (d) => {
@@ -140,7 +145,7 @@ export default {
         question: 'Determine the magnetic flux density $B$ between the poles.',
         numeric: d.num('B'),
         markscheme: [
-          'Uses $F = \\Delta m\\, g$ with $\\Delta m$ in kg, so $B = \\dfrac{\\text{gradient} \\times 10^{-3} \\times 9.8}{L}$ ✓',
+          `Uses $F = \\Delta m\\, g$ with $\\Delta m$ in kg, so $B = \\dfrac{\\text{gradient} \\times 10^{-3} \\times ${d.dp(d.p.g, 1)}}{L}$ ✓`,
           `$B = ${d.sf(d.r.B.value, 2)}\\ \\text{T}$ (accept ${d.sf(bLo, 2)} to ${d.sf(bHi, 2)}; allow ECF from (b)) ✓`,
         ],
       },
@@ -159,7 +164,7 @@ export default {
           mistakes: [{ value: (d.r.B.value * pct) / 100, feedback: `That uses only the ${pct} % from the gradient. The length $L$ is uncertain too: add the percentage uncertainties.` }],
         }),
         markscheme: [
-          `Percentage uncertainty in $L$ $= \\dfrac{0.2}{5.0} \\times 100 = ${L_PCT}\\ \\%$ ✓`,
+          `Percentage uncertainty in $L$ $= \\dfrac{${d.stated('dL_cm')}}{${d.stated('L_cm')}} \\times 100 = ${L_PCT}\\ \\%$ ✓`,
           `Adds percentages: ${pct} % + ${L_PCT} % = ${pct + L_PCT} %, so $\\Delta B = ${d.sf(d.r.dB.value, 2)}\\ \\text{T}$ (allow ECF from (c)) ✓`,
         ],
       },
