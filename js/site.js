@@ -419,7 +419,8 @@ window.CONSTANTS = {
   if (footer) {
     footer.className = 'site-footer';
     footer.innerHTML = `<div class="inner">A study guide for IB Diploma Programme Physics students.
-      This site is not produced or endorsed by the International Baccalaureate Organization.</div>`;
+      This site is not produced or endorsed by the International Baccalaureate Organization.
+      <span class="copyright">© 2026 Mark Silkstone. All rights reserved. Please ask before copying or reproducing anything from this site. <a href="${root}about.html#copyright">More</a></span></div>`;
   }
 
   // ----- List of all themes: <div data-theme-list></div> -----
