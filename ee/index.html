@@ -37,9 +37,11 @@
         <li><a href="#topic">Choosing a topic</a></li>
         <li><a href="#rq">The research question</a></li>
         <li><a href="#design">Designing the investigation</a></li>
+        <li><a href="#other-data">Databases and simulations</a></li>
         <li><a href="#uncertainty">Measurement and uncertainty</a></li>
         <li><a href="#data">Processing and presenting data</a></li>
         <li><a href="#structure">Structure and word count</a></li>
+        <li><a href="#argument">Finding your argument</a></li>
         <li><a href="#analytical">Writing analytically</a></li>
         <li><a href="#discussion">Discussion, evaluation and conclusion</a></li>
         <li><a href="#criteria">The five criteria</a></li>
@@ -148,7 +150,7 @@
     <p>The times below are approximate; the school sets the actual deadlines. The three reflection sessions are compulsory and are recorded on your Reflection and Progress Form (RPF).</p>
     <div class="timeline-day">
       <h3>1. Exploration (1–2 months)</h3>
-      <p>Read widely, narrow down an area, and test possible questions for feasibility (section 6).</p>
+      <p>Read widely, narrow down an area, and test possible questions for feasibility (see <a href="#topic">Choosing a topic</a>).</p>
     </div>
     <div class="timeline-day">
       <h3>2. Reflection session 1</h3>
@@ -176,7 +178,7 @@
     </div>
     <div class="timeline-day">
       <h3>8. Reflection session 3: the viva voce</h3>
-      <p>A short final conversation about your essay and what you learned, then you complete your RPF (section 17).</p>
+      <p>A short final conversation about your essay and what you learned, then you complete your RPF (see <a href="#rpf">Reflection and the RPF</a>).</p>
     </div>
     <div class="notice"><strong>Build in pilot time.</strong> More physics EEs are damaged by finding out, at the writing stage, that the apparatus wasn't good enough than by anything else. Two hours of trial work early in the year prevents a crisis later.</div>
 
@@ -202,6 +204,7 @@
         <tr><td>Hybrid</td><td>Often the strongest: your own measurements compared with a published dataset or an accepted value.</td><td>Keep one clear research question.</td></tr>
       </table>
     </div>
+    <p>Databases and simulations each have their own rules: see <a href="#other-data">Databases and simulations</a>.</p>
 
     <h3>Topics that tend to work</h3>
     <ul>
@@ -288,7 +291,84 @@
     <p>Include a short safety paragraph where it is relevant: lasers, high voltages, radioactive sources and projectiles all need explicit risk control. If your investigation involves people (reaction times, sport, the body), you need their informed consent; follow the IB's ethical guidelines for experiments and ask me first.</p>
 
     <!-- ===================================================== -->
-    <h2 id="uncertainty">9. Measurement and uncertainty</h2>
+    <h2 id="other-data">9. Databases and simulations</h2>
+    <p>You don't have to collect every number yourself. A physics EE can be built on published data or on a simulation you write, or on either of these alongside your own measurements. Both are allowed and both can score well, but each has its own rules. In both, the examiner is asking: <strong>which part of this is your work?</strong></p>
+
+    <h3>Essays using databases (secondary data)</h3>
+    <p>Research institutions publish enormous datasets, far more precise than anything a school lab can produce. You can download them and do the physics yourself. Some places to start:</p>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Source</th><th>What it holds</th><th>A model you could test</th></tr>
+        <tr><td>NASA Exoplanet Archive</td><td>Orbital periods, orbit sizes and masses of thousands of planets around other stars</td><td>Kepler's third law: find a star's mass from its planets' orbits</td></tr>
+        <tr><td>JPL Horizons</td><td>Positions and velocities of planets, moons, comets and spacecraft at any time</td><td>The inverse-square law of gravitation; conservation of energy and angular momentum in an orbit</td></tr>
+        <tr><td>Gaia archive (ESA)</td><td>Distances, brightnesses and colours of over a billion stars</td><td>Luminosity and the Stefan–Boltzmann law; the Hertzsprung–Russell diagram</td></tr>
+        <tr><td>NIST Atomic Spectra Database</td><td>Wavelengths of spectral lines for every element</td><td>Energy levels; the Rydberg formula and where it stops working</td></tr>
+        <tr><td>CERN Open Data</td><td>Real particle-collision events, including datasets prepared for students</td><td>Conservation of energy and momentum; the invariant mass of a particle</td></tr>
+        <tr><td>Gravitational Wave Open Science Center</td><td>Signals from black-hole and neutron-star mergers</td><td>How the frequency of the signal changes as two objects spiral together</td></tr>
+      </table>
+    </div>
+    <p>Phone sensors and video recordings that other people have published count as databases too, as long as you do the analysis.</p>
+    <p>What a database essay must show:</p>
+    <ul>
+      <li><strong>Your own analysis.</strong> You may reproduce a published graph to compare with, but the processing, fitting, uncertainties and interpretation must be yours. Downloading a result and discussing it is not an investigation.</li>
+      <li><strong>Selection criteria, stated openly.</strong> Which data you used, why, and what you left out and why. If you picked the points that fit best, the argument collapses. Decide your rule <em>before</em> you look at how well the points fit, and say what it was.</li>
+      <li><strong>The database's own uncertainties.</strong> Most datasets give an uncertainty with each value. Use them in your error bars and propagation; don't invent new ones or ignore them.</li>
+      <li><strong>Where the data came from.</strong> Say briefly how the values were measured (a space telescope, a spectrometer, a detector), because that tells the reader what limits them. Cite the database, with the date you downloaded the data.</li>
+      <li><strong>Careful units and conventions.</strong> Databases use astronomical units, days, electronvolts and solar masses. Convert them carefully, and say how you did it.</li>
+    </ul>
+    <div class="worked">
+      <h3>Worked example: from a database to a research question</h3>
+      <p><strong>Idea:</strong> the seven planets of the TRAPPIST-1 system all orbit the same star, so Kepler's third law says they should all lie on one line.</p>
+      <p><strong>Model:</strong> for circular orbits, $T^2 = \dfrac{4\pi^2}{GM}\,a^3$, where $T$ is the orbital period, $a$ the orbit's radius and $M$ the star's mass.</p>
+      <p><strong>Analysis:</strong> plot $T^2$ against $a^3$ using the archive's values and their uncertainties. The gradient is $\dfrac{4\pi^2}{GM}$, so it gives the star's mass. Compare that with the star's mass that astronomers found by a different method, from the star's brightness.</p>
+      <p><strong>The check that matters:</strong> find out how the archive got each orbit radius $a$. Some values are <em>calculated</em> from the period and the star's mass using Kepler's law itself. Testing Kepler's law with those would be circular. Use only values measured independently (for example, from the shape of the dip in starlight as the planet crosses the star), and say in the essay that you checked.</p>
+      <p><strong>Research question:</strong> "To what extent does Kepler's third law, applied to the orbits of the seven TRAPPIST-1 planets, give a stellar mass consistent with the published mass found from the star's brightness?"</p>
+      <p>The data are published, but the choice of data, the linearisation, the fit, the uncertainty in the gradient and the comparison are all the student's own. Two independent routes to the same quantity give the essay something to argue about.</p>
+    </div>
+
+    <h3>Essays using simulations</h3>
+    <p>There are two very different things people mean by a simulation:</p>
+    <ul>
+      <li><strong>Using someone else's simulation</strong> (a ready-made app or website). This is usually weak: the simulation already contains the model, so its "data" can only give you back the equations someone else put in. It can't test anything. Use these for exploring an idea, not as the evidence in your essay.</li>
+      <li><strong>Building your own numerical model.</strong> You write the equations, turn them into a step-by-step calculation in a spreadsheet or a short program, and use it to make predictions that the simple textbook formula can't. This can be an excellent EE.</li>
+    </ul>
+    <p>A numerical model is most useful where the equations can't be solved with algebra alone: air resistance that depends on $v^2$, a pendulum at large amplitudes, a rocket losing mass, alpha particles scattering off a nucleus, a planet pulled by two stars.</p>
+
+    <div class="worked">
+      <h3>Worked example: a falling ball with air resistance</h3>
+      <p>A ball falls from rest, with drag proportional to $v^2$. Its acceleration is</p>
+      $a = g - \frac{k}{m}v^2$
+      <p>Take $g = 9.8\ \text{m s}^{-2}$ and $k/m = 0.020\ \text{m}^{-1}$. The acceleration changes as the speed changes, so the equations of motion for constant acceleration don't apply.</p>
+      <p>Instead, split the motion into short time steps $\Delta t$ and assume the acceleration is constant during each step:</p>
+      $$v_{n+1} = v_n + a_n\,\Delta t$$
+      <p>With $\Delta t = 0.1$ s:</p>
+      <div class="table-wrap">
+        <table class="notes">
+          <tr><th>Step</th><th>$t$ / s</th><th>$v$ / $\text{m s}^{-1}$</th><th>$a$ / $\text{m s}^{-2}$</th></tr>
+          <tr><td>0</td><td>0.0</td><td>0.000</td><td>9.800</td></tr>
+          <tr><td>1</td><td>0.1</td><td>0.980</td><td>9.781</td></tr>
+          <tr><td>2</td><td>0.2</td><td>1.958</td><td>9.723</td></tr>
+          <tr><td>3</td><td>0.3</td><td>2.930</td><td>9.628</td></tr>
+        </table>
+      </div>
+      <p>A spreadsheet repeats this for thousands of rows in a second. The speed should level off at the terminal velocity, where the acceleration is zero: $v_\text{t} = \sqrt{\dfrac{g}{k/m}} = \sqrt{\dfrac{9.8}{0.020}} = 22\ \text{m s}^{-1}$.</p>
+    </div>
+
+    <p>What a simulation essay must show:</p>
+    <ul>
+      <li><strong>The physics.</strong> Derive the equations your model uses and state every assumption (no wind, constant drag coefficient, a point mass…).</li>
+      <li><strong>That the model works.</strong> Test it where you already know the answer. Set the drag to zero: does it give $v = gt$ exactly? Does the speed level off at the terminal velocity you can calculate by hand? Is energy conserved when it should be?</li>
+      <li><strong>That the time step is small enough.</strong> Halve $\Delta t$ and run it again. If the result barely changes, the step was small enough; if it changes a lot, it wasn't. The size of that change is part of your model's uncertainty.</li>
+      <li><strong>An anchor in reality.</strong> Compare the model with something real: your own measurements (a video of a falling ball analysed frame by frame in a free tool such as Tracker), published data, or an analytical result. A model that is never compared with anything is just arithmetic. The best simulation essays use the model to make a prediction and then test it.</li>
+      <li><strong>Sensitivity.</strong> How much does the prediction change if a parameter (the drag constant, the mass) is 5% out? That tells you which measurements matter most.</li>
+    </ul>
+    <p><strong>Tools:</strong> a spreadsheet is enough for most essays. Python (free to use in a browser with Google Colab) or GlowScript VPython are good if you want to go further. Describe the method in prose in the essay and put the code or a sample of the spreadsheet in an appendix. Write the code yourself; if any tool, including AI, helped with it, acknowledge it as you would any other source.</p>
+    <div class="key">
+      <p style="margin:0"><strong>The common trap in both kinds of essay is circularity.</strong> If your data come from a model, or you choose the data that fit a model, you can't use them to test that same model. Ask: could my results have come out differently from my prediction? If not, there is no test, and so no argument.</p>
+    </div>
+
+    <!-- ===================================================== -->
+    <h2 id="uncertainty">10. Measurement and uncertainty</h2>
     <p>This is where physics EEs are won and lost. Examiners look for uncertainties handled properly, and most candidates handle them badly. The <a href="../skills.html">Physics skills</a> page has the basics; this section is about how to use them in an essay.</p>
 
     <h3>Measure the quantity your equation needs</h3>
@@ -345,7 +425,7 @@
     <p>These sentences are where Criterion D marks are earned.</p>
 
     <!-- ===================================================== -->
-    <h2 id="data">10. Processing and presenting data</h2>
+    <h2 id="data">11. Processing and presenting data</h2>
     <h3>Units everywhere</h3>
     <p>Every column heading, every axis and every quoted value needs a unit. Use SI units and a slash on axes and headings: <em>kinetic energy / J</em>, <em>moment of inertia / kg m²</em>. Missing units on graph axes are one of the most common and most avoidable faults in physics EEs.</p>
     <h3>Significant figures</h3>
@@ -368,7 +448,7 @@
     <p>That doesn't make the work invalid, but you must be open about it: say what you measured, what you deduced, and what the comparison with theory actually tests. Examiners spot a deduction presented as a result and mark it down under Criterion D. Being upfront about it does the opposite.</p>
 
     <!-- ===================================================== -->
-    <h2 id="structure">11. Structure and word count</h2>
+    <h2 id="structure">12. Structure and word count</h2>
     <div class="table-wrap">
       <table class="notes">
         <tr><th>Part</th><th>What goes in it</th></tr>
@@ -379,7 +459,7 @@
         <tr><td>Method</td><td>In prose, replicable, with a labelled diagram. Variables identified and justified.</td></tr>
         <tr><td>Results, analysis and discussion</td><td>Processed data, graphs, uncertainties and the comparison with your prediction, discussed as you go rather than in separate sealed sections. Show one example of each calculation.</td></tr>
         <tr><td>Conclusion</td><td>Last. It answers the RQ directly and quantitatively, with its uncertainty. Nothing new appears here.</td></tr>
-        <tr><td>References</td><td>A reference list or bibliography (section 16).</td></tr>
+        <tr><td>References</td><td>A reference list or bibliography (see <a href="#sources">Sources, referencing and AI</a>).</td></tr>
         <tr><td>Appendices</td><td>Raw data, calibration details, long tables. Examiners don't have to read them, so anything essential to your argument must be in the body.</td></tr>
       </table>
     </div>
@@ -397,7 +477,72 @@
     <p>Because equations and tables aren't counted, physics essays often come in <strong>short</strong>, which is a risk of its own. An essay of 2,500 words has usually skimped on the literature or the discussion. Use the space. And don't hide argument in footnotes or appendices to get round the limit: that weakens your essay on every criterion.</p>
 
     <!-- ===================================================== -->
-    <h2 id="analytical">12. Writing analytically</h2>
+    <h2 id="argument">13. Finding your argument</h2>
+    <p>Criterion C asks for "a clear, sustained line of argument", and most students find this the hardest idea in the whole EE. It sounds like something from a history essay. In physics, it is simpler than it sounds.</p>
+    <div class="key">
+      <p style="margin:0"><strong>Your argument is your answer to the research question, plus the reasons a sceptical physicist should believe it, plus the limits on how far it can be trusted.</strong> It is not a debate or an opinion. It is a claim, backed by evidence, with its conditions stated.</p>
+    </div>
+
+    <h3>Description is not an argument</h3>
+    <p>"I measured the period of a pendulum at amplitudes from 5° to 60°, and it increased" is a <strong>description</strong>. Nobody could disagree with it, and it doesn't answer a question. An argument makes a claim that <em>could have turned out to be wrong</em>, and then shows why it isn't:</p>
+    <p>"The small-angle equation predicts the period to within 1% only up to about 23°. Above that, the period grows with amplitude as the first correction term predicts, reaching about 7% longer at 60°."</p>
+    <p>That claim is specific, it has numbers, someone could test it, and the rest of the essay exists to support it.</p>
+
+    <h3>The one-sentence test</h3>
+    <p>Before you write the essay, finish this sentence:</p>
+    <p style="text-align:center"><strong>My results show that ___, because ___, although ___.</strong></p>
+    <ul>
+      <li><strong>"show that"</strong> is your claim: the direct answer to the RQ, with numbers.</li>
+      <li><strong>"because"</strong> is your strongest evidence: the graph, the gradient, the comparison with uncertainty.</li>
+      <li><strong>"although"</strong> is the limit: the assumption that may fail, the range it holds over, the biggest uncertainty. This is where your evaluation comes from.</li>
+    </ul>
+    <p>If you can't fill in the blanks, you aren't ready to write yet: go back to your analysis. If your sentence would be true whatever your data had shown, it is a description, not a claim.</p>
+
+    <h3>The shapes a physics argument usually takes</h3>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Shape</th><th>The claim sounds like</th><th>The key evidence</th></tr>
+        <tr><td>Where a model breaks down</td><td>"Model X works within 2% up to Y, but beyond that it fails because assumption Z no longer holds."</td><td>The measured value against the model's prediction over the whole range, with the point where they stop agreeing within uncertainty</td></tr>
+        <tr><td>Which of two models fits</td><td>"Drag proportional to $v^2$ describes the data better than drag proportional to $v$, over this range of speeds."</td><td>Each model's linearised graph, and which one is straight within the error bars</td></tr>
+        <tr><td>A relationship</td><td>"Q depends on P as $Q \propto P^{n}$, with $n = 1.48 \pm 0.06$, consistent with the predicted 1.5."</td><td>A log–log or linearised graph and its gradient with uncertainty</td></tr>
+        <tr><td>Two routes to one quantity</td><td>"Method A gives (a ± Δa) and method B gives (b ± Δb); they agree / disagree, because…"</td><td>The overlap (or not) of two independent results</td></tr>
+      </table>
+    </div>
+    <p>Choosing a shape early helps: it tells you what your key graph has to be, and so what data you need.</p>
+
+    <h3>How to find it</h3>
+    <ol>
+      <li><strong>Start with a predicted argument.</strong> Once you have a research question and a model, write the claim you <em>expect</em> to make: "I expect the small-angle equation to fail above about 20°." That is your hypothesis, and it shapes your method.</li>
+      <li><strong>Revise it when the data arrive.</strong> Your final argument is whatever your analysis supports, even if it is the opposite of what you expected. An argument that the model failed, explained well, is just as strong.</li>
+      <li><strong>Ask "so what?" twice.</strong> "The gradient of my graph was 0.064 ± 0.002." So what? "The first correction term predicts 1/16 = 0.0625, which is inside that range." So what? "So the longer period at large amplitudes is explained by the term the small-angle equation leaves out, not by friction or damping." The second "so what?" usually reaches the argument.</li>
+      <li><strong>Argue with yourself.</strong> Write down what a sceptical examiner would say ("Couldn't that just be damping?"), then answer it with evidence ("the amplitude fell by less than 2° over ten swings; using the average amplitude instead of the starting one changes the predicted period by less than 0.3%, far smaller than the 7% effect"). Each answered objection strengthens the argument and earns Criterion D marks.</li>
+      <li><strong>Draft the conclusion first.</strong> Write a rough conclusion paragraph before the rest of the essay. Then every section has a clear job: to get the reader to that paragraph.</li>
+    </ol>
+
+    <h3>Every section has a job in the argument</h3>
+    <div class="table-wrap">
+      <table class="notes">
+        <tr><th>Section</th><th>Its job</th></tr>
+        <tr><td>Introduction</td><td>Shows there is a real question: what is known, what isn't, and what your essay will test.</td></tr>
+        <tr><td>Theory</td><td>Turns the model into a prediction, and names the assumptions that might fail.</td></tr>
+        <tr><td>Method</td><td>Convinces the reader that the test is fair and the measurements can be trusted.</td></tr>
+        <tr><td>Analysis</td><td>Provides the evidence: the key graph and the comparison with uncertainty.</td></tr>
+        <tr><td>Discussion and evaluation</td><td>Considers other explanations, tests the assumptions, and sets the limits of the claim.</td></tr>
+        <tr><td>Conclusion</td><td>States the claim, with numbers and conditions. Nothing new.</td></tr>
+      </table>
+    </div>
+    <p>Anything that doesn't do one of these jobs (a page of history, a theory section that is never used, a graph you never mention) weakens the argument by distracting from it. Cut it.</p>
+
+    <h3>Check that the line holds</h3>
+    <ul>
+      <li>Read only the first and last sentence of each section, in order. Do they tell a coherent story that ends at your answer? If not, the line of argument is broken, and no amount of good data will repair it.</li>
+      <li>Every graph and table should be referred to in the text, with a sentence saying what it shows for the argument.</li>
+      <li>Use signposts that show the reasoning: "This suggests…", "However…", "To test whether…", "This rules out…", "Therefore…".</li>
+      <li>Your conclusion's first sentence should be your one-sentence argument, now with final numbers.</li>
+    </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="analytical">14. Writing analytically</h2>
     <p>Descriptive writing answers <em>what</em>, <em>where</em> and <em>who</em>. Analytical writing answers <em>why</em>, <em>how</em> and <em>so what</em>.</p>
     <div class="table-wrap">
       <table class="notes">
@@ -418,8 +563,8 @@
       <li><strong>L</strong>ink forward to your next point.</li>
     </ul>
 
-    <h3>Keep a line of argument</h3>
-    <p>A line of argument is the reasoned thread from your RQ, through your findings, to your conclusion. The reader should never have to ask how a section connects to the question. A quick test: read only the first and last sentence of each section, in order. If they don't tell a coherent story that answers the RQ, the argument is broken, and no amount of good data will repair it.</p>
+    <h3>Points add up to an argument</h3>
+    <p>Each PEELL point is one step in your argument. See <a href="#argument">Finding your argument</a> for how to work out what the argument is and check that it holds together.</p>
 
     <h3>Phrases that cost marks</h3>
     <ul>
@@ -430,7 +575,7 @@
     </ul>
 
     <!-- ===================================================== -->
-    <h2 id="discussion">13. Discussion, evaluation and conclusion</h2>
+    <h2 id="discussion">15. Discussion, evaluation and conclusion</h2>
     <h3>Discussion</h3>
     <p>A balanced discussion considers more than one interpretation. For each finding: what does it mean physically? Does it match the prediction? If not, what could explain the difference, and can you tell the explanations apart with the evidence you have? Go back to the literature here: how do your results compare with published values? Agreement is a finding worth stating; disagreement is a finding worth investigating.</p>
 
@@ -453,7 +598,7 @@
     <p><strong>Don't overclaim.</strong> Writing that the data "closely followed the theoretical model" is fatal when the graph shows a large gap. Examiners read the graph.</p>
 
     <!-- ===================================================== -->
-    <h2 id="criteria">14. The five criteria</h2>
+    <h2 id="criteria">16. The five criteria</h2>
     <p>Read the official <a href="https://drive.google.com/file/d/19xYgLzNgfF4A-DJCz9J_Zf-nGJEgLiqj/view" target="_blank" rel="noopener">EE assessment criteria</a> (school Google account needed). The table below summarises them in my own words. Marking is <strong>positive</strong> and <strong>best fit</strong>: examiners credit what you have done rather than hunting for what's missing, you don't need every part of a level to get its marks, and the top mark doesn't mean perfect.</p>
     <p><a class="button secondary" href="https://drive.google.com/file/d/19xYgLzNgfF4A-DJCz9J_Zf-nGJEgLiqj/view" target="_blank" rel="noopener">Open the assessment criteria</a></p>
     <div class="table-wrap">
@@ -461,14 +606,14 @@
         <tr><th>Criterion</th><th>Marks</th><th>What it looks at</th><th>What moves you up, in physics</th></tr>
         <tr><td>A: Framework for the essay</td><td>6</td><td>Research question, research methods, structure</td><td>A question that is focused and specific about variables and range. Methods that suit the question and are described well enough to repeat. A structure that helps the reader: a real introduction, a method in prose, the conclusion last, the same RQ throughout, and labelled figures referred to in the text.</td></tr>
         <tr><td>B: Knowledge and understanding</td><td>6</td><td>Knowledge from research materials; terminology; concepts</td><td>Depth beyond the syllabus. Derivations shown, not just equations quoted. Accurate, consistent terminology. Concepts used to explain, not just named. Sources from textbooks and papers, not revision websites.</td></tr>
-        <tr><td>C: Analysis and line of argument</td><td>6</td><td>Analysis; line of argument</td><td>Analysis that produces real findings, not a description of the data: linearising, fitting, uncertainties. A thread linking the RQ, the findings and the conclusion with no gaps.</td></tr>
+        <tr><td>C: Analysis and line of argument</td><td>6</td><td>Analysis; line of argument</td><td>Analysis that produces real findings, not a description of the data: linearising, fitting, uncertainties. A thread linking the RQ, the findings and the conclusion with no gaps (see <a href="#argument">Finding your argument</a>).</td></tr>
         <tr><td>D: Discussion and evaluation</td><td>8</td><td>Discussion of the findings; evaluation of the essay</td><td>Agreement judged against uncertainty. Alternative explanations considered. Strengths as well as limitations. Limitations explained, with their size and specific improvements.</td></tr>
-        <tr><td>E: Reflection</td><td>4</td><td>Evaluative reflection; growth and transfer of learning</td><td>Marked on your RPF only (section 17).</td></tr>
+        <tr><td>E: Reflection</td><td>4</td><td>Evaluative reflection; growth and transfer of learning</td><td>Marked on your RPF only (see <a href="#rpf">Reflection and the RPF</a>).</td></tr>
       </table>
     </div>
 
     <!-- ===================================================== -->
-    <h2 id="mistakes">15. Twenty ways to lose marks</h2>
+    <h2 id="mistakes">17. Twenty ways to lose marks</h2>
     <p>Every one of these turns up in real essays, and most take less than an hour to fix.</p>
     <h3>Structure</h3>
     <ol>
@@ -504,7 +649,7 @@
     </ol>
 
     <!-- ===================================================== -->
-    <h2 id="sources">16. Sources, referencing and AI</h2>
+    <h2 id="sources">18. Sources, referencing and AI</h2>
     <h3>Choosing sources</h3>
     <p>Criterion B judges whether your research materials are relevant and comprehensive. A bibliography of revision websites won't support a high mark, however accurate they are. A rough order of quality for physics:</p>
     <ol>
@@ -529,7 +674,7 @@
     </ul>
 
     <!-- ===================================================== -->
-    <h2 id="rpf">17. Reflection and the RPF</h2>
+    <h2 id="rpf">19. Reflection and the RPF</h2>
     <p>Criterion E (4 marks) is marked <strong>only</strong> on the reflective statement on your Reflection and Progress Form (RPF), up to 500 words. It is not marked on your essay. It has two strands: whether your reflection is <em>evaluative</em> rather than descriptive, and whether it shows your <em>growth</em> and <em>transfer of learning</em>.</p>
     <div class="table-wrap">
       <table class="notes">
@@ -540,7 +685,7 @@
     <p>This is where your personal engagement belongs. The 500-word limit is strict (examiners stop reading there), and the statement must be in the same language as your essay. Make notes after each reflection session, while it is fresh.</p>
 
     <!-- ===================================================== -->
-    <h2 id="submit">18. Final submission checklist</h2>
+    <h2 id="submit">20. Final submission checklist</h2>
     <h3>Title page</h3>
     <ul>
       <li>Candidate code (no name, no school)</li>
@@ -589,7 +734,7 @@
     </ul>
 
     <!-- ===================================================== -->
-    <h2 id="check">19. Check your understanding</h2>
+    <h2 id="check">21. Check your understanding</h2>
     <details class="check">
       <summary>A student's research question is "How do the length and the diameter of a wire affect its resistance?" What is wrong with it?</summary>
       <p>It is two questions joined by "and", so it isn't focused. It also gives no range and names no model to test. Choose one variable (say, diameter), give its range, and make the question test something: for example, how well $R = \dfrac{\rho L}{A}$ predicts the resistance for diameters from 0.2 mm to 1.0 mm.</p>
@@ -615,6 +760,14 @@
       <p>Use the best-fit gradient, which should lie close to the middle of 0.44 and 0.52, about 0.48. Its uncertainty is $\dfrac{0.52 - 0.44}{2} = 0.04$, so the gradient is $0.48 \pm 0.04$, with its units.</p>
     </details>
     <details class="check">
+      <summary>A student writes a spreadsheet model of a projectile with air resistance. Name two checks that show the model can be trusted.</summary>
+      <p>Any two of: set the drag to zero and check that it gives the exact no-drag results (for example, the range $\dfrac{u^2\sin 2\theta}{g}$); check that a falling object levels off at the terminal velocity calculated by hand; halve the time step and check that the result hardly changes; check that energy is conserved when there is no drag. Then compare the model with real data, such as a video of a launched ball.</p>
+    </details>
+    <details class="check">
+      <summary>Which of these is an argument? (a) "I measured how the terminal velocity of steel balls in glycerol changed with their radius." (b) "Terminal velocity was proportional to $r^2$, as Stokes' law predicts, up to a radius of 3 mm; above that it rose more slowly, because the flow around the ball was no longer smooth."</summary>
+      <p>(b). It makes a specific claim that could have been wrong, gives the evidence (the $r^2$ relationship), and states its limit (3 mm) with a physical reason. (a) only describes what was done: nobody could disagree with it.</p>
+    </details>
+    <details class="check">
       <summary>Your finished essay is 2,400 words long. Is that a good thing?</summary>
       <p>Not necessarily. Equations, tables and graphs don't count, so physics essays often come in short, and a short essay has usually skimped on the literature or the discussion. Check that your discussion and evaluation (Criterion D, 8 marks) are developed fully.</p>
     </details>
@@ -624,7 +777,7 @@
     </details>
 
     <!-- ===================================================== -->
-    <h2 id="documents">20. EE documents</h2>
+    <h2 id="documents">22. EE documents</h2>
     <p>These open in Google Drive and need your <strong>school Google account</strong>.</p>
     <ul class="card-grid">
       <li><a class="card" href="https://drive.google.com/file/d/13YfMomLMO6AEIUDVx9acax2Q0bd7qFZA/view" target="_blank" rel="noopener"><h3>Physics EE Student Guide</h3><p>The full student guidance booklet behind this page, with all fifteen sections and the checklist.</p></a></li>
