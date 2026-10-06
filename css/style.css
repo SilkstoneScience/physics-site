@@ -202,6 +202,37 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1'/%3E%3Cpath d='M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1'/%3E%3C/svg%3E") center / contain no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1'/%3E%3Cpath d='M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1'/%3E%3C/svg%3E") center / contain no-repeat; }
 .link-q-label { font-weight: 700; color: var(--accent); margin-right: 4px; }
+/* "Lesson slides" button beside the guiding questions; drops below them on phones */
+.guiding-row { display: flex; gap: 12px; align-items: stretch; margin: 16px 0 20px; }
+.guiding-row .guiding { flex: 1; margin: 0; }
+.slides-link { flex: none; width: 116px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 8px; color: var(--accent); font-weight: 600; font-size: 0.92rem; text-decoration: none; }
+.slides-link:hover, .slides-link:focus-visible { border-color: var(--accent); }
+.slides-link svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.slides-link small { font-weight: 400; font-size: 0.78rem; color: var(--muted); }
+@media (max-width: 600px) {
+  .guiding-row { flex-direction: column; gap: 8px; }
+  .slides-link { width: auto; flex-direction: row; justify-content: flex-start; gap: 8px; padding: 8px 14px; }
+  .slides-link svg { width: 22px; height: 22px; }
+  .slides-link small::before { content: "· "; }
+}
+
+/* ===== Resources page: lesson slides by theme ===== */
+.theme-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 8px; }
+.theme-jump a { border: 1px solid var(--border); border-left: 4px solid var(--theme-color); border-radius: 8px; background: var(--surface); padding: 5px 10px; font-size: 0.9rem; text-decoration: none; color: var(--text); }
+.theme-jump a b { color: var(--theme-color); }
+.theme-head { border-bottom: 2px solid var(--theme-color); padding-bottom: 4px; margin-top: 32px; }
+.deck-group { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--theme-color); border-radius: var(--radius); padding: 4px 16px 10px; margin: 14px 0; scroll-margin-top: 80px; }
+.deck-group h3 { margin: 10px 0 4px; font-size: 1.05rem; }
+.deck-notes { font-size: 0.85rem; font-weight: 400; margin-left: 6px; white-space: nowrap; }
+.deck { padding: 6px 0; border-top: 1px solid var(--border); }
+.deck-group h3 + .deck { border-top: 0; }
+.deck-title { margin: 2px 0; font-weight: 600; }
+.deck-size { font-weight: 400; font-size: 0.82rem; color: var(--muted); margin-left: 4px; }
+.deck-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 4px 0; font-size: 0.92rem; }
+.deck-actions .button { padding: 5px 12px; font-size: 0.9rem; }
+.deck-note { color: var(--muted); }
+.deck-frame { margin: 8px 0 4px; }
+.deck-frame[hidden] { display: none; }
 .link-q .tag.nos { background: var(--surface); border: 1px solid var(--theme-d); color: var(--theme-d); font-size: 0.7rem; padding: 0 6px; }
 
 /* ===== Joke of the day (home page) ===== */

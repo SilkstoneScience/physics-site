@@ -500,6 +500,25 @@ window.CONSTANTS = {
     }
   }
 
+  // ----- Resources page: "Show slides" loads a Google Drive viewer only when pressed -----
+  document.querySelectorAll('button[data-slides]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const box = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!box) return;
+      if (!box.firstElementChild) {
+        const frame = document.createElement('iframe');
+        frame.src = 'https://drive.google.com/file/d/' + btn.dataset.slides + '/preview';
+        frame.title = 'Slides: ' + btn.dataset.title;
+        frame.allowFullscreen = true;
+        box.appendChild(frame);
+      }
+      const show = box.hidden;
+      box.hidden = !show;
+      btn.setAttribute('aria-expanded', String(show));
+      btn.textContent = show ? 'Hide slides' : 'Show slides';
+    });
+  });
+
   // ----- "Back to previous page" button at the bottom of every page -----
   let cameFromSite = false;
   try {
