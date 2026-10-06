@@ -30,7 +30,7 @@ This file is not published on the website (see `_config.yml`).
 - E.5 Fusion and stars (no HL content): notes, 13 Paper 1A and 2 Paper 2.
 
 ## Resources page
-- Lesson slides (October 2026): 33 Teacher decks from Drive, grouped by theme, each with a click-to-load viewer and an Open in Google Drive link (school accounts only). E.3 SL (178 MB) is link-only. Each topic page has a Lesson slides button beside its guiding questions; the home page has a Resources card.
+- Lesson slides (October 2026): the Resources page keeps its tiles; each theme tile opens a slides page (resources/a.html … e.html) with that theme's Teacher decks from Drive (33 in all), each with a click-to-load viewer and an Open in Google Drive link (school accounts only). Each topic page has a Lesson slides button beside its guiding questions; the home page has a Resources card.
 
 ## Guiding and linking questions
 - Added to all 24 topic pages (October 2026): 68 guiding questions after the ToK boxes and 121 linking questions, quoted exactly from the IB guide (credited on the About page), plus 8 extra linking questions of our own; each linking question links to the related section.

@@ -220,12 +220,13 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
 .theme-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 8px; }
 .theme-jump a { border: 1px solid var(--border); border-left: 4px solid var(--theme-color); border-radius: 8px; background: var(--surface); padding: 5px 10px; font-size: 0.9rem; text-decoration: none; color: var(--text); }
 .theme-jump a b { color: var(--theme-color); }
-.theme-head { border-bottom: 2px solid var(--theme-color); padding-bottom: 4px; margin-top: 32px; }
+.theme-jump a[aria-current="page"] { border-color: var(--theme-color); font-weight: 600; }
+.h1-sub { display: block; font-size: 1.05rem; font-weight: 400; color: var(--muted); margin-top: 2px; }
 .deck-group { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--theme-color); border-radius: var(--radius); padding: 4px 16px 10px; margin: 14px 0; scroll-margin-top: 80px; }
-.deck-group h3 { margin: 10px 0 4px; font-size: 1.05rem; }
+.deck-group h2 { margin: 10px 0 4px; font-size: 1.1rem; }
 .deck-notes { font-size: 0.85rem; font-weight: 400; margin-left: 6px; white-space: nowrap; }
 .deck { padding: 6px 0; border-top: 1px solid var(--border); }
-.deck-group h3 + .deck { border-top: 0; }
+.deck-group h2 + .deck { border-top: 0; }
 .deck-title { margin: 2px 0; font-weight: 600; }
 .deck-size { font-weight: 400; font-size: 0.82rem; color: var(--muted); margin-left: 4px; }
 .deck-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 4px 0; font-size: 0.92rem; }

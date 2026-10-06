@@ -1,4 +1,4 @@
-// Builds the lesson-slides part of resources.html and the "Lesson slides" buttons on topic pages.
+// Builds the theme slides pages (resources/a.html … e.html) and the "Lesson slides" buttons on topic pages.
 // To add or change a deck: edit THEMES below (title, Google Drive file id, size in MB), then run: node tools/build-resources.mjs
 import fs from 'fs';
 import { fileURLToPath } from 'url';
@@ -34,7 +34,7 @@ const THEMES = [
  ['E', 'Nuclear and quantum physics', [
   ['e1', 'E.1 Structure of the atom', [D('E.1 Structure of the atom: SL', '13zBvBBi-wTRKSE94qoxtkEIYvS-Wvo3Y', 7.3), D('E.1 Structure of the atom: HL', '13h6FnKLZRpaaxZ8o_Y5d5AJVU9-gcgYT', 2.1)]],
   ['e2', 'E.2 Quantum physics', [D('E.2 Quantum physics', '13wea8XWitc6iSp9MydmmoTlrhCI_4Gv8', 3.2)], true],
-  ['e3', 'E.3 Radioactive decay', [D('E.3 Radioactivity: SL', '148yCqpYMrLXGlVYUVp3AM8hoanBbBAOz', 177.6), D('E.3 Radioactivity: HL', '13q32gfM0xmuBxCzHa2Z1io-n50P3na4M', 1.7)]],
+  ['e3', 'E.3 Radioactive decay', [D('E.3 Radioactivity: SL', '148yCqpYMrLXGlVYUVp3AM8hoanBbBAOz', 8.0), D('E.3 Radioactivity: HL', '13q32gfM0xmuBxCzHa2Z1io-n50P3na4M', 1.7)]],
   ['e4', 'E.4 Fission', [D('E.4 Fission', '14CtljJAoYfe2YXF97BxKM36MSmA1fa3i', 8.7)]],
   ['e5', 'E.5 Fusion and stars', [D('E.5 Fusion and stars', '14ABaVtbRy4Q6MOzEzE-XY68GnZDiloki', 7.0)]]]],
 ];
@@ -42,16 +42,38 @@ const PREVIEW_LIMIT_MB = 100;   // Google Drive won't preview bigger files
 
 const esc = s => s.replace(/&/g, '&amp;');
 const mb = x => x >= 10 ? Math.round(x) + ' MB' : x.toFixed(1) + ' MB';
+const range = topics => `${topics[0][1].split(' ')[0]}–${topics[topics.length - 1][1].split(' ')[0]}`;
+
+// <head> for the theme pages: copied from resources.html, one folder down
+const res = fs.readFileSync(SITE + '/resources.html', 'utf8');
+const headTemplate = res.slice(res.indexOf('<head>'), res.indexOf('</head>') + 7)
+  .replace(/(href|src)="(?!https?:|#)([^"]+)"/g, '$1="../$2"');
+
+fs.mkdirSync(SITE + '/resources', { recursive: true });
 let n = 0;
-const out = [];
-out.push(`    <nav class="theme-jump" aria-label="Jump to a theme">`);
-for (const [L, name] of THEMES) out.push(`      <a data-theme="${L}" href="#theme-${L.toLowerCase()}"><b>${L}</b> ${name}</a>`);
-out.push(`    </nav>`, '');
 for (const [L, name, topics] of THEMES) {
-  out.push(`    <h2 id="theme-${L.toLowerCase()}" class="theme-head" data-theme="${L}">Theme ${L}: ${name}</h2>`);
-  for (const [id, title, decks, hlOnly] of topics) {
+  const l = L.toLowerCase();
+  const title = `Theme ${L} slides · Mr Silkstone's Physics`;
+  const desc = `IB DP Physics lesson slides for Theme ${L} (${name}), ${range(topics)}, for school Google accounts.`;
+  const head = headTemplate
+    .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*"/, `$1${desc}"`)
+    .replace(/(<meta property="og:title" content=")[^"]*"/, `$1${title}"`)
+    .replace(/(<meta property="og:description" content=")[^"]*"/, `$1${desc}"`)
+    .replace(/(<link rel="canonical" href=")[^"]*"/, `$1https://physics.silkstone.xyz/resources/${l}.html"`)
+    .replace(/(<meta property="og:url" content=")[^"]*"/, `$1https://physics.silkstone.xyz/resources/${l}.html"`);
+  const out = [];
+  out.push('<!doctype html>', '<html lang="en">', head, `<body data-root="../" data-section="resources">`, '  <header id="site-header"></header>', '  <main>');
+  out.push(`    <h1>Theme ${L} slides <span class="h1-sub">${name}</span></h1>`);
+  out.push(`    <p class="lead">My lesson slides for ${range(topics)}. Press <em>Show slides</em> to view a deck here, or open it in Google Drive. <a href="../resources.html">All resources</a></p>`);
+  out.push(`    <p class="notice">The slides open only for <strong>school Google accounts</strong>. If you see a sign-in message or a blank box, sign in to your school Google account in this browser, or use <em>Open in Google Drive</em>.</p>`);
+  out.push(`    <!-- Built by tools/build-resources.mjs from its deck list: change the list and re-run it rather than editing this page. -->`);
+  out.push(`    <nav class="theme-jump" aria-label="Other themes">`);
+  for (const [L2, name2] of THEMES) out.push(`      <a data-theme="${L2}" href="${L2.toLowerCase()}.html"${L2 === L ? ' aria-current="page"' : ''}><b>${L2}</b> ${name2}</a>`);
+  out.push(`    </nav>`);
+  for (const [id, ttl, decks, hlOnly] of topics) {
     out.push(`    <section class="deck-group" id="slides-${id}" data-theme="${L}">`);
-    out.push(`      <h3>${esc(title)}${hlOnly ? ' <span class="tag hl">HL only</span>' : ''} <a class="deck-notes" href="themes/${id}.html">Notes →</a></h3>`);
+    out.push(`      <h2>${esc(ttl)}${hlOnly ? ' <span class="tag hl">HL only</span>' : ''} <a class="deck-notes" href="../themes/${id}.html">Notes →</a></h2>`);
     for (const d of decks) {
       n++;
       const box = `deck-${n}`, open = `https://drive.google.com/file/d/${d.id}/view`;
@@ -67,32 +89,29 @@ for (const [L, name, topics] of THEMES) {
     }
     out.push(`    </section>`);
   }
-  out.push('');
+  out.push('  </main>', '  <footer id="site-footer"></footer>', '</body>', '</html>', '');
+  fs.writeFileSync(`${SITE}/resources/${l}.html`, out.join('\r\n'));
 }
-const block = out.join('\n');
-
-// ---- resources.html: replace everything between the markers ----
-const rp = SITE + '/resources.html';
-let r = fs.readFileSync(rp, 'utf8');
-const nlR = r.includes('\r\n') ? '\r\n' : '\n';
-const START = '<!-- LESSON SLIDES START -->', END = '<!-- LESSON SLIDES END -->';
-if (!r.includes(START)) throw new Error('markers missing in resources.html');
-r = r.slice(0, r.indexOf(START) + START.length) + nlR + block.replace(/\n/g, nlR) + nlR + '    ' + r.slice(r.indexOf(END));
-fs.writeFileSync(rp, r);
 
 // ---- topic pages: "Lesson slides" button beside the guiding questions ----
-for (const [, , topics] of THEMES) for (const [id, , decks] of topics) {
+for (const [L, , topics] of THEMES) for (const [id, , decks] of topics) {
   const p = `${SITE}/themes/${id}.html`;
   let s = fs.readFileSync(p, 'utf8');
   const nl = s.includes('\r\n') ? '\r\n' : '\n';
-  if (s.includes('class="slides-link"')) continue;
-  const a = s.indexOf('    <aside class="guiding"'), b = s.indexOf('</aside>', a) + '</aside>'.length;
-  if (a < 0) throw new Error(id + ': no guiding box');
-  const aside = s.slice(a, b).split(nl).map(l => '  ' + l).join(nl);
-  const link = `      <a class="slides-link" href="../resources.html#slides-${id}">` +
-    `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8"/><path d="M10 8.5v4l3.5-2z"/></svg>` +
-    `<span>Lesson slides</span><small>${decks.length > 1 ? decks.length + ' decks' : '1 deck'}</small></a>`;
-  s = s.slice(0, a) + `    <div class="guiding-row">${nl}${aside}${nl}${link}${nl}    </div>` + s.slice(b);
+  const href = `../resources/${L.toLowerCase()}.html#slides-${id}`;
+  const count = decks.length > 1 ? decks.length + ' decks' : '1 deck';
+  if (s.includes('class="slides-link"')) {           // update an existing button
+    s = s.replace(/<a class="slides-link" href="[^"]*">/, `<a class="slides-link" href="${href}">`)
+         .replace(/(<a class="slides-link"[\s\S]*?<small>)[^<]*(<\/small>)/, `$1${count}$2`);
+  } else {
+    const a = s.indexOf('    <aside class="guiding"'), b = s.indexOf('</aside>', a) + '</aside>'.length;
+    if (a < 0) throw new Error(id + ': no guiding box');
+    const aside = s.slice(a, b).split(nl).map(x => '  ' + x).join(nl);
+    const link = `      <a class="slides-link" href="${href}">` +
+      `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8"/><path d="M10 8.5v4l3.5-2z"/></svg>` +
+      `<span>Lesson slides</span><small>${count}</small></a>`;
+    s = s.slice(0, a) + `    <div class="guiding-row">${nl}${aside}${nl}${link}${nl}    </div>` + s.slice(b);
+  }
   fs.writeFileSync(p, s);
 }
-console.log(`Built ${n} decks.`);
+console.log(`Built 5 theme slides pages with ${n} decks.`);
