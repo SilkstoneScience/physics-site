@@ -1,0 +1,244 @@
+{
+  "id": "B3-B01",
+  "topic": "B.3",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 2,
+  "skills": [
+    "proportionality-from-table",
+    "extrapolation",
+    "intercept-meaning",
+    "intercept-uncertainty",
+    "accepted-value",
+    "prediction"
+  ],
+  "context": "experimental",
+  "seed": 51,
+  "physics": {
+    "scenario": "A flask of air, sealed and connected by a short tube to a Bourdon pressure gauge, is held in a water bath. The bath is heated in steps; at each step the student waits for the air to reach the bath temperature, then records θ and the pressure p.",
+    "principles": [
+      "Pressure law: for a fixed mass of ideal gas at constant volume, p ∝ T, with T the absolute temperature (B.3)",
+      "T/K = θ/°C + 273"
+    ],
+    "assumptions": [
+      "The air behaves as an ideal gas over this range",
+      "The volume of the flask is constant (its expansion is negligible) and no air leaks",
+      "All the air is at the bath temperature (the connecting tube holds a negligible volume)"
+    ],
+    "derivation": [
+      "p = p₀T/T₀ with T = θ + 273.15, so p = (p₀/T₀)θ + 273.15 p₀/T₀",
+      "p against θ is a straight line that reaches p = 0 at θ = −273.15 °C (absolute zero)"
+    ],
+    "relationship": "p = (p₀/T₀)(θ + 273.15)",
+    "params": {
+      "p0": {
+        "value": 100,
+        "unit": "kPa",
+        "range": [
+          90,
+          110
+        ],
+        "note": "pressure when the flask was sealed"
+      },
+      "T0": {
+        "value": 293.15,
+        "unit": "K",
+        "range": [
+          288,
+          298
+        ],
+        "note": "temperature when the flask was sealed (20 °C)"
+      },
+      "thetaAbs": {
+        "value": -273.15,
+        "unit": "°C",
+        "range": [
+          -273.15,
+          -273.15
+        ],
+        "note": "absolute zero: the temperature at which the model pressure is zero (checked, not an input)"
+      }
+    }
+  },
+  "models": {
+    "theta": {
+      "kind": "set",
+      "unit": "°C",
+      "values": [
+        12,
+        23.5,
+        37,
+        51.5,
+        64,
+        78.5
+      ],
+      "resolution": 0.5,
+      "uncertainty": 0.5
+    },
+    "p": {
+      "kind": "measured",
+      "unit": "kPa",
+      "model": {
+        "law": "pressure-law",
+        "inputs": {
+          "p0": "p.p0",
+          "T0": "p.T0",
+          "T": "row.theta"
+        }
+      },
+      "noise": {
+        "type": "gauss",
+        "sd": 0.2
+      },
+      "resolution": 0.5,
+      "uncertainty": 0.5
+    }
+  },
+  "laws": {
+    "pressure-law": {
+      "statement": "p = p₀T / T₀ (p/T is constant; T in kelvin, an absolute temperature)",
+      "inputs": {
+        "p0": "Pa",
+        "T0": "K",
+        "T": "K"
+      },
+      "output": "Pa",
+      "f": "({ p0, T0, T }) => (p0 * T) / T0"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "theta": 12,
+        "p": 97.5
+      },
+      {
+        "theta": 23.5,
+        "p": 101.5
+      },
+      {
+        "theta": 37,
+        "p": 105.5
+      },
+      {
+        "theta": 51.5,
+        "p": 110.5
+      },
+      {
+        "theta": 64,
+        "p": 115
+      },
+      {
+        "theta": 78.5,
+        "p": 120.5
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "theta": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "p": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student investigates how the pressure $p$ of a fixed mass of air at constant volume depends on its temperature $\\theta$. A sealed flask of air is held in a water bath and connected by a short tube to a Bourdon pressure gauge. The bath is heated in steps, and at each step the student waits until the reading is steady.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"theta\"><span class=\"h-name\">temperature</span>$\\theta$ / °C ± 0.5</th><th scope=\"col\" data-col=\"p\"><span class=\"h-name\">pressure</span>$p$ / kPa ± 0.5</th></tr></thead><tbody><tr><td data-col=\"theta\" data-row=\"0\">12.0</td><td data-col=\"p\" data-row=\"0\">97.5</td></tr><tr><td data-col=\"theta\" data-row=\"1\">23.5</td><td data-col=\"p\" data-row=\"1\">101.5</td></tr><tr><td data-col=\"theta\" data-row=\"2\">37.0</td><td data-col=\"p\" data-row=\"2\">105.5</td></tr><tr><td data-col=\"theta\" data-row=\"3\">51.5</td><td data-col=\"p\" data-row=\"3\">110.5</td></tr><tr><td data-col=\"theta\" data-row=\"4\">64.0</td><td data-col=\"p\" data-row=\"4\">115.0</td></tr><tr><td data-col=\"theta\" data-row=\"5\">78.5</td><td data-col=\"p\" data-row=\"5\">120.5</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "graph": {
+        "alt": "Graph of pressure against temperature, with 6 plotted points and error bars. The values are in the data table.",
+        "caption": "Graph of pressure against temperature. The error bars show the uncertainties."
+      },
+      "graph-ms": {
+        "alt": "Graph of pressure against temperature, with 6 plotted points and error bars, the line of best fit and the steepest and shallowest lines. The values are in the data table.",
+        "caption": "<span class=\"key-1\">Blue</span>: line of best fit. <span class=\"key-2\">Orange, dashed</span>: steepest and shallowest lines through the error bars."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Show, using two rows of the table, that $p$ is not proportional to $\\theta$.",
+      "marks": 2,
+      "markscheme": [
+        "$\\dfrac{p}{\\theta}$ is 8.13 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 12.0 °C but 1.54 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 78.5 °C (or any two non-adjacent rows) ✓",
+        "The ratio is not constant, so $p$ is not proportional to $\\theta$ (equivalently: increasing $\\theta$ by a factor does not increase $p$ by the same factor) ✓"
+      ]
+    },
+    {
+      "label": "b",
+      "question": "Draw the line of best fit and extend it to $p = 0$. Hence determine the temperature at which the pressure of the air would be zero, according to these data.",
+      "marks": 3,
+      "markscheme": [
+        "Line of best fit drawn through the error bars and extended to the $\\theta$ axis ✓",
+        "Reads the intercept, or calculates it from the gradient and the intercept on the $p$ axis ✓",
+        "About −272 °C (accept −285 to −255 °C) ✓"
+      ],
+      "numeric": {
+        "answer": -271.9221443235077,
+        "range": [
+          -285.2857142857143,
+          -254.90540540540542
+        ],
+        "unit": "${}^{\\circ}\\text{C}$",
+        "source": "absZeroAnswer"
+      },
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "c",
+      "question": "Explain why the uncertainty in your answer to (b) is much larger than the uncertainty in each temperature reading.",
+      "marks": 2,
+      "markscheme": [
+        "The line is extended a long way beyond the data (from 12.0 °C to about −272 °C) ✓",
+        "A small change of gradient, still within the error bars, moves the intercept a long way: the steepest and shallowest lines give about −285 °C to −255 °C ✓"
+      ],
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "d",
+      "question": "Comment on whether the result is consistent with the accepted value of absolute zero, $−273\\ {}^{\\circ}\\text{C}$.",
+      "marks": 1,
+      "markscheme": [
+        "−273 °C lies within the range −285 °C to −255 °C given by the steepest and shallowest lines, so the result is consistent with it (award for a conclusion consistent with the candidate's own range) ✓"
+      ]
+    },
+    {
+      "label": "e",
+      "question": "The flask is then placed in boiling water at 100 °C. Predict the reading of the pressure gauge.",
+      "marks": 2,
+      "markscheme": [
+        "Extends the line to 100 °C, or uses $p = (\\text{gradient})\\,\\theta + (\\text{intercept})$ ✓",
+        "$p = 127\\ \\text{kPa}$ (accept 127 to 129) ✓"
+      ],
+      "numeric": {
+        "answer": 127.4663675344157,
+        "range": [
+          126.82903569674362,
+          128.74019607843138
+        ],
+        "unit": "$\\text{kPa}$",
+        "source": "pred"
+      },
+      "msFigure": "graph-ms"
+    }
+  ]
+}

@@ -15,6 +15,10 @@ export default {
   context: 'experimental',
   skills: ['force-direction', 'gradient', 'proportionality', 'uncertainty-propagation'],
   seed: 7,
+  batch: 'pilot',
+  archetypes: ['L1', 'L3', 'V3'],
+  apparatus: 'current balance (magnet on a top-pan balance)',
+  originality: 'Textbook current-balance practical; not used in any legacy Section A or 2025 Paper 1B paper held. Own numbers and sequence.',
 
   // ----- 1. Physics model -----
   physics: {
@@ -124,7 +128,7 @@ export default {
     const pct = d.r.gradientPct.value;
     return [
       {
-        label: 'a', marks: 2, msFigure: 'diagram-ms',
+        label: 'a', marks: 2, ao: { AO1: 1, AO2: 1 }, msFigure: 'diagram-ms',
         question: 'State the direction of the magnetic force on the wire. Explain why the balance reading increases when there is a current in the wire.',
         markscheme: [
           'The force on the wire is upwards (from a hand rule, or the direction of $I\\vec{L} \\times \\vec{B}$) ✓',
@@ -132,7 +136,7 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 2, msFigure: 'graph-ms',
+        label: 'b', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         question: 'Determine the gradient of the graph of $\\Delta m$ against $I$.',
         numeric: d.num('gradient'),
         markscheme: [
@@ -141,7 +145,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2,
+        label: 'c', marks: 2, ao: 'AO2',
         question: 'Determine the magnetic flux density $B$ between the poles.',
         numeric: d.num('B'),
         markscheme: [
@@ -150,7 +154,7 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 2, msFigure: 'graph-ms',
+        label: 'd', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
         question: 'Discuss whether the data support the hypothesis that the force on the wire is proportional to the current.',
         markscheme: [
           'The points lie on a straight line, within their error bars ✓',
@@ -158,7 +162,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 2,
+        label: 'e', marks: 2, ao: 'AO2',
         question: `The percentage uncertainty in the gradient is ${pct} %. Determine the absolute uncertainty in your value of $B$.`,
         numeric: d.num('dB', {
           mistakes: [{ value: (d.r.B.value * pct) / 100, feedback: `That uses only the ${pct} % from the gradient. The length $L$ is uncertain too: add the percentage uncertainties.` }],

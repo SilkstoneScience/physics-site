@@ -3,7 +3,7 @@
 //   physics model → measurements (seeded noise, rounded to the instrument) → derived columns
 //   → fits → results → table, graph, diagrams and the question/mark-scheme text.
 // See tools/1b/README.md for how to write a dataset.
-import { makeRng, roundTo, decimalsOf, fmtNum, sigFig, parseUnit, sameDim, linearFit, gradientBand, toSI, fromSI } from './lib.mjs';
+import { makeRng, roundTo, decimalsOf, fmtNum, sigFig, parseUnit, sameDim, linearFit, gradientBand, toSI, fromSI, baseUnitExpr, valuePm, sciParts } from './lib.mjs';
 import { renderGraph } from './graph.mjs';
 import { propagate } from './uncertainty.mjs';
 import { applySystematic } from './systematic.mjs';
@@ -128,6 +128,10 @@ export function generateRows(def, { ideal = false } = {}) {
           row[k] = ideal ? mean : roundTo(mean, c.resolution);
         } else row[k] = measureOnce(c, model, rng, ideal);
         if (!ideal && c.anomaly && c.anomaly.row === i) row[k] = roundTo(row[k] + c.anomaly.shift, c.resolution);
+      } else if (c.kind === 'catalogue') {
+        // Published (secondary) data: the source's values, rounded to the column's resolution. The noise-free
+        // data are the physics model's values, so the analysis can be checked against the model exactly.
+        row[k] = ideal ? modelValue(def, c, { params: p, row, singles }, `column ${k}`) : roundTo(c.values[i], c.resolution);
       } else if (c.kind === 'derived') {
         const v = c.value(row, p, singles);
         row[k] = ideal ? v : roundTo(v, 10 ** -c.dp);
@@ -182,6 +186,8 @@ export function makeContext(def, rows, singles) {
   d.sf = (x, n) => rec(sigFig(x, n));
   d.dp = (x, n) => rec(fmtNum(x, n));
   d.int = (x) => rec(fmtNum(x, 0));
+  // Scientific notation in MathJax, e.g. 1.9 	imes 10^{27} (the mantissa is traced; the exponent is not a number in this sense).
+  d.sci = (x, n) => { const s = sciParts(x, n); return `${rec(s.mant)} \\times 10^{${s.exp}}`; };
   // A stated constant: a number the question gives that isn't in the data (def.stated), with its source.
   d.stated = (name) => {
     const st = (def.stated || {})[name];
@@ -211,6 +217,20 @@ export function makeContext(def, rows, singles) {
     const value = res.value(d);
     d.r[k] = { value, range: res.range ? res.range(d, value) : null, unit: res.unit || '' };
   }
+  // "State the unit" parts (asks: { unit: 'name' }): a result's unit, as given or in SI base units, in MathJax.
+  const resultUnit = (name) => {
+    if (!d.r[name]) throw new Error(`${def.id}: no result called "${name}"`);
+    return parseUnit(d.r[name].unit);
+  };
+  d.unitTex = (name) => resultUnit(name).tex;
+  d.baseUnitTex = (name) => parseUnit(baseUnitExpr(resultUnit(name).dim)).tex;
+  // "Value ± uncertainty" parts (asks: { valuePm: ['B', 'dB'] }): the uncertainty to sf significant figures
+  // and the value to the same decimal place, both traced.
+  d.pm = (name, uncName, sf = 1) => {
+    if (!d.r[name] || !d.r[uncName]) throw new Error(`${def.id}: d.pm needs results "${name}" and "${uncName}"`);
+    const t = valuePm(d.r[name].value, d.r[uncName].value, sf);
+    return `${rec(t.value)} \\pm ${rec(t.unc)}`;
+  };
   // The "numeric" field of a part, taken from a named result (so it can't be typed by hand).
   d.num = (name, extra = {}) => {
     const r = d.r[name];
@@ -254,8 +274,9 @@ export function trialsTableHtml(def, d) {
     + `<th scope="col">$${c.symbol}$${u.text ? ' / ' + u.text : ''}</th></tr></thead><tbody>${body}</tbody></table></div>`;
 }
 
-export function graphFigure(def, d, kind) {
-  const g = def.graph;
+// spec: def.graph (the analysed graph: 'graph' and 'graph-ms') or def.rawGraph (raw data before a
+// transformation: 'graph-raw', students' version only, never with a fitted line).
+export function graphFigure(def, d, kind, g = def.graph, name = kind === 'student' ? 'graph' : 'graph-ms') {
   const [cx, cy] = [def.columns[g.x], def.columns[g.y]];
   const omit = kind === 'student' ? g.omit || [] : [];
   const points = d.rows.map((row, i) => ({
@@ -264,22 +285,22 @@ export function graphFigure(def, d, kind) {
   })).filter((pt) => !omit.includes(pt.row));
   const lines = [];
   const curves = [];
-  if (kind === 'examiner' && g.fit === 'linear') {
+  if (kind === 'examiner' && g === def.graph && g.fit === 'linear') {
     lines.push({ m: d.fit.m, c: d.fit.c, cls: 'l1 thin', fit: 'best' });
     if (d.band) {
       lines.push({ m: d.band.steep.m, c: d.band.steep.c, cls: 'l2 thin dash', fit: 'max' });
       lines.push({ m: d.band.shallow.m, c: d.band.shallow.c, cls: 'l2 thin dash', fit: 'min' });
     }
   }
-  if (kind === 'examiner' && g.fit === 'exponential') curves.push({ f: (x) => d.fit.A * Math.exp(-d.fit.k * x), cls: 'l1 thin' });
+  if (kind === 'examiner' && g === def.graph && g.fit === 'exponential') curves.push({ f: (x) => d.fit.A * Math.exp(-d.fit.k * x), cls: 'l1 thin' });
   const bars = points.some((pt) => pt.ey || pt.ex);
   const what = `${cy.name} against ${cx.name}`;
   const alt = `Graph of ${what}, with ${points.length} plotted points${bars ? ' and error bars' : ''}`
     + (kind === 'examiner' ? (g.fit === 'linear' ? ', the line of best fit' + (d.band ? ' and the steepest and shallowest lines' : '') : ', and the curve of best fit') : '')
     + '. The values are in the data table.';
   const svg = renderGraph({
-    x: { symbol: cx.symbolText || cx.symbol, unit: parseUnit(cx.unit || '').text, includeZero: !!(g.zero && g.zero.x) },
-    y: { symbol: cy.symbolText || cy.symbol, unit: parseUnit(cy.unit || '').text, includeZero: !!(g.zero && g.zero.y) },
+    x: { symbol: cx.symbolText || cx.symbol, unit: parseUnit(cx.unit || '').text, includeZero: !!(g.zero && g.zero.x), range: g.xRange },
+    y: { symbol: cy.symbolText || cy.symbol, unit: parseUnit(cy.unit || '').text, includeZero: !!(g.zero && g.zero.y), range: g.yRange },
     points, lines, curves, alt, kind,
   });
   const caption = kind === 'student'
@@ -287,7 +308,7 @@ export function graphFigure(def, d, kind) {
     : (g.fit === 'linear'
       ? '<span class="key-1">Blue</span>: line of best fit.' + (d.band ? ' <span class="key-2">Orange, dashed</span>: steepest and shallowest lines through the error bars.' : '')
       : '<span class="key-1">Blue</span>: curve of best fit.');
-  return { kind: 'figure', figure: kind === 'student' ? 'graph' : 'graph-ms', svg, alt, caption };
+  return { kind: 'figure', figure: name, svg, alt, caption };
 }
 
 // ---------- 4. The question ----------
@@ -300,16 +321,22 @@ export function buildQuestion(def) {
     figures.graph = graphFigure(def, d, 'student');
     figures['graph-ms'] = graphFigure(def, d, 'examiner');
   }
+  if (def.rawGraph) figures['graph-raw'] = graphFigure(def, d, 'student', def.rawGraph, 'graph-raw');
   const order = def.present || ['diagram', 'table', 'graph'];
   const data = order.filter((k) => k === 'table' || k === 'trials' || figures[k]).map((k) => {
     if (k === 'table') return { kind: 'table', caption: def.tableCaption || '', html: tableHtml(def, d) };
     if (k === 'trials') return { kind: 'table', figure: 'trials', caption: def.trialsTable.caption || '', html: trialsTableHtml(def, d) };
     return figures[k];
   });
-  const parts = def.parts(d).map((pt) => {
-    const { msFigure, ...rest } = pt;
+  const rawParts = def.parts(d);
+  // Design metadata for the validator and reports (AO tags, what a part asks for): not published.
+  const meta = rawParts.map((pt) => ({ label: pt.label, marks: pt.marks, ao: pt.ao, asks: pt.asks }));
+  const parts = rawParts.map((pt) => {
+    const { msFigure, figure, ao: _ao, asks: _asks, ...rest } = pt;
     if (msFigure && !figures[msFigure]) throw new Error(`${def.id} part (${pt.label}): no figure called "${msFigure}"`);
-    return msFigure ? { ...rest, msFigure: figures[msFigure] } : rest;
+    // figure: shown with the part's question (data revealed by the part, as in a printed paper).
+    if (figure && !figures[figure]) throw new Error(`${def.id} part (${pt.label}): no figure called "${figure}"`);
+    return { ...rest, ...(figure ? { figure: figures[figure] } : {}), ...(msFigure ? { msFigure: figures[msFigure] } : {}) };
   });
   const question = {
     id: def.id,
@@ -325,5 +352,5 @@ export function buildQuestion(def) {
     parts,
     generated: { version: GENERATOR_VERSION, seed: def.seed },
   };
-  return { question, d, traced: [...d.traced] };
+  return { question, d, traced: [...d.traced], meta };
 }

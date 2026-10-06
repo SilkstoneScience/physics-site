@@ -1,0 +1,273 @@
+{
+  "id": "D1-B01",
+  "topic": "D.1",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 3,
+  "skills": [
+    "database-data",
+    "log-log",
+    "power-law-exponent",
+    "kepler-third-law",
+    "value-from-a-graph",
+    "evaluate-data"
+  ],
+  "context": "observational",
+  "seed": 81,
+  "physics": {
+    "scenario": "Eight moons of Jupiter, from the small inner moons to the distant Himalia, orbit Jupiter. Their published semi-major axes a and sidereal periods T are compared with the law for circular orbits.",
+    "principles": [
+      "Newton's law of gravitation provides the centripetal force: GMm/r² = mv²/r (D.1)",
+      "v = 2πr/T, giving Kepler's third law T² = 4π²r³/(GM) (D.1)",
+      "Logarithms: if T = ka^n then lg T = n lg a + lg k (Tool 3)"
+    ],
+    "assumptions": [
+      "Orbits are circular with radius equal to the semi-major axis a (eccentricities are small, except Himalia: 0.16)",
+      "Each moon's mass is negligible compared with Jupiter's",
+      "Jupiter acts as a point mass (its flattening slightly shortens the periods of the innermost moons)"
+    ],
+    "derivation": [
+      "T = 2π a^{3/2}/√(GM)",
+      "lg T = 1.5 lg a + lg(2π/√(GM)): a straight line of gradient 1.5 on a log–log graph",
+      "From any point (a, T) on the line: M = 4π²a³/(GT²)"
+    ],
+    "relationship": "T = 2π√(a³/(GM))",
+    "params": {
+      "G": {
+        "value": 6.67e-11,
+        "unit": "N m^2 kg^-2",
+        "range": [
+          6.67e-11,
+          6.67e-11
+        ],
+        "note": "data booklet value"
+      },
+      "M": {
+        "value": 1.898e+27,
+        "unit": "kg",
+        "range": [
+          1.85e+27,
+          1.95e+27
+        ],
+        "note": "mass of Jupiter (NASA Jupiter fact sheet: 1898.13 × 10²⁴ kg)"
+      }
+    }
+  },
+  "models": {
+    "a": {
+      "kind": "set",
+      "unit": "km",
+      "values": [
+        128000,
+        181400,
+        221900,
+        421800,
+        671100,
+        1070400,
+        1882700,
+        11461000
+      ],
+      "resolution": 100
+    },
+    "T": {
+      "kind": "catalogue",
+      "unit": "day",
+      "values": [
+        0.294779,
+        0.498179,
+        0.6745,
+        1.769138,
+        3.551181,
+        7.154553,
+        16.689017,
+        250.5662
+      ],
+      "model": {
+        "law": "kepler-period",
+        "inputs": {
+          "r": "row.a",
+          "G": "p.G",
+          "M": "p.M"
+        }
+      },
+      "resolution": 0.001
+    },
+    "lga": {
+      "kind": "derived",
+      "unit": "",
+      "dp": 3,
+      "hide": [
+        4
+      ]
+    },
+    "lgT": {
+      "kind": "derived",
+      "unit": "",
+      "dp": 3,
+      "hide": [
+        4
+      ]
+    }
+  },
+  "laws": {
+    "kepler-period": {
+      "statement": "T = 2π√(r³/(GM)), from GMm/r² = mv²/r with v = 2πr/T (Kepler's third law: T² ∝ r³)",
+      "inputs": {
+        "r": "m",
+        "G": "N m^2 kg^-2",
+        "M": "kg"
+      },
+      "output": "s",
+      "f": "({ r, G, M }) => 2 * Math.PI * Math.sqrt(r ** 3 / (G * M))"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "a": 128000,
+        "T": 0.295,
+        "lga": 5.107,
+        "lgT": -0.53
+      },
+      {
+        "a": 181400,
+        "T": 0.498,
+        "lga": 5.259,
+        "lgT": -0.303
+      },
+      {
+        "a": 221900,
+        "T": 0.675,
+        "lga": 5.346,
+        "lgT": -0.171
+      },
+      {
+        "a": 421800,
+        "T": 1.769,
+        "lga": 5.625,
+        "lgT": 0.248
+      },
+      {
+        "a": 671100,
+        "T": 3.551,
+        "lga": 5.827,
+        "lgT": 0.55
+      },
+      {
+        "a": 1070400,
+        "T": 7.155,
+        "lga": 6.03,
+        "lgT": 0.855
+      },
+      {
+        "a": 1882700,
+        "T": 16.689,
+        "lga": 6.275,
+        "lgT": 1.222
+      },
+      {
+        "a": 11461000,
+        "T": 250.566,
+        "lga": 7.059,
+        "lgT": 2.399
+      }
+    ],
+    "singles": {},
+    "uncertainties": {}
+  },
+  "text": {
+    "stem": "<p>The table gives the semi-major axis $a$ (the mean orbital radius) and the orbital period $T$ of eight moons of Jupiter, taken from a NASA database. A student investigates whether the moons obey Kepler's third law, $T^2 \\propto a^3$.</p><p>The graph shows $\\lg(T/\\text{day})$ against $\\lg(a/\\text{km})$. The point for Europa has not been plotted.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "Moons of Jupiter, in order of distance from Jupiter: Metis, Amalthea, Thebe, Io, Europa, Ganymede, Callisto and Himalia. Data: NASA Jovian Satellite Fact Sheet.",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"a\"><span class=\"h-name\">semi-major axis</span>$a$ / km</th><th scope=\"col\" data-col=\"T\"><span class=\"h-name\">orbital period</span>$T$ / day</th><th scope=\"col\" data-col=\"lga\"><span class=\"h-name\">log of semi-major axis</span>$\\lg(a/\\text{km})$</th><th scope=\"col\" data-col=\"lgT\"><span class=\"h-name\">log of period</span>$\\lg(T/\\text{day})$</th></tr></thead><tbody><tr><td data-col=\"a\" data-row=\"0\">128000</td><td data-col=\"T\" data-row=\"0\">0.295</td><td data-col=\"lga\" data-row=\"0\">5.107</td><td data-col=\"lgT\" data-row=\"0\">−0.530</td></tr><tr><td data-col=\"a\" data-row=\"1\">181400</td><td data-col=\"T\" data-row=\"1\">0.498</td><td data-col=\"lga\" data-row=\"1\">5.259</td><td data-col=\"lgT\" data-row=\"1\">−0.303</td></tr><tr><td data-col=\"a\" data-row=\"2\">221900</td><td data-col=\"T\" data-row=\"2\">0.675</td><td data-col=\"lga\" data-row=\"2\">5.346</td><td data-col=\"lgT\" data-row=\"2\">−0.171</td></tr><tr><td data-col=\"a\" data-row=\"3\">421800</td><td data-col=\"T\" data-row=\"3\">1.769</td><td data-col=\"lga\" data-row=\"3\">5.625</td><td data-col=\"lgT\" data-row=\"3\">0.248</td></tr><tr><td data-col=\"a\" data-row=\"4\">671100</td><td data-col=\"T\" data-row=\"4\">3.551</td><td data-col=\"lga\" data-row=\"4\" class=\"blank\">?</td><td data-col=\"lgT\" data-row=\"4\" class=\"blank\">?</td></tr><tr><td data-col=\"a\" data-row=\"5\">1070400</td><td data-col=\"T\" data-row=\"5\">7.155</td><td data-col=\"lga\" data-row=\"5\">6.030</td><td data-col=\"lgT\" data-row=\"5\">0.855</td></tr><tr><td data-col=\"a\" data-row=\"6\">1882700</td><td data-col=\"T\" data-row=\"6\">16.689</td><td data-col=\"lga\" data-row=\"6\">6.275</td><td data-col=\"lgT\" data-row=\"6\">1.222</td></tr><tr><td data-col=\"a\" data-row=\"7\">11461000</td><td data-col=\"T\" data-row=\"7\">250.566</td><td data-col=\"lga\" data-row=\"7\">7.059</td><td data-col=\"lgT\" data-row=\"7\">2.399</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "graph": {
+        "alt": "Graph of log of period against log of semi-major axis, with 7 plotted points. The values are in the data table.",
+        "caption": "Graph of log of period against log of semi-major axis."
+      },
+      "graph-ms": {
+        "alt": "Graph of log of period against log of semi-major axis, with 8 plotted points, the line of best fit. The values are in the data table.",
+        "caption": "<span class=\"key-1\">Blue</span>: line of best fit."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Calculate the two missing values for Europa.",
+      "marks": 2,
+      "markscheme": [
+        "$\\lg(a/\\text{km}) = \\lg(671100) = 5.827$ ✓",
+        "$\\lg(T/\\text{day}) = \\lg(3.551) = 0.550$ ✓"
+      ]
+    },
+    {
+      "label": "b",
+      "question": "Suggest two reasons why a graph of $\\lg T$ against $\\lg a$ is used for these data, rather than a graph of $T$ against $a$.",
+      "marks": 2,
+      "markscheme": [
+        "The values cover a very wide range ($a$ by a factor of about 90, $T$ by about 850): on ordinary axes most points would be crowded near the origin ✓",
+        "If $T = ka^n$, then $\\lg T = n\\lg a + \\lg k$: a straight line whose gradient is the power $n$, which can be tested directly ✓"
+      ]
+    },
+    {
+      "label": "c",
+      "question": "Determine the gradient of the graph.",
+      "marks": 2,
+      "markscheme": [
+        "Line of best fit; gradient from two well-separated points on the line ✓",
+        "Gradient $= 1.50$ (accept 1.47 to 1.53) ✓"
+      ],
+      "numeric": {
+        "answer": 1.5005156760649005,
+        "range": [
+          1.4705053625436026,
+          1.5305259895861985
+        ],
+        "source": "gradient"
+      },
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "d",
+      "question": "Deduce whether the data support Kepler's third law.",
+      "marks": 2,
+      "markscheme": [
+        "$T^2 \\propto a^3$ means $T \\propto a^{3/2}$, so the gradient should be 1.5 ✓",
+        "The gradient found is equal to this, within the precision of reading the graph, so the data support the law ✓"
+      ]
+    },
+    {
+      "label": "e",
+      "question": "For a circular orbit, $T^2 = \\dfrac{4\\pi^2a^3}{GM}$, where $M$ is the mass of Jupiter and $G = 6.67 \\times 10^{-11}\\ \\text{N m}^2\\,\\text{kg}^{-2}$. Use a point on the line of best fit to determine $M$.",
+      "marks": 3,
+      "markscheme": [
+        "Reads a point on the line, for example $\\lg(a/\\text{km}) = 6.000$ gives $\\lg(T/\\text{day}) = 0.810$ ✓",
+        "Converts to SI: $a = 1.0 \\times 10^{9}\\ \\text{m}$ and $T = 558000\\ \\text{s}$ ✓",
+        "$M = \\dfrac{4\\pi^2a^3}{GT^2} = 1.9 \\times 10^{27}\\ \\text{kg}$ (accept $1.8 \\times 10^{27}$ to $2.1 \\times 10^{27}\\ \\text{kg}$; allow ECF from the point read) ✓"
+      ],
+      "numeric": {
+        "answer": 1.9033412023888918e+27,
+        "range": [
+          1.7510739061977803e+27,
+          2.0556084985800032e+27
+        ],
+        "unit": "$\\text{kg}$",
+        "source": "M"
+      },
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "f",
+      "question": "The data come from a database, so the graph has no error bars. Suggest one reason why the gradient could still differ slightly from the value predicted by Kepler's third law.",
+      "marks": 1,
+      "markscheme": [
+        "Any one of: the orbits are not perfect circles (Himalia's eccentricity is about 0.16) / the moons pull on each other / Jupiter is not a perfect sphere, so it does not act exactly as a point mass ✓"
+      ]
+    }
+  ]
+}

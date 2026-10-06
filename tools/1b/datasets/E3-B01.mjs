@@ -13,6 +13,10 @@ export default {
   context: 'experimental',
   skills: ['background-correction', 'complete-table', 'read-graph', 'half-life', 'random-uncertainty'],
   seed: 32,
+  batch: 'pilot',
+  archetypes: ['N5', 'M4'],
+  apparatus: 'Geiger-Muller tube and counter with a short-lived source',
+  originality: 'Common half-life practical; not used in any legacy Section A (the foam analogues of Nov 2016 and Nov 2025 are different contexts). Own numbers and sequence.',
 
   // ----- 1. Physics model -----
   physics: {
@@ -113,12 +117,12 @@ export default {
     const bgCounts = (d.singles.Nb * d.p.dt) / d.p.tb;
     return [
       {
-        label: 'a', marks: 1,
+        label: 'a', marks: 1, ao: 'AO1',
         question: 'Outline why the student measured the background count.',
         markscheme: ['The counter also detects background radiation, which must be subtracted to find the count rate due to the source alone ✓'],
       },
       {
-        label: 'b', marks: 2,
+        label: 'b', marks: 2, ao: 'AO2',
         question: `Calculate the corrected count rate $R$ at $t = ${d.text('t', 7)}\\ \\text{s}$.`,
         numeric: d.num('Rmissing', {
           mistakes: [{ value: d.rows[7].N / d.p.dt, feedback: 'Remember to subtract the background count first.' }],
@@ -129,7 +133,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2, msFigure: 'graph-ms',
+        label: 'c', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         question: 'Use the graph to determine the half-life of the source.',
         numeric: d.num('halfLife'),
         markscheme: [
@@ -138,7 +142,7 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 2,
+        label: 'd', marks: 2, ao: 'AO3',
         question: 'Explain why the percentage uncertainty in $R$ increases as $t$ increases.',
         markscheme: [
           'Decay is random, so the uncertainty in a count $N$ is about $\\sqrt{N}$ ✓',
@@ -146,7 +150,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 1,
+        label: 'e', marks: 1, ao: 'AO3',
         question: 'Suggest one change to the method that would reduce the uncertainty in the later values of $R$.',
         markscheme: ['Count for a longer interval (or repeat the experiment and average), so more counts are recorded ✓'],
       },

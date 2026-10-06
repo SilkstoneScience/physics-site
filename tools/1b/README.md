@@ -35,6 +35,20 @@ node tools/1b/review.mjs reset D3-B01 --by "…" --note "why it changed"
 Reviews go in order (no skipping); TEACHER-REVIEWED and APPROVED must name a person, not an assistant or a
 script. If someone records a review on the reviewer's behalf, add `--recorded-by "<who>"`.
 
+**Batches** (docs/PAPER1B_SPECIFICATION.md section 16): new datasets carry `batch`, `archetypes` (IDs from
+docs/PAPER1B_ARCHETYPE_MATRIX.md), `apparatus` and an `originality` note (none of these is fingerprinted).
+`review.mjs batch <id>` classifies every dataset RED / AMBER / GREEN with reasons and suggests the GREEN sample;
+the teacher reviews AMBER datasets (or waives them with a reason) and the sample individually, then
+`review.mjs accept-batch <id> --by "<teacher>" --note "…" --systemic-ok [--waive <id> "<reason>"]` records one batch
+decision and promotes the batch to APPROVED. Each dataset's record says whether the teacher inspected it
+(`basis: batch`, `inspected: false` and a BATCH-ACCEPTED entry for those not inspected); batch acceptance never
+records TEACHER-REVIEWED.
+
+```
+node tools/1b/review.mjs batch batch-1
+node tools/1b/review.mjs accept-batch batch-1 --by "Mr Silkstone (teacher)" --note "…" --systemic-ok --waive E1-B01 "…"
+```
+
 ## Commands (run from the physics-site folder)
 
 | Command | What it does |
@@ -115,8 +129,15 @@ Copy the closest existing dataset and change it. The parts, in order:
    compares it with its own fit. Use `range` for answers read from a graph (`d.widen(d.gradientRange(), v, 0.04)`).
    A result that measures a model parameter says so with `estimates: 'B'`: run on noise-free data, it must give
    back exactly that parameter, which proves the analysis is the true inverse of the physics model.
-6. **Claims**: what the questions say is true (`linear`, `throughOrigin`, `agrees`, `anomaly`, `trend`).
+6. **Claims**: what the questions say is true (`linear`, `throughOrigin`, `agrees`, `verdict`, `anomaly`, `trend`).
    The validator checks each one against the data, so a question can't claim something the data don't show.
+   `agrees` (expect `true` only) checks that the data recover a model value. **A conclusion students must reach**
+   by comparing a stated value with the max/min-line range ("do the data support the manufacturer's value?") is a
+   `verdict`: `{ type: 'verdict', result: 'uLines', value: 2.6, expect: 'outside' }`. Its result must have
+   `basis: 'lines'` (a range from the steepest and shallowest lines only, not a widened answer tolerance), and the
+   value must be at least 4 % of the result clear of the range's edge (`VERDICT_MARGIN` in `validate.mjs`), so that
+   students' own lines give the same conclusion. The mark scheme must credit a conclusion consistent with the
+   candidate's own lines.
 7. **Presentation**: `figures` (diagrams), `intro` (the question text), and `parts`. In parts, write every
    number with a template (`${d.sf(d.r.B.value, 2)}`) and every typed answer as `numeric: d.num('B')`.
    `msFigure: 'graph-ms'` shows the examiner's graph (with the fit lines) inside the mark scheme.
@@ -124,6 +145,16 @@ Copy the closest existing dataset and change it. The parts, in order:
    A number the question states that isn't in the data (a manufacturer's claim, a length given in cm) is a
    **stated constant**: `stated: { L_cm: { value: 5.0, dp: 1, unit: 'cm', source: '…', from: (p) => p.L * 100 } }`
    (`from` is checked against the parameter when there is one). Only integers 0–12 and 100 may appear untraced.
+   **Every part has an AO tag**: `ao: 'AO2'`, or `ao: { AO1: 1, AO2: 1 }` for a part whose marks are split (the
+   numbers must add up to the part's marks). The tags are design metadata for reports: not shown to students, not
+   published and not in the fingerprint. `node tools/1b/ao.mjs --parts` prints AO marks by part, dataset, batch
+   (a dataset's `batch` field) and the whole bank, and warns when a batch of 40+ marks is outside 40–60 % AO3.
+   Individual datasets don't need to hit the target.
+   **"State the unit" parts**: `asks: { unit: 'gradient' }`, with the unit printed by `d.unitTex('gradient')` or
+   `d.baseUnitTex('gradient')` (SI base units) in the mark scheme; the validator checks it and that the question
+   doesn't give the unit away. **"Value ± uncertainty" parts**: `asks: { valuePm: ['B', 'dB'] }` (optional `sf: 2`),
+   with `d.pm('B', 'dB')` in the mark scheme: the uncertainty to 1 s.f. and the value to the same decimal place,
+   checked against the results recalculated from the published table.
 8. **Independent audit**: add an entry for the dataset to `AUDITS` in `independent.mjs`: its physics derived again
    from first principles (in SI units), the dimensions of each term, limiting cases, the expected magnitude, and
    how to recover the parameters and answers from the published table. Don't copy the formula from `laws.mjs`:

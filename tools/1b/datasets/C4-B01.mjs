@@ -20,6 +20,10 @@ export default {
   context: 'experimental',
   skills: ['linearisation', 'gradient', 'given-equation', 'percentage-uncertainty', 'prediction'],
   seed: 9,
+  batch: 'pilot',
+  archetypes: ['N1', 'G3'],
+  apparatus: 'vibration generator, string, pulley and hanging mass',
+  originality: 'Standing waves on a string are common; May 2023 TZ1 Section A used a similar rig but varied the hanging mass against wavelength squared. This dataset varies length at fixed tension: own variables, numbers and sequence.',
 
   // ----- 1. Physics model -----
   physics: {
@@ -129,12 +133,12 @@ export default {
     const f1 = d.fit.m / L_PREDICT + d.fit.c;
     return [
       {
-        label: 'a', marks: 1,
+        label: 'a', marks: 1, ao: 'AO2',
         question: 'Identify one variable that the student must keep constant so that the wave speed is the same for every length.',
         markscheme: ['The tension / the hanging mass (or: the same string, so the same $\\mu$) ✓'],
       },
       {
-        label: 'b', marks: 2,
+        label: 'b', marks: 2, ao: { AO1: 1, AO2: 1 },
         question: 'Show that the frequency of the first harmonic is $f = \\dfrac{1}{2L}\\sqrt{\\dfrac{T}{\\mu}}$.',
         markscheme: [
           'There are nodes at both ends, so the first harmonic is half a wavelength: $\\lambda = 2L$ ✓',
@@ -142,7 +146,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2, msFigure: 'graph-ms',
+        label: 'c', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         question: 'Determine the gradient of the graph of $f$ against $1/L$.',
         numeric: d.num('gradient'),
         markscheme: [
@@ -151,7 +155,7 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 2,
+        label: 'd', marks: 2, ao: 'AO2',
         question: 'Determine the mass per unit length $\\mu$ of the string.',
         numeric: d.num('mu', {
           mistakes: [{ value: T / d.r.gradient.value ** 2, feedback: 'The gradient is $\\tfrac12\\sqrt{T/\\mu}$, not $\\sqrt{T/\\mu}$: check the factor of 4.' }],
@@ -162,13 +166,13 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 1,
+        label: 'e', marks: 1, ao: 'AO2',
         question: `Calculate the percentage uncertainty in $1/L$ for $L = ${d.text('L', 0)}\\ \\text{m}$.`,
         numeric: d.num('pctInvL'),
         markscheme: [`The percentage uncertainty in $1/L$ equals that in $L$: $\\dfrac{0.002}{${d.text('L', 0)}} \\times 100 = ${d.sf(d.r.pctInvL.value, 2)}\\ \\%$ ✓`],
       },
       {
-        label: 'f', marks: 2, msFigure: 'diagram-ms',
+        label: 'f', marks: 2, ao: { AO2: 1, AO3: 1 }, msFigure: 'diagram-ms',
         question: `The student sets $L = ${d.dp(L_PREDICT, 3)}\\ \\text{m}$ and increases the frequency until the string vibrates in its third harmonic. Use the graph to predict this frequency.`,
         numeric: d.num('f3', {
           mistakes: [{ value: f1, feedback: 'That is the first harmonic. The third harmonic has three loops, so its frequency is three times larger.' }],

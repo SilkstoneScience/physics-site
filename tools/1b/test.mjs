@@ -4,7 +4,10 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import {
   makeRng, decimalsOf, roundTo, fmtNum, sigFig, parseNum, sigFigsIn, parseUnit, sameDim, linearFit, gradientBand, cross, toSI, fromSI,
+  baseUnitExpr, valuePm,
 } from './lib.mjs';
+import { normalizeAO, addAO, judgeBatch, aoTable, aoReport } from './ao.mjs';
+import { classify, establishedSets, diversityWarnings, acceptBatch, individuallyApproved, SAMPLE_FRACTION } from './batch.mjs';
 import { renderGraph, niceScale } from './graph.mjs';
 import { buildQuestion, generateRows, evalModel } from './generate.mjs';
 import { LAWS } from './laws.mjs';
@@ -13,7 +16,7 @@ import { applySystematic, checkSystematic } from './systematic.mjs';
 import { independentAudit } from './independent.mjs';
 import { validateDataset, parseGraph, scaleFromTicks, numbersIn } from './validate.mjs';
 import { buildAll, loadDatasets, loadTopics } from './build.mjs';
-import broken from './fixtures/broken.mjs';
+import broken, { D3_ASKS } from './fixtures/broken.mjs';
 import { canonicalContent, fingerprintOf } from './fingerprint.mjs';
 
 export async function runTests() {
@@ -54,6 +57,37 @@ export async function runTests() {
   let threw = false;
   try { parseUnit('furlong'); } catch (e) { threw = true; }
   check('unknown units are rejected', threw);
+  check('SI base units: Pa m = kg s⁻², T = kg s⁻² A⁻¹, m s⁻¹ unchanged',
+    baseUnitExpr(parseUnit('Pa m').dim) === 'kg s^-2' && baseUnitExpr(parseUnit('T').dim) === 'kg s^-2 A^-1' && baseUnitExpr(parseUnit('m s^-1').dim) === 'm s^-1');
+  check('SI base units of g A⁻¹ (a balance gradient) are kg A⁻¹', parseUnit(baseUnitExpr(parseUnit('g A^-1').dim)).text === 'kg A⁻¹');
+
+  // ----- Value ± uncertainty (uncertainty to 1 s.f., value to the same decimal place; worked by hand) -----
+  const pmText = (...a) => { const t = valuePm(...a); return `${t.value} ± ${t.unc}`; };
+  check('value ± uncertainty: 0.063728 ± 0.0050982 → 0.064 ± 0.005', pmText(0.063728, 0.0050982) === '0.064 ± 0.005');
+  check('value ± uncertainty: 4571 ± 286 → 4600 ± 300', pmText(4571, 286) === '4600 ± 300');
+  check('value ± uncertainty: 9.7907 ± 0.0997 → 9.8 ± 0.1 (uncertainty rounds up a place)', pmText(9.7907, 0.0997) === '9.8 ± 0.1');
+  check('value ± uncertainty to 2 s.f.: 9.7907 ± 0.0997 → 9.79 ± 0.10', pmText(9.7907, 0.0997, 2) === '9.79 ± 0.10');
+  check('value ± uncertainty: 611.089 ± 30.55 → 610 ± 30', pmText(611.089, 30.55) === '610 ± 30');
+  let threwPm = false;
+  try { valuePm(1, 0); } catch (e) { threwPm = true; }
+  check('value ± uncertainty needs a positive uncertainty', threwPm);
+
+  // ----- Assessment-objective tags (ao.mjs) -----
+  check('AO tag "AO2" gives all the marks to AO2', JSON.stringify(normalizeAO('AO2', 2)) === JSON.stringify({ AO1: 0, AO2: 2, AO3: 0 }));
+  check('AO tag split between AOs', JSON.stringify(normalizeAO({ AO1: 1, AO3: 1 }, 2)) === JSON.stringify({ AO1: 1, AO2: 0, AO3: 1 }));
+  for (const [bad, why] of [[undefined, 'missing'], ['AO4', 'unknown AO'], [{ AO2: 1 }, 'marks don\'t add up'], [{ AO2: 1.5, AO3: 0.5 }, 'fractions of a mark'], [{ AO5: 2 }, 'unknown key']]) {
+    let t = false;
+    try { normalizeAO(bad, 2); } catch (e) { t = true; }
+    check(`AO tag rejected: ${why}`, t);
+  }
+  {
+    const tot = addAO([{ AO1: 1, AO2: 3, AO3: 0 }, { AO1: 0, AO2: 1, AO3: 3 }]);
+    check('AO totals add up (8 marks, 3 AO3)', tot.marks === 8 && tot.AO3 === 3 && Math.abs(tot.ao3Share - 0.375) < 1e-12);
+    check('a batch below 40 marks is too small to judge', judgeBatch(tot).level === 'info');
+    check('an AO2-heavy batch is flagged', judgeBatch(addAO([{ AO1: 5, AO2: 30, AO3: 10 }])).level === 'warning');
+    check('an AO3-heavy batch is flagged', judgeBatch(addAO([{ AO1: 0, AO2: 10, AO3: 35 }])).level === 'warning');
+    check('a batch with 40–60 % AO3 passes', judgeBatch(addAO([{ AO1: 4, AO2: 18, AO3: 22 }])).level === 'ok');
+  }
 
   // ----- Fits -----
   {
@@ -201,7 +235,12 @@ export async function runTests() {
     const b = JSON.stringify(buildQuestion(def).question);
     check(`${file}: building twice gives identical output`, a === b);
     const rows = generateRows(def).rows;
-    check(`${file}: changing the seed changes the data`, JSON.stringify(generateRows({ ...def, seed: def.seed + 1 }).rows) !== JSON.stringify(rows));
+    if (def.source === 'secondary') {
+      // Published data have no generated scatter: they must not depend on the seed at all.
+      check(`${file}: published data don't depend on the seed`, JSON.stringify(generateRows({ ...def, seed: def.seed + 1 }).rows) === JSON.stringify(rows));
+    } else {
+      check(`${file}: changing the seed changes the data`, JSON.stringify(generateRows({ ...def, seed: def.seed + 1 }).rows) !== JSON.stringify(rows));
+    }
     const errs = validateDataset(def, buildQuestion(def).question, { topics }).filter((x) => x.level === 'error');
     check(`${file}: passes validation`, !errs.length, errs.map((x) => `${x.where}: ${x.message}`).join('; '));
   }
@@ -217,6 +256,26 @@ export async function runTests() {
       codes = [e.code || `crash: ${e.message}`];
     }
     check(`broken dataset "${fx.name}" is caught as ${fx.expect}`, codes.includes(fx.expect), `got ${codes.length ? [...new Set(codes)].join(', ') : 'no errors'}`);
+  }
+
+  // ----- New part types and AO tags on the real datasets -----
+  {
+    const errs = validateDataset(D3_ASKS, buildQuestion(D3_ASKS).question, { topics }).filter((x) => x.level === 'error');
+    check('a dataset with correct "state the unit" and "value ± uncertainty" parts passes', !errs.length, errs.map((x) => `${x.code} ${x.where}: ${x.message}`).join('; '));
+    const g = buildQuestion(D3_ASKS).question.parts.find((p) => p.label === 'g');
+    check('value ± uncertainty part prints B = (0.064 ± 0.005) T', g && g.markscheme[0].includes('0.064 \\pm 0.005'), g && g.markscheme[0]);
+    const published = datasets.flatMap(({ def }) => buildQuestion(def).question.parts);
+    check('AO tags and "asks" are not published to students', published.every((p) => !('ao' in p) && !('asks' in p)));
+    const d3 = datasets.find((x) => x.def.id === 'D3-B01').def;
+    const untagged = { ...d3, parts: (d) => d3.parts(d).map(({ ao: _ao, ...rest }) => rest) };
+    check('AO tags are not part of the review fingerprint',
+      fingerprintOf(canonicalContent(d3, buildQuestion(d3))) === fingerprintOf(canonicalContent(untagged, buildQuestion(untagged))));
+    const rows = aoTable(datasets.map(({ def }) => ({ def, meta: buildQuestion(def).meta })));
+    check('every pilot part has a valid AO tag', rows.every((r) => r.parts.every((p) => p.ao)), rows.flatMap((r) => r.parts.filter((p) => !p.ao).map((p) => `${r.id} (${p.label}): ${p.error}`)).join('; '));
+    const marks = rows.reduce((s, r) => s + r.total.marks, 0);
+    const realMarks = datasets.reduce((s, { def }) => s + buildQuestion(def).question.parts.reduce((t, p) => t + p.marks, 0), 0);
+    check('AO report covers every mark in the bank', marks === realMarks, `${marks} vs ${realMarks}`);
+    check('AO report lists datasets, batches and the whole bank', /By batch/.test(aoReport(rows)) && /Whole bank/.test(aoReport(rows)) && /pilot/.test(aoReport(rows)));
   }
 
   // ----- Ids must be unique, and invalid datasets never reach the output -----
@@ -268,6 +327,82 @@ export async function runTests() {
     check('an APPROVED dataset that changed is not published', changedApproved.questions.length === 0);
     const broken = buildAll([{ file: 'D3-B01.mjs', def: { ...d3.def, claims: [{ type: 'throughOrigin', expect: false }] } }], topics, { registry: reg('APPROVED') });
     check('an APPROVED dataset that fails validation is not published (status DRAFT)', broken.questions.length === 0 && broken.results[0].state.status === 'DRAFT');
+  }
+  // ----- Risk classes and batch acceptance (batch.mjs) -----
+  {
+    const reg0 = JSON.parse(JSON.stringify((await import('./registry.mjs')).loadRegistry()));
+    const real = buildAll(datasets, topics, { registry: reg0 });
+    const est = establishedSets(real.results, reg0);
+    check('the approved pilots establish their archetypes and features',
+      ['N2', 'L2', 'V3', 'N5', 'L1'].every((a) => est.archetypes.has(a)) && est.features.has('fit:linear') && est.features.has('claim:verdict'));
+    const d3 = datasets.find((x) => x.def.id === 'D3-B01').def;
+    const asResult = (def) => ({ id: def.id, def, valid: true, state: { changed: false, status: 'AUTO-VALIDATED' }, built: buildQuestion(def) });
+    const opts = { diags: [], established: est, verdictMargin: 0.04 };
+    const green = { ...d3, id: 'D3-B07', archetypes: ['L1'], originality: 'test' };
+    check('an established archetype with no flags is GREEN', classify(asResult(green), opts).class === 'GREEN', classify(asResult(green), opts).reasons.join('; '));
+    const withOffset = { ...green, columns: { ...d3.columns, m: { ...d3.columns.m, systematic: [{ type: 'zero-offset', offset: 0.01, cause: 'test', justification: 'test' }] } } };
+    check('the first use of a systematic effect makes a dataset AMBER', classify(asResult(withOffset), opts).reasons.some((x) => x.includes('systematic:zero-offset')));
+    // "First example" rules are tested against a fixed set of established archetypes (only L1), not the live
+    // review records, which change as archetypes become established.
+    const fresh = { ...opts, established: { archetypes: new Set(['L1']), features: est.features } };
+    check('the first example of a MEDIUM-risk archetype is AMBER', classify(asResult({ ...green, archetypes: ['N3'] }), fresh).class === 'AMBER');
+    const lowNew = classify(asResult({ ...green, archetypes: ['M2'] }), fresh);
+    check('the first example of a LOW-risk archetype is GREEN but preferred for the sample', lowNew.class === 'GREEN' && !!lowNew.priority);
+    check('an archetype established by an individually inspected approval is no longer "new"',
+      !classify(asResult({ ...green, archetypes: ['N3'] }), { ...opts, established: { archetypes: new Set(['N3']), features: est.features } }).reasons.some((x) => x.includes('archetype N3')));
+    check('a missing originality note makes a dataset AMBER', classify(asResult({ ...green, originality: undefined }), opts).class === 'AMBER');
+    check('a serious originality flag makes a dataset RED', classify(asResult({ ...green, reviewFlags: [{ flag: 'originality-serious', note: 'x' }] }), opts).class === 'RED');
+    check('a validation error makes a dataset RED',
+      classify(asResult(green), { ...opts, diags: [{ level: 'error', code: 'fit', dataset: 'D3-B07', where: 'graph' }] }).class === 'RED');
+    check('a validator warning makes a dataset AMBER',
+      classify(asResult(green), { ...opts, diags: [{ level: 'warning', code: 'meta', dataset: 'D3-B07', where: 'marks', message: 'm' }] }).class === 'AMBER');
+    check('diversity: the same apparatus twice in a batch is flagged',
+      diversityWarnings([{ id: 'X', def: { apparatus: 'spring' } }, { id: 'Y', def: { apparatus: 'spring' } }]).length === 1);
+
+    // acceptBatch on a synthetic batch: G1–G7 GREEN, A1 AMBER.
+    const row = (id, cls, reviewed = false) => ({ id, class: cls, reasons: cls === 'GREEN' ? [] : ['first example of archetype N3 (MEDIUM risk)'], individuallyReviewed: reviewed });
+    const rec = (status) => ({ status, history: [{ status: 'PHYSICS-REVIEWED', by: 'Claude (AI assistant)', date: '2026-10-07', fingerprint: 'f' }] });
+    const greens = ['G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7'];
+    const plan = { batchId: 'batch-t', rows: [...greens.map((g, i) => row(g, 'GREEN', i < 2)), row('A1x', 'AMBER')], sampleSize: Math.max(1, Math.ceil(SAMPLE_FRACTION * 7)), suggestedSample: [], diversity: [] };
+    check('GREEN sample size is about 15 % (7 GREEN → 2)', plan.sampleSize === 2);
+    const regT = { datasets: Object.fromEntries([...greens.map((g, i) => [g, rec(i < 2 ? 'TEACHER-REVIEWED' : 'PHYSICS-REVIEWED')]), ['A1x', rec('PHYSICS-REVIEWED')]]) };
+    const fps = Object.fromEntries([...greens, 'A1x'].map((g) => [g, `fp-${g}`]));
+    const base = { by: 'Mr Silkstone (teacher)', date: '2026-10-07', note: 'sample and AMBER reviewed', systemicOk: true, fingerprints: fps };
+    check('a batch can\'t be accepted by Claude', acceptBatch(plan, regT, { ...base, by: 'Claude (AI assistant)' }).errors.length > 0);
+    check('a batch needs the teacher\'s "no systemic problem" confirmation', acceptBatch(plan, regT, { ...base, systemicOk: false }).errors.some((e) => e.includes('systemic')));
+    check('an unreviewed, unwaived AMBER dataset blocks acceptance', acceptBatch(plan, regT, base).errors.some((e) => e.startsWith('A1x is AMBER')));
+    check('a RED dataset blocks acceptance and can\'t be waived',
+      acceptBatch({ ...plan, rows: [...plan.rows.slice(0, 7), row('A1x', 'RED')] }, regT, { ...base, waive: { A1x: 'x' } }).errors.some((e) => e.includes('RED')));
+    const smallSample = { ...plan, rows: plan.rows.map((x) => ({ ...x, individuallyReviewed: false })) };
+    check('too small a GREEN sample blocks acceptance', acceptBatch(smallSample, regT, { ...base, waive: { A1x: 'reviewed the data, fine' } }).errors.some((e) => e.includes('sample')));
+    check('an AUTO-VALIDATED dataset (no physics review) blocks acceptance',
+      acceptBatch(plan, { datasets: { ...regT.datasets, G7: { status: 'AUTO-VALIDATED', history: [] } } }, { ...base, waive: { A1x: 'r' } }).errors.some((e) => e.startsWith('G7 needs')));
+    check('an unwaived diversity warning blocks acceptance', acceptBatch({ ...plan, diversity: ['apparatus twice'] }, regT, { ...base, waive: { A1x: 'r' } }).errors.some((e) => e.startsWith('diversity')));
+    const ok = acceptBatch(plan, regT, { ...base, waive: { A1x: 'teacher judged the data structure acceptable' } });
+    check('a batch meeting every condition is accepted', ok.errors.length === 0, ok.errors.join('; '));
+    const g7 = ok.registry.datasets.G7;
+    const g1 = ok.registry.datasets.G1;
+    const last2 = (r) => r.history.slice(-2).map((h) => h.status).join(' > ');
+    check('an uninspected GREEN dataset is recorded BATCH-ACCEPTED (not inspected) then APPROVED on a batch basis',
+      g7.status === 'APPROVED' && last2(g7) === 'BATCH-ACCEPTED > APPROVED' && g7.history.at(-2).inspected === false && g7.history.at(-1).basis === 'batch' && g7.history.at(-1).inspected === false && g7.fingerprint === 'fp-G7');
+    check('a sampled dataset keeps its individual review and is approved as inspected',
+      g1.status === 'APPROVED' && g1.history.at(-1).inspected === true && !g1.history.some((h) => h.status === 'BATCH-ACCEPTED'));
+    check('batch acceptance never records TEACHER-REVIEWED for a dataset',
+      Object.entries(ok.registry.datasets).every(([id, r]) => r.history.filter((h) => h.status === 'TEACHER-REVIEWED').length === regT.datasets[id].history.filter((h) => h.status === 'TEACHER-REVIEWED').length));
+    check('the waived AMBER dataset records the teacher\'s waiver', ok.registry.datasets.A1x.history.at(-2).note.includes('waived'));
+    check('the batch decision is recorded once, with the sample and the waiver',
+      ok.registry.batches['batch-t'].decision === 'ACCEPTED' && ok.registry.batches['batch-t'].sampled.join() === 'G1,G2' && ok.registry.batches['batch-t'].datasets.find((x) => x.id === 'A1x').waived);
+    check('the input registry is not changed by a successful acceptance', !regT.batches && regT.datasets.G7.status === 'PHYSICS-REVIEWED');
+    check('a batch can\'t be decided twice', acceptBatch(plan, ok.registry, { ...base, waive: { A1x: 'r' } }).errors.some((e) => e.includes('already been decided')));
+    check('a batch approval without inspection does not establish an archetype', !individuallyApproved(g7) && individuallyApproved(g1));
+    check('older approvals (no basis recorded) count as individual', individuallyApproved(reg0.datasets['D3-B01']));
+    // A batch-approved dataset is published like any APPROVED dataset (production still needs APPROVED + unchanged).
+    const d3b = datasets.find((x) => x.def.id === 'D3-B01');
+    const fpD3 = fingerprintOf(canonicalContent(d3b.def, buildQuestion(d3b.def)));
+    const batchReg = { datasets: { 'D3-B01': { status: 'APPROVED', fingerprint: fpD3, history: [{ status: 'APPROVED', by: 'Mr Silkstone (teacher)', date: '2026-10-07', basis: 'batch', batch: 'b', inspected: false, fingerprint: fpD3 }] } } };
+    check('a batch-approved dataset is published', buildAll([d3b], topics, { registry: batchReg }).questions.length === 1);
+    check('archetype, apparatus and originality metadata don\'t change a fingerprint',
+      fingerprintOf(canonicalContent({ ...d3b.def, archetypes: ['X'], apparatus: 'y', originality: 'z' }, buildQuestion(d3b.def))) === fpD3);
   }
   return { count, failures };
 }

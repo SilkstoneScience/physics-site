@@ -197,6 +197,157 @@ export const LAWS = {
     ],
   },
 
+  'electrical-energy': {
+    title: 'Energy transferred by an electrical heater',
+    statement: 'E = VIt (power P = VI for a time t)',
+    syllabus: 'B.5',
+    inputs: { V: 'V', I: 'A', t: 's' },
+    output: 'J',
+    f: ({ V, I, t }) => V * I * t,
+    reference: [{ inputs: { V: 12, I: 4, t: 600 }, output: 28800, note: '12 × 4 × 600' }],
+    limits: [
+      { name: 'no time, no energy', inputs: { V: 12, I: 4, t: 0 }, output: 0 },
+      { name: 'energy is proportional to the time', check: (f) => near(f({ V: 12, I: 4, t: 1200 }), 2 * f({ V: 12, I: 4, t: 600 })) },
+    ],
+  },
+
+  'electrical-power': {
+    title: 'Power of an electrical heater',
+    statement: 'P = VI',
+    syllabus: 'B.5',
+    inputs: { V: 'V', I: 'A' },
+    output: 'W',
+    f: ({ V, I }) => V * I,
+    reference: [{ inputs: { V: 12, I: 3.5 }, output: 42, note: '12 × 3.5' }],
+    limits: [
+      { name: 'no current, no power', inputs: { V: 12, I: 0 }, output: 0 },
+      { name: 'power is proportional to the current at constant p.d.', check: (f) => near(f({ V: 12, I: 7 }), 2 * f({ V: 12, I: 3.5 })) },
+    ],
+  },
+
+  'temperature-after-heating': {
+    title: 'Temperature of a body after it receives energy, with no energy lost',
+    statement: 'θ = θ₀ + E/(mc), from Q = mcΔT with all the energy E staying in the body',
+    syllabus: 'B.1',
+    inputs: { theta0: 'K', E: 'J', m: 'kg', c: 'J kg^-1 ΔK^-1' },
+    output: 'K',
+    f: ({ theta0, E, m, c }) => theta0 + E / (m * c),
+    reference: [{ inputs: { theta0: 293, E: 9000, m: 1, c: 900 }, output: 303, note: '9000 J raises 1 kg of aluminium (900 J kg⁻¹ K⁻¹) by 10 K' }],
+    limits: [
+      { name: 'no energy, no temperature change', inputs: { theta0: 293, E: 0, m: 1, c: 900 }, output: 293 },
+      { name: 'twice the mass, half the temperature rise', check: (f) => near(f({ theta0: 0, E: 9000, m: 2, c: 900 }), f({ theta0: 0, E: 9000, m: 1, c: 900 }) / 2) },
+    ],
+  },
+
+  'heating-with-loss': {
+    title: 'Temperature of a heated body that loses energy to its surroundings at a rate proportional to its temperature excess',
+    statement: 'θ = θ_r + (P/h)(1 − e^(−ht/(mc))), from mc dθ/dt = P − h(θ − θ_r) with θ = θ_r at t = 0 '
+      + '(an empirical loss model, Newton\'s law of cooling, beyond the syllabus; it reduces to θ = θ_r + Pt/(mc) when h → 0)',
+    syllabus: 'B.1',
+    inputs: { thetaR: 'K', P: 'W', h: 'W ΔK^-1', m: 'kg', c: 'J kg^-1 ΔK^-1', t: 's' },
+    output: 'K',
+    // −expm1(−x) = 1 − e^(−x), accurate when x is small; h = 0 is handled as the no-loss limit.
+    f: ({ thetaR, P, h, m, c, t }) => (h === 0 ? thetaR + (P * t) / (m * c) : thetaR + (P / h) * -Math.expm1((-h * t) / (m * c))),
+    reference: [{ inputs: { thetaR: 293, P: 40, h: 0.4, m: 1, c: 4000, t: 10000 }, output: 293 + 100 * (1 - Math.exp(-1)), note: 'ht/mc = 1: rise = (P/h)(1 − 1/e) = 63.2 K' }],
+    limits: [
+      { name: 'no loss (h = 0): θ = θ_r + Pt/(mc)', inputs: { thetaR: 293, P: 40, h: 0, m: 1, c: 4000, t: 1000 }, output: 303 },
+      { name: 'a tiny loss gives almost the no-loss value', check: (f) => Math.abs(f({ thetaR: 293, P: 40, h: 1e-9, m: 1, c: 4000, t: 1000 }) - 303) < 1e-6 },
+      { name: 'losses always make the body cooler than with no loss', check: (f) => f({ thetaR: 293, P: 40, h: 0.4, m: 1, c: 4000, t: 1000 }) < 303 },
+      { name: 'after a long time the temperature excess approaches P/h', check: (f) => Math.abs(f({ thetaR: 293, P: 40, h: 0.4, m: 1, c: 4000, t: 1e7 }) - 393) < 1e-6 },
+    ],
+  },
+
+  'gate-time': {
+    title: 'Time for a card of length L to pass through a light gate at constant speed',
+    statement: 't = L/v (speed = distance / time; the speed is taken as constant while the card passes the gate)',
+    syllabus: 'A.1',
+    inputs: { L: 'm', v: 'm s^-1' },
+    output: 's',
+    f: ({ L, v }) => L / v,
+    reference: [{ inputs: { L: 0.1, v: 0.5 }, output: 0.2, note: '0.100 m at 0.500 m s⁻¹' }],
+    limits: [
+      { name: 'twice the speed, half the time', check: (f) => near(f({ L: 0.1, v: 1 }), f({ L: 0.1, v: 0.5 }) / 2) },
+      { name: 'twice the card length, twice the time', check: (f) => near(f({ L: 0.2, v: 0.5 }), 2 * f({ L: 0.1, v: 0.5 })) },
+    ],
+  },
+
+  'hooke-extension': {
+    title: 'Extension of a spring obeying Hooke\'s law',
+    statement: 'x = F/k (Hooke\'s law, F = kx, within the limit of proportionality)',
+    syllabus: 'A.2',
+    inputs: { F: 'N', k: 'N m^-1' },
+    output: 'm',
+    f: ({ F, k }) => F / k,
+    reference: [{ inputs: { F: 2, k: 25 }, output: 0.08, note: '2 N on a 25 N m⁻¹ spring' }],
+    limits: [
+      { name: 'no load, no extension', inputs: { F: 0, k: 25 }, output: 0 },
+      { name: 'extension is proportional to the load', check: (f) => near(f({ F: 4, k: 25 }), 2 * f({ F: 2, k: 25 })) },
+    ],
+  },
+
+  'load-sum': {
+    title: 'Total vertical load from two weights hanging together',
+    statement: 'F = F₁ + F₂ (forces in the same direction add)',
+    syllabus: 'A.2',
+    inputs: { F1: 'N', F2: 'N' },
+    output: 'N',
+    f: ({ F1, F2 }) => F1 + F2,
+    reference: [{ inputs: { F1: 1.5, F2: 0.49 }, output: 1.99, note: '1.5 + 0.49' }],
+    limits: [{ name: 'adding nothing changes nothing', inputs: { F1: 1.5, F2: 0 }, output: 1.5 }],
+  },
+
+  'mass-spring-period': {
+    title: 'Period of a mass oscillating on a spring',
+    statement: 'T = 2π√((m + mₑ)/k): the SL result T = 2π√(m/k), with mₑ an effective extra mass for the moving spring itself '
+      + '(about one third of the spring\'s mass; mₑ = 0 for an ideal, massless spring)',
+    syllabus: 'C.1',
+    inputs: { m: 'kg', me: 'kg', k: 'N m^-1' },
+    defaults: { me: 0 },
+    output: 's',
+    f: ({ m, me, k }) => 2 * Math.PI * Math.sqrt((m + me) / k),
+    reference: [{ inputs: { m: 0.25, me: 0, k: 25 * Math.PI ** 2 }, output: 0.2, note: 'm/k = 0.01/π², so T = 2π × 0.1/π = 0.2 s' }],
+    limits: [
+      { name: 'massless spring: the SL formula', check: (f) => near(f({ m: 0.4, k: 10 }), 2 * Math.PI * Math.sqrt(0.04)) },
+      { name: 'four times the mass doubles the period (ideal spring)', check: (f) => near(f({ m: 0.8, k: 10 }), 2 * f({ m: 0.2, k: 10 })) },
+      { name: 'T² is a straight line against m, crossing T² = 0 at m = −mₑ', check: (f) => Math.abs(f({ m: -0.02 + 1e-15, me: 0.02, k: 10 })) < 1e-6 },
+    ],
+  },
+
+  'kepler-period': {
+    title: 'Period of a circular orbit around a central mass M',
+    statement: 'T = 2π√(r³/(GM)), from GMm/r² = mv²/r with v = 2πr/T (Kepler\'s third law: T² ∝ r³)',
+    syllabus: 'D.1',
+    inputs: { r: 'm', G: 'N m^2 kg^-2', M: 'kg' },
+    output: 's',
+    f: ({ r, G, M }) => 2 * Math.PI * Math.sqrt(r ** 3 / (G * M)),
+    reference: [{ inputs: { r: 4.218e8, G: 6.674e-11, M: 1.898e27 }, output: 2 * Math.PI * Math.sqrt(4.218e8 ** 3 / (6.674e-11 * 1.898e27)), note: 'Io: about 1.77 days (1.53 × 10⁵ s)' }],
+    limits: [
+      { name: 'four times the radius gives eight times the period', check: (f) => near(f({ r: 4e8, G: 6.67e-11, M: 1.9e27 }), 8 * f({ r: 1e8, G: 6.67e-11, M: 1.9e27 })) },
+      { name: 'four times the central mass halves the period', check: (f) => near(f({ r: 4e8, G: 6.67e-11, M: 7.6e27 }), f({ r: 4e8, G: 6.67e-11, M: 1.9e27 }) / 2) },
+      { name: 'Io: period about 1.77 days', check: (f) => Math.abs(f({ r: 4.218e8, G: 6.674e-11, M: 1.898e27 }) / 86400 - 1.77) < 0.01 },
+    ],
+  },
+
+  'wire-extension-beyond-limit': {
+    title: 'Extension of a metal wire loaded beyond its limit of proportionality',
+    statement: 'x = F/k for F ≤ F_p; x = F/k + β(F − F_p)² for F > F_p (Hooke\'s law up to the limit of proportionality F_p; '
+      + 'beyond it an empirical extra extension as the metal starts to yield; beyond the syllabus)',
+    syllabus: 'A.2',
+    inputs: { F: 'N', k: 'N m^-1', Fp: 'N', beta: 'm N^-2' },
+    output: 'm',
+    f: ({ F, k, Fp, beta }) => F / k + (F > Fp ? beta * (F - Fp) ** 2 : 0),
+    reference: [
+      { inputs: { F: 40, k: 10000, Fp: 50, beta: 1e-6 }, output: 0.004, note: 'below the limit: Hooke\'s law, 40/10000' },
+      { inputs: { F: 90, k: 10000, Fp: 50, beta: 1e-6 }, output: 0.009 + 0.0016, note: '90/10000 + 10⁻⁶ × 40²' },
+    ],
+    limits: [
+      { name: 'no load, no extension', inputs: { F: 0, k: 10000, Fp: 50, beta: 1e-6 }, output: 0 },
+      { name: 'at the limit of proportionality: still Hooke\'s law', inputs: { F: 50, k: 10000, Fp: 50, beta: 1e-6 }, output: 0.005 },
+      { name: 'beyond the limit the extension exceeds the Hooke\'s-law value', check: (f) => f({ F: 70, k: 10000, Fp: 50, beta: 1e-6 }) > 0.007 },
+      { name: 'β = 0: Hooke\'s law everywhere', inputs: { F: 90, k: 10000, Fp: 50, beta: 0 }, output: 0.009 },
+    ],
+  },
+
   'uniform-counts': {
     title: 'Counts at a constant count rate (for example background radiation)',
     statement: 'N = R Δt',

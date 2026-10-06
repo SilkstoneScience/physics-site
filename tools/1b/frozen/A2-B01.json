@@ -1,0 +1,263 @@
+{
+  "id": "A2-B01",
+  "topic": "A.2",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 2,
+  "skills": [
+    "systematic-offset",
+    "not-proportional",
+    "gradient",
+    "intercept-meaning",
+    "single-reading-vs-gradient"
+  ],
+  "context": "experimental",
+  "seed": 42,
+  "physics": {
+    "scenario": "A spring hangs from a clamp beside a vertical metre rule. Slotted masses are added to a hanger on the spring. The student measures the extension x from the position of the spring's end with nothing attached, but records as the load F only the weight of the slotted masses, not the weight of the hanger that carries them.",
+    "principles": [
+      "Hooke's law: F = kx within the limit of proportionality (A.2)",
+      "Weight W = mg (A.2)"
+    ],
+    "assumptions": [
+      "The spring obeys Hooke's law over the whole range of loads (no permanent stretching)",
+      "The extension is measured from the end of the spring with nothing attached",
+      "The true load is the weight of the slotted masses plus the weight of the hanger"
+    ],
+    "derivation": [
+      "True load = F + m_h g, where m_h is the mass of the hanger",
+      "Hooke's law: x = (F + m_h g)/k = F/k + m_h g/k",
+      "So x against F is a straight line of gradient 1/k with intercept m_h g/k on the x axis: linear but not proportional"
+    ],
+    "relationship": "x = F/k + m_h g/k",
+    "params": {
+      "k": {
+        "value": 25,
+        "unit": "N m^-1",
+        "range": [
+          5,
+          100
+        ],
+        "note": "school extension spring"
+      },
+      "mh": {
+        "value": 0.05,
+        "unit": "kg",
+        "range": [
+          0.01,
+          0.1
+        ],
+        "note": "standard 50 g slotted-mass hanger"
+      },
+      "g": {
+        "value": 9.8,
+        "unit": "m s^-2",
+        "range": [
+          9.8,
+          9.8
+        ],
+        "note": "data booklet value"
+      }
+    }
+  },
+  "models": {
+    "F": {
+      "kind": "set",
+      "unit": "N",
+      "values": [
+        0.5,
+        1,
+        1.5,
+        2,
+        2.5,
+        3
+      ],
+      "resolution": 0.01
+    },
+    "x": {
+      "kind": "measured",
+      "unit": "mm",
+      "model": {
+        "law": "hooke-extension",
+        "inputs": {
+          "F": {
+            "law": "load-sum",
+            "inputs": {
+              "F1": "row.F",
+              "F2": {
+                "law": "weight",
+                "inputs": {
+                  "m": "p.mh",
+                  "g": "p.g"
+                }
+              }
+            }
+          },
+          "k": "p.k"
+        }
+      },
+      "noise": {
+        "type": "gauss",
+        "sd": 0.4
+      },
+      "resolution": 1,
+      "uncertainty": 1
+    }
+  },
+  "laws": {
+    "hooke-extension": {
+      "statement": "x = F/k (Hooke's law, F = kx, within the limit of proportionality)",
+      "inputs": {
+        "F": "N",
+        "k": "N m^-1"
+      },
+      "output": "m",
+      "f": "({ F, k }) => F / k"
+    },
+    "load-sum": {
+      "statement": "F = F₁ + F₂ (forces in the same direction add)",
+      "inputs": {
+        "F1": "N",
+        "F2": "N"
+      },
+      "output": "N",
+      "f": "({ F1, F2 }) => F1 + F2"
+    },
+    "weight": {
+      "statement": "F = mg",
+      "inputs": {
+        "m": "kg",
+        "g": "m s^-2"
+      },
+      "output": "N",
+      "f": "({ m, g }) => m * g"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "F": 0.5,
+        "x": 39
+      },
+      {
+        "F": 1,
+        "x": 59
+      },
+      {
+        "F": 1.5,
+        "x": 79
+      },
+      {
+        "F": 2,
+        "x": 99
+      },
+      {
+        "F": 2.5,
+        "x": 119
+      },
+      {
+        "F": 3,
+        "x": 140
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "x": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student investigates how the extension $x$ of a spring depends on the load $F$ on it. The spring hangs from a clamp beside a vertical metre rule. Slotted masses are added to a hanger attached to the spring.</p><p>The student measures the extension from the position of the end of the spring with nothing attached. The student records as $F$ the weight of the slotted masses only.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"F\"><span class=\"h-name\">load recorded</span>$F$ / N</th><th scope=\"col\" data-col=\"x\"><span class=\"h-name\">extension</span>$x$ / mm ± 1</th></tr></thead><tbody><tr><td data-col=\"F\" data-row=\"0\">0.50</td><td data-col=\"x\" data-row=\"0\">39</td></tr><tr><td data-col=\"F\" data-row=\"1\">1.00</td><td data-col=\"x\" data-row=\"1\">59</td></tr><tr><td data-col=\"F\" data-row=\"2\">1.50</td><td data-col=\"x\" data-row=\"2\">79</td></tr><tr><td data-col=\"F\" data-row=\"3\">2.00</td><td data-col=\"x\" data-row=\"3\">99</td></tr><tr><td data-col=\"F\" data-row=\"4\">2.50</td><td data-col=\"x\" data-row=\"4\">119</td></tr><tr><td data-col=\"F\" data-row=\"5\">3.00</td><td data-col=\"x\" data-row=\"5\">140</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "graph": {
+        "alt": "Graph of extension against load recorded, with 6 plotted points and error bars. The values are in the data table.",
+        "caption": "Graph of extension against load recorded. The error bars show the uncertainties."
+      },
+      "graph-ms": {
+        "alt": "Graph of extension against load recorded, with 6 plotted points and error bars, the line of best fit and the steepest and shallowest lines. The values are in the data table.",
+        "caption": "<span class=\"key-1\">Blue</span>: line of best fit. <span class=\"key-2\">Orange, dashed</span>: steepest and shallowest lines through the error bars."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Hooke's law suggests that $x$ is proportional to $F$. Explain how the graph shows that the student's values of $x$ are not proportional to $F$.",
+      "marks": 2,
+      "markscheme": [
+        "The points lie on a straight line, within their error bars ✓",
+        "No straight line through all the error bars passes through the origin: the line meets the extension axis (at $F = 0$) at about 19 mm ✓"
+      ],
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "b",
+      "question": "Determine the spring constant $k$ of the spring.",
+      "marks": 2,
+      "markscheme": [
+        "Gradient $= \\dfrac{1}{k}$: about 40.3 $\\text{mm N}^{-1}$, converted to $\\text{m N}^{-1}$ ✓",
+        "$k = 24.8\\ \\text{N m}^{-1}$ (accept 23.9 to 25.9) ✓"
+      ],
+      "numeric": {
+        "answer": 24.822695035460992,
+        "range": [
+          23.86797599563557,
+          25.856973995271865
+        ],
+        "unit": "$\\text{N}\\,\\text{m}^{-1}$",
+        "source": "k"
+      },
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "c",
+      "question": "Explain how leaving out the weight of the hanger accounts for the shape of the graph.",
+      "marks": 2,
+      "markscheme": [
+        "The hanger's weight stretches the spring even when the recorded load is zero, so every extension is larger by the same amount ✓",
+        "The line is shifted up by a constant amount ($m_h g/k$) but its gradient is unchanged ✓"
+      ]
+    },
+    {
+      "label": "d",
+      "question": "Use the graph to determine the mass $m_h$ of the hanger.",
+      "marks": 2,
+      "markscheme": [
+        "The intercept on the extension axis (at $F = 0$) is the extension caused by the hanger alone: about 19 mm $= \\dfrac{m_h g}{k}$ ✓",
+        "$m_h = 0.047\\ \\text{kg}$ (accept 0.041 to 0.054; allow ECF from (b)) ✓"
+      ],
+      "numeric": {
+        "answer": 0.047281323877068564,
+        "range": [
+          0.040916530278232416,
+          0.054176516942474384
+        ],
+        "unit": "$\\text{kg}$",
+        "source": "mh"
+      },
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "e",
+      "question": "Another student calculates $k$ as $\\dfrac{F}{x}$ using only the last row of the table. Calculate this value, and explain why it differs from your answer to (b).",
+      "marks": 2,
+      "markscheme": [
+        "$\\dfrac{F}{x} = \\dfrac{3.00}{140 \\times 10^{-3}} = 21.4\\ \\text{N m}^{-1}$ ✓",
+        "It is too small: $x$ includes the extension caused by the hanger but $F$ does not include its weight. The gradient method is not affected by a constant offset ✓"
+      ]
+    }
+  ]
+}

@@ -59,6 +59,13 @@ export function sigFig(x, n) {
   const p = Math.floor(Math.log10(Math.abs(r)));
   return fmtNum(r, Math.max(0, n - 1 - p));
 }
+// Scientific notation to n significant figures: sciParts(1.898e27, 2) = { mant: '1.9', exp: 27 }.
+export function sciParts(x, n) {
+  const r = Number(Number(x).toPrecision(n));
+  const exp = r === 0 ? 0 : Math.floor(Math.log10(Math.abs(r)));
+  return { mant: fmtNum(r / 10 ** exp, n - 1), exp };
+}
+
 // Reads a number written by fmtNum or sigFig (accepts "−" as a minus sign).
 export function parseNum(text) {
   const t = String(text).trim().replace(/−/g, '-');
@@ -86,7 +93,8 @@ const ANGLE = [0, 0, 0, 0, 0, 1];
 const BASE_UNITS = {
   ΔK: [1, [0, 0, 0, 0, 1]], 'Δ°C': [1, [0, 0, 0, 0, 1]], '°C': [1, [0, 0, 0, 0, 1]],
   rad: [1, ANGLE], '°': [Math.PI / 180, ANGLE],
-  m: [1, [1, 0, 0, 0, 0]], cm: [1e-2, [1, 0, 0, 0, 0]], mm: [1e-3, [1, 0, 0, 0, 0]],
+  m: [1, [1, 0, 0, 0, 0]], cm: [1e-2, [1, 0, 0, 0, 0]], mm: [1e-3, [1, 0, 0, 0, 0]], km: [1e3, [1, 0, 0, 0, 0]],
+  day: [86400, [0, 0, 1, 0, 0]],
   kg: [1, [0, 1, 0, 0, 0]], g: [1e-3, [0, 1, 0, 0, 0]],
   s: [1, [0, 0, 1, 0, 0]], ms: [1e-3, [0, 0, 1, 0, 0]], min: [60, [0, 0, 1, 0, 0]],
   A: [1, [0, 0, 0, 1, 0]], mA: [1e-3, [0, 0, 0, 1, 0]],
@@ -131,6 +139,25 @@ export function parseUnit(expr = '') {
     : '';
   return { expr, scale, dim, text, tex, offset, tempKind };
 }
+// The SI base units of a dimension, as a unit expression for parseUnit: [1, 1, -2, 0, 0, 0] → "kg m s^-2".
+// Used for "state the unit in SI base units" questions (a pascal metre is kg s⁻², for example).
+export function baseUnitExpr(dim) {
+  const order = [[1, 'kg'], [0, 'm'], [2, 's'], [3, 'A'], [4, 'K'], [5, 'rad']];
+  return order.filter(([i]) => dim[i]).map(([i, u]) => u + (dim[i] === 1 ? '' : '^' + dim[i])).join(' ');
+}
+
+// A value and its uncertainty written the IB way: the uncertainty to sf significant figures (normally 1),
+// and the value rounded to the same decimal place, e.g. valuePm(0.063728, 0.0050982) → "0.064" ± "0.005",
+// valuePm(4571, 286) → "4600" ± "300".
+export function valuePm(value, unc, sf = 1) {
+  if (!(unc > 0)) throw new Error(`valuePm: the uncertainty must be positive (got ${unc})`);
+  const u = Number(Number(unc).toPrecision(sf));
+  const place = Math.floor(Math.log10(u)) - (sf - 1); // power of ten of the last digit kept
+  const dp = Math.max(0, -place);
+  const round = (x) => Math.round(x / 10 ** place) * 10 ** place;
+  return { value: fmtNum(round(value), dp), unc: fmtNum(round(u), dp) };
+}
+
 // Converting a value to SI units and back, including the 273.15 offset for °C.
 export const toSI = (value, u) => value * u.scale + u.offset;
 export const fromSI = (si, u) => (si - u.offset) / u.scale;

@@ -1,0 +1,274 @@
+{
+  "id": "B1-B01",
+  "topic": "B.1",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 1,
+  "skills": [
+    "temperature-change",
+    "uncertainty-of-a-difference",
+    "propagation",
+    "largest-uncertainty",
+    "value-and-uncertainty",
+    "improvement"
+  ],
+  "context": "experimental",
+  "seed": 21,
+  "physics": {
+    "scenario": "An electric heater in a hole in an insulated aluminium block of mass m is supplied at constant p.d. V and current I. A thermometer in a second, oil-filled hole reads the temperature θ every 120 s for 600 s.",
+    "principles": [
+      "Electrical energy transferred: E = VIt (B.5)",
+      "Energy needed to raise the temperature of a body: Q = mcΔT (B.1)"
+    ],
+    "assumptions": [
+      "All the energy from the heater stays in the block (well insulated, small temperature rise above the room): no losses",
+      "The heater, the thermometer and the oil have negligible heat capacity compared with the block",
+      "The block is at a uniform temperature when each reading is taken",
+      "V and I stay constant during the heating"
+    ],
+    "derivation": [
+      "Energy from the heater after time t: E = VIt",
+      "With no losses, E = mc(θ − θ₀), so θ = θ₀ + VIt/(mc): θ rises linearly with t",
+      "Over the whole heating time t: c = VIt/(mΔT)"
+    ],
+    "relationship": "θ = θ₀ + VIt/(mc); c = VIt/(mΔT)",
+    "params": {
+      "V": {
+        "value": 12,
+        "unit": "V",
+        "range": [
+          6,
+          15
+        ],
+        "note": "low-voltage supply for a 50 W block heater"
+      },
+      "I": {
+        "value": 4.2,
+        "unit": "A",
+        "range": [
+          1,
+          6
+        ],
+        "note": "heater current"
+      },
+      "m": {
+        "value": 1,
+        "unit": "kg",
+        "range": [
+          0.5,
+          2
+        ],
+        "note": "standard 1 kg aluminium block"
+      },
+      "c": {
+        "value": 900,
+        "unit": "J kg^-1 ΔK^-1",
+        "range": [
+          850,
+          950
+        ],
+        "note": "aluminium"
+      },
+      "theta0": {
+        "value": 20,
+        "unit": "°C",
+        "range": [
+          15,
+          25
+        ],
+        "note": "room temperature"
+      }
+    }
+  },
+  "models": {
+    "t": {
+      "kind": "set",
+      "unit": "s",
+      "values": [
+        0,
+        120,
+        240,
+        360,
+        480,
+        600
+      ],
+      "resolution": 1,
+      "uncertainty": 1
+    },
+    "theta": {
+      "kind": "measured",
+      "unit": "°C",
+      "model": {
+        "law": "temperature-after-heating",
+        "inputs": {
+          "theta0": "p.theta0",
+          "E": {
+            "law": "electrical-energy",
+            "inputs": {
+              "V": "p.V",
+              "I": "p.I",
+              "t": "row.t"
+            }
+          },
+          "m": "p.m",
+          "c": "p.c"
+        }
+      },
+      "noise": {
+        "type": "gauss",
+        "sd": 0.15
+      },
+      "resolution": 0.5,
+      "uncertainty": 0.5
+    }
+  },
+  "laws": {
+    "electrical-energy": {
+      "statement": "E = VIt (power P = VI for a time t)",
+      "inputs": {
+        "V": "V",
+        "I": "A",
+        "t": "s"
+      },
+      "output": "J",
+      "f": "({ V, I, t }) => V * I * t"
+    },
+    "temperature-after-heating": {
+      "statement": "θ = θ₀ + E/(mc), from Q = mcΔT with all the energy E staying in the body",
+      "inputs": {
+        "theta0": "K",
+        "E": "J",
+        "m": "kg",
+        "c": "J kg^-1 ΔK^-1"
+      },
+      "output": "K",
+      "f": "({ theta0, E, m, c }) => theta0 + E / (m * c)"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "t": 0,
+        "theta": 20
+      },
+      {
+        "t": 120,
+        "theta": 26.5
+      },
+      {
+        "t": 240,
+        "theta": 33.5
+      },
+      {
+        "t": 360,
+        "theta": 40
+      },
+      {
+        "t": 480,
+        "theta": 47
+      },
+      {
+        "t": 600,
+        "theta": 53.5
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "t": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "theta": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student determines the specific heat capacity $c$ of aluminium. An electric heater is placed in a hole in an aluminium block of mass $m = (1.000 \\pm 0.001)\\ \\text{kg}$. A thermometer in a second hole, filled with oil, measures the temperature $\\theta$ of the block. The block is wrapped in insulation.</p><p>The heater is connected to a supply. The p.d. across it is $V = (12.0 \\pm 0.1)\\ \\text{V}$ and the current in it is $I = (4.20 \\pm 0.05)\\ \\text{A}$; both stay constant. The heater is switched on at $t = 0$. The table shows the temperature at different times. Each time is measured with an uncertainty of $\\pm 1\\ \\text{s}$.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"t\"><span class=\"h-name\">time</span>$t$ / s ± 1</th><th scope=\"col\" data-col=\"theta\"><span class=\"h-name\">temperature</span>$\\theta$ / °C ± 0.5</th></tr></thead><tbody><tr><td data-col=\"t\" data-row=\"0\">0</td><td data-col=\"theta\" data-row=\"0\">20.0</td></tr><tr><td data-col=\"t\" data-row=\"1\">120</td><td data-col=\"theta\" data-row=\"1\">26.5</td></tr><tr><td data-col=\"t\" data-row=\"2\">240</td><td data-col=\"theta\" data-row=\"2\">33.5</td></tr><tr><td data-col=\"t\" data-row=\"3\">360</td><td data-col=\"theta\" data-row=\"3\">40.0</td></tr><tr><td data-col=\"t\" data-row=\"4\">480</td><td data-col=\"theta\" data-row=\"4\">47.0</td></tr><tr><td data-col=\"t\" data-row=\"5\">600</td><td data-col=\"theta\" data-row=\"5\">53.5</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {}
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Determine the temperature change $\\Delta T$ of the block during the 600 s of heating.",
+      "marks": 1,
+      "markscheme": [
+        "$\\Delta T = 53.5 - 20.0 = 33.5\\ {}^{\\circ}\\text{C}$ ✓"
+      ],
+      "numeric": {
+        "answer": 33.5,
+        "unit": "${}^{\\circ}\\text{C}$",
+        "source": "dT"
+      }
+    },
+    {
+      "label": "b",
+      "question": "State the absolute uncertainty in $\\Delta T$.",
+      "marks": 1,
+      "markscheme": [
+        "Each temperature reading is uncertain by $\\pm 0.5\\ {}^{\\circ}\\text{C}$; for a difference the absolute uncertainties add, so $\\Delta T$ is uncertain by $\\pm 1.0\\ {}^{\\circ}\\text{C}$ ✓"
+      ],
+      "numeric": {
+        "answer": 1,
+        "unit": "${}^{\\circ}\\text{C}$",
+        "source": "dTunc"
+      }
+    },
+    {
+      "label": "c",
+      "question": "Calculate the specific heat capacity of aluminium from these data.",
+      "marks": 2,
+      "markscheme": [
+        "Energy supplied $E = VIt = 12.0 \\times 4.20 \\times 600 = 30240\\ \\text{J}$ ✓",
+        "$c = \\dfrac{E}{m\\Delta T} = 903\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ (allow ECF from (a)) ✓"
+      ],
+      "numeric": {
+        "answer": 902.6865671641792,
+        "unit": "$\\text{J}\\,\\text{kg}^{-1}\\,\\text{K}^{-1}$",
+        "source": "c"
+      }
+    },
+    {
+      "label": "d",
+      "question": "Identify, by comparing percentage uncertainties, the measured quantity that contributes most to the uncertainty in $c$.",
+      "marks": 2,
+      "markscheme": [
+        "Percentage uncertainties: $V$: 0.83 %; $I$: 1.2 %; $t$: 0.2 %; $m$: 0.1 %; $\\Delta T$: 3.0 % (at least three correct) ✓",
+        "$\\Delta T$ contributes most ✓"
+      ]
+    },
+    {
+      "label": "e",
+      "question": "Determine the absolute uncertainty in $c$. Hence state $c$ with its uncertainty, to an appropriate number of significant figures.",
+      "marks": 2,
+      "markscheme": [
+        "Adds the percentage uncertainties: 5.3 %, so $\\Delta c = 48\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ (allow ECF) ✓",
+        "$c = (900 \\pm 50)\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$: uncertainty to 1 significant figure and $c$ rounded to the same place ✓"
+      ]
+    },
+    {
+      "label": "f",
+      "question": "Suggest one change to the method that would reduce the percentage uncertainty in $\\Delta T$.",
+      "marks": 1,
+      "markscheme": [
+        "Any one of: heat for longer (or use a more powerful heater) so that $\\Delta T$ is larger / use a thermometer with a smaller division (for example a digital thermometer reading to $0.1\\ {}^{\\circ}\\text{C}$) ✓"
+      ]
+    }
+  ]
+}

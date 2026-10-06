@@ -467,6 +467,7 @@
           <p><span class="part-label">(${pt.label})</span>${pt.question}
              <span class="marks">[${pt.marks}]</span>
              ${hasData(q) ? `<a class="data-link" href="#data-${q.id}">↑ Data</a>` : ''}</p>
+          ${pt.figure ? msFigureHtml(q, pt.figure) : ''}
           ${pt.numeric ? numericHtml(pt, s) : `<textarea rows="3" aria-label="Your answer to part (${pt.label})" placeholder="Write your answer here, then check the mark scheme.">${escapeHtml(s.answer || '')}</textarea>`}
           ${s.revealed ? `
             <div class="markscheme">

@@ -27,6 +27,10 @@ export default {
   context: 'experimental',
   skills: ['anomaly', 'intercept', 'gradient', 'percentage-uncertainty', 'evaluate-method'],
   seed: 3,
+  batch: 'pilot',
+  archetypes: ['L2', 'E3', 'L1'],
+  apparatus: 'cell, ammeter, voltmeter and variable resistor',
+  originality: 'Standard internal-resistance practical, used in four legacy Section A sessions (May 2017 TZ2, May 2018 TZ1, May 2019 TZ2, Nov 2017). Own numbers, an anomaly and a different sequence; r of about 0.75 ohm resembles a Nov 2025 Paper 2 value (noted in the handoff).',
 
   // ----- 1. Physics model -----
   physics: {
@@ -109,7 +113,7 @@ export default {
     const [rLo, rHi] = d.r.r.range;
     return [
       {
-        label: 'a', marks: 2, msFigure: 'graph-ms',
+        label: 'a', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
         question: 'Identify the anomalous reading and suggest one possible cause of it.',
         markscheme: [
           `The reading at $I = ${d.text('I', 4)}\\ \\text{A}$, $V = ${d.text('V', 4)}\\ \\text{V}$ ✓`,
@@ -117,7 +121,7 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 2, msFigure: 'graph-ms',
+        label: 'b', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         question: 'Determine the emf $\\varepsilon$ of the cell.',
         numeric: d.num('emf'),
         markscheme: [
@@ -126,7 +130,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2,
+        label: 'c', marks: 2, ao: 'AO2',
         question: 'Determine the internal resistance $r$ of the cell.',
         numeric: d.num('r'),
         markscheme: [
@@ -135,13 +139,13 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 1,
+        label: 'd', marks: 1, ao: 'AO2',
         question: `Calculate the percentage uncertainty in the reading of $V$ when $I = ${d.text('I', 7)}\\ \\text{A}$.`,
         numeric: d.num('pctV'),
         markscheme: [`$\\dfrac{0.01}{${d.text('V', 7)}} \\times 100 = ${d.sf(d.r.pctV.value, 2)}\\ \\%$ ✓`],
       },
       {
-        label: 'e', marks: 2,
+        label: 'e', marks: 2, ao: 'AO3',
         question: 'Suggest why the student should disconnect the circuit between readings.',
         markscheme: [
           'A current makes the cell warm up / makes the cell run down ✓',

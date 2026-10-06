@@ -5,7 +5,10 @@ import { launcher } from '../diagrams.mjs';
 
 const halfRangeOf = (a) => (Math.max(...a) - Math.min(...a)) / 2;
 const meanOf = (a) => a.reduce((x, y) => x + y, 0) / a.length;
-const CLAIMED_U = 2.5; // the manufacturer's stated launch speed (m s⁻¹)
+// The manufacturer's stated launch speed (m s⁻¹). It must be clearly outside the range of u from the max/min
+// lines (the verdict claim below), so that students' own lines lead to the same conclusion. (It was 2.50, only
+// 0.7 % above the steepest line: changed after the October 2026 pilot audit.)
+const CLAIMED_U = 2.6;
 const ROW = 2; // the height whose five readings students process themselves (h = 0.700 m)
 
 const ALT = 'Side view. A spring launcher is clamped horizontally to a tall stand. A ball leaves it horizontally with speed u '
@@ -19,6 +22,10 @@ export default {
   context: 'experimental',
   skills: ['repeated-readings', 'mean-and-uncertainty', 'linearisation', 'gradient', 'evaluate-claim'],
   seed: 5,
+  batch: 'pilot',
+  archetypes: ['N2', 'M1', 'V3'],
+  apparatus: 'horizontal spring launcher',
+  originality: 'Common school practical (projectile launched horizontally). No legacy Paper 3 Section A or 2025 Paper 1B question uses this set-up; own numbers and sequence.',
 
   // ----- 1. Physics model -----
   physics: {
@@ -91,6 +98,12 @@ export default {
       value: (d) => Math.sqrt((d.p.g * d.r.gradient.value) / 2),
       range: (d) => d.r.gradient.range.map((k) => Math.sqrt((d.p.g * k) / 2)),
     },
+    // u from the steepest and shallowest lines alone (no reading tolerance): what (g) compares the claim with.
+    uLines: {
+      unit: 'm s^-1', basis: 'lines',
+      value: (d) => d.r.u.value,
+      range: (d) => d.gradientRange().map((k) => Math.sqrt((d.p.g * k) / 2)),
+    },
   },
 
   // Numbers the question states that aren't in the data (traced by the validator).
@@ -103,7 +116,7 @@ export default {
     { type: 'linear', minR2: 0.99 },
     { type: 'throughOrigin', expect: true },
     { type: 'agrees', result: 'u', value: 2.4, expect: true },
-    { type: 'agrees', result: 'u', value: CLAIMED_U, expect: false },
+    { type: 'verdict', result: 'uLines', value: CLAIMED_U, expect: 'outside' },
     { type: 'trend', direction: 'increasing' },
   ],
 
@@ -126,27 +139,28 @@ export default {
   parts: (d) => {
     const [uLo, uHi] = d.r.u.range;
     const [gLo, gHi] = d.r.gradient.range;
+    const [lLo, lHi] = d.r.uLines.range;
     const rd = d.rows[ROW].R__trials;
     return [
       {
-        label: 'a', marks: 1,
+        label: 'a', marks: 1, ao: 'AO2',
         question: 'Identify one variable that the student must control so that the launch speed is the same for every shot.',
         markscheme: ['Any one of: how far the spring is compressed / the same ball / the launcher kept horizontal ✓'],
       },
       {
-        label: 'b', marks: 1,
+        label: 'b', marks: 1, ao: 'AO2',
         question: 'Calculate the mean range for $h = 0.700\\ \\text{m}$.',
         numeric: d.num('Rmean'),
         markscheme: [`Mean $= \\dfrac{${rd.map((v) => v.toFixed(3)).join(' + ')}}{5} = ${d.sf(d.r.Rmean.value, 3)}\\ \\text{m}$ ✓`],
       },
       {
-        label: 'c', marks: 1,
+        label: 'c', marks: 1, ao: 'AO2',
         question: 'Determine the absolute uncertainty in this mean range.',
         numeric: d.num('dR'),
         markscheme: [`Half the range of the readings: $\\dfrac{${Math.max(...rd).toFixed(3)} - ${Math.min(...rd).toFixed(3)}}{2} = ${d.dp(d.r.dR.value, 4)}\\ \\text{m}$ (accept ${d.sf(d.r.dR.value, 2)} m or ${d.sf(d.r.dR.value, 3)} m) ✓`],
       },
       {
-        label: 'd', marks: 2,
+        label: 'd', marks: 2, ao: { AO1: 1, AO2: 1 },
         question: 'Show that, if air resistance is negligible, $R^2 = \\dfrac{2u^2}{g}h$, where $u$ is the launch speed.',
         markscheme: [
           'Vertical motion: $h = \\tfrac12 g t^2$, so $t = \\sqrt{\\dfrac{2h}{g}}$ ✓',
@@ -154,7 +168,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 2, msFigure: 'graph-ms',
+        label: 'e', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         question: 'Determine the gradient of the graph of $R^2$ against $h$.',
         numeric: d.num('gradient'),
         markscheme: [
@@ -163,7 +177,7 @@ export default {
         ],
       },
       {
-        label: 'f', marks: 2,
+        label: 'f', marks: 2, ao: 'AO2',
         question: 'Determine the launch speed $u$.',
         numeric: d.num('u', {
           mistakes: [
@@ -177,11 +191,11 @@ export default {
         ],
       },
       {
-        label: 'g', marks: 2, msFigure: 'graph-ms',
+        label: 'g', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
         question: `The manufacturer states that the launch speed is $${d.stated('claimedU')}\\ \\text{m s}^{-1}$. Discuss whether the data support this statement.`,
         markscheme: [
-          `The steepest and shallowest lines through the error bars give $u$ between about ${d.sf(uLo, 3)} and ${d.sf(uHi, 3)} $\\text{m s}^{-1}$ ✓`,
-          `${d.stated('claimedU')} $\\text{m s}^{-1}$ is outside this range, so the data do not support the statement (the launcher is slower than stated) ✓`,
+          `Uses the steepest and shallowest lines through the error bars (their own lines, or the uncertainty in the gradient) to find a range for $u$: the lines shown give about ${d.sf(lLo, 3)} to ${d.sf(lHi, 3)} $\\text{m s}^{-1}$ ✓`,
+          `${d.stated('claimedU')} $\\text{m s}^{-1}$ is above this range, so the data do not support the statement (the launcher is slower than stated). Award this mark for a conclusion consistent with the candidate's own range ✓`,
         ],
       },
     ];

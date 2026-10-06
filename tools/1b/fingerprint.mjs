@@ -59,7 +59,9 @@ export function canonicalContent(def, built) {
     const ms = typeof pt.msFigure === 'string' ? pt.msFigure : pt.msFigure && pt.msFigure.figure;
     if (pt.msFigure && typeof pt.msFigure === 'object') figureOf(pt.msFigure);
     if (typeof pt.msFigure === 'string') figureOf({ figure: ms, ...(q.figures || {})[ms] });
-    return { label: pt.label, question: pt.question, marks: pt.marks, markscheme: pt.markscheme, numeric: pt.numeric, msFigure: ms };
+    if (pt.figure && typeof pt.figure === 'object') figureOf(pt.figure);
+    const fig = pt.figure && (typeof pt.figure === 'string' ? pt.figure : pt.figure.figure);
+    return { label: pt.label, question: pt.question, marks: pt.marks, markscheme: pt.markscheme, numeric: pt.numeric, msFigure: ms, ...(fig ? { figure: fig } : {}) };
   });
   return {
     id: q.id, topic: q.topic, paper: q.paper, level: q.level, difficulty: q.difficulty, skills: q.skills, context: q.context,

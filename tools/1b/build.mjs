@@ -72,7 +72,7 @@ export function buildAll(datasets, topics, { registry = loadRegistry() } = {}) {
       results.push({ id, def, valid: false, state: stateFor(id, false, null, registry) });
       continue;
     }
-    const found = validateDataset(def, built.question, { topics, traced: built.traced });
+    const found = validateDataset(def, built.question, { topics, traced: built.traced, meta: built.meta });
     diags.push(...found);
     // The independent physics audit (tools/1b/independent.mjs): its own physics, units and fits.
     diags.push(...independentAudit(def, built.question));
@@ -195,7 +195,7 @@ export function splitForPublish(questions, dir) {
     const figures = {};
     const keep = (f) => { if (f && !figures[f.figure]) figures[f.figure] = { svg: f.svg, alt: f.alt, caption: f.caption }; return f.figure; };
     const data = q.data.map((item) => (item.kind === 'figure' ? { kind: 'figure', ref: keep(item) } : item));
-    const parts = q.parts.map((pt) => (pt.msFigure ? { ...pt, msFigure: keep(pt.msFigure) } : pt));
+    const parts = q.parts.map((pt) => ({ ...pt, ...(pt.figure ? { figure: keep(pt.figure) } : {}), ...(pt.msFigure ? { msFigure: keep(pt.msFigure) } : {}) }));
     files[`${dir}/${q.id}.json`] = JSON.stringify({ id: q.id, figures, data }) + '\n';
     const { data: _d, ...card } = q;
     return { ...card, parts, dataFile: `${dir}/${q.id}.json` };
@@ -222,7 +222,9 @@ export function printStatus(results) {
     const rec = r.state.rec;
     const last = rec && rec.history && rec.history[rec.history.length - 1];
     const flag = r.state.changed ? '  ✗ CHANGED SINCE REVIEW' : '';
-    console.log(`${r.id.padEnd(10)}${r.state.status.padEnd(19)}${(r.fingerprint || '-').slice(0, 16).padEnd(18)}${last ? `${last.status} by ${last.by}, ${last.date}` : '(none: automatic checks only)'}${flag}`);
+    const how = last && last.status === 'APPROVED' && last.basis === 'batch'
+      ? ` (batch ${last.batch}; ${last.inspected ? 'inspected individually' : 'not individually inspected'})` : '';
+    console.log(`${r.id.padEnd(10)}${r.state.status.padEnd(19)}${(r.fingerprint || '-').slice(0, 16).padEnd(18)}${last ? `${last.status} by ${last.by}, ${last.date}${how}` : '(none: automatic checks only)'}${flag}`);
   }
   console.log('Only APPROVED datasets are published. Change a status with: node tools/1b/review.mjs set <id> <STATUS> --by "<name>"\n');
 }

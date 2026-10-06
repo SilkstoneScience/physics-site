@@ -5,8 +5,9 @@
 // A dataset with any error is not written to questions/1b.json (see build.mjs).
 import {
   parseNum, dpOf, sigFigsIn, onGrid, roundTo, fmtNum, sigFig, parseUnit, sameDim, addDim,
-  linearFit, stripTags, cross, decimalsOf, toSI,
+  linearFit, stripTags, cross, decimalsOf, toSI, baseUnitExpr, valuePm, gradientBand, sciParts,
 } from './lib.mjs';
+import { normalizeAO } from './ao.mjs';
 import { generateRows, makeContext, uncertaintyOf, columnDp, paramValues, modelValue, evalModel, perRowUncertainty, buildQuestion } from './generate.mjs';
 import { LAWS } from './laws.mjs';
 import { createRequire } from 'node:module';
@@ -17,16 +18,28 @@ const generateRowsSafe = (def) => { try { return generateRows(def, { ideal: true
 const { checkNumeric } = createRequire(import.meta.url)('../../js/numeric.js');
 
 const CONTEXTS = ['experimental', 'observational', 'unfamiliar'];
+// A verdict students must reach from the max/min lines ("is the claimed value inside the range?") must
+// survive reasonable by-eye line drawing: the claimed value must be at least this fraction of the
+// result's value clear of the range's edge (inside or outside). Drawn steepest and shallowest lines
+// typically differ from the computed extremes by a few per cent of the gradient.
+export const VERDICT_MARGIN = 0.04;
 const rel = (a, b) => Math.abs(a - b) / Math.max(Math.abs(a), Math.abs(b), 1e-300);
 
-export function validateDataset(def, q, { topics, traced } = {}) {
+export function validateDataset(def, q, { topics, traced, meta } = {}) {
   const diags = [];
   const fail = (code, where, message, extra = {}) => diags.push({ level: 'error', code, dataset: def.id, where, message, ...extra });
   const warn = (code, where, message, extra = {}) => diags.push({ level: 'warning', code, dataset: def.id, where, message, ...extra });
+  let d = null;
   try {
-    run(def, q, topics, fail, warn);
+    d = run(def, q, topics, fail, warn);
   } catch (e) {
     fail('crash', 'dataset', `the validator stopped: ${e.message}`);
+  }
+  // Part metadata (AO tags, what a part asks for): not published, so taken from the generator.
+  try {
+    checkPartMeta(def, q, meta || buildQuestion(def).meta, d, fail);
+  } catch (e) {
+    fail('crash', 'part metadata', `couldn't check the parts' AO tags and asks: ${e.message}`);
   }
   // Numbers in the text: the generator records what its helpers printed (rebuilt here if not passed in).
   try {
@@ -170,6 +183,14 @@ function run(def, q, topics, fail, warn) {
             { expected: fmtNum(model, dp + 1), got: cell.text });
         }
       }
+      if (c.kind === 'catalogue') {
+        // Published (secondary) data: the table must show the source's value, and the source must agree
+        // with the physics model to within the declared tolerance (e.g. 1 %), or the model is wrong for these data.
+        const src = fmtNum(roundTo(c.values[i], c.resolution), dp);
+        if (src !== cell.text) fail('catalogue', where, 'value differs from the published source', { expected: src, got: cell.text });
+        const model = modelValue(def, c, { params: p, row, singles: gen.singles }, `column ${k}`);
+        if (Math.abs(v - model) > c.agree * Math.abs(model)) fail('catalogue', where, `the published value differs from the physics model by more than ${c.agree * 100} %`, { expected: fmtNum(model, dp + 1), got: cell.text });
+      }
       if (c.kind === 'derived') {
         const want = fmtNum(roundTo(c.value(row, p, gen.singles), 10 ** -c.dp), c.dp);
         if (want !== cell.text) fail('derived', where, 'calculated value doesn\'t match the values it is calculated from', { expected: want, got: cell.text });
@@ -211,7 +232,7 @@ function run(def, q, topics, fail, warn) {
   }
   if (g && g.fit === 'linear') {
     if (g.band && !d.band) fail('fit', 'graph', 'no straight line passes through every error bar: reduce the noise, increase the uncertainty, or mark the odd point as an anomaly');
-    if (own.r2 > 0.999999) warn('realism', 'graph', 'the points lie almost exactly on a line, so the data look invented: add realistic scatter');
+    if (own.r2 > 0.999999 && def.source !== 'secondary') warn('realism', 'graph', 'the points lie almost exactly on a line, so the data look invented: add realistic scatter');
   }
 
   for (const [name, res] of Object.entries(def.results || {})) {
@@ -234,6 +255,22 @@ function run(def, q, topics, fail, warn) {
       if (target === undefined) fail('fit', where, `unknown check "${res.check}"`);
       else if (bad) fail('fit', where, `${res.check} doesn't match the line fitted to the table`, { expected: show(target), got: show(r.value) });
     }
+    // A prediction must be at a value that wasn't measured (else students just read the table).
+    if (res.predictAt) {
+      const col = def.columns[res.predictAt.column];
+      if (!col) fail('prediction', where, `predictAt names an unknown column ${res.predictAt.column}`);
+      else if (rows.some((rw) => Math.abs(rw[res.predictAt.column] - res.predictAt.value) <= (col.resolution || 0) + 1e-12)) {
+        fail('prediction', where, `the prediction at ${res.predictAt.value} is at a measured row, so it can be read from the table`);
+      }
+    }
+    // A range said to come from the max/min lines must be exactly that for a gradient or an intercept.
+    if (res.basis === 'lines') {
+      const band = { gradient: d.band && [d.band.mMin, d.band.mMax], intercept: d.band && [d.band.cMin, d.band.cMax] }[res.check];
+      if (!r.range) fail('claim-verdict', where, 'basis "lines" needs a range');
+      else if (res.check in { gradient: 1, intercept: 1 } && (!band || r.range.some((v, i) => rel(v, band[i]) > 1e-9))) {
+        fail('claim-verdict', where, `the range isn't the ${res.check} range from the max/min lines`);
+      }
+    }
     if (r.range && !(r.range[0] <= r.value && r.value <= r.range[1])) {
       fail('answer-range', where, 'the accepted range doesn\'t contain the value', { expected: show(r.value), got: `${show(r.range[0])} to ${show(r.range[1])}` });
     }
@@ -254,13 +291,66 @@ function run(def, q, topics, fail, warn) {
         { expected: 'intercept range ' + (cl.expect ? 'including 0' : 'excluding 0'), got: `${sigFig(d.band.cMin, 3)} to ${sigFig(d.band.cMax, 3)}` });
       }
     } else if (cl.type === 'agrees') {
+      // A check that the data recover a model value. A disagreement that students must judge is a verdict
+      // (below), because it needs a margin and a range from the max/min lines, not the answer tolerance.
       const r = d.r[cl.result];
+      if (cl.expect === false) { fail('claim-verdict', where, 'a disagreement students must judge must be a verdict claim ({ type: "verdict", expect: "outside" }), with a margin and a max/min-line range'); continue; }
       if (!r || !r.range) { fail('claim', where, 'needs a result with an accepted range'); continue; }
       const ok = r.range[0] <= cl.value && cl.value <= r.range[1];
       if (ok !== cl.expect) {
         fail('claim', where, cl.expect ? `the question expects agreement with ${cl.value}, but the data's range excludes it`
           : `the question expects disagreement with ${cl.value}, but the data's range includes it`,
         { expected: cl.value, got: `${sigFig(r.range[0], 3)} to ${sigFig(r.range[1], 3)}` });
+      }
+    } else if (cl.type === 'verdict') {
+      // { type: 'verdict', result, value, expect: 'inside' | 'outside', margin } : a conclusion students reach
+      // by comparing a stated value with the range from the max/min lines. The value must be clearly inside
+      // or outside, by at least margin × the result's value, so that students' own lines give the same verdict.
+      const r = d.r[cl.result];
+      const res = (def.results || {})[cl.result];
+      if (!r || !r.range || !res || !['lines', 'uncertainty'].includes(res.basis)) {
+        fail('claim-verdict', where, 'needs a result whose range comes from the max/min lines (basis: "lines") or its propagated uncertainty (basis: "uncertainty"), not an answer tolerance'); continue;
+      }
+      if (!['inside', 'outside'].includes(cl.expect)) { fail('claim-verdict', where, 'expect must be "inside" or "outside"'); continue; }
+      const margin = cl.margin ?? VERDICT_MARGIN;
+      if (margin < VERDICT_MARGIN) fail('claim-verdict', where, `margin ${margin} is smaller than the minimum ${VERDICT_MARGIN}`);
+      const pad = Math.max(margin, VERDICT_MARGIN) * Math.abs(r.value);
+      const [lo, hi] = r.range;
+      const ok = cl.expect === 'outside' ? (cl.value < lo - pad || cl.value > hi + pad) : (lo + pad <= cl.value && cl.value <= hi - pad);
+      if (!ok) {
+        fail('claim-verdict', where, `${cl.value} is not clearly ${cl.expect} the max/min-line range: students' own lines could give the other conclusion`,
+          { expected: cl.expect === 'outside' ? `below ${sigFig(lo - pad, 3)} or above ${sigFig(hi + pad, 3)}` : `${sigFig(lo + pad, 3)} to ${sigFig(hi - pad, 3)}`, got: cl.value });
+      }
+    } else if (cl.type === 'notLinear') {
+      // The question says no straight line fits: true only if no line passes through every error bar.
+      const spec = cl.graph === 'raw' ? def.rawGraph : g;
+      if (!spec) { fail('claim', where, 'needs the graph it refers to'); continue; }
+      const pts = rows.map((rw, i) => ({ x: rw[spec.x], y: rw[spec.y], ex: (spec.xErrorBars && d.unc(spec.x, i)) || 0, ey: d.unc(spec.y, i) || 0 }));
+      if (gradientBand(pts)) fail('claim', where, 'the question says the data are not linear, but a straight line passes through every error bar');
+    } else if (cl.type === 'outlier') {
+      // Repeated readings with one outlying value: it must stand well clear of the others (at least 3 times
+      // their whole spread from their mean), so students can identify it from the table alone.
+      const c = def.columns[cl.column];
+      if (!c || !c.anomaly || c.anomaly.row !== cl.row) { fail('claim', where, "an outlier claim needs the column's anomaly to be in that row"); continue; }
+      const others = rows.map((rw) => rw[cl.column]).filter((_, i) => i !== cl.row);
+      const spread = Math.max(Math.max(...others) - Math.min(...others), c.resolution);
+      const dev = Math.abs(rows[cl.row][cl.column] - others.reduce((a, b) => a + b, 0) / others.length);
+      if (dev < 3 * spread) fail('claim', where, `the outlying reading is only ${(dev / spread).toFixed(1)} times the spread of the other readings from their mean (needs 3)`);
+    } else if (cl.type === 'validRange') {
+      // { type: 'validRange', lastLinearRow: i }: a straight line fits rows 0..i within the error bars; rows from
+      // i + 2 on lie outside every such line by more than their error bars (row i + 1 may be borderline).
+      const i0 = cl.lastLinearRow;
+      if (!g || g.fit !== 'linear') { fail('claim', where, 'needs a linear graph'); continue; }
+      const excl = rows.map((_, i) => i).filter((i) => i > i0);
+      if (excl.some((i) => !(g.exclude || []).includes(i))) fail('claim', where, 'every row beyond the linear region must be listed in graph.exclude, so the fit uses only the linear region');
+      const pt = (i) => ({ x: rows[i][g.x], y: rows[i][g.y], ex: (g.xErrorBars && d.unc(g.x, i)) || 0, ey: d.unc(g.y, i) || 0 });
+      const lin = gradientBand(rows.slice(0, i0 + 1).map((_, i) => pt(i)));
+      if (!lin) { fail('claim', where, `no straight line fits rows 1 to ${i0 + 1} within their error bars`); continue; }
+      if (i0 + 3 <= rows.length && gradientBand(rows.slice(0, i0 + 3).map((_, i) => pt(i)))) fail('claim', where, `a straight line still fits rows 1 to ${i0 + 3}, so the data don't show where the model fails`);
+      for (let j = i0 + 2; j < rows.length; j++) {
+        const P = pt(j);
+        const ys = [lin.steep, lin.shallow].map((L) => L.m * P.x + L.c);
+        if (!(P.y - P.ey > Math.max(...ys) || P.y + P.ey < Math.min(...ys))) fail('claim', where, `row ${j + 1} is still within reach of a straight line through the linear region, so the departure isn't clear`);
       }
     } else if (cl.type === 'anomaly') {
       if (!own || g.fit !== 'linear') { fail('claim-anomaly', where, 'anomaly checks need a linear graph'); continue; }
@@ -304,13 +394,15 @@ function run(def, q, topics, fail, warn) {
       }
     }
     const ms = stripTags((pt.markscheme || []).join(' '));
-    if (![2, 3].some((k) => ms.includes(sigFig(r.value, k)))) {
+    const sci = (k) => { const s = sciParts(r.value, k); return `${s.mant} \\times 10^{${s.exp}}`; };
+    if (![2, 3].some((k) => ms.includes(sigFig(r.value, k)) || ms.includes(sci(k)))) {
       fail('markscheme-value', where, 'the mark scheme doesn\'t state the answer', { expected: `${sigFig(r.value, 2)} or ${sigFig(r.value, 3)}` });
     }
   }
 
   // ---------- 6. Graphs must show exactly the data ----------
-  const figures = [...(q.data || []).filter((x) => x.kind === 'figure'), ...(q.parts || []).filter((pt) => pt.msFigure).map((pt) => pt.msFigure)];
+  const figures = [...(q.data || []).filter((x) => x.kind === 'figure'), ...(q.parts || []).flatMap((pt) => [pt.figure, pt.msFigure].filter((f) => f && typeof f === 'object'))];
+  if (def.rawGraph && !figures.some((f) => f.figure === 'graph-raw')) fail('graph-point', 'raw graph', "the dataset has a raw-data graph, but the question doesn't show it");
   if (g) {
     const student = figures.find((f) => f.figure === 'graph');
     if (!student) fail('graph-point', 'graph', 'the dataset has a graph, but the question doesn\'t show it');
@@ -325,6 +417,45 @@ function run(def, q, topics, fail, warn) {
     if (chk.harmonic) checkStandingWave(fig, chk.harmonic, fail);
   }
   if (def.circuit) checkCircuit(def, figures.find((f) => f.figure === (def.circuit.figure || 'diagram')), fail);
+  return d;
+}
+
+// ---------- Part metadata: AO tags and what a part asks for ----------
+//   ao: 'AO2' or { AO2: 1, AO3: 1 }   required on every part (see ao.mjs)
+//   asks: { unit: 'gradient' }        "state the unit": the mark scheme must give that result's unit (as
+//                                     given or in SI base units), and the question must not give it away
+//   asks: { valuePm: ['B', 'dB'], sf: 1 }   "value ± uncertainty": the mark scheme must give the value with
+//                                     the uncertainty to sf s.f. and the value to the same decimal place,
+//                                     worked out here from the results recalculated from the published table
+function checkPartMeta(def, q, meta, d, fail) {
+  const byLabel = new Map((q.parts || []).map((pt) => [pt.label, pt]));
+  for (const m of meta) {
+    const where = `part (${m.label})`;
+    try { normalizeAO(m.ao, m.marks); } catch (e) { fail('ao', where, e.message); }
+    const asks = m.asks;
+    if (!asks) continue;
+    const pt = byLabel.get(m.label);
+    if (!pt) { fail('asks', where, 'the part isn\'t in the question'); continue; }
+    const ms = (pt.markscheme || []).join(' ');
+    if (asks.unit !== undefined) {
+      const res = (def.results || {})[asks.unit];
+      if (!res || !res.unit) { fail('asks-unit', where, `asks for the unit of "${asks.unit}", which isn't a result with a unit`); continue; }
+      const u = parseUnit(res.unit);
+      const forms = [u.tex, parseUnit(baseUnitExpr(u.dim)).tex];
+      if (!forms.some((t) => ms.includes(t))) fail('asks-unit', where, 'the mark scheme doesn\'t give the unit asked for', { expected: forms.join(' or ') });
+      if (forms.some((t) => String(pt.question).includes(t))) fail('asks-unit', where, 'the question gives away the unit it asks for');
+    }
+    if (asks.valuePm !== undefined) {
+      const [vName, uName] = asks.valuePm;
+      const sf = asks.sf || 1;
+      if (![1, 2].includes(sf)) { fail('asks-pm', where, 'an uncertainty is quoted to 1 or 2 significant figures'); continue; }
+      if (!d || !d.r[vName] || !d.r[uName]) { fail('asks-pm', where, `needs results "${vName}" and "${uName}"`); continue; }
+      let t;
+      try { t = valuePm(d.r[vName].value, d.r[uName].value, sf); } catch (e) { fail('asks-pm', where, e.message); continue; }
+      const want = `${t.value} \\pm ${t.unc}`;
+      if (!ms.includes(want)) fail('asks-pm', where, 'the mark scheme doesn\'t give the value and uncertainty correctly rounded', { expected: want });
+    }
+  }
 }
 
 // ---------- Numbers in the text must be traceable ----------
@@ -372,6 +503,9 @@ function checkTextNumbers(def, q, traced, fail) {
     }
   }
   for (const [where, text] of texts) {
+    // A control character (tab, form feed, backspace…) in the text almost always means a LaTeX command lost its
+    // backslash in a template string (`\text` becomes a tab + "ext"), so the formula would display wrongly.
+    if (/[\u0000-\u0009\u000b-\u001f]/.test(String(text))) fail('text-control', where, 'contains a control character: probably a LaTeX command written with a single backslash in a template string (use \\\\text, \\\\dfrac, …)');
     for (const n of numbersIn(text)) {
       if (allowed.has(n.tok) || whitelisted(n.tok)) continue;
       fail('text-number', where, `the number ${n.tok} isn't traceable to the data, a parameter, a result or a stated constant (print it with d.sf, d.dp, d.text, d.int or d.stated)`,
@@ -475,6 +609,22 @@ function checkPhysics(def, fail) {
     if (!c.model || !c.model.law) bad('physics-meta', `${where}.model`, 'the model must be built from a vetted law in laws.mjs ({ law, inputs })');
     if (c.systematic) for (const msg of checkSystematic(c.systematic, generateRowsSafe(def))) bad('physics-meta', `${where}.systematic`, msg);
   }
+  // Published (secondary) data: provenance, a model to test them against, and a stated agreement tolerance.
+  const catalogue = Object.entries(def.columns).filter(([, c]) => c.kind === 'catalogue');
+  if (catalogue.length || def.source === 'secondary') {
+    const pv = def.provenance || {};
+    if (def.source !== 'secondary') bad('physics-meta', 'source', 'a dataset with published (catalogue) data must say source: "secondary"');
+    for (const k2 of ['source', 'url', 'retrieved', 'taken', 'transformations']) if (!isText(pv[k2])) bad('physics-meta', `provenance.${k2}`, 'secondary data need their provenance: source, url, retrieved (date), taken (which values) and transformations');
+  }
+  for (const [k2, c] of catalogue) {
+    const where = `column ${k2}`;
+    if (!c.model || !c.model.law) bad('physics-meta', `${where}.model`, 'published data must be compared with a model built from a vetted law');
+    if (!Array.isArray(c.expect) || c.expect.length !== 2) bad('physics-meta', `${where}.expect`, 'give the expected range of values');
+    if (!(c.agree > 0 && c.agree <= 0.05)) bad('physics-meta', `${where}.agree`, 'state how closely the published values should follow the model (0 < agree <= 0.05)');
+    if (!isText(c.agreeReason)) bad('physics-meta', `${where}.agreeReason`, 'explain why the published values may differ from the simple model');
+    const setCol = Object.values(def.columns).find((x) => x.kind === 'set');
+    if (!Array.isArray(c.values) || !setCol || c.values.length !== setCol.values.length) bad('physics-meta', `${where}.values`, 'needs one published value per row');
+  }
   if (!ok) return false;
 
   // Evaluate the model on noise-free data: units, magnitude, and the analysis recovering the parameters.
@@ -486,7 +636,7 @@ function checkPhysics(def, fail) {
     fail(e.code || 'physics-units', 'physics model', e.message);
     return false;
   }
-  for (const [where, c] of measured) {
+  for (const [where, c] of [...measured, ...catalogue.map(([k2, c]) => [`column ${k2}`, c])]) {
     const key = where.split(' ')[1];
     const vals = where.startsWith('single') ? [ideal.singles[key]] : ideal.rows.map((r) => r[key]);
     const [lo, hi] = c.expect;
@@ -504,7 +654,10 @@ function checkPhysics(def, fail) {
       // Compare in SI units (a result may be in g m⁻¹ while the parameter is in kg m⁻¹), with the same dimensions.
       const [ru, pu] = [parseUnit(res.unit || ''), parseUnit(def.physics.params[res.estimates].unit || '')];
       if (!sameDim(ru.dim, pu.dim)) { fail('physics-units', `result ${name}`, `is in ${ru.text || 'no unit'}, which can't be compared with ${res.estimates} in ${pu.text || 'no unit'}`); continue; }
-      if (Math.abs(toSI(d.r[name].value, ru) - toSI(truth, pu)) > tol * Math.abs(toSI(truth, pu))) {
+      // Tolerance scale: the size of the value in SI, or in its own unit when that is larger (absolute zero is
+      // 0 K but −273.15 °C, so a relative tolerance in kelvin alone would be zero).
+      const scale = Math.max(Math.abs(toSI(truth, pu)), Math.abs(truth * pu.scale));
+      if (Math.abs(toSI(d.r[name].value, ru) - toSI(truth, pu)) > tol * scale) {
         fail('physics-inversion', `result ${name}`, `with noise-free data, the analysis should recover ${res.estimates} exactly, so the analysis formula isn't the inverse of the physics model`,
           { expected: `${sigFig(truth, 4)} ${parseUnit(def.physics.params[res.estimates].unit).text}`.trim(), got: `${sigFig(d.r[name].value, 4)} ${parseUnit(res.unit || '').text}`.trim() });
       }
@@ -544,9 +697,10 @@ export function scaleFromTicks(ticks) {
 }
 
 function checkGraph(fig, def, d, rows, fail) {
-  const g = def.graph;
-  const kind = fig.figure === 'graph' ? 'student' : 'examiner';
-  const where = kind === 'student' ? 'graph' : 'mark-scheme graph';
+  const raw = fig.figure === 'graph-raw';
+  const g = raw ? def.rawGraph : def.graph;
+  const kind = fig.figure === 'graph' || raw ? 'student' : 'examiner';
+  const where = raw ? 'raw-data graph' : kind === 'student' ? 'graph' : 'mark-scheme graph';
   const G = parseGraph(fig.svg);
   const [cx, cy] = [def.columns[g.x], def.columns[g.y]];
   const titleOf = (c) => `${c.symbolText || c.symbol}${parseUnit(c.unit || '').text ? ' / ' + parseUnit(c.unit || '').text : ''}`;
@@ -558,7 +712,7 @@ function checkGraph(fig, def, d, rows, fail) {
   if (!X.even || !Y.even) fail('graph-scale', where, 'tick labels are not evenly spaced');
   const inBox = (px, py) => px >= G.box.l - 0.5 && px <= G.box.r + 0.5 && py >= G.box.t - 0.5 && py <= G.box.b + 0.5;
 
-  const want = rows.map((_, i) => i).filter((i) => kind === 'examiner' || !(g.omit || []).includes(i));
+  const want = rows.map((_, i) => i).filter((i) => kind === 'examiner' || raw || !(g.omit || []).includes(i));
   const got = G.points.map((pt) => pt.row);
   for (const i of want) if (!got.includes(i)) fail('graph-point', where, `the point for table row ${i + 1} is missing`);
   for (const i of got) if (!want.includes(i)) fail('graph-point', where, `the graph shows table row ${i + 1}, which should be left for students to plot`);

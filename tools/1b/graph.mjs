@@ -59,8 +59,10 @@ export function renderGraph(spec) {
   const { W, H, l, r, t, b } = BOX;
   const pw = W - l - r;
   const ph = H - t - b;
-  const xs = niceScale(Math.min(...points.map((p) => p.x - (p.ex || 0))), Math.max(...points.map((p) => p.x + (p.ex || 0))), x.includeZero);
-  const ys = niceScale(Math.min(...points.map((p) => p.y - (p.ey || 0))), Math.max(...points.map((p) => p.y + (p.ey || 0))), y.includeZero);
+  // An axis may be extended to include a stated range (x.range, y.range), e.g. to extrapolate to an intercept.
+  const ext = (ax, lo, hi) => (ax.range ? [Math.min(lo, ax.range[0]), Math.max(hi, ax.range[1])] : [lo, hi]);
+  const xs = niceScale(...ext(x, Math.min(...points.map((p) => p.x - (p.ex || 0))), Math.max(...points.map((p) => p.x + (p.ex || 0)))), x.includeZero);
+  const ys = niceScale(...ext(y, Math.min(...points.map((p) => p.y - (p.ey || 0))), Math.max(...points.map((p) => p.y + (p.ey || 0)))), y.includeZero);
   const X = (v) => r1(l + ((v - xs.min) / (xs.max - xs.min)) * pw);
   const Y = (v) => r1(t + ph - ((v - ys.min) / (ys.max - ys.min)) * ph);
   const out = [`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${escapeAttr(alt)}" data-graph="${kind}">`];

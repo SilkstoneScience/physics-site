@@ -1,5 +1,8 @@
 # Paper 1B handoff (for the next Claude Code session)
 
+> **SUPERSEDED (6 October 2026).** This file records the state before the specification, the pilot fixes and Batch 1.
+> For the current state and the next action, read **`docs/PAPER1B_PROJECT_STATUS.md`** first. This file is kept for history.
+
 Written 6 October 2026 on the teacher's first computer, after inspecting the repository and git state.
 This file is in `docs/`, which `_config.yml` keeps off the published website.
 

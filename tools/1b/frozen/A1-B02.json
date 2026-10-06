@@ -1,0 +1,231 @@
+{
+  "id": "A1-B02",
+  "topic": "A.1",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 1,
+  "skills": [
+    "outlier",
+    "repeated-readings",
+    "mean-and-half-range",
+    "speed",
+    "effect-of-an-outlier"
+  ],
+  "context": "experimental",
+  "seed": 31,
+  "physics": {
+    "scenario": "A trolley is released from rest at a mark on a ramp and runs down through a light gate. A card of length L on the trolley interrupts the beam; an electronic timer records the time t for which the beam is blocked. The run is repeated seven times.",
+    "principles": [
+      "Average speed = distance ÷ time (A.1): the card of length L passes the gate in time t, so v = L/t"
+    ],
+    "assumptions": [
+      "The trolley's speed hardly changes while the 10 cm card passes through the beam, so L/t is its speed at the gate",
+      "The trolley is released from rest at the same mark each time",
+      "The timer starts and stops exactly when the card's edges cross the beam"
+    ],
+    "derivation": [
+      "The card moves its own length L while the beam is blocked: t = L/v, so v = L/t̄ from the mean time"
+    ],
+    "relationship": "t = L/v",
+    "params": {
+      "L": {
+        "value": 0.1,
+        "unit": "m",
+        "range": [
+          0.05,
+          0.2
+        ],
+        "note": "card length, stated as (10.0 ± 0.1) cm"
+      },
+      "v": {
+        "value": 0.49,
+        "unit": "m s^-1",
+        "range": [
+          0.2,
+          2
+        ],
+        "note": "speed at the gate after rolling down a gentle ramp"
+      }
+    }
+  },
+  "models": {
+    "n": {
+      "kind": "set",
+      "unit": "",
+      "values": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "resolution": 1
+    },
+    "t": {
+      "kind": "measured",
+      "unit": "s",
+      "model": {
+        "law": "gate-time",
+        "inputs": {
+          "L": "p.L",
+          "v": "p.v"
+        }
+      },
+      "noise": {
+        "type": "gauss-relative",
+        "sd": 0.008
+      },
+      "resolution": 0.001,
+      "anomaly": {
+        "row": 4,
+        "shift": -0.024
+      },
+      "uncertainty": 0.001
+    }
+  },
+  "laws": {
+    "gate-time": {
+      "statement": "t = L/v (speed = distance / time; the speed is taken as constant while the card passes the gate)",
+      "inputs": {
+        "L": "m",
+        "v": "m s^-1"
+      },
+      "output": "s",
+      "f": "({ L, v }) => L / v"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "n": 1,
+        "t": 0.205
+      },
+      {
+        "n": 2,
+        "t": 0.205
+      },
+      {
+        "n": 3,
+        "t": 0.203
+      },
+      {
+        "n": 4,
+        "t": 0.207
+      },
+      {
+        "n": 5,
+        "t": 0.18
+      },
+      {
+        "n": 6,
+        "t": 0.204
+      },
+      {
+        "n": 7,
+        "t": 0.203
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "t": [
+        0.001,
+        0.001,
+        0.001,
+        0.001,
+        0.001,
+        0.001,
+        0.001
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student releases a trolley from rest at a mark on a ramp. The trolley runs down the ramp and through a light gate. A card of length $L = (10.0 \\pm 0.1)\\ \\text{cm}$ fixed to the trolley blocks the light beam, and a timer records the time $t$ for which the beam is blocked.</p><p>The student repeats the run seven times. The results are shown in the table.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"n\"><span class=\"h-name\">trial</span>$n$</th><th scope=\"col\" data-col=\"t\"><span class=\"h-name\">time</span>$t$ / s ± 0.001</th></tr></thead><tbody><tr><td data-col=\"n\" data-row=\"0\">1</td><td data-col=\"t\" data-row=\"0\">0.205</td></tr><tr><td data-col=\"n\" data-row=\"1\">2</td><td data-col=\"t\" data-row=\"1\">0.205</td></tr><tr><td data-col=\"n\" data-row=\"2\">3</td><td data-col=\"t\" data-row=\"2\">0.203</td></tr><tr><td data-col=\"n\" data-row=\"3\">4</td><td data-col=\"t\" data-row=\"3\">0.207</td></tr><tr><td data-col=\"n\" data-row=\"4\">5</td><td data-col=\"t\" data-row=\"4\">0.180</td></tr><tr><td data-col=\"n\" data-row=\"5\">6</td><td data-col=\"t\" data-row=\"5\">0.204</td></tr><tr><td data-col=\"n\" data-row=\"6\">7</td><td data-col=\"t\" data-row=\"6\">0.203</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {}
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Identify the trial that should not be used in the analysis. Justify your answer using the data.",
+      "marks": 2,
+      "markscheme": [
+        "Trial 5 ($t = 0.180\\ \\text{s}$) ✓",
+        "It is about 0.025 s shorter than the mean of the other trials, much more than their spread (they lie within about $\\pm 0.002\\ \\text{s}$ of each other) ✓"
+      ]
+    },
+    {
+      "label": "b",
+      "question": "Suggest one cause of this reading that is consistent with its value.",
+      "marks": 1,
+      "markscheme": [
+        "The time is too short, so the trolley was moving faster than in the other runs: for example it was released from above the mark, or it was pushed as it was released ✓"
+      ]
+    },
+    {
+      "label": "c",
+      "question": "Calculate the mean time $\\bar{t}$ of the remaining trials.",
+      "marks": 1,
+      "markscheme": [
+        "$\\bar{t} = 0.205\\ \\text{s}$ ✓"
+      ],
+      "numeric": {
+        "answer": 0.20450000000000002,
+        "unit": "$\\text{s}$",
+        "source": "tMean"
+      }
+    },
+    {
+      "label": "d",
+      "question": "Determine the absolute uncertainty in $\\bar{t}$, using the spread of the remaining readings.",
+      "marks": 1,
+      "markscheme": [
+        "Half the range of the remaining readings: $\\pm 0.0020\\ \\text{s}$ (accept 0.002 s) ✓"
+      ],
+      "numeric": {
+        "answer": 0.001999999999999988,
+        "range": [
+          0.0014999999999999879,
+          0.002499999999999988
+        ],
+        "unit": "$\\text{s}$",
+        "source": "dtHalf"
+      }
+    },
+    {
+      "label": "e",
+      "question": "Determine the speed $v$ of the trolley as it passes through the light gate.",
+      "marks": 2,
+      "markscheme": [
+        "$v = \\dfrac{L}{\\bar{t}}$ with $L$ in metres ✓",
+        "$v = 0.489\\ \\text{m s}^{-1}$ (allow ECF from (c)) ✓"
+      ],
+      "numeric": {
+        "answer": 0.4889975550122249,
+        "unit": "$\\text{m}\\,\\text{s}^{-1}$",
+        "source": "v",
+        "mistakes": [
+          {
+            "value": 48.899755501222494,
+            "feedback": "Convert the card length to metres before dividing."
+          }
+        ]
+      }
+    },
+    {
+      "label": "f",
+      "question": "State and explain the effect on the value of $v$ if trial 5 had been included.",
+      "marks": 1,
+      "markscheme": [
+        "The mean time would be smaller, so $v$ would be larger (by about 2 %) and would not represent a release from the mark ✓"
+      ]
+    }
+  ]
+}
