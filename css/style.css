@@ -107,6 +107,18 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 .site-footer { border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
 .site-footer .inner { max-width: var(--max); margin: 0 auto; padding: 16px; }
 .site-footer .copyright { display: block; margin-top: 6px; }
+/* Contact form on the About page */
+.contact-form { display: grid; gap: 12px; max-width: 560px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin: 12px 0; }
+.contact-form label { display: grid; gap: 4px; font-weight: 600; }
+.contact-form small { font-weight: 400; color: var(--muted); font-size: 0.82rem; }
+.contact-form textarea { resize: vertical; min-height: 120px; }
+.contact-form .button { justify-self: start; }
+.contact-form .button:disabled { opacity: 0.6; cursor: wait; }
+.contact-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.contact-status { margin: 0; font-weight: 600; min-height: 1.4em; }
+.contact-status.ok { color: var(--good); }
+.contact-status.error { color: var(--bad); }
+.contact-privacy { font-size: 0.85rem; color: var(--muted); }
 
 /* ===== Cards and grids ===== */
 .card-grid { list-style: none; padding: 0; margin: 16px 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }

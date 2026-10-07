@@ -130,7 +130,7 @@ This folder (`physics-site`) is a static website for IB DP Physics students, hos
 
 ## Home page and About page
 - **Joke of the day** (`index.html`): the jokes are in `js/jokes.js` as `{ q, a }` pairs; `js/site.js` picks a random one on each load (never the same as last time on that device) and the "Reveal the answer" button shows the punchline. Use well-known published jokes (the teacher's choice), mostly physics. Keep them safe for school: no flirting, alcohol, rude or unkind jokes.
-- **About page** (`about.html`): no photo of the teacher (removed at the user's request, October 2026; don't add one back unless asked). The dogs' photo stays. Only general professional details: never phone, email, date of birth, address, QTS number or referees.
+- **About page** (`about.html`): no photo of the teacher (removed at the user's request, October 2026; don't add one back unless asked). The dogs' photo stays. Only general professional details: never phone, email, date of birth, address, QTS number or referees. People contact the teacher through the **Contact me** form (`about.html#contact`), which sends to Formspree (form `xljggdak`, free plan: 50 messages a month) without showing the teacher's email; the sending code is in `js/site.js` (`form[data-formspree]`). The footer's "ask me" and the copyright section link to it.
 
 ## Previewing
 - Double-click `preview.bat` (or run `powershell -ExecutionPolicy Bypass -File tools/preview.ps1`), then open http://localhost:8000. A preview server is needed because browsers block the question bank from loading JSON files when a page is opened straight from disk.
