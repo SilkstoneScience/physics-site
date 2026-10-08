@@ -23,7 +23,7 @@ teacher decision.
 | Item | State (8 October 2026) |
 |---|---|
 | Production | **`main` is production.** GitHub Pages publishes `main` |
-| `main` | `4ca0f74` "Merge contact form on the About page" (7 October 2026), **pushed** (local = GitHub). Batch 1 reached `main` in `a9f8c58`; the 26 later commits are general website work (EE page, Resources, guiding questions, photos, copyright notice, contact form) and don't touch Paper 1B (`questions/1b.json` and `tools/1b/` are unchanged since `a9f8c58`) |
+| `main` | **Batch 2 is live (8 October 2026).** Merged in `d5d0a4c` ("Merge paper1b-batch2: Paper 1B Batch 2 …"), then `98b238c` (fingerprints independent of line endings, which fixed the GitHub check), then this documentation update. 20 approved datasets are published. Earlier production commits: `4ca0f74` (7 October), Batch 1 in `a9f8c58` |
 | Batch 1 | **Live.** Merged into `main` and pushed |
 | Approved Paper 1B datasets | **On `main`: 13** (5 pilots + 8 Batch 1, the 6 October versions). **On `paper1b-batch2`: 20** (the 13, with A2-B01, A2-B02, B3-B01, C1-B01 and C4-B01 changed and re-approved on 8 October, plus the 7 Batch 2 datasets accepted on 8 October 2026). `main` gets them only when the teacher authorises a merge |
 | Tests / checker | Phase 14 (8 October 2026, on `paper1b-batch2`): **729 of 729** Paper 1B tests pass; build: 20 APPROVED, 0 in the preview; site checker: no errors |
@@ -32,7 +32,7 @@ teacher decision.
 
 | Branch | Commit | Role |
 |---|---|---|
-| `main` | `4ca0f74` | Production. Never develop on it directly |
+| `main` | contains all of `paper1b-batch2` (8 October 2026) | Production. Never develop on it directly |
 | `paper-1b` | `a3fa896` (local = GitHub) | **Historical** Batch 1 development branch. Its work is fully contained in `main`. Keep it; don't develop on it any more |
 | `paper1b-batch2` | contains `main` at `4ca0f74` | **Current** branch for Batch 2 development, on GitHub. Created from `main` at `a9f8c58` on 6 October 2026; production `main` (`4ca0f74`) merged in on 8 October 2026 |
 
@@ -40,7 +40,7 @@ teacher decision.
 
 - **Generated, reviewed and accepted** on `paper1b-batch2`: 7 datasets, 62 marks, all **inspected individually by the teacher** and approved by batch acceptance (`batch-2`, no waivers). Details in section 3a.
 - **C2-B01 (LED tube) was withdrawn** by the teacher as too complicated for students; it is kept, unbuilt, in `tools/1b/withdrawn/`.
-- **Not in production yet:** `main` (the live site) still has the 13 datasets of 6 October. Merging is a separate teacher decision.
+- **In production since 8 October 2026:** merged into `main` and pushed; the GitHub check passes on both branches.
 - Plan: `docs/PAPER1B_BATCH2_PLAN.md`; tooling: `docs/PAPER1B_PHASE12_TOOLING.md` (Phase 12) and section 5 below (Phase 14 additions).
 
 For a short, step-by-step resume guide, see **`docs/PAPER1B_CONTINUATION.md`**.
@@ -241,7 +241,7 @@ Assumes the repository is cloned, Node.js is installed (`winget install OpenJS.N
 2. **Per-computer setup:** create `CLAUDE.local.md` (not in git) recording where `physics-source` and the reference cache are on that computer (see `CLAUDE.md`).
 3. **Dependencies:** none to install.
 4. **Run the tests:** `node tools/1b/test.mjs` (expect "All 729 Paper 1B tests passed", or more if tests were added).
-5. **Build the Paper 1B files:** `node tools/1b/build.mjs`. It should end with "Production (questions/1b.json): 20 APPROVED dataset(s)" (13 on `main` until the Batch 2 merge) and rebuild the local preview, which isn't stored in git.
+5. **Build the Paper 1B files:** `node tools/1b/build.mjs`. It should end with "Production (questions/1b.json): 20 APPROVED dataset(s)" and rebuild the local preview, which isn't stored in git.
 6. **Run the site checker:** `node tools/check.mjs` (expect "No errors").
 7. **Start the preview:** double-click `preview.bat` (or the PowerShell command above), then open http://localhost:8000.
 8. **Inspect one question:** http://localhost:8000/questions.html?paper=1B&q=D1-B01 (change the ID). Non-approved datasets show "Preview only: STATUS" and appear only on localhost.
@@ -366,5 +366,5 @@ When you return, in this order (detailed commands in `docs/PAPER1B_CONTINUATION.
 7. ~~**Automated QA and independent audit**~~: done; 729 tests, build, batch plan, AO report, site checker all pass.
 8. ~~**Teacher review**~~: all 7 inspected individually; changes in section 3a.
 9. ~~**Accept Batch 2**~~: accepted by the teacher on 8 October 2026 (`batches.batch-2`).
-10. **NEXT: merge `paper1b-batch2` into `main` and push**, only on the teacher's instruction, after `node tools/1b/test.mjs`, `node tools/1b/build.mjs` and `node tools/check.mjs` pass again on the branch and again on `main` after the merge. On a computer without the reference cache, the three source-copy checks (B2-B01, E1-B01, E4-B01, as for D1-B01) give warnings, not errors.
-11. Then plan Batch 3 (section 7).
+10. ~~**Merge `paper1b-batch2` into `main` and push**~~: done 8 October 2026 (`d5d0a4c`, fix `98b238c`), after the tests, build and checker passed on the branch and again on `main`. The first push failed the GitHub check (a line-ending difference in the A2-B03 fingerprint); fixed, A2-B03 re-approved, and both branches pass. GitHub workflow actions updated to v5 (the Node.js 20 notice).
+11. **NEXT:** when the teacher decides to generate more questions, plan Batch 3 (section 7 and section 3a); the pilot fixes listed in section 3a are for later.
