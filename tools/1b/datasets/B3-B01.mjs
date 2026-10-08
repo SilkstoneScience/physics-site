@@ -1,7 +1,8 @@
 // B.3 Pressure of a fixed volume of air against Celsius temperature, extrapolated to estimate absolute zero
 // (archetypes L2, G3 and V3).
 // Skills: testing proportionality from the table, extrapolating a line to an intercept, why the extrapolated value is
-// uncertain, judging agreement with the accepted value using the max/min lines, predicting at an unmeasured temperature.
+// uncertain, judging agreement with the accepted value from the range given by the max/min lines (stated in (d), because
+// the ±0.5 kPa uncertainty is too small to draw on this extended axis: Phase 12), predicting at an unmeasured temperature.
 
 const T_PREDICT = 100; // boiling water
 
@@ -18,6 +19,8 @@ export default {
   batch: 'batch-1',
   archetypes: ['L2', 'G3', 'V3'],
   apparatus: 'flask of air in a water bath with a Bourdon pressure gauge',
+  contextFamily: 'gas-pressure',
+  contextObjects: ['pressure-gauge', 'water-bath'],
   originality: 'The constant-volume gas experiment is a standard practical. Nov 2016 Paper 3 Q2 used a pressure–temperature graph in '
     + 'kelvin to ask about units and the expected shape for a second gas; this dataset instead uses Celsius data, a table ratio test, '
     + 'an extrapolation to absolute zero with its uncertainty from the max/min lines, and a prediction. Own numbers and sequence.',
@@ -57,7 +60,10 @@ export default {
       noise: { type: 'gauss', sd: 0.2 }, resolution: 0.5, uncertainty: 0.5,
     },
   },
-  graph: { x: 'theta', y: 'p', fit: 'linear', band: true, xErrorBars: true, zero: { y: true }, xRange: [-300, 100] },
+  // errorBars 'too-small': ±0.5 kPa is about 1 unit on this extended axis, so no bars are drawn and the caption states it (P1).
+  // xErrorBars keeps the ±0.5 °C temperature uncertainty in the max/min lines (it is real and moves the intercept range from
+  // −277…−262 °C to −285…−255 °C); nothing is drawn for it (Phase 12: y error bars only are drawn).
+  graph: { x: 'theta', y: 'p', fit: 'linear', band: true, xErrorBars: true, zero: { y: true }, xRange: [-300, 100], errorBars: 'too-small' },
 
   results: {
     gradient: { unit: 'kPa Δ°C^-1', dims: { of: 'y/x' }, check: 'gradient', value: (d) => d.fit.m },
@@ -110,10 +116,11 @@ export default {
       },
       {
         label: 'b', marks: 3, ao: { AO2: 2, AO3: 1 }, msFigure: 'graph-ms',
+        reads: [{ figure: 'graph', x: d.r.absZero.value, y: 0 }],
         question: 'Draw the line of best fit and extend it to $p = 0$. Hence determine the temperature at which the pressure of the air would be zero, according to these data.',
         numeric: d.num('absZeroAnswer'),
         markscheme: [
-          'Line of best fit drawn through the error bars and extended to the $\\theta$ axis ✓',
+          'Line of best fit drawn through the points and extended to the $\\theta$ axis ✓',
           'Reads the intercept, or calculates it from the gradient and the intercept on the $p$ axis ✓',
           `About ${d.int(d.r.absZero.value)} °C (accept ${d.int(d.r.absZeroAnswer.range[0])} to ${d.int(d.r.absZeroAnswer.range[1])} °C) ✓`,
         ],
@@ -123,16 +130,18 @@ export default {
         question: 'Explain why the uncertainty in your answer to (b) is much larger than the uncertainty in each temperature reading.',
         markscheme: [
           `The line is extended a long way beyond the data (from ${d.text('theta', 0)} °C to about ${d.int(d.r.absZero.value)} °C) ✓`,
-          `A small change of gradient, still within the error bars, moves the intercept a long way: the steepest and shallowest lines give about ${d.int(aLo)} °C to ${d.int(aHi)} °C ✓`,
+          'A small change of gradient, still consistent with the uncertainty in $p$, moves the intercept a long way (by tens of degrees) ✓',
         ],
       },
       {
         label: 'd', marks: 1, ao: 'AO3',
-        question: `Comment on whether the result is consistent with the accepted value of absolute zero, $${d.stated('accepted')}\\ {}^{\\circ}\\text{C}$.`,
-        markscheme: [`${d.stated('accepted')} °C lies within the range ${d.int(aLo)} °C to ${d.int(aHi)} °C given by the steepest and shallowest lines, so the result is consistent with it (award for a conclusion consistent with the candidate's own range) ✓`],
+        asks: { conclusion: ['is consistent', 'lies within'] },
+        question: `The steepest and shallowest straight lines that fit the data within their uncertainties meet the $\\theta$ axis at ${d.int(aLo)} °C and ${d.int(aHi)} °C. Comment on whether the result is consistent with the accepted value of absolute zero, $${d.stated('accepted')}\\ {}^{\\circ}\\text{C}$.`,
+        markscheme: [`${d.stated('accepted')} °C lies within the range ${d.int(aLo)} °C to ${d.int(aHi)} °C, so the result is consistent with it ✓`],
       },
       {
         label: 'e', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        reads: [{ figure: 'graph', x: T_PREDICT, y: d.r.pred.value }],
         question: 'The flask is then placed in boiling water at 100 °C. Predict the reading of the pressure gauge.',
         numeric: d.num('pred'),
         markscheme: [

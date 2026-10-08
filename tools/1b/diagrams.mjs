@@ -227,3 +227,28 @@ function symbol(type, cx, cy) {
       throw new Error(`circuit: unknown component type ${type}`);
   }
 }
+
+// ----- Instrument scale to read (T8, Phase 12) -----
+// A straight scale (a spectroscope's wavelength scale, a ruler, a meter's dial drawn straight) with lines or pointers
+// marked on it at the dataset's values. Students read the marks themselves, so the validator reads them back:
+//   labels       <text class="sx" x=… …>value</text>          (evenly spaced, as on the instrument)
+//   small ticks  <line class="scale-minor" x1=… …/>           (one per smallest division)
+//   marks        <line class="l1 scale-mark" data-mark="i" x1=… …/>   (i = the row whose value it shows)
+// opts: { min, max, major, minor, title, marks: [{ value, row }], width = 560 }
+export function scaleReading(alt, { min, max, major, minor, title, marks, width = 560 }) {
+  const [x0, x1, yAxis] = [40, width - 40, 92];
+  const X = (v) => r1(x0 + ((v - min) / (max - min)) * (x1 - x0));
+  const parts = [`<line class="l3 thin" x1="${x0}" y1="${yAxis}" x2="${x1}" y2="${yAxis}"/>`];
+  const nMinor = Math.round((max - min) / minor);
+  const dp = Math.max(0, -Math.floor(Math.log10(major) + 1e-9));
+  for (let i = 0; i <= nMinor; i++) {
+    const v = Number((min + i * minor).toPrecision(12));
+    const isMajor = Math.abs(v / major - Math.round(v / major)) < 1e-9;
+    parts.push(isMajor ? `<line class="l3 thin scale-major" x1="${X(v)}" y1="${yAxis}" x2="${X(v)}" y2="${yAxis + 14}"/>` : '');
+    parts.push(`<line class="axis scale-minor" x1="${X(v)}" y1="${yAxis}" x2="${X(v)}" y2="${yAxis + 8}"/>`);
+    if (isMajor) parts.push(`<text class="sx" x="${X(v)}" y="${yAxis + 34}" text-anchor="middle" font-size="16">${v.toFixed(dp)}</text>`);
+  }
+  for (const m of marks) parts.push(`<line class="l1 scale-mark" data-mark="${m.row}" x1="${X(m.value)}" y1="${yAxis - 62}" x2="${X(m.value)}" y2="${yAxis}"/>`);
+  parts.push(`<text x="${r1((x0 + x1) / 2)}" y="${yAxis + 58}" text-anchor="middle" font-size="16">${title}</text>`);
+  return svg(width, 160, alt, parts.join(''));
+}

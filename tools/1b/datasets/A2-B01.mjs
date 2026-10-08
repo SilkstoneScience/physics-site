@@ -15,6 +15,8 @@ export default {
   batch: 'batch-1',
   archetypes: ['E1', 'L2'],
   apparatus: 'spring with a hanger and slotted masses beside a metre rule',
+  contextFamily: 'elastic-stretching',
+  contextObjects: ['spring', 'slotted-masses', 'metre-rule'],
   originality: 'Hooke\'s-law springs are a standard practical, but no legacy Section A or 2025 Paper 1B question builds a question on '
     + 'an unrecorded hanger weight. Zero errors in legacy papers concern meters and microphones (May 2017 TZ2, May 2024 TZ1); this '
     + 'one is in the independent variable and is used to find a physical quantity. Own numbers and sequence.',
@@ -57,9 +59,17 @@ export default {
         noise: 'judging the end of the spring against the scale (parallax, small bouncing): normal scatter with standard deviation 0.4 mm',
       },
       noise: { type: 'gauss', sd: 0.4 }, resolution: 1, uncertainty: 1,
+      // T2 finds that 4 of the 5 steps are exactly 20 mm. Tried in Phase 12: a scatter of 0.7 mm (more pessimistic) breaks
+      // the independent audit's recovery of k within the ±1 mm max/min lines, so the declared 0.4 mm stays.
+      regularity: {
+        accept: ['equal-steps'],
+        reason: 'A metre rule read to the nearest millimetre with a scatter (0.4 mm) below one division: an ideal spring then reads '
+          + 'exactly 20 mm more for most 0.5 N steps, as a real ruler would show. Flagged in the Batch 1 retrospective; the teacher decides.',
+      },
     },
   },
-  graph: { x: 'F', y: 'x', fit: 'linear', band: true, zero: { x: true, y: true } },
+  // errorBars 'too-small': ±1 mm is under 1 % of the axis, so bars would hide under the markers; the caption states it (P1).
+  graph: { x: 'F', y: 'x', fit: 'linear', band: true, zero: { x: true, y: true }, errorBars: 'too-small' },
 
   results: {
     gradient: { unit: 'mm N^-1', dims: { of: 'y/x' }, check: 'gradient', value: (d) => d.fit.m, range: (d, v) => d.widen(d.gradientRange(), v, 0.04) },
@@ -99,10 +109,11 @@ export default {
     return [
       {
         label: 'a', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        reads: [{ figure: 'graph', x: 0, y: d.r.intercept.value }],
         question: 'Hooke\'s law suggests that $x$ is proportional to $F$. Explain how the graph shows that the student\'s values of $x$ are not proportional to $F$.',
         markscheme: [
-          'The points lie on a straight line, within their error bars ✓',
-          `No straight line through all the error bars passes through the origin: the line meets the extension axis (at $F = 0$) at about ${d.sf(d.r.intercept.value, 2)} mm ✓`,
+          'The points lie on a straight line (each extension is uncertain by only ±1 mm) ✓',
+          `The line does not pass through the origin: it meets the extension axis (at $F = 0$) at about ${d.sf(d.r.intercept.value, 2)} mm, far more than the ±1 mm uncertainty ✓`,
         ],
       },
       {
@@ -124,6 +135,7 @@ export default {
       },
       {
         label: 'd', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        reads: [{ figure: 'graph', x: 0, y: d.r.intercept.value }],
         question: 'Use the graph to determine the mass $m_h$ of the hanger.',
         numeric: d.num('mh'),
         markscheme: [

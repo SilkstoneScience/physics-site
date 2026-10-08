@@ -8,10 +8,19 @@ import {
   linearFit, stripTags, cross, decimalsOf, toSI, baseUnitExpr, valuePm, gradientBand, sciParts,
 } from './lib.mjs';
 import { normalizeAO } from './ao.mjs';
-import { generateRows, makeContext, uncertaintyOf, columnDp, paramValues, modelValue, evalModel, perRowUncertainty, buildQuestion } from './generate.mjs';
+import { generateRows, makeContext, uncertaintyOf, columnDp, paramValues, modelValue, evalModel, perRowUncertainty, buildQuestion, tableHtml } from './generate.mjs';
 import { LAWS } from './laws.mjs';
 import { createRequire } from 'node:module';
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 import { applySystematic, checkSystematic } from './systematic.mjs';
+import {
+  regularityFindings, VISIBLE_BAR, X_ERROR_BARS_ALLOWED, READ_PHRASES, axisRanges, visibleSequence, valueTokens, hasToken,
+  constancy, successiveRatios, multiplesProblems,
+} from './safeguards.mjs';
+import { MARKER_R } from './graph.mjs';
 
 const generateRowsSafe = (def) => { try { return generateRows(def, { ideal: true }).rows; } catch (e) { return []; } };
 
@@ -40,6 +49,20 @@ export function validateDataset(def, q, { topics, traced, meta } = {}) {
     checkPartMeta(def, q, meta || buildQuestion(def).meta, d, fail);
   } catch (e) {
     fail('crash', 'part metadata', `couldn't check the parts' AO tags and asks: ${e.message}`);
+  }
+  // Published values against a stored copy of the source (T10).
+  try {
+    checkProvenance(def, fail, warn);
+  } catch (e) {
+    fail('crash', 'provenance', `couldn't check the source values: ${e.message}`);
+  }
+  // Graph reads (T3) and giveaways (T4): from the question students see and the parts' metadata.
+  try {
+    const m = meta || buildQuestion(def).meta;
+    checkGraphReads(def, q, m, fail, warn);
+    checkGiveaways(def, q, m, d, fail, warn);
+  } catch (e) {
+    fail('crash', 'safeguards', `couldn't run the graph-read and giveaway checks: ${e.message}`);
   }
   // Numbers in the text: the generator records what its helpers printed (rebuilt here if not passed in).
   try {
@@ -71,7 +94,15 @@ function run(def, q, topics, fail, warn) {
   // ---------- 2. The table, read back cell by cell ----------
   const p = paramValues(def);
   const gen = generateRows(def);
-  const table = (q.data || []).find((x) => x.kind === 'table' && x.figure !== 'trials');
+  let table = (q.data || []).find((x) => x.kind === 'table' && x.figure !== 'trials');
+  if (def.tableless) {
+    // T7/T8 (Phase 12): data students see only as a graph or an instrument image. Everything below is checked against
+    // the generator's complete table (internal: never published), and the figure read-back checks compare what students
+    // see with those values. checkTableless makes sure every shown column can be read from a declared figure.
+    if (table) fail('table-header', 'table', 'the dataset says it has no student table (tableless), but the question shows one');
+    checkTableless(def, q, fail);
+    table = { kind: 'table', html: tableHtml(def, makeContext(def, gen.rows, gen.singles)) };
+  }
   if (!table) { fail('table-header', 'table', 'no data table'); return; }
   const heads = [...table.html.matchAll(/<th scope="col" data-col="(\w+)"( data-unc="1")?>(.*?)<\/th>/g)]
     .map((m) => ({ col: m[1], unc: !!m[2], html: m[3] }));
@@ -188,8 +219,10 @@ function run(def, q, topics, fail, warn) {
         // with the physics model to within the declared tolerance (e.g. 1 %), or the model is wrong for these data.
         const src = fmtNum(roundTo(c.values[i], c.resolution), dp);
         if (src !== cell.text) fail('catalogue', where, 'value differs from the published source', { expected: src, got: cell.text });
-        const model = modelValue(def, c, { params: p, row, singles: gen.singles }, `column ${k}`);
-        if (Math.abs(v - model) > c.agree * Math.abs(model)) fail('catalogue', where, `the published value differs from the physics model by more than ${c.agree * 100} %`, { expected: fmtNum(model, dp + 1), got: cell.text });
+        // An observed column (c.observed) is published data the question COMPARES with a model (e.g. Venus is far hotter
+        // than the no-atmosphere model): no agreement is expected, so only the source check (T10) applies.
+        const model = c.observed ? v : modelValue(def, c, { params: p, row, singles: gen.singles }, `column ${k}`);
+        if (!c.observed && Math.abs(v - model) > c.agree * Math.abs(model)) fail('catalogue', where, `the published value differs from the physics model by more than ${c.agree * 100} %`, { expected: fmtNum(model, dp + 1), got: cell.text });
       }
       if (c.kind === 'derived') {
         const want = fmtNum(roundTo(c.value(row, p, gen.singles), 10 ** -c.dp), c.dp);
@@ -212,6 +245,7 @@ function run(def, q, topics, fail, warn) {
     }
     rows.push(row);
   }
+  checkRegularity(def, rows, cells, p, gen.singles, fail, warn);
   for (const [k, s] of Object.entries(def.singles || {})) {
     const text = fmtNum(gen.singles[k], decimalsOf(s.resolution));
     if (!stripTags(q.stem).includes(text)) fail('stem-value', `single reading ${k}`, `the question text should give the reading ${text}`);
@@ -241,13 +275,15 @@ function run(def, q, topics, fail, warn) {
     let u;
     try { u = parseUnit(res.unit || ''); } catch (e) { fail('unit', where, e.message); continue; }
     if (res.dims && g) {
-      let want = { 'y/x': addDim(dimY, dimX, -1), y: dimY, x: dimX }[res.dims.of];
+      let want = { 'y/x': addDim(dimY, dimX, -1), y: dimY, x: dimX, xy: addDim(dimY, dimX, 1) }[res.dims.of];
       if (!want) { fail('unit-dims', where, `unknown dims.of "${res.dims.of}"`); continue; }
       if (res.dims.times) want = addDim(want, parseUnit(res.dims.times).dim);
       if (!sameDim(want, u.dim)) fail('unit-dims', where, `unit "${u.text}" has the wrong dimensions for ${res.dims.of}${res.dims.times ? ' × ' + res.dims.times : ''}`);
     }
     if (!Number.isFinite(r.value)) { fail('fit', where, 'value is not a finite number'); continue; }
     const show = (v) => `${sigFig(v, 4)} ${u.text}`.trim();
+    if (res.check === 'area') checkAreaResult(def, d, rows, res, r, where, q, fail);
+    if (res.check && !own && res.check !== 'area') fail('fit', where, `check "${res.check}" needs a fitted graph (fit: "linear" or "exponential")`);
     if (res.check && own) {
       const target = { gradient: own.m, minusGradient: -own.m, intercept: own.c, halfLife: own.halfLife }[res.check];
       const yRange = g ? Math.max(...rows.map((rw) => rw[g.y])) - Math.min(...rows.map((rw) => rw[g.y])) : 1;
@@ -366,6 +402,42 @@ function run(def, q, topics, fail, warn) {
     } else if (cl.type === 'trend') {
       const slope = g.fit === 'exponential' ? -own.k : own.m;
       if ((cl.direction === 'increasing') !== (slope > 0)) fail('claim', where, `the data aren't ${cl.direction}`);
+    } else if (cl.type === 'constantRatio' || cl.type === 'constantValue') {
+      // T5 (Phase 12). Students judge, from the table and the uncertainties, whether a quantity stays the same:
+      //   constantValue { column, rows?: [first, last], expect }  the values of one column (often a derived product
+      //                 or ratio such as I·d² or p/T), each with its uncertainty;
+      //   constantRatio { column, rows?, expect }  the ratio of each value to the one before (a geometric decay such
+      //                 as successive bounce heights), with its worst-case uncertainty (fractional uncertainties add).
+      // expect true: one value lies within every interval (the intervals share a common value).
+      // expect false: the intervals are clearly apart: the largest lower end exceeds the smallest upper end by at least
+      // VERDICT_MARGIN of the mean, so students' own rounding can't reverse the conclusion.
+      const c = def.columns[cl.column];
+      if (!c) { fail('claim', where, `names an unknown column ${cl.column}`); continue; }
+      const [i0, i1] = cl.rows || [0, rows.length - 1];
+      const vals = [];
+      for (let i = i0; i <= i1; i++) vals.push({ v: rows[i][cl.column], u: d.unc(cl.column, i) });
+      if (vals.some((x) => !(x.u > 0))) { fail('claim', where, 'every row needs an uncertainty, so "constant within the uncertainties" can be judged'); continue; }
+      const items = cl.type === 'constantRatio' ? successiveRatios(vals) : vals;
+      if (items.length < 3) { fail('claim', where, 'needs at least three values to judge'); continue; }
+      const k = constancy(items, VERDICT_MARGIN);
+      const what = cl.type === 'constantRatio' ? 'ratio' : 'value';
+      if (typeof cl.expect !== 'boolean') fail('claim', where, 'expect must be true or false');
+      else if (cl.expect && !k.constant) {
+        fail('claim', where, `the question says the ${what} is constant, but no single value lies within every uncertainty range`, { expected: 'overlapping ranges', got: `largest lower end ${sigFig(k.lo, 3)} > smallest upper end ${sigFig(k.hi, 3)}` });
+      } else if (!cl.expect && !k.clearlyNot) {
+        fail('claim', where, `the question says the ${what} is not constant, but the uncertainty ranges are not clearly apart (needs a gap of ${VERDICT_MARGIN * 100} % of the mean)`, { expected: `gap ≥ ${sigFig(VERDICT_MARGIN * Math.abs(k.mean), 2)}`, got: sigFig(k.lo - k.hi, 2) });
+      }
+    } else if (cl.type === 'integerMultiples') {
+      // T5 (Phase 12). { column, factor: result name or number, expect: true }: every value is a whole-number multiple
+      // (at least 1) of the factor within its uncertainty; each multiple is unambiguous (uncertainty under a quarter of
+      // the factor); and no LARGER common factor also fits (otherwise the data don't show this factor as the unit).
+      // A smaller factor (half, a third…) always fits multiples of the true one, so it can't be excluded by data alone:
+      // the question must not claim to exclude it.
+      const c = def.columns[cl.column];
+      const e = typeof cl.factor === 'string' ? (d.r[cl.factor] || {}).value : cl.factor;
+      if (!c || !(e > 0)) { fail('claim', where, 'needs a column and a positive factor (a number or a result name)'); continue; }
+      if (cl.expect !== true) { fail('claim', where, 'only expect: true is supported (the data are multiples of the factor)'); continue; }
+      for (const msg of multiplesProblems(rows.map((rw, i) => ({ q: rw[cl.column], u: d.unc(cl.column, i), label: `in row ${i + 1}` })), e, VERDICT_MARGIN)) fail('claim', where, msg);
     } else fail('claim', where, `unknown claim type "${cl.type}"`);
   }
 
@@ -401,12 +473,13 @@ function run(def, q, topics, fail, warn) {
   }
 
   // ---------- 6. Graphs must show exactly the data ----------
-  const figures = [...(q.data || []).filter((x) => x.kind === 'figure'), ...(q.parts || []).flatMap((pt) => [pt.figure, pt.msFigure].filter((f) => f && typeof f === 'object'))];
+  // Each figure once (a mark-scheme graph shown with several parts is checked once).
+  const figures = [...new Map([...(q.data || []).filter((x) => x.kind === 'figure'), ...(q.parts || []).flatMap((pt) => [pt.figure, pt.msFigure].filter((f) => f && typeof f === 'object'))].map((f) => [f.figure, f])).values()];
   if (def.rawGraph && !figures.some((f) => f.figure === 'graph-raw')) fail('graph-point', 'raw graph', "the dataset has a raw-data graph, but the question doesn't show it");
   if (g) {
     const student = figures.find((f) => f.figure === 'graph');
     if (!student) fail('graph-point', 'graph', 'the dataset has a graph, but the question doesn\'t show it');
-    for (const fig of figures.filter((f) => /data-graph=/.test(f.svg))) checkGraph(fig, def, d, rows, fail);
+    for (const fig of figures.filter((f) => /data-graph=/.test(f.svg))) checkGraph(fig, def, d, rows, fail, warn);
   }
 
   // ---------- 7. Diagrams and all SVG ----------
@@ -415,9 +488,313 @@ function run(def, q, topics, fail, warn) {
     const fig = figures.find((f) => f.figure === chk.figure);
     if (!fig) { fail('diagram', `figure ${chk.figure}`, 'diagram check names a figure that the question doesn\'t show'); continue; }
     if (chk.harmonic) checkStandingWave(fig, chk.harmonic, fail);
+    if (chk.scale) checkScale(fig, chk.scale, def, d, rows, fail, warn);
   }
   if (def.circuit) checkCircuit(def, figures.find((f) => f.figure === (def.circuit.figure || 'diagram')), fail);
   return d;
+}
+
+//// ---------- T10: published values against a stored copy of the source ----------
+// Secondary (published) data need, besides provenance.source/url/retrieved/taken/transformations:
+//   provenance.fields: { <column>: { sourceColumn, definition, scale? } }   for every catalogue column (and any other
+//       column taken from the source): the source's own column heading and what it means (D1-B01's lesson: JPL's "P"
+//       column is not the sidereal period). scale converts the source's unit to the column's (10³ km → km: 1000).
+//   provenance.extract: { file, sha256, rows: [source row name for each table row] }: a stored copy of the values as
+//       printed, kept OUTSIDE the repository in the reference cache (P1B_SOURCES, default ../reference-cache next to
+//       physics-site). Each value must equal the source's value (× scale) to within half the column's resolution, and the
+//       file must still have the recorded SHA-256 (so nobody edits the copy to match the data).
+// No extract: warning (the values can't be checked). Extract recorded but the file isn't on this computer (e.g. on
+// GitHub): warning. A changed file or a value that differs from the source: error.
+let SOURCES_DIR = process.env.P1B_SOURCES || fileURLToPath(new URL('../../../reference-cache/', import.meta.url));
+export const sourcesDir = () => SOURCES_DIR;
+// For tests only: point the check at another folder (returns the previous one).
+export function setSourcesDir(dir) { const old = SOURCES_DIR; SOURCES_DIR = dir; return old; }
+function checkProvenance(def, fail, warn) {
+  const catalogue = Object.entries(def.columns || {}).filter(([, c]) => c.kind === 'catalogue');
+  if (!catalogue.length && def.source !== 'secondary') return;
+  const pv = def.provenance || {};
+  const fields = pv.fields || {};
+  for (const [k] of catalogue) {
+    const f = fields[k];
+    if (!f || typeof f.sourceColumn !== 'string' || !f.sourceColumn.trim() || typeof f.definition !== 'string' || !f.definition.trim()) {
+      fail('provenance', `provenance.fields.${k}`, 'say which column of the source this is (sourceColumn, as headed there) and what it means (definition)');
+    }
+  }
+  const ex = pv.extract;
+  if (!ex) { warn('source-extract-missing', 'provenance.extract', 'no stored copy of the source values, so the published values can\'t be checked against the source'); return; }
+  const file = path.resolve(SOURCES_DIR, ex.file || '');
+  if (!ex.file || !fs.existsSync(file)) { warn('source-extract-unavailable', 'provenance.extract', `the stored copy of the source (${ex.file}) isn't on this computer, so the values weren't checked here`); return; }
+  const bytes = fs.readFileSync(file);
+  const hash = crypto.createHash('sha256').update(bytes).digest('hex');
+  if (hash !== ex.sha256) { fail('source-extract', 'provenance.extract', 'the stored copy of the source has changed since it was recorded', { expected: ex.sha256, got: hash }); return; }
+  let src;
+  try { src = JSON.parse(bytes.toString('utf8')); } catch (e) { fail('source-extract', 'provenance.extract', `the stored copy isn't valid JSON: ${e.message}`); return; }
+  const setCol = Object.values(def.columns).find((c) => c.kind === 'set');
+  const n = setCol ? setCol.values.length : 0;
+  if (!Array.isArray(ex.rows) || ex.rows.length !== n) { fail('source-extract', 'provenance.extract.rows', `name the source row for each of the ${n} table rows`); return; }
+  for (const [k, f] of Object.entries(fields)) {
+    const c = def.columns[k];
+    if (!c) { fail('provenance', `provenance.fields.${k}`, 'not a column of this dataset'); continue; }
+    if (!(f.sourceColumn in (src.columns || {}))) { fail('source-extract', `provenance.fields.${k}`, `the stored copy has no column "${f.sourceColumn}"`); continue; }
+    ex.rows.forEach((name, i) => {
+      const raw = ((src.rows || {})[name] || {})[f.sourceColumn];
+      const v = Number(raw) * (f.scale || 1);
+      if (raw === undefined || !Number.isFinite(v)) { fail('source-extract', `column ${k}, row ${i + 1}`, `the stored copy has no value for ${name}`); return; }
+      if (Math.abs(v - c.values[i]) > (c.resolution || 0) / 2 + 1e-9 * Math.abs(v)) {
+        fail('source-extract', `column ${k}, row ${i + 1} (${name})`, 'the value differs from the published source', { expected: `${raw} × ${f.scale || 1}`, got: c.values[i] });
+      }
+    });
+  }
+}
+
+// ---------- T7/T8: data without a student table ----------
+// tableless: { reason, readFrom: [{ figure, columns: [...] }] }. Every shown column must be readable from a declared
+// figure: a graph that plots it (checked point by point, or reading by reading for a trace), or an instrument image with
+// a scale read-back check (diagramChecks: [{ figure, scale: { column } }]).
+function checkTableless(def, q, fail) {
+  const t = def.tableless;
+  if (typeof t.reason !== 'string' || !t.reason.trim()) fail('table-header', 'tableless', 'say why students get no table (tableless.reason)');
+  const figs = graphFigs(q);
+  const covered = new Set();
+  for (const r of t.readFrom || []) {
+    const f = figs.find((x) => x.figure === r.figure);
+    if (!f) { fail('table-header', 'tableless', `reads data from ${r.figure}, which the question doesn't show`); continue; }
+    const isGraph = /data-graph=/.test(f.svg || '');
+    for (const c of r.columns || []) {
+      if (!def.columns[c]) { fail('table-header', 'tableless', `unknown column ${c}`); continue; }
+      if (isGraph) {
+        const g = r.figure === 'graph-raw' ? def.rawGraph : def.graph;
+        if (!g || ![g.x, g.y].includes(c)) fail('table-header', 'tableless', `${c} isn't plotted on ${r.figure}`);
+      } else if (!(def.diagramChecks || []).some((k) => k.figure === r.figure && k.scale && k.scale.column === c)) {
+        fail('table-header', 'tableless', `${c} is read from ${r.figure}, which needs a scale read-back check (diagramChecks: [{ figure: '${r.figure}', scale: { column: '${c}' } }])`);
+      }
+      covered.add(c);
+    }
+  }
+  for (const [k, c] of Object.entries(def.columns)) {
+    if (c.show !== false && !covered.has(k)) fail('table-header', `column ${k}`, 'students can\'t see this column: there is no table, and no figure in tableless.readFrom shows it (or set show: false)');
+  }
+}
+
+// ---------- T8: reading an instrument scale ----------
+// The scale's labels must be evenly spaced; its smallest division at least SCALE_MIN_DIVISION units wide (about 4 px on a
+// 375 px phone); every row of the column has a mark that reads back to its value within half a division; marks less than
+// one division apart are reported (students can't tell them apart); and the column's uncertainty can't be smaller than
+// half a division (nobody reads a scale better than that).
+export const SCALE_MIN_DIVISION = 6;
+function checkScale(fig, spec, def, d, rows, fail, warn) {
+  const where = `figure ${fig.figure}`;
+  const c = def.columns[spec.column];
+  if (!c) { fail('scale-read', where, `the scale check names an unknown column ${spec.column}`); return; }
+  const labels = [...fig.svg.matchAll(/<text class="sx" x="([-\d.]+)"[^>]*>([^<]+)<\/text>/g)].map((m) => ({ px: +m[1], v: parseNum(m[2]) }));
+  const S = scaleFromTicks(labels);
+  if (!S) { fail('scale-read', where, 'the scale has no readable labels'); return; }
+  if (!S.even) fail('scale-read', where, 'the scale labels are not evenly spaced');
+  const minors = [...new Set([...fig.svg.matchAll(/<line class="[^"]*\bscale-minor" x1="([-\d.]+)"/g)].map((m) => +m[1]))].sort((a, b) => a - b);
+  if (minors.length < 2) { fail('scale-read', where, 'the scale has no smallest divisions'); return; }
+  const divPx = Math.min(...minors.slice(1).map((x, i) => x - minors[i]));
+  const div = divPx * S.perPx;
+  if (divPx < SCALE_MIN_DIVISION - 1e-9) fail('scale-read', where, `the smallest division is ${divPx.toFixed(1)} units wide, too small to read on a phone (needs ${SCALE_MIN_DIVISION})`);
+  const marks = [...fig.svg.matchAll(/<line class="[^"]*\bscale-mark" data-mark="(\d+)" x1="([-\d.]+)"/g)].map((m) => ({ row: +m[1], px: +m[2] }));
+  const want = spec.rows || rows.map((_, i) => i);
+  for (const i of want) {
+    const m = marks.find((x) => x.row === i);
+    if (!m) { fail('scale-read', where, `no mark for row ${i + 1}`); continue; }
+    const v = S.toValue(m.px);
+    if (Math.abs(v - rows[i][spec.column]) > div / 2 + 0.6 * S.perPx) fail('scale-read', `${where}, mark ${i + 1}`, 'the mark doesn\'t read as the value in the data (to half a division)', { expected: sigFig(rows[i][spec.column], 4), got: sigFig(v, 4) });
+    const u = d.unc(spec.column, i);
+    if (!(u >= div / 2 - 1e-9)) fail('uncertainty', `${where}, mark ${i + 1}`, `the uncertainty (${u}) is smaller than half a division (${sigFig(div / 2, 2)}): nobody reads this scale that precisely`);
+  }
+  const xs = marks.map((m) => m.px).sort((a, b) => a - b);
+  if (xs.some((x, i) => i && x - xs[i - 1] < divPx)) warn('scale-read', where, 'two marks are less than one division apart: students may not be able to tell them apart');
+}
+
+// ---------- T7: area under a graph ----------
+// A result with check: 'area' and area: { from, to, baseline } is the area between the data and the baseline (a number,
+// or a function of d), from x = from to x = to: ∫ (y − baseline) dx, worked out here by the trapezium rule on the
+// published data. Accepted-range policy (PROPOSED for the teacher, specification decision 12): the range must contain
+//   • the value ± AREA_POLICY.minTol (5 %): students' estimates by counting squares or by shapes vary at least this much;
+//   • the "count the squares" estimate on the students' own graph (whole small squares + half of the part squares);
+// and must be no wider than ± AREA_POLICY.maxTol (20 %) of the value, so it still discriminates.
+export const AREA_POLICY = { minTol: 0.05, maxTol: 0.2 };
+function interpolator(rows, gx, gy) {
+  const s = [...rows].sort((a, b) => a[gx] - b[gx]);
+  return (xv) => {
+    const j = s.findIndex((rw) => rw[gx] >= xv);
+    if (j < 0) return s[s.length - 1][gy];
+    if (j === 0) return s[0][gy];
+    const [a, b] = [s[j - 1], s[j]];
+    return a[gy] + ((b[gy] - a[gy]) * (xv - a[gx])) / (b[gx] - a[gx]);
+  };
+}
+export function areaUnder(rows, gx, gy, from, to, base) {
+  const f = interpolator(rows, gx, gy);
+  const xs = [from, ...rows.map((rw) => rw[gx]).filter((x) => x > from && x < to).sort((a, b) => a - b), to];
+  let A = 0;
+  for (let i = 1; i < xs.length; i++) A += ((f(xs[i - 1]) - base + f(xs[i]) - base) / 2) * (xs[i] - xs[i - 1]);
+  return A;
+}
+export function squaresEstimate(rows, gx, gy, from, to, base, dx, dy) {
+  const f = interpolator(rows, gx, gy);
+  let est = 0;
+  for (let x0 = from; x0 < to - 1e-12; x0 += dx) {
+    const x1 = Math.min(x0 + dx, to);
+    const vals = Array.from({ length: 21 }, (_, k) => f(x0 + ((x1 - x0) * k) / 20) - base);
+    const [mn, mx] = [Math.min(...vals), Math.max(...vals)];
+    const w = (x1 - x0) / dx;
+    if (mn >= 0) { const full = Math.floor(mn / dy); est += w * (full + (Math.ceil(mx / dy) - full) / 2); }
+    else if (mx <= 0) { const full = Math.floor(-mx / dy); est -= w * (full + (Math.ceil(-mn / dy) - full) / 2); }
+    else est += (w * (Math.ceil(mx / dy) - Math.ceil(-mn / dy))) / 2;
+  }
+  return est * dx * dy;
+}
+function checkAreaResult(def, d, rows, res, r, where, q, fail) {
+  const g = def.graph;
+  const a = res.area || {};
+  if (!g || !Number.isFinite(a.from) || !Number.isFinite(a.to) || !(a.to > a.from)) { fail('fit', where, 'an area result needs a graph and area: { from, to, baseline } with to > from'); return; }
+  const xsAll = rows.map((rw) => rw[g.x]);
+  if (a.from < Math.min(...xsAll) || a.to > Math.max(...xsAll)) { fail('fit', where, 'the area runs beyond the data'); return; }
+  const base = typeof a.baseline === 'function' ? a.baseline(d) : a.baseline || 0;
+  const A = areaUnder(rows, g.x, g.y, a.from, a.to, base);
+  if (Math.abs(r.value - A) > 1e-6 * Math.max(Math.abs(A), 1e-12)) fail('fit', where, 'the area doesn\'t match the area under the published data (trapezium rule)', { expected: sigFig(A, 4), got: sigFig(r.value, 4) });
+  const student = (q.data || []).find((x) => x.figure === 'graph');
+  const info = student && axisInfo(student.svg);
+  const S = info && info.xMinor && info.yMinor ? squaresEstimate(rows, g.x, g.y, a.from, a.to, base, info.xMinor, info.yMinor) : null;
+  if (!r.range) { fail('answer-range', where, 'an area read from a graph needs an accepted range'); return; }
+  const [lo, hi] = r.range;
+  const need = [A - AREA_POLICY.minTol * Math.abs(A), A + AREA_POLICY.minTol * Math.abs(A)];
+  if (lo > need[0] + 1e-12 || hi < need[1] - 1e-12) fail('answer-range', where, `the accepted range must include ±${AREA_POLICY.minTol * 100} % of the area (students' estimates vary at least that much)`, { expected: `${sigFig(need[0], 3)} to ${sigFig(need[1], 3)}`, got: `${sigFig(lo, 3)} to ${sigFig(hi, 3)}` });
+  if (S !== null && (S < lo || S > hi)) fail('answer-range', where, 'the accepted range excludes the count-the-squares estimate on the students\' graph', { expected: `includes ${sigFig(S, 3)}`, got: `${sigFig(lo, 3)} to ${sigFig(hi, 3)}` });
+  if (lo < A - AREA_POLICY.maxTol * Math.abs(A) || hi > A + AREA_POLICY.maxTol * Math.abs(A)) fail('answer-range', where, `the accepted range is wider than ±${AREA_POLICY.maxTol * 100} % of the area, so it doesn't discriminate`);
+}
+
+// ---------- T2: too-regular data (safeguards.mjs) ----------
+function checkRegularity(def, rows, cells, p, singles, fail, warn) {
+  const setKey = Object.keys(def.columns).find((k) => def.columns[k].kind === 'set');
+  for (const [k, c] of Object.entries(def.columns)) {
+    if (c.kind !== 'measured' || c.show === false) continue;
+    const where = `column ${c.symbolText || c.symbol}`;
+    const acc = c.regularity;
+    if (acc && (!Array.isArray(acc.accept) || !acc.accept.length || typeof acc.reason !== 'string' || !acc.reason.trim())) {
+      fail('regular-data', where, 'regularity needs accept: [the finding codes] and a reason (why the instrument genuinely reads this way)');
+      continue;
+    }
+    const idx = rows.map((_, i) => i).filter((i) => !(c.anomaly && c.anomaly.row === i));
+    const models = idx.map((i) => applySystematic(c.systematic, modelValue(def, c, { params: p, row: rows[i], singles }, `column ${k}`), rows[i]));
+    const sigmas = models.map((m) => {
+      const nz = c.noise || {};
+      const s = nz.type === 'gauss' ? nz.sd : nz.type === 'gauss-relative' ? nz.sd * Math.abs(m) : nz.type === 'poisson' ? Math.sqrt(Math.max(m, 0)) : 0;
+      return c.trials ? s / Math.sqrt(c.trials) : s;
+    });
+    const findings = regularityFindings({
+      values: idx.map((i) => rows[i][k]),
+      texts: idx.map((i) => (cells.get(`${k}|${i}|`) || {}).text || fmtNum(rows[i][k], columnDp(c))),
+      xs: idx.map((i) => rows[i][setKey]),
+      models, sigmas, resolution: c.resolution,
+    });
+    for (const f of findings) {
+      if (acc && acc.accept.includes(f.code)) continue;
+      warn('regular-data', where, `${f.message}. If the instrument genuinely reads this way, declare columns.${k}.regularity = { accept: ['${f.code}'], reason: '…' } (the dataset is then AMBER, so a person agrees)`);
+    }
+  }
+}
+
+// ---------- T3: values read from a graph (safeguards.mjs) ----------
+const graphFigs = (q) => [...(q.data || []).filter((x) => x.kind === 'figure'), ...(q.parts || []).flatMap((pt) => [pt.figure, pt.msFigure].filter((f) => f && typeof f === 'object'))];
+function axisInfo(svg) {
+  const G = parseGraph(svg);
+  const X = scaleFromTicks(G.xTicks);
+  const Y = scaleFromTicks(G.yTicks);
+  const minor = (pos, S) => {
+    const u = [...new Set(pos)].sort((a, b) => a - b);
+    return u.length > 1 && S ? (u[1] - u[0]) * S.perPx : null;
+  };
+  return { ...axisRanges(G), xMinor: minor(G.minorX, X), yMinor: minor(G.minorY, Y) };
+}
+function checkGraphReads(def, q, meta, fail, warn) {
+  const figs = graphFigs(q);
+  const graphNamed = (n) => figs.find((f) => f.figure === n && /data-graph=/.test(f.svg || ''));
+  for (const m of meta) {
+    const pt = (q.parts || []).find((x) => x.label === m.label);
+    if (!pt) continue;
+    const where = `part (${m.label})`;
+    const text = stripTags(`${pt.question} ${(pt.markscheme || []).join(' ')}`);
+    if (!m.reads) {
+      if ((def.graph || def.rawGraph) && READ_PHRASES.test(text)) {
+        warn('graph-read-undeclared', where, `the wording ("${text.match(READ_PHRASES)[0]}") says students read a value from a graph, but the part declares no reads: [{ figure, x | y }], so the value can't be checked against the axes`);
+      }
+      continue;
+    }
+    for (const r of m.reads) {
+      const name = r.figure || 'graph';
+      const f = graphNamed(name);
+      if (!f) { fail('graph-read', where, `reads from a graph called "${name}", which the question doesn't show`); continue; }
+      const A = axisInfo(f.svg);
+      for (const ax of ['x', 'y']) {
+        if (r[ax] === undefined) continue;
+        const range = A[ax];
+        if (!range) { fail('graph-read', where, `${name} has no readable ${ax} axis`); continue; }
+        const pad = 1e-9 * Math.max(1, Math.abs(range[1] - range[0]));
+        if (!(r[ax] >= range[0] - pad && r[ax] <= range[1] + pad)) {
+          fail('graph-read', where, `students must read ${ax} = ${sigFig(r[ax], 3)} from ${name}, but its ${ax} axis only runs from ${range[0]} to ${range[1]}: the value can't be read from the graph`);
+        }
+        const minor = A[`${ax}Minor`];
+        if (r.tol !== undefined && minor && r.tol < minor / 2 - 1e-12) {
+          warn('graph-read', where, `accepts readings of ${ax} within ±${sigFig(r.tol, 2)}, less than half a small grid square (${sigFig(minor / 2, 2)}) on ${name}: students can't read it that precisely`);
+        }
+      }
+    }
+  }
+  // P1: with errorBars 'too-small' no bars are drawn, so no question or mark scheme may refer to them.
+  if ([def.graph, def.rawGraph].some((g) => g && g.errorBars === 'too-small')) {
+    const texts = [['the question text', q.stem], ...(q.parts || []).flatMap((pt) => [[`part (${pt.label}) question`, pt.question], [`part (${pt.label}) mark scheme`, (pt.markscheme || []).join(' ')]])];
+    for (const [where, t] of texts) {
+      if (/error[- ]bars?/i.test(stripTags(t))) fail('graph-errorbar-text', where, 'refers to error bars, but the graph draws none (errorBars: "too-small"): refer to the uncertainty instead');
+    }
+  }
+}
+
+// ---------- T4: giveaways (safeguards.mjs) ----------
+function checkGiveaways(def, q, meta, d, fail, warn) {
+  const figText = (svg) => [...String(svg).matchAll(/<text (?![^>]*class="t[xy]")[^>]*>(.*?)<\/text>/g)].map((m) => stripTags(m[1])).join(' ');
+  const seq = visibleSequence(q, figText);
+  const tableNums = new Set((q.data || []).filter((x) => x.kind === 'table').flatMap((t) => numbersIn(t.html.replace(/<[^>]+>/g, ' ')).map((n) => n.tok)));
+  const qIndex = (label) => seq.findIndex((s) => s.part === label && s.kind === 'question');
+  // Numbers: the value of every result, before the part whose mark scheme first establishes it.
+  if (d) {
+    for (const [name, r] of Object.entries(d.r)) {
+      for (const tok of valueTokens(r.value, numbersIn)) {
+        if (tableNums.has(tok)) continue;
+        const a = seq.findIndex((s, i) => s.kind === 'ms' && hasToken(s.text, tok, numbersIn) && !hasToken(seq[i - 1].text, tok, numbersIn));
+        if (a < 0) continue;
+        const early = seq.slice(0, a - 1).find((s) => hasToken(s.text, tok, numbersIn));
+        if (early) fail('giveaway', early.where, `shows ${tok}, the value of ${name} that part (${seq[a].part}) asks students to find: it is visible before that part`);
+      }
+    }
+  }
+  for (const m of meta) {
+    const i = qIndex(m.label);
+    if (i < 0) continue;
+    const where = `part (${m.label})`;
+    const asks = m.asks || {};
+    const before = seq.slice(0, i);
+    const res = asks.unit !== undefined && (def.results || {})[asks.unit];
+    if (res && res.unit) {
+      const u = parseUnit(res.unit);
+      const forms = [u.tex, parseUnit(baseUnitExpr(u.dim)).tex].filter(Boolean);
+      for (const s of before) if (forms.some((t) => s.text.includes(t))) fail('giveaway', s.where, `gives the unit that ${where} asks for (${forms.join(' or ')})`);
+    }
+    for (const t of asks.answerText || []) {
+      for (const s of [...before, seq[i]]) if (stripTags(s.text).includes(t)) fail('giveaway', s.where, `shows "${t}", which ${where} asks students to work out`);
+    }
+    for (const t of asks.conclusion || []) {
+      for (const s of before) if (stripTags(s.text).toLowerCase().includes(t.toLowerCase())) fail('giveaway', s.where, `states the conclusion "${t}" that ${where} asks students to reach`);
+    }
+    const pt = (q.parts || []).find((x) => x.label === m.label);
+    if (pt && /\bwhether\b/i.test(stripTags(pt.question)) && !asks.conclusion) {
+      warn('giveaway-undeclared', where, 'asks "whether …" but declares no asks.conclusion: [phrases], so an earlier statement of the conclusion can\'t be checked');
+    }
+  }
 }
 
 // ---------- Part metadata: AO tags and what a part asks for ----------
@@ -618,10 +995,18 @@ function checkPhysics(def, fail) {
   }
   for (const [k2, c] of catalogue) {
     const where = `column ${k2}`;
-    if (!c.model || !c.model.law) bad('physics-meta', `${where}.model`, 'published data must be compared with a model built from a vetted law');
     if (!Array.isArray(c.expect) || c.expect.length !== 2) bad('physics-meta', `${where}.expect`, 'give the expected range of values');
-    if (!(c.agree > 0 && c.agree <= 0.05)) bad('physics-meta', `${where}.agree`, 'state how closely the published values should follow the model (0 < agree <= 0.05)');
-    if (!isText(c.agreeReason)) bad('physics-meta', `${where}.agreeReason`, 'explain why the published values may differ from the simple model');
+    if (c.observed !== undefined) {
+      // Phase 12: observed published values that the question compares with a model, without expecting agreement.
+      // They need a reason, no model of their own, and their source checked against a stored copy (provenance, T10).
+      if (!c.observed || !isText(c.observed.reason)) bad('physics-meta', `${where}.observed`, 'say why these published values are not expected to follow a model (observed: { reason })');
+      if (c.model || c.agree !== undefined) bad('physics-meta', `${where}.observed`, 'an observed column has no model or agreement tolerance: the question compares it with a model elsewhere');
+      if (!(def.provenance && def.provenance.fields && def.provenance.fields[k2])) bad('physics-meta', `${where}.observed`, 'observed published values need provenance.fields (and a stored source copy), because no model checks them');
+    } else {
+      if (!c.model || !c.model.law) bad('physics-meta', `${where}.model`, 'published data must be compared with a model built from a vetted law (or declared observed: { reason })');
+      if (!(c.agree > 0 && c.agree <= 0.05)) bad('physics-meta', `${where}.agree`, 'state how closely the published values should follow the model (0 < agree <= 0.05)');
+      if (!isText(c.agreeReason)) bad('physics-meta', `${where}.agreeReason`, 'explain why the published values may differ from the simple model');
+    }
     const setCol = Object.values(def.columns).find((x) => x.kind === 'set');
     if (!Array.isArray(c.values) || !setCol || c.values.length !== setCol.values.length) bad('physics-meta', `${where}.values`, 'needs one published value per row');
   }
@@ -684,7 +1069,15 @@ export function parseGraph(svg) {
     fits: [...svg.matchAll(/<line class="[^"]*\bfit" data-fit="(\w+)" x1="([-\d.]+)" y1="([-\d.]+)" x2="([-\d.]+)" y2="([-\d.]+)"\/>/g)]
       .map((m) => ({ fit: m[1], x1: +m[2], y1: +m[3], x2: +m[4], y2: +m[5] })),
     curve: ((svg.match(/data-fit="curve" points="([^"]*)"/) || [])[1] || '').split(' ').filter(Boolean).map((s) => s.split(',').map(Number)),
+    model: ((svg.match(/data-model="curve" points="([^"]*)"/) || [])[1] || '').split(' ').filter(Boolean).map((s) => s.split(',').map(Number)),
+    trace: ((m) => (m ? { pts: m[1].split(' ').filter(Boolean).map((s) => s.split(',').map(Number)), rows: m[2].split(' ').map(Number) } : null))(
+      svg.match(/<polyline class="[^"]*\btrace" data-trace="1" points="([^"]*)" data-rows="([^"]*)"\/>/)),
+    area: ((m) => (m ? m[1].split(' ').filter(Boolean).map((s) => s.split(',').map(Number)) : null))(svg.match(/<polygon class="area" data-area="1" points="([^"]*)"\/>/)),
+    refs: [...svg.matchAll(/<line class="[^"]*\bref" data-ref="1" x1="([-\d.]+)" y1="([-\d.]+)" x2="([-\d.]+)" y2="([-\d.]+)"\/>/g)]
+      .map((m) => ({ x1: +m[1], y1: +m[2], x2: +m[3], y2: +m[4] })),
     xTitle: title('ax-x'), yTitle: title('ax-y'),
+    minorX: [...svg.matchAll(/<line class="grid-minor" x1="([-\d.]+)" y1="[-\d.]+" x2="\1"/g)].map((m) => +m[1]),
+    minorY: [...svg.matchAll(/<line class="grid-minor" x1="[-\d.]+" y1="([-\d.]+)" x2="[-\d.]+" y2="\1"/g)].map((m) => +m[1]),
   };
 }
 // Turns tick labels into a pixel ↔ value scale, and checks the ticks are evenly spaced.
@@ -696,7 +1089,7 @@ export function scaleFromTicks(ticks) {
   return { toValue: (px) => (px - f.c) / f.m, perPx: Math.abs(1 / f.m), even };
 }
 
-function checkGraph(fig, def, d, rows, fail) {
+function checkGraph(fig, def, d, rows, fail, warn) {
   const raw = fig.figure === 'graph-raw';
   const g = raw ? def.rawGraph : def.graph;
   const kind = fig.figure === 'graph' || raw ? 'student' : 'examiner';
@@ -713,10 +1106,41 @@ function checkGraph(fig, def, d, rows, fail) {
   const inBox = (px, py) => px >= G.box.l - 0.5 && px <= G.box.r + 0.5 && py >= G.box.t - 0.5 && py <= G.box.b + 0.5;
 
   const want = rows.map((_, i) => i).filter((i) => kind === 'examiner' || raw || !(g.omit || []).includes(i));
-  const got = G.points.map((pt) => pt.row);
-  for (const i of want) if (!got.includes(i)) fail('graph-point', where, `the point for table row ${i + 1} is missing`);
-  for (const i of got) if (!want.includes(i)) fail('graph-point', where, `the graph shows table row ${i + 1}, which should be left for students to plot`);
   const fmt = (v, c) => `${sigFig(v, 4)} ${parseUnit(c.unit || '').text}`.trim();
+  // T7: sensor data drawn as a trace: every reading is a vertex of one line, in order of x, and nothing else is drawn.
+  if (g.style === 'trace') {
+    if (G.points.length) fail('graph-point', where, 'a trace shows its readings as a line, not as points');
+    if ((g.omit || []).length) fail('graph-point', where, 'a trace can\'t leave readings for students to plot');
+    if (g.errorBars !== 'too-small' && rows.some((_, i) => d.unc(g.y, i))) fail('graph-errorbar', where, 'a trace draws no error bars: declare errorBars "too-small" (the caption states the uncertainty) or give the column no uncertainty');
+    if (!G.trace) fail('graph-point', where, 'the sensor trace is missing');
+    else {
+      if (G.trace.rows.length !== rows.length || new Set(G.trace.rows).size !== rows.length) fail('graph-point', where, `the trace has ${G.trace.rows.length} readings, but the data have ${rows.length}`);
+      G.trace.pts.forEach(([px, py], j) => {
+        const row = rows[G.trace.rows[j]];
+        if (!row) return;
+        if (Math.abs(X.toValue(px) - row[g.x]) > 0.6 * X.perPx || Math.abs(Y.toValue(py) - row[g.y]) > 0.6 * Y.perPx) {
+          fail('graph-point', `${where}, reading ${G.trace.rows[j] + 1}`, 'the trace is not where the data say', { expected: `(${fmt(row[g.x], cx)}, ${fmt(row[g.y], cy)})`, got: `(${fmt(X.toValue(px), cx)}, ${fmt(Y.toValue(py), cy)})` });
+        }
+        if (!inBox(px, py)) fail('graph-scale', `${where}, reading ${G.trace.rows[j] + 1}`, 'the trace runs outside the axes');
+      });
+      const xs = G.trace.pts.map((p) => p[0]);
+      if (xs.some((x, j) => j && x < xs[j - 1])) fail('graph-point', where, 'the trace must run in order of increasing x');
+    }
+  }
+  // T7: a shaded area on the examiner's graph covers exactly the declared x range.
+  if (kind === 'examiner' && !raw && g.shade) {
+    if (!G.area) fail('graph-fit', where, 'the shaded area is missing');
+    else {
+      const ax = G.area.map((p) => X.toValue(p[0]));
+      if (Math.abs(Math.min(...ax) - g.shade.from) > X.perPx || Math.abs(Math.max(...ax) - g.shade.to) > X.perPx) fail('graph-fit', where, `the shaded area should run from ${g.shade.from} to ${g.shade.to}`);
+      if (!g.shade.label) fail('graph-fit', where, 'a shaded area needs a label (what it represents, for the caption)');
+    }
+  } else if (G.area && !(kind === 'examiner' && g.shade)) fail('graph-fit', where, kind === 'student' ? 'the students\' graph shouldn\'t show the shaded area (it is the answer)' : 'shows a shaded area the dataset doesn\'t declare');
+  const got = G.points.map((pt) => pt.row);
+  if (g.style !== 'trace') {
+    for (const i of want) if (!got.includes(i)) fail('graph-point', where, `the point for table row ${i + 1} is missing`);
+    for (const i of got) if (!want.includes(i)) fail('graph-point', where, `the graph shows table row ${i + 1}, which should be left for students to plot`);
+  }
   for (const pt of G.points) {
     const row = rows[pt.row];
     if (!row) continue;
@@ -727,10 +1151,32 @@ function checkGraph(fig, def, d, rows, fail) {
     }
     if (!inBox(pt.px, pt.py)) fail('graph-scale', `${where}, point for row ${pt.row + 1}`, 'point is outside the axes');
   }
-  // Error bars: one per point where there is an uncertainty, each the right length.
+  // Points left for students to plot must fit on the students' axes (T3).
+  if (kind === 'student' && !raw) {
+    for (const i of g.omit || []) {
+      const [vx, vy] = [rows[i][g.x], rows[i][g.y]];
+      const [x0, x1] = [X.toValue(G.box.l), X.toValue(G.box.r)].sort((a, b) => a - b);
+      const [y0, y1] = [Y.toValue(G.box.b), Y.toValue(G.box.t)].sort((a, b) => a - b);
+      if (vx < x0 || vx > x1 || vy < y0 || vy > y1) fail('graph-read', `${where}, row ${i + 1}`, 'students must plot this point, but it lies outside the axes');
+    }
+  }
+  // P1: y error bars only; bars that can't be seen; errorBars 'too-small' (safeguards.mjs).
+  const hidden = g.errorBars === 'too-small';
+  if (g.errorBars !== undefined && !hidden) fail('graph-errorbar', where, `errorBars must be 'too-small' or left out, not ${JSON.stringify(g.errorBars)}`);
+  // y error bars only are DRAWN. xErrorBars may still put the x uncertainty into the max/min lines when no bars are drawn.
+  if (g.xErrorBars && !hidden && !X_ERROR_BARS_ALLOWED.has(def.id)) fail('graph-x-errorbars', where, 'this bank draws y error bars only: leave out xErrorBars (state the uncertainty in x in the table heading), or use it only with errorBars: "too-small" so the x uncertainty counts in the max/min lines without being drawn');
+  if (kind === 'student') {
+    const halves = want.map((i) => (d.unc(g.y, i) || 0) / Y.perPx).filter((h) => h > 0);
+    const longest = halves.length ? Math.max(...halves) : 0;
+    if (hidden && longest >= VISIBLE_BAR) fail('graph-errorbar-hidden', where, `errorBars is 'too-small', but the bars would be up to ${longest.toFixed(1)} units long, long enough to see: draw them`);
+    if (!hidden && halves.length && longest < VISIBLE_BAR) {
+      warn('graph-errorbar-visibility', where, `every y error bar is at most ${longest.toFixed(1)} units each side of its point, hidden under the ${MARKER_R}-unit marker (needs ${VISIBLE_BAR}): students can't see or use them. Declare ${raw ? 'rawGraph' : 'graph'}.errorBars: 'too-small' (the caption then states the uncertainty) and don't refer to error bars in the parts`);
+    }
+  }
+  // Error bars: one per point where there is an uncertainty (unless too small to draw), each the right length.
   for (const i of want) {
     for (const axis of ['y', 'x']) {
-      const u = axis === 'y' ? d.unc(g.y, i) || 0 : (g.xErrorBars && d.unc(g.x, i)) || 0;
+      const u = hidden ? 0 : axis === 'y' ? d.unc(g.y, i) || 0 : (g.xErrorBars && d.unc(g.x, i)) || 0;
       const bar = G.ebars.find((e) => e.row === i && e.axis === axis);
       if (!u && bar) fail('graph-errorbar', `${where}, row ${i + 1}`, `${axis} error bar drawn, but there is no uncertainty`);
       if (u && !bar) fail('graph-errorbar', `${where}, row ${i + 1}`, `${axis} error bar missing`);
@@ -759,6 +1205,33 @@ function checkGraph(fig, def, d, rows, fail) {
           fail('graph-fit', where, `the ${name} line isn't the fitted line`, { expected: `gradient ${sigFig(line.m, 4)}, intercept ${sigFig(line.c, 4)}` });
           break;
         }
+      }
+    }
+  }
+  // T6: a model curve (examiner's graph only) and a declared reference line (both graphs).
+  if (kind === 'student' && G.model.length) fail('graph-fit', where, 'the students\' graph shouldn\'t show the model curve');
+  if (kind === 'examiner' && !raw && g.modelCurve) {
+    if (!g.modelCurveLabel) fail('graph-fit', where, 'a model curve needs modelCurveLabel (what it shows, for the caption)');
+    if (!G.model.length) fail('graph-fit', where, 'the model curve is missing');
+    const f = g.modelCurve(d);
+    for (const [px, py] of G.model) {
+      if (Math.abs(Y.toValue(py) - f(X.toValue(px))) > 1.0 * Y.perPx) { fail('graph-fit', where, 'the drawn model curve isn\'t the declared model'); break; }
+    }
+  }
+  const ref = g.referenceLine ? (typeof g.referenceLine === 'function' ? g.referenceLine(d) : g.referenceLine) : null;
+  if (!ref && G.refs.length) fail('graph-fit', where, 'shows a reference line the dataset doesn\'t declare');
+  if (ref) {
+    if (!ref.label || !Number.isFinite(ref.m) || !Number.isFinite(ref.c)) fail('graph-fit', where, 'referenceLine needs m, c and a label');
+    else if (G.refs.length !== 1) fail('graph-fit', where, `should show the reference line (${ref.label}) once, but shows ${G.refs.length}`);
+    else {
+      const L = G.refs[0];
+      for (const [px, py] of [[L.x1, L.y1], [L.x2, L.y2]]) {
+        if (Math.abs(Y.toValue(py) - (ref.m * X.toValue(px) + ref.c)) > 1.0 * Y.perPx) { fail('graph-fit', where, 'the drawn reference line isn\'t the declared line'); break; }
+      }
+      // A reference line must not be (close to) the line of best fit: that would draw the answer on the students' graph.
+      const ySpan = Math.abs(Y.toValue(G.box.t) - Y.toValue(G.box.b));
+      if (kind === 'student' && d.fit && g.fit === 'linear' && rel(ref.m, d.fit.m) < 0.05 && Math.abs(ref.c - d.fit.c) < 0.05 * ySpan) {
+        fail('graph-fit', where, 'the reference line is almost the line of best fit, so it gives the answer away');
       }
     }
   }

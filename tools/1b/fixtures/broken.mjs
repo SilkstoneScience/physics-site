@@ -238,4 +238,27 @@ export default [
 
   // ----- Identity and level -----
   { name: 'Paper 1B dataset on an HL-only topic', expect: 'level-topic', def: { ...D3, id: 'A4-B01', topic: 'A.4' } },
+  // ----- Phase 12 safeguards (safeguards.mjs) -----
+  { name: 'T4: the stem states a value a later part asks for (the gradient)', expect: 'giveaway',
+    def: { ...D3, intro: (d) => D3.intro(d) + `<p>The gradient of the graph is about ${d.sf(d.r.gradient.value, 3)}.</p>` } },
+  { name: 'T4: an earlier part states the conclusion a later "whether" part asks for', expect: 'giveaway',
+    def: editPart(D3, 'a', (pt) => ({ ...pt, markscheme: [...pt.markscheme, 'So the data support $F \propto I$.'] })) },
+  { name: 'T4: the stem shows the transformation a later part asks students to choose', expect: 'giveaway',
+    def: { ...C1, intro: (d) => C1.intro(d) + '<p>The student also plans a graph of $T^2$ against $m$.</p>' } },
+  { name: 'T4: an earlier mark scheme gives the unit a later part asks for', expect: 'giveaway',
+    def: editPart(D3_ASKS, 'e', (pt, d) => ({ ...pt, markscheme: [...pt.markscheme, `(The gradient is in ${d.baseUnitTex('gradient')}.)`] })) },
+  { name: 'T3: a part expects a value read from the graph beyond its axis', expect: 'graph-read',
+    def: editPart(D3, 'b', (pt) => ({ ...pt, reads: [{ figure: 'graph', x: 10 }] })) },
+  { name: 'T3: a part reads from a graph the question doesn\'t show', expect: 'graph-read',
+    def: editPart(D3, 'b', (pt) => ({ ...pt, reads: [{ figure: 'graph-raw', x: 1 }] })) },
+  { name: 'P1: error bars declared too small to show although they would be visible', expect: 'graph-errorbar-hidden',
+    def: { ...D3, graph: { ...D3.graph, errorBars: 'too-small' } } },
+  { name: 'P1: a mark scheme refers to error bars that are not drawn', expect: 'graph-errorbar-text',
+    def: editPart(C1, 'a', (pt) => ({ ...pt, markscheme: ['No straight line passes through all the error bars ✓', ...pt.markscheme.slice(1)] })) },
+  { name: 'P1: x error bars drawn (this bank draws y error bars only)', expect: 'graph-x-errorbars',
+    def: { ...D3, graph: { ...D3.graph, xErrorBars: true } } },
+  { name: 'P1: an unknown errorBars setting', expect: 'graph-errorbar',
+    def: { ...D3, graph: { ...D3.graph, errorBars: 'none' } } },
+  { name: 'T2: a regularity acceptance without a reason', expect: 'regular-data',
+    def: { ...D3, columns: { ...D3.columns, m: { ...D3.columns.m, regularity: { accept: ['equal-steps'] } } } } },
 ];

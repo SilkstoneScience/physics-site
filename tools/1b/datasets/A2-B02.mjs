@@ -14,9 +14,11 @@ export default {
   batch: 'batch-1',
   archetypes: ['V2', 'L1'],
   apparatus: 'long copper wire with a reference wire and a vernier scale',
+  contextFamily: 'elastic-stretching',
+  contextObjects: ['stretched-wire', 'slotted-masses'],
   features: ['model:empirical'],
   originality: 'Loading a wire (Searle-type apparatus) is a standard practical; no legacy Section A or 2025 Paper 1B question uses it. '
-    + 'The emphasis on where Hooke\'s law stops fitting, judged from error bars, and on the difference between the limit of '
+    + 'The emphasis on where Hooke\'s law stops fitting, judged against the uncertainties, and on the difference between the limit of '
     + 'proportionality and the elastic limit, is this dataset\'s own. Own numbers and sequence.',
 
   physics: {
@@ -60,7 +62,8 @@ export default {
     },
   },
   // The fit uses only the proportional region; the examiner's line is extended to show the departure.
-  graph: { x: 'F', y: 'x', fit: 'linear', band: true, exclude: [5, 6, 7, 8], zero: { x: true, y: true } },
+  // errorBars 'too-small': ±0.05 mm is under 0.5 % of the axis; the caption states it instead (P1).
+  graph: { x: 'F', y: 'x', fit: 'linear', band: true, exclude: [5, 6, 7, 8], zero: { x: true, y: true }, errorBars: 'too-small' },
 
   results: {
     gradient: { unit: 'mm N^-1', dims: { of: 'y/x' }, check: 'gradient', value: (d) => d.fit.m, range: (d, v) => d.widen(d.gradientRange(), v, 0.04) },
@@ -94,10 +97,11 @@ export default {
     return [
       {
         label: 'a', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        reads: [{ figure: 'graph', x: d.rows[4].F }],
         question: 'Hooke\'s law predicts that $x$ is proportional to $F$. Use the graph to identify the range of loads for which the data are consistent with Hooke\'s law. Justify your answer.',
         markscheme: [
-          `A straight line through the origin passes through the error bars of the points up to about ${d.text('F', LIN)} N (accept up to ${d.text('F', LIN + 1)} N) ✓`,
-          'For larger loads the points lie above any such line by more than their error bars ✓',
+          `A straight line through the origin fits the points, within their uncertainty of ±0.05 mm, up to about ${d.text('F', LIN)} N (accept up to ${d.text('F', LIN + 1)} N) ✓`,
+          'For larger loads the points lie above any such line by far more than their uncertainty ✓',
         ],
       },
       {

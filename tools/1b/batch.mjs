@@ -16,6 +16,8 @@
 // audit trail that says whether the teacher inspected that dataset individually (inspected: true/false).
 // Nothing here ever records TEACHER-REVIEWED: only an individual review does that.
 
+import { contextProblems, contextRepetition } from './contexts.mjs';
+
 // Matrix risk of each archetype (docs/PAPER1B_ARCHETYPE_MATRIX.md, section 1).
 export const ARCHETYPE_RISK = {
   M1: 'LOW', M2: 'LOW', M3: 'MEDIUM', M4: 'MEDIUM',
@@ -97,6 +99,12 @@ export function classify(r, { diags, established, verdictMargin }) {
     const gap = cl.value < res.range[0] ? res.range[0] - cl.value : cl.value > res.range[1] ? cl.value - res.range[1] : Math.min(cl.value - res.range[0], res.range[1] - cl.value);
     if (gap < 2 * verdictMargin * Math.abs(res.value)) amber.push(`uncertainty-sensitive verdict on ${cl.result} (${(100 * gap / Math.abs(res.value)).toFixed(1)} % from the range edge)`);
   }
+  // Context family and objects (contexts.mjs): a missing, unknown or incomplete declaration needs a person.
+  for (const p of contextProblems(r.def)) amber.push(p);
+  // Data the author has declared regular on purpose (validate.mjs, regularity check): a person must agree.
+  for (const [k, c] of Object.entries(r.def.columns || {})) {
+    if (c.regularity) amber.push(`regular data accepted by the author in column ${k} (${(c.regularity.accept || []).join(', ')}): ${c.regularity.reason}`);
+  }
   // First example of a LOW-risk archetype: GREEN, but preferred for the teacher's sample.
   const newLow = arch.filter((a) => ARCHETYPE_RISK[a] === 'LOW' && !established.archetypes.has(a));
   const cls = red.length ? 'RED' : amber.length ? 'AMBER' : 'GREEN';
@@ -111,8 +119,9 @@ function seededOrder(ids, seedText) {
   return ids.map((id) => [rnd(), id]).sort((a, b) => a[0] - b[0]).map((x) => x[1]);
 }
 
-// Diversity within a batch: the same apparatus twice, or one archetype or sequence dominating.
-export function diversityWarnings(members) {
+// Diversity within a batch: the same apparatus twice, one archetype or sequence dominating, or a context family or
+// object repeated within the batch or already common in the rest of the bank (`others`; contexts.mjs).
+export function diversityWarnings(members, others = []) {
   const out = [];
   const seen = new Map();
   for (const r of members) {
@@ -126,6 +135,7 @@ export function diversityWarnings(members) {
     for (const r of members) { const main = (r.def.archetypes || [])[0]; if (main) count[main] = (count[main] || 0) + 1; }
     for (const [a, n] of Object.entries(count)) if (n / members.length > 0.35) out.push(`archetype ${a} is the main archetype of ${n} of ${members.length} datasets (over 35 %)`);
   }
+  out.push(...contextRepetition(members, others));
   return out;
 }
 
@@ -143,7 +153,7 @@ export function batchPlan(batchId, { results, diags, registry, verdictMargin }) 
   const prioritised = greens.filter((x) => x.priority).map((x) => x.id);
   const rest = seededOrder(greens.filter((x) => !x.priority).map((x) => x.id), batchId);
   const suggestedSample = [...prioritised, ...rest].slice(0, Math.max(sampleSize, prioritised.length ? 1 : 0));
-  return { batchId, rows, sampleSize, suggestedSample, diversity: diversityWarnings(members) };
+  return { batchId, rows, sampleSize, suggestedSample, diversity: diversityWarnings(members, results.filter((r) => r.def.batch !== batchId)) };
 }
 
 // The batch-acceptance decision. Returns { registry, approved: [...], errors: [...] }; on errors the registry is

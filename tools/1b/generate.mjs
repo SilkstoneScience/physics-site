@@ -131,7 +131,8 @@ export function generateRows(def, { ideal = false } = {}) {
       } else if (c.kind === 'catalogue') {
         // Published (secondary) data: the source's values, rounded to the column's resolution. The noise-free
         // data are the physics model's values, so the analysis can be checked against the model exactly.
-        row[k] = ideal ? modelValue(def, c, { params: p, row, singles }, `column ${k}`) : roundTo(c.values[i], c.resolution);
+        // An observed column (no model) keeps its published values even in the noise-free data.
+        row[k] = ideal && !c.observed ? modelValue(def, c, { params: p, row, singles }, `column ${k}`) : roundTo(c.values[i], c.resolution);
       } else if (c.kind === 'derived') {
         const v = c.value(row, p, singles);
         row[k] = ideal ? v : roundTo(v, 10 ** -c.dp);
@@ -207,7 +208,7 @@ export function makeContext(def, rows, singles) {
       const ok = pts.filter((q) => q.y > 0);
       const lf = linearFit(ok.map((q) => q.x), ok.map((q) => Math.log(q.y)));
       d.fit = { k: -lf.m, A: Math.exp(lf.c), r2: lf.r2, halfLife: Math.LN2 / -lf.m };
-    } else if (g.fit) throw new Error(`${def.id}: unknown fit "${g.fit}"`);
+    } else if (g.fit && g.fit !== 'none') throw new Error(`${def.id}: unknown fit "${g.fit}"`);
   }
   // Ranges from the max/min lines (null if no straight line passes through every error bar).
   d.gradientRange = () => (d.band ? [d.band.mMin, d.band.mMax] : null);
@@ -279,9 +280,12 @@ export function trialsTableHtml(def, d) {
 export function graphFigure(def, d, kind, g = def.graph, name = kind === 'student' ? 'graph' : 'graph-ms') {
   const [cx, cy] = [def.columns[g.x], def.columns[g.y]];
   const omit = kind === 'student' ? g.omit || [] : [];
+  // errorBars: 'too-small' (see safeguards.mjs, P1): the uncertainties are too small to see as bars, so none are drawn
+  // and the caption states them instead. They are still used for every max/min line and verdict.
+  const hideBars = g.errorBars === 'too-small';
   const points = d.rows.map((row, i) => ({
     x: row[g.x], y: row[g.y], row: i,
-    ex: (g.xErrorBars && d.unc(g.x, i)) || 0, ey: d.unc(g.y, i) || 0,
+    ex: (!hideBars && g.xErrorBars && d.unc(g.x, i)) || 0, ey: (!hideBars && d.unc(g.y, i)) || 0,
   })).filter((pt) => !omit.includes(pt.row));
   const lines = [];
   const curves = [];
@@ -293,21 +297,37 @@ export function graphFigure(def, d, kind, g = def.graph, name = kind === 'studen
     }
   }
   if (kind === 'examiner' && g === def.graph && g.fit === 'exponential') curves.push({ f: (x) => d.fit.A * Math.exp(-d.fit.k * x), cls: 'l1 thin' });
+  // T6: a model curve (the physics, not a fit) on the examiner's graph only, and a reference line (e.g. observed = model)
+  // on both graphs. Points-only graphs use fit: 'none'.
+  if (kind === 'examiner' && g.modelCurve) curves.push({ f: g.modelCurve(d), cls: 'l1 thin', model: true });
+  const ref = g.referenceLine ? (typeof g.referenceLine === 'function' ? g.referenceLine(d) : g.referenceLine) : null;
   const bars = points.some((pt) => pt.ey || pt.ex);
   const what = `${cy.name} against ${cx.name}`;
-  const alt = `Graph of ${what}, with ${points.length} plotted points${bars ? ' and error bars' : ''}`
-    + (kind === 'examiner' ? (g.fit === 'linear' ? ', the line of best fit' + (d.band ? ' and the steepest and shallowest lines' : '') : ', and the curve of best fit') : '')
+  const alt = `Graph of ${what}, ${g.style === 'trace' ? `a line through the sensor readings` : `with ${points.length} plotted points${bars ? ' and error bars' : ''}`}`
+    + (kind === 'examiner' && g.shade ? `, with ${g.shade.label} shaded` : '')
+    + (kind === 'examiner' ? (g.fit === 'linear' ? ', the line of best fit' + (d.band ? ' and the steepest and shallowest lines' : '') : g.fit === 'exponential' ? ', and the curve of best fit' : '') : '')
+    + (kind === 'examiner' && g.modelCurve ? `, and the model curve (${g.modelCurveLabel})` : '')
+    + (ref ? `, and a dashed line showing ${ref.label}` : '')
     + '. The values are in the data table.';
   const svg = renderGraph({
     x: { symbol: cx.symbolText || cx.symbol, unit: parseUnit(cx.unit || '').text, includeZero: !!(g.zero && g.zero.x), range: g.xRange },
     y: { symbol: cy.symbolText || cy.symbol, unit: parseUnit(cy.unit || '').text, includeZero: !!(g.zero && g.zero.y), range: g.yRange },
-    points, lines, curves, alt, kind,
+    points, lines, curves, refs: ref ? [ref] : [], alt, kind, height: g.height,
+    trace: g.style === 'trace',
+    shade: kind === 'examiner' && g.shade ? { from: g.shade.from, to: g.shade.to, baseline: typeof g.shade.baseline === 'function' ? g.shade.baseline(d) : g.shade.baseline } : null,
   });
+  const uy = d.rows.map((_, i) => d.unc(g.y, i));
+  const tooSmall = !hideBars ? ''
+    : uy.every((u) => u === uy[0]) && uy[0]
+      ? ` The uncertainty in ${cy.name} (±${fmtNum(uy[0], columnDp(cy))}${parseUnit(cy.unit || '').text ? ' ' + parseUnit(cy.unit || '').text : ''}) is too small to show as error bars.`
+      : ' The uncertainties are too small to show as error bars.';
+  const refNote = ref ? ` The dashed line shows ${ref.label}.` : '';
   const caption = kind === 'student'
-    ? `Graph of ${what}${bars ? '. The error bars show the uncertainties' : ''}.`
+    ? `Graph of ${what}${bars ? '. The error bars show the uncertainties' : ''}.${tooSmall}${refNote}`
     : (g.fit === 'linear'
-      ? '<span class="key-1">Blue</span>: line of best fit.' + (d.band ? ' <span class="key-2">Orange, dashed</span>: steepest and shallowest lines through the error bars.' : '')
-      : '<span class="key-1">Blue</span>: curve of best fit.');
+      ? '<span class="key-1">Blue</span>: line of best fit.' + (d.band ? ' <span class="key-2">Orange, dashed</span>: steepest and shallowest lines ' + (hideBars ? 'that fit the data within their uncertainties.' : 'through the error bars.') : '')
+      : g.fit === 'exponential' ? '<span class="key-1">Blue</span>: curve of best fit.' : `Graph of ${what}.`)
+      + (g.modelCurve ? ` <span class="key-1">Blue</span>: ${g.modelCurveLabel}.` : '') + (g.shade ? ` Shaded: ${g.shade.label}.` : '') + tooSmall + refNote;
   return { kind: 'figure', figure: name, svg, alt, caption };
 }
 
@@ -330,9 +350,9 @@ export function buildQuestion(def) {
   });
   const rawParts = def.parts(d);
   // Design metadata for the validator and reports (AO tags, what a part asks for): not published.
-  const meta = rawParts.map((pt) => ({ label: pt.label, marks: pt.marks, ao: pt.ao, asks: pt.asks }));
+  const meta = rawParts.map((pt) => ({ label: pt.label, marks: pt.marks, ao: pt.ao, asks: pt.asks, reads: pt.reads }));
   const parts = rawParts.map((pt) => {
-    const { msFigure, figure, ao: _ao, asks: _asks, ...rest } = pt;
+    const { msFigure, figure, ao: _ao, asks: _asks, reads: _reads, ...rest } = pt;
     if (msFigure && !figures[msFigure]) throw new Error(`${def.id} part (${pt.label}): no figure called "${msFigure}"`);
     // figure: shown with the part's question (data revealed by the part, as in a printed paper).
     if (figure && !figures[figure]) throw new Error(`${def.id} part (${pt.label}): no figure called "${figure}"`);

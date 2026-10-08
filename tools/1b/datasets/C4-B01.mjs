@@ -23,6 +23,8 @@ export default {
   batch: 'pilot',
   archetypes: ['N1', 'G3'],
   apparatus: 'vibration generator, string, pulley and hanging mass',
+  contextFamily: 'standing-waves',
+  contextObjects: ['vibrating-string', 'slotted-masses'],
   originality: 'Standing waves on a string are common; May 2023 TZ1 Section A used a similar rig but varied the hanging mass against wavelength squared. This dataset varies length at fixed tension: own variables, numbers and sequence.',
 
   // ----- 1. Physics model -----
@@ -173,6 +175,7 @@ export default {
       },
       {
         label: 'f', marks: 2, ao: { AO2: 1, AO3: 1 }, msFigure: 'diagram-ms',
+        reads: [{ figure: 'graph', x: 1 / L_PREDICT, y: d.r.f3.value / 3 }],
         question: `The student sets $L = ${d.dp(L_PREDICT, 3)}\\ \\text{m}$ and increases the frequency until the string vibrates in its third harmonic. Use the graph to predict this frequency.`,
         numeric: d.num('f3', {
           mistakes: [{ value: f1, feedback: 'That is the first harmonic. The third harmonic has three loops, so its frequency is three times larger.' }],

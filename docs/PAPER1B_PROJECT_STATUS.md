@@ -25,8 +25,8 @@ teacher decision.
 | Production | **`main` is production.** GitHub Pages publishes `main` |
 | `main` | `4ca0f74` "Merge contact form on the About page" (7 October 2026), **pushed** (local = GitHub). Batch 1 reached `main` in `a9f8c58`; the 26 later commits are general website work (EE page, Resources, guiding questions, photos, copyright notice, contact form) and don't touch Paper 1B (`questions/1b.json` and `tools/1b/` are unchanged since `a9f8c58`) |
 | Batch 1 | **Live.** Merged into `main` and pushed |
-| Approved and published Paper 1B datasets | **13**: 5 original pilots + 8 Batch 1 datasets, all in `questions/1b.json` on `main` |
-| Tests / checker | 460 of 460 Paper 1B tests pass; build: 13 APPROVED; site checker: no errors (verified 8 October 2026 on `paper1b-batch2` after merging `4ca0f74`) |
+| Approved and published Paper 1B datasets | **On `main`: 13** (5 pilots + 8 Batch 1). **On `paper1b-batch2`: 9.** A2-B01, A2-B02, B3-B01 and C1-B01 were reset in Phase 12 (presentation changes, Batch 1 reopened by the teacher) and are preview-only until re-approved |
+| Tests / checker | Phase 12 (8 October 2026, on `paper1b-batch2`): **543 of 543** Paper 1B tests pass; build: 9 APPROVED + 4 preview; site checker: no errors, 1 warning (C4-B01 error bars too small to see) |
 
 ### Development branches
 
@@ -41,13 +41,18 @@ teacher decision.
 - **Batch 2 has NOT been generated.**
 - No Batch 2 datasets exist, none is approved, and none is in production.
 - Batch 2 development begins from the current production `main` (`4ca0f74`), on `paper1b-batch2`.
-- Before generating, the agreed plan is to implement the MUST FIX tooling from `docs/PAPER1B_BATCH1_RETROSPECTIVE.md` (section 7).
+- **Plan:** `docs/PAPER1B_BATCH2_PLAN.md` (Phase 11, 8 datasets).
+- **Tooling (Phase 12):** the four MUST FIX checks (T1–T4) and the capabilities the plan needs (T5–T8, T10) are built and tested; T9 is deferred with C5-B01, which is flagged for a teacher decision. Details: **`docs/PAPER1B_PHASE12_TOOLING.md`**.
+- **Not ready to generate** until the teacher's decisions in that document (section 6) are made.
 
 For a short, step-by-step resume guide, see **`docs/PAPER1B_CONTINUATION.md`**.
 
 ---
 
 ## 2. Production bank (all APPROVED)
+
+> As approved on 6 October 2026 and live on `main`. On `paper1b-batch2`, A2-B01, A2-B02, B3-B01 and C1-B01 were reset in
+> Phase 12 for presentation changes and await re-approval (`docs/PAPER1B_PHASE12_TOOLING.md`, section 3).
 
 Risk classes did not exist when the pilots were approved, so they have none. "Inspected" means the teacher personally
 inspected that dataset.
@@ -171,7 +176,7 @@ review. Nothing else is written to `questions/1b.json`.
 | Batch tool (`batch.mjs`) | Risk classes, the established archetype and feature sets, sample size and suggestion, diversity warnings, and the acceptance logic | via `review.mjs batch` / `accept-batch` |
 | Build (`build.mjs`) | Builds every dataset twice (determinism), validates, audits, works out statuses, writes `questions/1b.json` (APPROVED only) and the local preview | `node tools/1b/build.mjs` (add `--report` for results, `--audit` for the physics) |
 | AO analysis (`ao.mjs`) | AO marks by part, dataset, batch and bank; warns outside 40–60 % AO3 for 40+ marks | `node tools/1b/ao.mjs --parts` · `--batch batch-1` |
-| Tests (`test.mjs`) | 460 tests: units, fits, laws, uncertainty, systematic effects, traceability, freeze, review gate, AO tags, batch logic, every dataset | `node tools/1b/test.mjs` |
+| Tests (`test.mjs`) | 543 tests (Phase 12): units, fits, laws, uncertainty, systematic effects, traceability, freeze, review gate, AO tags, batch logic, every dataset | `node tools/1b/test.mjs` |
 | Broken-dataset fixtures (`fixtures/broken.mjs`) | Deliberately broken datasets that must each be caught with a named error code | run by `test.mjs` |
 | Site checker (`tools/check.mjs`) | Whole-site checks, and runs the Paper 1B tests and build check; GitHub runs it on every push | `node tools/check.mjs` |
 | Preview (`preview.bat`, `tools/preview.ps1`) | Local web server on port 8000; non-approved datasets appear only here, marked "Preview only: STATUS" | double-click `preview.bat`, or `powershell -ExecutionPolicy Bypass -File tools/preview.ps1`, then open http://localhost:8000 |
@@ -196,8 +201,8 @@ Assumes the repository is cloned, Node.js is installed (`winget install OpenJS.N
    `main` has moved on since the branch last merged it, merge `main` into `paper1b-batch2` before starting new work.
 2. **Per-computer setup:** create `CLAUDE.local.md` (not in git) recording where `physics-source` and the reference cache are on that computer (see `CLAUDE.md`).
 3. **Dependencies:** none to install.
-4. **Run the tests:** `node tools/1b/test.mjs` (expect "All 460 Paper 1B tests passed", or more if tests were added).
-5. **Build the Paper 1B files:** `node tools/1b/build.mjs`. It should end with "Production (questions/1b.json): 13 APPROVED dataset(s)" and rebuild the local preview, which isn't stored in git.
+4. **Run the tests:** `node tools/1b/test.mjs` (expect "All 543 Paper 1B tests passed", or more if tests were added).
+5. **Build the Paper 1B files:** `node tools/1b/build.mjs`. On `paper1b-batch2` after Phase 12 it should end with "Production (questions/1b.json): 9 APPROVED dataset(s). Local preview …: 4 dataset(s)" (13 once the four reset Batch 1 datasets are re-approved) and rebuild the local preview, which isn't stored in git.
 6. **Run the site checker:** `node tools/check.mjs` (expect "No errors").
 7. **Start the preview:** double-click `preview.bat` (or the PowerShell command above), then open http://localhost:8000.
 8. **Inspect one question:** http://localhost:8000/questions.html?paper=1B&q=D1-B01 (change the ID). Non-approved datasets show "Preview only: STATUS" and appear only on localhost.
@@ -247,11 +252,7 @@ Batch 2 work.
   - AO tags;
   - systematic effects and empirical laws;
   - scientific notation in mark schemes.
-- **Capabilities to add before Batch 2** (retrospective, section 7, MUST FIX):
-  1. a context-family diversity check;
-  2. a check for too-regular data;
-  3. a check that values read from a graph are inside its axes;
-  4. a giveaway check across earlier mark schemes.
+- **Capabilities added before Batch 2 (Phase 12, `docs/PAPER1B_PHASE12_TOOLING.md`):** context families (T1), too-regular data (T2), graph reads inside the axes (T3), giveaways (T4), ratio and whole-multiple claims (T5), points-only graphs with model curves and reference lines (T6), area under a graph, sensor traces and data without a student table (T7), instrument-scale read-back (T8), published values against a stored source copy and observed published values (T10), error bars that can't be seen and y error bars only (P1). Deferred: observational-data mode (T9).
 - **Should add:** diagram components for common set-ups, a command-term check, secondary-data verification aids, specific physics-review records, a local originality index, an axis-name ambiguity lint, and a part-mark and command-term variety report (retrospective section 7, items 5–13).
 - **Intended review strategy:** inspect every HIGH-risk first and second example; waive only MEDIUM-level AMBER reasons, with written reasons; a GREEN sample of about 15 % (at least 1), preferably in a new context. The retrospective's rule-change proposals C1–C6 need the teacher's decision first.
 
@@ -290,13 +291,9 @@ Batch 2 work.
   - electrical heating for specific heat: B1-B01, B1-B02;
   - themes A and B: 8 of 13 datasets.
 - **Assessment quality not checked automatically:** ambiguity of wording, whether the intended interpretation is obvious, whether a question feels natural rather than engineered, realism as a teacher sees it, pedagogical level for SL students, fairness of mark allocation, command-term appropriateness, alternative valid student methods.
-- **Validator blind spots found in Batch 1** (to be fixed; retrospective section 7):
-  - repeated context families (it compares only exact apparatus names);
-  - too-regular tables (only r² > 0.999999 is flagged);
-  - graph values outside the plotted axes;
-  - giveaways in earlier mark schemes;
-  - command terms are not identified.
-- **Secondary data:** provenance is recorded but not machine-verified; choosing the right source quantity (e.g. sidereal versus anomalistic period) needed a person.
+- **Validator blind spots found in Batch 1:** context families, too-regular data, values outside the graph axes and giveaways are now checked (Phase 12). Still not checked: command terms.
+- **Secondary data:** values are now checked against a stored copy of the source (T10), but the copy itself is made by a person, and choosing the right source quantity (e.g. sidereal versus anomalistic period) still needs one.
+- **C4-B01 (approved pilot):** its error bars are hidden under the point markers (P1 warning); fixing it changes its caption, so it needs the teacher's agreement to reset.
 - **Empirical models:** B1-B02 (Newton's law of cooling) and A2-B02 (yield beyond the limit) use laws beyond the syllabus. They are not shown to students but were judged by the teacher, not proven.
 - **Physics-review records:** PHYSICS-REVIEWED for Batch 1 used one standard note for all 8 datasets; the note should become dataset-specific.
 - **Evidence for the risk rules is thin:** 5 inspections, 0 issues found by the teacher, and only 1 GREEN dataset inspected.
@@ -313,13 +310,17 @@ Batch 2 work.
 **Done on 8 October 2026:** restored on the second computer. The teacher confirmed `4ca0f74` as the production commit;
 `main` was merged into `paper1b-batch2`; tests (460/460), build (13 APPROVED) and site checker (no errors) verified.
 
+**Done on 8 October 2026 (Phases 11–12):** Batch 2 planned (`docs/PAPER1B_BATCH2_PLAN.md`); tooling T1–T8, T10 and P1 built and
+tested (543 tests); Batch 1 presentation audited, with A2-B01, A2-B02, B3-B01 and C1-B01 reset for re-approval; B5-B01's
+unreadable emf axis fixed (drawing only). See `docs/PAPER1B_PHASE12_TOOLING.md`.
+
 When you return, in this order (detailed commands in `docs/PAPER1B_CONTINUATION.md`):
 
-1. **Check out `paper1b-batch2`** and verify it: tests pass, the build reports 13 APPROVED datasets, the checker reports no errors, and `git log -1 main` shows the production commit.
-2. **Read** this file, `docs/PAPER1B_SPECIFICATION.md`, `docs/PAPER1B_ARCHETYPE_MATRIX.md` and `docs/PAPER1B_BATCH1_RETROSPECTIVE.md`.
-3. **Decide** (teacher) on the retrospective's MUST FIX tooling and the rule-change proposals C1–C6.
-4. **Implement the agreed tooling fixes** on `paper1b-batch2`, with tests; commit and push the branch.
-5. **Plan Batch 2:** choose about 8 datasets following the retrospective's priorities (section 9); record the plan in the repository before generating.
+1. **Check out `paper1b-batch2`** and verify it: tests pass, the build reports 9 APPROVED datasets and 4 in the preview, the checker reports no errors, and `git log -1 main` shows the production commit.
+2. **Read** this file, `docs/PAPER1B_PHASE12_TOOLING.md` and `docs/PAPER1B_BATCH2_PLAN.md`.
+3. **Teacher decisions** (`docs/PAPER1B_PHASE12_TOOLING.md`, section 6): re-approve the four reset Batch 1 datasets (individually or as a new batch); C5-B01; the area-range policy, empirical laws and external sources; proposals C1–C6; C4-B01.
+4. **Phase 13:** make the agreed Phase 12 rules permanent in the specification (section 7 of that document).
+5. **Plan check:** confirm the final Batch 2 list.
 6. **Generate Batch 2** on `paper1b-batch2` (`batch: 'batch-2'`).
 7. **Run automated QA and the independent physics audit:** build, tests, `review.mjs batch batch-2`, `ao.mjs --batch batch-2`, site checker.
 8. **Teacher sampling:** inspect the AMBER datasets (or waive with reasons) and the GREEN sample in the preview.

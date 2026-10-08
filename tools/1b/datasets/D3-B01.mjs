@@ -18,6 +18,8 @@ export default {
   batch: 'pilot',
   archetypes: ['L1', 'L3', 'V3'],
   apparatus: 'current balance (magnet on a top-pan balance)',
+  contextFamily: 'magnetic-force',
+  contextObjects: ['magnet', 'top-pan-balance', 'current-carrying-wire'],
   originality: 'Textbook current-balance practical; not used in any legacy Section A or 2025 Paper 1B paper held. Own numbers and sequence.',
 
   // ----- 1. Physics model -----
@@ -155,6 +157,7 @@ export default {
       },
       {
         label: 'd', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        asks: { conclusion: ['support $F \propto I$', 'can pass through the origin'] },
         question: 'Discuss whether the data support the hypothesis that the force on the wire is proportional to the current.',
         markscheme: [
           'The points lie on a straight line, within their error bars ✓',

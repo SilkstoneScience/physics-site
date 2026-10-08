@@ -25,6 +25,8 @@ export default {
   batch: 'pilot',
   archetypes: ['N2', 'M1', 'V3'],
   apparatus: 'horizontal spring launcher',
+  contextFamily: 'projectile',
+  contextObjects: ['spring', 'launcher', 'ball'],
   originality: 'Common school practical (projectile launched horizontally). No legacy Paper 3 Section A or 2025 Paper 1B question uses this set-up; own numbers and sequence.',
 
   // ----- 1. Physics model -----
@@ -192,6 +194,7 @@ export default {
       },
       {
         label: 'g', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        asks: { conclusion: ['do not support', 'not supported', 'is above this range'] },
         question: `The manufacturer states that the launch speed is $${d.stated('claimedU')}\\ \\text{m s}^{-1}$. Discuss whether the data support this statement.`,
         markscheme: [
           `Uses the steepest and shallowest lines through the error bars (their own lines, or the uncertainty in the gradient) to find a range for $u$: the lines shown give about ${d.sf(lLo, 3)} to ${d.sf(lHi, 3)} $\\text{m s}^{-1}$ ✓`,

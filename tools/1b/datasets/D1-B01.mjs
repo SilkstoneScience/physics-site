@@ -19,6 +19,8 @@ export default {
   batch: 'batch-1',
   archetypes: ['D1', 'N4'],
   apparatus: 'published orbital data for the moons of Jupiter',
+  contextFamily: 'orbital-data',
+  contextObjects: ['database'],
   features: ['graph:log'],
   provenance: {
     source: 'NASA Space Science Data Coordinated Archive (NSSDCA), Jovian Satellite Fact Sheet, by D. R. Williams (last updated 6 December 2023)',
@@ -30,6 +32,20 @@ export default {
       + 'JPL\'s period column there is not the sidereal period for the inner moons, so the fact sheet is used for periods.',
     transformations: 'Semi-major axes converted from 10³ km to km (×1000, exact); periods rounded to 0.001 day; lg(a/km) and lg(T/day) calculated to 3 decimal places. The selection of moons, the table layout, '
       + 'the graph and all questions are new; no published question, graph or table layout is reproduced.',
+    // T10 (Phase 12): the source's own columns, and a stored copy of the values as printed (re-read 2026-10-08: all 8 match).
+    fields: {
+      a: { sourceColumn: 'Semi-major axis (10^3 km)', definition: 'semi-major axis of the orbit, in thousands of kilometres', scale: 1000 },
+      T: {
+        sourceColumn: 'Orbital Period (days)',
+        definition: 'orbital period in days (the fact sheet\'s "Orbital Period*" column; the asterisk only marks retrograde orbits). '
+          + 'Used as the sidereal period: unlike the "P" column of JPL\'s mean elements, it agrees with Kepler\'s third law for the inner moons',
+      },
+    },
+    extract: {
+      file: 'p1b-sources/D1-B01-nssdca-jovian.json',
+      sha256: '1cef7f14c0a202175a0b31e9ac31f7430b4fccb8370f8310c36cfa930e42c325',
+      rows: ['Metis', 'Amalthea', 'Thebe', 'Io', 'Europa', 'Ganymede', 'Callisto', 'Himalia'],
+    },
   },
   originality: 'Database plus log–log analysis is also the structure of a Nov 2025 TZ3 Paper 1B question (stars and the Stefan–Boltzmann '
     + 'law, with a calculator regression line). This dataset uses a different context (moons and Kepler\'s third law), a hand-drawn '
@@ -145,6 +161,7 @@ export default {
     },
     {
       label: 'd', marks: 2, ao: 'AO3',
+      asks: { conclusion: ['support the law', 'supports the law', 'support Kepler'] },
       question: 'Deduce whether the data support Kepler\'s third law.',
       markscheme: [
         `$T^2 \\propto a^3$ means $T \\propto a^{3/2}$, so the gradient should be ${d.stated('n')} ✓`,
