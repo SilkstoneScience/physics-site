@@ -349,8 +349,8 @@ teacher's judgement (spec section 9).
 3. Real published data from **NASA planetary fact sheets** (B2-B01), **IAEA PRIS / operator figures** (E4-B01) and
    **NIST atomic levels** (E1-B01): accuracy, licence and provenance.
 4. ~~**Simulated observational data** for C5-B01, labelled as simulated~~: approved by the teacher on 8 October 2026.
-5. **Empirical laws** (bounce ratio, force-plate pulse) and the **exact line-source law** (beyond the SL syllabus,
-   used only to generate data; students use the inverse square law given in the question).
+5. ~~**Empirical laws** (bounce ratio, force-plate pulse) and the **exact line-source law**~~: all three approved by the teacher on
+   8 October 2026 (used only to generate data; students are given the relationships they use).
 6. ~~The accepted-range policy for **area estimates** (A2-B03)~~: adopted 8 October 2026 (±5 % minimum, count-the-squares estimate included, ±20 % maximum).
 7. Whether the C2-B01 topic tag (C.2, with b = L/4πd² from B.1) is right, or it should be tagged B.1.
 
