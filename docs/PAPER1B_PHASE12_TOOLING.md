@@ -199,7 +199,7 @@ Batch 1 was accepted as `batch-1`, and `accept-batch` refuses a batch that has a
 1. ~~Re-approval of the four reset Batch 1 datasets~~: done 8 October 2026 (section 3a); production on this branch is 13 again.
 2. ~~C5-B01~~: simplified, and simulated observations clearly labelled as simulated approved (8 October 2026; plan section 3.5).
 3. ~~The area accepted-range policy (T7)~~ (adopted 8 October 2026); ~~the empirical laws (bounce, force pulse) and the exact line-source law~~ (approved 8 October 2026); ~~the external sources (NIST, NASA planetary, IAEA PRIS)~~ (approved 8 October 2026).
-4. The retrospective's proposals C1–C6 (they change the risk classes in the Batch 2 plan).
+4. ~~The retrospective's proposals C1–C6~~: decided 8 October 2026: **C1 adopted** (a HIGH-risk archetype needs two individually inspected examples in different context families before later examples can be GREEN; `HIGH_RISK_EXAMPLES_NEEDED` in `batch.mjs`); **C2 not adopted for now**; C3 and C4 already built (T1, T2); **C5 no change**; **C6 adopted** (first and second examples of a HIGH-risk archetype can't be waived; `accept-batch` refuses). Tests: 7.
 5. C4-B01's invisible error bars (approved pilot).
 
 ## 7. For Phase 13: rules to make permanent in the specification (once agreed)
@@ -207,6 +207,7 @@ Batch 1 was accepted as `batch-1`, and `accept-batch` refuses a batch that has a
 - Context families and their limits (T1); the regularity thresholds (T2).
 - Declared graph reads (T3); the giveaway rules (T4).
 - Y error bars only, with `'too-small'` when bars can't be seen (P1); the marker-visibility threshold.
-- The area accepted-range policy (T7).
+- The area accepted-range policy (T7), adopted 8 October 2026.
+- Rules C1 and C6 (risk classes and waivers), adopted 8 October 2026: specification section 16.2–16.3.
 - Stored source copies for all published data (T10).
 - Section 14 (graph requirements) and section 15 (diagram requirements) of the specification should list the new graph types and the scale component.

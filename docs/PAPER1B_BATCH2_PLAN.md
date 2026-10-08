@@ -344,7 +344,8 @@ teacher's judgement (spec section 9).
 
 ## 7. Teacher decisions needed before generation
 
-1. The retrospective's MUST FIX tooling (T1–T4) and proposals **C1–C6** (C1 changes 3 risk classes in section 3.9).
+1. ~~The retrospective's MUST FIX tooling (T1–T4) and proposals **C1–C6**~~: tooling built (Phase 12); C1 and C6 adopted, C2 not
+   for now, C5 no change (8 October 2026). The "with C1" risk classes in section 3.9 now apply.
 2. This dataset list, or changes to it (topics, contexts, difficulty mix).
 3. ~~Real published data from **NASA planetary fact sheets** (B2-B01), **IAEA PRIS** (E4-B01) and **NIST atomic levels**
    (E1-B01)~~: all three approved by the teacher on 8 October 2026, with credit to the source in each question. Each

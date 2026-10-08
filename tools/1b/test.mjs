@@ -593,6 +593,32 @@ export async function runTests() {
     check('errorBars "none": the uncertainty still proves the raw data are not linear (claim checked internally)',
       !validateDataset(c1, q, { topics }).some((x) => x.level === 'error'));
   }
+  // ----- Rules C1 and C6 (adopted by the teacher, 8 October 2026) -----
+  {
+    const d3 = datasets.find((x) => x.def.id === 'D3-B01').def;
+    const asResult = (def) => ({ id: def.id, def, valid: true, state: { changed: false }, built: buildQuestion(def) });
+    const base = { ...d3, id: 'D3-B08', originality: 'test', contextFamily: 'magnetic-force', contextObjects: ['magnet', 'top-pan-balance', 'current-carrying-wire'] };
+    const est = (contexts) => ({ archetypes: new Set(['L1', 'V2']), features: new Set(['fit:linear', 'claim:verdict', 'claim:throughOrigin', 'claim:linear', 'claim:trend']), contexts: new Map(Object.entries(contexts).map(([a, f]) => [a, new Set(f)])) });
+    const opts = (contexts) => ({ diags: [], established: est(contexts), verdictMargin: 0.04 });
+    const v2 = { ...base, archetypes: ['V2'] };
+    const one = classify(asResult(v2), opts({ V2: ['elastic-stretching'] }));
+    check('C1: a HIGH-risk archetype with one inspected example is AMBER ("second example")', one.class === 'AMBER' && one.reasons.some((x) => x.startsWith('second example of HIGH-risk archetype V2')), one.reasons.join('; '));
+    const two = classify(asResult(v2), opts({ V2: ['elastic-stretching', 'light-intensity-distance'] }));
+    check('C1: with two inspected examples in different contexts it is no longer flagged', !two.reasons.some((x) => x.includes('HIGH-risk archetype V2')), two.reasons.join('; '));
+    const l1 = classify(asResult({ ...base, archetypes: ['L1'] }), opts({ L1: ['magnetic-force'] }));
+    check('C1 applies only to HIGH-risk archetypes (L1 with one example is not flagged)', !l1.reasons.some((x) => x.includes('HIGH-risk')));
+    check('C6: a "first example" or "second example" of a HIGH-risk archetype can\'t be waived', one.waivable === false && one.notWaivable.length === 1);
+    const medium = classify(asResult({ ...base, archetypes: ['L1'], reviewFlags: [{ flag: 'test', note: 'x' }] }), opts({ L1: ['magnetic-force'] }));
+    check('C6: a MEDIUM-level AMBER reason (an author flag) can be waived', medium.class === 'AMBER' && medium.waivable === true);
+    const plan = { batchId: 'batch-c6', rows: [{ ...one, individuallyReviewed: false }], sampleSize: 0, suggestedSample: [], diversity: [] };
+    const reg = { datasets: { 'D3-B08': { status: 'PHYSICS-REVIEWED', history: [] } } };
+    const res = acceptBatch(plan, reg, { by: 'Mr Silkstone (teacher)', date: '2026-10-08', note: 'n', systemicOk: true, fingerprints: { 'D3-B08': 'f' }, waive: { 'D3-B08': 'looked fine' } });
+    check('C6: accept-batch refuses a waiver of a HIGH-level AMBER reason', res.errors.some((e) => e.includes('can\'t be waived (rule C6)')), res.errors.join('; '));
+    const real = buildAll(datasets, topics, { registry: JSON.parse(JSON.stringify((await import('./registry.mjs')).loadRegistry())) });
+    const e = establishedSets(real.results, JSON.parse(JSON.stringify((await import('./registry.mjs')).loadRegistry())));
+    check('C1: the bank has one inspected context each for V2, D1 and E2, so second examples are AMBER',
+      ['V2', 'D1', 'E2'].every((a) => e.contexts.get(a) && e.contexts.get(a).size === 1));
+  }
   return { count, failures };
 }
 
