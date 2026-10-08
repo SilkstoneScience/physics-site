@@ -578,6 +578,21 @@ export async function runTests() {
     check('Observed values can\'t also carry a model', meta(obs({ observed: { reason: 'x' }, model: d1.columns.T.model })).some((m) => m.includes('no model')));
     check('Observed values need provenance fields', meta({ ...obs({ observed: { reason: 'x' } }), provenance: { ...d1.provenance, fields: {} } }).some((m) => m.includes('provenance.fields')));
   }
+  // ----- Uncertainty not part of the question: errorBars 'none' and showUncertainty: false (C1-B01, teacher, 8 October 2026) -----
+  {
+    const c1 = datasets.find((x) => x.def.id === 'C1-B01').def;
+    const q = buildQuestion(c1).question;
+    const table = q.data.find((x) => x.kind === 'table');
+    const figs = [...q.data.filter((x) => x.svg), ...q.parts.flatMap((p) => [p.figure, p.msFigure]).filter((f) => f && f.svg)];
+    check('errorBars "none": no error bars, no max/min lines and no mention of uncertainty in any caption or alt text',
+      figs.every((f) => !/class="ebar"|data-fit="(max|min)"/.test(f.svg) && !/error bar|uncertaint/i.test(`${f.caption} ${f.alt}`)));
+    check('showUncertainty: false: the table heading gives no ± for T', !/±/.test(table.html));
+    const mentions = editPartLocal(c1, 'a', (pt) => ({ ...pt, markscheme: ['The points lie on a curve, beyond the uncertainty in each period ✓', ...pt.markscheme.slice(1)] }));
+    check('errorBars "none": a mark scheme that uses the uncertainty is an error',
+      validateDataset(mentions, buildQuestion(mentions).question, { topics }).some((x) => x.code === 'graph-errorbar-text' && x.level === 'error'));
+    check('errorBars "none": the uncertainty still proves the raw data are not linear (claim checked internally)',
+      !validateDataset(c1, q, { topics }).some((x) => x.level === 'error'));
+  }
   return { count, failures };
 }
 

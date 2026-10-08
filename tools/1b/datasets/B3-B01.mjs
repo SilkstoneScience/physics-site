@@ -1,8 +1,8 @@
 // B.3 Pressure of a fixed volume of air against Celsius temperature, extrapolated to estimate absolute zero
 // (archetypes L2, G3 and V3).
-// Skills: testing proportionality from the table, extrapolating a line to an intercept, why the extrapolated value is
-// uncertain, judging agreement with the accepted value from the range given by the max/min lines (stated in (d), because
-// the ±0.5 kPa uncertainty is too small to draw on this extended axis: Phase 12), predicting at an unmeasured temperature.
+// Skills: testing proportionality from the table, the gradient and intercept of a line of best fit, extrapolating
+// algebraically to absolute zero, its uncertainty from the steepest and shallowest lines, percentage difference from the
+// accepted value, predicting at an unmeasured temperature. Temperature is T (in °C), as the IB writes it (teacher, 8 Oct 2026).
 
 const T_PREDICT = 100; // boiling water
 
@@ -47,7 +47,7 @@ export default {
   },
 
   columns: {
-    theta: { kind: 'set', name: 'temperature', symbol: '\\theta', symbolText: 'θ', unit: '°C', values: [12.0, 23.5, 37.0, 51.5, 64.0, 78.5], resolution: 0.5, uncertainty: 0.5 },
+    theta: { kind: 'set', name: 'temperature', symbol: 'T', symbolText: 'T', unit: '°C', values: [12.0, 23.5, 37.0, 51.5, 64.0, 78.5], resolution: 0.5, uncertainty: 0.5 },
     p: {
       kind: 'measured', name: 'pressure', symbol: 'p', unit: 'kPa',
       model: { law: 'pressure-law', inputs: { p0: 'p.p0', T0: 'p.T0', T: 'row.theta' } },
@@ -60,14 +60,14 @@ export default {
       noise: { type: 'gauss', sd: 0.2 }, resolution: 0.5, uncertainty: 0.5,
     },
   },
-  // errorBars 'too-small': ±0.5 kPa is about 1 unit on this extended axis, so no bars are drawn and the caption states it (P1).
-  // xErrorBars keeps the ±0.5 °C temperature uncertainty in the max/min lines (it is real and moves the intercept range from
-  // −277…−262 °C to −285…−255 °C); nothing is drawn for it (Phase 12: y error bars only are drawn).
-  graph: { x: 'theta', y: 'p', fit: 'linear', band: true, xErrorBars: true, zero: { y: true }, xRange: [-300, 100], errorBars: 'too-small' },
+  // Graph zoomed to 0–100 °C (teacher, 8 October 2026), so the ±0.5 kPa error bars are visible and students draw the best,
+  // steepest and shallowest lines through them; absolute zero is then found by algebraic extrapolation (T = −c/m).
+  // y error bars only; the plot is taller (height 480) so each bar clears its marker.
+  graph: { x: 'theta', y: 'p', fit: 'linear', band: true, zero: { x: true }, xRange: [0, 100], yRange: [90, 130], height: 480 },
 
   results: {
-    gradient: { unit: 'kPa Δ°C^-1', dims: { of: 'y/x' }, check: 'gradient', value: (d) => d.fit.m },
-    intercept: { unit: 'kPa', check: 'intercept', value: (d) => d.fit.c },
+    gradient: { unit: 'kPa Δ°C^-1', dims: { of: 'y/x' }, check: 'gradient', value: (d) => d.fit.m, range: (d, v) => d.widen(d.gradientRange(), v, 0.04) },
+    intercept: { unit: 'kPa', check: 'intercept', value: (d) => d.fit.c, range: (d, v) => d.widen(d.interceptRange(), v, 0.005) },
     absZero: {
       unit: '°C', estimates: 'thetaAbs', basis: 'lines',
       value: (d) => xAt0(d.fit),
@@ -78,6 +78,10 @@ export default {
       value: (d) => d.r.absZero.value,
       range: (d, v) => d.widen(d.r.absZero.range, v, 0.03),
     },
+    // Absolute uncertainty in absolute zero: half the spread of the steepest and shallowest lines' intercepts.
+    dAbsZero: { unit: 'Δ°C', value: (d) => (d.r.absZero.range[1] - d.r.absZero.range[0]) / 2 },
+    pctUnc: { unit: '%', value: (d) => (100 * d.r.dAbsZero.value) / Math.abs(d.r.absZero.value) },
+    pctDiff: { unit: '%', value: (d) => (100 * Math.abs(d.r.absZero.value - d.p.thetaAbs)) / Math.abs(d.p.thetaAbs) },
     pred: {
       unit: 'kPa', predictAt: { column: 'theta', value: T_PREDICT },
       value: (d) => d.fit.m * T_PREDICT + d.fit.c,
@@ -87,67 +91,81 @@ export default {
     ratioHigh: { unit: 'kPa Δ°C^-1', value: (d) => d.rows[5].p / d.rows[5].theta },
   },
 
+  // Part (e) has no verdict claim: with y error bars only, −273 °C lies about 1.5 % inside the steepest/shallowest-line
+  // range (the verdict rule needs 4 %), so students' own lines could give either conclusion. Teacher's decision
+  // (8 October 2026): keep (e) and credit a conclusion consistent with the candidate's own uncertainty. The review flag
+  // records this and keeps the dataset AMBER, so it is always inspected rather than batch-approved unseen.
   claims: [
     { type: 'linear', minR2: 0.995 },
     { type: 'throughOrigin', expect: false },
-    { type: 'verdict', result: 'absZero', value: -273, expect: 'inside' },
     { type: 'trend', direction: 'increasing' },
   ],
+  reviewFlags: [{ flag: 'verdict-borderline', note: 'part (e): −273 °C is only about 1.5 % inside the max/min-line range; teacher decided (8 October 2026) to credit a conclusion consistent with the candidate\'s own uncertainty' }],
 
   stated: {
-    accepted: { value: -273, dp: 0, unit: '°C', source: 'data booklet: T/K = θ/°C + 273, so absolute zero is −273 °C' },
+    accepted: { value: -273, dp: 0, unit: '°C', source: 'data booklet: absolute zero is 0 K = −273 °C' },
   },
 
-  intro: () => '<p>A student investigates how the pressure $p$ of a fixed mass of air at constant volume depends on its temperature $\\theta$. '
+  intro: () => '<p>A student investigates how the pressure $p$ of a fixed mass of air at constant volume depends on its temperature $T$. '
     + 'A sealed flask of air is held in a water bath and connected by a short tube to a Bourdon pressure gauge. The bath is heated in steps, '
     + 'and at each step the student waits until the reading is steady.</p>',
 
   parts: (d) => {
     const [aLo, aHi] = d.r.absZero.range;
+    const [gLo, gHi] = d.r.gradient.range;
+    const [cLo, cHi] = d.r.intercept.range;
     const [pLo, pHi] = d.r.pred.range;
     return [
       {
         label: 'a', marks: 2, ao: 'AO3',
-        question: 'Show, using two rows of the table, that $p$ is not proportional to $\\theta$.',
+        question: 'Show, using two rows of the table, that $p$ is not proportional to $T$.',
         markscheme: [
-          `$\\dfrac{p}{\\theta}$ is ${d.sf(d.r.ratioLow.value, 3)} $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at ${d.text('theta', 0)} °C but ${d.sf(d.r.ratioHigh.value, 3)} $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at ${d.text('theta', 5)} °C (or any two non-adjacent rows) ✓`,
-          'The ratio is not constant, so $p$ is not proportional to $\\theta$ (equivalently: increasing $\\theta$ by a factor does not increase $p$ by the same factor) ✓',
+          `$\\dfrac{p}{T}$ is ${d.sf(d.r.ratioLow.value, 3)} $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at ${d.text('theta', 0)} °C but ${d.sf(d.r.ratioHigh.value, 3)} $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at ${d.text('theta', 5)} °C (or any two non-adjacent rows) ✓`,
+          'The ratio is not constant, so $p$ is not proportional to $T$ ✓',
         ],
       },
       {
-        label: 'b', marks: 3, ao: { AO2: 2, AO3: 1 }, msFigure: 'graph-ms',
-        reads: [{ figure: 'graph', x: d.r.absZero.value, y: 0 }],
-        question: 'Draw the line of best fit and extend it to $p = 0$. Hence determine the temperature at which the pressure of the air would be zero, according to these data.',
+        label: 'b', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        reads: [{ figure: 'graph', x: 0, y: d.r.intercept.value }],
+        question: 'Draw the line of best fit on the graph. Determine its gradient and its intercept on the $p$ axis.',
+        markscheme: [
+          `Gradient $= ${d.sf(d.r.gradient.value, 2)}\\ \\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ (accept ${d.sf(gLo, 2)} to ${d.sf(gHi, 2)}) ✓`,
+          `Intercept $= ${d.sf(d.r.intercept.value, 3)}\\ \\text{kPa}$ (accept ${d.sf(cLo, 3)} to ${d.sf(cHi, 3)}) ✓`,
+        ],
+      },
+      {
+        label: 'c', marks: 2, ao: 'AO2',
+        question: 'Hence determine the temperature at which the pressure of the air would be zero, according to these data.',
         numeric: d.num('absZeroAnswer'),
         markscheme: [
-          'Line of best fit drawn through the points and extended to the $\\theta$ axis ✓',
-          'Reads the intercept, or calculates it from the gradient and the intercept on the $p$ axis ✓',
-          `About ${d.int(d.r.absZero.value)} °C (accept ${d.int(d.r.absZeroAnswer.range[0])} to ${d.int(d.r.absZeroAnswer.range[1])} °C) ✓`,
+          'At $p = 0$: $T = -\\dfrac{\\text{intercept}}{\\text{gradient}}$ (extrapolating the line) ✓',
+          `$T = ${d.int(d.r.absZero.value)}\\ {}^{\\circ}\\text{C}$ (accept ${d.int(d.r.absZeroAnswer.range[0])} to ${d.int(d.r.absZeroAnswer.range[1])}; allow ECF from (b)) ✓`,
         ],
       },
       {
-        label: 'c', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
-        question: 'Explain why the uncertainty in your answer to (b) is much larger than the uncertainty in each temperature reading.',
+        label: 'd', marks: 3, ao: { AO2: 2, AO3: 1 }, msFigure: 'graph-ms',
+        question: 'Draw the steepest and shallowest straight lines that pass through all the error bars. Use them to determine the absolute uncertainty in your answer to (c).',
         markscheme: [
-          `The line is extended a long way beyond the data (from ${d.text('theta', 0)} °C to about ${d.int(d.r.absZero.value)} °C) ✓`,
-          'A small change of gradient, still consistent with the uncertainty in $p$, moves the intercept a long way (by tens of degrees) ✓',
+          'Steepest and shallowest lines drawn through all the error bars ✓',
+          `Their temperatures at $p = 0$, found in the same way, are about ${d.int(aLo)} °C and ${d.int(aHi)} °C ✓`,
+          `Uncertainty $= \\dfrac{\\text{difference}}{2} \\approx ${d.int(d.r.dAbsZero.value)}\\ {}^{\\circ}\\text{C}$ (allow values from the candidate's own lines) ✓`,
         ],
       },
       {
-        label: 'd', marks: 1, ao: 'AO3',
-        asks: { conclusion: ['is consistent', 'lies within'] },
-        question: `The steepest and shallowest straight lines that fit the data within their uncertainties meet the $\\theta$ axis at ${d.int(aLo)} °C and ${d.int(aHi)} °C. Comment on whether the result is consistent with the accepted value of absolute zero, $${d.stated('accepted')}\\ {}^{\\circ}\\text{C}$.`,
-        markscheme: [`${d.stated('accepted')} °C lies within the range ${d.int(aLo)} °C to ${d.int(aHi)} °C, so the result is consistent with it ✓`],
+        label: 'e', marks: 2, ao: 'AO3',
+        asks: { conclusion: ['is consistent', 'consistent with the accepted'] },
+        question: `The accepted value of absolute zero is $${d.stated('accepted')}\\ {}^{\\circ}\\text{C}$. Calculate the percentage difference between your answer to (c) and this value. Hence discuss whether your result is consistent with the accepted value.`,
+        markscheme: [
+          `Percentage difference $= \\dfrac{|${d.int(d.r.absZero.value)} - (${d.stated('accepted')})|}{${d.int(Math.abs(d.p.thetaAbs))}} \\times 100 \\approx ${d.sf(d.r.pctDiff.value, 1)}\\,\\%$ ✓`,
+          `This is smaller than the percentage uncertainty from (d) (about ${d.sf(d.r.pctUnc.value, 1)} %), so the result is consistent with the accepted value (award for a conclusion consistent with the candidate's own uncertainty) ✓`,
+        ],
       },
       {
-        label: 'e', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'f', marks: 1, ao: 'AO2', msFigure: 'graph-ms',
         reads: [{ figure: 'graph', x: T_PREDICT, y: d.r.pred.value }],
-        question: 'The flask is then placed in boiling water at 100 °C. Predict the reading of the pressure gauge.',
+        question: 'The flask is then placed in boiling water at 100 °C. Use your line of best fit to predict the reading of the pressure gauge.',
         numeric: d.num('pred'),
-        markscheme: [
-          'Extends the line to 100 °C, or uses $p = (\\text{gradient})\\,\\theta + (\\text{intercept})$ ✓',
-          `$p = ${d.sf(d.r.pred.value, 3)}\\ \\text{kPa}$ (accept ${d.sf(pLo, 3)} to ${d.sf(pHi, 3)}) ✓`,
-        ],
+        markscheme: [`$p = ${d.sf(d.r.pred.value, 3)}\\ \\text{kPa}$ (accept ${d.sf(pLo, 3)} to ${d.sf(pHi, 3)}) ✓`],
       },
     ];
   },

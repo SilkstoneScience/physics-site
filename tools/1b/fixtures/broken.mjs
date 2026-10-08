@@ -258,7 +258,7 @@ export default [
   { name: 'P1: x error bars drawn (this bank draws y error bars only)', expect: 'graph-x-errorbars',
     def: { ...D3, graph: { ...D3.graph, xErrorBars: true } } },
   { name: 'P1: an unknown errorBars setting', expect: 'graph-errorbar',
-    def: { ...D3, graph: { ...D3.graph, errorBars: 'none' } } },
+    def: { ...D3, graph: { ...D3.graph, errorBars: 'invisible' } } },
   { name: 'T2: a regularity acceptance without a reason', expect: 'regular-data',
     def: { ...D3, columns: { ...D3.columns, m: { ...D3.columns.m, regularity: { accept: ['equal-steps'] } } } } },
 ];

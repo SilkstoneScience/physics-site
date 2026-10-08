@@ -179,7 +179,9 @@ Copy the closest existing dataset and change it. The parts, in order:
      (the dataset is then AMBER).
    - **Error bars**: only y error bars are drawn. If they would be shorter than the markers, set
      `graph.errorBars: 'too-small'` (the caption states the uncertainty; no part may mention error bars). `graph.height`
-     makes a taller plot (drawing only). `xErrorBars` is allowed only with `'too-small'`, to keep the x uncertainty in the
+     makes a taller plot (drawing only). When no part uses the uncertainty at all, set `errorBars: 'none'` (nothing drawn
+     or said; the examiner's graph has no steepest and shallowest lines) and `showUncertainty: false` on the column (no ± in
+     the table heading; the uncertainty stays internal for validation). `xErrorBars` is allowed only with `'too-small'`, to keep the x uncertainty in the
      max/min lines.
    - **Graphs**: `fit: 'none'` (points only), `modelCurve: (d) => (x) => y` with `modelCurveLabel` (examiner's graph),
      `referenceLine: { m, c, label }` (both graphs), `style: 'trace'` (sensor data), `shade: { from, to, baseline, label }`

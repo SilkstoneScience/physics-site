@@ -248,16 +248,17 @@ export function tableHtml(def, d) {
   const head = [];
   for (const [k, c] of shown) {
     const u = parseUnit(c.unit || '');
-    const pm = typeof c.uncertainty === 'number' ? ` ± ${fmtNum(c.uncertainty, columnDp(c))}` : '';
+    // showUncertainty: false keeps a column's uncertainty internal (validation only) when no part uses it.
+    const pm = typeof c.uncertainty === 'number' && c.showUncertainty !== false ? ` ± ${fmtNum(c.uncertainty, columnDp(c))}` : '';
     head.push(`<th scope="col" data-col="${k}"><span class="h-name">${c.name}</span>$${c.symbol}$${u.text ? ' / ' + u.text : ''}${pm}</th>`);
-    if (perRowUncertainty(c)) {
+    if (perRowUncertainty(c) && c.showUncertainty !== false) {
       head.push(`<th scope="col" data-col="${k}" data-unc="1"><span class="h-name">uncertainty</span>$${c.uncSymbol || '\\Delta ' + c.symbol}$${u.text ? ' / ' + u.text : ''}</th>`);
     }
   }
   const body = d.rows.map((row, i) => '<tr>' + shown.map(([k, c]) => {
     const hidden = (c.hide || []).includes(i);
     const cell = (unc) => `<td data-col="${k}" data-row="${i}"${unc ? ' data-unc="1"' : ''}${hidden ? ' class="blank"' : ''}>${hidden ? '?' : unc ? fmtNum(d.unc(k, i), columnDp(c)) : d.text(k, i)}</td>`;
-    return cell(false) + (perRowUncertainty(c) ? cell(true) : '');
+    return cell(false) + (perRowUncertainty(c) && c.showUncertainty !== false ? cell(true) : '');
   }).join('') + '</tr>').join('');
   return `<div class="table-wrap"><table class="data-table"><thead><tr>${head.join('')}</tr></thead><tbody>${body}</tbody></table></div>`;
 }
@@ -282,7 +283,8 @@ export function graphFigure(def, d, kind, g = def.graph, name = kind === 'studen
   const omit = kind === 'student' ? g.omit || [] : [];
   // errorBars: 'too-small' (see safeguards.mjs, P1): the uncertainties are too small to see as bars, so none are drawn
   // and the caption states them instead. They are still used for every max/min line and verdict.
-  const hideBars = g.errorBars === 'too-small';
+  // errorBars 'none': no part uses the uncertainty, so nothing about it is drawn or said.
+  const hideBars = g.errorBars === 'too-small' || g.errorBars === 'none';
   const points = d.rows.map((row, i) => ({
     x: row[g.x], y: row[g.y], row: i,
     ex: (!hideBars && g.xErrorBars && d.unc(g.x, i)) || 0, ey: (!hideBars && d.unc(g.y, i)) || 0,
@@ -291,7 +293,8 @@ export function graphFigure(def, d, kind, g = def.graph, name = kind === 'studen
   const curves = [];
   if (kind === 'examiner' && g === def.graph && g.fit === 'linear') {
     lines.push({ m: d.fit.m, c: d.fit.c, cls: 'l1 thin', fit: 'best' });
-    if (d.band) {
+    // With errorBars 'none' no part uses the uncertainty, so the steepest and shallowest lines aren't drawn either.
+    if (d.band && g.errorBars !== 'none') {
       lines.push({ m: d.band.steep.m, c: d.band.steep.c, cls: 'l2 thin dash', fit: 'max' });
       lines.push({ m: d.band.shallow.m, c: d.band.shallow.c, cls: 'l2 thin dash', fit: 'min' });
     }
@@ -305,7 +308,7 @@ export function graphFigure(def, d, kind, g = def.graph, name = kind === 'studen
   const what = `${cy.name} against ${cx.name}`;
   const alt = `Graph of ${what}, ${g.style === 'trace' ? `a line through the sensor readings` : `with ${points.length} plotted points${bars ? ' and error bars' : ''}`}`
     + (kind === 'examiner' && g.shade ? `, with ${g.shade.label} shaded` : '')
-    + (kind === 'examiner' ? (g.fit === 'linear' ? ', the line of best fit' + (d.band ? ' and the steepest and shallowest lines' : '') : g.fit === 'exponential' ? ', and the curve of best fit' : '') : '')
+    + (kind === 'examiner' ? (g.fit === 'linear' ? (g.errorBars === 'none' ? ' and the line of best fit' : ', the line of best fit' + (d.band ? ' and the steepest and shallowest lines' : '')) : g.fit === 'exponential' ? ', and the curve of best fit' : '') : '')
     + (kind === 'examiner' && g.modelCurve ? `, and the model curve (${g.modelCurveLabel})` : '')
     + (ref ? `, and a dashed line showing ${ref.label}` : '')
     + '. The values are in the data table.';
@@ -317,7 +320,7 @@ export function graphFigure(def, d, kind, g = def.graph, name = kind === 'studen
     shade: kind === 'examiner' && g.shade ? { from: g.shade.from, to: g.shade.to, baseline: typeof g.shade.baseline === 'function' ? g.shade.baseline(d) : g.shade.baseline } : null,
   });
   const uy = d.rows.map((_, i) => d.unc(g.y, i));
-  const tooSmall = !hideBars ? ''
+  const tooSmall = g.errorBars !== 'too-small' ? ''
     : uy.every((u) => u === uy[0]) && uy[0]
       ? ` The uncertainty in ${cy.name} (±${fmtNum(uy[0], columnDp(cy))}${parseUnit(cy.unit || '').text ? ' ' + parseUnit(cy.unit || '').text : ''}) is too small to show as error bars.`
       : ' The uncertainties are too small to show as error bars.';
@@ -325,7 +328,7 @@ export function graphFigure(def, d, kind, g = def.graph, name = kind === 'studen
   const caption = kind === 'student'
     ? `Graph of ${what}${bars ? '. The error bars show the uncertainties' : ''}.${tooSmall}${refNote}`
     : (g.fit === 'linear'
-      ? '<span class="key-1">Blue</span>: line of best fit.' + (d.band ? ' <span class="key-2">Orange, dashed</span>: steepest and shallowest lines ' + (hideBars ? 'that fit the data within their uncertainties.' : 'through the error bars.') : '')
+      ? '<span class="key-1">Blue</span>: line of best fit.' + (d.band && g.errorBars !== 'none' ? ' <span class="key-2">Orange, dashed</span>: steepest and shallowest lines ' + (hideBars ? 'that fit the data within their uncertainties.' : 'through the error bars.') : '')
       : g.fit === 'exponential' ? '<span class="key-1">Blue</span>: curve of best fit.' : `Graph of ${what}.`)
       + (g.modelCurve ? ` <span class="key-1">Blue</span>: ${g.modelCurveLabel}.` : '') + (g.shade ? ` Shaded: ${g.shade.label}.` : '') + tooSmall + refNote;
   return { kind: 'figure', figure: name, svg, alt, caption };

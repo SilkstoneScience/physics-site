@@ -183,12 +183,12 @@
     ],
     "figures": {
       "graph": {
-        "alt": "Graph of extension against load recorded, with 6 plotted points and error bars. The values are in the data table.",
-        "caption": "Graph of extension against load recorded. The error bars show the uncertainties."
+        "alt": "Graph of extension against load recorded, with 6 plotted points. The values are in the data table.",
+        "caption": "Graph of extension against load recorded. The uncertainty in extension (±1 mm) is too small to show as error bars."
       },
       "graph-ms": {
-        "alt": "Graph of extension against load recorded, with 6 plotted points and error bars, the line of best fit and the steepest and shallowest lines. The values are in the data table.",
-        "caption": "<span class=\"key-1\">Blue</span>: line of best fit. <span class=\"key-2\">Orange, dashed</span>: steepest and shallowest lines through the error bars."
+        "alt": "Graph of extension against load recorded, with 6 plotted points, the line of best fit and the steepest and shallowest lines. The values are in the data table.",
+        "caption": "<span class=\"key-1\">Blue</span>: line of best fit. <span class=\"key-2\">Orange, dashed</span>: steepest and shallowest lines that fit the data within their uncertainties. The uncertainty in extension (±1 mm) is too small to show as error bars."
       }
     }
   },
@@ -198,8 +198,8 @@
       "question": "Hooke's law suggests that $x$ is proportional to $F$. Explain how the graph shows that the student's values of $x$ are not proportional to $F$.",
       "marks": 2,
       "markscheme": [
-        "The points lie on a straight line, within their error bars ✓",
-        "No straight line through all the error bars passes through the origin: the line meets the extension axis (at $F = 0$) at about 19 mm ✓"
+        "The points lie on a straight line (each extension is uncertain by only ±1 mm) ✓",
+        "The line does not pass through the origin: it meets the extension axis (at $F = 0$) at about 19 mm, far more than the ±1 mm uncertainty ✓"
       ],
       "msFigure": "graph-ms"
     },

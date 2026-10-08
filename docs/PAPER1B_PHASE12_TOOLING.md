@@ -160,12 +160,26 @@ oscillations), so they were **not** enlarged. The presentation and wording were 
   - C4-B01: its error bars (at most 3.1 units) are hidden under the markers, so it **keeps a P1 warning**. Fixing it needs a caption change, which would reset an approved pilot: a teacher decision.
 - **Metadata added to every dataset** (not fingerprinted): context family and objects, graph reads, conclusions and answer text.
 
+### 3a. Teacher review of the reset datasets (8 October 2026, after the Phase 12 commit)
+
+| Dataset | Teacher's decision | What was done | Status |
+|---|---|---|---|
+| A2-B01 | Approve if no part needs the error bars on the graph | Checked: none does (the ±1 mm in (a) is in the table heading) | **APPROVED** (individual, inspected) |
+| A2-B02 | The same | Checked: none does ((a) and (c) use ±0.05 mm from the table heading) | **APPROVED** (individual, inspected) |
+| C1-B01 | No part uses error bars or uncertainties: don't mention them at all, and leave the uncertainty out of the table heading | New options: `errorBars: 'none'` (nothing drawn or said; any part mentioning an uncertainty is an error; no steepest and shallowest lines on the examiner's graph) and `showUncertainty: false` (the uncertainty stays internal, used only by the validator, e.g. to prove the raw data are not linear). Table heading now "period T / s"; the stem's uncertainty sentence and the (a) mark-scheme reference are removed | AUTO-VALIDATED: awaiting the teacher's look |
+| B3-B01 | (b)→(c) asked about an uncertainty never calculated; don't just remove error bars that are too small: zoom the graph to 0–100 °C and extrapolate algebraically; use T, not θ | Redesigned: graph 0–100 °C, 90–130 kPa, taller, ±0.5 kPa bars now visible (about 5 units); parts (a) ratio test, (b) gradient and p-intercept, (c) absolute zero by T = −c/m, (d) steepest and shallowest lines → uncertainty (about ±8 °C), (e) percentage difference (0.4 %) against percentage uncertainty (about 3 %), (f) prediction at 100 °C; 12 marks. The independent audit was updated for the new part letters | AUTO-VALIDATED, AMBER: awaiting the teacher's look |
+
+**B3-B01 (e):** with y error bars only, −273 °C is only about 1.5 % inside the steepest/shallowest-line range (the
+verdict rule needs 4 %), so students' own lines could give either conclusion. **Teacher's decision:** keep (e) and credit a
+conclusion consistent with the candidate's own uncertainty. So (e) carries no verdict claim, and an author flag
+(`verdict-borderline`) keeps the dataset AMBER, so it is always inspected.
+
 ---
 
 ## 4. Verification (8 October 2026)
 
-- `node tools/1b/test.mjs`: **543 of 543** pass.
-- `node tools/1b/build.mjs`: every dataset passes validation and the independent physics audit. Production 9 APPROVED, preview 4.
+- `node tools/1b/test.mjs`: **543 of 543** pass at the Phase 12 commit; **547** after the review follow-up (section 3a).
+- `node tools/1b/build.mjs`: every dataset passes validation and the independent physics audit. Production 9 APPROVED and preview 4 at the Phase 12 commit; **11 and 2** after the review follow-up.
 - `node tools/check.mjs`: **no errors**; 1 warning (C4-B01 error-bar visibility, above).
 - The rendered graphs were inspected in the browser at desktop width and at 375 px. These included the four changed Batch 1 graphs, B5-B01, and the new trace, shading, model-curve, reference-line and scale components (test fixtures).
 

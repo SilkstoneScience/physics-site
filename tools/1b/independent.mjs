@@ -343,7 +343,7 @@ export const AUDITS = {
       return {
         // in kelvin, so the truth (absolute zero) is 0 K
         params: [{ name: 'absolute zero', estimate: abs + 273.15, range: [lo + 273.15, hi + 273.15], truth: P.thetaAbs }],
-        answers: [{ part: 'b', value: abs }, { part: 'e', value: fit.m * 100 + fit.c }],
+        answers: [{ part: 'c', value: abs }, { part: 'f', value: fit.m * 100 + fit.c }],
         checks: [
           { name: 'not proportional to θ in °C', ok: Math.abs(y[0] / x[0] - y[n] / x[n]) > 0.1 * (y[n] / x[n]), detail: 'p/θ should differ clearly between the first and last rows' },
           { name: 'accepted value inside the extrapolated range', ok: lo < -273 && hi > -273, detail: '−273 °C should lie between the extreme extrapolations' },

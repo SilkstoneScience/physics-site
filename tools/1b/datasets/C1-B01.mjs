@@ -51,6 +51,9 @@ export default {
         noise: 'the observer\'s reaction time in starting and stopping the stopwatch, shared over 10 oscillations: normal scatter with standard deviation 0.004 s in T',
       },
       noise: { type: 'gauss', sd: 0.004 }, resolution: 0.001, uncertainty: 0.01,
+      // No part uses the uncertainty (teacher, 8 October 2026), so it isn't shown to students; it stays internal so the
+      // validator can prove that the raw data are not linear and that the T² line misses the origin.
+      showUncertainty: false,
     },
     T2: {
       kind: 'derived', name: 'period squared', symbol: 'T^2', symbolText: 'T²', unit: 's^2', dp: 3, show: false,
@@ -58,9 +61,9 @@ export default {
       propagation: { form: 'product', terms: [{ of: 'T', n: 2 }] },
     },
   },
-  // errorBars 'too-small': ±0.010 s in T (and the matching uncertainty in T²) would hide under the markers (P1).
-  rawGraph: { x: 'm', y: 'T', zero: { x: true, y: true }, errorBars: 'too-small' },
-  graph: { x: 'm', y: 'T2', fit: 'linear', band: true, zero: { x: true, y: true }, errorBars: 'too-small' },
+  // errorBars 'none': no part uses error bars or uncertainties, so the graphs neither draw nor mention them (teacher, 8 October 2026).
+  rawGraph: { x: 'm', y: 'T', zero: { x: true, y: true }, errorBars: 'none' },
+  graph: { x: 'm', y: 'T2', fit: 'linear', band: true, zero: { x: true, y: true }, errorBars: 'none' },
   present: ['table', 'graph-raw'],
 
   results: {
@@ -83,7 +86,7 @@ export default {
   ],
 
   intro: () => '<p>A student investigates how the period $T$ of a mass oscillating on a spring depends on the mass $m$. For each mass, '
-    + 'the student times 10 oscillations with a stopwatch and divides by 10. The uncertainty in each value of $T$ is shown in the table. '
+    + 'the student times 10 oscillations with a stopwatch and divides by 10. '
     + 'The graph shows $T$ against $m$.</p>',
 
   parts: (d) => {
@@ -93,7 +96,7 @@ export default {
         label: 'a', marks: 2, ao: 'AO3',
         question: 'Explain how the graph of $T$ against $m$ shows that $T$ is not proportional to $m$.',
         markscheme: [
-          'The points lie on a clear curve: no straight line fits them, even allowing for the uncertainty in $T$ (±0.010 s) ✓',
+          'The points lie on a clear curve: no straight line fits them ✓',
           'The gradient decreases as $m$ increases (equal increases in $m$ give smaller increases in $T$) ✓',
         ],
       },

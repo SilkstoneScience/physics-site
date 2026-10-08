@@ -123,7 +123,7 @@ function run(def, q, topics, fail, warn) {
     const label = `$${c.symbol}$${u.text ? ' / ' + u.text : ''}`;
     if (!h.html.includes(label)) fail('table-header', where, `the heading should show "${label}"`, { got: stripTags(h.html) });
     const pm = h.html.match(/± ([−\d.]+)$/);
-    if (typeof c.uncertainty === 'number') {
+    if (typeof c.uncertainty === 'number' && c.showUncertainty !== false) {
       if (!pm) fail('table-header', where, 'the heading should give the uncertainty (± …)');
       else {
         if (parseNum(pm[1]) !== c.uncertainty) fail('uncertainty', where, 'the uncertainty in the heading is wrong', { expected: c.uncertainty, got: pm[1] });
@@ -232,7 +232,7 @@ function run(def, q, topics, fail, warn) {
     }
     // Uncertainty columns (one value per row)
     for (const [k, c] of cols) {
-      if (!perRowUncertainty(c) || c.show === false) continue;
+      if (!perRowUncertainty(c) || c.show === false || c.showUncertainty === false) continue;
       const where = `table row ${i + 1}, Δ${c.symbolText || c.symbol}`;
       const cell = cells.get(`${k}|${i}|u`);
       if (!cell) { fail('uncertainty', where, 'uncertainty cell missing'); continue; }
@@ -746,6 +746,13 @@ function checkGraphReads(def, q, meta, fail, warn) {
     }
   }
   // P1: with errorBars 'too-small' no bars are drawn, so no question or mark scheme may refer to them.
+  // errorBars 'none': the uncertainty is not part of this question, so no question or mark scheme may use it.
+  if ([def.graph, def.rawGraph].some((g) => g && g.errorBars === 'none')) {
+    const texts = [['the question text', q.stem], ...(q.parts || []).flatMap((pt) => [[`part (${pt.label}) question`, pt.question], [`part (${pt.label}) mark scheme`, (pt.markscheme || []).join(' ')]])];
+    for (const [where, t] of texts) {
+      if (/error[- ]bars?|uncertaint|±|\pm/i.test(stripTags(t))) fail('graph-errorbar-text', where, 'mentions an uncertainty or error bars, but the graph declares errorBars: "none" (no part uses the uncertainty): use "too-small" or draw the bars instead');
+    }
+  }
   if ([def.graph, def.rawGraph].some((g) => g && g.errorBars === 'too-small')) {
     const texts = [['the question text', q.stem], ...(q.parts || []).flatMap((pt) => [[`part (${pt.label}) question`, pt.question], [`part (${pt.label}) mark scheme`, (pt.markscheme || []).join(' ')]])];
     for (const [where, t] of texts) {
@@ -1161,14 +1168,14 @@ function checkGraph(fig, def, d, rows, fail, warn) {
     }
   }
   // P1: y error bars only; bars that can't be seen; errorBars 'too-small' (safeguards.mjs).
-  const hidden = g.errorBars === 'too-small';
-  if (g.errorBars !== undefined && !hidden) fail('graph-errorbar', where, `errorBars must be 'too-small' or left out, not ${JSON.stringify(g.errorBars)}`);
+  const hidden = g.errorBars === 'too-small' || g.errorBars === 'none';
+  if (g.errorBars !== undefined && !hidden) fail('graph-errorbar', where, `errorBars must be 'too-small', 'none' or left out, not ${JSON.stringify(g.errorBars)}`);
   // y error bars only are DRAWN. xErrorBars may still put the x uncertainty into the max/min lines when no bars are drawn.
   if (g.xErrorBars && !hidden && !X_ERROR_BARS_ALLOWED.has(def.id)) fail('graph-x-errorbars', where, 'this bank draws y error bars only: leave out xErrorBars (state the uncertainty in x in the table heading), or use it only with errorBars: "too-small" so the x uncertainty counts in the max/min lines without being drawn');
   if (kind === 'student') {
     const halves = want.map((i) => (d.unc(g.y, i) || 0) / Y.perPx).filter((h) => h > 0);
     const longest = halves.length ? Math.max(...halves) : 0;
-    if (hidden && longest >= VISIBLE_BAR) fail('graph-errorbar-hidden', where, `errorBars is 'too-small', but the bars would be up to ${longest.toFixed(1)} units long, long enough to see: draw them`);
+    if (g.errorBars === 'too-small' && longest >= VISIBLE_BAR) fail('graph-errorbar-hidden', where, `errorBars is 'too-small', but the bars would be up to ${longest.toFixed(1)} units long, long enough to see: draw them`);
     if (!hidden && halves.length && longest < VISIBLE_BAR) {
       warn('graph-errorbar-visibility', where, `every y error bar is at most ${longest.toFixed(1)} units each side of its point, hidden under the ${MARKER_R}-unit marker (needs ${VISIBLE_BAR}): students can't see or use them. Declare ${raw ? 'rawGraph' : 'graph'}.errorBars: 'too-small' (the caption then states the uncertainty) and don't refer to error bars in the parts`);
     }
@@ -1194,7 +1201,9 @@ function checkGraph(fig, def, d, rows, fail, warn) {
   // Fit lines appear only on the mark-scheme graph, and must be the fitted lines.
   if (kind === 'student' && (G.fits.length || G.curve.length)) fail('graph-fit', where, 'the students\' graph shouldn\'t show a fitted line');
   if (kind === 'examiner' && g.fit === 'linear') {
-    const lines = { best: d.fit, max: d.band && d.band.steep, min: d.band && d.band.shallow };
+    const showBand = d.band && g.errorBars !== 'none';
+    const lines = { best: d.fit, max: showBand && d.band.steep, min: showBand && d.band.shallow };
+    if (!showBand && G.fits.some((f) => f.fit !== 'best')) fail('graph-fit', where, 'shows steepest and shallowest lines, but no part uses the uncertainty (errorBars: "none")');
     for (const [name, line] of Object.entries(lines)) {
       if (!line) continue;
       const drawn = G.fits.find((f) => f.fit === name);
