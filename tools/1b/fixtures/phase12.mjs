@@ -75,6 +75,8 @@ export const P12_BROKEN = [
   { name: 'T5: a ratio claimed constant that is clearly not (D3 with a constant-ratio claim on Δm)', expect: 'claim', def: { ...D3, claims: [...D3.claims, { type: 'constantRatio', column: 'm', expect: true }] } },
   { name: 'T5: values claimed to be whole multiples of a factor that they are not', expect: 'claim', def: { ...D3, claims: [...D3.claims, { type: 'integerMultiples', column: 'm', factor: 0.1, expect: true }] } },
   { name: 'T5: a value claimed not constant although the ranges overlap', expect: 'claim', def: { ...E3, claims: [...E3.claims, { type: 'constantRatio', column: 'R', rows: [0, 3], expect: false }] } },
+  // compare (A2-B02 (d))
+  { name: 'compare: a result claimed smaller although it lies inside the other result range', expect: 'claim', def: { ...D3, claims: [...D3.claims, { type: 'compare', result: 'gradient', than: 'gradient', expect: 'smaller' }] } },
   // T6
   { name: 'T6: a result checked against a gradient on a graph with no fit', expect: 'fit',
     def: { ...D3_MODEL, results: { gradient: { unit: 'g A^-1', check: 'gradient', value: () => 0.3 } } } },

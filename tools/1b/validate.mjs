@@ -427,6 +427,19 @@ function run(def, q, topics, fail, warn) {
       } else if (!cl.expect && !k.clearlyNot) {
         fail('claim', where, `the question says the ${what} is not constant, but the uncertainty ranges are not clearly apart (needs a gap of ${VERDICT_MARGIN * 100} % of the mean)`, { expected: `gap ≥ ${sigFig(VERDICT_MARGIN * Math.abs(k.mean), 2)}`, got: sigFig(k.lo - k.hi, 2) });
       }
+    } else if (cl.type === 'compare') {
+      // { result, than, expect: 'smaller' | 'larger' }: one result is clearly below (or above) the WHOLE accepted range of
+      // another, by at least VERDICT_MARGIN of the other's value, so students' own readings give the same answer.
+      const a = d.r[cl.result];
+      const b = d.r[cl.than];
+      if (!a || !b) { fail('claim', where, 'needs two results (result and than)'); continue; }
+      if (!['smaller', 'larger'].includes(cl.expect)) { fail('claim', where, 'expect must be "smaller" or "larger"'); continue; }
+      const [lo, hi] = b.range || [b.value, b.value];
+      const pad = VERDICT_MARGIN * Math.abs(b.value);
+      const ok = cl.expect === 'smaller' ? a.value < lo - pad : a.value > hi + pad;
+      if (!ok) {
+        fail('claim', where, `${cl.result} is not clearly ${cl.expect} than ${cl.than}`, { expected: cl.expect === 'smaller' ? `below ${sigFig(lo - pad, 3)}` : `above ${sigFig(hi + pad, 3)}`, got: sigFig(a.value, 3) });
+      }
     } else if (cl.type === 'integerMultiples') {
       // T5 (Phase 12). { column, factor: result name or number, expect: true }: every value is a whole-number multiple
       // (at least 1) of the factor within its uncertainty; each multiple is unambiguous (uncertainty under a quarter of

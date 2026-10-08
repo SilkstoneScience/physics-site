@@ -614,10 +614,20 @@ export async function runTests() {
     const reg = { datasets: { 'D3-B08': { status: 'PHYSICS-REVIEWED', history: [] } } };
     const res = acceptBatch(plan, reg, { by: 'Mr Silkstone (teacher)', date: '2026-10-08', note: 'n', systemicOk: true, fingerprints: { 'D3-B08': 'f' }, waive: { 'D3-B08': 'looked fine' } });
     check('C6: accept-batch refuses a waiver of a HIGH-level AMBER reason', res.errors.some((e) => e.includes('can\'t be waived (rule C6)')), res.errors.join('; '));
-    const real = buildAll(datasets, topics, { registry: JSON.parse(JSON.stringify((await import('./registry.mjs')).loadRegistry())) });
-    const e = establishedSets(real.results, JSON.parse(JSON.stringify((await import('./registry.mjs')).loadRegistry())));
-    check('C1: the bank has one inspected context each for V2, D1 and E2, so second examples are AMBER',
-      ['V2', 'D1', 'E2'].every((a) => e.contexts.get(a) && e.contexts.get(a).size === 1));
+    // establishedSets counts context families from fixed inputs (not the live review records, which change).
+    const appr = { status: 'APPROVED', history: [{ status: 'APPROVED', basis: 'individual', inspected: true }] };
+    const batchOnly = { status: 'APPROVED', history: [{ status: 'APPROVED', basis: 'batch', inspected: false }] };
+    const res3 = [
+      { id: 'X1', valid: true, state: { changed: false }, def: { archetypes: ['V2'], contextFamily: 'elastic-stretching' } },
+      { id: 'X2', valid: true, state: { changed: false }, def: { archetypes: ['V2'], contextFamily: 'elastic-stretching' } },
+      { id: 'X3', valid: true, state: { changed: false }, def: { archetypes: ['V2'], contextFamily: 'light-intensity-distance' } },
+    ];
+    const e1 = establishedSets(res3.slice(0, 2), { datasets: { X1: appr, X2: appr } });
+    check('C1: two inspected examples in the SAME context family count as one context', e1.contexts.get('V2').size === 1);
+    const e2 = establishedSets(res3, { datasets: { X1: appr, X2: appr, X3: batchOnly } });
+    check('C1: an example approved in a batch without inspection doesn\'t count', e2.contexts.get('V2').size === 1);
+    const e3 = establishedSets(res3, { datasets: { X1: appr, X2: appr, X3: appr } });
+    check('C1: inspected examples in two different families establish a HIGH-risk archetype', e3.contexts.get('V2').size === 2);
   }
   return { count, failures };
 }
