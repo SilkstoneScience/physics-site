@@ -714,6 +714,21 @@ export async function runTests() {
       !!reviewProblem(rec('AUTO-VALIDATED'), 'PHYSICS-REVIEWED', 'x', { valid: false }) && !!reviewProblem(rec('PHYSICS-REVIEWED'), 'TEACHER-REVIEWED', 'Mr Silkstone (teacher)', { changed: true }));
     check('Review gate: nothing comes after APPROVED', !!reviewProblem(rec('APPROVED'), 'APPROVED', 'Mr Silkstone (teacher)'));
 
+    // Fingerprints are the same on Windows (CRLF checkout) and on GitHub's Linux runner (LF): the A2-B03 failure, Phase 14.
+    const a2b03 = datasets.find((x) => x.def.id === 'A2-B03').def;
+    const content = canonicalContent(a2b03, buildQuestion(a2b03));
+    const lawText = content.laws['force-plate-jump'].f;
+    check('Fingerprints ignore line-ending style: a multi-line law is stored with LF line breaks only (CRLF checkout on Windows, LF on Linux)', lawText.includes('\n') && !lawText.includes('\r'));
+    const law = LAWS['force-plate-jump'];
+    const original = law.f;
+    let same = false;
+    try {
+      // The same law as a CRLF checkout would read it: a function whose source text has CRLF line breaks.
+      law.f = new Function(`return ${original.toString().replace(/\r?\n/g, '\r\n')}`)();
+      same = fingerprintOf(canonicalContent(a2b03, buildQuestion(a2b03))) === fingerprintOf(content);
+    } finally { law.f = original; }
+    check('Fingerprints ignore line-ending style: the law read with CRLF line breaks gives the same fingerprint', same);
+
     // Every safeguard has proof: its error codes are caught by a deliberately broken dataset, its tests exist.
     const caught = new Set([...broken, ...P12_BROKEN].map((fx) => fx.expect));
     for (const s of SAFEGUARDS) {

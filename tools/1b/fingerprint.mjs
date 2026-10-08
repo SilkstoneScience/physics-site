@@ -41,7 +41,8 @@ export function canonicalContent(def, built) {
     };
   }
   const laws = Object.fromEntries([...used].sort().map((n) => [n, {
-    statement: LAWS[n].statement, inputs: LAWS[n].inputs, defaults: LAWS[n].defaults, output: LAWS[n].output, f: LAWS[n].f.toString(),
+    // Line endings normalised: a multi-line law reads with CRLF on Windows and LF on GitHub's Linux runner (Phase 14).
+    statement: LAWS[n].statement, inputs: LAWS[n].inputs, defaults: LAWS[n].defaults, output: LAWS[n].output, f: LAWS[n].f.toString().replace(/\r\n?/g, '\n'),
   }]));
   const uncertainties = {};
   for (const [k, c] of Object.entries(def.columns)) {

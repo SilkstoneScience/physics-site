@@ -408,7 +408,7 @@
         "B": "N"
       },
       "output": "N",
-      "f": "({ m, g, t, t0, tau, A, p, dL, tauL, B }) => {\r\n      const W = m * g;\r\n      if (t < t0) return W;\r\n      if (t <= t0 + tau) { const s = (t - t0) / tau; return W * (1 - s ** p) + A * Math.sin(Math.PI * s); }\r\n      const v = (tau * ((2 * A) / Math.PI - W / (p + 1))) / m;\r\n      const tL = t0 + tau + (2 * v) / g + dL;\r\n      if (t < tL) return 0;\r\n      if (t <= tL + tauL) { const s = (t - tL) / tauL; return W * s + B * Math.sin(Math.PI * s); }\r\n      return W;\r\n    }"
+      "f": "({ m, g, t, t0, tau, A, p, dL, tauL, B }) => {\n      const W = m * g;\n      if (t < t0) return W;\n      if (t <= t0 + tau) { const s = (t - t0) / tau; return W * (1 - s ** p) + A * Math.sin(Math.PI * s); }\n      const v = (tau * ((2 * A) / Math.PI - W / (p + 1))) / m;\n      const tL = t0 + tau + (2 * v) / g + dL;\n      if (t < tL) return 0;\n      if (t <= tL + tauL) { const s = (t - tL) / tauL; return W * s + B * Math.sin(Math.PI * s); }\n      return W;\n    }"
     }
   },
   "data": {
