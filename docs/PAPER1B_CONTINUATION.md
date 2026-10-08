@@ -72,13 +72,13 @@ git status
 ```
 node tools/1b/test.mjs
 ```
-Expect "✓ All 543 Paper 1B tests passed" (more if tests have been added since).
+Expect "✓ All 547 Paper 1B tests passed" (more if tests have been added since).
 
 ### 6. Run the Paper 1B build
 ```
 node tools/1b/build.mjs
 ```
-Expect it to end with "Production (questions/1b.json): 9 APPROVED dataset(s)" and 4 in the local preview: after Phase 12, A2-B01, A2-B02, B3-B01 and C1-B01 await re-approval (13 once they are re-approved; see `docs/PAPER1B_PHASE12_TOOLING.md`). It also rebuilds the local preview
+Expect it to end with "Production (questions/1b.json): 13 APPROVED dataset(s)". It also rebuilds the local preview
 (`questions/1b-preview.json`), which is never committed.
 
 **Windows note:** after a build, `git status` may list the question files as modified even though nothing changed.

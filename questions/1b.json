@@ -595,6 +595,109 @@
     "dataFile": "questions/1b/B1-B02.json"
   },
   {
+    "id": "B3-B01",
+    "theme": "B",
+    "topic": "B.3",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "proportionality-from-table",
+      "extrapolation",
+      "intercept-meaning",
+      "intercept-uncertainty",
+      "accepted-value",
+      "prediction"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates how the pressure $p$ of a fixed mass of air at constant volume depends on its temperature $T$. A sealed flask of air is held in a water bath and connected by a short tube to a Bourdon pressure gauge. The bath is heated in steps, and at each step the student waits until the reading is steady.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Show, using two rows of the table, that $p$ is not proportional to $T$.",
+        "markscheme": [
+          "$\\dfrac{p}{T}$ is 8.13 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 12.0 °C but 1.54 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 78.5 °C (or any two non-adjacent rows) ✓",
+          "The ratio is not constant, so $p$ is not proportional to $T$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "Draw the line of best fit on the graph. Determine its gradient and its intercept on the $p$ axis.",
+        "markscheme": [
+          "Gradient $= 0.34\\ \\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ (accept 0.33 to 0.36) ✓",
+          "Intercept $= 93.2\\ \\text{kPa}$ (accept 92.7 to 93.7) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Hence determine the temperature at which the pressure of the air would be zero, according to these data.",
+        "numeric": {
+          "answer": -271.9221443235077,
+          "range": [
+            -280.079808653213,
+            -261.67857142857144
+          ],
+          "unit": "${}^{\\circ}\\text{C}$",
+          "source": "absZeroAnswer"
+        },
+        "markscheme": [
+          "At $p = 0$: $T = -\\dfrac{\\text{intercept}}{\\text{gradient}}$ (extrapolating the line) ✓",
+          "$T = −272\\ {}^{\\circ}\\text{C}$ (accept −280 to −262; allow ECF from (b)) ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 3,
+        "question": "Draw the steepest and shallowest straight lines that pass through all the error bars. Use them to determine the absolute uncertainty in your answer to (c).",
+        "markscheme": [
+          "Steepest and shallowest lines drawn through all the error bars ✓",
+          "Their temperatures at $p = 0$, found in the same way, are about −277 °C and −262 °C ✓",
+          "Uncertainty $= \\dfrac{\\text{difference}}{2} \\approx 8\\ {}^{\\circ}\\text{C}$ (allow values from the candidate's own lines) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "The accepted value of absolute zero is $−273\\ {}^{\\circ}\\text{C}$. Calculate the percentage difference between your answer to (c) and this value. Hence discuss whether your result is consistent with the accepted value.",
+        "markscheme": [
+          "Percentage difference $= \\dfrac{|−272 - (−273)|}{273} \\times 100 \\approx 0.4\\,\\%$ ✓",
+          "This is smaller than the percentage uncertainty from (d) (about 3 %), so the result is consistent with the accepted value (award for a conclusion consistent with the candidate's own uncertainty) ✓"
+        ]
+      },
+      {
+        "label": "f",
+        "marks": 1,
+        "question": "The flask is then placed in boiling water at 100 °C. Use your line of best fit to predict the reading of the pressure gauge.",
+        "numeric": {
+          "answer": 127.4663675344157,
+          "range": [
+            126.82903569674362,
+            128.18987341772151
+          ],
+          "unit": "$\\text{kPa}$",
+          "source": "pred"
+        },
+        "markscheme": [
+          "$p = 127\\ \\text{kPa}$ (accept 127 to 128) ✓"
+        ],
+        "msFigure": "graph-ms"
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 51
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/B3-B01.json"
+  },
+  {
     "id": "B5-B01",
     "theme": "B",
     "topic": "B.5",
@@ -689,6 +792,90 @@
       "status": "APPROVED"
     },
     "dataFile": "questions/1b/B5-B01.json"
+  },
+  {
+    "id": "C1-B01",
+    "theme": "C",
+    "topic": "C.1",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "not-linear",
+      "choose-transformation",
+      "gradient",
+      "intercept-meaning",
+      "model-assumption",
+      "unit-base-si"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates how the period $T$ of a mass oscillating on a spring depends on the mass $m$. For each mass, the student times 10 oscillations with a stopwatch and divides by 10. The graph shows $T$ against $m$.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Explain how the graph of $T$ against $m$ shows that $T$ is not proportional to $m$.",
+        "markscheme": [
+          "The points lie on a clear curve: no straight line fits them ✓",
+          "The gradient decreases as $m$ increases (equal increases in $m$ give smaller increases in $T$) ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "For a spring of negligible mass, $T = 2\\pi\\sqrt{\\dfrac{m}{k}}$, where $k$ is the spring constant. State the quantity that should be plotted against $m$ to give a straight line, and the gradient that line is expected to have.",
+        "markscheme": [
+          "$T^2$ ✓",
+          "Gradient $= \\dfrac{4\\pi^2}{k}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 1,
+        "question": "State the unit of the gradient of a graph of $T^2$ against $m$, in SI base units.",
+        "markscheme": [
+          "$\\text{kg}^{-1}\\,\\text{s}^{2}$ ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 2,
+        "question": "The student plots a graph of $T^2$ against $m$, shown below. Determine $k$.",
+        "numeric": {
+          "answer": 12.079243082022117,
+          "range": [
+            11.614656809636651,
+            12.582544877106372
+          ],
+          "unit": "$\\text{N}\\,\\text{m}^{-1}$",
+          "source": "k"
+        },
+        "markscheme": [
+          "Gradient of the line of best fit $= 3.27\\ \\text{s}^2\\,\\text{kg}^{-1}$ ✓",
+          "$k = \\dfrac{4\\pi^2}{\\text{gradient}} = 12.1\\ \\text{N m}^{-1}$ (accept 11.6 to 12.6) ✓"
+        ],
+        "figure": "graph",
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "The line of best fit on the graph of $T^2$ against $m$ does not pass through the origin. Explain what this suggests about the assumption that the spring has negligible mass.",
+        "markscheme": [
+          "$T^2$ is not zero when $m = 0$: something else is oscillating, the spring itself, so its mass is not negligible ✓",
+          "The intercept on the $T^2$ axis is about 0.086 $\\text{s}^2$; extended, the line would cross the $m$ axis at $m = -\\dfrac{\\text{intercept}}{\\text{gradient}} \\approx −0.026\\ \\text{kg}$: the spring behaves like an extra mass of about 0.026 kg added to $m$ ✓"
+        ],
+        "msFigure": "graph-ms"
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 61
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/C1-B01.json"
   },
   {
     "id": "C4-B01",

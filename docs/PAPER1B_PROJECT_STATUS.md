@@ -25,8 +25,8 @@ teacher decision.
 | Production | **`main` is production.** GitHub Pages publishes `main` |
 | `main` | `4ca0f74` "Merge contact form on the About page" (7 October 2026), **pushed** (local = GitHub). Batch 1 reached `main` in `a9f8c58`; the 26 later commits are general website work (EE page, Resources, guiding questions, photos, copyright notice, contact form) and don't touch Paper 1B (`questions/1b.json` and `tools/1b/` are unchanged since `a9f8c58`) |
 | Batch 1 | **Live.** Merged into `main` and pushed |
-| Approved and published Paper 1B datasets | **On `main`: 13** (5 pilots + 8 Batch 1). **On `paper1b-batch2`: 9.** A2-B01, A2-B02, B3-B01 and C1-B01 were reset in Phase 12 (presentation changes, Batch 1 reopened by the teacher) and are preview-only until re-approved |
-| Tests / checker | Phase 12 (8 October 2026, on `paper1b-batch2`): **543 of 543** Paper 1B tests pass; build: 9 APPROVED + 4 preview; site checker: no errors, 1 warning (C4-B01 error bars too small to see) |
+| Approved and published Paper 1B datasets | **On `main`: 13** (5 pilots + 8 Batch 1). **On `paper1b-batch2`: 13.** A2-B01, A2-B02, B3-B01 and C1-B01 were reset in Phase 12 (presentation changes, Batch 1 reopened by the teacher) and re-approved individually by the teacher on 8 October 2026 (B3-B01 redesigned) |
+| Tests / checker | Phase 12 (8 October 2026, on `paper1b-batch2`): **547 of 547** Paper 1B tests pass; build: 13 APPROVED; site checker: no errors, 1 warning (C4-B01 error bars too small to see) |
 
 ### Development branches
 
@@ -51,8 +51,8 @@ For a short, step-by-step resume guide, see **`docs/PAPER1B_CONTINUATION.md`**.
 
 ## 2. Production bank (all APPROVED)
 
-> As approved on 6 October 2026 and live on `main`. On `paper1b-batch2`, A2-B01, A2-B02, B3-B01 and C1-B01 were reset in
-> Phase 12 for presentation changes and await re-approval (`docs/PAPER1B_PHASE12_TOOLING.md`, section 3).
+> As approved on 6 October 2026 and live on `main`. On `paper1b-batch2`, A2-B01, A2-B02, B3-B01 and C1-B01 changed in
+> Phase 12 and were re-approved by the teacher on 8 October 2026 (`docs/PAPER1B_PHASE12_TOOLING.md`, section 3a).
 
 Risk classes did not exist when the pilots were approved, so they have none. "Inspected" means the teacher personally
 inspected that dataset.
@@ -201,8 +201,8 @@ Assumes the repository is cloned, Node.js is installed (`winget install OpenJS.N
    `main` has moved on since the branch last merged it, merge `main` into `paper1b-batch2` before starting new work.
 2. **Per-computer setup:** create `CLAUDE.local.md` (not in git) recording where `physics-source` and the reference cache are on that computer (see `CLAUDE.md`).
 3. **Dependencies:** none to install.
-4. **Run the tests:** `node tools/1b/test.mjs` (expect "All 543 Paper 1B tests passed", or more if tests were added).
-5. **Build the Paper 1B files:** `node tools/1b/build.mjs`. On `paper1b-batch2` after Phase 12 it should end with "Production (questions/1b.json): 9 APPROVED dataset(s). Local preview …: 4 dataset(s)" (13 once the four reset Batch 1 datasets are re-approved) and rebuild the local preview, which isn't stored in git.
+4. **Run the tests:** `node tools/1b/test.mjs` (expect "All 547 Paper 1B tests passed", or more if tests were added).
+5. **Build the Paper 1B files:** `node tools/1b/build.mjs`. It should end with "Production (questions/1b.json): 13 APPROVED dataset(s)" and rebuild the local preview, which isn't stored in git.
 6. **Run the site checker:** `node tools/check.mjs` (expect "No errors").
 7. **Start the preview:** double-click `preview.bat` (or the PowerShell command above), then open http://localhost:8000.
 8. **Inspect one question:** http://localhost:8000/questions.html?paper=1B&q=D1-B01 (change the ID). Non-approved datasets show "Preview only: STATUS" and appear only on localhost.
@@ -316,9 +316,9 @@ unreadable emf axis fixed (drawing only). See `docs/PAPER1B_PHASE12_TOOLING.md`.
 
 When you return, in this order (detailed commands in `docs/PAPER1B_CONTINUATION.md`):
 
-1. **Check out `paper1b-batch2`** and verify it: tests pass, the build reports 9 APPROVED datasets and 4 in the preview, the checker reports no errors, and `git log -1 main` shows the production commit.
+1. **Check out `paper1b-batch2`** and verify it: tests pass, the build reports 13 APPROVED datasets, the checker reports no errors, and `git log -1 main` shows the production commit.
 2. **Read** this file, `docs/PAPER1B_PHASE12_TOOLING.md` and `docs/PAPER1B_BATCH2_PLAN.md`.
-3. **Teacher decisions** (`docs/PAPER1B_PHASE12_TOOLING.md`, section 6): re-approve the four reset Batch 1 datasets (individually or as a new batch); C5-B01; the area-range policy, empirical laws and external sources; proposals C1–C6; C4-B01.
+3. **Teacher decisions** (`docs/PAPER1B_PHASE12_TOOLING.md`, section 6): C5-B01; the area-range policy, empirical laws and external sources; proposals C1–C6; C4-B01.
 4. **Phase 13:** make the agreed Phase 12 rules permanent in the specification (section 7 of that document).
 5. **Plan check:** confirm the final Batch 2 list.
 6. **Generate Batch 2** on `paper1b-batch2` (`batch: 'batch-2'`).
