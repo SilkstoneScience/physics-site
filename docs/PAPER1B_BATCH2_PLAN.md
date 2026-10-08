@@ -143,7 +143,7 @@ before a HIGH archetype can be GREEN) would make it AMBER.
 | Generator | Empirical force-pulse law (`model:empirical`, documented shape with stated parameters); dense-trace graph type (T7); area result with an accepted range |
 | Validator | **Area result** (T7): the accepted range covers sensible square-counting and trapezium estimates on the printed grid; the weight line is readable on the axes (T3); take-off speeds from the two methods differ by a stated, explained amount |
 | Independent audit | Integrate the published trace numerically by a different rule; impulse/m equals the take-off speed; flight-time speed from kinematics; the direction of the difference matches the stated cause (landing with bent knees lengthens the flight time) |
-| Assessment risk | MEDIUM: accepted-range policy for area estimates (spec decision 12) |
+| Assessment risk | MEDIUM: area estimates vary; accepted-range policy adopted by the teacher (8 October 2026): covers ±5 % and the count-the-squares estimate, no wider than ±20 % |
 | Originality risk | LOW: the 2023 Paper 3 force sensor measured a ball's peak force against pressure; no jump or area task |
 | Review risk | **AMBER** (first G1; first `graph:area`). Must be inspected |
 
@@ -351,7 +351,7 @@ teacher's judgement (spec section 9).
 4. ~~**Simulated observational data** for C5-B01, labelled as simulated~~: approved by the teacher on 8 October 2026.
 5. **Empirical laws** (bounce ratio, force-plate pulse) and the **exact line-source law** (beyond the SL syllabus,
    used only to generate data; students use the inverse square law given in the question).
-6. The accepted-range policy for **area estimates** (A2-B03).
+6. ~~The accepted-range policy for **area estimates** (A2-B03)~~: adopted 8 October 2026 (±5 % minimum, count-the-squares estimate included, ±20 % maximum).
 7. Whether the C2-B01 topic tag (C.2, with b = L/4πd² from B.1) is right, or it should be tagged B.1.
 
 ---

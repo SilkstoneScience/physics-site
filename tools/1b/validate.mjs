@@ -612,7 +612,7 @@ function checkScale(fig, spec, def, d, rows, fail, warn) {
 // ---------- T7: area under a graph ----------
 // A result with check: 'area' and area: { from, to, baseline } is the area between the data and the baseline (a number,
 // or a function of d), from x = from to x = to: ∫ (y − baseline) dx, worked out here by the trapezium rule on the
-// published data. Accepted-range policy (PROPOSED for the teacher, specification decision 12): the range must contain
+// published data. Accepted-range policy (adopted by the teacher on 8 October 2026, specification decision 12): the range must contain
 //   • the value ± AREA_POLICY.minTol (5 %): students' estimates by counting squares or by shapes vary at least this much;
 //   • the "count the squares" estimate on the students' own graph (whole small squares + half of the part squares);
 // and must be no wider than ± AREA_POLICY.maxTol (20 %) of the value, so it still discriminates.

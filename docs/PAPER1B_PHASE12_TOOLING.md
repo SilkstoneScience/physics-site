@@ -82,7 +82,7 @@ Students see the stem, then each part's question, then its mark scheme. The chec
 - `style: 'trace'` draws sensor data as one line through every reading. Every vertex is read back, and no error bars are drawn.
 - `shade: { from, to, baseline, label }` shades the area on the examiner's graph only. Shading on the students' graph is an error, because it is the answer.
 - A result with `check: 'area'` is recalculated by the trapezium rule from the data.
-- **Accepted-range policy (proposed, needs the teacher's decision):** the range must cover the value ± 5 % and the count-the-squares estimate on the students' graph, and must be no wider than ± 20 %. This is `AREA_POLICY`.
+- **Accepted-range policy (adopted by the teacher, 8 October 2026):** the range must cover the value ± 5 % and the count-the-squares estimate on the students' graph, and must be no wider than ± 20 %. This is `AREA_POLICY`.
 - `tableless: { reason, readFrom }`: students get no table when every shown column is readable from a declared figure. Validation still runs on the complete internal table, which is never published.
 
 ### T8 Instrument-scale read-back
@@ -120,7 +120,7 @@ new law, diagram or audit entry: normal dataset work), **D** = can defer.
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | A3-B01 bouncing ball | LOW (A.3) | LOW | M: empirical `bounce-height-ratio` law | E: points-only graph, model curve, Plot | E: `constantRatio`, `predictAt`, T2–T4 | M: entry | none | E: ±1 cm, ratio propagation | E | E | **Yes**, once the teacher approves the empirical law |
 | E1-B01 spectrum | LOW (E.1 SL) | LOW–MED | M: `photon-energy` law; lines as published values | E: `scaleReading`; D: level diagram (give levels as text or a small table) | E: scale read-back, `tableless`, T10 | M: entry | NIST levels and lines (copy + teacher approval) | E: ± half a division enforced | none | none (image) | **Yes**, after the NIST copy and the teacher's approval of the source |
-| A2-B03 force plate | LOW–MED (A.2 impulse) | LOW | M: empirical force-pulse law; dense times | E: trace, shading; D: force-plate diagram (text description) | E: area result, `tableless` | M: entry (independent integration) | none | E (sensor, no bars) | E | none | **Yes**, after the teacher decides the area-range policy |
+| A2-B03 force plate | LOW–MED (A.2 impulse) | LOW | M: empirical force-pulse law; dense times | E: trace, shading; D: force-plate diagram (text description) | E: area result, `tableless` | M: entry (independent integration) | none | E (sensor, no bars) | E | none | **Yes** (area-range policy adopted 8 October 2026) |
 | B2-B01 planets | LOW (B.2) | LOW | M: `energy-balance-temperature` law | E: reference line | E: `observed` published values, T10, verdict claims | M: entry | NASA planetary fact sheets (copy) | E | E | E | **Yes**, after the NASA copy |
 | C5-B01 binary star (**simplified**, teacher 8 Oct) | LOW–MED (no systemic velocity, no sketch) | MED (astrophysics option papers) | M: radial-velocity law; uneven sampling exists | E: points + model curve | M: small T9 check (stem says the data are simulated), built with the dataset | M: entry | none: simulated observations, clearly labelled (**approved by the teacher**, 8 October 2026) | E: wavelength uncertainty → % uncertainty in v | E | E | **Yes** |
 | D2-B01 Millikan | LOW–MED | LOW–MED | M: `millikan-balance` law; calibration systematic exists | E: table; D: plates diagram | E: `integerMultiples`, calibration feature | M: entry | none | E: r³ propagation | none | E | **Yes** |
@@ -198,7 +198,7 @@ Batch 1 was accepted as `batch-1`, and `accept-batch` refuses a batch that has a
 **NOT READY for Batch 2 generation.** The tooling is ready, but these decisions are open:
 1. ~~Re-approval of the four reset Batch 1 datasets~~: done 8 October 2026 (section 3a); production on this branch is 13 again.
 2. ~~C5-B01~~: simplified, and simulated observations clearly labelled as simulated approved (8 October 2026; plan section 3.5).
-3. The area accepted-range policy (T7), the empirical laws (bounce, force pulse), the exact line-source law, and the external sources (NIST, NASA planetary, IAEA PRIS licence).
+3. ~~The area accepted-range policy (T7)~~ (adopted 8 October 2026); the empirical laws (bounce, force pulse), the exact line-source law, and the external sources (NIST, NASA planetary, IAEA PRIS licence).
 4. The retrospective's proposals C1–C6 (they change the risk classes in the Batch 2 plan).
 5. C4-B01's invisible error bars (approved pilot).
 
