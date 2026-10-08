@@ -12,6 +12,8 @@ export default {
   batch: 'batch-1',
   archetypes: ['N3', 'L2'],
   apparatus: 'mass oscillating vertically on a spring, timed with a stopwatch',
+  contextFamily: 'oscillation',
+  contextObjects: ['spring', 'slotted-masses', 'stopwatch'],
   originality: 'Mass–spring oscillations are a standard practical; no legacy Section A or 2025 Paper 1B question uses them. Legacy '
     + 'questions on choosing what to plot use other contexts (May 2019 TZ2 Q2, May 2023 TZ1 Q2). Own numbers and sequence, including '
     + 'the use of the T² intercept to test the massless-spring assumption.',
@@ -49,6 +51,9 @@ export default {
         noise: 'the observer\'s reaction time in starting and stopping the stopwatch, shared over 10 oscillations: normal scatter with standard deviation 0.004 s in T',
       },
       noise: { type: 'gauss', sd: 0.004 }, resolution: 0.001, uncertainty: 0.01,
+      // No part uses the uncertainty (teacher, 8 October 2026), so it isn't shown to students; it stays internal so the
+      // validator can prove that the raw data are not linear and that the T² line misses the origin.
+      showUncertainty: false,
     },
     T2: {
       kind: 'derived', name: 'period squared', symbol: 'T^2', symbolText: 'T²', unit: 's^2', dp: 3, show: false,
@@ -56,8 +61,9 @@ export default {
       propagation: { form: 'product', terms: [{ of: 'T', n: 2 }] },
     },
   },
-  rawGraph: { x: 'm', y: 'T', zero: { x: true, y: true } },
-  graph: { x: 'm', y: 'T2', fit: 'linear', band: true, zero: { x: true, y: true } },
+  // errorBars 'none': no part uses error bars or uncertainties, so the graphs neither draw nor mention them (teacher, 8 October 2026).
+  rawGraph: { x: 'm', y: 'T', zero: { x: true, y: true }, errorBars: 'none' },
+  graph: { x: 'm', y: 'T2', fit: 'linear', band: true, zero: { x: true, y: true }, errorBars: 'none' },
   present: ['table', 'graph-raw'],
 
   results: {
@@ -80,7 +86,7 @@ export default {
   ],
 
   intro: () => '<p>A student investigates how the period $T$ of a mass oscillating on a spring depends on the mass $m$. For each mass, '
-    + 'the student times 10 oscillations with a stopwatch and divides by 10. The uncertainty in each value of $T$ is shown in the table. '
+    + 'the student times 10 oscillations with a stopwatch and divides by 10. '
     + 'The graph shows $T$ against $m$.</p>',
 
   parts: (d) => {
@@ -90,12 +96,12 @@ export default {
         label: 'a', marks: 2, ao: 'AO3',
         question: 'Explain how the graph of $T$ against $m$ shows that $T$ is not proportional to $m$.',
         markscheme: [
-          'No straight line can be drawn through all the error bars: the points lie on a curve ✓',
+          'The points lie on a clear curve: no straight line fits them ✓',
           'The gradient decreases as $m$ increases (equal increases in $m$ give smaller increases in $T$) ✓',
         ],
       },
       {
-        label: 'b', marks: 2, ao: 'AO2',
+        label: 'b', marks: 2, ao: 'AO2', asks: { answerText: ['T^2', 'T²'] },
         question: 'For a spring of negligible mass, $T = 2\\pi\\sqrt{\\dfrac{m}{k}}$, where $k$ is the spring constant. State the quantity that should be plotted against $m$ to give a straight line, and the gradient that line is expected to have.',
         markscheme: ['$T^2$ ✓', 'Gradient $= \\dfrac{4\\pi^2}{k}$ ✓'],
       },
@@ -115,6 +121,7 @@ export default {
       },
       {
         label: 'e', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        reads: [{ figure: 'graph', x: 0, y: d.r.intercept.value }],
         question: 'The line of best fit on the graph of $T^2$ against $m$ does not pass through the origin. Explain what this suggests about the assumption that the spring has negligible mass.',
         markscheme: [
           '$T^2$ is not zero when $m = 0$: something else is oscillating, the spring itself, so its mass is not negligible ✓',

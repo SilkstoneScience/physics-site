@@ -1,0 +1,332 @@
+{
+  "id": "D2-B01",
+  "topic": "D.2",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 3,
+  "skills": [
+    "supporting-derivation",
+    "complete-a-table",
+    "uncertainty-of-a-power",
+    "quantisation",
+    "best-value",
+    "calibration-error"
+  ],
+  "context": "experimental",
+  "seed": 211,
+  "physics": {
+    "scenario": "A student sprays oil drops between two horizontal metal plates 6.00 mm apart and views them through a microscope. The radius of each drop is found from its steady fall speed with the plates uncharged. A p.d. is then applied and adjusted until the drop stays still; the student records the voltmeter reading V. The voltmeter, it is found later, reads 3.0 % too high.",
+    "principles": [
+      "Uniform field between parallel plates: E = V/d (D.2)",
+      "Force on a charge: F = qE (D.2)",
+      "A stationary drop is in equilibrium: qV/d = mg, so q = mgd/V",
+      "Mass of a spherical drop: m = (4/3)πr³ρ",
+      "Charge is quantised: q = ne (D.2, Millikan)"
+    ],
+    "assumptions": [
+      "The field between the plates is uniform and the drop is far from their edges",
+      "Upthrust of the air on the drop is negligible (air is about 700 times less dense than the oil)",
+      "The radius from the fall speed is correct to within its stated uncertainty",
+      "The voltmeter reads 3.0 % high at every reading (a calibration error: reading = 1.030 × true p.d.)"
+    ],
+    "derivation": [
+      "qV_true/d = mg with m = (4/3)πr³ρ and q = ne, so V_true = (4/3)πr³ρgd/(ne)",
+      "The voltmeter shows V = 1.030 V_true, so q calculated from the reading, mgd/V, is the true charge divided by 1.030"
+    ],
+    "relationship": "V = (4/3)πr³ρgd/(ne), read as 1.030 V",
+    "params": {
+      "rho": {
+        "value": 875,
+        "unit": "kg m^-3",
+        "range": [
+          800,
+          1000
+        ],
+        "note": "density of the oil (a low-volatility oil used for Millikan experiments)"
+      },
+      "g": {
+        "value": 9.8,
+        "unit": "m s^-2",
+        "range": [
+          9.8,
+          9.8
+        ],
+        "note": "data booklet value"
+      },
+      "d": {
+        "value": 6,
+        "unit": "mm",
+        "range": [
+          3,
+          10
+        ],
+        "note": "plate separation"
+      },
+      "e": {
+        "value": 1.602176634e-19,
+        "unit": "C",
+        "range": [
+          1.602176634e-19,
+          1.602176634e-19
+        ],
+        "note": "elementary charge (the charge on each drop is a whole-number multiple)"
+      }
+    }
+  },
+  "models": {
+    "r": {
+      "kind": "set",
+      "unit": "µm",
+      "values": [
+        0.512,
+        0.633,
+        0.741,
+        0.468,
+        0.596,
+        0.825,
+        0.702
+      ],
+      "resolution": 0.001,
+      "uncertainty": 0.005
+    },
+    "n": {
+      "kind": "derived",
+      "unit": "",
+      "dp": 0
+    },
+    "V": {
+      "kind": "measured",
+      "unit": "V",
+      "model": {
+        "law": "balance-pd",
+        "inputs": {
+          "m": {
+            "law": "sphere-mass",
+            "inputs": {
+              "r": "row.r",
+              "rho": "p.rho"
+            }
+          },
+          "g": "p.g",
+          "d": "p.d",
+          "q": {
+            "law": "charge-multiple",
+            "inputs": {
+              "n": "row.n",
+              "e": "p.e"
+            }
+          }
+        }
+      },
+      "noise": {
+        "type": "gauss-relative",
+        "sd": 0.008
+      },
+      "resolution": 1,
+      "systematic": [
+        {
+          "type": "calibration",
+          "factor": 1.03,
+          "cause": "the voltmeter reads 3.0 % higher than the true p.d. across the plates",
+          "justification": "a few per cent is a typical calibration error for an inexpensive meter on a high-voltage range; the question tells students about it in part (e)"
+        }
+      ],
+      "uncertainty": 1
+    },
+    "q": {
+      "kind": "derived",
+      "unit": "",
+      "dp": 2,
+      "hide": [
+        2,
+        5
+      ],
+      "uncertainty": "rule"
+    }
+  },
+  "laws": {
+    "balance-pd": {
+      "statement": "V = mgd/q: the electric force qE = qV/d balances the weight mg (D.2: E = V/d, F = qE)",
+      "inputs": {
+        "m": "kg",
+        "g": "m s^-2",
+        "d": "m",
+        "q": "C"
+      },
+      "output": "V",
+      "f": "({ m, g, d, q }) => (m * g * d) / q"
+    },
+    "charge-multiple": {
+      "statement": "q = ne (charge is quantised in units of e)",
+      "inputs": {
+        "n": "",
+        "e": "C"
+      },
+      "output": "C",
+      "f": "({ n, e }) => n * e"
+    },
+    "sphere-mass": {
+      "statement": "m = (4/3)πr³ρ",
+      "inputs": {
+        "r": "m",
+        "rho": "kg m^-3"
+      },
+      "output": "kg",
+      "f": "({ r, rho }) => (4 / 3) * Math.PI * r ** 3 * rho"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "r": 0.512,
+        "n": 1,
+        "V": 184,
+        "q": 1.57
+      },
+      {
+        "r": 0.633,
+        "n": 2,
+        "V": 176,
+        "q": 3.11
+      },
+      {
+        "r": 0.741,
+        "n": 3,
+        "V": 188,
+        "q": 4.66
+      },
+      {
+        "r": 0.468,
+        "n": 1,
+        "V": 142,
+        "q": 1.56
+      },
+      {
+        "r": 0.596,
+        "n": 2,
+        "V": 146,
+        "q": 3.13
+      },
+      {
+        "r": 0.825,
+        "n": 4,
+        "V": 192,
+        "q": 6.3
+      },
+      {
+        "r": 0.702,
+        "n": 3,
+        "V": 161,
+        "q": 4.63
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "r": [
+        0.005,
+        0.005,
+        0.005,
+        0.005,
+        0.005,
+        0.005,
+        0.005
+      ],
+      "V": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "q": [
+        0.05,
+        0.09,
+        0.12,
+        0.06,
+        0.1,
+        0.15,
+        0.13
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student investigates the charges on oil drops. Drops are sprayed between two horizontal metal plates a distance $d = 6.00\\ \\text{mm}$ apart. The density of the oil is $875\\ \\text{kg m}^{-3}$.</p><p>The radius $r$ of each drop is found from its steady fall speed when the plates are not charged (you do not need this method). A potential difference is then applied, and adjusted until the drop stays still. The student records the voltmeter reading $V$.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "Radius $r$ of each drop and the voltmeter reading $V$ when it is held still, with the charge $q$ calculated from them.",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\">drop</th><th scope=\"col\" data-col=\"r\"><span class=\"h-name\">radius</span>$r$ / µm ± 0.005</th><th scope=\"col\" data-col=\"V\"><span class=\"h-name\">p.d.</span>$V$ / V ± 1</th><th scope=\"col\" data-col=\"q\"><span class=\"h-name\">charge</span>$q/(10^{-19}\\,\\text{C})$</th></tr></thead><tbody><tr><th scope=\"row\">A</th><td data-col=\"r\" data-row=\"0\">0.512</td><td data-col=\"V\" data-row=\"0\">184</td><td data-col=\"q\" data-row=\"0\">1.57</td></tr><tr><th scope=\"row\">B</th><td data-col=\"r\" data-row=\"1\">0.633</td><td data-col=\"V\" data-row=\"1\">176</td><td data-col=\"q\" data-row=\"1\">3.11</td></tr><tr><th scope=\"row\">C</th><td data-col=\"r\" data-row=\"2\">0.741</td><td data-col=\"V\" data-row=\"2\">188</td><td data-col=\"q\" data-row=\"2\" class=\"blank\">?</td></tr><tr><th scope=\"row\">D</th><td data-col=\"r\" data-row=\"3\">0.468</td><td data-col=\"V\" data-row=\"3\">142</td><td data-col=\"q\" data-row=\"3\">1.56</td></tr><tr><th scope=\"row\">E</th><td data-col=\"r\" data-row=\"4\">0.596</td><td data-col=\"V\" data-row=\"4\">146</td><td data-col=\"q\" data-row=\"4\">3.13</td></tr><tr><th scope=\"row\">F</th><td data-col=\"r\" data-row=\"5\">0.825</td><td data-col=\"V\" data-row=\"5\">192</td><td data-col=\"q\" data-row=\"5\" class=\"blank\">?</td></tr><tr><th scope=\"row\">G</th><td data-col=\"r\" data-row=\"6\">0.702</td><td data-col=\"V\" data-row=\"6\">161</td><td data-col=\"q\" data-row=\"6\">4.63</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "diagram": {
+        "alt": "Two horizontal metal plates, the upper one positive, 6.00 mm apart. A small oil drop is held still between them, with the electric force on it upwards and its weight downwards. A voltmeter is connected across the plates and a microscope looks at the drop from the side.",
+        "caption": "The oil drop is held still when the electric force on it balances its weight."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Show that the charge on a drop that stays still is $q = \\dfrac{mgd}{V}$, where $m$ is the mass of the drop.",
+      "marks": 1,
+      "markscheme": [
+        "The electric force balances the weight: $qE = mg$ with $E = \\dfrac{V}{d}$, so $\\dfrac{qV}{d} = mg$ and $q = \\dfrac{mgd}{V}$ ✓"
+      ]
+    },
+    {
+      "label": "b",
+      "question": "Calculate the missing values of $q$ for drops C and F.",
+      "marks": 2,
+      "markscheme": [
+        "Mass from $m = \\tfrac43\\pi r^3\\rho$; drop C: $q = 4.66 \\times 10^{-19}\\ \\text{C}$ ✓",
+        "Drop F: $q = 6.30 \\times 10^{-19}\\ \\text{C}$ ✓"
+      ]
+    },
+    {
+      "label": "c",
+      "question": "The uncertainties in $V$, $d$ and the density are small compared with the uncertainty in $r$. Determine the percentage uncertainty in $q$ for drop A.",
+      "marks": 2,
+      "markscheme": [
+        "$\\dfrac{\\Delta r}{r} = \\dfrac{0.005}{0.512}$, and $q \\propto r^3$, so the percentage uncertainty is three times as large ✓",
+        "$2.9\\,\\%$ ✓"
+      ],
+      "numeric": {
+        "answer": 2.9296875,
+        "range": [
+          2.841796875,
+          3.017578125
+        ],
+        "unit": "$\\%$",
+        "source": "pct",
+        "mistakes": [
+          {
+            "value": 0.9765625,
+            "feedback": "The mass depends on r³: multiply the percentage uncertainty in r by 3."
+          }
+        ]
+      }
+    },
+    {
+      "label": "d",
+      "question": "Deduce whether these data support the idea that charge comes in whole-number multiples of one smallest charge. Determine, from the data, the best value of that smallest charge.",
+      "marks": 3,
+      "markscheme": [
+        "Every charge is close to a whole-number multiple (1, 2, 3, 4) of about $1.56 \\times 10^{-19}\\ \\text{C}$ ✓",
+        "Each lies within its uncertainty (a few per cent, mostly from $r^3$) of that multiple, and no value lies halfway between multiples, so the data support quantisation ✓",
+        "Best value: total charge ÷ total number of charges (or the mean of $q/n$) $= 1.56 \\times 10^{-19}\\ \\text{C}$ (accept 1.54 to 1.58) ✓"
+      ]
+    },
+    {
+      "label": "e",
+      "question": "The voltmeter is later found to read 3.0 % higher than the true p.d. Determine the corrected value of the smallest charge, and state the effect of this error on your conclusion in (d).",
+      "marks": 2,
+      "markscheme": [
+        "The true p.d. is smaller, so every true charge is larger: $1.56 \\times 1.030 = 1.61 \\times 10^{-19}\\ \\text{C}$ (allow ECF from (d)) ✓",
+        "Every charge is scaled by the same factor, so they are still whole-number multiples of one value: the conclusion about quantisation is unchanged ✓"
+      ]
+    }
+  ]
+}

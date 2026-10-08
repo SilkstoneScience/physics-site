@@ -8,7 +8,7 @@
     "model-validity-range",
     "gradient",
     "evidence-against-a-model",
-    "limit-of-proportionality-vs-elastic-limit",
+    "fit-only-the-valid-region",
     "reference-wire"
   ],
   "context": "experimental",
@@ -17,8 +17,7 @@
     "scenario": "A long, thin hard-drawn copper wire hangs from a beam beside an identical reference wire that carries a constant small load. Masses of 1.0 kg are added one at a time to the test wire, and a vernier scale between the two wires measures the extension x of the test wire. The loads are taken beyond the limit of proportionality.",
     "principles": [
       "Hooke's law: F = kx up to the limit of proportionality (A.2)",
-      "Beyond the limit of proportionality the extension grows faster than the load as the metal begins to yield",
-      "The elastic limit is the largest load after which the wire returns to its original length when unloaded; it is a different limit"
+      "Beyond the limit of proportionality the extension grows faster than the load as the metal begins to yield (not assessed: the SL guide has only Hooke's law)"
     ],
     "assumptions": [
       "Below F_p the wire obeys Hooke's law, with k = EA/L for its dimensions (about 9.4 kN m⁻¹)",
@@ -175,12 +174,12 @@
     ],
     "figures": {
       "graph": {
-        "alt": "Graph of extension against load, with 9 plotted points and error bars. The values are in the data table.",
-        "caption": "Graph of extension against load. The error bars show the uncertainties."
+        "alt": "Graph of extension against load, with 9 plotted points. The values are in the data table.",
+        "caption": "Graph of extension against load. The uncertainty in extension (±0.05 mm) is too small to show as error bars."
       },
       "graph-ms": {
-        "alt": "Graph of extension against load, with 9 plotted points and error bars, the line of best fit and the steepest and shallowest lines. The values are in the data table.",
-        "caption": "<span class=\"key-1\">Blue</span>: line of best fit. <span class=\"key-2\">Orange, dashed</span>: steepest and shallowest lines through the error bars."
+        "alt": "Graph of extension against load, with 9 plotted points, the line of best fit and the steepest and shallowest lines. The values are in the data table.",
+        "caption": "<span class=\"key-1\">Blue</span>: line of best fit. <span class=\"key-2\">Orange, dashed</span>: steepest and shallowest lines that fit the data within their uncertainties. The uncertainty in extension (±0.05 mm) is too small to show as error bars."
       }
     }
   },
@@ -190,8 +189,8 @@
       "question": "Hooke's law predicts that $x$ is proportional to $F$. Use the graph to identify the range of loads for which the data are consistent with Hooke's law. Justify your answer.",
       "marks": 2,
       "markscheme": [
-        "A straight line through the origin passes through the error bars of the points up to about 49.0 N (accept up to 58.8 N) ✓",
-        "For larger loads the points lie above any such line by more than their error bars ✓"
+        "A straight line through the origin fits the points, within their uncertainty of ±0.05 mm, up to about 49.0 N (accept up to 58.8 N) ✓",
+        "For larger loads the points lie above any such line by far more than their uncertainty ✓"
       ],
       "msFigure": "graph-ms"
     },
@@ -225,11 +224,11 @@
     },
     {
       "label": "d",
-      "question": "A student concludes that the wire passed its elastic limit at about 50 N. Explain why these data alone cannot show this.",
+      "question": "Another student draws one line of best fit through all nine points and calculates $k$ from its gradient. Explain whether this value of $k$ would be larger or smaller than your answer to (b).",
       "marks": 2,
       "markscheme": [
-        "The elastic limit is the largest load after which the wire returns to its original length when the load is removed; it is not the same as the limit of proportionality, where the graph stops being straight ✓",
-        "All the readings were taken while loading: the student would need to remove the load and check for a permanent extension ✓"
+        "The points beyond about 49.0 N lie above the straight line, so a line through all the points has a larger gradient (more extension per newton) ✓",
+        "Since $k = \\dfrac{1}{\\text{gradient}}$, this $k$ would be smaller (about 8200 $\\text{N m}^{-1}$) ✓"
       ]
     },
     {

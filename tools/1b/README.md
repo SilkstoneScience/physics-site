@@ -72,7 +72,10 @@ node tools/1b/review.mjs accept-batch batch-1 --by "Mr Silkstone (teacher)" --no
 | `lib.mjs` | Seeded random numbers, rounding, significant figures, units, line fits, max/min gradient lines |
 | `generate.mjs` | Model → measurements (seeded noise, rounded to the instrument) → derived columns → fits → results → table/graph/question |
 | `graph.mjs` | Draws graphs from the data (axes, grid, points, error bars, fit lines/curves) |
-| `diagrams.mjs` | Diagram components: arrows (vectors), labels, current balance, circuits from a netlist |
+| `diagrams.mjs` | Diagram components: arrows (vectors), labels, current balance, circuits from a netlist, instrument scales |
+| `contexts.mjs` | Context families and objects, and the repetition check (diversity) |
+| `safeguards.mjs` | Phase 12 safeguards: too-regular data, error-bar visibility, graph reads, giveaways, ratio and multiple claims |
+| `fixtures/phase12.mjs` | Test datasets for the Phase 12 capabilities (never published) |
 | `validate.mjs` | Reads the published table and graphs back and checks everything (see below) |
 | `build.mjs` | Builds every dataset twice (must be identical), validates, writes `questions/1b.json` |
 | `test.mjs`, `fixtures/broken.mjs` | Tests, and broken datasets that must each be caught |
@@ -159,6 +162,50 @@ Copy the closest existing dataset and change it. The parts, in order:
    from first principles (in SI units), the dimensions of each term, limiting cases, the expected magnitude, and
    how to recover the parameters and answers from the published table. Don't copy the formula from `laws.mjs`:
    derive it again, so that a mistake in one shows up as a disagreement.
+
+9. **Phase 12 metadata and options** (details and reasons: `docs/PAPER1B_PHASE12_TOOLING.md`). None of the metadata is
+   published or fingerprinted.
+   - **Context** (required): `contextFamily` (one id from `CONTEXT_FAMILIES` in `contexts.mjs`) and `contextObjects`
+     (ids from `CONTEXT_OBJECTS`). A repeated family or main object in a batch, or a family already common in the bank, is a
+     diversity warning.
+   - **Graph reads**: a part that expects a value read from a graph declares `reads: [{ figure: 'graph', x, y, tol }]`;
+     each value must be on that graph's axes.
+   - **What a part asks for**: `asks: { answerText: ['T^2'] }` (a relationship or quantity that must not appear earlier,
+     or in the part's own question) and `asks: { conclusion: ['support'] }` for "whether …" parts (the conclusion must not
+     be stated earlier). Every result's value is also checked automatically against everything shown before the part that
+     establishes it.
+   - **Regular data**: if the validator says the data step too evenly or scatter too little, fix the measurement model;
+     only if the instrument genuinely reads that way, declare `columns.<k>.regularity = { accept: [codes], reason }`
+     (the dataset is then AMBER).
+   - **Error bars**: only y error bars are drawn. If they would be shorter than the markers, set
+     `graph.errorBars: 'too-small'` (the caption states the uncertainty; no part may mention error bars). `graph.height`
+     makes a taller plot (drawing only). When no part uses the uncertainty at all, set `errorBars: 'none'` (nothing drawn
+     or said; the examiner's graph has no steepest and shallowest lines) and `showUncertainty: false` on the column (no ± in
+     the table heading; the uncertainty stays internal for validation). `xErrorBars` is allowed only with `'too-small'`, to keep the x uncertainty in the
+     max/min lines.
+   - **Graphs**: `fit: 'none'` (points only), `modelCurve: (d) => (x) => y` with `modelCurveLabel` (examiner's graph),
+     `referenceLine: { m, c, label }` (both graphs), `style: 'trace'` (sensor data), `shade: { from, to, baseline, label }`
+     (examiner's graph).
+   - **Claims**: `constantValue` and `constantRatio` (`{ column, rows?, expect }`), `integerMultiples` (`{ column, factor, expect: true }`).
+   - **Area**: a result with `check: 'area'`, `area: { from, to, baseline }`, `dims: { of: 'xy' }` and a range (policy:
+     covers ±5 % and the count-the-squares estimate; no wider than ±20 %).
+   - **No student table**: `tableless: { reason, readFrom: [{ figure, columns }] }` and leave `'table'` out of `present`.
+   - **Instrument scale**: `scaleReading(alt, { min, max, major, minor, title, marks })` in `diagrams.mjs`, with
+     `diagramChecks: [{ figure, scale: { column } }]`.
+   - **Published data**: `provenance.fields` (source column heading, definition, scale) for every catalogue column, and
+     `provenance.extract: { file, sha256, rows }`: a copy of the source values as printed, kept in the reference cache
+     (`P1B_SOURCES`, default `../reference-cache`), never in this repository. Observed values that the question compares
+     with a model (not expected to follow it) are `observed: { reason }` instead of `model`/`agree`.
+
+10. **Phase 14 (Batch 2) options.**
+   - **Row names**: `rowLabels: { heading: 'body', values: ['Mercury', …] }` puts a first column of row headers (a planet, a year) in the table; one name per row, no numbers needed.
+   - **Simulated observations** (T9): a dataset with `source: 'observational'` must declare `simulated: true` or `false`; simulated data must say "simulated" in the question text (teacher, 8 October 2026).
+   - **Converted published values**: `provenance.fields.<k>.offset` is added after `scale` when checking against the stored source copy (published °C to K: `offset: 273`).
+   - **Graphs**: `graph.what` replaces "y-name against x-name" in the caption and alt text; `graph.altDescription` describes the graph's shape for screen readers when there is no student table (`tableless`).
+   - **Predictions**: a `predictAt` value counts as "measured" only within half the column's resolution of a row (bounce 7 after bounces 0–6 is a prediction).
+   - **Data without a table**: the independent audit reads such data back from the drawings itself (trace vertices, plotted points, scale marks).
+   - **Rules are inherited automatically**: `safeguard-index.mjs` lists every rule (specification section 21) with the error codes and tests that prove it; `test.mjs` fails if a rule has no broken dataset or test. Add a new rule there, with its proof.
+   - **New checks**: every drawn error bar must be visible (not only the longest); a point left off a graph needs a "Plot" part; numbers round halves up, as students do.
 
 Then run `node tools/1b/build.mjs --report` and fix anything it reports. Look at the question in the preview
 at 375 px and in dark mode, and get the teacher's approval before it goes live.

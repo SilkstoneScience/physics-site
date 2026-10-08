@@ -28,6 +28,8 @@ export default {
   batch: 'batch-1',
   archetypes: ['M2'],
   apparatus: 'aluminium block with an electric heater and a thermometer',
+  contextFamily: 'electrical-heating',
+  contextObjects: ['electric-heater', 'thermometer'],
   originality: 'Electrical determination of a specific heat capacity is a standard practical. Closest IB item: May 2024 TZ1 Paper 3 '
     + 'Section A Q2 (specific heat capacity of WATER from three given readings, absolute uncertainty, significant figures, a systematic '
     + 'error). This dataset differs: an insulated aluminium block, a time series of temperatures from which students take ΔT and its '

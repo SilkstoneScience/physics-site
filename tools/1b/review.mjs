@@ -21,7 +21,7 @@
 // person, not an assistant or an automated process. --recorded-by notes who typed the record if it
 // wasn't the reviewer (for example "Claude, from the teacher's message").
 import { loadDatasets, loadTopics, buildAll, printStatus } from './build.mjs';
-import { loadRegistry, saveRegistry, saveSnapshot, STATUSES, REVIEWED } from './registry.mjs';
+import { loadRegistry, saveRegistry, saveSnapshot, STATUSES, REVIEWED, reviewProblem } from './registry.mjs';
 import { batchPlan, acceptBatch } from './batch.mjs';
 import { VERDICT_MARGIN } from './validate.mjs';
 
@@ -95,14 +95,8 @@ if (wanted === 'DRAFT') {
 } else {
   if (!r.valid) die(`${id} doesn't pass the automatic checks:\n  ` + diags.filter((x) => x.dataset === id && x.level === 'error').map((x) => x.message).join('\n  '));
   if (r.state.changed) die(`${id} has changed since its last review: reset it first (review.mjs reset ${id} --by … --note …)`);
-  const current = REVIEWED.includes(rec.status) ? rec.status : 'AUTO-VALIDATED';
-  const order = ['AUTO-VALIDATED', ...REVIEWED];
-  if (order.indexOf(wanted) !== order.indexOf(current) + 1) {
-    die(`${id} is ${current}: the next review is ${order[order.indexOf(current) + 1] || '(none: already APPROVED)'}, not ${wanted}`);
-  }
-  if ((wanted === 'TEACHER-REVIEWED' || wanted === 'APPROVED') && /\b(claude|assistant|ai|automated|bot|script)\b/i.test(by)) {
-    die(`${wanted} must be recorded for a person (the teacher), not "${by}"`);
-  }
+  const problem = reviewProblem(rec, wanted, by, { valid: r.valid, changed: r.state.changed });
+  if (problem) die(`${id}: ${problem}`);
   rec.history.push({ status: wanted, ...entry, ...(wanted === 'APPROVED' ? { basis: 'individual', inspected: true } : {}), fingerprint: r.fingerprint });
   rec.status = wanted;
   rec.fingerprint = r.fingerprint;

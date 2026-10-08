@@ -258,8 +258,8 @@
         "marks": 2,
         "question": "Hooke's law suggests that $x$ is proportional to $F$. Explain how the graph shows that the student's values of $x$ are not proportional to $F$.",
         "markscheme": [
-          "The points lie on a straight line, within their error bars ✓",
-          "No straight line through all the error bars passes through the origin: the line meets the extension axis (at $F = 0$) at about 19 mm ✓"
+          "The points lie on a straight line (each extension is uncertain by only ±1 mm) ✓",
+          "The line does not pass through the origin: it meets the extension axis (at $F = 0$) at about 19 mm, far more than the ±1 mm uncertainty ✓"
         ],
         "msFigure": "graph-ms"
       },
@@ -340,7 +340,7 @@
       "model-validity-range",
       "gradient",
       "evidence-against-a-model",
-      "limit-of-proportionality-vs-elastic-limit",
+      "fit-only-the-valid-region",
       "reference-wire"
     ],
     "context": "experimental",
@@ -351,8 +351,8 @@
         "marks": 2,
         "question": "Hooke's law predicts that $x$ is proportional to $F$. Use the graph to identify the range of loads for which the data are consistent with Hooke's law. Justify your answer.",
         "markscheme": [
-          "A straight line through the origin passes through the error bars of the points up to about 49.0 N (accept up to 58.8 N) ✓",
-          "For larger loads the points lie above any such line by more than their error bars ✓"
+          "A straight line through the origin fits the points, within their uncertainty of ±0.05 mm, up to about 49.0 N (accept up to 58.8 N) ✓",
+          "For larger loads the points lie above any such line by far more than their uncertainty ✓"
         ],
         "msFigure": "graph-ms"
       },
@@ -387,10 +387,10 @@
       {
         "label": "d",
         "marks": 2,
-        "question": "A student concludes that the wire passed its elastic limit at about 50 N. Explain why these data alone cannot show this.",
+        "question": "Another student draws one line of best fit through all nine points and calculates $k$ from its gradient. Explain whether this value of $k$ would be larger or smaller than your answer to (b).",
         "markscheme": [
-          "The elastic limit is the largest load after which the wire returns to its original length when the load is removed; it is not the same as the limit of proportionality, where the graph stops being straight ✓",
-          "All the readings were taken while loading: the student would need to remove the load and check for a permanent extension ✓"
+          "The points beyond about 49.0 N lie above the straight line, so a line through all the points has a larger gradient (more extension per newton) ✓",
+          "Since $k = \\dfrac{1}{\\text{gradient}}$, this $k$ would be smaller (about 8200 $\\text{N m}^{-1}$) ✓"
         ]
       },
       {
@@ -410,6 +410,186 @@
       "status": "APPROVED"
     },
     "dataFile": "questions/1b/A2-B02.json"
+  },
+  {
+    "id": "A2-B03",
+    "theme": "A",
+    "topic": "A.2",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "equilibrium",
+      "value-from-a-graph",
+      "area-under-a-graph",
+      "impulse",
+      "momentum",
+      "compare-two-methods",
+      "systematic-difference"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student stands still on a force plate, bends their knees, and then jumps straight up. The force plate records the vertical force $F$ on it 200 times per second. The student lands back on the plate with bent knees.</p><p>The graph shows the force recorded by the plate.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 1,
+        "question": "Explain why the force recorded in the first 0.10 s is equal to the student's weight.",
+        "markscheme": [
+          "The student is at rest, so the resultant force is zero: the upward force from the plate equals the weight (and the student pushes down on the plate with an equal force) ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 1,
+        "question": "Determine the mass of the student.",
+        "markscheme": [
+          "$F \\approx 606\\ \\text{N}$, so $m = \\dfrac{F}{g} = 62\\ \\text{kg}$ (accept 60 to 64 kg) ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 3,
+        "question": "The push starts at $t = 0.10\\ \\text{s}$. Estimate the impulse of the resultant force on the student from then until the student leaves the plate.",
+        "markscheme": [
+          "Resultant force $= F - mg$: uses the area between the graph and a horizontal line at the weight ✓",
+          "Up to take-off at $t = 0.50\\ \\text{s}$ (where $F$ reaches zero); the area below the weight line near take-off is subtracted ✓",
+          "Impulse $\\approx 150\\ \\text{N s}$ (accept 140 to 160 N s) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "d",
+        "marks": 2,
+        "question": "Determine the speed of the student at take-off.",
+        "numeric": {
+          "answer": 2.4381207223550763,
+          "range": [
+            2.2918334790137718,
+            2.5844079656963808
+          ],
+          "unit": "$\\text{m}\\,\\text{s}^{-1}$",
+          "source": "v"
+        },
+        "markscheme": [
+          "Impulse = change of momentum, from rest: $v = \\dfrac{\\text{impulse}}{m}$ ✓",
+          "$v = 2.4\\ \\text{m s}^{-1}$ (accept 2.3 to 2.6; allow ECF from (b) and (c)) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "The take-off speed can also be found from the time the student spends in the air, using $v = \\dfrac{gt}{2}$. Determine this speed and compare it with your answer to (d).",
+        "markscheme": [
+          "Time in the air from the graph: $1.06 - 0.50 = 0.56\\ \\text{s}$, so $v = 2.7\\ \\text{m s}^{-1}$ ✓",
+          "This is larger than the value from the impulse, by about 13 % (accept a comparison consistent with the candidate's values) ✓"
+        ]
+      },
+      {
+        "label": "f",
+        "marks": 1,
+        "question": "Suggest one reason why the speed from the time in the air is larger.",
+        "markscheme": [
+          "The student lands with bent knees, so the centre of mass is lower at landing than at take-off: the student is in the air for longer than the rise and fall to the same height takes ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 231
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/A2-B03.json"
+  },
+  {
+    "id": "A3-B01",
+    "theme": "A",
+    "topic": "A.3",
+    "paper": "1B",
+    "difficulty": 1,
+    "level": "SL_HL",
+    "skills": [
+      "energy-transfers",
+      "successive-ratios",
+      "plot-a-point",
+      "constant-within-uncertainty",
+      "prediction",
+      "video-analysis"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates how much energy a tennis ball keeps each time it bounces. The ball is released from rest and bounces several times on a hard floor. A phone films it at 30 frames per second in front of a height scale fixed to the wall.</p><p>For each bounce, the student finds the frame in which the ball is highest and reads the peak height $h$ of the bottom of the ball. The table and graph show the results. The point for bounce 4 has not been plotted.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 1,
+        "question": "Describe the energy transfers from the moment the ball is released until it reaches its highest point after the first bounce.",
+        "markscheme": [
+          "Gravitational potential energy → kinetic energy as it falls; at the impact some energy is transferred to internal (thermal) energy and sound (the rest is stored elastically and returned as kinetic energy); kinetic → gravitational potential energy as it rises, so there is less at the top than at the start ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "Calculate the ratio $\\dfrac{h_1}{h_0}$ for the first bounce and the ratio $\\dfrac{h_6}{h_5}$ for the last bounce.",
+        "markscheme": [
+          "$\\dfrac{h_1}{h_0} = \\dfrac{110.5}{200.0} = 0.553$ ✓",
+          "$\\dfrac{h_6}{h_5} = \\dfrac{6.5}{10.0} = 0.65$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 1,
+        "question": "Plot the point for bounce 4 on the graph.",
+        "markscheme": [
+          "Point plotted at $n = 4$, $h = 18.5\\ \\text{cm}$, to within half a small square ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "d",
+        "marks": 3,
+        "question": "The fraction of its energy that the ball keeps in a bounce is equal to $\\dfrac{h_{n+1}}{h_n}$. Deduce, using the uncertainties in the heights, whether the data support the idea that every bounce keeps the same fraction of the energy.",
+        "markscheme": [
+          "The fractional uncertainties of the two heights add: $\\Delta\\!\\left(\\dfrac{h_1}{h_0}\\right) = 0.5525 \\times \\left(\\dfrac{1.0}{200.0} + \\dfrac{1.0}{110.5}\\right)$, so $\\dfrac{h_1}{h_0} = 0.553 \\pm 0.008$ ✓",
+          "$\\Delta\\!\\left(\\dfrac{h_6}{h_5}\\right) = 0.65 \\times \\left(\\dfrac{1.0}{6.5} + \\dfrac{1.0}{10.0}\\right)$, so $\\dfrac{h_6}{h_5} = 0.65 \\pm 0.17$ (accept $0.7 \\pm 0.2$): the small heights at the end have large fractional uncertainties ✓",
+          "A single value (about 0.55) lies within the uncertainty range of every ratio, so the data are consistent with a constant fraction; but the later ratios are imprecise, so they test the idea only weakly (award for a conclusion consistent with the candidate's ratios) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 1,
+        "question": "Predict the peak height after bounce 7.",
+        "numeric": {
+          "answer": 3.59125,
+          "range": [
+            2.9859296922086234,
+            4.095
+          ],
+          "unit": "$\\text{cm}$",
+          "source": "hPred"
+        },
+        "markscheme": [
+          "$h_7 \\approx h_6 \\times 0.55 = 3.6\\ \\text{cm}$, using the common ratio from (d) (or the mean ratio, or $h_0$ multiplied by the ratio 7 times; accept 3.0 to 4.1 cm) ✓"
+        ]
+      },
+      {
+        "label": "f",
+        "marks": 1,
+        "question": "Suggest one limitation of measuring the peak heights from this video, and its effect on the readings.",
+        "markscheme": [
+          "Any one of: the frame nearest the top may not show the ball at its highest point, so the reading is slightly too low / the ball is nearer the camera than the scale (parallax), so its height read against the scale depends on where the camera is / the moving ball is blurred, so its bottom edge is hard to judge ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 301
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/A3-B01.json"
   },
   {
     "id": "B1-B01",
@@ -595,6 +775,86 @@
     "dataFile": "questions/1b/B1-B02.json"
   },
   {
+    "id": "B2-B01",
+    "theme": "B",
+    "topic": "B.2",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "equilibrium-temperature",
+      "plot-a-point",
+      "model-versus-data",
+      "greenhouse-effect",
+      "value-from-a-graph",
+      "evaluate-data"
+    ],
+    "context": "unfamiliar",
+    "stem": "<p>A simple model treats a planet or moon as a black body with no atmosphere. It absorbs a fraction $(1 - \\alpha)$ of the sunlight falling on it, where $\\alpha$ is its albedo, and radiates energy from its whole surface. The temperature at which these balance is</p><p>$$T_\\text{model} = \\left(\\frac{(1-\\alpha)S}{4\\sigma}\\right)^{1/4}$$</p><p>where $S$ is the solar irradiance at the body. The table gives published data for five bodies. The graph shows the published mean temperature $T_\\text{obs}$ against $T_\\text{model}$; the point for Mars has not been plotted.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Calculate $T_\\text{model}$ for Mars.",
+        "numeric": {
+          "answer": 210,
+          "range": [
+            208,
+            212
+          ],
+          "unit": "$\\text{K}$",
+          "source": "TMars"
+        },
+        "markscheme": [
+          "$T^4 = \\dfrac{(1 - 0.250) \\times 586.2}{4 \\times 5.67 \\times 10^{-8}}$ ✓",
+          "$T_\\text{model} = 210\\ \\text{K}$ (accept 208 to 212 K) ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 1,
+        "question": "Plot the point for Mars on the graph.",
+        "markscheme": [
+          "Point at $T_\\text{model} = 210\\ \\text{K}$, $T_\\text{obs} = 208\\ \\text{K}$ (close to the dashed line), to within half a small square ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Identify the body whose temperature is furthest from the model. Explain why.",
+        "markscheme": [
+          "Venus: about 510 K hotter than the model ✓",
+          "It has a very thick atmosphere, mostly carbon dioxide: a strong greenhouse effect absorbs the infrared radiated by the surface and re-emits much of it back down, so the surface must be far hotter to radiate the absorbed energy away ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 1,
+        "question": "Use the graph to determine how much warmer the surface of the Earth is than the model predicts.",
+        "markscheme": [
+          "The vertical distance of Earth's point above the dashed line: about 33 K (accept 23 to 43 K) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 1,
+        "question": "On the Moon, the surface temperature at the equator ranges from 95 K at night to 390 K in the day. State one reason, other than the effect of the atmosphere, why the actual temperatures of planets and moons can differ from the model.",
+        "markscheme": [
+          "Any one of: the temperature is not the same over the whole surface: it varies enormously between day and night (and from equator to poles), but the model assumes one uniform temperature / a single \"mean temperature\" depends on how it is averaged over such a wide range / emission depends on $T^4$, so a body with a wide range of temperatures radiates its energy at a lower mean temperature (the Moon lies below the line) / the surface is not a perfect black body ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 201
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/B2-B01.json"
+  },
+  {
     "id": "B3-B01",
     "theme": "B",
     "topic": "B.3",
@@ -610,71 +870,80 @@
       "prediction"
     ],
     "context": "experimental",
-    "stem": "<p>A student investigates how the pressure $p$ of a fixed mass of air at constant volume depends on its temperature $\\theta$. A sealed flask of air is held in a water bath and connected by a short tube to a Bourdon pressure gauge. The bath is heated in steps, and at each step the student waits until the reading is steady.</p>",
+    "stem": "<p>A student investigates how the pressure $p$ of a fixed mass of air at constant volume depends on its temperature $T$. A sealed flask of air is held in a water bath and connected by a short tube to a Bourdon pressure gauge. The bath is heated in steps, and at each step the student waits until the reading is steady.</p>",
     "parts": [
       {
         "label": "a",
         "marks": 2,
-        "question": "Show, using two rows of the table, that $p$ is not proportional to $\\theta$.",
+        "question": "Show, using two rows of the table, that $p$ is not proportional to $T$.",
         "markscheme": [
-          "$\\dfrac{p}{\\theta}$ is 8.13 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 12.0 °C but 1.54 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 78.5 °C (or any two non-adjacent rows) ✓",
-          "The ratio is not constant, so $p$ is not proportional to $\\theta$ (equivalently: increasing $\\theta$ by a factor does not increase $p$ by the same factor) ✓"
+          "$\\dfrac{p}{T}$ is 8.13 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 12.0 °C but 1.54 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 78.5 °C (or any two non-adjacent rows) ✓",
+          "The ratio is not constant, so $p$ is not proportional to $T$ ✓"
         ]
       },
       {
         "label": "b",
-        "marks": 3,
-        "question": "Draw the line of best fit and extend it to $p = 0$. Hence determine the temperature at which the pressure of the air would be zero, according to these data.",
-        "numeric": {
-          "answer": -271.9221443235077,
-          "range": [
-            -285.2857142857143,
-            -254.90540540540542
-          ],
-          "unit": "${}^{\\circ}\\text{C}$",
-          "source": "absZeroAnswer"
-        },
+        "marks": 2,
+        "question": "Draw the line of best fit on the graph. Determine its gradient and its intercept on the $p$ axis.",
         "markscheme": [
-          "Line of best fit drawn through the error bars and extended to the $\\theta$ axis ✓",
-          "Reads the intercept, or calculates it from the gradient and the intercept on the $p$ axis ✓",
-          "About −272 °C (accept −285 to −255 °C) ✓"
+          "Gradient $= 0.34\\ \\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ (accept 0.33 to 0.36) ✓",
+          "Intercept $= 93.2\\ \\text{kPa}$ (accept 92.7 to 93.7) ✓"
         ],
         "msFigure": "graph-ms"
       },
       {
         "label": "c",
         "marks": 2,
-        "question": "Explain why the uncertainty in your answer to (b) is much larger than the uncertainty in each temperature reading.",
+        "question": "Hence determine the temperature at which the pressure of the air would be zero, according to these data.",
+        "numeric": {
+          "answer": -271.9221443235077,
+          "range": [
+            -280.079808653213,
+            -261.67857142857144
+          ],
+          "unit": "${}^{\\circ}\\text{C}$",
+          "source": "absZeroAnswer"
+        },
         "markscheme": [
-          "The line is extended a long way beyond the data (from 12.0 °C to about −272 °C) ✓",
-          "A small change of gradient, still within the error bars, moves the intercept a long way: the steepest and shallowest lines give about −285 °C to −255 °C ✓"
+          "At $p = 0$: $T = -\\dfrac{\\text{intercept}}{\\text{gradient}}$ (extrapolating the line) ✓",
+          "$T = −272\\ {}^{\\circ}\\text{C}$ (accept −280 to −262; allow ECF from (b)) ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 3,
+        "question": "Draw the steepest and shallowest straight lines that pass through all the error bars. Use them to determine the absolute uncertainty in your answer to (c).",
+        "markscheme": [
+          "Steepest and shallowest lines drawn through all the error bars ✓",
+          "Their temperatures at $p = 0$, found in the same way, are about −277 °C and −262 °C ✓",
+          "Uncertainty $= \\dfrac{\\text{difference}}{2} \\approx 8\\ {}^{\\circ}\\text{C}$ (allow values from the candidate's own lines) ✓"
         ],
         "msFigure": "graph-ms"
       },
       {
-        "label": "d",
-        "marks": 1,
-        "question": "Comment on whether the result is consistent with the accepted value of absolute zero, $−273\\ {}^{\\circ}\\text{C}$.",
+        "label": "e",
+        "marks": 2,
+        "question": "The accepted value of absolute zero is $−273\\ {}^{\\circ}\\text{C}$. Calculate the percentage difference between your answer to (c) and this value. Hence discuss whether your result is consistent with the accepted value.",
         "markscheme": [
-          "−273 °C lies within the range −285 °C to −255 °C given by the steepest and shallowest lines, so the result is consistent with it (award for a conclusion consistent with the candidate's own range) ✓"
+          "Percentage difference $= \\dfrac{|−272 - (−273)|}{273} \\times 100 \\approx 0.4\\,\\%$ ✓",
+          "This is smaller than the percentage uncertainty from (d) (about 3 %), so the result is consistent with the accepted value (award for a conclusion consistent with the candidate's own uncertainty) ✓"
         ]
       },
       {
-        "label": "e",
-        "marks": 2,
-        "question": "The flask is then placed in boiling water at 100 °C. Predict the reading of the pressure gauge.",
+        "label": "f",
+        "marks": 1,
+        "question": "The flask is then placed in boiling water at 100 °C. Use your line of best fit to predict the reading of the pressure gauge.",
         "numeric": {
           "answer": 127.4663675344157,
           "range": [
             126.82903569674362,
-            128.74019607843138
+            128.18987341772151
           ],
           "unit": "$\\text{kPa}$",
           "source": "pred"
         },
         "markscheme": [
-          "Extends the line to 100 °C, or uses $p = (\\text{gradient})\\,\\theta + (\\text{intercept})$ ✓",
-          "$p = 127\\ \\text{kPa}$ (accept 127 to 129) ✓"
+          "$p = 127\\ \\text{kPa}$ (accept 127 to 128) ✓"
         ],
         "msFigure": "graph-ms"
       }
@@ -800,14 +1069,14 @@
       "unit-base-si"
     ],
     "context": "experimental",
-    "stem": "<p>A student investigates how the period $T$ of a mass oscillating on a spring depends on the mass $m$. For each mass, the student times 10 oscillations with a stopwatch and divides by 10. The uncertainty in each value of $T$ is shown in the table. The graph shows $T$ against $m$.</p>",
+    "stem": "<p>A student investigates how the period $T$ of a mass oscillating on a spring depends on the mass $m$. For each mass, the student times 10 oscillations with a stopwatch and divides by 10. The graph shows $T$ against $m$.</p>",
     "parts": [
       {
         "label": "a",
         "marks": 2,
         "question": "Explain how the graph of $T$ against $m$ shows that $T$ is not proportional to $m$.",
         "markscheme": [
-          "No straight line can be drawn through all the error bars: the points lie on a curve ✓",
+          "The points lie on a clear curve: no straight line fits them ✓",
           "The gradient decreases as $m$ increases (equal increases in $m$ give smaller increases in $T$) ✓"
         ]
       },
@@ -994,6 +1263,88 @@
     "dataFile": "questions/1b/C4-B01.json"
   },
   {
+    "id": "C5-B01",
+    "theme": "C",
+    "topic": "C.5",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "period-from-a-graph",
+      "doppler-shift",
+      "orbital-speed",
+      "percentage-uncertainty",
+      "prediction",
+      "improve-the-method"
+    ],
+    "context": "observational",
+    "stem": "<p>Astronomers study a star in a binary system: the star moves in a circular orbit, so it moves alternately towards and away from Earth. They measure the wavelength $\\lambda$ of a hydrogen line in its spectrum. In the laboratory this line has a wavelength of $656.28\\ \\text{nm}$.</p><p>The graph shows <strong>simulated observations</strong> on 18 nights: values generated from a model of the orbit, with the scatter a real spectrograph would give. Each wavelength has an uncertainty of $\\pm 0.008\\ \\text{nm}$. The system as a whole is not moving towards or away from Earth.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Determine the orbital period of the star.",
+        "markscheme": [
+          "Uses the times of two maxima (or minima) several cycles apart, for example about day 5 and day 28 (2 cycles) ✓",
+          "Period $= 11.6$ days (accept 10.4 to 12.7 days) ✓"
+        ],
+        "msFigure": "graph-ms"
+      },
+      {
+        "label": "b",
+        "marks": 3,
+        "question": "Determine the orbital speed of the star, in $\\text{km s}^{-1}$.",
+        "numeric": {
+          "answer": 51.75743240341206,
+          "range": [
+            46.54773375019798,
+            56.967131056626144
+          ],
+          "unit": "$\\text{km}\\,\\text{s}^{-1}$",
+          "source": "K"
+        },
+        "markscheme": [
+          "Largest shift from the laboratory wavelength, from the graph: $\\Delta\\lambda \\approx 0.113\\ \\text{nm}$ ✓",
+          "$v = \\dfrac{c\\,\\Delta\\lambda}{\\lambda}$ ✓",
+          "$v = 52\\ \\text{km s}^{-1}$ (accept 47 to 57; allow ECF from the shift read) ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Determine the percentage uncertainty in your answer to (b). The laboratory wavelength and $c$ are known precisely.",
+        "markscheme": [
+          "The uncertainty in $\\Delta\\lambda$ is that of one wavelength reading, $0.008\\ \\text{nm}$ ✓",
+          "$\\dfrac{0.008}{0.113} \\times 100 \\approx 7\\,\\%$ (allow ECF from (b)) ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 1,
+        "question": "Predict the wavelength that would be observed on day 34.",
+        "markscheme": [
+          "About half a period after the maximum near day 28, so near a minimum: $\\lambda \\approx 656.17\\ \\text{nm}$ (accept 656.164 to 656.196 nm) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 1,
+        "question": "Suggest one way in which the observations could be changed to determine the period more precisely.",
+        "markscheme": [
+          "Any one of: observe for more cycles (a longer time) / observe more often, especially near the maxima and minima / fill the gaps in the record ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 251
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/C5-B01.json"
+  },
+  {
     "id": "D1-B01",
     "theme": "D",
     "topic": "D.1",
@@ -1093,6 +1444,94 @@
       "status": "APPROVED"
     },
     "dataFile": "questions/1b/D1-B01.json"
+  },
+  {
+    "id": "D2-B01",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1B",
+    "difficulty": 3,
+    "level": "SL_HL",
+    "skills": [
+      "supporting-derivation",
+      "complete-a-table",
+      "uncertainty-of-a-power",
+      "quantisation",
+      "best-value",
+      "calibration-error"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates the charges on oil drops. Drops are sprayed between two horizontal metal plates a distance $d = 6.00\\ \\text{mm}$ apart. The density of the oil is $875\\ \\text{kg m}^{-3}$.</p><p>The radius $r$ of each drop is found from its steady fall speed when the plates are not charged (you do not need this method). A potential difference is then applied, and adjusted until the drop stays still. The student records the voltmeter reading $V$.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 1,
+        "question": "Show that the charge on a drop that stays still is $q = \\dfrac{mgd}{V}$, where $m$ is the mass of the drop.",
+        "markscheme": [
+          "The electric force balances the weight: $qE = mg$ with $E = \\dfrac{V}{d}$, so $\\dfrac{qV}{d} = mg$ and $q = \\dfrac{mgd}{V}$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 2,
+        "question": "Calculate the missing values of $q$ for drops C and F.",
+        "markscheme": [
+          "Mass from $m = \\tfrac43\\pi r^3\\rho$; drop C: $q = 4.66 \\times 10^{-19}\\ \\text{C}$ ✓",
+          "Drop F: $q = 6.30 \\times 10^{-19}\\ \\text{C}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "The uncertainties in $V$, $d$ and the density are small compared with the uncertainty in $r$. Determine the percentage uncertainty in $q$ for drop A.",
+        "numeric": {
+          "answer": 2.9296875,
+          "range": [
+            2.841796875,
+            3.017578125
+          ],
+          "unit": "$\\%$",
+          "source": "pct",
+          "mistakes": [
+            {
+              "value": 0.9765625,
+              "feedback": "The mass depends on r³: multiply the percentage uncertainty in r by 3."
+            }
+          ]
+        },
+        "markscheme": [
+          "$\\dfrac{\\Delta r}{r} = \\dfrac{0.005}{0.512}$, and $q \\propto r^3$, so the percentage uncertainty is three times as large ✓",
+          "$2.9\\,\\%$ ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 3,
+        "question": "Deduce whether these data support the idea that charge comes in whole-number multiples of one smallest charge. Determine, from the data, the best value of that smallest charge.",
+        "markscheme": [
+          "Every charge is close to a whole-number multiple (1, 2, 3, 4) of about $1.56 \\times 10^{-19}\\ \\text{C}$ ✓",
+          "Each lies within its uncertainty (a few per cent, mostly from $r^3$) of that multiple, and no value lies halfway between multiples, so the data support quantisation ✓",
+          "Best value: total charge ÷ total number of charges (or the mean of $q/n$) $= 1.56 \\times 10^{-19}\\ \\text{C}$ (accept 1.54 to 1.58) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "The voltmeter is later found to read 3.0 % higher than the true p.d. Determine the corrected value of the smallest charge, and state the effect of this error on your conclusion in (d).",
+        "markscheme": [
+          "The true p.d. is smaller, so every true charge is larger: $1.56 \\times 1.030 = 1.61 \\times 10^{-19}\\ \\text{C}$ (allow ECF from (d)) ✓",
+          "Every charge is scaled by the same factor, so they are still whole-number multiples of one value: the conclusion about quantisation is unchanged ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 211
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/D2-B01.json"
   },
   {
     "id": "D3-B01",
@@ -1202,6 +1641,86 @@
     "dataFile": "questions/1b/D3-B01.json"
   },
   {
+    "id": "E1-B01",
+    "theme": "E",
+    "topic": "E.1",
+    "paper": "1B",
+    "difficulty": 1,
+    "level": "SL_HL",
+    "skills": [
+      "read-a-scale",
+      "reading-uncertainty",
+      "photon-energy",
+      "energy-levels",
+      "test-a-claim",
+      "resolution-of-a-scale"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student looks at a mercury vapour lamp through a handheld spectroscope. Bright lines of different colours are seen against a wavelength scale. The diagram shows part of the scale, with the three brightest lines in this part of the spectrum.</p><p>The second diagram shows some of the energy levels of a mercury atom.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Read the wavelengths of the three lines from the scale.",
+        "markscheme": [
+          "Violet 405 nm, blue 436 nm, green 546 nm, each accepted within ±2.5 nm: any two correct ✓",
+          "All three correct ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 1,
+        "question": "State the absolute uncertainty in each of your readings.",
+        "markscheme": [
+          "$\\pm 2.5\\ \\text{nm}$: half the smallest division (5 nm) of the scale ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 2,
+        "question": "Calculate the energy, in eV, of a photon of the green light.",
+        "numeric": {
+          "answer": 2.27636879692364,
+          "range": [
+            2.265995260663507,
+            2.2868377483443703
+          ],
+          "unit": "$\\text{eV}$",
+          "source": "EG"
+        },
+        "markscheme": [
+          "$E = \\dfrac{hc}{\\lambda} = \\dfrac{6.63 \\times 10^{-34} \\times 3.00 \\times 10^{8}}{546 \\times 10^{-9}}$ J ✓",
+          "÷ $1.60 \\times 10^{-19}$: $E = 2.28\\ \\text{eV}$ (accept 2.27 to 2.29 eV) ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 2,
+        "question": "A student suggests that all three lines are emitted by atoms falling from one and the same energy level. Deduce, using the energy levels, whether the suggestion is correct.",
+        "markscheme": [
+          "Photon energies about 3.07, 2.85 and 2.28 eV (each uncertain by about ±0.02 eV) ✓",
+          "These match 7.73 − 4.67, 7.73 − 4.89 and 7.73 − 5.46 eV: all three are transitions from the 7.73 eV level, so the suggestion is correct (no other pair of levels gives these energies) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 1,
+        "question": "Beyond the part of the scale shown, the mercury spectrum has two yellow lines, at 577.0 nm and 579.1 nm. Deduce whether readings from this scale could show that there are two lines.",
+        "markscheme": [
+          "No: they are only 2.1 nm apart, less than the reading uncertainty of ±2.5 nm (and less than one 5 nm division), so they would be read as one line ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 101
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/E1-B01.json"
+  },
+  {
     "id": "E3-B01",
     "theme": "E",
     "topic": "E.3",
@@ -1291,5 +1810,86 @@
       "status": "APPROVED"
     },
     "dataFile": "questions/1b/E3-B01.json"
+  },
+  {
+    "id": "E4-B01",
+    "theme": "E",
+    "topic": "E.4",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "skills": [
+      "mass-defect-energy",
+      "load-factor",
+      "energy-chain",
+      "estimate",
+      "evidence-from-data",
+      "evaluate-a-claim"
+    ],
+    "context": "unfamiliar",
+    "stem": "<p>The Krško nuclear power station in Slovenia has one reactor. Its thermal power is $1994\\ \\text{MW}$ and, in the years shown, its net electrical power output was $688\\ \\text{MW}$. The table gives the electrical energy $E$ it supplied in six years.</p><p>The load factor LF is the energy supplied as a percentage of the energy the station would supply at full power for the whole year. A year has 8760 hours (a leap year, such as 2020, has 8784).</p><p>One fission reaction in the reactor is</p><p>$${}^{235}_{92}\\text{U} + {}^{1}_{0}\\text{n} \\rightarrow {}^{141}_{56}\\text{Ba} + {}^{92}_{36}\\text{Kr} + 3\\,{}^{1}_{0}\\text{n}$$</p><p>Masses: $^{235}\\text{U}$ 235.0439 u, neutron 1.0087 u, $^{141}\\text{Ba}$ 140.9144 u, $^{92}\\text{Kr}$ 91.9262 u.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "marks": 2,
+        "question": "Calculate the energy released in this fission reaction, in MeV.",
+        "markscheme": [
+          "Mass difference $= (235.0439 + 1.0087) - (140.9144 + 91.9262 + 3 \\times 1.0087) = 0.1859\\ \\text{u}$ ✓",
+          "$E = 0.1859 \\times 931.5 \\approx 173\\ \\text{MeV}$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "marks": 1,
+        "question": "Calculate the load factor in 2018.",
+        "numeric": {
+          "answer": 91.1,
+          "range": [
+            90.89999999999999,
+            91.3
+          ],
+          "unit": "$\\%$",
+          "source": "LF18"
+        },
+        "markscheme": [
+          "$\\dfrac{5490\\ \\text{GWh}}{0.688\\ \\text{GW} \\times 8760\\ \\text{h}} \\times 100 = 91.1\\,\\%$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "marks": 3,
+        "question": "Estimate the mass of $^{235}\\text{U}$ that underwent fission in 2020. Assume that all the energy released in the reactor comes from the reaction above.",
+        "markscheme": [
+          "Efficiency $= \\dfrac{688}{1994} = 0.345$, so thermal energy $= \\dfrac{6041 \\times 3.6 \\times 10^{12}}{0.345} = 6.3 \\times 10^{16}\\ \\text{J}$ ✓",
+          "Number of fissions $= \\dfrac{6.3 \\times 10^{16}}{173 \\times 1.60 \\times 10^{-13}} = 2.3 \\times 10^{27}$ ✓",
+          "Mass $= 2.3 \\times 10^{27} \\times 235.0439 \\times 1.661 \\times 10^{-27} \\approx 890\\ \\text{kg}$ (accept 750 to 1000 kg; allow ECF from (a)) ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "marks": 1,
+        "question": "The reactor is shut down for refuelling about once every 18 months. Identify the years in the table in which it was not refuelled, and state the evidence.",
+        "markscheme": [
+          "2017 and 2020: the load factor is close to 100 % and the station was connected to the grid for 8708 and 8748 hours, compared with 88.1–91.8 % and 7849–8081 hours in the other years ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "marks": 2,
+        "question": "A gigawatt-year is the energy supplied by a power of 1 GW for one year. In 2020 the station supplied 0.69 gigawatt-years of electrical energy. A rule of thumb says that a reactor fissions about one tonne of $^{235}\\text{U}$ for every gigawatt-year of electrical energy. Use your answer to (c) to deduce whether the 2020 data support this rule.",
+        "markscheme": [
+          "Mass per gigawatt-year $= \\dfrac{890\\ \\text{kg}}{0.69} \\approx 1.3\\ \\text{t}$ (allow ECF from (c)) ✓",
+          "This is close to one tonne (the same order of magnitude), so the data roughly support the rule; accept a conclusion consistent with the candidate's value. (Not required: the estimate is a little larger because some energy comes from fissions of $^{239}\\text{Pu}$ made in the fuel, which the calculation ignores.) ✓"
+        ]
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 241
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/E4-B01.json"
   }
 ]

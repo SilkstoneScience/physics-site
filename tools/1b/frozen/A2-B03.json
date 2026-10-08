@@ -1,0 +1,1462 @@
+{
+  "id": "A2-B03",
+  "topic": "A.2",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 2,
+  "skills": [
+    "equilibrium",
+    "value-from-a-graph",
+    "area-under-a-graph",
+    "impulse",
+    "momentum",
+    "compare-two-methods",
+    "systematic-difference"
+  ],
+  "context": "experimental",
+  "seed": 231,
+  "physics": {
+    "scenario": "A student stands still on a force plate, bends their knees, then pushes off and jumps straight up from the squat (no counter-movement). The plate records the vertical force F on it 200 times per second. The student lands on the plate with bent knees.",
+    "principles": [
+      "Standing still: the resultant force is zero, so the plate pushes up with a force equal to the weight mg (A.2, Newton's first law; by Newton's third law the plate reads this force)",
+      "The resultant (net) upward force on the jumper is F − mg",
+      "Impulse of the resultant force = area under the (F − mg)–t graph = change of momentum (A.2): starting from rest, mv = ∫(F − mg)dt up to take-off",
+      "In flight only gravity acts: rising and falling to the same height takes t = 2v/g (A.1)"
+    ],
+    "assumptions": [
+      "The force during the push follows a smooth empirical pulse, F = mg(1 − sᵖ) + A sin(πs) (approved by the teacher on 8 October 2026)",
+      "The jumper's centre of mass is at the same height at landing as at take-off, apart from a stated extra flight time δ because the student lands with bent knees",
+      "Air resistance is negligible"
+    ],
+    "derivation": [
+      "Impulse of the net force from the start of the push to take-off: J = τ(2A/π − mg/(p + 1))",
+      "Take-off speed v = J/m; flight time 2v/g + δ; landing force F = mg·s + B sin(πs), then mg"
+    ],
+    "relationship": "F(t) as in the force-plate-jump law; mv = ∫(F − mg)dt",
+    "params": {
+      "m": {
+        "value": 62,
+        "unit": "kg",
+        "range": [
+          40,
+          90
+        ],
+        "note": "mass of the jumper"
+      },
+      "g": {
+        "value": 9.8,
+        "unit": "m s^-2",
+        "range": [
+          9.8,
+          9.8
+        ],
+        "note": "data booklet value"
+      },
+      "t0": {
+        "value": 0.1,
+        "unit": "s",
+        "range": [
+          0,
+          0.5
+        ],
+        "note": "start of the push"
+      },
+      "tau": {
+        "value": 0.4,
+        "unit": "s",
+        "range": [
+          0.25,
+          0.5
+        ],
+        "note": "duration of the push (typical squat jump: 0.3–0.4 s)"
+      },
+      "A": {
+        "value": 830,
+        "unit": "N",
+        "range": [
+          400,
+          1500
+        ],
+        "note": "size of the push (peak force about 2.3 mg)"
+      },
+      "p": {
+        "value": 3,
+        "unit": "",
+        "range": [
+          1,
+          5
+        ],
+        "note": "shape of the fall in force as the legs straighten"
+      },
+      "dL": {
+        "value": 0.06,
+        "unit": "s",
+        "range": [
+          0,
+          0.08
+        ],
+        "note": "extra time in the air from landing with bent knees (centre of mass lower at landing)"
+      },
+      "tauL": {
+        "value": 0.1,
+        "unit": "s",
+        "range": [
+          0.08,
+          0.3
+        ],
+        "note": "duration of the landing impact"
+      },
+      "B": {
+        "value": 1500,
+        "unit": "N",
+        "range": [
+          500,
+          3000
+        ],
+        "note": "size of the landing impact (peak about 3 mg)"
+      }
+    }
+  },
+  "models": {
+    "t": {
+      "kind": "set",
+      "unit": "s",
+      "values": [
+        0,
+        0.005,
+        0.01,
+        0.015,
+        0.02,
+        0.025,
+        0.03,
+        0.035,
+        0.04,
+        0.045,
+        0.05,
+        0.055,
+        0.06,
+        0.065,
+        0.07,
+        0.075,
+        0.08,
+        0.085,
+        0.09,
+        0.095,
+        0.1,
+        0.105,
+        0.11,
+        0.115,
+        0.12,
+        0.125,
+        0.13,
+        0.135,
+        0.14,
+        0.145,
+        0.15,
+        0.155,
+        0.16,
+        0.165,
+        0.17,
+        0.175,
+        0.18,
+        0.185,
+        0.19,
+        0.195,
+        0.2,
+        0.205,
+        0.21,
+        0.215,
+        0.22,
+        0.225,
+        0.23,
+        0.235,
+        0.24,
+        0.245,
+        0.25,
+        0.255,
+        0.26,
+        0.265,
+        0.27,
+        0.275,
+        0.28,
+        0.285,
+        0.29,
+        0.295,
+        0.3,
+        0.305,
+        0.31,
+        0.315,
+        0.32,
+        0.325,
+        0.33,
+        0.335,
+        0.34,
+        0.345,
+        0.35,
+        0.355,
+        0.36,
+        0.365,
+        0.37,
+        0.375,
+        0.38,
+        0.385,
+        0.39,
+        0.395,
+        0.4,
+        0.405,
+        0.41,
+        0.415,
+        0.42,
+        0.425,
+        0.43,
+        0.435,
+        0.44,
+        0.445,
+        0.45,
+        0.455,
+        0.46,
+        0.465,
+        0.47,
+        0.475,
+        0.48,
+        0.485,
+        0.49,
+        0.495,
+        0.5,
+        0.505,
+        0.51,
+        0.515,
+        0.52,
+        0.525,
+        0.53,
+        0.535,
+        0.54,
+        0.545,
+        0.55,
+        0.555,
+        0.56,
+        0.565,
+        0.57,
+        0.575,
+        0.58,
+        0.585,
+        0.59,
+        0.595,
+        0.6,
+        0.605,
+        0.61,
+        0.615,
+        0.62,
+        0.625,
+        0.63,
+        0.635,
+        0.64,
+        0.645,
+        0.65,
+        0.655,
+        0.66,
+        0.665,
+        0.67,
+        0.675,
+        0.68,
+        0.685,
+        0.69,
+        0.695,
+        0.7,
+        0.705,
+        0.71,
+        0.715,
+        0.72,
+        0.725,
+        0.73,
+        0.735,
+        0.74,
+        0.745,
+        0.75,
+        0.755,
+        0.76,
+        0.765,
+        0.77,
+        0.775,
+        0.78,
+        0.785,
+        0.79,
+        0.795,
+        0.8,
+        0.805,
+        0.81,
+        0.815,
+        0.82,
+        0.825,
+        0.83,
+        0.835,
+        0.84,
+        0.845,
+        0.85,
+        0.855,
+        0.86,
+        0.865,
+        0.87,
+        0.875,
+        0.88,
+        0.885,
+        0.89,
+        0.895,
+        0.9,
+        0.905,
+        0.91,
+        0.915,
+        0.92,
+        0.925,
+        0.93,
+        0.935,
+        0.94,
+        0.945,
+        0.95,
+        0.955,
+        0.96,
+        0.965,
+        0.97,
+        0.975,
+        0.98,
+        0.985,
+        0.99,
+        0.995,
+        1,
+        1.005,
+        1.01,
+        1.015,
+        1.02,
+        1.025,
+        1.03,
+        1.035,
+        1.04,
+        1.045,
+        1.05,
+        1.055,
+        1.06,
+        1.065,
+        1.07,
+        1.075,
+        1.08,
+        1.085,
+        1.09,
+        1.095,
+        1.1,
+        1.105,
+        1.11,
+        1.115,
+        1.12,
+        1.125,
+        1.13,
+        1.135,
+        1.14,
+        1.145,
+        1.15,
+        1.155,
+        1.16,
+        1.165,
+        1.17,
+        1.175,
+        1.18,
+        1.185,
+        1.19,
+        1.195,
+        1.2
+      ],
+      "resolution": 0.005
+    },
+    "F": {
+      "kind": "measured",
+      "unit": "N",
+      "model": {
+        "law": "force-plate-jump",
+        "inputs": {
+          "m": "p.m",
+          "g": "p.g",
+          "t": "row.t",
+          "t0": "p.t0",
+          "tau": "p.tau",
+          "A": "p.A",
+          "p": "p.p",
+          "dL": "p.dL",
+          "tauL": "p.tauL",
+          "B": "p.B"
+        }
+      },
+      "noise": {
+        "type": "gauss-relative",
+        "sd": 0.006
+      },
+      "resolution": 1,
+      "uncertainty": null
+    }
+  },
+  "laws": {
+    "force-plate-jump": {
+      "statement": "Standing still, F = mg. Pushing off (t₀ ≤ t ≤ t₀ + τ, s = (t − t₀)/τ): F = mg(1 − sᵖ) + A sin(πs), an empirical pulse shape (approved by the teacher on 8 October 2026) that starts at mg and falls to zero at take-off. Take-off speed from the impulse of the net force (A.2): mv = ∫(F − mg)dt = τ(2A/π − mg/(p + 1)). In flight F = 0 for 2v/g + δ (δ: extra flight time from landing with bent knees). Landing (s = (t − t_L)/τ_L): F = mg·s + B sin(πs), then F = mg",
+      "inputs": {
+        "m": "kg",
+        "g": "m s^-2",
+        "t": "s",
+        "t0": "s",
+        "tau": "s",
+        "A": "N",
+        "p": "",
+        "dL": "s",
+        "tauL": "s",
+        "B": "N"
+      },
+      "output": "N",
+      "f": "({ m, g, t, t0, tau, A, p, dL, tauL, B }) => {\r\n      const W = m * g;\r\n      if (t < t0) return W;\r\n      if (t <= t0 + tau) { const s = (t - t0) / tau; return W * (1 - s ** p) + A * Math.sin(Math.PI * s); }\r\n      const v = (tau * ((2 * A) / Math.PI - W / (p + 1))) / m;\r\n      const tL = t0 + tau + (2 * v) / g + dL;\r\n      if (t < tL) return 0;\r\n      if (t <= tL + tauL) { const s = (t - tL) / tauL; return W * s + B * Math.sin(Math.PI * s); }\r\n      return W;\r\n    }"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "t": 0,
+        "F": 608
+      },
+      {
+        "t": 0.005,
+        "F": 608
+      },
+      {
+        "t": 0.01,
+        "F": 604
+      },
+      {
+        "t": 0.015,
+        "F": 599
+      },
+      {
+        "t": 0.02,
+        "F": 599
+      },
+      {
+        "t": 0.025,
+        "F": 606
+      },
+      {
+        "t": 0.03,
+        "F": 602
+      },
+      {
+        "t": 0.035,
+        "F": 608
+      },
+      {
+        "t": 0.04,
+        "F": 608
+      },
+      {
+        "t": 0.045,
+        "F": 602
+      },
+      {
+        "t": 0.05,
+        "F": 603
+      },
+      {
+        "t": 0.055,
+        "F": 611
+      },
+      {
+        "t": 0.06,
+        "F": 610
+      },
+      {
+        "t": 0.065,
+        "F": 607
+      },
+      {
+        "t": 0.07,
+        "F": 613
+      },
+      {
+        "t": 0.075,
+        "F": 611
+      },
+      {
+        "t": 0.08,
+        "F": 609
+      },
+      {
+        "t": 0.085,
+        "F": 607
+      },
+      {
+        "t": 0.09,
+        "F": 608
+      },
+      {
+        "t": 0.095,
+        "F": 604
+      },
+      {
+        "t": 0.1,
+        "F": 605
+      },
+      {
+        "t": 0.105,
+        "F": 637
+      },
+      {
+        "t": 0.11,
+        "F": 672
+      },
+      {
+        "t": 0.115,
+        "F": 702
+      },
+      {
+        "t": 0.12,
+        "F": 739
+      },
+      {
+        "t": 0.125,
+        "F": 768
+      },
+      {
+        "t": 0.13,
+        "F": 803
+      },
+      {
+        "t": 0.135,
+        "F": 830
+      },
+      {
+        "t": 0.14,
+        "F": 865
+      },
+      {
+        "t": 0.145,
+        "F": 895
+      },
+      {
+        "t": 0.15,
+        "F": 927
+      },
+      {
+        "t": 0.155,
+        "F": 961
+      },
+      {
+        "t": 0.16,
+        "F": 986
+      },
+      {
+        "t": 0.165,
+        "F": 1011
+      },
+      {
+        "t": 0.17,
+        "F": 1033
+      },
+      {
+        "t": 0.175,
+        "F": 1066
+      },
+      {
+        "t": 0.18,
+        "F": 1092
+      },
+      {
+        "t": 0.185,
+        "F": 1125
+      },
+      {
+        "t": 0.19,
+        "F": 1142
+      },
+      {
+        "t": 0.195,
+        "F": 1159
+      },
+      {
+        "t": 0.2,
+        "F": 1185
+      },
+      {
+        "t": 0.205,
+        "F": 1196
+      },
+      {
+        "t": 0.21,
+        "F": 1219
+      },
+      {
+        "t": 0.215,
+        "F": 1244
+      },
+      {
+        "t": 0.22,
+        "F": 1269
+      },
+      {
+        "t": 0.225,
+        "F": 1288
+      },
+      {
+        "t": 0.23,
+        "F": 1304
+      },
+      {
+        "t": 0.235,
+        "F": 1288
+      },
+      {
+        "t": 0.24,
+        "F": 1314
+      },
+      {
+        "t": 0.245,
+        "F": 1335
+      },
+      {
+        "t": 0.25,
+        "F": 1338
+      },
+      {
+        "t": 0.255,
+        "F": 1349
+      },
+      {
+        "t": 0.26,
+        "F": 1356
+      },
+      {
+        "t": 0.265,
+        "F": 1369
+      },
+      {
+        "t": 0.27,
+        "F": 1352
+      },
+      {
+        "t": 0.275,
+        "F": 1380
+      },
+      {
+        "t": 0.28,
+        "F": 1359
+      },
+      {
+        "t": 0.285,
+        "F": 1383
+      },
+      {
+        "t": 0.29,
+        "F": 1373
+      },
+      {
+        "t": 0.295,
+        "F": 1352
+      },
+      {
+        "t": 0.3,
+        "F": 1360
+      },
+      {
+        "t": 0.305,
+        "F": 1353
+      },
+      {
+        "t": 0.31,
+        "F": 1336
+      },
+      {
+        "t": 0.315,
+        "F": 1352
+      },
+      {
+        "t": 0.32,
+        "F": 1321
+      },
+      {
+        "t": 0.325,
+        "F": 1315
+      },
+      {
+        "t": 0.33,
+        "F": 1307
+      },
+      {
+        "t": 0.335,
+        "F": 1274
+      },
+      {
+        "t": 0.34,
+        "F": 1266
+      },
+      {
+        "t": 0.345,
+        "F": 1245
+      },
+      {
+        "t": 0.35,
+        "F": 1218
+      },
+      {
+        "t": 0.355,
+        "F": 1200
+      },
+      {
+        "t": 0.36,
+        "F": 1177
+      },
+      {
+        "t": 0.365,
+        "F": 1158
+      },
+      {
+        "t": 0.37,
+        "F": 1115
+      },
+      {
+        "t": 0.375,
+        "F": 1100
+      },
+      {
+        "t": 0.38,
+        "F": 1076
+      },
+      {
+        "t": 0.385,
+        "F": 1034
+      },
+      {
+        "t": 0.39,
+        "F": 1011
+      },
+      {
+        "t": 0.395,
+        "F": 980
+      },
+      {
+        "t": 0.4,
+        "F": 931
+      },
+      {
+        "t": 0.405,
+        "F": 900
+      },
+      {
+        "t": 0.41,
+        "F": 869
+      },
+      {
+        "t": 0.415,
+        "F": 832
+      },
+      {
+        "t": 0.42,
+        "F": 783
+      },
+      {
+        "t": 0.425,
+        "F": 744
+      },
+      {
+        "t": 0.43,
+        "F": 694
+      },
+      {
+        "t": 0.435,
+        "F": 660
+      },
+      {
+        "t": 0.44,
+        "F": 606
+      },
+      {
+        "t": 0.445,
+        "F": 566
+      },
+      {
+        "t": 0.45,
+        "F": 523
+      },
+      {
+        "t": 0.455,
+        "F": 469
+      },
+      {
+        "t": 0.46,
+        "F": 424
+      },
+      {
+        "t": 0.465,
+        "F": 373
+      },
+      {
+        "t": 0.47,
+        "F": 322
+      },
+      {
+        "t": 0.475,
+        "F": 270
+      },
+      {
+        "t": 0.48,
+        "F": 218
+      },
+      {
+        "t": 0.485,
+        "F": 164
+      },
+      {
+        "t": 0.49,
+        "F": 109
+      },
+      {
+        "t": 0.495,
+        "F": 55
+      },
+      {
+        "t": 0.5,
+        "F": 0
+      },
+      {
+        "t": 0.505,
+        "F": 0
+      },
+      {
+        "t": 0.51,
+        "F": 0
+      },
+      {
+        "t": 0.515,
+        "F": 0
+      },
+      {
+        "t": 0.52,
+        "F": 0
+      },
+      {
+        "t": 0.525,
+        "F": 0
+      },
+      {
+        "t": 0.53,
+        "F": 0
+      },
+      {
+        "t": 0.535,
+        "F": 0
+      },
+      {
+        "t": 0.54,
+        "F": 0
+      },
+      {
+        "t": 0.545,
+        "F": 0
+      },
+      {
+        "t": 0.55,
+        "F": 0
+      },
+      {
+        "t": 0.555,
+        "F": 0
+      },
+      {
+        "t": 0.56,
+        "F": 0
+      },
+      {
+        "t": 0.565,
+        "F": 0
+      },
+      {
+        "t": 0.57,
+        "F": 0
+      },
+      {
+        "t": 0.575,
+        "F": 0
+      },
+      {
+        "t": 0.58,
+        "F": 0
+      },
+      {
+        "t": 0.585,
+        "F": 0
+      },
+      {
+        "t": 0.59,
+        "F": 0
+      },
+      {
+        "t": 0.595,
+        "F": 0
+      },
+      {
+        "t": 0.6,
+        "F": 0
+      },
+      {
+        "t": 0.605,
+        "F": 0
+      },
+      {
+        "t": 0.61,
+        "F": 0
+      },
+      {
+        "t": 0.615,
+        "F": 0
+      },
+      {
+        "t": 0.62,
+        "F": 0
+      },
+      {
+        "t": 0.625,
+        "F": 0
+      },
+      {
+        "t": 0.63,
+        "F": 0
+      },
+      {
+        "t": 0.635,
+        "F": 0
+      },
+      {
+        "t": 0.64,
+        "F": 0
+      },
+      {
+        "t": 0.645,
+        "F": 0
+      },
+      {
+        "t": 0.65,
+        "F": 0
+      },
+      {
+        "t": 0.655,
+        "F": 0
+      },
+      {
+        "t": 0.66,
+        "F": 0
+      },
+      {
+        "t": 0.665,
+        "F": 0
+      },
+      {
+        "t": 0.67,
+        "F": 0
+      },
+      {
+        "t": 0.675,
+        "F": 0
+      },
+      {
+        "t": 0.68,
+        "F": 0
+      },
+      {
+        "t": 0.685,
+        "F": 0
+      },
+      {
+        "t": 0.69,
+        "F": 0
+      },
+      {
+        "t": 0.695,
+        "F": 0
+      },
+      {
+        "t": 0.7,
+        "F": 0
+      },
+      {
+        "t": 0.705,
+        "F": 0
+      },
+      {
+        "t": 0.71,
+        "F": 0
+      },
+      {
+        "t": 0.715,
+        "F": 0
+      },
+      {
+        "t": 0.72,
+        "F": 0
+      },
+      {
+        "t": 0.725,
+        "F": 0
+      },
+      {
+        "t": 0.73,
+        "F": 0
+      },
+      {
+        "t": 0.735,
+        "F": 0
+      },
+      {
+        "t": 0.74,
+        "F": 0
+      },
+      {
+        "t": 0.745,
+        "F": 0
+      },
+      {
+        "t": 0.75,
+        "F": 0
+      },
+      {
+        "t": 0.755,
+        "F": 0
+      },
+      {
+        "t": 0.76,
+        "F": 0
+      },
+      {
+        "t": 0.765,
+        "F": 0
+      },
+      {
+        "t": 0.77,
+        "F": 0
+      },
+      {
+        "t": 0.775,
+        "F": 0
+      },
+      {
+        "t": 0.78,
+        "F": 0
+      },
+      {
+        "t": 0.785,
+        "F": 0
+      },
+      {
+        "t": 0.79,
+        "F": 0
+      },
+      {
+        "t": 0.795,
+        "F": 0
+      },
+      {
+        "t": 0.8,
+        "F": 0
+      },
+      {
+        "t": 0.805,
+        "F": 0
+      },
+      {
+        "t": 0.81,
+        "F": 0
+      },
+      {
+        "t": 0.815,
+        "F": 0
+      },
+      {
+        "t": 0.82,
+        "F": 0
+      },
+      {
+        "t": 0.825,
+        "F": 0
+      },
+      {
+        "t": 0.83,
+        "F": 0
+      },
+      {
+        "t": 0.835,
+        "F": 0
+      },
+      {
+        "t": 0.84,
+        "F": 0
+      },
+      {
+        "t": 0.845,
+        "F": 0
+      },
+      {
+        "t": 0.85,
+        "F": 0
+      },
+      {
+        "t": 0.855,
+        "F": 0
+      },
+      {
+        "t": 0.86,
+        "F": 0
+      },
+      {
+        "t": 0.865,
+        "F": 0
+      },
+      {
+        "t": 0.87,
+        "F": 0
+      },
+      {
+        "t": 0.875,
+        "F": 0
+      },
+      {
+        "t": 0.88,
+        "F": 0
+      },
+      {
+        "t": 0.885,
+        "F": 0
+      },
+      {
+        "t": 0.89,
+        "F": 0
+      },
+      {
+        "t": 0.895,
+        "F": 0
+      },
+      {
+        "t": 0.9,
+        "F": 0
+      },
+      {
+        "t": 0.905,
+        "F": 0
+      },
+      {
+        "t": 0.91,
+        "F": 0
+      },
+      {
+        "t": 0.915,
+        "F": 0
+      },
+      {
+        "t": 0.92,
+        "F": 0
+      },
+      {
+        "t": 0.925,
+        "F": 0
+      },
+      {
+        "t": 0.93,
+        "F": 0
+      },
+      {
+        "t": 0.935,
+        "F": 0
+      },
+      {
+        "t": 0.94,
+        "F": 0
+      },
+      {
+        "t": 0.945,
+        "F": 0
+      },
+      {
+        "t": 0.95,
+        "F": 0
+      },
+      {
+        "t": 0.955,
+        "F": 0
+      },
+      {
+        "t": 0.96,
+        "F": 0
+      },
+      {
+        "t": 0.965,
+        "F": 0
+      },
+      {
+        "t": 0.97,
+        "F": 0
+      },
+      {
+        "t": 0.975,
+        "F": 0
+      },
+      {
+        "t": 0.98,
+        "F": 0
+      },
+      {
+        "t": 0.985,
+        "F": 0
+      },
+      {
+        "t": 0.99,
+        "F": 0
+      },
+      {
+        "t": 0.995,
+        "F": 0
+      },
+      {
+        "t": 1,
+        "F": 0
+      },
+      {
+        "t": 1.005,
+        "F": 0
+      },
+      {
+        "t": 1.01,
+        "F": 0
+      },
+      {
+        "t": 1.015,
+        "F": 0
+      },
+      {
+        "t": 1.02,
+        "F": 0
+      },
+      {
+        "t": 1.025,
+        "F": 0
+      },
+      {
+        "t": 1.03,
+        "F": 0
+      },
+      {
+        "t": 1.035,
+        "F": 0
+      },
+      {
+        "t": 1.04,
+        "F": 0
+      },
+      {
+        "t": 1.045,
+        "F": 0
+      },
+      {
+        "t": 1.05,
+        "F": 0
+      },
+      {
+        "t": 1.055,
+        "F": 0
+      },
+      {
+        "t": 1.06,
+        "F": 229
+      },
+      {
+        "t": 1.065,
+        "F": 486
+      },
+      {
+        "t": 1.07,
+        "F": 740
+      },
+      {
+        "t": 1.075,
+        "F": 966
+      },
+      {
+        "t": 1.08,
+        "F": 1180
+      },
+      {
+        "t": 1.085,
+        "F": 1374
+      },
+      {
+        "t": 1.09,
+        "F": 1535
+      },
+      {
+        "t": 1.095,
+        "F": 1671
+      },
+      {
+        "t": 1.1,
+        "F": 1732
+      },
+      {
+        "t": 1.105,
+        "F": 1801
+      },
+      {
+        "t": 1.11,
+        "F": 1795
+      },
+      {
+        "t": 1.115,
+        "F": 1808
+      },
+      {
+        "t": 1.12,
+        "F": 1735
+      },
+      {
+        "t": 1.125,
+        "F": 1663
+      },
+      {
+        "t": 1.13,
+        "F": 1553
+      },
+      {
+        "t": 1.135,
+        "F": 1376
+      },
+      {
+        "t": 1.14,
+        "F": 1231
+      },
+      {
+        "t": 1.145,
+        "F": 1038
+      },
+      {
+        "t": 1.15,
+        "F": 843
+      },
+      {
+        "t": 1.155,
+        "F": 636
+      },
+      {
+        "t": 1.16,
+        "F": 615
+      },
+      {
+        "t": 1.165,
+        "F": 612
+      },
+      {
+        "t": 1.17,
+        "F": 608
+      },
+      {
+        "t": 1.175,
+        "F": 607
+      },
+      {
+        "t": 1.18,
+        "F": 607
+      },
+      {
+        "t": 1.185,
+        "F": 602
+      },
+      {
+        "t": 1.19,
+        "F": 610
+      },
+      {
+        "t": 1.195,
+        "F": 601
+      },
+      {
+        "t": 1.2,
+        "F": 606
+      }
+    ],
+    "singles": {},
+    "uncertainties": {}
+  },
+  "text": {
+    "stem": "<p>A student stands still on a force plate, bends their knees, and then jumps straight up. The force plate records the vertical force $F$ on it 200 times per second. The student lands back on the plate with bent knees.</p><p>The graph shows the force recorded by the plate.</p>",
+    "tables": [],
+    "figures": {
+      "graph": {
+        "alt": "Graph of force against time, a line through the sensor readings. The force is steady at first (the student standing still), rises to a peak during the push, falls to zero at take-off, stays at zero while the student is in the air, then rises sharply at landing and settles back to its first value.",
+        "caption": "Graph of force against time."
+      },
+      "graph-ms": {
+        "alt": "Graph of force against time, a line through the sensor readings, with the area between the trace and the weight line from the start of the push to take-off (below the line counts as negative) shaded. The force is steady at first (the student standing still), rises to a peak during the push, falls to zero at take-off, stays at zero while the student is in the air, then rises sharply at landing and settles back to its first value.",
+        "caption": "Graph of force against time. Shaded: the area between the trace and the weight line from the start of the push to take-off (below the line counts as negative)."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Explain why the force recorded in the first 0.10 s is equal to the student's weight.",
+      "marks": 1,
+      "markscheme": [
+        "The student is at rest, so the resultant force is zero: the upward force from the plate equals the weight (and the student pushes down on the plate with an equal force) ✓"
+      ]
+    },
+    {
+      "label": "b",
+      "question": "Determine the mass of the student.",
+      "marks": 1,
+      "markscheme": [
+        "$F \\approx 606\\ \\text{N}$, so $m = \\dfrac{F}{g} = 62\\ \\text{kg}$ (accept 60 to 64 kg) ✓"
+      ]
+    },
+    {
+      "label": "c",
+      "question": "The push starts at $t = 0.10\\ \\text{s}$. Estimate the impulse of the resultant force on the student from then until the student leaves the plate.",
+      "marks": 3,
+      "markscheme": [
+        "Resultant force $= F - mg$: uses the area between the graph and a horizontal line at the weight ✓",
+        "Up to take-off at $t = 0.50\\ \\text{s}$ (where $F$ reaches zero); the area below the weight line near take-off is subtracted ✓",
+        "Impulse $\\approx 150\\ \\text{N s}$ (accept 140 to 160 N s) ✓"
+      ],
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "d",
+      "question": "Determine the speed of the student at take-off.",
+      "marks": 2,
+      "markscheme": [
+        "Impulse = change of momentum, from rest: $v = \\dfrac{\\text{impulse}}{m}$ ✓",
+        "$v = 2.4\\ \\text{m s}^{-1}$ (accept 2.3 to 2.6; allow ECF from (b) and (c)) ✓"
+      ],
+      "numeric": {
+        "answer": 2.4381207223550763,
+        "range": [
+          2.2918334790137718,
+          2.5844079656963808
+        ],
+        "unit": "$\\text{m}\\,\\text{s}^{-1}$",
+        "source": "v"
+      }
+    },
+    {
+      "label": "e",
+      "question": "The take-off speed can also be found from the time the student spends in the air, using $v = \\dfrac{gt}{2}$. Determine this speed and compare it with your answer to (d).",
+      "marks": 2,
+      "markscheme": [
+        "Time in the air from the graph: $1.06 - 0.50 = 0.56\\ \\text{s}$, so $v = 2.7\\ \\text{m s}^{-1}$ ✓",
+        "This is larger than the value from the impulse, by about 13 % (accept a comparison consistent with the candidate's values) ✓"
+      ]
+    },
+    {
+      "label": "f",
+      "question": "Suggest one reason why the speed from the time in the air is larger.",
+      "marks": 1,
+      "markscheme": [
+        "The student lands with bent knees, so the centre of mass is lower at landing than at take-off: the student is in the air for longer than the rise and fall to the same height takes ✓"
+      ]
+    }
+  ]
+}

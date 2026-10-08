@@ -1,0 +1,312 @@
+{
+  "id": "C5-B01",
+  "topic": "C.5",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 2,
+  "skills": [
+    "period-from-a-graph",
+    "doppler-shift",
+    "orbital-speed",
+    "percentage-uncertainty",
+    "prediction",
+    "improve-the-method"
+  ],
+  "context": "observational",
+  "seed": 251,
+  "physics": {
+    "scenario": "A star orbits the centre of mass of a binary system in a circular orbit seen edge-on. Its hydrogen-alpha line (656.28 nm in the laboratory) is observed with a spectrograph on 18 nights over 30 days, on uneven dates (weather and daylight). The system as a whole is not moving towards or away from us. The data are simulated observations, generated from this model with realistic scatter.",
+    "principles": [
+      "Doppler effect for light: Δλ/λ ≈ v/c for v ≪ c, with v the velocity along the line of sight (C.5)",
+      "A star in a circular orbit seen edge-on has a line-of-sight velocity that varies sinusoidally with the orbital period"
+    ],
+    "assumptions": [
+      "Circular orbit seen edge-on; no motion of the system as a whole (simplified, teacher's decision of 8 October 2026)",
+      "v ≪ c, so Δλ/λ ≈ v/c (v/c is about 2 × 10⁻⁴)",
+      "Simulated observations clearly labelled as simulated (approved by the teacher, 8 October 2026)"
+    ],
+    "derivation": [
+      "v(t) = K sin(2π(t − t₀)/P), so λ(t) = λ₀(1 + v(t)/c): a sinusoid about λ₀ of amplitude λ₀K/c and period P"
+    ],
+    "relationship": "λ = λ₀(1 + (K/c) sin(2π(t − t₀)/P))",
+    "params": {
+      "lambda0": {
+        "value": 656.28,
+        "unit": "nm",
+        "range": [
+          656.28,
+          656.28
+        ],
+        "note": "laboratory wavelength of hydrogen-alpha (in air)"
+      },
+      "K": {
+        "value": 52,
+        "unit": "km s^-1",
+        "range": [
+          10,
+          150
+        ],
+        "note": "orbital speed of the star (typical for a close binary of solar-type stars)"
+      },
+      "c": {
+        "value": 300000000,
+        "unit": "m s^-1",
+        "range": [
+          300000000,
+          300000000
+        ],
+        "note": "data booklet value"
+      },
+      "t0": {
+        "value": 2.3,
+        "unit": "day",
+        "range": [
+          0,
+          20
+        ],
+        "note": "a time at which the star crosses the line of sight (moving away)"
+      },
+      "P": {
+        "value": 11.6,
+        "unit": "day",
+        "range": [
+          1,
+          100
+        ],
+        "note": "orbital period"
+      }
+    }
+  },
+  "models": {
+    "t": {
+      "kind": "set",
+      "unit": "day",
+      "values": [
+        0,
+        1.1,
+        3,
+        4.1,
+        6.9,
+        8,
+        9.2,
+        11.9,
+        13.1,
+        15.8,
+        17,
+        18.1,
+        20.9,
+        22.2,
+        24,
+        26.9,
+        28.1,
+        29.8
+      ],
+      "resolution": 0.1
+    },
+    "lam": {
+      "kind": "measured",
+      "unit": "nm",
+      "model": {
+        "law": "radial-velocity-doppler",
+        "inputs": {
+          "lambda0": "p.lambda0",
+          "K": "p.K",
+          "c": "p.c",
+          "t": "row.t",
+          "t0": "p.t0",
+          "P": "p.P"
+        }
+      },
+      "noise": {
+        "type": "gauss",
+        "sd": 0.004
+      },
+      "resolution": 0.001,
+      "uncertainty": 0.008
+    }
+  },
+  "laws": {
+    "radial-velocity-doppler": {
+      "statement": "λ = λ₀(1 + v/c) with v = K sin(2π(t − t₀)/P): Δλ/λ₀ ≈ v/c for v ≪ c (C.5); v is the line-of-sight velocity, positive away from us",
+      "inputs": {
+        "lambda0": "m",
+        "K": "m s^-1",
+        "c": "m s^-1",
+        "t": "s",
+        "t0": "s",
+        "P": "s"
+      },
+      "output": "m",
+      "f": "({ lambda0, K, c, t, t0, P }) => lambda0 * (1 + (K / c) * Math.sin((2 * Math.PI * (t - t0)) / P))"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "t": 0,
+        "lam": 656.177
+      },
+      {
+        "t": 1.1,
+        "lam": 656.214
+      },
+      {
+        "t": 3,
+        "lam": 656.315
+      },
+      {
+        "t": 4.1,
+        "lam": 656.384
+      },
+      {
+        "t": 6.9,
+        "lam": 656.343
+      },
+      {
+        "t": 8,
+        "lam": 656.292
+      },
+      {
+        "t": 9.2,
+        "lam": 656.22
+      },
+      {
+        "t": 11.9,
+        "lam": 656.177
+      },
+      {
+        "t": 13.1,
+        "lam": 656.233
+      },
+      {
+        "t": 15.8,
+        "lam": 656.379
+      },
+      {
+        "t": 17,
+        "lam": 656.395
+      },
+      {
+        "t": 18.1,
+        "lam": 656.369
+      },
+      {
+        "t": 20.9,
+        "lam": 656.214
+      },
+      {
+        "t": 22.2,
+        "lam": 656.172
+      },
+      {
+        "t": 24,
+        "lam": 656.2
+      },
+      {
+        "t": 26.9,
+        "lam": 656.363
+      },
+      {
+        "t": 28.1,
+        "lam": 656.392
+      },
+      {
+        "t": 29.8,
+        "lam": 656.363
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "lam": [
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008,
+        0.008
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>Astronomers study a star in a binary system: the star moves in a circular orbit, so it moves alternately towards and away from Earth. They measure the wavelength $\\lambda$ of a hydrogen line in its spectrum. In the laboratory this line has a wavelength of $656.28\\ \\text{nm}$.</p><p>The graph shows <strong>simulated observations</strong> on 18 nights: values generated from a model of the orbit, with the scatter a real spectrograph would give. Each wavelength has an uncertainty of $\\pm 0.008\\ \\text{nm}$. The system as a whole is not moving towards or away from Earth.</p>",
+    "tables": [],
+    "figures": {
+      "graph": {
+        "alt": "Graph of wavelength against time, with 18 plotted points and error bars, and a dashed line showing the laboratory wavelength. The wavelength rises and falls regularly, above and below the laboratory wavelength, with about two and a half cycles over the observations; the points are unevenly spaced in time.",
+        "caption": "Graph of wavelength against time. The error bars show the uncertainties. The dashed line shows the laboratory wavelength."
+      },
+      "graph-ms": {
+        "alt": "Graph of wavelength against time, with 18 plotted points and error bars, and the model curve (the orbit model used to simulate the observations), and a dashed line showing the laboratory wavelength. The wavelength rises and falls regularly, above and below the laboratory wavelength, with about two and a half cycles over the observations; the points are unevenly spaced in time.",
+        "caption": "Graph of wavelength against time. <span class=\"key-1\">Blue</span>: the orbit model used to simulate the observations. The dashed line shows the laboratory wavelength."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Determine the orbital period of the star.",
+      "marks": 2,
+      "markscheme": [
+        "Uses the times of two maxima (or minima) several cycles apart, for example about day 5 and day 28 (2 cycles) ✓",
+        "Period $= 11.6$ days (accept 10.4 to 12.7 days) ✓"
+      ],
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "b",
+      "question": "Determine the orbital speed of the star, in $\\text{km s}^{-1}$.",
+      "marks": 3,
+      "markscheme": [
+        "Largest shift from the laboratory wavelength, from the graph: $\\Delta\\lambda \\approx 0.113\\ \\text{nm}$ ✓",
+        "$v = \\dfrac{c\\,\\Delta\\lambda}{\\lambda}$ ✓",
+        "$v = 52\\ \\text{km s}^{-1}$ (accept 47 to 57; allow ECF from the shift read) ✓"
+      ],
+      "numeric": {
+        "answer": 51.75743240341206,
+        "range": [
+          46.54773375019798,
+          56.967131056626144
+        ],
+        "unit": "$\\text{km}\\,\\text{s}^{-1}$",
+        "source": "K"
+      }
+    },
+    {
+      "label": "c",
+      "question": "Determine the percentage uncertainty in your answer to (b). The laboratory wavelength and $c$ are known precisely.",
+      "marks": 2,
+      "markscheme": [
+        "The uncertainty in $\\Delta\\lambda$ is that of one wavelength reading, $0.008\\ \\text{nm}$ ✓",
+        "$\\dfrac{0.008}{0.113} \\times 100 \\approx 7\\,\\%$ (allow ECF from (b)) ✓"
+      ]
+    },
+    {
+      "label": "d",
+      "question": "Predict the wavelength that would be observed on day 34.",
+      "marks": 1,
+      "markscheme": [
+        "About half a period after the maximum near day 28, so near a minimum: $\\lambda \\approx 656.17\\ \\text{nm}$ (accept 656.164 to 656.196 nm) ✓"
+      ]
+    },
+    {
+      "label": "e",
+      "question": "Suggest one way in which the observations could be changed to determine the period more precisely.",
+      "marks": 1,
+      "markscheme": [
+        "Any one of: observe for more cycles (a longer time) / observe more often, especially near the maxima and minima / fill the gaps in the record ✓"
+      ]
+    }
+  ]
+}

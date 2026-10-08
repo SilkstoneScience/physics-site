@@ -16,6 +16,8 @@
 // audit trail that says whether the teacher inspected that dataset individually (inspected: true/false).
 // Nothing here ever records TEACHER-REVIEWED: only an individual review does that.
 
+import { contextProblems, contextRepetition } from './contexts.mjs';
+
 // Matrix risk of each archetype (docs/PAPER1B_ARCHETYPE_MATRIX.md, section 1).
 export const ARCHETYPE_RISK = {
   M1: 'LOW', M2: 'LOW', M3: 'MEDIUM', M4: 'MEDIUM',
@@ -57,18 +59,30 @@ export const individuallyApproved = (rec) => {
   return !!a && (a.basis === undefined || a.basis === 'individual' || a.inspected === true);
 };
 
-// What has been established by individually reviewed, APPROVED, unchanged datasets.
+// What has been established by individually reviewed, APPROVED, unchanged datasets. `contexts` maps each archetype to
+// the context families of its individually inspected examples (rule C1 below).
 export function establishedSets(results, registry) {
   const archetypes = new Set();
   const features = new Set();
+  const contexts = new Map();
   for (const r of results) {
     const rec = registry.datasets[r.id];
     if (!r.valid || r.state.changed || !individuallyApproved(rec)) continue;
-    for (const a of r.def.archetypes || []) archetypes.add(a);
+    for (const a of r.def.archetypes || []) {
+      archetypes.add(a);
+      if (!contexts.has(a)) contexts.set(a, new Set());
+      contexts.get(a).add(r.def.contextFamily || r.id);
+    }
     for (const f of featuresOf(r.def)) features.add(f);
   }
-  return { archetypes, features };
+  return { archetypes, features, contexts };
 }
+
+// Rule C1 (adopted by the teacher, 8 October 2026): a HIGH-risk archetype is established only by TWO individually inspected
+// approved examples in different context families. Until then every example is AMBER ("first" or "second example").
+export const HIGH_RISK_EXAMPLES_NEEDED = 2;
+// Rule C6 (adopted 8 October 2026): AMBER reasons at this level can't be waived: the dataset must be inspected individually.
+const HIGH_LEVEL = /^(first example of archetype w+ (HIGH risk)|second example of HIGH-risk archetype)/;
 
 // RED / AMBER / GREEN for one built dataset (r = an entry of buildAll's results), with reasons.
 export function classify(r, { diags, established, verdictMargin }) {
@@ -84,6 +98,11 @@ export function classify(r, { diags, established, verdictMargin }) {
   for (const a of arch) {
     if (!(a in ARCHETYPE_RISK)) amber.push(`unknown archetype ${a}`);
     else if (!established.archetypes.has(a) && ARCHETYPE_RISK[a] !== 'LOW') amber.push(`first example of archetype ${a} (${ARCHETYPE_RISK[a]} risk)`);
+    else if (ARCHETYPE_RISK[a] === 'HIGH' && established.contexts) {
+      const seen = established.contexts.get(a) || new Set();
+      const others = [...seen].filter((fam) => fam !== r.def.contextFamily);
+      if (seen.size < HIGH_RISK_EXAMPLES_NEEDED) amber.push(`second example of HIGH-risk archetype ${a} (C1: needs ${HIGH_RISK_EXAMPLES_NEEDED} individually inspected examples in different contexts; inspected so far: ${seen.size}${others.length < seen.size ? ', in the same context family as this one' : ''})`);
+    }
   }
   for (const f of featuresOf(r.def)) {
     if (JUDGEMENT_FEATURES.includes(f) && !established.features.has(f)) amber.push(`first use of ${f}`);
@@ -97,10 +116,17 @@ export function classify(r, { diags, established, verdictMargin }) {
     const gap = cl.value < res.range[0] ? res.range[0] - cl.value : cl.value > res.range[1] ? cl.value - res.range[1] : Math.min(cl.value - res.range[0], res.range[1] - cl.value);
     if (gap < 2 * verdictMargin * Math.abs(res.value)) amber.push(`uncertainty-sensitive verdict on ${cl.result} (${(100 * gap / Math.abs(res.value)).toFixed(1)} % from the range edge)`);
   }
+  // Context family and objects (contexts.mjs): a missing, unknown or incomplete declaration needs a person.
+  for (const p of contextProblems(r.def)) amber.push(p);
+  // Data the author has declared regular on purpose (validate.mjs, regularity check): a person must agree.
+  for (const [k, c] of Object.entries(r.def.columns || {})) {
+    if (c.regularity) amber.push(`regular data accepted by the author in column ${k} (${(c.regularity.accept || []).join(', ')}): ${c.regularity.reason}`);
+  }
   // First example of a LOW-risk archetype: GREEN, but preferred for the teacher's sample.
   const newLow = arch.filter((a) => ARCHETYPE_RISK[a] === 'LOW' && !established.archetypes.has(a));
   const cls = red.length ? 'RED' : amber.length ? 'AMBER' : 'GREEN';
-  return { id: r.id, class: cls, reasons: [...red, ...amber], priority: newLow.length ? `first example of LOW-risk archetype ${newLow.join(', ')}` : null };
+  const notWaivable = amber.filter((x) => HIGH_LEVEL.test(x));
+  return { id: r.id, class: cls, reasons: [...red, ...amber], waivable: !notWaivable.length, notWaivable, priority: newLow.length ? `first example of LOW-risk archetype ${newLow.join(', ')}` : null };
 }
 
 // A repeatable "random" order from the batch id, so the suggested sample can't be hand-picked.
@@ -111,8 +137,9 @@ function seededOrder(ids, seedText) {
   return ids.map((id) => [rnd(), id]).sort((a, b) => a[0] - b[0]).map((x) => x[1]);
 }
 
-// Diversity within a batch: the same apparatus twice, or one archetype or sequence dominating.
-export function diversityWarnings(members) {
+// Diversity within a batch: the same apparatus twice, one archetype or sequence dominating, or a context family or
+// object repeated within the batch or already common in the rest of the bank (`others`; contexts.mjs).
+export function diversityWarnings(members, others = []) {
   const out = [];
   const seen = new Map();
   for (const r of members) {
@@ -126,6 +153,7 @@ export function diversityWarnings(members) {
     for (const r of members) { const main = (r.def.archetypes || [])[0]; if (main) count[main] = (count[main] || 0) + 1; }
     for (const [a, n] of Object.entries(count)) if (n / members.length > 0.35) out.push(`archetype ${a} is the main archetype of ${n} of ${members.length} datasets (over 35 %)`);
   }
+  out.push(...contextRepetition(members, others));
   return out;
 }
 
@@ -143,7 +171,7 @@ export function batchPlan(batchId, { results, diags, registry, verdictMargin }) 
   const prioritised = greens.filter((x) => x.priority).map((x) => x.id);
   const rest = seededOrder(greens.filter((x) => !x.priority).map((x) => x.id), batchId);
   const suggestedSample = [...prioritised, ...rest].slice(0, Math.max(sampleSize, prioritised.length ? 1 : 0));
-  return { batchId, rows, sampleSize, suggestedSample, diversity: diversityWarnings(members) };
+  return { batchId, rows, sampleSize, suggestedSample, diversity: diversityWarnings(members, results.filter((r) => r.def.batch !== batchId)) };
 }
 
 // The batch-acceptance decision. Returns { registry, approved: [...], errors: [...] }; on errors the registry is
@@ -167,6 +195,7 @@ export function acceptBatch(plan, registry, { by, date, note, recordedBy, waive 
     if (!x) errors.push(`--waive ${id}: not in this batch`);
     else if (x.class !== 'AMBER') errors.push(`--waive ${id}: only AMBER datasets can be waived (it is ${x.class})`);
     else if (!waive[id]) errors.push(`--waive ${id}: give a reason`);
+    else if (x.waivable === false) errors.push(`--waive ${id}: can't be waived (rule C6): ${x.notWaivable.join('; ')}. Review it individually`);
   }
   const sampled = plan.rows.filter((x) => x.class === 'GREEN' && x.individuallyReviewed).map((x) => x.id);
   if (sampled.length < plan.sampleSize) errors.push(`the GREEN sample needs ${plan.sampleSize} individually TEACHER-REVIEWED dataset(s); ${sampled.length} so far (suggested: ${plan.suggestedSample.join(', ')})`);

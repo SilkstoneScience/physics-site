@@ -32,6 +32,8 @@ export default {
   batch: 'batch-1',
   archetypes: ['E2', 'V3'],
   apparatus: 'beaker of water heated by an electric immersion heater',
+  contextFamily: 'electrical-heating',
+  contextObjects: ['electric-heater', 'thermometer', 'water-bath'],
   features: ['model:empirical'],
   originality: 'Heating water electrically is a standard practical. May 2024 TZ1 Paper 3 Q2(b) asked for one systematic error in such an '
     + 'experiment and its effect. This dataset differs: the heat loss must be inferred from a time series (a falling rate of temperature '

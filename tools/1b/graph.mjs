@@ -6,6 +6,10 @@
 //   error bars   <path class="ebar" data-row="i" data-axis="y" d="Mx y1Vy2…"/>
 //   fit lines    <line class="… fit" data-fit="best|max|min" x1=… y1=… x2=… y2=…/>
 //   fit curve    <polyline class="… fit" data-fit="curve" points="…"/>
+//   model curve  <polyline class="… model" data-model="curve" points="…"/>   (examiner graph only: graph.modelCurve)
+//   reference    <line class="… ref" data-ref="1" x1=… y1=… x2=… y2=…/>      (graph.referenceLine, e.g. observed = model)
+//   trace        <polyline class="… trace" data-trace="1" points="…" data-rows="…"/>  (graph.style 'trace': sensor data)
+//   shaded area  <polygon class="area" data-area="1" points="…"/>             (graph.shade, examiner's graph)
 import { fmtNum, escapeAttr } from './lib.mjs';
 
 export const BOX = { W: 560, H: 400, l: 86, r: 24, t: 20, b: 66 };
@@ -55,8 +59,10 @@ function clipLine(m, c, xs, ys) {
 // spec: { x: {symbol, unit, includeZero}, y: {…}, points: [{x, y, ex, ey, row}],
 //         lines: [{m, c, cls, fit}], curves: [{f, cls}], alt, kind: 'student' | 'examiner' }
 export function renderGraph(spec) {
-  const { x, y, points, lines = [], curves = [], alt, kind } = spec;
-  const { W, H, l, r, t, b } = BOX;
+  const { x, y, points, lines = [], curves = [], refs = [], alt, kind } = spec;
+  // height: a taller plotting area where a graph needs it (e.g. so short error bars clear the markers). Drawing only.
+  const { W, l, r, t, b } = BOX;
+  const H = spec.height || BOX.H;
   const pw = W - l - r;
   const ph = H - t - b;
   // An axis may be extended to include a stated range (x.range, y.range), e.g. to extrapolate to an intercept.
@@ -99,7 +105,33 @@ export function renderGraph(spec) {
       const yv = cv.f(xv);
       if (yv >= ys.min && yv <= ys.max) pts.push(`${X(xv)},${Y(yv)}`);
     }
-    out.push(`<polyline class="${cv.cls} fit" data-fit="curve" points="${pts.join(' ')}"/>`);
+    out.push(cv.model ? `<polyline class="${cv.cls} model" data-model="curve" points="${pts.join(' ')}"/>` : `<polyline class="${cv.cls} fit" data-fit="curve" points="${pts.join(' ')}"/>`);
+  }
+  for (const rf of refs) {
+    const seg = clipLine(rf.m, rf.c, xs, ys);
+    if (seg) out.push(`<line class="l3 thin dash ref" data-ref="1" x1="${X(seg[0])}" y1="${Y(seg[1])}" x2="${X(seg[2])}" y2="${Y(seg[3])}"/>`);
+  }
+  // T7: a shaded area (examiner's graph) under the data between two x values, down (or up) to a baseline.
+  if (spec.shade) {
+    const { from, to, baseline } = spec.shade;
+    const inside = points.filter((p) => p.x > from && p.x < to).sort((a, b) => a.x - b.x);
+    const sorted = [...points].sort((a, b) => a.x - b.x);
+    const at = (xv) => {
+      const j = sorted.findIndex((p) => p.x >= xv);
+      if (j <= 0) return sorted[Math.max(j, 0)].y;
+      const [p0, p1] = [sorted[j - 1], sorted[j]];
+      return p0.y + ((p1.y - p0.y) * (xv - p0.x)) / (p1.x - p0.x);
+    };
+    const edge = [[from, at(from)], ...inside.map((p) => [p.x, p.y]), [to, at(to)]];
+    const poly = [[from, baseline], ...edge, [to, baseline]].map(([xv, yv]) => `${X(xv)},${Y(yv)}`).join(' ');
+    out.push(`<polygon class="area" data-area="1" points="${poly}"/>`);
+  }
+  // T7: sensor data shown as a trace (a line through every reading, no markers), as a data logger draws it.
+  if (spec.trace) {
+    const sorted = [...points].sort((a, b) => a.x - b.x);
+    out.push(`<polyline class="l1 thin trace" data-trace="1" points="${sorted.map((p) => `${X(p.x)},${Y(p.y)}`).join(' ')}" data-rows="${sorted.map((p) => p.row).join(' ')}"/>`);
+    out.push('</svg>');
+    return out.join('');
   }
   // Points first, then their error bars on top (so no bar is hidden behind its point).
   for (const p of points) out.push(`<circle class="f1 pt" cx="${X(p.x)}" cy="${Y(p.y)}" r="${MARKER_R}" data-row="${p.row}"/>`);

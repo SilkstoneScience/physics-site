@@ -16,6 +16,8 @@ export default {
   batch: 'pilot',
   archetypes: ['N5', 'M4'],
   apparatus: 'Geiger-Muller tube and counter with a short-lived source',
+  contextFamily: 'radioactive-counting',
+  contextObjects: ['gm-tube'],
   originality: 'Common half-life practical; not used in any legacy Section A (the foam analogues of Nov 2016 and Nov 2025 are different contexts). Own numbers and sequence.',
 
   // ----- 1. Physics model -----
@@ -134,6 +136,7 @@ export default {
       },
       {
         label: 'c', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        reads: [{ figure: 'graph', x: d.r.halfLife.value, y: d.fit.A / 2 }],
         question: 'Use the graph to determine the half-life of the source.',
         numeric: d.num('halfLife'),
         markscheme: [

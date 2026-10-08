@@ -19,6 +19,8 @@ export default {
   batch: 'batch-1',
   archetypes: ['M1', 'E3'],
   apparatus: 'trolley on a ramp passing through a light gate',
+  contextFamily: 'trolley-motion',
+  contextObjects: ['trolley', 'light-gate'],
   originality: 'Light-gate timing is a common practical; no legacy Paper 3 Section A or 2025 Paper 1B question uses repeated '
     + 'light-gate times with an outlying trial. Own context, numbers and sequence.',
 

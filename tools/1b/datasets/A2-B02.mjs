@@ -1,5 +1,7 @@
-// A.2 A copper wire loaded beyond its limit of proportionality: where Hooke's law stops describing the data, evidence
-// from the graph, and why loading data cannot show the elastic limit (archetypes V2 and L1).
+// A.2 A copper wire loaded until Hooke's law stops describing the data: where the model holds (evidence from the graph),
+// k from that region only, and why fitting every point would give the wrong k (archetypes V2 and L1).
+// Part (d) replaced on 8 October 2026 (teacher): the elastic limit and the limit of proportionality are not in the SL
+// guide (A.2 has only Hooke's law), so (d) now asks what happens to k if the points beyond the straight region are included.
 
 const LIN = 4;  // last row in the proportional region (49.0 N)
 const ROW = 7;  // the row used for the comparison in (c) (78.4 N)
@@ -9,15 +11,17 @@ export default {
   topic: 'A.2',
   difficulty: 3,
   context: 'experimental',
-  skills: ['model-validity-range', 'gradient', 'evidence-against-a-model', 'limit-of-proportionality-vs-elastic-limit', 'reference-wire'],
+  skills: ['model-validity-range', 'gradient', 'evidence-against-a-model', 'fit-only-the-valid-region', 'reference-wire'],
   seed: 91,
   batch: 'batch-1',
   archetypes: ['V2', 'L1'],
   apparatus: 'long copper wire with a reference wire and a vernier scale',
+  contextFamily: 'elastic-stretching',
+  contextObjects: ['stretched-wire', 'slotted-masses'],
   features: ['model:empirical'],
   originality: 'Loading a wire (Searle-type apparatus) is a standard practical; no legacy Section A or 2025 Paper 1B question uses it. '
-    + 'The emphasis on where Hooke\'s law stops fitting, judged from error bars, and on the difference between the limit of '
-    + 'proportionality and the elastic limit, is this dataset\'s own. Own numbers and sequence.',
+    + 'The emphasis on where Hooke\'s law stops fitting, judged against the uncertainties, and on the error made by fitting all the '
+    + 'points, is this dataset\'s own. Own numbers and sequence.',
 
   physics: {
     scenario: 'A long, thin hard-drawn copper wire hangs from a beam beside an identical reference wire that carries a constant small load. '
@@ -25,8 +29,7 @@ export default {
       + 'of the test wire. The loads are taken beyond the limit of proportionality.',
     principles: [
       'Hooke\'s law: F = kx up to the limit of proportionality (A.2)',
-      'Beyond the limit of proportionality the extension grows faster than the load as the metal begins to yield',
-      'The elastic limit is the largest load after which the wire returns to its original length when unloaded; it is a different limit',
+      'Beyond the limit of proportionality the extension grows faster than the load as the metal begins to yield (not assessed: the SL guide has only Hooke\'s law)',
     ],
     assumptions: [
       'Below F_p the wire obeys Hooke\'s law, with k = EA/L for its dimensions (about 9.4 kN m⁻¹)',
@@ -60,7 +63,8 @@ export default {
     },
   },
   // The fit uses only the proportional region; the examiner's line is extended to show the departure.
-  graph: { x: 'F', y: 'x', fit: 'linear', band: true, exclude: [5, 6, 7, 8], zero: { x: true, y: true } },
+  // errorBars 'too-small': ±0.05 mm is under 0.5 % of the axis; the caption states it instead (P1).
+  graph: { x: 'F', y: 'x', fit: 'linear', band: true, exclude: [5, 6, 7, 8], zero: { x: true, y: true }, errorBars: 'too-small' },
 
   results: {
     gradient: { unit: 'mm N^-1', dims: { of: 'y/x' }, check: 'gradient', value: (d) => d.fit.m, range: (d, v) => d.widen(d.gradientRange(), v, 0.04) },
@@ -71,6 +75,19 @@ export default {
     },
     xHooke: { unit: 'mm', value: (d) => (d.rows[ROW].F / d.r.k.value) * 1e3 },
     excess: { unit: 'mm', value: (d) => d.rows[ROW].x - d.r.xHooke.value },
+    // (d): k from one straight line through ALL nine points (least squares), which the curved region makes too small.
+    kAll: {
+      unit: 'N m^-1',
+      value: (d) => {
+        const xs = d.rows.map((r) => r.F);
+        const ys = d.rows.map((r) => r.x);
+        const n = xs.length;
+        const mx = xs.reduce((a, b) => a + b, 0) / n;
+        const my = ys.reduce((a, b) => a + b, 0) / n;
+        const m = xs.reduce((s, x, i) => s + (x - mx) * (ys[i] - my), 0) / xs.reduce((s, x) => s + (x - mx) ** 2, 0);
+        return 1 / (m * 1e-3);
+      },
+    },
   },
 
   claims: [
@@ -79,11 +96,9 @@ export default {
     { type: 'throughOrigin', expect: true },
     { type: 'agrees', result: 'k', value: 9420, expect: true },
     { type: 'trend', direction: 'increasing' },
+    // (d): fitting every point gives a k clearly below the whole accepted range of the correct k.
+    { type: 'compare', result: 'kAll', than: 'k', expect: 'smaller' },
   ],
-
-  stated: {
-    Fp: { value: 50, dp: 0, unit: 'N', source: "the student's claim, near the limit of proportionality (physics.params.Fp)", from: (p) => p.Fp },
-  },
 
   intro: () => '<p>A student investigates how the extension $x$ of a long, thin copper wire depends on the load $F$ on it. The wire hangs '
     + 'from a beam beside a second, identical reference wire, which carries a constant small load. Masses are added to the test wire, '
@@ -94,10 +109,11 @@ export default {
     return [
       {
         label: 'a', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        reads: [{ figure: 'graph', x: d.rows[4].F }],
         question: 'Hooke\'s law predicts that $x$ is proportional to $F$. Use the graph to identify the range of loads for which the data are consistent with Hooke\'s law. Justify your answer.',
         markscheme: [
-          `A straight line through the origin passes through the error bars of the points up to about ${d.text('F', LIN)} N (accept up to ${d.text('F', LIN + 1)} N) ✓`,
-          'For larger loads the points lie above any such line by more than their error bars ✓',
+          `A straight line through the origin fits the points, within their uncertainty of ±0.05 mm, up to about ${d.text('F', LIN)} N (accept up to ${d.text('F', LIN + 1)} N) ✓`,
+          'For larger loads the points lie above any such line by far more than their uncertainty ✓',
         ],
       },
       {
@@ -119,10 +135,11 @@ export default {
       },
       {
         label: 'd', marks: 2, ao: 'AO3',
-        question: `A student concludes that the wire passed its elastic limit at about ${d.stated('Fp')} N. Explain why these data alone cannot show this.`,
+        asks: { conclusion: ['would be smaller', 'is smaller than'] },
+        question: 'Another student draws one line of best fit through all nine points and calculates $k$ from its gradient. Explain whether this value of $k$ would be larger or smaller than your answer to (b).',
         markscheme: [
-          'The elastic limit is the largest load after which the wire returns to its original length when the load is removed; it is not the same as the limit of proportionality, where the graph stops being straight ✓',
-          'All the readings were taken while loading: the student would need to remove the load and check for a permanent extension ✓',
+          `The points beyond about ${d.text('F', LIN)} N lie above the straight line, so a line through all the points has a larger gradient (more extension per newton) ✓`,
+          `Since $k = \\dfrac{1}{\\text{gradient}}$, this $k$ would be smaller (about ${d.sf(d.r.kAll.value, 2)} $\\text{N m}^{-1}$) ✓`,
         ],
       },
       {

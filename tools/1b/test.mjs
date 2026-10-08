@@ -18,11 +18,23 @@ import { validateDataset, parseGraph, scaleFromTicks, numbersIn } from './valida
 import { buildAll, loadDatasets, loadTopics } from './build.mjs';
 import broken, { D3_ASKS } from './fixtures/broken.mjs';
 import { canonicalContent, fingerprintOf } from './fingerprint.mjs';
+import { contextRepetition, contextProblems } from './contexts.mjs';
+import { regularityFindings, constancy, successiveRatios, multiplesProblems } from './safeguards.mjs';
+import { areaUnder, squaresEstimate, setSourcesDir } from './validate.mjs';
+import fs from 'node:fs';
+import os from 'node:os';
+import crypto from 'node:crypto';
+import { D3_MODEL, E3_AREA, D3_SCALE, P12_BROKEN } from './fixtures/phase12.mjs';
+import { reviewProblem } from './registry.mjs';
+import { SAFEGUARDS } from './safeguard-index.mjs';
+
+const editPartLocal = (def, label, change) => ({ ...def, parts: (d) => def.parts(d).map((pt) => (pt.label === label ? change(pt, d) : pt)) });
 
 export async function runTests() {
   const failures = [];
   let count = 0;
-  const check = (name, ok, detail = '') => { count++; if (!ok) failures.push(`${name}${detail ? ': ' + detail : ''}`); };
+  const names = []; // every test name, so the safeguard index can check that each rule's tests exist (end of file)
+  const check = (name, ok, detail = '') => { count++; names.push(name); if (!ok) failures.push(`${name}${detail ? ': ' + detail : ''}`); };
   const near = (a, b, tol = 1e-9) => Math.abs(a - b) <= tol * Math.max(1, Math.abs(a), Math.abs(b));
 
   // ----- Random numbers: repeatable, and the right shape -----
@@ -357,7 +369,7 @@ export async function runTests() {
     check('a validator warning makes a dataset AMBER',
       classify(asResult(green), { ...opts, diags: [{ level: 'warning', code: 'meta', dataset: 'D3-B07', where: 'marks', message: 'm' }] }).class === 'AMBER');
     check('diversity: the same apparatus twice in a batch is flagged',
-      diversityWarnings([{ id: 'X', def: { apparatus: 'spring' } }, { id: 'Y', def: { apparatus: 'spring' } }]).length === 1);
+      diversityWarnings([{ id: 'X', def: { apparatus: 'spring' } }, { id: 'Y', def: { apparatus: 'spring' } }]).some((w) => w.startsWith('apparatus "spring"')));
 
     // acceptBatch on a synthetic batch: G1–G7 GREEN, A1 AMBER.
     const row = (id, cls, reviewed = false) => ({ id, class: cls, reasons: cls === 'GREEN' ? [] : ['first example of archetype N3 (MEDIUM risk)'], individuallyReviewed: reviewed });
@@ -403,6 +415,313 @@ export async function runTests() {
     check('a batch-approved dataset is published', buildAll([d3b], topics, { registry: batchReg }).questions.length === 1);
     check('archetype, apparatus and originality metadata don\'t change a fingerprint',
       fingerprintOf(canonicalContent({ ...d3b.def, archetypes: ['X'], apparatus: 'y', originality: 'z' }, buildQuestion(d3b.def))) === fpD3);
+  }
+  // ----- Phase 12: context families (T1, contexts.mjs) -----
+  {
+    const r = (id, def) => ({ id, def });
+    const spring1 = r('S1', { apparatus: 'spring with a hanger', contextFamily: 'elastic-stretching', contextObjects: ['spring', 'slotted-masses'] });
+    const spring2 = r('S2', { apparatus: 'mass oscillating on a spring', contextFamily: 'oscillation', contextObjects: ['spring', 'stopwatch'] });
+    const wire = r('W1', { apparatus: 'loaded copper wire', contextFamily: 'elastic-stretching', contextObjects: ['stretched-wire', 'slotted-masses'] });
+    const heater = r('H1', { apparatus: 'block with an electric heater', contextFamily: 'electrical-heating', contextObjects: ['electric-heater', 'thermometer'] });
+    const gas = r('G1', { apparatus: 'flask in a water bath with a pressure gauge', contextFamily: 'gas-pressure', contextObjects: ['pressure-gauge', 'water-bath'] });
+    const rep = contextRepetition([spring1, wire, spring2, heater]);
+    check('T1: the same context family twice in a batch is flagged, naming both datasets and the family',
+      rep.some((w) => w.includes('"elastic-stretching"') && w.includes('S1') && w.includes('W1')));
+    check('T1: the same main object in two families (a spring) is flagged', rep.some((w) => w.includes('S1') && w.includes('S2') && w.includes('helical spring')));
+    check('T1: a shared generic instrument (slotted masses, thermometer) is not repetition', !rep.some((w) => /slotted masses|thermometer/.test(w)));
+    check('T1: different families with different objects are not flagged', contextRepetition([heater, gas]).length === 0);
+    const bank = [r('B1', { contextFamily: 'electrical-heating', contextObjects: ['electric-heater'] }), r('B2', { contextFamily: 'electrical-heating', contextObjects: ['electric-heater'] })];
+    check('T1: a family already used twice in the bank is flagged for a new dataset', contextRepetition([heater], bank).some((w) => w.includes('already used by 2')));
+    check('T1: a family used once in the bank is not flagged', contextRepetition([heater], bank.slice(0, 1)).every((w) => !w.includes('context family')));
+    check('T1: an object mentioned in the apparatus but not declared is reported',
+      contextProblems({ apparatus: 'a spring and a light gate', contextFamily: 'oscillation', contextObjects: ['spring'] }).some((p) => p.includes('light-gate')));
+    check('T1: a missing or unknown family is reported', contextProblems({}).length === 1 && contextProblems({ contextFamily: 'springs' })[0].includes('unknown'));
+    const all = datasets.map(({ def }) => ({ id: def.id, def }));
+    check('T1: every dataset in the bank declares a known family and its objects', all.every((x) => contextProblems(x.def).length === 0),
+      all.filter((x) => contextProblems(x.def).length).map((x) => `${x.id}: ${contextProblems(x.def).join('; ')}`).join(' | '));
+    const b1 = all.filter((x) => x.def.batch === 'batch-1');
+    const found = contextRepetition(b1, all.filter((x) => x.def.batch !== 'batch-1'));
+    check('T1: Batch 1\'s repeated springs and heaters (found by reading in the retrospective) are now caught',
+      found.some((w) => w.includes('A2-B01') && w.includes('C1-B01') && w.includes('spring')) && found.some((w) => w.includes('"electrical-heating"')));
+  }
+  // ----- Phase 12: too-regular data (T2, safeguards.mjs) -----
+  {
+    const base = { resolution: 1, sigmas: [0.4, 0.4, 0.4, 0.4, 0.4, 0.4] };
+    const codes = (o) => regularityFindings({ ...base, ...o }).map((f) => f.code);
+    check('T2: equal steps in 4 of 5 differences are flagged', codes({ values: [39, 59, 79, 99, 119, 140], texts: ['39', '59', '79', '99', '119', '140'], xs: [0.5, 1, 1.5, 2, 2.5, 3], models: [38.8, 58.8, 78.8, 98.8, 118.8, 138.8] }).includes('equal-steps'));
+    check('T2: uneven, honestly scattered data are not flagged', codes({ values: [39, 58, 80, 99, 118, 140], texts: ['39', '58', '80', '99', '118', '140'], xs: [0.5, 1, 1.5, 2, 2.5, 3], models: [38.8, 58.8, 78.8, 98.8, 118.8, 138.8] }).length === 0);
+    check('T2: data much cleaner than their declared noise are flagged',
+      codes({ resolution: 0.01, sigmas: [0.2, 0.2, 0.2, 0.2, 0.2, 0.2], values: [1.01, 2.03, 2.98, 4.02, 5.01, 6.03], texts: ['1.01', '2.03', '2.98', '4.02', '5.01', '6.03'], xs: [1, 2, 3, 4, 5, 6], models: [1.01, 2.03, 2.98, 4.02, 5.01, 6.03] }).includes('too-little-scatter'));
+    check('T2: exactly proportional values are flagged', codes({ resolution: 0.01, sigmas: [0, 0, 0, 0, 0], values: [0.52, 1.04, 1.56, 2.08, 2.6], texts: ['0.52', '1.04', '1.56', '2.08', '2.60'], xs: [1, 2, 3, 4, 5], models: [0.52, 1.04, 1.56, 2.08, 2.6] }).includes('exact-ratios'));
+    check('T2: every value ending in the same digit is flagged', codes({ resolution: 0.1, sigmas: [1, 1, 1, 1, 1], values: [1.5, 3.5, 4.5, 6.5, 8.5], texts: ['1.5', '3.5', '4.5', '6.5', '8.5'], xs: [1, 2, 3, 4, 5], models: [1.4, 3.1, 4.7, 6.3, 8.2] }).includes('repeated-digit'));
+    check('T2: a resolution of 10 (last digit always 0) is not a repeated-digit finding', !codes({ resolution: 10, sigmas: [30, 30, 30, 30, 30], values: [120, 190, 250, 330, 380], texts: ['120', '190', '250', '330', '380'], xs: [1, 2, 3, 4, 5], models: [110, 180, 260, 320, 390] }).includes('repeated-digit'));
+    // C4-B01 declares a scatter of 0.25 Hz with a resolution of 0.1 Hz. Replace its measured column with the rounded
+    // noise-free model (as if someone typed "clean" values): far too little scatter, so the validator must warn.
+    // (Where the declared scatter is below the resolution, as in D3-B01, rounded model values are honest data.)
+    const c4 = datasets.find((x) => x.def.id === 'C4-B01').def;
+    const q = JSON.parse(JSON.stringify(buildQuestion(c4).question));
+    const ideal = generateRows(c4, { ideal: true }).rows;
+    const t = q.data.find((x) => x.kind === 'table');
+    t.html = t.html.replace(/<td data-col="f" data-row="(\d+)">([^<]*)<\/td>/g, (_, i) => `<td data-col="f" data-row="${i}">${fmtNum(roundTo(ideal[+i].f, c4.columns.f.resolution), decimalsOf(c4.columns.f.resolution))}</td>`);
+    const w = validateDataset(c4, q, { topics }).filter((x) => x.code === 'regular-data');
+    check('T2: a table edited to the exact model values is reported as too regular (warning)', w.length > 0 && w.every((x) => x.level === 'warning'), w.map((x) => x.message).join('; ') || 'no warning');
+    check('T2: A2-B01\'s accepted regularity is reported to the teacher (AMBER reason), not silently passed',
+      classify({ id: 'A2-B01', def: datasets.find((x) => x.def.id === 'A2-B01').def, valid: true, state: { changed: false }, built: null }, { diags: [], established: { archetypes: new Set(['E1', 'L2']), features: new Set() }, verdictMargin: 0.04 })
+        .reasons.some((x) => x.startsWith('regular data accepted')));
+  }
+  // ----- Phase 12: warnings from the graph and giveaway checks -----
+  {
+    const warns = (def) => validateDataset(def, buildQuestion(def).question, { topics }).filter((x) => x.level === 'warning').map((x) => x.code);
+    const a2 = datasets.find((x) => x.def.id === 'A2-B01').def;
+    check('P1: error bars hidden under the markers are reported (A2-B01 without errorBars "too-small")',
+      warns({ ...a2, graph: { ...a2.graph, errorBars: undefined }, parts: (d) => a2.parts(d) }).includes('graph-errorbar-visibility'));
+    check('P1: with errorBars "too-small" the caption states the uncertainty and no bars are drawn',
+      (() => { const q2 = buildQuestion(a2).question; const g = q2.data.find((x) => x.figure === 'graph'); return /too small to show as error bars/.test(g.caption) && !/class="ebar"/.test(g.svg) && /±1 mm/.test(g.caption); })());
+    const d3 = datasets.find((x) => x.def.id === 'D3-B01').def;
+    check('T3: wording that reads from a graph without declared reads is reported',
+      warns(editPartLocal(d3, 'b', (pt) => ({ ...pt, question: 'Read from the graph the mass reading when $I = 2.0$ A.' }))).includes('graph-read-undeclared'));
+    check('T4: a "whether" part without a declared conclusion is reported',
+      warns(editPartLocal(d3, 'd', (pt) => { const { asks: _a, ...rest } = pt; return rest; })).includes('giveaway-undeclared'));
+    check('T3: B5-B01\'s emf (read at I = 0) is now on the graph\'s axes',
+      !validateDataset(datasets.find((x) => x.def.id === 'B5-B01').def, buildQuestion(datasets.find((x) => x.def.id === 'B5-B01').def).question, { topics }).some((x) => x.code === 'graph-read'));
+    check('Graph height is a drawing option: it doesn\'t change a fingerprint',
+      (() => { const b5 = datasets.find((x) => x.def.id === 'B5-B01').def; const h = { ...b5, graph: { ...b5.graph, height: 400 } }; return fingerprintOf(canonicalContent(b5, buildQuestion(b5))) === fingerprintOf(canonicalContent(h, buildQuestion(h))); })());
+  }
+  // ----- Phase 12: new capabilities T5–T8 (fixtures/phase12.mjs) -----
+  {
+    // T5 arithmetic, worked by hand.
+    const k1 = constancy([{ v: 1.00, u: 0.05 }, { v: 1.04, u: 0.05 }, { v: 0.97, u: 0.05 }], 0.04);
+    check('T5: overlapping ranges (0.95–1.05, 0.99–1.09, 0.92–1.02) share a value', k1.constant && !k1.clearlyNot);
+    const k2 = constancy([{ v: 1.0, u: 0.02 }, { v: 1.2, u: 0.02 }, { v: 1.4, u: 0.02 }], 0.04);
+    check('T5: separated ranges are clearly not constant', !k2.constant && k2.clearlyNot);
+    const r = successiveRatios([{ v: 200, u: 1 }, { v: 110, u: 1 }]);
+    check('T5: a successive ratio and its uncertainty: 110/200 = 0.55 ± 0.55 × (1/200 + 1/110)', near(r[0].v, 0.55) && near(r[0].u, 0.55 * (1 / 200 + 1 / 110)));
+    const e = 1.6;
+    const drops = [3.21, 4.79, 6.42, 1.58, 8.03].map((q, i) => ({ q, u: 0.12, label: `${i + 1}` }));
+    check('T5: charges that are whole multiples of 1.6 (within ±0.12) pass', multiplesProblems(drops, e, 0.04).length === 0, multiplesProblems(drops, e, 0.04).join('; '));
+    check('T5: a value between multiples is reported', multiplesProblems([...drops, { q: 5.6, u: 0.12, label: '6' }], e, 0.04).some((m) => m.includes('5.6')));
+    check('T5: a multiple that can\'t be identified (uncertainty ≥ a quarter of the factor) is reported', multiplesProblems([{ q: 3.2, u: 0.5, label: '1' }], e, 0.04).some((m) => m.includes('quarter')));
+    check('T5: a larger factor that also fits every value is reported (all values even multiples)', multiplesProblems([3.2, 6.4, 9.6, 12.8].map((q, i) => ({ q, u: 0.05, label: `${i}` })), e, 0.04).some((m) => m.includes('larger common factor')));
+    const e3 = datasets.find((x) => x.def.id === 'E3-B01').def;
+    // E3-B01's first four rates (47.6, 33.9, 25.3, 17.8 s⁻¹) fall by ratios 0.71, 0.75, 0.70 whose ranges overlap. (Over seven
+    // rows they don't: 17.8 → 16.8 gives 0.94 ± 0.14, clear of the others; the claim reports that honestly.)
+    const ratioOk = { ...e3, claims: [...e3.claims, { type: 'constantRatio', column: 'R', rows: [0, 3], expect: true }] };
+    const ratioErrs = validateDataset(ratioOk, buildQuestion(ratioOk).question, { topics }).filter((x) => x.level === 'error' && x.code === 'claim');
+    check('T5: E3-B01\'s first four count rates fall by a constant ratio within their uncertainties (true claim passes)', !ratioErrs.length, ratioErrs.map((x) => x.message).join('; '));
+    // T6–T8 good fixtures pass.
+    for (const [name, def] of [['T6 points-only graph with a model curve and a reference line', D3_MODEL], ['T7 sensor trace with an area and no table', E3_AREA], ['T8 readings on an instrument scale', D3_SCALE]]) {
+      const errs = validateDataset(def, buildQuestion(def).question, { topics }).filter((x) => x.level === 'error');
+      check(`${name}: passes validation`, !errs.length, errs.map((x) => `${x.code} ${x.where}: ${x.message}`).join('; '));
+    }
+    const qm = buildQuestion(D3_MODEL).question;
+    const stud = qm.data.find((x) => x.figure === 'graph');
+    const ms = qm.parts[0].msFigure || null;
+    check('T6: the students\' graph shows points and the reference line, but no fit and no model curve',
+      /class="f1 pt"/.test(stud.svg) && /data-ref="1"/.test(stud.svg) && !/data-fit=/.test(stud.svg) && !/data-model=/.test(stud.svg) && /dashed line shows/.test(stud.caption));
+    check('T6: the examiner\'s graph shows the model curve and the reference line', !!ms && /data-model="curve"/.test(ms.svg) && /data-ref="1"/.test(ms.svg));
+    const qa = buildQuestion(E3_AREA).question;
+    check('T7: the trace has one vertex per reading and no student table is published',
+      !qa.data.some((x) => x.kind === 'table') && (qa.data.find((x) => x.figure === 'graph').svg.match(/data-rows="([^"]*)"/)[1].split(' ').length === E3_AREA.columns.t.values.length));
+    check('T7: the trapezium area of a straight line y = 2x from 0 to 3 is 9', near(areaUnder([{ x: 0, y: 0 }, { x: 1, y: 2 }, { x: 3, y: 6 }], 'x', 'y', 0, 3, 0), 9));
+    check('T7: the area between y = 5 and a baseline of 2 from 1 to 4 is 9', near(areaUnder([{ x: 0, y: 5 }, { x: 5, y: 5 }], 'x', 'y', 1, 4, 2), 9));
+    check('T7: counting squares under y = 2x (0 to 3, 0.5 × 0.5 squares) gives the true 9', near(squaresEstimate([{ x: 0, y: 0 }, { x: 3, y: 6 }], 'x', 'y', 0, 3, 0, 0.5, 0.5), 9));
+    for (const fx of P12_BROKEN) {
+      let codes;
+      try {
+        const q = JSON.parse(JSON.stringify(buildQuestion(fx.def).question));
+        if (fx.mutate) fx.mutate(q);
+        codes = validateDataset(fx.def, q, { topics }).filter((x) => x.level === 'error').map((x) => x.code);
+      } catch (e) {
+        codes = [e.code || `crash: ${e.message}`];
+      }
+      check(`broken dataset "${fx.name}" is caught as ${fx.expect}`, codes.includes(fx.expect), `got ${codes.length ? [...new Set(codes)].join(', ') : 'no errors'}`);
+    }
+    check('Phase 12 fixtures are never real datasets', datasets.every(({ def }) => ![D3_MODEL, E3_AREA, D3_SCALE].includes(def)));
+  }
+  // ----- Phase 12: published values against a stored copy of the source (T10) -----
+  {
+    const d1 = datasets.find((x) => x.def.id === 'D1-B01').def;
+    // A temporary copy of the source (so the test runs anywhere, including on GitHub without the reference cache).
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'p1b-src-'));
+    const rows = {};
+    d1.provenance.extract.rows.forEach((name, i) => {
+      rows[name] = { 'Semi-major axis (10^3 km)': String(d1.columns.a.values[i] / 1000), 'Orbital Period (days)': String(d1.columns.T.values[i]) };
+    });
+    const text = JSON.stringify({ source: 'test copy', columns: { 'Semi-major axis (10^3 km)': 'a', 'Orbital Period (days)': 'T' }, rows });
+    fs.mkdirSync(path.join(dir, 'p1b-sources'));
+    fs.writeFileSync(path.join(dir, 'p1b-sources', 'x.json'), text);
+    const sha = crypto.createHash('sha256').update(text).digest('hex');
+    const withExtract = (extra = {}, fields = d1.provenance.fields) => ({ ...d1, provenance: { ...d1.provenance, fields, extract: { file: 'p1b-sources/x.json', sha256: sha, rows: d1.provenance.extract.rows, ...extra } } });
+    const old = setSourcesDir(dir);
+    try {
+      const diagsOf = (def) => validateDataset(def, buildQuestion(def).question, { topics });
+      const good = diagsOf(withExtract());
+      check('T10: published values matching the stored source pass, with no source warning', !good.some((x) => /source-extract|provenance/.test(x.code)), good.map((x) => x.code).join(', '));
+      const tampered = { ...withExtract(), columns: { ...d1.columns, T: { ...d1.columns.T, values: d1.columns.T.values.map((v, i) => (i === 3 ? v * 1.01 : v)) } } };
+      check('T10: a published value that differs from the source is an error', diagsOf(tampered).some((x) => x.code === 'source-extract' && x.level === 'error'));
+      check('T10: a stored copy changed since it was recorded is an error', diagsOf(withExtract({ sha256: '0'.repeat(64) })).some((x) => x.code === 'source-extract' && x.message.includes('changed')));
+      check('T10: a catalogue column without its source column and definition is an error', diagsOf(withExtract({}, {})).some((x) => x.code === 'provenance' && x.level === 'error'));
+      check('T10: a source row name that isn\'t in the copy is an error', diagsOf(withExtract({ rows: ['Metis', 'Amalthea', 'Thebe', 'Io', 'Europa', 'Ganymede', 'Callisto', 'Pluto'] })).some((x) => x.code === 'source-extract'));
+      check('T10: no stored copy at all is a warning (AMBER), not silence', diagsOf({ ...d1, provenance: { ...d1.provenance, extract: undefined } }).some((x) => x.code === 'source-extract-missing' && x.level === 'warning'));
+      setSourcesDir(path.join(dir, 'nowhere'));
+      check('T10: a stored copy that isn\'t on this computer is a warning (e.g. on GitHub)', diagsOf(withExtract()).some((x) => x.code === 'source-extract-unavailable' && x.level === 'warning'));
+    } finally {
+      setSourcesDir(old);
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  }
+  // ----- Phase 12: observed published values (compared with a model, not expected to follow it) -----
+  {
+    const d1 = datasets.find((x) => x.def.id === 'D1-B01').def;
+    const { model: _m, agree: _a, agreeReason: _r, ...rest } = d1.columns.T;
+    const obs = (extra) => ({ ...d1, columns: { ...d1.columns, T: { ...rest, ...extra } } });
+    const meta = (def) => validateDataset(def, buildQuestion(def).question, { topics }).filter((x) => x.code === 'physics-meta').map((x) => x.message);
+    check('Observed values with a reason and provenance are accepted without a model', meta(obs({ observed: { reason: 'compared with a model in the question' } })).length === 0, meta(obs({ observed: { reason: 'x' } })).join('; '));
+    check('Observed values need a reason', meta(obs({ observed: {} })).some((m) => m.includes('observed: { reason }')));
+    check('Observed values can\'t also carry a model', meta(obs({ observed: { reason: 'x' }, model: d1.columns.T.model })).some((m) => m.includes('no model')));
+    check('Observed values need provenance fields', meta({ ...obs({ observed: { reason: 'x' } }), provenance: { ...d1.provenance, fields: {} } }).some((m) => m.includes('provenance.fields')));
+  }
+  // ----- Uncertainty not part of the question: errorBars 'none' and showUncertainty: false (C1-B01, teacher, 8 October 2026) -----
+  {
+    const c1 = datasets.find((x) => x.def.id === 'C1-B01').def;
+    const q = buildQuestion(c1).question;
+    const table = q.data.find((x) => x.kind === 'table');
+    const figs = [...q.data.filter((x) => x.svg), ...q.parts.flatMap((p) => [p.figure, p.msFigure]).filter((f) => f && f.svg)];
+    check('errorBars "none": no error bars, no max/min lines and no mention of uncertainty in any caption or alt text',
+      figs.every((f) => !/class="ebar"|data-fit="(max|min)"/.test(f.svg) && !/error bar|uncertaint/i.test(`${f.caption} ${f.alt}`)));
+    check('showUncertainty: false: the table heading gives no ± for T', !/±/.test(table.html));
+    const mentions = editPartLocal(c1, 'a', (pt) => ({ ...pt, markscheme: ['No straight line passes through the error bars ✓', ...pt.markscheme.slice(1)] }));
+    check('errorBars "none": a mark scheme that refers to error bars is an error',
+      validateDataset(mentions, buildQuestion(mentions).question, { topics }).some((x) => x.code === 'graph-errorbar-text' && x.level === 'error'));
+    const shown = { ...c1, columns: { ...c1.columns, T: { ...c1.columns.T, showUncertainty: true } } };
+    check('errorBars "none": still showing the plotted quantity\'s uncertainty in the table is an error',
+      validateDataset(shown, buildQuestion(shown).question, { topics }).some((x) => x.code === 'graph-errorbar-text' && x.where.startsWith('column')));
+    check('errorBars "none": the uncertainty still proves the raw data are not linear (claim checked internally)',
+      !validateDataset(c1, q, { topics }).some((x) => x.level === 'error'));
+  }
+  // ----- Rules C1 and C6 (adopted by the teacher, 8 October 2026) -----
+  {
+    const d3 = datasets.find((x) => x.def.id === 'D3-B01').def;
+    const asResult = (def) => ({ id: def.id, def, valid: true, state: { changed: false }, built: buildQuestion(def) });
+    const base = { ...d3, id: 'D3-B08', originality: 'test', contextFamily: 'magnetic-force', contextObjects: ['magnet', 'top-pan-balance', 'current-carrying-wire'] };
+    const est = (contexts) => ({ archetypes: new Set(['L1', 'V2']), features: new Set(['fit:linear', 'claim:verdict', 'claim:throughOrigin', 'claim:linear', 'claim:trend']), contexts: new Map(Object.entries(contexts).map(([a, f]) => [a, new Set(f)])) });
+    const opts = (contexts) => ({ diags: [], established: est(contexts), verdictMargin: 0.04 });
+    const v2 = { ...base, archetypes: ['V2'] };
+    const one = classify(asResult(v2), opts({ V2: ['elastic-stretching'] }));
+    check('C1: a HIGH-risk archetype with one inspected example is AMBER ("second example")', one.class === 'AMBER' && one.reasons.some((x) => x.startsWith('second example of HIGH-risk archetype V2')), one.reasons.join('; '));
+    const two = classify(asResult(v2), opts({ V2: ['elastic-stretching', 'light-intensity-distance'] }));
+    check('C1: with two inspected examples in different contexts it is no longer flagged', !two.reasons.some((x) => x.includes('HIGH-risk archetype V2')), two.reasons.join('; '));
+    const l1 = classify(asResult({ ...base, archetypes: ['L1'] }), opts({ L1: ['magnetic-force'] }));
+    check('C1 applies only to HIGH-risk archetypes (L1 with one example is not flagged)', !l1.reasons.some((x) => x.includes('HIGH-risk')));
+    check('C6: a "first example" or "second example" of a HIGH-risk archetype can\'t be waived', one.waivable === false && one.notWaivable.length === 1);
+    const medium = classify(asResult({ ...base, archetypes: ['L1'], reviewFlags: [{ flag: 'test', note: 'x' }] }), opts({ L1: ['magnetic-force'] }));
+    check('C6: a MEDIUM-level AMBER reason (an author flag) can be waived', medium.class === 'AMBER' && medium.waivable === true);
+    const plan = { batchId: 'batch-c6', rows: [{ ...one, individuallyReviewed: false }], sampleSize: 0, suggestedSample: [], diversity: [] };
+    const reg = { datasets: { 'D3-B08': { status: 'PHYSICS-REVIEWED', history: [] } } };
+    const res = acceptBatch(plan, reg, { by: 'Mr Silkstone (teacher)', date: '2026-10-08', note: 'n', systemicOk: true, fingerprints: { 'D3-B08': 'f' }, waive: { 'D3-B08': 'looked fine' } });
+    check('C6: accept-batch refuses a waiver of a HIGH-level AMBER reason', res.errors.some((e) => e.includes('can\'t be waived (rule C6)')), res.errors.join('; '));
+    // establishedSets counts context families from fixed inputs (not the live review records, which change).
+    const appr = { status: 'APPROVED', history: [{ status: 'APPROVED', basis: 'individual', inspected: true }] };
+    const batchOnly = { status: 'APPROVED', history: [{ status: 'APPROVED', basis: 'batch', inspected: false }] };
+    const res3 = [
+      { id: 'X1', valid: true, state: { changed: false }, def: { archetypes: ['V2'], contextFamily: 'elastic-stretching' } },
+      { id: 'X2', valid: true, state: { changed: false }, def: { archetypes: ['V2'], contextFamily: 'elastic-stretching' } },
+      { id: 'X3', valid: true, state: { changed: false }, def: { archetypes: ['V2'], contextFamily: 'light-intensity-distance' } },
+    ];
+    const e1 = establishedSets(res3.slice(0, 2), { datasets: { X1: appr, X2: appr } });
+    check('C1: two inspected examples in the SAME context family count as one context', e1.contexts.get('V2').size === 1);
+    const e2 = establishedSets(res3, { datasets: { X1: appr, X2: appr, X3: batchOnly } });
+    check('C1: an example approved in a batch without inspection doesn\'t count', e2.contexts.get('V2').size === 1);
+    const e3 = establishedSets(res3, { datasets: { X1: appr, X2: appr, X3: appr } });
+    check('C1: inspected examples in two different families establish a HIGH-risk archetype', e3.contexts.get('V2').size === 2);
+  }
+  // ----- Phase 14 (Batch 2) tooling -----
+  {
+    const errs = (def, q = buildQuestion(def).question) => validateDataset(def, q, { topics }).filter((x) => x.level === 'error');
+    // T9: simulated observations must say so in the question (teacher, 8 October 2026).
+    const c5 = datasets.find((x) => x.def.id === 'C5-B01').def;
+    const unlabelled = { ...c5, intro: (d) => c5.intro(d).replace(/simulated/gi, 'recorded') };
+    check('T9: simulated observations whose question text doesn\'t say "simulated" are an error', errs(unlabelled).some((x) => x.code === 'observational'));
+    check('T9: observational data must declare whether they are simulated', errs({ ...c5, simulated: undefined }).some((x) => x.code === 'observational'));
+    check('T9: simulated: true is refused for non-observational data', errs({ ...datasets.find((x) => x.def.id === 'D3-B01').def, simulated: true }).some((x) => x.code === 'observational'));
+    check('T9: the labelled simulated dataset passes', !errs(c5).length, errs(c5).map((x) => x.message).join('; '));
+    // Row labels (planet names): one per row, as row headers that the table reader ignores.
+    const b2 = datasets.find((x) => x.def.id === 'B2-B01').def;
+    check('Row labels: a wrong number of labels is an error', errs({ ...b2, rowLabels: { heading: 'body', values: ['Mercury'] } }).some((x) => x.code === 'table-header' && x.where === 'rowLabels'));
+    check('Row labels are shown as row headers', /<th scope="row">Venus<\/th>/.test(buildQuestion(b2).question.data.find((x) => x.kind === 'table').html));
+    // Prediction: "at a measured row" means within half the resolution (bounce 7 is not bounce 6), but the same reading is refused.
+    const a3 = datasets.find((x) => x.def.id === 'A3-B01').def;
+    check('Prediction one step beyond the last integer row is allowed', !errs(a3).some((x) => x.code === 'prediction'));
+    const atRow = { ...a3, results: { ...a3.results, hPred: { ...a3.results.hPred, predictAt: { column: 'n', value: 6 } } } };
+    check('Prediction at a measured row is still refused', errs(atRow).some((x) => x.code === 'prediction'));
+    // A published value converted with an offset (°C → K): checked against a temporary copy of the source.
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'p1b-src-'));
+    const rows = {};
+    b2.provenance.extract.rows.forEach((name, i) => {
+      rows[name] = { 'Solar irradiance (W/m2)': String(b2.columns.S.values[i]), 'Bond albedo': String(b2.columns.alpha.values[i]), 'Mean Temperature (C)': String(b2.columns.Tobs.values[i] - 273) };
+    });
+    const text = JSON.stringify({ source: 'test copy', columns: { 'Solar irradiance (W/m2)': 'S', 'Bond albedo': 'a', 'Mean Temperature (C)': 'T' }, rows });
+    fs.mkdirSync(path.join(dir, 'p1b-sources'));
+    fs.writeFileSync(path.join(dir, 'p1b-sources', 'x.json'), text);
+    const sha = crypto.createHash('sha256').update(text).digest('hex');
+    const withCopy = (fields = b2.provenance.fields) => ({ ...b2, provenance: { ...b2.provenance, fields, extract: { ...b2.provenance.extract, file: 'p1b-sources/x.json', sha256: sha } } });
+    const old = setSourcesDir(dir);
+    try {
+      const all = (def) => validateDataset(def, buildQuestion(def).question, { topics });
+      check('Source offset: °C converted to K with offset 273 matches the stored copy', !all(withCopy()).some((x) => /source-extract/.test(x.code)), all(withCopy()).map((x) => x.message).join('; '));
+      const noOffset = { ...b2.provenance.fields, Tobs: { ...b2.provenance.fields.Tobs, offset: undefined } };
+      check('Source offset: without the offset the published kelvin values don\'t match the source (error)', all(withCopy(noOffset)).some((x) => x.code === 'source-extract' && x.level === 'error'));
+    } finally {
+      setSourcesDir(old);
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+    // Tableless data read back by the independent audit from the drawings (trace, points, scale).
+    for (const id of ['A2-B03', 'C5-B01', 'E1-B01']) {
+      const def = datasets.find((x) => x.def.id === id).def;
+      const q = JSON.parse(JSON.stringify(buildQuestion(def).question));
+      check(`${id}: the independent audit reads the data from the drawings and passes`, !independentAudit(def, q).some((x) => x.level === 'error'));
+    }
+    const a2 = datasets.find((x) => x.def.id === 'A2-B03').def;
+    const q2 = JSON.parse(JSON.stringify(buildQuestion(a2).question));
+    const shift = (s) => s.replace(/data-trace="1" points="([^"]*)"/, (m, pts) => `data-trace="1" points="${pts.split(' ').map((p) => { const [x, y] = p.split(','); return `${x},${(+y - 8).toFixed(1)}`; }).join(' ')}"`);
+    for (const f of q2.data) if (f.figure === 'graph') f.svg = shift(f.svg);
+    check('A2-B03: a trace drawn 8 units too high is caught by the independent audit', independentAudit(a2, q2).some((x) => x.level === 'error'));
+  }
+  // ----- Phase 14 regression tests: rounding, hidden bars, unplotted points, the review gate, the safeguard index -----
+  {
+    check('Rounding: halves round up, as students round (0.5525 → 0.553, 1.575 → 1.58, 2.675 → 2.68, 1.005 → 1.01)',
+      sigFig(0.5525, 3) === '0.553' && sigFig(1.575, 3) === '1.58' && fmtNum(2.675, 2) === '2.68' && fmtNum(1.005, 2) === '1.01' && sigFig(-0.5525, 3) === '−0.553');
+    check('Rounding: ordinary values are unchanged (0.06372 → 0.064, 9.96 → 10, 0.995 → 1.0, 1234 → 1200)',
+      sigFig(0.06372, 2) === '0.064' && sigFig(9.96, 2) === '10' && sigFig(0.995, 2) === '1.0' && sigFig(1234, 2) === '1200' && fmtNum(0.004999, 2) === '0.00');
+    check('Rounding: value ± uncertainty uses the same rule (0.5525 ± 0.0078 → 0.553 ± 0.008)', (() => { const t = valuePm(0.5525, 0.0078, 1); return t.value === '0.553' && t.unc === '0.008'; })());
+
+    const e3 = datasets.find((x) => x.def.id === 'E3-B01').def;
+    const warnCodes = (def) => validateDataset(def, buildQuestion(def).question, { topics }).filter((x) => x.level === 'warning').map((x) => x.code);
+    const copy = { ...e3, id: 'E3-B09' }; // the same dataset, not on the list of pilots approved before these rules
+    check('Some error bars hidden under their markers (others visible) is reported', warnCodes(copy).includes('graph-errorbar-visibility'), warnCodes(copy).join(', '));
+    check('Omitted point without a Plot part is reported', warnCodes(copy).includes('graph-omit-plot'));
+    check('Pilots approved before these rules are listed exceptions (E3-B01 gets neither warning)', !warnCodes(e3).some((c) => ['graph-errorbar-visibility', 'graph-omit-plot'].includes(c)));
+    const withPlot = editPartLocal(copy, 'b', (pt) => ({ ...pt, question: `Plot the missing point. ${pt.question}` }));
+    check('Omitted point with a Plot part is not reported', !warnCodes(withPlot).includes('graph-omit-plot'));
+
+    const rec = (status) => ({ status, history: [] });
+    check('Review gate: reviews go in order (no skipping from AUTO-VALIDATED to TEACHER-REVIEWED)', !!reviewProblem(rec('AUTO-VALIDATED'), 'TEACHER-REVIEWED', 'Mr Silkstone (teacher)'));
+    check('Review gate: the next review in order is allowed', reviewProblem(rec('PHYSICS-REVIEWED'), 'TEACHER-REVIEWED', 'Mr Silkstone (teacher)') === null);
+    check('Review gate: TEACHER-REVIEWED can\'t be recorded for an assistant', !!reviewProblem(rec('PHYSICS-REVIEWED'), 'TEACHER-REVIEWED', 'Claude (AI assistant)'));
+    check('Review gate: APPROVED can\'t be recorded for a script', !!reviewProblem(rec('TEACHER-REVIEWED'), 'APPROVED', 'build script'));
+    check('Review gate: PHYSICS-REVIEWED may be recorded by the assistant', reviewProblem(rec('AUTO-VALIDATED'), 'PHYSICS-REVIEWED', 'Claude (AI assistant)') === null);
+    check('Review gate: a dataset that fails its checks, or changed since review, can\'t be reviewed',
+      !!reviewProblem(rec('AUTO-VALIDATED'), 'PHYSICS-REVIEWED', 'x', { valid: false }) && !!reviewProblem(rec('PHYSICS-REVIEWED'), 'TEACHER-REVIEWED', 'Mr Silkstone (teacher)', { changed: true }));
+    check('Review gate: nothing comes after APPROVED', !!reviewProblem(rec('APPROVED'), 'APPROVED', 'Mr Silkstone (teacher)'));
+
+    // Every safeguard has proof: its error codes are caught by a deliberately broken dataset, its tests exist.
+    const caught = new Set([...broken, ...P12_BROKEN].map((fx) => fx.expect));
+    for (const s of SAFEGUARDS) {
+      const missingCodes = s.codes.filter((c) => !caught.has(c));
+      const missingTests = s.tests.filter((t) => !names.some((n) => n.includes(t)));
+      check(`Safeguard index: "${s.area}" is proved by broken datasets and tests`, (s.codes.length + s.tests.length) > 0 && !missingCodes.length && !missingTests.length,
+        `${missingCodes.length ? 'no broken dataset for ' + missingCodes.join(', ') : ''}${missingTests.length ? ' no test matching ' + missingTests.join(', ') : ''}`);
+    }
   }
   return { count, failures };
 }

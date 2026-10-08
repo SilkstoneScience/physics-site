@@ -46,17 +46,27 @@ export function onGrid(x, step) {
   const k = x / step;
   return Math.abs(k - Math.round(k)) < 1e-6;
 }
+// Rounds half away from zero at dp decimal places, as students round by hand. Binary floating point stores 0.5525 as
+// 0.55249999…, so toFixed/toPrecision alone would print 0.552 (A3-B01, Phase 14); the value is first cleaned to 12
+// significant figures, which removes that representation error without changing any genuine digit.
+export function roundHalfUp(x, dp) {
+  const k = 10 ** dp;
+  const m = Number((Math.abs(x) * k).toPrecision(12));
+  return (Math.sign(x) * Math.round(m)) / k;
+}
 // Fixed decimal places, with a proper minus sign and never "−0.00".
 export function fmtNum(x, dp) {
-  let s = x.toFixed(dp);
+  let s = roundHalfUp(x, dp).toFixed(dp);
   if (/^-0\.?0*$/.test(s)) s = s.slice(1);
   return s.replace('-', '−');
 }
-// Rounds to n significant figures, e.g. sigFig(0.06372, 2) = "0.064", sigFig(1234, 2) = "1200".
+// Rounds to n significant figures, e.g. sigFig(0.06372, 2) = "0.064", sigFig(1234, 2) = "1200"; halves round up (0.5525 → 0.553).
 export function sigFig(x, n) {
   if (x === 0) return '0';
-  const r = Number(x.toPrecision(n));
-  const p = Math.floor(Math.log10(Math.abs(r)));
+  const p0 = Math.floor(Math.log10(Math.abs(Number(x.toPrecision(12)))));
+  let r = roundHalfUp(x, n - 1 - p0);
+  const p = Math.floor(Math.log10(Math.abs(r))); // 9.96 → 10.0 moves up a power of ten
+  if (p !== p0) r = roundHalfUp(x, n - 1 - p);
   return fmtNum(r, Math.max(0, n - 1 - p));
 }
 // Scientific notation to n significant figures: sciParts(1.898e27, 2) = { mant: '1.9', exp: 27 }.
@@ -106,6 +116,18 @@ const BASE_UNITS = {
   T: [1, [0, 1, -2, -1, 0]], mT: [1e-3, [0, 1, -2, -1, 0]],
   Hz: [1, [0, 0, -1, 0, 0]], Pa: [1, [-1, 1, -2, 0, 0]], kPa: [1e3, [-1, 1, -2, 0, 0]],
   '%': [0.01, [0, 0, 0, 0, 0]],
+  // Batch 2 (Phase 14)
+  'µm': [1e-6, [1, 0, 0, 0, 0]], nm: [1e-9, [1, 0, 0, 0, 0]],
+  h: [3600, [0, 0, 1, 0, 0]],
+  C: [1, [0, 0, 1, 1, 0]],
+  eV: [1.602176634e-19, [2, 1, -2, 0, 0]], MeV: [1.602176634e-13, [2, 1, -2, 0, 0]],
+  GWh: [3.6e12, [2, 1, -2, 0, 0]],
+  MW: [1e6, [2, 1, -3, 0, 0]], GW: [1e9, [2, 1, -3, 0, 0]],
+  u: [1.66053906892e-27, [0, 1, 0, 0, 0]],
+  // Photometric units (a phone's light sensor reads illuminance in lux) are given the dimensions of their radiometric
+  // counterparts: for light of a fixed spectrum, luminous flux (lm) is proportional to power (W) and illuminance (lx = lm m⁻²)
+  // to intensity (W m⁻²), which is all an inverse-square or line-source model needs.
+  lm: [1, [2, 1, -3, 0, 0]], lx: [1, [0, 1, -3, 0, 0]],
 };
 const SUPERSCRIPT = { '-': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' };
 

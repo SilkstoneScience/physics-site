@@ -30,6 +30,8 @@ export default {
   batch: 'pilot',
   archetypes: ['L2', 'E3', 'L1'],
   apparatus: 'cell, ammeter, voltmeter and variable resistor',
+  contextFamily: 'dc-circuit',
+  contextObjects: ['cell-and-meters'],
   originality: 'Standard internal-resistance practical, used in four legacy Section A sessions (May 2017 TZ2, May 2018 TZ1, May 2019 TZ2, Nov 2017). Own numbers, an anomaly and a different sequence; r of about 0.75 ohm resembles a Nov 2025 Paper 2 value (noted in the handoff).',
 
   // ----- 1. Physics model -----
@@ -75,7 +77,9 @@ export default {
       anomaly: { row: 4, shift: -0.1 },
     },
   },
-  graph: { x: 'I', y: 'V', fit: 'linear', band: true, exclude: [4], zero: { x: true } },
+  // yRange: the emf (the intercept at I = 0, read in part (b)) lies above the data, so the axis must reach it (T3);
+  // height: the taller plot keeps the ±0.01 V error bars longer than the point markers (P1).
+  graph: { x: 'I', y: 'V', fit: 'linear', band: true, exclude: [4], zero: { x: true }, yRange: [1.0, 1.55], height: 480 },
 
   // ----- 3. Results -----
   results: {
@@ -122,6 +126,7 @@ export default {
       },
       {
         label: 'b', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        reads: [{ figure: 'graph', x: 0, y: d.r.emf.value }],
         question: 'Determine the emf $\\varepsilon$ of the cell.',
         numeric: d.num('emf'),
         markscheme: [

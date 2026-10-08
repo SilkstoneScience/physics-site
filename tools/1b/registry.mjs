@@ -51,6 +51,22 @@ export function stateFor(id, valid, fingerprint, reg) {
   return { status: valid ? 'AUTO-VALIDATED' : 'DRAFT', changed: false, rec };
 }
 
+// Whether a review may be recorded (used by review.mjs set; tested in test.mjs). Returns an error message, or null.
+// Reviews go in order with no skipping; a dataset must pass every check and be unchanged since its last review;
+// TEACHER-REVIEWED and APPROVED must name a person, never an assistant or a script.
+export const NOT_A_PERSON = /\b(claude|assistant|ai|automated|bot|script)\b/i;
+export function reviewProblem(rec, wanted, by, { valid = true, changed = false } = {}) {
+  if (!by) return 'say who is reviewing (--by "<name>")';
+  if (!REVIEWED.includes(wanted)) return `status must be one of ${REVIEWED.join(', ')}`;
+  if (!valid) return 'the dataset doesn\'t pass the automatic checks';
+  if (changed) return 'the dataset has changed since its last review: reset it first';
+  const current = rec && REVIEWED.includes(rec.status) ? rec.status : 'AUTO-VALIDATED';
+  const order = ['AUTO-VALIDATED', ...REVIEWED];
+  if (order.indexOf(wanted) !== order.indexOf(current) + 1) return `the dataset is ${current}: the next review is ${order[order.indexOf(current) + 1] || '(none: already APPROVED)'}, not ${wanted}`;
+  if ((wanted === 'TEACHER-REVIEWED' || wanted === 'APPROVED') && NOT_A_PERSON.test(by)) return `${wanted} must be recorded for a person (the teacher), not "${by}"`;
+  return null;
+}
+
 // The checker's error when a reviewed dataset would change: which fields, and both fingerprints.
 export function freezeDiagnostic(id, rec, content, fingerprint) {
   const before = loadSnapshot(id);

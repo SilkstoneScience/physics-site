@@ -23,6 +23,8 @@ export default {
   batch: 'pilot',
   archetypes: ['N1', 'G3'],
   apparatus: 'vibration generator, string, pulley and hanging mass',
+  contextFamily: 'standing-waves',
+  contextObjects: ['vibrating-string', 'slotted-masses'],
   originality: 'Standing waves on a string are common; May 2023 TZ1 Section A used a similar rig but varied the hanging mass against wavelength squared. This dataset varies length at fixed tension: own variables, numbers and sequence.',
 
   // ----- 1. Physics model -----
@@ -62,6 +64,8 @@ export default {
       kind: 'derived', name: 'reciprocal of length', symbol: '1/L', symbolText: '1/L', unit: 'm^-1', dp: 3, uncSymbol: '\\Delta(1/L)',
       value: (row) => 1 / row.L,
       propagation: { form: 'product', terms: [{ of: 'L', n: -1 }] }, // Δ(1/L)/(1/L) = ΔL/L, so Δ(1/L) = ΔL/L²
+      // Not shown (teacher, 8 October 2026): the Δ(1/L) column gave away most of part (e), which asks for this uncertainty.
+      showUncertainty: false,
     },
     f: {
       kind: 'measured', name: 'frequency', symbol: 'f', unit: 'Hz',
@@ -73,9 +77,14 @@ export default {
         noise: 'the largest amplitude is judged by eye, so repeated settings differ by a few tenths of a hertz: normal scatter, standard deviation 0.25 Hz',
       },
       noise: { type: 'gauss', sd: 0.25 }, resolution: 0.1, uncertainty: 0.5,
+      // No part uses the ±0.5 Hz (teacher, 8 October 2026): kept internal for validation and the accepted ranges, not shown.
+      showUncertainty: false,
     },
   },
-  graph: { x: 'invL', y: 'f', fit: 'linear', band: true, xErrorBars: true, zero: { x: true, y: true } },
+  // errorBars 'none' (teacher, 8 October 2026): no part uses the error bars, which were too small to see anyway. Nothing is
+  // drawn or said about them. xErrorBars keeps the 1/L uncertainty in the (undrawn) max/min lines, so the accepted ranges for
+  // (c), (d) and (f) are unchanged.
+  graph: { x: 'invL', y: 'f', fit: 'linear', band: true, xErrorBars: true, zero: { x: true, y: true }, errorBars: 'none' },
 
   // ----- 3. Results -----
   results: {
@@ -173,6 +182,7 @@ export default {
       },
       {
         label: 'f', marks: 2, ao: { AO2: 1, AO3: 1 }, msFigure: 'diagram-ms',
+        reads: [{ figure: 'graph', x: 1 / L_PREDICT, y: d.r.f3.value / 3 }],
         question: `The student sets $L = ${d.dp(L_PREDICT, 3)}\\ \\text{m}$ and increases the frequency until the string vibrates in its third harmonic. Use the graph to predict this frequency.`,
         numeric: d.num('f3', {
           mistakes: [{ value: f1, feedback: 'That is the first harmonic. The third harmonic has three loops, so its frequency is three times larger.' }],
