@@ -346,8 +346,9 @@ teacher's judgement (spec section 9).
 
 1. The retrospective's MUST FIX tooling (T1–T4) and proposals **C1–C6** (C1 changes 3 risk classes in section 3.9).
 2. This dataset list, or changes to it (topics, contexts, difficulty mix).
-3. Real published data from **NASA planetary fact sheets** (B2-B01), **IAEA PRIS / operator figures** (E4-B01) and
-   **NIST atomic levels** (E1-B01): accuracy, licence and provenance.
+3. ~~Real published data from **NASA planetary fact sheets** (B2-B01), **IAEA PRIS** (E4-B01) and **NIST atomic levels**
+   (E1-B01)~~: all three approved by the teacher on 8 October 2026, with credit to the source in each question. Each
+   still needs a stored source copy (T10) when the dataset is written.
 4. ~~**Simulated observational data** for C5-B01, labelled as simulated~~: approved by the teacher on 8 October 2026.
 5. ~~**Empirical laws** (bounce ratio, force-plate pulse) and the **exact line-source law**~~: all three approved by the teacher on
    8 October 2026 (used only to generate data; students are given the relationships they use).
