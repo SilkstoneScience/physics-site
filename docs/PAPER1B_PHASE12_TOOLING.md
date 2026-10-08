@@ -90,10 +90,9 @@ Students see the stem, then each part's question, then its mark scheme. The chec
 - `diagramChecks: [{ figure, scale: { column } }]` reads every mark back: evenly spaced labels; the smallest division at least 6 units (about 4 px on a phone); each mark within half a division of its value; marks less than one division apart reported.
 - The column's uncertainty can't be smaller than half a division.
 
-### T9 Observational-data mode: deferred
-- Only C5-B01 needs it, and C5-B01 is flagged in section 2 for a teacher decision (simulated observations, SL fairness, originality).
-- Uneven sampling and model curves already work (T6). What is missing is a required "simulated" label and realism checks adapted to observations.
-- Build it with C5-B01 if the teacher keeps it.
+### T9 Observational-data mode: deferred, now small
+- Only C5-B01 needs it. The teacher chose to **simplify** C5-B01 (8 October 2026): no systemic velocity, no sketch.
+- Uneven sampling and model curves already work (T6). What remains is a check that a dataset with `source: 'observational'` and simulated data says so in its stem. Build it with C5-B01.
 
 ### T10 Published values against a stored source copy
 - Every catalogue column now needs `provenance.fields` (the source's own column heading, what it means, and a unit scale).
@@ -123,7 +122,7 @@ new law, diagram or audit entry: normal dataset work), **D** = can defer.
 | E1-B01 spectrum | LOW (E.1 SL) | LOW–MED | M: `photon-energy` law; lines as published values | E: `scaleReading`; D: level diagram (give levels as text or a small table) | E: scale read-back, `tableless`, T10 | M: entry | NIST levels and lines (copy + teacher approval) | E: ± half a division enforced | none | none (image) | **Yes**, after the NIST copy and the teacher's approval of the source |
 | A2-B03 force plate | LOW–MED (A.2 impulse) | LOW | M: empirical force-pulse law; dense times | E: trace, shading; D: force-plate diagram (text description) | E: area result, `tableless` | M: entry (independent integration) | none | E (sensor, no bars) | E | none | **Yes**, after the teacher decides the area-range policy |
 | B2-B01 planets | LOW (B.2) | LOW | M: `energy-balance-temperature` law | E: reference line | E: `observed` published values, T10, verdict claims | M: entry | NASA planetary fact sheets (copy) | E | E | E | **Yes**, after the NASA copy |
-| C5-B01 binary star | MED (systemic velocity is subtle for SL) | MED (astrophysics option papers) | M: radial-velocity law; uneven sampling exists | E: points + model curve; Sketch as a self-marked part with an examiner figure | **D: T9 not built** | M: entry | none (simulated), or real data (teacher) | E | E | E | **No: flagged.** Disproportionate assessment risk and an open decision on simulated observations. Recommend replacing it, or moving it to Batch 3 |
+| C5-B01 binary star (**simplified**, teacher 8 Oct) | LOW–MED (no systemic velocity, no sketch) | MED (astrophysics option papers) | M: radial-velocity law; uneven sampling exists | E: points + model curve | M: small T9 check (stem says the data are simulated), built with the dataset | M: entry | none (simulated; labelling is the teacher's decision 3) | E: wavelength uncertainty → % uncertainty in v | E | E | **Yes**, after the decision on simulated observations |
 | D2-B01 Millikan | LOW–MED | LOW–MED | M: `millikan-balance` law; calibration systematic exists | E: table; D: plates diagram | E: `integerMultiples`, calibration feature | M: entry | none | E: r³ propagation | none | E | **Yes** |
 | E4-B01 reactor | LOW (E.4) | LOW | M: `mass-energy` law, energy chain | E | E: `observed` published values, T10 | M: entry | IAEA PRIS or operator figures (copy; **licence decision needed**) | E | none | E | **Yes, technically**; the licence and source decision is open |
 | C2-B01 LED tube | MED (exact line-source law is beyond SL; used only to generate data) | MED (May 2018 Paper 3) | M: `line-source-irradiance` law (exact + point-source limit) | E: points-only graph with model curve | E: `constantValue` over row ranges (where the inverse square holds and where it doesn't) | M: entry (numerical integration) | none | E: derived I·d² with propagation | E | E | **Yes**, after the teacher approves the law |
@@ -198,7 +197,7 @@ Batch 1 was accepted as `batch-1`, and `accept-batch` refuses a batch that has a
 
 **NOT READY for Batch 2 generation.** The tooling is ready, but these decisions are open:
 1. ~~Re-approval of the four reset Batch 1 datasets~~: done 8 October 2026 (section 3a); production on this branch is 13 again.
-2. C5-B01: replace, defer, or keep. Keeping it means building T9.
+2. ~~C5-B01~~: simplified (8 October 2026; plan section 3.5). Still open: whether simulated observations are acceptable (decision 3).
 3. The area accepted-range policy (T7), the empirical laws (bounce, force pulse), the exact line-source law, and the external sources (NIST, NASA planetary, IAEA PRIS licence).
 4. The retrospective's proposals C1–C6 (they change the risk classes in the Batch 2 plan).
 5. C4-B01's invisible error bars (approved pilot).

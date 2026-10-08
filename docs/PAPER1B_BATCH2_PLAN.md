@@ -167,24 +167,28 @@ before a HIGH archetype can be GREEN) would make it AMBER.
 | Originality risk | LOW: the 2025 Paper 2 Venus question is about orbits, not energy balance |
 | Review risk | **AMBER** (first V1). Second D1 example: GREEN under current rules, AMBER (C1) |
 
-### 3.5 C5-B01 Radial velocity of a spectroscopic binary (C.5)
+### 3.5 C5-B01 Radial velocity of a spectroscopic binary (C.5), simplified
+
+**Simplified on the teacher's decision (8 October 2026).** The first plan's two riskiest parts are gone: "explain why the
+mean wavelength is shifted" (the whole system's motion) and "sketch the companion's curve". The system has no overall
+motion in the model, so the mean wavelength is the laboratory wavelength.
 
 | Field | Plan |
 |---|---|
 | Archetype | **D2** (observational data, first example) + G3 (prediction later in the cycle) |
-| Purpose | Use a spectral line's wavelength, observed over several weeks, to find a star's orbital period and orbital speed, and explain why the average wavelength is shifted (the whole system is moving) |
-| Difficulty | **3** |
-| Marks | 11: (a) the period from the graph [2] · (b) the star's orbital speed from the largest shift [3, typed 1 value] · (c) **Explain** why the mean wavelength is not the laboratory wavelength [2] · (d) **Predict** the wavelength on a later date [1] · (e) **Sketch** the curve for the companion star (opposite phase, larger shift) [2] · (f) one source of uncertainty in a single observation [1] |
-| Data type | **Observational**: simulated observations from a circular-orbit model with spectrograph scatter, uneven observation dates (weather, daylight), clearly labelled as simulated |
-| Graph | Wavelength against time: a periodic curve with scatter. Students get no fit; the examiner graph shows the model curve |
-| Relationship | Δλ/λ ≈ v/c with a sinusoidal line-of-sight velocity |
-| AO emphasis | AO2 5, AO3 6 |
+| Purpose | Use a spectral line's wavelength, observed over several weeks, to find a star's orbital period and orbital speed, judge how precisely the speed is known, and evaluate the observing method |
+| Difficulty | **2** |
+| Marks | 9: (a) the period from the graph [2] · (b) the star's orbital speed from the largest shift, using Δλ/λ ≈ v/c [3, typed 1 value] · (c) the percentage uncertainty in the speed, from the stated uncertainty in each wavelength [2] · (d) **Predict** the wavelength on a later date [1] · (e) **Suggest** how the observations could be changed to find the period more precisely (observe over more cycles; fill the gaps) [1] |
+| Data type | **Observational**: simulated observations from a circular-orbit model with spectrograph scatter, uneven observation dates (weather, daylight), clearly labelled in the stem as simulated |
+| Graph | Wavelength against time: a periodic pattern of points with scatter and visible y error bars. Students get no fit; the examiner's graph shows the model curve |
+| Relationship | Δλ/λ ≈ v/c with a sinusoidal line-of-sight velocity (no systemic velocity) |
+| AO emphasis | AO2 7, AO3 2 ((c) 1, (e) 1) |
 | SL/HL | SL (C.5: Δλ/λ ≈ v/c and spectral-line shifts of stars). No sound Doppler (HL) |
-| Generator | **`source: 'observational'` mode** (T9) with uneven sampling and stated scatter; circular-orbit radial-velocity law; model-curve overlay on the examiner graph (T6); Sketch part (T11) |
-| Validator | Period and amplitude recovered from noise-free data; the predicted date is not an observation (`predictAt`); the systemic shift is clearly larger than the scatter; the sketch's examiner figure is generated from the model; readable from the graph (T3) |
-| Independent audit | Fit a sinusoid by a different method; recover the period, speed and systemic velocity; check v ≪ c, so the approximation holds |
-| Assessment risk | HIGH: the systemic-velocity idea is subtle for SL; the teacher should judge the fairness of (c) and (e) |
-| Originality risk | MEDIUM: legacy astrophysics option papers (2016, 2017, 2019, 2024) use spectroscopic binaries. Section A did not, but the sequence must differ from those option questions |
+| Generator | Circular-orbit radial-velocity law (new, with reference values and limiting cases); uneven dates (set values: supported); `source: 'observational'` declared; model curve on the examiner's graph (T6, exists). No Sketch part |
+| Validator | Period and amplitude recovered from noise-free data; the predicted date is not an observation (`predictAt`); the readings on the graph are inside the axes (T3); the shift is clearly larger than the scatter; the stem says the data are simulated (small T9 check, built with this dataset) |
+| Independent audit | Fit a sinusoid by a different method; recover the period and speed; check v ≪ c, so the approximation holds |
+| Assessment risk | MEDIUM: reading a period from unevenly spaced points needs a clear graph and a generous accepted range |
+| Originality risk | MEDIUM: legacy astrophysics option papers (2016, 2017, 2019, 2024) use spectroscopic binaries. The simplified sequence (period, speed, its uncertainty, prediction, method) must still be checked against them |
 | Review risk | **AMBER** (first D2; first `source:observational`). Must be inspected |
 
 ### 3.6 D2-B01 Charges on oil drops, with a miscalibrated voltmeter (D.2)
@@ -255,16 +259,16 @@ before a HIGH archetype can be GREEN) would make it AMBER.
 | E1-B01 | E.1 | M3 | 1 | 8 | image of a scale | none | 3 | AMBER / AMBER |
 | A2-B03 | A.2 | G1 | 2 | 10 | force-plate sensor | dense trace, area | 4 | AMBER / AMBER |
 | B2-B01 | B.2 | V1 | 2 | 9 | published planetary data | data against model line | 5 | AMBER / AMBER |
-| C5-B01 | C.5 | D2 | 3 | 11 | simulated observations | periodic | 6 | AMBER / AMBER |
+| C5-B01 | C.5 | D2 | 2 | 9 | simulated observations | periodic | 2 | AMBER / AMBER |
 | D2-B01 | D.2 | L3 + E2 | 3 | 10 | lab (model) | none / strip | 6 | AMBER / AMBER |
 | E4-B01 | E.4 | D1 | 2 | 9 | published reactor data | none | 3 | GREEN / AMBER |
 | C2-B01 | C.2 | V2 | 3 | 10 | phone sensor | curve levelling off | 7 | GREEN / AMBER |
-| **Total** | 8 topics | 8 different main archetypes | 2/3/3 | **76** | | | **38 (50 %)** | **3 GREEN, 5 AMBER, 0 RED** (with C1: 1 GREEN, 7 AMBER) |
+| **Total** | 8 topics | 8 different main archetypes | 2/4/2 | **74** | | | **34 (46 %)** | **3 GREEN, 5 AMBER, 0 RED** (with C1: 1 GREEN, 7 AMBER) |
 
 - **Diversity:** no apparatus or context family repeated; L3 is a main archetype in 2 of 8 (25 %, under the 35 % limit).
-- **Part marks:** 20 one-mark, 19 two-mark, 6 three-mark parts (45 parts; 42 % worth 2 marks, against 68 % in the bank). Typed parts in 5 of 8 datasets, about 10 marks.
+- **Part marks:** 20 one-mark, 18 two-mark, 6 three-mark parts (44 parts; 41 % worth 2 marks, against 68 % in the bank). Typed parts in 5 of 8 datasets, about 10 marks.
 - **Bank after Batch 2:** 21 datasets, about 201 marks, 17 of 19 SL topics, 22 of 26 archetypes (missing L4, G2, E4, D3),
-  difficulty 19 / 52 / 29 %, non-lab or non-primary data in 8 of 21.
+  difficulty 19 / 57 / 24 %, non-lab or non-primary data in 8 of 21.
 - **Proposed review:** inspect E1-B01, A2-B03, C5-B01 (first examples, visual or HIGH risk) and B2-B01 (first V1);
   inspect C2-B01 and E4-B01 (second HIGH-risk examples, real data); D2-B01 could be waived only if the calibration
   claim is fully automated (a MEDIUM-level reason under C6); A3-B01 as the GREEN sample. About 6–7 of 8 inspected:
