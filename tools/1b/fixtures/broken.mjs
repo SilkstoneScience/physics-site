@@ -148,8 +148,8 @@ export default [
     def: { ...E3, columns: { ...E3.columns, R: { ...E3.columns.R, propagation: { form: 'sum', terms: [{ single: 'Nb', coef: (p) => -1 / p.tb, unc: 'poisson' }], neglect: [{ of: 'N', unc: 'poisson', reason: 'test' }] } } } } },
   { name: 'propagation includes a quantity the formula doesn\'t use', expect: 'propagation',
     def: { ...C4, columns: { ...C4.columns, invL: { ...C4.columns.invL, propagation: { form: 'product', terms: [{ of: 'L', n: -1 }, { of: 'f', n: 1 }] } } } } },
-  { name: 'propagated uncertainty edited in the table', expect: 'propagation', def: C4,
-    mutate: (q) => editTable(q, (h) => h.replace(/(<td data-col="invL" data-row="0" data-unc="1">)([\d.]+)/, '$10.080')) },
+  { name: 'propagated uncertainty edited in the table', expect: 'propagation', def: E3,
+    mutate: (q) => editTable(q, (h) => h.replace(/(<td data-col="R" data-row="0" data-unc="1">)([\d.]+)/, '$19.9')) },
 
   // ----- Independent physics audit (generator vs independently derived physics) -----
   // The audit's original E3 error, written with valid units (a rate × a time), so only physics catches it.

@@ -232,8 +232,15 @@ function run(def, q, topics, fail, warn) {
     }
     // Uncertainty columns (one value per row)
     for (const [k, c] of cols) {
-      if (!perRowUncertainty(c) || c.show === false || c.showUncertainty === false) continue;
+      if (!perRowUncertainty(c) || c.show === false) continue;
       const where = `table row ${i + 1}, Δ${c.symbolText || c.symbol}`;
+      // An uncertainty kept internal (showUncertainty: false) is still checked: its declared propagation must match the
+      // column's own formula, because it still drives max/min lines and accepted ranges.
+      if (c.showUncertainty === false) {
+        if (cells.get(`${k}|${i}|u`)) fail('uncertainty', where, 'showUncertainty is false, but the table shows this uncertainty');
+        if (c.propagation) checkPropagation(def, c, k, i, row, p, { ...gen.singles }, fmtNum(uncertaintyOf(c, row, p, gen.singles, k, def), columnDp(c)), fail);
+        continue;
+      }
       const cell = cells.get(`${k}|${i}|u`);
       if (!cell) { fail('uncertainty', where, 'uncertainty cell missing'); continue; }
       if (cell.blank) continue;
@@ -759,12 +766,16 @@ function checkGraphReads(def, q, meta, fail, warn) {
     }
   }
   // P1: with errorBars 'too-small' no bars are drawn, so no question or mark scheme may refer to them.
-  // errorBars 'none': the uncertainty is not part of this question, so no question or mark scheme may use it.
-  if ([def.graph, def.rawGraph].some((g) => g && g.errorBars === 'none')) {
+  // errorBars 'none': the plotted quantity's uncertainty is not part of this question. So nothing may mention error bars,
+  // and that uncertainty must not be shown to students (showUncertainty: false on the column). Uncertainties of OTHER
+  // quantities may still be used (C4-B01 (e) uses the uncertainty in L).
+  for (const g of [def.graph, def.rawGraph].filter((x) => x && x.errorBars === 'none')) {
     const texts = [['the question text', q.stem], ...(q.parts || []).flatMap((pt) => [[`part (${pt.label}) question`, pt.question], [`part (${pt.label}) mark scheme`, (pt.markscheme || []).join(' ')]])];
     for (const [where, t] of texts) {
-      if (/error[- ]bars?|uncertaint|±|\pm/i.test(stripTags(t))) fail('graph-errorbar-text', where, 'mentions an uncertainty or error bars, but the graph declares errorBars: "none" (no part uses the uncertainty): use "too-small" or draw the bars instead');
+      if (/error[- ]bars?/i.test(stripTags(t))) fail('graph-errorbar-text', where, 'refers to error bars, but the graph declares errorBars: "none" (its uncertainty is not part of this question)');
     }
+    const c = def.columns[g.y];
+    if (c && c.uncertainty != null && c.showUncertainty !== false) fail('graph-errorbar-text', `column ${c.symbolText || c.symbol}`, 'the graph declares errorBars: "none", but the table still shows this quantity\'s uncertainty: set showUncertainty: false');
   }
   if ([def.graph, def.rawGraph].some((g) => g && g.errorBars === 'too-small')) {
     const texts = [['the question text', q.stem], ...(q.parts || []).flatMap((pt) => [[`part (${pt.label}) question`, pt.question], [`part (${pt.label}) mark scheme`, (pt.markscheme || []).join(' ')]])];

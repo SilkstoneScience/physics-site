@@ -293,7 +293,7 @@ Batch 2 work.
 - **Assessment quality not checked automatically:** ambiguity of wording, whether the intended interpretation is obvious, whether a question feels natural rather than engineered, realism as a teacher sees it, pedagogical level for SL students, fairness of mark allocation, command-term appropriateness, alternative valid student methods.
 - **Validator blind spots found in Batch 1:** context families, too-regular data, values outside the graph axes and giveaways are now checked (Phase 12). Still not checked: command terms.
 - **Secondary data:** values are now checked against a stored copy of the source (T10), but the copy itself is made by a person, and choosing the right source quantity (e.g. sidereal versus anomalistic period) still needs one.
-- **C4-B01 (approved pilot):** its error bars are hidden under the point markers (P1 warning); fixing it changes its caption, so it needs the teacher's agreement to reset.
+- **Awaiting re-approval (8 October 2026):** A2-B02 (part (d) replaced: the elastic limit is not SL) and C4-B01 (no error bars, no unused uncertainties, Δ(1/L) column removed). Until then, 11 datasets are approved on `paper1b-batch2`.
 - **Empirical models:** B1-B02 (Newton's law of cooling) and A2-B02 (yield beyond the limit) use laws beyond the syllabus. They are not shown to students but were judged by the teacher, not proven.
 - **Physics-review records:** PHYSICS-REVIEWED for Batch 1 used one standard note for all 8 datasets; the note should become dataset-specific.
 - **Evidence for the risk rules is thin:** 5 inspections, 0 issues found by the teacher, and only 1 GREEN dataset inspected.

@@ -587,9 +587,12 @@ export async function runTests() {
     check('errorBars "none": no error bars, no max/min lines and no mention of uncertainty in any caption or alt text',
       figs.every((f) => !/class="ebar"|data-fit="(max|min)"/.test(f.svg) && !/error bar|uncertaint/i.test(`${f.caption} ${f.alt}`)));
     check('showUncertainty: false: the table heading gives no ± for T', !/±/.test(table.html));
-    const mentions = editPartLocal(c1, 'a', (pt) => ({ ...pt, markscheme: ['The points lie on a curve, beyond the uncertainty in each period ✓', ...pt.markscheme.slice(1)] }));
-    check('errorBars "none": a mark scheme that uses the uncertainty is an error',
+    const mentions = editPartLocal(c1, 'a', (pt) => ({ ...pt, markscheme: ['No straight line passes through the error bars ✓', ...pt.markscheme.slice(1)] }));
+    check('errorBars "none": a mark scheme that refers to error bars is an error',
       validateDataset(mentions, buildQuestion(mentions).question, { topics }).some((x) => x.code === 'graph-errorbar-text' && x.level === 'error'));
+    const shown = { ...c1, columns: { ...c1.columns, T: { ...c1.columns.T, showUncertainty: true } } };
+    check('errorBars "none": still showing the plotted quantity\'s uncertainty in the table is an error',
+      validateDataset(shown, buildQuestion(shown).question, { topics }).some((x) => x.code === 'graph-errorbar-text' && x.where.startsWith('column')));
     check('errorBars "none": the uncertainty still proves the raw data are not linear (claim checked internally)',
       !validateDataset(c1, q, { topics }).some((x) => x.level === 'error'));
   }

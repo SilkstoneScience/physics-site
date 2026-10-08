@@ -168,6 +168,9 @@ oscillations), so they were **not** enlarged. The presentation and wording were 
 | C1-B01 | No part uses error bars or uncertainties: don't mention them at all, and leave the uncertainty out of the table heading | New options: `errorBars: 'none'` (nothing drawn or said; any part mentioning an uncertainty is an error; no steepest and shallowest lines on the examiner's graph) and `showUncertainty: false` (the uncertainty stays internal, used only by the validator, e.g. to prove the raw data are not linear). Table heading now "period T / s"; the stem's uncertainty sentence and the (a) mark-scheme reference are removed | **APPROVED** (individual, inspected) |
 | B3-B01 | (b)→(c) asked about an uncertainty never calculated; don't just remove error bars that are too small: zoom the graph to 0–100 °C and extrapolate algebraically; use T, not θ | Redesigned: graph 0–100 °C, 90–130 kPa, taller, ±0.5 kPa bars now visible (about 5 units); parts (a) ratio test, (b) gradient and p-intercept, (c) absolute zero by T = −c/m, (d) steepest and shallowest lines → uncertainty (about ±8 °C), (e) percentage difference (0.4 %) against percentage uncertainty (about 3 %), (f) prediction at 100 °C; 12 marks. The independent audit was updated for the new part letters | **APPROVED** (individual, inspected) |
 
+| A2-B02 (again) | Part (d) asked about the elastic limit and the limit of proportionality, which are not in the SL guide (A.2 has only Hooke's law) | (d) replaced: would k from one line through all nine points be larger or smaller than (b)? (smaller: about 8200 against 9470 N m⁻¹), checked by a new `compare` claim. Elastic-limit text removed | AUTO-VALIDATED: awaiting the teacher's look |
+| C4-B01 (approved pilot) | Option 3: treat like C1-B01 | `errorBars: 'none'`; no ± on f; the Δ(1/L) column removed (it gave away most of part (e)); x bars no longer drawn (the 1/L uncertainty stays in the undrawn max/min lines, so accepted ranges are unchanged). Internal-only uncertainties are still checked against their propagation | AUTO-VALIDATED: awaiting the teacher's look |
+
 **B3-B01 (e):** with y error bars only, −273 °C is only about 1.5 % inside the steepest/shallowest-line range (the
 verdict rule needs 4 %), so students' own lines could give either conclusion. **Teacher's decision:** keep (e) and credit a
 conclusion consistent with the candidate's own uncertainty. So (e) carries no verdict claim, and an author flag
@@ -200,7 +203,7 @@ Batch 1 was accepted as `batch-1`, and `accept-batch` refuses a batch that has a
 2. ~~C5-B01~~: simplified, and simulated observations clearly labelled as simulated approved (8 October 2026; plan section 3.5).
 3. ~~The area accepted-range policy (T7)~~ (adopted 8 October 2026); ~~the empirical laws (bounce, force pulse) and the exact line-source law~~ (approved 8 October 2026); ~~the external sources (NIST, NASA planetary, IAEA PRIS)~~ (approved 8 October 2026).
 4. ~~The retrospective's proposals C1–C6~~: decided 8 October 2026: **C1 adopted** (a HIGH-risk archetype needs two individually inspected examples in different context families before later examples can be GREEN; `HIGH_RISK_EXAMPLES_NEEDED` in `batch.mjs`); **C2 not adopted for now**; C3 and C4 already built (T1, T2); **C5 no change**; **C6 adopted** (first and second examples of a HIGH-risk archetype can't be waived; `accept-batch` refuses). Tests: 7.
-5. C4-B01's invisible error bars (approved pilot).
+5. ~~C4-B01's invisible error bars~~: redesigned like C1-B01 (8 October 2026); awaiting re-approval with A2-B02.
 
 ## 7. For Phase 13: rules to make permanent in the specification (once agreed)
 
