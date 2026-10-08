@@ -72,7 +72,7 @@ git status
 ```
 node tools/1b/test.mjs
 ```
-Expect "✓ All 547 Paper 1B tests passed" (more if tests have been added since).
+Expect "✓ All 558 Paper 1B tests passed" (more if tests have been added since).
 
 ### 6. Run the Paper 1B build
 ```

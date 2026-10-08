@@ -26,7 +26,7 @@ teacher decision.
 | `main` | `4ca0f74` "Merge contact form on the About page" (7 October 2026), **pushed** (local = GitHub). Batch 1 reached `main` in `a9f8c58`; the 26 later commits are general website work (EE page, Resources, guiding questions, photos, copyright notice, contact form) and don't touch Paper 1B (`questions/1b.json` and `tools/1b/` are unchanged since `a9f8c58`) |
 | Batch 1 | **Live.** Merged into `main` and pushed |
 | Approved and published Paper 1B datasets | **On `main`: 13** (5 pilots + 8 Batch 1). **On `paper1b-batch2`: 13.** A2-B01, A2-B02, B3-B01 and C1-B01 were reset in Phase 12 (presentation changes, Batch 1 reopened by the teacher) and re-approved individually by the teacher on 8 October 2026 (B3-B01 redesigned) |
-| Tests / checker | Phase 12 (8 October 2026, on `paper1b-batch2`): **547 of 547** Paper 1B tests pass; build: 13 APPROVED; site checker: no errors, 1 warning (C4-B01 error bars too small to see) |
+| Tests / checker | Phase 12 (8 October 2026, on `paper1b-batch2`): **558 of 558** Paper 1B tests pass; build: 13 APPROVED; site checker: no errors, no warnings |
 
 ### Development branches
 
@@ -201,7 +201,7 @@ Assumes the repository is cloned, Node.js is installed (`winget install OpenJS.N
    `main` has moved on since the branch last merged it, merge `main` into `paper1b-batch2` before starting new work.
 2. **Per-computer setup:** create `CLAUDE.local.md` (not in git) recording where `physics-source` and the reference cache are on that computer (see `CLAUDE.md`).
 3. **Dependencies:** none to install.
-4. **Run the tests:** `node tools/1b/test.mjs` (expect "All 547 Paper 1B tests passed", or more if tests were added).
+4. **Run the tests:** `node tools/1b/test.mjs` (expect "All 558 Paper 1B tests passed", or more if tests were added).
 5. **Build the Paper 1B files:** `node tools/1b/build.mjs`. It should end with "Production (questions/1b.json): 13 APPROVED dataset(s)" and rebuild the local preview, which isn't stored in git.
 6. **Run the site checker:** `node tools/check.mjs` (expect "No errors").
 7. **Start the preview:** double-click `preview.bat` (or the PowerShell command above), then open http://localhost:8000.
@@ -293,7 +293,7 @@ Batch 2 work.
 - **Assessment quality not checked automatically:** ambiguity of wording, whether the intended interpretation is obvious, whether a question feels natural rather than engineered, realism as a teacher sees it, pedagogical level for SL students, fairness of mark allocation, command-term appropriateness, alternative valid student methods.
 - **Validator blind spots found in Batch 1:** context families, too-regular data, values outside the graph axes and giveaways are now checked (Phase 12). Still not checked: command terms.
 - **Secondary data:** values are now checked against a stored copy of the source (T10), but the copy itself is made by a person, and choosing the right source quantity (e.g. sidereal versus anomalistic period) still needs one.
-- **Awaiting re-approval (8 October 2026):** A2-B02 (part (d) replaced: the elastic limit is not SL) and C4-B01 (no error bars, no unused uncertainties, Δ(1/L) column removed). Until then, 11 datasets are approved on `paper1b-batch2`.
+- **Re-approved on 8 October 2026:** A2-B02 (part (d) replaced: the elastic limit is not SL) and C4-B01 (no error bars, no unused uncertainties, Δ(1/L) column removed). All 13 datasets are approved on `paper1b-batch2`.
 - **Empirical models:** B1-B02 (Newton's law of cooling) and A2-B02 (yield beyond the limit) use laws beyond the syllabus. They are not shown to students but were judged by the teacher, not proven.
 - **Physics-review records:** PHYSICS-REVIEWED for Batch 1 used one standard note for all 8 datasets; the note should become dataset-specific.
 - **Evidence for the risk rules is thin:** 5 inspections, 0 issues found by the teacher, and only 1 GREEN dataset inspected.
