@@ -331,7 +331,8 @@ archetype risk levels it uses (`ARCHETYPE_RISK` in `tools/1b/batch.mjs`).
 
 How these feed the dataset risk classes (specification 16.2): the first example of a MEDIUM or HIGH archetype is
 **AMBER**; once one example has been individually reviewed and approved, later examples are judged by their own
-features. The first example of a LOW archetype is **GREEN** but preferred for the teacher's sample. Other AMBER
+features. **HIGH-risk archetypes need two** individually reviewed examples in different context families before later
+examples can be GREEN, and their first and second examples can never be waived (rules C1 and C6, adopted 8 October 2026). The first example of a LOW archetype is **GREEN** but preferred for the teacher's sample. Other AMBER
 triggers (first use of a judgement-heavy feature, an uncertainty-sensitive verdict, validator warnings, author
 flags) apply whatever the archetype. Difficulty 3 is not a trigger by itself.
 

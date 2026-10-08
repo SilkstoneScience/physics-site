@@ -20,7 +20,13 @@ outside this repository. For the full state of the project, read `docs/PAPER1B_P
 - **`paper1b-batch2`**: the **current** branch for Batch 2 development, on GitHub. Created from `main` at `a9f8c58`, then
   brought up to date with production `main` (`4ca0f74`) on 8 October 2026.
 
-### Batch 2 status
+### Batch 2 status (8 October 2026)
+- **Planned and confirmed:** 8 datasets in `docs/PAPER1B_BATCH2_PLAN.md`; every teacher decision is made.
+- **Tooling ready (Phase 12)** and **rules in the specification (Phase 13, version 2)**. All 13 existing datasets are APPROVED
+  (5 were changed and re-approved on 8 October; `main` still has the 6 October versions until a merge).
+- **Next:** generate Batch 2 into the local preview, run the full QA, then the teacher reviews each dataset.
+- The stored NASA source copy for D1-B01 lives outside the repository, in the reference cache
+  (`reference-cache/p1b-sources/`). On a computer without it, the build shows a warning (not an error) for D1-B01.
 - **Batch 2 has NOT been generated.**
 - No Batch 2 dataset is approved, and none is in production.
 - Batch 2 development begins from the current production `main`, on `paper1b-batch2`.

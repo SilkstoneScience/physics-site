@@ -318,8 +318,8 @@ When you return, in this order (detailed commands in `docs/PAPER1B_CONTINUATION.
 
 1. **Check out `paper1b-batch2`** and verify it: tests pass, the build reports 13 APPROVED datasets, the checker reports no errors, and `git log -1 main` shows the production commit.
 2. **Read** this file, `docs/PAPER1B_PHASE12_TOOLING.md` and `docs/PAPER1B_BATCH2_PLAN.md`.
-3. **Teacher decisions** (`docs/PAPER1B_PHASE12_TOOLING.md`, section 6): C5-B01; the area-range policy, empirical laws and external sources; proposals C1–C6; C4-B01.
-4. **Phase 13:** make the agreed Phase 12 rules permanent in the specification (section 7 of that document).
+3. ~~**Teacher decisions**~~: all made on 8 October 2026 (`docs/PAPER1B_PHASE12_TOOLING.md`, section 6).
+4. ~~**Phase 13**~~: done 8 October 2026: the agreed rules are now in `docs/PAPER1B_SPECIFICATION.md` (version 2).
 5. ~~**Plan check:** confirm the final Batch 2 list~~: confirmed by the teacher on 8 October 2026 (8 datasets, `docs/PAPER1B_BATCH2_PLAN.md`).
 6. **Generate Batch 2** on `paper1b-batch2` (`batch: 'batch-2'`).
 7. **Run automated QA and the independent physics audit:** build, tests, `review.mjs batch batch-2`, `ao.mjs --batch batch-2`, site checker.

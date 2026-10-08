@@ -1,6 +1,8 @@
 # Paper 1B question bank: design specification
 
-Version 1, 6 October 2026. Branch `paper-1b`. This file is in `docs/`, which `_config.yml` keeps off the published website.
+Version 2, 8 October 2026 (Phase 13: the rules built and agreed in Phase 12 made permanent; version 1: 6 October 2026).
+Branch `paper1b-batch2`. This file is in `docs/`, which `_config.yml` keeps off the published website. Implementation
+details and reasons for the version 2 rules: `docs/PAPER1B_PHASE12_TOOLING.md`.
 
 This is the **authoritative design specification** for the Paper 1B system. Where it conflicts with an older note
 (including `docs/PAPER1B_HANDOFF.md` or `tools/1b/README.md`), this file wins for *design*; the README remains the
@@ -117,6 +119,7 @@ and requires the student to do something with it.
 
    New questions should prefer giving the relationship and testing it (section 13). *(Revised 6 October 2026 after the pilot audit: the earlier blanket "1 content-only mark" rule would have counted A1 (d), C4 (b) and D3 (a) as violations although each sets up the analysis that follows. They are within the revised rule; see section 18.)*
 6. **Not IA:** no part asks the student to design a whole investigation.
+7. **SL content only, in every part:** any law, definition or term a student needs for a mark must be in the SL guide. A term outside it may not be needed for a mark, even in a mark scheme (A2-B02 (d) asked about the elastic limit and the limit of proportionality, which the guide's A.2 doesn't include; it was replaced on 8 October 2026). **[IB]** content + **[Design]**
 
 ---
 
@@ -130,18 +133,21 @@ So **not every dataset is a laboratory experiment**. **[Design]**
 | Context type | Example | Data origin | Status |
 |---|---|---|---|
 | Hands-on experiment | current balance, spring launcher | primary, generated from a model with measurement scatter | supported |
-| Sensor or data-logger experiment | light sensor, motion sensor, force sensor | primary; finer resolution, more points, sensor-specific noise | supported (no sensor-specific noise type yet) |
-| Image or video analysis | multiflash photograph, trace on a grid | primary, read from a figure | **roadmap** |
+| Sensor or data-logger experiment | light sensor, motion sensor, force sensor | primary; finer resolution, more points, sensor-specific noise | supported, including dense sensor traces (section 14; no sensor-specific noise type yet) |
+| Image or video analysis | multiflash photograph, an instrument scale, heights read from video frames | primary, read from a figure | supported: instrument scales with read-back (section 15); video data given as a table |
 | Field investigation | temperature of a pond over a day, sound level against distance outdoors | primary; uncontrolled variables matter | supported in principle |
-| Database or secondary data | catalogue of stars, published material constants | secondary, real values with provenance | **roadmap** |
-| Astronomical observation | brightness of a variable star against time | secondary or simulated observational | **roadmap** (depends on SL topics E.5, A/E) |
+| Database or secondary data | catalogue of stars, published material constants | secondary, real values with provenance | supported: provenance, source column definitions and a stored copy of the source (section 10) |
+| Astronomical observation | brightness of a variable star, a binary star's spectral lines | secondary, or **simulated observations, clearly labelled as simulated** | supported (simulated observations approved by the teacher, 8 October 2026) |
 | Simulation or computational output | modelled field profiles for three set-ups | model output, no measurement scatter | **roadmap** |
-| Model vs experimental data | data plotted against a theoretical curve | both | partly supported (claims, `agrees`) |
+| Model vs experimental data | data plotted against a theoretical curve or an "observed = model" line | both | supported: model curves and reference lines (section 14), observed published values (section 10) |
 | Theory or model testing | "does this relationship hold, and over what range?" | any | partly supported |
 | Analogue model | foam decay compared with radioactive decay | primary, empirical model | **roadmap** |
 
-[Impl] The `context` field currently allows `experimental`, `observational` and `unfamiliar`. A `source` field
-(`primary`, `secondary`, `model`) is on the roadmap (section 19).
+[Impl] The `context` field allows `experimental`, `observational` and `unfamiliar`; the `source` field (`primary`,
+`secondary`, `observational`, `model`) says where the data come from.
+
+**Simulated observations** (data generated from a model to look like real observations, such as a binary star's spectral
+lines) are allowed **only when the question says clearly that the data are simulated**. **[Design]** (teacher, 8 October 2026)
 
 Bank mix **[Design]**: mostly primary laboratory data (as in the real papers), with **about one question in five**
 using secondary, model, image or observational data once the generator supports them. Exact share: teacher decision.
@@ -174,19 +180,19 @@ Source column: **IB** = named in the 2025 guide; **L** = assessed in legacy Sect
 |---|---|---|---|
 | GR1 | Interpret a graph or chart (read values, describe features) | IB, L, 25 | ✓ |
 | GR2 | Plot a point (raw or processed) | IB, L, 25 | ◐ (point can be omitted; self-marked) |
-| GR3 | Draw uncertainty bars | IB, L, 25 | ◐ (drawn by generator, not by student) |
+| GR3 | Draw uncertainty bars | IB, L, 25 | ◐ (drawn by generator, y bars only, not by student; section 14) |
 | GR4 | Line of best fit (through all error bars) | IB, L, 25 | ✓ (examiner graph, self-marked) |
 | GR5 | Curve of best fit | IB, L | ◐ (exponential only) |
 | GR6 | Gradient, with unit | IB, L, 25 | ✓ |
 | GR7 | Intercept and its physical meaning | IB, L, 25 | ✓ |
 | GR8 | Maximum and minimum gradient lines | IB, L, 25 | ◐ (computed; not a student task) |
 | GR9 | Uncertainty in gradient and in intercept | IB, L, 25 | ◐ (gradient only, given as a %) |
-| GR10 | Area under a graph | IB | ✗ |
+| GR10 | Area under a graph | IB | ✓ (area results with the accepted-range policy, section 14) |
 | GR11 | Changes in gradient; tangent to a curve | IB, L (1) | ✗ |
 | GR12 | Interpolation | IB, L, 25 | ✓ |
 | GR13 | Extrapolation and its limits | IB, L, 25 | ◐ (no "model limit" check) |
 | GR14 | Linearisation: choosing what to plot; meaning of transformed gradient and intercept | IB ("only where appropriate"), L 14/17, 25 | ✓ |
-| GR15 | Logarithmic representations: log columns, log–log and semi-log analysis, log scales | IB (all students), L (HL), 25 | ✗ |
+| GR15 | Logarithmic representations: log columns, log–log and semi-log analysis, log scales | IB (all students), L (HL), 25 | ◐ (log columns on linear axes; no log scales) |
 | GR16 | Sketch a graph with labelled but unscaled axes | IB, L | ✗ |
 
 ### 5.3 Experimental reasoning (EX)
@@ -196,7 +202,7 @@ Source column: **IB** = named in the 2025 guide; **L** = assessed in legacy Sect
 | EX2 | Justify why a variable is controlled, or how | IB, L | ✓ |
 | EX3 | Apparatus and instrument choice, set-up, meter placement | IB (measuring variables), L, 25 | ◐ |
 | EX4 | Measurement technique (parallax, zero error, timing many cycles, measuring across many fringes) | IB, L, 25 | ◐ |
-| EX5 | Reading an instrument scale or an image | IB (Tool 2), L, 25 | ✗ |
+| EX5 | Reading an instrument scale or an image | IB (Tool 2), L, 25 | ✓ (instrument scales with read-back, section 15) |
 | EX6 | Justify a step in the method | IB, L, 25 | ✓ |
 | EX7 | Range and number of measurements | IB | ✓ (text) |
 | EX8 | Purpose of repeated measurements | IB, L, 25 | ✓ |
@@ -222,8 +228,8 @@ Source column: **IB** = named in the 2025 guide; **L** = assessed in legacy Sect
 | IN1 | Describe patterns and trends | IB, L, 25 | ✓ |
 | IN2 | Identify relationships: direct, inverse, power, exponential | IB, L, 25 | ◐ (linear and exponential fits) |
 | IN3 | Proportionality from a graph (straight line through origin within error bars) | IB, L 7/17 | ✓ |
-| IN4 | Proportionality or non-proportionality from table ratios | L, 25 | ✗ |
-| IN5 | Recognise a non-linear relationship from error bars | L, 25 | ✗ |
+| IN4 | Proportionality or non-proportionality from table ratios | L, 25 | ✓ (constant-value and constant-ratio claims) |
+| IN5 | Recognise a non-linear relationship from error bars | L, 25 | ✓ (not-linear claim) |
 | IN6 | Compare data with a model or theory | IB, L, 25 | ✓ |
 | IN7 | Predict from a model or graph | IB, L, 25 | ✓ |
 | IN8 | Evidence for or against a hypothesis | IB, L, 25 | ✓ |
@@ -366,9 +372,10 @@ Every numerical dataset is generated from an **explicit physical model** whereve
 
 Rules **[Design]**:
 - No formula typed directly into a dataset; a missing law is added to `laws.mjs` with reference values and limiting cases first.
-- **Empirical models** (an analogue system, an observed trend with no syllabus law) are allowed only with a stated physical basis, a documented functional form and an independent audit; they are marked as empirical in the audit report. *(Roadmap.)*
-- **Secondary data** (database values) are not generated from a model: they need provenance, must be checked against the model they test, and must not have invented scatter added. *(Roadmap.)*
-- **Model or simulation output** shown as "simulation data" has no measurement noise and must say so. *(Roadmap.)*
+- **Empirical models** (an analogue system, an observed trend with no syllabus law) are allowed only with a stated physical basis, a documented functional form, an independent audit and the teacher's approval; they are marked as empirical in the audit report. Laws beyond the SL syllabus are used only to generate data: students are always given the relationship a part needs.
+- **Secondary data** (database values) are not generated from a model and must not have invented scatter added. They need provenance (source, address, date, values taken, transformations), **the source's own column heading and its meaning** for every published column, and **a stored copy of the values as printed**, kept outside the repository in the reference cache, with its checksum; every value must match the copy. **[Design]** (Phase 12, T10)
+- Published values are normally checked against the model they test (within a stated tolerance). Values the question **compares** with a model rather than expecting to follow it (observed planetary temperatures against a no-atmosphere model) are declared **observed**, with a reason; they still need their source checked.
+- **Model or simulation output** shown as "simulation data" has no measurement noise and must say so. *(Roadmap.)* **Simulated observations** carry realistic scatter and must be labelled as simulated (section 4).
 
 ---
 
@@ -393,6 +400,12 @@ All of the following are mandatory before a dataset can be AUTO-VALIDATED. **[De
 | Independent audit | physics re-derived from first principles without the generator's laws or maths; dimensions, limiting cases, magnitudes, published answers | `independent.mjs` |
 | Determinism and freeze | identical output twice; reviewed datasets unchanged (fingerprint) | `build.mjs`, `fingerprint.mjs` |
 | Diagrams | alt text, theme colours, vectors, circuits, standing-wave loops | `validate.mjs` (diagram, vector, circuit) |
+| Realistic data | measured data not cleaner than their declared measurement (section 12) | `safeguards.mjs` (regular-data) |
+| Graph reads | every value a part reads from a graph is on that graph's axes; points to plot fit on the axes | `validate.mjs` (graph-read) |
+| Giveaways | no answer, unit, relationship or conclusion appears before the part that asks for it (section 13) | `validate.mjs` (giveaway) |
+| Error bars | y error bars only; bars that can't be seen are declared and stated instead; unused uncertainties aren't shown (section 14) | `validate.mjs` (graph-errorbar…) |
+| Instrument scales | each mark read back from the drawing matches the data within half a division; divisions readable on a phone (section 15) | `validate.mjs` (scale-read) |
+| Published sources | every published value matches the stored copy of its source | `validate.mjs` (provenance, source-extract) |
 
 **Passing validation is never approval.** What automation cannot check (whether the chosen model matches the wording,
 pedagogy, originality, clarity) is the reviewers' job. **[Design]**
@@ -413,6 +426,8 @@ New checks required by this specification are listed in section 19.
 | Meaningful ranges | independent variable spans enough of its range to show the relationship; parameters within real school or published ranges |
 | Number of measurements | typically 5–8 values of the independent variable; repeats (3–5) where the method would repeat; fewer only when the question is about having too few |
 | Data quality | not perfectly clean: points scatter about the line within their error bars; an "ideal" dataset is used only when the question needs model data, and is labelled as model or simulation output |
+| Too-regular data | measured data are reported (AMBER) when at least 80 % of successive steps are identical, the scatter about the model is under 0.35 of what the declared noise and rounding predict, the ratio to the independent variable is identical to 3 s.f. in at least 80 % of rows, or every value ends in the same digit. A physically intended relationship is never rejected. If an instrument genuinely reads that way, the author states the reason and a person agrees (the dataset stays AMBER) |
+| Uncertainty shown | an uncertainty is shown to students only if a part uses it; otherwise it stays internal (used for validation and accepted ranges) |
 | Plausibility check | expected magnitudes declared and checked; teacher confirms the set-up is realistic |
 
 ---
@@ -423,7 +438,7 @@ New checks required by this specification are listed in section 19.
 2. **One clear task per sub-question.** Two-value tasks are split or explicitly asked for together (for example "value and absolute uncertainty").
 3. **Mark allocation**: one mark per creditable step or point; 1–4 marks per part; marks shown on every part; each question 5–12 marks.
 4. **No unnecessary cognitive load**: short stems, symbols defined once, units stated, no irrelevant data unless the task is to select data.
-5. **No giveaways**: a part must not state or imply an answer that an earlier or later part asks for. Stated intermediates (section 6.3) are allowed only for values whose working is not itself assessed in the same question, or are given *after* the part that asks for them.
+5. **No giveaways**: a part must not state or imply an answer that an earlier or later part asks for. Stated intermediates (section 6.3) are allowed only for values whose working is not itself assessed in the same question, or are given *after* the part that asks for them. **Checked** [Impl: T4]: no result's value may appear in the stem, figure text, earlier questions or earlier mark schemes before the part whose mark scheme establishes it; a part's declared answer (a relationship such as $T^2$, a unit, or the conclusion of a "whether" question) may not appear earlier. A "whether" question must declare its conclusion. A table whose columns hand students most of a later part's working is also a giveaway (C4-B01's Δ(1/L) column was removed for this reason).
 6. **No unexplained constants**: every constant is in the data booklet, stated in the question with its source, or in the data.
 7. **Traceability**: every number in stems, mark schemes, captions and alt text comes from the dataset, the model or a stated constant **[Impl: traced helpers, whitelist 0–12 and 100]**.
 8. **Units**: SI by default; non-SI units stated (and converted where needed); negative powers in MathJax.
@@ -431,6 +446,8 @@ New checks required by this specification are listed in section 19.
 10. **Typed answers**: single-number answers only, unrounded value stored, accepted range from the data; not for "show that", explain, or two-value parts.
 11. **Self-marked parts**: drawing, sketching and plotting tasks show the examiner's figure in the mark scheme.
 12. **Accessibility**: tables readable at 375 px; figures have full alt text; a blank cell has a screen-reader label.
+13. **Graph reads**: every value a part expects students to read from a graph (an intercept, a point, a prediction) is declared and must lie on that graph's axes; wording that implies reading from a graph without a declaration is reported. Do not solve an off-axis value by stretching every axis: choose axes that suit the question.
+14. **Error-bar wording**: no question or mark scheme refers to error bars that the graph doesn't draw; refer to the stated uncertainty instead (section 14).
 
 ---
 
@@ -441,23 +458,34 @@ Rules **[Design]**:
 - **Never** draw a graph by hand and invent data to match it.
 - **Never** show a trend inconsistent with the numerical data (the validator reads the SVG back).
 - **Never** alter uncertainty bars for appearance; fix visibility in the drawing only (markers r = 3.2, bars drawn on top).
+- **Y error bars only** are drawn. An x uncertainty may still count in the steepest and shallowest lines when no bars are drawn. (Two pilots approved earlier keep drawn x bars.)
+- **Error bars must be visible when drawn.** A bar shorter than the marker plus 1.5 units is hidden, so students can't use it. When uncertainty matters to the question, first choose axes and a graph size that make the bars visible (zoom to the data, a taller plot), as for B3-B01 and B5-B01.
+- If the bars still can't be seen but the uncertainty matters, the graph declares them **too small to show**: no bars are drawn and the caption states the uncertainty ("The uncertainty in extension (±1 mm) is too small to show as error bars.").
+- If **no part uses** the plotted quantity's uncertainty, the graph shows **no error bars and says nothing about them**, the table doesn't show that uncertainty, and the examiner's graph has no steepest and shallowest lines. The uncertainty stays internal for validation (C1-B01, C4-B01).
+- **Area under a graph**: the accepted range must include the value ± 5 % and the count-the-squares estimate on the students' graph (whole small squares plus half the part squares), and must be no wider than ± 20 % of the value. **[Design]** (teacher, 8 October 2026)
+- A shaded area, a model curve or a line of best fit appears only on the examiner's graph; a reference line (such as observed = model) may appear on both, but never on top of the line of best fit.
+- **No duplicate tables**: a table is shown when it serves a purpose (calculation, transformation, averaging, uncertainty, precision a graph can't give). When a graph or image shows everything students need, there may be no student table; the complete data remain internal for validation.
 - Students' graphs carry no fit lines; the examiner's graph (mark scheme) shows best fit and, where used, max/min lines.
 - Axes labelled `quantity / unit`, evenly spaced ticks, sensible scales; graph text readable on phones.
 
 | Graph type | Status [Impl] |
 |---|---|
-| Scatter with error bars (y; x optional) | supported |
+| Scatter with error bars (y only drawn) | supported |
+| Points only, no fit (`fit: 'none'`) | supported |
+| Error bars too small to show, stated in the caption; or none when unused | supported |
+| Sensor trace (a line through every reading, no markers) | supported |
 | Linear best fit; max/min gradient lines | supported |
 | Exponential best-fit curve | supported |
 | Omitted point for students to plot | supported (self-marked) |
 | Origin included or not (`zero`) | supported |
-| Log–log and semi-log (log columns plotted on linear axes) | **required before scaling** (GR15) |
+| Log–log and semi-log (log columns plotted on linear axes) | supported |
 | Logarithmic axis scales | useful during scaling |
 | Power-law and other non-linear best-fit curves | useful during scaling |
 | Tangent at a point (examiner graph) | useful during scaling |
-| Multiple series on one graph (two set-ups, model vs data) | future |
-| Model curve over data (theory vs experiment) | future |
-| Area under a graph tasks | future |
+| Multiple series on one graph (two set-ups) | future |
+| Model curve over data (examiner's graph); reference line such as observed = model | supported |
+| Area under a graph, with the area shaded on the examiner's graph | supported |
+| Taller plot for one graph (drawing only) | supported |
 | Axis-break symbol | future |
 | Bar charts, histograms | future (only if a context needs them) |
 
@@ -478,7 +506,8 @@ Rules **[Design]**:
 | Circuits from a netlist (meter placement checked) | current |
 | Projectile launcher with exact path | current |
 | Vibrating string with exact standing-wave envelope | current |
-| Instrument scales to read (ruler, protractor, caliper with zero error, analogue meter) | **required before scaling** (EX5) |
+| Instrument scale to read (straight scale with marks: a spectroscope, a ruler, a meter drawn straight); smallest division at least 6 units wide; marks read back within half a division; the reading uncertainty at least half a division | supported |
+| Protractor, caliper with zero error, round analogue dial | future |
 | Multiflash or video-frame images; trace on a grid | useful during scaling |
 | Ray diagrams, wavefronts, field lines | future |
 | Thermal set-ups (calorimeter, heater, insulation) | future |
@@ -505,8 +534,8 @@ decision, and the record always says whether the teacher inspected each dataset 
 |---|---|
 | 1 Validation (section 11) | ✓ `validate.mjs` |
 | 2 Independent physics audit | ✓ `independent.mjs` |
-| 3 Assessment quality | ✓ AO tags and report, verdict margins, unit and value ± uncertainty parts, marks per question. To build: data-dependence and command-term checks, prediction-not-at-a-measured-row |
-| 4 Diversity and originality | ✓ batch diversity (same apparatus twice; one archetype over 35 %); every dataset needs an `originality` note. To build: comparison with a local index of IB contexts (kept outside the repository) |
+| 3 Assessment quality | ✓ AO tags and report, verdict margins, unit and value ± uncertainty parts, marks per question, prediction not at a measured row, graph reads, giveaways, error-bar visibility, too-regular data. To build: data-dependence and command-term checks |
+| 4 Diversity and originality | ✓ batch diversity: the same apparatus, **context family** or main object twice in a batch; a family already used by 2 other datasets or an object by 3 in the bank; one archetype over 35 %. Every dataset declares its context family and objects and needs an `originality` note. To build: comparison with a local index of IB contexts (kept outside the repository) |
 | 5 Risk classification | ✓ `batch.mjs` |
 
 ### 16.2 Risk classes (automatic) **[Design]**
@@ -514,16 +543,19 @@ decision, and the record always says whether the teacher inspected each dataset 
 | Class | Meaning | Triggers [Impl: `classify` in `batch.mjs`] |
 |---|---|---|
 | **RED** | must be fixed; cannot be accepted or waived | a validation or independent-audit error; the dataset changed since review; an author flag marked serious (e.g. `originality-serious`); an unresolved HIGH issue |
-| **AMBER** | passes, but human judgement is appropriate | first example of a MEDIUM- or HIGH-risk archetype (risk in `docs/PAPER1B_ARCHETYPE_MATRIX.md`); first use of a judgement-heavy feature (systematic effects, secondary/model/observational data, empirical models, validity ranges, log graphs, tangents, areas, instrument images) that no individually reviewed APPROVED dataset has used; an uncertainty-sensitive conclusion (a verdict less than twice the minimum margin from its range edge); any validator warning; an author's review flag; no archetype or no originality note |
+| **AMBER** | passes, but human judgement is appropriate | first example of a MEDIUM- or HIGH-risk archetype (risk in `docs/PAPER1B_ARCHETYPE_MATRIX.md`); a HIGH-risk archetype with fewer than two individually inspected examples in different context families (rule C1); a missing, unknown or incomplete context family; data the author accepted as regular; first use of a judgement-heavy feature (systematic effects, secondary/model/observational data, empirical models, validity ranges, log graphs, tangents, areas, instrument images) that no individually reviewed APPROVED dataset has used; an uncertainty-sensitive conclusion (a verdict less than twice the minimum margin from its range edge); any validator warning; an author's review flag; no archetype or no originality note |
 | **GREEN** | all automated checks pass; established archetype and features; no unusual assessment risk | everything else. The first example of a LOW-risk archetype is GREEN but is preferred for the sample |
 
 An archetype or feature is **established** once an APPROVED, unchanged dataset that the teacher **inspected
-individually** uses it. Batch-approved datasets that were not inspected never establish anything.
+individually** uses it. A **HIGH-risk** archetype needs **two** such datasets in **different context families** (rule C1,
+adopted 8 October 2026). Batch-approved datasets that were not inspected never establish anything.
 
 ### 16.3 What the teacher reviews **[Design]**
 
 1. Every AMBER dataset that requires judgement: reviewed individually (`review.mjs set … TEACHER-REVIEWED`), **or**
-   explicitly waived by the teacher in the batch decision with a reason. RED datasets are fixed, never waived.
+   explicitly waived by the teacher in the batch decision with a reason. RED datasets are fixed, never waived. Only
+   MEDIUM-level reasons can be waived: the first or second example of a HIGH-risk archetype is always reviewed
+   individually (rule C6, adopted 8 October 2026; `accept-batch` refuses such a waiver).
 2. The first representative example of a genuinely new MEDIUM/HIGH-risk archetype (this is AMBER automatically).
    Once one example has been individually reviewed and approved, later examples follow the normal process.
 3. A random sample of GREEN datasets: about **15 %** (target 10–20 %), **at least 1** per batch when there are GREEN
@@ -559,7 +591,7 @@ otherwise:
 - every AMBER dataset individually TEACHER-REVIEWED, or waived by the teacher with a reason;
 - the required GREEN sample has been individually TEACHER-REVIEWED and passed;
 - every dataset at least PHYSICS-REVIEWED, passing validation and the independent audit, and unchanged;
-- no diversity warning, unless the teacher waives it with a reason;
+- no diversity warning (including repeated context families and objects), unless the teacher waives it with a reason;
 - the teacher confirms that **no systemic generator or validator problem** was found (`--systemic-ok`); if the sample reveals one, the batch goes back, and the problem is fixed and the whole batch rebuilt and rechecked;
 - the decision is made by a person (not Claude or a script); Claude may type it only on the teacher's explicit instruction, with `--recorded-by`.
 
@@ -585,11 +617,11 @@ reviewed. `review.mjs status` shows "(batch …; not individually inspected)" fo
 ## 17. Production rules **[Design]**
 
 - Production (`main`, and `questions/1b.json` on it) remains protected.
-- All Paper 1B development happens on `paper-1b`.
-- Do not modify `main`. Do not merge `paper-1b` into `main` or deploy without the teacher's explicit instruction at that time.
+- All Paper 1B development happens on the current development branch (`paper1b-batch2`; `paper-1b` is historical).
+- Do not modify `main`. Do not merge a development branch into `main` or deploy without the teacher's explicit instruction at that time.
 - Do not push unless the teacher asks (the project's end-of-session routine applies only when the teacher says so for this branch).
 - `questions/1b.json` holds only APPROVED, unchanged datasets, written only by `node tools/1b/build.mjs`, never by hand.
-- Current state (6 October 2026): all five pilots are APPROVED (individually) and in `questions/1b.json` on `paper-1b`. A1 was changed to fix the audit's HIGH finding, reset, and re-approved by the teacher after reviewing the new part (g). None is live until a merge the teacher authorises.
+- Current state (8 October 2026): 13 datasets (5 pilots and 8 Batch 1) are APPROVED. On `paper1b-batch2`, A2-B01, A2-B02, B3-B01, C1-B01 and C4-B01 were changed in Phase 12 and re-approved individually by the teacher; `main` still serves the 6 October versions until a merge the teacher authorises.
 - Scale in controlled batches (section 19), never all at once.
 
 ---
@@ -653,26 +685,26 @@ Typed (auto-marked) versions of the last two would need site changes in `js/nume
 2. **Unit-answer part type** (DH9): validator support done; typed answer checked by dimensions still to do (optional).
 3. **Value ± uncertainty part type** (DH8): validator support done; typed answer still to do (optional).
 4. **Intercept uncertainty and student max/min lines** (GR8/GR9): `basis: 'lines'` ranges and verdicts done; an intercept-uncertainty result used by a dataset and its examiner graph still to do.
-5. **Non-linearity and model-validity claims** (IN5, GR13, EV2): "no straight line through all error bars"; "model holds up to x" (needs laws with an exact and an approximate form).
-6. **Proportionality-ratio result** (IN4).
-7. **Log columns and log–log / semi-log analysis** (GR15) on linear axes.
-8. **Instrument-scale diagrams with read-back** (EX5): ruler, protractor, caliper with zero error, analogue meter.
+5. ~~**Non-linearity and model-validity claims**~~ (IN5, GR13, EV2): done (Batch 1: `notLinear`, `validRange`).
+6. ~~**Proportionality-ratio result**~~ (IN4): done (Phase 12: `constantValue`, `constantRatio`; also `integerMultiples`, `compare`).
+7. ~~**Log columns and log–log / semi-log analysis**~~ (GR15) on linear axes: done (Batch 1).
+8. ~~**Instrument-scale diagrams with read-back**~~ (EX5): straight scales done (Phase 12); protractor, caliper and round dials still to do.
 9. **Paper assembly** (section 7): 20-mark sets from 2–3 questions with the coverage rules.
 10. **Use systematic effects in at least one new dataset** (EU2/EU3) to prove the path end to end (no new code needed).
 11. **Originality record** per dataset (section 9) in the review notes.
 
 ### 19.2 Useful during scaling
-- `source` field and secondary-data mode with provenance (database contexts).
-- Empirical-model mode with independent audit (analogue models).
+- ~~`source` field and secondary-data mode with provenance~~: done, with stored source copies (Phase 12).
+- ~~Empirical-model mode with independent audit~~: done (Batch 1).
 - Plot-a-point and draw-an-error-bar parts with examiner figures; sketch parts.
 - Logarithmic axis scales; power-law curve fits; tangent support with justified ranges.
 - Multiflash / grid-trace image diagrams.
 - Sensor-specific noise models.
-- Command-term check; detecting a later part that gives away an earlier answer.
+- Command-term check. (~~Detecting giveaways~~: done, Phase 12.)
 - Accepted-range policy and seed-acceptance rule (from the handoff's deferred list).
 
 ### 19.3 Future enhancements
-- Multi-series graphs; model curve over data; area tasks; axis breaks; bar charts.
+- Multi-series graphs; axis breaks; bar charts. (~~Model curve over data; area tasks~~: done, Phase 12.)
 - Multi-panel model output for design-choice questions (EV7).
 - Further diagram components (rays, field lines, wavefronts, thermal set-ups, multi-loop circuits).
 - Printable or assembled "paper" view; splitting `validate.mjs` by area; validator independence from generator code.
@@ -708,6 +740,10 @@ and AO (40–60 % AO3 per batch).
 ## Decisions requiring teacher approval
 
 These must not be decided automatically by the generator or by Claude:
+
+**Decided on 8 October 2026** (Phases 11–13): rules C1 and C6 adopted, C2 not for now, C5 unchanged; the area accepted-range
+policy (section 14); simulated observations allowed when labelled (section 4); the bounce, force-pulse and line-source
+models and the NASA, NIST and IAEA PRIS sources for Batch 2 (`docs/PAPER1B_BATCH2_PLAN.md`); the Batch 2 list.
 
 **Review model (adopted 6 October 2026, section 16).** The teacher reviews AMBER datasets (or waives them with a
 reason), the first example of each new MEDIUM/HIGH-risk archetype, and a sample of about 15 % of GREEN datasets
