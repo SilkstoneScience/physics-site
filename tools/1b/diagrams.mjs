@@ -248,7 +248,8 @@ export function scaleReading(alt, { min, max, major, minor, title, marks, width 
     parts.push(`<line class="axis scale-minor" x1="${X(v)}" y1="${yAxis}" x2="${X(v)}" y2="${yAxis + 8}"/>`);
     if (isMajor) parts.push(`<text class="sx" x="${X(v)}" y="${yAxis + 34}" text-anchor="middle" font-size="16">${v.toFixed(dp)}</text>`);
   }
-  for (const m of marks) parts.push(`<line class="l1 scale-mark" data-mark="${m.row}" x1="${X(m.value)}" y1="${yAxis - 62}" x2="${X(m.value)}" y2="${yAxis}"/>`);
+  // m.cls: a stylesheet class for the mark's colour (e.g. spec-violet for a spectral line); blue (l1) by default.
+  for (const m of marks) parts.push(`<line class="${m.cls || 'l1'} scale-mark" data-mark="${m.row}" x1="${X(m.value)}" y1="${yAxis - 62}" x2="${X(m.value)}" y2="${yAxis}"/>`);
   parts.push(`<text x="${r1((x0 + x1) / 2)}" y="${yAxis + 58}" text-anchor="middle" font-size="16">${title}</text>`);
   return svg(width, 160, alt, parts.join(''));
 }

@@ -1,8 +1,8 @@
 # Paper 1B Phase 12: tooling safeguards and Batch 1 presentation
 
 8 October 2026. Branch `paper1b-batch2`. Records what Phase 12 built and changed. No Batch 2 dataset was generated, and
-nothing was approved. The rules here are implemented and tested, but they are **not yet part of
-`docs/PAPER1B_SPECIFICATION.md`**: section 7 lists what Phase 13 should make permanent.
+nothing was approved. The rules here are implemented and tested, and Phase 13 made them part of
+`docs/PAPER1B_SPECIFICATION.md` (version 2).
 
 ---
 
@@ -198,7 +198,7 @@ Batch 1 was accepted as `batch-1`, and `accept-batch` refuses a batch that has a
 
 ## 6. Readiness
 
-**NOT READY for Batch 2 generation.** The tooling is ready, but these decisions are open:
+**Ready (all decisions below made on 8 October 2026; Batch 2 was then generated and accepted in Phase 14).** The decisions that were open:
 1. ~~Re-approval of the four reset Batch 1 datasets~~: done 8 October 2026 (section 3a); production on this branch is 13 again.
 2. ~~C5-B01~~: simplified, and simulated observations clearly labelled as simulated approved (8 October 2026; plan section 3.5).
 3. ~~The area accepted-range policy (T7)~~ (adopted 8 October 2026); ~~the empirical laws (bounce, force pulse) and the exact line-source law~~ (approved 8 October 2026); ~~the external sources (NIST, NASA planetary, IAEA PRIS)~~ (approved 8 October 2026).

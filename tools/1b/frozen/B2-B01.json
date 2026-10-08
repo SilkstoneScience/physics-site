@@ -1,0 +1,203 @@
+{
+  "id": "B2-B01",
+  "topic": "B.2",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 2,
+  "skills": [
+    "equilibrium-temperature",
+    "plot-a-point",
+    "model-versus-data",
+    "greenhouse-effect",
+    "value-from-a-graph",
+    "evaluate-data"
+  ],
+  "context": "unfamiliar",
+  "seed": 201,
+  "physics": {
+    "scenario": "For each body, the energy absorbed from sunlight is compared with the energy it radiates. The model ignores any atmosphere: it predicts the temperature at which a body that absorbs (1 − α) of the sunlight and radiates as a black body from its whole surface is in balance. The predictions are compared with published mean surface temperatures.",
+    "principles": [
+      "Energy balance: absorbed power = emitted power for a body at a steady temperature (B.2)",
+      "Absorbed: (1 − α)S × πR² (the body's cross-section); emitted: σT⁴ × 4πR² (Stefan–Boltzmann law, black body, B.1)",
+      "So T = [(1 − α)S/(4σ)]^¼ (the S/4 factor of B.2)",
+      "Greenhouse gases absorb and re-emit outgoing infrared radiation, so a surface under an atmosphere is warmer than this model (B.2)"
+    ],
+    "assumptions": [
+      "Each body radiates as a black body (emissivity 1) at one uniform temperature over its whole surface",
+      "No atmosphere (no greenhouse effect) and no internal heating",
+      "The published irradiance is the mean at the body's mean distance from the Sun"
+    ],
+    "derivation": [
+      "(1 − α)S πR² = σT⁴ 4πR², so T⁴ = (1 − α)S/(4σ)"
+    ],
+    "relationship": "T = [(1 − α)S/(4σ)]^¼",
+    "params": {
+      "sigma": {
+        "value": 5.67e-8,
+        "unit": "W m^-2 K^-4",
+        "range": [
+          5.67e-8,
+          5.67e-8
+        ],
+        "note": "Stefan–Boltzmann constant (data booklet)"
+      }
+    }
+  },
+  "models": {
+    "S": {
+      "kind": "set",
+      "unit": "W m^-2",
+      "values": [
+        9082.7,
+        2601.3,
+        1361,
+        1361,
+        586.2
+      ],
+      "resolution": 0.1
+    },
+    "alpha": {
+      "kind": "catalogue",
+      "unit": "",
+      "values": [
+        0.068,
+        0.77,
+        0.294,
+        0.11,
+        0.25
+      ],
+      "resolution": 0.001
+    },
+    "Tobs": {
+      "kind": "catalogue",
+      "unit": "K",
+      "values": [
+        440,
+        737,
+        288,
+        253,
+        208
+      ],
+      "resolution": 1
+    },
+    "Tmod": {
+      "kind": "derived",
+      "unit": "K",
+      "dp": 0,
+      "hide": [
+        4
+      ]
+    }
+  },
+  "laws": {},
+  "data": {
+    "rows": [
+      {
+        "S": 9082.7,
+        "alpha": 0.068,
+        "Tobs": 440,
+        "Tmod": 440
+      },
+      {
+        "S": 2601.3,
+        "alpha": 0.77,
+        "Tobs": 737,
+        "Tmod": 227
+      },
+      {
+        "S": 1361,
+        "alpha": 0.294,
+        "Tobs": 288,
+        "Tmod": 255
+      },
+      {
+        "S": 1361,
+        "alpha": 0.11,
+        "Tobs": 253,
+        "Tmod": 270
+      },
+      {
+        "S": 586.2,
+        "alpha": 0.25,
+        "Tobs": 208,
+        "Tmod": 210
+      }
+    ],
+    "singles": {},
+    "uncertainties": {}
+  },
+  "text": {
+    "stem": "<p>A simple model treats a planet or moon as a black body with no atmosphere. It absorbs a fraction $(1 - \\alpha)$ of the sunlight falling on it, where $\\alpha$ is its albedo, and radiates energy from its whole surface. The temperature at which these balance is</p><p>$$T_\\text{model} = \\left(\\frac{(1-\\alpha)S}{4\\sigma}\\right)^{1/4}$$</p><p>where $S$ is the solar irradiance at the body. The table gives published data for five bodies. The graph shows the published mean temperature $T_\\text{obs}$ against $T_\\text{model}$; the point for Mars has not been plotted.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "Data: NASA planetary fact sheets. $S$ is the solar irradiance at the body's mean distance from the Sun and $\\alpha$ its albedo. $T_\\text{obs}$ is the published mean surface temperature; $T_\\text{model}$ is calculated from the model.",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\">body</th><th scope=\"col\" data-col=\"S\"><span class=\"h-name\">irradiance</span>$S$ / W m⁻²</th><th scope=\"col\" data-col=\"alpha\"><span class=\"h-name\">albedo</span>$\\alpha$</th><th scope=\"col\" data-col=\"Tobs\"><span class=\"h-name\">observed</span>$T_\\text{obs}$ / K</th><th scope=\"col\" data-col=\"Tmod\"><span class=\"h-name\">model</span>$T_\\text{model}$ / K</th></tr></thead><tbody><tr><th scope=\"row\">Mercury</th><td data-col=\"S\" data-row=\"0\">9082.7</td><td data-col=\"alpha\" data-row=\"0\">0.068</td><td data-col=\"Tobs\" data-row=\"0\">440</td><td data-col=\"Tmod\" data-row=\"0\">440</td></tr><tr><th scope=\"row\">Venus</th><td data-col=\"S\" data-row=\"1\">2601.3</td><td data-col=\"alpha\" data-row=\"1\">0.770</td><td data-col=\"Tobs\" data-row=\"1\">737</td><td data-col=\"Tmod\" data-row=\"1\">227</td></tr><tr><th scope=\"row\">Earth</th><td data-col=\"S\" data-row=\"2\">1361.0</td><td data-col=\"alpha\" data-row=\"2\">0.294</td><td data-col=\"Tobs\" data-row=\"2\">288</td><td data-col=\"Tmod\" data-row=\"2\">255</td></tr><tr><th scope=\"row\">Moon</th><td data-col=\"S\" data-row=\"3\">1361.0</td><td data-col=\"alpha\" data-row=\"3\">0.110</td><td data-col=\"Tobs\" data-row=\"3\">253</td><td data-col=\"Tmod\" data-row=\"3\">270</td></tr><tr><th scope=\"row\">Mars</th><td data-col=\"S\" data-row=\"4\">586.2</td><td data-col=\"alpha\" data-row=\"4\">0.250</td><td data-col=\"Tobs\" data-row=\"4\">208</td><td data-col=\"Tmod\" data-row=\"4\" class=\"blank\">?</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "graph": {
+        "alt": "Graph of observed mean temperature against model temperature, with 4 plotted points, and a dashed line showing where observed = model. The values are in the data table.",
+        "caption": "Graph of observed mean temperature against model temperature. The dashed line shows where observed = model."
+      },
+      "graph-ms": {
+        "alt": "Graph of observed mean temperature against model temperature, with 5 plotted points, and a dashed line showing where observed = model. The values are in the data table.",
+        "caption": "Graph of observed mean temperature against model temperature. The dashed line shows where observed = model."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Calculate $T_\\text{model}$ for Mars.",
+      "marks": 2,
+      "markscheme": [
+        "$T^4 = \\dfrac{(1 - 0.250) \\times 586.2}{4 \\times 5.67 \\times 10^{-8}}$ ✓",
+        "$T_\\text{model} = 210\\ \\text{K}$ (accept 208 to 212 K) ✓"
+      ],
+      "numeric": {
+        "answer": 210,
+        "range": [
+          208,
+          212
+        ],
+        "unit": "$\\text{K}$",
+        "source": "TMars"
+      }
+    },
+    {
+      "label": "b",
+      "question": "Plot the point for Mars on the graph.",
+      "marks": 1,
+      "markscheme": [
+        "Point at $T_\\text{model} = 210\\ \\text{K}$, $T_\\text{obs} = 208\\ \\text{K}$ (close to the dashed line), to within half a small square ✓"
+      ],
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "c",
+      "question": "Identify the body whose temperature is furthest from the model. Explain why.",
+      "marks": 2,
+      "markscheme": [
+        "Venus: about 510 K hotter than the model ✓",
+        "It has a very thick atmosphere, mostly carbon dioxide: a strong greenhouse effect absorbs the infrared radiated by the surface and re-emits much of it back down, so the surface must be far hotter to radiate the absorbed energy away ✓"
+      ]
+    },
+    {
+      "label": "d",
+      "question": "Use the graph to determine how much warmer the surface of the Earth is than the model predicts.",
+      "marks": 1,
+      "markscheme": [
+        "The vertical distance of Earth's point above the dashed line: about 33 K (accept 23 to 43 K) ✓"
+      ]
+    },
+    {
+      "label": "e",
+      "question": "On the Moon, the surface temperature at the equator ranges from 95 K at night to 390 K in the day. State one reason, other than the effect of the atmosphere, why the actual temperatures of planets and moons can differ from the model.",
+      "marks": 1,
+      "markscheme": [
+        "Any one of: the temperature is not the same over the whole surface: it varies enormously between day and night (and from equator to poles), but the model assumes one uniform temperature / a single \"mean temperature\" depends on how it is averaged over such a wide range / emission depends on $T^4$, so a body with a wide range of temperatures radiates its energy at a lower mean temperature (the Moon lies below the line) / the surface is not a perfect black body ✓"
+      ]
+    }
+  ]
+}

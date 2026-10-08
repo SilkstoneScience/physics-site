@@ -80,6 +80,11 @@ export function regularityFindings({ values, texts, xs, models, sigmas, resoluti
 export const VISIBLE_BAR = MARKER_R + 1.5;
 // x error bars are not used in this bank (y error bars only, Phase 12). These pilots were approved with them earlier.
 export const X_ERROR_BARS_ALLOWED = new Set(['A1-B01', 'C4-B01']);
+// Phase 14 whole-bank review: SOME error bars hidden under their markers while others show (the check above looks only at
+// the longest bar). Approved before this rule, so listed as exceptions (the teacher chose to fix them later).
+export const SOME_BARS_HIDDEN_ALLOWED = new Set(['A1-B01', 'E3-B01']);
+// A point left off the students' graph must come with a part that asks them to plot it. Approved before this rule.
+export const OMIT_WITHOUT_PLOT_ALLOWED = new Set(['D1-B01', 'E3-B01']);
 
 // ---------- T3: values read from a graph must be on that graph ----------
 // A part that expects students to read a value from a graph declares it in its metadata (not published):

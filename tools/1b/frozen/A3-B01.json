@@ -1,0 +1,227 @@
+{
+  "id": "A3-B01",
+  "topic": "A.3",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 1,
+  "skills": [
+    "energy-transfers",
+    "successive-ratios",
+    "plot-a-point",
+    "constant-within-uncertainty",
+    "prediction",
+    "video-analysis"
+  ],
+  "context": "experimental",
+  "seed": 301,
+  "physics": {
+    "scenario": "A tennis ball is released from rest about 2 m above a hard floor and bounces several times. A phone films it at 30 frames per second in front of a height scale fixed to the wall. For each peak, the student finds the frame in which the ball is highest and reads the height of the bottom of the ball against the scale.",
+    "principles": [
+      "Conservation of energy (A.3): between impacts the ball's kinetic and gravitational potential energy are transferred into each other; at the top of each bounce all its mechanical energy is gravitational potential energy mgh",
+      "At each impact some of the ball's energy is dissipated (internal energy of the ball and floor, sound), so each peak is lower than the one before",
+      "Fraction of energy kept in one bounce = mghₙ₊₁ / mghₙ = hₙ₊₁/hₙ"
+    ],
+    "assumptions": [
+      "Each impact keeps the same fraction r of the ball's mechanical energy (empirical model, approved by the teacher on 8 October 2026)",
+      "Air resistance is negligible for a tennis ball over heights of 2 m or less",
+      "The ball moves vertically, close to the plane of the wall scale"
+    ],
+    "derivation": [
+      "hₙ₊₁ = r hₙ for every bounce, so hₙ = h₀ rⁿ: each ratio of successive peak heights equals r"
+    ],
+    "relationship": "hₙ = h₀rⁿ",
+    "params": {
+      "h0": {
+        "value": 2,
+        "unit": "m",
+        "range": [
+          1,
+          3
+        ],
+        "note": "release height (the bottom of the ball)"
+      },
+      "r": {
+        "value": 0.55,
+        "unit": "",
+        "range": [
+          0.45,
+          0.65
+        ],
+        "note": "fraction of the energy kept per bounce; a tennis ball dropped from 254 cm onto a hard surface rebounds to 53–58 % of its drop height"
+      }
+    }
+  },
+  "models": {
+    "n": {
+      "kind": "set",
+      "unit": "",
+      "values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "resolution": 1
+    },
+    "h": {
+      "kind": "measured",
+      "unit": "cm",
+      "model": {
+        "law": "bounce-height-ratio",
+        "inputs": {
+          "h0": "p.h0",
+          "r": "p.r",
+          "n": "row.n"
+        }
+      },
+      "noise": {
+        "type": "gauss",
+        "sd": 0.4
+      },
+      "resolution": 0.5,
+      "uncertainty": 1
+    }
+  },
+  "laws": {
+    "bounce-height-ratio": {
+      "statement": "hₙ = h₀ rⁿ (an empirical model, approved by the teacher on 8 October 2026: each impact keeps a constant fraction r of the ball's mechanical energy, so each peak gravitational potential energy mgh, and so each peak height, is r times the one before; air resistance neglected)",
+      "inputs": {
+        "h0": "m",
+        "r": "",
+        "n": ""
+      },
+      "output": "m",
+      "f": "({ h0, r, n }) => h0 * r ** n"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "n": 0,
+        "h": 200
+      },
+      {
+        "n": 1,
+        "h": 110.5
+      },
+      {
+        "n": 2,
+        "h": 60.5
+      },
+      {
+        "n": 3,
+        "h": 34
+      },
+      {
+        "n": 4,
+        "h": 18.5
+      },
+      {
+        "n": 5,
+        "h": 10
+      },
+      {
+        "n": 6,
+        "h": 6.5
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "h": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student investigates how much energy a tennis ball keeps each time it bounces. The ball is released from rest and bounces several times on a hard floor. A phone films it at 30 frames per second in front of a height scale fixed to the wall.</p><p>For each bounce, the student finds the frame in which the ball is highest and reads the peak height $h$ of the bottom of the ball. The table and graph show the results. The point for bounce 4 has not been plotted.</p>",
+    "tables": [
+      {
+        "figure": "table",
+        "caption": "Peak heights of the ball. Bounce number 0 is the height from which the ball was released.",
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"n\"><span class=\"h-name\">bounce number</span>$n$</th><th scope=\"col\" data-col=\"h\"><span class=\"h-name\">peak height</span>$h$ / cm ± 1.0</th></tr></thead><tbody><tr><td data-col=\"n\" data-row=\"0\">0</td><td data-col=\"h\" data-row=\"0\">200.0</td></tr><tr><td data-col=\"n\" data-row=\"1\">1</td><td data-col=\"h\" data-row=\"1\">110.5</td></tr><tr><td data-col=\"n\" data-row=\"2\">2</td><td data-col=\"h\" data-row=\"2\">60.5</td></tr><tr><td data-col=\"n\" data-row=\"3\">3</td><td data-col=\"h\" data-row=\"3\">34.0</td></tr><tr><td data-col=\"n\" data-row=\"4\">4</td><td data-col=\"h\" data-row=\"4\">18.5</td></tr><tr><td data-col=\"n\" data-row=\"5\">5</td><td data-col=\"h\" data-row=\"5\">10.0</td></tr><tr><td data-col=\"n\" data-row=\"6\">6</td><td data-col=\"h\" data-row=\"6\">6.5</td></tr></tbody></table></div>"
+      }
+    ],
+    "figures": {
+      "graph": {
+        "alt": "Graph of peak height against bounce number, with 6 plotted points. The values are in the data table.",
+        "caption": "Graph of peak height against bounce number. The uncertainty in peak height (±1.0 cm) is too small to show as error bars."
+      },
+      "graph-ms": {
+        "alt": "Graph of peak height against bounce number, with 7 plotted points. The values are in the data table.",
+        "caption": "Graph of peak height against bounce number. The uncertainty in peak height (±1.0 cm) is too small to show as error bars."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Describe the energy transfers from the moment the ball is released until it reaches its highest point after the first bounce.",
+      "marks": 1,
+      "markscheme": [
+        "Gravitational potential energy → kinetic energy as it falls; at the impact some energy is transferred to internal (thermal) energy and sound (the rest is stored elastically and returned as kinetic energy); kinetic → gravitational potential energy as it rises, so there is less at the top than at the start ✓"
+      ]
+    },
+    {
+      "label": "b",
+      "question": "Calculate the ratio $\\dfrac{h_1}{h_0}$ for the first bounce and the ratio $\\dfrac{h_6}{h_5}$ for the last bounce.",
+      "marks": 2,
+      "markscheme": [
+        "$\\dfrac{h_1}{h_0} = \\dfrac{110.5}{200.0} = 0.553$ ✓",
+        "$\\dfrac{h_6}{h_5} = \\dfrac{6.5}{10.0} = 0.65$ ✓"
+      ]
+    },
+    {
+      "label": "c",
+      "question": "Plot the point for bounce 4 on the graph.",
+      "marks": 1,
+      "markscheme": [
+        "Point plotted at $n = 4$, $h = 18.5\\ \\text{cm}$, to within half a small square ✓"
+      ],
+      "msFigure": "graph-ms"
+    },
+    {
+      "label": "d",
+      "question": "The fraction of its energy that the ball keeps in a bounce is equal to $\\dfrac{h_{n+1}}{h_n}$. Deduce, using the uncertainties in the heights, whether the data support the idea that every bounce keeps the same fraction of the energy.",
+      "marks": 3,
+      "markscheme": [
+        "The fractional uncertainties of the two heights add: $\\Delta\\!\\left(\\dfrac{h_1}{h_0}\\right) = 0.5525 \\times \\left(\\dfrac{1.0}{200.0} + \\dfrac{1.0}{110.5}\\right)$, so $\\dfrac{h_1}{h_0} = 0.553 \\pm 0.008$ ✓",
+        "$\\Delta\\!\\left(\\dfrac{h_6}{h_5}\\right) = 0.65 \\times \\left(\\dfrac{1.0}{6.5} + \\dfrac{1.0}{10.0}\\right)$, so $\\dfrac{h_6}{h_5} = 0.65 \\pm 0.17$ (accept $0.7 \\pm 0.2$): the small heights at the end have large fractional uncertainties ✓",
+        "A single value (about 0.55) lies within the uncertainty range of every ratio, so the data are consistent with a constant fraction; but the later ratios are imprecise, so they test the idea only weakly (award for a conclusion consistent with the candidate's ratios) ✓"
+      ]
+    },
+    {
+      "label": "e",
+      "question": "Predict the peak height after bounce 7.",
+      "marks": 1,
+      "markscheme": [
+        "$h_7 \\approx h_6 \\times 0.55 = 3.6\\ \\text{cm}$, using the common ratio from (d) (or the mean ratio, or $h_0$ multiplied by the ratio 7 times; accept 3.0 to 4.1 cm) ✓"
+      ],
+      "numeric": {
+        "answer": 3.59125,
+        "range": [
+          2.9859296922086234,
+          4.095
+        ],
+        "unit": "$\\text{cm}$",
+        "source": "hPred"
+      }
+    },
+    {
+      "label": "f",
+      "question": "Suggest one limitation of measuring the peak heights from this video, and its effect on the readings.",
+      "marks": 1,
+      "markscheme": [
+        "Any one of: the frame nearest the top may not show the ball at its highest point, so the reading is slightly too low / the ball is nearer the camera than the scale (parallax), so its height read against the scale depends on where the camera is / the moving ball is blurred, so its bottom edge is hard to judge ✓"
+      ]
+    }
+  ]
+}

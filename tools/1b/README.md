@@ -197,6 +197,16 @@ Copy the closest existing dataset and change it. The parts, in order:
      (`P1B_SOURCES`, default `../reference-cache`), never in this repository. Observed values that the question compares
      with a model (not expected to follow it) are `observed: { reason }` instead of `model`/`agree`.
 
+10. **Phase 14 (Batch 2) options.**
+   - **Row names**: `rowLabels: { heading: 'body', values: ['Mercury', …] }` puts a first column of row headers (a planet, a year) in the table; one name per row, no numbers needed.
+   - **Simulated observations** (T9): a dataset with `source: 'observational'` must declare `simulated: true` or `false`; simulated data must say "simulated" in the question text (teacher, 8 October 2026).
+   - **Converted published values**: `provenance.fields.<k>.offset` is added after `scale` when checking against the stored source copy (published °C to K: `offset: 273`).
+   - **Graphs**: `graph.what` replaces "y-name against x-name" in the caption and alt text; `graph.altDescription` describes the graph's shape for screen readers when there is no student table (`tableless`).
+   - **Predictions**: a `predictAt` value counts as "measured" only within half the column's resolution of a row (bounce 7 after bounces 0–6 is a prediction).
+   - **Data without a table**: the independent audit reads such data back from the drawings itself (trace vertices, plotted points, scale marks).
+   - **Rules are inherited automatically**: `safeguard-index.mjs` lists every rule (specification section 21) with the error codes and tests that prove it; `test.mjs` fails if a rule has no broken dataset or test. Add a new rule there, with its proof.
+   - **New checks**: every drawn error bar must be visible (not only the longest); a point left off a graph needs a "Plot" part; numbers round halves up, as students do.
+
 Then run `node tools/1b/build.mjs --report` and fix anything it reports. Look at the question in the preview
 at 375 px and in dark mode, and get the teacher's approval before it goes live.
 

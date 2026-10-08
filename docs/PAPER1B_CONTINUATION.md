@@ -1,6 +1,6 @@
 # Paper 1B: how to continue on any computer
 
-Last updated **8 October 2026**. A step-by-step guide for resuming Paper 1B work, written so that it needs nothing
+Last updated **8 October 2026** (after Phase 14: Batch 2 accepted). A step-by-step guide for resuming Paper 1B work, written so that it needs nothing
 outside this repository. For the full state of the project, read `docs/PAPER1B_PROJECT_STATUS.md`.
 
 ---
@@ -24,12 +24,13 @@ outside this repository. For the full state of the project, read `docs/PAPER1B_P
 - **Planned and confirmed:** 8 datasets in `docs/PAPER1B_BATCH2_PLAN.md`; every teacher decision is made.
 - **Tooling ready (Phase 12)** and **rules in the specification (Phase 13, version 2)**. All 13 existing datasets are APPROVED
   (5 were changed and re-approved on 8 October; `main` still has the 6 October versions until a merge).
-- **Next:** generate Batch 2 into the local preview, run the full QA, then the teacher reviews each dataset.
+- **Batch 2 is done (Phase 14):** 7 datasets generated, inspected individually by the teacher and accepted as `batch-2`; C2-B01 withdrawn (kept unbuilt in `tools/1b/withdrawn/`). 20 APPROVED datasets on `paper1b-batch2`.
+- **Next:** on the teacher's instruction, merge `paper1b-batch2` into `main` and push (section 12, step 8). Then plan Batch 3.
 - The stored NASA source copy for D1-B01 lives outside the repository, in the reference cache
   (`reference-cache/p1b-sources/`). On a computer without it, the build shows a warning (not an error) for D1-B01.
-- **Batch 2 has NOT been generated.**
-- No Batch 2 dataset is approved, and none is in production.
-- Batch 2 development begins from the current production `main`, on `paper1b-batch2`.
+- Stored source copies for B2-B01, E1-B01 and E4-B01 are also in `reference-cache/p1b-sources/`; without them the build gives warnings, not errors.
+- Batch 2 is approved but **not in production**: `main` (the live site) still has the 13 datasets of 6 October.
+- `paper1b-batch2` contains production `main` (`4ca0f74`) plus all Batch 2 work.
 
 ---
 
@@ -78,13 +79,13 @@ git status
 ```
 node tools/1b/test.mjs
 ```
-Expect "✓ All 558 Paper 1B tests passed" (more if tests have been added since).
+Expect "✓ All 729 Paper 1B tests passed" (more if tests have been added since).
 
 ### 6. Run the Paper 1B build
 ```
 node tools/1b/build.mjs
 ```
-Expect it to end with "Production (questions/1b.json): 13 APPROVED dataset(s)". It also rebuilds the local preview
+Expect it to end with "Production (questions/1b.json): 20 APPROVED dataset(s)" on `paper1b-batch2` (13 on `main` until Batch 2 is merged). It also rebuilds the local preview
 (`questions/1b-preview.json`), which is never committed.
 
 **Windows note:** after a build, `git status` may list the question files as modified even though nothing changed.

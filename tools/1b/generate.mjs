@@ -245,7 +245,9 @@ export function makeContext(def, rows, singles) {
 // ---------- 3. Presentation ----------
 export function tableHtml(def, d) {
   const shown = Object.entries(def.columns).filter(([, c]) => c.show !== false);
-  const head = [];
+  // rowLabels: { heading, values }: a first column naming each row (a planet, a year), as row headers with no numbers.
+  const labels = def.rowLabels;
+  const head = labels ? [`<th scope="col">${labels.heading}</th>`] : [];
   for (const [k, c] of shown) {
     const u = parseUnit(c.unit || '');
     // showUncertainty: false keeps a column's uncertainty internal (validation only) when no part uses it.
@@ -255,7 +257,7 @@ export function tableHtml(def, d) {
       head.push(`<th scope="col" data-col="${k}" data-unc="1"><span class="h-name">uncertainty</span>$${c.uncSymbol || '\\Delta ' + c.symbol}$${u.text ? ' / ' + u.text : ''}</th>`);
     }
   }
-  const body = d.rows.map((row, i) => '<tr>' + shown.map(([k, c]) => {
+  const body = d.rows.map((row, i) => '<tr>' + (labels ? `<th scope="row">${labels.values[i]}</th>` : '') + shown.map(([k, c]) => {
     const hidden = (c.hide || []).includes(i);
     const cell = (unc) => `<td data-col="${k}" data-row="${i}"${unc ? ' data-unc="1"' : ''}${hidden ? ' class="blank"' : ''}>${hidden ? '?' : unc ? fmtNum(d.unc(k, i), columnDp(c)) : d.text(k, i)}</td>`;
     return cell(false) + (perRowUncertainty(c) && c.showUncertainty !== false ? cell(true) : '');
@@ -305,13 +307,15 @@ export function graphFigure(def, d, kind, g = def.graph, name = kind === 'studen
   if (kind === 'examiner' && g.modelCurve) curves.push({ f: g.modelCurve(d), cls: 'l1 thin', model: true });
   const ref = g.referenceLine ? (typeof g.referenceLine === 'function' ? g.referenceLine(d) : g.referenceLine) : null;
   const bars = points.some((pt) => pt.ey || pt.ex);
-  const what = `${cy.name} against ${cx.name}`;
+  // g.what: a fuller description for the caption and alt text when the table's short column names would read oddly.
+  const what = g.what || `${cy.name} against ${cx.name}`;
   const alt = `Graph of ${what}, ${g.style === 'trace' ? `a line through the sensor readings` : `with ${points.length} plotted points${bars ? ' and error bars' : ''}`}`
     + (kind === 'examiner' && g.shade ? `, with ${g.shade.label} shaded` : '')
     + (kind === 'examiner' ? (g.fit === 'linear' ? (g.errorBars === 'none' ? ' and the line of best fit' : ', the line of best fit' + (d.band ? ' and the steepest and shallowest lines' : '')) : g.fit === 'exponential' ? ', and the curve of best fit' : '') : '')
     + (kind === 'examiner' && g.modelCurve ? `, and the model curve (${g.modelCurveLabel})` : '')
     + (ref ? `, and a dashed line showing ${ref.label}` : '')
-    + '. The values are in the data table.';
+    // Data without a student table (tableless): there is no table to point to, so describe the graph's shape instead.
+    + (def.tableless ? `. ${g.altDescription || 'The readings are shown only on this graph.'}` : '. The values are in the data table.');
   const svg = renderGraph({
     x: { symbol: cx.symbolText || cx.symbol, unit: parseUnit(cx.unit || '').text, includeZero: !!(g.zero && g.zero.x), range: g.xRange },
     y: { symbol: cy.symbolText || cy.symbol, unit: parseUnit(cy.unit || '').text, includeZero: !!(g.zero && g.zero.y), range: g.yRange },

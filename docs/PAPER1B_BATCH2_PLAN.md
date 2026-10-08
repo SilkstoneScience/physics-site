@@ -5,7 +5,9 @@ In `docs/`, which `_config.yml` keeps off the website. Section and archetype IDs
 `docs/PAPER1B_SPECIFICATION.md` and `docs/PAPER1B_ARCHETYPE_MATRIX.md`; tooling items refer to
 `docs/PAPER1B_BATCH1_RETROSPECTIVE.md` section 7.
 
-**Verdict at the end: NOT READY — TOOLING CHANGES REQUIRED.** The four MUST FIX checks from the retrospective are
+> **Outcome (Phase 14, 8 October 2026):** generated, reviewed and accepted. 7 datasets approved as `batch-2` (all inspected by the teacher); C2-B01 withdrawn as too complicated. Final versions and the teacher's changes: `docs/PAPER1B_PROJECT_STATUS.md`, section 3a. The readiness verdicts below are historical.
+
+**Verdict at the end (historical, before Phase 12): NOT READY — TOOLING CHANGES REQUIRED.** The four MUST FIX checks from the retrospective are
 not yet in the code (checked 8 October 2026), and this plan needs five further capabilities (section 4).
 
 > **Confirmed by the teacher (8 October 2026):** the 8 datasets in section 3 are the Batch 2 list (C5-B01 in its simplified

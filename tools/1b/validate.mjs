@@ -17,7 +17,7 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { applySystematic, checkSystematic } from './systematic.mjs';
 import {
-  regularityFindings, VISIBLE_BAR, X_ERROR_BARS_ALLOWED, READ_PHRASES, axisRanges, visibleSequence, valueTokens, hasToken,
+  regularityFindings, VISIBLE_BAR, X_ERROR_BARS_ALLOWED, SOME_BARS_HIDDEN_ALLOWED, OMIT_WITHOUT_PLOT_ALLOWED, READ_PHRASES, axisRanges, visibleSequence, valueTokens, hasToken,
   constancy, successiveRatios, multiplesProblems,
 } from './safeguards.mjs';
 import { MARKER_R } from './graph.mjs';
@@ -87,6 +87,19 @@ function run(def, q, topics, fail, warn) {
   if (!CONTEXTS.includes(def.context)) fail('meta', 'context', `context must be one of ${CONTEXTS.join(', ')}`);
   const marks = (q.parts || []).reduce((s, pt) => s + (pt.marks || 0), 0);
   if (marks < 4 || marks > 12) warn('meta', 'marks', `${marks} marks in total; IB Paper 1B questions are usually 6–10`);
+  // T9 (Phase 14, with C5-B01): observational data say whether they are real or simulated; simulated observations (data
+  // generated from a model to look like real observations) are allowed only when the question says so (teacher, 8 October 2026).
+  if (def.source === 'observational') {
+    if (typeof def.simulated !== 'boolean') fail('observational', 'simulated', 'observational data must declare simulated: true (generated from a model) or false (real observations)');
+    else if (def.simulated && !/\bsimulated\b/i.test(stripTags(q.stem))) fail('observational', 'question text', 'the observations are simulated, so the question text must say so (the word "simulated")');
+  } else if (def.simulated) fail('observational', 'simulated', 'simulated: true is only for observational data (source: "observational")');
+  if (def.rowLabels) {
+    const n = (Object.values(def.columns).find((c) => c.kind === 'set') || { values: [] }).values.length;
+    const L = def.rowLabels;
+    if (typeof L.heading !== 'string' || !L.heading.trim() || !Array.isArray(L.values) || L.values.length !== n || L.values.some((v) => typeof v !== 'string' || !v.trim())) {
+      fail('table-header', 'rowLabels', `rowLabels needs a heading and one name for each of the ${n} rows`);
+    }
+  }
 
   // ---------- 1b. The physics model (stops here if it is unusable) ----------
   if (!checkPhysics(def, fail)) return;
@@ -302,7 +315,8 @@ function run(def, q, topics, fail, warn) {
     if (res.predictAt) {
       const col = def.columns[res.predictAt.column];
       if (!col) fail('prediction', where, `predictAt names an unknown column ${res.predictAt.column}`);
-      else if (rows.some((rw) => Math.abs(rw[res.predictAt.column] - res.predictAt.value) <= (col.resolution || 0) + 1e-12)) {
+      // "At a measured row" means the same reading: within half the column's resolution (bounce 7 is not bounce 6).
+      else if (rows.some((rw) => Math.abs(rw[res.predictAt.column] - res.predictAt.value) <= (col.resolution || 0) / 2 + 1e-12)) {
         fail('prediction', where, `the prediction at ${res.predictAt.value} is at a measured row, so it can be read from the table`);
       }
     }
@@ -558,7 +572,8 @@ function checkProvenance(def, fail, warn) {
     if (!(f.sourceColumn in (src.columns || {}))) { fail('source-extract', `provenance.fields.${k}`, `the stored copy has no column "${f.sourceColumn}"`); continue; }
     ex.rows.forEach((name, i) => {
       const raw = ((src.rows || {})[name] || {})[f.sourceColumn];
-      const v = Number(raw) * (f.scale || 1);
+      // offset: a fixed conversion added after scaling (published °C to K: offset 273, as the source itself converts).
+      const v = Number(raw) * (f.scale || 1) + (f.offset || 0);
       if (raw === undefined || !Number.isFinite(v)) { fail('source-extract', `column ${k}, row ${i + 1}`, `the stored copy has no value for ${name}`); return; }
       if (Math.abs(v - c.values[i]) > (c.resolution || 0) / 2 + 1e-9 * Math.abs(v)) {
         fail('source-extract', `column ${k}, row ${i + 1} (${name})`, 'the value differs from the published source', { expected: `${raw} × ${f.scale || 1}`, got: c.values[i] });
@@ -763,6 +778,12 @@ function checkGraphReads(def, q, meta, fail, warn) {
           warn('graph-read', where, `accepts readings of ${ax} within ±${sigFig(r.tol, 2)}, less than half a small grid square (${sigFig(minor / 2, 2)}) on ${name}: students can't read it that precisely`);
         }
       }
+    }
+  }
+  // Phase 14: a point left off the students' graph (graph.omit) needs a part that tells students to plot it.
+  for (const [spec, name] of [[def.graph, 'graph']]) {
+    if (spec && (spec.omit || []).length && !OMIT_WITHOUT_PLOT_ALLOWED.has(def.id) && !(q.parts || []).some((pt) => /\bplot\b/i.test(stripTags(pt.question)))) {
+      warn('graph-omit-plot', name, `the graph leaves out ${spec.omit.length} point(s) (graph.omit), but no part asks students to plot them: add a "Plot …" part or plot the point`);
     }
   }
   // P1: with errorBars 'too-small' no bars are drawn, so no question or mark scheme may refer to them.
@@ -1202,6 +1223,9 @@ function checkGraph(fig, def, d, rows, fail, warn) {
     if (g.errorBars === 'too-small' && longest >= VISIBLE_BAR) fail('graph-errorbar-hidden', where, `errorBars is 'too-small', but the bars would be up to ${longest.toFixed(1)} units long, long enough to see: draw them`);
     if (!hidden && halves.length && longest < VISIBLE_BAR) {
       warn('graph-errorbar-visibility', where, `every y error bar is at most ${longest.toFixed(1)} units each side of its point, hidden under the ${MARKER_R}-unit marker (needs ${VISIBLE_BAR}): students can't see or use them. Declare ${raw ? 'rawGraph' : 'graph'}.errorBars: 'too-small' (the caption then states the uncertainty) and don't refer to error bars in the parts`);
+    } else if (!hidden && halves.length && Math.min(...halves) < VISIBLE_BAR && !SOME_BARS_HIDDEN_ALLOWED.has(def.id)) {
+      // Phase 14: the shortest bars matter too. A graph whose bars are partly hidden misleads students about those points.
+      warn('graph-errorbar-visibility', where, `some y error bars are only ${Math.min(...halves).toFixed(1)} units each side of their points, hidden under the ${MARKER_R}-unit marker (needs ${VISIBLE_BAR}), although others show: make the plot taller or zoom the axes so every bar is visible`);
     }
   }
   // Error bars: one per point where there is an uncertainty (unless too small to draw), each the right length.

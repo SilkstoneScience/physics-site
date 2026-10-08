@@ -1,0 +1,212 @@
+{
+  "id": "E1-B01",
+  "topic": "E.1",
+  "paper": "1B",
+  "level": "SL_HL",
+  "difficulty": 1,
+  "skills": [
+    "read-a-scale",
+    "reading-uncertainty",
+    "photon-energy",
+    "energy-levels",
+    "test-a-claim",
+    "resolution-of-a-scale"
+  ],
+  "context": "experimental",
+  "seed": 101,
+  "physics": {
+    "scenario": "A student looks at a mercury vapour lamp through a handheld spectroscope. A wavelength scale (smallest division 5 nm) is seen alongside the spectrum. The three brightest lines between 400 nm and 560 nm (violet, blue and green) are read against the scale.",
+    "principles": [
+      "An atom emits a photon when it falls from a higher energy level to a lower one; the photon's energy is the difference between the levels (E.1)",
+      "Photon energy E = hf = hc/λ (E.1)",
+      "A scale reading is uncertain by about half its smallest division"
+    ],
+    "assumptions": [
+      "The spectroscope's scale is correctly calibrated, so each line appears at its true wavelength (in air)",
+      "The three lines come from the transitions listed in the NIST database (their upper level is 7.73 eV)"
+    ],
+    "derivation": [
+      "λ = hc/(E_upper − E_lower), with the level energies converted from eV to joules"
+    ],
+    "relationship": "λ = hc/(E_u − E_l)",
+    "params": {
+      "h": {
+        "value": 6.62607015e-34,
+        "unit": "J s",
+        "range": [
+          6.62607015e-34,
+          6.62607015e-34
+        ],
+        "note": "Planck constant (exact SI value)"
+      },
+      "c": {
+        "value": 299792458,
+        "unit": "m s^-1",
+        "range": [
+          299792458,
+          299792458
+        ],
+        "note": "speed of light in a vacuum (exact)"
+      },
+      "Eu": {
+        "value": 7.7304551,
+        "unit": "eV",
+        "range": [
+          7.7304551,
+          7.7304551
+        ],
+        "note": "upper level of the three lines (Hg 6s7s ³S₁, NIST)"
+      }
+    }
+  },
+  "models": {
+    "k": {
+      "kind": "set",
+      "unit": "",
+      "values": [
+        1,
+        2,
+        3
+      ],
+      "resolution": 1
+    },
+    "El": {
+      "kind": "catalogue",
+      "unit": "eV",
+      "values": [
+        4.6673829,
+        4.8864946,
+        5.4606248
+      ],
+      "resolution": 1e-7
+    },
+    "lam": {
+      "kind": "catalogue",
+      "unit": "nm",
+      "values": [
+        404.6565,
+        435.8335,
+        546.075
+      ],
+      "model": {
+        "law": "transition-wavelength",
+        "inputs": {
+          "h": "p.h",
+          "c": "p.c",
+          "Eu": "p.Eu",
+          "El": "row.El"
+        }
+      },
+      "resolution": 0.1,
+      "uncertainty": 2.5
+    }
+  },
+  "laws": {
+    "transition-wavelength": {
+      "statement": "λ = hc/(E_u − E_l) (the photon carries the energy difference between the levels, E = hc/λ)",
+      "inputs": {
+        "h": "J s",
+        "c": "m s^-1",
+        "Eu": "J",
+        "El": "J"
+      },
+      "output": "m",
+      "f": "({ h, c, Eu, El }) => (h * c) / (Eu - El)"
+    }
+  },
+  "data": {
+    "rows": [
+      {
+        "k": 1,
+        "El": 4.6673829,
+        "lam": 404.7
+      },
+      {
+        "k": 2,
+        "El": 4.8864946,
+        "lam": 435.8
+      },
+      {
+        "k": 3,
+        "El": 5.4606248,
+        "lam": 546.1
+      }
+    ],
+    "singles": {},
+    "uncertainties": {
+      "lam": [
+        2.5,
+        2.5,
+        2.5
+      ]
+    }
+  },
+  "text": {
+    "stem": "<p>A student looks at a mercury vapour lamp through a handheld spectroscope. Bright lines of different colours are seen against a wavelength scale. The diagram shows part of the scale, with the three brightest lines in this part of the spectrum.</p><p>The second diagram shows some of the energy levels of a mercury atom.</p>",
+    "tables": [],
+    "figures": {
+      "scale": {
+        "alt": "A spectroscope scale from 400 nm to 560 nm, numbered every 20 nm, with a small division every 5 nm. Three bright lines (violet, blue and green) are marked against the scale.",
+        "caption": "The scale seen in the spectroscope, with the violet, blue and green lines of mercury (left to right). Line positions: NIST Atomic Spectra Database."
+      },
+      "levels": {
+        "alt": "Energy levels of mercury (not to scale): ground state: 0 eV, 4.67 eV, 4.89 eV, 5.46 eV, 6.70 eV, 7.73 eV.",
+        "caption": "Some energy levels of a mercury atom (not to scale). Data: NIST."
+      }
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "question": "Read the wavelengths of the three lines from the scale.",
+      "marks": 2,
+      "markscheme": [
+        "Violet 405 nm, blue 436 nm, green 546 nm, each accepted within ±2.5 nm: any two correct ✓",
+        "All three correct ✓"
+      ]
+    },
+    {
+      "label": "b",
+      "question": "State the absolute uncertainty in each of your readings.",
+      "marks": 1,
+      "markscheme": [
+        "$\\pm 2.5\\ \\text{nm}$: half the smallest division (5 nm) of the scale ✓"
+      ]
+    },
+    {
+      "label": "c",
+      "question": "Calculate the energy, in eV, of a photon of the green light.",
+      "marks": 2,
+      "markscheme": [
+        "$E = \\dfrac{hc}{\\lambda} = \\dfrac{6.63 \\times 10^{-34} \\times 3.00 \\times 10^{8}}{546 \\times 10^{-9}}$ J ✓",
+        "÷ $1.60 \\times 10^{-19}$: $E = 2.28\\ \\text{eV}$ (accept 2.27 to 2.29 eV) ✓"
+      ],
+      "numeric": {
+        "answer": 2.27636879692364,
+        "range": [
+          2.265995260663507,
+          2.2868377483443703
+        ],
+        "unit": "$\\text{eV}$",
+        "source": "EG"
+      }
+    },
+    {
+      "label": "d",
+      "question": "A student suggests that all three lines are emitted by atoms falling from one and the same energy level. Deduce, using the energy levels, whether the suggestion is correct.",
+      "marks": 2,
+      "markscheme": [
+        "Photon energies about 3.07, 2.85 and 2.28 eV (each uncertain by about ±0.02 eV) ✓",
+        "These match 7.73 − 4.67, 7.73 − 4.89 and 7.73 − 5.46 eV: all three are transitions from the 7.73 eV level, so the suggestion is correct (no other pair of levels gives these energies) ✓"
+      ]
+    },
+    {
+      "label": "e",
+      "question": "Beyond the part of the scale shown, the mercury spectrum has two yellow lines, at 577.0 nm and 579.1 nm. Deduce whether readings from this scale could show that there are two lines.",
+      "marks": 1,
+      "markscheme": [
+        "No: they are only 2.1 nm apart, less than the reading uncertainty of ±2.5 nm (and less than one 5 nm division), so they would be read as one line ✓"
+      ]
+    }
+  ]
+}

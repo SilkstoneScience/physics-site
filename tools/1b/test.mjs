@@ -25,13 +25,16 @@ import fs from 'node:fs';
 import os from 'node:os';
 import crypto from 'node:crypto';
 import { D3_MODEL, E3_AREA, D3_SCALE, P12_BROKEN } from './fixtures/phase12.mjs';
+import { reviewProblem } from './registry.mjs';
+import { SAFEGUARDS } from './safeguard-index.mjs';
 
 const editPartLocal = (def, label, change) => ({ ...def, parts: (d) => def.parts(d).map((pt) => (pt.label === label ? change(pt, d) : pt)) });
 
 export async function runTests() {
   const failures = [];
   let count = 0;
-  const check = (name, ok, detail = '') => { count++; if (!ok) failures.push(`${name}${detail ? ': ' + detail : ''}`); };
+  const names = []; // every test name, so the safeguard index can check that each rule's tests exist (end of file)
+  const check = (name, ok, detail = '') => { count++; names.push(name); if (!ok) failures.push(`${name}${detail ? ': ' + detail : ''}`); };
   const near = (a, b, tol = 1e-9) => Math.abs(a - b) <= tol * Math.max(1, Math.abs(a), Math.abs(b));
 
   // ----- Random numbers: repeatable, and the right shape -----
@@ -631,6 +634,94 @@ export async function runTests() {
     check('C1: an example approved in a batch without inspection doesn\'t count', e2.contexts.get('V2').size === 1);
     const e3 = establishedSets(res3, { datasets: { X1: appr, X2: appr, X3: appr } });
     check('C1: inspected examples in two different families establish a HIGH-risk archetype', e3.contexts.get('V2').size === 2);
+  }
+  // ----- Phase 14 (Batch 2) tooling -----
+  {
+    const errs = (def, q = buildQuestion(def).question) => validateDataset(def, q, { topics }).filter((x) => x.level === 'error');
+    // T9: simulated observations must say so in the question (teacher, 8 October 2026).
+    const c5 = datasets.find((x) => x.def.id === 'C5-B01').def;
+    const unlabelled = { ...c5, intro: (d) => c5.intro(d).replace(/simulated/gi, 'recorded') };
+    check('T9: simulated observations whose question text doesn\'t say "simulated" are an error', errs(unlabelled).some((x) => x.code === 'observational'));
+    check('T9: observational data must declare whether they are simulated', errs({ ...c5, simulated: undefined }).some((x) => x.code === 'observational'));
+    check('T9: simulated: true is refused for non-observational data', errs({ ...datasets.find((x) => x.def.id === 'D3-B01').def, simulated: true }).some((x) => x.code === 'observational'));
+    check('T9: the labelled simulated dataset passes', !errs(c5).length, errs(c5).map((x) => x.message).join('; '));
+    // Row labels (planet names): one per row, as row headers that the table reader ignores.
+    const b2 = datasets.find((x) => x.def.id === 'B2-B01').def;
+    check('Row labels: a wrong number of labels is an error', errs({ ...b2, rowLabels: { heading: 'body', values: ['Mercury'] } }).some((x) => x.code === 'table-header' && x.where === 'rowLabels'));
+    check('Row labels are shown as row headers', /<th scope="row">Venus<\/th>/.test(buildQuestion(b2).question.data.find((x) => x.kind === 'table').html));
+    // Prediction: "at a measured row" means within half the resolution (bounce 7 is not bounce 6), but the same reading is refused.
+    const a3 = datasets.find((x) => x.def.id === 'A3-B01').def;
+    check('Prediction one step beyond the last integer row is allowed', !errs(a3).some((x) => x.code === 'prediction'));
+    const atRow = { ...a3, results: { ...a3.results, hPred: { ...a3.results.hPred, predictAt: { column: 'n', value: 6 } } } };
+    check('Prediction at a measured row is still refused', errs(atRow).some((x) => x.code === 'prediction'));
+    // A published value converted with an offset (°C → K): checked against a temporary copy of the source.
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'p1b-src-'));
+    const rows = {};
+    b2.provenance.extract.rows.forEach((name, i) => {
+      rows[name] = { 'Solar irradiance (W/m2)': String(b2.columns.S.values[i]), 'Bond albedo': String(b2.columns.alpha.values[i]), 'Mean Temperature (C)': String(b2.columns.Tobs.values[i] - 273) };
+    });
+    const text = JSON.stringify({ source: 'test copy', columns: { 'Solar irradiance (W/m2)': 'S', 'Bond albedo': 'a', 'Mean Temperature (C)': 'T' }, rows });
+    fs.mkdirSync(path.join(dir, 'p1b-sources'));
+    fs.writeFileSync(path.join(dir, 'p1b-sources', 'x.json'), text);
+    const sha = crypto.createHash('sha256').update(text).digest('hex');
+    const withCopy = (fields = b2.provenance.fields) => ({ ...b2, provenance: { ...b2.provenance, fields, extract: { ...b2.provenance.extract, file: 'p1b-sources/x.json', sha256: sha } } });
+    const old = setSourcesDir(dir);
+    try {
+      const all = (def) => validateDataset(def, buildQuestion(def).question, { topics });
+      check('Source offset: °C converted to K with offset 273 matches the stored copy', !all(withCopy()).some((x) => /source-extract/.test(x.code)), all(withCopy()).map((x) => x.message).join('; '));
+      const noOffset = { ...b2.provenance.fields, Tobs: { ...b2.provenance.fields.Tobs, offset: undefined } };
+      check('Source offset: without the offset the published kelvin values don\'t match the source (error)', all(withCopy(noOffset)).some((x) => x.code === 'source-extract' && x.level === 'error'));
+    } finally {
+      setSourcesDir(old);
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+    // Tableless data read back by the independent audit from the drawings (trace, points, scale).
+    for (const id of ['A2-B03', 'C5-B01', 'E1-B01']) {
+      const def = datasets.find((x) => x.def.id === id).def;
+      const q = JSON.parse(JSON.stringify(buildQuestion(def).question));
+      check(`${id}: the independent audit reads the data from the drawings and passes`, !independentAudit(def, q).some((x) => x.level === 'error'));
+    }
+    const a2 = datasets.find((x) => x.def.id === 'A2-B03').def;
+    const q2 = JSON.parse(JSON.stringify(buildQuestion(a2).question));
+    const shift = (s) => s.replace(/data-trace="1" points="([^"]*)"/, (m, pts) => `data-trace="1" points="${pts.split(' ').map((p) => { const [x, y] = p.split(','); return `${x},${(+y - 8).toFixed(1)}`; }).join(' ')}"`);
+    for (const f of q2.data) if (f.figure === 'graph') f.svg = shift(f.svg);
+    check('A2-B03: a trace drawn 8 units too high is caught by the independent audit', independentAudit(a2, q2).some((x) => x.level === 'error'));
+  }
+  // ----- Phase 14 regression tests: rounding, hidden bars, unplotted points, the review gate, the safeguard index -----
+  {
+    check('Rounding: halves round up, as students round (0.5525 → 0.553, 1.575 → 1.58, 2.675 → 2.68, 1.005 → 1.01)',
+      sigFig(0.5525, 3) === '0.553' && sigFig(1.575, 3) === '1.58' && fmtNum(2.675, 2) === '2.68' && fmtNum(1.005, 2) === '1.01' && sigFig(-0.5525, 3) === '−0.553');
+    check('Rounding: ordinary values are unchanged (0.06372 → 0.064, 9.96 → 10, 0.995 → 1.0, 1234 → 1200)',
+      sigFig(0.06372, 2) === '0.064' && sigFig(9.96, 2) === '10' && sigFig(0.995, 2) === '1.0' && sigFig(1234, 2) === '1200' && fmtNum(0.004999, 2) === '0.00');
+    check('Rounding: value ± uncertainty uses the same rule (0.5525 ± 0.0078 → 0.553 ± 0.008)', (() => { const t = valuePm(0.5525, 0.0078, 1); return t.value === '0.553' && t.unc === '0.008'; })());
+
+    const e3 = datasets.find((x) => x.def.id === 'E3-B01').def;
+    const warnCodes = (def) => validateDataset(def, buildQuestion(def).question, { topics }).filter((x) => x.level === 'warning').map((x) => x.code);
+    const copy = { ...e3, id: 'E3-B09' }; // the same dataset, not on the list of pilots approved before these rules
+    check('Some error bars hidden under their markers (others visible) is reported', warnCodes(copy).includes('graph-errorbar-visibility'), warnCodes(copy).join(', '));
+    check('Omitted point without a Plot part is reported', warnCodes(copy).includes('graph-omit-plot'));
+    check('Pilots approved before these rules are listed exceptions (E3-B01 gets neither warning)', !warnCodes(e3).some((c) => ['graph-errorbar-visibility', 'graph-omit-plot'].includes(c)));
+    const withPlot = editPartLocal(copy, 'b', (pt) => ({ ...pt, question: `Plot the missing point. ${pt.question}` }));
+    check('Omitted point with a Plot part is not reported', !warnCodes(withPlot).includes('graph-omit-plot'));
+
+    const rec = (status) => ({ status, history: [] });
+    check('Review gate: reviews go in order (no skipping from AUTO-VALIDATED to TEACHER-REVIEWED)', !!reviewProblem(rec('AUTO-VALIDATED'), 'TEACHER-REVIEWED', 'Mr Silkstone (teacher)'));
+    check('Review gate: the next review in order is allowed', reviewProblem(rec('PHYSICS-REVIEWED'), 'TEACHER-REVIEWED', 'Mr Silkstone (teacher)') === null);
+    check('Review gate: TEACHER-REVIEWED can\'t be recorded for an assistant', !!reviewProblem(rec('PHYSICS-REVIEWED'), 'TEACHER-REVIEWED', 'Claude (AI assistant)'));
+    check('Review gate: APPROVED can\'t be recorded for a script', !!reviewProblem(rec('TEACHER-REVIEWED'), 'APPROVED', 'build script'));
+    check('Review gate: PHYSICS-REVIEWED may be recorded by the assistant', reviewProblem(rec('AUTO-VALIDATED'), 'PHYSICS-REVIEWED', 'Claude (AI assistant)') === null);
+    check('Review gate: a dataset that fails its checks, or changed since review, can\'t be reviewed',
+      !!reviewProblem(rec('AUTO-VALIDATED'), 'PHYSICS-REVIEWED', 'x', { valid: false }) && !!reviewProblem(rec('PHYSICS-REVIEWED'), 'TEACHER-REVIEWED', 'Mr Silkstone (teacher)', { changed: true }));
+    check('Review gate: nothing comes after APPROVED', !!reviewProblem(rec('APPROVED'), 'APPROVED', 'Mr Silkstone (teacher)'));
+
+    // Every safeguard has proof: its error codes are caught by a deliberately broken dataset, its tests exist.
+    const caught = new Set([...broken, ...P12_BROKEN].map((fx) => fx.expect));
+    for (const s of SAFEGUARDS) {
+      const missingCodes = s.codes.filter((c) => !caught.has(c));
+      const missingTests = s.tests.filter((t) => !names.some((n) => n.includes(t)));
+      check(`Safeguard index: "${s.area}" is proved by broken datasets and tests`, (s.codes.length + s.tests.length) > 0 && !missingCodes.length && !missingTests.length,
+        `${missingCodes.length ? 'no broken dataset for ' + missingCodes.join(', ') : ''}${missingTests.length ? ' no test matching ' + missingTests.join(', ') : ''}`);
+    }
   }
   return { count, failures };
 }

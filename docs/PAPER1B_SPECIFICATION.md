@@ -1,6 +1,7 @@
 # Paper 1B question bank: design specification
 
-Version 2, 8 October 2026 (Phase 13: the rules built and agreed in Phase 12 made permanent; version 1: 6 October 2026).
+Version 3, 8 October 2026 (after Batch 2: section 21 records every rule the system now enforces, each tied to its checks and
+regression tests; version 2: Phase 13, the Phase 12 rules made permanent; version 1: 6 October 2026).
 Branch `paper1b-batch2`. This file is in `docs/`, which `_config.yml` keeps off the published website. Implementation
 details and reasons for the version 2 rules: `docs/PAPER1B_PHASE12_TOOLING.md`.
 
@@ -137,7 +138,7 @@ So **not every dataset is a laboratory experiment**. **[Design]**
 | Image or video analysis | multiflash photograph, an instrument scale, heights read from video frames | primary, read from a figure | supported: instrument scales with read-back (section 15); video data given as a table |
 | Field investigation | temperature of a pond over a day, sound level against distance outdoors | primary; uncontrolled variables matter | supported in principle |
 | Database or secondary data | catalogue of stars, published material constants | secondary, real values with provenance | supported: provenance, source column definitions and a stored copy of the source (section 10) |
-| Astronomical observation | brightness of a variable star, a binary star's spectral lines | secondary, or **simulated observations, clearly labelled as simulated** | supported (simulated observations approved by the teacher, 8 October 2026) |
+| Astronomical observation | brightness of a variable star, a binary star's spectral lines | secondary, or **simulated observations, clearly labelled as simulated** | supported, with the label checked (T9; C5-B01) |
 | Simulation or computational output | modelled field profiles for three set-ups | model output, no measurement scatter | **roadmap** |
 | Model vs experimental data | data plotted against a theoretical curve or an "observed = model" line | both | supported: model curves and reference lines (section 14), observed published values (section 10) |
 | Theory or model testing | "does this relationship hold, and over what range?" | any | partly supported |
@@ -621,7 +622,7 @@ reviewed. `review.mjs status` shows "(batch …; not individually inspected)" fo
 - Do not modify `main`. Do not merge a development branch into `main` or deploy without the teacher's explicit instruction at that time.
 - Do not push unless the teacher asks (the project's end-of-session routine applies only when the teacher says so for this branch).
 - `questions/1b.json` holds only APPROVED, unchanged datasets, written only by `node tools/1b/build.mjs`, never by hand.
-- Current state (8 October 2026): 13 datasets (5 pilots and 8 Batch 1) are APPROVED. On `paper1b-batch2`, A2-B01, A2-B02, B3-B01, C1-B01 and C4-B01 were changed in Phase 12 and re-approved individually by the teacher; `main` still serves the 6 October versions until a merge the teacher authorises.
+- Current state (8 October 2026): on `paper1b-batch2`, 20 datasets are APPROVED: 5 pilots, 8 Batch 1 (A2-B01, A2-B02, B3-B01, C1-B01 and C4-B01 changed in Phase 12 and re-approved individually) and 7 Batch 2 (accepted on 8 October 2026, all inspected; C2-B01 withdrawn). `main` still serves the 13 datasets of 6 October until a merge the teacher authorises.
 - Scale in controlled batches (section 19), never all at once.
 
 ---
@@ -737,9 +738,52 @@ and AO (40–60 % AO3 per batch).
 
 ---
 
+## 21. Rules every future dataset inherits (version 3)
+
+Demonstrated by the pilots, Batch 1 and Batch 2. Each rule is enforced by code, so a new dataset inherits it without anyone
+remembering it. `tools/1b/safeguard-index.mjs` lists the rules with their error codes and tests, and `node tools/1b/test.mjs`
+fails if any rule loses its proof: every code must be caught by a deliberately broken dataset, and every named test must exist.
+**A new rule is added to the index with a broken dataset or a test, or the test suite fails.** **[Design]** (teacher, 8 October 2026)
+
+| Area | Rule | Enforced by [Impl] |
+|---|---|---|
+| Deterministic datasets | One definition plus one seed always gives the same question (built twice, compared). Generated data change with the seed; published data never depend on it. A published dataset's id and seed never change. | `build.mjs` (determinism), per-dataset tests |
+| Explicit physics | Every model is built from vetted laws in `laws.mjs` (reference values, limiting cases, dimensional tests) with checked units; assumptions, measurement and the cause of every scatter are stated; parameters plausible; noise-free data recover the parameters. Constants a law needs are inputs, never hidden inside it. | `validate.mjs` (physics-*), law tests |
+| Independent audit | Each dataset's physics is re-derived from first principles in `independent.mjs`, with its own units, fits and reading of the published question. For data without a table it reads the drawings itself (trace vertices, plotted points, scale marks). Published data must scatter fairly about it; parameters, typed answers and intended conclusions are recalculated. | `independent.mjs` |
+| Uncertainty | Realistic for the instrument and method: never below half the resolution, nor half a scale division for a scale read by eye. At most 2 s.f., the same decimal places as the values. Propagated by IB worst-case sums, checked by differentiating the column's own formula. A value ± uncertainty is rounded to the uncertainty's place; 2 s.f. when rounding to 1 s.f. would change the uncertainty a lot (Skills page rule). **Halves round up, as students round** (binary 1.575 must print 1.58, not 1.57). | `validate.mjs` (uncertainty, propagation, table-dp, asks-pm), `lib.mjs` (`roundHalfUp`) |
+| Y error bars | Only y error bars are drawn. Bars shorter than the marker are not drawn: the graph declares them too small and the caption states the uncertainty; when no part uses the uncertainty, nothing about it is shown. No question or mark scheme mentions bars that aren't drawn. **Every drawn bar must be visible, not only the longest** (Phase 14). | `validate.mjs` (graph-errorbar*, graph-x-errorbars), `safeguards.mjs` (`VISIBLE_BAR`) |
+| Graph and table selection | A table only when a part needs its values (calculation, ratio, precision a graph can't give). Data shown only as a graph or instrument image declare `tableless`, and every column is readable from a declared figure. Row names (planets, years) are row headers. **A point left off a graph comes with a "Plot" part** (Phase 14). | `validate.mjs` (table-header, graph-omit-plot) |
+| Observational data | Observational data declare whether they are simulated; simulated observations say "simulated" in the question. | `validate.mjs` (observational, T9) |
+| Published data | Published values appear exactly as the source gives them (rounded only to the column's resolution). They either follow a model within a stated tolerance, with a reason, or are declared `observed` with a reason (values the question compares with a model). No invented scatter. | `validate.mjs` (catalogue, physics-meta) |
+| Provenance | Every published column names the source's own column heading and its meaning. Values match a stored copy of the source, kept outside the repository with its checksum, after declared `scale` and `offset` conversions (°C to K). No copy, or a copy not on this computer: a warning, never silence. | `validate.mjs` (provenance, source-extract) |
+| Graph validation | Every graph is read back from its SVG: axis labels, evenly spaced ticks, every point and trace vertex, error-bar lengths, fit, model and reference lines, shaded areas, instrument-scale marks. Answers and lines appear only on the examiner's graph. Every value a part reads lies on the axes, with a tolerance of at least half a small square. | `validate.mjs` (graph-*, scale-read) |
+| Context diversity | Every dataset declares a context family and objects. A repeated family or object in a batch, or one already common in the bank, is a diversity warning that blocks batch acceptance unless the teacher waives it. | `contexts.mjs`, `batch.mjs` |
+| Data regularity | Measured data may not be cleaner or more regular than the declared measurement (equal steps, too little scatter, exact ratios, repeated final digits). An accepted exception needs a reason and keeps the dataset AMBER. | `safeguards.mjs`, `validate.mjs` (regular-data) |
+| Mark-scheme leakage | No answer value, unit, relationship or conclusion is visible before the part that asks for it (stem, captions, alt text, earlier parts and mark schemes). Every number is traceable to data, a result or a sourced constant. Typed answers come from results and are accepted by the site's own marker. | `validate.mjs` (giveaway, text-number, answer-*) |
+| Student-facing vs internal data | Students see only what a part needs. Uncertainties no part uses stay internal: no ± in the table, no bars, no wording, but they still drive validation. Tableless data are validated on the complete internal table, which is never published. Datasets that aren't approved appear only in the local preview. | `generate.mjs`, `validate.mjs`, `build.mjs` |
+| Claims and verdicts | Every conclusion a part asks for (linear, through the origin, constant ratio, whole-number multiples, validity range, outlier, comparison, verdict) is checked against the data, with a margin students' own lines can't reverse. | `validate.mjs` (claim, claim-verdict, claim-anomaly) |
+| Review and approval states | DRAFT → AUTO-VALIDATED → PHYSICS-REVIEWED → TEACHER-REVIEWED → APPROVED, in order. TEACHER-REVIEWED and APPROVED name a person; Claude records them only on the teacher's instruction, with `--recorded-by`. Only APPROVED, unchanged datasets are published. Any change to a reviewed dataset, including from shared code such as rounding, breaks the freeze and needs a reset and fresh review. Batch acceptance never records TEACHER-REVIEWED. | `registry.mjs` (`reviewProblem`), `fingerprint.mjs`, `batch.mjs` |
+
+**Exceptions** (approved before a rule existed; the teacher chose to fix them later, 8 October 2026): x error bars in A1-B01
+and C4-B01; some hidden bars in A1-B01 and E3-B01; points left off the graph without a Plot part in D1-B01 and E3-B01; the
+D3-B01 table duplicates its graph. Listed in `safeguards.mjs`; a new dataset can't be added to these lists without the
+teacher's agreement.
+
+**Not yet automated** (judgement or roadmap): numbers inside mark-scheme prose that claim something about the data (A3-B01's
+"0.57 lies within every range" was caught by reading); command terms; originality against IB material; sketch parts;
+students' own steepest and shallowest lines; tangents; simulation output with several series; paper assembly. **Reading every
+generated question in the preview, at 375 px and in dark mode, stays mandatory**: in Batch 2 it found several problems the checks
+missed.
+
+---
+
 ## Decisions requiring teacher approval
 
 These must not be decided automatically by the generator or by Claude:
+
+**Decided on 8 October 2026** (Phase 14): Batch 2 accepted (7 datasets, all inspected); C2-B01 withdrawn as too complicated;
+evaluation parts kept simple for students (B2-B01 (e), E4-B01 (e) changed); the shared rounding rounds halves up (D2-B01 reset
+and re-approved); exceptions for older pilots kept until later (section 21); the bank-review findings carried to Batch 3.
 
 **Decided on 8 October 2026** (Phases 11–13): rules C1 and C6 adopted, C2 not for now, C5 unchanged; the area accepted-range
 policy (section 14); simulated observations allowed when labelled (section 4); the bounce, force-pulse and line-source
