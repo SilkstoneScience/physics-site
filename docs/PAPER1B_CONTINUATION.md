@@ -1,6 +1,6 @@
 # Paper 1B: how to continue on any computer
 
-Last updated **6 October 2026**. A step-by-step guide for resuming Paper 1B work, written so that it needs nothing
+Last updated **8 October 2026**. A step-by-step guide for resuming Paper 1B work, written so that it needs nothing
 outside this repository. For the full state of the project, read `docs/PAPER1B_PROJECT_STATUS.md`.
 
 ---
@@ -9,12 +9,16 @@ outside this repository. For the full state of the project, read `docs/PAPER1B_P
 
 ### Current production
 - **`main` is production.** GitHub Pages publishes the `main` branch as the live website.
-- **Batch 1 is live.** `main` is at `a9f8c58` ("Merge paper-1b: Paper 1B pilots, Batch 1 and review pipeline").
+- **Batch 1 is live.** It reached `main` in `a9f8c58` ("Merge paper-1b: Paper 1B pilots, Batch 1 and review pipeline").
+- **The production commit is `4ca0f74`** ("Merge contact form on the About page", 7 October 2026). It adds 26 commits of
+  general website work after `a9f8c58` (EE page, Resources, guiding questions, photos, copyright notice, contact form);
+  none of them touches Paper 1B (`questions/1b.json` and `tools/1b/` are unchanged since `a9f8c58`).
 - **13 Paper 1B datasets are approved and published:** 5 original pilots (A1-B01, B5-B01, C4-B01, D3-B01, E3-B01) and 8 Batch 1 datasets (A1-B02, A2-B01, A2-B02, B1-B01, B1-B02, B3-B01, C1-B01, D1-B01).
 
 ### Development branches
 - **`paper-1b`** (`a3fa896`): the **historical** Batch 1 development branch. Everything on it is already in `main`. Keep it, but don't develop on it.
-- **`paper1b-batch2`**: the **current** branch for Batch 2 development, created from production `main` (`a9f8c58`).
+- **`paper1b-batch2`**: the **current** branch for Batch 2 development, on GitHub. Created from `main` at `a9f8c58`, then
+  brought up to date with production `main` (`4ca0f74`) on 8 October 2026.
 
 ### Batch 2 status
 - **Batch 2 has NOT been generated.**
@@ -40,7 +44,8 @@ git fetch
 git checkout paper1b-batch2
 git pull
 ```
-If Git says `paper1b-batch2` doesn't exist (it reaches GitHub with its first commit), create it from production:
+`paper1b-batch2` is on GitHub, so `git checkout` creates it locally from `origin/paper1b-batch2`. Only if it is ever
+missing, create it from production:
 ```
 git checkout -b paper1b-batch2 origin/main
 ```
@@ -53,7 +58,9 @@ git log -1 --oneline
 git status
 ```
 - The first command must print `paper1b-batch2`. **If it prints `main`, stop and switch branches before changing anything.**
-- `origin/main` should be the production commit (`a9f8c58` or a later, deliberately merged production commit).
+- `origin/main` should be the production commit (`4ca0f74` or a later, deliberately merged production commit).
+- `main` should be contained in `paper1b-batch2`: `git merge-base --is-ancestor origin/main HEAD` prints nothing and
+  succeeds. If production has moved on, merge `main` into `paper1b-batch2` before starting new work.
 - `git status` should report a clean working tree.
 
 ### 4. Install dependencies

@@ -1,6 +1,6 @@
 # Paper 1B project status (authoritative handoff)
 
-Last updated **6 October 2026**. This is the document to read first when resuming the Paper 1B project on any
+Last updated **8 October 2026**. This is the document to read first when resuming the Paper 1B project on any
 computer. It supersedes `docs/PAPER1B_HANDOFF.md` (kept for history). It is in `docs/`, which `_config.yml` keeps off
 the published website.
 
@@ -20,27 +20,27 @@ teacher decision.
 
 ### Current production
 
-| Item | State (6 October 2026) |
+| Item | State (8 October 2026) |
 |---|---|
 | Production | **`main` is production.** GitHub Pages publishes `main` |
-| `main` | `a9f8c58` "Merge paper-1b: Paper 1B pilots, Batch 1 and review pipeline", **pushed** (local = GitHub) |
+| `main` | `4ca0f74` "Merge contact form on the About page" (7 October 2026), **pushed** (local = GitHub). Batch 1 reached `main` in `a9f8c58`; the 26 later commits are general website work (EE page, Resources, guiding questions, photos, copyright notice, contact form) and don't touch Paper 1B (`questions/1b.json` and `tools/1b/` are unchanged since `a9f8c58`) |
 | Batch 1 | **Live.** Merged into `main` and pushed |
 | Approved and published Paper 1B datasets | **13**: 5 original pilots + 8 Batch 1 datasets, all in `questions/1b.json` on `main` |
-| Tests / checker at the merge | 460 of 460 Paper 1B tests pass; site checker: no errors |
+| Tests / checker | 460 of 460 Paper 1B tests pass; build: 13 APPROVED; site checker: no errors (verified 8 October 2026 on `paper1b-batch2` after merging `4ca0f74`) |
 
 ### Development branches
 
 | Branch | Commit | Role |
 |---|---|---|
-| `main` | `a9f8c58` | Production. Never develop on it directly |
+| `main` | `4ca0f74` | Production. Never develop on it directly |
 | `paper-1b` | `a3fa896` (local = GitHub) | **Historical** Batch 1 development branch. Its work is fully contained in `main`. Keep it; don't develop on it any more |
-| `paper1b-batch2` | created from `main` at `a9f8c58` | **Current** branch for Batch 2 development. Created locally on 6 October 2026; push it to GitHub with its first commit (`git push -u origin paper1b-batch2`) |
+| `paper1b-batch2` | contains `main` at `4ca0f74` | **Current** branch for Batch 2 development, on GitHub. Created from `main` at `a9f8c58` on 6 October 2026; production `main` (`4ca0f74`) merged in on 8 October 2026 |
 
 ### Batch 2 status
 
 - **Batch 2 has NOT been generated.**
 - No Batch 2 datasets exist, none is approved, and none is in production.
-- Batch 2 development begins from the current production `main` (`a9f8c58`), on `paper1b-batch2`.
+- Batch 2 development begins from the current production `main` (`4ca0f74`), on `paper1b-batch2`.
 - Before generating, the agreed plan is to implement the MUST FIX tooling from `docs/PAPER1B_BATCH1_RETROSPECTIVE.md` (section 7).
 
 For a short, step-by-step resume guide, see **`docs/PAPER1B_CONTINUATION.md`**.
@@ -191,8 +191,9 @@ Assumes the repository is cloned, Node.js is installed (`winget install OpenJS.N
    git checkout paper1b-batch2
    git pull
    ```
-   Check the branch with `git branch --show-current` (it must say `paper1b-batch2`). If `paper1b-batch2` doesn't exist
-   on GitHub yet (it is pushed with its first commit), create it from production: `git checkout -b paper1b-batch2 origin/main`.
+   Check the branch with `git branch --show-current` (it must say `paper1b-batch2`). `paper1b-batch2` is on GitHub;
+   only if it is ever missing, create it from production: `git checkout -b paper1b-batch2 origin/main`. If production
+   `main` has moved on since the branch last merged it, merge `main` into `paper1b-batch2` before starting new work.
 2. **Per-computer setup:** create `CLAUDE.local.md` (not in git) recording where `physics-source` and the reference cache are on that computer (see `CLAUDE.md`).
 3. **Dependencies:** none to install.
 4. **Run the tests:** `node tools/1b/test.mjs` (expect "All 460 Paper 1B tests passed", or more if tests were added).
@@ -308,6 +309,9 @@ Batch 2 work.
 
 **Done on 6 October 2026:** Batch 1 verified, committed (`a3fa896`), merged into `main` (`a9f8c58`) and pushed;
 `paper-1b` pushed (`a3fa896`); `paper1b-batch2` created from `main`.
+
+**Done on 8 October 2026:** restored on the second computer. The teacher confirmed `4ca0f74` as the production commit;
+`main` was merged into `paper1b-batch2`; tests (460/460), build (13 APPROVED) and site checker (no errors) verified.
 
 When you return, in this order (detailed commands in `docs/PAPER1B_CONTINUATION.md`):
 
