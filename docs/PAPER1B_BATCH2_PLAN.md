@@ -179,7 +179,7 @@ motion in the model, so the mean wavelength is the laboratory wavelength.
 | Purpose | Use a spectral line's wavelength, observed over several weeks, to find a star's orbital period and orbital speed, judge how precisely the speed is known, and evaluate the observing method |
 | Difficulty | **2** |
 | Marks | 9: (a) the period from the graph [2] · (b) the star's orbital speed from the largest shift, using Δλ/λ ≈ v/c [3, typed 1 value] · (c) the percentage uncertainty in the speed, from the stated uncertainty in each wavelength [2] · (d) **Predict** the wavelength on a later date [1] · (e) **Suggest** how the observations could be changed to find the period more precisely (observe over more cycles; fill the gaps) [1] |
-| Data type | **Observational**: simulated observations from a circular-orbit model with spectrograph scatter, uneven observation dates (weather, daylight), clearly labelled in the stem as simulated |
+| Data type | **Observational**: simulated observations from a circular-orbit model with spectrograph scatter, uneven observation dates (weather, daylight), clearly labelled in the stem as simulated (approved by the teacher, 8 October 2026) |
 | Graph | Wavelength against time: a periodic pattern of points with scatter and visible y error bars. Students get no fit; the examiner's graph shows the model curve |
 | Relationship | Δλ/λ ≈ v/c with a sinusoidal line-of-sight velocity (no systemic velocity) |
 | AO emphasis | AO2 7, AO3 2 ((c) 1, (e) 1) |
@@ -348,7 +348,7 @@ teacher's judgement (spec section 9).
 2. This dataset list, or changes to it (topics, contexts, difficulty mix).
 3. Real published data from **NASA planetary fact sheets** (B2-B01), **IAEA PRIS / operator figures** (E4-B01) and
    **NIST atomic levels** (E1-B01): accuracy, licence and provenance.
-4. **Simulated observational data** for C5-B01, labelled as simulated.
+4. ~~**Simulated observational data** for C5-B01, labelled as simulated~~: approved by the teacher on 8 October 2026.
 5. **Empirical laws** (bounce ratio, force-plate pulse) and the **exact line-source law** (beyond the SL syllabus,
    used only to generate data; students use the inverse square law given in the question).
 6. The accepted-range policy for **area estimates** (A2-B03).
