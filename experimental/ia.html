@@ -298,11 +298,13 @@
     <div class="table-wrap">
       <table class="notes">
         <tr><th>Situation</th><th>Uncertainty to record</th></tr>
-        <tr><td>A single reading from an instrument</td><td>The <strong>least count</strong> (the smallest division), not half of it. A length has two ends, the zero and the reading, and each contributes half a division. This is the rule for our IAs.</td></tr>
-        <tr><td>Repeated readings that vary</td><td>Half the range: $\dfrac{\text{largest} - \text{smallest}}{2}$. If that is smaller than the least count, use the least count.</td></tr>
-        <tr><td>Repeated readings that don't vary (including simulations)</td><td>The least count. Never zero.</td></tr>
-        <tr><td>A reading that needs judgement</td><td>More than the least count, with a reason. A stopwatch reads to 0.01 s, but your reaction time is about 0.1–0.2 s.</td></tr>
-        <tr><td>Video or image measurement</td><td>Combine the image resolution, parallax and how sharp the object's edge is; justify it in words.</td></tr>
+        <tr><td>A single reading on an analogue scale (ruler, thermometer, measuring cylinder)</td><td><strong>Half the smallest division</strong>: a thermometer marked every 1 °C gives ±0.5 °C.</td></tr>
+        <tr><td>A measurement that needs two analogue readings</td><td>The two half-divisions add, giving <strong>one full division</strong>. A length on a ruler has two ends, the zero and the reading, so a millimetre ruler gives ±1 mm.</td></tr>
+        <tr><td>A single reading on a digital display</td><td><strong>The smallest division</strong> (one in the last digit): a balance reading 52.37 g gives ±0.01 g.</td></tr>
+        <tr><td>Repeated readings that vary</td><td>Half the range: $\dfrac{\text{largest} - \text{smallest}}{2}$. If that is smaller than the instrument's reading uncertainty, use the reading uncertainty instead.</td></tr>
+        <tr><td>Repeated readings that don't vary (including simulations)</td><td>The instrument's reading uncertainty. Never zero.</td></tr>
+        <tr><td>A reading that needs judgement</td><td>More than the instrument's reading uncertainty, with a reason: the uncertainty must make sense for how the reading was really made. A stopwatch reads to 0.01 s, but your reaction time is about 0.1–0.2 s.</td></tr>
+        <tr><td>Video or image measurement</td><td>Combine the image resolution, parallax and how sharp the object's edge is; justify it in words. The scale in the video may read to 1 mm, but you can't judge a basketball's rebound height to 1 mm when its edge is blurred across several pixels.</td></tr>
         <tr><td>Calibration of instruments</td><td>Not expected at this level. Don't spend words on it.</td></tr>
       </table>
     </div>
@@ -589,7 +591,7 @@
     </details>
     <details class="check">
       <summary>A ruler reads to 1 mm. A length measured once is 254 mm. What uncertainty should you record in your IA?</summary>
-      <p>±1 mm, the least count: half a division at each end of the length. So $L = (254 \pm 1)$ mm.</p>
+      <p>±1 mm: a length needs two readings (the zero and the far end), and each contributes half a division, ±0.5 mm. So $L = (254 \pm 1)$ mm.</p>
     </details>
     <details class="check">
       <summary>Five repeats of a fall time are 1.42 s, 1.47 s, 1.39 s, 1.45 s and 1.44 s. Give the mean with its uncertainty.</summary>

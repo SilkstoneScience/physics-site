@@ -60,6 +60,18 @@
       <p class="tok-more"><a href="../tok.html">How do physics, NoS and ToK fit together? →</a></p>
     </section>
 
+    <div class="guiding-row">
+      <aside class="guiding" aria-label="Guiding questions">
+        <p class="guiding-title">Guiding questions</p>
+        <ul>
+          <li>How do charged particles flow through materials?</li>
+          <li>How are the electrical properties of materials quantified?</li>
+          <li>What are the consequences of resistance in conductors?</li>
+        </ul>
+      </aside>
+      <a class="slides-link" href="../resources/b.html#slides-b5"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8"/><path d="M10 8.5v4l3.5-2z"/></svg><span>Lesson slides</span><small>2 decks</small></a>
+    </div>
+
     <nav class="toc" aria-label="On this page">
       <strong>On this page</strong>
       <p style="margin:8px 0 0"><a href="#b5a"><strong>B.5a Electric circuits</strong></a></p>
@@ -134,6 +146,7 @@
       <p>$W = qV = 3600 \times 5.0 = 1.8 \times 10^4$ J.</p>
     </div>
 
+    <p class="link-q"><span><span class="link-q-label">Linking question</span> How are the fields in other areas of physics similar to and different from each other? <a href="d2.html#compare">D.2 Comparing fields&nbsp;→</a></span></p>
     <!-- ===================================================== -->
     <h2 id="symbols">4. Circuit diagrams and meters</h2>
     <p>Circuit diagrams use standard symbols, which are listed in the data booklet:</p>
@@ -167,17 +180,23 @@
     <p><strong>Where resistance comes from:</strong> as free electrons drift through a metal, they keep colliding with the positive ions of the metal lattice, which vibrate about fixed positions. Each collision transfers some of the electrons' kinetic energy to the lattice, so the ions vibrate more: the metal gets <strong>hotter</strong>. This is the <strong>heating effect</strong> of a current. In a hotter metal the ions vibrate more, collisions happen more often, and the resistance <strong>increases</strong>.</p>
     <p>The resistance of a wire depends on its material, its length $L$ and its cross-sectional area $A$:</p>
     <figure class="diagram">
-      <svg viewBox="0 0 380 120" role="img" aria-labelledby="b5ct">
-        <title id="b5ct">A cylindrical wire of length L with a circular cross-section of area A at one end.</title>
-        <path class="area" d="M60 30 L320 30 A16 30 0 0 1 320 90 L60 90 Z"/>
-        <path class="axis" d="M60 30 L320 30 M60 90 L320 90 M320 30 A16 30 0 0 1 320 90 A16 30 0 0 1 320 30"/>
-        <ellipse cx="60" cy="60" rx="16" ry="30" class="f1" opacity="0.6"/>
-        <ellipse cx="60" cy="60" rx="16" ry="30" class="axis"/>
-        <text class="t1" x="20" y="64">A</text>
-        <line class="l3 thin" x1="60" y1="106" x2="320" y2="106" marker-start="url(#ah3)" marker-end="url(#ah3)"/>
-        <text x="190" y="100" text-anchor="middle" style="font-size:14px">L</text>
+      <svg viewBox="0 0 380 150" role="img" aria-labelledby="b5ct">
+        <title id="b5ct">A solid cylindrical wire seen at a slight angle, so that its circular end face is visible on the left. The end face, of area A, is shaded. A double-headed arrow below the wire, between lines marking its two ends, shows its length L.</title>
+        <path class="area" d="M80 30 L300 30 A15 32 0 0 1 300 94 L80 94 Z"/>
+        <defs><linearGradient id="b5wire" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0.35"/><stop offset="0.3" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.16"/></linearGradient></defs>
+        <path d="M80 30 L300 30 A15 32 0 0 1 300 94 L80 94 Z" style="fill:url(#b5wire)"/>
+        <path class="axis" d="M80 30 L300 30 M80 94 L300 94 M300 30 A15 32 0 0 1 300 94" style="stroke-width:2"/>
+        <ellipse cx="80" cy="62" rx="15" ry="32" class="f1" opacity="0.55"/>
+        <ellipse cx="80" cy="62" rx="15" ry="32" class="axis" style="stroke-width:2"/>
+        <line class="l1 thin" x1="38" y1="44" x2="72" y2="58"/>
+        <text class="t1" x="32" y="44" text-anchor="end" style="font-size:18px;font-style:italic;font-family:'Times New Roman',serif">A</text>
+        <line class="grid" x1="80" y1="100" x2="80" y2="132"/>
+        <line class="grid" x1="300" y1="100" x2="300" y2="132"/>
+        <line class="l3 thin" x1="81" y1="122" x2="299" y2="122" marker-start="url(#ah3)" marker-end="url(#ah3)"/>
+        <rect x="178" y="110" width="24" height="24" style="fill:var(--bg)"/>
+        <text x="190" y="128" text-anchor="middle" style="font-size:18px;font-style:italic;font-family:'Times New Roman',serif">L</text>
       </svg>
-      <figcaption>A wire of length L and <span class="key-1">cross-sectional area A</span>.</figcaption>
+      <figcaption>A wire of length $L$ and <span class="key-1">cross-sectional area $A$</span>.</figcaption>
     </figure>
     <div class="key">
       $$\rho = \frac{RA}{L} \qquad\text{so}\qquad R = \frac{\rho L}{A}$$
@@ -202,6 +221,8 @@
       <p>A copper wire of the same size would need to be over 170 m long, which is why heaters use high-resistivity alloys.</p>
     </div>
 
+    <p class="link-q"><span><span class="link-q-label">Linking question</span> How does a particle model allow electrical resistance to be explained? <span class="tag nos" title="Nature of science">NoS</span> <a href="b1.html#model">B.1 The molecular model of solids, liquids and gases&nbsp;→</a></span></p>
+    <p class="link-q"><span><span class="link-q-label">Linking question</span> What are the parallels in the models for thermal and electrical conductivity? <span class="tag nos" title="Nature of science">NoS</span> <a href="b1.html#transfer">B.1 Conduction&nbsp;→</a></span></p>
     <!-- ===================================================== -->
     <h2 id="ohm">6. Ohm's law: ohmic and non-ohmic conductors</h2>
     <div class="key"><strong>Ohm's law:</strong> the current through a conductor is directly proportional to the potential difference across it, provided the temperature (and other physical conditions) stay constant. A component that obeys Ohm's law has a <strong>constant resistance</strong> and is called <strong>ohmic</strong>.</div>
@@ -218,6 +239,19 @@
         <text class="t2" x="178" y="40" text-anchor="end" style="font-size:15px">filament lamp</text>
       </svg>
       <figcaption>I–V graphs. <span class="key-1">Ohmic resistor</span>: a straight line through the origin, so R is constant. <span class="key-2">Filament lamp</span>: non-ohmic. As V rises, the gradient falls, so R = V/I increases.</figcaption>
+    </figure>
+    <figure class="diagram">
+      <div class="diagram-row" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));align-items:end">
+        <svg viewBox="0 0 390 250" role="img" aria-labelledby="b5rt">
+          <title id="b5rt">Real class data: current in milliamps against potential difference from 0 to 8 volts for three resistors of 100, 121 and 162 ohms. Each set of points lies on a straight line through the origin. The 100 ohm line is steepest, reaching about 81 milliamps at 8 volts; the 121 ohm line reaches about 67 milliamps and the 162 ohm line about 50 milliamps.</title>
+          <line class="grid" x1="121.0" y1="225.0" x2="121.0" y2="21.0"/><line class="grid" x1="187.0" y1="225.0" x2="187.0" y2="21.0"/><line class="grid" x1="253.0" y1="225.0" x2="253.0" y2="21.0"/><line class="grid" x1="319.0" y1="225.0" x2="319.0" y2="21.0"/><line class="grid" x1="55.0" y1="177.0" x2="332.2" y2="177.0"/><line class="grid" x1="55.0" y1="129.0" x2="332.2" y2="129.0"/><line class="grid" x1="55.0" y1="81.0" x2="332.2" y2="81.0"/><line class="grid" x1="55.0" y1="33.0" x2="332.2" y2="33.0"/><line class="axis" x1="55.0" y1="225.0" x2="348.7" y2="225.0"/><line class="axis" x1="55.0" y1="225.0" x2="55.0" y2="13.8"/><text x="55.0" y="245.0" text-anchor="middle" style="font-size:13px">0</text><text x="187.0" y="245.0" text-anchor="middle" style="font-size:13px">4</text><text x="319.0" y="245.0" text-anchor="middle" style="font-size:13px">8</text><text x="49.0" y="134.0" text-anchor="end" style="font-size:13px">40</text><text x="49.0" y="38.0" text-anchor="end" style="font-size:13px">80</text><text x="348.7" y="217.0" text-anchor="end" style="font-size:14px">V / V</text><text x="63.0" y="17.8" style="font-size:14px">I / mA</text><line class="l1 thin" x1="55.0" y1="224.4" x2="332.2" y2="21.6"/><circle cx="88.0" cy="201.0" r="3.5" class="f1"/><circle cx="121.0" cy="176.3" r="3.5" class="f1"/><circle cx="154.0" cy="151.6" r="3.5" class="f1"/><circle cx="187.0" cy="127.3" r="3.5" class="f1"/><circle cx="220.0" cy="103.3" r="3.5" class="f1"/><circle cx="253.0" cy="78.6" r="3.5" class="f1"/><circle cx="286.0" cy="56.3" r="3.5" class="f1"/><circle cx="319.0" cy="31.6" r="3.5" class="f1"/><text class="t1" x="337.8" y="26.6" style="font-size:14px">100 Ω</text><line class="l2 thin" x1="55.0" y1="225.5" x2="332.2" y2="55.7"/><circle cx="88.0" cy="205.1" r="3.5" class="f2"/><circle cx="121.0" cy="184.9" r="3.5" class="f2"/><circle cx="154.0" cy="165.5" r="3.5" class="f2"/><circle cx="187.0" cy="144.6" r="3.5" class="f2"/><circle cx="220.0" cy="124.4" r="3.5" class="f2"/><circle cx="253.0" cy="103.6" r="3.5" class="f2"/><circle cx="286.0" cy="84.8" r="3.5" class="f2"/><circle cx="319.0" cy="63.5" r="3.5" class="f2"/><text class="t2" x="337.8" y="60.7" style="font-size:14px">121 Ω</text><line class="l3 thin" x1="55.0" y1="224.6" x2="332.2" y2="98.7"/><circle cx="88.0" cy="210.1" r="3.5" class="f3"/><circle cx="121.0" cy="195.0" r="3.5" class="f3"/><circle cx="154.0" cy="178.9" r="3.5" class="f3"/><circle cx="187.0" cy="164.5" r="3.5" class="f3"/><circle cx="220.0" cy="148.4" r="3.5" class="f3"/><circle cx="253.0" cy="135.5" r="3.5" class="f3"/><circle cx="286.0" cy="120.6" r="3.5" class="f3"/><circle cx="319.0" cy="104.3" r="3.5" class="f3"/><text x="337.8" y="103.7" style="font-size:14px">162 Ω</text>
+        </svg>
+        <svg viewBox="0 0 380 250" role="img" aria-labelledby="b5lt">
+          <title id="b5lt">Real class data for a filament lamp: current in amps against potential difference from minus 6 to plus 6 volts. The points lie on a curve through the origin that gets less steep as the potential difference increases in either direction, reaching about 0.46 amps at 6 volts and minus 0.44 amps at minus 6 volts. A dashed straight line through the origin, matching the lamp at 1 volt, rises far above the curve at higher voltages.</title>
+          <line class="grid" x1="34.0" y1="230.0" x2="34.0" y2="20.0"/><line class="grid" x1="86.0" y1="230.0" x2="86.0" y2="20.0"/><line class="grid" x1="138.0" y1="230.0" x2="138.0" y2="20.0"/><line class="grid" x1="242.0" y1="230.0" x2="242.0" y2="20.0"/><line class="grid" x1="294.0" y1="230.0" x2="294.0" y2="20.0"/><line class="grid" x1="346.0" y1="230.0" x2="346.0" y2="20.0"/><line class="grid" x1="26.2" y1="209.0" x2="353.8" y2="209.0"/><line class="grid" x1="26.2" y1="167.0" x2="353.8" y2="167.0"/><line class="grid" x1="26.2" y1="83.0" x2="353.8" y2="83.0"/><line class="grid" x1="26.2" y1="41.0" x2="353.8" y2="41.0"/><line class="axis" x1="18.4" y1="125.0" x2="364.2" y2="125.0"/><line class="axis" x1="190.0" y1="234.2" x2="190.0" y2="13.7"/><text x="34.0" y="145.0" text-anchor="middle" style="font-size:13px">-6</text><text x="346.0" y="145.0" text-anchor="middle" style="font-size:13px">6</text><text x="184.0" y="214.0" text-anchor="end" style="font-size:13px">-0.4</text><text x="184.0" y="46.0" text-anchor="end" style="font-size:13px">0.4</text><text x="364.2" y="117.0" text-anchor="end" style="font-size:14px">V / V</text><text x="198.0" y="17.7" style="font-size:14px">I / A</text><line class="l3 thin dash" x1="125.0" y1="223.8" x2="255.0" y2="26.2"/><polyline class="l2 thin" points="26.2,216.5 28.8,215.8 31.4,215.0 34.0,214.3 36.6,213.5 39.2,212.8 41.8,212.0 44.4,211.2 47.0,210.4 49.6,209.6 52.2,208.8 54.8,208.0 57.4,207.2 60.0,206.4 62.6,205.5 65.2,204.7 67.8,203.8 70.4,203.0 73.0,202.1 75.6,201.2 78.2,200.3 80.8,199.4 83.4,198.5 86.0,197.6 88.6,196.7 91.2,195.7 93.8,194.8 96.4,193.8 99.0,192.8 101.6,191.8 104.2,190.8 106.8,189.7 109.4,188.7 112.0,187.6 114.6,186.5 117.2,185.4 119.8,184.3 122.4,183.1 125.0,182.0 127.6,180.8 130.2,179.6 132.8,178.3 135.4,177.0 138.0,175.7 140.6,174.4 143.2,173.0 145.8,171.6 148.4,170.1 151.0,168.6 153.6,167.0 156.2,165.4 158.8,163.7 161.4,161.9 164.0,160.0 166.6,158.1 169.2,156.0 171.8,153.8 174.4,151.4 177.0,148.7 179.6,145.8 182.2,142.4 184.8,138.4 187.4,133.2 190.0,125.0 192.6,115.9 195.2,110.2 197.8,105.8 200.4,102.1 203.0,98.8 205.6,95.9 208.2,93.3 210.8,90.8 213.4,88.5 216.0,86.4 218.6,84.3 221.2,82.3 223.8,80.5 226.4,78.7 229.0,76.9 231.6,75.3 234.2,73.6 236.8,72.1 239.4,70.5 242.0,69.1 244.6,67.6 247.2,66.2 249.8,64.8 252.4,63.5 255.0,62.2 257.6,60.9 260.2,59.6 262.8,58.4 265.4,57.1 268.0,55.9 270.6,54.8 273.2,53.6 275.8,52.5 278.4,51.3 281.0,50.2 283.6,49.1 286.2,48.1 288.8,47.0 291.4,46.0 294.0,44.9 296.6,43.9 299.2,42.9 301.8,41.9 304.4,40.9 307.0,40.0 309.6,39.0 312.2,38.1 314.8,37.1 317.4,36.2 320.0,35.3 322.6,34.4 325.2,33.5 327.8,32.6 330.4,31.7 333.0,30.8 335.6,29.9 338.2,29.1 340.8,28.2 343.4,27.4 346.0,26.5 348.6,25.7 351.2,24.9 353.8,24.1"/><circle cx="216.3" cy="85.1" r="4" class="f2"/><circle cx="242.0" cy="68.3" r="4" class="f2"/><circle cx="268.0" cy="55.7" r="4" class="f2"/><circle cx="294.0" cy="45.2" r="4" class="f2"/><circle cx="320.0" cy="34.7" r="4" class="f2"/><circle cx="346.0" cy="28.4" r="4" class="f2"/><circle cx="164.0" cy="160.7" r="4" class="f2"/><circle cx="138.0" cy="175.4" r="4" class="f2"/><circle cx="112.0" cy="185.9" r="4" class="f2"/><circle cx="86.0" cy="196.4" r="4" class="f2"/><circle cx="60.0" cy="206.9" r="4" class="f2"/><circle cx="34.0" cy="217.4" r="4" class="f2"/><text class="t2" x="34.0" y="40.0" style="font-size:14px">filament lamp</text>
+        </svg>
+      </div>
+      <figcaption>Real data from one of our class practicals. First graph: three resistors (<span class="key-1">100 Ω</span>, <span class="key-2">121 Ω</span> and 162 Ω). Each gives a straight line through the origin, so each is ohmic. The gradient is $1/R$: the best-fit gradients, 10.1, 8.4 and 6.2 mA per volt, give 99&nbsp;Ω, 119&nbsp;Ω and 160&nbsp;Ω. Second graph: a <span class="key-2">filament lamp</span>. The curve gets flatter as the filament heats up, so its resistance rises: $R = V/I$ is about 5&nbsp;Ω at 1&nbsp;V but 13&nbsp;Ω at 6&nbsp;V. The dashed line shows what a constant 5&nbsp;Ω would give. Reversing the p.d. gives the same shape upside down.</figcaption>
     </figure>
     <p><strong>Why a filament lamp is non-ohmic:</strong> a bigger current heats the tungsten filament (to over 2000 °C). The lattice ions vibrate more, the electrons collide more often, and the resistance increases. Equal increases in $V$ therefore give smaller and smaller increases in $I$. Reversing the p.d. gives the same shape upside down.</p>
     <p>On an I–V graph, the resistance at any point is $\dfrac{V}{I}$ for that point, <strong>not</strong> the inverse of the gradient of the curve.</p>
@@ -236,6 +270,7 @@
       <p>Energy $= Pt = 2300 \times 240 = 5.5 \times 10^5$ J. In kWh: $2.3\ \text{kW} \times \dfrac{4.0}{60}\ \text{h} = 0.15$ kWh. Electricity companies charge per kWh ($1\ \text{kWh} = 3.60 \times 10^6$ J).</p>
     </div>
 
+    <p class="link-q"><span><span class="link-q-label">Linking question</span> How can the heating of an electrical resistor be explained using other areas of physics? <a href="a2.html#momentum">A.2 Momentum and impulse&nbsp;→</a> · <a href="b1.html#internal">B.1 Internal energy and thermal equilibrium&nbsp;→</a></span></p>
     <!-- ===================================================== -->
     <h2 id="combos">8. Series and parallel circuits</h2>
     <figure class="diagram">
@@ -275,6 +310,7 @@
       <p>Branch currents: $\dfrac{6.0}{6.0} = 1.0$ A and $\dfrac{6.0}{12} = 0.50$ A. Check: $1.0 + 0.50 = 1.5$ A ✓.</p>
     </div>
 
+    <p class="link-q"><span><span class="link-q-label">Linking question</span> In what ways can an electrical circuit be described as a system like the Earth’s atmosphere or a heat engine? <a href="b2.html#balance">B.2 Energy balance&nbsp;→</a> · <a href="b4.html#engines">B.4 Cycles and heat engines (HL)&nbsp;→</a></span></p>
     <!-- ===================================================== -->
     <h2 id="divider">9. Variable resistors and potential dividers</h2>
     <p>Some resistors are designed to change their resistance:</p>
@@ -371,6 +407,7 @@
       <p>Input power $= 800 \times 1.6 = 1280$ W. &nbsp; Output $= 0.20 \times 1280 = 260$ W.</p>
     </div>
 
+    <p class="link-q"><span><span class="link-q-label">Extra linking question</span> How does light free electrons in a solar cell, and how is that like the photoelectric effect? <a href="e2.html#photoelectric">E.2 The photoelectric effect (HL)&nbsp;→</a></span></p>
     <!-- ===================================================== -->
     <h2 id="sources">13. Comparing sources of electrical energy</h2>
     <ul>
@@ -380,6 +417,7 @@
       <li><strong>Mains electricity from power stations.</strong> <em>For:</em> a large, continuous supply that is cheap per kWh. <em>Against:</em> not portable, and often generated from fossil fuels, which add to the enhanced greenhouse effect (B.2).</li>
     </ul>
 
+    <p class="link-q"><span><span class="link-q-label">Linking question</span> What are the advantages of cells as a source of electrical energy?</span></p>
     <!-- ===================================================== -->
     <h2 id="mistakes">14. Common mistakes</h2>
     <ul>

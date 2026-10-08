@@ -419,7 +419,8 @@ window.CONSTANTS = {
   if (footer) {
     footer.className = 'site-footer';
     footer.innerHTML = `<div class="inner">A study guide for IB Diploma Programme Physics students.
-      This site is not produced or endorsed by the International Baccalaureate Organization.</div>`;
+      This site is not produced or endorsed by the International Baccalaureate Organization.
+      <span class="copyright">© 2026 Mark Silkstone. All rights reserved. Please <a href="${root}about.html#contact">ask me</a> before copying or reproducing anything from this site. <a href="${root}about.html#copyright">More</a></span></div>`;
   }
 
   // ----- List of all themes: <div data-theme-list></div> -----
@@ -499,6 +500,50 @@ window.CONSTANTS = {
       bookletCard.removeAttribute('target');
     }
   }
+
+  // ----- Resources page: "Show slides" loads a Google Drive viewer only when pressed -----
+  document.querySelectorAll('button[data-slides]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const box = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!box) return;
+      if (!box.firstElementChild) {
+        const frame = document.createElement('iframe');
+        frame.src = 'https://drive.google.com/file/d/' + btn.dataset.slides + '/preview';
+        frame.title = 'Slides: ' + btn.dataset.title;
+        frame.allowFullscreen = true;
+        box.appendChild(frame);
+      }
+      const show = box.hidden;
+      box.hidden = !show;
+      btn.setAttribute('aria-expanded', String(show));
+      btn.textContent = show ? 'Hide slides' : 'Show slides';
+    });
+  });
+
+  // ----- About page: contact form, sent to Formspree without leaving the page -----
+  // (Without JavaScript the form still works: it posts to Formspree, which shows its own thank-you page.)
+  document.querySelectorAll('form[data-formspree]').forEach((form) => {
+    const status = form.querySelector('.contact-status');
+    const button = form.querySelector('button[type="submit"]');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      button.disabled = true;
+      status.className = 'contact-status';
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error('status ' + res.status);
+        form.reset();
+        status.classList.add('ok');
+        status.textContent = 'Thank you: your message has been sent. I will reply by email.';
+      } catch (err) {
+        status.classList.add('error');
+        status.textContent = 'Sorry, the message could not be sent. Please check your connection and try again in a moment.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+  });
 
   // ----- "Back to previous page" button at the bottom of every page -----
   let cameFromSite = false;
