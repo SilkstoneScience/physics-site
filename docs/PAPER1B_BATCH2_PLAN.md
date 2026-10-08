@@ -8,6 +8,9 @@ In `docs/`, which `_config.yml` keeps off the website. Section and archetype IDs
 **Verdict at the end: NOT READY — TOOLING CHANGES REQUIRED.** The four MUST FIX checks from the retrospective are
 not yet in the code (checked 8 October 2026), and this plan needs five further capabilities (section 4).
 
+> **Confirmed by the teacher (8 October 2026):** the 8 datasets in section 3 are the Batch 2 list (C5-B01 in its simplified
+> form). All decisions in section 7 are made; the next steps are Phase 13 (the specification) and then generation.
+>
 > **Phase 12 update (8 October 2026):** T1–T8 and T10 are now built and tested; T9 is deferred, and C5-B01 is flagged for a
 > teacher decision. The capability assessment of each dataset is in `docs/PAPER1B_PHASE12_TOOLING.md` (section 2). The
 > dataset list below is unchanged.
