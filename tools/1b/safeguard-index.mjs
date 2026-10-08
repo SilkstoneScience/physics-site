@@ -5,7 +5,7 @@
 // Adding a rule? Add it here with its code or test: a rule with neither fails the test suite.
 export const SAFEGUARDS = [
   { area: 'Deterministic datasets', rule: 'the same definition and seed always build the same question; generated data change with the seed; published data never depend on it',
-    codes: [], tests: ['building twice gives identical output', 'changing the seed changes the data', 'published data don\'t depend on the seed'] },
+    codes: [], tests: ['building twice gives identical output', 'changing the seed changes the data', 'published data don\'t depend on the seed', 'Fingerprints ignore line-ending style'] },
   { area: 'Explicit physics', rule: 'models are built only from vetted laws with checked units, stated assumptions and causes of scatter; noise-free data recover the parameters',
     codes: ['physics-meta', 'physics-units', 'physics-range', 'physics-magnitude', 'physics-inversion'], tests: ['law '] },
   { area: 'Independent audit', rule: 'every dataset is re-derived from first principles without the generator\'s physics; published data unbiased; answers and conclusions recalculated',
