@@ -622,7 +622,7 @@ reviewed. `review.mjs status` shows "(batch …; not individually inspected)" fo
 - Do not modify `main`. Do not merge a development branch into `main` or deploy without the teacher's explicit instruction at that time.
 - Do not push unless the teacher asks (the project's end-of-session routine applies only when the teacher says so for this branch).
 - `questions/1b.json` holds only APPROVED, unchanged datasets, written only by `node tools/1b/build.mjs`, never by hand.
-- Current state (8 October 2026): on `paper1b-batch2`, 20 datasets are APPROVED: 5 pilots, 8 Batch 1 (A2-B01, A2-B02, B3-B01, C1-B01 and C4-B01 changed in Phase 12 and re-approved individually) and 7 Batch 2 (accepted on 8 October 2026, all inspected; C2-B01 withdrawn). `main` still serves the 13 datasets of 6 October until a merge the teacher authorises.
+- Current state (8 October 2026): on `paper1b-batch2`, 20 datasets are APPROVED: 5 pilots, 8 Batch 1 (A2-B01, A2-B02, B3-B01, C1-B01 and C4-B01 changed in Phase 12 and re-approved individually) and 7 Batch 2 (accepted on 8 October 2026, all inspected; C2-B01 withdrawn). All 20 are on `main` (live) since the teacher-authorised merge of 8 October 2026.
 - Scale in controlled batches (section 19), never all at once.
 
 ---

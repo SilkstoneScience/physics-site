@@ -9,11 +9,11 @@ outside this repository. For the full state of the project, read `docs/PAPER1B_P
 
 ### Current production
 - **`main` is production.** GitHub Pages publishes the `main` branch as the live website.
-- **Batch 1 is live.** It reached `main` in `a9f8c58` ("Merge paper-1b: Paper 1B pilots, Batch 1 and review pipeline").
-- **The production commit is `4ca0f74`** ("Merge contact form on the About page", 7 October 2026). It adds 26 commits of
+- **Batch 1 is live** (merged in `a9f8c58`) and **Batch 2 is live** (merged on 8 October 2026 in `d5d0a4c`, with the GitHub-check fix in `98b238c`).
+- **Production is the latest commit on `main`**, which contains all of `paper1b-batch2`. Before Batch 2, production was `4ca0f74` (7 October 2026), which added
   general website work after `a9f8c58` (EE page, Resources, guiding questions, photos, copyright notice, contact form);
-  none of them touches Paper 1B (`questions/1b.json` and `tools/1b/` are unchanged since `a9f8c58`).
-- **13 Paper 1B datasets are approved and published:** 5 original pilots (A1-B01, B5-B01, C4-B01, D3-B01, E3-B01) and 8 Batch 1 datasets (A1-B02, A2-B01, A2-B02, B1-B01, B1-B02, B3-B01, C1-B01, D1-B01).
+  none of it touched Paper 1B.
+- **20 Paper 1B datasets are approved and published:** 5 pilots (A1-B01, B5-B01, C4-B01, D3-B01, E3-B01), 8 Batch 1 (A1-B02, A2-B01, A2-B02, B1-B01, B1-B02, B3-B01, C1-B01, D1-B01) and 7 Batch 2 (A2-B03, A3-B01, B2-B01, C5-B01, D2-B01, E1-B01, E4-B01).
 
 ### Development branches
 - **`paper-1b`** (`a3fa896`): the **historical** Batch 1 development branch. Everything on it is already in `main`. Keep it, but don't develop on it.
@@ -23,14 +23,15 @@ outside this repository. For the full state of the project, read `docs/PAPER1B_P
 ### Batch 2 status (8 October 2026)
 - **Planned and confirmed:** 8 datasets in `docs/PAPER1B_BATCH2_PLAN.md`; every teacher decision is made.
 - **Tooling ready (Phase 12)** and **rules in the specification (Phase 13, version 2)**. All 13 existing datasets are APPROVED
-  (5 were changed and re-approved on 8 October; `main` still has the 6 October versions until a merge).
+  (5 were changed and re-approved on 8 October).
 - **Batch 2 is done (Phase 14):** 7 datasets generated, inspected individually by the teacher and accepted as `batch-2`; C2-B01 withdrawn (kept unbuilt in `tools/1b/withdrawn/`). 20 APPROVED datasets on `paper1b-batch2`.
-- **Next:** on the teacher's instruction, merge `paper1b-batch2` into `main` and push (section 12, step 8). Then plan Batch 3.
+- **Batch 2 is live:** merged into `main` and pushed on 8 October 2026; the GitHub check passes.
+- **Next:** Batch 3, when the teacher decides to generate more questions (priorities: `docs/PAPER1B_PROJECT_STATUS.md`, sections 3a and 7).
 - The stored NASA source copy for D1-B01 lives outside the repository, in the reference cache
   (`reference-cache/p1b-sources/`). On a computer without it, the build shows a warning (not an error) for D1-B01.
 - Stored source copies for B2-B01, E1-B01 and E4-B01 are also in `reference-cache/p1b-sources/`; without them the build gives warnings, not errors.
-- Batch 2 is approved but **not in production**: `main` (the live site) still has the 13 datasets of 6 October.
-- `paper1b-batch2` contains production `main` (`4ca0f74`) plus all Batch 2 work.
+- `main` (the live site) and `paper1b-batch2` both have the 20 approved datasets.
+- `paper1b-batch2` and `main` contain the same Paper 1B work (8 October 2026).
 
 ---
 
@@ -65,7 +66,7 @@ git log -1 --oneline
 git status
 ```
 - The first command must print `paper1b-batch2`. **If it prints `main`, stop and switch branches before changing anything.**
-- `origin/main` should be the production commit (`4ca0f74` or a later, deliberately merged production commit).
+- `origin/main` should be the latest deliberately merged production commit (Batch 2 merged on 8 October 2026; check with `git log -3 --oneline origin/main`).
 - `main` should be contained in `paper1b-batch2`: `git merge-base --is-ancestor origin/main HEAD` prints nothing and
   succeeds. If production has moved on, merge `main` into `paper1b-batch2` before starting new work.
 - `git status` should report a clean working tree.
@@ -85,7 +86,7 @@ Expect "✓ All 729 Paper 1B tests passed" (more if tests have been added since)
 ```
 node tools/1b/build.mjs
 ```
-Expect it to end with "Production (questions/1b.json): 20 APPROVED dataset(s)" on `paper1b-batch2` (13 on `main` until Batch 2 is merged). It also rebuilds the local preview
+Expect it to end with "Production (questions/1b.json): 20 APPROVED dataset(s)". It also rebuilds the local preview
 (`questions/1b-preview.json`), which is never committed.
 
 **Windows note:** after a build, `git status` may list the question files as modified even though nothing changed.
