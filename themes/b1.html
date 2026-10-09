@@ -38,6 +38,7 @@
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="b.html">Theme B The particulate nature of matter</a></p>
     <h1><span class="code">B.1</span>Thermal energy transfers</h1>
     <p class="lead">Why does a metal bench feel colder than a wooden one on the same morning? How long does a kettle take to boil, and how can we measure the temperature of the Sun without going there? This topic builds a <strong>particle model</strong> of matter, links temperature to the motion of particles, and explains the three ways thermal energy moves: <strong>conduction</strong>, <strong>convection</strong> and <strong>radiation</strong>. There is no additional HL content in B.1.</p>
+    <p class="new2028-note"><span class="tag y2028">New for 2028</span> For exams from 2028: $\overline{E}_k = \frac{3}{2}k_BT$ is stated for an <a href="#monatomic">ideal monatomic gas</a>; luminosity means radiated power; <a href="#intensity">intensity $I = \frac{P}{A}$</a> is new (and in the data booklet); and apparent brightness is the intensity of a star's light.</p>
 
     <section class="tok" aria-labelledby="tok-title">
       <h2 id="tok-title">Knowledge and science</h2>
@@ -87,7 +88,7 @@
         <li><a href="#transfer">Conduction</a></li>
         <li><a href="#convection">Convection</a></li>
         <li><a href="#radiation">Thermal radiation and black bodies</a></li>
-        <li><a href="#luminosity">Luminosity and apparent brightness</a></li>
+        <li><a href="#luminosity">Luminosity, intensity and apparent brightness</a></li>
         <li><a href="#mistakes">Common mistakes</a></li>
         <li><a href="#check">Check your understanding</a></li>
       </ol>
@@ -180,6 +181,7 @@
       $$\overline{E}_k = \frac{3}{2}k_B T$$
       <p style="margin:0">$\overline{E}_k$ is the average kinetic energy of one particle in J, $T$ is the temperature in K, and $k_B = 1.38 \times 10^{-23}\ \text{J K}^{-1}$ is the <strong>Boltzmann constant</strong>.</p>
     </div>
+    <p class="new2028" id="monatomic"><span class="tag y2028">New for 2028</span> The 2028 guide says exactly which particles this is for: $\overline{E}_k = \frac{3}{2}k_BT$ gives the average kinetic energy of the particles of an <strong>ideal monatomic gas</strong> (single atoms, such as helium or argon, that only move from place to place). In solids, liquids and gases made of molecules, the particles also vibrate or rotate, so the temperature still measures their average random kinetic energy, but this exact formula is for the ideal monatomic gas.</p>
     <p>This only works with kelvin. Doubling the temperature from 300 K to 600 K doubles the average kinetic energy. "Doubling" 20 °C to 40 °C does not (it is 293 K to 313 K, only a 7% increase).</p>
     <div class="worked">
       <h3>Worked example: molecules in a room</h3>
@@ -418,13 +420,14 @@
 
     <p class="link-q"><span><span class="link-q-label">Linking question</span> What applications does the Stefan-Boltzmann law have in astrophysics and in the use of solar energy? <a href="e5.html#radius">E.5 Finding the radius of a star&nbsp;→</a> · <a href="b2.html#solar">B.2 The solar constant and the S/4 rule&nbsp;→</a></span></p>
     <!-- ===================================================== -->
-    <h2 id="luminosity">10. Luminosity and apparent brightness</h2>
+    <h2 id="luminosity">10. Luminosity, intensity and apparent brightness</h2>
     <p>The <strong>luminosity</strong> $L$ of a star is the <strong>total power</strong> it radiates, in watts. For a black body it depends on its surface area and on its temperature to the <strong>fourth power</strong>:</p>
     <div class="key">
       $$L = \sigma A T^4$$
       <p style="margin:0">This is the <strong>Stefan–Boltzmann law</strong>. $A$ is the surface area in $\text{m}^2$ (for a sphere of radius $R$, $A = 4\pi R^2$), $T$ is the surface temperature in K, and $\sigma = 5.67 \times 10^{-8}\ \text{W m}^{-2}\,\text{K}^{-4}$ is the Stefan–Boltzmann constant.</p>
     </div>
     <p>Because of the $T^4$, doubling the temperature makes a body emit $2^4 = 16$ times as much power.</p>
+    <p class="new2028"><span class="tag y2028">New for 2028</span> The 2028 guide states that <strong>luminosity is synonymous with radiated power</strong>: the luminosity of any body (a star, a lamp filament, a planet) is the total power it radiates, in watts.</p>
     <div class="worked">
       <h3>Worked example: the luminosity of the Sun</h3>
       <p>The Sun has a radius of $6.96 \times 10^8$ m and a surface temperature of 5800 K. Find its luminosity.</p>
@@ -443,8 +446,24 @@
       <p>It is cooler than the Sun, so each square metre emits less, yet it is 100&nbsp;000 times more luminous. It must be enormous: placed where the Sun is, it would swallow the orbit of Mars.</p>
     </div>
 
+    <div class="new2028" id="intensity">
+      <h3>Intensity <span class="tag y2028">New for 2028</span></h3>
+      <p>The <strong>intensity</strong> $I$ of radiation is the power arriving per unit area, measured on a surface at right angles to the direction of travel:</p>
+      <div class="key">
+        $$I = \frac{P}{A}$$
+        <p style="margin:0">$P$ is the power in W and $A$ is the area in $\text{m}^2$, so intensity is in $\text{W m}^{-2}$. This equation is new in the 2028 data booklet.</p>
+      </div>
+      <div class="worked">
+        <h3>Worked example: a solar panel</h3>
+        <p>Sunlight delivers 1.2 kW to a solar panel of area 1.6 m² facing the Sun. What is the intensity of the sunlight?</p>
+        <p>$I = \dfrac{P}{A} = \dfrac{1.2 \times 10^3}{1.6} = 750\ \text{W m}^{-2}$.</p>
+        <p>If the panel converts 20% of this into electrical energy, it supplies $0.20 \times 1.2\ \text{kW} = 240$ W.</p>
+      </div>
+    </div>
+
     <h3>Apparent brightness</h3>
     <p>How bright a star looks from Earth depends on its luminosity <em>and</em> on how far away it is. The <strong>apparent brightness</strong> $b$ is the power received per square metre at a distance $d$, measured at right angles to the direction of the light, in $\text{W m}^{-2}$.</p>
+    <p class="new2028"><span class="tag y2028">New for 2028</span> The 2028 guide states that <strong>apparent brightness is synonymous with intensity</strong>: $b$ is simply the intensity $I = \frac{P}{A}$ of a star's light where it is received. For a star, the power $L$ is spread over a sphere of area $4\pi d^2$, which gives the equation below.</p>
     <p>The star's power spreads out equally in all directions, over the surface of a bigger and bigger sphere. At distance $d$, that sphere has area $4\pi d^2$:</p>
     <div class="key">
       $$b = \frac{L}{4\pi d^2}$$

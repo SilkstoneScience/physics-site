@@ -35,6 +35,7 @@
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="b.html">Theme B The particulate nature of matter</a></p>
     <h1><span class="code">B.3</span>Gas laws</h1>
     <p class="lead">Squeeze a balloon and it pushes back harder; leave a ball in the cold and it goes soft. Gases follow simple, exact laws that link their pressure, volume and temperature. This topic finds those laws by experiment, combines them into one equation, and then explains them with a model of tiny molecules bouncing around. There is no additional HL content in B.3, but B.4 (HL) builds directly on it.</p>
+    <p class="new2028-note"><span class="tag y2028">New for 2028</span> For exams from 2028 the guide adds <a href="#rms">the difference between rms speed and average speed, and why rms is used</a>.</p>
 
     <section class="tok" aria-labelledby="tok-title">
       <h2 id="tok-title">Knowledge and science</h2>
@@ -228,30 +229,40 @@
       <li>A molecule of mass $m$ moving at speed $u$ towards a wall bounces back at the same speed. Its momentum changes by $2mu$.</li>
       <li>It travels $2L$ (there and back) before hitting the same wall again, so it hits it every $\dfrac{2L}{u}$ seconds.</li>
       <li>The average force on the wall is the rate of change of momentum: $\dfrac{2mu}{2L/u} = \dfrac{mu^2}{L}$.</li>
-      <li>Add up the forces from all $N$ molecules. On average a third of the motion is in each of the three directions, so the total force is $\dfrac{Nm\overline{v^2}}{3L}$, where $\overline{v^2}$ is the <strong>mean of the squares</strong> of the speeds.</li>
+      <li>Add up the forces from all $N$ molecules. On average a third of the motion is in each of the three directions, so the total force is $\dfrac{Nmv_{\text{rms}}^2}{3L}$, where $v_{\text{rms}}^2$ is the <strong>mean of the squares</strong> of the speeds.</li>
       <li>Divide by the wall's area $L^2$, and note that $\dfrac{Nm}{L^3}$ is the density $\rho$ of the gas.</li>
     </ol>
     <div class="key">
-      $$P = \frac{1}{3}\rho\overline{v^2}$$
-      <p style="margin:0">$\rho$ is the density of the gas in $\text{kg m}^{-3}$ and $\overline{v^2}$ is the mean square speed of its molecules in $\text{m}^2\,\text{s}^{-2}$. The square root of $\overline{v^2}$ is called the <strong>root-mean-square (rms) speed</strong>, $v_{\text{rms}}$.</p>
+      $$P = \frac{1}{3}\rho v_{\text{rms}}^2$$
+      <p style="margin:0">$\rho$ is the density of the gas in $\text{kg m}^{-3}$ and $v_{\text{rms}}$ is the <strong>root-mean-square (rms) speed</strong> of its molecules. $v_{\text{rms}}^2$ is the <strong>mean of the squared speeds</strong> (the mean square speed), in $\text{m}^2\,\text{s}^{-2}$.</p>
+    </div>
+    <div class="new2028" id="rms">
+      <h3>Root-mean-square speed <span class="tag y2028">New for 2028</span></h3>
+      <p>The guide asks you to know how the rms speed differs from the average speed, and why the gas laws use it.</p>
+      <ul>
+        <li><strong>rms speed:</strong> square every molecule's speed, take the mean, then take the square root. <strong>Average (mean) speed:</strong> just add the speeds and divide by how many there are.</li>
+        <li>They are not the same. Four molecules moving at 100, 200, 300 and 400 $\text{m s}^{-1}$ have an average speed of 250 $\text{m s}^{-1}$, but $v_{\text{rms}}^2 = \frac{(1 + 4 + 9 + 16) \times 10^4}{4} = 7.5 \times 10^4\ \text{m}^2\,\text{s}^{-2}$, so $v_{\text{rms}} = 274\ \text{m s}^{-1}$. Squaring gives the fast molecules more weight, so $v_{\text{rms}}$ is always a little larger than the average speed.</li>
+        <li>The <strong>average velocity</strong> of the molecules is zero: they move equally in all directions, so their velocities cancel. That is why we use speeds, not velocities.</li>
+        <li><strong>Why rms?</strong> A molecule's effect on the pressure depends on $v^2$: a faster molecule hits the wall harder (momentum change $\propto v$) <em>and</em> more often (collisions per second $\propto v$). Its kinetic energy, $\frac{1}{2}mv^2$, also depends on $v^2$. So the quantity that appears in the gas laws is the mean of $v^2$, and $v_{\text{rms}}$ is the speed that gives it.</li>
+      </ul>
     </div>
     <div class="worked">
       <h3>Worked example: how fast are air molecules?</h3>
       <p>Air at $1.0 \times 10^5$ Pa has a density of 1.2 $\text{kg m}^{-3}$. Find the rms speed of its molecules.</p>
-      <p>$\overline{v^2} = \dfrac{3P}{\rho} = \dfrac{3 \times 1.0 \times 10^5}{1.2} = 2.5 \times 10^5\ \text{m}^2\,\text{s}^{-2}$, so $v_{\text{rms}} = 500\ \text{m s}^{-1}$.</p>
+      <p>$v_{\text{rms}}^2 = \dfrac{3P}{\rho} = \dfrac{3 \times 1.0 \times 10^5}{1.2} = 2.5 \times 10^5\ \text{m}^2\,\text{s}^{-2}$, so $v_{\text{rms}} = 500\ \text{m s}^{-1}$.</p>
       <p>That's faster than the speed of sound (340 $\text{m s}^{-1}$), which makes sense: sound is passed on by the molecules themselves.</p>
     </div>
 
     <p class="link-q"><span><span class="link-q-label">Linking question</span> How does the concept of force and momentum link mechanics and thermodynamics? <a href="a2.html#momentum">A.2 Momentum and impulse&nbsp;→</a></span></p>
     <!-- ===================================================== -->
     <h2 id="energy">7. Temperature, speed and internal energy</h2>
-    <p>Put the two descriptions of a gas together. From $P = \frac{1}{3}\rho\overline{v^2}$ with $\rho = \dfrac{Nm}{V}$, we get $PV = \frac{1}{3}Nm\overline{v^2}$. The ideal gas equation says $PV = Nk_BT$. So:</p>
-    $$\tfrac{1}{3}m\overline{v^2} = k_BT \qquad\Rightarrow\qquad \tfrac{1}{2}m\overline{v^2} = \tfrac{3}{2}k_BT$$
+    <p>Put the two descriptions of a gas together. From $P = \frac{1}{3}\rho v_{\text{rms}}^2$ with $\rho = \dfrac{Nm}{V}$, we get $PV = \frac{1}{3}Nmv_{\text{rms}}^2$. The ideal gas equation says $PV = Nk_BT$. So:</p>
+    $$\tfrac{1}{3}mv_{\text{rms}}^2 = k_BT \qquad\Rightarrow\qquad \tfrac{1}{2}mv_{\text{rms}}^2 = \tfrac{3}{2}k_BT$$
     <p>This is the result from B.1: the average kinetic energy of a molecule is $\frac{3}{2}k_BT$. The kinetic model <em>explains</em> why kelvin temperature measures the average kinetic energy of the molecules.</p>
     <div class="worked">
       <h3>Worked example: helium atoms</h3>
       <p>Find the rms speed of helium atoms at 300 K. The mass of a helium atom is $6.6 \times 10^{-27}$ kg.</p>
-      <p>$\overline{v^2} = \dfrac{3k_BT}{m} = \dfrac{3 \times 1.38 \times 10^{-23} \times 300}{6.6 \times 10^{-27}} = 1.9 \times 10^6\ \text{m}^2\,\text{s}^{-2}$, so $v_{\text{rms}} = 1.4 \times 10^3\ \text{m s}^{-1}$.</p>
+      <p>$v_{\text{rms}}^2 = \dfrac{3k_BT}{m} = \dfrac{3 \times 1.38 \times 10^{-23} \times 300}{6.6 \times 10^{-27}} = 1.9 \times 10^6\ \text{m}^2\,\text{s}^{-2}$, so $v_{\text{rms}} = 1.4 \times 10^3\ \text{m s}^{-1}$.</p>
       <p>At the same temperature, all gases have the same average kinetic energy, so lighter molecules move faster. Helium atoms move nearly three times faster than nitrogen molecules.</p>
     </div>
     <h3>Internal energy of an ideal gas</h3>
@@ -314,7 +325,7 @@
       <li><strong>Leaving volumes in litres or cm³.</strong> Convert to $\text{m}^3$ before using $PV = nRT$. (In $\dfrac{P_1V_1}{T_1} = \dfrac{P_2V_2}{T_2}$, any units work as long as both sides match, except temperature, which must be in kelvin.)</li>
       <li><strong>Mixing up $n$ and $N$.</strong> Use $R$ with moles ($n$) and $k_B$ with numbers of molecules ($N$).</li>
       <li><strong>Saying compressing a gas at constant temperature makes the molecules hit harder.</strong> Their speed is unchanged; they hit each part of the wall more often.</li>
-      <li><strong>Treating $\overline{v^2}$ as the square of the mean speed.</strong> It is the mean of the squared speeds.</li>
+      <li><strong>Treating $v_{\text{rms}}^2$ as the square of the mean speed.</strong> It is the mean of the squared speeds.</li>
       <li><strong>Using $U = \frac{3}{2}nRT$ for real gases or for gases such as O<sub>2</sub>.</strong> It's for ideal monatomic gases only.</li>
       <li><strong>Forgetting that the gas laws need a fixed mass of gas.</strong> A leaking tyre doesn't obey $PV/T = \text{constant}$.</li>
     </ul>
@@ -331,7 +342,7 @@
     </details>
     <details class="check">
       <summary>The kelvin temperature of a gas is doubled. By what factor does the rms speed of its molecules change?</summary>
-      <p>$\overline{v^2} \propto T$, so $\overline{v^2}$ doubles and $v_{\text{rms}}$ increases by a factor of $\sqrt{2} \approx 1.4$.</p>
+      <p>$v_{\text{rms}}^2 \propto T$, so $v_{\text{rms}}^2$ doubles and $v_{\text{rms}}$ increases by a factor of $\sqrt{2} \approx 1.4$.</p>
     </details>
     <details class="check">
       <summary>Two containers hold different ideal gases at the same temperature. Which of these is the same for both: the average kinetic energy of the molecules, or their rms speed?</summary>

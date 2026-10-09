@@ -136,6 +136,11 @@ a.card:hover { border-color: var(--accent); }
 /* ===== Small pieces ===== */
 .tag { display: inline-block; font-size: 0.75rem; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); vertical-align: middle; }
 .tag.hl { background: var(--warn-soft); color: var(--text); }
+/* "New for 2028": content added or changed in the 2028 guide and data booklet (first exams 2028). Theme D's violet, so it
+   can't be confused with HL (orange) or ordinary tags (blue). */
+.tag.y2028 { background: var(--surface); border: 1px solid var(--theme-d); color: var(--theme-d); }
+.new2028 { border-left: 4px solid var(--theme-d); padding-left: 12px; margin: 14px 0; }
+.new2028-note { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--theme-d); border-radius: var(--radius); padding: 8px 14px; margin: 16px 0; }
 .notice { background: var(--warn-soft); border-radius: var(--radius); padding: 12px 16px; margin: 16px 0; }
 .box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 16px; margin: 16px 0; }
 .crumbs { font-size: 0.9rem; color: var(--muted); margin: 0; }
