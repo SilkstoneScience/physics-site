@@ -1,0 +1,57 @@
+# Science news, Stage 0 (dry run). Commits nothing and publishes nothing.
+# Runs the collector on GitHub's computers and shows its report on the run's summary page
+# (github.com → physics-site → Actions → "Science news dry run" → the run). It also tests two things
+# Stage 1 needs: whether GitHub's runner has ImageMagick, and whether this workflow may ask GitHub Pages
+# to rebuild the site (pushes made by a workflow don't trigger a rebuild on their own).
+# Runs each time the science-news branch is pushed with changes to the collector. (GitHub only offers the
+# "Run workflow" button and timed runs for workflows on main, so those come with Stage 1.)
+name: Science news dry run
+on:
+  push:
+    branches: [science-news]
+    paths: ['tools/news/**', '.github/workflows/news-dryrun.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+concurrency:
+  group: science-news
+  cancel-in-progress: false
+jobs:
+  dryrun:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Install the collector's libraries
+        working-directory: tools/news
+        run: npm ci
+      - name: Collect and summarise (dry run)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node tools/news/collect.mjs --dry-run --report "$GITHUB_STEP_SUMMARY"
+      - name: Is ImageMagick available?
+        run: |
+          echo "## Runner tools" >> "$GITHUB_STEP_SUMMARY"
+          for t in magick convert cwebp; do
+            if command -v "$t" >/dev/null; then echo "- $t: $(command -v $t)" >> "$GITHUB_STEP_SUMMARY"; else echo "- $t: not installed" >> "$GITHUB_STEP_SUMMARY"; fi
+          done
+          v=$( (magick -version 2>/dev/null || convert -version 2>/dev/null || echo "ImageMagick not installed") | head -1)
+          echo "$v" >> "$GITHUB_STEP_SUMMARY"
+          echo "::notice title=ImageMagick::$v"
+      - name: Can this workflow request a Pages build?
+        # Rebuilds the live site from main exactly as it is now, so it changes nothing students see.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "## Pages build request" >> "$GITHUB_STEP_SUMMARY"
+          if out=$(gh api -X POST "repos/${{ github.repository }}/pages/builds" 2>&1); then
+            echo "Accepted: $out" >> "$GITHUB_STEP_SUMMARY"
+            echo "::notice title=Pages build request::Accepted"
+          else
+            echo "**Refused:** $out" >> "$GITHUB_STEP_SUMMARY"
+            echo "::warning title=Pages build request::Refused: $(echo "$out" | tr '\n' ' ' | head -c 300)"; exit 1
+          fi

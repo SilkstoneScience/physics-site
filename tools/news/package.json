@@ -1,0 +1,16 @@
+{
+  "name": "physics-site-news",
+  "private": true,
+  "description": "Science news collector for the study-guide site (runs in GitHub Actions; nothing here is loaded by the website).",
+  "type": "module",
+  "scripts": {
+    "dry-run": "node collect.mjs --dry-run"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.132.1",
+    "fast-xml-parser": "5.11.2"
+  }
+}
