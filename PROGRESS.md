@@ -66,6 +66,9 @@ This file is not published on the website (see `_config.yml`).
 - Equations panel: equations new to the booklet carry `'2028'` as their fourth item and show the tag; a new "Maths and uncertainties" set (`window.DATA_BOOKLET_MATHS`, also on the Skills page) includes the new sphere-area and percentage formulas. Rewritten equations (½k(Δx)², ⅓ρv_rms²) were simply updated, untagged.
 - Lesson decks (physics-source) updated through PowerPoint with "Changes for exams from 2028" slides, new content slides and "New for 2028" labels; the originals were backed up first to `reference-cache/deck-backups-2028/`.
 
+## Science news (October 2026, in progress)
+- Agreed plan and progress: `science-news-plan.md` in the `C:\dp-physics` folder (outside this repository). Stage 0 (dry run) is live on main: `tools/news/collect.mjs` reads 13 science feeds, picks the best recent story and has Claude Opus 5.5 write a checked summary, and `.github/workflows/news-dryrun.yml` runs it Mon/Wed/Fri, committing and publishing nothing. The teacher reviews the picks on the Actions page, then Stage 1 adds the home-page panel, `news.html` and automatic publishing.
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".
