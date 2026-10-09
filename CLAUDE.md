@@ -127,7 +127,7 @@ This folder (`physics-site`) is a static website for IB DP Physics students, hos
   - For "which graph" questions, put the four graphs in one SVG labelled A–D and use options like "Graph A".
   - "I, II and III" questions (as in the 2025 papers): stem `<p>Three statements about … are:</p><p>I. …<br>II. …<br>III. …</p><p>Which statements are correct?</p>`, options always "I and II only", "I and III only", "II and III only", "I, II and III" in that order. The explanation says why each statement is true or false. Every topic has at least one.
   - Use $g = 9.8$ m s⁻² everywhere (notes and questions). This is the value in the 2025 data booklet.
-- The question bank shows one question at a time by default, with Previous/Next, a "Next question" button after answering, and a Back link to the page the student came from. "All on one page" is an option. Link to a set with `questions.html?topic=A.1`, or to one question with `&q=A1-004`.
+- The question bank shows one question at a time by default, with Previous/Next above and below the question, a "Next question" button after answering, and a Back link to the page the student came from. "All on one page" is an option. Link to a set with `questions.html?topic=A.1`, or to one question with `&q=A1-004`.
 
 ## Home page and About page
 - **Joke of the day** (`index.html`): the jokes are in `js/jokes.js` as `{ q, a }` pairs; `js/site.js` picks a random one on each load (never the same as last time on that device) and the "Reveal the answer" button shows the punchline. Use well-known published jokes (the teacher's choice), mostly physics. Keep them safe for school: no flirting, alcohol, rude or unkind jokes.

@@ -232,6 +232,8 @@
       current = Math.min(Math.max(current, 0), shown.length - 1);
       listEl.appendChild(buildNav());
       listEl.appendChild(buildCard(shown[current]));
+      // The same Previous / Next under the question, so students needn't scroll back up.
+      listEl.appendChild(buildNav(true));
       updateUrl();
     } else {
       shown.forEach((q) => listEl.appendChild(buildCard(q)));
@@ -259,15 +261,16 @@
     if (btn && !btn.disabled) btn.focus(); else focusIn(listEl, '.q-count');
   }
 
-  function buildNav() {
+  // bottom: the copy under the question. Its buttons take the student to the top of the next question.
+  function buildNav(bottom = false) {
     const nav = document.createElement('div');
-    nav.className = 'q-nav';
+    nav.className = bottom ? 'q-nav q-nav-bottom' : 'q-nav';
     nav.innerHTML = `
       <button class="secondary" data-go="prev" ${current === 0 ? 'disabled' : ''}>← Previous</button>
       <span class="q-count">Question ${current + 1} of ${shown.length}</span>
       <button class="secondary" data-go="next" ${current === shown.length - 1 ? 'disabled' : ''}>Next →</button>`;
-    nav.querySelector('[data-go="prev"]').addEventListener('click', () => goToAndFocus(current - 1, '[data-go="prev"]'));
-    nav.querySelector('[data-go="next"]').addEventListener('click', () => goToAndFocus(current + 1, '[data-go="next"]'));
+    nav.querySelector('[data-go="prev"]').addEventListener('click', () => goToAndFocus(current - 1, bottom ? null : '[data-go="prev"]'));
+    nav.querySelector('[data-go="next"]').addEventListener('click', () => goToAndFocus(current + 1, bottom ? null : '[data-go="next"]'));
     return nav;
   }
 
