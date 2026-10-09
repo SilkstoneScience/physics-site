@@ -300,6 +300,8 @@ if (dropped.length) {
 out('## AI summaries');
 out();
 let pick = null;
+let keyProblem = null;    // the API key was refused: the run must fail so GitHub emails the teacher
+const aiNotes = [];       // [title, text] for the run page on GitHub
 if (AI_COUNT === 0) out('Skipped (--ai 0).');
 else if (!process.env.ANTHROPIC_API_KEY) out('Skipped: no ANTHROPIC_API_KEY is set on this computer or in the GitHub secret yet (see the teacher to-do in the plan).');
 else {
@@ -320,6 +322,8 @@ else {
       out(`Topics: ${result.topics.join(', ')} · category: ${result.category} · ${result.suitable ? 'suitable' : 'not suitable'} (${result.reason})`);
       out(`Model: ${model} · ${usage.input_tokens} tokens in, ${usage.output_tokens} out${cand.fullText ? ` · full press release used (${cand.fullText.length} characters)` : ' · feed description only'}`);
       out(problems.length ? `**Checks failed:** ${problems.join('; ')}. This story would wait for the next run.` : 'Checks: all passed.');
+      aiNotes.push([`AI summary: ${cand.title}`, `${result.summary}\n\nTopics: ${result.topics.join(', ')} · ${result.category} · ${cand.source.name}\n` +
+        (problems.length ? `Checks failed: ${problems.join('; ')}` : 'Checks: all passed')]);
       if (!problems.length && !pick) {
         pick = {
           id: cand.id, title: cand.title, url: cand.url, source: { key: cand.source.key, name: cand.source.name },
@@ -330,6 +334,8 @@ else {
       }
     } catch (e) {
       out(`**AI step failed:** ${e.message}. This story would wait for the next run.`);
+      aiNotes.push([`AI step failed: ${cand.title}`, e.message]);
+      if (e instanceof Anthropic.AuthenticationError || e instanceof Anthropic.PermissionDeniedError) { keyProblem = e.message; break; }
     }
     out();
   }
@@ -344,6 +350,10 @@ else out('Nothing (no story has passed the AI step and the checks yet).');
 
 // On GitHub, also post short notes on the run page (visible without signing in).
 if (process.env.GITHUB_ACTIONS) {
+  const esc = (s) => String(s).replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
+  const escTitle = (s) => esc(s).replace(/:/g, '%3A').replace(/,/g, '%2C');
+  for (const [title, text] of aiNotes) console.log(`::notice title=${escTitle(title)}::${esc(text)}`);
+  if (keyProblem) console.log(`::error title=Anthropic API key refused::${esc(keyProblem)} Check the ANTHROPIC_API_KEY secret (and that the key hasn't expired).`);
   const failed = feedStatus.filter((f) => !f.ok);
   console.log(`::notice title=Feeds::${feedStatus.length - failed.length} of ${feedStatus.length} feeds read`);
   for (const f of failed) console.log(`::warning title=Feed failed::${f.src.name} (${f.src.key}): ${f.error}`);
@@ -352,3 +362,4 @@ if (process.env.GITHUB_ACTIONS) {
 }
 
 if (REPORT) { fs.mkdirSync(path.dirname(REPORT), { recursive: true }); fs.appendFileSync(REPORT, lines.join('\n') + '\n'); }
+if (keyProblem) { console.error(`The Anthropic API key was refused: ${keyProblem}`); process.exitCode = 1; }
