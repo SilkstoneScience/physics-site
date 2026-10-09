@@ -57,8 +57,10 @@ window.topicFile = (id) => id.replace('.', '').toLowerCase() + '.html';
 window.DATA_BOOKLET_URL = 'https://drive.google.com/open?id=1vtP7efHOuywaeqp1YeYcqorHjxl5r49-&usp=drive_fs';
 
 // Data-booklet equations for each topic, shown in the "Σ Equations" panel.
-// Written from the 2025 IB Physics data booklet (same symbols); the labels are ours.
-// Add a topic here when its notes page is written. Backslashes are doubled inside JS strings.
+// Written from the 2025 IB Physics data booklet (same symbols), updated from the 2028 data booklet (first exams 2028);
+// the labels are ours. Add a topic here when its notes page is written. Backslashes are doubled inside JS strings.
+// Each equation is [label, TeX, HL?, '2028'?]: a third item `true` marks it HL only; a fourth item '2028' marks it as new
+// in the 2028 data booklet (shown with a "New for 2028" tag). An equation the booklet merely rewrote is simply updated, with no tag.
 window.DATA_BOOKLET = {
   'A.1': {
     equations: [
@@ -140,9 +142,10 @@ window.DATA_BOOKLET = {
       ['Rate of thermal energy transfer by conduction', '\\frac{\\Delta Q}{\\Delta t} = -kA\\frac{\\Delta T}{\\Delta x}'],
       ['Stefan–Boltzmann law (luminosity)', 'L = \\sigma A T^4'],
       ['Apparent brightness', 'b = \\frac{L}{4\\pi d^2}'],
+      ['Intensity (power per unit area)', 'I = \\frac{P}{A}', false, '2028'],
       ["Wien's displacement law", '\\lambda_{\\max} T = 2.9 \\times 10^{-3}\\ \\text{m K}'],
     ],
-    note: 'Always use kelvin in $\\overline{E}_k$, $L = \\sigma AT^4$ and Wien\'s law: $T/\\text{K} = \\theta/{}^\\circ\\text{C} + 273$. A temperature <em>change</em> $\\Delta T$ is the same in K and °C. The minus sign in the conduction equation just shows that energy flows towards the colder side.',
+    note: 'New for 2028: $\\overline{E}_k = \\tfrac{3}{2}k_BT$ is for an ideal monatomic gas; luminosity means radiated power; apparent brightness is the intensity of the light received. Always use kelvin in $\\overline{E}_k$, $L = \\sigma AT^4$ and Wien\'s law: $T/\\text{K} = \\theta/{}^\\circ\\text{C} + 273$. A temperature <em>change</em> $\\Delta T$ is the same in K and °C. The minus sign in the conduction equation just shows that energy flows towards the colder side.',
     constants: ['kB', 'sigma'],
   },
   'B.2': {
@@ -162,10 +165,10 @@ window.DATA_BOOKLET = {
       ['Amount of substance', 'n = \\frac{N}{N_A}'],
       ['Fixed amount of gas', '\\frac{PV}{T} = \\text{constant}'],
       ['Ideal gas equation', 'PV = nRT = Nk_BT'],
-      ['Pressure from molecular motion', 'P = \\tfrac{1}{3}\\rho\\overline{v^2}'],
+      ['Pressure from molecular motion', 'P = \\tfrac{1}{3}\\rho v_{\\text{rms}}^2'],
       ['Internal energy of an ideal monatomic gas', 'U = \\tfrac{3}{2}Nk_BT = \\tfrac{3}{2}nRT'],
     ],
-    note: 'Temperatures in kelvin, volumes in $\\text{m}^3$ ($1\\ \\text{litre} = 10^{-3}\\ \\text{m}^3$). Use $R$ with moles and $k_B$ with numbers of molecules.',
+    note: '$v_{\\text{rms}}^2$ is the mean of the squared speeds. Temperatures in kelvin, volumes in $\\text{m}^3$ ($1\\ \\text{litre} = 10^{-3}\\ \\text{m}^3$). Use $R$ with moles and $k_B$ with numbers of molecules.',
     constants: ['NA', 'R', 'kB'],
   },
   'B.4': {
@@ -229,6 +232,7 @@ window.DATA_BOOKLET = {
     equations: [
       ['Force on a moving charge', 'F = qvB\\sin\\theta'],
       ['Force on a current-carrying conductor', 'F = BIL\\sin\\theta'],
+      ['Magnetic field strength of a long straight wire', 'B = \\frac{\\mu_0 I}{2\\pi r}', false, '2028'],
       ['Force per unit length between parallel wires', '\\frac{F}{L} = \\mu_0\\frac{I_1I_2}{2\\pi r}'],
     ],
     note: 'Not in the booklet but derived from it: radius in a magnetic field $r = \\frac{mv}{qB}$; velocity selector $v = \\frac{E}{B}$; accelerating through a p.d. $\\frac{1}{2}mv^2 = qV$.',
@@ -340,6 +344,33 @@ window.DATA_BOOKLET = {
     constants: ['c'],
   },
 };
+// The data booklet's "Mathematical equations" and "Uncertainties" sections (not tied to one topic), shown in the Σ panel as
+// "Maths and uncertainties" and opened by default on the Skills page. Checked against the 2028 booklet, pages 2–3.
+window.DATA_BOOKLET_MATHS = {
+  title: 'Maths and uncertainties',
+  equations: [
+    ['Area of a triangle', 'A = \\tfrac{1}{2}(bh)'],
+    ['Area of a circle', 'A = \\pi r^2'],
+    ['Circumference of a circle', 'C = 2\\pi r'],
+    ['Volume of a cuboid', 'V = lwh'],
+    ['Volume of a cylinder', 'V = \\pi r^2 h'],
+    ['Volume of a prism', 'V = Ah'],
+    ['Volume of a sphere', 'V = \\tfrac{4}{3}\\pi r^3'],
+    ['Surface area of a sphere', 'A = 4\\pi r^2', false, '2028'],
+    ['Area of the curved surface of a cylinder', 'A = 2\\pi rh'],
+    ['Components of a vector A at angle θ to the horizontal', 'A_H = A\\cos\\theta \\qquad A_V = A\\sin\\theta'],
+    ['Trigonometric relationships', '\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta} \\qquad \\sin^2\\theta + \\cos^2\\theta = 1'],
+    ['Percentage change', '\\frac{\\text{final value} - \\text{initial value}}{\\text{initial value}} \\times 100\\%', false, '2028'],
+    ['Percentage difference', '\\frac{\\text{difference}}{\\left(\\frac{\\text{final value} + \\text{initial value}}{2}\\right)} \\times 100\\%', false, '2028'],
+    ['Percentage error', '\\frac{\\text{measured value} - \\text{actual value}}{\\text{actual value}} \\times 100\\%', false, '2028'],
+    ['Percentage uncertainty', '\\frac{\\text{absolute uncertainty}}{\\text{measured value}} \\times 100\\%', false, '2028'],
+    ['Uncertainty: sum or difference, y = a ± b', '\\Delta y = \\Delta a + \\Delta b'],
+    ['Uncertainty: product or quotient, y = ab/c', '\\frac{\\Delta y}{y} = \\frac{\\Delta a}{a} + \\frac{\\Delta b}{b} + \\frac{\\Delta c}{c}'],
+    ['Uncertainty: power, y = aⁿ', '\\frac{\\Delta y}{y} = \\left|n\\frac{\\Delta a}{a}\\right|'],
+  ],
+  note: 'The four percentage equations are new in the 2028 data booklet, so that every exam uses the same definitions. More on these: the <a href="SKILLS_LINK">Skills page</a>.',
+};
+
 // Fundamental constants from the data booklet (add more as topics need them; check each value against the PDF).
 window.CONSTANTS = {
   g: ["Acceleration of free fall (Earth's surface)", 'g = 9.8\\ \\text{m s}^{-2}'],
@@ -595,12 +626,15 @@ window.CONSTANTS = {
   // ----- "Σ Equations" button and panel (topic pages and the question bank) -----
   // The question bank tells the panel which topic is showing by calling window.setEquationTopic('A.2').
   const usesMathJax = !!document.querySelector('script[src*="mathjax"]');
-  if (usesMathJax && (body.dataset.topic || section === 'questions')) buildEquationPanel();
+  // A page can also open the panel on the maths section: <body data-eq-topic="MATHS"> (the Skills page).
+  if (usesMathJax && (body.dataset.topic || body.dataset.eqTopic || section === 'questions')) buildEquationPanel();
 
   function buildEquationPanel() {
     const allTopics = SYLLABUS.flatMap((t) => t.topics);
     const withData = allTopics.filter((s) => DATA_BOOKLET[s.id]);
-    let currentTopic = body.dataset.topic || '';
+    let currentTopic = body.dataset.topic || body.dataset.eqTopic || '';
+    const MATHS = window.DATA_BOOKLET_MATHS;
+    const newTag = ' <span class="tag y2028">New for 2028</span>';
 
     const fab = document.createElement('button');
     fab.type = 'button';
@@ -620,7 +654,7 @@ window.CONSTANTS = {
         <button type="button" class="eq-close" aria-label="Close equations">×</button>
       </div>
       <label class="eq-pick">Topic
-        <select>${withData.map((s) => `<option value="${s.id}">${s.id} ${s.title}</option>`).join('')}</select>
+        <select>${MATHS ? `<option value="MATHS">${MATHS.title}</option>` : ''}${withData.map((s) => `<option value="${s.id}">${s.id} ${s.title}</option>`).join('')}</select>
       </label>
       <div class="eq-body" aria-live="polite"></div>
       <p class="eq-foot">${DATA_BOOKLET_URL
@@ -633,7 +667,7 @@ window.CONSTANTS = {
     const out = panel.querySelector('.eq-body');
 
     function render() {
-      const d = DATA_BOOKLET[currentTopic];
+      const d = currentTopic === 'MATHS' ? MATHS : DATA_BOOKLET[currentTopic];
       const info = allTopics.find((s) => s.id === currentTopic);
       if (window.MathJax && MathJax.typesetClear) MathJax.typesetClear([out]);
       if (!d) {
@@ -642,9 +676,9 @@ window.CONSTANTS = {
         select.selectedIndex = -1;
       } else {
         select.value = currentTopic;
-        out.innerHTML = d.equations.map(([label, tex, hl]) =>
-          `<div class="eq-item"><div class="eq-label">${label}${hl ? ' <span class="tag hl">HL</span>' : ''}</div>$$${tex}$$</div>`).join('') +
-          (d.note ? `<p class="eq-note">${d.note}</p>` : '') +
+        out.innerHTML = d.equations.map(([label, tex, hl, mark]) =>
+          `<div class="eq-item"><div class="eq-label">${label}${hl ? ' <span class="tag hl">HL</span>' : ''}${mark === '2028' ? newTag : ''}</div>$$${tex}$$</div>`).join('') +
+          (d.note ? `<p class="eq-note">${d.note.replace('SKILLS_LINK', (body.dataset.root || '') + 'skills.html')}</p>` : '') +
           (d.constants && d.constants.length ? `<h4>Constants</h4>` + d.constants.filter((c) => CONSTANTS[c]).map((c) =>
             `<div class="eq-item"><div class="eq-label">${CONSTANTS[c][0]}</div>$$${CONSTANTS[c][1]}$$</div>`).join('') : '');
       }

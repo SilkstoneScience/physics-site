@@ -61,6 +61,11 @@ This file is not published on the website (see `_config.yml`).
 ## XYZ visual identity (October 2026)
 - Light-orange XYZ motif: home-page hero ("The XYZ of DP Physics") with animated axes and orbit, category cards with line icons, section-heading accents, a small axes mark in the header on every page, and an orange underline for the current menu item. Styles are in the "XYZ motif" section at the end of `css/style.css`.
 
+## 2028 syllabus update (October 2026)
+- The IB's updated guide and data booklet (first exams 2028; changes listed in the appendix of each) are covered on the site with a purple "New for 2028" tag (`.tag.y2028`), a `.new2028-note` box after the lead paragraph of each changed topic page, and `.new2028` blocks around new content: A.1 non-uniform acceleration, A.2 linear velocity, A.3 kinetic energy / energy density, B.1 monatomic gas, luminosity, intensity I = P/A and apparent brightness, B.3 rms vs average speed and why rms, C.2 I ∝ A², C.4 harmonic names, D.1 Kepler's third law for all, D.2/D.3 B = μ₀I/2πr, D.4 self-induction removed ("Changed for 2028"), E.3 strong-force guidance, E.4/E.5 change in mass, E.5 Chandrasekhar and Oppenheimer–Volkoff limits.
+- Equations panel: equations new to the booklet carry `'2028'` as their fourth item and show the tag; a new "Maths and uncertainties" set (`window.DATA_BOOKLET_MATHS`, also on the Skills page) includes the new sphere-area and percentage formulas. Rewritten equations (½k(Δx)², ⅓ρv_rms²) were simply updated, untagged.
+- Lesson decks (physics-source) updated through PowerPoint with "Changes for exams from 2028" slides, new content slides and "New for 2028" labels; the originals were backed up first to `reference-cache/deck-backups-2028/`.
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".

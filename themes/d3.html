@@ -35,6 +35,7 @@
     <p class="crumbs"><a href="index.html">Themes</a> › <a href="d.html">Theme D Fields</a></p>
     <h1><span class="code">D.3</span>Motion in electromagnetic fields</h1>
     <p class="lead">Old TV screens, particle accelerators, mass spectrometers and the northern lights all depend on how charged particles move in electric and magnetic fields. An electric field speeds particles up or bends them into parabolas; a magnetic field bends them into circles without changing their speed. This topic works out both, and the forces on wires carrying currents. There is no additional HL content in D.3.</p>
+    <p class="new2028-note"><span class="tag y2028">New for 2028</span> For exams from 2028 the guide and data booklet add <a href="#wire-field">the magnetic field strength of an infinitely long straight wire, $B = \frac{\mu_0 I}{2\pi r}$</a>, for SL and HL students.</p>
 
     <section class="tok" aria-labelledby="tok-title">
       <h2 id="tok-title">Knowledge and science</h2>
@@ -80,7 +81,7 @@
         <li><a href="#qm">Measuring the charge-to-mass ratio</a></li>
         <li><a href="#crossed">Crossed electric and magnetic fields</a></li>
         <li><a href="#wire">The force on a current-carrying wire</a></li>
-        <li><a href="#parallel">The force between parallel wires</a></li>
+        <li><a href="#parallel">The field of a straight wire and the force between parallel wires</a></li>
         <li><a href="#mistakes">Common mistakes</a></li>
         <li><a href="#check">Check your understanding</a></li>
       </ol>
@@ -250,7 +251,23 @@
     </div>
 
     <!-- ===================================================== -->
-    <h2 id="parallel">7. The force between parallel wires</h2>
+    <h2 id="parallel">7. The field of a straight wire and the force between parallel wires</h2>
+    <div class="new2028" id="wire-field">
+      <h3>The field of a long straight wire <span class="tag y2028">New for 2028</span></h3>
+      <p>The field lines around a long straight wire are circles centred on the wire (D.2, right-hand grip rule). The 2028 data booklet adds the size of this field at a distance $r$ from an infinitely long wire carrying current $I$:</p>
+      <div class="key">
+        $$B = \frac{\mu_0 I}{2\pi r}$$
+        <p style="margin:0">$B$ is proportional to the current and inversely proportional to the distance: twice as far away, half the field. That is why the circles on a field-line diagram get further apart with distance. $\mu_0 = 4\pi \times 10^{-7}\ \text{T m A}^{-1}$.</p>
+      </div>
+      <div class="worked">
+        <h3>Worked example: a compass near a cable <span class="tag y2028">New for 2028</span></h3>
+        <p>A long straight cable carries a steady current of 12 A. Find the magnetic field strength 3.0 cm from the cable, and compare it with the Earth's field of about $5 \times 10^{-5}$ T.</p>
+        <p>$B = \dfrac{4\pi \times 10^{-7} \times 12}{2\pi \times 0.030} = 8.0 \times 10^{-5}\ \text{T}$</p>
+        <p>This is bigger than the Earth's field, so a compass held this close to the cable would swing well away from north. At 30 cm the field is ten times smaller ($8.0 \times 10^{-6}$ T), and the compass hardly moves.</p>
+      </div>
+      <p>This equation also explains the force between two wires below: wire 2 sits in wire 1's field $B_1 = \dfrac{\mu_0 I_1}{2\pi r}$, so the force on a length $L$ of wire 2 is $F = B_1 I_2 L$, which gives $\dfrac{F}{L} = \dfrac{\mu_0 I_1 I_2}{2\pi r}$.</p>
+    </div>
+
     <p>Each current-carrying wire sits in the magnetic field of the other, so two parallel wires exert forces on each other:</p>
     <div class="key">
       $$\frac{F}{L} = \mu_0\frac{I_1I_2}{2\pi r}$$

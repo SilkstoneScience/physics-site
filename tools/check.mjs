@@ -52,6 +52,11 @@ for (const [id, d] of Object.entries(site.DATA_BOOKLET)) {
   for (const c of d.constants || []) if (!site.CONSTANTS[c]) err('js/site.js DATA_BOOKLET', `${id} uses unknown constant "${c}"`);
   if (TOPICS.get(id)?.hl) for (const [label, , hl] of d.equations) if (!hl) warn('js/site.js DATA_BOOKLET', `${id} is HL only, but "${label}" isn't marked HL`);
 }
+// A fourth item marks an equation as new or changed for the 2028 data booklet ('2028'); nothing else is allowed there.
+for (const [id, d] of [...Object.entries(site.DATA_BOOKLET), ['maths', site.DATA_BOOKLET_MATHS || { equations: [] }]]) {
+  for (const [label, , , mark] of d.equations) if (mark !== undefined && mark !== '2028') err('js/site.js DATA_BOOKLET', `${id}: "${label}" has an unknown marker "${mark}" (use '2028')`);
+}
+if (!site.DATA_BOOKLET_MATHS) err('js/site.js', 'DATA_BOOKLET_MATHS (the maths and uncertainties equations) is missing');
 
 // ---------- 2. Question bank ----------
 const { checkNumeric, parseNumber } = createRequire(import.meta.url)('../js/numeric.js');
