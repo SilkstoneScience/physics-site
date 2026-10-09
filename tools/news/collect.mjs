@@ -342,4 +342,13 @@ out();
 if (pick) { out('```json'); out(JSON.stringify(pick, null, 2)); out('```'); }
 else out('Nothing (no story has passed the AI step and the checks yet).');
 
+// On GitHub, also post short notes on the run page (visible without signing in).
+if (process.env.GITHUB_ACTIONS) {
+  const failed = feedStatus.filter((f) => !f.ok);
+  console.log(`::notice title=Feeds::${feedStatus.length - failed.length} of ${feedStatus.length} feeds read`);
+  for (const f of failed) console.log(`::warning title=Feed failed::${f.src.name} (${f.src.key}): ${f.error}`);
+  if (candidates[0]) console.log(`::notice title=Top candidate::${candidates[0].title} (${candidates[0].source.name}, score ${candidates[0].score})`);
+  console.log(`::notice title=Would publish::${pick ? pick.title : 'nothing yet (AI step skipped or checks failed)'}`);
+}
+
 if (REPORT) { fs.mkdirSync(path.dirname(REPORT), { recursive: true }); fs.appendFileSync(REPORT, lines.join('\n') + '\n'); }
