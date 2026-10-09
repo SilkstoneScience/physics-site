@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/style.css">
   <script defer src="js/jokes.js"></script>
   <script defer src="js/site.js"></script>
+  <script defer src="js/news.js"></script>
 </head>
 <body data-root="" data-section="home">
   <header id="site-header"></header>
@@ -59,6 +60,8 @@
       </svg>
     </section>
 
+    <!-- Joke and news side by side on wider screens (news below on phones); if the news can't load, the joke fills the row -->
+    <div class="home-pair">
     <!-- Filled in by js/site.js from the list in js/jokes.js -->
     <section class="joke" id="joke" aria-labelledby="joke-title" hidden>
       <h2 id="joke-title"><span aria-hidden="true">😄</span> Joke of the day</h2>
@@ -69,6 +72,29 @@
         <button type="button" class="secondary joke-next">Another joke</button>
       </div>
     </section>
+
+    <!-- Filled in by js/news.js from news/latest.json (made by tools/news/build.mjs) -->
+    <section class="news" id="news" aria-labelledby="news-title" hidden>
+      <h2 id="news-title"><span aria-hidden="true">🔭</span> Science news</h2>
+      <div class="news-tagline"><svg class="cat-icon news-icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"></svg><span class="cat-label"></span></div>
+      <h3 class="news-headline"><a href="news.html" target="_blank" rel="noopener"></a></h3>
+      <div class="news-more" id="news-more" hidden>
+        <p class="news-summary"></p>
+        <p class="news-ai"></p>
+        <p class="news-meta"></p>
+        <p class="news-topics"></p>
+      </div>
+      <div class="news-buttons">
+        <button type="button" class="primary news-toggle" aria-controls="news-more" aria-expanded="false">Read the summary</button>
+        <span class="news-nav" hidden>
+          <button type="button" class="secondary news-prev" aria-label="Previous story">←</button>
+          <span class="news-count" aria-live="polite"></span>
+          <button type="button" class="secondary news-next" aria-label="Next story">→</button>
+        </span>
+      </div>
+      <p class="news-all"><a href="news.html">All science news <span aria-hidden="true">→</span></a></p>
+    </section>
+    </div>
 
     <h2 class="xyz-h"><span class="eyebrow"><svg class="eyebrow-icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 11C15 8 9 8 5 9V32C9 31 15 31 20 34C25 31 31 31 35 32V9C31 8 25 8 20 11Z"/><path class="o" d="M20 11V34"/></svg>Learn</span>Syllabus themes</h2>
     <div data-theme-list></div>

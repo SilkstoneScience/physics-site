@@ -422,6 +422,7 @@ window.CONSTANTS = {
     ['experimental', 'experimental/index.html', 'Experimental programme'],
     ['ee', 'ee/index.html', 'Extended essay'],
     ['resources', 'resources.html', 'Resources'],
+    ['news', 'news.html', 'Science news'],
     ['about', 'about.html', 'About'],
   ];
   const header = document.getElementById('site-header');
