@@ -2,7 +2,11 @@
 // Skills: identifying and justifying the exclusion of an outlying reading, its likely cause, mean and half-range of
 // the remaining readings, speed from the mean time, the effect of wrongly including the outlier.
 
+import { trolleyRampGate } from '../diagrams.mjs';
+
 const ROW = 4; // the outlying trial (trial 5)
+const DIAGRAM_ALT = 'Side view: a ramp with a release mark near its top leads down onto a level runway. A trolley with a card on top moves '
+  + 'along the level runway towards a light gate standing beside the runway; a dot on the gate marks the light beam, at the height of the card.';
 const L_CM = 10.0;
 const DL_CM = 0.1;
 
@@ -18,18 +22,19 @@ export default {
   seed: 31,
   batch: 'batch-1',
   archetypes: ['M1', 'E3'],
-  apparatus: 'trolley on a ramp passing through a light gate',
+  apparatus: 'trolley released on a ramp, then through a light gate on a level runway',
   contextFamily: 'trolley-motion',
   contextObjects: ['trolley', 'light-gate'],
   originality: 'Light-gate timing is a common practical; no legacy Paper 3 Section A or 2025 Paper 1B question uses repeated '
     + 'light-gate times with an outlying trial. Own context, numbers and sequence.',
 
   physics: {
-    scenario: 'A trolley is released from rest at a mark on a ramp and runs down through a light gate. A card of length L on the '
-      + 'trolley interrupts the beam; an electronic timer records the time t for which the beam is blocked. The run is repeated seven times.',
+    scenario: 'A trolley is released from rest at a mark on a ramp, runs down onto a level runway and passes through a light gate on the '
+      + 'level runway. A card of length L on the trolley interrupts the beam; an electronic timer records the time t for which the beam '
+      + 'is blocked. The run is repeated seven times.',
     principles: ['Average speed = distance ÷ time (A.1): the card of length L passes the gate in time t, so v = L/t'],
     assumptions: [
-      'The trolley\'s speed hardly changes while the 10 cm card passes through the beam, so L/t is its speed at the gate',
+      'The light gate is on the level runway, where the trolley moves at a constant velocity (friction is negligible over the 10 cm of the card), so L/t is its speed at the gate',
       'The trolley is released from rest at the same mark each time',
       'The timer starts and stops exactly when the card\'s edges cross the beam',
     ],
@@ -57,7 +62,14 @@ export default {
       anomaly: { row: ROW, shift: -0.024 },
     },
   },
-  present: ['table'],
+  figures: {
+    diagram: () => ({
+      svg: trolleyRampGate(DIAGRAM_ALT),
+      alt: DIAGRAM_ALT,
+      caption: 'The trolley is released down the ramp and travels through the light gate.',
+    }),
+  },
+  present: ['diagram', 'table'],
 
   results: {
     tMean: { unit: 's', value: (d) => meanOf(kept(d)) },
@@ -75,7 +87,8 @@ export default {
     dL: { value: DL_CM, dp: 1, unit: 'cm', source: 'ruler measurement of the card, ±1 mm' },
   },
 
-  intro: (d) => '<p>A student releases a trolley from rest at a mark on a ramp. The trolley runs down the ramp and through a light gate. '
+  intro: (d) => '<p>A student releases a trolley from rest at a mark on a ramp. The trolley runs down the ramp onto a level runway, where it '
+    + 'moves through a light gate. '
     + `A card of length $L = (${d.stated('L')} \\pm ${d.stated('dL')})\\ \\text{cm}$ fixed to the trolley blocks the light beam, and a timer records `
     + 'the time $t$ for which the beam is blocked.</p>'
     + '<p>The student repeats the run seven times. The results are shown in the table.</p>',

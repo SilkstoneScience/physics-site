@@ -253,3 +253,33 @@ export function scaleReading(alt, { min, max, major, minor, title, marks, width 
   parts.push(`<text x="${r1((x0 + x1) / 2)}" y="${yAxis + 58}" text-anchor="middle" font-size="16">${title}</text>`);
   return svg(width, 160, alt, parts.join(''));
 }
+
+// ----- Trolley released on a ramp, then through a light gate on a level runway (side view, not to scale) -----
+// The gate is on the level section, so the trolley moves at a constant velocity while its card blocks the beam.
+export function trolleyRampGate(alt) {
+  const [x0, yTop, xb, yb, x1] = [30, 58, 210, 150, 540]; // ramp top, bottom of the ramp, end of the runway
+  const parts = [
+    // ramp, its support and the level runway
+    `<line class="l3" x1="${x0}" y1="${yTop}" x2="${xb}" y2="${yb}"/>`,
+    `<line class="l3 thin" x1="${x0}" y1="${yTop}" x2="${x0}" y2="${yb}"/>`,
+    `<line class="l3" x1="${xb}" y1="${yb}" x2="${x1}" y2="${yb}"/>`,
+    `<line class="l3 thin" x1="${x0}" y1="${yb}" x2="${xb}" y2="${yb}"/>`,
+    // release mark on the ramp
+    `<line class="l2" x1="72" y1="72" x2="88" y2="96"/>`,
+    label(84, 52, 'release mark', { anchor: 'start', size: 15 }),
+    // trolley on the level runway, with its card
+    `<rect class="l3 thin" x="300" y="122" width="64" height="18" rx="3"/>`,
+    `<circle class="l3 thin" cx="314" cy="144" r="6"/>`,
+    `<circle class="l3 thin" cx="350" cy="144" r="6"/>`,
+    `<rect class="l1 thin" x="306" y="96" width="52" height="26"/>`,
+    label(332, 86, 'card', { size: 15 }),
+    arrow(372, 112, 398, 112, { cls: 'l3 thin', head: 9, half: 4.5 }),
+    // light gate on the runway: a frame with the beam (going into the page) marked by a dot
+    `<rect class="l3 thin" x="430" y="80" width="14" height="70"/>`,
+    `<circle class="f1" cx="437" cy="108" r="3.2"/>`,
+    label(437, 70, 'light gate', { size: 15 }),
+    label(118, 174, 'ramp', { size: 15 }),
+    label(375, 174, 'level runway', { size: 15 }),
+  ];
+  return svg(560, 190, alt, parts.join(''));
+}
