@@ -1,6 +1,6 @@
 // "Science news" panel on the home page: <section id="news"> in index.html, filled from news/latest.json
-// (written by tools/news/build.mjs). Shows the newest headline; "Read the summary" opens the AI summary,
-// its topics and Previous/Next. If the file can't be loaded, the panel stays hidden and the joke fills the row.
+// (written by tools/news/build.mjs). Shows the newest headline; "more" after it opens the summary,
+// its topics, Previous/Next and the link to all the news. If the file can't be loaded, the panel stays hidden and the joke fills the row.
 (function () {
   const box = document.getElementById('news');
   if (!box) return;
@@ -58,13 +58,14 @@
       $('.news-next').disabled = i === stories.length - 1;
     }
 
+    // "more" / "less" after the headline opens and closes the story's details.
     toggle.addEventListener('click', () => {
       const open = more.hidden;
       more.hidden = !open;
-      nav.hidden = !open || stories.length < 2;
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.textContent = open ? 'Hide the summary' : 'Read the summary';
+      toggle.firstChild.textContent = open ? 'less' : 'more';
     });
+    nav.hidden = stories.length < 2;
     $('.news-prev').addEventListener('click', () => { if (i > 0) { i--; show(); } });
     $('.news-next').addEventListener('click', () => { if (i < stories.length - 1) { i++; show(); } });
 

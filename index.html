@@ -75,24 +75,25 @@
 
     <!-- Filled in by js/news.js from news/latest.json (made by tools/news/build.mjs) -->
     <section class="news" id="news" aria-labelledby="news-title" hidden>
-      <h2 id="news-title"><span aria-hidden="true">🔭</span> Science news</h2>
-      <div class="news-tagline"><svg class="cat-icon news-icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"></svg><span class="cat-label"></span></div>
-      <h3 class="news-headline"><a href="news.html" target="_blank" rel="noopener"></a></h3>
+      <div class="news-top">
+        <h2 id="news-title"><span aria-hidden="true">🔭</span> Science news</h2>
+        <span class="news-tagline"><svg class="cat-icon news-icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"></svg><span class="cat-label"></span></span>
+      </div>
+      <p class="news-headline"><a href="news.html" target="_blank" rel="noopener"></a> <button type="button" class="news-toggle" aria-controls="news-more" aria-expanded="false">more<span class="visually-hidden"> about this story</span></button></p>
       <div class="news-more" id="news-more" hidden>
         <p class="news-summary"></p>
         <p class="news-ai"></p>
         <p class="news-meta"></p>
         <p class="news-topics"></p>
+        <div class="news-buttons">
+          <span class="news-nav">
+            <button type="button" class="secondary news-prev" aria-label="Previous story">←</button>
+            <span class="news-count" aria-live="polite"></span>
+            <button type="button" class="secondary news-next" aria-label="Next story">→</button>
+          </span>
+          <a class="news-all" href="news.html">All science news <span aria-hidden="true">→</span></a>
+        </div>
       </div>
-      <div class="news-buttons">
-        <button type="button" class="primary news-toggle" aria-controls="news-more" aria-expanded="false">Read the summary</button>
-        <span class="news-nav" hidden>
-          <button type="button" class="secondary news-prev" aria-label="Previous story">←</button>
-          <span class="news-count" aria-live="polite"></span>
-          <button type="button" class="secondary news-next" aria-label="Next story">→</button>
-        </span>
-      </div>
-      <p class="news-all"><a href="news.html">All science news <span aria-hidden="true">→</span></a></p>
     </section>
     </div>
 
