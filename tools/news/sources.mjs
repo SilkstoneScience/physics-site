@@ -32,6 +32,13 @@ export const SOURCES = [
   // Quanta covers maths, biology and computing too: physics categories only.
   { key: 'quanta', name: 'Quanta Magazine', feed: 'https://www.quantamagazine.org/feed/', bonus: 4, open: false, image: null,
     keep: (it) => it.categories.some((c) => /physic|cosmolog|astronom|quantum/i.test(c)) },
+  // Physics sources added October 2026 (tested 10 Oct: working, with the rates shown), so the news isn't mostly astronomy.
+  { key: 'sciencedaily', name: 'ScienceDaily', feed: 'https://www.sciencedaily.com/rss/matter_energy/physics.xml', bonus: 4, open: false, image: null },   // ~8/wk
+  { key: 'physorg', name: 'Phys.org', feed: 'https://phys.org/rss-feed/physics-news/', bonus: 2, open: false, image: null },   // ~60/wk
+  { key: 'fermilab', name: 'Fermilab', feed: 'https://news.fnal.gov/feed/', bonus: 4, open: false, image: null },   // ~5/wk
+  // US government text is public domain, so NIST's full articles may be read (its images are credited case by case, so not used).
+  { key: 'nist', name: 'NIST', feed: 'https://www.nist.gov/news-events/news/rss.xml', bonus: 6, open: true, image: null },   // ~1/wk
+  { key: 'mit', name: 'MIT News', feed: 'https://news.mit.edu/topic/mitphysics-rss.xml', bonus: 2, open: false, image: null },   // ~2/wk
   { key: 'esa-eo', name: 'ESA', feed: 'https://www.esa.int/rssfeed/Applications/Observing_the_Earth', bonus: 2, open: true, image: ESA },
   { key: 'nasa-eo', name: 'NASA Earth Observatory', feed: 'https://earthobservatory.nasa.gov/feeds/image-of-the-day.rss', bonus: 0, open: true, image: NASA_PD },
 ];

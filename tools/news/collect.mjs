@@ -252,6 +252,15 @@ feedStatus.sort((a, b) => SOURCES.indexOf(a.src) - SOURCES.indexOf(b.src));
 const since = new Date(NOW - DAYS * 864e5);
 const recent = items.filter((it) => it.publishedAt && new Date(it.publishedAt) >= since && new Date(it.publishedAt) <= new Date(+NOW + 864e5));
 for (const it of recent) { Object.assign(it, score(it)); it.id = storyId(it.source.key, it.url); }
+// Variety (agreed October 2026): a story loses points for each of the last 3 published stories from the same area,
+// so the news doesn't become all astronomy. It's only a ranking: if nothing else is good enough, the same area can still win.
+const AREA = { astronomy: 'space', space: 'space', physics: 'physics', quantum: 'physics', particles: 'physics', technology: 'physics', energy: 'earth-energy', 'earth-climate': 'earth-energy' };
+const VARIETY_PENALTY = 20;
+const lastAreas = [...archive].sort((a, b) => b.featuredAt.localeCompare(a.featuredAt)).slice(0, 3).map((s) => AREA[s.category]);
+for (const it of recent) {
+  it.variety = lastAreas.filter((a) => a === AREA[it.guessCategory]).length * VARIETY_PENALTY;
+  it.score -= it.variety;
+}
 recent.sort((a, b) => b.score - a.score);
 
 const accepted = [], dropped = [];
@@ -281,9 +290,11 @@ out(`## Ranked candidates (${candidates.length} with a positive score, top ${TOP
 out();
 out(`Words = length of the feed description; +PR = the full press release is also read. Under ${MIN_SOURCE_WORDS} words in all, the publisher's description is quoted instead of summarised.`);
 out();
+out(`Last 3 published stories: ${lastAreas.join(', ') || 'none yet'}. Each match costs a story ${VARIETY_PENALTY} points (shown as −).`);
+out();
 out('| # | Score | Guess | Source | Words | Published | Headline |');
 out('|---|---|---|---|---|---|---|');
-candidates.slice(0, TOP).forEach((it, i) => out(`| ${i + 1} | ${it.score} | ${it.guessCategory} | ${it.source.name} | ${it.text ? wordCount(it.text) : 0}${it.source.open ? ' +PR' : ''} | ${it.publishedAt.slice(0, 10)} | [${it.title.replace(/\|/g, '/')}](${it.url}) |`));
+candidates.slice(0, TOP).forEach((it, i) => out(`| ${i + 1} | ${it.score}${it.variety ? ` (−${it.variety})` : ''} | ${it.guessCategory} | ${it.source.name} | ${it.text ? wordCount(it.text) : 0}${it.source.open ? ' +PR' : ''} | ${it.publishedAt.slice(0, 10)} | [${it.title.replace(/\|/g, '/')}](${it.url}) |`));
 out();
 if (dropped.length) {
   out(`<details><summary>${dropped.length} duplicates skipped</summary>\n`);
