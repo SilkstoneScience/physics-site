@@ -287,7 +287,8 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
 /* Joke and news share a row on wider screens and stack on phones; a hidden panel takes no space. */
 .home-pair { display: flex; flex-direction: column; gap: 20px; margin: 20px 0; }
 .home-pair > .joke, .home-pair > .news { margin: 0; }
-@media (min-width: 800px) { .home-pair { flex-direction: row; align-items: flex-start; } .home-pair > section { flex: 1 1 0; min-width: 0; } }
+/* Side by side, the two tiles always have the same height (the taller one sets it). */
+@media (min-width: 800px) { .home-pair { flex-direction: row; } .home-pair > section { flex: 1 1 0; min-width: 0; } }
 .news { background: var(--surface); border: 1px solid var(--border); border-top: 5px solid var(--xyz); border-radius: var(--radius); padding: 4px 18px 16px; display: flex; flex-direction: column; }
 .news[hidden] { display: none; }
 .news-top { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin: 12px 0 8px; }
