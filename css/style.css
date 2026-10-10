@@ -94,7 +94,8 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 .site-nav a:hover { background: var(--bg); }
 /* Current page: a thin orange underline (a bar on the left in the phone menu) */
 .site-nav a[aria-current="page"] { font-weight: 600; background: linear-gradient(var(--xyz-ink), var(--xyz-ink)) no-repeat left 9px bottom 2px / calc(100% - 18px) 2px; }
-@media (max-width: 760px) {
+/* Below 860 px the eight menu items no longer fit on one line, so they move into the Menu button. */
+@media (max-width: 860px) {
   .menu-btn { display: block; }
   .site-nav { display: none; width: 100%; }
   .site-nav.open { display: block; }
@@ -281,6 +282,39 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
 .joke-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
 .joke-buttons button { padding: 10px 16px; border-radius: 8px; font: inherit; font-weight: 600; cursor: pointer; }
 .joke-buttons button[hidden] { display: none; }
+
+/* ===== Science news (home-page panel from js/news.js; news.html made by tools/news/build.mjs) ===== */
+/* Joke and news share a row on wider screens and stack on phones; a hidden panel takes no space. */
+.home-pair { display: flex; flex-direction: column; gap: 20px; margin: 20px 0; }
+.home-pair > .joke, .home-pair > .news { margin: 0; }
+/* Side by side, the two tiles always have the same height (the taller one sets it). */
+@media (min-width: 800px) { .home-pair { flex-direction: row; } .home-pair > section { flex: 1 1 0; min-width: 0; } }
+.news { background: var(--surface); border: 1px solid var(--border); border-top: 5px solid var(--xyz); border-radius: var(--radius); padding: 4px 18px 16px; display: flex; flex-direction: column; }
+.news[hidden] { display: none; }
+.news-top { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin: 12px 0 6px; }
+.news h2 { margin: 0; font-size: 1.15rem; color: var(--xyz-ink); }
+.news-tagline { display: flex; align-items: center; gap: 8px; }
+.cat-icon.news-icon { width: 30px; height: 30px; margin: 0; flex: none; }
+.news-headline, .news-card h3 { margin: 4px 0 8px; font-size: 1.05rem; font-weight: 700; line-height: 1.35; }
+/* "more" / "less" after the headline: a button that looks like a small link */
+.news-toggle { background: none; border: 0; padding: 0 2px; font: inherit; font-size: 0.9rem; font-weight: 600; color: var(--accent); text-decoration: underline; cursor: pointer; white-space: nowrap; }
+.news-summary { margin: 0 0 8px; }
+.news-ai { margin: 0 0 4px; font-size: 0.82rem; font-style: italic; color: var(--muted); }
+.news-meta, .news-topics { margin: 0 0 4px; font-size: 0.88rem; color: var(--muted); }
+.news-more[hidden], .news-nav[hidden] { display: none; }
+.news-buttons { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 10px; }
+.news-buttons button { padding: 10px 16px; border-radius: 8px; font: inherit; font-weight: 600; cursor: pointer; }
+.news-nav { display: inline-flex; align-items: center; gap: 8px; }
+.news-nav button { padding: 8px 14px; }
+.news-nav button:disabled { opacity: 0.4; cursor: default; }
+.news-count { min-width: 4.5em; text-align: center; font-size: 0.9rem; color: var(--muted); }
+.news-all { margin-left: auto; font-size: 0.95rem; }
+/* The news page */
+.news-note { border-left: 3px solid var(--border); padding: 2px 0 2px 12px; color: var(--muted); font-size: 0.92rem; }
+.news-list { display: grid; gap: 14px; }
+.news-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px 12px; }
+.news-gone { font-size: 0.9rem; font-weight: 400; color: var(--muted); }
+.news-empty { color: var(--muted); }
 
 /* ===== About page ===== */
 .about-dogs { margin: 12px 0 0; max-width: 320px; }

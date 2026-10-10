@@ -8,13 +8,15 @@
 //   image   null = use the category icon (images are copyright or the licence varies per image);
 //           otherwise the credit and licence to show with the publisher's own images (used from Stage 2)
 //   keep    optional filter: return false to skip an item (item has title, url, text, categories)
+//   quote   false = never show this publisher's own description word for word (used when a short description
+//           can't be summarised honestly); APS's feed says "Personal use only, all commercial or other reuse prohibited"
 
 const CC_BY = { licence: 'CC BY 4.0', licenceUrl: 'https://creativecommons.org/licenses/by/4.0/' };
 const NASA_PD = { credit: 'NASA', licence: 'Public domain', licenceUrl: 'https://www.nasa.gov/nasa-brand-center/images-and-media/' };
 const ESA = { credit: '© ESA', licence: 'ESA standard licence (educational use)', licenceUrl: 'https://www.esa.int/ESA_Multimedia/Copyright_Notice_Images' };
 
 export const SOURCES = [
-  { key: 'aps', name: 'APS Physics Magazine', feed: 'https://feeds.aps.org/rss/recent/physics.xml', bonus: 10, open: false, image: null },
+  { key: 'aps', name: 'APS Physics Magazine', feed: 'https://feeds.aps.org/rss/recent/physics.xml', bonus: 10, open: false, image: null, quote: false },
   { key: 'physicsworld', name: 'Physics World', feed: 'https://physicsworld.com/feed/', bonus: 6, open: false, image: null },
   { key: 'cern', name: 'CERN', feed: 'https://home.cern/feed/', bonus: 4, open: false, image: null },
   { key: 'esa', name: 'ESA', feed: 'https://www.esa.int/rssfeed/Science_Exploration/Space_Science', bonus: 6, open: true, image: ESA },
@@ -30,6 +32,13 @@ export const SOURCES = [
   // Quanta covers maths, biology and computing too: physics categories only.
   { key: 'quanta', name: 'Quanta Magazine', feed: 'https://www.quantamagazine.org/feed/', bonus: 4, open: false, image: null,
     keep: (it) => it.categories.some((c) => /physic|cosmolog|astronom|quantum/i.test(c)) },
+  // Physics sources added October 2026 (tested 10 Oct: working, with the rates shown), so the news isn't mostly astronomy.
+  { key: 'sciencedaily', name: 'ScienceDaily', feed: 'https://www.sciencedaily.com/rss/matter_energy/physics.xml', bonus: 4, open: false, image: null },   // ~8/wk
+  { key: 'physorg', name: 'Phys.org', feed: 'https://phys.org/rss-feed/physics-news/', bonus: 2, open: false, image: null },   // ~60/wk
+  { key: 'fermilab', name: 'Fermilab', feed: 'https://news.fnal.gov/feed/', bonus: 4, open: false, image: null },   // ~5/wk
+  // US government text is public domain, so NIST's full articles may be read (its images are credited case by case, so not used).
+  { key: 'nist', name: 'NIST', feed: 'https://www.nist.gov/news-events/news/rss.xml', bonus: 6, open: true, image: null },   // ~1/wk
+  { key: 'mit', name: 'MIT News', feed: 'https://news.mit.edu/topic/mitphysics-rss.xml', bonus: 2, open: false, image: null },   // ~2/wk
   { key: 'esa-eo', name: 'ESA', feed: 'https://www.esa.int/rssfeed/Applications/Observing_the_Earth', bonus: 2, open: true, image: ESA },
   { key: 'nasa-eo', name: 'NASA Earth Observatory', feed: 'https://earthobservatory.nasa.gov/feeds/image-of-the-day.rss', bonus: 0, open: true, image: NASA_PD },
 ];

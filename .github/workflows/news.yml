@@ -1,0 +1,83 @@
+# Science news: adds one AI-summarised story to the site on Mondays, Wednesdays and Fridays.
+# What it does on each kind of run:
+#   - timed run (Mon/Wed/Fri 06:05 UTC; GitHub may start it a little late), or "Run workflow" on main:
+#       collect → pick the best new story → check it → add it to news/ → rebuild news.html → run the site checker →
+#       commit → ask GitHub Pages to republish (a commit made by a workflow doesn't trigger that on its own).
+#   - news/hidden.json edited on main (to remove a story): rebuild news.html and news/latest.json, then the same.
+#   - any push to another branch that changes the collector: a dry run that writes nothing.
+# Reports: github.com → physics-site → Actions → "Science news" → a run (signed in, the full report is on the
+# summary page; AI summaries and the pick are also posted as notes). GitHub emails the teacher if a run fails:
+# e.g. the ANTHROPIC_API_KEY secret is refused or expired, a feed has failed 7 runs in a row, or the checker fails.
+name: Science news
+on:
+  schedule:
+    - cron: '5 6 * * 1,3,5'
+  push:
+    paths: ['news/hidden.json', 'tools/news/**', '.github/workflows/news.yml']
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'publish = add a story now; dry-run = report only'
+        type: choice
+        options: [publish, dry-run]
+        default: publish
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: science-news
+  cancel-in-progress: false
+jobs:
+  news:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0   # full history: needed to see which files a push changed, and to rebase before pushing
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Decide what this run does
+        id: mode
+        run: |
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then mode=dry-run
+          elif [ "$GITHUB_EVENT_NAME" = "schedule" ]; then mode=publish
+          elif [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then mode="${{ inputs.mode }}"
+          elif git diff --name-only "${{ github.event.before }}" "$GITHUB_SHA" 2>/dev/null | grep -q '^news/hidden.json$'; then mode=rebuild
+          else mode=dry-run
+          fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "This run: $mode"
+      - name: Install the collector's libraries
+        if: steps.mode.outputs.mode != 'rebuild'
+        working-directory: tools/news
+        run: npm ci
+      - name: Collect (dry run)
+        if: steps.mode.outputs.mode == 'dry-run'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node tools/news/collect.mjs --dry-run --report "$GITHUB_STEP_SUMMARY"
+      - name: Collect and publish one story
+        if: steps.mode.outputs.mode == 'publish'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node tools/news/collect.mjs --publish --report "$GITHUB_STEP_SUMMARY"
+      - name: Rebuild the news pages (a story was hidden)
+        if: steps.mode.outputs.mode == 'rebuild'
+        run: node tools/news/build.mjs
+      - name: Check the whole site before saving
+        if: steps.mode.outputs.mode != 'dry-run'
+        run: node tools/check.mjs
+      - name: Save and republish
+        if: steps.mode.outputs.mode != 'dry-run'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git add news news.html
+          if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Science news: $(date -u +%Y-%m-%d) ${{ steps.mode.outputs.mode }}"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" > /dev/null && echo "Asked GitHub Pages to republish the site."

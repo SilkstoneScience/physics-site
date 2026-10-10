@@ -167,6 +167,24 @@ if (exists(p1b.DATA_DIR)) {
 const tests1b = await (await import('./1b/test.mjs')).runTests();
 for (const f of tests1b.failures) err('tools/1b/test.mjs', f);
 
+// ---------- 2c. Science news (tools/news) ----------
+// Every stored story must be valid, and news.html / news/latest.json must match the stored stories.
+let newsCount = 0;
+try {
+  const news = await import('./news/news-lib.mjs');
+  const stories = news.loadArchive();
+  newsCount = stories.length;
+  for (const p of news.archiveProblems(stories, new Set(TOPICS.keys()))) err('news/archive', p);
+  const hidden = news.loadHidden();
+  for (const h of hidden) if (!stories.some((s) => news.isHidden(s, [h]))) warn('news/hidden.json', `"${h}" doesn't match any stored story (use its id or the article's address)`);
+  const { buildOutputs } = await import('./news/build.mjs');
+  const { latest, html } = buildOutputs();
+  if (!exists('news/latest.json') || read('news/latest.json').replace(/\r/g, '') !== latest) err('news/latest.json', 'is out of date: run `node tools/news/build.mjs`');
+  if (!exists('news.html') || read('news.html').replace(/\r/g, '') !== html) err('news.html', 'is out of date: run `node tools/news/build.mjs`');
+} catch (e) {
+  err('news', e.message);
+}
+
 // ---------- 3. Pages: set-up and links ----------
 function htmlFiles(dir = '') {
   return fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true }).flatMap((d) => {
@@ -283,7 +301,7 @@ for (const [n, text, want] of markCases) {
 if (checkNumeric({ answer: 10, mistakes: [{ value: 20, feedback: 'x' }] }, '20').mistake !== 0) err('js/numeric.js', 'a listed mistake value should be recognised');
 
 // ---------- Report ----------
-console.log(`Checked ${pages.length} pages, ${questionCount} questions (${built1b.questions.length} generated Paper 1B datasets), ${parseCases.length + markCases.length} marking tests and ${tests1b.count} Paper 1B tests.`);
+console.log(`Checked ${pages.length} pages, ${questionCount} questions (${built1b.questions.length} generated Paper 1B datasets), ${parseCases.length + markCases.length} marking tests, ${tests1b.count} Paper 1B tests and ${newsCount} science news ${newsCount === 1 ? 'story' : 'stories'}.`);
 if (warnings.length) console.log(`\n${warnings.length} warning(s):\n` + warnings.map((w) => '  ! ' + w).join('\n'));
 if (errors.length) {
   console.log(`\n${errors.length} error(s):\n` + errors.map((e) => '  ✗ ' + e).join('\n'));
