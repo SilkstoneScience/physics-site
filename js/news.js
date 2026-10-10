@@ -35,8 +35,11 @@
       hint.className = 'visually-hidden';
       hint.textContent = ` (opens ${possessive(s.source)} article in a new tab)`;
       link.append(hint);
-      $('.news-summary').textContent = s.summary;
-      $('.news-ai').textContent = `Summary written automatically with AI, from ${possessive(s.source)} article.`;
+      // A publisher's own short description is quoted word for word (same wording as tools/news/build.mjs).
+      const quoted = s.summaryOrigin === 'publisher';
+      $('.news-summary').textContent = quoted ? `“${s.summary}”` : s.summary;
+      $('.news-ai').textContent = quoted ? `Description quoted from ${s.source}.`
+        : `Summary written automatically with AI, from ${possessive(s.source)} article.`;
       $('.news-meta').textContent = `${s.source} · ${dateText(s.publishedAt)}`;
       const t = $('.news-topics');
       t.textContent = 'In the course: ';

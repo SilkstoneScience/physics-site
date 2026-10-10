@@ -8,6 +8,10 @@ import { fileURLToPath } from 'node:url';
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 export const NEWS_DIR = path.join(ROOT, 'news');
 export const LATEST_COUNT = 6;   // stories in the home-page panel
+// Source text under MIN_SOURCE_WORDS can't be summarised honestly, so the publisher's description is quoted instead
+// (agreed with the teacher, October 2026); under MIN_QUOTE_WORDS it is too short to be useful and the story is skipped.
+export const MIN_SOURCE_WORDS = 40;
+export const MIN_QUOTE_WORDS = 10;
 
 // Category → [label, icon]. Icons are line drawings in the style of the home page's category cards
 // (40 × 40 grid; class "o" = orange line, "of" = orange dot). Decorative only.
@@ -66,10 +70,12 @@ export function storyProblems(s, topicIds) {
   str('title', 5, 250);
   if (!/^https?:\/\/[^\s"<>]+$/.test(s.url ?? '')) p.push('url must be a web address');
   if (!s.source || typeof s.source.key !== 'string' || typeof s.source.name !== 'string') p.push('source must have a key and a name');
-  str('summary', 100, 900);
+  // summaryOrigin "ai" = our AI summary; "publisher" = the publisher's own short description, quoted word for word.
+  if (!['ai', 'publisher'].includes(s.summaryOrigin)) p.push('summaryOrigin must be "ai" or "publisher"');
+  const [minWords, maxWords] = s.summaryOrigin === 'publisher' ? [MIN_QUOTE_WORDS, MIN_SOURCE_WORDS - 1] : [30, 110];
+  str('summary', 40, 900);
   if (typeof s.summary === 'string' && /[<>]|https?:/.test(s.summary)) p.push('summary must not contain markup or links');
-  if (typeof s.summary === 'string' && (wordCount(s.summary) < 30 || wordCount(s.summary) > 110)) p.push('summary must be 30–110 words');
-  if (s.summaryOrigin !== 'ai') p.push('summaryOrigin must be "ai"');
+  if (typeof s.summary === 'string' && (wordCount(s.summary) < minWords || wordCount(s.summary) > maxWords)) p.push(`summary must be ${minWords}–${maxWords} words`);
   if (!CATEGORIES[s.category]) p.push(`unknown category "${s.category}"`);
   if (!Array.isArray(s.topics) || s.topics.length < 1 || s.topics.length > 2 || s.topics.some((t) => !topicIds.has(t))) p.push('topics must be 1–2 syllabus codes');
   for (const k of ['publishedAt', 'collectedAt', 'featuredAt']) if (!ISO.test(s[k] ?? '')) p.push(`${k} must be a UTC date-time`);

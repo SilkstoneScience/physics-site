@@ -18,7 +18,7 @@ import path from 'path';
 import { XMLParser } from 'fast-xml-parser';
 import Anthropic from '@anthropic-ai/sdk';
 import { SOURCES } from './sources.mjs';
-import { NEWS_DIR, CATEGORIES, storyId, readTopics, loadArchive, loadHidden, isHidden, loadStatus, storyProblems, archiveProblems, wordCount } from './news-lib.mjs';
+import { NEWS_DIR, CATEGORIES, MIN_SOURCE_WORDS, MIN_QUOTE_WORDS, storyId, readTopics, loadArchive, loadHidden, isHidden, loadStatus, storyProblems, archiveProblems, wordCount } from './news-lib.mjs';
 import { writeOutputs } from './build.mjs';
 
 const args = process.argv.slice(2);
@@ -32,7 +32,6 @@ const REPORT = opt('--report', null);
 const MODEL = 'claude-opus-5-5';
 const UA = 'physics-site-news/1.0 (school study-guide site; https://physics.silkstone.xyz)';
 const NOW = new Date();
-const MIN_SOURCE_WORDS = 40;    // less than this and the AI can only pad: the story waits (or is skipped)
 const FEED_FAIL_LIMIT = 7;      // runs in a row before the workflow fails and GitHub emails
 
 if (DRY === PUBLISH) { console.error('Use either --dry-run (report only) or --publish.'); process.exit(1); }
@@ -186,11 +185,15 @@ Only state what the source supports. Every number you use must appear in the sou
 Choose 1 or 2 topic codes from the list, the ones whose physics the story really uses (most relevant first). Choose the category that fits best.
 Set suitable to false for stories that are mainly about awards, appointments, deaths, funding, politics, events, products or opinion, for stories with too little physics or space science for these students, and for anything not appropriate for a school audience.`;
 
+// For a story whose text is too short to summarise, the publisher's description is shown word for word,
+// so the AI only chooses the topics and category and judges whether the story is suitable.
+const QUOTE_NOTE = `\n\nThis story's text is too short to summarise, so the website will show the publisher's description word for word instead. Set summary to an empty string; still choose the topics and category and decide whether the story is suitable.`;
+
 let client = null;
-async function summarise(cand) {
+async function summarise(cand, quote) {
   client ??= new Anthropic();
   const topicList = TOPICS.map((t) => `${t.id} ${t.title}${t.hl ? ' (HL only)' : ''}`).join('\n');
-  const user = `<syllabus_topics>\n${topicList}\n</syllabus_topics>\n\n<story publisher="${cand.source.name}">\n<headline>${cand.title}</headline>\n<published>${cand.publishedAt ?? 'unknown'}</published>\n<text>\n${sourceText(cand)}\n</text>\n</story>`;
+  const user = `<syllabus_topics>\n${topicList}\n</syllabus_topics>\n\n<story publisher="${cand.source.name}">\n<headline>${cand.title}</headline>\n<published>${cand.publishedAt ?? 'unknown'}</published>\n<text>\n${sourceText(cand)}\n</text>\n</story>${quote ? QUOTE_NOTE : ''}`;
   const msg = await client.beta.messages.create({
     model: MODEL,
     max_tokens: 16000,
@@ -209,15 +212,16 @@ const sourceText = (cand) => [cand.text, cand.fullText].filter(Boolean).join('\n
 
 // Checks before anything is published. Returns a list of problems (empty = passes).
 const numbersIn = (s) => (s.replace(/(\d),(?=\d{3})/g, '$1').match(/\d+(?:\.\d+)?/g) ?? []);
-function checkSummary(r, cand) {
+function checkSummary(r, cand, quote) {
   const problems = [];
   if (!r.suitable) problems.push(`judged unsuitable: ${r.reason}`);
-  const n = wordCount(r.summary);
-  if (n < 30 || n > 110) problems.push(`summary is ${n} words (allowed 30–110)`);
-  if ((r.summary.match(/[.!?](\s|$)/g) ?? []).length > 4) problems.push('summary has more than 4 sentences');
   if (r.topics.length < 1 || r.topics.length > 2) problems.push(`${r.topics.length} topics (allowed 1–2)`);
   const bad = r.topics.filter((t) => !TOPIC_IDS.has(t));
   if (bad.length) problems.push(`unknown topic code(s): ${bad.join(', ')}`);
+  if (quote) return problems;   // the text shown is the publisher's own, so there is no summary to check
+  const n = wordCount(r.summary);
+  if (n < 30 || n > 110) problems.push(`summary is ${n} words (allowed 30–110)`);
+  if ((r.summary.match(/[.!?](\s|$)/g) ?? []).length > 4) problems.push('summary has more than 4 sentences');
   const sourceNums = new Set(numbersIn([cand.title, sourceText(cand)].join(' ')));
   const missing = numbersIn(r.summary).filter((x) => !sourceNums.has(x));
   if (missing.length) problems.push(`number(s) not found in the source: ${missing.join(', ')}`);
@@ -275,7 +279,7 @@ for (const f of feedStatus) {
 out();
 out(`## Ranked candidates (${candidates.length} with a positive score, top ${TOP} shown)`);
 out();
-out(`Words = length of the feed description; +PR = the full press release is also read. Under ${MIN_SOURCE_WORDS} words in all, a story is skipped.`);
+out(`Words = length of the feed description; +PR = the full press release is also read. Under ${MIN_SOURCE_WORDS} words in all, the publisher's description is quoted instead of summarised.`);
 out();
 out('| # | Score | Guess | Source | Words | Published | Headline |');
 out('|---|---|---|---|---|---|---|');
@@ -305,25 +309,34 @@ else {
     if (cand.source.open) {
       try { cand.fullText = await articleText(cand.url); } catch (e) { out(`(Could not fetch the full press release: ${e.message})`); }
     }
-    // Too little to summarise honestly (e.g. a one-sentence feed description): skip it without using the AI.
+    // Too little to summarise honestly (e.g. a one-sentence feed description): show the publisher's own words instead,
+    // unless the publisher doesn't allow that, the description is very short, or it is cut off mid-sentence.
     const words = wordCount(sourceText(cand));
-    if (words < MIN_SOURCE_WORDS) { out(`Skipped: the source gives only ${words} words (at least ${MIN_SOURCE_WORDS} needed).`); out(); continue; }
+    const quote = words < MIN_SOURCE_WORDS;
+    if (quote) {
+      const why = cand.source.quote === false ? `${cand.source.name} doesn't allow its descriptions to be reused`
+        : words < MIN_QUOTE_WORDS ? `the description is only ${words} words (at least ${MIN_QUOTE_WORDS} needed to quote it)`
+          : /(…|\.\.\.)$/.test(cand.text) ? 'the description is cut off' : null;
+      if (why) { out(`Skipped: too short to summarise (${words} words) and ${why}.`); out(); continue; }
+    }
     tried++;
     try {
-      const { result, usage, model } = await summarise(cand);
+      const { result, usage, model } = await summarise(cand, quote);
       cost += (usage.input_tokens * 4 + usage.output_tokens * 20) / 1e6;
-      const problems = checkSummary(result, cand);
-      out(`> ${result.summary}`);
+      const problems = checkSummary(result, cand, quote);
+      const shown = quote ? cand.text : result.summary.trim();
+      out(`> ${shown}`);
       out();
+      out(quote ? `(The publisher's own description, quoted word for word: the source is too short to summarise.)` : '(AI summary.)');
       out(`Topics: ${result.topics.join(', ')} · category: ${result.category} · ${result.suitable ? 'suitable' : 'not suitable'} (${result.reason})`);
       out(`Model: ${model} · ${usage.input_tokens} tokens in, ${usage.output_tokens} out · source ${words} words${cand.fullText ? ' (full press release)' : ' (feed description only)'}`);
       out(problems.length ? `**Checks failed:** ${problems.join('; ')}. This story waits.` : 'Checks: all passed.');
-      aiNotes.push([`AI summary: ${cand.title}`, `${result.summary}\n\nTopics: ${result.topics.join(', ')} · ${result.category} · ${cand.source.name}\n` +
+      aiNotes.push([`${quote ? 'Quoted description' : 'AI summary'}: ${cand.title}`, `${shown}\n\nTopics: ${result.topics.join(', ')} · ${result.category} · ${cand.source.name}\n` +
         (problems.length ? `Checks failed: ${problems.join('; ')}` : 'Checks: all passed')]);
       if (!problems.length && !pick) {
         pick = {
           id: cand.id, title: cand.title, url: cand.url, source: { key: cand.source.key, name: cand.source.name },
-          summary: result.summary.trim(), summaryOrigin: 'ai', category: result.category, topics: result.topics,
+          summary: shown, summaryOrigin: quote ? 'publisher' : 'ai', category: result.category, topics: result.topics,
           publishedAt: cand.publishedAt, collectedAt: NOW.toISOString().replace(/\.\d{3}Z$/, 'Z'), featuredAt: NOW.toISOString().replace(/\.\d{3}Z$/, 'Z'),
           image: null, linkStatus: 'ok', score: cand.score,
         };

@@ -8,13 +8,15 @@
 //   image   null = use the category icon (images are copyright or the licence varies per image);
 //           otherwise the credit and licence to show with the publisher's own images (used from Stage 2)
 //   keep    optional filter: return false to skip an item (item has title, url, text, categories)
+//   quote   false = never show this publisher's own description word for word (used when a short description
+//           can't be summarised honestly); APS's feed says "Personal use only, all commercial or other reuse prohibited"
 
 const CC_BY = { licence: 'CC BY 4.0', licenceUrl: 'https://creativecommons.org/licenses/by/4.0/' };
 const NASA_PD = { credit: 'NASA', licence: 'Public domain', licenceUrl: 'https://www.nasa.gov/nasa-brand-center/images-and-media/' };
 const ESA = { credit: '© ESA', licence: 'ESA standard licence (educational use)', licenceUrl: 'https://www.esa.int/ESA_Multimedia/Copyright_Notice_Images' };
 
 export const SOURCES = [
-  { key: 'aps', name: 'APS Physics Magazine', feed: 'https://feeds.aps.org/rss/recent/physics.xml', bonus: 10, open: false, image: null },
+  { key: 'aps', name: 'APS Physics Magazine', feed: 'https://feeds.aps.org/rss/recent/physics.xml', bonus: 10, open: false, image: null, quote: false },
   { key: 'physicsworld', name: 'Physics World', feed: 'https://physicsworld.com/feed/', bonus: 6, open: false, image: null },
   { key: 'cern', name: 'CERN', feed: 'https://home.cern/feed/', bonus: 4, open: false, image: null },
   { key: 'esa', name: 'ESA', feed: 'https://www.esa.int/rssfeed/Science_Exploration/Space_Science', bonus: 6, open: true, image: ESA },
