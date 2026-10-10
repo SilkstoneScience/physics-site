@@ -312,7 +312,8 @@ if (AI_COUNT === 0) out('Skipped (--ai 0).');
 else if (!process.env.ANTHROPIC_API_KEY) out('Skipped: no ANTHROPIC_API_KEY is set.');
 else {
   let cost = 0, tried = 0;
-  for (const cand of candidates) {
+  const reserve = [];   // stories that passed but were moved down by the variety rule once the AI gave their area
+  for (const [idx, cand] of candidates.entries()) {
     if (tried >= AI_COUNT || (PUBLISH && pick)) break;
     out(`### ${cand.title}`);
     out(`${cand.source.name}, ${cand.publishedAt.slice(0, 10)}, score ${cand.score}: ${cand.url}`);
@@ -345,18 +346,32 @@ else {
       aiNotes.push([`${quote ? 'Quoted description' : 'AI summary'}: ${cand.title}`, `${shown}\n\nTopics: ${result.topics.join(', ')} · ${result.category} · ${cand.source.name}\n` +
         (problems.length ? `Checks failed: ${problems.join('; ')}` : 'Checks: all passed')]);
       if (!problems.length && !pick) {
-        pick = {
+        const story = {
           id: cand.id, title: cand.title, url: cand.url, source: { key: cand.source.key, name: cand.source.name },
           summary: shown, summaryOrigin: quote ? 'publisher' : 'ai', category: result.category, topics: result.topics,
           publishedAt: cand.publishedAt, collectedAt: NOW.toISOString().replace(/\.\d{3}Z$/, 'Z'), featuredAt: NOW.toISOString().replace(/\.\d{3}Z$/, 'Z'),
           image: null, linkStatus: 'ok', score: cand.score,
         };
+        // The variety rule used a keyword guess at the story's area; the AI's category is more reliable. If that puts the
+        // story in a more recent area, recalculate its score: when it falls below the next story's, try that one first.
+        const correct = lastAreas.filter((a) => a === AREA[result.category]).length * VARIETY_PENALTY;
+        const score = cand.score + cand.variety - correct;
+        const next = candidates[idx + 1];
+        if (correct > cand.variety && next && score < next.score) {
+          out(`Passed, but it is really ${result.category}: the variety rule lowers its score to ${score}, below the next story (${next.score}), so that is tried first. This one is kept in reserve.`);
+          reserve.push({ ...story, score });
+        } else pick = story;
       }
     } catch (e) {
       out(`**AI step failed:** ${e.message}. This story waits for the next run.`);
       aiNotes.push([`AI step failed: ${cand.title}`, e.message]);
       if (e instanceof Anthropic.AuthenticationError || e instanceof Anthropic.PermissionDeniedError) { keyProblem = e.message; break; }
     }
+    out();
+  }
+  if (!pick && reserve.length) {
+    pick = reserve.sort((a, b) => b.score - a.score)[0];
+    out(`No better story passed, so the reserve story is used: ${pick.title}`);
     out();
   }
   out(`Approximate cost of these AI calls: $${cost.toFixed(3)}`);
