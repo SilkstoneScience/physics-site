@@ -622,6 +622,7 @@
   // Ask MathJax to draw the equations inside an element (if MathJax has loaded yet;
   // if not, MathJax draws the whole page itself when it finishes loading).
   function typeset(el) {
+    if (window.glueUnits) glueUnits(el); // keep numbers and their units on one line (js/site.js)
     if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([el]).catch(console.error);
   }
   function typesetClear(el) {

@@ -58,6 +58,17 @@ This file is not published on the website (see `_config.yml`).
 - MathJax pinned to 4.1.3.
 - 404 page, robots.txt, sitemap.xml, favicon, link-preview (Open Graph) tags and descriptions on every page.
 
+## Design review changes (12 October 2026)
+After a design review, the teacher chose these changes (all in `js/site.js` and `css/style.css` unless noted):
+- "Knowledge and science" box starts **partly shown**, fading out, with a "Show more" button, on every topic page and the Skills page (a fully closed box was too easy to miss). The heading and the faded text also open it; the box stays open without JavaScript. On a phone, A.1's first section moved from about 3 screens down to about 1.9.
+- **"↑ Contents" button** (bottom left) on every page with a contents list, shown once the list has scrolled off screen.
+- **Narrower, centred text column** (`--read: 50rem`, about 105 characters per line; 39rem was too thin on laptops, the main audience) on topic pages, Skills, ToK, Experimental, EE and About pages.
+- **Home page:** the XYZ hero picture is hidden on narrow screens (under 760 px); "Practise and investigate" has an "Apply" label, matching "Learn".
+- **Site search:** `search.html` + `js/search.js`, a search link in the header, and `search-index.json` (page titles and descriptions, section headings with ids, and the bold terms and sub-headings in each section). The checker rebuilds it with `node tools/check.mjs --sitemap` and reports when it is out of date. The home page and news page are left out of the index.
+- **Units no longer split from numbers** across lines (`window.glueUnits` in `js/site.js`, also used by the question bank).
+- **"Try it first"** on worked examples (topic pages and the Skills page): hides solutions so students attempt them first; the choice is remembered on the device. Three Skills examples were reordered (questions first, then answers) so this works.
+- **IA page:** the teacher's guidance on the variables section (own section, table or paragraphs, instruments and precision, calculated independent variables, control values), no long equipment list, data-processing choices as methodological considerations, the analysis told as a story (what, how, why; raw data introduced), which calculations need examples, and tables in the evaluation.
+
 ## XYZ visual identity (October 2026)
 - Light-orange XYZ motif: home-page hero ("The XYZ of DP Physics") with animated axes and orbit, category cards with line icons, section-heading accents, a small axes mark in the header on every page, and an orange underline for the current menu item. Styles are in the "XYZ motif" section at the end of `css/style.css`.
 
@@ -90,7 +101,9 @@ Ask the user before starting any item marked "decide".
 - **Layout checks.** The menu at 768 px (tablets) may wrap onto two lines (consider raising the 760 px breakpoint); check the "Σ Equations" button never covers the question bank's "Next" button on small phones.
 
 ### P3: future/optional
-- **Site search.** A small search index of page headings and question stems, searched in the browser. Worth it once students revise across many topics.
+- **Site search: question stems** (decide). The search (done October 2026) covers pages only; questions could be added later.
+- **Question bank filter panel** (explore; teacher's request, 12 October 2026). On a laptop the filters push the question below the fold; consider collapsing them to "Filters ▾" once a topic is chosen. The Theme dropdown also cuts off its own text ("A: Space, time and mo…").
+- **Space at the bottom of the page for the floating buttons** (explore; teacher's request, 12 October 2026). On phones the "Σ Equations" and "↑ Contents" buttons can cover the last line of text on screen while scrolling.
 - **Split question files by topic.** Only needed past about 1,500 questions, when loading every file at once gets slow on phones. Keep all question ids unchanged.
 - **XYZ favicon and social card** (decide). The browser-tab icon and the link-preview image are still the old blue design.
 - **More XYZ motif uses** (decide). Possible later: topic-page headers, the question bank's empty or loading states. Keep it subtle.

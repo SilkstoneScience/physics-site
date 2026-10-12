@@ -90,8 +90,8 @@
       <table class="notes">
         <tr><th>Strand</th><th>The examiner wants</th><th>So you must write</th></tr>
         <tr><td>i</td><td>The research question in a specific, appropriate context.</td><td>A precise question naming both variables, a short description of the system, and the background physics that directly bears on it. Not history, not a general essay, not why you find it interesting.</td></tr>
-        <tr><td>ii</td><td>Methodological considerations <strong>explained</strong>, not just listed.</td><td>Why this method, range, interval and number of repeats; how each control variable is controlled and why it matters; what precision you need and whether your instruments give it; safety and environmental issues.</td></tr>
-        <tr><td>iii</td><td>A description that lets someone reproduce the investigation.</td><td>Specific apparatus, specific steps, how each measurement was taken, and a labelled diagram.</td></tr>
+        <tr><td>ii</td><td>Methodological considerations <strong>explained</strong>, not just listed.</td><td>Why this method, range, interval and number of repeats; how each control variable is controlled and why it matters; what precision you need and whether your instruments give it; your data-processing choices (what you will calculate and plot, and why); safety and environmental issues.</td></tr>
+        <tr><td>iii</td><td>A description that lets someone reproduce the investigation.</td><td>Clear, specific steps, how each measurement was taken, and a labelled diagram. The key instruments are already described in your variables section, so you don't need a long equipment list.</td></tr>
       </table>
     </div>
 
@@ -252,7 +252,7 @@
     <h2 id="method">7. Designing the method</h2>
     <p>This is Research Design strands ii and iii. They are separate: you can describe a poor method beautifully, or run a good method and describe it too vaguely to repeat. Aim for both.</p>
     <h3>The decisions you must explain</h3>
-    <p>The key word is <strong>explain</strong>: give the reason for each decision.</p>
+    <p>The key word is <strong>explain</strong>: give the reason for each decision. Methodological considerations include how you will <em>process</em> the data, not just how you collect it.</p>
     <div class="table-wrap">
       <table class="notes">
         <tr><th>Decision</th><th>What explaining it sounds like</th></tr>
@@ -262,19 +262,28 @@
         <tr><td>Number of repeats</td><td>"Five repeats per length, because a pilot run showed a spread of about 3% between trials."</td></tr>
         <tr><td>Precision needed</td><td>"Across the range the period changes by about 0.9 s, so a timer reading to 0.01 s is more than enough."</td></tr>
         <tr><td>Control variables</td><td>Name each one, say why it would affect the result, and say how you kept it fixed. Gravity is not a control variable; the release angle is.</td></tr>
+        <tr><td>Data-processing choices</td><td>"Timing ten swings and dividing by ten makes the uncertainty in each period ten times smaller. Plotting $T^2$ against $L$ gives a straight line whose gradient is $\dfrac{4\pi^2}{g}$, so $g$ can be found from the gradient and its uncertainty from the steepest and shallowest lines."</td></tr>
         <tr><td>Safety, ethical, environmental</td><td>Short and specific: hot liquids, lasers, mains electricity, disposing of oils, reducing waste.</td></tr>
       </table>
     </div>
     <p><strong>How much data?</strong> As a guideline, use <strong>five values</strong> of the independent variable with <strong>five trials</strong> of each. It is a guideline, not a rule: some experiments need more values or trials (a curve whose shape you need to see clearly, or results that vary a lot) and some need fewer (very consistent readings, or a slow method). Justify your choice either way.</p>
     <div class="notice"><strong>Do a precision check before collecting anything.</strong> Use the theory to estimate how much your dependent variable will change across your whole range, and compare that with the uncertainty of one measurement. If the change isn't several times bigger than the uncertainty, your investigation can't answer its own question. Change the range, the method or the question now.</div>
 
-    <h3>Variables table</h3>
-    <p>Make a table of every variable: its symbol and unit, how it is measured or controlled (with the instrument and its uncertainty), and <strong>why it matters</strong>. That last column is where the marks are. If you calculate the independent variable from another quantity, say how.</p>
+    <h3>The variables section</h3>
+    <p>Give your variables a section of their own, before the method. For each one:</p>
+    <ul>
+      <li><strong>Independent variable:</strong> its symbol and unit, the values you chose, how you changed it, and the instrument you measured it with, with its uncertainty. If you don't measure it directly but calculate it from other measurements, explain the calculation. For example, the speed of a trolley might be worked out from the length of a card and the time it takes to pass through a light gate.</li>
+      <li><strong>Dependent variable:</strong> its symbol and unit, how you measured it, and the instrument and its uncertainty. This is a good place to discuss precision: can the instrument show the change you expect?</li>
+      <li><strong>Control variables:</strong> why each one would affect the result, how you kept it fixed and, if you know it, its value, measured like any other quantity. For example: "The mass of the trolley was kept constant at (1.57 ± 0.01) kg, measured with a classroom balance."</li>
+    </ul>
+    <p>A table works well when the details are short. When a variable needs more explanation (an independent variable you calculate, or a control that is hard to keep fixed), write the section as short paragraphs instead: a table crammed with long sentences is hard to read. Either way, saying <strong>why</strong> each variable matters is where the marks are.</p>
 
     <h3>The method itself</h3>
     <ul>
+      <li>You don't need a long equipment list, or one at all. The important instruments are already described in your variables section, with their uncertainties, and your labelled diagram shows the other equipment needed to run the experiment.</li>
       <li>Say what you did, focusing on how you changed the independent variable, measured the dependent variable and kept the controls fixed.</li>
-      <li>Write the method as a <strong>series of clear steps</strong>, naming specific apparatus (with sizes or models) and specific quantities, so someone else could repeat it.</li><li>Leave out steps about how everything connects together (such as plugging the sensor into the computer), unless it is an important methodological consideration.</li>
+      <li>Write the method as a <strong>series of clear steps</strong>, with specific quantities, so someone else could repeat it.</li>
+      <li>Leave out steps about how everything connects together (such as plugging the sensor into the computer), unless it is an important methodological consideration.</li>
       <li>Include a <strong>labelled diagram</strong> of the set-up. A clear sketch usually communicates better than a photograph.</li>
       <li>Avoid unnecessary or repeated detail.</li>
     </ul>
@@ -315,6 +324,16 @@
 
     <!-- ===================================================== -->
     <h2 id="processing">9. Processing and propagating uncertainties</h2>
+    <h3>Tell the story of your analysis</h3>
+    <p>Your data analysis should read as a <strong>story</strong> that someone can follow from start to finish. If a reader can't follow it, they can't understand what you did, and neither can the examiner.</p>
+    <ul>
+      <li>Introduce every part before you show it, <strong>including the raw data</strong>: say what the table shows and how the values were obtained.</li>
+      <li>Then introduce each processing step and explain <strong>what</strong> you are doing, <strong>how</strong> you are doing it and <strong>why</strong>: how this step gets you closer to answering your research question.</li>
+      <li>Show the result of that step, then move on to the next one in the same way, all the way to your final graph and value.</li>
+    </ul>
+    <p>For example: "Table 2 shows the five times for ten swings at each length. Each time was divided by ten to give the period, which also divides its uncertainty by ten. The mean period at each length was then found, with half the range as its uncertainty (Table 3). To test whether $T$ is proportional to $\sqrt{L}$, the mean periods were squared…"</p>
+
+    <h3>Processing and propagation rules</h3>
     <p>Data Analysis marks are usually good, and lost to the same few mistakes. The full rules, with worked examples, are on the <a href="../skills.html#propagating">Physics skills page</a>. In short:</p>
     <div class="table-wrap">
       <table class="notes">
@@ -334,8 +353,8 @@
     </div>
     <h3>Writing the final value</h3>
     <p>Give the uncertainty to <strong>one significant figure</strong> (two if it starts with a 1), with the value to the same decimal place: (12.2 ± 0.4) m and (14.23 ± 0.12) s are right; (12.2 ± 0.36) m and (14.23 ± 0.1) s are not. If an uncertainty is bigger than the value, say so and deal with it.</p>
-    <h3>Show one of each calculation</h3>
-    <p>Show one worked example of each different calculation: the equation, the substituted values and the result, with its uncertainty. Don't show forty of them; examiners criticize pages of repeated arithmetic. A sentence is enough for routine spreadsheet steps such as taking a mean.</p>
+    <h3>Which calculations to show</h3>
+    <p><strong>Simple steps</strong>, such as a mean or half the range, need no example calculation: just say what you did. <strong>More complex steps</strong>, such as linearizing (calculating $T^2$ or $\ln\eta$, for example) and especially <strong>uncertainty calculations</strong>, need a short example using your own data: the equation, the substituted values and the result, with its uncertainty, like the worked example above. Show one example of each, not forty: examiners criticize pages of repeated arithmetic.</p>
     <div class="notice"><strong>No statistics.</strong> Don't use R², Pearson's <em>r</em> or standard deviation. With cause-and-effect variables, R² is almost always above 0.9, even when you have fitted the wrong relationship, and your small data sets are too small for standard deviation. Use experimental uncertainties instead: half-ranges, propagation, uncertainty bars, and maximum and minimum gradients.</div>
 
     <!-- ===================================================== -->
@@ -447,6 +466,7 @@
       </table>
     </div>
     <p>The word <strong>relative</strong> in the top band means the examiner wants your judgement: which weakness mattered most, and why?</p>
+    <p><strong>A table can help here.</strong> Setting your evaluation out as a table, with one row per weakness and a column for each of the four steps, keeps your ideas organized and makes the evaluation easy to follow. It also makes a missing step obvious. Put the rows in order of impact, and add a sentence or two saying which weakness mattered most and why.</p>
     <h3>Where to look for real weaknesses</h3>
     <ul>
       <li><strong>The approach:</strong> was this the right technique? What did choosing it cost you?</li>
@@ -478,7 +498,7 @@
         <tr><td>Title, candidate code, word count</td><td>(top of page 1)</td><td>Required</td></tr>
         <tr><td>Introduction, context and theory</td><td>400–600</td><td>Research Design i</td></tr>
         <tr><td>Research question and hypothesis</td><td>50–100</td><td>Research Design i</td></tr>
-        <tr><td>Variables table</td><td>not counted</td><td>Research Design ii</td></tr>
+        <tr><td>Variables (a table or short paragraphs)</td><td>not counted as a table; 100–250 as paragraphs</td><td>Research Design ii</td></tr>
         <tr><td>Method and labelled diagram</td><td>300–450</td><td>Research Design ii, iii</td></tr>
         <tr><td>Raw data and uncertainties</td><td>150–250</td><td>Data Analysis i, ii</td></tr>
         <tr><td>Processing and sample calculations</td><td>250–400</td><td>Data Analysis i, ii</td></tr>
@@ -492,6 +512,7 @@
     <h3>Cut these</h3>
     <ul>
       <li>A cover page and contents page.</li>
+      <li>A long equipment list: the key instruments belong in your variables section, and your diagram shows the rest.</li>
       <li>A personal engagement section, or opening lines like "Ever since I was a child…".</li>
       <li>A summary at the end: your conclusion already is one.</li>
       <li>Derivations of equations in the data booklet.</li>
@@ -566,8 +587,8 @@
     <h3>Point to the evidence</h3>
     <p>For each strand, find the page and line where an examiner will see the evidence. If you can't point to it, it isn't there.</p>
     <ul>
-      <li><strong>Research Design:</strong> the question names both variables, with range and units, in a specific physics context; range, interval, repeats, precision and each control are explained with reasons; the method and diagram are detailed enough to repeat.</li>
-      <li><strong>Data Analysis:</strong> table headings have quantity, symbol, unit and uncertainty; significant figures and decimal places are consistent; every uncertainty is justified and propagated; the graph answers the question, with a fit justified by theory, bars and gradient lines.</li>
+      <li><strong>Research Design:</strong> the question names both variables, with range and units, in a specific physics context; range, interval, repeats, precision, each control and the data-processing choices are explained with reasons; the method and diagram are detailed enough to repeat.</li>
+      <li><strong>Data Analysis:</strong> the analysis reads as a story, with each step introduced and explained (what, how and why); table headings have quantity, symbol, unit and uncertainty; significant figures and decimal places are consistent; every uncertainty is justified and propagated; the graph answers the question, with a fit justified by theory, bars and gradient lines.</li>
       <li><strong>Conclusion:</strong> a number with its uncertainty, the relationship named correctly, gradient and intercept explained, and a comparison with a source.</li>
       <li><strong>Evaluation:</strong> specific weaknesses, ranked, each with its effect on the data and the conclusion, and a targeted improvement.</li>
     </ul>

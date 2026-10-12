@@ -262,11 +262,53 @@ function pageUrl(page) { return SITE + page.replace(/(^|\/)index\.html$/, '$1');
 const wantedUrls = pages.filter((p) => p !== '404.html').map(pageUrl).sort();
 const sitemapXml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
   + wantedUrls.map((u) => `  <url><loc>${u}</loc></url>\n`).join('') + '</urlset>\n';
+// search-index.json feeds the site search (search.html, js/search.js): every page's title and description, and each
+// section heading that has an id, with the bold key terms in that section. It is rebuilt with the sitemap.
+const searchJson = buildSearchIndex();
 if (process.argv.includes('--sitemap')) {
   fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), sitemapXml);
   console.log(`Wrote sitemap.xml (${wantedUrls.length} pages).`);
-} else if (!exists('sitemap.xml') || read('sitemap.xml').replace(/\r/g, '') !== sitemapXml) {
-  err('sitemap.xml', 'is missing or out of date: run `node tools/check.mjs --sitemap` to rewrite it');
+  fs.writeFileSync(path.join(ROOT, 'search-index.json'), searchJson);
+  console.log(`Wrote search-index.json (${Math.round(searchJson.length / 1024)} KB).`);
+} else {
+  if (!exists('sitemap.xml') || read('sitemap.xml').replace(/\r/g, '') !== sitemapXml) {
+    err('sitemap.xml', 'is missing or out of date: run `node tools/check.mjs --sitemap` to rewrite it');
+  }
+  if (!exists('search-index.json') || read('search-index.json').replace(/\r/g, '') !== searchJson) {
+    err('search-index.json', 'is missing or out of date (a page or heading changed): run `node tools/check.mjs --sitemap` to rebuild it');
+  }
+}
+
+function buildSearchIndex() {
+  // Left out: the home page, the search page itself, 404 and the news page (it changes three times a week by itself).
+  const skip = new Set(['index.html', '404.html', 'search.html', 'news.html']);
+  // Maths in a heading becomes plain text: "$E_{\max}$" -> "Emax"
+  const clean = (s) => s.replace(/\$([^$]*)\$/g, (m, tex) => tex.replace(/\\(max|min)\b/g, '$1').replace(/\\[a-zA-Z]+/g, '').replace(/[{}_^]/g, ''))
+    .replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#(\d+);/g, (m, n) => String.fromCharCode(n)).replace(/\s+/g, ' ').trim();
+  const out = { pages: [], sections: [] };
+  for (const page of pages.filter((p) => !skip.has(p)).sort()) {
+    const html = read(page);
+    const title = clean((html.match(/<title>([^<]*)<\/title>/) || [])[1] || '').replace(/ · Mr Silkstone's Physics$/, '');
+    const desc = clean((html.match(/<meta name="description" content="([^"]*)">/) || [])[1] || '');
+    const p = out.pages.push([page, title, desc]) - 1;
+    const main = (html.match(/<main[^>]*>([\s\S]*)<\/main>/) || [])[1] || '';
+    const body = main.replace(/<!--[\s\S]*?-->/g, '').replace(/<svg[\s\S]*?<\/svg>/g, '').replace(/<script[\s\S]*?<\/script>/g, '');
+    // HL-only stretches of a page: from <div class="hl-zone"> to the "End of the HL-only content" line
+    const hlRanges = [...body.matchAll(/class="hl-zone"/g)].map((m) => [m.index, body.indexOf('class="hl-end"', m.index)]);
+    const heads = [...body.matchAll(/<(h2|h3)[^>]*\sid="([^"]+)"[^>]*>([\s\S]*?)<\/\1>/g)];
+    heads.forEach((m, i) => {
+      if (m[2] === 'tok-title') return;
+      const end = i + 1 < heads.length ? heads[i + 1].index : body.length;
+      const chunk = body.slice(m.index + m[0].length, end);
+      const terms = [...new Set([...chunk.matchAll(/<(strong|dfn)>([\s\S]*?)<\/\1>|<h3>([\s\S]*?)<\/h3>/g)]
+        .map((t) => clean(t[2] || t[3]).replace(/[.:,;]$/, '').replace(/^Worked example: /, ''))
+        .filter((t) => t.length >= 3 && t.length <= 60 && !t.includes('$')))];
+      const hl = /class="tag hl"/.test(m[3]) || hlRanges.some(([a, b]) => m.index > a && (b < 0 || m.index < b));
+      out.sections.push([p, m[2], clean(m[3]).replace(/^\d+\.\s*/, '').replace(/\s*\bHL$/, ''), terms.join(' · '), hl ? 1 : 0]);
+    });
+  }
+  return JSON.stringify(out) + '\n';
 }
 
 if (mathjaxVersions.size > 1) {

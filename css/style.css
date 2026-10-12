@@ -65,6 +65,7 @@ a { color: var(--accent); }
 img, svg { max-width: 100%; height: auto; }
 .lead { font-size: 1.1rem; color: var(--muted); }
 .code { color: var(--muted); font-weight: 600; margin-right: 0.3em; }
+.nobr { white-space: nowrap; } /* a number and its unit (added by site.js) */
 mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
 .key, .worked, .feedback, .markscheme { overflow-x: auto; }
 
@@ -88,6 +89,10 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 .xyz-mark { width: 22px; height: 22px; flex: none; }
 .xyz-mark path { fill: none; stroke: var(--xyz-ink); stroke-width: 1.8; stroke-linecap: round; }
 .xyz-mark circle { fill: var(--xyz); }
+.header-tools { display: flex; align-items: center; gap: 8px; }
+.search-link { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-size: 0.95rem; }
+.search-link:hover, .search-link[aria-current="page"] { border-color: var(--accent); color: var(--accent); }
+.search-link svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
 .menu-btn { display: none; background: none; border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 6px 12px; font: inherit; cursor: pointer; }
 .site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 2px; flex-wrap: wrap; }
 .site-nav a { display: block; padding: 6px 9px; border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.95rem; }
@@ -97,6 +102,9 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 /* Below 860 px the eight menu items no longer fit on one line, so they move into the Menu button. */
 @media (max-width: 860px) {
   .menu-btn { display: block; }
+  /* Phones: the search link shrinks to its magnifying-glass icon (its label stays for screen readers) */
+  .search-link { padding: 7px 9px; }
+  .search-link span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .site-nav { display: none; width: 100%; }
   .site-nav.open { display: block; }
   .site-nav ul { flex-direction: column; padding-bottom: 8px; }
@@ -163,10 +171,26 @@ a.card:hover { border-color: var(--accent); }
 .hl-zone > h2:first-child { margin-top: 12px; }
 .hl-end { margin: 18px 0 0; padding: 8px 12px; border-radius: var(--radius); background: var(--warn-soft); font-size: 0.9rem; font-weight: 600; }
 .toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 16px; }
+/* "↑ Contents" button (bottom left; the Σ Equations button is bottom right). Added by site.js on pages with a contents list. */
+.toc-fab { position: fixed; left: 16px; bottom: 16px; z-index: 20; background: var(--surface); color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 9px 16px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18); }
+.toc-fab[hidden] { display: none; }
+.toc-fab:hover { background: var(--accent-soft); }
+/* Reading pages: a slightly narrower, centred column than the rest of the site (the teacher found 39rem too thin on laptops).
+   To adjust, change --read (the width of the text itself). */
+:root { --read: 50rem; }
+body:is([data-topic], [data-section="skills"], [data-section="tok"], [data-section="experimental"], [data-section="ee"], [data-section="about"]) main { max-width: calc(var(--read) + 32px); }
 .toc ol { margin: 6px 0; padding-left: 1.3em; }
 .key { background: var(--accent-soft); border-radius: var(--radius); padding: 10px 16px; margin: 16px 0; }
 .worked { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--theme-b); border-radius: var(--radius); padding: 4px 16px 10px; margin: 18px 0; }
 .worked h3 { font-size: 1rem; margin: 10px 0 4px; color: var(--theme-b); }
+/* "Try it first" bar between a worked example's question and its solution (added by site.js) */
+.try-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin: 6px 0 8px; font-size: 0.88rem; }
+.try-btn { font: inherit; font-weight: 600; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--theme-b); background: var(--surface); color: var(--text); cursor: pointer; }
+.try-btn:hover { background: var(--warn-soft); }
+.try-btn.primary { background: var(--theme-b); border-color: var(--theme-b); color: var(--surface); }
+.try-note { color: var(--muted); }
+.try-off { font-size: 0.85rem; color: var(--muted); }
+.worked-sol[hidden] { display: none; }
 .table-wrap { overflow-x: auto; }
 table.notes { border-collapse: collapse; margin: 12px 0; width: 100%; }
 table.notes th, table.notes td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; }
@@ -316,6 +340,17 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
 .news-gone { font-size: 0.9rem; font-weight: 400; color: var(--muted); }
 .news-empty { color: var(--muted); }
 
+/* ===== Search page (js/search.js) ===== */
+.search-form { display: flex; gap: 8px; margin: 12px 0 8px; max-width: 40rem; }
+.search-form input { flex: 1; font-size: 1.05rem; padding: 10px 12px; background: var(--surface); }
+.search-status { color: var(--muted); margin: 8px 0; }
+.search-results { list-style: none; padding: 0; margin: 0; max-width: 44rem; }
+.search-results li { padding: 10px 0; border-top: 1px solid var(--border); }
+.search-results a { font-weight: 700; font-size: 1.05rem; }
+.search-page { display: block; font-size: 0.88rem; color: var(--muted); }
+.search-snip { display: block; font-size: 0.92rem; margin-top: 2px; }
+.search-results mark { background: var(--warn-soft); color: inherit; border-radius: 3px; padding: 0 1px; }
+
 /* ===== About page ===== */
 .about-dogs { margin: 12px 0 0; max-width: 320px; }
 .about-dogs img { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--border); display: block; }
@@ -334,6 +369,17 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
 .tok-q li { margin-bottom: 8px; }
 .tok-q strong { display: block; }
 .tok-more { margin: 10px 0 0; font-weight: 600; }
+/* Partly shown by default (site.js): the top of the box fades out, with a "Show more" button below it */
+.tok > h2:has(.tok-toggle) { margin: 0; font-size: 1.25rem; }
+.tok-toggle { display: block; width: 100%; position: relative; text-align: left; background: none; border: 0; padding: 8px 32px 4px 0; font: inherit; color: var(--text); cursor: pointer; }
+.tok-toggle-title { display: block; font-weight: 700; }
+.tok-toggle::after { content: ""; position: absolute; right: 6px; top: 50%; width: 10px; height: 10px; border-right: 2.5px solid var(--theme-d); border-bottom: 2.5px solid var(--theme-d); transform: translateY(-75%) rotate(45deg); transition: transform 0.2s; }
+.tok-toggle[aria-expanded="true"]::after { transform: translateY(-25%) rotate(-135deg); }
+.tok-toggle:hover .tok-toggle-title { color: var(--theme-d); }
+.tok.closed .tok-body { position: relative; max-height: 11rem; overflow: hidden; cursor: pointer; }
+.tok.closed .tok-body::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6rem; background: linear-gradient(to bottom, transparent, var(--surface)); pointer-events: none; }
+.tok-more-btn { display: block; margin: 6px auto 2px; background: var(--surface); border: 1px solid var(--theme-d); color: var(--theme-d); border-radius: 999px; padding: 5px 16px; font: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer; }
+.tok-more-btn:hover { background: var(--accent-soft); }
 
 /* ===== "Σ Equations" button and panel ===== */
 .eq-fab { position: fixed; right: 16px; bottom: 16px; z-index: 20; background: var(--accent); color: var(--surface); border: 0; border-radius: 999px; padding: 10px 18px; font: inherit; font-weight: 700; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); cursor: pointer; }
@@ -477,9 +523,9 @@ table.notes.stacked td[data-label]:not(:first-child)::before, table.notes.stacke
 @keyframes xyz-fade { from { opacity: 0; } }
 @keyframes xyz-orbit { from { offset-distance: 0%; } to { offset-distance: 100%; } }
 @media (max-width: 760px) {
+  /* Narrow screens: no picture, so the heading and buttons are the first thing students see */
   .hero { grid-template-columns: 1fr; padding-top: 4px; }
-  .xyz-hero { order: -1; max-width: 190px; justify-self: start; margin: 0 0 -6px -8px; }
-  .xyz-grid, .xyz-orbit2, .xyz-orbit2-dot, .xyz-point { display: none; }
+  .xyz-hero { display: none; }
 }
 
 /* Section heading accent: a short orange line ending in a dot */

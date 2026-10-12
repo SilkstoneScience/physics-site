@@ -396,6 +396,79 @@ window.CONSTANTS = {
   pc: ['Parsec', '1\\ \\text{pc} = 3.26\\ \\text{ly}'],
 };
 
+// Keep a number and its unit together on one line ("13 s", "$t = 13$ s", "$u = 24$ $\text{m s}^{-1}$"):
+// swaps the space between them for a non-breaking space. Runs on the page text before MathJax draws the equations,
+// so it never changes anything inside $...$. Call window.glueUnits(element) on content added later (the question bank does).
+window.glueUnits = (function () {
+  const SUP = '⁰¹²³⁴⁵⁶⁷⁸⁹⁻';
+  const UNIT = `(?:kWh|mol|rad|min|MeV|keV|GeV|eV|[kMGmμµnp]?(?:m|s|g|N|J|W|Hz|V|A|C|Ω|Pa|T|Wb|F)|kg|°C|K|h|u|pc|ly|AU|dB|L|mL|%)`;
+  const NBSP = ' ';
+  // number (or closing bracket), space, unit, then any further unit parts that carry a power ("m s⁻¹", "J kg⁻¹ K⁻¹")
+  const plain = new RegExp(`([\\d${SUP})]) (${UNIT}[${SUP}]*(?: ${UNIT}[${SUP}]+)*)(?![A-Za-zΩ°µμ])`, 'g');
+  const unitStart = new RegExp(`^ (${UNIT}[${SUP}]*)(?![A-Za-zΩ°µμ])`);
+  const unitEnd = new RegExp(` (${UNIT})$`);
+  const mathUnit = /^\$\\(?:text|mathrm)\{/;
+  const MATH = /(\$\$[\s\S]*?\$\$|\$(?:\\.|[^$\\])+\$)/;
+  const gluePlain = (s) => s.replace(plain, (m, n, u) => n + NBSP + u.replace(/ /g, NBSP)).replace(/(\d) ± (?=\d)/g, `$1${NBSP}±${NBSP}`);
+
+  // A non-breaking space next to an equation doesn't stop the browser breaking the line there, so:
+  // "$u = 24$ $\text{m s}^{-1}$" becomes one equation, "$u = 24\ \text{m s}^{-1}$" (MathJax keeps 24 and its unit together),
+  // and "24 $\text{m s}^{-1}$" is marked (START...END) to go inside a <span class="nobr">.
+  const START = '';
+  const END = '';
+  function fix(text) {
+    const parts = text.split(MATH); // even items: ordinary text; odd items: $...$ maths
+    if (parts.length === 1) return gluePlain(text);
+    for (let i = 1; i + 2 < parts.length; i += 2) {
+      while (i + 2 < parts.length && !parts[i].startsWith('$$') && parts[i + 1] === ' ' && mathUnit.test(parts[i + 2])) {
+        parts[i] = parts[i].slice(0, -1) + '\\ ' + parts[i + 2].slice(1);
+        parts.splice(i + 1, 2);
+      }
+    }
+    for (let i = 0; i < parts.length; i += 2) {
+      let t = parts[i];
+      const before = parts[i - 1];
+      const after = parts[i + 1];
+      if (before && !before.startsWith('$$') && /[\d})]\$$/.test(before)) t = t.replace(unitStart, NBSP + '$1'); // $t = 13$ s
+      if (after && after.startsWith('$^')) t = t.replace(unitEnd, NBSP + '$1'); // 1000 kg m$^{-3}$
+      t = gluePlain(t);
+      if (after && mathUnit.test(after) && /[+\-−]?[\d.,]*\d $/.test(t)) {     // 24 $\text{m s}^{-1}$
+        t = t.replace(/([+\-−]?[\d.,]*\d) $/, START + '$1 ');
+        parts[i + 1] = after + END;
+      }
+      parts[i] = t;
+    }
+    return parts.join('');
+  }
+
+  return function glueUnits(rootEl) {
+    if (!rootEl) return;
+    const skip = 'script, style, textarea, code, pre, svg, mjx-container, .MathJax';
+    const walker = document.createTreeWalker(rootEl, NodeFilter.SHOW_TEXT, {
+      acceptNode: (n) => (/\d/.test(n.nodeValue) && !n.parentElement.closest(skip) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT),
+    });
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((n) => {
+      const v = fix(n.nodeValue);
+      if (v === n.nodeValue) return;
+      if (!v.includes(START)) { n.nodeValue = v; return; }
+      // Split the text around each marked number-and-unit and put that piece in a no-wrap span.
+      const frag = document.createDocumentFragment();
+      v.split(new RegExp(`(${START}[^${END}]*${END})`)).forEach((piece) => {
+        if (!piece) return;
+        if (piece.startsWith(START)) {
+          const span = document.createElement('span');
+          span.className = 'nobr';
+          span.textContent = piece.slice(1, -1);
+          frag.appendChild(span);
+        } else frag.appendChild(document.createTextNode(piece));
+      });
+      n.replaceWith(frag);
+    });
+  };
+})();
+
 (function () {
   const body = document.body;
   const root = body.dataset.root || '';
@@ -431,7 +504,10 @@ window.CONSTANTS = {
     header.innerHTML = `
       <div class="inner">
         <a class="brand" href="${root}index.html"><svg class="xyz-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 14V3M12 14L22 17M12 14L3 20"/><circle cx="12" cy="14" r="2.6"/></svg>Mr Silkstone's <span>Physics</span></a>
-        <button class="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <div class="header-tools">
+          <a class="search-link" href="${root}search.html"${section === 'search' ? ' aria-current="page"' : ''}><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg><span>Search</span></a>
+          <button class="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        </div>
         <nav class="site-nav" id="site-nav" aria-label="Main">
           <ul>${links.map(([key, href, label]) =>
             `<li><a href="${root}${href}"${key === section ? ' aria-current="page"' : ''}>${label}</a></li>`).join('')}
@@ -617,12 +693,144 @@ window.CONSTANTS = {
     const target = id && document.getElementById(id);
     if (!target) return;
     e.preventDefault();
+    openAround(target);
     target.scrollIntoView();
     history.replaceState(null, '', '#' + id);
     // Move the keyboard focus too, so Tab carries on from the section the student jumped to.
     if (!target.matches('a[href], button, input, select, textarea, summary') && !target.hasAttribute('tabindex')) target.tabIndex = -1;
     target.focus({ preventScroll: true });
   });
+
+  // Numbers and their units stay on one line (see window.glueUnits above). Done before MathJax draws the page.
+  if (mainEl) glueUnits(mainEl);
+
+  // ----- "Knowledge and science" box: starts partly shown, fading out, with a "Show more" button below -----
+  // The heading is a button too. (Without JavaScript the box simply stays open.)
+  const tokBoxes = [...document.querySelectorAll('section.tok')];
+  tokBoxes.forEach((box, i) => {
+    const h = box.querySelector(':scope > h2');
+    if (!h) return;
+    const inner = document.createElement('div');
+    inner.className = 'tok-body';
+    inner.id = 'tok-body' + (i ? '-' + i : '');
+    while (h.nextSibling) inner.appendChild(h.nextSibling);
+    box.appendChild(inner);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'tok-toggle';
+    btn.setAttribute('aria-controls', inner.id);
+    btn.innerHTML = `<span class="tok-toggle-title">${h.innerHTML}</span>`;
+    h.replaceChildren(btn);
+    const more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'tok-more-btn';
+    more.setAttribute('aria-controls', inner.id);
+    box.appendChild(more);
+    let isOpen = false;
+    const set = (open) => {
+      isOpen = open;
+      box.classList.toggle('closed', !open);
+      btn.setAttribute('aria-expanded', String(open));
+      more.setAttribute('aria-expanded', String(open));
+      more.innerHTML = open ? 'Show less <span aria-hidden="true">▴</span>' : 'Show more <span aria-hidden="true">▾</span>';
+    };
+    btn.addEventListener('click', () => set(!isOpen));
+    more.addEventListener('click', () => {
+      set(!isOpen);
+      if (!isOpen) box.scrollIntoView({ block: 'nearest' });
+    });
+    inner.addEventListener('click', () => { if (!isOpen) set(true); }); // tapping the faded text opens it too
+    inner.addEventListener('focusin', () => { if (!isOpen) set(true); }); // so keyboard users never tab into hidden text
+    box.openBox = () => set(true);
+    set(false);
+  });
+  // A link (or the address) pointing inside a closed box opens it first.
+  function openAround(el) {
+    const box = el.closest && el.closest('section.tok');
+    if (box && box.openBox) box.openBox();
+  }
+  if (location.hash) {
+    const t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (t) openAround(t);
+  }
+
+  // ----- "↑ Contents" button: appears once the contents list has scrolled off the top of the screen -----
+  const toc = mainEl && mainEl.querySelector('nav.toc');
+  if (toc && 'IntersectionObserver' in window) {
+    if (!toc.id) toc.id = 'contents';
+    const tocBtn = document.createElement('a');
+    tocBtn.className = 'toc-fab';
+    tocBtn.href = '#' + toc.id;
+    tocBtn.innerHTML = '<span aria-hidden="true">↑</span> Contents';
+    tocBtn.setAttribute('aria-label', 'Back to the contents list');
+    tocBtn.hidden = true;
+    body.appendChild(tocBtn);
+    new IntersectionObserver(([entry]) => {
+      tocBtn.hidden = entry.isIntersecting || entry.boundingClientRect.top > 0;
+    }).observe(toc);
+  }
+
+  // ----- "Try it first": worked examples can hide their solutions so students attempt them first -----
+  // Topic pages and pages with <body data-try-first>. Each .worked box is: h3, the question <p> (plus any diagram),
+  // then the solution. The choice is remembered on this device, so later pages start the same way.
+  if (body.dataset.topic || body.dataset.tryFirst !== undefined) setUpTryFirst();
+
+  function setUpTryFirst() {
+    const examples = [];
+    document.querySelectorAll('main .worked').forEach((box, i) => {
+      const kids = [...box.children];
+      const q = kids.findIndex((k) => k.tagName === 'P');
+      if (q < 0) return;
+      let s = q + 1;
+      while (kids[s] && kids[s].tagName === 'FIGURE') s++;
+      const solParts = kids.slice(s);
+      if (!solParts.length) return; // a short demonstration with no separate question: nothing to hide
+      const sol = document.createElement('div');
+      sol.className = 'worked-sol';
+      sol.id = 'worked-sol-' + (i + 1);
+      kids[s - 1].after(sol);
+      solParts.forEach((k) => sol.appendChild(k));
+      const bar = document.createElement('div');
+      bar.className = 'try-bar';
+      sol.before(bar);
+      examples.push({ sol, bar, shown: true });
+    });
+    if (!examples.length) return;
+
+    let tryFirst = false;
+    try { tryFirst = localStorage.getItem('tryFirst') === '1'; } catch (e) { /* storage blocked */ }
+
+    function render(ex) {
+      ex.sol.hidden = !ex.shown;
+      if (!tryFirst) {
+        ex.bar.innerHTML = '<button type="button" class="try-btn" data-act="mode-on">Try it first</button><span class="try-note">hides the solutions to worked examples</span>';
+      } else if (!ex.shown) {
+        ex.bar.innerHTML = `<span class="try-note">Have a go first, then check.</span><button type="button" class="try-btn primary" data-act="show" aria-controls="${ex.sol.id}" aria-expanded="false">Show solution</button><button type="button" class="link-btn try-off" data-act="mode-off">Always show solutions</button>`;
+      } else {
+        ex.bar.innerHTML = `<button type="button" class="try-btn" data-act="hide" aria-controls="${ex.sol.id}" aria-expanded="true">Hide solution</button><button type="button" class="link-btn try-off" data-act="mode-off">Always show solutions</button>`;
+      }
+    }
+    function setMode(on, anchor) {
+      // Keep the clicked example where it is on screen, even though boxes above it open or close.
+      const before = anchor.getBoundingClientRect().top;
+      tryFirst = on;
+      try { if (on) localStorage.setItem('tryFirst', '1'); else localStorage.removeItem('tryFirst'); } catch (e) { /* ignore */ }
+      examples.forEach((ex) => { ex.shown = !on; render(ex); });
+      window.scrollBy(0, anchor.getBoundingClientRect().top - before);
+    }
+    examples.forEach((ex) => {
+      ex.shown = !tryFirst;
+      render(ex);
+      ex.bar.addEventListener('click', (e) => {
+        const act = e.target.closest('button') && e.target.closest('button').dataset.act;
+        if (!act) return;
+        if (act === 'mode-on' || act === 'mode-off') { setMode(act === 'mode-on', ex.bar); ex.bar.querySelector('button').focus(); return; }
+        ex.shown = act === 'show';
+        render(ex);
+        ex.bar.querySelector('button').focus();
+      });
+    });
+  }
 
   // ----- "Σ Equations" button and panel (topic pages and the question bank) -----
   // The question bank tells the panel which topic is showing by calling window.setEquationTopic('A.2').

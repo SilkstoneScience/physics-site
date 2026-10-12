@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search · Mr Silkstone's Physics</title>
+  <meta name="description" content="Search the IB DP Physics study guide: topic notes, skills, the IA and the extended essay.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/search.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="Search · Mr Silkstone's Physics">
+  <meta property="og:description" content="Search the IB DP Physics study guide: topic notes, skills, the IA and the extended essay.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/search.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/site.js"></script>
+  <script defer src="js/search.js"></script>
+</head>
+<body data-root="" data-section="search">
+  <header id="site-header"></header>
+  <main>
+    <h1>Search</h1>
+    <!-- The results come from search-index.json, which `node tools/check.mjs --sitemap` rebuilds from the pages' headings. -->
+    <form class="search-form" role="search" action="search.html" method="get">
+      <label for="search-q" class="visually-hidden">Search the site</label>
+      <input id="search-q" type="search" name="q" placeholder="e.g. projectile, half-life, uncertainty" autocomplete="off" autofocus>
+      <button class="button" type="submit">Search</button>
+    </form>
+    <p class="search-status" aria-live="polite"></p>
+    <ol class="search-results"></ol>
+    <noscript><p class="notice">Search needs JavaScript. You can still find every topic from the <a href="themes/index.html">Themes</a> page.</p></noscript>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
