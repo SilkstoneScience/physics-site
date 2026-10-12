@@ -660,7 +660,7 @@ window.glueUnits = (function () {
     cameFromSite = ref.origin === location.origin && ref.pathname !== location.pathname;
   } catch (e) { /* no referrer: opened from a bookmark, a typed address or another site */ }
   const main = document.querySelector('main');
-  if (main && !(section === 'home' && !cameFromSite)) {
+  if (main && section !== 'home') { // never on the home page
     // Where to go if the student didn't arrive from another page of this site.
     let fallbackHref = root + 'index.html';
     let fallbackLabel = 'home page';
