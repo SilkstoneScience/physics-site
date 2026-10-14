@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 230" font-family="Arial, sans-serif" fill="#1c2430">
+  <title>A drone descending at an angle θ below the horizontal releases a package at height h above level ground</title>
+  <!-- ground -->
+  <line x1="10" y1="200" x2="350" y2="200" stroke="#1c2430" stroke-width="2"/>
+  <g stroke="#9aa5b4" stroke-width="1"><line x1="20" y1="200" x2="12" y2="210"/><line x1="60" y1="200" x2="52" y2="210"/><line x1="100" y1="200" x2="92" y2="210"/><line x1="140" y1="200" x2="132" y2="210"/><line x1="180" y1="200" x2="172" y2="210"/><line x1="220" y1="200" x2="212" y2="210"/><line x1="260" y1="200" x2="252" y2="210"/><line x1="300" y1="200" x2="292" y2="210"/><line x1="340" y1="200" x2="332" y2="210"/></g>
+  <text x="300" y="225" font-size="13">ground</text>
+  <!-- drone's path before release (dashed), descending at θ -->
+  <line x1="20" y1="18" x2="90" y2="43" stroke="#9aa5b4" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <!-- drone -->
+  <g stroke="#1c2430" stroke-width="2" fill="none"><line x1="78" y1="40" x2="102" y2="46"/><line x1="76" y1="36" x2="84" y2="38"/><line x1="96" y1="42" x2="104" y2="44"/></g>
+  <rect x="85" y="41" width="10" height="6" fill="#1c2430" transform="rotate(14 90 44)"/>
+  <!-- velocity arrow at release, θ below horizontal -->
+  <line x1="90" y1="48" x2="160" y2="73" stroke="#1f5fbf" stroke-width="2.5"/>
+  <path d="M151 74 L161 73 L154 66" fill="none" stroke="#1f5fbf" stroke-width="2.5"/>
+  <text x="166" y="80" font-size="14" fill="#1f5fbf" font-style="italic">v</text>
+  <!-- horizontal reference and angle -->
+  <line x1="90" y1="48" x2="170" y2="48" stroke="#9aa5b4" stroke-width="1" stroke-dasharray="3 3"/>
+  <path d="M130 48 A40 40 0 0 1 127.6 61.7" fill="none" stroke="#c45a00" stroke-width="1.5"/>
+  <text x="136" y="60" font-size="14" fill="#c45a00" font-style="italic">θ</text>
+  <!-- package -->
+  <rect x="85" y="50" width="10" height="9" fill="#c45a00"/>
+  <text x="40" y="66" font-size="13">package</text>
+  <!-- height h -->
+  <line x1="60" y1="75" x2="60" y2="196" stroke="#1c2430" stroke-width="1"/>
+  <path d="M56 81 L60 73 L64 81 M56 190 L60 198 L64 190" fill="none" stroke="#1c2430" stroke-width="1"/>
+  <line x1="55" y1="54" x2="84" y2="54" stroke="#9aa5b4" stroke-width="1" stroke-dasharray="2 2"/>
+  <text x="42" y="140" font-size="14" font-style="italic">h</text>
+  <text x="200" y="130" font-size="12" fill="#5b6675">not to scale</text>
+</svg>

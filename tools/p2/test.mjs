@@ -84,8 +84,8 @@ export async function runTests() {
   check('numbers are filled in from the given values', short && short.stem.includes('32 m') && short.stem.includes('8.5 $\\text{m s}^{-1}$'));
   check('a "show that" value is rounded honestly', short && short.parts[0].question.includes('about 2.6 s'));
   check('placeholders inside MathJax are written as MathJax', short && short.parts[0].markscheme[0] === '$32 = \\tfrac{1}{2} \\times 9.8 \\times t^2$ ✓', short && short.parts[0].markscheme[0]);
-  check('the typed answer is stored unrounded with the accept range', short && short.parts[1].numeric.answer === 21.7218 && short.parts[1].numeric.range.join() === '20.9,22.6');
-  check('the accept range in the mark scheme is the stored range', short && short.parts[1].markscheme[2].includes('20.9 to 22.6'));
+  check('the typed answer is stored unrounded with the accept range', short && short.parts[1].numeric.answer === 21.7218 && short.parts[1].numeric.range.join() === '20.8,22.6');
+  check('the accept range in the mark scheme is the stored range', short && short.parts[1].markscheme[2].includes('20.8 to 22.6'));
   const link = good.preview.find((q) => q.id === 'LQ-S90');
   check('a linking question is paper 2L, topic "Linking", with its topics listed', link && link.paper === '2L' && link.topic === 'Linking' && link.theme === '' && link.topics.length === 4);
   check('building is deterministic', build([GOOD_SHORT]).json === build([GOOD_SHORT]).json);

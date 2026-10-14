@@ -13,6 +13,12 @@ import { parseUnit, toSI, fromSI, fmtSig, sigFig } from './units.mjs';
 export const PLACEHOLDER = /\[\[([A-Za-z_][\w.]*)(?::([^\]]*))?\]\]/g;
 const KV = Object.fromEntries(Object.entries(CONSTANTS).map(([k, c]) => [k, c.value]));
 export const helpers = { sf: sigFig };
+// Accept ranges are rounded outwards to 3 significant figures (e.g. 5.655–6.127 becomes 5.65–6.13).
+const RANGE_SF = 3;
+function outward(x, n, round) {
+  const step = 10 ** (Math.floor(Math.log10(Math.abs(x))) - n + 1);
+  return Number((round(x / step) * step).toPrecision(n + 2)); // toPrecision only tidies floating-point noise
+}
 
 export class QuestionError extends Error {
   constructor(code, message) { super(message); this.code = code; }
@@ -114,12 +120,12 @@ export function fill(template, ctx, where) {
     const value = g ? g.value : shownValue(r);
     const unit = g ? (g.unit || '') : r.unit;
     const ownSf = g ? g.sf : r.sf;
-    if (!g && name.startsWith('wrong_')) throw new QuestionError('placeholder', `${where}: ${all} is a wrong answer (for feedback only), not for the question text`);
+    if (!g && name.startsWith('wrong_') && !/mark scheme/.test(where)) throw new QuestionError('placeholder', `${where}: ${all} is a wrong answer: it may appear only in a mark scheme or as feedback`);
     if (fmt === 'lo' || fmt === 'hi') {
       const range = ctx.ranges[name];
       if (!range) throw new QuestionError('placeholder', `${where}: ${all} needs a part whose numeric answer is ${name}`);
       const x = fmt === 'lo' ? range[0] : range[1];
-      return math ? stripDollars(fmtSig(x, ownSf + 1)) : fmtSig(x, ownSf + 1); // exactly the stored range
+      return math ? stripDollars(fmtSig(x, RANGE_SF)) : fmtSig(x, RANGE_SF); // exactly the stored range
     }
     const m = fmt.match(/^(n|\d+)?(u)?$/);
     if (!m) throw new QuestionError('placeholder', `${where}: can't read the format of ${all}`);
@@ -154,7 +160,7 @@ export function buildQuestion(def) {
     if (pt.numeric.accept != null) {
       const [lo, hi] = Array.isArray(pt.numeric.accept) ? pt.numeric.accept : [pt.numeric.accept, pt.numeric.accept];
       const a = [ans * (1 - lo), ans * (1 + hi)].sort((x, y) => x - y);
-      n.range = [Number(sigFig(a[0], r.sf + 1)), Number(sigFig(a[1], r.sf + 1))];
+      n.range = [outward(a[0], RANGE_SF, Math.floor), outward(a[1], RANGE_SF, Math.ceil)]; // rounded outwards, never narrower than asked
       ranges[pt.numeric.result] = n.range;
     }
     if (pt.numeric.tolerance) n.tolerance = pt.numeric.tolerance;
