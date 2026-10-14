@@ -176,7 +176,8 @@
       (!f.topic.value || q.topic === f.topic.value) &&
       (!f.paper.value || q.paper === f.paper.value) &&
       (!f.difficulty.value || String(q.difficulty) === f.difficulty.value) &&
-      (!f.level.value || q.level !== 'HL') && // "SL only" keeps SL and the common Paper 1B (SL_HL)
+      // "SL only" keeps SL and the common Paper 1B (SL_HL); "HL only" keeps just the HL questions
+      (!f.level.value || (f.level.value === 'HL' ? q.level === 'HL' : q.level !== 'HL')) &&
       (!f.status.value || statusOf(q) === f.status.value);
   }
 
