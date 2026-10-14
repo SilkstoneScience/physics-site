@@ -35,7 +35,7 @@ Totals: 132 marks; SL 64, HL 68; 6 short, 4 linking (2 SL, 2 HL).
 - Each question is written from the guide and the teacher's lesson decks, with the style modelled on the 2025 and
   legacy papers (style only).
 - While writing, I will look in the matching **Daily Questions** folders for a similar situation (allowed: same
-  situation, topics, similar wording; not copied; new numbers) and record the file name in the question's
+  situation and topics, with our own wording that is not too close to the original, and new numbers) and record the file name in the question's
   `originality` note, so you can compare them.
 
 ## Build order

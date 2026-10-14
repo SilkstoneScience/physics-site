@@ -1,6 +1,6 @@
 # Paper 2 question bank: design specification
 
-Draft version 0, 14 October 2026, branch `paper2-batch1`. **Not yet agreed by the teacher.** This file is in `docs/`,
+Draft version 0.1, 14 October 2026 (0.1: section 4 split into "not on the syllabus" and "limited by the guidance"; stricter Daily Questions wording rule), branch `paper2-batch1`. **Not yet agreed by the teacher.** This file is in `docs/`,
 which `_config.yml` keeps off the published website. It follows the Paper 1B system (`docs/PAPER1B_SPECIFICATION.md`)
 wherever that fits. Changes to this specification need the teacher's agreement.
 
@@ -91,21 +91,40 @@ schemes are still a good model for the short questions, as long as the content i
   each marked SL or AHL. **[Design]** The validator rejects an unknown ID, AHL content in an SL question, and an HL
   question with no AHL part. **[Impl]**
 - Every term a student needs for a mark must be in the 2025 guide at the question's level. **[IB]** + **[Design]**
-- **No longer assessed** (in legacy papers, not in the 2025 guide, or excluded by its guidance). The validator searches
-  question and mark-scheme text for these and fails unless the teacher has waived that question: **[Design]**
+- Old-syllabus content falls into two groups (built from the 2025 guide, searched 14 October 2026, and checked again
+  whenever a question is written): **[Design]**
 
-| Area | Not assessed now |
+**Group 1: not on the syllabus at all.** The validator searches question and mark-scheme text for these terms and
+**fails** the build unless the teacher has waived that question.
+
+| Area | Not on the 2025 syllabus |
 |---|---|
 | Particles | quarks, leptons, baryons, mesons, the standard model, Feynman diagrams, exchange particles |
-| Electricity | alternating current, rms values, transformers, rectification, capacitors, drift speed, Kirchhoff's laws by name, inductance and RL circuits |
-| Waves | polarisation and Malus's law, thin-film interference, the Rayleigh criterion and resolution, end corrections, pressure nodes in pipes, the words "fundamental" and "overtone" (the guide uses harmonic numbers), oblique-incidence interference |
-| Quantum and nuclear | the uncertainty principle, tunnelling, Schrödinger's model, pair production, deriving the Compton formula |
-| Energy | how particular power stations work (wind turbines, solar cells, hydro, fossil-fuel stations). Still assessed in A.3: efficiency, Sankey diagrams and the energy density of fuels |
+| Electricity | alternating current (the guide excludes ac circuits), rms values, transformers, rectification, capacitors, drift speed, inductance and RL circuits |
+| Waves | polarisation and Malus's law, thin-film interference, the Rayleigh criterion and resolution, end corrections, pressure nodes and antinodes in pipes, the words "fundamental" and "overtone" (the guide says to use "first harmonic" and harmonic numbers) |
+| Quantum and nuclear | the uncertainty principle, tunnelling, Schrödinger's model, pair production |
+| Energy | how particular power stations work (wind turbines, solar cells, hydro, fossil-fuel stations). Still on the syllabus (A.3): efficiency, Sankey diagrams and the energy density of fuels |
 | Astrophysics | Hubble's law, cosmology, dark matter, Cepheid variables |
-| Mechanics | calculating centres of mass, banked curves (quantitative), the equation of a trajectory |
-| Gases | processes other than constant V, T, p, adiabatic (HL), and the ideal gas law; non-monatomic gases in quantitative problems (HL) |
 
-  The list is built from the guide (searched 14 October 2026) and is checked again whenever a question is written.
+**Group 2: on the syllabus, but limited by the guide's guidance.** The topic may be used within the limit. The
+validator **flags** (does not fail) questions that touch these, and the audit printout lists the limit, so the
+reviewer and the teacher check it.
+
+| Topic | Allowed | Not allowed |
+|---|---|---|
+| A.1 projectiles | calculations without air resistance, constant $g$; qualitative effects of air resistance | the equation of the trajectory; calculations with air resistance |
+| A.2 collisions | 1D calculations (SL); 2D calculations (HL only) | solving momentum and energy equations simultaneously |
+| A.2 banked curves | free-body diagrams; explaining that the horizontal component of the normal force provides the centripetal force | any calculation (speed, angle, forces) |
+| A.2 vertical circles | forces at the top and the bottom of the circle | forces at any other point |
+| A.4 rigid bodies (HL) | the centre of mass as the point where the mass acts; moment of inertia equations given in the question; rolling without slipping | calculating where the centre of mass is; other combined rotation and translation; vector treatment of angular velocity |
+| A.5 relativity (HL) | using the time dilation, length contraction and Lorentz equations; space–time diagrams; world lines at constant velocity | deriving those equations; accelerating world lines |
+| B.3 gases (SL) | constant V, constant T, constant p, the ideal gas law; p–V diagrams | adiabatic changes |
+| B.4 thermodynamics (HL) | adiabatic changes using $PV^{5/3}$ = constant (in the data booklet); work from areas on p–V diagrams, including stages where pressure changes | calculations for gases that aren't monatomic and ideal |
+| B.5 circuits | thermistors, LDRs and potentiometers as variable resistors | other variable components; the terms "potential divider" or "Kirchhoff's laws" being needed for a mark (the guide doesn't use them) |
+| C.3 wave phenomena | wavefronts and rays for incident, reflected and transmitted waves; patterns at normal incidence; single slits with monochromatic light | oblique incidence on slits or gratings; non-rectangular slits; slit-width effects on intensity beyond a qualitative description |
+| D.4 induction (HL) | calculations for straight conductors moving at right angles to the field and rectangular coils moving into, out of or rotating in a field; self-induction qualitatively | other geometries in calculations; inductance; RL circuits |
+| E.1 atomic structure | Rutherford scattering: qualitative at SL | recall of chemical symbols being needed for a mark |
+| E.2 quantum (HL) | using the Compton equation | deriving it |
 - Exam conventions from the site: $g = 9.8\ \text{m s}^{-2}$; data-booklet symbols and constants; relative velocity
   only as in A.1. **[Design]**
 
@@ -116,7 +135,7 @@ schemes are still a good model for the short questions, as long as the content i
 | Source | Allowed use | Check |
 |---|---|---|
 | IB papers (2016–2025) and mark schemes | Style, mark density, command terms only. No context, sequence of parts, data or wording reused | Automatic: no run of **8 or more words** shared with any cached IB paper or mark scheme (common phrases like "the diagram shows" are excluded); no question uses the same context *and* the same quantity sequence as an IB question (checked by the reviewer) |
-| Daily Questions (non-IB, image files) | A similar situation, the same topics and similar wording are fine; **no direct copying**; new numbers | The question records the file it was inspired by and what was changed; the reviewer compares the two |
+| Daily Questions (non-IB, image files) | A similar situation and the same topics are fine, with new numbers. **The wording must be our own and not too close** (teacher, 14 October 2026): no copied sentences, no sentence that follows the original's phrasing with a few words changed, and a different order of parts where possible | The question records the file it was inspired by, and the originality note says how the wording and numbers differ. I transcribe the inspiring question's text into the reference cache (never into physics-site) so the same automatic overlap check as for IB papers can run on it, with a **stricter limit of 6 words**; the reviewer also compares the two side by side |
 | Textbooks, other copyrighted reference | Physics accuracy only | Not used for questions |
 
 Every question file has an `originality` note: its inspiration (if any) and why it is not a copy.
@@ -156,7 +175,7 @@ Every question file has an `originality` note: its inspiration (if any) and why 
 2. Structure: question type limits (section 3), part sizes, command terms from the IB list, one command term per part.
 3. Syllabus: IDs exist; level rules; the not-assessed list (section 4).
 4. Numbers: every inserted value defined; every answer equal to the independent check; "show that" rounding; plausible ranges.
-5. Originality: the 8-word overlap check against all cached IB Paper 2 texts.
+5. Originality: the overlap check against all cached IB Paper 2 texts (8 words) and the transcribed Daily Question that inspired the question (6 words).
 6. Diagrams: file exists, has `<title>` and alt text, font sizes on each `<text>`.
 7. Built twice, identical output.
 
