@@ -43,7 +43,8 @@ export async function runTests() {
   check('fmtSig scientific for small values', fmtSig(6.63e-34, 3) === '$6.63 \\times 10^{-34}$');
   check('fmtSig rounding up a power of ten', fmtSig(99960, 2) === '$1.0 \\times 10^{5}$', fmtSig(99960, 2));
   check('fmtSig rounds whole numbers to the figures asked for', fmtSig(252, 2) === '250' && fmtSig(1649, 2) === '1600' && fmtSig(25.4, 2) === '25', `${fmtSig(252, 2)} ${fmtSig(1649, 2)} ${fmtSig(25.4, 2)}`);
-  check('fmtSig groups 5-digit integers only', fmtSig(15000, 2) === '15 000' && fmtSig(1600, 2) === '1600');
+  check('fmtSig groups 5-digit integers only', fmtSig(15000, 5) === '15 000' && fmtSig(1600, 2) === '1600');
+  check('fmtSig uses powers of ten when trailing zeros are not significant', fmtSig(63000, 2) === '$6.3 \\times 10^{4}$' && fmtSig(0.001, 2) === '$1.0 \\times 10^{-3}$', fmtSig(63000, 2) + ' ' + fmtSig(0.001, 2));
   check('fmtQuantity with degrees', fmtQuantity(30, 2, '°') === '30°');
 
   // ----- Constants: typed again from the 2025 data booklet, page 3 and 4 -----

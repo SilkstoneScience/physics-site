@@ -97,7 +97,7 @@ export function sigFig(x, n) {
   return Number(x.toPrecision(n));
 }
 
-// A number written to n significant figures, as text for a page: plain for 0.001 ≤ |x| < 100000,
+// A number written to n significant figures, as text for a page: plain for 0.01 ≤ |x| < 10000 (and exact 5-digit values),
 // otherwise scientific notation in MathJax ("$3.0 \times 10^{8}$"). Trailing zeros are kept
 // (significant), so 3.00e8 to 3 s.f. is "$3.00 \times 10^{8}$" and 12.0 to 3 s.f. is "12.0".
 export function fmtSig(x, n) {
@@ -106,7 +106,9 @@ export function fmtSig(x, n) {
   const neg = x < 0 ? '−' : '';
   const a = Math.abs(x);
   const e = Math.floor(Math.log10(Number(a.toPrecision(n))));
-  if (e >= 5 || e < -3) {
+  // Scientific notation for small values (below 0.01), for 6 or more digits, and for 5-digit values whose trailing
+  // zeros wouldn't be significant (63 000 to 2 s.f. is written 6.3 × 10⁴), as IB papers do.
+  if (e >= 5 || e < -2 || (e >= 4 && n < e + 1)) {
     const mant = (a / 10 ** e).toFixed(Math.max(0, n - 1));
     return `$${neg ? '-' : ''}${mant} \\times 10^{${e}}$`;
   }
