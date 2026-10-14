@@ -99,6 +99,8 @@ function quantityText(value, sf, unit, math) {
 // Fills the placeholders of one template. ctx: { def, results, ranges }.
 export function fill(template, ctx, where) {
   if (typeof template !== 'string') throw new QuestionError('format', `${where}: missing text`);
+  // Line endings differ between Windows and GitHub's Linux runner: normalise them so the output and fingerprint don't.
+  template = template.replace(/\r\n?/g, '\n');
   return template.replace(PLACEHOLDER, (all, name, fmt = '', offset) => {
     const math = insideMath(template, offset);
     if (name.startsWith('K.')) {
