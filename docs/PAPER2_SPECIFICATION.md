@@ -1,6 +1,6 @@
 # Paper 2 question bank: design specification
 
-Draft version 0.1, 14 October 2026 (0.1: section 4 split into "not on the syllabus" and "limited by the guidance"; stricter Daily Questions wording rule), branch `paper2-batch1`. **Not yet agreed by the teacher.** This file is in `docs/`,
+Version 1, 14 October 2026: **agreed by the teacher** (14 October 2026), with section 6 updated to match the tools as built (0.1: section 4 split into "not on the syllabus" and "limited by the guidance"; stricter Daily Questions wording rule). Branch `paper2-batch1`. How to write a question file: `tools/p2/README.md`. This file is in `docs/`,
 which `_config.yml` keeps off the published website. It follows the Paper 1B system (`docs/PAPER1B_SPECIFICATION.md`)
 wherever that fits. Changes to this specification need the teacher's agreement.
 
@@ -147,10 +147,13 @@ Every question file has an `originality` note: its inspiration (if any) and why 
 - Every given value is defined once, in the question file's `given` block, with its unit. The question text, the
   mark scheme and the typed-answer fields **insert** values from `given` and from calculated results. No answer
   is typed by hand, so changing a given value can never leave a wrong answer behind. **[Impl]**
-- Calculations use the data booklet's equations and constants only (in `tools/p2/physics.mjs`, each with a
-  hand-worked reference value and unit check, like `tools/1b/laws.mjs`). **[Impl]**
+- Calculations use only the given values and the data booklet's constants (`tools/p2/constants.mjs`, tested against
+  the booklet); any other number typed into a calculation fails the build unless listed with a reason. **[Impl]**
+- **Dimension check:** every calculation is run again with the base units rescaled; each result must scale exactly
+  as its unit says, which catches a wrong formula (a missing square, a forgotten factor with units). **[Impl]**
 - **Independent check:** every numerical answer is worked out a second time in `tools/p2/independent.mjs`, written
-  separately from first principles without the question's own calculation. Build fails if they differ by more than 0.5 %. **[Impl]**
+  separately from first principles without the question's own calculation or the constants file. Build fails if
+  they differ by more than 0.01 % (stricter than the 0.5 % first proposed). **[Impl]**
 - "Show that … about X": the calculated value must round to X, and later parts must work from X (with the
   unrounded alternative accepted in the mark scheme). **[Impl]**
 - Values in the stem have sensible significant figures (2–3); final answers in the mark scheme are given to the
@@ -174,7 +177,8 @@ Every question file has an `originality` note: its inspiration (if any) and why 
 1. Format: fields, labels, marks, `numeric` fields, MathJax (backslashes, units in MathJax), HTML.
 2. Structure: question type limits (section 3), part sizes, command terms from the IB list, one command term per part.
 3. Syllabus: IDs exist; level rules; the not-assessed list (section 4).
-4. Numbers: every inserted value defined; every answer equal to the independent check; "show that" rounding; plausible ranges.
+4. Numbers: every inserted value defined; no numbers typed into the text or the calculation; the dimension check;
+   every answer equal to the independent check; "show that" rounding; plausible ranges.
 5. Originality: the overlap check against all cached IB Paper 2 texts (8 words) and the transcribed Daily Question that inspired the question (6 words).
 6. Diagrams: file exists, has `<title>` and alt text, font sizes on each `<text>`.
 7. Built twice, identical output.

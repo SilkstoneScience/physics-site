@@ -5,7 +5,8 @@
 (function () {
   const STORE_KEY = 'dpphys-progress-v1';
   const VIEW_KEY = 'dpphys-view';
-  const PAPERS = { '1A': 'Paper 1A', '1B': 'Paper 1B', '2': 'Paper 2' };
+  // '2L': Paper 2 linking questions (20 marks across several themes), shown only in their own section.
+  const PAPERS = { '1A': 'Paper 1A', '1B': 'Paper 1B', '2': 'Paper 2', '2L': 'Paper 2 linking' };
   const DIFFICULTY = { 1: 'Foundation', 2: 'Standard', 3: 'Challenging' };
   const LETTERS = 'ABCDEFG';
 
@@ -63,13 +64,15 @@
         if (r.status === 'fulfilled' && Array.isArray(r.value)) questions.push(...r.value);
         else { failedFiles.push(index.files[i]); console.error(index.files[i], r.reason || 'not a list of questions'); }
       });
-      // On the teacher's own computer only, also show Paper 1B datasets that aren't approved yet.
-      // (questions/1b-preview.json is made by tools/1b/build.mjs and is never published.)
+      // On the teacher's own computer only, also show Paper 1B datasets and Paper 2 questions that aren't
+      // approved yet. (The preview files are made by tools/1b/build.mjs and tools/p2/build.mjs and never published.)
       if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) {
-        try {
-          const extra = await getJSON('questions/1b-preview.json');
-          if (Array.isArray(extra)) questions.push(...extra);
-        } catch (e) { /* no preview file: nothing to add */ }
+        for (const file of ['questions/1b-preview.json', 'questions/p2-preview.json']) {
+          try {
+            const extra = await getJSON(file);
+            if (Array.isArray(extra)) questions.push(...extra);
+          } catch (e) { /* no preview file: nothing to add */ }
+        }
       }
       const usable = questions.filter(isUsable);
       skipped = questions.length - usable.length;
@@ -346,7 +349,9 @@
 
     card.innerHTML = `
       <div class="q-meta">
-        <span class="tag">${q.topic} ${topicTitle(q.topic)}</span>
+        ${q.paper === '2L'
+    ? `<span class="tag">Linking question</span>${(q.topics || []).map((t) => `<span class="tag">${t}</span>`).join('')}`
+    : `<span class="tag">${q.topic} ${topicTitle(q.topic)}</span>`}
         <span class="tag">${PAPERS[q.paper] || q.paper}</span>
         <span class="tag">${DIFFICULTY[q.difficulty] || ''}</span>
         ${q.level === 'HL' ? '<span class="tag hl">HL</span>' : ''}
