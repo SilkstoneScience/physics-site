@@ -238,7 +238,7 @@ const ORDER = ['simulations', 'apps', 'youtube'];
 
 let count = 0;
 for (const [key, pg] of Object.entries(PAGES)) {
-  const title = `${pg.title} · Mr Silkstone's Physics`;
+  const title = `${pg.title} for IB Physics · Mr Silkstone's Physics`; // "IB Physics" in the title helps search engines
   const desc = `IB DP Physics ${pg.title.toLowerCase()}: ${pg.lead.split(':')[0].replace(/\.$/, '')}.`.replace(/\s+/g, ' ');
   const head = headTemplate
     .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)

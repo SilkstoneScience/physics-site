@@ -289,7 +289,7 @@ function buildSearchIndex() {
   const out = { pages: [], sections: [] };
   for (const page of pages.filter((p) => !skip.has(p)).sort()) {
     const html = read(page);
-    const title = clean((html.match(/<title>([^<]*)<\/title>/) || [])[1] || '').replace(/ · Mr Silkstone's Physics$/, '');
+    const title = clean((html.match(/<title>([^<]*)<\/title>/) || [])[1] || '').replace(/ · Mr Silkstone's Physics$/, '').replace(/: IB Physics notes$/, '');
     const desc = clean((html.match(/<meta name="description" content="([^"]*)">/) || [])[1] || '');
     const p = out.pages.push([page, title, desc]) - 1;
     const main = (html.match(/<main[^>]*>([\s\S]*)<\/main>/) || [])[1] || '';

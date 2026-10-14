@@ -53,7 +53,7 @@ fs.mkdirSync(SITE + '/resources', { recursive: true });
 let n = 0;
 for (const [L, name, topics] of THEMES) {
   const l = L.toLowerCase();
-  const title = `Theme ${L} slides · Mr Silkstone's Physics`;
+  const title = `Theme ${L} lesson slides: IB Physics · Mr Silkstone's Physics`;
   const desc = `IB DP Physics lesson slides for Theme ${L} (${name}), ${range(topics)}, for school Google accounts.`;
   const head = headTemplate
     .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
