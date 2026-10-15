@@ -1,0 +1,479 @@
+{
+  "question": {
+    "id": "LQ-H02",
+    "theme": "",
+    "topic": "Linking",
+    "topics": [
+      "A.4",
+      "A.3",
+      "D.4",
+      "B.1"
+    ],
+    "paper": "2L",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A tram stores energy in a flywheel, a uniform disc of mass 300 kg and radius 0.40 m that spins about its central axis. The moment of inertia of a uniform disc is $I = \\tfrac{1}{2}MR^2$. At full speed the flywheel rotates at 3000 $\\text{rev min}^{-1}$.</p>",
+    "diagram": "questions/diagrams/p2-lqh02-flywheel.svg",
+    "diagramAlt": "A uniform disc of mass M seen face on, with its radius R drawn from the centre to the edge and a curved arrow showing it spinning with angular speed omega about its centre.",
+    "parts": [
+      {
+        "label": "a(i)",
+        "question": "Show that the moment of inertia of the flywheel is about 24 $\\text{kg m}^{2}$.",
+        "marks": 1,
+        "markscheme": [
+          "$I = \\tfrac{1}{2} \\times 300 \\times 0.40^2 = 24.0\\ \\text{kg m}^{2}$ ✓"
+        ]
+      },
+      {
+        "label": "a(ii)",
+        "question": "Calculate the rotational kinetic energy of the flywheel at full speed.",
+        "marks": 2,
+        "markscheme": [
+          "$\\omega = \\dfrac{3000 \\times 2\\pi}{60} = 314\\ \\text{rad s}^{-1}$ ✓",
+          "$E_{\\text{k}} = \\tfrac{1}{2}I\\omega^2 = 1.18 \\times 10^{6}\\ \\text{J}$; allow ECF from (a)(i) ✓"
+        ],
+        "numeric": {
+          "answer": 1184350,
+          "unit": "J",
+          "range": [
+            1140000,
+            1220000
+          ],
+          "mistakes": [
+            {
+              "value": 30000,
+              "feedback": "Convert the rotation rate to an angular speed in rad s⁻¹: multiply revolutions per second by 2π."
+            }
+          ]
+        }
+      },
+      {
+        "label": "a(iii)",
+        "question": "The tram is parked and the flywheel is left spinning freely from full speed. The only torque on it is a constant frictional torque of 0.80 $\\text{N m}$ in the bearings. Determine the time taken for the flywheel to stop.",
+        "marks": 2,
+        "markscheme": [
+          "$\\alpha = \\dfrac{\\tau}{I} = 0.0333\\ \\text{rad s}^{-2}$ ✓",
+          "$t = \\dfrac{\\omega}{\\alpha} = 9420\\ \\text{s}$; allow ECF from (a)(i) and (a)(ii) ✓"
+        ],
+        "numeric": {
+          "answer": 9424.78,
+          "unit": "s",
+          "range": [
+            9140,
+            9710
+          ]
+        }
+      },
+      {
+        "label": "a(iv)",
+        "question": "Calculate the number of revolutions the flywheel makes while it slows down to rest.",
+        "marks": 2,
+        "markscheme": [
+          "$\\Delta\\theta = \\dfrac{\\omega_{\\text{i}} + \\omega_{\\text{f}}}{2}t$ (OR $\\omega_{\\text{i}}^2 = 2\\alpha\\Delta\\theta$) ✓",
+          "number of revolutions $= \\dfrac{\\Delta\\theta}{2\\pi} = 2.36 \\times 10^{5}$; allow ECF from (a)(iii) ✓"
+        ],
+        "numeric": {
+          "answer": 235619,
+          "range": [
+            228000,
+            243000
+          ]
+        }
+      },
+      {
+        "label": "b",
+        "question": "The flywheel is used to accelerate the tram, of mass $1.8 \\times 10^{4}$ kg, from rest to 6.0 $\\text{m s}^{-1}$ on level track. During this time the flywheel slows from 3000 $\\text{rev min}^{-1}$ to 2400 $\\text{rev min}^{-1}$. Determine the efficiency of this energy transfer.",
+        "marks": 3,
+        "markscheme": [
+          "energy given up by the flywheel $= \\tfrac{1}{2}I(\\omega_1^2 - \\omega_2^2) = 4.26 \\times 10^{5}\\ \\text{J}$ ✓",
+          "kinetic energy gained by the tram $= \\tfrac{1}{2}mv^2 = 3.24 \\times 10^{5}\\ \\text{J}$ ✓",
+          "$\\eta = \\dfrac{3.24 \\times 10^{5}}{4.26 \\times 10^{5}} = 0.76$; allow ECF from (a)(i) ✓"
+        ],
+        "numeric": {
+          "answer": 0.759909,
+          "range": [
+            0.721,
+            0.798
+          ],
+          "mistakes": [
+            {
+              "value": 0.273567,
+              "feedback": "Use the energy the flywheel actually gave up (from the change in its rotation rate), not all the energy it stored."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c(i)",
+        "question": "The flywheel turns a rectangular generator coil of 200 turns and area 0.020 $\\text{m}^{2}$ in a uniform magnetic field of strength 0.35 T. The coil turns at the same rate as the flywheel at full speed. Determine the average emf induced while the coil turns through a quarter of a revolution, starting from the position where the flux linkage is greatest.",
+        "marks": 2,
+        "markscheme": [
+          "change in flux linkage $= NBA$, in a time of a quarter of a period, $\\dfrac{1}{4f}$ with $f = 50\\ \\text{Hz}$ ✓",
+          "$\\varepsilon = \\dfrac{N\\Delta\\Phi}{\\Delta t} = 4NBAf = 280\\ \\text{V}$ ✓"
+        ],
+        "numeric": {
+          "answer": 280,
+          "unit": "V",
+          "range": [
+            271,
+            289
+          ]
+        }
+      },
+      {
+        "label": "c(ii)",
+        "question": "Explain how the emf from the generator changes as the flywheel slows down.",
+        "marks": 2,
+        "markscheme": [
+          "the flux linkage changes more slowly, so the peak (maximum) emf decreases ✓",
+          "and its frequency decreases: each cycle of the emf takes longer ✓"
+        ]
+      },
+      {
+        "label": "c(iii)",
+        "question": "Explain, with reference to Lenz's law, why the flywheel slows down more quickly when the generator supplies a current.",
+        "marks": 2,
+        "markscheme": [
+          "the induced current opposes the change that produces it, so the forces on the coil produce a torque opposing the rotation ✓",
+          "the electrical energy supplied comes from the kinetic energy of the flywheel (energy is conserved), so it loses energy faster ✓"
+        ]
+      },
+      {
+        "label": "d(i)",
+        "question": "Explain, in terms of the particles of the steel, why the bearings warm up as the flywheel slows down.",
+        "marks": 2,
+        "markscheme": [
+          "work done against friction transfers energy to the bearings ✓",
+          "increasing the random kinetic energy of the particles of the steel, so the internal energy and temperature increase ✓"
+        ]
+      },
+      {
+        "label": "d(ii)",
+        "question": "The bearings and their steel housing have a total mass of 45 kg. Steel has a specific heat capacity of 450 $\\text{J kg}^{-1}\\text{ K}^{-1}$. Calculate the rise in temperature of the bearings and housing when the flywheel runs down from full speed to rest, assuming no energy leaves them.",
+        "marks": 2,
+        "markscheme": [
+          "$Q = mc\\Delta T$ with $Q$ = the energy stored at full speed ✓",
+          "$\\Delta T = 58.5\\ \\text{K}$; allow ECF from (a)(ii) ✓"
+        ],
+        "numeric": {
+          "answer": 58.4865,
+          "unit": "K",
+          "range": [
+            56.1,
+            60.9
+          ]
+        }
+      }
+    ]
+  },
+  "type": "linking",
+  "topics": [
+    "A.4",
+    "A.3",
+    "D.4",
+    "B.1"
+  ],
+  "given": {
+    "M": {
+      "value": 300,
+      "sf": 2,
+      "unit": "kg",
+      "range": [
+        50,
+        1000
+      ],
+      "what": "mass of the flywheel (a uniform disc)"
+    },
+    "R": {
+      "value": 0.4,
+      "sf": 2,
+      "unit": "m",
+      "range": [
+        0.1,
+        1
+      ],
+      "what": "radius of the flywheel"
+    },
+    "w1": {
+      "value": 3000,
+      "sf": 2,
+      "unit": "rev min^-1",
+      "range": [
+        1000,
+        20000
+      ],
+      "what": "full rotation rate of the flywheel"
+    },
+    "tau": {
+      "value": 0.8,
+      "sf": 2,
+      "unit": "N m",
+      "range": [
+        0.1,
+        10
+      ],
+      "what": "frictional torque in the bearings"
+    },
+    "mt": {
+      "value": 18000,
+      "sf": 2,
+      "unit": "kg",
+      "range": [
+        10000,
+        50000
+      ],
+      "what": "mass of the tram"
+    },
+    "vt": {
+      "value": 6,
+      "sf": 2,
+      "unit": "m s^-1",
+      "range": [
+        2,
+        15
+      ],
+      "what": "speed the tram reaches"
+    },
+    "w2": {
+      "value": 2400,
+      "sf": 2,
+      "unit": "rev min^-1",
+      "range": [
+        500,
+        20000
+      ],
+      "what": "rotation rate of the flywheel after accelerating the tram"
+    },
+    "N": {
+      "value": 200,
+      "sf": 2,
+      "unit": "",
+      "range": [
+        10,
+        2000
+      ],
+      "what": "number of turns on the generator coil"
+    },
+    "A": {
+      "value": 0.02,
+      "sf": 2,
+      "unit": "m^2",
+      "range": [
+        0.001,
+        0.1
+      ],
+      "what": "area of the generator coil"
+    },
+    "B": {
+      "value": 0.35,
+      "sf": 2,
+      "unit": "T",
+      "range": [
+        0.05,
+        1.5
+      ],
+      "what": "magnetic field strength in the generator"
+    },
+    "mb": {
+      "value": 45,
+      "sf": 2,
+      "unit": "kg",
+      "range": [
+        5,
+        200
+      ],
+      "what": "mass of the bearings and their steel housing"
+    },
+    "cs": {
+      "value": 450,
+      "sf": 2,
+      "unit": "J kg^-1 K^-1",
+      "range": [
+        420,
+        500
+      ],
+      "what": "specific heat capacity of steel"
+    }
+  },
+  "results": {
+    "I": {
+      "value": 24.000000000000004,
+      "unit": "kg m^2",
+      "sf": 3
+    },
+    "w1SI": {
+      "value": 314.1592653589793,
+      "unit": "rad s^-1",
+      "sf": 3
+    },
+    "E1": {
+      "value": 1184352.5281307232,
+      "unit": "J",
+      "sf": 3
+    },
+    "alpha": {
+      "value": 0.03333333333333333,
+      "unit": "rad s^-2",
+      "sf": 3
+    },
+    "tstop": {
+      "value": 9424.77796076938,
+      "unit": "s",
+      "sf": 3
+    },
+    "revs": {
+      "value": 235619.44901923448,
+      "unit": "",
+      "sf": 3
+    },
+    "dE": {
+      "value": 426366.91012706043,
+      "unit": "J",
+      "sf": 3
+    },
+    "Etram": {
+      "value": 324000,
+      "unit": "J",
+      "sf": 3
+    },
+    "eff": {
+      "value": 0.7599088773175331,
+      "unit": "",
+      "sf": 2
+    },
+    "f": {
+      "value": 50,
+      "unit": "Hz",
+      "sf": 2
+    },
+    "emf": {
+      "value": 280,
+      "unit": "V",
+      "sf": 3
+    },
+    "dT": {
+      "value": 58.48654459904806,
+      "unit": "K",
+      "sf": 3
+    },
+    "wrong_E1": {
+      "value": 30000.000000000004,
+      "unit": "J",
+      "sf": 3
+    },
+    "wrong_eff": {
+      "value": 0.27356719583431194,
+      "unit": "",
+      "sf": 2
+    }
+  },
+  "parts": [
+    {
+      "label": "a(i)",
+      "command": "Show that",
+      "syllabus": [
+        "A.4.H6"
+      ],
+      "examinerNote": "The equation is given, as the guide requires for a particular shape."
+    },
+    {
+      "label": "a(ii)",
+      "command": "Calculate",
+      "syllabus": [
+        "A.4.H11",
+        "A.4.H4"
+      ],
+      "examinerNote": "The angular speed must be in rad s⁻¹.",
+      "dependsOn": [
+        "a(i)"
+      ]
+    },
+    {
+      "label": "a(iii)",
+      "command": "Determine",
+      "syllabus": [
+        "A.4.H8",
+        "A.4.H5"
+      ],
+      "examinerNote": "Newton's second law for rotation, then uniform angular deceleration (or angular impulse τt = Iω).",
+      "dependsOn": [
+        "a(i)",
+        "a(ii)"
+      ]
+    },
+    {
+      "label": "a(iv)",
+      "command": "Calculate",
+      "syllabus": [
+        "A.4.H5"
+      ],
+      "examinerNote": "Angular displacement in radians, divided by 2π.",
+      "dependsOn": [
+        "a(iii)"
+      ]
+    },
+    {
+      "label": "b",
+      "command": "Determine",
+      "syllabus": [
+        "A.3.8",
+        "A.3.5",
+        "A.4.H11"
+      ],
+      "examinerNote": "Efficiency = useful energy out / energy in. The flywheel does not stop, so only the change in its energy counts.",
+      "dependsOn": [
+        "a(i)"
+      ]
+    },
+    {
+      "label": "c(i)",
+      "command": "Determine",
+      "syllabus": [
+        "D.4.H1",
+        "D.4.H2",
+        "D.4.H5"
+      ],
+      "examinerNote": "Faraday's law for an average emf: the flux linkage falls from NBA to zero in a quarter turn. Sign ignored (magnitude)."
+    },
+    {
+      "label": "c(ii)",
+      "command": "Explain",
+      "syllabus": [
+        "D.4.H5",
+        "D.4.H2"
+      ],
+      "examinerNote": "Both the amplitude and the frequency of the sinusoidal emf fall with the rotation rate."
+    },
+    {
+      "label": "c(iii)",
+      "command": "Explain",
+      "syllabus": [
+        "D.4.H4"
+      ],
+      "examinerNote": "Lenz's law as a consequence of energy conservation; with no current there is no opposing magnetic torque."
+    },
+    {
+      "label": "d(i)",
+      "command": "Explain",
+      "syllabus": [
+        "B.1.4",
+        "B.1.1"
+      ],
+      "examinerNote": "Temperature is a measure of the average random kinetic energy of the particles."
+    },
+    {
+      "label": "d(ii)",
+      "command": "Calculate",
+      "syllabus": [
+        "B.1.6"
+      ],
+      "examinerNote": "All the rotational kinetic energy is dissipated in the bearings. In practice energy leaves by conduction and radiation, so the real rise is smaller.",
+      "dependsOn": [
+        "a(ii)"
+      ]
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-lqh02-flywheel.svg": "ddbb5dd9e2a1b3f92430fa0fecbc1c43873e705ec7ea86760fa62823ccf3ce70"
+  }
+}

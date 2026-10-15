@@ -1,0 +1,245 @@
+{
+  "question": {
+    "id": "D1-P01",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A satellite of mass 850 kg is in a circular orbit 600 km above the surface of the Earth. Its engines are used to move it to a circular orbit 2400 km above the surface. The mass of the Earth is $5.97 \\times 10^{24}$ kg and its radius is $6.37 \\times 10^{6}$ m.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Show that, in the first orbit, the satellite moves at about 7.6 $\\text{km s}^{-1}$.",
+        "marks": 2,
+        "markscheme": [
+          "$r = 6.37 \\times 10^{6} + 600 \\times 10^{3} = 6.97 \\times 10^{6}\\ \\text{m}$ ✓",
+          "$v = \\sqrt{\\dfrac{GM}{r}} = 7.56\\ \\text{km s}^{-1}$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the period of the satellite in the first orbit.",
+        "marks": 2,
+        "markscheme": [
+          "$T = \\dfrac{2\\pi r}{v}$ ✓",
+          "$T = 5790\\ \\text{s}$ ✓",
+          "Allow ECF from (a); accept 5620 to 5970 s"
+        ],
+        "numeric": {
+          "answer": 5794.01,
+          "unit": "s",
+          "range": [
+            5620,
+            5970
+          ],
+          "mistakes": [
+            {
+              "value": 498.767,
+              "feedback": "The satellite goes round a circle whose radius is measured from the centre of the Earth, not from the surface."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Deduce that the total energy of a satellite of mass $m$ in a circular orbit of radius $r$ is $E = -\\dfrac{GMm}{2r}$.",
+        "marks": 2,
+        "markscheme": [
+          "$E_{\\text{k}} = \\tfrac{1}{2}mv^2 = \\dfrac{GMm}{2r}$ (using $v^2 = GM/r$) ✓",
+          "$E = E_{\\text{k}} + E_{\\text{p}} = \\dfrac{GMm}{2r} - \\dfrac{GMm}{r} = -\\dfrac{GMm}{2r}$ ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Determine the minimum energy that the engines must supply to move the satellite to the second orbit.",
+        "marks": 3,
+        "markscheme": [
+          "$r_2 = 8.77 \\times 10^{6}\\ \\text{m}$ ✓",
+          "$\\Delta E = \\dfrac{GMm}{2}\\left(\\dfrac{1}{r_1} - \\dfrac{1}{r_2}\\right)$ ✓",
+          "$\\Delta E = 4.98 \\times 10^{9}\\ \\text{J}$ ✓",
+          "Allow ECF from (a) and (c); accept $4.78 \\times 10^{9}$ to $5.19 \\times 10^{9}$ J. Award [2 max] for the change in potential energy only, $9.97 \\times 10^{9}$ J."
+        ],
+        "numeric": {
+          "answer": 4983440000,
+          "unit": "J",
+          "range": [
+            4780000000,
+            5190000000
+          ],
+          "mistakes": [
+            {
+              "value": 9966880000,
+              "feedback": "That is the gain in gravitational potential energy only. The satellite also loses kinetic energy: use the change in total energy."
+            }
+          ]
+        }
+      },
+      {
+        "label": "e",
+        "question": "The engines supply energy to the satellite, yet its kinetic energy is smaller in the second orbit. Explain this.",
+        "marks": 2,
+        "markscheme": [
+          "In a higher orbit the orbital speed is lower, so the kinetic energy ($GMm/2r$) decreases ✓",
+          "the gravitational potential energy ($-GMm/r$) increases by twice as much as the kinetic energy falls, so the total energy increases and the engines must supply the difference ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "D.1",
+    "A.3"
+  ],
+  "given": {
+    "M": {
+      "value": 5.97e+24,
+      "sf": 3,
+      "unit": "kg",
+      "range": [
+        5.9e+24,
+        6e+24
+      ],
+      "what": "mass of the Earth"
+    },
+    "RE": {
+      "value": 6370000,
+      "sf": 3,
+      "unit": "m",
+      "range": [
+        6300000,
+        6400000
+      ],
+      "what": "radius of the Earth"
+    },
+    "m": {
+      "value": 850,
+      "sf": 2,
+      "unit": "kg",
+      "range": [
+        50,
+        20000
+      ],
+      "what": "mass of the satellite"
+    },
+    "h1": {
+      "value": 600,
+      "sf": 2,
+      "unit": "km",
+      "range": [
+        200,
+        2000
+      ],
+      "what": "height of the first orbit above the surface"
+    },
+    "h2": {
+      "value": 2400,
+      "sf": 2,
+      "unit": "km",
+      "range": [
+        500,
+        36000
+      ],
+      "what": "height of the second orbit above the surface"
+    }
+  },
+  "results": {
+    "r1": {
+      "value": 6970000,
+      "unit": "m",
+      "sf": 3
+    },
+    "r2": {
+      "value": 8770000,
+      "unit": "m",
+      "sf": 3
+    },
+    "v1": {
+      "value": 7.5584665156939455,
+      "unit": "km s^-1",
+      "sf": 3
+    },
+    "T1": {
+      "value": 5794.006165154122,
+      "unit": "s",
+      "sf": 3
+    },
+    "E1": {
+      "value": -24280426829.26829,
+      "unit": "J",
+      "sf": 3
+    },
+    "E2": {
+      "value": -19296986887.115166,
+      "unit": "J",
+      "sf": 3
+    },
+    "dE": {
+      "value": 4983439942.153126,
+      "unit": "J",
+      "sf": 3
+    },
+    "wrong_T1": {
+      "value": 498.76667131886273,
+      "unit": "s",
+      "sf": 3
+    },
+    "wrong_dE": {
+      "value": 9966879884.306261,
+      "unit": "J",
+      "sf": 3
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Show that",
+      "syllabus": [
+        "D.1.H5"
+      ],
+      "examinerNote": "The radius of the orbit is measured from the centre of the Earth. Gravity provides the centripetal force: GMm/r² = mv²/r."
+    },
+    {
+      "label": "b",
+      "command": "Calculate",
+      "syllabus": [
+        "D.1.H5"
+      ],
+      "examinerNote": "One circumference at the orbital speed (or Kepler's third law with GM).",
+      "dependsOn": [
+        "a"
+      ]
+    },
+    {
+      "label": "c",
+      "command": "Deduce",
+      "syllabus": [
+        "D.1.H1",
+        "D.1.H5",
+        "A.3.5"
+      ],
+      "examinerNote": "Both energies in terms of r, then add. The gravitational potential energy is negative (zero at infinity)."
+    },
+    {
+      "label": "d",
+      "command": "Determine",
+      "syllabus": [
+        "D.1.H5"
+      ],
+      "examinerNote": "The minimum energy is the change in total orbital energy, E(r2) − E(r1), ignoring losses. (Both total energies are listed in the audit.)",
+      "dependsOn": [
+        "c"
+      ]
+    },
+    {
+      "label": "e",
+      "command": "Explain",
+      "syllabus": [
+        "D.1.H5",
+        "D.1.H1"
+      ],
+      "examinerNote": "The key idea: ΔEp = −2ΔEk, so ΔE = −ΔEk > 0. Answers that only say \"the potential energy increases\" earn the second mark only if they say it increases by more than the kinetic energy decreases."
+    }
+  ],
+  "diagrams": {}
+}

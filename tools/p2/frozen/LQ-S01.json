@@ -1,0 +1,481 @@
+{
+  "question": {
+    "id": "LQ-S01",
+    "theme": "",
+    "topic": "Linking",
+    "topics": [
+      "A.2",
+      "B.3",
+      "C.2",
+      "A.1",
+      "A.3",
+      "B.1"
+    ],
+    "paper": "2L",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A weather balloon is filled with helium and released from a ground station. It carries a payload of instruments and a radio transmitter. At launch the balloon has a volume of 4.2 $\\text{m}^{3}$ and the total mass of the balloon, helium and payload is 3.1 kg. The density of the air at ground level is 1.2 $\\text{kg m}^{-3}$.</p>",
+    "parts": [
+      {
+        "label": "a(i)",
+        "question": "Show that the buoyancy force on the balloon at launch is about 49 N.",
+        "marks": 2,
+        "markscheme": [
+          "$F_{\\text{b}} = \\rho V g$ (the weight of the air displaced) ✓",
+          "$F_{\\text{b}} = 1.2 \\times 4.2 \\times 9.8 = 49.4\\ \\text{N}$ ✓"
+        ]
+      },
+      {
+        "label": "a(ii)",
+        "question": "Calculate the initial acceleration of the balloon.",
+        "marks": 2,
+        "markscheme": [
+          "resultant force $= 49.4 - 30.4$ (weight $= mg$) ✓",
+          "$a = \\dfrac{F}{m} = 6.13\\ \\text{m s}^{-2}$ ✓",
+          "Allow ECF from (a)(i); accept 5.88 to 6.38 $\\text{m s}^{-2}$"
+        ],
+        "numeric": {
+          "answer": 6.1329,
+          "unit": "$\\text{m s}^{-2}$",
+          "range": [
+            5.88,
+            6.38
+          ],
+          "mistakes": [
+            {
+              "value": 15.9329,
+              "feedback": "The resultant force is the buoyancy force minus the weight of the balloon and payload."
+            }
+          ]
+        }
+      },
+      {
+        "label": "a(iii)",
+        "question": "As the balloon rises, the density of the surrounding air decreases. The helium stays at the same pressure and temperature as the surrounding air. Suggest why the buoyancy force on the balloon stays about the same as it rises.",
+        "marks": 2,
+        "markscheme": [
+          "The balloon expands as the air pressure falls, so the volume of air displaced increases ✓",
+          "the density of the air and the volume of the balloon change in inverse proportion (both depend on $p/T$), so $\\rho V$, the mass of air displaced, and hence the buoyancy force stay about constant ✓"
+        ]
+      },
+      {
+        "label": "b(i)",
+        "question": "At launch the helium has a pressure of $1.01 \\times 10^{5}$ Pa and a temperature of 15 °C. At the highest point of its flight the pressure of the helium is 5500 Pa and its temperature is −56 °C. Calculate the volume of the balloon at the highest point.",
+        "marks": 2,
+        "markscheme": [
+          "$\\dfrac{p_1V_1}{T_1} = \\dfrac{p_2V_2}{T_2}$ with temperatures in kelvin (288 K and 217 K) ✓",
+          "$V_2 = 58.1\\ \\text{m}^{3}$ ✓",
+          "Accept 55.7 to 60.5 $\\text{m}^{3}$. Award [1 max] for using Celsius temperatures."
+        ],
+        "numeric": {
+          "answer": 58.1133,
+          "unit": "$\\text{m}^{3}$",
+          "range": [
+            55.7,
+            60.5
+          ],
+          "mistakes": [
+            {
+              "value": 77.1273,
+              "feedback": "The temperature also changes: use pV/T = constant with temperatures in kelvin."
+            }
+          ]
+        }
+      },
+      {
+        "label": "b(ii)",
+        "question": "State one assumption made in your calculation in (b)(i).",
+        "marks": 1,
+        "markscheme": [
+          "no helium leaks out / the amount of gas is constant / helium behaves as an ideal gas / the helium is in thermal equilibrium with the air ✓"
+        ]
+      },
+      {
+        "label": "b(iii)",
+        "question": "Outline why helium is well described by the ideal gas model in these conditions.",
+        "marks": 2,
+        "markscheme": [
+          "the pressure (density) is low, so the molecules are far apart compared with their size ✓",
+          "the temperature is far above the boiling point of helium, so intermolecular forces are negligible compared with the kinetic energy of the molecules ✓"
+        ]
+      },
+      {
+        "label": "c(i)",
+        "question": "The radio transmitter has a frequency of 403 MHz. Calculate the wavelength of the radio waves.",
+        "marks": 1,
+        "markscheme": [
+          "$\\lambda = \\dfrac{c}{f} = 0.744\\ \\text{m}$ ✓"
+        ],
+        "numeric": {
+          "answer": 0.744417,
+          "unit": "m",
+          "range": [
+            0.722,
+            0.767
+          ]
+        }
+      },
+      {
+        "label": "c(ii)",
+        "question": "At one moment the balloon is 20 km above the ground and 30 km horizontally from the ground station. <img src=\"questions/diagrams/p2-lqs01-signal.svg\" alt=\"The ground station is on level ground. The balloon is 20 km vertically above a point on the ground that is 30 km horizontally from the station. Not to scale.\"> Calculate the time taken for the radio signal to reach the ground station.",
+        "marks": 2,
+        "markscheme": [
+          "distance $= \\sqrt{20^2 + 30^2} = 36.1\\ \\text{km}$ ✓",
+          "$t = \\dfrac{d}{c} = 1.20 \\times 10^{-4}\\ \\text{s}$ ✓"
+        ],
+        "numeric": {
+          "answer": 0.000120185,
+          "unit": "s",
+          "range": [
+            0.000116,
+            0.000124
+          ],
+          "mistakes": [
+            {
+              "value": 0.0000666667,
+              "feedback": "The signal travels in a straight line from the balloon to the station: find that distance with Pythagoras."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c(iii)",
+        "question": "Near the highest point the air is so thin that the sound of the balloon bursting would be very hard to detect, yet the radio signal is received without difficulty. Outline why.",
+        "marks": 2,
+        "markscheme": [
+          "sound is a mechanical wave: it needs a medium, and with very few particles the vibrations are hardly passed on ✓",
+          "radio waves are electromagnetic waves, which do not need a medium (they travel through a vacuum) ✓"
+        ]
+      },
+      {
+        "label": "d(i)",
+        "question": "When the balloon bursts, the payload falls back to the ground on a parachute. Outline why the payload reaches a terminal speed.",
+        "marks": 2,
+        "markscheme": [
+          "air resistance (drag) increases as the speed of the payload increases ✓",
+          "until it equals the weight, so the resultant force (and the acceleration) becomes zero and the speed stays constant ✓"
+        ]
+      },
+      {
+        "label": "d(ii)",
+        "question": "The payload and parachute have a mass of 0.60 kg and fall at a terminal speed of 5.0 $\\text{m s}^{-1}$. Calculate the rate at which energy is transferred to the air as they fall at this speed.",
+        "marks": 2,
+        "markscheme": [
+          "at terminal speed the drag force equals the weight, $mg$ (OR the loss of gravitational potential energy per second is $mgv$) ✓",
+          "$P = Fv = 0.60 \\times 9.8 \\times 5.0 = 29.4\\ \\text{W}$ ✓"
+        ],
+        "numeric": {
+          "answer": 29.4,
+          "unit": "W",
+          "range": [
+            28.5,
+            30.3
+          ]
+        }
+      }
+    ]
+  },
+  "type": "linking",
+  "topics": [
+    "A.2",
+    "B.3",
+    "C.2",
+    "A.1",
+    "A.3",
+    "B.1"
+  ],
+  "given": {
+    "V1": {
+      "value": 4.2,
+      "sf": 2,
+      "unit": "m^3",
+      "range": [
+        1,
+        10
+      ],
+      "what": "volume of the balloon at launch"
+    },
+    "m": {
+      "value": 3.1,
+      "sf": 2,
+      "unit": "kg",
+      "range": [
+        1,
+        6
+      ],
+      "what": "total mass of balloon, helium and payload"
+    },
+    "rho": {
+      "value": 1.2,
+      "sf": 2,
+      "unit": "kg m^-3",
+      "range": [
+        1.1,
+        1.3
+      ],
+      "what": "density of air at ground level"
+    },
+    "p1": {
+      "value": 101000,
+      "sf": 3,
+      "unit": "Pa",
+      "range": [
+        95000,
+        105000
+      ],
+      "what": "pressure of the helium at launch"
+    },
+    "T1": {
+      "value": 15,
+      "sf": 2,
+      "unit": "°C",
+      "range": [
+        -10,
+        35
+      ],
+      "what": "temperature of the helium at launch"
+    },
+    "p2": {
+      "value": 5500,
+      "sf": 2,
+      "unit": "Pa",
+      "range": [
+        1000,
+        30000
+      ],
+      "what": "pressure of the helium at the highest point"
+    },
+    "T2": {
+      "value": -56,
+      "sf": 2,
+      "unit": "°C",
+      "range": [
+        -80,
+        -40
+      ],
+      "what": "temperature of the helium at the highest point"
+    },
+    "f": {
+      "value": 403,
+      "sf": 3,
+      "unit": "MHz",
+      "range": [
+        400,
+        406
+      ],
+      "what": "frequency of the radio transmitter"
+    },
+    "alt": {
+      "value": 20,
+      "sf": 2,
+      "unit": "km",
+      "range": [
+        10,
+        40
+      ],
+      "what": "height of the balloon above the ground station"
+    },
+    "dx": {
+      "value": 30,
+      "sf": 2,
+      "unit": "km",
+      "range": [
+        0,
+        200
+      ],
+      "what": "horizontal distance of the balloon from the ground station"
+    },
+    "mp": {
+      "value": 0.6,
+      "sf": 2,
+      "unit": "kg",
+      "range": [
+        0.2,
+        2
+      ],
+      "what": "mass of the payload and parachute"
+    },
+    "vt": {
+      "value": 5,
+      "sf": 2,
+      "unit": "m s^-1",
+      "range": [
+        3,
+        10
+      ],
+      "what": "terminal speed of the payload"
+    }
+  },
+  "results": {
+    "Fb": {
+      "value": 49.392,
+      "unit": "N",
+      "sf": 3
+    },
+    "W": {
+      "value": 30.380000000000003,
+      "unit": "N",
+      "sf": 3
+    },
+    "T1_K": {
+      "value": 288,
+      "unit": "K",
+      "sf": 3
+    },
+    "T2_K": {
+      "value": 217,
+      "unit": "K",
+      "sf": 3
+    },
+    "a": {
+      "value": 6.1329032258064515,
+      "unit": "m s^-2",
+      "sf": 3
+    },
+    "V2": {
+      "value": 58.11325757575757,
+      "unit": "m^3",
+      "sf": 3
+    },
+    "lambda": {
+      "value": 0.7444168734491315,
+      "unit": "m",
+      "sf": 3
+    },
+    "dist": {
+      "value": 36.05551275463989,
+      "unit": "km",
+      "sf": 3
+    },
+    "time": {
+      "value": 0.00012018504251546632,
+      "unit": "s",
+      "sf": 3
+    },
+    "P": {
+      "value": 29.4,
+      "unit": "W",
+      "sf": 3
+    },
+    "wrong_a": {
+      "value": 15.932903225806452,
+      "unit": "m s^-2",
+      "sf": 3
+    },
+    "wrong_V2": {
+      "value": 77.12727272727273,
+      "unit": "m^3",
+      "sf": 3
+    },
+    "wrong_time": {
+      "value": 0.00006666666666666667,
+      "unit": "s",
+      "sf": 3
+    }
+  },
+  "parts": [
+    {
+      "label": "a(i)",
+      "command": "Show that",
+      "syllabus": [
+        "A.2.7"
+      ],
+      "examinerNote": "Buoyancy equals the weight of the displaced air; the volume of the payload is negligible."
+    },
+    {
+      "label": "a(ii)",
+      "command": "Calculate",
+      "syllabus": [
+        "A.2.1",
+        "A.2.2"
+      ],
+      "examinerNote": "Two forces at the instant of release (air resistance is zero at zero speed). Using the rounded 49 N gives 6.0 m s⁻², inside the accepted range.",
+      "dependsOn": [
+        "a(i)"
+      ]
+    },
+    {
+      "label": "a(iii)",
+      "command": "Suggest",
+      "syllabus": [
+        "A.2.7",
+        "B.3.4"
+      ],
+      "examinerNote": "ρ_air ∝ p/T and V_helium ∝ T/p for a fixed amount of gas, so ρV is constant while the balloon can still stretch. A strong answer links the two ideas; one mark for the expansion alone."
+    },
+    {
+      "label": "b(i)",
+      "command": "Calculate",
+      "syllabus": [
+        "B.3.4",
+        "B.1.3"
+      ],
+      "examinerNote": "Fixed amount of gas, so the combined gas law applies. Kelvin temperatures are essential."
+    },
+    {
+      "label": "b(ii)",
+      "command": "State",
+      "syllabus": [
+        "B.3.4"
+      ],
+      "examinerNote": "Any one sensible assumption."
+    },
+    {
+      "label": "b(iii)",
+      "command": "Outline",
+      "syllabus": [
+        "B.3.7",
+        "B.3.3"
+      ],
+      "examinerNote": "Real gases approach ideal behaviour at low pressure/density and high temperature (well above condensation)."
+    },
+    {
+      "label": "c(i)",
+      "command": "Calculate",
+      "syllabus": [
+        "C.2.2",
+        "C.2.4"
+      ],
+      "examinerNote": "Electromagnetic waves travel at c; convert MHz to Hz."
+    },
+    {
+      "label": "c(ii)",
+      "command": "Calculate",
+      "syllabus": [
+        "C.2.4",
+        "T.6"
+      ],
+      "examinerNote": "Straight-line distance, then t = d/c."
+    },
+    {
+      "label": "c(iii)",
+      "command": "Outline",
+      "syllabus": [
+        "C.2.5",
+        "C.2.3"
+      ],
+      "examinerNote": "The key contrast between mechanical and electromagnetic waves."
+    },
+    {
+      "label": "d(i)",
+      "command": "Outline",
+      "syllabus": [
+        "A.1.8",
+        "A.2.2"
+      ],
+      "examinerNote": "Drag grows with speed until the forces balance (Newton's first law)."
+    },
+    {
+      "label": "d(ii)",
+      "command": "Calculate",
+      "syllabus": [
+        "A.3.7",
+        "A.3.6"
+      ],
+      "examinerNote": "Kinetic energy is constant, so all the gravitational potential energy lost each second is transferred to the air (internal energy) by the drag force."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-lqs01-signal.svg": "778a32efb70316756b9d78261df3809751e0bc79c39c487b53327f05020dd4b5"
+  }
+}

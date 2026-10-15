@@ -1,0 +1,208 @@
+{
+  "question": {
+    "id": "B5-P01",
+    "theme": "B",
+    "topic": "B.5",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A frost alarm uses a thermistor whose resistance increases as its temperature decreases. The thermistor is connected in series with a fixed resistor of resistance 2.2 $\\mathrm{k\\Omega}$ and a battery of emf 9.0 V with negligible internal resistance. An ideal voltmeter measures the potential difference across the thermistor, which controls the alarm.</p>",
+    "diagram": "questions/diagrams/p2-b5-frost.svg",
+    "diagramAlt": "Circuit diagram: a battery of emf epsilon, a fixed resistor R and a thermistor in one series loop. A voltmeter V is connected across the thermistor, with a label saying its output goes to the alarm.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "The fixed resistor is a metal resistor that stays at a constant temperature. State and explain whether it is an ohmic conductor.",
+        "marks": 2,
+        "markscheme": [
+          "It is ohmic ✓",
+          "because at constant temperature its resistance is constant / the current in it is proportional to the potential difference across it ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "At 0 °C the resistance of the thermistor is 3.3 $\\mathrm{k\\Omega}$. Calculate, in mA, the current in the circuit at this temperature.",
+        "marks": 2,
+        "markscheme": [
+          "total resistance $= 2.2 + 3.3 = 5.5\\ \\mathrm{k\\Omega}$ ✓",
+          "$I = \\dfrac{9.0}{5.5 \\times 10^{3}} = 1.64\\ \\text{mA}$ ✓"
+        ],
+        "numeric": {
+          "answer": 1.63636,
+          "unit": "mA",
+          "range": [
+            1.58,
+            1.69
+          ],
+          "mistakes": [
+            {
+              "value": 2.72727,
+              "feedback": "The thermistor and the fixed resistor are in series: use the total resistance."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Show that the potential difference across the thermistor at 0 °C is about 5.4 V.",
+        "marks": 1,
+        "markscheme": [
+          "$V = IR_{\\text{T}}$ OR $V = \\dfrac{3.3}{5.5} \\times 9.0 = 5.40\\ \\text{V}$ ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Calculate, in mW, the power dissipated in the fixed resistor at 0 °C.",
+        "marks": 2,
+        "markscheme": [
+          "$P = I^2 R = (1.64 \\times 10^{-3})^2 \\times 2.2 \\times 10^{3}$ ✓",
+          "$P = 5.89\\ \\text{mW}$ ✓",
+          "Allow ECF from (b); accept 5.65 to 6.13 mW"
+        ],
+        "numeric": {
+          "answer": 5.89091,
+          "unit": "mW",
+          "range": [
+            5.65,
+            6.13
+          ],
+          "mistakes": [
+            {
+              "value": 14.7273,
+              "feedback": "That is the power in the whole circuit. Use the resistance of the fixed resistor only."
+            }
+          ]
+        }
+      },
+      {
+        "label": "e",
+        "question": "The alarm sounds when the potential difference across the thermistor is greater than 5.4 V. Explain why the alarm sounds when the temperature falls below 0 °C.",
+        "marks": 3,
+        "markscheme": [
+          "As the temperature falls, the resistance of the thermistor increases (so the total resistance increases) ✓",
+          "so the current decreases and the potential difference across the fixed resistor ($IR$) decreases ✓",
+          "the emf is shared between the two components, so the potential difference across the thermistor increases above 5.4 V ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "B.5"
+  ],
+  "given": {
+    "emf": {
+      "value": 9,
+      "sf": 2,
+      "unit": "V",
+      "range": [
+        1.5,
+        24
+      ],
+      "what": "emf of the battery (negligible internal resistance)"
+    },
+    "R": {
+      "value": 2.2,
+      "sf": 2,
+      "unit": "kΩ",
+      "range": [
+        0.1,
+        100
+      ],
+      "what": "resistance of the fixed resistor"
+    },
+    "RT": {
+      "value": 3.3,
+      "sf": 2,
+      "unit": "kΩ",
+      "range": [
+        0.1,
+        100
+      ],
+      "what": "resistance of the thermistor at 0 °C"
+    }
+  },
+  "results": {
+    "Rtot": {
+      "value": 5.5,
+      "unit": "kΩ",
+      "sf": 2
+    },
+    "I": {
+      "value": 1.6363636363636362,
+      "unit": "mA",
+      "sf": 3
+    },
+    "VT": {
+      "value": 5.3999999999999995,
+      "unit": "V",
+      "sf": 3
+    },
+    "P": {
+      "value": 5.890909090909091,
+      "unit": "mW",
+      "sf": 3
+    },
+    "wrong_I": {
+      "value": 2.7272727272727275,
+      "unit": "mA",
+      "sf": 3
+    },
+    "wrong_P": {
+      "value": 14.727272727272727,
+      "unit": "mW",
+      "sf": 3
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "State",
+      "syllabus": [
+        "B.5.8"
+      ],
+      "examinerNote": "The guide: a metal conductor at constant temperature is treated as ohmic. Award the second mark only with a reason, not for \"ohmic\" alone."
+    },
+    {
+      "label": "b",
+      "command": "Calculate",
+      "syllabus": [
+        "B.5.6",
+        "B.5.10"
+      ],
+      "examinerNote": "Series resistances add; I = ε / R_total with negligible internal resistance."
+    },
+    {
+      "label": "c",
+      "command": "Show that",
+      "syllabus": [
+        "B.5.6"
+      ],
+      "examinerNote": "V = IR for the thermistor (or the ratio of resistances times the emf)."
+    },
+    {
+      "label": "d",
+      "command": "Calculate",
+      "syllabus": [
+        "B.5.9"
+      ],
+      "examinerNote": "Any of the power equations for the fixed resistor (V across it = ε − 5.4 V also works).",
+      "dependsOn": [
+        "b"
+      ]
+    },
+    {
+      "label": "e",
+      "command": "Explain",
+      "syllabus": [
+        "B.5.12",
+        "B.5.10",
+        "B.5.6"
+      ],
+      "examinerNote": "A chain of reasoning: thermistor resistance up, current down, pd across R down, so pd across thermistor up (or: the thermistor gets a larger share of the emf because its share of the total resistance increases)."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-b5-frost.svg": "960db10859ae51cf9e8bbeca548f8bb2f4e036f0b332711b674f8c96ce808e23"
+  }
+}

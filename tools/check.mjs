@@ -77,12 +77,20 @@ function checkQuestion(q, file) {
   if (typeof q.id !== 'string' || !q.id) { err(where, 'missing id'); return; }
   if (questionIds.has(q.id)) err(where, 'duplicate id');
   questionIds.set(q.id, q.topic);
-  if (!/^[A-E]\d-(\d{3}|B\d{2})$/.test(q.id)) warn(where, 'id doesn\'t follow the pattern A1-001 (or D3-B01 for a generated Paper 1B dataset)');
-  const topic = TOPICS.get(q.topic);
-  if (!topic) err(where, `unknown topic "${q.topic}"`);
-  if (q.theme !== (topic ? topic.theme : q.theme)) err(where, `theme "${q.theme}" doesn't match topic ${q.topic}`);
-  if (topic && q.id.slice(0, 2) !== q.topic.replace('.', '')) warn(where, `id doesn't start with its topic (${q.topic})`);
-  if (!['1A', '1B', '2'].includes(q.paper)) err(where, `paper must be "1A", "1B" or "2", not ${JSON.stringify(q.paper)}`);
+  // Paper 2 linking questions (20 marks, several themes: paper "2L") have topic "Linking", no theme, and list their topics.
+  const linking = q.paper === '2L';
+  if (!/^([A-E]\d-(\d{3}|B\d{2}|P\d{2})|LQ-[SH]\d{2})$/.test(q.id)) warn(where, 'id doesn\'t follow the pattern A1-001 (D3-B01 for a generated Paper 1B dataset, A1-P01 or LQ-S01 for a generated Paper 2 question)');
+  const topic = linking ? null : TOPICS.get(q.topic);
+  if (linking) {
+    if (q.topic !== 'Linking' || q.theme !== '') err(where, 'a linking question (paper "2L") has topic "Linking" and theme ""');
+    if (!Array.isArray(q.topics) || !q.topics.length || !q.topics.every((t) => TOPICS.has(t))) err(where, 'a linking question lists its topics (known subtopics) in "topics"');
+    else if (q.level !== 'HL' && q.topics.some((t) => TOPICS.get(t).hl)) err(where, 'a linking question with an HL-only topic must be HL');
+  } else {
+    if (!topic) err(where, `unknown topic "${q.topic}"`);
+    if (q.theme !== (topic ? topic.theme : q.theme)) err(where, `theme "${q.theme}" doesn't match topic ${q.topic}`);
+    if (topic && q.id.slice(0, 2) !== q.topic.replace('.', '')) warn(where, `id doesn't start with its topic (${q.topic})`);
+  }
+  if (!['1A', '1B', '2', '2L'].includes(q.paper)) err(where, `paper must be "1A", "1B", "2" or "2L", not ${JSON.stringify(q.paper)}`);
   if (![1, 2, 3].includes(q.difficulty)) err(where, 'difficulty must be 1, 2 or 3');
   // Paper 1B is the same paper for SL and HL students, so it uses SL material only: level "SL_HL".
   if (!['SL', 'HL', 'SL_HL'].includes(q.level)) err(where, 'level must be "SL", "HL" or "SL_HL"');
@@ -167,7 +175,20 @@ if (exists(p1b.DATA_DIR)) {
 const tests1b = await (await import('./1b/test.mjs')).runTests();
 for (const f of tests1b.failures) err('tools/1b/test.mjs', f);
 
-// ---------- 2c. Science news (tools/news) ----------
+// ---------- 2c. Paper 2 questions (tools/p2) ----------
+// As for Paper 1B: questions/p2.json must be exactly what tools/p2/build.mjs makes from the APPROVED questions
+// in tools/p2/questions, every question must pass its checks, and the tools' own tests must pass.
+const p2 = await import('./p2/build.mjs');
+const built2 = p2.buildAll(await p2.loadQuestions(), TOPICS);
+for (const x of built2.diags) {
+  if (x.code === 'originality-skipped') continue; // no reference cache (e.g. on GitHub); reviews can't be recorded there anyway
+  (x.level === 'error' ? err : warn)(`Paper 2 ${x.question}`, `[${x.code}] ${x.message}`);
+}
+if (!exists(p2.OUTPUT) || read(p2.OUTPUT).replace(/\r/g, '') !== built2.json) err(p2.OUTPUT, 'is out of date or edited by hand: run `node tools/p2/build.mjs` to rebuild it from tools/p2/questions');
+const tests2 = await (await import('./p2/test.mjs')).runTests();
+for (const f of tests2.failures) err('tools/p2/test.mjs', f);
+
+// ---------- 2d. Science news (tools/news) ----------
 // Every stored story must be valid, and news.html / news/latest.json must match the stored stories.
 let newsCount = 0;
 try {
@@ -343,7 +364,7 @@ for (const [n, text, want] of markCases) {
 if (checkNumeric({ answer: 10, mistakes: [{ value: 20, feedback: 'x' }] }, '20').mistake !== 0) err('js/numeric.js', 'a listed mistake value should be recognised');
 
 // ---------- Report ----------
-console.log(`Checked ${pages.length} pages, ${questionCount} questions (${built1b.questions.length} generated Paper 1B datasets), ${parseCases.length + markCases.length} marking tests, ${tests1b.count} Paper 1B tests and ${newsCount} science news ${newsCount === 1 ? 'story' : 'stories'}.`);
+console.log(`Checked ${pages.length} pages, ${questionCount} questions (${built1b.questions.length} generated Paper 1B datasets, ${built2.questions.length} generated Paper 2 questions), ${parseCases.length + markCases.length} marking tests, ${tests1b.count} Paper 1B tests, ${tests2.count} Paper 2 tests and ${newsCount} science news ${newsCount === 1 ? 'story' : 'stories'}.`);
 if (warnings.length) console.log(`\n${warnings.length} warning(s):\n` + warnings.map((w) => '  ! ' + w).join('\n'));
 if (errors.length) {
   console.log(`\n${errors.length} error(s):\n` + errors.map((e) => '  ✗ ' + e).join('\n'));
