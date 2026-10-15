@@ -80,3 +80,7 @@ unit, wrong-answer values allowed in mark schemes, ECF clauses ignored by the or
    TEACHER-REVIEWED in your name (with `--recorded-by`) only on your explicit instruction.
 4. When all 10 are TEACHER-REVIEWED: `node tools/p2/review.mjs accept-batch batch-1 --by "<you>" --note "…"`,
    rebuild, check, and merge `paper2-batch1` into `main`.
+
+## Outcome (15 October 2026)
+
+The teacher inspected all 10 questions. Changes requested and made: more space between mark-scheme points (site-wide), a larger E2-P01 graph, a diagram for LQ-S01 (c)(ii) and for the LQ-H02 flywheel. All 10 approved; batch-1 accepted and merged into `main`.
