@@ -494,6 +494,7 @@ window.glueUnits = (function () {
     ['skills', 'skills.html', 'Skills'],
     ['experimental', 'experimental/index.html', 'Experimental programme'],
     ['ee', 'ee/index.html', 'Extended essay'],
+    ['exam', 'exam-technique.html', 'Exam tips'],
     ['resources', 'resources.html', 'Resources'],
     ['news', 'news.html', 'Science news'],
     ['about', 'about.html', 'About'],

@@ -99,8 +99,8 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 .site-nav a:hover { background: var(--bg); }
 /* Current page: a thin orange underline (a bar on the left in the phone menu) */
 .site-nav a[aria-current="page"] { font-weight: 600; background: linear-gradient(var(--xyz-ink), var(--xyz-ink)) no-repeat left 9px bottom 2px / calc(100% - 18px) 2px; }
-/* Below 860 px the eight menu items no longer fit on one line, so they move into the Menu button. */
-@media (max-width: 860px) {
+/* Below 960 px the nine menu items no longer fit on one line (they need about 930 px plus the scrollbar), so they move into the Menu button. */
+@media (max-width: 960px) {
   .menu-btn { display: block; }
   /* Phones: the search link shrinks to its magnifying-glass icon (its label stays for screen readers) */
   .search-link { padding: 7px 9px; }
