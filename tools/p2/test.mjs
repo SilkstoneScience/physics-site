@@ -99,9 +99,9 @@ export async function runTests() {
   let d;
   d = clone(GOOD_SHORT); d.parts[0].markscheme.pop(); expect('marking points must equal the marks', d, 'markscheme');
   d = clone(GOOD_SHORT); d.parts[2].syllabus = ['A.1.99']; expect('unknown syllabus ID', d, 'syllabus');
-  d = clone(GOOD_SHORT); d.parts[2].syllabus = ['A.1.Y1']; expect('2028 content needs y2028: true', d, 'y2028');
+  d = clone(GOOD_SHORT); d.topics = ['A.1', 'C.2']; d.parts[2].syllabus = ['C.2.Y1']; expect('2028 content needs y2028: true', d, 'y2028');
   d = clone(GOOD_SHORT); d.y2028 = true; expect('y2028: true needs some 2028 content', d, 'y2028');
-  d = clone(GOOD_SHORT); d.parts[2].syllabus = ['A.1.Y1']; d.y2028 = true;
+  d = clone(GOOD_SHORT); d.topics = ['A.1', 'C.2']; d.parts[2].syllabus = ['C.2.Y1']; d.y2028 = true;
   check('a 2028 question passes and is tagged y2028 on the site', !codesFor(d).length && build([d]).preview[0].y2028 === true, codesFor(d).join());
   d = clone(GOOD_SHORT); d.topics = ['A.1', 'A.2']; d.parts[2].syllabus = ['A.2.H1']; expect('AHL content in an SL question', d, 'level');
   d = clone(GOOD_SHORT); d.parts[2].syllabus = ['C.2.1']; expect('a syllabus ID outside the question\'s topics', d, 'syllabus');

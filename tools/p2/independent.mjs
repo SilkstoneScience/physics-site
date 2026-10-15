@@ -131,12 +131,10 @@ export const INDEPENDENT = {
     for (let i = 1; i < n; i++) s += (i % 2 ? 4 : 2) * vel(i * h);
     return { v8: vel(t8.value), dist: s * h / 3, aAvg: vel(t8.value) / t8.value, a0: vmax.value / tau.value };
   },
-  // Molecular speeds: mean and rms directly; T from ½m v² = (3/2)kT; P = ⅓ρv².
-  'B3-P01': ({ s1, s2, s3, s4, s5, m, vr, rho }) => {
-    const list = [s1, s2, s3, s4, s5].map((x) => x.value);
-    const sq = list.map((x) => x * x).reduce((a, b) => a + b) / 5;
+  // Helium: T from ½m v² = (3/2)kT; P = ⅓ρv².
+  'B3-P01': ({ m, vr, rho }) => {
     const vSI = vr.value * 1000;
-    return { mean: list.reduce((a, b) => a + b) / 5, meanSq: sq, rms: Math.sqrt(sq), T: (0.5 * m.value * vSI * vSI) / (1.5 * 1.38e-23), P: rho.value * vSI * vSI / 3 };
+    return { T: (0.5 * m.value * vSI * vSI) / (1.5 * 1.38e-23), P: rho.value * vSI * vSI / 3 };
   },
   // Closed pipe: allowed wavelengths 4L/n for odd n; open pipe 2L/n.
   'C4-P01': ({ L, v }) => {

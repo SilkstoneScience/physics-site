@@ -301,27 +301,24 @@ export const UNDERSTANDINGS = {
   ]) },
 };
 
-// Content new in the guide for exams from 2028 ("Updates to the publication", September 2026, and the 2028 data
-// booklet). IDs 'A.1.Y1' …; a question using one must have y2028: true, and is tagged "New for 2028" on the site.
+// Content new for exams from 2028 (guide "Updates to the publication", September 2026, and the 2028 data booklet).
+// Only relationships the update specifies count (teacher's decision, October 2026); wording that only clarifies
+// 2025 content (e.g. "kinetic" energy in A.3, "ideal monatomic gas" in B.1, non-uniform acceleration treated
+// graphically in A.1, energy calculations in E.4/E.5, P = ⅓ρv²rms only rewritten) is NOT new and uses the 2025 IDs.
+// IDs 'B.1.Y1' …; a question using one must have y2028: true, and is tagged "New for 2028" on the site.
 export const NEW_2028 = {
-  'A.1': [{ label: 'non-uniform acceleration, treated graphically and qualitatively', hl: false }],
-  'A.3': [{ label: 'work done by the resultant force equals the change in kinetic energy', hl: false },
-    { label: 'energy density of fuels as energy per unit volume', hl: false }],
-  'B.1': [{ label: 'average kinetic energy 3/2 kBT for an ideal monatomic gas', hl: false },
-    { label: 'luminosity as radiated power; intensity I = P/A; apparent brightness as intensity', hl: false }],
-  'B.3': [{ label: 'rms speed against average speed, and why rms is used; P = ⅓ρv²rms', hl: false }],
-  'C.2': [{ label: 'intensity proportional to amplitude squared', hl: false }],
-  'C.4': [{ label: 'wavelength–length relationship for the nth harmonic sets the harmonic numbers; closed pipe: 1st, 3rd, 5th…', hl: false }],
+  'B.1': [{ label: 'intensity as power per unit area, I = P/A', hl: false }],
+  'B.3': [{ label: 'difference between rms velocity and average velocity, and why rms is preferred in the gas laws', hl: false }],
+  'C.2': [{ label: 'intensity proportional to amplitude squared, I ∝ A²', hl: false }],
+  'C.4': [{ label: 'harmonic numbers set by the wavelength–length relationship; a pipe closed at one end has the 1st, 3rd, 5th… harmonics', hl: false }],
   'D.1': [{ label: 'deducing Kepler\'s third law from the centripetal and gravitational forces (all students)', hl: false }],
-  'D.3': [{ label: 'magnetic field of a long straight wire B = μ0I/2πr', hl: false }],
-  'E.3': [{ label: 'strong force balances proton repulsion (SL); range of order 10⁻¹⁵ m (HL)', hl: false }],
-  'E.4': [{ label: 'calculations of the change in mass and energy released in fission', hl: false }],
-  'E.5': [{ label: 'Chandrasekhar and Oppenheimer–Volkoff limits', hl: false },
-    { label: 'calculations of the change in mass and energy released in fusion', hl: false }],
+  'D.3': [{ label: 'magnetic field of a long straight wire, B = μ0I/2πr', hl: false }],
+  'E.3': [{ label: 'range of the strong nuclear force of order 10⁻¹⁵ m', hl: true }],
+  'E.5': [{ label: 'Chandrasekhar and Oppenheimer–Volkoff limits', hl: false }],
   'T': [{ label: 'percentage change, difference, error and uncertainty (data booklet equations)', hl: false }],
 };
 
-// All valid IDs: 'A.1.1' … for SL, 'C.1.H1' … for AHL, 'A.1.Y1' … new for 2028, 'T.3', 'NOS.1'.
+// All valid IDs: 'A.1.1' … for SL, 'C.1.H1' … for AHL, 'B.1.Y1' … new for 2028, 'T.3', 'NOS.1'.
 export const SYLLABUS_IDS = new Map();
 for (const [topic, { sl = [], hl = [] }] of Object.entries(UNDERSTANDINGS)) {
   sl.forEach((u, i) => SYLLABUS_IDS.set(`${topic}.${i + 1}`, { topic, ...u }));

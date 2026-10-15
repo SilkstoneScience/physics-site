@@ -1,4 +1,4 @@
-// A1-P02: an electric scooter with non-uniform acceleration (new for 2028: graphical, qualitative treatment).
+// A1-P02: an electric scooter with non-uniform acceleration, from a graph.
 export default {
   id: 'A1-P02',
   title: 'Electric scooter: non-uniform acceleration from a graph',
@@ -6,12 +6,11 @@ export default {
   level: 'SL',
   difficulty: 2,
   topics: ['A.1'],
-  batch: 'batch-2028',
-  y2028: true,
+  batch: 'batch-2',
   literals: { 12: 'the time span shown on the graph', 10: 'lower limit for a velocity read from the graph at 8.0 s', 11: 'upper limit for a velocity read from the graph at 8.0 s' },
   originality: {
     inspiredBy: null,
-    note: 'Written for this bank for the 2028 addition to A.1 (non-uniform acceleration, graphically and qualitatively). The curve is generated from v = 12(1 − e^(−t/4.0)); students estimate the area by counting squares. Context and numbers are our own.',
+    note: 'Written for this bank on non-uniform acceleration (A.1; the 2028 guide only clarifies that it is treated graphically and qualitatively). The curve is generated from v = 12(1 − e^(−t/4.0)); students estimate the area by counting squares. Context and numbers are our own.',
   },
   given: {
     vmax: { value: 12, sf: 2, unit: 'm s^-1', range: [5, 25], what: 'speed the scooter approaches (used to draw the graph)' },
@@ -33,7 +32,7 @@ export default {
   diagram: { file: 'questions/diagrams/p2-a1-scooter.svg', large: true, alt: 'Velocity in metres per second against time in seconds from 0 to 12, on a grid of 1 second by 1 metre per second squares. The curve starts at the origin, rises steeply, and bends over so that it levels off towards 12 metres per second. At 8 seconds the velocity is about 10.4 metres per second.' },
   parts: [
     {
-      label: 'a', command: 'Describe', marks: 2, syllabus: ['A.1.Y1', 'A.1.6'],
+      label: 'a', command: 'Describe', marks: 2, syllabus: ['A.1.6', 'A.1.4'],
       question: 'Describe how the acceleration of the scooter changes during the first 12 s.',
       markscheme: [
         'the acceleration decreases ✓',
@@ -42,7 +41,7 @@ export default {
       examinerNote: 'Acceleration is the gradient of the velocity–time graph; the curve flattens. "The scooter slows down" earns nothing: the velocity still increases.',
     },
     {
-      label: 'b', command: 'Estimate', marks: 3, syllabus: ['A.1.Y1', 'A.1.4', 'T.4'],
+      label: 'b', command: 'Estimate', marks: 3, syllabus: ['A.1.4', 'A.1.6', 'T.4'],
       question: 'Estimate the distance travelled by the scooter in the first [[t8:n]] s.',
       numeric: { result: 'dist', accept: 0.08, mistakes: [{ result: 'wrong_dist', feedback: 'The graph is a curve, not a straight line: it lies above the straight line from the origin, so the area is larger than ½ × v × t. Count the squares under the curve.' }] },
       markscheme: [
@@ -61,7 +60,7 @@ export default {
       examinerNote: 'Average acceleration uses the change in velocity over the whole interval (the chord), not the gradient at one point.',
     },
     {
-      label: 'd', command: 'Explain', marks: 2, syllabus: ['A.1.Y1', 'A.1.4'],
+      label: 'd', command: 'Explain', marks: 2, syllabus: ['A.1.4', 'A.1.6'],
       question: 'Explain why the acceleration of the scooter just after it starts is greater than your answer to (c).',
       markscheme: [
         'the gradient of the curve (the tangent) is steepest at the start ✓',
