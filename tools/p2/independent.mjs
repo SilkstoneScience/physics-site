@@ -60,4 +60,37 @@ export const INDEPENDENT = {
     const gradient = (line(f2) - line(f1)) / (f2 - f1);
     return { f0_read: f0.value, grad: gradient, hexp: gradient * e, phi: gradient * f0.value };
   },
+  // Weather balloon: forces from Newton's second law; amount of helium from pV = nRT, then the new volume;
+  // radio wavelength and travel time with c; power from the loss of potential energy per second.
+  'LQ-S01': ({ V1, m, rho, p1, T1, p2, T2, f, alt, dx, mp, vt }) => {
+    const c = 3.00e8, R = 8.31;
+    const up = rho.value * V1.value * G, down = m.value * G;
+    const tk1 = T1.value + 273, tk2 = T2.value + 273;
+    const moles = p1.value * V1.value / (R * tk1);
+    const path = Math.sqrt((alt.value * 1e3) ** 2 + (dx.value * 1e3) ** 2);
+    return {
+      Fb: up, W: down, T1_K: tk1, T2_K: tk2, a: (up - down) / m.value,
+      V2: moles * R * tk2 / p2.value,
+      lambda: c / (f.value * 1e6),
+      dist: path / 1e3, time: path / c,
+      P: mp.value * G * vt.value,
+    };
+  },
+  // Radioisotope source: power = activity × energy per decay; halving per half-life by repeated halving;
+  // Stefan–Boltzmann; P = IV; g = GM/r².
+  'LQ-S02': ({ A0, Ea, Thalf, t3, mc, c, Prad, Af, Pe, Ve, Rc, Ms, rs }) => {
+    const MeV = 1.60e-13, sigma = 5.67e-8, Gc = 6.67e-11;
+    const watts = A0.value * Ea.value * MeV;
+    let later = watts;
+    const n = Math.round(t3.value / Thalf.value);
+    for (let i = 0; i < n; i++) later /= 2;
+    const amps = Pe.value / Ve.value;
+    return {
+      P0: watts / 1e3, halves: t3.value / Thalf.value, P3: later,
+      rate: watts / (mc.value * c.value),
+      Tf: Math.sqrt(Math.sqrt(Prad.value * 1e3 / (sigma * Af.value))),
+      I: amps, eff: 100 * Pe.value / watts, Pc: amps * amps * Rc.value,
+      g: Gc * Ms.value / (rs.value * rs.value),
+    };
+  },
 };
