@@ -19,6 +19,7 @@
     paper: document.getElementById('f-paper'),
     difficulty: document.getElementById('f-difficulty'),
     level: document.getElementById('f-level'),
+    syllabus: document.getElementById('f-syllabus'),
     status: document.getElementById('f-status'),
   };
 
@@ -166,6 +167,7 @@
       f.theme.value = p.get('theme');
     }
     if (PAPERS[p.get('paper')]) f.paper.value = p.get('paper'); // e.g. questions.html?topic=D.3&paper=1B
+    if (p.get('syllabus') === '2028') f.syllabus.value = '2028'; // e.g. questions.html?topic=B.3&syllabus=2028
     listEl.dataset.wantedQuestion = p.get('q') || '';
   }
 
@@ -181,6 +183,7 @@
       (!f.difficulty.value || String(q.difficulty) === f.difficulty.value) &&
       // "SL only" keeps SL and the common Paper 1B (SL_HL); "HL only" keeps just the HL questions
       (!f.level.value || (f.level.value === 'HL' ? q.level === 'HL' : q.level !== 'HL')) &&
+      (!f.syllabus.value || q.y2028 === true) && // "New for 2028 only": content new in the guide for exams from 2028
       (!f.status.value || statusOf(q) === f.status.value);
   }
 
@@ -356,6 +359,7 @@
         <span class="tag">${DIFFICULTY[q.difficulty] || ''}</span>
         ${q.level === 'HL' ? '<span class="tag hl">HL</span>' : ''}
         ${q.level === 'SL_HL' ? '<span class="tag">SL &amp; HL</span>' : ''}
+        ${q.y2028 ? '<span class="tag y2028">New for 2028</span>' : ''}
         ${q.review && q.review.status !== 'APPROVED' ? `<span class="tag preview">Preview only: ${q.review.status}</span>` : ''}
         <span class="tag">${totalMarks} mark${totalMarks === 1 ? '' : 's'}</span>
         <span class="q-status ${status}">${statusLabel(q)}</span>

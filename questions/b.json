@@ -1785,5 +1785,113 @@
     ],
     "answer": 1,
     "explanation": "The total resistance falls, so $I = \\dfrac{\\varepsilon}{R + r}$ increases (I is true). The power wasted inside the battery is $I^2r$, which increases with the current (III is true). The terminal p.d. is $V = \\varepsilon - Ir$, so a larger current means more lost volts and a smaller terminal p.d. (II is false)."
+  },
+  {
+    "id": "B1-018",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>A small lamp radiates 60 W of electromagnetic radiation equally in all directions.</p><p>What is the intensity of the radiation at a distance of 2.0 m from the lamp?</p>",
+    "options": [
+      "1.2 $\\text{W m}^{-2}$",
+      "2.4 $\\text{W m}^{-2}$",
+      "4.8 $\\text{W m}^{-2}$",
+      "15 $\\text{W m}^{-2}$"
+    ],
+    "answer": 0,
+    "explanation": "Intensity is power per unit area, I = P/A. The power spreads over a sphere of area 4πr² = 4π × 2.0² = 50 m², so I = 60/50 = 1.2 W m⁻². 2.4 uses r instead of r²; 4.8 uses πr² (a circle, not a sphere); 15 divides by r² only."
+  },
+  {
+    "id": "B1-019",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>Helium behaves as an ideal monatomic gas. What is the average kinetic energy of a helium atom at 300 K?</p>",
+    "options": [
+      "$4.1 \\times 10^{-21}$ J",
+      "$6.2 \\times 10^{-21}$ J",
+      "$1.2 \\times 10^{-20}$ J",
+      "$3.7 \\times 10^{3}$ J"
+    ],
+    "answer": 1,
+    "explanation": "For an ideal monatomic gas, the average kinetic energy of a particle is $\\frac{3}{2}k_BT$ = 1.5 × 1.38 × 10⁻²³ × 300 = 6.2 × 10⁻²¹ J. 4.1 × 10⁻²¹ J is $k_BT$ (the 3/2 is missing); 1.2 × 10⁻²⁰ J uses 3 instead of 3/2; 3.7 × 10³ J is $\\frac{3}{2}RT$, the energy of a whole mole."
+  },
+  {
+    "id": "B1-020",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>Three statements about the radiation from stars are:</p><p>I. The luminosity of a star is the total power it radiates.<br>II. The apparent brightness of a star is the intensity of its radiation at the observer.<br>III. Two stars with the same luminosity always have the same apparent brightness.</p><p>Which statements are correct?</p>",
+    "options": [
+      "I and II only",
+      "I and III only",
+      "II and III only",
+      "I, II and III"
+    ],
+    "answer": 0,
+    "explanation": "Luminosity means radiated power (I), and apparent brightness is the same thing as intensity, power per unit area at the observer (II). III is false: b = L/(4πd²), so a star twice as far away appears a quarter as bright even if its luminosity is the same."
+  },
+  {
+    "id": "B3-019",
+    "theme": "B",
+    "topic": "B.3",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>Three gas molecules have speeds of 200 $\\text{m s}^{-1}$, 400 $\\text{m s}^{-1}$ and 600 $\\text{m s}^{-1}$.</p><p>What is their root-mean-square (rms) speed?</p>",
+    "options": [
+      "400 $\\text{m s}^{-1}$",
+      "430 $\\text{m s}^{-1}$",
+      "600 $\\text{m s}^{-1}$",
+      "$1.9 \\times 10^{5}$ $\\text{m s}^{-1}$"
+    ],
+    "answer": 1,
+    "explanation": "Square the speeds, find their mean, then take the square root: √((200² + 400² + 600²)/3) = √(1.87 × 10⁵) = 430 m s⁻¹. 400 is the ordinary mean speed (the rms speed is always at least as large); 1.9 × 10⁵ is the mean of the squares without the square root; 600 is just the largest speed."
+  },
+  {
+    "id": "B3-020",
+    "theme": "B",
+    "topic": "B.3",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>Why is the root-mean-square speed of the molecules, rather than their average speed, used in the equation for the pressure of an ideal gas?</p>",
+    "options": [
+      "The rms speed is always smaller than the average speed, so it gives a safe estimate of the pressure.",
+      "The average velocity of the molecules is zero, so it cannot be used for anything.",
+      "The pressure depends on the average of the squares of the speeds, because both the momentum change in each collision and the rate of collisions are proportional to the speed.",
+      "The kinetic energy of a molecule depends on its velocity, not its speed."
+    ],
+    "answer": 2,
+    "explanation": "Each collision changes momentum by an amount proportional to the speed, and faster molecules also hit the wall more often, so the pressure depends on speed² averaged over the molecules: the mean square speed, whose square root is the rms speed. The rms speed is never smaller than the average speed (A is false). The average velocity is indeed zero, but that is not why squares appear (B). Kinetic energy depends on speed, not direction (D)."
+  },
+  {
+    "id": "B3-021",
+    "theme": "B",
+    "topic": "B.3",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>Air at a pressure of $1.0 \\times 10^{5}$ Pa has a density of 1.2 $\\text{kg m}^{-3}$.</p><p>What is the rms speed of the air molecules?</p>",
+    "options": [
+      "290 $\\text{m s}^{-1}$",
+      "500 $\\text{m s}^{-1}$",
+      "$8.3 \\times 10^{4}$ $\\text{m s}^{-1}$",
+      "$2.5 \\times 10^{5}$ $\\text{m s}^{-1}$"
+    ],
+    "answer": 1,
+    "explanation": "From $P = \\frac{1}{3}\\rho v_{\\text{rms}}^2$: $v_{\\text{rms}} = \\sqrt{3P/\\rho} = \\sqrt{3 \\times 1.0 \\times 10^{5} / 1.2}$ = 500 m s⁻¹. 290 forgets the factor 3; 2.5 × 10⁵ forgets the square root; 8.3 × 10⁴ does both."
   }
 ]

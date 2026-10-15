@@ -184,6 +184,7 @@ export function buildQuestion(def) {
     paper: linking ? '2L' : '2',
     difficulty: def.difficulty,
     level: def.level,
+    ...(def.y2028 ? { y2028: true } : {}),
     stem: fill(def.stem, ctx, 'stem'),
     ...(def.diagram ? { diagram: def.diagram.file, diagramAlt: def.diagram.alt, ...(def.diagram.large ? { diagramLarge: true } : {}) } : {}),
     parts: (def.parts || []).map((pt) => ({

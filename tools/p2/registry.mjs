@@ -61,6 +61,7 @@ export function classify(r, diags) {
   const def = r.def;
   if (def.type === 'linking') reasons.push('linking question');
   if (def.level === 'HL') reasons.push('HL question');
+  if (def.y2028) reasons.push('new for 2028 (checked against the 2028 guide)');
   if (def.originality && def.originality.inspiredBy) reasons.push(`inspired by a Daily Question (${def.originality.inspiredBy})`);
   if ((def.parts || []).some((pt) => pt.marks >= 3 && !['Calculate', 'Determine', 'Show that', 'Estimate'].includes(pt.command))) reasons.push('has a 3–4 mark explanation part');
   if (mine.some((x) => x.code === 'limit')) reasons.push('touches a guidance limit');
