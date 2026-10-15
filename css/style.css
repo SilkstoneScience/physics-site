@@ -414,7 +414,9 @@ select, textarea, input { font: inherit; color: var(--text); background: var(--b
 .q-status.started { color: var(--muted); }
 .question figure { margin: 12px 0; text-align: center; }
 .question figure img { background: #fff; border-radius: 8px; padding: 6px; width: 100%; max-width: 420px; }
-.question figure.large img { max-width: 620px; } /* graphs students must read values from ("diagramLarge": true) */
+.question figure.large img { max-width: 620px; }
+/* diagrams placed inside a part's text (Paper 2): on their own line, the same size as question diagrams */
+.question .part > p > img { display: block; margin: 10px auto; background: #fff; border-radius: 8px; padding: 6px; width: 100%; max-width: 420px; } /* graphs students must read values from ("diagramLarge": true) */
 .question table { border-collapse: collapse; margin: 10px 0; }
 .question th, .question td { border: 1px solid var(--border); padding: 4px 10px; text-align: center; }
 .options { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 8px; }

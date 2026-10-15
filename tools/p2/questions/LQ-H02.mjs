@@ -52,6 +52,7 @@ export default {
       wrong_eff: { value: Etram / E1, unit: '', sf: 2 }, // used all the stored energy
     };
   },
+  diagram: { file: 'questions/diagrams/p2-lqh02-flywheel.svg', alt: 'A uniform disc of mass M seen face on, with its radius R drawn from the centre to the edge and a curved arrow showing it spinning with angular speed omega about its centre.' },
   stem: '<p>A tram stores energy in a flywheel, a uniform disc of mass [[M]] and radius [[R]] that spins about its central axis. The moment of inertia of a uniform disc is $I = \\tfrac{1}{2}MR^2$. At full speed the flywheel rotates at [[w1]].</p>',
   parts: [
     {

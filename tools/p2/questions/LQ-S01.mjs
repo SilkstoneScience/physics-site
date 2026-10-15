@@ -113,7 +113,7 @@ export default {
     },
     {
       label: 'c(ii)', command: 'Calculate', marks: 2, syllabus: ['C.2.4', 'T.6'],
-      question: 'At one moment the balloon is [[alt]] above the ground and [[dx]] horizontally from the ground station. Calculate the time taken for the radio signal to reach the ground station.',
+      question: 'At one moment the balloon is [[alt]] above the ground and [[dx]] horizontally from the ground station. <img src="questions/diagrams/p2-lqs01-signal.svg" alt="The ground station is on level ground. The balloon is [[alt]] vertically above a point on the ground that is [[dx]] horizontally from the station. Not to scale."> Calculate the time taken for the radio signal to reach the ground station.',
       numeric: { result: 'time', accept: 0.03, mistakes: [{ result: 'wrong_time', feedback: 'The signal travels in a straight line from the balloon to the station: find that distance with Pythagoras.' }] },
       markscheme: [
         'distance $= \\sqrt{[[alt:n]]^2 + [[dx:n]]^2} = [[dist:3u]]$ ✓',
