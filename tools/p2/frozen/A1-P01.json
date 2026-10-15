@@ -1,0 +1,201 @@
+{
+  "question": {
+    "id": "A1-P01",
+    "theme": "A",
+    "topic": "A.1",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "SL",
+    "stem": "<p>A delivery drone is flying in a straight line, descending at a constant speed of 12 $\\text{m s}^{-1}$ along a path at 20° below the horizontal. It releases a package when the package is 35 m above level ground. Air resistance on the package is negligible unless stated.</p>",
+    "diagram": "questions/diagrams/p2-a1-drone.svg",
+    "diagramAlt": "A drone moves down and to the right along a dashed straight path at an angle theta below the horizontal. At the moment of release the package has velocity v along the same direction. The height h of the package above the level ground is marked.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Show that the vertical component of the package's velocity at the moment of release is about 4 $\\text{m s}^{-1}$.",
+        "marks": 1,
+        "markscheme": [
+          "$u_y = 12 \\sin 20^{\\circ} = 4.10\\ \\text{m s}^{-1}$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Determine the time taken for the package to reach the ground.",
+        "marks": 3,
+        "markscheme": [
+          "$35 = 4.10\\,t + \\tfrac{1}{2} \\times 9.8 \\times t^2$ (taking downwards as positive) ✓",
+          "OR final vertical speed $v_y = \\sqrt{4.10^2 + 2 \\times 9.8 \\times 35} = 26.5\\ \\text{m s}^{-1}$ ✓",
+          "solving for $t$, OR $t = \\dfrac{v_y - u_y}{g}$ ✓",
+          "$t = 2.29\\ \\text{s}$ ✓",
+          "Allow ECF from (a); accept 2.21 to 2.36 s. Award [1 max] for $t = \\sqrt{2h/g}$ = 2.67 s (initial velocity ignored)."
+        ],
+        "numeric": {
+          "answer": 2.28643,
+          "unit": "s",
+          "range": [
+            2.21,
+            2.36
+          ],
+          "mistakes": [
+            {
+              "value": 2.67261,
+              "feedback": "The package already has a downward velocity when it is released, so it reaches the ground sooner than a package dropped from rest."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Calculate the horizontal distance travelled by the package between release and landing.",
+        "marks": 2,
+        "markscheme": [
+          "$v_x = 12 \\cos 20^{\\circ} = 11.3\\ \\text{m s}^{-1}$ ✓",
+          "$x = 11.3 \\times 2.29 = 25.8\\ \\text{m}$ ✓",
+          "Allow ECF from (b); accept 24.7 to 26.9 m"
+        ],
+        "numeric": {
+          "answer": 25.7825,
+          "unit": "m",
+          "range": [
+            24.7,
+            26.9
+          ],
+          "mistakes": [
+            {
+              "value": 27.4371,
+              "feedback": "Only the horizontal component of the velocity carries the package sideways: use v cos θ, not v."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "In practice, air resistance acts on the package. Outline how this affects the horizontal distance travelled by the package before it lands.",
+        "marks": 2,
+        "markscheme": [
+          "Air resistance acts opposite to the package's velocity, so it has a horizontal component backwards / the horizontal velocity decreases during the fall ✓",
+          "so the package travels a smaller horizontal distance / lands closer to the point below the release point ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "A.1"
+  ],
+  "given": {
+    "v": {
+      "value": 12,
+      "sf": 2,
+      "unit": "m s^-1",
+      "range": [
+        3,
+        25
+      ],
+      "what": "speed of the drone (and package) at release"
+    },
+    "theta": {
+      "value": 20,
+      "sf": 2,
+      "unit": "°",
+      "range": [
+        5,
+        45
+      ],
+      "what": "angle of the drone's path below the horizontal"
+    },
+    "h": {
+      "value": 35,
+      "sf": 2,
+      "unit": "m",
+      "range": [
+        10,
+        120
+      ],
+      "what": "height of the package above the ground at release"
+    }
+  },
+  "results": {
+    "uy": {
+      "value": 4.104241719908025,
+      "unit": "m s^-1",
+      "sf": 3
+    },
+    "vx": {
+      "value": 11.276311449430901,
+      "unit": "m s^-1",
+      "sf": 3
+    },
+    "vyf": {
+      "value": 26.51122026794379,
+      "unit": "m s^-1",
+      "sf": 3
+    },
+    "t": {
+      "value": 2.286426382452629,
+      "unit": "s",
+      "sf": 3
+    },
+    "x": {
+      "value": 25.78245599473146,
+      "unit": "m",
+      "sf": 3
+    },
+    "wrong_t": {
+      "value": 2.6726124191242437,
+      "unit": "s",
+      "sf": 3
+    },
+    "wrong_x": {
+      "value": 27.43711658943155,
+      "unit": "m",
+      "sf": 3
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Show that",
+      "syllabus": [
+        "A.1.7",
+        "T.6"
+      ],
+      "examinerNote": "The package has the drone's velocity at release; resolve it. Needs the unrounded value or the working."
+    },
+    {
+      "label": "b",
+      "command": "Determine",
+      "syllabus": [
+        "A.1.7",
+        "A.1.5"
+      ],
+      "examinerNote": "Either solve the quadratic in t, or find the final vertical speed first and use v = u + at. The initial downward velocity must be included.",
+      "dependsOn": [
+        "a"
+      ]
+    },
+    {
+      "label": "c",
+      "command": "Calculate",
+      "syllabus": [
+        "A.1.7",
+        "T.6"
+      ],
+      "examinerNote": "Horizontal velocity is constant with no air resistance.",
+      "dependsOn": [
+        "b"
+      ]
+    },
+    {
+      "label": "d",
+      "command": "Outline",
+      "syllabus": [
+        "A.1.8"
+      ],
+      "examinerNote": "Qualitative only (the guide limits A.1 calculations to no air resistance). The time of flight also increases slightly, but the decreasing horizontal speed dominates."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-a1-drone.svg": "263fabecf8bcf610409a2be022eefc7ec0077b521a86fbad2db62a72a4a592a5"
+  }
+}

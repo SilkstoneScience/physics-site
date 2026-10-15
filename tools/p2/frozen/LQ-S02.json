@@ -1,0 +1,494 @@
+{
+  "question": {
+    "id": "LQ-S02",
+    "theme": "",
+    "topic": "Linking",
+    "topics": [
+      "E.3",
+      "B.1",
+      "B.5",
+      "D.1",
+      "A.3",
+      "A.2",
+      "E.1"
+    ],
+    "paper": "2L",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A deep-space probe is powered by a radioisotope source containing plutonium-238. Plutonium-238 decays by alpha emission with a half-life of 88 years. The thermal energy released in the source is partly converted to electrical energy; the rest is radiated into space.</p>",
+    "parts": [
+      {
+        "label": "a(i)",
+        "question": "Plutonium-238 ($^{238}_{94}\\text{Pu}$) decays to an isotope of uranium (U). Write down the equation for this decay.",
+        "marks": 2,
+        "markscheme": [
+          "$^{238}_{94}\\text{Pu} \\rightarrow {}^{234}_{92}\\text{U} + {}^{4}_{2}\\alpha$: alpha particle (or $^{4}_{2}\\text{He}$) correct ✓",
+          "nucleon number 234 and proton number 92 for uranium ✓"
+        ]
+      },
+      {
+        "label": "a(ii)",
+        "question": "At launch the activity of the source is $2.7 \\times 10^{15}$ Bq and each decay releases 5.6 MeV. Show that the thermal power produced by the source at launch is about 2.4 kW.",
+        "marks": 2,
+        "markscheme": [
+          "energy per decay $= 5.6 \\times 10^{6} \\times 1.60 \\times 10^{-19}$ J ✓",
+          "$P = 2.7 \\times 10^{15} \\times 5.6 \\times 10^{6} \\times 1.60 \\times 10^{-19} = 2.42\\ \\text{kW}$ ✓"
+        ]
+      },
+      {
+        "label": "a(iii)",
+        "question": "Determine the thermal power produced by the source 264 years after launch.",
+        "marks": 2,
+        "markscheme": [
+          "$\\dfrac{264}{88} = 3$ half-lives, so the power falls by a factor of $2^{3} = 8$ ✓",
+          "$P = 302\\ \\text{W}$ ✓",
+          "Allow ECF from (a)(ii); accept 293 to 312 W"
+        ],
+        "numeric": {
+          "answer": 302.4,
+          "unit": "W",
+          "range": [
+            293,
+            312
+          ],
+          "mistakes": [
+            {
+              "value": 403.2,
+              "feedback": "Three half-lives halve the power three times: divide by 2 × 2 × 2 = 8, not by 6."
+            }
+          ]
+        }
+      },
+      {
+        "label": "a(iv)",
+        "question": "Outline why an alpha emitter is a good choice for this power source.",
+        "marks": 2,
+        "markscheme": [
+          "alpha particles are strongly ionising / have a very short range, so they are absorbed within the source itself ✓",
+          "so (almost) all their energy becomes thermal energy in the source, and little shielding is needed to protect the instruments ✓"
+        ]
+      },
+      {
+        "label": "b(i)",
+        "question": "Before launch, the source sits inside an aluminium casing of mass 12 kg. The specific heat capacity of aluminium is 900 $\\text{J kg}^{-1}\\text{ K}^{-1}$. If its cooling system failed, how quickly would the temperature of the casing start to rise? Calculate this rate. Assume all the thermal power goes into the casing.",
+        "marks": 2,
+        "markscheme": [
+          "$P = mc\\dfrac{\\Delta T}{\\Delta t}$ ✓",
+          "$\\dfrac{\\Delta T}{\\Delta t} = 0.224\\ \\text{K s}^{-1}$ ✓",
+          "Allow ECF from (a)(ii); accept 0.215 to 0.233 $\\text{K s}^{-1}$"
+        ],
+        "numeric": {
+          "answer": 0.224,
+          "unit": "$\\text{K s}^{-1}$",
+          "range": [
+            0.215,
+            0.233
+          ]
+        }
+      },
+      {
+        "label": "b(ii)",
+        "question": "In space, the radiator fins have a total surface area of 1.2 $\\text{m}^{2}$ and radiate 2.3 kW. Determine the temperature of the fins. Assume they behave as a black body.",
+        "marks": 2,
+        "markscheme": [
+          "$P = \\sigma A T^4$ so $T^4 = \\dfrac{2.3 \\times 10^{3}}{5.67 \\times 10^{-8} \\times 1.2}$ ✓",
+          "$T = 429\\ \\text{K}$ ✓"
+        ],
+        "numeric": {
+          "answer": 428.786,
+          "unit": "K",
+          "range": [
+            415,
+            442
+          ],
+          "mistakes": [
+            {
+              "value": 183858,
+              "feedback": "The power radiated depends on T⁴: take the fourth root, not the square root."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c(i)",
+        "question": "The electrical power output is 110 W at a potential difference of 28 V. Calculate the output current.",
+        "marks": 1,
+        "markscheme": [
+          "$I = \\dfrac{P}{V} = 3.93\\ \\text{A}$ ✓"
+        ],
+        "numeric": {
+          "answer": 3.92857,
+          "unit": "A",
+          "range": [
+            3.81,
+            4.05
+          ]
+        }
+      },
+      {
+        "label": "c(ii)",
+        "question": "Calculate, as a percentage, the efficiency of the conversion of thermal power to electrical power at launch.",
+        "marks": 1,
+        "markscheme": [
+          "$\\eta = \\dfrac{110}{2.42 \\times 10^{3}} = 4.5\\%$; allow ECF from (a)(ii) ✓"
+        ],
+        "numeric": {
+          "answer": 4.54696,
+          "unit": "%",
+          "range": [
+            4.36,
+            4.73
+          ]
+        }
+      },
+      {
+        "label": "c(iii)",
+        "question": "The cables connecting the source to the instruments have a total resistance of 0.15 Ω. Calculate the power dissipated in the cables.",
+        "marks": 2,
+        "markscheme": [
+          "$P = I^2R$ ✓",
+          "$P = 3.93^2 \\times 0.15 = 2.32\\ \\text{W}$; allow ECF from (c)(i) ✓"
+        ],
+        "numeric": {
+          "answer": 2.31505,
+          "unit": "W",
+          "range": [
+            2.22,
+            2.41
+          ]
+        }
+      },
+      {
+        "label": "d(i)",
+        "question": "The probe later orbits Saturn in a circular orbit of radius $1.2 \\times 10^{9}$ m. The mass of Saturn is $5.68 \\times 10^{26}$ kg. Calculate the gravitational field strength due to Saturn at the probe.",
+        "marks": 2,
+        "markscheme": [
+          "$g = \\dfrac{GM}{r^2}$ ✓",
+          "$g = \\dfrac{6.67 \\times 10^{-11} \\times 5.68 \\times 10^{26}}{(1.2 \\times 10^{9})^2} = 0.0263\\ \\text{N kg}^{-1}$ ✓"
+        ],
+        "numeric": {
+          "answer": 0.0263094,
+          "unit": "$\\text{N kg}^{-1}$",
+          "range": [
+            0.0255,
+            0.0271
+          ]
+        }
+      },
+      {
+        "label": "d(ii)",
+        "question": "Explain why a loose object inside the orbiting probe floats, even though there is a gravitational field at the probe.",
+        "marks": 2,
+        "markscheme": [
+          "the probe and the object are both in free fall, accelerating towards Saturn with the same acceleration $g$ ✓",
+          "so there is no contact (normal) force between them: the object does not press on the probe, and floats relative to it ✓"
+        ]
+      }
+    ]
+  },
+  "type": "linking",
+  "topics": [
+    "E.3",
+    "B.1",
+    "B.5",
+    "D.1",
+    "A.3",
+    "A.2",
+    "E.1"
+  ],
+  "given": {
+    "A0": {
+      "value": 2700000000000000,
+      "sf": 2,
+      "unit": "Bq",
+      "range": [
+        100000000000000,
+        10000000000000000
+      ],
+      "what": "activity of the source at launch"
+    },
+    "Ea": {
+      "value": 5.6,
+      "sf": 2,
+      "unit": "MeV",
+      "range": [
+        4,
+        9
+      ],
+      "what": "energy released per decay"
+    },
+    "Thalf": {
+      "value": 88,
+      "sf": 2,
+      "unit": "y",
+      "range": [
+        80,
+        90
+      ],
+      "what": "half-life of plutonium-238"
+    },
+    "t3": {
+      "value": 264,
+      "sf": 3,
+      "unit": "y",
+      "range": [
+        100,
+        400
+      ],
+      "what": "time after launch (three half-lives)"
+    },
+    "mc": {
+      "value": 12,
+      "sf": 2,
+      "unit": "kg",
+      "range": [
+        5,
+        50
+      ],
+      "what": "mass of the aluminium casing"
+    },
+    "c": {
+      "value": 900,
+      "sf": 2,
+      "unit": "J kg^-1 K^-1",
+      "range": [
+        850,
+        950
+      ],
+      "what": "specific heat capacity of aluminium"
+    },
+    "Prad": {
+      "value": 2.3,
+      "sf": 2,
+      "unit": "kW",
+      "range": [
+        1,
+        3
+      ],
+      "what": "power radiated by the fins in space"
+    },
+    "Af": {
+      "value": 1.2,
+      "sf": 2,
+      "unit": "m^2",
+      "range": [
+        0.3,
+        5
+      ],
+      "what": "surface area of the radiator fins"
+    },
+    "Pe": {
+      "value": 110,
+      "sf": 2,
+      "unit": "W",
+      "range": [
+        50,
+        300
+      ],
+      "what": "electrical power output"
+    },
+    "Ve": {
+      "value": 28,
+      "sf": 2,
+      "unit": "V",
+      "range": [
+        12,
+        48
+      ],
+      "what": "output potential difference"
+    },
+    "Rc": {
+      "value": 0.15,
+      "sf": 2,
+      "unit": "Ω",
+      "range": [
+        0.01,
+        1
+      ],
+      "what": "resistance of the cables"
+    },
+    "Ms": {
+      "value": 5.68e+26,
+      "sf": 3,
+      "unit": "kg",
+      "range": [
+        5.6e+26,
+        5.7e+26
+      ],
+      "what": "mass of Saturn"
+    },
+    "rs": {
+      "value": 1200000000,
+      "sf": 2,
+      "unit": "m",
+      "range": [
+        100000000,
+        10000000000
+      ],
+      "what": "radius of the probe's orbit around Saturn"
+    }
+  },
+  "results": {
+    "P0": {
+      "value": 2.4192,
+      "unit": "kW",
+      "sf": 3
+    },
+    "halves": {
+      "value": 3,
+      "unit": "",
+      "sf": 2
+    },
+    "P3": {
+      "value": 302.4,
+      "unit": "W",
+      "sf": 3
+    },
+    "rate": {
+      "value": 0.22399999999999998,
+      "unit": "K s^-1",
+      "sf": 3
+    },
+    "Tf": {
+      "value": 428.786282083024,
+      "unit": "K",
+      "sf": 3
+    },
+    "I": {
+      "value": 3.9285714285714284,
+      "unit": "A",
+      "sf": 3
+    },
+    "eff": {
+      "value": 4.5469576719576725,
+      "unit": "%",
+      "sf": 2
+    },
+    "Pc": {
+      "value": 2.315051020408163,
+      "unit": "W",
+      "sf": 3
+    },
+    "g": {
+      "value": 0.026309444444444444,
+      "unit": "N kg^-1",
+      "sf": 3
+    },
+    "wrong_P3": {
+      "value": 403.2,
+      "unit": "W",
+      "sf": 3
+    },
+    "wrong_Tf": {
+      "value": 183857.6757025826,
+      "unit": "K",
+      "sf": 3
+    }
+  },
+  "parts": [
+    {
+      "label": "a(i)",
+      "command": "Write down",
+      "syllabus": [
+        "E.3.7",
+        "E.1.2"
+      ],
+      "examinerNote": "An alpha particle carries away 2 protons and 2 neutrons. Both sides must balance."
+    },
+    {
+      "label": "a(ii)",
+      "command": "Show that",
+      "syllabus": [
+        "E.3.10",
+        "E.3.4"
+      ],
+      "examinerNote": "Power = decays per second × energy per decay, with 1 MeV = 1.60 × 10⁻¹³ J."
+    },
+    {
+      "label": "a(iii)",
+      "command": "Determine",
+      "syllabus": [
+        "E.3.10"
+      ],
+      "examinerNote": "Whole numbers of half-lives only (SL). The power is proportional to the activity.",
+      "dependsOn": [
+        "a(ii)"
+      ]
+    },
+    {
+      "label": "a(iv)",
+      "command": "Outline",
+      "syllabus": [
+        "E.3.9"
+      ],
+      "examinerNote": "Short range means the energy stays in the source as heat, and the radiation does not escape to damage electronics."
+    },
+    {
+      "label": "b(i)",
+      "command": "Calculate",
+      "syllabus": [
+        "B.1.6"
+      ],
+      "examinerNote": "Q = mcΔT per second. Using 2.4 kW gives a value about 1 % lower, inside the range.",
+      "dependsOn": [
+        "a(ii)"
+      ]
+    },
+    {
+      "label": "b(ii)",
+      "command": "Determine",
+      "syllabus": [
+        "B.1.11"
+      ],
+      "examinerNote": "Stefan–Boltzmann law for a black body; in a vacuum, radiation is the only way the fins lose energy."
+    },
+    {
+      "label": "c(i)",
+      "command": "Calculate",
+      "syllabus": [
+        "B.5.9"
+      ],
+      "examinerNote": "Electrical power P = IV, rearranged for the current."
+    },
+    {
+      "label": "c(ii)",
+      "command": "Calculate",
+      "syllabus": [
+        "A.3.8"
+      ],
+      "examinerNote": "Useful power out over total power in. 110/2400 gives 4.6 %, also accepted.",
+      "dependsOn": [
+        "a(ii)"
+      ]
+    },
+    {
+      "label": "c(iii)",
+      "command": "Calculate",
+      "syllabus": [
+        "B.5.9"
+      ],
+      "examinerNote": "The cables carry the full output current.",
+      "dependsOn": [
+        "c(i)"
+      ]
+    },
+    {
+      "label": "d(i)",
+      "command": "Calculate",
+      "syllabus": [
+        "D.1.3"
+      ],
+      "examinerNote": "Saturn treated as a point mass at its centre."
+    },
+    {
+      "label": "d(ii)",
+      "command": "Explain",
+      "syllabus": [
+        "D.1.3",
+        "A.2.1"
+      ],
+      "examinerNote": "Gravity provides the centripetal acceleration of both; \"weightlessness\" is the absence of a supporting force, not the absence of gravity."
+    }
+  ],
+  "diagrams": {}
+}

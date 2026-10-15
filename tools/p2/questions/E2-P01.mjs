@@ -34,7 +34,7 @@ export default {
     };
   },
   stem: '<p>In an experiment on the photoelectric effect, monochromatic light falls on a metal surface. For each frequency $f$ of the light, the stopping voltage $V_{\\text{s}}$ is measured: the smallest potential difference that stops all the emitted electrons from reaching the collecting electrode. The graph shows the results.</p>',
-  diagram: { file: 'questions/diagrams/p2-e2-stopping.svg', alt: 'Graph of stopping voltage in volts against frequency in units of 10 to the 14 hertz, from 4 to 11. Five measured points lie on a straight line that meets the frequency axis at 5.5 and rises to 2.0 volts at 10.5 and 2.2 volts at 11.' },
+  diagram: { file: 'questions/diagrams/p2-e2-stopping.svg', large: true, alt: 'Graph of stopping voltage in volts against frequency in units of 10 to the 14 hertz, from 4 to 11. Five measured points lie on a straight line that meets the frequency axis at 5.5 and rises to 2.0 volts at 10.5 and 2.2 volts at 11.' },
   parts: [
     {
       label: 'a', command: 'Outline', marks: 2, syllabus: ['E.2.H1', 'E.2.H2'],

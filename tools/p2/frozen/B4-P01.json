@@ -1,0 +1,238 @@
+{
+  "question": {
+    "id": "B4-P01",
+    "theme": "B",
+    "topic": "B.4",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A fixed mass of a monatomic ideal gas is taken round the cycle A → B → C → A shown on the graph.</p><ul><li>A → B: the gas expands at a constant pressure of $2.0 \\times 10^{5}$ Pa from $1.0 \\times 10^{-3}$ $\\text{m}^{3}$ to $2.0 \\times 10^{-3}$ $\\text{m}^{3}$.</li><li>B → C: the gas cools at constant volume.</li><li>C → A: the gas is compressed adiabatically back to A.</li></ul>",
+    "diagram": "questions/diagrams/p2-b4-cycle.svg",
+    "diagramAlt": "Graph of pressure in units of 10 to the power 5 pascal against volume in units of 10 to the power minus 3 cubic metres. A horizontal line from A at volume 1.0 to B at volume 2.0, both at pressure 2.0. A vertical line down from B to C at volume 2.0 and pressure about 0.63. A curve rising steeply from C back to A.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Show that the pressure at C is about $6.3 \\times 10^{4}$ Pa.",
+        "marks": 2,
+        "markscheme": [
+          "$p_{\\text{C}} V_{\\text{C}}^{5/3} = p_{\\text{A}} V_{\\text{A}}^{5/3}$ ✓",
+          "$p_{\\text{C}} = 2.0 \\times 10^{5} \\times \\left(\\dfrac{1.0 \\times 10^{-3}}{2.0 \\times 10^{-3}}\\right)^{5/3} = 6.30 \\times 10^{4}\\ \\text{Pa}$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Determine the thermal energy transferred to the gas during A → B.",
+        "marks": 3,
+        "markscheme": [
+          "$W = p\\Delta V = 200\\ \\text{J}$ ✓",
+          "$\\Delta U = \\tfrac{3}{2}p\\Delta V$ (from $\\tfrac{3}{2}nR\\Delta T$ and $pV = nRT$) $= 300\\ \\text{J}$ ✓",
+          "$Q = \\Delta U + W = 500\\ \\text{J}$ ✓"
+        ],
+        "numeric": {
+          "answer": 500,
+          "unit": "J",
+          "range": [
+            485,
+            515
+          ],
+          "mistakes": [
+            {
+              "value": 200,
+              "feedback": "That is only the work done by the gas. The internal energy of the gas also increases: Q = ΔU + W."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Determine the work done on the gas during C → A.",
+        "marks": 2,
+        "markscheme": [
+          "$Q = 0$, so the work done on the gas equals the increase in internal energy ✓",
+          "$\\Delta U = \\tfrac{3}{2}(p_{\\text{A}}V_{\\text{A}} - p_{\\text{C}}V_{\\text{C}}) = 111\\ \\text{J}$ ✓",
+          "Allow ECF from (a); accept 106 to 116 J"
+        ],
+        "numeric": {
+          "answer": 111.012,
+          "unit": "J",
+          "range": [
+            106,
+            116
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "Calculate the efficiency of this cycle.",
+        "marks": 2,
+        "markscheme": [
+          "net work $= 200 - 111 = 89.0\\ \\text{J}$ (no work during B → C) ✓",
+          "$\\eta = \\dfrac{89.0}{500} = 0.18$ ✓",
+          "Allow ECF from (b) and (c); accept 0.167 to 0.189"
+        ],
+        "numeric": {
+          "answer": 0.177976,
+          "range": [
+            0.167,
+            0.189
+          ],
+          "mistakes": [
+            {
+              "value": 0.4,
+              "feedback": "Efficiency uses the NET work done by the gas over the whole cycle: subtract the work done on the gas during C → A."
+            }
+          ]
+        }
+      },
+      {
+        "label": "e",
+        "question": "Explain why the entropy of the gas does not change during C → A.",
+        "marks": 2,
+        "markscheme": [
+          "No thermal energy is transferred to or from the gas during an adiabatic change ($Q = 0$) ✓",
+          "so $\\Delta S = \\dfrac{\\Delta Q}{T} = 0$ (the change is treated as reversible) ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "B.4"
+  ],
+  "given": {
+    "pA": {
+      "value": 200000,
+      "sf": 2,
+      "unit": "Pa",
+      "range": [
+        50000,
+        1000000
+      ],
+      "what": "pressure at A and B"
+    },
+    "VA": {
+      "value": 0.001,
+      "sf": 2,
+      "unit": "m^3",
+      "range": [
+        0.0001,
+        0.01
+      ],
+      "what": "volume at A"
+    },
+    "VB": {
+      "value": 0.002,
+      "sf": 2,
+      "unit": "m^3",
+      "range": [
+        0.0002,
+        0.02
+      ],
+      "what": "volume at B and C"
+    }
+  },
+  "results": {
+    "pC": {
+      "value": 62996.05249474366,
+      "unit": "Pa",
+      "sf": 3
+    },
+    "W_AB": {
+      "value": 200,
+      "unit": "J",
+      "sf": 3
+    },
+    "dU_AB": {
+      "value": 300,
+      "unit": "J",
+      "sf": 3
+    },
+    "Q_AB": {
+      "value": 500,
+      "unit": "J",
+      "sf": 3
+    },
+    "W_onCA": {
+      "value": 111.01184251576902,
+      "unit": "J",
+      "sf": 3
+    },
+    "Wnet": {
+      "value": 88.98815748423098,
+      "unit": "J",
+      "sf": 3
+    },
+    "eff": {
+      "value": 0.17797631496846197,
+      "unit": "",
+      "sf": 2
+    },
+    "wrong_Q_AB": {
+      "value": 200,
+      "unit": "J",
+      "sf": 3
+    },
+    "wrong_eff": {
+      "value": 0.4,
+      "unit": "",
+      "sf": 2
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Show that",
+      "syllabus": [
+        "B.4.H8"
+      ],
+      "examinerNote": "The adiabatic equation from the data booklet, applied between C and A (V_C = V_B)."
+    },
+    {
+      "label": "b",
+      "command": "Determine",
+      "syllabus": [
+        "B.4.H1",
+        "B.4.H2",
+        "B.4.H3"
+      ],
+      "examinerNote": "For a monatomic ideal gas ΔU = 3/2 Δ(pV); at constant pressure that is 3/2 pΔV. No amount of gas is needed."
+    },
+    {
+      "label": "c",
+      "command": "Determine",
+      "syllabus": [
+        "B.4.H1",
+        "B.4.H3",
+        "B.4.H7"
+      ],
+      "examinerNote": "Students cannot integrate under the adiabat, but the first law with Q = 0 gives the work. Using the rounded p_C from (a) gives about the same answer.",
+      "dependsOn": [
+        "a"
+      ]
+    },
+    {
+      "label": "d",
+      "command": "Calculate",
+      "syllabus": [
+        "B.4.H9"
+      ],
+      "examinerNote": "Thermal energy enters only during A → B (B → C rejects energy, C → A has Q = 0).",
+      "dependsOn": [
+        "b",
+        "c"
+      ]
+    },
+    {
+      "label": "e",
+      "command": "Explain",
+      "syllabus": [
+        "B.4.H4",
+        "B.4.H7"
+      ],
+      "examinerNote": "Entropy change from ΔS = ΔQ/T; an ideal adiabatic compression is reversible."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-b4-cycle.svg": "cf91cf9526364e7fa479e621114699a0399cf87498f30a64dda1f4b8bb181197"
+  }
+}

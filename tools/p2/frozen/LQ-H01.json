@@ -1,0 +1,457 @@
+{
+  "question": {
+    "id": "LQ-H01",
+    "theme": "",
+    "topic": "Linking",
+    "topics": [
+      "D.3",
+      "A.2",
+      "A.3",
+      "A.5",
+      "E.3",
+      "B.1",
+      "B.5"
+    ],
+    "paper": "2L",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A hospital cyclotron accelerates protons, which move in a circle in a uniform magnetic field of strength 1.5 T. The protons spiral outwards as they gain energy and leave the cyclotron when the radius of their path is 0.40 m. They then strike a target and produce the radioactive isotope fluorine-18, which is used in medical scans.</p>",
+    "parts": [
+      {
+        "label": "a(i)",
+        "question": "Show that the speed of the protons when they leave the cyclotron is about $5.7 \\times 10^{7}$ $\\text{m s}^{-1}$.",
+        "marks": 2,
+        "markscheme": [
+          "$qvB = \\dfrac{mv^2}{r}$ (magnetic force provides the centripetal force) ✓",
+          "$v = \\dfrac{qBr}{m} = \\dfrac{1.60 \\times 10^{-19} \\times 1.5 \\times 0.40}{1.673 \\times 10^{-27}} = 5.74 \\times 10^{7}\\ \\text{m s}^{-1}$ ✓"
+        ]
+      },
+      {
+        "label": "a(ii)",
+        "question": "Explain why the magnetic field does not change the kinetic energy of the protons.",
+        "marks": 2,
+        "markscheme": [
+          "the magnetic force is always perpendicular to the velocity (direction of motion) ✓",
+          "so it does no work on the protons ($W = Fs\\cos 90^{\\circ} = 0$): it changes their direction but not their speed ✓"
+        ]
+      },
+      {
+        "label": "a(iii)",
+        "question": "Calculate the time taken by a proton to complete one circle in the magnetic field.",
+        "marks": 2,
+        "markscheme": [
+          "$T = \\dfrac{2\\pi r}{v} = \\dfrac{2\\pi m}{qB}$ ✓",
+          "$T = 4.38 \\times 10^{-8}\\ \\text{s}$ ✓",
+          "Award both marks for $2\\pi r/v$ with the values from (a)(i)."
+        ],
+        "numeric": {
+          "answer": 4.3799e-8,
+          "unit": "s",
+          "range": [
+            4.24e-8,
+            4.52e-8
+          ]
+        }
+      },
+      {
+        "label": "a(iv)",
+        "question": "Calculate, in MeV, the kinetic energy of a proton when it leaves the cyclotron.",
+        "marks": 2,
+        "markscheme": [
+          "$E_{\\text{k}} = \\tfrac{1}{2}mv^2 = 2.75 \\times 10^{-12}\\ \\text{J}$ ✓",
+          "$E_{\\text{k}} = 17.2\\ \\text{MeV}$; allow ECF from (a)(i) ✓"
+        ],
+        "numeric": {
+          "answer": 17.2146,
+          "unit": "MeV",
+          "range": [
+            16.5,
+            18
+          ]
+        }
+      },
+      {
+        "label": "b(i)",
+        "question": "Calculate the Lorentz factor $\\gamma$ for the protons when they leave the cyclotron.",
+        "marks": 1,
+        "markscheme": [
+          "$\\dfrac{v}{c} = 0.19$, so $\\gamma = \\dfrac{1}{\\sqrt{1 - v^2/c^2}} = 1.019$; allow ECF from (a)(i) ✓"
+        ],
+        "numeric": {
+          "answer": 1.01881,
+          "tolerance": 0.002
+        }
+      },
+      {
+        "label": "b(ii)",
+        "question": "Comment on whether it was reasonable to use $E_{\\text{k}} = \\tfrac{1}{2}mv^2$ in (a)(iv).",
+        "marks": 2,
+        "markscheme": [
+          "$\\gamma$ is only about 2 % greater than 1 ✓",
+          "so relativistic effects change the energy by only about this amount: the non-relativistic equation is a reasonable approximation (for this answer to 2 significant figures) ✓"
+        ]
+      },
+      {
+        "label": "c(i)",
+        "question": "The half-life of fluorine-18 is 110 min. Calculate the decay constant of fluorine-18, in $\\text{s}^{-1}$.",
+        "marks": 1,
+        "markscheme": [
+          "$\\lambda = \\dfrac{\\ln 2}{110 \\times 60} = 1.05 \\times 10^{-4}\\ \\text{s}^{-1}$ ✓"
+        ],
+        "numeric": {
+          "answer": 0.000105022,
+          "unit": "$\\text{s}^{-1}$",
+          "range": [
+            0.000101,
+            0.000109
+          ],
+          "mistakes": [
+            {
+              "value": 0.00630134,
+              "feedback": "Convert the half-life to seconds before using λ = ln 2 / T½."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c(ii)",
+        "question": "At the end of production the activity of the fluorine-18 is $5.0 \\times 10^{10}$ Bq. It takes 45 min to transport the sample to a hospital. Determine the activity of the sample when it arrives.",
+        "marks": 2,
+        "markscheme": [
+          "$A = A_0 e^{-\\lambda t}$ with $t = 45 \\times 60$ s ✓",
+          "$A = 3.77 \\times 10^{10}\\ \\text{Bq}$; allow ECF from (c)(i) ✓"
+        ],
+        "numeric": {
+          "answer": 37654900000,
+          "unit": "Bq",
+          "range": [
+            36500000000,
+            38800000000
+          ],
+          "mistakes": [
+            {
+              "value": 25000000000,
+              "feedback": "The transport time is less than one half-life, so the activity falls by less than half: use A = A₀e^(−λt)."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c(iii)",
+        "question": "Calculate the number of fluorine-18 nuclei in the sample when it arrives.",
+        "marks": 2,
+        "markscheme": [
+          "$N = \\dfrac{A}{\\lambda}$ ✓",
+          "$N = 3.59 \\times 10^{14}$; allow ECF from (c)(i) and (c)(ii) ✓"
+        ],
+        "numeric": {
+          "answer": 358542000000000,
+          "range": [
+            344000000000000,
+            373000000000000
+          ]
+        }
+      },
+      {
+        "label": "d(i)",
+        "question": "The beam of protons hitting the target is equivalent to a current of 50 $\\mu\\text{A}$. Show that the beam delivers energy to the target at a rate of about 860 W.",
+        "marks": 2,
+        "markscheme": [
+          "number of protons per second $= \\dfrac{I}{e} = \\dfrac{50 \\times 10^{-6}}{1.60 \\times 10^{-19}}$ ✓",
+          "$P = \\dfrac{I}{e} \\times E_{\\text{k}} = 861\\ \\text{W}$ (OR $P = IV$ with $V$ = 17.2 MV) ✓"
+        ]
+      },
+      {
+        "label": "d(ii)",
+        "question": "The target is cooled by water, which warms by 12 K as it flows past. Water has a specific heat capacity of 4200 $\\text{J kg}^{-1}\\text{ K}^{-1}$. Calculate the mass of water that must flow past the target each second.",
+        "marks": 2,
+        "markscheme": [
+          "$P = \\dfrac{m}{t}c\\Delta T$ ✓",
+          "$\\dfrac{m}{t} = 0.0171\\ \\text{kg s}^{-1}$; allow ECF from (d)(i) ✓"
+        ],
+        "numeric": {
+          "answer": 0.017078,
+          "unit": "$\\text{kg s}^{-1}$",
+          "range": [
+            0.0163,
+            0.0178
+          ]
+        }
+      }
+    ]
+  },
+  "type": "linking",
+  "topics": [
+    "D.3",
+    "A.2",
+    "A.3",
+    "A.5",
+    "E.3",
+    "B.1",
+    "B.5"
+  ],
+  "given": {
+    "B": {
+      "value": 1.5,
+      "sf": 2,
+      "unit": "T",
+      "range": [
+        0.5,
+        3
+      ],
+      "what": "magnetic field strength in the cyclotron"
+    },
+    "r": {
+      "value": 0.4,
+      "sf": 2,
+      "unit": "m",
+      "range": [
+        0.2,
+        1
+      ],
+      "what": "radius of the protons' path when they leave"
+    },
+    "Th": {
+      "value": 110,
+      "sf": 3,
+      "unit": "min",
+      "range": [
+        109,
+        110
+      ],
+      "what": "half-life of fluorine-18"
+    },
+    "A0": {
+      "value": 50000000000,
+      "sf": 2,
+      "unit": "Bq",
+      "range": [
+        1000000000,
+        1000000000000
+      ],
+      "what": "activity of the fluorine-18 at the end of production"
+    },
+    "tt": {
+      "value": 45,
+      "sf": 2,
+      "unit": "min",
+      "range": [
+        10,
+        240
+      ],
+      "what": "time taken to transport the sample to the hospital"
+    },
+    "Ib": {
+      "value": 50,
+      "sf": 2,
+      "unit": "µA",
+      "range": [
+        5,
+        200
+      ],
+      "what": "beam current hitting the target"
+    },
+    "dTw": {
+      "value": 12,
+      "sf": 2,
+      "unit": "K",
+      "range": [
+        2,
+        40
+      ],
+      "what": "temperature rise of the cooling water"
+    },
+    "cw": {
+      "value": 4200,
+      "sf": 2,
+      "unit": "J kg^-1 K^-1",
+      "range": [
+        4100,
+        4300
+      ],
+      "what": "specific heat capacity of water"
+    }
+  },
+  "results": {
+    "speed": {
+      "value": 57381948.59533771,
+      "unit": "m s^-1",
+      "sf": 3
+    },
+    "T": {
+      "value": 4.3799037578797706e-8,
+      "unit": "s",
+      "sf": 3
+    },
+    "Ek_J": {
+      "value": 2.7543335325762103e-12,
+      "unit": "J",
+      "sf": 3
+    },
+    "Ek": {
+      "value": 17.214584578601315,
+      "unit": "MeV",
+      "sf": 3
+    },
+    "beta": {
+      "value": 0.19127316198445904,
+      "unit": "",
+      "sf": 2
+    },
+    "gamma": {
+      "value": 1.0188104556637503,
+      "unit": "",
+      "sf": 3
+    },
+    "lam": {
+      "value": 0.0001050223000848402,
+      "unit": "s^-1",
+      "sf": 3
+    },
+    "A": {
+      "value": 37654888829.26529,
+      "unit": "Bq",
+      "sf": 3
+    },
+    "N": {
+      "value": 358541841102761.3,
+      "unit": "",
+      "sf": 3
+    },
+    "P": {
+      "value": 860.7292289300657,
+      "unit": "W",
+      "sf": 3
+    },
+    "flow": {
+      "value": 0.017077960891469558,
+      "unit": "kg s^-1",
+      "sf": 3
+    },
+    "wrong_lam": {
+      "value": 0.006301338005090412,
+      "unit": "s^-1",
+      "sf": 3
+    },
+    "wrong_A": {
+      "value": 25000000000,
+      "unit": "Bq",
+      "sf": 3
+    }
+  },
+  "parts": [
+    {
+      "label": "a(i)",
+      "command": "Show that",
+      "syllabus": [
+        "D.3.2",
+        "D.3.4",
+        "A.2.13"
+      ],
+      "examinerNote": "Equate the magnetic force to the centripetal force. Proton mass and charge from the data booklet."
+    },
+    {
+      "label": "a(ii)",
+      "command": "Explain",
+      "syllabus": [
+        "D.3.2",
+        "A.3.2"
+      ],
+      "examinerNote": "The energy is supplied by the electric field in the gap between the electrodes, not by the magnetic field."
+    },
+    {
+      "label": "a(iii)",
+      "command": "Calculate",
+      "syllabus": [
+        "D.3.2",
+        "A.2.14"
+      ],
+      "examinerNote": "The period does not depend on the radius or speed (for non-relativistic speeds), which is what makes a cyclotron work with a fixed-frequency electric field."
+    },
+    {
+      "label": "a(iv)",
+      "command": "Calculate",
+      "syllabus": [
+        "A.3.5"
+      ],
+      "examinerNote": "Convert joules to MeV by dividing by e × 10⁶. Using the rounded speed gives about 17 MeV.",
+      "dependsOn": [
+        "a(i)"
+      ]
+    },
+    {
+      "label": "b(i)",
+      "command": "Calculate",
+      "syllabus": [
+        "A.5.H4"
+      ],
+      "examinerNote": "A value just above 1; the answer must be given to at least 3 significant figures to show the difference from 1.",
+      "dependsOn": [
+        "a(i)"
+      ]
+    },
+    {
+      "label": "b(ii)",
+      "command": "Comment",
+      "syllabus": [
+        "A.5.H4",
+        "A.3.5"
+      ],
+      "examinerNote": "At about one-fifth of the speed of light the relativistic correction is a few per cent. Award the second mark for a conclusion consistent with the student's γ."
+    },
+    {
+      "label": "c(i)",
+      "command": "Calculate",
+      "syllabus": [
+        "E.3.H9"
+      ],
+      "examinerNote": "The half-life must be in seconds for λ in s⁻¹."
+    },
+    {
+      "label": "c(ii)",
+      "command": "Determine",
+      "syllabus": [
+        "E.3.H6",
+        "E.3.H8"
+      ],
+      "examinerNote": "The decay law for a time that is not a whole number of half-lives (HL).",
+      "dependsOn": [
+        "c(i)"
+      ]
+    },
+    {
+      "label": "c(iii)",
+      "command": "Calculate",
+      "syllabus": [
+        "E.3.H8"
+      ],
+      "examinerNote": "Activity A = λN.",
+      "dependsOn": [
+        "c(i)",
+        "c(ii)"
+      ]
+    },
+    {
+      "label": "d(i)",
+      "command": "Show that",
+      "syllabus": [
+        "B.5.3",
+        "A.3.7"
+      ],
+      "examinerNote": "Each proton delivers its kinetic energy; I/e protons arrive per second. Equivalent to P = IV with V numerically equal to the energy in MeV (in MV)."
+    },
+    {
+      "label": "d(ii)",
+      "command": "Calculate",
+      "syllabus": [
+        "B.1.6",
+        "A.3.7"
+      ],
+      "examinerNote": "All the beam power is removed by the water. Using the rounded power from (d)(i) gives a value inside the range.",
+      "dependsOn": [
+        "d(i)"
+      ]
+    }
+  ],
+  "diagrams": {}
+}

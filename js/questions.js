@@ -361,7 +361,7 @@
         <span class="q-status ${status}">${statusLabel(q)}</span>
       </div>
       <div class="stem">${q.stem}</div>
-      ${q.diagram ? `<figure><img src="${q.diagram}" alt="${escapeAttr(q.diagramAlt || 'Diagram for this question')}"></figure>` : ''}
+      ${q.diagram ? `<figure${q.diagramLarge ? ' class="large"' : ''}><img src="${q.diagram}" alt="${escapeAttr(q.diagramAlt || 'Diagram for this question')}"></figure>` : ''}
       ${dataBlockHtml(q)}
       <div class="answer-area"></div>`;
 

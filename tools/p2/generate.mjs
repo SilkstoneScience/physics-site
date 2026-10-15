@@ -185,7 +185,7 @@ export function buildQuestion(def) {
     difficulty: def.difficulty,
     level: def.level,
     stem: fill(def.stem, ctx, 'stem'),
-    ...(def.diagram ? { diagram: def.diagram.file, diagramAlt: def.diagram.alt } : {}),
+    ...(def.diagram ? { diagram: def.diagram.file, diagramAlt: def.diagram.alt, ...(def.diagram.large ? { diagramLarge: true } : {}) } : {}),
     parts: (def.parts || []).map((pt) => ({
       label: pt.label,
       question: fill(pt.question, ctx, `(${pt.label}) question`),
