@@ -15,7 +15,7 @@ const UNITS = {
   A: [1, D(0, 0, 0, 1)], mA: [1e-3, D(0, 0, 0, 1)], 'µA': [1e-6, D(0, 0, 0, 1)],
   K: [1, D(0, 0, 0, 0, 1)], '°C': [1, D(0, 0, 0, 0, 1)], 'Δ°C': [1, D(0, 0, 0, 0, 1)],
   mol: [1, D(0, 0, 0, 0, 0, 1)],
-  rad: [1, D()], '°': [Math.PI / 180, D()], sr: [1, D()],
+  rad: [1, D()], '°': [Math.PI / 180, D()], sr: [1, D()], rev: [2 * Math.PI, D()], // rev min^-1 converts to rad s^-1
   N: [1, D(1, 1, -2)], kN: [1e3, D(1, 1, -2)], MN: [1e6, D(1, 1, -2)], mN: [1e-3, D(1, 1, -2)],
   J: [1, ENERGY], kJ: [1e3, ENERGY], MJ: [1e6, ENERGY], GJ: [1e9, ENERGY], eV: [1.60e-19, ENERGY], keV: [1.60e-16, ENERGY], MeV: [1.60e-13, ENERGY], kWh: [3.60e6, ENERGY],
   W: [1, POWER], mW: [1e-3, POWER], kW: [1e3, POWER], MW: [1e6, POWER], GW: [1e9, POWER],
@@ -70,6 +70,12 @@ function unitTex(factors) {
   let out = '';
   let open = false;
   factors.forEach(([u, p], i) => {
+    if (u.startsWith('µ')) { // micro: Greek mu followed by upright letters, e.g. µA → \mu\text{A}
+      if (open) { out += '}'; open = false; }
+      out += `${i ? '\\,' : ''}\\mu\\text{${u.slice(1)}}`;
+      if (p !== 1) out += `^{${p}}`;
+      return;
+    }
     const name = u === 'Ω' ? '\\Omega' : u === 'kΩ' ? 'k\\Omega' : u === 'µm' ? '\\mu m' : u === 'µs' ? '\\mu s' : u === 'µA' ? '\\mu A' : u === 'µC' ? '\\mu C' : u === 'µT' ? '\\mu T' : u === 'Δ°C' ? '{}^{\\circ}C' : u;
     const plain = !/\\/.test(name);
     const sep = i ? ' ' : '';

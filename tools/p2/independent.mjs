@@ -93,4 +93,34 @@ export const INDEPENDENT = {
       g: Gc * Ms.value / (rs.value * rs.value),
     };
   },
+  // Cyclotron: r = mv/(qB); period 2πr/v; energy ½mv²; γ from v/c; decay via half-lives elapsed (2^(−t/T½),
+  // equivalent to e^(−λt)); beam power = protons per second × energy; water flow from Q = mcΔT per second.
+  'LQ-H01': ({ B, r, Th, A0, tt, Ib, dTw, cw }) => {
+    const q = 1.60e-19, mp = 1.673e-27, c = 3.00e8;
+    const speed = q * B.value * r.value / mp;
+    const ekJ = 0.5 * mp * speed * speed;
+    const thS = Th.value * 60;
+    const lam = Math.LN2 / thS;
+    const act = A0.value * Math.pow(0.5, (tt.value * 60) / thS);
+    const watts = (Ib.value * 1e-6 / q) * ekJ;
+    return {
+      speed, T: 2 * Math.PI * r.value / speed, Ek_J: ekJ, Ek: ekJ / (q * 1e6), beta: speed / c,
+      gamma: 1 / Math.sqrt(1 - (speed / c) ** 2), lam, A: act, N: act / lam, P: watts, flow: watts / (cw.value * dTw.value),
+    };
+  },
+  // Flywheel: run-down from the angular impulse τt = Iω and the work done by friction τΔθ = E; efficiency from
+  // energies; average emf from Faraday's law over a quarter turn; temperature rise from Q = mcΔT.
+  'LQ-H02': ({ M, R, w1, tau, mt, vt, w2, N, A, B, mb, cs }) => {
+    const inertia = M.value * R.value * R.value / 2;
+    const om1 = w1.value * 2 * Math.PI / 60, om2 = w2.value * 2 * Math.PI / 60;
+    const ke = (om) => inertia * om * om / 2;
+    const t = inertia * om1 / tau.value;
+    const theta = ke(om1) / tau.value;
+    const revPerSec = w1.value / 60;
+    return {
+      I: inertia, w1SI: om1, E1: ke(om1), alpha: tau.value / inertia, tstop: t, revs: theta / (2 * Math.PI),
+      dE: ke(om1) - ke(om2), Etram: mt.value * vt.value ** 2 / 2, eff: (mt.value * vt.value ** 2 / 2) / (ke(om1) - ke(om2)),
+      f: revPerSec, emf: N.value * B.value * A.value / (1 / (4 * revPerSec)), dT: ke(om1) / (mb.value * cs.value),
+    };
+  },
 };

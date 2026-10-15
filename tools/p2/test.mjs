@@ -149,6 +149,7 @@ export async function runTests() {
     // a phrase found in 5 or more papers is stock phrasing and is ignored
     for (let i = 0; i < 5; i++) fs.writeFileSync(path.join(cache, 'past-papers-2025', `stock-${i}_paper_2.txt`), 'Outline how air resistance would change the horizontal distance travelled by it.');
     process.env.DP_REFERENCE_CACHE = cache;
+    check('words(): ECF clauses (a mark-scheme convention) are ignored', words('x ✓; allow ECF from (a)(i) and (a)(ii)').join(' ') === 'x');
     check('words(): numbers become # and MathJax is removed', words('A car of mass 1600 kg, $v = 2$').join(' ') === 'a car of mass #' && words('at 6.0 m s-1 from').join(' ') === words('at 8.5 $\\text{m s}^{-1}$ from').join(' '));
     const o1 = checkOriginality(GOOD_SHORT, build([GOOD_SHORT]).preview[0], ROOT);
     check('originality: an 8-word run copied from an IB paper is caught', o1.ran && o1.problems.some((p) => /stone is thrown horizontally at # from the/.test(p.run)), JSON.stringify(o1.problems));

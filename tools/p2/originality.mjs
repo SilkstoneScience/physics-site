@@ -32,6 +32,7 @@ const UNIT_WORDS = new Set(['m', 's', 'kg', 'g', 'n', 'j', 'w', 'v', 'k', 'c', '
 export function words(text) {
   const raw = String(text)
     .replace(/<[^>]*>/g, ' ')
+    .replace(/\b(allow|award)\s+ECF\s+from[^;.✓]*/gi, ' ') // mark-scheme convention, not content
     .replace(/\$[^$]*\$/g, ' # ')
     .replace(/&[a-z]+;/g, ' ')
     .replace(/[‘’]/g, '\'')
