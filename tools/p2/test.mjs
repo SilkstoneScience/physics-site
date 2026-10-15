@@ -64,7 +64,7 @@ export async function runTests() {
     check(`syllabus covers ${id}`, !!UNDERSTANDINGS[id]);
     if (UNDERSTANDINGS[id]) check(`HL-only topic ${id} has only AHL items`, !t.hl || !(UNDERSTANDINGS[id].sl || []).length);
   }
-  check('syllabus IDs look right', [...SYLLABUS_IDS.keys()].every((k) => /^([A-E]\.\d|T|NOS)\.H?\d+$/.test(k)));
+  check('syllabus IDs look right', [...SYLLABUS_IDS.keys()].every((k) => /^([A-E]\.\d|T|NOS)\.[HY]?\d+$/.test(k)));
   check('about 250 understandings listed', SYLLABUS_IDS.size > 200, String(SYLLABUS_IDS.size));
   const caught = (txt) => EXCLUDED.filter((x) => x.re.test(txt)).map((x) => x.id);
   for (const bad of ['a step-up transformer', 'the rms current', 'quarks in a proton', 'a capacitor discharges', 'polarised light', 'the fundamental frequency', 'the first overtone', 'Hubble constant', 'the uncertainty principle', 'a wind turbine', 'drift velocity of electrons', 'Malus\'s law']) check(`excluded: "${bad}" is caught`, caught(bad).length > 0);
@@ -99,6 +99,10 @@ export async function runTests() {
   let d;
   d = clone(GOOD_SHORT); d.parts[0].markscheme.pop(); expect('marking points must equal the marks', d, 'markscheme');
   d = clone(GOOD_SHORT); d.parts[2].syllabus = ['A.1.99']; expect('unknown syllabus ID', d, 'syllabus');
+  d = clone(GOOD_SHORT); d.topics = ['A.1', 'C.2']; d.parts[2].syllabus = ['C.2.Y1']; expect('2028 content needs y2028: true', d, 'y2028');
+  d = clone(GOOD_SHORT); d.y2028 = true; expect('y2028: true needs some 2028 content', d, 'y2028');
+  d = clone(GOOD_SHORT); d.topics = ['A.1', 'C.2']; d.parts[2].syllabus = ['C.2.Y1']; d.y2028 = true;
+  check('a 2028 question passes and is tagged y2028 on the site', !codesFor(d).length && build([d]).preview[0].y2028 === true, codesFor(d).join());
   d = clone(GOOD_SHORT); d.topics = ['A.1', 'A.2']; d.parts[2].syllabus = ['A.2.H1']; expect('AHL content in an SL question', d, 'level');
   d = clone(GOOD_SHORT); d.parts[2].syllabus = ['C.2.1']; expect('a syllabus ID outside the question\'s topics', d, 'syllabus');
   d = clone(GOOD_SHORT); d.stem += '<p>It is lit by a lamp on a transformer.</p>'; expect('a term that is not on the 2025 syllabus', d, 'excluded');
@@ -139,6 +143,8 @@ export async function runTests() {
   d = clone(GOOD_LINKING); d.parts.find((pt) => pt.label === 'e(iv)').markscheme.shift(); expect('"any n from" needs its note line', d, 'markscheme');
   d = clone(GOOD_LINKING); d.id = 'LQ-H90'; expect('a linking id matches its level', d, 'meta', { independent: { 'LQ-H90': GOOD_LINKING_INDEPENDENT } });
   d = clone(GOOD_SHORT); d.parts[1].question += ' Give your answer in m s^-1.'; expect('units with negative powers outside MathJax', d, 'units');
+  d = clone(GOOD_SHORT); d.stem += '<p>A helium-4 nucleus and a carbon-12 nucleus.</p>'; d.literals = { 12: 'test' };
+  check('nuclide names such as helium-4 are not mistaken for units', !codesFor(d).includes('units'), codesFor(d).join());
 
   // ----- Originality (a pretend reference cache, so this also runs on GitHub) -----
   const cache = fs.mkdtempSync(path.join(os.tmpdir(), 'p2-orig-'));

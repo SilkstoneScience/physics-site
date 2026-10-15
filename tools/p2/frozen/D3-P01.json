@@ -1,0 +1,183 @@
+{
+  "question": {
+    "id": "D3-P01",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>Two long straight parallel wires, P and Q, are 6.0 cm apart in air. P carries a current of 15 A and Q carries a current of 5.0 A in the same direction.</p>",
+    "diagram": "questions/diagrams/p2-d3-wires.svg",
+    "diagramAlt": "Two long vertical wires, P on the left and Q on the right, 6.0 cm apart. Arrows show that both currents flow upwards: 15 A in P and 5.0 A in Q.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the magnetic field strength due to P at the position of Q.",
+        "marks": 2,
+        "markscheme": [
+          "$B = \\dfrac{\\mu_0 I}{2\\pi r}$ with $r$ in metres ✓",
+          "$B = \\dfrac{4\\pi \\times 10^{-7} \\times 15}{2\\pi \\times 6.0 \\times 10^{-2}} = 5.0 \\times 10^{-5}\\ \\text{T}$ ✓"
+        ],
+        "numeric": {
+          "answer": 0.00005,
+          "unit": "T",
+          "range": [
+            0.0000485,
+            0.0000516
+          ],
+          "mistakes": [
+            {
+              "value": 5e-7,
+              "feedback": "Convert the distance to metres: 6.0 cm = 0.060 m."
+            }
+          ]
+        }
+      },
+      {
+        "label": "b",
+        "question": "Determine the force on each metre of wire Q.",
+        "marks": 2,
+        "markscheme": [
+          "$F = BIL$, so $\\dfrac{F}{L} = BI_{\\text{Q}}$ (OR $\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1 I_2}{2\\pi r}$) ✓",
+          "$\\dfrac{F}{L} = 5.0 \\times 10^{-5} \\times 5.0 = 2.5 \\times 10^{-4}\\ \\text{N m}^{-1}$; allow ECF from (a) ✓"
+        ],
+        "numeric": {
+          "answer": 0.00025,
+          "unit": "$\\text{N m}^{-1}$",
+          "range": [
+            0.000242,
+            0.000258
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Outline how the force on P compares with the force on Q, in both magnitude and direction.",
+        "marks": 2,
+        "markscheme": [
+          "the forces are equal in magnitude, even though the currents are different (Newton's third law) ✓",
+          "they are in opposite directions: each wire is attracted towards the other, because the currents are in the same direction ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "At one point on the line between P and Q, the resultant magnetic field due to the two wires is zero. Determine the distance of this point from P.",
+        "marks": 2,
+        "markscheme": [
+          "between the wires the two fields are in opposite directions, so $\\dfrac{\\mu_0 I_{\\text{P}}}{2\\pi x} = \\dfrac{\\mu_0 I_{\\text{Q}}}{2\\pi (d - x)}$ ✓",
+          "$\\dfrac{15}{x} = \\dfrac{5.0}{6.0 - x}$, so $x = 4.5\\ \\text{cm}$ from P ✓"
+        ],
+        "numeric": {
+          "answer": 4.5,
+          "unit": "cm",
+          "range": [
+            4.36,
+            4.64
+          ]
+        }
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "D.3",
+    "A.2"
+  ],
+  "given": {
+    "IP": {
+      "value": 15,
+      "sf": 2,
+      "unit": "A",
+      "range": [
+        1,
+        50
+      ],
+      "what": "current in wire P"
+    },
+    "IQ": {
+      "value": 5,
+      "sf": 2,
+      "unit": "A",
+      "range": [
+        1,
+        50
+      ],
+      "what": "current in wire Q (same direction as P)"
+    },
+    "d": {
+      "value": 6,
+      "sf": 2,
+      "unit": "cm",
+      "range": [
+        1,
+        20
+      ],
+      "what": "distance between the wires"
+    }
+  },
+  "results": {
+    "B": {
+      "value": 0.00005,
+      "unit": "T",
+      "sf": 2
+    },
+    "FL": {
+      "value": 0.00025,
+      "unit": "N m^-1",
+      "sf": 2
+    },
+    "x0": {
+      "value": 4.5,
+      "unit": "cm",
+      "sf": 2
+    },
+    "wrong_B": {
+      "value": 5e-7,
+      "unit": "T",
+      "sf": 2
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Calculate",
+      "syllabus": [
+        "D.3.Y1"
+      ],
+      "examinerNote": "The new data-booklet equation for the field of a long straight wire."
+    },
+    {
+      "label": "b",
+      "command": "Determine",
+      "syllabus": [
+        "D.3.5",
+        "D.3.6"
+      ],
+      "examinerNote": "The field of P is perpendicular to Q, so sin θ = 1. Both routes give the same answer.",
+      "dependsOn": [
+        "a"
+      ]
+    },
+    {
+      "label": "c",
+      "command": "Outline",
+      "syllabus": [
+        "D.3.6",
+        "A.2.1"
+      ],
+      "examinerNote": "A common mistake is to think the wire with the larger current feels the larger force."
+    },
+    {
+      "label": "d",
+      "command": "Determine",
+      "syllabus": [
+        "D.3.Y1"
+      ],
+      "examinerNote": "The point is nearer the wire with the smaller current. With B ∝ I/r, the distances are in the ratio of the currents."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-d3-wires.svg": "e27424602cff501de4217a99dc3eeb0a83406da133517e67a41f075fa56bf3b4"
+  }
+}

@@ -123,4 +123,43 @@ export const INDEPENDENT = {
       f: revPerSec, emf: N.value * B.value * A.value / (1 / (4 * revPerSec)), dT: ke(om1) / (mb.value * cs.value),
     };
   },
+  // Scooter, v = vmax(1 − e^(−t/τ)): the distance by numerical integration (Simpson's rule), not the closed form.
+  'A1-P02': ({ vmax, tau, t8 }) => {
+    const vel = (t) => vmax.value * (1 - Math.exp(-t / tau.value));
+    const n = 1000, h = t8.value / n;
+    let s = vel(0) + vel(t8.value);
+    for (let i = 1; i < n; i++) s += (i % 2 ? 4 : 2) * vel(i * h);
+    return { v8: vel(t8.value), dist: s * h / 3, aAvg: vel(t8.value) / t8.value, a0: vmax.value / tau.value };
+  },
+  // Helium: T from ½m v² = (3/2)kT; P = ⅓ρv².
+  'B3-P01': ({ m, vr, rho }) => {
+    const vSI = vr.value * 1000;
+    return { T: (0.5 * m.value * vSI * vSI) / (1.5 * 1.38e-23), P: rho.value * vSI * vSI / 3 };
+  },
+  // Closed pipe: allowed wavelengths 4L/n for odd n; open pipe 2L/n.
+  'C4-P01': ({ L, v }) => {
+    const closed = (n) => v.value / (4 * L.value / n);
+    return { lam1: 4 * L.value, f1: closed(1), f3: closed(3), f5: closed(5), fOpen: v.value / (2 * L.value) };
+  },
+  // Kepler: M from GM = ω²r³ with ω = 2π/T; Rhea's period from GM via T = 2π√(r³/GM).
+  'D1-P02': ({ rT, TT, rR }) => {
+    const day = 24 * 3600, Gc = 6.67e-11;
+    const omega = 2 * Math.PI / (TT.value * day);
+    const GM = omega * omega * rT.value ** 3;
+    return { TTs: TT.value * day, M: GM / Gc, TR: 2 * Math.PI * Math.sqrt(rR.value ** 3 / GM) / day };
+  },
+  // Parallel wires: B = 2 × 10⁻⁷ I / r (μ0/2π); zero field where I_P/x = I_Q/(d − x), found by bisection.
+  'D3-P01': ({ IP, IQ, d }) => {
+    const r = d.value / 100;
+    const field = 2e-7 * IP.value / r;
+    let lo = 0.0001, hi = d.value - 0.0001;
+    for (let i = 0; i < 200; i++) { const mid = (lo + hi) / 2; if (IP.value / mid - IQ.value / (d.value - mid) > 0) lo = mid; else hi = mid; }
+    return { B: field, FL: field * IQ.value, x0: (lo + hi) / 2 };
+  },
+  // Triple alpha: mass defect × 931.5 MeV; reactions per second = L / (energy in J).
+  'E5-P01': ({ mHe, mC, L }) => {
+    const defect = mHe.value * 3 - mC.value;
+    const mev = defect * 931.5;
+    return { dm: defect, E: mev, N: L.value / (mev * 1.60e-13) };
+  },
 };

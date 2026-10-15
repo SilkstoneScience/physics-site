@@ -1,0 +1,190 @@
+{
+  "question": {
+    "id": "C4-P01",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>An organ pipe of length 0.85 m has one closed end; its other end is open. Sound travels through the air inside it at 340 $\\text{m s}^{-1}$.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Show that the wavelength of the first harmonic is about 3.4 m.",
+        "marks": 1,
+        "markscheme": [
+          "a quarter of a wavelength fits the pipe (node at the closed end, antinode at the open end), so $\\lambda = 4L = 4 \\times 0.85 = 3.4\\ \\text{m}$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the frequency of the first harmonic.",
+        "marks": 1,
+        "markscheme": [
+          "$f = \\dfrac{v}{\\lambda} = \\dfrac{340}{3.4} = 100\\ \\text{Hz}$ ✓"
+        ],
+        "numeric": {
+          "answer": 100,
+          "unit": "Hz",
+          "range": [
+            97,
+            103
+          ],
+          "mistakes": [
+            {
+              "value": 200,
+              "feedback": "That is the first harmonic of a pipe open at both ends (λ = 2L). For a pipe closed at one end, λ = 4L."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Determine the frequencies of the next two standing waves that can form in this pipe, and state the harmonic number of each.",
+        "marks": 3,
+        "markscheme": [
+          "next standing waves have $L = \\tfrac{3\\lambda}{4}$ and $L = \\tfrac{5\\lambda}{4}$ ✓",
+          "frequencies 300 Hz and 500 Hz ✓",
+          "these are the third and fifth harmonics (harmonic number = frequency ÷ first-harmonic frequency) ✓",
+          "Allow ECF from (b)."
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Explain why a standing wave of twice the frequency of the first harmonic cannot form in this pipe.",
+        "marks": 2,
+        "markscheme": [
+          "there must always be a node at the closed end and an antinode at the open end ✓",
+          "so the pipe length must be an odd number of quarter-wavelengths; twice the frequency would need L = λ/2 (two quarter-wavelengths), which would put a node at the open end ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "The closed end is opened, so that the pipe is open at both ends. Calculate the new frequency of the first harmonic.",
+        "marks": 1,
+        "markscheme": [
+          "antinodes at both ends, so $\\lambda = 2L$ and $f = \\dfrac{340}{2 \\times 0.85} = 200\\ \\text{Hz}$ ✓"
+        ],
+        "numeric": {
+          "answer": 200,
+          "unit": "Hz",
+          "range": [
+            194,
+            206
+          ]
+        }
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "C.4",
+    "C.2"
+  ],
+  "given": {
+    "L": {
+      "value": 0.85,
+      "sf": 2,
+      "unit": "m",
+      "range": [
+        0.1,
+        5
+      ],
+      "what": "length of the pipe"
+    },
+    "v": {
+      "value": 340,
+      "sf": 2,
+      "unit": "m s^-1",
+      "range": [
+        320,
+        350
+      ],
+      "what": "speed of sound in the air in the pipe"
+    }
+  },
+  "results": {
+    "lam1": {
+      "value": 3.4,
+      "unit": "m",
+      "sf": 2
+    },
+    "f1": {
+      "value": 100,
+      "unit": "Hz",
+      "sf": 3
+    },
+    "f3": {
+      "value": 300,
+      "unit": "Hz",
+      "sf": 3
+    },
+    "f5": {
+      "value": 500,
+      "unit": "Hz",
+      "sf": 3
+    },
+    "fOpen": {
+      "value": 200,
+      "unit": "Hz",
+      "sf": 3
+    },
+    "wrong_f1": {
+      "value": 200,
+      "unit": "Hz",
+      "sf": 3
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Show that",
+      "syllabus": [
+        "C.4.Y1",
+        "C.4.3"
+      ],
+      "examinerNote": "The first harmonic has a displacement node at the closed end and an antinode at the open end: L = λ/4."
+    },
+    {
+      "label": "b",
+      "command": "Calculate",
+      "syllabus": [
+        "C.2.2",
+        "C.4.3"
+      ],
+      "examinerNote": "The wave equation with the wavelength from (a)."
+    },
+    {
+      "label": "c",
+      "command": "Determine",
+      "syllabus": [
+        "C.4.Y1",
+        "C.4.3"
+      ],
+      "examinerNote": "Two values, so no typed answer. The harmonic number is set by the λ–L relationship, so the second standing wave in a closed pipe is the THIRD harmonic (2028 guidance).",
+      "dependsOn": [
+        "b"
+      ]
+    },
+    {
+      "label": "d",
+      "command": "Explain",
+      "syllabus": [
+        "C.4.Y1",
+        "C.4.2"
+      ],
+      "examinerNote": "Only odd harmonics fit the boundary conditions of a pipe closed at one end."
+    },
+    {
+      "label": "e",
+      "command": "Calculate",
+      "syllabus": [
+        "C.4.Y1",
+        "C.4.3"
+      ],
+      "examinerNote": "Open at both ends: half a wavelength fits, so the first-harmonic frequency doubles."
+    }
+  ],
+  "diagrams": {}
+}

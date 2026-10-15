@@ -356,6 +356,7 @@
         <span class="tag">${DIFFICULTY[q.difficulty] || ''}</span>
         ${q.level === 'HL' ? '<span class="tag hl">HL</span>' : ''}
         ${q.level === 'SL_HL' ? '<span class="tag">SL &amp; HL</span>' : ''}
+        ${q.y2028 ? '<span class="tag y2028">New for 2028</span>' : ''}
         ${q.review && q.review.status !== 'APPROVED' ? `<span class="tag preview">Preview only: ${q.review.status}</span>` : ''}
         <span class="tag">${totalMarks} mark${totalMarks === 1 ? '' : 's'}</span>
         <span class="q-status ${status}">${statusLabel(q)}</span>

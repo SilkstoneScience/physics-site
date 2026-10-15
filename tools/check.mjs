@@ -96,6 +96,8 @@ function checkQuestion(q, file) {
   if (!['SL', 'HL', 'SL_HL'].includes(q.level)) err(where, 'level must be "SL", "HL" or "SL_HL"');
   if ((q.paper === '1B') !== (q.level === 'SL_HL')) err(where, 'Paper 1B questions (and only those) have level "SL_HL": Paper 1B is common to SL and HL');
   if (topic && topic.hl && q.level !== 'HL') err(where, `${q.topic} is HL only, so level must be "HL"${q.paper === '1B' ? ' (and Paper 1B can\'t use HL-only topics)' : ''}`);
+  // "y2028": true marks content new in the guide for exams from 2028 (tagged and filterable in the question bank).
+  if (q.y2028 !== undefined && q.y2028 !== true) err(where, '"y2028" must be true (or left out)');
   checkText(where, q.stem, 'stem');
   if (q.diagram) {
     if (!exists(q.diagram)) err(where, `diagram file not found: ${q.diagram}`);

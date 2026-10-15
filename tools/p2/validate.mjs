@@ -54,7 +54,8 @@ export function validateQuestion(def, built, { root, topics, originality, indepe
     if (CONTROL.test(text)) err('mathjax', `${where} contains a control character: a backslash probably needs doubling ("\\\\theta")`);
     if ((text.replace(/\\\$/g, '').match(/\$/g) || []).length % 2) err('mathjax', `${where} has an odd number of $ signs`);
     if (/\[\[|\]\]/.test(text)) err('placeholder', `${where} has a placeholder that wasn't filled`);
-    if (/\^-?\d|\b[A-Za-z]+-[1-4]\b|\bm\/s\b|[⁻¹²³]/.test(plain(text))) err('units', `${where}: write units with negative powers in MathJax (use a placeholder with a unit)`);
+    // unit symbols with a power written as text ("m s-1", "s^-1", "s⁻¹"), but not names like "helium-4"
+    if (/\^-?\d|\b(?:m|s|kg|g|J|W|N|K|mol|Hz|A|V|C|T|Pa|km|cm|mm)-[1-4]\b|\bm\/s\b|[⁻¹²³]/.test(plain(text))) err('units', `${where}: write units with negative powers in MathJax (use a placeholder with a unit)`);
   }
 
   // ---- 2. Structure ----
@@ -96,6 +97,7 @@ export function validateQuestion(def, built, { root, topics, originality, indepe
 
   // ---- 3. Syllabus ----
   const themes = new Set();
+  let uses2028 = false;
   let hlMarks = 0;
   const marksByTopic = {};
   parts.forEach((pt) => {
@@ -105,6 +107,7 @@ export function validateQuestion(def, built, { root, topics, originality, indepe
       const u = SYLLABUS_IDS.get(id);
       if (!u) { err('syllabus', `(${pt.label}) unknown syllabus ID ${id}`); continue; }
       if (u.hl) hl = true;
+      if (u.y2028) uses2028 = true;
       if (/^[A-E]/.test(u.topic)) {
         themes.add(u.topic[0]);
         if (def.topics && !def.topics.includes(u.topic)) err('syllabus', `(${pt.label}) ${id} is from ${u.topic}, which isn't in the question's topics`);
@@ -114,6 +117,8 @@ export function validateQuestion(def, built, { root, topics, originality, indepe
     }
     if (hl) hlMarks += pt.marks;
   });
+  if (uses2028 && def.y2028 !== true) err('y2028', 'a part tests content new for 2028 (a .Y syllabus ID), so the question needs y2028: true');
+  if (def.y2028 === true && !uses2028) err('y2028', 'y2028: true, but no part tests content new for 2028 (a .Y syllabus ID)');
   if (def.level === 'HL' && hlMarks === 0) err('level', 'an HL question must test some additional higher level content');
   if (linking && def.level === 'HL' && hlMarks < 4) err('level', `an HL linking question needs at least 4 marks of AHL content (has ${hlMarks})`);
   if (linking && themes.size < 3) err('structure', `a linking question covers at least three themes (A–E); this one covers ${[...themes].join(', ') || 'none'}`);
