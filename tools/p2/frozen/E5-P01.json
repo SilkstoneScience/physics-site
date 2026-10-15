@@ -1,0 +1,210 @@
+{
+  "question": {
+    "id": "E5-P01",
+    "theme": "E",
+    "topic": "E.5",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>In the core of a red giant, helium nuclei fuse to form carbon:</p><p>$3\\,{}^{4}_{2}\\text{He} \\rightarrow {}^{12}_{6}\\text{C}$</p><p>The mass of a helium-4 atom is 4.002603 u and the mass of a carbon-12 atom is 12.000000 u.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate, in u, the decrease in mass in one reaction.",
+        "marks": 1,
+        "markscheme": [
+          "$\\Delta m = 3 \\times 4.002603 - 12.000000 = 7.81 \\times 10^{-3}$ u ✓"
+        ],
+        "numeric": {
+          "answer": 0.007809,
+          "range": [
+            0.00765,
+            0.00797
+          ]
+        }
+      },
+      {
+        "label": "b",
+        "question": "Show that the energy released in one reaction is about 7.3 MeV.",
+        "marks": 1,
+        "markscheme": [
+          "$E = 7.81 \\times 10^{-3} \\times 931.5 = 7.27\\ \\text{MeV}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "The red giant has a luminosity of $4.0 \\times 10^{29}$ W. Assume that all of this power comes from this reaction. Calculate the number of reactions per second in the core.",
+        "marks": 2,
+        "markscheme": [
+          "luminosity is the power radiated, so reactions per second $= \\dfrac{L}{E}$ with $E$ in joules ✓",
+          "$N = \\dfrac{4.0 \\times 10^{29}}{7.27 \\times 10^{6} \\times 1.60 \\times 10^{-19}} = 3.4 \\times 10^{41}\\ \\text{s}^{-1}$; allow ECF from (b) ✓"
+        ],
+        "numeric": {
+          "answer": 3.43686e+41,
+          "unit": "$\\text{s}^{-1}$",
+          "range": [
+            3.29e+41,
+            3.58e+41
+          ],
+          "mistakes": [
+            {
+              "value": 5.49897e+28,
+              "feedback": "Convert the energy per reaction from MeV to joules (1 MeV = 1.60 × 10⁻¹³ J) before dividing."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "Explain why the fusion of helium requires a higher core temperature than the fusion of hydrogen.",
+        "marks": 2,
+        "markscheme": [
+          "helium nuclei have twice the charge of protons, so the electrostatic repulsion between them is greater ✓",
+          "so the nuclei need greater kinetic energy (a higher temperature) to get close enough for the strong force to act and fusion to happen ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "Two stars end their lives leaving remnant cores of 1.2 solar masses and 1.8 solar masses. Outline, with reference to the Chandrasekhar and Oppenheimer–Volkoff limits, what each core becomes.",
+        "marks": 3,
+        "markscheme": [
+          "the 1.2 solar mass core is below the Chandrasekhar limit (about 1.4 solar masses) ✓",
+          "so electron degeneracy pressure supports it and it becomes a white dwarf ✓",
+          "the 1.8 solar mass core is above the Chandrasekhar limit but below the Oppenheimer–Volkoff limit, so it becomes a neutron star (supported by neutron degeneracy pressure) ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "E.5",
+    "E.3",
+    "B.1"
+  ],
+  "given": {
+    "mHe": {
+      "value": 4.002603,
+      "sf": 7,
+      "unit": "",
+      "range": [
+        4.0026,
+        4.0027
+      ],
+      "what": "mass of a helium-4 atom in u"
+    },
+    "mC": {
+      "value": 12,
+      "sf": 8,
+      "unit": "",
+      "range": [
+        12,
+        12
+      ],
+      "what": "mass of a carbon-12 atom in u"
+    },
+    "L": {
+      "value": 4e+29,
+      "sf": 2,
+      "unit": "W",
+      "range": [
+        1e+28,
+        1e+31
+      ],
+      "what": "luminosity of the red giant"
+    },
+    "core1": {
+      "value": 1.2,
+      "sf": 2,
+      "unit": "",
+      "range": [
+        0.5,
+        1.3
+      ],
+      "what": "mass of the first remnant core in solar masses"
+    },
+    "core2": {
+      "value": 1.8,
+      "sf": 2,
+      "unit": "",
+      "range": [
+        1.5,
+        2
+      ],
+      "what": "mass of the second remnant core in solar masses"
+    }
+  },
+  "results": {
+    "dm": {
+      "value": 0.0078089999999981785,
+      "unit": "",
+      "sf": 3
+    },
+    "E": {
+      "value": 7.274083499998303,
+      "unit": "MeV",
+      "sf": 3
+    },
+    "N": {
+      "value": 3.436859090221583e+41,
+      "unit": "s^-1",
+      "sf": 2
+    },
+    "wrong_N": {
+      "value": 5.498974544354533e+28,
+      "unit": "s^-1",
+      "sf": 2
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Calculate",
+      "syllabus": [
+        "E.5.2",
+        "E.3.4"
+      ],
+      "examinerNote": "Atomic masses can be used: the electrons balance (6 on each side)."
+    },
+    {
+      "label": "b",
+      "command": "Show that",
+      "syllabus": [
+        "E.5.2",
+        "E.3.4"
+      ],
+      "examinerNote": "1 u is equivalent to 931.5 MeV (data booklet).",
+      "dependsOn": []
+    },
+    {
+      "label": "c",
+      "command": "Calculate",
+      "syllabus": [
+        "B.1.12",
+        "E.5.2"
+      ],
+      "examinerNote": "Luminosity is the total radiated power (2028 wording).",
+      "dependsOn": [
+        "b"
+      ]
+    },
+    {
+      "label": "d",
+      "command": "Explain",
+      "syllabus": [
+        "E.5.3"
+      ],
+      "examinerNote": "Temperature is a measure of the kinetic energy of the nuclei; a larger Coulomb barrier needs more energy."
+    },
+    {
+      "label": "e",
+      "command": "Outline",
+      "syllabus": [
+        "E.5.Y1",
+        "E.5.4"
+      ],
+      "examinerNote": "The Oppenheimer–Volkoff limit is about 2–3 solar masses; above it a core becomes a black hole. The core masses are chosen well inside each range."
+    }
+  ],
+  "diagrams": {}
+}

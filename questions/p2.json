@@ -83,6 +83,160 @@
     }
   },
   {
+    "id": "A1-P02",
+    "theme": "A",
+    "topic": "A.1",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>An electric scooter starts from rest. The graph shows how its velocity changes with time during the first 12 s.</p>",
+    "diagram": "questions/diagrams/p2-a1-scooter.svg",
+    "diagramAlt": "Velocity in metres per second against time in seconds from 0 to 12, on a grid of 1 second by 1 metre per second squares. The curve starts at the origin, rises steeply, and bends over so that it levels off towards 12 metres per second. At 8 seconds the velocity is about 10.4 metres per second.",
+    "diagramLarge": true,
+    "parts": [
+      {
+        "label": "a",
+        "question": "Describe how the acceleration of the scooter changes during the first 12 s.",
+        "marks": 2,
+        "markscheme": [
+          "the acceleration decreases ✓",
+          "because the gradient of the graph decreases, approaching zero as the velocity approaches a constant value ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Estimate the distance travelled by the scooter in the first 8.0 s.",
+        "marks": 3,
+        "markscheme": [
+          "the distance is the area under the graph from 0 to 8.0 s ✓",
+          "area estimated by counting squares (each square = 1 m) OR by splitting into strips/trapezia ✓",
+          "distance = 54 m ✓",
+          "Accept 50.1 to 58.9 m. Award [2 max] for ½ × 10.4 × 8.0 = 41.5 m (curve treated as a straight line)."
+        ],
+        "numeric": {
+          "answer": 54.4961,
+          "unit": "m",
+          "range": [
+            50.1,
+            58.9
+          ],
+          "mistakes": [
+            {
+              "value": 41.5039,
+              "feedback": "The graph is a curve, not a straight line: it lies above the straight line from the origin, so the area is larger than ½ × v × t. Count the squares under the curve."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Calculate the average acceleration of the scooter during the first 8.0 s.",
+        "marks": 1,
+        "markscheme": [
+          "$a = \\dfrac{\\Delta v}{\\Delta t} = \\dfrac{10.4}{8.0} = 1.3\\ \\text{m s}^{-2}$; allow a velocity read from the graph between 10 and 11 $\\text{m s}^{-1}$ ✓"
+        ],
+        "numeric": {
+          "answer": 1.297,
+          "unit": "$\\text{m s}^{-2}$",
+          "range": [
+            1.23,
+            1.37
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "Explain why the acceleration of the scooter just after it starts is greater than your answer to (c).",
+        "marks": 2,
+        "markscheme": [
+          "the gradient of the curve (the tangent) is steepest at the start ✓",
+          "the average acceleration is the gradient of the straight line from the origin to the point at 8.0 s, which is less steep than the tangent at the start ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "B3-P01",
+    "theme": "B",
+    "topic": "B.3",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>A sealed container at rest holds helium gas. Each helium atom has a mass of $6.64 \\times 10^{-27}$ kg. The atoms move randomly, with a root-mean-square (rms) speed of 1.37 $\\text{km s}^{-1}$. Helium behaves as an ideal monatomic gas.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "State the average velocity of the helium atoms.",
+        "marks": 1,
+        "markscheme": [
+          "zero: the atoms move equally in all directions, so their velocities (vectors) cancel ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Explain why the rms speed, rather than the average velocity, is used in the equation for the pressure of an ideal gas.",
+        "marks": 2,
+        "markscheme": [
+          "the average velocity is zero, so it cannot describe how hard or how often the atoms hit the walls ✓",
+          "the momentum change in each collision and the rate of collisions both depend on the speed, so the pressure depends on the mean of the squares of the speeds, whose square root is the rms speed ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Determine the temperature of the helium.",
+        "marks": 2,
+        "markscheme": [
+          "$\\tfrac{1}{2}mv_{\\text{rms}}^2 = \\tfrac{3}{2}k_BT$ ✓",
+          "$T = \\dfrac{mv_{\\text{rms}}^2}{3k_B} = 301\\ \\text{K}$ ✓"
+        ],
+        "numeric": {
+          "answer": 301.029,
+          "unit": "K",
+          "range": [
+            291,
+            311
+          ],
+          "mistakes": [
+            {
+              "value": 451.544,
+              "feedback": "The average kinetic energy of an atom of an ideal monatomic gas is (3/2)kBT, not kBT."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "The density of the helium is 0.16 $\\text{kg m}^{-3}$. Calculate the pressure of the helium.",
+        "marks": 2,
+        "markscheme": [
+          "$P = \\tfrac{1}{3}\\rho v_{\\text{rms}}^2$ ✓",
+          "$P = \\tfrac{1}{3} \\times 0.16 \\times (1.37 \\times 10^{3})^2 = 1.0 \\times 10^{5}\\ \\text{Pa}$ ✓"
+        ],
+        "numeric": {
+          "answer": 100101,
+          "unit": "Pa",
+          "range": [
+            96000,
+            105000
+          ],
+          "mistakes": [
+            {
+              "value": 300304,
+              "feedback": "P = (1/3)ρv²rms: remember the factor of one third."
+            }
+          ]
+        }
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
     "id": "B4-P01",
     "theme": "B",
     "topic": "B.4",
@@ -346,6 +500,87 @@
     }
   },
   {
+    "id": "C4-P01",
+    "theme": "C",
+    "topic": "C.4",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>An organ pipe of length 0.85 m has one closed end; its other end is open. Sound travels through the air inside it at 340 $\\text{m s}^{-1}$.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Show that the wavelength of the first harmonic is about 3.4 m.",
+        "marks": 1,
+        "markscheme": [
+          "a quarter of a wavelength fits the pipe (node at the closed end, antinode at the open end), so $\\lambda = 4L = 4 \\times 0.85 = 3.4\\ \\text{m}$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the frequency of the first harmonic.",
+        "marks": 1,
+        "markscheme": [
+          "$f = \\dfrac{v}{\\lambda} = \\dfrac{340}{3.4} = 100\\ \\text{Hz}$ ✓"
+        ],
+        "numeric": {
+          "answer": 100,
+          "unit": "Hz",
+          "range": [
+            97,
+            103
+          ],
+          "mistakes": [
+            {
+              "value": 200,
+              "feedback": "That is the first harmonic of a pipe open at both ends (λ = 2L). For a pipe closed at one end, λ = 4L."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Determine the frequencies of the next two standing waves that can form in this pipe, and state the harmonic number of each.",
+        "marks": 3,
+        "markscheme": [
+          "next standing waves have $L = \\tfrac{3\\lambda}{4}$ and $L = \\tfrac{5\\lambda}{4}$ ✓",
+          "frequencies 300 Hz and 500 Hz ✓",
+          "these are the third and fifth harmonics (harmonic number = frequency ÷ first-harmonic frequency) ✓",
+          "Allow ECF from (b)."
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Explain why a standing wave of twice the frequency of the first harmonic cannot form in this pipe.",
+        "marks": 2,
+        "markscheme": [
+          "there must always be a node at the closed end and an antinode at the open end ✓",
+          "so the pipe length must be an odd number of quarter-wavelengths; twice the frequency would need L = λ/2 (two quarter-wavelengths), which would put a node at the open end ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "The closed end is opened, so that the pipe is open at both ends. Calculate the new frequency of the first harmonic.",
+        "marks": 1,
+        "markscheme": [
+          "antinodes at both ends, so $\\lambda = 2L$ and $f = \\dfrac{340}{2 \\times 0.85} = 200\\ \\text{Hz}$ ✓"
+        ],
+        "numeric": {
+          "answer": 200,
+          "unit": "Hz",
+          "range": [
+            194,
+            206
+          ]
+        }
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
     "id": "D1-P01",
     "theme": "D",
     "topic": "D.1",
@@ -429,6 +664,162 @@
           "In a higher orbit the orbital speed is lower, so the kinetic energy ($GMm/2r$) decreases ✓",
           "the gravitational potential energy ($-GMm/r$) increases by twice as much as the kinetic energy falls, so the total energy increases and the engines must supply the difference ✓"
         ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "D1-P02",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>Titan and Rhea are moons of Saturn. Each moves in an approximately circular orbit. Titan has an orbital radius of $1.22 \\times 10^{9}$ m and an orbital period of 15.9 days. Rhea has an orbital radius of $5.27 \\times 10^{8}$ m.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "A moon of mass $m$ orbits a planet of mass $M$ in a circle of radius $r$ with period $T$. Deduce that $T^2 = \\dfrac{4\\pi^2}{GM}r^3$.",
+        "marks": 3,
+        "markscheme": [
+          "the gravitational force provides the centripetal force: $\\dfrac{GMm}{r^2} = \\dfrac{mv^2}{r}$ ✓",
+          "with $v = \\dfrac{2\\pi r}{T}$ ✓",
+          "so $\\dfrac{GM}{r^2} = \\dfrac{4\\pi^2 r}{T^2}$, which rearranges to $T^2 = \\dfrac{4\\pi^2}{GM}r^3$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Determine the mass of Saturn.",
+        "marks": 2,
+        "markscheme": [
+          "period in seconds: $T = 15.9$ days $= 1.37 \\times 10^{6}\\ \\text{s}$ ✓",
+          "$M = \\dfrac{4\\pi^2 r^3}{GT^2} = 5.69 \\times 10^{26}\\ \\text{kg}$; allow ECF from (a) ✓"
+        ],
+        "numeric": {
+          "answer": 5.69497e+26,
+          "unit": "kg",
+          "range": [
+            5.52e+26,
+            5.87e+26
+          ],
+          "mistakes": [
+            {
+              "value": 4.25127e+36,
+              "feedback": "Convert the period to seconds before using T² = 4π²r³/(GM)."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Calculate, in days, the orbital period of Rhea.",
+        "marks": 2,
+        "markscheme": [
+          "$\\dfrac{T_{\\text{R}}^2}{r_{\\text{R}}^3} = \\dfrac{T_{\\text{T}}^2}{r_{\\text{T}}^3}$ (OR using the mass from (b)) ✓",
+          "$T_{\\text{R}} = 15.9 \\times \\left(\\dfrac{5.27 \\times 10^{8}}{1.22 \\times 10^{9}}\\right)^{3/2} = 4.51$ days ✓"
+        ],
+        "numeric": {
+          "answer": 4.51412,
+          "unit": "day",
+          "range": [
+            4.37,
+            4.65
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "Explain why the masses of the moons are not needed in (b) and (c).",
+        "marks": 1,
+        "markscheme": [
+          "the moon's mass cancels (it appears on both sides of the force equation), so the orbital period does not depend on it ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "D3-P01",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>Two long straight parallel wires, P and Q, are 6.0 cm apart in air. P carries a current of 15 A and Q carries a current of 5.0 A in the same direction.</p>",
+    "diagram": "questions/diagrams/p2-d3-wires.svg",
+    "diagramAlt": "Two long vertical wires, P on the left and Q on the right, 6.0 cm apart. Arrows show that both currents flow upwards: 15 A in P and 5.0 A in Q.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the magnetic field strength due to P at the position of Q.",
+        "marks": 2,
+        "markscheme": [
+          "$B = \\dfrac{\\mu_0 I}{2\\pi r}$ with $r$ in metres ✓",
+          "$B = \\dfrac{4\\pi \\times 10^{-7} \\times 15}{2\\pi \\times 6.0 \\times 10^{-2}} = 5.0 \\times 10^{-5}\\ \\text{T}$ ✓"
+        ],
+        "numeric": {
+          "answer": 0.00005,
+          "unit": "T",
+          "range": [
+            0.0000485,
+            0.0000516
+          ],
+          "mistakes": [
+            {
+              "value": 5e-7,
+              "feedback": "Convert the distance to metres: 6.0 cm = 0.060 m."
+            }
+          ]
+        }
+      },
+      {
+        "label": "b",
+        "question": "Determine the force on each metre of wire Q.",
+        "marks": 2,
+        "markscheme": [
+          "$F = BIL$, so $\\dfrac{F}{L} = BI_{\\text{Q}}$ (OR $\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1 I_2}{2\\pi r}$) ✓",
+          "$\\dfrac{F}{L} = 5.0 \\times 10^{-5} \\times 5.0 = 2.5 \\times 10^{-4}\\ \\text{N m}^{-1}$; allow ECF from (a) ✓"
+        ],
+        "numeric": {
+          "answer": 0.00025,
+          "unit": "$\\text{N m}^{-1}$",
+          "range": [
+            0.000242,
+            0.000258
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Outline how the force on P compares with the force on Q, in both magnitude and direction.",
+        "marks": 2,
+        "markscheme": [
+          "the forces are equal in magnitude, even though the currents are different (Newton's third law) ✓",
+          "they are in opposite directions: each wire is attracted towards the other, because the currents are in the same direction ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "At one point on the line between P and Q, the resultant magnetic field due to the two wires is zero. Determine the distance of this point from P.",
+        "marks": 2,
+        "markscheme": [
+          "between the wires the two fields are in opposite directions, so $\\dfrac{\\mu_0 I_{\\text{P}}}{2\\pi x} = \\dfrac{\\mu_0 I_{\\text{Q}}}{2\\pi (d - x)}$ ✓",
+          "$\\dfrac{15}{x} = \\dfrac{5.0}{6.0 - x}$, so $x = 4.5\\ \\text{cm}$ from P ✓"
+        ],
+        "numeric": {
+          "answer": 4.5,
+          "unit": "cm",
+          "range": [
+            4.36,
+            4.64
+          ]
+        }
       }
     ],
     "review": {
@@ -526,6 +917,86 @@
         "markscheme": [
           "No change in the stopping voltage ✓",
           "The maximum kinetic energy of the electrons depends only on the photon energy ($hf$) and the work function; more intense light means more photons per second, so more electrons per second, not more energetic electrons ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "E5-P01",
+    "theme": "E",
+    "topic": "E.5",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>In the core of a red giant, helium nuclei fuse to form carbon:</p><p>$3\\,{}^{4}_{2}\\text{He} \\rightarrow {}^{12}_{6}\\text{C}$</p><p>The mass of a helium-4 atom is 4.002603 u and the mass of a carbon-12 atom is 12.000000 u.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate, in u, the decrease in mass in one reaction.",
+        "marks": 1,
+        "markscheme": [
+          "$\\Delta m = 3 \\times 4.002603 - 12.000000 = 7.81 \\times 10^{-3}$ u ✓"
+        ],
+        "numeric": {
+          "answer": 0.007809,
+          "range": [
+            0.00765,
+            0.00797
+          ]
+        }
+      },
+      {
+        "label": "b",
+        "question": "Show that the energy released in one reaction is about 7.3 MeV.",
+        "marks": 1,
+        "markscheme": [
+          "$E = 7.81 \\times 10^{-3} \\times 931.5 = 7.27\\ \\text{MeV}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "The red giant has a luminosity of $4.0 \\times 10^{29}$ W. Assume that all of this power comes from this reaction. Calculate the number of reactions per second in the core.",
+        "marks": 2,
+        "markscheme": [
+          "luminosity is the power radiated, so reactions per second $= \\dfrac{L}{E}$ with $E$ in joules ✓",
+          "$N = \\dfrac{4.0 \\times 10^{29}}{7.27 \\times 10^{6} \\times 1.60 \\times 10^{-19}} = 3.4 \\times 10^{41}\\ \\text{s}^{-1}$; allow ECF from (b) ✓"
+        ],
+        "numeric": {
+          "answer": 3.43686e+41,
+          "unit": "$\\text{s}^{-1}$",
+          "range": [
+            3.29e+41,
+            3.58e+41
+          ],
+          "mistakes": [
+            {
+              "value": 5.49897e+28,
+              "feedback": "Convert the energy per reaction from MeV to joules (1 MeV = 1.60 × 10⁻¹³ J) before dividing."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "Explain why the fusion of helium requires a higher core temperature than the fusion of hydrogen.",
+        "marks": 2,
+        "markscheme": [
+          "helium nuclei have twice the charge of protons, so the electrostatic repulsion between them is greater ✓",
+          "so the nuclei need greater kinetic energy (a higher temperature) to get close enough for the strong force to act and fusion to happen ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "Two stars end their lives leaving remnant cores of 1.2 solar masses and 1.8 solar masses. Outline, with reference to the Chandrasekhar and Oppenheimer–Volkoff limits, what each core becomes.",
+        "marks": 3,
+        "markscheme": [
+          "the 1.2 solar mass core is below the Chandrasekhar limit (about 1.4 solar masses) ✓",
+          "so electron degeneracy pressure supports it and it becomes a white dwarf ✓",
+          "the 1.8 solar mass core is above the Chandrasekhar limit but below the Oppenheimer–Volkoff limit, so it becomes a neutron star (supported by neutron degeneracy pressure) ✓"
         ]
       }
     ],
