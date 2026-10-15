@@ -54,7 +54,8 @@ export function validateQuestion(def, built, { root, topics, originality, indepe
     if (CONTROL.test(text)) err('mathjax', `${where} contains a control character: a backslash probably needs doubling ("\\\\theta")`);
     if ((text.replace(/\\\$/g, '').match(/\$/g) || []).length % 2) err('mathjax', `${where} has an odd number of $ signs`);
     if (/\[\[|\]\]/.test(text)) err('placeholder', `${where} has a placeholder that wasn't filled`);
-    if (/\^-?\d|\b[A-Za-z]+-[1-4]\b|\bm\/s\b|[⁻¹²³]/.test(plain(text))) err('units', `${where}: write units with negative powers in MathJax (use a placeholder with a unit)`);
+    // unit symbols with a power written as text ("m s-1", "s^-1", "s⁻¹"), but not names like "helium-4"
+    if (/\^-?\d|\b(?:m|s|kg|g|J|W|N|K|mol|Hz|A|V|C|T|Pa|km|cm|mm)-[1-4]\b|\bm\/s\b|[⁻¹²³]/.test(plain(text))) err('units', `${where}: write units with negative powers in MathJax (use a placeholder with a unit)`);
   }
 
   // ---- 2. Structure ----

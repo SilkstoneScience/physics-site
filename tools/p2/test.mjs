@@ -143,6 +143,8 @@ export async function runTests() {
   d = clone(GOOD_LINKING); d.parts.find((pt) => pt.label === 'e(iv)').markscheme.shift(); expect('"any n from" needs its note line', d, 'markscheme');
   d = clone(GOOD_LINKING); d.id = 'LQ-H90'; expect('a linking id matches its level', d, 'meta', { independent: { 'LQ-H90': GOOD_LINKING_INDEPENDENT } });
   d = clone(GOOD_SHORT); d.parts[1].question += ' Give your answer in m s^-1.'; expect('units with negative powers outside MathJax', d, 'units');
+  d = clone(GOOD_SHORT); d.stem += '<p>A helium-4 nucleus and a carbon-12 nucleus.</p>'; d.literals = { 12: 'test' };
+  check('nuclide names such as helium-4 are not mistaken for units', !codesFor(d).includes('units'), codesFor(d).join());
 
   // ----- Originality (a pretend reference cache, so this also runs on GitHub) -----
   const cache = fs.mkdtempSync(path.join(os.tmpdir(), 'p2-orig-'));
