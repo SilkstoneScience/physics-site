@@ -306,8 +306,13 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
 .vlab-buttons .button { padding: 7px 14px; }
 .vlab-buttons .button:disabled { opacity: 0.45; cursor: default; }
 .vlab-zoom { display: block; width: 180px; border: 1px solid var(--border); border-radius: 6px; }
+.vlab-zoom.vlab-zoom-wide { width: 100%; }
+.vlab-dial { display: block; width: 260px; max-width: 100%; margin: 0 0 8px; }
+.vlab-field select { display: block; margin-top: 4px; font: inherit; padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); }
 .vlab-watch { font-size: 2rem; font-weight: 700; font-variant-numeric: tabular-nums; margin: 0 0 4px; }
 .vlab-small { font-size: 0.85rem; color: var(--muted); margin: 6px 0; }
+.vlab-check { display: flex; align-items: center; gap: 6px; }
+.vlab-check input { margin: 0; }
 .vlab-table input { width: 100%; min-width: 3.8em; font: inherit; padding: 4px 6px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text); }
 .vlab-table td { padding: 4px; }
 .vlab-del { border: 0; background: none; color: var(--bad); font-size: 1.2rem; cursor: pointer; padding: 0 6px; }

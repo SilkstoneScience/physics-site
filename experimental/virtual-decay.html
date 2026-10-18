@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics virtual practical: the half-life of protactinium · Mr Silkstone's Physics</title>
+  <meta name="description" content="A simulated radioactive decay experiment for IB DP Physics: count with a Geiger–Müller tube, correct for background, and find a half-life from a decay curve or a log graph.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/virtual-decay.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics virtual practical: the half-life of protactinium · Mr Silkstone's Physics">
+  <meta property="og:description" content="A simulated radioactive decay experiment for IB DP Physics: count with a Geiger–Müller tube, correct for background, and find a half-life from a decay curve or a log graph.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/virtual-decay.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/decay.js"></script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Half-life (simulation)</p>
+    <h1>The half-life of protactinium-234m <span class="tag sim-tag">Simulation</span></h1>
+    <p class="lead">A virtual practical: the simulation is the equipment, and you take the readings. <span class="tag">E.3 Radioactive decay</span></p>
+    <p><strong>Aim:</strong> to find the half-life of protactinium-234m from how its count rate falls with time.</p>
+    <p><strong>Skills practised:</strong> working with random data, correcting for background, choosing a counting time, plotting a decay curve, reading half-lives from a graph, and (HL) linearising with a natural log.</p>
+
+    <h2 id="theory">Theory</h2>
+    <p>Protactinium-234m is a beta emitter with a short half-life. It is made continuously in a sealed bottle containing a uranium compound dissolved in water, under a layer of an organic liquid. Shaking the bottle moves the protactinium into the top layer. When the layers separate, the protactinium in the top layer decays and isn't replaced, so the count rate from a Geiger–Müller tube next to the top layer falls.</p>
+    <p>The count rate falls by half every <a href="../themes/e3.html#halflife">half-life</a>, $T_{1/2}$. The tube also detects <a href="../themes/e3.html#background">background radiation</a>, so subtract the background count rate from every count rate first:</p>
+    <div class="key">$$\text{corrected count rate} = \frac{N}{\Delta t} - B$$</div>
+    <p>where $N$ is the count in a counting time $\Delta t$, and $B$ is the background count rate. Radioactive decay is random, so the counts scatter. This is a determination of a constant, so state an expected value rather than a hypothesis: look it up and quote your source.</p>
+    <p class="vlab-small">In a real lab, the bottle is sealed, it is handled only by the teacher, and its contents are radioactive and toxic. The simulation lets you practise the method safely.</p>
+
+    <h2 id="variables">Variables</h2>
+    <div class="table-wrap">
+      <table class="notes">
+        <thead><tr><th>Variable</th><th>How it is measured or kept the same</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Independent:</strong> time $t$</td><td>The stopwatch starts when the layers have separated. Record the time at the start of each count, then use the time at the <strong>middle</strong> of the count when you plot the graph.</td></tr>
+          <tr><td><strong>Dependent:</strong> count rate</td><td>The counter counts for a fixed time (10 s works well). Then count rate $= N / \Delta t$.</td></tr>
+          <tr><td><strong>Background</strong></td><td>Measured before shaking, over a long time (100 s), because the background count is small and random.</td></tr>
+          <tr><td><strong>Control:</strong> the set-up</td><td>Keep the tube in the same place, next to the top layer, and use the same counting time throughout.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="method">Method</h2>
+    <ol>
+      <li>Before shaking the bottle, set the counting time to 100 s and take a background count. Work out $B$ in counts per second.</li>
+      <li>Set the counting time to 10 s. Press <strong>Shake the bottle</strong>. The stopwatch starts.</li>
+      <li>Press <strong>Start counting</strong> straight away. When it stops, press <strong>Add to table</strong>, which records the start time and the count.</li>
+      <li>Start the next count at once. Keep going for at least 5 minutes, or until the counts are close to the background.</li>
+      <li>Press <strong>Download as CSV</strong> to open your readings in a spreadsheet.</li>
+    </ol>
+
+    <div class="vlab" data-lab="decay">
+      <noscript><p class="notice">This virtual practical needs JavaScript turned on in your browser.</p></noscript>
+    </div>
+
+    <h2 id="processing">Processing your data</h2>
+    <ol>
+      <li>For each count, find the mid-time, $t + \Delta t/2$, and the corrected count rate, $N/\Delta t - B$.</li>
+      <li>Plot the corrected count rate against the mid-time and draw a smooth best-fit curve through the scatter.</li>
+      <li>Read the half-life from the curve several times: the time for the rate to fall from its first value to half of it, from that to half again, and so on.</li>
+      <li>Use the mean of these half-lives as your result, and half their range as its uncertainty (see <a href="../skills.html#recording">recording uncertainties</a>).</li>
+    </ol>
+
+    <div class="worked">
+      <h3>Worked example: one corrected count rate</h3>
+      <p>A student counts 52 background counts in 100 s. After shaking, a 10 s count starting at $t = 40$ s gives 188 counts. Find the corrected count rate, and the time to plot it at.</p>
+      <p>Background: $B = 52 \div 100 = 0.52$ counts per second.</p>
+      <p>Count rate: $188 \div 10 = 18.8$ counts per second, so the corrected rate is $18.8 - 0.52 = 18.3$ counts per second.</p>
+      <p>Plot it at the middle of the count: $t = 40 + 5 = 45$ s.</p>
+    </div>
+
+    <div class="hl-zone">
+      <h3 id="log">Using a log graph <span class="tag hl">HL</span></h3>
+      <p>The corrected count rate $C$ follows the <a href="../themes/e3.html#law">decay law</a>, $C = C_0 e^{-\lambda t}$. Taking natural logs gives a straight line (see <a href="../skills.html#linearising">linearising</a>):</p>
+      <div class="key">$$\ln C = -\lambda t + \ln C_0$$</div>
+      <p>Plot $\ln C$ against $t$. The gradient is $-\lambda$, and $T_{1/2} = \dfrac{\ln 2}{\lambda}$. The fractional uncertainty in $T_{1/2}$ equals the fractional uncertainty in $\lambda$. Leave out the last few points if the corrected rate is close to zero: their logs are very uncertain, and a negative rate has no log.</p>
+      <div class="worked">
+        <h3>Worked example: half-life from a log graph <span class="tag hl">HL</span></h3>
+        <p>A student's graph of $\ln C$ against $t$ for a different isotope has a best-fit gradient of $-0.0231$ s<sup>−1</sup>. The steepest and shallowest lines have gradients of $-0.0247$ and $-0.0216$ s<sup>−1</sup>. Find the half-life with its uncertainty.</p>
+        <p>$\lambda = 0.0231$ s<sup>−1</sup>, and $\Delta\lambda = (0.0247 - 0.0216) \div 2 = 0.0016$ s<sup>−1</sup>.</p>
+        <p>$T_{1/2} = \dfrac{\ln 2}{0.0231} = 30.0$ s.</p>
+        <p>$\dfrac{\Delta T_{1/2}}{T_{1/2}} = \dfrac{0.0016}{0.0231} = 0.069$, so $\Delta T_{1/2} = 2$ s, and $T_{1/2} = (30 \pm 2)$ s.</p>
+      </div>
+      <p class="hl-end">End of the HL-only content.</p>
+    </div>
+
+    <h2 id="evaluating">Evaluating</h2>
+    <ul>
+      <li><strong>Randomness:</strong> your points scatter about the curve even though nothing else is changing. Where on the graph is the scatter largest, compared with the count rate itself?</li>
+      <li><strong>Counting time:</strong> what are the advantages and disadvantages of counting for 20 s instead of 10 s?</li>
+      <li><strong>Background:</strong> why measure it for 100 s rather than 10 s? What would happen to your half-life if you forgot to subtract it?</li>
+      <li><strong>Mid-times:</strong> why plot each count at the middle of its counting time?</li>
+    </ul>
+    <p><strong>Extension:</strong> repeat the experiment and compare your two half-lives. Do they agree within their uncertainties?</p>
+
+    <h2 id="check">Check your understanding</h2>
+    <details class="check">
+      <summary>Two 10 s counts taken one after the other near the start are 231 and 205. Does the drop prove the protactinium is decaying?</summary>
+      <p>Not on its own. Counts are random, so two counts at the same average rate can easily differ by this much. The trend over many counts shows the decay, which is why you need a graph of many points.</p>
+    </details>
+    <details class="check">
+      <summary>A student forgets to subtract the background. Is their half-life too long or too short?</summary>
+      <p>Too long. Late in the experiment the background is a large part of each count, so the measured rate falls more slowly than the true rate from the protactinium, and the curve seems to level off above zero.</p>
+    </details>
+    <details class="check">
+      <summary>What half-life does the simulation use? (Open this after you have found your own.)</summary>
+      <p>70 s, close to the accepted value for protactinium-234m (about 1.2 minutes). Does your range include it?</p>
+    </details>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

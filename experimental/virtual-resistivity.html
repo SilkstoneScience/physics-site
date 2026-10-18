@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics virtual practical: the resistivity of a wire · Mr Silkstone's Physics</title>
+  <meta name="description" content="A simulated resistivity experiment for IB DP Physics: read analogue meters and a metre rule, measure the diameter, and find the resistivity of a wire from a graph of R against L.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/virtual-resistivity.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics virtual practical: the resistivity of a wire · Mr Silkstone's Physics">
+  <meta property="og:description" content="A simulated resistivity experiment for IB DP Physics: read analogue meters and a metre rule, measure the diameter, and find the resistivity of a wire from a graph of R against L.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/virtual-resistivity.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/resistivity.js"></script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Resistivity (simulation)</p>
+    <h1>The resistivity of a wire <span class="tag sim-tag">Simulation</span></h1>
+    <p class="lead">A virtual practical: the simulation is the equipment, and you take the readings. <span class="tag">B.5 Current and circuits</span></p>
+    <p><strong>Aim:</strong> to find the resistivity of the metal in a wire, from how the wire's resistance depends on its length.</p>
+    <p><strong>Skills practised:</strong> reading analogue meters, zero errors, repeated readings of a diameter, propagating uncertainties (including a squared quantity), uncertainty bars, the uncertainty in a gradient, and what an intercept tells you.</p>
+
+    <h2 id="theory">Theory</h2>
+    <p>The resistance of a wire of length $L$ and cross-sectional area $A$ is</p>
+    <div class="key">$$R = \frac{\rho L}{A}$$</div>
+    <p>where $\rho$ is the <a href="../themes/b5.html#resistance">resistivity</a> of the metal. Find each resistance from the meter readings, $R = \dfrac{V}{I}$. A graph of $R$ (on the $y$-axis) against $L$ (on the $x$-axis) should be a straight line through the origin with gradient $\dfrac{\rho}{A}$. So</p>
+    <div class="key">$$\rho = \text{gradient} \times A, \qquad A = \frac{\pi d^2}{4}$$</div>
+    <p>where $d$ is the diameter of the wire. This is a determination of a constant, so state the expected value instead of a hypothesis: metals used for resistance wire have resistivities of roughly $10^{-7}$ to $10^{-6}$ Ω m.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 380 190" role="img" aria-labelledby="vr1t">
+        <title id="vr1t">Circuit diagram: a cell, a switch and an ammeter in series with a length L of resistance wire between a fixed clip and a sliding clip. A voltmeter is connected across the two clips. The rest of the wire, beyond the sliding clip, is not in the circuit.</title>
+        <!-- cell -->
+        <line class="axis" x1="40" y1="30" x2="170" y2="30"/>
+        <line class="axis" x1="170" y1="18" x2="170" y2="42"/>
+        <line class="axis" x1="178" y1="24" x2="178" y2="36" style="stroke-width:4"/>
+        <line class="axis" x1="178" y1="30" x2="240" y2="30"/>
+        <!-- switch -->
+        <circle class="axis" cx="244" cy="30" r="3" style="fill:none"/>
+        <line class="axis" x1="246" y1="28" x2="276" y2="16"/>
+        <circle class="axis" cx="280" cy="30" r="3" style="fill:none"/>
+        <line class="axis" x1="283" y1="30" x2="340" y2="30"/>
+        <line class="axis" x1="340" y1="30" x2="340" y2="80"/>
+        <!-- ammeter -->
+        <circle class="axis" cx="340" cy="96" r="14" style="fill:none"/>
+        <text x="340" y="101" text-anchor="middle" font-size="14">A</text>
+        <line class="axis" x1="340" y1="110" x2="340" y2="178"/>
+        <line class="axis" x1="340" y1="178" x2="230" y2="178"/>
+        <line class="axis" x1="230" y1="178" x2="230" y2="140"/>
+        <!-- wire: the part beyond the sliding clip carries no current -->
+        <line class="l3" x1="80" y1="140" x2="230" y2="140"/>
+        <line class="l3 thin dash" x1="230" y1="140" x2="300" y2="140"/>
+        <line class="axis" x1="40" y1="30" x2="40" y2="140"/>
+        <line class="axis" x1="40" y1="140" x2="80" y2="140"/>
+        <circle class="f1" cx="80" cy="140" r="4"/>
+        <circle class="f1" cx="230" cy="140" r="4"/>
+        <line class="l1 thin" x1="84" y1="152" x2="226" y2="152" marker-start="url(#vrA)" marker-end="url(#vrA)"/>
+        <text class="t1" x="155" y="170" text-anchor="middle" font-size="14">L</text>
+        <!-- voltmeter -->
+        <line class="axis" x1="80" y1="140" x2="80" y2="88"/>
+        <line class="axis" x1="80" y1="88" x2="141" y2="88"/>
+        <circle class="axis" cx="155" cy="88" r="14" style="fill:none"/>
+        <text x="155" y="93" text-anchor="middle" font-size="14">V</text>
+        <line class="axis" x1="169" y1="88" x2="230" y2="88"/>
+        <line class="axis" x1="230" y1="88" x2="230" y2="140"/>
+        <text x="175" y="18" text-anchor="middle" font-size="13">cell</text>
+        <text x="262" y="50" text-anchor="middle" font-size="13">switch</text>
+        <defs><marker id="vrA" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="f1"/></marker></defs>
+      </svg>
+      <figcaption>The circuit. The current flows only through the <span class="key-1">length $L$ between the clips</span>, and the voltmeter measures the pd across it. The rest of the wire (dashed) is not in the circuit.</figcaption>
+    </figure>
+
+    <h2 id="variables">Variables</h2>
+    <div class="table-wrap">
+      <table class="notes">
+        <thead><tr><th>Variable</th><th>How it is measured or kept the same</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Independent:</strong> length $L$</td><td>Read the metre rule at the sliding clip, to the nearest mm. The fixed clip is at the zero, so two readings are involved and the uncertainty is one full division, ±0.001 m.</td></tr>
+          <tr><td><strong>Dependent:</strong> resistance $R$</td><td>Calculated from the voltmeter reading $V$ (0–2 V scale, divisions of 0.05 V, so ±0.025 V) and the ammeter reading $I$ (0–1 A scale, divisions of 0.02 A, so ±0.01 A).</td></tr>
+          <tr><td><strong>Measured once for the wire:</strong> diameter $d$</td><td>A digital micrometer that reads to 0.01 mm. The wire isn't perfectly uniform, so measure it at several points and use the mean, with half the range as the uncertainty.</td></tr>
+          <tr><td><strong>Control:</strong> the wire and its temperature</td><td>The same wire throughout. Open the switch between readings so the current doesn't warm the wire, because resistance changes with temperature.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="method">Method</h2>
+    <ol>
+      <li>With the switch <strong>open</strong>, look at both meters. Do they read exactly zero? If one doesn't, write down its <strong>zero error</strong>: you will need to correct every reading from that meter.</li>
+      <li>Measure the <strong>diameter of the wire</strong> with the <strong>digital micrometer</strong>. Press <strong>Measure the diameter at a new point</strong> 5 or more times, to measure it at different points along the wire, and record every reading.</li>
+      <li>Move the sliding clip to a length near 10 cm. Read the length on the magnified rule and record it in metres.</li>
+      <li>Close the switch, read both meters, then open the switch again.</li>
+      <li>Repeat for at least 6 lengths, spread evenly from about 10 cm to 95 cm.</li>
+      <li>Press <strong>Download as CSV</strong> to open your readings in a spreadsheet.</li>
+    </ol>
+
+    <div class="vlab" data-lab="resistivity">
+      <noscript><p class="notice">This virtual practical needs JavaScript turned on in your browser.</p></noscript>
+    </div>
+
+    <h2 id="processing">Processing your data</h2>
+    <ol>
+      <li>Correct each meter reading for any zero error: subtract the zero error from every reading.</li>
+      <li>Calculate $R = V/I$ for each length. Its fractional uncertainty is the sum of the fractional uncertainties of $V$ and $I$ (see <a href="../skills.html#propagating">propagating uncertainties</a>).</li>
+      <li>Find the mean diameter and its uncertainty (half the range). Convert it to metres, then calculate $A = \pi d^2/4$. Because $d$ is squared, $\dfrac{\Delta A}{A} = 2\,\dfrac{\Delta d}{d}$.</li>
+      <li>Plot $R$ against $L$ with uncertainty bars, and draw the line of best fit (see <a href="../skills.html#graphs">graphs</a>).</li>
+      <li>Find the gradient and its uncertainty from the steepest and shallowest lines (see <a href="../skills.html#gradient-uncertainty">uncertainty in the gradient</a>).</li>
+      <li>Calculate $\rho = \text{gradient} \times A$. Add the fractional uncertainties of the gradient and of $A$.</li>
+    </ol>
+
+    <div class="worked">
+      <h3>Worked example: one resistance</h3>
+      <p>For a length of 0.452 m, a student reads 1.15 V on the voltmeter and 0.38 A on the ammeter (after correcting for its zero error). The meters can be read to ±0.025 V and ±0.01 A. Find the resistance with its uncertainty.</p>
+      <p>$R = \dfrac{1.15}{0.38} = 3.03$ Ω.</p>
+      <p>$\dfrac{\Delta R}{R} = \dfrac{0.025}{1.15} + \dfrac{0.01}{0.38} = 0.022 + 0.026 = 0.048$</p>
+      <p>$\Delta R = 0.048 \times 3.03 = 0.15$ Ω, so $R = (3.0 \pm 0.1)$ Ω. The ammeter gives the bigger share of the uncertainty, and it gets worse for longer wires, where the current is smaller.</p>
+    </div>
+
+    <div class="worked">
+      <h3>Worked example: from the gradient to the resistivity</h3>
+      <p>A student's graph of $R$ against $L$ for a different wire has a gradient of 5.20 Ω m<sup>−1</sup>. The steepest and shallowest lines have gradients of 5.46 and 4.98 Ω m<sup>−1</sup>. Their diameter readings have a mean of 0.36 mm, with an uncertainty of ±0.01 mm. Find the resistivity with its uncertainty.</p>
+      <p>Gradient uncertainty: $(5.46 - 4.98) \div 2 = 0.24$ Ω m<sup>−1</sup>.</p>
+      <p>$A = \dfrac{\pi (0.36 \times 10^{-3})^2}{4} = 1.02 \times 10^{-7}$ m<sup>2</sup>.</p>
+      <p>$\rho = 5.20 \times 1.02 \times 10^{-7} = 5.3 \times 10^{-7}$ Ω m.</p>
+      <p>$\dfrac{\Delta \rho}{\rho} = \dfrac{0.24}{5.20} + 2 \times \dfrac{0.01}{0.36} = 0.046 + 0.056 = 0.10$</p>
+      <p>$\rho = (5.3 \pm 0.5) \times 10^{-7}$ Ω m. The diameter is the largest source of uncertainty, even though it was measured with the most precise instrument, because it is small and it is squared.</p>
+    </div>
+
+    <h2 id="evaluating">Evaluating</h2>
+    <ul>
+      <li><strong>Zero error:</strong> did either meter have one? What would happen to your values of $R$, and to the gradient, if you forgot to correct for it? Is the effect bigger for short wires or long wires?</li>
+      <li><strong>The intercept:</strong> does your line pass through the origin? The clips don't make perfect contact with the wire, so there is a small extra resistance at the contacts. How does this affect the intercept, and does it affect the gradient?</li>
+      <li><strong>The diameter:</strong> how much did your readings vary along the wire? Which measurement contributes most to the uncertainty in $\rho$, and how could you reduce it?</li>
+      <li><strong>Reading the meters:</strong> why should you look at an analogue meter from straight in front? Would digital meters make the result more precise?</li>
+      <li><strong>Temperature:</strong> why does the method say to open the switch between readings?</li>
+    </ul>
+    <p><strong>Extension:</strong> investigate how the resistance of a fixed length depends on the diameter, using wires of different gauges. Write a hypothesis first.</p>
+
+    <h2 id="check">Check your understanding</h2>
+    <details class="check">
+      <summary>Why is a graph of $R$ against $L$ better than calculating $\rho$ from a single length?</summary>
+      <p>The graph uses all your readings, so random errors partly average out, and it shows any readings that don't fit. It also separates out a systematic extra resistance, such as the contact resistance at the clips: this moves the line up (it gives an intercept) but doesn't change the gradient, so $\rho$ is unaffected.</p>
+    </details>
+    <details class="check">
+      <summary>The ammeter reads 0.01 A with the switch open, and a student doesn't correct for it. Are their values of $R$ too large or too small?</summary>
+      <p>Every current reading is 0.01 A too large, so every $R = V/I$ is too <strong>small</strong>. The effect is largest for long wires, where the current is smallest, so the gradient, and therefore $\rho$, also comes out too small.</p>
+    </details>
+    <details class="check">
+      <summary>What is the resistivity of the wire in the simulation? (Open this after you have found your own.)</summary>
+      <p>The wire is constantan, with $\rho = 4.9 \times 10^{-7}$ Ω m. Does your range include it? If not, check your zero error correction and your area calculation (diameter in metres, and halved for the radius if you used $\pi r^2$).</p>
+    </details>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
