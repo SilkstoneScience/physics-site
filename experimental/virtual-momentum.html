@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics virtual practical: momentum in collisions · Mr Silkstone's Physics</title>
+  <meta name="description" content="A simulated collisions experiment for IB DP Physics: level a dynamics track, time carts through light gates, and test conservation of momentum in bouncing, sticking and explosive collisions.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/virtual-momentum.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics virtual practical: momentum in collisions · Mr Silkstone's Physics">
+  <meta property="og:description" content="A simulated collisions experiment for IB DP Physics: level a dynamics track, time carts through light gates, and test conservation of momentum in bouncing, sticking and explosive collisions.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/virtual-momentum.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/momentum.js"></script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Momentum (simulation)</p>
+    <h1>Momentum in collisions and explosions <span class="tag sim-tag">Simulation</span></h1>
+    <p class="lead">A virtual practical: the simulation is the equipment, and you take the readings. <span class="tag">A.2 Forces and momentum</span></p>
+    <p><strong>Aim:</strong> to test whether the total momentum of two carts is the same before and after they collide or push apart, and to compare their total kinetic energy before and after.</p>
+    <p><strong>Skills practised:</strong> reducing a systematic error (levelling the track), velocities from light gates, using signs for vector quantities, propagating uncertainties, ratios and percentage differences, a graph to test a prediction, and deciding how to treat awkward data.</p>
+
+    <h2 id="theory">Theory</h2>
+    <p>The <a href="../themes/a2.html#momentum">momentum</a> of an object is $p = mv$. Momentum is a vector, so a velocity to the left must have the opposite sign to a velocity to the right. If no resultant external force acts on a system, its total momentum stays the same (see <a href="../themes/a2.html#conservation">conservation of momentum</a>):</p>
+    <div class="key">$$m_A u_A + m_B u_B = m_A v_A + m_B v_B$$</div>
+    <p>where $u$ is a velocity before and $v$ a velocity after. The forces the carts exert on each other are internal, so they cannot change the total. Kinetic energy, $E_k = \tfrac{1}{2}mv^2$, is different:</p>
+    <ul>
+      <li>In an <strong>elastic</strong> collision, the total kinetic energy is the same afterwards.</li>
+      <li>In an <strong>inelastic</strong> collision, some kinetic energy is transferred to other stores, such as thermal energy. It is lost most when the objects stick together.</li>
+      <li>In an <strong>explosion</strong>, the objects start at rest, so the total momentum is zero before and should be zero after. The kinetic energy comes from energy stored in the spring.</li>
+    </ul>
+    <p>Each cart carries a flag of width $L$. A light gate records the time $t$ for which the flag blocks its beam, so the cart's speed through the gate is $v = \dfrac{L}{t}$.</p>
+
+    <h2 id="variables">Variables</h2>
+    <div class="table-wrap">
+      <table class="notes">
+        <thead><tr><th>Variable</th><th>How it is measured or controlled</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Changed:</strong> the type of collision, the masses and the push</td><td>Magnet, Velcro or plunger ends. Add up to two extra masses to either cart, and push cart A at different speeds.</td></tr>
+          <tr><td><strong>Measured:</strong> the masses</td><td>A balance that reads to 0.001 kg, so ±0.001 kg.</td></tr>
+          <tr><td><strong>Measured:</strong> the velocities</td><td>The light gates time each flag to 0.1 ms. The flags are $(5.00 \pm 0.01)$ cm wide, measured with vernier calipers. Give each velocity a sign: positive to the right (→), negative to the left (←).</td></tr>
+          <tr><td><strong>Controlled:</strong> the slope of the track</td><td>Level the track first, so that gravity doesn't speed the carts up or slow them down.</td></tr>
+          <tr><td><strong>Controlled:</strong> gentle collisions</td><td>With the magnets, push gently enough that the carts repel without touching. A jolt gives poor results.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="method">Method</h2>
+    <ol>
+      <li><strong>Level the track.</strong> Push cart A on its own to the right, and note its two gate times. Then push it to the left. A little friction always slows the cart, so the second time is a bit longer than the first. If the cart slows much more in one direction than the other, the track slopes: turn the levelling screw and test again, until the change is about the same both ways.</li>
+      <li><strong>Weigh the carts</strong> with the balance whenever you change the extra masses.</li>
+      <li><strong>Bouncing collisions.</strong> Choose the magnet ends and put the carts in place. Push cart A towards cart B, which is at rest. Record every gate reading. Do at least 5 runs, with cart A lighter than, equal to and heavier than cart B, and different pushes.</li>
+      <li><strong>Sticking collisions.</strong> Choose the Velcro ends and do at least 3 runs. Both carts pass through gate 2 afterwards, so you get two readings for one velocity: decide how to use them.</li>
+      <li><strong>Explosions.</strong> Choose the plunger. The carts start at rest between the gates. Release the plunger, and do at least 3 runs with different masses.</li>
+      <li>For each run, work out the velocities with their signs and record them in the table. Press <strong>Download as CSV</strong> to open them in a spreadsheet.</li>
+    </ol>
+
+    <div class="vlab" data-lab="momentum">
+      <noscript><p class="notice">This virtual practical needs JavaScript turned on in your browser.</p></noscript>
+    </div>
+
+    <h2 id="processing">Processing your data</h2>
+    <ol>
+      <li>For every run, calculate the momentum of each cart before and after, and the total momentum before and after.</li>
+      <li>For each collision, calculate the ratio $\dfrac{p_{\text{after}}}{p_{\text{before}}}$. Conservation of momentum predicts 1.</li>
+      <li>Plot the total momentum after (on the $y$-axis) against the total momentum before (on the $x$-axis) for all your collisions. Conservation predicts a straight line through the origin with gradient 1. Does your gradient's uncertainty range include 1? (See <a href="../skills.html#gradient-uncertainty">uncertainty in the gradient</a>.)</li>
+      <li>For each explosion, the total momentum before is zero, so a ratio won't work. Instead, express the total momentum after as a percentage of the momentum of one cart.</li>
+      <li>Calculate the total kinetic energy before and after every run, and the fraction of kinetic energy lost (or gained).</li>
+      <li>Estimate the uncertainty in a momentum: $\dfrac{\Delta p}{p} = \dfrac{\Delta m}{m} + \dfrac{\Delta L}{L} + \dfrac{\Delta t}{t}$ (see <a href="../skills.html#propagating">propagating uncertainties</a>). Are your differences larger than this?</li>
+    </ol>
+
+    <div class="worked">
+      <h3>Worked example: a sticking collision</h3>
+      <p>In a different experiment, a 0.762 kg cart blocks gate 1 for 112.4 ms on its way to hit a 0.498 kg cart at rest. The carts stick together. At gate 2, the front cart's flag blocks the beam for 186.5 ms, then the back cart's flag for 189.6 ms. The flags are 5.00 cm wide. Compare the momentum and the kinetic energy before and after the collision.</p>
+      <p>Before: $u = \dfrac{0.0500}{0.1124} = 0.445$ m s<sup>−1</sup>, so $p = 0.762 \times 0.445 = 0.339$ kg m s<sup>−1</sup>.</p>
+      <p>After: the two readings give $\dfrac{0.0500}{0.1865} = 0.268$ m s<sup>−1</sup> and $\dfrac{0.0500}{0.1896} = 0.264$ m s<sup>−1</sup>. The carts slowed slightly between the two readings because of friction, so use the first, which was closer in time to the collision: $v = 0.268$ m s<sup>−1</sup>.</p>
+      <p>$p = (0.762 + 0.498) \times 0.268 = 0.338$ kg m s<sup>−1</sup>. The ratio $\dfrac{p_{\text{after}}}{p_{\text{before}}} = \dfrac{0.338}{0.339} = 0.996$: momentum is conserved to within 0.4%.</p>
+      <p>Kinetic energy: before, $\tfrac{1}{2} \times 0.762 \times 0.445^2 = 0.0754$ J. After, $\tfrac{1}{2} \times 1.260 \times 0.268^2 = 0.0452$ J. About 40% of the kinetic energy was transferred to other stores, so the collision is inelastic.</p>
+    </div>
+
+    <div class="worked">
+      <h3>Worked example: an explosion</h3>
+      <p>Two carts of mass 0.640 kg and 0.910 kg push apart from rest. Their velocities are −0.452 m s<sup>−1</sup> and +0.311 m s<sup>−1</sup>. How well is momentum conserved?</p>
+      <p>Momenta: $0.640 \times (-0.452) = -0.289$ kg m s<sup>−1</sup> and $0.910 \times 0.311 = +0.283$ kg m s<sup>−1</sup>.</p>
+      <p>Total after: $-0.006$ kg m s<sup>−1</sup>, compared with 0 before.</p>
+      <p>As a percentage of one cart's momentum: $\dfrac{0.006}{0.289} \times 100\% = 2\%$. So momentum is conserved to within about 2%.</p>
+    </div>
+
+    <h2 id="evaluating">Evaluating</h2>
+    <ul>
+      <li><strong>Friction:</strong> the carts slow down between the collision and the gates. Does this make the momentum after too small or too large? Is your ratio usually above or below 1?</li>
+      <li><strong>Levelling:</strong> how did you decide when the track was level? What would happen to your results if one end were too high?</li>
+      <li><strong>The light gates:</strong> a gate measures the average speed while the flag passes through it. When does that differ from the speed just after the collision?</li>
+      <li><strong>Kinetic energy:</strong> were any of your magnet collisions perfectly elastic? Where did the "missing" energy go? In the explosions, where did the extra kinetic energy come from?</li>
+      <li><strong>Uncertainties:</strong> compare your differences with the uncertainty from the measurements. If the differences are bigger, what is the most likely cause?</li>
+    </ul>
+
+    <h2 id="check">Check your understanding</h2>
+    <details class="check">
+      <summary>In a collision, cart B bounces back towards the left. Why must you use a negative velocity for it?</summary>
+      <p>Momentum is a vector. Choosing right as positive, momentum to the left is negative. If you used a positive value, you would add the two carts' momenta when they should partly cancel, and momentum would seem not to be conserved.</p>
+    </details>
+    <details class="check">
+      <summary>Momentum is conserved in a sticking collision, but kinetic energy isn't. How can both be true?</summary>
+      <p>Momentum is always conserved when no resultant external force acts, because the carts exert equal and opposite forces on each other for the same time. Kinetic energy isn't protected in the same way: the forces can do work that deforms the Velcro and heats it, transferring kinetic energy to other stores. The total energy is still conserved.</p>
+    </details>
+    <details class="check">
+      <summary>Why test the track's level in both directions rather than one?</summary>
+      <p>Friction always slows the cart, whichever way it moves, but a slope slows it one way and speeds it up the other way. Pushing both ways lets you tell the two effects apart: when the cart slows by the same amount in each direction, only friction is acting, so the track is level.</p>
+    </details>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

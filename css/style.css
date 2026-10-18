@@ -308,6 +308,10 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
 .vlab-zoom { display: block; width: 180px; border: 1px solid var(--border); border-radius: 6px; }
 .vlab-zoom.vlab-zoom-wide { width: 100%; }
 .vlab-dial { display: block; width: 260px; max-width: 100%; margin: 0 0 8px; }
+.vlab > .vlab-main { display: block; width: 100%; border: 1px solid var(--border); border-radius: var(--radius); }
+.vlab-grid-2 { margin-top: 12px; }
+@media (min-width: 760px) { .vlab-grid.vlab-grid-2 { grid-template-columns: 1fr 1fr; } }
+.vlab-log { margin: 6px 0; padding-left: 1.6em; font-size: 0.92rem; font-variant-numeric: tabular-nums; max-height: 14em; overflow-y: auto; }
 .vlab-field select { display: block; margin-top: 4px; font: inherit; padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); }
 .vlab-watch { font-size: 2rem; font-weight: 700; font-variant-numeric: tabular-nums; margin: 0 0 4px; }
 .vlab-small { font-size: 0.85rem; color: var(--muted); margin: 6px 0; }
