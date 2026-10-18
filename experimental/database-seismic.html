@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics database practical: the speed of seismic waves · Mr Silkstone's Physics</title>
+  <meta name="description" content="A database practical for IB DP Physics: use real arrival times from a 2025 California earthquake to find the speeds of P and S waves, and see how earthquakes are located.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/database-seismic.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics database practical: the speed of seismic waves · Mr Silkstone's Physics">
+  <meta property="og:description" content="A database practical for IB DP Physics: use real arrival times from a 2025 California earthquake to find the speeds of P and S waves, and see how earthquakes are located.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/database-seismic.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Seismic waves (database)</p>
+    <h1>The speed of seismic waves <span class="tag data-tag">Database</span></h1>
+    <p class="lead">A database practical: the measurements were made by others, and your job is to analyse them. <span class="tag">C.2 Wave model</span></p>
+    <p><strong>Aim:</strong> to find the speeds of P waves and S waves through the Earth's crust, using the times at which waves from a real earthquake reached 92 seismometers.</p>
+    <p><strong>Skills practised:</strong> working with a large real data set, gradients and what they mean, choosing which data to include, outliers, interpreting an intercept, and judging the uncertainty of data you didn't collect.</p>
+
+    <h2 id="theory">Theory</h2>
+    <p>An earthquake sends out two kinds of wave through the rock:</p>
+    <ul>
+      <li><strong>P waves</strong> (primary) are <a href="../themes/c2.html#types">longitudinal</a>. They are faster, so they arrive first.</li>
+      <li><strong>S waves</strong> (secondary) are transverse. They are slower, so they arrive later.</li>
+    </ul>
+    <p>If a wave travels at a constant speed $v$, the time it takes to reach a seismometer a distance $d$ away is $t = \dfrac{d}{v}$. So a graph of travel time $t$ (on the $y$-axis) against distance $d$ (on the $x$-axis) is a straight line with gradient $\dfrac{1}{v}$:</p>
+    <div class="key">$$v = \frac{1}{\text{gradient}}$$</div>
+    <p>The S wave arrives after the P wave, and the gap grows with distance:</p>
+    <div class="key">$$t_S - t_P = d\left(\frac{1}{v_S} - \frac{1}{v_P}\right)$$</div>
+    <p>A single seismometer can use this gap to work out how far away an earthquake was, without knowing when it happened. Three seismometers can then locate it.</p>
+
+    <h2 id="data">The data</h2>
+    <p>On 14 April 2025 at 17:08:28 UTC, a magnitude 5.2 earthquake struck 5 km south of Julian, California, 14.3 km below the surface. The Southern California Seismic Network recorded it on hundreds of seismometers, and its analysts marked (or "picked") the moment each wave arrived.</p>
+    <p>The data set lists the 92 stations, from 15 km to 110 km away, where both the P and S arrivals were picked:</p>
+    <ul>
+      <li><strong>station</strong>: the network and station code;</li>
+      <li><strong>epicentral distance $d$</strong>: the distance along the surface from the epicentre, the point directly above the earthquake (we converted it from degrees to km);</li>
+      <li><strong>$t_P$ and $t_S$</strong>: the travel times of the P and S waves, from the time of the earthquake to the picked arrival;</li>
+      <li><strong>S minus P time</strong>: $t_S - t_P$, which we calculated.</li>
+    </ul>
+    <p>Data: Southern California Seismic Network (Caltech and USGS), from the <a href="https://earthquake.usgs.gov/earthquakes/eventpage/ci40925991/phase-data" target="_blank" rel="noopener">USGS earthquake catalogue (event ci40925991)</a>. USGS data are in the public domain.</p>
+    <details class="check">
+      <summary>Show the data (92 stations)</summary>
+      <div class="table-wrap"><table class="notes">
+        <thead><tr><th>Station</th><th>$d$ / km</th><th>$t_P$ / s</th><th>$t_S$ / s</th><th>$t_S - t_P$ / s</th></tr></thead>
+        <tbody>
+            <tr><td>CI.CYP</td><td>14.7</td><td>3.62</td><td>6.02</td><td>2.40</td></tr>
+            <tr><td>CE.12478</td><td>15.3</td><td>3.49</td><td>5.82</td><td>2.33</td></tr>
+            <tr><td>CI.VLO</td><td>18.6</td><td>3.98</td><td>6.73</td><td>2.75</td></tr>
+            <tr><td>CI.MTG</td><td>18.8</td><td>4.01</td><td>6.91</td><td>2.90</td></tr>
+            <tr><td>CI.LKH</td><td>27.0</td><td>5.27</td><td>8.79</td><td>3.52</td></tr>
+            <tr><td>CI.EML</td><td>28.4</td><td>5.50</td><td>9.42</td><td>3.92</td></tr>
+            <tr><td>CI.ACP</td><td>28.7</td><td>5.55</td><td>9.56</td><td>4.01</td></tr>
+            <tr><td>CI.BOR</td><td>30.6</td><td>5.43</td><td>9.06</td><td>3.63</td></tr>
+            <tr><td>CI.DPP</td><td>32.7</td><td>6.09</td><td>10.39</td><td>4.30</td></tr>
+            <tr><td>AZ.LVA2</td><td>35.2</td><td>6.35</td><td>10.95</td><td>4.60</td></tr>
+            <tr><td>SB.BVDA</td><td>38.6</td><td>6.68</td><td>11.36</td><td>4.68</td></tr>
+            <tr><td>CI.LYP</td><td>39.8</td><td>7.09</td><td>12.20</td><td>5.11</td></tr>
+            <tr><td>CI.BAR</td><td>40.1</td><td>7.03</td><td>12.39</td><td>5.36</td></tr>
+            <tr><td>CE.02143</td><td>41.6</td><td>7.35</td><td>12.60</td><td>5.25</td></tr>
+            <tr><td>CE.03260</td><td>42.7</td><td>7.56</td><td>13.23</td><td>5.67</td></tr>
+            <tr><td>CI.CPO</td><td>44.8</td><td>7.66</td><td>13.66</td><td>6.00</td></tr>
+            <tr><td>CI.RCR</td><td>44.9</td><td>7.67</td><td>12.98</td><td>5.31</td></tr>
+            <tr><td>CI.VCP</td><td>45.7</td><td>7.72</td><td>13.39</td><td>5.67</td></tr>
+            <tr><td>CI.SDR</td><td>46.5</td><td>8.04</td><td>14.12</td><td>6.08</td></tr>
+            <tr><td>NP.5231</td><td>47.2</td><td>8.26</td><td>13.93</td><td>5.67</td></tr>
+            <tr><td>CE.13477</td><td>50.1</td><td>8.52</td><td>14.68</td><td>6.16</td></tr>
+            <tr><td>CI.DZA</td><td>50.5</td><td>8.60</td><td>15.25</td><td>6.65</td></tr>
+            <tr><td>AZ.FRD</td><td>50.9</td><td>8.79</td><td>15.02</td><td>6.23</td></tr>
+            <tr><td>BC.TKX</td><td>51.8</td><td>8.67</td><td>15.53</td><td>6.86</td></tr>
+            <tr><td>CE.03156</td><td>52.9</td><td>9.07</td><td>15.84</td><td>6.77</td></tr>
+            <tr><td>CI.LUS</td><td>53.1</td><td>9.04</td><td>15.88</td><td>6.84</td></tr>
+            <tr><td>CI.SWP</td><td>53.8</td><td>9.45</td><td>16.07</td><td>6.62</td></tr>
+            <tr><td>CI.ANG</td><td>55.5</td><td>9.50</td><td>16.14</td><td>6.64</td></tr>
+            <tr><td>CE.03148</td><td>56.3</td><td>9.75</td><td>16.91</td><td>7.16</td></tr>
+            <tr><td>CI.PALA</td><td>56.5</td><td>9.35</td><td>17.02</td><td>7.67</td></tr>
+            <tr><td>CI.OLP</td><td>56.9</td><td>9.65</td><td>16.54</td><td>6.89</td></tr>
+            <tr><td>AZ.SND</td><td>57.3</td><td>9.92</td><td>16.53</td><td>6.61</td></tr>
+            <tr><td>CE.12092</td><td>57.6</td><td>10.06</td><td>17.33</td><td>7.27</td></tr>
+            <tr><td>CI.SDG</td><td>58.0</td><td>9.97</td><td>17.24</td><td>7.27</td></tr>
+            <tr><td>CI.DNR</td><td>59.0</td><td>10.21</td><td>17.54</td><td>7.33</td></tr>
+            <tr><td>CI.PLR</td><td>59.6</td><td>10.33</td><td>17.68</td><td>7.35</td></tr>
+            <tr><td>AZ.CRY</td><td>60.2</td><td>10.31</td><td>17.83</td><td>7.52</td></tr>
+            <tr><td>CI.GOR</td><td>60.6</td><td>10.16</td><td>17.83</td><td>7.67</td></tr>
+            <tr><td>CI.CRR</td><td>60.8</td><td>10.51</td><td>18.12</td><td>7.61</td></tr>
+            <tr><td>CE.13141</td><td>60.8</td><td>10.32</td><td>18.34</td><td>8.02</td></tr>
+            <tr><td>CI.RHR</td><td>61.1</td><td>10.10</td><td>17.62</td><td>7.52</td></tr>
+            <tr><td>CE.03738</td><td>61.4</td><td>10.49</td><td>18.35</td><td>7.86</td></tr>
+            <tr><td>CI.IKP</td><td>62.4</td><td>10.60</td><td>17.91</td><td>7.31</td></tr>
+            <tr><td>CI.OCP</td><td>62.6</td><td>11.05</td><td>18.56</td><td>7.51</td></tr>
+            <tr><td>CI.PGA</td><td>66.8</td><td>11.06</td><td>19.76</td><td>8.70</td></tr>
+            <tr><td>CI.CSH</td><td>67.5</td><td>11.35</td><td>19.40</td><td>8.05</td></tr>
+            <tr><td>CE.03121</td><td>68.4</td><td>11.80</td><td>20.30</td><td>8.50</td></tr>
+            <tr><td>CI.TOR</td><td>69.0</td><td>11.49</td><td>19.58</td><td>8.09</td></tr>
+            <tr><td>AZ.RDM</td><td>70.0</td><td>11.71</td><td>20.21</td><td>8.50</td></tr>
+            <tr><td>SB.GVDA</td><td>70.6</td><td>11.80</td><td>20.60</td><td>8.80</td></tr>
+            <tr><td>CI.PMD</td><td>70.8</td><td>11.65</td><td>19.87</td><td>8.22</td></tr>
+            <tr><td>AZ.SMER</td><td>71.2</td><td>11.34</td><td>19.85</td><td>8.51</td></tr>
+            <tr><td>CI.ERR</td><td>72.6</td><td>12.72</td><td>21.30</td><td>8.58</td></tr>
+            <tr><td>AZ.KNW</td><td>76.0</td><td>12.68</td><td>21.96</td><td>9.28</td></tr>
+            <tr><td>CI.CPT2</td><td>76.1</td><td>12.41</td><td>22.23</td><td>9.82</td></tr>
+            <tr><td>CI.YUH2</td><td>76.3</td><td>12.76</td><td>21.50</td><td>8.74</td></tr>
+            <tr><td>CI.DGR</td><td>78.3</td><td>12.93</td><td>22.20</td><td>9.27</td></tr>
+            <tr><td>CI.IDY</td><td>79.6</td><td>13.28</td><td>22.65</td><td>9.37</td></tr>
+            <tr><td>CI.THM</td><td>83.5</td><td>14.52</td><td>24.32</td><td>9.80</td></tr>
+            <tr><td>CI.NSS2</td><td>83.5</td><td>14.37</td><td>25.08</td><td>10.71</td></tr>
+            <tr><td>CI.COK2</td><td>83.6</td><td>14.23</td><td>25.54</td><td>11.31</td></tr>
+            <tr><td>CI.HMT2</td><td>83.6</td><td>13.78</td><td>23.88</td><td>10.10</td></tr>
+            <tr><td>CI.MUR</td><td>83.9</td><td>13.58</td><td>23.99</td><td>10.41</td></tr>
+            <tr><td>CI.SLB</td><td>84.2</td><td>14.02</td><td>24.81</td><td>10.79</td></tr>
+            <tr><td>CI.MTA</td><td>85.0</td><td>13.73</td><td>24.07</td><td>10.34</td></tr>
+            <tr><td>CI.PSD</td><td>87.5</td><td>14.33</td><td>24.27</td><td>9.94</td></tr>
+            <tr><td>CI.IDQ</td><td>87.7</td><td>14.83</td><td>25.68</td><td>10.85</td></tr>
+            <tr><td>CI.BOM</td><td>88.5</td><td>14.50</td><td>24.99</td><td>10.49</td></tr>
+            <tr><td>CI.CTC</td><td>88.8</td><td>14.83</td><td>25.42</td><td>10.59</td></tr>
+            <tr><td>CI.MGE</td><td>89.3</td><td>15.08</td><td>26.12</td><td>11.04</td></tr>
+            <tr><td>CI.SLR</td><td>90.5</td><td>15.11</td><td>26.33</td><td>11.22</td></tr>
+            <tr><td>CI.IDO</td><td>91.2</td><td>15.40</td><td>25.70</td><td>10.30</td></tr>
+            <tr><td>CI.SGL</td><td>91.9</td><td>15.26</td><td>25.60</td><td>10.34</td></tr>
+            <tr><td>BC.CORX</td><td>92.1</td><td>15.17</td><td>26.45</td><td>11.28</td></tr>
+            <tr><td>CI.MSJ</td><td>92.4</td><td>16.11</td><td>27.68</td><td>11.57</td></tr>
+            <tr><td>NP.5062</td><td>92.7</td><td>14.83</td><td>25.77</td><td>10.94</td></tr>
+            <tr><td>CI.VLY</td><td>93.6</td><td>15.08</td><td>26.11</td><td>11.03</td></tr>
+            <tr><td>CI.WMD</td><td>94.6</td><td>15.55</td><td>28.39</td><td>12.84</td></tr>
+            <tr><td>CI.CTW</td><td>97.9</td><td>15.77</td><td>27.42</td><td>11.65</td></tr>
+            <tr><td>CI.FRK</td><td>98.0</td><td>15.27</td><td>26.59</td><td>11.32</td></tr>
+            <tr><td>CI.ESI2</td><td>98.2</td><td>15.76</td><td>26.88</td><td>11.12</td></tr>
+            <tr><td>NP.5058</td><td>98.7</td><td>16.37</td><td>29.94</td><td>13.57</td></tr>
+            <tr><td>CI.CZN</td><td>98.9</td><td>16.53</td><td>28.33</td><td>11.80</td></tr>
+            <tr><td>SB.WLA</td><td>99.6</td><td>16.04</td><td>28.67</td><td>12.63</td></tr>
+            <tr><td>CI.SOC</td><td>99.8</td><td>16.49</td><td>29.01</td><td>12.52</td></tr>
+            <tr><td>CI.DEV</td><td>99.8</td><td>16.65</td><td>28.88</td><td>12.23</td></tr>
+            <tr><td>CI.WWC</td><td>101.8</td><td>16.90</td><td>28.84</td><td>11.94</td></tr>
+            <tr><td>CI.ELS2</td><td>103.0</td><td>16.17</td><td>28.34</td><td>12.17</td></tr>
+            <tr><td>CI.KYV</td><td>106.1</td><td>17.43</td><td>29.54</td><td>12.11</td></tr>
+            <tr><td>CI.PER</td><td>107.7</td><td>17.14</td><td>30.00</td><td>12.86</td></tr>
+            <tr><td>CI.LMH</td><td>108.0</td><td>17.05</td><td>29.91</td><td>12.86</td></tr>
+            <tr><td>BC.JARAX</td><td>109.8</td><td>17.53</td><td>30.29</td><td>12.76</td></tr>
+        </tbody>
+      </table></div>
+      <p><a href="data/julian-earthquake-2025.csv" download>Download as CSV</a></p>
+    </details>
+
+    <h2 id="tasks">Tasks</h2>
+    <ol>
+      <li><strong>The P wave.</strong> Plot $t_P$ against $d$. Is it a straight line? Find the gradient, and the speed of P waves in km s<sup>−1</sup>.</li>
+      <li><strong>The S wave.</strong> Do the same for $t_S$. How do the two speeds compare? Work out $v_P / v_S$.</li>
+      <li><strong>Outliers.</strong> Some points lie off the line. Decide which to leave out, and justify each one. Does leaving them out change the speeds much?</li>
+      <li><strong>The intercept.</strong> At $d = 0$ the line doesn't pass through the origin. Why not? (Think about where the earthquake actually happened.)</li>
+      <li><strong>Locating an earthquake.</strong> Plot $t_S - t_P$ against $d$. Use your gradient to estimate how far away an earthquake was if a seismometer records an S–P time of 10.0 s.</li>
+      <li><strong>Uncertainties.</strong> No uncertainties are given. Estimate them from the scatter of the points, then find the uncertainty in each speed from the steepest and shallowest lines (see <a href="../skills.html#gradient-uncertainty">uncertainty in the gradient</a>).</li>
+    </ol>
+
+    <div class="worked">
+      <h3>Worked example: from a gradient to a speed</h3>
+      <p>For a different earthquake, a student's graph of P-wave travel time against distance has a gradient of 0.168 s km<sup>−1</sup>. The steepest and shallowest lines give 0.174 and 0.162 s km<sup>−1</sup>. Find the speed of the P waves with its uncertainty.</p>
+      <p>$v = \dfrac{1}{0.168} = 5.95$ km s<sup>−1</sup>.</p>
+      <p>Gradient uncertainty: $(0.174 - 0.162) \div 2 = 0.006$ s km<sup>−1</sup>, a fractional uncertainty of $\dfrac{0.006}{0.168} = 0.036$.</p>
+      <p>Taking the reciprocal keeps the same fractional uncertainty, so $\Delta v = 0.036 \times 5.95 = 0.2$ km s<sup>−1</sup>, and $v = (6.0 \pm 0.2)$ km s<sup>−1</sup>.</p>
+    </div>
+
+    <div class="worked">
+      <h3>Worked example: how far away was the earthquake?</h3>
+      <p>In a region where P waves travel at 6.0 km s<sup>−1</sup> and S waves at 3.5 km s<sup>−1</sup>, a seismometer records the S wave 14.0 s after the P wave. How far away was the earthquake?</p>
+      <p>$\dfrac{1}{v_S} - \dfrac{1}{v_P} = \dfrac{1}{3.5} - \dfrac{1}{6.0} = 0.286 - 0.167 = 0.119$ s km<sup>−1</sup>.</p>
+      <p>$d = \dfrac{14.0}{0.119} = 118$ km, so about 120 km.</p>
+    </div>
+
+    <h2 id="graph">Graphing tool</h2>
+    <p>Choose the variables to plot. Add uncertainty bars to find the steepest and shallowest lines, and use <strong>Choose which data points to use</strong> to leave out outliers.</p>
+    <div class="dgraph" data-sets='[{"src":"data/julian-earthquake-2025.csv","name":"Julian, California earthquake, 14 April 2025"}]' data-x="1" data-y="2">
+      <noscript><p class="notice">The graphing tool needs JavaScript turned on in your browser.</p></noscript>
+    </div>
+
+    <h2 id="evaluating">Evaluating</h2>
+    <ul>
+      <li><strong>Picking arrivals:</strong> an analyst judges each arrival time from a wiggly trace. Why is the S arrival harder to pick than the P arrival? (It arrives while the ground is still shaking from the P wave.)</li>
+      <li><strong>Distance:</strong> the earthquake happened 14.3 km underground, but $d$ is measured along the surface. For which stations does this matter most? How could you calculate the true straight-line distance?</li>
+      <li><strong>The rock:</strong> the waves travel through different rocks on the way to different stations, and waves speed up deeper in the crust. How would this show up in your graph?</li>
+      <li><strong>The time of the earthquake:</strong> nobody saw the earthquake start: its time and position were calculated from these same arrival times. Why does the S–P method avoid this problem?</li>
+      <li><strong>The source:</strong> how reliable are data that have been checked by professional analysts? What would you need to know to judge them?</li>
+    </ul>
+
+    <h2 id="check">Check your understanding</h2>
+    <details class="check">
+      <summary>Why is the gradient of a time–distance graph equal to $1/v$, not $v$?</summary>
+      <p>Time is on the $y$-axis and distance on the $x$-axis, so the gradient is $\dfrac{\Delta t}{\Delta d}$, the time taken per kilometre. Speed is distance per unit time, $\dfrac{\Delta d}{\Delta t}$, which is the reciprocal.</p>
+    </details>
+    <details class="check">
+      <summary>S waves cannot travel through liquids. Why does this make sense for a transverse wave?</summary>
+      <p>A transverse wave needs the medium to spring back when it is pushed sideways. A liquid flows instead of resisting a sideways (shear) push, so it cannot carry a transverse wave. P waves compress and stretch the medium, which liquids do resist, so P waves can pass through liquids. This is how seismologists showed that the Earth's outer core is liquid.</p>
+    </details>
+    <details class="check">
+      <summary>What values should you get? (Open this after you have found your own.)</summary>
+      <p>In the upper crust of southern California, P waves typically travel at about 6 to 7 km s<sup>−1</sup> and S waves at about 3.5 to 4 km s<sup>−1</sup>, with $v_P / v_S$ close to 1.7. How do your values compare?</p>
+    </details>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics database practical: Kepler's third law · Mr Silkstone's Physics</title>
+  <meta name="description" content="A database practical for IB DP Physics: use NASA data for the planets and Jupiter's moons to deduce Kepler's third law and find the masses of the Sun and Jupiter.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/database-kepler.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics database practical: Kepler's third law · Mr Silkstone's Physics">
+  <meta property="og:description" content="A database practical for IB DP Physics: use NASA data for the planets and Jupiter's moons to deduce Kepler's third law and find the masses of the Sun and Jupiter.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/database-kepler.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Kepler's third law (database)</p>
+    <h1>Kepler's third law from NASA data <span class="tag data-tag">Database</span></h1>
+    <p class="lead">A database practical: the measurements were made by others, and your job is to analyse them. <span class="tag">D.1 Gravitational fields</span></p>
+    <p><strong>Aim:</strong> to use real orbital data to deduce how the period of an orbit depends on its radius, and to find the masses of the Sun and of Jupiter.</p>
+    <p><strong>Skills practised:</strong> choosing and judging a data source, converting units, linearising (including a log–log graph), choosing which data to include, the uncertainty in a gradient, and comparing two data sets.</p>
+
+    <h2 id="theory">Theory</h2>
+    <p>For a body in a circular orbit of radius $r$ around a much larger mass $M$, the gravitational force provides the centripetal force:</p>
+    <div class="key">$$\frac{GMm}{r^2} = \frac{4\pi^2 m r}{T^2} \quad\Rightarrow\quad T^2 = \frac{4\pi^2}{GM}\,r^3$$</div>
+    <p>This is <a href="../themes/d1.html#kepler">Kepler's third law</a>. Deducing it is <span class="tag y2028">New for 2028</span> in the syllabus. You can test it in two ways:</p>
+    <ul>
+      <li><strong>A log–log graph</strong> (see <a href="../skills.html#linearising">linearising</a>): if $T = k r^n$, then $\log T = n \log r + \log k$. The gradient of $\log T$ against $\log r$ is the power $n$. Kepler's law predicts $n = 1.5$.</li>
+      <li><strong>A graph of $T^2$ against $r^3$</strong>: a straight line through the origin, with gradient $\dfrac{4\pi^2}{GM}$. So $M = \dfrac{4\pi^2}{G \times \text{gradient}}$.</li>
+    </ul>
+    <p>The mass $m$ of the orbiting body cancels, so every planet (or moon) of the same central body should lie on the same line.</p>
+
+    <h2 id="data">The data</h2>
+    <p>Two data sets from NASA, both public domain:</p>
+    <ul>
+      <li><strong>The planets:</strong> mean distance from the Sun and orbital period, from the <a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/" target="_blank" rel="noopener">NASA Planetary Fact Sheet</a>.</li>
+      <li><strong>Jupiter's moons:</strong> mean orbital radius (the semi-major axis) and orbital period for 17 moons, from the <a href="https://ssd.jpl.nasa.gov/sats/elem/" target="_blank" rel="noopener">NASA JPL Planetary Satellite Mean Elements</a>. The first eight orbit close to Jupiter, in nearly circular orbits. The others are small, distant "irregular" moons, probably captured asteroids, in tilted, elongated orbits that the Sun's gravity disturbs.</li>
+    </ul>
+    <p>Both sources give the values without uncertainties. The number of significant figures tells you how precisely each value is known. The orbits are ellipses, not circles, so "mean distance" means the semi-major axis, half the longest diameter of the ellipse.</p>
+    <details class="check">
+      <summary>Show the data for the planets</summary>
+      <div class="table-wrap"><table class="notes">
+        <thead><tr><th>Planet</th><th>Mean distance from Sun $r$ / $10^6$ km</th><th>Orbital period $T$ / days</th></tr></thead>
+        <tbody>
+<tr><td>Mercury</td><td>57.9</td><td>88.0</td></tr>
+            <tr><td>Venus</td><td>108.2</td><td>224.7</td></tr>
+            <tr><td>Earth</td><td>149.6</td><td>365.2</td></tr>
+            <tr><td>Mars</td><td>228.0</td><td>687.0</td></tr>
+            <tr><td>Jupiter</td><td>778.5</td><td>4331</td></tr>
+            <tr><td>Saturn</td><td>1432.0</td><td>10747</td></tr>
+            <tr><td>Uranus</td><td>2867.0</td><td>30589</td></tr>
+            <tr><td>Neptune</td><td>4515.0</td><td>59800</td></tr>
+        </tbody>
+      </table></div>
+      <p><a href="data/planets.csv" download>Download as CSV</a></p>
+    </details>
+    <details class="check">
+      <summary>Show the data for Jupiter's moons</summary>
+      <div class="table-wrap"><table class="notes">
+        <thead><tr><th>Moon</th><th>Mean orbital radius $r$ / km</th><th>Orbital period $T$ / days</th></tr></thead>
+        <tbody>
+            <tr><td>Metis</td><td>128000</td><td>0.294779</td></tr>
+            <tr><td>Adrastea</td><td>129000</td><td>0.298260</td></tr>
+            <tr><td>Amalthea</td><td>181400</td><td>0.499918</td></tr>
+            <tr><td>Thebe</td><td>221900</td><td>0.676105</td></tr>
+            <tr><td>Io</td><td>421800</td><td>1.762732</td></tr>
+            <tr><td>Europa</td><td>671100</td><td>3.525463</td></tr>
+            <tr><td>Ganymede</td><td>1070400</td><td>7.155588</td></tr>
+            <tr><td>Callisto</td><td>1882700</td><td>16.690440</td></tr>
+            <tr><td>Themisto</td><td>7397000</td><td>129.9681</td></tr>
+            <tr><td>Leda</td><td>11145200</td><td>240.3264</td></tr>
+            <tr><td>Himalia</td><td>11439000</td><td>249.9090</td></tr>
+            <tr><td>Lysithea</td><td>11699100</td><td>258.5035</td></tr>
+            <tr><td>Elara</td><td>11710700</td><td>258.8861</td></tr>
+            <tr><td>Ananke</td><td>21029500</td><td>623.1097</td></tr>
+            <tr><td>Carme</td><td>23139200</td><td>719.2806</td></tr>
+            <tr><td>Pasiphae</td><td>23463200</td><td>734.4215</td></tr>
+            <tr><td>Sinope</td><td>23679300</td><td>744.5951</td></tr>
+        </tbody>
+      </table></div>
+      <p><a href="data/jupiter-moons.csv" download>Download as CSV</a></p>
+    </details>
+
+    <h2 id="tasks">Tasks</h2>
+    <ol>
+      <li><strong>Deduce the law.</strong> For the planets, plot $\log T$ against $\log r$. Find the gradient. Is it close to 1.5?</li>
+      <li><strong>Convert to SI units.</strong> $1\ \text{day} = 86\,400$ s, and $10^6$ km $= 10^9$ m. Make columns for $T^2$ in $\text{s}^2$ and $r^3$ in $\text{m}^3$.</li>
+      <li><strong>Find the mass of the Sun.</strong> Plot $T^2$ against $r^3$. Use the gradient and $G = 6.67 \times 10^{-11}\ \text{N m}^2\,\text{kg}^{-2}$ to find $M$.</li>
+      <li><strong>Find the mass of Jupiter</strong> in the same way, using the eight inner moons.</li>
+      <li><strong>Choose your data.</strong> Now add the irregular moons. Do they fit the same line? Decide whether to include them, and justify your choice.</li>
+      <li><strong>Estimate uncertainties.</strong> No uncertainties are given, so decide how to estimate them: from the significant figures, from the scatter of the points about the line, or from the steepest and shallowest lines (see <a href="../skills.html#gradient-uncertainty">uncertainty in the gradient</a>).</li>
+    </ol>
+    <aside class="maths-link">
+      <h3>Maths link: the log–log graph <span class="tag">AA SL 1.5, 1.7</span></h3>
+      <p>The planets' distances range over a factor of almost 80, and their periods over a factor of almost 700. On ordinary axes, Mercury, Venus, Earth and Mars crowd together near the origin. Logs spread the points out evenly, so every planet counts equally.</p>
+    </aside>
+
+    <div class="worked">
+      <h3>Worked example: the mass of Saturn from one moon</h3>
+      <p>NASA JPL gives the mean orbital radius of Saturn's largest moon, Titan, as 1 221 900 km, and its orbital period as 15.945448 days. Find the mass of Saturn.</p>
+      <p>In SI units: $r = 1.2219 \times 10^9$ m and $T = 15.945448 \times 86\,400 = 1.37769 \times 10^6$ s.</p>
+      <p>$M = \dfrac{4\pi^2 r^3}{G T^2} = \dfrac{4\pi^2 \times (1.2219 \times 10^9)^3}{6.67 \times 10^{-11} \times (1.37769 \times 10^6)^2}$</p>
+      <p>$M = 5.69 \times 10^{26}$ kg.</p>
+      <p>One moon gives one value. A graph of many moons tests whether the law holds, shows any moons that don't fit, and gives a better value from the gradient.</p>
+    </div>
+
+    <div class="worked">
+      <h3>Worked example: what does the log–log gradient tell you?</h3>
+      <p>A student plots $\log T$ against $\log r$ for five moons of Uranus. The best-fit gradient is 1.51, and the steepest and shallowest lines give 1.54 and 1.47. What can they conclude?</p>
+      <p>The gradient is $1.51 \pm 0.04$, so $T \propto r^n$ with $n$ between 1.47 and 1.55. This range includes 1.5, so the data agree with $T \propto r^{1.5}$, which means $T^2 \propto r^3$: Kepler's third law.</p>
+    </div>
+
+    <h2 id="graph">Graphing tool</h2>
+    <p>Choose the variables to plot and how to plot them. Then add uncertainty bars to find the steepest and shallowest lines, and use <strong>Choose which data points to use</strong> to leave points out. The tool uses the units of the data, so convert the gradient to SI units yourself.</p>
+    <div class="dgraph" data-sets='[{"src":"data/planets.csv","name":"The planets (NASA Planetary Fact Sheet)"},{"src":"data/jupiter-moons.csv","name":"Jupiter&#39;s moons (NASA JPL)"}]' data-x="1" data-y="2">
+      <noscript><p class="notice">The graphing tool needs JavaScript turned on in your browser.</p></noscript>
+    </div>
+
+    <h2 id="evaluating">Evaluating</h2>
+    <ul>
+      <li><strong>The source:</strong> how reliable is NASA data? How could you check it against an independent source?</li>
+      <li><strong>The model:</strong> the theory assumes circular orbits and a central mass much larger than the orbiting body. Which planet or moon fits these assumptions least well? Does it lie off your line?</li>
+      <li><strong>The irregular moons:</strong> these distant moons are so far from Jupiter that the Sun's gravity noticeably disturbs their orbits. How could that explain any differences you found?</li>
+      <li><strong>Comparing methods:</strong> which method gives the more reliable mass: one moon, a graph of $T^2$ against $r^3$, or the intercept of a log–log graph? Why do the outer planets dominate a graph of $T^2$ against $r^3$?</li>
+    </ul>
+
+    <h2 id="check">Check your understanding</h2>
+    <details class="check">
+      <summary>Why doesn't the mass of a planet affect its orbital period?</summary>
+      <p>The planet's mass $m$ appears on both sides of $\dfrac{GMm}{r^2} = \dfrac{4\pi^2 m r}{T^2}$: a heavier planet feels a larger gravitational force, but needs a proportionally larger centripetal force. So $m$ cancels, and $T$ depends only on $r$ and the central mass $M$.</p>
+    </details>
+    <details class="check">
+      <summary>Why do the planets and Jupiter's moons give two different straight lines on a graph of $T^2$ against $r^3$?</summary>
+      <p>The gradient is $\dfrac{4\pi^2}{GM}$, and $M$ is different: the Sun for the planets, Jupiter for its moons. Jupiter is about a thousand times less massive than the Sun, so its line is about a thousand times steeper.</p>
+    </details>
+    <details class="check">
+      <summary>What values should you get? (Open this after you have found your own.)</summary>
+      <p>The accepted values are about $1.99 \times 10^{30}$ kg for the Sun and $1.90 \times 10^{27}$ kg for Jupiter. How close are your values? If yours are out by a large power of ten, check your unit conversions.</p>
+    </details>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

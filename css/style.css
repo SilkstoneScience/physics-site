@@ -284,7 +284,7 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
 /* Embedded simulations on topic pages: the iframe loads only when "Run simulation" is pressed */
 .sim { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--good); border-radius: var(--radius); padding: 4px 16px 10px; margin: 20px 0; }
 .sim h3 { margin: 10px 0 4px; }
-.tag.sim-tag { background: var(--good-soft); color: var(--good); }
+.tag.sim-tag, .tag.data-tag { background: var(--good-soft); color: var(--good); }
 .sim ol { padding-left: 1.3em; }
 .sim-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 8px 0; }
 .sim-frame { margin: 8px 0; }
@@ -312,10 +312,24 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
 .vlab-watch { font-size: 2rem; font-weight: 700; font-variant-numeric: tabular-nums; margin: 0 0 4px; }
 .vlab-small { font-size: 0.85rem; color: var(--muted); margin: 6px 0; }
 .vlab-check { display: flex; align-items: center; gap: 6px; }
-.vlab-check input { margin: 0; }
+.vlab-check input { margin: 0; width: auto; flex: none; }
 .vlab-table input { width: 100%; min-width: 3.8em; font: inherit; padding: 4px 6px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text); }
 .vlab-table td { padding: 4px; }
 .vlab-del { border: 0; background: none; color: var(--bad); font-size: 1.2rem; cursor: pointer; padding: 0 6px; }
+/* Graphing tool for the database practicals (js/labs/graph.js) */
+.dgraph { margin: 16px 0; }
+.dgraph-axes { display: grid; gap: 10px; }
+@media (min-width: 640px) { .dgraph-axes { grid-template-columns: 1fr 1fr; } }
+.dgraph-axes fieldset { border: 1px solid var(--border); border-radius: 8px; margin: 0; padding: 6px 12px 10px; }
+.dgraph-axes legend { font-weight: 600; padding: 0 4px; }
+.dgraph-axes label { display: block; margin: 6px 0; font-size: 0.92rem; }
+.dgraph select, .dgraph input:not([type="checkbox"]) { display: block; width: 100%; margin-top: 3px; font: inherit; padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); }
+.dgraph-toggles { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 10px 0; font-size: 0.92rem; }
+.dgraph-canvas { display: block; width: 100%; border: 1px solid var(--border); border-radius: 8px; }
+.dgraph-results p { margin: 8px 0; }
+.dgraph-points { margin: 8px 0; }
+.dgraph-points summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+.dgraph-points div { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; font-size: 0.9rem; }
 /* YouTube channels, Apps and software, Simulations pages */
 .res-pages { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
 .res-pages a { border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px; font-size: 0.9rem; text-decoration: none; background: var(--surface); }
