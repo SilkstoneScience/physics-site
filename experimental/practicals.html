@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>IB Physics practicals · Mr Silkstone's Physics</title>
-  <meta name="description" content="Guides to the practical work in IB DP Physics, linked to syllabus topics.">
+  <meta name="description" content="Guides to the practical work in IB DP Physics, linked to syllabus topics, with virtual practicals where you collect your own data from a simulation.">
   <link rel="canonical" href="https://physics.silkstone.xyz/experimental/practicals.html">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
@@ -12,26 +12,129 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Mr Silkstone's Physics">
   <meta property="og:title" content="IB Physics practicals · Mr Silkstone's Physics">
-  <meta property="og:description" content="Guides to the practical work in IB DP Physics, linked to syllabus topics.">
+  <meta property="og:description" content="Guides to the practical work in IB DP Physics, linked to syllabus topics, with virtual practicals where you collect your own data from a simulation.">
   <meta property="og:url" content="https://physics.silkstone.xyz/experimental/practicals.html">
   <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="../css/style.css">
   <script defer src="../js/site.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/pendulum.js"></script>
 </head>
 <body data-root="../" data-section="experimental">
   <header id="site-header"></header>
   <main>
     <p class="crumbs"><a href="index.html">Experimental programme</a> › Practicals</p>
     <h1>Practicals</h1>
-    <p class="lead">Guides for the practicals you carry out during the course.</p>
+    <p class="lead">Guides for the practicals you carry out during the course, and <a href="#virtual">virtual practicals</a> where you take real-style readings from a simulation.</p>
     <div class="notice">The full lab guides will be added soon.</div>
     <ul class="card-grid">
       <li><div class="card" data-theme="A"><h3>Newton's second law</h3><p>A.2 Forces and momentum</p></div></li>
       <li><div class="card" data-theme="A"><h3>Static and dynamic friction</h3><p>A.2 Forces and momentum</p></div></li>
       <li><div class="card" data-theme="C"><h3>Single-slit diffraction</h3><p>C.3 Wave phenomena</p></div></li>
+      <li><a class="card" data-theme="C" href="#pendulum"><h3>Finding <em>g</em> with a simple pendulum <span class="tag sim-tag">Simulation</span></h3><p>C.1 Simple harmonic motion</p></a></li>
     </ul>
+
+    <!-- ===================================================== -->
+    <h2 id="virtual">Virtual practicals</h2>
+    <p>In a virtual practical, the simulation acts like the equipment and <strong>you take the readings</strong>. You read the scale, start and stop the stopwatch by hand, and decide how many readings to take. Your results have real uncertainties, so you practise the same skills as in the lab: recording readings, dealing with uncertainty, linearising, graphing and evaluating. See the <a href="../skills.html">Physics skills</a> page for help with each step.</p>
+    <p>A virtual practical doesn't replace real practical work, but it is a good way to practise before an experiment or your IA, or to catch up on one you missed.</p>
+
+    <section class="vprac" id="pendulum">
+      <h3>Virtual practical 1: finding <em>g</em> with a simple pendulum <span class="tag">C.1 Simple harmonic motion</span></h3>
+      <p><strong>Aim:</strong> to find the acceleration of free fall, $g$, from how the period of a pendulum depends on its length.</p>
+      <p><strong>Skills practised:</strong> reading an analogue scale, repeated readings and half the range, timing several oscillations, propagating uncertainties, linearising, uncertainty bars, and the uncertainty in a gradient.</p>
+
+      <h4>Theory</h4>
+      <p>For small angles, the period of a simple pendulum of length $L$ is</p>
+      <div class="key">$$T = 2\pi\sqrt{\frac{L}{g}}$$</div>
+      <p>A graph of $T$ against $L$ is a curve, so <a href="../skills.html#linearising">linearise</a> it by squaring both sides:</p>
+      <div class="key">$$T^2 = \frac{4\pi^2}{g}\,L$$</div>
+      <p>A graph of $T^2$ (on the $y$-axis) against $L$ (on the $x$-axis) should be a straight line through the origin with gradient $\dfrac{4\pi^2}{g}$. So $g = \dfrac{4\pi^2}{\text{gradient}}$. Because this is a determination of a constant, state the expected value rather than a hypothesis: $g$ should be close to $9.8$ $\text{m s}^{-2}$.</p>
+      <p>$L$ is measured from the pivot to the <strong>centre</strong> of the bob. The metre rule gives the string length $s$ (to the top of the bob), so add the bob's radius: $L = s + r$.</p>
+
+      <h4>Variables</h4>
+      <div class="table-wrap">
+        <table class="notes">
+          <thead><tr><th>Variable</th><th>How it is measured or kept the same</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Independent:</strong> length $L$</td><td>String length $s$ from the metre rule, read to the nearest mm. Two readings are needed (zero at the pivot, and the top of the bob), so the uncertainty is one full division, ±0.001 m. Add the radius, $r = (12.50 \pm 0.05)$ mm, from the bob's diameter. The radius uncertainty is so small compared with ±1 mm that $\Delta L = \pm 0.001$ m.</td></tr>
+            <tr><td><strong>Dependent:</strong> period $T$</td><td>Time $t$ for 10 oscillations, with a stopwatch that reads to 0.01 s. Your reaction time is much larger than 0.01 s, so use half the range of 5 repeats as the uncertainty. Then $T = t / 10$ and $\Delta T = \Delta t / 10$.</td></tr>
+            <tr><td><strong>Control:</strong> release angle</td><td>Keep it the same, at 10° or less, so the small-angle equation applies.</td></tr>
+            <tr><td><strong>Control:</strong> bob and timing point</td><td>The same bob throughout. Always start and stop the stopwatch as the bob passes the timing marker below the pivot.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Method</h4>
+      <ol>
+        <li>Set the release angle to 10°. Adjust the string to a length near the shortest it will go.</li>
+        <li>Use the magnified metre rule to read the string length $s$ at the top of the bob, to the nearest mm. Write it in the table in metres (for example, 0.312 m).</li>
+        <li>Press <strong>Release</strong>. Let the pendulum swing a few times, then start the stopwatch as the bob passes the marker. Count "zero" at that moment.</li>
+        <li>Count each time the bob passes the marker <strong>moving in the same direction</strong>. Stop the stopwatch at "ten". Press <strong>Add to table</strong>, then <strong>Reset</strong>.</li>
+        <li>Repeat until you have 5 timings for this length. Then stop the pendulum.</li>
+        <li>Press <strong>Add a row</strong>, lengthen the string, and repeat for at least 5 lengths spread evenly across the full range.</li>
+        <li>Press <strong>Download as CSV</strong> to open your readings in a spreadsheet, such as Excel, Google Sheets or Logger Pro.</li>
+      </ol>
+
+      <div class="vlab" data-lab="pendulum">
+        <noscript><p class="notice">This virtual practical needs JavaScript turned on in your browser.</p></noscript>
+      </div>
+
+      <h4>Processing your data</h4>
+      <ol>
+        <li>Work out $L = s + r$ for each row.</li>
+        <li>For each length, find the mean time $\bar{t}$ and its uncertainty, half the range (see <a href="../skills.html#recording">recording uncertainties</a>). Then $T = \bar{t} / 10$ and $\Delta T = \Delta t / 10$.</li>
+        <li>Work out $T^2$ and its uncertainty. Squaring doubles the fractional uncertainty: $\Delta(T^2) = 2\,\dfrac{\Delta T}{T} \times T^2$ (see <a href="../skills.html#propagating">propagating uncertainties</a>).</li>
+        <li>Make a processed-data table, with units and uncertainties in the column headings (see <a href="../skills.html#tables">tables</a>).</li>
+        <li>Plot $T^2$ against $L$ with uncertainty bars on every point, and draw the line of best fit (see <a href="../skills.html#graphs">graphs</a>).</li>
+        <li>Draw the steepest and shallowest lines that still pass through all the uncertainty bars, and use them to find the uncertainty in the gradient (see <a href="../skills.html#gradient-uncertainty">uncertainty in the gradient</a>).</li>
+        <li>Calculate $g = 4\pi^2 / \text{gradient}$. Its fractional uncertainty equals the gradient's fractional uncertainty.</li>
+      </ol>
+
+      <div class="worked">
+        <h3>Worked example: processing one row</h3>
+        <p>A student reads the string length as $s = 0.598$ m. The bob's radius is 12.50 mm. Their five times for 10 oscillations are 15.58 s, 15.79 s, 15.66 s, 15.71 s and 15.62 s. Find $L$, $T$ and $T^2$, each with its uncertainty.</p>
+        <p>$L = 0.598 + 0.0125 = 0.6105$ m, so $L = (0.611 \pm 0.001)$ m.</p>
+        <p>Mean time: $\bar{t} = 78.36 \div 5 = 15.67$ s. Half the range: $\Delta t = (15.79 - 15.58) \div 2 = 0.105$ s, about $0.1$ s.</p>
+        <p>$T = 15.67 \div 10 = 1.567$ s and $\Delta T = 0.0105$ s, so $T = (1.57 \pm 0.01)$ s. Timing 10 oscillations has made the uncertainty in $T$ ten times smaller.</p>
+        <p>$T^2 = 1.567^2 = 2.456$ $\text{s}^2$.</p>
+        <p>$\Delta(T^2) = 2 \times \dfrac{0.0105}{1.567} \times 2.456 = 0.033$ $\text{s}^2$, so $T^2 = (2.46 \pm 0.03)$ $\text{s}^2$.</p>
+      </div>
+
+      <div class="worked">
+        <h3>Worked example: from the gradient to <em>g</em></h3>
+        <p>On a student's graph of $T^2$ against $L$, the best-fit line has a gradient of 4.03 $\text{s}^2\,\text{m}^{-1}$. The steepest and shallowest lines through all the uncertainty bars have gradients of 4.15 and 3.92 $\text{s}^2\,\text{m}^{-1}$. Find $g$ with its uncertainty, and compare it with the expected value.</p>
+        <p>Uncertainty in the gradient: $(4.15 - 3.92) \div 2 = 0.115$ $\text{s}^2\,\text{m}^{-1}$.</p>
+        <p>$g = \dfrac{4\pi^2}{4.03} = 9.80$ $\text{m s}^{-2}$.</p>
+        <p>Fractional uncertainty: $\dfrac{0.115}{4.03} = 0.029$, so $\Delta g = 0.029 \times 9.80 = 0.3$ $\text{m s}^{-2}$.</p>
+        <p>$g = (9.8 \pm 0.3)$ $\text{m s}^{-2}$. The expected value lies within this range, so the result agrees with it.</p>
+      </div>
+
+      <h4>Evaluating</h4>
+      <ul>
+        <li><strong>Random error:</strong> your reaction time when starting and stopping the stopwatch. Does half the range of your repeats agree with a typical reaction time, about 0.1–0.2 s? How does timing 10 oscillations help?</li>
+        <li><strong>The timing point:</strong> why is it better to time at the lowest point, where the bob moves fastest, than at the end of the swing?</li>
+        <li><strong>Systematic error:</strong> what would happen to the gradient, and to the intercept, if you forgot to add the radius? Does your line pass through the origin?</li>
+        <li><strong>The small-angle condition:</strong> repeat one length with a release angle of 40°. Is the period different? What does this tell you about the equation?</li>
+        <li><strong>The model:</strong> the amplitude slowly gets smaller. Does this change the period?</li>
+      </ul>
+      <p><strong>Extension:</strong> investigate how the period depends on the release angle. This tests a relationship between two variables, so write a hypothesis first.</p>
+
+      <h4>Check your understanding</h4>
+      <details class="check">
+        <summary>Why time 10 oscillations instead of one?</summary>
+        <p>Your reaction time adds about the same uncertainty to any timing, whether it is long or short. Dividing a time for 10 oscillations by 10 also divides that uncertainty by 10, so the percentage uncertainty in $T$ is ten times smaller.</p>
+      </details>
+      <details class="check">
+        <summary>A student plots $T^2$ against the string length $s$ and forgets to add the radius. What happens to their value of $g$?</summary>
+        <p>Nothing: every point moves the same distance sideways (by $r$), so the gradient, and therefore $g$, stays the same. But the line no longer passes through the origin: it cuts the $T^2$ axis at about $\dfrac{4\pi^2 r}{g} = 0.05$ $\text{s}^2$. Using the gradient removes this kind of systematic error, which is one reason a graph is better than a single calculation.</p>
+      </details>
+      <details class="check">
+        <summary>Which value of $g$ does the simulation use? (Open this after you have found your own.)</summary>
+        <p>$g = 9.81$ $\text{m s}^{-2}$. Does your range include it? Find the percentage difference between your value and 9.81. If your range doesn't include it, look for a systematic error.</p>
+      </details>
+    </section>
   </main>
   <footer id="site-footer"></footer>
 </body>

@@ -629,6 +629,25 @@ window.glueUnits = (function () {
     });
   });
 
+  // ----- Topic pages: "Run simulation" loads an embedded simulation (e.g. PhET) only when pressed -----
+  document.querySelectorAll('button[data-sim]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const box = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!box) return;
+      if (!box.firstElementChild) {
+        const frame = document.createElement('iframe');
+        frame.src = btn.dataset.sim;
+        frame.title = 'Simulation: ' + btn.dataset.title;
+        frame.allowFullscreen = true;
+        box.appendChild(frame);
+      }
+      const show = box.hidden;
+      box.hidden = !show;
+      btn.setAttribute('aria-expanded', String(show));
+      btn.textContent = show ? 'Hide simulation' : 'Run simulation';
+    });
+  });
+
   // ----- About page: contact form, sent to Formspree without leaving the page -----
   // (Without JavaScript the form still works: it posts to Formspree, which shows its own thank-you page.)
   document.querySelectorAll('form[data-formspree]').forEach((form) => {

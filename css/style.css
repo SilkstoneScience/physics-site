@@ -281,6 +281,36 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
 .deck-note { color: var(--muted); }
 .deck-frame { margin: 8px 0 4px; }
 .deck-frame[hidden] { display: none; }
+/* Embedded simulations on topic pages: the iframe loads only when "Run simulation" is pressed */
+.sim { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--good); border-radius: var(--radius); padding: 4px 16px 10px; margin: 20px 0; }
+.sim h3 { margin: 10px 0 4px; }
+.tag.sim-tag { background: var(--good-soft); color: var(--good); }
+.sim ol { padding-left: 1.3em; }
+.sim-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin: 8px 0; }
+.sim-frame { margin: 8px 0; }
+.sim-frame[hidden] { display: none; }
+.sim-frame iframe { display: block; width: 100%; aspect-ratio: 1024 / 640; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
+.sim .credit { font-size: 0.82rem; color: var(--muted); margin: 6px 0 0; }
+/* Virtual practicals (js/labs/): simulated equipment for collecting data */
+.vlab { margin: 16px 0; }
+.vlab-grid { display: grid; gap: 12px; }
+@media (min-width: 900px) { .vlab-grid { grid-template-columns: 1.5fr 1fr; align-items: start; } }
+.vlab-scene canvas { display: block; width: 100%; border: 1px solid var(--border); border-radius: var(--radius); }
+.vlab-side { display: grid; gap: 12px; }
+.vlab-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 14px 10px; }
+.vlab > .vlab-panel { margin-top: 12px; }
+.vlab-panel h4 { margin: 8px 0 6px; font-size: 1rem; }
+.vlab-field { display: block; margin: 6px 0 10px; font-size: 0.95rem; }
+.vlab-field input[type="range"] { display: block; width: 100%; margin-top: 4px; }
+.vlab-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; }
+.vlab-buttons .button { padding: 7px 14px; }
+.vlab-buttons .button:disabled { opacity: 0.45; cursor: default; }
+.vlab-zoom { display: block; width: 180px; border: 1px solid var(--border); border-radius: 6px; }
+.vlab-watch { font-size: 2rem; font-weight: 700; font-variant-numeric: tabular-nums; margin: 0 0 4px; }
+.vlab-small { font-size: 0.85rem; color: var(--muted); margin: 6px 0; }
+.vlab-table input { width: 100%; min-width: 3.8em; font: inherit; padding: 4px 6px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text); }
+.vlab-table td { padding: 4px; }
+.vlab-del { border: 0; background: none; color: var(--bad); font-size: 1.2rem; cursor: pointer; padding: 0 6px; }
 /* YouTube channels, Apps and software, Simulations pages */
 .res-pages { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
 .res-pages a { border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px; font-size: 0.9rem; text-decoration: none; background: var(--surface); }
