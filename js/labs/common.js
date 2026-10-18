@@ -38,7 +38,11 @@ window.Lab = (() => {
     try { rows = JSON.parse(localStorage.getItem(store)); } catch (e) { rows = null; }
     if (Array.isArray(rows)) rows = rows.filter(r => Array.isArray(r) && r.length === cols.length);
     if (!Array.isArray(rows) || !rows.length) rows = [blank()];
-    const save = () => { try { localStorage.setItem(store, JSON.stringify(rows)); } catch (e) { /* storage blocked: the table still works */ } };
+    const listeners = [];
+    const save = () => {
+      try { localStorage.setItem(store, JSON.stringify(rows)); } catch (e) { /* storage blocked: the table still works */ }
+      listeners.forEach(f => f());
+    };
     const render = () => {
       tbody.innerHTML = rows.map((r, i) => `<tr>${r.map((v, j) =>
         `<td><input data-r="${i}" data-c="${j}" inputmode="decimal" value="${esc(v)}" aria-label="Row ${i + 1}: ${cols[j].aria}"></td>`).join('')}
@@ -79,6 +83,9 @@ window.Lab = (() => {
         return rows.length;
       },
       say(text) { msg.textContent = text; },
+      rows: () => rows.map(r => r.slice()),
+      cols,
+      onChange(f) { listeners.push(f); },
     };
   }
 

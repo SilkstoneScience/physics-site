@@ -1,11 +1,13 @@
-// Graphing tool for the database practicals (needs js/labs/common.js).
-// <div class="dgraph" data-sets='[{"src":"data/planets.csv","name":"The planets"}]' data-x="1" data-y="2" data-xf="pow3" data-yf="pow2"></div>
+// Graphing tool for the practicals (needs js/labs/common.js).
+// Database labs: <div class="dgraph" data-sets='[{"src":"data/planets.csv","name":"The planets"}]' data-x="1" data-y="2" data-xf="pow3" data-yf="pow2"></div>
+// Students' own data: Lab.graph(root, { source, x, y, xf, yf, onSnapshot }) where source = { get(), onChange(callback) }
+// and get() returns { heads: ["name", "peak force F / N", ...], rows: [{ name, vals: [numbers or NaN] }] }.
 // Loads a CSV (first column = names, other columns = numbers, headings like "orbital period T / days"),
 // lets the student choose and transform the variables, add uncertainty bars, leave out points, and see the
 // best-fit line (least squares) and the steepest and shallowest lines that pass through every uncertainty bar.
 (() => {
   if (!window.Lab) return;
-  const { col, fit } = Lab;
+  const { fit } = Lab;
 
   const SUP = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '-': '⁻' };
   const sup = s => String(s).split('').map(c => SUP[c] || c).join('');
@@ -19,7 +21,7 @@
     ln: { name: 'ln x', f: v => Math.log(v), q: (s, u) => `ln(${s}${u ? ' / ' + u : ''})`, u: () => '' },
     log: { name: 'log₁₀ x', f: v => Math.log10(v), q: (s, u) => `log(${s}${u ? ' / ' + u : ''})`, u: () => '' },
   };
-  function par(u) { return /[\s^/]/.test(u) ? `(${u})` : u; }
+  function par(u) { return /^\(.*\)[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]*$/.test(u) || !/[\s^/]/.test(u) ? u : `(${u})`; }
   function pw(u, n) { return u ? par(u.replace(/\^(-?\d+)/g, (m, e) => sup(e))) + sup(n) : ''; }
   const nice = u => u.replace(/\^(-?\d+)/g, (m, e) => sup(e));
 
@@ -86,8 +88,8 @@
     const m = sxy / sxx; return { m, c: my - m * mx };
   }
 
-  document.querySelectorAll('.dgraph').forEach(async (root) => {
-    const sets = JSON.parse(root.dataset.sets);
+  function makeGraph(root, opt) {
+    const sets = opt.sets || [];
     const opts = Object.entries(TRANSFORMS).map(([k, t]) => `<option value="${k}">${t.name}</option>`).join('');
     root.innerHTML = `
       <div class="vlab-panel">
@@ -112,27 +114,31 @@
         <canvas class="dgraph-canvas" role="img" aria-label="A graph of the chosen data, described in the results below it."></canvas>
         <div class="dgraph-results" aria-live="polite"></div>
         <details class="dgraph-points"><summary>Choose which data points to use</summary><div data-g="points"></div></details>
-        <p class="vlab-small"><a data-g="download" download>Download this data set (CSV)</a></p>
+        ${sets.length ? '<p class="vlab-small"><a data-g="download" download>Download this data set (CSV)</a></p>' : ''}
+        ${opt.onSnapshot ? '<div class="vlab-buttons"><button type="button" class="button secondary" data-g="snap">Add this graph to my report</button></div><p class="vlab-small" data-g="snapmsg" aria-live="polite"></p>' : ''}
       </div>`;
     const $ = k => root.querySelector(`[data-g="${k}"]`);
-    const canvas = root.querySelector('canvas'), out = root.querySelector('.dgraph-results');
+    const mainCanvas = root.querySelector('canvas'), out = root.querySelector('.dgraph-results');
     let data = null, skip = new Set();
 
+    function setData(d, first) {
+      data = { heads: d.heads.map(parseHead), rows: d.rows };
+      if (first) {
+        skip = new Set();
+        const cols = data.heads.slice(1).map((h, j) => `<option value="${j}">${h.label}${h.unit ? ' / ' + nice(h.unit) : ''}</option>`).join('');
+        $('xcol').innerHTML = $('ycol').innerHTML = cols;
+        $('xcol').value = opt.x ? +opt.x - 1 : 0;
+        $('ycol').value = opt.y ? +opt.y - 1 : 1;
+        $('xf').value = opt.xf || 'none';
+        $('yf').value = opt.yf || 'none';
+      }
+      $('points').innerHTML = data.rows.map((r, k) => `<label class="vlab-check"><input type="checkbox" data-p="${k}" ${skip.has(k) ? '' : 'checked'}> ${r.name}</label>`).join('');
+      draw();
+    }
     async function load(i) {
       const res = await fetch(sets[i].src);
-      data = parseCSV(await res.text());
-      data.heads = data.heads.map(parseHead);
-      skip = new Set();
-      const cols = data.heads.slice(1).map((h, j) => `<option value="${j}">${h.label}${h.unit ? ' / ' + nice(h.unit) : ''}</option>`).join('');
-      $('xcol').innerHTML = $('ycol').innerHTML = cols;
-      const first = i === 0;
-      $('xcol').value = first && root.dataset.x ? +root.dataset.x - 1 : 0;
-      $('ycol').value = first && root.dataset.y ? +root.dataset.y - 1 : 1;
-      $('xf').value = (first && root.dataset.xf) || 'none';
-      $('yf').value = (first && root.dataset.yf) || 'none';
+      setData(parseCSV(await res.text()), true);
       $('download').href = sets[i].src;
-      $('points').innerHTML = data.rows.map((r, k) => `<label class="vlab-check"><input type="checkbox" data-p="${k}" checked> ${r.name}</label>`).join('');
-      draw();
     }
 
     function axisInfo(which) {
@@ -141,16 +147,18 @@
       return { q, u, f: t.f, text: u ? `${q} / ${u}` : q, col: +$(which + 'col').value };
     }
 
-    function draw() {
+    function draw(target, size, palette) {
       if (!data) return;
+      const col = palette || Lab.col, canvas = target || mainCanvas;
       const X = axisInfo('x'), Y = axisInfo('y');
       const pts = data.rows.map((r, k) => {
         const x = X.f(r.vals[X.col]), y = Y.f(r.vals[Y.col]);
         return { k, name: r.name, x, y, dx: unc($('dx').value, x), dy: unc($('dy').value, y) };
       }).filter(p => !skip.has(p.k) && isFinite(p.x) && isFinite(p.y));
-      const W = canvas.clientWidth, H = Math.round(Math.min(W * 0.75, 460)), g = fit(canvas, W, H);
+      const W = size ? size[0] : canvas.clientWidth, H = size ? size[1] : Math.round(Math.min(W * 0.75, 460));
+      const g = size ? canvas.getContext('2d') : fit(canvas, W, H);
       g.fillStyle = col['--surface']; g.fillRect(0, 0, W, H);
-      if (pts.length < 2) { out.textContent = 'Choose at least two data points.'; return; }
+      if (pts.length < 2) { if (!target) out.textContent = 'Enter or choose at least two data points.'; return false; }
       // ranges
       let x0 = Math.min(...pts.map(p => p.x - p.dx)), x1 = Math.max(...pts.map(p => p.x + p.dx));
       let y0 = Math.min(...pts.map(p => p.y - p.dy)), y1 = Math.max(...pts.map(p => p.y + p.dy));
@@ -197,7 +205,7 @@
       });
       g.restore();
       // results
-      const gradUnit = Y.u && X.u ? `${Y.u} / ${X.u}` : Y.u ? Y.u : X.u ? `1 / ${X.u}` : 'no unit';
+      const gradUnit = Y.u && X.u ? `${Y.u} / ${par(X.u)}` : Y.u ? Y.u : X.u ? `1 / ${par(X.u)}` : 'no unit';
       let html = `<p><strong>Line of best fit:</strong> gradient = ${fmt(best.m, 4)} &nbsp;(${gradUnit}), &nbsp;y-intercept = ${fmt(best.c, 4)}${Y.u ? ' ' + Y.u : ''}. <span class="vlab-small">${pts.length} points.</span></p>`;
       if ($('ext').checked) {
         if (!$('dx').value.trim() && !$('dy').value.trim()) html += '<p class="vlab-small">Add uncertainty bars to find the steepest and shallowest lines.</p>';
@@ -208,7 +216,8 @@
             <p>Gradient = ${fmt(best.m, 4)} ± ${fmt(dm, 2)} &nbsp;(${gradUnit}); &nbsp;y-intercept = ${fmt(best.c, 4)} ± ${fmt(dc, 2)}${Y.u ? ' ' + Y.u : ''}.</p>`;
         }
       }
-      out.innerHTML = html;
+      if (!target) out.innerHTML = html;
+      return { text: Y.text + ' against ' + X.text, x: X.text, y: Y.text, best, results: out.innerText };
     }
 
     root.addEventListener('input', (e) => {
@@ -216,8 +225,23 @@
       if (e.target.dataset.g === 'set') { load(+e.target.value); return; }
       draw();
     });
-    addEventListener('resize', draw);
-    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTimeout(draw, 50));
-    load(0);
-  });
+    addEventListener('resize', () => draw());
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTimeout(() => draw(), 50));
+    // A copy of the graph for the report: always on a white background, at a fixed size
+    if (opt.onSnapshot) $('snap').addEventListener('click', () => {
+      const c = document.createElement('canvas'); c.width = 1200; c.height = 800;
+      const g = c.getContext('2d'); g.scale(2, 2);
+      const light = { '--surface': '#ffffff', '--text': '#1c2430', '--muted': '#5b6676', '--border': '#dde2e9', '--accent': '#1f5fbf' };
+      const info = draw(c, [600, 400], light);
+      if (!info) { $('snapmsg').textContent = 'Enter at least two data points first.'; return; }
+      $('snapmsg').textContent = opt.onSnapshot(c, info) || 'Added to your report.';
+    });
+    if (opt.source) { setData(opt.source.get(), true); opt.source.onChange(() => setData(opt.source.get(), false)); }
+    else load(0);
+    return { redraw: () => draw() };
+  }
+
+  Lab.graph = makeGraph;
+  document.querySelectorAll('.dgraph[data-sets]').forEach(root => makeGraph(root, {
+    sets: JSON.parse(root.dataset.sets), x: root.dataset.x, y: root.dataset.y, xf: root.dataset.xf, yf: root.dataset.yf }));
 })();

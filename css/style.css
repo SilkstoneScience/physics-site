@@ -334,6 +334,17 @@ figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
 .dgraph-points { margin: 8px 0; }
 .dgraph-points summary { cursor: pointer; color: var(--accent); font-weight: 600; }
 .dgraph-points div { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; font-size: 0.9rem; }
+/* Lab pages where students record answers and download a Word report (js/labs/report.js) */
+.report-box { background: var(--accent-soft); border-radius: var(--radius); padding: 4px 16px 12px; margin: 20px 0; }
+.report-box h2 { margin-top: 12px; }
+.answer { margin: 14px 0; }
+.answer label { display: block; margin-bottom: 4px; }
+.answer textarea { min-height: 4.5em; resize: vertical; }
+.mathbar { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0 6px; }
+.mathbar button { min-width: 2.2em; padding: 4px 6px; font: inherit; font-size: 1rem; line-height: 1.2; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text); cursor: pointer; }
+.mathbar button:hover { border-color: var(--accent); color: var(--accent); }
+.mathbar p { flex-basis: 100%; margin: 2px 0 0; }
+.measure-panel h3 { margin: 8px 0 4px; font-size: 1rem; }
 /* YouTube channels, Apps and software, Simulations pages */
 .res-pages { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
 .res-pages a { border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px; font-size: 0.9rem; text-decoration: none; background: var(--surface); }

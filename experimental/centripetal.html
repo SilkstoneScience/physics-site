@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: centripetal acceleration with a pendulum · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab with Vernier sensors: measure the force on a swinging pendulum with a force sensor and photogate, and discover how centripetal force depends on mass, speed and radius.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/centripetal.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: centripetal acceleration with a pendulum · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab with Vernier sensors: measure the force on a swinging pendulum with a force sensor and photogate, and discover how centripetal force depends on mass, speed and radius.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/centripetal.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/centripetal.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Centripetal acceleration</p>
+    <h1>Centripetal acceleration with a pendulum</h1>
+    <p class="lead">A lab with Vernier sensors: a force sensor measures the tension in a pendulum's string, and a photogate measures the bob's speed. <span class="tag">A.2 Forces and momentum</span></p>
+    <p><strong>Aim:</strong> to find how the force needed to keep an object moving in a circle depends on its speed and on the radius of the circle, and from this to deduce an equation for its acceleration.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#setup">Setting up the equipment</a></li>
+        <li><a href="#logger">Setting up Logger Pro</a></li>
+        <li><a href="#part1">Part 1: force and speed</a></li>
+        <li><a href="#part2">Part 2: force and radius</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="equipment">1. Equipment and safety</h2>
+    <ul>
+      <li>Vernier interface (LabQuest Mini or LabQuest Stream) and a laptop with Logger Pro 3</li>
+      <li>Vernier Dual-Range Force Sensor and Vernier Photogate</li>
+      <li>Ring stand (or support rod and base), a second rod, and a right-angle clamp</li>
+      <li>About 1.2 m of string, a mass hanger and slotted masses</li>
+      <li>Metre rule or tape measure, vernier calipers and a balance</li>
+    </ul>
+    <div class="notice">
+      <p style="margin:0"><strong>Safety:</strong> clamp the stand firmly to the bench so it can't tip over, and keep the area around the swinging bob clear. Check that the slotted masses can't slide off the hanger before each swing.</p>
+    </div>
+
+    <h2 id="prelab">2. Before the lab</h2>
+    <p>Tie a soft object, such as a rubber stopper, to about 1 m of string. Standing well away from other people, swing it in a horizontal circle above your head at a steady speed. Feel the pull of the string on your hand. Then swing it faster, and then with a shorter string.</p>
+    <p>In this lab, you treat the path of a swinging pendulum bob as part of a circle, centred on the hook it hangs from. Answer these questions before you start.</p>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> How did the pull on your hand change when you swung the stopper faster? When you used a shorter string?</label><textarea id="pre1" data-save="pre1" rows="3"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> The stopper moves at a constant speed, but it is accelerating. Explain why, and state the direction of its acceleration.</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> At which point of a pendulum's swing should you record its speed and the force on it? Explain your choice.</label><textarea id="pre3" data-save="pre3" rows="3"></textarea></div>
+    </div>
+
+    <h2 id="setup">3. Setting up the equipment</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 300" role="img" aria-labelledby="cp1t">
+        <title id="cp1t">Set-up: a ring stand clamped to the bench holds a horizontal rod. A force sensor hangs vertically from the rod. A string runs from the force sensor's hook down to a mass hanger with slotted masses. A photogate stands on the floor so that the hanging masses pass between its arms. The radius r is measured from the hook to the centre of the masses. A dashed arc shows the swing.</title>
+        <line class="axis" x1="20" y1="285" x2="340" y2="285"/>
+        <rect class="axis" x="30" y="275" width="60" height="10" style="fill:none"/>
+        <line class="l3" x1="45" y1="275" x2="45" y2="20"/>
+        <line class="l3" x1="45" y1="30" x2="185" y2="30"/>
+        <rect class="axis" x="38" y="24" width="14" height="12" style="fill:none"/>
+        <rect class="axis" x="172" y="34" width="26" height="40" rx="3" style="fill:none"/>
+        <text x="206" y="56" font-size="12">force sensor</text>
+        <path class="axis" d="M185 74 v6 a4 4 0 1 1 -4 4" style="fill:none"/>
+        <line class="l1" x1="185" y1="86" x2="185" y2="232"/>
+        <rect class="axis" x="173" y="232" width="24" height="22" style="fill:none"/>
+        <line class="axis" x1="173" y1="239" x2="197" y2="239"/>
+        <line class="axis" x1="173" y1="246" x2="197" y2="246"/>
+        <path class="l3 thin dash" d="M110 222 Q185 262 260 222" style="fill:none"/>
+        <path class="axis" d="M160 285 v-36 M210 285 v-36" style="stroke-width:6"/>
+        <text x="222" y="270" font-size="12">photogate</text>
+        <line class="l2 thin" x1="150" y1="84" x2="150" y2="243" marker-start="url(#cpA)" marker-end="url(#cpA)"/>
+        <text class="t2" x="134" y="170" font-size="14">r</text>
+        <defs><marker id="cpA" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="f2"/></marker></defs>
+      </svg>
+      <figcaption>The bob swings through the photogate at the bottom of its swing. The <span class="key-2">radius r</span> is measured from the hook to the centre of mass of the hanger and its masses.</figcaption>
+    </figure>
+    <ol>
+      <li>Clamp the ring stand to the edge of the bench. Fix the second rod horizontally with the right-angle clamp, and attach the force sensor to it so that the sensor hangs <strong>vertically</strong> with its hook pointing down.</li>
+      <li>Tie the mass hanger to one end of a 0.7–1.0 m length of string. Tie a loop in the other end and hang it on the force sensor's hook, so that the hanger can swing freely.</li>
+      <li>Add slotted masses to the hanger. Measure the diameter of the slotted masses (the part that will pass through the photogate) with vernier calipers.</li>
+      <li>Stand the photogate on the floor under the bob, so that the bob passes between its arms at the bottom of its swing without touching them. Check by swinging the bob gently by hand.</li>
+      <li>Plug the force sensor into <strong>CH 1</strong> and the photogate into <strong>DIG 1</strong> on the interface. Set the force sensor's switch to <strong>±10 N</strong>.</li>
+    </ol>
+
+    <h2 id="logger">4. Setting up Logger Pro</h2>
+    <ol>
+      <li>Connect the interface to the laptop with its USB cable, then open <strong>Logger Pro 3</strong>. It should find both sensors: you will see a force reading and the photogate's state at the bottom of the window.</li>
+      <li><strong>Data collection:</strong> choose <strong>Experiment ▸ Data Collection…</strong> Set the mode to <strong>Time Based</strong>, the length to <strong>10 seconds</strong> and the sampling rate to <strong>50 samples/second</strong>. Click <strong>Done</strong>.</li>
+      <li><strong>Photogate:</strong> choose <strong>Experiment ▸ Set Up Sensors ▸ Show All Interfaces</strong>. Click the picture of the photogate and choose <strong>Gate Timing</strong>. Click the picture again, choose <strong>Set Distance or Length</strong>, and type the diameter of the slotted masses <strong>in metres</strong> (for example 0.050 for 5.0 cm). Close the window. Logger Pro now calculates the bob's speed each time it passes through the gate.</li>
+      <li><strong>Zero the force sensor:</strong> lift the string off the hook, so that <strong>nothing</strong> is hanging from it. Choose <strong>Experiment ▸ Zero</strong>. Then hang the string back on the hook. (Zeroing with nothing hanging means the sensor measures the whole tension in the string.)</li>
+      <li><strong>Graphs:</strong> you need two graphs, force against time and velocity against time. If only one graph shows, choose <strong>Insert ▸ Graph</strong>. Click the label on the vertical axis of each graph to choose what it shows: <strong>Force</strong> on one and <strong>Velocity</strong> on the other.</li>
+      <li><strong>Test it:</strong> pull the bob back a little, release it, and click <strong>Collect</strong>. You should see a force peak each time the bob passes through the bottom, and a velocity reading each time it passes through the gate.</li>
+    </ol>
+    <div class="key">
+      <p style="margin:0"><strong>How to read the maximum values (used in Parts 1 and 2):</strong> on the force graph, drag across a section where the force peaks are steady for at least three swings. Choose <strong>Analyze ▸ Statistics</strong> and read the <strong>maximum</strong>. Select the same section of the velocity graph, choose <strong>Analyze ▸ Statistics</strong> again, and read the maximum velocity.</p>
+    </div>
+
+    <h2 id="part1">5. Part 1: force and speed</h2>
+    <p>Keep the radius and the mass the same, and change the speed by releasing the bob from different angles.</p>
+    <div class="vlab-panel measure-panel">
+      <h3>Measurements for Part 1</h3>
+      <label class="vlab-field">Mass of the bob (hanger + slotted masses) <i>m</i> / kg <input data-save="p1-m" inputmode="decimal"></label>
+      <label class="vlab-field">Radius (hook to centre of mass of the bob) <i>r</i> / m <input data-save="p1-r" inputmode="decimal"></label>
+      <label class="vlab-field">Diameter of the slotted masses <i>d</i> / m <input data-save="p1-d" inputmode="decimal"></label>
+    </div>
+    <ol>
+      <li>Weigh the hanger with its slotted masses. Treat it as a single point mass: its centre of mass is the point where it would balance if laid on its side. Measure the radius from the hook to this point.</li>
+      <li>Pull the bob back 15–20° from the vertical and release it. If it swings smoothly through the photogate, click <strong>Collect</strong>. If not, stop it and try again.</li>
+      <li>Read the maximum force and the maximum velocity with <strong>Analyze ▸ Statistics</strong> (see the box above). Record them in the table.</li>
+      <li>Release the bob from a slightly larger angle each time, until you have <strong>at least 7 readings</strong>. Your largest speed should be at least 4 times your smallest.</li>
+    </ol>
+    <div class="vlab-panel" data-lab-table="p1"></div>
+    <h3>Graph of your Part 1 readings</h3>
+    <p class="vlab-small">The graph updates as you type. Use it to spot a reading that doesn't fit, while you can still repeat it. Choose what to plot, then press <strong>Add this graph to my report</strong> for each graph you want to keep.</p>
+    <div class="dgraph" data-lab-graph="p1"></div>
+
+    <h2 id="part2">6. Part 2: force and radius</h2>
+    <p>Keep the speed and the mass the same, and change the radius by shortening the string.</p>
+    <div class="vlab-panel measure-panel">
+      <h3>Measurements for Part 2</h3>
+      <label class="vlab-field">Mass of the bob <i>m</i> / kg <input data-save="p2-m" inputmode="decimal"></label>
+      <label class="vlab-field">Target speed <i>v</i> / m s<sup>−1</sup> <input data-save="p2-v" inputmode="decimal"></label>
+    </div>
+    <ol>
+      <li>Set the radius to <strong>at least 0.9 m</strong>, and measure it from the hook to the bob's centre of mass.</li>
+      <li>Release the bob from 15–20° and watch the velocity graph. Choose a speed that you can easily get again each time, and record it as your target speed.</li>
+      <li>Release the bob again. When its speed is close to your target, select that section of the force graph and read the maximum force. Record the radius and the force.</li>
+      <li>Shorten the string, measure the new radius, and repeat, releasing the bob so that it passes through the gate at your target speed. Collect <strong>at least 6 readings</strong>. Your smallest radius should be less than half your largest.</li>
+    </ol>
+    <div class="vlab-panel" data-lab-table="p2"></div>
+    <h3>Graph of your Part 2 readings</h3>
+    <div class="dgraph" data-lab-graph="p2"></div>
+
+    <h2 id="analysis">7. Analysis</h2>
+    <p>Answer each question in its box. Use the graphs above, and add the graphs you describe to your report.</p>
+
+    <h3>Part 1: force and speed</h3>
+    <div data-report-section="Analysis: Part 1">
+      <div class="answer"><label for="a1"><strong>1.</strong> Describe how the peak force on the bob depends on its maximum speed.</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> Is your graph of force against speed a straight line? If not, change what you plot on the horizontal axis until it is. Which graph is linear? Add both your original and your linear graph to your report.</label><textarea id="a2" data-save="a2" rows="3"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> Write the equation of your straight line, with the units of the gradient and intercept. Simplify the gradient's units as far as you can.</label><textarea id="a3" data-save="a3" rows="3"></textarea></div>
+    </div>
+
+    <h3>Part 2: force and radius</h3>
+    <div data-report-section="Analysis: Part 2">
+      <div class="answer"><label for="a4"><strong>4.</strong> Describe how the peak force on the bob depends on the radius.</label><textarea id="a4" data-save="a4" rows="3"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Change what you plot until your graph is linear. Which graph is linear? Add your original and your linear graph to your report.</label><textarea id="a5" data-save="a5" rows="3"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Write the equation of your straight line, with units. Simplify the gradient's units as far as you can.</label><textarea id="a6" data-save="a6" rows="3"></textarea></div>
+    </div>
+
+    <h3>Part 3: putting it together</h3>
+    <div data-report-section="Analysis: Part 3">
+      <div class="answer"><label for="a7"><strong>7.</strong> Your straight lines have a large intercept on the force axis, so force is not proportional to your variable. Draw a free-body diagram of the bob at the bottom of its swing. Which force does the intercept represent? Calculate it from your measurements and compare.</label><textarea id="a7" data-save="a7" rows="4"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> The force that makes the bob move in a circle is the <strong>resultant</strong> force at the bottom of the swing. Work it out for every reading and type it into the last column of each table. Then plot it against your linear variable. Does the line now pass through the origin? Add these graphs to your report.</label><textarea id="a8" data-save="a8" rows="3"></textarea></div>
+      <div class="answer"><label for="a9"><strong>9.</strong> When a force depends on several variables, the gradient of each graph contains the quantities you kept constant. Simplify the units of the gradient of your Part 1 resultant-force graph. Which combination of the quantities you kept constant has the same units? Calculate it and compare it with your gradient. Do the same for Part 2.</label><textarea id="a9" data-save="a9" rows="4"></textarea></div>
+      <div class="answer"><label for="a10"><strong>10.</strong> Write one equation for the resultant force on the bob in terms of its mass, its speed and the radius.</label><textarea id="a10" data-save="a10" rows="2"></textarea></div>
+      <div class="answer"><label for="a11"><strong>11.</strong> Use Newton's second law to write an equation for the bob's acceleration at the bottom of its swing. Find out what "centripetal" means, and explain why it is a good name for this acceleration.</label><textarea id="a11" data-save="a11" rows="3"></textarea></div>
+      <div class="answer"><label for="a12"><strong>12.</strong> Evaluate your method: what were the main sources of uncertainty, and how could you reduce them?</label><textarea id="a12" data-save="a12" rows="4"></textarea></div>
+      <div class="answer"><label for="a13"><strong>Extension.</strong> People often talk about a "centrifugal force" pushing them outwards, for example in a car going round a bend. Describe a time you have felt this, and explain it instead using the idea of a centripetal force.</label><textarea id="a13" data-save="a13" rows="3"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your measurements, both tables, the graphs you added, and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
