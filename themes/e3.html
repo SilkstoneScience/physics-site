@@ -141,6 +141,7 @@
     <div class="worked">
       <h3>Worked example: binding energy of helium-4</h3>
       <p>A helium-4 nucleus has a mass of 4.001506 u. A proton is 1.007276 u and a neutron 1.008665 u. Find its binding energy and binding energy per nucleon.</p>
+      <p class="hint"><strong>Hint:</strong> How many protons and neutrons does helium-4 have? The mass defect is the mass of the separate nucleons minus the mass of the nucleus: keep all six decimal places, then convert u to MeV with 931.5.</p>
       <p>Separate nucleons: $2 \times 1.007276 + 2 \times 1.008665 = 4.031882$ u.</p>
       <p>Mass defect: $\Delta m = 4.031882 - 4.001506 = 0.030376$ u.</p>
       <p>Binding energy: $0.030376 \times 931.5 = 28.3$ MeV. In joules: $28.3 \times 10^{6} \times 1.60 \times 10^{-19} = 4.53 \times 10^{-12}$ J.</p>
@@ -167,6 +168,7 @@
     <div class="worked">
       <h3>Worked example: reading the curve</h3>
       <p>Uranium-235 has a binding energy per nucleon of about 7.6 MeV. Find its total binding energy.</p>
+      <p class="hint"><strong>Hint:</strong> The value from the curve is the binding energy <em>per nucleon</em>. How many nucleons does uranium-235 have?</p>
       <p>$235 \times 7.6 \approx 1800$ MeV, about $2.9 \times 10^{-10}$ J. That is the energy needed to pull one uranium nucleus completely apart.</p>
     </div>
 
@@ -197,12 +199,14 @@
     <div class="worked">
       <h3>Worked example: finding the missing nucleus</h3>
       <p>Thorium-232 ($Z = 90$) undergoes alpha decay, and the product then undergoes β⁻ decay. Find the final nucleus.</p>
+      <p class="hint"><strong>Hint:</strong> Take one decay at a time. How do $A$ and $Z$ change when a nucleus emits $^{4}_{2}\alpha$? In β⁻ decay a neutron turns into a proton: which number changes then?</p>
       <p>Alpha: $A = 232 - 4 = 228$, $Z = 90 - 2 = 88$ (radium-228).</p>
       <p>Beta-minus: $A = 228$, $Z = 88 + 1 = 89$. The final nucleus is $^{228}_{\;89}\text{Ac}$ (actinium-228). You don't need to know the chemical symbols; they would be given.</p>
     </div>
     <div class="worked">
       <h3>Worked example: energy of an alpha decay</h3>
       <p>Using atomic masses, polonium-210 is 209.982874 u, lead-206 is 205.974465 u and helium-4 is 4.002603 u. Find the energy released when polonium-210 alpha-decays.</p>
+      <p class="hint"><strong>Hint:</strong> The energy released comes from the mass lost: the mass before minus the total mass of the products. Keep every decimal place in the subtraction, then multiply by 931.5 to get MeV.</p>
       <p>$\Delta m = 209.982874 - (205.974465 + 4.002603) = 0.005806$ u, so $E = 0.005806 \times 931.5 = 5.41$ MeV.</p>
       <p>Almost all of this is carried by the alpha particle as kinetic energy. Using atomic masses is fine here: the electrons balance on both sides.</p>
     </div>
@@ -261,12 +265,14 @@
     <div class="worked">
       <h3>Worked example: a medical tracer</h3>
       <p>A sample of a tracer with a half-life of 6.0 hours has an activity of 800 MBq. (a) What is its activity after 24 hours? (b) What fraction of the original nuclei has decayed by then?</p>
+      <p class="hint"><strong>Hint:</strong> How many half-lives fit into 24 hours? Halve the activity once for each. For (b), careful: the question asks for the fraction that has <em>decayed</em>, not the fraction left.</p>
       <p>(a) $24 \div 6.0 = 4$ half-lives: $800 \rightarrow 400 \rightarrow 200 \rightarrow 100 \rightarrow 50$ MBq.</p>
       <p>(b) The fraction left is $\left(\frac{1}{2}\right)^4 = \frac{1}{16}$, so $\frac{15}{16}$ has decayed.</p>
     </div>
     <div class="worked">
       <h3>Worked example: finding a half-life</h3>
       <p>The count rate from a sample falls from 640 to 40 counts per minute in 12 days (after correcting for background). Find the half-life.</p>
+      <p class="hint"><strong>Hint:</strong> Keep halving 640 until you reach 40. How many halvings did that take, and how do they share out the 12 days?</p>
       <p>$640 \rightarrow 320 \rightarrow 160 \rightarrow 80 \rightarrow 40$: four half-lives in 12 days, so $T_{1/2} = 3.0$ days.</p>
     </div>
     <p><strong>Measuring a half-life.</strong> Record the count rate at regular intervals, subtract the background, and plot a graph of corrected count rate against time. Read off the time for the count rate to halve, several times from different starting points, and average. (HL: a graph of $\ln(\text{count rate})$ against time is a straight line with gradient $-\lambda$.)</p>
@@ -282,6 +288,7 @@
     <div class="worked">
       <h3>Worked example: correcting for background</h3>
       <p>A detector records 245 counts per minute near a source; the background is 25 counts per minute. The half-life is 2.0 hours. What will the detector record 4.0 hours later?</p>
+      <p class="hint"><strong>Hint:</strong> Only the source decays, not the background. Subtract the background first, apply the half-lives to what is left, then think about what the detector actually records.</p>
       <p>Source alone: $245 - 25 = 220$ counts per minute. After 2 half-lives: $\frac{220}{4} = 55$. The detector records $55 + 25 = 80$ counts per minute. Halving 245 twice (to 61) would be wrong, because the background doesn't decay.</p>
     </div>
 
@@ -368,6 +375,7 @@
     <div class="worked">
       <h3>Worked example: iodine-131</h3>
       <p>Iodine-131 has a half-life of 8.02 days. A sample contains 1.0 μg of it. Find (a) the decay constant in $\text{s}^{-1}$, (b) the activity and (c) the percentage left after 20 days.</p>
+      <p class="hint"><strong>Hint:</strong> For (a), the half-life must be in seconds before you use $\lambda = \dfrac{\ln 2}{T_{1/2}}$. For (b), activity depends on the number of nuclei: how many are in 1.0 μg, if each has a mass of about $131u$? For (c), any time unit works, as long as $\lambda$ and $t$ match.</p>
       <p>(a) $\lambda = \dfrac{\ln 2}{8.02 \times 24 \times 3600} = 1.00 \times 10^{-6}\ \text{s}^{-1}$.</p>
       <p>(b) Mass of one nucleus $\approx 131u = 131 \times 1.661 \times 10^{-27} = 2.18 \times 10^{-25}$ kg. $N = \dfrac{1.0 \times 10^{-9}}{2.18 \times 10^{-25}} = 4.6 \times 10^{15}$. $A = \lambda N = 4.6 \times 10^{9}$ Bq.</p>
       <p>(c) In days, $\lambda = \dfrac{0.693}{8.02} = 0.0864\ \text{d}^{-1}$. $\dfrac{N}{N_0} = e^{-0.0864 \times 20} = e^{-1.73} = 0.18$, so 18% is left. Check: 20 days is 2.5 half-lives, and $\left(\frac{1}{2}\right)^{2.5} = 0.18$.</p>
@@ -375,6 +383,7 @@
     <div class="worked">
       <h3>Worked example: carbon dating</h3>
       <p>Living wood has a carbon-14 activity of 0.25 Bq per gram of carbon. An ancient wooden tool has 0.080 Bq per gram. How old is it? ($T_{1/2} = 5730$ y)</p>
+      <p class="hint"><strong>Hint:</strong> Assume the tool started with the activity of living wood. Find $\lambda$ in $\text{y}^{-1}$, then take natural logs of $A = A_0e^{-\lambda t}$ to make $t$ the subject.</p>
       <p>$\lambda = \dfrac{0.693}{5730} = 1.21 \times 10^{-4}\ \text{y}^{-1}$. From $A = A_0e^{-\lambda t}$: $t = \dfrac{1}{\lambda}\ln\dfrac{A_0}{A} = \dfrac{\ln(0.25/0.080)}{1.21 \times 10^{-4}} = \dfrac{1.14}{1.21 \times 10^{-4}} \approx 9400$ years.</p>
     </div>
 

@@ -111,6 +111,7 @@
     <div class="worked">
       <h3>Worked example: a radiator panel</h3>
       <p>A painted radiator panel has a surface area of 1.2 $\text{m}^2$, a temperature of 60 °C and an emissivity of 0.90. Find the power it radiates.</p>
+      <p class="hint"><strong>Hint:</strong> A real surface radiates less than a black body, so use $P = e\sigma AT^4$. Which temperature scale must $T$ be in?</p>
       <p>$T = 60 + 273 = 333$ K.</p>
       <p>$P = e\sigma AT^4 = 0.90 \times 5.67 \times 10^{-8} \times 1.2 \times 333^4 = 750$ W.</p>
       <p>It also absorbs radiation from the room around it, so the <em>net</em> power it loses by radiation is smaller than this.</p>
@@ -139,6 +140,7 @@
     <div class="worked">
       <h3>Worked example: snow and sea</h3>
       <p>Sunlight of intensity 900 $\text{W m}^{-2}$ falls on 50 $\text{m}^2$ of fresh snow (albedo 0.85) and on 50 $\text{m}^2$ of open sea (albedo 0.06). Find the power absorbed by each.</p>
+      <p class="hint"><strong>Hint:</strong> First find the power arriving on each surface from intensity × area. Albedo is the fraction <em>reflected</em>, so what fraction is absorbed?</p>
       <p>Incident power on each: $900 \times 50 = 45\,000$ W.</p>
       <p>Snow absorbs $(1 - 0.85) \times 45\,000 = 6800$ W. &nbsp; Sea absorbs $(1 - 0.06) \times 45\,000 = 42\,000$ W.</p>
       <p>The sea absorbs about six times as much. When Arctic ice melts and exposes dark sea, more sunlight is absorbed, which melts more ice. This <strong>ice–albedo feedback</strong> makes warming faster near the poles.</p>
@@ -196,6 +198,7 @@
     <div class="worked">
       <h3>Worked example: the Earth without greenhouse gases</h3>
       <p>Treat the Earth as a black body ($e = 1$) with an albedo of 0.30. Estimate its equilibrium surface temperature.</p>
+      <p class="hint"><strong>Hint:</strong> Use the $S/4$ rule with the solar constant (1360 $\text{W m}^{-2}$), and remove the reflected fraction to get the intensity absorbed. In equilibrium, the intensity emitted, $\sigma T^4$, equals the intensity absorbed.</p>
       <p>Absorbed: $(1 - 0.30) \times \dfrac{1360}{4} = 238\ \text{W m}^{-2}$.</p>
       <p>$\sigma T^4 = 238$, &nbsp; so &nbsp; $T^4 = \dfrac{238}{5.67 \times 10^{-8}} = 4.20 \times 10^9\ \text{K}^4$.</p>
       <p>$T = \sqrt[4]{4.20 \times 10^9} = 255$ K, about −18 °C.</p>
@@ -205,6 +208,7 @@
     <div class="worked">
       <h3>Worked example: effective emissivity</h3>
       <p>What effective emissivity would give the Earth its real average temperature of 288 K, with the same absorbed intensity of 238 $\text{W m}^{-2}$?</p>
+      <p class="hint"><strong>Hint:</strong> In equilibrium, the intensity emitted equals the intensity absorbed. Set $e\sigma T^4$ equal to the absorbed intensity, with $T$ = 288 K, and solve for $e$.</p>
       <p>$e = \dfrac{238}{\sigma T^4} = \dfrac{238}{5.67 \times 10^{-8} \times 288^4} = \dfrac{238}{390} = 0.61$.</p>
       <p>So the surface radiates 390 $\text{W m}^{-2}$, but only about 61% of that power's worth escapes to space. The rest is held back by the atmosphere.</p>
     </div>
@@ -311,6 +315,7 @@
     <div class="worked">
       <h3>Worked example: checking the balance</h3>
       <p>Show that the surface, the atmosphere and the Earth as a whole are each in equilibrium, and find the surface temperature, treating it as a black body.</p>
+      <p class="hint"><strong>Hint:</strong> For each system, total the energy flowing in and the energy flowing out. For the surface, use the sunlight it actually absorbs (worked out in the caption), and notice that its infrared emission is split into two arrows. For the temperature, set $\sigma T^4$ equal to the total infrared intensity the surface emits.</p>
       <p><strong>Surface.</strong> In: $165 + 335 = 500$. &nbsp; Out: $395 + 105 = 500$. ✓</p>
       <p><strong>Atmosphere.</strong> In: $75 + 360 + 105 = 540$. &nbsp; Out: $335 + 205 = 540$. ✓</p>
       <p><strong>Top of the atmosphere.</strong> In: 340. &nbsp; Out: $100 + 35 + 205 = 340$. ✓</p>

@@ -134,6 +134,7 @@
     <div class="worked">
       <h3>Worked example: opening a door</h3>
       <p>A student pushes a door with a force of 40 N, 0.80 m from the hinges, at 60° to the plane of the door. Find the torque.</p>
+      <p class="hint"><strong>Hint:</strong> Only the component of the force perpendicular to the door turns it. Use $\tau = Fr\sin\theta$, where $\theta$ is the angle between the force and the door.</p>
       <p>$\tau = Fr\sin\theta = 40 \times 0.80 \times \sin 60° = 28$ N m. Pushing at right angles would give the maximum, $40 \times 0.80 = 32$ N m.</p>
     </div>
     <p>Two equal and opposite forces whose lines of action don't coincide form a <strong>couple</strong>, like your hands turning a steering wheel. A couple has no resultant force, so it causes no linear acceleration, but it does produce a resultant torque, so it causes rotation.</p>
@@ -150,6 +151,7 @@
     <div class="worked">
       <h3>Worked example: a plank on two supports</h3>
       <p>A uniform plank 3.0 m long, weighing 120 N, rests on supports at each end. A person weighing 500 N stands 1.0 m from the left end. Find the force from each support.</p>
+      <p class="hint"><strong>Hint:</strong> Take torques about one of the supports, so that support's force has no torque. Where does the plank's own weight act? Then use the balance of vertical forces to find the other support force.</p>
       <figure class="diagram">
         <svg viewBox="0 0 380 190" role="img" aria-labelledby="a4bt">
           <title id="a4bt">A horizontal plank 3.0 metres long rests on supports at each end. The upward reaction forces at the ends are labelled R left and R right. The person's weight of 500 newtons acts downwards 1.0 metre from the left end, and the plank's weight of 120 newtons acts downwards at the middle, 1.5 metres from the left end.</title>
@@ -208,6 +210,7 @@
     <div class="worked">
       <h3>Worked example: a spinning wheel</h3>
       <p>A bicycle wheel is spun from rest with a constant angular acceleration of 3.0 $\text{rad s}^{-2}$ for 4.0 s. Find its final angular velocity and the number of revolutions it makes.</p>
+      <p class="hint"><strong>Hint:</strong> The rotational equations of motion work just like those in A.1, with $\theta$, $\omega$ and $\alpha$ in place of $s$, $v$ and $a$. The angle comes out in radians: how many radians are there in one revolution?</p>
       <p>$\omega_f = \omega_i + \alpha t = 0 + 3.0 \times 4.0 = 12\ \text{rad s}^{-1}$.</p>
       <p>$\Delta\theta = \omega_i t + \tfrac{1}{2}\alpha t^2 = \tfrac{1}{2} \times 3.0 \times 4.0^2 = 24$ rad. &nbsp; Revolutions: $\dfrac{24}{2\pi} = 3.8$.</p>
     </div>
@@ -257,6 +260,7 @@
     <div class="worked">
       <h3>Worked example: point masses</h3>
       <p>Two 2.0 kg masses are fixed to a light rod, one on each side of the axis, each 0.50 m from it. Find the moment of inertia, then find it again when both masses are moved to 0.25 m from the axis.</p>
+      <p class="hint"><strong>Hint:</strong> Treat each mass as a point and add up $mr^2$ for the two of them. Because $r$ is squared, what happens to $I$ when $r$ is halved?</p>
       <p>$I = \sum mr^2 = 2.0(0.50)^2 + 2.0(0.50)^2 = 1.0\ \text{kg m}^2$. &nbsp; At 0.25 m: $I = 2 \times 2.0 \times 0.25^2 = 0.25\ \text{kg m}^2$, a quarter as much.</p>
     </div>
 
@@ -270,6 +274,7 @@
     <div class="worked">
       <h3>Worked example: a falling mass and a pulley</h3>
       <p>A string is wrapped around a pulley of radius 0.10 m and moment of inertia 0.020 $\text{kg m}^2$, which turns freely on its axle. A 0.50 kg mass hangs from the string and is released. Find the acceleration of the mass and the tension in the string.</p>
+      <p class="hint"><strong>Hint:</strong> Write Newton's second law for the hanging mass and $\tau = I\alpha$ for the pulley. The string doesn't slip, so how are $a$ and $\alpha$ linked? Then solve the equations together.</p>
       <figure class="diagram">
         <svg viewBox="0 0 300 220" class="small" role="img" aria-labelledby="a4dt">
           <title id="a4dt">A pulley wheel on a fixed axle, with a string wrapped around it. A mass hangs from the string. The tension T acts upwards on the mass and downwards on the rim of the pulley. The weight mg acts downwards on the mass.</title>
@@ -316,12 +321,14 @@
     <div class="worked">
       <h3>Worked example: a spinning skater</h3>
       <p>A skater spins at 2.0 $\text{rad s}^{-1}$ with arms outstretched, where $I = 3.2\ \text{kg m}^2$. She pulls her arms in, reducing $I$ to 1.0 $\text{kg m}^2$. Find her new angular velocity, and compare the kinetic energies.</p>
+      <p class="hint"><strong>Hint:</strong> No external torque acts on the skater, so which quantity is conserved? For the energies, use $E_k = \tfrac{1}{2}I\omega^2$ before and after.</p>
       <p>$I_1\omega_1 = I_2\omega_2$: &nbsp; $3.2 \times 2.0 = 1.0\,\omega_2$, so $\omega_2 = 6.4\ \text{rad s}^{-1}$.</p>
       <p>$E_k$ before: $\tfrac{1}{2}(3.2)(2.0)^2 = 6.4$ J. &nbsp; After: $\tfrac{1}{2}(1.0)(6.4)^2 = 20$ J. The kinetic energy has <strong>increased</strong>: the extra energy comes from the work her muscles do pulling her arms inwards. Angular momentum is conserved; kinetic energy is not.</p>
     </div>
     <div class="worked">
       <h3>Worked example: coupled bodies</h3>
       <p>A turntable with $I = 0.12\ \text{kg m}^2$ spins freely at 3.0 $\text{rad s}^{-1}$. A disc with $I = 0.060\ \text{kg m}^2$, not rotating, is dropped onto it, centred on the axis, and they turn together. Find their final angular velocity and the kinetic energy lost.</p>
+      <p class="hint"><strong>Hint:</strong> This is the rotational version of two trolleys sticking together: angular momentum is conserved, and afterwards both bodies share one angular velocity. Work out the kinetic energy before and after separately.</p>
       <p>$0.12 \times 3.0 + 0 = (0.12 + 0.060)\,\omega$, so $\omega = \dfrac{0.36}{0.18} = 2.0\ \text{rad s}^{-1}$.</p>
       <p>$E_k$: before $\tfrac{1}{2}(0.12)(3.0)^2 = 0.54$ J; after $\tfrac{1}{2}(0.18)(2.0)^2 = 0.36$ J. So 0.18 J is lost as thermal energy while the surfaces slip against each other, just like a perfectly inelastic collision (A.2).</p>
     </div>
@@ -351,6 +358,7 @@
     <div class="worked">
       <h3>Worked example: area under a torque–time graph</h3>
       <p>The torque in the graph above acts on a wheel with $I = 1.5\ \text{kg m}^2$, initially at rest. Find the angular impulse and the final angular velocity.</p>
+      <p class="hint"><strong>Hint:</strong> Angular impulse is the area under the torque–time graph, so split the area into triangles and a rectangle. How is angular impulse linked to the change in $\omega$?</p>
       <p>Area: rising triangle $\tfrac{1}{2} \times 2 \times 8 = 8$, rectangle $3 \times 8 = 24$, falling triangle $\tfrac{1}{2} \times 1 \times 8 = 4$. Total angular impulse $= 36$ N m s.</p>
       <p>$\Delta L = I\Delta\omega$, so $\omega = \dfrac{36}{1.5} = 24\ \text{rad s}^{-1}$.</p>
     </div>
@@ -369,6 +377,7 @@
     <div class="worked">
       <h3>Worked example: a ball rolling down a ramp</h3>
       <p>A solid ball ($I = \tfrac{2}{5}mR^2$) rolls without slipping from rest down a ramp, dropping a height of 1.2 m. Find its speed at the bottom, and compare it with a block sliding down a frictionless ramp.</p>
+      <p class="hint"><strong>Hint:</strong> Use conservation of energy, but remember the rolling ball has both translational and rotational kinetic energy. Rolling without slipping means $\omega = v/R$, so you can write everything in terms of $v$.</p>
       <p>Energy: $mgh = \tfrac{1}{2}mv^2 + \tfrac{1}{2}\left(\tfrac{2}{5}mR^2\right)\left(\tfrac{v}{R}\right)^2 = \tfrac{1}{2}mv^2 + \tfrac{1}{5}mv^2 = \tfrac{7}{10}mv^2$.</p>
       <p>So $v = \sqrt{\tfrac{10}{7}gh} = \sqrt{\tfrac{10}{7} \times 9.8 \times 1.2} = 4.1\ \text{m s}^{-1}$. The mass and radius cancel.</p>
       <p>A sliding block gets $v = \sqrt{2gh} = 4.8\ \text{m s}^{-1}$. The ball is slower because $\tfrac{2}{7}$ of its kinetic energy is rotational.</p>

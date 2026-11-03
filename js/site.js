@@ -792,19 +792,25 @@ window.glueUnits = (function () {
 
   // ----- "Try it first": worked examples can hide their solutions so students attempt them first -----
   // Topic pages and pages with <body data-try-first>. Each .worked box is: h3, the question <p> (plus any diagram),
-  // then the solution. The choice is remembered on this device, so later pages start the same way.
+  // then the solution. Solutions start hidden (teacher's decision, November 2026); a student who picks
+  // "Always show solutions" has that remembered on this device, so later pages start the same way.
   if (body.dataset.topic || body.dataset.tryFirst !== undefined) setUpTryFirst();
 
   function setUpTryFirst() {
     const examples = [];
     document.querySelectorAll('main .worked').forEach((box, i) => {
-      const kids = [...box.children];
-      const q = kids.findIndex((k) => k.tagName === 'P');
+      // An optional <p class="hint"> (anywhere in the box) gets its own "Show hint" button.
+      const hint = box.querySelector(':scope > .hint');
+      if (hint) hint.remove();
+      // Use every node, not just elements, so a bare $$…$$ line in the solution is hidden too.
+      const kids = [...box.childNodes];
+      const blank = (k) => k.nodeType === Node.COMMENT_NODE || (k.nodeType === Node.TEXT_NODE && !k.textContent.trim());
+      const q = kids.findIndex((k) => k.nodeName === 'P');
       if (q < 0) return;
       let s = q + 1;
-      while (kids[s] && kids[s].tagName === 'FIGURE') s++;
+      while (kids[s] && (kids[s].nodeName === 'FIGURE' || blank(kids[s]))) s++;
       const solParts = kids.slice(s);
-      if (!solParts.length) return; // a short demonstration with no separate question: nothing to hide
+      if (solParts.every(blank)) return; // a short demonstration with no separate question: nothing to hide
       const sol = document.createElement('div');
       sol.className = 'worked-sol';
       sol.id = 'worked-sol-' + (i + 1);
@@ -813,19 +819,22 @@ window.glueUnits = (function () {
       const bar = document.createElement('div');
       bar.className = 'try-bar';
       sol.before(bar);
-      examples.push({ sol, bar, shown: true });
+      if (hint) { hint.id = 'worked-hint-' + (i + 1); bar.after(hint); }
+      examples.push({ sol, bar, hint, shown: true, hintShown: false });
     });
     if (!examples.length) return;
 
-    let tryFirst = false;
-    try { tryFirst = localStorage.getItem('tryFirst') === '1'; } catch (e) { /* storage blocked */ }
+    let tryFirst = true;
+    try { tryFirst = localStorage.getItem('tryFirst') !== '0'; } catch (e) { /* storage blocked */ }
 
     function render(ex) {
       ex.sol.hidden = !ex.shown;
+      if (ex.hint) ex.hint.hidden = !(tryFirst && ex.hintShown);
       if (!tryFirst) {
         ex.bar.innerHTML = '<button type="button" class="try-btn" data-act="mode-on">Try it first</button><span class="try-note">hides the solutions to worked examples</span>';
       } else if (!ex.shown) {
-        ex.bar.innerHTML = `<span class="try-note">Have a go first, then check.</span><button type="button" class="try-btn primary" data-act="show" aria-controls="${ex.sol.id}" aria-expanded="false">Show solution</button><button type="button" class="link-btn try-off" data-act="mode-off">Always show solutions</button>`;
+        const hintBtn = ex.hint ? `<button type="button" class="try-btn" data-act="hint" aria-controls="${ex.hint.id}" aria-expanded="${ex.hintShown}">${ex.hintShown ? 'Hide hint' : 'Show hint'}</button>` : '';
+        ex.bar.innerHTML = `<span class="try-note">Have a go first, then check.</span>${hintBtn}<button type="button" class="try-btn primary" data-act="show" aria-controls="${ex.sol.id}" aria-expanded="false">Show solution</button><button type="button" class="link-btn try-off" data-act="mode-off">Always show solutions</button>`;
       } else {
         ex.bar.innerHTML = `<button type="button" class="try-btn" data-act="hide" aria-controls="${ex.sol.id}" aria-expanded="true">Hide solution</button><button type="button" class="link-btn try-off" data-act="mode-off">Always show solutions</button>`;
       }
@@ -834,8 +843,8 @@ window.glueUnits = (function () {
       // Keep the clicked example where it is on screen, even though boxes above it open or close.
       const before = anchor.getBoundingClientRect().top;
       tryFirst = on;
-      try { if (on) localStorage.setItem('tryFirst', '1'); else localStorage.removeItem('tryFirst'); } catch (e) { /* ignore */ }
-      examples.forEach((ex) => { ex.shown = !on; render(ex); });
+      try { if (on) localStorage.removeItem('tryFirst'); else localStorage.setItem('tryFirst', '0'); } catch (e) { /* ignore */ }
+      examples.forEach((ex) => { ex.shown = !on; ex.hintShown = false; render(ex); });
       window.scrollBy(0, anchor.getBoundingClientRect().top - before);
     }
     examples.forEach((ex) => {
@@ -845,6 +854,7 @@ window.glueUnits = (function () {
         const act = e.target.closest('button') && e.target.closest('button').dataset.act;
         if (!act) return;
         if (act === 'mode-on' || act === 'mode-off') { setMode(act === 'mode-on', ex.bar); ex.bar.querySelector('button').focus(); return; }
+        if (act === 'hint') { ex.hintShown = !ex.hintShown; render(ex); ex.bar.querySelector('[data-act="hint"]').focus(); return; }
         ex.shown = act === 'show';
         render(ex);
         ex.bar.querySelector('button').focus();

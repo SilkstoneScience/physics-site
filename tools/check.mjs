@@ -280,6 +280,87 @@ for (const page of pages) {
   }
 }
 
+// ---------- 3b. Worked examples on topic pages: hints and spoilers ----------
+// Each .worked box is: h3, the question <p>, a <p class="hint">, any set-up figures, then the solution (hidden by
+// js/site.js until "Show solution"). Warn when the hint, or a figure shown before the solution, contains a result
+// that the solution works out (a number after "=" in the solution) but the question doesn't give.
+function workedBoxes(html) {
+  const boxes = [];
+  for (const m of html.matchAll(/<div class="worked">/g)) {
+    let depth = 0;
+    const tag = /<(\/?)div\b[^>]*>/g;
+    tag.lastIndex = m.index;
+    for (let t; (t = tag.exec(html));) {
+      depth += t[1] ? -1 : 1;
+      if (!depth) { boxes.push(html.slice(m.index + m[0].length, t.index)); break; }
+    }
+  }
+  return boxes;
+}
+function topLevel(inner) { // the box's direct children: { tag, cls, html }, plus any loose text as tag '#text'
+  const kids = [];
+  const tag = /<(\/?)([a-zA-Z][\w-]*)\b([^>]*?)(\/?)>/g;
+  let depth = 0, start = 0, open = null, last = 0;
+  for (let t; (t = tag.exec(inner));) {
+    const name = t[2].toLowerCase();
+    if (['br', 'img', 'hr', 'input', 'meta', 'link'].includes(name) || t[4]) continue;
+    if (!t[1]) {
+      if (!depth) {
+        const text = inner.slice(last, t.index).replace(/<!--[\s\S]*?-->/g, '');
+        if (text.trim()) kids.push({ tag: '#text', cls: '', html: text });
+        start = t.index; open = { tag: name, cls: (t[3].match(/class="([^"]*)"/) || [])[1] || '' };
+      }
+      depth++;
+    } else if (--depth === 0) { kids.push({ ...open, html: inner.slice(start, tag.lastIndex) }); last = tag.lastIndex; }
+  }
+  const rest = inner.slice(last).replace(/<!--[\s\S]*?-->/g, '');
+  if (rest.trim()) kids.push({ tag: '#text', cls: '', html: rest });
+  return kids;
+}
+const plain = (s) => s.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&minus;|−/g, '-');
+const numbersIn = (s) => [...plain(s)
+  .replace(/(\d+(?:\.\d+)?)\s*(?:\\times|×)\s*10\^\{?(-?\d+)\}?/g, '$1e$2')
+  .matchAll(/\d+(?:\.\d+)?(?:e-?\d+)?/g)].map((m) => Number(m[0]));
+const resultsIn = (s) => new Set([...plain(s)
+  .replace(/(\d+(?:\.\d+)?)\s*(?:\\times|×)\s*10\^\{?(-?\d+)\}?/g, '$1e$2')
+  .matchAll(/(?:=|≈|\\approx)\s*\$?\s*-?(\d+(?:\.\d+)?(?:e-?\d+)?)/g)].map((m) => Number(m[1])));
+// Constants and data-booklet values may appear in hints; so may small whole numbers.
+const ALLOWED = new Set([...numbersIn(JSON.stringify([site.CONSTANTS, site.DATA_BOOKLET]).replace(/\\\\/g, '\\')),
+  931.5, 13.6, 2.9e-3, 1.661e-27, 1360, 273, 0.5]);
+const given = (n, set) => set.has(n) || ALLOWED.has(n) || (Number.isInteger(n) && n <= 10);
+for (const page of pages.filter((p) => /^themes\/[a-e]\d\.html$/.test(p))) {
+  workedBoxes(read(page)).forEach((inner, i) => {
+    const kids = topLevel(inner);
+    const where = `${page} worked example ${i + 1} ("${plain(kids[0]?.html || '').trim().slice(0, 40)}")`;
+    if (kids[0]?.tag !== 'h3') { err(where, 'should start with an <h3> title'); return; }
+    const q = kids[1];
+    if (q?.tag !== 'p' || q.cls) { err(where, 'the question should be one <p> straight after the title'); return; }
+    const hints = kids.filter((k) => /\bhint\b/.test(k.cls));
+    if (hints.length !== 1) { err(where, hints.length ? 'has more than one hint' : 'has no <p class="hint"> (every topic-page worked example gets one)'); return; }
+    const hint = hints[0];
+    if (kids[2] !== hint) err(where, 'the hint should come straight after the question <p>');
+    if (!/^<p class="hint"><strong>Hint:<\/strong>/.test(hint.html)) err(where, 'the hint should start <p class="hint"><strong>Hint:</strong>');
+    if ((hint.html.match(/\$/g) || []).length % 2) err(where, 'the hint has an odd number of $ signs');
+    const words = plain(hint.html).split(/\s+/).filter(Boolean).length;
+    if (words > 60) warn(where, `the hint is long (${words} words): keep it to one to three short sentences`);
+    let s = 3;
+    const figs = [];
+    while (kids[s]?.tag === 'figure') figs.push(kids[s++]);
+    const sol = kids.slice(s);
+    if (!sol.length) { err(where, 'has no solution after the question'); return; }
+    if (sol.some((k) => k.tag === '#text' && /\S/.test(plain(k.html)) && !k.html.includes('$$'))) warn(where, 'has loose text outside any element');
+    const qNums = new Set(numbersIn(q.html));
+    const results = resultsIn(sol.map((k) => k.html).join(' '));
+    const leak = (html) => [...new Set(numbersIn(html))].filter((n) => results.has(n) && !given(n, qNums));
+    const hl = leak(hint.html);
+    if (hl.length) warn(where, `the hint contains ${hl.join(', ')}, which the solution works out: does it give the answer away?`);
+    for (const f of figs) {
+      const fl = leak(f.html);
+      if (fl.length) warn(where, `a diagram shown before the solution contains ${fl.join(', ')}, which the solution works out: move it after the first solution paragraph, or relabel it`);
+    }
+  });
+}
+
 // sitemap.xml must list every page except 404.html (it tells search engines what exists).
 function pageUrl(page) { return SITE + page.replace(/(^|\/)index\.html$/, '$1'); }
 const wantedUrls = pages.filter((p) => p !== '404.html').map(pageUrl).sort();

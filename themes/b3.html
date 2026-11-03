@@ -100,6 +100,7 @@
     <div class="worked">
       <h3>Worked example: why a can collapses</h3>
       <p>A sealed metal box has one face of area $0.050\ \text{m}^2$. Air is pumped out until the pressure inside is $2.0 \times 10^4$ Pa. The air outside is at $1.0 \times 10^5$ Pa. Find the resultant force on the face.</p>
+      <p class="hint"><strong>Hint:</strong> The air pushes on both sides of the face, so the resultant force depends on the <em>difference</em> in pressure. Then use $P = \dfrac{F}{A}$. Which way does the resultant force act?</p>
       <p>Pressure difference: $1.0 \times 10^5 - 2.0 \times 10^4 = 8.0 \times 10^4$ Pa.</p>
       <p>$F = PA = 8.0 \times 10^4 \times 0.050 = 4000$ N, pushing inwards. That's about the weight of a 400 kg object, which is why thin cans crush when the air inside is removed.</p>
     </div>
@@ -115,6 +116,7 @@
     <div class="worked">
       <h3>Worked example: molecules in a glass of water</h3>
       <p>How many molecules are there in 0.25 kg of water? (Molar mass of water = 18 g $\text{mol}^{-1}$.)</p>
+      <p class="hint"><strong>Hint:</strong> First find the number of moles: mass ÷ molar mass, with both in the same units (grams here). Each mole contains $N_A$ particles.</p>
       <p>$n = \dfrac{250\ \text{g}}{18\ \text{g mol}^{-1}} = 13.9$ mol.</p>
       <p>$N = nN_A = 13.9 \times 6.02 \times 10^{23} = 8.4 \times 10^{24}$ molecules.</p>
     </div>
@@ -191,6 +193,7 @@
     <div class="worked">
       <h3>Worked example: the air in a classroom</h3>
       <p>A classroom measures 8.0 m × 6.0 m × 3.0 m. The air is at $1.0 \times 10^5$ Pa and 20 °C. Find the amount of air in moles, the number of molecules, and the mass of the air (molar mass of air = 29 g $\text{mol}^{-1}$).</p>
+      <p class="hint"><strong>Hint:</strong> Find the volume, convert the temperature to kelvin, then rearrange $PV = nRT$ for $n$. From $n$, use $N_A$ for the number of molecules and the molar mass (in kg $\text{mol}^{-1}$) for the mass.</p>
       <p>$V = 8.0 \times 6.0 \times 3.0 = 144\ \text{m}^3$ and $T = 293$ K.</p>
       <p>$n = \dfrac{PV}{RT} = \dfrac{1.0 \times 10^5 \times 144}{8.31 \times 293} = 5.9 \times 10^3$ mol.</p>
       <p>$N = nN_A = 5.9 \times 10^3 \times 6.02 \times 10^{23} = 3.6 \times 10^{27}$ molecules.</p>
@@ -199,6 +202,8 @@
     <div class="worked">
       <h3>Worked example: a weather balloon</h3>
       <p>A weather balloon holds $5.0\ \text{m}^3$ of helium at $1.0 \times 10^5$ Pa and 290 K at ground level. It rises to a height where the pressure is $2.5 \times 10^4$ Pa and the temperature is 230 K. Find its new volume (assume no helium escapes).</p>
+      <p class="hint"><strong>Hint:</strong> The amount of gas is fixed, so $\dfrac{PV}{T}$ stays constant: $\dfrac{P_1V_1}{T_1} = \dfrac{P_2V_2}{T_2}$. Rearrange for $V_2$. Does a fall in pressure make the balloon bigger or smaller, and what about a fall in temperature?</p>
+      <p>$V_2 = V_1 \times \dfrac{P_1}{P_2} \times \dfrac{T_2}{T_1} = 5.0 \times \dfrac{1.0 \times 10^5}{2.5 \times 10^4} \times \dfrac{230}{290} = 16\ \text{m}^3$.</p>
       <figure class="diagram">
         <svg viewBox="0 0 360 170" role="img" aria-labelledby="b3bt">
           <title id="b3bt">A small balloon at ground level and a much larger balloon high in the atmosphere, where the pressure and temperature are lower.</title>
@@ -215,7 +220,6 @@
         </svg>
         <figcaption>As the balloon rises, the falling pressure lets it <span class="key-1">expand</span>, while the falling temperature makes it shrink a little.</figcaption>
       </figure>
-      <p>$V_2 = V_1 \times \dfrac{P_1}{P_2} \times \dfrac{T_2}{T_1} = 5.0 \times \dfrac{1.0 \times 10^5}{2.5 \times 10^4} \times \dfrac{230}{290} = 16\ \text{m}^3$.</p>
       <p>Quartering the pressure would make it four times bigger, but the cooling reduces this a little. Weather balloons are only partly filled at launch, so they have room to grow.</p>
     </div>
 
@@ -265,6 +269,7 @@
     <div class="worked">
       <h3>Worked example: how fast are air molecules?</h3>
       <p>Air at $1.0 \times 10^5$ Pa has a density of 1.2 $\text{kg m}^{-3}$. Find the rms speed of its molecules.</p>
+      <p class="hint"><strong>Hint:</strong> Use the kinetic-theory equation that links pressure and density, $P = \tfrac{1}{3}\rho v_{\text{rms}}^2$. Rearrange for $v_{\text{rms}}^2$ and don't forget the square root.</p>
       <p>$v_{\text{rms}}^2 = \dfrac{3P}{\rho} = \dfrac{3 \times 1.0 \times 10^5}{1.2} = 2.5 \times 10^5\ \text{m}^2\,\text{s}^{-2}$, so $v_{\text{rms}} = 500\ \text{m s}^{-1}$.</p>
       <p>That's faster than the speed of sound (340 $\text{m s}^{-1}$), which makes sense: sound is passed on by the molecules themselves.</p>
     </div>
@@ -278,6 +283,7 @@
     <div class="worked">
       <h3>Worked example: helium atoms</h3>
       <p>Find the rms speed of helium atoms at 300 K. The mass of a helium atom is $6.6 \times 10^{-27}$ kg.</p>
+      <p class="hint"><strong>Hint:</strong> The average kinetic energy of one atom is $\tfrac{1}{2}mv_{\text{rms}}^2 = \tfrac{3}{2}k_BT$. Rearrange for $v_{\text{rms}}$, using the mass of a single atom.</p>
       <p>$v_{\text{rms}}^2 = \dfrac{3k_BT}{m} = \dfrac{3 \times 1.38 \times 10^{-23} \times 300}{6.6 \times 10^{-27}} = 1.9 \times 10^6\ \text{m}^2\,\text{s}^{-2}$, so $v_{\text{rms}} = 1.4 \times 10^3\ \text{m s}^{-1}$.</p>
       <p>At the same temperature, all gases have the same average kinetic energy, so lighter molecules move faster. Helium atoms move nearly three times faster than nitrogen molecules.</p>
     </div>
@@ -290,6 +296,7 @@
     <div class="worked">
       <h3>Worked example: internal energy of a helium balloon</h3>
       <p>A party balloon contains 0.50 mol of helium at 20 °C. Find its internal energy.</p>
+      <p class="hint"><strong>Hint:</strong> Helium is a monatomic ideal gas, so its internal energy is only the kinetic energy of its atoms: $U = \tfrac{3}{2}nRT$. Remember to use kelvin.</p>
       <p>$U = \tfrac{3}{2}nRT = 1.5 \times 0.50 \times 8.31 \times 293 = 1.8 \times 10^3$ J.</p>
     </div>
 

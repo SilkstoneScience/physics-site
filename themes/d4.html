@@ -113,6 +113,7 @@
     <div class="worked">
       <h3>Worked example: flux through a tilted loop <span class="tag hl">HL</span></h3>
       <p>A loop of area 0.050 $\text{m}^2$ is in a uniform field of 0.30 T. The normal to the loop is at 60° to the field. Find the flux, and the flux linkage of a 40-turn coil of the same area in the same position.</p>
+      <p class="hint"><strong>Hint:</strong> Use $\Phi = BA\cos\theta$, where $\theta$ is the angle between the field and the <em>normal</em> to the loop. Flux linkage counts every turn of the coil, so how does $N$ come in?</p>
       <p>$\Phi = BA\cos\theta = 0.30 \times 0.050 \times \cos 60^\circ = 7.5 \times 10^{-3}$ Wb.</p>
       <p>Flux linkage $= N\Phi = 40 \times 7.5 \times 10^{-3} = 0.30$ Wb.</p>
     </div>
@@ -134,6 +135,7 @@
     <div class="worked">
       <h3>Worked example: a changing field <span class="tag hl">HL</span></h3>
       <p>A 200-turn coil of area $4.0 \times 10^{-3}\ \text{m}^2$ is at right angles to a magnetic field. The field falls steadily from 0.50 T to 0.10 T in 0.20 s. Find the size of the induced emf.</p>
+      <p class="hint"><strong>Hint:</strong> Only $B$ changes here, so the change in flux through one turn is $\Delta B \times A$. Then apply Faraday's law, $\varepsilon = -N\dfrac{\Delta\Phi}{\Delta t}$; you only need the size, so you can ignore the minus sign.</p>
       <p>Change in flux through each turn: $\Delta\Phi = \Delta B \times A = 0.40 \times 4.0 \times 10^{-3} = 1.6 \times 10^{-3}$ Wb.</p>
       <p>$\varepsilon = N\dfrac{\Delta\Phi}{\Delta t} = 200 \times \dfrac{1.6 \times 10^{-3}}{0.20} = 1.6$ V.</p>
     </div>
@@ -188,6 +190,7 @@
     <div class="worked">
       <h3>Worked example: a sliding rod <span class="tag hl">HL</span></h3>
       <p>In the arrangement above, $B = 0.50$ T, the rails are 0.20 m apart, the rod moves at 3.0 $\text{m s}^{-1}$ and $R = 2.0\ \Omega$ (the rod and rails have negligible resistance). Find the emf, the current, the force needed to keep the rod moving at constant speed, and the power supplied.</p>
+      <p class="hint"><strong>Hint:</strong> Start with $\varepsilon = BvL$, then Ohm's law gives the current. The current-carrying rod feels a force $BIL$ that opposes its motion (Lenz's law), so at constant speed your push must balance it. Power is force × velocity.</p>
       <p>$\varepsilon = BvL = 0.50 \times 3.0 \times 0.20 = 0.30$ V, &nbsp; so $I = \dfrac{0.30}{2.0} = 0.15$ A.</p>
       <p>The current in the rod feels a force $F = BIL = 0.50 \times 0.15 \times 0.20 = 0.015$ N, which <strong>opposes</strong> the motion (Lenz's law). To keep the speed constant, you must push with 0.015 N.</p>
       <p>Power supplied: $Fv = 0.015 \times 3.0 = 0.045$ W. Power dissipated in the resistor: $I^2R = 0.15^2 \times 2.0 = 0.045$ W. Your work becomes thermal energy in the resistor: energy is conserved.</p>
@@ -195,6 +198,7 @@
     <div class="worked">
       <h3>Worked example: an aircraft wing <span class="tag hl">HL</span></h3>
       <p>An aircraft with a wingspan of 35 m flies horizontally at 240 $\text{m s}^{-1}$ where the vertical component of the Earth's magnetic field is 45 µT. Find the emf between its wingtips.</p>
+      <p class="hint"><strong>Hint:</strong> The wing is a conductor moving through a field, so use $\varepsilon = BvL$ with the wingspan as $L$. Only the vertical component of the field is cut by a wing moving horizontally. Convert µT to T.</p>
       <p>$\varepsilon = BvL = 45 \times 10^{-6} \times 240 \times 35 = 0.38$ V. It can't drive a current, because any wire connected across the wings would have the same emf induced in it.</p>
     </div>
 
@@ -255,6 +259,7 @@
     <div class="worked">
       <h3>Worked example: a coil crossing a field <span class="tag hl">HL</span></h3>
       <p>A square 50-turn coil of side 10 cm moves at 0.20 $\text{m s}^{-1}$ into a 0.40 T field, perpendicular to its plane. Find the emf while it is entering, and how long the emf lasts.</p>
+      <p class="hint"><strong>Hint:</strong> While entering, only the leading side cuts the field, so use $\varepsilon = NBvL$ (convert cm to m). The flux stops changing once the whole coil is inside: how far must the coil move for that to happen?</p>
       <p>$\varepsilon = NBvL = 50 \times 0.40 \times 0.20 \times 0.10 = 0.40$ V.</p>
       <p>The coil is fully inside after it has moved its own width: $t = \dfrac{0.10}{0.20} = 0.50$ s.</p>
     </div>
@@ -290,8 +295,9 @@
       <p>With $N\Phi = NBA\cos(\omega t)$, the chain rule gives $\varepsilon = -\dfrac{d(N\Phi)}{dt} = NBA\omega\sin(\omega t)$. So the peak emf is $\varepsilon_0 = NBA\omega$, proportional to the frequency, and the emf is a quarter of a cycle out of step with the flux. (This formula is not in the data booklet and you don't need to use it, but it explains both effects of doubling the frequency.)</p>
     </aside>
     <div class="worked">
-      <h3>Worked example: speeding up a generator <span class="tag hl">HL</span></h3>
+      <h3>Worked example: slowing down a generator <span class="tag hl">HL</span></h3>
       <p>A generator coil produces an alternating emf of peak value 63 V at a frequency of 50 Hz. The coil is now turned at 25 Hz. State the new peak emf and the new period of the ac.</p>
+      <p class="hint"><strong>Hint:</strong> The emf depends on the <em>rate</em> of change of flux linkage. If the coil turns at half the rate, what happens to how quickly the flux changes? For the period, use $T = \dfrac{1}{f}$.</p>
       <p>Halving the frequency halves the rate of change of flux, so the peak emf halves to 31.5 V. The period doubles from $\frac{1}{50} = 0.020$ s to $\frac{1}{25} = 0.040$ s.</p>
     </div>
     <p>In a power station, a turbine driven by steam, water or wind turns the generator. To keep the mains frequency fixed (50 or 60 Hz), generators are run at a constant speed.</p>

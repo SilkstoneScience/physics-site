@@ -127,7 +127,8 @@
     </figure>
     <div class="worked">
       <h3>Worked example: on a train</h3>
-      <p>A train moves at 30 $\text{m s}^{-1}$ relative to the ground. A passenger walks towards the front at 1.5 $\text{m s}^{-1}$ relative to the train. (a) What is the passenger's velocity relative to the ground? (b) A bird lands on a post 200 m from the platform's origin, 4.0 s after the train's origin passes it. Where is the bird in the train's frame?</p>
+      <p>A train moves at 30 $\text{m s}^{-1}$ relative to the ground. A passenger walks towards the front at 1.5 $\text{m s}^{-1}$ relative to the train. (a) What is the passenger's velocity relative to the ground? (b) The train's origin passes the platform's origin at $t = 0$. At $t = 4.0$ s, a bird lands on a post 200 m ahead of the platform's origin, in the direction the train moves. Where is the bird in the train's frame?</p>
+      <p class="hint"><strong>Hint:</strong> For (a), rearrange the Galilean velocity transformation $u' = u - v$, where $u'$ is measured on the train. For (b), use $x' = x - vt$: how far has the train's origin moved in 4.0 s?</p>
       <p>(a) $u' = u - v$, so $u = u' + v = 1.5 + 30 = 31.5\ \text{m s}^{-1}$.</p>
       <p>(b) $x' = x - vt = 200 - 30 \times 4.0 = 80$ m ahead of the train's origin, at $t' = t = 4.0$ s.</p>
     </div>
@@ -182,6 +183,7 @@
     <div class="worked">
       <h3>Worked example: transforming an event</h3>
       <p>Frame S′ moves at $v = 0.60c$ relative to S, and the origins coincide at $t = t' = 0$. In S, an event happens at $x = 900$ m and $t = 2.0\ \mu\text{s}$. Find its coordinates in S′.</p>
+      <p class="hint"><strong>Hint:</strong> Find $\gamma$ for $0.60c$ first, then use the Lorentz transformations for $x'$ and $t'$. Keep the units consistent: $c$ in $\text{m s}^{-1}$ and times in seconds.</p>
       <p>$\gamma = \dfrac{1}{\sqrt{1 - 0.60^2}} = 1.25$. &nbsp; $vt = 0.60 \times 3.00\times10^{8} \times 2.0\times10^{-6} = 360$ m.</p>
       <p>$x' = \gamma(x - vt) = 1.25(900 - 360) = 675$ m.</p>
       <p>$\dfrac{vx}{c^2} = \dfrac{0.60 \times 900}{3.00\times10^{8}} = 1.8\ \mu\text{s}$, so $t' = \gamma\left(t - \dfrac{vx}{c^2}\right) = 1.25(2.0 - 1.8) = 0.25\ \mu\text{s}$.</p>
@@ -204,6 +206,7 @@
     <div class="worked">
       <h3>Worked example: two spacecraft approaching each other</h3>
       <p>Two spacecraft approach each other head-on, each moving at $0.60c$ relative to the Earth. How fast does one move relative to the other?</p>
+      <p class="hint"><strong>Hint:</strong> Let the Earth be frame S and one spacecraft be S′. In S, the two velocities have opposite signs. Use the relativistic velocity addition equation, taking care with the signs in the denominator.</p>
       <p>Let S be the Earth and S′ the left-hand spacecraft, so $v = +0.60c$. The right-hand craft has $u = -0.60c$ in S. Then:</p>
       <p>$u' = \dfrac{-0.60c - 0.60c}{1 - \dfrac{(-0.60c)(0.60c)}{c^2}} = \dfrac{-1.20c}{1 + 0.36} = -0.88c$.</p>
       <p>The other craft approaches at $0.88c$, not the Galilean $1.20c$. Relativistic velocity addition never gives a result faster than light.</p>
@@ -235,6 +238,7 @@
     <div class="worked">
       <h3>Worked example: a journey to a star</h3>
       <p>A spacecraft travels to a star at $0.80c$. The astronaut's clock shows that the journey takes 3.0 years. How long does it take according to clocks on the Earth?</p>
+      <p class="hint"><strong>Hint:</strong> Which clock is present at both the departure and the arrival? That clock measures the proper time. Should the Earth's time be longer or shorter?</p>
       <p>The departure and the arrival both happen at the astronaut's position, so 3.0 years is the proper time. $\gamma = \dfrac{1}{\sqrt{1 - 0.80^2}} = 1.67$.</p>
       <p>$\Delta t = \gamma\,\Delta t_0 = 1.67 \times 3.0 = 5.0$ years. The astronaut ages two years less than people on the Earth during the trip.</p>
     </div>
@@ -250,6 +254,7 @@
     <div class="worked">
       <h3>Worked example: a passing spacecraft</h3>
       <p>A spacecraft is 120 m long when measured at rest. It flies past a space station at $0.60c$. How long is it according to the station?</p>
+      <p class="hint"><strong>Hint:</strong> The 120 m is the proper length, measured at rest relative to the craft. A moving object is contracted along its direction of motion, so should your answer be more or less than 120 m?</p>
       <p>$\gamma = 1.25$, so $L = \dfrac{L_0}{\gamma} = \dfrac{120}{1.25} = 96$ m. The crew still measure their own craft as 120 m. For them, the <em>station</em> is moving and contracted.</p>
     </div>
     <p>Time dilation and length contraction always go together. In the star-journey example, Earth observers say the trip takes 5.0 years because the astronaut's clock runs slow. The astronaut says it takes only 3.0 years because, in their frame, the distance to the star is length-contracted. Both descriptions agree about what the astronaut's clock reads on arrival.</p>
@@ -261,6 +266,7 @@
     <div class="worked">
       <h3>Worked example: simultaneous in one frame, not in another</h3>
       <p>In frame S, two lamps flash at the same time, $t = 0$: one at $x = 0$ and one at $x = 600$ m. Frame S′ moves at $0.60c$ in the $+x$ direction. When does each flash happen in S′?</p>
+      <p class="hint"><strong>Hint:</strong> Apply the Lorentz transformation for time, $t' = \gamma\left(t - \dfrac{vx}{c^2}\right)$, to each flash. Both have $t = 0$, so only the $x$ term can make them differ.</p>
       <p>Lamp at $x = 0$: $t' = \gamma(0 - 0) = 0$.</p>
       <p>Lamp at $x = 600$ m: $t' = \gamma\left(0 - \dfrac{vx}{c^2}\right) = -1.25 \times \dfrac{0.60 \times 600}{3.00\times10^{8}} = -1.5\ \mu\text{s}$.</p>
       <p>In S′, the far lamp flashes 1.5 µs <em>before</em> the near one. The flashes are simultaneous in S but not in S′.</p>
@@ -311,6 +317,7 @@
     <div class="worked">
       <h3>Worked example: angle of a world line</h3>
       <p>A spacecraft moves at $0.50c$. At what angle to the $ct$ axis is its world line?</p>
+      <p class="hint"><strong>Hint:</strong> For every distance $ct$ up the time axis, the craft moves $vt$ along the $x$ axis. Which trigonometric ratio links these two distances to the angle with the $ct$ axis?</p>
       <p>$\tan\theta = \dfrac{v}{c} = 0.50$, so $\theta = 27°$. (For light, $\tan\theta = 1$ and $\theta = 45°$.)</p>
     </div>
 
@@ -319,6 +326,8 @@
     <p><strong>Muons</strong> are unstable particles made when cosmic rays hit the upper atmosphere, about 10 km up. At rest, a muon's average lifetime is about 2.2 µs. Typical cosmic-ray muons travel at about $0.995c$, so $\gamma \approx 10$.</p>
     <div class="worked">
       <h3>Worked example: how do muons reach the ground?</h3>
+      <p>Muons made about 10 km up in the atmosphere travel down at $0.995c$, so ${\gamma = 10}$. Their mean lifetime, measured at rest, is 2.2 µs. Without relativity, how far would a typical muon travel before decaying? Explain why many muons reach the ground, (a) in the Earth's frame and (b) in the muon's frame.</p>
+      <p class="hint"><strong>Hint:</strong> Without relativity, distance = speed × lifetime. In the Earth's frame, whose clock runs slow? In the muon's frame, the muon is at rest, so what is moving, and what happens to its length?</p>
       <p><strong>Without relativity:</strong> in 2.2 µs, a muon at $0.995c$ travels $0.995 \times 3.00\times10^{8} \times 2.2\times10^{-6} = 660$ m. Very few should survive the 10 km trip to the ground. But large numbers are detected at sea level.</p>
       <p><strong>In the Earth's frame (time dilation):</strong> the muon's clock runs slow. Its lifetime becomes $\gamma\,\Delta t_0 = 10 \times 2.2 = 22\ \mu\text{s}$, long enough to travel about 6.6 km on average, so many reach the ground.</p>
       <p><strong>In the muon's frame (length contraction):</strong> its lifetime is the normal 2.2 µs, but the atmosphere is rushing past at $0.995c$. The 10 km of atmosphere is contracted to $\frac{10}{10} = 1.0$ km, so many muons cross it before decaying.</p>

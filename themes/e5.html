@@ -108,17 +108,21 @@
     <div class="worked">
       <h3>Worked example: energy from the proton–proton chain</h3>
       <p>Using atomic masses (hydrogen-1 = 1.007825 u, helium-4 = 4.002603 u), find the energy released when four hydrogen atoms become one helium atom.</p>
+      <p class="hint"><strong>Hint:</strong> Compare the total mass of four hydrogen atoms with the mass of one helium atom. Keep all six decimal places in the difference, then convert u to MeV with 931.5.</p>
       <p>$\Delta m = 4 \times 1.007825 - 4.002603 = 0.028697$ u, so $E = 0.028697 \times 931.5 = 26.7$ MeV.</p>
       <p>Using atomic masses automatically includes the energy from the positrons annihilating. About 0.7% of the original mass becomes energy.</p>
     </div>
     <div class="worked">
       <h3>Worked example: deuterium–tritium fusion</h3>
       <p>Fusion reactors on Earth aim to use $^{2}_{1}\text{H} + {}^{3}_{1}\text{H} \rightarrow {}^{4}_{2}\text{He} + {}^{1}_{0}\text{n}$. The masses are 2.014102 u, 3.016049 u, 4.002603 u and 1.008665 u. Find the energy released.</p>
+      <p class="hint"><strong>Hint:</strong> The masses are listed in the same order as the particles in the equation. Find the total mass before minus the total mass after, then use 931.5 MeV per u.</p>
       <p>$\Delta m = (2.014102 + 3.016049) - (4.002603 + 1.008665) = 0.018883$ u, so $E = 17.6$ MeV.</p>
     </div>
     <div class="worked">
       <h3>Worked example: how fast is the Sun losing mass?</h3>
-      <p>The Sun's luminosity is $3.83 \times 10^{26}$ W. $\dfrac{\Delta m}{\Delta t} = \dfrac{L}{c^2} = \dfrac{3.83 \times 10^{26}}{(3.00 \times 10^8)^2} = 4.3 \times 10^9\ \text{kg s}^{-1}$: over four million tonnes every second. Even so, in its whole lifetime the Sun will turn less than 0.1% of its mass into energy.</p>
+      <p>The Sun's luminosity is $3.83 \times 10^{26}$ W. At what rate is the Sun losing mass?</p>
+      <p class="hint"><strong>Hint:</strong> Luminosity is energy radiated per second. Each second, how much mass corresponds to that energy by $E = mc^2$?</p>
+      <p>$\dfrac{\Delta m}{\Delta t} = \dfrac{L}{c^2} = \dfrac{3.83 \times 10^{26}}{(3.00 \times 10^8)^2} = 4.3 \times 10^9\ \text{kg s}^{-1}$: over four million tonnes every second. Even so, in its whole lifetime the Sun will turn less than 0.1% of its mass into energy.</p>
     </div>
     <p class="new2028" id="fusion-mass"><span class="tag y2028">New for 2028</span> The 2028 guide says you must be able to calculate the <strong>change in mass</strong> in a fusion reaction, as well as the energy released. The examples above do both: $\Delta m$ = (mass before) − (mass after), then $E = \Delta m c^2$ (or $\Delta m$ in u × 931.5 MeV). To give $\Delta m$ in kilograms, multiply by $1.661 \times 10^{-27}$ kg: for deuterium–tritium fusion, $0.018883 \times 1.661 \times 10^{-27} = 3.136 \times 10^{-29}$ kg per reaction. The Sun example works backwards, from a power to a rate of mass loss.</p>
 
@@ -161,6 +165,7 @@
     <div class="worked">
       <h3>Worked example: converting units</h3>
       <p>A star is 8.6 ly away (about the distance of Sirius). Express this in metres, parsecs and AU.</p>
+      <p class="hint"><strong>Hint:</strong> Use the conversion factors from the data booklet: how many metres in a light year, and how many light years in a parsec? For AU, work from the distance in metres.</p>
       <p>Metres: $8.6 \times 9.46 \times 10^{15} = 8.1 \times 10^{16}$ m.</p>
       <p>Parsecs: $\dfrac{8.6}{3.26} = 2.6$ pc.</p>
       <p>AU: $\dfrac{8.1 \times 10^{16}}{1.50 \times 10^{11}} = 5.4 \times 10^{5}$ AU.</p>
@@ -185,6 +190,7 @@
     <div class="worked">
       <h3>Worked example: a nearby star</h3>
       <p>A star has a parallax angle of 0.25 arcseconds. How far away is it, in parsecs, light years and metres?</p>
+      <p class="hint"><strong>Hint:</strong> With the parallax angle in arcseconds, $d = \dfrac{1}{p}$ gives the distance in parsecs directly. Then convert parsecs to light years, and light years to metres.</p>
       <p>$d = \dfrac{1}{0.25} = 4.0$ pc $= 4.0 \times 3.26 = 13$ ly $= 13 \times 9.46 \times 10^{15} = 1.2 \times 10^{17}$ m.</p>
     </div>
     <p><strong>Limits.</strong> From the ground, the atmosphere blurs images, so angles below about 0.01″ can't be measured: parallax works only up to about 100 pc. Space telescopes like Gaia reach thousands of parsecs, but that is still only a small part of our galaxy. Other methods are used further away.</p>
@@ -214,12 +220,14 @@
     <div class="worked">
       <h3>Worked example: a hot star</h3>
       <p>A star's spectrum peaks at 290 nm, and its luminosity is $1.5 \times 10^{28}$ W (about 40 times the Sun's). Find its radius.</p>
+      <p class="hint"><strong>Hint:</strong> The peak wavelength gives the surface temperature through Wien's law (convert nm to m). Then rearrange $L = 4\pi R^2\sigma T^4$ for $R$.</p>
       <p>$T = \dfrac{2.9 \times 10^{-3}}{2.90 \times 10^{-7}} = 1.0 \times 10^4$ K.</p>
       <p>Bottom of the fraction: $4\pi\sigma T^4 = 4\pi \times 5.67 \times 10^{-8} \times (1.0 \times 10^4)^4 = 7.1 \times 10^{9}$.</p><p>$R = \sqrt{\dfrac{L}{4\pi\sigma T^4}} = \sqrt{\dfrac{1.5 \times 10^{28}}{7.1 \times 10^{9}}} = 1.5 \times 10^9$ m, about twice the Sun's radius.</p>
     </div>
     <div class="worked">
       <h3>Worked example: comparing with the Sun</h3>
       <p>A red giant is 100 times as luminous as the Sun, with a surface temperature of 4000 K (the Sun's is 5800 K). How many times bigger is it?</p>
+      <p class="hint"><strong>Hint:</strong> Work with ratios, so $\sigma$ and $4\pi$ cancel: $L \propto R^2T^4$. Make $R$ the subject, then put in the ratios of luminosities and temperatures, taking care which way up the temperature ratio goes.</p>
       <p>From $L \propto R^2T^4$: $\dfrac{R}{R_\odot} = \sqrt{\dfrac{L}{L_\odot}} \times \left(\dfrac{T_\odot}{T}\right)^2 = \sqrt{100} \times \left(\dfrac{5800}{4000}\right)^2 = 10 \times 2.1 = 21$.</p>
       <p>It is cooler than the Sun but much brighter, so it must be much bigger.</p>
     </div>

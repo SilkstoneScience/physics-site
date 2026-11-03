@@ -115,6 +115,7 @@
     <div class="worked">
       <h3>Worked example: using the signs</h3>
       <p>(a) A gas is heated with 500 J of thermal energy and does 200 J of work as it expands. (b) Later it is compressed, with 150 J of work done on it, while it loses 60 J of thermal energy to the surroundings. Find $\Delta U$ in each case.</p>
+      <p class="hint"><strong>Hint:</strong> Rearrange $Q = \Delta U + W$ for $\Delta U$. $Q$ is positive when energy goes <em>into</em> the gas, and $W$ is positive when the gas does work <em>on</em> the surroundings. So in (b), what signs do $Q$ and $W$ have?</p>
       <p>(a) $Q = +500$ J, $W = +200$ J: &nbsp; $\Delta U = Q - W = 500 - 200 = +300$ J. The internal energy rises.</p>
       <p>(b) $Q = -60$ J (energy lost) and $W = -150$ J (work done on the gas): &nbsp; $\Delta U = -60 - (-150) = +90$ J. The internal energy still rises, because more energy goes in as work than leaves as heat.</p>
     </div>
@@ -143,6 +144,7 @@
     <div class="worked">
       <h3>Worked example: constant and changing pressure</h3>
       <p>(a) A gas at a constant pressure of $2.0 \times 10^5$ Pa expands from $1.5 \times 10^{-3}\ \text{m}^3$ to $4.0 \times 10^{-3}\ \text{m}^3$. (b) Another gas expands from $1.0 \times 10^{-3}\ \text{m}^3$ to $4.0 \times 10^{-3}\ \text{m}^3$ while its pressure falls steadily (a straight line on the p–V graph) from $3.0 \times 10^5$ Pa to $1.0 \times 10^5$ Pa. Find the work done by each gas.</p>
+      <p class="hint"><strong>Hint:</strong> The work done is the area under the p–V graph. For (a) the pressure is constant, so use $W = P\Delta V$. For (b) the graph is a sloping straight line: what shape is the area under it?</p>
       <p>(a) $W = P\Delta V = 2.0 \times 10^5 \times 2.5 \times 10^{-3} = 500$ J.</p>
       <p>(b) The area under a straight line is a trapezium: $W = \dfrac{(3.0 + 1.0) \times 10^5}{2} \times 3.0 \times 10^{-3} = 600$ J.</p>
     </div>
@@ -159,6 +161,7 @@
     <div class="worked">
       <h3>Worked example: heating at constant pressure or constant volume</h3>
       <p>0.20 mol of helium is heated from 300 K to 400 K, (a) at constant volume and (b) at constant pressure. Find the thermal energy needed in each case.</p>
+      <p class="hint"><strong>Hint:</strong> The temperature change is the same, so $\Delta U = \tfrac{3}{2}nR\Delta T$ is the same in both cases. Then use $Q = \Delta U + W$: is any work done at constant volume? At constant pressure, $PV = nRT$ gives $P\Delta V = nR\Delta T$.</p>
       <p>In both cases $\Delta U = \tfrac{3}{2}nR\Delta T = 1.5 \times 0.20 \times 8.31 \times 100 = 249$ J.</p>
       <p>(a) Constant volume: no work is done, so $Q = \Delta U = 249$ J.</p>
       <p>(b) Constant pressure: the gas expands, doing work $W = P\Delta V = nR\Delta T = 0.20 \times 8.31 \times 100 = 166$ J. So $Q = 249 + 166 = 415$ J.</p>
@@ -201,6 +204,7 @@
     <div class="worked">
       <h3>Worked example: compressing a gas quickly</h3>
       <p>A monatomic ideal gas at 300 K is compressed adiabatically to a quarter of its original volume. Find the factor by which its pressure increases, and its new temperature.</p>
+      <p class="hint"><strong>Hint:</strong> For an adiabatic change of a monatomic ideal gas, $PV^{\frac{5}{3}}$ stays constant, so write $P_1V_1^{5/3} = P_2V_2^{5/3}$ and find $\dfrac{P_2}{P_1}$. For the temperature, use $\dfrac{PV}{T} = \text{constant}$.</p>
       <p>$P_1V_1^{5/3} = P_2V_2^{5/3}$, &nbsp; so &nbsp; $\dfrac{P_2}{P_1} = \left(\dfrac{V_1}{V_2}\right)^{5/3} = 4^{5/3} = 10.1$.</p>
       <p>Then use $\dfrac{PV}{T} = \text{constant}$: &nbsp; $\dfrac{T_2}{T_1} = \dfrac{P_2V_2}{P_1V_1} = 10.1 \times \dfrac{1}{4} = 2.52$.</p>
       <p>$T_2 = 2.52 \times 300 = 760$ K (about 490 °C). An isothermal compression would only have quadrupled the pressure. Diesel engines use this effect: the air is compressed so fast and so much that it becomes hot enough to ignite the fuel without a spark.</p>
@@ -237,6 +241,7 @@
     <div class="worked">
       <h3>Worked example: a rectangular cycle</h3>
       <p>A monatomic ideal gas is taken round the cycle A → B → C → D → A shown. Find the net work done per cycle, the thermal energy taken in, and the efficiency.</p>
+      <p class="hint"><strong>Hint:</strong> The net work is the area enclosed by the cycle. For each stage, find $\Delta U = \tfrac{3}{2}\Delta(PV)$ and $W$, then $Q = \Delta U + W$. Only the stages where $Q$ is positive count as energy taken in, $Q_h$.</p>
       <figure class="diagram">
         <svg viewBox="0 0 380 215" role="img" aria-labelledby="b4dt">
           <title id="b4dt">A rectangular cycle on a pressure–volume graph. A is at 1.0 times ten to the five pascals and 1.0 times ten to the minus three cubic metres. B is directly above A at 3.0 times ten to the five pascals. C is to the right of B at 3.0 times ten to the minus three cubic metres. D is below C at 1.0 times ten to the five pascals. The cycle runs clockwise and the enclosed area is shaded.</title>
@@ -301,6 +306,7 @@
     <div class="worked">
       <h3>Worked example: limits on a power station</h3>
       <p>(a) A power station's steam enters the turbines at 560 °C, and the cooling water is at 30 °C. Find the maximum possible efficiency. (b) Compare the rectangular cycle above with a Carnot engine working between its highest and lowest temperatures.</p>
+      <p class="hint"><strong>Hint:</strong> Use $\eta_{\text{Carnot}} = 1 - \dfrac{T_c}{T_h}$, with both temperatures in kelvin. For (b) you don't know the actual temperatures, but for a fixed amount of gas $T \propto PV$: which corners of the cycle are hottest and coldest?</p>
       <p>(a) $T_h = 833$ K, $T_c = 303$ K: &nbsp; $\eta_{\text{Carnot}} = 1 - \dfrac{303}{833} = 0.64$, or 64%. Real power stations manage about 40%, because their processes are not reversible (friction, turbulence and heat leaks).</p>
       <p>(b) $T \propto PV$, so the hottest state (C, $PV = 900$ J) is 9 times hotter than the coldest (A, $PV = 100$ J). $\eta_{\text{Carnot}} = 1 - \dfrac{1}{9} = 0.89$, far more than the 22% the rectangular cycle achieves.</p>
     </div>
@@ -328,6 +334,7 @@
     <div class="worked">
       <h3>Worked example: melting ice and heat flow</h3>
       <p>(a) Find the entropy change when 0.50 kg of ice melts at 0 °C ($L_f = 3.34 \times 10^5\ \text{J kg}^{-1}$). (b) 1000 J of thermal energy flows from a large body at 400 K to a large body at 300 K. Find the total entropy change.</p>
+      <p class="hint"><strong>Hint:</strong> Use $\Delta S = \dfrac{\Delta Q}{T}$ with $T$ in kelvin; for (a), the energy to melt the ice is $mL_f$. For (b), find the entropy change of each body separately: which one loses energy, so has a negative $\Delta Q$?</p>
       <p>(a) $\Delta Q = mL = 0.50 \times 3.34 \times 10^5 = 1.67 \times 10^5$ J, so $\Delta S = \dfrac{1.67 \times 10^5}{273} = 612\ \text{J K}^{-1}$. The water is more disordered than the ice.</p>
       <p>(b) Hot body: $\Delta S = -\dfrac{1000}{400} = -2.50\ \text{J K}^{-1}$. &nbsp; Cold body: $\Delta S = +\dfrac{1000}{300} = +3.33\ \text{J K}^{-1}$.</p>
       <p>Total: $+0.83\ \text{J K}^{-1}$. The cold body gains more entropy than the hot one loses, so the total increases. Flow the other way would decrease the total entropy, which is why it never happens on its own: this is the Clausius form of the second law.</p>
@@ -355,8 +362,10 @@
     <div class="worked">
       <h3>Worked example: coins</h3>
       <p>Find the entropy of the "5 heads" and "10 heads" macrostates of 10 coins, and the difference between them.</p>
+      <p class="hint"><strong>Hint:</strong> Read the number of microstates $\Omega$ for each macrostate from the bar chart, then use $S = k_B\ln\Omega$. Which macrostate has the most microstates, and so the highest entropy?</p>
       <p>$S_{5} = k_B\ln 252 = 1.38 \times 10^{-23} \times 5.53 = 7.6 \times 10^{-24}\ \text{J K}^{-1}$.</p>
       <p>$S_{10} = k_B\ln 1 = 0$.</p>
+      <p>Difference: $\Delta S = 7.6 \times 10^{-24} - 0 = 7.6 \times 10^{-24}\ \text{J K}^{-1}$.</p>
       <p>The difference is tiny for 10 coins, but entropy grows with the number of particles. For a mole of gas it is measured in joules per kelvin.</p>
     </div>
     <aside class="maths-link">

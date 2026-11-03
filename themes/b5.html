@@ -128,6 +128,7 @@
     <div class="worked">
       <h3>Worked example: charging a phone</h3>
       <p>A phone charges with a current of 2.0 A for 30 minutes. How much charge flows, and how many electrons is that?</p>
+      <p class="hint"><strong>Hint:</strong> Current is charge per second, so $\Delta q = I\Delta t$, with the time in seconds. Each electron carries a charge of $1.60 \times 10^{-19}$ C: how many fit into the total?</p>
       <p>$\Delta q = I\Delta t = 2.0 \times 30 \times 60 = 3600$ C.</p>
       <p>Number of electrons $= \dfrac{3600}{1.60 \times 10^{-19}} = 2.3 \times 10^{22}$.</p>
     </div>
@@ -141,8 +142,9 @@
     </div>
     <p>"Voltage" is the everyday word for p.d. Potential difference is always measured <strong>between two points</strong>: it makes no sense to talk about the p.d. "at" a single point or "through" a component.</p>
     <div class="worked">
-      <h3>Worked example: energy from a battery</h3>
+      <h3>Worked example: energy from a charger</h3>
       <p>The 3600 C in the phone example passes through a 5.0 V charger. How much energy is transferred?</p>
+      <p class="hint"><strong>Hint:</strong> Potential difference is energy transferred per coulomb, $V = \dfrac{W}{q}$. Rearrange for $W$.</p>
       <p>$W = qV = 3600 \times 5.0 = 1.8 \times 10^4$ J.</p>
     </div>
 
@@ -216,6 +218,7 @@
     <div class="worked">
       <h3>Worked example: a heater element</h3>
       <p>A heater element is made of nichrome wire of diameter 0.40 mm. It needs a resistance of 24 Ω. What length of wire is needed?</p>
+      <p class="hint"><strong>Hint:</strong> Rearrange $R = \dfrac{\rho L}{A}$ for $L$. To find the cross-sectional area $A = \pi r^2$, halve the diameter and convert it to metres first. You'll need the resistivity of nichrome from the table.</p>
       <p>$A = \pi r^2 = \pi \times (0.20 \times 10^{-3})^2 = 1.26 \times 10^{-7}\ \text{m}^2$. (Use the <em>radius</em>, in metres.)</p>
       <p>$L = \dfrac{RA}{\rho} = \dfrac{24 \times 1.26 \times 10^{-7}}{1.1 \times 10^{-6}} = 2.7$ m.</p>
       <p>A copper wire of the same size would need to be over 170 m long, which is why heaters use high-resistivity alloys.</p>
@@ -266,6 +269,7 @@
     <div class="worked">
       <h3>Worked example: a kettle</h3>
       <p>A kettle is rated 2.3 kW at 230 V. Find the current, the resistance of its element, and the energy used in 4.0 minutes, in joules and in kilowatt-hours.</p>
+      <p class="hint"><strong>Hint:</strong> Use $P = IV$ for the current, then $R = \dfrac{V}{I}$. Energy is power × time: for joules use W and s; for kilowatt-hours use kW and hours.</p>
       <p>$I = \dfrac{P}{V} = \dfrac{2300}{230} = 10$ A, &nbsp; $R = \dfrac{V}{I} = 23\ \Omega$.</p>
       <p>Energy $= Pt = 2300 \times 240 = 5.5 \times 10^5$ J. In kWh: $2.3\ \text{kW} \times \dfrac{4.0}{60}\ \text{h} = 0.15$ kWh. Electricity companies charge per kWh ($1\ \text{kWh} = 3.60 \times 10^6$ J).</p>
     </div>
@@ -297,6 +301,7 @@
     <div class="worked">
       <h3>Worked example: a combination circuit</h3>
       <p>A 12 V battery (no internal resistance) is connected to a 4.0 Ω resistor in series with a parallel pair of 6.0 Ω and 12 Ω resistors. Find the current from the battery, and the current in each branch.</p>
+      <p class="hint"><strong>Hint:</strong> Replace the parallel pair with its combined resistance, using $\dfrac{1}{R_p} = \dfrac{1}{R_1} + \dfrac{1}{R_2}$, then add the series resistor to find the total. Once you know the battery current, what p.d. is left across the parallel pair?</p>
       <figure class="diagram">
         <svg viewBox="0 0 360 190" role="img" aria-labelledby="b5ft">
           <title id="b5ft">A battery connected to a 4.0 ohm resistor, followed by a 6.0 ohm resistor and a 12 ohm resistor connected in parallel with each other.</title>
@@ -350,6 +355,7 @@
     <div class="worked">
       <h3>Worked example: a fire alarm sensor</h3>
       <p>In the circuit above, $V_{\text{in}} = 9.0$ V and $R_2 = 2.0$ kΩ. The thermistor's resistance is 18 kΩ at room temperature and 1.0 kΩ in a fire. Find $V_{\text{out}}$ in each case. The alarm switches on when $V_{\text{out}}$ exceeds 5.0 V. Does it work?</p>
+      <p class="hint"><strong>Hint:</strong> Use $V_{\text{out}} = V_{\text{in}} \times \dfrac{R_2}{R_1 + R_2}$, with the thermistor as $R_1$. Each resistor takes a share of the p.d. in proportion to its resistance, so what happens to the fixed resistor's share when the thermistor's resistance falls?</p>
       <p>Room temperature: $V_{\text{out}} = 9.0 \times \dfrac{2.0}{18 + 2.0} = 0.90$ V.</p>
       <p>Fire: $V_{\text{out}} = 9.0 \times \dfrac{2.0}{1.0 + 2.0} = 6.0$ V.</p>
       <p>Yes: in a fire the thermistor's resistance falls, it takes a smaller share of the p.d., so $V_{\text{out}}$ rises above 5.0 V. If the thermistor and the fixed resistor were swapped, $V_{\text{out}}$ would <em>fall</em> when it got hot, which would suit a circuit that switches on a heater in the cold.</p>
@@ -385,6 +391,7 @@
     <div class="worked">
       <h3>Worked example: finding the internal resistance</h3>
       <p>A 9.0 V battery is connected to a 12 Ω resistor. The terminal p.d. is then 8.4 V. Find the current, the internal resistance, and the power wasted inside the battery.</p>
+      <p class="hint"><strong>Hint:</strong> The terminal p.d. is across the 12 Ω resistor, so it gives you the current. The "lost volts" (emf minus terminal p.d.) are across the internal resistance $r$. The power wasted inside is $I^2r$.</p>
       <p>$I = \dfrac{V}{R} = \dfrac{8.4}{12} = 0.70$ A.</p>
       <p>Lost volts: $9.0 - 8.4 = 0.6$ V, so $r = \dfrac{0.6}{0.70} = 0.86\ \Omega$.</p>
       <p>Power wasted in the battery: $I^2r = 0.70^2 \times 0.86 = 0.42$ W.</p>
@@ -420,6 +427,7 @@
     <div class="worked">
       <h3>Worked example: a solar panel</h3>
       <p>A solar panel of area 1.6 $\text{m}^2$ has an efficiency of 20%. Sunlight of intensity 800 $\text{W m}^{-2}$ falls on it at right angles. Find its electrical power output.</p>
+      <p class="hint"><strong>Hint:</strong> Intensity is power per square metre, so first find the power of the sunlight arriving on the whole panel. The efficiency tells you what fraction of that comes out as electrical power.</p>
       <p>Input power $= 800 \times 1.6 = 1280$ W. &nbsp; Output $= 0.20 \times 1280 = 260$ W.</p>
     </div>
 

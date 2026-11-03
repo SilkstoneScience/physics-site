@@ -165,9 +165,10 @@
     <div class="worked">
       <h3>Worked example: light entering water</h3>
       <p>A ray of light in air hits a water surface at 50° to the normal. Find the angle of refraction and the speed of light in water ($n = 1.33$).</p>
+      <p class="hint"><strong>Hint:</strong> Use Snell's law, $n_1\sin\theta_1 = n_2\sin\theta_2$, with $n = 1.00$ for air and both angles measured from the normal. For the speed, how is $n$ related to $c$ and $v$?</p>
       <figure class="diagram">
         <svg viewBox="0 0 380 220" role="img" aria-labelledby="wrefrt">
-          <title id="wrefrt">A ray of light in air hits a water surface at 50 degrees to the normal. In the water it bends towards the normal, to 35 degrees.</title>
+          <title id="wrefrt">A ray of light in air hits a water surface at 50 degrees to the normal. In the water it bends towards the normal, at an unknown angle of refraction theta 2.</title>
           <rect x="0" y="110" width="380" height="110" class="area"/>
           <line class="axis" x1="0" y1="110" x2="380" y2="110"/>
           <line class="axis dash" x1="190" y1="18" x2="190" y2="205"/>
@@ -177,7 +178,7 @@
           <path class="axis" d="M190 70 A 40 40 0 0 0 159.4 84.3"/>
           <text class="t1" x="184" y="60" text-anchor="end" style="font-size:14px">50°</text>
           <path class="axis" d="M190 150 A 40 40 0 0 0 212.9 142.8"/>
-          <text class="t2" x="214" y="186" text-anchor="middle" style="font-size:14px">35°</text>
+          <text class="t2" x="214" y="186" text-anchor="middle" style="font-size:14px">θ₂</text>
           <text x="12" y="30">air, n = 1.00</text>
           <text x="12" y="206">water, n = 1.33</text>
         </svg>
@@ -214,6 +215,7 @@
     <div class="worked">
       <h3>Worked example: critical angles</h3>
       <p>Find the critical angle for glass ($n = 1.50$) in air, and in water ($n = 1.33$).</p>
+      <p class="hint"><strong>Hint:</strong> At the critical angle the refracted ray travels along the boundary, so $\theta_2 = 90°$ in Snell's law. Which $n$ goes on top: the medium the light is in, or the one outside?</p>
       <p>In air: $\sin\theta_c = \dfrac{1.00}{1.50}$, so $\theta_c = 41.8°$. &nbsp; In water: $\sin\theta_c = \dfrac{1.33}{1.50} = 0.887$, so $\theta_c = 62.5°$.<br>
       Surrounding the glass with water makes TIR harder to achieve. That's why optical fibres have a "cladding" with a carefully chosen lower refractive index.</p>
     </div>
@@ -286,6 +288,7 @@
     <div class="worked">
       <h3>Worked example: loud or quiet?</h3>
       <p>Two loudspeakers connected to the same signal generator emit sound of wavelength 0.50 m. A student stands 3.25 m from one speaker and 4.00 m from the other. Is it loud or quiet there?</p>
+      <p class="hint"><strong>Hint:</strong> Find the path difference, then divide it by the wavelength. A whole number of wavelengths means the waves arrive in phase; what does a whole number plus a half mean?</p>
       <figure class="diagram">
         <svg viewBox="0 0 380 258" role="img" aria-labelledby="wspkt">
           <title id="wspkt">Two loudspeakers, S1 and S2, one above the other, are both connected to a signal generator. A student at point P is 3.25 metres from S1 and 4.00 metres from S2.</title>
@@ -340,6 +343,7 @@
     <div class="worked">
       <h3>Worked example: measuring a laser's wavelength</h3>
       <p>Red laser light passes through two slits 0.50 mm apart. On a screen 2.0 m away, the distance across 10 fringe spacings is 25 mm. Find the wavelength.</p>
+      <p class="hint"><strong>Hint:</strong> First find one fringe spacing $s$. Then rearrange $s = \dfrac{\lambda D}{d}$ for $\lambda$, with every length in metres.</p>
       <p>$s = 25/10 = 2.5$ mm. &nbsp; $\lambda = \dfrac{sd}{D} = \dfrac{2.5\times10^{-3} \times 0.50\times10^{-3}}{2.0} = 6.3\times10^{-7}$ m $= 630$ nm, which is red, as expected.</p>
     </div>
 
@@ -371,6 +375,7 @@
     <div class="worked">
       <h3>Worked example: width of the central maximum <span class="tag hl">HL</span></h3>
       <p>Light of wavelength 600 nm passes through a slit 0.12 mm wide onto a screen 3.0 m away. How wide is the central maximum?</p>
+      <p class="hint"><strong>Hint:</strong> $\theta = \lambda/b$ gives the angle to the first minimum in radians. For small angles, distance on the screen $\approx D\theta$. Does that reach across the whole central maximum, or only from its centre to one edge?</p>
       <p>$\theta = \dfrac{\lambda}{b} = \dfrac{600\times10^{-9}}{0.12\times10^{-3}} = 5.0\times10^{-3}$ rad.<br>
       For small angles, distance from the centre to the first minimum $\approx D\theta$ $= 3.0 \times 5.0\times10^{-3} = 15$ mm. The central maximum is twice this: <strong>30 mm</strong> wide.</p>
     </div>
@@ -422,6 +427,10 @@
     <div class="worked">
       <h3>Worked example: a diffraction grating <span class="tag hl">HL</span></h3>
       <p>Green light of wavelength 550 nm falls normally on a grating with 500 lines per mm. Find the angles of the maxima, and the highest order visible.</p>
+      <p class="hint"><strong>Hint:</strong> The slit spacing $d$ is one millimetre divided by the number of lines in it. Then use $n\lambda = d\sin\theta$ for $n = 1, 2, 3, \ldots$ What is the largest value $\sin\theta$ can have?</p>
+      <p>$d = \dfrac{1}{500\times10^{3}} = 2.0\times10^{-6}$ m.<br>
+      $n = 1$: $\sin\theta = \dfrac{550\times10^{-9}}{2.0\times10^{-6}} = 0.275$, so $\theta = 16°$. &nbsp; $n = 2$: $\sin\theta = 0.55$, so $\theta = 33°$. &nbsp; $n = 3$: $\sin\theta = 0.825$, so $\theta = 56°$.<br>
+      $n = 4$ would need $\sin\theta = 1.1$, which is impossible. So the <strong>highest order is 3</strong> ($d/\lambda = 3.6$).</p>
       <figure class="diagram">
         <svg viewBox="0 0 380 235" role="img" aria-labelledby="wgratt">
           <title id="wgratt">Green light hits a diffraction grating from the left. Beams leave the grating at the angles of the maxima: straight through for n equals 0, then 16, 33 and 56 degrees for orders 1, 2 and 3. Only the upper half is drawn; the pattern is the same below the central beam.</title>
@@ -441,9 +450,6 @@
         </svg>
         <figcaption>The <span class="key-1">bright maxima</span> above the central beam. The same pattern appears below it. There is no fourth order, because $\sin\theta$ can't be bigger than 1.</figcaption>
       </figure>
-      <p>$d = \dfrac{1}{500\times10^{3}} = 2.0\times10^{-6}$ m.<br>
-      $n = 1$: $\sin\theta = \dfrac{550\times10^{-9}}{2.0\times10^{-6}} = 0.275$, so $\theta = 16°$. &nbsp; $n = 2$: $\sin\theta = 0.55$, so $\theta = 33°$. &nbsp; $n = 3$: $\sin\theta = 0.825$, so $\theta = 56°$.<br>
-      $n = 4$ would need $\sin\theta = 1.1$, which is impossible. So the <strong>highest order is 3</strong> ($d/\lambda = 3.6$).</p>
     </div>
     <p class="link-q"><span><span class="link-q-label">Extra linking question</span> How do diffraction gratings let astronomers find out what stars are made of? <a href="e1.html#composition">E.1 Spectra and chemical composition&nbsp;→</a></span></p>
     <p class="hl-end">End of the HL-only content for C.3.</p>

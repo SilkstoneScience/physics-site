@@ -135,7 +135,8 @@
     </aside>
     <div class="worked">
       <h3>Worked example: pulling a sledge</h3>
-      <p>A child pulls a 20 kg sledge 25 m across flat snow with a force of 80 N along a rope at 30° above the horizontal. Friction on the sledge is 50 N. The sledge starts at rest.</p>
+      <p>A child pulls a 20 kg sledge 25 m across flat snow with a force of 80 N along a rope at 30° above the horizontal. Friction on the sledge is 50 N. The sledge starts at rest. Find its speed after the 25 m.</p>
+      <p class="hint"><strong>Hint:</strong> Use $W = Fs\cos\theta$ for each force, where $\theta$ is the angle between the force and the motion. Friction acts opposite to the motion, so what sign does its work have? The net work becomes kinetic energy.</p>
       <p>Work done by the pull: $W = Fs\cos\theta$ $= 80 \times 25 \times \cos 30°$ $= 1730$ J.<br>
       Work done by friction (opposite to the motion): $W = 50 \times 25 \times \cos 180° = -1250$ J.<br>
       The weight and the normal force are perpendicular to the motion, so they do no work.<br>
@@ -152,6 +153,7 @@
     <div class="worked">
       <h3>Worked example: braking distance</h3>
       <p>A 1500 kg car travelling at 20 $\text{m s}^{-1}$ brakes with a constant force of 6000 N. How far does it travel before stopping?</p>
+      <p class="hint"><strong>Hint:</strong> The work done by the brakes equals the change in the car's kinetic energy. You don't need the deceleration or the time.</p>
       <p>$\Delta E_k = 0 - \tfrac{1}{2}(1500)(20)^2 = -3.0\times10^5$ J. This equals the work done by the brakes, $-Fs$:<br>
       $-6000\,s = -3.0\times10^5$, so $s = 50$ m.<br>
       At double the speed (40 $\text{m s}^{-1}$) the kinetic energy is four times larger, so the braking distance is <strong>200 m</strong>, four times as far. This is why speed limits matter so much.</p>
@@ -199,7 +201,8 @@
       <p style="margin:0">The work done by friction and drag is negative, so the mechanical energy decreases.</p></div>
     <div class="worked">
       <h3>Worked example: a skateboard ramp</h3>
-      <p>A 50 kg skateboarder starts from rest at the top of a curved ramp 3.2 m high.</p>
+      <p>A 50 kg skateboarder starts from rest at the top of a curved ramp 3.2 m high. (a) Ignoring friction, find her speed at the bottom. (b) In fact her speed at the bottom is 7.0 $\text{m s}^{-1}$, and the ramp is 8.0 m long. Find the average resistive force.</p>
+      <p class="hint"><strong>Hint:</strong> For (a), the gravitational potential energy lost becomes kinetic energy: does the mass matter? For (b), the "missing" energy was transferred by the resistive force acting along the whole ramp, so use work done = force × distance.</p>
       <figure class="diagram">
         <svg viewBox="0 0 360 215" role="img" aria-labelledby="wrampt">
           <title id="wrampt">A curved ramp. The skateboarder starts at rest at the top, 3.2 metres above the ground, and rolls down the curve to the flat ground at the bottom, where the speed is v.</title>
@@ -217,13 +220,13 @@
         <figcaption>Without friction, the speed at the bottom depends only on the <span class="key-2">height</span> dropped, not on the shape of the ramp.</figcaption>
       </figure>
       <p>(a) Ignoring friction: $mg\Delta h = \tfrac{1}{2}mv^2$, so $v = \sqrt{2 \times 9.8 \times 3.2} = 7.9\ \text{m s}^{-1}$.</p>
-      <p>(b) In fact her speed at the bottom is 7.0 $\text{m s}^{-1}$, and the ramp is 8.0 m long. Find the average resistive force.<br>
-      $E_p$ lost $= 50 \times 9.8 \times 3.2 = 1570$ J. &nbsp; $E_k$ gained $= \tfrac{1}{2}(50)(7.0)^2 = 1230$ J.<br>
+      <p>(b) $E_p$ lost $= 50 \times 9.8 \times 3.2 = 1570$ J. &nbsp; $E_k$ gained $= \tfrac{1}{2}(50)(7.0)^2 = 1230$ J.<br>
       Energy transferred to thermal energy $= 1570 - 1230 = 340$ J $=$ (resistive force) × (8.0 m), so the force is about 43 N.</p>
     </div>
     <div class="worked">
       <h3>Worked example: a spring launcher</h3>
       <p>A toy launcher has a spring with $k = 400\ \text{N m}^{-1}$, compressed by 0.10 m. It fires a 0.050 kg ball straight up. How high does the ball rise? Ignore air resistance.</p>
+      <p class="hint"><strong>Hint:</strong> Follow the energy from the compressed spring to the top of the flight. How much kinetic energy does the ball have at its highest point?</p>
       <p>Elastic energy stored: $E_H = \tfrac{1}{2}(400)(0.10)^2 = 2.0$ J. At the top, all of it has become gravitational potential energy:<br>
       $mg\Delta h = 2.0$, so $\Delta h = \dfrac{2.0}{0.050 \times 9.8} = 4.1$ m.</p>
     </div>
@@ -251,7 +254,8 @@
     <p>The form $P = Fv$ comes from $\frac{\Delta W}{\Delta t} = F\frac{\Delta s}{\Delta t}$. It gives the power needed to keep something moving at speed $v$ against a force $F$. Electricity bills use the <strong>kilowatt-hour</strong> (kWh), the energy transferred by 1 kW in one hour: 1 kWh = 3.6 MJ.</p>
     <div class="worked">
       <h3>Worked example: driving faster costs much more</h3>
-      <p>A car moves at a constant 25 $\text{m s}^{-1}$ against a total resistive force of 600 N.</p>
+      <p>A car moves at a constant 25 $\text{m s}^{-1}$ against a total resistive force of 600 N. Find the power the engine must supply. Then estimate the power needed at 50 $\text{m s}^{-1}$, assuming the resistive force is roughly proportional to $v^2$.</p>
+      <p class="hint"><strong>Hint:</strong> At constant speed the forces balance, so what is the driving force? Then use $P = Fv$. When the speed doubles, two things in $P = Fv$ change: by what factor does each one change?</p>
       <p>At constant speed, the driving force equals the resistive force, so $P = Fv = 600 \times 25 = 15$ kW.<br>
       Air resistance is roughly proportional to $v^2$. At 50 $\text{m s}^{-1}$ the drag is about 4 times larger, so $P = Fv$ is about $4 \times 2 = 8$ times larger, roughly 120 kW. Doubling your speed needs about eight times the power to overcome air resistance.</p>
     </div>
@@ -285,6 +289,7 @@
     <div class="worked">
       <h3>Worked example: a lift motor</h3>
       <p>An electric motor raises an 800 kg lift through 30 m at constant speed in 20 s. The motor draws 16 kW of electrical power. Find its efficiency.</p>
+      <p class="hint"><strong>Hint:</strong> The useful output is the gravitational potential energy the lift gains each second. Compare that useful power with the electrical power put in.</p>
       <p>Useful power out $= \dfrac{mg\Delta h}{t} = \dfrac{800 \times 9.8 \times 30}{20} = 11.8$ kW.<br>
       $\eta = \dfrac{11.8}{16} = 0.74$, or 74%. The other 4.2 kW is wasted, mostly as thermal energy in the motor's wires and as friction.</p>
     </div>
@@ -315,6 +320,7 @@
     <div class="worked">
       <h3>Worked example: fuelling a power station</h3>
       <p>A coal-fired power station delivers 500 MW of electrical power with an efficiency of 35%. Coal has a specific energy of 30 MJ kg$^{-1}$. How much coal does it burn each day?</p>
+      <p class="hint"><strong>Hint:</strong> With an efficiency of 35%, the input power must be larger than the output, so find it first. How many seconds are there in a day? The specific energy then turns energy into mass.</p>
       <p>Input power $= \dfrac{500}{0.35} = 1430$ MW. Energy needed per day $= 1.43\times10^{9} \times 86\,400 = 1.2 \times 10^{14}$ J.<br>
       Mass of coal $= \dfrac{1.2\times10^{14}}{3.0\times10^{7}} = 4.1 \times 10^{6}$ kg, about 4000 tonnes every day.</p>
     </div>
