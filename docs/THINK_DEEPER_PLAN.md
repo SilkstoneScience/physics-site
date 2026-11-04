@@ -61,7 +61,7 @@ A button on every item opens it full screen: large text and picture, answer hidd
 
 ## 5. Sources and copyright
 
-- **Next-Time Questions** (teacher's Drive folder): Paul Hewitt's, copyrighted. We only use ones that link well to the DP syllabus, and only their *idea* (the situation and the misconception). Every question is reworded with a new context and a newly drawn picture. They're listed in a private tracking note (not on the site) so we don't reuse the same idea twice.
+- **Next-Time Questions** (teacher's Drive folder): Paul Hewitt's. Their wording and pictures are copyrighted, but ideas and concepts aren't (teacher's decision, November 2026): we use ones that link well to the DP syllabus freely, including the same situation where it tests the idea best. Every question is written in our own words, with our own numbers and a newly drawn picture. They're listed in a private tracking note (not on the site) so we don't reuse the same idea twice.
 - Wikimedia Commons photos: licence and author checked on each file page.
 - The teacher's lesson images: allowed, except images that are themselves from textbooks or IB papers.
 

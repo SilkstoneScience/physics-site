@@ -157,7 +157,7 @@ Agreed with the teacher in November 2026; plan and history in `docs/THINK_DEEPER
 - **Check the guide before calling anything off-syllabus**, and use the guide's terms. Buoyancy, $F_b = \rho V g$ in any fluid including air, IS on the syllabus (A.2; teacher's correction): say "buoyancy force", not "upthrust".
 - **Check the physics with numbers** whenever the answer depends on them (e.g. the dip-track times were calculated, not assumed), and recalculate every number in the reveal.
 - **Don't duplicate the question bank**: search `questions/*.json` for the same situation first.
-- All wording and pictures are our own. Hewitt's Next-Time Questions are copyrighted: use only their ideas (private index `next-time-questions-map.md` in the reference cache), with a new context, new wording and a new picture.
+- All wording and pictures are our own. **Hewitt's Next-Time Questions** (teacher's decision, November 2026): ideas and concepts can't be copyrighted, so use them freely, including the same situation when that tests the idea best, and questions that test the understanding of the whole idea. Only their expression is protected: never copy or closely paraphrase their wording, numbers-as-presented, layout or pictures; write everything in our own words with our own numbers and draw our own pictures. The private index `next-time-questions-map.md` in the reference cache lists the ideas by topic (112 rated "Good"). A new context is needed only to avoid repeating something already on our own site (question bank, notes, Skills page checks).
 
 **What each item needs**
 - **Every item:** a `figure` (the tiles need one), with alt text.
