@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 215">
+  <!-- iron bar -->
+  <rect class="area" x="60" y="60" width="280" height="24" rx="2"/><rect class="axis" x="60" y="60" width="280" height="24" rx="2"/>
+  <!-- coil A, with a cell and a switch (open) -->
+  <path class="l3 thin" d="M84 92 L92 52 M96 92 L104 52 M108 92 L116 52 M120 92 L128 52 M132 92 L140 52 M144 92 L152 52"/>
+  <path class="wire" d="M84 92 V102 H44 V24 H88 M96 24 H120 M152 52 V44 H176 V24 H150"/>
+  <line class="axis" x1="88" y1="12" x2="88" y2="36"/><line class="axis" style="stroke-width:4" x1="96" y1="17" x2="96" y2="31"/>
+  <circle class="f3" cx="120" cy="24" r="3"/><circle class="f3" cx="150" cy="24" r="3"/>
+  <line class="wire" x1="120" y1="24" x2="146" y2="8"/>
+  <text x="118" y="45" text-anchor="middle" style="font-size:14px">switch</text>
+  <text x="120" y="118" text-anchor="middle">coil A</text>
+  <!-- coil B, with a centre-zero meter -->
+  <path class="l3 thin" d="M240 92 L248 52 M252 92 L260 52 M264 92 L272 52 M276 92 L284 52 M288 92 L296 52 M300 92 L308 52"/>
+  <path class="wire" d="M240 92 V170 H284 M308 52 V44 H356 V170 H316"/>
+  <circle class="axis" cx="300" cy="170" r="16" style="fill:var(--surface)"/>
+  <path class="axis" d="M290 165 A12 12 0 0 1 310 165"/>
+  <line class="l3 thin" x1="300" y1="178" x2="300" y2="158"/>
+  <text x="276" y="118" text-anchor="middle">coil B</text>
+  <text x="300" y="206" text-anchor="middle">centre-zero meter</text>
+  <text x="200" y="118" text-anchor="middle" style="font-size:14px">iron bar</text>
+</svg>

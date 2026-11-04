@@ -486,6 +486,54 @@
     "tempting": "<p>\"The 100 W lamp is brighter\" is true when each lamp has the full 230 V across it, as at home, where lamps are connected in parallel. Then $P = \\dfrac{V^2}{R}$ applies with the same $V$, and the lower resistance wins. In series it is the <em>current</em> that is the same for both, so $P = I^2R$ shows that the higher resistance wins. A power rating describes a lamp under its rated conditions, not in every circuit.</p>"
   },
   {
+    "id": "CC-C1-01",
+    "topic": "C.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "The bouncing ball",
+    "figure": {
+      "svg": "diagrams/cc-c1-01-bounce.svg",
+      "alt": "A ball above a hard floor, with a dashed outline of the same ball touching the floor and a double-headed arrow showing that it moves up and down between the two positions.",
+      "caption": "The ball bounces back to the same height every time."
+    },
+    "question": "<p>A ball is dropped onto a hard floor. Assume it bounces perfectly, losing no energy, and that air resistance is negligible. It bounces up and down to the same height again and again, and each bounce takes the same time. Is its motion simple harmonic motion?</p>",
+    "options": [
+      "Yes: it repeats with a fixed period, and that's all SHM needs",
+      "Yes: gravity always pulls it back down towards the floor",
+      "No: its acceleration isn't proportional to its displacement from a fixed point",
+      "No: SHM has to be a side-to-side motion, like a pendulum"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>No.</strong> SHM needs a particular kind of force: the acceleration must be proportional to the displacement from the equilibrium position and directed back towards it, $a = -\\omega^2 x$. The further the object is from equilibrium, the harder it is pulled back.</p><p>The ball isn't like that. In the air its acceleration is $g$ downwards whether it is 1 cm or 1 m above the floor; then, during its very short contact with the floor, it has a huge upward acceleration. Its graph of height against time is a chain of parabolas with sharp corners at each bounce, not a smooth sine curve.</p><p>There's a quick test, too. In SHM the period doesn't depend on the amplitude. The ball's does: it takes $\\sqrt{2h/g}$ to fall a height $h$ and the same time to rise again, so dropped from 1.0 m each bounce takes 0.90 s, but dropped from 0.25 m it takes only 0.45 s. A quarter of the height gives half the period.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-c1-01-graphs.svg",
+      "alt": "Two graphs against time. The top graph, height of the bouncing ball, is a row of upside-down parabolas that meet the time axis in sharp points. The bottom graph, displacement in SHM, is a smooth sine-shaped curve with the same period.",
+      "caption": "Top: height of the <span class=\"key-1\">bouncing ball</span> against time, parabolas joined by sharp corners. Bottom: displacement of an <span class=\"key-2\">object in SHM</span> against time, a smooth sine curve with the same period."
+    },
+    "tempting": "<p>Every SHM is periodic, but not every periodic motion is SHM: a bouncing ball, a heartbeat and a clock's hands all repeat. What makes SHM special is a restoring force that grows in proportion to the displacement.</p><p>Gravity does always pull the ball down, but by the same amount at every height, so it isn't a restoring force of the SHM kind. And SHM doesn't have to be side to side: a mass on a spring moves up and down in SHM.</p>"
+  },
+  {
+    "id": "CC-C1-02",
+    "topic": "C.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "Half a spring",
+    "figure": {
+      "svg": "diagrams/cc-c1-02-spring.svg",
+      "alt": "Left: a mass m hanging from a long spring, labelled T = 0.80 s, whole spring. Right: the same mass m hanging from a spring half as long, labelled T = ?, half the spring."
+    },
+    "question": "<p>A mass hangs from a light, uniform spring and oscillates up and down with a period of 0.80 s. The spring is cut exactly in half, and the same mass is hung from one of the halves and set oscillating. The spring obeys Hooke's law throughout. What is the new period?</p>",
+    "options": [
+      "0.40 s",
+      "0.57 s",
+      "0.80 s",
+      "1.1 s"
+    ],
+    "answer": 1,
+    "reveal": "<p>The key is what happens to the spring constant. Hang a weight from the whole spring and every coil stretches a little. Hang the same weight from half the spring and each coil stretches by the same amount as before, but there are only half as many coils, so the total extension is halved. Half the extension for the same force means the spring constant has <strong>doubled</strong>: the half spring is twice as stiff.</p><p>For a mass–spring system, $T = 2\\pi\\sqrt{\\dfrac{m}{k}}$. With $m$ unchanged and $k$ doubled, $T$ is divided by $\\sqrt{2}$:</p><p>$T = \\dfrac{0.80}{\\sqrt{2}} = 0.57$ s</p>",
+    "tempting": "<p>\"Half the spring, half the period\" (0.40 s) forgets the square root: $T$ depends on $\\sqrt{k}$, not on $k$. \"Still 0.80 s\" treats the spring constant as a fixed property of the material, like density, but it depends on the spring's length too. And 1.1 s comes from thinking a shorter spring is weaker. It is actually stiffer: it's harder to stretch a short piece of spring by 1 cm than a long one.</p>"
+  },
+  {
     "id": "CC-C2-01",
     "topic": "C.2",
     "level": "SL",
@@ -517,6 +565,550 @@
       "title": "Colour mixing: the mystery of magenta",
       "channel": "The Royal Institution"
     }
+  },
+  {
+    "id": "CC-C2-02",
+    "topic": "C.2",
+    "level": "SL",
+    "type": "choice",
+    "title": "Live on the radio",
+    "figure": {
+      "svg": "diagrams/cc-c2-02-radio.svg",
+      "alt": "A singer with a microphone on the stage of a concert hall, and listener A at the back of the hall, 34 m away. Outside, a radio mast sends out radio waves. Listener B stands next to a radio at home, 1000 km away.",
+      "caption": "Not to scale."
+    },
+    "question": "<p>A singer performs live in a concert hall, and the concert is broadcast live on AM radio. Listener A sits at the back of the hall, 34 m from the singer. Listener B is at home, 1.0 m from her radio. The radio waves travel 1000 km from the hall to B's radio. The singer's microphone is 30 cm from her mouth. Assume there are no delays in the electronics. The speed of sound in air is 340 $\\text{m s}^{-1}$. Who hears each note first?</p>",
+    "options": [
+      "A, in the hall",
+      "Both hear it at the same moment",
+      "B, at home"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>B, at home, by nearly a tenth of a second.</strong></p><p>The sound takes $\\dfrac{34}{340} = 0.10$ s to reach A.</p><p>B's note travels in three stages: as sound to the microphone ($\\dfrac{0.30}{340} = 0.0009$ s), as radio waves to her radio ($\\dfrac{1.0\\times10^{6}}{3.00\\times10^{8}} = 0.0033$ s), and as sound again from the radio's loudspeaker to her ear ($\\dfrac{1.0}{340} = 0.0029$ s). That adds up to about 0.007 s, in about a fourteenth of the time A's sound takes.</p><p>Radio waves are <strong>electromagnetic waves</strong>, not sound. They travel at $c = 3.00\\times10^{8}$ $\\text{m s}^{-1}$, nearly a million times faster than sound in air. The microphone turns the sound into an electrical signal and the radio turns it back into sound, but in between, the music travels as an electromagnetic wave. (This works only with analogue radio: digital radio and online streams add delays of a second or more while the signal is coded and decoded.)</p>",
+    "tempting": "<p>Many people think of radio as a kind of sound, because we listen to it. But a radio receives electromagnetic waves that we can't hear at all, and turns them into sound only at the very end. It is also tempting to think that 1000 km must take longer than 34 m, whatever the wave. That would be true if both waves travelled at the same speed, but a radio wave crosses 1000 km in about the time sound takes to travel 1 m.</p>"
+  },
+  {
+    "id": "CC-C3-01",
+    "topic": "C.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "The laser and the fish",
+    "figure": {
+      "svg": "diagrams/cc-c3-01-fish.svg",
+      "alt": "A person standing on the bank of a pond, holding a laser pointer. A fish lies under the water some distance out from the bank.",
+      "caption": "Not to scale."
+    },
+    "question": "<p>You stand on the bank of a still, clear pond and see a fish lying still under the water, some way out from the bank. You want to light it up with the narrow beam of a laser pointer, held right next to your eye so that you sight along it. Where should you aim the beam?</p>",
+    "options": [
+      "Above the fish you see",
+      "Straight at the fish you see",
+      "Below the fish you see"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>Straight at the fish you see.</strong> You see the fish because light from it travels to your eye. That light bends away from the normal as it leaves the water, and your brain traces it back in a straight line, so you see an <em>image</em> of the fish that is higher (nearer the surface) than the fish really is.</p><p>Light paths are reversible. A beam sent back along the exact path of the light that reaches your eye bends at the surface in the same way, towards the normal this time, and follows that path all the way back to the fish. So aim at what you see, and refraction takes care of the rest.</p><p>A spear is different: it travels in a straight line. Thrown at the image, it passes above the real fish, which is why spear-fishers learn to aim below the fish they see.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-c3-01-rays.svg",
+      "alt": "The same scene with a ray of light from the fish to the surface, where it bends away from the normal and continues to the person's eye. A dashed straight line continues the eye's line of sight under the water to the image of the fish, which is higher than the real fish, and on past it, above the real fish.",
+      "caption": "Light from the <span class=\"key-1\">fish</span> bends at the surface on its way to your eye, which traces it back to the <span class=\"key-2\">image</span>. A laser beam sent from beside your eye towards the image follows the blue path in reverse; a spear thrown along the dashed line passes above the fish. Not to scale."
+    },
+    "tempting": "<p>If you know that a pond looks shallower than it is, or that spear-fishers aim low, it is tempting to aim below the fish. That correction is needed for things that travel in straight lines, like a spear. A light beam bends at the surface on the way in exactly as the light from the fish bent on the way out, so it needs no correction. \"Above\" comes from mixing up which way the image is shifted: the fish looks higher than it is, not lower.</p>"
+  },
+  {
+    "id": "CC-C3-02",
+    "topic": "C.3",
+    "level": "SL",
+    "type": "open",
+    "title": "Swapping the speaker wires",
+    "figure": {
+      "svg": "diagrams/cc-c3-02-speakers.svg",
+      "alt": "A signal generator connected to two loudspeakers, S1 and S2, one above the other. A dashed centre line runs from midway between them to a listener labelled you, who is the same distance from both."
+    },
+    "question": "<p>Two identical loudspeakers stand side by side in an open field, connected to the same signal generator, so they send out the same note in phase. You stand on the centre line, the same distance from both, where the sound is loud. A friend then swaps the two wires on one loudspeaker, so its cone moves out whenever the other one moves in. Nothing else changes, and you can ignore reflections from the ground. Predict what you now hear where you are standing.</p>",
+    "reveal": "<p><strong>It goes very quiet.</strong> You are the same distance from both speakers, so the path difference is zero and the two waves take the same time to reach you. Before the swap the waves left in phase, so they arrived in phase: a compression from one arrived with a compression from the other, and they interfered constructively.</p><p>After the swap the speakers are in <strong>antiphase</strong> (a phase difference of $\\pi$). Now a compression from one always arrives with a rarefaction from the other. The two waves have equal amplitudes where you stand, so they cancel almost completely: destructive interference.</p><p>The energy isn't destroyed. The whole interference pattern shifts: points that were quiet before (path difference $\\tfrac{1}{2}\\lambda$, $\\tfrac{3}{2}\\lambda$, …) are now loud, and loud points are now quiet. The conditions \"path difference $= n\\lambda$\" for loud and \"path difference $= (n + \\tfrac{1}{2})\\lambda$\" for quiet hold only for sources that are in phase. (Indoors, reflections from the walls spoil the cancellation, which is why the speakers are in a field.)</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-c3-02-waves.svg",
+      "alt": "Before the swap, the waves from S1 and S2 arrive in step and add up to a wave of twice the amplitude. After the swap, the wave from S2 is upside down compared with the wave from S1, and they add up to a flat line.",
+      "caption": "The waves from <span class=\"key-1\">S₁</span> and <span class=\"key-2\">S₂</span> where you stand. Before the swap they arrive in phase and add up; after it they arrive in antiphase and cancel."
+    },
+    "tempting": "<p>Swapping two wires seems a tiny change: each loudspeaker still plays the same note just as loudly, so it is natural to expect the same sound, or to think that two speakers must always be louder than one. But interference depends on the phase difference between the waves where they meet, not just on how loud each one is. A path difference is only one way to create a phase difference; reversing one speaker is another.</p>"
+  },
+  {
+    "id": "CC-C4-01",
+    "topic": "C.4",
+    "level": "SL",
+    "type": "choice",
+    "title": "Reading the rope",
+    "figure": {
+      "svg": "diagrams/cc-c4-01-rope.svg",
+      "alt": "The outline of a vibrating rope stretched between a post and a vibration generator 3.0 m apart. The outline shows three loops. At its widest point, a loop measures 40 cm from top to bottom.",
+      "caption": "The outline of the vibrating rope, as in a long-exposure photo. Not to scale."
+    },
+    "question": "<p>A rope is stretched between a post and a vibration generator 3.0 m apart, and vibrates in a standing wave with a node at each end. A long-exposure photo shows its outline: three loops, each measuring 40 cm from top to bottom at its widest point. What are the amplitude at an antinode and the wavelength?</p>",
+    "options": [
+      "Amplitude 20 cm, wavelength 1.0 m",
+      "Amplitude 20 cm, wavelength 2.0 m",
+      "Amplitude 40 cm, wavelength 1.0 m",
+      "Amplitude 40 cm, wavelength 2.0 m"
+    ],
+    "answer": 1,
+    "reveal": "<p>The amplitude is the <strong>maximum displacement from the equilibrium position</strong> (the straight rope). The photo shows both extremes at once, so the amplitude at an antinode is half the top-to-bottom height: $\\dfrac{40}{2} = 20$ cm.</p><p>Each loop stretches from one node to the next, which is <strong>half</strong> a wavelength. Three loops fill 3.0 m, so each loop is 1.0 m long and $\\lambda = 2 \\times 1.0 = 2.0$ m. This is the third harmonic.</p><p>Notice too that the amplitude isn't the same everywhere: 20 cm at the antinodes, smaller in between and zero at the nodes.</p>",
+    "tempting": "<p>The photo shows the top and the bottom of the motion together, so the full height is twice the amplitude, just as the distance between the two ends of a pendulum's swing is twice its amplitude. A loop also looks like a complete wave, but a whole wavelength of a travelling wave has a crest <em>and</em> a trough. In a standing wave one loop is only half of that: the next loop, which moves the opposite way, completes the wavelength.</p>"
+  },
+  {
+    "id": "CC-C4-02",
+    "topic": "C.4",
+    "level": "SL",
+    "type": "choice",
+    "title": "Bowing harder",
+    "figure": {
+      "svg": "diagrams/cc-c4-02-violin.svg",
+      "alt": "A violin seen from the front, with a bow drawn across its strings between the end of the fingerboard and the bridge."
+    },
+    "question": "<p>A violinist plays one open string (no fingers pressing on it), first drawing the bow gently across it, and then bowing harder and faster. Assume the tension in the string doesn't change. What changes?</p>",
+    "options": [
+      "The frequency rises, so the note sounds higher",
+      "The waves travel faster along the string",
+      "The wavelength of the standing wave gets shorter",
+      "The amplitude increases, so the note is louder; its frequency stays the same"
+    ],
+    "answer": 3,
+    "reveal": "<p><strong>Only the amplitude changes.</strong> The bow gives the string more energy, so it vibrates with a bigger amplitude and the note is louder.</p><p>The frequency is set by the standing waves the string can hold. Both ends (the nut and the bridge) are nodes, so the first harmonic has $\\lambda = 2L$, fixed by the length of the string. The wave speed along the string depends on its tension and on its mass per unit length, not on how hard it is bowed. With $v$ and $\\lambda$ unchanged, $f = \\dfrac{v}{\\lambda}$ is unchanged, so the pitch stays the same. (Bowing harder can change the mix of harmonics a little, which changes the tone, but not the pitch.)</p><p>To play a higher note, the violinist shortens the vibrating length with a finger (shorter $\\lambda$), or uses a thinner string or tightens it (faster waves).</p>",
+    "tempting": "<p>In everyday speech \"high\" and \"loud\" get mixed up (people say \"turn it up\" for both), and putting more effort in feels as if it should make everything faster. But loudness depends on amplitude and pitch on frequency, and the two are independent. A wave's speed is set by the medium it travels through, not by how hard the source works. And the wavelength can't shrink while the nodes stay fixed at the two ends of the string.</p>"
+  },
+  {
+    "id": "CC-C5-01",
+    "topic": "C.5",
+    "level": "SL",
+    "type": "choice",
+    "title": "Sound in a steady wind",
+    "figure": {
+      "svg": "diagrams/cc-c5-01-wind.svg",
+      "alt": "A siren on a pole and a listener labelled you, standing 500 m away. Arrows labelled steady wind point from the siren towards the listener.",
+      "caption": "Not to scale."
+    },
+    "question": "<p>A siren on a pole sounds a steady note of 500 Hz. You stand still, 500 m away. A steady wind blows at 15 $\\text{m s}^{-1}$ from the siren towards you. The speed of sound in still air is 340 $\\text{m s}^{-1}$. Compared with a calm day, the frequency you hear is</p>",
+    "options": [
+      "lower",
+      "the same",
+      "higher"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The same, 500 Hz.</strong> The wind carries the sound towards you, so relative to the ground it travels at $340 + 15 = 355$ $\\text{m s}^{-1}$ and arrives a little sooner (after 1.41 s instead of 1.47 s). But every wavefront makes the same journey at the same speed, so each one takes exactly the same time to reach you. The siren sends out 500 wavefronts each second, so 500 arrive each second.</p><p>The wind does stretch the waves: relative to the ground the wavelength is $\\dfrac{355}{500} = 0.71$ m instead of $\\dfrac{340}{500} = 0.68$ m. But the waves also travel faster, in proportion, so the frequency $f = \\dfrac{v}{\\lambda}$ is unchanged.</p><p>A Doppler shift needs the source or the observer to move so that the distance between them changes. Here neither moves, so the distance stays 500 m and there is no shift.</p>",
+    "tempting": "<p>The Doppler effect is about motion, and wind is moving air, so it seems it must change the pitch: higher downwind, lower upwind. But what matters is whether the waves arrive more or less often than they were sent out. A steady wind changes the speed and the wavelength together, so the frequency is untouched. (A gusty wind can make the pitch wobble slightly while its speed is changing, because then the travel time changes from one wavefront to the next.)</p>"
+  },
+  {
+    "id": "CC-C5-02",
+    "topic": "C.5",
+    "level": "SL",
+    "type": "open",
+    "title": "The whirling buzzer",
+    "figure": {
+      "svg": "diagrams/cc-c5-02-buzzer.svg",
+      "alt": "Student A whirls a buzzer on a string in a horizontal circle above his head. Student B stands still some distance away.",
+      "caption": "Not to scale."
+    },
+    "question": "<p>Student A whirls a buzzer on a string in a horizontal circle, at a steady speed, with the centre of the circle directly above his head. The buzzer gives out a steady note. Student B stands still several metres away. The air is still. Predict what each of them hears.</p>",
+    "reveal": "<p><strong>A hears a steady note at the buzzer's own frequency. B hears the pitch rise and fall once every revolution.</strong></p><p>The Doppler effect happens when the source moves towards or away from the observer. A's ears are almost exactly on the axis of the circle, so the buzzer stays practically the same distance from them: it moves round A, but never towards or away from him. The wavefronts reach him at the same rate as they are emitted.</p><p>For B it's different. While the buzzer is moving towards her, the wavefronts are bunched up and she hears a higher pitch; while it is moving away, they are spread out and she hears a lower pitch. At the two moments when it moves across her line of sight, she hears the true frequency. For example, a 2000 Hz buzzer on a 1.0 m string, going round twice a second, moves at $2\\pi \\times 1.0 \\times 2 = 12.6$ $\\text{m s}^{-1}$; B hears the note swing between about 1930 Hz and 2080 Hz (calculated with the HL equation for a moving source).</p>",
+    "tempting": "<p>The buzzer is clearly moving fast, so it is tempting to expect everyone to hear a Doppler shift. But only the part of the source's velocity directed towards or away from the observer matters. For A, the buzzer's velocity is always at right angles to the line joining it to him, so that part is always zero. Some also expect B to hear a pitch that keeps rising as long as the buzzer moves; in fact it is higher only while the buzzer comes towards her and lower while it moves away.</p>"
+  },
+  {
+    "id": "CC-D1-01",
+    "topic": "D.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "If the Sun became a black hole",
+    "figure": {
+      "svg": "diagrams/cc-d1-01-black-hole.svg",
+      "alt": "Left, labelled now: the Sun with the Earth on part of its orbit. Right, labelled after the collapse: a dashed circle shows where the Sun's surface used to be, with a tiny black hole at its centre; the Earth is at the same distance, with a question mark.",
+      "caption": "Not to scale. The black hole has the same mass as the Sun; the dashed circle shows where the Sun's surface used to be."
+    },
+    "question": "<p>Imagine that the Sun suddenly collapsed into a black hole with exactly the same mass as the Sun has now. (The real Sun can't do this, but imagine it anyway.) What would happen to the Earth's orbit?</p>",
+    "options": [
+      "The Earth would be pulled in and swallowed",
+      "The Earth would carry on in the same orbit",
+      "The Earth would spiral slowly inwards",
+      "The Earth would drift outwards, because a smaller Sun pulls less"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The orbit would not change.</strong> The gravitational force on the Earth is $F = \\dfrac{GMm}{r^2}$. It depends on the mass $M$ at the centre and on the distance $r$ between the centres, not on how big the Sun is: because the Earth is outside it, the Sun (or the black hole) acts as a point mass at its centre. $M$, $m$ and $r$ are all unchanged, so the force is unchanged, and the Earth carries on round the same orbit at the same speed, taking one year as before.</p><p>Black holes get their reputation because you can get <em>very close</em> to all that mass. The Sun's mass squeezed into a black hole would be only about 3 km in radius (a result from general relativity, beyond the course). The Newtonian formula $g = \\dfrac{GM}{r^2}$ gives a rough estimate: the gravitational field strength 10 km from its centre would be about $1 \\times 10^{12}$ $\\text{N kg}^{-1}$, but at the Earth's distance it would still be only about 0.006 $\\text{N kg}^{-1}$, exactly as it is now. On Earth, the real change would be darkness and cold.</p><p>(The Sun can't actually become a black hole: it has far too little mass. It will end its life as a white dwarf.)</p>",
+    "tempting": "<p>Black holes are famous for \"sucking everything in\", so it is tempting to think the Earth would be dragged in. But a black hole pulls no harder than any other object of the same mass at the same distance. What makes it special is how small it is, so things can get extremely close to its centre, where the field is enormous.</p><p>\"Spiralling inwards\" would need something to take energy away from the Earth's orbit, and nothing does. \"Drifting outwards\" mixes up size with mass: a smaller Sun with the same mass pulls on the Earth exactly as hard.</p>"
+  },
+  {
+    "id": "CC-D1-02",
+    "topic": "D.1",
+    "level": "HL",
+    "type": "open",
+    "title": "Into the Sun, or out of the Solar System?",
+    "figure": {
+      "svg": "diagrams/cc-d1-02-probe.svg",
+      "alt": "The Sun, and part of a space probe's circular orbit around it. The probe moves along its orbit at 30 kilometres per second.",
+      "caption": "Not to scale. The planets are far away."
+    },
+    "question": "<p>A space probe is in a circular orbit around the Sun at the same distance as the Earth, but far from the Earth, with an orbital speed of about 30 $\\text{km s}^{-1}$. It can fire its engine once, briefly, in any direction. Which needs the smaller change of velocity (and so less fuel): escaping completely from the Sun's gravitational field, or falling into the Sun? Ignore the gravity of the planets.</p>",
+    "reveal": "<p><strong>Escaping needs the smaller change: about 12 $\\text{km s}^{-1}$, compared with about 27 $\\text{km s}^{-1}$ to hit the Sun.</strong></p><p><strong>Escaping.</strong> At the orbit, $v_{\\text{orbital}} = \\sqrt{\\dfrac{GM}{r}}$ and $v_{\\text{esc}} = \\sqrt{\\dfrac{2GM}{r}}$, so the escape speed is $\\sqrt{2}$ times the orbital speed. With $M = 1.99 \\times 10^{30}$ kg and $r = 1.50 \\times 10^{11}$ m, $v_{\\text{orbital}} = 29.7$ $\\text{km s}^{-1}$ and $v_{\\text{esc}} = 42.1$ $\\text{km s}^{-1}$. Firing the engine forwards, the probe needs to gain only 12.3 $\\text{km s}^{-1}$.</p><p><strong>Falling into the Sun.</strong> The probe keeps missing the Sun because it is moving sideways at 29.7 $\\text{km s}^{-1}$. To fall straight in, it would have to lose all of that sideways velocity. Even to just graze the Sun's surface, it would have to slow down to about 2.9 $\\text{km s}^{-1}$, a change of about 27 $\\text{km s}^{-1}$ (this uses energy and angular momentum, beyond the course).</p><p>So, starting from the Earth's orbit, it takes less than half as much change of velocity to leave the Solar System as to hit the Sun. That's why probes sent close to the Sun, such as the Parker Solar Probe, use repeated close flybys of Venus to lose speed.</p>",
+    "tempting": "<p>Falling into the Sun sounds easy: the Sun pulls the probe towards it all the time, so surely a small nudge inwards would do. But the probe is <em>already</em> falling towards the Sun all the time; it keeps missing because of its large sideways velocity. A push towards the Sun doesn't remove that sideways velocity, so the probe would still miss. Only removing nearly all of the sideways velocity makes it hit.</p><p>Escaping sounds hard because the probe must get \"all the way to infinity\". But it already has half of the kinetic energy it needs: since $v_{\\text{esc}}^2 = 2v_{\\text{orbital}}^2$, its kinetic energy in the circular orbit is exactly half the escape value. Increasing the speed by a factor of $\\sqrt{2}$, only about 41%, doubles the kinetic energy and is enough to escape.</p>"
+  },
+  {
+    "id": "CC-D2-01",
+    "topic": "D.2",
+    "level": "SL",
+    "type": "choice",
+    "title": "Who pulls harder?",
+    "figure": {
+      "svg": "diagrams/cc-d2-01-alpha-electron.svg",
+      "alt": "An alpha particle, made of two protons and two neutrons, with charge plus 2e. Some distance away is an electron, with charge minus e.",
+      "caption": "Not to scale. The orange circles are protons."
+    },
+    "question": "<p>An alpha particle (charge $+2e$) and an electron (charge $-e$) are some distance apart, far from anything else, and attract each other. Compared with the size of the electric force on the alpha particle, the size of the electric force on the electron is</p>",
+    "options": [
+      "half as big",
+      "the same",
+      "twice as big",
+      "about 7000 times as big"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The forces are the same size</strong>, and opposite in direction. Coulomb's law, $F = k\\dfrac{q_1q_2}{r^2}$, gives just one value for the force between two charges: the product $q_1q_2$ is the same whichever particle you think of as doing the pulling. This is also Newton's third law: the two forces are a pair.</p><p>Fields give the same result. The alpha particle's field at the electron is $\\dfrac{k(2e)}{r^2}$, so the force on the electron is $e \\times \\dfrac{k(2e)}{r^2}$. The electron's field at the alpha particle is only $\\dfrac{ke}{r^2}$, but the alpha particle has twice the charge, so the force on it is $2e \\times \\dfrac{ke}{r^2}$: exactly the same.</p><p>What is very different is the <em>effect</em>. An alpha particle has about 7300 times the mass of an electron, so by $a = \\dfrac{F}{m}$ the electron's acceleration is about 7300 times larger. If the two were released from rest, they would meet very close to where the alpha particle started.</p>",
+    "tempting": "<p>\"Twice as big\" comes from thinking that the particle with more charge pulls harder. But a force needs <em>both</em> charges: the alpha particle's bigger charge makes a stronger field, but it also responds more strongly to the electron's weaker field. Doubling either charge doubles the force on <em>both</em> particles. \"Half as big\" is the same mistake the other way round.</p><p>\"About 7000 times as big\" mixes up force with acceleration. The electron's motion changes far more because it has so little mass, not because the force on it is bigger.</p>"
+  },
+  {
+    "id": "CC-D2-02",
+    "topic": "D.2",
+    "level": "HL",
+    "type": "choice",
+    "title": "Close to the wall",
+    "figure": {
+      "svg": "diagrams/cc-d2-02-hollow-sphere.svg",
+      "alt": "A cross-section of a hollow metal sphere, with plus signs all round its outer surface. Point P is in the hollow space inside, close to the right-hand wall. The centre is also marked.",
+      "caption": "The sphere is positively charged. P is in the hollow space, close to the wall."
+    },
+    "question": "<p>A hollow metal sphere is given a positive charge and left isolated, with no other charges nearby. Point P is in the air inside the sphere, much closer to one side of the wall than to the opposite side. What is the electric field at P due to the charge on the sphere?</p>",
+    "options": [
+      "Zero",
+      "Directed away from the nearest part of the wall",
+      "Directed towards the nearest part of the wall",
+      "The same as just outside the sphere"
+    ],
+    "answer": 0,
+    "reveal": "<p><strong>The field at P is zero</strong>, and it is zero everywhere inside the sphere, not just at the centre. In a metal, charges are free to move, and on an isolated sphere they spread out evenly over the outer surface.</p><p>Why doesn't the nearby charge win? Draw a narrow double cone through P. It cuts out a small patch of the sphere close to P and a large patch on the far side. If, for example, the far patch is 9 times as far from P, its area, and so its charge, is (for a sphere, where the cone meets the wall at the same angle at both ends) $9^2 = 81$ times as large. But the field from each bit of charge falls as $\\dfrac{1}{r^2}$, so each bit of the far patch contributes $9^2 = 81$ times less at P. The two patches cancel exactly, and the same is true for every cone through P: the fewer, nearer charges balance the many, further ones.</p><p>A hollow conductor of any shape shields the space inside it like this (a Faraday cage). This is why a metal-bodied car protects the people inside it from an electric storm.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-d2-02-cones.svg",
+      "alt": "The same sphere with a narrow double cone drawn through P. The cone cuts a small patch of the wall near P and a much larger patch of the wall on the far side.",
+      "caption": "A narrow cone through P cuts a <span class=\"key-1\">small, near patch</span> and a <span class=\"key-2\">large, far patch</span>. Their fields at P are equal in size and opposite in direction."
+    },
+    "tempting": "<p>\"Away from the nearest part of the wall\" is the most tempting answer: the nearest charges are much closer, and closer charges push harder. But there are far more charges on the far side, and for a sphere the two effects cancel exactly.</p><p>\"Towards the nearest part of the wall\" counts the extra charge on the far side but forgets that it is further away. \"The same as just outside\" treats the sphere as a point charge at its centre, but that shortcut works only for points <em>outside</em> the sphere.</p>"
+  },
+  {
+    "id": "CC-D3-01",
+    "topic": "D.3",
+    "level": "SL",
+    "type": "open",
+    "title": "Along the field lines",
+    "figure": {
+      "svg": "diagrams/cc-d3-01-beams.svg",
+      "alt": "Two rectangular regions of field, each with straight, evenly spaced field lines pointing to the right. Beam 1 approaches the region of uniform electric field from the left, moving to the right along a field line. Beam 2 approaches the region of uniform magnetic field in the same way.",
+      "caption": "Both beams enter moving in the same direction as the field lines."
+    },
+    "question": "<p>Two beams of protons travel through a vacuum at the same speed. Beam 1 enters a region of uniform electric field, and beam 2 enters a region of uniform magnetic field. Each beam enters moving exactly parallel to the field lines, in the same direction as the field. Gravity is negligible. Predict the path of each beam inside its field, and whether its speed changes.</p>",
+    "reveal": "<p><strong>Neither beam bends. Beam 1 speeds up; beam 2 carries on as if the field weren't there.</strong></p><p><strong>Beam 1 (electric field):</strong> the force on a charge in an electric field, $F = qE$, acts along the field lines, in the direction of the field for a positive charge. Here that is straight along the protons' velocity, so there is no sideways force: the protons go in a straight line and accelerate uniformly, speeding up. (Protons moving <em>against</em> the field would slow down, stop and come back.)</p><p><strong>Beam 2 (magnetic field):</strong> the magnetic force on a moving charge is $F = qvB\\sin\\theta$, where $\\theta$ is the angle between the velocity and the field. Here $\\theta = 0$, so $\\sin\\theta = 0$ and there is no force at all: the protons travel in a straight line at constant speed.</p><p>The two fields act very differently. An electric force acts along the field lines, whether the charge is moving or not. A magnetic force is always at right angles to both the field and the velocity, and is zero for a charge at rest or one moving along the field.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-d3-01-paths.svg",
+      "alt": "Positions of the protons at equal time intervals. In the electric field the positions lie on a straight line with growing gaps. In the magnetic field they lie on a straight line with equal gaps.",
+      "caption": "Positions at equal time intervals (the size of the speed-up is not to scale)."
+    },
+    "tempting": "<p>Most diagrams show charged particles entering a field at right angles, where both kinds of field bend the beam, so it is easy to think that a field always bends a charged particle. What matters is the direction of the force compared with the velocity: a force along the velocity changes only the speed, and a force at right angles to it changes only the direction. Here the electric force is along the velocity, and the magnetic force is zero.</p>"
+  },
+  {
+    "id": "CC-D3-02",
+    "topic": "D.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "A coil between the poles",
+    "figure": {
+      "svg": "diagrams/cc-d3-02-coil.svg",
+      "alt": "A view along an axle. The north pole of a magnet is on the left and the south pole on the right, with uniform field lines from N to S. Between them, a coil is seen end-on as a horizontal line joining two wires: the left wire is marked with a cross (current into the page) and the right wire with a dot (current out of the page). The axle is a dot at the centre of the coil.",
+      "caption": "Circle with a cross: current into the page. Circle with a dot: current out of the page. The coil turns on an axle through its centre."
+    },
+    "question": "<p>A rectangular coil is mounted on an axle between the poles of a magnet, where the magnetic field is uniform. The diagram looks along the axle: the plane of the coil is horizontal, along the field lines, and its two long sides run into the page. There is a current in the coil: into the page in the left-hand side and out of the page in the right-hand side. The coil is released from rest in this position. As seen in the diagram, what happens?</p>",
+    "options": [
+      "It stays still, because the forces on its two sides cancel",
+      "It is pushed upwards, out of the gap",
+      "It turns clockwise",
+      "It turns anticlockwise"
+    ],
+    "answer": 3,
+    "reveal": "<p><strong>It turns anticlockwise.</strong> Use Fleming's left-hand rule on each long side, with the field from N to S (to the right):</p><ul><li>left-hand side, current into the page: the force is <strong>downwards</strong>;</li><li>right-hand side, current out of the page: the force is <strong>upwards</strong>.</li></ul><p>The two forces are equal in size ($F = BIL$ for each side) and opposite in direction, so the <em>resultant</em> force on the coil is zero and it doesn't move off as a whole. But the forces act along different lines, on opposite sides of the axle, so together they turn the coil. This is how an electric motor works.</p><p>The short sides of the coil (not seen in the diagram) lie along the field lines in this position, so $\\theta = 0$ in $F = BIL\\sin\\theta$ and there is no force on them.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-d3-02-coil-forces.svg",
+      "alt": "The same view with force arrows: the left-hand side of the coil is pushed down and the right-hand side is pushed up, so the coil turns anticlockwise about the axle.",
+      "caption": "The <span class=\"key-1\">forces</span> on the two sides are equal and opposite, but they act along different lines."
+    },
+    "tempting": "<p>\"It stays still\" is half right: the forces do cancel as far as moving the coil as a whole is concerned. But equal and opposite forces acting along different lines make an object turn, like two hands on a steering wheel, one pushing up and the other pulling down.</p><p>\"Pushed upwards\" comes from looking at only one side of the coil. \"Clockwise\" usually comes from using the wrong hand: Fleming's <em>left</em>-hand rule gives the force on a current in a magnetic field.</p>"
+  },
+  {
+    "id": "CC-D4-01",
+    "topic": "D.4",
+    "level": "HL",
+    "type": "open",
+    "title": "The meter that only kicks",
+    "figure": {
+      "svg": "diagrams/cc-d4-01-two-coils.svg",
+      "alt": "An iron bar with two coils wound on it. Coil A, on the left, is connected to a cell and an open switch. Coil B, on the right, is connected to a centre-zero meter whose needle points to zero.",
+      "caption": "The two coils are not connected to each other."
+    },
+    "question": "<p>Two coils are wound on the same iron bar. Coil A is connected to a cell and a switch. Coil B is connected only to a sensitive centre-zero meter; it has no connection to coil A. Predict what the meter shows (a) at the moment the switch is closed, (b) while the switch stays closed, and (c) at the moment the switch is opened again.</p>",
+    "reveal": "<p><strong>(a) A brief deflection to one side. (b) Zero. (c) A brief deflection to the other side.</strong></p><p>An emf is induced in coil B only while the magnetic flux through it is <em>changing</em> (Faraday's law, $\\varepsilon = -N\\dfrac{\\Delta\\Phi}{\\Delta t}$). When the switch closes, the current in coil A grows from zero, so the magnetic field it makes in the iron grows, and the flux through coil B increases: a brief current flows in B. Once the current in A is steady, the flux through B is large but constant, so there is no emf and the meter reads zero, however long the switch stays closed. When the switch opens, the flux through B falls to zero, and an emf is induced in the opposite direction.</p><p>Lenz's law gives the directions: while the flux increases, the current in B makes a field that opposes the increase; while it decreases, the current in B makes a field that opposes the decrease.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-d4-01-graphs.svg",
+      "alt": "Two graphs against time. Top: the current in coil A rises quickly to a steady value when the switch is closed and falls quickly to zero when it is opened. Bottom: the current in coil B is a short pulse one way when the switch closes, zero while the current in A is steady, and a short pulse the other way when the switch opens.",
+      "caption": "A sketch, not to scale. The <span class=\"key-2\">current in B</span> depends on the <em>rate of change</em> of the <span class=\"key-1\">current in A</span>. The switch-off pulse is usually shorter and taller, because the current in A falls faster than it rises."
+    },
+    "tempting": "<p>It is natural to expect a steady current in A to give a steady reading in B: there is a strong magnetic field through coil B the whole time. But induction needs a <em>changing</em> flux, not just a large one. A large, steady flux induces nothing.</p><p>Many people also expect the two kicks to be in the same direction. But closing the switch increases the flux and opening it decreases the flux, so the two changes, and the two induced emfs, are in opposite directions.</p>"
+  },
+  {
+    "id": "CC-D4-02",
+    "topic": "D.4",
+    "level": "HL",
+    "type": "choice",
+    "title": "Two hanging rings",
+    "figure": {
+      "svg": "diagrams/cc-d4-02-rings.svg",
+      "alt": "Two light aluminium rings hang from threads below a support. The left ring is complete; the right ring has a narrow cut at the bottom. Next to each ring, a bar magnet with its north pole facing the ring is being pushed towards the ring along its axis.",
+      "caption": "The same magnet is pushed quickly towards each ring in turn (drawn twice here)."
+    },
+    "question": "<p>Two identical light aluminium rings hang from threads. One is complete; the other has a narrow cut through it. The north pole of a strong bar magnet is pushed quickly towards each ring in turn, along the ring's axis. What happens to the rings?</p>",
+    "options": [
+      "Neither ring moves, because aluminium is not magnetic",
+      "Both rings are pushed away from the magnet",
+      "Only the complete ring is pushed away from the magnet",
+      "Both rings are attracted towards the magnet"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>Only the complete ring is pushed away.</strong> As the magnet approaches, the magnetic flux through each ring increases, so an emf is induced in <em>both</em> rings (Faraday's law).</p><p>In the complete ring, the emf drives a current round the ring. By Lenz's law, the magnetic field of this current opposes the increase in flux: the face of the ring nearest the magnet acts as a north pole, which repels the magnet's north pole. So the ring swings away from the magnet.</p><p>In the cut ring, the same emf is induced, but there is no complete circuit, so no current flows: the emf just appears as a potential difference across the cut. With no current, the ring makes no magnetic field and feels no force, so it hardly moves.</p><p>Energy conservation agrees: pushing the magnet towards the complete ring takes extra work, which becomes the ring's kinetic energy and thermal energy in the ring. Pushing it towards the cut ring takes no extra work. (If the magnet were pulled quickly <em>away</em>, the complete ring would follow it.)</p>",
+    "tempting": "<p>\"Neither ring moves\" is right that aluminium isn't attracted to a magnet the way iron is. But aluminium is a good conductor, and a <em>changing</em> magnetic field drives currents in a conductor, which make magnetic fields of their own.</p><p>\"Both rings are pushed away\" is tempting because the same emf is induced in both. But the force needs a current, and a current needs a complete circuit. \"Attracted\" is what happens to iron; here the induced current always opposes the change that causes it, so the approaching magnet is repelled.</p>"
+  },
+  {
+    "id": "CC-E1-01",
+    "topic": "E.1",
+    "level": "SL",
+    "type": "open",
+    "title": "The flame that casts a shadow",
+    "figure": {
+      "svg": "diagrams/cc-e1-01-sodium-flame.svg",
+      "alt": "A sodium lamp on a stand on the left, a white screen on the right, and between them a Bunsen burner whose flame has been coloured yellow with salt."
+    },
+    "question": "<p>A low-pressure sodium lamp gives out yellow light with almost all of it at a single wavelength, about 589 nm. It shines on a white screen. A Bunsen flame, coloured bright yellow by sprinkling salt (which contains sodium) into it, is placed between the lamp and the screen. Predict what appears on the screen where the flame is in the way, and explain why.</p>",
+    "reveal": "<p><strong>The flame casts a dark shadow</strong>, even though it is glowing yellow itself.</p><p>The sodium atoms in the flame have exactly the same energy levels as the sodium atoms in the lamp. The lamp's photons were emitted when sodium atoms dropped between two of those levels, so each photon has exactly the energy needed to lift a sodium atom in the flame back up. The atoms in the flame absorb a large share of the lamp's light.</p><p>The excited atoms soon emit photons of the same energy again, but in <em>all directions</em>, so very little of that light carries on towards the screen. The flame glows, but the screen behind it is left much darker. It is an absorption spectrum you can see with your own eyes.</p><p>Light the same flame with white light instead and it casts almost no shadow: only a tiny slice of white light has exactly the right photon energy, and every other wavelength passes straight through.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-e1-01-sodium-shadow.svg",
+      "alt": "The same set-up. Dashed lines from the lamp past the top and bottom of the flame mark a dark shadow on the screen. Short arrows from the flame point in all directions.",
+      "caption": "The flame absorbs the lamp's light and re-emits it in all directions (<span class=\"key-2\">orange arrows</span>), so its <span class=\"key-1\">shadow</span> is dark."
+    },
+    "tempting": "<p>Flames seem transparent because we usually see them in white light, where their shadow is extremely faint. And because the flame gives out light of its own, it seems it should brighten the screen, not darken it. But a gas strongly absorbs photons whose energies match the gaps between its energy levels, and the lamp's light is made almost entirely of exactly those photons. The light the flame gives out again is spread in every direction, so far less of it reaches the screen than the light the flame blocks.</p>"
+  },
+  {
+    "id": "CC-E1-02",
+    "topic": "E.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "One extra particle",
+    "figure": {
+      "svg": "diagrams/cc-e1-02-water.svg",
+      "alt": "A glass of water. A circle zooms in on one water molecule: an oxygen atom with two hydrogen atoms attached."
+    },
+    "question": "<p>Imagine you could add one extra particle to the nucleus of every oxygen atom in a glass of water, leaving the hydrogen atoms alone. In one version you add a neutron. In the other you add a proton (and an extra electron to each atom, so the atoms stay neutral). After which change would the glass still contain water?</p>",
+    "options": [
+      "Only after adding a neutron",
+      "Only after adding a proton",
+      "After either change",
+      "After neither change"
+    ],
+    "answer": 0,
+    "reveal": "<p>An element is defined by its <strong>proton number</strong> $Z$.</p><p><strong>Adding a neutron</strong> changes oxygen-16, $^{16}_{\\;8}\\text{O}$, into oxygen-17, $^{17}_{\\;8}\\text{O}$: still oxygen, just a different <strong>isotope</strong>. Isotopes have the same number of electrons, so they have the same chemistry, and the glass still holds water, only slightly heavier. (Oxygen-17 is stable, and ordinary water already contains a little of it.)</p><p><strong>Adding a proton</strong> changes $Z$ from 8 to 9, so every oxygen atom becomes fluorine-17, $^{17}_{\\;9}\\text{F}$. Fluorine has completely different chemistry, so the glass no longer contains water. In fact fluorine-17 is unstable: it decays by β⁺ emission with a half-life of about a minute, turning back into oxygen-17.</p>",
+    "tempting": "<p>\"After neither change\" comes from thinking that any change to a nucleus makes a new element. But changing the number of neutrons only changes the nucleon number $A$, which tells you which <em>isotope</em> it is, not which element.</p><p>\"After either change\" comes from thinking that an element's identity, or its chemistry, is decided by the electrons, which we kept balanced. But a neutral atom always has $Z$ electrons, so adding a proton (and its electron) changes how the atom bonds. And \"only after adding a proton\" mixes up the two particles: it is the proton, the particle that carries the charge, that sets the element.</p>"
+  },
+  {
+    "id": "CC-E2-01",
+    "topic": "E.2",
+    "level": "HL",
+    "type": "choice",
+    "title": "The positive electroscope",
+    "figure": {
+      "svg": "diagrams/cc-e2-01-electroscope.svg",
+      "alt": "An ultraviolet lamp shines on a zinc plate on top of a gold-leaf electroscope. Plus signs show that the plate and the leaves are positively charged, and the leaves stand apart."
+    },
+    "question": "<p>A clean zinc plate sits on top of a gold-leaf electroscope. Ultraviolet light makes a <em>negatively</em> charged plate lose its charge, so the leaves fall. This time the electroscope is charged <strong>positively</strong>, so its leaves stand apart, and the same ultraviolet lamp shines on the plate. Ignore any slow leakage of charge into the air. What happens to the leaves?</p>",
+    "options": [
+      "They stay where they are",
+      "They rise further apart, because the light knocks electrons out of the plate",
+      "They fall together, because the light discharges the plate"
+    ],
+    "answer": 0,
+    "reveal": "<p><strong>The leaves stay where they are.</strong> The ultraviolet photons still have more energy than zinc's work function, so photoelectrons are still released. But they leave with very little kinetic energy: for a typical ultraviolet lamp (wavelength 254 nm, photon energy 4.9 eV) and a work function of about 4.3 eV, $E_{\\max} \\approx 0.6$ eV.</p><p>The positive plate attracts them back. To escape, an electron would need enough energy to get away from a plate at a potential of hundreds or even thousands of volts, so every photoelectron is pulled straight back to the plate. Its charge doesn't change, so the leaves don't move.</p><p>On a <em>negative</em> plate the same electrons are repelled, so they leave for good and the plate discharges. The result depends on the sign of the charge because the light removes <strong>electrons</strong>, which only a negative plate has to spare.</p>",
+    "tempting": "<p>\"They rise\" is the most tempting answer, and it is half right: electrons <em>are</em> emitted. But emitting an electron is not the same as losing it. The pull of the positive plate is far too strong for an electron with less than 1 eV of kinetic energy to escape.</p><p>\"They fall\" comes from remembering that ultraviolet light discharges an electroscope without asking <em>why</em>. It only works when the light removes the excess charge, and only a negatively charged plate has excess electrons to lose.</p>"
+  },
+  {
+    "id": "CC-E2-02",
+    "topic": "E.2",
+    "level": "HL",
+    "type": "choice",
+    "title": "Does the photon slow down?",
+    "figure": {
+      "svg": "diagrams/cc-e2-02-compton.svg",
+      "alt": "An X-ray photon, drawn as a wavy line, travels towards an electron at rest. After the collision the electron moves off down and to the right, and the scattered photon moves off up and to the right; its path is a dashed line with a question mark."
+    },
+    "question": "<p>In Compton scattering, an X-ray photon collides with a free electron at rest. The electron recoils, taking some of the photon's energy. Compared with the photon before the collision, how is the scattered photon different?</p>",
+    "options": [
+      "It travels more slowly",
+      "It has a longer wavelength",
+      "It has a shorter wavelength",
+      "Only its direction is different"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>Its wavelength is longer.</strong> In a vacuum every photon travels at $c$, whatever its energy, so the scattered photon can't slow down. A photon's energy is set by its frequency: $E = hf = \\dfrac{hc}{\\lambda}$. Less energy means a lower frequency and so a <em>longer</em> wavelength.</p><p>Its momentum, $p = \\dfrac{h}{\\lambda}$, decreases too: the electron's momentum makes up the change in the photon's momentum (as vectors), so the total momentum is conserved.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-e2-02-compton-wavelength.svg",
+      "alt": "The same collision. The scattered photon is drawn as a wavy line with a longer wavelength than the incoming photon.",
+      "caption": "The scattered photon has a <span class=\"key-2\">longer wavelength</span> than the <span class=\"key-1\">incoming photon</span>. The change is exaggerated: for X-rays scattered through 90°, it is only about 2.4 × 10⁻¹² m."
+    },
+    "tempting": "<p>When a moving ball hits another ball and loses kinetic energy, it slows down, so it is natural to expect the same of a photon. But a photon's speed is fixed at $c$; what changes is its frequency and wavelength. Others link \"less energy\" with \"shorter wavelength\", but in $E = \\dfrac{hc}{\\lambda}$ energy and wavelength are inversely related.</p><p>\"Only its direction is different\" is what the wave model predicts: a wave scattered by an electron would come off with the same wavelength. Measuring the longer wavelength is exactly what made Compton scattering such strong evidence for photons.</p>"
+  },
+  {
+    "id": "CC-E3-01",
+    "topic": "E.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "Does counting speed it up?",
+    "figure": {
+      "svg": "diagrams/cc-e3-01-two-sources.svg",
+      "alt": "Sample A: a small radioactive source in front of a Geiger–Müller tube connected to a counter showing a large number of counts. Sample B: an identical source inside a closed lead box."
+    },
+    "question": "<p>Two identical samples of the same radioactive isotope are prepared at the same time. The half-life is 2 days. For the next 8 days, sample A sits in front of a Geiger–Müller tube that counts its decays non-stop, while sample B is shut in a thick lead box. At the end of the 8 days, how do the numbers of undecayed nuclei in the two samples compare?</p>",
+    "options": [
+      "They are the same",
+      "Fewer in A, because detecting the radiation draws out extra decays",
+      "Fewer in A, because the lead box slows down the decay of B"
+    ],
+    "answer": 0,
+    "reveal": "<p><strong>They are the same</strong> (apart from random differences far too small to measure). Radioactive decay is <strong>random and spontaneous</strong>: each nucleus has a fixed chance of decaying in each second, and outside conditions such as temperature, pressure or chemical reactions have no noticeable effect on it (tiny effects have been measured only for a few unusual kinds of decay). Watching, counting, shielding or heating the sample makes no difference.</p><p>The Geiger–Müller tube only detects radiation that has <em>already</em> left the nuclei, and the lead only absorbs radiation that has already been emitted. After 8 days, which is 4 half-lives, both samples have $\\left(\\tfrac{1}{2}\\right)^4 = \\tfrac{1}{16}$ of their nuclei left.</p><p>What the lead box <em>does</em> change is the <strong>count rate</strong> that a detector outside it would record. The <strong>activity</strong> of the source (decays per second) is the same in both.</p>",
+    "tempting": "<p>A detector clicking away can feel as if it is \"pulling\" decays out of the source. But a Geiger–Müller tube is a passive detector: it only reacts to radiation that has already been emitted.</p><p>Others imagine that a lead box \"switches off\" radioactivity. Lead stops the <em>radiation</em> getting out; it does nothing to the nuclei inside, which keep decaying at the same rate. Both mistakes mix up the <strong>count rate</strong> (what a detector records) with the <strong>activity</strong> (what the source does).</p>"
+  },
+  {
+    "id": "CC-E3-02",
+    "topic": "E.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "The overdue nucleus",
+    "figure": {
+      "svg": "diagrams/cc-e3-02-one-nucleus.svg",
+      "alt": "A single nucleus, drawn as a cluster of protons and neutrons, labelled with a half-life of 10 minutes. Next to it, a stopwatch shows that 30 minutes have passed."
+    },
+    "question": "<p>An isotope has a half-life of 10 minutes. Imagine you could watch one single nucleus of it. After 30 minutes it still hasn't decayed. What is the probability that it decays during the next 10 minutes?</p>",
+    "options": [
+      "$\\frac{1}{8}$",
+      "$\\frac{1}{2}$",
+      "$\\frac{7}{8}$",
+      "1 (it is certain to decay)"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The probability is $\\frac{1}{2}$</strong>, exactly as it was when the stopwatch started. A nucleus doesn't age or wear out: its chance of decaying in the next 10 minutes is the same however long it has already survived. Decay is random, and a nucleus has no memory.</p><p>The half-life describes what happens to a large number of nuclei. Start with 1 000 000 of them: after 30 minutes about 125 000 are left. During the next 10 minutes about half of <em>those</em>, roughly 62 500, decay: the same fraction as decayed in the first 10 minutes. That is why a decay curve halves in every 10 minutes, wherever you start.</p><p>$\\frac{1}{8}$ is the probability that a nucleus survives the <em>first</em> 30 minutes. For this nucleus that has already happened, so it no longer matters.</p>",
+    "tempting": "<p>It feels as if a nucleus that has survived three half-lives must be \"overdue\", so its chance of decaying should be high ($\\frac{7}{8}$) or even certain. This is the gambler's fallacy: after a coin lands heads three times in a row, the next throw is still 50:50. Others pick $\\frac{1}{8}$ because they apply the fraction left after three half-lives to the nucleus's future. The half-life tells you the chance of decaying within the next half-life, counted from <em>now</em>, whatever has happened before.</p>"
+  },
+  {
+    "id": "CC-E4-01",
+    "topic": "E.4",
+    "level": "SL",
+    "type": "choice",
+    "title": "Splitting iron",
+    "figure": {
+      "svg": "diagrams/cc-e4-01-be-curve.svg",
+      "alt": "Graph of binding energy per nucleon (0 to about 9 MeV) against nucleon number A (0 to 240). The curve rises steeply for light nuclei to a broad peak marked iron-56, at about 8.8 MeV, then falls slowly to about 7.6 MeV at uranium-235, which is also marked.",
+      "caption": "Values for real nuclei. The three dots above the curve on the left are helium-4, carbon-12 and oxygen-16."
+    },
+    "question": "<p>When a uranium-235 nucleus splits into two medium-sized nuclei, about 200 MeV is released. Imagine instead splitting an iron-56 nucleus into two equal halves: two aluminium-28 nuclei, each with 13 protons and 15 neutrons. Use the binding energy per nucleon curve. What would happen?</p>",
+    "options": [
+      "More energy would be released than in uranium fission",
+      "Less energy would be released than in uranium fission",
+      "No energy would be released, and none would be needed",
+      "Energy would have to be supplied"
+    ],
+    "answer": 3,
+    "reveal": "<p><strong>Energy would have to be supplied.</strong> Splitting a nucleus releases energy only when the products are <em>more tightly bound</em> (have a higher binding energy per nucleon) than the original nucleus. Uranium-235 is on the right of the curve at about 7.6 MeV per nucleon, and its fragments sit higher, at about 8.5 MeV per nucleon, so energy is released.</p><p>Iron-56 sits at, or very close to, the top of the curve, at about 8.8 MeV per nucleon. Aluminium-28 is lower, at about 8.3 MeV per nucleon. (It lies a little below the curve, which follows the most tightly bound nucleus for each $A$; even the curve's value at $A = 28$, about 8.45 MeV, is below iron's.) So splitting iron moves <em>down</em> the curve:</p><ul><li>binding energy of iron-56: $56 \\times 8.79 \\approx 492$ MeV</li><li>binding energy of two aluminium-28: $2 \\times 28 \\times 8.31 \\approx 465$ MeV</li></ul><p>The products would have about 27 MeV <em>less</em> binding energy, so about 27 MeV would have to be supplied, and the two products would have more mass than the iron nucleus. Iron is the end of the line both ways: joining light nuclei releases energy, and splitting very heavy nuclei releases energy, but neither works for nuclei near iron.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-e4-01-totals.svg",
+      "alt": "Two bars compare total binding energy. Iron-56: 492 MeV. Two aluminium-28 nuclei: 27 MeV less.",
+      "caption": "Total binding energy before and after. The products are less tightly bound, so <span class=\"key-2\">27 MeV</span> would have to be supplied."
+    },
+    "tempting": "<p>\"Splitting the atom\" is famous for releasing energy, so it is tempting to think that splitting <em>any</em> nucleus does. Others expect a smaller nucleus to release less energy, but still some. What matters is not the size of the nucleus but which way the change goes on the binding energy per nucleon curve: fission releases energy only for nuclei much heavier than iron, whose fragments end up higher on the curve.</p><p>\"No energy\" assumes the top of the curve is flat. It is fairly flat for heavier nuclei, but aluminium-28 really is less tightly bound than iron-56.</p>"
+  },
+  {
+    "id": "CC-E4-02",
+    "topic": "E.4",
+    "level": "SL",
+    "type": "open",
+    "title": "A sphere or a sheet?",
+    "figure": {
+      "svg": "diagrams/cc-e4-02-sphere-sheet.svg",
+      "alt": "A solid sphere and, beside it, a thin, flat sheet."
+    },
+    "question": "<p>Imagine a sphere of pure uranium-235 whose mass is just above the critical mass, so a chain reaction can sustain itself in it. Exactly the same uranium is then rolled out into a thin, flat sheet. Nothing surrounds either piece. Can a chain reaction still sustain itself in the sheet? Predict, then explain.</p>",
+    "reveal": "<p><strong>No.</strong> A chain reaction sustains itself only if, on average, at least one neutron from each fission goes on to cause another fission. A neutron travels some distance through the uranium before it hits a nucleus, and any neutron that reaches the surface first escapes and is lost.</p><p>In the sphere, most neutrons are released far enough from the surface that enough of them cause further fissions. The sheet contains the same nuclei at the same density, but it is so thin that every fission happens close to a surface, and most neutrons escape before they can cause another fission. The chain reaction dies out.</p><p>So the critical mass depends on shape as well as material. A sphere has the smallest surface area for its volume, so it needs the least mass. Nuclear safety uses this: solutions of fissile material are kept in thin tanks and narrow pipes, shapes designed so that they cannot become critical.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-e4-02-neutrons.svg",
+      "alt": "Cross-sections of the sphere and of the sheet seen edge on. From a fission at the centre of each, arrows show neutrons from fissions there travelling the same distance in different directions. In the sphere all of them stay inside; in the sheet all of them leave.",
+      "caption": "Neutrons released by fissions at the centre (<span class=\"key-2\">arrows</span> show some possible directions) travel the same distance in each piece. In the sphere they are still inside the uranium; from the thin sheet they escape. Not to scale."
+    },
+    "tempting": "<p>It seems natural that the same amount of uranium should behave the same way whatever its shape, because the number of nuclei that could split hasn't changed. But a chain reaction depends on neutrons <em>finding</em> nuclei before they escape, and that depends on how far each fission is from the surface.</p><p>Some students think the sheet fails because its nuclei are spread further apart. They aren't: rolling the metal out doesn't change its density. It only makes the piece thinner, so far more of it lies close to a surface.</p>"
+  },
+  {
+    "id": "CC-E5-01",
+    "topic": "E.5",
+    "level": "SL",
+    "type": "choice",
+    "title": "Hotter than the Sun",
+    "figure": {
+      "svg": "diagrams/cc-e5-01-hr.svg",
+      "alt": "Empty HR diagram axes: luminosity, in units of the Sun's luminosity on a logarithmic scale, against surface temperature, which increases to the left. Only the Sun is marked, at a luminosity of 1 and a temperature of about 5800 K."
+    },
+    "question": "<p>Star X has a higher surface temperature than the Sun. Treat both stars as black bodies. Which statement <strong>must</strong> be true?</p>",
+    "options": [
+      "X has a larger radius than the Sun",
+      "X is more luminous than the Sun",
+      "X has more mass than the Sun",
+      "X's spectrum peaks at a shorter wavelength than the Sun's"
+    ],
+    "answer": 3,
+    "reveal": "<p><strong>Only the peak wavelength must be shorter.</strong> By Wien's displacement law, $\\lambda_{\\max} T = 2.9 \\times 10^{-3}$ m K, so a higher surface temperature always means a shorter peak wavelength.</p><p>Luminosity depends on size as well as temperature: $L = \\sigma A T^4$, where $A = 4\\pi R^2$ is the surface area. A very small hot star can be far <em>less</em> luminous than the Sun.</p><p>On the HR diagram every star to the left of the Sun is hotter. That region includes the upper main sequence (stars bigger, more luminous and more massive than the Sun) but also the <strong>white dwarfs</strong>: hotter than the Sun, but only about the size of the Earth and much dimmer. Sirius B, for example, has a surface temperature of about 25 000 K, more than four times the Sun's, yet only a few hundredths of the Sun's luminosity. Most white dwarfs also have less mass than the Sun.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-e5-01-hr-regions.svg",
+      "alt": "The same HR diagram with the region to the left of the Sun shaded. The shaded region contains the upper part of the main sequence, above the Sun, and the white dwarfs, far below the Sun.",
+      "caption": "Every star in the shaded region is hotter than the Sun. Stars there on the <span class=\"key-1\">main sequence</span> are more luminous than the Sun; <span class=\"key-2\">white dwarfs</span> are far less luminous. Positions are approximate."
+    },
+    "tempting": "<p>Along the main sequence the pattern really is \"hotter means bigger, more luminous and more massive\", so it is tempting to apply it to every star. But that pattern belongs only to the main sequence. Temperature alone fixes a star's colour and peak wavelength; it doesn't fix its size or its luminosity, because the luminosity depends on the surface area too. White dwarfs break the pattern completely.</p>"
+  },
+  {
+    "id": "CC-E5-02",
+    "topic": "E.5",
+    "level": "SL",
+    "type": "choice",
+    "title": "Who gets the energy?",
+    "figure": {
+      "svg": "diagrams/cc-e5-02-dt.svg",
+      "alt": "Before: a deuterium nucleus (one proton, one neutron) and a tritium nucleus (one proton, two neutrons). An arrow leads to after: a helium-4 nucleus and a free neutron, each marked with a question mark."
+    },
+    "question": "<p>In deuterium–tritium fusion, $^{2}_{1}\\text{H} + {}^{3}_{1}\\text{H} \\rightarrow {}^{4}_{2}\\text{He} + {}^{1}_{0}\\text{n}$, about 17.6 MeV is released as kinetic energy of the two products. Before they fuse, the deuterium and tritium nuclei have very little momentum compared with the products. How is the 17.6 MeV shared?</p>",
+    "options": [
+      "Most goes to the neutron, because it has less mass",
+      "It is shared equally between the two products",
+      "Most goes to the helium-4 nucleus, because it has more mass"
+    ],
+    "answer": 0,
+    "reveal": "<p><strong>The neutron gets about 80% of it</strong>, roughly 14.1 MeV, leaving about 3.5 MeV for the helium nucleus.</p><p>Momentum is conserved. The total momentum before is almost zero, so the two products fly apart with momenta of <em>equal size</em> in opposite directions. For the same momentum $p$, the kinetic energy is $E_k = \\dfrac{p^2}{2m}$, so the lighter particle gets more. The helium nucleus has about 4 times the neutron's mass, so the neutron moves about 4 times as fast and gets about 4 times as much kinetic energy: $\\tfrac{4}{5} \\times 17.6 \\approx 14.1$ MeV, and $\\tfrac{1}{5} \\times 17.6 \\approx 3.5$ MeV.</p><p>Beyond the syllabus: this matters in fusion reactors. Neutrons have no charge, so the magnetic field that holds the hot plasma can't hold them: they carry most of the energy out into the walls, where it is collected as thermal energy. The charged helium nuclei stay in the plasma and help to keep it hot.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-e5-02-dt-after.svg",
+      "alt": "After the fusion, the helium-4 nucleus moves left with a short velocity arrow and 3.5 MeV; the neutron moves right with an arrow about four times as long and 14.1 MeV.",
+      "caption": "<span class=\"key-2\">Arrows</span> show velocities. The products have equal and opposite momenta, so the neutron moves about 4 times as fast as the helium nucleus."
+    },
+    "tempting": "<p>The helium nucleus is the \"main\" product and has most of the mass, so it seems it should take most of the energy. But the share is decided by conservation of momentum: the two products get momenta of equal size, and a light particle with a given momentum moves fast and carries more kinetic energy. An equal share would break momentum conservation, because equal kinetic energies with different masses would mean different momenta.</p>"
   },
   {
     "id": "CC-SK-01",
