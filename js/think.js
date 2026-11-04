@@ -24,7 +24,10 @@
   const saveDone = () => { try { localStorage.setItem(STORE, JSON.stringify([...done])); } catch (e) { /* ignore */ } };
 
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  const topicPage = (t) => `${root}themes/${t.replace('.', '').toLowerCase()}.html`;
+  // "Skills" is a topic label of its own (the essential skills on skills.html), grouped like a theme.
+  const SKILLS = 'Skills';
+  const topicPage = (t) => (t === SKILLS ? `${root}skills.html` : `${root}themes/${t.replace('.', '').toLowerCase()}.html`);
+  const themeOf = (t) => (t === SKILLS ? SKILLS : TOPICS.get(t)?.theme);
   const topicsOf = (it) => (it.topic ? [it.topic] : it.topics || []);
   const isHL = (it) => it.level === 'HL' || topicsOf(it).some((t) => TOPICS.get(t) && TOPICS.get(t).hl);
 
@@ -92,7 +95,7 @@
     // In the list each card starts closed, as a tile: a small copy of its picture, the title and the tags.
     // The title button (or the picture) opens it across the full width.
     // Marked done automatically once the student chooses an answer or opens a reveal (saved in this browser only).
-    const theme = topicsOf(it).length ? TOPICS.get(topicsOf(it)[0])?.theme : '';
+    const theme = topicsOf(it).length ? themeOf(topicsOf(it)[0]) : '';
     const f = it.figure;
     const thumb = !f ? '' : `<div class="think-thumb diagram" aria-hidden="true">${f.img
       ? `<img src="${esc(f.img)}" alt="" loading="lazy">`
@@ -134,23 +137,30 @@
   }
   function groupHeading(text, id) { return `<h2 class="think-group"${id ? ` id="${id}"` : ''}>${text}</h2>`; }
 
-  // Concept challenges page without ?theme= or ?topic=: one card per theme (teacher's decision).
+  // Concept challenges page without ?theme= or ?topic=: one card per theme (teacher's decision), then the
+  // Skills challenges as a group of their own, with a link to the Skills page.
+  function groupCard(id, title) {
+    const list = items.filter((it) => themeOf(it.topic) === id);
+    const name = `<h3>${title}</h3>`;
+    if (!list.length) return `<li><div class="card think-soon" data-theme="${id}">${name}<p>Coming soon</p></div></li>`;
+    const n = list.filter((it) => done.has(it.id)).length;
+    const count = `${list.length} challenge${list.length === 1 ? '' : 's'}${n ? ` · ${n} done` : ''}`;
+    return `<li><a class="card" data-theme="${id}" href="?theme=${id}">${name}<p>${count}</p></a></li>`;
+  }
   function themeCardsHtml() {
-    return '<ul class="card-grid think-topics">' + window.SYLLABUS.map((th) => {
-      const list = items.filter((it) => TOPICS.get(it.topic)?.theme === th.id);
-      const name = `<h3>Theme ${th.id}: ${esc(th.title)}</h3>`;
-      if (!list.length) return `<li><div class="card think-soon" data-theme="${th.id}">${name}<p>Coming soon</p></div></li>`;
-      const n = list.filter((it) => done.has(it.id)).length;
-      const count = `${list.length} challenge${list.length === 1 ? '' : 's'}${n ? ` · ${n} done` : ''}`;
-      return `<li><a class="card" data-theme="${th.id}" href="?theme=${th.id}">${name}<p>${count}</p></a></li>`;
-    }).join('') + '</ul>';
+    return groupHeading('Syllabus themes', 'themes')
+      + '<ul class="card-grid think-topics">'
+      + window.SYLLABUS.map((th) => groupCard(th.id, `Theme ${th.id}: ${esc(th.title)}`)).join('') + '</ul>'
+      + groupHeading('Skills', 'skills')
+      + `<p>Measurement, uncertainties, graphs and vectors: the essential skills on the <a href="${root}skills.html">Physics skills</a> page, used in every topic.</p>`
+      + `<ul class="card-grid think-topics">${groupCard(SKILLS, 'Skills: measurement, uncertainty, graphs and vectors')}</ul>`;
   }
 
   function render() {
     const topic = params.get('topic');
     const theme = params.get('theme');
     shown = items.filter((it) => (!topic || topicsOf(it).includes(topic))
-      && (!theme || topicsOf(it).some((t) => TOPICS.get(t)?.theme === theme)));
+      && (!theme || topicsOf(it).some((t) => themeOf(t) === theme)));
     let html = '';
     const grid = (list) => (list.length ? `<div class="think-grid">${list.map((it) => cardHtml(it)).join('')}</div>` : '');
     if (kind === 'concepts' && !topic && !theme) {
@@ -158,7 +168,10 @@
       html = themeCardsHtml();
     } else if (kind === 'concepts') {
       // No heading: each challenge's own topic tag links to the notes.
-      html = `<p class="think-back"><a href="${location.pathname}">← All themes</a></p>` + grid(shown);
+      html = `<p class="think-back"><a href="${location.pathname}">← All themes</a></p>`
+        + (theme === SKILLS || topic === SKILLS
+          ? `<p>These challenges practise the essential skills on the <a href="${root}skills.html">Physics skills</a> page.</p>` : '')
+        + grid(shown);
       if (!shown.length) html += '<p class="notice">No challenges here yet. More are coming.</p>';
     } else if (kind === 'big') {
       for (const k of ['unsolved', 'solved']) {

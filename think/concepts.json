@@ -484,5 +484,238 @@
     "answer": 0,
     "reveal": "<p>A lamp's rating is the power it dissipates <em>with 230 V across it</em>. From $P = \\dfrac{V^2}{R}$, each lamp's resistance is $R = \\dfrac{V^2}{P}$:</p><ul><li>60 W lamp: $R = \\dfrac{230^2}{60} = 882\\ \\Omega$</li><li>100 W lamp: $R = \\dfrac{230^2}{100} = 529\\ \\Omega$</li></ul><p>So the <strong>lower</strong>-rated lamp has the <strong>higher</strong> resistance. In series, both lamps carry the same current: $I = \\dfrac{230}{882 + 529} = 0.163$ A. Then $P = I^2R$ gives about 23 W for the 60 W lamp and 14 W for the 100 W lamp. <strong>The 60 W lamp glows more brightly</strong>, although both are much dimmer than normal.</p><p>In reality a filament's resistance is lower when it is cooler, so both resistances are smaller than these values. The 100 W lamp runs further below its normal temperature, so its resistance drops more, and if anything the 60 W lamp wins by even more.</p>",
     "tempting": "<p>\"The 100 W lamp is brighter\" is true when each lamp has the full 230 V across it, as at home, where lamps are connected in parallel. Then $P = \\dfrac{V^2}{R}$ applies with the same $V$, and the lower resistance wins. In series it is the <em>current</em> that is the same for both, so $P = I^2R$ shows that the higher resistance wins. A power rating describes a lamp under its rated conditions, not in every circuit.</p>"
+  },
+  {
+    "id": "CC-C2-01",
+    "topic": "C.2",
+    "level": "SL",
+    "type": "choice",
+    "title": "Where is purple?",
+    "figure": {
+      "svg": "diagrams/cc-c2-01-spectrum.svg",
+      "alt": "The visible spectrum as a coloured strip from violet at 400 nanometres, through blue, green, yellow and orange, to red at 700 nanometres. Below it is an empty dashed box labelled 'purple?'.",
+      "caption": "The visible spectrum, from violet (about 400 nm) to red (about 700 nm). The reddish purples and magentas aren't in it."
+    },
+    "question": "<p>The visible spectrum runs from violet (about 400 nm), through blue, green, yellow and orange, to red (about 700 nm). Violet can look a little purplish, but the reddish purples and magentas, the colours between red and violet on a colour wheel, aren't anywhere in the spectrum: no single wavelength of light looks like them. Yet we clearly see them. Where does purple come from?</p>",
+    "options": [
+      "Purple light has a wavelength just shorter than violet, in the ultraviolet",
+      "We see purple when red light and blue light reach the eye together, with little green",
+      "Purple light has a wavelength between red and violet that instruments can't detect",
+      "Purple is violet light that has been made dimmer"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>Purple is made by your eyes and brain, not by a single wavelength.</strong> It appears when the eye receives red light and blue (or violet) light together, without much green.</p><p>The retina has three types of colour-sensitive cell (cones). One type responds most to long wavelengths (red), one to medium wavelengths (green) and one to short wavelengths (blue and violet). Your brain works out a colour by comparing how strongly each type responds. A single wavelength always excites neighbouring types: light of 580 nm, for example, excites the \"red\" and \"green\" cones strongly but the \"blue\" ones hardly at all, and you see yellow. But the \"red\" and \"blue\" cones respond to opposite ends of the spectrum, with the \"green\" cones' range in between, so no single wavelength can excite the red and blue cones strongly while leaving the green ones weak; only a <em>mixture</em> of red and blue light can. Your brain's answer to that mixture is purple (or magenta). That's why it's called a <strong>non-spectral colour</strong>. Violet, at about 400 nm, really is in the spectrum, and it can look bluish-purple; but no single wavelength matches a reddish purple or magenta.</p><p>The picture shows red, green and blue light overlapping on a dark screen. Red and blue make magenta; red and green make yellow; green and blue make cyan; all three together make white. A phone or TV screen makes every colour you see, purple included, from tiny red, green and blue dots. (How the eye detects colour goes beyond the DP syllabus; the range of visible wavelengths in the electromagnetic spectrum is in <a href=\"../themes/c2.html\">C.2</a>.)</p>",
+    "revealFigure": {
+      "img": "../images/think/additive-colour.svg",
+      "alt": "Three overlapping circles of red, green and blue light on a black background. Where red and green overlap the colour is yellow, where green and blue overlap it is cyan, where blue and red overlap it is magenta, and in the centre, where all three overlap, it is white.",
+      "caption": "Adding coloured light: red + blue = magenta (purple), red + green = yellow, green + blue = cyan, and all three = white.",
+      "credit": "Image: SharkD and Jacobolus, <a href=\"https://commons.wikimedia.org/wiki/File:AdditiveColor.svg\">Wikimedia Commons</a>, public domain."
+    },
+    "tempting": "<p>\"Purple\" sounds as if it should sit next to violet, so it's tempting to place it just beyond violet, in the ultraviolet. But ultraviolet is invisible to us: the eye's lens absorbs it before it reaches the retina. Colour wheels join red round to violet, which makes it look as if purple sits \"between\" them; but the spectrum is a straight line of wavelengths with red at one end and violet at the other, and only our eyes and brain join the ends together. And dimming violet light makes it look darker violet, not purple.</p>"
+  },
+  {
+    "id": "CC-SK-01",
+    "topic": "Skills",
+    "level": "SL",
+    "type": "choice",
+    "title": "Precise or accurate?",
+    "figure": {
+      "svg": "diagrams/cc-sk-01-sets.svg",
+      "alt": "Four number lines, labelled A to D, on a scale of g from 9.0 to 10.6 m s⁻². Each has five dots, one student's five measurements. A dashed line marks the true value, 9.8. Set A: five dots close together around 9.8. Set B: five dots close together around 9.3. Set C: dots spread widely, from about 9.4 to 10.2. Set D: dots spread widely, from about 9.9 to 10.6.",
+      "caption": "Each dot is one measurement of $g$. The <span class=\"key-2\">dashed line</span> is the true value, 9.8 $\\text{m s}^{-2}$."
+    },
+    "question": "<p>Four students each measure the acceleration of free fall, $g$, five times. The true value is 9.8 $\\text{m s}^{-2}$. The picture shows each student's five results. Which set of results is precise but not accurate?</p>",
+    "options": [
+      "Set A",
+      "Set B",
+      "Set C",
+      "Set D"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>Set B.</strong> Its five results are very close to each other (from 9.21 to 9.39 $\\text{m s}^{-2}$), so it is <strong>precise</strong>. But they are all close to 9.3, not 9.8, so it isn't <strong>accurate</strong>: every result is about 0.5 $\\text{m s}^{-2}$ too low. A shift like that, the same way for every reading, is the sign of a <em>systematic error</em>, such as a timer that always stops a little late, which makes every fall time too long.</p><p>Set A is precise and accurate. Set C is accurate on average (its mean is 9.80 $\\text{m s}^{-2}$) but not precise: large <em>random errors</em> scatter its results. Set D is neither.</p><p><a href=\"../skills.html#accuracy\">Skills: accuracy, precision and errors</a></p>",
+    "tempting": "<p>The two words sound alike, and in everyday English they often mean the same thing. In physics they don't: <strong>precise</strong> means the results are close to <em>each other</em>; <strong>accurate</strong> means they are close to the <em>true value</em>. Set C is tempting because its results look untidy, and untidy feels \"inaccurate\", but they are spread evenly around 9.8. Set B looks the most professional of all, and that's the trap: a tight group of results is no guarantee that they are right.</p>"
+  },
+  {
+    "id": "CC-SK-02",
+    "topic": "Skills",
+    "level": "SL",
+    "type": "choice",
+    "title": "The worn ruler",
+    "figure": {
+      "svg": "diagrams/cc-sk-02-worn-ruler.svg",
+      "alt": "A ruler numbered in centimetres whose left end is worn away, so the zero mark is missing. An eraser lies on the ruler with one end lined up with the worn end of the ruler.",
+      "caption": "The worn end of the ruler is where the 2 mm mark would be."
+    },
+    "question": "<p>The end of a student's ruler is worn away, so its zero mark has gone: the end is now where the 2 mm mark would be. She measures the length of an eraser by lining up one end of it with the end of the ruler and reading the scale at the other end. She takes 10 readings and uses their mean. Which statement is correct?</p>",
+    "options": [
+      "Each reading is 2 mm too short, and taking the mean of 10 removes the error",
+      "Each reading is 2 mm too long, and taking the mean of 10 removes the error",
+      "Each reading is 2 mm too short, and taking the mean of 10 doesn't change the error",
+      "Each reading is 2 mm too long, and taking the mean of 10 doesn't change the error"
+    ],
+    "answer": 3,
+    "reveal": "<p><strong>Each reading is 2 mm too long, and repeating doesn't change that.</strong> The eraser starts at the worn end, where the scale would read 2 mm, so the reading at its other end is its true length <em>plus</em> 2 mm. The error is <em>systematic</em>: every reading is 2 mm too long, so the mean of 10 readings is also 2 mm too long. Taking a mean reduces only <em>random</em> errors, which push some readings up and others down, so that they partly cancel. A systematic error pushes every reading the same way, so nothing cancels.</p><p>To fix it, deal with the cause. Subtract 2 mm from every reading, or measure from a clear mark, such as the 1 cm mark, and subtract the two readings (as for any length measured on a ruler, the uncertainty is ±1 mm).</p><p><a href=\"../skills.html#accuracy\">Skills: accuracy, precision and errors</a></p>",
+    "tempting": "<p>\"Too short\" is tempting because something is missing from the ruler, so it feels as if the readings must come out small. But the missing part is at the start of the scale: the eraser begins at the 2 mm position, so the scale counts 2 mm that aren't there. \"Repeat and take the mean\" is the standard advice for improving a result, so it's tempting to think it fixes any error, or at least shrinks it. It works only for random errors. Here the 10 readings will agree closely with each other (they are precise), which can make the result look trustworthy when every one of them is wrong by the same 2 mm.</p>"
+  },
+  {
+    "id": "CC-SK-03",
+    "topic": "Skills",
+    "level": "SL",
+    "type": "choice",
+    "title": "Through the origin?",
+    "figure": {
+      "svg": "diagrams/cc-sk-03-data.svg",
+      "alt": "A graph of current I in amperes, from 0 to 0.18, against potential difference V in volts, from 0 to 7. Six data points, at 1 V to 6 V, each with a vertical uncertainty bar. The points rise steadily, from about 0.06 A at 1 V to about 0.16 A at 6 V. No line is drawn.",
+      "caption": "Each uncertainty bar is ±0.01 A. The uncertainty in $V$ is too small to show."
+    },
+    "question": "<p>A student measures the current $I$ in a resistor for six values of the potential difference $V$ across it. Theory says that $I$ is proportional to $V$, because the resistance stays constant. She plots her data with an uncertainty bar on every point, as in the picture. The points lie close to a straight line, but that line would cross the current axis above zero. How should she draw her line of best fit?</p>",
+    "options": [
+      "Draw the best straight line through the points (within the uncertainty bars), even if it misses the origin",
+      "Draw the line through the origin anyway, because the theory says so",
+      "Leave out the points that don't fit a line through the origin",
+      "Join the points dot-to-dot"
+    ],
+    "answer": 0,
+    "reveal": "<p><strong>Draw the best straight line through the uncertainty bars, and let it miss the origin.</strong> The line must follow the data, not the theory. Here it passes through every uncertainty bar and crosses the current axis at about 0.04 A.</p><p>An intercept that should be zero but isn't is evidence of a <em>systematic error</em>. Here it is probably a zero error: an ammeter whose pointer sits at 0.04 A when no current flows adds 0.04 A to every reading. That shifts the whole line up without changing its slope, so the gradient is still valid. The gradient is about 0.020 $\\text{A V}^{-1}$, so the resistance is $R = \\dfrac{1}{0.020} = 50$ Ω. Report the intercept and suggest a cause: it's useful information, not a failure.</p><p><a href=\"../skills.html#graphs\">Skills: graphs and best-fit lines</a> · <a href=\"../skills.html#linearising\">Skills: what an intercept means</a></p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-sk-03-best-fit.svg",
+      "alt": "The same graph with a solid best-fit line that passes through every uncertainty bar and crosses the current axis at about 0.04 A, which is circled. A dashed orange line forced through the origin misses four of the six uncertainty bars.",
+      "caption": "The best-fit line (black) crosses the current axis at about 0.04 A (circled). A line <span class=\"key-2\">forced through the origin</span> misses four of the six uncertainty bars."
+    },
+    "tempting": "<p>It's tempting to trust the theory over the data, or to treat the points that \"spoil\" a line through the origin as mistakes. But the theory describes an ideal experiment, and your line must describe <em>your</em> data. Leaving points out so that the data fit a theory is never acceptable. Joining the dots is tempting because it passes through every point exactly, but it treats random scatter as if it were real, and it doesn't give a single gradient.</p>"
+  },
+  {
+    "id": "CC-SK-04",
+    "topic": "Skills",
+    "level": "SL",
+    "type": "choice",
+    "title": "Adding 3 N and 4 N",
+    "figure": {
+      "svg": "diagrams/cc-sk-04-two-forces.svg",
+      "alt": "Two arrows start from a small ring: a 4.0 N force pointing right and a 3.0 N force pointing up and to the right. The angle between them is marked with a question mark.",
+      "caption": "Seen from above. You choose the angle between the two forces."
+    },
+    "question": "<p>Two forces, of 3.0 N and 4.0 N, act on the same small ring. You can choose the angle between them. Which of these can <strong>not</strong> be the size of the resultant of these two forces?</p>",
+    "options": [
+      "1.0 N",
+      "5.0 N",
+      "7.0 N",
+      "8.0 N"
+    ],
+    "answer": 3,
+    "reveal": "<p><strong>8.0 N.</strong> Forces are vectors: they add tip to tail, so their directions matter. The resultant is largest when the two forces point the same way, $4.0 + 3.0 = 7.0$ N, and smallest when they point in opposite directions, $4.0 - 3.0 = 1.0$ N. Every angle in between gives a resultant somewhere between 1.0 N and 7.0 N. At right angles it is $\\sqrt{3.0^2 + 4.0^2} = 5.0$ N.</p><p>No angle can make the resultant bigger than 7.0 N: one side of a triangle is never longer than the other two sides together.</p><p><a href=\"../skills.html#vectors\">Skills: vectors</a></p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-sk-04-range.svg",
+      "alt": "The 4.0 N force drawn as an arrow, with a dashed circle of radius 3.0 N around its tip. The 3.0 N force, added tip to tail, can end anywhere on the circle, here at right angles. The resultant runs from the start to that point: 5.0 N. Dots on the circle mark 7.0 N on the far side and 1.0 N on the near side.",
+      "caption": "Drawn to scale. Adding the <span class=\"key-2\">3.0 N</span> force to the <span class=\"key-1\">4.0 N</span> force tip to tail: as you turn it, the tip of the resultant moves round the dashed circle, so the resultant can be anything from 1.0 N to 7.0 N (5.0 N at right angles)."
+    },
+    "tempting": "<p>Two ideas are common: that forces simply add, so the resultant \"must\" be 7.0 N, or that the answer \"must\" be 5.0 N, because the 3–4–5 triangle is so familiar. Either way, the other values look impossible. But the resultant depends on the angle between the forces: 7.0 N needs them in the same direction, 5.0 N at right angles, and 1.0 N in opposite directions. Only 8.0 N is out of reach.</p>"
+  },
+  {
+    "id": "CC-SK-05",
+    "topic": "Skills",
+    "level": "SL",
+    "type": "choice",
+    "title": "Timing 20 swings",
+    "figure": {
+      "svg": "diagrams/cc-sk-05-pendulum.svg",
+      "alt": "A pendulum hanging from a stand, with a dashed outline showing the other end of its swing, labelled 20 swings. Beside it, a stopwatch reads 31.40.",
+      "caption": "One swing is a complete oscillation, there and back."
+    },
+    "question": "<p>A student times 20 complete swings of a pendulum. Her stopwatch reads 31.40 s, but her reaction time makes the total time uncertain by about ±0.2 s, so she records $t = (31.4 \\pm 0.2)$ s. What is the uncertainty in the period, the time for <strong>one</strong> swing?</p>",
+    "options": [
+      "±0.01 s",
+      "±0.1 s",
+      "±0.2 s",
+      "±4 s"
+    ],
+    "answer": 0,
+    "reveal": "<p><strong>±0.01 s.</strong> One period is $T = \\dfrac{31.4}{20} = 1.570$ s. The 20 is an exact count, with no uncertainty, so dividing by it divides the absolute uncertainty by 20 as well: $\\Delta T = \\dfrac{0.2}{20} = 0.01$ s. So $T = (1.57 \\pm 0.01)$ s.</p><p>The percentage uncertainty doesn't change: $\\dfrac{0.2}{31.4} = 0.6\\%$ and $\\dfrac{0.01}{1.57} = 0.6\\%$. This is why we time many swings: the reaction-time error happens only when you start and stop the stopwatch, however many swings you count, so it is shared among all of them.</p><p><a href=\"../skills.html#propagating\">Skills: propagating uncertainties</a></p>",
+    "tempting": "<p>±0.2 s is tempting because that was the uncertainty in the timing, and it feels as if it must carry over unchanged. But the ±0.2 s belongs to the whole 31.4 s, not to each swing. ±0.1 s comes from sharing the uncertainty between starting and stopping, rather than among the 20 swings. ±4 s comes from multiplying by 20 instead of dividing, which would make one swing more uncertain than all 20 together.</p>"
+  },
+  {
+    "id": "CC-SK-06",
+    "topic": "Skills",
+    "level": "SL",
+    "type": "choice",
+    "title": "Dividing by T squared",
+    "figure": {
+      "svg": "diagrams/cc-sk-06-pendulum-g.svg",
+      "alt": "A pendulum hanging from a clamp. Its length l is marked as measured precisely, and its period is given as T = (1.57 ± 0.01) s.",
+      "caption": "The period from \"Timing 20 swings\", used to find $g$."
+    },
+    "question": "<p>A student finds the period of a pendulum to be $T = (1.57 \\pm 0.01)$ s, a percentage uncertainty of about 0.6%. Its length $l$ is measured so precisely that its uncertainty can be ignored. She calculates $g$ from $g = \\dfrac{4\\pi^2 l}{T^2}$. What is the percentage uncertainty in $g$?</p>",
+    "options": [
+      "0.3%",
+      "0.6%",
+      "1.3%",
+      "2.5%"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>About 1.3%.</strong> $g$ depends on $T^{-2}$. For a power, multiply the fractional uncertainty by the size of the power; the minus sign doesn't make it any smaller. So $\\dfrac{\\Delta g}{g} = 2 \\times \\dfrac{\\Delta T}{T} = 2 \\times \\dfrac{0.01}{1.57} = 2 \\times 0.64\\% \\approx 1.3\\%$. The 4 and $\\pi^2$ are exact numbers, and the uncertainty in $l$ is negligible, so they add nothing.</p><p>Dividing by $T^2$ is dividing by $T$ twice, and dividing (like multiplying) adds percentage uncertainties: $0.64\\% + 0.64\\%$. With numbers, if $l = 0.612$ m, then $g = \\dfrac{4\\pi^2 \\times 0.612}{1.57^2} = 9.80$ $\\text{m s}^{-2}$, and 1.3% of that is 0.12, so $g = (9.8 \\pm 0.1)$ $\\text{m s}^{-2}$.</p><p><a href=\"../skills.html#propagating\">Skills: propagating uncertainties</a></p>",
+    "tempting": "<p>0.6% is tempting because only one quantity, $T$, carries an uncertainty, so it seems to carry straight over. But $T$ appears twice in $T^2$, so its uncertainty counts twice. 0.3% comes from thinking that dividing makes an uncertainty smaller (halving is the rule for a square root, not for dividing by a square). 2.5% comes from multiplying by 4, as if the 4 in the equation or the square of the power mattered.</p>"
+  },
+  {
+    "id": "CC-SK-07",
+    "topic": "Skills",
+    "level": "SL",
+    "type": "choice",
+    "title": "Both ends of the ruler",
+    "figure": {
+      "svg": "diagrams/cc-sk-07-pencil.svg",
+      "alt": "A pencil lying just above a ruler marked in millimetres and numbered in centimetres. The end of the pencil lines up with 12.0 mm and its tip with 155.0 mm.",
+      "caption": "The ruler is numbered in centimetres and marked every millimetre."
+    },
+    "question": "<p>A student measures a pencil with a millimetre ruler, without starting at zero: the end of the pencil is at 12.0 mm and its tip is at 155.0 mm. What is the uncertainty in the pencil's length?</p>",
+    "options": [
+      "±0.5 mm",
+      "±1 mm",
+      "±2 mm",
+      "±5 mm"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>±1 mm.</strong> The length is the difference between two readings: $155.0 - 12.0 = 143.0$ mm. Each reading on an analogue scale is uncertain by half the smallest division, ±0.5 mm. When you subtract two values, their absolute uncertainties add: $0.5 + 0.5 = 1$ mm. So the length is $(143 \\pm 1)$ mm.</p><p>The same is true when you line one end up with the zero mark: judging where the zero is still counts as a reading. That's why a length measured with a ruler is always ± one full division.</p><p><a href=\"../skills.html#recording\">Skills: recording uncertainties</a></p>",
+    "tempting": "<p>±0.5 mm is tempting because \"half the smallest division\" is the rule for a single reading on an analogue scale. But a length needs two readings, one at each end, and each has its own ±0.5 mm. ±2 mm and ±5 mm (half a centimetre) are too pessimistic: you can judge each end to within half a millimetre.</p>"
+  },
+  {
+    "id": "CC-SK-08",
+    "topic": "Skills",
+    "level": "SL",
+    "type": "open",
+    "title": "The drone in the wind",
+    "figure": {
+      "svg": "diagrams/cc-sk-08-drone.svg",
+      "alt": "Top view of a drone pointing due north, towards a flag directly ahead of it. A blue arrow shows the drone's velocity relative to the air, 3.0 m s⁻¹ north. An orange arrow shows the wind, 4.0 m s⁻¹ towards the east.",
+      "caption": "Seen from above. The <span class=\"key-1\">blue arrow</span> is the drone's velocity relative to the air; the <span class=\"key-2\">orange arrow</span> is the wind. Not to scale."
+    },
+    "question": "<p>A small drone flies pointing due north, at 3.0 $\\text{m s}^{-1}$ relative to the air. A steady wind blows the air towards the east at 4.0 $\\text{m s}^{-1}$. What is the drone's speed relative to the ground? Will it reach the flag directly north of where it started?</p>",
+    "reveal": "<p><strong>5.0 $\\text{m s}^{-1}$, and it misses the flag.</strong> The drone's velocity relative to the ground is its velocity relative to the air plus the air's velocity relative to the ground. These are at right angles, so $v = \\sqrt{3.0^2 + 4.0^2} = 5.0$ $\\text{m s}^{-1}$, in a direction $\\tan^{-1}\\left(\\dfrac{4.0}{3.0}\\right) = 53°$ east of north. Pointing north doesn't make it travel north: it drifts east. If the flag is 30 m away, the drone takes 10 s to cover 30 m northwards, and in that time the wind carries it 40 m east.</p><p>Could it reach the flag by pointing partly into the wind? Not in this wind. To cancel the 4.0 $\\text{m s}^{-1}$ drift it would need a westward component of 4.0 $\\text{m s}^{-1}$, more than its whole speed relative to the air. Whichever way it points, it is carried east of the flag.</p><p><a href=\"../themes/a1.html#relative\">A.1: relative velocity</a> · <a href=\"../skills.html#vectors\">Skills: vectors</a></p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-sk-08-triangle.svg",
+      "alt": "Vector triangle: a 3.0 m s⁻¹ arrow pointing north, then a 4.0 m s⁻¹ arrow pointing east from its tip. The resultant, 5.0 m s⁻¹, runs from the start to the end, at 53 degrees east of north.",
+      "caption": "Drawn to scale, tip to tail: the <span class=\"key-1\">velocity relative to the air</span> plus the <span class=\"key-2\">velocity of the air</span> gives the velocity relative to the ground (black)."
+    },
+    "tempting": "<p>It's tempting to think that pointing at the flag means flying to it, or that the two speeds simply add to 7.0 $\\text{m s}^{-1}$ (or subtract to 1.0 $\\text{m s}^{-1}$). But the wind carries the whole drone sideways whichever way it points, and velocities at right angles add as vectors, by Pythagoras. Another common idea is that a cross-wind slows the drone down. Here it actually makes the drone faster relative to the ground, just in the wrong direction.</p>"
+  },
+  {
+    "id": "CC-SK-09",
+    "topic": "Skills",
+    "level": "SL",
+    "type": "choice",
+    "title": "What the gradient means",
+    "figure": {
+      "svg": "diagrams/cc-sk-09-graph.svg",
+      "alt": "Axes with v squared, in m² s⁻², up the side and s, in m, along the bottom, and a straight line rising from the origin. There are no numbers on the axes."
+    },
+    "question": "<p>A trolley starts from rest and rolls down a ramp with a constant acceleration $a$. A light gate measures its speed $v$ after it has travelled a distance $s$ down the ramp, for several different distances. A graph of $v^2$ against $s$ is a straight line through the origin. What does its gradient equal?</p>",
+    "options": [
+      "$\\tfrac{1}{2}a$",
+      "$a$",
+      "$2a$",
+      "$\\sqrt{2a}$"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>$2a$.</strong> For uniform acceleration from rest, $v^2 = u^2 + 2as$ with $u = 0$, so $v^2 = 2as$. Compare this with $y = mx$: $y$ is $v^2$, $x$ is $s$, and the gradient $m$ is $2a$. The units agree: $\\text{m}^2\\,\\text{s}^{-2}$ divided by m gives $\\text{m s}^{-2}$, the unit of an acceleration. So the trolley's acceleration is half the gradient: a gradient of 1.6 $\\text{m s}^{-2}$ means $a = 0.80$ $\\text{m s}^{-2}$.</p><p>To find what any gradient means, write the equation with the $y$-axis quantity on its own on one side, then see what multiplies the $x$-axis quantity.</p><p><a href=\"../skills.html#linearising\">Skills: linearising and logarithms</a></p>",
+    "tempting": "<p>$a$ is tempting because the trolley's acceleration is $a$, and it feels as if the gradient of any graph about motion should be the acceleration. But the gradient is whatever multiplies the $x$-axis quantity in the equation, and that depends on what you plot. $\\tfrac{1}{2}a$ is the gradient of a different graph, $s$ against $t^2$ (from $s = \\tfrac{1}{2}at^2$), which is easy to mix up with this one. $\\sqrt{2a}$ would be the gradient of $v$ against $\\sqrt{s}$.</p>"
   }
 ]

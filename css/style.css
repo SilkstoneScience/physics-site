@@ -651,6 +651,7 @@ h2.xyz-h::after { content: ""; position: absolute; left: 41px; top: -2.5px; widt
 .think-card.is-done .think-badge { display: grid; }
 .think-card.is-open .think-badge { display: none; }
 .think-topics .card[data-theme] { border-left: 5px solid var(--theme-color); }
+[data-theme="Skills"] { --theme-color: var(--muted); } /* Skills challenges: a neutral strip, not a theme colour */
 .think-card h3 { margin: 12px 0 2px; }
 /* Cards start closed: the title is a button that opens the rest */
 .think-toggle { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; width: 100%; padding: 0; background: none; border: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; }
