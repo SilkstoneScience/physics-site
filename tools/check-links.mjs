@@ -1,6 +1,6 @@
 // Weekly link check for Think deeper (run by .github/workflows/links.yml, or by hand: node tools/check-links.mjs).
 // Checks every "Find out more" video and article in think/*.json, any video shown in "What physicists think so far"
-// (thinkingVideo), and the source pages named in photo credits.
+// (thinkingVideo) or as a challenge's answer (revealVideo), and the source pages named in photo credits.
 // YouTube videos are checked with YouTube's oEmbed lookup, which reports removed and private videos.
 // The run fails (and GitHub emails the teacher) only for a definite "not found" or "gone"; a site that is busy,
 // slow or blocks automatic visitors is reported as a warning, so there are no false alarms.
@@ -21,6 +21,7 @@ for (const file of FILES) {
     const add = (url, what) => { if (!links.has(url)) links.set(url, []); links.get(url).push(`${it.id} ${what}`); };
     for (const l of it.links || []) add(l.url, `"${l.title}"`);
     if (it.thinkingVideo) add(`https://www.youtube.com/watch?v=${it.thinkingVideo.youtube}`, `video in "What physicists think so far"`);
+    if (it.revealVideo) add(`https://www.youtube.com/watch?v=${it.revealVideo.youtube}`, 'video answer');
     for (const f of [it.figure, it.revealFigure]) {
       for (const m of (f && f.credit ? f.credit : '').matchAll(/href="(https?:[^"]+)"/g)) add(m[1], 'photo credit');
     }

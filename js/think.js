@@ -58,10 +58,18 @@
     }
     return '<p class="think-predict">Decide on your answer, and your reason, before you look.</p>';
   }
+  // A YouTube video in place of a written answer (teacher's decision): loaded only when its reveal opens, with the
+  // written version kept below, folded, for anyone who can't watch (YouTube is often blocked in schools).
+  function videoHtml(v, readHtml) {
+    return `<div class="think-video" data-yt="${esc(v.youtube)}" data-title="${esc(v.title)}"></div>
+      <p class="think-small">Video: ${esc(v.title)} (${esc(v.channel)}). <a href="https://www.youtube.com/watch?v=${esc(v.youtube)}" target="_blank" rel="noopener">Watch on YouTube</a></p>
+      <details class="think-reveal think-read"><summary>Prefer to read it?</summary>${readHtml}</details>`;
+  }
   function revealHtml(it) {
     const tempting = it.tempting ? `<div class="think-tempting"><h4>Clearing misconceptions</h4>${it.tempting}</div>` : '';
+    const written = it.reveal + figureHtml(it.revealFigure);
     return `<details class="think-reveal think-answer"><summary>Show the answer</summary>
-      <p class="think-feedback" aria-live="polite"></p>${it.reveal}${figureHtml(it.revealFigure)}${tempting}</details>`;
+      <p class="think-feedback" aria-live="polite"></p>${it.revealVideo ? videoHtml(it.revealVideo, written) : written}${tempting}</details>`;
   }
   function bigHtml(it) {
     const puzzling = it.puzzling ? `<details class="think-reveal"><summary>Why is it puzzling?</summary>${it.puzzling}</details>` : '';
@@ -72,11 +80,7 @@
     // A big question can answer "What physicists think so far" with a video (thinkingVideo); the written
     // explanation then stays underneath, folded, for anyone who can't watch (YouTube is often blocked in schools).
     const v = it.thinkingVideo;
-    const thinking = v
-      ? `<div class="think-video" data-yt="${esc(v.youtube)}" data-title="${esc(v.title)}"></div>
-        <p class="think-small">Video: ${esc(v.title)} (${esc(v.channel)}). <a href="https://www.youtube.com/watch?v=${esc(v.youtube)}" target="_blank" rel="noopener">Watch on YouTube</a></p>
-        <details class="think-reveal think-read"><summary>Prefer to read it?</summary>${it.thinking}</details>`
-      : it.thinking;
+    const thinking = v ? videoHtml(v, it.thinking) : it.thinking;
     return `${puzzling}
       <details class="think-reveal"><summary>What physicists think so far</summary>${thinking}</details>
       ${discuss}
@@ -137,8 +141,8 @@
   }
   function groupHeading(text, id) { return `<h2 class="think-group"${id ? ` id="${id}"` : ''}>${text}</h2>`; }
 
-  // Concept challenges page without ?theme= or ?topic=: one card per theme (teacher's decision), then the
-  // Skills challenges as a group of their own, with a link to the Skills page.
+  // Concept challenges page without ?theme= or ?topic=: one card per theme, plus one for the Skills challenges
+  // (their list starts with a link to the Skills page).
   function groupCard(id, title) {
     const list = items.filter((it) => themeOf(it.topic) === id);
     const name = `<h3>${title}</h3>`;
@@ -147,13 +151,11 @@
     const count = `${list.length} challenge${list.length === 1 ? '' : 's'}${n ? ` · ${n} done` : ''}`;
     return `<li><a class="card" data-theme="${id}" href="?theme=${id}">${name}<p>${count}</p></a></li>`;
   }
+  // One grid with no headings: the Skills card first, then Themes A–E (teacher's decision).
   function themeCardsHtml() {
-    return groupHeading('Syllabus themes', 'themes')
-      + '<ul class="card-grid think-topics">'
-      + window.SYLLABUS.map((th) => groupCard(th.id, `Theme ${th.id}: ${esc(th.title)}`)).join('') + '</ul>'
-      + groupHeading('Skills', 'skills')
-      + `<p>Measurement, uncertainties, graphs and vectors: the essential skills on the <a href="${root}skills.html">Physics skills</a> page, used in every topic.</p>`
-      + `<ul class="card-grid think-topics">${groupCard(SKILLS, 'Skills: measurement, uncertainty, graphs and vectors')}</ul>`;
+    return '<ul class="card-grid think-topics">'
+      + groupCard(SKILLS, 'Skills: measurement, uncertainty, graphs and vectors')
+      + window.SYLLABUS.map((th) => groupCard(th.id, `Theme ${th.id}: ${esc(th.title)}`)).join('') + '</ul>';
   }
 
   function render() {

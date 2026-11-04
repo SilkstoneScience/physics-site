@@ -250,7 +250,12 @@ function checkThinkAnswer(it, file) {
       if (!Number.isInteger(it.answer) || it.answer < 0 || it.answer >= it.options.length) err(where, 'answer must be the number of a correct option (0 = first)');
     }
   }
-  checkText(where, it.reveal, 'reveal');
+  checkText(where, it.reveal, 'reveal'); // still needed with a revealVideo: it becomes "Prefer to read it?"
+  if (it.revealVideo) {
+    const v = it.revealVideo;
+    if (!/^[\w-]{11}$/.test(v.youtube || '')) err(where, 'revealVideo.youtube must be an 11-character YouTube video id');
+    if (!v.title || !v.channel) err(where, 'revealVideo needs a title and a channel');
+  }
   if (!it.tempting) err(where, 'needs "tempting" (the "Clearing misconceptions" part of the answer)');
   else checkText(where, it.tempting, 'tempting');
 }
