@@ -764,6 +764,29 @@ window.glueUnits = (function () {
     box.openBox = () => set(true);
     set(false);
   });
+  // ----- "Think deeper" line at the end of a topic page's Knowledge and science box -----
+  // Counts this topic's items in think/*.json and links to them (shown only when there are some).
+  if (body.dataset.topic && tokBoxes.length) addThinkLinks(body.dataset.topic, tokBoxes[0]);
+  function addThinkLinks(topic, box) {
+    const sets = [
+      ['concepts', 'concept challenge', 'concept challenges'],
+      ['big-questions', 'big question', 'big questions'],
+      ['puzzles', 'puzzle', 'puzzles'],
+    ];
+    Promise.all(sets.map(([f]) => fetch(`${root}think/${f}.json`).then((r) => (r.ok ? r.json() : [])).catch(() => [])))
+      .then((lists) => {
+        const links = lists.map((list, i) => {
+          const n = list.filter((it) => it.topic === topic || (it.topics || []).includes(topic)).length;
+          const [f, one, many] = sets[i];
+          return n ? `<a href="${root}think/${f}.html?topic=${topic}">${n} ${n === 1 ? one : many}</a>` : '';
+        }).filter(Boolean);
+        if (!links.length) return;
+        const p = document.createElement('p');
+        p.className = 'tok-more';
+        p.innerHTML = `Think deeper on ${topic}: ${links.join(' · ')}`;
+        (box.querySelector('.tok-body') || box).appendChild(p);
+      });
+  }
   // A link (or the address) pointing inside a closed box opens it first.
   function openAround(el) {
     const box = el.closest && el.closest('section.tok');

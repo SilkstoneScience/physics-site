@@ -1,0 +1,22 @@
+# Checks the Think deeper videos and articles (think/*.json) once a week, every Monday at 07:00 UTC, and whenever
+# those files change. If a video has been removed or made private, or a page has gone, the run fails and GitHub
+# emails the teacher. The report is on github.com → physics-site → Actions → "Link check" → the run's summary page.
+# Run it by hand there with "Run workflow".
+name: Link check
+on:
+  schedule:
+    - cron: '0 7 * * 1'
+  push:
+    paths: ['think/*.json', 'tools/check-links.mjs', '.github/workflows/links.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - run: node tools/check-links.mjs

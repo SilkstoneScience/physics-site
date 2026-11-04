@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 200">
+  <!-- Horizontal forces on each vehicle, drawn separately. Arrow lengths: F > T > R. -->
+  <rect class="area" x="20" y="138" width="160" height="6"/><line class="axis" x1="20" y1="138" x2="180" y2="138"/>
+  <rect class="area" x="222" y="138" width="190" height="6"/><line class="axis" x1="222" y1="138" x2="412" y2="138"/>
+  <!-- trailer (same outline as the question diagram, at 80%) -->
+  <g transform="translate(40 10) scale(0.8)">
+    <rect class="area" x="28" y="92" width="36" height="22" rx="5"/><rect class="axis" x="28" y="92" width="36" height="22" rx="5"/>
+    <rect class="area" x="68" y="92" width="36" height="22" rx="5"/><rect class="axis" x="68" y="92" width="36" height="22" rx="5"/>
+    <rect class="area" x="108" y="92" width="36" height="22" rx="5"/><rect class="axis" x="108" y="92" width="36" height="22" rx="5"/>
+    <rect class="area" x="48" y="68" width="36" height="22" rx="5"/><rect class="axis" x="48" y="68" width="36" height="22" rx="5"/>
+    <rect class="axis" x="20" y="114" width="132" height="12" style="fill:var(--surface)"/>
+    <circle class="l3" cx="56" cy="147" r="13" style="fill:var(--surface)"/><circle class="f3" cx="56" cy="147" r="3"/>
+    <circle class="l3" cx="116" cy="147" r="13" style="fill:var(--surface)"/><circle class="f3" cx="116" cy="147" r="3"/>
+  </g>
+  <!-- tractor (same outline, at 80%; its hitch is at x = 275) -->
+  <g transform="translate(123.8 10) scale(0.8)">
+    <rect class="area" x="236" y="100" width="104" height="30" rx="4"/><rect class="axis" x="236" y="100" width="104" height="30" rx="4"/>
+    <line class="l3 thin" x1="250" y1="108" x2="250" y2="122"/><line class="l3 thin" x1="258" y1="108" x2="258" y2="122"/>
+    <line class="l3" x1="318" y1="100" x2="318" y2="74"/><line class="l3" x1="314" y1="74" x2="322" y2="74"/>
+    <rect class="area" x="204" y="44" width="58" height="62" rx="3"/><rect class="axis" x="204" y="44" width="58" height="62" rx="3"/>
+    <line class="l3" x1="198" y1="44" x2="268" y2="44"/>
+    <rect class="l1 thin" x="212" y="52" width="42" height="30" rx="2" style="fill:var(--surface)"/>
+    <path class="l3" d="M189 140 H200 V106"/>
+    <path class="l3" d="M196 130 A36 36 0 0 1 268 130"/>
+    <circle class="l3" cx="232" cy="132" r="28" style="fill:var(--surface)"/>
+    <circle class="l3 thin dash" cx="232" cy="132" r="22"/>
+    <circle class="area" cx="232" cy="132" r="9"/><circle class="axis" cx="232" cy="132" r="9"/>
+    <circle class="l3" cx="322" cy="145" r="15" style="fill:var(--surface)"/><circle class="f3" cx="322" cy="145" r="4"/>
+  </g>
+  <!-- forces -->
+  <line class="l1" x1="162" y1="108" x2="212" y2="108" marker-end="url(#ah1)"/>
+  <text class="t1" x="187" y="98" text-anchor="middle">T</text>
+  <line class="l2" x1="56" y1="108" x2="26" y2="108" marker-end="url(#ah2)"/>
+  <text class="t2" x="40" y="98" text-anchor="middle">R</text>
+  <line class="l1" x1="275" y1="122" x2="225" y2="122" marker-end="url(#ah1)"/>
+  <text class="t1" x="250" y="112" text-anchor="middle">T</text>
+  <line class="l2" x1="309" y1="152" x2="381" y2="152" marker-end="url(#ah2)"/>
+  <text class="t2" x="390" y="157">F</text>
+  <text x="100" y="188" text-anchor="middle">trailer</text>
+  <text x="310" y="188" text-anchor="middle">tractor</text>
+</svg>

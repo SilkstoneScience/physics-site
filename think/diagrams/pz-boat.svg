@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 226">
+  <!-- banks and pond bed (cross-section) -->
+  <path d="M0 72 H26 L48 204 H332 L354 72 H380 V226 H0 Z" style="fill:var(--border)"/>
+  <path class="axis" d="M0 72 H26 L48 204 H332 L354 72 H380"/>
+  <!-- water, with a wavy surface -->
+  <path class="area" d="M32.3 110 L48 204 H332 L347.7 110 Z"/>
+  <path class="l1 thin" d="M32 110 q8 -4 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t12 0"/>
+  <ellipse class="f3" cx="150" cy="201" rx="5" ry="3" style="opacity:0.35"/><ellipse class="f3" cx="226" cy="202" rx="4" ry="2.5" style="opacity:0.35"/><ellipse class="f3" cx="296" cy="201" rx="6" ry="3" style="opacity:0.35"/>
+  <!-- rowing boat with a rock; the part below the waterline is tinted -->
+  <path class="axis" d="M122 90 L252 90 Q246 124 214 128 L158 128 Q128 124 122 90 Z" style="fill:var(--surface)"/>
+  <path class="area" d="M126 110 L248 110 Q241 125 214 128 L158 128 Q132 125 126 110 Z" style="opacity:0.7"/>
+  <line class="l3" x1="118" y1="90" x2="256" y2="90"/>
+  <line class="l3 thin" x1="214" y1="98" x2="242" y2="98"/>
+  <path class="axis" d="M176 90 L174 80 L182 71 L197 72 L205 82 L203 90 Z" style="fill:var(--muted)"/>
+  <text x="190" y="62" text-anchor="middle">rock</text>
+  <line class="l3" x1="232" y1="78" x2="276" y2="124"/>
+  <ellipse class="axis" cx="280" cy="128" rx="11" ry="4" transform="rotate(46 280 128)" style="fill:var(--surface)"/>
+  <!-- where the rock will go -->
+  <path class="l3 thin dash" d="M140 84 C112 88 100 140 104 186" marker-end="url(#ah3)"/>
+  <path class="l3 thin dash" d="M96 204 L95 196 L101 189 L112 190 L117 197 L115 204 Z"/>
+  <!-- depth gauge -->
+  <rect class="axis" x="316" y="58" width="8" height="146" style="fill:var(--surface)"/>
+  <path class="axis" d="M324 80 H329 M324 95 H329 M324 125 H329 M324 140 H329 M324 155 H329 M324 170 H329 M324 185 H329"/>
+  <line class="l1" x1="306" y1="110" x2="334" y2="110" style="stroke-width:4"/>
+  <line class="l2 thin" x1="344" y1="104" x2="344" y2="86" marker-end="url(#ah2)"/>
+  <line class="l2 thin" x1="344" y1="116" x2="344" y2="134" marker-end="url(#ah2)"/>
+  <text class="t1" x="320" y="48" text-anchor="middle">water level?</text>
+</svg>

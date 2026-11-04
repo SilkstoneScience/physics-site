@@ -208,6 +208,88 @@ try {
   err('news', e.message);
 }
 
+// ---------- 2e. Think deeper: concept challenges, big questions and puzzles (think/*.json, drawn by js/think.js) ----------
+// Ids are permanent (students' "I've thought about this" ticks are saved against them).
+const NOS = ['Observations', 'Patterns and trends', 'Hypotheses', 'Experiments', 'Measurement', 'Models', 'Evidence',
+  'Theories', 'Falsification', 'Science as a shared endeavour', 'Global impact of science'];
+const thinkIds = new Set();
+function checkThinkFigure(where, f, field) {
+  if (!f) return;
+  if (!f.alt) err(where, `${field} has no alt text`);
+  if (f.svg && !exists(`think/${f.svg}`)) err(where, `${field}: file not found: think/${f.svg}`);
+  if (f.img) {
+    if (!exists(path.posix.normalize(`think/${f.img}`))) err(where, `${field}: image not found: ${f.img}`);
+    if (!f.credit) err(where, `${field}: a photo needs a credit (author, source, licence)`);
+  }
+  if (!f.svg && !f.img) err(where, `${field} needs "svg" or "img"`);
+  for (const k of ['caption', 'credit']) if (f[k]) checkText(where, f[k], `${field}.${k}`);
+}
+function checkThinkItem(it, file, idPattern) {
+  const where = `${file} ${it.id || '(no id)'}`;
+  if (!idPattern.test(it.id || '')) err(where, `id should look like ${idPattern.source.replace(/[\^$\\]/g, '')}`);
+  if (thinkIds.has(it.id)) err(where, 'duplicate id');
+  thinkIds.add(it.id);
+  for (const k of ['title', 'question']) checkText(where, it[k], k);
+  const topics = it.topic ? [it.topic] : it.topics;
+  if (!Array.isArray(topics)) err(where, 'needs "topic" or a "topics" list');
+  else for (const t of topics) if (!TOPICS.has(t)) err(where, `unknown topic "${t}"`);
+  if (it.level !== undefined && !['SL', 'HL'].includes(it.level)) err(where, 'level must be "SL" or "HL"');
+  if (topics && topics.some((t) => TOPICS.get(t)?.hl) && it.level !== 'HL') err(where, 'uses an HL-only topic, so level must be "HL"');
+  checkThinkFigure(where, it.figure, 'figure');
+  checkThinkFigure(where, it.revealFigure, 'revealFigure');
+}
+function checkThinkAnswer(it, file) {
+  const where = `${file} ${it.id}`;
+  if (!['choice', 'open'].includes(it.type)) err(where, 'type must be "choice" or "open"');
+  if (it.type === 'choice') {
+    if (!Array.isArray(it.options) || it.options.length < 2 || it.options.length > 4) err(where, 'a choice item needs 2 to 4 options');
+    else {
+      it.options.forEach((o, i) => checkText(where, o, `option ${i + 1}`));
+      if (!Number.isInteger(it.answer) || it.answer < 0 || it.answer >= it.options.length) err(where, 'answer must be the number of a correct option (0 = first)');
+    }
+  }
+  checkText(where, it.reveal, 'reveal');
+  if (it.tempting) checkText(where, it.tempting, 'tempting');
+}
+function readThink(rel) {
+  if (!exists(rel)) { err(rel, 'is missing'); return []; }
+  try { const list = JSON.parse(read(rel)); if (Array.isArray(list)) return list; err(rel, 'should be a list [ ... ]'); } catch (e) { err(rel, `isn't valid JSON: ${e.message}`); }
+  return [];
+}
+for (const it of readThink('think/concepts.json')) {
+  checkThinkItem(it, 'think/concepts.json', /^CC-[A-E]\d-\d{2}$/);
+  if (!it.topic) err(`think/concepts.json ${it.id}`, 'a concept challenge has one "topic"');
+  else if (it.id && it.id.slice(3, 5) !== it.topic.replace('.', '')) err(`think/concepts.json ${it.id}`, `id doesn't match its topic (${it.topic})`);
+  checkThinkAnswer(it, 'think/concepts.json');
+}
+for (const it of readThink('think/puzzles.json')) {
+  checkThinkItem(it, 'think/puzzles.json', /^PZ-\d{2}$/);
+  if (!Array.isArray(it.tags) || !it.tags.includes('fun') || it.tags.some((t) => !['fun', 'beyond'].includes(t))) err(`think/puzzles.json ${it.id}`, 'tags must include "fun" (and may include "beyond")');
+  checkThinkAnswer(it, 'think/puzzles.json');
+}
+for (const it of readThink('think/big-questions.json')) {
+  const where = `think/big-questions.json ${it.id}`;
+  checkThinkItem(it, 'think/big-questions.json', /^BQ-\d{2}$/);
+  if (!['unsolved', 'solved'].includes(it.kind)) err(where, 'kind must be "unsolved" or "solved"');
+  checkText(where, it.thinking, 'thinking');
+  if (it.thinkingVideo) {
+    const v = it.thinkingVideo;
+    if (!/^[\w-]{11}$/.test(v.youtube || '')) err(where, 'thinkingVideo.youtube must be an 11-character YouTube video id');
+    if (!v.title || !v.channel) err(where, 'thinkingVideo needs a title and a channel');
+  }
+  if (it.puzzling) checkText(where, it.puzzling, 'puzzling');
+  if (!Array.isArray(it.discussion) || it.discussion.length < 2 || it.discussion.length > 3) err(where, 'needs 2 or 3 discussion questions');
+  else it.discussion.forEach((d, i) => checkText(where, d, `discussion ${i + 1}`));
+  if (!Array.isArray(it.nos) || !it.nos.length) err(where, 'needs at least one NoS aspect');
+  else for (const n of it.nos) if (!NOS.includes(n)) err(where, `"${n}" isn't one of the guide's NoS aspects`);
+  checkText(where, it.tok, 'tok');
+  if (!Array.isArray(it.links) || !it.links.length) err(where, 'needs at least one "Find out more" link');
+  else for (const l of it.links) {
+    if (!l.title || !/^https:\/\//.test(l.url || '')) err(where, 'each link needs a title and an https:// address');
+    if (!['article', 'video'].includes(l.kind)) err(where, 'each link kind must be "article" or "video"');
+  }
+}
+
 // ---------- 3. Pages: set-up and links ----------
 function htmlFiles(dir = '') {
   return fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true }).flatMap((d) => {

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "CC-A1-01",
+    "topic": "A.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "The top of the throw",
+    "figure": { "svg": "diagrams/cc-a1-top.svg", "alt": "A ball thrown straight up rises, stops for an instant at the top, then falls back down. At the top its velocity is zero; its acceleration is marked with a question mark." },
+    "question": "<p>A ball is thrown straight up. At the very top of its flight it stops for an instant. Air resistance is negligible. What is its acceleration at that moment?</p>",
+    "options": ["Zero, because it has stopped", "9.8 $\\text{m s}^{-2}$ downwards", "9.8 $\\text{m s}^{-2}$ upwards", "It depends on how fast it was thrown"],
+    "answer": 1,
+    "reveal": "<p>The <strong>velocity</strong> is zero for an instant, but it is still <em>changing</em>: just before the top the ball moves up, and just after it moves down. Acceleration is the rate of change of velocity, so it isn't zero.</p><p>The only force on the ball is its weight, all the way up and all the way down. By Newton's second law, $a = g = 9.8$ $\\text{m s}^{-2}$ downwards at every point of the flight, including the top.</p>",
+    "tempting": "<p>\"Zero\" feels right because the ball has stopped. But if the acceleration really were zero at the top, the velocity would stop changing, and the ball would stay hanging in the air. Don't mix up <em>where something is going</em> (velocity) with <em>how its velocity is changing</em> (acceleration).</p>"
+  },
+  {
+    "id": "CC-A1-02",
+    "topic": "A.1",
+    "level": "SL",
+    "type": "open",
+    "title": "Dropped or thrown?",
+    "figure": { "svg": "diagrams/cc-a1-drop-throw.svg", "alt": "Two balls at the edge of a high ledge. Ball A is simply dropped. Ball B is thrown horizontally away from the ledge at the same moment." },
+    "question": "<p>From the same height and at the same moment, ball A is dropped and ball B is thrown horizontally, fast. Air resistance is negligible. Which ball hits the ground first?</p>",
+    "reveal": "<p><strong>They land at the same time.</strong> The horizontal and vertical motions are independent. Both balls start with <em>zero vertical velocity</em> and both accelerate downwards at $g$, so at every moment they have fallen the same distance. Ball B's horizontal velocity only carries it sideways: it lands further away, but not later.</p>",
+    "revealFigure": { "svg": "diagrams/cc-a1-drop-throw-strobe.svg", "alt": "Positions of both balls at equal time intervals. At each instant, ball A and ball B are at the same height; ball B is also further to the side each time.", "caption": "Positions every 0.1 s. At each instant <span class=\"key-1\">A</span> and <span class=\"key-2\">B</span> are at the same height." },
+    "tempting": "<p>Ball B travels a longer, curved path, so it feels as if it must take longer. But the extra distance is all horizontal, and horizontal motion doesn't affect how fast something falls.</p>"
+  },
+  {
+    "id": "CC-A2-01",
+    "topic": "A.2",
+    "level": "SL",
+    "type": "choice",
+    "title": "The truck and the fly",
+    "figure": { "svg": "diagrams/cc-a2-truck-fly.svg", "alt": "A lorry drives towards a tiny fly just in front of its windscreen. A dashed circle shows the fly enlarged.", "caption": "The tiny dot is the fly (drawn to scale, it would be smaller than a pixel); the circle shows it enlarged." },
+    "question": "<p>A fly hits the windscreen of a moving truck. During the collision, how does the force of the truck on the fly compare with the force of the fly on the truck?</p>",
+    "options": ["The force on the fly is bigger", "The force on the truck is bigger", "The two forces are equal in size", "Only the fly feels a force"],
+    "answer": 2,
+    "reveal": "<p>The two forces are a <strong>Newton's third law pair</strong>: they are always equal in size and opposite in direction, however different the two objects are.</p><p>So why does the fly come off so much worse? The same force produces very different accelerations, $a = \\dfrac{F}{m}$. A truck has about a billion times the mass of a fly, so its change of velocity is far too small to notice, while the fly's velocity changes completely in a fraction of a second.</p>",
+    "tempting": "<p>We judge forces by their <em>effects</em>, and the effect on the fly is dramatic. But equal forces can have very unequal effects, because the effect depends on the mass that the force acts on.</p>"
+  },
+  {
+    "id": "CC-A2-02",
+    "topic": "A.2",
+    "level": "SL",
+    "type": "open",
+    "title": "The tractor and the trailer",
+    "figure": { "svg": "diagrams/cc-a2-tractor.svg", "alt": "A tractor pulling a flatbed trailer loaded with hay bales along a level road. A towbar joins the trailer to a hitch at the back of the tractor." },
+    "question": "<p>A tractor pulls a trailer. By Newton's third law, the trailer pulls back on the tractor with a force that is equal and opposite to the tractor's pull. So how can the tractor and trailer ever start moving forwards?</p>",
+    "reveal": "<p>A third-law pair acts on <strong>two different objects</strong>, so the two forces can never cancel each other. To decide whether something accelerates, look only at the forces acting <em>on that object</em>.</p><ul><li><strong>Trailer:</strong> the tractor pulls it forwards with force $T$; friction and air resistance $R$ act backwards. It speeds up when $T > R$.</li><li><strong>Tractor:</strong> the trailer pulls it backwards with $T$. Its wheels push backwards on the road, so the road pushes the tractor <em>forwards</em> with friction $F$. It speeds up when $F > T$.</li></ul><p>The force that moves the whole system forwards is the road's push on the tractor's tyres. On ice, where that friction is tiny, the wheels just spin.</p>",
+    "revealFigure": { "svg": "diagrams/cc-a2-tractor-forces.svg", "alt": "The trailer and the tractor drawn apart, with their horizontal forces. The trailer has a forward pull T from the tractor at its towbar end and a backward resistance R. The tractor has a backward pull T from the trailer at its hitch, and a longer forward push F from the road where its big rear wheel touches the ground.", "caption": "Horizontal forces on each vehicle. The two <span class=\"key-1\">T</span> forces are a third-law pair, acting on different objects. The road's push <span class=\"key-2\">F</span> on the tractor is bigger than $T$, and $T$ is bigger than the resistance <span class=\"key-2\">R</span> on the trailer." },
+    "tempting": "<p>\"Equal and opposite forces cancel\" is true only when both forces act on the <em>same</em> object, as in equilibrium (Newton's first law). The two forces of a third-law pair always act on different objects.</p>"
+  },
+  {
+    "id": "CC-A3-01",
+    "topic": "A.3",
+    "level": "SL",
+    "type": "open",
+    "title": "The track with a dip",
+    "figure": { "svg": "diagrams/cc-a3-dip.svg", "alt": "Two tracks of the same length between the same start and finish. Track A is flat. Track B is level at both ends but dips down in the middle. A ball starts on each track at the same speed and at the same moment." },
+    "question": "<p>Two balls start at the same moment with the same speed. Ball A rolls along a flat track; ball B's track dips down in the middle and comes back up to the same height. Friction is negligible. (a) Which ball is faster at the finish? (b) Which ball reaches the finish first?</p>",
+    "reveal": "<p><strong>(a) Their speeds at the finish are the same.</strong> Both finish at the height they started from, so they have lost no gravitational potential energy overall and must have the same kinetic energy as at the start.</p><p><strong>(b) Ball B gets there first.</strong> In the dip, B converts potential energy into kinetic energy, so it moves faster than A at every point of the dip. Its path is a little longer, but the extra speed more than makes up for it. For the track drawn here (a dip 15 cm deep, with both balls starting at 1.0 $\\text{m s}^{-1}$), A takes 1.00 s and B takes 0.87 s.</p>",
+    "tempting": "<p>It's tempting to think B must be slower because its path is longer, or that \"the same final speed\" means \"the same time\". Final speed depends only on the change in height (energy), but the <em>time</em> depends on the speed all the way along.</p>"
+  },
+  {
+    "id": "CC-A4-01",
+    "topic": "A.4",
+    "level": "HL",
+    "type": "open",
+    "title": "The spinning skater",
+    "figure": { "svg": "diagrams/cc-a4-skater.svg", "alt": "Top view of a spinning skater. With arms stretched out, the skater turns slowly. With arms pulled in close to the body, the skater turns fast." },
+    "question": "<p>A skater spinning on ice pulls their arms in and spins much faster. Angular momentum is conserved, but the skater's rotational kinetic energy increases. Where does the extra kinetic energy come from?</p>",
+    "reveal": "<p>Write the kinetic energy in terms of angular momentum: $E_k = \\dfrac{L^2}{2I}$. $L$ stays the same, and pulling the arms in reduces $I$, so $E_k$ increases.</p><p>The extra energy comes from the <strong>skater's muscles</strong>. Each hand moves in a circle, so the skater must pull it inwards just to keep it on that circle. To pull the arms <em>closer</em>, the skater has to pull harder still, and that inward force moves the hands inwards, so it does work on them. Chemical energy in the muscles becomes rotational kinetic energy. When the skater lets the arms move out again, the spin slows and the kinetic energy decreases.</p>",
+    "tempting": "<p>It's tempting to think that if angular momentum is conserved, kinetic energy must be too, or that the energy comes from the ice. But the ice exerts almost no torque, and conservation of angular momentum says nothing about kinetic energy: the skater does work.</p>"
+  }
+]

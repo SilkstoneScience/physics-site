@@ -1,0 +1,109 @@
+[
+  {
+    "id": "BQ-01",
+    "kind": "unsolved",
+    "title": "The Fermi paradox: where is everybody?",
+    "figure": { "img": "../images/think/milky-way.jpg", "alt": "A panorama of the Milky Way: a bright band of hundreds of billions of stars, crossed by dark dust lanes.", "caption": "Our galaxy, the Milky Way, seen from Earth: hundreds of billions of stars.", "credit": "Photo: ESO/S. Brunier, <a href=\"https://www.eso.org/public/images/eso0932a/\">ESO</a>, <a href=\"https://creativecommons.org/licenses/by/4.0/\">CC BY 4.0</a>. Resized." },
+    "question": "<p>Our galaxy has hundreds of billions of stars, and most of them have planets. It is over 13 billion years old. Even a spacecraft travelling at 1% of the speed of light could cross it in about 10 million years: less than 0.1% of the galaxy's age. So if intelligent life is common, <strong>why have we found no sign of anyone else?</strong></p>",
+    "thinking": "<p>Nobody knows. The suggested answers fall into three groups.</p><ul><li><strong>Life, or intelligent life, is rare.</strong> Perhaps the conditions for life are unusual, or some step (from simple cells to complex life, or surviving your own technology) almost never happens. This is sometimes called a \"Great Filter\".</li><li><strong>They exist, but we can't detect them.</strong> Signals spread out and get weaker with the inverse-square law, so a radio transmission from even a nearby star would be extremely faint. And we've only been listening for a few decades: our own radio broadcasts have reached stars within about 100 light-years, a tiny part of a galaxy 100 000 light-years across.</li><li><strong>They exist, but don't come or don't call.</strong> Civilisations might last only a short time, or have no interest in contacting us.</li></ul><p>Telescopes now find thousands of planets around other stars, some of them about Earth's size at the right distance for liquid water. That makes the silence more puzzling, not less.</p>",
+    "discussion": [
+      "Our radio signals have travelled about 100 light-years. Treat the galaxy as a disc 100 000 ly across and 1000 ly thick: roughly what fraction of its volume have our signals reached? What does that suggest about the silence?",
+      "Which of the suggested explanations could be tested, and how? Is \"they exist but hide from us\" a scientific hypothesis?",
+      "Should we deliberately send messages to other stars? Who should decide?"
+    ],
+    "topics": ["E.5", "C.5", "B.1"],
+    "nos": ["Hypotheses", "Evidence", "Falsification", "Global impact of science"],
+    "tok": "Is the absence of evidence ever evidence of absence?",
+    "links": [
+      { "title": "The Fermi paradox: where are all the aliens? (Kurzgesagt)", "url": "https://www.youtube.com/watch?v=sNhhvQGsMEc", "kind": "video" },
+      { "title": "Fermi paradox (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Fermi_paradox", "kind": "article" },
+      { "title": "Exoplanets: worlds beyond our solar system (NASA)", "url": "https://science.nasa.gov/exoplanets/", "kind": "article" }
+    ]
+  },
+  {
+    "id": "BQ-02",
+    "kind": "solved",
+    "title": "Olbers' paradox: why is the night sky dark?",
+    "figure": { "img": "../images/c5/hubble-ultra-deep-field.jpg", "alt": "The Hubble Ultra Deep Field: a tiny patch of apparently empty sky, crowded with thousands of faint, distant galaxies.", "caption": "A tiny patch of \"empty\" sky, photographed for about 11 days by the Hubble Space Telescope. Almost every spot of light is a whole galaxy.", "credit": "Image: NASA and ESA, <a href=\"https://commons.wikimedia.org/wiki/File:Hubble_ultra_deep_field.jpg\">Wikimedia Commons</a>, public domain. Resized." },
+    "question": "<p>Imagine the universe goes on forever, has always existed, and is filled fairly evenly with stars. Then wherever you look, your line of sight must eventually end on the surface of a star. <strong>So why isn't the whole night sky as bright as the surface of the Sun?</strong></p>",
+    "puzzling": "<p>Think of the stars in thin shells around the Earth. A shell twice as far away has an area four times larger, so it contains about <strong>four times as many stars</strong>. But each of those stars looks <strong>four times fainter</strong>, by the inverse-square law $b = \\dfrac{L}{4\\pi d^2}$. So every shell sends us the same amount of light, whatever its distance. With an endless number of shells, the sky should blaze.</p>",
+    "thinking": "<p>The paradox is solved, and the dark sky turns out to be evidence about the whole universe.</p><ul><li><strong>The universe has a finite age</strong> (about 13.8 billion years). Light from very distant stars hasn't had time to reach us yet, so we only receive light from a limited region, however large the universe is.</li><li><strong>Stars don't shine forever.</strong> There simply isn't enough starlight in the universe to make every part of the sky as bright as a star's surface.</li><li><strong>The universe is expanding.</strong> Light from distant galaxies is redshifted, so it arrives with less energy.</li></ul><p>There's a twist: in one sense the sky <em>is</em> glowing in every direction. The early universe was hot and bright everywhere. That light has been stretched by the expansion into microwaves, the <strong>cosmic microwave background</strong>, which now matches a black body at about 2.7 K, far too cold for our eyes to see.</p>",
+    "discussion": [
+      "Explain why a finite age solves the paradox even if the universe is infinitely large.",
+      "Use Wien's law to find the peak wavelength of the 2.7 K background radiation. Why can't we see it?",
+      "The writer Edgar Allan Poe suggested the finite-age answer in 1848, long before there was any evidence for it. What role should imagination play in science?"
+    ],
+    "topics": ["E.5", "B.1", "C.5"],
+    "nos": ["Observations", "Models", "Evidence"],
+    "tok": "Can an everyday observation, like a dark night sky, be strong evidence for a theory about the whole universe?",
+    "links": [
+      { "title": "Why is it dark at night? (minutephysics)", "url": "https://www.youtube.com/watch?v=gxJ4M7tyLRE", "kind": "video" },
+      { "title": "Olbers' paradox (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Olbers%27_paradox", "kind": "article" },
+      { "title": "Hubble Ultra Deep Field (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Hubble_Ultra-Deep_Field", "kind": "article" }
+    ]
+  },
+  {
+    "id": "BQ-03",
+    "kind": "solved",
+    "title": "The twin paradox: who ends up younger?",
+    "figure": { "svg": "diagrams/bq-twin.svg", "alt": "A spacetime diagram. The Earth twin's world line goes straight up the time axis for 10 years. The travelling twin's world line goes out to a star 4 light-years away, arriving after 5 years, then turns round and comes back, meeting the Earth twin again at 10 years.", "caption": "World lines in the Earth's frame: the <span class=\"key-1\">Earth twin</span> stays put; the <span class=\"key-2\">travelling twin</span> flies to a star 4 ly away at $0.8c$ and back." },
+    "thinkingVideo": { "youtube": "noaGNuQCW8A", "title": "Twin paradox: the real explanation (no maths)", "channel": "Fermilab" },
+    "question": "<p>One twin stays on Earth. The other flies to a star 4 light-years away at $0.8c$ and comes straight back. While they move apart, each twin sees the other's clock running slow. So when they meet again, <strong>which twin is younger? Surely they can't both be?</strong></p>",
+    "thinking": "<p>The travelling twin is younger, and experiments agree.</p><p>The situation only <em>looks</em> symmetric. The Earth twin stays in one inertial frame the whole time. The travelling twin doesn't: they turn round and switch from an outward-moving frame to an inward-moving one, and only they feel the acceleration. On a spacetime diagram, the travelling twin's world line is bent, and between the same two events (leaving and returning), a bent world line always has less proper time than a straight one.</p><p>In numbers, in the Earth's frame the trip takes 10 years. With $\\gamma = \\dfrac{1}{\\sqrt{1 - 0.8^2}} = \\dfrac{5}{3}$, the traveller's clock records $\\dfrac{10}{5/3} = 6$ years. They come home 4 years younger than their twin.</p><p>In 1971, atomic clocks flown around the world on airliners came back differing from identical clocks left on the ground by a few hundred billionths of a second, as relativity predicted.</p>",
+    "discussion": [
+      "Draw the trip on a spacetime diagram. Where is the asymmetry between the twins?",
+      "Is the acceleration at the turn-round the cause of the age difference, or just a sign that the two journeys are different?",
+      "Is a \"paradox\" a contradiction in nature, or in our reasoning?"
+    ],
+    "topics": ["A.5"],
+    "level": "HL",
+    "nos": ["Theories", "Experiments", "Models"],
+    "tok": "When common sense and a well-tested theory disagree, which should we trust?",
+    "links": [
+      { "title": "Twin paradox (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Twin_paradox", "kind": "article" },
+      { "title": "Hafele–Keating experiment (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Hafele%E2%80%93Keating_experiment", "kind": "article" }
+    ]
+  },
+  {
+    "id": "BQ-04",
+    "kind": "unsolved",
+    "title": "The arrow of time: why can't you unscramble an egg?",
+    "figure": { "svg": "diagrams/bq-arrow.svg", "alt": "Two boxes of gas particles. In the first, blue particles are on the left and orange on the right, just after a partition is removed. In the second, later, the colours are completely mixed. An arrow forwards in time is solid; an arrow backwards is dashed with a question mark.", "caption": "Two gases just after the partition is removed, and some time later. Nobody has ever seen the mixed gases separate again." },
+    "question": "<p>Film two snooker balls colliding and play the film backwards: it still looks perfectly possible. The laws of motion work the same forwards and backwards in time. Yet you never see a smashed egg put itself back together, or milk unmix from tea. <strong>If the laws don't care about the direction of time, where does the difference between past and future come from?</strong></p>",
+    "thinking": "<p>Part of the answer is well understood. The second law of thermodynamics says the entropy of an isolated system tends to increase, and $S = k_B \\ln \\Omega$ explains why: a mixed arrangement can happen in vastly more ways (microstates) than a separated one. Nothing forbids the gases from separating again; it's just overwhelmingly unlikely. With the 28 particles in the picture, the chance of finding all the blue ones on the left and all the orange ones on the right at a given moment is about 1 in 300 million. With $10^{23}$ particles, it would never be seen in the lifetime of the universe.</p><p>So the arrow of time is <em>statistical</em>. But that raises a deeper question that is <strong>still unsolved</strong>: for entropy to be increasing everywhere today, the universe must have started in a state of extraordinarily low entropy. Why was the early universe so special? Nobody knows.</p>",
+    "discussion": [
+      "Use the coins idea from B.4: what is the chance that 100 tossed coins all land heads? How does this help explain why gases don't unmix?",
+      "If the second law is only true \"almost certainly\", is it still a law?",
+      "We remember the past but not the future. Could that be connected to entropy?"
+    ],
+    "topics": ["B.4"],
+    "level": "HL",
+    "nos": ["Theories", "Models", "Patterns and trends"],
+    "tok": "Can a law that is only true with overwhelming probability count as certain knowledge?",
+    "links": [
+      { "title": "The most misunderstood concept in physics: entropy (Veritasium)", "url": "https://www.youtube.com/watch?v=DxL2HoqLbyA", "kind": "video" },
+      { "title": "Arrow of time (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Arrow_of_time", "kind": "article" },
+      { "title": "Entropy, in statistical mechanics (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Entropy_(statistical_thermodynamics)", "kind": "article" }
+    ]
+  },
+  {
+    "id": "BQ-05",
+    "kind": "unsolved",
+    "title": "Dark matter: what is holding galaxies together?",
+    "figure": { "svg": "diagrams/bq-dark-matter.svg", "alt": "A graph of the orbital speed of stars against distance from the centre of a spiral galaxy. The expected curve, based on the visible matter, rises and then falls steadily. The measured curve rises and then stays flat out to large distances.", "caption": "Orbital speeds of stars in a typical spiral galaxy: <span class=\"key-2\">expected</span> from the matter we can see, and <span class=\"key-1\">measured</span>." },
+    "question": "<p>Most of the visible matter in a spiral galaxy is packed near its bright centre, so stars far out should orbit more slowly, just as Neptune orbits the Sun more slowly than the Earth does. But measurements show that the outer stars orbit <em>as fast as</em> the inner ones. Either galaxies contain far more mass than we can see, or our understanding of gravity is wrong on large scales. <strong>Which is it?</strong></p>",
+    "thinking": "<p>For a circular orbit, $v = \\sqrt{\\dfrac{GM}{r}}$, where $M$ is the mass inside the orbit. If the speed stays the same as $r$ increases, $M$ must keep growing in proportion to $r$, even in the dark outer regions where there are few stars. The speeds are measured from the Doppler shift of light and radio waves from the stars and gas.</p><p>Most astronomers think galaxies sit inside huge clouds of <strong>dark matter</strong>: matter that has mass but doesn't emit or absorb light. There is other evidence too, such as the way galaxy clusters bend light from galaxies behind them (gravitational lensing). Altogether there seems to be about five times more dark matter than ordinary matter.</p><p>But <strong>nobody has ever detected a dark matter particle</strong>, despite decades of searching with detectors deep underground. A minority of physicists think gravity itself behaves differently over very large distances. Their ideas explain rotation curves well, but struggle with other evidence. The question is still open.</p>",
+    "discussion": [
+      "Use $v = \\sqrt{\\dfrac{GM}{r}}$: if $v$ stays constant as $r$ doubles, what happens to the mass $M$ inside the orbit?",
+      "How can scientists be confident something exists when it has never been detected directly?",
+      "In the 1800s, odd wobbles in Uranus's orbit led astronomers to predict an unseen planet, and Neptune was found. Odd behaviour in Mercury's orbit led to a predicted planet that was never found; instead, Einstein's new theory of gravity explained it. When should we look for something unseen, and when should we change the theory?"
+    ],
+    "topics": ["D.1", "C.5", "E.5"],
+    "nos": ["Evidence", "Hypotheses", "Theories", "Falsification"],
+    "tok": "When observations disagree with a theory, how do we decide whether to change the theory or to look for something we have missed?",
+    "links": [
+      { "title": "Dark matter and dark energy (NASA)", "url": "https://science.nasa.gov/universe/dark-matter-dark-energy/", "kind": "article" },
+      { "title": "Galaxy rotation curve (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Galaxy_rotation_curve", "kind": "article" }
+    ]
+  }
+]

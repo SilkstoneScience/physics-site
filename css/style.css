@@ -630,3 +630,74 @@ h2.xyz-h::after { content: ""; position: absolute; left: 41px; top: -2.5px; widt
 
 /* Line icons in the home page panel headings (replace emoji) */
 .h-icon { width: 1.2em; height: 1.2em; vertical-align: -0.2em; margin-right: 0.15em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ===== Think deeper: concept challenges, big questions and puzzles (js/think.js) ===== */
+.think-group { margin-top: 32px; }
+.think-topics .card h3 { margin: 0 0 4px; font-size: 1rem; }
+.think-soon { opacity: 0.6; }
+.think-back { margin: 16px 0 0; }
+.think-card { position: relative; background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--theme-color, var(--accent)); border-radius: var(--radius); padding: 0 16px 10px; margin: 16px 0; scroll-margin-top: 80px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); transition: transform 0.15s ease-out, box-shadow 0.15s ease-out; }
+.think-card:not(.is-open):hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12); }
+/* Closed cards sit as picture tiles in a grid; an open card takes the full width */
+.think-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin: 16px 0; }
+.think-grid .think-card { margin: 0; }
+.think-card.is-open { grid-column: 1 / -1; }
+.think-thumb { margin: 0 -16px; height: 150px; padding: 8px; display: block; background: var(--bg); border-bottom: 1px solid var(--border); border-radius: 0 var(--radius) 0 0; overflow: hidden; cursor: pointer; }
+.think-thumb .think-svg { width: 100%; height: 100%; }
+.think-thumb svg { display: block; width: 100%; height: 100%; }
+.think-thumb img { display: block; width: calc(100% + 16px); height: calc(100% + 16px); margin: -8px; object-fit: cover; }
+.think-card.is-open .think-thumb { display: none; }
+.think-badge { display: none; position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%; background: var(--good); color: var(--surface); place-items: center; font-weight: 700; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25); }
+.think-card.is-done .think-badge { display: grid; }
+.think-card.is-open .think-badge { display: none; }
+.think-topics .card[data-theme] { border-left: 5px solid var(--theme-color); }
+.think-card h3 { margin: 12px 0 2px; }
+/* Cards start closed: the title is a button that opens the rest */
+.think-toggle { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; width: 100%; padding: 0; background: none; border: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.think-toggle::after { content: "▾"; flex: none; color: var(--accent); transition: transform 0.2s; }
+.think-toggle[aria-expanded="true"]::after { transform: rotate(180deg); }
+.think-toggle:hover { color: var(--accent); }
+.think-card .think-tags { margin-bottom: 8px; }
+.think-card h4 { margin: 14px 0 4px; font-size: 1rem; }
+.think-tags { margin: 0 0 6px; }
+.think-tags a.tag { text-decoration: none; }
+.tag.think-kind-unsolved { background: var(--surface); border: 1px solid var(--theme-c); color: var(--theme-c); }
+.tag.think-kind-solved { background: var(--surface); border: 1px solid var(--accent); color: var(--accent); }
+.tag.think-fun { background: var(--warn-soft); color: var(--text); }
+.think-q { font-size: 1.05rem; }
+.think-opts { list-style: none; padding: 0; margin: 10px 0; display: grid; gap: 8px; }
+.think-opt { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+.think-opt:hover:not(:disabled) { border-color: var(--accent); }
+.think-opt:disabled { cursor: default; }
+.think-opt.right { background: var(--good-soft); border-color: var(--good); }
+.think-opt.wrong { background: var(--bad-soft); border-color: var(--bad); }
+.think-letter { flex: none; width: 1.8em; height: 1.8em; border-radius: 50%; display: grid; place-items: center; font-weight: 700; border: 1px solid currentColor; }
+.think-predict { color: var(--muted); font-style: italic; }
+details.think-reveal { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; margin: 10px 0; }
+details.think-reveal summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+details.think-reveal[open] summary { margin-bottom: 6px; }
+.think-feedback:empty { display: none; }
+.think-feedback { font-weight: 700; }
+.think-feedback.good { color: var(--good); }
+.think-feedback.bad { color: var(--bad); }
+.think-tempting { border-top: 1px dashed var(--border); margin-top: 10px; }
+.think-discuss li { margin: 4px 0; }
+.think-links .tag.nos { background: var(--surface); border: 1px solid var(--theme-d); color: var(--theme-d); text-decoration: none; }
+.think-small { color: var(--muted); font-size: 0.85rem; }
+.think-video iframe { display: block; width: 100%; max-width: 720px; aspect-ratio: 16 / 9; margin: 6px auto 0; border: 0; border-radius: 8px; background: #000; }
+details.think-read { background: var(--surface); }
+.think-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; border-top: 1px solid var(--border); margin-top: 10px; padding-top: 8px; font-size: 0.92rem; }
+.tag.think-sl { background: var(--surface); border: 1px solid var(--border); color: var(--muted); }
+/* "Show on the board": the item fills the screen in large text */
+dialog.think-board { width: 100vw; height: 100vh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: var(--bg); color: var(--text); }
+dialog.think-board::backdrop { background: rgba(0, 0, 0, 0.6); }
+.think-board-bar { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 16px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.think-board-count { margin-right: auto; color: var(--muted); }
+.think-board-bar [data-move="-1"] { order: -1; }
+.think-board-body { max-width: 1100px; margin: 0 auto; padding: 8px 24px 40px; font-size: clamp(1.1rem, 2.2vw, 1.6rem); }
+.think-board .think-card { border: 0; background: none; padding: 0; box-shadow: none; }
+.think-board .think-card h3 { font-size: 1.6em; }
+.think-board .think-q, .think-board .think-predict { font-size: 1.1em; }
+.think-board figure.diagram svg { max-width: 720px; }
+.think-board figure.diagram img.photo { max-width: 900px; }
+@media (max-width: 600px) { .think-board-body { padding: 8px 14px 30px; } }

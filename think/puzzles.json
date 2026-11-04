@@ -1,0 +1,28 @@
+[
+  {
+    "id": "PZ-01",
+    "type": "choice",
+    "title": "Feathers or gold?",
+    "tags": ["fun"],
+    "topics": ["A.2"],
+    "figure": { "svg": "diagrams/pz-feathers.svg", "alt": "A huge fluffy pile of feathers labelled 1 kilogram, next to a small gold bar labelled 1 kilogram, each on a scale." },
+    "question": "<p>You have a kilogram of feathers and a kilogram of gold. When placed on a scale, which would weigh more?</p>",
+    "options": ["The feathers", "The gold", "They weigh the same"],
+    "answer": 1,
+    "reveal": "<p><strong>The gold</strong>, by about a gram.</p><p>Both have a mass of 1 kg, so the Earth pulls on each with the same weight, $mg \\approx 9.8$ N. But a scale doesn't measure weight directly: it measures how hard the object presses down on it. Air is a fluid, so it exerts a <strong>buoyancy force</strong> on anything in it, $F_b = \\rho V g$, where $V$ is the volume of air pushed aside. That force pushes up and reduces the reading.</p><p>What counts is the volume of the feather material itself, about 0.8 litres of keratin, not the fluffy pile (the air between the feathers is just air). With $\\rho \\approx 1.2$ $\\text{kg m}^{-3}$ for air, $F_b \\approx 1.2 \\times 0.8 \\times 10^{-3} \\times 9.8 \\approx 0.009$ N: the weight of about 1 g. So the feathers read about 999 g. Gold is so dense that 1 kg takes up only about 0.05 litres, so its buoyancy force is tiny and it reads almost exactly 1000 g.</p>",
+    "tempting": "<p>\"They weigh the same\" is the famous answer to the old riddle, and it's true of their <em>weights</em> ($mg$). But a scale reading is the weight minus the buoyancy force from the air, and the much larger volume of the feathers gets a larger buoyancy force. It's easy to forget that buoyancy acts in air as well as in water. In a vacuum, the two readings would be exactly equal.</p>"
+  },
+  {
+    "id": "PZ-02",
+    "type": "choice",
+    "title": "The rock in the boat",
+    "tags": ["fun"],
+    "topics": ["A.2"],
+    "figure": { "svg": "diagrams/pz-boat.svg", "alt": "A cross-section of a pond. A rowing boat floats on it with a heavy rock inside, and a dashed path shows the rock going over the side to the bottom. A depth gauge in the water marks the water level, with arrows asking whether it will rise or fall." },
+    "question": "<p>You're in a small boat floating on a pond, holding a heavy rock. You drop the rock over the side and it sinks to the bottom. What happens to the water level of the pond?</p>",
+    "options": ["It rises", "It falls", "It stays the same"],
+    "answer": 1,
+    "reveal": "<p><strong>It falls</strong>, slightly.</p><p>The buoyancy force is $F_b = \\rho V g$, where $V$ is the volume of water pushed aside (displaced). A floating boat is in equilibrium, so the buoyancy force equals its whole weight, rock included. To carry the rock, the boat must displace a mass of water equal to the rock's mass. Rock is about 2.5 times as dense as water, so that's about 2.5 times the rock's own volume.</p><p>On the bottom of the pond, the rock displaces only its own volume of water. (The buoyancy force on it is now less than its weight, which is why it sinks; the pond floor supports the rest.) Less water is pushed aside than before, so the level drops.</p>",
+    "tempting": "<p>Many people say \"it stays the same\" (the rock is still in the pond) or \"it rises\" (the rock is now in the water). The key is that a floating object displaces its own <em>weight</em> of water, but a sunken object displaces only its own <em>volume</em>. For anything denser than water, its weight's worth of water takes up more room than the object itself.</p>"
+  }
+]
