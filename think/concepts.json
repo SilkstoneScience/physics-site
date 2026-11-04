@@ -5,9 +5,17 @@
     "level": "SL",
     "type": "choice",
     "title": "The top of the throw",
-    "figure": { "svg": "diagrams/cc-a1-top.svg", "alt": "A ball thrown straight up rises, stops for an instant at the top, then falls back down. At the top its velocity is zero; its acceleration is marked with a question mark." },
+    "figure": {
+      "svg": "diagrams/cc-a1-top.svg",
+      "alt": "A ball thrown straight up rises, stops for an instant at the top, then falls back down. At the top its velocity is zero; its acceleration is marked with a question mark."
+    },
     "question": "<p>A ball is thrown straight up. At the very top of its flight it stops for an instant. Air resistance is negligible. What is its acceleration at that moment?</p>",
-    "options": ["Zero, because it has stopped", "9.8 $\\text{m s}^{-2}$ downwards", "9.8 $\\text{m s}^{-2}$ upwards", "It depends on how fast it was thrown"],
+    "options": [
+      "Zero, because it has stopped",
+      "9.8 $\\text{m s}^{-2}$ downwards",
+      "9.8 $\\text{m s}^{-2}$ upwards",
+      "It depends on how fast it was thrown"
+    ],
     "answer": 1,
     "reveal": "<p>The <strong>velocity</strong> is zero for an instant, but it is still <em>changing</em>: just before the top the ball moves up, and just after it moves down. Acceleration is the rate of change of velocity, so it isn't zero.</p><p>The only force on the ball is its weight, all the way up and all the way down. By Newton's second law, $a = g = 9.8$ $\\text{m s}^{-2}$ downwards at every point of the flight, including the top.</p>",
     "tempting": "<p>\"Zero\" feels right because the ball has stopped. But if the acceleration really were zero at the top, the velocity would stop changing, and the ball would stay hanging in the air. Don't mix up <em>where something is going</em> (velocity) with <em>how its velocity is changing</em> (acceleration).</p>"
@@ -18,10 +26,17 @@
     "level": "SL",
     "type": "open",
     "title": "Dropped or thrown?",
-    "figure": { "svg": "diagrams/cc-a1-drop-throw.svg", "alt": "Two balls at the edge of a high ledge. Ball A is simply dropped. Ball B is thrown horizontally away from the ledge at the same moment." },
+    "figure": {
+      "svg": "diagrams/cc-a1-drop-throw.svg",
+      "alt": "Two balls at the edge of a high ledge. Ball A is simply dropped. Ball B is thrown horizontally away from the ledge at the same moment."
+    },
     "question": "<p>From the same height and at the same moment, ball A is dropped and ball B is thrown horizontally, fast. Air resistance is negligible. Which ball hits the ground first?</p>",
     "reveal": "<p><strong>They land at the same time.</strong> The horizontal and vertical motions are independent. Both balls start with <em>zero vertical velocity</em> and both accelerate downwards at $g$, so at every moment they have fallen the same distance. Ball B's horizontal velocity only carries it sideways: it lands further away, but not later.</p>",
-    "revealFigure": { "svg": "diagrams/cc-a1-drop-throw-strobe.svg", "alt": "Positions of both balls at equal time intervals. At each instant, ball A and ball B are at the same height; ball B is also further to the side each time.", "caption": "Positions every 0.1 s. At each instant <span class=\"key-1\">A</span> and <span class=\"key-2\">B</span> are at the same height." },
+    "revealFigure": {
+      "svg": "diagrams/cc-a1-drop-throw-strobe.svg",
+      "alt": "Positions of both balls at equal time intervals. At each instant, ball A and ball B are at the same height; ball B is also further to the side each time.",
+      "caption": "Positions every 0.1 s. At each instant <span class=\"key-1\">A</span> and <span class=\"key-2\">B</span> are at the same height."
+    },
     "tempting": "<p>Ball B travels a longer, curved path, so it feels as if it must take longer. But the extra distance is all horizontal, and horizontal motion doesn't affect how fast something falls.</p>"
   },
   {
@@ -30,9 +45,18 @@
     "level": "SL",
     "type": "choice",
     "title": "The truck and the fly",
-    "figure": { "svg": "diagrams/cc-a2-truck-fly.svg", "alt": "A lorry drives towards a tiny fly just in front of its windscreen. A dashed circle shows the fly enlarged.", "caption": "The tiny dot is the fly (drawn to scale, it would be smaller than a pixel); the circle shows it enlarged." },
+    "figure": {
+      "svg": "diagrams/cc-a2-truck-fly.svg",
+      "alt": "A lorry drives towards a tiny fly just in front of its windscreen. A dashed circle shows the fly enlarged.",
+      "caption": "The tiny dot is the fly (drawn to scale, it would be smaller than a pixel); the circle shows it enlarged."
+    },
     "question": "<p>A fly hits the windscreen of a moving truck. During the collision, how does the force of the truck on the fly compare with the force of the fly on the truck?</p>",
-    "options": ["The force on the fly is bigger", "The force on the truck is bigger", "The two forces are equal in size", "Only the fly feels a force"],
+    "options": [
+      "The force on the fly is bigger",
+      "The force on the truck is bigger",
+      "The two forces are equal in size",
+      "Only the fly feels a force"
+    ],
     "answer": 2,
     "reveal": "<p>The two forces are a <strong>Newton's third law pair</strong>: they are always equal in size and opposite in direction, however different the two objects are.</p><p>So why does the fly come off so much worse? The same force produces very different accelerations, $a = \\dfrac{F}{m}$. A truck has about a billion times the mass of a fly, so its change of velocity is far too small to notice, while the fly's velocity changes completely in a fraction of a second.</p>",
     "tempting": "<p>We judge forces by their <em>effects</em>, and the effect on the fly is dramatic. But equal forces can have very unequal effects, because the effect depends on the mass that the force acts on.</p>"
@@ -43,10 +67,17 @@
     "level": "SL",
     "type": "open",
     "title": "The tractor and the trailer",
-    "figure": { "svg": "diagrams/cc-a2-tractor.svg", "alt": "A tractor pulling a flatbed trailer loaded with hay bales along a level road. A towbar joins the trailer to a hitch at the back of the tractor." },
+    "figure": {
+      "svg": "diagrams/cc-a2-tractor.svg",
+      "alt": "A tractor pulling a flatbed trailer loaded with hay bales along a level road. A towbar joins the trailer to a hitch at the back of the tractor."
+    },
     "question": "<p>A tractor pulls a trailer. By Newton's third law, the trailer pulls back on the tractor with a force that is equal and opposite to the tractor's pull. So how can the tractor and trailer ever start moving forwards?</p>",
     "reveal": "<p>A third-law pair acts on <strong>two different objects</strong>, so the two forces can never cancel each other. To decide whether something accelerates, look only at the forces acting <em>on that object</em>.</p><ul><li><strong>Trailer:</strong> the tractor pulls it forwards with force $T$; friction and air resistance $R$ act backwards. It speeds up when $T > R$.</li><li><strong>Tractor:</strong> the trailer pulls it backwards with $T$. Its wheels push backwards on the road, so the road pushes the tractor <em>forwards</em> with friction $F$. It speeds up when $F > T$.</li></ul><p>The force that moves the whole system forwards is the road's push on the tractor's tyres. On ice, where that friction is tiny, the wheels just spin.</p>",
-    "revealFigure": { "svg": "diagrams/cc-a2-tractor-forces.svg", "alt": "The trailer and the tractor drawn apart, with their horizontal forces. The trailer has a forward pull T from the tractor at its towbar end and a backward resistance R. The tractor has a backward pull T from the trailer at its hitch, and a longer forward push F from the road where its big rear wheel touches the ground.", "caption": "Horizontal forces on each vehicle. The two <span class=\"key-1\">T</span> forces are a third-law pair, acting on different objects. The road's push <span class=\"key-2\">F</span> on the tractor is bigger than $T$, and $T$ is bigger than the resistance <span class=\"key-2\">R</span> on the trailer." },
+    "revealFigure": {
+      "svg": "diagrams/cc-a2-tractor-forces.svg",
+      "alt": "The trailer and the tractor drawn apart, with their horizontal forces. The trailer has a forward pull T from the tractor at its towbar end and a backward resistance R. The tractor has a backward pull T from the trailer at its hitch, and a longer forward push F from the road where its big rear wheel touches the ground.",
+      "caption": "Horizontal forces on each vehicle. The two <span class=\"key-1\">T</span> forces are a third-law pair, acting on different objects. The road's push <span class=\"key-2\">F</span> on the tractor is bigger than $T$, and $T$ is bigger than the resistance <span class=\"key-2\">R</span> on the trailer."
+    },
     "tempting": "<p>\"Equal and opposite forces cancel\" is true only when both forces act on the <em>same</em> object, as in equilibrium (Newton's first law). The two forces of a third-law pair always act on different objects.</p>"
   },
   {
@@ -55,10 +86,62 @@
     "level": "SL",
     "type": "open",
     "title": "The track with a dip",
-    "figure": { "svg": "diagrams/cc-a3-dip.svg", "alt": "Two tracks of the same length between the same start and finish. Track A is flat. Track B is level at both ends but dips down in the middle. A ball starts on each track at the same speed and at the same moment." },
+    "figure": {
+      "svg": "diagrams/cc-a3-dip.svg",
+      "alt": "Two tracks of the same length between the same start and finish. Track A is flat. Track B is level at both ends but dips down in the middle. A ball starts on each track at the same speed and at the same moment."
+    },
     "question": "<p>Two balls start at the same moment with the same speed. Ball A rolls along a flat track; ball B's track dips down in the middle and comes back up to the same height. Friction is negligible. (a) Which ball is faster at the finish? (b) Which ball reaches the finish first?</p>",
     "reveal": "<p><strong>(a) Their speeds at the finish are the same.</strong> Both finish at the height they started from, so they have lost no gravitational potential energy overall and must have the same kinetic energy as at the start.</p><p><strong>(b) Ball B gets there first.</strong> In the dip, B converts potential energy into kinetic energy, so it moves faster than A at every point of the dip. Its path is a little longer, but the extra speed more than makes up for it. For the track drawn here (a dip 15 cm deep, with both balls starting at 1.0 $\\text{m s}^{-1}$), A takes 1.00 s and B takes 0.87 s.</p>",
     "tempting": "<p>It's tempting to think B must be slower because its path is longer, or that \"the same final speed\" means \"the same time\". Final speed depends only on the change in height (energy), but the <em>time</em> depends on the speed all the way along.</p>"
+  },
+  {
+    "id": "CC-A3-02",
+    "topic": "A.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "Three throws from a bridge",
+    "figure": {
+      "svg": "diagrams/cc-a3-02-bridge.svg",
+      "alt": "A person stands on a bridge high above a river; the bridge is seen from one end. Three arrows of equal length start from the person's hand: A points 40 degrees above the horizontal, B points horizontally and C points 40 degrees below the horizontal.",
+      "caption": "The bridge seen from one end. The arrows show the directions of the three throws."
+    },
+    "question": "<p>Three identical stones are thrown from the same point on a bridge with the same speed: stone A at 40° above the horizontal, stone B horizontally and stone C at 40° below the horizontal. Air resistance is negligible. Stone A rises, then falls back down past the height of the bridge. At that moment, how does A's velocity compare with C's velocity just after C was thrown?</p>",
+    "options": [
+      "A is moving more slowly than C was",
+      "The same speed, but in a different direction",
+      "The same speed and in the same direction",
+      "A is moving faster than C was"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>The same speed and in the same direction.</strong> The horizontal component of A's velocity never changes, because no horizontal force acts on it. The vertical component is $8.0 \\sin 40° = 5.1$ $\\text{m s}^{-1}$ upwards at the start; gravity slows it to zero at the top, then speeds it up again, so by the time A is back at bridge height it is 5.1 $\\text{m s}^{-1}$ <em>downwards</em>. Energy agrees: A is back at its starting height, so it has its starting kinetic energy and speed. So A passes bridge height at 8.0 $\\text{m s}^{-1}$, 40° below the horizontal: exactly how C started.</p><p>From there on, A moves just like C, only later and further along. And by energy conservation B lands at the same speed too: all three start with the same kinetic energy and lose the same gravitational potential energy. From 12 m above the water at 8.0 $\\text{m s}^{-1}$, every stone hits the water at $v = \\sqrt{u^2 + 2gh} = \\sqrt{8.0^2 + 2 \\times 9.8 \\times 12} = 17.3$ $\\text{m s}^{-1}$, after 2.2 s (A), 1.6 s (B) and 1.1 s (C).</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-a3-02-paths.svg",
+      "alt": "The paths of the three stones, drawn to scale. A rises a little, then curves down and lands furthest away. B curves down and lands slightly closer. C curves steeply down and lands closest to the bridge.",
+      "caption": "Paths drawn to scale for throws at 8.0 $\\text{m s}^{-1}$ from 12 m above the water. <span class=\"key-1\">A</span>, B and <span class=\"key-2\">C</span> land at different times and places, but all at 17.3 $\\text{m s}^{-1}$."
+    },
+    "tempting": "<p>It's tempting to think A has \"used up\" some of its speed by climbing, or has gained extra by falling from its highest point. But between leaving the bridge and coming back to the same height, its gravitational potential energy is unchanged, so its kinetic energy and speed are too. \"A different direction\" is tempting because A was thrown upwards, but on the way down it is moving downwards at 40°, just like C at the start: the horizontal component is unchanged and the vertical one has simply reversed.</p>"
+  },
+  {
+    "id": "CC-A3-03",
+    "topic": "A.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "Pushed twice as far",
+    "figure": {
+      "svg": "diagrams/cc-a3-03-carts.svg",
+      "alt": "Two identical carts, P and Q, at rest on level tracks. Each is pushed by the same force F. Cart P's push is marked as lasting for a distance d; cart Q's push lasts for a distance 2d.",
+      "caption": "Each push stops when its cart has moved the marked distance."
+    },
+    "question": "<p>Two identical carts, P and Q, start from rest on a level track. Friction and air resistance are negligible. Each cart is pushed with the same constant horizontal force $F$: P over a distance $d$ and Q over a distance $2d$. Then the pushing stops. How does Q's final speed compare with P's?</p>",
+    "options": [
+      "The same as P's",
+      "$\\sqrt{2}$ times P's (about 1.4 times)",
+      "2 times P's",
+      "4 times P's"
+    ],
+    "answer": 1,
+    "reveal": "<p>The work done on each cart is $W = Fs$, so Q receives <strong>twice the work</strong> and gains twice the kinetic energy. But $E_k = \\tfrac{1}{2}mv^2$, so doubling the kinetic energy multiplies $v^2$ by 2, and $v$ by only $\\sqrt{2} \\approx 1.41$.</p><p>For example, with 2.0 kg carts, $F = 4.0$ N and $d = 1.0$ m: P gains 4.0 J, so $v = \\sqrt{\\dfrac{2 \\times 4.0}{2.0}} = 2.0$ $\\text{m s}^{-1}$. Q gains 8.0 J, so $v = \\sqrt{\\dfrac{2 \\times 8.0}{2.0}} = 2.8$ $\\text{m s}^{-1}$. To end up twice as fast as P, Q would have to be pushed over $4d$.</p>",
+    "tempting": "<p>Twice the distance means twice the work, so it's natural to expect twice the speed. But work equals the change in <em>kinetic energy</em>, which depends on $v^2$. \"The same\" is tempting because the force is the same, but Q is pushed over a longer distance (and for longer), so it gains more energy. The time isn't doubled either: Q covers the second half of its push faster, so it is pushed for $\\sqrt{2}$ times as long as P.</p><p>\"4 times\" comes from squaring the wrong way round: it is $v^2$, not $v$, that is proportional to the work done, so making Q 4 times faster would need 16 times the work (a push over $16d$).</p>"
   },
   {
     "id": "CC-A4-01",
@@ -66,9 +149,340 @@
     "level": "HL",
     "type": "open",
     "title": "The spinning skater",
-    "figure": { "svg": "diagrams/cc-a4-skater.svg", "alt": "Top view of a spinning skater. With arms stretched out, the skater turns slowly. With arms pulled in close to the body, the skater turns fast." },
+    "figure": {
+      "svg": "diagrams/cc-a4-skater.svg",
+      "alt": "Top view of a spinning skater. With arms stretched out, the skater turns slowly. With arms pulled in close to the body, the skater turns fast."
+    },
     "question": "<p>A skater spinning on ice pulls their arms in and spins much faster. Angular momentum is conserved, but the skater's rotational kinetic energy increases. Where does the extra kinetic energy come from?</p>",
     "reveal": "<p>Write the kinetic energy in terms of angular momentum: $E_k = \\dfrac{L^2}{2I}$. $L$ stays the same, and pulling the arms in reduces $I$, so $E_k$ increases.</p><p>The extra energy comes from the <strong>skater's muscles</strong>. Each hand moves in a circle, so the skater must pull it inwards just to keep it on that circle. To pull the arms <em>closer</em>, the skater has to pull harder still, and that inward force moves the hands inwards, so it does work on them. Chemical energy in the muscles becomes rotational kinetic energy. When the skater lets the arms move out again, the spin slows and the kinetic energy decreases.</p>",
     "tempting": "<p>It's tempting to think that if angular momentum is conserved, kinetic energy must be too, or that the energy comes from the ice. But the ice exerts almost no torque, and conservation of angular momentum says nothing about kinetic energy: the skater does work.</p>"
+  },
+  {
+    "id": "CC-A4-02",
+    "topic": "A.4",
+    "level": "HL",
+    "type": "open",
+    "title": "Hollow or solid?",
+    "figure": {
+      "svg": "diagrams/cc-a4-02-race.svg",
+      "alt": "Two identical slopes side by side, each with a ball at the top. The two balls look exactly the same from the outside and are labelled 1 and 2.",
+      "caption": "The two balls look identical. Which one is hollow?"
+    },
+    "question": "<p>Two balls have the same mass and the same radius, and look identical from the outside. One is a thin hollow shell; the other is solid all the way through, made of a less dense material. You may not cut them open, and weighing them won't help. How could you use a slope to find out which ball is hollow? Predict what you would see.</p>",
+    "reveal": "<p><strong>Race them.</strong> Release both together from rest at the top of the same slope (or two identical slopes) so that they roll without slipping. <strong>The solid ball reaches the bottom first.</strong></p><p>Both balls lose the same gravitational potential energy. A rolling ball shares it between translational kinetic energy, $\\tfrac{1}{2}mv^2$, and rotational kinetic energy, $\\tfrac{1}{2}I\\omega^2$. The hollow ball has all its mass at its surface, far from the axis, so it has the <strong>larger moment of inertia</strong>: $\\tfrac{2}{3}mR^2$ for a thin shell, compared with $\\tfrac{2}{5}mR^2$ for the solid ball. More of its energy goes into spinning and less into moving down the slope, so at every point it is slower.</p><p>With $I = kmR^2$ and $\\omega = \\dfrac{v}{R}$, energy conservation gives $mgh = \\tfrac{1}{2}mv^2(1 + k)$. For a drop of 0.50 m, the solid ball reaches 2.6 $\\text{m s}^{-1}$ and the hollow ball 2.4 $\\text{m s}^{-1}$. On a 2.0 m long slope, they take 1.51 s and 1.65 s. The mass and the radius cancel, so the result doesn't depend on the size of the balls or the slope: the one that arrives second is hollow.</p>",
+    "tempting": "<p>Weighing them, or dropping them, can't tell them apart: they have the same mass, and in free fall (or sliding without friction) mass makes no difference. Some expect the hollow ball to win the race because its mass at the rim acts like a flywheel that keeps it going; but spinning that mass takes energy that would otherwise make the ball move faster down the slope. For rolling, what matters is <em>where</em> the mass is: the further it is from the axis, the larger the share of the energy that goes into rotation, and the slower the object rolls.</p>"
+  },
+  {
+    "id": "CC-A4-03",
+    "topic": "A.4",
+    "level": "HL",
+    "type": "choice",
+    "title": "Sawing the bat",
+    "figure": {
+      "svg": "diagrams/cc-a4-03-bat.svg",
+      "alt": "A wooden baseball bat lies horizontally, balanced on a narrow pivot. The pivot is much closer to the thick end than to the thin handle. A dashed line marks a cut through the bat directly above the pivot."
+    },
+    "question": "<p>A wooden baseball bat balances horizontally on a narrow pivot. It is sawn into two pieces exactly at the balance point, as shown. Which piece has the greater mass?</p>",
+    "options": [
+      "The thick end",
+      "The handle end",
+      "They have the same mass"
+    ],
+    "answer": 0,
+    "reveal": "<p>Balanced means that the <strong>torques</strong> about the pivot cancel, not the masses. Each piece's weight acts at its own centre of mass. The thick piece is short, so its centre of mass is close to the pivot; the handle piece is long and thin, so its centre of mass is much further away.</p><p>Taking torques about the pivot (1 = the handle piece, 2 = the thick piece): $m_1 g d_1 = m_2 g d_2$, so $\\dfrac{m_2}{m_1} = \\dfrac{d_1}{d_2}$. Because $d_2$ is smaller than $d_1$, the thick piece has the greater mass. For example, for a 0.90 kg bat whose handle piece has its centre of mass 18 cm from the cut and whose thick piece has its centre of mass 12 cm from the cut, the thick piece has 1.5 times the mass: 0.54 kg against 0.36 kg. Check: $0.36 \\times 9.8 \\times 0.18 = 0.54 \\times 9.8 \\times 0.12 = 0.64$ N m.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-a4-03-bat-moments.svg",
+      "alt": "The same balanced bat with the weight of each piece drawn at its centre of mass. The handle piece's weight W1 acts a long distance d1 from the pivot and is drawn short. The thick piece's weight W2 acts a short distance d2 from the pivot and is drawn longer.",
+      "caption": "Each piece's weight acts at its own centre of mass (dots). The torques about the pivot balance: <span class=\"key-1\">$W_1 d_1$</span> $=$ <span class=\"key-2\">$W_2 d_2$</span>, so the piece closer to the pivot is heavier."
+    },
+    "tempting": "<p>\"Balanced\" sounds like \"the same amount on each side\". That is only true for a symmetrical object. Think of a see-saw: a heavy adult sitting close to the pivot balances a light child sitting far from it. The bat's two pieces are the adult and the child.</p><p>The handle piece is tempting because it is much longer, but length isn't mass: most of the handle piece is thin.</p>"
+  },
+  {
+    "id": "CC-A5-01",
+    "topic": "A.5",
+    "level": "HL",
+    "type": "open",
+    "title": "Who is shorter?",
+    "figure": {
+      "svg": "diagrams/cc-a5-01-pass.svg",
+      "alt": "A space station and a spaceship of the same length, drawn one above the other. An arrow labelled 0.8c shows the ship moving to the right, parallel to the station.",
+      "caption": "Both are drawn at their lengths measured at rest, 100 m each."
+    },
+    "question": "<p>A spaceship and a space station are each 100 m long when measured at rest. The ship flies past the station at $0.8c$, parallel to the station's length. The station crew measure the length of the ship and find that it is shorter than their station. The ship's crew measure the length of the station and find that it is shorter than their ship. Who is right?</p>",
+    "reveal": "<p><strong>Both are right.</strong> Each crew sees the other's craft moving at $0.8c$, so each measures it length-contracted: $\\gamma = \\dfrac{1}{\\sqrt{1 - 0.8^2}} = \\dfrac{1}{0.6}$, so $L = \\dfrac{L_0}{\\gamma} = 0.6 \\times 100 = 60$ m. Each crew measures its own craft at its proper length, 100 m. The situation is symmetrical: neither frame is the one that is \"really\" moving.</p><p>Why is there no contradiction? To measure the length of a moving object, you must record where its front and back are <em>at the same time</em>. The station crew mark the positions of the ship's front and back at the same moment in their frame, and the marks are 60 m apart. But events in different places that are simultaneous in one frame are <strong>not simultaneous</strong> in another. In the ship's frame, the station crew marked the ship's front first and its back 0.27 µs later. Meanwhile the station slid 64 m backwards, carrying the first mark with it, so the two marks ended up closer together than the ship's 100 m. The ship's crew say the two ends were not marked at the same time.</p><p>The two crews agree about every event; they disagree about which events happen at the same time, and therefore about lengths.</p>",
+    "tempting": "<p>It feels as if one craft must <em>really</em> be shorter, as if moving squashed it. But there is no absolute rest, so there is no \"real\" length apart from the proper length in the object's own frame. A length measured in another frame depends on that frame's idea of \"at the same time\". Once you accept that simultaneity is relative, the two results stop clashing.</p>"
+  },
+  {
+    "id": "CC-A5-02",
+    "topic": "A.5",
+    "level": "HL",
+    "type": "choice",
+    "title": "The headlight",
+    "figure": {
+      "svg": "diagrams/cc-a5-02-headlight.svg",
+      "alt": "A spaceship moves to the right at 0.6c with a beam of light shining forwards from its headlight. An observer stands on the Earth below."
+    },
+    "question": "<p>A spaceship moves at $0.6c$ relative to the Earth. It switches on a headlight that points forwards, along its direction of motion, and the crew measure the speed of the light as $c$. What speed does an observer on the Earth measure for this light?</p>",
+    "options": [
+      "$0.4c$",
+      "$c$",
+      "$1.6c$",
+      "It depends on whether the ship is moving towards or away from the Earth"
+    ],
+    "answer": 1,
+    "reveal": "<p>Einstein's second postulate: the speed of light in a vacuum is the <strong>same for all inertial observers</strong>, $c$, however fast the source or the observer is moving. So the Earth observer also measures $c$.</p><p>Relativistic velocity addition agrees. Let the Earth be frame S and the ship be frame S′, moving at $v = 0.6c$. If the Earth observer measures $u = c$, then the crew measure $u' = \\dfrac{u - v}{1 - \\dfrac{uv}{c^2}} = \\dfrac{c - 0.6c}{1 - 0.6} = \\dfrac{0.4c}{0.4} = c$, just as they found. The motion of the source changes the light's frequency and wavelength (the Doppler effect), but not its speed.</p>",
+    "tempting": "<p>$1.6c$ comes from Galilean velocity addition, $u = u' + v$, which works very well for trains and cars but fails close to $c$. $0.4c$ is tempting because in the Earth's frame, the gap between the ship and the front of its beam does grow at $c - 0.6c = 0.4c$. But that is the rate at which two things separate, measured in one frame, not the speed of the light. Experiments agree with the postulate: in 1964, gamma rays given out by particles moving at more than $0.99c$ were measured at CERN to travel at $c$.</p><p>The last option mixes up speed with frequency: whether the ship is moving towards or away from the Earth changes the light's colour (the Doppler effect), not its speed.</p>"
+  },
+  {
+    "id": "CC-B1-01",
+    "topic": "B.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "Twice as hot",
+    "figure": {
+      "svg": "diagrams/cc-b1-01-thermometers.svg",
+      "alt": "Two glasses of the same water, each with a thermometer. The left glass, labelled now, reads 10 degrees Celsius. The right glass, labelled twice as hot, has its reading replaced by a question mark."
+    },
+    "question": "<p>Some water in a glass is at 10 °C. Suppose \"twice as hot\" means that its molecules have twice the average random kinetic energy. What temperature would the water have to reach? (Ignore boiling: assume the water is kept under enough pressure to stay liquid.)</p>",
+    "options": [
+      "20 °C",
+      "273 °C",
+      "293 °C",
+      "566 °C"
+    ],
+    "answer": 2,
+    "reveal": "<p>The average random kinetic energy of the molecules is proportional to the <strong>kelvin</strong> temperature, not the Celsius temperature. So convert first: $T = 10 + 273 = 283$ K.</p><p>Twice the average kinetic energy needs twice the kelvin temperature: $2 \\times 283 = 566$ K. Converting back, $566 - 273 = 293$ °C. \"Twice as hot\" in this sense is <strong>293 °C</strong>.</p><p>Heating the water to 20 °C (293 K) only multiplies the average kinetic energy by $\\dfrac{293}{283} = 1.04$: an increase of about 4%.</p>",
+    "tempting": "<p>\"Twice as hot\" sounds like \"twice the number\", so 20 °C is tempting. But the zero of the Celsius scale is just the temperature at which water freezes, and the molecules at 0 °C are still moving fast. The kelvin scale starts at absolute zero, where (in the kinetic model) the particles have no random kinetic energy at all. That's why only kelvin temperatures can be doubled or halved like this.</p><p>566 °C comes from doubling correctly in kelvin but forgetting to convert back to Celsius. 273 °C (546 K) doubles the 273 K of melting ice and leaves out the 10 °C.</p>"
+  },
+  {
+    "id": "CC-B1-02",
+    "topic": "B.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "Copper or wood on ice",
+    "figure": {
+      "svg": "diagrams/cc-b1-02-blocks-on-ice.svg",
+      "alt": "A small copper cube and a larger wooden block, each resting on its own block of ice. Both have a mass of 0.20 kg and a temperature of 100 degrees Celsius.",
+      "caption": "Drawn roughly to scale: the masses are equal, but wood is much less dense than copper."
+    },
+    "question": "<p>A 0.20 kg block of copper and a 0.20 kg block of dry wood are both heated to 100 °C. Each is then placed on its own large block of ice at 0 °C and left until it has cooled to 0 °C. No energy is transferred to or from the air, and neither block of ice melts completely. Which block melts more ice? (Specific heat capacities: copper 390 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$, dry wood about 1700 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$.)</p>",
+    "options": [
+      "The copper",
+      "The wood",
+      "They melt the same amount",
+      "It depends on how fast each one conducts"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The wood melts more than four times as much ice as the copper.</strong> As each block cools by 100 K it gives out energy $Q = mc\\Delta T$, and all of that energy melts ice at 0 °C. The mass of ice melted is $\\dfrac{Q}{L_f}$, with $L_f = 3.34 \\times 10^5$ $\\text{J kg}^{-1}$.</p><ul><li><strong>Copper</strong> ($c = 390$ $\\text{J kg}^{-1}\\,\\text{K}^{-1}$): $Q = 0.20 \\times 390 \\times 100 = 7800$ J, which melts $\\dfrac{7800}{3.34 \\times 10^5} = 0.023$ kg, about 23 g of ice.</li><li><strong>Dry wood</strong> ($c \\approx 1700$ $\\text{J kg}^{-1}\\,\\text{K}^{-1}$): $Q = 0.20 \\times 1700 \\times 100 = 34\\,000$ J, which melts $\\dfrac{34\\,000}{3.34 \\times 10^5} = 0.10$ kg, about 100 g of ice.</li></ul><p>The masses and the temperature drops are the same, so the difference comes entirely from the specific heat capacity. Wood's is more than four times copper's, so it gives out more than four times as much energy for every kelvin it cools.</p>",
+    "tempting": "<p>Copper at 100 °C feels much hotter to touch than wood at 100 °C, and it melts its way into the ice much more quickly, so it seems to hold more \"heat\". But conduction decides how <em>fast</em> energy is transferred, not how <em>much</em> is transferred in total. The copper melts its 23 g quickly; the wood melts its 100 g slowly, but it gets there in the end. That's why \"it depends on how fast each one conducts\" is wrong: it mixes up the rate of transfer with the total energy.</p><p>It's also tempting to think that equal masses at equal temperatures must give out equal amounts of energy. Temperature tells you which way energy will flow; how much flows also depends on $m$ and $c$.</p>"
+  },
+  {
+    "id": "CC-B1-03",
+    "topic": "B.1",
+    "level": "SL",
+    "type": "open",
+    "title": "Sparks and the baking tray",
+    "figure": {
+      "svg": "diagrams/cc-b1-03-sparks-tray.svg",
+      "alt": "Left: a lit sparkler throwing out sparks, labelled over 1000 degrees Celsius. Right: a baking tray of biscuits straight from the oven, labelled 200 degrees Celsius."
+    },
+    "question": "<p>The sparks from a sparkler can be hotter than 1000 °C, yet a spark that lands on your hand barely hurts. A baking tray at 200 °C, straight from the oven, burns you if you touch it. Why? (Don't test either one: a sparkler's wire stays dangerously hot.)</p>",
+    "reveal": "<p><strong>Temperature alone doesn't decide how much energy reaches your skin.</strong> The mass and specific heat capacity of the hot object matter, and so does how quickly energy can keep arriving.</p><p><strong>A spark</strong> is a tiny particle of burning iron (much of it iron oxide by the time it lands), with a mass of perhaps 0.1 mg, which is $1 \\times 10^{-7}$ kg. With $c \\approx 650$ $\\text{J kg}^{-1}\\,\\text{K}^{-1}$, cooling it by about 1000 K releases only</p>$$Q = mc\\Delta T = 1 \\times 10^{-7} \\times 650 \\times 1000 \\approx 0.065\\ \\text{J}$$<p>Shared with just 5 mg of skin (mostly water, $c \\approx 4200$ $\\text{J kg}^{-1}\\,\\text{K}^{-1}$), that would warm it by about $\\dfrac{0.065}{5 \\times 10^{-6} \\times 4200} \\approx 3$ K. In fact the spark has already lost much of its energy to the air on the way down. Its temperature falls almost at once, and there is no more energy behind it.</p><p><strong>A baking tray</strong> of, say, 0.5 kg of steel ($c \\approx 450$ $\\text{J kg}^{-1}\\,\\text{K}^{-1}$) gives out about $0.5 \\times 450 \\times 160 = 36\\,000$ J as it cools to 40 °C: around half a million times as much. Metal is also a good conductor, so as your skin takes energy from the spot you touch, energy flows in from the rest of the tray and keeps that spot close to 200 °C. Your skin is heated to a damaging temperature very quickly.</p>",
+    "tempting": "<p>It's tempting to think that the hotter object must always do more harm, as if temperature were \"the amount of heat\". But temperature measures the average random kinetic energy of the particles, not the total. A spark has so few particles that its internal energy is tiny, however high its temperature.</p><p>The same idea explains why the air inside a 200 °C oven doesn't burn your hand at once, though the tray does: the air has a very small mass and is a poor conductor.</p>"
+  },
+  {
+    "id": "CC-B2-01",
+    "topic": "B.2",
+    "level": "SL",
+    "type": "open",
+    "title": "Clear and cloudy nights",
+    "figure": {
+      "svg": "diagrams/cc-b2-01-clear-cloudy.svg",
+      "alt": "Two night scenes with the same house and a thermometer marked with a question mark. Left: a clear sky with stars and the Moon. Right: low clouds covering the sky."
+    },
+    "question": "<p>Two winter nights start at the same temperature at sunset, with no wind. One night is cloudless; the other has a thick layer of low cloud. By morning, the ground has cooled much more on the cloudless night, often enough for frost to form. Why do the clouds make such a difference?</p>",
+    "reveal": "<p><strong>Clouds absorb the infrared radiation emitted by the ground, and send much of it back down.</strong></p><p>At night there is no sunlight, but the ground keeps emitting infrared radiation, as every object above absolute zero does. Whether it cools depends on the balance between the infrared it emits and the infrared it receives from the sky.</p><ul><li><strong>Clear night:</strong> much of the ground's infrared passes straight through the dry air and escapes to space. The sky sends back relatively little, so the ground loses energy quickly and cools.</li><li><strong>Cloudy night:</strong> the water droplets in a cloud absorb almost all the infrared that reaches them. Low cloud is only a little colder than the ground, so its underside emits nearly as much infrared back down as the ground sends up. The ground's net loss is small.</li></ul><p>Rough numbers: ground at 5 °C (emissivity 0.95) emits about 320 $\\text{W m}^{-2}$. A clear winter sky might send back about 210 $\\text{W m}^{-2}$, of which the ground absorbs about 200, so it loses a net 120 $\\text{W m}^{-2}$. Low cloud at 0 °C sends back about 310 $\\text{W m}^{-2}$, of which the ground absorbs about 295, so the net loss is only about 25 $\\text{W m}^{-2}$: around a fifth as much.</p><p>This is the same physics as the <a href=\"../themes/b2.html#greenhouse\">greenhouse effect</a>: water vapour and cloud droplets absorb infrared and re-emit it in all directions, including back to the surface.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-b2-01-infrared.svg",
+      "alt": "Left, clear night: infrared arrows go up from the ground and out to space. Right, cloudy night: infrared arrows go up from the ground into the cloud; dashed arrows come back down from the cloud to the ground, and one dashed arrow goes up from the top of the cloud.",
+      "caption": "<span class=\"key-1\">Infrared</span> emitted by the ground. On a clear night much of it escapes to space. On a cloudy night the cloud absorbs it and emits infrared of its own (dashed), much of it back down to the ground."
+    },
+    "tempting": "<p>\"Clouds act like a blanket\" is a handy picture, but it hides the mechanism and suggests that clouds trap warm air. Clouds are hundreds of metres or more above the ground, so they can't hold in the air next to it. What they stop is <em>radiation</em> escaping.</p><p>It's also wrong to say that cold \"comes down\" from a clear sky: cold isn't something that flows. The ground simply loses energy faster when less infrared comes back to it. And clouds aren't a heat source like a radiator: the infrared they send down depends on their own temperature, which is kept up largely by absorbing infrared from below.</p>"
+  },
+  {
+    "id": "CC-B2-02",
+    "topic": "B.2",
+    "level": "SL",
+    "type": "choice",
+    "title": "Melting Arctic ice",
+    "figure": {
+      "svg": "diagrams/cc-b2-02-sea-ice.svg",
+      "alt": "Parallel rays of sunlight fall on a floe of sea ice on the left and on open ocean on the right."
+    },
+    "question": "<p>As Arctic sea ice melts in summer, it exposes the much darker open ocean underneath. Assume the sunlight reaching the surface stays the same. Does this change make the Arctic warm faster, slower, or make no difference?</p>",
+    "options": [
+      "Faster",
+      "Slower",
+      "No difference",
+      "It depends only on the amount of carbon dioxide"
+    ],
+    "answer": 0,
+    "reveal": "<p><strong>Faster.</strong> The fraction of incoming sunlight that a surface reflects is its <a href=\"../themes/b2.html#albedo\">albedo</a>. Sea ice has an albedo of about 0.5–0.7; open ocean, about 0.06. So the ocean absorbs most of the sunlight that the ice would have reflected.</p><p>For example, with sunlight of 300 $\\text{W m}^{-2}$ reaching the surface, a square metre of sea ice with an albedo of 0.60 absorbs $(1 - 0.60) \\times 300 = 120$ W, while a square metre of open ocean absorbs $(1 - 0.06) \\times 300 \\approx 280$ W: more than twice as much.</p><p>The extra energy warms the water, which melts more ice from below and at its edges, exposing even more dark water. A change that causes more of the same change is a <strong>positive feedback</strong>, here the <strong>ice–albedo feedback</strong>. It is one of the reasons the Arctic is warming several times faster than the world as a whole.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-b2-02-reflect-absorb.svg",
+      "alt": "On the sea ice, a thick arrow of sunlight comes in, a slightly thinner arrow labelled 60 percent reflected goes back up, and a small arrow labelled 40 percent absorbed goes into the ice. On the open ocean, a tiny arrow labelled 6 percent reflected goes back up and a thick arrow labelled 94 percent absorbed goes into the water.",
+      "caption": "Arrow widths show roughly how much of the <span class=\"key-2\">sunlight</span> is reflected and absorbed, for sea ice with an albedo of 0.60."
+    },
+    "tempting": "<p>\"Slower\" is tempting because melting ice takes in energy (latent heat) without getting warmer, which holds the temperature near 0 °C while it melts. But that energy came from absorbed sunlight in the first place, and once the ice has gone, the dark water absorbs far more sunlight than the ice did.</p><p>\"It depends only on the amount of carbon dioxide\" treats greenhouse gases as the only control on temperature. They affect how much infrared escapes to space; albedo affects how much sunlight is absorbed in the first place. Both are part of the energy balance. \"No difference\" misses that ice and water at the same temperature can absorb very different fractions of the sunlight.</p>"
+  },
+  {
+    "id": "CC-B3-01",
+    "topic": "B.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "Helium or argon?",
+    "figure": {
+      "svg": "diagrams/cc-b3-01-syringes.svg",
+      "alt": "Two identical large syringes, each sealed at the nozzle with a piston that can slide freely. The top one holds 1 g of helium and the bottom one 1 g of argon. Both pistons are drawn at the same place, with a double-headed arrow and a question mark showing that their final positions are unknown.",
+      "caption": "The pistons are drawn in the same place only to show the syringes; they can slide freely. Where do they settle? (Not to scale.)"
+    },
+    "question": "<p>Two identical, extra-large syringes are sealed at the nozzle, and each piston can slide freely without friction. One syringe holds 1 g of helium and the other holds 1 g of argon. Both gases are at room temperature and atmospheric pressure, and both behave as ideal gases. Which gas takes up the larger volume?</p>",
+    "options": [
+      "The helium, about 10 times as much",
+      "The argon, about 10 times as much",
+      "They take up the same volume",
+      "The helium, about twice as much"
+    ],
+    "answer": 0,
+    "reveal": "<p>The volume of an ideal gas depends on the <strong>number of particles</strong>, not on their mass. At the same pressure and temperature, $V = \\dfrac{nRT}{P}$, so the volume is proportional to the amount of gas $n$.</p><p>A helium atom is about 10 times lighter than an argon atom (molar masses about 4 and 40 g $\\text{mol}^{-1}$), so 1 g of helium contains about 10 times as many atoms. At 20 °C (293 K) and $1.0 \\times 10^5$ Pa:</p><ul><li>Helium: $n = \\dfrac{1}{4} = 0.25$ mol, so $V = \\dfrac{0.25 \\times 8.31 \\times 293}{1.0 \\times 10^5} = 6.1 \\times 10^{-3}\\ \\text{m}^3$, about 6 litres.</li><li>Argon: $n = \\dfrac{1}{40} = 0.025$ mol, so $V = 6.1 \\times 10^{-4}\\ \\text{m}^3$, about 0.6 litres.</li></ul><p>Each piston settles where the pressure of the gas equals atmospheric pressure. The heavier argon atoms move more slowly, but at the same temperature every atom has the same average kinetic energy, $\\tfrac{3}{2}k_BT$, so each atom contributes the same share of the pressure whatever gas it belongs to.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-b3-01-syringes-answer.svg",
+      "alt": "The same two syringes after the pistons have settled. The helium fills most of its syringe, labelled 6.1 litres; the argon fills a short section near the nozzle, labelled 0.61 litres.",
+      "caption": "Where the pistons settle: about <span class=\"key-1\">6.1 L</span> of helium and <span class=\"key-2\">0.61 L</span> of argon."
+    },
+    "tempting": "<p>\"Same mass, same amount of gas\" feels natural, because for solids and liquids we usually measure an amount by its mass. But for a gas at a given temperature and pressure, the volume depends on the number of particles. Lighter atoms mean more atoms in each gram, so more volume. (This is Avogadro's idea: equal volumes of gases at the same temperature and pressure contain equal numbers of particles.)</p><p>\"About twice as much\" tempts people who know that helium is lighter but guess the factor instead of working it out from the molar masses: 40 ÷ 4 = 10.</p>"
+  },
+  {
+    "id": "CC-B3-02",
+    "topic": "B.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "A balloon in the freezer",
+    "figure": {
+      "svg": "diagrams/cc-b3-02-freezer.svg",
+      "alt": "A sealed, blown-up balloon at 20 °C, with an arrow pointing to an upright freezer at −18 °C. The freezer door is open and a question mark is drawn inside it."
+    },
+    "question": "<p>A sealed balloon is taken from a room at 20 °C and put in a freezer at −18 °C. Treat the air inside as an ideal gas, and assume its pressure stays the same (ignore any change in the stretch of the rubber). Once the air in the balloon has cooled to −18 °C, what has happened to the balloon's volume?</p>",
+    "options": [
+      "It stays the same size",
+      "It shrinks by about 13%",
+      "It shrinks to about half",
+      "It shrinks to almost nothing"
+    ],
+    "answer": 1,
+    "reveal": "<p>At constant pressure, the volume of a fixed mass of ideal gas is proportional to its <strong>kelvin</strong> temperature (Charles's law): $\\dfrac{V}{T} = \\text{constant}$.</p><p>$T_1 = 20 + 273 = 293$ K and $T_2 = -18 + 273 = 255$ K, so $\\dfrac{V_2}{V_1} = \\dfrac{255}{293} = 0.87$.</p><p>The balloon shrinks to 87% of its original volume, a drop of about 13%. That's a noticeable change, but nowhere near empty. Take it out and let it warm up again, and it goes back to its original size.</p>",
+    "tempting": "<p>In degrees Celsius the temperature goes from +20 to −18, which sounds like going \"below nothing\", so it is tempting to think the gas must shrink to half or to almost nothing. But 0 °C is just the melting point of ice, not a zero of anything in the gas. At −18 °C the molecules still have plenty of kinetic energy. What matters is the change compared with absolute zero: a drop of 38 K from 293 K.</p><p>Others think a sealed balloon can't change size because no air gets in or out. The <em>mass</em> of air is fixed, but its volume isn't.</p>"
+  },
+  {
+    "id": "CC-B4-01",
+    "topic": "B.4",
+    "level": "HL",
+    "type": "open",
+    "title": "Cooling the cabin air",
+    "figure": {
+      "svg": "diagrams/cc-b4-01-airliner.svg",
+      "alt": "An airliner in flight, with the outside air at −50 °C. A duct runs from one of its engines up into the passenger cabin.",
+      "caption": "The <span class=\"key-2\">duct</span> carries compressed outside air from the engine to the cabin."
+    },
+    "question": "<p>At cruising height, the air outside an airliner is about −50 °C. The air for the cabin is taken from outside and squeezed by the engines' compressors to a much higher pressure. Yet before it can be used in the cabin, this air has to be <strong>cooled</strong>, not heated. Why?</p>",
+    "reveal": "<p>Compressing a gas means doing work on it, and if the compression is fast, that work raises its temperature.</p><p>Inside the engine the air is squeezed in a tiny fraction of a second, far too quickly for much thermal energy to flow out through the walls. So the compression is close to <strong>adiabatic</strong>: $Q \\approx 0$. In the first law, $Q = \\Delta U + W$, where $W$ is the work done <em>by</em> the gas, this gives $\\Delta U = -W$. In a compression, work is done <em>on</em> the gas, so $W$ is negative and $\\Delta U$ is positive: the internal energy of the air rises, and so does its temperature.</p><p>The compressors squeeze the air to many times its starting pressure, so it comes out far hotter than the cabin needs, hotter than boiling water. Cooling units bring it down to a comfortable temperature before it reaches the passengers. You can feel the same effect on a small scale: the barrel of a bicycle pump gets warm when you pump hard.</p>",
+    "tempting": "<p>It is tempting to think \"the air starts at −50 °C, so it must still be cold\", or that only heating can raise a temperature. But the temperature of a gas rises whenever its internal energy rises, and doing work on it is just as good a way of increasing internal energy as heating it. In an adiabatic compression, all the work done on the gas goes into its internal energy.</p>"
+  },
+  {
+    "id": "CC-B4-02",
+    "topic": "B.4",
+    "level": "HL",
+    "type": "choice",
+    "title": "The open fridge",
+    "figure": {
+      "svg": "diagrams/cc-b4-02-fridge.svg",
+      "alt": "A small kitchen with the window and door shut. A fridge plugged into the wall stands with its door wide open. A thermometer on the wall has a question mark beside it."
+    },
+    "question": "<p>On a hot day, someone shuts the door and window of a small kitchen and leaves the fridge door wide open, hoping to cool the room down. The fridge keeps running. Assume the kitchen is well insulated, so no energy enters or leaves through the walls, window or door. What happens to the temperature of the kitchen over the next few hours?</p>",
+    "options": [
+      "It falls",
+      "It rises",
+      "It stays the same",
+      "It falls at first, then stays steady"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The kitchen gets warmer.</strong> A fridge doesn't make \"cold\": it is a pump that <em>moves</em> thermal energy. It takes thermal energy from the inside of the cabinet and releases it, together with the energy it takes from the electricity supply, from the warm coils at the back.</p><p>With the door open, the inside of the fridge is part of the kitchen. The thermal energy it removes from the air in front of it is released back into the same kitchen from the coils behind it, so that part just goes round in a loop. But the fridge also takes electrical energy all the time it runs, and all of that ends up in the kitchen too.</p><p>Take the whole kitchen as the system. No thermal energy crosses the walls, but the electricity supply keeps transferring energy in, so by the first law (conservation of energy) the internal energy of the kitchen rises, and so does its temperature. A fridge running non-stop at about 150 W adds over 0.5 MJ every hour. Just in front of the door it may feel cool for a few minutes, as the cold air and food from inside mix with the room, but the steady energy input soon wins.</p>",
+    "tempting": "<p>We think of a fridge as something that \"makes cold\", so it seems that opening it should cool the room. But a fridge only makes one place colder by making another place warmer, and it needs an energy input to do it. When both places are in the same closed room, the only overall effect is that energy input, which warms the room. This is why an air-conditioner has to release its thermal energy outside the building.</p><p>\"It stays the same\" is tempting once you see that the fridge just moves thermal energy from the front of the kitchen to the back. That part does cancel out, but it forgets the electrical energy the fridge takes in all the time, which also ends up in the kitchen. \"It falls at first, then stays steady\" comes from the cool air you feel just in front of the open door for the first few minutes: that cool air soon mixes with the rest of the room, and from then on the energy input warms the whole kitchen.</p>"
+  },
+  {
+    "id": "CC-B5-01",
+    "topic": "B.5",
+    "level": "SL",
+    "type": "choice",
+    "title": "Swapping the lamps",
+    "figure": {
+      "svg": "diagrams/cc-b5-01-swap.svg",
+      "alt": "Two circuit diagrams. Before: a cell in series with lamp A and then lamp B, with A nearer the positive terminal. After: the same circuit with the two lamps swapped, so B is nearer the positive terminal.",
+      "caption": "Lamps <span class=\"key-1\">A</span> and <span class=\"key-2\">B</span> are different. Only their positions change."
+    },
+    "question": "<p>A cell is connected in series with two <strong>different</strong> filament lamps, A and B, with lamp A nearer the positive terminal. The two lamps are then swapped round, so that lamp B is nearer the positive terminal. What happens?</p>",
+    "options": [
+      "Lamp A becomes brighter",
+      "Lamp B becomes brighter",
+      "Nothing changes",
+      "Both lamps become dimmer"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>Nothing changes.</strong> A series circuit has only one path, and charge can't pile up anywhere or be used up, so the current is the same at every point in the loop. The same current flows through A as through B, whichever comes first.</p><p>The total resistance hasn't changed, so the current is the same as before. The power dissipated in each lamp is $P = I^2R$, and each lamp still has its own resistance, so each lamp is exactly as bright as it was. If A was the brighter lamp before the swap, it still is.</p>",
+    "tempting": "<p>Many people picture current as something that gets \"used up\" by each lamp, so the lamp that gets the current first should get the most. But the lamps don't use up charge: they transfer <em>energy</em> from the moving charges. Charge flows round the whole loop at the same rate everywhere, and all the charges start moving together as soon as the circuit is complete.</p><p>The two lamps can be different in brightness, but that is because they have different resistances, not because of where they are in the loop.</p>"
+  },
+  {
+    "id": "CC-B5-02",
+    "topic": "B.5",
+    "level": "SL",
+    "type": "choice",
+    "title": "The longer wire",
+    "figure": {
+      "svg": "diagrams/cc-b5-02-wires.svg",
+      "alt": "Two copper wires made from the same amount of copper. Wire A has length L. Wire B has length 2L and is thinner.",
+      "caption": "Both wires contain the same volume of copper."
+    },
+    "question": "<p>Two uniform copper wires are made from identical lumps of copper, so they have the same volume. Wire B is drawn out to twice the length of wire A. Both wires are at the same temperature. Compared with the resistance of wire A, the resistance of wire B is</p>",
+    "options": [
+      "the same",
+      "2 times as large",
+      "4 times as large",
+      "8 times as large"
+    ],
+    "answer": 2,
+    "reveal": "<p>$R = \\dfrac{\\rho L}{A}$, and both wires are copper at the same temperature, so $\\rho$ is the same. Wire B is twice as long, which on its own would double the resistance. But it contains the same volume of copper, $V = AL$, so its cross-sectional area is <strong>half</strong> as big, which doubles the resistance again:</p><p>$R_B = \\dfrac{\\rho \\times 2L}{A/2} = 4 \\times \\dfrac{\\rho L}{A} = 4R_A$</p><p>Another way to see it: picture wire A as two thin wires of length $L$ side by side (in parallel). Each thin wire must have resistance $2R_A$. Wire B is those same two thin wires joined end to end (in series): $2R_A + 2R_A = 4R_A$.</p>",
+    "tempting": "<p>\"Twice as long, twice the resistance\" is true only if the thickness stays the same. Here the same amount of copper has to stretch further, so the wire must also get thinner, and a thinner wire has more resistance too.</p><p>\"8 times\" comes from thinking the diameter halves, which would make the area a quarter. In fact it is the <em>area</em> that halves (the diameter only falls by a factor of $\\sqrt{2}$).</p>"
+  },
+  {
+    "id": "CC-B5-03",
+    "topic": "B.5",
+    "level": "SL",
+    "type": "choice",
+    "title": "60 W or 100 W?",
+    "figure": {
+      "svg": "diagrams/cc-b5-03-lamps.svg",
+      "alt": "A circuit diagram: a 60 W lamp and a 100 W lamp connected in series to a 230 V supply.",
+      "caption": "Both lamps are designed for 230 V."
+    },
+    "question": "<p>Two old-style filament lamps are both designed for the 230 V mains: one is rated 60 W and the other 100 W. They are connected in series to a 230 V supply. Assume each lamp's resistance stays the same as when it works normally at its rating, and that the lamp dissipating more power glows more brightly. Which lamp glows more brightly?</p>",
+    "options": [
+      "The 60 W lamp",
+      "The 100 W lamp",
+      "They are equally bright",
+      "Neither lights"
+    ],
+    "answer": 0,
+    "reveal": "<p>A lamp's rating is the power it dissipates <em>with 230 V across it</em>. From $P = \\dfrac{V^2}{R}$, each lamp's resistance is $R = \\dfrac{V^2}{P}$:</p><ul><li>60 W lamp: $R = \\dfrac{230^2}{60} = 882\\ \\Omega$</li><li>100 W lamp: $R = \\dfrac{230^2}{100} = 529\\ \\Omega$</li></ul><p>So the <strong>lower</strong>-rated lamp has the <strong>higher</strong> resistance. In series, both lamps carry the same current: $I = \\dfrac{230}{882 + 529} = 0.163$ A. Then $P = I^2R$ gives about 23 W for the 60 W lamp and 14 W for the 100 W lamp. <strong>The 60 W lamp glows more brightly</strong>, although both are much dimmer than normal.</p><p>In reality a filament's resistance is lower when it is cooler, so both resistances are smaller than these values. The 100 W lamp runs further below its normal temperature, so its resistance drops more, and if anything the 60 W lamp wins by even more.</p>",
+    "tempting": "<p>\"The 100 W lamp is brighter\" is true when each lamp has the full 230 V across it, as at home, where lamps are connected in parallel. Then $P = \\dfrac{V^2}{R}$ applies with the same $V$, and the lower resistance wins. In series it is the <em>current</em> that is the same for both, so $P = I^2R$ shows that the higher resistance wins. A power rating describes a lamp under its rated conditions, not in every circuit.</p>"
   }
 ]

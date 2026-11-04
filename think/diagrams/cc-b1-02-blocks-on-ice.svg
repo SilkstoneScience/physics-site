@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 210">
+  <line class="axis" x1="10" y1="172" x2="370" y2="172"/>
+  <!-- two blocks of ice -->
+  <rect class="area" x="40" y="122" width="120" height="50" rx="4"/><rect class="axis" x="40" y="122" width="120" height="50" rx="4"/>
+  <path class="grid" d="M52 134 L66 146 M120 158 L140 150 M88 160 L96 166"/>
+  <rect class="area" x="220" y="122" width="120" height="50" rx="4"/><rect class="axis" x="220" y="122" width="120" height="50" rx="4"/>
+  <path class="grid" d="M232 158 L248 150 M316 132 L328 144 M262 136 L270 142"/>
+  <!-- copper cube (small: copper is dense) -->
+  <path class="f2" d="M87 122 V96 H113 V122 Z"/>
+  <path class="f2" d="M87 96 L94 90 H120 L113 96 Z" style="opacity:0.6"/>
+  <path class="f2" d="M113 96 L120 90 V116 L113 122 Z" style="opacity:0.8"/>
+  <path class="axis" d="M87 122 V96 H113 V122 Z M87 96 L94 90 H120 L113 96 M120 90 V116 L113 122"/>
+  <!-- wooden block (large: wood is much less dense), with grain -->
+  <path class="area" d="M246 122 V58 H310 V122 Z" style="fill:var(--surface)"/>
+  <path class="f2" d="M246 122 V58 H310 V122 Z" style="opacity:0.22"/>
+  <path class="f2" d="M246 58 L258 48 H322 L310 58 Z" style="opacity:0.4"/>
+  <path class="f2" d="M310 58 L322 48 V112 L310 122 Z" style="opacity:0.32"/>
+  <path class="axis" d="M254 70 C270 76 282 64 302 72 M252 88 C268 82 286 96 304 88 M256 106 C272 112 288 100 302 108" style="stroke-width:1"/>
+  <path class="axis" d="M246 122 V58 H310 V122 Z M246 58 L258 48 H322 L310 58 M322 48 V112 L310 122"/>
+  <text x="100" y="80" text-anchor="middle">copper</text>
+  <text x="280" y="38" text-anchor="middle">wood</text>
+  <text x="190" y="152" text-anchor="middle">ice</text>
+  <text x="100" y="192" text-anchor="middle" style="font-size:14px">0.20 kg, 100 °C</text>
+  <text x="280" y="192" text-anchor="middle" style="font-size:14px">0.20 kg, 100 °C</text>
+</svg>
