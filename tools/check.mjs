@@ -235,8 +235,10 @@ function checkThinkItem(it, file, idPattern) {
   else for (const t of topics) if (!TOPICS.has(t)) err(where, `unknown topic "${t}"`);
   if (it.level !== undefined && !['SL', 'HL'].includes(it.level)) err(where, 'level must be "SL" or "HL"');
   if (topics && topics.some((t) => TOPICS.get(t)?.hl) && it.level !== 'HL') err(where, 'uses an HL-only topic, so level must be "HL"');
+  if (!it.figure) err(where, 'needs a "figure" (every card shows its picture as a tile)');
   checkThinkFigure(where, it.figure, 'figure');
   checkThinkFigure(where, it.revealFigure, 'revealFigure');
+  if (/upthrust/i.test(JSON.stringify(it))) warn(where, 'says "upthrust": the syllabus term is "buoyancy force" (A.2)');
 }
 function checkThinkAnswer(it, file) {
   const where = `${file} ${it.id}`;
@@ -249,7 +251,13 @@ function checkThinkAnswer(it, file) {
     }
   }
   checkText(where, it.reveal, 'reveal');
-  if (it.tempting) checkText(where, it.tempting, 'tempting');
+  if (!it.tempting) err(where, 'needs "tempting" (the "Clearing misconceptions" part of the answer)');
+  else checkText(where, it.tempting, 'tempting');
+}
+// Each diagram appears twice on a page (as a tile and full size), so ids inside it would clash.
+for (const f of exists('think/diagrams') ? fs.readdirSync(path.join(ROOT, 'think/diagrams')).filter((n) => n.endsWith('.svg')) : []) {
+  const svg = read(`think/diagrams/${f}`);
+  if (/\sid="/.test(svg) || /<defs[\s>]/.test(svg)) err(`think/diagrams/${f}`, 'contains an id or <defs>: each picture appears twice on the page, so ids would clash (arrowheads use the page\'s #ah1, #ah2, #ah3)');
 }
 function readThink(rel) {
   if (!exists(rel)) { err(rel, 'is missing'); return []; }
