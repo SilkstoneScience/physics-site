@@ -19,6 +19,7 @@ const others = (d, k) => d.rows.filter((_, i) => i !== 0 && i !== Y2020).map((r)
 export default {
   id: 'E4-B01',
   topic: 'E.4',
+  sections: ['calc', 'energy', 'reactor'],
   difficulty: 2,
   context: 'unfamiliar',
   source: 'secondary',
@@ -138,7 +139,7 @@ export default {
     const [mLo, mHi] = d.r.mass.range;
     return [
       {
-        label: 'a', marks: 2, ao: 'AO2',
+        label: 'a', sections: ['energy'], marks: 2, ao: 'AO2',
         question: 'Calculate the energy released in this fission reaction, in MeV.',
         markscheme: [
           `Mass difference $= (${d.stated('mU')} + ${d.stated('mn')}) - (${d.stated('mBa')} + ${d.stated('mKr')} + 3 \\times ${d.stated('mn')}) = ${d.dp(d.r.dm.value, 4)}\\ \\text{u}$ ✓`,
@@ -146,13 +147,13 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 1, ao: 'AO2',
+        label: 'b', sections: ['calc'], marks: 1, ao: 'AO2',
         question: 'Calculate the load factor in 2018.',
         numeric: d.num('LF18'),
         markscheme: [`$\\dfrac{${d.text('E', Y2018)}\\ \\text{GWh}}{${d.dp(PREF / 1e3, 3)}\\ \\text{GW} \\times ${d.stated('h')}\\ \\text{h}} \\times 100 = ${d.dp(d.r.LF18.value, 1)}\\,\\%$ ✓`],
       },
       {
-        label: 'c', marks: 3, ao: { AO2: 2, AO3: 1 },
+        label: 'c', sections: ['calc', 'energy'], marks: 3, ao: { AO2: 2, AO3: 1 },
         question: 'Estimate the mass of $^{235}\\text{U}$ that underwent fission in 2020. Assume that all the energy released in the reactor comes from the reaction above.',
         markscheme: [
           `Efficiency $= \\dfrac{${d.stated('Pref')}}{${d.stated('Pth')}} = ${d.dp(d.r.eta.value, 3)}$, so thermal energy $= \\dfrac{${d.text('E', Y2020)} \\times ${d.stated('GWhJ')} \\times 10^{12}}{${d.dp(d.r.eta.value, 3)}} = ${d.sci(d.r.Eth.value, 2)}\\ \\text{J}$ ✓`,
@@ -161,13 +162,13 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 1, ao: 'AO3',
+        label: 'd', sections: ['reactor'], marks: 1, ao: 'AO3',
         question: `The reactor is shut down for refuelling about once every ${d.stated('months')} months. Identify the years in the table in which it was not refuelled, and state the evidence.`,
         markscheme: [`${d.text('year', 0)} and ${d.text('year', Y2020)}: the load factor is close to 100 % and the station was connected to the grid for ${d.text('ton', 0)} and ${d.text('ton', Y2020)} hours, `
           + `compared with ${d.dp(Math.min(...others(d, 'LF')), 1)}–${d.dp(Math.max(...others(d, 'LF')), 1)} % and ${d.int(Math.min(...others(d, 'ton')))}–${d.int(Math.max(...others(d, 'ton')))} hours in the other years ✓`],
       },
       {
-        label: 'e', marks: 2, ao: 'AO3',
+        label: 'e', sections: ['calc'], marks: 2, ao: 'AO3',
         asks: { conclusion: ['is supported', 'supports the rule'] },
         // Scaffolded on the teacher's request (8 October 2026): the gigawatt-year is defined and the 2020 value given.
         question: 'A gigawatt-year is the energy supplied by a power of 1 GW for one year. In 2020 the station supplied '

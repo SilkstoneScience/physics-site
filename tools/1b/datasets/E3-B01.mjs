@@ -9,6 +9,7 @@
 export default {
   id: 'E3-B01',
   topic: 'E.3',
+  sections: ['halflife', 'background', 'random'],
   difficulty: 2,
   context: 'experimental',
   skills: ['background-correction', 'complete-table', 'read-graph', 'half-life', 'random-uncertainty'],
@@ -119,12 +120,12 @@ export default {
     const bgCounts = (d.singles.Nb * d.p.dt) / d.p.tb;
     return [
       {
-        label: 'a', marks: 1, ao: 'AO1',
+        label: 'a', sections: ['background'], marks: 1, ao: 'AO1',
         question: 'Outline why the student measured the background count.',
         markscheme: ['The counter also detects background radiation, which must be subtracted to find the count rate due to the source alone ✓'],
       },
       {
-        label: 'b', marks: 2, ao: 'AO2',
+        label: 'b', sections: ['background', 'halflife'], marks: 2, ao: 'AO2',
         question: `Calculate the corrected count rate $R$ at $t = ${d.text('t', 7)}\\ \\text{s}$.`,
         numeric: d.num('Rmissing', {
           mistakes: [{ value: d.rows[7].N / d.p.dt, feedback: 'Remember to subtract the background count first.' }],
@@ -135,7 +136,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'c', sections: ['halflife'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         reads: [{ figure: 'graph', x: d.r.halfLife.value, y: d.fit.A / 2 }],
         question: 'Use the graph to determine the half-life of the source.',
         numeric: d.num('halfLife'),
@@ -145,7 +146,7 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 2, ao: 'AO3',
+        label: 'd', sections: ['random', 'halflife'], marks: 2, ao: 'AO3',
         question: 'Explain why the percentage uncertainty in $R$ increases as $t$ increases.',
         markscheme: [
           'Decay is random, so the uncertainty in a count $N$ is about $\\sqrt{N}$ ✓',
@@ -153,7 +154,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 1, ao: 'AO3',
+        label: 'e', sections: ['halflife'], marks: 1, ao: 'AO3',
         question: 'Suggest one change to the method that would reduce the uncertainty in the later values of $R$.',
         markscheme: ['Count for a longer interval (or repeat the experiment and average), so more counts are recorded ✓'],
       },

@@ -12,6 +12,7 @@ const xAt0 = (L) => -L.c / L.m;
 export default {
   id: 'B3-B01',
   topic: 'B.3',
+  sections: ['laws'],
   difficulty: 2,
   context: 'experimental',
   skills: ['proportionality-from-table', 'extrapolation', 'intercept-meaning', 'intercept-uncertainty', 'accepted-value', 'prediction'],
@@ -117,7 +118,7 @@ export default {
     const [pLo, pHi] = d.r.pred.range;
     return [
       {
-        label: 'a', marks: 2, ao: 'AO3',
+        label: 'a', sections: ['laws'], marks: 2, ao: 'AO3',
         question: 'Show, using two rows of the table, that $p$ is not proportional to $T$.',
         markscheme: [
           `$\\dfrac{p}{T}$ is ${d.sf(d.r.ratioLow.value, 3)} $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at ${d.text('theta', 0)} °C but ${d.sf(d.r.ratioHigh.value, 3)} $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at ${d.text('theta', 5)} °C (or any two non-adjacent rows) ✓`,
@@ -125,7 +126,7 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'b', sections: ['laws'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         reads: [{ figure: 'graph', x: 0, y: d.r.intercept.value }],
         question: 'Draw the line of best fit on the graph. Determine its gradient and its intercept on the $p$ axis.',
         markscheme: [
@@ -134,7 +135,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2, ao: 'AO2',
+        label: 'c', sections: ['laws'], marks: 2, ao: 'AO2',
         question: 'Hence determine the temperature at which the pressure of the air would be zero, according to these data.',
         numeric: d.num('absZeroAnswer'),
         markscheme: [
@@ -143,7 +144,7 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 3, ao: { AO2: 2, AO3: 1 }, msFigure: 'graph-ms',
+        label: 'd', sections: ['laws'], marks: 3, ao: { AO2: 2, AO3: 1 }, msFigure: 'graph-ms',
         question: 'Draw the steepest and shallowest straight lines that pass through all the error bars. Use them to determine the absolute uncertainty in your answer to (c).',
         markscheme: [
           'Steepest and shallowest lines drawn through all the error bars ✓',
@@ -152,7 +153,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 2, ao: 'AO3',
+        label: 'e', sections: ['laws'], marks: 2, ao: 'AO3',
         asks: { conclusion: ['is consistent', 'consistent with the accepted'] },
         question: `The accepted value of absolute zero is $${d.stated('accepted')}\\ {}^{\\circ}\\text{C}$. Calculate the percentage difference between your answer to (c) and this value. Hence discuss whether your result is consistent with the accepted value.`,
         markscheme: [
@@ -161,7 +162,7 @@ export default {
         ],
       },
       {
-        label: 'f', marks: 1, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'f', sections: ['laws'], marks: 1, ao: 'AO2', msFigure: 'graph-ms',
         reads: [{ figure: 'graph', x: T_PREDICT, y: d.r.pred.value }],
         question: 'The flask is then placed in boiling water at 100 °C. Use your line of best fit to predict the reading of the pressure gauge.',
         numeric: d.num('pred'),

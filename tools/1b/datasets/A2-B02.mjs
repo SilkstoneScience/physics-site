@@ -9,6 +9,7 @@ const ROW = 7;  // the row used for the comparison in (c) (78.4 N)
 export default {
   id: 'A2-B02',
   topic: 'A.2',
+  sections: ['contact'],
   difficulty: 3,
   context: 'experimental',
   skills: ['model-validity-range', 'gradient', 'evidence-against-a-model', 'fit-only-the-valid-region', 'reference-wire'],
@@ -108,7 +109,7 @@ export default {
     const [kLo, kHi] = d.r.k.range;
     return [
       {
-        label: 'a', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        label: 'a', sections: ['contact'], marks: 2, ao: 'AO3', msFigure: 'graph-ms',
         reads: [{ figure: 'graph', x: d.rows[4].F }],
         question: 'Hooke\'s law predicts that $x$ is proportional to $F$. Use the graph to identify the range of loads for which the data are consistent with Hooke\'s law. Justify your answer.',
         markscheme: [
@@ -117,7 +118,7 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'b', sections: ['contact'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         question: 'Determine $k$, the load per unit extension, in the region where Hooke\'s law holds.',
         numeric: d.num('k'),
         markscheme: [
@@ -126,7 +127,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2, ao: 'AO3',
+        label: 'c', sections: ['contact'], marks: 2, ao: 'AO3',
         question: `Calculate the extension that Hooke's law predicts for a load of ${d.text('F', ROW)} N, using your value of $k$. Compare it with the measured extension.`,
         markscheme: [
           `$x = \\dfrac{F}{k} = ${d.sf(d.r.xHooke.value, 3)}\\ \\text{mm}$ (allow ECF from (b)) ✓`,
@@ -134,7 +135,7 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 2, ao: 'AO3',
+        label: 'd', sections: ['contact'], marks: 2, ao: 'AO3',
         asks: { conclusion: ['would be smaller', 'is smaller than'] },
         question: 'Another student draws one line of best fit through all nine points and calculates $k$ from its gradient. Explain whether this value of $k$ would be larger or smaller than your answer to (b).',
         markscheme: [
@@ -143,7 +144,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 1, ao: 'AO3',
+        label: 'e', sections: ['contact'], marks: 1, ao: 'AO3',
         question: 'Suggest why the extension is measured relative to a reference wire hanging from the same beam.',
         markscheme: ['Changes in room temperature (thermal expansion) and any sagging of the beam affect both wires equally, so they do not change the measured extension ✓'],
       },

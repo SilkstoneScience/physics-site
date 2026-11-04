@@ -41,8 +41,12 @@ export function canonicalContent(def, built, root = ROOT) {
     const full = path.join(root, f);
     return [f, fs.existsSync(full) ? crypto.createHash('sha256').update(fs.readFileSync(full, 'utf8').replace(/\r\n?/g, '\n')).digest('hex') : null];
   }));
+  // Sub-part tags ("sections") are metadata for the revision sheet builder, not content: leave them out, so
+  // tagging a question never changes its fingerprint or its review status.
+  const { sections: _s, ...question } = built.question;
+  question.parts = (question.parts || []).map(({ sections: _ps, ...pt }) => pt);
   return {
-    question: built.question,
+    question,
     type: def.type, topics: def.topics,
     given: def.given,
     results: Object.fromEntries(Object.entries(built.results).map(([k, r]) => [k, { value: shownValue(r), unit: r.unit, sf: r.sf }])),

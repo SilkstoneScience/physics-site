@@ -6,6 +6,7 @@ export default {
   level: 'SL',
   difficulty: 2,
   topics: ['D.3', 'A.2'],
+  sections: ['parallel'],
   batch: 'batch-2028',
   y2028: true,
   originality: {
@@ -31,7 +32,7 @@ export default {
   diagram: { file: 'questions/diagrams/p2-d3-wires.svg', alt: 'Two long vertical wires, P on the left and Q on the right, 6.0 cm apart. Arrows show that both currents flow upwards: 15 A in P and 5.0 A in Q.' },
   parts: [
     {
-      label: 'a', command: 'Calculate', marks: 2, syllabus: ['D.3.Y1'],
+      label: 'a', sections: ['parallel'], command: 'Calculate', marks: 2, syllabus: ['D.3.Y1'],
       question: 'Calculate the magnetic field strength due to P at the position of Q.',
       numeric: { result: 'B', accept: 0.03, mistakes: [{ result: 'wrong_B', feedback: 'Convert the distance to metres: 6.0 cm = 0.060 m.' }] },
       markscheme: [
@@ -41,7 +42,7 @@ export default {
       examinerNote: 'The new data-booklet equation for the field of a long straight wire.',
     },
     {
-      label: 'b', command: 'Determine', marks: 2, syllabus: ['D.3.5', 'D.3.6'], dependsOn: ['a'],
+      label: 'b', sections: ['parallel'], command: 'Determine', marks: 2, syllabus: ['D.3.5', 'D.3.6'], dependsOn: ['a'],
       question: 'Determine the force on each metre of wire Q.',
       numeric: { result: 'FL', accept: 0.03 },
       markscheme: [
@@ -51,7 +52,7 @@ export default {
       examinerNote: 'The field of P is perpendicular to Q, so sin θ = 1. Both routes give the same answer.',
     },
     {
-      label: 'c', command: 'Outline', marks: 2, syllabus: ['D.3.6', 'A.2.1'],
+      label: 'c', sections: ['parallel'], command: 'Outline', marks: 2, syllabus: ['D.3.6', 'A.2.1'],
       question: 'Outline how the force on P compares with the force on Q, in both magnitude and direction.',
       markscheme: [
         'the forces are equal in magnitude, even though the currents are different (Newton\'s third law) ✓',
@@ -60,7 +61,7 @@ export default {
       examinerNote: 'A common mistake is to think the wire with the larger current feels the larger force.',
     },
     {
-      label: 'd', command: 'Determine', marks: 2, syllabus: ['D.3.Y1'],
+      label: 'd', sections: ['parallel'], command: 'Determine', marks: 2, syllabus: ['D.3.Y1'],
       question: 'At one point on the line between P and Q, the resultant magnetic field due to the two wires is zero. Determine the distance of this point from P.',
       numeric: { result: 'x0', accept: 0.03 },
       markscheme: [

@@ -15,6 +15,7 @@ const mean = (a) => a.reduce((x, y) => x + y, 0) / a.length;
 export default {
   id: 'A3-B01',
   topic: 'A.3',
+  sections: ['mechanical', 'efficiency'],
   difficulty: 1,
   context: 'experimental',
   skills: ['energy-transfers', 'successive-ratios', 'plot-a-point', 'constant-within-uncertainty', 'prediction', 'video-analysis'],
@@ -105,14 +106,14 @@ export default {
     const [pLo, pHi] = d.r.hPred.range;
     return [
       {
-        label: 'a', marks: 1, ao: 'AO1',
+        label: 'a', sections: ['mechanical'], marks: 1, ao: 'AO1',
         question: 'Describe the energy transfers from the moment the ball is released until it reaches its highest point after the first bounce.',
         markscheme: ['Gravitational potential energy → kinetic energy as it falls; at the impact some energy is transferred to internal (thermal) energy '
           + 'and sound (the rest is stored elastically and returned as kinetic energy); kinetic → gravitational potential energy as it rises, '
           + 'so there is less at the top than at the start ✓'],
       },
       {
-        label: 'b', marks: 2, ao: 'AO2',
+        label: 'b', sections: ['mechanical'], marks: 2, ao: 'AO2',
         question: 'Calculate the ratio $\\dfrac{h_1}{h_0}$ for the first bounce and the ratio $\\dfrac{h_6}{h_5}$ for the last bounce.',
         markscheme: [
           // Rounded half up (0.5525 → 0.553), as students would; the binary value 0.55249… would otherwise print 0.552.
@@ -121,12 +122,12 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 1, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'c', sections: ['mechanical'], marks: 1, ao: 'AO2', msFigure: 'graph-ms',
         question: 'Plot the point for bounce 4 on the graph.',
         markscheme: [`Point plotted at $n = ${d.int(OMIT)}$, $h = ${d.text('h', OMIT)}\\ \\text{cm}$, to within half a small square ✓`],
       },
       {
-        label: 'd', marks: 3, ao: 'AO3',
+        label: 'd', sections: ['efficiency', 'mechanical'], marks: 3, ao: 'AO3',
         // The last ratio's uncertainty (0.165) is quoted to 2 s.f.: rounding it to 0.2 would change it by 20 % (Skills page rule).
         asks: { conclusion: ['are consistent', 'is consistent'], valuePm: ['rLast', 'drLast'], sf: 2 },
         question: 'The fraction of its energy that the ball keeps in a bounce is equal to $\\dfrac{h_{n+1}}{h_n}$. '
@@ -141,14 +142,14 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 1, ao: 'AO2',
+        label: 'e', sections: ['mechanical'], marks: 1, ao: 'AO2',
         question: `Predict the peak height after bounce ${d.int(N_PRED)}.`,
         numeric: d.num('hPred'),
         markscheme: [`$h_${N_PRED} \\approx h_6 \\times ${d.sf(d.r.rCommon.value, 2)} = ${d.sf(d.r.hPred.value, 2)}\\ \\text{cm}$, using the common ratio from (d) `
           + `(or the mean ratio, or $h_0$ multiplied by the ratio ${d.int(N_PRED)} times; accept ${d.sf(pLo, 2)} to ${d.sf(pHi, 2)} cm) ✓`],
       },
       {
-        label: 'f', marks: 1, ao: 'AO3',
+        label: 'f', sections: ['mechanical'], marks: 1, ao: 'AO3',
         question: 'Suggest one limitation of measuring the peak heights from this video, and its effect on the readings.',
         markscheme: ['Any one of: the frame nearest the top may not show the ball at its highest point, so the reading is slightly too low / the ball is '
           + 'nearer the camera than the scale (parallax), so its height read against the scale depends on where the camera is / the moving ball '

@@ -6,6 +6,7 @@ export default {
   level: 'SL',
   difficulty: 2,
   topics: ['D.1', 'A.2'],
+  sections: ['kepler', 'orbits'],
   batch: 'batch-2028',
   y2028: true,
   originality: {
@@ -31,7 +32,7 @@ export default {
   stem: '<p>Titan and Rhea are moons of Saturn. Each moves in an approximately circular orbit. Titan has an orbital radius of [[rT]] and an orbital period of [[TT:n]] days. Rhea has an orbital radius of [[rR]].</p>',
   parts: [
     {
-      label: 'a', command: 'Deduce', marks: 3, syllabus: ['D.1.Y1', 'D.1.2', 'A.2.13'],
+      label: 'a', sections: ['kepler', 'orbits'], command: 'Deduce', marks: 3, syllabus: ['D.1.Y1', 'D.1.2', 'A.2.13'],
       question: 'A moon of mass $m$ orbits a planet of mass $M$ in a circle of radius $r$ with period $T$. Deduce that $T^2 = \\dfrac{4\\pi^2}{GM}r^3$.',
       markscheme: [
         'the gravitational force provides the centripetal force: $\\dfrac{GMm}{r^2} = \\dfrac{mv^2}{r}$ ✓',
@@ -41,7 +42,7 @@ export default {
       examinerNote: 'Equivalent routes with ω = 2π/T are fine. The moon\'s mass must cancel visibly.',
     },
     {
-      label: 'b', command: 'Determine', marks: 2, syllabus: ['D.1.Y1', 'D.1.1'], dependsOn: ['a'],
+      label: 'b', sections: ['orbits'], command: 'Determine', marks: 2, syllabus: ['D.1.Y1', 'D.1.1'], dependsOn: ['a'],
       question: 'Determine the mass of Saturn.',
       numeric: { result: 'M', accept: 0.03, mistakes: [{ result: 'wrong_M', feedback: 'Convert the period to seconds before using T² = 4π²r³/(GM).' }] },
       markscheme: [
@@ -51,7 +52,7 @@ export default {
       examinerNote: 'The period must be in seconds.',
     },
     {
-      label: 'c', command: 'Calculate', marks: 2, syllabus: ['D.1.1', 'D.1.Y1'],
+      label: 'c', sections: ['kepler'], command: 'Calculate', marks: 2, syllabus: ['D.1.1', 'D.1.Y1'],
       question: 'Calculate, in days, the orbital period of Rhea.',
       numeric: { result: 'TR', accept: 0.03 },
       markscheme: [
@@ -61,7 +62,7 @@ export default {
       examinerNote: 'Kepler\'s third law as a ratio needs neither G nor M; the result is close to Rhea\'s observed period.',
     },
     {
-      label: 'd', command: 'Explain', marks: 1, syllabus: ['D.1.Y1'],
+      label: 'd', sections: ['orbits'], command: 'Explain', marks: 1, syllabus: ['D.1.Y1'],
       question: 'Explain why the masses of the moons are not needed in (b) and (c).',
       markscheme: ['the moon\'s mass cancels (it appears on both sides of the force equation), so the orbital period does not depend on it ✓'],
       examinerNote: 'Gravitational and centripetal forces are both proportional to the moon\'s mass.',

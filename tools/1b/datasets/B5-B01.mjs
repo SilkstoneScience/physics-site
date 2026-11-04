@@ -23,6 +23,7 @@ const ALT = 'Circuit diagram. A cell, drawn with its internal resistance r insid
 export default {
   id: 'B5-B01',
   topic: 'B.5',
+  sections: ['internal'],
   difficulty: 2,
   context: 'experimental',
   skills: ['anomaly', 'intercept', 'gradient', 'percentage-uncertainty', 'evaluate-method'],
@@ -117,7 +118,7 @@ export default {
     const [rLo, rHi] = d.r.r.range;
     return [
       {
-        label: 'a', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        label: 'a', sections: ['internal'], marks: 2, ao: 'AO3', msFigure: 'graph-ms',
         question: 'Identify the anomalous reading and suggest one possible cause of it.',
         markscheme: [
           `The reading at $I = ${d.text('I', 4)}\\ \\text{A}$, $V = ${d.text('V', 4)}\\ \\text{V}$ ✓`,
@@ -125,7 +126,7 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'b', sections: ['internal'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         reads: [{ figure: 'graph', x: 0, y: d.r.emf.value }],
         question: 'Determine the emf $\\varepsilon$ of the cell.',
         numeric: d.num('emf'),
@@ -135,7 +136,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2, ao: 'AO2',
+        label: 'c', sections: ['internal'], marks: 2, ao: 'AO2',
         question: 'Determine the internal resistance $r$ of the cell.',
         numeric: d.num('r'),
         markscheme: [
@@ -144,13 +145,13 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 1, ao: 'AO2',
+        label: 'd', sections: ['internal'], marks: 1, ao: 'AO2',
         question: `Calculate the percentage uncertainty in the reading of $V$ when $I = ${d.text('I', 7)}\\ \\text{A}$.`,
         numeric: d.num('pctV'),
         markscheme: [`$\\dfrac{0.01}{${d.text('V', 7)}} \\times 100 = ${d.sf(d.r.pctV.value, 2)}\\ \\%$ ✓`],
       },
       {
-        label: 'e', marks: 2, ao: 'AO3',
+        label: 'e', sections: ['internal'], marks: 2, ao: 'AO3',
         question: 'Suggest why the student should disconnect the circuit between readings.',
         markscheme: [
           'A current makes the cell warm up / makes the cell run down ✓',

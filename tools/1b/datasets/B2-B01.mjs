@@ -12,6 +12,7 @@ const tModel = (alpha, S) => LAWS['energy-balance-temperature'].f({ alpha, S, si
 export default {
   id: 'B2-B01',
   topic: 'B.2',
+  sections: ['equilibrium', 'albedo', 'greenhouse'],
   difficulty: 2,
   context: 'unfamiliar',
   source: 'secondary',
@@ -115,7 +116,7 @@ export default {
     const [eLo, eHi] = d.r.dEarth.range;
     return [
       {
-        label: 'a', marks: 2, ao: 'AO2',
+        label: 'a', sections: ['equilibrium', 'albedo'], marks: 2, ao: 'AO2',
         question: 'Calculate $T_\\text{model}$ for Mars.',
         numeric: d.num('TMars'),
         markscheme: [
@@ -124,12 +125,12 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 1, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'b', sections: ['equilibrium'], marks: 1, ao: 'AO2', msFigure: 'graph-ms',
         question: 'Plot the point for Mars on the graph.',
         markscheme: [`Point at $T_\\text{model} = ${d.int(d.r.TMars.value)}\\ \\text{K}$, $T_\\text{obs} = ${d.text('Tobs', MARS)}\\ \\text{K}$ (close to the dashed line), to within half a small square ✓`],
       },
       {
-        label: 'c', marks: 2, ao: { AO2: 1, AO3: 1 },
+        label: 'c', sections: ['greenhouse'], marks: 2, ao: { AO2: 1, AO3: 1 },
         question: 'Identify the body whose temperature is furthest from the model. Explain why.',
         markscheme: [
           `Venus: about ${d.int(d.r.dVenus.value)} K hotter than the model ✓`,
@@ -137,14 +138,14 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 1, ao: 'AO2',
+        label: 'd', sections: ['greenhouse'], marks: 1, ao: 'AO2',
         reads: [{ figure: 'graph', x: d.rows[EARTH].Tmod, y: d.rows[EARTH].Tobs, tol: 10 }],
         question: 'Use the graph to determine how much warmer the surface of the Earth is than the model predicts.',
         markscheme: [`The vertical distance of Earth's point above the dashed line: about ${d.int(d.r.dEarth.value)} K (accept ${d.int(eLo)} to ${d.int(eHi)} K) ✓`],
       },
       {
         // Reduced to 1 mark on the teacher's decision (8 October 2026): students state one reason; the subtler points stay as accepted answers.
-        label: 'e', marks: 1, ao: 'AO3',
+        label: 'e', sections: ['equilibrium'], marks: 1, ao: 'AO3',
         question: `On the Moon, the surface temperature at the equator ranges from ${d.stated('moonLo')} K at night to ${d.stated('moonHi')} K in the day. `
           + 'State one reason, other than the effect of the atmosphere, why the actual temperatures of planets and moons can differ from the model.',
         markscheme: [

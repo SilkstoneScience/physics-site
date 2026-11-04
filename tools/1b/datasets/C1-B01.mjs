@@ -5,6 +5,7 @@
 export default {
   id: 'C1-B01',
   topic: 'C.1',
+  sections: ['systems'],
   difficulty: 2,
   context: 'experimental',
   skills: ['not-linear', 'choose-transformation', 'gradient', 'intercept-meaning', 'model-assumption', 'unit-base-si'],
@@ -93,7 +94,7 @@ export default {
     const [kLo, kHi] = d.r.k.range;
     return [
       {
-        label: 'a', marks: 2, ao: 'AO3',
+        label: 'a', sections: ['systems'], marks: 2, ao: 'AO3',
         question: 'Explain how the graph of $T$ against $m$ shows that $T$ is not proportional to $m$.',
         markscheme: [
           'The points lie on a clear curve: no straight line fits them ✓',
@@ -101,17 +102,17 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 2, ao: 'AO2', asks: { answerText: ['T^2', 'T²'] },
+        label: 'b', sections: ['systems'], marks: 2, ao: 'AO2', asks: { answerText: ['T^2', 'T²'] },
         question: 'For a spring of negligible mass, $T = 2\\pi\\sqrt{\\dfrac{m}{k}}$, where $k$ is the spring constant. State the quantity that should be plotted against $m$ to give a straight line, and the gradient that line is expected to have.',
         markscheme: ['$T^2$ ✓', 'Gradient $= \\dfrac{4\\pi^2}{k}$ ✓'],
       },
       {
-        label: 'c', marks: 1, ao: 'AO2', asks: { unit: 'gradient' },
+        label: 'c', sections: ['systems'], marks: 1, ao: 'AO2', asks: { unit: 'gradient' },
         question: 'State the unit of the gradient of a graph of $T^2$ against $m$, in SI base units.',
         markscheme: [`${d.baseUnitTex('gradient')} ✓`],
       },
       {
-        label: 'd', marks: 2, ao: 'AO2', figure: 'graph', msFigure: 'graph-ms',
+        label: 'd', sections: ['systems'], marks: 2, ao: 'AO2', figure: 'graph', msFigure: 'graph-ms',
         question: 'The student plots a graph of $T^2$ against $m$, shown below. Determine $k$.',
         numeric: d.num('k'),
         markscheme: [
@@ -120,7 +121,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        label: 'e', sections: ['systems'], marks: 2, ao: 'AO3', msFigure: 'graph-ms',
         reads: [{ figure: 'graph', x: 0, y: d.r.intercept.value }],
         question: 'The line of best fit on the graph of $T^2$ against $m$ does not pass through the origin. Explain what this suggests about the assumption that the spring has negligible mass.',
         markscheme: [

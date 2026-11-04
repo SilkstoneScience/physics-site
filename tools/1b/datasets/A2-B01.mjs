@@ -8,6 +8,7 @@ const LAST = 5;
 export default {
   id: 'A2-B01',
   topic: 'A.2',
+  sections: ['contact', 'first'],
   difficulty: 2,
   context: 'experimental',
   skills: ['systematic-offset', 'not-proportional', 'gradient', 'intercept-meaning', 'single-reading-vs-gradient'],
@@ -108,7 +109,7 @@ export default {
     const [mLo, mHi] = d.r.mh.range;
     return [
       {
-        label: 'a', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        label: 'a', sections: ['contact'], marks: 2, ao: 'AO3', msFigure: 'graph-ms',
         reads: [{ figure: 'graph', x: 0, y: d.r.intercept.value }],
         question: 'Hooke\'s law suggests that $x$ is proportional to $F$. Explain how the graph shows that the student\'s values of $x$ are not proportional to $F$.',
         markscheme: [
@@ -117,7 +118,7 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'b', sections: ['contact'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         question: 'Determine the spring constant $k$ of the spring.',
         numeric: d.num('k'),
         markscheme: [
@@ -126,7 +127,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2, ao: 'AO3',
+        label: 'c', sections: ['contact', 'first'], marks: 2, ao: 'AO3',
         question: 'Explain how leaving out the weight of the hanger accounts for the shape of the graph.',
         markscheme: [
           'The hanger\'s weight stretches the spring even when the recorded load is zero, so every extension is larger by the same amount ✓',
@@ -134,7 +135,7 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'd', sections: ['contact', 'first'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         reads: [{ figure: 'graph', x: 0, y: d.r.intercept.value }],
         question: 'Use the graph to determine the mass $m_h$ of the hanger.',
         numeric: d.num('mh'),
@@ -144,7 +145,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 2, ao: 'AO3',
+        label: 'e', sections: ['contact'], marks: 2, ao: 'AO3',
         question: `Another student calculates $k$ as $\\dfrac{F}{x}$ using only the last row of the table. Calculate this value, and explain why it differs from your answer to (b).`,
         markscheme: [
           `$\\dfrac{F}{x} = \\dfrac{${d.text('F', LAST)}}{${d.text('x', LAST)} \\times 10^{-3}} = ${d.sf(d.r.kWrong.value, 3)}\\ \\text{N m}^{-1}$ ✓`,

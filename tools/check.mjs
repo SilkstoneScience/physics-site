@@ -536,6 +536,9 @@ for (const [n, text, want] of markCases) {
 }
 if (checkNumeric({ answer: 10, mistakes: [{ value: 20, feedback: 'x' }] }, '20').mistake !== 0) err('js/numeric.js', 'a listed mistake value should be recognised');
 
+// ---------- 5. Sub-part tags on questions ("sections"; the checks are in tools/check-sections.mjs) ----------
+(await import('./check-sections.mjs')).checkSections({ err, warn });
+
 // ---------- Report ----------
 console.log(`Checked ${pages.length} pages, ${questionCount} questions (${built1b.questions.length} generated Paper 1B datasets, ${built2.questions.length} generated Paper 2 questions), ${parseCases.length + markCases.length} marking tests, ${tests1b.count} Paper 1B tests, ${tests2.count} Paper 2 tests and ${newsCount} science news ${newsCount === 1 ? 'story' : 'stories'}.`);
 if (warnings.length) console.log(`\n${warnings.length} warning(s):\n` + warnings.map((w) => '  ! ' + w).join('\n'));

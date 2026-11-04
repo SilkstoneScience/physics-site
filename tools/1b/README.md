@@ -86,6 +86,9 @@ Copy the closest existing dataset and change it. The parts, in order:
 
 1. **Identity**: `id` (`D3-B01`: topic, B, number; the file is called `D3-B01.mjs`), `topic`, `difficulty`,
    `context` (`experimental`, `observational` or `unfamiliar`), `skills`, and a `seed`.
+   Also `sections`: the sections of the topic page the question uses, main one first (e.g. `['projectiles']`),
+   and `sections` on every part. These sub-part tags are checked by `tools/check-sections.mjs` and are **not** part
+   of the review fingerprint, so adding or changing them never affects a dataset's review.
    The seed fixes the "random" scatter: the same seed always gives the same data. Changing it gives a new
    version of the experiment. **Never change the seed or the id of a published dataset**: students' saved
    answers would no longer match the data.

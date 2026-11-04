@@ -16,6 +16,7 @@ const meanOf = (a) => a.reduce((x, y) => x + y, 0) / a.length;
 export default {
   id: 'A1-B02',
   topic: 'A.1',
+  sections: ['velocity'],
   difficulty: 1,
   context: 'experimental',
   skills: ['outlier', 'repeated-readings', 'mean-and-half-range', 'speed', 'effect-of-an-outlier'],
@@ -97,7 +98,7 @@ export default {
     const pctUp = ((d.r.vAll.value - d.r.v.value) / d.r.v.value) * 100;
     return [
       {
-        label: 'a', marks: 2, ao: 'AO3',
+        label: 'a', sections: ['velocity'], marks: 2, ao: 'AO3',
         question: 'Identify the trial that should not be used in the analysis. Justify your answer using the data.',
         markscheme: [
           `Trial ${d.int(ROW + 1)} ($t = ${d.text('t', ROW)}\\ \\text{s}$) ✓`,
@@ -106,25 +107,25 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 1, ao: 'AO3',
+        label: 'b', sections: ['velocity'], marks: 1, ao: 'AO3',
         question: 'Suggest one cause of this reading that is consistent with its value.',
         markscheme: ['The time is too short, so the trolley was moving faster than in the other runs: for example it was released from '
           + 'above the mark, or it was pushed as it was released ✓'],
       },
       {
-        label: 'c', marks: 1, ao: 'AO2',
+        label: 'c', sections: ['velocity'], marks: 1, ao: 'AO2',
         question: 'Calculate the mean time $\\bar{t}$ of the remaining trials.',
         numeric: d.num('tMean'),
         markscheme: [`$\\bar{t} = ${d.sf(d.r.tMean.value, 3)}\\ \\text{s}$ ✓`],
       },
       {
-        label: 'd', marks: 1, ao: 'AO2',
+        label: 'd', sections: ['velocity'], marks: 1, ao: 'AO2',
         question: 'Determine the absolute uncertainty in $\\bar{t}$, using the spread of the remaining readings.',
         numeric: d.num('dtHalf'),
         markscheme: [`Half the range of the remaining readings: $\\pm ${d.dp(d.r.dtHalf.value, 4)}\\ \\text{s}$ (accept ${d.dp(d.r.dtHalf.value, 3)} s) ✓`],
       },
       {
-        label: 'e', marks: 2, ao: 'AO2',
+        label: 'e', sections: ['velocity'], marks: 2, ao: 'AO2',
         question: 'Determine the speed $v$ of the trolley as it passes through the light gate.',
         numeric: d.num('v', { mistakes: [{ value: L_CM / d.r.tMean.value, feedback: 'Convert the card length to metres before dividing.' }] }),
         markscheme: [
@@ -133,7 +134,7 @@ export default {
         ],
       },
       {
-        label: 'f', marks: 1, ao: 'AO3',
+        label: 'f', sections: ['velocity'], marks: 1, ao: 'AO3',
         question: `State and explain the effect on the value of $v$ if trial ${d.int(ROW + 1)} had been included.`,
         markscheme: [`The mean time would be smaller, so $v$ would be larger (by about ${d.sf(pctUp, 1)} %) and would not represent a release from the mark ✓`],
       },

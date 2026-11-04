@@ -372,6 +372,10 @@ export function buildQuestion(def) {
     paper: '1B',
     difficulty: def.difficulty,
     level: 'SL_HL',
+    // Sub-part tags (sections of the topic page; tools/check-sections.mjs). Each part's own "sections" is passed
+    // through with the part. Like the AO tags, they are left out of the review fingerprint (fingerprint.mjs lists
+    // the fields it covers), so adding or changing tags never affects a dataset's review.
+    ...(def.sections ? { sections: def.sections } : {}),
     skills: def.skills,
     context: def.context,
     stem: def.intro(d),

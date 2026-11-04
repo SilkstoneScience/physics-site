@@ -21,6 +21,7 @@ const total = (d) => {
 export default {
   id: 'B1-B01',
   topic: 'B.1',
+  sections: ['shc'],
   difficulty: 1,
   context: 'experimental',
   skills: ['temperature-change', 'uncertainty-of-a-difference', 'propagation', 'largest-uncertainty', 'value-and-uncertainty', 'improvement'],
@@ -116,20 +117,20 @@ export default {
     const th = (i) => d.text('theta', i);
     return [
       {
-        label: 'a', marks: 1, ao: 'AO2',
+        label: 'a', sections: ['shc'], marks: 1, ao: 'AO2',
         question: 'Determine the temperature change $\\Delta T$ of the block during the 600 s of heating.',
         numeric: d.num('dT'),
         markscheme: [`$\\Delta T = ${th(LAST)} - ${th(0)} = ${d.dp(d.r.dT.value, 1)}\\ {}^{\\circ}\\text{C}$ ✓`],
       },
       {
-        label: 'b', marks: 1, ao: 'AO2',
+        label: 'b', sections: ['shc'], marks: 1, ao: 'AO2',
         question: 'State the absolute uncertainty in $\\Delta T$.',
         numeric: d.num('dTunc'),
         markscheme: ['Each temperature reading is uncertain by $\\pm 0.5\\ {}^{\\circ}\\text{C}$; for a difference the absolute uncertainties add, '
           + `so $\\Delta T$ is uncertain by $\\pm ${d.dp(d.r.dTunc.value, 1)}\\ {}^{\\circ}\\text{C}$ ✓`],
       },
       {
-        label: 'c', marks: 2, ao: 'AO2',
+        label: 'c', sections: ['shc'], marks: 2, ao: 'AO2',
         question: 'Calculate the specific heat capacity of aluminium from these data.',
         numeric: d.num('c'),
         markscheme: [
@@ -138,7 +139,7 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 2, ao: 'AO3',
+        label: 'd', sections: ['shc'], marks: 2, ao: 'AO3',
         question: 'Identify, by comparing percentage uncertainties, the measured quantity that contributes most to the uncertainty in $c$.',
         markscheme: [
           `Percentage uncertainties: $V$: ${d.sf(pct.V, 2)} %; $I$: ${d.sf(pct.I, 2)} %; $t$: ${d.sf(pct.t, 1)} %; $m$: ${d.sf(pct.m, 1)} %; `
@@ -147,7 +148,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 2, ao: 'AO2', asks: { valuePm: ['c', 'dc'] },
+        label: 'e', sections: ['shc'], marks: 2, ao: 'AO2', asks: { valuePm: ['c', 'dc'] },
         question: 'Determine the absolute uncertainty in $c$. Hence state $c$ with its uncertainty, to an appropriate number of significant figures.',
         markscheme: [
           `Adds the percentage uncertainties: ${d.sf(d.r.pctTotal.value, 2)} %, so $\\Delta c = ${d.sf(d.r.dc.value, 2)}\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ (allow ECF) ✓`,
@@ -155,7 +156,7 @@ export default {
         ],
       },
       {
-        label: 'f', marks: 1, ao: 'AO3',
+        label: 'f', sections: ['shc'], marks: 1, ao: 'AO3',
         question: 'Suggest one change to the method that would reduce the percentage uncertainty in $\\Delta T$.',
         markscheme: ['Any one of: heat for longer (or use a more powerful heater) so that $\\Delta T$ is larger / use a thermometer with a smaller '
           + 'division (for example a digital thermometer reading to $0.1\\ {}^{\\circ}\\text{C}$) ✓'],

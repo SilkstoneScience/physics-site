@@ -6,6 +6,7 @@ export default {
   level: 'HL',
   difficulty: 3,
   topics: ['B.4'],
+  sections: ['engines', 'adiabatic', 'first', 'work', 'entropy'],
   batch: 'batch-1',
   batchRule: 'inspect-all',
   originality: {
@@ -41,7 +42,7 @@ export default {
   diagram: { file: 'questions/diagrams/p2-b4-cycle.svg', alt: 'Graph of pressure in units of 10 to the power 5 pascal against volume in units of 10 to the power minus 3 cubic metres. A horizontal line from A at volume 1.0 to B at volume 2.0, both at pressure 2.0. A vertical line down from B to C at volume 2.0 and pressure about 0.63. A curve rising steeply from C back to A.' },
   parts: [
     {
-      label: 'a', command: 'Show that', marks: 2, syllabus: ['B.4.H8'],
+      label: 'a', sections: ['adiabatic'], command: 'Show that', marks: 2, syllabus: ['B.4.H8'],
       question: 'Show that the pressure at C is about [[pC:2u]].',
       showThat: { result: 'pC', sf: 2 },
       markscheme: [
@@ -51,7 +52,7 @@ export default {
       examinerNote: 'The adiabatic equation from the data booklet, applied between C and A (V_C = V_B).',
     },
     {
-      label: 'b', command: 'Determine', marks: 3, syllabus: ['B.4.H1', 'B.4.H2', 'B.4.H3'],
+      label: 'b', sections: ['first', 'work'], command: 'Determine', marks: 3, syllabus: ['B.4.H1', 'B.4.H2', 'B.4.H3'],
       question: 'Determine the thermal energy transferred to the gas during A → B.',
       numeric: { result: 'Q_AB', accept: 0.03, mistakes: [{ result: 'wrong_Q_AB', feedback: 'That is only the work done by the gas. The internal energy of the gas also increases: Q = ΔU + W.' }] },
       markscheme: [
@@ -62,7 +63,7 @@ export default {
       examinerNote: 'For a monatomic ideal gas ΔU = 3/2 Δ(pV); at constant pressure that is 3/2 pΔV. No amount of gas is needed.',
     },
     {
-      label: 'c', command: 'Determine', marks: 2, syllabus: ['B.4.H1', 'B.4.H3', 'B.4.H7'], dependsOn: ['a'],
+      label: 'c', sections: ['adiabatic', 'first'], command: 'Determine', marks: 2, syllabus: ['B.4.H1', 'B.4.H3', 'B.4.H7'], dependsOn: ['a'],
       question: 'Determine the work done on the gas during C → A.',
       numeric: { result: 'W_onCA', accept: 0.04 },
       markscheme: [
@@ -73,7 +74,7 @@ export default {
       examinerNote: 'Students cannot integrate under the adiabat, but the first law with Q = 0 gives the work. Using the rounded p_C from (a) gives about the same answer.',
     },
     {
-      label: 'd', command: 'Calculate', marks: 2, syllabus: ['B.4.H9'], dependsOn: ['b', 'c'],
+      label: 'd', sections: ['engines'], command: 'Calculate', marks: 2, syllabus: ['B.4.H9'], dependsOn: ['b', 'c'],
       question: 'Calculate the efficiency of this cycle.',
       numeric: { result: 'eff', accept: 0.06, mistakes: [{ result: 'wrong_eff', feedback: 'Efficiency uses the NET work done by the gas over the whole cycle: subtract the work done on the gas during C → A.' }] },
       markscheme: [
@@ -84,7 +85,7 @@ export default {
       examinerNote: 'Thermal energy enters only during A → B (B → C rejects energy, C → A has Q = 0).',
     },
     {
-      label: 'e', command: 'Explain', marks: 2, syllabus: ['B.4.H4', 'B.4.H7'],
+      label: 'e', sections: ['adiabatic', 'entropy'], command: 'Explain', marks: 2, syllabus: ['B.4.H4', 'B.4.H7'],
       question: 'Explain why the entropy of the gas does not change during C → A.',
       markscheme: [
         'No thermal energy is transferred to or from the gas during an adiabatic change ($Q = 0$) ✓',

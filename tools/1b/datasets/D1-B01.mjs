@@ -11,6 +11,7 @@ const LG_A_POINT = 6; // a point on the line at lg(a/km) = 6.000 (a = 1.0 × 10�
 export default {
   id: 'D1-B01',
   topic: 'D.1',
+  sections: ['kepler', 'orbits'],
   difficulty: 3,
   context: 'observational',
   source: 'secondary',
@@ -138,7 +139,7 @@ export default {
 
   parts: (d) => [
     {
-      label: 'a', marks: 2, ao: 'AO2',
+      label: 'a', sections: ['kepler'], marks: 2, ao: 'AO2',
       question: 'Calculate the two missing values for Europa.',
       markscheme: [
         `$\\lg(a/\\text{km}) = \\lg(${d.text('a', HIDE)}) = ${d.dp(d.r.lgaHidden.value, 3)}$ ✓`,
@@ -146,7 +147,7 @@ export default {
       ],
     },
     {
-      label: 'b', marks: 2, ao: 'AO3',
+      label: 'b', sections: ['kepler'], marks: 2, ao: 'AO3',
       question: 'Suggest two reasons why a graph of $\\lg T$ against $\\lg a$ is used for these data, rather than a graph of $T$ against $a$.',
       markscheme: [
         `The values cover a very wide range ($a$ by a factor of about ${d.sf(d.r.aRatio.value, 2)}, $T$ by about ${d.sf(d.r.tRatio.value, 2)}): on ordinary axes most points would be crowded near the origin ✓`,
@@ -154,13 +155,13 @@ export default {
       ],
     },
     {
-      label: 'c', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+      label: 'c', sections: ['kepler'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
       question: 'Determine the gradient of the graph.',
       numeric: d.num('gradient'),
       markscheme: ['Line of best fit; gradient from two well-separated points on the line ✓', `Gradient $= ${d.sf(d.r.gradient.value, 3)}$ (accept ${d.sf(d.r.gradient.range[0], 3)} to ${d.sf(d.r.gradient.range[1], 3)}) ✓`],
     },
     {
-      label: 'd', marks: 2, ao: 'AO3',
+      label: 'd', sections: ['kepler'], marks: 2, ao: 'AO3',
       asks: { conclusion: ['support the law', 'supports the law', 'support Kepler'] },
       question: 'Deduce whether the data support Kepler\'s third law.',
       markscheme: [
@@ -169,7 +170,7 @@ export default {
       ],
     },
     {
-      label: 'e', marks: 3, ao: 'AO2', msFigure: 'graph-ms',
+      label: 'e', sections: ['kepler', 'orbits'], marks: 3, ao: 'AO2', msFigure: 'graph-ms',
       question: `For a circular orbit, $T^2 = \\dfrac{4\\pi^2a^3}{GM}$, where $M$ is the mass of Jupiter and $G = ${d.stated('G')} \\times 10^{-11}\\ \\text{N m}^2\\,\\text{kg}^{-2}$. `
         + 'Use a point on the line of best fit to determine $M$.',
       numeric: d.num('M'),
@@ -180,7 +181,7 @@ export default {
       ],
     },
     {
-      label: 'f', marks: 1, ao: 'AO3',
+      label: 'f', sections: ['kepler'], marks: 1, ao: 'AO3',
       question: 'The data come from a database, so the graph has no error bars. Suggest one reason why the gradient could still differ slightly from the value predicted by Kepler\'s third law.',
       markscheme: [`Any one of: the orbits are not perfect circles (Himalia's eccentricity is about ${d.stated('eHim')}) / the moons pull on each other / Jupiter is not a perfect sphere, so it does not act exactly as a point mass ✓`],
     },

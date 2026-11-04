@@ -25,6 +25,7 @@ const cFrom = (d, i) => {
 export default {
   id: 'B1-B02',
   topic: 'B.1',
+  sections: ['shc', 'transfer'],
   difficulty: 3,
   context: 'experimental',
   skills: ['evidence-of-heat-loss', 'systematic-error-direction', 'reducing-a-systematic-error', 'precision-vs-accuracy', 'accepted-value'],
@@ -127,7 +128,7 @@ export default {
     const f = cFrom(d, FIRST);
     return [
       {
-        label: 'a', marks: 2, ao: 'AO3',
+        label: 'a', sections: ['shc'], marks: 2, ao: 'AO3',
         question: 'Use the data to show that the rate at which the temperature of the water rises decreases during the heating.',
         markscheme: [
           `In the first 150 s the temperature rises by ${d.dp(d.r.rise1.value, 1)} °C ✓`,
@@ -135,7 +136,7 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 2, ao: 'AO2',
+        label: 'b', sections: ['shc'], marks: 2, ao: 'AO2',
         question: 'Calculate $c$ using the readings at $t = 0$ and $t = 900\\ \\text{s}$.',
         numeric: d.num('cWhole'),
         markscheme: [
@@ -144,7 +145,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2, ao: 'AO3',
+        label: 'c', sections: ['shc', 'transfer'], marks: 2, ao: 'AO3',
         question: `The accepted value of $c$ for water is $${d.stated('accepted')}\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$. Explain, with reference to your answer to (a), why the value in (b) is larger than the accepted value.`,
         markscheme: [
           'The falling rate of rise shows that energy is lost to the surroundings, at a greater rate as the water gets hotter ✓',
@@ -152,18 +153,18 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 1, ao: 'AO2',
+        label: 'd', sections: ['shc'], marks: 1, ao: 'AO2',
         question: 'Calculate $c$ using only the first 150 s of heating.',
         numeric: d.num('cFirst'),
         markscheme: [`$c = \\dfrac{VI \\times 150}{m\\,(${d.text('theta', FIRST)} - ${d.text('theta', 0)})} = ${d.sf(f.value, 3)}\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ ✓`],
       },
       {
-        label: 'e', marks: 1, ao: 'AO3',
+        label: 'e', sections: ['shc', 'transfer'], marks: 1, ao: 'AO3',
         question: 'Explain why using only the first 150 s reduces the effect of the energy losses.',
         markscheme: ['At the start the water is close to room temperature, so the rate of energy loss is small and almost all of $VIt$ goes into the water ✓'],
       },
       {
-        label: 'f', marks: 2, ao: 'AO3',
+        label: 'f', sections: ['shc'], marks: 2, ao: 'AO3',
         question: `The uncertainty in the value from (b) is about $\\pm ${d.sf(w.unc, 2)}\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$ and in the value from (d) about `
           + `$\\pm ${d.sf(f.unc, 2)}\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}$. Discuss which value is the better estimate of $c$.`,
         markscheme: [

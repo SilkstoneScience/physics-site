@@ -7,6 +7,7 @@ export default {
   level: 'SL',
   difficulty: 2,
   topics: ['B.3', 'B.1'],
+  sections: ['molecular', 'kinetic', 'energy'],
   batch: 'batch-2028',
   y2028: true,
   originality: {
@@ -27,13 +28,13 @@ export default {
   stem: '<p>A sealed container at rest holds helium gas. Each helium atom has a mass of [[m]]. The atoms move randomly, with a root-mean-square (rms) speed of [[vr]]. Helium behaves as an ideal monatomic gas.</p>',
   parts: [
     {
-      label: 'a', command: 'State', marks: 1, syllabus: ['B.3.Y1'],
+      label: 'a', sections: ['kinetic'], command: 'State', marks: 1, syllabus: ['B.3.Y1'],
       question: 'State the average velocity of the helium atoms.',
       markscheme: ['zero: the atoms move equally in all directions, so their velocities (vectors) cancel ✓'],
       examinerNote: 'The 2028 guidance contrasts rms velocity with average VELOCITY. A speed (e.g. "about 1.3 km/s") earns no mark.',
     },
     {
-      label: 'b', command: 'Explain', marks: 2, syllabus: ['B.3.Y1', 'B.3.5'],
+      label: 'b', sections: ['molecular'], command: 'Explain', marks: 2, syllabus: ['B.3.Y1', 'B.3.5'],
       question: 'Explain why the rms speed, rather than the average velocity, is used in the equation for the pressure of an ideal gas.',
       markscheme: [
         'the average velocity is zero, so it cannot describe how hard or how often the atoms hit the walls ✓',
@@ -42,7 +43,7 @@ export default {
       examinerNote: 'Pressure ∝ (momentum change per collision) × (collision rate), both ∝ v, so ∝ the mean of v², which is not zero.',
     },
     {
-      label: 'c', command: 'Determine', marks: 2, syllabus: ['B.1.4', 'B.3.5'],
+      label: 'c', sections: ['energy'], command: 'Determine', marks: 2, syllabus: ['B.1.4', 'B.3.5'],
       question: 'Determine the temperature of the helium.',
       numeric: { result: 'T', accept: 0.03, mistakes: [{ result: 'wrong_T', feedback: 'The average kinetic energy of an atom of an ideal monatomic gas is (3/2)kBT, not kBT.' }] },
       markscheme: [
@@ -52,7 +53,7 @@ export default {
       examinerNote: 'The average kinetic energy uses the mean square speed, so the rms speed goes into ½mv². The rms speed must be in m s⁻¹.',
     },
     {
-      label: 'd', command: 'Calculate', marks: 2, syllabus: ['B.3.5'],
+      label: 'd', sections: ['molecular'], command: 'Calculate', marks: 2, syllabus: ['B.3.5'],
       question: 'The density of the helium is [[rho]]. Calculate the pressure of the helium.',
       numeric: { result: 'P', accept: 0.04, mistakes: [{ result: 'wrong_P', feedback: 'P = (1/3)ρv²rms: remember the factor of one third.' }] },
       markscheme: [

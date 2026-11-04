@@ -22,6 +22,7 @@ const flight = (d) => {
 export default {
   id: 'A2-B03',
   topic: 'A.2',
+  sections: ['momentum', 'first', 'field'],
   difficulty: 2,
   context: 'experimental',
   skills: ['equilibrium', 'value-from-a-graph', 'area-under-a-graph', 'impulse', 'momentum', 'compare-two-methods', 'systematic-difference'],
@@ -123,18 +124,18 @@ export default {
     const [vLo, vHi] = d.r.v.range;
     return [
       {
-        label: 'a', marks: 1, ao: 'AO2',
+        label: 'a', sections: ['first'], marks: 1, ao: 'AO2',
         question: `Explain why the force recorded in the first ${d.dp(T0, 2)} s is equal to the student\'s weight.`,
         markscheme: ['The student is at rest, so the resultant force is zero: the upward force from the plate equals the weight (and the student pushes down on the plate with an equal force) ✓'],
       },
       {
-        label: 'b', marks: 1, ao: 'AO2',
+        label: 'b', sections: ['first', 'field'], marks: 1, ao: 'AO2',
         reads: [{ figure: 'graph', x: 0.05, y: d.r.W.value }],
         question: 'Determine the mass of the student.',
         markscheme: [`$F \\approx ${d.sf(d.r.W.value, 3)}\\ \\text{N}$, so $m = \\dfrac{F}{g} = ${d.sf(d.r.m.value, 2)}\\ \\text{kg}$ (accept ${d.sf(d.r.m.range[0], 2)} to ${d.sf(d.r.m.range[1], 2)} kg) ✓`],
       },
       {
-        label: 'c', marks: 3, ao: { AO2: 2, AO3: 1 }, msFigure: 'graph-ms',
+        label: 'c', sections: ['momentum'], marks: 3, ao: { AO2: 2, AO3: 1 }, msFigure: 'graph-ms',
         reads: [{ figure: 'graph', x: T_OFF }],
         question: `The push starts at $t = ${d.dp(T0, 2)}\\ \\text{s}$. Estimate the impulse of the resultant force on the student from then until the student leaves the plate.`,
         markscheme: [
@@ -144,7 +145,7 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 2, ao: 'AO2',
+        label: 'd', sections: ['momentum'], marks: 2, ao: 'AO2',
         question: 'Determine the speed of the student at take-off.',
         numeric: d.num('v'),
         markscheme: [
@@ -153,7 +154,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 2, ao: { AO2: 1, AO3: 1 },
+        label: 'e', sections: ['momentum'], marks: 2, ao: { AO2: 1, AO3: 1 },
         reads: [{ figure: 'graph', x: d.r.tOff.value }, { figure: 'graph', x: d.r.tLand.value }],
         question: 'The take-off speed can also be found from the time the student spends in the air, using $v = \\dfrac{gt}{2}$. Determine this speed and compare it with your answer to (d).',
         markscheme: [
@@ -162,7 +163,7 @@ export default {
         ],
       },
       {
-        label: 'f', marks: 1, ao: 'AO3',
+        label: 'f', sections: ['momentum'], marks: 1, ao: 'AO3',
         question: 'Suggest one reason why the speed from the time in the air is larger.',
         markscheme: ['The student lands with bent knees, so the centre of mass is lower at landing than at take-off: the student is in the air for longer than the rise and fall to the same height takes ✓'],
       },

@@ -18,6 +18,7 @@ const ALT = 'Side view. A spring launcher is clamped horizontally to a tall stan
 export default {
   id: 'A1-B01',
   topic: 'A.1',
+  sections: ['projectiles', 'suvat'],
   difficulty: 2,
   context: 'experimental',
   skills: ['repeated-readings', 'mean-and-uncertainty', 'linearisation', 'gradient', 'evaluate-claim'],
@@ -145,24 +146,24 @@ export default {
     const rd = d.rows[ROW].R__trials;
     return [
       {
-        label: 'a', marks: 1, ao: 'AO2',
+        label: 'a', sections: ['projectiles'], marks: 1, ao: 'AO2',
         question: 'Identify one variable that the student must control so that the launch speed is the same for every shot.',
         markscheme: ['Any one of: how far the spring is compressed / the same ball / the launcher kept horizontal ✓'],
       },
       {
-        label: 'b', marks: 1, ao: 'AO2',
+        label: 'b', sections: ['projectiles'], marks: 1, ao: 'AO2',
         question: 'Calculate the mean range for $h = 0.700\\ \\text{m}$.',
         numeric: d.num('Rmean'),
         markscheme: [`Mean $= \\dfrac{${rd.map((v) => v.toFixed(3)).join(' + ')}}{5} = ${d.sf(d.r.Rmean.value, 3)}\\ \\text{m}$ ✓`],
       },
       {
-        label: 'c', marks: 1, ao: 'AO2',
+        label: 'c', sections: ['projectiles'], marks: 1, ao: 'AO2',
         question: 'Determine the absolute uncertainty in this mean range.',
         numeric: d.num('dR'),
         markscheme: [`Half the range of the readings: $\\dfrac{${Math.max(...rd).toFixed(3)} - ${Math.min(...rd).toFixed(3)}}{2} = ${d.dp(d.r.dR.value, 4)}\\ \\text{m}$ (accept ${d.sf(d.r.dR.value, 2)} m or ${d.sf(d.r.dR.value, 3)} m) ✓`],
       },
       {
-        label: 'd', marks: 2, ao: { AO1: 1, AO2: 1 },
+        label: 'd', sections: ['projectiles', 'suvat'], marks: 2, ao: { AO1: 1, AO2: 1 },
         question: 'Show that, if air resistance is negligible, $R^2 = \\dfrac{2u^2}{g}h$, where $u$ is the launch speed.',
         markscheme: [
           'Vertical motion: $h = \\tfrac12 g t^2$, so $t = \\sqrt{\\dfrac{2h}{g}}$ ✓',
@@ -170,7 +171,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'e', sections: ['projectiles'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         question: 'Determine the gradient of the graph of $R^2$ against $h$.',
         numeric: d.num('gradient'),
         markscheme: [
@@ -179,7 +180,7 @@ export default {
         ],
       },
       {
-        label: 'f', marks: 2, ao: 'AO2',
+        label: 'f', sections: ['projectiles'], marks: 2, ao: 'AO2',
         question: 'Determine the launch speed $u$.',
         numeric: d.num('u', {
           mistakes: [
@@ -193,7 +194,7 @@ export default {
         ],
       },
       {
-        label: 'g', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        label: 'g', sections: ['projectiles'], marks: 2, ao: 'AO3', msFigure: 'graph-ms',
         asks: { conclusion: ['do not support', 'not supported', 'is above this range'] },
         question: `The manufacturer states that the launch speed is $${d.stated('claimedU')}\\ \\text{m s}^{-1}$. Discuss whether the data support this statement.`,
         markscheme: [

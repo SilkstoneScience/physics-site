@@ -11,6 +11,7 @@ const DIAGRAM_ALT = 'Front view of the apparatus. A U-shaped magnet stands on a 
 export default {
   id: 'D3-B01',
   topic: 'D.3',
+  sections: ['wire'],
   difficulty: 2,
   context: 'experimental',
   skills: ['force-direction', 'gradient', 'proportionality', 'uncertainty-propagation'],
@@ -130,7 +131,7 @@ export default {
     const pct = d.r.gradientPct.value;
     return [
       {
-        label: 'a', marks: 2, ao: { AO1: 1, AO2: 1 }, msFigure: 'diagram-ms',
+        label: 'a', sections: ['wire'], marks: 2, ao: { AO1: 1, AO2: 1 }, msFigure: 'diagram-ms',
         question: 'State the direction of the magnetic force on the wire. Explain why the balance reading increases when there is a current in the wire.',
         markscheme: [
           'The force on the wire is upwards (from a hand rule, or the direction of $I\\vec{L} \\times \\vec{B}$) ✓',
@@ -138,7 +139,7 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'b', sections: ['wire'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         question: 'Determine the gradient of the graph of $\\Delta m$ against $I$.',
         numeric: d.num('gradient'),
         markscheme: [
@@ -147,7 +148,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2, ao: 'AO2',
+        label: 'c', sections: ['wire'], marks: 2, ao: 'AO2',
         question: 'Determine the magnetic flux density $B$ between the poles.',
         numeric: d.num('B'),
         markscheme: [
@@ -156,7 +157,7 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        label: 'd', sections: ['wire'], marks: 2, ao: 'AO3', msFigure: 'graph-ms',
         asks: { conclusion: ['support $F \propto I$', 'can pass through the origin'] },
         question: 'Discuss whether the data support the hypothesis that the force on the wire is proportional to the current.',
         markscheme: [
@@ -165,7 +166,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 2, ao: 'AO2',
+        label: 'e', sections: ['wire'], marks: 2, ao: 'AO2',
         question: `The percentage uncertainty in the gradient is ${pct} %. Determine the absolute uncertainty in your value of $B$.`,
         numeric: d.num('dB', {
           mistakes: [{ value: (d.r.B.value * pct) / 100, feedback: `That uses only the ${pct} % from the gradient. The length $L$ is uncertain too: add the percentage uncertainties.` }],

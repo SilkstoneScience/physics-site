@@ -6,6 +6,7 @@ export default {
   level: 'SL',
   difficulty: 2,
   topics: ['C.4', 'C.2'],
+  sections: ['pipes'],
   batch: 'batch-2028',
   y2028: true,
   originality: {
@@ -32,21 +33,21 @@ export default {
   stem: '<p>An organ pipe of length [[L]] has one closed end; its other end is open. Sound travels through the air inside it at [[v]].</p>',
   parts: [
     {
-      label: 'a', command: 'Show that', marks: 1, syllabus: ['C.4.Y1', 'C.4.3'],
+      label: 'a', sections: ['pipes'], command: 'Show that', marks: 1, syllabus: ['C.4.Y1', 'C.4.3'],
       question: 'Show that the wavelength of the first harmonic is about [[lam1:2u]].',
       showThat: { result: 'lam1', sf: 2 },
       markscheme: ['a quarter of a wavelength fits the pipe (node at the closed end, antinode at the open end), so $\\lambda = 4L = 4 \\times [[L:n]] = [[lam1:2u]]$ ✓'],
       examinerNote: 'The first harmonic has a displacement node at the closed end and an antinode at the open end: L = λ/4.',
     },
     {
-      label: 'b', command: 'Calculate', marks: 1, syllabus: ['C.2.2', 'C.4.3'],
+      label: 'b', sections: ['pipes'], command: 'Calculate', marks: 1, syllabus: ['C.2.2', 'C.4.3'],
       question: 'Calculate the frequency of the first harmonic.',
       numeric: { result: 'f1', accept: 0.03, mistakes: [{ result: 'wrong_f1', feedback: 'That is the first harmonic of a pipe open at both ends (λ = 2L). For a pipe closed at one end, λ = 4L.' }] },
       markscheme: ['$f = \\dfrac{v}{\\lambda} = \\dfrac{[[v:n]]}{[[lam1:2]]} = [[f1:3u]]$ ✓'],
       examinerNote: 'The wave equation with the wavelength from (a).',
     },
     {
-      label: 'c', command: 'Determine', marks: 3, syllabus: ['C.4.Y1', 'C.4.3'], dependsOn: ['b'], noNumeric: true,
+      label: 'c', sections: ['pipes'], command: 'Determine', marks: 3, syllabus: ['C.4.Y1', 'C.4.3'], dependsOn: ['b'], noNumeric: true,
       question: 'Determine the frequencies of the next two standing waves that can form in this pipe, and state the harmonic number of each.',
       markscheme: [
         'next standing waves have $L = \\tfrac{3\\lambda}{4}$ and $L = \\tfrac{5\\lambda}{4}$ ✓',
@@ -57,7 +58,7 @@ export default {
       examinerNote: 'Two values, so no typed answer. The harmonic number is set by the λ–L relationship, so the second standing wave in a closed pipe is the THIRD harmonic (2028 guidance).',
     },
     {
-      label: 'd', command: 'Explain', marks: 2, syllabus: ['C.4.Y1', 'C.4.2'],
+      label: 'd', sections: ['pipes'], command: 'Explain', marks: 2, syllabus: ['C.4.Y1', 'C.4.2'],
       question: 'Explain why a standing wave of twice the frequency of the first harmonic cannot form in this pipe.',
       markscheme: [
         'there must always be a node at the closed end and an antinode at the open end ✓',
@@ -66,7 +67,7 @@ export default {
       examinerNote: 'Only odd harmonics fit the boundary conditions of a pipe closed at one end.',
     },
     {
-      label: 'e', command: 'Calculate', marks: 1, syllabus: ['C.4.Y1', 'C.4.3'],
+      label: 'e', sections: ['pipes'], command: 'Calculate', marks: 1, syllabus: ['C.4.Y1', 'C.4.3'],
       question: 'The closed end is opened, so that the pipe is open at both ends. Calculate the new frequency of the first harmonic.',
       numeric: { result: 'fOpen', accept: 0.03 },
       markscheme: ['antinodes at both ends, so $\\lambda = 2L$ and $f = \\dfrac{[[v:n]]}{2 \\times [[L:n]]} = [[fOpen:3u]]$ ✓'],

@@ -35,6 +35,7 @@ const fitOf = (d) => { if (!cache.has(d.rows)) cache.set(d.rows, sineFit(d.rows)
 export default {
   id: 'C5-B01',
   topic: 'C.5',
+  sections: ['light', 'space'],
   difficulty: 2,
   context: 'observational',
   source: 'observational',
@@ -144,7 +145,7 @@ export default {
     const [lLo, lHi] = d.r.lamPred.range;
     return [
       {
-        label: 'a', marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        label: 'a', sections: ['light'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
         reads: peaks.map((x) => ({ figure: 'graph', x })),
         question: 'Determine the orbital period of the star.',
         markscheme: [
@@ -153,7 +154,7 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 3, ao: 'AO2',
+        label: 'b', sections: ['light', 'space'], marks: 3, ao: 'AO2',
         reads: [{ figure: 'graph', y: f.C + f.amp }, { figure: 'graph', y: f.C - f.amp }],
         question: 'Determine the orbital speed of the star, in $\\text{km s}^{-1}$.',
         numeric: d.num('K'),
@@ -164,7 +165,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2, ao: { AO2: 1, AO3: 1 },
+        label: 'c', sections: ['light'], marks: 2, ao: { AO2: 1, AO3: 1 },
         question: 'Determine the percentage uncertainty in your answer to (b). The laboratory wavelength and $c$ are known precisely.',
         markscheme: [
           `The uncertainty in $\\Delta\\lambda$ is that of one wavelength reading, $${d.stated('dlam')}\\ \\text{nm}$ ✓`,
@@ -172,12 +173,12 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 1, ao: 'AO2',
+        label: 'd', sections: ['light'], marks: 1, ao: 'AO2',
         question: `Predict the wavelength that would be observed on day ${d.stated('tPred')}.`,
         markscheme: [`About half a period after the maximum near day ${d.dp(peaks[peaks.length - 1], 0)}, so near a minimum: $\\lambda \\approx ${d.dp(d.r.lamPred.value, 2)}\\ \\text{nm}$ (accept ${d.dp(lLo, 3)} to ${d.dp(lHi, 3)} nm) ✓`],
       },
       {
-        label: 'e', marks: 1, ao: 'AO3',
+        label: 'e', sections: ['light'], marks: 1, ao: 'AO3',
         question: 'Suggest one way in which the observations could be changed to determine the period more precisely.',
         markscheme: ['Any one of: observe for more cycles (a longer time) / observe more often, especially near the maxima and minima / fill the gaps in the record ✓'],
       },

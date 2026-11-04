@@ -6,6 +6,7 @@ export default {
   level: 'SL',
   difficulty: 3,
   topics: ['A.1'],
+  sections: ['projectiles', 'drag'],
   batch: 'batch-1',
   batchRule: 'inspect-all',
   originality: {
@@ -37,14 +38,14 @@ export default {
   diagram: { file: 'questions/diagrams/p2-a1-drone.svg', alt: 'A drone moves down and to the right along a dashed straight path at an angle theta below the horizontal. At the moment of release the package has velocity v along the same direction. The height h of the package above the level ground is marked.' },
   parts: [
     {
-      label: 'a', command: 'Show that', marks: 1, syllabus: ['A.1.7', 'T.6'],
+      label: 'a', sections: ['projectiles'], command: 'Show that', marks: 1, syllabus: ['A.1.7', 'T.6'],
       question: 'Show that the vertical component of the package\'s velocity at the moment of release is about [[uy:1u]].',
       showThat: { result: 'uy', sf: 1 },
       markscheme: ['$u_y = [[v:n]] \\sin [[theta]] = [[uy:3u]]$ ✓'],
       examinerNote: 'The package has the drone\'s velocity at release; resolve it. Needs the unrounded value or the working.',
     },
     {
-      label: 'b', command: 'Determine', marks: 3, syllabus: ['A.1.7', 'A.1.5'], dependsOn: ['a'],
+      label: 'b', sections: ['projectiles'], command: 'Determine', marks: 3, syllabus: ['A.1.7', 'A.1.5'], dependsOn: ['a'],
       question: 'Determine the time taken for the package to reach the ground.',
       numeric: { result: 't', accept: 0.03, mistakes: [{ result: 'wrong_t', feedback: 'The package already has a downward velocity when it is released, so it reaches the ground sooner than a package dropped from rest.' }] },
       markscheme: [
@@ -57,7 +58,7 @@ export default {
       examinerNote: 'Either solve the quadratic in t, or find the final vertical speed first and use v = u + at. The initial downward velocity must be included.',
     },
     {
-      label: 'c', command: 'Calculate', marks: 2, syllabus: ['A.1.7', 'T.6'], dependsOn: ['b'],
+      label: 'c', sections: ['projectiles'], command: 'Calculate', marks: 2, syllabus: ['A.1.7', 'T.6'], dependsOn: ['b'],
       question: 'Calculate the horizontal distance travelled by the package between release and landing.',
       numeric: { result: 'x', accept: 0.04, mistakes: [{ result: 'wrong_x', feedback: 'Only the horizontal component of the velocity carries the package sideways: use v cos θ, not v.' }] },
       markscheme: [
@@ -68,7 +69,7 @@ export default {
       examinerNote: 'Horizontal velocity is constant with no air resistance.',
     },
     {
-      label: 'd', command: 'Outline', marks: 2, syllabus: ['A.1.8'],
+      label: 'd', sections: ['drag'], command: 'Outline', marks: 2, syllabus: ['A.1.8'],
       question: 'In practice, air resistance acts on the package. Outline how this affects the horizontal distance travelled by the package before it lands.',
       markscheme: [
         'Air resistance acts opposite to the package\'s velocity, so it has a horizontal component backwards / the horizontal velocity decreases during the fall ✓',

@@ -6,6 +6,7 @@ export default {
   level: 'HL',
   difficulty: 2,
   topics: ['E.2'],
+  sections: ['graph', 'classical', 'einstein', 'stopping'],
   batch: 'batch-1',
   batchRule: 'inspect-all',
   originality: {
@@ -37,7 +38,7 @@ export default {
   diagram: { file: 'questions/diagrams/p2-e2-stopping.svg', large: true, alt: 'Graph of stopping voltage in volts against frequency in units of 10 to the 14 hertz, from 4 to 11. Five measured points lie on a straight line that meets the frequency axis at 5.5 and rises to 2.0 volts at 10.5 and 2.2 volts at 11.' },
   parts: [
     {
-      label: 'a', command: 'Outline', marks: 2, syllabus: ['E.2.H1', 'E.2.H2'],
+      label: 'a', sections: ['classical'], command: 'Outline', marks: 2, syllabus: ['E.2.H1', 'E.2.H2'],
       question: 'Below a certain frequency, no electrons are emitted however bright the light is. Outline why this observation supports a particle model of light rather than a wave model.',
       markscheme: [
         'In the wave model, energy arrives continuously, so bright enough light of any frequency should eventually release electrons ✓',
@@ -46,14 +47,14 @@ export default {
       examinerNote: 'One mark for what the wave model predicts, one for the photon explanation (one photon, one electron; photon energy depends on frequency only).',
     },
     {
-      label: 'b', command: 'State', marks: 1, syllabus: ['E.2.H2', 'T.4'],
+      label: 'b', sections: ['graph'], command: 'State', marks: 1, syllabus: ['E.2.H2', 'T.4'],
       question: 'State the threshold frequency of the metal.',
       numeric: { result: 'f0_read', accept: 0.03 },
       markscheme: ['$f_0 = [[f0]]$ (the intercept on the frequency axis) ✓'],
       examinerNote: 'Read where the line meets the frequency axis, remembering the axis unit of 10^14 Hz.',
     },
     {
-      label: 'c', command: 'Determine', marks: 3, syllabus: ['E.2.H3', 'T.4'],
+      label: 'c', sections: ['graph'], command: 'Determine', marks: 3, syllabus: ['E.2.H3', 'T.4'],
       question: 'Determine, using the graph, a value for the Planck constant.',
       numeric: { result: 'hexp', accept: 0.03, mistakes: [{ result: 'wrong_hexp', feedback: 'The gradient of the graph is h/e, not h: multiply it by the elementary charge.' }, { result: 'wrong_booklet', feedback: 'That is the data booklet value. The question asks for the value this experiment gives: use the gradient of the graph.' }] },
       markscheme: [
@@ -65,7 +66,7 @@ export default {
       examinerNote: 'Rearranging Einstein\'s equation: V_s = (h/e) f − Φ/e. The line passes through grid points (5.5, 0) and (10.5, 2.0). The experimental h is about 3 % below the accepted value, as in many real experiments.',
     },
     {
-      label: 'd', command: 'Calculate', marks: 2, syllabus: ['E.2.H3'], dependsOn: ['b', 'c'],
+      label: 'd', sections: ['einstein'], command: 'Calculate', marks: 2, syllabus: ['E.2.H3'], dependsOn: ['b', 'c'],
       question: 'Calculate the minimum energy, in eV, needed to remove an electron from this surface.',
       numeric: { result: 'phi', accept: 0.05 },
       markscheme: [
@@ -76,7 +77,7 @@ export default {
       examinerNote: 'Either the graph value of h or the booklet value is fine: the intercept on the voltage axis (extended) also gives −Φ/e.',
     },
     {
-      label: 'e', command: 'Explain', marks: 2, syllabus: ['E.2.H3', 'E.2.H1'],
+      label: 'e', sections: ['stopping'], command: 'Explain', marks: 2, syllabus: ['E.2.H3', 'E.2.H1'],
       question: 'The intensity of the light is doubled while its frequency stays the same. Explain the effect, if any, on the stopping voltage.',
       markscheme: [
         'No change in the stopping voltage ✓',

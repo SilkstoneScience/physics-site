@@ -16,6 +16,7 @@ const ePhoton = (lamNm) => LAWS['photon-energy'].f({ h: H, c: C, lambda: lamNm *
 export default {
   id: 'E1-B01',
   topic: 'E.1',
+  sections: ['levels', 'spectra'],
   difficulty: 1,
   context: 'experimental',
   source: 'secondary',
@@ -146,7 +147,7 @@ export default {
     const lvl = [0, 1, 2].map((i) => d.dp(d.rows[i].El, 2));
     return [
       {
-        label: 'a', marks: 2, ao: 'AO2',
+        label: 'a', sections: ['spectra'], marks: 2, ao: 'AO2',
         question: 'Read the wavelengths of the three lines from the scale.',
         markscheme: [
           `Violet ${d.dp(d.rows[0].lam, 0)} nm, blue ${d.dp(d.rows[1].lam, 0)} nm, green ${d.dp(d.rows[GREEN].lam, 0)} nm, each accepted within ±${d.stated('half')} nm: any two correct ✓`,
@@ -154,12 +155,12 @@ export default {
         ],
       },
       {
-        label: 'b', marks: 1, ao: 'AO1',
+        label: 'b', sections: ['spectra'], marks: 1, ao: 'AO1',
         question: 'State the absolute uncertainty in each of your readings.',
         markscheme: [`$\\pm ${d.stated('half')}\\ \\text{nm}$: half the smallest division (${d.stated('div')} nm) of the scale ✓`],
       },
       {
-        label: 'c', marks: 2, ao: 'AO2',
+        label: 'c', sections: ['levels'], marks: 2, ao: 'AO2',
         question: 'Calculate the energy, in eV, of a photon of the green light.',
         numeric: d.num('EG'),
         markscheme: [
@@ -168,7 +169,7 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 2, ao: 'AO3',
+        label: 'd', sections: ['levels'], marks: 2, ao: 'AO3',
         asks: { conclusion: ['is correct', 'the same upper level'] },
         question: 'A student suggests that all three lines are emitted by atoms falling from one and the same energy level. Deduce, using the energy levels, whether the suggestion is correct.',
         markscheme: [
@@ -177,7 +178,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 1, ao: 'AO3',
+        label: 'e', sections: ['spectra'], marks: 1, ao: 'AO3',
         asks: { conclusion: ['read as one line'] },
         question: `Beyond the part of the scale shown, the mercury spectrum has two yellow lines, at ${d.stated('y1')} nm and ${d.stated('y2')} nm. `
           + 'Deduce whether readings from this scale could show that there are two lines.',

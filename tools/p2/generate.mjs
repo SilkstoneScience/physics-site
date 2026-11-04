@@ -184,11 +184,15 @@ export function buildQuestion(def) {
     paper: linking ? '2L' : '2',
     difficulty: def.difficulty,
     level: def.level,
+    // Sub-part tags (sections of the topic page; tools/check-sections.mjs): left out of the review fingerprint
+    // (canonicalContent in build.mjs removes them), so adding or changing tags never affects a question's review.
+    ...(def.sections ? { sections: def.sections } : {}),
     ...(def.y2028 ? { y2028: true } : {}),
     stem: fill(def.stem, ctx, 'stem'),
     ...(def.diagram ? { diagram: def.diagram.file, diagramAlt: def.diagram.alt, ...(def.diagram.large ? { diagramLarge: true } : {}) } : {}),
     parts: (def.parts || []).map((pt) => ({
       label: pt.label,
+      ...(pt.sections ? { sections: pt.sections } : {}),
       question: fill(pt.question, ctx, `(${pt.label}) question`),
       marks: pt.marks,
       markscheme: (pt.markscheme || []).map((m, i) => fill(m, ctx, `(${pt.label}) mark scheme ${i + 1}`)),

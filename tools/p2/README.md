@@ -44,6 +44,11 @@ node tools/p2/review.mjs accept-batch batch-1 --by "Mr Silkstone (teacher)" --no
 
 The full worked example is `GOOD_SHORT` in `fixtures/examples.mjs` (and `GOOD_LINKING` for a 20-mark question).
 
+Short questions also need **sub-part tags**: `sections: [...]` on the question (sections of the topic page it uses,
+main one first, e.g. `['projectiles', 'drag']`) and `sections` on every part. They are checked by
+`tools/check-sections.mjs` and are **not** part of the review fingerprint (`canonicalContent` in `build.mjs` removes
+them), so adding or changing them never affects a question's review. Linking questions aren't tagged.
+
 ```js
 export default {
   id: 'A1-P01',                 // short: <first topic>-P<nn>; linking: LQ-S<nn> (SL) or LQ-H<nn> (HL). Never change once published

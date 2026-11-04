@@ -6,6 +6,7 @@ export default {
   level: 'HL',
   difficulty: 3,
   topics: ['D.1', 'A.3'],
+  sections: ['energy', 'orbits'],
   batch: 'batch-1',
   batchRule: 'inspect-all',
   originality: {
@@ -39,7 +40,7 @@ export default {
   stem: '<p>A satellite of mass [[m]] is in a circular orbit [[h1]] above the surface of the Earth. Its engines are used to move it to a circular orbit [[h2]] above the surface. The mass of the Earth is [[M]] and its radius is [[RE]].</p>',
   parts: [
     {
-      label: 'a', command: 'Show that', marks: 2, syllabus: ['D.1.H5'],
+      label: 'a', sections: ['orbits'], command: 'Show that', marks: 2, syllabus: ['D.1.H5'],
       question: 'Show that, in the first orbit, the satellite moves at about [[v1:2u]].',
       showThat: { result: 'v1', sf: 2 },
       markscheme: [
@@ -49,7 +50,7 @@ export default {
       examinerNote: 'The radius of the orbit is measured from the centre of the Earth. Gravity provides the centripetal force: GMm/r² = mv²/r.',
     },
     {
-      label: 'b', command: 'Calculate', marks: 2, syllabus: ['D.1.H5'], dependsOn: ['a'],
+      label: 'b', sections: ['orbits'], command: 'Calculate', marks: 2, syllabus: ['D.1.H5'], dependsOn: ['a'],
       question: 'Calculate the period of the satellite in the first orbit.',
       numeric: { result: 'T1', accept: 0.03, mistakes: [{ result: 'wrong_T1', feedback: 'The satellite goes round a circle whose radius is measured from the centre of the Earth, not from the surface.' }] },
       markscheme: [
@@ -60,7 +61,7 @@ export default {
       examinerNote: 'One circumference at the orbital speed (or Kepler\'s third law with GM).',
     },
     {
-      label: 'c', command: 'Deduce', marks: 2, syllabus: ['D.1.H1', 'D.1.H5', 'A.3.5'],
+      label: 'c', sections: ['energy'], command: 'Deduce', marks: 2, syllabus: ['D.1.H1', 'D.1.H5', 'A.3.5'],
       question: 'Deduce that the total energy of a satellite of mass $m$ in a circular orbit of radius $r$ is $E = -\\dfrac{GMm}{2r}$.',
       markscheme: [
         '$E_{\\text{k}} = \\tfrac{1}{2}mv^2 = \\dfrac{GMm}{2r}$ (using $v^2 = GM/r$) ✓',
@@ -69,7 +70,7 @@ export default {
       examinerNote: 'Both energies in terms of r, then add. The gravitational potential energy is negative (zero at infinity).',
     },
     {
-      label: 'd', command: 'Determine', marks: 3, syllabus: ['D.1.H5'], dependsOn: ['c'],
+      label: 'd', sections: ['energy'], command: 'Determine', marks: 3, syllabus: ['D.1.H5'], dependsOn: ['c'],
       question: 'Determine the minimum energy that the engines must supply to move the satellite to the second orbit.',
       numeric: { result: 'dE', accept: 0.04, mistakes: [{ result: 'wrong_dE', feedback: 'That is the gain in gravitational potential energy only. The satellite also loses kinetic energy: use the change in total energy.' }] },
       markscheme: [
@@ -81,7 +82,7 @@ export default {
       examinerNote: 'The minimum energy is the change in total orbital energy, E(r2) − E(r1), ignoring losses. (Both total energies are listed in the audit.)',
     },
     {
-      label: 'e', command: 'Explain', marks: 2, syllabus: ['D.1.H5', 'D.1.H1'],
+      label: 'e', sections: ['energy'], command: 'Explain', marks: 2, syllabus: ['D.1.H5', 'D.1.H1'],
       question: 'The engines supply energy to the satellite, yet its kinetic energy is smaller in the second orbit. Explain this.',
       markscheme: [
         'In a higher orbit the orbital speed is lower, so the kinetic energy ($GMm/2r$) decreases ✓',

@@ -6,6 +6,7 @@ export default {
   level: 'SL',
   difficulty: 2,
   topics: ['A.1'],
+  sections: ['graphs'],
   batch: 'batch-2',
   literals: { 12: 'the time span shown on the graph', 10: 'lower limit for a velocity read from the graph at 8.0 s', 11: 'upper limit for a velocity read from the graph at 8.0 s' },
   originality: {
@@ -32,7 +33,7 @@ export default {
   diagram: { file: 'questions/diagrams/p2-a1-scooter.svg', large: true, alt: 'Velocity in metres per second against time in seconds from 0 to 12, on a grid of 1 second by 1 metre per second squares. The curve starts at the origin, rises steeply, and bends over so that it levels off towards 12 metres per second. At 8 seconds the velocity is about 10.4 metres per second.' },
   parts: [
     {
-      label: 'a', command: 'Describe', marks: 2, syllabus: ['A.1.6', 'A.1.4'],
+      label: 'a', sections: ['graphs'], command: 'Describe', marks: 2, syllabus: ['A.1.6', 'A.1.4'],
       question: 'Describe how the acceleration of the scooter changes during the first 12 s.',
       markscheme: [
         'the acceleration decreases ✓',
@@ -41,7 +42,7 @@ export default {
       examinerNote: 'Acceleration is the gradient of the velocity–time graph; the curve flattens. "The scooter slows down" earns nothing: the velocity still increases.',
     },
     {
-      label: 'b', command: 'Estimate', marks: 3, syllabus: ['A.1.4', 'A.1.6', 'T.4'],
+      label: 'b', sections: ['graphs'], command: 'Estimate', marks: 3, syllabus: ['A.1.4', 'A.1.6', 'T.4'],
       question: 'Estimate the distance travelled by the scooter in the first [[t8:n]] s.',
       numeric: { result: 'dist', accept: 0.08, mistakes: [{ result: 'wrong_dist', feedback: 'The graph is a curve, not a straight line: it lies above the straight line from the origin, so the area is larger than ½ × v × t. Count the squares under the curve.' }] },
       markscheme: [
@@ -53,14 +54,14 @@ export default {
       examinerNote: 'The exact area is from the generating function. Square counting by students usually lands within about 5 %; the accept range is 8 %.',
     },
     {
-      label: 'c', command: 'Calculate', marks: 1, syllabus: ['A.1.4'],
+      label: 'c', sections: ['graphs'], command: 'Calculate', marks: 1, syllabus: ['A.1.4'],
       question: 'Calculate the average acceleration of the scooter during the first [[t8:n]] s.',
       numeric: { result: 'aAvg', accept: 0.05 },
       markscheme: ['$a = \\dfrac{\\Delta v}{\\Delta t} = \\dfrac{[[v8:3]]}{[[t8:n]]} = [[aAvg:2u]]$; allow a velocity read from the graph between 10 and 11 $\\text{m s}^{-1}$ ✓'],
       examinerNote: 'Average acceleration uses the change in velocity over the whole interval (the chord), not the gradient at one point.',
     },
     {
-      label: 'd', command: 'Explain', marks: 2, syllabus: ['A.1.4', 'A.1.6'],
+      label: 'd', sections: ['graphs'], command: 'Explain', marks: 2, syllabus: ['A.1.4', 'A.1.6'],
       question: 'Explain why the acceleration of the scooter just after it starts is greater than your answer to (c).',
       markscheme: [
         'the gradient of the curve (the tangent) is steepest at the start ✓',

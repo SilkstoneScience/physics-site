@@ -6,6 +6,7 @@ export default {
   level: 'SL',
   difficulty: 2,
   topics: ['B.5'],
+  sections: ['divider', 'ohm', 'combos', 'power', 'resistance'],
   batch: 'batch-1',
   batchRule: 'inspect-all',
   originality: {
@@ -32,7 +33,7 @@ export default {
   diagram: { file: 'questions/diagrams/p2-b5-frost.svg', alt: 'Circuit diagram: a battery of emf epsilon, a fixed resistor R and a thermistor in one series loop. A voltmeter V is connected across the thermistor, with a label saying its output goes to the alarm.' },
   parts: [
     {
-      label: 'a', command: 'State', marks: 2, syllabus: ['B.5.8'],
+      label: 'a', sections: ['ohm'], command: 'State', marks: 2, syllabus: ['B.5.8'],
       question: 'The fixed resistor is a metal resistor that stays at a constant temperature. State and explain whether it is an ohmic conductor.',
       markscheme: [
         'It is ohmic ✓',
@@ -41,7 +42,7 @@ export default {
       examinerNote: 'The guide: a metal conductor at constant temperature is treated as ohmic. Award the second mark only with a reason, not for "ohmic" alone.',
     },
     {
-      label: 'b', command: 'Calculate', marks: 2, syllabus: ['B.5.6', 'B.5.10'],
+      label: 'b', sections: ['combos'], command: 'Calculate', marks: 2, syllabus: ['B.5.6', 'B.5.10'],
       question: 'At 0 °C the resistance of the thermistor is [[RT]]. Calculate, in mA, the current in the circuit at this temperature.',
       numeric: { result: 'I', accept: 0.03, mistakes: [{ result: 'wrong_I', feedback: 'The thermistor and the fixed resistor are in series: use the total resistance.' }] },
       markscheme: [
@@ -51,14 +52,14 @@ export default {
       examinerNote: 'Series resistances add; I = ε / R_total with negligible internal resistance.',
     },
     {
-      label: 'c', command: 'Show that', marks: 1, syllabus: ['B.5.6'],
+      label: 'c', sections: ['divider'], command: 'Show that', marks: 1, syllabus: ['B.5.6'],
       question: 'Show that the potential difference across the thermistor at 0 °C is about [[VT:2u]].',
       showThat: { result: 'VT', sf: 2 },
       markscheme: ['$V = IR_{\\text{T}}$ OR $V = \\dfrac{[[RT:n]]}{[[Rtot:n]]} \\times [[emf:n]] = [[VT:3u]]$ ✓'],
       examinerNote: 'V = IR for the thermistor (or the ratio of resistances times the emf).',
     },
     {
-      label: 'd', command: 'Calculate', marks: 2, syllabus: ['B.5.9'], dependsOn: ['b'],
+      label: 'd', sections: ['power'], command: 'Calculate', marks: 2, syllabus: ['B.5.9'], dependsOn: ['b'],
       question: 'Calculate, in mW, the power dissipated in the fixed resistor at 0 °C.',
       numeric: { result: 'P', accept: 0.04, mistakes: [{ result: 'wrong_P', feedback: 'That is the power in the whole circuit. Use the resistance of the fixed resistor only.' }] },
       markscheme: [
@@ -69,7 +70,7 @@ export default {
       examinerNote: 'Any of the power equations for the fixed resistor (V across it = ε − 5.4 V also works).',
     },
     {
-      label: 'e', command: 'Explain', marks: 3, syllabus: ['B.5.12', 'B.5.10', 'B.5.6'],
+      label: 'e', sections: ['divider', 'resistance'], command: 'Explain', marks: 3, syllabus: ['B.5.12', 'B.5.10', 'B.5.6'],
       question: 'The alarm sounds when the potential difference across the thermistor is greater than [[VT:2u]]. Explain why the alarm sounds when the temperature falls below 0 °C.',
       markscheme: [
         'As the temperature falls, the resistance of the thermistor increases (so the total resistance increases) ✓',

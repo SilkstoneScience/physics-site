@@ -22,6 +22,7 @@ const multiples = (d) => {
 export default {
   id: 'D2-B01',
   topic: 'D.2',
+  sections: ['charge', 'plates'],
   difficulty: 3,
   context: 'experimental',
   skills: ['supporting-derivation', 'complete-a-table', 'uncertainty-of-a-power', 'quantisation', 'best-value', 'calibration-error'],
@@ -147,12 +148,12 @@ export default {
     const k = multiples(d);
     return [
       {
-        label: 'a', marks: 1, ao: 'AO2',
+        label: 'a', sections: ['plates', 'charge'], marks: 1, ao: 'AO2',
         question: 'Show that the charge on a drop that stays still is $q = \\dfrac{mgd}{V}$, where $m$ is the mass of the drop.',
         markscheme: ['The electric force balances the weight: $qE = mg$ with $E = \\dfrac{V}{d}$, so $\\dfrac{qV}{d} = mg$ and $q = \\dfrac{mgd}{V}$ ✓'],
       },
       {
-        label: 'b', marks: 2, ao: 'AO2',
+        label: 'b', sections: ['plates'], marks: 2, ao: 'AO2',
         question: 'Calculate the missing values of $q$ for drops C and F.',
         markscheme: [
           `Mass from $m = \\tfrac43\\pi r^3\\rho$; drop C: $q = ${d.sf(d.r.qC.value, 3)} \\times 10^{-19}\\ \\text{C}$ ✓`,
@@ -160,7 +161,7 @@ export default {
         ],
       },
       {
-        label: 'c', marks: 2, ao: 'AO2',
+        label: 'c', sections: ['plates'], marks: 2, ao: 'AO2',
         question: 'The uncertainties in $V$, $d$ and the density are small compared with the uncertainty in $r$. Determine the percentage uncertainty in $q$ for drop A.',
         numeric: d.num('pct', { mistakes: [{ value: (d.unc('r', PCT_ROW) * 100) / d.rows[PCT_ROW].r, feedback: 'The mass depends on r³: multiply the percentage uncertainty in r by 3.' }] }),
         markscheme: [
@@ -169,7 +170,7 @@ export default {
         ],
       },
       {
-        label: 'd', marks: 3, ao: 'AO3',
+        label: 'd', sections: ['charge'], marks: 3, ao: 'AO3',
         asks: { conclusion: ['support the idea', 'supports the idea', 'is quantised', 'are quantised'] },
         question: 'Deduce whether these data support the idea that charge comes in whole-number multiples of one smallest charge. Determine, from the data, the best value of that smallest charge.',
         markscheme: [
@@ -179,7 +180,7 @@ export default {
         ],
       },
       {
-        label: 'e', marks: 2, ao: 'AO3',
+        label: 'e', sections: ['plates'], marks: 2, ao: 'AO3',
         question: `The voltmeter is later found to read ${d.stated('cal')} % higher than the true p.d. Determine the corrected value of the smallest charge, and state the effect of this error on your conclusion in (d).`,
         markscheme: [
           `The true p.d. is smaller, so every true charge is larger: $${d.sf(d.r.e.value / 1e-19, 3)} \\times ${d.stated('calF')} = ${d.sf(d.r.eCorr.value / 1e-19, 3)} \\times 10^{-19}\\ \\text{C}$ (allow ECF from (d)) ✓`,
