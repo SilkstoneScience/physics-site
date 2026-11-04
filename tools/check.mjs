@@ -537,6 +537,8 @@ for (const [n, text, want] of markCases) {
 if (checkNumeric({ answer: 10, mistakes: [{ value: 20, feedback: 'x' }] }, '20').mistake !== 0) err('js/numeric.js', 'a listed mistake value should be recognised');
 
 // ---------- 5. Sub-part tags on questions ("sections"; the checks are in tools/check-sections.mjs) ----------
+// Revision sheet builder: teacher files (teachers/*.json; the checks are in tools/check-teachers.mjs)
+(await import('./check-teachers.mjs')).checkTeachers({ err, warn, TOPICS });
 (await import('./check-sections.mjs')).checkSections({ err, warn });
 
 // ---------- Report ----------

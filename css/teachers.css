@@ -1,0 +1,92 @@
+/* Revision sheet builder (teachers/index.html). Loaded after style.css. */
+
+/* ----- The choices ----- */
+.tb-form { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; margin: 16px 0; }
+.tb-row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.tb-form select, .tb-form input[type="number"] { font: inherit; padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text); max-width: 100%; }
+.tb-form input[type="number"] { width: 4.5em; }
+.tb-form input[type="checkbox"], .tb-form input[type="radio"] { width: auto; padding: 0; margin: 0 6px 0 0; vertical-align: -2px; accent-color: var(--accent); }
+.tb-form select { padding: 6px 8px; }
+.tb-parts { border: 0; padding: 0; margin: 12px 0 0; }
+.tb-parts legend { font-weight: 700; padding: 0; margin-bottom: 4px; }
+.tb-part { padding: 6px 0; border-top: 1px solid var(--border); }
+.tb-part > label { font-weight: 600; }
+.tb-sub { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin: 6px 0 2px 26px; }
+.tb-sub[hidden] { display: none; }
+.tb-sub select { width: 100%; }
+.tb-sub label select { width: auto; max-width: 100%; margin-left: 4px; }
+.tb-avail { color: var(--muted); font-size: 0.9rem; }
+.tb-mode { display: flex; flex-direction: column; gap: 2px; width: 100%; }
+.tb-choose { width: 100%; max-height: 420px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; }
+.tb-choose h4 { margin: 10px 0 4px; }
+.tb-pick { display: flex; gap: 8px; align-items: flex-start; padding: 4px 0; font-size: 0.92rem; border-top: 1px solid var(--border); }
+.tb-pick input { margin-top: 5px; }
+.tb-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0 4px; }
+.tb-copied { color: var(--good); font-weight: 600; }
+.tb-tip { color: var(--muted); font-size: 0.92rem; margin-top: 4px; }
+.tb-tabs { display: flex; gap: 4px; margin: 20px 0 0; border-bottom: 2px solid var(--border); }
+.tb-tabs button { font: inherit; font-weight: 600; padding: 8px 14px; border: 1px solid var(--border); border-bottom: 0; border-radius: 8px 8px 0 0; background: var(--bg); color: var(--muted); cursor: pointer; }
+.tb-tabs button[aria-selected="true"] { background: var(--surface); color: var(--accent); }
+.tb-status:empty { display: none; }
+
+/* ----- The sheets (on screen, a white page) ----- */
+.sheet { background: var(--surface); border: 1px solid var(--border); border-top: 0; border-radius: 0 0 var(--radius) var(--radius); padding: 8px 20px 16px; }
+.sheet.is-hidden { display: none; }
+.sheet-head { border-bottom: 2px solid var(--theme-a); padding-bottom: 6px; margin-bottom: 8px; }
+.sheet-head h2 { margin: 0.1em 0 0.2em; font-size: 1.6rem; }
+.sheet-kicker { margin: 8px 0 0; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem; }
+.sheet-name { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: flex-end; }
+.sheet-blank { display: inline-block; flex: 1 1 10em; border-bottom: 1px solid var(--text); min-width: 8em; height: 1.2em; }
+.sheet-blank.short { flex: 0 1 8em; }
+.sheet-part > h3 { display: flex; align-items: center; gap: 10px; margin: 1.4em 0 0.4em; font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+.sheet-num { display: inline-flex; align-items: center; justify-content: center; width: 1.6em; height: 1.6em; border-radius: 50%; background: var(--accent); color: var(--surface); font-size: 0.85rem; flex: none; }
+.sheet h4 { margin: 1em 0 0.3em; }
+.sheet h5 { margin: 0.9em 0 0.2em; font-size: 1rem; }
+.sheet-item, .sheet-q, .sheet-notes { margin: 10px 0; }
+.sheet-q { border-top: 1px solid var(--border); padding-top: 6px; }
+.sheet-qnum { font-weight: 700; margin: 4px 0; display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.sheet-marks { font-weight: 400; color: var(--muted); }
+.sheet-id { font-weight: 400; color: var(--muted); font-size: 0.85rem; }
+.sheet-options { list-style: upper-alpha; padding-left: 2em; }
+.sheet-options li { margin: 2px 0; }
+.sheet-instr { font-style: italic; color: var(--muted); }
+.sheet-tok strong { display: block; }
+.sheet-lines { margin: 6px 0 10px; }
+.sheet-lines span { display: block; height: 1.9em; border-bottom: 1px dotted var(--muted); }
+.sheet .q-fig { margin: 8px 0; }
+.sheet .q-fig img { max-width: min(100%, 520px); background: #fff; border-radius: 6px; }
+.sheet .think-svg svg { max-width: min(100%, 460px); display: block; margin: 0 auto; }
+.sheet .photo { max-width: min(100%, 460px); }
+.sheet-answers li { margin: 6px 0; }
+.sheet-url { display: none; }
+.sheet-foot { margin-top: 24px; padding-top: 8px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
+.tb-swap { margin-left: auto; font-size: 0.85rem; }
+.sheet .worked { overflow: visible; }
+
+/* ----- Printing (the "Download … (PDF)" buttons) ----- */
+@page { size: A4; margin: 14mm 14mm 16mm; }
+@media print {
+  /* Always print in light colours, even if the screen is in dark mode. */
+  :root {
+    --bg: #ffffff; --surface: #ffffff; --text: #1c2430; --muted: #4a5464; --border: #c9d0da;
+    --accent: #1f5fbf; --accent-soft: #e6eefb; --good: #1e7a46; --good-soft: #e3f4ea; --bad: #b3261e; --bad-soft: #fbe9e7;
+    --warn-soft: #fff6dc; --theme-a: #1f5fbf; --theme-b: #c2561a; --theme-c: #0f8077; --theme-d: #7b3fbf; --theme-e: #2e7d32;
+  }
+  body { background: #fff; font-size: 11pt; line-height: 1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body > header, body > footer, .site-header, .site-footer, .page-back, .toc-fab, .eq-fab, main > h1, main > .lead, main > .notice, .tb-form, .tb-actions, .tb-tip, .tb-tabs, .tb-status, .no-print { display: none !important; }
+  main { max-width: none; padding: 0; margin: 0; }
+  .sheet { display: none !important; border: 0; padding: 0; }
+  body[data-print="student"] #student-sheet, body[data-print="teacher"] #teacher-sheet { display: block !important; }
+  .sheet-url { display: block; font-size: 9pt; color: var(--muted); word-break: break-all; }
+  .sheet-q, .sheet-qpart, .sheet-item, .worked, figure, .key, table, .sheet-notes ul li { break-inside: avoid; }
+  .sheet-part > h3, .sheet h4, .worked h3 { break-after: avoid; }
+  .sheet-head h2 { font-size: 18pt; }
+  .sheet-part > h3 { font-size: 14pt; }
+  a { color: var(--accent); text-decoration: none; }
+  /* Smaller pictures on paper, so a sheet doesn't run to many pages */
+  .sheet figure.diagram svg { max-width: 105mm; max-height: 70mm; }
+  .sheet .think-svg svg { max-width: 70mm; max-height: 60mm; }
+  .sheet .q-fig img { max-width: 105mm; max-height: 75mm; }
+  .sheet .photo { max-width: 90mm; }
+  .sheet figure { margin: 6px auto; }
+}

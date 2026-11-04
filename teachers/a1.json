@@ -1,0 +1,99 @@
+{
+  "topic": "A.1",
+  "page": "themes/a1.html",
+  "pageFingerprint": "66b6cd3d3c1d33f2",
+  "summary": [
+    {
+      "heading": "Describing motion",
+      "html": "<ul><li><strong>Distance</strong> is the total path length (a scalar). <strong>Displacement</strong> $s$ is the change in position, $s = \\Delta x$, measured in a straight line from start to finish (a vector: give a sign or direction).</li><li><strong>Speed</strong> = distance ÷ time (scalar). <strong>Velocity</strong> is the rate of change of displacement (vector). Both in $\\text{m s}^{-1}$.</li><li><strong>Acceleration</strong> is the rate of change of velocity: $a = \\dfrac{\\Delta v}{\\Delta t} = \\dfrac{v - u}{t}$, in $\\text{m s}^{-2}$. Negative acceleration means it points in the negative direction, not always \"slowing down\".</li><li>Velocity is a vector, so a <strong>change of direction is an acceleration</strong>, even at constant speed (for example, moving in a circle: A.2).</li><li><strong>Average</strong> values are taken over a time interval; <strong>instantaneous</strong> values at one moment (the limit of shorter and shorter intervals).</li></ul>"
+    },
+    {
+      "heading": "Motion graphs",
+      "html": "<table class=\"notes\"><tr><th>Graph</th><th>Gradient</th><th>Area under it</th></tr><tr><td>$s$–$t$</td><td>velocity</td><td>(not useful)</td></tr><tr><td>$v$–$t$</td><td>acceleration</td><td>displacement</td></tr><tr><td>$a$–$t$</td><td>(not needed)</td><td>change in velocity</td></tr></table><ul><li>Average value: gradient of the chord between two points. Instantaneous value: gradient of the <strong>tangent</strong>.</li><li>Area below the time axis on a $v$–$t$ graph is negative displacement. Distance: add the sizes of the areas; displacement: add them with their signs.</li><li><strong>A ball thrown straight up</strong> (no air resistance, up positive): the $v$–$t$ graph is a straight line with gradient $-g$, crossing zero at the highest point. The areas above and below the axis are equal, because the ball returns to where it started.</li><li><span class=\"tag y2028\">New for 2028</span> <strong>Non-uniform acceleration</strong> is treated graphically and qualitatively: curved $v$–$t$ graph, acceleration = gradient of the tangent, displacement = area (count squares).</li></ul>"
+    },
+    {
+      "heading": "Equations of motion (constant acceleration only)",
+      "html": "<div class=\"key\">$$v = u + at \\qquad s = ut + \\tfrac{1}{2}at^{2}$$ $$v^{2} = u^{2} + 2as \\qquad s = \\frac{(u + v)}{2}\\,t$$</div><ul><li>List the five quantities $s, u, v, a, t$: you need three to find the others. Pick the equation that leaves out the one you don't know and don't need.</li><li><strong>Don't use them when the acceleration changes</strong>: with air resistance, for a mass on a spring, in circular motion (the direction of the acceleration keeps changing) or far from a planet's surface ($g$ gets smaller). Use graphs instead.</li><li>Choose a positive direction first and keep to it.</li><li>Free fall (no air resistance): $a = g = 9.8$ $\\text{m s}^{-2}$ downwards for all objects, whatever their mass. If up is positive, $a = -9.8$ $\\text{m s}^{-2}$.</li><li>$g$ can be measured by timing falls from several heights: a graph of $s$ against $t^2$ is a straight line through the origin with gradient $\\tfrac{1}{2}g$.</li><li>Motion can be measured with <strong>light gates</strong> (speed = length of the card ÷ time the beam is blocked), strobe photos or video against a scale, or a motion sensor and data logger. Several readings plotted on a graph give a more reliable value than one timing.</li></ul>"
+    },
+    {
+      "heading": "Projectiles",
+      "html": "<ul><li>With no air resistance, the <strong>horizontal and vertical motions are independent</strong>, linked only by the time.</li><li>Resolve the launch velocity: $u_x = u\\cos\\theta$, $u_y = u\\sin\\theta$.</li><li>Horizontally: constant velocity, $x = u_x t$. Vertically: constant acceleration $g$ downwards, so use the equations of motion.</li><li>At the highest point $v_y = 0$, but the acceleration is still $g$ downwards.</li><li>For a given launch speed, on level ground with no air resistance, the <strong>greatest range</strong> is at a launch angle of 45°.</li><li>The path is a parabola (its equation isn't needed). Know launches horizontally, above and below the horizontal.</li></ul>"
+    },
+    {
+      "heading": "Relative velocity",
+      "html": "<ul><li>The velocity of A relative to B: $v_{AB} = v_A - v_B$ (vector subtraction).</li><li>In one dimension, use signs. In two dimensions at right angles, use Pythagoras and $\\tan^{-1}$ for the direction.</li></ul>"
+    },
+    {
+      "heading": "Fluid resistance (qualitative)",
+      "html": "<ul><li>Drag acts opposite to the velocity and increases with speed.</li><li>A falling object: acceleration $g$ at release, then the drag grows, so the acceleration decreases until drag = weight. Then the resultant force is zero and it moves at <strong>terminal speed</strong>.</li><li>Projectile with air resistance (compared with a vacuum): lower maximum height reached sooner, shorter range, decreasing horizontal velocity, a steeper descent (not symmetrical), and an acceleration that isn't constant.</li></ul>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Using the equations of motion when the acceleration isn't constant (use graphs).</li><li>Mixing horizontal and vertical quantities in one equation.</li><li>Using a chord when the question asks for an instantaneous value.</li><li>A calculator left in radians when resolving velocities.</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Observations": [
+      "Why did Aristotle's idea last so long? What everyday observations support it, and what was different about Galileo's observations?",
+      "Drop a sheet of paper and a book side by side, then put the paper on top of the book. What does each version show, and what does it not show?"
+    ],
+    "Measurement": [
+      "Compare timing a 1 m fall with a hand stopwatch and with a light gate. Roughly how big is each uncertainty, and could each one tell 9.8 from 9.5 $\\text{m s}^{-2}$?",
+      "Can a better instrument ever change what we believe, or only make us more confident?"
+    ],
+    "Models": [
+      "List the assumptions behind the equations of motion. For a thrown ball, a sky-diver and a sprinter, which assumption fails first?",
+      "Is a model that is \"wrong but useful\" still scientific knowledge?"
+    ]
+  },
+  "tokPrompts": {
+    "If a model is never exactly right, why trust it?": [
+      "Ask students to name a situation where they rely on an imperfect model every day (weather forecasts, maps, satnav arrival times).",
+      "Who decides what counts as \"good enough\": the scientist, the engineer or the person using the result?"
+    ],
+    "Should we trust our intuition?": [
+      "Poll the class before showing the dropped-and-pushed balls (or the MythBusters bullet video). How many predicted correctly?",
+      "Is intuition useless in science, or is it where hypotheses come from?"
+    ],
+    "Does it matter if the story is true?": [
+      "Galileo's Pisa experiment may be a myth. Does a false story about a true result do any harm?",
+      "Compare how textbooks and historians tell the story of a discovery. Why might they differ?"
+    ],
+    "Can motion be captured in symbols?": [
+      "What does a graph or an equation show that a video of the motion doesn't, and the other way round?",
+      "Are the equations of motion discovered or invented?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "E43-CfukEgs",
+      "title": "Brian Cox visits the world's biggest vacuum",
+      "channel": "BBC",
+      "use": "A bowling ball and feathers dropped together in a huge vacuum chamber. A strong hook for free fall and the Observations NoS idea."
+    },
+    {
+      "youtube": "ZVfhztmK9zI",
+      "title": "Apollo 15 Proves Galileo Correct",
+      "channel": "NASA Video",
+      "use": "The hammer and feather dropped on the Moon in 1971. Ask students why it works on the Moon but not in the classroom."
+    },
+    {
+      "youtube": "lw8zbFP50Qo",
+      "title": "Does A Fired Bullet Hit The Ground At The Same Time As A Dropped One? | MythBusters",
+      "channel": "MythBusters",
+      "use": "Independence of horizontal and vertical motion. Pause before the result and ask for predictions."
+    },
+    {
+      "youtube": "mNjxr2Ht17g",
+      "title": "Dropping vs. Horizontal Motion - No Drag vs. Linear Drag vs. Quadratic Drag",
+      "channel": "Dot Physics",
+      "use": "Extension: how air resistance changes the dropped-and-launched comparison. Good for the qualitative effects of fluid resistance."
+    }
+  ],
+  "alsoLabs": [
+    {
+      "href": "experimental/virtual-pendulum.html",
+      "note": "Another way to measure g (section 6, free fall). The lab's main topic is C.1."
+    }
+  ]
+}

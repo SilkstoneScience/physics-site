@@ -89,6 +89,11 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Next-Time Questions: a private index of the ideas (197 questions mapped to the syllabus, ideas only) is in the reference cache as `next-time-questions-map.md`. Use ideas only; write new questions and draw new pictures.
 - Next, after the teacher's check: 2–3 concept challenges per topic for Themes A–E, more big questions and puzzles; maybe a "challenge of the week" if the home page stays uncluttered.
 
+## For teachers: revision sheet builder (trial, November 2026)
+- Plan and decisions: `docs/TEACHERS_PLAN.md`. `teachers/index.html` builds a student revision sheet and teacher notes for one subtopic, downloadable as PDF; linked from a home-page card only, marked "In development". **A.1 only so far** (`teachers/a1.json`: summary, ToK/NoS prompts, videos, extra labs).
+- Every question in the bank has sub-part tags (`"sections"`), checked by `tools/check-sections.mjs`, ready for choosing sub-parts later.
+- Next: teacher files for A.2, A.3 onwards (after the concept challenges); later the Extended Essay menu move, sub-part choice (when there are more Paper 2 questions) and essential-skills sheets.
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".

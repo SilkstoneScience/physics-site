@@ -7,7 +7,7 @@ on:
   schedule:
     - cron: '0 7 * * 1'
   push:
-    paths: ['think/*.json', 'tools/check-links.mjs', '.github/workflows/links.yml']
+    paths: ['think/*.json', 'teachers/*.json', 'tools/check-links.mjs', '.github/workflows/links.yml']
   workflow_dispatch:
 permissions:
   contents: read

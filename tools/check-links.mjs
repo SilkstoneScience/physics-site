@@ -27,6 +27,16 @@ for (const file of FILES) {
   }
 }
 
+// Video ideas in the revision sheet builder's teacher files (teachers/<topic>.json)
+const teacherDir = path.join(ROOT, 'teachers');
+for (const f of fs.existsSync(teacherDir) ? fs.readdirSync(teacherDir).filter((n) => /^[a-e]\d\.json$/.test(n)) : []) {
+  for (const v of JSON.parse(fs.readFileSync(path.join(teacherDir, f), 'utf8')).videos || []) {
+    const url = `https://www.youtube.com/watch?v=${v.youtube}`;
+    if (!links.has(url)) links.set(url, []);
+    links.get(url).push(`teachers/${f} video "${v.title}"`);
+  }
+}
+
 // ----- Check one link -----
 const youtubeId = (url) => (url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([\w-]{11})/) || [])[1];
 async function get(url) {
