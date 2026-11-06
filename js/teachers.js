@@ -140,7 +140,15 @@
   function shuffle(a) { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
   const byOrder = (pool) => (a, b) => pool.findIndex((q) => q.id === a) - pool.findIndex((q) => q.id === b);
   function randomSet(pool, n) { return shuffle(pool).slice(0, n).map((q) => q.id).sort(byOrder(pool)); }
-  function cleanSet(ids, pool, max) { const ok = new Set(pool.map((q) => q.id)); return [...new Set(ids)].filter((id) => ok.has(id)).slice(0, max); }
+  // A saved link keeps its questions; any that no longer exist are replaced at random, so the sheet stays the same length.
+  function cleanSet(ids, pool, max) {
+    const ok = new Set(pool.map((q) => q.id));
+    const wanted = [...new Set(ids)];
+    const kept = wanted.filter((id) => ok.has(id)).slice(0, max);
+    const missing = Math.min(wanted.length, max) - kept.length;
+    if (missing <= 0) return kept;
+    return kept.concat(shuffle(pool.filter((q) => !kept.includes(q.id))).slice(0, missing).map((q) => q.id)).sort(byOrder(pool));
+  }
 
   // ---------- Building the student sheet ----------
   const figureSvg = (f) => f.svg
