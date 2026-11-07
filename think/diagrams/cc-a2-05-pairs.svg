@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <!-- the two third-law pairs: gravitational (blue) between the person and the Earth, contact (orange) between the feet and the ground -->
+  <!-- the Earth, drawn as a large arc, not to scale -->
+  <path class="area" d="M0 240 V200 A420 420 0 0 1 400 200 V240 Z"/>
+  <path class="axis" d="M0 200 A420 420 0 0 1 400 200"/>
+  <text x="392" y="228" text-anchor="end">Earth</text>
+  <!-- person standing at the top of the arc (ground at y = 149 there) -->
+  <circle class="axis" cx="200" cy="42" r="9" style="fill:var(--surface)"/>
+  <path class="axis" d="M200 51 V90 M200 60 L186 80 M200 60 L214 80 M200 90 L192 149 M200 90 L208 149 M192 149 H184 M208 149 H216"/>
+  <!-- gravitational pair (blue): Earth pulls person down; person pulls Earth up -->
+  <line class="l1" x1="236" y1="96" x2="236" y2="140" marker-end="url(#ah1)"/>
+  <text class="t1" x="246" y="122">weight</text>
+  <line class="l1" x1="236" y1="214" x2="236" y2="170" marker-end="url(#ah1)"/>
+  <text class="t1" x="246" y="196">pull on Earth</text>
+  <!-- contact pair (orange): ground pushes person up; feet push ground down -->
+  <line class="l2" x1="164" y1="146" x2="164" y2="102" marker-end="url(#ah2)"/>
+  <text class="t2" x="154" y="122" text-anchor="end">normal force</text>
+  <line class="l2" x1="164" y1="154" x2="164" y2="198" marker-end="url(#ah2)"/>
+  <text class="t2" x="154" y="180" text-anchor="end">push on ground</text>
+</svg>
