@@ -2,6 +2,7 @@
 export default {
   id: 'LQ-S02',
   title: 'Radioisotope power source on a deep-space probe',
+  situation: 'deep-space probe powered by a plutonium-238 radioisotope generator',
   type: 'linking',
   level: 'SL',
   difficulty: 2,

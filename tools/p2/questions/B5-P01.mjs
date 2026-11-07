@@ -2,6 +2,7 @@
 export default {
   id: 'B5-P01',
   title: 'Thermistor frost alarm',
+  situation: 'frost alarm thermistor in series with a fixed resistor',
   type: 'short',
   level: 'SL',
   difficulty: 2,

@@ -31,6 +31,7 @@ export function validateQuestion(def, built, { root, topics, originality, indepe
   if (![1, 2, 3].includes(def.difficulty)) err('meta', 'difficulty must be 1, 2 or 3');
   if (!def.batch) err('meta', 'say which batch the question belongs to (batch: "batch-1")');
   if (!def.title) err('meta', 'give the question a short title (for the audit)');
+  if (def.batch !== 'batch-1' && (typeof def.situation !== 'string' || def.situation.trim().split(/\s+/).length < 3)) err('meta', 'give the situation (situation: "a few words naming the scenario, e.g. frost alarm thermistor circuit") so the similarity check can compare it with other questions');
   if (!Array.isArray(def.topics) || !def.topics.length) err('meta', 'topics must list the subtopics, e.g. ["A.1"]');
   else {
     for (const t of def.topics) {
@@ -190,6 +191,9 @@ export function validateQuestion(def, built, { root, topics, originality, indepe
     const exact = shownValue(r);
     const stated = sigFig(exact, pt.showThat.sf);
     if (Math.abs(stated - exact) > SHOW_THAT_TOLERANCE * Math.abs(exact)) err('show-that', `(${pt.label}) "about ${stated}" is more than 5 % from the true value ${exact.toPrecision(4)}: use more significant figures or change the given values`);
+    // Teacher's rule (7 November 2026): a student shows a "show that" value by giving one more significant figure,
+    // so the true value's next figure must not be 0 ("about 5.4" with a true value of 5.40 cannot be shown that way).
+    if (sigFig(exact, pt.showThat.sf + 1) === stated) warn('show-that-figure', `(${pt.label}) "about ${stated}": the true value ${exact.toPrecision(pt.showThat.sf + 2)} has 0 as its next significant figure, so a student cannot show one more figure than the question states; change a given value so the next figure is not 0`);
     if (!new RegExp(`\\[\\[${pt.showThat.result}:${pt.showThat.sf}u?\\]\\]`).test(pt.question)) err('show-that', `(${pt.label}) the question should state the value with [[${pt.showThat.result}:${pt.showThat.sf}u]]`);
     if (!q.parts[i].markscheme.some((m) => /\d/.test(m))) err('show-that', `(${pt.label}) the mark scheme should give the value to more figures than the question`);
   });

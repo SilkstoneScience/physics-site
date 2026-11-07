@@ -138,7 +138,7 @@ reviewer and the teacher check it.
 | Daily Questions (non-IB, image files) | A similar situation and the same topics are fine, with new numbers. **The wording must be our own and not too close** (teacher, 14 October 2026): no copied sentences, no sentence that follows the original's phrasing with a few words changed, and a different order of parts where possible | The question records the file it was inspired by, and the originality note says how the wording and numbers differ. I transcribe the inspiring question's text into the reference cache (never into physics-site) so the same automatic overlap check as for IB papers can run on it, with a **stricter limit of 6 words**; the reviewer also compares the two side by side |
 | Textbooks, other copyrighted reference | Physics accuracy only | Not used for questions |
 
-Every question file has an `originality` note: its inspiration (if any) and why it is not a copy.
+Every question file has an `originality` note: its inspiration (if any) and why it is not a copy, and (from batch 2) a `situation`: a few words naming its scenario, which the similarity check compares with every other question (section 8).
 
 ---
 
@@ -182,6 +182,8 @@ Every question file has an `originality` note: its inspiration (if any) and why 
 5. Originality: the overlap check against all cached IB Paper 2 texts (8 words) and the transcribed Daily Question that inspired the question (6 words).
 6. Diagrams: file exists, has `<title>` and alt text, font sizes on each `<text>`.
 7. Built twice, identical output.
+8. Similarity (teacher's rule, 7 November 2026): a question may test the same concepts as an existing one, but its situation must differ and its sequence of parts should differ. Checked by `tools/p2/similarity.mjs` against every live Paper 2 question, generated or hand-written: shared content words of the stem and parts (warning at 20 %, error at 40 %, calibrated so that only the known look-alikes of November 2026 warn), the declared `situation` (error when two generated questions share it) and runs of parts with the same command term and syllabus id (warning at 3, error at 4). The reviewer still compares the closest pair by eye.
+9. "Show that" values: the true value's next significant figure must not be 0, so a student can show one more figure than the question states (warning).
 
 `node tools/p2/build.mjs --audit` prints each question's physics, syllabus IDs, inspiration and independent-check
 results for the reviewer.

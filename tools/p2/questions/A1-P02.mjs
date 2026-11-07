@@ -2,6 +2,7 @@
 export default {
   id: 'A1-P02',
   title: 'Electric scooter: non-uniform acceleration from a graph',
+  situation: 'electric scooter velocity-time graph from rest',
   type: 'short',
   level: 'SL',
   difficulty: 2,

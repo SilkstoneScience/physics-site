@@ -2,6 +2,7 @@
 export default {
   id: 'C2-P01',
   title: 'Earthquake P and S waves at a seismic station',
+  situation: 'earthquake P and S waves arriving at a seismic station',
   type: 'short',
   level: 'SL',
   difficulty: 2,

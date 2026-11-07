@@ -11,6 +11,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { buildQuestion, dimensionCheck, shownValue } from './generate.mjs';
 import { validateQuestion } from './validate.mjs';
 import { checkOriginality } from './originality.mjs';
+import { similarityDiagnostics } from './similarity.mjs';
 import { INDEPENDENT } from './independent.mjs';
 import { SYLLABUS_IDS } from './syllabus.mjs';
 import { loadRegistry, stateFor, freezeDiagnostic } from './registry.mjs';
@@ -58,7 +59,7 @@ export const fingerprintOf = (content) => crypto.createHash('sha256').update(sta
 
 // Builds every question twice (it must come out the same), checks it, works out its review status and checks
 // the freeze. Returns { questions, preview, diags, results, json, previewJson }.
-export function buildAll(list, topics, { registry = loadRegistry(), independent = INDEPENDENT, root = ROOT, originality = true } = {}) {
+export function buildAll(list, topics, { registry = loadRegistry(), independent = INDEPENDENT, root = ROOT, originality = true, similarity = true } = {}) {
   const questions = [];
   const preview = [];
   const diags = [];
@@ -87,9 +88,20 @@ export function buildAll(list, topics, { registry = loadRegistry(), independent 
     const fingerprint = fingerprintOf(content);
     const state = stateFor(id, valid, fingerprint, registry);
     if (state.changed) add(freezeDiagnostic(id, state.rec, content, fingerprint));
-    const out = { ...built.question, review: { status: state.status } };
-    if (valid && !state.changed) (state.status === 'APPROVED' ? questions : preview).push(out);
     results.push({ id, def, built, valid, content, fingerprint, state, originality: orig });
+  }
+  // Similarity needs every question built first (tools/p2/similarity.mjs): a question too close to another
+  // (generated or hand-written) fails like any other error and is left out of the outputs.
+  if (similarity) {
+    for (const d of similarityDiagnostics(results, { root })) {
+      diags.push({ ...d, where: `${d.question}.mjs` });
+      const r = results.find((x) => x.id === d.question);
+      if (d.level === 'error' && r && r.valid) { r.valid = false; r.state = stateFor(r.id, false, r.fingerprint, registry); }
+    }
+  }
+  for (const r of results) {
+    if (!r.built || !r.valid || r.state.changed) continue;
+    (r.state.status === 'APPROVED' ? questions : preview).push({ ...r.built.question, review: { status: r.state.status } });
   }
   for (const id of Object.keys(registry.questions)) {
     if (!ids.has(id)) diags.push({ level: 'error', code: 'registry', question: id, where: 'tools/p2/reviews.json', message: 'has a review record, but there is no question file with this id' });

@@ -2,6 +2,7 @@
 export default {
   id: 'D1-P01',
   title: 'Raising a satellite to a higher orbit',
+  situation: 'satellite raised from a low orbit to a higher orbit by its engines',
   type: 'short',
   level: 'HL',
   difficulty: 3,

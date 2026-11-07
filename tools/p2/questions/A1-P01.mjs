@@ -2,6 +2,7 @@
 export default {
   id: 'A1-P01',
   title: 'Package released from a descending drone',
+  situation: 'package released from a descending delivery drone',
   type: 'short',
   level: 'SL',
   difficulty: 3,

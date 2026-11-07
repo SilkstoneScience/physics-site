@@ -58,6 +58,7 @@ export default {
   difficulty: 2,
   topics: ['A.1'],              // the main topic first
   batch: 'batch-1',
+  situation: 'package released from a descending drone',  // a few words naming the scenario (required from batch 2), compared with every other question
   originality: {
     inspiredBy: 'Daily Questions/A.1 - Kinematics/Q12.png',  // or null
     transcript: 'p2-daily/A.1/Q12.txt',  // its text, typed into the reference cache (never into physics-site)
@@ -117,6 +118,8 @@ temperature change. The list is in `units.mjs`.
 | Plausible values | every given value (and any result with a range) inside its plausible range; given values not more precise than stated |
 | Diagrams | file exists, alt text, `<title>`, font sizes on `<text>` not `<g>` |
 | Originality | no 8-word run shared with an IB Paper 2 or mark scheme (2016–2025; runs in 5+ papers are stock phrasing and ignored); no 6-word run shared with the transcript of the Daily Question that inspired it. Needs the reference cache (found from `CLAUDE.local.md`) |
+| Similarity | against every other Paper 2 question, generated or hand-written (`similarity.mjs`): a warning when the two share 20 % or more of their content words (same situation described twice?), an error at 40 % or when two generated questions declare the same `situation`; a warning when 3, and an error when 4, consecutive parts have the same command term and syllabus id as another generated question (vary the sequence of parts). Teacher's rule of 7 November 2026: the same concepts may be tested, but in a different situation and with a different sequence of parts |
+| Show that (next figure) | a warning when the true value's next significant figure is 0 ("about 5.4" with 5.40): a student shows the value by giving one more figure, so change a given value |
 | Determinism | building twice gives the same question |
 
 ## Files

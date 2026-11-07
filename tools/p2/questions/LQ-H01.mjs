@@ -2,6 +2,7 @@
 export default {
   id: 'LQ-H01',
   title: 'Cyclotron making a medical isotope',
+  situation: 'hospital cyclotron producing fluorine-18 for medical scans',
   type: 'linking',
   level: 'HL',
   difficulty: 3,

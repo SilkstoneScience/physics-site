@@ -2,6 +2,7 @@
 export default {
   id: 'C4-P01',
   title: 'Organ pipe closed at one end: harmonics',
+  situation: 'organ pipe closed at one end, harmonics',
   type: 'short',
   level: 'SL',
   difficulty: 2,

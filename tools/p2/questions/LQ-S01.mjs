@@ -2,6 +2,7 @@
 export default {
   id: 'LQ-S01',
   title: 'High-altitude weather balloon',
+  situation: 'helium weather balloon with radiosonde payload rising through the atmosphere',
   type: 'linking',
   level: 'SL',
   difficulty: 2,

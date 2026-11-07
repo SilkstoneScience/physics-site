@@ -3,6 +3,7 @@
 export default {
   id: 'E5-P01',
   title: 'Helium fusion and the fate of stellar cores',
+  situation: 'triple-alpha helium fusion in a red giant core',
   type: 'short',
   level: 'SL',
   difficulty: 3,

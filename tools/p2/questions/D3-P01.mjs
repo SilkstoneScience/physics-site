@@ -2,6 +2,7 @@
 export default {
   id: 'D3-P01',
   title: 'Two parallel wires: field and force',
+  situation: 'two long parallel wires P and Q carrying currents',
   type: 'short',
   level: 'SL',
   difficulty: 2,

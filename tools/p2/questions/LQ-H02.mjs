@@ -2,6 +2,7 @@
 export default {
   id: 'LQ-H02',
   title: 'Flywheel energy store on a tram',
+  situation: 'tram flywheel energy store spun down by friction and braking',
   type: 'linking',
   level: 'HL',
   difficulty: 3,

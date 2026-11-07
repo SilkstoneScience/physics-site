@@ -3,6 +3,7 @@
 export default {
   id: 'B3-P01',
   title: 'Helium atoms: rms speed, temperature and pressure',
+  situation: 'helium gas atoms in a sealed container, rms speed and pressure',
   type: 'short',
   level: 'SL',
   difficulty: 2,

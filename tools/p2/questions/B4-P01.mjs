@@ -2,6 +2,7 @@
 export default {
   id: 'B4-P01',
   title: 'Cycle with an adiabatic compression',
+  situation: 'monatomic ideal gas cycle with an adiabatic compression on a pV graph',
   type: 'short',
   level: 'HL',
   difficulty: 3,

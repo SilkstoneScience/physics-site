@@ -2,6 +2,7 @@
 export default {
   id: 'E2-P01',
   title: 'Photoelectric effect: stopping voltage against frequency',
+  situation: 'photoelectric stopping voltage against frequency graph',
   type: 'short',
   level: 'HL',
   difficulty: 2,

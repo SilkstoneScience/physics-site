@@ -5,6 +5,7 @@
 export const GOOD_SHORT = {
   id: 'A1-P90',
   title: 'Stone thrown horizontally from a cliff (test example)',
+  situation: 'test fixture: stone thrown horizontally from a cliff',
   type: 'short',
   level: 'SL',
   difficulty: 2,
@@ -60,6 +61,7 @@ export const GOOD_SHORT_INDEPENDENT = (gv) => {
 export const GOOD_LINKING = {
   id: 'LQ-S90',
   title: 'Kettle on a camping stove (test example)',
+  situation: 'test fixture: kettle heated on a camping stove',
   type: 'linking',
   level: 'SL',
   difficulty: 2,
