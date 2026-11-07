@@ -18,8 +18,11 @@ const ESA = { credit: '© ESA', licence: 'ESA standard licence (educational use)
 export const SOURCES = [
   { key: 'aps', name: 'APS Physics Magazine', feed: 'https://feeds.aps.org/rss/recent/physics.xml', bonus: 10, open: false, image: null, quote: false },
   { key: 'physicsworld', name: 'Physics World', feed: 'https://physicsworld.com/feed/', bonus: 6, open: false, image: null },
-  { key: 'cern', name: 'CERN', feed: 'https://home.cern/feed/', bonus: 4, open: false, image: null },
-  { key: 'esa', name: 'ESA', feed: 'https://www.esa.int/rssfeed/Science_Exploration/Space_Science', bonus: 6, open: true, image: ESA },
+  // Paused November 2026: CERN's new website still advertises this feed, but the address gives "not found". Restore this line when it works again.
+  // { key: 'cern', name: 'CERN', feed: 'https://home.cern/feed/', bonus: 4, open: false, image: null },
+  // Paused November 2026: this is ESA's new address and it works, but after ESA's website move its dates are unreliable
+  // (old articles carry new dates and new addresses, so old stories look new and published ones could repeat). Restore once the dates settle.
+  // { key: 'esa', name: 'ESA', feed: 'https://www.esa.int/rss/science.rss', bonus: 6, open: true, image: ESA },
   { key: 'esawebb', name: 'ESA/Webb', feed: 'https://esawebb.org/news/feed/', bonus: 8, open: true, image: { credit: 'ESA/Webb, NASA & CSA', ...CC_BY } },
   { key: 'esahubble', name: 'ESA/Hubble', feed: 'https://esahubble.org/news/feed/', bonus: 8, open: true, image: { credit: 'ESA/Hubble & NASA', ...CC_BY } },
   { key: 'eso', name: 'ESO', feed: 'https://www.eso.org/public/news/feed/', bonus: 8, open: true, image: { credit: 'ESO', ...CC_BY } },
@@ -39,6 +42,7 @@ export const SOURCES = [
   // US government text is public domain, so NIST's full articles may be read (its images are credited case by case, so not used).
   { key: 'nist', name: 'NIST', feed: 'https://www.nist.gov/news-events/news/rss.xml', bonus: 6, open: true, image: null },   // ~1/wk
   { key: 'mit', name: 'MIT News', feed: 'https://news.mit.edu/topic/mitphysics-rss.xml', bonus: 2, open: false, image: null },   // ~2/wk
-  { key: 'esa-eo', name: 'ESA', feed: 'https://www.esa.int/rssfeed/Applications/Observing_the_Earth', bonus: 2, open: true, image: ESA },
+  // Paused November 2026: ESA's new website has no Earth observation feed that we could find. Restore with the new address if one appears.
+  // { key: 'esa-eo', name: 'ESA', feed: 'https://www.esa.int/rssfeed/Applications/Observing_the_Earth', bonus: 2, open: true, image: ESA },
   { key: 'nasa-eo', name: 'NASA Earth Observatory', feed: 'https://earthobservatory.nasa.gov/feeds/image-of-the-day.rss', bonus: 0, open: true, image: NASA_PD },
 ];

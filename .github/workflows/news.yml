@@ -57,8 +57,12 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node tools/news/collect.mjs --dry-run --report "$GITHUB_STEP_SUMMARY"
+      # A collector problem (e.g. a failing feed) mustn't lose a story it has already written: carry on, save, and
+      # only then fail the run in the last step, so GitHub still emails the teacher.
       - name: Collect and publish one story
+        id: collect
         if: steps.mode.outputs.mode == 'publish'
+        continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node tools/news/collect.mjs --publish --report "$GITHUB_STEP_SUMMARY"
@@ -81,3 +85,8 @@ jobs:
           git pull --rebase origin main
           git push origin HEAD:main
           gh api -X POST "repos/${{ github.repository }}/pages/builds" > /dev/null && echo "Asked GitHub Pages to republish the site."
+      - name: Report a collector problem
+        if: steps.collect.outcome == 'failure'
+        run: |
+          echo "::error::The collector reported a problem: see the notes on this run. Anything it found has been saved."
+          exit 1
