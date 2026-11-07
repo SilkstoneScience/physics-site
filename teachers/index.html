@@ -36,12 +36,20 @@
 
     <h1>Revision sheet builder <span class="tag preview">In development</span></h1>
     <p class="lead">For teachers: choose a subtopic and the parts you want, and the page builds a student revision sheet and a matching set of teacher notes with answers. Download either one as a PDF.</p>
-    <p class="notice"><strong>Work in progress.</strong> Only A.1 Kinematics is available so far; more subtopics are coming, and the sheets may change as the tool develops. Spotted a problem or have a suggestion? <a href="../about.html#contact">Let me know</a>.</p>
+    <p class="notice"><strong>Work in progress.</strong> The sheets may change as the tool develops. Spotted a problem or have a suggestion? <a href="../about.html#contact">Let me know</a>.</p>
 
     <form class="tb-form" id="tb-form" onsubmit="return false">
       <div class="tb-row">
         <label for="tb-topic"><strong>Subtopic</strong></label>
         <select id="tb-topic"></select>
+      </div>
+      <div class="tb-row tb-level-row">
+        <label for="tb-level"><strong>Level</strong></label>
+        <select id="tb-level">
+          <option value="HL">SL and HL (HL content tagged)</option>
+          <option value="SL">SL only (leave out HL content)</option>
+        </select>
+        <span class="tb-avail" id="tb-level-note"></span>
       </div>
 
       <fieldset class="tb-parts">

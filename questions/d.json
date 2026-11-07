@@ -337,6 +337,7 @@
     "paper": "2",
     "difficulty": 2,
     "level": "SL",
+    "y2028": true,
     "sections": ["orbits", "kepler", "strength", "weightless"],
     "stem": "<p>Phobos, a moon of Mars, moves in a circular orbit of radius $9.38 \\times 10^6$ m with a period of 7.65 hours. The radius of Mars is $3.39 \\times 10^6$ m.</p>",
     "parts": [
@@ -913,7 +914,7 @@
     "difficulty": 1,
     "level": "SL",
     "sections": ["circle", "force"],
-    "stem": "<p>A charged particle moves at right angles to a uniform magnetic field. Which quantity stays constant?</p>",
+    "stem": "<p>A charged particle moves at right angles to a uniform magnetic field. Which quantity stays constant in both magnitude and direction?</p>",
     "options": [
       "Its velocity",
       "Its kinetic energy",
@@ -921,7 +922,7 @@
       "Its acceleration"
     ],
     "answer": 1,
-    "explanation": "The magnetic force is always perpendicular to the velocity, so it does no work: the speed and kinetic energy stay constant. The direction of the velocity, momentum and acceleration all keep changing as the particle goes round its circle."
+    "explanation": "The magnetic force is always perpendicular to the velocity, so it does no work: the speed and kinetic energy stay constant. The velocity, momentum and acceleration keep the same magnitude, but their directions change continuously as the particle goes round its circle. Kinetic energy is a scalar, so it is unchanged in every sense."
   },
   {
     "id": "D3-003",
@@ -1411,12 +1412,12 @@
     "stem": "<p>For a coil rotating in a uniform magnetic field, when is the induced emf zero?</p>",
     "options": [
       "When the plane of the coil is parallel to the field",
-      "When the flux through the coil is zero",
+      "When the flux through the coil is changing fastest",
       "When the coil is moving fastest",
       "When the plane of the coil is at right angles to the field"
     ],
     "answer": 3,
-    "explanation": "When the coil faces the field (its plane at right angles to $B$), the flux is at a maximum and, for an instant, not changing, so the emf is zero. When the plane is parallel to the field, the flux is zero but changing fastest, so the emf is maximum."
+    "explanation": "When the coil faces the field (its plane at right angles to $B$), the flux is at a maximum and, for an instant, not changing, so the emf is zero. When the plane is parallel to the field, the flux is zero but changing fastest, so the emf is a maximum: options A and B both describe that moment, not a zero."
   },
   {
     "id": "D4-009",

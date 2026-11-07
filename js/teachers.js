@@ -35,6 +35,7 @@
   const params = new URLSearchParams(location.search);
   const state = {
     topic: params.get('topic') || '',
+    level: params.get('level') === 'SL' ? 'SL' : 'HL', // SL sheets leave out HL notes, worked examples and questions
     parts: new Set(params.has('parts') ? params.get('parts').split('').filter((p) => PARTS.includes(p)) : PARTS),
     cc: params.get('cc'), // concept challenge id, "" = none, null = default
     bq: params.get('bq'),
@@ -47,6 +48,7 @@
   function saveState() {
     const p = new URLSearchParams();
     p.set('topic', state.topic);
+    if (state.level === 'SL' && !data.hlOnly) p.set('level', 'SL');
     if (PARTS.some((x) => !state.parts.has(x))) p.set('parts', PARTS.filter((x) => state.parts.has(x)).join(''));
     p.set('cc', state.cc || '');
     p.set('bq', state.bq || '');
@@ -72,25 +74,46 @@
     const all = files.flat().filter(Boolean).filter((q) => q.topic === topic);
     const pageUrl = new URL(`../themes/${slug}.html`, location.href);
     const tokBox = page.querySelector('section.tok');
+    const info = (window.SYLLABUS || []).flatMap((t) => t.topics).find((t) => t.id === topic);
     return {
       topic, slug, teacher, pageUrl,
       liveUrl: `${SITE}themes/${slug}.html`, // printed links always point to the published site
-      title: (window.SYLLABUS || []).flatMap((t) => t.topics).find((t) => t.id === topic)?.title || topic,
-      concepts: (concepts || []).filter((c) => c.topic === topic),
-      bigs: (bigs || []).filter((b) => (b.topics || []).includes(topic)),
+      title: info?.title || topic,
+      hlOnly: !!info?.hl,
+      allConcepts: (concepts || []).filter((c) => c.topic === topic),
+      allBigs: (bigs || []).filter((b) => (b.topics || []).includes(topic)),
       tokQs: tokBox ? [...tokBox.querySelectorAll('ul.tok-q > li')].map((li) => absolutise(li, pageUrl).innerHTML.trim()) : [],
       nos: tokBox ? [...tokBox.querySelectorAll('.tok-grid > div:first-child > p')].map((p) => absolutise(p, pageUrl).innerHTML.trim()) : [],
-      worked: [...page.querySelectorAll('main .worked')].map((box) => {
+      allWorked: [...page.querySelectorAll('main .worked')].map((box) => {
         const b = absolutise(box.cloneNode(true), pageUrl);
         b.querySelectorAll('.hint').forEach((h) => h.remove()); // solutions are visible on the sheet, so no hint is needed
-        return b.outerHTML;
+        // HL if it sits in the page's HL-only part or its heading carries an HL tag
+        return { html: b.outerHTML, hl: !!(box.closest('.hl-zone') || box.querySelector('h3 .tag.hl')) };
       }),
-      p1: all.filter((q) => q.paper === '1A'),
-      p2: all.filter((q) => q.paper === '2'),
+      allP1: all.filter((q) => q.paper === '1A'),
+      allP2: all.filter((q) => q.paper === '2'),
       labs: labsFor(topic, practicals, teacher.alsoLabs || []),
       sims: listFrom(sims, `#simulations-${slug}`, '../resources/simulations.html'),
       apps: listFrom(apps, `#apps-${slug}`, '../resources/apps.html'),
     };
+  }
+  // The content for the chosen level: an SL sheet leaves out everything marked HL.
+  function applyLevel(d) {
+    const sl = state.level === 'SL' && !d.hlOnly;
+    const keep = (x) => !sl || x.level !== 'HL';
+    d.sl = sl;
+    d.concepts = d.allConcepts.filter(keep);
+    d.bigs = d.allBigs.filter(keep);
+    d.worked = d.allWorked.filter((w) => !sl || !w.hl).map((w) => w.html);
+    d.p1 = d.allP1.filter(keep);
+    d.p2 = d.allP2.filter(keep);
+    d.summary = (d.teacher.summary || []).filter((x) => !sl || !x.hl).map((x) => {
+      const box = document.createElement('div');
+      box.innerHTML = x.html;
+      if (sl) box.querySelectorAll('.hl-only').forEach((el) => el.remove());
+      const tag = x.hl && !d.hlOnly ? '<span class="tag hl">HL</span> ' : '';
+      return `<div class="sheet-notes"><h4>${tag}${esc(x.heading)}</h4>${box.innerHTML}</div>`;
+    });
   }
   // Make links and pictures copied from another page work here (and in the PDF).
   function absolutise(el, base) {
@@ -159,14 +182,16 @@
     return `<figure class="diagram">${figureSvg(f)}${f.caption || f.credit ? `<figcaption>${f.caption || ''}${f.credit ? ` <span class="credit">${f.credit}</span>` : ''}</figcaption>` : ''}</figure>`;
   }
   function lines(n) { return `<div class="sheet-lines" aria-hidden="true">${'<span></span>'.repeat(n)}</div>`; }
+  const hlTag = (q) => (q.level === 'HL' && !data.hlOnly ? ' <span class="tag hl">HL</span>' : '');
   const qDiagram = (q) => q.diagram ? `<figure class="q-fig"><img src="../${esc(q.diagram)}" alt="${esc(q.diagramAlt || 'Diagram for this question')}"></figure>` : '';
   const totalMarks = (q) => q.parts.reduce((s, p) => s + (p.marks || 0), 0);
 
+  const levelLabel = (d) => (d.hlOnly ? 'HL only' : d.sl ? 'SL' : 'SL and HL');
   function studentSheet(d, picks) {
     const out = [];
     let n = 0;
     const part = (title, html) => out.push(`<section class="sheet-part"><h3><span class="sheet-num">${++n}</span>${title}</h3>${html}</section>`);
-    out.push(`<header class="sheet-head"><p class="sheet-kicker">IB Physics revision sheet</p><h2><span class="code">${esc(d.topic)}</span>${esc(d.title)}</h2>
+    out.push(`<header class="sheet-head"><p class="sheet-kicker">IB Physics revision sheet · ${levelLabel(d)}</p><h2><span class="code">${esc(d.topic)}</span>${esc(d.title)}</h2>
       <p class="sheet-name"><span>Name: </span><span class="sheet-blank"></span><span>Date: </span><span class="sheet-blank short"></span></p></header>`);
 
     if (state.parts.has('h') && (picks.cc || picks.bq)) {
@@ -191,7 +216,7 @@
     if (state.parts.has('t') && tokQ) part('Theory of knowledge', `<p class="sheet-tok">${tokQ}</p>${lines(3)}`);
     if (state.parts.has('n') && nosP) part('Nature of science', `<p>${nosP}</p>`);
     if (state.parts.has('r')) {
-      part('Revision notes', d.teacher.summary.map((s) => `<div class="sheet-notes"><h4>${esc(s.heading)}</h4>${s.html}</div>`).join(''));
+      part('Revision notes', d.summary.join(''));
     }
     if (state.parts.has('w') && d.worked.length) part('Worked examples', d.worked.join(''));
     if (state.parts.has('s') && (picks.p1.length || picks.p2.length)) {
@@ -200,12 +225,12 @@
       const swap = (id, which) => (state.mode === 'random' ? `<button type="button" class="link-btn tb-swap no-print" data-swap="${which}" data-id="${esc(id)}">Swap this question</button>` : '');
       if (picks.p1.length) {
         html += `<h4>Multiple choice (Paper 1A style)</h4>`;
-        html += picks.p1.map((q) => `<div class="sheet-q"><p class="sheet-qnum">${++qn}.${swap(q.id, 1)}</p>${q.stem}${qDiagram(q)}
+        html += picks.p1.map((q) => `<div class="sheet-q"><p class="sheet-qnum">${++qn}.${hlTag(q)}${swap(q.id, 1)}</p>${q.stem}${qDiagram(q)}
           <ol class="sheet-options">${q.options.map((o) => `<li>${o}</li>`).join('')}</ol></div>`).join('');
       }
       if (picks.p2.length) {
         html += `<h4>Structured questions (Paper 2 style)</h4>`;
-        html += picks.p2.map((q) => `<div class="sheet-q"><p class="sheet-qnum">${++qn}. <span class="sheet-marks">[${totalMarks(q)} marks]</span>${swap(q.id, 2)}</p>${q.stem}${qDiagram(q)}
+        html += picks.p2.map((q) => `<div class="sheet-q"><p class="sheet-qnum">${++qn}.${hlTag(q)} <span class="sheet-marks">[${totalMarks(q)} marks]</span>${swap(q.id, 2)}</p>${q.stem}${qDiagram(q)}
           ${q.parts.map((p) => `<div class="sheet-qpart"><p><strong>(${esc(p.label)})</strong> ${p.question} <span class="sheet-marks">[${p.marks}]</span></p>${lines(Math.min(8, 2 * p.marks))}</div>`).join('')}</div>`).join('');
       }
       part('Self-test', html);
@@ -223,7 +248,7 @@
     const out = [];
     let n = 0;
     const part = (title, html) => out.push(`<section class="sheet-part"><h3><span class="sheet-num">${++n}</span>${title}</h3>${html}</section>`);
-    out.push(`<header class="sheet-head"><p class="sheet-kicker">Teacher notes and answers</p><h2><span class="code">${esc(d.topic)}</span>${esc(d.title)}</h2>
+    out.push(`<header class="sheet-head"><p class="sheet-kicker">Teacher notes and answers · ${levelLabel(d)}</p><h2><span class="code">${esc(d.topic)}</span>${esc(d.title)}</h2>
       <p>For the revision sheet built at <a href="${esc(location.href)}">this link</a>.</p></header>`);
 
     if (state.parts.has('h') && (picks.cc || picks.bq)) {
@@ -339,6 +364,12 @@
 
   function setUpControls() {
     const d = data;
+    applyLevel(d);
+    if (state.cc && !d.concepts.some((c) => c.id === state.cc)) state.cc = null;
+    if (state.bq && !d.bigs.some((b) => b.id === state.bq)) state.bq = null;
+    $('tb-level').value = d.hlOnly ? 'HL' : state.level;
+    $('tb-level').disabled = d.hlOnly;
+    $('tb-level-note').textContent = d.hlOnly ? 'This subtopic is HL only.' : '';
     if (state.cc === null) state.cc = d.concepts[0]?.id || '';
     if (state.bq === null) state.bq = d.concepts.length ? '' : (d.bigs[0]?.id || '');
     fillSelect($('tb-cc'), d.concepts.map((c) => ({ value: c.id, label: c.title })), state.cc, d.concepts.length ? 'None' : 'None yet for this subtopic');
@@ -397,6 +428,7 @@
     $('tb-form').addEventListener('change', (e) => {
       const t = e.target;
       if (t.dataset.part) { if (t.checked) state.parts.add(t.dataset.part); else state.parts.delete(t.dataset.part); }
+      else if (t.id === 'tb-level') { state.level = t.value; setUpControls(); }
       else if (t.id === 'tb-cc') state.cc = t.value;
       else if (t.id === 'tb-bq') state.bq = t.value;
       else if (t.id === 'tb-tok') state.tok = Number(t.value);

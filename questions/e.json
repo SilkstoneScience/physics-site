@@ -335,17 +335,17 @@
     "difficulty": 3,
     "level": "HL",
     "sections": ["approach", "radius", "deviations"],
-    "stem": "<p>An alpha particle with kinetic energy 6.0 MeV is fired head-on at a silver nucleus, $^{108}_{\\;47}\\text{Ag}$. Assume the silver nucleus does not move.</p>",
+    "stem": "<p>An alpha particle with kinetic energy 5.5 MeV is fired head-on at a silver nucleus, $^{108}_{\\;47}\\text{Ag}$. Assume the silver nucleus does not move.</p>",
     "parts": [
       {
         "label": "a",
         "sections": ["approach"],
-        "question": "Show that the distance of closest approach is about $2 \\times 10^{-14}$ m.",
+        "question": "Show that the distance of closest approach is about $2.5 \\times 10^{-14}$ m.",
         "marks": 3,
         "markscheme": [
-          "$E_k = 6.0 \\times 10^{6} \\times 1.60 \\times 10^{-19} = 9.6 \\times 10^{-13}$ J ✓",
+          "$E_k = 5.5 \\times 10^{6} \\times 1.60 \\times 10^{-19} = 8.8 \\times 10^{-13}$ J ✓",
           "At closest approach $E_k = \\dfrac{k(2e)(47e)}{d}$ ✓",
-          "$d = \\dfrac{8.99 \\times 10^{9} \\times 2 \\times 47 \\times (1.60 \\times 10^{-19})^2}{9.6 \\times 10^{-13}} = 2.25 \\times 10^{-14}$ m ✓"
+          "$d = \\dfrac{8.99 \\times 10^{9} \\times 2 \\times 47 \\times (1.60 \\times 10^{-19})^2}{8.8 \\times 10^{-13}} = 2.46 \\times 10^{-14}$ m ✓"
         ]
       },
       {
@@ -769,12 +769,12 @@
     "stem": "<p>Radium-226, $^{226}_{\\;88}\\text{Ra}$, undergoes alpha decay. What is the product nucleus?</p>",
     "options": [
       "$^{222}_{\\;86}\\text{Rn}$",
-      "$^{222}_{\\;88}\\text{Rn}$",
+      "$^{222}_{\\;88}\\text{Ra}$",
       "$^{226}_{\\;87}\\text{Fr}$",
       "$^{226}_{\\;89}\\text{Ac}$"
     ],
     "answer": 0,
-    "explanation": "An alpha particle carries away 4 nucleons and 2 protons: $A = 222$, $Z = 86$. $^{226}_{\\;89}$Ac would come from β⁻ decay."
+    "explanation": "An alpha particle carries away 4 nucleons and 2 protons: $A = 222$, $Z = 86$. $^{226}_{\\;89}$Ac would come from β⁻ decay. Option B keeps the proton number unchanged, which only happens in gamma decay."
   },
   {
     "id": "E3-002",
@@ -1824,7 +1824,7 @@
     "difficulty": 3,
     "level": "SL",
     "sections": ["parallax", "units", "spectra", "radius", "hr"],
-    "stem": "<p>Observations of a star give: parallax angle 0.0200 arcseconds; apparent brightness $4.0 \\times 10^{-10}\\ \\text{W m}^{-2}$; peak wavelength of its spectrum 725 nm.</p><p>Luminosity of the Sun $= 3.83 \\times 10^{26}$ W &nbsp;·&nbsp; Radius of the Sun $= 6.96 \\times 10^{8}$ m</p>",
+    "stem": "<p>Observations of a star give: parallax angle 0.0200 arcseconds; apparent brightness $4.5 \\times 10^{-10}\\ \\text{W m}^{-2}$; peak wavelength of its spectrum 725 nm.</p><p>Luminosity of the Sun $= 3.83 \\times 10^{26}$ W &nbsp;·&nbsp; Radius of the Sun $= 6.96 \\times 10^{8}$ m</p>",
     "parts": [
       {
         "label": "a",
@@ -1840,11 +1840,11 @@
       {
         "label": "b",
         "sections": ["spectra"],
-        "question": "Show that the luminosity of the star is about $1 \\times 10^{28}$ W.",
+        "question": "Show that the luminosity of the star is about $1.3 \\times 10^{28}$ W.",
         "marks": 2,
         "markscheme": [
-          "$L = 4\\pi d^2b = 4\\pi \\times (1.54 \\times 10^{18})^2 \\times 4.0 \\times 10^{-10}$ ✓",
-          "$= 1.2 \\times 10^{28}$ W ✓"
+          "$L = 4\\pi d^2b = 4\\pi \\times (1.54 \\times 10^{18})^2 \\times 4.5 \\times 10^{-10}$ ✓",
+          "$= 1.34 \\times 10^{28}$ W ✓"
         ]
       },
       {
@@ -1862,11 +1862,11 @@
         "sections": ["radius"],
         "question": "Calculate the radius of the star, as a multiple of the Sun’s radius.",
         "marks": 3,
-        "numeric": { "answer": 11.7, "mistakes": [{ "value": 8100000000, "feedback": "That's the radius in metres. Divide by the Sun's radius." }] },
+        "numeric": { "answer": 12.34, "range": [11.9, 12.6], "mistakes": [{ "value": 8500000000, "feedback": "That's the radius in metres. Divide by the Sun's radius." }] },
         "markscheme": [
-          "$R = \\sqrt{\\dfrac{L}{4\\pi\\sigma T^4}} = \\sqrt{\\dfrac{1.2 \\times 10^{28}}{4\\pi \\times 5.67 \\times 10^{-8} \\times (4.0 \\times 10^{3})^4}}$ ✓",
-          "$= 8.1 \\times 10^{9}$ m ✓",
-          "$\\approx 12$ times the Sun’s radius ✓"
+          "$R = \\sqrt{\\dfrac{L}{4\\pi\\sigma T^4}} = \\sqrt{\\dfrac{1.34 \\times 10^{28}}{4\\pi \\times 5.67 \\times 10^{-8} \\times (4.0 \\times 10^{3})^4}}$ ✓",
+          "$= 8.6 \\times 10^{9}$ m ✓ (accept $8.4 \\times 10^{9}$ m using $1.3 \\times 10^{28}$ W)",
+          "$\\approx 12$ times the Sun’s radius ✓ (accept 12.1 to 12.3)"
         ]
       },
       {
@@ -1875,7 +1875,7 @@
         "question": "Identify the type of star, giving a reason.",
         "marks": 1,
         "markscheme": [
-          "Red giant: cooler than the Sun but about 30 times as luminous, so much larger ✓"
+          "Red giant: cooler than the Sun but about 35 times as luminous, so much larger ✓"
         ]
       }
     ]
@@ -1887,6 +1887,7 @@
     "paper": "2",
     "difficulty": 2,
     "level": "SL",
+    "y2028": true,
     "sections": ["evolution", "hr", "equilibrium"],
     "stem": "<p>This question is about the evolution of stars.</p>",
     "parts": [

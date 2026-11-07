@@ -101,9 +101,9 @@ export default {
       question: 'Comment on whether it was reasonable to use $E_{\\text{k}} = \\tfrac{1}{2}mv^2$ in (a)(iv).',
       markscheme: [
         '$\\gamma$ is only about 2 % greater than 1 ✓',
-        'so relativistic effects change the energy by only about this amount: the non-relativistic equation is a reasonable approximation (for this answer to 2 significant figures) ✓',
+        'so the relativistic correction to the kinetic energy is only a few per cent: the non-relativistic equation is a reasonable approximation ✓',
       ],
-      examinerNote: 'At about one-fifth of the speed of light the relativistic correction is a few per cent. Award the second mark for a conclusion consistent with the student\'s γ.',
+      examinerNote: 'At about one-fifth of the speed of light the relativistic correction is a few per cent: the relativistic kinetic energy (γ − 1)mc² is about 17.7 MeV against the classical 17.2 MeV, so the two do not agree to 2 significant figures. Award the second mark for a conclusion consistent with the student\'s γ.',
     },
     {
       label: 'c(i)', command: 'Calculate', marks: 1, syllabus: ['E.3.H9'],
