@@ -318,6 +318,61 @@ function idsIn(rel) {
   return idsCache.get(rel);
 }
 
+// ---------- 3a. Famous scientists (scientists.json, drawn on topic pages by js/site.js and in the revision sheet builder) ----------
+// Plan and decisions: docs/FAMOUS_SCIENTISTS_PLAN.md. Pictures: openly licensed only, credited on the page and on about.html.
+const OPEN_LICENCES = /^(public domain|CC0|CC BY( \d\.\d)?|CC BY-SA( \d\.\d)?)$/i;
+function jpegWidth(rel) { // reads the width from a JPEG's frame header
+  const b = fs.readFileSync(path.join(ROOT, rel));
+  for (let i = 2; i < b.length - 9;) {
+    if (b[i] !== 0xff) return null;
+    const m = b[i + 1];
+    if (m >= 0xc0 && m <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(m)) return b.readUInt16BE(i + 7);
+    i += 2 + b.readUInt16BE(i + 2);
+  }
+  return null;
+}
+if (exists('scientists.json')) {
+  let sci = {};
+  try { sci = JSON.parse(read('scientists.json')); } catch (e) { err('scientists.json', `isn't valid JSON: ${e.message}`); }
+  const about = exists('about.html') ? read('about.html') : '';
+  const seen = new Set();
+  for (const [topic, list] of Object.entries(sci)) {
+    if (!TOPICS.has(topic)) { err('scientists.json', `unknown subtopic "${topic}"`); continue; }
+    if (!Array.isArray(list)) { err('scientists.json', `${topic} should be a list [ ... ]`); continue; }
+    const page = 'themes/' + site.topicFile(topic);
+    for (const s of list) {
+      const where = `scientists.json ${topic} ${s.id || '(no id)'}`;
+      if (!/^[a-z][a-z-]*$/.test(s.id || '')) err(where, 'id should be lower case letters and hyphens, e.g. "du-chatelet"');
+      if (seen.has(s.id)) err(where, 'duplicate id');
+      seen.add(s.id);
+      for (const k of ['name', 'years', 'origin', 'caption', 'summary', 'achievements', 'prompt']) {
+        if (!s[k]) err(where, `needs "${k}"`); else checkText(where, s[k], k);
+      }
+      if (!['SL', 'HL'].includes(s.level)) err(where, 'level must be "SL" or "HL"');
+      else if (TOPICS.get(topic).hl && s.level !== 'HL') err(where, `${topic} is HL only, so level must be "HL"`);
+      if (!s.place) err(where, 'needs "place" (the id of the <h2> section the box goes in)');
+      else if (!new RegExp(`<h2[^>]*\\sid="${s.place}"`).test(read(page))) err(where, `place "${s.place}" isn't an <h2> section on ${page}`);
+      if (!s.alt) err(where, 'the picture needs alt text');
+      if (!s.image) err(where, 'needs a picture ("image")');
+      else if (!exists(s.image)) err(where, `picture not found: ${s.image}`);
+      else {
+        const kb = fs.statSync(path.join(ROOT, s.image)).size / 1024;
+        if (kb > 300) err(where, `${s.image} is ${Math.round(kb)} KB: compress it (ideally under 200 KB)`);
+        else if (kb > 200) warn(where, `${s.image} is ${Math.round(kb)} KB (ideally under 200 KB)`);
+        const w = /\.jpe?g$/i.test(s.image) ? jpegWidth(s.image) : null;
+        if (w > 1200) err(where, `${s.image} is ${w} px wide (at most 1200 px)`);
+      }
+      const c = s.credit || {};
+      if (!c.author || !c.file || !c.licence) err(where, 'credit needs "author", "file" (the Commons file page) and "licence"');
+      else {
+        if (!OPEN_LICENCES.test(c.licence)) err(where, `licence "${c.licence}" isn't allowed: only CC BY, CC BY-SA, CC0 or public domain`);
+        if (!/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(c.file)) err(where, 'credit.file should be the picture\'s Wikimedia Commons file page');
+        if (!about.includes(c.file)) err(where, 'the picture is missing from the "Image credits" list on about.html');
+      }
+    }
+  }
+}
+
 for (const page of pages) {
   const html = read(page);
   const depth = page.split('/').length - 1;

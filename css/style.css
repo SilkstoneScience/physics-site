@@ -211,6 +211,21 @@ figure.diagram svg.small { max-width: 280px; }
 /* Photos from Wikimedia Commons and similar: the credit line sits under the caption */
 figure.diagram img.photo { display: block; margin: 0 auto; width: 100%; max-width: 600px; height: auto; border-radius: 8px; }
 figure.diagram .credit { display: block; font-size: 0.8rem; margin-top: 4px; }
+/* Famous scientist box (drawn by js/site.js from scientists.json, inside the section the work fits best) */
+aside.scientist { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px 10px; margin: 22px 0; }
+.scientist-head { display: flex; gap: 16px; align-items: flex-start; }
+.scientist-pic { flex: none; display: block; width: 128px; height: auto; border-radius: 8px; border: 1px solid var(--border); }
+.scientist-intro { min-width: 0; }
+.scientist-kicker { margin: 0 0 2px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+aside.scientist h3 { margin: 0 0 2px; }
+.scientist-meta { margin: 0 0 8px; color: var(--muted); font-size: 0.92rem; }
+.scientist-caption { margin: 0; }
+details.scientist-more { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 8px; }
+details.scientist-more summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+details.scientist-more ul { margin: 8px 0 4px; padding-left: 1.2em; }
+details.scientist-more li { margin: 4px 0; }
+aside.scientist .credit { font-size: 0.8rem; color: var(--muted); margin: 8px 0 0; }
+@media (max-width: 480px) { .scientist-head { gap: 12px; } .scientist-pic { width: 92px; } }
 .diagram text { fill: currentColor; font-size: 16px; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
 @media (max-width: 600px) { .diagram text { font-size: 19px; } }
 .key-1 { color: var(--accent); font-weight: 600; }

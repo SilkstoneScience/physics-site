@@ -12,7 +12,7 @@
   const MAX1 = 10; // most Paper 1A questions on one sheet (teacher's decision)
   const MAX2 = 5;  // most Paper 2 questions
   const SITE = 'https://physics.silkstone.xyz/';
-  const PARTS = ['h', 't', 'n', 'o', 'r', 'w', 's']; // hook, ToK, NoS, oracy (teacher notes only), revision notes, worked examples, self-test
+  const PARTS = ['h', 't', 'n', 'f', 'o', 'r', 'w', 's']; // hook, ToK, NoS, famous scientists, oracy (teacher notes only), revision notes, worked examples, self-test
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const LETTERS = 'ABCD';
@@ -64,11 +64,12 @@
   let data = null; // everything for the current topic
   async function loadTopic(topic) {
     const slug = topic.replace('.', '').toLowerCase();
-    const [teacher, page, concepts, bigs, qIndex, practicals, sims, apps] = await Promise.all([
+    const [teacher, page, concepts, bigs, qIndex, practicals, sims, apps, scientists] = await Promise.all([
       json(`${slug}.json`), doc(`../themes/${slug}.html`),
       optional(json('../think/concepts.json')), optional(json('../think/big-questions.json')),
       json('../questions/index.json'),
       optional(doc('../experimental/practicals.html')), optional(doc('../resources/simulations.html')), optional(doc('../resources/apps.html')),
+      optional(json('../scientists.json')),
     ]);
     const files = await Promise.all(qIndex.files.map((f) => optional(json(`../questions/${f}`))));
     const all = files.flat().filter(Boolean).filter((q) => q.topic === topic);
@@ -82,6 +83,7 @@
       hlOnly: !!info?.hl,
       allConcepts: (concepts || []).filter((c) => c.topic === topic),
       allBigs: (bigs || []).filter((b) => (b.topics || []).includes(topic)),
+      allScientists: (scientists || {})[topic] || [], // the same people as the "Famous scientist" boxes on the topic page
       tokQs: tokBox ? [...tokBox.querySelectorAll('ul.tok-q > li')].map((li) => absolutise(li, pageUrl).innerHTML.trim()) : [],
       nos: tokBox ? [...tokBox.querySelectorAll('.tok-grid > div:first-child > p')].map((p) => absolutise(p, pageUrl).innerHTML.trim()) : [],
       allWorked: [...page.querySelectorAll('main .worked')].map((box) => {
@@ -104,6 +106,7 @@
     d.sl = sl;
     d.concepts = d.allConcepts.filter(keep);
     d.bigs = d.allBigs.filter(keep);
+    d.scientists = d.allScientists.filter(keep);
     d.worked = d.allWorked.filter((w) => !sl || !w.hl).map((w) => w.html);
     d.p1 = d.allP1.filter(keep);
     d.p2 = d.allP2.filter(keep);
@@ -215,6 +218,12 @@
     const nosP = d.nos[state.nos];
     if (state.parts.has('t') && tokQ) part('Theory of knowledge', `<p class="sheet-tok">${tokQ}</p>${lines(3)}`);
     if (state.parts.has('n') && nosP) part('Nature of science', `<p>${nosP}</p>`);
+    if (state.parts.has('f') && d.scientists.length) {
+      part(d.scientists.length > 1 ? 'Famous scientists' : 'Famous scientist', d.scientists.map((s) => `<div class="sheet-item sheet-sci">
+        <img class="sheet-sci-pic" src="${esc(new URL('../' + s.image, location.href).href)}" alt="${esc(s.alt)}">
+        <div><h4>${esc(s.name)}${hlTag(s)} <span class="sheet-id">(${esc(s.years)}, ${esc(s.origin)})</span></h4>${s.summary}
+        <p class="sheet-credit">Picture: ${esc(s.credit.author)}, Wikimedia Commons, ${esc(s.credit.licence)}.</p></div></div>`).join(''));
+    }
     if (state.parts.has('r')) {
       part('Revision notes', d.summary.join(''));
     }
@@ -278,6 +287,11 @@
       const key = (nosP.match(/<strong>([\s\S]*?)\.?<\/strong>/) || [])[1]?.replace(/\.$/, '').trim();
       const prompts = (d.teacher.nosPrompts || {})[key] || [];
       part('NoS: discussion prompts', `<p>${nosP}</p>${prompts.length ? `<ul>${prompts.map((x) => `<li>${x}</li>`).join('')}</ul>` : '<p>No prompts written yet for this idea.</p>'}`);
+    }
+    if (state.parts.has('f') && d.scientists.length) {
+      part(d.scientists.length > 1 ? 'Famous scientists: notes' : 'Famous scientist: notes', d.scientists.map((s) => `<div class="sheet-item">
+        <h4>${esc(s.name)}${hlTag(s)} <span class="sheet-id">(${esc(s.years)}, ${esc(s.origin)})</span></h4>
+        <p><em>${s.caption}</em></p>${s.achievements}${s.prompt ? `<p><strong>Discuss:</strong> ${esc(s.prompt)}</p>` : ''}</div>`).join(''));
     }
     const oracy = d.teacher.oracy;
     if (state.parts.has('o') && oracy) part(`Oracy activity: ${esc(oracy.activity)}`, oracy.html);
@@ -372,6 +386,7 @@
     $('tb-level').value = d.hlOnly ? 'HL' : state.level;
     $('tb-level').disabled = d.hlOnly;
     $('tb-level-note').textContent = d.hlOnly ? 'This subtopic is HL only.' : '';
+    $('tb-f-note').textContent = d.scientists.length ? `(${d.scientists.map((s) => s.name).join(' and ')})` : '(none yet for this subtopic)';
     if (state.cc === null) state.cc = d.concepts[0]?.id || '';
     if (state.bq === null) state.bq = d.concepts.length ? '' : (d.bigs[0]?.id || '');
     fillSelect($('tb-cc'), d.concepts.map((c) => ({ value: c.id, label: c.title })), state.cc, d.concepts.length ? 'None' : 'None yet for this subtopic');

@@ -794,6 +794,51 @@ window.glueUnits = (function () {
         (box.querySelector('.tok-body') || box).appendChild(p);
       });
   }
+  // ----- Famous scientists: a box in the section of the topic page that their work fits best -----
+  // Data: scientists.json, keyed by subtopic ("place" = the id of that section's <h2>). Plan: docs/FAMOUS_SCIENTISTS_PLAN.md.
+  // The revision sheet builder (js/teachers.js) reads the same file.
+  if (body.dataset.topic && mainEl) addScientists(body.dataset.topic);
+  function addScientists(topic) {
+    fetch(`${root}scientists.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})).then((all) => {
+      for (const s of all[topic] || []) {
+        const h = document.getElementById(s.place);
+        if (!h || h.tagName !== 'H2') continue; // the checker reports an unknown place
+        // The section runs until the next <h2> (or a block that holds one, such as the HL banner or HL zone).
+        let end = h.nextElementSibling;
+        while (end && end.tagName !== 'H2' && !end.querySelector('h2') && !end.matches('.part-banner, .hl-end')) end = end.nextElementSibling;
+        // The section's linking questions stay at its very end, after the box.
+        let before = end;
+        let prev = end ? end.previousElementSibling : h.parentNode.lastElementChild;
+        while (prev && prev !== h && prev.matches('p.link-q')) { before = prev; prev = prev.previousElementSibling; }
+        // An HL tag only on an SL+HL page (on an HL-only page everything is HL).
+        const hlOnly = (window.SYLLABUS || []).flatMap((t) => t.topics).some((t) => t.id === topic && t.hl);
+        const box = scientistBox(s, s.level === 'HL' && !hlOnly ? ' <span class="tag hl">HL</span>' : '');
+        h.parentNode.insertBefore(box, before); // the text has no maths, so MathJax doesn't need to run again
+      }
+    });
+  }
+  function scientistBox(s, hlTag) {
+    const esc = (t) => String(t ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    const c = s.credit || {};
+    const licence = c.licenceUrl ? `<a href="${esc(c.licenceUrl)}" target="_blank" rel="noopener">${esc(c.licence)}</a>` : esc(c.licence);
+    const box = document.createElement('aside');
+    box.className = 'scientist';
+    box.id = 'scientist-' + s.id;
+    box.setAttribute('aria-label', 'Famous scientist: ' + s.name);
+    box.innerHTML = `<div class="scientist-head">
+        <img class="scientist-pic" src="${esc(root + s.image)}" alt="${esc(s.alt)}" loading="lazy">
+        <div class="scientist-intro">
+          <p class="scientist-kicker">Famous scientist${hlTag}</p>
+          <h3>${esc(s.name)}</h3>
+          <p class="scientist-meta">${esc(s.years)} · ${esc(s.origin)}</p>
+          <p class="scientist-caption">${s.caption}</p>
+        </div>
+      </div>
+      <details class="scientist-more"><summary>What ${esc(s.short || s.name)} achieved</summary>${s.achievements}</details>
+      <p class="credit">Picture: ${esc(c.author)}, <a href="${esc(c.file)}" target="_blank" rel="noopener">Wikimedia Commons</a>, ${licence}. Resized.</p>`;
+    return box;
+  }
+
   // A link (or the address) pointing inside a closed box opens it first.
   function openAround(el) {
     const box = el.closest && el.closest('section.tok');

@@ -100,6 +100,11 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Every question in the bank has sub-part tags (`"sections"`), checked by `tools/check-sections.mjs`, ready for choosing sub-parts later.
 - Next: the Extended Essay menu move (the concept-challenge task is now merged), sub-part choice (when there are more Paper 2 questions) and essential-skills sheets.
 
+## Famous scientists (November 2026)
+- Plan, the approved list of 48 names (two per subtopic, A.1–E.5) and sources: `docs/FAMOUS_SCIENTISTS_PLAN.md`.
+- **Theme A done** (pilot, teacher-checked and pushed): 10 scientists in `scientists.json` with public-domain pictures in `images/scientists/`. Each box sits in the section the work fits best and is drawn by `js/site.js`. There's a "Famous scientists" part in the revision sheet builder, and the checker rules are in `tools/check.mjs` (3a).
+- Next: themes B–E (38 scientists), in batches by theme, each fact-checked, with openly licensed pictures.
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".
