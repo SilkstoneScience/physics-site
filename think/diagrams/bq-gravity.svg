@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 215">
+  <!-- the Earth -->
+  <path class="area" d="M0 200 Q190 140 380 200 V215 H0 Z"/>
+  <path class="axis" d="M0 200 Q190 140 380 200"/>
+  <text x="190" y="205" text-anchor="middle">the whole Earth</text>
+  <!-- a small horseshoe magnet, poles down -->
+  <path class="axis" d="M164 70 V40 A26 26 0 0 1 216 40 V70 H202 V40 A12 12 0 0 0 178 40 V70 Z" style="fill:var(--surface)"/>
+  <rect class="f1" x="164" y="62" width="14" height="10"/><rect class="f2" x="202" y="62" width="14" height="10"/>
+  <text x="226" y="40" style="font-size:15px">magnet</text>
+  <!-- a paper clip hanging from the poles, lifted off the table -->
+  <path class="l3 thin" d="M174 73 H206 A6 6 0 0 1 206 85 H178 A4 4 0 0 1 178 77 H202"/>
+  <text x="222" y="88" style="font-size:15px">paper clip</text>
+  <!-- forces on the clip: the magnet's pull (up) is bigger than the Earth's pull (down) -->
+  <line class="l1" x1="156" y1="112" x2="156" y2="78" marker-end="url(#ah1)"/>
+  <line class="l2" x1="166" y1="96" x2="166" y2="118" marker-end="url(#ah2)"/>
+</svg>

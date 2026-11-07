@@ -232,7 +232,7 @@ function checkThinkItem(it, file, idPattern) {
   for (const k of ['title', 'question']) checkText(where, it[k], k);
   const topics = it.topic ? [it.topic] : it.topics;
   if (!Array.isArray(topics)) err(where, 'needs "topic" or a "topics" list');
-  else for (const t of topics) if (!TOPICS.has(t)) err(where, `unknown topic "${t}"`);
+  else for (const t of topics) if (!TOPICS.has(t) && t !== 'Skills') err(where, `unknown topic "${t}" (use a syllabus topic such as A.1, or "Skills")`);
   if (it.level !== undefined && !['SL', 'HL'].includes(it.level)) err(where, 'level must be "SL" or "HL"');
   if (topics && topics.some((t) => TOPICS.get(t)?.hl) && it.level !== 'HL') err(where, 'uses an HL-only topic, so level must be "HL"');
   if (!it.figure) err(where, 'needs a "figure" (every card shows its picture as a tile)');
@@ -250,7 +250,12 @@ function checkThinkAnswer(it, file) {
       if (!Number.isInteger(it.answer) || it.answer < 0 || it.answer >= it.options.length) err(where, 'answer must be the number of a correct option (0 = first)');
     }
   }
-  checkText(where, it.reveal, 'reveal');
+  checkText(where, it.reveal, 'reveal'); // still needed with a revealVideo: it becomes "Prefer to read it?"
+  if (it.revealVideo) {
+    const v = it.revealVideo;
+    if (!/^[\w-]{11}$/.test(v.youtube || '')) err(where, 'revealVideo.youtube must be an 11-character YouTube video id');
+    if (!v.title || !v.channel) err(where, 'revealVideo needs a title and a channel');
+  }
   if (!it.tempting) err(where, 'needs "tempting" (the "Clearing misconceptions" part of the answer)');
   else checkText(where, it.tempting, 'tempting');
 }
@@ -265,9 +270,12 @@ function readThink(rel) {
   return [];
 }
 for (const it of readThink('think/concepts.json')) {
-  checkThinkItem(it, 'think/concepts.json', /^CC-[A-E]\d-\d{2}$/);
+  // Ids: CC-A1-01 for a syllabus topic, CC-SK-01 for a Skills challenge (topic "Skills", always SL).
+  checkThinkItem(it, 'think/concepts.json', /^CC-([A-E]\d|SK)-\d{2}$/);
+  const idTopic = it.topic === 'Skills' ? 'SK' : (it.topic || '').replace('.', '');
   if (!it.topic) err(`think/concepts.json ${it.id}`, 'a concept challenge has one "topic"');
-  else if (it.id && it.id.slice(3, 5) !== it.topic.replace('.', '')) err(`think/concepts.json ${it.id}`, `id doesn't match its topic (${it.topic})`);
+  else if (it.id && it.id.slice(3, 5) !== idTopic) err(`think/concepts.json ${it.id}`, `id doesn't match its topic (${it.topic}: use CC-${idTopic}-…)`);
+  if (it.topic === 'Skills' && it.level === 'HL') err(`think/concepts.json ${it.id}`, 'Skills challenges are for everyone: level "SL"');
   checkThinkAnswer(it, 'think/concepts.json');
 }
 for (const it of readThink('think/puzzles.json')) {

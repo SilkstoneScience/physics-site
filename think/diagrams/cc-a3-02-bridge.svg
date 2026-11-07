@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 260">
+  <!-- river -->
+  <rect class="area" x="0" y="230" width="380" height="30"/>
+  <line class="axis" x1="0" y1="230" x2="380" y2="230"/>
+  <path class="grid" d="M20 242 q8 -4 16 0 t16 0 M330 246 q8 -4 16 0 t16 0"/>
+  <!-- bridge seen end-on: deck, railings, pier -->
+  <path class="area" d="M78 230 L84 116 H112 L118 230 Z"/><path class="axis" d="M78 230 L84 116 H112 L118 230"/>
+  <rect class="axis" x="56" y="106" width="84" height="10" style="fill:var(--surface)"/>
+  <line class="l3" x1="62" y1="106" x2="62" y2="84"/><line class="l3" x1="58" y1="84" x2="66" y2="84"/>
+  <line class="l3" x1="134" y1="106" x2="134" y2="84"/><line class="l3" x1="130" y1="84" x2="138" y2="84"/>
+  <!-- person throwing -->
+  <path class="l3 thin" d="M111 106 L117 88 L123 106 M117 88 V72 M117 75 L146 79"/>
+  <circle class="l3 thin" cx="117" cy="64" r="7" style="fill:var(--surface)"/>
+  <text x="70" y="160" text-anchor="end">bridge</text>
+  <text x="372" y="222" text-anchor="end">river</text>
+  <!-- three throws: same speed (equal arrows), 40 degrees up, horizontal, 40 degrees down -->
+  <circle class="f3" cx="150" cy="80" r="4"/>
+  <line class="l1" x1="150" y1="80" x2="211.3" y2="28.6" marker-end="url(#ah1)"/>
+  <line class="l1" x1="150" y1="80" x2="230" y2="80" marker-end="url(#ah1)"/>
+  <line class="l1" x1="150" y1="80" x2="211.3" y2="131.4" marker-end="url(#ah1)"/>
+  <path class="l3 thin" d="M190 80 A40 40 0 0 0 180.6 54.3 M190 80 A40 40 0 0 1 180.6 105.7"/>
+  <text x="204" y="65" text-anchor="middle" style="font-size:14px">40°</text>
+  <text x="204" y="105" text-anchor="middle" style="font-size:14px">40°</text>
+  <text class="t1" x="218" y="30">A</text>
+  <text class="t1" x="238" y="86">B</text>
+  <text class="t1" x="218" y="142">C</text>
+</svg>

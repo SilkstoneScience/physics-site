@@ -24,7 +24,10 @@
   const saveDone = () => { try { localStorage.setItem(STORE, JSON.stringify([...done])); } catch (e) { /* ignore */ } };
 
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  const topicPage = (t) => `${root}themes/${t.replace('.', '').toLowerCase()}.html`;
+  // "Skills" is a topic label of its own (the essential skills on skills.html), grouped like a theme.
+  const SKILLS = 'Skills';
+  const topicPage = (t) => (t === SKILLS ? `${root}skills.html` : `${root}themes/${t.replace('.', '').toLowerCase()}.html`);
+  const themeOf = (t) => (t === SKILLS ? SKILLS : TOPICS.get(t)?.theme);
   const topicsOf = (it) => (it.topic ? [it.topic] : it.topics || []);
   const isHL = (it) => it.level === 'HL' || topicsOf(it).some((t) => TOPICS.get(t) && TOPICS.get(t).hl);
 
@@ -55,10 +58,18 @@
     }
     return '<p class="think-predict">Decide on your answer, and your reason, before you look.</p>';
   }
+  // A YouTube video in place of a written answer (teacher's decision): loaded only when its reveal opens, with the
+  // written version kept below, folded, for anyone who can't watch (YouTube is often blocked in schools).
+  function videoHtml(v, readHtml) {
+    return `<div class="think-video" data-yt="${esc(v.youtube)}" data-title="${esc(v.title)}"></div>
+      <p class="think-small">Video: ${esc(v.title)} (${esc(v.channel)}). <a href="https://www.youtube.com/watch?v=${esc(v.youtube)}" target="_blank" rel="noopener">Watch on YouTube</a></p>
+      <details class="think-reveal think-read"><summary>Prefer to read it?</summary>${readHtml}</details>`;
+  }
   function revealHtml(it) {
     const tempting = it.tempting ? `<div class="think-tempting"><h4>Clearing misconceptions</h4>${it.tempting}</div>` : '';
+    const written = it.reveal + figureHtml(it.revealFigure);
     return `<details class="think-reveal think-answer"><summary>Show the answer</summary>
-      <p class="think-feedback" aria-live="polite"></p>${it.reveal}${figureHtml(it.revealFigure)}${tempting}</details>`;
+      <p class="think-feedback" aria-live="polite"></p>${it.revealVideo ? videoHtml(it.revealVideo, written) : written}${tempting}</details>`;
   }
   function bigHtml(it) {
     const puzzling = it.puzzling ? `<details class="think-reveal"><summary>Why is it puzzling?</summary>${it.puzzling}</details>` : '';
@@ -69,11 +80,7 @@
     // A big question can answer "What physicists think so far" with a video (thinkingVideo); the written
     // explanation then stays underneath, folded, for anyone who can't watch (YouTube is often blocked in schools).
     const v = it.thinkingVideo;
-    const thinking = v
-      ? `<div class="think-video" data-yt="${esc(v.youtube)}" data-title="${esc(v.title)}"></div>
-        <p class="think-small">Video: ${esc(v.title)} (${esc(v.channel)}). <a href="https://www.youtube.com/watch?v=${esc(v.youtube)}" target="_blank" rel="noopener">Watch on YouTube</a></p>
-        <details class="think-reveal think-read"><summary>Prefer to read it?</summary>${it.thinking}</details>`
-      : it.thinking;
+    const thinking = v ? videoHtml(v, it.thinking) : it.thinking;
     return `${puzzling}
       <details class="think-reveal"><summary>What physicists think so far</summary>${thinking}</details>
       ${discuss}
@@ -92,7 +99,7 @@
     // In the list each card starts closed, as a tile: a small copy of its picture, the title and the tags.
     // The title button (or the picture) opens it across the full width.
     // Marked done automatically once the student chooses an answer or opens a reveal (saved in this browser only).
-    const theme = topicsOf(it).length ? TOPICS.get(topicsOf(it)[0])?.theme : '';
+    const theme = topicsOf(it).length ? themeOf(topicsOf(it)[0]) : '';
     const f = it.figure;
     const thumb = !f ? '' : `<div class="think-thumb diagram" aria-hidden="true">${f.img
       ? `<img src="${esc(f.img)}" alt="" loading="lazy">`
@@ -134,23 +141,28 @@
   }
   function groupHeading(text, id) { return `<h2 class="think-group"${id ? ` id="${id}"` : ''}>${text}</h2>`; }
 
-  // Concept challenges page without ?theme= or ?topic=: one card per theme (teacher's decision).
+  // Concept challenges page without ?theme= or ?topic=: one card per theme, plus one for the Skills challenges
+  // (their list starts with a link to the Skills page).
+  function groupCard(id, title) {
+    const list = items.filter((it) => themeOf(it.topic) === id);
+    const name = `<h3>${title}</h3>`;
+    if (!list.length) return `<li><div class="card think-soon" data-theme="${id}">${name}<p>Coming soon</p></div></li>`;
+    const n = list.filter((it) => done.has(it.id)).length;
+    const count = `${list.length} challenge${list.length === 1 ? '' : 's'}${n ? ` · ${n} done` : ''}`;
+    return `<li><a class="card" data-theme="${id}" href="?theme=${id}">${name}<p>${count}</p></a></li>`;
+  }
+  // One grid with no headings: the Skills card first, then Themes A–E (teacher's decision).
   function themeCardsHtml() {
-    return '<ul class="card-grid think-topics">' + window.SYLLABUS.map((th) => {
-      const list = items.filter((it) => TOPICS.get(it.topic)?.theme === th.id);
-      const name = `<h3>Theme ${th.id}: ${esc(th.title)}</h3>`;
-      if (!list.length) return `<li><div class="card think-soon" data-theme="${th.id}">${name}<p>Coming soon</p></div></li>`;
-      const n = list.filter((it) => done.has(it.id)).length;
-      const count = `${list.length} challenge${list.length === 1 ? '' : 's'}${n ? ` · ${n} done` : ''}`;
-      return `<li><a class="card" data-theme="${th.id}" href="?theme=${th.id}">${name}<p>${count}</p></a></li>`;
-    }).join('') + '</ul>';
+    return '<ul class="card-grid think-topics">'
+      + groupCard(SKILLS, 'Skills: measurement, uncertainty, graphs and vectors')
+      + window.SYLLABUS.map((th) => groupCard(th.id, `Theme ${th.id}: ${esc(th.title)}`)).join('') + '</ul>';
   }
 
   function render() {
     const topic = params.get('topic');
     const theme = params.get('theme');
     shown = items.filter((it) => (!topic || topicsOf(it).includes(topic))
-      && (!theme || topicsOf(it).some((t) => TOPICS.get(t)?.theme === theme)));
+      && (!theme || topicsOf(it).some((t) => themeOf(t) === theme)));
     let html = '';
     const grid = (list) => (list.length ? `<div class="think-grid">${list.map((it) => cardHtml(it)).join('')}</div>` : '');
     if (kind === 'concepts' && !topic && !theme) {
@@ -158,7 +170,10 @@
       html = themeCardsHtml();
     } else if (kind === 'concepts') {
       // No heading: each challenge's own topic tag links to the notes.
-      html = `<p class="think-back"><a href="${location.pathname}">← All themes</a></p>` + grid(shown);
+      html = `<p class="think-back"><a href="${location.pathname}">← All themes</a></p>`
+        + (theme === SKILLS || topic === SKILLS
+          ? `<p>These challenges practise the essential skills on the <a href="${root}skills.html">Physics skills</a> page.</p>` : '')
+        + grid(shown);
       if (!shown.length) html += '<p class="notice">No challenges here yet. More are coming.</p>';
     } else if (kind === 'big') {
       for (const k of ['unsolved', 'solved']) {

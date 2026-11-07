@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 205">
+<!-- sodium lamp: real sodium-yellow light, so the fill is fixed in both modes -->
+  <line class="l3" x1="40" y1="134" x2="40" y2="182"/>
+  <line class="l3" x1="24" y1="182" x2="56" y2="182"/>
+  <rect class="axis" x="33" y="124" width="14" height="12" style="fill:var(--surface)"/>
+  <ellipse cx="40" cy="98" rx="14" ry="26" style="fill:#ffb000"/>
+  <ellipse class="axis" cx="40" cy="98" rx="14" ry="26"/>
+  <text x="8" y="60">sodium lamp</text>
+  <!-- Bunsen burner with a salt-coloured (sodium-yellow) flame -->
+  <path d="M150 120 C139 111 140 97 150 84 C160 97 161 111 150 120 Z" style="fill:#ffb000"/>
+  <path class="l3 thin" d="M150 120 C139 111 140 97 150 84 C160 97 161 111 150 120 Z"/>
+  <rect class="axis" x="145" y="122" width="10" height="46" style="fill:var(--surface)"/>
+  <circle class="axis" cx="150" cy="155" r="2.5"/>
+  <rect class="axis" x="132" y="168" width="36" height="7" style="fill:var(--surface)"/>
+  <text x="150" y="196" text-anchor="middle">flame + salt</text>
+  <rect class="axis" x="300" y="30" width="8" height="150" style="fill:var(--surface)"/>
+  <text x="304" y="196" text-anchor="middle">screen</text>
+  <line class="l3 thin dash" x1="54" y1="96.2" x2="300" y2="64.9"/>
+  <line class="l3 thin dash" x1="54" y1="100.8" x2="300" y2="150"/>
+  <!-- screen lit by sodium light (real colour) except in the shadow (fixed dark grey: no light) -->
+  <rect x="300" y="30" width="8" height="150" style="fill:#ffb000;opacity:0.7"/>
+  <rect x="300" y="64.9" width="8" height="85.1" style="fill:#4a4a4a"/>
+  <rect class="axis" x="300" y="30" width="8" height="150"/>
+  <!-- light absorbed by the flame and re-emitted in all directions -->
+  <line class="l2 thin" x1="150" y1="80" x2="150" y2="58" marker-end="url(#ah2)"/>
+  <line class="l2 thin" x1="162" y1="86" x2="178" y2="70" marker-end="url(#ah2)"/>
+  <line class="l2 thin" x1="138" y1="86" x2="122" y2="70" marker-end="url(#ah2)"/>
+  <line class="l2 thin" x1="165" y1="104" x2="186" y2="104" marker-end="url(#ah2)"/>
+  <text class="t1" x="316" y="112.5">shadow</text>
+</svg>

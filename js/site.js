@@ -767,6 +767,7 @@ window.glueUnits = (function () {
   // ----- "Think deeper" line at the end of a topic page's Knowledge and science box -----
   // Counts this topic's items in think/*.json and links to them (shown only when there are some).
   if (body.dataset.topic && tokBoxes.length) addThinkLinks(body.dataset.topic, tokBoxes[0]);
+  else if (section === 'skills' && tokBoxes.length) addThinkLinks('Skills', tokBoxes[0]); // the Skills page's challenges
   function addThinkLinks(topic, box) {
     const sets = [
       ['concepts', 'concept challenge', 'concept challenges'],
@@ -783,7 +784,7 @@ window.glueUnits = (function () {
         if (!links.length) return;
         const p = document.createElement('p');
         p.className = 'tok-more';
-        p.innerHTML = `Think deeper on ${topic}: ${links.join(' · ')}`;
+        p.innerHTML = `Think deeper on ${topic === 'Skills' ? 'these skills' : topic}: ${links.join(' · ')}`;
         (box.querySelector('.tok-body') || box).appendChild(p);
       });
   }
