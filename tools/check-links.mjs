@@ -9,7 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const FILES = ['think/concepts.json', 'think/big-questions.json', 'think/puzzles.json'];
+const FILES = ['think/concepts.json', 'think/big-questions.json'];
 const UA = 'Mozilla/5.0 (compatible; physics-site link check)';
 
 // ----- Collect the links -----

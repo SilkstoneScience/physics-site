@@ -772,7 +772,6 @@ window.glueUnits = (function () {
     const sets = [
       ['concepts', 'concept challenge', 'concept challenges'],
       ['big-questions', 'big question', 'big questions'],
-      ['puzzles', 'puzzle', 'puzzles'],
     ];
     Promise.all(sets.map(([f]) => fetch(`${root}think/${f}.json`).then((r) => (r.ok ? r.json() : [])).catch(() => [])))
       .then((lists) => {

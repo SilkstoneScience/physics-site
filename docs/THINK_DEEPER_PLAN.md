@@ -10,7 +10,7 @@ A new section for thinking beyond exam questions, with three collections plus th
 |---|---|---|
 | **Concept challenges** | A picture and a short situation that tests conceptual understanding (in the spirit of Hewitt's Next-Time Questions, but all our own). Some multiple choice, some open "predict, then reveal". The reveal explains the physics and why the tempting wrong answer is wrong. | Theme and topic (A.1, A.2…), HL tagged |
 | **Big questions** | Paradoxes, contradictions and unanswered questions that students can understand but that make them think harder (e.g. the Fermi paradox). | Kind: *Still unsolved* / *Solved, but surprising*, with topic tags |
-| **Puzzles** | Fun logic and physics brain-teasers (e.g. a kilogram of feathers or a kilogram of gold). Tagged *Just for fun*. | One list, with topic tags where they fit |
+| **Puzzles** | *Merged into the concept challenges (teacher's decision, 7 November 2026), keeping their PZ ids; `think/puzzles.html` forwards old links.* | — |
 | **Knowledge and science** | The existing ToK/NoS page (`tok.html`, file name unchanged). | — |
 
 Kept separate from the question bank (that stays exam-style).

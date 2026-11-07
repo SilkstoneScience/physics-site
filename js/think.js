@@ -1,6 +1,7 @@
-// Think deeper: concept challenges, big questions and puzzles (think/*.html).
-// Each page says which collection it shows with <body data-think="concepts|big|puzzles">; the items come from
-// think/concepts.json, think/big-questions.json and think/puzzles.json. Diagrams are SVG files drawn inline, so
+// Think deeper: concept challenges and big questions (think/*.html). The puzzles (ids PZ-01…) were merged into the
+// concept challenges in November 2026 (teacher's decision); think/puzzles.html now forwards to them.
+// Each page says which collection it shows with <body data-think="concepts|big">; the items come from
+// think/concepts.json and think/big-questions.json. Diagrams are SVG files drawn inline, so
 // they follow the site's colours and dark mode. An item counts as done once the student chooses an answer or opens a
 // reveal; that is saved only in this browser. The concept challenges page opens with one card per theme.
 (function () {
@@ -9,7 +10,7 @@
   const listEl = document.querySelector('[data-think-list]');
   if (!kind || !listEl) return;
   const root = body.dataset.root || '';
-  const FILES = { concepts: 'concepts.json', big: 'big-questions.json', puzzles: 'puzzles.json' };
+  const FILES = { concepts: 'concepts.json', big: 'big-questions.json' };
   const KIND_LABEL = { unsolved: 'Still unsolved', solved: 'Solved, but surprising' };
   const TAG_LABEL = { fun: 'Just for fun', beyond: 'Beyond the syllabus' };
   const LETTERS = 'ABCD';
@@ -47,7 +48,7 @@
     for (const t of it.tags || []) tags.push(`<span class="tag think-fun">${TAG_LABEL[t]}</span>`);
     for (const t of topicsOf(it)) tags.push(`<a class="tag" href="${topicPage(t)}">${t}</a>`);
     if (isHL(it)) tags.push('<span class="tag hl">HL</span>');
-    else if (kind !== 'puzzles') tags.push('<span class="tag think-sl">SL</span>');
+    else tags.push('<span class="tag think-sl">SL</span>');
     return tags.join(' ');
   }
   function answerHtml(it) {

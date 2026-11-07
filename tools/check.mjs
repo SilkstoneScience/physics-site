@@ -271,17 +271,13 @@ function readThink(rel) {
 }
 for (const it of readThink('think/concepts.json')) {
   // Ids: CC-A1-01 for a syllabus topic, CC-SK-01 for a Skills challenge (topic "Skills", always SL).
-  checkThinkItem(it, 'think/concepts.json', /^CC-([A-E]\d|SK)-\d{2}$/);
+  // PZ-01… are the former puzzles, merged in November 2026: they keep their ids (students' ticks are saved against them).
+  checkThinkItem(it, 'think/concepts.json', /^(CC-([A-E]\d|SK)|PZ)-\d{2}$/);
   const idTopic = it.topic === 'Skills' ? 'SK' : (it.topic || '').replace('.', '');
   if (!it.topic) err(`think/concepts.json ${it.id}`, 'a concept challenge has one "topic"');
-  else if (it.id && it.id.slice(3, 5) !== idTopic) err(`think/concepts.json ${it.id}`, `id doesn't match its topic (${it.topic}: use CC-${idTopic}-…)`);
+  else if (it.id && !it.id.startsWith('PZ-') && it.id.slice(3, 5) !== idTopic) err(`think/concepts.json ${it.id}`, `id doesn't match its topic (${it.topic}: use CC-${idTopic}-…)`);
   if (it.topic === 'Skills' && it.level === 'HL') err(`think/concepts.json ${it.id}`, 'Skills challenges are for everyone: level "SL"');
   checkThinkAnswer(it, 'think/concepts.json');
-}
-for (const it of readThink('think/puzzles.json')) {
-  checkThinkItem(it, 'think/puzzles.json', /^PZ-\d{2}$/);
-  if (!Array.isArray(it.tags) || !it.tags.includes('fun') || it.tags.some((t) => !['fun', 'beyond'].includes(t))) err(`think/puzzles.json ${it.id}`, 'tags must include "fun" (and may include "beyond")');
-  checkThinkAnswer(it, 'think/puzzles.json');
 }
 for (const it of readThink('think/big-questions.json')) {
   const where = `think/big-questions.json ${it.id}`;
@@ -459,9 +455,11 @@ for (const page of pages.filter((p) => /^themes\/[a-e]\d\.html$/.test(p))) {
   });
 }
 
-// sitemap.xml must list every page except 404.html (it tells search engines what exists).
+// sitemap.xml must list every page except 404.html and pages marked noindex (e.g. think/puzzles.html, which only
+// forwards old links to the concept challenges); it tells search engines what exists.
 function pageUrl(page) { return SITE + page.replace(/(^|\/)index\.html$/, '$1'); }
-const wantedUrls = pages.filter((p) => p !== '404.html').map(pageUrl).sort();
+const noindex = new Set(pages.filter((p) => /<meta name="robots" content="noindex/.test(read(p))));
+const wantedUrls = pages.filter((p) => p !== '404.html' && !noindex.has(p)).map(pageUrl).sort();
 const sitemapXml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
   + wantedUrls.map((u) => `  <url><loc>${u}</loc></url>\n`).join('') + '</urlset>\n';
 // search-index.json feeds the site search (search.html, js/search.js): every page's title and description, and each
@@ -489,7 +487,7 @@ function buildSearchIndex() {
     .replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"')
     .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#(\d+);/g, (m, n) => String.fromCharCode(n)).replace(/\s+/g, ' ').trim();
   const out = { pages: [], sections: [] };
-  for (const page of pages.filter((p) => !skip.has(p)).sort()) {
+  for (const page of pages.filter((p) => !skip.has(p) && !noindex.has(p)).sort()) {
     const html = read(page);
     const title = clean((html.match(/<title>([^<]*)<\/title>/) || [])[1] || '').replace(/ · Mr Silkstone's Physics$/, '').replace(/: IB Physics notes$/, '');
     const desc = clean((html.match(/<meta name="description" content="([^"]*)">/) || [])[1] || '');
