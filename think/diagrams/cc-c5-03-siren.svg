@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- straight road -->
+  <line class="axis" x1="10" y1="150" x2="390" y2="150"/>
+  <line class="axis" x1="10" y1="110" x2="390" y2="110"/>
+  <path class="axis thin dash" d="M10 130 H390"/>
+  <!-- ambulance: van body, cab, windows, wheels, light bar -->
+  <path class="axis" d="M70 136 V96 H150 L172 112 V136 Z" style="fill:var(--surface)"/>
+  <rect class="area" x="152" y="100" width="16" height="12"/>
+  <rect class="area" x="80" y="102" width="40" height="12"/>
+  <rect class="f1" x="96" y="88" width="20" height="8"/>
+  <circle class="axis" cx="92" cy="138" r="8" style="fill:var(--surface)"/>
+  <circle class="axis" cx="150" cy="138" r="8" style="fill:var(--surface)"/>
+  <path class="l2" d="M130 118 h12 M136 112 v12"/>
+  <line class="l1" x1="180" y1="124" x2="240" y2="124" marker-end="url(#ah1)"/>
+  <text class="t1" x="210" y="96" text-anchor="middle" style="font-size:14px">steady speed</text>
+  <!-- listener at the roadside -->
+  <circle class="l3 thin" cx="330" cy="166" r="8" style="fill:var(--surface)"/>
+  <line class="l3 thin" x1="330" y1="174" x2="330" y2="192"/>
+  <path class="l3 thin" d="M322 200 L330 192 L338 200 M318 182 L330 178 L342 182"/>
+  <text x="365" y="188">you</text>
+  <!-- siren sound marks -->
+  <path class="l2 thin" d="M60 70 q-6 12 0 24 M48 60 q-10 22 0 44"/>
+  <text x="40" y="40" style="font-size:14px">siren on</text>
+</svg>

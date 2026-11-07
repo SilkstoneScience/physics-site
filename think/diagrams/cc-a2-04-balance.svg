@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200">
+  <!-- two posts carrying pulleys on short arms; a spring balance lies horizontally between them; a 10 N weight hangs from each end of the string -->
+  <line class="axis" x1="0" y1="192" x2="380" y2="192"/>
+  <line class="l3" x1="76" y1="56" x2="76" y2="192"/>
+  <line class="l3" x1="304" y1="56" x2="304" y2="192"/>
+  <line class="l3" x1="60" y1="60" x2="76" y2="60"/>
+  <line class="l3" x1="320" y1="60" x2="304" y2="60"/>
+  <!-- string -->
+  <path class="axis thin" d="M48 140 V60 A12 12 0 0 1 60 48 H118 M262 48 H320 A12 12 0 0 1 332 60 V140" style="fill:none"/>
+  <!-- pulleys -->
+  <circle class="l3" cx="60" cy="60" r="12" style="fill:var(--surface)"/><circle class="f3" cx="60" cy="60" r="2.5"/>
+  <circle class="l3" cx="320" cy="60" r="12" style="fill:var(--surface)"/><circle class="f3" cx="320" cy="60" r="2.5"/>
+  <!-- spring balance: hooks at both ends, a reading window in the middle -->
+  <path class="axis thin" d="M118 48 H130 M250 48 H262"/>
+  <rect class="axis" x="130" y="36" width="120" height="24" rx="4" style="fill:var(--surface)"/>
+  <rect class="area" x="152" y="41" width="76" height="14"/><rect class="axis thin" x="152" y="41" width="76" height="14" style="fill:none"/>
+  <text x="190" y="53" text-anchor="middle" style="font-size:13px">?</text>
+  <text x="190" y="84" text-anchor="middle">spring balance</text>
+  <!-- weights -->
+  <rect class="area" x="38" y="140" width="20" height="26" rx="2"/><rect class="axis" x="38" y="140" width="20" height="26" rx="2"/>
+  <text x="48" y="184" text-anchor="middle">10 N</text>
+  <rect class="area" x="322" y="140" width="20" height="26" rx="2"/><rect class="axis" x="322" y="140" width="20" height="26" rx="2"/>
+  <text x="332" y="184" text-anchor="middle">10 N</text>
+</svg>

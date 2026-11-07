@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- table -->
+  <line class="axis" x1="20" y1="168" x2="380" y2="168"/>
+  <!-- sealed box, drawn with a little depth; surface fill so nothing shows through -->
+  <path class="axis" d="M90 70 L110 52 L300 52 L280 70 Z" style="fill:var(--surface)"/>
+  <path class="axis" d="M280 70 L300 52 L300 150 L280 168 Z" style="fill:var(--surface)"/>
+  <rect class="axis" x="90" y="70" width="190" height="98" style="fill:var(--surface)"/>
+  <!-- lid edge and latch -->
+  <line class="axis" x1="90" y1="82" x2="280" y2="82"/>
+  <rect class="f3" x="178" y="78" width="14" height="10" rx="2"/>
+  <text x="185" y="140" text-anchor="middle" style="font-size:44px">?</text>
+  <!-- sealed label -->
+  <text x="185" y="188" text-anchor="middle" style="font-size:14px">sealed, no window</text>
+  <!-- the one-photon double slit that started the puzzle, far left -->
+  <circle class="f1" cx="34" cy="110" r="3"/>
+  <line class="l1 thin dash" x1="40" y1="110" x2="68" y2="110"/>
+  <path class="l3" d="M72 80 V100 M72 108 V120 M72 128 V146"/>
+  <text class="t1" x="34" y="96" text-anchor="middle" style="font-size:13px">one</text>
+  <text class="t1" x="34" y="134" text-anchor="middle" style="font-size:13px">photon</text>
+  <!-- detector clicking on the far side feeds the box -->
+  <path class="l3 thin" d="M320 110 h40"/>
+  <rect class="axis" x="322" y="96" width="36" height="28" rx="3" style="fill:var(--surface)"/>
+  <text x="340" y="115" text-anchor="middle" style="font-size:12px">click</text>
+  <text x="340" y="140" text-anchor="middle" style="font-size:13px">detector</text>
+</svg>

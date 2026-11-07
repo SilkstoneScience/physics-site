@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- ground -->
+  <line class="axis" x1="10" y1="180" x2="390" y2="180"/>
+  <!-- pylon 1: lattice tower with two cross-arms -->
+  <path class="axis thin" d="M60 180 L74 50 H86 L100 180 M66 130 H94 M70 95 H90 M62 150 L92 130 M68 130 L92 110 M70 110 L90 95 M72 95 L88 70"/>
+  <path class="axis" d="M50 78 H110 M56 100 H104"/>
+  <!-- pylon 2 -->
+  <path class="axis thin" d="M230 180 L244 50 H256 L270 180 M236 130 H264 M240 95 H260 M232 150 L262 130 M238 130 L262 110 M240 110 L260 95 M242 95 L258 70"/>
+  <path class="axis" d="M220 78 H280 M226 100 H274"/>
+  <!-- sagging cables between the arms, and on to the left and right -->
+  <path class="l1" d="M50 78 Q140 108 220 78 M110 78 Q165 108 220 78 M56 100 Q140 128 226 100 M104 100 Q165 128 226 100"/>
+  <path class="l1" d="M0 70 Q25 84 50 78 M280 78 Q310 92 340 84 M274 100 Q310 114 340 108"/>
+  <!-- small transformer/house at the right -->
+  <path class="axis" d="M335 180 V140 L360 118 L385 140 V180 Z" style="fill:var(--surface)"/>
+  <rect class="axis thin" x="352" y="156" width="16" height="24" style="fill:var(--surface)"/>
+  <line class="l1 thin" x1="340" y1="84" x2="340" y2="140"/>
+  <!-- labels -->
+  <text class="t1" x="165" y="44" text-anchor="middle">400 kV</text>
+  <text class="t1" x="165" y="62" text-anchor="middle" style="font-size:14px">line to ground</text>
+  <text x="360" y="198" text-anchor="middle" style="font-size:14px">to users</text>
+</svg>

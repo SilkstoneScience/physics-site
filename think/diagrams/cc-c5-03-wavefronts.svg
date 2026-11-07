@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- wavefronts sent out one period apart by a source moving right at 0.3 of the wave speed;
+       each circle is centred where the source was when it was emitted (calculated: v = 16, u = 4.8 per period) -->
+  <circle class="l1 thin" cx="191.2" cy="100" r="96"/>
+  <circle class="l1 thin" cx="196" cy="100" r="80"/>
+  <circle class="l1 thin" cx="200.8" cy="100" r="64"/>
+  <circle class="l1 thin" cx="205.6" cy="100" r="48"/>
+  <circle class="l1 thin" cx="210.4" cy="100" r="32"/>
+  <circle class="l1 thin" cx="215.2" cy="100" r="16"/>
+  <!-- the source now, and its velocity -->
+  <circle class="f2" cx="220" cy="100" r="5"/>
+  <line class="l2" x1="226" y1="100" x2="262" y2="100" marker-end="url(#ah2)"/>
+  <text class="t2" x="240" y="84" text-anchor="middle" style="font-size:14px">source</text>
+  <!-- listeners ahead and behind -->
+  <text x="330" y="106" style="font-size:14px">ahead:</text>
+  <text x="330" y="124" style="font-size:14px">bunched</text>
+  <text x="70" y="106" text-anchor="end" style="font-size:14px">behind:</text>
+  <text x="70" y="124" text-anchor="end" style="font-size:14px">stretched</text>
+</svg>

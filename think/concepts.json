@@ -40,6 +40,54 @@
     "tempting": "<p>Ball B travels a longer, curved path, so it feels as if it must take longer. But the extra distance is all horizontal, and horizontal motion doesn't affect how fast something falls.</p>"
   },
   {
+    "id": "CC-A1-03",
+    "topic": "A.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "Up or down?",
+    "figure": {
+      "svg": "diagrams/cc-a1-03-ball-up.svg",
+      "alt": "A hand has just thrown a ball straight up. The ball is rising, with motion lines below it, and a few wavy lines around it show the air it moves through.",
+      "caption": "The ball on its way up, moving through <span class=\"key-1\">air</span>. Not to scale."
+    },
+    "question": "<p>A ball is thrown straight up and caught at the same height it left from. Air resistance (fluid resistance) is <em>not</em> negligible: the ball feels a drag force whenever it moves. Which takes longer, the way up or the way down?</p>",
+    "options": [
+      "The way up takes longer",
+      "The way down takes longer",
+      "They take the same time"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The way down takes longer.</strong> Drag always acts against the motion. On the way up, the ball is moving upwards, so drag acts <em>downwards</em>, in the same direction as the weight: the ball's deceleration is greater than $g$. On the way down, drag acts <em>upwards</em>, against the weight, so the acceleration is less than $g$. The ball is slowed more sharply on the way up than it is speeded up on the way down.</p><p>Energy settles the comparison. Drag does negative work on the ball all the way round, so the ball comes back with less kinetic energy than it left with: it returns more slowly than it was thrown. More than that, at <em>any</em> height the ball passes twice, it is moving more slowly on the second pass (the way down) than on the first, because energy has been lost to drag in between. Every part of the path is covered more slowly on the way down, over the same distance, so the way down takes longer.</p><p>Numbers from a computer model with a realistic drag law (beyond the course) show the size of the effect. A ball thrown up at 20 $\\text{m s}^{-1}$ whose terminal speed is 30 $\\text{m s}^{-1}$ takes 1.8 s to rise 16.9 m, then 1.9 s to fall back, arriving at 16.6 $\\text{m s}^{-1}$. Without air it would take 2.0 s each way and rise to $\\dfrac{u^2}{2g} = \\dfrac{20^2}{2 \\times 9.8} = 20.4$ m.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-a1-03-forces.svg",
+      "alt": "Two free-body diagrams. Going up: the weight and the drag both point downwards. Coming down: the weight points downwards and the drag points upwards, and the drag arrow is shorter because the ball is slower.",
+      "caption": "Free-body diagrams on the way up and the way down. The <span class=\"key-1\">weight</span> is the same in both; the <span class=\"key-2\">drag</span> always opposes the motion, and is smaller on the way down because the ball is slower. The small grey arrow shows the direction of motion."
+    },
+    "tempting": "<p>\"The same time\" is what the no-air case gives, and it is the one practised most often: with no drag the motion is symmetric, so the time up equals the time down. Adding drag breaks the symmetry, because the drag force changes direction when the ball does, while the weight does not.</p><p>\"The way up takes longer\" comes from feeling that a ball \"struggles\" upwards against gravity and \"just falls\" on the way down. In fact the ball loses its upward speed quickly, because gravity and drag are working together, and gains speed slowly on the way down, because they are working against each other.</p>"
+  },
+  {
+    "id": "CC-A1-04",
+    "topic": "A.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "There and back in a wind",
+    "figure": {
+      "svg": "diagrams/cc-a1-04-wind.svg",
+      "alt": "Seen from above, a small plane between two towns, A on the left and B on the right, joined by a dashed route. Two arrows above show a steady wind blowing from A towards B.",
+      "caption": "The <span class=\"key-1\">wind</span> blows along the route the whole time. Not to scale."
+    },
+    "question": "<p>A small plane flies from town A to town B and straight back, always at the same airspeed (its speed relative to the air). A steady wind blows along the route for the whole trip, so the plane has a tailwind one way and a headwind the other. Compared with the same round trip in still air, is the total flight time shorter, the same, or longer?</p>",
+    "options": [
+      "Shorter: the tailwind more than makes up for the headwind",
+      "The same: the tailwind and the headwind cancel out",
+      "Longer, whichever way the wind blows",
+      "It depends on whether the tailwind or the headwind comes first"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>Longer, always.</strong> The plane's velocity relative to the ground is its velocity relative to the air plus the velocity of the air relative to the ground. With the wind the ground speed is the airspeed plus the wind speed; against it, the airspeed minus the wind speed. The two legs cover the same distance but take different times, and the plane spends <em>longer</em> on the slow leg than on the fast one, so the slow leg counts for more in the average.</p><p>Try an airspeed of 200 $\\text{km h}^{-1}$, a route of 300 km and a wind of 50 $\\text{km h}^{-1}$. Outward, with the wind: ground speed 250 $\\text{km h}^{-1}$, time $\\dfrac{300}{250} = 1.2$ h. Back, against it: ground speed 150 $\\text{km h}^{-1}$, time $\\dfrac{300}{150} = 2.0$ h. Total 3.2 h, against $2 \\times \\dfrac{300}{200} = 3.0$ h in still air. The order of the legs makes no difference: 2.0 h + 1.2 h is still 3.2 h.</p><p>The limiting case makes the point: if the wind speed equalled the airspeed, the plane would never make headway on the return leg, and the round trip would take forever. In general the round trip takes $\\dfrac{d}{v + w} + \\dfrac{d}{v - w} = \\dfrac{2dv}{v^2 - w^2}$, which is always more than $\\dfrac{2d}{v}$ when $w$ is not zero. Relative velocity is introduced in <a href=\"../themes/a1.html#relative\">A.1</a> on this site; the syllabus places it in A.5.</p>",
+    "tempting": "<p>\"They cancel out\" is the natural guess: the wind adds 50 $\\text{km h}^{-1}$ one way and takes 50 $\\text{km h}^{-1}$ away the other way, so the average <em>speed</em> looks unchanged. But the average speed for the whole trip is total distance over total time, not the mean of the two speeds. The plane spends more time at the lower speed, so the overall average speed is lower.</p><p>\"Shorter\" comes from picturing the fast leg and forgetting that the slow leg takes correspondingly longer. \"Depends on the order\" confuses the order of the legs with their total: both legs are flown whichever comes first, and their times simply add.</p>"
+  },
+  {
     "id": "CC-A2-01",
     "topic": "A.2",
     "level": "SL",
@@ -161,6 +209,54 @@
     "tempting": "<p>Almost everyone expects the balloon to swing backwards, like a pendulum or a passenger. That's what a heavy object on a string would do. A helium balloon is lighter than the air it displaces, so it moves the opposite way to the air around it.</p>"
   },
   {
+    "id": "CC-A2-03",
+    "topic": "A.2",
+    "level": "SL",
+    "type": "choice",
+    "title": "Wall or head-on?",
+    "figure": {
+      "svg": "diagrams/cc-a2-03-crash.svg",
+      "alt": "Top view of two situations. (a): a car moving at 50 km/h towards a thick, hatched wall. (b): two identical cars moving towards each other, each at 50 km/h.",
+      "caption": "Seen from above. (a) One car and a rigid wall. (b) Two identical cars, head-on. The <span class=\"key-1\">arrows</span> show the velocities. Not to scale."
+    },
+    "question": "<p>In crash (a), a car travelling at 50 $\\text{km h}^{-1}$ hits a very rigid wall that does not move or deform. In crash (b), the same car, at the same 50 $\\text{km h}^{-1}$, hits an identical car coming the other way at 50 $\\text{km h}^{-1}$, exactly head-on. In both crashes the cars end up at rest. Which crash is worse for the driver of the first car?</p>",
+    "options": [
+      "Crash (a), against the wall: a wall doesn't give at all",
+      "Crash (b), head-on: the closing speed is 100 km/h",
+      "They are equally bad"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>They are equally bad.</strong> Think about what the first car itself goes through. In both crashes it is brought from 50 $\\text{km h}^{-1}$ to rest, so its change in momentum is the same. For a 1200 kg car, 50 $\\text{km h}^{-1}$ is 13.9 $\\text{m s}^{-1}$ and the change in momentum is $1200 \\times 13.9 = 1.67 \\times 10^{4}$ N s either way. The force on the car is this change in momentum divided by the time the crumpling takes, and the crumpling is the same in both crashes, as the next paragraph shows.</p><p>Head-on, the two identical cars push on each other with equal and opposite forces (Newton's third law). By symmetry, the place where their front ends meet does not move: it stays fixed in the middle, exactly like the face of the wall. Each car's crumple zone squashes against a surface that does not move, through the same distance and in the same time as against the wall. From the first car's point of view, the second car is doing precisely what the wall did.</p><p>Energy tells the same story. Each car arrives with $\\tfrac{1}{2} \\times 1200 \\times 13.9^2 = 1.16 \\times 10^{5}$ J of kinetic energy. Head-on, the total of $2.3 \\times 10^{5}$ J is shared between <em>two</em> crumple zones, so each one absorbs $1.16 \\times 10^{5}$ J, which is exactly what the single crumple zone absorbs against the wall (a rigid wall absorbs almost nothing). The famous claim that a head-on crash at 50 $\\text{km h}^{-1}$ \"is like hitting a wall at 100 $\\text{km h}^{-1}$\" is wrong: hitting a wall at 100 $\\text{km h}^{-1}$ would mean four times the kinetic energy going into one car.</p>",
+    "tempting": "<p>\"The closing speed is 100 $\\text{km h}^{-1}$\" is true, but the closing speed is not what the driver experiences. What matters is how quickly <em>your</em> car is brought to rest, and that is from 50 $\\text{km h}^{-1}$ in both crashes. The extra kinetic energy in the head-on crash belongs to the other car and is absorbed by the other car's crumple zone. (If the oncoming car were a much heavier truck, the answer would change: the meeting point would then move towards you, and your car would end up moving backwards, a larger change in momentum.)</p><p>\"The wall doesn't give\" assumes that the other car's crumpling softens your impact. But the other car's crumpling absorbs the other car's energy; by symmetry, the surface you crumple against is just as unmoving as the wall.</p>"
+  },
+  {
+    "id": "CC-A2-04",
+    "topic": "A.2",
+    "level": "SL",
+    "type": "choice",
+    "title": "The balance in the middle",
+    "figure": {
+      "svg": "diagrams/cc-a2-04-balance.svg",
+      "alt": "A spring balance lies horizontally between two posts. A string from each end of the balance passes over a pulley at the top of the nearest post and hangs down to a 10 N weight. The balance's reading window shows a question mark.",
+      "caption": "A spring balance (newton meter) held between two 10 N weights. The strings and pulleys are light and frictionless. Not to scale."
+    },
+    "question": "<p>A spring balance lies horizontally. A string from each of its ends passes over a pulley and hangs down to a 10 N weight, so the balance is pulled by a 10 N weight at each end. The strings and the pulleys are light and frictionless, and everything is at rest. What does the balance read?</p>",
+    "options": [
+      "0 N",
+      "5 N",
+      "10 N",
+      "20 N"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>10 N.</strong> A spring balance reads the tension in its spring, and a tension is one force, not the sum of the pulls at both ends. A light string over a frictionless pulley has the same tension all along it, so each string pulls on the balance with 10 N: 10 N to the left at one end and 10 N to the right at the other. The balance is in equilibrium, with no resultant force, and its spring is stretched by a 10 N tension.</p><p>Compare the ordinary way of using the balance: hang it from a hook and put one 10 N weight on it. The weight pulls down with 10 N; the hook pulls up with 10 N (it must, or the balance would accelerate); and the balance reads 10 N. Nobody adds the hook's pull to the weight's pull to get 20 N. In the two-weight set-up, the second weight is simply doing the hook's job.</p><p>The same idea applies to a rope in a tug of war, or the tow bar between a tractor and a trailer: a rope pulled with 10 N at each end has a tension of 10 N, and every part of the rope pulls on its neighbours with that same 10 N.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-a2-04-forces.svg",
+      "alt": "Top: the balance pulled with 10 N to the left and 10 N to the right, reading 10 N. Bottom: the same balance hanging from a hook with one 10 N weight, drawn sideways, with the hook pulling 10 N one way and the weight pulling 10 N the other way, also reading 10 N.",
+      "caption": "The <span class=\"key-2\">forces on the balance</span> are the same in both cases: 10 N at each end, and a reading of 10 N."
+    },
+    "tempting": "<p>\"20 N\" adds the two weights, as if the balance measured the total of everything pulling on it. But if that were how a balance worked, the ordinary set-up (hook plus one weight) would also read 20 N, because the hook pulls just as hard as the weight. A balance reads the tension in it, which is 10 N.</p><p>\"0\" treats the two pulls as cancelling. They do cancel as far as the <em>resultant</em> force goes, which is why the balance stays still, but equal and opposite pulls on the two ends of a spring are exactly what stretch it. \"5 N\" shares the 10 N between the two ends, as if each end felt half; each end is pulled by the full 10 N.</p>"
+  },
+  {
     "id": "CC-A3-01",
     "topic": "A.3",
     "level": "SL",
@@ -222,6 +318,32 @@
     "answer": 1,
     "reveal": "<p>The work done on each cart is $W = Fs$, so Q receives <strong>twice the work</strong> and gains twice the kinetic energy. But $E_k = \\tfrac{1}{2}mv^2$, so doubling the kinetic energy multiplies $v^2$ by 2, and $v$ by only $\\sqrt{2} \\approx 1.41$.</p><p>For example, with 2.0 kg carts, $F = 4.0$ N and $d = 1.0$ m: P gains 4.0 J, so $v = \\sqrt{\\dfrac{2 \\times 4.0}{2.0}} = 2.0$ $\\text{m s}^{-1}$. Q gains 8.0 J, so $v = \\sqrt{\\dfrac{2 \\times 8.0}{2.0}} = 2.8$ $\\text{m s}^{-1}$. To end up twice as fast as P, Q would have to be pushed over $4d$.</p>",
     "tempting": "<p>Twice the distance means twice the work, so it's natural to expect twice the speed. But work equals the change in <em>kinetic energy</em>, which depends on $v^2$. \"The same\" is tempting because the force is the same, but Q is pushed over a longer distance (and for longer), so it gains more energy. The time isn't doubled either: Q covers the second half of its push faster, so it is pushed for $\\sqrt{2}$ times as long as P.</p><p>\"4 times\" comes from squaring the wrong way round: it is $v^2$, not $v$, that is proportional to the work done, so making Q 4 times faster would need 16 times the work (a push over $16d$).</p>"
+  },
+  {
+    "id": "CC-A3-04",
+    "topic": "A.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "The roller-coaster train",
+    "figure": {
+      "svg": "diagrams/cc-a3-04-train.svg",
+      "alt": "Side view of a roller-coaster track: a flat section at the top, a straight drop and a flat section at the bottom. A train of four linked cars waits at rest on the top, with its first car at the edge of the drop and its last car furthest from it.",
+      "caption": "The train waits at the top of the drop with its <span class=\"key-1\">first</span> car at the edge. Not to scale."
+    },
+    "question": "<p>A roller-coaster train of several linked cars is given a tiny push at the top of a drop, with its first car at the edge, and runs down to the flat section at the bottom. Friction and air resistance are negligible, and the cars stay linked together. Compare the speed of each car <em>at the moment that car reaches the bottom of the drop</em>. Which car is moving fastest when it gets there?</p>",
+    "options": [
+      "The first car",
+      "The last car",
+      "All the cars have the same speed when they reach the bottom"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The last car.</strong> The cars are linked, so at any instant the whole train has one speed. That speed keeps increasing as long as part of the train is still on the slope, because gravity is still doing work on that part. When the first car reaches the bottom, the rest of the train is still high up on the slope, so the train is only part-way through gaining its speed. By the time the last car reaches the bottom, the whole train is down, and the train, with the last car, is moving faster than it was when the first car arrived.</p><p>Energy conservation for the train as a whole says it neatly: the kinetic energy of the train equals the gravitational potential energy it has lost, and that is set by how far the train's <em>centre of mass</em> has fallen. When the first car is at the bottom, the centre of mass is still part-way up the slope; when the last car is at the bottom, the centre of mass has fallen the full height of the drop.</p><p>Numbers, for a 24 m train (four 6 m cars) on a straight slope 40 m long with a 20 m drop. When the first car reaches the bottom, the train occupies the lowest 24 m of the slope, so its centre of mass is 12 m up the slope: $12 \\times \\dfrac{20}{40} = 6$ m above the bottom, so it has fallen 14 m and $v = \\sqrt{2gh} = \\sqrt{2 \\times 9.8 \\times 14} = 16.6$ $\\text{m s}^{-1}$. When the last car reaches the bottom the centre of mass has fallen the full 20 m: $v = \\sqrt{2 \\times 9.8 \\times 20} = 19.8$ $\\text{m s}^{-1}$. A single car on its own would also reach 19.8 $\\text{m s}^{-1}$; it is the first car of a train that reaches the bottom slower, not the last car that reaches it faster.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-a3-04-cm.svg",
+      "alt": "Two drawings of the same track. Top: the first car has just reached the bottom, the train lies along the slope, and its centre of mass, marked by an orange dot, is 14 m below its starting height. Bottom: the last car has just reached the bottom, the whole train is on the flat, and its centre of mass is 20 m below its starting height.",
+      "caption": "Drawn to scale for the numbers in the answer. The <span class=\"key-2\">dot</span> is the train's centre of mass and the <span class=\"key-2\">dashed line</span> is its height at the start. It has fallen 14 m when the first car arrives at the bottom, and 20 m when the last car does."
+    },
+    "tempting": "<p>\"All the same, they all drop the same height\" would be right for separate, unlinked cars, each converting its own loss of gravitational potential energy into its own kinetic energy. But linked cars share one speed, so energy is exchanged between them through the couplings: on the slope, the cars still high up are pushing the cars already at the bottom along faster, and the cars at the bottom are holding the ones on the slope back. The train's kinetic energy depends on how far the <em>whole train's</em> centre of mass has fallen, not on where any one car is.</p><p>\"The first car, it has been moving longest\" gets the timing right (it does reach the bottom first) but the speed wrong: when it arrives, much of the train is still high on the slope, so only part of the available gravitational potential energy has been released. The last car gets to the bottom later, by which time the whole train's potential energy has been turned into kinetic energy.</p>"
   },
   {
     "id": "CC-A4-01",
@@ -371,6 +493,49 @@
     "tempting": "<p>It's tempting to think that the hotter object must always do more harm, as if temperature were \"the amount of heat\". But temperature measures the average random kinetic energy of the particles, not the total. A spark has so few particles that its internal energy is tiny, however high its temperature.</p><p>The same idea explains why the air inside a 200 °C oven doesn't burn your hand at once, though the tray does: the air has a very small mass and is a poor conductor.</p>"
   },
   {
+    "id": "CC-B1-04",
+    "topic": "B.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "Milk now or later?",
+    "figure": {
+      "svg": "diagrams/cc-b1-04-milk.svg",
+      "alt": "A steaming cup of hot coffee and a small jug of cold milk on a table, with a clock marking a five-minute wait.",
+      "caption": "You must wait five minutes before drinking."
+    },
+    "question": "<p>You have just made a cup of hot coffee, and a small jug of cold milk is on the table beside it. You must leave the cup for five minutes before you drink it. You will add the milk at some point, and you want the drink to be as hot as possible when you finally drink it. The room is cooler than both the coffee and the milk, and the milk stays at its own temperature while it waits in the jug. Should you add the milk now, or just before you drink?</p>",
+    "options": [
+      "Add the milk now",
+      "Add the milk just before drinking",
+      "It makes no difference"
+    ],
+    "answer": 0,
+    "reveal": "<p><strong>Add the milk now</strong>, although the gain is small.</p><p>The coffee loses energy to the room by conduction and convection into the air (and the cup), by thermal radiation, and by evaporation from the surface. For every one of these, the rate of energy transfer is larger when the drink is hotter: the rate of conduction is proportional to the temperature difference between the drink and its surroundings, a hotter surface drives faster convection, and a hotter surface radiates more. So the hotter the drink is during the wait, the faster it loses energy.</p><p>Adding the milk now makes the drink cooler at the start of the five minutes, so it loses energy more slowly for the whole wait. Leaving the coffee black keeps it hotter, so it loses more energy, and then the same cold milk cools it by the same amount at the end. The \"milk now\" cup wins both ways: it loses less energy during the wait, and it has more mass, so a given energy loss lowers its temperature by less ($Q = mc\\Delta T$).</p><p>Numbers show how small the effect is. Suppose 200 g of coffee at 90 °C and 50 g of milk at 5 °C (treat both as water), in a room at 20 °C, and suppose that black coffee would cool from 90 °C to 75 °C in the five minutes. Milk now: the mixture starts at $\\dfrac{4 \\times 90 + 1 \\times 5}{5} = 73$ °C, and cooling at a rate proportional to the temperature difference above the room (Newton's law of cooling, beyond the course) brings it to about 61.6 °C if the milky cup cooled at the same rate per degree as the black one; allowing for its extra 50 g, which makes its temperature fall more slowly for the same energy loss, gives about 63.7 °C. Milk later: the coffee is at 75 °C, and adding the milk gives $\\dfrac{4 \\times 75 + 1 \\times 5}{5} = 61$ °C. So between half a degree and about three degrees in favour of \"now\". In a real kitchen the milk in the jug warms slightly towards room temperature while it waits, which helps \"later\" and makes the difference smaller still. Physics says \"now\"; your tongue may not notice.</p>",
+    "tempting": "<p>\"It makes no difference\" is the natural answer: the same milk goes into the same coffee either way, so surely the final temperature is the same. That would be true if the coffee lost energy at a fixed rate, whatever its temperature. But the rate of cooling depends on the temperature difference between the drink and the room, so a hotter drink loses more energy in the same five minutes. The order matters.</p><p>\"Just before drinking\" comes from the feeling that cold milk \"ruins\" a hot drink, so it should go in as late as possible. The milk lowers the temperature by the same amount whenever it goes in; what differs is how much energy the drink loses to the room in the meantime, and that is smaller for the cooler, milky drink.</p>"
+  },
+  {
+    "id": "CC-B1-05",
+    "topic": "B.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "The pot inside the pot",
+    "figure": {
+      "svg": "diagrams/cc-b1-05-pot-in-pot.svg",
+      "alt": "A small metal pot of water sits inside a large pot of water on a gas flame. The water in the large pot has bubbles and is boiling; the water in the small pot has none.",
+      "caption": "The outer water boils hard; the inner water never does. Not to scale."
+    },
+    "question": "<p>A large metal pot of water is boiling vigorously on a hob at normal atmospheric pressure. A small, thin metal pot, also holding water, sits inside it so that its base and sides are surrounded by the boiling water. The inner water gets very hot, but however long you wait and however hard the outer water boils, the inner water never boils. Why not?</p>",
+    "options": [
+      "The inner water stays well below 100 °C",
+      "The inner water reaches 100 °C but then receives no more energy",
+      "The metal of the small pot stops thermal energy getting through",
+      "Water in a pot inside a pot needs to be hotter than 100 °C to boil"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The inner water reaches 100 °C, but then it receives no more energy.</strong></p><p>Energy is transferred by conduction through the thin metal wall only while there is a temperature difference across it: the rate of transfer is proportional to the temperature difference. At first the outer water (100 °C) is hotter than the inner water, so energy flows in and the inner water warms up. When the inner water reaches 100 °C it is in <strong>thermal equilibrium</strong> with the boiling water around it: both are at the same temperature, so there is no net transfer of energy and the inner water goes no further.</p><p>To boil, that is not enough. Boiling is a change of state at a constant temperature, and it needs a continuous supply of energy: the specific latent heat of vaporization of water is $L_v = 2.26 \\times 10^6$ $\\text{J kg}^{-1}$, so turning just 0.50 kg of the inner water into steam would need $Q = mL = 0.50 \\times 2.26 \\times 10^6 = 1.1 \\times 10^6$ J. The outer water can boil because the flame keeps pushing energy into it; the inner water has no source hotter than itself, so it can only sit at 100 °C.</p><p>Meanwhile the outer water stays at 100 °C no matter how fiercely it boils: a hotter flame makes it boil faster, not hotter. That is why no amount of extra heat under the big pot helps. (Cooks use exactly this arrangement, a bain-marie, to warm delicate sauces without ever boiling them.)</p>",
+    "tempting": "<p>\"It never reaches 100 °C\" sounds cautious, but there is no reason for it to stop short: energy keeps flowing in while the inner water is cooler than the outer water, and the outer water stays at 100 °C. The inner water does get to 100 °C; the problem comes after that.</p><p>\"The metal stops the energy getting through\" has it backwards. Metals are good thermal conductors, and the inner water clearly gets very hot, so energy is getting through. The wall is not the barrier; the lack of a temperature difference is.</p><p>\"It needs to be hotter than 100 °C\" confuses two things. At normal pressure water boils at 100 °C wherever it is. What it needs is not a higher temperature but a continuing supply of energy at that temperature, to pay the latent heat of vaporization.</p>"
+  },
+  {
     "id": "CC-B2-01",
     "topic": "B.2",
     "level": "SL",
@@ -462,6 +627,28 @@
     "answer": 1,
     "reveal": "<p>At constant pressure, the volume of a fixed mass of ideal gas is proportional to its <strong>kelvin</strong> temperature (Charles's law): $\\dfrac{V}{T} = \\text{constant}$.</p><p>$T_1 = 20 + 273 = 293$ K and $T_2 = -18 + 273 = 255$ K, so $\\dfrac{V_2}{V_1} = \\dfrac{255}{293} = 0.87$.</p><p>The balloon shrinks to 87% of its original volume, a drop of about 13%. That's a noticeable change, but nowhere near empty. Take it out and let it warm up again, and it goes back to its original size.</p>",
     "tempting": "<p>In degrees Celsius the temperature goes from +20 to −18, which sounds like going \"below nothing\", so it is tempting to think the gas must shrink to half or to almost nothing. But 0 °C is just the melting point of ice, not a zero of anything in the gas. At −18 °C the molecules still have plenty of kinetic energy. What matters is the change compared with absolute zero: a drop of 38 K from 293 K.</p><p>Others think a sealed balloon can't change size because no air gets in or out. The <em>mass</em> of air is fixed, but its volume isn't.</p>"
+  },
+  {
+    "id": "CC-B3-03",
+    "topic": "B.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "The freezer door that sticks",
+    "figure": {
+      "svg": "diagrams/cc-b3-03-freezer-door.svg",
+      "alt": "An upright freezer at minus 18 degrees Celsius in a room at 20 degrees Celsius. Its door has just been closed, and a hand is pulling the handle to open it again.",
+      "caption": "Opened, closed, and pulled again a few seconds later. Not to scale."
+    },
+    "question": "<p>An upright freezer keeps its inside at −18 °C in a kitchen at 20 °C. You open the door for a few seconds, take something out, and close it. A few seconds later you try to open it again, and it is noticeably harder to pull open than it was the first time. If you wait a minute or two, it opens easily again. What causes the door to stick?</p>",
+    "options": [
+      "The cold makes the rubber seal stiffer, so it grips the door",
+      "The air inside shrinks and sucks the door inwards",
+      "The warm air that got in cools quickly, so its pressure falls below the pressure outside",
+      "Water vapour on the seal freezes and glues the door shut"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>The warm air that got in cools quickly, so its pressure falls below the pressure of the room air outside.</strong></p><p>While the door is open, the cold air spills out (it is denser) and room air at about 20 °C, or 293 K, takes its place. When the door shuts, that air is trapped in a fixed volume and the cold walls and shelves cool it quickly towards −18 °C, or 255 K. For a fixed amount of gas at constant volume, pressure is proportional to absolute temperature ($\\dfrac{p}{T}$ constant), so the pressure inside falls from about 100 kPa to $100 \\times \\dfrac{255}{293} = 87$ kPa. The pressure outside is still 100 kPa, so there is a net inward pressure of about 13 kPa on the door.</p><p>Pressure is force per unit area, $p = \\dfrac{F}{A}$. For a door 0.5 m by 1.2 m, area 0.6 $\\text{m}^2$, the net inward force would be $F = pA = 13 \\times 10^3 \\times 0.6 = 7.8 \\times 10^3$ N, the weight of about 800 kg! In practice the force is much smaller, because the seal is not perfectly airtight: air starts leaking back in at once, the air inside does not all cool to −18 °C in a few seconds, and the door and seal flex inwards a little, which reduces the volume and so the pressure drop. Even so, the extra force needed is easy to feel.</p><p>Air keeps seeping in through the seal until the pressure inside equals the pressure outside, which takes a minute or so, and the door opens freely again. Some freezers have a small one-way vent for exactly this reason.</p>",
+    "tempting": "<p>\"The air inside shrinks and sucks the door inwards\" has the right idea about the air cooling, but the wrong picture of forces. A gas cannot pull on anything: its molecules only push when they hit a surface. The air inside pushes outwards on the door with a lower pressure than before, and the room air pushes inwards with its full pressure. It is the <em>outside</em> air that holds the door shut. Also the air does not \"shrink\": the volume is fixed by the cabinet, so it is the pressure that falls.</p><p>\"The seal gets stiffer\" and \"water vapour freezes the door shut\" both fail the timing test. The seal was just as cold the first time you opened the door, and ice would take much longer than a few seconds to form and would not vanish again a minute later. The sticking appears quickly and disappears quickly, exactly like a pressure difference that air leaking through the seal slowly removes.</p>"
   },
   {
     "id": "CC-B4-01",
@@ -566,6 +753,28 @@
     "tempting": "<p>\"The 100 W lamp is brighter\" is true when each lamp has the full 230 V across it, as at home, where lamps are connected in parallel. Then $P = \\dfrac{V^2}{R}$ applies with the same $V$, and the lower resistance wins. In series it is the <em>current</em> that is the same for both, so $P = I^2R$ shows that the higher resistance wins. A power rating describes a lamp under its rated conditions, not in every circuit.</p>"
   },
   {
+    "id": "CC-B5-04",
+    "topic": "B.5",
+    "level": "SL",
+    "type": "choice",
+    "title": "High voltage, low current?",
+    "figure": {
+      "svg": "diagrams/cc-b5-04-pylons.svg",
+      "alt": "Two electricity pylons carrying cables labelled 400 kV, with a line running on to a small building labelled to users.",
+      "caption": "The 400 kV is the potential difference between the <span class=\"key-1\">lines</span> (roughly, between a line and the ground). Not to scale."
+    },
+    "question": "<p>The cables on the big pylons that cross the countryside are at a potential difference of about 400 kV from the ground, yet the current in them is only a few hundred amperes. A student objects: \"$V = IR$, so a very high voltage must mean a very high current.\" The current is not very high. What is wrong with the student's reasoning?</p>",
+    "options": [
+      "Nothing: the current in a 400 kV cable really is enormous",
+      "The 400 kV is not the p.d. across the cable's resistance, so putting it into V = IR gives the wrong current",
+      "V = IR does not apply to power lines because they carry alternating current",
+      "The cable's resistance is so large that it cancels the high voltage"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The 400 kV is not the potential difference across the cable's resistance.</strong> It is the p.d. between the line and the ground (or between two lines). The p.d. that drives current <em>along</em> the cable is the small difference between the potentials at its two ends, and that is what $V = IR$ links to the current: $V_{\\text{cable}} = IR_{\\text{cable}}$, which is only a few kilovolts.</p><p>The current is fixed by the power being delivered, not by the line voltage alone: $P = IV$, so $I = \\dfrac{P}{V}$. For 100 MW sent at 400 kV, $I = \\dfrac{100 \\times 10^6}{400 \\times 10^3} = 250$ A. If the cable's resistance is 5 Ω, the p.d. along the cable is $V = IR = 250 \\times 5 = 1250$ V, about 1.25 kV out of 400 kV, and the power wasted as heat in the cable is $P = I^2 R = 250^2 \\times 5 = 3.1 \\times 10^5$ W, about 0.31 MW, which is 0.3% of the power sent.</p><p>Now send the same 100 MW at 40 kV. The current is ten times larger, $I = \\dfrac{100 \\times 10^6}{40 \\times 10^3} = 2500$ A, the p.d. along the cable is $2500 \\times 5 = 12.5$ kV, and the loss is $I^2 R = 2500^2 \\times 5 = 3.1 \\times 10^7$ W, about 31 MW: nearly a third of the power is lost before it arrives. So for a given power, a high transmission voltage means a <em>low</em> current and small $I^2 R$ losses. That is exactly why the grid uses such high voltages (and transformers to step them up and back down).</p>",
+    "tempting": "<p>\"The current really is enormous\" follows directly from the student's slip. $V = IR$ is correct, but $V$ must be the p.d. across the resistance you are using. The 400 kV is the p.d. between the cable and the ground: across the whole route from the line, through the users' appliances and back to earth. $V = IR$ with that route's resistance (about 1600 Ω here) gives the 250 A correctly. Pairing the 400 kV with the cable's own 5 Ω instead would predict 80 000 A, and that is the student's mistake.</p><p>\"The cable's resistance is huge\" tries to rescue $V = IR$ by making $R$ large, but transmission cables are thick aluminium and steel with a resistance of only a few ohms over many kilometres, deliberately kept low. A huge resistance would waste enormous power as $I^2 R$ heating.</p><p>\"It does not apply to alternating current\" is an excuse rather than an explanation. For a resistor, $V = IR$ holds at every instant whichever way the current flows; the student's error is about <em>which</em> p.d. to use, not about a.c.</p>"
+  },
+  {
     "id": "CC-C1-01",
     "topic": "C.1",
     "level": "SL",
@@ -612,6 +821,28 @@
     "answer": 1,
     "reveal": "<p>The key is what happens to the spring constant. Hang a weight from the whole spring and every coil stretches a little. Hang the same weight from half the spring and each coil stretches by the same amount as before, but there are only half as many coils, so the total extension is halved. Half the extension for the same force means the spring constant has <strong>doubled</strong>: the half spring is twice as stiff.</p><p>For a mass–spring system, $T = 2\\pi\\sqrt{\\dfrac{m}{k}}$. With $m$ unchanged and $k$ doubled, $T$ is divided by $\\sqrt{2}$:</p><p>$T = \\dfrac{0.80}{\\sqrt{2}} = 0.57$ s</p>",
     "tempting": "<p>\"Half the spring, half the period\" (0.40 s) forgets the square root: $T$ depends on $\\sqrt{k}$, not on $k$. \"Still 0.80 s\" treats the spring constant as a fixed property of the material, like density, but it depends on the spring's length too. And 1.1 s comes from thinking a shorter spring is weaker. It is actually stiffer: it's harder to stretch a short piece of spring by 1 cm than a long one.</p>"
+  },
+  {
+    "id": "CC-C1-03",
+    "topic": "C.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "Two clocks on the Moon",
+    "figure": {
+      "svg": "diagrams/cc-c1-03-moon-clocks.svg",
+      "alt": "Two clocks standing side by side on the lunar surface, with the Earth small in the sky. The left clock is driven by a swinging pendulum; the right clock is driven by a mass bouncing on a spring.",
+      "caption": "The <span class=\"key-1\">pendulum</span> clock and the <span class=\"key-2\">mass-on-a-spring</span> clock, taken to the Moon, where $g \\approx 1.6$ $\\text{m s}^{-2}$. Not to scale."
+    },
+    "question": "<p>Two clocks keep perfect time on Earth. One is regulated by a swinging pendulum; the other by a mass bouncing up and down on a spring. Both are taken to the Moon, where the gravitational field strength is about 1.6 $\\text{m s}^{-2}$ instead of 9.8 $\\text{m s}^{-2}$, and set going again. Both oscillate with small amplitudes, and friction and air resistance are negligible. What happens to their timekeeping?</p>",
+    "options": [
+      "Both clocks run slow",
+      "The pendulum clock runs slow; the spring clock keeps time",
+      "The spring clock runs slow; the pendulum clock keeps time",
+      "Both clocks keep time"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The pendulum clock runs slow; the spring clock keeps perfect time.</strong></p><p>The period of a simple pendulum is $T = 2\\pi\\sqrt{\\dfrac{l}{g}}$: it depends on $g$ because gravity provides the restoring force. With $g$ smaller, each swing takes longer, by a factor $\\sqrt{\\dfrac{9.8}{1.6}} = 2.5$. A pendulum that swung once a second on Earth now takes about 2.5 s, so the clock shows only about 24 minutes for every real hour.</p><p>The period of a mass on a spring is $T = 2\\pi\\sqrt{\\dfrac{m}{k}}$: no $g$ at all. The restoring force comes from the spring, and the mass $m$ (the inertia of the oscillating object) and the spring constant $k$ are the same on the Moon as on Earth. The spring does sag less: the equilibrium extension is $\\dfrac{mg}{k}$, so on the Moon the mass hangs at about a sixth of its Earth extension ($\\dfrac{1.6}{9.8} = 0.16$). But the mass oscillates about that new equilibrium position with exactly the same period, so the clock keeps time.</p><p>This is why a pendulum can be used to measure $g$, while a spring-driven balance wheel (the heart of a mechanical wristwatch) does not care where it is.</p>",
+    "tempting": "<p>\"Both run slow, because everything is lighter on the Moon\" mixes up weight and mass. Weight (the force $mg$) is smaller on the Moon, but mass, the inertia that resists acceleration, is not. The spring's restoring force depends on its extension, not on gravity, and the mass it has to accelerate is unchanged, so the spring oscillation is unchanged.</p><p>\"The spring clock runs slow because the mass hangs lower on the Moon\" gets the sag backwards (it hangs <em>higher</em>, because its weight is smaller) and, more importantly, confuses the equilibrium position with the period. Shifting where the mass hangs does not change how quickly it bounces about that point.</p><p>\"Both keep time\" is tempting if you think a pendulum is just another oscillator with a fixed length. But its restoring force is the component of the weight along the swing, and a smaller weight means a smaller force, a smaller acceleration and a longer period.</p>"
   },
   {
     "id": "CC-C2-01",
@@ -714,6 +945,28 @@
     "tempting": "<p>Swapping two wires seems a tiny change: each loudspeaker still plays the same note just as loudly, so it is natural to expect the same sound, or to think that two speakers must always be louder than one. But interference depends on the phase difference between the waves where they meet, not just on how loud each one is. A path difference is only one way to create a phase difference; reversing one speaker is another.</p>"
   },
   {
+    "id": "CC-C3-03",
+    "topic": "C.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "Covering one slit",
+    "figure": {
+      "svg": "diagrams/cc-c3-03-cover-slit.svg",
+      "alt": "Seen from above, a laser shines on a barrier with two narrow slits, and a pattern of bright fringes appears on a screen beyond it, with the brightest fringe at the centre. A card is held just above the upper slit, ready to cover it.",
+      "caption": "With both slits open there is a bright fringe at the centre of the screen. The card is about to cover one slit. Not to scale."
+    },
+    "question": "<p>A laser shines on two identical, very narrow slits, and a pattern of bright and dark fringes appears on a screen some distance away, with a bright fringe at the centre. The light is monochromatic and the two slits are coherent sources. Now a card is placed over one of the slits, blocking it completely, while nothing else changes. What happens to the brightness at the centre of the screen, where the central bright fringe was?</p>",
+    "options": [
+      "It goes dark",
+      "It stays the same brightness",
+      "It falls to half its brightness",
+      "It falls to a quarter of its brightness"
+    ],
+    "answer": 3,
+    "reveal": "<p><strong>It falls to about a quarter of its brightness.</strong></p><p>At the centre of the screen the path difference is zero, so with both slits open the two waves arrive in phase and interfere constructively: if each slit alone would give an oscillation of amplitude $A$ there, the two together give amplitude $2A$. The intensity (the brightness) of a wave is proportional to the <em>square</em> of its amplitude, so the central fringe has intensity proportional to $(2A)^2 = 4A^2$: four times what one slit gives, not twice. (The 2025 guide doesn't state \"intensity ∝ amplitude²\" in so many words; the guide for exams from 2028 does.)</p><p>Cover one slit and the amplitude at the centre drops from $2A$ to $A$, so the intensity drops from $4A^2$ to $A^2$: a quarter. Energy is still conserved. With two slits, twice as much light passes through, and its average over the screen is twice that of one slit, but interference redistributes it: the bright fringes get four times the single-slit intensity and the dark fringes get none, which averages to twice.</p><p>The fringes themselves disappear as well, because fringes need two coherent sources. What remains is the broad, smooth spread of light from a single narrow slit, brightest in the middle and fading on either side (the single-slit intensity pattern is HL content; the answer here needs no equation for it). The slits must be narrow for this: a wide single slit would not spread its light evenly across the screen.</p>",
+    "tempting": "<p>\"Half, because half the light is blocked\" is the most common answer, and it is right about the light passing through the slits: that does halve. But at the <em>centre</em> of the screen the two beams were adding constructively, and intensity depends on amplitude squared, so halving the amplitude quarters the intensity. The missing light has not vanished; it was never at the centre in the first place, because with two slits it was concentrated into bright fringes and taken away from dark ones.</p><p>\"The same, because the central fringe comes from the one slit that is still open\" ignores that the central fringe is made by <em>both</em> slits together. Each contributes equally there.</p><p>\"It goes dark\" comes from thinking the whole pattern is \"made of interference\", so no interference means no light. But a single slit still lets light through to the screen; what you lose is the fringe pattern, not the light.</p>"
+  },
+  {
     "id": "CC-C4-01",
     "topic": "C.4",
     "level": "SL",
@@ -791,6 +1044,33 @@
     "question": "<p>Student A whirls a buzzer on a string in a horizontal circle, at a steady speed, with the centre of the circle directly above his head. The buzzer gives out a steady note. Student B stands still several metres away. The air is still. Predict what each of them hears.</p>",
     "reveal": "<p><strong>A hears a steady note at the buzzer's own frequency. B hears the pitch rise and fall once every revolution.</strong></p><p>The Doppler effect happens when the source moves towards or away from the observer. A's ears are almost exactly on the axis of the circle, so the buzzer stays practically the same distance from them: it moves round A, but never towards or away from him. The wavefronts reach him at the same rate as they are emitted.</p><p>For B it's different. While the buzzer is moving towards her, the wavefronts are bunched up and she hears a higher pitch; while it is moving away, they are spread out and she hears a lower pitch. At the two moments when it moves across her line of sight, she hears the true frequency. For example, a 2000 Hz buzzer on a 1.0 m string, going round twice a second, moves at $2\\pi \\times 1.0 \\times 2 = 12.6$ $\\text{m s}^{-1}$; B hears the note swing between about 1930 Hz and 2080 Hz (calculated with the HL equation for a moving source).</p>",
     "tempting": "<p>The buzzer is clearly moving fast, so it is tempting to expect everyone to hear a Doppler shift. But only the part of the source's velocity directed towards or away from the observer matters. For A, the buzzer's velocity is always at right angles to the line joining it to him, so that part is always zero. Some also expect B to hear a pitch that keeps rising as long as the buzzer moves; in fact it is higher only while the buzzer comes towards her and lower while it moves away.</p>"
+  },
+  {
+    "id": "CC-C5-03",
+    "topic": "C.5",
+    "level": "SL",
+    "type": "choice",
+    "title": "The approaching siren",
+    "figure": {
+      "svg": "diagrams/cc-c5-03-siren.svg",
+      "alt": "An ambulance with its siren on drives along a straight road at a steady speed towards a person standing at the roadside.",
+      "caption": "The ambulance drives straight towards you at a <span class=\"key-1\">steady speed</span>, passes, and drives away. Not to scale."
+    },
+    "question": "<p>An ambulance drives along a straight road at a steady speed, directly towards you, with its siren sounding a steady note. It passes close by you and drives away along the same road at the same speed. The air is still. Which statement best describes the pitch (the frequency) of the siren that you hear?</p>",
+    "options": [
+      "It rises steadily as the ambulance approaches, then falls steadily as it recedes",
+      "It is constant and higher than the siren's true pitch while the ambulance approaches, then drops to a constant lower pitch as it passes",
+      "It is constant and equal to the siren's true pitch while the ambulance approaches, and only drops after it has passed",
+      "It falls steadily the whole time, from before the ambulance reaches you until it is out of earshot"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>Constant and higher than the true pitch while it approaches, then a drop to a constant lower pitch as it passes.</strong></p><p>The Doppler shift depends on the <em>speed</em> of the source along the line to you, not on its distance. As the ambulance approaches, each wavefront is sent out from a point a little closer to you than the one before, so the wavefronts arrive bunched together: shorter wavelength, higher frequency. The ambulance's speed is steady, so the bunching is the same for every wavefront and the pitch you hear is steady too, however far away it is. Once it has passed, each wavefront starts a little further from you than the last, the wavefronts are stretched out, and you hear a steady lower pitch.</p><p>The change happens around the moment of passing. If the ambulance drove exactly through the spot where you stand, the pitch would switch at that instant. In reality it passes a few metres to one side, so for a second or so the velocity component along the line to you swings from \"towards\" through zero to \"away\", and the pitch slides smoothly from the high value to the low one: the familiar \"nee-naw... neeow\" of a passing siren.</p><p>For a number (the equation $f' = f\\dfrac{v}{v - u_s}$ for a moving source is HL content in C.5, so this is beyond SL): an ambulance at 30 $\\text{m s}^{-1}$ with a 700 Hz siren, with sound at 340 $\\text{m s}^{-1}$, is heard at $700 \\times \\dfrac{340}{340 - 30} = 768$ Hz while approaching and $700 \\times \\dfrac{340}{340 + 30} = 643$ Hz while receding: a drop of about three semitones at the moment it passes.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-c5-03-wavefronts.svg",
+      "alt": "Six circular wavefronts sent out by a source that is moving to the right. Each circle is centred on where the source was when it was emitted, so the circles are bunched together ahead of the source and spread out behind it.",
+      "caption": "Wavefronts from the <span class=\"key-2\">moving source</span>, one sent out each period. Ahead of it they are <span class=\"key-1\">bunched</span> (shorter wavelength, higher frequency); behind, they are stretched. Exaggerated: this source moves at 0.3 of the wave speed, an ambulance at about 0.09."
+    },
+    "tempting": "<p>\"It rises as it approaches, then falls\" is what most people remember hearing, but what actually rises and falls is the <em>loudness</em>: the sound gets louder as the ambulance gets closer and quieter as it goes away, and we confuse louder with higher. The frequency shift depends only on the speed of approach, which is constant, so the pitch is constant until the ambulance passes.</p><p>\"Falls steadily the whole time\" mixes the pitch of the siren with its envelope: a real siren also wails up and down on its own, which hides what the Doppler effect is doing. Picture a plain steady note instead.</p><p>\"The same as the true pitch while approaching\" treats the shift as something that happens only when the source has gone past. But the wavefronts are bunched the whole time the source is moving towards you, so the pitch is raised from the first moment you can hear it.</p>"
   },
   {
     "id": "CC-D1-01",
@@ -877,6 +1157,33 @@
       "caption": "A narrow cone through P cuts a <span class=\"key-1\">small, near patch</span> and a <span class=\"key-2\">large, far patch</span>. Their fields at P are equal in size and opposite in direction."
     },
     "tempting": "<p>\"Away from the nearest part of the wall\" is the most tempting answer: the nearest charges are much closer, and closer charges push harder. But there are far more charges on the far side, and for a sphere the two effects cancel exactly.</p><p>\"Towards the nearest part of the wall\" counts the extra charge on the far side but forgets that it is further away. \"The same as just outside\" treats the sphere as a point charge at its centre, but that shortcut works only for points <em>outside</em> the sphere.</p>"
+  },
+  {
+    "id": "CC-D2-03",
+    "topic": "D.2",
+    "level": "SL",
+    "type": "choice",
+    "title": "The balloon on the wall",
+    "figure": {
+      "svg": "diagrams/cc-d2-03-balloon-wall.svg",
+      "alt": "A balloon with a string hanging from it rests against a painted wall, seen from the side. No charges are drawn.",
+      "caption": "The balloon stays where it is put, with nothing holding it but the wall."
+    },
+    "question": "<p>A balloon is rubbed on a woollen jumper and becomes negatively charged. When it is held against a painted wall and let go, it stays there. The wall is a good insulator and has no overall charge: it has exactly as many protons as electrons, before and after the balloon arrives. Treat the balloon's charge as a point charge a short distance from the wall. Why is there an attractive force between a charged balloon and a wall that has no net charge?</p>",
+    "options": [
+      "The wall must have a small positive charge overall, left by earlier rubbing",
+      "The balloon's charge pushes the wall's electrons slightly away from the surface, so the surface nearest the balloon becomes positive",
+      "The balloon's electrons are attracted by the wall's protons, and the wall's electrons play no part",
+      "Opposite charges aren't needed: any charged object attracts any other object"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The balloon's negative charge pushes the wall's electrons slightly away from the surface, leaving the nearest layer of the wall slightly positive, and that positive layer is closer to the balloon than the displaced negative charge is.</strong></p><p>This is <strong>electrostatic induction</strong>. Paint is an insulator, so its electrons can't flow freely through it, but within each molecule they can shift a little. Near the balloon, every molecule's electrons are repelled a fraction of a nanometre away from the surface, so the surface facing the balloon becomes slightly positive and the region a little further in becomes slightly negative. The wall still has no overall charge: the charges have only been separated.</p><p>Why does that give an attraction rather than nothing? Coulomb's law, $F = k\\dfrac{q_1 q_2}{r^2}$, says the force falls off with distance. The balloon's charge attracts the nearby positive layer and repels the slightly more distant negative one, and because the positive layer is closer, the attraction wins. As an illustration (not real numbers), if the induced charges were equal and at relative distances 1.0 and 1.2 from the balloon's charge, the forces would be in the ratio $\\dfrac{1}{1.0^2} : \\dfrac{1}{1.2^2} = 1 : 0.69$, so a net attraction of about 30% of the attraction alone would remain.</p><p>The same induction explains a charged comb lifting scraps of paper, and why a charged rod attracts a thin stream of water whether the rod is positive or negative. A <em>positively</em> charged balloon would also stick: it would pull the wall's electrons towards the surface instead, and the attraction would again win because the attracted charge ends up closer.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-d2-03-balloon-induced.svg",
+      "alt": "The same balloon against the wall. The balloon carries minus signs. Inside the wall, a column of plus signs sits at the surface nearest the balloon and a column of minus signs sits further in.",
+      "caption": "The wall's electrons are pushed inwards: the <span class=\"key-1\">near surface</span> becomes positive and the <span class=\"key-2\">region further in</span> negative. The separation is hugely exaggerated: in reality it happens within each molecule."
+    },
+    "tempting": "<p>\"The wall is slightly positive overall\" is tempting because we learn that attraction needs opposite charges, so a neutral wall seems to need a hidden charge. But a balloon sticks to almost any wall, and would stick just as well if it were positively charged, so the wall's own charge can't be the explanation. Induction gives the attraction with a wall that stays neutral.</p><p>\"The protons attract the balloon and the electrons play no part\" forgets that a neutral wall's protons and electrons attract and repel the balloon almost equally: if nothing moved, the two forces would cancel exactly. It is the tiny <em>shift</em> of the electrons that unbalances them.</p><p>\"Any charged object attracts anything\" is the right observation but not an explanation, and it isn't quite true either: a charged balloon brought near a second balloon with the same charge is repelled. Attraction to a <em>neutral</em> object happens because induction always leaves the opposite charge nearer, and Coulomb's law makes the nearer charge count more.</p>"
   },
   {
     "id": "CC-D3-01",
@@ -966,6 +1273,33 @@
     "answer": 2,
     "reveal": "<p><strong>Only the complete ring is pushed away.</strong> As the magnet approaches, the magnetic flux through each ring increases, so an emf is induced in <em>both</em> rings (Faraday's law).</p><p>In the complete ring, the emf drives a current round the ring. By Lenz's law, the magnetic field of this current opposes the increase in flux: the face of the ring nearest the magnet acts as a north pole, which repels the magnet's north pole. So the ring swings away from the magnet.</p><p>In the cut ring, the same emf is induced, but there is no complete circuit, so no current flows: the emf just appears as a potential difference across the cut. With no current, the ring makes no magnetic field and feels no force, so it hardly moves.</p><p>Energy conservation agrees: pushing the magnet towards the complete ring takes extra work, which becomes the ring's kinetic energy and thermal energy in the ring. Pushing it towards the cut ring takes no extra work. (If the magnet were pulled quickly <em>away</em>, the complete ring would follow it.)</p>",
     "tempting": "<p>\"Neither ring moves\" is right that aluminium isn't attracted to a magnet the way iron is. But aluminium is a good conductor, and a <em>changing</em> magnetic field drives currents in a conductor, which make magnetic fields of their own.</p><p>\"Both rings are pushed away\" is tempting because the same emf is induced in both. But the force needs a current, and a current needs a complete circuit. \"Attracted\" is what happens to iron; here the induced current always opposes the change that causes it, so the approaching magnet is repelled.</p>"
+  },
+  {
+    "id": "CC-D4-03",
+    "topic": "D.4",
+    "level": "HL",
+    "type": "choice",
+    "title": "When is the emf biggest?",
+    "figure": {
+      "svg": "diagrams/cc-d4-03-coil-positions.svg",
+      "alt": "Two drawings of a rectangular coil in a uniform magnetic field shown by horizontal arrows. In position 1 the coil faces the field, so the field lines pass straight through it. In position 2 the coil has turned a quarter turn and lies along the field lines, so none pass through it. A question mark sits between the two drawings.",
+      "caption": "The <span class=\"key-2\">coil</span> turns steadily about the dashed axis. In position 1 its plane is perpendicular to the field; in position 2, a quarter of a turn later, its plane is parallel to the field."
+    },
+    "question": "<p>A rectangular coil rotates at a steady rate in a uniform magnetic field, about an axis perpendicular to the field, like a simple generator. In position 1 the plane of the coil is perpendicular to the field, so the magnetic flux through the coil is at its maximum. In position 2, a quarter of a turn later, the plane of the coil is parallel to the field and the flux through it is zero. At which point in the rotation is the <em>induced emf</em> in the coil greatest?</p>",
+    "options": [
+      "In position 1, when the flux through the coil is greatest",
+      "In position 2, when the flux through the coil is zero",
+      "Nowhere in particular: the emf is constant because the rotation is steady",
+      "Halfway between the two positions, when the flux is half its maximum"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>In position 2, where the flux is zero but is changing fastest.</strong></p><p>Faraday's law says the emf depends on the <em>rate of change</em> of flux, not on the flux itself: $\\varepsilon = -N\\dfrac{\\Delta\\Phi}{\\Delta t}$. With the coil turning at angular speed $\\omega$, the angle between the field and the normal to the coil is $\\theta = \\omega t$, so the flux is $\\Phi = BA\\cos\\omega t$. In position 1 ($\\theta = 0$) the flux is at its peak, but a peak is where a graph is momentarily flat: the flux is not changing, so the emf is zero. In position 2 ($\\theta = 90^\\circ$) the flux is passing through zero, which is where the cosine graph is steepest, so the emf is at its maximum.</p><p>Taking the gradient of the flux graph gives $\\varepsilon = NBA\\omega\\sin\\omega t$: a sine wave a quarter of a cycle behind the cosine, with peak value $\\varepsilon_0 = NBA\\omega$. For a coil of 100 turns and area 0.010 $\\text{m}^2$ turning at 50 Hz ($\\omega = 2\\pi \\times 50 = 314$ $\\text{rad s}^{-1}$) in a 0.20 T field, the peak emf is $100 \\times 0.20 \\times 0.010 \\times 314 = 63$ V, reached twice per turn, each time the coil passes position 2. The emf is zero twice per turn too, each time it passes position 1.</p><p>The $\\omega$ in $NBA\\omega$ is also why spinning a generator faster gives a bigger emf as well as a higher frequency: doubling the rate of rotation doubles the peak emf, because the same flux change happens in half the time.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-d4-03-graphs.svg",
+      "alt": "Two graphs against time for one full turn. Top: the flux is a cosine curve, maximum in position 1, zero in position 2, and a minimum half a turn later. Bottom: the emf is a sine curve, zero in position 1 and at its peaks in position 2.",
+      "caption": "Calculated curves. The <span class=\"key-2\">emf</span> is the negative gradient of the <span class=\"key-1\">flux</span> graph: it peaks where the flux passes through zero and is zero where the flux peaks. The numbers along the bottom are the coil's positions."
+    },
+    "tempting": "<p>\"When the flux is greatest\" is the most common answer, because it feels as if more flux should mean more effect. But the emf measures how fast the flux is <em>changing</em>. At the moment of maximum flux the coil faces the field squarely, and for an instant turning it does not change the flux through it: the flux graph is flat there, so the emf is zero, just as a ball thrown upwards has zero velocity at its highest point.</p><p>\"The emf is constant because the rotation is steady\" confuses a steady <em>rate of rotation</em> with a steady <em>rate of change of flux</em>. The coil turns at a constant rate, but the flux through it depends on $\\cos\\theta$, which changes quickly near $90^\\circ$ and hardly at all near $0^\\circ$. That is why a rotating coil gives an alternating emf, not a steady one.</p><p>\"When the flux is half its maximum\" comes from looking for a compromise between the two positions. The gradient of a cosine curve keeps growing all the way to the zero crossing, so the emf there (at $\\theta = 60^\\circ$, where $\\cos\\theta = 0.5$) is $\\sin 60^\\circ = 0.87$ of the maximum, not the maximum.</p>"
   },
   {
     "id": "CC-E1-01",

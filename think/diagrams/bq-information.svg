@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- accretion disc, seen at a tilt -->
+  <ellipse class="l2" cx="200" cy="105" rx="120" ry="28" style="fill:none"/>
+  <ellipse class="l2 thin" cx="200" cy="105" rx="90" ry="20" style="fill:none"/>
+  <!-- back half of the disc is hidden behind the hole: cover it with the hole itself -->
+  <!-- the hole itself: hard-coded black because a black hole is black in light and dark mode alike;
+       in dark mode its edge is still seen against the disc and the dashed horizon -->
+  <circle cx="200" cy="105" r="38" fill="#000"/>
+  <!-- the event horizon, drawn as a dashed ring just outside the dark disc -->
+  <circle class="axis dash thin" cx="200" cy="105" r="44" style="fill:none"/>
+  <text x="200" y="168" text-anchor="middle" style="font-size:13px">event horizon</text>
+  <!-- a book falling in (blue) -->
+  <path class="l1" d="M62 36 l26 -8 l6 16 l-26 8 Z" style="fill:var(--surface)"/>
+  <path class="l1 thin" d="M75 32 l6 16 M66 40 l22 -7"/>
+  <line class="l1 thin" x1="96" y1="48" x2="150" y2="80" marker-end="url(#ah1)"/>
+  <text class="t1" x="40" y="24">book falls in</text>
+  <!-- faint Hawking radiation leaving (grey, dashed wiggles) -->
+  <path class="l3 thin dash" d="M248 72 q8 -8 16 0 t16 0 t16 0"/>
+  <path class="l3 thin dash" d="M252 128 q8 8 16 0 t16 0 t16 0"/>
+  <path class="l3 thin dash" d="M200 56 q-8 -8 0 -16 t0 -16"/>
+  <text x="300" y="60" style="font-size:13px">radiation out,</text>
+  <text x="300" y="76" style="font-size:13px">very faint</text>
+  <text x="200" y="190" text-anchor="middle" style="font-size:12px">Not to scale.</text>
+</svg>

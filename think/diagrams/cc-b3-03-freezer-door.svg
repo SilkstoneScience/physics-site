@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220">
+  <!-- floor -->
+  <line class="axis" x1="20" y1="200" x2="380" y2="200"/>
+  <!-- upright freezer cabinet -->
+  <rect class="axis" x="110" y="30" width="110" height="170" style="fill:var(--surface)"/>
+  <rect class="area" x="116" y="36" width="98" height="158"/>
+  <line class="axis thin" x1="116" y1="90" x2="214" y2="90"/><line class="axis thin" x1="116" y1="142" x2="214" y2="142"/>
+  <!-- door, just closed (drawn a little ajar), hinged on the left -->
+  <path class="axis" d="M110 30 L236 46 V210 L110 200 Z" style="fill:var(--surface)"/>
+  <rect class="axis thin" x="222" y="110" width="7" height="34" style="fill:var(--surface)"/>
+  <!-- hand pulling the handle -->
+  <line class="l3" x1="248" y1="118" x2="330" y2="104"/>
+  <line class="l3" x1="248" y1="134" x2="330" y2="122"/>
+  <ellipse class="l3" cx="236" cy="127" rx="13" ry="11" style="fill:var(--surface)"/>
+  <path class="l3 thin" d="M226 122 q4 -6 10 -4 M226 130 q4 -6 10 -4"/>
+  <!-- labels -->
+  <text x="165" y="22" text-anchor="middle">freezer</text>
+  <text class="t1" x="165" y="124" text-anchor="middle">−18 °C</text>
+  <text x="320" y="60" text-anchor="middle">room 20 °C</text>
+  <text x="300" y="160" text-anchor="middle">pull</text>
+  <line class="l2" x1="282" y1="150" x2="320" y2="150" marker-end="url(#ah2)"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- the Sun (not to scale) -->
+  <circle class="f2" cx="50" cy="100" r="36"/>
+  <text x="50" y="160" text-anchor="middle">Sun</text>
+  <!-- the Earth, drawn in section -->
+  <circle class="area" cx="240" cy="100" r="55"/>
+  <circle class="axis" cx="240" cy="100" r="55" style="fill:none"/>
+  <text x="240" y="178" text-anchor="middle">Earth</text>
+  <!-- neutrinos stream outwards, straight through the Earth -->
+  <line class="l1 thin dash" x1="90" y1="82" x2="385" y2="82"/>
+  <line class="l1 thin dash" x1="90" y1="100" x2="385" y2="100"/>
+  <line class="l1 thin dash" x1="90" y1="118" x2="385" y2="118"/>
+  <text class="t1" x="96" y="68">neutrinos</text>
+  <!-- a mine shaft and the detector tank deep underground -->
+  <line class="axis" x1="271" y1="54.6" x2="271" y2="90"/>
+  <path class="axis" d="M263 54 L271 42 L279 54 Z" style="fill:var(--surface)"/>
+  <rect class="axis" x="260" y="90" width="22" height="16" style="fill:var(--surface)"/>
+  <text x="340" y="150" text-anchor="middle" style="font-size:14px">tank in a mine</text>
+  <line class="axis thin" x1="310" y1="138" x2="284" y2="108"/>
+</svg>

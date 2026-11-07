@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220">
+  <!-- lunar ground -->
+  <line class="axis" x1="10" y1="200" x2="390" y2="200"/>
+  <path class="l3 thin" d="M30 200 q12 -8 24 0 M300 200 q16 -10 32 0 M340 200 q8 -5 16 0"/>
+  <!-- the Earth, small, in the black sky -->
+  <circle class="l1 thin" cx="330" cy="50" r="14" style="fill:var(--surface)"/>
+  <path class="l1 thin" d="M320 44 q6 4 10 -2 q6 2 8 8 M322 58 q8 -4 14 2"/>
+  <text x="330" y="84" text-anchor="middle" style="font-size:14px">Earth</text>
+  <!-- pendulum clock: tall case, dial, pendulum -->
+  <rect class="axis" x="70" y="40" width="70" height="160" style="fill:var(--surface)"/>
+  <circle class="axis thin" cx="105" cy="68" r="18" style="fill:var(--surface)"/>
+  <line class="axis thin" x1="105" y1="68" x2="105" y2="56"/><line class="axis thin" x1="105" y1="68" x2="114" y2="68"/>
+  <line class="l1" x1="105" y1="92" x2="105" y2="166"/>
+  <circle class="f1" cx="105" cy="172" r="9"/>
+  <text x="105" y="26" text-anchor="middle">pendulum</text>
+  <!-- spring clock: case, dial, spring with mass -->
+  <rect class="axis" x="200" y="40" width="70" height="160" style="fill:var(--surface)"/>
+  <circle class="axis thin" cx="235" cy="68" r="18" style="fill:var(--surface)"/>
+  <line class="axis thin" x1="235" y1="68" x2="235" y2="56"/><line class="axis thin" x1="235" y1="68" x2="244" y2="68"/>
+  <path class="l2" d="M235 92 V98 L227 102 L243 108 L227 114 L243 120 L227 126 L243 132 L227 138 L243 144 L235 148 V154"/>
+  <rect class="f2" x="224" y="154" width="22" height="20"/>
+  <text x="235" y="26" text-anchor="middle">spring</text>
+  <!-- label -->
+  <text x="330" y="150" text-anchor="middle">on the Moon</text>
+  <text x="330" y="170" text-anchor="middle" style="font-size:14px">g ≈ 1.6 m s⁻²</text>
+</svg>

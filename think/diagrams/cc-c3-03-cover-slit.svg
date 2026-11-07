@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- laser, seen from above -->
+  <rect class="axis" x="20" y="88" width="56" height="24" style="fill:var(--surface)"/>
+  <text x="48" y="80" text-anchor="middle" style="font-size:14px">laser</text>
+  <line class="l2" x1="76" y1="100" x2="168" y2="100"/>
+  <!-- barrier with two narrow slits -->
+  <path class="axis" style="stroke-width:4" d="M172 20 V84 M172 94 V106 M172 116 V180"/>
+  <text x="150" y="30" text-anchor="end" style="font-size:14px">two slits</text>
+  <!-- card about to cover the upper slit (not covering it yet) -->
+  <rect class="f3" x="150" y="52" width="6" height="30"/>
+  <line class="l3 thin" x1="153" y1="52" x2="153" y2="36"/>
+  <text x="120" y="60" text-anchor="end" style="font-size:14px">card</text>
+  <path class="l3 thin" d="M156 84 L166 88" marker-end="url(#ah3)"/>
+  <!-- light spreading from both slits to the screen -->
+  <path class="l2 thin" d="M172 89 L350 30 M172 89 L350 170 M172 111 L350 30 M172 111 L350 170"/>
+  <!-- screen (seen from above) with the fringes drawn as if seen face-on -->
+  <rect class="axis" x="350" y="20" width="30" height="160" style="fill:var(--surface)"/>
+  <rect class="f2" x="352" y="24" width="26" height="8"/>
+  <rect class="f2" x="352" y="48" width="26" height="8"/>
+  <rect class="f2" x="352" y="72" width="26" height="8"/>
+  <rect class="f2" x="352" y="96" width="26" height="8"/>
+  <rect class="f2" x="352" y="120" width="26" height="8"/>
+  <rect class="f2" x="352" y="144" width="26" height="8"/>
+  <rect class="f2" x="352" y="168" width="26" height="8"/>
+  <text x="365" y="196" text-anchor="middle" style="font-size:14px">screen</text>
+  <text x="330" y="106" text-anchor="end" style="font-size:14px">centre</text>
+</svg>

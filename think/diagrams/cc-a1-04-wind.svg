@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- two towns, A and B, with a plane between them seen from above; the wind blows along the route -->
+  <path class="axis" d="M22 156 V126 L42 108 L62 126 V156 Z" style="fill:var(--surface)"/>
+  <rect class="f3" x="37" y="138" width="10" height="18"/>
+  <text x="42" y="182" text-anchor="middle">A</text>
+  <path class="axis" d="M338 156 V126 L358 108 L378 126 V156 Z" style="fill:var(--surface)"/>
+  <rect class="f3" x="353" y="138" width="10" height="18"/>
+  <text x="358" y="182" text-anchor="middle">B</text>
+  <line class="l3 thin dash" x1="70" y1="132" x2="330" y2="132"/>
+  <!-- plane, top view, nose pointing right: tail fins, wings, then the fuselage on top -->
+  <path class="axis" d="M162 136 L154 118 H162 L174 136 Z M162 128 L154 146 H162 L174 128 Z" style="fill:var(--surface)"/>
+  <path class="axis" d="M186 128 L172 94 H184 L204 128 Z M186 136 L172 170 H184 L204 136 Z" style="fill:var(--surface)"/>
+  <path class="axis" d="M150 132 Q152 124 166 124 L226 127 Q242 129 246 132 Q242 135 226 137 L166 140 Q152 140 150 132 Z" style="fill:var(--surface)"/>
+  <!-- wind -->
+  <line class="l1" x1="130" y1="40" x2="220" y2="40" marker-end="url(#ah1)"/>
+  <line class="l1" x1="180" y1="64" x2="270" y2="64" marker-end="url(#ah1)"/>
+  <text class="t1" x="238" y="46">steady wind</text>
+</svg>

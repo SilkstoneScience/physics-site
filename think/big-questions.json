@@ -358,5 +358,342 @@
         "kind": "article"
       }
     ]
+  },
+  {
+    "id": "BQ-09",
+    "kind": "unsolved",
+    "title": "The Hubble tension: how fast is the universe expanding?",
+    "figure": {
+      "svg": "diagrams/bq-hubble-tension.svg",
+      "alt": "A number line of the Hubble constant from 64 to 78 kilometres per second per megaparsec, with three measurements drawn as points with error bars: the Planck cosmic microwave background value near 67.4 with a very short bar, a red-giant value near 70.4 with a long bar, and the SH0ES supernova value near 73.0 with a short bar. The first and last bars do not overlap.",
+      "caption": "Three measurements of $H_0$, drawn to scale from the published values and uncertainties: the <span class=\"key-1\">cosmic microwave background</span> (Planck, 2018), red giants (CCHP, 2025) and <span class=\"key-2\">Cepheids and supernovae</span> (SH0ES, 2022). The error bars show one standard deviation."
+    },
+    "question": "<p>Hubble's law, $v = H_0 d$, says that a galaxy's recession speed is proportional to its distance, and the Hubble constant $H_0$ sets the expansion rate and, roughly, the age of the universe. Astronomers measure $H_0$ in two very different ways. Measuring the distances and redshifts of nearby galaxies directly, using Cepheid variable stars and type Ia supernovae, gives about 73 $\\text{km s}^{-1}\\,\\text{Mpc}^{-1}$. Fitting the standard cosmological model to the cosmic microwave background, the radiation from the early universe, gives $67.4 \\pm 0.5$. Both groups have checked their work for years, and the gap has grown more significant, not less. (Hubble's law itself is not on the IB course; the distance methods are close to E.5.) <strong>So how fast is the universe expanding, and why don't the two methods agree?</strong></p>",
+    "thinking": "<p>Nobody knows yet. The two numbers come from the two ends of cosmic history. The <strong>distance ladder</strong> works outwards from today: parallax fixes the distances of nearby Cepheid stars, Cepheids calibrate type Ia supernovae in the same galaxies, and the supernovae then give distances to galaxies far enough away for the expansion to dominate their redshifts. The SH0ES team, led by Adam Riess, published $73.0 \\pm 1.0$ $\\text{km s}^{-1}\\,\\text{Mpc}^{-1}$ in 2022, and a 2026 combined analysis of local measurements by many groups gave about $73.5 \\pm 0.8$. The <strong>cosmic microwave background</strong> method works forwards from the early universe: the pattern of hot and cold patches in the radiation released about 380,000 years after the Big Bang is fitted with the standard model of cosmology (cold dark matter plus dark energy), and the model then predicts how fast the universe should be expanding today. Planck's final analysis (2018) gave $67.4 \\pm 0.5$. The difference is more than five standard deviations: if both uncertainties are right, chance alone would produce it less than once in a million tries.</p><p>The obvious suspect was the ladder's first rungs. Cepheids in crowded distant galaxies are hard to measure cleanly, so from 2023 to 2025 the James Webb Space Telescope re-observed them in sharper infrared images. The JWST distances agreed with Hubble's to within a few per cent, far too close to explain an 8–9% gap in $H_0$. Not every local method gives 73, though: a team led by Wendy Freedman, using the brightness of the tip of the red-giant branch instead of Cepheids, found $70.4 \\pm 1.9$ in 2025, which sits uncomfortably between the two camps, and the two groups disagree about whose supernova sample is more reliable.</p><p>If no measurement error is hiding anywhere, the problem is the model used to turn the microwave background into a prediction. Ideas include an extra burst of \"early dark energy\" that faded away before the radiation was released, dark energy whose strength changes with time, dark matter that decays into something lighter, or our galaxy sitting inside an unusually empty region of space. Each of these fixes one measurement and tends to break another, which is why none has been accepted. Since the whole picture of the expanding universe rests on Hubble's law, an 8–9% disagreement about its one constant is the most important open problem in cosmology today.</p>",
+    "thinkingVideo": {
+      "youtube": "dsCjRjA4O7Y",
+      "title": "The NEW Crisis in Cosmology",
+      "channel": "PBS Space Time"
+    },
+    "discussion": [
+      "The age of the universe is roughly $1/H_0$. Convert 1 Mpc to kilometres ($3.09 \\times 10^{19}$ km) and calculate $1/H_0$ in years for $H_0 = 67.4$ and for $H_0 = 73.0$ $\\text{km s}^{-1}\\,\\text{Mpc}^{-1}$. How big is the disagreement about the age of the universe?",
+      "One method measures distances and redshifts of galaxies directly and applies $v = H_0 d$; the other fits a model to the early universe and predicts $H_0$. List the assumptions each method depends on. Which would you trust more, and why?",
+      "The two values differ by more than five standard deviations. Explain what that means in terms of the error bars in the picture, and why physicists treat \"five sigma\" as the threshold for a discovery. What evidence would convince you that the gap is a measurement error? What would convince you it is new physics?"
+    ],
+    "topics": [
+      "E.5"
+    ],
+    "nos": [
+      "Measurement",
+      "Evidence",
+      "Models"
+    ],
+    "tok": "When two careful measurements of the same quantity disagree, how do scientists decide whether to doubt the measurements or the theory that connects them?",
+    "links": [
+      {
+        "title": "The NEW Crisis in Cosmology (PBS Space Time)",
+        "url": "https://www.youtube.com/watch?v=dsCjRjA4O7Y",
+        "kind": "video"
+      },
+      {
+        "title": "Hubble constant and tension (NASA Science)",
+        "url": "https://science.nasa.gov/mission/hubble/science/science-behind-the-discoveries/hubble-constant-and-tension/",
+        "kind": "article"
+      },
+      {
+        "title": "Hubble tension (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Hubble_tension",
+        "kind": "article"
+      }
+    ]
+  },
+  {
+    "id": "BQ-10",
+    "kind": "unsolved",
+    "title": "Does hot water freeze faster than cold? The Mpemba effect",
+    "figure": {
+      "svg": "diagrams/bq-mpemba.svg",
+      "alt": "An open upright freezer at minus 18 degrees Celsius with two identical beakers of water on a shelf. Steam rises from the left beaker, labelled hot; the right beaker is labelled cold.",
+      "caption": "Two identical beakers of water go into the same freezer at the same moment: one <span class=\"key-2\">hot</span>, one <span class=\"key-1\">cold</span>. Which freezes first?"
+    },
+    "question": "<p>Two identical beakers hold 100 g of water each, one at 80 °C and one at 30 °C, and both go into the same freezer. The hot water has far more thermal energy to lose: cooling it to 0 °C means removing $0.100 \\times 4200 \\times 80 = 34$ kJ, against 13 kJ for the cooler water, and then each needs another $0.100 \\times 3.34 \\times 10^5 = 33$ kJ removed to freeze. On the face of it the hot water must take longer, because at some point it has to pass through 30 °C and then do everything the cold water did. Yet in 1963 a Tanzanian school student, Erasto Mpemba, noticed that a hot ice-cream mixture froze before a cold one, and people have been reporting the same thing since Aristotle. <strong>Can hot water really freeze faster than cold water, and if so, why?</strong></p>",
+    "thinking": "<p>The honest answer in 2026 is: <strong>sometimes, under some conditions, and physicists still disagree about why, and even about how to test it.</strong></p><p>Mpemba was laughed at by his classmates, but when the physicist Denis Osborne visited his school, he tried the experiment himself, saw the effect, and the two published it together in 1969. Aristotle, Francis Bacon and René Descartes had all written that warmed water freezes more readily, so the claim is old, but so is the difficulty of pinning it down. Many mechanisms have been proposed, and each has been disputed: the hot water <strong>evaporates</strong> more, so there is less of it left to freeze; it holds less <strong>dissolved gas</strong>; its stronger <strong>convection currents</strong> carry warm water to the surface, where it cools faster; its <strong>container melts the frost</strong> on the freezer shelf and makes better thermal contact; and cold water tends to <strong>supercool</strong> further below 0 °C before ice forms, which can delay its freezing.</p><p>In 2016 Henry Burridge and Paul Linden tested the claim carefully, timing how long water from different starting temperatures took to <em>reach</em> 0 °C. They found no effect at all: the hotter water always took longer, and the apparent effects in earlier reports were small enough to be produced by moving the thermometer by 1 cm. Their conclusion was that \"hot water freezes faster\" has never been meaningfully demonstrated. Others object that reaching 0 °C is not freezing, and a 2024 study of small drops and a 2025 preprint reported that initially hot water sometimes did solidify first, in one case only when the freezer was barely cold enough for ice to start forming, a process that is itself random. In other words, the dispute is as much about what \"frozen\" means and how to control the experiment as about the physics.</p><p>Meanwhile the idea has taken on a life of its own. In 2017 theorists showed that in some systems a hotter starting state really can reach a cold equilibrium sooner, because it takes a different route through its possible states, and they predicted an <em>inverse</em> effect, where a cold system heats up faster than a warm one. Both have since been seen in experiments on tiny particles in water (2020 and 2022) and in quantum systems (2024–2025). None of that proves the kitchen-freezer version, but it shows that \"more energy to lose\" is not the whole story of how fast a system cools.</p>",
+    "thinkingVideo": {
+      "youtube": "v9n9b_hYBOc",
+      "title": "Hot Water Freezes Either Faster or Slower Than Cold Water",
+      "channel": "Reactions"
+    },
+    "discussion": [
+      "Design the fairest possible test. What exactly counts as \"frozen\": the first ice crystal, the surface frozen over, or the whole beaker solid? Where would you put the thermometer, and why did a 1 cm difference matter in the 2016 study? List every variable you would control (volume, container, lid, position in the freezer, dissolved gas, frost on the shelf) and how.",
+      "Use $Q = mc\\Delta T$ and $Q = mL$ to calculate the total energy that must be removed from each 100 g sample to turn it into ice at 0 °C. If the freezer removes energy at a rate proportional to the temperature difference, sketch temperature–time graphs for both samples. Which assumption would have to fail for the curves to cross?",
+      "Burridge and Linden say the effect has never been meaningfully shown; others say they measured the wrong thing. How should science treat a claim that is reported often but can't be reproduced reliably?"
+    ],
+    "topics": [
+      "B.1"
+    ],
+    "nos": [
+      "Experiments",
+      "Measurement",
+      "Falsification"
+    ],
+    "tok": "If an effect is reported for over two thousand years but can't be reliably reproduced, is it knowledge?",
+    "links": [
+      {
+        "title": "Hot Water Freezes Either Faster or Slower Than Cold Water (Reactions)",
+        "url": "https://www.youtube.com/watch?v=v9n9b_hYBOc",
+        "kind": "video"
+      },
+      {
+        "title": "Mpemba effect (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Mpemba_effect",
+        "kind": "article"
+      },
+      {
+        "title": "Questioning the Mpemba effect: hot water does not cool more quickly than cold (Burridge and Linden, Scientific Reports 2016)",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5121640/",
+        "kind": "article"
+      }
+    ]
+  },
+  {
+    "id": "BQ-11",
+    "kind": "unsolved",
+    "title": "Why is the Sun's atmosphere hotter than its surface?",
+    "figure": {
+      "svg": "diagrams/bq-corona.svg",
+      "alt": "The Sun drawn as an orange disc, surrounded by short streamers and a faint dashed outer boundary representing the corona. Labels give the surface temperature as about 5800 kelvin and the corona as one to three million kelvin.",
+      "caption": "The visible surface (photosphere) and the corona above it. Not to scale: the real corona is extremely faint and extends many solar radii outwards."
+    },
+    "question": "<p>The Sun's energy is released by fusion in its core and works its way outwards, so the Sun gets cooler from the centre out: about 15 million K in the core and about 5800 K at the visible surface, the photosphere. Then something odd happens. In the thin outer atmosphere, the corona, the temperature climbs again, to between one and three million kelvin. Thermal energy never flows by itself from a cooler body to a hotter one, so the 5800 K surface cannot simply be heating the corona above it. <strong>Where does the corona's energy come from, and why hasn't the question been settled after 80 years?</strong></p>",
+    "thinking": "<p>The puzzle was born when the corona's temperature was first measured. During eclipses, astronomers had seen a green spectral line that matched no known element, and for decades it was attributed to a new element, \"coronium\". In 1939–1941 it was identified as light from iron atoms that had lost 13 of their 26 electrons, which only happens in a gas at around a million kelvin. The corona glows in X-rays for the same reason, and photographs from X-ray telescopes show it shining while the cooler photosphere is dark.</p><p>The second law of thermodynamics is not broken, because the energy does not arrive as thermal energy. The Sun's churning surface is threaded by magnetic fields, and the energy is carried upwards by those fields and released in the corona. Two kinds of mechanism are the main candidates. In <strong>wave heating</strong>, the surface motion shakes the field lines and sends magnetic waves (Alfvén waves) up into the corona, where they dissipate. In <strong>nanoflares</strong>, proposed by Eugene Parker in 1988, tangled field lines snap and reconnect in countless tiny bursts, each far too small to see individually. The power needed is modest, roughly a kilowatt for each square metre of the Sun's surface, about one part in fifty thousand of what the Sun radiates, which is one reason the answer is hard to pin down: the heating is a small effect hidden in a violent environment.</p><p>Two spacecraft are now testing the ideas directly. NASA's Parker Solar Probe, launched in 2018, became the first spacecraft to fly through the corona in 2021 and on 24 December 2024 passed about 6.1 million km above the surface at 192 $\\text{km s}^{-1}$, the closest and fastest any spacecraft has been. ESA's Solar Orbiter, launched in 2020, images the corona and its small flares from closer in than Earth. So far the measurements show plenty of waves and plenty of small reconnection events, and most solar physicists now expect that both mechanisms contribute, perhaps in different places. What is still missing is a demonstration that either one delivers enough energy in the right place. The corona is seen as X-rays, not visible light, yet it is so thin, about a hundred million times less dense than the photosphere, that it radiates far less than the surface below it: hotter does not mean brighter.</p>",
+    "thinkingVideo": {
+      "youtube": "NYnUjtWCqA0",
+      "title": "Discovering the Sun's Mysteriously Hot Atmosphere",
+      "channel": "NASA Goddard"
+    },
+    "discussion": [
+      "Use Wien's law, $\\lambda_{\\text{max}} = \\dfrac{2.9 \\times 10^{-3}}{T}$, to find the peak wavelength of radiation from the 5800 K photosphere and from a 2 million K corona. Which part of the electromagnetic spectrum is each in? Why does the corona look faint and white in an eclipse photograph but bright in an X-ray image?",
+      "Explain why a 5800 K surface could never heat a million-kelvin corona by conduction or radiation alone (thermal energy only ever flows from hotter to cooler by these processes), and why energy carried by magnetic waves or reconnection is different. (Think about how a microwave oven heats food that is hotter than the oven's walls.)",
+      "How can you measure the temperature of a gas you can't touch? Suggest at least two methods using spectra (which lines are present, how wide they are) and link each to a part of the course."
+    ],
+    "topics": [
+      "E.5",
+      "B.1"
+    ],
+    "nos": [
+      "Observations",
+      "Hypotheses",
+      "Models"
+    ],
+    "tok": "A new element was invented to explain the corona's green line. When is it reasonable to explain an observation with something nobody has ever seen?",
+    "links": [
+      {
+        "title": "Discovering the Sun's Mysteriously Hot Atmosphere (NASA Goddard)",
+        "url": "https://www.youtube.com/watch?v=NYnUjtWCqA0",
+        "kind": "video"
+      },
+      {
+        "title": "NASA's Parker Solar Probe and the curious case of the hot corona (NASA)",
+        "url": "https://www.nasa.gov/science-research/heliophysics/nasas-parker-solar-probe-and-the-curious-case-of-the-hot-corona/",
+        "kind": "article"
+      },
+      {
+        "title": "Coronal heating problem (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Coronal_heating_problem",
+        "kind": "article"
+      }
+    ]
+  },
+  {
+    "id": "BQ-12",
+    "kind": "solved",
+    "title": "The missing solar neutrinos",
+    "figure": {
+      "svg": "diagrams/bq-solar-neutrinos.svg",
+      "alt": "The Sun on the left. Dashed lines representing neutrinos stream from it to the right, passing straight through a cross-section of the Earth. On the Earth's far side a mine shaft leads down from the surface to a small tank deep underground.",
+      "caption": "<span class=\"key-1\">Neutrinos</span> from the Sun's core pass straight through the Earth. A tank of fluid 1.5 km down a mine, shielded from everything else, catches a few of them. Not to scale."
+    },
+    "question": "<p>The Sun shines by the proton–proton chain, which fuses four hydrogen nuclei into one helium nucleus and releases two positrons, two neutrinos and about 27 MeV of energy. Light takes tens of thousands of years to struggle out of the Sun's interior, but neutrinos interact so weakly that they leave the core in about two seconds and reach Earth eight minutes later: around $6 \\times 10^{14}$ pass through every square metre of you every second. From 1968, Ray Davis counted them with 380 $\\text{m}^3$ of dry-cleaning fluid 1.5 km down a gold mine in South Dakota, where a neutrino occasionally turned a chlorine nucleus into radioactive argon. He found about <strong>one third</strong> of the number John Bahcall's model of the Sun predicted, and kept finding it for 25 years. <strong>Was the detector wrong, was the Sun wrong, or were the neutrinos themselves doing something nobody expected?</strong></p>",
+    "thinking": "<p><strong>The neutrinos were changing type on the way.</strong> It took more than 30 years to be sure.</p><p>Davis's tank produced about one argon atom every two days, which he extracted and counted with heroic care; the prediction was roughly three times that. Most physicists assumed that one of the two men had made a mistake. The experiment was checked and rebuilt, and Bahcall's solar model was recalculated as better data arrived on nuclear reaction rates and on the Sun's own vibrations (helioseismology), which probe its interior temperature. Both held firm. From the late 1980s Masatoshi Koshiba's Kamiokande detector in Japan, a tank of water watched by light sensors, saw the same shortfall and, for the first time, showed that the neutrinos really were coming from the direction of the Sun.</p><p>The way out had been suggested in the late 1960s by Bruno Pontecorvo: if neutrinos have mass, a neutrino created as an electron neutrino can later be found as a muon or tau neutrino. Davis's chlorine could detect only electron neutrinos, so if two thirds of them had changed type, his count would come out at a third. In 1998 Super-Kamiokande showed that neutrinos made in the atmosphere change type as they cross the Earth. Then, in 2001–2002, the Sudbury Neutrino Observatory in Canada, using 1000 tonnes of heavy water 2 km underground, counted the Sun's electron neutrinos and <em>all three types</em> separately. The electron neutrinos were about a third of the total, and the total matched Bahcall's prediction. Both Davis and Bahcall had been right all along.</p><p>The consequence was bigger than the puzzle. The Standard Model of particle physics had assumed neutrinos were massless; changing type requires mass, so this was the first firm evidence of physics beyond the Standard Model. (In the Sun the change is also affected by the dense matter the neutrinos pass through, which goes beyond the course.) Davis and Koshiba shared half of the 2002 Nobel Prize in Physics for detecting cosmic neutrinos; Takaaki Kajita (Super-Kamiokande) and Arthur McDonald (SNO) shared the 2015 prize for showing that neutrinos change type and therefore have mass.</p>",
+    "thinkingVideo": {
+      "youtube": "nN5hnznAVX0",
+      "title": "The solar neutrino problem | Even Bananas 08",
+      "channel": "Fermilab"
+    },
+    "discussion": [
+      "In beta-minus decay an antineutrino is emitted; in beta-plus decay a neutrino is. The first step of the proton–proton chain is $^1\\text{H} + {}^1\\text{H} \\rightarrow {}^2\\text{H} + e^+ + \\nu_e$. Which conservation laws make the positron and the neutrino necessary, and why can the neutrino escape the Sun while the positron cannot?",
+      "Why wasn't Bahcall's prediction simply abandoned when the experiment disagreed with it for 25 years? What other evidence about the Sun's core had to agree with the model, and what would have happened to our understanding of fusion in stars if the Sun really were producing a third of the expected neutrinos?",
+      "Explain how a tank deep underground can \"see\" the Sun's core when it cannot see the Sun itself, and why detectors are built underground rather than on the surface. Why do the properties that make neutrinos hard to detect also make them useful?"
+    ],
+    "topics": [
+      "E.3",
+      "E.5"
+    ],
+    "nos": [
+      "Evidence",
+      "Theories",
+      "Science as a shared endeavour"
+    ],
+    "tok": "For 30 years a careful experiment contradicted a careful theory. How long should scientists keep trusting both before giving one up?",
+    "links": [
+      {
+        "title": "The solar neutrino problem | Even Bananas 08 (Fermilab)",
+        "url": "https://www.youtube.com/watch?v=nN5hnznAVX0",
+        "kind": "video"
+      },
+      {
+        "title": "Solar neutrino problem (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Solar_neutrino_problem",
+        "kind": "article"
+      },
+      {
+        "title": "The Sudbury Neutrino Observatory (SNO, Queen's University)",
+        "url": "https://sno.phy.queensu.ca/",
+        "kind": "article"
+      }
+    ]
+  },
+  {
+    "id": "BQ-13",
+    "kind": "unsolved",
+    "title": "What counts as a measurement? Schrödinger's cat and the measurement problem",
+    "figure": {
+      "svg": "diagrams/bq-cat-box.svg",
+      "alt": "On the left a single photon, drawn as a blue dot, heads towards a barrier with two slits. On the right a small detector box labelled click. Between them sits a large sealed box with a closed lid and a question mark on its front.",
+      "caption": "A <span class=\"key-1\">single photon</span> reaches the two slits; a detector on the far side clicks or doesn't; the sealed box's fate depends on that click. At which step does \"both slits\" become \"one place\"? Not to scale."
+    },
+    "question": "<p>Send photons (or electrons) through a double slit one at a time and the dots on the screen still build up an interference pattern, so each one must in some sense pass through <em>both</em> slits. Quantum theory describes it as a superposition of the two paths. Yet every time it arrives, it is detected in <em>one</em> place. The theory's rules say the superposition \"collapses\" when a measurement is made, but they do not say what a measurement is, or why the detector, which is also made of atoms, is not itself put into a superposition of \"clicked\" and \"not clicked\". In 1935 Erwin Schrödinger made the point with a sealed box: wire a cat's fate to a quantum event with a 50% chance, and the rules seem to describe the cat as both alive and dead until someone opens the lid. <strong>Where, and why, does the superposition end?</strong></p>",
+    "thinking": "<p>There is no agreed answer, ninety years on. The physics that <em>is</em> agreed is called <strong>decoherence</strong>, worked out from the 1970s onwards. Anything bigger than a few atoms is constantly bumped by air molecules, photons and thermal vibrations, and every bump records which path the object took. Once that record exists, the two paths can no longer interfere, and this happens in an unimaginably short time for anything the size of a dust grain, let alone a cat. Decoherence explains why we never <em>see</em> large superpositions. What it does not explain is why one particular outcome happens rather than the other: that is the measurement problem proper, and it is still open.</p><p>Physicists have offered several <strong>interpretations</strong>. The Copenhagen view treats collapse as a rule you apply when you measure and declines to say more. Many-worlds says there is no collapse: both outcomes happen and the detector, the cat and you branch along with them. Pilot-wave theory says the particle always has one position, guided by a wave that goes through both slits. Objective-collapse theories add a tiny random collapse to the equations, so that big objects collapse by themselves. These give identical predictions for every experiment done so far (objective-collapse theories differ only for objects far larger than any yet tested), which is why the argument has not been settled by data.</p><p>Experiment is slowly closing in from the other side, by making superpositions bigger. In 2019 a Vienna group showed interference with molecules of about 2000 atoms (mass about $2.5 \\times 10^4$ u), and in 2025 the same group reported interference with sodium clusters of several thousand atoms, over $1.7 \\times 10^5$ u, published in <em>Nature</em> in 2026. Tiny mechanical oscillators have been put into quantum states too. Objective-collapse theories predict that interference must fail at some size; so far it hasn't, and the limits on those theories tighten each year. A cat is still about $10^{22}$ times heavier than the record.</p>",
+    "thinkingVideo": {
+      "youtube": "IOYyCHGWJq4",
+      "title": "Schrödinger's Cat",
+      "channel": "minutephysics"
+    },
+    "discussion": [
+      "In a double-slit experiment with one electron at a time, what is actually seen on the screen after one electron, after a hundred, and after a million? What does the pattern tell you about each single electron, and what does the single dot tell you?",
+      "The 2019 molecules had a mass of about $2.5 \\times 10^4$ u and moved at roughly $250\\ \\text{m s}^{-1}$. Estimate their de Broglie wavelength, and explain why interference with such objects is so hard to show.",
+      "If several interpretations predict the same results in every experiment, is choosing between them a job for physics at all? What kind of evidence could decide it?"
+    ],
+    "topics": [
+      "E.2"
+    ],
+    "level": "HL",
+    "nos": [
+      "Theories",
+      "Models",
+      "Falsification"
+    ],
+    "tok": "If two theories make identical predictions, can one of them still be more true than the other?",
+    "links": [
+      {
+        "title": "Schrödinger's Cat (minutephysics)",
+        "url": "https://www.youtube.com/watch?v=IOYyCHGWJq4",
+        "kind": "video"
+      },
+      {
+        "title": "Measurement problem (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Measurement_problem",
+        "kind": "article"
+      },
+      {
+        "title": "Schrödinger's cat (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Schr%C3%B6dinger%27s_cat",
+        "kind": "article"
+      }
+    ]
+  },
+  {
+    "id": "BQ-14",
+    "kind": "unsolved",
+    "title": "Ball lightning: real, rare and unexplained",
+    "figure": {
+      "svg": "diagrams/bq-ball-lightning.svg",
+      "alt": "A storm cloud with rain and an orange lightning bolt on the left. On the right a house with an open window, and a glowing yellow ball drifting in through the window.",
+      "caption": "A typical report: just after a <span class=\"key-2\">lightning strike</span>, a glowing ball the size of a football drifts about for a few seconds, sometimes through an open window, then vanishes. Not to scale; the glow colour is as witnesses describe it."
+    },
+    "question": "<p>For centuries people have described the same thing: during a thunderstorm, a glowing ball, usually 10 to 30 cm across, appears near the ground, drifts about slowly for a few seconds, sometimes passes through a window or along a wire, and then fades or pops. There are thousands of such accounts, including from scientists and pilots. Ordinary lightning lasts less than a millisecond and we understand it well; a glowing ball that hangs in the air for seconds should cool and disperse almost instantly. <strong>What is ball lightning, and why can't we make it?</strong></p>",
+    "thinking": "<p>Honestly, we don't know, and until recently we weren't even sure it existed. Almost all the evidence is eyewitness testimony, which is hard to use: people are startled, estimates of size and distance are unreliable, and some reports are probably afterimages, St Elmo's fire or ordinary lightning seen oddly. Physicists want measurements they can repeat, and ball lightning refuses to appear on demand.</p><p>The best data so far came by luck. In July 2012 a team from Northwest Normal University was recording ordinary lightning on the Qinghai plateau in China with a spectrometer and a high-speed camera when a strike about 900 m away produced a glowing ball that lasted about 1.5 s and drifted about 10 to 15 metres. Their spectrum, published in 2014 by Cen, Yuan and Xue, showed emission lines of silicon, iron and calcium: the main elements of soil, not of air. That supports a hypothesis proposed by John Abrahamson and James Dinniss in 2000: a strike vaporises silicon compounds in the soil, the vapour condenses into a cloud of nanoparticles, and the slow oxidation of those particles, burning, keeps the ball glowing for seconds. Other hypotheses include a plasma held together by its own currents, and microwaves trapped inside a plasma shell.</p><p>None has been confirmed. Laboratory discharges usually make glowing plasmoids that last a fraction of a second. Arcs struck on silicon have produced small glowing balls that lasted several seconds (2007), the best support so far for the burning-soil idea, but they were only a few centimetres across, and nobody has produced one that drifts through a window. Even the one spectrum is a single event; it could be one kind of ball lightning, or something else that happened to look like it. The puzzle stays open because the evidence is still mostly anecdotal.</p>",
+    "discussion": [
+      "Thousands of people say they have seen ball lightning. Why is that not enough to count as scientific evidence, and what would the Qinghai recording need (more of what?) before physicists accept the burning-soil explanation?",
+      "A lightning strike carries a current of tens of kiloamperes for less than a millisecond. Estimate the charge transferred, then the energy if the potential difference is about $10^8$ V. How much of it would have to end up in a 20 cm ball to keep it glowing for 5 s at, say, 100 W?",
+      "Any successful model must respect physics you know: a hot gas expands and cools, a plasma conducts and is pulled by magnetic fields, and energy must come from somewhere. Which of these makes a ball lasting several seconds hardest to explain?"
+    ],
+    "topics": [
+      "B.5",
+      "D.3"
+    ],
+    "nos": [
+      "Observations",
+      "Evidence",
+      "Hypotheses"
+    ],
+    "tok": "When does a large number of eyewitness reports become knowledge, and when does it stay a story?",
+    "links": [
+      {
+        "title": "First spectrum of ball lightning (Physics, APS)",
+        "url": "https://physics.aps.org/articles/v7/5",
+        "kind": "article"
+      },
+      {
+        "title": "Burning soil fuels ball lightning (Physics World)",
+        "url": "https://physicsworld.com/a/burning-soil-fuels-ball-lightning/",
+        "kind": "article"
+      },
+      {
+        "title": "Ball lightning (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Ball_lightning",
+        "kind": "article"
+      }
+    ]
+  },
+  {
+    "id": "BQ-15",
+    "kind": "unsolved",
+    "title": "The black hole information paradox",
+    "figure": {
+      "svg": "diagrams/bq-information.svg",
+      "alt": "A black disc with a dashed ring around it, labelled event horizon, sits in the middle of a tilted orange ring that represents the accretion disc. A blue book falls in from the top left. Faint dashed wavy lines leave the hole, labelled radiation out, very faint.",
+      "caption": "A <span class=\"key-1\">book</span> falls past the event horizon. Hawking radiation leaks out over an enormous time, but it seems to carry none of the book's words. The <span class=\"key-2\">accretion disc</span> is glowing gas on its way in. Not to scale."
+    },
+    "question": "<p>Nothing that crosses a black hole's event horizon can come back out: the escape speed there is the speed of light. In 1974 Stephen Hawking showed that, because of quantum effects near the horizon, a black hole nevertheless glows very faintly, loses mass and eventually evaporates completely. But his calculation said the radiation is purely thermal, the same whatever fell in: a star, a book, or a bag of sand of the same mass. So when the hole has gone, every detail of what fell in has gone with it. Quantum mechanics insists that information is never destroyed: from the complete present state you can always, in principle, work out the past. <strong>Does a black hole destroy information, and if not, how does it get out?</strong></p>",
+    "thinking": "<p>Two things are not in doubt. Classically, anything inside the Schwarzschild radius $R = \\dfrac{2GM}{c^2}$ cannot escape: putting $v_{esc} = c$ into the escape-speed formula gives $R \\approx 3$ km for the mass of the Sun (beyond the course, the exact answer needs general relativity, but it gives the same number). And Hawking's radiation is accepted by almost everyone, although it has never been detected: a solar-mass black hole would have a temperature of about $6 \\times 10^{-8}$ K, far colder than the $2.7$ K of the cosmic microwave background, so for now it absorbs more than it emits. Its evaporation time would be around $10^{67}$ years, when the universe is $1.4 \\times 10^{10}$ years old.</p><p>Hawking himself first argued that information really is lost. Most physicists came to disagree, and he changed his mind in 2004, but nobody could show <em>how</em> the information escapes. A big step came in 2019: Geoffrey Penington, and separately Ahmed Almheiri, Netta Engelhardt, Donald Marolf and Henry Maxfield, used new methods to calculate how the \"amount of information\" in the radiation changes as the hole evaporates. They found the curve Don Page had predicted in 1993 for a hole that does <em>not</em> destroy information: the radiation starts out looking random, but after about half the hole's lifetime it begins to carry the details of what fell in, in a form so scrambled that only an impossibly complete measurement could read them.</p><p>That convinced many people that information survives. But the calculations work in simplified models, they say little about what the mechanism is physically, and some physicists still question what they really show. There is no experiment, and none in sight, so this is a puzzle argued out entirely with theory, in a region, the horizon, where our two best theories, quantum mechanics and general relativity, have not yet been made to agree.</p>",
+    "thinkingVideo": {
+      "youtube": "yWO-cvGETRQ",
+      "title": "Why Black Holes Could Delete The Universe – The Information Paradox",
+      "channel": "Kurzgesagt – In a Nutshell"
+    },
+    "discussion": [
+      "Use $v_{esc} = \\sqrt{\\dfrac{2GM}{r}}$ to find the radius at which the escape speed from a body of the Sun's mass ($2.0 \\times 10^{30}$ kg) would equal $c$. Compare it with the Sun's actual radius. Why does \"escape speed equals $c$\" make a black hole black?",
+      "Burn a book, and physicists say its information still exists in principle, in the smoke, ash and light. What does \"information\" mean here, and why is a black hole different from a fire?",
+      "Hawking radiation from any real black hole is far too faint to measure, and the evaporation would take $10^{67}$ years. Is a prediction that can't be tested within the lifetime of the universe still science? What would a Popperian say?"
+    ],
+    "topics": [
+      "D.1",
+      "E.5"
+    ],
+    "level": "HL",
+    "nos": [
+      "Theories",
+      "Models",
+      "Falsification"
+    ],
+    "tok": "Can a claim be scientific knowledge if no possible experiment could show it to be wrong?",
+    "links": [
+      {
+        "title": "Why Black Holes Could Delete The Universe – The Information Paradox (Kurzgesagt)",
+        "url": "https://www.youtube.com/watch?v=yWO-cvGETRQ",
+        "kind": "video"
+      },
+      {
+        "title": "The Most Famous Paradox in Physics Nears Its End (Quanta Magazine, 2020)",
+        "url": "https://www.quantamagazine.org/the-most-famous-paradox-in-physics-nears-its-end-20201029/",
+        "kind": "article"
+      },
+      {
+        "title": "Black hole information paradox (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Black_hole_information_paradox",
+        "kind": "article"
+      }
+    ]
   }
 ]

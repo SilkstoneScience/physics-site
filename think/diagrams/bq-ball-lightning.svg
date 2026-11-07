@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- storm cloud -->
+  <path class="f3" d="M40 60 a22 22 0 0 1 40 -16 a26 26 0 0 1 50 2 a20 20 0 0 1 30 20 a14 14 0 0 1 -6 26 H46 a16 16 0 0 1 -6 -32 Z" style="opacity:0.35"/>
+  <!-- lightning bolt: orange so it reads as a flash -->
+  <path class="l2" d="M120 92 L104 124 L118 122 L100 160"/>
+  <text x="76" y="150" text-anchor="end" style="font-size:14px">lightning</text>
+  <!-- rain -->
+  <path class="l3 thin" d="M50 100 l-4 10 M66 108 l-4 10 M84 100 l-4 10 M58 126 l-4 10 M78 132 l-4 10"/>
+  <!-- ground -->
+  <line class="axis" x1="20" y1="180" x2="380" y2="180"/>
+  <!-- house: surface fill so the bolt and rain don't show through -->
+  <path class="axis" d="M210 90 L290 50 L370 90 Z" style="fill:var(--surface)"/>
+  <rect class="axis" x="222" y="90" width="136" height="90" style="fill:var(--surface)"/>
+  <!-- door -->
+  <rect class="axis" x="320" y="134" width="24" height="46" style="fill:var(--surface)"/>
+  <!-- window, open: the frame and a half-open pane -->
+  <rect class="axis" x="238" y="106" width="52" height="44" style="fill:var(--surface)"/>
+  <line class="axis" x1="264" y1="106" x2="264" y2="150"/>
+  <line class="axis" x1="238" y1="128" x2="290" y2="128"/>
+  <text x="264" y="168" text-anchor="middle" style="font-size:13px">window</text>
+  <!-- glowing ball drifting in through the window. Warm colour hard-coded because the
+       glow is a real colour: reports describe yellow-orange to white. -->
+  <circle cx="252" cy="120" r="18" fill="#f6b24a" opacity="0.25"/>
+  <circle cx="252" cy="120" r="11" fill="#f6b24a" opacity="0.6"/>
+  <circle cx="252" cy="120" r="6" fill="#fff3c4"/>
+  <text x="150" y="28" style="font-size:14px">glowing ball,</text>
+  <text x="150" y="44" style="font-size:14px">a few seconds</text>
+  <line class="l3 thin" x1="190" y1="48" x2="246" y2="100"/>
+</svg>
