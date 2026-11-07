@@ -677,7 +677,8 @@ window.glueUnits = (function () {
   let cameFromSite = false;
   try {
     const ref = new URL(document.referrer);
-    cameFromSite = ref.origin === location.origin && ref.pathname !== location.pathname;
+    // A different query counts as a different page (e.g. the concept challenges' theme lists, concepts.html?theme=B).
+    cameFromSite = ref.origin === location.origin && ref.pathname + ref.search !== location.pathname + location.search;
   } catch (e) { /* no referrer: opened from a bookmark, a typed address or another site */ }
   const main = document.querySelector('main');
   if (main && section !== 'home') { // never on the home page
@@ -691,6 +692,12 @@ window.glueUnits = (function () {
     } else if (section === 'themes' && !/themes\/(index\.html)?$/.test(location.pathname)) {
       fallbackHref = root + 'themes/index.html';
       fallbackLabel = 'all themes';
+    } else if (section === 'think' && /concepts\.html$/.test(location.pathname) && location.search) {
+      fallbackHref = location.pathname; // a theme's or topic's list of concept challenges: back to the theme cards
+      fallbackLabel = 'all themes';
+    } else if (section === 'think' && !/think\/(index\.html)?$/.test(location.pathname)) {
+      fallbackHref = root + 'think/index.html';
+      fallbackLabel = 'Think deeper';
     }
     const back = document.createElement('p');
     back.className = 'page-back';

@@ -526,22 +526,22 @@
     "topic": "B.5",
     "level": "SL",
     "type": "choice",
-    "title": "The longer wire",
+    "title": "The wire across the lamp",
     "figure": {
-      "svg": "diagrams/cc-b5-02-wires.svg",
-      "alt": "Two copper wires made from the same amount of copper. Wire A has length L. Wire B has length 2L and is thinner.",
-      "caption": "Both wires contain the same volume of copper."
+      "svg": "diagrams/cc-b5-02-short.svg",
+      "alt": "Three lamps, numbered 1, 2 and 3, connected in a row in series with a battery. A wire is connected from one side of lamp 2 to the other side, so that it bypasses the lamp.",
+      "caption": "The <span class=\"key-1\">wire added</span> joins the two sides of lamp 2."
     },
-    "question": "<p>Two uniform copper wires are made from identical lumps of copper, so they have the same volume. Wire B is drawn out to twice the length of wire A. Both wires are at the same temperature. Compared with the resistance of wire A, the resistance of wire B is</p>",
+    "question": "<p>Three identical lamps are connected in series with a battery, and all three glow. The battery's internal resistance is negligible, and you can treat the resistance of each lamp as constant. A thick copper wire is now connected across lamp 2, from one side of it to the other, as shown. What happens to lamps 1 and 3?</p>",
     "options": [
-      "the same",
-      "2 times as large",
-      "4 times as large",
-      "8 times as large"
+      "They both go out",
+      "They glow as before",
+      "They glow more brightly",
+      "They glow more dimly"
     ],
     "answer": 2,
-    "reveal": "<p>$R = \\dfrac{\\rho L}{A}$, and both wires are copper at the same temperature, so $\\rho$ is the same. Wire B is twice as long, which on its own would double the resistance. But it contains the same volume of copper, $V = AL$, so its cross-sectional area is <strong>half</strong> as big, which doubles the resistance again:</p><p>$R_B = \\dfrac{\\rho \\times 2L}{A/2} = 4 \\times \\dfrac{\\rho L}{A} = 4R_A$</p><p>Another way to see it: picture wire A as two thin wires of length $L$ side by side (in parallel). Each thin wire must have resistance $2R_A$. Wire B is those same two thin wires joined end to end (in series): $2R_A + 2R_A = 4R_A$.</p>",
-    "tempting": "<p>\"Twice as long, twice the resistance\" is true only if the thickness stays the same. Here the same amount of copper has to stretch further, so the wire must also get thinner, and a thinner wire has more resistance too.</p><p>\"8 times\" comes from thinking the diameter halves, which would make the area a quarter. In fact it is the <em>area</em> that halves (the diameter only falls by a factor of $\\sqrt{2}$).</p>"
+    "reveal": "<p><strong>They glow more brightly</strong>, and lamp 2 goes out.</p><p>The copper wire has almost no resistance, so it is a <strong>short circuit</strong> across lamp 2: nearly all the current flows through the wire instead of the lamp, and the potential difference across the lamp (and the wire) is almost zero. With no p.d. across it, lamp 2 goes out.</p><p>For lamps 1 and 3, what matters is the total resistance of the circuit. Call the battery's emf $\\varepsilon$ and each lamp's resistance $R$. Before, the current was $I = \\dfrac{\\varepsilon}{3R}$. With lamp 2 bypassed, the total resistance is $2R$, so $I = \\dfrac{\\varepsilon}{2R}$: the current is 1.5 times larger. The power in each remaining lamp, $P = I^2 R$, is $1.5^2 = 2.25$ times larger, so they glow much more brightly.</p><p>(A real filament's resistance rises as it gets hotter, so the increase is a little less than 2.25 times, but the lamps still get brighter. A short circuit across the <em>battery</em> would be a different story: a very large current and a hot, damaged battery.)</p>",
+    "tempting": "<p>\"They both go out\" comes from thinking of a short circuit as something that stops the whole circuit working. It only short-circuits the part it is connected across; the rest of the loop is still complete, with a lower total resistance than before.</p><p>\"They glow more dimly\" comes from thinking that the new wire \"takes\" current away from the other lamps, or that the current is used up. In a series circuit the current is the same everywhere, and its size is set by the whole circuit: less resistance means more current, for every component.</p><p>\"They glow as before\" would be right if the lamps were in <em>parallel</em>, each with the full battery p.d. across it. In series, every lamp's share of the p.d. depends on the others.</p>"
   },
   {
     "id": "CC-B5-03",
@@ -854,7 +854,7 @@
   {
     "id": "CC-D2-02",
     "topic": "D.2",
-    "level": "HL",
+    "level": "SL",
     "type": "choice",
     "title": "Close to the wall",
     "figure": {
