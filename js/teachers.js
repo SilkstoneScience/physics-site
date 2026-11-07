@@ -12,7 +12,7 @@
   const MAX1 = 10; // most Paper 1A questions on one sheet (teacher's decision)
   const MAX2 = 5;  // most Paper 2 questions
   const SITE = 'https://physics.silkstone.xyz/';
-  const PARTS = ['h', 't', 'n', 'r', 'w', 's']; // hook, ToK, NoS, revision notes, worked examples, self-test
+  const PARTS = ['h', 't', 'n', 'o', 'r', 'w', 's']; // hook, ToK, NoS, oracy (teacher notes only), revision notes, worked examples, self-test
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const LETTERS = 'ABCD';
@@ -279,6 +279,8 @@
       const prompts = (d.teacher.nosPrompts || {})[key] || [];
       part('NoS: discussion prompts', `<p>${nosP}</p>${prompts.length ? `<ul>${prompts.map((x) => `<li>${x}</li>`).join('')}</ul>` : '<p>No prompts written yet for this idea.</p>'}`);
     }
+    const oracy = d.teacher.oracy;
+    if (state.parts.has('o') && oracy) part(`Oracy activity: ${esc(oracy.activity)}`, oracy.html);
     if (state.parts.has('s') && (picks.p1.length || picks.p2.length)) {
       let html = '';
       let qn = 0;

@@ -48,6 +48,19 @@ export function checkTeachers({ err, warn, TOPICS }) {
       if (!s.heading || !s.html) err(file, `summary ${i + 1} needs a heading and html`);
       if (((s.html || '').match(/\$/g) || []).length % 2) err(file, `summary "${s.heading}" has an odd number of $ signs`);
       if (/[\t\b\f\r]/.test(s.html || '')) err(file, `summary "${s.heading}" contains a control character: double every backslash`);
+      // HL marks: "hl": true on a whole entry, class="hl-only" on a part (an SL sheet leaves both out)
+      if ('hl' in s && typeof s.hl !== 'boolean') err(file, `summary "${s.heading}": "hl" must be true or false`);
+      const hlTopic = /<span class="tag hl">HL<\/span>\s*only/.test((html.match(/<h1[\s\S]*?<\/h1>/) || [''])[0]) || /hl:\s*true/.test(((read('js/site.js').match(new RegExp(`id: '${topic.replace('.', '\\.')}'[^}]*`)) || [''])[0]));
+      if (hlTopic && (s.hl || /class="hl-only"/.test(s.html || ''))) warn(file, `summary "${s.heading}": ${topic} is HL only, so it needs no HL marks`);
+      if (!hlTopic && !html.includes('hl-zone') && !/class="tag hl"/.test(html) && (s.hl || /class="hl-only"/.test(s.html || ''))) warn(file, `summary "${s.heading}" is marked HL, but ${page} has no HL content`);
+    }
+
+    // Oracy activity (teacher notes): { activity, html }
+    if (!t.oracy) warn(file, 'no oracy activity yet');
+    else {
+      if (!t.oracy.activity || !t.oracy.html) err(file, '"oracy" needs an activity and html');
+      if (((t.oracy.html || '').match(/\$/g) || []).length % 2) err(file, 'oracy html has an odd number of $ signs');
+      if (/[\t\b\f\r]/.test(t.oracy.html || '')) err(file, 'oracy html contains a control character: double every backslash');
     }
 
     // Discussion prompts must match the ToK questions and NoS ideas on the topic page.
@@ -92,7 +105,11 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     const t = JSON.parse(raw);
     const fp = pageFingerprint(t.page);
     // Change only the fingerprint line, so the rest of the file keeps its layout.
-    const out = raw.replace(/"pageFingerprint": "[^"]*"/, `"pageFingerprint": "${fp}"`);
+    // A file without one yet gets the line straight after "page".
+    const out = /"pageFingerprint": "[^"]*"/.test(raw)
+      ? raw.replace(/"pageFingerprint": "[^"]*"/, `"pageFingerprint": "${fp}"`)
+      : raw.replace(/("page": "[^"]*",)(\r?\n)(\s*)/, `$1$2$3"pageFingerprint": "${fp}",$2$3`);
+    if (out === raw && !raw.includes(`"pageFingerprint": "${fp}"`)) { console.log(`✗ ${file}: couldn't find where to record the fingerprint`); process.exitCode = 1; continue; }
     fs.writeFileSync(path.join(ROOT, file), out);
     console.log(`✓ ${file}: recorded the fingerprint of ${t.page} (${fp}).`);
   }

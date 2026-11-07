@@ -1,0 +1,101 @@
+{
+  "topic": "C.4",
+  "page": "themes/c4.html",
+  "pageFingerprint": "4d88800842310fec",
+  "summary": [
+    {
+      "heading": "How standing waves form",
+      "html": "<ul><li>A <strong>standing wave</strong> forms when <strong>two identical waves</strong> (same frequency, wavelength and amplitude) travel in <strong>opposite directions</strong> and superpose, usually a wave and its reflection.</li></ul><table class=\"notes\"><tr><th></th><th>Travelling wave</th><th>Standing wave</th></tr><tr><td>Energy</td><td>transferred along the wave</td><td><strong>no net transfer</strong>; stored in the medium</td></tr><tr><td>Amplitude</td><td>the same everywhere</td><td>zero at nodes, maximum at antinodes</td></tr><tr><td>Phase</td><td>changes steadily along the wave</td><td>in phase within a loop; antiphase across a node</td></tr><tr><td>Profile</td><td>moves at speed $v$</td><td>stays in place</td></tr></table>"
+    },
+    {
+      "heading": "Nodes, antinodes, amplitude and phase",
+      "html": "<ul><li><strong>Node</strong>: a point that never moves. <strong>Antinode</strong>: a point with the largest amplitude.</li><li>Node to node (or antinode to antinode) = $\\frac{\\lambda}{2}$; node to the nearest antinode = $\\frac{\\lambda}{4}$.</li><li>All points between two neighbouring nodes are <strong>in phase</strong> (different amplitudes); points in neighbouring loops are in <strong>antiphase</strong>, a phase difference of $\\pi$.</li><li>All points oscillate at the same frequency, except nodes. Energy depends on amplitude squared, so antinodes have the most and nodes none.</li></ul>"
+    },
+    {
+      "heading": "Harmonics on strings and in pipes",
+      "html": "<ul><li><strong>Boundary conditions</strong>: a fixed string end or a closed pipe end is a (displacement) <strong>node</strong>; a free string end or an open pipe end is an <strong>antinode</strong>.</li><li>Sound in a pipe is longitudinal: describe it with displacement nodes and antinodes (no pressure nodes or end corrections needed).</li><li>The lowest-frequency pattern is the <strong>first harmonic</strong>. The IB doesn't use \"fundamental\" or \"overtone\".</li></ul><table class=\"notes\"><tr><th>Ends</th><th>Examples</th><th>$\\lambda_n$</th><th>Harmonics</th></tr><tr><td>node–node</td><td>string fixed at both ends; pipe closed at both ends</td><td>$\\dfrac{2L}{n}$</td><td>all</td></tr><tr><td>antinode–antinode</td><td>string free at both ends; pipe open at both ends</td><td>$\\dfrac{2L}{n}$</td><td>all</td></tr><tr><td>node–antinode</td><td>string with one free end; pipe closed at one end</td><td>$\\dfrac{4L}{n}$</td><td>odd only</td></tr></table><div class=\"key\">$$f_n = \\frac{v}{\\lambda_n} = \\frac{nv}{2L} \\quad\\text{or}\\quad \\frac{nv}{4L}$$</div><ul><li>These aren't in the data booklet: sketch the pattern and count the half- or quarter-wavelengths in $L$.</li><li><span class=\"tag y2028\">New for 2028</span> Derive $L = \\frac{n\\lambda}{2}$ (matching ends) or $L = \\frac{n\\lambda}{4}$ with $n$ odd (node–antinode), and see that these set the harmonic names: a pipe closed at one end has only the 1st, 3rd, 5th… harmonics, so the pattern after the first is the <strong>third</strong> harmonic.</li><li>Wave speed on a string depends on tension and mass per unit length: tighter or lighter strings play higher notes; a shorter vibrating length (pressing a fret) plays a higher note.</li><li><strong>Resonance tube</strong>: the difference between two successive resonance lengths is $\\frac{\\lambda}{2}$, which cancels the error from the antinode sitting slightly above the open end. The tuning fork fixes the frequency.</li></ul>"
+    },
+    {
+      "heading": "Natural frequency and resonance",
+      "html": "<ul><li>The <strong>natural frequency</strong> $f_0$ is the frequency at which a system oscillates freely after one disturbance. Strings and pipes have one for each harmonic.</li><li>A periodic <strong>driving force</strong> causes a <strong>forced oscillation</strong> at the driving frequency $f$.</li></ul><div class=\"key\"><strong>Resonance</strong>: when the driving frequency equals (or is very close to) the natural frequency, energy is transferred most efficiently and the amplitude is greatest.</div><ul><li>The amplitude stops growing when the energy lost per cycle equals the energy supplied per cycle (conservation of energy).</li></ul>"
+    },
+    {
+      "heading": "Damping",
+      "html": "<ul><li><strong>Damping</strong> is energy loss from an oscillating system (friction, air resistance, drag), which reduces the amplitude.</li><li><strong>Light damping</strong>: keeps oscillating with gradually decreasing amplitude; period almost unchanged (a guitar string dying away).</li><li><strong>Critical damping</strong>: returns to equilibrium in the <strong>shortest time without oscillating</strong> (car shock absorbers, soft-closing doors).</li><li><strong>Heavy damping</strong>: no oscillation, but returns <strong>more slowly</strong> than critical (a pendulum in thick oil).</li><li><strong>Resonance curve</strong> (amplitude against driving frequency): more damping gives a <strong>lower maximum amplitude</strong>, a <strong>broader peak</strong>, and a resonant (peak) frequency <strong>shifted slightly below</strong> $f_0$.</li><li>Damping does <strong>not</strong> change the natural frequency $f_0$, which depends only on the system.</li><li>Very low driving frequencies: small amplitude, following the pushes. Very high: amplitude falls towards zero.</li></ul>"
+    },
+    {
+      "heading": "Useful and destructive resonance",
+      "html": "<ul><li><strong>Useful</strong>: musical instruments (and their hollow bodies), tuning a radio circuit to one station, quartz clocks, MRI scanners, and greenhouse gases absorbing infrared at their molecules' natural frequencies (B.2).</li><li><strong>Destructive</strong>: footbridges driven by walkers (London's Millennium Bridge, fixed with dampers), buildings in earthquakes (tuned mass dampers, as in Taipei 101), vibrating machine parts (rubber mounts), a glass shattered by a loud note.</li><li>Reduced by adding damping or designing the natural frequency away from likely driving frequencies.</li></ul>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Saying a standing wave transfers energy.</li><li>Taking node to node as one wavelength (it is half; node to antinode is a quarter).</li><li>Saying all points of a standing wave have the same amplitude.</li><li>Calling the second pattern of a pipe closed at one end the \"second harmonic\" (it is the third).</li><li>Mixing up pipe ends: closed end = displacement node, open end = displacement antinode.</li><li>Using \"fundamental\" or \"overtone\".</li><li>Thinking the frequency changes with the air-column length in a resonance tube (the fork sets it).</li><li>Saying damping changes the natural frequency, or confusing critical and heavy damping.</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Patterns and trends": [
+      "Play two notes an octave apart (2 : 1) and then two that clash. Can students hear the pattern before they know the numbers?",
+      "Why is describing a pattern with numbers such an important step, even before anyone can explain it?"
+    ],
+    "Models": [
+      "The same \"whole number of half-wavelengths\" idea fits strings, pipes, microwave ovens and electrons in atoms. What does each system have in common that makes the model work?",
+      "Where does the model fail? (For example, real open pipes need an end correction.)"
+    ],
+    "Observations": [
+      "Chladni's sand made nodes visible. What other tricks do physicists use to make invisible things observable?",
+      "Does an observation made with a trick like this count as direct observation?"
+    ],
+    "Global impact": [
+      "Who should pay for damping a bridge after it is built: the designer, the owner or the public?",
+      "How might engineers in an earthquake zone decide what natural frequency to give a new building?"
+    ]
+  },
+  "oracy": {
+    "activity": "Hot seat",
+    "html": "<p>Hot seat (whole class, 8 minutes): one student, the expert, answers the class's questions; swap experts every few questions. Situation: a violinist bows one open string gently, then harder and faster; the tension is unchanged. What happens to the pitch and the loudness?</p><ul><li>My question for the expert is …</li><li>Could you explain why …?</li><li>What would happen if …?</li></ul><p>Listen for: the frequency is set by the length, tension and mass per unit length, so the pitch stays the same; the amplitude grows, so it is louder.</p>"
+  },
+  "tokPrompts": {
+    "Is music universal?": [
+      "Ask students whether music from their own culture uses the same intervals as Western music. Does physics or culture decide what sounds pleasant?",
+      "Can a physical explanation of harmony ever explain why a piece of music is moving?"
+    ],
+    "Can we know what we can't picture?": [
+      "Students can picture a vibrating string but not an electron's standing wave. Is the second kind of knowledge weaker?",
+      "What role does mathematics play when imagination runs out?"
+    ],
+    "Do words shape understanding?": [
+      "Does \"first harmonic\" make the pattern $f_1, 3f_1, 5f_1$ easier to understand than \"fundamental and first overtone\"?",
+      "Find other words that mean different things in physics and everyday life (resonance, damping, work). Can they cause misconceptions?"
+    ],
+    "Should we learn from failure?": [
+      "Engineers learned a great deal from the Millennium Bridge and the Tacoma Narrows collapse. Should such risks ever be accepted as part of learning?",
+      "Is knowledge from an accident less reliable than knowledge from a planned experiment, or just harder to repeat?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "wYoxOJDrZzw",
+      "title": "Singing plates - Standing Waves on Chladni plates",
+      "channel": "Physics Girl",
+      "use": "Sand collects along the nodes of a vibrating plate. Use it with the Observations NoS idea, and ask students where the nodes and antinodes are."
+    },
+    {
+      "youtube": "X3uKmTdgmQg",
+      "title": "Shattering a Wine Glass with Sound at 187,500FPS - The Slow Mo Guys",
+      "channel": "The Slow Mo Guys",
+      "use": "Slow-motion footage of a glass driven at its natural frequency. A memorable example of destructive resonance: ask what happens to the amplitude each cycle."
+    },
+    {
+      "youtube": "6ai2QFxStxo",
+      "title": "The Tacoma Narrows Fallacy",
+      "channel": "minutephysics",
+      "use": "Extension: explains why the famous bridge collapse is not a simple case of resonance. Good for the ToK question on learning from failure and for checking textbook claims."
+    }
+  ],
+  "alsoLabs": [
+    {
+      "href": "experimental/virtual-pendulum.html",
+      "note": "One question asks whether the slowly decreasing amplitude changes the period: an example of light damping. The lab's main topic is C.1."
+    }
+  ]
+}

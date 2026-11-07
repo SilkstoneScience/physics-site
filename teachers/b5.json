@@ -1,0 +1,100 @@
+{
+  "topic": "B.5",
+  "page": "themes/b5.html",
+  "pageFingerprint": "6f9252f6133ecb1f",
+  "summary": [
+    {
+      "heading": "Charge, current and potential difference",
+      "html": "<ul><li>Charge is <strong>quantised</strong> (whole numbers of $e = 1.60 \\times 10^{-19}$ C) and <strong>conserved</strong>. Like charges repel, unlike attract.</li><li>Conductors have many <strong>mobile charge carriers</strong> (free electrons in metals, ions in solutions); insulators have almost none; semiconductors have few, and more with heat or light.</li></ul><div class=\"key\">$$I = \\frac{\\Delta q}{\\Delta t} \\qquad V = \\frac{W}{q}$$</div><ul><li>Direct current: a flow of charge carriers in one direction. $1\\ \\text{A} = 1\\ \\text{C s}^{-1}$. Conventional current goes from + to −; electrons in a metal drift the other way, slowly (typically under a mm per second), but all start moving at once.</li><li>P.d.: work done per unit charge moving positive charge between two points. $1\\ \\text{V} = 1\\ \\text{J C}^{-1}$. Always <em>between</em> two points, never \"through\".</li><li>Circuit symbols are in the data booklet. <strong>Ammeter</strong> in series (ideal: zero resistance); <strong>voltmeter</strong> in parallel (ideal: infinite resistance). Meters are ideal unless stated; a non-ideal meter has a given, constant resistance.</li></ul>"
+    },
+    {
+      "heading": "Resistance, resistivity and Ohm's law",
+      "html": "<div class=\"key\">$$R = \\frac{V}{I} \\qquad \\rho = \\frac{RA}{L}$$</div><ul><li><strong>Origin of resistance</strong>: drifting electrons collide with vibrating lattice ions and give them kinetic energy, so the metal heats up (the heating effect). Hotter metal: more vibration, more collisions, more resistance.</li><li>Resistivity $\\rho$ (Ω m) depends only on the material (and temperature). Longer wire, more $R$; thicker wire, less.</li><li><strong>Ohm's law</strong>: $I \\propto V$ for a conductor at constant temperature (and other conditions). Such a component is <strong>ohmic</strong>; a metal at constant temperature is ohmic.</li><li>$R = \\dfrac{V}{I}$ <em>defines</em> resistance for any component; Ohm's law adds that $R$ stays constant.</li><li><strong>Filament lamp</strong> (non-ohmic): more current, hotter filament, larger $R$, so the I–V graph curves over (same shape reversed). Find $R$ from $\\dfrac{V}{I}$ at a point, not from the gradient.</li></ul>"
+    },
+    {
+      "heading": "Electrical power",
+      "html": "<div class=\"key\">$$P = IV = I^2R = \\frac{V^2}{R}$$</div><ul><li>Choose the form with the quantities you know. In a resistor all the power is dissipated as thermal energy.</li></ul>"
+    },
+    {
+      "heading": "Series and parallel circuits",
+      "html": "<table class=\"notes\"><tr><th></th><th>Series</th><th>Parallel</th></tr><tr><td>current</td><td>$I = I_1 = I_2$</td><td>$I = I_1 + I_2$</td></tr><tr><td>p.d.</td><td>$V = V_1 + V_2$</td><td>$V = V_1 = V_2$</td></tr><tr><td>resistance</td><td>$R_s = R_1 + R_2$</td><td>$\\dfrac{1}{R_p} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2}$</td></tr></table><ul><li>From <strong>conservation of charge</strong> (current into a junction = current out) and <strong>conservation of energy</strong> (round a loop, p.d.s add up to the emf).</li><li>Adding a resistor in series increases the total; in parallel it decreases it. $R_p$ is smaller than the smallest branch; two equal resistors in parallel give half of one.</li></ul>"
+    },
+    {
+      "heading": "Variable resistors and potential dividers",
+      "html": "<ul><li>The guide limits variable resistors to three. <strong>Thermistor</strong> (NTC, semiconductor): hotter, lower resistance. <strong>LDR</strong> (semiconductor): brighter light, lower resistance. <strong>Potentiometer</strong>: a sliding contact gives any fraction of the p.d.</li></ul><div class=\"key\">$$V_{\\text{out}} = V_{\\text{in}} \\times \\frac{R_2}{R_1 + R_2}$$</div><ul><li>Two resistors in series share the supply p.d. in proportion to their resistances ($V \\propto R$, same current). Not in the data booklet: be ready to derive it. With a thermistor or LDR as one resistor, it makes a sensor circuit.</li></ul>"
+    },
+    {
+      "heading": "Cells, emf and internal resistance",
+      "html": "<ul><li>The <strong>emf</strong> $\\varepsilon$ is the work done per unit charge by a source in moving charge round the complete circuit: energy converted <em>into</em> electrical energy per coulomb (in volts; not a force). P.d. is electrical energy converted <em>into other forms</em> in a component.</li><li>Chemical cells: reactions between two electrodes and an electrolyte. <strong>Primary</strong> cells are used once; <strong>secondary</strong> cells are rechargeable (current pushed backwards reverses the reactions). A battery is cells in series: emfs add.</li></ul><div class=\"key\">$$\\varepsilon = I(R + r)$$</div><ul><li>Terminal p.d. $V = IR = \\varepsilon - Ir$ ($Ir$ is the \"lost volts\", which warms the cell). With no current, $V = \\varepsilon$.</li><li>Measuring $\\varepsilon$ and $r$: vary $R$, record $I$ and $V$, plot $V$ against $I$: a straight line, $V = -rI + \\varepsilon$, with gradient $-r$ and $y$-intercept $\\varepsilon$.</li></ul>"
+    },
+    {
+      "heading": "Solar cells and comparing sources",
+      "html": "<ul><li><strong>Solar (photovoltaic) cell</strong>: layers of semiconductor (usually treated silicon); absorbed photons free electrons that are driven round the circuit. Output depends on light intensity (weather, time of day, season, angle); nothing at night. Panels convert about 20% of the incident light.</li><li><strong>Primary cells</strong>: portable, cheap, steady p.d.; little energy stored, not rechargeable, harmful waste.</li><li><strong>Secondary cells</strong>: portable, reusable, store renewable energy; costly, slow to charge, lose capacity, mining costs (lithium, cobalt).</li><li><strong>Solar cells</strong>: renewable, no emissions or fuel while running, low maintenance, good in remote places; intermittent, large area, energy and materials to make.</li><li><strong>Mains</strong>: large, continuous, cheap per kWh; not portable, often from fossil fuels (enhanced greenhouse effect, B.2).</li></ul>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Saying current is \"used up\". Current is the same either side of a series component; energy is transferred.</li><li>Meters in the wrong place (ammeters in series, voltmeters in parallel).</li><li>Forgetting to invert $\\frac{1}{R_p}$.</li><li>Using the diameter in $A = \\pi r^2$, or not converting mm to m.</li><li>Taking resistance from the gradient of a curved I–V graph.</li><li>Calling $V = IR$ Ohm's law.</li><li>Confusing emf with terminal p.d. (equal only when $I = 0$).</li><li>Getting thermistors and LDRs backwards.</li><li>Mixing up conventional current and electron flow.</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Models": [
+      "The \"electrons bumping into ions\" picture explains why resistance rises with temperature. What does it fail to explain (for example, why a thermistor does the opposite)?",
+      "Compare thermal and electrical conduction in metals. What does the shared free-electron model predict about materials that are good at one but not the other?"
+    ],
+    "Conventions": [
+      "Franklin's choice of which charge to call positive was a 50–50 guess that turned out the \"wrong\" way for metals. Should physics switch to electron flow now? List what it would cost.",
+      "Find other conventions in physics (sign conventions in B.4, positive direction in A.1). What makes a good convention?"
+    ],
+    "Measurement and patterns": [
+      "Ohm's 1827 results were at first received coolly in Germany, where critics distrusted his mathematical approach. What would students need to see before believing a new law from one person's data?",
+      "Ask students to sketch the I–V graph they would expect for a lamp before measuring. How does a pattern become a law?"
+    ],
+    "Global impact": [
+      "Cheaper batteries and solar panels are changing energy use worldwide. Who benefits first, and who pays the environmental costs of mining?",
+      "Can a physics improvement (for example, more efficient solar cells) on its own solve an environmental problem?"
+    ]
+  },
+  "oracy": {
+    "activity": "Talk tokens",
+    "html": "<p>Talk tokens (fours, 10 minutes): each student spends a token to add each step of the explanation; nobody speaks again until everyone has spent one. Claim: \"With two different lamps in series with a cell, the lamp nearer the positive terminal is brighter, because current is used up on the way round.\"</p><ul><li>The next step is …</li><li>That fits with …, because …</li><li>I'd change one word: …</li></ul><p>Listen for: charge is conserved, so the current is the same everywhere in series; energy is transferred, not current, and swapping the lamps changes nothing.</p>"
+  },
+  "tokPrompts": {
+    "Does it matter that conventional current is \"backwards\"?": [
+      "If two descriptions (conventional current and electron flow) always give the same predictions, is one of them more true?",
+      "Where else does knowledge rest on an agreed convention (a map's north at the top, the order of a calendar)?"
+    ],
+    "Can we know what we can't observe?": [
+      "List the meter readings and experiments that lead us to believe in drifting electrons. At which step does observation become inference?",
+      "Does it change students' confidence to learn that a typical drift speed is under a millimetre per second?"
+    ],
+    "When is a \"law\" not a law?": [
+      "Ohm's law describes some materials only. Compare it with conservation of charge, which has no known exceptions. Should they share the word \"law\"?",
+      "Who decides what gets called a law, a principle or a rule in science?"
+    ],
+    "Who decides which energy source is best?": [
+      "Give groups one energy source each to defend. Which of their arguments could be settled by measurement, and which could not?",
+      "Should the cheapest source win if its costs fall on other countries or future generations?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "HXOok3mfMLM",
+      "title": "Electric Current: Crash Course Physics #28",
+      "channel": "CrashCourse",
+      "use": "Current, conventional current, resistance and Ohm's law in about ten minutes. Share for revision of sections 2–6."
+    },
+    {
+      "youtube": "g-wjP1otQWI",
+      "title": "DC Resistors & Batteries: Crash Course Physics #29",
+      "channel": "CrashCourse",
+      "use": "Series and parallel resistors and how batteries supply emf. Useful before the combination-circuit worked example."
+    },
+    {
+      "youtube": "9OVtk6G2TnQ",
+      "title": "How batteries work - Adam Jacobson",
+      "channel": "TED-Ed",
+      "use": "The chemistry inside a cell, from Volta to lithium-ion. A good starter for section 10 and the comparison of primary and secondary cells."
+    }
+  ],
+  "alsoLabs": []
+}

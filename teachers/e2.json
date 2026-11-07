@@ -1,0 +1,96 @@
+{
+  "topic": "E.2",
+  "page": "themes/e2.html",
+  "pageFingerprint": "c02b52ce6c4184e1",
+  "summary": [
+    {
+      "heading": "The photoelectric effect",
+      "html": "<ul><li>Light of high enough frequency on a clean metal surface releases electrons (<strong>photoelectrons</strong>). Demonstration: ultraviolet discharges a negatively charged zinc plate on an electroscope; bright visible light doesn't.</li><li>Below the <strong>threshold frequency</strong> $f_0$: no emission, however bright the light.</li><li>Above $f_0$: emission is <strong>instant</strong>, even in dim light.</li><li>The <strong>maximum kinetic energy</strong> depends on frequency, not intensity.</li><li>Brighter light (above $f_0$) gives <strong>more</strong> electrons per second (a bigger current), not faster ones.</li></ul><table class=\"notes\"><tr><th>Wave model predicts</th><th>Experiment shows</th></tr><tr><td>Any frequency works if bright enough</td><td>Nothing below $f_0$</td></tr><tr><td>Dim light needs time to build up energy</td><td>Emission is instant</td></tr><tr><td>Brighter light gives faster electrons</td><td>$E_{\\max}$ depends only on $f$</td></tr></table>"
+    },
+    {
+      "heading": "Einstein's photon explanation",
+      "html": "<div class=\"key\">$$E_{\\max} = hf - \\Phi$$</div><ul><li>Light is a stream of <strong>photons</strong>, $E = hf$. Each photon gives all its energy to <strong>one</strong> electron; an electron can't combine energy from two photons.</li><li><strong>Work function</strong> $\\Phi$: the minimum energy needed to remove an electron from the surface. Electrons from deeper down lose more energy, so only some have $E_{\\max}$.</li><li>Threshold: $hf_0 = \\Phi$, so $f_0 = \\dfrac{\\Phi}{h}$.</li><li>This explains all four results: too little energy per photon below $f_0$; one photon is enough above it (instant); more energy per photon at higher $f$; more photons per second in brighter light.</li></ul>"
+    },
+    {
+      "heading": "Stopping voltage and the graph of maximum kinetic energy against frequency",
+      "html": "<div class=\"key\">$$eV_s = E_{\\max} = hf - \\Phi$$</div><ul><li>Reversing the supply in a photocell repels the electrons. At the <strong>stopping voltage</strong> $V_s$ even the fastest are turned back and the current is zero. In eV: $V_s = 0.68$ V means $E_{\\max} = 0.68$ eV.</li><li>Brighter light of the same frequency: bigger current, same $V_s$. Higher frequency: bigger $V_s$. At large forward p.d. the current levels off (every electron is collected).</li><li>Graph of $E_{\\max}$ against $f$: a straight line. <strong>Gradient</strong> = $h$ (the same for every metal); <strong>$f$-intercept</strong> = $f_0$; extended <strong>$E$-intercept</strong> = $-\\Phi$.</li><li>Plotting $V_s$ against $f$ gives gradient $\\dfrac{h}{e}$ (Millikan's measurement of $h$).</li></ul>"
+    },
+    {
+      "heading": "Matter waves and electron diffraction",
+      "html": "<div class=\"key\">$$\\lambda = \\frac{h}{p} = \\frac{h}{mv}$$</div><ul><li>De Broglie: every moving particle has a wavelength. Photons obey the same rule, so a photon has momentum $p = \\dfrac{h}{\\lambda}$.</li><li>Everyday objects have far too much momentum for a detectable wavelength. Electrons accelerated through a few hundred volts have $\\lambda \\approx 10^{-10}$ m, about the atomic spacing in crystals.</li><li>From an accelerating p.d.: $E_k = eV$, then $p = \\sqrt{2mE_k}$, then $\\lambda = \\dfrac{h}{p}$.</li><li><strong>Electron diffraction</strong> through thin graphite gives rings (maxima and minima from interference): evidence for the <strong>wave nature of matter</strong>. A higher accelerating voltage gives smaller rings.</li><li>High-energy electrons scattered by nuclei show a central maximum and a <strong>first minimum</strong> at $\\sin\\theta \\approx \\dfrac{\\lambda}{D}$, where $D$ is the diameter of the nucleus. This is how nuclear sizes are measured.</li></ul>"
+    },
+    {
+      "heading": "Compton scattering",
+      "html": "<div class=\"key\">$$\\Delta\\lambda = \\lambda_f - \\lambda_i = \\frac{h}{m_ec}(1 - \\cos\\theta)$$</div><ul><li>X-rays or gamma rays scattered by (effectively free) electrons come off with a <strong>longer wavelength</strong>. A wave would keep its wavelength.</li><li>Explanation: a photon with energy and momentum collides with one electron; the electron recoils, so the scattered photon has less energy. Energy and momentum are both conserved.</li><li>$\\dfrac{h}{m_ec} = 2.43 \\times 10^{-12}$ m. Shift 0 at $\\theta = 0$, $\\dfrac{h}{m_ec}$ at 90°, greatest ($2\\dfrac{h}{m_ec}$) at 180°. No derivation needed.</li><li>Only noticeable for X-rays and gamma rays. <strong>Stronger evidence</strong> for photons than the photoelectric effect: it shows they carry momentum.</li></ul>"
+    },
+    {
+      "heading": "Wave–particle duality",
+      "html": "<table class=\"notes\"><tr><th></th><th>Wave behaviour</th><th>Particle behaviour</th></tr><tr><td>Light</td><td>interference, diffraction, polarization</td><td>photoelectric effect, Compton scattering, line spectra</td></tr><tr><td>Electrons</td><td>electron diffraction</td><td>deflection by fields, definite charge and mass, tracks in detectors</td></tr></table><ul><li>Neither picture is complete on its own: waves describe how light and matter travel; particles describe how they interact, in single events.</li><li>$E = hf$ and $p = \\dfrac{h}{\\lambda}$ link the particle quantities to the wave quantities.</li></ul>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Saying brighter light gives faster photoelectrons.</li><li>Confusing the work function (an energy) with the threshold frequency.</li><li>Mixing eV and J in $E_{\\max} = hf - \\Phi$.</li><li>Saying all photoelectrons have $E_{\\max}$.</li><li>Putting kinetic energy into $\\lambda = \\dfrac{h}{p}$ instead of momentum.</li><li>Thinking the Compton shift depends on the incident wavelength: it depends only on the angle.</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Paradigm shift": [
+      "Why was the wave model of light so hard to give up in 1905? List the evidence that supported it.",
+      "Planck himself resisted the photon. Does a paradigm shift need the old generation to be convinced, or to retire?"
+    ],
+    "Falsification": [
+      "Millikan set out to disprove Einstein's equation and confirmed it. What does that say about the value of trying to prove a theory wrong?",
+      "Which single photoelectric observation would you choose as the strongest falsification of the pure wave model, and why?"
+    ],
+    "Creativity": [
+      "De Broglie's idea came largely from a sense of symmetry. Is a hunch like that a legitimate starting point in science?",
+      "What turned de Broglie's guess into accepted physics?"
+    ],
+    "Experiments": [
+      "Why did Compton's result persuade people who doubted the photoelectric explanation?",
+      "Design question: what would you measure, and at which angles, to test the Compton equation?"
+    ]
+  },
+  "oracy": {
+    "activity": "Opinion line",
+    "html": "<p>Opinion line (whole class, 8 minutes): students stand between \"agree\" and \"disagree\", explain their place, and may move after hearing others. Claim: \"Shining brighter light on a metal surface makes the photoelectrons come off with more kinetic energy.\"</p><ul><li>I'm standing here because …</li><li>I moved after hearing …, because …</li><li>That would only be true if …</li></ul><p>Listen for: intensity sets the number of photons per second, so more electrons, not faster ones; $E_{\\max} = hf - \\Phi$ depends only on frequency, and below the threshold frequency none are emitted.</p>"
+  },
+  "tokPrompts": {
+    "Can two contradictory models both be true?": [
+      "Is light \"really\" a wave or a particle, or is the question badly posed?",
+      "Find an example from another subject where two incompatible descriptions are both useful (a map projection, two historical accounts)."
+    ],
+    "Does an experiment decide what we see?": [
+      "Ask students: if you only ever did diffraction experiments, what would you conclude light is?",
+      "How much does the design of an experiment shape the knowledge it produces?"
+    ],
+    "Why do scientists resist new ideas?": [
+      "List reasons a scientist might reject the photon idea in 1905 that were sensible at the time.",
+      "When does scepticism become stubbornness? Can students suggest a test for telling them apart?"
+    ],
+    "What counts as understanding?": [
+      "Students can calculate $E_{\\max}$ without picturing a photon. Do they understand the photoelectric effect?",
+      "Is being able to predict results enough, or must a theory also give a picture of what is happening?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "jWbwDTPju-M",
+      "title": "Photoelectric Effect Explained | Perimeter Institute for Theoretical Physics",
+      "channel": "Perimeter Institute for Theoretical Physics",
+      "use": "A clear account of the key observations and Einstein's photon explanation. Pause after the observations and ask why the wave model fails."
+    },
+    {
+      "youtube": "IYnU4T3jbgA",
+      "title": "How to demonstrate electron diffraction in the classroom",
+      "channel": "National STEM Centre",
+      "use": "The electron diffraction tube in action. Ask students to predict what happens to the rings as the accelerating voltage rises."
+    },
+    {
+      "youtube": "nmxwVU88Bd8",
+      "title": "Quantum mechanics and the double slit experiment",
+      "channel": "Fermilab",
+      "use": "Don Lincoln on single particles building up an interference pattern. A good discussion starter for wave–particle duality."
+    }
+  ],
+  "alsoLabs": []
+}

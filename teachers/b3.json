@@ -1,0 +1,90 @@
+{
+  "topic": "B.3",
+  "page": "themes/b3.html",
+  "pageFingerprint": "b56af26f92a4119d",
+  "summary": [
+    {
+      "heading": "Pressure and the mole",
+      "html": "<div class=\"key\">$$P = \\frac{F}{A} \\qquad n = \\frac{N}{N_A}$$</div><ul><li>$F$ is the force <strong>perpendicular</strong> to the surface. Pressure is a scalar, in Pa ($1\\ \\text{Pa} = 1\\ \\text{N m}^{-2}$). Air pressure at sea level is about $1.0 \\times 10^5$ Pa.</li><li>$N_A = 6.02 \\times 10^{23}\\ \\text{mol}^{-1}$. Molar mass $M$: mass of one mole (in $\\text{g mol}^{-1}$, numerically equal to the relative molecular mass), so $n = \\dfrac{m}{M}$. Convert g to kg when needed.</li></ul>"
+    },
+    {
+      "heading": "The kinetic model of an ideal gas",
+      "html": "<ul><li>Assumptions: a very large number of identical molecules moving randomly with a range of speeds; their total volume is negligible; no forces except during collisions (straight lines at constant speed between them); perfectly elastic collisions; collisions take negligible time; Newton's laws apply.</li><li>No intermolecular forces means no potential energy: an ideal gas's internal energy is all kinetic.</li><li><strong>Pressure</strong>: molecules bouncing off a wall change momentum, so the wall pushes on them and they push on the wall (Newton's 2nd and 3rd laws).</li><li>Heating at constant volume: faster molecules hit more often and harder, so $P$ rises. Compressing at constant temperature: same speed, but more frequent hits per square metre. Heating at constant pressure: the gas must expand.</li></ul>"
+    },
+    {
+      "heading": "The gas laws and the ideal gas equation",
+      "html": "<ul><li>For a fixed mass of gas: <strong>Boyle's law</strong> $PV = \\text{constant}$ (constant $T$); <strong>Charles's law</strong> $\\dfrac{V}{T} = \\text{constant}$ (constant $P$); <strong>pressure law</strong> $\\dfrac{P}{T} = \\text{constant}$ (constant $V$). $T$ in kelvin.</li><li>Testing Boyle's law: plot $P$ against $\\dfrac{1}{V}$ for a straight line through the origin. Wait for the gas to return to room temperature after each change.</li></ul><div class=\"key\">$$\\frac{P_1V_1}{T_1} = \\frac{P_2V_2}{T_2} \\qquad PV = nRT = Nk_BT$$</div><ul><li>$R = 8.31\\ \\text{J K}^{-1}\\text{ mol}^{-1}$ with moles; $k_B = 1.38 \\times 10^{-23}\\ \\text{J K}^{-1}$ with numbers of molecules. $R = N_Ak_B$.</li><li>$1\\ \\text{litre} = 1000\\ \\text{cm}^3 = 10^{-3}\\ \\text{m}^3$.</li></ul>"
+    },
+    {
+      "heading": "Pressure from molecular collisions",
+      "html": "<div class=\"key\">$$P = \\frac{1}{3}\\rho v_{\\text{rms}}^2$$</div><ul><li>Outline: momentum change $2mu$ per collision; one hit every $\\dfrac{2L}{u}$; force $\\dfrac{mu^2}{L}$; a third of the motion in each direction; divide by area, and $\\dfrac{Nm}{L^3} = \\rho$. Know the idea and the result, not the full derivation.</li><li><span class=\"tag y2028\">New for 2028</span> <strong>rms speed</strong>: square the speeds, take the mean, then the square root. It is not the mean speed (100, 200, 300, 400 $\\text{m s}^{-1}$: mean 250, rms 274), and it is never smaller (equal only if every molecule has the same speed).</li><li><span class=\"tag y2028\">New for 2028</span> The average <em>velocity</em> of the molecules is zero (random directions). The gas laws use the mean of $v^2$ because each molecule's effect on pressure (harder and more frequent hits) and its kinetic energy both depend on $v^2$.</li></ul>"
+    },
+    {
+      "heading": "Temperature, speed and internal energy",
+      "html": "<ul><li>Combining $PV = \\frac{1}{3}Nmv_{\\text{rms}}^2$ with $PV = Nk_BT$: $\\tfrac{1}{2}mv_{\\text{rms}}^2 = \\tfrac{3}{2}k_BT$. Kelvin temperature measures the average kinetic energy of the molecules.</li></ul><div class=\"key\">$$U = \\frac{3}{2}Nk_BT = \\frac{3}{2}nRT$$</div><ul><li>For an <strong>ideal monatomic gas</strong> only. For a fixed amount of gas, $U$ depends only on temperature, not on pressure or volume.</li></ul>"
+    },
+    {
+      "heading": "Pressure–volume diagrams and real gases",
+      "html": "<ul><li>Two of $P$, $V$, $T$ fix the state, so a change of state is a line on a p–V diagram.</li><li>Isobaric: horizontal line. Isovolumetric: vertical line. Isothermal: a curve $PV = \\text{constant}$ (an isotherm); hotter isotherms lie further from the origin.</li><li><strong>Real gases</strong>: molecules have some volume and attract slightly, so real gases can liquefy. They behave nearly ideally at <strong>low pressure</strong>, <strong>low density</strong> and <strong>high temperature</strong> (well above liquefying).</li></ul>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Using °C in any gas equation.</li><li>Leaving volumes in litres or cm³ in $PV = nRT$ (the ratio form only needs matching units, but $T$ must still be in K).</li><li>Mixing up $n$ with $R$ and $N$ with $k_B$.</li><li>Saying molecules hit harder when compressed at constant temperature. They hit more often.</li><li>Treating $v_{\\text{rms}}^2$ as the square of the mean speed.</li><li>Using $U = \\frac{3}{2}nRT$ for real or non-monatomic gases.</li><li>Applying the gas laws when gas leaks (the mass must be fixed).</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Experiments and patterns": [
+      "Give students Boyle-style data (pressure and volume of trapped air). How would they find the pattern, and what graph would convince a sceptic?",
+      "Boyle's law (1662) was used for nearly two centuries before the kinetic explanation was accepted (Bernoulli's 1738 explanation was largely ignored). Is a law with no accepted explanation still useful?"
+    ],
+    "Models": [
+      "Theory and experiment both reach $PV = nRT$. Which assumptions in the kinetic model were really guesses at the time?",
+      "Ask students which kinetic-model assumption they would drop first to make the model more realistic, and what it would change."
+    ],
+    "Shared endeavour": [
+      "The same law was stated in different but equivalent ways by different scientists. How do scientists decide two statements say the same thing?",
+      "Avogadro's hypothesis was ignored for about 50 years. What had to change before it was accepted?"
+    ],
+    "Ideal and real": [
+      "Engineers designing a scuba tank or a gas pipeline need to know when \"ideal\" is good enough. How would they find out?",
+      "Is it a weakness or a strength of physics that it builds on things that don't exist, like ideal gases?"
+    ]
+  },
+  "oracy": {
+    "activity": "ABC discussion",
+    "html": "<p>ABC discussion (threes, 8 minutes): each student in turn agrees with, builds on or challenges the last point. Claim: \"A sealed balloon shrinks in the freezer because the gas molecules get smaller when they are cold.\"</p><ul><li>I agree with … because …</li><li>Building on that, …</li><li>I'd challenge that, because …</li></ul><p>Listen for: the molecules stay the same size but move more slowly; at constant pressure the volume is proportional to the kelvin temperature, so cooling from 293 K to 255 K makes it about 13% smaller.</p>"
+  },
+  "tokPrompts": {
+    "When is an idealised model \"good enough\" to count as knowledge?": [
+      "Compare $PV = nRT$ with real data for air at room conditions and for CO2 near liquefaction. Where does \"good enough\" end?",
+      "Is knowing the limits of a model part of knowing the model?"
+    ],
+    "Can we know that something exists before we can see it?": [
+      "Mach and Ostwald doubted atoms. Einstein's 1905 analysis of Brownian motion, confirmed by Perrin's measurements in 1908–09, changed most minds (Ostwald accepted atoms in 1909; Mach never did). Why were these measurements more convincing than the success of the gas laws?",
+      "Can we \"see\" atoms today with electron microscopes, or is that still an inference?"
+    ],
+    "Do two routes to the same answer make it more certain?": [
+      "If two independent methods agree, could they both share the same hidden mistake? Give an example.",
+      "Compare with other areas of knowledge: does a historian trust an event more when two independent sources agree?"
+    ],
+    "Is a \"law\" in science the same as a law in society?": [
+      "A society's law can be broken and still be a law. Can a scientific law be broken and still be a law?",
+      "Should Boyle's law be renamed \"Boyle's approximation\"? What would be gained or lost?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "BxUS1K7xu30",
+      "title": "The Ideal Gas Law: Crash Course Chemistry #12",
+      "channel": "CrashCourse",
+      "use": "From the empirical gas laws to $PV = nRT$, with plenty of examples. Useful revision before section 5; note it is a chemistry video, so it uses some non-SI units."
+    },
+    {
+      "youtube": "WOEvvHbc240",
+      "title": "Kinetic Theory and Phase Changes: Crash Course Physics #21",
+      "channel": "CrashCourse",
+      "use": "Links molecular motion to pressure and temperature, and why real gases liquefy. Share for revision of sections 3, 7 and 9."
+    }
+  ],
+  "alsoLabs": []
+}

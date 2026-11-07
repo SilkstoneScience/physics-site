@@ -94,10 +94,10 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - **Second independent review of batch 2** (7 November 2026): five reviewers (one per theme) recalculated every number and checked wording, levels, pictures and bank overlaps; no wrong answers; wording fixes applied (CC-A3-02, CC-B4-02, CC-C2-01, CC-D1-02, BQ-08 and smaller ones), five pictures corrected. Teacher's decisions: CC-B5-02 replaced ("The wire across the lamp", a short circuit across one of three series lamps; the stretched-wire version duplicated bank item B5-005); CC-D2-02 is SL; CC-A4-03 stays HL; CC-C2-01 and CC-E5-02 stay as they are; BQ-06 embeds the PBS Space Time video. Still waiting for the teacher's own check in the preview before pushing.
 - **Puzzles merged into concept challenges** (teacher's decision, 7 November 2026): PZ-01…PZ-04 moved into `think/concepts.json` under A.2 with their ids kept; the Puzzles card is gone from the hub; `think/puzzles.html` only forwards old links to `concepts.html?topic=A.2`.
 
-## For teachers: revision sheet builder (trial, November 2026)
-- Plan and decisions: `docs/TEACHERS_PLAN.md`. `teachers/index.html` builds a student revision sheet and teacher notes for one subtopic, downloadable as PDF; linked from a home-page card only, marked "In development". **A.1 only so far** (`teachers/a1.json`: summary, ToK/NoS prompts, videos, extra labs).
+## For teachers: revision sheet builder (November 2026)
+- Plan and decisions: `docs/TEACHERS_PLAN.md`. `teachers/index.html` builds a student revision sheet and teacher notes for one subtopic, downloadable as PDF; linked from a home-page card only, marked "In development". **All 24 subtopics** (`teachers/a1.json` … `e5.json`: summary, ToK/NoS prompts, videos, extra labs), with an SL/HL level choice; A.2–E.5 drafted by theme and independently reviewed.
 - Every question in the bank has sub-part tags (`"sections"`), checked by `tools/check-sections.mjs`, ready for choosing sub-parts later.
-- Next: teacher files for A.2, A.3 onwards (after the concept challenges); later the Extended Essay menu move, sub-part choice (when there are more Paper 2 questions) and essential-skills sheets.
+- Next: the Extended Essay menu move (the concept-challenge task is now merged), sub-part choice (when there are more Paper 2 questions) and essential-skills sheets.
 
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).

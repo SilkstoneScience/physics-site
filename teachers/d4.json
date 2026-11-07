@@ -1,0 +1,96 @@
+{
+  "topic": "D.4",
+  "page": "themes/d4.html",
+  "pageFingerprint": "5b46db4e6a41069f",
+  "summary": [
+    {
+      "heading": "Magnetic flux and flux linkage",
+      "html": "<div class=\"key\">$$\\Phi = BA\\cos\\theta$$</div><ul><li><strong>Magnetic flux</strong> measures how much field passes through an area (like counting field lines). $\\theta$ is the angle between the field and the <strong>normal</strong> to the area.</li><li>Unit: weber, $1\\ \\text{Wb} = 1\\ \\text{T m}^{2}$. Maximum when the field passes straight through ($\\theta = 0$); zero when the field is parallel to the surface.</li><li><strong>Flux linkage</strong> of a coil of $N$ turns: $N\\Phi$.</li></ul>"
+    },
+    {
+      "heading": "Faraday's law",
+      "html": "<div class=\"key\">$$\\varepsilon = -N\\frac{\\Delta\\Phi}{\\Delta t}$$</div><ul><li>An emf is induced whenever the flux linking a circuit <strong>changes</strong>; the emf equals the rate of change of flux linkage. A steady flux, however large, induces nothing. A complete circuit carries an induced current.</li><li>The minus sign is Lenz's law.</li><li>Three ways to change $\\Phi = BA\\cos\\theta$: change $B$ (move a magnet, switch a nearby current on or off); change $A$ in the field (move a coil in or out, slide a rod on rails); change $\\theta$ (rotate a coil).</li><li>A faster change gives a bigger emf, even for the same total change of flux.</li><li>On a graph of flux linkage against time, the emf is minus the gradient: zero where the graph is flat, largest where it is steepest.</li></ul>"
+    },
+    {
+      "heading": "Moving conductors and coils",
+      "html": "<div class=\"key\">$$\\varepsilon = BvL$$</div><ul><li>For a straight conductor moving perpendicular to a uniform field: its free charges feel $qvB$ along it, and charge builds up until the electric force balances it. The same result follows from Faraday's law (the rod sweeps out area $Lv\\Delta t$).</li><li>A rectangular coil at constant speed crossing a field region: <strong>entering</strong>, $\\varepsilon = NBvL$ ($L$ = the leading edge); <strong>fully inside</strong> a uniform field, the flux is constant, so $\\varepsilon = 0$; <strong>leaving</strong>, $\\varepsilon = NBvL$ in the opposite direction.</li></ul>"
+    },
+    {
+      "heading": "Lenz's law and energy",
+      "html": "<ul><li><strong>Lenz's law</strong>: the induced emf (and current) is in the direction that opposes the change that produced it.</li><li>N pole pushed towards a coil: the near end becomes N and repels it. Pulled away: the near end becomes S and attracts it back.</li><li>It is a consequence of <strong>energy conservation</strong>: if the induced current helped the change, energy would appear from nothing. The electrical energy produced comes from the work done against the opposing force.</li><li>Applications: electromagnetic braking (a magnet falling slowly down a copper pipe; braking of trains and roller coasters with no contact).</li></ul>"
+    },
+    {
+      "heading": "The ac generator",
+      "html": "<ul><li>A coil rotating steadily in a uniform field: $\\theta = \\omega t$ with $\\omega = 2\\pi f$, so the flux linkage varies sinusoidally and so does the emf (an alternating emf).</li><li>Plane of the coil <strong>perpendicular</strong> to the field: flux maximum, emf zero. Plane <strong>parallel</strong> to the field: flux zero, emf maximum. The emf is a quarter of a cycle out of step with the flux.</li><li><strong>Doubling the rotation frequency</strong> doubles the peak emf <em>and</em> halves the period. The peak emf also rises with more turns, larger area or a stronger field.</li><li>Power stations run generators at constant speed to keep the mains frequency fixed (50 or 60 Hz).</li></ul>"
+    },
+    {
+      "heading": "Self-induction",
+      "html": "<ul><li><span class=\"tag y2028\">Changed for 2028</span> Qualitative only for exams before 2028; the 2028 guide no longer mentions it (inductance and RL circuits are not required either way).</li><li>A changing current in a coil changes the flux linking the coil itself, inducing an emf in the same coil. By Lenz's law this back emf opposes the change in current: it slows the rise at switch-on and tries to keep the current flowing at switch-off (sparks at switches).</li></ul>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Thinking a large flux gives a large emf: only the rate of change of flux linkage matters.</li><li>Measuring $\\theta$ in $\\Phi = BA\\cos\\theta$ from the plane of the coil instead of the normal.</li><li>Forgetting $N$ in Faraday's law.</li><li>Saying a coil moving fully inside a uniform field has an emf.</li><li>Lenz direction: the induced current opposes the <strong>change</strong> in flux, not the flux itself.</li><li>Saying doubling a generator's frequency changes only the ac frequency: the peak emf doubles too.</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Experiments": [
+      "Faraday's meter flicked only at switch-on and switch-off. Why might other experimenters have missed this, or dismissed it as a fault?",
+      "Repeat the iron-ring experiment with two coils and a sensitive meter. Ask students to predict before switching on, while steady and at switch-off."
+    ],
+    "Patterns and trends": [
+      "Ørsted showed currents make magnetic fields; Faraday looked for the reverse. Is searching for symmetry a good scientific strategy? Can students think of a case where it failed?",
+      "Why did it take eleven years to find induction, if people were looking for it?"
+    ],
+    "Models": [
+      "Faraday reasoned with field lines being 'cut'. Use the cutting picture and the changing-flux picture on the sliding rod: do they give the same answer?",
+      "Maxwell turned Faraday's pictures into equations. What did the equations add that the pictures could not?"
+    ],
+    "Global impact": [
+      "Almost all electricity comes from induction. List the energy sources that turn a generator and the few that don't (solar cells).",
+      "Who gained most, and who least, from large-scale electricity generation in the 1800s and today?"
+    ]
+  },
+  "oracy": {
+    "activity": "Hot seat",
+    "html": "<p>Hot seat (whole class, 8 minutes): one student, the expert, answers the class's questions; swap experts every few questions. Situation: two light aluminium rings hang from threads, one complete, one cut through. A magnet pushed quickly towards each makes only the complete ring swing away. Why?</p><ul><li>My question for the expert is …</li><li>Could you explain why …?</li><li>What would happen if …?</li></ul><p>Listen for: the changing flux induces an emf in both rings, but current flows only in the complete one; by Lenz's law it opposes the change.</p>"
+  },
+  "tokPrompts": {
+    "Does terminology help or hinder?": [
+      "Ask students to explain the difference between flux, flux density and flux linkage in one sentence each. Where do they get stuck?",
+      "Should physics simplify its words for the public, or should the public learn the precise words?"
+    ],
+    "Pictures or equations?": [
+      "Faraday had little mathematics but made huge discoveries. Can visual reasoning ever be as rigorous as an equation?",
+      "Ask students whether they understand Lenz's law better from a picture of a magnet and coil, or from the minus sign in Faraday's law."
+    ],
+    "Is Lenz's law a law?": [
+      "If Lenz's law follows from energy conservation, is it a separate law, or a consequence? Does the name matter?",
+      "Can students find another 'law' in physics that follows from a deeper principle?"
+    ],
+    "Who benefits from discoveries?": [
+      "When Faraday found induction, its uses were unknown. Should scientists be expected to predict the uses of their work?",
+      "Does a scientist share responsibility for harmful uses of a discovery, decades later?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "N7tIi71-AjA",
+      "title": "Lenz's Law with Copper Pipe (H16) [5K20.25]",
+      "channel": "MIT Physics Instructional Resources Lab",
+      "use": "A magnet falling slowly through a copper pipe. Ask students to explain with Lenz's law and energy conservation where the magnet's lost energy goes."
+    },
+    {
+      "youtube": "WhATjUHgzxQ",
+      "title": "AC Electrical Generator Basics - How electricity is generated",
+      "channel": "The Engineering Mindset",
+      "use": "Animated introduction to the ac generator. Pause at the positions where the coil is perpendicular and parallel to the field and ask what the emf is at each."
+    },
+    {
+      "youtube": "NqdOyxJZj0U",
+      "title": "World's First Electric Generator",
+      "channel": "Veritasium",
+      "use": "Filmed at the Royal Institution: a recreation of Faraday's 1831 coil-and-magnet experiment. A history hook for the Experiments NoS idea; ask students why the meter only moves while the magnet moves."
+    }
+  ],
+  "alsoLabs": []
+}

@@ -1,0 +1,98 @@
+{
+  "topic": "C.1",
+  "page": "themes/c1.html",
+  "pageFingerprint": "3f151074f5fe8e1f",
+  "summary": [
+    {
+      "heading": "Describing oscillations",
+      "html": "<ul><li>An <strong>oscillation</strong> is a repeated back-and-forth motion about an <strong>equilibrium position</strong> (where the object would rest if left alone).</li><li><strong>Displacement</strong> $x$: distance and direction from equilibrium (can be negative). <strong>Amplitude</strong> $x_0$: the maximum displacement, half the distance between the two extremes.</li><li><strong>Time period</strong> $T$: time for one complete oscillation. <strong>Frequency</strong> $f$: oscillations per second (Hz). <strong>Angular frequency</strong> $\\omega$ in $\\text{rad s}^{-1}$, which links SHM to circular motion.</li></ul><div class=\"key\">$$T = \\frac{1}{f} = \\frac{2\\pi}{\\omega}$$</div>"
+    },
+    {
+      "heading": "The conditions for SHM",
+      "html": "<ul><li>SHM happens when the resultant force (and so the acceleration) is <strong>proportional to the displacement</strong> and always <strong>directed towards the equilibrium position</strong>: a restoring force.</li></ul><div class=\"key\">$$a = -\\omega^2 x$$</div><ul><li><strong>The minus sign</strong> shows the acceleration is always opposite to the displacement, which is what pulls the object back. An $a$–$x$ graph is a straight line through the origin with gradient $-\\omega^2$.</li><li>Mass on a spring: $F = -kx$ and $F = ma$ give $a = -\\frac{k}{m}x$, so $\\omega^2 = \\frac{k}{m}$.</li><li>The period doesn't depend on the amplitude (the motion is <strong>isochronous</strong>): a bigger oscillation has further to go but moves faster.</li></ul>"
+    },
+    {
+      "heading": "Graphs of SHM",
+      "html": "<ul><li>Displacement, velocity and acceleration all vary sinusoidally with the same period, each a quarter of a cycle out of step with the one before.</li><li><strong>At the extremes</strong> ($x = \\pm x_0$): velocity zero, acceleration maximum (towards equilibrium).</li><li><strong>At equilibrium</strong> ($x = 0$): speed maximum, acceleration zero.</li><li>The $a$–$t$ graph is the $x$–$t$ graph upside down (the minus sign). Velocity = gradient of the $x$–$t$ graph; acceleration = gradient of the $v$–$t$ graph.</li></ul>"
+    },
+    {
+      "heading": "The mass–spring system and the simple pendulum",
+      "html": "<div class=\"key\">$$T = 2\\pi\\sqrt{\\frac{m}{k}} \\qquad T = 2\\pi\\sqrt{\\frac{l}{g}}$$</div><ul><li><strong>Mass–spring:</strong> a larger mass gives a longer period, a stiffer spring a shorter one. It doesn't depend on $g$ or the amplitude, so it works the same on the Moon.</li><li><strong>Pendulum:</strong> SHM only for <strong>small swings</strong> (below about 10°). The period depends on $l$ and $g$, <strong>not on the bob's mass</strong> or the (small) amplitude.</li><li>Proportionalities: $T \\propto \\sqrt{m}$ for a spring, $T \\propto \\sqrt{l}$ for a pendulum (four times the length doubles the period).</li><li><strong>Measuring $g$:</strong> time 20 oscillations to reduce the effect of reaction time, repeat for several lengths and plot $T^2$ against $l$: a straight line through the origin with gradient $\\frac{4\\pi^2}{g}$.</li></ul>"
+    },
+    {
+      "heading": "Energy in SHM",
+      "html": "<ul><li>Energy is continually transferred between <strong>kinetic</strong> and <strong>potential</strong> energy (elastic for a spring, gravitational for a pendulum).</li><li>At the extremes: $E_k = 0$, potential energy maximum. At equilibrium: $E_k$ maximum, potential energy minimum.</li><li>With no damping, the <strong>total energy is constant</strong>.</li><li>$E_k$ and $E_p$ each peak twice per period, so they vary at <strong>twice the frequency</strong> of the oscillation.</li><li>At SL, describe these changes in words and sketches; HL students also calculate them.</li></ul>"
+    },
+    {
+      "heading": "Phase and the equations of SHM",
+      "hl": true,
+      "html": "<ul><li>SHM is the shadow of uniform circular motion. The <strong>phase</strong> is the angle $\\omega t + \\phi$; the <strong>phase angle</strong> $\\phi$ is its value at $t = 0$, in <strong>radians</strong>.</li></ul><div class=\"key\">$$x = x_0\\sin(\\omega t + \\phi)$$ $$v = \\omega x_0\\cos(\\omega t + \\phi)$$ $$v = \\pm\\,\\omega\\sqrt{x_0^2 - x^2}$$</div><ul><li>$\\phi = 0$: starts at equilibrium moving in the positive direction. $\\phi = \\frac{\\pi}{2}$: starts at $+x_0$.</li><li>Maximum speed $v_{\\max} = \\omega x_0$, at $x = 0$.</li><li>A phase difference $\\Delta\\phi$ corresponds to a time difference $\\Delta t = \\frac{\\Delta\\phi}{2\\pi}T$ (a quarter cycle is $\\frac{\\pi}{2}$, half a cycle is $\\pi$).</li><li>Differentiating $x$ twice gives $a = -\\omega^2 x$, confirming the equations describe SHM.</li><li><strong>Calculator in radians.</strong></li></ul>"
+    },
+    {
+      "heading": "Energy in SHM: calculations",
+      "hl": true,
+      "html": "<div class=\"key\">$$E_T = \\tfrac{1}{2}m\\omega^2 x_0^2 \\qquad E_p = \\tfrac{1}{2}m\\omega^2 x^2$$ $$E_k = E_T - E_p = \\tfrac{1}{2}m\\omega^2(x_0^2 - x^2)$$</div><ul><li>Total energy $\\propto$ amplitude squared: doubling $x_0$ gives four times the energy.</li><li>At half the amplitude, $E_p$ is only a quarter of the total, so three-quarters is kinetic.</li><li>For a spring, $m\\omega^2 = k$, so $E_p = \\frac{1}{2}kx^2$ (as in A.3).</li></ul>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Taking the amplitude as the distance between the extremes (that is $2x_0$).</li><li>Leaving out or not explaining the minus sign in $a = -\\omega^2 x$.</li><li>Saying the velocity is greatest at the extremes: it is zero there, and the acceleration is greatest.</li><li>Thinking a heavier pendulum bob changes the period (it doesn't; for a mass–spring system the mass does).</li><li>Using $T = 2\\pi\\sqrt{l/g}$ for large swings.</li><li class=\"hl-only\"><span class=\"tag hl\">HL</span> A calculator in degrees with $\\sin(\\omega t + \\phi)$.</li><li class=\"hl-only\"><span class=\"tag hl\">HL</span> Assuming $E_k = E_p$ at half the amplitude.</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Models": [
+      "List the assumptions behind the SHM model of a pendulum. Which one fails first as the swing gets bigger, and how would you notice?",
+      "A guitar note looks messy on an oscilloscope, yet it can be built from simple sine waves. Does that make SHM a description of reality or a tool for calculation?"
+    ],
+    "Observations": [
+      "Galileo timed swings against his pulse. How reliable is that as a clock, and what would he have needed to show the period really is independent of amplitude?",
+      "Ask students to test isochronism themselves with a pendulum and a stopwatch. At what amplitude can they first detect a change in period?"
+    ],
+    "Measurement and a shared endeavour": [
+      "Why does every country need to agree on one definition of the second? What would go wrong for GPS or the internet if they didn't?",
+      "Why is an atomic oscillation a better time standard than a pendulum or a quartz crystal?"
+    ]
+  },
+  "oracy": {
+    "activity": "Explain it to a younger student",
+    "html": "<p>Explain it to a younger student (pairs, 6 minutes, then swap roles): one explains; the other plays a curious 12-year-old who keeps asking \"why?\". Question: \"Why does a pendulum take the same time for each swing whether you pull it back a little or a bit further?\"</p><ul><li>Think of it like this: …</li><li>That happens because …</li><li>So, putting it together, …</li></ul><p>Listen for: a bigger displacement gives a bigger restoring force and acceleration, so the bob moves faster over the longer path; this holds only for small amplitudes.</p>"
+  },
+  "tokPrompts": {
+    "When is a simple model good enough?": [
+      "Give students the pendulum equation and a 30° swing. Is the error big enough to matter for a clock, for a playground swing, for an exam answer?",
+      "Who decides the threshold: the person building the model or the person using its results?"
+    ],
+    "What counts as proof?": [
+      "Fourier's methods worked before mathematicians could fully justify them. Should results that work be accepted before the reasoning is complete?",
+      "Compare proof in mathematics with evidence in physics. Which one does a physicist need before using a technique?"
+    ],
+    "Is nature made of sine waves, or is that just our mathematics?": [
+      "A square wave can be built from sine waves, but sine waves can also be built from square waves. Does that weaken the claim that nature is made of sine waves?",
+      "Is a mathematical description something we discover or something we choose?"
+    ],
+    "Can a definition be wrong?": [
+      "If the second is defined by caesium, what does it mean when two caesium clocks disagree?",
+      "Ask students for other definitions that changed over time (the metre, the kilogram). Were the old definitions wrong, or just less useful?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "yVkdfJ9PkRQ",
+      "title": "Pendulum Waves",
+      "channel": "Harvard Natural Sciences Lecture Demonstrations",
+      "use": "Fifteen pendulums of slightly different lengths drift in and out of step. A striking hook for $T \\propto \\sqrt{l}$: ask students why each pendulum has a different period."
+    },
+    {
+      "youtube": "J2gpEgjy1qg",
+      "title": "1D10.50 Simple Harmonic Motion and Uniform Circular Motion",
+      "channel": "Brown Physics Demos",
+      "use": "The shadow of a rotating object matches an oscillating mass. Use it to introduce angular frequency and (HL) the phase angle."
+    },
+    {
+      "youtube": "t-_VPRCtiUg",
+      "title": "The Surprising Secret of Synchronization",
+      "channel": "Veritasium",
+      "use": "Extension: metronomes on a shared platform fall into step. Good for discussing oscillators that interact, and a link to resonance in C.4."
+    }
+  ],
+  "alsoLabs": []
+}

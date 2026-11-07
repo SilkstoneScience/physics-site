@@ -1,0 +1,94 @@
+{
+  "topic": "C.3",
+  "page": "themes/c3.html",
+  "pageFingerprint": "78f1a1f5e4ab1a67",
+  "summary": [
+    {
+      "heading": "Wavefronts, rays and reflection",
+      "html": "<ul><li>A <strong>wavefront</strong> joins neighbouring points in phase (for example along a crest); neighbouring wavefronts are one wavelength apart.</li><li>A <strong>ray</strong> shows the direction of travel of the wave and its energy, always <strong>perpendicular</strong> to the wavefronts.</li><li>At a boundary, part of a wave is usually <strong>reflected</strong> and part <strong>transmitted</strong>.</li><li>All angles are measured from the <strong>normal</strong>. Law of reflection: angle of incidence = angle of reflection. On reflection, speed, frequency and wavelength are unchanged.</li></ul>"
+    },
+    {
+      "heading": "Refraction, Snell's law and total internal reflection",
+      "html": "<ul><li><strong>Refraction</strong>: a change of direction at a boundary because the <strong>speed changes</strong>. The frequency is fixed, so the wavelength changes in proportion to the speed.</li><li>Slowing down: bends <strong>towards</strong> the normal. Speeding up: bends <strong>away</strong>. Along the normal: no change of direction, but speed and wavelength still change.</li><li>Refractive index $n = \\dfrac{c}{v}$ (air 1.00, water 1.33, glass about 1.5).</li></ul><div class=\"key\">$$\\frac{n_1}{n_2} = \\frac{\\sin\\theta_2}{\\sin\\theta_1} = \\frac{v_2}{v_1}$$</div><ul><li>Equivalently $n_1\\sin\\theta_1 = n_2\\sin\\theta_2$, where medium 1 is the one the wave comes from.</li><li><strong>Critical angle</strong>: going into a medium with a <strong>lower</strong> refractive index, the refracted ray runs along the boundary when $\\sin\\theta_c = \\dfrac{n_2}{n_1}$ ($n_1 &gt; n_2$).</li><li>Beyond $\\theta_c$, all the light is reflected: <strong>total internal reflection</strong>. Uses: optical fibres (with a lower-index cladding), endoscopes, the sparkle of diamonds.</li></ul>"
+    },
+    {
+      "heading": "Diffraction",
+      "html": "<ul><li><strong>Diffraction</strong> is the spreading of a wave through a gap or around an obstacle. Wavelength, frequency and speed are unchanged; only the wavefront shape changes.</li><li>Most noticeable when the gap or obstacle is <strong>similar in size to the wavelength</strong>; a much wider gap gives little spreading.</li><li>So sound (wavelength about 1 m) diffracts round doorways but light (about $5 \\times 10^{-7}$ m) doesn't, and long-wavelength radio reaches valleys behind hills.</li><li><strong>Huygens' principle</strong>: every point on a wavefront is a source of new wavelets; a narrow gap acts like a point source.</li></ul>"
+    },
+    {
+      "heading": "Superposition and interference",
+      "html": "<ul><li><strong>Principle of superposition</strong>: where waves overlap, the total displacement is the sum of the individual displacements (with signs). Afterwards, each wave carries on unchanged.</li><li>Crest meets crest: <strong>constructive</strong>; crest meets an equal trough: <strong>destructive</strong>.</li><li>A steady interference pattern needs <strong>coherent</strong> sources: the same frequency and a constant phase difference. For light, both sources come from one source (a laser through two slits).</li></ul><div class=\"key\">$$\\text{constructive: path difference} = n\\lambda$$ $$\\text{destructive: path difference} = \\left(n + \\tfrac{1}{2}\\right)\\lambda$$</div><ul><li>(For sources in phase, $n = 0, 1, 2, \\ldots$)</li><li><strong>Young's double slit</strong>: equally spaced bright and dark fringes on a distant screen.</li></ul><div class=\"key\">$$s = \\frac{\\lambda D}{d}$$</div><ul><li>$s$ = fringe separation, $d$ = slit separation, $D$ = slits-to-screen distance. Fringes spread out for longer $\\lambda$, larger $D$ or smaller $d$.</li><li>Measure across several fringes and divide, to reduce the percentage uncertainty in $s$.</li></ul>"
+    },
+    {
+      "heading": "Single-slit diffraction and the double-slit envelope",
+      "hl": true,
+      "html": "<ul><li>A single slit of width $b$ gives a <strong>wide, bright central maximum</strong>, twice as wide as each much dimmer side maximum.</li></ul><div class=\"key\">$$\\theta = \\frac{\\lambda}{b}$$</div><ul><li>$\\theta$ is the angle to the <strong>first minimum</strong>, in <strong>radians</strong> (small angles). Distance on the screen $\\approx D\\theta$; the central maximum is $2D\\theta$ wide.</li><li>A narrower slit or longer wavelength gives a <strong>wider</strong> pattern; a narrower slit also makes it dimmer.</li><li>White light: white centre with coloured edges (blue inside, red outside).</li><li>In a double-slit experiment, each slit's single-slit pattern <strong>modulates</strong> the fringes: they stay equally spaced but their brightness follows the single-slit envelope, and a fringe that falls on a single-slit minimum is <strong>missing</strong>.</li></ul>"
+    },
+    {
+      "heading": "Multiple slits and diffraction gratings",
+      "hl": true,
+      "html": "<ul><li>More slits with the same spacing: maxima in the <strong>same positions</strong> as for two slits, but <strong>narrower and brighter</strong>, with faint secondary maxima between.</li></ul><div class=\"key\">$$n\\lambda = d\\sin\\theta$$</div><ul><li>$n$ = order (0 straight through), $d$ = line spacing; $N$ lines per metre gives $d = 1/N$. No small-angle approximation.</li><li>Highest order: the largest whole number $n$ less than $d/\\lambda$ (since $\\sin\\theta$ must be less than 1).</li><li>White light: white central maximum; each other order is a spectrum, violet nearest the centre, red furthest. Higher orders can overlap.</li><li>Sharp maxima make gratings ideal for measuring wavelengths precisely (spectrometers, E.1).</li></ul>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Measuring angles from the surface instead of the normal.</li><li>Saying the frequency changes on refraction.</li><li>Saying total internal reflection can happen going into a higher-index medium.</li><li>Saying diffraction changes the wavelength.</li><li>Forgetting the coherence condition.</li><li>Mixing up $d$ and $D$, or not converting mm and nm to m.</li><li class=\"hl-only\"><span class=\"tag hl\">HL</span> Using degrees in $\\theta = \\lambda/b$.</li><li class=\"hl-only\"><span class=\"tag hl\">HL</span> Swapping slit width $b$ and spacing $d$ between the two formulas, or giving an order where $\\sin\\theta &gt; 1$.</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Competing theories": [
+      "Both theories explained reflection and refraction. Which observation could tell them apart? (Hint: what does each predict for the speed of light in water?)",
+      "How much should a scientist's reputation count when judging a theory? Can students think of a modern example?"
+    ],
+    "Evidence": [
+      "Young's fringes were not accepted straight away. Why might strong evidence take years to change a community's mind?",
+      "Students do the double-slit experiment with a laser. What exactly in the pattern counts as evidence for waves rather than particles?"
+    ],
+    "Falsification": [
+      "Poisson made a prediction he expected to fail. Why is a risky prediction that comes true more convincing than a safe one?",
+      "If Arago had not seen the spot, would the wave theory have been finished? What else might scientists have blamed?"
+    ]
+  },
+  "oracy": {
+    "activity": "Think–pair–share",
+    "html": "<p>Think–pair–share (1 minute alone, 3 minutes in pairs, then pairs report to the class). Question: \"From the bank you see a fish lying still under a calm pond. To light it up with a laser pointer, should you aim straight at where you see it, below it, or above it?\"</p><ul><li>We think … because …</li><li>A ray diagram shows …</li><li>The strongest objection to our view is …</li></ul><p>Listen for: aim straight at it; light paths are reversible, so the beam refracts at the surface and follows the same path back to the fish.</p>"
+  },
+  "tokPrompts": {
+    "How does a community choose between theories?": [
+      "Ask students to list factors other than evidence that influenced the light debate (reputation, nationality, mathematical tools). Should any of them matter?",
+      "Is there a point where a theory has been tested enough to call it true?"
+    ],
+    "Can trying to disprove a theory prove it right?": [
+      "Popper argued theories can be falsified but never proved. Does the Poisson spot prove the wave theory, or only fail to disprove it?",
+      "Light later turned out to have particle properties too (E.2). Was the Arago experiment misleading?"
+    ],
+    "How simple is too simple?": [
+      "Young's formula ignores slit width, yet it gives good wavelengths. When does a missing detail start to matter?",
+      "Compare this with leaving out air resistance in A.1. Is there a general rule for what can be left out?"
+    ],
+    "Can something be two things at once?": [
+      "Is \"wave\" a description of what light is, or of how it behaves in certain experiments?",
+      "Can students think of other things described by two different models depending on the question asked?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "Iuv6hY6zsd0",
+      "title": "The Original Double Slit Experiment",
+      "channel": "Veritasium",
+      "use": "Young's experiment recreated with sunlight and a homemade slit. Use it before the double-slit section and the Evidence NoS discussion."
+    },
+    {
+      "youtube": "XP3bNYkDads",
+      "title": "Demo 12702: Fresnel Diffraction and The Arago Spot",
+      "channel": "Caltech's Feynman Lecture Hall",
+      "use": "Shows the bright spot in the centre of a round shadow. Pair it with the Falsification NoS story: ask students to predict the shadow first."
+    },
+    {
+      "youtube": "VtheVym0KGU",
+      "title": "Laser Waterfall: Total Internal Reflection - High School",
+      "channel": "UA OSC",
+      "use": "A laser trapped in a stream of water by total internal reflection. A quick model of an optical fibre that students could set up themselves with a low-power laser."
+    }
+  ],
+  "alsoLabs": []
+}

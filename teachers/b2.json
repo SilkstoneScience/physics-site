@@ -1,0 +1,100 @@
+{
+  "topic": "B.2",
+  "page": "themes/b2.html",
+  "pageFingerprint": "961a803c97d0629c",
+  "summary": [
+    {
+      "heading": "Energy balance",
+      "html": "<ul><li>The whole topic is <strong>conservation of energy</strong>. A planet absorbs power from its star and radiates power to space.</li><li>Absorbing faster than it radiates: it warms, radiates more ($\\propto T^4$), until power in = power out. Then it is in <strong>radiative equilibrium</strong> at a constant temperature.</li><li>Method: write down the power absorbed and the power emitted, and set them equal.</li></ul>"
+    },
+    {
+      "heading": "Emissivity and albedo",
+      "html": "<div class=\"key\">$$e = \\frac{\\text{power radiated per unit area}}{\\sigma T^4} \\qquad \\alpha = \\frac{\\text{total scattered power}}{\\text{total incident power}}$$</div><ul><li>Power radiated: $P = e\\sigma AT^4$. $e$ has no units, $0 \\le e \\le 1$; $e = 1$ for a black body (less than 1: a \"grey body\"). A good emitter is also a good absorber.</li><li>Albedo: fraction of incoming radiation reflected or scattered; fraction absorbed $= 1 - \\alpha$. Snow and cloud high, forest and ocean low.</li><li>Earth's mean albedo is about 0.30. It varies daily with <strong>cloud cover</strong>, and with <strong>latitude</strong>, season and type of surface.</li></ul>"
+    },
+    {
+      "heading": "The solar constant and the S/4 rule",
+      "html": "<div class=\"key\">$$S = 1.36 \\times 10^3\\ \\text{W m}^{-2} \\qquad \\text{mean incoming intensity} = \\frac{S \\times \\pi R^2}{4\\pi R^2} = \\frac{S}{4}$$</div><ul><li>$S$: intensity of sunlight at the Earth's distance, above the atmosphere, on a surface at right angles to the rays (the Sun's apparent brightness from Earth).</li><li>The Earth intercepts sunlight over its shadow disc ($\\pi R^2$) but spreads it over its whole surface ($4\\pi R^2$) as it spins, so the mean is $S/4 \\approx 340\\ \\text{W m}^{-2}$.</li><li>Near the poles sunlight arrives at a low angle, is spread over a larger area and passes through more atmosphere, so the intensity on the ground is lower.</li></ul>"
+    },
+    {
+      "heading": "Equilibrium temperature of a planet",
+      "html": "<div class=\"key\">$$(1 - \\alpha)\\frac{S}{4} = e\\sigma T^4$$</div><ul><li>Left: mean power absorbed per square metre. Right: power emitted per square metre ($e = 1$ for a black body).</li><li>With no greenhouse effect this gives about 255 K (−18 °C) for the Earth; the real mean is about 288 K.</li><li>A simple way to include the atmosphere: an <strong>effective emissivity</strong> below 1 for the Earth.</li></ul>"
+    },
+    {
+      "heading": "The greenhouse effect and greenhouse gases",
+      "html": "<ul><li>The Sun (about 5800 K) emits mostly visible and near-infrared light, peaking near 500 nm, and the atmosphere is almost transparent to it. The surface (about 288 K) emits infrared, peaking near 10 µm.</li><li>Greenhouse gases absorb much of this infrared and re-emit it <strong>in all directions</strong>; part returns to the surface, which settles at a higher temperature.</li><li>The natural effect keeps the Earth about 33 K warmer and is essential for life. (A real greenhouse works mainly by stopping convection.)</li><li>Main greenhouse gases, each with natural and human sources: <strong>H<sub>2</sub>O</strong> (evaporation; largest natural contribution, and a warmer atmosphere holds more), <strong>CO<sub>2</sub></strong> (respiration, volcanoes; burning fossil fuels, deforestation, cement), <strong>CH<sub>4</sub></strong> (wetlands; cattle, rice, landfill, gas leaks), <strong>N<sub>2</sub>O</strong> (soil bacteria; fertilisers). N<sub>2</sub> and O<sub>2</sub> hardly absorb infrared.</li></ul>"
+    },
+    {
+      "heading": "Why greenhouse gases absorb infrared",
+      "html": "<ul><li><strong>Resonance model:</strong> a molecule is atoms joined by springy bonds with natural frequencies in the infrared (about $10^{13}$–$10^{14}$ Hz). Infrared at a natural frequency drives the vibration at resonance and is absorbed strongly.</li><li><strong>Energy-level model:</strong> molecules have discrete vibrational and rotational energy levels. A photon is absorbed only if $E = hf$ matches a gap; infrared photons match, visible ones don't.</li><li>After absorbing, the molecule re-emits infrared in a random direction or shares the energy with other molecules in collisions (warming the air).</li><li>The two models agree (natural frequency ↔ energy gap), but only the energy-level model explains why just certain sharp frequencies are absorbed.</li></ul>"
+    },
+    {
+      "heading": "Surface–atmosphere flows and the enhanced greenhouse effect",
+      "html": "<ul><li>Two-system model: the surface and the atmosphere are each in equilibrium when energy in = energy out. Exam problems give the flows (in $\\text{W m}^{-2}$) and ask you to balance them.</li><li>More greenhouse gas: less infrared escapes directly, more returns, and the surface warms to a new, higher equilibrium.</li><li>The <strong>enhanced greenhouse effect</strong> is the strengthening of the natural effect by human activity; the main cause is <strong>burning fossil fuels</strong>. CO<sub>2</sub> has risen from about 280 ppm to over 420 ppm, and the mean surface temperature by more than 1 °C since the late 1800s.</li><li>Feedbacks: more water vapour, lower albedo as ice melts, methane from thawing permafrost.</li><li>Consequences: warmer oceans and air, sea-level rise (melting land ice, thermal expansion), extreme weather, changed rainfall, ocean acidification. Reductions: renewable and nuclear electricity, efficiency, electric transport, forests, carbon capture.</li><li>A simple step-by-step model (like a bath with a tap and a leak) reaches an equilibrium and shows why the response takes time.</li></ul>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Using $S$ instead of $S/4$, or $\\alpha S$ instead of $(1 - \\alpha)S$ for the absorbed power.</li><li>Mixing up albedo (reflecting incoming sunlight) and emissivity (emitting compared with a black body).</li><li>Saying greenhouse gases trap sunlight. They absorb the Earth's infrared.</li><li>Saying the infrared is re-emitted downwards. It goes in all directions.</li><li>Confusing the greenhouse effect with the ozone hole, or calling the natural effect bad.</li><li>Forgetting the fourth root, or using °C in $\\sigma T^4$.</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Models": [
+      "The single-temperature model predicts −18 °C; the two-system model gets close to 15 °C. What did the better model add, and what does it still leave out?",
+      "Why might a scientist keep teaching the simple model even though supercomputer models exist?"
+    ],
+    "Evidence": [
+      "Foote's cylinders and Tyndall's measurements were small lab experiments. How do we get from a lab result to a claim about the whole planet?",
+      "Which is stronger evidence for human-caused warming: the Mauna Loa CO2 record, ice cores, or the physics of infrared absorption? Can any one of them stand alone?"
+    ],
+    "Shared endeavour": [
+      "IPCC reports are reviewed by thousands of scientists, and their Summaries for Policymakers are approved line by line by governments. Does that process make the conclusions more reliable, or more cautious?",
+      "Eunice Foote's work was largely forgotten for over a century. What does that tell us about who gets credit in science?"
+    ],
+    "Global impact": [
+      "The countries that emitted least are often hit hardest. Is this a question physics can help answer, or only describe?",
+      "Ask students for one decision in their own lives that the physics on this page could inform."
+    ]
+  },
+  "oracy": {
+    "activity": "Structured debate",
+    "html": "<p>Structured debate (two teams, the rest as judges, 15 minutes): opening statements, rebuttals, then a vote. Motion: \"Raising the Earth's albedo, for example with reflective roofs, is a better answer to the enhanced greenhouse effect than cutting carbon dioxide emissions.\"</p><ul><li>Our main argument is …</li><li>The other team claimed …, but …</li><li>The evidence that supports this is …</li></ul><p>Listen for: a higher albedo means less of the incoming solar radiation is absorbed, but it does nothing about the extra infrared radiation absorbed and re-emitted by greenhouse gases.</p>"
+  },
+  "tokPrompts": {
+    "When scientists disagree, how do we decide?": [
+      "Separate the climate claims scientists agree on (CO2 is rising, it absorbs infrared, the Earth is warming) from those still debated (how much, how fast). Why does the public often hear only the debate?",
+      "Is a consensus of experts a reason to believe something, or only a reason to take it seriously?"
+    ],
+    "How far can we trust a model of the future?": [
+      "Climate models can be run on past data (\"hindcasting\"). Does matching the past give us confidence about the future?",
+      "Weather forecasts fail after about ten days, yet climate projections reach decades ahead. Why isn't that a contradiction?"
+    ],
+    "Is a simple model wrong, or just incomplete?": [
+      "Compare the resonance and energy-level models side by side. What can each explain that the other can't, or explains less clearly?",
+      "Is there such a thing as the \"true\" model, or only models that are better for a purpose?"
+    ],
+    "Who should decide what to do?": [
+      "Draw a line between \"physics can tell us\" and \"people must decide\" for one policy (a carbon tax, a ban on petrol cars). Where does the line fall?",
+      "Should scientists campaign for particular policies, or does that risk their credibility?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "sTvqIijqvTg",
+      "title": "How Do Greenhouse Gases Actually Work?",
+      "channel": "MinuteEarth",
+      "use": "Why CO2 and water vapour absorb infrared but N2 and O2 don't, in a few minutes. Use it to introduce section 8 and the two absorption models."
+    },
+    {
+      "youtube": "Ztmo_SCNEII",
+      "title": "Get to Know: Eunice Newton Foote",
+      "channel": "Science Museum of Virginia",
+      "use": "The 1856 experiment behind the Evidence NoS idea, and the question of who gets credit. Good for the Shared endeavour discussion."
+    },
+    {
+      "youtube": "G4H1N_yXBiA",
+      "title": "Causes and Effects of Climate Change | National Geographic",
+      "channel": "National Geographic",
+      "use": "A short overview of the enhanced greenhouse effect and its consequences, to start section 10 or the Global impact discussion."
+    }
+  ],
+  "alsoLabs": []
+}

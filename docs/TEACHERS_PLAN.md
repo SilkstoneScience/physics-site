@@ -1,6 +1,6 @@
 # For Teachers: revision-sheet builder (plan)
 
-Status: **A.1 trial published (November 2026)**, marked "In development" (tag on the page and its card, plus a work-in-progress notice). Linked from a **home-page card only** ("For teachers"); teacher's decision: no main-menu item yet. The About page's copyright section says sheets may be copied for classroom use. The A.1 summary was checked against the OCR'd Kirk study guide (text in the reference cache), adding five points. Files: `teachers/index.html`, `teachers/index.json` (the subtopics on offer), `teachers/a1.json`, `js/teachers.js`, `css/teachers.css`, `tools/check-teachers.mjs` (called from `tools/check.mjs`); teacher videos are added to the weekly link check. `?print=student` / `?print=teacher` shows a sheet in print layout (used to test the PDFs with headless Edge).
+Status: **all 24 subtopics built (November 2026)**, with an SL/HL level choice (see section 6d); still marked "In development" (tag on the page and its card, plus a work-in-progress notice). Linked from a **home-page card only** ("For teachers"); teacher's decision: no main-menu item yet. The About page's copyright section says sheets may be copied for classroom use. The A.1 summary was checked against the OCR'd Kirk study guide (text in the reference cache), adding five points. Files: `teachers/index.html`, `teachers/index.json` (the subtopics on offer), `teachers/a1.json`, `js/teachers.js`, `css/teachers.css`, `tools/check-teachers.mjs` (called from `tools/check.mjs`); teacher videos are added to the weekly link check. `?print=student` / `?print=teacher` shows a sheet in print layout (used to test the PDFs with headless Edge).
 ## 1. What it is
 
 A page, `teachers/index.html`, where any teacher picks **one subtopic** (A.1, A.2, …; no combining topics) and builds:
@@ -51,6 +51,20 @@ Each teacher file stores a **fingerprint** of its topic page's text (a short cod
 - **The teacher key is public** (a static site can't hide it). Accepted: the mark schemes are already visible in the question bank.
 - **Extended Essay:** removed from the main menu, added as a card on the Experimental Programme landing page (`experimental/index.html`); the home-page card stays. `ee/index.html` keeps its name.
 - **Still to decide:** whether "For teachers" goes in the main menu or is only a home-page card.
+
+## 6d. SL and HL (November 2026)
+
+Teacher's decision: the builder has a **Level** choice. "SL and HL" (the default) shows everything, with HL notes, worked examples and questions tagged HL; "SL only" leaves out all HL content. HL-only subtopics (`hl: true` in `window.SYLLABUS`) are always HL, and the choice is locked. What counts as HL:
+- revision summary: an entry with `"hl": true`, or a part with `class="hl-only"` (written `<li class="hl-only"><span class="tag hl">HL</span> …</li>`); HL-only topics need no marks (the checker warns if they have any, or if a topic with no HL content has some);
+- worked examples: those inside the page's `div.hl-zone`, or with an HL tag in their heading;
+- questions, concept challenges and big questions: `"level": "HL"`.
+The level is kept in the page address (`level=SL`).
+
+**How A.2–E.5 were written:** one drafting helper per theme (from the topic page, checked against the guide's Understandings and the Kirk study guide as a checklist only; videos confirmed with YouTube oEmbed), then an independent reviewer per theme or two (physics, HL marks, 2028 tags, wording copied from Kirk, history in the prompts). Every fix the reviewers proposed was applied; the page fingerprints were recorded after review.
+
+## 6e. Oracy activity (November 2026)
+
+Teacher's request: each teacher file has an `oracy` activity for the teacher notes (tick box "Oracy activity", on by default; it never appears on the student sheet). About 60–90 words: the structure and timing (ABC discussion, opinion line, think–pair–share, explain it to a younger student, hot seat, odd one out, talk tokens, structured debate; varied across topics), a physics claim worth arguing over (SL content, so it suits SL sheets), 2–3 sentence starters, and "Listen for:" what a strong answer includes. Several restate a concept challenge for the topic, which suits a sheet that uses that challenge as its hook.
 
 ## 6b. Essential skills sheets (agreed, built LATER)
 

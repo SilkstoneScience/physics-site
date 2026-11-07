@@ -1,0 +1,100 @@
+{
+  "topic": "A.2",
+  "page": "themes/a2.html",
+  "pageFingerprint": "aee8e6555a0ca7c6",
+  "summary": [
+    {
+      "heading": "Forces and free-body diagrams",
+      "html": "<ul><li>A <strong>force</strong> is an interaction between two bodies (a push or a pull). It is a vector, measured in newtons (N).</li><li>A <strong>free-body diagram</strong> shows one body and only the forces acting <em>on</em> it, as labelled arrows (length shows size). Labels: $F_g$ or $mg$, $F_N$, $F_f$, $T$, $F_d$, $F_b$.</li><li>Weight acts from the centre of mass, straight down. The normal force is perpendicular to the surface; friction is parallel to it.</li><li>The <strong>resultant</strong> force is the vector sum. In 2D, resolve every force into perpendicular components, add each direction, then combine.</li></ul><div class=\"key\">$$F_x = F\\cos\\theta \\qquad F_y = F\\sin\\theta$$</div><ul><li>On a slope, use axes along and perpendicular to the slope: the weight has components $mg\\sin\\theta$ down the slope and $mg\\cos\\theta$ into it.</li><li>Three balanced forces form a closed triangle of forces (sine or cosine rule if it has no right angle).</li></ul>"
+    },
+    {
+      "heading": "Newton's three laws",
+      "html": "<ul><li><strong>First law:</strong> a body stays at rest or at constant velocity unless a resultant external force acts. A force is needed to <em>change</em> motion, not to keep it going. Mass measures <strong>inertia</strong>.</li><li><strong>Translational equilibrium:</strong> zero resultant force, so $\\sum F_x = 0$ and $\\sum F_y = 0$ (at rest or at constant velocity).</li><li><strong>Second law:</strong> the resultant force is proportional to the rate of change of momentum. For constant mass:</li></ul><div class=\"key\">$$F = ma$$</div><ul><li>$F$ is the <em>resultant</em> force; $a$ is in the same direction. 1 N gives 1 kg an acceleration of 1 $\\text{m s}^{-2}$.</li><li>Lift: scales read the normal force, $F_N = m(g + a)$ accelerating up, $m(g - a)$ accelerating down.</li><li><strong>Third law:</strong> if A exerts a force on B, B exerts an equal and opposite force on A. The pair act on <strong>different bodies</strong> (so never cancel), are the <strong>same type</strong> of force, and act for the same time.</li><li>Weight and the normal force on a book on a table are <em>not</em> a third-law pair (same body, different types). The pairs are Earth–book (gravitational) and table–book (contact).</li></ul>"
+    },
+    {
+      "heading": "Contact and field forces",
+      "html": "<table class=\"notes\"><tr><th>Force</th><th>Key facts</th></tr><tr><td>Normal $F_N$</td><td>perpendicular component of the contact force; adjusts its size; not always $mg$</td></tr><tr><td>Tension $T$</td><td>pulls along a string, never pushes; same throughout a light string over a frictionless pulley</td></tr><tr><td>Elastic $F_H$</td><td>$F_H = -kx$ (Hooke's law, up to the limit of proportionality); $k$ in $\\text{N m}^{-1}$</td></tr><tr><td>Friction $F_f$</td><td>static: $F_f \\le \\mu_s F_N$; dynamic: $F_f = \\mu_d F_N$; usually $\\mu_d &lt; \\mu_s$; no units</td></tr><tr><td>Viscous drag $F_d$</td><td>$F_d = 6\\pi\\eta r v$ for a small sphere moving slowly (non-turbulent flow); $\\eta$ in Pa s</td></tr><tr><td>Buoyancy $F_b$</td><td>$F_b = \\rho V g$: $\\rho$ of the <em>fluid</em>, $V$ the volume <em>displaced</em></td></tr><tr><td>Weight $F_g$</td><td>$F_g = mg$; mass (kg) is the same everywhere, weight (N) depends on $g$</td></tr><tr><td>Electric $F_e$, magnetic $F_m$</td><td>recognise and include in free-body diagrams only (calculated in Theme D)</td></tr></table><ul><li>Static friction is only as big as it needs to be: compare the push with $\\mu_s F_N$ to decide whether something moves.</li><li>Measuring $\\mu_s$: tilt a board until the block just slips, then $\\mu_s = \\tan\\theta$. The angle for sliding at constant velocity gives $\\mu_d$.</li><li>Buoyancy comes from the pressure difference between the bottom and top of a body (pressure rises with depth). A floating body displaces fluid until $F_b = mg$; a body denser than the fluid sinks.</li><li>A sphere falling through oil reaches terminal speed when $F_d + F_b = mg$ (a way to measure $\\eta$).</li></ul>"
+    },
+    {
+      "heading": "Momentum and impulse",
+      "html": "<div class=\"key\">$$p = mv \\qquad F = \\frac{\\Delta p}{\\Delta t} \\qquad J = F\\Delta t = \\Delta p$$</div><ul><li>Momentum is a vector, in $\\text{kg m s}^{-1}$ (or N s).</li><li>$F = ma$ assumes constant mass; $F = \\dfrac{\\Delta p}{\\Delta t}$ also works when the mass changes (sand onto a conveyor belt, water from a hose, a rocket): $F = v\\dfrac{\\Delta m}{\\Delta t}$.</li><li><strong>Impulse</strong> = average resultant force × contact time = change in momentum = <strong>area under the force–time graph</strong>.</li><li>Rebounds: use signs. A ball hitting a wall at 20 and leaving at 15 $\\text{m s}^{-1}$ has $\\Delta v = 35$, not 5.</li><li><strong>Safety:</strong> for the same $\\Delta p$, a longer stopping time means a smaller average force (airbags, crumple zones, helmets, crash mats, bending your knees).</li><li><strong>Rockets:</strong> exhaust is pushed backwards, so (third law) the gas pushes the rocket forwards; no air is needed. A jet engine's thrust is $\\dfrac{\\Delta m}{\\Delta t}(v - u)$.</li></ul>"
+    },
+    {
+      "heading": "Conservation of momentum, collisions and explosions",
+      "html": "<ul><li><strong>The total momentum of a system is constant if no resultant external force acts.</strong> In a collision the forces between the bodies are a third-law pair acting for the same time, so their impulses are equal and opposite.</li></ul><table class=\"notes\"><tr><th>Type</th><th>Momentum</th><th>Kinetic energy</th></tr><tr><td>Elastic</td><td>conserved</td><td>conserved</td></tr><tr><td>Inelastic</td><td>conserved</td><td>decreases (thermal, sound, deformation)</td></tr><tr><td>Perfectly inelastic</td><td>conserved</td><td>largest decrease; bodies stick together</td></tr><tr><td>Explosion</td><td>conserved (often zero total)</td><td>increases (from chemical or elastic energy)</td></tr></table><ul><li>Total energy is always conserved; only kinetic energy can change.</li><li>$E_k = \\dfrac{p^2}{2m}$: when two bodies fly apart from rest with equal and opposite momenta, the <strong>lighter</strong> one gets more kinetic energy (bullet and gun).</li><li>Draw before-and-after sketches with a positive direction. A negative answer means the opposite direction.</li><li>SL: quantitative collisions and explosions in one dimension.</li><li class=\"hl-only\"><span class=\"tag hl\">HL</span> Collisions in <strong>two dimensions</strong>: momentum is conserved separately in each direction. Resolve every momentum into $x$ and $y$ components. Check that $E_k$ hasn't increased without an energy source.</li></ul>"
+    },
+    {
+      "heading": "Circular motion",
+      "html": "<ul><li>Constant speed in a circle is still <strong>acceleration</strong>, because the direction of the velocity changes. Velocity is along the tangent; acceleration and resultant force point to the <strong>centre</strong> (centripetal).</li><li>Period $T$, frequency $f = 1/T$. Angles in <strong>radians</strong>: $s = r\\theta$, $2\\pi$ rad $= 360°$. Angular velocity $\\omega = \\dfrac{\\Delta\\theta}{\\Delta t} = \\dfrac{2\\pi}{T} = 2\\pi f$, in $\\text{rad s}^{-1}$.</li></ul><div class=\"key\">$$v = \\frac{2\\pi r}{T} = \\omega r$$ $$a = \\frac{v^2}{r} = \\omega^2 r = \\frac{4\\pi^2 r}{T^2} \\qquad F = \\frac{mv^2}{r}$$</div><ul><li><span class=\"tag y2028\">New for 2028</span> The guide links $\\omega$ to the linear <strong>velocity</strong>: $v = \\omega r$ gives its size, and its direction is along the tangent.</li><li>Every point on a rotating rigid body has the same $\\omega$; points further out have a larger $v$.</li><li>Centripetal force is <strong>not a new force</strong>: it is the resultant towards the centre, provided by friction (car on a flat bend), tension (ball on a string), gravity (orbit), the magnetic force, or a component of lift or normal force (banking: describe only).</li><li>It is perpendicular to the velocity, so it changes direction, not speed, and does no work. If it stops, the body moves off along the <strong>tangent</strong>.</li><li><strong>Vertical circle</strong> (analyse top and bottom only): top $T + mg = \\dfrac{mv^2}{r}$, slowest speed $v_{\\min} = \\sqrt{gr}$ when $T = 0$; bottom $T - mg = \\dfrac{mv^2}{r}$, tension largest.</li></ul>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Thinking a force is needed to keep something moving.</li><li>Calling weight and the normal force a third-law pair.</li><li>Assuming $F_N = mg$ (not on a slope, in an accelerating lift, or with a rope pulling partly upwards).</li><li>Using $F_f = \\mu_s F_N$ for something that isn't sliding: static friction only matches the push, up to that limit.</li><li>Forgetting the sign change in rebounds.</li><li>Saying kinetic energy is conserved in every collision.</li><li>Drawing an outward \"centrifugal force\", or adding centripetal force as an extra force on a free-body diagram.</li><li>Using degrees in $v = \\omega r$, or forgetting to convert rpm to $\\text{rad s}^{-1}$.</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Theories and paradigm shifts": [
+      "Ask students to argue Aristotle's side: in everyday life, things do stop when you stop pushing. What had to be imagined away (friction) before Newton's first law made sense?",
+      "One set of laws explained falling apples and planetary orbits. Why is a theory that unifies very different things so convincing?"
+    ],
+    "Falsification": [
+      "Newton's laws fail near the speed of light and at the atomic scale, yet engineers still use them. Has the theory been falsified, or has its range been mapped?",
+      "What sort of result would make you doubt $F = ma$ in a school lab, and how would you check it wasn't experimental error first?"
+    ],
+    "A shared endeavour": [
+      "List what Newton took from Galileo, Kepler and Descartes. Which parts of the three laws were genuinely new?",
+      "Why do we name laws after one person? Would \"the laws of motion\" be a fairer name?"
+    ],
+    "Models and impact": [
+      "Point particles, frictionless surfaces, light strings: pick one worked example and say which simplification matters most to the answer.",
+      "Crumple zones and airbags come straight from $F = \\Delta p / \\Delta t$. Ask students for another design that uses the same idea (trainers, packaging, climbing ropes)."
+    ]
+  },
+  "oracy": {
+    "activity": "ABC discussion",
+    "html": "<p>ABC discussion (threes, 10 minutes): each student in turn agrees with, builds on or challenges the last point. Claim: \"When a tractor pulls a trailer, Newton's third law says the two pulls are equal and opposite, so they cancel and nothing can start moving.\"</p><ul><li>I agree with … because …</li><li>Building on that, …</li><li>I'd challenge that, because …</li></ul><p>Listen for: a third-law pair acts on different bodies, so it can't cancel; the trailer accelerates because the forces on it are unbalanced, and the ground's friction pushes the tractor forwards.</p>"
+  },
+  "tokPrompts": {
+    "Can a law be useful without being true?": [
+      "Spacecraft are steered with Newton's laws even though relativity is more accurate. Is \"true enough for this job\" a kind of truth?",
+      "Is a scientific law a description of what nature does, or a rule nature must obey?"
+    ],
+    "Who owns a discovery?": [
+      "Newton's \"shoulders of giants\" phrase was itself borrowed. What does that suggest about how ideas travel?",
+      "How should credit be shared today, when a discovery paper can have thousands of authors?"
+    ],
+    "Can we know the future?": [
+      "If we knew every force and position exactly, could we predict everything? What gets in the way in practice (measurement uncertainty, chaos, quantum physics)?",
+      "Weather forecasts use Newton's laws. Why do they become unreliable after about a week?"
+    ],
+    "Should we trust our senses?": [
+      "In a car turning a corner you feel pushed outwards. Ask students to describe what is really happening from the point of view of someone standing on the pavement.",
+      "Can a feeling be evidence? When should physics overrule experience, and when should experience make us question the physics?"
+    ],
+    "Can we know what we can't perceive?": [
+      "List things we accept but can't sense directly (the Earth's spin, air pressure, magnetic fields). What evidence convinces us of each?",
+      "Is knowledge from an instrument (Foucault's pendulum, a data logger) more or less reliable than knowledge from our senses?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "C_r5UJrxcck",
+      "title": "1959 Chevrolet Bel Air vs. 2009 Chevrolet Malibu IIHS crash test",
+      "channel": "IIHS",
+      "use": "A short crash test comparing an old car with a modern one. Use it to discuss impulse: how crumple zones, airbags and seat belts lengthen the stopping time and reduce the average force on the occupants."
+    },
+    {
+      "youtube": "dCF--YOjiOw",
+      "title": "STEMonstrations: Newton's Third Law of Motion",
+      "channel": "NASA Johnson",
+      "use": "An astronaut on the ISS shows equal and opposite force pairs with no friction or weight to confuse things. Ask students to name each pair and say which body each force acts on."
+    },
+    {
+      "youtube": "Zulw5bQ18Kk",
+      "title": "Demonstrating Why Water Stays in a Bucket Revolving in a Vertical Circle",
+      "channel": "Flipping Physics",
+      "use": "A vertical-circle demonstration with a different explanation (inertia and the radius of the water's free-fall path). Compare it with the page's condition $mg \\le mv^2/r$ at the top."
+    }
+  ],
+  "alsoLabs": []
+}

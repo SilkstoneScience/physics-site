@@ -1,0 +1,100 @@
+{
+  "topic": "A.5",
+  "page": "themes/a5.html",
+  "pageFingerprint": "98865d3a57abc782",
+  "summary": [
+    {
+      "heading": "Reference frames and Galilean relativity",
+      "html": "<ul><li>A <strong>reference frame</strong> is a coordinate system with rulers and synchronised clocks that gives each <strong>event</strong> (something at one place and one instant) a position $x$ and time $t$.</li><li>An <strong>inertial frame</strong> is not accelerating; Newton's first law holds in it. Special relativity deals only with inertial frames.</li><li>Frame S′ moves at constant velocity $v$ along $x$ relative to S; clocks start at $t = t' = 0$ when the origins pass.</li><li>Galileo and Newton assumed time is <strong>absolute</strong> and lengths are the same for everyone:</li></ul><div class=\"key\">$$x' = x - vt \\qquad t' = t \\qquad u' = u - v$$</div><ul><li><strong>Galilean relativity:</strong> both frames measure the same acceleration, so Newton's laws are the same in all inertial frames. No mechanics experiment inside a smoothly moving, closed train reveals its speed.</li></ul>"
+    },
+    {
+      "heading": "The problem with light and Einstein's postulates",
+      "html": "<ul><li>Maxwell's theory fixes the speed of light, $c = \\dfrac{1}{\\sqrt{\\mu_0\\varepsilon_0}}$, without saying relative to what. Galilean addition would give different speeds for different observers.</li><li>The <strong>Michelson–Morley experiment</strong> (1887) looked for the Earth's motion through the \"ether\" and found <strong>no change</strong> in the speed of light.</li></ul><div class=\"key\"><strong>1.</strong> The laws of physics are the same in all inertial reference frames.<br><strong>2.</strong> The speed of light in a vacuum is the same for all inertial observers, whatever the motion of the source or observer.</div><ul><li>So distances and times must differ between frames. There is no ether and no absolute frame.</li></ul>"
+    },
+    {
+      "heading": "Lorentz transformations and velocity addition",
+      "html": "<div class=\"key\">$$x' = \\gamma(x - vt) \\qquad t' = \\gamma\\left(t - \\frac{vx}{c^2}\\right)$$ $$\\gamma = \\frac{1}{\\sqrt{1 - \\dfrac{v^2}{c^2}}}$$</div><ul><li>Derivation not required. For intervals, use $\\Delta x$ and $\\Delta t$. To go back from S′ to S, swap the primes and change the sign of $v$.</li><li>$\\gamma \\ge 1$, and $\\gamma \\to \\infty$ as $v \\to c$. Useful values: $0.60c \\to 1.25$, $0.80c \\to 1.67$, $0.866c \\to 2.0$.</li><li>At everyday speeds $\\gamma \\approx 1$, so the Galilean equations are an excellent approximation.</li></ul><div class=\"key\">$$u' = \\frac{u - v}{1 - \\dfrac{uv}{c^2}}$$</div><ul><li>Use signs (+ in the $+x$ direction). Two craft each moving at $0.60c$ towards each other (Earth frame): each measures the other approaching at $0.88c$, not $1.20c$. If $u = c$, then $u' = c$: no result exceeds $c$.</li></ul>"
+    },
+    {
+      "heading": "The space-time interval",
+      "html": "<div class=\"key\">$$(\\Delta s)^2 = (c\\Delta t)^2 - (\\Delta x)^2$$</div><ul><li>$(\\Delta s)^2$ is <strong>invariant</strong>: the same in every inertial frame, even though $\\Delta t$ and $\\Delta x$ differ.</li><li>$(\\Delta s)^2 &gt; 0$: a signal slower than light can link the events, so one could cause the other and everyone agrees on their order.</li><li>$(\\Delta s)^2 = 0$: the events can be linked only by light.</li><li>$(\\Delta s)^2 &lt; 0$: nothing can travel between them, and observers can disagree about which came first.</li></ul>"
+    },
+    {
+      "heading": "Time dilation and length contraction",
+      "html": "<div class=\"key\">$$\\Delta t = \\gamma\\,\\Delta t_0 \\qquad L = \\frac{L_0}{\\gamma}$$</div><ul><li><strong>Proper time</strong> $\\Delta t_0$: measured in the frame where both events happen <strong>at the same place</strong> (by a clock present at both). It is the <strong>shortest</strong> time; a moving clock runs slow.</li><li><strong>Proper length</strong> $L_0$: measured in the object's <strong>rest frame</strong>. It is the <strong>longest</strong> length; moving objects are shorter, along the motion only.</li><li>The two effects go together: Earth says the astronaut's clock runs slow; the astronaut says the distance is contracted. Both agree on what the astronaut's clock reads on arrival.</li><li><strong>Twin paradox:</strong> the travelling twin returns younger. The situation isn't symmetrical, because only the traveller changes inertial frame.</li><li>Derivations not required (the light clock is an optional illustration).</li></ul>"
+    },
+    {
+      "heading": "Simultaneity and space-time diagrams",
+      "html": "<ul><li><strong>Relativity of simultaneity:</strong> events at the same time but different places in one frame are not simultaneous in a frame moving relative to it (from the $\\dfrac{vx}{c^2}$ term). Events at the same place and time are simultaneous for everyone.</li><li><strong>Space-time diagram:</strong> $x$ horizontal, $ct$ vertical. A body's path is its <strong>world line</strong>: vertical at rest, straight and tilted at constant velocity, 45° for light.</li></ul><div class=\"key\">$$\\tan\\theta = \\frac{v}{c}$$</div><ul><li>$\\theta$ is the angle between the world line and the $ct$ axis.</li><li>For S′: the $ct'$ axis is tilted by $\\theta$ from $ct$; the $x'$ axis is tilted up by the same $\\theta$ from $x$. Both tilt towards the 45° light line.</li><li>Read S′ coordinates with lines <strong>parallel</strong> to the $x'$ and $ct'$ axes. Events on a line parallel to the $x'$ axis are simultaneous in S′.</li><li>The scales on the tilted axes differ from those on $x$ and $ct$; they are fixed by lines of constant interval (hyperbolas). Time dilation, length contraction and simultaneity can all be shown on the diagram.</li></ul>"
+    },
+    {
+      "heading": "Evidence: muon decay",
+      "html": "<ul><li>Muons are made about 10 km up by cosmic rays and travel at about $0.995c$ ($\\gamma \\approx 10$). Mean lifetime at rest: about 2.2 µs.</li><li>Without relativity they would travel only about 660 m on average, so very few should reach the ground. Many do.</li><li><strong>Earth's frame:</strong> time dilation stretches the lifetime to about 22 µs (about 6.6 km of travel).</li><li><strong>Muon's frame:</strong> the lifetime is 2.2 µs, but the atmosphere is length-contracted to about 1 km.</li><li>Both views predict the same count, confirmed by measurements at different altitudes: evidence for time dilation <em>and</em> length contraction.</li></ul>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Getting proper time the wrong way round (it is the shortest, measured where both events are at the same place).</li><li>Getting proper length the wrong way round (it is the longest, measured at rest).</li><li>Adding velocities the Galilean way at high speed, giving answers above $c$.</li><li>Forgetting the signs in the velocity addition formula for objects moving towards each other.</li><li>Mixing units in $\\dfrac{vx}{c^2}$ (watch out for µs).</li><li>Thinking only one observer is \"right\": they agree on $c$ and on the interval.</li><li>Drawing the $x'$ axis tilted downwards.</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Theories": [
+      "Show that $\\gamma \\approx 1$ for a jet airliner. Did special relativity overthrow Newton, or show where Newton works?",
+      "Why might scientists prefer a new theory that contains the old one as a special case?"
+    ],
+    "Falsification": [
+      "Michelson and Morley found nothing. Why was a null result so important, and why might it be hard to publish a null result today?",
+      "Some physicists tried to save the ether (for example with length contraction of the apparatus). When does rescuing an idea stop being reasonable?"
+    ],
+    "Models": [
+      "Einstein started from two postulates and deduced the rest. How is that different from building a model from measurements, as in A.1?",
+      "Does drawing relativity as geometry (space-time diagrams) give us new knowledge, or just a new picture of the same knowledge?"
+    ],
+    "Evidence": [
+      "GPS satellites must correct for relativity every day. Is technology that works stronger evidence than a laboratory experiment?",
+      "The muon result can be explained in either frame. Does having two explanations make the evidence stronger or weaker?"
+    ]
+  },
+  "oracy": {
+    "activity": "Think–pair–share",
+    "html": "<p>Think–pair–share (1 minute alone, 3 minutes in pairs, then pairs report to the class). Claim: \"Two spaceships pass at high speed, and each crew measures the other's clocks running slow. They can't both be right, so one ship must really be the moving one.\"</p><ul><li>We think … because …</li><li>The postulate that matters here is …</li><li>The strongest objection to our view is …</li></ul><p>Listen for: both are right; no inertial frame is preferred, and comparing distant clocks depends on simultaneity, which is relative.</p>"
+  },
+  "tokPrompts": {
+    "Can reasoning alone tell us about the world?": [
+      "Einstein predicted time dilation before it was measured. Would students have believed it without the muon and clock experiments?",
+      "Compare with mathematics: what is the difference between a proof and a physical prediction?"
+    ],
+    "Is common sense a reliable guide?": [
+      "List \"obvious\" ideas from earlier topics that turned out wrong (heavier things fall faster, motion needs a force, time is absolute). What do they have in common?",
+      "If common sense comes from slow, everyday experience, should we expect it to work at $0.99c$ or inside atoms?"
+    ],
+    "What does it mean to say something \"really\" happened first?": [
+      "Use the lightning-and-train example: is there a single correct answer about which strike came first? What would \"correct\" even mean?",
+      "Why does it matter that observers always agree on the order of events that could be cause and effect?"
+    ],
+    "Why did it take a paradigm shift?": [
+      "Lorentz had the equations; Einstein changed what they meant. Is an interpretation part of scientific knowledge, or just a way of talking about it?",
+      "What might have made it hard for experienced physicists in 1905 to give up absolute time?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "rVzDP8SMhPo",
+      "title": "Impossible Muons",
+      "channel": "minutephysics",
+      "use": "A short animated explanation of why cosmic-ray muons reach the ground, in both the Earth's frame and the muon's frame. Use it after the muon worked example or as revision."
+    },
+    {
+      "youtube": "hTxWAQGgeQw",
+      "title": "Spacetime Diagrams | Special Relativity Ch. 2",
+      "channel": "minutephysics",
+      "use": "An introduction to space-time diagrams and world lines (about 15 minutes). Pause to let students sketch the world lines before they appear."
+    },
+    {
+      "youtube": "noaGNuQCW8A",
+      "title": "Twin paradox: the real explanation (no math)",
+      "channel": "Fermilab",
+      "use": "Don Lincoln explains the twin paradox without equations, which suits the page's point that only the travelling twin changes inertial frame. Good as homework before a class discussion."
+    }
+  ],
+  "alsoLabs": []
+}

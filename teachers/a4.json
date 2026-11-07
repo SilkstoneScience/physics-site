@@ -1,0 +1,96 @@
+{
+  "topic": "A.4",
+  "page": "themes/a4.html",
+  "pageFingerprint": "4515e579a57f4024",
+  "summary": [
+    {
+      "heading": "Rigid bodies and torque",
+      "html": "<ul><li>A <strong>rigid body</strong> has size and shape but never deforms. It can <strong>translate</strong> (every point moves the same way) and <strong>rotate</strong> about an axis (every point turns through the same angle), or both (rolling).</li><li>For linear motion, treat the mass as concentrated at the <strong>centre of mass</strong> (at the centre of a uniform, symmetrical body; no calculation needed). A force through the centre of mass causes no rotation.</li></ul><div class=\"key\">$$\\tau = Fr\\sin\\theta$$</div><ul><li>$r$ = distance from the axis to where the force acts; $\\theta$ = angle between the force and $r$. Equivalently, force × perpendicular distance to its line of action.</li><li>Unit: <strong>N m</strong> (never J: torque is not energy).</li><li>Largest when $F$ is perpendicular to $r$; zero when the line of action passes through the axis.</li><li>Torques have a <strong>sense</strong>: choose clockwise or anticlockwise as positive.</li><li>A <strong>couple</strong> (equal, opposite, non-collinear forces) gives no resultant force but a resultant torque: rotation without linear acceleration.</li></ul>"
+    },
+    {
+      "heading": "Equilibrium",
+      "html": "<ul><li>A rigid body is in equilibrium only if <strong>both</strong> conditions hold:</li></ul><div class=\"key\">$$\\sum F = 0 \\qquad \\sum \\tau = 0$$</div><ul><li>Rotational equilibrium: total clockwise torque = total anticlockwise torque, about <em>any</em> axis.</li><li>Take torques about a point an unknown force passes through, so it drops out. Then use $\\sum F = 0$ for the rest.</li><li>Include the weight of the beam or plank itself, acting at its centre.</li></ul>"
+    },
+    {
+      "heading": "Describing rotation",
+      "html": "<ul><li>Angular displacement $\\Delta\\theta$ (rad), angular velocity $\\omega = \\dfrac{\\Delta\\theta}{\\Delta t}$ ($\\text{rad s}^{-1}$), angular acceleration $\\alpha = \\dfrac{\\Delta\\omega}{\\Delta t}$ ($\\text{rad s}^{-2}$). Used with a sense, not as vectors.</li><li>A point at radius $r$: $v = \\omega r$ and tangential acceleration $a = \\alpha r$.</li><li>For <strong>constant</strong> $\\alpha$, the A.1 equations carry over:</li></ul><div class=\"key\">$$\\Delta\\theta = \\frac{\\omega_f + \\omega_i}{2}\\,t \\qquad \\omega_f = \\omega_i + \\alpha t$$ $$\\Delta\\theta = \\omega_i t + \\tfrac{1}{2}\\alpha t^2 \\qquad \\omega_f^2 = \\omega_i^2 + 2\\alpha\\Delta\\theta$$</div><ul><li>Graphs: gradient of $\\theta$–$t$ is $\\omega$; gradient of $\\omega$–$t$ is $\\alpha$, and its area is $\\Delta\\theta$.</li><li>Revolutions = $\\Delta\\theta / 2\\pi$. Always work in radians.</li></ul>"
+    },
+    {
+      "heading": "Moment of inertia and Newton's second law for rotation",
+      "html": "<div class=\"key\">$$I = \\sum mr^2 \\qquad \\tau = I\\alpha$$</div><ul><li>Moment of inertia ($\\text{kg m}^2$) measures resistance to changes in angular velocity. It depends on the mass <strong>and how it is distributed about the axis</strong>: doubling $r$ makes $I$ four times bigger.</li><li>Formulas for solid shapes are given when needed, e.g. ring $MR^2$, solid disc $\\tfrac{1}{2}MR^2$, solid sphere $\\tfrac{2}{5}MR^2$. A rod has a larger $I$ about its end than its centre.</li><li>An unbalanced torque gives an angular acceleration; $\\tau$ and $I$ must be about the same axis.</li><li>Mass on a string round a pulley: write $mg - T = ma$ for the mass, $TR = I\\alpha$ for the pulley, and link them with $a = \\alpha R$ (no slipping).</li></ul>"
+    },
+    {
+      "heading": "Angular momentum and angular impulse",
+      "html": "<div class=\"key\">$$L = I\\omega \\qquad \\Delta L = \\tau\\Delta t = \\Delta(I\\omega)$$</div><ul><li>Unit of $L$: $\\text{kg m}^2\\,\\text{s}^{-1}$.</li><li><strong>Conservation:</strong> total angular momentum is constant unless a resultant external torque acts.</li><li>If $I$ changes, $\\omega$ changes so that $I_1\\omega_1 = I_2\\omega_2$: skaters pull their arms in to spin faster, divers tuck, collapsing stars spin up into fast neutron stars.</li><li>Kinetic energy is <strong>not</strong> conserved: a skater pulling in her arms gains $E_k$ from the work her muscles do. Bodies that couple together (a disc dropped onto a turntable) lose $E_k$, like a perfectly inelastic collision.</li><li><strong>Angular impulse</strong> = area under the torque–time graph = change in angular momentum.</li></ul>"
+    },
+    {
+      "heading": "Rotational kinetic energy and rolling",
+      "html": "<div class=\"key\">$$E_k = \\tfrac{1}{2}I\\omega^2 = \\frac{L^2}{2I}$$</div><ul><li>Work done by a torque, $\\tau\\Delta\\theta$, changes the rotational kinetic energy.</li><li><strong>Rolling without slipping:</strong> $v = \\omega R$, and $E_k = \\tfrac{1}{2}mv^2 + \\tfrac{1}{2}I\\omega^2$.</li><li>Rolling down a slope, the lost $E_p$ is shared between translation and rotation, so a rolling body is slower than a frictionless sliding one. Larger $I$ for its mass and radius means slower: solid sphere beats solid cylinder beats hoop, whatever their masses and sizes.</li><li>Static friction makes rolling possible but does no work (the contact point is momentarily at rest).</li></ul>"
+    },
+    {
+      "heading": "Linear and rotational twins",
+      "html": "<table class=\"notes\"><tr><th>Linear</th><th>Rotational</th></tr><tr><td>$s$, $v$, $a$</td><td>$\\Delta\\theta$, $\\omega$, $\\alpha$</td></tr><tr><td>mass $m$</td><td>moment of inertia $I = \\sum mr^2$</td></tr><tr><td>force $F$</td><td>torque $\\tau = Fr\\sin\\theta$</td></tr><tr><td>$F = ma$</td><td>$\\tau = I\\alpha$</td></tr><tr><td>$p = mv$</td><td>$L = I\\omega$</td></tr><tr><td>$F\\Delta t = \\Delta p$</td><td>$\\tau\\Delta t = \\Delta L$</td></tr><tr><td>$E_k = \\frac{1}{2}mv^2 = \\frac{p^2}{2m}$</td><td>$E_k = \\frac{1}{2}I\\omega^2 = \\frac{L^2}{2I}$</td></tr></table>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Using the distance along the object instead of the perpendicular distance to the line of action (remember $\\sin\\theta$).</li><li>Writing torque in joules.</li><li>Forgetting the weight of the beam itself.</li><li>Checking only one equilibrium condition.</li><li>Using $r$ instead of $r^2$ in $I = \\sum mr^2$, or measuring $r$ from the wrong point.</li><li>Using degrees in $v = \\omega r$ or the rotational equations of motion.</li><li>Assuming kinetic energy is conserved when $I$ changes or bodies couple together.</li><li>Leaving out the rotational kinetic energy of a rolling body.</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Models": [
+      "When is the point-particle model good enough, and when do you need the rigid body? Try a thrown ball, a spinning top, a door and a planet.",
+      "The rigid-body model ignores bending. Ask students for a real object where that assumption fails (a diving board, a bridge, a golf club)."
+    ],
+    "Patterns": [
+      "Give students the linear column of the summary table and ask them to predict the rotational column before showing it.",
+      "Where does the analogy break down? (For example, $I$ depends on the axis chosen, but mass doesn't.)"
+    ],
+    "Global impact": [
+      "Flywheels store energy as $\\tfrac{1}{2}I\\omega^2$. Why would an engineer make the rim heavy and spin it fast?",
+      "Which everyday tools are levers designed for a large torque from a small force (spanners, scissors, door handles, bottle openers)?"
+    ]
+  },
+  "oracy": {
+    "activity": "Hot seat",
+    "html": "<p>Hot seat (whole class, 8 minutes): one student, the expert, answers the class's questions; swap experts every few questions. Situation: a spinning skater pulls her arms in and spins faster. Her angular momentum is conserved, yet her rotational kinetic energy increases. Where does the extra energy come from?</p><ul><li>My question for the expert is …</li><li>Could you explain why …?</li><li>What would happen if …?</li></ul><p>Listen for: $L = I\\omega$ stays constant as $I$ falls, and her muscles do work pulling her arms inwards.</p>"
+  },
+  "tokPrompts": {
+    "Is any model permanent?": [
+      "The point particle was \"replaced\" but is still used every day. Is a model ever truly discarded, or just given a smaller job?",
+      "Compare with other areas of knowledge: do historians or economists keep using older models in the same way?"
+    ],
+    "Does an analogy explain anything?": [
+      "Does knowing that $\\tau = I\\alpha$ looks like $F = ma$ help you understand rotation, or just remember the equation?",
+      "Can an analogy mislead? Ask students for an example from another subject where it did."
+    ],
+    "What does \"rigid\" mean?": [
+      "No real object is perfectly rigid. How would you decide whether a ruler, a car tyre or a skater counts as rigid for a given question?",
+      "Is knowledge built on an idealisation less certain than knowledge built on direct measurement?"
+    ],
+    "Who owns an idea?": [
+      "Archimedes' law of the lever is over 2000 years old and still in exams. What makes some ideas last so long?",
+      "If an idea is refined many times by many people, whose idea is the final version?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "2WZ1PZ7imrI",
+      "title": "Angular Momentum - Physics 101 / AP Physics 1 Review with Dianna Cowern",
+      "channel": "Physics Girl",
+      "use": "A short review of angular momentum and its conservation. Use it for revision, or set it before the lesson on $L = I\\omega$."
+    },
+    {
+      "youtube": "CHQOctEvtTY",
+      "title": "Rotational Inertia: The Race Between a Ring and a Disc",
+      "channel": "North Carolina School of Science and Mathematics",
+      "use": "A ring and a disc race down a ramp. Pause before the result and ask students to predict the winner using energy sharing between translation and rotation."
+    },
+    {
+      "youtube": "gjLk_72V9Bw",
+      "title": "NASA | What is a Pulsar?",
+      "channel": "NASA Goddard",
+      "use": "Pulsars are collapsed stars spinning many times a second. Ask students to explain the fast spin with conservation of angular momentum as the star's radius shrinks."
+    }
+  ],
+  "alsoLabs": []
+}

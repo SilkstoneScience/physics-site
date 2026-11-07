@@ -1,0 +1,96 @@
+{
+  "topic": "B.4",
+  "page": "themes/b4.html",
+  "pageFingerprint": "74223305b187da45",
+  "summary": [
+    {
+      "heading": "Systems, signs and the first law",
+      "html": "<ul><li><strong>Closed system</strong>: no mass in or out, but energy can transfer by heating or work. <strong>Isolated system</strong>: neither mass nor energy.</li><li>Clausius sign convention: $Q$ = net thermal energy <strong>supplied to</strong> the system (negative if it loses energy); $W$ = net work done <strong>by</strong> the system (positive when expanding, negative when compressed).</li></ul><div class=\"key\">$$Q = \\Delta U + W$$</div><ul><li>The first law is conservation of energy for a closed system.</li></ul>"
+    },
+    {
+      "heading": "Work done and change in internal energy",
+      "html": "<div class=\"key\">$$W = P\\Delta V \\qquad \\Delta U = \\frac{3}{2}nR\\Delta T = \\frac{3}{2}Nk_B\\Delta T$$</div><ul><li>$W = P\\Delta V$ only at constant pressure (from $F = PA$ moving a distance $\\Delta x$). When the pressure changes, $W$ = <strong>area under the p–V graph</strong>.</li><li>For an ideal monatomic gas, $\\Delta U$ depends only on $\\Delta T$. Also $\\Delta U = \\frac{3}{2}\\Delta(PV)$, handy when given pressures and volumes.</li></ul>"
+    },
+    {
+      "heading": "Four types of process",
+      "html": "<table class=\"notes\"><tr><th>Process</th><th>Fixed</th><th>First law becomes</th></tr><tr><td>isovolumetric</td><td>$V$</td><td>$W = 0$, $Q = \\Delta U$</td></tr><tr><td>isobaric</td><td>$P$</td><td>$Q = \\Delta U + P\\Delta V$</td></tr><tr><td>isothermal</td><td>$T$</td><td>$\\Delta U = 0$, $Q = W$</td></tr><tr><td>adiabatic</td><td>no heat flow</td><td>$Q = 0$, $\\Delta U = -W$</td></tr></table><ul><li>Isothermal: slow, in good thermal contact; all heat supplied becomes work.</li><li>Adiabatic: insulated or very fast. Expanding, the gas does work from its own internal energy and cools; compressed, it heats up.</li></ul><div class=\"key\">$$PV^{\\frac{5}{3}} = \\text{constant}$$</div><ul><li>For adiabatic changes of an ideal monatomic gas. An adiabat is steeper than an isotherm through the same point.</li></ul>"
+    },
+    {
+      "heading": "Cycles, heat engines and the Carnot cycle",
+      "html": "<ul><li>A heat engine runs a <strong>cycle</strong> that returns the gas to its start, so $\\Delta U = 0$ per cycle (net $Q$ = net $W$). It takes in $Q_h$ from a hot reservoir, does work $W$, and gives out $Q_c$ to a cold reservoir: $W = Q_h - Q_c$.</li></ul><div class=\"key\">$$\\eta = \\frac{\\text{useful work}}{\\text{energy input}} = \\frac{W}{Q_h} \\qquad \\eta_{\\text{Carnot}} = 1 - \\frac{T_c}{T_h}$$</div><ul><li>Net work per cycle = area enclosed by the loop. Clockwise: an engine. Anticlockwise: net work is done on the gas (fridge, heat pump).</li><li>Carnot cycle: isothermal expansion at $T_h$ (takes in $Q_h$), adiabatic expansion (cools to $T_c$), isothermal compression at $T_c$ (gives out $Q_c$), adiabatic compression (back to $T_h$).</li><li>No engine between two reservoirs can beat the Carnot efficiency. Temperatures in kelvin; 100% would need $T_c = 0$ K.</li></ul>"
+    },
+    {
+      "heading": "The second law of thermodynamics",
+      "html": "<ul><li><strong>Kelvin form</strong>: no cyclic engine can take thermal energy from a hot reservoir and turn it all into work; some must go to a cold reservoir.</li><li><strong>Clausius form</strong>: thermal energy cannot flow spontaneously from a colder body to a hotter one (a fridge needs work done on it).</li><li><strong>Entropy form</strong>: the total entropy of an isolated system never decreases. Constant for a reversible process; increases for an irreversible one.</li><li>Real processes (friction, turbulence, heat flow across a temperature difference) are irreversible, so the entropy of a real isolated system, and of the universe, always increases.</li></ul>"
+    },
+    {
+      "heading": "Entropy",
+      "html": "<div class=\"key\">$$\\Delta S = \\frac{\\Delta Q}{T} \\qquad S = k_B\\ln\\Omega$$</div><ul><li>Entropy measures the disorder of the particles: how spread out their energy and positions are. Unit $\\text{J K}^{-1}$. Gas &gt; liquid &gt; solid; hotter and larger volumes have more.</li><li>$\\Delta S = \\dfrac{\\Delta Q}{T}$ for energy transferred at constant $T$ (in K): positive for energy in, negative for energy out.</li><li><strong>Macrostate</strong>: the overall description (5 heads from 10 coins). <strong>Microstate</strong>: one particular arrangement. All microstates are equally likely, and disordered macrostates have far more of them. $\\Omega = 1$ gives $S = 0$.</li><li><strong>Local decreases</strong>: a non-isolated system's entropy can fall (water freezing, living things growing) if the surroundings' entropy rises by at least as much.</li></ul>"
+    },
+    {
+      "heading": "Watch out for",
+      "html": "<ul><li>Sign errors: $W$ is negative for a compression; $Q$ is negative when the gas loses energy.</li><li>Saying no heat flows in an isothermal process ($Q = W$), or that the temperature is constant in an adiabatic one.</li><li>Using $W = P\\Delta V$ when the pressure changes (use the area).</li><li>Forgetting $\\Delta U = 0$ over a whole cycle.</li><li>Celsius in $\\eta_{\\text{Carnot}}$ or $\\Delta S = \\frac{\\Delta Q}{T}$.</li><li>Efficiency as $\\frac{W}{Q_c}$ or $\\frac{Q_c}{Q_h}$ instead of $\\frac{W}{Q_h}$.</li><li>Saying entropy can never decrease (it can, locally).</li><li>Calling $k_B$ the Stefan–Boltzmann constant.</li></ul>"
+    }
+  ],
+  "nosPrompts": {
+    "Global impact": [
+      "The steam engine came before the theory. Can students name another technology that worked long before anyone understood why?",
+      "Carnot's limit means every thermal power station wastes most of its fuel's energy. How does that shape the case for and against different energy sources?"
+    ],
+    "Theories": [
+      "Ask students to show that if the Clausius form were false, an engine could break the Kelvin form. Why does showing two statements are equivalent strengthen a theory?",
+      "The first law is about quantity of energy, the second about its direction. Why do we need both?"
+    ],
+    "Shared endeavour": [
+      "The founders of thermodynamics argued publicly about who had discovered what, and what the laws meant. Is fierce disagreement good or bad for science?",
+      "Carnot worked with the wrong (caloric) theory of heat, yet his conclusion that the maximum efficiency depends only on the two reservoir temperatures survived. How is that possible?"
+    ],
+    "Models": [
+      "Boltzmann's counting model links entropy to probability. Use the coin example: why does a \"tidy\" arrangement become so unlikely as the number of coins grows?",
+      "Boltzmann faced strong opposition from scientists who doubted atoms. What did his model assume that could not yet be tested?"
+    ]
+  },
+  "oracy": {
+    "activity": "Opinion line",
+    "html": "<p>Opinion line (whole class, 8 minutes): students stand between \"agree\" and \"disagree\", explain their place, and may move after hearing others. Claim: \"Leaving the fridge door open in a closed, well-insulated kitchen will cool the kitchen down.\"</p><ul><li>I'm standing here because …</li><li>I moved after hearing …, because …</li><li>Where does the energy go when …?</li></ul><p>Listen for: energy taken from inside the fridge is released by its coils into the same room, and the electrical work done on it ends up there too: the kitchen warms.</p>"
+  },
+  "tokPrompts": {
+    "Can a law be based on probability?": [
+      "Shuffle a new pack of cards: could it come back in order? Why do we treat \"absurdly unlikely\" as \"impossible\"?",
+      "Is a law that is certain in practice but not in principle weaker than one that is exact?"
+    ],
+    "Why does time have a direction?": [
+      "Play a short clip backwards (a glass breaking, milk mixing into coffee). How do students know it's reversed, and what physics do they use?",
+      "If the arrow of time comes from entropy, why do we remember the past and not the future?"
+    ],
+    "Can we know the fate of the universe?": [
+      "Heat death relies on treating the universe as an isolated system. How could we know whether that is true?",
+      "Compare a prediction we can never test with a claim about the distant past. Are both equally scientific?"
+    ],
+    "Does technology drive science, or science drive technology?": [
+      "Find an example each way: steam engines led to thermodynamics; quantum theory led to lasers and transistors. Which direction is more common today?",
+      "Does it matter for knowledge whether a discovery came from curiosity or from a practical need?"
+    ]
+  },
+  "videos": [
+    {
+      "youtube": "DxL2HoqLbyA",
+      "title": "The Most Misunderstood Concept in Physics",
+      "channel": "Veritasium",
+      "use": "Entropy, the Sun as a source of low entropy, and the arrow of time. Use it for sections 9–12 and the ToK questions on time and probability."
+    },
+    {
+      "youtube": "YM-uykVfq_E",
+      "title": "What is entropy? - Jeff Phillips",
+      "channel": "TED-Ed",
+      "use": "A short animated version of the microstates idea in section 11. Pair it with the coin model in class."
+    },
+    {
+      "youtube": "4i1MUWJoI0U",
+      "title": "Thermodynamics: Crash Course Physics #23",
+      "channel": "CrashCourse",
+      "use": "The first law, the four processes and p–V diagrams. Share with students for revision of sections 2–6."
+    }
+  ],
+  "alsoLabs": []
+}
