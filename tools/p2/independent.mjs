@@ -156,6 +156,38 @@ export const INDEPENDENT = {
     for (let i = 0; i < 200; i++) { const mid = (lo + hi) / 2; if (IP.value / mid - IQ.value / (d.value - mid) > 0) lo = mid; else hi = mid; }
     return { B: field, FL: field * IQ.value, x0: (lo + hi) / 2 };
   },
+  // Bobbing float: ω from the period; v_max = ωx₀; kinetic energy as the difference between the total energy
+  // ½mω²x₀² and the potential energy ½mω²x² at the displacement (cm → m, g → kg by hand).
+  'C1-P01': ({ x0, T, m, x1 }) => {
+    const om = 2 * Math.PI / T.value;
+    const a = x0.value / 100, x = x1.value / 100, kg = m.value / 1000;
+    const total = 0.5 * kg * om * om * a * a;
+    const pot = 0.5 * kg * om * om * x * x;
+    return { omega: om, vmax: om * a, v1: Math.sqrt(2 * (total - pot) / kg), Ek: total - pot, ET: total, th: T.value / 2, tq: T.value / 4 };
+  },
+  // Optical fibre: Snell's law n₁ sin θ₁ = n₂ sin θ₂ at each boundary; the critical angle is the incidence angle
+  // in the core for which the refracted ray grazes the boundary (90°); the ray meets the side of the core at
+  // 90° minus its angle to the axis.
+  'C3-P01': ({ n1, n2, theta }) => {
+    const deg = (x) => x * 180 / Math.PI;
+    const crit = deg(Math.asin(n2.value * Math.sin(rad(90)) / n1.value));
+    const refr = deg(Math.asin(1 * Math.sin(rad(theta.value)) / n1.value)); // air has n = 1
+    return { c: crit, r: refr, phi: 90 - refr };
+  },
+  // Two loudspeakers: λ = v/f; the path difference is the difference of the two distances; its ratio to λ decides
+  // the interference.
+  'C3-P02': ({ f, v, d1, d2 }) => {
+    const lam = v.value / f.value;
+    const diff = d1.value - d2.value;
+    return { lambda: lam, delta: diff, ratio: diff / lam, halfLambda: v.value / (2 * f.value) };
+  },
+  // Spectroscopic binary: the Doppler shift for v ≪ c, Δλ/λ = v/c; the extreme observed wavelengths are
+  // λ₀ ± Δλ; the period is read straight from the graph.
+  'C5-P01': ({ lam0, dlam, P }) => {
+    const c = 3.00e8;
+    const metres = (nm) => nm * 1e-9;
+    return { Pd: P.value, lamMax: lam0.value + dlam.value, lamMin: lam0.value - dlam.value, ratio: metres(dlam.value) / metres(lam0.value), v: c * metres(dlam.value) / metres(lam0.value) };
+  },
   // Triple alpha: mass defect × 931.5 MeV; reactions per second = L / (energy in J).
   'E5-P01': ({ mHe, mC, L }) => {
     const defect = mHe.value * 3 - mC.value;
