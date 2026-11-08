@@ -162,4 +162,39 @@ export const INDEPENDENT = {
     const mev = defect * 931.5;
     return { dm: defect, E: mev, N: L.value / (mev * 1.60e-13) };
   },
+  // Precipitator: kV to V, then E = V/d; the field does work qV on a charge crossing the whole gap (J, and eV by
+  // dividing by the electron charge); electric force qE against the weight; speed if all the work became KE.
+  'D2-P01': ({ V, d, q, m }) => {
+    const volts = V.value * 1000;
+    const field = volts / d.value;
+    const work = q.value * volts;
+    return { E: field, W: work, WeV: work / 1.60e-19, F: q.value * field, weight: m.value * G, vArr: Math.sqrt(2 * work / m.value) };
+  },
+  // Magnet through a coil: flux per turn BA (cm² to m²), flux linkage N × that, one grid square in volt seconds,
+  // squares under the first pulse, B back from the linkage; free-fall time and speed to the coil's centre.
+  'D4-P01': ({ N, A, h, B0, gridT, gridV }) => {
+    const area = A.value / 1e4, tesla = B0.value / 1e3, drop = h.value / 100;
+    const perTurn = tesla * area;
+    const linkage = N.value * perTurn;
+    const square = (gridT.value / 1e3) * gridV.value;
+    return { Phi0: perTurn, NPhi: linkage, sqArea: square * 1e3, squares: linkage / square, Bavg: linkage / (N.value * area), t0: Math.sqrt(2 * drop / G) * 1e3, v0: Math.sqrt(2 * G * drop) };
+  },
+  // Sodium levels: photon energy = difference between levels (eV, then J); f = E/h; λ = c/f in nm; the largest
+  // gap gives the shortest wavelength; the number of pairs of n levels is n(n − 1)/2.
+  'E1-P01': ({ E0, E1, E2, E3, nLev }) => {
+    const planck = 6.63e-34, light = 3.00e8, joulesPerEV = 1.60e-19;
+    const gap = E1.value - E0.value, biggest = E3.value - E0.value;
+    const freq = gap * joulesPerEV / planck;
+    const n = nLev.value;
+    return { dE: gap, dEJ: gap * joulesPerEV, f: freq, lam: (light / freq) * 1e9, dEmax: biggest, lamShort: (light / (biggest * joulesPerEV / planck)) * 1e9, dE21: E2.value - E1.value, nTrans: n * (n - 1) / 2 };
+  },
+  // Reactor: nucleon and proton numbers balance on both sides; thermal power = electrical / efficiency; fissions
+  // per second = power / energy per fission (MeV to J); mass per day = fissions per day × mass of one nucleus.
+  'E4-P01': ({ Pe, eff, Ef, AU, ZU, AX, ZX }) => {
+    const thermalW = Pe.value * 1e6 / (eff.value / 100);
+    const perFission = Ef.value * 1e6 * 1.60e-19;
+    const perSecond = thermalW / perFission;
+    const nucleus = AU.value * 1.661e-27;
+    return { Amiss: AU.value + 1 - AX.value - 2 * 1, Zmiss: ZU.value - ZX.value, Pth: thermalW / 1e6, EfJ: perFission, rate: perSecond, mU: nucleus, mDay: perSecond * 24 * 3600 * nucleus };
+  },
 };
