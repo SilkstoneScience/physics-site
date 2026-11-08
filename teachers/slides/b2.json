@@ -1,0 +1,1184 @@
+{
+  "topic": "B.2",
+  "hours": 6,
+  "points": [
+    {
+      "id": "energy",
+      "short": "Conservation of energy",
+      "guide": "The conservation of energy.",
+      "sections": [
+        "balance"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Apply conservation of energy to a planet that receives energy from its star and radiates energy into space."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "A planet is an energy budget",
+          "bullets": [
+            "A planet gains energy from its star and loses energy to space, both as <strong>radiation</strong>",
+            "Absorbing more power than it emits: its internal energy rises and it <strong>warms</strong>",
+            "A warmer planet emits more, because emission grows as $T^{4}$",
+            "The temperature stops changing once the two powers are equal: <strong>radiative equilibrium</strong>",
+            "Every calculation in this topic starts by writing the two powers and setting them equal"
+          ],
+          "notes": "Link back to B.1: a cup of tea on a table cools until it gives out energy as fast as it receives it. A planet does the same thing, with space as its surroundings and a star as its supply."
+        },
+        {
+          "type": "equation",
+          "title": "The energy balance",
+          "latex": "\\text{power absorbed} = \\text{power emitted}",
+          "bullets": [
+            "True only when the temperature is <strong>constant</strong>",
+            "If the two sides differ, the difference is the rate of change of internal energy"
+          ],
+          "notes": "Not in the data booklet: it is conservation of energy applied to a system. Ask what could upset the balance (a change in the star, in the reflection of sunlight, in the atmosphere). That list is the plan for the rest of the topic."
+        }
+      ]
+    },
+    {
+      "id": "solar-constant",
+      "short": "The solar constant",
+      "guide": "The solar constant S.",
+      "sections": [
+        "solar"
+      ],
+      "minutes": 30,
+      "aims": [
+        "State the meaning of the solar constant $S$ and calculate the intensity of a star's radiation at a given distance.",
+        "Explain why the intensity on the ground is lower at high latitudes."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The solar constant",
+          "bullets": [
+            "$S$: the intensity of the Sun's radiation at the Earth's distance, above the atmosphere, on a surface facing the rays",
+            "It is the Sun's <strong>apparent brightness</strong> as seen from the Earth (B.1)",
+            "Unit: $\\text{W m}^{-2}$, so it tells us the power arriving on each square metre",
+            "Other planets have their own value: intensity falls with the <strong>inverse square</strong> of the distance from the star"
+          ],
+          "notes": "Ask why the definition insists on \"above the atmosphere\" and \"facing the rays\". Each phrase removes something that would reduce the reading."
+        },
+        {
+          "type": "equation",
+          "title": "Radiation from a star",
+          "latex": [
+            "S = 1.36 \\times 10^{3}\\ \\text{W m}^{-2}",
+            "b = \\dfrac{L}{4\\pi d^{2}}"
+          ],
+          "bullets": [
+            "Use the data booklet's value of $S$ for the Earth",
+            "$L$ is the star's power; $4\\pi d^{2}$ is the sphere the power has spread over at distance $d$"
+          ],
+          "notes": "$S$ is in the booklet's table of constants. The apparent brightness equation is the one from B.1."
+        },
+        {
+          "type": "diagram",
+          "title": "Why latitude matters",
+          "figure": "b2bt",
+          "bullets": [
+            "Two beams of equal power and equal width",
+            "At high latitude the same beam covers a <strong>longer stretch</strong> of ground, so each square metre gets less",
+            "It also crosses more atmosphere on the way"
+          ],
+          "notes": "Shine a torch straight down on a desk, then tilt it. The lit patch gets longer and dimmer, with the same torch."
+        },
+        {
+          "type": "worked",
+          "title": "Sunlight at Saturn",
+          "question": "Saturn orbits at a distance of $1.43 \\times 10^{12}$ m from the Sun, whose power output is $3.8 \\times 10^{26}$ W. Calculate the intensity of the Sun's radiation at Saturn, and compare it with the Earth's solar constant.",
+          "hint": "The power has spread over a sphere whose radius is the distance from the Sun. Use the apparent brightness equation.",
+          "steps": [
+            {
+              "text": "Use the inverse-square equation.",
+              "latex": "b = \\dfrac{L}{4\\pi d^{2}}"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "b = \\dfrac{3.8 \\times 10^{26}}{4\\pi \\times (1.43 \\times 10^{12})^{2}}"
+            },
+            {
+              "text": "This is Saturn's \"solar constant\".",
+              "latex": "b = 15\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "Compare with the Earth's value.",
+              "latex": "\\dfrac{1360}{15} \\approx 90"
+            }
+          ],
+          "notes": "Saturn receives about 1% of the intensity at the Earth. Saturn is about 9.5 times further away, and 9.5 squared is about 90: a quick way to check the answer."
+        }
+      ],
+      "checks": [
+        "B2-012"
+      ]
+    },
+    {
+      "id": "emissivity",
+      "short": "Emissivity",
+      "guide": "Emissivity as the ratio of the power radiated per unit area by a surface compared to that of an ideal black surface at the same temperature.",
+      "sections": [
+        "emissivity"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Define emissivity and state its range of values.",
+        "Calculate the power radiated by a real surface, using $P = e\\sigma AT^{4}$."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Emissivity",
+          "bullets": [
+            "A <strong>black body</strong> is the perfect emitter and absorber: nothing at the same temperature radiates more",
+            "<strong>Emissivity</strong> $e$ compares a real surface with a black body <strong>at the same temperature</strong>",
+            "No units, and between 0 and 1: $e = 1$ for a black body, close to 0 for a polished metal",
+            "A surface with $e < 1$ is sometimes called a <strong>grey body</strong>",
+            "Good emitters are good absorbers (at the same wavelengths)"
+          ],
+          "notes": "A lamp-black sphere and the small hole in a hollow metal cavity are both close to ideal black bodies. A polished silver teapot keeps tea warm because it emits so poorly."
+        },
+        {
+          "type": "equation",
+          "title": "Emissivity and radiated power",
+          "latex": [
+            "e = \\dfrac{\\text{power radiated per unit area}}{\\sigma T^{4}}",
+            "P = e\\sigma AT^{4}"
+          ],
+          "bullets": [
+            "The first form is in the data booklet; $\\sigma = 5.67 \\times 10^{-8}\\ \\text{W m}^{-2}\\ \\text{K}^{-4}$",
+            "$T$ must be in <strong>kelvin</strong>"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "From the definition to the power radiated",
+          "start": "Start from the definition of emissivity for a surface of area $A$ at temperature $T$.",
+          "steps": [
+            {
+              "text": "Emissivity compares the power per unit area with that of a black body",
+              "latex": "e = \\dfrac{P/A}{\\sigma T^{4}}"
+            },
+            {
+              "text": "Multiply both sides by $\\sigma T^{4}$",
+              "latex": "\\dfrac{P}{A} = e\\sigma T^{4}"
+            },
+            {
+              "text": "Multiply by the area to get the <strong>power radiated</strong>",
+              "latex": "P = e\\sigma AT^{4}"
+            },
+            {
+              "text": "Check: a black body has $e = 1$, which gives the Stefan–Boltzmann law",
+              "latex": "L = \\sigma AT^{4}"
+            }
+          ],
+          "notes": "Students who remember the derivation need only one equation from the booklet."
+        },
+        {
+          "type": "worked",
+          "title": "A wood-burning stove",
+          "question": "The outer surface of a cast-iron stove has an area of 1.5 $\\text{m}^2$, a temperature of 230 °C and an emissivity of 0.85. Calculate the power radiated by the stove.",
+          "hint": "A real surface emits less than a black body, so include the emissivity. Convert the temperature before using it.",
+          "steps": [
+            {
+              "text": "Convert the temperature to kelvin.",
+              "latex": "T = 230 + 273 = 503\\ \\text{K}"
+            },
+            {
+              "text": "Use the power equation.",
+              "latex": "P = e\\sigma AT^{4}"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "P = 0.85 \\times 5.67 \\times 10^{-8} \\times 1.5 \\times 503^{4}"
+            },
+            {
+              "text": "Round sensibly.",
+              "latex": "P = 4.6\\ \\text{kW}"
+            }
+          ],
+          "notes": "This is the power emitted, not the net loss: the room radiates back to the stove too. Using 230 instead of 503 would give a power about 23 times too small."
+        },
+        {
+          "type": "worked",
+          "title": "Testing a black coating",
+          "question": "A laboratory test panel coated in black anodised aluminium has an area of 0.25 $\\text{m}^2$. At a temperature of 400 K it radiates 320 W. Determine the emissivity of the coating.",
+          "hint": "Work out what a black body of the same area and temperature would radiate, then compare.",
+          "steps": [
+            {
+              "text": "Power from a black body of this size at 400 K.",
+              "latex": "\\sigma AT^{4} = 5.67 \\times 10^{-8} \\times 0.25 \\times 400^{4}"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "\\sigma AT^{4} = 363\\ \\text{W}"
+            },
+            {
+              "text": "Emissivity is the ratio of the powers.",
+              "latex": "e = \\dfrac{320}{363} = 0.88"
+            }
+          ],
+          "notes": "No units. An answer above 1 would be a sign of a mistake, since nothing out-radiates a black body at the same temperature."
+        }
+      ],
+      "checks": [
+        "B2-002"
+      ]
+    },
+    {
+      "id": "albedo",
+      "short": "Albedo",
+      "guide": "Albedo as a measure of the average energy reflected off a macroscopic system.",
+      "sections": [
+        "albedo"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Define albedo and calculate the power a surface absorbs from its albedo.",
+        "Distinguish between albedo and emissivity."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Albedo",
+          "bullets": [
+            "Sunlight striking a surface is partly absorbed and partly reflected or scattered",
+            "<strong>Albedo</strong> $\\alpha$: the fraction of the incident power that is scattered back",
+            "The fraction absorbed is therefore $1 - \\alpha$",
+            "No units, between 0 and 1: a mirror is close to 1, and a black body is 0",
+            "Fresh snow scores high (about 0.85), desert about 0.4, forest about 0.1, ocean about 0.06"
+          ],
+          "notes": "Walking barefoot on dark tarmac and on pale sand on the same sunny day shows the difference. The deck has a table and a satellite map of monthly albedo: good to show here."
+        },
+        {
+          "type": "equation",
+          "title": "Albedo",
+          "latex": "\\alpha = \\dfrac{\\text{total scattered power}}{\\text{total incident power}}",
+          "bullets": [
+            "In the data booklet",
+            "Power absorbed = (1 − albedo) × incident power"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Emissivity or albedo?",
+          "bullets": [
+            "<strong>Albedo</strong> describes what happens to radiation <strong>arriving</strong> (visible and near-infrared from the Sun)",
+            "<strong>Emissivity</strong> describes the radiation a surface <strong>gives out</strong> because of its temperature (for a planet, infrared)",
+            "Snow reflects most sunlight (high albedo), yet it is an excellent emitter of infrared (high emissivity)",
+            "So $e$ is not simply $1 - \\alpha$: the two numbers refer to different wavelengths"
+          ],
+          "notes": "Fresh snow has an infrared emissivity of about 0.98 but a visible albedo of about 0.85. This example usually ends the confusion between the two ideas."
+        },
+        {
+          "type": "worked",
+          "title": "Dust on a glacier",
+          "question": "Sunlight of mean intensity 650 $\\text{W m}^{-2}$ falls on 12 $\\text{km}^2$ of glacier during a summer day. A layer of windblown dust lowers the albedo of the glacier's snowy surface from 0.75 to 0.45. Calculate (a) the incident power and (b) the increase in the power absorbed.",
+          "hint": "Convert the area to square metres. The absorbed fraction is the part that isn't scattered, so find how much that fraction changes.",
+          "steps": [
+            {
+              "text": "(a) Convert the area: 1 $\\text{km}^2$ is $10^{6}\\ \\text{m}^2$.",
+              "latex": "P = 650 \\times 12 \\times 10^{6}"
+            },
+            {
+              "text": "Evaluate the incident power.",
+              "latex": "P = 7.8 \\times 10^{9}\\ \\text{W}"
+            },
+            {
+              "text": "(b) Find the change in the fraction absorbed.",
+              "latex": "\\Delta(1 - \\alpha) = 0.55 - 0.25 = 0.30"
+            },
+            {
+              "text": "Multiply by the incident power.",
+              "latex": "\\Delta P = 2.3 \\times 10^{9}\\ \\text{W}"
+            }
+          ],
+          "notes": "That is about the output of two large power stations, spent on melting ice. Soot and dust on ice are a real and measured effect."
+        }
+      ],
+      "checks": [
+        "B2-001"
+      ]
+    },
+    {
+      "id": "albedo-varies",
+      "short": "Why albedo varies",
+      "guide": "Earth's albedo varies daily and is dependent on cloud formations and latitude.",
+      "sections": [
+        "albedo"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Explain why the Earth's albedo changes with cloud cover, latitude and season."
+      ],
+      "challenge": "CC-B2-02",
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The Earth's albedo changes",
+          "bullets": [
+            "The Earth's yearly mean albedo is about <strong>0.30</strong>",
+            "<strong>Cloud</strong> changes from day to day and is highly reflective",
+            "<strong>Latitude</strong>: polar snow and ice reflect strongly, and water reflects more when the Sun is low",
+            "<strong>Season</strong> and land use also matter: snow cover, crops, forest clearance",
+            "Finding one value for a whole planet is complicated, which is why satellites map it"
+          ],
+          "notes": "Show the satellite albedo map from the deck and ask students to identify deserts, ice and cloud bands."
+        },
+        {
+          "type": "worked",
+          "title": "Cloud over the ocean",
+          "question": "A model region is ocean of albedo 0.06, and any part covered by cloud has albedo 0.70. Sunlight of mean intensity 340 $\\text{W m}^{-2}$ arrives from above. Calculate the albedo of the region on a day when cloud covers (a) 40% of it and (b) 50% of it, and (c) the change in the intensity absorbed between the two days.",
+          "hint": "Each part of the region contributes in proportion to its share of the area. Multiply each albedo by its fraction and add.",
+          "steps": [
+            {
+              "text": "(a) Combine the two albedos using area fractions.",
+              "latex": "\\alpha = 0.60 \\times 0.06 + 0.40 \\times 0.70"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "\\alpha = 0.316"
+            },
+            {
+              "text": "(b) Repeat for half cloud.",
+              "latex": "\\alpha = 0.03 + 0.35 = 0.38"
+            },
+            {
+              "text": "(c) The intensity absorbed is $(1 - \\alpha) \\times 340$.",
+              "latex": "0.684 \\times 340 = 233\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "On the cloudier day:",
+              "latex": "0.62 \\times 340 = 211\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "The absorbed intensity falls.",
+              "latex": "\\Delta = 22\\ \\text{W m}^{-2}"
+            }
+          ],
+          "notes": "Clouds also affect the infrared leaving the Earth, so their overall effect on temperature is more complicated than this."
+        }
+      ],
+      "checks": [
+        "B2-015"
+      ]
+    },
+    {
+      "id": "projected-area",
+      "short": "The mean intensity S/4",
+      "guide": "The incoming radiative power is dependent on the projected surface of a planet along the direction of the path of the rays, resulting in a mean value of the incoming intensity being S/4.",
+      "sections": [
+        "solar"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Derive the mean incoming intensity $S/4$ from the projected area of a planet."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Disc in, sphere out",
+          "bullets": [
+            "A planet catches sunlight over its <strong>projected area</strong>: the disc $\\pi R^{2}$ that makes its shadow",
+            "As it spins, that energy is shared over the whole <strong>sphere</strong>, of area $4\\pi R^{2}$",
+            "The sphere has four times the area of the disc",
+            "So the mean intensity over the whole surface is a quarter of $S$",
+            "For the Earth, the mean is about 340 $\\text{W m}^{-2}$"
+          ],
+          "notes": "Hold a ball in the beam of a projector and look at its shadow on the wall. The shadow is a disc, not a sphere."
+        },
+        {
+          "type": "equation",
+          "title": "Mean incoming intensity",
+          "latex": "\\text{mean intensity} = \\dfrac{S}{4}",
+          "bullets": [
+            "Averaged over day and night, equator and poles"
+          ],
+          "notes": "$S/4$ is a mean. Nowhere on the Earth actually has this as a steady value."
+        },
+        {
+          "type": "derivation",
+          "title": "Where the factor of 4 comes from",
+          "start": "A planet of radius $R$ is at a distance where the star's intensity is $S$.",
+          "steps": [
+            {
+              "text": "Power intercepted by the projected disc",
+              "latex": "P = S \\times \\pi R^{2}"
+            },
+            {
+              "text": "Total surface area that shares this power",
+              "latex": "A = 4\\pi R^{2}"
+            },
+            {
+              "text": "Mean intensity = power ÷ total area",
+              "latex": "\\text{mean} = \\dfrac{S \\pi R^{2}}{4\\pi R^{2}}"
+            },
+            {
+              "text": "The $\\pi R^{2}$ cancels, whatever the planet's size",
+              "latex": "\\text{mean} = \\dfrac{S}{4}"
+            }
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "The projected area",
+          "figure": "b2at",
+          "bullets": [
+            "Sunlight is blocked by the disc $\\pi R^{2}$",
+            "It is spread over the sphere $4\\pi R^{2}$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Sunlight on the Moon",
+          "question": "The Moon has a radius of $1.74 \\times 10^{6}$ m, and the solar intensity at its distance from the Sun is 1360 $\\text{W m}^{-2}$. Calculate (a) the power of the sunlight intercepted by the Moon and (b) the mean intensity over its whole surface.",
+          "hint": "The Moon intercepts sunlight over its shadow disc. For (b), share that same power over the whole sphere.",
+          "steps": [
+            {
+              "text": "(a) Area of the projected disc.",
+              "latex": "\\pi R^{2} = 9.51 \\times 10^{12}\\ \\text{m}^2"
+            },
+            {
+              "text": "Multiply by the intensity.",
+              "latex": "P = 1360 \\times 9.51 \\times 10^{12}"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "P = 1.29 \\times 10^{16}\\ \\text{W}"
+            },
+            {
+              "text": "(b) Total surface area of the sphere.",
+              "latex": "4\\pi R^{2} = 3.80 \\times 10^{13}\\ \\text{m}^2"
+            },
+            {
+              "text": "Share the power over it.",
+              "latex": "\\dfrac{1.29 \\times 10^{16}}{3.80 \\times 10^{13}} = 340\\ \\text{W m}^{-2}"
+            }
+          ],
+          "notes": "The answer to (b) is exactly $S/4$, as the derivation predicts. The radius cancels, so it would be the same for any planet at this distance."
+        }
+      ],
+      "checks": [
+        "B2-003"
+      ]
+    },
+    {
+      "id": "equilibrium",
+      "short": "Equilibrium temperature",
+      "guide": "Problems will include the estimation of equilibrium temperature of a body using energy balance between incoming and outgoing radiation intensity, including albedo, emissivity, and solar or other constants.",
+      "sections": [
+        "equilibrium"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Derive and use the energy-balance equation $(1 - \\alpha)\\tfrac{S}{4} = e\\sigma T^{4}$.",
+        "Estimate the equilibrium temperature of a planet or other body, including albedo and emissivity."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Energy balance for a planet",
+          "latex": "(1 - \\alpha)\\dfrac{S}{4} = e\\sigma T^{4}",
+          "bullets": [
+            "Set $e = 1$ if the surface emits as a black body",
+            "For a planet around another star or at another distance, use its own value of $S$"
+          ],
+          "notes": "This combines several booklet relationships. It is not printed in the booklet in this form, so students should be able to build it."
+        },
+        {
+          "type": "derivation",
+          "title": "Finding the equilibrium temperature",
+          "start": "Apply the energy balance to each square metre of the surface, on average.",
+          "steps": [
+            {
+              "text": "Mean intensity arriving",
+              "latex": "\\text{in} = \\dfrac{S}{4}"
+            },
+            {
+              "text": "A fraction $1 - \\alpha$ is absorbed",
+              "latex": "\\text{absorbed} = (1 - \\alpha)\\dfrac{S}{4}"
+            },
+            {
+              "text": "In equilibrium, this equals the power emitted per square metre",
+              "latex": "(1 - \\alpha)\\dfrac{S}{4} = e\\sigma T^{4}"
+            },
+            {
+              "text": "Make $T$ the subject",
+              "latex": "T = \\sqrt[4]{\\dfrac{(1 - \\alpha)S}{4e\\sigma}}"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "What the model gives for the Earth",
+          "bullets": [
+            "With $\\alpha = 0.30$ and $e = 1$, the model gives about 255 K (−18 °C)",
+            "The measured mean surface temperature is about 288 K (15 °C)",
+            "The 33 K difference is the natural <strong>greenhouse effect</strong>",
+            "A simple fix: give the Earth an <strong>effective emissivity</strong> of about 0.6"
+          ],
+          "notes": "Let students calculate 255 K from the equation before showing it, then ask what the model has left out. That sets up the second half of the topic. The effective emissivity comes from the 238 $\\text{W m}^{-2}$ absorbed divided by the 390 $\\text{W m}^{-2}$ that a black body emits at 288 K, which gives 0.61."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for energy-balance problems",
+          "bullets": [
+            "Start from $S/4$ for a rotating sphere; use $S$ alone only for a flat surface facing the rays",
+            "Multiply by $1 - \\alpha$, not $\\alpha$",
+            "Take the <strong>fourth root</strong> at the end: pressing the square-root key twice does it",
+            "Temperatures in kelvin; give °C only if asked",
+            "If a question gives total powers, the same method works with areas $\\pi R^{2}$ and $4\\pi R^{2}$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Ceres, a dwarf planet",
+          "question": "The dwarf planet Ceres has no atmosphere, an albedo of about 0.03 and spins once every 9 hours. It orbits the Sun at 2.77 times the Earth's distance. Assuming it emits as a black body, estimate its mean surface temperature. Use $S = 1360\\ \\text{W m}^{-2}$ for the Earth.",
+          "hint": "First scale the solar constant using the inverse-square law. Then balance the absorbed and emitted intensities.",
+          "steps": [
+            {
+              "text": "Intensity at Ceres, using the inverse-square law.",
+              "latex": "S_{C} = \\dfrac{1360}{2.77^{2}} = 177\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "Mean intensity absorbed.",
+              "latex": "0.97 \\times \\dfrac{177}{4} = 43.0\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "Black body: $\\sigma T^{4}$ equals this.",
+              "latex": "T^{4} = \\dfrac{43.0}{5.67 \\times 10^{-8}}"
+            },
+            {
+              "text": "Take the fourth root.",
+              "latex": "T = 166\\ \\text{K}"
+            }
+          ],
+          "notes": "Ask why the question mentions the fast rotation: it makes sharing the energy over the whole surface a reasonable assumption. With no atmosphere there is no greenhouse effect to add."
+        },
+        {
+          "type": "worked",
+          "title": "A probe in deep space",
+          "question": "A spherical space probe of radius 0.60 m is at the Earth's distance from the Sun but far from the Earth. Its surface has an albedo of 0.40 and an emissivity of 0.80. The probe spins, so its temperature is uniform. Determine its equilibrium temperature.",
+          "hint": "Write the total power absorbed (over a disc) and the total power emitted (over a sphere) and set them equal. See what happens to the radius.",
+          "steps": [
+            {
+              "text": "Power absorbed, through the projected disc.",
+              "latex": "P_{\\text{in}} = (1 - \\alpha)S\\pi r^{2}"
+            },
+            {
+              "text": "Power emitted, from the whole sphere.",
+              "latex": "P_{\\text{out}} = e\\sigma \\times 4\\pi r^{2} \\times T^{4}"
+            },
+            {
+              "text": "Set them equal; $\\pi r^{2}$ cancels.",
+              "latex": "T^{4} = \\dfrac{(1 - \\alpha)S}{4e\\sigma}"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "T^{4} = \\dfrac{0.60 \\times 1360}{4 \\times 0.80 \\times 5.67 \\times 10^{-8}}"
+            },
+            {
+              "text": "Take the fourth root.",
+              "latex": "T = 259\\ \\text{K}"
+            }
+          ],
+          "notes": "The radius wasn't needed: a larger probe catches more sunlight and has more area to emit from. Spacecraft designers choose surface coatings to control $\\alpha$ and $e$ separately."
+        },
+        {
+          "type": "worked",
+          "title": "A snowball Earth",
+          "question": "Geological evidence suggests that the Earth was once almost entirely covered in ice, giving an albedo of about 0.60. Assume the mean incoming intensity was 340 $\\text{W m}^{-2}$ and that the Earth had an effective emissivity of 0.61. Estimate the mean surface temperature in °C.",
+          "hint": "Find the absorbed intensity and set it equal to the emitted intensity. Remember the emissivity, and convert at the end.",
+          "steps": [
+            {
+              "text": "Intensity absorbed.",
+              "latex": "0.40 \\times 340 = 136\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "Balance with $e\\sigma T^{4}$.",
+              "latex": "T^{4} = \\dfrac{136}{0.61 \\times 5.67 \\times 10^{-8}}"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "T^{4} = 3.93 \\times 10^{9}\\ \\text{K}^4"
+            },
+            {
+              "text": "Take the fourth root.",
+              "latex": "T = 250\\ \\text{K}"
+            },
+            {
+              "text": "Convert to Celsius.",
+              "latex": "250 - 273 = -23\\ \\text{°C}"
+            }
+          ],
+          "notes": "A very cold, very reflective planet tends to stay that way: this is the ice–albedo feedback working in reverse. Volcanic CO₂ building up over millions of years is thought to have ended these episodes."
+        }
+      ],
+      "checks": [
+        "B2-004"
+      ]
+    },
+    {
+      "id": "gases",
+      "short": "Greenhouse gases",
+      "guide": "Methane CH4, water vapour H2O, carbon dioxide CO2, and nitrous oxide N2O, are the main greenhouse gases and each of these has origins that are both natural and created by human activity.",
+      "sections": [
+        "greenhouse",
+        "gases"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Describe the greenhouse effect in terms of the different wavelengths emitted by the Sun and the Earth.",
+        "Name the four main greenhouse gases, with a natural and a human source of each."
+      ],
+      "challenge": "CC-B2-01",
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The greenhouse effect",
+          "bullets": [
+            "The hot Sun emits mostly visible and near-infrared radiation, and most of it passes through the atmosphere",
+            "The ground absorbs this radiation and warms, then emits <strong>infrared</strong>, because it is far cooler than the Sun",
+            "Greenhouse gases absorb much of that infrared, then re-emit it <strong>in all directions</strong>",
+            "Part of it returns to the surface, which settles at a higher temperature",
+            "The natural effect keeps the Earth about 33 K warmer, so liquid water and life are possible"
+          ],
+          "notes": "Real greenhouses work mostly by stopping warm air from rising, so the name is misleading. Ask students what they'd expect at night on a clear sky compared with a cloudy one."
+        },
+        {
+          "type": "bullets",
+          "title": "The main greenhouse gases",
+          "bullets": [
+            "<strong>Water vapour</strong> H₂O: evaporation; humans add little directly, but a warmer atmosphere holds more",
+            "<strong>Carbon dioxide</strong> CO₂: respiration, volcanoes, decay; fossil fuels, deforestation, cement",
+            "<strong>Methane</strong> CH₄: wetlands, termites; cattle, rice paddies, landfill, gas leaks",
+            "<strong>Nitrous oxide</strong> N₂O: soil and ocean bacteria; nitrogen fertilisers, industry",
+            "Water vapour contributes most to the natural effect",
+            "Nitrogen and oxygen, 99% of dry air, hardly absorb infrared"
+          ],
+          "notes": "Each gas has both natural and human sources: students need one of each."
+        },
+        {
+          "type": "diagram",
+          "title": "The greenhouse effect, step by step",
+          "figure": "b2ct",
+          "bullets": [
+            "Step through the four numbered stages",
+            "The re-emitted infrared goes in all directions, not just down"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Radiation from a desert",
+          "question": "The ground in a desert reaches a temperature of 320 K at midday. Use Wien's law, $\\lambda_{\\text{max}}T = 2.9 \\times 10^{-3}$ m K, to find the peak wavelength it emits. Name the region of the spectrum, and state why this radiation behaves differently in the atmosphere from sunlight.",
+          "hint": "Rearrange Wien's law for the wavelength. Compare your answer with the wavelengths of visible light, and think about which radiation greenhouse gases absorb.",
+          "steps": [
+            {
+              "text": "Rearrange Wien's law.",
+              "latex": "\\lambda_{\\text{max}} = \\dfrac{2.9 \\times 10^{-3}}{320}"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "\\lambda_{\\text{max}} = 9.1 \\times 10^{-6}\\ \\text{m}"
+            },
+            {
+              "text": "This is about 20 times the wavelength of visible light: the <strong>infrared</strong>."
+            },
+            {
+              "text": "Greenhouse gases absorb strongly in the infrared but let most visible sunlight pass."
+            }
+          ],
+          "notes": "Even the hottest ground on the Earth emits far into the infrared."
+        }
+      ],
+      "checks": [
+        "B2-006"
+      ]
+    },
+    {
+      "id": "absorption",
+      "short": "Absorbing infrared",
+      "guide": "The absorption of infrared radiation by the main greenhouse gases in terms of the molecular energy levels and the subsequent emission of radiation in all directions.",
+      "sections": [
+        "models"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Explain the absorption of infrared by greenhouse gases using molecular energy levels.",
+        "Calculate the energy of an absorbed photon using $E = hf$."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The energy-level picture",
+          "bullets": [
+            "Molecules can only hold certain <strong>discrete</strong> amounts of vibrational and rotational energy",
+            "A photon is absorbed only if its energy $hf$ <strong>matches a gap</strong> between two of these levels",
+            "In greenhouse gases the gaps match <strong>infrared</strong> photons; visible photons do not fit",
+            "A photon of infrared is later given out as the molecule de-excites, in a <strong>random direction</strong>",
+            "Or it passes the energy to neighbouring molecules in collisions, which warms the air"
+          ],
+          "notes": "Infrared photons are far too weak to move electrons between levels: this is about the vibration and rotation of the whole molecule. Electron transitions need visible or ultraviolet photons."
+        },
+        {
+          "type": "bullets",
+          "title": "Different gases, different wavelengths",
+          "bullets": [
+            "Each gas absorbs only in particular <strong>bands</strong> of the infrared",
+            "Water vapour has the widest bands; carbon dioxide has a strong one near 15 µm",
+            "The Earth's emission peaks near 10 µm and spreads widely either side, so these bands intercept much of it",
+            "Some infrared escapes through gaps between the bands, the \"atmospheric window\""
+          ],
+          "notes": "The absorption charts in the deck are good to show here: ask which gas contributes most, and which contribute least."
+        },
+        {
+          "type": "equation",
+          "title": "Photon energy",
+          "latex": [
+            "E = hf",
+            "v = f\\lambda"
+          ],
+          "bullets": [
+            "For radiation, the speed $v$ is $c = 3.00 \\times 10^{8}\\ \\text{m s}^{-1}$",
+            "$h = 6.63 \\times 10^{-34}$ J s"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A carbon dioxide absorption band",
+          "question": "Carbon dioxide absorbs strongly at a wavelength of 15 µm. Calculate (a) the frequency of this radiation, (b) the energy of one photon of it and (c) how many times more energy a photon of visible light of wavelength 500 nm carries.",
+          "hint": "Convert the wavelengths to metres. Find the frequency from the wave equation, then use the photon equation.",
+          "steps": [
+            {
+              "text": "(a) Use the wave equation.",
+              "latex": "f = \\dfrac{3.00 \\times 10^{8}}{15 \\times 10^{-6}}"
+            },
+            {
+              "text": "Evaluate the frequency.",
+              "latex": "f = 2.0 \\times 10^{13}\\ \\text{Hz}"
+            },
+            {
+              "text": "(b) Use the photon energy equation.",
+              "latex": "E = 6.63 \\times 10^{-34} \\times 2.0 \\times 10^{13}"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "E = 1.3 \\times 10^{-20}\\ \\text{J}"
+            },
+            {
+              "text": "(c) Energy is inversely proportional to wavelength.",
+              "latex": "\\dfrac{15 \\times 10^{-6}}{500 \\times 10^{-9}} = 30"
+            }
+          ],
+          "notes": "A visible photon carries 30 times the energy of this gap, so it does not match and passes through."
+        }
+      ],
+      "checks": [
+        "B2-008"
+      ]
+    },
+    {
+      "id": "models",
+      "short": "Resonance and energy levels",
+      "guide": "The greenhouse effect can be explained in terms of both a resonance model and molecular energy levels.",
+      "sections": [
+        "models"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Explain the absorption of infrared using a resonance model of a molecule.",
+        "Compare the resonance model with the energy-level model, including the limits of the resonance model."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The resonance model",
+          "bullets": [
+            "Treat a molecule as <strong>atoms joined by springs</strong>, so it has natural frequencies of vibration",
+            "For greenhouse gases these lie in the infrared, about $10^{13}$–$10^{14}$ Hz",
+            "Infrared radiation has an oscillating electric field that pushes on the molecule's charges",
+            "When the driving frequency matches a natural frequency: <strong>resonance</strong>, and energy is absorbed strongly",
+            "A molecule stores energy in vibration (kinetic and spring potential), and in rotation",
+            "Collisions then share it as translational kinetic energy, which is what a thermometer registers"
+          ],
+          "notes": "A child on a swing, pushed at the right moment, is the familiar resonance example. Only vibrations that shift the charge distribution absorb: that is why N₂ and O₂, with no such vibration, hardly absorb infrared."
+        },
+        {
+          "type": "diagram",
+          "title": "How carbon dioxide vibrates",
+          "figure": "b2dt",
+          "bullets": [
+            "Bending and asymmetric stretching vibrations absorb infrared",
+            "In the symmetric stretch the charge stays balanced, so it does not"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Two models of one process",
+          "bullets": [
+            "Natural frequency in the resonance model ↔ energy gap $\\Delta E = hf$ in the energy-level model",
+            "The spring model is easy to picture, and links to oscillations in Theme C",
+            "It predicts that absorption would be spread around each natural frequency",
+            "It cannot explain why only certain sharp frequencies are absorbed",
+            "The energy-level model explains the sharp frequencies, using quantum ideas"
+          ],
+          "notes": "The guide has a linking question on the limits of the resonance model: good for a short pair discussion. Is either model \"the true one\"?"
+        }
+      ],
+      "checks": [
+        "B2-007"
+      ]
+    },
+    {
+      "id": "flows",
+      "short": "Surface–atmosphere balance",
+      "guide": "Energy balance problems will include energy exchanged between the surface and the atmosphere of a body.",
+      "sections": [
+        "flows"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Use a Sankey diagram to show the energy flows between the surface, the atmosphere and space.",
+        "Solve energy-balance problems for the surface and atmosphere, and predict the effect of a change in the flows."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Two systems exchanging energy",
+          "bullets": [
+            "A better model separates the <strong>surface</strong> and the <strong>atmosphere</strong>; each obeys energy in = energy out",
+            "All flows are means, in $\\text{W m}^{-2}$, over the whole planet",
+            "Sunlight is partly reflected, partly absorbed by the atmosphere, and the rest reaches the surface",
+            "The surface loses energy by infrared emission and by <strong>convection and evaporation</strong>",
+            "The atmosphere radiates both <strong>down</strong> to the surface and <strong>up</strong> to space",
+            "Check three places: the surface, the atmosphere and the top of the atmosphere"
+          ],
+          "notes": "Deck slides 35–38 build the Sankey diagrams one arrow at a time, first with a non-greenhouse atmosphere and then with greenhouse gases. Drawing the pair side by side shows exactly what the greenhouse gases add."
+        },
+        {
+          "type": "equation",
+          "title": "Balancing the surface",
+          "latex": "\\text{solar} + \\text{back-radiation} = \\sigma T_{\\text{s}}^{4} + \\text{losses}",
+          "bullets": [
+            "\"Solar\" is the sunlight absorbed; \"losses\" are convection and evaporation",
+            "The surface is usually treated as a black body at temperature $T_{\\text{s}}$",
+            "A grey atmosphere at temperature $T_{\\text{a}}$ emits $e\\sigma T_{\\text{a}}^{4}$ in each direction"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "The surface with a grey atmosphere",
+          "start": "Model the surface as a black body. All the sunlight that isn't reflected reaches the surface, and the atmosphere is a grey body of emissivity $e$.",
+          "steps": [
+            {
+              "text": "Sunlight absorbed per square metre of surface",
+              "latex": "(1 - \\alpha)\\dfrac{S}{4}"
+            },
+            {
+              "text": "Infrared absorbed from the atmosphere",
+              "latex": "e\\sigma T_{\\text{a}}^{4}"
+            },
+            {
+              "text": "Power emitted by the black-body surface",
+              "latex": "\\sigma T_{\\text{s}}^{4}"
+            },
+            {
+              "text": "In equilibrium, in = out",
+              "latex": "(1 - \\alpha)\\dfrac{S}{4} + e\\sigma T_{\\text{a}}^{4} = \\sigma T_{\\text{s}}^{4}"
+            }
+          ],
+          "notes": "In this simple model the surface loses energy only by radiation. Questions will state what to include."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for flow problems",
+          "bullets": [
+            "Treat each system in turn: add up what goes in and what goes out",
+            "If the surface emission is shown as two arrows, add them before using $\\sigma T^{4}$",
+            "Arrows from the surface that pass through the atmosphere count at the top of the atmosphere, not for the atmosphere",
+            "If in and out differ, the system gains or loses that much power per square metre, so it warms or cools",
+            "To find a new temperature, set the new emitted intensity equal to the new absorbed intensity"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Energy flows in the Earth system",
+          "figure": "b2et",
+          "bullets": [
+            "Widths are to scale",
+            "Find the largest input to the surface: it is not the Sun"
+          ],
+          "notes": "Back-radiation from the atmosphere is about twice the sunlight absorbed by the surface. That surprises most students."
+        },
+        {
+          "type": "diagram",
+          "title": "The Earth without greenhouse gases",
+          "svg": "figures/b2-no-greenhouse.svg",
+          "alt": "Sankey diagram with arrow widths to scale, in watts per square metre. A band of 340 arrives from the Sun. 70 is reflected to space by clouds and 30 by the ground. The remaining 240 is absorbed by the ground. The ground emits 240 as infrared, which passes straight through the atmosphere to space.",
+          "bullets": [
+            "Arriving: 340 $\\text{W m}^{-2}$. Reflected: 70 by clouds and 30 by the ground",
+            "The ground absorbs 240 and emits 240 as infrared",
+            "With no greenhouse gases, all of that infrared escapes to space",
+            "A black-body surface emitting 240 $\\text{W m}^{-2}$ would be at about 255 K, far colder than today's 288 K"
+          ],
+          "notes": "Arrow widths are to scale. Check the balance at the top of the atmosphere: 340 in, and 70 + 30 + 240 = 340 out. Compare with the Sankey diagram of the real Earth on the previous slide. Check: $T = \\left(\\dfrac{240}{5.67 \\times 10^{-8}}\\right)^{1/4} = 255$ K."
+        },
+        {
+          "type": "worked",
+          "title": "A planet without greenhouse gases",
+          "question": "On a model planet, the atmosphere contains no greenhouse gases. The mean incoming intensity is 410 $\\text{W m}^{-2}$. Clouds reflect 90 $\\text{W m}^{-2}$ back to space, the ground reflects 40 $\\text{W m}^{-2}$, and the rest is absorbed by the ground. Determine (a) the intensity absorbed by the ground and (b) its equilibrium temperature, assuming it emits as a black body.",
+          "hint": "Sunlight is either reflected or absorbed. With no greenhouse gases, what the ground emits goes straight to space, so it must equal what it absorbs.",
+          "steps": [
+            {
+              "text": "(a) Subtract what is reflected.",
+              "latex": "410 - 90 - 40 = 280\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "(b) In equilibrium, the ground emits what it absorbs.",
+              "latex": "\\sigma T^{4} = 280"
+            },
+            {
+              "text": "Rearrange.",
+              "latex": "T^{4} = \\dfrac{280}{5.67 \\times 10^{-8}}"
+            },
+            {
+              "text": "Take the fourth root.",
+              "latex": "T = 265\\ \\text{K}"
+            }
+          ],
+          "notes": "Check at the top of the atmosphere: in 410, out 90 + 40 + 280 = 410."
+        },
+        {
+          "type": "worked",
+          "title": "Finding the missing flow",
+          "question": "In a model of the Earth, the mean intensities in $\\text{W m}^{-2}$ are: 340 arriving from the Sun, 102 reflected, 78 absorbed by the atmosphere, and the rest absorbed by the surface. The surface emits 398 of infrared, of which 36 escapes directly to space, and loses 98 by convection and evaporation. The atmosphere radiates 336 to the surface. Find (a) the sunlight absorbed by the surface, (b) whether the surface is in equilibrium, (c) the intensity the atmosphere must radiate to space for it to be in equilibrium and (d) the surface temperature, assuming it emits as a black body.",
+          "hint": "Add up the energy going into and out of each system in turn. The surface's infrared that doesn't escape directly is absorbed by the atmosphere.",
+          "steps": [
+            {
+              "text": "(a) The rest of the sunlight.",
+              "latex": "340 - 102 - 78 = 160"
+            },
+            {
+              "text": "(b) Surface: in equals out, so it is in equilibrium.",
+              "latex": "160 + 336 = 398 + 98 = 496"
+            },
+            {
+              "text": "(c) Infrared absorbed by the atmosphere.",
+              "latex": "398 - 36 = 362"
+            },
+            {
+              "text": "Atmosphere in, which must equal its total emission.",
+              "latex": "78 + 362 + 98 = 538"
+            },
+            {
+              "text": "Subtract the part sent down.",
+              "latex": "538 - 336 = 202\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "(d) All of the surface emission counts.",
+              "latex": "T = \\sqrt[4]{\\dfrac{398}{5.67 \\times 10^{-8}}} = 289\\ \\text{K}"
+            }
+          ],
+          "notes": "Finish by checking the top of the atmosphere: 102 + 36 + 202 = 340, equal to what arrives."
+        },
+        {
+          "type": "worked",
+          "title": "More greenhouse gas",
+          "question": "In the model of the previous example, extra greenhouse gas raises the back-radiation from 336 to 342 $\\text{W m}^{-2}$, while the other flows at the surface stay the same. Calculate (a) the net rate of energy gain per square metre of surface and (b) the eventual rise in surface temperature if the surface's infrared emission increases to restore equilibrium.",
+          "hint": "The surface was in equilibrium before, so the imbalance is only the change. Find the new emission and the temperature that goes with it.",
+          "steps": [
+            {
+              "text": "(a) Energy in minus energy out.",
+              "latex": "(160 + 342) - 496 = 6\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "(b) The new surface emission must be 6 higher.",
+              "latex": "398 + 6 = 404\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "New temperature.",
+              "latex": "T = \\sqrt[4]{\\dfrac{404}{5.67 \\times 10^{-8}}} = 290.54\\ \\text{K}"
+            },
+            {
+              "text": "Original temperature, to the same precision.",
+              "latex": "T = \\sqrt[4]{\\dfrac{398}{5.67 \\times 10^{-8}}} = 289.45\\ \\text{K}"
+            },
+            {
+              "text": "Rise in temperature.",
+              "latex": "\\Delta T = 290.54 - 289.45 = 1.1\\ \\text{K}"
+            }
+          ],
+          "notes": "Keep more figures here: rounding the temperatures to 3 s.f. too early loses the small difference. A 6 W m⁻² imbalance is only about 1.5% of the surface emission."
+        },
+        {
+          "type": "worked",
+          "title": "A grey atmosphere on an exoplanet",
+          "question": "A model of an exoplanet has a mean incoming intensity of 510 $\\text{W m}^{-2}$ and an albedo of 0.40. The atmosphere has an emissivity of 0.65 and a temperature of 260 K. All the sunlight that isn't reflected reaches the black-body surface. Calculate (a) the intensity radiated downwards by the atmosphere, (b) the surface temperature and (c) the rise in surface temperature if the atmosphere warms by 5.0 K.",
+          "hint": "The surface absorbs both sunlight and the atmosphere's downward radiation, and emits as a black body.",
+          "steps": [
+            {
+              "text": "(a) Grey-body emission from the atmosphere.",
+              "latex": "I_{\\text{a}} = 0.65\\sigma \\times 260^{4} = 168\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "(b) Add the absorbed sunlight.",
+              "latex": "0.60 \\times 510 + 168.4 = 474.4\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "Black-body surface: 302 K to 3 s.f., with more figures kept for part (c).",
+              "latex": "T_{\\text{s}} = \\sqrt[4]{\\dfrac{474.4}{5.67 \\times 10^{-8}}} = 302.44\\ \\text{K}"
+            },
+            {
+              "text": "(c) Atmosphere at 265 K emits 181.8, so the surface absorbs:",
+              "latex": "306 + 181.8 = 487.8\\ \\text{W m}^{-2}"
+            },
+            {
+              "text": "New surface temperature.",
+              "latex": "T_{\\text{s}} = 304.55\\ \\text{K}"
+            },
+            {
+              "text": "Rise in temperature.",
+              "latex": "\\Delta T = 304.55 - 302.44 = 2.1\\ \\text{K}"
+            }
+          ],
+          "notes": "Extra figures are kept because the rise is small compared with the temperatures. The extra 13 W m⁻² is only about 3% of what the surface absorbs, and because emission goes as the fourth power, a 3% rise in emission needs a rise of under 1% in temperature."
+        }
+      ],
+      "checks": [
+        "B2-009"
+      ]
+    },
+    {
+      "id": "enhanced",
+      "short": "Enhanced greenhouse effect",
+      "guide": "The augmentation of the greenhouse effect due to human activities is known as the enhanced greenhouse effect. The burning of fossil fuels is a primary cause.",
+      "sections": [
+        "enhanced"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Define the enhanced greenhouse effect and identify burning fossil fuels as its main cause.",
+        "Describe evidence for it, its feedbacks, its consequences and ways to reduce it."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The enhanced greenhouse effect",
+          "bullets": [
+            "The strengthening of the natural effect by human activities that add greenhouse gases",
+            "<strong>Burning fossil fuels</strong> is the main cause: it returns carbon stored for millions of years to the air as CO₂",
+            "CO₂ has risen from about 280 ppm before industry to over 420 ppm, an increase of about 50%",
+            "The rise in CO₂ follows the rise in fossil fuel emissions",
+            "Global mean surface temperature is more than 1 °C above that of the late 1800s"
+          ],
+          "notes": "The Keeling curve on the topic page is worth showing here. Ask students to explain the small yearly zigzag. Clarify that the ozone hole is a separate problem."
+        },
+        {
+          "type": "bullets",
+          "title": "Feedbacks and consequences",
+          "bullets": [
+            "<strong>Positive feedbacks</strong> amplify warming",
+            [
+              "Warmer air holds more water vapour",
+              "Melting ice lowers the albedo",
+              "Thawing permafrost releases methane"
+            ],
+            "<strong>Consequences</strong> include:",
+            [
+              "Warmer air and oceans; more frequent extreme weather",
+              "Rising seas, from melting land ice and thermal expansion",
+              "Changed local climates; more acidic oceans"
+            ]
+          ],
+          "notes": "Note that melting sea ice does not itself raise the sea level; melting land ice does. Thermal expansion of the water does too."
+        },
+        {
+          "type": "bullets",
+          "title": "Reducing the enhanced effect",
+          "bullets": [
+            "Generate electricity from renewable and nuclear sources instead of fossil fuels",
+            "Use energy more efficiently, waste less and consume less",
+            "Use public and electric transport",
+            "Protect and replant forests; capture CO₂ from power stations",
+            "Large-scale change needs action by governments and international cooperation"
+          ],
+          "notes": "Physics can predict outcomes, but it cannot settle who should pay. A short discussion here connects with the ToK questions on the page."
+        }
+      ],
+      "checks": [
+        "B2-010"
+      ]
+    },
+    {
+      "id": "modelling",
+      "short": "A step-by-step climate model",
+      "extra": true,
+      "guide": "Extra (from the teacher's deck): a simple spreadsheet model of how a system approaches equilibrium.",
+      "sections": [
+        "modelling"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Use a simple iterative model to show how a system approaches a new equilibrium, and why the response takes time."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Modelling with a spreadsheet",
+          "bullets": [
+            "Real climate models need supercomputers, but the central idea fits in a spreadsheet",
+            "A <strong>steady input</strong> plays the part of the power from the Sun",
+            "A <strong>loss that grows with the amount stored</strong> plays the part of radiation to space",
+            "Equilibrium is reached once the loss equals the input",
+            "Adding greenhouse gas is like reducing the fractional loss: the level climbs to a new equilibrium"
+          ],
+          "notes": "A tank of water with a tap and a leak gives students something concrete to reason about before any spreadsheet appears."
+        },
+        {
+          "type": "bullets",
+          "title": "Building the model",
+          "bullets": [
+            "Column A: the time step, with each cell one more than the cell above",
+            "Column B: the amount stored, starting at zero",
+            "In B3 enter =0.92*B2+6, for an input of 6 and a loss of 8% each step",
+            "Fill the formulas down for about 100 rows, then plot a graph of B against A",
+            "Change the input or the loss and watch the new equilibrium appear"
+          ],
+          "notes": "Students can build this themselves in ten minutes. Ask them to predict the equilibrium first, then check it from the graph."
+        },
+        {
+          "type": "worked",
+          "title": "A pond fed by a stream",
+          "question": "A new pond starts empty. Each day a stream adds 6 $\\text{m}^3$ of water, and 8% of the water stored is lost by seepage and evaporation, so that $M_{\\text{new}} = 0.92M_{\\text{old}} + 6$. Determine (a) the volume of water after 3 days, (b) the equilibrium volume and (c) how long the pond takes to reach 95% of its equilibrium volume.",
+          "hint": "For (a), apply the rule three times. At equilibrium, the volume no longer changes, so what is lost equals what flows in.",
+          "steps": [
+            {
+              "text": "(a) Apply the rule, starting from zero.",
+              "latex": "0 \\rightarrow 6 \\rightarrow 11.5 \\rightarrow 16.6\\ \\text{m}^3"
+            },
+            {
+              "text": "(b) At equilibrium, 8% of the water equals the daily input.",
+              "latex": "0.08M = 6"
+            },
+            {
+              "text": "Solve for the volume.",
+              "latex": "M = 75\\ \\text{m}^3"
+            },
+            {
+              "text": "(c) The gap to equilibrium shrinks by a factor of 0.92 each day.",
+              "latex": "0.92^{n} = 0.05"
+            },
+            {
+              "text": "Use logarithms, or read it from the spreadsheet.",
+              "latex": "n \\approx 36\\ \\text{days}"
+            }
+          ],
+          "notes": "The pond approaches equilibrium quickly at first, then ever more slowly. In the same way, the climate takes decades to respond fully to a change in the atmosphere."
+        }
+      ]
+    }
+  ]
+}

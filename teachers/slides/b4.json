@@ -1,0 +1,1434 @@
+{
+  "topic": "B.4",
+  "hours": 0,
+  "hlHours": 8,
+  "points": [
+    {
+      "id": "internal",
+      "short": "Internal energy and temperature",
+      "hl": true,
+      "guide": "The change in internal energy as given by ΔU = (3/2)Nk_BΔT = (3/2)nRΔT of a system is related to the change of its temperature.",
+      "sections": [
+        "internal"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Describe internal energy, and distinguish it from heat and work.",
+        "Calculate the change in internal energy of a monatomic ideal gas from its change in temperature."
+      ],
+      "checks": [
+        "B4-007"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What is internal energy?",
+          "bullets": [
+            "<strong>Internal energy</strong> $U$: the total random kinetic energy of the particles plus the potential energy of the forces between them",
+            "In an <strong>ideal gas</strong> the particles exert no forces except in collisions, so its internal energy is all kinetic",
+            "The mean kinetic energy of a particle is proportional to the <strong>kelvin</strong> temperature (B.3)",
+            "Exam calculations on gases in B.4 use <strong>monatomic</strong> ideal gases, such as helium, neon and argon",
+            "A positive $\\Delta U$ means the internal energy has increased; a negative one means it has decreased"
+          ],
+          "notes": "Gases with more than one atom per molecule also store energy in rotation and vibration, so they need more energy for the same temperature rise. That is beyond the calculations here, but worth saying once. The examples here with air or steam use only the first law and $W = P\\Delta V$, which hold for any gas."
+        },
+        {
+          "type": "bullets",
+          "title": "Heat is not internal energy",
+          "bullets": [
+            "Internal energy is something a system <strong>has</strong>; heat and work are ways of <strong>transferring</strong> energy",
+            "<strong>Heat</strong> (thermal energy transfer): energy moving because of a temperature difference",
+            "<strong>Work</strong>: energy transferred by a force acting through a distance, such as a gas pushing a piston",
+            "Energy supplied may raise the mean kinetic energy (the temperature rises) or stretch bonds (raising potential energy at constant temperature, as in melting)",
+            "Avoid saying that a body \"contains heat\""
+          ],
+          "notes": "The comparison with mechanics helps: work is not \"stored\" in a body either. It is a transfer into or out of a store."
+        },
+        {
+          "type": "equation",
+          "title": "Change in internal energy",
+          "latex": [
+            "\\Delta U = \\tfrac{3}{2}Nk_{B}\\Delta T",
+            "\\Delta U = \\tfrac{3}{2}nR\\Delta T"
+          ],
+          "bullets": [
+            "Use $N$ (number of atoms) with $k_B$, and $n$ (amount in moles) with $R$",
+            "For a fixed amount of monatomic ideal gas, $U$ depends <strong>only on the temperature</strong>"
+          ],
+          "notes": "Both forms are in the data booklet. $k_B = 1.38 \\times 10^{-23}\\ \\text{J K}^{-1}$ and $R = 8.31\\ \\text{J K}^{-1}\\ \\text{mol}^{-1}$."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the internal energy change",
+          "start": "Start from the mean kinetic energy of one atom (B.3). The atoms of a monatomic ideal gas have no potential energy.",
+          "steps": [
+            {
+              "text": "Mean kinetic energy of one atom",
+              "latex": "\\bar{E}_{\\text{k}} = \\tfrac{3}{2}k_{B}T"
+            },
+            {
+              "text": "Multiply by the number of atoms $N$",
+              "latex": "U = \\tfrac{3}{2}Nk_{B}T"
+            },
+            {
+              "text": "Only $T$ can change, for a fixed amount of gas",
+              "latex": "\\Delta U = \\tfrac{3}{2}Nk_{B}\\Delta T"
+            },
+            {
+              "text": "Since $N = nN_A$ and $R = N_Ak_B$, the product $Nk_B$ equals $nR$",
+              "latex": "\\Delta U = \\tfrac{3}{2}nR\\Delta T"
+            },
+            {
+              "text": "From $PV = nRT$: useful when given $P$ and $V$",
+              "latex": "\\Delta U = \\tfrac{3}{2}\\Delta(PV)"
+            }
+          ],
+          "notes": "The last line isn't in the data booklet, but it saves a lot of time on p–V cycle questions."
+        },
+        {
+          "type": "worked",
+          "title": "A welding cylinder in the sun",
+          "question": "A sealed steel welding cylinder holds 80 mol of argon, a monatomic gas. Standing in the sun, it warms from 288 K to 313 K. Find the increase in internal energy of the argon, (a) using $n$ and $R$ and (b) using $N$ and $k_B$.",
+          "hint": "Find the temperature change first. Then choose the form of the equation that matches the quantity you are using, moles or atoms.",
+          "steps": [
+            {
+              "text": "Temperature change",
+              "latex": "\\Delta T = 313 - 288 = 25\\ \\text{K}"
+            },
+            {
+              "text": "(a) Use moles and $R$",
+              "latex": "\\Delta U = 1.5 \\times 80 \\times 8.31 \\times 25"
+            },
+            {
+              "text": "The increase in internal energy",
+              "latex": "\\Delta U = 2.5 \\times 10^{4}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Number of atoms",
+              "latex": "N = 80 \\times 6.02 \\times 10^{23} = 4.8 \\times 10^{25}"
+            },
+            {
+              "text": "Use atoms and $k_B$: the same result",
+              "latex": "\\Delta U = 1.5Nk_{B}\\Delta T = 2.5 \\times 10^{4}\\ \\text{J}"
+            }
+          ],
+          "notes": "The cylinder's volume is fixed, so no work is done, and all of this energy arrived by heating."
+        }
+      ]
+    },
+    {
+      "id": "first",
+      "short": "First law of thermodynamics",
+      "hl": true,
+      "guide": "The first law of thermodynamics as given by Q = ΔU + W results from the application of conservation of energy to a closed system and relates the internal energy of a system to the transfer of energy as heat and as work. (Guidance: closed and isolated systems; Clausius sign convention.)",
+      "sections": [
+        "systems",
+        "first"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Distinguish between closed and isolated systems, and use the Clausius sign convention for $Q$ and $W$.",
+        "Apply the first law $Q = \\Delta U + W$ to a gas."
+      ],
+      "checks": [
+        "B4-002"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Systems and signs",
+          "bullets": [
+            "<strong>Closed system</strong>: no mass enters or leaves, but energy can transfer as heat or as work",
+            "<strong>Isolated system</strong>: neither mass nor energy can enter or leave",
+            "Clausius sign convention:",
+            [
+              "$Q$ is positive when thermal energy goes <strong>into</strong> the system",
+              "$W$ is positive when the system does work <strong>on</strong> its surroundings"
+            ],
+            "So work done <strong>on</strong> a gas (a compression) makes $W$ negative"
+          ],
+          "notes": "A gas in a syringe being heated is closed, not isolated. Ask students for one everyday example of each."
+        },
+        {
+          "type": "equation",
+          "title": "The first law of thermodynamics",
+          "latex": "Q = \\Delta U + W",
+          "bullets": [
+            "Conservation of energy for a closed system",
+            "Thermal energy supplied goes into raising the internal energy and into work done by the gas"
+          ],
+          "notes": "Some older books define $W$ as the work done on the gas, which changes a sign in the law. The IB uses the form above."
+        },
+        {
+          "type": "bullets",
+          "title": "Using the first law",
+          "bullets": [
+            "Rewrite it as $\\Delta U = Q - W$ when you want the change in internal energy",
+            "Decide the sign of $Q$ and of $W$ <strong>before</strong> you substitute",
+            "\"Loses energy to the surroundings\" means a negative $Q$",
+            "\"Is compressed\" or \"work is done on it\" means a negative $W$",
+            "The law holds for any closed system; only $\\Delta U = \\tfrac{3}{2}nR\\Delta T$ needs a monatomic ideal gas"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A bicycle pump",
+          "question": "During one stroke of a bicycle pump, with the outlet closed, 18 J of work is done on the air in the barrel, and the air loses 5 J of thermal energy to the barrel walls. Find the change in internal energy of the air.",
+          "hint": "Work out the sign of each term first. Is energy leaving or entering as heat? Is the air doing work, or having work done on it?",
+          "steps": [
+            {
+              "text": "Work is done on the air, so $W$ is negative",
+              "latex": "W = -18\\ \\text{J}"
+            },
+            {
+              "text": "The air loses thermal energy, so $Q$ is negative",
+              "latex": "Q = -5\\ \\text{J}"
+            },
+            {
+              "text": "Rearrange the first law",
+              "latex": "\\Delta U = Q - W = -5 - (-18)"
+            },
+            {
+              "text": "The internal energy rises, so the air warms",
+              "latex": "\\Delta U = +13\\ \\text{J}"
+            }
+          ],
+          "notes": "Students who have pumped a tyre will know the barrel gets warm."
+        },
+        {
+          "type": "worked",
+          "title": "The power stroke",
+          "question": "During the power stroke in one cylinder of a car engine, the hot gas does 420 J of work on the piston, and 150 J of thermal energy passes from the gas into the cylinder walls. Find the change in internal energy of the gas, and state what happens to its temperature.",
+          "hint": "Here the gas does work and also loses thermal energy. Decide what that means for the signs of $W$ and $Q$.",
+          "steps": [
+            {
+              "text": "The gas does work on the piston",
+              "latex": "W = +420\\ \\text{J}"
+            },
+            {
+              "text": "Energy leaves the gas as heat",
+              "latex": "Q = -150\\ \\text{J}"
+            },
+            {
+              "text": "Rearrange the first law",
+              "latex": "\\Delta U = Q - W = -150 - 420"
+            },
+            {
+              "text": "The internal energy falls, so the temperature falls",
+              "latex": "\\Delta U = -570\\ \\text{J}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "short": "Work done by a gas",
+      "hl": true,
+      "guide": "The work done by or on a closed system as given by W = PΔV when its boundaries are changed can be described in terms of pressure and changes of volume of the system. (Guidance: includes situations where pressure is not constant.)",
+      "sections": [
+        "work"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Calculate the work done by or on a gas at constant pressure using $W = P\\Delta V$.",
+        "Find the work done when the pressure changes, from the area under a p–V graph."
+      ],
+      "checks": [
+        "B4-005"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "When a gas changes volume",
+          "bullets": [
+            "A gas pushes on the walls of its container, so a moving wall has work done on it",
+            "<strong>Expanding</strong> gas ($\\Delta V$ positive): the gas does work, so $W$ is positive",
+            "<strong>Compressed</strong> gas ($\\Delta V$ negative): work is done on the gas, so $W$ is negative",
+            "<strong>No change in volume</strong>: no work is done",
+            "When the pressure changes, the work is the <strong>area under the p–V graph</strong>"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Work done by a gas",
+          "latex": "W = P\\Delta V",
+          "bullets": [
+            "Valid when the pressure is <strong>constant</strong>",
+            "Pressure in pascals and volume in $\\text{m}^{3}$ give work in joules"
+          ],
+          "notes": "$1\\ \\text{litre} = 10^{-3}\\ \\text{m}^3$ and $1\\ \\text{cm}^3 = 10^{-6}\\ \\text{m}^3$: unit changes are the commonest source of lost marks here."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the work done by a gas",
+          "start": "A gas at constant pressure $P$ pushes a piston of area $A$ out through a short distance $d$.",
+          "steps": [
+            {
+              "text": "Force of the gas on the piston",
+              "latex": "F = PA"
+            },
+            {
+              "text": "Work = force × distance",
+              "latex": "W = Fd = PAd"
+            },
+            {
+              "text": "The volume swept out by the piston",
+              "latex": "\\Delta V = Ad"
+            },
+            {
+              "text": "Substitute: the work done by the gas",
+              "latex": "W = P\\Delta V"
+            }
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Work is the area under the graph",
+          "figure": "b4at",
+          "bullets": [
+            "The area has units of $\\text{Pa} \\times \\text{m}^{3} = \\text{J}$",
+            "A straight sloping line gives a trapezium",
+            "A curve: count squares on the grid"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A steam engine cylinder",
+          "question": "While the inlet valve of a steam engine is open, steam at a constant pressure of $4.0 \\times 10^{5}$ Pa pushes a piston of area 0.080 $\\text{m}^{2}$ through a distance of 0.60 m. Find the work done by the steam.",
+          "hint": "The pressure is constant. Find the change in volume from the area of the piston and how far it moves.",
+          "steps": [
+            {
+              "text": "Volume swept out by the piston",
+              "latex": "\\Delta V = 0.080 \\times 0.60 = 0.048\\ \\text{m}^{3}"
+            },
+            {
+              "text": "Constant pressure",
+              "latex": "W = P\\Delta V"
+            },
+            {
+              "text": "Substitute",
+              "latex": "W = 4.0 \\times 10^{5} \\times 0.048"
+            },
+            {
+              "text": "The work done by the steam",
+              "latex": "W = 1.9 \\times 10^{4}\\ \\text{J}"
+            }
+          ],
+          "notes": "A good moment to raise the guide's linking question about harnessing the power of steam."
+        },
+        {
+          "type": "worked",
+          "title": "An air shock on a mountain bike",
+          "question": "As the air shock on a mountain bike extends, the volume of the air inside rises from $1.0 \\times 10^{-4}\\ \\text{m}^{3}$ to $1.5 \\times 10^{-4}\\ \\text{m}^{3}$, while the pressure falls from $1.2 \\times 10^{6}$ Pa to $0.80 \\times 10^{6}$ Pa. Taking the p–V graph to be a straight line, find the work done by the air.",
+          "hint": "The pressure isn't constant, so sketch the graph. What shape is the region under a sloping straight line?",
+          "steps": [
+            {
+              "text": "The area under the line is a trapezium: use the mean pressure",
+              "latex": "\\bar{P} = 1.0 \\times 10^{6}\\ \\text{Pa}"
+            },
+            {
+              "text": "Change in volume",
+              "latex": "\\Delta V = 0.50 \\times 10^{-4}\\ \\text{m}^{3}"
+            },
+            {
+              "text": "Area = mean pressure × change in volume",
+              "latex": "W = 1.0 \\times 10^{6} \\times 0.50 \\times 10^{-4}"
+            },
+            {
+              "text": "Positive, since the air expands",
+              "latex": "W = 50\\ \\text{J}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "processes",
+      "short": "Four types of process",
+      "hl": true,
+      "guide": "Isovolumetric, isobaric, isothermal and adiabatic processes are obtained by keeping one variable fixed.",
+      "sections": [
+        "processes"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Identify isovolumetric, isobaric, isothermal and adiabatic processes, in words and on p–V graphs.",
+        "Apply the first law to each type of process."
+      ],
+      "checks": [
+        "B4-003"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "States and processes",
+          "bullets": [
+            "The <strong>state</strong> of a gas is its set of values of $P$, $V$, $n$ and $T$, linked by $PV = nRT$",
+            "A <strong>process</strong> takes the gas from one state to another",
+            "With $n$ fixed, four simple processes each hold one thing fixed:",
+            [
+              "<strong>isovolumetric</strong> (isochoric): constant volume",
+              "<strong>isobaric</strong>: constant pressure",
+              "<strong>isothermal</strong>: constant temperature",
+              "<strong>adiabatic</strong>: no thermal energy transfer"
+            ]
+          ],
+          "notes": "When measuring these changes in the lab, wait before each reading: the gas must return to the temperature of its bath if the change is to count as isothermal."
+        },
+        {
+          "type": "bullets",
+          "title": "Sketching processes on a p–V graph",
+          "bullets": [
+            "Isovolumetric: a <strong>vertical</strong> line; isobaric: a <strong>horizontal</strong> line",
+            "Isothermal: a curve called an <strong>isotherm</strong>, with $P$ inversely proportional to $V$",
+            "A higher temperature gives an isotherm <strong>further from the origin</strong>",
+            "Moving between isotherms tells you whether the gas is warming or cooling",
+            "Put an arrow on each line to show the direction of the change"
+          ],
+          "notes": "Pressure, volume and temperature can be drawn as a 3D surface. Each isotherm is one slice through it at a fixed temperature."
+        },
+        {
+          "type": "diagram",
+          "title": "Four processes from one point",
+          "svg": "figures/b4-four-processes.svg",
+          "alt": "A pressure against volume graph with four paths from the point A. Isochoric: straight up at constant volume. Isobaric: horizontally to the right at constant pressure. Isothermal: a curve falling to the right. Adiabatic: a steeper curve falling to the right, below the isothermal curve.",
+          "bullets": [
+            "<strong>Isochoric</strong>: constant $V$ (vertical)",
+            "<strong>Isobaric</strong>: constant $P$ (horizontal)",
+            "<strong>Isothermal</strong>: constant $T$",
+            "<strong>Adiabatic</strong>: $Q = 0$, so steeper than the isothermal"
+          ],
+          "notes": "The curves are calculated for a monatomic ideal gas: isothermal $PV = $ constant, adiabatic $PV^{5/3} = $ constant. Ask which expansion does the most work, by comparing the areas under the paths."
+        },
+        {
+          "type": "equation",
+          "title": "The first law in each process",
+          "latex": [
+            "\\text{isovolumetric: } Q = \\Delta U",
+            "\\text{isobaric: } Q = \\Delta U + P\\Delta V",
+            "\\text{isothermal: } Q = W",
+            "\\text{adiabatic: } \\Delta U = -W"
+          ],
+          "bullets": [
+            "Each one comes from fixing one quantity in the first law, $Q = \\Delta U + W$",
+            "The isothermal form needs an ideal gas, for which constant temperature means $\\Delta U = 0$"
+          ],
+          "notes": "Only the first law itself and $W = P\\Delta V$ are in the data booklet. Students should be able to produce these four forms quickly."
+        },
+        {
+          "type": "derivation",
+          "title": "The gas laws from the equation of state",
+          "start": "Start from $PV = nRT$ with $n$ and $R$ constant, then hold one more quantity fixed.",
+          "steps": [
+            {
+              "text": "Constant pressure: $V$ is proportional to $T$",
+              "latex": "\\dfrac{V}{T} = \\dfrac{nR}{P} = \\text{constant}"
+            },
+            {
+              "text": "Constant temperature: Boyle's law",
+              "latex": "P_{1}V_{1} = P_{2}V_{2} = nRT"
+            },
+            {
+              "text": "Constant volume: $P$ is proportional to $T$",
+              "latex": "\\dfrac{P}{T} = \\dfrac{nR}{V} = \\text{constant}"
+            }
+          ],
+          "notes": "Each of these needs a <em>closed</em> system, because $n$ is fixed. It need not be isolated: energy must flow in or out for most of these changes."
+        },
+        {
+          "type": "derivation",
+          "title": "Absolute zero from a pressure graph",
+          "start": "A fixed amount of gas at constant volume is warmed. Its Celsius temperature $\\theta$ and pressure $P$ are recorded.",
+          "steps": [
+            {
+              "text": "Constant volume",
+              "latex": "P = \\dfrac{nR}{V}T"
+            },
+            {
+              "text": "Change to Celsius, using $T = \\theta + 273$",
+              "latex": "P = \\dfrac{nR}{V}(\\theta + 273)"
+            },
+            {
+              "text": "A straight line on a graph of $P$ against $\\theta$, not through the origin",
+              "latex": "\\text{gradient} = \\dfrac{nR}{V}"
+            },
+            {
+              "text": "The pressure would reach zero at the intercept: absolute zero",
+              "latex": "\\theta = -273\\ ^{\\circ}\\text{C}"
+            }
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Thermal energy at constant pressure",
+          "start": "A monatomic ideal gas changes temperature at constant pressure. Find the work done and the thermal energy needed.",
+          "steps": [
+            {
+              "text": "At constant pressure, $PV = nRT$ gives",
+              "latex": "W = P\\Delta V = nR\\Delta T"
+            },
+            {
+              "text": "The change in internal energy is",
+              "latex": "\\Delta U = \\tfrac{3}{2}nR\\Delta T"
+            },
+            {
+              "text": "Add these, by the first law",
+              "latex": "Q = \\Delta U + W"
+            },
+            {
+              "text": "So the thermal energy transferred is",
+              "latex": "Q = \\tfrac{5}{2}nR\\Delta T"
+            }
+          ],
+          "notes": "At constant volume, the thermal energy needed for the same temperature rise is only $\\tfrac{3}{2}nR\\Delta T$, because no work is done."
+        },
+        {
+          "type": "worked",
+          "title": "Switching on a filament lamp",
+          "question": "A filament lamp of internal volume $1.2 \\times 10^{-4}\\ \\text{m}^{3}$ is filled with argon (treated as a monatomic ideal gas) at $8.0 \\times 10^{4}$ Pa and 295 K. When it is switched on, the mean temperature of the argon rises to 400 K. Find (a) the new pressure of the argon and (b) the thermal energy absorbed by the argon.",
+          "hint": "The glass doesn't change size, so this is an isovolumetric change. What does that make $W$? In (b), $\\Delta U = \\tfrac{3}{2}\\Delta(PV)$ avoids finding $n$.",
+          "steps": [
+            {
+              "text": "(a) At constant volume, pressure is proportional to $T$",
+              "latex": "\\dfrac{P_{2}}{P_{1}} = \\dfrac{T_{2}}{T_{1}} = \\dfrac{400}{295}"
+            },
+            {
+              "text": "New pressure",
+              "latex": "P_{2} = 1.1 \\times 10^{5}\\ \\text{Pa}"
+            },
+            {
+              "text": "(b) No work is done, so",
+              "latex": "Q = \\Delta U = \\tfrac{3}{2}V\\Delta P"
+            },
+            {
+              "text": "The unrounded pressure rise is $2.85 \\times 10^{4}$ Pa",
+              "latex": "Q = 1.5 \\times 1.2 \\times 10^{-4} \\times 2.85 \\times 10^{4}"
+            },
+            {
+              "text": "The thermal energy absorbed",
+              "latex": "Q = 5.1\\ \\text{J}"
+            }
+          ],
+          "notes": "Lamp makers choose a filling pressure below atmospheric so that the pressure is close to atmospheric when the lamp is hot."
+        },
+        {
+          "type": "worked",
+          "title": "Slow compression in a water bath",
+          "question": "Krypton (treated as a monatomic ideal gas) in a thin metal cylinder stands in a water bath and is compressed very slowly, from $2.4 \\times 10^{-4}\\ \\text{m}^{3}$ at $1.1 \\times 10^{5}$ Pa to $0.80 \\times 10^{-4}\\ \\text{m}^{3}$. The work done on the krypton is 29 J. Find (a) its final pressure, (b) the change in its internal energy and (c) the thermal energy transferred, stating the direction.",
+          "hint": "Slow compression in a water bath keeps the temperature constant. What does that tell you about $PV$, and about $\\Delta U$?",
+          "steps": [
+            {
+              "text": "(a) Isothermal, so $PV$ is constant",
+              "latex": "P_{2} = \\dfrac{1.1 \\times 10^{5} \\times 2.4}{0.80}"
+            },
+            {
+              "text": "Final pressure",
+              "latex": "P_{2} = 3.3 \\times 10^{5}\\ \\text{Pa}"
+            },
+            {
+              "text": "(b) The temperature doesn't change",
+              "latex": "\\Delta U = 0"
+            },
+            {
+              "text": "(c) Work is done on the gas, so $W$ is negative",
+              "latex": "Q = W = -29\\ \\text{J}"
+            },
+            {
+              "text": "So 29 J of thermal energy leaves the krypton and passes to the water."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adiabatic",
+      "short": "Adiabatic processes",
+      "hl": true,
+      "challenge": "CC-B4-01",
+      "guide": "Adiabatic processes in monatomic ideal gases can be modelled by the equation as given by PV^(5/3) = constant.",
+      "sections": [
+        "adiabatic",
+        "processes"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Explain why a gas cools in an adiabatic expansion and warms in an adiabatic compression.",
+        "Use $PV^{\\frac{5}{3}} = \\text{constant}$ for a monatomic ideal gas."
+      ],
+      "checks": [
+        "B4-008"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Adiabatic changes",
+          "bullets": [
+            "In an <strong>adiabatic</strong> process no thermal energy enters or leaves, so $Q = 0$ and $\\Delta U = -W$",
+            "This happens when the gas is well insulated, or when the change is so <strong>fast</strong> that heat has no time to flow",
+            "Expanding: the gas does work out of its own internal energy, and <strong>cools</strong>",
+            "Compressed: the work done on the gas goes into its internal energy, and it <strong>warms</strong>"
+          ],
+          "notes": "Quick demonstration: a fire syringe. Air compressed very quickly becomes hot enough to light a scrap of cotton wool."
+        },
+        {
+          "type": "bullets",
+          "title": "Isothermal or adiabatic?",
+          "bullets": [
+            "Isothermal: the temperature is fixed, and thermal energy transfers ($Q = W$)",
+            "Adiabatic: no thermal energy transfers, and the temperature changes ($\\Delta U = -W$)",
+            "Isothermal needs a <strong>slow</strong> change, with good thermal contact",
+            "Adiabatic needs a <strong>fast</strong> change, or good insulation",
+            "In an adiabatic compression the pressure rises for two reasons: smaller volume <strong>and</strong> higher temperature"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Adiabatic change",
+          "latex": "PV^{\\frac{5}{3}} = \\text{constant}",
+          "bullets": [
+            "Only for a <strong>monatomic ideal gas</strong>",
+            "Between two states, the product is the same at each end",
+            "Given without proof at this level; it is in the data booklet"
+          ],
+          "notes": "Strictly, the equation describes a reversible adiabatic change, with a well-defined pressure throughout. A gas rushing freely into a vacuum has $Q = 0$ but does not follow it."
+        },
+        {
+          "type": "derivation",
+          "title": "Temperature in an adiabatic change",
+          "start": "For a monatomic ideal gas, combine the adiabatic equation with the equation of state, to remove the pressure.",
+          "steps": [
+            {
+              "text": "The adiabatic equation",
+              "latex": "PV^{\\frac{5}{3}} = \\text{constant}"
+            },
+            {
+              "text": "Replace $P$ using $PV = nRT$",
+              "latex": "\\dfrac{nRT}{V}V^{\\frac{5}{3}} = \\text{constant}"
+            },
+            {
+              "text": "Combine the powers of $V$",
+              "latex": "nRTV^{\\frac{2}{3}} = \\text{constant}"
+            },
+            {
+              "text": "$n$ and $R$ are constant",
+              "latex": "TV^{\\frac{2}{3}} = \\text{constant}"
+            }
+          ],
+          "notes": "Students can always reach the same answer with $PV/T = \\text{constant}$ as a second step, so this form is a convenience and not something to memorise. Like the adiabatic equation, it holds only for a monatomic ideal gas, and it is not in the data booklet."
+        },
+        {
+          "type": "diagram",
+          "title": "An adiabat is steeper than an isotherm",
+          "figure": "b4bt",
+          "bullets": [
+            "Both curves pass through the same state",
+            "Compressing along the adiabat gives a higher pressure, because the gas also warms"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Inside a cryocooler",
+          "question": "In a cryocooler, used to chill sensitive detectors, helium (treated as a monatomic ideal gas) at $2.0 \\times 10^{6}$ Pa and 60 K expands adiabatically until its pressure is $5.0 \\times 10^{5}$ Pa. Find (a) the factor by which its volume increases and (b) its final temperature.",
+          "hint": "Write the adiabatic equation for the two states and make the volume ratio the subject. For the temperature, you can use $\\dfrac{PV}{T} = \\text{constant}$.",
+          "steps": [
+            {
+              "text": "(a) Rearrange the adiabatic equation for the two states",
+              "latex": "\\dfrac{V_{2}}{V_{1}} = \\left(\\dfrac{P_{1}}{P_{2}}\\right)^{\\frac{3}{5}}"
+            },
+            {
+              "text": "The pressure ratio is 4",
+              "latex": "\\dfrac{V_{2}}{V_{1}} = 4^{0.6} = 2.30"
+            },
+            {
+              "text": "(b) Use the ideal gas relation, with the unrounded ratio",
+              "latex": "\\dfrac{T_{2}}{T_{1}} = \\dfrac{P_{2}V_{2}}{P_{1}V_{1}} = \\dfrac{2.297}{4}"
+            },
+            {
+              "text": "The final temperature",
+              "latex": "T_{2} = 0.574 \\times 60 = 34\\ \\text{K}"
+            }
+          ],
+          "notes": "Helium is used because it stays a gas at these very low temperatures."
+        },
+        {
+          "type": "worked",
+          "title": "A rapid compression machine",
+          "question": "Rapid compression machines are used to study how fuels ignite. In one, 0.040 mol of argon (treated as a monatomic ideal gas) at 310 K is squeezed adiabatically to one fifth of its original volume. Find (a) the final temperature and (b) the work done by the argon.",
+          "hint": "The form of the adiabatic equation with $T$ and $V$ gets straight to the temperature. Then use the first law: what is $Q$?",
+          "steps": [
+            {
+              "text": "(a) Temperature and volume are linked",
+              "latex": "T_{2} = T_{1}\\left(\\dfrac{V_{1}}{V_{2}}\\right)^{\\frac{2}{3}}"
+            },
+            {
+              "text": "The volume ratio is 5",
+              "latex": "T_{2} = 310 \\times 5^{\\frac{2}{3}} = 906\\ \\text{K}"
+            },
+            {
+              "text": "(b) The temperature rises by 596 K",
+              "latex": "\\Delta U = 1.5 \\times 0.040 \\times 8.31 \\times 596"
+            },
+            {
+              "text": "This is the change in internal energy",
+              "latex": "\\Delta U = +297\\ \\text{J}"
+            },
+            {
+              "text": "Adiabatic, so $Q = 0$ and the work is the negative of this",
+              "latex": "W = -3.0 \\times 10^{2}\\ \\text{J}"
+            }
+          ],
+          "notes": "The negative sign means work is done on the gas. Argon reaches a higher temperature than air would for the same compression."
+        }
+      ]
+    },
+    {
+      "id": "cycles",
+      "short": "Cycles and heat engines",
+      "hl": true,
+      "challenge": "CC-B4-02",
+      "guide": "Cyclic gas processes are used to run heat engines.",
+      "sections": [
+        "engines"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Describe how a cycle of gas processes runs a heat engine.",
+        "Find the net work done in a cycle from a p–V graph, and explain what reversing the cycle does."
+      ],
+      "checks": [
+        "B4-006"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Cycles on a p–V graph",
+          "bullets": [
+            "A <strong>cycle</strong> is a series of processes that brings the gas back to its starting state",
+            "The temperature returns to its first value, so $\\Delta U = 0$ over a whole cycle",
+            "So over a cycle the net thermal energy in equals the net work out",
+            "<strong>Net work per cycle = area enclosed by the loop</strong>",
+            "Clockwise loop: the gas does net work (an engine)"
+          ],
+          "notes": "Ask why more work is done by the gas than on it in a clockwise loop: the expansion happens at higher pressures than the compression."
+        },
+        {
+          "type": "bullets",
+          "title": "Heat engines",
+          "bullets": [
+            "A <strong>heat engine</strong> converts part of the thermal energy it takes in into mechanical work, cycle after cycle",
+            "Simplest form: a gas in a cylinder with a piston",
+            "It takes in thermal energy from a <strong>hot reservoir</strong> (for example, burning fuel)",
+            "It does useful work on the piston",
+            "It gives out the rest to a <strong>cold reservoir</strong> (for example, the air or a river)"
+          ],
+          "notes": "Show an animation of a four-stroke engine and ask students to pick out each stage of the cycle."
+        },
+        {
+          "type": "bullets",
+          "title": "Running a cycle backwards",
+          "bullets": [
+            "An anticlockwise loop means net work is done <strong>on</strong> the gas",
+            "The gas takes in thermal energy at low temperature and gives it out at high temperature",
+            "Reversing the cycle changes the <strong>sign</strong> of the net work, not its size",
+            "This is how <strong>refrigerators</strong> and <strong>heat pumps</strong> work",
+            "Energy can move from cold to hot here only because work is done on the system"
+          ],
+          "notes": "For a fridge, the energy given out to the kitchen equals the energy removed from the food compartment plus the work done by the compressor. Students rarely expect that the kitchen ends up warmer."
+        },
+        {
+          "type": "diagram",
+          "title": "Energy flows in a refrigerator",
+          "svg": "figures/b4-refrigerator.svg",
+          "alt": "Energy flow diagram. Thermal energy Q c flows from the cold interior into the fridge. Work W is done on the fridge. Thermal energy Q h flows out of the fridge to the hot surroundings.",
+          "bullets": [
+            "Work $W$ moves thermal energy from cold to hot",
+            "Energy is conserved: $Q_{\\text{h}} = Q_{\\text{c}} + W$",
+            "With no work this would be impossible: the second law"
+          ],
+          "notes": "A fridge is a heat engine run backwards. Compare the arrows with the heat engine diagram: every one is reversed."
+        },
+        {
+          "type": "worked",
+          "title": "A four-stage cycle",
+          "question": "The gas in a model engine goes round the cycle A → B → C → D → A in straight lines. In pascals and $\\text{m}^{3}$, the states are A $(2.0 \\times 10^{5},\\ 1.0 \\times 10^{-3})$, B $(2.0 \\times 10^{5},\\ 4.0 \\times 10^{-3})$, C $(1.0 \\times 10^{5},\\ 3.0 \\times 10^{-3})$ and D $(1.0 \\times 10^{5},\\ 1.0 \\times 10^{-3})$. Find the work done in each stage and the net work per cycle.",
+          "hint": "Sketch the cycle first. Which stages are at constant pressure, and which is at constant volume? B → C is a sloping line, so use the area under it.",
+          "steps": [
+            {
+              "text": "A → B: constant pressure",
+              "latex": "W = 2.0 \\times 10^{5} \\times 3.0 \\times 10^{-3}"
+            },
+            {
+              "text": "So A → B gives $W = +600$ J. B → C: use the mean pressure of $1.5 \\times 10^{5}$ Pa",
+              "latex": "W = 1.5 \\times 10^{5} \\times (-1.0 \\times 10^{-3})"
+            },
+            {
+              "text": "So B → C gives",
+              "latex": "W = -150\\ \\text{J}"
+            },
+            {
+              "text": "C → D: constant pressure",
+              "latex": "W = 1.0 \\times 10^{5} \\times (-2.0 \\times 10^{-3})"
+            },
+            {
+              "text": "So C → D gives $W = -200$ J, and D → A has no volume change. Add them",
+              "latex": "W_{\\text{net}} = 600 - 150 - 200 = 250\\ \\text{J}"
+            }
+          ],
+          "notes": "Check with the enclosed area: a trapezium with parallel sides $3.0 \\times 10^{-3}$ and $2.0 \\times 10^{-3}\\ \\text{m}^3$ and height $1.0 \\times 10^{5}$ Pa has area 250 J."
+        }
+      ]
+    },
+    {
+      "id": "efficiency",
+      "short": "Efficiency of a heat engine",
+      "hl": true,
+      "guide": "A heat engine can respond to different cycles and is characterized by its efficiency as given by η = useful work / input energy.",
+      "sections": [
+        "engines"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Calculate the efficiency of a heat engine from energy transfers.",
+        "Find the input energy of a gas cycle from the first law."
+      ],
+      "checks": [
+        "B4-010"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Comparing engines",
+          "bullets": [
+            "Engines can run on different cycles: petrol engines, diesel engines and Stirling engines all use different ones",
+            "Whatever the cycle, an engine is rated by its <strong>efficiency</strong>",
+            "Efficiency compares the useful work with the thermal energy taken in",
+            "The energy given out to the cold reservoir isn't useful, but it can't be avoided"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Efficiency of a heat engine",
+          "latex": "\\eta = \\dfrac{\\text{useful work}}{\\text{input energy}}",
+          "bullets": [
+            "No unit; often given as a percentage",
+            "The work per cycle is $Q_h - Q_c$: energy from the hot reservoir minus energy to the cold one"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Efficiency from the energy flows",
+          "start": "Over one full cycle the gas returns to its starting state. Let $Q_h$ and $Q_c$ be the sizes of the two energy transfers.",
+          "steps": [
+            {
+              "text": "The internal energy returns to its first value",
+              "latex": "\\Delta U = 0"
+            },
+            {
+              "text": "The first law: net thermal energy in equals work",
+              "latex": "W = Q_h - Q_c"
+            },
+            {
+              "text": "Divide by the input energy",
+              "latex": "\\eta = \\dfrac{W}{Q_h} = \\dfrac{Q_h - Q_c}{Q_h}"
+            },
+            {
+              "text": "Simplify",
+              "latex": "\\eta = 1 - \\dfrac{Q_c}{Q_h}"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Finding the efficiency of a cycle",
+          "bullets": [
+            "For each stage, find $W$ (area under the line) and $\\Delta U$ (from $\\tfrac{3}{2}\\Delta(PV)$)",
+            "Then use the first law to find $Q$ for each stage",
+            "Only the stages with <strong>positive</strong> $Q$ count towards the input energy",
+            "Check: the sum of all the values of $Q$ should equal the net work"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "The energy flow in a heat engine",
+          "figure": "b4ct",
+          "bullets": [
+            "The arrows are not drawn to scale",
+            "Only the work is a useful output"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A steam locomotive",
+          "question": "A steam locomotive burns coal, releasing thermal energy at a rate of 12 MW, and delivers a useful power of 0.90 MW. Find (a) its efficiency and (b) the rate at which it rejects thermal energy. (c) The specific energy of the coal is $30\\ \\text{MJ kg}^{-1}$. Find the mass of coal burned in one hour.",
+          "hint": "Efficiency works with rates of energy transfer just as it does with energies. What happens to the energy that doesn't become useful work?",
+          "steps": [
+            {
+              "text": "(a) Useful power out ÷ power in",
+              "latex": "\\eta = \\dfrac{0.90}{12} = 0.075 = 7.5\\%"
+            },
+            {
+              "text": "(b) The rest is rejected",
+              "latex": "12 - 0.90 = 11\\ \\text{MW}"
+            },
+            {
+              "text": "(c) Coal burned each second",
+              "latex": "\\dfrac{12 \\times 10^{6}}{30 \\times 10^{6}} = 0.40\\ \\text{kg s}^{-1}"
+            },
+            {
+              "text": "Multiply by 3600 s",
+              "latex": "0.40 \\times 3600 = 1.4 \\times 10^{3}\\ \\text{kg}"
+            }
+          ],
+          "notes": "Despite this low efficiency, steam power changed society. A good link to the guide's NoS linking question."
+        },
+        {
+          "type": "worked",
+          "title": "The efficiency of a model engine",
+          "question": "A model engine contains a monatomic ideal gas, which goes round the cycle A → B → C → D → A in straight lines. In pascals and $\\text{m}^{3}$, its states are A $(2.0 \\times 10^{5},\\ 1.0 \\times 10^{-3})$, B $(2.0 \\times 10^{5},\\ 4.0 \\times 10^{-3})$, C $(1.0 \\times 10^{5},\\ 3.0 \\times 10^{-3})$ and D $(1.0 \\times 10^{5},\\ 1.0 \\times 10^{-3})$. The net work per cycle is 250 J. Find the efficiency of the engine.",
+          "hint": "Use $\\Delta U = \\tfrac{3}{2}\\Delta(PV)$ and the work done in each stage, then apply the first law to each. Which stages take in thermal energy?",
+          "steps": [
+            {
+              "text": "A → B: $PV$ rises from 200 J to 800 J, so $\\Delta U = 900$ J; $W = 600$ J",
+              "latex": "Q = 900 + 600 = +1500\\ \\text{J}"
+            },
+            {
+              "text": "B → C: $PV$ falls to 300 J, so $\\Delta U = -750$ J; $W = -150$ J",
+              "latex": "Q = -750 - 150 = -900\\ \\text{J}"
+            },
+            {
+              "text": "C → D: $PV$ falls to 100 J, so $\\Delta U = -300$ J; $W = -200$ J",
+              "latex": "Q = -300 - 200 = -500\\ \\text{J}"
+            },
+            {
+              "text": "D → A: $PV$ rises to 200 J, so $\\Delta U = +150$ J; no work is done",
+              "latex": "Q = +150\\ \\text{J}"
+            },
+            {
+              "text": "The input energy is the sum of the positive values",
+              "latex": "Q_h = 1500 + 150 = 1650\\ \\text{J}"
+            },
+            {
+              "text": "The efficiency",
+              "latex": "\\eta = \\dfrac{250}{1650} = 0.15 = 15\\%"
+            }
+          ],
+          "notes": "Check: the sum of all four values of $Q$ is $1500 - 900 - 500 + 150 = 250$ J, which equals the net work."
+        }
+      ]
+    },
+    {
+      "id": "carnot",
+      "short": "The Carnot cycle",
+      "hl": true,
+      "guide": "The Carnot cycle sets a limit for the efficiency of a heat engine at the temperatures of its heat reservoirs as given by η_Carnot = 1 − T_c/T_h.",
+      "sections": [
+        "carnot"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Describe the four stages of the Carnot cycle.",
+        "Calculate the Carnot efficiency, and use it as the upper limit for an engine."
+      ],
+      "checks": [
+        "B4-009"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The Carnot cycle",
+          "bullets": [
+            "An ideal, <strong>reversible</strong> cycle with four stages:",
+            [
+              "<strong>isothermal expansion</strong> at $T_h$: takes in $Q_h$",
+              "<strong>adiabatic expansion</strong>: cools from $T_h$ to $T_c$",
+              "<strong>isothermal compression</strong> at $T_c$: gives out $Q_c$",
+              "<strong>adiabatic compression</strong>: warms from $T_c$ to $T_h$"
+            ],
+            "No engine working between the same two reservoirs can be more efficient"
+          ],
+          "notes": "Ask which stages have zero $Q$ (the two adiabatic ones) and which have zero $\\Delta U$ (the two isothermal ones)."
+        },
+        {
+          "type": "equation",
+          "title": "Carnot efficiency",
+          "latex": "\\eta_{\\text{Carnot}} = 1 - \\dfrac{T_c}{T_h}",
+          "bullets": [
+            "$T_h$ and $T_c$ are the temperatures of the reservoirs, <strong>in kelvin</strong>"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the Carnot efficiency",
+          "start": "Start from the efficiency in terms of energy flows. The Carnot cycle has a special property that links them to temperature.",
+          "steps": [
+            {
+              "text": "Efficiency of any heat engine",
+              "latex": "\\eta = 1 - \\dfrac{Q_c}{Q_h}"
+            },
+            {
+              "text": "In a Carnot cycle (shown later, using entropy)",
+              "latex": "\\dfrac{Q_c}{Q_h} = \\dfrac{T_c}{T_h}"
+            },
+            {
+              "text": "Substitute",
+              "latex": "\\eta_{\\text{Carnot}} = 1 - \\dfrac{T_c}{T_h}"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Using the Carnot efficiency",
+          "bullets": [
+            "Always change Celsius temperatures to kelvin first",
+            "It is the <strong>upper limit</strong>: real engines fall below it because of friction, turbulence and heat leaks",
+            "It rises when the hot reservoir is hotter or the cold reservoir colder",
+            "It could reach 100% only with a cold reservoir at 0 K, which is impossible"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "The Carnot cycle on a p–V graph",
+          "figure": "b4et",
+          "bullets": [
+            "Two isotherms joined by two adiabats",
+            "The enclosed area is the net work per cycle"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A parabolic-trough solar engine",
+          "question": "An engine running on the Carnot cycle works between oil heated by parabolic-trough solar collectors, at 520 K, and the surrounding air at 300 K. In each cycle it takes in 2.6 kJ from the hot oil. Find (a) its efficiency, (b) the work done per cycle and (c) the thermal energy given out per cycle.",
+          "hint": "In a Carnot cycle, the two reservoir temperatures set the efficiency. Then efficiency links the work to the input energy.",
+          "steps": [
+            {
+              "text": "(a) Carnot efficiency",
+              "latex": "\\eta = 1 - \\dfrac{300}{520} = 0.42"
+            },
+            {
+              "text": "(b) Work = efficiency × input energy",
+              "latex": "W = 0.423 \\times 2600 = 1100\\ \\text{J}"
+            },
+            {
+              "text": "(c) The remaining energy is given out",
+              "latex": "Q_c = 2600 - 1100 = 1500\\ \\text{J}"
+            }
+          ],
+          "notes": "Check: $Q_c/Q_h = 1500/2600 = 0.577$, which equals $T_c/T_h = 300/520$."
+        },
+        {
+          "type": "worked",
+          "title": "Power from the sea",
+          "question": "Ocean thermal power plants use warm surface water at 27 °C as the hot reservoir and deep water at 5 °C as the cold reservoir. Find (a) the maximum possible efficiency and (b) the minimum rate at which thermal energy must be taken from the warm water for an output of 1.0 MW.",
+          "hint": "Change both temperatures to kelvin. For (b), think about how efficiency links the useful power to the input power.",
+          "steps": [
+            {
+              "text": "Temperature of the warm water in kelvin",
+              "latex": "T_h = 300\\ \\text{K}"
+            },
+            {
+              "text": "Temperature of the deep water",
+              "latex": "T_c = 278\\ \\text{K}"
+            },
+            {
+              "text": "(a) Maximum efficiency",
+              "latex": "\\eta = 1 - \\dfrac{278}{300} = 0.073"
+            },
+            {
+              "text": "(b) Input power = output ÷ efficiency",
+              "latex": "\\dfrac{1.0\\ \\text{MW}}{0.0733} = 14\\ \\text{MW}"
+            }
+          ],
+          "notes": "Real plants reach about 3%, so they must pump huge volumes of water. The fuel is free, which is why the idea is still attractive."
+        }
+      ]
+    },
+    {
+      "id": "second",
+      "short": "Second law of thermodynamics",
+      "hl": true,
+      "guide": "The second law of thermodynamics refers to the change in entropy of an isolated system and sets constraints on possible physical processes and on the overall evolution of the system. (Guidance: Clausius and Kelvin forms, and entropy change in reversible and irreversible processes in isolated systems.)",
+      "sections": [
+        "second"
+      ],
+      "minutes": 25,
+      "aims": [
+        "State the second law in its Kelvin, Clausius and entropy forms.",
+        "Explain how the second law limits what can happen to a system."
+      ],
+      "checks": [
+        "B4-012"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The second law: three forms",
+          "bullets": [
+            "<strong>Kelvin form</strong>: an engine working in a cycle can't convert all the thermal energy it takes in into work",
+            "<strong>Clausius form</strong>: thermal energy can't pass by itself from a colder body to a hotter one",
+            "<strong>Entropy form</strong>: the total entropy of an isolated system never decreases",
+            "The three forms are equivalent: if one failed, the others would too"
+          ],
+          "notes": "The equivalence of these statements took decades of debate between scientists in several countries, which fits the \"shared endeavour\" aspect of NoS."
+        },
+        {
+          "type": "bullets",
+          "title": "What the second law forbids",
+          "bullets": [
+            "Energy conservation alone doesn't settle the direction of a process: the second law does",
+            "A hot drink could gain energy from a cooler room without breaking the first law, but it never does",
+            "Every heat engine must have a cold reservoir, so its efficiency is below 100%",
+            "It lets us predict how an isolated system will change: towards higher entropy",
+            "If the universe is treated as an isolated system, its entropy must be increasing"
+          ],
+          "notes": "Link to the guiding question on the future evolution of a system, and to E.5."
+        }
+      ]
+    },
+    {
+      "id": "disorder",
+      "short": "Entropy as disorder",
+      "hl": true,
+      "guide": "Entropy S is a thermodynamic quantity that relates to the degree of disorder of the particles in a system.",
+      "sections": [
+        "entropy"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Describe entropy as a measure of the disorder of the particles in a system.",
+        "Compare the entropy of different states of a system."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Entropy and disorder",
+          "bullets": [
+            "<strong>Entropy</strong> $S$ tells us how disordered the particles of a system are; its unit is $\\text{J K}^{-1}$",
+            "The more ways the particles can be arranged and share energy, the greater the entropy",
+            "For the same amount of a substance, entropy is <strong>higher</strong>:",
+            [
+              "for a liquid than for a solid, and for a gas than for a liquid",
+              "for a larger volume",
+              "at a higher temperature"
+            ],
+            "An untidy room is a helpful picture: there are many more untidy arrangements than tidy ones"
+          ],
+          "notes": "Ask: can the room become tidy again? Yes, but someone has to do work, and that person warms the surroundings. That leads directly to local decreases in entropy."
+        }
+      ]
+    },
+    {
+      "id": "calc",
+      "short": "Calculating entropy",
+      "hl": true,
+      "guide": "Entropy can be determined in terms of macroscopic quantities such as thermal energy and temperature as given by ΔS = ΔQ/T and also in terms of the properties of individual particles of the system as given by S = k_B ln Ω, where k_B is the Boltzmann constant and Ω is the number of possible microstates of the system. (Guidance: microstates are equally probable; simple combinatorial model, for example coins.)",
+      "sections": [
+        "microstates",
+        "entropy"
+      ],
+      "minutes": 55,
+      "aims": [
+        "Count microstates in a simple model, and calculate entropy using $S = k_B\\ln\\Omega$.",
+        "Calculate entropy changes using $\\Delta S = \\dfrac{\\Delta Q}{T}$."
+      ],
+      "checks": [
+        "B4-011"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Macrostates and microstates",
+          "bullets": [
+            "<strong>Macrostate</strong>: the overall description, such as \"3 heads out of 6 coins\"",
+            "<strong>Microstate</strong>: one exact arrangement, saying which coin is which",
+            "Every microstate is <strong>equally likely</strong>",
+            "Mixed macrostates have far more microstates than tidy ones, so they are far more likely",
+            "In a gas, microstates can differ in the position, speed and direction of each particle"
+          ],
+          "notes": "Toss six coins in groups and tally the results to see the pattern build up."
+        },
+        {
+          "type": "equation",
+          "title": "Two ways to find entropy",
+          "latex": [
+            "S = k_{B}\\ln\\Omega",
+            "\\Delta S = \\dfrac{\\Delta Q}{T}"
+          ],
+          "bullets": [
+            "$k_B$ is the <strong>Boltzmann</strong> constant, and $\\Omega$ is the number of microstates",
+            "$\\Delta Q$ is the thermal energy transferred to the system at constant temperature $T$"
+          ],
+          "notes": "Strictly, $\\Delta Q$ is a reversible transfer; a body large enough to stay at a steady temperature can be treated this way. The logarithm makes entropies add when systems are combined, because their numbers of microstates multiply. With one possible microstate, $\\ln 1 = 0$, so the entropy is zero."
+        },
+        {
+          "type": "derivation",
+          "title": "Entropy change from microstates",
+          "start": "A system changes from a macrostate with $\\Omega_1$ microstates to one with $\\Omega_2$.",
+          "steps": [
+            {
+              "text": "The entropy of each macrostate",
+              "latex": "S_{1} = k_{B}\\ln\\Omega_{1}"
+            },
+            {
+              "text": "Take the difference",
+              "latex": "\\Delta S = k_{B}\\ln\\Omega_{2} - k_{B}\\ln\\Omega_{1}"
+            },
+            {
+              "text": "Use the laws of logarithms",
+              "latex": "\\Delta S = k_{B}\\ln\\dfrac{\\Omega_{2}}{\\Omega_{1}}"
+            }
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Why heat flows from hot to cold",
+          "start": "Thermal energy $Q$ passes from a large body at $T_h$ to a large body at $T_c$. Neither temperature changes noticeably. Together they form an isolated system.",
+          "steps": [
+            {
+              "text": "Entropy lost by the hot body",
+              "latex": "\\Delta S_{h} = -\\dfrac{Q}{T_h}"
+            },
+            {
+              "text": "Entropy gained by the cold body",
+              "latex": "\\Delta S_{c} = +\\dfrac{Q}{T_c}"
+            },
+            {
+              "text": "Add the two changes",
+              "latex": "\\Delta S = Q\\left(\\dfrac{1}{T_c} - \\dfrac{1}{T_h}\\right)"
+            },
+            {
+              "text": "The cold body has the lower temperature, so the total increases. The opposite flow would decrease it, so the Clausius form agrees with the entropy form."
+            }
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "The Carnot ratio from entropy",
+          "start": "In a Carnot cycle, thermal energy transfers only during the two isothermal stages, and every stage is reversible.",
+          "steps": [
+            {
+              "text": "Entropy gained by the gas at $T_h$",
+              "latex": "\\Delta S = +\\dfrac{Q_h}{T_h}"
+            },
+            {
+              "text": "Entropy lost by the gas at $T_c$",
+              "latex": "\\Delta S = -\\dfrac{Q_c}{T_c}"
+            },
+            {
+              "text": "The gas returns to its starting state, so its total change is zero",
+              "latex": "\\dfrac{Q_h}{T_h} - \\dfrac{Q_c}{T_c} = 0"
+            },
+            {
+              "text": "Rearrange",
+              "latex": "\\dfrac{Q_c}{Q_h} = \\dfrac{T_c}{T_h}"
+            }
+          ],
+          "notes": "This completes the derivation of the Carnot efficiency. The adiabatic stages have $Q = 0$, so no entropy change."
+        },
+        {
+          "type": "bullets",
+          "title": "Using the entropy equations",
+          "bullets": [
+            "Temperature must be in <strong>kelvin</strong>",
+            "Energy flowing out of a body gives <strong>that body</strong> a negative change in entropy",
+            "When energy passes between bodies, find each change and then add them",
+            "Phase changes are ideal uses of $\\Delta S = \\dfrac{\\Delta Q}{T}$, as the temperature stays constant",
+            "Don't confuse $k_B$ with $\\sigma$, the Stefan–Boltzmann constant"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Counting microstates",
+          "figure": "b4ft",
+          "bullets": [
+            "Ten coins, each landing heads or tails",
+            "The most mixed macrostate has the most microstates"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Eight gas molecules",
+          "question": "A box holds eight gas molecules, and each is equally likely to be in the left or the right half. (a) How many microstates does the macrostate \"four on each side\" have? (b) Find its entropy, counting only these left–right arrangements. (c) Find the probability of finding all eight molecules in the left half.",
+          "hint": "Each molecule behaves like a coin: left or right. How many ways are there to choose which four are on the left? Each microstate is equally likely.",
+          "steps": [
+            {
+              "text": "(a) Choose 4 of the 8 to be on the left",
+              "latex": "\\Omega = \\dfrac{8!}{4!\\,4!} = 70"
+            },
+            {
+              "text": "(b) Boltzmann's equation",
+              "latex": "S = 1.38 \\times 10^{-23} \\times \\ln 70"
+            },
+            {
+              "text": "The entropy",
+              "latex": "S = 5.9 \\times 10^{-23}\\ \\text{J K}^{-1}"
+            },
+            {
+              "text": "(c) The total number of microstates is",
+              "latex": "2^{8} = 256"
+            },
+            {
+              "text": "Only one microstate has all eight on the left",
+              "latex": "\\text{probability} = \\dfrac{1}{256} = 0.0039"
+            }
+          ],
+          "notes": "With $10^{23}$ molecules this probability becomes so small that it is never observed: a gas does not collect in one half of its container."
+        },
+        {
+          "type": "worked",
+          "title": "Casting lead",
+          "question": "A foundry worker pours 3.0 kg of molten lead into a mould, where it solidifies at its melting point of 600 K. The specific latent heat of fusion of lead is $2.5 \\times 10^{4}\\ \\text{J kg}^{-1}$. Find the change in entropy of the lead.",
+          "hint": "The temperature doesn't change during solidification. Is energy entering or leaving the lead? That gives the sign.",
+          "steps": [
+            {
+              "text": "Thermal energy released on solidifying",
+              "latex": "mL = 3.0 \\times 2.5 \\times 10^{4} = 7.5 \\times 10^{4}\\ \\text{J}"
+            },
+            {
+              "text": "Energy leaves the lead, so $\\Delta Q$ is negative",
+              "latex": "\\Delta S = \\dfrac{-7.5 \\times 10^{4}}{600}"
+            },
+            {
+              "text": "The entropy of the lead falls",
+              "latex": "\\Delta S = -1.3 \\times 10^{2}\\ \\text{J K}^{-1}"
+            }
+          ],
+          "notes": "Ask how this can be allowed, given the second law. The surroundings gain more entropy than the lead loses, which comes up again with local decreases."
+        },
+        {
+          "type": "worked",
+          "title": "Heat through a house wall",
+          "question": "On a winter day, thermal energy passes through the walls of a house at a rate of 2.0 kW, from the inside at 293 K to the outside air at 273 K. Find the total change in entropy of the inside and outside in each second.",
+          "hint": "In one second, 2000 J moves. Find the entropy change of each side separately, taking care with the signs, and then add them.",
+          "steps": [
+            {
+              "text": "Inside loses 2000 J each second",
+              "latex": "\\Delta S = -\\dfrac{2000}{293} = -6.83\\ \\text{J K}^{-1}"
+            },
+            {
+              "text": "Outside gains 2000 J each second",
+              "latex": "\\Delta S = +\\dfrac{2000}{273} = +7.33\\ \\text{J K}^{-1}"
+            },
+            {
+              "text": "Total change each second",
+              "latex": "\\Delta S = +0.50\\ \\text{J K}^{-1}"
+            }
+          ],
+          "notes": "A positive total is what the second law requires for this flow. The two temperatures are close, so keep three significant figures in the intermediate values."
+        }
+      ]
+    },
+    {
+      "id": "irreversible",
+      "short": "Irreversible processes",
+      "hl": true,
+      "guide": "Processes in real isolated systems are almost always irreversible and consequently the entropy of a real isolated system always increases.",
+      "sections": [
+        "second"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Distinguish between reversible and irreversible processes.",
+        "Use entropy changes to decide whether a proposed process is possible."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Reversible or irreversible?",
+          "bullets": [
+            "<strong>Reversible</strong>: an ideal process that could run backwards, leaving no change anywhere",
+            "In a reversible process, the total entropy of an isolated system stays <strong>constant</strong>",
+            "<strong>Irreversible</strong>: can't be undone without a change elsewhere; friction, turbulence and heat flow across a temperature difference are examples",
+            "In an irreversible process, the total entropy of an isolated system <strong>increases</strong>",
+            "Real processes are almost always irreversible, so a real isolated system gains entropy"
+          ],
+          "notes": "Play a video of an egg breaking in reverse. Students notice at once that it is impossible, though no energy rule is broken."
+        },
+        {
+          "type": "worked",
+          "title": "An inventor's claim",
+          "question": "An inventor claims that an engine working between reservoirs at 750 K and 310 K takes in 1000 J and does 620 J of work in each cycle. Use (a) the Carnot efficiency and (b) the entropy change of the two reservoirs to test the claim.",
+          "hint": "For (a), compare the claimed efficiency with the upper limit. For (b), use the first law to find the energy rejected, then find the entropy change of each reservoir.",
+          "steps": [
+            {
+              "text": "(a) The claimed efficiency",
+              "latex": "\\eta = \\dfrac{620}{1000} = 0.62"
+            },
+            {
+              "text": "The upper limit is lower than this",
+              "latex": "\\eta_{\\text{Carnot}} = 1 - \\dfrac{310}{750} = 0.59"
+            },
+            {
+              "text": "(b) The energy rejected",
+              "latex": "Q_c = 1000 - 620 = 380\\ \\text{J}"
+            },
+            {
+              "text": "Change in entropy of the two reservoirs",
+              "latex": "\\Delta S = -\\dfrac{1000}{750} + \\dfrac{380}{310}"
+            },
+            {
+              "text": "The total entropy would fall, so the claim is impossible",
+              "latex": "\\Delta S = -0.11\\ \\text{J K}^{-1}"
+            }
+          ],
+          "notes": "The engine's gas returns to its starting state, so its own entropy change over a cycle is zero. Only the reservoirs count."
+        }
+      ]
+    },
+    {
+      "id": "local",
+      "short": "Local decreases in entropy",
+      "hl": true,
+      "guide": "The entropy of a non-isolated system can decrease locally, but this is compensated by an equal or greater increase of the entropy of the surroundings.",
+      "sections": [
+        "local"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Explain how the entropy of a non-isolated system can decrease without breaking the second law."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Entropy can fall locally",
+          "bullets": [
+            "The second law applies to the <strong>total</strong> entropy of an isolated system",
+            "A non-isolated system can lose entropy if its surroundings gain at least as much",
+            "Making ice cubes: the water becomes more ordered, but the kitchen warms",
+            "Growing plants build ordered molecules using sunlight, and give out thermal energy"
+          ],
+          "notes": "The room-tidying image returns here: a tidy room is a local decrease, paid for by the entropy increase caused by the person doing the tidying."
+        },
+        {
+          "type": "worked",
+          "title": "Ice in a freezer",
+          "question": "A freezer turns 0.40 kg of water at 273 K into ice at 273 K. The motor does $4.0 \\times 10^{4}$ J of work, and all the energy removed and the work done pass to the kitchen at 295 K. The specific latent heat of fusion of water is $3.34 \\times 10^{5}\\ \\text{J kg}^{-1}$. Find (a) the entropy change of the water, (b) the entropy change of the kitchen and (c) the total.",
+          "hint": "Find the thermal energy removed from the water first. What is the total energy passed to the kitchen? Remember the signs.",
+          "steps": [
+            {
+              "text": "Energy removed from the water",
+              "latex": "mL = 1.34 \\times 10^{5}\\ \\text{J}"
+            },
+            {
+              "text": "(a) Energy leaves, at 273 K",
+              "latex": "\\Delta S = -\\dfrac{1.336 \\times 10^{5}}{273} = -489\\ \\text{J K}^{-1}"
+            },
+            {
+              "text": "Energy to the kitchen includes the work",
+              "latex": "Q = 1.736 \\times 10^{5}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Energy enters, at 295 K",
+              "latex": "\\Delta S = +\\dfrac{1.736 \\times 10^{5}}{295} = +588\\ \\text{J K}^{-1}"
+            },
+            {
+              "text": "(c) The total increases",
+              "latex": "\\Delta S = +99\\ \\text{J K}^{-1}"
+            }
+          ],
+          "notes": "Ask: what is the smallest amount of work that would make the total exactly zero? That is the reversible limit."
+        }
+      ]
+    }
+  ]
+}

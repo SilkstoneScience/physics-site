@@ -493,7 +493,7 @@
     const groups = [];
     let cur = [];
     for (const a of aims) {
-      if (cur.length && (cur.length === 6 || !fitSize([...cur, a], 10.0, 5.1, [2400]))) { groups.push(cur); cur = []; }
+      if (cur.length && (cur.length === 6 || !fitSize([...cur, a], 9.8, 4.9, [2400]))) { groups.push(cur); cur = []; }
       cur.push(a);
     }
     if (cur.length) groups.push(cur);
@@ -651,9 +651,11 @@
       status(`Writing "${p.short}"…`);
       const first = slides.length;
       for (const s of p.slides || []) {
+        const before = slides.length;
         if (s.type === 'bullets' && t.has('b')) {
-          // a bullet slide can be HL on its own, inside an SL point (A.2's two-dimensional collisions)
-          slides.push({ kind: 'content', hl: s.hl, title: s.title, paras: bulletParas(s.bullets), notes: notes(s.notes) });
+          // long lists shrink a little (PowerPoint doesn't do this when a file opens)
+          const size = fitSize(s.bullets.flat(), 11.2, 5.0, [2400, 2200, 2000]) || 2000;
+          slides.push({ kind: 'content', title: s.title, size: size < 2400 ? size : undefined, paras: bulletParas(s.bullets, size), notes: notes(s.notes) });
         } else if (s.type === 'equation' && t.has('e')) {
           const list = [].concat(s.latex);
           const rowH = list.length > 1 ? 2.0 / Math.ceil(list.length / 2) : 1.75;
@@ -700,6 +702,7 @@
             question: top, questionSize: 2000, stepsTop, steps: group, notes: notes(s.notes),
           }));
         }
+        if (s.hl) for (let i = before; i < slides.length; i++) slides[i].hl = true; // one slide marked HL inside an SL point
       }
       if (t.has('q')) {
         const pick = (p.checks || []).map((id) => questions.find((q) => q.id === id)).filter(Boolean)[0]

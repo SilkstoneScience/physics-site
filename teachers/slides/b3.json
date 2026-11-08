@@ -1,0 +1,1154 @@
+{
+  "topic": "B.3",
+  "hours": 6,
+  "points": [
+    {
+      "id": "pressure",
+      "short": "Pressure",
+      "guide": "Pressure as given by $P = \\dfrac{F}{A}$ where $F$ is the force exerted perpendicular to the surface.",
+      "sections": [
+        "pressure"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Define pressure and calculate it with $P = \\dfrac{F}{A}$, using the perpendicular force."
+      ],
+      "checks": [
+        "B3-002"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What pressure means",
+          "bullets": [
+            "<strong>Pressure</strong> is the perpendicular force on each square metre of a surface",
+            "Only the component of the force <strong>at right angles</strong> to the surface counts",
+            "Unit: the pascal, with $1\\ \\text{Pa} = 1\\ \\text{N m}^{-2}$",
+            "Pressure is a <strong>scalar</strong>: the force it produces acts at right angles to whichever surface it meets",
+            "The atmosphere at sea level: about $1.0 \\times 10^{5}$ Pa"
+          ],
+          "notes": "Ask why a sharp knife cuts better than a blunt one with the same push. The same force over a smaller area gives a larger pressure."
+        },
+        {
+          "type": "equation",
+          "title": "Pressure",
+          "latex": "P = \\dfrac{F}{A}",
+          "bullets": [
+            "$F$ is the force perpendicular to the surface, in N",
+            "$A$ is the area in $\\text{m}^{2}$: $1\\ \\text{cm}^{2} = 10^{-4}\\ \\text{m}^{2}$"
+          ],
+          "notes": "Students often convert cm² to m² by dividing by 100. A square of side 1 cm is $10^{-2}$ m by $10^{-2}$ m."
+        },
+        {
+          "type": "worked",
+          "title": "A skier on a slope",
+          "question": "A skier of mass 72 kg stands on a slope at 25° to the horizontal. The two skis have a total area of $0.30\\ \\text{m}^{2}$ in contact with the snow. Find the pressure on the snow.",
+          "hint": "Only the part of the weight at right angles to the slope presses on the snow. Which trigonometric function gives that component?",
+          "steps": [
+            {
+              "text": "The component of the weight perpendicular to the slope.",
+              "latex": "F = mg\\cos 25^{\\circ} = 72 \\times 9.8 \\times 0.906"
+            },
+            {
+              "text": "Evaluate the force.",
+              "latex": "F = 640\\ \\text{N}"
+            },
+            {
+              "text": "Divide by the contact area.",
+              "latex": "P = \\dfrac{640}{0.30} = 2.1 \\times 10^{3}\\ \\text{Pa}"
+            }
+          ],
+          "notes": "About 2% of atmospheric pressure. Ask what happens to the pressure if the skier takes the skis off and stands in boots."
+        },
+        {
+          "type": "worked",
+          "title": "An aircraft window",
+          "question": "In flight, the air pressure inside an aircraft cabin is $7.6 \\times 10^{4}$ Pa and the pressure outside is $2.4 \\times 10^{4}$ Pa. A cabin window has an area of $0.070\\ \\text{m}^{2}$. Find the size and direction of the resultant force of the air on the window.",
+          "hint": "Air pushes on both faces of the window. Work with the difference between the two pressures.",
+          "steps": [
+            {
+              "text": "The pressure difference across the window.",
+              "latex": "\\Delta P = 5.2 \\times 10^{4}\\ \\text{Pa}"
+            },
+            {
+              "text": "Rearrange the definition of pressure.",
+              "latex": "F = \\Delta P\\,A = 5.2 \\times 10^{4} \\times 0.070"
+            },
+            {
+              "text": "The force acts outwards, towards the lower pressure.",
+              "latex": "F = 3.6 \\times 10^{3}\\ \\text{N}"
+            }
+          ],
+          "notes": "That force is about the weight of a 370 kg object, which is why windows are small, rounded and thick."
+        }
+      ]
+    },
+    {
+      "id": "kinetic",
+      "short": "The kinetic model",
+      "guide": "Ideal gases are described in terms of the kinetic theory and constitute a modelled system used to approximate the behaviour of real gases.",
+      "sections": [
+        "kinetic"
+      ],
+      "minutes": 45,
+      "aims": [
+        "State the assumptions of the kinetic model of an ideal gas.",
+        "Explain the behaviour of a gas qualitatively, using the motion of its molecules."
+      ],
+      "challenge": "CC-B3-05",
+      "checks": [
+        "B3-015"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The ideal gas: a model",
+          "bullets": [
+            "A very large number of identical molecules in <strong>random</strong> motion, with a range of speeds",
+            "Total molecular volume is <strong>negligible</strong> beside the container's volume",
+            "<strong>No intermolecular forces</strong> except during collisions: straight lines between impacts",
+            "Collisions are <strong>perfectly elastic</strong> and last a negligible time",
+            "Molecules follow Newton's laws of motion",
+            "No gas is exactly like this: it is a model used to approximate real gases"
+          ],
+          "notes": "Ask which assumption seems least believable, then return to that question when real gases are covered."
+        },
+        {
+          "type": "bullets",
+          "title": "Temperature and molecular motion",
+          "bullets": [
+            "Kelvin temperature measures the <strong>mean random kinetic energy</strong> of the molecules",
+            "Hotter gas: faster molecules on average, though each molecule's speed differs",
+            "Collisions keep exchanging energy between molecules, so the spread of speeds remains",
+            "For a fixed temperature, the average energy of the molecules stays the same"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Explaining gas behaviour",
+          "bullets": [
+            "<strong>Heating at constant volume:</strong> faster molecules hit harder and more often, so the pressure rises",
+            "<strong>Compressing at constant temperature:</strong> same speeds, shorter trips between walls, so more hits on each square metre",
+            "<strong>Heating at constant pressure:</strong> the volume must grow, so that wall impacts become less frequent"
+          ],
+          "notes": "The second case is the classic error: molecules do not hit harder when the temperature is unchanged."
+        },
+        {
+          "type": "bullets",
+          "title": "Compressing a gas quickly",
+          "bullets": [
+            "A moving piston exerts a force through a distance: it <strong>does work</strong> on the gas",
+            "Molecules rebound from the advancing piston faster, gaining kinetic energy",
+            "So a rapid compression <strong>raises the temperature</strong>",
+            "When a gas pushes a piston outwards, it does the work, loses kinetic energy and cools",
+            "In a slow compression, energy has time to leave, so the temperature can stay constant"
+          ],
+          "notes": "Quickly pump a bicycle pump with a finger over the outlet and feel the barrel warm. The detail of these processes returns at HL in B.4."
+        },
+        {
+          "type": "worked",
+          "title": "A football in the sun",
+          "question": "A fully inflated football is left in strong sunshine, and its volume stays almost constant. Explain, using the kinetic model, why the pressure of the air inside increases.",
+          "hint": "Link the temperature to the speed of the molecules, then think about two separate effects at the wall.",
+          "steps": [
+            {
+              "text": "The temperature rises, so the mean kinetic energy of the molecules increases and they move faster on average."
+            },
+            {
+              "text": "Each impact with the wall gives a larger change of momentum."
+            },
+            {
+              "text": "With unchanged volume, faster molecules also reach the wall more frequently."
+            },
+            {
+              "text": "So the rate of change of momentum at the wall, and hence the force per unit area, increases."
+            }
+          ],
+          "notes": "Encourage students to write the chain in this order. Marks are usually given for the speed, the collision rate or momentum change, and the link to force."
+        },
+        {
+          "type": "worked",
+          "title": "A syringe in warm water",
+          "question": "A syringe has a freely sliding piston and holds a fixed mass of air. It is placed in warm water. Explain, using the kinetic model, why the piston moves outwards until the air pressure again equals the pressure outside.",
+          "hint": "Compare the force on the inside and the outside of the piston as the gas warms. What does a larger volume do to the collisions?",
+          "steps": [
+            {
+              "text": "Warmer air means faster molecules, so the impacts on the piston exert more force than before."
+            },
+            {
+              "text": "The resultant force on the piston is now outwards, so the piston moves out."
+            },
+            {
+              "text": "In the larger volume, molecules travel further between impacts, so each area of wall is hit less often."
+            },
+            {
+              "text": "The piston stops when reduced collision frequency balances the harder impacts: the pressure is back to its original value."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collisions",
+      "short": "Pressure from collisions",
+      "guide": "The change in momentum of particles due to collisions with a given surface gives rise to pressure in gases and, from that analysis, pressure is related to the average (translational speed)² of molecules as given by $P = \\tfrac{1}{3}\\rho v_{\\text{rms}}^{2}$.",
+      "sections": [
+        "molecular"
+      ],
+      "minutes": 55,
+      "aims": [
+        "Explain pressure in terms of the momentum change of molecules at a wall.",
+        "Use $P = \\tfrac{1}{3}\\rho v_{\\text{rms}}^{2}$, and explain why the rms speed is used."
+      ],
+      "checks": [
+        "B3-020"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Why a gas pushes on its container",
+          "bullets": [
+            "A molecule that rebounds from a wall has its velocity reversed, so its <strong>momentum changes</strong>",
+            "A change of momentum needs a force: the wall pushes on the molecule",
+            "By Newton's third law, the molecule pushes back equally on the wall",
+            "Huge numbers of tiny impacts each second add up to a <strong>steady force</strong>",
+            "That force per unit area of wall is the gas pressure"
+          ],
+          "notes": "This links back to A.2: force is the rate of change of momentum. It answers the linking question about force and momentum connecting mechanics and thermodynamics."
+        },
+        {
+          "type": "bullets",
+          "title": "Mean speed, rms speed and average velocity",
+          "bullets": [
+            "Molecules move equally in all directions, so their <strong>average velocity is zero</strong>",
+            "<strong>Mean speed</strong>: add the speeds and divide by the number of molecules",
+            "<strong>rms speed</strong> (root-mean-square): square each speed, take the mean, then take the square root",
+            "Squaring removes direction, so the rms value is <strong>not zero</strong>; it also favours fast molecules, so it exceeds the mean speed",
+            "Why rms? A faster molecule hits harder ($\\propto v$) and more often ($\\propto v$), so its effect grows as $v^{2}$",
+            "Kinetic energy also depends on $v^{2}$, so the gas laws need the mean of $v^{2}$"
+          ],
+          "notes": "New for exams from 2028. The guide asks for the difference between rms velocity and average velocity, and why rms is preferred in the gas laws. The rms velocity and the rms speed are the same number, because squaring removes the direction."
+        },
+        {
+          "type": "equation",
+          "title": "Pressure and molecular speed",
+          "latex": "P = \\tfrac{1}{3}\\rho v_{\\text{rms}}^{2}",
+          "bullets": [
+            "$\\rho$ is the density of the gas, in $\\text{kg m}^{-3}$",
+            "The quantity $v_{\\text{rms}}^{2}$ is the mean of the squared speeds, in $\\text{m}^{2}\\ \\text{s}^{-2}$"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the pressure of a gas",
+          "start": "Take $N$ molecules, each of mass $m$, in a cube of side $L$. One molecule has a velocity component $u$ towards a wall and rebounds elastically.",
+          "steps": [
+            {
+              "text": "The velocity goes from $+u$ to $-u$, so the momentum change has size",
+              "latex": "\\Delta p = 2mu"
+            },
+            {
+              "text": "It crosses the box and back between hits on that wall",
+              "latex": "\\Delta t = \\dfrac{2L}{u}"
+            },
+            {
+              "text": "Average force = rate of change of momentum",
+              "latex": "F = \\dfrac{2mu}{2L/u} = \\dfrac{mu^{2}}{L}"
+            },
+            {
+              "text": "For $N$ molecules, one third of the mean of $v^{2}$ lies along each axis",
+              "latex": "F_{\\text{total}} = \\dfrac{Nmv_{\\text{rms}}^{2}}{3L}"
+            },
+            {
+              "text": "Divide by the area $L^{2}$, with density $\\rho = Nm/L^{3}$",
+              "latex": "P = \\tfrac{1}{3}\\rho v_{\\text{rms}}^{2}"
+            }
+          ],
+          "notes": "Students need the idea and the result rather than every line. Step 4 is the subtle one: random motion shares the mean of the squared speed equally between the three directions."
+        },
+        {
+          "type": "bullets",
+          "title": "Using $P = \\tfrac{1}{3}\\rho v_{\\text{rms}}^{2}$",
+          "bullets": [
+            "Rearrange for the square first, then remember to take the <strong>square root</strong>",
+            "Density must be in $\\text{kg m}^{-3}$ and pressure in Pa",
+            "The equation holds for any ideal gas, monatomic or not",
+            "The mean of the squares is not the square of the mean"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "A molecule rebounding from a wall",
+          "figure": "b3ct"
+        },
+        {
+          "type": "worked",
+          "title": "Four sample molecules",
+          "question": "Four molecules of a gas have speeds of 300, 400, 500 and 800 $\\text{m s}^{-1}$. Find (a) their mean speed and (b) their rms speed.",
+          "hint": "For part (b), work in the order the name gives backwards: square, then mean, then root.",
+          "steps": [
+            {
+              "text": "(a) Add the speeds and divide by four.",
+              "latex": "\\bar{v} = \\dfrac{2000}{4} = 500\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(b) The mean of the squares, in units of $10^{4}$.",
+              "latex": "\\dfrac{9 + 16 + 25 + 64}{4} = 28.5"
+            },
+            {
+              "text": "So the mean square speed is",
+              "latex": "v_{\\text{rms}}^{2} = 2.85 \\times 10^{5}\\ \\text{m}^{2}\\ \\text{s}^{-2}"
+            },
+            {
+              "text": "Take the square root.",
+              "latex": "v_{\\text{rms}} = 534\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "New for exams from 2028. The list is only to show the idea: the guide does not ask students to calculate an rms speed from a list of speeds. The rms speed is larger because the 800 m/s molecule counts for more once speeds are squared."
+        },
+        {
+          "type": "worked",
+          "title": "Argon in a welding line",
+          "question": "Argon gas in a welding supply line has a pressure of $2.0 \\times 10^{5}$ Pa and a density of 3.2 $\\text{kg m}^{-3}$. Find the rms speed of the argon atoms.",
+          "hint": "Make $v_{\\text{rms}}^{2}$ the subject of the equation linking pressure and density.",
+          "steps": [
+            {
+              "text": "Rearrange the equation.",
+              "latex": "v_{\\text{rms}}^{2} = \\dfrac{3P}{\\rho}"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "v_{\\text{rms}}^{2} = \\dfrac{3 \\times 2.0 \\times 10^{5}}{3.2}"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "v_{\\text{rms}}^{2} = 1.9 \\times 10^{5}\\ \\text{m}^{2}\\ \\text{s}^{-2}"
+            },
+            {
+              "text": "Take the square root.",
+              "latex": "v_{\\text{rms}} = 430\\ \\text{m s}^{-1}"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "The thin air of Mars",
+          "question": "Near the surface of Mars, the carbon dioxide atmosphere has a pressure of 610 Pa and its molecules have an rms speed of 345 $\\text{m s}^{-1}$. Find the density of the atmosphere.",
+          "hint": "This time the unknown is the density. Rearrange before substituting any numbers.",
+          "steps": [
+            {
+              "text": "Rearrange for the density.",
+              "latex": "\\rho = \\dfrac{3P}{v_{\\text{rms}}^{2}}"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "\\rho = \\dfrac{3 \\times 610}{345^{2}}"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "\\rho = 0.015\\ \\text{kg m}^{-3}"
+            }
+          ],
+          "notes": "Air at sea level on Earth is about 80 times denser. Ask students which factor makes the Martian value so small: the speed is similar to that of air molecules here, so it must be the pressure."
+        }
+      ]
+    },
+    {
+      "id": "mole",
+      "short": "Amount of substance",
+      "guide": "The amount of substance $n$ as given by $n = \\dfrac{N}{N_A}$ where $N$ is the number of molecules and $N_A$ is the Avogadro constant.",
+      "sections": [
+        "mole"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Convert between number of particles, amount in moles and mass, using $n = \\dfrac{N}{N_A}$ and the molar mass."
+      ],
+      "checks": [
+        "B3-003"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Counting particles in moles",
+          "bullets": [
+            "Even small samples hold enormous numbers of particles, so we count them in <strong>moles</strong>",
+            "One mole contains $6.02 \\times 10^{23}$ particles: the <strong>Avogadro constant</strong> $N_A$",
+            "A mole of any substance has the same number of particles, but not the same mass",
+            "<strong>Molar mass</strong> $M$: the mass of one mole, in g $\\text{mol}^{-1}$",
+            "From the periodic table: about 12 g for carbon, 16 g for atomic oxygen, so 32 g for $\\text{O}_{2}$"
+          ],
+          "notes": "Molecules need their atoms added: H₂O is 2(1) + 16 = 18 g per mole, and one mole of water contains two moles of H atoms and one mole of O atoms."
+        },
+        {
+          "type": "equation",
+          "title": "Moles, particles and mass",
+          "latex": [
+            "n = \\dfrac{N}{N_A}",
+            "n = \\dfrac{m}{M}"
+          ],
+          "bullets": [
+            "$N_A = 6.02 \\times 10^{23}\\ \\text{mol}^{-1}$",
+            "Mass and molar mass must be in the same unit (both g or both kg)"
+          ],
+          "notes": "The first equation is in the data booklet. The second is not, so students must learn it."
+        },
+        {
+          "type": "worked",
+          "title": "A gold ring",
+          "question": "A gold ring has a mass of 5.0 g. The molar mass of gold is 197 g $\\text{mol}^{-1}$. Find (a) the amount of gold in moles and (b) the number of gold atoms in the ring.",
+          "hint": "Mass and molar mass are both in grams, so divide. Each mole then holds $N_A$ atoms.",
+          "steps": [
+            {
+              "text": "(a) Divide the mass by the molar mass.",
+              "latex": "n = \\dfrac{5.0}{197} = 0.025\\ \\text{mol}"
+            },
+            {
+              "text": "(b) Multiply by the Avogadro constant.",
+              "latex": "N = nN_A = 0.0254 \\times 6.02 \\times 10^{23}"
+            },
+            {
+              "text": "The number of atoms is",
+              "latex": "N = 1.5 \\times 10^{22}"
+            }
+          ],
+          "notes": "Keep the unrounded value of n in the calculator. Remind students to quote the final answer to a sensible number of significant figures."
+        },
+        {
+          "type": "worked",
+          "title": "A dry-ice pellet",
+          "question": "A pellet of dry ice contains $1.8 \\times 10^{23}$ molecules of carbon dioxide (molar mass 44 g $\\text{mol}^{-1}$). Find (a) the amount of carbon dioxide and (b) the mass of the pellet.",
+          "hint": "Start with the given number of molecules and turn it into moles. Moles and molar mass then give the mass.",
+          "steps": [
+            {
+              "text": "(a) Divide by the Avogadro constant.",
+              "latex": "n = \\dfrac{1.8 \\times 10^{23}}{6.02 \\times 10^{23}}"
+            },
+            {
+              "text": "The amount of carbon dioxide is",
+              "latex": "n = 0.30\\ \\text{mol}"
+            },
+            {
+              "text": "(b) Multiply by the molar mass.",
+              "latex": "m = nM = 0.299 \\times 44"
+            },
+            {
+              "text": "The mass of the pellet is",
+              "latex": "m = 13\\ \\text{g}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "equations",
+      "short": "Ideal gas equations",
+      "guide": "The equations governing the behaviour of ideal gases as given by $PV = Nk_BT$ and $PV = nRT$.",
+      "sections": [
+        "ideal"
+      ],
+      "minutes": 55,
+      "aims": [
+        "Use $PV = nRT$ and $PV = Nk_BT$, with every quantity in SI units.",
+        "Show that the two forms agree because $R = N_Ak_B$."
+      ],
+      "challenge": "CC-B3-01",
+      "checks": [
+        "B3-004"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The state of a gas",
+          "bullets": [
+            "Pressure, volume, temperature and amount of gas together describe the <strong>state</strong> of a gas",
+            "The ideal gas equation links all four, so three of them fix the other",
+            "Pressure in Pa, volume in $\\text{m}^{3}$, temperature in <strong>K</strong>",
+            "$1\\ \\text{litre} = 10^{-3}\\ \\text{m}^{3}$ and $1\\ \\text{cm}^{3} = 10^{-6}\\ \\text{m}^{3}$",
+            "To convert: $T / \\text{K} = \\theta / °\\text{C} + 273$"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "The ideal gas equation",
+          "latex": [
+            "PV = nRT",
+            "PV = Nk_BT"
+          ],
+          "bullets": [
+            "$R = 8.31\\ \\text{J K}^{-1}\\ \\text{mol}^{-1}$ (molar gas constant) goes with <strong>moles</strong>",
+            "$k_B = 1.38 \\times 10^{-23}\\ \\text{J K}^{-1}$ (Boltzmann constant) goes with <strong>numbers of molecules</strong>"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Linking the two constants",
+          "start": "Both forms describe the same gas, so their right-hand sides are equal. The number of molecules is $N = nN_A$.",
+          "steps": [
+            {
+              "text": "Equate the two forms",
+              "latex": "nRT = Nk_BT"
+            },
+            {
+              "text": "Cancel $T$ from both sides",
+              "latex": "nR = Nk_B"
+            },
+            {
+              "text": "Replace $N$ with $nN_A$",
+              "latex": "nR = nN_Ak_B"
+            },
+            {
+              "text": "Cancel $n$",
+              "latex": "R = N_Ak_B"
+            },
+            {
+              "text": "Check with the values in the data booklet",
+              "latex": "6.02 \\times 10^{23} \\times 1.38 \\times 10^{-23} = 8.31"
+            }
+          ],
+          "notes": "The gas constant is simply the Boltzmann constant scaled up from one molecule to one mole. Ask students whether they can find another way to show this, for example from the units."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for using the gas equations",
+          "bullets": [
+            "Convert °C to K <strong>first</strong>, and volumes to $\\text{m}^{3}$",
+            "Moles go with $R$; numbers of molecules go with $k_B$",
+            "The equation is for a gas treated as <strong>ideal</strong>: it applies to any such gas",
+            "Check the size of the answer: 1 mol at room conditions fills about $0.024\\ \\text{m}^{3}$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A hospital oxygen cylinder",
+          "question": "An oxygen cylinder has a volume of 4.7 litres and holds oxygen at $1.37 \\times 10^{7}$ Pa and 22 °C. Treat the oxygen as an ideal gas of molar mass 32 g $\\text{mol}^{-1}$. Find (a) the amount of oxygen, (b) the number of molecules and (c) the mass of oxygen.",
+          "hint": "Put the volume in cubic metres and the temperature in kelvin, then rearrange the form of the equation that uses moles.",
+          "steps": [
+            {
+              "text": "Convert: $V = 4.7 \\times 10^{-3}\\ \\text{m}^{3}$ and $T = 295$ K."
+            },
+            {
+              "text": "(a) Rearrange for the amount.",
+              "latex": "n = \\dfrac{PV}{RT}"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "n = \\dfrac{1.37 \\times 10^{7} \\times 4.7 \\times 10^{-3}}{8.31 \\times 295}"
+            },
+            {
+              "text": "The amount of oxygen is",
+              "latex": "n = 26\\ \\text{mol}"
+            },
+            {
+              "text": "(b) Multiply by the Avogadro constant.",
+              "latex": "N = nN_A = 1.6 \\times 10^{25}"
+            },
+            {
+              "text": "(c) Use the molar mass in kg.",
+              "latex": "m = 26.3 \\times 0.032 = 0.84\\ \\text{kg}"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "How empty is a vacuum?",
+          "question": "A laboratory vacuum chamber has a pressure of $1.0 \\times 10^{-4}$ Pa at 295 K. Find the number of gas molecules in each cubic centimetre of the chamber.",
+          "hint": "The question is about numbers of molecules, so use the form with $k_B$ and rearrange for $N/V$. Then convert from per cubic metre.",
+          "steps": [
+            {
+              "text": "Rearrange for the number per unit volume.",
+              "latex": "\\dfrac{N}{V} = \\dfrac{P}{k_BT}"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "\\dfrac{N}{V} = \\dfrac{1.0 \\times 10^{-4}}{1.38 \\times 10^{-23} \\times 295}"
+            },
+            {
+              "text": "Evaluate, per cubic metre.",
+              "latex": "\\dfrac{N}{V} = 2.5 \\times 10^{16}\\ \\text{m}^{-3}"
+            },
+            {
+              "text": "One cubic metre is $10^{6}\\ \\text{cm}^{3}$.",
+              "latex": "\\dfrac{N}{V} = 2.5 \\times 10^{10}\\ \\text{cm}^{-3}"
+            }
+          ],
+          "notes": "Even a good laboratory vacuum holds billions of molecules in every cubic centimetre."
+        },
+        {
+          "type": "worked",
+          "title": "Lift from a hot-air balloon",
+          "question": "A hot-air balloon has an envelope of volume $2800\\ \\text{m}^{3}$, open at the bottom. The air inside is at 100 °C and the air outside is at 15 °C, both at a pressure of $1.0 \\times 10^{5}$ Pa. The molar mass of air is 29 g $\\text{mol}^{-1}$. Find (a) the mass of air inside the envelope and (b) the greatest total mass of envelope, basket and load that the balloon can lift.",
+          "hint": "For (b), the buoyancy force equals the weight of the outside air displaced. Find the mass of that same volume of air at the outside temperature.",
+          "steps": [
+            {
+              "text": "(a) Use $T = 373$ K.",
+              "latex": "n = \\dfrac{1.0 \\times 10^{5} \\times 2800}{8.31 \\times 373}"
+            },
+            {
+              "text": "So $n = 9.03 \\times 10^{4}$ mol, and the mass is",
+              "latex": "m = nM = 2.6 \\times 10^{3}\\ \\text{kg}"
+            },
+            {
+              "text": "(b) Outside air in the same volume, at $T = 288$ K.",
+              "latex": "n = 1.17 \\times 10^{5}\\ \\text{mol}"
+            },
+            {
+              "text": "The mass of air displaced is",
+              "latex": "m = 3.4 \\times 10^{3}\\ \\text{kg}"
+            },
+            {
+              "text": "The difference is the mass that can be lifted.",
+              "latex": "\\Delta m = 7.7 \\times 10^{2}\\ \\text{kg}"
+            }
+          ],
+          "notes": "This links to buoyancy in A.2. The envelope is open, so the air inside stays at atmospheric pressure and the mass of gas inside is not fixed. Use unrounded values: 3393 kg − 2620 kg = 773 kg."
+        }
+      ]
+    },
+    {
+      "id": "real",
+      "short": "Real and ideal gases",
+      "guide": "The temperature, pressure and density conditions under which an ideal gas is a good approximation of a real gas.",
+      "sections": [
+        "real"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Describe how real gases differ from an ideal gas, and state when the ideal model works well."
+      ],
+      "checks": [
+        "B3-011"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "How real gases differ",
+          "bullets": [
+            "Real molecules have a <strong>non-zero volume</strong>, and many are not spherical ($\\text{N}_{2}$, $\\text{H}_{2}\\text{O}$)",
+            "Real molecules <strong>attract</strong> one another weakly",
+            "So real gases can be <strong>liquefied</strong>; an ideal gas never could be",
+            "A real gas also has some intermolecular potential energy"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "When is the ideal model good enough?",
+          "bullets": [
+            "A real gas is close to ideal at <strong>low pressure</strong> and <strong>low density</strong>: molecules are far apart",
+            "And at <strong>high temperature</strong>, well above liquefying: weak attractions hardly affect fast molecules",
+            "Expect large deviations at high pressure, or near the boiling point",
+            "Air under everyday conditions is very close to ideal"
+          ],
+          "notes": "This is a good moment for the ToK question: when does modelling an \"ideal\" situation become good enough to count as knowledge?"
+        },
+        {
+          "type": "worked",
+          "title": "How far apart are the molecules?",
+          "question": "A gas is at 293 K. Estimate the volume available to each molecule, and the side of a cube of that volume, at (a) $1.0 \\times 10^{5}$ Pa and (b) $3.0 \\times 10^{7}$ Pa. A small molecule is about 0.3 nm across. Comment on whether the ideal model is likely to work in each case.",
+          "hint": "The volume per molecule is $V/N$. Rearrange the form of the ideal gas equation that uses $k_B$.",
+          "steps": [
+            {
+              "text": "The volume available to each molecule.",
+              "latex": "\\dfrac{V}{N} = \\dfrac{k_BT}{P}"
+            },
+            {
+              "text": "(a) Substitute $P = 1.0 \\times 10^{5}$ Pa.",
+              "latex": "\\dfrac{V}{N} = 4.0 \\times 10^{-26}\\ \\text{m}^{3}"
+            },
+            {
+              "text": "Take the cube root: about ten molecular widths.",
+              "latex": "L = 3.4\\ \\text{nm}"
+            },
+            {
+              "text": "(b) Substitute $P = 3.0 \\times 10^{7}$ Pa.",
+              "latex": "\\dfrac{V}{N} = 1.3 \\times 10^{-28}\\ \\text{m}^{3}"
+            },
+            {
+              "text": "The cube root is now under two molecular widths.",
+              "latex": "L = 0.51\\ \\text{nm}"
+            },
+            {
+              "text": "At (a) the model works well. At (b) molecular size and attractions matter, so it is no longer reliable."
+            }
+          ],
+          "notes": "The estimate in (b) uses the ideal equation at the point where it is starting to fail, so treat it as an order of magnitude only."
+        }
+      ]
+    },
+    {
+      "id": "laws",
+      "short": "The gas laws",
+      "guide": "The ideal gas law equation can be derived from the empirical gas laws for constant pressure, constant volume and constant temperature as given by $\\dfrac{PV}{T} = \\text{constant}$. (Guidance: changes of state of an ideal gas can be represented on pressure–volume diagrams.)",
+      "sections": [
+        "laws",
+        "pv"
+      ],
+      "minutes": 90,
+      "aims": [
+        "Use the gas laws for constant pressure, volume and temperature, and derive $\\dfrac{PV}{T} = \\text{constant}$ from them.",
+        "Represent changes of state on a pressure–volume diagram."
+      ],
+      "challenge": "CC-B3-02",
+      "checks": [
+        "B3-005"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Three ways to change a fixed mass of gas",
+          "bullets": [
+            "Hold one of $P$, $V$ and $T$ constant, and see how the other two are related",
+            "<strong>Constant temperature</strong> (isothermal): Boyle's law",
+            "<strong>Constant pressure</strong> (isobaric): Charles's law",
+            "<strong>Constant volume</strong> (isovolumetric, or isochoric): the pressure law",
+            "These are <strong>empirical</strong> laws: found from measurements, before any molecular explanation"
+          ],
+          "notes": "Demonstrate Boyle’s law with a sealed syringe and a pressure sensor. Ask why we wait after each change before taking a reading: compression warms the gas, and the law needs the original temperature."
+        },
+        {
+          "type": "equation",
+          "title": "The empirical gas laws",
+          "latex": [
+            "PV = \\text{constant}",
+            "\\dfrac{V}{T} = \\text{constant}",
+            "\\dfrac{P}{T} = \\text{constant}",
+            "\\dfrac{P_1V_1}{T_1} = \\dfrac{P_2V_2}{T_2}"
+          ],
+          "bullets": [
+            "Constant $T$; constant $P$; constant $V$; and the combined law for a fixed mass of gas",
+            "Temperature must be in kelvin"
+          ],
+          "notes": "The data booklet prints the combined form as $\\dfrac{PV}{T} = \\text{constant}$."
+        },
+        {
+          "type": "derivation",
+          "title": "From three laws to one",
+          "start": "Take a fixed mass of gas from state 1 ($P_1$, $V_1$, $T_1$) to state 2 ($P_2$, $V_2$, $T_2$) in two stages, passing through an intermediate volume $V'$.",
+          "steps": [
+            {
+              "text": "Stage 1, constant temperature: change the pressure to $P_2$",
+              "latex": "P_1V_1 = P_2V'"
+            },
+            {
+              "text": "Stage 2, constant pressure: change the temperature to $T_2$",
+              "latex": "\\dfrac{V'}{T_1} = \\dfrac{V_2}{T_2}"
+            },
+            {
+              "text": "Rearrange stage 2 for the intermediate volume",
+              "latex": "V' = \\dfrac{V_2T_1}{T_2}"
+            },
+            {
+              "text": "Substitute into stage 1",
+              "latex": "P_1V_1 = \\dfrac{P_2V_2T_1}{T_2}"
+            },
+            {
+              "text": "Divide by $T_1$: the quantity $PV/T$ is the same in both states",
+              "latex": "\\dfrac{P_1V_1}{T_1} = \\dfrac{P_2V_2}{T_2}"
+            }
+          ],
+          "notes": "The route between the two states does not matter, so any two states of a fixed mass of gas are linked this way. Experiment then shows the constant is proportional to the amount of gas, which gives PV = nRT."
+        },
+        {
+          "type": "derivation",
+          "title": "Each law is a special case",
+          "start": "Start from $PV = nRT$ for a fixed amount of gas, so that $n$ and $R$ are both constant.",
+          "steps": [
+            {
+              "text": "Isobaric: $P$ is constant, so $V \\propto T$",
+              "latex": "V = \\left(\\dfrac{nR}{P}\\right)T"
+            },
+            {
+              "text": "Isovolumetric: $V$ is constant, so $P \\propto T$",
+              "latex": "P = \\left(\\dfrac{nR}{V}\\right)T"
+            },
+            {
+              "text": "Isothermal: $T$ is constant, so the product $PV$ is too",
+              "latex": "P_1V_1 = nRT = P_2V_2"
+            }
+          ],
+          "notes": "A fixed amount of gas means that none enters or leaves the container."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for using the gas laws",
+          "bullets": [
+            "Check the mass of gas is fixed: a leaking container doesn't obey these laws",
+            "Temperature must be in <strong>kelvin</strong>, whichever form you use",
+            "In the ratio form, pressure and volume may be in any unit if both sides match",
+            "Decide which quantity is constant, then cancel it",
+            "Say what you expect first: does the answer need to be larger or smaller?"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Graphs of the three laws",
+          "figure": "b3at",
+          "bullets": [
+            "A plot of $P$ against $V$ is a curve: plot $P$ against $\\dfrac{1}{V}$ to get a straight line",
+            "Against kelvin temperature, both lines go through the origin"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Graphs in degrees Celsius",
+          "bullets": [
+            "Plotted against °C, the graphs are still straight lines, but they miss the origin",
+            "Extending the line back to zero pressure gives an intercept of about −273 °C",
+            "So the pressure of an ideal gas would reach zero at <strong>absolute zero</strong>",
+            "Real gases liquefy first, so the last part is always an extrapolation"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Extrapolating to absolute zero",
+          "svg": "figures/b3-absolute-zero.svg",
+          "alt": "Graph of pressure P against temperature theta in degrees Celsius for three samples of gas at constant volume. Three straight lines of different gradients are measured between minus 40 and 100 degrees Celsius. Dashed extensions of all three meet at zero pressure at minus 273 degrees Celsius.",
+          "bullets": [
+            "Three samples of gas at constant volume: three straight lines",
+            "Their gradients differ, but extended back they all reach $P = 0$ at the same temperature: −273 °C",
+            "The dashed part is an extrapolation: a real gas liquefies before reaching it"
+          ],
+          "notes": "This is the evidence for an absolute zero of temperature, and the reason the kelvin scale starts there."
+        },
+        {
+          "type": "worked",
+          "title": "A rising bubble",
+          "question": "A diver at a depth where the pressure is $3.0 \\times 10^{5}$ Pa breathes out a bubble of volume 2.0 $\\text{cm}^{3}$. The bubble rises to the surface, where the pressure is $1.0 \\times 10^{5}$ Pa. Assume the temperature stays constant. Find the volume of the bubble at the surface.",
+          "hint": "Temperature is constant, so which law applies? Volumes can stay in cubic centimetres here.",
+          "steps": [
+            {
+              "text": "Constant temperature, so use Boyle's law.",
+              "latex": "P_1V_1 = P_2V_2"
+            },
+            {
+              "text": "Rearrange for the final volume.",
+              "latex": "V_2 = \\dfrac{P_1V_1}{P_2}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "V_2 = \\dfrac{3.0 \\times 10^{5} \\times 2.0}{1.0 \\times 10^{5}}"
+            },
+            {
+              "text": "The final volume is",
+              "latex": "V_2 = 6.0\\ \\text{cm}^{3}"
+            }
+          ],
+          "notes": "This is why divers are taught never to hold their breath while ascending."
+        },
+        {
+          "type": "worked",
+          "title": "A gas thermometer",
+          "question": "A thin glass tube of uniform cross-section contains a column of air trapped behind a bead of liquid that is free to move, so the pressure stays constant. The column is 12.0 cm long at 17 °C. In a hot liquid the column is 14.4 cm long. Find the temperature of the liquid in °C.",
+          "hint": "The volume of air depends on the length of the column. How? Remember to work in kelvin.",
+          "steps": [
+            {
+              "text": "Convert the temperature: $T_1 = 290$ K. At constant pressure,",
+              "latex": "\\dfrac{V_1}{T_1} = \\dfrac{V_2}{T_2}"
+            },
+            {
+              "text": "Volume is proportional to length.",
+              "latex": "T_2 = T_1 \\times \\dfrac{L_2}{L_1}"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "T_2 = 290 \\times \\dfrac{14.4}{12.0} = 348\\ \\text{K}"
+            },
+            {
+              "text": "Convert back to degrees Celsius.",
+              "latex": "\\theta_2 = 348 - 273 = 75^{\\circ}\\text{C}"
+            }
+          ],
+          "notes": "Doing this with Celsius values gives 20.4 °C, which is obviously wrong: the liquid would be scarcely warm."
+        },
+        {
+          "type": "worked",
+          "title": "Inside a diesel engine",
+          "question": "Air enters a diesel engine cylinder at $1.0 \\times 10^{5}$ Pa and 320 K. It is compressed to one eighteenth of its original volume, and its pressure rises to $4.8 \\times 10^{6}$ Pa. Find the temperature of the compressed air.",
+          "hint": "All three quantities change, so use the combined form. You only need the ratio of the volumes.",
+          "steps": [
+            {
+              "text": "The mass of gas is fixed.",
+              "latex": "\\dfrac{P_1V_1}{T_1} = \\dfrac{P_2V_2}{T_2}"
+            },
+            {
+              "text": "Rearrange for the final temperature.",
+              "latex": "T_2 = T_1 \\times \\dfrac{P_2}{P_1} \\times \\dfrac{V_2}{V_1}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "T_2 = 320 \\times 48 \\times \\dfrac{1}{18}"
+            },
+            {
+              "text": "The final temperature is",
+              "latex": "T_2 = 850\\ \\text{K}"
+            }
+          ],
+          "notes": "That is hot enough to ignite diesel fuel with no spark."
+        },
+        {
+          "type": "worked",
+          "title": "Finding absolute zero",
+          "question": "A student heats a fixed mass of air at constant volume. The pressure is 96.0 kPa at 0 °C and 131.2 kPa at 100 °C. Assuming a straight-line graph of pressure against temperature, find the temperature at which the pressure would be zero.",
+          "hint": "Find the gradient of the graph in kPa per °C. How far must the temperature drop from 0 °C to lose all 96.0 kPa?",
+          "steps": [
+            {
+              "text": "The gradient of the line.",
+              "latex": "\\dfrac{131.2 - 96.0}{100} = 0.352\\ \\text{kPa }°\\text{C}^{-1}"
+            },
+            {
+              "text": "The temperature fall needed from 0 °C.",
+              "latex": "\\dfrac{96.0}{0.352} = 273\\ °\\text{C}"
+            },
+            {
+              "text": "The pressure would be zero at",
+              "latex": "\\theta = -273\\ °\\text{C}"
+            }
+          ],
+          "notes": "Ask why we cannot actually measure the pressure down to this point: the air would liquefy long before."
+        },
+        {
+          "type": "bullets",
+          "title": "Pressure–volume diagrams",
+          "bullets": [
+            "Each point on a $P$–$V$ graph is one <strong>state</strong> of a fixed mass of gas",
+            "Temperature follows from $PV = nRT$, so a line shows a <strong>change of state</strong>",
+            "<strong>Isobaric:</strong> a horizontal line",
+            "<strong>Isovolumetric:</strong> a vertical line",
+            "<strong>Isothermal:</strong> a curve called an <strong>isotherm</strong>, with hotter ones further from the origin",
+            "A <strong>cycle</strong> is a set of changes that returns the gas to its starting state"
+          ],
+          "notes": "A useful picture: P, V and T form a three-dimensional surface, and slicing it at fixed temperatures gives the isotherms. The four-stroke engine is a familiar real example of a cycle."
+        },
+        {
+          "type": "diagram",
+          "title": "Isotherms and changes of state",
+          "figure": "b3dt"
+        },
+        {
+          "type": "worked",
+          "title": "Round a cycle",
+          "question": "A fixed mass of ideal gas starts in state A, with $P = 1.0 \\times 10^{5}$ Pa, $V = 2.0 \\times 10^{-3}\\ \\text{m}^{3}$ and $T = 300$ K. It expands at constant pressure to state B, where $V = 5.0 \\times 10^{-3}\\ \\text{m}^{3}$. It then cools at constant volume to state C, and returns to A along an isotherm. Find (a) the temperature at B and (b) the pressure at C.",
+          "hint": "A to B is at constant pressure. The last stage is an isotherm, which tells you the temperature at C.",
+          "steps": [
+            {
+              "text": "(a) Constant pressure from A to B.",
+              "latex": "T_B = T_A \\times \\dfrac{V_B}{V_A}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "T_B = 300 \\times \\dfrac{5.0}{2.0} = 750\\ \\text{K}"
+            },
+            {
+              "text": "(b) C lies on the same isotherm as A.",
+              "latex": "P_CV_C = P_AV_A"
+            },
+            {
+              "text": "$V_C$ equals $V_B$.",
+              "latex": "P_C = \\dfrac{1.0 \\times 10^{5} \\times 2.0}{5.0}"
+            },
+            {
+              "text": "The pressure at C is",
+              "latex": "P_C = 4.0 \\times 10^{4}\\ \\text{Pa}"
+            }
+          ],
+          "notes": "Ask students to sketch the cycle with labelled axes: a horizontal line to the right, a vertical line down, and a curve back up to A."
+        },
+        {
+          "type": "derivation",
+          "title": "Work done by a gas (HL only)",
+          "start": "<strong>HL only</strong> (SL students can skip this. HL students meet it again in B.4.). A gas at constant pressure $P$ pushes a piston of area $A$ a distance $\\Delta x$.",
+          "steps": [
+            {
+              "text": "The force the gas exerts on the piston",
+              "latex": "F = PA"
+            },
+            {
+              "text": "Work = force × distance moved",
+              "latex": "W = F\\Delta x = PA\\Delta x"
+            },
+            {
+              "text": "The volume swept out is $A\\Delta x$",
+              "latex": "W = P\\Delta V"
+            },
+            {
+              "text": "If the pressure changes during the expansion, the work done is the area under the $P$–$V$ graph"
+            }
+          ],
+          "notes": "HL only: this equation is in the B.4 part of the data booklet. W is positive when the gas expands and negative when it is compressed.",
+          "hl": true
+        }
+      ]
+    },
+    {
+      "id": "internal",
+      "short": "Internal energy",
+      "guide": "The relationship between the internal energy $U$ of an ideal monatomic gas and the number of molecules or amount of substance as given by $U = \\tfrac{3}{2}Nk_BT$ or $U = \\tfrac{3}{2}RnT$.",
+      "sections": [
+        "energy"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Relate the mean kinetic energy of a molecule to the kelvin temperature.",
+        "Calculate the internal energy of an ideal monatomic gas with $U = \\tfrac{3}{2}Nk_BT = \\tfrac{3}{2}nRT$."
+      ],
+      "checks": [
+        "B3-009"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Internal energy of an ideal gas",
+          "bullets": [
+            "In general, internal energy is the total of the molecules' kinetic and potential energies",
+            "An ideal gas has no intermolecular forces, so <strong>no potential energy</strong>",
+            "Its internal energy is therefore all <strong>kinetic</strong>",
+            "For a <strong>monatomic</strong> gas (helium, neon, argon) that is only translational motion",
+            "For a fixed amount of ideal gas, $U$ depends only on <strong>temperature</strong>"
+          ],
+          "notes": "Molecules with more than one atom can also rotate and vibrate, which is why these equations are limited to monatomic gases."
+        },
+        {
+          "type": "equation",
+          "title": "Energy of an ideal monatomic gas",
+          "latex": [
+            "\\overline{E}_k = \\tfrac{3}{2}k_BT",
+            "U = \\tfrac{3}{2}Nk_BT",
+            "U = \\tfrac{3}{2}nRT"
+          ],
+          "bullets": [
+            "$\\overline{E}_k$ is the mean kinetic energy of one molecule",
+            "Temperature in kelvin; use $k_B$ with $N$ and $R$ with $n$"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Temperature and molecular energy",
+          "start": "Combine the two descriptions of the gas: the pressure equation and the ideal gas equation. The density is $\\rho = Nm/V$.",
+          "steps": [
+            {
+              "text": "Substitute the density into the pressure equation",
+              "latex": "P = \\dfrac{Nmv_{\\text{rms}}^{2}}{3V}"
+            },
+            {
+              "text": "Multiply both sides by $V$",
+              "latex": "PV = \\tfrac{1}{3}Nmv_{\\text{rms}}^{2}"
+            },
+            {
+              "text": "Equate this with the ideal gas equation",
+              "latex": "\\tfrac{1}{3}Nmv_{\\text{rms}}^{2} = Nk_BT"
+            },
+            {
+              "text": "Cancel $N$ and multiply by $\\tfrac{3}{2}$. The left side is now the mean kinetic energy of one molecule",
+              "latex": "\\tfrac{1}{2}mv_{\\text{rms}}^{2} = \\tfrac{3}{2}k_BT"
+            }
+          ],
+          "notes": "This is the payoff of the kinetic model: it explains why kelvin temperature measures the mean kinetic energy of the molecules."
+        },
+        {
+          "type": "derivation",
+          "title": "From one molecule to the whole gas",
+          "start": "An ideal monatomic gas has only the translational kinetic energy of its $N$ molecules, each with mean energy $\\tfrac{3}{2}k_BT$.",
+          "steps": [
+            {
+              "text": "Multiply the mean energy by the number of molecules",
+              "latex": "U = N \\times \\tfrac{3}{2}k_BT"
+            },
+            {
+              "text": "Use $Nk_B = nR$",
+              "latex": "U = \\tfrac{3}{2}nRT"
+            },
+            {
+              "text": "Using $PV = nRT$, it can also be written as",
+              "latex": "U = \\tfrac{3}{2}PV"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for using these equations",
+          "bullets": [
+            "Use them only for an <strong>ideal monatomic</strong> gas",
+            "The mean energy depends only on $T$: different gases at one temperature share it",
+            "At the same temperature, lighter molecules have a larger rms speed",
+            "Halve a gas's kelvin temperature and $v_{\\text{rms}}$ falls by a factor of $\\sqrt{2}$, not 2"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Krypton in double glazing",
+          "question": "The gap in a double-glazed window is filled with krypton at 288 K. Treat krypton as an ideal monatomic gas. The mass of a krypton atom is $1.39 \\times 10^{-25}$ kg. Find (a) the mean kinetic energy of an atom and (b) the rms speed of the atoms.",
+          "hint": "The mean energy depends only on temperature. Then set it equal to $\\tfrac{1}{2}mv_{\\text{rms}}^{2}$.",
+          "steps": [
+            {
+              "text": "(a) Use the mean-energy equation.",
+              "latex": "\\overline{E}_k = \\tfrac{3}{2} \\times 1.38 \\times 10^{-23} \\times 288"
+            },
+            {
+              "text": "The mean kinetic energy is",
+              "latex": "\\overline{E}_k = 6.0 \\times 10^{-21}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Rearrange for the speed.",
+              "latex": "v_{\\text{rms}} = \\sqrt{\\dfrac{2\\overline{E}_k}{m}}"
+            },
+            {
+              "text": "Substitute, using the unrounded energy.",
+              "latex": "v_{\\text{rms}} = \\sqrt{\\dfrac{2 \\times 5.96 \\times 10^{-21}}{1.39 \\times 10^{-25}}}"
+            },
+            {
+              "text": "The rms speed is",
+              "latex": "v_{\\text{rms}} = 290\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "Heavy atoms move slowly and conduct less energy across the gap, which is one reason krypton is used."
+        },
+        {
+          "type": "worked",
+          "title": "The energy in an airship",
+          "question": "An airship holds $5700\\ \\text{m}^{3}$ of helium at $1.0 \\times 10^{5}$ Pa. Treating the helium as an ideal monatomic gas, find its internal energy.",
+          "hint": "You are not given the amount of gas or its temperature. Which product in the ideal gas equation can replace $nRT$?",
+          "steps": [
+            {
+              "text": "Internal energy of a monatomic ideal gas.",
+              "latex": "U = \\tfrac{3}{2}nRT"
+            },
+            {
+              "text": "Replace $nRT$ with $PV$.",
+              "latex": "U = \\tfrac{3}{2}PV"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "U = 1.5 \\times 1.0 \\times 10^{5} \\times 5700"
+            },
+            {
+              "text": "The internal energy is",
+              "latex": "U = 8.6 \\times 10^{8}\\ \\text{J}"
+            }
+          ],
+          "notes": "A surprising amount of energy, but none of it can simply be extracted unless something colder is available."
+        },
+        {
+          "type": "worked",
+          "title": "Heating a sealed flask",
+          "question": "A sealed rigid flask contains 0.80 mol of argon, treated as an ideal monatomic gas. It is heated from 20 °C to 120 °C. Find the increase in the internal energy of the gas.",
+          "hint": "A rise of 100 °C is also a rise of 100 K. The internal energy depends directly on $T$.",
+          "steps": [
+            {
+              "text": "The amount of gas is fixed, so",
+              "latex": "\\Delta U = \\tfrac{3}{2}nR\\Delta T"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "\\Delta U = 1.5 \\times 0.80 \\times 8.31 \\times 100"
+            },
+            {
+              "text": "The increase in internal energy is",
+              "latex": "\\Delta U = 1.0 \\times 10^{3}\\ \\text{J}"
+            }
+          ],
+          "notes": "A change in temperature is the same in °C and K, but the temperature itself is not."
+        }
+      ]
+    }
+  ]
+}

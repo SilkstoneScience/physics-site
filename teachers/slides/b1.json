@@ -1,0 +1,1161 @@
+{
+  "topic": "B.1",
+  "hours": 6,
+  "points": [
+    {
+      "id": "molecular",
+      "short": "Molecular theory",
+      "guide": "Molecular theory in solids, liquids and gases.",
+      "sections": [
+        "model"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Describe the arrangement and motion of the particles in solids, liquids and gases.",
+        "Name the changes of phase and explain them with the particle model."
+      ],
+      "challenge": "CC-B1-09",
+      "slides": [
+        {
+          "type": "diagram",
+          "title": "Particles in three phases",
+          "figure": "b1at",
+          "bullets": [
+            "<strong>Solid</strong>: a fixed lattice. Particles only vibrate, so the shape and volume are fixed",
+            "<strong>Liquid</strong>: particles close but disordered. They vibrate and move past one another, so only the volume is fixed",
+            "<strong>Gas</strong>: particles far apart and fast, with almost no forces except in collisions",
+            "Gases compress easily because of the space between particles; solids and liquids barely compress"
+          ],
+          "notes": "An elementary explanation is all the guide asks for. Water is the unusual case: ice is less dense than liquid water, so it floats."
+        },
+        {
+          "type": "bullets",
+          "title": "Changing phase",
+          "bullets": [
+            "Solid to liquid: <strong>melting</strong> (reverse: <strong>freezing</strong>). Some intermolecular bonds break, so particles can move about",
+            "Liquid to gas: <strong>boiling</strong> or <strong>evaporation</strong> (reverse: <strong>condensing</strong>). Most of the remaining bonds break",
+            "Solid straight to gas: <strong>sublimation</strong> (reverse: <strong>deposition</strong>, as when frost forms)",
+            "Every one of these changes can be reversed"
+          ],
+          "notes": "The guide lists melting, freezing, boiling, condensing and evaporation. Sublimation and deposition are extra vocabulary from the lesson deck."
+        }
+      ]
+    },
+    {
+      "id": "density",
+      "short": "Density",
+      "guide": "Density $\\rho$ as given by $\\rho = \\dfrac{m}{V}$.",
+      "sections": [
+        "density"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Calculate density, mass or volume with $\\rho = \\dfrac{m}{V}$, using SI units."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Density",
+          "latex": "\\rho = \\dfrac{m}{V}",
+          "bullets": [
+            "Density is mass per unit volume, in $\\text{kg m}^{-3}$",
+            "Particles touch in solids and liquids, so their densities are high; gases are roughly 1000 times less dense",
+            "Conversions: $1\\ \\text{g cm}^{-3} = 1000\\ \\text{kg m}^{-3}$ and $1\\ \\text{cm}^{3} = 10^{-6}\\ \\text{m}^{3}$"
+          ],
+          "notes": "Density comes back in convection (fluids of different density) and in the gas laws of B.3."
+        },
+        {
+          "type": "worked",
+          "title": "Is the ring pure gold?",
+          "question": "A ring has a mass of 11.2 g. Lowered into a narrow measuring cylinder of water, it raises the reading by 0.70 $\\text{cm}^{3}$. Pure gold has a density of 19 300 $\\text{kg m}^{-3}$. (a) Find the density of the ring in $\\text{kg m}^{-3}$. (b) State whether the ring can be pure gold.",
+          "hint": "The rise in the reading is the volume of the ring. Change the mass to kilograms and the volume to cubic metres before dividing.",
+          "steps": [
+            {
+              "text": "Convert to SI units.",
+              "latex": "m = 1.12 \\times 10^{-2}\\ \\text{kg}"
+            },
+            {
+              "text": "The volume is the rise in the reading.",
+              "latex": "V = 7.0 \\times 10^{-7}\\ \\text{m}^{3}"
+            },
+            {
+              "text": "(a) Divide the mass by the volume.",
+              "latex": "\\rho = \\dfrac{1.12 \\times 10^{-2}}{7.0 \\times 10^{-7}} = 1.6 \\times 10^{4}\\ \\text{kg m}^{-3}"
+            },
+            {
+              "text": "(b) This is well below 19 300 $\\text{kg m}^{-3}$, so the ring is not pure gold."
+            }
+          ],
+          "notes": "A density near 16 000 kg m⁻³ is typical of 18-carat gold, which is alloyed with lighter metals."
+        }
+      ]
+    },
+    {
+      "id": "internal",
+      "short": "Internal energy",
+      "guide": "The internal energy of a system is the total intermolecular potential energy arising from the forces between the molecules plus the total random kinetic energy of the molecules arising from their random motion.",
+      "sections": [
+        "internal"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Define internal energy in terms of the random kinetic and intermolecular potential energies of the molecules.",
+        "Distinguish between temperature and internal energy."
+      ],
+      "challenge": "CC-B1-03",
+      "checks": [
+        "B1-004"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Internal energy",
+          "bullets": [
+            "Molecules have <strong>random kinetic energy</strong> because they vibrate, slide or fly about",
+            "They have <strong>intermolecular potential energy</strong> because of the forces between them",
+            "<strong>Internal energy</strong> = total random kinetic energy + total intermolecular potential energy",
+            "Supplying thermal energy makes the molecules move faster, or moves them further apart, or both",
+            "An ideal gas has no intermolecular forces, so all of its internal energy is kinetic"
+          ],
+          "notes": "Only random motion counts: a ball thrown across the room has extra kinetic energy as a whole, but its molecules are no hotter. Springs between atoms make a helpful picture of the potential energy part."
+        },
+        {
+          "type": "bullets",
+          "title": "Temperature or internal energy?",
+          "bullets": [
+            "Temperature tells us about the <strong>average</strong> kinetic energy per particle",
+            "Internal energy is a <strong>total</strong>, so it depends on how much substance there is",
+            "A swimming pool at 25 °C has far more internal energy than a mug of tea at 80 °C",
+            "A thermometer responds to the kinetic part only: a potential energy change does not show on it"
+          ],
+          "notes": "Ask which holds more internal energy: 1 kg of ice at 0 °C or 1 kg of water at 0 °C. The temperature is the same, but the water has more potential energy."
+        }
+      ]
+    },
+    {
+      "id": "kinetic",
+      "short": "Temperature and kinetic energy",
+      "guide": "Kelvin temperature is a measure of the average kinetic energy of particles of an ideal monatomic gas as given by $\\overline{E}_k = \\tfrac{3}{2}k_B T$.",
+      "sections": [
+        "temperature"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Relate the kelvin temperature to the average kinetic energy of the particles.",
+        "Calculate average kinetic energies with $\\overline{E}_k = \\tfrac{3}{2}k_B T$."
+      ],
+      "challenge": "CC-B1-01",
+      "checks": [
+        "B1-019"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Average kinetic energy of a particle",
+          "latex": "\\overline{E}_k = \\tfrac{3}{2}k_B T",
+          "bullets": [
+            "$\\overline{E}_k$ is the average kinetic energy of one particle, in J",
+            "$k_B = 1.38 \\times 10^{-23}\\ \\text{J K}^{-1}$ is the Boltzmann constant",
+            "$T$ must be the absolute temperature, in kelvin",
+            "Particles in a gas have a wide range of speeds: this is the average over all of them"
+          ],
+          "notes": "The equation is given without proof here. B.3 connects it to the pressure of a gas."
+        },
+        {
+          "type": "bullets",
+          "title": "Which gases does it describe?",
+          "bullets": [
+            "It is stated for an <strong>ideal monatomic gas</strong>, such as helium, neon or argon",
+            "A single atom can only move from place to place, so all its kinetic energy is translational",
+            "Molecules with several atoms rotate and vibrate as well, so they hold more kinetic energy in total",
+            "For any ideal gas, $\\tfrac{3}{2}k_B T$ is still the average <strong>translational</strong> kinetic energy per molecule"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A helium weather balloon",
+          "question": "The helium in a weather balloon is at 220 K high in the atmosphere. Treat helium as an ideal monatomic gas. Find (a) the average kinetic energy of a helium atom and (b) how many times greater the average kinetic energy was on the ground, when the helium was at 293 K.",
+          "hint": "The average kinetic energy is proportional to the kelvin temperature, so part (b) needs only a ratio of temperatures.",
+          "steps": [
+            {
+              "text": "(a) Use the temperature in kelvin.",
+              "latex": "\\overline{E}_k = \\tfrac{3}{2}k_B T"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "\\overline{E}_k = 1.5(1.38 \\times 10^{-23})(220)"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "\\overline{E}_k = 4.6 \\times 10^{-21}\\ \\text{J}"
+            },
+            {
+              "text": "(b) The energy is proportional to $T$.",
+              "latex": "\\dfrac{293}{220} = 1.3"
+            }
+          ],
+          "notes": "This average depends only on the temperature, not on the size of the balloon. A larger balloon has more atoms and so more internal energy, at the same temperature."
+        }
+      ]
+    },
+    {
+      "id": "scales",
+      "short": "Kelvin and Celsius scales",
+      "guide": "Kelvin and Celsius scales are used to express temperature.",
+      "sections": [
+        "temperature"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Explain how extrapolating gas measurements leads to absolute zero and the kelvin scale.",
+        "Convert between kelvin and Celsius temperatures."
+      ],
+      "checks": [
+        "B1-003"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "From Celsius to kelvin",
+          "latex": "T/\\text{K} = \\theta/^{\\circ}\\text{C} + 273",
+          "bullets": [
+            "The Celsius scale $\\theta$ is fixed by the freezing and boiling points of water",
+            "The kelvin scale $T$ starts at <strong>absolute zero</strong>: 0 K is $-273$ °C",
+            "Write 300 K, not 300 °K: the kelvin has no degree sign",
+            "Physics equations involving absolute temperature need kelvin"
+          ],
+          "notes": "More precisely, absolute zero is −273.15 °C, but the data booklet uses 273."
+        },
+        {
+          "type": "derivation",
+          "title": "Where the 273 comes from",
+          "start": "Heat a fixed sample of gas in a sealed, rigid container. Its pressure $p$ is a straight-line function of its Celsius temperature $\\theta$.",
+          "steps": [
+            {
+              "text": "Each sample of gas gives a straight line",
+              "latex": "p = a\\theta + p_{0}"
+            },
+            {
+              "text": "Extend the line back to zero pressure",
+              "latex": "\\theta_{\\text{zero}} = -\\dfrac{p_{0}}{a}"
+            },
+            {
+              "text": "Every sample of every gas gives the same value",
+              "latex": "\\theta_{\\text{zero}} = -273\\ ^{\\circ}\\text{C}"
+            },
+            {
+              "text": "So $p_{0} = 273a$, and the line can be written",
+              "latex": "p = a(\\theta + 273)"
+            },
+            {
+              "text": "Define $T = \\theta + 273$: pressure is proportional to the absolute temperature",
+              "latex": "p = aT"
+            }
+          ],
+          "notes": "Here $a$ is the gradient and $p_{0}$ is the pressure at 0 °C. Pressure cannot be less than zero, so this temperature is the lowest possible. The straight line through the origin returns in B.3 as the pressure law."
+        },
+        {
+          "type": "diagram",
+          "title": "Finding absolute zero",
+          "figure": "b1bt",
+          "bullets": [
+            "Each line is one sample of gas, heated at constant volume",
+            "Measurements cover only a small range; the rest of each line is extrapolated",
+            "All the lines reach zero pressure at the same temperature"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "change",
+      "short": "Temperature changes",
+      "guide": "The change in temperature of a system is the same when expressed with the Kelvin or Celsius scales.",
+      "sections": [
+        "temperature"
+      ],
+      "minutes": 5,
+      "aims": [
+        "Explain why a temperature change has the same value in kelvin and in degrees Celsius."
+      ],
+      "checks": [
+        "B1-001"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "A temperature change",
+          "bullets": [
+            "The degrees on the two scales are the same size; the scales are simply shifted by 273",
+            "So warming by 30 °C is the same as warming by 30 K",
+            "A change $\\Delta T$ may be written in either unit, but $T$ on its own needs kelvin in physics equations"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Liquid nitrogen",
+          "question": "Liquid nitrogen boils at 77 K, and the air in a laboratory is at 20 °C. Find (a) the boiling point of nitrogen in °C, (b) the temperature of the air in K and (c) the difference between the two temperatures, on each scale.",
+          "hint": "The two scales differ by a fixed 273, and one kelvin is the same size as one degree Celsius.",
+          "steps": [
+            {
+              "text": "(a) Subtract 273 from the kelvin temperature.",
+              "latex": "\\theta = 77 - 273 = -196\\ ^{\\circ}\\text{C}"
+            },
+            {
+              "text": "(b) Add 273 to the Celsius temperature.",
+              "latex": "T = 20 + 273 = 293\\ \\text{K}"
+            },
+            {
+              "text": "(c) In kelvin:",
+              "latex": "\\Delta T = 293 - 77 = 216\\ \\text{K}"
+            },
+            {
+              "text": "In Celsius:",
+              "latex": "\\Delta\\theta = 20 - (-196) = 216\\ ^{\\circ}\\text{C}"
+            }
+          ],
+          "notes": "The 273 cancels when two temperatures are subtracted. This is why Q = mcΔT works in either unit, while the equations with T on its own need kelvin."
+        }
+      ]
+    },
+    {
+      "id": "shc",
+      "short": "Specific heat capacity",
+      "guide": "Quantitative analysis of thermal energy transfers $Q$ with the use of specific heat capacity $c$ as given by $Q = mc\\Delta T$.",
+      "sections": [
+        "shc"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Solve problems with $Q = mc\\Delta T$, including electrical heating and mixing.",
+        "Determine a specific heat capacity from heating data."
+      ],
+      "challenge": "CC-B1-02",
+      "checks": [
+        "B1-006"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Specific heat capacity",
+          "latex": "Q = mc\\Delta T",
+          "bullets": [
+            "$c$ is the energy needed per kilogram for each kelvin of temperature rise, in $\\text{J kg}^{-1}\\,\\text{K}^{-1}$",
+            "Each material has its own value: equal masses given equal energy warm by different amounts",
+            "$\\Delta T$ can be in K or °C, because it is a change",
+            "Water has an unusually large value, about 4200 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$, which is why seas warm and cool so slowly"
+          ],
+          "notes": "Values of c are given in exam questions when they are needed."
+        },
+        {
+          "type": "derivation",
+          "title": "The gradient of a heating graph",
+          "start": "A heater of constant power $P$ warms a mass $m$ of a substance. No energy is lost to the surroundings.",
+          "steps": [
+            {
+              "text": "The energy supplied by the heater in a time $t$",
+              "latex": "Q = Pt"
+            },
+            {
+              "text": "The energy gained by the substance",
+              "latex": "Q = mc\\Delta T"
+            },
+            {
+              "text": "These are equal",
+              "latex": "Pt = mc\\Delta T"
+            },
+            {
+              "text": "Divide by $mct$: the gradient of the temperature–time graph",
+              "latex": "\\dfrac{\\Delta T}{t} = \\dfrac{P}{mc}"
+            }
+          ],
+          "notes": "A steeper gradient means a smaller specific heat capacity. An electric heater also gives P = VI, so the energy can be calculated from Q = VIt."
+        },
+        {
+          "type": "bullets",
+          "title": "Using the equation",
+          "bullets": [
+            "Find $\\Delta T$ first, and take care to use the mass in kilograms",
+            "From an electric heater: $Q = Pt$ or $Q = VIt$",
+            "When objects mix with no losses, the energy given out by the hotter equals that taken in by the cooler",
+            "The objects end at one shared final temperature",
+            "In an electrical heating experiment, losses to the surroundings make the calculated $c$ too large"
+          ],
+          "notes": "Students should write the mixing equation with (higher temperature − lower temperature) on each side, so that both sides are positive."
+        },
+        {
+          "type": "worked",
+          "title": "An electric shower",
+          "question": "An electric shower has a 9.0 kW heater. Cold water enters at 12 °C and leaves at 40 °C. All the electrical energy warms the water. The specific heat capacity of water is 4200 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$. Find (a) the mass of water flowing through each second and (b) the mass of water delivered in one minute.",
+          "hint": "Power is the energy transferred each second, so write the equation for one second of flow.",
+          "steps": [
+            {
+              "text": "The temperature rise.",
+              "latex": "\\Delta T = 40 - 12 = 28\\ \\text{K}"
+            },
+            {
+              "text": "In one second the heater supplies 9000 J.",
+              "latex": "9000 = m(4200)(28)"
+            },
+            {
+              "text": "(a) Solve for the mass heated each second.",
+              "latex": "m = 0.0765 \\approx 0.077\\ \\text{kg}"
+            },
+            {
+              "text": "(b) Multiply by 60 seconds.",
+              "latex": "0.0765 \\times 60 = 4.6\\ \\text{kg}"
+            }
+          ],
+          "notes": "About 4.6 litres a minute, which is why electric showers feel weaker than mains-pressure ones. Turning the temperature up reduces the flow."
+        },
+        {
+          "type": "worked",
+          "title": "A pan in the sink",
+          "question": "An aluminium pan of mass 0.80 kg at 90 °C is placed in a sink holding 5.0 kg of water at 35 °C. Energy transfer to the surroundings is negligible. The specific heat capacities are 900 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$ for aluminium and 4200 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$ for water. Find the final temperature of the water.",
+          "hint": "Call the final temperature $T$. The energy lost by the pan equals the energy gained by the water.",
+          "steps": [
+            {
+              "text": "Energy lost by the pan = energy gained by the water.",
+              "latex": "0.80(900)(90 - T) = 5.0(4200)(T - 35)"
+            },
+            {
+              "text": "Multiply out the constants.",
+              "latex": "720(90 - T) = 21000(T - 35)"
+            },
+            {
+              "text": "Expand and collect the $T$ terms.",
+              "latex": "64800 + 735000 = 21720T"
+            },
+            {
+              "text": "Solve for the final temperature.",
+              "latex": "T = 36.8 \\approx 37\\ ^{\\circ}\\text{C}"
+            }
+          ],
+          "notes": "The water barely warms up: it has about six times the mass and more than four times the specific heat capacity of the pan."
+        },
+        {
+          "type": "worked",
+          "title": "Measuring c for cooking oil",
+          "question": "A 300 W heater warms 0.50 kg of cooking oil. The temperature of the oil rises steadily from 20 °C to 56 °C in 120 s. (a) Find the specific heat capacity of the oil. (b) State and explain whether the true value is likely to be larger or smaller than your answer.",
+          "hint": "Find the gradient of the temperature–time graph first. For part (b), think about where some of the energy goes.",
+          "steps": [
+            {
+              "text": "The gradient of the temperature–time graph.",
+              "latex": "\\dfrac{\\Delta T}{t} = \\dfrac{36}{120} = 0.30\\ \\text{K s}^{-1}"
+            },
+            {
+              "text": "(a) Rearrange the gradient equation.",
+              "latex": "c = \\dfrac{P}{m \\times \\text{gradient}}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "c = \\dfrac{300}{0.50 \\times 0.30} = 2000\\ \\text{J kg}^{-1}\\,\\text{K}^{-1}"
+            },
+            {
+              "text": "(b) Some energy escapes, so the oil warms by less than the calculation assumes. The answer is too large: the true value is smaller."
+            }
+          ],
+          "notes": "The same reasoning applies to any electrical measurement of c. Insulating the container reduces the error."
+        }
+      ]
+    },
+    {
+      "id": "phase",
+      "short": "Phase changes",
+      "guide": "A phase change represents a change in particle behaviour arising from a change in energy at constant temperature.",
+      "sections": [
+        "phase"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Explain, in terms of molecular energies, why the temperature stays constant during a phase change.",
+        "Sketch and interpret graphs of temperature against energy supplied or time."
+      ],
+      "challenge": "CC-B1-05",
+      "checks": [
+        "B1-005"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What happens during a phase change",
+          "bullets": [
+            "Energy is still being supplied, but the <strong>temperature stays constant</strong>",
+            "The average kinetic energy is unchanged, so the energy goes into <strong>potential energy</strong>",
+            "The energy does work against the attractive forces between the molecules",
+            "A helpful picture: a molecule trapped in a deep box gains height until it can climb out and is free",
+            "When a substance freezes or condenses, potential energy falls and the same energy is released"
+          ],
+          "notes": "Temperature only reveals the kinetic part of the internal energy, so a flat section means no change in the average kinetic energy."
+        },
+        {
+          "type": "diagram",
+          "title": "Heating ice until it is steam",
+          "figure": "b1ct",
+          "bullets": [
+            "Slopes: one phase warming, kinetic energy rising",
+            "Flat sections: a phase change, potential energy rising",
+            "Boiling takes longer than melting, as separating the molecules completely needs more energy"
+          ],
+          "notes": "At constant power, the time axis is proportional to the energy supplied."
+        }
+      ]
+    },
+    {
+      "id": "latent",
+      "short": "Specific latent heat",
+      "guide": "Quantitative analysis of thermal energy transfers $Q$ with the use of specific latent heat of fusion and vaporization of substances $L$ as given by $Q = mL$.",
+      "sections": [
+        "phase"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Solve problems with $Q = mL$, including those with several stages.",
+        "Compare boiling and evaporation."
+      ],
+      "challenge": "CC-B1-08",
+      "checks": [
+        "B1-008"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Specific latent heat",
+          "latex": "Q = mL",
+          "bullets": [
+            "$L$ is the energy that takes 1 kg from one phase to another at constant temperature, in $\\text{J kg}^{-1}$",
+            "$L_f$ (fusion) is for melting and freezing; $L_v$ (vaporization) is for boiling and condensing",
+            "The energy absorbed in one direction is released in the other",
+            "Use $Q = mL$ on the flat sections of a heating curve and $Q = mc\\Delta T$ on the slopes"
+          ],
+          "notes": "\"Latent\" means hidden: no temperature change reveals the energy being transferred."
+        },
+        {
+          "type": "bullets",
+          "title": "Boiling and evaporation",
+          "bullets": [
+            "<strong>Boiling</strong>: at one fixed temperature for a given pressure, with bubbles appearing all through the liquid",
+            "<strong>Evaporation</strong>: at any temperature, and only from the surface",
+            "Only the most energetic molecules escape, so the average kinetic energy of the rest falls: evaporation <strong>cools</strong> the liquid",
+            "It is faster with a warmer liquid, a larger surface area or moving air"
+          ],
+          "notes": "Sweating works this way. Ask why a wet swimsuit feels cold on a windy day."
+        },
+        {
+          "type": "worked",
+          "title": "Freezing an ice tray",
+          "question": "An ice tray holds 0.40 kg of water at 15 °C. A freezer removes energy from it at an average rate of 40 W. Find the time taken for the water to become ice at $-18$ °C. Use 4200 and 2100 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$ for the specific heat capacities of water and ice, and $3.34 \\times 10^{5}\\ \\text{J kg}^{-1}$ for the specific latent heat of fusion.",
+          "hint": "Split the cooling into stages. How many stages are there, and which involve a change in temperature?",
+          "steps": [
+            {
+              "text": "Cool the water to 0 °C.",
+              "latex": "0.40(4200)(15) = 2.52 \\times 10^{4}\\ \\text{J}"
+            },
+            {
+              "text": "Freeze the water at 0 °C.",
+              "latex": "0.40(3.34 \\times 10^{5}) = 1.34 \\times 10^{5}\\ \\text{J}"
+            },
+            {
+              "text": "Cool the ice to $-18$ °C.",
+              "latex": "0.40(2100)(18) = 1.51 \\times 10^{4}\\ \\text{J}"
+            },
+            {
+              "text": "Add the three stages.",
+              "latex": "Q = 1.74 \\times 10^{5}\\ \\text{J}"
+            },
+            {
+              "text": "Time = energy ÷ power (about 72 minutes).",
+              "latex": "t = \\dfrac{1.74 \\times 10^{5}}{40} = 4.3 \\times 10^{3}\\ \\text{s}"
+            }
+          ],
+          "notes": "Freezing takes about three-quarters of the energy, although it happens at a single temperature."
+        },
+        {
+          "type": "worked",
+          "title": "A barista's steam wand",
+          "question": "Steam at 100 °C is blown into 0.25 kg of milk at 5 °C. All the steam condenses, and the milk and condensed water end at 65 °C. Use 3900 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$ for milk, 4200 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$ for water and $2.26 \\times 10^{6}\\ \\text{J kg}^{-1}$ for the specific latent heat of vaporization of water. Energy losses are negligible. Find the mass of steam needed.",
+          "hint": "The steam gives out energy in two stages. Write each as an expression in the unknown mass, then set the total equal to the energy gained by the milk.",
+          "steps": [
+            {
+              "text": "Energy gained by the milk.",
+              "latex": "0.25(3900)(60) = 5.85 \\times 10^{4}\\ \\text{J}"
+            },
+            {
+              "text": "Energy from condensing the steam.",
+              "latex": "m(2.26 \\times 10^{6})"
+            },
+            {
+              "text": "Energy from cooling the condensed water to 65 °C.",
+              "latex": "m(4200)(35) = 1.47 \\times 10^{5}\\,m"
+            },
+            {
+              "text": "Energy given out = energy gained.",
+              "latex": "2.41 \\times 10^{6}\\,m = 5.85 \\times 10^{4}"
+            },
+            {
+              "text": "Solve for the mass of steam.",
+              "latex": "m = 0.024\\ \\text{kg}"
+            }
+          ],
+          "notes": "Only 24 g of steam is needed, because condensing releases so much energy. The same fact makes steam scalds so severe."
+        },
+        {
+          "type": "worked",
+          "title": "Cooling a cyclist",
+          "question": "During a hard ride, a cyclist's skin loses 0.80 kg of sweat by evaporation in one hour. At skin temperature the specific latent heat of vaporization of sweat is $2.4 \\times 10^{6}\\ \\text{J kg}^{-1}$. Find the average rate at which evaporation removes energy from the cyclist.",
+          "hint": "Find the energy for the whole hour first, then divide by the number of seconds in an hour.",
+          "steps": [
+            {
+              "text": "The energy needed to evaporate the sweat.",
+              "latex": "Q = 0.80(2.4 \\times 10^{6}) = 1.92 \\times 10^{6}\\ \\text{J}"
+            },
+            {
+              "text": "Divide by the time ($t = 3600$ s).",
+              "latex": "P = \\dfrac{1.92 \\times 10^{6}}{3600} = 530\\ \\text{W}"
+            }
+          ],
+          "notes": "Over 500 W is comparable with the waste power of a cyclist working hard. Sweat that drips off removes almost no energy: it has to evaporate."
+        }
+      ]
+    },
+    {
+      "id": "mechanisms",
+      "short": "Three transfer mechanisms",
+      "guide": "Conduction, convection and thermal radiation are the primary mechanisms for thermal energy transfer.",
+      "sections": [
+        "transfer",
+        "convection",
+        "radiation"
+      ],
+      "minutes": 5,
+      "aims": [
+        "Name the three main mechanisms of thermal energy transfer and state what each one needs."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Three ways to transfer thermal energy",
+          "bullets": [
+            "<strong>Conduction</strong>: through matter, while the matter itself stays in place",
+            "<strong>Convection</strong>: by the movement of a fluid (a liquid or a gas)",
+            "<strong>Thermal radiation</strong>: by electromagnetic waves, which need no medium",
+            "Only radiation can carry the energy of the Sun to us through empty space"
+          ],
+          "notes": "A wood-burning stove shows all three: the iron conducts, air currents move around the room, and you feel radiation from across the room. Ask which of the three could still cross the vacuum in a vacuum flask."
+        }
+      ]
+    },
+    {
+      "id": "conduction",
+      "short": "Conduction",
+      "guide": "Conduction in terms of the difference in the kinetic energy of particles.",
+      "sections": [
+        "transfer"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Explain conduction in terms of the kinetic energy of particles.",
+        "Explain why metals conduct well and gases conduct poorly."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "How conduction works",
+          "bullets": [
+            "Particles in the hot region have more kinetic energy than those in the cold region",
+            "In collisions they pass on kinetic energy to neighbours with less, all along the material",
+            "Energy travels, but the particles stay where they are",
+            "<strong>Metals</strong> conduct very well: their free electrons carry energy quickly through the lattice",
+            "<strong>Gases</strong> conduct poorly, because their particles are so far apart: trapped air insulates"
+          ],
+          "notes": "Free electrons also explain why good electrical conductors tend to be good thermal conductors. A metal bench feels colder than a wooden one on the same morning because it conducts energy away from the hand faster."
+        }
+      ]
+    },
+    {
+      "id": "direction",
+      "short": "Direction of energy transfer",
+      "guide": "Temperature difference determines the direction of the resultant thermal energy transfer between bodies.",
+      "sections": [
+        "internal"
+      ],
+      "minutes": 10,
+      "aims": [
+        "Use temperature differences to predict the direction of the net thermal energy transfer.",
+        "Define thermal equilibrium."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Which way does the energy go?",
+          "bullets": [
+            "The net transfer is always from the higher <strong>temperature</strong> to the lower",
+            "Internal energy does not decide it: a small hot nail warms a large bath of cool water",
+            "The hot body cools and the cold body warms until the temperatures match",
+            "<strong>Thermal equilibrium</strong>: equal temperatures, and no net transfer of energy",
+            "Objects contain internal energy; \"heat\" is energy in transit. Cold never flows in"
+          ],
+          "notes": "At equilibrium, energy still passes both ways between the bodies, but at equal rates, so the net transfer is zero."
+        }
+      ]
+    },
+    {
+      "id": "rate",
+      "short": "Rate of conduction",
+      "guide": "Quantitative analysis of rate of thermal energy transfer by conduction in terms of the type of material and cross-sectional area of the material and the temperature gradient as given by $\\dfrac{\\Delta Q}{\\Delta t} = -kA\\dfrac{\\Delta T}{\\Delta x}$.",
+      "sections": [
+        "transfer"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Calculate the rate of energy transfer by conduction with $\\dfrac{\\Delta Q}{\\Delta t} = -kA\\dfrac{\\Delta T}{\\Delta x}$."
+      ],
+      "challenge": "CC-B1-04",
+      "checks": [
+        "B1-011"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Rate of conduction",
+          "latex": "\\dfrac{\\Delta Q}{\\Delta t} = -kA\\dfrac{\\Delta T}{\\Delta x}",
+          "bullets": [
+            "$k$ is the thermal conductivity of the material, in $\\text{W m}^{-1}\\,\\text{K}^{-1}$",
+            "$A$ is the cross-sectional area; $\\dfrac{\\Delta T}{\\Delta x}$ is the temperature gradient",
+            "The minus sign shows that energy flows towards the colder side",
+            "In calculations, use the size of $\\Delta T$ and put $\\Delta x$ in metres"
+          ],
+          "notes": "The conduction equation has the same form as the flow of electric charge, which is useful in B.5."
+        },
+        {
+          "type": "diagram",
+          "title": "Conduction through a slab",
+          "figure": "b1dt",
+          "bullets": [
+            "A larger area gives a larger rate of energy transfer",
+            "A larger temperature difference gives a larger rate",
+            "A thicker slab gives a smaller rate",
+            "A material with larger $k$ gives a larger rate"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Insulating a loft",
+          "question": "A ceiling of area 60 $\\text{m}^{2}$ is covered with mineral wool 0.27 m thick, with thermal conductivity 0.040 $\\text{W m}^{-1}\\,\\text{K}^{-1}$. The temperature is 20 °C at the bottom of the wool and 2 °C at the top. Find (a) the rate of energy transfer through the wool and (b) the thickness of wool that would reduce this rate to 100 W.",
+          "hint": "Use only the size of the temperature difference. For part (b), rearrange the equation for the thickness.",
+          "steps": [
+            {
+              "text": "The temperature difference.",
+              "latex": "\\Delta T = 20 - 2 = 18\\ \\text{K}"
+            },
+            {
+              "text": "(a) Use the size of the rate.",
+              "latex": "\\dfrac{\\Delta Q}{\\Delta t} = kA\\dfrac{\\Delta T}{\\Delta x}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "0.040(60)\\dfrac{18}{0.27} = 160\\ \\text{W}"
+            },
+            {
+              "text": "(b) Rearrange for the thickness.",
+              "latex": "\\Delta x = \\dfrac{kA\\Delta T}{100}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "\\Delta x = \\dfrac{0.040(60)(18)}{100} = 0.43\\ \\text{m}"
+            }
+          ],
+          "notes": "The rate is inversely proportional to the thickness, so reducing 160 W to 100 W needs 1.6 times the thickness."
+        }
+      ]
+    },
+    {
+      "id": "convection",
+      "short": "Convection",
+      "guide": "Qualitative description of thermal energy transferred by convection due to fluid density differences.",
+      "sections": [
+        "convection"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Describe how differences in fluid density set up a convection current."
+      ],
+      "challenge": "CC-B1-07",
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Convection currents",
+          "bullets": [
+            "Convection needs a <strong>fluid</strong>: it cannot happen in a solid",
+            "A heated fluid expands, so its density falls",
+            "Warm fluid, being less dense, rises; cooler fluid of greater density sinks and takes its place",
+            "The rising fluid cools, sinks and is heated again: a <strong>convection current</strong>",
+            "\"Heat rises\" is wrong: it is the warm fluid that rises"
+          ],
+          "notes": "Only a qualitative description is required: there are no convection calculations in this topic."
+        },
+        {
+          "type": "diagram",
+          "title": "A convection current",
+          "figure": "b1et",
+          "bullets": [
+            "Convection also shapes the planet and the stars:",
+            [
+              "thunderclouds and weather systems",
+              "ocean currents",
+              "hot rock in the mantle, moving tectonic plates",
+              "the churning surface of the Sun"
+            ]
+          ],
+          "notes": "Rock in the mantle flows extremely slowly: over millions of years it behaves as a very viscous fluid. Plate tectonics itself is not in the guide."
+        }
+      ]
+    },
+    {
+      "id": "spectrum",
+      "short": "Black-body spectrum",
+      "guide": "The emission spectrum of a black body and the determination of the temperature of the body using Wien's displacement law as given by $\\lambda_{\\max} T = 2.9 \\times 10^{-3}\\ \\text{m K}$ where $\\lambda_{\\max}$ is the peak wavelength emitted.",
+      "sections": [
+        "radiation"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Describe how the emission spectrum of a black body changes with temperature.",
+        "Use Wien's displacement law to find a body's temperature or peak wavelength."
+      ],
+      "challenge": "CC-B1-06",
+      "checks": [
+        "B1-012"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Thermal radiation and black bodies",
+          "bullets": [
+            "Every object above 0 K emits <strong>thermal radiation</strong>: electromagnetic waves from its surface",
+            "At everyday temperatures, the radiation is mostly infrared",
+            "A <strong>black body</strong> absorbs every bit of radiation reaching it and reflects nothing",
+            "No surface at the same temperature can emit more than a black body",
+            "Stars behave almost like black bodies; dark, matt surfaces are closer than light, shiny ones"
+          ],
+          "notes": "A solid looks the colour of the light it does not absorb. A black body absorbs every wavelength, yet it glows when hot enough. Emissivity, which describes real surfaces, is in B.2."
+        },
+        {
+          "type": "equation",
+          "title": "Wien's displacement law",
+          "latex": "\\lambda_{\\max} T = 2.9 \\times 10^{-3}\\ \\text{m K}",
+          "bullets": [
+            "$\\lambda_{\\max}$ is the wavelength at the peak of the spectrum, in m",
+            "$T$ is the temperature of the surface, in K",
+            "Measuring the peak wavelength of a star gives its surface temperature",
+            "Cool stars look red; very hot stars look blue-white"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Black-body spectra",
+          "figure": "b1ft",
+          "bullets": [
+            "Hotter: more power at <strong>every</strong> wavelength",
+            "The area under a curve is the total power emitted per unit area of surface",
+            "Hotter: the peak moves to <strong>shorter</strong> wavelengths",
+            "Heated metal goes from a dull red through orange to yellow-white"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A lamp filament and a star",
+          "question": "The filament of an old-style lamp is at 2700 K. A star's spectrum peaks at a wavelength of 290 nm. Find (a) the peak wavelength emitted by the filament, stating the region of the spectrum it lies in, and (b) the surface temperature of the star.",
+          "hint": "Wien's law links the two quantities with one constant. Rearrange it for each part, and put the wavelength in metres.",
+          "steps": [
+            {
+              "text": "(a) Rearrange for the peak wavelength.",
+              "latex": "\\lambda_{\\max} = \\dfrac{2.9 \\times 10^{-3}}{2700}"
+            },
+            {
+              "text": "Evaluate: this is longer than visible light, so it is in the infrared.",
+              "latex": "\\lambda_{\\max} = 1.1 \\times 10^{-6}\\ \\text{m}"
+            },
+            {
+              "text": "(b) Convert the wavelength and rearrange.",
+              "latex": "T = \\dfrac{2.9 \\times 10^{-3}}{290 \\times 10^{-9}}"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "T = 1.0 \\times 10^{4}\\ \\text{K}"
+            }
+          ],
+          "notes": "Most of the power from a filament lamp is emitted in the infrared, which is why these lamps waste so much energy. A star at 10 000 K looks blue-white."
+        }
+      ]
+    },
+    {
+      "id": "stefan",
+      "short": "Stefan–Boltzmann law",
+      "guide": "Quantitative analysis of energy transferred by radiation as a result of the emission of electromagnetic waves from the surface of a body, which in the case of a black body can be modelled by the Stefan-Boltzmann law as given by $L = \\sigma AT^{4}$ where $L$ is the luminosity, $A$ is the surface area and $T$ is the absolute temperature of the body.",
+      "sections": [
+        "luminosity"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Calculate the luminosity of a black body with $L = \\sigma AT^{4}$.",
+        "Express and compare luminosities in watts and in terms of the luminosity of the Sun."
+      ],
+      "checks": [
+        "B1-013"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "The Stefan–Boltzmann law",
+          "latex": "L = \\sigma AT^{4}",
+          "bullets": [
+            "<strong>Luminosity</strong> $L$ means radiated power, in W: the total power emitted by a body",
+            "$\\sigma = 5.67 \\times 10^{-8}\\ \\text{W m}^{-2}\\,\\text{K}^{-4}$ is the Stefan–Boltzmann constant",
+            "$A$ is the surface area and $T$ is in kelvin; for a sphere, $A = 4\\pi R^{2}$",
+            "Doubling $T$ multiplies $L$ by $2^{4} = 16$",
+            "Star luminosities may be given in W or as multiples of the Sun's luminosity, $L_{\\odot}$"
+          ],
+          "notes": "No body is at 0 K, so every body radiates. The law gives the power emitted; the net power loss also depends on what the body absorbs from its surroundings (B.2)."
+        },
+        {
+          "type": "derivation",
+          "title": "Comparing a star with the Sun",
+          "start": "Treat a star and the Sun as black spheres, of radius $R$ and $R_{\\odot}$, with surface temperatures $T$ and $T_{\\odot}$.",
+          "steps": [
+            {
+              "text": "Stefan–Boltzmann law",
+              "latex": "L = \\sigma AT^{4}"
+            },
+            {
+              "text": "The surface area of a sphere",
+              "latex": "A = 4\\pi R^{2}"
+            },
+            {
+              "text": "So for the star",
+              "latex": "L = 4\\pi\\sigma R^{2}T^{4}"
+            },
+            {
+              "text": "In the same way, for the Sun",
+              "latex": "L_{\\odot} = 4\\pi\\sigma R_{\\odot}^{2}T_{\\odot}^{4}"
+            },
+            {
+              "text": "Divide the two: $4\\pi\\sigma$ cancels",
+              "latex": "\\dfrac{L}{L_{\\odot}} = \\left(\\dfrac{R}{R_{\\odot}}\\right)^{2}\\left(\\dfrac{T}{T_{\\odot}}\\right)^{4}"
+            }
+          ],
+          "notes": "A star can be very luminous either because it is very hot or because it is very large."
+        },
+        {
+          "type": "worked",
+          "title": "A white dwarf",
+          "question": "A white dwarf has a radius of $5.8 \\times 10^{6}$ m and a surface temperature of 25 000 K. Treat it as a black body. Taking $L_{\\odot} = 3.8 \\times 10^{26}$ W, find its luminosity (a) in watts and (b) in terms of the luminosity of the Sun.",
+          "hint": "A star is a sphere, so find its whole surface area first. Check that the temperature is raised to the fourth power.",
+          "steps": [
+            {
+              "text": "The surface area of the sphere.",
+              "latex": "A = 4\\pi(5.8 \\times 10^{6})^{2} = 4.23 \\times 10^{14}\\ \\text{m}^{2}"
+            },
+            {
+              "text": "(a) Stefan–Boltzmann law.",
+              "latex": "L = (5.67 \\times 10^{-8})AT^{4}"
+            },
+            {
+              "text": "Substitute with $T = 25\\,000$ K.",
+              "latex": "L = 9.4 \\times 10^{24}\\ \\text{W}"
+            },
+            {
+              "text": "(b) Divide by the luminosity of the Sun.",
+              "latex": "\\dfrac{9.4 \\times 10^{24}}{3.8 \\times 10^{26}} = 0.025\\,L_{\\odot}"
+            }
+          ],
+          "notes": "Very hot, but faint: a white dwarf is about the size of the Earth. Ask students what would be needed to make it as luminous as the Sun."
+        },
+        {
+          "type": "worked",
+          "title": "A steel billet cools",
+          "question": "A steel billet with a surface area of 0.90 $\\text{m}^{2}$ leaves a furnace at 1227 °C. Treat it as a black body. Find (a) the power it radiates and (b) the factor by which this power falls when the billet cools to 627 °C.",
+          "hint": "Convert both temperatures to kelvin before anything else. For part (b), everything except the temperature cancels in the ratio.",
+          "steps": [
+            {
+              "text": "(a) Convert the temperature to kelvin.",
+              "latex": "T = 1227 + 273 = 1500\\ \\text{K}"
+            },
+            {
+              "text": "Stefan–Boltzmann law.",
+              "latex": "L = (5.67 \\times 10^{-8})(0.90)(1500)^{4}"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "L = 2.6 \\times 10^{5}\\ \\text{W}"
+            },
+            {
+              "text": "(b) The final temperature in kelvin.",
+              "latex": "T = 627 + 273 = 900\\ \\text{K}"
+            },
+            {
+              "text": "Ratio of the two powers.",
+              "latex": "\\left(\\dfrac{1500}{900}\\right)^{4} = 7.7"
+            }
+          ],
+          "notes": "Using Celsius in the ratio would give about 15, instead of 7.7. Real hot steel has an emissivity of about 0.8 (B.2), so the true power is a little lower."
+        }
+      ]
+    },
+    {
+      "id": "brightness",
+      "short": "Intensity and apparent brightness",
+      "guide": "Intensity as power per unit area, $I = \\dfrac{P}{A}$; the concept of apparent brightness $b$, which is the intensity of a star's light where it is received.",
+      "sections": [
+        "luminosity"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Define intensity and apparent brightness, and calculate intensity with $I = \\dfrac{P}{A}$."
+      ],
+      "checks": [
+        "B1-020"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Intensity",
+          "latex": "I = \\dfrac{P}{A}",
+          "bullets": [
+            "Intensity is the power falling on each unit of area, measured at right angles to the radiation, in $\\text{W m}^{-2}$",
+            "<strong>Apparent brightness</strong> $b$ is the intensity of the light from a star where it is received",
+            "Luminosity is a property of the star; apparent brightness also depends on where you are observing from"
+          ],
+          "notes": "New for exams from 2028. Intensity as I = P/A is in the 2028 data booklet."
+        },
+        {
+          "type": "worked",
+          "title": "A laser pointer",
+          "question": "A laser pointer emits a beam of power 1.0 mW. The beam has a cross-sectional area of $2.0 \\times 10^{-6}\\ \\text{m}^{2}$. Find the intensity of the beam.",
+          "hint": "Change the power to watts first, and then use the definition of intensity.",
+          "steps": [
+            {
+              "text": "Convert the power to watts.",
+              "latex": "P = 1.0 \\times 10^{-3}\\ \\text{W}"
+            },
+            {
+              "text": "Intensity = power ÷ area.",
+              "latex": "I = \\dfrac{1.0 \\times 10^{-3}}{2.0 \\times 10^{-6}} = 500\\ \\text{W m}^{-2}"
+            }
+          ],
+          "notes": "New for exams from 2028. A tiny power gives an intensity comparable with direct sunlight at the Earth's surface. The eye then focuses the beam to a tiny spot, so lasers must never be pointed at eyes."
+        }
+      ]
+    },
+    {
+      "id": "luminosity",
+      "short": "Luminosity and distance",
+      "guide": "Luminosity $L$ of a body as given by $b = \\dfrac{L}{4\\pi d^{2}}$.",
+      "sections": [
+        "luminosity"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Derive and use $b = \\dfrac{L}{4\\pi d^{2}}$.",
+        "Use luminosity and apparent brightness to find the distance to a star."
+      ],
+      "checks": [
+        "B1-014"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Apparent brightness and luminosity",
+          "latex": "b = \\dfrac{L}{4\\pi d^{2}}",
+          "bullets": [
+            "$b$ in $\\text{W m}^{-2}$; $L$ in W; $d$ is the distance from the star, in m",
+            "An <strong>inverse-square law</strong>: at twice the distance, the brightness is a quarter as great",
+            "Two stars of equal luminosity: the closer one looks brighter"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Where the equation comes from",
+          "start": "A star of luminosity $L$ radiates equally in all directions, and nothing absorbs the energy on the way.",
+          "steps": [
+            {
+              "text": "At a distance $d$, the radiation has spread over a sphere of area",
+              "latex": "A = 4\\pi d^{2}"
+            },
+            {
+              "text": "All of the power $L$ passes through that sphere",
+              "latex": "P = L"
+            },
+            {
+              "text": "Brightness is intensity, power per unit area",
+              "latex": "b = \\dfrac{P}{A}"
+            },
+            {
+              "text": "Substitute for $P$ and $A$",
+              "latex": "b = \\dfrac{L}{4\\pi d^{2}}"
+            },
+            {
+              "text": "Rearrange to find a distance",
+              "latex": "d = \\sqrt{\\dfrac{L}{4\\pi b}}"
+            }
+          ],
+          "notes": "The last step is the way astronomers use this: once L is known, a measured b gives the distance."
+        },
+        {
+          "type": "diagram",
+          "title": "The inverse-square law",
+          "figure": "b1gt",
+          "bullets": [
+            "The same light covers four times the area at twice the distance",
+            "Each square metre then receives a quarter of the power"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "How far away is the star?",
+          "question": "A star has a luminosity of $40\\,L_{\\odot}$. Its apparent brightness measured at the Earth is $2.1 \\times 10^{-8}\\ \\text{W m}^{-2}$. Taking $L_{\\odot} = 3.8 \\times 10^{26}$ W, find the distance of the star from the Earth.",
+          "hint": "Find the luminosity in watts, and rearrange the brightness equation for the distance.",
+          "steps": [
+            {
+              "text": "The luminosity in watts.",
+              "latex": "L = 40(3.8 \\times 10^{26}) = 1.52 \\times 10^{28}\\ \\text{W}"
+            },
+            {
+              "text": "Rearrange for the distance.",
+              "latex": "d = \\sqrt{\\dfrac{L}{4\\pi b}}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "d = \\sqrt{\\dfrac{1.52 \\times 10^{28}}{4\\pi(2.1 \\times 10^{-8})}}"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "d = 2.4 \\times 10^{17}\\ \\text{m}"
+            }
+          ],
+          "notes": "This is about 25 light-years. Remind students to take the square root at the end."
+        },
+        {
+          "type": "worked",
+          "title": "Solar power at Jupiter",
+          "question": "At the Earth's distance from the Sun, the solar panels of a space probe can produce 14 kW. Jupiter is 5.2 times further from the Sun than the Earth is. Assuming the panels work equally well in both places, find the power they can produce at Jupiter.",
+          "hint": "The power from the panels is proportional to the apparent brightness of the Sun. How does that depend on distance?",
+          "steps": [
+            {
+              "text": "The brightness falls with the square of the distance.",
+              "latex": "\\dfrac{b_{\\text{J}}}{b_{\\text{E}}} = \\dfrac{1}{5.2^{2}} = 0.037"
+            },
+            {
+              "text": "The power is proportional to the brightness.",
+              "latex": "P = 0.037 \\times 14\\ \\text{kW}"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "P = 0.52\\ \\text{kW}"
+            }
+          ],
+          "notes": "No distances or luminosity are needed: the ratio does the work. Real probes to Jupiter need very large panels for this reason."
+        }
+      ]
+    }
+  ]
+}

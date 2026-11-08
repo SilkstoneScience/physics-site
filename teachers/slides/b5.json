@@ -1,0 +1,1197 @@
+{
+  "topic": "B.5",
+  "hours": 6,
+  "points": [
+    {
+      "id": "conductors",
+      "short": "Conductors and insulators",
+      "guide": "The properties of electrical conductors and insulators in terms of mobility of charge carriers.",
+      "sections": [
+        "charge"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Describe electric charge: its two kinds, the elementary charge and its conservation.",
+        "Explain the difference between conductors, insulators and semiconductors using mobile charge carriers."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Electric charge",
+          "bullets": [
+            "Two kinds of charge, <strong>positive</strong> and <strong>negative</strong>: like charges repel, unlike charges attract",
+            "Charge is measured in coulombs (C). The <strong>elementary charge</strong> is $e = 1.60 \\times 10^{-19}$ C",
+            "An electron carries $-e$ and a proton $+e$, and any charge we can isolate is a whole number of $e$",
+            "An atom that loses an electron becomes a positive ion; one that gains an electron becomes a negative ion",
+            "<strong>Conservation of charge</strong>: charge is never created or destroyed, only moved from place to place",
+            "Rubbing a balloon on wool moves electrons to the balloon, and the wool ends up equally positive"
+          ],
+          "notes": "Two rubbed balloons on threads show repulsion, and a balloon with the wool shows attraction. An electroscope also works well here: touch a charged rod to the cap and the leaves spread, because charge moves freely through the metal and the two leaves repel. It shows the amount of charge, not its sign."
+        },
+        {
+          "type": "bullets",
+          "title": "Conductors, insulators and semiconductors",
+          "bullets": [
+            "<strong>Charge carriers</strong> are charged particles that can move (are mobile) through a material",
+            "<strong>Conductors</strong> have huge numbers of mobile carriers: free electrons in metals, ions in salt solutions",
+            "<strong>Insulators</strong> have almost none, because their electrons stay bound to atoms (plastic, glass, rubber)",
+            "<strong>Semiconductors</strong> such as silicon have few, and gain more as temperature or light level rises",
+            "Roughly: metals conduct, non-metals insulate, and metalloids are semiconductors"
+          ],
+          "notes": "Ask why the metal of a plug has a plastic cover, then why neither would be useful alone. This prepares the thermistor and LDR later in the topic."
+        }
+      ]
+    },
+    {
+      "id": "current",
+      "short": "Direct current",
+      "guide": "Direct current (dc) $I$ as a flow of charge carriers as given by $I = \\Delta q/\\Delta t$.",
+      "sections": [
+        "current"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Define current as the rate of flow of charge, and use $I = \\Delta q / \\Delta t$.",
+        "Explain why a current starts everywhere in a circuit almost at once."
+      ],
+      "challenge": "CC-B5-01",
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Direct current",
+          "bullets": [
+            "<strong>Direct current (dc)</strong>: charge carriers flowing in one direction round a circuit",
+            "<strong>Current</strong> $I$ is the rate at which charge passes a point in the circuit",
+            "Current is measured in amperes, where $1\\ \\text{A} = 1\\ \\text{C s}^{-1}$",
+            "The carriers are electrons in a metal, and positive and negative ions in a salt solution",
+            "Alternating current (ac) circuits aren't required in this course"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Why a lamp lights straight away",
+          "bullets": [
+            "A wire is already full of free electrons, like a pipe already full of water",
+            "The cell pushes on the nearest electrons, each repels the next, and the push runs round the loop",
+            "So carriers everywhere start moving almost together, although each one only <strong>drifts</strong> slowly (under 1 mm per second)",
+            "Break the loop anywhere and the push stops, so the current stops everywhere",
+            "Electrons don't leak out of a cut wire: leaving the metal would take far too much energy"
+          ],
+          "notes": "A line of students passing a push along their shoulders makes the point: the push arrives quickly, though nobody travels far."
+        },
+        {
+          "type": "equation",
+          "title": "Current",
+          "latex": "I = \\dfrac{\\Delta q}{\\Delta t}",
+          "bullets": [
+            "The charge $\\Delta q$ passes a point in the time $\\Delta t$",
+            "Rearranged: $\\Delta q = I\\Delta t$, with the time in seconds",
+            "Charge is conserved, so a component doesn't use up current: what flows in also flows out"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Starting a car",
+          "question": "A car's starter motor draws a current of 150 A for 1.2 s. Find (a) the charge that flows and (b) the number of electrons that pass any point in the circuit.",
+          "hint": "Current is charge per second. Each electron carries a charge of size $e$.",
+          "steps": [
+            {
+              "text": "(a) Rearrange the definition of current.",
+              "latex": "\\Delta q = I\\Delta t = 150 \\times 1.2"
+            },
+            {
+              "text": "This gives the charge.",
+              "latex": "\\Delta q = 180\\ \\text{C}"
+            },
+            {
+              "text": "(b) Divide by the charge on one electron.",
+              "latex": "n = \\dfrac{180}{1.60 \\times 10^{-19}} = 1.1 \\times 10^{21}"
+            }
+          ],
+          "notes": "Compare with a small LED at about 20 mA: the starter's current is thousands of times larger. Thick cables are needed for it, which leads on to resistance."
+        }
+      ],
+      "checks": [
+        "B5-016"
+      ]
+    },
+    {
+      "id": "origin",
+      "short": "Origin of resistance",
+      "guide": "Electric resistance and its origin.",
+      "sections": [
+        "resistance"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Explain the origin of electrical resistance in a metal, using collisions between electrons and ions."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Where resistance comes from",
+          "bullets": [
+            "<strong>Resistance</strong> measures how strongly something opposes the current through it",
+            "In a metal, free electrons drift between a regular <strong>lattice</strong> of positive ions",
+            "The electrons collide with the vibrating ions and pass on kinetic energy",
+            "The ions then vibrate more, so the metal gets hotter: the <strong>heating effect</strong> of a current",
+            "In a hotter metal the ions vibrate more, collisions are more frequent and the resistance increases"
+          ],
+          "notes": "A particle model at work (NoS: Models). It explains why a metal's resistance rises with temperature. Ask what else would be needed to explain a thermistor, whose resistance falls: there the number of carriers changes."
+        }
+      ]
+    },
+    {
+      "id": "resistance",
+      "short": "Resistance",
+      "guide": "Electrical resistance $R$ as given by $R = V/I$.",
+      "sections": [
+        "resistance"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Calculate resistance from the potential difference across a component and the current in it."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Resistors and measuring resistance",
+          "bullets": [
+            "A <strong>resistor</strong> is a component made to have a chosen resistance, often a carbon film or a coil of wire",
+            "Resistance is measured in <strong>ohms</strong> (Ω), with an ohmmeter or from a voltmeter and an ammeter",
+            "The <strong>potential difference (p.d.)</strong> $V$ is the energy each coulomb transfers to the component (defined fully with cells)",
+            "Some resistors can vary, such as potentiometers, thermistors and light-dependent resistors (LDRs): more on these later"
+          ],
+          "notes": "Pass round some carbon resistors and a wire-wound one. An ohmmeter that shows an overload is reporting a resistance too large for its range. A complete treatment of potential difference comes in the cells lessons."
+        },
+        {
+          "type": "equation",
+          "title": "Resistance",
+          "latex": "R = \\dfrac{V}{I}",
+          "bullets": [
+            "Resistance is measured in ohms: $1\\ \\Omega = 1\\ \\text{V A}^{-1}$",
+            "Rearranged: $V = IR$",
+            "This equation defines resistance for <strong>any</strong> component, at any moment"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "resistivity",
+      "short": "Resistivity",
+      "guide": "Resistivity as given by $\\rho = RA/L$.",
+      "sections": [
+        "resistance"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Explain how the resistance of a wire depends on its length, cross-sectional area and material.",
+        "Use $\\rho = \\dfrac{RA}{L}$ in calculations, with consistent units."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What decides a wire's resistance?",
+          "bullets": [
+            "Think of drinking a milkshake: a longer straw, or a narrower one, is harder work",
+            "Resistance is proportional to <strong>length</strong>",
+            "Resistance is inversely proportional to <strong>cross-sectional area</strong>",
+            "The <strong>material</strong> matters too: copper conducts far better than carbon of the same size",
+            "<strong>Resistivity</strong> $\\rho$ belongs to a material (at a given temperature); resistance belongs to one particular object"
+          ],
+          "notes": "Straws of different lengths and widths make a quick demonstration. The effect of temperature on resistivity is not required numerically."
+        },
+        {
+          "type": "equation",
+          "title": "Resistivity",
+          "latex": "\\rho = \\dfrac{RA}{L}",
+          "bullets": [
+            "The area $A$ is the <strong>cross-section</strong> of the wire, in $\\text{m}^{2}$, and the length $L$ is in m",
+            "Resistivity is measured in Ω m"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Building the resistivity equation",
+          "start": "Experiments show how the resistance of a conductor depends on its shape.",
+          "steps": [
+            {
+              "text": "Resistance is proportional to length.",
+              "latex": "R \\propto L"
+            },
+            {
+              "text": "It is inversely proportional to cross-sectional area.",
+              "latex": "R \\propto \\dfrac{1}{A}"
+            },
+            {
+              "text": "Combine the two.",
+              "latex": "R \\propto \\dfrac{L}{A}"
+            },
+            {
+              "text": "The constant of proportionality is the resistivity.",
+              "latex": "R = \\dfrac{\\rho L}{A}"
+            },
+            {
+              "text": "Rearrange into the data booklet form.",
+              "latex": "\\rho = \\dfrac{RA}{L}"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Using the resistivity equation",
+          "bullets": [
+            "Change lengths to metres and areas to $\\text{m}^{2}$ before substituting",
+            "Watch the conversion: $1\\ \\text{mm}^{2} = 1.0 \\times 10^{-6}\\ \\text{m}^{2}$",
+            "For a round wire, the area is $\\pi r^{2}$: halve the diameter first",
+            "Doubling the diameter makes the area four times larger, so the resistance is a quarter",
+            "Typical values in Ω m: copper $1.7 \\times 10^{-8}$, nichrome $1.0 \\times 10^{-6}$, glass about $10^{12}$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "An extension lead",
+          "question": "An extension lead is 25 m long, and each of its two copper cores has a cross-sectional area of 1.5 $\\text{mm}^{2}$. The resistivity of copper is $1.7 \\times 10^{-8}$ Ω m. Find (a) the resistance of one core and (b) the resistance of the complete path out and back.",
+          "hint": "Rearrange the resistivity equation for $R$, with the area in $\\text{m}^{2}$. Current goes out along one core and back along the other.",
+          "steps": [
+            {
+              "text": "Convert the area to $\\text{m}^{2}$.",
+              "latex": "A = 1.5 \\times 10^{-6}\\ \\text{m}^{2}"
+            },
+            {
+              "text": "(a) Rearrange and substitute.",
+              "latex": "R = \\dfrac{1.7 \\times 10^{-8} \\times 25}{1.5 \\times 10^{-6}}"
+            },
+            {
+              "text": "This gives the resistance of one core.",
+              "latex": "R = 0.28\\ \\Omega"
+            },
+            {
+              "text": "(b) The current travels along both cores in turn, so double it.",
+              "latex": "R_{\\text{total}} = 0.57\\ \\Omega"
+            }
+          ],
+          "notes": "Part (b) uses the unrounded 0.283 Ω. A heavy load on a long lead makes the cable warm, so leads shouldn't be left coiled."
+        }
+      ],
+      "checks": [
+        "B5-004"
+      ]
+    },
+    {
+      "id": "ohm",
+      "short": "Ohm's law",
+      "guide": "Ohm's law.",
+      "sections": [
+        "ohm"
+      ],
+      "minutes": 10,
+      "aims": [
+        "State Ohm's law and identify a conductor that obeys it."
+      ],
+      "slides": [
+        {
+          "type": "diagram",
+          "title": "Ohm's law in real class data",
+          "figure": "b5rt",
+          "bullets": [
+            "<strong>Ohm's law</strong>: at constant temperature, the current in a metal conductor is proportional to the potential difference across it",
+            "So the ratio $V/I$, the resistance, stays constant",
+            "The equation $R = V/I$ defines resistance; Ohm's law adds that, for these conductors, it doesn't change"
+          ],
+          "notes": "Students often call $V = IR$ \"Ohm's law\". The equation is only the definition of resistance: the law is the claim that the resistance is constant. A metal conductor at constant temperature can be treated as ohmic."
+        }
+      ]
+    },
+    {
+      "id": "ohmic",
+      "short": "Ohmic and non-ohmic",
+      "guide": "The ohmic and non-ohmic behaviour of electrical conductors, including the heating effect of resistors.",
+      "sections": [
+        "ohm"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Distinguish ohmic and non-ohmic behaviour on graphs of current and potential difference.",
+        "Explain how the heating effect makes a filament lamp non-ohmic."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Ohmic or non-ohmic?",
+          "bullets": [
+            "<strong>Ohmic</strong>: $V$ and $I$ are proportional, so the graph is a straight line through the origin",
+            "<strong>Non-ohmic</strong>: the ratio $V/I$ changes, so the graph curves",
+            "In a filament lamp, more current makes the filament hotter, so its resistance rises",
+            "On a graph of $I$ against $V$ the lamp's curve flattens; on $V$ against $I$ it steepens",
+            "Find resistance from $V/I$ at the point, <strong>never</strong> from the gradient of a curve"
+          ],
+          "notes": "Every resistor warms when it carries a current. It stays ohmic only as long as its temperature stays steady."
+        },
+        {
+          "type": "diagram",
+          "title": "Ohmic resistor and filament lamp",
+          "figure": "b5dt"
+        },
+        {
+          "type": "worked",
+          "title": "A bicycle lamp",
+          "question": "A 6.0 V bicycle lamp has a current of 0.20 A when the potential difference across it is 1.0 V, and a current of 0.50 A when the potential difference is 6.0 V. Find the resistance at each potential difference, and state whether the lamp is ohmic, with a reason.",
+          "hint": "Use the ratio $V/I$ at each point. What would be true of the resistance if the lamp were ohmic?",
+          "steps": [
+            {
+              "text": "Resistance at 1.0 V.",
+              "latex": "R = \\dfrac{1.0}{0.20} = 5.0\\ \\Omega"
+            },
+            {
+              "text": "Resistance at 6.0 V.",
+              "latex": "R = \\dfrac{6.0}{0.50} = 12\\ \\Omega"
+            },
+            {
+              "text": "The resistance changes, so the lamp is non-ohmic. The hotter filament has a larger resistance."
+            }
+          ],
+          "notes": "Ask why a lamp is most likely to fail just as it is switched on: its cold resistance is low, so the first surge of current is large."
+        }
+      ],
+      "checks": [
+        "B5-009"
+      ]
+    },
+    {
+      "id": "power",
+      "short": "Electrical power",
+      "guide": "Electrical power $P$ dissipated by a resistor as given by $P = IV = I^{2}R = V^{2}/R$.",
+      "sections": [
+        "power"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Derive and use the three forms of the power equation.",
+        "Choose the most useful form for a given circuit."
+      ],
+      "challenge": "CC-B5-04",
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Electrical power",
+          "latex": "P = IV = I^{2}R = \\dfrac{V^{2}}{R}",
+          "bullets": [
+            "Power is the rate of transferring energy, measured in watts ($1\\ \\text{W} = 1\\ \\text{J s}^{-1}$)",
+            "In a resistor, the energy is <strong>dissipated</strong> as thermal energy",
+            "The energy transferred in a time $t$ is $Pt$"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Three forms of electrical power",
+          "start": "Power is work done per unit time. Potential difference is energy per coulomb, so the work done on a charge $q$ moved through a p.d. $V$ is $qV$.",
+          "steps": [
+            {
+              "text": "Start from the definition of power.",
+              "latex": "P = \\dfrac{W}{t}"
+            },
+            {
+              "text": "Substitute the work done.",
+              "latex": "P = \\dfrac{qV}{t}"
+            },
+            {
+              "text": "Current is charge per unit time.",
+              "latex": "P = IV"
+            },
+            {
+              "text": "Substitute $V = IR$.",
+              "latex": "P = I(IR) = I^{2}R"
+            },
+            {
+              "text": "Or substitute $I = V/R$.",
+              "latex": "P = \\dfrac{V}{R} \\times V = \\dfrac{V^{2}}{R}"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Choosing the right form",
+          "bullets": [
+            "Pick the form that uses the quantities you know",
+            "Two resistors with the same current: use $I^{2}R$, and the larger resistance has the larger power",
+            "Two resistors with the same p.d.: use $V^{2}/R$, and the smaller resistance has the larger power",
+            "Doubling the current in a fixed resistor makes the power four times larger",
+            "An appliance's power rating applies only at the p.d. stated on it"
+          ],
+          "notes": "Same current means connected in series, and same p.d. means connected in parallel: both come up shortly, so return to this slide then."
+        },
+        {
+          "type": "worked",
+          "title": "A long cable",
+          "question": "A 2.0 kW heater runs from a 230 V supply at the end of a long cable with a total resistance of 0.60 Ω. Treat the potential difference across the heater as 230 V. Find (a) the current in the heater and (b) the power dissipated in the cable.",
+          "hint": "The current in the cable is the same as in the heater. Choose the form of the power equation that uses the current and the resistance.",
+          "steps": [
+            {
+              "text": "(a) Rearrange $P = IV$ for the heater.",
+              "latex": "I = \\dfrac{2000}{230} = 8.7\\ \\text{A}"
+            },
+            {
+              "text": "(b) The cable has the same current.",
+              "latex": "P = I^{2}R = 8.7^{2} \\times 0.60"
+            },
+            {
+              "text": "This gives the power lost in the cable.",
+              "latex": "P = 45\\ \\text{W}"
+            }
+          ],
+          "notes": "About 2% of the heater's power is wasted in the cable. Halving the current would cut this loss to a quarter, which is the idea behind high-voltage transmission."
+        }
+      ],
+      "checks": [
+        "B5-008"
+      ]
+    },
+    {
+      "id": "diagrams",
+      "short": "Circuit diagrams",
+      "guide": "Circuit diagrams represent the arrangement of components in a circuit.",
+      "sections": [
+        "symbols"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Draw and interpret circuit diagrams using the standard symbols in the data booklet."
+      ],
+      "challenge": "CC-B5-02",
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Drawing a circuit",
+          "bullets": [
+            "A working circuit needs a <strong>complete loop</strong> of conductors and a source, such as a cell",
+            "A <strong>battery</strong> is a set of cells joined in series: three 1.5 V cells make 4.5 V",
+            "The <strong>longer line</strong> of a cell's symbol is its positive terminal",
+            "Draw wires as straight ruled lines, and put a dot where wires join",
+            "A diagram shows how components are <strong>connected</strong>, not where they sit on the bench"
+          ],
+          "notes": "Build a circuit on the bench and ask students to draw it, then rearrange the same circuit so it looks different. The diagram shouldn't change."
+        },
+        {
+          "type": "diagram",
+          "title": "The symbols to know",
+          "figure": "b5at",
+          "notes": "All of these are listed in the data booklet, so students can look them up, but they should still be able to draw them quickly."
+        }
+      ],
+      "checks": [
+        "B5-012"
+      ]
+    },
+    {
+      "id": "combos",
+      "short": "Series and parallel",
+      "guide": "The combinations of resistors in series and parallel circuits.",
+      "sections": [
+        "combos",
+        "symbols"
+      ],
+      "minutes": 55,
+      "aims": [
+        "Calculate currents, potential differences and total resistance in series, parallel and mixed circuits.",
+        "Connect ammeters and voltmeters correctly, and allow for a non-ideal meter."
+      ],
+      "challenge": "CC-B5-03",
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Series circuits",
+          "latex": [
+            "I = I_{1} = I_{2} = \\ldots",
+            "V = V_{1} + V_{2} + \\ldots",
+            "R_{s} = R_{1} + R_{2} + \\ldots"
+          ],
+          "bullets": [
+            "There is one path, so every component has the same current",
+            "The p.d.s share out the supply, with the larger resistance taking the larger share"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Parallel circuits",
+          "latex": [
+            "I = I_{1} + I_{2} + \\ldots",
+            "V = V_{1} = V_{2} = \\ldots",
+            "\\dfrac{1}{R_{p}} = \\dfrac{1}{R_{1}} + \\dfrac{1}{R_{2}} + \\ldots"
+          ],
+          "bullets": [
+            "There are separate branches, so each one has the same p.d.",
+            "The current divides, and the smaller resistance takes the larger share"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Resistors in series",
+          "start": "Three resistors share one path, so the same current $I$ passes through each. Conservation of energy links the potential differences.",
+          "steps": [
+            {
+              "text": "Each coulomb transfers energy in each resistor, so the p.d.s add.",
+              "latex": "V = V_{1} + V_{2} + V_{3}"
+            },
+            {
+              "text": "Use $V = IR$ for each, with the same current.",
+              "latex": "IR_{s} = IR_{1} + IR_{2} + IR_{3}"
+            },
+            {
+              "text": "Divide by $I$.",
+              "latex": "R_{s} = R_{1} + R_{2} + R_{3}"
+            }
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Resistors in parallel",
+          "start": "Each resistor is connected directly across the supply, so each has the same potential difference $V$. Conservation of charge links the currents.",
+          "steps": [
+            {
+              "text": "The current divides between the branches.",
+              "latex": "I = I_{1} + I_{2} + I_{3}"
+            },
+            {
+              "text": "Use $I = V/R$ for each branch.",
+              "latex": "\\dfrac{V}{R_{p}} = \\dfrac{V}{R_{1}} + \\dfrac{V}{R_{2}} + \\dfrac{V}{R_{3}}"
+            },
+            {
+              "text": "Divide by $V$.",
+              "latex": "\\dfrac{1}{R_{p}} = \\dfrac{1}{R_{1}} + \\dfrac{1}{R_{2}} + \\dfrac{1}{R_{3}}"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Using the series and parallel rules",
+          "bullets": [
+            "Adding a resistor in series <strong>increases</strong> the total; adding one in parallel <strong>decreases</strong> it",
+            "The parallel total is always smaller than the smallest branch",
+            "Two equal resistors in parallel have half the resistance of one",
+            "Don't forget the last step: invert to get $R_{p}$",
+            "Mixed circuits: replace each parallel group with one resistor, then add in series",
+            "On the same supply, a larger total resistance means a smaller current from the source"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Series and parallel connections",
+          "figure": "b5et"
+        },
+        {
+          "type": "worked",
+          "title": "Fairy lights",
+          "question": "A string of 20 identical filament lamps is connected in series across the 230 V mains. The current in the string is 0.25 A. Find (a) the potential difference across each lamp, (b) the resistance of one lamp and (c) the total power of the string.",
+          "hint": "In series the potential differences add up to the supply, and every lamp has the same current.",
+          "steps": [
+            {
+              "text": "(a) The 20 identical lamps share the supply equally.",
+              "latex": "V = \\dfrac{230}{20} = 11.5\\ \\text{V}"
+            },
+            {
+              "text": "(b) Use the p.d. across one lamp.",
+              "latex": "R = \\dfrac{11.5}{0.25} = 46\\ \\Omega"
+            },
+            {
+              "text": "(c) Use the whole string.",
+              "latex": "P = IV = 0.25 \\times 230 = 58\\ \\text{W}"
+            }
+          ],
+          "notes": "Ask what happens when one lamp breaks: the single loop is broken, and every lamp goes out."
+        },
+        {
+          "type": "worked",
+          "title": "Car electrics",
+          "question": "Two headlamps, each of resistance 2.4 Ω, and a rear-window heater of resistance 1.2 Ω are connected in parallel across a 12 V car battery of negligible internal resistance. Find (a) the current in each component, (b) the total current from the battery and (c) the combined resistance.",
+          "hint": "Every branch has the full battery p.d. across it. Find the branch currents first.",
+          "steps": [
+            {
+              "text": "(a) Each headlamp has 12 V across it.",
+              "latex": "I = \\dfrac{12}{2.4} = 5.0\\ \\text{A}"
+            },
+            {
+              "text": "The heater also has 12 V across it.",
+              "latex": "I = \\dfrac{12}{1.2} = 10\\ \\text{A}"
+            },
+            {
+              "text": "(b) Add the branch currents.",
+              "latex": "I = 5.0 + 5.0 + 10 = 20\\ \\text{A}"
+            },
+            {
+              "text": "(c) Use the parallel rule.",
+              "latex": "\\dfrac{1}{R_{p}} = \\dfrac{1}{2.4} + \\dfrac{1}{2.4} + \\dfrac{1}{1.2}"
+            },
+            {
+              "text": "Invert the result.",
+              "latex": "R_{p} = 0.60\\ \\Omega"
+            }
+          ],
+          "notes": "Check: $12 / 20 = 0.60$ Ω. The total is smaller than the smallest branch, as it must be. \"Negligible internal resistance\" means the battery's own resistance can be ignored; internal resistance is covered with cells."
+        },
+        {
+          "type": "diagram",
+          "title": "Connecting meters",
+          "figure": "b5bt",
+          "bullets": [
+            "An <strong>ammeter</strong> goes in <strong>series</strong>: break the circuit so all the current passes through it",
+            "A <strong>voltmeter</strong> goes in <strong>parallel</strong>, across the component being measured",
+            "Ideal ammeter: zero resistance. Ideal voltmeter: infinite resistance",
+            "Assume ideal meters unless told otherwise. A non-ideal meter has a constant resistance: treat it as one more resistor"
+          ],
+          "notes": "For an $I$–$V$ characteristic the ammeter must read only the component's current, and the voltmeter must be across only that component. Ask what goes wrong if the two meters are swapped."
+        },
+        {
+          "type": "worked",
+          "title": "A caravan heating circuit",
+          "question": "A 12 V leisure battery of negligible internal resistance feeds two identical heating pads, each of resistance 6.0 Ω, connected in parallel. The long thin cable between the battery and the pads has a total resistance of 1.0 Ω. Find (a) the total resistance, (b) the current from the battery, (c) the potential difference across the pads and (d) the power of each pad.",
+          "hint": "Replace the parallel pair with one resistor first, then treat it as being in series with the cable.",
+          "steps": [
+            {
+              "text": "(a) Two equal resistors in parallel give half of one.",
+              "latex": "R_{p} = 3.0\\ \\Omega"
+            },
+            {
+              "text": "Add the cable in series.",
+              "latex": "R = 3.0 + 1.0 = 4.0\\ \\Omega"
+            },
+            {
+              "text": "(b) Use the total resistance.",
+              "latex": "I = \\dfrac{12}{4.0} = 3.0\\ \\text{A}"
+            },
+            {
+              "text": "(c) Use the current through the pair.",
+              "latex": "V = IR_{p} = 3.0 \\times 3.0 = 9.0\\ \\text{V}"
+            },
+            {
+              "text": "(d) Each pad has this p.d. across it.",
+              "latex": "P = \\dfrac{V^{2}}{R} = \\dfrac{9.0^{2}}{6.0} = 14\\ \\text{W}"
+            }
+          ],
+          "notes": "With a thick cable each pad would run at 24 W. The thin cable takes a quarter of the battery's p.d. Ask students to find the power dissipated in the cable (9.0 W)."
+        },
+        {
+          "type": "worked",
+          "title": "A voltmeter that changes the circuit",
+          "question": "A 9.0 V battery of negligible internal resistance is connected to a 12 kΩ resistor in series with a 24 kΩ resistor. Find (a) the potential difference across the 24 kΩ resistor with no meter connected and (b) the reading on an analogue voltmeter of constant resistance 72 kΩ when it is connected across the 24 kΩ resistor.",
+          "hint": "A non-ideal voltmeter is a resistor in parallel with the component it measures. Combine those two before sharing out the battery's p.d.",
+          "steps": [
+            {
+              "text": "(a) Series resistors share the p.d. in proportion.",
+              "latex": "V = 9.0 \\times \\dfrac{24}{36} = 6.0\\ \\text{V}"
+            },
+            {
+              "text": "(b) Combine the voltmeter with the resistor (values in kΩ).",
+              "latex": "\\dfrac{1}{R_{p}} = \\dfrac{1}{24} + \\dfrac{1}{72}"
+            },
+            {
+              "text": "Invert the result.",
+              "latex": "R_{p} = 18\\ \\text{k}\\Omega"
+            },
+            {
+              "text": "Share the p.d. again.",
+              "latex": "V = 9.0 \\times \\dfrac{18}{12 + 18} = 5.4\\ \\text{V}"
+            }
+          ],
+          "notes": "The meter lowers the p.d. it is trying to measure. A digital voltmeter of about 10 MΩ would hardly change the reading, which is why ideal voltmeters are given infinite resistance."
+        }
+      ],
+      "checks": [
+        "B5-007"
+      ]
+    },
+    {
+      "id": "variable",
+      "short": "Variable resistors",
+      "guide": "Resistors can have variable resistance (limited to thermistors, light-dependent resistors and potentiometers).",
+      "sections": [
+        "divider"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Describe how thermistors, light-dependent resistors and potentiometers behave.",
+        "Calculate the output of a potential divider, including in sensor circuits."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Variable resistors",
+          "bullets": [
+            "<strong>Thermistor</strong> (a semiconductor): as temperature rises more carriers are freed, so the resistance falls",
+            "<strong>Light-dependent resistor (LDR)</strong>, also a semiconductor: the brighter the light, the lower the resistance",
+            "<strong>Potentiometer</strong>: a sliding contact taps off any fraction of the p.d. across a resistive track",
+            "A <strong>potential divider</strong> is two or more resistors in series, giving an output less than the supply"
+          ],
+          "notes": "A thermistor held between finger and thumb, or an LDR covered with a hand, connected to an ohmmeter shows the change at once."
+        },
+        {
+          "type": "equation",
+          "title": "The potential divider",
+          "latex": "V_{\\text{out}} = V_{\\text{in}} \\times \\dfrac{R_{2}}{R_{1} + R_{2}}",
+          "bullets": [
+            "The supply p.d. $V_{\\text{in}}$ is across both resistors; the output $V_{\\text{out}}$ is across $R_{2}$",
+            "This is not in the data booklet, so be ready to derive it"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the potential divider equation",
+          "start": "Two resistors $R_{1}$ and $R_{2}$ are in series across a supply $V_{\\text{in}}$, and the output is taken across $R_{2}$.",
+          "steps": [
+            {
+              "text": "The resistors are in series.",
+              "latex": "R = R_{1} + R_{2}"
+            },
+            {
+              "text": "The same current passes through both.",
+              "latex": "I = \\dfrac{V_{\\text{in}}}{R_{1} + R_{2}}"
+            },
+            {
+              "text": "The output is the p.d. across $R_{2}$.",
+              "latex": "V_{\\text{out}} = IR_{2}"
+            },
+            {
+              "text": "Substitute for the current.",
+              "latex": "V_{\\text{out}} = V_{\\text{in}} \\times \\dfrac{R_{2}}{R_{1} + R_{2}}"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Using potential dividers",
+          "bullets": [
+            "Two resistors in series share the p.d. in proportion to their resistances",
+            "For a thermistor or LDR, ask what happens to its resistance first, then to its share of the p.d.",
+            "When the sensor's resistance falls, the p.d. across it falls and the p.d. across the fixed resistor rises",
+            "A load across the output is in parallel with that part of the divider: combine them first",
+            "For a potentiometer, treat the two parts of the track as $R_{1}$ and $R_{2}$"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "A temperature sensor",
+          "figure": "b5gt"
+        },
+        {
+          "type": "worked",
+          "title": "An automatic garden light",
+          "question": "A garden light's control circuit has a 5.0 V supply of negligible internal resistance, a fixed resistor $R_{1}$ of 10 kΩ and a light-dependent resistor $R_{2}$, with the output taken across the LDR. The LDR's resistance is 0.40 kΩ in daylight and 20 kΩ at dusk. The light comes on when the output is above 2.0 V. Find the output in each case, and state when the light comes on.",
+          "hint": "The output is the LDR's share of the supply. Use the potential divider equation twice.",
+          "steps": [
+            {
+              "text": "Daylight.",
+              "latex": "V_{\\text{out}} = 5.0 \\times \\dfrac{0.40}{10 + 0.40} = 0.19\\ \\text{V}"
+            },
+            {
+              "text": "Dusk.",
+              "latex": "V_{\\text{out}} = 5.0 \\times \\dfrac{20}{10 + 20} = 3.3\\ \\text{V}"
+            },
+            {
+              "text": "Only the dusk output is above 2.0 V, so the light comes on at dusk."
+            }
+          ],
+          "notes": "Ask how to make the light come on in bright conditions instead: swap the LDR and the fixed resistor."
+        },
+        {
+          "type": "worked",
+          "title": "Loading a potentiometer",
+          "question": "A 12 V battery of negligible internal resistance is connected across a 5.0 kΩ potentiometer. The sliding contact is set so that the output is taken across 1.5 kΩ of the track, with the other 3.5 kΩ above it. Find (a) the output potential difference and (b) the output potential difference after a 1.5 kΩ test resistor is connected across the output.",
+          "hint": "Treat the two parts of the track as the two resistors of a potential divider. In (b), the test resistor is in parallel with one of them.",
+          "steps": [
+            {
+              "text": "(a) The output share of the track.",
+              "latex": "V_{\\text{out}} = 12 \\times \\dfrac{1.5}{5.0} = 3.6\\ \\text{V}"
+            },
+            {
+              "text": "(b) Two equal parallel resistors give half of one.",
+              "latex": "R_{p} = 0.75\\ \\text{k}\\Omega"
+            },
+            {
+              "text": "Use the divider equation with the new lower part.",
+              "latex": "V_{\\text{out}} = 12 \\times \\dfrac{0.75}{0.75 + 3.5}"
+            },
+            {
+              "text": "This gives the new output.",
+              "latex": "V_{\\text{out}} = 2.1\\ \\text{V}"
+            }
+          ],
+          "notes": "The output falls when a load is connected. A load of much larger resistance than the track would barely change it."
+        }
+      ],
+      "checks": [
+        "B5-010"
+      ]
+    },
+    {
+      "id": "chemical",
+      "short": "Chemical cells",
+      "guide": "Chemical cells as the energy source in circuits.",
+      "sections": [
+        "emf",
+        "sources"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Describe how a chemical cell converts chemical energy into electrical energy.",
+        "Distinguish primary from secondary cells, and conventional current from electron flow."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The chemical cell",
+          "bullets": [
+            "Two <strong>electrodes</strong> of different metals stand in an <strong>electrolyte</strong>, such as a weak acid",
+            "A dissolving metal enters the acid as positive ions and leaves electrons behind on the electrode",
+            "The electrode left with more electrons is the <strong>negative terminal</strong>; the other is the <strong>positive terminal</strong>",
+            "The cell converts <strong>chemical energy</strong> to electrical energy until a reactant is used up",
+            "<strong>Primary cell</strong>: used once and not rechargeable",
+            "<strong>Secondary cell</strong>: recharged by an external supply, which reverses the reactions"
+          ],
+          "notes": "A lemon with a zinc nail and a copper coin, connected to a voltmeter, makes a quick cell. Ask which everyday devices use each kind of cell, and why."
+        },
+        {
+          "type": "bullets",
+          "title": "Conventional current",
+          "bullets": [
+            "In the wires, electrons leave the negative terminal and travel to the positive terminal",
+            "Early scientists didn't know which charge moved, and Benjamin Franklin guessed it was the positive one",
+            "<strong>Conventional current</strong> is the direction positive charge would flow: from + to − outside the cell",
+            "Electrons in a metal drift the opposite way, and calculations come out the same",
+            "We use conventional current throughout this course"
+          ],
+          "notes": "Students can use the charge law to explain the electrons' direction: there are more negative charges repelling at the negative terminal."
+        }
+      ]
+    },
+    {
+      "id": "pd",
+      "short": "Potential difference",
+      "guide": "The electric potential difference $V$ is the work done per unit charge on moving a positive charge between two points along the path of the current as given by $V = W/q$.",
+      "sections": [
+        "pd"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Define potential difference as the work done per unit charge.",
+        "Use $V = \\dfrac{W}{q}$ in calculations."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Potential difference",
+          "bullets": [
+            "A cell lifts positive charge to a higher potential, as a lift carries people to a higher floor",
+            "Outside the cell the charge \"comes back down\", doing work on the components as it goes",
+            "<strong>Potential difference (p.d.)</strong> between two points: the work done per unit charge as positive charge goes from one to the other",
+            "P.d. is measured in volts: $1\\ \\text{V} = 1\\ \\text{J C}^{-1}$",
+            "A p.d. of 3 V across a buzzer means each coulomb gives the buzzer 3 J",
+            "A p.d. is always <strong>between</strong> two points, never \"through\" a component or \"at\" a point"
+          ],
+          "notes": "The lift analogy links to gravitational potential energy from A.3. Positive charge at the positive terminal can still do work on the whole circuit; charge returning to the negative terminal has no more to give."
+        },
+        {
+          "type": "equation",
+          "title": "Potential difference",
+          "latex": "V = \\dfrac{W}{q}",
+          "bullets": [
+            "Rearranged: $W = qV$, the energy transferred as charge $q$ moves through p.d. $V$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "An electric eel",
+          "question": "An electric eel stuns its prey with a pulse in which a charge of 2.0 mC flows through a potential difference of 600 V. The pulse lasts 2.0 ms. Find (a) the energy transferred and (b) the average power of the pulse.",
+          "hint": "Potential difference is energy per unit charge. Power is the rate of transferring that energy.",
+          "steps": [
+            {
+              "text": "(a) Rearrange the definition of p.d.",
+              "latex": "W = qV = 2.0 \\times 10^{-3} \\times 600"
+            },
+            {
+              "text": "This gives the energy.",
+              "latex": "W = 1.2\\ \\text{J}"
+            },
+            {
+              "text": "(b) Divide by the time of the pulse.",
+              "latex": "P = \\dfrac{1.2}{2.0 \\times 10^{-3}} = 600\\ \\text{W}"
+            }
+          ],
+          "notes": "Little energy, but a high power for a very short time. Ask what the average current in the pulse is (1.0 A)."
+        }
+      ],
+      "checks": [
+        "B5-003"
+      ]
+    },
+    {
+      "id": "solar",
+      "short": "Solar cells and sources",
+      "guide": "Solar cells as the energy source in circuits (including the advantages and disadvantages of different sources of electrical energy).",
+      "sections": [
+        "solar",
+        "sources"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Describe how a solar cell converts light into electrical energy.",
+        "Compare the advantages and disadvantages of different sources of electrical energy."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Solar (photovoltaic) cells",
+          "bullets": [
+            "A solar cell turns light <strong>directly</strong> into electrical energy, with no moving parts",
+            "It is made of layers of silicon, a semiconductor, with tiny amounts of impurities such as phosphorus and boron",
+            "Absorbed photons free electrons, which are driven round the external circuit as a direct current",
+            "The output depends on the light arriving: weather, time of day, season and the panel's angle",
+            "There is no output at night, so solar cells are often paired with rechargeable cells"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Comparing sources of electrical energy",
+          "bullets": [
+            "<strong>Primary cells</strong>: cheap and portable, but low energy, single use and harmful waste",
+            "<strong>Secondary cells</strong>: portable and reusable, but costly, slow to charge, and they rely on mined metals",
+            "<strong>Solar cells</strong>: no fuel or emissions while running, but intermittent and need a large area",
+            "<strong>Mains supply</strong>: large and continuous, but not portable and often generated from fossil fuels"
+          ],
+          "notes": "Ask students to choose a source for a pacemaker, a remote weather station and a hospital, and justify each choice."
+        },
+        {
+          "type": "worked",
+          "title": "A solar garden lamp",
+          "question": "The small panel of a solar garden lamp gives 2.0 V and 60 mA in full sun, and it charges a rechargeable cell. Find (a) the panel's electrical power and (b) the energy it supplies in 6.0 hours of sunshine. (c) If 70% of this energy is stored, for how long can the stored energy run the lamp's 40 mW LED?",
+          "hint": "Power is current times potential difference. Energy is power times time, with the time in seconds.",
+          "steps": [
+            {
+              "text": "(a) Convert the current to amperes.",
+              "latex": "P = IV = 0.060 \\times 2.0 = 0.12\\ \\text{W}"
+            },
+            {
+              "text": "(b) Six hours is 21 600 s.",
+              "latex": "E = Pt = 0.12 \\times 21\\,600 = 2.6\\ \\text{kJ}"
+            },
+            {
+              "text": "(c) Find the energy stored.",
+              "latex": "E = 0.70 \\times 2592 = 1814\\ \\text{J}"
+            },
+            {
+              "text": "Divide by the LED's power.",
+              "latex": "t = \\dfrac{1814}{0.040} = 4.5 \\times 10^{4}\\ \\text{s}"
+            },
+            {
+              "text": "Convert to hours.",
+              "latex": "t = 13\\ \\text{h}"
+            }
+          ],
+          "notes": "Use the unrounded energy of 2592 J in part (c). This is enough for a night in summer, but a cloudy day would give much less."
+        }
+      ],
+      "checks": [
+        "B5-015"
+      ]
+    },
+    {
+      "id": "emf",
+      "short": "Cells and emf",
+      "guide": "Cells provide a source of emf.",
+      "sections": [
+        "emf"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Define emf as the energy converted to electrical energy per unit charge, and distinguish it from potential difference."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Electromotive force (emf)",
+          "bullets": [
+            "A cell is a source of <strong>emf</strong>, symbol $\\varepsilon$, measured in volts",
+            "<strong>Emf</strong>: the energy converted <strong>into</strong> electrical energy per unit charge by the source",
+            "<strong>P.d.</strong>: the electrical energy converted <strong>into other forms</strong> per unit charge by a component",
+            "Despite its name, emf is not a force",
+            "A voltmeter across an <strong>unloaded</strong> cell, with nothing else connected, reads the emf"
+          ],
+          "notes": "The word \"unloaded\" sets up the next idea: connect a load and the reading drops."
+        },
+        {
+          "type": "worked",
+          "title": "A rechargeable AA cell",
+          "question": "A rechargeable AA cell of emf 1.2 V is labelled 2000 mA h, which means it can deliver a current of 2000 mA for one hour. Find (a) the charge it can deliver, in coulombs, (b) the energy it converts and (c) how long it would run a torch that draws 150 mA.",
+          "hint": "Current is charge per second, so charge is current times time in seconds. Emf is energy per unit charge.",
+          "steps": [
+            {
+              "text": "(a) Use 2.0 A for 3600 s.",
+              "latex": "q = It = 2.0 \\times 3600 = 7200\\ \\text{C}"
+            },
+            {
+              "text": "(b) Energy is emf times charge.",
+              "latex": "W = q\\varepsilon = 7200 \\times 1.2"
+            },
+            {
+              "text": "This gives the energy converted.",
+              "latex": "W = 8.6\\ \\text{kJ}"
+            },
+            {
+              "text": "(c) Rearrange the definition of current.",
+              "latex": "t = \\dfrac{7200}{0.150} = 4.8 \\times 10^{4}\\ \\text{s}"
+            },
+            {
+              "text": "Convert to hours.",
+              "latex": "t = 13\\ \\text{h}"
+            }
+          ],
+          "notes": "A rating in mA h gives charge, not energy. Ask students to look at the label on their phone or a power bank."
+        }
+      ]
+    },
+    {
+      "id": "internal",
+      "short": "Emf and internal resistance",
+      "guide": "Electric cells are characterized by their emf $\\varepsilon$ and internal resistance $r$ as given by $\\varepsilon = I(R + r)$.",
+      "sections": [
+        "internal"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Explain internal resistance and terminal potential difference.",
+        "Use $\\varepsilon = I(R + r)$, and find $\\varepsilon$ and $r$ from a graph of $V$ against $I$."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Internal resistance",
+          "bullets": [
+            "Every real cell has an <strong>internal resistance</strong> $r$: the opposition to current inside the cell itself",
+            "With a load connected, the reading across the cell drops a little: the cell is <strong>loaded</strong>",
+            "<strong>Terminal p.d.</strong> $V$: the p.d. between the cell's terminals, which depends on the current",
+            "The difference, $Ir$, is the \"lost volts\": energy per coulomb dissipated inside the cell",
+            "The cell warms at the rate $I^{2}r$, so a very large current can make a battery hot"
+          ],
+          "notes": "A good cell has a small internal resistance. Show a voltmeter across a torch battery as the torch is switched on and off."
+        },
+        {
+          "type": "equation",
+          "title": "Emf and internal resistance",
+          "latex": [
+            "\\varepsilon = I(R + r)",
+            "V = \\varepsilon - Ir"
+          ],
+          "bullets": [
+            "Here $R$ is the total resistance of the external circuit",
+            "The first is in the data booklet; the second follows from it, with $V = IR$"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the emf equation",
+          "start": "A charge $q$ passes through the cell and the external resistance $R$. The current $I$ is the same in both.",
+          "steps": [
+            {
+              "text": "The energy the cell converts is dissipated in both resistances.",
+              "latex": "q\\varepsilon = qV_{R} + qV_{r}"
+            },
+            {
+              "text": "Divide by $q$.",
+              "latex": "\\varepsilon = V_{R} + V_{r}"
+            },
+            {
+              "text": "Use $V = IR$ for each.",
+              "latex": "\\varepsilon = IR + Ir"
+            },
+            {
+              "text": "Factorise.",
+              "latex": "\\varepsilon = I(R + r)"
+            },
+            {
+              "text": "The terminal p.d. is $IR$, so rearrange.",
+              "latex": "V = \\varepsilon - Ir"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Using the emf equation",
+          "bullets": [
+            "Combine the external resistors into a single $R$ before using the equation",
+            "When a current flows, a voltmeter across the cell reads the terminal p.d., not the emf",
+            "With no current, the terminal p.d. equals the emf",
+            "A short circuit gives the largest current, $\\varepsilon / r$, and heats the cell, which may leak or burst"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "A real cell in a circuit",
+          "figure": "b5ht"
+        },
+        {
+          "type": "diagram",
+          "title": "Finding emf and internal resistance from a graph",
+          "figure": "b5it",
+          "bullets": [
+            "Vary the external resistance, and record $V$ and $I$ each time",
+            "Rearranged: $V = -rI + \\varepsilon$, a straight line",
+            "The intercept on the $V$ axis is the emf",
+            "The gradient is $-r$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Starting a car, again",
+          "question": "A car battery has an emf of 12.6 V and an internal resistance of 0.020 Ω. While the engine is being started, the starter motor draws a current of 150 A. Find (a) the terminal potential difference and (b) the rate at which energy is dissipated inside the battery.",
+          "hint": "The terminal potential difference is the emf minus the lost volts. The power dissipated inside uses the internal resistance.",
+          "steps": [
+            {
+              "text": "(a) Find the lost volts.",
+              "latex": "Ir = 150 \\times 0.020 = 3.0\\ \\text{V}"
+            },
+            {
+              "text": "Subtract from the emf.",
+              "latex": "V = 12.6 - 3.0 = 9.6\\ \\text{V}"
+            },
+            {
+              "text": "(b) Use the internal resistance.",
+              "latex": "P = I^{2}r = 150^{2} \\times 0.020"
+            },
+            {
+              "text": "This gives the power dissipated.",
+              "latex": "P = 450\\ \\text{W}"
+            }
+          ],
+          "notes": "This is why a car's lights dim while the engine is being started."
+        },
+        {
+          "type": "worked",
+          "title": "Two readings from a cell",
+          "question": "A used 1.5 V cell is connected to a variable resistor. The terminal potential difference is 1.46 V when the current is 0.10 A, and 1.30 V when the current is 0.50 A. Find the internal resistance and the emf of the cell.",
+          "hint": "Write the terminal potential difference equation for each reading. The difference between them contains only the internal resistance.",
+          "steps": [
+            {
+              "text": "The change in $V$ comes from the change in lost volts.",
+              "latex": "r = \\dfrac{1.46 - 1.30}{0.50 - 0.10}"
+            },
+            {
+              "text": "This gives the internal resistance.",
+              "latex": "r = 0.40\\ \\Omega"
+            },
+            {
+              "text": "Use either reading for the emf.",
+              "latex": "\\varepsilon = V + Ir = 1.46 + 0.10 \\times 0.40"
+            },
+            {
+              "text": "This gives the emf.",
+              "latex": "\\varepsilon = 1.50\\ \\text{V}"
+            }
+          ],
+          "notes": "Check with the other reading: $1.30 + 0.50 \\times 0.40 = 1.50$ V. These two readings are in effect two points on the $V$ against $I$ graph."
+        }
+      ],
+      "checks": [
+        "B5-019"
+      ]
+    }
+  ]
+}
