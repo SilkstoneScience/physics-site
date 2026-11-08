@@ -96,7 +96,7 @@
     document.body.appendChild(a); a.click(); a.remove();
   }
 
-  const api = { docx, download };
+  const api = { docx, download, zip }; // zip is also used by js/pptx.js (lesson slides)
   if (typeof window !== 'undefined') window.Lab = Object.assign(window.Lab || {}, api);
   if (typeof module !== 'undefined') module.exports = api;
 })();

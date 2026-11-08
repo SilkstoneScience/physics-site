@@ -1,4 +1,4 @@
-/* Revision sheet builder (teachers/index.html). Loaded after style.css. */
+/* Revision sheet builder (teachers/worksheets.html). Loaded after style.css. */
 
 /* ----- The choices ----- */
 .tb-form { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; margin: 16px 0; }
@@ -96,3 +96,26 @@
   .sheet figure { margin: 6px auto; }
 }
 .tb-level-row { margin-top: 10px; }
+
+/* ----- Lesson slide generator (teachers/slides.html) ----- */
+.sl-help { margin: 0 0 6px; }
+.link-button { font: inherit; background: none; border: 0; padding: 0; color: var(--accent); text-decoration: underline; cursor: pointer; }
+.sl-point { display: flex; gap: 8px; align-items: flex-start; padding: 6px 0; border-top: 1px solid var(--border); }
+.sl-point input { margin-top: 5px !important; flex: none; }
+.sl-min { color: var(--accent); font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
+.sl-guide { color: var(--muted); font-size: 0.92rem; }
+.sl-types { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 4px 16px; }
+.sl-type { padding: 4px 0; }
+.sl-type.wide { grid-column: 1 / -1; }
+.sl-sub { margin: 4px 0 6px 26px; }
+.sl-sub[hidden] { display: none; }
+.sl-sub select { max-width: 100%; margin-left: 6px; }
+.sl-sub .tb-mode { margin-top: 6px; }
+.sl-sub .tb-mode label { display: block; padding: 2px 0; }
+.sl-sub .sl-talk { display: block; margin-top: 6px; }
+.sl-hook-note { margin: 6px 0 0; }
+.sl-tokq { display: block; margin-top: 6px; }
+.sl-tokq[hidden] { display: none; }
+.sl-time { font-size: 1.05rem; margin: 12px 0 0; }
+.sl-render { position: absolute; left: -10000px; top: 0; width: 900px; color: #1c2430; background: #fff; }
+button.primary:disabled { opacity: 0.55; cursor: default; }

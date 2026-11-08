@@ -1,0 +1,858 @@
+{
+  "topic": "A.1",
+  "hours": 9,
+  "points": [
+    {
+      "id": "describing",
+      "short": "Describing motion",
+      "guide": "The motion of bodies through space and time can be described and analysed in terms of position, velocity and acceleration.",
+      "sections": [
+        "describing"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Describe a motion in words and with numbers, using position, velocity and acceleration."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Describing motion",
+          "bullets": [
+            "Three quantities describe a motion at any moment: <strong>position</strong>, <strong>velocity</strong> and <strong>acceleration</strong>",
+            "Position is measured from a chosen <strong>origin</strong>, with a chosen <strong>positive direction</strong>",
+            "<strong>Qualitative</strong> description: words and sketches (\"speeds up, then moves steadily\")",
+            "<strong>Quantitative</strong> description: numbers, graphs and equations",
+            "<strong>Scalars</strong> have size only (distance, speed, time); <strong>vectors</strong> have size and direction (displacement, velocity, acceleration)"
+          ],
+          "notes": "Ask students to describe a short clip (a ball rolling, a lift ride) first in words, then with numbers. The contrast introduces the qualitative and quantitative descriptions the guide asks for."
+        }
+      ],
+      "checks": [
+        "A1-003"
+      ]
+    },
+    {
+      "id": "displacement",
+      "short": "Displacement",
+      "guide": "The change in position is the displacement.",
+      "sections": [
+        "describing"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Define displacement as the change in position, and give it a sign or direction."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Displacement: the change in position",
+          "bullets": [
+            "Displacement = final position − initial position: $s = \\Delta x$",
+            "It is a <strong>vector</strong>: in one dimension, its sign gives its direction",
+            "It depends only on where the motion <strong>starts and ends</strong>, not on the route taken",
+            "Unit: the metre (m)"
+          ],
+          "notes": "Use a number line on the board: start at x = +3 m, end at x = −2 m, so the displacement is −5 m. Students often give only the size."
+        }
+      ],
+      "checks": [
+        "A1-019"
+      ]
+    },
+    {
+      "id": "distance",
+      "short": "Distance and displacement",
+      "guide": "The difference between distance and displacement.",
+      "sections": [
+        "describing"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Distinguish between distance and displacement, and calculate both for a journey."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Distance or displacement?",
+          "bullets": [
+            "<strong>Distance</strong>: the total length of the path travelled (a scalar, never negative)",
+            "<strong>Displacement</strong>: the straight-line change in position, with a direction (a vector)",
+            "The distance is never less than the size of the displacement",
+            "They are equal only for motion in a straight line in one direction",
+            "After a round trip, the displacement is zero but the distance is not"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Distance and displacement on a number line",
+          "figure": "fig1t"
+        },
+        {
+          "type": "worked",
+          "title": "A walk across town",
+          "question": "A student walks 400 m north and then 300 m east, taking 10 minutes in total. Find (a) the distance walked, (b) the displacement and (c) the average speed and the average velocity.",
+          "hint": "Draw the two legs of the walk as arrows, nose to tail. The displacement is the arrow from the start to the finish.",
+          "steps": [
+            {
+              "text": "(a) Add the lengths of the two legs.",
+              "latex": "d = 400 + 300 = 700\\ \\text{m}"
+            },
+            {
+              "text": "(b) The legs are at right angles: use Pythagoras.",
+              "latex": "s = \\sqrt{400^{2} + 300^{2}} = 500\\ \\text{m}"
+            },
+            {
+              "text": "(c) Average speed = distance ÷ time ($t = 600$ s).",
+              "latex": "\\dfrac{700}{600} = 1.2\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "Average velocity = displacement ÷ time, 37° east of north.",
+              "latex": "\\dfrac{500}{600} = 0.83\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "Remind students to change minutes to seconds. The direction is $\\tan^{-1}(300/400) = 37°$ east of north. The average velocity is smaller than the average speed because the walk wasn't in a straight line."
+        }
+      ],
+      "checks": [
+        "A1-002"
+      ]
+    },
+    {
+      "id": "rates",
+      "short": "Velocity and acceleration as rates",
+      "guide": "Velocity is the rate of change of position, and acceleration is the rate of change of velocity.",
+      "sections": [
+        "velocity",
+        "acceleration"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Define velocity and acceleration as rates of change.",
+        "Calculate velocities and accelerations, with their units and directions."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Velocity, speed and acceleration",
+          "bullets": [
+            "<strong>Velocity</strong>: the rate of change of position (displacement per unit time), in $\\text{m s}^{-1}$",
+            "<strong>Speed</strong>: distance per unit time (a scalar). Instantaneous speed is the size of the instantaneous velocity, but an average speed is usually larger than the size of the average velocity",
+            "<strong>Acceleration</strong>: the rate of change of velocity, in $\\text{m s}^{-2}$",
+            "Changing direction at a steady speed is still an acceleration, because the velocity changes",
+            "A negative acceleration points in the negative direction: it means slowing down only if the velocity is positive"
+          ],
+          "notes": "A useful check: an acceleration of 3 m s⁻² means the velocity changes by 3 m s⁻¹ every second."
+        },
+        {
+          "type": "equation",
+          "title": "Rates of change",
+          "latex": [
+            "v = \\dfrac{\\Delta s}{\\Delta t}",
+            "a = \\dfrac{\\Delta v}{\\Delta t}"
+          ],
+          "bullets": [
+            "$\\Delta$ means \"change in\": final value − initial value",
+            "Over a time interval these give <strong>average</strong> values; over a very short interval, <strong>instantaneous</strong> ones"
+          ],
+          "notes": "These definitions are not in the data booklet, so students must learn them."
+        },
+        {
+          "type": "worked",
+          "title": "Leaving the blocks",
+          "question": "A sprinter starts from rest and reaches a velocity of 8.4 $\\text{m s}^{-1}$ in 1.2 s. Find the sprinter's average acceleration.",
+          "hint": "Acceleration is the change in velocity divided by the time taken. What is the starting velocity?",
+          "steps": [
+            {
+              "text": "From rest, so $u = 0$.",
+              "latex": "\\Delta v = 8.4 - 0 = 8.4\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "Divide by the time taken.",
+              "latex": "a = \\dfrac{\\Delta v}{\\Delta t} = \\dfrac{8.4}{1.2} = 7.0\\ \\text{m s}^{-2}"
+            }
+          ],
+          "notes": "Ask: is the sprinter's acceleration likely to be constant over these 1.2 s? (No: it is largest at the start. This gives the average.)"
+        }
+      ],
+      "checks": [
+        "A1-006"
+      ]
+    },
+    {
+      "id": "instant",
+      "short": "Instantaneous and average values",
+      "guide": "The difference between instantaneous and average values of velocity, speed and acceleration, and how to determine them.",
+      "sections": [
+        "velocity",
+        "graphs"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Distinguish between instantaneous and average values of velocity, speed and acceleration.",
+        "Determine them from data and from the gradients of motion graphs."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Average or instantaneous?",
+          "bullets": [
+            "<strong>Average</strong> value: over a time interval (total change ÷ total time)",
+            "<strong>Instantaneous</strong> value: at one moment (the limit of a very short time interval)",
+            "Average speed = total distance ÷ total time",
+            "Average velocity = displacement ÷ total time",
+            "A speedometer shows the instantaneous speed; a journey's distance and time give the average speed"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Finding them from graphs",
+          "bullets": [
+            "Displacement–time graph:",
+            [
+              "gradient of a <strong>chord</strong> (a line between two points) = average velocity",
+              "gradient of the <strong>tangent</strong> at a point = instantaneous velocity"
+            ],
+            "Velocity–time graph:",
+            [
+              "gradient = acceleration (chord: average; tangent: instantaneous)",
+              "area under the graph = displacement"
+            ],
+            "Acceleration–time graph: area under the graph = change in velocity"
+          ],
+          "notes": "Students should draw tangents with a ruler and use a large triangle to find the gradient, reading the values off the axes rather than counting squares."
+        },
+        {
+          "type": "diagram",
+          "title": "Chord or tangent?",
+          "figure": "fig2t"
+        },
+        {
+          "type": "worked",
+          "title": "A tangent to a curve",
+          "question": "A trolley starts from rest at the origin and speeds up. On its displacement–time graph, the point at $t = 5.0$ s is at $s = 9.0$ m, and the tangent at that point passes through (2.0 s, 0 m) and (8.0 s, 18 m). Find (a) the instantaneous velocity at $t = 5.0$ s and (b) the average velocity over the first 5.0 s.",
+          "hint": "Instantaneous velocity is the gradient of the tangent. Average velocity uses the displacement and the time from the start.",
+          "steps": [
+            {
+              "text": "(a) Gradient of the tangent.",
+              "latex": "v = \\dfrac{18 - 0}{8.0 - 2.0} = 3.0\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(b) Displacement ÷ time from the start.",
+              "latex": "\\bar{v} = \\dfrac{9.0}{5.0} = 1.8\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "Check: the trolley has been speeding up, so its velocity now should be greater than its average so far."
+            }
+          ]
+        }
+      ],
+      "checks": [
+        "A1-004"
+      ]
+    },
+    {
+      "id": "suvat",
+      "short": "Equations of motion",
+      "guide": "The equations of motion for solving problems with uniformly accelerated motion.",
+      "sections": [
+        "suvat",
+        "freefall"
+      ],
+      "minutes": 135,
+      "aims": [
+        "Use the equations of motion to solve problems with uniform acceleration, including free fall.",
+        "Describe how g can be measured by timing a falling object."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Equations for uniform acceleration",
+          "latex": [
+            "s = \\dfrac{u + v}{2}t",
+            "v = u + at",
+            "s = ut + \\tfrac{1}{2}at^{2}",
+            "v^{2} = u^{2} + 2as"
+          ],
+          "bullets": [
+            "All four are in the data booklet",
+            "Each one leaves out one of $s$, $u$, $v$, $a$ and $t$"
+          ],
+          "notes": "Ask students which quantity each equation leaves out: the first has no a, the second no s, the third no v and the fourth no t."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the first two equations",
+          "start": "Start from the definition of acceleration. The acceleration is constant, so its average value equals its value at every instant. In a time $t$, the velocity changes from $u$ to $v$.",
+          "steps": [
+            {
+              "text": "Acceleration is the rate of change of velocity",
+              "latex": "a = \\dfrac{v - u}{t}"
+            },
+            {
+              "text": "Multiply by $t$ and rearrange: the <strong>velocity</strong> equation",
+              "latex": "v = u + at"
+            },
+            {
+              "text": "The velocity changes steadily, so the average velocity is halfway between $u$ and $v$",
+              "latex": "v_{\\text{avg}} = \\dfrac{u + v}{2}"
+            },
+            {
+              "text": "Displacement = average velocity × time: the <strong>average displacement</strong> equation",
+              "latex": "s = \\dfrac{u + v}{2}t"
+            }
+          ],
+          "notes": "Step 3 is where constant acceleration matters: if the velocity–time graph were curved, the average velocity would not be halfway between $u$ and $v$."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the displacement equation",
+          "start": "Combine the two equations just derived, to remove $v$.",
+          "steps": [
+            {
+              "text": "Start from the average displacement equation",
+              "latex": "s = \\dfrac{u + v}{2}t"
+            },
+            {
+              "text": "Replace $v$ using $v = u + at$",
+              "latex": "s = \\dfrac{u + (u + at)}{2}t"
+            },
+            {
+              "text": "Collect like terms",
+              "latex": "s = \\dfrac{2u + at}{2}t"
+            },
+            {
+              "text": "Divide by 2 and multiply out: the <strong>displacement</strong> equation",
+              "latex": "s = ut + \\tfrac{1}{2}at^{2}"
+            }
+          ],
+          "notes": "The same result comes from the area under a straight velocity–time graph: a rectangle $ut$ plus a triangle $\\tfrac{1}{2}(v - u)t = \\tfrac{1}{2}at^{2}$."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the timeless equation",
+          "start": "This time, remove $t$ by combining the same two equations.",
+          "steps": [
+            {
+              "text": "Make $t$ the subject of $v = u + at$",
+              "latex": "t = \\dfrac{v - u}{a}"
+            },
+            {
+              "text": "Substitute it into the average displacement equation",
+              "latex": "s = \\dfrac{(u + v)(v - u)}{2a}"
+            },
+            {
+              "text": "Multiply both sides by $2a$",
+              "latex": "2as = (v + u)(v - u)"
+            },
+            {
+              "text": "Expand the brackets ($uv$ and $-uv$ cancel) and rearrange: the <strong>timeless</strong> equation",
+              "latex": "v^{2} = u^{2} + 2as"
+            }
+          ],
+          "notes": "It is called \"timeless\" because it has no $t$: use it when the time is neither known nor wanted."
+        },
+        {
+          "type": "bullets",
+          "title": "Using the equations of motion",
+          "bullets": [
+            "Use them <strong>only when the acceleration is constant</strong> (uniform)",
+            "Five quantities: displacement $s$, initial velocity $u$, final velocity $v$, acceleration $a$, time $t$",
+            "Know three of them, and you can find the other two",
+            "Choose the equation that skips the quantity you don't know and don't want",
+            "Choose a positive direction first, and give every vector a sign"
+          ],
+          "notes": "A \"suvat\" list in the margin (s = ?, u = …, v = …, a = …, t = …) is the most reliable habit to build."
+        },
+        {
+          "type": "worked",
+          "title": "Joining the motorway",
+          "question": "A car moving at 6.0 $\\text{m s}^{-1}$ accelerates uniformly at 2.5 $\\text{m s}^{-2}$ along a straight slip road 80 m long. Find (a) its speed at the end of the slip road and (b) the time this takes.",
+          "hint": "Write down s, u, v, a and t. The time is unknown, so start with the equation that doesn't contain t.",
+          "steps": [
+            {
+              "text": "(a) $u$, $a$ and $s$ are known, but not $t$, so use",
+              "latex": "v^{2} = u^{2} + 2as"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "v^{2} = 6.0^{2} + 2(2.5)(80) = 436"
+            },
+            {
+              "text": "Take the square root.",
+              "latex": "v = 20.9 \\approx 21\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(b) Rearrange $v = u + at$.",
+              "latex": "t = \\dfrac{v - u}{a} = \\dfrac{20.9 - 6.0}{2.5} = 6.0\\ \\text{s}"
+            }
+          ],
+          "notes": "Keep the unrounded value of v (20.88) in the calculator for part (b)."
+        },
+        {
+          "type": "bullets",
+          "title": "Free fall",
+          "bullets": [
+            "With negligible air resistance, every object near the Earth's surface falls with the same acceleration, $g = 9.8$ $\\text{m s}^{-2}$, whatever its mass",
+            "The acceleration stays $g$ downwards <strong>throughout the flight</strong>, including the instant at the top",
+            "With up as positive, $a = -9.8$ $\\text{m s}^{-2}$",
+            "At the top, the velocity is zero for an instant, but it is still changing"
+          ],
+          "notes": "Use 9.8 m s⁻², the value in the data booklet. A dropped sheet of paper and a book, then the paper laid on top of the book, makes a quick demonstration."
+        },
+        {
+          "type": "worked",
+          "title": "A ball thrown straight up",
+          "question": "A ball is thrown vertically upwards at 14 $\\text{m s}^{-1}$. Air resistance is negligible. Find (a) the maximum height it reaches above the point of release, (b) the time it takes to reach that height and (c) the time until it returns to the point of release.",
+          "hint": "Take up as positive, so $a = -9.8$ $\\text{m s}^{-2}$. What is the velocity at the highest point?",
+          "steps": [
+            {
+              "text": "Take up as positive: $v = 0$ at the top.",
+              "latex": "v^{2} = u^{2} + 2as"
+            },
+            {
+              "text": "(a) Substitute and solve for $s$.",
+              "latex": "0 = 14^{2} + 2(-9.8)s \\;\\Rightarrow\\; s = 10\\ \\text{m}"
+            },
+            {
+              "text": "(b) Rearrange $v = u + at$.",
+              "latex": "t = \\dfrac{0 - 14}{-9.8} = 1.4\\ \\text{s}"
+            },
+            {
+              "text": "(c) With no air resistance, the way down takes as long.",
+              "latex": "t_{\\text{total}} = 2 \\times 1.43 = 2.9\\ \\text{s}"
+            }
+          ],
+          "notes": "Part (c) can also be found from s = ut + ½at² with s = 0, which gives t = 0 or t = 2.9 s: a good discussion of why there are two answers."
+        },
+        {
+          "type": "diagram",
+          "title": "Measuring g",
+          "figure": "figgt",
+          "bullets": [
+            "Drop a ball from rest through a measured height $h$, and time the fall $t$",
+            "From rest: $h = \\tfrac{1}{2}gt^{2}$",
+            "A graph of $h$ against $t^{2}$ should be straight and pass through the origin; its gradient is $\\tfrac{1}{2}g$",
+            "Use several heights, repeating each: the line of best fit reduces random errors, and an intercept that isn't zero reveals a systematic error (e.g. a delay in the release)"
+          ],
+          "notes": "Light gates or an electromagnet and trapdoor give far smaller timing uncertainties than a hand stopwatch."
+        }
+      ],
+      "challenge": "CC-A1-01",
+      "checks": [
+        "A1-007"
+      ]
+    },
+    {
+      "id": "uniform",
+      "short": "Uniform and non-uniform acceleration",
+      "guide": "Motion with uniform and non-uniform acceleration.",
+      "sections": [
+        "graphs",
+        "acceleration"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Distinguish between uniform and non-uniform acceleration.",
+        "Analyse non-uniform motion using the gradients of, and areas under, motion graphs."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Uniform and non-uniform acceleration",
+          "bullets": [
+            "<strong>Uniform</strong>: the velocity changes by equal amounts in equal times, so the velocity–time graph is a straight line",
+            "<strong>Non-uniform</strong>: the acceleration changes, so the velocity–time graph is curved",
+            "Examples of non-uniform acceleration: an object falling through air, a car pulling away and changing gear, a mass bouncing on a spring",
+            "The equations of motion <strong>don't apply</strong> when the acceleration changes: use graphs instead"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Non-uniform motion on a graph",
+          "bullets": [
+            "Acceleration at an instant: the gradient of the tangent to the velocity–time graph",
+            "Displacement: the area under the velocity–time graph",
+            [
+              "split it into rectangles and triangles, or count squares"
+            ],
+            "Change in velocity: the area under the acceleration–time graph",
+            "Area below the time axis counts as negative displacement"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "A changing acceleration",
+          "figure": "fig-nonuni"
+        },
+        {
+          "type": "worked",
+          "title": "A lift ride",
+          "question": "A lift starts from rest and accelerates uniformly upwards to 3.0 $\\text{m s}^{-1}$ in 2.0 s. It then moves at a constant 3.0 $\\text{m s}^{-1}$ for 6.0 s, and finally slows uniformly to rest in 3.0 s. Find how far the lift rises.",
+          "hint": "Sketch the velocity–time graph. The displacement is the area under it.",
+          "steps": [
+            {
+              "text": "Displacement = area under the graph. Speeding up: a triangle.",
+              "latex": "\\tfrac{1}{2}(2.0)(3.0) = 3.0\\ \\text{m}"
+            },
+            {
+              "text": "Constant speed: a rectangle.",
+              "latex": "(6.0)(3.0) = 18\\ \\text{m}"
+            },
+            {
+              "text": "Slowing down: a triangle.",
+              "latex": "\\tfrac{1}{2}(3.0)(3.0) = 4.5\\ \\text{m}"
+            },
+            {
+              "text": "Add the three areas.",
+              "latex": "s = 3.0 + 18 + 4.5 = 25.5 \\approx 26\\ \\text{m}"
+            }
+          ],
+          "notes": "The acceleration changes between the stages, so no single equation of motion covers the whole ride; the graph does. The whole graph is a trapezium, so ½ × (6.0 + 11.0) × 3.0 = 25.5 m gives the same answer in one step."
+        }
+      ],
+      "checks": [
+        "A1-021"
+      ]
+    },
+    {
+      "id": "projectiles",
+      "short": "Projectile motion",
+      "guide": "The behaviour of projectiles in the absence of fluid resistance, and the application of the equations of motion resolved into vertical and horizontal components.",
+      "sections": [
+        "projectiles"
+      ],
+      "minutes": 135,
+      "aims": [
+        "Explain why the horizontal and vertical motions of a projectile are independent.",
+        "Solve projectile problems for launches horizontally, above and below the horizontal."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Projectiles",
+          "bullets": [
+            "A projectile moves under gravity alone (fluid resistance negligible)",
+            "Split the motion into <strong>horizontal</strong> and <strong>vertical</strong> components: they are independent, and only the <strong>time</strong> links them",
+            "Horizontally: no force, so constant velocity: $x = u_{x}t$",
+            "Vertically: constant acceleration $g$ downwards, so use the equations of motion",
+            "The path is a parabola; students need not know its equation",
+            "$g$ is taken as constant (close to the Earth's surface)"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Resolving the launch velocity",
+          "latex": [
+            "u_{x} = u\\cos\\theta",
+            "u_{y} = u\\sin\\theta"
+          ],
+          "bullets": [
+            "$\\theta$ is the angle to the horizontal",
+            "Check that the calculator is in degrees"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "The path of a projectile",
+          "figure": "fig4t"
+        },
+        {
+          "type": "bullets",
+          "title": "Useful projectile facts",
+          "bullets": [
+            "At the highest point, the vertical velocity is zero; the horizontal velocity is unchanged",
+            "Launched horizontally: $u_{y} = 0$",
+            "Launched below the horizontal: the vertical velocity is downwards from the start",
+            "Speed at any moment: $v = \\sqrt{v_{x}^{2} + v_{y}^{2}}$",
+            "On level ground with no air resistance, a given launch speed gives the greatest range at 45°"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the time to the top and the maximum height",
+          "start": "A projectile is launched with an upward vertical velocity component $u_{y}$. Take up as positive, so the acceleration is $-g$. At the highest point, $v_{y} = 0$.",
+          "steps": [
+            {
+              "text": "Velocity equation, vertically, at the highest point",
+              "latex": "0 = u_{y} - gt"
+            },
+            {
+              "text": "Rearrange: the time to reach the highest point",
+              "latex": "t = \\dfrac{u_{y}}{g}"
+            },
+            {
+              "text": "Timeless equation, vertically, up to the maximum height $H$",
+              "latex": "0 = u_{y}^{2} - 2gH"
+            },
+            {
+              "text": "Rearrange: the maximum height",
+              "latex": "H = \\dfrac{u_{y}^{2}}{2g}"
+            }
+          ],
+          "notes": "On level ground with no air resistance, the motion is symmetrical, so the time of flight is twice the time to the top: $\\dfrac{2u_{y}}{g}$. These results are not in the data booklet: students should derive them from the equations of motion rather than memorise them."
+        },
+        {
+          "type": "worked",
+          "title": "A fountain jet",
+          "question": "A fountain nozzle at ground level sends a jet of water at 9.0 $\\text{m s}^{-1}$ at 60° above the horizontal. Air resistance is negligible. Find (a) the maximum height of the water, (b) the time the water spends in the air and (c) how far from the nozzle it lands.",
+          "hint": "Resolve the launch velocity. What is the vertical velocity at the highest point? Only the horizontal component carries the water sideways.",
+          "steps": [
+            {
+              "text": "Resolve the launch velocity (in $\\text{m s}^{-1}$).",
+              "latex": "u_{x} = 9.0\\cos 60^{\\circ} = 4.5 \\qquad u_{y} = 9.0\\sin 60^{\\circ} = 7.79"
+            },
+            {
+              "text": "(a) Up positive, $v_{y} = 0$ at the top.",
+              "latex": "h = \\dfrac{u_{y}^{2}}{2g} = \\dfrac{7.79^{2}}{2(9.8)} = 3.1\\ \\text{m}"
+            },
+            {
+              "text": "(b) Time to the top, then double it (the flight is symmetrical).",
+              "latex": "t = 2 \\times \\dfrac{7.79}{9.8} = 1.6\\ \\text{s}"
+            },
+            {
+              "text": "(c) Horizontally, the velocity is constant.",
+              "latex": "x = u_{x}t = 4.5 \\times 1.59 = 7.2\\ \\text{m}"
+            }
+          ],
+          "notes": "The jet lands at the same height it started from, which is why the time up equals the time down."
+        },
+        {
+          "type": "worked",
+          "title": "A parcel from a drone",
+          "question": "A drone flying horizontally at 6.0 $\\text{m s}^{-1}$ at a height of 45 m releases a parcel. Air resistance is negligible. Find (a) the time the parcel takes to reach the ground and (b) the horizontal distance it travels in that time.",
+          "hint": "The parcel starts with the drone's horizontal velocity but zero vertical velocity. Find the time from the vertical motion first.",
+          "steps": [
+            {
+              "text": "(a) Take down as positive: $u_{y} = 0$, $a = g$, $s = 45$ m.",
+              "latex": "s = \\tfrac{1}{2}gt^{2}"
+            },
+            {
+              "text": "Solve for $t$.",
+              "latex": "t = \\sqrt{\\dfrac{2s}{g}} = \\sqrt{\\dfrac{2(45)}{9.8}} = 3.0\\ \\text{s}"
+            },
+            {
+              "text": "(b) Horizontally, the velocity is constant.",
+              "latex": "x = u_{x}t = 6.0 \\times 3.03 = 18\\ \\text{m}"
+            }
+          ],
+          "notes": "Ask where the drone is when the parcel lands, if it keeps flying at the same velocity (directly above it)."
+        },
+        {
+          "type": "worked",
+          "title": "Thrown down from a bridge",
+          "question": "A ball is thrown from a bridge 20 m above a river, at 8.0 $\\text{m s}^{-1}$ and 30° below the horizontal. Air resistance is negligible. Find (a) the time until the ball reaches the water and (b) the horizontal distance it travels in that time.",
+          "hint": "Resolve the launch velocity first. The vertical component points downwards, so take down as positive.",
+          "steps": [
+            {
+              "text": "Resolve the launch velocity (in $\\text{m s}^{-1}$).",
+              "latex": "u_{x} = 8.0\\cos 30^{\\circ} = 6.93 \\qquad u_{y} = 8.0\\sin 30^{\\circ} = 4.0"
+            },
+            {
+              "text": "Down positive: the vertical velocity at the water.",
+              "latex": "v_{y} = \\sqrt{4.0^{2} + 2(9.8)(20)} = 20.2\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(a) Time from the vertical motion.",
+              "latex": "t = \\dfrac{v_{y} - u_{y}}{g} = \\dfrac{20.2 - 4.0}{9.8} = 1.7\\ \\text{s}"
+            },
+            {
+              "text": "(b) Horizontal distance.",
+              "latex": "x = u_{x}t = 6.93 \\times 1.65 = 11\\ \\text{m}"
+            }
+          ],
+          "notes": "Solving 20 = 4.0t + 4.9t² as a quadratic gives the same time (1.65 s). Finding v first avoids the quadratic."
+        }
+      ],
+      "challenge": "CC-A1-02",
+      "checks": [
+        "A1-012"
+      ]
+    },
+    {
+      "id": "drag",
+      "short": "Fluid resistance",
+      "guide": "The qualitative effect of fluid resistance on projectiles, including time of flight, trajectory, velocity, acceleration, range and terminal speed.",
+      "sections": [
+        "drag"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Describe the effects of fluid resistance on a projectile's time of flight, path, velocity, acceleration and range.",
+        "Explain how a falling object reaches terminal speed."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Fluid resistance (drag)",
+          "bullets": [
+            "Fluids (liquids and gases) push back on objects moving through them",
+            "Drag points <strong>against the motion</strong>, and grows as the object moves faster",
+            "It also depends on the object's shape and size, and on the fluid",
+            "A falling object reaches <strong>terminal speed</strong> when the drag equals its weight: the resultant force is zero, so the acceleration is zero"
+          ],
+          "notes": "In A.1 the effects are qualitative only: no drag calculations. Buoyancy (A.2) is negligible for a skydiver or a ball in air."
+        },
+        {
+          "type": "diagram",
+          "title": "Falling through air",
+          "figure": "fig5t"
+        },
+        {
+          "type": "worked",
+          "title": "Reaching terminal speed",
+          "question": "A skydiver jumps from a hovering helicopter. Describe and explain how the skydiver's acceleration changes until they reach terminal speed.",
+          "hint": "Think about the size of the drag at the start, and how it changes as the speed increases.",
+          "steps": [
+            {
+              "text": "Just after the jump the skydiver is barely moving, so the drag is tiny: the weight alone accelerates them at $g$."
+            },
+            {
+              "text": "Faster motion means more drag, so the unbalanced downward force shrinks."
+            },
+            {
+              "text": "A smaller resultant force gives a smaller acceleration: the speed still rises, but more and more slowly."
+            },
+            {
+              "text": "Once the drag has grown to equal the weight, nothing is unbalanced: the speed stops changing.",
+              "latex": "F_{\\text{d}} = mg"
+            }
+          ],
+          "notes": "The links to resultant force use Newton's second law, met fully in A.2."
+        },
+        {
+          "type": "bullets",
+          "title": "Projectiles with fluid resistance",
+          "bullets": [
+            "Compared with the same launch with no fluid resistance, the projectile:",
+            [
+              "peaks lower, and earlier in the flight",
+              "lands closer, and is usually in the air for less time",
+              "loses horizontal velocity as it flies",
+              "has a lopsided path: the descent is steeper than the climb",
+              "has an acceleration that varies in size and direction"
+            ]
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Two paths compared",
+          "figure": "fig6t"
+        }
+      ],
+      "challenge": "CC-A1-03",
+      "checks": [
+        "A1-014"
+      ]
+    },
+    {
+      "id": "relative",
+      "short": "Relative velocity",
+      "extra": true,
+      "guide": "Relative velocity in one dimension and simple two-dimensional cases (introduced here on this site; the guide places it in A.5).",
+      "sections": [
+        "relative"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Calculate the velocity of one object relative to another, in one dimension and at right angles."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Relative velocity",
+          "bullets": [
+            "A velocity only has meaning compared with something else, which is usually the ground",
+            "The velocity of A relative to B is how A appears to move to an observer moving with B",
+            "In one dimension: choose a positive direction and use signs",
+            "In two dimensions at right angles: Pythagoras for the size, $\\tan^{-1}$ for the direction"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Relative velocity",
+          "latex": "v_{\\text{AB}} = v_{\\text{A}} - v_{\\text{B}}",
+          "bullets": [
+            "A vector subtraction: the velocity of A relative to B",
+            "The velocity of B relative to A has the same size and the opposite direction",
+            "$v_{\\text{A}}$ and $v_{\\text{B}}$ are both measured relative to the ground"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Where the relative velocity equation comes from",
+          "start": "Objects A and B move along the same line. Their positions $s_{\\text{A}}$ and $s_{\\text{B}}$, and velocities $v_{\\text{A}}$ and $v_{\\text{B}}$, are measured relative to the ground.",
+          "steps": [
+            {
+              "text": "The position of A as seen from B is the difference between their positions",
+              "latex": "s_{\\text{AB}} = s_{\\text{A}} - s_{\\text{B}}"
+            },
+            {
+              "text": "In a time $\\Delta t$, each position changes",
+              "latex": "\\Delta s_{\\text{AB}} = \\Delta s_{\\text{A}} - \\Delta s_{\\text{B}}"
+            },
+            {
+              "text": "Divide by $\\Delta t$: velocity is the rate of change of position",
+              "latex": "\\dfrac{\\Delta s_{\\text{AB}}}{\\Delta t} = \\dfrac{\\Delta s_{\\text{A}}}{\\Delta t} - \\dfrac{\\Delta s_{\\text{B}}}{\\Delta t}"
+            },
+            {
+              "text": "So the velocity of A relative to B is",
+              "latex": "v_{\\text{AB}} = v_{\\text{A}} - v_{\\text{B}}"
+            }
+          ],
+          "notes": "The same works in two dimensions: subtract the velocity vectors (add the vector −v_B to v_A)."
+        },
+        {
+          "type": "diagram",
+          "title": "Subtracting velocities at right angles",
+          "figure": "figrvt"
+        },
+        {
+          "type": "worked",
+          "title": "Overtaking a cyclist",
+          "question": "A bus travels east at 14 $\\text{m s}^{-1}$ along a straight road. A cyclist on the same road travels east at 5.0 $\\text{m s}^{-1}$. Find (a) the velocity of the bus relative to the cyclist and (b) the velocity of the cyclist relative to the bus.",
+          "hint": "Take east as positive and subtract the velocities in the right order.",
+          "steps": [
+            {
+              "text": "Take east as positive.",
+              "latex": "v_{\\text{B}} = +14\\ \\text{m s}^{-1} \\quad v_{\\text{C}} = +5.0\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(a) Bus relative to cyclist:",
+              "latex": "v_{\\text{BC}} = v_{\\text{B}} - v_{\\text{C}} = 14 - 5.0 = +9.0\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(b) Cyclist relative to bus:",
+              "latex": "v_{\\text{CB}} = 5.0 - 14 = -9.0\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "Answers: (a) 9.0 $\\text{m s}^{-1}$ east; (b) 9.0 $\\text{m s}^{-1}$ west, so to someone on the bus the cyclist seems to move backwards."
+        },
+        {
+          "type": "worked",
+          "title": "A drone seen from a car",
+          "question": "A car drives east at 12 $\\text{m s}^{-1}$. A drone flies north at 5.0 $\\text{m s}^{-1}$. Find the velocity of the drone relative to the car.",
+          "hint": "Subtracting the car's velocity is the same as adding a velocity of the same size in the opposite direction.",
+          "steps": [
+            {
+              "text": "Subtracting 12 east is the same as adding 12 west.",
+              "latex": "v_{\\text{DC}} = v_{\\text{D}} - v_{\\text{C}}"
+            },
+            {
+              "text": "5.0 north and 12 west are at right angles: use Pythagoras.",
+              "latex": "v_{\\text{DC}} = \\sqrt{5.0^{2} + 12^{2}} = 13\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "Direction.",
+              "latex": "\\theta = \\tan^{-1}\\left(\\dfrac{5.0}{12}\\right) = 23^{\\circ} \\text{ north of west}"
+            }
+          ],
+          "notes": "A sketch helps: draw the drone's velocity, then the car's velocity reversed, nose to tail. To the driver, the drone seems to drift backwards and to the left."
+        }
+      ],
+      "challenge": "CC-A1-04",
+      "checks": [
+        "A1-017"
+      ]
+    }
+  ]
+}

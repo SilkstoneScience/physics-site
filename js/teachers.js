@@ -1,4 +1,4 @@
-// Revision sheet builder for teachers (teachers/index.html). Plan and decisions: docs/TEACHERS_PLAN.md.
+// Revision sheet builder for teachers (teachers/worksheets.html). Plan and decisions: docs/TEACHERS_PLAN.md.
 // It builds two documents from the site's own content, every time the page opens:
 //   - teachers/<topic>.json: revision summary, ToK/NoS discussion prompts, video ideas, "also useful for" labs
 //   - themes/<topic>.html: the ToK and NoS box and the worked examples

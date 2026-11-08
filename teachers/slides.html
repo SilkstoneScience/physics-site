@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics for teachers: lesson slide generator · Mr Silkstone's Physics</title>
+  <meta name="description" content="Make an IB DP Physics lesson deck in PowerPoint: choose a subtopic and its curriculum points, then download slides with aims, teaching time, bullet points and worked examples with editable equations.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/teachers/slides.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics for teachers: lesson slide generator · Mr Silkstone's Physics">
+  <meta property="og:description" content="Make an IB DP Physics lesson deck in PowerPoint: choose a subtopic and its curriculum points, then download slides with aims, teaching time, bullet points and worked examples with editable equations.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/teachers/slides.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/teachers.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/omml.js"></script>
+  <script defer src="../js/pptx.js"></script>
+  <script defer src="../js/slides.js"></script>
+  <!-- SVG output (not CHTML): the slide generator turns each equation into a picture for viewers without PowerPoint equations -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-svg.js"></script>
+</head>
+<body data-root="../" data-section="teachers">
+  <header id="site-header"></header>
+  <main>
+    <!-- Arrowheads used by the topic-page diagrams that go into the slides (the same markers as the topic pages) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
+    <h1>Lesson slide generator <span class="tag preview">In development</span></h1>
+    <p class="lead">For teachers: choose a subtopic, tick the curriculum points you want to teach and the kinds of slide you need, then download a PowerPoint deck. It has a concept-challenge hook, aims, an estimated teaching time, clear bullet points, worked examples whose equations you can edit in PowerPoint, quick checks, and any Paper 2 questions you choose from the question bank.</p>
+    <p class="notice"><strong>Work in progress.</strong> Only A.1 is ready so far; the other subtopics will follow. Spotted a problem or have a suggestion? <a href="../about.html#contact">Let me know</a>.</p>
+
+    <form class="tb-form" id="sl-form" onsubmit="return false">
+      <div class="tb-row">
+        <label for="sl-topic"><strong>Subtopic</strong></label>
+        <select id="sl-topic"></select>
+      </div>
+
+      <fieldset class="tb-parts">
+        <legend>Curriculum points</legend>
+        <p class="tb-avail sl-help">The points use the wording of the IB guide (shortened where it is long). <button type="button" class="link-button" id="sl-all">Tick all</button> · <button type="button" class="link-button" id="sl-none">Untick all</button></p>
+        <div id="sl-points" class="sl-points"></div>
+      </fieldset>
+
+      <fieldset class="tb-parts">
+        <legend>Slides to include</legend>
+        <div id="sl-types" class="sl-types"></div>
+      </fieldset>
+    </form>
+
+    <p class="sl-time" id="sl-time" role="status"></p>
+    <div class="tb-actions">
+      <button type="button" class="primary" id="sl-download">Download slides (.pptx)</button>
+      <span class="tb-avail" id="sl-status" role="status"></span>
+    </div>
+    <p class="tb-tip">The deck opens in PowerPoint with editable equations. Google Slides and Keynote can open it too, but they show the equations as pictures. The page address saves your choices, so you (or a colleague) can make the same deck again.</p>
+
+    <!-- Diagrams are drawn here, out of sight, while they are turned into pictures -->
+    <div id="sl-render" class="sl-render" aria-hidden="true"></div>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

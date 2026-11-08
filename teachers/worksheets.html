@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics for teachers: revision sheet builder · Mr Silkstone's Physics</title>
+  <meta name="description" content="Build an IB DP Physics revision sheet for any subtopic: a concept hook, ToK and NoS, revision notes, worked examples and a self-test, with teacher notes and answers. Download both as PDF.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/teachers/worksheets.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics for teachers: revision sheet builder · Mr Silkstone's Physics">
+  <meta property="og:description" content="Build an IB DP Physics revision sheet for any subtopic: a concept hook, ToK and NoS, revision notes, worked examples and a self-test, with teacher notes and answers. Download both as PDF.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/teachers/worksheets.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/teachers.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="../js/teachers.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+</head>
+<body data-root="../" data-section="teachers">
+  <header id="site-header"></header>
+  <main>
+    <!-- Arrowheads used by the diagrams copied into the sheets (the same markers as the topic pages) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--accent)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--theme-b)"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--text)"/></marker>
+      </defs>
+    </svg>
+
+    <h1>Revision sheet builder <span class="tag preview">In development</span></h1>
+    <p class="lead">For teachers: choose a subtopic and the parts you want, and the page builds a student revision sheet and a matching set of teacher notes with answers. Download either one as a PDF.</p>
+    <p class="notice"><strong>Work in progress.</strong> The sheets may change as the tool develops. Spotted a problem or have a suggestion? <a href="../about.html#contact">Let me know</a>.</p>
+
+    <form class="tb-form" id="tb-form" onsubmit="return false">
+      <div class="tb-row">
+        <label for="tb-topic"><strong>Subtopic</strong></label>
+        <select id="tb-topic"></select>
+      </div>
+      <div class="tb-row tb-level-row">
+        <label for="tb-level"><strong>Level</strong></label>
+        <select id="tb-level">
+          <option value="HL">SL and HL (HL content tagged)</option>
+          <option value="SL">SL only (leave out HL content)</option>
+        </select>
+        <span class="tb-avail" id="tb-level-note"></span>
+      </div>
+
+      <fieldset class="tb-parts">
+        <legend>Parts of the sheet</legend>
+        <div class="tb-part">
+          <label><input type="checkbox" data-part="h" checked> Hook</label>
+          <div class="tb-sub" data-for="h">
+            <label>Concept challenge <select id="tb-cc"></select></label>
+            <label>Big question <select id="tb-bq"></select></label>
+          </div>
+        </div>
+        <div class="tb-part">
+          <label><input type="checkbox" data-part="t" checked> ToK question</label>
+          <div class="tb-sub" data-for="t"><select id="tb-tok" aria-label="Which ToK question"></select></div>
+        </div>
+        <div class="tb-part">
+          <label><input type="checkbox" data-part="n" checked> Nature of science idea</label>
+          <div class="tb-sub" data-for="n"><select id="tb-nos" aria-label="Which nature of science idea"></select></div>
+        </div>
+        <div class="tb-part"><label><input type="checkbox" data-part="f" checked> Famous scientists</label> <span class="tb-avail" id="tb-f-note"></span></div>
+        <div class="tb-part"><label><input type="checkbox" data-part="o" checked> Oracy activity <span class="tb-avail">(teacher notes only)</span></label></div>
+        <div class="tb-part"><label><input type="checkbox" data-part="r" checked> Revision notes</label></div>
+        <div class="tb-part"><label><input type="checkbox" data-part="w" checked> Worked examples</label></div>
+        <div class="tb-part">
+          <label><input type="checkbox" data-part="s" checked> Self-test</label>
+          <div class="tb-sub" data-for="s">
+            <label>Paper 1A questions <input type="number" id="tb-n1" min="0" max="10" value="6" inputmode="numeric"></label> <span class="tb-avail" id="tb-a1"></span>
+            <label>Paper 2 questions <input type="number" id="tb-n2" min="0" max="5" value="1" inputmode="numeric"></label> <span class="tb-avail" id="tb-a2"></span>
+            <div class="tb-mode" role="radiogroup" aria-label="How questions are chosen">
+              <label><input type="radio" name="tb-mode" value="random" checked> Random (swap any you don't want)</label>
+              <label><input type="radio" name="tb-mode" value="choose"> Choose them myself</label>
+            </div>
+            <button type="button" class="button secondary" id="tb-reroll">New random set</button>
+            <div id="tb-choose" class="tb-choose" hidden></div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="tb-actions">
+      <button type="button" class="primary" id="tb-print-student">Download student sheet (PDF)</button>
+      <button type="button" class="primary" id="tb-print-teacher">Download teacher notes (PDF)</button>
+      <button type="button" class="button secondary" id="tb-copy">Copy link to this sheet</button>
+      <span class="tb-copied" id="tb-copied" role="status"></span>
+    </div>
+    <p class="tb-tip">The download buttons open your browser's print window: choose <strong>Save as PDF</strong> as the printer. The link saves your choices, so you (or a colleague) can rebuild exactly the same sheet.</p>
+
+    <div class="tb-tabs" role="tablist" aria-label="Preview">
+      <button type="button" role="tab" id="tab-student" aria-selected="true" aria-controls="student-sheet">Student sheet</button>
+      <button type="button" role="tab" id="tab-teacher" aria-selected="false" aria-controls="teacher-sheet">Teacher notes</button>
+    </div>
+    <div id="tb-status" class="tb-status" role="status"></div>
+    <article class="sheet" id="student-sheet" role="tabpanel" aria-labelledby="tab-student"></article>
+    <article class="sheet is-hidden" id="teacher-sheet" role="tabpanel" aria-labelledby="tab-teacher"></article>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
