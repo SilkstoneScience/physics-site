@@ -647,5 +647,99 @@
         "kind": "article"
       }
     ]
+  },
+  {
+    "id": "BQ-16",
+    "kind": "solved",
+    "level": "HL",
+    "title": "Can a black hole be less dense than water?",
+    "figure": {
+      "svg": "diagrams/bq-black-hole-density.svg",
+      "alt": "The inner Solar System seen from above: the Sun at the centre with the orbits of Mercury, Venus, Earth and Mars drawn to scale. A dashed orange circle just outside Mars's orbit marks the event horizon of a black hole of 100 million solar masses.",
+      "caption": "The <span class=\"key-2\">event horizon</span> of a black hole of 100 million solar masses, drawn to the same scale as the planets' orbits (<span class=\"key-1\">Earth's</span> is blue). It reaches about 2 au from the centre, just beyond Mars. The Sun and planets are not to scale."
+    },
+    "question": "<p>A black hole is usually pictured as matter crushed to an unimaginable density. Yet the biggest black holes at the centres of galaxies, hundreds of millions or billions of times the Sun's mass, have an <em>average</em> density lower than water, and the very largest are less dense than the air you are breathing. <strong>How can something that not even light can escape from be less dense than a swimming pool?</strong></p>",
+    "thinking": "<p>The puzzle dissolves once you see how the <em>size</em> of a black hole depends on its mass. In D.1 the escape speed from a sphere of mass $M$ and radius $r$ is $v_{esc} = \\sqrt{\\dfrac{2GM}{r}}$. Set this equal to the speed of light and solve for the radius: $r = \\dfrac{2GM}{c^2}$. This is the <strong>Schwarzschild radius</strong>, the radius of the event horizon. (Strictly, a black hole is a prediction of general relativity, not of Newton's gravity, and the proper calculation was made by Karl Schwarzschild in 1916, but the simple argument happens to give exactly the right answer. John Michell had reached a similar conclusion about \"dark stars\" as early as 1783.)</p><p>The key is that the radius grows <em>in proportion</em> to the mass: double the mass and the horizon doubles in radius. The volume inside the horizon grows as $r^3$, so as $M^3$, and the average density $\\dfrac{M}{\\frac{4}{3}\\pi r^3}$ falls as $\\dfrac{1}{M^2}$. For one solar mass ($1.99 \\times 10^{30}$ kg): $r = \\dfrac{2 \\times 6.67 \\times 10^{-11} \\times 1.99 \\times 10^{30}}{(3.00 \\times 10^{8})^2} = 2.95$ km, and the average density is $\\dfrac{1.99 \\times 10^{30}}{\\frac{4}{3}\\pi (2950)^3} = 1.9 \\times 10^{19}$ $\\text{kg m}^{-3}$, about $10^{16}$ times denser than water. Now scale up. A hole of $10^{8}$ solar masses has a horizon $10^{8}$ times bigger, $2.95 \\times 10^{8}$ km or 1.97 au (just beyond Mars's orbit), and an average density $10^{16}$ times smaller: about $1.9 \\times 10^{3}$ $\\text{kg m}^{-3}$, roughly twice that of water. The black hole at the centre of the galaxy M87, photographed by the Event Horizon Telescope in April 2019, has a mass of about $6.5 \\times 10^{9}$ solar masses. Its horizon has a radius of $1.9 \\times 10^{10}$ km, about 128 au, four times the radius of Neptune's orbit, and its average density is $\\dfrac{1.9 \\times 10^{19}}{(6.5 \\times 10^{9})^2} \\approx 0.4$ $\\text{kg m}^{-3}$: about a third of the density of air at sea level.</p><p>So what does \"density\" mean here? It is the mass divided by the volume enclosed by the horizon, and that is a slightly sneaky quantity. As far as our theories can say, the mass is not spread evenly through that volume; it has collapsed towards the centre, where general relativity breaks down and nobody knows what happens. The horizon is not a surface made of anything: it is simply the boundary beyond which no path leads back out. The low average density does tell you something real, though. The pull of gravity at the horizon, and in particular the <em>difference</em> in pull between your head and your feet (the tidal effect), gets weaker the bigger the hole. At the horizon of a one-solar-mass hole that difference would be around $10^{10}$ $\\text{m s}^{-2}$, enough to stretch an astronaut into a thread long before they arrived. At the horizon of M87's hole it is about $5 \\times 10^{-10}$ $\\text{m s}^{-2}$, far too small to feel. You could cross the horizon of a supermassive black hole without noticing anything special at that moment, and only the fact that you could never get out again would tell you where you were.</p><p>The 2019 image fits this picture well. The dark shadow at its centre is about two and a half times the diameter of the horizon (light that passes close to the hole is bent into it), and its size matched what general relativity predicted for a hole of M87's measured mass. A second image, of the much smaller black hole at the centre of our own galaxy ($4 \\times 10^{6}$ solar masses), followed in 2022.</p>",
+    "thinkingVideo": {
+      "youtube": "S_GVbuddri8",
+      "title": "First Image of a Black Hole!",
+      "channel": "Veritasium"
+    },
+    "discussion": [
+      "The escape-speed argument from D.1 treats light as a projectile slowed by gravity, which is not how light behaves, yet it gives the correct Schwarzschild radius. Does a model that gives the right answer for the wrong reason count as a good model? What would make you trust or distrust it?",
+      "A sphere's volume grows as $r^3$ but a black hole's mass only as $r$. Use this to explain, without a calculator, why a black hole of a billion solar masses is less dense than one of a million solar masses, and by what factor.",
+      "A stellar remnant heavier than about 1.4 solar masses cannot be a white dwarf (the Chandrasekhar limit), and a neutron star above roughly 2 to 3 solar masses must collapse further (the Oppenheimer–Volkoff limit). Stellar black holes therefore form at enormous densities. How, then, can the universe contain black holes of billions of solar masses with the density of air? What do you think they must have done since they formed?"
+    ],
+    "topics": [
+      "D.1",
+      "E.5"
+    ],
+    "nos": [
+      "Models",
+      "Theories",
+      "Evidence"
+    ],
+    "tok": "We can never observe the inside of a black hole, even in principle. In what sense can a scientific claim about its interior be knowledge?",
+    "links": [
+      {
+        "title": "First Image of a Black Hole! (Veritasium)",
+        "url": "https://www.youtube.com/watch?v=S_GVbuddri8",
+        "kind": "video"
+      },
+      {
+        "title": "Astronomers capture first image of a black hole (ESO press release, 10 April 2019)",
+        "url": "https://www.eso.org/public/news/eso1907/",
+        "kind": "article"
+      },
+      {
+        "title": "Schwarzschild radius (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Schwarzschild_radius",
+        "kind": "article"
+      }
+    ]
+  },
+  {
+    "id": "BQ-17",
+    "kind": "solved",
+    "title": "The hiss that arrived four minutes early",
+    "figure": {
+      "svg": "diagrams/bq-jansky.svg",
+      "alt": "A long rectangular aerial, a frame of upright poles strung with wires, standing on a wooden chassis with four wheels on a circular track, under a night sky with stars and the faint band of the Milky Way. An orange arrow shows the frame turning.",
+      "caption": "Jansky's aerial, about 30 m long, <span class=\"key-2\">turned</span> once every 20 minutes on a circular track so that it could tell which direction a radio signal came from. Its <span class=\"key-1\">wires</span> picked up radio waves of wavelength about 15 m. Not to scale."
+    },
+    "question": "<p>In 1932 Karl Jansky, a young engineer at Bell Telephone Laboratories in New Jersey, was hunting down the sources of static that spoilt transatlantic radio-telephone calls. He built a 30 m aerial on wheels that turned slowly on a circular track, so that he could tell where each kind of noise came from. Thunderstorms were easy to identify. But one faint, steady hiss was odd: it rose and fell once a day, so he first assumed it came from the Sun. Then he noticed that its peak arrived about <strong>four minutes earlier each day</strong>, by the clock. <strong>Why did those four minutes prove that the hiss came from far beyond the Solar System, and why did they start a whole new kind of astronomy?</strong></p>",
+    "thinking": "<p>The clue is in two different lengths of day. The ordinary day, 24 hours from noon to noon, is the time the Earth takes to turn until the Sun is back overhead. But while the Earth spins once, it also moves about a degree along its orbit, so it has to turn a little <em>more</em> than one full rotation before the Sun is overhead again. Measured against the distant stars, one full rotation takes only 23 h 56 min 4 s: the <strong>sidereal day</strong>. It is shorter than the solar day by 3 min 56 s, which is simply 24 hours divided by the 366.24 rotations the Earth makes in a year. (A year of 365.24 solar days contains one extra rotation, because the Earth's orbit itself adds one turn.) So anything fixed among the stars returns to the same place in the sky about four minutes earlier each day by the clock, and any source that keeps to sidereal time cannot be the Sun or anything else in the Solar System.</p><p>Jansky's hiss kept sidereal time. A colleague, the astronomer Albert Skellett, pointed out what that meant, and by the end of 1932 Jansky had traced the direction of the peak to the constellation Sagittarius, which lies towards the centre of the Milky Way. He announced the result in April 1933 and published it that October. It was the first detection of radio waves from beyond the Earth, and the source was about 26 000 light years away. Jansky did not know what produced the emission: the main mechanism, synchrotron radiation from fast electrons spiralling in the galaxy's magnetic field, was not worked out until the 1950s. He asked Bell Labs for a larger dish to follow up, but the static did not threaten the telephone service, the Depression was on, and he was moved on to other work. He never returned to astronomy, and died in 1950 aged 44.</p><p>The professional astronomers of the day, who worked only with light, largely ignored the discovery. The person who took it up was Grote Reber, a radio amateur who built a 9 m parabolic dish in his back garden in Wheaton, Illinois, in 1937 and made the first maps of the radio sky, confirming that the whole Milky Way glows at radio wavelengths. After the Second World War, radar engineers turned their equipment on the sky and radio astronomy grew fast: the 21 cm line of hydrogen (1951), which maps the gas in galaxies that light cannot see through the dust; quasars; pulsars (1967); the cosmic microwave background (1965, also at Bell Labs, a few kilometres from Jansky's aerial); and in 2019 the Event Horizon Telescope's image of a black hole, made by radio dishes across the Earth working together. Since 1973 the unit of radio flux density has been the <strong>jansky</strong>, $1 \\text{ Jy} = 10^{-26}$ $\\text{W m}^{-2}\\,\\text{Hz}^{-1}$, a reminder of how faint his hiss was.</p>",
+    "discussion": [
+      "Explain why the sidereal day is about four minutes shorter than the solar day, and why that difference adds up to exactly one extra rotation over a year. How could you use a fixed star and a stopwatch to measure the sidereal day yourself?",
+      "Jansky found the hiss with an instrument built to solve a telephone problem. How did a pattern in the <em>timing</em> of a signal tell him about its location, before anyone knew what was producing it? Which of the guide's Nature of Science ideas (observations, patterns and trends, evidence) does each step of his reasoning illustrate?",
+      "Radio waves of wavelength 15 m have far lower frequency, and far lower photon energy, than visible light. Using what you know about the electromagnetic spectrum and about dust and gas in space (E.5), suggest what radio telescopes can see that optical telescopes cannot, and vice versa."
+    ],
+    "topics": [
+      "E.5",
+      "C.5"
+    ],
+    "nos": [
+      "Observations",
+      "Patterns and trends",
+      "Evidence"
+    ],
+    "tok": "Jansky was looking for the source of telephone static and found the centre of the galaxy. How much of scientific knowledge comes from noticing what you were not looking for, and can that kind of discovery be planned?",
+    "links": [
+      {
+        "title": "Karl Jansky and his Merry-go-Round (National Radio Astronomy Observatory)",
+        "url": "https://public.nrao.edu/gallery/karl-jansky-and-his-merrygoround/",
+        "kind": "article"
+      },
+      {
+        "title": "This month in physics history: Jansky's discovery of cosmic radio waves (APS News)",
+        "url": "https://www.aps.org/apsnews/2015/05/this-month-in-physics-history",
+        "kind": "article"
+      },
+      {
+        "title": "Karl Guthe Jansky (Wikipedia)",
+        "url": "https://en.wikipedia.org/wiki/Karl_Guthe_Jansky",
+        "kind": "article"
+      }
+    ]
   }
 ]

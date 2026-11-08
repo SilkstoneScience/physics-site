@@ -1,0 +1,198 @@
+{
+  "question": {
+    "id": "C3-P02",
+    "theme": "C",
+    "topic": "C.3",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Two loudspeakers, S<sub>1</sub> and S<sub>2</sub>, stand at one end of a school hall. They are connected to the same signal generator, which drives them in phase at a frequency of 425 Hz. A student walks slowly along a line parallel to the line joining the loudspeakers and notices that the sound is loud at some positions and very quiet at others. The point P on this line is 7.40 m from S<sub>1</sub> and 5.40 m from S<sub>2</sub>. The speed of sound in the hall is 340 $\\text{m s}^{-1}$.</p>",
+    "diagram": "questions/diagrams/p2-c3-speakers.svg",
+    "diagramAlt": "Plan view: a signal generator connected by wires to two loudspeakers S1 and S2, one above the other at the left. A dashed vertical line to their right is labelled as the line along which the student walks. A point P on this line is joined to S1 by a line labelled 7.40 m and to S2 by a line labelled 5.40 m.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "State the condition for the two loudspeakers to act as coherent sources.",
+        "marks": 1,
+        "markscheme": [
+          "the waves they emit have a constant phase difference / the same frequency and a constant phase relationship ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the wavelength of the sound in the hall.",
+        "marks": 1,
+        "markscheme": [
+          "$\\lambda = \\dfrac{v}{f} = \\dfrac{340}{425} = 0.800\\ \\text{m}$ ✓"
+        ],
+        "numeric": {
+          "answer": 0.8,
+          "unit": "m",
+          "range": [
+            0.792,
+            0.808
+          ],
+          "mistakes": [
+            {
+              "value": 1.25,
+              "feedback": "Wavelength = speed ÷ frequency, not frequency ÷ speed."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Determine whether P is a loud position or a quiet position.",
+        "marks": 3,
+        "markscheme": [
+          "path difference $= 7.40 - 5.40 = 2.00\\ \\text{m}$ ✓",
+          "this is $2.5\\lambda$ / an odd number of half wavelengths / $(n + \\tfrac{1}{2})\\lambda$ with $n = 2$ ✓",
+          "so the waves from the two loudspeakers interfere destructively at P, which is a quiet position ✓",
+          "Allow ECF from (b)."
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Explain why the sound at a quiet position is very faint even though both loudspeakers are emitting sound.",
+        "marks": 2,
+        "markscheme": [
+          "the two waves arrive half a cycle out of phase / with a phase difference of $\\pi$ (a compression from one loudspeaker arrives together with a rarefaction from the other) ✓",
+          "by the principle of superposition the displacements add to give a resultant of (almost) zero amplitude, so very little sound energy reaches the ear (not exactly zero, because the two waves have travelled different distances and so have slightly different amplitudes) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "The frequency of the signal generator is doubled. Predict, with a reason, what happens to the separation of neighbouring quiet positions along the line.",
+        "marks": 2,
+        "markscheme": [
+          "the wavelength halves (to 0.400 m), because the speed of sound is unchanged ✓",
+          "neighbouring quiet positions differ in path difference by one wavelength, so they move closer together / their separation is roughly halved ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "C.3",
+    "C.2"
+  ],
+  "given": {
+    "f": {
+      "value": 425,
+      "sf": 3,
+      "unit": "Hz",
+      "range": [
+        100,
+        2000
+      ],
+      "what": "frequency of the signal generator"
+    },
+    "v": {
+      "value": 340,
+      "sf": 3,
+      "unit": "m s^-1",
+      "range": [
+        330,
+        350
+      ],
+      "what": "speed of sound in the hall"
+    },
+    "d1": {
+      "value": 7.4,
+      "sf": 3,
+      "unit": "m",
+      "range": [
+        1,
+        30
+      ],
+      "what": "distance from loudspeaker 1 to the point P"
+    },
+    "d2": {
+      "value": 5.4,
+      "sf": 3,
+      "unit": "m",
+      "range": [
+        1,
+        30
+      ],
+      "what": "distance from loudspeaker 2 to the point P"
+    }
+  },
+  "results": {
+    "lambda": {
+      "value": 0.8,
+      "unit": "m",
+      "sf": 3
+    },
+    "delta": {
+      "value": 2,
+      "unit": "m",
+      "sf": 3
+    },
+    "ratio": {
+      "value": 2.5,
+      "unit": "",
+      "sf": 2
+    },
+    "halfLambda": {
+      "value": 0.4,
+      "unit": "m",
+      "sf": 3
+    },
+    "wrong_lambda": {
+      "value": 1.25,
+      "unit": "m",
+      "sf": 3
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "State",
+      "syllabus": [
+        "C.3.6"
+      ],
+      "examinerNote": "Coherence is a constant phase difference (which requires the same frequency). \"They are in phase\" alone is accepted as a special case of a constant phase difference."
+    },
+    {
+      "label": "b",
+      "command": "Calculate",
+      "syllabus": [
+        "C.2.2"
+      ],
+      "examinerNote": "v = fλ rearranged."
+    },
+    {
+      "label": "c",
+      "command": "Determine",
+      "syllabus": [
+        "C.3.6"
+      ],
+      "examinerNote": "Path difference 2.00 m = 2.5 wavelengths, so destructive interference. The conclusion must follow from the comparison with the wavelength; \"quiet\" without the path difference earns nothing.",
+      "dependsOn": [
+        "b"
+      ]
+    },
+    {
+      "label": "d",
+      "command": "Explain",
+      "syllabus": [
+        "C.3.5",
+        "C.3.6"
+      ],
+      "examinerNote": "Two points: antiphase arrival, then superposition giving a minimum amplitude. The bracketed remark on unequal amplitudes is not required for the mark."
+    },
+    {
+      "label": "e",
+      "command": "Predict",
+      "syllabus": [
+        "C.3.6",
+        "C.2.2"
+      ],
+      "examinerNote": "λ = v/f halves. Successive minima are one wavelength apart in path difference, so the pattern becomes finer. Students may argue by analogy with the fringe spacing; the path-difference reason is what is asked for."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-c3-speakers.svg": "03f680a5fcbd9c2b7a5569bfce3d84dcb2921869f40fdfb4aa8fd7816d7a8198"
+  }
+}

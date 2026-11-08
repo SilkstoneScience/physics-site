@@ -44,6 +44,7 @@ export default {
   },
   calcLiterals: { 3600: 'seconds in an hour, for the common wrong answer that forgets the conversion' },
   stem: '<p>An energy-storage scheme in a mountain valley links two reservoirs. At night, when the demand for electrical energy is low, pumps raise water from the lower reservoir to the upper one. During the day the water flows back down through turbines, which drive generators. The upper reservoir holds [[V]] of water of density [[rho]], and the surface of this water is on average [[h]] above the turbines. Pumping the full volume up takes [[tp]] with an electrical input power of [[Pp]]. Emptying the upper reservoir through the turbines takes [[tg]] and gives an average electrical output power of [[Pg]].</p>',
+  diagram: { file: 'questions/diagrams/p2-a3-reservoirs.svg', alt: 'A mountain valley with an upper reservoir high on the left and a lower reservoir at the bottom right. A pipe runs from the upper reservoir down to a building housing the pumps and turbines next to the lower reservoir. The average height h of the upper water above the turbines is marked. Arrows show water pumped up at night and flowing down by day. Not to scale.' },
   parts: [
     {
       label: 'a', sections: ['potential'], command: 'Show that', marks: 2, syllabus: ['A.3.5', 'B.1.2'],

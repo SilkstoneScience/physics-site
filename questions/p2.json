@@ -190,6 +190,307 @@
     }
   },
   {
+    "id": "A2-P02",
+    "theme": "A",
+    "topic": "A.2",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "momentum",
+      "third"
+    ],
+    "stem": "<p>In a crash test, a car moving at constant velocity is stopped suddenly by a barrier. The head of the crash-test dummy in the driver's seat, of mass 4.5 kg, continues to move forwards until it strikes the airbag, which brings it to rest. The graph shows how the force exerted by the airbag on the head varies with time during the contact.</p>",
+    "diagram": "questions/diagrams/p2-a2-airbag.svg",
+    "diagramAlt": "Force in newtons against time in milliseconds, on a grid with small squares of 5 ms by 100 N and darker lines every 10 ms and 200 N. The curve is a smooth hump: zero at 0 ms, rising to a peak of about 1600 N at 30 ms, and falling back to zero at 60 ms. The time axis runs to 80 ms and the force axis to 2000 N.",
+    "diagramLarge": true,
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "third"
+        ],
+        "question": "The airbag exerts a force on the head. State the force that forms a Newton's third-law pair with this force.",
+        "marks": 1,
+        "markscheme": [
+          "the force exerted by the head on the airbag, equal in magnitude and opposite in direction ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "momentum"
+        ],
+        "question": "Estimate, using the graph, the impulse given to the head by the airbag.",
+        "marks": 3,
+        "markscheme": [
+          "impulse $=$ the area under the force–time graph ✓",
+          "area estimated by counting squares (each small square $= 0.5$ N s) OR by strips/trapezia OR as about two-thirds of peak force $\\times$ contact time ✓",
+          "impulse $= 61\\ \\text{N s}$ ✓",
+          "Accept 55.0 to 67.3 N s. Award [1 max] for $\\tfrac{1}{2} \\times 1600 \\times 60 \\times 10^{-3} = 48$ N s (hump treated as a triangle)"
+        ],
+        "numeric": {
+          "answer": 61.1155,
+          "unit": "$\\text{N s}$",
+          "range": [
+            55,
+            67.3
+          ],
+          "mistakes": [
+            {
+              "value": 48,
+              "feedback": "The curve bulges above the straight lines from the ends to the peak, so the area is larger than that of a triangle. Count the squares under the curve, or use strips."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "momentum"
+        ],
+        "question": "Determine the speed of the head just before it strikes the airbag.",
+        "marks": 2,
+        "markscheme": [
+          "impulse $=$ change in momentum $= mv$, since the head is brought to rest ✓",
+          "$v = \\dfrac{61}{4.5} = 13.6\\ \\text{m s}^{-1}$ ✓",
+          "Allow ECF from (b); accept 12.2 to 15.0 $\\text{m s}^{-1}$"
+        ],
+        "numeric": {
+          "answer": 13.5812,
+          "unit": "$\\text{m s}^{-1}$",
+          "range": [
+            12.2,
+            15
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "sections": [
+          "momentum"
+        ],
+        "question": "Without an airbag, the head would strike the steering wheel and be stopped in a much shorter time. Explain, with reference to the graph, how the airbag reduces the risk of injury to the head.",
+        "marks": 3,
+        "markscheme": [
+          "the change in momentum of the head, and so the impulse, is the same whether it is stopped by the airbag or by the steering wheel ✓",
+          "the airbag increases the time over which the head is brought to rest ✓",
+          "since $F = \\dfrac{\\Delta p}{\\Delta t}$, the force on the head is smaller: the graph for the steering wheel would be a taller, narrower hump with the same area ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "B1-P01",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "transfer",
+      "convection",
+      "temperature"
+    ],
+    "stem": "<p>Heating buildings uses a large share of the energy supplied to homes in cold countries, and much of that energy escapes through the windows. On a cold day a room is heated to 20 °C while the air outside is at −8 °C. The window is a single pane of glass of area 1.8 $\\text{m}^{2}$ and thickness 4.0 mm. Thin layers of almost still air cling to both faces of the glass, so the glass is much cooler than the room: its inside surface is at 5.4 °C and its outside surface is at 4.6 °C. The thermal conductivity of the glass is 1.0 $\\text{W m}^{-1}\\text{ K}^{-1}$.</p>",
+    "diagram": "questions/diagrams/p2-b1-window.svg",
+    "diagramAlt": "Two cross-sections, not to scale. Left: a single pane of glass with the warm room on one side and the cold outside air on the other. Right: a double-glazed unit of two panes of glass with an air gap between them, again with the room on one side and the outside on the other.",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "transfer",
+          "temperature"
+        ],
+        "question": "Calculate the rate at which energy is conducted through the glass.",
+        "marks": 2,
+        "markscheme": [
+          "$\\Delta T = 5.4 - 4.6 = 0.8$ K (a temperature difference is the same in °C and in K) ✓",
+          "$\\dfrac{\\Delta Q}{\\Delta t} = \\dfrac{kA\\Delta T}{\\Delta x} = \\dfrac{1.0 \\times 1.8 \\times 0.8}{4.0 \\times 10^{-3}} = 360\\ \\text{W}$ ✓",
+          "Do not accept the air temperatures (giving $1.3 \\times 10^{4}$ W)."
+        ],
+        "numeric": {
+          "answer": 360,
+          "unit": "W",
+          "range": [
+            349,
+            371
+          ],
+          "mistakes": [
+            {
+              "value": 12600,
+              "feedback": "The temperature difference in the conduction equation is across the glass itself: use the temperatures of its two surfaces, not the air temperatures."
+            }
+          ]
+        }
+      },
+      {
+        "label": "b",
+        "sections": [
+          "transfer"
+        ],
+        "question": "The surface temperatures stay roughly the same throughout a winter day. Estimate, in MJ, the energy transferred through the pane in one day.",
+        "marks": 2,
+        "markscheme": [
+          "$E = P\\Delta t$ with $\\Delta t = 8.64 \\times 10^{4}\\ \\text{s}$ (one day) ✓",
+          "$E = 360 \\times 8.64 \\times 10^{4} = 31\\ \\text{MJ}$ ✓",
+          "Allow ECF from (a); accept 29.5 to 32.7 MJ, or the same value in J."
+        ],
+        "numeric": {
+          "answer": 31.104,
+          "unit": "MJ",
+          "range": [
+            29.5,
+            32.7
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "transfer",
+          "convection"
+        ],
+        "question": "To reduce the energy loss, the window is replaced by a double-glazed unit: two panes of the same glass separated by a gap of width 12 mm filled with air. Compare the ways in which energy could be transferred across the air gap by conduction and by convection.",
+        "marks": 2,
+        "markscheme": [
+          "conduction: energy is passed on through collisions between neighbouring molecules (faster molecules near the warmer pane transfer kinetic energy to slower ones) with no overall movement of the air ✓",
+          "convection: the air itself moves, because air warmed by the inner pane expands, becomes less dense and rises while cooler, denser air sinks, so a circulating flow of air carries the energy across the gap ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "sections": [
+          "transfer",
+          "convection"
+        ],
+        "question": "The thermal conductivity of air is 0.025 $\\text{W m}^{-1}\\text{ K}^{-1}$. Explain why the double-glazed unit loses energy much more slowly than the single pane, for the same room and outside temperatures.",
+        "marks": 3,
+        "markscheme": [
+          "the thermal conductivity of air is about 40 times smaller than that of glass, so for the same temperature difference the rate of conduction through a layer of still air is far smaller than through glass ✓",
+          "the gap is narrow, so the air cannot circulate freely and convection across the gap is largely suppressed / the air stays almost still, so energy must cross it mainly by (poor) conduction ✓",
+          "most of the temperature difference between inside and outside is now across the air gap rather than across the glass, so the rate of energy transfer through the whole unit is much smaller ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "transfer"
+        ],
+        "question": "State one benefit to the environment of reducing the rate of energy loss from heated buildings.",
+        "marks": 1,
+        "markscheme": [
+          "less fuel (or electricity generated from fuel) is needed for heating, so less carbon dioxide / greenhouse gas is released, reducing the enhanced greenhouse effect ✓",
+          "Accept less fossil fuel burned, or a reduction in any named pollutant from heating."
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "B2-P01",
+    "theme": "B",
+    "topic": "B.2",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "equilibrium",
+      "greenhouse",
+      "albedo",
+      "models",
+      "enhanced",
+      "modelling",
+      "emissivity",
+      "solar"
+    ],
+    "stem": "<p>Venus orbits closer to the Sun than Earth does. At the orbit of Venus, sunlight delivers 2600 $\\text{W m}^{-2}$ to a surface facing the Sun, and the thick clouds of Venus give it an albedo of 0.76. Spacecraft have measured the temperature of the surface of Venus to be 735 K. The atmosphere of Venus is almost entirely carbon dioxide, and the pressure at its surface is about 90 times the pressure at the surface of Earth.</p><p>For comparison, Earth would have an equilibrium temperature of about 255 K if it had no atmosphere; its actual surface temperature is 288 K.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "albedo"
+        ],
+        "question": "State what is meant by the albedo of a planet.",
+        "marks": 1,
+        "markscheme": [
+          "the ratio of the total power scattered (reflected) by the planet to the total power incident on it ✓",
+          "Accept \"the fraction of the incoming radiation that is reflected back into space\"."
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "equilibrium",
+          "solar"
+        ],
+        "question": "Venus is modelled as a black body with no atmosphere. Show that its equilibrium temperature would then be about 230 K.",
+        "marks": 2,
+        "markscheme": [
+          "mean absorbed intensity $= \\dfrac{I(1 - \\alpha)}{4} = \\dfrac{2600 \\times (1 - 0.76)}{4} = 156\\ \\text{W m}^{-2}$ ✓",
+          "$\\sigma T^4 = 156$ so $T = \\left(\\dfrac{156}{5.67 \\times 10^{-8}}\\right)^{1/4} = 229\\ \\text{K}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "sections": [
+          "greenhouse",
+          "models"
+        ],
+        "question": "Explain why the surface temperature of Venus is so much higher than the temperature in (b).",
+        "marks": 3,
+        "markscheme": [
+          "the surface of Venus radiates mainly infrared radiation, and carbon dioxide molecules absorb infrared photons whose energies match the differences between their (vibrational) molecular energy levels / resonate at those frequencies ✓",
+          "the molecules then re-emit this radiation in all directions, so a large part of it returns to the surface ✓",
+          "the surface receives energy from the atmosphere as well as from the Sun, so it must be at a higher temperature to radiate enough power to balance what it absorbs ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "sections": [
+          "emissivity",
+          "equilibrium"
+        ],
+        "question": "The surface of Venus has an emissivity of 1. Deduce the ratio of the energy emitted each second by one square metre of the surface at 735 K to the energy that the same square metre would emit each second at the temperature in (b).",
+        "marks": 2,
+        "markscheme": [
+          "energy emitted per second per unit area $= \\sigma T^4$, so ratio $= \\left(\\dfrac{735}{229}\\right)^4$ ✓",
+          "ratio $= 106$ ✓",
+          "Allow ECF from (b); accept 101 to 111 (using 230 K gives 104)."
+        ],
+        "numeric": {
+          "answer": 106.074,
+          "range": [
+            101,
+            111
+          ]
+        }
+      },
+      {
+        "label": "e",
+        "sections": [
+          "enhanced",
+          "modelling"
+        ],
+        "question": "Discuss what the measurements of Venus suggest about the enhanced greenhouse effect on Earth.",
+        "marks": 2,
+        "markscheme": [
+          "Venus shows that a carbon dioxide atmosphere can raise a planet's surface far above its equilibrium temperature (by about 510 K, compared with about 33 K on Earth), so adding carbon dioxide to Earth's atmosphere by burning fossil fuels should be expected to raise Earth's surface temperature ✓",
+          "OR the measurements are evidence that the energy-balance model of the greenhouse effect is correct, because it accounts for a planet other than Earth",
+          "but the atmosphere of Venus is far denser and almost entirely carbon dioxide, so the comparison cannot say how much Earth warms for a given increase in carbon dioxide / Earth will not become like Venus because of human emissions alone ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
     "id": "B3-P01",
     "theme": "B",
     "topic": "B.3",
@@ -522,6 +823,126 @@
     }
   },
   {
+    "id": "C1-P01",
+    "theme": "C",
+    "topic": "C.1",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "HL",
+    "sections": [
+      "graphs",
+      "shm",
+      "phase",
+      "energy-hl",
+      "describing"
+    ],
+    "stem": "<p>A cylindrical fishing float of mass 24 g floats upright in still water. An angler pushes the float down a short distance and releases it, and it then bobs up and down with simple harmonic motion. The graph shows how its displacement $x$ from the equilibrium position varies with time. $x$ is measured downwards, so it is positive when the float is lower than its equilibrium position. Resistive forces are negligible.</p>",
+    "diagram": "questions/diagrams/p2-c1-float.svg",
+    "diagramAlt": "Graph of displacement x in centimetres against time in seconds, from 0 to 2.0 s, on a grid of 0.1 s by 0.5 cm. The curve is a cosine shape starting at its maximum of 2.0 cm at t = 0, crossing zero at 0.20 s, reaching −2.0 cm at 0.40 s and returning to 2.0 cm at 0.80 s and again at 1.60 s. Two and a half cycles are shown.",
+    "diagramLarge": true,
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "graphs",
+          "describing"
+        ],
+        "question": "Determine, from the graph, the amplitude and the period of the oscillation.",
+        "marks": 2,
+        "markscheme": [
+          "amplitude $= 2.0\\ \\text{cm}$ ✓",
+          "period $= 0.80\\ \\text{s}$ (one complete cycle, e.g. from the first peak at $t = 0$ to the next peak) ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "shm"
+        ],
+        "question": "When the float is at rest at its equilibrium position, the buoyancy force on it equals its weight. Explain why the motion of the float after it is released is simple harmonic.",
+        "marks": 3,
+        "markscheme": [
+          "when the float is pushed below equilibrium it displaces more water, so the buoyancy force is greater than the weight and the resultant force is upwards, towards the equilibrium position (and when it rises above equilibrium the buoyancy force is less than the weight, so the resultant force is downwards) ✓",
+          "the extra buoyancy force equals the weight of the extra water displaced, $\\rho g A x$, which is proportional to the displacement $x$ because the float is a cylinder of constant cross-section ✓",
+          "so the acceleration is proportional to the displacement and directed towards equilibrium / opposite to the displacement, which is the condition for SHM ($a = -\\omega^2 x$) ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "sections": [
+          "phase"
+        ],
+        "question": "Calculate the maximum speed of the float.",
+        "marks": 2,
+        "markscheme": [
+          "$\\omega = \\dfrac{2\\pi}{T} = \\dfrac{2\\pi}{0.80} = 7.85\\ \\text{rad s}^{-1}$ ✓",
+          "$v_{\\max} = \\omega x_0 = 7.85 \\times 2.0 \\times 10^{-2} = 0.157\\ \\text{m s}^{-1}$ ✓",
+          "Allow ECF from (a); accept 0.150 to 0.164 $\\text{m s}^{-1}$"
+        ],
+        "numeric": {
+          "answer": 0.15708,
+          "unit": "$\\text{m s}^{-1}$",
+          "range": [
+            0.15,
+            0.164
+          ],
+          "mistakes": [
+            {
+              "value": 15.708,
+              "feedback": "The amplitude is in centimetres: convert it to metres before multiplying by ω."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "sections": [
+          "graphs",
+          "phase"
+        ],
+        "question": "Sketch a graph to show how the velocity of the float varies with time from $t = 0$ to $t = 1.6$ s. Label the maximum and minimum values of the velocity.",
+        "marks": 2,
+        "markscheme": [
+          "a sinusoidal curve with the same period as the displacement graph (0.80 s), zero at $t = 0$ and at every half period (0.40 s) after that, covering two cycles ✓",
+          "the velocity is negative first (the float moves upwards after release, while $x$ is positive downwards), with the first minimum at $t = 0.20\\ \\text{s}$, and the maximum and minimum labelled $\\pm$0.16 $\\text{m s}^{-1}$ ✓",
+          "Allow ECF from (c) for the labelled values. Award [1 max] for a correct sine shape of the right period that is inverted (positive first).",
+          "Note: the examiner's sketch is shown below.<figure><img src=\"questions/diagrams/p2-c1-float-ms.svg\" alt=\"Examiner's velocity–time graph: a negative sine curve starting at zero, reaching −0.16 metres per second at 0.20 s, zero at 0.40 s, +0.16 metres per second at 0.60 s, and repeating with a period of 0.80 s up to 1.6 s.\"></figure>"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "energy-hl"
+        ],
+        "question": "Determine the kinetic energy of the float when its displacement is 1.0 cm.",
+        "marks": 2,
+        "markscheme": [
+          "$E_k = \\tfrac{1}{2} m\\omega^2 (x_0^2 - x^2) = \\tfrac{1}{2} \\times 24 \\times 10^{-3} \\times 7.85^2 \\times \\left[(2.0 \\times 10^{-2})^2 - (1.0 \\times 10^{-2})^2\\right]$ ✓",
+          "$E_k = 2.2 \\times 10^{-4}\\ \\text{J}$ ✓",
+          "OR $v = \\omega\\sqrt{x_0^2 - x^2} = 0.136\\ \\text{m s}^{-1}$ ✓ then $E_k = \\tfrac{1}{2}mv^2 = 2.2 \\times 10^{-4}\\ \\text{J}$ ✓",
+          "Allow ECF from (a) and (c); accept $2.08 \\times 10^{-4}$ to $2.36 \\times 10^{-4}$ J"
+        ],
+        "numeric": {
+          "answer": 0.000222066,
+          "unit": "J",
+          "range": [
+            0.000208,
+            0.000236
+          ],
+          "mistakes": [
+            {
+              "value": 0.000074022,
+              "feedback": "That is the potential energy at this displacement, ½mω²x². The kinetic energy is the total energy minus the potential energy: ½mω²(x₀² − x²)."
+            }
+          ]
+        }
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
     "id": "C2-P01",
     "theme": "C",
     "topic": "C.2",
@@ -606,6 +1027,201 @@
             }
           ]
         }
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "C3-P01",
+    "theme": "C",
+    "topic": "C.3",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "tir",
+      "refraction"
+    ],
+    "stem": "<p>A medical endoscope carries light into and out of a patient's body along a bundle of thin glass optical fibres. Each fibre has a core of refractive index 1.60 surrounded by a cladding of refractive index 1.50. The diagram shows one fibre. A ray of light in air meets the centre of the flat end face of the fibre with an angle of incidence of 25°. The end face is perpendicular to the axis of the fibre.</p>",
+    "diagram": "questions/diagrams/p2-c3-fibre.svg",
+    "diagramAlt": "A horizontal section of optical fibre: a core labelled n = 1.60 between two bands of cladding labelled n = 1.50, with a flat end face on the left. A ray in air comes from the upper left and meets the centre of the end face at 25 degrees to the dashed normal, which lies along the axis of the fibre.",
+    "diagramLarge": true,
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "tir"
+        ],
+        "question": "Calculate the critical angle for light at the boundary between the core and the cladding.",
+        "marks": 1,
+        "markscheme": [
+          "$\\sin c = \\dfrac{n_2}{n_1} = \\dfrac{1.50}{1.60}$ so $c = 69.6^{\\circ}$ ✓"
+        ],
+        "numeric": {
+          "answer": 69.6359,
+          "unit": "°",
+          "range": [
+            68.9,
+            70.4
+          ],
+          "mistakes": [
+            {
+              "value": 38.6822,
+              "feedback": "The boundary is between the core and the cladding, not between the core and air: use the ratio of the two refractive indices."
+            }
+          ]
+        }
+      },
+      {
+        "label": "b",
+        "sections": [
+          "refraction",
+          "tir"
+        ],
+        "question": "Determine whether the ray is totally internally reflected when it first reaches the boundary between the core and the cladding.",
+        "marks": 3,
+        "markscheme": [
+          "$\\sin\\theta_2 = \\dfrac{\\sin 25^{\\circ}}{1.60}$, so the angle of refraction in the core is $15.3^{\\circ}$ ✓",
+          "the angle of incidence at the core–cladding boundary is $90^{\\circ} - 15.3^{\\circ} = 74.7^{\\circ}$ ✓",
+          "$74.7^{\\circ}$ is greater than the critical angle ($69.6^{\\circ}$), so the ray is totally internally reflected / none of the light is refracted into the cladding ✓",
+          "Allow ECF from (a)."
+        ]
+      },
+      {
+        "label": "c",
+        "sections": [
+          "tir"
+        ],
+        "question": "Sketch the path of the ray along a short length of the fibre, showing two reflections at the boundary between the core and the cladding.",
+        "marks": 2,
+        "markscheme": [
+          "the ray bends towards the normal (towards the axis of the fibre) as it enters the core ✓",
+          "straight segments inside the core, reflected at the boundary with equal angles on the two sides of the normal, and no ray drawn in the cladding ✓",
+          "Note: the examiner's sketch is shown below.<figure><img src=\"questions/diagrams/p2-c3-fibre-ms.svg\" alt=\"Examiner's drawing: the ray refracts towards the axis at the end face, travels in a straight line to the lower core–cladding boundary, reflects up to the upper boundary at an equal angle, reflects again and continues along the core; the angles with the boundary normals are marked 75 degrees.\"></figure>"
+        ]
+      },
+      {
+        "label": "d",
+        "sections": [
+          "tir"
+        ],
+        "question": "In the bundle the fibres touch each other. Outline why each core is surrounded by a cladding of lower refractive index rather than being left as bare glass.",
+        "marks": 2,
+        "markscheme": [
+          "where bare cores touched each other (or body tissue or fluid), the boundary would be between materials of similar refractive index, so there would be no critical angle (or a much larger one) and light would leak from one fibre into its neighbour ✓",
+          "the cladding keeps a boundary with a lower refractive index all the way along the core, so total internal reflection continues (and it protects the core surface from scratches and dirt, which would scatter light) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "tir"
+        ],
+        "question": "Suggest one reason why optical fibres are well suited to viewing the inside of a patient's body.",
+        "marks": 1,
+        "markscheme": [
+          "Any 1 from:",
+          "the fibres are thin and flexible, so a bundle can be passed along narrow, curved passages in the body ✓",
+          "light (and the image) is carried without any electric current or heating inside the body ✓",
+          "a view inside the body is obtained through a small natural opening or incision, so major surgery can be avoided ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "C3-P02",
+    "theme": "C",
+    "topic": "C.3",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "interference",
+      "superposition"
+    ],
+    "stem": "<p>Two loudspeakers, S<sub>1</sub> and S<sub>2</sub>, stand at one end of a school hall. They are connected to the same signal generator, which drives them in phase at a frequency of 425 Hz. A student walks slowly along a line parallel to the line joining the loudspeakers and notices that the sound is loud at some positions and very quiet at others. The point P on this line is 7.40 m from S<sub>1</sub> and 5.40 m from S<sub>2</sub>. The speed of sound in the hall is 340 $\\text{m s}^{-1}$.</p>",
+    "diagram": "questions/diagrams/p2-c3-speakers.svg",
+    "diagramAlt": "Plan view: a signal generator connected by wires to two loudspeakers S1 and S2, one above the other at the left. A dashed vertical line to their right is labelled as the line along which the student walks. A point P on this line is joined to S1 by a line labelled 7.40 m and to S2 by a line labelled 5.40 m.",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "interference"
+        ],
+        "question": "State the condition for the two loudspeakers to act as coherent sources.",
+        "marks": 1,
+        "markscheme": [
+          "the waves they emit have a constant phase difference / the same frequency and a constant phase relationship ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "interference"
+        ],
+        "question": "Calculate the wavelength of the sound in the hall.",
+        "marks": 1,
+        "markscheme": [
+          "$\\lambda = \\dfrac{v}{f} = \\dfrac{340}{425} = 0.800\\ \\text{m}$ ✓"
+        ],
+        "numeric": {
+          "answer": 0.8,
+          "unit": "m",
+          "range": [
+            0.792,
+            0.808
+          ],
+          "mistakes": [
+            {
+              "value": 1.25,
+              "feedback": "Wavelength = speed ÷ frequency, not frequency ÷ speed."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "interference"
+        ],
+        "question": "Determine whether P is a loud position or a quiet position.",
+        "marks": 3,
+        "markscheme": [
+          "path difference $= 7.40 - 5.40 = 2.00\\ \\text{m}$ ✓",
+          "this is $2.5\\lambda$ / an odd number of half wavelengths / $(n + \\tfrac{1}{2})\\lambda$ with $n = 2$ ✓",
+          "so the waves from the two loudspeakers interfere destructively at P, which is a quiet position ✓",
+          "Allow ECF from (b)."
+        ]
+      },
+      {
+        "label": "d",
+        "sections": [
+          "superposition",
+          "interference"
+        ],
+        "question": "Explain why the sound at a quiet position is very faint even though both loudspeakers are emitting sound.",
+        "marks": 2,
+        "markscheme": [
+          "the two waves arrive half a cycle out of phase / with a phase difference of $\\pi$ (a compression from one loudspeaker arrives together with a rarefaction from the other) ✓",
+          "by the principle of superposition the displacements add to give a resultant of (almost) zero amplitude, so very little sound energy reaches the ear (not exactly zero, because the two waves have travelled different distances and so have slightly different amplitudes) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "interference"
+        ],
+        "question": "The frequency of the signal generator is doubled. Predict, with a reason, what happens to the separation of neighbouring quiet positions along the line.",
+        "marks": 2,
+        "markscheme": [
+          "the wavelength halves (to 0.400 m), because the speed of sound is unchanged ✓",
+          "neighbouring quiet positions differ in path difference by one wavelength, so they move closer together / their separation is roughly halved ✓"
+        ]
       }
     ],
     "review": {
@@ -705,6 +1321,109 @@
             206
           ]
         }
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "C5-P01",
+    "theme": "C",
+    "topic": "C.5",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "space",
+      "light"
+    ],
+    "stem": "<p>Many stars belong to binary systems, in which two stars orbit their common centre of mass. The light from one star of such a system is analysed with a spectrometer. An absorption line of calcium, which has a wavelength of 393.40 nm when measured in a laboratory on Earth, is observed at a wavelength that changes with time. The graph shows the observed wavelength of this line over several days. Two times, A and B, are marked.</p>",
+    "diagram": "questions/diagrams/p2-c5-binary.svg",
+    "diagramAlt": "Graph of observed wavelength in nanometres (393.30 to 393.50) against time in days (0 to 8), on a grid of 0.5 days by 0.01 nm. A dashed horizontal line marks 393.40 nm. The curve is a sine wave: it starts at 393.40 nm, peaks at 393.48 nm at 1.0 day (marked A), falls to 393.32 nm at 3.0 days (marked B), returns to 393.40 nm at 4.0 days and repeats, peaking again at 5.0 days and reaching its minimum at 7.0 days.",
+    "diagramLarge": true,
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "space"
+        ],
+        "question": "Outline why the observed wavelength of the line changes periodically.",
+        "marks": 2,
+        "markscheme": [
+          "the star moves around its orbit, so the component of its velocity along the line of sight to Earth alternates between towards Earth and away from Earth ✓",
+          "the Doppler effect increases the observed wavelength when the star is receding and decreases it when the star is approaching, so the shift repeats once every orbit ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "space"
+        ],
+        "question": "Determine the orbital period of the star.",
+        "marks": 1,
+        "markscheme": [
+          "period $= 4.0$ days, e.g. from one peak to the next ✓"
+        ],
+        "numeric": {
+          "answer": 4,
+          "unit": "day",
+          "range": [
+            3.88,
+            4.12
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "light"
+        ],
+        "question": "Calculate the maximum speed of the star along the line of sight.",
+        "marks": 2,
+        "markscheme": [
+          "maximum shift $\\Delta\\lambda = 393.48 - 393.40 = 0.080\\ \\text{nm}$ ✓",
+          "$v = c\\,\\dfrac{\\Delta\\lambda}{\\lambda} = 3.00 \\times 10^{8} \\times \\dfrac{0.080}{393.40} = 6.1 \\times 10^{4}\\ \\text{m s}^{-1}$ ✓",
+          "Accept $5.67 \\times 10^{4}$ to $6.53 \\times 10^{4}$ $\\text{m s}^{-1}$ (allowing for the reading of the shift from the graph)."
+        ],
+        "numeric": {
+          "answer": 61006.6,
+          "unit": "$\\text{m s}^{-1}$",
+          "range": [
+            56700,
+            65300
+          ],
+          "mistakes": [
+            {
+              "value": 122013,
+              "feedback": "The shift Δλ is measured from the laboratory wavelength to the peak (or the trough), not from trough to peak."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "sections": [
+          "space"
+        ],
+        "question": "Deduce at which of the marked times, A or B, the star is moving towards Earth.",
+        "marks": 2,
+        "markscheme": [
+          "at B the observed wavelength (393.32 nm) is shorter than the laboratory wavelength / the line is blueshifted ✓",
+          "a decrease in wavelength means the source is moving towards the observer, so the star is moving towards Earth at B (and away from Earth at A) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "space"
+        ],
+        "question": "State one assumption that must be made if the speed found in (c) is to be taken as the orbital speed of the star.",
+        "marks": 1,
+        "markscheme": [
+          "the orbit is seen edge-on from Earth / the line of sight lies in the plane of the orbit, so at A and B the whole of the star's velocity is along the line of sight ✓",
+          "OR the orbit is circular, so the orbital speed is constant ✓"
+        ]
       }
     ],
     "review": {
@@ -911,6 +1630,140 @@
     }
   },
   {
+    "id": "D2-P01",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "HL",
+    "sections": [
+      "plates",
+      "elines",
+      "equip",
+      "gradient",
+      "ev",
+      "efield"
+    ],
+    "stem": "<p>An electrostatic precipitator removes smoke particles from the waste gas leaving a factory chimney. Inside the chimney, two large vertical metal plates are 0.30 m apart and the potential difference between them is 60 kV. The gas flows upwards between the plates. A smoke particle of mass $5.0 \\times 10^{-13}$ kg, carrying a negative charge of magnitude $8.0 \\times 10^{-16}$ C, enters the gap next to the negative plate.</p>",
+    "diagram": "questions/diagrams/p2-d2-precipitator.svg",
+    "diagramAlt": "Two large vertical metal plates seen edge-on, the left one labelled negative and the right one labelled positive, with the separation marked below them and the potential difference labelled above. A small smoke particle is drawn just to the right of the negative plate, and a dashed arrow between the plates shows the flue gas flowing upwards.",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "elines",
+          "equip"
+        ],
+        "question": "Sketch, on a copy of the diagram, the electric field lines between the plates and two equipotential surfaces. Ignore edge effects.",
+        "marks": 2,
+        "markscheme": [
+          "at least four straight, parallel, evenly spaced field lines at right angles to the plates, with arrows pointing from the positive plate to the negative plate ✓",
+          "two equipotential surfaces drawn as straight lines parallel to the plates, at right angles to the field lines ✓",
+          "Note: examiner's figure. <img src=\"questions/diagrams/p2-d2-precipitator-ms.svg\" alt=\"Examiner figure: the two plates with evenly spaced horizontal field lines running from the positive plate to the negative plate, and two dashed vertical equipotential lines parallel to the plates and at right angles to the field lines.\">"
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "plates",
+          "gradient"
+        ],
+        "question": "Calculate the electric field strength between the plates.",
+        "marks": 1,
+        "markscheme": [
+          "$E = \\dfrac{V}{d} = \\dfrac{60 \\times 10^{3}}{0.30} = 2.0 \\times 10^{5}\\ \\text{V m}^{-1}$ ✓"
+        ],
+        "numeric": {
+          "answer": 200000,
+          "unit": "$\\text{V m}^{-1}$",
+          "range": [
+            194000,
+            206000
+          ],
+          "mistakes": [
+            {
+              "value": 200,
+              "feedback": "The potential difference is given in kilovolts: convert it to volts first."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "equip"
+        ],
+        "question": "State the work done by the electric field on the particle when the particle moves along one of the equipotential surfaces you have drawn.",
+        "marks": 1,
+        "markscheme": [
+          "zero ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "sections": [
+          "gradient",
+          "ev"
+        ],
+        "question": "Determine the work done by the electric field on the particle as it moves from the negative plate to the positive plate.",
+        "marks": 2,
+        "markscheme": [
+          "$W = q\\Delta V_e$ ✓",
+          "$W = 8.0 \\times 10^{-16} \\times 60 \\times 10^{3} = 4.8 \\times 10^{-11}\\ \\text{J}$ ✓",
+          "Allow the answer in electronvolts: $3.0 \\times 10^{8}$ eV. Accept $4.65 \\times 10^{-11}$ to $4.95 \\times 10^{-11}$ J."
+        ],
+        "numeric": {
+          "answer": 4.8e-11,
+          "unit": "J",
+          "range": [
+            4.65e-11,
+            4.95e-11
+          ],
+          "mistakes": [
+            {
+              "value": 1.6e-10,
+              "feedback": "W = qΔV uses the potential difference between the plates, not the field strength."
+            },
+            {
+              "value": 4.8e-14,
+              "feedback": "The potential difference is in kilovolts: convert it to volts."
+            }
+          ]
+        }
+      },
+      {
+        "label": "e",
+        "sections": [
+          "efield"
+        ],
+        "question": "In practice the particle does not keep accelerating all the way to the positive plate. Explain, with reference to the forces acting on the particle, why it soon moves towards the plate at a constant speed.",
+        "marks": 2,
+        "markscheme": [
+          "Any 2 from:",
+          "the electric force $qE$ on the particle is constant because the field is uniform ✓",
+          "the drag force from the gas on the particle increases as its speed increases ✓",
+          "when the drag force becomes equal (and opposite) to the electric force the resultant force is zero, so the speed stays constant (a terminal speed) ✓",
+          "Allow the weight to be ignored: it is much smaller than the electric force."
+        ]
+      },
+      {
+        "label": "f",
+        "sections": [
+          "plates"
+        ],
+        "question": "Outline one environmental benefit of fitting the precipitator to the chimney and one limitation of what it can achieve.",
+        "marks": 2,
+        "markscheme": [
+          "benefit: smoke / soot / ash particles are attracted to the plate and removed from the gas before it leaves the chimney, so less particulate pollution reaches the air (fewer breathing problems, less soiling of the surroundings) ✓",
+          "limitation: only charged particles are collected, so gases such as carbon dioxide or sulfur dioxide pass through unchanged OR a high-voltage supply (electrical energy) is needed to run it OR the collected ash must still be disposed of ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
     "id": "D3-P01",
     "theme": "D",
     "topic": "D.3",
@@ -1002,6 +1855,212 @@
             4.64
           ]
         }
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "D4-P01",
+    "theme": "D",
+    "topic": "D.4",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "HL",
+    "sections": [
+      "faraday",
+      "flux",
+      "lenz"
+    ],
+    "stem": "<p>A student releases a short bar magnet from rest so that it falls, north pole first, through a coil of 500 turns and cross-sectional area 8.0 $\\text{cm}^{2}$. The coil is connected to a data logger that records the emf induced in it. At the moment of release the centre of the magnet is 6.0 cm above the centre of the coil. The graph shows how the induced emf varies with time after the release.</p>",
+    "diagram": "questions/diagrams/p2-d4-magnet.svg",
+    "diagramAlt": "Graph of emf in volts against time in milliseconds from 0 to 180 ms, on a grid of 10 millisecond by 0.05 volt squares. The emf is zero at first, then dips to a negative pulse that reaches about minus 0.32 volts near 95 milliseconds, crosses zero at about 111 milliseconds, rises to a taller, narrower positive pulse of about plus 0.42 volts near 127 milliseconds, and returns to zero by about 160 milliseconds.",
+    "diagramLarge": true,
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "faraday",
+          "lenz"
+        ],
+        "question": "Outline the main features of the graph.",
+        "marks": 2,
+        "markscheme": [
+          "the emf is zero while the magnet is far from the coil, then there is a negative pulse as the magnet enters the coil followed by a positive pulse as it leaves, after which the emf returns to zero ✓",
+          "the second pulse has a greater peak value and lasts for a shorter time than the first ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "faraday",
+          "lenz"
+        ],
+        "question": "Explain why the second pulse has the opposite sign to the first, and why it is taller and shorter.",
+        "marks": 3,
+        "markscheme": [
+          "the flux (linkage) through the coil increases as the magnet enters and decreases as it leaves, and by Lenz's law the induced emf (current) opposes each change, so the emf reverses direction ✓",
+          "the magnet is accelerating under gravity, so it is moving faster when it leaves the coil than when it enters ✓",
+          "the flux therefore changes at a greater rate, giving a larger emf (Faraday's law), and the same change in flux takes less time, so the pulse is shorter ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "sections": [
+          "faraday",
+          "flux"
+        ],
+        "question": "Estimate, using the graph, the change in the magnetic flux linkage of the coil while the magnet enters it, that is during the first pulse.",
+        "marks": 2,
+        "markscheme": [
+          "the change in flux linkage $N\\Delta\\Phi$ is the area between the first pulse and the time axis (since $\\varepsilon = -N\\dfrac{\\Delta\\Phi}{\\Delta t}$) ✓",
+          "area ≈ 20 squares × 0.50 $\\text{mV s}$ per square, so $N\\Delta\\Phi \\approx 0.010\\ \\text{Wb}$ ✓",
+          "Accept $8.50 \\times 10^{-3}$ to 0.0115 Wb, by counting squares or using strips; ignore the sign."
+        ],
+        "numeric": {
+          "answer": 0.01,
+          "unit": "Wb",
+          "range": [
+            0.0085,
+            0.0115
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "sections": [
+          "flux"
+        ],
+        "question": "Calculate the average magnetic flux density over the area of the coil when the centre of the magnet is at the centre of the coil.",
+        "marks": 2,
+        "markscheme": [
+          "flux through one turn $\\Phi = \\dfrac{N\\Delta\\Phi}{N} = \\dfrac{0.010}{500} = 2.0 \\times 10^{-5}\\ \\text{Wb}$ ✓",
+          "$B = \\dfrac{\\Phi}{A} = \\dfrac{2.0 \\times 10^{-5}}{8.0 \\times 10^{-4}} = 0.025\\ \\text{T}$ ✓",
+          "Allow ECF from (c); accept 0.0212 to 0.0288 T."
+        ],
+        "numeric": {
+          "answer": 0.025,
+          "unit": "T",
+          "range": [
+            0.0212,
+            0.0288
+          ],
+          "mistakes": [
+            {
+              "value": 12.5,
+              "feedback": "Your estimate in (c) is the flux linkage of all the turns. Divide by the number of turns to get the flux through one turn before dividing by the area."
+            }
+          ]
+        }
+      },
+      {
+        "label": "e",
+        "sections": [
+          "faraday"
+        ],
+        "question": "The magnet is now released from a greater height above the coil. Predict, with a reason, how the graph changes.",
+        "marks": 1,
+        "markscheme": [
+          "both pulses have greater peak values and are narrower (shorter), because the magnet is moving faster as it passes through the coil, so the flux changes at a greater rate and in a shorter time ✓",
+          "Allow: the area under each pulse is unchanged because the total change in flux is the same."
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "E1-P01",
+    "theme": "E",
+    "topic": "E.1",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "levels",
+      "spectra",
+      "composition"
+    ],
+    "stem": "<p>A low-pressure sodium lamp used for street lighting contains sodium vapour. When a current flows in the vapour the lamp gives out light whose spectrum is a line spectrum, almost all of it in a single yellow line. The diagram shows the ground state and three excited energy levels of a sodium atom.</p>",
+    "diagram": "questions/diagrams/p2-e1-sodium.svg",
+    "diagramAlt": "Energy-level diagram with four horizontal lines. From the bottom: the ground state at minus 5.14 electronvolts, level 1 at minus 3.04 electronvolts, level 2 at minus 1.95 electronvolts and level 3 at minus 1.39 electronvolts. A blue downward arrow from level 1 to the ground state is labelled transition for part b.",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "spectra",
+          "levels"
+        ],
+        "question": "Outline how the line spectrum of the lamp provides evidence that the energy of a sodium atom can take only certain discrete values.",
+        "marks": 2,
+        "markscheme": [
+          "only certain wavelengths / frequencies / photon energies are present in the light ✓",
+          "a photon is emitted when the atom moves from one energy level to a lower one, with energy equal to the difference between the levels ($E = hf$), so only certain energy differences, and hence only certain levels, can exist ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "levels"
+        ],
+        "question": "Calculate, in nm, the wavelength of the photon released in the transition shown by the arrow on the diagram.",
+        "marks": 2,
+        "markscheme": [
+          "$\\Delta E = -3.04 - (-5.14) = 2.10\\ \\text{eV} = 3.36 \\times 10^{-19}\\ \\text{J}$ ✓",
+          "$\\lambda = \\dfrac{hc}{\\Delta E} = \\dfrac{6.63 \\times 10^{-34} \\times 3.00 \\times 10^{8}}{3.36 \\times 10^{-19}} = 592\\ \\text{nm}$ ✓",
+          "Accept 580 to 604 nm."
+        ],
+        "numeric": {
+          "answer": 591.964,
+          "unit": "nm",
+          "range": [
+            580,
+            604
+          ],
+          "mistakes": [
+            {
+              "value": 331.5,
+              "feedback": "That is the wavelength for the transition from level 3 to the ground state. The arrow shows level 1 to the ground state."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "levels"
+        ],
+        "question": "Deduce which transition between the levels shown gives the photon of shortest wavelength, and the number of different photon energies that transitions between the levels shown can produce.",
+        "marks": 2,
+        "markscheme": [
+          "level 3 to the ground state, because it has the largest energy difference and so the highest frequency / shortest wavelength ✓",
+          "6 different photon energies ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "sections": [
+          "spectra"
+        ],
+        "question": "White light is sent through a tube of sodium vapour at room temperature. Describe how the absorption spectrum produced differs in appearance from the emission spectrum of the lamp.",
+        "marks": 2,
+        "markscheme": [
+          "dark lines on a continuous bright background, instead of bright lines on a dark background ✓",
+          "the dark lines are at the same wavelengths as (some of) the emission lines OR only the lines for transitions starting from the ground state appear, because the cool atoms are almost all in the ground state ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "composition"
+        ],
+        "question": "The same yellow line appears as a dark line in the spectrum of the Sun. State what this tells astronomers.",
+        "marks": 1,
+        "markscheme": [
+          "sodium is present in the Sun (in its outer layers / atmosphere) ✓"
+        ]
       }
     ],
     "review": {
@@ -1120,6 +2179,91 @@
         "markscheme": [
           "No change in the stopping voltage ✓",
           "The maximum kinetic energy of the electrons depends only on the photon energy ($hf$) and the work function; more intense light means more photons per second, so more electrons per second, not more energetic electrons ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "E4-P01",
+    "theme": "E",
+    "topic": "E.4",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "reactor",
+      "calc",
+      "fission",
+      "chain",
+      "debate",
+      "waste"
+    ],
+    "stem": "<p>A small modular nuclear reactor is planned to supply electrical power to a town. It will deliver 80 MW of electrical power with an overall efficiency of 33%. The fuel is enriched in uranium-235. One of the many fission reactions that occur in the reactor is</p>$$^{1}_{0}\\text{n} + {}^{235}_{92}\\text{U} \\rightarrow {}^{140}_{54}\\text{Xe} + {}^{A}_{Z}\\text{X} + 2\\,{}^{1}_{0}\\text{n}$$<p>Each fission frees, on average, 200 MeV of energy.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "fission"
+        ],
+        "question": "Deduce the nucleon number A and the proton number Z of the nuclide X.",
+        "marks": 2,
+        "markscheme": [
+          "nucleon number conserved: $A = 1 + 235 - 140 - 2 = 94$ ✓",
+          "proton number (charge) conserved: $Z = 92 - 54 = 38$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "calc"
+        ],
+        "question": "Estimate the number of fissions per second in the reactor and hence the mass of uranium-235 that undergoes fission each day.",
+        "marks": 3,
+        "markscheme": [
+          "thermal power from fission $= \\dfrac{80\\ \\text{MW}}{33\\%} = 242\\ \\text{MW}$ ✓",
+          "fissions per second $= \\dfrac{242 \\times 10^{6}}{3.20 \\times 10^{-11}} = 7.6 \\times 10^{18}\\ \\text{s}^{-1}$ ✓",
+          "mass per day $= 7.6 \\times 10^{18} \\times 86400 \\times 235 \\times 1.661 \\times 10^{-27} = 0.26\\ \\text{kg day}^{-1}$ ✓",
+          "Accept 0.3 kg from rounded intermediate values. Award [2 max] if the efficiency is not used (electrical power taken as the fission power)."
+        ]
+      },
+      {
+        "label": "c",
+        "sections": [
+          "reactor",
+          "chain"
+        ],
+        "question": "Explain why the reactor needs a moderator.",
+        "marks": 2,
+        "markscheme": [
+          "the neutrons released by fission are fast (have high kinetic energy), and uranium-235 is much more likely to undergo fission when it absorbs a slow (thermal) neutron ✓",
+          "the moderator slows the neutrons, through repeated collisions with its (light) nuclei, so that enough neutrons cause further fissions and the chain reaction is sustained ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "sections": [
+          "reactor"
+        ],
+        "question": "Outline how the control rods are used to keep the power output of the reactor steady.",
+        "marks": 1,
+        "markscheme": [
+          "the rods absorb neutrons, so they are moved further into the core to reduce the number of neutrons available for fission (and withdrawn to increase it) until, on average, one neutron from each fission goes on to cause another ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "debate",
+          "waste"
+        ],
+        "question": "Discuss one advantage and one problem of supplying the town from this reactor rather than by burning fossil fuels.",
+        "marks": 2,
+        "markscheme": [
+          "advantage: no carbon dioxide (greenhouse gas) is released while generating OR only a very small mass of fuel is needed (high energy density, as in (b)) OR a steady supply that does not depend on the weather ✓",
+          "problem: the fission products are highly radioactive and some stay hazardous for thousands of years, so the waste must be stored securely for a very long time OR the risk of an accident releasing radioactive material OR security / proliferation concerns, public acceptance or high cost ✓"
         ]
       }
     ],

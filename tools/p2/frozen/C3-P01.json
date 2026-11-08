@@ -1,0 +1,187 @@
+{
+  "question": {
+    "id": "C3-P01",
+    "theme": "C",
+    "topic": "C.3",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A medical endoscope carries light into and out of a patient's body along a bundle of thin glass optical fibres. Each fibre has a core of refractive index 1.60 surrounded by a cladding of refractive index 1.50. The diagram shows one fibre. A ray of light in air meets the centre of the flat end face of the fibre with an angle of incidence of 25°. The end face is perpendicular to the axis of the fibre.</p>",
+    "diagram": "questions/diagrams/p2-c3-fibre.svg",
+    "diagramAlt": "A horizontal section of optical fibre: a core labelled n = 1.60 between two bands of cladding labelled n = 1.50, with a flat end face on the left. A ray in air comes from the upper left and meets the centre of the end face at 25 degrees to the dashed normal, which lies along the axis of the fibre.",
+    "diagramLarge": true,
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the critical angle for light at the boundary between the core and the cladding.",
+        "marks": 1,
+        "markscheme": [
+          "$\\sin c = \\dfrac{n_2}{n_1} = \\dfrac{1.50}{1.60}$ so $c = 69.6^{\\circ}$ ✓"
+        ],
+        "numeric": {
+          "answer": 69.6359,
+          "unit": "°",
+          "range": [
+            68.9,
+            70.4
+          ],
+          "mistakes": [
+            {
+              "value": 38.6822,
+              "feedback": "The boundary is between the core and the cladding, not between the core and air: use the ratio of the two refractive indices."
+            }
+          ]
+        }
+      },
+      {
+        "label": "b",
+        "question": "Determine whether the ray is totally internally reflected when it first reaches the boundary between the core and the cladding.",
+        "marks": 3,
+        "markscheme": [
+          "$\\sin\\theta_2 = \\dfrac{\\sin 25^{\\circ}}{1.60}$, so the angle of refraction in the core is $15.3^{\\circ}$ ✓",
+          "the angle of incidence at the core–cladding boundary is $90^{\\circ} - 15.3^{\\circ} = 74.7^{\\circ}$ ✓",
+          "$74.7^{\\circ}$ is greater than the critical angle ($69.6^{\\circ}$), so the ray is totally internally reflected / none of the light is refracted into the cladding ✓",
+          "Allow ECF from (a)."
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Sketch the path of the ray along a short length of the fibre, showing two reflections at the boundary between the core and the cladding.",
+        "marks": 2,
+        "markscheme": [
+          "the ray bends towards the normal (towards the axis of the fibre) as it enters the core ✓",
+          "straight segments inside the core, reflected at the boundary with equal angles on the two sides of the normal, and no ray drawn in the cladding ✓",
+          "Note: the examiner's sketch is shown below.<figure><img src=\"questions/diagrams/p2-c3-fibre-ms.svg\" alt=\"Examiner's drawing: the ray refracts towards the axis at the end face, travels in a straight line to the lower core–cladding boundary, reflects up to the upper boundary at an equal angle, reflects again and continues along the core; the angles with the boundary normals are marked 75 degrees.\"></figure>"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "In the bundle the fibres touch each other. Outline why each core is surrounded by a cladding of lower refractive index rather than being left as bare glass.",
+        "marks": 2,
+        "markscheme": [
+          "where bare cores touched each other (or body tissue or fluid), the boundary would be between materials of similar refractive index, so there would be no critical angle (or a much larger one) and light would leak from one fibre into its neighbour ✓",
+          "the cladding keeps a boundary with a lower refractive index all the way along the core, so total internal reflection continues (and it protects the core surface from scratches and dirt, which would scatter light) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "Suggest one reason why optical fibres are well suited to viewing the inside of a patient's body.",
+        "marks": 1,
+        "markscheme": [
+          "Any 1 from:",
+          "the fibres are thin and flexible, so a bundle can be passed along narrow, curved passages in the body ✓",
+          "light (and the image) is carried without any electric current or heating inside the body ✓",
+          "a view inside the body is obtained through a small natural opening or incision, so major surgery can be avoided ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "C.3"
+  ],
+  "given": {
+    "n1": {
+      "value": 1.6,
+      "sf": 3,
+      "unit": "",
+      "range": [
+        1.4,
+        1.9
+      ],
+      "what": "refractive index of the glass core"
+    },
+    "n2": {
+      "value": 1.5,
+      "sf": 3,
+      "unit": "",
+      "range": [
+        1.3,
+        1.8
+      ],
+      "what": "refractive index of the cladding"
+    },
+    "theta": {
+      "value": 25,
+      "sf": 2,
+      "unit": "°",
+      "range": [
+        5,
+        60
+      ],
+      "what": "angle of incidence of the ray in air at the end face"
+    }
+  },
+  "results": {
+    "c": {
+      "value": 69.63586519368219,
+      "unit": "°",
+      "sf": 3
+    },
+    "r": {
+      "value": 15.315644675531857,
+      "unit": "°",
+      "sf": 3
+    },
+    "phi": {
+      "value": 74.68435532446814,
+      "unit": "°",
+      "sf": 3
+    },
+    "wrong_c": {
+      "value": 38.68218745348944,
+      "unit": "°",
+      "sf": 3
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Calculate",
+      "syllabus": [
+        "C.3.4"
+      ],
+      "examinerNote": "Snell's law with the angle of refraction equal to 90°: sin c = n₂/n₁. Using 1/n₁ (glass to air) gives 38.7°, a common error."
+    },
+    {
+      "label": "b",
+      "command": "Determine",
+      "syllabus": [
+        "C.3.4"
+      ],
+      "examinerNote": "Snell's law at the end face, then the geometry: the ray makes 15.3° with the axis, so it meets the side of the core at 90° − 15.3° = 74.7° to the normal there, which exceeds the critical angle. The answer is a reasoned conclusion, so there is no typed number.",
+      "dependsOn": [
+        "a"
+      ]
+    },
+    {
+      "label": "c",
+      "command": "Sketch",
+      "syllabus": [
+        "C.3.2",
+        "C.3.4"
+      ],
+      "examinerNote": "Two features: refraction towards the normal at the end face (the ray in the core is closer to the axis than the ray in air) and a zigzag with equal angles of incidence and reflection that stays in the core."
+    },
+    {
+      "label": "d",
+      "command": "Outline",
+      "syllabus": [
+        "C.3.4"
+      ],
+      "examinerNote": "Total internal reflection needs the second medium to have a lower refractive index at every point of the surface. Glass touching glass of the same index has no boundary, so light crosses between fibres and the image is scrambled."
+    },
+    {
+      "label": "e",
+      "command": "Suggest",
+      "syllabus": [
+        "C.3.4"
+      ],
+      "examinerNote": "Aims 7 and 9: a benefit of the technology. Any sensible, physics-based reason earns the mark; \"it is cheap\" does not."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-c3-fibre.svg": "89bb4824437c3c06bcbd4120929984013e6645a19565591b31ade9c58ccecefe",
+    "questions/diagrams/p2-c3-fibre-ms.svg": "bd1b7cdaa68b5bf86764ed57e4afcce49f0f3d6906a67048f466f023805ffb21"
+  }
+}

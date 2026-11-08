@@ -1,0 +1,217 @@
+{
+  "question": {
+    "id": "B2-P01",
+    "theme": "B",
+    "topic": "B.2",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Venus orbits closer to the Sun than Earth does. At the orbit of Venus, sunlight delivers 2600 $\\text{W m}^{-2}$ to a surface facing the Sun, and the thick clouds of Venus give it an albedo of 0.76. Spacecraft have measured the temperature of the surface of Venus to be 735 K. The atmosphere of Venus is almost entirely carbon dioxide, and the pressure at its surface is about 90 times the pressure at the surface of Earth.</p><p>For comparison, Earth would have an equilibrium temperature of about 255 K if it had no atmosphere; its actual surface temperature is 288 K.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "State what is meant by the albedo of a planet.",
+        "marks": 1,
+        "markscheme": [
+          "the ratio of the total power scattered (reflected) by the planet to the total power incident on it ✓",
+          "Accept \"the fraction of the incoming radiation that is reflected back into space\"."
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Venus is modelled as a black body with no atmosphere. Show that its equilibrium temperature would then be about 230 K.",
+        "marks": 2,
+        "markscheme": [
+          "mean absorbed intensity $= \\dfrac{I(1 - \\alpha)}{4} = \\dfrac{2600 \\times (1 - 0.76)}{4} = 156\\ \\text{W m}^{-2}$ ✓",
+          "$\\sigma T^4 = 156$ so $T = \\left(\\dfrac{156}{5.67 \\times 10^{-8}}\\right)^{1/4} = 229\\ \\text{K}$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Explain why the surface temperature of Venus is so much higher than the temperature in (b).",
+        "marks": 3,
+        "markscheme": [
+          "the surface of Venus radiates mainly infrared radiation, and carbon dioxide molecules absorb infrared photons whose energies match the differences between their (vibrational) molecular energy levels / resonate at those frequencies ✓",
+          "the molecules then re-emit this radiation in all directions, so a large part of it returns to the surface ✓",
+          "the surface receives energy from the atmosphere as well as from the Sun, so it must be at a higher temperature to radiate enough power to balance what it absorbs ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "The surface of Venus has an emissivity of 1. Deduce the ratio of the energy emitted each second by one square metre of the surface at 735 K to the energy that the same square metre would emit each second at the temperature in (b).",
+        "marks": 2,
+        "markscheme": [
+          "energy emitted per second per unit area $= \\sigma T^4$, so ratio $= \\left(\\dfrac{735}{229}\\right)^4$ ✓",
+          "ratio $= 106$ ✓",
+          "Allow ECF from (b); accept 101 to 111 (using 230 K gives 104)."
+        ],
+        "numeric": {
+          "answer": 106.074,
+          "range": [
+            101,
+            111
+          ]
+        }
+      },
+      {
+        "label": "e",
+        "question": "Discuss what the measurements of Venus suggest about the enhanced greenhouse effect on Earth.",
+        "marks": 2,
+        "markscheme": [
+          "Venus shows that a carbon dioxide atmosphere can raise a planet's surface far above its equilibrium temperature (by about 510 K, compared with about 33 K on Earth), so adding carbon dioxide to Earth's atmosphere by burning fossil fuels should be expected to raise Earth's surface temperature ✓",
+          "OR the measurements are evidence that the energy-balance model of the greenhouse effect is correct, because it accounts for a planet other than Earth",
+          "but the atmosphere of Venus is far denser and almost entirely carbon dioxide, so the comparison cannot say how much Earth warms for a given increase in carbon dioxide / Earth will not become like Venus because of human emissions alone ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "B.2",
+    "B.1"
+  ],
+  "given": {
+    "Iv": {
+      "value": 2600,
+      "sf": 3,
+      "unit": "W m^-2",
+      "range": [
+        2400,
+        2800
+      ],
+      "what": "intensity of solar radiation at the orbit of Venus"
+    },
+    "alpha": {
+      "value": 0.76,
+      "sf": 2,
+      "unit": "",
+      "range": [
+        0.6,
+        0.9
+      ],
+      "what": "albedo of Venus"
+    },
+    "Tv": {
+      "value": 735,
+      "sf": 3,
+      "unit": "K",
+      "range": [
+        700,
+        760
+      ],
+      "what": "mean surface temperature of Venus"
+    },
+    "pratio": {
+      "value": 90,
+      "sf": 1,
+      "unit": "",
+      "range": [
+        85,
+        95
+      ],
+      "what": "surface pressure on Venus as a multiple of Earth's"
+    },
+    "TEeq": {
+      "value": 255,
+      "sf": 3,
+      "unit": "K",
+      "range": [
+        250,
+        260
+      ],
+      "what": "equilibrium temperature of Earth with no atmosphere"
+    },
+    "TE": {
+      "value": 288,
+      "sf": 3,
+      "unit": "K",
+      "range": [
+        285,
+        290
+      ],
+      "what": "mean surface temperature of Earth"
+    }
+  },
+  "results": {
+    "Iabs": {
+      "value": 156,
+      "unit": "W m^-2",
+      "sf": 3
+    },
+    "Teq": {
+      "value": 229.02631471360712,
+      "unit": "K",
+      "sf": 3
+    },
+    "ratio": {
+      "value": 106.07372416947112,
+      "unit": "",
+      "sf": 3
+    },
+    "ratio2": {
+      "value": 104.28888212413477,
+      "unit": "",
+      "sf": 3
+    },
+    "dTv": {
+      "value": 505.9736852863929,
+      "unit": "K",
+      "sf": 2
+    },
+    "dTE": {
+      "value": 33,
+      "unit": "K",
+      "sf": 2
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "State",
+      "syllabus": [
+        "B.2.3"
+      ],
+      "examinerNote": "The data-booklet definition: scattered power over incident power. \"Reflectivity\" alone is not enough."
+    },
+    {
+      "label": "b",
+      "command": "Show that",
+      "syllabus": [
+        "B.2.9",
+        "B.2.4"
+      ],
+      "examinerNote": "Energy balance: the planet intercepts I × πR² but radiates from 4πR², so the mean absorbed intensity is I(1 − α)/4, which equals σT⁴ for a black body. Both the factor 4 and the albedo are needed for the first mark."
+    },
+    {
+      "label": "c",
+      "command": "Explain",
+      "syllabus": [
+        "B.2.6",
+        "B.2.7"
+      ],
+      "examinerNote": "The mechanism in the guide's terms (molecular energy levels or the resonance model), re-emission in all directions, and the consequence for the energy balance. \"The atmosphere traps heat\" alone earns nothing."
+    },
+    {
+      "label": "d",
+      "command": "Deduce",
+      "syllabus": [
+        "B.2.2",
+        "B.1.11"
+      ],
+      "examinerNote": "Emissivity 1 means power per unit area = σT⁴; σ cancels in the ratio. The surface radiates about a hundred times more than the sunlight it absorbs, which the atmosphere's back-radiation supplies.",
+      "dependsOn": [
+        "b"
+      ]
+    },
+    {
+      "label": "e",
+      "command": "Discuss",
+      "syllabus": [
+        "B.2.8",
+        "B.2.5"
+      ],
+      "examinerNote": "A balanced answer: one mark for what Venus supports (the greenhouse model, or that more CO₂ means a warmer Earth), one for a limitation of the comparison (the very different amount of CO₂, so it is not a prediction for Earth)."
+    }
+  ],
+  "diagrams": {}
+}

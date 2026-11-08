@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- The inner Solar System to scale: 1 au = 36 px, centred on the Sun at (120, 100).
+       Orbit radii: Mercury 0.39 au = 14 px, Venus 0.72 au = 26 px, Earth 1.00 au = 36 px, Mars 1.52 au = 55 px.
+       The event horizon of a 10^8 solar-mass black hole: r = 2GM/c^2 = 2.95 x 10^8 km = 1.97 au = 71 px. -->
+  <!-- planetary orbits (grey, thin) -->
+  <circle class="l3 thin" cx="120" cy="100" r="14" style="fill:none"/>
+  <circle class="l3 thin" cx="120" cy="100" r="26" style="fill:none"/>
+  <circle class="l1 thin" cx="120" cy="100" r="36" style="fill:none"/>
+  <circle class="l3 thin" cx="120" cy="100" r="55" style="fill:none"/>
+  <!-- the planets as dots on their orbits (not to scale) -->
+  <circle class="f3" cx="130" cy="90" r="1.6"/>
+  <circle class="f3" cx="100" cy="116" r="2"/>
+  <circle class="f1" cx="150" cy="79" r="2.4"/>
+  <circle class="f3" cx="81" cy="61" r="2"/>
+  <!-- the Sun: drawn as a small orange dot; to scale it would be invisible (0.005 au) -->
+  <circle class="f2" cx="120" cy="100" r="3.5"/>
+  <!-- the event horizon of a 100-million-Sun black hole, drawn in orange dashes -->
+  <circle class="l2 dash" cx="120" cy="100" r="71" style="fill:none"/>
+  <!-- labels on the right, with leader lines -->
+  <line class="l1 thin" x1="150" y1="79" x2="232" y2="48"/>
+  <text class="t1" x="238" y="52" style="font-size:14px">Earth's orbit</text>
+  <line class="l3 thin" x1="175" y1="100" x2="232" y2="92"/>
+  <text x="238" y="96" style="font-size:14px">Mars's orbit</text>
+  <line class="l2 thin" x1="170" y1="150" x2="232" y2="150"/>
+  <text class="t2" x="238" y="146" style="font-size:14px">event horizon,</text>
+  <text class="t2" x="238" y="162" style="font-size:14px">10⁸ solar masses</text>
+  <text x="120" y="190" text-anchor="middle" style="font-size:12px">Orbits to scale.</text>
+</svg>

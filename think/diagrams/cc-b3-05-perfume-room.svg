@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- a room seen from the side: an open perfume bottle on a small table at the left, a person standing at the right -->
+  <!-- floor and walls -->
+  <line class="axis" x1="20" y1="180" x2="380" y2="180"/>
+  <line class="axis thin" x1="20" y1="180" x2="20" y2="20"/>
+  <line class="axis thin" x1="380" y1="180" x2="380" y2="20"/>
+  <line class="axis thin" x1="20" y1="20" x2="380" y2="20"/>
+  <!-- table -->
+  <rect class="axis" x="48" y="120" width="80" height="6" style="fill:var(--surface)"/>
+  <line class="axis" x1="56" y1="126" x2="56" y2="180"/>
+  <line class="axis" x1="120" y1="126" x2="120" y2="180"/>
+  <!-- perfume bottle: rounded body, narrow neck, open (no stopper); the stopper lies beside it -->
+  <path class="axis" d="M76 120 V96 Q76 80 88 80 Q100 80 100 96 V120 Z" style="fill:var(--surface)"/>
+  <rect class="area" x="78" y="100" width="20" height="18"/>
+  <rect class="axis" x="84" y="70" width="8" height="10" style="fill:var(--surface)"/>
+  <circle class="axis thin" cx="112" cy="114" r="5" style="fill:var(--surface)"/>
+  <!-- person at the far end -->
+  <circle class="axis" cx="330" cy="72" r="12" style="fill:var(--surface)"/>
+  <line class="axis" x1="330" y1="84" x2="330" y2="134"/>
+  <line class="axis" x1="330" y1="96" x2="312" y2="122"/>
+  <line class="axis" x1="330" y1="96" x2="348" y2="122"/>
+  <line class="axis" x1="330" y1="134" x2="318" y2="180"/>
+  <line class="axis" x1="330" y1="134" x2="342" y2="180"/>
+  <!-- labels -->
+  <text x="88" y="56" text-anchor="middle">open bottle</text>
+  <text x="200" y="166" text-anchor="middle">still air, 5 m</text>
+  <text x="372" y="48" text-anchor="end">smells nothing</text>
+</svg>

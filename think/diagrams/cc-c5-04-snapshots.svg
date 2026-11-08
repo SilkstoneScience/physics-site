@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <text x="110" y="22" text-anchor="middle">sound sent</text>
+  <text x="290" y="22" text-anchor="middle">sound arrives</text>
+  <!-- left: the moment a wavefront leaves the loudspeaker -->
+  <rect class="axis" x="95" y="40" width="30" height="16" style="fill:var(--surface)"/>
+  <polygon class="axis" points="99,56 121,56 129,70 91,70" style="fill:var(--surface)"/>
+  <line class="l3" x1="110" y1="70" x2="110" y2="161"/>
+  <path class="l2" d="M92 78 q18 10 36 0"/>
+  <circle class="axis" cx="110" cy="168" r="7" style="fill:var(--surface)"/>
+  <text class="t1" x="168" y="92" text-anchor="middle">slower</text>
+  <line class="l1" x1="168" y1="100" x2="168" y2="132" marker-end="url(#ah1)"/>
+  <!-- the height the microphone had when the wavefront set off -->
+  <line class="axis thin dash" x1="60" y1="168" x2="350" y2="168"/>
+  <!-- right: 6 ms later the same wavefront reaches the microphone, which has moved down and sped up -->
+  <rect class="axis" x="275" y="62" width="30" height="16" style="fill:var(--surface)"/>
+  <polygon class="axis" points="279,78 301,78 309,92 271,92" style="fill:var(--surface)"/>
+  <line class="l3" x1="290" y1="92" x2="290" y2="183"/>
+  <path class="l2" d="M272 180 q18 10 36 0"/>
+  <circle class="axis" cx="290" cy="190" r="7" style="fill:var(--surface)"/>
+  <text class="t1" x="350" y="102" text-anchor="middle">faster</text>
+  <line class="l1" x1="350" y1="110" x2="350" y2="162" marker-end="url(#ah1)"/>
+  <text x="60" y="226">Movement exaggerated</text>
+</svg>

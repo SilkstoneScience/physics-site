@@ -1,0 +1,278 @@
+{
+  "question": {
+    "id": "B1-P01",
+    "theme": "B",
+    "topic": "B.1",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Heating buildings uses a large share of the energy supplied to homes in cold countries, and much of that energy escapes through the windows. On a cold day a room is heated to 20 °C while the air outside is at −8 °C. The window is a single pane of glass of area 1.8 $\\text{m}^{2}$ and thickness 4.0 mm. Thin layers of almost still air cling to both faces of the glass, so the glass is much cooler than the room: its inside surface is at 5.4 °C and its outside surface is at 4.6 °C. The thermal conductivity of the glass is 1.0 $\\text{W m}^{-1}\\text{ K}^{-1}$.</p>",
+    "diagram": "questions/diagrams/p2-b1-window.svg",
+    "diagramAlt": "Two cross-sections, not to scale. Left: a single pane of glass with the warm room on one side and the cold outside air on the other. Right: a double-glazed unit of two panes of glass with an air gap between them, again with the room on one side and the outside on the other.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the rate at which energy is conducted through the glass.",
+        "marks": 2,
+        "markscheme": [
+          "$\\Delta T = 5.4 - 4.6 = 0.8$ K (a temperature difference is the same in °C and in K) ✓",
+          "$\\dfrac{\\Delta Q}{\\Delta t} = \\dfrac{kA\\Delta T}{\\Delta x} = \\dfrac{1.0 \\times 1.8 \\times 0.8}{4.0 \\times 10^{-3}} = 360\\ \\text{W}$ ✓",
+          "Do not accept the air temperatures (giving $1.3 \\times 10^{4}$ W)."
+        ],
+        "numeric": {
+          "answer": 360,
+          "unit": "W",
+          "range": [
+            349,
+            371
+          ],
+          "mistakes": [
+            {
+              "value": 12600,
+              "feedback": "The temperature difference in the conduction equation is across the glass itself: use the temperatures of its two surfaces, not the air temperatures."
+            }
+          ]
+        }
+      },
+      {
+        "label": "b",
+        "question": "The surface temperatures stay roughly the same throughout a winter day. Estimate, in MJ, the energy transferred through the pane in one day.",
+        "marks": 2,
+        "markscheme": [
+          "$E = P\\Delta t$ with $\\Delta t = 8.64 \\times 10^{4}\\ \\text{s}$ (one day) ✓",
+          "$E = 360 \\times 8.64 \\times 10^{4} = 31\\ \\text{MJ}$ ✓",
+          "Allow ECF from (a); accept 29.5 to 32.7 MJ, or the same value in J."
+        ],
+        "numeric": {
+          "answer": 31.104,
+          "unit": "MJ",
+          "range": [
+            29.5,
+            32.7
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "To reduce the energy loss, the window is replaced by a double-glazed unit: two panes of the same glass separated by a gap of width 12 mm filled with air. Compare the ways in which energy could be transferred across the air gap by conduction and by convection.",
+        "marks": 2,
+        "markscheme": [
+          "conduction: energy is passed on through collisions between neighbouring molecules (faster molecules near the warmer pane transfer kinetic energy to slower ones) with no overall movement of the air ✓",
+          "convection: the air itself moves, because air warmed by the inner pane expands, becomes less dense and rises while cooler, denser air sinks, so a circulating flow of air carries the energy across the gap ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "The thermal conductivity of air is 0.025 $\\text{W m}^{-1}\\text{ K}^{-1}$. Explain why the double-glazed unit loses energy much more slowly than the single pane, for the same room and outside temperatures.",
+        "marks": 3,
+        "markscheme": [
+          "the thermal conductivity of air is about 40 times smaller than that of glass, so for the same temperature difference the rate of conduction through a layer of still air is far smaller than through glass ✓",
+          "the gap is narrow, so the air cannot circulate freely and convection across the gap is largely suppressed / the air stays almost still, so energy must cross it mainly by (poor) conduction ✓",
+          "most of the temperature difference between inside and outside is now across the air gap rather than across the glass, so the rate of energy transfer through the whole unit is much smaller ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "State one benefit to the environment of reducing the rate of energy loss from heated buildings.",
+        "marks": 1,
+        "markscheme": [
+          "less fuel (or electricity generated from fuel) is needed for heating, so less carbon dioxide / greenhouse gas is released, reducing the enhanced greenhouse effect ✓",
+          "Accept less fossil fuel burned, or a reduction in any named pollutant from heating."
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "B.1",
+    "B.2"
+  ],
+  "given": {
+    "Troom": {
+      "value": 20,
+      "sf": 2,
+      "unit": "°C",
+      "range": [
+        15,
+        25
+      ],
+      "what": "air temperature in the room"
+    },
+    "Tout": {
+      "value": -8,
+      "sf": 1,
+      "unit": "°C",
+      "range": [
+        -30,
+        10
+      ],
+      "what": "outside air temperature"
+    },
+    "A": {
+      "value": 1.8,
+      "sf": 2,
+      "unit": "m^2",
+      "range": [
+        0.3,
+        6
+      ],
+      "what": "area of the pane"
+    },
+    "d": {
+      "value": 4,
+      "sf": 2,
+      "unit": "mm",
+      "range": [
+        2,
+        10
+      ],
+      "what": "thickness of the pane"
+    },
+    "Ti": {
+      "value": 5.4,
+      "sf": 2,
+      "unit": "°C",
+      "range": [
+        0,
+        15
+      ],
+      "what": "temperature of the inside surface of the glass"
+    },
+    "To": {
+      "value": 4.6,
+      "sf": 2,
+      "unit": "°C",
+      "range": [
+        -2,
+        15
+      ],
+      "what": "temperature of the outside surface of the glass"
+    },
+    "k": {
+      "value": 1,
+      "sf": 2,
+      "unit": "W m^-1 K^-1",
+      "range": [
+        0.7,
+        1.2
+      ],
+      "what": "thermal conductivity of glass"
+    },
+    "t": {
+      "value": 1,
+      "sf": 1,
+      "unit": "day",
+      "range": [
+        0.5,
+        30
+      ],
+      "what": "time for the energy estimate"
+    },
+    "gap": {
+      "value": 12,
+      "sf": 2,
+      "unit": "mm",
+      "range": [
+        6,
+        20
+      ],
+      "what": "width of the air gap in the double-glazed unit"
+    },
+    "kair": {
+      "value": 0.025,
+      "sf": 2,
+      "unit": "W m^-1 K^-1",
+      "range": [
+        0.02,
+        0.03
+      ],
+      "what": "thermal conductivity of air"
+    }
+  },
+  "results": {
+    "dT": {
+      "value": 0.7999999999999545,
+      "unit": "K",
+      "sf": 1
+    },
+    "P": {
+      "value": 359.99999999997954,
+      "unit": "W",
+      "sf": 2
+    },
+    "tsec": {
+      "value": 86400,
+      "unit": "s",
+      "sf": 3
+    },
+    "E": {
+      "value": 31.10399999999823,
+      "unit": "MJ",
+      "sf": 2
+    },
+    "kratio": {
+      "value": 40,
+      "unit": "",
+      "sf": 2
+    },
+    "wrong_P": {
+      "value": 12600,
+      "unit": "W",
+      "sf": 2
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Calculate",
+      "syllabus": [
+        "B.1.9",
+        "B.1.3"
+      ],
+      "examinerNote": "The data-booklet equation with the temperature difference across the glass (0.8 K) and the thickness in metres. The minus sign only gives the direction. Using the 28 K air-temperature difference is the expected wrong answer."
+    },
+    {
+      "label": "b",
+      "command": "Estimate",
+      "syllabus": [
+        "B.1.9",
+        "T.5"
+      ],
+      "examinerNote": "Energy = power × time, with one day in seconds. An estimate because the temperatures are taken as steady all day.",
+      "dependsOn": [
+        "a"
+      ]
+    },
+    {
+      "label": "c",
+      "command": "Compare",
+      "syllabus": [
+        "B.1.8",
+        "B.1.10"
+      ],
+      "examinerNote": "One mark for each mechanism, each with its defining feature: conduction transfers particle kinetic energy without bulk flow; convection is bulk flow driven by density differences."
+    },
+    {
+      "label": "d",
+      "command": "Explain",
+      "syllabus": [
+        "B.1.9",
+        "B.1.10",
+        "B.1.8"
+      ],
+      "examinerNote": "Three separate ideas: air is a poor conductor; a narrow gap stops convection (which would otherwise bypass the air's low conductivity); the overall temperature gradient is therefore mostly across a poorly conducting layer, giving a small rate of transfer."
+    },
+    {
+      "label": "e",
+      "command": "State",
+      "syllabus": [
+        "B.2.8",
+        "B.2.5"
+      ],
+      "examinerNote": "Aim 9 (environmental impact). Any benefit that links lower energy use to lower emissions or less fuel burned."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-b1-window.svg": "d3877203af2e25aaf6637504ca524f8ac880938e190ed124cd93dbaf4e806941"
+  }
+}

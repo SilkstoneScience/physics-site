@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230">
+  <!-- a globe with its rotation axis; one person on a bathroom scale at the North Pole, another at the equator; no forces drawn -->
+  <!-- rotation axis -->
+  <line class="l3 thin dash" x1="200" y1="4" x2="200" y2="226"/>
+  <!-- globe -->
+  <circle class="axis" cx="200" cy="130" r="80" style="fill:var(--surface)"/>
+  <!-- equator seen in perspective -->
+  <path class="l3 thin" d="M120 130 A80 18 0 0 0 280 130"/>
+  <path class="l3 thin dash" d="M120 130 A80 18 0 0 1 280 130"/>
+  <!-- a spin arrow around the axis -->
+  <path class="l3 thin" d="M226 218 A26 7 0 1 0 213 224.06" marker-end="url(#ah3)"/>
+  <text x="236" y="224" style="font-size:14px">spins once a day</text>
+  <!-- person on a scale at the North Pole -->
+  <rect class="axis" x="188" y="46" width="24" height="5" style="fill:var(--surface)"/>
+  <circle class="axis" cx="200" cy="14" r="5" style="fill:var(--surface)"/>
+  <path class="axis thin" d="M200 19 V34 M200 23 L192 31 M200 23 L208 31 M200 34 L195 46 M200 34 L205 46"/>
+  <!-- person on a scale at the equator, standing outwards -->
+  <rect class="axis" x="280" y="118" width="5" height="24" style="fill:var(--surface)"/>
+  <circle class="axis" cx="317" cy="130" r="5" style="fill:var(--surface)"/>
+  <path class="axis thin" d="M312 130 H297 M308 130 L300 120 M308 130 L300 140 M297 130 L285 125 M297 130 L285 135"/>
+  <path class="axis thin" d="M300 120 L296 118 M300 140 L296 142"/>
+  <text x="178" y="36" text-anchor="end">North Pole</text>
+  <text x="396" y="166" text-anchor="end">equator</text>
+  <text x="112" y="208" text-anchor="end" style="font-size:14px">same scale,</text>
+  <text x="112" y="224" text-anchor="end" style="font-size:14px">two places</text>
+</svg>

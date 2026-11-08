@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 220">
+  <!-- a flat metal washer lies on a tripod over a Bunsen flame; the flame has real colours, so they are hard-coded -->
+  <!-- bench -->
+  <line class="axis" x1="40" y1="204" x2="360" y2="204"/>
+  <!-- Bunsen burner: base, barrel, collar -->
+  <path class="axis" d="M168 204 L178 184 H222 L232 204 Z" style="fill:var(--surface)"/>
+  <rect class="axis" x="192" y="118" width="16" height="66" style="fill:var(--surface)"/>
+  <rect class="axis" x="188" y="166" width="24" height="10" style="fill:var(--surface)"/>
+  <!-- flame: blue cone with a paler inner cone -->
+  <path d="M200 60 C214 84 216 104 200 118 C184 104 186 84 200 60 Z" style="fill:#4a86e8;stroke:none"/>
+  <path d="M200 86 C207 98 208 108 200 116 C192 108 193 98 200 86 Z" style="fill:#9fc5ff;stroke:none"/>
+  <!-- tripod: ring seen edge-on, three legs (one behind) -->
+  <line class="axis" x1="130" y1="62" x2="270" y2="62"/>
+  <line class="axis" x1="138" y1="62" x2="118" y2="204"/>
+  <line class="axis" x1="262" y1="62" x2="282" y2="204"/>
+  <line class="axis thin" x1="200" y1="62" x2="200" y2="40"/>
+  <!-- the washer: shown in perspective lying on the tripod, as a flat ring (ellipses) -->
+  <ellipse class="axis" cx="200" cy="56" rx="60" ry="14" style="fill:var(--surface)"/>
+  <ellipse class="axis" cx="200" cy="56" rx="26" ry="6" style="fill:var(--surface)"/>
+  <!-- the same washer seen from above, at the left, so the hole is clear -->
+  <circle class="axis" cx="60" cy="56" r="38" style="fill:var(--surface)"/>
+  <circle class="axis" cx="60" cy="56" r="16" style="fill:var(--surface)"/>
+  <text x="60" y="118" text-anchor="middle">from above</text>
+  <!-- labels -->
+  <text x="412" y="46" text-anchor="end">metal washer</text>
+  <text x="412" y="150" text-anchor="end">heated evenly</text>
+</svg>

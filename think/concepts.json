@@ -296,6 +296,133 @@
     "tempting": "<p>\"The team that pulls harder\" is the natural answer, and it sounds like Newton's second law. But the rope has one tension, and it pulls both teams equally. A team can only make $T$ larger if the ground can push on their feet just as hard; otherwise they pull themselves forwards.</p><p>\"The stronger team\" is half right. Strength lets a team build up a large tension, but it is weight, boots and the ground that decide whether they can hold it. A strong team on wet grass loses to a heavier team on dry ground.</p><p>\"Newton's third law means it must be a draw\" misreads the law. The third-law pairs (team on rope and rope on team, feet on ground and ground on feet) are always equal, but they act on different bodies. What moves a team is the <em>net</em> force on that team, tension minus friction, and that need not be zero.</p>"
   },
   {
+    "id": "CC-A2-07",
+    "topic": "A.2",
+    "level": "SL",
+    "type": "choice",
+    "title": "Weighing yourself at the equator",
+    "figure": {
+      "svg": "diagrams/cc-a2-07-equator.svg",
+      "alt": "A globe with its rotation axis drawn as a dashed vertical line and a small arrow showing that it spins once a day. One person stands on a bathroom scale at the North Pole, on top of the globe; another stands on the same kind of scale at the equator, on the right-hand side, feet towards the centre of the Earth.",
+      "caption": "The same bathroom scale, used at the North Pole and then at the equator. Not to scale."
+    },
+    "question": "<p>You weigh yourself on an ordinary bathroom scale at the North Pole, then fly to the equator and weigh yourself again on the same scale, at sea level. Treat the Earth as a perfect sphere, so that the pull of gravity on you is the same at both places, and ignore the air. The only difference is that at the equator you are being carried round in a circle once a day. Compared with the reading at the pole, what does the scale read at the equator?</p>",
+    "options": [
+      "More than at the pole",
+      "The same as at the pole",
+      "Less than at the pole"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>Less than at the pole, by a fraction of a per cent: about 0.35 %.</strong> For a 70 kg person the reading drops by about 0.24 kg.</p><p>A bathroom scale does not measure your weight. It measures how hard it has to push up on your feet: the <a href=\"../themes/a2.html#contact\">normal force</a> $F_{\\text{N}}$. At the pole you are on the axis, so you are not moving in a circle, the resultant force on you is zero, and $F_{\\text{N}} = mg$. At the equator you travel round a circle of radius $r = 6.37 \\times 10^6$ m once every 23 h 56 min, so you have a <a href=\"../themes/a2.html#circular\">centripetal acceleration</a> towards the centre of the Earth. The resultant force must point the same way: gravity (inwards) minus the scale's push (outwards) equals $m\\omega^2 r$, so $F_{\\text{N}} = mg - m\\omega^2 r$. The scale pushes <em>less</em> hard than your weight.</p><p>How much less? $\\omega = \\dfrac{2\\pi}{86\\,164\\ \\text{s}} = 7.29 \\times 10^{-5}$ $\\text{s}^{-1}$, so $\\omega^2 r = (7.29 \\times 10^{-5})^2 \\times 6.37 \\times 10^6 = 0.0339$ $\\text{m s}^{-2}$. Compared with $g = 9.8$ $\\text{m s}^{-2}$ that is $0.0339 / 9.8 = 0.35\\,\\%$. The scale reads $m(g - \\omega^2 r)$, so a 70 kg person reads about 69.76 kg: 0.24 kg lighter.</p><p>In reality the drop is larger, about 0.5 %, because the spinning Earth has bulged: the equator is 21 km further from the centre than the poles, which weakens gravity itself there. Measured values of $g$ are about 9.83 $\\text{m s}^{-2}$ at the poles and 9.78 $\\text{m s}^{-2}$ at the equator, and the booklet's 9.8 $\\text{m s}^{-2}$ is a convenient average.</p>",
+    "tempting": "<p>\"The same as at the pole\" comes from thinking the scale reads $mg$, which mixes up two different forces. Weight is the gravitational force on you, $F_{\\text{g}} = mg$; the scale measures the normal force, the push of its surface on your feet. The two are equal only when your acceleration is zero. In a lift that is speeding up or slowing down, or on the spinning Earth, they are not.</p><p>\"More than at the pole\" is the outward-force misconception: the spin seems to press you outwards, harder against the scale. Moving in a circle needs a resultant force <em>towards</em> the centre, and nothing pushes you outwards. Some of gravity's inward pull is used up providing the centripetal acceleration, so less is left to be balanced by the scale, and the scale reads less, not more. The feeling of being \"thrown outwards\" on a roundabout is your body trying to go in a straight line while the roundabout pulls you round.</p>"
+  },
+  {
+    "id": "CC-A2-08",
+    "topic": "A.2",
+    "level": "SL",
+    "type": "choice",
+    "title": "Balloon or submarine?",
+    "figure": {
+      "svg": "diagrams/cc-a2-08-balloon-sub.svg",
+      "alt": "Two scenes side by side. Left: a rigid sphere filled with helium, with a small basket hanging under it, just above the ground in the air. Right: a submarine just below the wavy surface of the sea.",
+      "caption": "Left, the <span class=\"key-1\">rigid helium-filled sphere</span> just after release. Right, the submarine as it starts to sink. Not to scale."
+    },
+    "question": "<p>A lightweight sphere with a thin but completely rigid shell is filled with helium and released. It starts to rise through the air. At the same moment a submarine, which has just let a little extra water into its tanks and so is now slightly denser than the sea water around it, starts to sink. Its steel hull is strong but not perfectly rigid: like any real hull, it is squeezed very slightly as the pressure rises. Neither does anything further to control its motion. Which statement is right?</p>",
+    "options": [
+      "Both keep going until they hit something: the sphere reaches space and the submarine reaches the sea bed",
+      "The sphere levels off at some height and hovers there, but the submarine keeps sinking",
+      "The submarine levels off at some depth and hovers there, but the sphere keeps rising",
+      "Both level off: the sphere at some height, the submarine at some depth"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The sphere stops at some height and hovers; the submarine keeps sinking, and the deeper it goes the stronger the tendency to sink.</strong></p><p>Both objects feel two forces: their weight, and the <a href=\"../themes/a2.html#contact\">buoyancy force</a> $F_{\\text{b}} = \\rho V g$, where $\\rho$ is the density of the fluid they are in and $V$ is the volume of fluid they displace. The weight of each object does not change. What matters is how $\\rho V$ changes as they move, and the two fluids behave very differently.</p><p>Air is a gas and is easily compressed, so the atmosphere is squeezed by its own weight: its density halves roughly every 5.5 km of height. The rigid sphere keeps the same volume, so its buoyancy force falls as it climbs. Near the ground it is larger than the weight, so the sphere rises; higher up, the buoyancy force shrinks until it just equals the weight, and the sphere settles at that height. It is in <a href=\"../themes/a2.html#first\">translational equilibrium</a> there: push it up a little and the thinner air gives a smaller buoyancy force, so it comes back down; push it down and it rises again. (A real party balloon stretches and grows as the outside pressure drops, which is why balloons go much higher, and eventually burst.)</p><p>Water is almost incompressible. Even 1000 m down, where the pressure is about 100 times atmospheric, sea water is only about half a per cent denser than at the surface. Meanwhile the submarine's steel hull <em>is</em> squeezed slightly by the rising pressure, so its volume gets a little smaller as it sinks. Its weight is unchanged, its buoyancy force gets smaller, so the resultant downward force grows: sinking makes it sink more. There is no depth at which it can hover by itself. A real submarine controls its depth with its hydroplanes and by pumping water out of its tanks; left alone below its crush depth, the hull fails.</p>",
+    "tempting": "<p>\"Both level off\" treats air and water as the same kind of fluid. It is right for the air because the density of air changes a lot with height; it fails for water because the density of water hardly changes with depth, while the hull shrinks a little.</p><p>\"The sphere keeps rising into space\" forgets that the buoyancy force depends on the fluid's density. In thinner air, the same sphere displaces less mass of air, so it is pushed up less; at some height the push is no more than its weight.</p><p>\"The submarine levels off\" usually comes from imagining that deep water is much denser, as if it were \"compressed\" by the weight above it. Water resists compression extremely well: that is why hydraulic systems work and why a water-filled pipe transmits pressure almost instantly.</p>"
+  },
+  {
+    "id": "CC-A2-09",
+    "topic": "A.2",
+    "level": "SL",
+    "type": "choice",
+    "title": "Why don't clouds fall?",
+    "figure": {
+      "svg": "diagrams/cc-a2-09-cloud.svg",
+      "alt": "A cumulus cloud with a bumpy top and a flat base above a grassy field. Dashed lines lead from a small circle inside the cloud to a large zoom circle showing a scattering of tiny blue dots, the water droplets.",
+      "caption": "A cumulus cloud over a field. The zoom circle shows the <span class=\"key-1\">liquid water droplets</span> the cloud is made of. Hugely enlarged: the droplets are about a hundredth of a millimetre across."
+    },
+    "question": "<p>A cloud is not water vapour (which is an invisible gas) but a vast swarm of tiny liquid water droplets, each about 10 μm across. Liquid water is about 1000 times denser than air, and a dropped bucket of water certainly falls. So why does a cloud float in the sky for hours?</p>",
+    "options": [
+      "The droplets are so small that they are lighter than air, so the air holds them up",
+      "The droplets are falling, but so slowly that gentle rising air keeps them aloft",
+      "The droplets carry electric charge and are held up by electric forces",
+      "Water vapour weighs nothing, and the droplets are mostly vapour"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>The droplets are falling all the time, but at a tiny terminal speed, and the air in a cloud is usually rising at least as fast.</strong></p><p>Every droplet is denser than air, so its weight is greater than the buoyancy force on it and it accelerates downwards. As it moves, the air exerts a <a href=\"../themes/a2.html#contact\">viscous drag force</a> $F_{\\text{d}} = 6\\pi\\eta r v$ in the opposite direction, growing with speed, until drag plus buoyancy balance the weight. From then on the droplet falls at a steady <a href=\"../themes/a1.html#drag\">terminal speed</a>. The key is how the two forces depend on size. The weight is proportional to the volume, $r^3$; the drag on a tiny slow sphere is proportional only to $r$. Make a drop ten times smaller and its weight falls 1000 times but its drag only 10 times, so it needs a far smaller speed to balance.</p><p>For a droplet of radius 5 μm (diameter 10 μm), setting $6\\pi\\eta r v = \\frac{4}{3}\\pi r^3 \\rho g$ (ignoring the tiny buoyancy force) gives $v = \\dfrac{2 r^2 \\rho g}{9\\eta}$. With $\\rho = 1000$ $\\text{kg m}^{-3}$ and air's viscosity $\\eta = 1.8 \\times 10^{-5}$ Pa s: $v = \\dfrac{2 \\times (5 \\times 10^{-6})^2 \\times 1000 \\times 9.8}{9 \\times 1.8 \\times 10^{-5}} = 3.0 \\times 10^{-3}$ $\\text{m s}^{-1}$. That is 3 mm every second, or about 11 m in an hour. The air inside a growing cumulus cloud rises at anything from 0.1 to 1 $\\text{m s}^{-1}$, so it carries the droplets upwards far faster than they sink through it. The cloud as a whole can even be sinking slowly, and it still looks as if it is floating.</p><p>Rain happens when droplets collide and merge. A raindrop 1 mm across has 100 times the diameter of a cloud droplet, so $100^3 = 10^6$ times the mass: about a million droplets. The simple drag formula no longer applies to a drop that size, but its measured terminal speed is about 4 $\\text{m s}^{-1}$, far more than any updraught can hold up, and it falls out of the cloud. The flat base of a cumulus cloud is the height at which rising, cooling air first becomes cold enough for its vapour to condense; any droplet that sinks below it evaporates back into the warmer, drier air, which is why the bottom edge is so sharp.</p>",
+    "tempting": "<p>\"The droplets are lighter than air\" confuses small with light. Density does not depend on size: a 10 μm droplet of water is still about 800 times denser than the air around it, so its weight beats the buoyancy force by a factor of about 800. Only the drag can hold it up, and drag needs motion.</p><p>\"Water vapour weighs nothing\" is doubly wrong: vapour is an invisible gas (if you can see it, it is droplets), and a gas has mass just like anything else. Humid air is in fact slightly <em>less</em> dense than dry air, because a water molecule (18 u) is lighter than the nitrogen and oxygen molecules it replaces, but that helps the moist air rise, not the droplets.</p><p>Electric forces do act on charged droplets, especially in thunderclouds, but they are not what keeps an ordinary cloud up: a fair-weather cloud with almost no charge floats just the same.</p>"
+  },
+  {
+    "id": "CC-A2-10",
+    "topic": "A.2",
+    "level": "SL",
+    "type": "open",
+    "title": "Galileo's two stones",
+    "figure": {
+      "svg": "diagrams/cc-a2-10-stones.svg",
+      "alt": "A large angular stone and a much smaller stone, joined by a short cord, in mid-air above the ground. No arrows are drawn.",
+      "caption": "A heavy stone and a light stone, tied together with a short cord, released together in a vacuum."
+    },
+    "question": "<p>Here is an argument, four centuries old, in our own words. Suppose heavier objects fall faster than lighter ones, as most people once believed. Tie a light stone to a heavy one with a short cord and drop the pair in a vacuum. The light stone, falling more slowly, should drag on the cord and hold the heavy stone back, so the pair falls more slowly than the heavy stone alone. But the pair together is heavier than the heavy stone, so it should fall <em>faster</em> than the heavy stone alone. One assumption, two contradictory conclusions: so the assumption is false, and all objects must fall at the same rate. No experiment needed. Decide for yourself: is this a proof? What is the argument quietly assuming?</p>",
+    "reveal": "<p><strong>It is a beautiful argument, but not a proof. It quietly assumes that the property which makes an object heavy is the same property that makes it hard to accelerate, and only experiment can tell us that.</strong></p><p>Two different things are called \"mass\". One is the mass a balance measures: how strongly gravity pulls on an object, so that its weight is $F_{\\text{g}} = mg$ (<a href=\"../themes/a2.html#field\">gravitational mass</a>). The other is the $m$ in <a href=\"../themes/a2.html#second\">Newton's second law</a>, $F = ma$: how much an object resists being accelerated (inertial mass). A falling object's acceleration is the gravitational force divided by the inertial mass, $a = \\dfrac{m_{\\text{grav}}\\, g}{m_{\\text{inert}}}$, and this is the same for every object only if the two masses are proportional to each other. The two-stones argument assumes they are. If, say, lead had a larger ratio of gravitational to inertial mass than granite, lead would fall faster, and tying stones together would simply give the pair a ratio somewhere in between: no contradiction at all. The argument would then collapse, and nature would be perfectly consistent.</p><p>So the real content of \"everything falls at the same rate\" is an experimental fact: the two masses are equal. It has been tested with growing precision, from Eötvös's torsion-balance experiments in the 1890s (about 1 part in $10^8$) to the MICROSCOPE satellite (2016–2022), which compared the fall of titanium and platinum test masses in orbit and found no difference to better than 1 part in $10^{14}$. Einstein made this equivalence the foundation of general relativity. In the guide's terms: $g = \\dfrac{F_{\\text{g}}}{m}$ is both the gravitational field strength and the acceleration of free fall, and that double meaning works only because the two kinds of mass agree.</p><p>What the argument <em>does</em> show is something about logic, not about the world: a universe in which heavier things fall faster would have to be one with two different kinds of mass, where tying stones together does not simply add their fall rates. Galileo was right about the answer, and a thought experiment was the perfect way to make the old view look suspicious. But thought experiments sharpen questions; it takes measurements to settle them.</p>",
+    "tempting": "<p>\"It's obviously a proof: the contradiction is airtight\" is the most common reaction. The contradiction only appears if you have already assumed that \"heavier\" (a bigger gravitational pull) must mean \"harder to accelerate\" (a bigger inertia) in exactly the same proportion. That is the very thing in question.</p><p>\"The flaw is air resistance\" misses the point: the argument is about a vacuum, and in a vacuum a hammer and a feather really do land together, as the Apollo 15 astronauts showed on the Moon in 1971. Air resistance explains why feathers fall slowly on Earth; it has nothing to do with whether the argument is logically a proof.</p><p>\"The cord changes things: it is a different object now\" is closer to the mark but gets it backwards. The argument deliberately treats the pair both as two objects and as one, and asks for the same answer either way. Nature does give the same answer, which is a deep fact about mass, not about cords.</p>"
+  },
+  {
+    "id": "CC-A2-11",
+    "topic": "A.2",
+    "level": "SL",
+    "type": "choice",
+    "title": "Sliding off the igloo",
+    "figure": {
+      "svg": "diagrams/cc-a2-11-igloo.svg",
+      "alt": "A hemispherical igloo built of snow blocks, with a low entrance tunnel at the left, standing on snowy ground. A small child sits at the very top of the dome.",
+      "caption": "The igloo's roof is a smooth hemisphere. The child starts at the top, at rest. Not to scale."
+    },
+    "question": "<p>A child sits on the very top of a smooth, hemispherical igloo and is given the tiniest nudge, so they start sliding down the curved roof from rest. Friction and air resistance are negligible. Where do they lose contact with the roof?</p>",
+    "options": [
+      "At the very top, the moment they start to move",
+      "Part-way down, at the same place for every child",
+      "Part-way down, higher up for a heavier child",
+      "At the bottom edge, where the roof meets the ground"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>Part-way down, when they have dropped one third of the igloo's radius, at about 48° from the vertical: the same place for everyone.</strong></p><p>While the child is on the roof, they move along a circle of radius $R$ (the igloo's radius), so the resultant force on them must have a component $\\dfrac{mv^2}{R}$ towards the centre of the dome. Two forces act: their weight $mg$, straight down, and the <a href=\"../themes/a2.html#contact\">normal force</a> $F_{\\text{N}}$ from the roof, which points <em>outwards</em> along the radius. A surface can push but never pull. At the top the child is barely moving, so almost no inward force is needed: the roof pushes up with nearly their full weight. As they speed up, more inward force is needed, and at the same time they move round the curve, so the inward component of their weight, $mg\\cos\\theta$ (where $\\theta$ is the angle from the vertical), gets smaller. The roof pushes less and less. When the inward force needed is exactly the inward component of the weight, $F_{\\text{N}}$ has reached zero; a moment later the roof would have to <em>pull</em> to keep them on the circle, which it cannot do, so they fly off as a projectile.</p><p>Finding the place takes two lines, slightly beyond what exams ask (the guide only asks for forces at the top and bottom of a vertical circle). Energy: sliding from the top to angle $\\theta$ the child drops a height $R - R\\cos\\theta$, so $v^2 = 2gR(1 - \\cos\\theta)$. Circular motion at the moment of leaving, with $F_{\\text{N}} = 0$: $mg\\cos\\theta = \\dfrac{mv^2}{R} = 2mg(1 - \\cos\\theta)$, so $3\\cos\\theta = 2$ and $\\cos\\theta = \\dfrac{2}{3}$, giving $\\theta = 48.2°$. The height lost is $R(1 - \\frac{2}{3}) = \\dfrac{R}{3}$. The mass cancelled, $R$ cancelled from the angle, and so did $g$: a heavy adult, a light child, a huge igloo or the same igloo on the Moon all leave at 48° from the vertical. On a 2.0 m igloo the child leaves at $v = \\sqrt{2gR/3} = \\sqrt{2 \\times 9.8 \\times 2.0 / 3} = 3.6$ $\\text{m s}^{-1}$, about 0.67 m below the top, and then follows a parabola to the ground.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-a2-11-forces.svg",
+      "alt": "The dome with a dashed radius drawn from its centre to a point 48 degrees from the vertical, where the child is shown as a dot. A blue arrow points straight down from the dot, labelled weight. A short orange arrow points outwards along the radius, labelled normal force. A dashed level line shows the point is one third of the radius below the top.",
+      "caption": "At the leaving point the <span class=\"key-1\">weight</span> alone provides the inward force $mv^2/R$, so the <span class=\"key-2\">normal force</span> has fallen to zero. It happens one third of a radius below the top, for any mass."
+    },
+    "tempting": "<p>\"Immediately, because the top is only a point\" imagines the child balanced on a pin. But the roof is a smooth curve, and at the top it is horizontal: the child is barely moving, needs almost no inward force, and is pressed onto the roof by nearly their whole weight. They stay firmly in contact and slide.</p><p>\"At the bottom edge\" is how a slide works, but a slide curves the other way (concave, like the inside of a bowl), so the surface pushes <em>inwards</em> and can supply as much centripetal force as needed. On the outside of a dome the surface can only push outwards, so beyond a certain speed there is nothing to hold the child on the curve.</p><p>\"Higher up for a heavier child\" is tempting because a heavy child needs a bigger inward force. But the inward component of their weight is bigger in the same proportion: both sides of $mg\\cos\\theta = mv^2/R$ contain $m$, so it cancels, just as it does for the acceleration of free fall.</p>"
+  },
+  {
+    "id": "CC-A2-12",
+    "topic": "A.2",
+    "level": "SL",
+    "type": "open",
+    "title": "Stranded on the ice",
+    "figure": {
+      "svg": "diagrams/cc-a2-12-ice.svg",
+      "alt": "A person wearing a backpack stands alone in the middle of a wide flat frozen lake. The shore, with a low bank and a few fir trees, is far away to the right.",
+      "caption": "Standing on ice with no friction at all, a long way from the shore. Not to scale."
+    },
+    "question": "<p>You are standing in the middle of a frozen lake, a long way from the shore, wearing a heavy backpack. Imagine the ice is <em>perfectly</em> frictionless: no friction at all, however you move your feet. Walking is impossible: your shoes simply slide on the spot, and you cannot even fall over properly because your feet have nothing to grip. Nothing on the ice can be pulled or pushed against. Decide how you would reach the shore, then reveal.</p>",
+    "reveal": "<p><strong>Throw the backpack as hard as you can, directly away from the shore. You slide towards the shore, and with no friction you keep sliding until you get there.</strong></p><p>Before the throw, you and the pack are at rest, so the total horizontal <a href=\"../themes/a2.html#momentum\">momentum</a> of the system is zero. The throw is an interaction between you and the pack: in the guide's language, an <a href=\"../themes/a2.html#conservation\">explosion</a>, in which internal forces separate two bodies. Horizontally there is no resultant external force on the system (the ice cannot exert a horizontal force on you; that is what frictionless means), so the total horizontal momentum stays zero. If the pack goes one way with momentum $m_{\\text{p}} v_{\\text{p}}$, you go the other way with exactly the same momentum: $m_{\\text{you}} v_{\\text{you}} = m_{\\text{p}} v_{\\text{p}}$.</p><p>Suppose you have a mass of 60 kg and throw an 8.0 kg pack at 6.0 $\\text{m s}^{-1}$. Then $v_{\\text{you}} = \\dfrac{8.0 \\times 6.0}{60} = 0.80$ $\\text{m s}^{-1}$. Slow, but with no friction nothing slows you down, so 50 m of ice takes 50 ÷ 0.80 ≈ 60 s: about a minute. Throw horizontally: the vertical part of a throw is fought by the ice's normal force and does nothing for you. If you want to go faster, throw harder, or throw the heavy things first and the light things afterwards, each one adding a bit more speed. The same physics launches rockets, which throw hot gas backwards and have nothing to push against either.</p><p>Why does nothing else work? Walking, crawling and \"swimming\" along the ice all rely on the ground pushing you forwards in reaction to your pushing it backwards, and a frictionless surface cannot push you sideways at all. Leaning, waving your arms, rocking back and forth or lunging move parts of your body relative to other parts, but these are internal forces: your centre of mass does not move, and the moment you stop, every part of you stops too. The one thing that moves your centre of mass is giving some mass momentum and letting it go. In principle even blowing air hard counts, since you are throwing air molecules, but the mass is so small that the shore would be a very long way off.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-a2-12-momentum.svg",
+      "alt": "The same frozen lake just after the throw. The backpack flies to the left with an orange arrow pointing away from the shore, labelled pack, fast. The person slides to the right with a blue arrow of the same length pointing towards the shore, labelled you, slowly.",
+      "caption": "The <span class=\"key-2\">pack's momentum</span> away from the shore equals <span class=\"key-1\">your momentum</span> towards it. Equal momentum, but your larger mass means a smaller speed."
+    },
+    "tempting": "<p>\"Swim through the air\" feels possible because swimming works in water. It works there because water is dense enough to push back on your hands with a useful force; air pushes back about 800 times less for the same stroke, and your arm coming forward again undoes most of it. You would get somewhere, but much too slowly, and only by pushing air backwards, which is the same idea as throwing the pack, done badly.</p><p>\"Rock back and forth, or lean towards the shore\" moves your body relative to itself. The forces involved are all internal to the system, so they cannot change the total momentum, and your centre of mass stays put; lean forwards and your feet slide backwards to compensate.</p><p>\"Crawl\" or \"take off your shoes and go in socks\" both still rely on friction with the ice. With zero friction there is nothing for hands, knees or socks to grip. On real ice there is always a little friction, which is why skaters can push off; the puzzle asks what happens when that last bit is taken away.</p>"
+  },
+  {
     "id": "CC-A3-01",
     "topic": "A.3",
     "level": "SL",
@@ -439,6 +566,28 @@
     "tempting": "<p>\"Balanced\" sounds like \"the same amount on each side\". That is only true for a symmetrical object. Think of a see-saw: a heavy adult sitting close to the pivot balances a light child sitting far from it. The bat's two pieces are the adult and the child.</p><p>The handle piece is tempting because it is much longer, but length isn't mass: most of the handle piece is thin.</p>"
   },
   {
+    "id": "CC-A4-04",
+    "topic": "A.4",
+    "level": "HL",
+    "type": "choice",
+    "title": "Changing the length of the day",
+    "figure": {
+      "svg": "diagrams/cc-a4-04-road.svg",
+      "alt": "Left: the Earth with its rotation axis drawn as a dashed line and a curved arrow at the top showing its spin; a blue line marks the latitude of a road. Right: a two-lane road seen from above, with west on the left, east on the right and north upwards. A car in the northern lane heads west and a car in the southern lane heads east.",
+      "caption": "Left: the Earth spins from west to east about its axis. Right: an east–west road at about 55° N seen from above, after the switch to driving on the right. Not to scale."
+    },
+    "question": "<p>In 1967 Sweden switched overnight from driving on the left to driving on the right. Someone claims that a change like this alters the length of the day: on an east–west road, drivers on the right put eastbound traffic in the southern lane, a few metres nearer the equator than before, and the cars' motion affects the Earth's spin. Treat the Earth and everything on it as an isolated system (ignore the Moon and the Sun) and treat traffic as it really is: people drive somewhere and later drive back. What happens to the length of the day?</p>",
+    "options": [
+      "The day gets permanently longer",
+      "The day gets permanently shorter",
+      "It changes very slightly while cars move, but there is no lasting change",
+      "Cars are far too small to affect the Earth's spin, even in principle"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>The Earth's spin changes while cars are moving, but every journey is a round trip, so there is no lasting change.</strong></p><p>The Earth and the cars form a system with no external torque about the Earth's axis, so their total angular momentum about that axis is conserved. A car at rest on the road already shares the Earth's rotation. When it drives <em>eastwards</em>, the same way the Earth turns, it gains angular momentum, so the Earth must lose exactly that amount: it turns a little more slowly, and the day is a little longer, for as long as the car is moving. A car driving <em>westwards</em> does the opposite. When either car brakes to a stop, friction between tyres and road hands the angular momentum back and the Earth is spinning exactly as before. Which lane the car used, and how far from the equator it was, makes no difference once it has stopped.</p><p>What about a car that drives east and parks? While it was moving the day was fractionally longer; once parked it has given everything back. Driving home again, westwards, shortens the day fractionally during the trip and again leaves no trace afterwards. So traffic produces only a tiny, flickering change while cars are on the move, with nothing left over, and which side of the road they use does not matter.</p><p>How tiny? Take a 1500 kg car at 20 $\\text{m s}^{-1}$ at latitude 55°. Its distance from the Earth's axis is $r = 6.37 \\times 10^{6} \\cos 55° = 3.65 \\times 10^{6}$ m, so its angular momentum about the axis from its motion along the road is $L = mvr = 1500 \\times 20 \\times 3.65 \\times 10^{6} = 1.1 \\times 10^{11}$ $\\text{kg m}^2\\text{ s}^{-1}$. The Earth's moment of inertia is about $0.33MR^2$ (less than a uniform sphere's $0.4MR^2$, because the core is dense): $I = 0.33 \\times 5.97 \\times 10^{24} \\times (6.37 \\times 10^{6})^2 = 8.0 \\times 10^{37}$ $\\text{kg m}^2$, and with $\\omega = \\dfrac{2\\pi}{86\\,164\\text{ s}} = 7.29 \\times 10^{-5}$ $\\text{rad s}^{-1}$ its angular momentum is $L = I\\omega = 5.8 \\times 10^{33}$ $\\text{kg m}^2\\text{ s}^{-1}$. One moving car therefore changes the Earth's angular speed by about $1.9 \\times 10^{-23}$ of itself: the day changes by $86\\,400 \\times 1.9 \\times 10^{-23} \\approx 1.6 \\times 10^{-18}$ s while it drives. A million cars all heading east at once would make it about $10^{-12}$ s: a millionth of a millionth of a second. Real but utterly unmeasurable, and gone again when they stop.</p><p>Angular momentum <em>can</em> be moved around the Earth for good: when water piles up behind a new dam or ice melts and spreads into the oceans, mass moves closer to or further from the axis and the day really does change, by microseconds. Cars just drive home.</p>",
+    "tempting": "<p>\"Longer\" and \"shorter\" both come from following the lane argument carefully (eastbound traffic a few metres nearer the equator) without noticing that it only describes cars <em>while they move</em>. Traffic is a stream of return journeys, so every eastward gain is cancelled by a westward loss, and in any case the moment a car stops, the Earth has its angular momentum back.</p><p>\"Too small to affect the Earth at all\" confuses <em>immeasurably small</em> with <em>zero</em>. Conservation of angular momentum applies to every interaction: the Earth really does slow by about $10^{-18}$ s per day while a car drives east. Physics does not have a size limit below which conservation laws switch off.</p>"
+  },
+  {
     "id": "CC-A5-01",
     "topic": "A.5",
     "level": "HL",
@@ -473,6 +622,50 @@
     "answer": 1,
     "reveal": "<p>Einstein's second postulate: the speed of light in a vacuum is the <strong>same for all inertial observers</strong>, $c$, however fast the source or the observer is moving. So the Earth observer also measures $c$.</p><p>Relativistic velocity addition agrees. Let the Earth be frame S and the ship be frame S′, moving at $v = 0.6c$. If the Earth observer measures $u = c$, then the crew measure $u' = \\dfrac{u - v}{1 - \\dfrac{uv}{c^2}} = \\dfrac{c - 0.6c}{1 - 0.6} = \\dfrac{0.4c}{0.4} = c$, just as they found. The motion of the source changes the light's frequency and wavelength (the Doppler effect), but not its speed.</p>",
     "tempting": "<p>$1.6c$ comes from Galilean velocity addition, $u = u' + v$, which works very well for trains and cars but fails close to $c$. $0.4c$ is tempting because in the Earth's frame, the gap between the ship and the front of its beam does grow at $c - 0.6c = 0.4c$. But that is the rate at which two things separate, measured in one frame, not the speed of the light. Experiments agree with the postulate: in 1964, gamma rays given out by particles moving at more than $0.99c$ were measured at CERN to travel at $c$.</p><p>The last option mixes up speed with frequency: whether the ship is moving towards or away from the Earth changes the light's colour (the Doppler effect), not its speed.</p>"
+  },
+  {
+    "id": "CC-A5-03",
+    "topic": "A.5",
+    "level": "HL",
+    "type": "choice",
+    "title": "Two torches, back to back",
+    "figure": {
+      "svg": "diagrams/cc-a5-03-torches.svg",
+      "alt": "A person stands still holding two torches at arm's length, one pointing left and one pointing right. A beam of light spreads out from each torch in opposite directions.",
+      "caption": "The two <span class=\"key-2\">beams</span> leave the torches at the same instant. Not to scale."
+    },
+    "question": "<p>You stand still and switch on two torches at the same instant, one pointing left and one pointing right, so two light fronts set off in opposite directions. In your frame, how far apart are the two light fronts after one second? And how fast does each light front measure the other one moving away from it?</p>",
+    "options": [
+      "300 000 km apart, because nothing can separate faster than $c$; each light front measures the other moving away at $c$",
+      "600 000 km apart; each light front measures the other moving away at $2c$",
+      "600 000 km apart; each light front measures the other moving away at $c$",
+      "600 000 km apart; the second question has no answer, because no observer can travel with light"
+    ],
+    "answer": 3,
+    "reveal": "<p><strong>600 000 km apart, and the second question has no answer.</strong></p><p>In your frame each light front travels at $c = 3.00 \\times 10^{8}$ $\\text{m s}^{-1}$, one to the left and one to the right, so after 1 s each is 300 000 km from you and they are 600 000 km apart. The gap between them grows at $2c$. That breaks no rule: the speed limit of special relativity applies to the speed of a <em>thing</em> measured in an inertial frame, and here each thing is moving at exactly $c$. The rate at which a <em>gap</em> between two things grows is not the speed of anything, so it can be anything up to $2c$.</p><p>The second question is a trap. To ask what a light front \"measures\" is to ask for a reference frame in which that light is at rest. There is none: the second postulate says light moves at $c$ in <em>every</em> inertial frame, so no inertial frame can ever catch it up and sit beside it. The Lorentz factor $\\gamma = \\dfrac{1}{\\sqrt{1 - v^2/c^2}}$ would have to be infinite. So neither light front has a point of view, and the question simply does not apply.</p><p>Here is the version that <em>does</em> have an answer. Replace the light fronts with two spaceships leaving you at $0.9c$ in opposite directions. In your frame the gap between them grows at $1.8c$: still fine, because it is a gap, not a ship. But the relative velocity of one ship measured <em>by the other</em> comes from the relativistic velocity addition equation, $u' = \\dfrac{u - v}{1 - \\dfrac{uv}{c^2}}$, with $u = 0.9c$ for the right-hand ship and $v = -0.9c$ for the frame of the left-hand ship: $u' = \\dfrac{0.9c + 0.9c}{1 + 0.81} = \\dfrac{1.8c}{1.81} = 0.994c$. Each ship measures the other moving away at $0.994c$, below $c$ as it must be. The nearer the ships get to $c$, the nearer this result gets to $c$; it never reaches it.</p>",
+    "tempting": "<p>\"300 000 km, because nothing can separate faster than $c$\" misapplies the speed limit to a separation. In one frame you simply add up what each light front did: 300 000 km each way. Nothing in relativity stops two objects being 600 000 km apart after one second.</p><p>\"Each measures the other at $2c$\" is Galilean velocity addition, $u' = u - v$, which fails near $c$. For two spaceships the relativistic equation gives $0.994c$, not $1.8c$.</p><p>\"Each measures the other at $c$\" sounds like the second postulate at work, and would be right if the question were about a spaceship measuring the speed of the <em>light</em>. But it asks what the light itself measures, and light has no frame in which to measure anything. Spotting a question that has no answer is part of understanding the postulates.</p>"
+  },
+  {
+    "id": "CC-A5-04",
+    "topic": "A.5",
+    "level": "HL",
+    "type": "choice",
+    "title": "The plank and the drill",
+    "figure": {
+      "svg": "diagrams/cc-a5-04-drill.svg",
+      "alt": "Two panels. Top, labelled 'Drill's frame': a drill at rest with its 10 cm bit pointing right, and a thin plank, 8.7 cm thick, flying towards it at 0.9c. Bottom, labelled 'Plank's frame': a plank 20 cm thick at rest, and a squashed drill with a 4.4 cm bit flying towards it at 0.9c.",
+      "caption": "The same event seen from the two frames. In the <span class=\"key-1\">drill's frame</span> (top) the plank is thinner than the bit is long; in the plank's frame (bottom) the bit is much shorter than the plank is thick. Drawn to the same scale."
+    },
+    "question": "<p>A drill bit is 10 cm long. A plank is 20 cm thick. The drill is held still with its bit pointing along a track, and the plank is fired along the track at $0.9c$, face first, so that the plank's own motion drives the bit into it (assume the bit cuts freely and does not break). In the drill's frame the moving plank is length-contracted to $\\dfrac{20}{\\gamma} = 8.7$ cm, thinner than the bit, so the tip of the bit pokes out of the plank's far face before the plank reaches the drill's body, and at that instant the drill is flicked sideways out of the plank's path. In the plank's frame, however, the plank is 20 cm thick and it is the <em>drill</em> that is contracted, to 4.4 cm, far shorter than the plank is thick. Is there a hole right through the plank?</p>",
+    "options": [
+      "Yes: the hole goes right through in both frames",
+      "The hole goes right through in the drill's frame, but in the plank's frame it is only 4.4 cm deep",
+      "A hole cannot go right through in one frame and only part-way in another, so the set-up is impossible: relativity forbids it",
+      "In the plank's frame the short bit would snap, so the hole goes through only in the drill's frame"
+    ],
+    "answer": 0,
+    "reveal": "<p><strong>The hole goes right through in both frames.</strong> Whether the plank has a hole in it is a fact about events (the tip of the bit passing each face of the plank), and events happen in every frame. Observers disagree about <em>when</em> and <em>in what order</em> things happen, never about <em>whether</em> they happen.</p><p>In the drill's frame the story is easy: a plank only 8.7 cm thick slides over a 10 cm bit, the tip emerges from the far face, and the drill is flicked aside with 1.3 cm to spare. Hole.</p><p>In the plank's frame the plank sits still, 20 cm thick, and a 4.4 cm bit arrives at $0.9c$. A short bit can still make a long hole, just as a short bullet goes right through a thick wall: the tip enters the front face and keeps moving at $0.9c$ until it comes out of the back face, 20 cm later. The puzzle is the drill's body, which is now only 4.4 cm behind the tip. Doesn't it hit the plank long before the tip gets through? Here the <strong>relativity of simultaneity</strong> does the work. \"Flick the whole drill sideways\" happens at one instant <em>in the drill's frame</em>, but the drill's body and the bit's tip are in different places, so in the plank's frame those two flicks are <em>not</em> simultaneous: the body is flicked aside first, while it is still about 3 cm short of the plank, and the tip is flicked only after it has travelled another 18.6 cm and emerged from the back face. For that moment, in the plank's frame, the drill is bent: its body has moved aside while its tip is still boring through the wood. Nothing is rigid in relativity, because no part of an object can find out what another part is doing faster than light.</p><p>Two numbers to check: $\\gamma = \\dfrac{1}{\\sqrt{1 - 0.9^2}} = 2.29$, so $L = \\dfrac{L_0}{\\gamma}$ gives $20/2.29 = 8.7$ cm for the plank in the drill's frame and $10/2.29 = 4.4$ cm for the drill in the plank's frame. The two \"flick\" events are 10 cm apart in the drill's frame and happen together there, so the Lorentz transformation $t' = \\gamma\\left(t - \\dfrac{vx}{c^2}\\right)$ puts them $\\gamma \\times 0.9 \\times 10 = 20.6$ cm of light-travel time apart in the plank's frame, during which the tip, at $0.9c$, covers $0.9 \\times 20.6 = 18.6$ cm. This is the pole-and-barn paradox (a long pole that fits inside a short barn in one frame but not the other) with a twist, and it is resolved the same way: both frames agree on every event, and only their ordering in time differs.</p>",
+    "tempting": "<p>\"Only 4.4 cm deep in the plank's frame\" treats the contracted drill as if it were stationary: a 4.4 cm bit pushed gently into a plank would stop at 4.4 cm. But in the plank's frame the bit is <em>moving</em> at $0.9c$; its tip goes wherever its motion carries it, right out of the far side.</p><p>\"Relativity forbids it\" is the right instinct applied to the wrong thing. Relativity does forbid a hole that exists in one frame and not in another, because the hole is made of events. It therefore <em>requires</em> the plank's frame to find a way for the hole to go through, and the relativity of simultaneity provides it. A set-up that seems to give two frames different facts is a sign that you have assumed something is simultaneous, or rigid, when it is not.</p><p>\"The short bit would snap\" imagines length contraction as a physical squashing that strains the material. It is not: the drill is at rest in its own frame and perfectly comfortable. Its length in another frame is a different measurement, not a different drill.</p>"
   },
   {
     "id": "CC-B1-01",
@@ -610,6 +803,54 @@
     "tempting": "<p>\"There is no gravity, so there is no flame\" is wrong twice over. Gravity in low orbit is only about 10% weaker than at the surface; the module and everything in it are in free fall, which is why things float. And a flame needs fuel, oxygen and heat, not gravity: the candle lights perfectly well.</p><p>\"The flame is the same\" ignores how much of a flame's familiar look depends on hot gas rising. Take away convection and the shape, colour, brightness and burning rate all change.</p><p>\"It goes out at once\" is too quick. The flame burns steadily, if slowly, for as long as diffusion brings enough oxygen to the wick; candles on Mir burned for many minutes, some for about three-quarters of an hour, before fading.</p>"
   },
   {
+    "id": "CC-B1-08",
+    "topic": "B.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "Ice meets boiling water",
+    "figure": {
+      "svg": "diagrams/cc-b1-08-ice-jug.svg",
+      "alt": "A tilted jug of steaming water pours into an open box with thick insulated walls. Inside the box are several ice cubes. Labels: 1 kg water at 100 °C, 1 kg ice at 0 °C, insulated box.",
+      "caption": "The hot water is poured onto the ice and the box is closed. Not to scale."
+    },
+    "question": "<p>1.0 kg of ice at 0 °C is put in a well-insulated box, and 1.0 kg of water at 100 °C is poured over it. The box is closed and left until everything inside is at one temperature. No energy is transferred to or from the box or the surroundings. The specific heat capacity of water is 4200 $\\text{J kg}^{-1}\\text{ K}^{-1}$ and the specific latent heat of fusion of ice is $3.34 \\times 10^5$ $\\text{J kg}^{-1}$. What is the final temperature?</p>",
+    "options": [
+      "0 °C, with some ice left",
+      "About 10 °C",
+      "About 25 °C",
+      "50 °C"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>About 10 °C.</strong> Melting the ice swallows most of the hot water's energy before any warming can start.</p><p>First check that all the ice melts. Melting 1.0 kg of ice needs $Q = mL = 1.0 \\times 3.34 \\times 10^5 = 3.34 \\times 10^5$ J. The hot water can give up $Q = mc\\Delta T = 1.0 \\times 4200 \\times 100 = 4.2 \\times 10^5$ J before it reaches 0 °C, which is more than enough, so the ice does all melt and the final temperature is above 0 °C.</p><p>Now find it. Melting the ice cools the hot water by $\\Delta T = \\dfrac{3.34 \\times 10^5}{4200} = 79.5$ K, to 20.5 °C. That leaves 1.0 kg of water at 0 °C (the melted ice) and 1.0 kg at 20.5 °C, which mix to $\\dfrac{0 + 20.5}{2} = 10.2$ °C. In one line: energy lost by the hot water = energy gained by the ice, $4200(100 - T) = 3.34 \\times 10^5 + 4200\\,T$, so $8400\\,T = 8.6 \\times 10^4$ and $T = 10.2$ °C.</p><p>The reason the answer is so low is that a phase change happens at constant temperature: the energy that melts the ice goes into pulling the molecules apart from their fixed positions, raising their intermolecular potential energy, not into making them move faster. Only after that does any energy go into raising the temperature, which is a measure of the average kinetic energy of the molecules. The same 1.0 kg of <em>cold water</em> at 0 °C, instead of ice, would have given 50 °C.</p>",
+    "tempting": "<p>\"50 °C\" is the average of 0 and 100, and it would be right for equal masses of <em>water</em> at those temperatures. It forgets the latent heat: ice at 0 °C must first be melted, and that costs as much energy as cooling the hot water by almost 80 K, before the melted ice has warmed by a single degree.</p><p>\"0 °C with some ice left\" takes the latent heat seriously but over-estimates it. The numbers settle it: the hot water has $4.2 \\times 10^5$ J to give before it reaches 0 °C, and melting all the ice needs only $3.34 \\times 10^5$ J. Ice would be left over only if the hot water had less than about 0.8 kg, or started cooler than about 80 °C.</p><p>\"About 25 °C\" is a compromise between the two: latent heat matters, so knock the 50 °C down a bit. Guessing the size of the effect is risky; a quick $Q = mL$ and $Q = mc\\Delta T$ shows that melting costs the equivalent of almost 80 K of cooling, not 25 K.</p>"
+  },
+  {
+    "id": "CC-B1-09",
+    "topic": "B.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "The heated ring",
+    "figure": {
+      "svg": "diagrams/cc-b1-09-washer.svg",
+      "alt": "A flat metal washer lies on a tripod above a Bunsen burner flame. To the left, the same washer is drawn seen from above, a ring with a round hole in the middle.",
+      "caption": "A flat metal washer is heated evenly on a tripod. On the left, the same washer seen from above. Not to scale."
+    },
+    "question": "<p>A flat metal washer, a disc with a round hole in the middle, is heated evenly on a tripod until the whole washer is at the same high temperature. Metals expand slightly when they are heated. What happens to the diameter of the hole?</p>",
+    "options": [
+      "It gets bigger",
+      "It gets smaller",
+      "It stays the same size"
+    ],
+    "answer": 0,
+    "reveal": "<p><strong>The hole gets bigger.</strong> Every part of the washer grows, including the empty part.</p><p>Heating a solid gives its atoms more kinetic energy (temperature is a measure of the average kinetic energy of the particles), so they vibrate more vigorously about their positions, and the average distance between neighbouring atoms grows by a small fraction. The key point is that <em>every</em> distance between two atoms in the washer grows by the same fraction, wherever they are. So the whole washer scales up like a photograph being enlarged, and the gap between the atoms on opposite sides of the hole grows by the same fraction as everything else.</p><p>Another way to see it: a washer is a rod bent into a circle. When the rod is heated its length grows, so the circumference of the ring grows, and since $C = 2\\pi r$, so does the radius of the hole. (The ring cannot grow a longer circumference while its hole shrinks.) Or imagine drawing a circle on a flat metal sheet and then heating the sheet: the drawn circle grows. Cutting out the metal inside the circle changes nothing about how the rest expands.</p><p>The effect is small: steel grows by about one part in a hundred thousand for every kelvin, so a 20 mm hole heated by 300 K grows by about 0.07 mm. That is enough to matter: it is why a metal lid stuck on a glass jar loosens under hot water (the lid expands more than the glass), how engineers fit a wheel onto an axle by heating the wheel first, and why bridges and railway tracks have expansion gaps. (Thermal expansion itself is beyond the IB course; the link to B.1 is temperature as a measure of molecular kinetic energy and the larger average spacing of atoms that vibrate harder.)</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-b1-09-ring-after.svg",
+      "alt": "Two rings drawn on the same centre. A dashed blue ring shows the cold washer. A solid orange ring, slightly larger in both its outer edge and its hole, shows the hot washer.",
+      "caption": "The <span class=\"key-1\">cold washer</span> and the <span class=\"key-2\">hot washer</span>, hugely exaggerated: the real change is a fraction of a millimetre. The outer edge and the hole both grow by the same fraction."
+    },
+    "tempting": "<p>\"It gets smaller\" treats the hole as empty space waiting to be filled, as if the metal expands inwards into it, growing in every direction from its own middle. But expansion is not the metal \"pushing out\" into whatever space is nearest; it is every atom moving slightly further from its neighbours. Neighbouring atoms around the inner edge move further <em>apart from each other</em>, so the inner edge gets longer, and a longer circle is a bigger circle.</p><p>\"It stays the same size\" imagines an inward expansion and an outward expansion fighting over the hole. There is only one expansion, by one scale factor, applied to every length in the washer: the outer diameter, the width of the metal and the hole all grow by the same fraction. If you have ever struggled with a jar lid, you have already seen that the hole in a heated ring gets bigger.</p>"
+  },
+  {
     "id": "CC-B2-01",
     "topic": "B.2",
     "level": "SL",
@@ -738,6 +979,33 @@
     "question": "<p>Three pans of water are heated until they boil: one on a camping stove 3000 m up a mountain, one in a kitchen at sea level, and one inside a pressure cooker with its lid locked on. Before you look at any thermometer, answer the question in the title: at what temperature does water boil? Give a number if you can, and a reason.</p>",
     "reveal": "<p><strong>There is no single answer: water boils at whatever temperature matches the pressure on it.</strong> 100 °C is the boiling point at normal atmospheric pressure, about 101 kPa, and nowhere else.</p><p>Boiling is different from evaporation. Evaporation happens only at the surface, at any temperature. Boiling happens when bubbles of water vapour can form and grow <em>inside</em> the liquid. A bubble can only grow if the vapour inside it pushes outwards at least as hard as the surroundings push in. The pressure a liquid's own vapour can exert (its <em>vapour pressure</em>, beyond the course) rises steeply with temperature, so water boils at the temperature where its vapour pressure reaches the <a href=\"../themes/b3.html#pressure\">pressure</a> acting on it.</p><p>That is why the three pans give three different readings. At sea level the air pushes down with about 101 kPa and water boils at 100 °C. At 3000 m the air pressure is only about 70 kPa, so the vapour wins at about 90 °C: the water boils earlier, and because it never gets hotter than 90 °C, pasta and potatoes cook slowly. In the pressure cooker the trapped steam raises the pressure to roughly 200 kPa (twice atmospheric), and the water does not boil until about 120 °C, so food cooks faster. Go the other way and put a glass of room-temperature water in a vacuum chamber: once the pressure drops to about 2.3 kPa the water boils at 20 °C, without getting any warmer.</p><p>Whatever the boiling temperature, boiling still needs energy. While the water boils, the energy supplied goes into the <a href=\"../themes/b1.html#phase\">specific latent heat of vaporization</a>, $Q = mL$, not into raising the temperature: the thermometer stays put until the water has gone.</p><p>One more twist, a real hazard: water heated in a microwave in a smooth, clean cup can go <em>above</em> 100 °C without boiling, because a bubble needs a rough spot, a scratch or a speck of dust to start on (a <em>nucleation site</em>, beyond the course). The water is then <em>superheated</em>. Dropping in a spoon or a teabag gives the bubbles their start, and the water can erupt out of the cup all at once and scald you. Heating water in a microwave with a wooden stirrer or a scratched mug in it avoids this.</p>",
     "tempting": "<p>\"100 °C\" is the answer almost everyone gives, because it is the number we all learn. It is true only at one pressure, about 101 kPa. Mountaineers, pressure-cooker users and vacuum-chamber users all see water boiling at other temperatures.</p><p>\"When it reaches its boiling point\" sounds safe but explains nothing: it just renames the question. The physics is the match between the water's vapour pressure and the pressure on it.</p><p>\"When bubbles appear\" is a tempting test, but the first small bubbles on the bottom of a pan are dissolved <em>air</em> coming out of solution, well before boiling. The rolling bubbles of boiling are made of water vapour, and they form throughout the liquid.</p>"
+  },
+  {
+    "id": "CC-B3-05",
+    "topic": "B.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "Why does the smell take so long?",
+    "figure": {
+      "svg": "diagrams/cc-b3-05-perfume-room.svg",
+      "alt": "A room seen from the side. At the left, an open perfume bottle stands on a small table with its stopper beside it. At the right, 5 metres away, a person stands and smells nothing yet. The air is still.",
+      "caption": "The bottle is opened at one end of a still room; the person is 5 m away. Not to scale."
+    },
+    "question": "<p>A perfume bottle is opened at one end of a room 5 m long. The air is completely still: no draughts, no heating, nobody moving (an idealised room: ignore even the warmth of the person's body). At room temperature the perfume molecules that leave the bottle are moving at a few hundred metres per second (around 200 to 300 $\\text{m s}^{-1}$ for a fairly heavy molecule; the air molecules around them average about 500 $\\text{m s}^{-1}$). At that speed a molecule could cross the room in a few hundredths of a second. Yet a person at the far end smells nothing for a very long time. Why?</p>",
+    "options": [
+      "The molecules slow down to walking pace as soon as they leave the bottle",
+      "They collide with air molecules billions of times a second and zigzag, so they get nowhere fast",
+      "Smell travels through the air as a wave, and that wave moves much more slowly than the molecules do",
+      "Perfume molecules are heavier than air molecules, so they sink to the floor before they can spread out"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>They zigzag.</strong> The molecules really are moving at hundreds of metres per second, but they cannot travel in a straight line for more than a tiny fraction of a millimetre before hitting an air molecule and heading off in a new direction.</p><p>In the kinetic model of a gas, the molecules fly about in straight lines between collisions, and their average kinetic energy is set by the temperature: $\\overline{E_k} = \\tfrac{3}{2}k_BT$. At 20 °C that gives a perfume molecule of molar mass around 150 g $\\text{mol}^{-1}$ a typical speed of about 220 $\\text{m s}^{-1}$, and a nitrogen molecule about 510 $\\text{m s}^{-1}$. Nothing slows them down: as long as the room stays at 20 °C, they keep these speeds for ever. The same collisions that give a gas its pressure also get in the way of travel. At atmospheric pressure a molecule travels on average only about $7 \\times 10^{-8}$ m, a few hundred molecular diameters, before hitting another one, so a perfume molecule moving at 220 $\\text{m s}^{-1}$ is knocked off course about $\\dfrac{220}{7 \\times 10^{-8}} \\approx 3 \\times 10^9$ times every second.</p><p>Each collision sends the molecule off in a fresh, effectively random direction, so its path is a <em>random walk</em>. A random walk has a famous property (beyond the course, so take it as a stated result): after $N$ steps of length $\\lambda$ the walker typically ends up only about $\\sqrt{N}\\,\\lambda$ from the start, not $N\\lambda$, because the steps so often cancel each other out. With about $3 \\times 10^9$ steps of $7 \\times 10^{-8}$ m in one second, $\\sqrt{N}\\,\\lambda \\approx 5.5 \\times 10^4 \\times 7 \\times 10^{-8} \\approx 4 \\times 10^{-3}$ m: about 4 mm of net progress for roughly 220 m of actual travel. To get about 1000 times further, to 5 m, needs about a million times as many steps, roughly $10^6$ s, which is nearly two weeks. That is diffusion, and it really is that slow over room-sized distances.</p><p>So in a real room the smell arrives by a different route: the air itself moves. Convection currents from warm bodies, radiators and sunlit walls, and the wake of anyone walking past, carry the vapour-laden air across the room in seconds or minutes, and diffusion only finishes the job over the last few millimetres, into your nose.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-b3-05-random-walk.svg",
+      "alt": "A jagged path of 60 straight steps of equal length in random directions, starting at a blue dot and ending at an orange dot. A dashed straight line joins the start to the end; it is much shorter than the path.",
+      "caption": "A random walk of 60 equal steps in computed random directions. The walker ends only about 8 step lengths from the <span class=\"key-1\">start</span> ($\\sqrt{60} \\approx 7.7$), a typical result, after walking 60 step lengths to get there. A perfume molecule makes thousands of millions of such steps every second, each about $7 \\times 10^{-8}$ m long."
+    },
+    "tempting": "<p>\"They slow down to walking pace\" is the most natural guess, because the smell does spread at about walking pace. But a molecule's speed is fixed by the temperature of the gas it is in, and the room is no cooler than the bottle. The molecules never slow down; they just keep being turned round.</p><p>\"Smell is a wave\" confuses two very different things that travel through air. A sound wave is a disturbance that passes from molecule to molecule, so it travels at 340 $\\text{m s}^{-1}$ while each molecule only jiggles about its own position. A smell is the <em>molecules themselves</em> arriving at your nose; nothing arrives until they do.</p><p>\"They are heavier, so they sink\" sounds like common sense, but in a gas the constant collisions mix everything far faster than gravity can sort it. Carbon dioxide is heavier than nitrogen, yet the air in a room does not separate into layers, and you can smell perfume at nose height, not just at your feet. (Over kilometres of height the atmosphere does thin out, but it stays well mixed.)</p>"
   },
   {
     "id": "CC-B4-01",
@@ -934,6 +1202,33 @@
     "tempting": "<p>\"Both run slow, because everything is lighter on the Moon\" mixes up weight and mass. Weight (the force $mg$) is smaller on the Moon, but mass, the inertia that resists acceleration, is not. The spring's restoring force depends on its extension, not on gravity, and the mass it has to accelerate is unchanged, so the spring oscillation is unchanged.</p><p>\"The spring clock runs slow because the mass hangs lower on the Moon\" gets the sag backwards (it hangs <em>higher</em>, because its weight is smaller) and, more importantly, confuses the equilibrium position with the period. Shifting where the mass hangs does not change how quickly it bounces about that point.</p><p>\"Both keep time\" is tempting if you think a pendulum is just another oscillator with a fixed length. But its restoring force is the component of the weight along the swing, and a smaller weight means a smaller force, a smaller acceleration and a longer period.</p>"
   },
   {
+    "id": "CC-C1-04",
+    "topic": "C.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "The ant on the loudspeaker",
+    "figure": {
+      "svg": "diagrams/cc-c1-04-ant-speaker.svg",
+      "alt": "A loudspeaker lies on its back on a bench with its cone facing upwards, drawn in section as a shallow V. An ant stands on the sloping cone. A blue double-headed arrow beside the cone shows that it moves up and down.",
+      "caption": "The cone moves straight up and down. The ant is not to scale."
+    },
+    "question": "<p>A loudspeaker lies on its back so that its cone moves vertically. An ant stands on the cone. The cone moves up and down in simple harmonic motion with an amplitude of 2.0 mm, and the frequency is turned up slowly from a very low value. The ant does not grip the cone or jump; it just stands there, and the cone can push on it but not pull. Take $g = 9.8$ $\\text{m s}^{-2}$. What happens?</p>",
+    "options": [
+      "The ant stays in contact with the cone however high the frequency goes",
+      "Once the frequency passes a certain value, the ant loses contact at the bottom of each oscillation",
+      "Once the frequency passes a certain value, the ant loses contact at the top of each oscillation",
+      "Whether the ant loses contact depends on its mass"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>At the top, once the frequency passes about 11 Hz</strong>, whatever the ant's mass.</p><p>In simple harmonic motion the acceleration is proportional to the displacement and directed towards the equilibrium position: $a = -\\omega^2 x$. So the cone's acceleration is largest at the two ends of its travel, where it is $\\omega^2 A$ in size, and at the <em>top</em> it points downwards: the cone is being yanked back down towards the middle.</p><p>Now think about the ant. Only two forces act on it: its weight $mg$ downwards and the normal force $N$ from the cone upwards. The cone can push the ant up but cannot pull it down, so $N$ can never be negative. The ant's largest possible downward acceleration is therefore $g$, when $N = 0$ and it is in free fall. As long as the cone's downward acceleration at the top, $\\omega^2 A$, is less than $g$, the cone just pushes a little less hard ($N = m(g - \\omega^2 A)$) and the ant follows it down. But once $\\omega^2 A > g$ the cone drops away faster than the ant can fall, and they separate at the top.</p><p>The condition $\\omega^2 A = g$ gives $\\omega = \\sqrt{\\dfrac{g}{A}} = \\sqrt{\\dfrac{9.8}{0.0020}} = \\sqrt{4900} = 70$ $\\text{rad s}^{-1}$, so $f = \\dfrac{\\omega}{2\\pi} = \\dfrac{70}{2\\pi} = 11.1$ Hz. The mass cancelled, so a heavy beetle would lose contact at exactly the same frequency as the ant. With a smaller amplitude the frequency needed is higher ($f \\propto 1/\\sqrt{A}$): at 0.50 mm it would be 22 Hz. The same idea explains why a coin left on a rattling washing machine starts to dance, and why loose grit on a vibrating table hops into the air.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-c1-04-sine.svg",
+      "alt": "A graph of the cone's displacement against time: a smooth sine curve between plus A and minus A. One peak is marked with a dot labelled top, ant leaves here, with an orange arrow pointing downwards from it labelled acceleration of cone.",
+      "caption": "The cone's displacement against time (a computed sine curve). At the top, the <span class=\"key-2\">cone's acceleration</span> is downwards and of size $\\omega^2 A$; the ant cannot accelerate downwards faster than $g$, so it is left behind when $\\omega^2 A > g$."
+    },
+    "tempting": "<p>\"At the bottom\" is tempting because the bottom is where the motion feels most violent: the cone is accelerating upwards hardest there, and the normal force on the ant is at its largest, $N = m(g + \\omega^2 A)$. The ant feels heaviest at the bottom, but a big push upwards is the opposite of losing contact. Contact is lost where the normal force falls to zero, and that is the top.</p><p>\"It depends on the mass\" comes from thinking a heavier ant is harder to throw off. But both its weight and the force needed to accelerate it are proportional to its mass, so $m$ cancels: the only question is whether the cone's acceleration exceeds $g$. A grain of sand and a coin leave at the same frequency.</p><p>\"Never loses contact\" assumes the cone can always take the ant with it. Going up, it can: it pushes. Coming down from the top, it can only let the ant fall, and nothing can make the ant fall faster than $g$.</p>"
+  },
+  {
     "id": "CC-C2-01",
     "topic": "C.2",
     "level": "SL",
@@ -1056,6 +1351,33 @@
     "tempting": "<p>\"Half, because half the light is blocked\" is the most common answer, and it is right about the light passing through the slits: that does halve. But at the <em>centre</em> of the screen the two beams were adding constructively, and intensity depends on amplitude squared, so halving the amplitude quarters the intensity. The missing light has not vanished; it was never at the centre in the first place, because with two slits it was concentrated into bright fringes and taken away from dark ones.</p><p>\"The same, because the central fringe comes from the one slit that is still open\" ignores that the central fringe is made by <em>both</em> slits together. Each contributes equally there.</p><p>\"It goes dark\" comes from thinking the whole pattern is \"made of interference\", so no interference means no light. But a single slit still lets light through to the screen; what you lose is the fringe pattern, not the light.</p>"
   },
   {
+    "id": "CC-C3-04",
+    "topic": "C.3",
+    "level": "SL",
+    "type": "choice",
+    "title": "Can the fish hear the angler?",
+    "figure": {
+      "svg": "diagrams/cc-c3-04-angler.svg",
+      "alt": "An angler stands at the edge of a lake bank holding a fishing rod and talking quietly. A fish lies still under the water a few metres out from the bank.",
+      "caption": "Not to scale."
+    },
+    "question": "<p>Sound travels at about 340 $\\text{m s}^{-1}$ in air and about 1500 $\\text{m s}^{-1}$ in water. An angler stands at the edge of a lake bank, talking quietly to a friend. A fish lies still under the water a few metres out from the bank. The air and the water are still. Which statement about the sound of the angler's voice is correct?</p>",
+    "options": [
+      "Water carries sound much better than air, so the fish hears the voice easily",
+      "Only sound that reaches the surface nearly vertically can enter the water; sound arriving at a shallower angle is reflected, so almost none of the voice reaches the fish",
+      "Sound cannot cross from air into water at all",
+      "Only the low notes of the voice get through; the high notes are reflected"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>Only sound meeting the surface nearly head-on can get in, so the fish hears almost nothing of a quiet voice.</strong> Snell's law in the form the guide gives, $\\dfrac{\\sin\\theta_1}{\\sin\\theta_2} = \\dfrac{v_1}{v_2}$, works for any wave, including sound. Here the second medium is the <em>faster</em> one, so a sound ray entering water bends <em>away</em> from the normal: the opposite of light entering water, and the same as light leaving it.</p><p>That means there is a critical angle, and it is on the air side. The refracted ray reaches $90^\\circ$ when $\\sin c = \\dfrac{340}{1500} = 0.227$, so $c = 13^\\circ$. Sound arriving at the surface more than $13^\\circ$ from the vertical cannot enter at all: it is totally reflected back into the air. Even inside that cone the bending is severe: sound arriving at $10^\\circ$ from the vertical travels on at $50^\\circ$ in the water.</p><p>The angler's mouth is about 1.5 m above the water, so the only part of the surface it can \"see\" within $13^\\circ$ of the vertical is a patch about 0.7 m across (0.35 m each way from the point directly below the mouth), right at the angler's feet, and most of that is bank, not water. Sound heading for the water above the fish, a few metres out, meets the surface at $60^\\circ$ or more and bounces off. The little that does get in spreads out steeply and arrives at the fish very weak.</p><p>Beyond the course: even inside the cone most of the sound is reflected, because air and water are so different in density and wave speed that they are badly \"matched\". At normal incidence only about 0.1% of the sound energy crosses from air into water. So talking does not scare fish. Footsteps on the bank do: those vibrations travel through the ground straight into the water, with no air–water boundary to cross.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-c3-04-cone.svg",
+      "alt": "The same scene with sound rays from the angler's mouth. A ray reaching the water within a narrow cone of 13 degrees around the vertical enters the water and bends sharply away from the normal. Two rays reaching the surface further out are reflected back up into the air and never reach the fish.",
+      "caption": "Only sound inside the <span class=\"key-2\">13° cone</span> enters the water, bending away from the normal as it does. Everything arriving at a shallower angle is <span class=\"key-1\">totally reflected</span>. Not to scale."
+    },
+    "tempting": "<p>\"Water carries sound better\" is true for sound that is already in the water: whales call across oceans. The problem is getting across the boundary. Most of the voice never enters the water, and that is what decides what the fish hears.</p><p>\"Cannot enter at all\" goes too far. Within the narrow cone some sound does cross, which is why a fish directly below a shouting person does hear something.</p><p>\"Only low notes\" treats refraction like diffraction. The critical angle comes from the ratio of the wave speeds, $\\dfrac{340}{1500}$, which is the same for every frequency, so high and low notes are reflected together.</p>"
+  },
+  {
     "id": "CC-C4-01",
     "topic": "C.4",
     "level": "SL",
@@ -1162,6 +1484,33 @@
     "tempting": "<p>\"It rises as it approaches, then falls\" is what most people remember hearing, but what actually rises and falls is the <em>loudness</em>: the sound gets louder as the ambulance gets closer and quieter as it goes away, and we confuse louder with higher. The frequency shift depends only on the speed of approach, which is constant, so the pitch is constant until the ambulance passes.</p><p>\"Falls steadily the whole time\" mixes the pitch of the siren with its envelope: a real siren also wails up and down on its own, which hides what the Doppler effect is doing. Picture a plain steady note instead.</p><p>\"The same as the true pitch while approaching\" treats the shift as something that happens only when the source has gone past. But the wavefronts are bunched the whole time the source is moving towards you, so the pitch is raised from the first moment you can hear it.</p>"
   },
   {
+    "id": "CC-C5-04",
+    "topic": "C.5",
+    "level": "HL",
+    "type": "choice",
+    "title": "The falling loudspeaker",
+    "figure": {
+      "svg": "diagrams/cc-c5-04-falling.svg",
+      "alt": "A light rigid rod with a small loudspeaker at its top end, pointing downwards, and a microphone at its bottom end, 2 m below. The rod falls freely beside a fixed height scale.",
+      "caption": "The rod, loudspeaker and microphone fall together through still air. Not to scale."
+    },
+    "question": "<p>A small loudspeaker sounding a steady 1000 Hz note and a microphone are fixed 2.0 m apart on a light rigid rod, with the loudspeaker directly above the microphone and pointing down at it. The rod is released and falls freely through still air (air resistance is negligible; the speed of sound is 340 $\\text{m s}^{-1}$). While they fall, what frequency does the microphone record?</p>",
+    "options": [
+      "Exactly 1000 Hz, because the loudspeaker and the microphone are not moving relative to each other",
+      "Lower by a fraction of a hertz, almost the same amount throughout the fall",
+      "Below 1000 Hz, by an amount that grows in proportion to their speed, like the shift heard by an observer moving away from a source",
+      "Slightly above 1000 Hz, because the loudspeaker is moving towards the microphone"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>Slightly below 1000 Hz, by about 0.2 Hz, and almost the same all the way down.</strong> The rod makes no difference to the sound: once a wavefront leaves the loudspeaker it travels through the <em>air</em> at 340 $\\text{m s}^{-1}$, whatever the rod does. So we have a moving source and a moving observer, and there are two steps to the answer.</p><p><strong>Step 1: equal speeds cancel exactly.</strong> Suppose at some instant both are moving downwards at speed $u$. The loudspeaker is a source moving towards the microphone, so the wavefronts it sends down are squeezed closer together: their wavelength is $\\dfrac{v - u}{f}$ instead of $\\dfrac{v}{f}$. But the microphone is an observer moving away from those wavefronts, so they pass it at relative speed $v - u$ rather than $v$. Squeezed wavelength, slower passing: the microphone meets $\\dfrac{v - u}{(v - u)/f} = f$ wavefronts every second. In the HL equations of C.5 this is $f' = f\\dfrac{v - u_o}{v - u_s}$ with $u_o = u_s$. (The guide says exam questions never have both source and observer moving. This is why it is interesting.)</p><p><strong>Step 2: but they are accelerating.</strong> A wavefront takes $\\dfrac{2.0}{340} = 5.9$ ms to travel from the loudspeaker to the microphone, and in that time the microphone's speed grows by $9.8 \\times 0.0059 = 0.058$ $\\text{m s}^{-1}$. So every wavefront is received by a microphone moving away slightly <em>faster</em> than the loudspeaker was moving when it sent it: $u_o = u_s + gt$. The frequency is lowered by the fraction $\\dfrac{gt}{v - u_s} \\approx \\dfrac{gd}{v^2} = \\dfrac{9.8 \\times 2.0}{340^2} = 1.7 \\times 10^{-4}$, which is 0.17 Hz on 1000 Hz. Because $u$ cancelled in step 1, the drop hardly depends on how fast they are falling: 0.17 Hz at the moment of release, 0.18 Hz after falling 5 m, 0.19 Hz after 20 m (the travel time grows a little as the source speeds up). Compare that with a microphone moving away at 10 $\\text{m s}^{-1}$ from a <em>fixed</em> loudspeaker, which would record 29 Hz less.</p><p>Beyond the course: light has no medium, so for light the roles swap. A freely falling source and detector measure no shift, while a detector fixed on the ground below a fixed source measures a shift of $\\dfrac{gh}{c^2}$ (a blueshift for light falling; the gravitational redshift in reverse). Pound and Rebka confirmed it in 1959–60, sending gamma rays both down and up a 22.5 m tower, with a shift of $2.5 \\times 10^{-15}$ each way. Our sound result, $\\dfrac{gd}{v^2}$, has exactly the same form with the speed of sound in place of $c$.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-c5-04-snapshots.svg",
+      "alt": "Two snapshots of the falling rod. Left: a wavefront has just left the loudspeaker, and the rod is moving down slowly. Right, about six milliseconds later: the same wavefront reaches the microphone, but the whole rod has moved down a little and is moving faster. A dashed line marks where the microphone was in the first snapshot.",
+      "caption": "While a <span class=\"key-2\">wavefront</span> travels the 2 m from loudspeaker to microphone, the rod <span class=\"key-1\">speeds up</span> by about 0.06 $\\text{m s}^{-1}$, so the microphone is moving away from the sound slightly faster than the loudspeaker was moving towards it when the sound was sent. Movement exaggerated."
+    },
+    "tempting": "<p>\"Exactly 1000 Hz, no relative motion\" forgets that sound travels relative to the air, not relative to the rod, so the loudspeaker and the microphone each have their own Doppler effect. As it happens, the two would cancel exactly at a steady speed, so the answer is <em>nearly</em> right. What spoils it is the acceleration during the few milliseconds the sound is in flight.</p><p>\"Lower, in proportion to their speed\" treats the microphone as an observer moving away from a fixed source and forgets that the source is chasing the sound just as fast. The speed $u$ cancels; only the small change in speed during the travel time survives.</p><p>\"Higher, because the loudspeaker approaches\" makes the same mistake the other way round, keeping the source's shift and forgetting the observer's. Both must be included, and the observer's effect wins by a whisker, because the microphone is moving a little faster when the sound arrives than the loudspeaker was when it left.</p>"
+  },
+  {
     "id": "CC-D1-01",
     "topic": "D.1",
     "level": "SL",
@@ -1197,6 +1546,104 @@
     "question": "<p>A space probe is in a circular orbit around the Sun at the same distance as the Earth, but far from the Earth, with an orbital speed of about 30 $\\text{km s}^{-1}$. It can fire its engine once, briefly, in any direction. Which needs the smaller change of velocity (and so less fuel): escaping completely from the Sun's gravitational field, or falling into the Sun? Ignore the gravity of the planets.</p>",
     "reveal": "<p><strong>Escaping needs the smaller change: about 12 $\\text{km s}^{-1}$, compared with about 27 $\\text{km s}^{-1}$ to hit the Sun.</strong></p><p><strong>Escaping.</strong> At the orbit, $v_{\\text{orbital}} = \\sqrt{\\dfrac{GM}{r}}$ and $v_{\\text{esc}} = \\sqrt{\\dfrac{2GM}{r}}$, so the escape speed is $\\sqrt{2}$ times the orbital speed. With $M = 1.99 \\times 10^{30}$ kg and $r = 1.50 \\times 10^{11}$ m, $v_{\\text{orbital}} = 29.7$ $\\text{km s}^{-1}$ and $v_{\\text{esc}} = 42.1$ $\\text{km s}^{-1}$. Firing the engine forwards, the probe needs to gain only 12.3 $\\text{km s}^{-1}$.</p><p><strong>Falling into the Sun.</strong> The probe keeps missing the Sun because it is moving sideways at 29.7 $\\text{km s}^{-1}$. To fall straight in, it would have to lose all of that sideways velocity. Even to just graze the Sun's surface, it would have to slow down to about 2.9 $\\text{km s}^{-1}$, a change of about 27 $\\text{km s}^{-1}$ (this uses energy and angular momentum, beyond the course).</p><p>So, starting from the Earth's orbit, it takes less than half as much change of velocity to leave the Solar System as to hit the Sun. That's why probes sent close to the Sun, such as the Parker Solar Probe, use repeated close flybys of Venus to lose speed.</p><p>Measured in energy, the two jobs are almost the same: each changes the probe's kinetic energy by about $\\dfrac{GMm}{2r}$. But fuel depends on the <em>change of velocity</em>, and because kinetic energy depends on $v^2$, adding 12 $\\text{km s}^{-1}$ to 30 $\\text{km s}^{-1}$ changes the energy as much as taking all 30 $\\text{km s}^{-1}$ away.</p>",
     "tempting": "<p>Falling into the Sun sounds easy: the Sun pulls the probe towards it all the time, so surely a small nudge inwards would do. But the probe is <em>already</em> falling towards the Sun all the time; it keeps missing because of its large sideways velocity. A push towards the Sun doesn't remove that sideways velocity, so the probe would still miss. Only removing nearly all of the sideways velocity makes it hit.</p><p>Escaping sounds hard because the probe must get \"all the way to infinity\". But it already has half of the kinetic energy it needs: since $v_{\\text{esc}}^2 = 2v_{\\text{orbital}}^2$, its kinetic energy in the circular orbit is exactly half the escape value. Increasing the speed by a factor of $\\sqrt{2}$, only about 41%, doubles the kinetic energy and is enough to escape.</p>"
+  },
+  {
+    "id": "CC-D1-03",
+    "topic": "D.1",
+    "level": "HL",
+    "type": "choice",
+    "title": "Jumping off an asteroid",
+    "figure": {
+      "svg": "diagrams/cc-d1-03-asteroid.svg",
+      "alt": "A lumpy, cratered asteroid against a starry sky, with a small astronaut standing on top of it.",
+      "caption": "Not to scale: the asteroid is far bigger than the astronaut."
+    },
+    "question": "<p>On Earth you can jump about 0.5 m straight up. Now imagine standing on a small asteroid made of rock with the same average density as the Earth, 5500 $\\text{kg m}^{-3}$. The asteroid is not spinning, and your legs give you the same take-off speed as they do on Earth. About how big would the asteroid have to be for a jump to carry you away for good, so that you never came back down?</p>",
+    "options": [
+      "A radius of about 200 m",
+      "A radius of about 2 km",
+      "A radius of about 20 km",
+      "You would always come back down: gravity never lets go"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>About 2 km: a rock less than 4 km across (our calculation gives a radius of about 1.8 km).</strong></p><p>First, your take-off speed. Rising 0.5 m against $g = 9.8$ $\\text{m s}^{-2}$ needs $v = \\sqrt{2gh} = \\sqrt{2 \\times 9.8 \\times 0.5} = 3.1$ $\\text{m s}^{-1}$.</p><p>Next, the <a href=\"../themes/d1.html#escape\">escape speed</a>, $v_{\\text{esc}} = \\sqrt{\\dfrac{2GM}{R}}$. For a uniform sphere, $M = \\dfrac{4}{3}\\pi R^3 \\rho$, so $v_{\\text{esc}} = R\\sqrt{\\dfrac{8\\pi G \\rho}{3}}$: at a fixed density, the escape speed is simply <em>proportional to the radius</em>. With $\\rho = 5500$ $\\text{kg m}^{-3}$, $\\sqrt{\\dfrac{8\\pi G\\rho}{3}} = 1.75 \\times 10^{-3}$ $\\text{s}^{-1}$. (Check: the Earth's radius, $6.37 \\times 10^6$ m, gives 11.2 $\\text{km s}^{-1}$, the right answer.) Setting $v_{\\text{esc}} = 3.1$ $\\text{m s}^{-1}$ gives $R = \\dfrac{3.1}{1.75 \\times 10^{-3}} = 1.8 \\times 10^3$ m.</p><p>Put another way: the Earth's radius is about 3600 times bigger than 1.8 km, and its escape speed, 11.2 $\\text{km s}^{-1}$, is about 3600 times your jump speed. Such an asteroid has a mass of about $1.3 \\times 10^{14}$ kg, and its gravitational field strength at the surface is only $g = \\dfrac{GM}{R^2} = 2.7 \\times 10^{-3}$ $\\text{N kg}^{-1}$: a 70 kg astronaut would weigh about 0.2 N there, and even a gentle hop would take minutes to come down. Real asteroids are often smaller still: Bennu, visited by the OSIRIS-REx probe, has a radius of about 250 m and an escape speed of about 0.2 $\\text{m s}^{-1}$, slower than a walking pace.</p><p>(Because the asteroid barely pulls you back during the push-off, your legs would in fact give you a noticeably higher take-off speed than on Earth (about $4\\ \\text{m s}^{-1}$ rather than 3), so the real limit is nearer 2.5 km: still only a few kilometres, and still \"about 2 km\".)</p>",
+    "tempting": "<p>\"Gravity never lets go\" is tempting because the gravitational force never quite falls to zero, however far away you get. But the <em>work</em> needed to get infinitely far away is finite: the gravitational potential energy per kilogram at the surface is $-\\dfrac{GM}{R}$, and reaching \"infinity\" (potential zero) only needs that much kinetic energy per kilogram. If your kinetic energy is more than that, gravity slows you but never stops you.</p><p>Guessing 20 km or 200 m comes from not knowing how escape speed scales. The Earth's 11.2 $\\text{km s}^{-1}$ makes escape sound like a job for rockets, and in a sense 2 km seems too small for a whole world; but at a fixed density the escape speed grows in proportion to the radius, so shrinking the Earth 3600 times brings the escape speed down to jumping speed.</p>"
+  },
+  {
+    "id": "CC-D1-04",
+    "topic": "D.1",
+    "level": "HL",
+    "type": "choice",
+    "title": "Is there a speed limit for falling?",
+    "figure": {
+      "svg": "diagrams/cc-d1-04-far-fall.svg",
+      "alt": "The Earth on the left and, a long way to the right, a small object labelled released from rest, very far away, with a dashed line between them broken in the middle to show the distance is cut short.",
+      "caption": "Not to scale: the object starts far beyond the Moon's distance."
+    },
+    "question": "<p>An object is released from rest a very long way from the Earth and falls straight towards it. There is no air, and you can ignore the Sun, the Moon and everything else: only the Earth's gravity acts. Think about the speed the object has when it reaches the Earth's surface. By releasing it from higher and higher up, can it be made to arrive at any speed you like?</p>",
+    "options": [
+      "Yes: with enough height to fall from, it can arrive at any speed at all",
+      "No: there is a ceiling of about 11 $\\text{km s}^{-1}$ that it can approach but never exceed",
+      "It gains 9.8 $\\text{m s}^{-1}$ every second, so after 10 minutes it is doing 5.9 $\\text{km s}^{-1}$ and still getting faster",
+      "It never gets going, because $g$ is zero so far from the Earth"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>No. However far away it starts, it cannot arrive faster than about 11.2 $\\text{km s}^{-1}$.</strong></p><p>Think in terms of energy. The <a href=\"../themes/d1.html#potential\">gravitational potential</a> at a distance $r$ from the Earth's centre is $V_g = -\\dfrac{GM}{r}$. It is negative everywhere and rises towards zero as $r$ grows, but it never gets <em>above</em> zero. So the most potential energy a falling object can lose, per kilogram, is the difference between zero (infinitely far away) and the value at the surface: $\\dfrac{GM}{R} = \\dfrac{3.98 \\times 10^{14}}{6.37 \\times 10^6} = 6.25 \\times 10^7$ $\\text{J kg}^{-1}$. All of it becomes kinetic energy, so $\\tfrac{1}{2}v^2 = 6.25 \\times 10^7$ $\\text{J kg}^{-1}$ and $v = \\sqrt{\\dfrac{2GM}{R}} = 1.12 \\times 10^4$ $\\text{m s}^{-1}$.</p><p>That is the <strong>escape speed</strong>, and it is no coincidence: a fall from very far away is an escape played backwards. An object thrown up at exactly 11.2 $\\text{km s}^{-1}$ just reaches \"infinity\" with no speed left; released from there with no speed, it arrives back at 11.2 $\\text{km s}^{-1}$.</p><p>The ceiling is reached surprisingly quickly. Released from the Moon's distance, $3.84 \\times 10^8$ m, the object's speed at the surface is $\\sqrt{2GM\\left(\\dfrac{1}{R} - \\dfrac{1}{r}\\right)} = 11.1$ $\\text{km s}^{-1}$: already 99% of the ceiling. From ten Earth radii it would be 10.6 $\\text{km s}^{-1}$. Almost all of the speed is gained in the last few Earth radii, where the field is strong; the vast distances further out add very little.</p><p>(Real meteoroids do hit the Earth's atmosphere at anything from 11 to 72 $\\text{km s}^{-1}$, but that is because they are also moving around the Sun, which we ignored. Relative to the Earth, nothing falling from rest under the Earth's gravity alone can beat 11.2 $\\text{km s}^{-1}$.)</p>",
+    "tempting": "<p>\"Any speed you like\" and \"9.8 $\\text{m s}^{-1}$ every second\" both come from the picture of gravity we use near the ground, where $g$ is constant and a longer fall always means a bigger speed. But $g = \\dfrac{GM}{r^2}$ falls off quickly with distance: at the Moon's distance it is only $0.0027$ $\\text{N kg}^{-1}$, so the object creeps along for days before the field becomes strong enough to add real speed. Adding up all those small gains gives a finite total, not an unlimited one. Falling from a height of 1000 km with constant $g$ would predict 4.4 $\\text{km s}^{-1}$; the real answer is 4.1 $\\text{km s}^{-1}$, and the gap grows with height.</p><p>\"It never gets going\" takes \"$g$ is tiny far away\" to mean \"$g$ is zero\". The field is never zero, so the object does start to move, however slowly, and once it is moving inwards the field only gets stronger.</p>"
+  },
+  {
+    "id": "CC-D1-05",
+    "topic": "D.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "The tunnel through the Earth",
+    "figure": {
+      "svg": "diagrams/cc-d1-05-tunnel.svg",
+      "alt": "A cut-away drawing of the Earth with a straight tunnel running from one side, through the centre, to the far side. A small figure stands at the tunnel entrance at the top.",
+      "caption": "Not to scale. The tunnel runs straight through the centre and out of the far side."
+    },
+    "question": "<p>Imagine a straight tunnel bored right through the Earth, from one side to the other through the centre. All the air has been pumped out, and the walls never touch you, so there is no friction or air resistance. Treat the Earth as a sphere of uniform density that is not spinning. You step off the edge and fall in. What happens next?</p>",
+    "options": [
+      "You slow down and stop at the centre, where the gravitational field strength is zero",
+      "You shoot out of the far end at high speed",
+      "You oscillate from one surface to the other, for ever",
+      "You fall past the centre, but only a little way: you end up oscillating in a small region around it"
+    ],
+    "answer": 2,
+    "reveal": "<p><strong>You oscillate from one side of the Earth to the other, taking about 42 minutes each way and just reaching the surface at the far end.</strong></p><p>The gravitational field strength at the centre is zero, but that says nothing about your <em>speed</em> there. On the way down gravity does work on you all the way, so you are moving fastest as you pass the centre, at about 7.9 $\\text{km s}^{-1}$ (see below). Past the centre the field points back the way you came, so you slow down. By symmetry you lose exactly the speed you gained, and you arrive at the far surface with no speed at all, just as you had none at the start. Then you fall back, and the whole trip repeats.</p><p>Inside a uniform sphere, only the mass <em>closer to the centre than you</em> pulls you inwards: the pulls from the shell of material further out cancel (the same cancellation as in <a href=\"concepts.html?topic=D.1#CC-D1-06\">Inside a hollow planet</a>; the course only uses the field <em>outside</em> a sphere, so this is a step beyond it). That inner mass is proportional to $r^3$, while $\\dfrac{1}{r^2}$ weakens the pull, so the field strength is proportional to your distance from the centre: $g(r) = g\\dfrac{r}{R}$, where $g = 9.8$ $\\text{N kg}^{-1}$ at the surface. An acceleration proportional to displacement and directed towards the centre is exactly the condition for <strong>simple harmonic motion</strong> (<a href=\"../themes/c1.html\">C.1</a>): $a = -\\omega^2 x$ with $\\omega^2 = \\dfrac{g}{R}$. The period is $T = 2\\pi\\sqrt{\\dfrac{R}{g}} = 2\\pi\\sqrt{\\dfrac{6.37 \\times 10^6}{9.8}} = 5070$ s, about 84 minutes, so one side to the other takes 42 minutes. The greatest speed, at the centre, works out as $\\sqrt{gR} = 7.9$ $\\text{km s}^{-1}$ (the same as the speed of a satellite skimming the surface).</p><p>That is no coincidence: 84 minutes is also the period of that skimming satellite (<a href=\"../themes/d1.html#kepler\">Kepler's third law</a>, $T^2 = \\dfrac{4\\pi^2 R^3}{GM}$, with $r = R$, gives the same 84 minutes). The fall through the tunnel is the up-and-down part of that orbit, seen on its own.</p><p>Two surprises for the curious. A straight frictionless tunnel between <em>any</em> two cities, not through the centre, also takes 42 minutes: the shorter path has a gentler pull along it, and the two effects cancel exactly. And because the real Earth is not uniform (its iron core is much denser than its rocky mantle), the real trip would take about 38 minutes.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-d1-05-speeds.svg",
+      "alt": "The cut-away Earth and tunnel with velocity arrows beside the tunnel: no arrow at the top surface, a short arrow part-way down, the longest arrow at the centre labelled 7.9 kilometres per second, a short arrow part-way up the other side and no arrow at the far surface. A note says 42 minutes from end to end.",
+      "caption": "Your <span class=\"key-1\">velocity</span> along the tunnel: zero at both surfaces, greatest at the centre, where the field strength is zero."
+    },
+    "tempting": "<p>\"You stop at the centre, where gravity is zero\" mixes up force with velocity. Zero resultant force means zero <em>acceleration</em>: at the centre you stop speeding up, but you keep the speed you already have, and nothing is there to take it away.</p><p>\"You shoot out of the far end\" would need extra energy from somewhere. Falling in and climbing out are mirror images: every joule of kinetic energy gained on the way to the centre is given back on the way out, so you reach the far surface with exactly your starting speed, which was zero.</p><p>\"Oscillating in a small region around the centre\" treats the centre as a bowl you drop into from the edge. It <em>is</em> a bowl, but you entered it at the rim, so you swing all the way up to the rim on the other side.</p>"
+  },
+  {
+    "id": "CC-D1-06",
+    "topic": "D.1",
+    "level": "SL",
+    "type": "choice",
+    "title": "Inside a hollow planet",
+    "figure": {
+      "svg": "diagrams/cc-d1-06-hollow-planet.svg",
+      "alt": "A cut-away drawing of a hollow planet: a thick spherical shell with an empty space inside. An astronaut floats in the empty space, noticeably closer to the right-hand wall than to the left. The centre is marked.",
+      "caption": "A cross-section. The shell has the same density all the way through; the space inside it is empty."
+    },
+    "question": "<p>A hollow planet is a thick spherical shell of rock with the same density throughout and nothing at all inside. An astronaut floats inside the hollow, much closer to one part of the wall than to the opposite part. There are no other masses nearby. In which direction is the resultant gravitational force on the astronaut due to the shell?</p>",
+    "options": [
+      "Towards the nearest part of the wall",
+      "Towards the centre of the planet",
+      "Towards the far side of the wall, where there is more rock",
+      "There is no resultant force: the astronaut floats wherever they are"
+    ],
+    "answer": 3,
+    "reveal": "<p><strong>There is no resultant gravitational force on the astronaut anywhere inside the hollow.</strong> The shell's gravity cancels out exactly at every point inside it, not just at the centre.</p><p>Here is why. Imagine a narrow double cone with its tip at the astronaut's position, P. It cuts out a small patch of wall near P and a large patch on the far side. Suppose the far patch is 5 times as far away. Because the cone meets the spherical wall at the same angle at both ends, the far patch has $5^2 = 25$ times the area, and so 25 times the mass. But <a href=\"../themes/d1.html#newton\">Newton's law of gravitation</a> is an inverse-square law, $F = \\dfrac{Gm_1m_2}{r^2}$, so each kilogram of the far patch pulls $5^2 = 25$ times more weakly. Twenty-five times the mass, each pulling 25 times less: the two patches pull equally hard in opposite directions. The same is true for every cone you can draw through P, so the whole shell adds up to nothing.</p><p>The cancellation works only because the force falls off as exactly $\\dfrac{1}{r^2}$, the same way that the area of the patch grows. Newton proved this result (his <em>shell theorem</em>) in 1687. Its other half is the one the course does use: seen from <em>outside</em>, a uniform spherical shell, and so any sphere built from such shells, attracts as if all its mass were at its centre. That is why the guide lets us treat planets as point masses.</p><p>The electric field inside a hollow charged conductor is zero for exactly the same geometrical reason, because Coulomb's law is also an inverse-square law (see <a href=\"concepts.html?topic=D.2#CC-D2-02\">Close to the wall</a>, D.2).</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-d1-06-cones.svg",
+      "alt": "The same hollow planet with a narrow double cone drawn through the astronaut's position P. The cone cuts a small patch of the inner wall near P and a much larger patch on the far side.",
+      "caption": "Through P, a narrow cone cuts a <span class=\"key-1\">small, near patch</span> and a <span class=\"key-2\">large, far patch</span>. Their pulls on the astronaut are equal and opposite."
+    },
+    "tempting": "<p>\"Towards the nearest wall\" is the natural first thought: the inverse-square law makes nearby rock pull much harder per kilogram. It does, but there is correspondingly less of it. The further wall makes up in quantity exactly what it loses in distance.</p><p>\"Towards the far side, where there is more rock\" makes the opposite mistake: it counts the extra mass but forgets that it is further away and pulls more weakly.</p><p>\"Towards the centre\" comes from thinking of the inside of the <em>solid</em> Earth, where you are indeed pulled towards the centre. But there, the pull comes from the mass <em>closer to the centre than you are</em>. In a hollow planet there is no such mass, so there is nothing left to do the pulling.</p>"
   },
   {
     "id": "CC-D2-01",
@@ -1613,6 +2060,33 @@
       "caption": "<span class=\"key-2\">Arrows</span> show velocities. The products have equal and opposite momenta, so the neutron moves about 4 times as fast as the helium nucleus."
     },
     "tempting": "<p>The helium nucleus is the \"main\" product and has most of the mass, so it seems it should take most of the energy. But the share is decided by conservation of momentum: the two products get momenta of equal size, and a light particle with a given momentum moves fast and carries more kinetic energy. An equal share would break momentum conservation, because equal kinetic energies with different masses would mean different momenta.</p>"
+  },
+  {
+    "id": "CC-E5-03",
+    "topic": "E.5",
+    "level": "SL",
+    "type": "choice",
+    "title": "A fast cool star or a slow hot star?",
+    "figure": {
+      "svg": "diagrams/cc-e5-03-peak.svg",
+      "alt": "A graph of intensity against wavelength in nanometres showing a single black-body curve that rises steeply, peaks at 500 nm and falls away slowly towards longer wavelengths. A question mark stands beside the peak.",
+      "caption": "The star's continuous spectrum, with its <span class=\"key-1\">peak at 500 nm</span>. The curve is calculated from Planck's law; the intensity scale is arbitrary."
+    },
+    "question": "<p>An astronomer records the continuous spectrum of a star and finds that its intensity peaks at a wavelength of 500 nm. By Wien's displacement law that suggests a surface temperature of about 5800 K. A colleague objects: \"A cooler star moving towards us fast enough would have its whole spectrum shifted to shorter wavelengths, and its peak could land at 500 nm too.\" Treating the star as a black body, can the <em>shape</em> of the continuous spectrum alone tell them which they are looking at: a 5800 K star at rest, or a cooler star approaching?</p>",
+    "options": [
+      "Yes: a Doppler-shifted black-body curve has a different shape, so the two cases can be told apart",
+      "No: a Doppler-shifted black-body curve is exactly a black-body curve for a different temperature, so only the spectral lines can settle it",
+      "Yes: a Doppler shift moves only the peak and leaves the rest of the curve where it was, which gives it away",
+      "No: nothing in a star's light can reveal how fast it is moving"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>No. A shifted black-body curve is still a perfect black-body curve, so the continuous spectrum alone can only give an <em>apparent</em> temperature; the absorption lines settle it.</strong></p><p>Wien's law, $\\lambda_{\\max} T = 2.9 \\times 10^{-3}$ m K, gives 5800 K for a peak at 500 nm, and 580 nm for the peak of a 5000 K star. To bring that peak to 500 nm, every wavelength must be multiplied by $\\dfrac{500}{580} = 0.86$, a fractional change $\\dfrac{\\Delta\\lambda}{\\lambda} = 0.14$, which with $\\dfrac{\\Delta\\lambda}{\\lambda} \\approx \\dfrac{v}{c}$ (C.5) means approaching at roughly $0.14c$ (the approximation is itself rough at such a speed, but the principle is what matters here).</p><p>The point is that a Doppler shift multiplies <em>every</em> wavelength by the same factor, and that is exactly what a change of temperature does to a black-body curve too: the shape of the curve depends on wavelength only through the product $\\lambda T$ (plus an overall brightness factor). Shrink all the wavelengths of a 5000 K curve by 0.86 and you get precisely the curve of a 5800 K body, with its peak at 500 nm and the same shape on both sides. So from the continuous spectrum alone the two stars are indistinguishable.</p><p>What breaks the tie are the dark absorption lines, which are at wavelengths fixed by the atoms that make them. Hydrogen's red line, at 656 nm in the laboratory, would appear at 656 nm in the spectrum of the star at rest but at $656 \\times 0.86 = 566$ nm for the approaching one. The line shift gives the speed (the C.5 understanding that shifts in spectral lines tell us about the motion of stars and galaxies), and once the speed is known every wavelength can be corrected and the true temperature read off.</p><p>In practice stars move at tens to hundreds of kilometres per second. At 100 $\\text{km s}^{-1}$, $\\dfrac{v}{c} = 3.3 \\times 10^{-4}$, which changes an apparent 5800 K by only about 2 K, so for a star the correction hardly matters; the same lines are routinely used to measure the speeds of binary stars and the wobble caused by exoplanets. Beyond the course: for distant galaxies, and for the cosmic microwave background, the shifts are huge, and the shifted light is still a perfect black-body spectrum, which is part of how we know what it is.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-e5-03-two-stars.svg",
+      "alt": "The same graph with two black-body curves lying exactly on top of each other: a solid curve for star A, 5800 kelvin at rest, and a dashed curve for star B, 5000 kelvin approaching fast. The same hydrogen absorption line is marked at 656 nm for star A and at 566 nm for star B.",
+      "caption": "<span class=\"key-1\">Star A</span>: 5800 K, at rest. <span class=\"key-2\">Star B</span>: 5000 K, approaching at about 0.14c. The two continuous spectra are the same curve (B is dashed so that both show). Only the hydrogen absorption line, 656 nm in the laboratory, tells them apart: at 656 nm for A, shifted to 566 nm for B. Intensity scale arbitrary."
+    },
+    "tempting": "<p>\"A shifted curve has a different shape\" feels right because stretching or squeezing a graph usually distorts it. But a uniform scaling of all the wavelengths is exactly the change a black-body curve undergoes when its temperature changes, so the shifted curve lands precisely on another member of the same family.</p><p>\"Only the peak moves\" misreads the Doppler effect. Every wavelength changes by the same fraction $\\dfrac{v}{c}$, not just the one at the peak, so the whole curve slides and squeezes together.</p><p>\"Nothing in a star's light reveals its speed\" forgets the spectral lines. Their laboratory wavelengths are known precisely, so their shift is one of astronomy's main tools for measuring how stars and galaxies move.</p>"
   },
   {
     "id": "CC-SK-01",

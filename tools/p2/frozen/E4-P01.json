@@ -1,0 +1,219 @@
+{
+  "question": {
+    "id": "E4-P01",
+    "theme": "E",
+    "topic": "E.4",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A small modular nuclear reactor is planned to supply electrical power to a town. It will deliver 80 MW of electrical power with an overall efficiency of 33%. The fuel is enriched in uranium-235. One of the many fission reactions that occur in the reactor is</p>$$^{1}_{0}\\text{n} + {}^{235}_{92}\\text{U} \\rightarrow {}^{140}_{54}\\text{Xe} + {}^{A}_{Z}\\text{X} + 2\\,{}^{1}_{0}\\text{n}$$<p>Each fission frees, on average, 200 MeV of energy.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Deduce the nucleon number A and the proton number Z of the nuclide X.",
+        "marks": 2,
+        "markscheme": [
+          "nucleon number conserved: $A = 1 + 235 - 140 - 2 = 94$ ✓",
+          "proton number (charge) conserved: $Z = 92 - 54 = 38$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Estimate the number of fissions per second in the reactor and hence the mass of uranium-235 that undergoes fission each day.",
+        "marks": 3,
+        "markscheme": [
+          "thermal power from fission $= \\dfrac{80\\ \\text{MW}}{33\\%} = 242\\ \\text{MW}$ ✓",
+          "fissions per second $= \\dfrac{242 \\times 10^{6}}{3.20 \\times 10^{-11}} = 7.6 \\times 10^{18}\\ \\text{s}^{-1}$ ✓",
+          "mass per day $= 7.6 \\times 10^{18} \\times 86400 \\times 235 \\times 1.661 \\times 10^{-27} = 0.26\\ \\text{kg day}^{-1}$ ✓",
+          "Accept 0.3 kg from rounded intermediate values. Award [2 max] if the efficiency is not used (electrical power taken as the fission power)."
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Explain why the reactor needs a moderator.",
+        "marks": 2,
+        "markscheme": [
+          "the neutrons released by fission are fast (have high kinetic energy), and uranium-235 is much more likely to undergo fission when it absorbs a slow (thermal) neutron ✓",
+          "the moderator slows the neutrons, through repeated collisions with its (light) nuclei, so that enough neutrons cause further fissions and the chain reaction is sustained ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Outline how the control rods are used to keep the power output of the reactor steady.",
+        "marks": 1,
+        "markscheme": [
+          "the rods absorb neutrons, so they are moved further into the core to reduce the number of neutrons available for fission (and withdrawn to increase it) until, on average, one neutron from each fission goes on to cause another ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "Discuss one advantage and one problem of supplying the town from this reactor rather than by burning fossil fuels.",
+        "marks": 2,
+        "markscheme": [
+          "advantage: no carbon dioxide (greenhouse gas) is released while generating OR only a very small mass of fuel is needed (high energy density, as in (b)) OR a steady supply that does not depend on the weather ✓",
+          "problem: the fission products are highly radioactive and some stay hazardous for thousands of years, so the waste must be stored securely for a very long time OR the risk of an accident releasing radioactive material OR security / proliferation concerns, public acceptance or high cost ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "E.4",
+    "E.1"
+  ],
+  "given": {
+    "Pe": {
+      "value": 80,
+      "sf": 2,
+      "unit": "MW",
+      "range": [
+        10,
+        400
+      ],
+      "what": "electrical power output of the reactor"
+    },
+    "eff": {
+      "value": 33,
+      "sf": 2,
+      "unit": "%",
+      "range": [
+        25,
+        45
+      ],
+      "what": "overall efficiency (electrical output / thermal power from fission)"
+    },
+    "Ef": {
+      "value": 200,
+      "sf": 3,
+      "unit": "MeV",
+      "range": [
+        170,
+        215
+      ],
+      "what": "average energy released per fission"
+    },
+    "AU": {
+      "value": 235,
+      "sf": 3,
+      "unit": "",
+      "range": [
+        233,
+        239
+      ],
+      "what": "nucleon number of the uranium isotope"
+    },
+    "ZU": {
+      "value": 92,
+      "sf": 2,
+      "unit": "",
+      "range": [
+        90,
+        94
+      ],
+      "what": "proton number of uranium"
+    },
+    "AX": {
+      "value": 140,
+      "sf": 3,
+      "unit": "",
+      "range": [
+        130,
+        150
+      ],
+      "what": "nucleon number of the xenon fission product"
+    },
+    "ZX": {
+      "value": 54,
+      "sf": 2,
+      "unit": "",
+      "range": [
+        50,
+        58
+      ],
+      "what": "proton number of xenon"
+    }
+  },
+  "results": {
+    "Amiss": {
+      "value": 94,
+      "unit": "",
+      "sf": 2
+    },
+    "Zmiss": {
+      "value": 38,
+      "unit": "",
+      "sf": 2
+    },
+    "Pth": {
+      "value": 242.4242424242424,
+      "unit": "MW",
+      "sf": 3
+    },
+    "EfJ": {
+      "value": 3.2e-11,
+      "unit": "J",
+      "sf": 3
+    },
+    "rate": {
+      "value": 7575757575757575000,
+      "unit": "s^-1",
+      "sf": 2
+    },
+    "mU": {
+      "value": 3.9033500000000005e-25,
+      "unit": "kg",
+      "sf": 3
+    },
+    "mDay": {
+      "value": 0.255492,
+      "unit": "kg day^-1",
+      "sf": 2
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Deduce",
+      "syllabus": [
+        "E.4.1",
+        "E.1.2"
+      ],
+      "examinerNote": "Conservation of nucleon number and of charge in the reaction. The element (strontium) is not required: the guide says recall of chemical symbols is not needed."
+    },
+    {
+      "label": "b",
+      "command": "Estimate",
+      "syllabus": [
+        "E.4.1",
+        "T.5"
+      ],
+      "examinerNote": "Efficiency gives the fission (thermal) power; dividing by the energy per fission ([[EfJ]]) gives the rate; each fission uses one nucleus of mass [[AU:n]] u ≈ [[mU]]. Mass defect of the fuel (about 0.1 %) is ignored, as an estimate allows."
+    },
+    {
+      "label": "c",
+      "command": "Explain",
+      "syllabus": [
+        "E.4.3",
+        "E.4.2"
+      ],
+      "examinerNote": "Fission neutrons are fast; the fission probability of U-235 is far greater for thermal neutrons; the moderator (water, graphite) slows them by collisions so the chain reaction continues. \"To slow the neutrons\" alone earns the second mark only with the reason in the first."
+    },
+    {
+      "label": "d",
+      "command": "Outline",
+      "syllabus": [
+        "E.4.3"
+      ],
+      "examinerNote": "Control rods (boron, cadmium) absorb neutrons; their position sets the number of neutrons that cause further fission, so the chain reaction is kept at a steady rate."
+    },
+    {
+      "label": "e",
+      "command": "Discuss",
+      "syllabus": [
+        "E.4.4"
+      ],
+      "examinerNote": "Aims 8 and 9 and the guide's linking question on fission and climate change. One clearly stated advantage and one clearly stated problem, each linked to the physics (no combustion, so no CO2; radioactive fission products with long half-lives)."
+    }
+  ],
+  "diagrams": {}
+}

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220">
+  <!-- the dome with the leaving point at 48.2 degrees from the vertical; weight (blue) and normal force (orange) drawn at that point; dashed radius -->
+  <line class="axis" x1="0" y1="180" x2="400" y2="180"/>
+  <!-- dome: centre (200,180), radius 110 -->
+  <path class="axis" d="M90 180 A110 110 0 0 1 310 180" style="fill:var(--surface)"/>
+  <!-- vertical through the centre and the radius to the leaving point (sin 48.19 = 0.7454, cos 48.19 = 0.6667) -->
+  <line class="l3 thin dash" x1="200" y1="180" x2="200" y2="60"/>
+  <line class="l3 thin dash" x1="200" y1="180" x2="282" y2="106.7"/>
+  <!-- angle arc, radius 34 from the centre -->
+  <path class="l3 thin" d="M200 146 A34 34 0 0 1 225.3 157.3"/>
+  <text x="214" y="138" style="font-size:14px">48°</text>
+  <!-- the sliding child at the leaving point (282, 106.7) -->
+  <circle class="f3" cx="282" cy="106.7" r="4"/>
+  <!-- weight: straight down -->
+  <line class="l1" x1="282" y1="106.7" x2="282" y2="160" marker-end="url(#ah1)"/>
+  <text class="t1" x="282" y="176" text-anchor="middle">weight</text>
+  <!-- normal force: outwards along the radius, shrinking to zero at this point -->
+  <line class="l2" x1="282" y1="106.7" x2="304.4" y2="86.7" marker-end="url(#ah2)"/>
+  <text class="t2" x="300" y="74" text-anchor="middle">normal force</text>
+  <!-- level of the leaving point: one third of the radius below the top -->
+  <line class="l3 thin dash" x1="282" y1="106.7" x2="386" y2="106.7"/>
+  <line class="l3 thin" x1="372" y1="70" x2="372" y2="106.7" marker-start="url(#ah3)" marker-end="url(#ah3)"/>
+  <text x="380" y="130" text-anchor="end" style="font-size:14px">drop R/3</text>
+  <text x="200" y="210" text-anchor="middle">same place for any mass</text>
+</svg>

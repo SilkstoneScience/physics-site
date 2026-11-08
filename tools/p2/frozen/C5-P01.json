@@ -1,0 +1,199 @@
+{
+  "question": {
+    "id": "C5-P01",
+    "theme": "C",
+    "topic": "C.5",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Many stars belong to binary systems, in which two stars orbit their common centre of mass. The light from one star of such a system is analysed with a spectrometer. An absorption line of calcium, which has a wavelength of 393.40 nm when measured in a laboratory on Earth, is observed at a wavelength that changes with time. The graph shows the observed wavelength of this line over several days. Two times, A and B, are marked.</p>",
+    "diagram": "questions/diagrams/p2-c5-binary.svg",
+    "diagramAlt": "Graph of observed wavelength in nanometres (393.30 to 393.50) against time in days (0 to 8), on a grid of 0.5 days by 0.01 nm. A dashed horizontal line marks 393.40 nm. The curve is a sine wave: it starts at 393.40 nm, peaks at 393.48 nm at 1.0 day (marked A), falls to 393.32 nm at 3.0 days (marked B), returns to 393.40 nm at 4.0 days and repeats, peaking again at 5.0 days and reaching its minimum at 7.0 days.",
+    "diagramLarge": true,
+    "parts": [
+      {
+        "label": "a",
+        "question": "Outline why the observed wavelength of the line changes periodically.",
+        "marks": 2,
+        "markscheme": [
+          "the star moves around its orbit, so the component of its velocity along the line of sight to Earth alternates between towards Earth and away from Earth ✓",
+          "the Doppler effect increases the observed wavelength when the star is receding and decreases it when the star is approaching, so the shift repeats once every orbit ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Determine the orbital period of the star.",
+        "marks": 1,
+        "markscheme": [
+          "period $= 4.0$ days, e.g. from one peak to the next ✓"
+        ],
+        "numeric": {
+          "answer": 4,
+          "unit": "day",
+          "range": [
+            3.88,
+            4.12
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Calculate the maximum speed of the star along the line of sight.",
+        "marks": 2,
+        "markscheme": [
+          "maximum shift $\\Delta\\lambda = 393.48 - 393.40 = 0.080\\ \\text{nm}$ ✓",
+          "$v = c\\,\\dfrac{\\Delta\\lambda}{\\lambda} = 3.00 \\times 10^{8} \\times \\dfrac{0.080}{393.40} = 6.1 \\times 10^{4}\\ \\text{m s}^{-1}$ ✓",
+          "Accept $5.67 \\times 10^{4}$ to $6.53 \\times 10^{4}$ $\\text{m s}^{-1}$ (allowing for the reading of the shift from the graph)."
+        ],
+        "numeric": {
+          "answer": 61006.6,
+          "unit": "$\\text{m s}^{-1}$",
+          "range": [
+            56700,
+            65300
+          ],
+          "mistakes": [
+            {
+              "value": 122013,
+              "feedback": "The shift Δλ is measured from the laboratory wavelength to the peak (or the trough), not from trough to peak."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "Deduce at which of the marked times, A or B, the star is moving towards Earth.",
+        "marks": 2,
+        "markscheme": [
+          "at B the observed wavelength (393.32 nm) is shorter than the laboratory wavelength / the line is blueshifted ✓",
+          "a decrease in wavelength means the source is moving towards the observer, so the star is moving towards Earth at B (and away from Earth at A) ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "State one assumption that must be made if the speed found in (c) is to be taken as the orbital speed of the star.",
+        "marks": 1,
+        "markscheme": [
+          "the orbit is seen edge-on from Earth / the line of sight lies in the plane of the orbit, so at A and B the whole of the star's velocity is along the line of sight ✓",
+          "OR the orbit is circular, so the orbital speed is constant ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "C.5"
+  ],
+  "given": {
+    "lam0": {
+      "value": 393.4,
+      "sf": 5,
+      "unit": "nm",
+      "range": [
+        380,
+        700
+      ],
+      "what": "laboratory wavelength of the calcium absorption line"
+    },
+    "dlam": {
+      "value": 0.08,
+      "sf": 2,
+      "unit": "nm",
+      "range": [
+        0.005,
+        0.5
+      ],
+      "what": "maximum shift of the observed wavelength from the laboratory value, read from the graph"
+    },
+    "P": {
+      "value": 4,
+      "sf": 2,
+      "unit": "day",
+      "range": [
+        0.5,
+        100
+      ],
+      "what": "orbital period, read from the graph"
+    }
+  },
+  "results": {
+    "Pd": {
+      "value": 4,
+      "unit": "day",
+      "sf": 2
+    },
+    "lamMax": {
+      "value": 393.47999999999996,
+      "unit": "nm",
+      "sf": 5
+    },
+    "lamMin": {
+      "value": 393.32,
+      "unit": "nm",
+      "sf": 5
+    },
+    "ratio": {
+      "value": 0.00020335536349771227,
+      "unit": "",
+      "sf": 2
+    },
+    "v": {
+      "value": 61006.60904931368,
+      "unit": "m s^-1",
+      "sf": 2
+    },
+    "wrong_v2": {
+      "value": 122013.21809862736,
+      "unit": "m s^-1",
+      "sf": 2
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Outline",
+      "syllabus": [
+        "C.5.1",
+        "C.5.3"
+      ],
+      "examinerNote": "Orbital motion changes the line-of-sight velocity periodically; the Doppler shift follows it. The second star is not needed for the marks."
+    },
+    {
+      "label": "b",
+      "command": "Determine",
+      "syllabus": [
+        "C.5.3",
+        "T.4"
+      ],
+      "examinerNote": "One full cycle of the graph: peak to peak (1.0 d to 5.0 d) or trough to trough (3.0 d to 7.0 d). Typed in days."
+    },
+    {
+      "label": "c",
+      "command": "Calculate",
+      "syllabus": [
+        "C.5.2"
+      ],
+      "examinerNote": "Δλ/λ ≈ v/c with the shift from the laboratory value to the peak, 0.080 nm, giving Δλ/λ = 2.0 × 10⁻⁴ and v = 6.1 × 10⁴ m s⁻¹ (61 km s⁻¹, a typical orbital speed in a close binary). The ratio in nm cancels, so no unit conversion is needed."
+    },
+    {
+      "label": "d",
+      "command": "Deduce",
+      "syllabus": [
+        "C.5.3",
+        "C.5.1"
+      ],
+      "examinerNote": "Shorter observed wavelength (blueshift) means approach. The answer \"B\" alone, without the reason, earns 1 mark at most."
+    },
+    {
+      "label": "e",
+      "command": "State",
+      "syllabus": [
+        "C.5.3"
+      ],
+      "examinerNote": "If the orbit is tilted, only the component of the velocity along the line of sight is measured, so the orbital speed is larger than the value found. Either the edge-on or the circular-orbit assumption earns the mark."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-c5-binary.svg": "491d2595eb80964cc88091c97e2c4b60ad1b8a164d7edac77e6cf7303c6b6579"
+  }
+}

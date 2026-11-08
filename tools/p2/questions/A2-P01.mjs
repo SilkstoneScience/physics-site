@@ -35,6 +35,7 @@ export default {
   },
   calcLiterals: { 100: 'centimetres in a metre, for the common wrong answer that leaves the extension in cm' },
   stem: '<p>A wooden crate of mass [[m]] rests on a rough, horizontal concrete floor. A horizontal elastic cord of spring constant [[k]] is attached to the crate and pulled so that its extension increases slowly. The crate stays at rest until the extension of the cord reaches [[xs]], when it starts to slide. The cord is then pulled so that the crate slides at constant velocity; the extension of the cord is now [[xd]]. The cord obeys Hooke\'s law throughout.</p>',
+  diagram: { file: 'questions/diagrams/p2-a2-crate.svg', alt: 'Side view of a wooden crate resting on a rough concrete floor. A horizontal elastic cord, drawn stretched, runs from the right side of the crate to a hand pulling it to the right. No forces are drawn. Not to scale.' },
   parts: [
     {
       label: 'a', sections: ['forces', 'contact'], command: 'Draw', marks: 2, syllabus: ['A.2.2', 'A.2.3'],
