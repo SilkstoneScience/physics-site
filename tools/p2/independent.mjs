@@ -260,5 +260,43 @@ export const INDEPENDENT = {
     const perSecond = thermalW / perFission;
     const nucleus = AU.value * 1.661e-27;
     return { Amiss: AU.value + 1 - AX.value - 2 * 1, Zmiss: ZU.value - ZX.value, Pth: thermalW / 1e6, EfJ: perFission, rate: perSecond, mU: nucleus, mDay: perSecond * 24 * 3600 * nucleus };
+  // Fire hose: the jet is at its highest when the vertical velocity is zero (time uy/g, height from s = ut + ½at²
+  // over that time, not from v² = u² + 2as); it lands when the vertical displacement returns to zero, at twice
+  // that time; the horizontal velocity is unchanged throughout.
+  'A1-P03': ({ u, theta }) => {
+    const up = u.value * Math.sin(rad(theta.value)), along = u.value * Math.cos(rad(theta.value));
+    const tTop = up / G;
+    const top = up * tTop - 0.5 * G * tTop * tTop;
+    return { uy: up, ux: along, H: top, t: 2 * tTop, R: along * 2 * tTop };
+  },
+  // Crate: Hooke's law with extensions in metres; constant velocity means friction balances the pull and the
+  // normal force balances the weight; μd is their ratio. Two crates: twice the normal force, twice the extension.
+  'A2-P01': ({ m, k, xs, xd }) => {
+    const pullStart = k.value * (xs.value / 100), pullSlide = k.value * (xd.value / 100);
+    const weight = m.value * G;
+    return { Fs: pullStart, Fd: pullSlide, N: weight, mud: pullSlide / weight, x2: xd.value + xd.value };
+  },
+  // Airbag: the impulse is the area under F = Fmax sin(πt/T), found by Simpson's rule over the contact time (ms → s),
+  // not from the closed form; the head is brought to rest so m v = J; the average force is J / T.
+  'A2-P02': ({ Fmax, T, m }) => {
+    const Ts = T.value / 1000;
+    const force = (t) => Fmax.value * Math.sin(Math.PI * t / Ts);
+    const n = 2000, dt = Ts / n;
+    let s = force(0) + force(Ts);
+    for (let i = 1; i < n; i++) s += (i % 2 ? 4 : 2) * force(i * dt);
+    const impulse = s * dt / 3;
+    return { J: impulse, v: impulse / m.value, Favg: impulse / Ts };
+  },
+  // Reservoir: weight of the water × height; the power in MW from joules per second; energies in and out from
+  // power × time with hours as 60 × 60 s; the overall efficiency as a percentage.
+  'A3-P01': ({ V, rho, h, Pp, tp, Pg, tg }) => {
+    const hour = 60 * 60;
+    const water = rho.value * V.value;
+    const stored = water * G * h.value;
+    const used = Pp.value * 1e6 * tp.value * hour, returned = Pg.value * 1e6 * tg.value * hour;
+    return {
+      mass: water, E: stored, Pgpe: stored / (tg.value * hour) / 1e6,
+      Ein: used, Eout: returned, eff: 100 * returned / used, perkg: G * h.value,
+    };
   },
 };
