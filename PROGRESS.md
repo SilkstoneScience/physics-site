@@ -108,7 +108,8 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - **Theme B done** (teacher-checked, 8 November 2026): Black, Telkes, Foote (her 1856 paper instead of a portrait), Manabe, Boyle, Bernoulli, Carnot, Boltzmann, Latimer, Ohm.
 - **Theme C done** (teacher-checked, 8 November 2026): Zhang Heng (a model of his seismoscope), Huygens, Lehmann, J. C. Bose, Ibn al-Haytham and Ibn Sahl (manuscript pages: no portraits exist), Germain, Raman, Doppler, Rubin.
 - **Theme D done** (teacher-checked, 8 November 2026): Katherine Johnson, Mary Golda Ross (HL, shown on the 2019 one-dollar coin), Coulomb, Shen Kuo (a modern statue), J. J. Thomson, Joan Feynman, Faraday, Tesla.
-- Next: theme E (10 scientists), fact-checked, with openly licensed pictures.
+- **Theme E done** (teacher-checked, 8 November 2026): Rutherford, Nagaoka, S. N. Bose, Elmer Imes (a measured HCl infrared spectrum: no open photo exists), Marie Curie, Chien-Shiung Wu, Meitner, Fermi, Payne-Gaposchkin, Chandrasekhar.
+- **All 48 scientists are on the site.** Possible later step: make the checker warn about any subtopic page without two scientists.
 
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).

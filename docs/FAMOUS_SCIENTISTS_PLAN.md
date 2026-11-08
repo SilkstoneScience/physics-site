@@ -2,7 +2,7 @@
 
 **Aim:** each subtopic page (A.1–E.5) gets a short "Famous scientist" box: a portrait, a one-line caption and an expandable "What they achieved" section. The same scientist is an optional part of the revision sheet builder. The selection deliberately includes scientists from many countries, ethnicities and backgrounds, and women, alongside the traditional European names.
 
-Status: **draft. Nothing is built until the teacher agrees this plan and picks from the candidate list (section 6).**
+Status: **complete (8 November 2026).** All 48 scientists (two per subtopic, A.1–E.5) are on the site, each batch fact-checked and checked by the teacher before it was pushed. Sections 1–6 are the original plan; 6b is the approved list; 7 has the sources.
 
 ## 1. Data: one shared file
 
@@ -182,6 +182,20 @@ Each scientist's facts were checked by an independent fact-check (November 2026)
 - **Joan Feynman:** Physics Today obituary, https://physicstoday.aip.org/obituaries/joan-feynman ; APS, https://www.aps.org/apsnews/2020/08/joan-feynman-obituary ; NASA biography, https://science.nasa.gov/wp-content/uploads/2023/09/SWLH-BIO_Joan_Feynman.pdf . Not "discovered how auroras form"; medal year differs between sources (2000/2002), so no year is given.
 - **Faraday:** Royal Institution, https://www.rigb.org/node/2696 and https://www.rigb.org/christmas-lectures/history-christmas-lecturesr ; MacTutor, https://mathshistory.st-andrews.ac.uk/Biographies/Faraday/ . No knighthood is known to have been offered; he didn't start the Christmas Lectures.
 - **Tesla:** ETHW, https://ethw.org/Nikola_Tesla ; rotating fields milestone, https://ethw.org/Milestones:Rotating_Fields_and_Early_Induction_Motors,_1885-1888 ; Adams plant, https://ethw.org/Milestones:Adams_Hydroelectric_Generating_Plant,_1895 ; radio myth, https://www.mercurians.org/1998_fall/misreading.htm . Ferraris independent; not "inventor of radio".
+
+### Theme E
+- **Rutherford:** AIP, https://history.aip.org/exhibits/rutherford/sections/alpha-particles-atom.html ; CERN Courier, https://cerncourier.com/a/rutherford-transmutation-and-the-proton/ ; the "15-inch shell" quote, https://en.wikiquote.org/wiki/Ernest_Rutherford . The quote is a 1936 memory (described as "years later"); Nobel 1908 was in Chemistry, for McGill work; no oxygen identification claimed for 1919.
+- **Nagaoka:** DSB, https://encyclopedia.com/science/dictionaries-thesauruses-pictures-and-press-releases/nagaoka-hantaro ; Physics Today (Badash 1967), https://physicstoday.aip.org/features/nagaoka-to-rutherford-22-february-1911 ; National Diet Library, https://www.ndl.go.jp/portrait/e/datas/5176 . "Heavy" centre; probably didn't shape Rutherford's argument (said on the page).
+- **S. N. Bose:** MacTutor, https://mathshistory.st-andrews.ac.uk/Biographies/Bose/ ; the Phil. Mag. rejection, https://arxiv.org/pdf/2210.13967 ("reportedly"); relativity translation, https://gutenberg.org/cache/epub/66944/pg66944-images.html .
+- **Imes:** APS News, https://www.aps.org/apsnews/2008/11/elmer-imes-publishes-infrared-spectroscopy ; Rackham (Michigan), https://rackham.umich.edu/discover-rackham/a-scholar-and-a-trailblazer/ ; isotopes, https://arxiv.org/pdf/1112.2339 . The 1919 paper was his alone; others made the isotope interpretation (said on the page).
+- **Curie:** AIP, https://history.aip.org/exhibits/curie/ and https://history.aip.org/exhibits/curie/war1.htm ; notebooks, https://www.sciencealert.com/these-personal-effects-of-marie-curie-will-be-radioactive-for-another-1-500-years . She didn't discover radioactivity (Becquerel); she named it and showed it was atomic.
+- **Wu:** NAS memoir (Benczer-Koller, 2009), https://www.nasonline.org/wp-content/uploads/2024/06/wu-chien-shiung.pdf . "First Lady of Physics" has no traceable source, so it's given as "often called".
+- **Meitner:** Stuewer, https://www.mprl-series.mpg.de/media/proceedings/5/11/Proc5ch9.pdf ; Atomic Heritage Foundation, https://ahf.nuclearmuseum.org/ahf/profile/lise-meitner/ ; NPS, https://www.nps.gov/people/women-of-the-manhattan-project-lise-meitner.htm .
+- **Fermi:** Chicago Pile-1, https://ethw.org/Chicago_Pile-1 ; Laura Fermi, https://ahf.nuclearmuseum.org/ahf/profile/laura-fermi/ . His Nobel "new elements" were mostly fission products (said on the page).
+- **Payne-Gaposchkin:** DSB (Gingerich), https://mathshistory.st-andrews.ac.uk/DSB/payne-gaposchkin.pdf . Not "first woman full professor at Harvard": the first woman to head a Harvard department (1956).
+- **Chandrasekhar:** MacTutor, https://mathshistory.st-andrews.ac.uk/Biographies/Chandrasekhar/ ; priority, https://physicstoday.aip.org/letters/placing-chandras-work-in-historical-context . Others found simpler limits at about the same time (said on the page). The Chandrasekhar limit is new in the 2028 guide.
+
+**Pictures (theme E):** public domain, except Wu (AIP Emilio Segrè Visual Archives, CC BY 4.0) and the HCl spectrum (Cnrowley, CC BY-SA 4.0). The Smithsonian "no known copyright restrictions" photos of Wu were not used, because that isn't one of the allowed licences. No openly licensed photo of Elmer Imes was found, so (teacher's choice, 8 November 2026) his box shows an openly licensed modern measurement of the kind of spectrum he measured.
 
 **Pictures (theme D):** public domain, except Shen Kuo's statue (CatOnMars, CC BY-SA 4.0) and Joan Feynman (Maia Weinstock, CC BY-SA 4.0). Mary Golda Ross is shown on the 2019 US Mint coin (public domain); "$1" is written "one-dollar" so MathJax doesn't treat it as an equation.
 
