@@ -1,0 +1,1091 @@
+{
+  "topic": "A.3",
+  "hours": 8,
+  "points": [
+    {
+      "id": "conservation",
+      "short": "Conservation of energy",
+      "guide": "The principle of the conservation of energy.",
+      "sections": [
+        "conservation"
+      ],
+      "minutes": 30,
+      "aims": [
+        "State the principle of conservation of energy.",
+        "Describe the energy transfers in an everyday process, accounting for all the energy."
+      ],
+      "checks": [
+        "A3-013"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Energy is conserved",
+          "bullets": [
+            "Energy is measured in <strong>joules</strong> (J)",
+            "It is held in <strong>stores</strong>: kinetic, gravitational, elastic, thermal, chemical, nuclear",
+            "Energy is transferred from one store to another by work done by forces, by heating, by electric currents and by waves",
+            "<strong>Conservation of energy</strong>: energy cannot be created or destroyed, so the total energy of an isolated system is constant",
+            "Energy is never \"used up\": it ends up in less useful stores, usually thermal energy in the surroundings"
+          ],
+          "notes": "Ask students where the energy of a moving car goes when it brakes to a stop. \"It disappears\" is the misconception to address: it becomes thermal energy in the brakes, tyres and air."
+        },
+        {
+          "type": "worked",
+          "title": "A ball that stops bouncing",
+          "question": "A rubber ball is dropped from rest onto a hard floor. Each bounce is lower than the one before, and the ball eventually comes to rest on the floor. Describe the energy transfers from the moment of release until the ball is at rest, and explain whether energy has been conserved.",
+          "hint": "Follow the energy store by store: falling, squashing against the floor, rising again. Where does the \"missing\" energy go each time?",
+          "steps": [
+            {
+              "text": "Falling: gravitational potential energy is transferred to kinetic energy."
+            },
+            {
+              "text": "Hitting the floor: kinetic energy is stored briefly as elastic energy as the ball squashes, then most of it returns as kinetic energy."
+            },
+            {
+              "text": "Each impact, and the air resistance, transfers some energy to thermal energy (and a little to sound), so each bounce is lower."
+            },
+            {
+              "text": "At rest, all of the original gravitational potential energy has become thermal energy in the ball, the floor and the air: the total is unchanged, so energy is conserved."
+            }
+          ],
+          "notes": "A good place to stress the difference between energy being conserved and mechanical energy being conserved. Students can check the ball and floor are very slightly warmer after many bounces only with sensitive equipment: the energy is spread thinly."
+        }
+      ]
+    },
+    {
+      "id": "work-transfer",
+      "short": "Work as energy transfer",
+      "guide": "Work done by a force is equivalent to a transfer of energy.",
+      "sections": [
+        "work",
+        "conservation"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Explain that the work done by a force is equal to the energy it transfers.",
+        "Use the joule as the unit of both work and energy: $1\\ \\text{J} = 1\\ \\text{N m}$."
+      ],
+      "checks": [
+        "A3-001"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Doing work transfers energy",
+          "bullets": [
+            "A force does <strong>work</strong> when its point of application moves with a component along the force",
+            "The work done by a force equals the energy it transfers: 1 J of work transfers 1 J of energy",
+            "Work and energy are both measured in joules: $1\\ \\text{J} = 1\\ \\text{N m}$",
+            "Positive work: the force transfers energy <strong>to</strong> the body; negative work: <strong>from</strong> the body",
+            "Work is a <strong>scalar</strong>: it has no direction"
+          ],
+          "notes": "\"Work\" in everyday speech means effort. In physics, a force that does not move its point of application does no work: holding a heavy bag still is tiring, yet the upward force on the bag does no work on it."
+        },
+        {
+          "type": "bullets",
+          "title": "Examples of work as energy transfer",
+          "bullets": [
+            "Lifting a box: the lifting force transfers energy to its gravitational store",
+            "Stretching a spring: the pulling force transfers energy to its elastic store",
+            "Pushing a cart from rest: the push transfers energy to its kinetic store",
+            "Friction on a sliding block: transfers energy from its kinetic store to the thermal store of the block and surface"
+          ],
+          "notes": "Ask students to name the force doing the work and the stores the energy moves between in each case."
+        }
+      ]
+    },
+    {
+      "id": "work-component",
+      "short": "Work done by a constant force",
+      "guide": "Work W done on a body by a constant force depends on the component of the force along the line of displacement, as given by W = Fs cos θ.",
+      "sections": [
+        "work"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Calculate the work done by a constant force using $W = Fs\\cos\\theta$, including negative and zero work.",
+        "Determine the work done by a changing force from the area under a force–displacement graph."
+      ],
+      "checks": [
+        "A3-002"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Work done by a constant force",
+          "bullets": [
+            "Only $F\\cos\\theta$, the part of the force that lies <strong>along the displacement</strong>, does work",
+            "$\\theta$ is the angle between the force and the displacement",
+            [
+              "$\\theta = 0^{\\circ}$: $W = Fs$ (the force is along the motion)",
+              "$\\theta = 90^{\\circ}$: $W = 0$ (e.g. the normal force on a level road)",
+              "$\\theta = 180^{\\circ}$: $W = -Fs$ (e.g. friction, braking)"
+            ],
+            "No displacement, no work"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Work done",
+          "latex": "W = Fs\\cos\\theta",
+          "bullets": [
+            "In the data booklet",
+            "Valid for a <strong>constant</strong> force; $F$ and $s$ are magnitudes, and $\\cos\\theta$ supplies the sign"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "The component that does work",
+          "figure": "w1t"
+        },
+        {
+          "type": "bullets",
+          "title": "Work from a force–displacement graph",
+          "bullets": [
+            "If the force varies, the work done equals the <strong>area between the force–displacement graph and the displacement axis</strong>",
+            "Split the area into rectangles, triangles and trapeziums, or count squares",
+            "Read the values from the axes, with their units (convert mm and cm to m)",
+            "Hooke's law spring: force is proportional to extension, so the area is a triangle"
+          ],
+          "notes": "This is the step that leads to the elastic potential energy equation later in the topic."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for calculating work",
+          "bullets": [
+            "Find the angle between the <strong>force</strong> and the <strong>displacement</strong>, not between the force and the horizontal (unless the motion is horizontal)",
+            "Check the calculator is in degrees",
+            "Ask which force the question is about: each force on a body does its own work",
+            "A force at right angles to the motion does no work, however large it is"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A wheeled suitcase",
+          "question": "A traveller pulls a wheeled suitcase 120 m along a level platform with a constant force of 45 N along the handle, which is at 35° above the horizontal. Find (a) the work done by the pull and (b) the work done by the weight of the suitcase.",
+          "hint": "Only the component of the pull along the platform does work. What is the angle between the weight and the displacement?",
+          "steps": [
+            {
+              "text": "(a) The angle between the pull and the displacement is 35°.",
+              "latex": "W = Fs\\cos\\theta = 45 \\times 120 \\times \\cos 35^{\\circ}"
+            },
+            {
+              "text": "Evaluate.",
+              "latex": "W = 4.4 \\times 10^{3}\\ \\text{J}"
+            },
+            {
+              "text": "(b) The weight acts vertically and the displacement is horizontal, so $\\theta = 90^{\\circ}$.",
+              "latex": "W = mgs\\cos 90^{\\circ} = 0"
+            }
+          ],
+          "notes": "Unrounded, (a) is 4423 J. The vertical component of the pull ($45\\sin 35^{\\circ} \\approx 26$ N) helps to support the suitcase but does no work, because it is at right angles to the displacement."
+        },
+        {
+          "type": "worked",
+          "title": "Lowering a piano",
+          "question": "Removal workers lower a 210 kg piano through a vertical height of 3.5 m at constant speed, using a rope. Find (a) the work done on the piano by the tension in the rope and (b) the work done on it by its weight.",
+          "hint": "At constant speed the forces on the piano balance, so how large is the tension? Compare the direction of each force with the direction of the displacement.",
+          "steps": [
+            {
+              "text": "Constant speed, so the tension equals the weight.",
+              "latex": "T = mg = 210 \\times 9.8 = 2058\\ \\text{N}"
+            },
+            {
+              "text": "(a) The tension acts upwards but the piano moves down: $\\theta = 180^{\\circ}$.",
+              "latex": "W_{T} = 2058 \\times 3.5 \\times \\cos 180^{\\circ} = -7.2 \\times 10^{3}\\ \\text{J}"
+            },
+            {
+              "text": "(b) The weight is along the displacement: $\\theta = 0^{\\circ}$.",
+              "latex": "W_{g} = 2058 \\times 3.5 \\times \\cos 0^{\\circ} = +7.2 \\times 10^{3}\\ \\text{J}"
+            },
+            {
+              "text": "The total work is zero, so the kinetic energy of the piano does not change."
+            }
+          ],
+          "notes": "The negative work done by the rope means energy is transferred from the piano's gravitational store to the workers and the rope, where it ends up as thermal energy."
+        },
+        {
+          "type": "worked",
+          "title": "A changing push",
+          "question": "A trolley is pushed along a straight track. The push increases uniformly from 20 N to 50 N over the first 4.0 m, then stays at 50 N for a further 2.0 m. The push is always along the track. Find the total work done by the push.",
+          "hint": "Sketch the force–displacement graph. The work is the area under it: which two shapes make up that area?",
+          "steps": [
+            {
+              "text": "First 4.0 m: a trapezium under the graph.",
+              "latex": "W_{1} = \\tfrac{1}{2}(20 + 50)(4.0) = 140\\ \\text{J}"
+            },
+            {
+              "text": "Next 2.0 m: a rectangle.",
+              "latex": "W_{2} = 50 \\times 2.0 = 100\\ \\text{J}"
+            },
+            {
+              "text": "Add the two areas.",
+              "latex": "W = 140 + 100 = 240\\ \\text{J}"
+            }
+          ],
+          "notes": "Using the final force for the whole 6.0 m would give 300 J, the most common wrong answer: the force is only 50 N for part of the motion."
+        }
+      ]
+    },
+    {
+      "id": "energy-forms",
+      "short": "Kinetic and potential energy",
+      "guide": "If mechanical energy is conserved, work is the amount of energy transformed between different forms of mechanical energy: kinetic energy Ek = ½mv² = p²/2m, gravitational potential energy close to the Earth's surface ΔEp = mgΔh, and elastic potential energy EH = ½k(Δx)².",
+      "sections": [
+        "kinetic",
+        "potential"
+      ],
+      "minutes": 75,
+      "aims": [
+        "Calculate kinetic energy from mass and speed or from momentum, gravitational potential energy changes and elastic potential energy.",
+        "Derive $\\Delta E_{p} = mg\\Delta h$, $E_{H} = \\tfrac{1}{2}k(\\Delta x)^{2}$ and $E_{k} = \\dfrac{p^{2}}{2m}$."
+      ],
+      "challenge": "CC-A3-02",
+      "checks": [
+        "A3-006"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Three mechanical energy stores",
+          "bullets": [
+            "<strong>Kinetic energy</strong>: the energy of a moving body; it depends on mass and on speed squared",
+            "<strong>Gravitational potential energy</strong>: depends on height; only <strong>changes</strong> matter, so any level can be chosen as zero",
+            "<strong>Elastic potential energy</strong>: stored in a stretched or compressed spring (or other elastic object)",
+            "When mechanical energy is conserved, work done moves energy between these stores"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Mechanical energy equations",
+          "latex": [
+            "E_{k} = \\tfrac{1}{2}mv^{2} = \\dfrac{p^{2}}{2m}",
+            "\\Delta E_{p} = mg\\Delta h",
+            "E_{H} = \\tfrac{1}{2}k(\\Delta x)^{2}"
+          ],
+          "bullets": [
+            "All three are in the data booklet",
+            "$k$: spring constant ($\\text{N m}^{-1}$); $\\Delta x$: extension or compression",
+            "$\\Delta E_{p} = mg\\Delta h$ only applies close to the Earth's surface, where $g$ is constant"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the gravitational potential energy change",
+          "start": "A body of mass $m$ is lifted at constant speed through a height $\\Delta h$, close to the Earth's surface, where $g$ is constant.",
+          "steps": [
+            {
+              "text": "Constant speed, so the lifting force balances the weight",
+              "latex": "F = mg"
+            },
+            {
+              "text": "The force and the displacement are both upwards: $\\theta = 0^{\\circ}$",
+              "latex": "W = F\\Delta h\\cos 0^{\\circ} = mg\\Delta h"
+            },
+            {
+              "text": "The kinetic energy does not change, so all this work is stored as gravitational potential energy",
+              "latex": "\\Delta E_{p} = mg\\Delta h"
+            }
+          ],
+          "notes": "Far from the Earth, $g$ falls with distance and this equation no longer applies (D.1, HL)."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the elastic potential energy",
+          "start": "A spring obeys Hooke's law: the force needed to stretch it is proportional to its extension, $F = k\\Delta x$. It is stretched slowly from its natural length.",
+          "steps": [
+            {
+              "text": "The force rises from 0 to $k\\Delta x$, so the force–extension graph is a straight line through the origin",
+              "latex": "F_{\\text{max}} = k\\Delta x"
+            },
+            {
+              "text": "Work done = area under the graph, a triangle",
+              "latex": "W = \\tfrac{1}{2} \\times \\Delta x \\times k\\Delta x"
+            },
+            {
+              "text": "Simplify",
+              "latex": "W = \\tfrac{1}{2}k(\\Delta x)^{2}"
+            },
+            {
+              "text": "This work is stored in the spring as elastic potential energy",
+              "latex": "E_{H} = \\tfrac{1}{2}k(\\Delta x)^{2}"
+            }
+          ],
+          "notes": "Students who take DP Maths can also get this by integrating $F = kx$ from 0 to $\\Delta x$. The average force during the stretch is half the final force, which is where the ½ comes from."
+        },
+        {
+          "type": "derivation",
+          "title": "Kinetic energy in terms of momentum",
+          "start": "Start from the kinetic energy and the momentum of a body of mass $m$ moving at speed $v$.",
+          "steps": [
+            {
+              "text": "Momentum (A.2)",
+              "latex": "p = mv \\;\\Rightarrow\\; v = \\dfrac{p}{m}"
+            },
+            {
+              "text": "Substitute for $v$ in the kinetic energy",
+              "latex": "E_{k} = \\tfrac{1}{2}m\\left(\\dfrac{p}{m}\\right)^{2}"
+            },
+            {
+              "text": "Simplify",
+              "latex": "E_{k} = \\dfrac{p^{2}}{2m}"
+            }
+          ],
+          "notes": "Useful in collision and decay problems where the momentum is known: for the same momentum, the lighter body has more kinetic energy."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for using the energy equations",
+          "bullets": [
+            "Square the speed or the extension: doubling either one <strong>quadruples</strong> the energy",
+            "Kinetic and elastic energy are never negative; a change in gravitational potential energy can be",
+            "Convert grams to kg, and mm or cm to m, before substituting",
+            "Use the height change $\\Delta h$ (vertical), not the distance moved along a slope"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A cyclist's kinetic energy",
+          "question": "A cyclist and her bicycle have a total mass of 72 kg and move at 9.0 $\\text{m s}^{-1}$. Find (a) their kinetic energy, (b) their momentum, and (c) the kinetic energy again, this time from the momentum.",
+          "hint": "Use $E_{k} = \\tfrac{1}{2}mv^{2}$ for (a) and $p = mv$ for (b). Part (c) is a check that the two forms of the kinetic energy equation agree.",
+          "steps": [
+            {
+              "text": "(a) Kinetic energy.",
+              "latex": "E_{k} = \\tfrac{1}{2}(72)(9.0)^{2} = 2.9 \\times 10^{3}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Momentum.",
+              "latex": "p = mv = 72 \\times 9.0 = 648\\ \\text{kg m s}^{-1}"
+            },
+            {
+              "text": "(c) From the momentum.",
+              "latex": "E_{k} = \\dfrac{p^{2}}{2m} = \\dfrac{648^{2}}{2 \\times 72} = 2.9 \\times 10^{3}\\ \\text{J}"
+            }
+          ],
+          "notes": "Both give 2916 J. Ask what her kinetic energy would be at 18 $\\text{m s}^{-1}$ (four times as much, about 11.7 kJ)."
+        },
+        {
+          "type": "worked",
+          "title": "Climbing the stairs",
+          "question": "A student of mass 58 kg climbs a flight of stairs that rises 3.4 m vertically and runs 4.5 m horizontally. Find the increase in her gravitational potential energy.",
+          "hint": "Gravitational potential energy depends only on the change in height. Which of the two distances is the height?",
+          "steps": [
+            {
+              "text": "Only the vertical rise matters: $\\Delta h = 3.4$ m.",
+              "latex": "\\Delta E_{p} = mg\\Delta h"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "\\Delta E_{p} = 58 \\times 9.8 \\times 3.4 = 1.9 \\times 10^{3}\\ \\text{J}"
+            }
+          ],
+          "notes": "The horizontal 4.5 m is there to be ignored. Unrounded: 1933 J. A follow-up: does it matter whether she walks or runs up? (Not for the energy; it matters for the power, later in the topic.)"
+        },
+        {
+          "type": "worked",
+          "title": "A gate spring",
+          "question": "A spring that closes a garden gate has a spring constant of 850 $\\text{N m}^{-1}$. Find (a) the elastic potential energy stored when it is stretched by 0.24 m and (b) the extension at which it stores 100 J.",
+          "hint": "Use $E_{H} = \\tfrac{1}{2}k(\\Delta x)^{2}$ for (a). For (b), rearrange the same equation to make $\\Delta x$ the subject.",
+          "steps": [
+            {
+              "text": "(a) Substitute.",
+              "latex": "E_{H} = \\tfrac{1}{2}(850)(0.24)^{2} = 24\\ \\text{J}"
+            },
+            {
+              "text": "(b) Rearrange.",
+              "latex": "\\Delta x = \\sqrt{\\dfrac{2E_{H}}{k}}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "\\Delta x = \\sqrt{\\dfrac{2 \\times 100}{850}} = 0.49\\ \\text{m}"
+            }
+          ],
+          "notes": "Four times the energy (roughly) needs only about twice the extension. Unrounded: 24.48 J and 0.485 m."
+        }
+      ]
+    },
+    {
+      "id": "work-energy",
+      "short": "Work–energy principle",
+      "guide": "Work done by the resultant force on a system is equal to the change in the energy of the system.",
+      "sections": [
+        "kinetic"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Derive $E_{k} = \\tfrac{1}{2}mv^{2}$ and the work–energy principle from the equations of motion.",
+        "Use the work done by the resultant force to find changes in kinetic energy and speed."
+      ],
+      "challenge": "CC-A3-03",
+      "checks": [
+        "A3-024"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The work–energy principle",
+          "bullets": [
+            "Work–energy principle: the change in a body's kinetic energy equals the work done on it by the <strong>resultant</strong> force",
+            "Positive resultant work: the body speeds up; negative: it slows down; zero: constant speed",
+            "It solves problems without finding the acceleration or the time",
+            "It works even when the path curves or the acceleration changes, as long as the work can be found"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the work–energy principle",
+          "start": "A constant resultant force $F$ acts on a body of mass $m$ along its displacement $s$. Its speed changes from $u$ to $v$.",
+          "steps": [
+            {
+              "text": "The timeless equation of motion (A.1)",
+              "latex": "v^{2} = u^{2} + 2as"
+            },
+            {
+              "text": "Multiply both sides by $\\tfrac{1}{2}m$",
+              "latex": "\\tfrac{1}{2}mv^{2} = \\tfrac{1}{2}mu^{2} + mas"
+            },
+            {
+              "text": "Newton's second law (A.2): $ma = F$",
+              "latex": "\\tfrac{1}{2}mv^{2} = \\tfrac{1}{2}mu^{2} + Fs"
+            },
+            {
+              "text": "$Fs$ is the work done by the resultant force, so $\\tfrac{1}{2}mv^{2}$ is the kinetic energy",
+              "latex": "W_{\\text{net}} = \\tfrac{1}{2}mv^{2} - \\tfrac{1}{2}mu^{2} = \\Delta E_{k}"
+            }
+          ],
+          "notes": "This is where $E_{k} = \\tfrac{1}{2}mv^{2}$ comes from: it is the work needed to bring a body from rest to speed $v$. The principle is not in the data booklet."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for using the work–energy principle",
+          "bullets": [
+            "Draw a free-body diagram and find the <strong>resultant</strong> force, or add the work done by each force",
+            "Forces at right angles to the motion do no work: leave them out",
+            "Friction on a sliding body acts against the motion, so it does negative work and reduces the kinetic energy",
+            "Use it when the question gives distances but not times"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A curling stone",
+          "question": "A curling stone of mass 20 kg is released at 2.2 $\\text{m s}^{-1}$ and slides in a straight line across level ice. The friction on it is a constant 1.6 N and air resistance is negligible. Find (a) the initial kinetic energy of the stone and (b) how far it slides before stopping.",
+          "hint": "Friction is the resultant force, and it acts against the motion. The work it does equals the change in kinetic energy.",
+          "steps": [
+            {
+              "text": "(a) Initial kinetic energy.",
+              "latex": "E_{k} = \\tfrac{1}{2}(20)(2.2)^{2} = 48.4\\ \\text{J}"
+            },
+            {
+              "text": "(b) The stone stops, so $\\Delta E_{k} = -48.4$ J. Friction acts against the motion ($\\theta = 180^{\\circ}$).",
+              "latex": "-Fs = \\Delta E_{k}"
+            },
+            {
+              "text": "Solve for $s$.",
+              "latex": "s = \\dfrac{48.4}{1.6} = 30\\ \\text{m}"
+            }
+          ],
+          "notes": "The friction is less than 1% of the stone's weight, which is why it slides so far. Ask what happens to the stopping distance if the stone is released twice as fast (four times as far, because $E_{k}$ depends on $v^{2}$)."
+        },
+        {
+          "type": "worked",
+          "title": "Throwing a ball upwards",
+          "question": "A student throws a 0.40 kg ball vertically upwards. Starting from rest, her hand pushes on the ball with a constant upward force of 22 N over a vertical distance of 0.60 m. Find the speed of the ball as it leaves her hand.",
+          "hint": "The push is not the only force on the ball during the throw. Find the resultant force first, then the work it does.",
+          "steps": [
+            {
+              "text": "Resultant force: the push minus the weight.",
+              "latex": "F_{\\text{net}} = 22 - 0.40 \\times 9.8 = 18.1\\ \\text{N}"
+            },
+            {
+              "text": "Work done by the resultant force.",
+              "latex": "W_{\\text{net}} = 18.1 \\times 0.60 = 10.8\\ \\text{J}"
+            },
+            {
+              "text": "This equals the kinetic energy gained from rest.",
+              "latex": "\\tfrac{1}{2}(0.40)v^{2} = 10.8"
+            },
+            {
+              "text": "Solve for $v$.",
+              "latex": "v = \\sqrt{\\dfrac{2 \\times 10.8}{0.40}} = 7.4\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "Using 22 N alone gives 8.1 $\\text{m s}^{-1}$, the common wrong answer. Alternatively: work by the push (13.2 J) = gain in $E_{k}$ + gain in $E_{p}$ (2.35 J), which gives the same result."
+        }
+      ]
+    },
+    {
+      "id": "mechanical",
+      "short": "Mechanical energy",
+      "guide": "Mechanical energy is the sum of kinetic energy, gravitational potential energy and elastic potential energy.",
+      "sections": [
+        "mechanical"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Define mechanical energy as the sum of kinetic, gravitational potential and elastic potential energy."
+      ],
+      "challenge": "CC-A3-04",
+      "checks": [
+        "A3-009"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Mechanical energy",
+          "bullets": [
+            "<strong>Mechanical energy</strong> = kinetic + gravitational potential + elastic potential energy",
+            "Other stores (thermal, chemical, nuclear, ...) are not mechanical",
+            "Examples of exchanges between mechanical stores:",
+            [
+              "a swing: kinetic ⇄ gravitational",
+              "a mass bouncing on a spring: kinetic ⇄ elastic ⇄ gravitational",
+              "a trampoline jump: all three"
+            ]
+          ],
+          "notes": "Ask students to identify the mechanical stores at the top, middle and bottom of a trampoline bounce."
+        }
+      ]
+    },
+    {
+      "id": "conserved",
+      "short": "Conserving mechanical energy",
+      "guide": "In the absence of frictional, resistive forces, the total mechanical energy of a system is conserved. (Guidance: the change in total mechanical energy is interpreted as the work done by any non-conservative force.)",
+      "sections": [
+        "mechanical"
+      ],
+      "minutes": 75,
+      "aims": [
+        "Use conservation of mechanical energy to solve problems involving speeds, heights and springs.",
+        "Calculate the energy transferred, and the average resistive force, when friction or drag act."
+      ],
+      "challenge": "CC-A3-01",
+      "checks": [
+        "A3-008"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "When is mechanical energy conserved?",
+          "bullets": [
+            "With <strong>no friction or air resistance</strong>, the total mechanical energy of a system stays constant",
+            "Energy moves between kinetic, gravitational and elastic stores, but the total does not change",
+            "If gravity is the only force doing work, the speed gained depends only on the drop in height, whatever the path or the mass",
+            "This solves problems where forces and accelerations change (curved tracks, swings), which the equations of motion cannot"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Conservation of mechanical energy",
+          "latex": [
+            "E_{k} + E_{p} + E_{H} = \\text{constant}",
+            "\\Delta E_{k} + \\Delta E_{p} + \\Delta E_{H} = 0"
+          ],
+          "bullets": [
+            "Only when there are no frictional or resistive forces",
+            "Not in the data booklet as written: build it from the booklet's three energy equations"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "The speed after a drop",
+          "start": "A body of mass $m$ starts from rest and drops through a height $\\Delta h$ along any frictionless path, with no air resistance.",
+          "steps": [
+            {
+              "text": "Mechanical energy is conserved, so the gravitational potential energy lost equals the kinetic energy gained",
+              "latex": "mg\\Delta h = \\tfrac{1}{2}mv^{2}"
+            },
+            {
+              "text": "The mass cancels",
+              "latex": "g\\Delta h = \\tfrac{1}{2}v^{2}"
+            },
+            {
+              "text": "Rearrange: the speed after the drop",
+              "latex": "v = \\sqrt{2g\\Delta h}"
+            }
+          ],
+          "notes": "The result is the same as for free fall from the same height: the path shape and the mass do not matter. Students should derive it each time rather than memorise it, because it only applies when starting from rest."
+        },
+        {
+          "type": "diagram",
+          "title": "Energy in free fall",
+          "figure": "m1t"
+        },
+        {
+          "type": "bullets",
+          "title": "When friction or drag act",
+          "bullets": [
+            "Friction and drag are <strong>non-conservative</strong> forces: they convert mechanical energy into thermal energy",
+            "The change in mechanical energy equals the work done by these forces (which is negative)",
+            "Energy transferred to thermal = mechanical energy at the start − mechanical energy at the end",
+            "Average resistive force = energy transferred ÷ distance along the path"
+          ],
+          "notes": "The total energy is still conserved: only the mechanical energy decreases. The thermal energy spreads into the surroundings and cannot easily be recovered."
+        },
+        {
+          "type": "equation",
+          "title": "Mechanical energy with resistive forces",
+          "latex": "\\Delta E_{\\text{mech}} = W_{\\text{nc}}",
+          "bullets": [
+            "$W_{\\text{nc}}$: the work done on the system by non-conservative forces such as friction and drag",
+            "Friction and drag do negative work, so $\\Delta E_{\\text{mech}}$ is negative: the mechanical energy decreases",
+            "Not in the data booklet"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for energy-conservation problems",
+          "bullets": [
+            "Choose two moments (a start and an end) and list the energy in every store at each",
+            "Choose a zero level for gravitational potential energy (often the lowest point)",
+            "Check whether friction or drag act: if not, the totals are equal",
+            "If the mass is unknown, it often cancels"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A playground swing",
+          "question": "A child on a swing passes through the lowest point of the swing at 4.2 $\\text{m s}^{-1}$. Air resistance and friction are negligible. Find how high above the lowest point the child rises.",
+          "hint": "At the highest point the child is momentarily at rest. All the kinetic energy at the bottom has become gravitational potential energy.",
+          "steps": [
+            {
+              "text": "Mechanical energy is conserved: kinetic energy at the bottom = gravitational potential energy gained.",
+              "latex": "\\tfrac{1}{2}mv^{2} = mg\\Delta h"
+            },
+            {
+              "text": "The mass cancels; rearrange.",
+              "latex": "\\Delta h = \\dfrac{v^{2}}{2g}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "\\Delta h = \\dfrac{4.2^{2}}{2 \\times 9.8} = 0.90\\ \\text{m}"
+            }
+          ],
+          "notes": "The mass of the child was not needed. The length of the swing does not matter either: ask students why (the tension is always at right angles to the motion, so it does no work)."
+        },
+        {
+          "type": "worked",
+          "title": "A pinball launcher",
+          "question": "A pinball machine's launcher spring has a spring constant of 320 $\\text{N m}^{-1}$ and is compressed by 0.050 m. When it is released, it pushes a 0.080 kg ball along a level track. Friction is negligible. Find the speed of the ball as it leaves the spring.",
+          "hint": "The spring returns to its natural length, so all its elastic energy becomes kinetic energy of the ball.",
+          "steps": [
+            {
+              "text": "Elastic energy stored.",
+              "latex": "E_{H} = \\tfrac{1}{2}(320)(0.050)^{2} = 0.40\\ \\text{J}"
+            },
+            {
+              "text": "All of it becomes kinetic energy.",
+              "latex": "\\tfrac{1}{2}(0.080)v^{2} = 0.40"
+            },
+            {
+              "text": "Solve for $v$.",
+              "latex": "v = \\sqrt{\\dfrac{2 \\times 0.40}{0.080}} = 3.2\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "Real pinball tables slope upwards from the launcher, so some of the energy becomes gravitational potential energy too: a possible extension."
+        },
+        {
+          "type": "worked",
+          "title": "A mountain-bike descent",
+          "question": "A mountain biker (total mass 85 kg with the bike) freewheels down a track 150 m long, dropping 12 m vertically. Her speed is 3.0 $\\text{m s}^{-1}$ at the top and 11 $\\text{m s}^{-1}$ at the bottom. Find (a) the energy transferred by resistive forces and (b) the average resistive force on her.",
+          "hint": "Compare the total mechanical energy at the top and the bottom. The difference was transferred by the resistive forces acting along the whole track.",
+          "steps": [
+            {
+              "text": "Gravitational potential energy lost.",
+              "latex": "\\Delta E_{p} = 85 \\times 9.8 \\times 12 = 9996\\ \\text{J}"
+            },
+            {
+              "text": "Kinetic energy at the top.",
+              "latex": "E_{k,\\text{top}} = \\tfrac{1}{2}(85)(3.0)^{2} = 383\\ \\text{J}"
+            },
+            {
+              "text": "Kinetic energy at the bottom.",
+              "latex": "E_{k,\\text{bottom}} = \\tfrac{1}{2}(85)(11)^{2} = 5143\\ \\text{J}"
+            },
+            {
+              "text": "(a) Energy transferred = mechanical energy at the top − at the bottom.",
+              "latex": "9996 + 383 - 5143 = 5.2 \\times 10^{3}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Work done by the resistive force = force × distance along the track.",
+              "latex": "F = \\dfrac{5236}{150} = 35\\ \\text{N}"
+            }
+          ],
+          "notes": "Use the distance along the track (150 m), not the height, for the resistive force. Forgetting the starting kinetic energy gives 4.9 kJ."
+        }
+      ]
+    },
+    {
+      "id": "power",
+      "short": "Power",
+      "guide": "Power developed P is the rate of work done, or the rate of energy transfer, as given by P = ΔW/Δt = Fv.",
+      "sections": [
+        "power"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Define power as the rate of doing work or of transferring energy, and use $P = \\dfrac{\\Delta W}{\\Delta t}$.",
+        "Derive and use $P = Fv$ for a force moving at constant speed."
+      ],
+      "checks": [
+        "A3-015"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Power",
+          "bullets": [
+            "<strong>Power</strong>: the rate of doing work, or the rate of transferring energy",
+            "Unit: the watt, $1\\ \\text{W} = 1\\ \\text{J s}^{-1}$",
+            "Two machines can do the same work; the more powerful one does it in less time",
+            "The <strong>kilowatt-hour</strong> is a unit of energy: 1 kW for 1 hour, $1\\ \\text{kWh} = 3.6\\ \\text{MJ}$"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Power",
+          "latex": "P = \\dfrac{\\Delta W}{\\Delta t} = Fv",
+          "bullets": [
+            "In the data booklet",
+            "$P = Fv$: the power needed to move at speed $v$ against a force $F$ (with $F$ along the velocity)"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving P = Fv",
+          "start": "A constant force $F$ moves a body at constant velocity $v$, in the direction of the force.",
+          "steps": [
+            {
+              "text": "Power is the rate of doing work",
+              "latex": "P = \\dfrac{\\Delta W}{\\Delta t}"
+            },
+            {
+              "text": "The work done in a small displacement $\\Delta s$",
+              "latex": "\\Delta W = F\\Delta s"
+            },
+            {
+              "text": "Substitute; $F$ is constant",
+              "latex": "P = F\\dfrac{\\Delta s}{\\Delta t}"
+            },
+            {
+              "text": "$\\Delta s / \\Delta t$ is the velocity",
+              "latex": "P = Fv"
+            }
+          ],
+          "notes": "If the force is at an angle $\\theta$ to the velocity, the power is $Fv\\cos\\theta$; the data booklet gives only $P = Fv$."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for power problems",
+          "bullets": [
+            "Moving at constant speed? The driving force balances the resistive force, so use the resistive force in $P = Fv$",
+            "Energy transferred = power × time: convert minutes and hours to seconds",
+            "If the drag is proportional to $v^{2}$, the power needed against it is proportional to $v^{3}$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "An escalator",
+          "question": "An escalator carries 25 people, of average mass 70 kg, up through a vertical height of 6.0 m in 20 s. Find the useful power output needed to lift them.",
+          "hint": "Find the gravitational potential energy the people gain, then divide by the time.",
+          "steps": [
+            {
+              "text": "Gain in gravitational potential energy of all the people.",
+              "latex": "\\Delta E_{p} = 25 \\times 70 \\times 9.8 \\times 6.0 = 1.03 \\times 10^{5}\\ \\text{J}"
+            },
+            {
+              "text": "Power = energy transferred ÷ time.",
+              "latex": "P = \\dfrac{1.03 \\times 10^{5}}{20} = 5.1 \\times 10^{3}\\ \\text{W}"
+            }
+          ],
+          "notes": "This is only the useful output: the motor must supply more, because of friction in the escalator. A link to efficiency later in the topic."
+        },
+        {
+          "type": "worked",
+          "title": "A cargo ship",
+          "question": "A cargo ship moves at a constant 7.5 $\\text{m s}^{-1}$. Its engines deliver a useful power of 12 MW to the propellers. Find the total resistive force on the ship.",
+          "hint": "At constant speed, the driving force balances the resistive force. Rearrange $P = Fv$.",
+          "steps": [
+            {
+              "text": "Constant speed, so the driving force equals the resistive force.",
+              "latex": "F = \\dfrac{P}{v}"
+            },
+            {
+              "text": "Substitute, with the power in watts.",
+              "latex": "F = \\dfrac{12 \\times 10^{6}}{7.5} = 1.6 \\times 10^{6}\\ \\text{N}"
+            }
+          ],
+          "notes": "Remind students that M means $10^{6}$. Follow-up: if the resistive force rose to $2.0 \\times 10^{6}$ N in a headwind, how fast could the ship go with the same power? (6.0 $\\text{m s}^{-1}$.)"
+        }
+      ]
+    },
+    {
+      "id": "efficiency",
+      "short": "Efficiency",
+      "guide": "Efficiency η in terms of energy transfer or power, as given by η = useful work out / total work in = useful power out / total power in.",
+      "sections": [
+        "efficiency"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Calculate efficiency from energies or from powers, as a fraction or a percentage."
+      ],
+      "checks": [
+        "A3-017"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Efficiency",
+          "bullets": [
+            "No real machine transfers all its input energy usefully: some is always <strong>wasted</strong>, usually as thermal energy",
+            "<strong>Efficiency</strong> compares the useful output with the total input",
+            "It has no unit: give it as a fraction or a percentage",
+            "It is always less than 1 (100%)",
+            "Wasted energy = total input − useful output"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Efficiency",
+          "latex": [
+            "\\eta = \\dfrac{\\text{useful work out}}{\\text{total work in}}",
+            "\\eta = \\dfrac{\\text{useful power out}}{\\text{total power in}}"
+          ],
+          "bullets": [
+            "Both are in the data booklet",
+            "Use energies or powers, but don't mix them"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "An LED lamp",
+          "question": "An LED lamp takes in 9.0 W of electrical power and emits 3.6 W as light. Find (a) its efficiency and (b) the energy it wastes in one hour.",
+          "hint": "Which power is useful, and which is the total input? The rest is wasted as thermal energy.",
+          "steps": [
+            {
+              "text": "(a) Useful power out ÷ total power in.",
+              "latex": "\\eta = \\dfrac{3.6}{9.0} = 0.40 = 40\\%"
+            },
+            {
+              "text": "(b) Wasted power.",
+              "latex": "9.0 - 3.6 = 5.4\\ \\text{W}"
+            },
+            {
+              "text": "Energy wasted in one hour (3600 s).",
+              "latex": "E = 5.4 \\times 3600 = 1.9 \\times 10^{4}\\ \\text{J}"
+            }
+          ],
+          "notes": "Unrounded: 19 440 J. An old filament lamp giving the same light would have an efficiency of only a few percent."
+        },
+        {
+          "type": "worked",
+          "title": "Efficiencies in a chain",
+          "question": "A power station converts the chemical energy of its fuel to electrical energy with an efficiency of 38%. A factory uses the electricity in a motor of efficiency 85%. Find the overall efficiency from fuel to the motor's useful output.",
+          "hint": "Imagine 100 J of chemical energy entering the power station. Follow it through each stage.",
+          "steps": [
+            {
+              "text": "Of 100 J of chemical energy, the power station delivers",
+              "latex": "0.38 \\times 100 = 38\\ \\text{J}"
+            },
+            {
+              "text": "Of that, the motor gives a useful output of",
+              "latex": "0.85 \\times 38 = 32.3\\ \\text{J}"
+            },
+            {
+              "text": "Overall efficiency.",
+              "latex": "\\eta = \\dfrac{32.3}{100} = 0.32 = 32\\%"
+            }
+          ],
+          "notes": "The overall efficiency is the product of the stage efficiencies, so it is always lower than the lowest stage. Losses in the power lines would reduce it further."
+        }
+      ]
+    },
+    {
+      "id": "fuels",
+      "short": "Energy density of fuels",
+      "guide": "Energy density of the fuel sources.",
+      "sections": [
+        "fuels"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Distinguish between energy density (per unit volume) and specific energy (per unit mass) of fuels.",
+        "Calculate the mass or volume of fuel needed for a given energy output, including efficiency."
+      ],
+      "checks": [
+        "A3-019"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Energy sources",
+          "bullets": [
+            "<strong>Primary</strong> sources occur naturally: fossil fuels, uranium, wind, solar radiation, moving water, biomass",
+            "<strong>Secondary</strong> sources, such as electricity and hydrogen, are made from primary sources because they are more convenient to distribute and use",
+            "<strong>Renewable</strong>: naturally replenished at least as fast as it is used (solar, wind, tidal)",
+            "<strong>Non-renewable</strong>: finite reserves that will eventually be used up (coal, oil, gas, uranium)"
+          ],
+          "notes": "The deck's discussion of advantages and disadvantages of each source fits here; specific sources are studied in more detail in E.4 and B.2."
+        },
+        {
+          "type": "bullets",
+          "title": "Comparing fuels",
+          "bullets": [
+            "<strong>Energy density</strong>: energy released per unit <strong>volume</strong> of fuel, in $\\text{J m}^{-3}$",
+            "<strong>Specific energy</strong>: energy released per unit <strong>mass</strong> of fuel, in $\\text{J kg}^{-1}$",
+            "Check the units: the two are easy to mix up",
+            "Liquid fuels such as petrol have a high energy density; gases such as hydrogen have a high specific energy but a low energy density",
+            "Nuclear fuel releases about a million times more energy per kilogram than chemical fuels"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Energy density and specific energy",
+          "latex": [
+            "\\text{energy density} = \\dfrac{E}{V}",
+            "\\text{specific energy} = \\dfrac{E}{m}"
+          ],
+          "bullets": [
+            "These definitions are not in the data booklet"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Linking energy density and specific energy",
+          "start": "A fuel of density $\\rho$ releases energy $E$ from a mass $m$ that has volume $V$.",
+          "steps": [
+            {
+              "text": "Energy density is energy per unit volume",
+              "latex": "\\text{energy density} = \\dfrac{E}{V}"
+            },
+            {
+              "text": "Multiply and divide by $m$",
+              "latex": "\\dfrac{E}{V} = \\dfrac{E}{m} \\times \\dfrac{m}{V}"
+            },
+            {
+              "text": "$E/m$ is the specific energy and $m/V$ is the density",
+              "latex": "\\text{energy density} = \\text{specific energy} \\times \\rho"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for fuel calculations",
+          "bullets": [
+            "With an efficiency, the energy (or power) <strong>input</strong> is larger than the useful output: divide by $\\eta$",
+            "Energy = power × time: 1 day = 86 400 s",
+            "Mass of fuel = energy input ÷ specific energy",
+            "Volume of fuel = energy input ÷ energy density"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A camping stove",
+          "question": "A camping-stove gas cartridge holds 0.23 kg of butane, which has a specific energy of 49 $\\text{MJ kg}^{-1}$. The stove transfers 40% of the energy released to the pan. Find (a) the energy released by burning all the butane, (b) the energy that reaches the pan and (c) how long the cartridge lasts if the pan receives energy at 1.2 kW.",
+          "hint": "Specific energy × mass gives the energy released. The efficiency gives the useful part; then use energy = power × time.",
+          "steps": [
+            {
+              "text": "(a) Energy released.",
+              "latex": "E = 0.23 \\times 49 \\times 10^{6} = 1.13 \\times 10^{7}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Useful energy at 40% efficiency.",
+              "latex": "E_{\\text{useful}} = 0.40 \\times 1.13 \\times 10^{7} = 4.5 \\times 10^{6}\\ \\text{J}"
+            },
+            {
+              "text": "(c) Time = useful energy ÷ useful power.",
+              "latex": "t = \\dfrac{4.51 \\times 10^{6}}{1200} = 3.8 \\times 10^{3}\\ \\text{s}"
+            }
+          ],
+          "notes": "3800 s is about an hour. Most of the wasted energy heats the surrounding air, especially on a windy day."
+        },
+        {
+          "type": "worked",
+          "title": "Diesel or hydrogen?",
+          "question": "Diesel has a specific energy of 45 $\\text{MJ kg}^{-1}$ and a density of 830 $\\text{kg m}^{-3}$. Hydrogen compressed in a fuel tank to about 700 times atmospheric pressure has a specific energy of 140 $\\text{MJ kg}^{-1}$ and a density of 40 $\\text{kg m}^{-3}$. Find (a) the energy density of each fuel and (b) how many times more energy a 0.060 $\\text{m}^{3}$ tank holds when it is filled with diesel rather than hydrogen.",
+          "hint": "Energy density = specific energy × density. For (b), the tank volume is the same for both fuels.",
+          "steps": [
+            {
+              "text": "(a) Diesel.",
+              "latex": "45 \\times 10^{6} \\times 830 = 3.7 \\times 10^{10}\\ \\text{J m}^{-3}"
+            },
+            {
+              "text": "Hydrogen.",
+              "latex": "140 \\times 10^{6} \\times 40 = 5.6 \\times 10^{9}\\ \\text{J m}^{-3}"
+            },
+            {
+              "text": "(b) Same volume, so compare the energy densities.",
+              "latex": "\\dfrac{3.7 \\times 10^{10}}{5.6 \\times 10^{9}} = 6.7"
+            }
+          ],
+          "notes": "The tank holds about $2.2 \\times 10^{9}$ J of diesel energy but only $3.4 \\times 10^{8}$ J of hydrogen. Hydrogen has three times the specific energy, yet a much larger tank is needed: a good discussion of why hydrogen cars and lorries are hard to design."
+        }
+      ]
+    },
+    {
+      "id": "sankey",
+      "short": "Sankey diagrams",
+      "guide": "Energy transfers can be represented on a Sankey diagram.",
+      "sections": [
+        "efficiency"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Draw and interpret Sankey diagrams, drawn to scale, for energy transfers.",
+        "Explain that wasted energy is degraded, not destroyed."
+      ],
+      "checks": [
+        "A3-018"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Sankey diagrams",
+          "bullets": [
+            "In a Sankey diagram each energy transfer is an arrow, and the <strong>width of each arrow is proportional to the energy</strong> (or power) it carries",
+            "The input enters from the left; the useful output carries on to the right; wasted energy bends away",
+            "Energy is conserved: the output arrows together are as wide as the input arrow",
+            "Draw to scale, and state the scale (e.g. 1 mm for 10 J)"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "A Sankey diagram for a car engine",
+          "figure": "s1t"
+        },
+        {
+          "type": "bullets",
+          "title": "Energy degradation",
+          "bullets": [
+            "Wasted energy still exists, but it is <strong>degraded</strong>: dispersed as thermal energy in the surroundings at a low temperature",
+            "Degraded energy can no longer do useful work",
+            "Mechanical energy can be turned completely into thermal energy (a sliding block stopping)",
+            "The reverse is impossible in a cycle: a heat engine can never convert all of its thermal energy input into work, so its efficiency is always below 100% (B.4, HL)"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "An electric drill",
+          "question": "Each second, an electric drill takes in 600 J of electrical energy. It does 390 J of useful work turning the drill bit, 150 J is transferred to thermal energy in the motor's wires, and the rest is transferred to thermal energy by friction in the gearbox. Find (a) the energy transferred by friction in the gearbox each second, (b) the efficiency of the drill and (c) the width of each arrow on a Sankey diagram drawn with 1 cm for 100 J.",
+          "hint": "Energy is conserved, so the outputs add up to the input. For (c), divide each energy by 100 J to get its width in centimetres.",
+          "steps": [
+            {
+              "text": "(a) Outputs add up to the input.",
+              "latex": "E_{\\text{gearbox}} = 600 - 390 - 150 = 60\\ \\text{J}"
+            },
+            {
+              "text": "(b) Useful energy out ÷ total energy in.",
+              "latex": "\\eta = \\dfrac{390}{600} = 0.65 = 65\\%"
+            },
+            {
+              "text": "(c) Widths: input 6.0 cm; useful work 3.9 cm; thermal in the motor 1.5 cm; thermal in the gearbox 0.6 cm.",
+              "latex": "3.9 + 1.5 + 0.6 = 6.0\\ \\text{cm}"
+            }
+          ],
+          "notes": "Ask students to sketch it: the useful arrow goes straight on; the two thermal arrows bend downwards. The drill also makes sound, but that power is far too small to show at this scale."
+        }
+      ]
+    }
+  ]
+}

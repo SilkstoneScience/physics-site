@@ -1,6 +1,6 @@
 # Lesson slide generator for teachers (plan)
 
-Status: **step 1 done (8 November 2026): the engine and the A.1 pilot, checked by the teacher.** The page is `teachers/slides.html`, linked from the "For teachers" landing page (`teachers/index.html`), which the home page's card opens. Next: step 2 (the other 23 subtopics). How it was built: section 8.
+Status: **step 1 done, and Theme A of step 2 (A.1–A.5) done (8 November 2026), checked by the teacher.** The page is `teachers/slides.html`, linked from the "For teachers" landing page (`teachers/index.html`), which the home page's card opens. Next: step 2 for themes B–E. How it was built: section 8.
 
 ## 1. What it does
 
@@ -62,11 +62,11 @@ Progress: step 1 is done (8 November 2026). From step 3, the checker rules and t
 
 - **Files:** `teachers/slides.html` (the page), `js/slides.js` (the form and the deck), `js/pptx.js` (the template and the .pptx writer: 7 layouts plus "Derivation", theme colour as accent1 so teachers can recolour a deck), `js/omml.js` (MathML → OMML, with a plain-text fallback for equations inside text), `tools/check-slides.mjs` (run by `tools/check.mjs`). The page keeps the teacher's choices in its address (`topic`, `points`, `types`, `hook`, `hooktalk`, `toktalk`, `tokq`, `p2`).
 - **Slide types** (letters in `types`): `c` hook, `a` aims, `b` bullets, `e` key equations, `r` derivations, `d` diagrams, `w` worked examples, `q` quick checks, `p` Paper 2 questions, `t` ToK, `n` NoS, `v` videos. Hook and Paper 2 start unticked.
-- **Data file** `teachers/slides/<topic>.json`: `topic`, `hours` (the guide's hours), and `points`, each with `id`, `short`, `guide` (guide wording), `sections` (h2 ids on the topic page), `minutes`, `aims` (1–2), optional `extra: true` (not in the guide's list for this subtopic; not counted in its hours), `challenge` (the suggested hook), `checks` (Paper 1A ids, optional; otherwise one is chosen by section) and `slides`:
+- **Data file** `teachers/slides/<topic>.json`: `topic`, `hours` (the guide's SL-and-HL hours; 0 for an HL-only subtopic), `hlHours` (its additional HL hours, if any), and `points`, each with `id`, `short`, `guide` (guide wording), `sections` (h2 ids on the topic page), `minutes`, `aims` (1–2), optional `hl: true` (HL content: an HL tag on the page and an orange HL label on its slides; counted in `hlHours`), optional `extra: true` (not in the guide's list for this subtopic; not counted in its hours), `challenge` (the suggested hook), `checks` (Paper 1A ids, optional; otherwise one is chosen by section) and `slides`:
   - `{ "type": "bullets", "title", "bullets": [string or [sub-bullets]], "notes" }`
   - `{ "type": "equation", "title", "latex": string or up to 4 strings, "bullets" }`
   - `{ "type": "derivation", "title", "start", "steps": [{ "text", "latex" }], "notes" }`
   - `{ "type": "diagram", "title", "figure": "<title id of a figure on the topic page>", "bullets" }`
   - `{ "type": "worked", "title", "question", "hint", "steps": [{ "text", "latex" }], "notes" }`
-- **Text fitting:** PowerPoint doesn't shrink text when a file opens, so `js/slides.js` estimates the space text needs (an average Arial character is about 0.53 of the font size wide) and picks the size, the text width beside a picture, or how to split long Paper 2 questions and mark schemes over several slides.
+- **Text fitting:** PowerPoint doesn't shrink text when a file opens, so `js/slides.js` estimates the space text needs (an average Arial character is about 0.53 of the font size wide) and picks the size, the text width beside a picture, or how to split long Paper 2 questions and mark schemes over several slides. Aims, worked-solution steps and derivation steps are spread over as many slides as their measured heights need (at most five steps on a slide), and key equations too tall for the card are drawn smaller.
 - **Testing:** build a deck in the preview, open it in PowerPoint through COM, count the equation objects, look for text taller than its box, and export the slides as pictures to look at. Write LaTeX into the data files with a script using `String.raw`: shell heredocs drop backslashes (the checker reports control characters and commands without their backslash).

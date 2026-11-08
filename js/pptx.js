@@ -146,7 +146,7 @@
       b.shape('roundRect', [E(6.0), E(1.15), pillW, E(0.46)], { fill: tint(deck.color, 0.88), adj: 50000, name: 'Theme',
         textXml: `<a:p><a:pPr algn="ctr"/><a:r><a:rPr lang="en-GB" sz="1800" b="1" spc="60" dirty="0">${solid('accent1')}</a:rPr><a:t>${xml(deck.theme.toUpperCase())}</a:t></a:r></a:p>` });
       b.text({ ph: 'ctrTitle', paras: [{ runs: [{ t: deck.title }] }] });
-      b.text({ ph: 'subTitle', paras: s.points });
+      b.text({ ph: 'subTitle', size: s.pointsSize, paras: s.points });
       b.text({ name: 'Teaching time', box: [E(6.0), E(6.25), E(6.8), E(0.5)], anchor: 'ctr', size: 2000,
         paras: [{ bullet: false, runs: [{ t: s.time, b: true, color: 'accent1' }] }] });
     } else {
@@ -162,14 +162,18 @@
           const rows = Math.ceil(eqs.length / 2), rowH = 2.0 / rows;
           eqs.forEach((eq, i) => b.equation(eq, [E(1.0 + (i % 2) * 5.9), E(1.9 + Math.floor(i / 2) * rowH), E(5.6), E(rowH)], { size: 2800, align: 'ctr' }));
         }
-        if (s.paras?.length) b.text({ ph: 'body', paras: s.paras });
+        if (s.paras?.length) b.text({ ph: 'body', size: s.size, paras: s.paras });
       } else if (s.kind === 'worked' || s.kind === 'derivation') {
         // the question (smaller on the solution slides), then numbered steps: text on the left, the equation on the right
         b.text({ ph: 'body', size: s.questionSize, paras: s.question, box: s.steps?.length ? [E(0.6), E(1.55), E(12.13), E(s.stepsTop - 1.7)] : [E(0.6), E(1.55), E(12.13), E(5.2)] });
         const steps = s.steps || [];
-        const top = s.stepsTop || 2.95, rowH = Math.min(1.1, (6.85 - top) / Math.max(steps.length, 1));
+        const top = s.stepsTop || 2.95, rowHEqual = Math.min(1.1, (6.85 - top) / Math.max(steps.length, 1));
+        let next = top;
         steps.forEach((st, i) => {
-          const y = top + i * rowH;
+          // a step's own height when the generator worked one out (tall equations), otherwise an equal share
+          const y = next;
+          const rowH = st.h || rowHEqual;
+          next += rowH;
           const d = 0.46;
           b.shape('ellipse', [E(0.6), E(y + (rowH - d) / 2), E(d), E(d)], { fill: 'accent1', name: 'Step number', textXml: pills(String(st.n ?? i + 1), 1800) });
           // the equation starts at 7.0 in, or further left when it is long (but leaves the text at least 3.3 in)
@@ -188,6 +192,11 @@
       } else if (s.paras?.length) {
         b.text({ ph: 'body', size: s.size, paras: s.paras });
       }
+    }
+    // HL content gets an orange "HL" label at the top right (left of the worked-example or derivation label)
+    if (s.hl && s.kind !== 'title') {
+      const x = s.kind === 'worked' || s.kind === 'derivation' ? 9.8 : 11.98;
+      b.shape('roundRect', [E(x), E(1.02), E(0.75), E(0.36)], { fill: 'accent2', adj: 50000, name: 'HL label', textXml: pills('HL', 1400) });
     }
     const tree = `<p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr>${xfrm(0, 0, 0, 0).replace('</a:xfrm>', '<a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm>')}</p:grpSpPr>${b.shapes.join('')}</p:spTree>`;
     return {

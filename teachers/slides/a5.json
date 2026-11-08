@@ -1,0 +1,1144 @@
+{
+  "topic": "A.5",
+  "hours": 0,
+  "hlHours": 8,
+  "points": [
+    {
+      "id": "frames",
+      "short": "Reference frames",
+      "hl": true,
+      "guide": "Reference frames.",
+      "sections": [
+        "frames"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Describe a reference frame and an event, and distinguish between inertial and non-inertial frames."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Reference frames and events",
+          "bullets": [
+            "A <strong>reference frame</strong>: a set of coordinates, with rulers and synchronised clocks, used by an observer",
+            "An <strong>event</strong> happens at one place and one instant: it has a position $x$ and a time $t$ in each frame",
+            "An <strong>inertial frame</strong> is not accelerating: it is at rest or moving at constant velocity",
+            "In an inertial frame, Newton's first law holds: with no resultant force, an object stays at rest or moves at constant velocity",
+            "In an accelerating (<strong>non-inertial</strong>) frame, objects seem to accelerate with no force on them",
+            "Usual set-up: frame S′ moves at velocity $v$ along $x$ relative to S, and $t = t' = 0$ when the origins pass"
+          ],
+          "notes": "The roadside observer and the passing van from the deck work well: each can measure the distance to the same cone, giving two different coordinates for one event. A ball dropped in a braking vehicle \"accelerates forwards\" with no horizontal force on it: the sign of a non-inertial frame."
+        },
+        {
+          "type": "worked",
+          "title": "Inertial or not?",
+          "question": "Which of these reference frames are inertial (to a good approximation)? (a) A lift rising at a constant 2.0 $\\text{m s}^{-1}$. (b) A car going round a roundabout at a steady speed. (c) An aircraft speeding up along the runway. (d) A spacecraft drifting with its engines off, far from any star or planet.",
+          "hint": "An inertial frame is not accelerating. Remember that a change of direction is an acceleration too.",
+          "steps": [
+            {
+              "text": "(a) Constant velocity, so no acceleration: <strong>inertial</strong>."
+            },
+            {
+              "text": "(b) Its direction is changing, so it is accelerating (towards the centre): <strong>not inertial</strong>."
+            },
+            {
+              "text": "(c) Its speed is increasing: <strong>not inertial</strong>."
+            },
+            {
+              "text": "(d) No resultant force acts, so it moves at constant velocity: <strong>inertial</strong>."
+            }
+          ],
+          "notes": "Ask how a passenger could tell in (b) and (c) without looking out: a hanging key ring or a cup of water tilts. In (a) and (d) nothing inside reveals the motion."
+        }
+      ],
+      "checks": [
+        "A5-001"
+      ]
+    },
+    {
+      "id": "galilean-transform",
+      "short": "Galilean transformations",
+      "hl": true,
+      "guide": "That in Galilean relativity the position $x'$ and time $t'$ of an event are given by $x' = x - vt$ and $t' = t$.",
+      "sections": [
+        "galilean"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Use the Galilean transformations $x' = x - vt$ and $t' = t$ to find an event's coordinates in a second frame."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Newton's view of space and time",
+          "bullets": [
+            "Newton assumed time is <strong>absolute</strong>: it passes at the same rate for every observer",
+            "He also assumed lengths are the same in every frame",
+            "So two observers can disagree about where an event happens, but not about when",
+            "A <strong>transformation</strong> converts an event's coordinates in one frame into its coordinates in another"
+          ],
+          "notes": "Tell students that both of these \"obvious\" assumptions will turn out to be wrong later in the topic."
+        },
+        {
+          "type": "equation",
+          "title": "The Galilean transformations",
+          "latex": [
+            "x' = x - vt",
+            "t' = t"
+          ],
+          "bullets": [
+            "In the data booklet",
+            "$v$ is the velocity of S′ relative to S, along the $x$ direction",
+            "The inverse: $x = x' + vt$"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the Galilean transformation",
+          "start": "Frame S′ moves at constant velocity $v$ relative to S, and the two origins pass each other at $t = 0$. An event happens at position $x$ in S.",
+          "steps": [
+            {
+              "text": "In a time $t$, the origin of S′ moves a distance",
+              "latex": "vt"
+            },
+            {
+              "text": "Distances along $x$ add (Newton: lengths are the same in both frames)",
+              "latex": "x = x' + vt"
+            },
+            {
+              "text": "Rearrange to give the position in S′",
+              "latex": "x' = x - vt"
+            },
+            {
+              "text": "Time is absolute, so both clocks agree",
+              "latex": "t' = t"
+            }
+          ],
+          "notes": "Draw the two sets of axes, with the gap vt between the origins, as in the figure that follows."
+        },
+        {
+          "type": "diagram",
+          "title": "Two frames, one event",
+          "figure": "a5at"
+        },
+        {
+          "type": "worked",
+          "title": "A cyclist and a barking dog",
+          "question": "A cyclist rides along a straight road at 8.0 $\\text{m s}^{-1}$ and passes a lamp post at $t = 0$. Take the lamp post as the origin of the road frame S and the cyclist as the origin of frame S′. At $t = 3.5$ s, a dog barks 50 m from the lamp post, ahead of the cyclist. Find (a) the position of the bark in the cyclist's frame and (b) the time at which the cyclist reaches a tree 120 m from the lamp post.",
+          "hint": "Use $x' = x - vt$ with $v = 8.0$ $\\text{m s}^{-1}$. In (b), what is the tree's position in the cyclist's frame when the cyclist reaches it?",
+          "steps": [
+            {
+              "text": "(a) Substitute into the Galilean transformation.",
+              "latex": "x' = x - vt = 50 - 8.0 \\times 3.5 = 22\\ \\text{m}"
+            },
+            {
+              "text": "So the bark is 22 m ahead of the cyclist, at $t' = t = 3.5$ s."
+            },
+            {
+              "text": "(b) When the cyclist reaches the tree, $x' = 0$.",
+              "latex": "0 = 120 - 8.0t"
+            },
+            {
+              "text": "Solve for $t$.",
+              "latex": "t = \\dfrac{120}{8.0} = 15\\ \\text{s}"
+            }
+          ],
+          "notes": "Stress that the event (the bark) is the same; only its coordinates depend on the frame."
+        }
+      ]
+    },
+    {
+      "id": "galilean-velocity",
+      "short": "Galilean velocity addition",
+      "hl": true,
+      "guide": "That Galilean transformation equations lead to the velocity addition equation as given by $u' = u - v$.",
+      "sections": [
+        "galilean"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Derive and use the Galilean velocity addition equation $u' = u - v$, with signs for direction."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Galilean velocity addition",
+          "latex": "u' = u - v",
+          "bullets": [
+            "$u$: the object's velocity in S; $u'$: its velocity in S′",
+            "$v$: the velocity of S′ relative to S",
+            "Choose a positive direction and give every velocity a sign",
+            "This is the relative velocity met in A.1"
+          ],
+          "notes": "Link back to A.1, where relative velocity was introduced as $v_{\\text{AB}} = v_{\\text{A}} - v_{\\text{B}}$: it is the same idea, with S′ as object B."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the velocity addition equation",
+          "start": "An object moves at constant velocity $u$ in S, so its position is $x = ut$ (starting from the origin). Frame S′ moves at $v$ relative to S.",
+          "steps": [
+            {
+              "text": "Galilean transformation of the object's position",
+              "latex": "x' = x - vt"
+            },
+            {
+              "text": "Substitute $x = ut$",
+              "latex": "x' = ut - vt = (u - v)t"
+            },
+            {
+              "text": "Time is the same in both frames, $t' = t$, so divide by $t'$",
+              "latex": "\\dfrac{x'}{t'} = u - v"
+            },
+            {
+              "text": "Velocity in S′ is position ÷ time in S′",
+              "latex": "u' = u - v"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "On a ferry",
+          "question": "A ferry sails east at 6.5 $\\text{m s}^{-1}$ relative to the water, which is still. A passenger walks towards the back of the ferry at 1.2 $\\text{m s}^{-1}$ relative to the deck. A seagull flies west at 4.0 $\\text{m s}^{-1}$ relative to the water. Taking east as positive and the ferry as frame S′, find (a) the passenger's velocity relative to the water and (b) the seagull's velocity relative to the ferry.",
+          "hint": "Write down $v$ for the ferry first. For (a) you know $u'$ and want $u$; for (b) you know $u$ and want $u'$. Watch the signs.",
+          "steps": [
+            {
+              "text": "The ferry's velocity relative to the water (frame S).",
+              "latex": "v = +6.5\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(a) The passenger has $u' = -1.2$ $\\text{m s}^{-1}$. Rearrange $u' = u - v$.",
+              "latex": "u = u' + v = -1.2 + 6.5 = +5.3\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(b) The seagull has $u = -4.0$ $\\text{m s}^{-1}$.",
+              "latex": "u' = u - v = -4.0 - 6.5 = -10.5\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "So the passenger moves 5.3 $\\text{m s}^{-1}$ east over the water, and the seagull moves 10.5 $\\text{m s}^{-1}$ west relative to the ferry."
+            }
+          ],
+          "notes": "Ask students to check each answer for sense: the passenger still moves east because the ferry is faster than the walk; from the ferry, the oncoming seagull seems faster than it really is."
+        }
+      ],
+      "checks": [
+        "A5-003"
+      ]
+    },
+    {
+      "id": "galilean-relativity",
+      "short": "Newton's laws in every inertial frame",
+      "hl": true,
+      "guide": "That Newton's laws of motion are the same in all inertial reference frames and this is known as Galilean relativity.",
+      "sections": [
+        "galilean"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Show that observers in two inertial frames measure the same acceleration, so Newton's laws are the same in both."
+      ],
+      "slides": [
+        {
+          "type": "derivation",
+          "title": "Both frames measure the same acceleration",
+          "start": "An object's velocity changes from $u_1$ to $u_2$ in S during a time $\\Delta t$. Frame S′ moves at constant velocity $v$, and $\\Delta t' = \\Delta t$.",
+          "steps": [
+            {
+              "text": "Velocities in S′ at the start and the end",
+              "latex": "u_1' = u_1 - v \\qquad u_2' = u_2 - v"
+            },
+            {
+              "text": "Change in velocity in S′: $v$ cancels",
+              "latex": "\\Delta u' = u_2' - u_1' = u_2 - u_1 = \\Delta u"
+            },
+            {
+              "text": "Divide by the same time interval",
+              "latex": "a' = \\dfrac{\\Delta u'}{\\Delta t'} = \\dfrac{\\Delta u}{\\Delta t} = a"
+            },
+            {
+              "text": "Same mass and same acceleration, so the same resultant force",
+              "latex": "F = ma = ma'"
+            }
+          ],
+          "notes": "This only works because $v$ is constant: if S′ accelerated, $v$ would not cancel, and observers in S′ would see accelerations with no force to explain them."
+        },
+        {
+          "type": "bullets",
+          "title": "Galilean relativity",
+          "bullets": [
+            "Observers in all inertial frames measure the same accelerations and the same forces",
+            "So <strong>Newton's laws of motion are the same in all inertial frames</strong>: this is Galilean relativity",
+            "No frame is special: none is \"really\" at rest",
+            "No mechanics experiment inside a closed room moving at constant velocity can reveal that velocity",
+            "Velocities and positions differ between frames; accelerations and forces don't"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A coin dropped on a train",
+          "question": "A passenger on a train moving at a constant 40 $\\text{m s}^{-1}$ along a straight, level track drops a coin. Air resistance is negligible. Describe the coin's path (a) as seen by the passenger and (b) as seen by someone standing beside the track, and (c) explain why both observers agree on the force acting on the coin.",
+          "hint": "What horizontal velocity does the coin have in each frame at the moment it is released? Which quantity is the same in both frames?",
+          "steps": [
+            {
+              "text": "(a) In the train's frame, the coin starts at rest, so it falls straight down."
+            },
+            {
+              "text": "(b) In the ground's frame, the coin starts with the train's horizontal velocity, 40 $\\text{m s}^{-1}$, so it follows a parabola, like a projectile."
+            },
+            {
+              "text": "(c) The train's velocity is constant, so both observers measure the same acceleration, $g$ downwards.",
+              "latex": "a = a' = 9.8\\ \\text{m s}^{-2}"
+            },
+            {
+              "text": "Same mass and same acceleration, so both find the same force: the coin's weight, $mg$."
+            }
+          ],
+          "notes": "Both observers also agree on where the coin lands: at the passenger's feet. The deck's wagon and bowling ball shows what changes when the vehicle brakes during the fall."
+        }
+      ]
+    },
+    {
+      "id": "postulates",
+      "short": "The two postulates",
+      "hl": true,
+      "guide": "The two postulates of special relativity.",
+      "sections": [
+        "light",
+        "postulates"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Explain why Maxwell's theory and the Michelson–Morley result conflict with Galilean relativity.",
+        "State the two postulates of special relativity and apply them to light."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The problem with light",
+          "bullets": [
+            "Maxwell (1860s): light is an electromagnetic wave whose speed is fixed by two constants: $c = \\dfrac{1}{\\sqrt{\\mu_0\\varepsilon_0}}$",
+            "Fixed relative to what? Galilean addition says different observers should measure different speeds",
+            "Physicists proposed a medium, the \"ether\", with light travelling at $c$ relative to it",
+            "The Michelson–Morley experiment (1887) looked for the Earth's motion through the ether using interference",
+            "It found <strong>no shift</strong> in the interference pattern, whichever way the apparatus faced: no sign of the ether"
+          ],
+          "notes": "Students can check that $1/\\sqrt{\\mu_0\\varepsilon_0}$ gives $3.00\\times10^{8}$ $\\text{m s}^{-1}$ using the data booklet constants. The deck also shows how two charges at rest in one frame are moving, and so exert magnetic forces, in another: electromagnetism did not fit Galilean relativity."
+        },
+        {
+          "type": "bullets",
+          "title": "Einstein's two postulates (1905)",
+          "bullets": [
+            "<strong>1.</strong> The laws of physics are the same in all inertial reference frames",
+            "<strong>2.</strong> The speed of light in a vacuum, $c$, is the same for all inertial observers, whatever the motion of the source or the observer",
+            "Postulate 1 extends Galilean relativity to all of physics, including electromagnetism",
+            "Postulate 2 means there is no ether and no absolute frame",
+            "For both to be true, distances and time intervals must depend on the frame"
+          ],
+          "notes": "Students should be able to state both postulates accurately: \"in a vacuum\" and \"inertial\" are often left out."
+        },
+        {
+          "type": "worked",
+          "title": "A signal sent home",
+          "question": "A spacecraft moves directly away from the Earth at $0.40c$ and sends a radio signal back towards the Earth. The crew measure the signal's speed as $c$. Find the speed of the signal relative to the Earth (a) according to Galilean velocity addition and (b) according to special relativity.",
+          "hint": "Radio waves are electromagnetic waves, like light. For (a), take the direction towards the Earth as positive and add the velocities. For (b), which postulate applies?",
+          "steps": [
+            {
+              "text": "(a) Galilean: the signal moves at $c$ towards the Earth relative to the craft, and the craft moves at $0.40c$ away from the Earth.",
+              "latex": "u = c - 0.40c = 0.60c"
+            },
+            {
+              "text": "(b) Postulate 2: the speed of light (and of all electromagnetic waves) in a vacuum is the same for all inertial observers.",
+              "latex": "u = c"
+            },
+            {
+              "text": "Experiments agree with (b): the motion of the source does not change the speed of light."
+            }
+          ],
+          "notes": "The deck's train headlight makes the same point in the forward direction. Ask students which answer Maxwell's theory supports."
+        }
+      ],
+      "challenge": "CC-A5-02",
+      "checks": [
+        "A5-002"
+      ]
+    },
+    {
+      "id": "proper",
+      "short": "Proper time and proper length",
+      "hl": true,
+      "guide": "Proper time interval and proper length.",
+      "sections": [
+        "dilation",
+        "contraction"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Define proper time interval and proper length, and identify the frame that measures each."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Proper time and proper length",
+          "bullets": [
+            "<strong>Proper time interval</strong> $\\Delta t_0$: the time between two events measured in the frame where both happen <strong>at the same place</strong>",
+            [
+              "e.g. two ticks of a clock, measured by an observer moving with the clock"
+            ],
+            "<strong>Proper length</strong> $L_0$: the length of an object measured in the frame where it is <strong>at rest</strong>",
+            "Observers moving relative to that frame measure a longer time and a shorter length",
+            "Ask first: in which frame do the two events happen at the same place? In which frame is the object at rest?"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Who measures what?",
+          "question": "A train passes along a straight platform at high speed. Lamp A is at one end of the platform and lamp B at the other. Event 1: the front of the train passes lamp A. Event 2: the front of the train passes lamp B. Who measures (a) the proper time between events 1 and 2, (b) the proper length of the platform and (c) the proper length of the train: a passenger at the front of the train, or an observer on the platform?",
+          "hint": "For (a), find the frame in which both events happen at the same place. For (b) and (c), find the frame in which each object is at rest.",
+          "steps": [
+            {
+              "text": "(a) In the train's frame, both events happen at the front of the train: the same place. The passenger measures the proper time."
+            },
+            {
+              "text": "On the platform, the events happen at lamp A and at lamp B: different places."
+            },
+            {
+              "text": "(b) The platform is at rest relative to the platform observer, who measures its proper length."
+            },
+            {
+              "text": "(c) The train is at rest relative to the passenger, who measures its proper length."
+            }
+          ],
+          "notes": "A common error is to think that proper time and proper length always belong to the same observer: here they don't."
+        }
+      ],
+      "checks": [
+        "A5-015"
+      ]
+    },
+    {
+      "id": "dilation",
+      "short": "Time dilation",
+      "hl": true,
+      "guide": "Time dilation as given by $\\Delta t = \\gamma \\Delta t_0$.",
+      "sections": [
+        "dilation"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Explain time dilation using a light clock and the second postulate.",
+        "Use $\\Delta t = \\gamma \\Delta t_0$ to calculate dilated times and speeds."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Time dilation",
+          "latex": [
+            "\\Delta t = \\gamma\\,\\Delta t_0",
+            "\\gamma = \\dfrac{1}{\\sqrt{1 - \\dfrac{v^{2}}{c^{2}}}}"
+          ],
+          "bullets": [
+            "Both in the data booklet",
+            "$\\Delta t_0$: proper time; $\\Delta t$: the time measured by an observer for whom the clock moves at speed $v$",
+            "$\\gamma \\ge 1$, so a moving clock runs slow"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "The light clock",
+          "start": "A light clock: a pulse bounces between two mirrors a distance $L$ apart. For an observer moving with it, one tick (up and back) takes $\\Delta t_0 = 2L/c$. Another observer sees the clock move sideways at speed $v$, so each tick takes $\\Delta t$.",
+          "steps": [
+            {
+              "text": "For the second observer, the pulse travels a zigzag, still at $c$ (postulate 2). Half a tick is a right-angled triangle: Pythagoras",
+              "latex": "\\left(\\dfrac{c\\Delta t}{2}\\right)^{2} = L^{2} + \\left(\\dfrac{v\\Delta t}{2}\\right)^{2}"
+            },
+            {
+              "text": "Multiply by 4, then replace $2L$ with $cDelta t_0$",
+              "latex": "(c\\Delta t)^{2} = (c\\Delta t_0)^{2} + (v\\Delta t)^{2}"
+            },
+            {
+              "text": "Collect the $\\Delta t$ terms",
+              "latex": "(c^{2} - v^{2})\\Delta t^{2} = c^{2}\\Delta t_0^{2}"
+            },
+            {
+              "text": "Divide by $c^{2} - v^{2}$ and take the square root",
+              "latex": "\\Delta t = \\dfrac{\\Delta t_0}{\\sqrt{1 - \\dfrac{v^{2}}{c^{2}}}} = \\gamma\\,\\Delta t_0"
+            }
+          ],
+          "notes": "The derivation is not required by the guide, but it shows clearly where time dilation comes from. With Newton's absolute time ($\\Delta t = \\Delta t_0$), the same diagram would need the light to travel faster than $c$ for the moving observer, breaking postulate 2."
+        },
+        {
+          "type": "bullets",
+          "title": "Using time dilation",
+          "bullets": [
+            "Identify the proper time first: the clock present at both events",
+            "Check: the proper time is always the <strong>shortest</strong> time between the events",
+            "Find $\\gamma$ from $v/c$: you don't need to put in $3.00\\times10^{8}$ $\\text{m s}^{-1}$",
+            "The effect is symmetrical: each observer sees the other's clock running slow"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "An experiment on a fast probe",
+          "question": "A space probe passes the Earth at $0.92c$. An experiment on board lasts 45 minutes, measured by the probe's own clock. How long does the experiment last according to observers on the Earth?",
+          "hint": "The experiment starts and ends at the same place on the probe, so which time is the proper time? Find $\\gamma$ first.",
+          "steps": [
+            {
+              "text": "The probe's clock is at both events, so $\\Delta t_0 = 45$ min."
+            },
+            {
+              "text": "Find the Lorentz factor.",
+              "latex": "\\gamma = \\dfrac{1}{\\sqrt{1 - 0.92^{2}}} = 2.55"
+            },
+            {
+              "text": "Apply time dilation.",
+              "latex": "\\Delta t = \\gamma\\,\\Delta t_0 = 2.55 \\times 45 = 115\\ \\text{min}"
+            }
+          ],
+          "notes": "There is no need to change the minutes to seconds: both times are in the same unit. The answer is longer than 45 minutes, as it must be."
+        },
+        {
+          "type": "worked",
+          "title": "How fast is the clock moving?",
+          "question": "Observers on a space station watch a clock on a passing spacecraft. While their own clocks advance by 10.0 s, the spacecraft's clock advances by only 7.0 s. Find the speed of the spacecraft relative to the station.",
+          "hint": "Which of the two times is the proper time? Find $\\gamma$ from the ratio of the times, then rearrange the equation for $\\gamma$ to find $v$.",
+          "steps": [
+            {
+              "text": "The spacecraft's clock measures the proper time, $\\Delta t_0 = 7.0$ s.",
+              "latex": "\\gamma = \\dfrac{\\Delta t}{\\Delta t_0} = \\dfrac{10.0}{7.0} = 1.43"
+            },
+            {
+              "text": "Rearrange the Lorentz factor.",
+              "latex": "1 - \\dfrac{v^{2}}{c^{2}} = \\dfrac{1}{\\gamma^{2}} = 0.49"
+            },
+            {
+              "text": "Solve for $v$.",
+              "latex": "v = \\sqrt{1 - 0.49}\\ c = 0.71c"
+            }
+          ],
+          "notes": "Keep $1/\\gamma = 0.70$ exact rather than rounding $\\gamma$: then $1/\\gamma^{2} = 0.49$ exactly."
+        },
+        {
+          "type": "bullets",
+          "title": "The twin paradox",
+          "bullets": [
+            "One twin travels to a star and back at high speed; the other stays on the Earth",
+            "The traveller returns <strong>younger</strong>: their clock ran slow in the Earth's frame",
+            "The \"paradox\": from the traveller's view, the Earth twin moved, so shouldn't the Earth twin be younger?",
+            "The situations are not symmetrical: only the traveller changes inertial frame, at the turnaround",
+            "The Earth twin stays in one inertial frame throughout, and ages more"
+          ],
+          "notes": "Avoid saying the paradox needs general relativity: special relativity resolves it, because the traveller's journey uses two different inertial frames."
+        }
+      ],
+      "checks": [
+        "A5-005"
+      ]
+    },
+    {
+      "id": "contraction",
+      "short": "Length contraction",
+      "hl": true,
+      "guide": "Length contraction as given by $L = \\dfrac{L_0}{\\gamma}$.",
+      "sections": [
+        "contraction"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Explain why time dilation requires length contraction.",
+        "Use $L = \\dfrac{L_0}{\\gamma}$ to calculate contracted lengths and speeds."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Length contraction",
+          "latex": "L = \\dfrac{L_0}{\\gamma}",
+          "bullets": [
+            "In the data booklet",
+            "$L_0$: proper length (measured at rest); $L$: length measured by an observer for whom the object moves",
+            "Only lengths <strong>along</strong> the motion are contracted; lengths at right angles are unchanged"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Length contraction from time dilation",
+          "start": "A train moves at speed $v$ along a platform of proper length $L_0$. Event 1: the train's front passes one end; event 2: it passes the other end. Both observers agree on the relative speed $v$.",
+          "steps": [
+            {
+              "text": "Platform frame: the front covers the platform's proper length in time $\\Delta t$",
+              "latex": "L_0 = v\\Delta t"
+            },
+            {
+              "text": "Train frame: both events happen at the front of the train, so the train measures the proper time; the platform rushes past",
+              "latex": "L = v\\Delta t_0"
+            },
+            {
+              "text": "Divide the two equations",
+              "latex": "\\dfrac{L}{L_0} = \\dfrac{\\Delta t_0}{\\Delta t}"
+            },
+            {
+              "text": "Time dilation, $\\Delta t = \\gamma\\Delta t_0$, gives",
+              "latex": "L = \\dfrac{L_0}{\\gamma}"
+            }
+          ],
+          "notes": "The derivation is not required by the guide. It shows that length contraction and time dilation are two sides of one effect. FitzGerald and Lorentz had proposed the same contraction to explain the Michelson–Morley result, before Einstein."
+        },
+        {
+          "type": "worked",
+          "title": "Through a docking tunnel",
+          "question": "A docking tunnel on a space station is 250 m long, measured by the station crew. A shuttle flies straight through the tunnel at $0.92c$. What length does the shuttle crew measure for the tunnel?",
+          "hint": "In which frame is the tunnel at rest? That frame measures the proper length. Should the shuttle crew's length be longer or shorter?",
+          "steps": [
+            {
+              "text": "The tunnel is at rest relative to the station, so $L_0 = 250$ m."
+            },
+            {
+              "text": "The Lorentz factor at this speed.",
+              "latex": "\\gamma = \\dfrac{1}{\\sqrt{1 - 0.92^{2}}} = 2.55"
+            },
+            {
+              "text": "Apply length contraction.",
+              "latex": "L = \\dfrac{L_0}{\\gamma} = \\dfrac{250}{2.55} = 98\\ \\text{m}"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A fast cargo pod",
+          "question": "A cylindrical cargo pod is 5.0 m long when it is at rest. As it flies along its length past a space station, the station crew measure its length as 1.4 m. Find the speed of the pod relative to the station.",
+          "hint": "Find $\\gamma$ from the two lengths, then rearrange the equation for $\\gamma$ to find $v$.",
+          "steps": [
+            {
+              "text": "The ratio of the lengths gives $\\gamma$.",
+              "latex": "\\gamma = \\dfrac{L_0}{L} = \\dfrac{5.0}{1.4} = 3.57"
+            },
+            {
+              "text": "Rearrange the Lorentz factor.",
+              "latex": "\\dfrac{v^{2}}{c^{2}} = 1 - \\dfrac{1}{\\gamma^{2}} = 1 - \\left(\\dfrac{1.4}{5.0}\\right)^{2} = 0.9216"
+            },
+            {
+              "text": "Take the square root.",
+              "latex": "v = 0.96c"
+            }
+          ],
+          "notes": "Using $1/\\gamma = L/L_0 = 0.28$ directly avoids rounding $\\gamma$."
+        }
+      ],
+      "challenge": "CC-A5-01",
+      "checks": [
+        "A5-006"
+      ]
+    },
+    {
+      "id": "muons",
+      "short": "Evidence from muon decay",
+      "hl": true,
+      "guide": "That muon decay experiments provide experimental evidence for time dilation and length contraction.",
+      "sections": [
+        "muons"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Explain how muon decay experiments give evidence for time dilation and length contraction, in both the Earth's and the muon's frames."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Muons from the sky",
+          "bullets": [
+            "Cosmic rays hitting the upper atmosphere make <strong>muons</strong>, unstable particles with a mean lifetime of about 2.2 µs at rest",
+            "They travel very close to $c$, but even at $c$, 2.2 µs would carry them only about 660 m",
+            "Yet they are made many kilometres up, and large numbers reach sea level",
+            "Experiments count muons at a mountain top and at sea level: far more survive the journey than non-relativistic physics predicts",
+            "Earth frame: the muon's clock runs slow (time dilation). Muon frame: the atmosphere is contracted (length contraction)"
+          ],
+          "notes": "Both explanations predict the same number of muons at sea level: the two observers describe the same events differently. Experiments of this kind were done in the 1940s and 1960s."
+        },
+        {
+          "type": "worked",
+          "title": "Muons through the atmosphere",
+          "question": "A muon is made 12 km above the ground and travels straight down at $0.999c$, where $\\gamma = 22.4$. Its mean lifetime at rest is 2.2 µs. Find (a) the time it takes to reach the ground in the Earth's frame, (b) this time in the muon's frame and (c) the thickness of the 12 km of atmosphere in the muon's frame. (d) Explain why many such muons reach the ground.",
+          "hint": "For (a), use time = distance ÷ speed. The muon is present at both events (made, reaching the ground), so which time is the proper time?",
+          "steps": [
+            {
+              "text": "(a) Earth frame.",
+              "latex": "\\Delta t = \\dfrac{12\\,000}{0.999 \\times 3.00\\times10^{8}} = 40\\ \\mu\\text{s}"
+            },
+            {
+              "text": "(b) The muon's time is the proper time.",
+              "latex": "\\Delta t_0 = \\dfrac{\\Delta t}{\\gamma} = \\dfrac{40.0}{22.4} = 1.8\\ \\mu\\text{s}"
+            },
+            {
+              "text": "(c) The atmosphere is at rest relative to the Earth: 12 km is its proper length.",
+              "latex": "L = \\dfrac{L_0}{\\gamma} = \\dfrac{12\\,000}{22.4} = 540\\ \\text{m}"
+            },
+            {
+              "text": "(d) In the muon's frame the trip takes 1.8 µs, less than its mean lifetime of 2.2 µs, so many muons survive. Without time dilation, the muon's own clock would record the full 40 µs, about 18 lifetimes, and almost none would survive."
+            }
+          ],
+          "notes": "Part (b) can also be found in the muon's frame as the contracted distance ÷ speed: 536 m ÷ (0.999 × 3.00 × 10⁸ m s⁻¹) = 1.8 µs. The two frames agree."
+        }
+      ],
+      "checks": [
+        "A5-012"
+      ]
+    },
+    {
+      "id": "simultaneity",
+      "short": "The relativity of simultaneity",
+      "hl": true,
+      "guide": "The relativity of simultaneity.",
+      "sections": [
+        "simultaneity"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Explain why two events that are simultaneous in one frame need not be simultaneous in another."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Simultaneous for whom?",
+          "bullets": [
+            "Two events at the same time but in <strong>different places</strong> in one frame are <strong>not simultaneous</strong> in a frame moving relative to it",
+            "Thought experiment: lightning strikes both ends of a moving train at the same instant for a platform observer standing midway between the two strikes",
+            "A passenger at the middle of the train moves towards the front flash, so its light reaches her first",
+            "Light travels at $c$ in her frame too, and she is midway between the ends, so she concludes the front strike happened first",
+            "Neither observer is wrong: simultaneity depends on the frame",
+            "Events at the same place and the same time are simultaneous for everyone"
+          ],
+          "notes": "Synchronising distant clocks shows why this matters: a clock can be set by a light signal only after allowing for the light's travel time, and that allowance depends on the frame."
+        },
+        {
+          "type": "worked",
+          "title": "A flash in the middle of a rocket",
+          "question": "A lamp at the exact middle of a rocket flashes once. Detectors at the front and the back of the rocket record the light. The rocket moves past the Earth at high speed. (a) In the rocket's frame, which detector is hit first? (b) In the Earth's frame, which detector is hit first? Explain your answers.",
+          "hint": "Light travels at $c$ in both frames (postulate 2). In each frame, ask whether the detectors move while the light is on its way.",
+          "steps": [
+            {
+              "text": "(a) In the rocket's frame, the detectors are at rest and equal distances from the lamp. The light travels at $c$ both ways, so both are hit <strong>at the same time</strong>."
+            },
+            {
+              "text": "(b) In the Earth's frame, the light still travels at $c$ in both directions, but the rocket moves while it does."
+            },
+            {
+              "text": "The back detector moves towards the light and the front detector moves away from it, so the light has less distance to cover to the back."
+            },
+            {
+              "text": "So the <strong>back</strong> detector is hit first: two events simultaneous in the rocket are not simultaneous on the Earth."
+            }
+          ],
+          "notes": "The Lorentz transformation for time makes this quantitative: the $vx/c^{2}$ term gives events at different $x$ different values of $t'$."
+        }
+      ],
+      "challenge": "CC-A5-04",
+      "checks": [
+        "A5-011"
+      ]
+    },
+    {
+      "id": "lorentz",
+      "short": "Lorentz transformations",
+      "hl": true,
+      "guide": "That the postulates of special relativity lead to the Lorentz transformation equations for the coordinates of an event in two inertial reference frames, $x' = \\gamma(x - vt)$ and $t' = \\gamma\\left(t - \\dfrac{vx}{c^2}\\right)$, where $\\gamma = \\dfrac{1}{\\sqrt{1 - \\frac{v^2}{c^2}}}$.",
+      "sections": [
+        "lorentz"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Use the Lorentz transformations to find an event's coordinates, or the intervals between two events, in another frame.",
+        "Show that the Lorentz transformations become the Galilean ones when $v \\ll c$."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "The Lorentz transformations",
+          "latex": [
+            "x' = \\gamma(x - vt)",
+            "t' = \\gamma\\left(t - \\dfrac{vx}{c^{2}}\\right)",
+            "\\gamma = \\dfrac{1}{\\sqrt{1 - \\dfrac{v^{2}}{c^{2}}}}"
+          ],
+          "bullets": [
+            "All in the data booklet; the derivation is not required",
+            "They replace the Galilean transformations: time now depends on the frame too",
+            "For two events, use intervals: $\\Delta x' = \\gamma(\\Delta x - v\\Delta t)$ and $\\Delta t' = \\gamma\\left(\\Delta t - \\dfrac{v\\Delta x}{c^{2}}\\right)$"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Using the Lorentz transformations",
+          "bullets": [
+            "Both frames start at $x = x' = 0$ when $t = t' = 0$",
+            "To go from S′ back to S: swap the primes and change the sign of $v$",
+            "Keep units consistent: $c = 3.00\\times10^{8}$ $\\text{m s}^{-1}$, times in seconds (or work in $ct$, in metres)",
+            "When $v \\ll c$: $\\gamma \\approx 1$ and $\\dfrac{vx}{c^{2}} \\approx 0$, so they become $x' = x - vt$ and $t' = t$",
+            "For a car at 30 $\\text{m s}^{-1}$, $\\gamma$ differs from 1 by only about $5\\times10^{-15}$"
+          ],
+          "notes": "This is why Newton's mechanics works so well at everyday speeds: it is the low-speed limit of special relativity."
+        },
+        {
+          "type": "diagram",
+          "title": "The Lorentz factor",
+          "figure": "a5bt",
+          "bullets": [
+            "$\\gamma = 1$ when $v = 0$",
+            "$\\gamma$ is still only 1.15 at $0.5c$",
+            "$\\gamma \\to \\infty$ as $v \\to c$: nothing with mass reaches $c$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Coordinates of a flash",
+          "question": "Frame S′ moves at $0.40c$ in the $+x$ direction relative to frame S, and the origins coincide at $t = t' = 0$. In S, a flash happens at $x = 1200$ m and $t = 5.0\\ \\mu\\text{s}$. Find (a) the Lorentz factor and (b) the position and (c) the time of the flash in S′.",
+          "hint": "Find $\\gamma$ for $0.40c$ first. Work out $vt$ and $\\dfrac{vx}{c^{2}}$ separately before substituting.",
+          "steps": [
+            {
+              "text": "(a) The Lorentz factor.",
+              "latex": "\\gamma = \\dfrac{1}{\\sqrt{1 - 0.40^{2}}} = 1.091"
+            },
+            {
+              "text": "(b) First find $vt$.",
+              "latex": "vt = 0.40 \\times 3.00\\times10^{8} \\times 5.0\\times10^{-6} = 600\\ \\text{m}"
+            },
+            {
+              "text": "Lorentz transformation for position.",
+              "latex": "x' = 1.091(1200 - 600) = 655\\ \\text{m}"
+            },
+            {
+              "text": "(c) Lorentz transformation for time.",
+              "latex": "\\dfrac{vx}{c^{2}} = \\dfrac{0.40 \\times 1200}{3.00\\times10^{8}} = 1.6\\ \\mu\\text{s}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "t' = 1.091(5.0 - 1.6) = 3.7\\ \\mu\\text{s}"
+            }
+          ],
+          "notes": "Compare with Galilean relativity, which gives $x' = 600$ m and $t' = 5.0$ µs. In $vx/c^{2}$, one factor of $c$ cancels with the $c$ in $v = 0.40c$, which saves a step."
+        }
+      ],
+      "checks": [
+        "A5-004"
+      ]
+    },
+    {
+      "id": "velocity",
+      "short": "Relativistic velocity addition",
+      "hl": true,
+      "guide": "That Lorentz transformation equations lead to the relativistic velocity addition equation as given by $u' = \\dfrac{u - v}{1 - \\frac{uv}{c^2}}$.",
+      "sections": [
+        "velocity"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Use the relativistic velocity addition equation, with signs, and show that it never gives a speed greater than $c$."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Relativistic velocity addition",
+          "latex": "u' = \\dfrac{u - v}{1 - \\dfrac{uv}{c^{2}}}",
+          "bullets": [
+            "In the data booklet: $u$ in S, $u'$ in S′, and S′ moves at $v$ relative to S",
+            "Velocities in the $+x$ direction are positive",
+            "Rearranged to find $u$: $u = \\dfrac{u' + v}{1 + \\dfrac{u'v}{c^{2}}}$",
+            "When $uv \\ll c^{2}$ it becomes the Galilean $u' = u - v$"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Where the velocity addition equation comes from",
+          "start": "An object moves at constant velocity $u$ in S, passing the origin at $t = 0$, so $x = ut$. Its velocity in S′ is $u' = x'/t'$. (The derivation is not required, but it uses only the Lorentz transformations.)",
+          "steps": [
+            {
+              "text": "Divide the two Lorentz transformations",
+              "latex": "u' = \\dfrac{x'}{t'} = \\dfrac{\\gamma(x - vt)}{\\gamma\\left(t - \\dfrac{vx}{c^{2}}\\right)}"
+            },
+            {
+              "text": "Cancel $\\gamma$ and substitute $x = ut$",
+              "latex": "u' = \\dfrac{ut - vt}{t - \\dfrac{vut}{c^{2}}}"
+            },
+            {
+              "text": "Cancel $t$: the relativistic velocity addition equation",
+              "latex": "u' = \\dfrac{u - v}{1 - \\dfrac{uv}{c^{2}}}"
+            },
+            {
+              "text": "Check with light: put $u = c$",
+              "latex": "u' = \\dfrac{c - v}{1 - \\dfrac{v}{c}} = c"
+            }
+          ],
+          "notes": "The last step shows the equation builds in the second postulate: light has speed $c$ in every frame."
+        },
+        {
+          "type": "worked",
+          "title": "A probe fired forwards",
+          "question": "A spacecraft moves away from the Earth at $0.70c$. It launches a probe straight ahead at $0.45c$ relative to the spacecraft. Find the speed of the probe relative to the Earth.",
+          "hint": "Let the Earth be S and the spacecraft be S′. You know $u'$ and $v$ and want $u$, so rearrange the equation first.",
+          "steps": [
+            {
+              "text": "Earth = S, spacecraft = S′: $v = 0.70c$ and $u' = 0.45c$.",
+              "latex": "u = \\dfrac{u' + v}{1 + \\dfrac{u'v}{c^{2}}}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "u = \\dfrac{0.45c + 0.70c}{1 + 0.45 \\times 0.70} = \\dfrac{1.15c}{1.315}"
+            },
+            {
+              "text": "Calculate.",
+              "latex": "u = 0.87c"
+            }
+          ],
+          "notes": "Galilean addition would give $1.15c$, faster than light."
+        },
+        {
+          "type": "worked",
+          "title": "A probe fired backwards",
+          "question": "The spacecraft from the last example, still moving away from the Earth at $0.70c$, now fires a second probe backwards, towards the Earth, at $0.90c$ relative to the spacecraft. Taking the direction away from the Earth as positive, find the velocity of this probe relative to the Earth.",
+          "hint": "The probe moves in the negative direction relative to the spacecraft, so $u'$ is negative. Keep the signs in the denominator too.",
+          "steps": [
+            {
+              "text": "Now $u' = -0.90c$ and $v = +0.70c$.",
+              "latex": "u = \\dfrac{-0.90c + 0.70c}{1 + (-0.90)(0.70)}"
+            },
+            {
+              "text": "Simplify.",
+              "latex": "u = \\dfrac{-0.20c}{0.37} = -0.54c"
+            },
+            {
+              "text": "The probe moves towards the Earth at $0.54c$."
+            }
+          ],
+          "notes": "Galilean addition would give only $0.20c$ towards the Earth. A sign error in the denominator ($1 + 0.63$) gives $-0.12c$: a good mistake to discuss."
+        }
+      ],
+      "challenge": "CC-A5-03",
+      "checks": [
+        "A5-007"
+      ]
+    },
+    {
+      "id": "interval",
+      "short": "The space-time interval",
+      "hl": true,
+      "guide": "That the space–time interval $\\Delta s$ between two events is an invariant quantity as given by $(\\Delta s)^2 = (c\\Delta t)^2 - (\\Delta x)^2$.",
+      "sections": [
+        "interval"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Calculate the space-time interval between two events and use its invariance to check transformed coordinates."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "The space-time interval",
+          "latex": "(\\Delta s)^{2} = (c\\Delta t)^{2} - (\\Delta x)^{2}",
+          "bullets": [
+            "In the data booklet",
+            "<strong>Invariant</strong>: it has the same value in every inertial frame",
+            "Observers disagree about $\\Delta t$ and $\\Delta x$, but agree about $(\\Delta s)^{2}$",
+            "Unit: $\\text{m}^{2}$ (with $c\\Delta t$ and $\\Delta x$ in metres)"
+          ],
+          "notes": "Some sources write the interval with the opposite sign, $(\\Delta x)^{2} - (c\\Delta t)^{2}$. Use the form in the guide and the data booklet, which is positive when a signal slower than light could travel from one event to the other."
+        },
+        {
+          "type": "derivation",
+          "title": "The interval from the light clock",
+          "start": "Two events: two ticks of a clock moving at $v$ relative to S. In the clock's frame they happen at the same place, $\\Delta t_0$ apart. In S they are $\\Delta t$ apart and $\\Delta x = v\\Delta t$ apart.",
+          "steps": [
+            {
+              "text": "From the light clock",
+              "latex": "(c\\Delta t)^{2} = (c\\Delta t_0)^{2} + (v\\Delta t)^{2}"
+            },
+            {
+              "text": "Rearrange, using $\\Delta x = v\\Delta t$ (the distance the clock moves in S)",
+              "latex": "(c\\Delta t)^{2} - (\\Delta x)^{2} = (c\\Delta t_0)^{2}"
+            },
+            {
+              "text": "In the clock's frame, $\\Delta x' = 0$ and $\\Delta t' = \\Delta t_0$",
+              "latex": "(c\\Delta t)^{2} - (\\Delta x)^{2} = (c\\Delta t')^{2} - (\\Delta x')^{2}"
+            }
+          ],
+          "notes": "This shows the invariance for one pair of frames; the Lorentz transformations prove it for any two inertial frames."
+        },
+        {
+          "type": "bullets",
+          "title": "What the sign tells you",
+          "bullets": [
+            "$(\\Delta s)^{2} > 0$: something slower than light could travel between the events, so one could <strong>cause</strong> the other; every observer agrees on their order",
+            "$(\\Delta s)^{2} = 0$: only light could connect them",
+            "$(\\Delta s)^{2} < 0$: nothing can travel between them; observers can disagree about which came first",
+            "For a clock present at both events, $\\Delta s = c\\Delta t_0$: the interval is $c$ × the proper time"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Two fireworks",
+          "question": "In frame S, firework A explodes at $x = 0$, $t = 0$, and firework B explodes at $x = 3.0$ km, $t = 6.0\\ \\mu\\text{s}$. Frame S′ moves at $0.90c$ in the $+x$ direction, where $\\gamma = 2.29$. Find (a) $(\\Delta s)^{2}$ for the two explosions and (b) the time between them in S′. (c) Could firework A have set off firework B?",
+          "hint": "Change $\\Delta t$ into a distance $c\\Delta t$ first. For (b), use the Lorentz transformation for time intervals. For (c), what does the sign of $(\\Delta s)^{2}$ tell you?",
+          "steps": [
+            {
+              "text": "(a) Convert the time interval to a distance.",
+              "latex": "c\\Delta t = 3.00\\times10^{8} \\times 6.0\\times10^{-6} = 1800\\ \\text{m}"
+            },
+            {
+              "text": "Space-time interval.",
+              "latex": "(\\Delta s)^{2} = 1800^{2} - 3000^{2} = -5.8\\times10^{6}\\ \\text{m}^{2}"
+            },
+            {
+              "text": "(b) Lorentz transformation for the time interval: $\\dfrac{v\\Delta x}{c^{2}} = \\dfrac{0.90 \\times 3000}{3.00\\times10^{8}} = 9.0\\ \\mu\\text{s}$.",
+              "latex": "\\Delta t' = 2.29(6.0 - 9.0) = -6.9\\ \\mu\\text{s}"
+            },
+            {
+              "text": "(c) $\\Delta t'$ is negative: in S′, B explodes <strong>before</strong> A. $(\\Delta s)^{2} < 0$, so no signal (even light, which covers only 1800 m in 6.0 µs) could get from A to B: A could not have set off B."
+            }
+          ],
+          "notes": "As a check, $\\Delta x' = 2.29(3000 - 0.90 \\times 1800) = 3170$ m, and $(c\\Delta t')^{2} - (\\Delta x')^{2}$ gives $-5.8\\times10^{6}$ $\\text{m}^{2}$ again."
+        }
+      ],
+      "checks": [
+        "A5-010"
+      ]
+    },
+    {
+      "id": "diagrams",
+      "short": "Space-time diagrams",
+      "hl": true,
+      "guide": "Space–time diagrams.",
+      "sections": [
+        "diagrams"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Draw and interpret world lines on a space-time diagram with $x$ and $ct$ axes.",
+        "Use the axes of a moving frame to show simultaneity, time dilation and length contraction."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Space-time diagrams",
+          "bullets": [
+            "Position $x$ across, $ct$ up: both axes in metres (or light-years)",
+            "Each <strong>event</strong> is a point; an object's path through space-time is its <strong>world line</strong>",
+            "An object at rest: a vertical world line",
+            "Constant velocity: a straight world line tilted from the $ct$ axis",
+            "Light: a world line at 45° (the light line)",
+            "Anything with mass has a world line steeper than 45° (closer to the $ct$ axis)"
+          ],
+          "notes": "World lines are limited to constant velocity in the guide. Contrast a space diagram of circular motion (a circle) with its space-time diagram (a helix that never repeats its time coordinate) to show what the extra axis adds."
+        },
+        {
+          "type": "bullets",
+          "title": "Adding a moving frame",
+          "bullets": [
+            "The $ct'$ axis is the world line of the origin of S′, tilted from $ct$ by an angle $\\theta$",
+            "The $x'$ axis (all events at $t' = 0$) is tilted up from $x$ by the same angle",
+            "The light line stays at 45°, halfway between both pairs of axes: light has speed $c$ in both frames",
+            "To read coordinates in S′, draw lines through the event parallel to the $x'$ and $ct'$ axes",
+            "The scales on the $x'$ and $ct'$ axes differ from those on $x$ and $ct$: they are set by lines of constant interval"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Simultaneity on a space-time diagram",
+          "figure": "a5ct",
+          "bullets": [
+            "Events on a line parallel to $x$ are simultaneous in S",
+            "Events on a line parallel to $x'$ are simultaneous in S′",
+            "These are different lines, so simultaneity depends on the frame"
+          ],
+          "notes": "Ask students to use the same diagram to show time dilation: two events on the $ct'$ axis (a clock at rest in S′) are further apart in time when measured with lines parallel to the $x$ axis. Remind them that the $ct'$ axis has its own scale, set by lines of constant interval."
+        },
+        {
+          "type": "worked",
+          "title": "Which events can be connected?",
+          "question": "On a space-time diagram for frame S, with both axes in metres, event O is at the origin, event P is at $x = 2.0$ m, $ct = 5.0$ m, and event Q is at $x = 6.0$ m, $ct = 2.0$ m. (a) Find $(\\Delta s)^{2}$ between O and each of the other events. (b) Which event could a particle with mass travel to from O? (c) Find that particle's speed.",
+          "hint": "Use $(\\Delta s)^{2} = (c\\Delta t)^{2} - (\\Delta x)^{2}$ with $c\\Delta t$ read from the $ct$ axis. For (c), the speed is the distance moved ÷ the time taken.",
+          "steps": [
+            {
+              "text": "(a) From O to P.",
+              "latex": "(\\Delta s)^{2} = 5.0^{2} - 2.0^{2} = 21\\ \\text{m}^{2}"
+            },
+            {
+              "text": "From O to Q.",
+              "latex": "(\\Delta s)^{2} = 2.0^{2} - 6.0^{2} = -32\\ \\text{m}^{2}"
+            },
+            {
+              "text": "(b) Only O to P has $(\\Delta s)^{2} > 0$: its world line would be steeper than the light line. Reaching Q would need a speed greater than $c$."
+            },
+            {
+              "text": "(c) Distance ÷ time, with $c\\Delta t = 5.0$ m.",
+              "latex": "\\dfrac{v}{c} = \\dfrac{\\Delta x}{c\\Delta t} = \\dfrac{2.0}{5.0} \\;\\Rightarrow\\; v = 0.40c"
+            }
+          ],
+          "notes": "Ask students to sketch the light lines from O: P lies inside them and Q outside. The square root of 21 m², 4.6 m, is $c$ × the proper time a clock moving from O to P would record."
+        }
+      ]
+    },
+    {
+      "id": "angle",
+      "short": "World-line angle and speed",
+      "hl": true,
+      "guide": "That the angle between the world line of a moving particle and the time axis on a space–time diagram is related to the particle's speed as given by $\\tan\\theta = \\dfrac{v}{c}$.",
+      "sections": [
+        "diagrams"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Use $\\tan\\theta = \\dfrac{v}{c}$ to relate the angle of a world line to the object's speed."
+      ],
+      "slides": [
+        {
+          "type": "derivation",
+          "title": "The angle of a world line",
+          "start": "An object moves at constant speed $v$ from the origin. On a space-time diagram, $\\theta$ is the angle between its world line and the $ct$ axis.",
+          "steps": [
+            {
+              "text": "In a time $t$, the object moves across",
+              "latex": "x = vt"
+            },
+            {
+              "text": "and the world line rises",
+              "latex": "ct"
+            },
+            {
+              "text": "The world line is the hypotenuse of a right-angled triangle with $x$ opposite $\\theta$",
+              "latex": "\\tan\\theta = \\dfrac{x}{ct} = \\dfrac{vt}{ct} = \\dfrac{v}{c}"
+            }
+          ],
+          "notes": "For light, $\\tan\\theta = 1$, so $\\theta = 45°$. The same angle gives the tilt of the $ct'$ axis from $ct$, and of the $x'$ axis from $x$."
+        },
+        {
+          "type": "equation",
+          "title": "World-line angle",
+          "latex": "\\tan\\theta = \\dfrac{v}{c}",
+          "bullets": [
+            "In the data booklet",
+            "$\\theta$ is measured from the $ct$ axis, not the $x$ axis",
+            "$\\theta = 0$: at rest; $\\theta = 45°$: light; $\\theta$ can never reach 45° for an object with mass"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Angles and speeds",
+          "question": "(a) A comet moves at $0.35c$ relative to the Sun. At what angle to the $ct$ axis is its world line in the Sun's frame? (b) On another diagram, the world line of a spacecraft makes an angle of 40° with the $ct$ axis. Find its speed.",
+          "hint": "Use $\\tan\\theta = \\dfrac{v}{c}$ both ways. Check that the angle is measured from the $ct$ axis.",
+          "steps": [
+            {
+              "text": "(a) Use the inverse tangent.",
+              "latex": "\\theta = \\tan^{-1}(0.35) = 19^{\\circ}"
+            },
+            {
+              "text": "(b) Rearrange.",
+              "latex": "v = c\\tan 40^{\\circ} = 0.84c"
+            },
+            {
+              "text": "Check: both angles are less than 45°, so both speeds are less than $c$."
+            }
+          ],
+          "notes": "A comet at $0.35c$ is unrealistic, but the numbers are easier to see on a diagram. A common slip is measuring from the $x$ axis, which would give $\\tan 50° = 1.19$, faster than light."
+        }
+      ],
+      "checks": [
+        "A5-009"
+      ]
+    }
+  ]
+}

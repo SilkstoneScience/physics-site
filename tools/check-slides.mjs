@@ -30,7 +30,8 @@ export function checkSlides({ err, warn, TOPICS }) {
     let d;
     try { d = JSON.parse(read(file)); } catch (e) { err(file, `isn't valid JSON (${e.message})`); continue; }
     if (d.topic !== topic) err(file, `"topic" should be "${topic}"`);
-    if (!(d.hours > 0)) err(file, '"hours" (the guide\'s teaching hours) is missing');
+    // "hours": the guide's SL-and-HL hours (0 for an HL-only subtopic); "hlHours": its additional HL hours
+    if (!(d.hours >= 0) || !(d.hours > 0 || d.hlHours > 0)) err(file, '"hours" (the guide\'s teaching hours, and "hlHours" for HL content) is missing');
     const page = exists(`themes/${slug}.html`) ? read(`themes/${slug}.html`) : '';
     const h2 = new Set([...page.matchAll(/<h2 id="([^"]+)"/g)].map((m) => m[1]));
     const figures = new Set([...page.matchAll(/<figure[\s\S]*?<\/figure>/g)].flatMap((m) => [...m[0].matchAll(/<title id="([^"]+)"/g)].map((t) => t[1])));
@@ -48,14 +49,17 @@ export function checkSlides({ err, warn, TOPICS }) {
       if (bare) err(file, `${where}: "${bare[1]}" without its backslash in "${latex}"`);
     };
     const ids = new Set();
-    let total = 0;
+    let total = 0, hlTotal = 0;
     for (const p of d.points || []) {
       const at = `point "${p.id}"`;
       if (!p.id || ids.has(p.id)) err(file, `${at}: missing or repeated id`);
       ids.add(p.id);
       for (const k of ['short', 'guide']) if (!p[k]) err(file, `${at}: "${k}" is missing`);
       if (!(p.minutes > 0)) err(file, `${at}: "minutes" (estimated teaching time) is missing`);
-      if (!p.extra) total += p.minutes || 0; // extras (not in the guide's list for this topic) don't count towards its hours
+      // extras (not in the guide's list for this topic) don't count towards its hours; HL points count towards the HL hours
+      if (!p.extra) { if (p.hl) hlTotal += p.minutes || 0; else total += p.minutes || 0; }
+      if (p.hl !== undefined && p.hl !== true) err(file, `${at}: "hl" should be true or left out`);
+      if (!d.hours && !p.hl) err(file, `${at}: ${topic} is HL only, so every point needs "hl": true`);
       if (!Array.isArray(p.aims) || !p.aims.length) err(file, `${at}: needs 1–2 aims`);
       else if (p.aims.length > 2) warn(file, `${at}: has ${p.aims.length} aims (the plan says 1–2)`);
       (p.aims || []).forEach((a) => maths(`${at} aim`, a));
@@ -91,6 +95,12 @@ export function checkSlides({ err, warn, TOPICS }) {
         else if (found.paper !== '1A') err(file, `${at}: quick-check question ${q} isn't a Paper 1A question`);
       }
     }
-    if (total !== d.hours * 60) warn(file, `the guide points' minutes add up to ${total}, but the guide gives ${d.hours} hours (${d.hours * 60} minutes)`);
+    if (total !== (d.hours || 0) * 60) warn(file, `the SL-and-HL points' minutes add up to ${total}, but the guide gives ${d.hours || 0} hours (${(d.hours || 0) * 60} minutes)`);
+    if (hlTotal !== (d.hlHours || 0) * 60) warn(file, `the HL points' minutes add up to ${hlTotal}, but the guide gives ${d.hlHours || 0} additional HL hours (${(d.hlHours || 0) * 60} minutes)`);
+    // an HL point's quick check may be HL; an SL point's must be SL
+    for (const p of d.points || []) for (const q of p.checks || []) {
+      const found = questions.find((x) => x.id === q);
+      if (found && !p.hl && found.level === 'HL') err(file, `point "${p.id}": quick-check question ${q} is HL, but the point is SL`);
+    }
   }
 }

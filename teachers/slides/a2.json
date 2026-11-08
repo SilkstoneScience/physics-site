@@ -1,0 +1,1816 @@
+{
+  "topic": "A.2",
+  "hours": 10,
+  "points": [
+    {
+      "id": "interactions",
+      "short": "Forces as interactions",
+      "guide": "Forces as interactions between bodies.",
+      "sections": [
+        "forces"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Describe a force as an interaction between two bodies, and name the two bodies involved."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What is a force?",
+          "bullets": [
+            "A force is a push or a pull that comes from an <strong>interaction between two bodies</strong>",
+            "Name both bodies: \"the force <strong>of</strong> the Earth <strong>on</strong> the ball\"",
+            "Force is a <strong>vector</strong>, measured in newtons (N)",
+            "<strong>Contact forces</strong> need touching (normal, friction, tension, drag, buoyancy); <strong>field forces</strong> act at a distance (gravitational, electric, magnetic)",
+            "A resultant force changes a body's velocity (its speed or direction); forces can also change its shape"
+          ],
+          "notes": "Ask students to list five forces acting in the room right now, and name the two bodies for each. If they can't name the second body, it probably isn't a force (e.g. \"the force of motion\")."
+        }
+      ]
+    },
+    {
+      "id": "fbd",
+      "short": "Free-body diagrams",
+      "guide": "That forces acting on a body can be represented in a free-body diagram.",
+      "sections": [
+        "forces"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Draw and label free-body diagrams showing every force acting on a single body."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Drawing a free-body diagram",
+          "bullets": [
+            "Draw <strong>one body only</strong>, as a dot or a simple box",
+            "Show every force acting <strong>on</strong> it as an arrow, starting on the body, never the forces it exerts on other things",
+            "Arrow length shows the size of the force; arrow direction shows its direction",
+            "Weight: from the centre of mass, straight down. Normal force: perpendicular to the surface. Friction: along the surface",
+            "Labels: $F_{g}$ or $mg$, $F_{N}$, $F_{f}$, $T$, $F_{d}$, $F_{b}$"
+          ],
+          "notes": "Guidance: free-body diagrams are for one- and two-dimensional situations only, and forces should be labelled with commonly accepted names or symbols."
+        },
+        {
+          "type": "diagram",
+          "title": "A box pulled by a rope",
+          "figure": "f1t"
+        },
+        {
+          "type": "worked",
+          "title": "A hot-air balloon",
+          "question": "A hot-air balloon, with its basket and passengers, rises at a constant velocity. Identify the forces acting on the balloon, state the direction of each, and compare their sizes.",
+          "hint": "List every body the balloon interacts with: the Earth, and the air around it (in more than one way).",
+          "steps": [
+            {
+              "text": "The Earth pulls the balloon down: its weight $F_{g}$, acting from the centre of mass."
+            },
+            {
+              "text": "The air it displaces pushes it up: the buoyancy force $F_{b}$."
+            },
+            {
+              "text": "It moves up through the air, so drag $F_{d}$ acts downwards, against the motion."
+            },
+            {
+              "text": "Constant velocity means zero resultant force, so the upward force balances the two downward ones.",
+              "latex": "F_{b} = F_{g} + F_{d}"
+            }
+          ],
+          "notes": "A good place to show that \"constant velocity\" does not mean \"no forces\". Ask what changes if the pilot turns the burner off (the air inside cools and becomes denser, so the balloon's total weight, including that air, increases while the buoyancy force stays about the same: the resultant force is now downwards and the balloon slows down)."
+        }
+      ]
+    },
+    {
+      "id": "resultant",
+      "short": "Resultant force",
+      "guide": "That free-body diagrams can be analysed to find the resultant force on a system.",
+      "sections": [
+        "forces"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Find the resultant of several forces in one and two dimensions by resolving them into components."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Finding the resultant force",
+          "bullets": [
+            "The <strong>resultant</strong> (net) force: all the forces on the body added as vectors",
+            "In one dimension: choose a positive direction and add the forces with signs",
+            "In two dimensions: split each force into components along two perpendicular axes",
+            [
+              "add the components in each direction",
+              "combine the two totals with Pythagoras, and find the direction with $\\tan^{-1}$"
+            ],
+            "Choose axes that suit the problem: on a slope, along and perpendicular to the slope"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Resolving and combining forces",
+          "latex": [
+            "F_{x} = F\\cos\\theta",
+            "F_{y} = F\\sin\\theta",
+            "F = \\sqrt{F_{x}^{2} + F_{y}^{2}}",
+            "\\theta = \\tan^{-1}\\left(\\dfrac{F_{y}}{F_{x}}\\right)"
+          ],
+          "bullets": [
+            "$\\theta$ is measured from the $x$-axis",
+            "These are not in the data booklet: they are the vector skills from the Skills page"
+          ],
+          "notes": "A scale drawing (nose-to-tail arrows) is a good check on the calculation."
+        },
+        {
+          "type": "worked",
+          "title": "Two tugs and a ship",
+          "question": "Two tugboats pull a ship. Tug A pulls with a force of 12 kN at 20° north of east, and tug B with 9.0 kN at 35° south of east. Find the size and direction of the resultant of these two forces.",
+          "hint": "Resolve each force into east and north components, taking south as negative. Then combine the totals.",
+          "steps": [
+            {
+              "text": "East components (in kN).",
+              "latex": "F_{x} = 12\\cos 20^{\\circ} + 9.0\\cos 35^{\\circ} = 11.28 + 7.37 = 18.65"
+            },
+            {
+              "text": "North components (in kN): tug B pulls partly south.",
+              "latex": "F_{y} = 12\\sin 20^{\\circ} - 9.0\\sin 35^{\\circ} = 4.10 - 5.16 = -1.06"
+            },
+            {
+              "text": "Combine with Pythagoras.",
+              "latex": "F = \\sqrt{18.65^{2} + 1.06^{2}} = 19\\ \\text{kN}"
+            },
+            {
+              "text": "Direction: a little south of east.",
+              "latex": "\\theta = \\tan^{-1}\\left(\\dfrac{1.06}{18.65}\\right) = 3.2^{\\circ} \\text{ south of east}"
+            }
+          ],
+          "notes": "The resultant is nearly 19 kN, less than 12 + 9.0 = 21 kN, because the tugs don't pull in the same direction."
+        }
+      ]
+    },
+    {
+      "id": "first-law",
+      "short": "Newton's first law",
+      "guide": "Newton's three laws of motion: the first law, applied to translational equilibrium.",
+      "sections": [
+        "first"
+      ],
+      "minutes": 30,
+      "aims": [
+        "State Newton's first law and explain what inertia is.",
+        "Solve problems on translational equilibrium, at rest or at constant velocity."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Newton's first law",
+          "bullets": [
+            "With no resultant external force, a body at rest stays at rest and a moving body keeps a <strong>constant velocity</strong>",
+            "Motion doesn't need a force to keep going: only a <strong>change</strong> of velocity needs one",
+            "Everyday objects stop because friction and drag act on them, not because motion \"runs out\"",
+            "<strong>Inertia</strong>: a body's reluctance to change its velocity; the greater the mass, the greater the inertia",
+            "<strong>Translational equilibrium</strong>: zero resultant force, so $\\sum F_{x} = 0$ and $\\sum F_{y} = 0$"
+          ],
+          "notes": "Galileo's thought experiment (a ball rolling down one ramp and up another, then along a flat track forever) is a good NoS story: a law found by imagining away friction, which can never be removed in a real experiment."
+        },
+        {
+          "type": "worked",
+          "title": "A skier on a tow rope",
+          "question": "A 65 kg skier is pulled up a smooth (frictionless) slope at 12° to the horizontal by a tow rope parallel to the slope. The skier moves at a constant velocity, and air resistance is negligible. Find (a) the tension in the rope and (b) the normal force on the skier.",
+          "hint": "Constant velocity means equilibrium. Use axes along and perpendicular to the slope, and resolve the weight.",
+          "steps": [
+            {
+              "text": "Constant velocity, so the forces balance in each direction. Weight:",
+              "latex": "mg = 65 \\times 9.8 = 637\\ \\text{N}"
+            },
+            {
+              "text": "(a) Along the slope, the tension balances the component of the weight down the slope.",
+              "latex": "T = mg\\sin 12^{\\circ} = 637 \\times 0.208 = 130\\ \\text{N}"
+            },
+            {
+              "text": "(b) Perpendicular to the slope, the normal force balances the other component.",
+              "latex": "F_{N} = mg\\cos 12^{\\circ} = 637 \\times 0.978 = 620\\ \\text{N}"
+            }
+          ],
+          "notes": "Ask: would the tension be larger if the skier were pulled faster, but still at constant velocity? (No: still equilibrium, if friction and drag are negligible.)"
+        },
+        {
+          "type": "worked",
+          "title": "A hanging basket",
+          "question": "A 2.5 kg basket of flowers hangs at rest from two ropes. One rope is horizontal and is fixed to a wall; the other is at 50° above the horizontal and is fixed to a post. Find the tension in each rope.",
+          "hint": "Only the angled rope can hold the basket up. Balance the vertical forces first, then the horizontal ones.",
+          "steps": [
+            {
+              "text": "Vertically: the vertical component of the angled rope's tension $T_{2}$ balances the weight.",
+              "latex": "T_{2}\\sin 50^{\\circ} = 2.5 \\times 9.8 = 24.5\\ \\text{N}"
+            },
+            {
+              "text": "Solve for $T_{2}$.",
+              "latex": "T_{2} = \\dfrac{24.5}{\\sin 50^{\\circ}} = 32\\ \\text{N}"
+            },
+            {
+              "text": "Horizontally: the horizontal rope's tension $T_{1}$ balances the other component.",
+              "latex": "T_{1} = T_{2}\\cos 50^{\\circ} = 32.0 \\times 0.643 = 21\\ \\text{N}"
+            }
+          ],
+          "notes": "Both tensions can be larger than they look: the angled rope carries more than the basket's weight."
+        }
+      ],
+      "challenge": "CC-A2-10",
+      "checks": [
+        "A2-002"
+      ]
+    },
+    {
+      "id": "second-law",
+      "short": "Newton's second law",
+      "guide": "Newton's three laws of motion: the second law, F = ma.",
+      "sections": [
+        "second"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Use Newton's second law, $F = ma$, where $F$ is the resultant force.",
+        "Solve problems with connected bodies and bodies on slopes."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Newton's second law",
+          "bullets": [
+            "The resultant force on a body equals the rate at which its momentum changes",
+            "For a body of constant mass: resultant force = mass × acceleration",
+            "The acceleration is in the <strong>same direction</strong> as the resultant force",
+            "A resultant force of 1 N accelerates a mass of 1 kg at $1\\ \\text{m s}^{-2}$",
+            "The first law is the special case $F = 0$, so $a = 0$"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Newton's second law",
+          "latex": "F = ma",
+          "bullets": [
+            "$F$ is the <strong>resultant</strong> force, not any single force",
+            "The data booklet also gives the momentum form, $F = \\dfrac{\\Delta p}{\\Delta t}$ (A.2b)"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Weight from the second law",
+          "start": "An object falls freely near the Earth's surface. The only force on it is its weight $F_{g}$, and its acceleration is $g$.",
+          "steps": [
+            {
+              "text": "Newton's second law",
+              "latex": "F = ma"
+            },
+            {
+              "text": "The resultant force is the weight alone",
+              "latex": "F = F_{g}"
+            },
+            {
+              "text": "The acceleration is the free-fall acceleration",
+              "latex": "a = g"
+            },
+            {
+              "text": "So the <strong>weight</strong> is",
+              "latex": "F_{g} = mg"
+            }
+          ],
+          "notes": "The weight is the same whether or not the object is falling: on a table, the normal force balances it, but it is still mg."
+        },
+        {
+          "type": "derivation",
+          "title": "Acceleration down a smooth slope",
+          "start": "A body slides down a smooth (frictionless) slope at angle $\\theta$ to the horizontal. Use axes along and perpendicular to the slope.",
+          "steps": [
+            {
+              "text": "Component of the weight along the slope",
+              "latex": "F_{\\parallel} = mg\\sin\\theta"
+            },
+            {
+              "text": "Perpendicular to the slope, the normal force balances the other component",
+              "latex": "F_{N} = mg\\cos\\theta"
+            },
+            {
+              "text": "Newton's second law along the slope",
+              "latex": "mg\\sin\\theta = ma"
+            },
+            {
+              "text": "The mass cancels",
+              "latex": "a = g\\sin\\theta"
+            }
+          ],
+          "notes": "Check the limits: θ = 0 gives a = 0 (level ground) and θ = 90° gives a = g (free fall)."
+        },
+        {
+          "type": "bullets",
+          "title": "Using Newton's second law",
+          "bullets": [
+            "Draw a free-body diagram for each body first",
+            "Take the positive direction as the direction of the acceleration",
+            "Resolve forces along and perpendicular to the acceleration",
+            "$F$ is the resultant: add every force along the line of the acceleration, with signs",
+            "Connected bodies (a light, inextensible string over a frictionless pulley): they share the same size of acceleration, and the tension is the same all along the string",
+            "Use SI units: kg, N and $\\text{m s}^{-2}$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A car on tow",
+          "question": "A broken-down car of mass 1500 kg is towed along a level road by a horizontal rope. The resistive forces on the car total 600 N, and the car accelerates at 0.80 $\\text{m s}^{-2}$. Find the tension in the tow rope.",
+          "hint": "The tension minus the resistive forces is the resultant force.",
+          "steps": [
+            {
+              "text": "Forward is positive. The resultant force is the tension minus the resistance.",
+              "latex": "T - 600 = ma"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "T - 600 = 1500 \\times 0.80 = 1200"
+            },
+            {
+              "text": "Solve for $T$.",
+              "latex": "T = 1800\\ \\text{N}"
+            }
+          ],
+          "notes": "Ask what the tension would be at constant velocity (600 N: just enough to balance the resistance)."
+        },
+        {
+          "type": "worked",
+          "title": "A trolley pulled by a falling mass",
+          "question": "A 2.0 kg trolley on a smooth horizontal bench is joined by a light string, over a frictionless pulley, to a 0.50 kg mass hanging over the edge. The system is released from rest. Find (a) the acceleration of the trolley and (b) the tension in the string.",
+          "hint": "Apply the second law to each body separately (or to the whole system). The hanging mass and the trolley have the same size of acceleration.",
+          "steps": [
+            {
+              "text": "Trolley (horizontal, towards the pulley):",
+              "latex": "T = 2.0a"
+            },
+            {
+              "text": "Hanging mass (downwards positive):",
+              "latex": "0.50 \\times 9.8 - T = 0.50a"
+            },
+            {
+              "text": "(a) Add the two equations: $T$ cancels.",
+              "latex": "4.9 = 2.5a \\;\\Rightarrow\\; a = 1.96 \\approx 2.0\\ \\text{m s}^{-2}"
+            },
+            {
+              "text": "(b) Use the trolley's equation.",
+              "latex": "T = 2.0 \\times 1.96 = 3.9\\ \\text{N}"
+            }
+          ],
+          "notes": "The tension (3.9 N) is less than the hanging weight (4.9 N): if it weren't, the hanging mass couldn't accelerate downwards."
+        }
+      ],
+      "challenge": "CC-A2-02",
+      "checks": [
+        "A2-003"
+      ]
+    },
+    {
+      "id": "normal-tension",
+      "short": "Normal force and tension",
+      "guide": "Contact forces: the normal force $F_{N}$ (the component of the contact force perpendicular to the surface) and tension.",
+      "sections": [
+        "contact"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Describe the normal force and tension, and find them from the other forces on a body."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Normal force and tension",
+          "bullets": [
+            "<strong>Normal force</strong> $F_{N}$: the component of the contact force <strong>perpendicular</strong> to the surface",
+            [
+              "its size is whatever keeps the body from moving into the surface (until the surface gives way)",
+              "$F_{N} = mg$ only for a body on level ground, with nothing else pushing or pulling it vertically, and not accelerating up or down"
+            ],
+            "<strong>Tension</strong> $T$: the pull of a stretched string, rope or cable, acting along it, away from the body",
+            [
+              "a string can pull but never push",
+              "a light string over a frictionless pulley has the same tension all the way along"
+            ]
+          ],
+          "notes": "A bathroom scale measures the normal force on your feet, which is not always your weight: a useful link to lifts and to circular motion later."
+        },
+        {
+          "type": "worked",
+          "title": "Pressing down on a box",
+          "question": "A 6.0 kg box rests on a level floor. A student presses straight down on its lid with a force of 20 N. Find the normal force from the floor on the box.",
+          "hint": "The box is in equilibrium: list every vertical force on it.",
+          "steps": [
+            {
+              "text": "Downward forces: the weight and the push.",
+              "latex": "mg = 6.0 \\times 9.8 = 58.8\\ \\text{N}"
+            },
+            {
+              "text": "Equilibrium: the normal force balances both.",
+              "latex": "F_{N} = 58.8 + 20 = 79\\ \\text{N}"
+            }
+          ],
+          "notes": "Then ask: if the student pulled up on a handle with 20 N instead, what would the normal force be? (39 N.)"
+        }
+      ],
+      "challenge": "CC-A2-04",
+      "checks": [
+        "A2-004"
+      ]
+    },
+    {
+      "id": "buoyancy",
+      "short": "Buoyancy",
+      "guide": "Contact forces: buoyancy $F_{b}$ acting on a body due to the displacement of the fluid, $F_{b} = \\rho V g$.",
+      "sections": [
+        "contact"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Explain the buoyancy force in terms of pressure, and calculate it with $F_{b} = \\rho V g$."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Density and buoyancy",
+          "bullets": [
+            "Density = mass per unit volume, $\\rho = \\dfrac{m}{V}$, in $\\text{kg m}^{-3}$; water is about 1000 $\\text{kg m}^{-3}$",
+            "Any fluid (liquid or gas) exerts a pressure on a body immersed in it, and the pressure is greater deeper down",
+            "The upward push on the bottom of a body is larger than the downward push on its top",
+            "The difference is the <strong>buoyancy force</strong>: equal to the weight of the fluid displaced"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Buoyancy",
+          "latex": "F_{b} = \\rho V g",
+          "bullets": [
+            "$\\rho$ is the density of the <strong>fluid</strong>, not of the body",
+            "$V$ is the volume of fluid <strong>displaced</strong>: the part of the body below the surface"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Where the buoyancy force comes from",
+          "start": "A block of height $h$ and top area $A$ is fully under water. The pressure at depth $d$ in a fluid of density $\\rho$ is $\\rho g d$ (the weight of the fluid above, per unit area), and force = pressure × area.",
+          "steps": [
+            {
+              "text": "Upward force on the bottom face, at depth $d_{2}$",
+              "latex": "F_{\\text{up}} = \\rho g d_{2} A"
+            },
+            {
+              "text": "Downward force on the top face, at depth $d_{1}$",
+              "latex": "F_{\\text{down}} = \\rho g d_{1} A"
+            },
+            {
+              "text": "The resultant upward force; $d_{2} - d_{1} = h$",
+              "latex": "F_{b} = \\rho g A (d_{2} - d_{1}) = \\rho g A h"
+            },
+            {
+              "text": "$Ah$ is the volume $V$ of fluid displaced",
+              "latex": "F_{b} = \\rho V g"
+            }
+          ],
+          "notes": "The forces on the four side faces cancel in pairs. ρVg is the weight of the displaced fluid: Archimedes' principle."
+        },
+        {
+          "type": "diagram",
+          "title": "Why the push from below is larger",
+          "figure": "fbt",
+          "bullets": [
+            "Fully submerged with $F_{b}$ smaller than the weight (a body denser than the fluid): it sinks",
+            "Floats with just enough of its volume submerged for $F_{b} = mg$",
+            "Buoyancy acts in air too, but is usually tiny compared with the weight"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A floating log",
+          "question": "A log of mass 30 kg floats at rest in a pond. The density of the water is 1000 $\\text{kg m}^{-3}$. Find (a) the buoyancy force on the log and (b) the volume of the log below the water surface.",
+          "hint": "A floating body is in equilibrium. The submerged volume is the volume of water displaced.",
+          "steps": [
+            {
+              "text": "(a) Floating, so the buoyancy force balances the weight.",
+              "latex": "F_{b} = mg = 30 \\times 9.8 = 294 \\approx 290\\ \\text{N}"
+            },
+            {
+              "text": "(b) Rearrange $F_{b} = \\rho V g$.",
+              "latex": "V = \\dfrac{F_{b}}{\\rho g} = \\dfrac{294}{1000 \\times 9.8} = 0.030\\ \\text{m}^{3}"
+            }
+          ],
+          "notes": "The answer to (b) is just the volume of 30 kg of water. Ask: would it float higher or lower in seawater (denser)? (Higher.)"
+        },
+        {
+          "type": "worked",
+          "title": "An anchor under water",
+          "question": "A 12 kg anchor of volume $1.5 \\times 10^{-3}$ $\\text{m}^{3}$ hangs at rest on its rope, fully under water of density 1000 $\\text{kg m}^{-3}$. Find the tension in the rope.",
+          "hint": "Three forces act on the anchor. Find the buoyancy force from the volume of water it displaces.",
+          "steps": [
+            {
+              "text": "Weight of the anchor.",
+              "latex": "F_{g} = 12 \\times 9.8 = 117.6\\ \\text{N}"
+            },
+            {
+              "text": "Buoyancy force.",
+              "latex": "F_{b} = 1000 \\times 1.5\\times10^{-3} \\times 9.8 = 14.7\\ \\text{N}"
+            },
+            {
+              "text": "Equilibrium: tension + buoyancy = weight.",
+              "latex": "T = 117.6 - 14.7 = 1.0 \\times 10^{2}\\ \\text{N}"
+            }
+          ],
+          "notes": "The anchor feels \"lighter\" under water by 14.7 N. Once it is lifted out, the tension rises to the full 118 N."
+        }
+      ],
+      "challenge": "PZ-02",
+      "checks": [
+        "A2-009"
+      ]
+    },
+    {
+      "id": "hooke",
+      "short": "Hooke's law",
+      "guide": "Contact forces: the elastic restoring force $F_{H}$ following Hooke's law, $F_{H} = -kx$, where $k$ is the spring constant.",
+      "sections": [
+        "contact"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Use Hooke's law, $F_{H} = -kx$, to find forces, extensions and spring constants."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The elastic restoring force",
+          "bullets": [
+            "A stretched or compressed spring pushes or pulls back towards its natural length",
+            "Up to the limit of proportionality, the force is proportional to the extension $x$",
+            "The spring constant $k$ (in $\\text{N m}^{-1}$) measures stiffness: a stiff spring has a large $k$",
+            "The minus sign: the restoring force is opposite to the displacement"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Hooke's law",
+          "latex": "F_{H} = -kx",
+          "bullets": [
+            "In calculations, use the sizes: $F = kx$",
+            "The gradient of a force–extension graph is $k$"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "A spring obeying Hooke's law",
+          "figure": "f4t",
+          "notes": "A restoring force proportional to displacement is the condition for simple harmonic motion (C.1)."
+        },
+        {
+          "type": "worked",
+          "title": "A luggage scale",
+          "question": "A hand-held luggage scale contains a spring. When a 9.0 kg suitcase hangs from it at rest, the spring extends by 2.4 cm. Find (a) the spring constant and (b) the extension when a 6.5 kg bag hangs from it.",
+          "hint": "At rest, the spring force balances the weight. Change centimetres to metres.",
+          "steps": [
+            {
+              "text": "(a) The spring force balances the weight.",
+              "latex": "k = \\dfrac{F}{x} = \\dfrac{9.0 \\times 9.8}{0.024} = 3.7 \\times 10^{3}\\ \\text{N m}^{-1}"
+            },
+            {
+              "text": "(b) Rearrange for the extension.",
+              "latex": "x = \\dfrac{F}{k} = \\dfrac{6.5 \\times 9.8}{3675} = 0.017\\ \\text{m}"
+            },
+            {
+              "text": "So the extension is about 1.7 cm."
+            }
+          ],
+          "notes": "Quicker: the extension is proportional to the load, so x = 2.4 × 6.5/9.0 = 1.7 cm."
+        }
+      ],
+      "checks": [
+        "A2-007"
+      ]
+    },
+    {
+      "id": "friction",
+      "short": "Friction",
+      "guide": "Contact forces: surface friction $F_{f}$, parallel to the surface, with $F_{f} \\le \\mu_{s} F_{N}$ on a stationary body and $F_{f} = \\mu_{d} F_{N}$ on a body in motion.",
+      "sections": [
+        "contact"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Distinguish between static and dynamic friction.",
+        "Use the coefficients of friction to decide whether a body moves, and find its acceleration."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Static and dynamic friction",
+          "bullets": [
+            "Friction acts along the surface, against sliding or against the direction the body would slide",
+            "<strong>Static</strong> friction (no sliding) is just as large as it needs to be to prevent sliding, up to a maximum $\\mu_{s} F_{N}$",
+            "<strong>Dynamic</strong> friction (sliding) is roughly constant: $\\mu_{d} F_{N}$",
+            "The coefficients $\\mu_{s}$ and $\\mu_{d}$ have no units; usually $\\mu_{d} < \\mu_{s}$, so starting is harder than keeping going",
+            "Friction depends on the normal force (how hard the surfaces press together), not on the area of contact"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Friction",
+          "latex": [
+            "F_{f} \\le \\mu_{s} F_{N}",
+            "F_{f} = \\mu_{d} F_{N}"
+          ],
+          "bullets": [
+            "Static: stationary body, \"up to\"",
+            "Dynamic: body in motion"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Measuring the coefficient of static friction",
+          "start": "A block rests on a board. One end is raised slowly until the block is just about to slip, at angle $\\theta$. Static friction is then at its maximum.",
+          "steps": [
+            {
+              "text": "Perpendicular to the board",
+              "latex": "F_{N} = mg\\cos\\theta"
+            },
+            {
+              "text": "Along the board, friction balances the weight's component",
+              "latex": "F_{f} = mg\\sin\\theta"
+            },
+            {
+              "text": "At the point of slipping",
+              "latex": "F_{f} = \\mu_{s} F_{N}"
+            },
+            {
+              "text": "Substitute, and the mass cancels",
+              "latex": "\\mu_{s} = \\dfrac{mg\\sin\\theta}{mg\\cos\\theta} = \\tan\\theta"
+            }
+          ],
+          "notes": "Lower the board until the block slides at constant velocity: the same steps give μd = tan θ for that smaller angle. Example: a block that slips at 31° has μs = tan 31° = 0.60."
+        },
+        {
+          "type": "bullets",
+          "title": "Using friction",
+          "bullets": [
+            "Find $F_{N}$ first: it is not always $mg$ (a slope, or a pull at an angle)",
+            "Not moving? Compare the applied force with $\\mu_{s} F_{N}$: friction is only as large as it needs to be",
+            "Moving? Use $\\mu_{d} F_{N}$, opposite to the velocity",
+            "Then apply the first law (equilibrium) or the second law (acceleration)"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Friction against applied force",
+          "figure": "f3t"
+        },
+        {
+          "type": "worked",
+          "title": "Moving a wardrobe",
+          "question": "A 38 kg wardrobe stands on a level floor. The coefficients of friction are $\\mu_{s} = 0.35$ and $\\mu_{d} = 0.25$. (a) A horizontal push of 120 N is applied. Does the wardrobe move, and what is the friction force? (b) The push is increased to 160 N. Find the acceleration of the wardrobe.",
+          "hint": "Compare each push with the largest static friction force. Once it slides, use the dynamic coefficient.",
+          "steps": [
+            {
+              "text": "Normal force on level ground.",
+              "latex": "F_{N} = 38 \\times 9.8 = 372.4\\ \\text{N}"
+            },
+            {
+              "text": "Largest static friction force.",
+              "latex": "\\mu_{s} F_{N} = 0.35 \\times 372.4 = 130\\ \\text{N}"
+            },
+            {
+              "text": "(a) 120 N is less than 130 N: it doesn't move. Static friction is 120 N, matching the push."
+            },
+            {
+              "text": "(b) 160 N is more than 130 N: it slides. Dynamic friction:",
+              "latex": "F_{f} = 0.25 \\times 372.4 = 93.1\\ \\text{N}"
+            },
+            {
+              "text": "Second law.",
+              "latex": "a = \\dfrac{160 - 93.1}{38} = 1.8\\ \\text{m s}^{-2}"
+            }
+          ],
+          "notes": "The commonest mistake is to give 130 N as the friction in part (a)."
+        }
+      ],
+      "checks": [
+        "A2-006"
+      ]
+    },
+    {
+      "id": "drag",
+      "short": "Viscous drag",
+      "guide": "Contact forces: the viscous drag force $F_{d}$ on a small sphere moving through a fluid, $F_{d} = 6\\pi\\eta r v$.",
+      "sections": [
+        "contact"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Use Stokes' law, $F_{d} = 6\\pi\\eta r v$, for a small sphere moving slowly through a fluid.",
+        "Explain terminal speed in terms of the forces on a falling sphere."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Viscous drag",
+          "bullets": [
+            "A body moving through a fluid is slowed by a <strong>drag</strong> force opposing its motion",
+            "<strong>Viscosity</strong> $\\eta$ is a fluid's resistance to flowing (unit Pa s): honey is high, air is very low",
+            "Stokes' law applies to a <strong>small sphere</strong> moving <strong>slowly</strong>, with smooth (non-turbulent) flow",
+            "A falling sphere speeds up until drag + buoyancy = weight: then it moves at <strong>terminal speed</strong>"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Stokes' law",
+          "latex": "F_{d} = 6\\pi\\eta r v",
+          "bullets": [
+            "$r$: radius of the sphere; $v$: its velocity through the fluid",
+            "Drag is proportional to both the radius and the speed"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Terminal speed of a falling sphere",
+          "start": "A sphere of radius $r$ and density $\\rho_{s}$ falls through a fluid of density $\\rho_{f}$ and viscosity $\\eta$. At terminal speed $v$, the resultant force is zero.",
+          "steps": [
+            {
+              "text": "Forces balance",
+              "latex": "F_{d} + F_{b} = F_{g}"
+            },
+            {
+              "text": "Substitute each force, with $V$ the volume of the sphere",
+              "latex": "6\\pi\\eta r v + \\rho_{f} V g = \\rho_{s} V g"
+            },
+            {
+              "text": "Use $V = \\tfrac{4}{3}\\pi r^{3}$",
+              "latex": "6\\pi\\eta r v = \\tfrac{4}{3}\\pi r^{3}(\\rho_{s} - \\rho_{f})g"
+            },
+            {
+              "text": "Solve for $v$",
+              "latex": "v = \\dfrac{2r^{2}(\\rho_{s} - \\rho_{f})g}{9\\eta}"
+            }
+          ],
+          "notes": "Not in the data booklet: students should derive it each time. It shows why measuring the terminal speed of a ball bearing is a way to find η."
+        },
+        {
+          "type": "worked",
+          "title": "Finding the viscosity of an oil",
+          "question": "A steel ball bearing of radius 1.0 mm falls through an oil at a terminal speed of 0.020 $\\text{m s}^{-1}$. The density of steel is 7800 $\\text{kg m}^{-3}$ and that of the oil is 900 $\\text{kg m}^{-3}$. Find the viscosity of the oil.",
+          "hint": "At terminal speed the drag, the buoyancy force and the weight balance. Find the volume of the ball first.",
+          "steps": [
+            {
+              "text": "Volume of the ball.",
+              "latex": "V = \\tfrac{4}{3}\\pi(1.0\\times10^{-3})^{3} = 4.19\\times10^{-9}\\ \\text{m}^{3}"
+            },
+            {
+              "text": "Drag = weight − buoyancy force.",
+              "latex": "F_{d} = (7800 - 900)(4.19\\times10^{-9})(9.8) = 2.83\\times10^{-4}\\ \\text{N}"
+            },
+            {
+              "text": "Rearrange Stokes' law.",
+              "latex": "\\eta = \\dfrac{F_{d}}{6\\pi r v} = \\dfrac{2.83\\times10^{-4}}{6\\pi(1.0\\times10^{-3})(0.020)}"
+            },
+            {
+              "text": "Calculate.",
+              "latex": "\\eta = 0.75\\ \\text{Pa s}"
+            }
+          ],
+          "notes": "The terminal speed equation gives the same answer in one step. A thick oil such as castor oil has a viscosity of this order."
+        }
+      ],
+      "challenge": "CC-A2-09",
+      "checks": [
+        "A2-008"
+      ]
+    },
+    {
+      "id": "field",
+      "short": "Field forces",
+      "guide": "Field forces: the gravitational force $F_{g} = mg$ (the weight of the body), the electric force $F_{e}$ and the magnetic force $F_{m}$.",
+      "sections": [
+        "field"
+      ],
+      "minutes": 10,
+      "aims": [
+        "Recognise the three field forces and include them in free-body diagrams."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Field forces",
+          "bullets": [
+            "Field forces act at a distance: no contact is needed",
+            "<strong>Gravitational</strong> force (weight): $F_{g} = mg$",
+            [
+              "your mass (kg) doesn't depend on where you are; your weight (N) does, through $g$",
+              "on the Moon, $g$ is about one-sixth of its value on Earth, and so is your weight"
+            ],
+            "<strong>Electric</strong> force $F_{e}$: acts between charges; like charges repel, unlike charges attract",
+            "<strong>Magnetic</strong> force $F_{m}$: acts on magnets, on currents and on moving charged particles in a magnetic field",
+            "Here: recognise them and draw them; calculations come in Theme D"
+          ],
+          "notes": "A balloon rubbed on a jumper and stuck to the wall makes a quick demonstration: the electric force, normal force, friction and weight all act on it."
+        }
+      ]
+    },
+    {
+      "id": "third-law",
+      "short": "Newton's third law",
+      "guide": "Newton's three laws of motion: the third law, including the identification of force pairs.",
+      "sections": [
+        "third"
+      ],
+      "minutes": 30,
+      "aims": [
+        "State Newton's third law and identify third-law force pairs.",
+        "Explain why the forces in a pair never cancel."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Newton's third law",
+          "bullets": [
+            "When body A pushes or pulls body B, B exerts a force on A of the <strong>same size</strong> in the <strong>opposite direction</strong>",
+            "The two forces in a pair:",
+            [
+              "act on two <strong>different bodies</strong>, so they can never cancel",
+              "are the <strong>same type</strong> of force",
+              "start and stop together"
+            ],
+            "Each body responds only to the forces acting on it"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Two skaters push apart",
+          "figure": "f2t"
+        },
+        {
+          "type": "bullets",
+          "title": "Pair or balanced forces?",
+          "bullets": [
+            "A book on a table: the weight and the normal force on it are equal and opposite, yet they are <strong>not</strong> a third-law pair",
+            [
+              "both act on the book, and they are different types of force; they are equal because the book is in equilibrium (first law)"
+            ],
+            "The partner of the weight: the book pulls the Earth up (gravitational)",
+            "The partner of the normal force: the book pushes the table down (contact)"
+          ],
+          "notes": "Test for a pair: swap the two body names. \"Earth pulls book\" becomes \"book pulls Earth\"."
+        },
+        {
+          "type": "worked",
+          "title": "A magnet on a fridge",
+          "question": "A small magnet holds itself at rest on the vertical steel door of a fridge. Identify the forces acting on the magnet, and the third-law partner of each.",
+          "hint": "There are two bodies interacting with the magnet: the Earth and the fridge door. The door interacts with it in more than one way.",
+          "steps": [
+            {
+              "text": "Weight, down (the Earth on the magnet). Partner: the magnet pulls the Earth up."
+            },
+            {
+              "text": "Magnetic attraction, towards the door (the door on the magnet). Partner: the magnet pulls the door towards itself."
+            },
+            {
+              "text": "Normal force, away from the door (the door pushes on the magnet). Partner: the magnet pushes on the door."
+            },
+            {
+              "text": "Friction, up the door (the door on the magnet). Partner: friction from the magnet on the door, downwards."
+            },
+            {
+              "text": "On the magnet: friction balances the weight, and the normal force balances the magnetic force."
+            }
+          ],
+          "notes": "This combines all three ideas: field and contact forces, equilibrium (first law) and force pairs (third law)."
+        }
+      ],
+      "challenge": "CC-A2-05",
+      "checks": [
+        "A2-001"
+      ]
+    },
+    {
+      "id": "momentum-form",
+      "short": "Momentum and F = Δp/Δt",
+      "guide": "That Newton's second law in the form $F = ma$ assumes mass is constant, whereas $F = \\dfrac{\\Delta p}{\\Delta t}$ allows for situations where mass is changing.",
+      "sections": [
+        "momentum"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Define linear momentum, $p = mv$.",
+        "Use $F = \\dfrac{\\Delta p}{\\Delta t}$, including where the mass changes."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Linear momentum",
+          "bullets": [
+            "Linear momentum = mass × velocity: $p = mv$",
+            "A <strong>vector</strong>, in the direction of the velocity",
+            "Unit: $\\text{kg m s}^{-1}$, which is the same as N s",
+            "Newton's own version of the second law: resultant force = <strong>rate of change of momentum</strong>"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Momentum and force",
+          "latex": [
+            "p = mv",
+            "F = ma = \\dfrac{\\Delta p}{\\Delta t}"
+          ],
+          "bullets": [
+            "$F = ma$ needs a constant mass",
+            "$F = \\dfrac{\\Delta p}{\\Delta t}$ also works when the mass changes"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "From the momentum form to F = ma",
+          "start": "A resultant force $F$ acts on a body of constant mass $m$ for a time $\\Delta t$, changing its velocity from $u$ to $v$.",
+          "steps": [
+            {
+              "text": "Force is the rate of change of momentum",
+              "latex": "F = \\dfrac{\\Delta p}{\\Delta t} = \\dfrac{mv - mu}{\\Delta t}"
+            },
+            {
+              "text": "The mass is constant, so take it out as a factor",
+              "latex": "F = m\\,\\dfrac{v - u}{\\Delta t}"
+            },
+            {
+              "text": "The rate of change of velocity is the acceleration",
+              "latex": "F = ma"
+            }
+          ],
+          "notes": "If the mass changes, step 2 is not allowed, which is why F = ma fails for a rocket."
+        },
+        {
+          "type": "derivation",
+          "title": "Thrust from a stream of gas or air",
+          "start": "An engine pushes out a mass $\\Delta m$ of gas in a time $\\Delta t$. The gas starts at rest relative to the engine and leaves at speed $v$.",
+          "steps": [
+            {
+              "text": "Change in momentum of the gas pushed out",
+              "latex": "\\Delta p = \\Delta m\\,v"
+            },
+            {
+              "text": "Force on the gas = rate of change of its momentum",
+              "latex": "F = \\dfrac{\\Delta p}{\\Delta t} = v\\,\\dfrac{\\Delta m}{\\Delta t}"
+            },
+            {
+              "text": "By Newton's third law, the gas pushes the engine with an equal and opposite force: the <strong>thrust</strong>",
+              "latex": "F = v\\,\\dfrac{\\Delta m}{\\Delta t}"
+            }
+          ],
+          "notes": "A jet engine takes in air at the plane's speed u, so its thrust is (Δm/Δt)(v − u). Rockets carry their own oxidiser, so they work in space."
+        },
+        {
+          "type": "bullets",
+          "title": "When to use which form",
+          "bullets": [
+            "$F = ma$: a body whose mass stays constant",
+            "$F = \\dfrac{\\Delta p}{\\Delta t}$: a changing mass, or a stream of matter",
+            [
+              "rockets and jet engines",
+              "water from a hose, rain on a roof",
+              "sand or grain falling onto a moving belt",
+              "helicopters and drones pushing air down"
+            ],
+            "Find the mass per second $\\dfrac{\\Delta m}{\\Delta t}$, and the change in velocity it is given"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A hovering drone",
+          "question": "A 1.2 kg drone hovers at rest. Its rotors push air, initially at rest, straight down at 8.0 $\\text{m s}^{-1}$. Find the mass of air the rotors must push down each second.",
+          "hint": "Hovering means the upward force on the drone balances its weight. That force equals the rate of change of the air's momentum.",
+          "steps": [
+            {
+              "text": "Hovering: the upward thrust balances the weight.",
+              "latex": "F = mg = 1.2 \\times 9.8 = 11.8\\ \\text{N}"
+            },
+            {
+              "text": "Thrust = rate of change of the air's momentum.",
+              "latex": "F = v\\,\\dfrac{\\Delta m}{\\Delta t}"
+            },
+            {
+              "text": "Rearrange.",
+              "latex": "\\dfrac{\\Delta m}{\\Delta t} = \\dfrac{11.8}{8.0} = 1.5\\ \\text{kg s}^{-1}"
+            }
+          ],
+          "notes": "Ask how the rotors must change for the drone to hover while carrying a parcel (push more air per second, or push it faster)."
+        }
+      ],
+      "checks": [
+        "A2-016"
+      ]
+    },
+    {
+      "id": "impulse",
+      "short": "Impulse",
+      "guide": "That a resultant external force applied to a system constitutes an impulse $J = F\\Delta t$, where $F$ is the average resultant force and $\\Delta t$ is the time of contact.",
+      "sections": [
+        "momentum"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Calculate the impulse of a force, $J = F\\Delta t$, including from the area under a force–time graph."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Impulse",
+          "bullets": [
+            "A resultant force acting for a time gives the body an <strong>impulse</strong>",
+            "Impulse = average resultant force × time of contact",
+            "Unit: N s (the same as $\\text{kg m s}^{-1}$); a vector, in the direction of the force",
+            "The force in a real impact varies: the impulse is then the <strong>area under the force–time graph</strong>",
+            "The average force is the constant force that would give the same area in the same time"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Impulse",
+          "latex": "J = F\\Delta t",
+          "bullets": [
+            "$F$: the average resultant force",
+            "$\\Delta t$: the time of contact"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "A force–time graph for a collision",
+          "figure": "f5t"
+        },
+        {
+          "type": "worked",
+          "title": "Hitting a golf ball",
+          "question": "A sensor records the force of a golf club on a ball. The force rises steadily from zero to 4.0 kN in 0.20 ms, stays at 4.0 kN for 0.30 ms, and then falls steadily to zero in 0.20 ms. Find (a) the impulse on the ball and (b) the average force during the contact.",
+          "hint": "Sketch the force–time graph: it is two triangles and a rectangle. The impulse is the area under it.",
+          "steps": [
+            {
+              "text": "(a) The two triangles (in N s).",
+              "latex": "2 \\times \\tfrac{1}{2}(4000)(0.20\\times10^{-3}) = 0.80"
+            },
+            {
+              "text": "The rectangle (in N s).",
+              "latex": "(4000)(0.30\\times10^{-3}) = 1.2"
+            },
+            {
+              "text": "Total area = impulse.",
+              "latex": "J = 0.80 + 1.2 = 2.0\\ \\text{N s}"
+            },
+            {
+              "text": "(b) Average force over the whole 0.70 ms.",
+              "latex": "F = \\dfrac{J}{\\Delta t} = \\dfrac{2.0}{0.70\\times10^{-3}} = 2.9\\ \\text{kN}"
+            }
+          ],
+          "notes": "Change kN to N and ms to s before multiplying. The average force is less than the peak force, as it must be."
+        }
+      ],
+      "challenge": "CC-A2-03",
+      "checks": [
+        "A2-011"
+      ]
+    },
+    {
+      "id": "impulse-momentum",
+      "short": "Impulse and change in momentum",
+      "guide": "That the applied external impulse equals the change in momentum of the system.",
+      "sections": [
+        "momentum"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Use impulse = change in momentum to find forces and velocities.",
+        "Explain how a longer collision time reduces the force."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Impulse changes momentum",
+          "bullets": [
+            "The impulse on a body equals its change in momentum: $J = \\Delta p$",
+            "Give velocities signs: a rebound changes the momentum more than just stopping",
+            "For the same $\\Delta p$, a <strong>longer</strong> contact time means a <strong>smaller</strong> average force",
+            "Safety: airbags, crumple zones, helmets, crash mats and bending your knees all make the stop last longer",
+            "Sport: following through keeps the force acting for longer, giving a larger impulse"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Impulse equals change in momentum",
+          "start": "A constant resultant force $F$ acts on a body of mass $m$ for a time $\\Delta t$, changing its velocity from $u$ to $v$.",
+          "steps": [
+            {
+              "text": "Newton's second law with the definition of acceleration",
+              "latex": "F = ma = m\\,\\dfrac{v - u}{\\Delta t}"
+            },
+            {
+              "text": "Multiply both sides by $\\Delta t$",
+              "latex": "F\\Delta t = mv - mu"
+            },
+            {
+              "text": "The left side is the impulse; the right side is the change in momentum",
+              "latex": "J = \\Delta p"
+            }
+          ],
+          "notes": "For a force that changes, use its average value: the result holds for the area under any force–time graph."
+        },
+        {
+          "type": "worked",
+          "title": "Landing on a crash mat",
+          "question": "A 75 kg gymnast falls onto a crash mat, landing at 6.0 $\\text{m s}^{-1}$ and coming to rest in 0.40 s. Find (a) the impulse on the gymnast, (b) the average resultant force on the gymnast and (c) the average force from the mat.",
+          "hint": "The impulse is the change in momentum. That gives the resultant force; the mat must also hold up the gymnast's weight.",
+          "steps": [
+            {
+              "text": "(a) Take up as positive: $u = -6.0$, $v = 0$.",
+              "latex": "J = \\Delta p = 75(0 - (-6.0)) = 450\\ \\text{N s upwards}"
+            },
+            {
+              "text": "(b) Resultant force.",
+              "latex": "F = \\dfrac{J}{\\Delta t} = \\dfrac{450}{0.40} = 1.1\\ \\text{kN}"
+            },
+            {
+              "text": "(c) Resultant = force from the mat − weight.",
+              "latex": "F_{\\text{mat}} = 1125 + 75 \\times 9.8 = 1.9\\ \\text{kN}"
+            }
+          ],
+          "notes": "On a hard floor, stopping in 0.050 s, the floor would need about 9.7 kN. The mat doesn't change the impulse, only the time."
+        }
+      ],
+      "checks": [
+        "A2-025"
+      ]
+    },
+    {
+      "id": "conservation",
+      "short": "Conservation of momentum",
+      "guide": "That linear momentum, $p = mv$, remains constant unless the system is acted upon by a resultant external force.",
+      "sections": [
+        "conservation"
+      ],
+      "minutes": 25,
+      "aims": [
+        "State the law of conservation of momentum and explain it using the third law.",
+        "Apply it to an interaction in one dimension."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Conservation of momentum",
+          "bullets": [
+            "A <strong>system</strong>: the bodies we choose to study together",
+            "<strong>Internal</strong> forces act between bodies in the system; <strong>external</strong> forces come from outside it",
+            "With no resultant external force on a system, its total momentum is constant",
+            "Momentum is a vector: give every velocity a sign, and add the momenta with their signs",
+            "Collisions are short, so external forces such as friction have little effect during them"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Why momentum is conserved",
+          "start": "Bodies A and B interact, for example in a collision, with no external force on the system. A pushes B with force $F_{\\text{BA}}$ and B pushes A with $F_{\\text{AB}}$ for the same time $\\Delta t$.",
+          "steps": [
+            {
+              "text": "Newton's third law",
+              "latex": "F_{\\text{AB}} = -F_{\\text{BA}}"
+            },
+            {
+              "text": "Multiply by the same contact time",
+              "latex": "F_{\\text{AB}}\\Delta t = -F_{\\text{BA}}\\Delta t"
+            },
+            {
+              "text": "Each impulse is that body's change in momentum",
+              "latex": "\\Delta p_{\\text{A}} = -\\Delta p_{\\text{B}}"
+            },
+            {
+              "text": "So the total momentum doesn't change",
+              "latex": "\\Delta p_{\\text{A}} + \\Delta p_{\\text{B}} = 0"
+            }
+          ],
+          "notes": "One body's gain in momentum is exactly the other's loss: for the system, the internal forces add up to zero."
+        },
+        {
+          "type": "worked",
+          "title": "Catching a toolbox in space",
+          "question": "An astronaut of mass 70 kg floats at rest beside a space station. She catches a 5.0 kg toolbox that is moving towards her at 3.0 $\\text{m s}^{-1}$. Find her velocity, holding the toolbox, just after the catch.",
+          "hint": "There are no external forces on the astronaut and toolbox. Afterwards they move together.",
+          "steps": [
+            {
+              "text": "Momentum before (the astronaut is at rest).",
+              "latex": "p = 5.0 \\times 3.0 + 70 \\times 0 = 15\\ \\text{kg m s}^{-1}"
+            },
+            {
+              "text": "Momentum after: both move at the same velocity $v$.",
+              "latex": "p = (70 + 5.0)v"
+            },
+            {
+              "text": "Conservation of momentum.",
+              "latex": "v = \\dfrac{15}{75} = 0.20\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "She moves off in the direction the toolbox was moving. Ask how she could stop herself again (throw something the other way)."
+        }
+      ],
+      "challenge": "CC-A2-12",
+      "checks": [
+        "A2-014"
+      ]
+    },
+    {
+      "id": "collisions",
+      "short": "Elastic and inelastic collisions",
+      "guide": "The elastic and inelastic collisions of two bodies.",
+      "sections": [
+        "conservation"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Distinguish between elastic, inelastic and perfectly inelastic collisions.",
+        "Use conservation of momentum to solve collision problems in one dimension."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Types of collision",
+          "bullets": [
+            "Momentum is conserved in <strong>every</strong> collision (with no external force)",
+            "<strong>Elastic</strong>: kinetic energy is also conserved (collisions between ideal gas molecules; snooker balls come close)",
+            "<strong>Inelastic</strong>: kinetic energy decreases (most real collisions)",
+            "<strong>Perfectly inelastic</strong>: the bodies stick together and move with the same velocity; the largest possible loss of kinetic energy",
+            "Draw before-and-after sketches with masses, velocities and a positive direction"
+          ],
+          "notes": "SL problems are one-dimensional; HL students also apply conservation in two dimensions (topic page, section 8). Solving simultaneous equations for momentum and energy is not required."
+        },
+        {
+          "type": "worked",
+          "title": "A head-on crash",
+          "question": "A 1300 kg car moving east at 14 $\\text{m s}^{-1}$ collides head-on with a 1600 kg van moving west at 9.0 $\\text{m s}^{-1}$. The vehicles lock together. Find their velocity just after the collision.",
+          "hint": "Take east as positive, so the van's velocity is negative. The vehicles move as one body afterwards.",
+          "steps": [
+            {
+              "text": "Total momentum before (east positive).",
+              "latex": "p = 1300(14) + 1600(-9.0) = 18200 - 14400 = 3800\\ \\text{kg m s}^{-1}"
+            },
+            {
+              "text": "After: one body of mass 2900 kg.",
+              "latex": "3800 = 2900v"
+            },
+            {
+              "text": "Solve.",
+              "latex": "v = 1.3\\ \\text{m s}^{-1} \\text{ east}"
+            }
+          ],
+          "notes": "The commonest error is to forget the minus sign for the van, which gives 11 m s⁻¹."
+        },
+        {
+          "type": "worked",
+          "title": "Gliders on an air track",
+          "question": "On an air track, a 0.40 kg glider moving at 0.60 $\\text{m s}^{-1}$ hits a stationary 0.20 kg glider. Afterwards the 0.40 kg glider moves on in the same direction at 0.20 $\\text{m s}^{-1}$. Find (a) the velocity of the 0.20 kg glider and (b) whether the collision is elastic.",
+          "hint": "Use conservation of momentum for (a). For (b), compare the total kinetic energy before and after.",
+          "steps": [
+            {
+              "text": "(a) Momentum before = momentum after.",
+              "latex": "0.40(0.60) = 0.40(0.20) + 0.20v"
+            },
+            {
+              "text": "Solve.",
+              "latex": "v = \\dfrac{0.24 - 0.08}{0.20} = 0.80\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(b) Kinetic energy before.",
+              "latex": "\\tfrac{1}{2}(0.40)(0.60)^{2} = 0.072\\ \\text{J}"
+            },
+            {
+              "text": "Kinetic energy after.",
+              "latex": "\\tfrac{1}{2}(0.40)(0.20)^{2} + \\tfrac{1}{2}(0.20)(0.80)^{2} = 0.072\\ \\text{J}"
+            },
+            {
+              "text": "The kinetic energy is unchanged, so the collision is elastic."
+            }
+          ],
+          "notes": "Real air-track collisions with spring buffers come close to this, but always lose a little kinetic energy."
+        }
+      ],
+      "checks": [
+        "A2-013"
+      ]
+    },
+    {
+      "id": "explosions",
+      "short": "Explosions",
+      "guide": "Explosions.",
+      "sections": [
+        "conservation"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Use conservation of momentum for explosions, where bodies at rest fly apart."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Explosions",
+          "bullets": [
+            "An explosion: bodies that were together (often at rest) are pushed apart by internal forces",
+            "If the total momentum was zero before, it is zero after: the momenta are equal and opposite",
+            "The lighter body moves off faster",
+            "Examples: a gun and its bullet (recoil), a firework shell bursting, skaters pushing apart, a spring released between two trolleys"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Two trolleys and a spring",
+          "question": "Two trolleys, of mass 0.50 kg and 0.30 kg, are held at rest on a level track with a compressed spring between them. When they are released, the 0.30 kg trolley moves away at 1.2 $\\text{m s}^{-1}$. Find the velocity of the 0.50 kg trolley.",
+          "hint": "The trolleys start at rest. Compare the total momentum before and after the release.",
+          "steps": [
+            {
+              "text": "Total momentum before release is zero.",
+              "latex": "0 = 0.30(1.2) + 0.50v"
+            },
+            {
+              "text": "Solve.",
+              "latex": "v = -\\dfrac{0.36}{0.50} = -0.72\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "The minus sign: it moves at 0.72 $\\text{m s}^{-1}$ in the opposite direction."
+            }
+          ],
+          "notes": "Follow-up for the energy point: the spring gave the trolleys ½(0.30)(1.2)² + ½(0.50)(0.72)² = 0.35 J of kinetic energy."
+        }
+      ],
+      "checks": [
+        "A2-015"
+      ]
+    },
+    {
+      "id": "energy",
+      "short": "Energy in collisions",
+      "guide": "Energy considerations in elastic collisions, inelastic collisions, and explosions.",
+      "sections": [
+        "conservation"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Compare the kinetic energy before and after collisions and explosions, and say where any energy goes."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Where does the energy go?",
+          "bullets": [
+            "<strong>Total energy</strong> is always conserved",
+            "Elastic: kinetic energy is unchanged",
+            "Inelastic: some kinetic energy is transferred to thermal energy, sound and permanent deformation",
+            "Explosions: kinetic energy <strong>increases</strong>; it comes from a store such as chemical or elastic potential energy",
+            "Two bodies flying apart from rest have the same size of momentum, so the less massive one gets the larger share of kinetic energy"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Kinetic energy from momentum",
+          "start": "A body of mass $m$ moves at speed $v$, with momentum $p = mv$.",
+          "steps": [
+            {
+              "text": "Kinetic energy",
+              "latex": "E_{k} = \\tfrac{1}{2}mv^{2}"
+            },
+            {
+              "text": "Multiply the top and bottom by $m$",
+              "latex": "E_{k} = \\dfrac{m^{2}v^{2}}{2m}"
+            },
+            {
+              "text": "$m^{2}v^{2} = p^{2}$",
+              "latex": "E_{k} = \\dfrac{p^{2}}{2m}"
+            }
+          ],
+          "notes": "This form is in the data booklet (A.3). For two bodies flying apart with the same size of momentum, Ek is inversely proportional to m."
+        },
+        {
+          "type": "worked",
+          "title": "Clay on a trolley",
+          "question": "A 0.50 kg lump of clay moving horizontally at 6.0 $\\text{m s}^{-1}$ hits a stationary 1.5 kg trolley and sticks to it. Find (a) their common velocity and (b) the fraction of the kinetic energy transferred to other forms.",
+          "hint": "Momentum is conserved; kinetic energy is not. Find the kinetic energy before and after.",
+          "steps": [
+            {
+              "text": "(a) Conservation of momentum.",
+              "latex": "0.50(6.0) = 2.0v \\;\\Rightarrow\\; v = 1.5\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(b) Kinetic energy before.",
+              "latex": "\\tfrac{1}{2}(0.50)(6.0)^{2} = 9.0\\ \\text{J}"
+            },
+            {
+              "text": "Kinetic energy after.",
+              "latex": "\\tfrac{1}{2}(2.0)(1.5)^{2} = 2.25\\ \\text{J}"
+            },
+            {
+              "text": "Fraction transferred.",
+              "latex": "\\dfrac{9.0 - 2.25}{9.0} = 0.75"
+            }
+          ],
+          "notes": "Check with the momentum form: p = 3.0 kg m s⁻¹ throughout, so Ek after = 3.0²/(2 × 2.0) = 2.25 J. Most of the energy becomes thermal energy in the clay."
+        }
+      ]
+    },
+    {
+      "id": "centripetal-acc",
+      "short": "Centripetal acceleration",
+      "guide": "That bodies moving along a circular trajectory at a constant speed experience an acceleration directed radially towards the centre of the circle (centripetal acceleration), $a = \\dfrac{v^{2}}{r} = \\omega^{2} r = \\dfrac{4\\pi^{2} r}{T^{2}}$.",
+      "sections": [
+        "circular"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Explain why a body moving in a circle at constant speed is accelerating towards the centre.",
+        "Calculate centripetal accelerations."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Moving in a circle",
+          "bullets": [
+            "In <strong>uniform circular motion</strong>, a body moves round a circle at constant speed",
+            "Its velocity is always along the <strong>tangent</strong> to the circle",
+            "The speed is constant, but the <strong>direction</strong> of the velocity keeps changing",
+            "A changing velocity means an acceleration: it points towards the <strong>centre</strong> of the circle",
+            "\"Centripetal\" means centre-seeking"
+          ],
+          "notes": "Draw two velocity vectors a short time apart and find Δv = v₂ − v₁ (add −v₁ nose to tail): Δv points towards the centre."
+        },
+        {
+          "type": "diagram",
+          "title": "Velocity and acceleration in a circle",
+          "figure": "f6t"
+        },
+        {
+          "type": "equation",
+          "title": "Centripetal acceleration",
+          "latex": "a = \\dfrac{v^{2}}{r} = \\omega^{2} r = \\dfrac{4\\pi^{2} r}{T^{2}}",
+          "bullets": [
+            "$r$: radius; $T$: period (time for one revolution)",
+            "$\\omega$: angular velocity (next point)"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "The period form of the acceleration",
+          "start": "Start from $a = \\dfrac{v^{2}}{r}$. In one period $T$, the body travels once round the circle.",
+          "steps": [
+            {
+              "text": "Speed = one circumference per period",
+              "latex": "v = \\dfrac{2\\pi r}{T}"
+            },
+            {
+              "text": "Square it",
+              "latex": "v^{2} = \\dfrac{4\\pi^{2} r^{2}}{T^{2}}"
+            },
+            {
+              "text": "Divide by $r$",
+              "latex": "a = \\dfrac{v^{2}}{r} = \\dfrac{4\\pi^{2} r}{T^{2}}"
+            }
+          ],
+          "notes": "Useful when the period or the frequency is given rather than the speed."
+        },
+        {
+          "type": "worked",
+          "title": "Round the velodrome",
+          "question": "A cyclist rides at a constant 15 $\\text{m s}^{-1}$ round a curve of a velodrome that is part of a circle of radius 40 m. Find the cyclist's centripetal acceleration.",
+          "hint": "The speed and the radius are given, so choose the form of the equation that uses them.",
+          "steps": [
+            {
+              "text": "Use the speed form.",
+              "latex": "a = \\dfrac{v^{2}}{r}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "a = \\dfrac{15^{2}}{40} = 5.6\\ \\text{m s}^{-2}"
+            },
+            {
+              "text": "Direction: towards the centre of the curve."
+            }
+          ],
+          "notes": "More than half of g, even at a steady speed."
+        },
+        {
+          "type": "worked",
+          "title": "A playground roundabout",
+          "question": "A child sits 2.0 m from the centre of a playground roundabout that turns once every 4.0 s. Find the child's centripetal acceleration.",
+          "hint": "The period is given, not the speed.",
+          "steps": [
+            {
+              "text": "Use the period form.",
+              "latex": "a = \\dfrac{4\\pi^{2} r}{T^{2}}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "a = \\dfrac{4\\pi^{2}(2.0)}{4.0^{2}} = 4.9\\ \\text{m s}^{-2}"
+            }
+          ],
+          "notes": "Ask: what happens to the acceleration if the child moves to 1.0 m from the centre? (It halves, because T is the same for everyone on the roundabout.)"
+        }
+      ],
+      "checks": [
+        "A2-017"
+      ]
+    },
+    {
+      "id": "angular",
+      "short": "Angular velocity",
+      "guide": "That motion along a circular trajectory can be described in terms of the angular velocity $\\omega$, which is related to the linear speed $v$ by $v = \\dfrac{2\\pi r}{T} = \\omega r$.",
+      "sections": [
+        "circular"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Use radians, period, frequency and angular velocity to describe circular motion.",
+        "Use $v = \\dfrac{2\\pi r}{T} = \\omega r$."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Describing circular motion",
+          "bullets": [
+            "Period $T$: the time for one revolution (s); frequency $f = \\dfrac{1}{T}$ (Hz)",
+            "Angles in <strong>radians</strong>: $\\theta = \\dfrac{s}{r}$ (arc length ÷ radius), so $2\\pi$ rad = 360°",
+            "<strong>Angular velocity</strong> $\\omega$: the angle turned through per unit time, $\\omega = \\dfrac{\\Delta\\theta}{\\Delta t}$, in $\\text{rad s}^{-1}$",
+            "One revolution is $2\\pi$ rad, so $\\omega = \\dfrac{2\\pi}{T} = 2\\pi f$",
+            "All points of a rigid rotating body share one $\\omega$; the further a point is from the axis, the faster it moves"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Speed in circular motion",
+          "latex": "v = \\dfrac{2\\pi r}{T} = \\omega r",
+          "bullets": [
+            "$\\omega = \\dfrac{2\\pi}{T}$ and $f = \\dfrac{1}{T}$ are not in the data booklet for A.2",
+            "Use $\\omega$ in $\\text{rad s}^{-1}$"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Linking speed and angular velocity",
+          "start": "A body moves round a circle of radius $r$. In a time $\\Delta t$ it turns through an angle $\\Delta\\theta$ (in radians) and moves an arc length $\\Delta s$.",
+          "steps": [
+            {
+              "text": "Definition of the radian",
+              "latex": "\\Delta s = r\\,\\Delta\\theta"
+            },
+            {
+              "text": "Divide by the time taken",
+              "latex": "\\dfrac{\\Delta s}{\\Delta t} = r\\,\\dfrac{\\Delta\\theta}{\\Delta t}"
+            },
+            {
+              "text": "Arc length per second is the speed; angle per second is $\\omega$",
+              "latex": "v = \\omega r"
+            },
+            {
+              "text": "For one revolution, $\\Delta\\theta = 2\\pi$ in a time $T$",
+              "latex": "v = \\dfrac{2\\pi r}{T}"
+            }
+          ],
+          "notes": "Step 1 only works with the angle in radians, which is why circular motion always uses them."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for circular motion units",
+          "bullets": [
+            "Revolutions per minute: divide by 60 to get the frequency in Hz, then $\\omega = 2\\pi f$",
+            "Degrees to radians: multiply by $\\dfrac{\\pi}{180}$",
+            "Days or hours: change to seconds",
+            "Check whether a question gives the radius or the diameter"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A wind turbine",
+          "question": "The blades of a wind turbine are 40 m long and turn at 15 revolutions per minute. Find (a) the angular velocity of the blades and (b) the speed of a blade tip.",
+          "hint": "Change revolutions per minute into revolutions per second first: that is the frequency.",
+          "steps": [
+            {
+              "text": "Frequency.",
+              "latex": "f = \\dfrac{15}{60} = 0.25\\ \\text{Hz}"
+            },
+            {
+              "text": "(a) Angular velocity.",
+              "latex": "\\omega = 2\\pi f = 2\\pi(0.25) = 1.6\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "(b) Speed of the tip ($r = 40$ m).",
+              "latex": "v = \\omega r = 1.57 \\times 40 = 63\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "A point halfway along a blade has the same ω but half the speed."
+        },
+        {
+          "type": "worked",
+          "title": "The Earth's orbit",
+          "question": "The Earth moves round the Sun in a nearly circular orbit of radius $1.5 \\times 10^{11}$ m, taking 365 days. Find (a) its angular velocity and (b) its orbital speed.",
+          "hint": "Change the period into seconds first.",
+          "steps": [
+            {
+              "text": "Period in seconds.",
+              "latex": "T = 365 \\times 24 \\times 3600 = 3.15\\times10^{7}\\ \\text{s}"
+            },
+            {
+              "text": "(a) Angular velocity.",
+              "latex": "\\omega = \\dfrac{2\\pi}{T} = 2.0\\times10^{-7}\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "(b) Orbital speed.",
+              "latex": "v = \\omega r = (1.99\\times10^{-7})(1.5\\times10^{11}) = 3.0\\times10^{4}\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "About 30 km every second. Gravity provides the centripetal force here (D.1)."
+        }
+      ],
+      "checks": [
+        "A2-020"
+      ]
+    },
+    {
+      "id": "centripetal-force",
+      "short": "Centripetal force",
+      "guide": "That circular motion is caused by a centripetal force acting perpendicular to the velocity.",
+      "sections": [
+        "circular"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Identify the force that provides the centripetal force in different situations.",
+        "Solve problems on horizontal and vertical circles."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Centripetal force",
+          "bullets": [
+            "A resultant force towards the centre is needed to keep a body moving in a circle: the <strong>centripetal force</strong>",
+            "It is not a new kind of force: some real force (or a resultant of several) provides it",
+            [
+              "tension: a ball whirled on a string",
+              "friction: a car on a flat bend",
+              "gravity: a satellite or planet in orbit",
+              "the magnetic force: a charged particle in a magnetic field",
+              "part of the lift (a plane banking) or of the normal force (a car on a banked track)"
+            ],
+            "Size, from the second law: $F = ma = \\dfrac{mv^{2}}{r}$"
+          ],
+          "notes": "Never add \"centripetal force\" as an extra arrow on a free-body diagram, and never draw an outward \"centrifugal\" force."
+        },
+        {
+          "type": "bullets",
+          "title": "Circles in a vertical plane",
+          "bullets": [
+            "At every point, the net force towards the centre must be $\\dfrac{mv^{2}}{r}$",
+            "At the <strong>top</strong> of a loop, weight and tension (or normal force) both point down, towards the centre: $T + mg = \\dfrac{mv^{2}}{r}$",
+            "At the <strong>bottom</strong>, the tension points up and the weight down: $T - mg = \\dfrac{mv^{2}}{r}$",
+            "Minimum speed at the top for a string, or inside a loop: gravity alone provides the force, $v = \\sqrt{gr}$",
+            "Only the top and the bottom are analysed in this course"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Forces in a vertical circle",
+          "figure": "f7t"
+        },
+        {
+          "type": "worked",
+          "title": "A puck on a string",
+          "question": "A 0.40 kg puck moves in a horizontal circle of radius 0.75 m on a frictionless air table, held by a string fixed at the centre. It makes 2.0 revolutions per second. Find the tension in the string.",
+          "hint": "The tension is the only horizontal force, so it provides the centripetal force. Find $\\omega$ from the frequency.",
+          "steps": [
+            {
+              "text": "Angular velocity.",
+              "latex": "\\omega = 2\\pi f = 2\\pi(2.0) = 12.6\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "Tension = centripetal force.",
+              "latex": "T = m\\omega^{2} r"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "T = 0.40 \\times 12.57^{2} \\times 0.75 = 47\\ \\text{N}"
+            }
+          ],
+          "notes": "Doubling the frequency would make the tension four times larger, because F ∝ ω²."
+        },
+        {
+          "type": "worked",
+          "title": "Over the top of a hump",
+          "question": "A 450 kg roller-coaster car passes over the top of a hump in the track that is part of a vertical circle of radius 12 m, at 8.0 $\\text{m s}^{-1}$. Find (a) the normal force from the track on the car and (b) the greatest speed at which the car stays in contact with the track there, if it isn't held down.",
+          "hint": "At the top of the hump the centre of the circle is below the car. Take towards the centre (down) as positive.",
+          "steps": [
+            {
+              "text": "(a) Resultant force towards the centre (down).",
+              "latex": "mg - F_{N} = \\dfrac{mv^{2}}{r}"
+            },
+            {
+              "text": "Solve for the normal force.",
+              "latex": "F_{N} = 450\\left(9.8 - \\dfrac{8.0^{2}}{12}\\right) = 2.0\\times10^{3}\\ \\text{N}"
+            },
+            {
+              "text": "(b) The car leaves the track when $F_{N} = 0$: gravity alone provides the force.",
+              "latex": "mg = \\dfrac{mv^{2}}{r} \\;\\Rightarrow\\; v = \\sqrt{gr} = \\sqrt{9.8 \\times 12} = 11\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "The normal force (2.0 kN) is less than the weight (4.4 kN): riders feel lighter going over a hump."
+        },
+        {
+          "type": "worked",
+          "title": "Pulling out of a dive",
+          "question": "A stunt pilot of mass 70 kg flies through the lowest point of a vertical circle of radius 400 m at 120 $\\text{m s}^{-1}$. Find the force of the seat on the pilot, and compare it with the pilot's weight.",
+          "hint": "At the bottom of the circle the centre is above the pilot, so the resultant force must point upwards.",
+          "steps": [
+            {
+              "text": "Resultant force towards the centre (up).",
+              "latex": "F_{N} - mg = \\dfrac{mv^{2}}{r}"
+            },
+            {
+              "text": "Centripetal acceleration.",
+              "latex": "\\dfrac{v^{2}}{r} = \\dfrac{120^{2}}{400} = 36\\ \\text{m s}^{-2}"
+            },
+            {
+              "text": "Solve for the seat force.",
+              "latex": "F_{N} = 70(9.8 + 36) = 3.2\\times10^{3}\\ \\text{N}"
+            },
+            {
+              "text": "Compare with the weight.",
+              "latex": "\\dfrac{F_{N}}{mg} = \\dfrac{45.8}{9.8} = 4.7"
+            }
+          ],
+          "notes": "The pilot feels nearly five times heavier than normal (\"4.7 g\"). Pilots wear special suits to stop blood draining from the brain."
+        }
+      ],
+      "challenge": "CC-A2-07",
+      "checks": [
+        "A2-019"
+      ]
+    },
+    {
+      "id": "direction",
+      "short": "Changing direction only",
+      "guide": "That a centripetal force causes the body to change direction even if its magnitude of velocity may remain constant.",
+      "sections": [
+        "circular"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Explain why a centripetal force changes the direction of motion but not the speed.",
+        "Describe uniform and non-uniform circular motion, including banking."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Changing direction, not speed",
+          "bullets": [
+            "The centripetal force is <strong>perpendicular</strong> to the velocity, so it has no component along the motion",
+            "It changes the direction of the velocity but not its size, and it does <strong>no work</strong>",
+            "Remove it (the string breaks) and the body carries on in a straight line along the <strong>tangent</strong> (first law)",
+            "It doesn't fly straight outwards: no outward force acts on it",
+            "<strong>Non-uniform</strong> circular motion: the speed changes too (e.g. round a vertical loop), so there is also a force component along the motion"
+          ],
+          "notes": "Whirl a ball on a string and let go at different points: the class predicts the path before each release."
+        },
+        {
+          "type": "bullets",
+          "title": "Banking",
+          "bullets": [
+            "A plane can't use friction to turn: it <strong>banks</strong> (rolls), so the lift has a horizontal component towards the centre",
+            "The vertical component of the lift balances the weight",
+            "Roads and cycle tracks are banked so that a component of the <strong>normal force</strong> provides some of the centripetal force",
+            "Less friction is needed, so the turn is safer",
+            "Describe banking only: calculations on banked surfaces are not required"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A satellite in orbit",
+          "question": "A satellite moves in a circular orbit around the Earth. The Earth's gravitational force on it is never zero. Explain why the satellite's speed stays constant.",
+          "hint": "Think about the direction of the gravitational force compared with the direction of the velocity.",
+          "steps": [
+            {
+              "text": "The gravitational force points towards the Earth's centre, the centre of the orbit."
+            },
+            {
+              "text": "The velocity is along the tangent, so the force is perpendicular to it."
+            },
+            {
+              "text": "A force perpendicular to the motion has no component along it, so it can't speed the satellite up or slow it down."
+            },
+            {
+              "text": "It does no work, so the kinetic energy (and the speed) stays the same; only the direction changes.",
+              "latex": "W = Fs\\cos 90^{\\circ} = 0"
+            }
+          ],
+          "notes": "Links to A.3 (work) and D.1 (orbits). In an elliptical orbit, the force is not perpendicular to the velocity, and the speed changes."
+        }
+      ],
+      "checks": [
+        "A2-018"
+      ]
+    }
+  ]
+}

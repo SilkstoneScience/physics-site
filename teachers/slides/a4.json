@@ -1,0 +1,1076 @@
+{
+  "topic": "A.4",
+  "hours": 0,
+  "hlHours": 7,
+  "points": [
+    {
+      "id": "torque",
+      "short": "Torque",
+      "hl": true,
+      "guide": "The torque $\\tau$ of a force about an axis as given by $\\tau = Fr\\sin\\theta$.",
+      "sections": [
+        "torque"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Calculate the torque of a force about an axis using $\\tau = Fr\\sin\\theta$.",
+        "State the sense of a torque as clockwise or anticlockwise."
+      ],
+      "checks": [
+        "A4-002"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Torque: the turning effect of a force",
+          "bullets": [
+            "<strong>Torque</strong> $\\tau$ (also called the moment) measures how strongly a force turns a body about an axis",
+            "It depends on the size of the force, where it acts and the direction it acts in",
+            "$r$ is the distance from the axis to the point where the force acts; $\\theta$ is the angle between the force and $r$",
+            "Equivalently: torque = force × <strong>perpendicular distance</strong> from the axis to the force's line of action, $r\\sin\\theta$",
+            "A force whose line of action passes through the axis has <strong>zero torque</strong>",
+            "Torques have a <strong>sense</strong>: clockwise or anticlockwise. Choose one as positive"
+          ],
+          "notes": "Open a door by pushing near the handle, then near the hinge, then along the door towards the hinge. Students feel all three factors: size, distance and direction."
+        },
+        {
+          "type": "equation",
+          "title": "Torque",
+          "latex": "\\tau = Fr\\sin\\theta",
+          "bullets": [
+            "Unit: the newton metre, N m (not J: torque is not energy)",
+            "Largest when the force is perpendicular to $r$ ($\\theta = 90°$)",
+            "In the data booklet"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Force, distance and angle",
+          "figure": "a4at",
+          "bullets": [
+            "Only the component of $F$ perpendicular to the spanner turns the bolt: $F\\sin\\theta$",
+            "Or extend the line of action: its perpendicular distance from the axis is $r\\sin\\theta$",
+            "A longer spanner gives a larger torque for the same force"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Pushing a bicycle pedal",
+          "question": "A cyclist pushes vertically downwards with a force of 420 N on a pedal at the end of a crank 0.17 m long. The crank points forwards at 30° above the horizontal. Find (a) the perpendicular distance from the axle to the line of action of the force and (b) the torque about the axle. (c) Where should the crank be for the same force to give the largest torque?",
+          "hint": "Sketch the crank and the vertical line of action of the force. The perpendicular distance is a horizontal distance from the axle.",
+          "steps": [
+            {
+              "text": "(a) The force is vertical, so the perpendicular distance is the horizontal distance from the axle to the pedal.",
+              "latex": "d = 0.17\\cos 30^{\\circ} = 0.147\\ \\text{m}"
+            },
+            {
+              "text": "(b) Torque = force × perpendicular distance.",
+              "latex": "\\tau = 420 \\times 0.147 = 62\\ \\text{N m}"
+            },
+            {
+              "text": "Check with $\\tau = Fr\\sin\\theta$: the angle between the crank and the force is 120°.",
+              "latex": "\\tau = 420 \\times 0.17 \\times \\sin 120^{\\circ} = 62\\ \\text{N m}"
+            },
+            {
+              "text": "(c) Horizontal, pointing forwards: then the force is perpendicular to the crank, giving 420 × 0.17 = 71 N m."
+            }
+          ],
+          "notes": "When the crank points straight down, the line of action passes through the axle and the torque is zero: the \"dead spot\" cyclists push through. The torque is clockwise as seen from the right-hand side of the bicycle."
+        }
+      ]
+    },
+    {
+      "id": "equilibrium",
+      "short": "Rotational equilibrium",
+      "hl": true,
+      "guide": "Bodies in rotational equilibrium have a resultant torque of zero.",
+      "sections": [
+        "equilibrium"
+      ],
+      "minutes": 45,
+      "aims": [
+        "State the two conditions for a rigid body to be in equilibrium.",
+        "Solve equilibrium problems by taking torques about a well-chosen point."
+      ],
+      "challenge": "CC-A4-03",
+      "checks": [
+        "A4-004"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Equilibrium of a rigid body",
+          "bullets": [
+            "A rigid body is in equilibrium only when <strong>both</strong> conditions hold:",
+            [
+              "<strong>translational</strong>: resultant force zero, $\\sum F = 0$",
+              "<strong>rotational</strong>: resultant torque zero, $\\sum \\tau = 0$"
+            ],
+            "Rotational equilibrium: total clockwise torque = total anticlockwise torque (the principle of moments)",
+            "Equilibrium means no angular acceleration: at rest, or rotating at a constant rate",
+            "A uniform body's weight acts at its centre (its centre of mass)"
+          ],
+          "notes": "A metre rule balanced on a finger, with coins added on either side, gives a quick demonstration of the principle of moments."
+        },
+        {
+          "type": "bullets",
+          "title": "Solving equilibrium problems",
+          "bullets": [
+            "Draw every force on the body, including its own weight at its centre",
+            "If the body is in equilibrium, the torques balance about <strong>any</strong> point, not just a real pivot",
+            "Take torques about a point that an unknown force passes through: that force then drops out",
+            "Use $\\sum F = 0$ (vertically and horizontally) to find the remaining forces",
+            "Use the perpendicular distance, or $r\\sin\\theta$, for forces at an angle"
+          ],
+          "notes": "A common error is to forget the weight of the beam itself, or to use the distance along the beam for a force at an angle."
+        },
+        {
+          "type": "worked",
+          "title": "Lifting a wheelbarrow",
+          "question": "A loaded wheelbarrow has a total weight of 700 N, acting 0.40 m horizontally behind the wheel's axle. The handles are 1.4 m horizontally behind the axle. The gardener holds the wheelbarrow still with its legs just off the ground, pulling vertically up on the handles. Find (a) the upward force needed on the handles and (b) the force from the ground on the wheel.",
+          "hint": "Take torques about the axle, so the ground's force on the wheel has no torque. Then balance the vertical forces.",
+          "steps": [
+            {
+              "text": "(a) Take torques about the axle: anticlockwise = clockwise.",
+              "latex": "F \\times 1.4 = 700 \\times 0.40"
+            },
+            {
+              "text": "Solve for the force on the handles.",
+              "latex": "F = \\dfrac{280}{1.4} = 200\\ \\text{N}"
+            },
+            {
+              "text": "(b) Vertical forces balance: $F + R = 700$.",
+              "latex": "R = 700 - 200 = 500\\ \\text{N}"
+            }
+          ],
+          "notes": "Ask why loading the barrow near the wheel makes it easier to lift: the weight's perpendicular distance from the axle is smaller, so its torque is smaller."
+        },
+        {
+          "type": "worked",
+          "title": "Lifting a scaffold board",
+          "question": "A uniform scaffold board 2.4 m long, weighing 150 N, has one end on the ground. A builder holds the other end still so that the board makes 30° with the ground; the bottom end does not slip. Find the force the builder must apply (a) pulling vertically upwards and (b) pushing perpendicular to the board.",
+          "hint": "Take torques about the end on the ground, so the forces from the ground drop out. For each force, find the perpendicular distance from that end to its line of action.",
+          "steps": [
+            {
+              "text": "(a) Both forces are vertical, so their perpendicular distances from the bottom end are horizontal.",
+              "latex": "F \\times 2.4\\cos 30^{\\circ} = 150 \\times 1.2\\cos 30^{\\circ}"
+            },
+            {
+              "text": "The $\\cos 30^{\\circ}$ cancels.",
+              "latex": "F = \\dfrac{150 \\times 1.2}{2.4} = 75\\ \\text{N}"
+            },
+            {
+              "text": "(b) Now the builder's force is perpendicular to the board, so its perpendicular distance is the full 2.4 m.",
+              "latex": "F \\times 2.4 = 150 \\times 1.2\\cos 30^{\\circ}"
+            },
+            {
+              "text": "Solve for the force.",
+              "latex": "F = \\dfrac{155.9}{2.4} = 65\\ \\text{N}"
+            }
+          ],
+          "notes": "In (a) the answer is half the weight at any angle. In (b) the builder's push has a horizontal component, so friction from the ground must balance it."
+        }
+      ]
+    },
+    {
+      "id": "unbalanced",
+      "short": "Unbalanced torques",
+      "hl": true,
+      "guide": "An unbalanced torque applied to an extended, rigid body will cause angular acceleration.",
+      "sections": [
+        "rigid",
+        "torque"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Explain how an unbalanced torque causes angular acceleration, and how a couple causes rotation without linear acceleration."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Rigid bodies and unbalanced torques",
+          "bullets": [
+            "A <strong>rigid body</strong> keeps its shape: it can translate, rotate, or both (rolling)",
+            "For linear motion, treat its mass as concentrated at its <strong>centre of mass</strong> (no calculation of its position is needed)",
+            "A resultant force through the centre of mass: linear acceleration only",
+            "An <strong>unbalanced</strong> (resultant) torque: <strong>angular acceleration</strong>",
+            "A <strong>couple</strong>: two equal, opposite forces with different lines of action",
+            [
+              "resultant force zero, so no linear acceleration; resultant torque not zero, so rotation"
+            ]
+          ],
+          "notes": "Push a book lying on a table at its centre, then near one corner. The second push makes it both slide and turn. The deck's opening question fits here."
+        },
+        {
+          "type": "worked",
+          "title": "Turning a steering wheel",
+          "question": "A driver turns a steering wheel of diameter 0.38 m by pushing with each hand tangentially to the rim, with forces of 25 N in opposite directions on opposite sides. Find (a) the resultant force on the wheel and (b) the resultant torque about its centre.",
+          "hint": "The two forces form a couple. Each force is perpendicular to the radius, so find each torque and add them, as both turn the wheel the same way.",
+          "steps": [
+            {
+              "text": "(a) The forces are equal and opposite.",
+              "latex": "\\sum F = 25 - 25 = 0"
+            },
+            {
+              "text": "(b) Each force acts at $r = 0.19$ m, perpendicular to the radius, and turns the wheel the same way.",
+              "latex": "\\tau = 2 \\times 25 \\times 0.19 = 9.5\\ \\text{N m}"
+            }
+          ],
+          "notes": "The torque of a couple is one force × the perpendicular distance between the two lines of action: 25 × 0.38 = 9.5 N m, whichever axis is chosen."
+        }
+      ]
+    },
+    {
+      "id": "describing",
+      "short": "Describing rotation",
+      "hl": true,
+      "guide": "The rotation of a body can be described in terms of angular displacement, angular velocity and angular acceleration.",
+      "sections": [
+        "angular"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Define angular displacement, angular velocity and angular acceleration, using radians.",
+        "Relate the linear and angular quantities with $s = r\\theta$ and $v = \\omega r$."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Describing rotation",
+          "bullets": [
+            "Every point of a rotating rigid body turns through the <strong>same angle</strong> in the same time",
+            "<strong>Angular displacement</strong> $\\Delta\\theta$: the angle turned through, in radians (rad)",
+            [
+              "$2\\pi$ rad = 360° = 1 revolution"
+            ],
+            "<strong>Angular velocity</strong> $\\omega$: the rate of change of angle, in $\\text{rad s}^{-1}$",
+            "<strong>Angular acceleration</strong> $\\alpha$: the rate of change of angular velocity, in $\\text{rad s}^{-2}$",
+            "We use angular velocity as a speed with a sense (clockwise or anticlockwise), not as a vector"
+          ],
+          "notes": "Points further from the axis travel further and faster, but all have the same angular displacement, angular velocity and angular acceleration. That is why angular quantities describe the whole body at once."
+        },
+        {
+          "type": "equation",
+          "title": "Angular and linear quantities",
+          "latex": [
+            "\\omega = \\dfrac{\\Delta\\theta}{\\Delta t}",
+            "\\alpha = \\dfrac{\\Delta\\omega}{\\Delta t}",
+            "v = \\omega r",
+            "a = \\alpha r"
+          ],
+          "bullets": [
+            "$v$ and $a$: the speed and tangential acceleration of a point at distance $r$ from the axis",
+            "Only $v = \\omega r$ is in the data booklet (A.2); the definitions must be learned",
+            "Angles must be in radians"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Linking linear and angular speed",
+          "start": "A point at distance $r$ from the axis turns through an angle $\\Delta\\theta$ (in radians) in a time $\\Delta t$.",
+          "steps": [
+            {
+              "text": "The definition of the radian: arc length = radius × angle",
+              "latex": "\\Delta s = r\\Delta\\theta"
+            },
+            {
+              "text": "Divide by the time taken",
+              "latex": "\\dfrac{\\Delta s}{\\Delta t} = r\\dfrac{\\Delta\\theta}{\\Delta t}"
+            },
+            {
+              "text": "Distance ÷ time is the speed; angle ÷ time is the angular speed",
+              "latex": "v = \\omega r"
+            },
+            {
+              "text": "In the same way, a change in $\\omega$ gives the tangential acceleration",
+              "latex": "a = \\dfrac{\\Delta v}{\\Delta t} = r\\dfrac{\\Delta\\omega}{\\Delta t} = \\alpha r"
+            }
+          ],
+          "notes": "Step 1 only works in radians: one radian is the angle at which the arc length equals the radius. In degrees, $s = \\dfrac{\\pi r\\theta}{180}$."
+        },
+        {
+          "type": "worked",
+          "title": "A washing machine on spin",
+          "question": "The drum of a washing machine has a radius of 0.25 m and spins at 1200 revolutions per minute. Find (a) its angular velocity in $\\text{rad s}^{-1}$ and (b) the speed of a sock on the inside surface of the drum.",
+          "hint": "Change revolutions to radians and minutes to seconds. Then use the link between linear and angular speed.",
+          "steps": [
+            {
+              "text": "(a) One revolution is $2\\pi$ rad, and one minute is 60 s.",
+              "latex": "\\omega = \\dfrac{1200 \\times 2\\pi}{60} = 126\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "(b) Use $v = \\omega r$.",
+              "latex": "v = 126 \\times 0.25 = 31\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "Every point of the drum has the same angular velocity; a point halfway to the axis would move at half this speed."
+        }
+      ]
+    },
+    {
+      "id": "suvat",
+      "short": "Equations of angular motion",
+      "hl": true,
+      "guide": "Equations of motion for uniform angular acceleration can be used to predict the body's angular position $\\theta$, angular displacement $\\Delta\\theta$, angular speed $\\omega$ and angular acceleration $\\alpha$.",
+      "sections": [
+        "angular"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Solve problems with uniform angular acceleration using the rotational equations of motion.",
+        "Interpret the gradients of, and areas under, graphs of angular motion."
+      ],
+      "checks": [
+        "A4-006"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Equations for uniform angular acceleration",
+          "latex": [
+            "\\Delta\\theta = \\dfrac{\\omega_f + \\omega_i}{2}t",
+            "\\omega_f = \\omega_i + \\alpha t",
+            "\\Delta\\theta = \\omega_i t + \\tfrac{1}{2}\\alpha t^{2}",
+            "\\omega_f^{2} = \\omega_i^{2} + 2\\alpha\\Delta\\theta"
+          ],
+          "bullets": [
+            "All four are in the data booklet",
+            "The A.1 equations with $s \\to \\Delta\\theta$, $u \\to \\omega_i$, $v \\to \\omega_f$, $a \\to \\alpha$"
+          ],
+          "notes": "They are derived exactly as in A.1, so ask students to derive one of them by analogy as a check of understanding."
+        },
+        {
+          "type": "bullets",
+          "title": "Using the rotational equations",
+          "bullets": [
+            "Use them <strong>only when $\\alpha$ is constant</strong>",
+            "Work in <strong>radians</strong>: revolutions = $\\dfrac{\\Delta\\theta}{2\\pi}$",
+            "Change rpm to $\\text{rad s}^{-1}$: multiply by $\\dfrac{2\\pi}{60}$",
+            "Choose a positive sense; slowing down means $\\alpha$ is opposite to $\\omega$",
+            "Graphs work as in A.1:",
+            [
+              "gradient of a $\\theta$–$t$ graph is $\\omega$",
+              "gradient of an $\\omega$–$t$ graph is $\\alpha$; the area under it is $\\Delta\\theta$"
+            ]
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A ceiling fan switched off",
+          "question": "A ceiling fan rotating at 18 $\\text{rad s}^{-1}$ is switched off and slows down uniformly, making 40 revolutions before it stops. Find (a) its angular acceleration and (b) the time it takes to stop.",
+          "hint": "Change the revolutions to radians first. The time is unknown, so use the equation without t.",
+          "steps": [
+            {
+              "text": "Angular displacement in radians.",
+              "latex": "\\Delta\\theta = 40 \\times 2\\pi = 251\\ \\text{rad}"
+            },
+            {
+              "text": "(a) Use $\\omega_f^{2} = \\omega_i^{2} + 2\\alpha\\Delta\\theta$ with $\\omega_f = 0$.",
+              "latex": "\\alpha = \\dfrac{0 - 18^{2}}{2 \\times 251} = -0.64\\ \\text{rad s}^{-2}"
+            },
+            {
+              "text": "(b) Use the average angular velocity equation.",
+              "latex": "t = \\dfrac{2\\Delta\\theta}{\\omega_f + \\omega_i} = \\dfrac{2 \\times 251}{18} = 28\\ \\text{s}"
+            }
+          ],
+          "notes": "The negative sign shows the angular acceleration is opposite to the rotation. Part (b) could also use $\\omega_f = \\omega_i + \\alpha t$; the average-velocity route avoids carrying a rounded $\\alpha$."
+        },
+        {
+          "type": "worked",
+          "title": "A drill starting up",
+          "question": "An electric drill's chuck accelerates uniformly from rest to 300 $\\text{rad s}^{-1}$ in 0.60 s. Find (a) its angular acceleration and (b) the number of revolutions it makes in this time.",
+          "hint": "Start from rest, so the initial angular velocity is zero. Find the angle in radians, then change it to revolutions.",
+          "steps": [
+            {
+              "text": "(a) Use $\\omega_f = \\omega_i + \\alpha t$.",
+              "latex": "\\alpha = \\dfrac{300 - 0}{0.60} = 500\\ \\text{rad s}^{-2}"
+            },
+            {
+              "text": "(b) Average angular velocity × time.",
+              "latex": "\\Delta\\theta = \\dfrac{0 + 300}{2} \\times 0.60 = 90\\ \\text{rad}"
+            },
+            {
+              "text": "Change to revolutions.",
+              "latex": "\\dfrac{90}{2\\pi} = 14\\ \\text{revolutions}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inertia-dist",
+      "short": "Moment of inertia",
+      "hl": true,
+      "guide": "The moment of inertia I depends on the distribution of mass of an extended body about an axis of rotation.",
+      "sections": [
+        "inertia"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Explain how the moment of inertia depends on the mass of a body and how it is distributed about the axis."
+      ],
+      "challenge": "CC-A4-02",
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Moment of inertia",
+          "bullets": [
+            "Mass resists changes in linear motion; <strong>moment of inertia</strong> $I$ resists changes in rotation",
+            "It depends on the mass <strong>and on how far that mass is from the axis</strong>",
+            "Mass far from the axis counts much more than mass close to it",
+            "The same body has different moments of inertia about different axes",
+            "Unit: $\\text{kg m}^{2}$"
+          ],
+          "notes": "Hold a metre rule at its centre and twist it back and forth, then hold it at one end: the second is much harder. A tightrope walker's long pole works the same way."
+        },
+        {
+          "type": "diagram",
+          "title": "Moving the mass outwards",
+          "figure": "a4ct",
+          "bullets": [
+            "Same masses, same axis",
+            "Twice as far out: four times the moment of inertia",
+            "Harder to start spinning, and harder to stop"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Moments of inertia of some shapes",
+          "latex": [
+            "\\text{ring: } I = MR^{2}",
+            "\\text{solid disc: } I = \\tfrac{1}{2}MR^{2}",
+            "\\text{solid sphere: } I = \\tfrac{2}{5}MR^{2}",
+            "\\text{rod about its centre: } I = \\tfrac{1}{12}ML^{2}"
+          ],
+          "bullets": [
+            "Not to be learned: an exam question gives the one needed",
+            "A ring has all its mass at the rim, so it has the largest $I$ for its mass and radius"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inertia-points",
+      "short": "Point masses",
+      "hl": true,
+      "guide": "The moment of inertia for a system of point masses as given by $I = \\Sigma mr^{2}$.",
+      "sections": [
+        "inertia"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Calculate the moment of inertia of a system of point masses using $I = \\sum mr^{2}$."
+      ],
+      "checks": [
+        "A4-003"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Point masses",
+          "latex": "I = \\sum mr^{2}",
+          "bullets": [
+            "Add $mr^{2}$ for every mass; $r$ is measured from the <strong>axis</strong>",
+            "Because of $r^{2}$, doubling the distance makes the moment of inertia four times larger",
+            "\"Light rod\": its own moment of inertia is negligible",
+            "Moments of inertia about the same axis can be added: point masses plus a given shape",
+            "In the data booklet"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A spinning mobile",
+          "question": "A light rod 0.80 m long carries a 0.30 kg mass at one end and a 0.50 kg mass at the other. Find its moment of inertia (a) about an axis 0.20 m from the 0.30 kg mass, between the masses and perpendicular to the rod, and (b) about a parallel axis through the centre of the rod.",
+          "hint": "Treat each mass as a point and find its distance from the axis in each case. Then add $mr^{2}$ for both.",
+          "steps": [
+            {
+              "text": "(a) The distances are 0.20 m and 0.60 m.",
+              "latex": "I = 0.30(0.20)^{2} + 0.50(0.60)^{2}"
+            },
+            {
+              "text": "Add the two terms.",
+              "latex": "I = 0.012 + 0.180 = 0.19\\ \\text{kg m}^{2}"
+            },
+            {
+              "text": "(b) Both masses are 0.40 m from the centre.",
+              "latex": "I = (0.30 + 0.50)(0.40)^{2} = 0.13\\ \\text{kg m}^{2}"
+            }
+          ],
+          "notes": "The same object has a different moment of inertia about each axis. Ask which axis makes it easiest to spin: the smallest $I$ is about the centre of mass, 0.50 m from the 0.30 kg mass, where $I = 0.30(0.50)^{2} + 0.50(0.30)^{2} = 0.12\\ \\text{kg m}^{2}$."
+        },
+        {
+          "type": "worked",
+          "title": "A disc with clips on its rim",
+          "question": "A uniform solid disc of mass 1.6 kg and radius 0.15 m ($I = \\tfrac{1}{2}MR^{2}$) spins about its central axis. Two small 0.20 kg clips are fixed to its rim. Find the moment of inertia of the disc with its clips.",
+          "hint": "Add the disc's moment of inertia to those of the two clips, treating each clip as a point mass on the rim.",
+          "steps": [
+            {
+              "text": "The disc.",
+              "latex": "I_{\\text{disc}} = \\tfrac{1}{2}(1.6)(0.15)^{2} = 0.018\\ \\text{kg m}^{2}"
+            },
+            {
+              "text": "The two clips, each at $r = 0.15$ m.",
+              "latex": "I_{\\text{clips}} = 2 \\times 0.20 \\times 0.15^{2} = 0.0090\\ \\text{kg m}^{2}"
+            },
+            {
+              "text": "Add them.",
+              "latex": "I = 0.018 + 0.0090 = 0.027\\ \\text{kg m}^{2}"
+            }
+          ],
+          "notes": "The clips are only a quarter of the disc's mass but add half as much again to its moment of inertia, because all their mass is at the rim."
+        }
+      ]
+    },
+    {
+      "id": "second-law",
+      "short": "Newton's second law for rotation",
+      "hl": true,
+      "guide": "Newton's second law for rotation as given by $\\tau = I\\alpha$ where $\\tau$ is the average torque.",
+      "sections": [
+        "second-law"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Use $\\tau = I\\alpha$ to find angular accelerations, torques and moments of inertia.",
+        "Solve problems where a body rotates and another moves in a line, such as a mass on a string round a pulley."
+      ],
+      "checks": [
+        "A4-007"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Newton's second law for rotation",
+          "bullets": [
+            "Linear: a resultant force gives a mass an acceleration, $F = ma$",
+            "Rotational: a resultant torque gives a body an angular acceleration, $\\tau = I\\alpha$",
+            "$\\tau$ is the resultant (average) torque, and $I$ the moment of inertia, about the <strong>same axis</strong>",
+            "For the same torque, a larger $I$ gives a smaller $\\alpha$",
+            "When a body rotates and another moves in a line, write one equation for each and link them"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Newton's second law for rotation",
+          "latex": "\\tau = I\\alpha",
+          "bullets": [
+            "In the data booklet",
+            "Units: $\\text{N m} = \\text{kg m}^{2} \\times \\text{rad s}^{-2}$"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Where $\\tau = I\\alpha$ comes from",
+          "start": "A point mass $m$ on a light arm of length $r$ is pushed by a force $F$ perpendicular to the arm, so it speeds up along its circle.",
+          "steps": [
+            {
+              "text": "Newton's second law along the direction of motion",
+              "latex": "F = ma"
+            },
+            {
+              "text": "The tangential acceleration is $a = \\alpha r$",
+              "latex": "F = m\\alpha r"
+            },
+            {
+              "text": "Multiply by $r$: the left-hand side is the torque",
+              "latex": "Fr = mr^{2}\\alpha"
+            },
+            {
+              "text": "So, with $I = mr^{2}$",
+              "latex": "\\tau = I\\alpha"
+            }
+          ],
+          "notes": "For a rigid body, every piece of mass has the same $\\alpha$, so adding up the torques on all the pieces gives $\\tau = \\left(\\sum mr^{2}\\right)\\alpha = I\\alpha$. The torques of the internal forces cancel in pairs."
+        },
+        {
+          "type": "derivation",
+          "title": "A falling mass turning a pulley",
+          "start": "A string wrapped round a pulley (radius $R$, moment of inertia $I$) holds a hanging mass $m$. The mass is released; the string doesn't slip.",
+          "steps": [
+            {
+              "text": "For the mass (down positive): Newton's second law",
+              "latex": "mg - T = ma"
+            },
+            {
+              "text": "For the pulley: the tension gives a torque $TR$",
+              "latex": "TR = I\\alpha"
+            },
+            {
+              "text": "No slipping, so $a = \\alpha R$; then the tension is",
+              "latex": "T = \\dfrac{Ia}{R^{2}}"
+            },
+            {
+              "text": "Substitute into the first equation and solve for $a$",
+              "latex": "a = \\dfrac{mg}{m + I/R^{2}}"
+            }
+          ],
+          "notes": "Limiting cases: a massless pulley ($I = 0$) gives $a = g$, free fall; a very heavy pulley gives $a \\to 0$. The pulley behaves like an extra mass $I/R^{2}$ that must also be accelerated."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for rotation problems",
+          "bullets": [
+            "Draw the forces on each body separately",
+            "Write $F = ma$ for each body that moves in a line, $\\tau = I\\alpha$ for each body that rotates",
+            "Link them: a string that doesn't slip has $a = \\alpha r$",
+            "The tension is different from the weight whenever the mass accelerates",
+            "Check: is $a$ smaller than $g$ for a falling mass?"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Forces on the mass and the pulley",
+          "figure": "a4dt",
+          "bullets": [
+            "Tension up on the mass, down on the pulley's rim",
+            "Torque on the pulley: $TR$",
+            "The weight of the mass drives the system"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A grinding wheel slowing down",
+          "question": "A grinding wheel with a moment of inertia of 0.045 $\\text{kg m}^{2}$ spins at 250 $\\text{rad s}^{-1}$. When the motor is switched off, a constant frictional torque of 0.30 N m acts on it. Find (a) its angular deceleration and (b) the time it takes to stop.",
+          "hint": "The frictional torque is the only torque, so it is the resultant torque. Use $\\tau = I\\alpha$, then an equation of angular motion.",
+          "steps": [
+            {
+              "text": "(a) Rearrange $\\tau = I\\alpha$.",
+              "latex": "\\alpha = \\dfrac{\\tau}{I} = \\dfrac{0.30}{0.045} = 6.7\\ \\text{rad s}^{-2}"
+            },
+            {
+              "text": "(b) Use $\\omega_f = \\omega_i + \\alpha t$, with $\\alpha$ opposite to $\\omega$.",
+              "latex": "0 = 250 - 6.67t"
+            },
+            {
+              "text": "Solve for the time.",
+              "latex": "t = \\dfrac{250}{6.67} = 38\\ \\text{s}"
+            }
+          ],
+          "notes": "The answer is 37.5 s from unrounded values, so 38 s to 2 s.f."
+        },
+        {
+          "type": "worked",
+          "title": "A bucket and a well",
+          "question": "A 4.0 kg bucket hangs from a rope wound round the drum of a well. The drum has radius 0.12 m and moment of inertia 0.60 $\\text{kg m}^{2}$, and turns without friction. The bucket is released from rest. Find (a) the bucket's acceleration and (b) the tension in the rope.",
+          "hint": "Write $F = ma$ for the bucket and $\\tau = I\\alpha$ for the drum, then link them with $a = \\alpha r$ because the rope doesn't slip.",
+          "steps": [
+            {
+              "text": "(a) Combine the two equations, as in the derivation.",
+              "latex": "a = \\dfrac{mg}{m + I/R^{2}}"
+            },
+            {
+              "text": "Substitute: $I/R^{2} = 0.60/0.0144 = 41.7$ kg.",
+              "latex": "a = \\dfrac{4.0 \\times 9.8}{4.0 + 41.7} = 0.86\\ \\text{m s}^{-2}"
+            },
+            {
+              "text": "(b) From the bucket's equation, $mg - T = ma$.",
+              "latex": "T = 4.0(9.8 - 0.858) = 36\\ \\text{N}"
+            }
+          ],
+          "notes": "The drum acts like an extra 42 kg, so the bucket falls slowly and the tension is nearly its weight (39 N). Ask students to check by finding α = a/R = 7.2 rad s⁻² and τ = TR = Iα."
+        }
+      ]
+    },
+    {
+      "id": "angular-momentum",
+      "short": "Angular momentum",
+      "hl": true,
+      "guide": "An extended body rotating with an angular speed has an angular momentum $L$ as given by $L = I\\omega$.",
+      "sections": [
+        "momentum"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Calculate the angular momentum of a rotating body using $L = I\\omega$."
+      ],
+      "checks": [
+        "A4-009"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Angular momentum",
+          "latex": "L = I\\omega",
+          "bullets": [
+            "The rotational version of linear momentum, $p = mv$",
+            "Unit: $\\text{kg m}^{2}\\ \\text{s}^{-1}$",
+            "It has a sense (clockwise or anticlockwise), like a torque",
+            "In the data booklet"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Angular momentum of a single particle",
+          "start": "A particle of mass $m$ moves at speed $v$ in a circle of radius $r$.",
+          "steps": [
+            {
+              "text": "Its moment of inertia about the centre",
+              "latex": "I = mr^{2}"
+            },
+            {
+              "text": "Its angular velocity",
+              "latex": "\\omega = \\dfrac{v}{r}"
+            },
+            {
+              "text": "Substitute into $L = I\\omega$",
+              "latex": "L = mr^{2} \\times \\dfrac{v}{r}"
+            },
+            {
+              "text": "Simplify",
+              "latex": "L = mvr"
+            }
+          ],
+          "notes": "This form is used in E.1 (HL), where the Bohr model quantises the electron's angular momentum."
+        },
+        {
+          "type": "worked",
+          "title": "A spinning bicycle wheel",
+          "question": "A bicycle wheel with a moment of inertia of 0.11 $\\text{kg m}^{2}$ is spun at 3.5 revolutions per second. Find its angular momentum.",
+          "hint": "Change revolutions per second to $\\text{rad s}^{-1}$ first.",
+          "steps": [
+            {
+              "text": "Angular velocity in $\\text{rad s}^{-1}$.",
+              "latex": "\\omega = 3.5 \\times 2\\pi = 22.0\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "Use $L = I\\omega$.",
+              "latex": "L = 0.11 \\times 22.0 = 2.4\\ \\text{kg m}^{2}\\ \\text{s}^{-1}"
+            }
+          ],
+          "notes": "A spinning wheel held by its axle resists being tilted: a good demonstration that angular momentum has a direction, although the course does not need the vector treatment."
+        }
+      ]
+    },
+    {
+      "id": "conservation",
+      "short": "Conservation of angular momentum",
+      "hl": true,
+      "guide": "Angular momentum remains constant unless the body is acted upon by a resultant torque.",
+      "sections": [
+        "momentum"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Apply conservation of angular momentum to bodies whose moment of inertia changes and to coupled pairs of bodies.",
+        "Explain why rotational kinetic energy changes when angular momentum is conserved."
+      ],
+      "challenge": "CC-A4-04",
+      "checks": [
+        "A4-010"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Conservation of angular momentum",
+          "bullets": [
+            "The total angular momentum of a system stays constant unless a resultant <strong>external torque</strong> acts on it",
+            "If $I$ decreases, $\\omega$ increases so that $I\\omega$ stays the same:",
+            [
+              "a skater pulls in their arms and spins faster",
+              "a diver tucks to somersault faster, then straightens to slow down",
+              "a collapsing star spins up into a fast-spinning neutron star"
+            ],
+            "<strong>Coupled bodies</strong> that join and turn together share one angular velocity, like a perfectly inelastic collision",
+            "Kinetic energy is usually <strong>not</strong> conserved"
+          ],
+          "notes": "A swivel chair, a student holding two heavy books at arm's length, and a slow push: the student pulls the books in and speeds up. Keep the chair's speed low."
+        },
+        {
+          "type": "equation",
+          "title": "Using conservation of angular momentum",
+          "latex": [
+            "I_1\\omega_1 = I_2\\omega_2",
+            "I_A\\omega_A + I_B\\omega_B = (I_A + I_B)\\omega"
+          ],
+          "bullets": [
+            "First: one body whose moment of inertia changes",
+            "Second: two bodies on the same axis that couple together",
+            "Both follow from $L = I\\omega$; choose a positive sense if the bodies spin opposite ways"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A diver tucks",
+          "question": "A diver leaves the board rotating at 1.8 $\\text{rad s}^{-1}$ in a straight position, with a moment of inertia of 14 $\\text{kg m}^{2}$ about her centre of mass. She tucks, reducing her moment of inertia to 4.2 $\\text{kg m}^{2}$. Find (a) her angular velocity in the tuck and (b) how many somersaults she completes if she stays tucked for 1.1 s.",
+          "hint": "In the air, no external torque acts about her centre of mass, so her angular momentum is conserved.",
+          "steps": [
+            {
+              "text": "(a) Conservation of angular momentum.",
+              "latex": "14 \\times 1.8 = 4.2\\,\\omega_2"
+            },
+            {
+              "text": "Solve.",
+              "latex": "\\omega_2 = \\dfrac{25.2}{4.2} = 6.0\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "(b) Angle turned in the tuck, then revolutions.",
+              "latex": "\\dfrac{6.0 \\times 1.1}{2\\pi} = 1.1\\ \\text{somersaults}"
+            }
+          ],
+          "notes": "Her weight acts through her centre of mass, so it has no torque about it: that is why angular momentum is conserved even though gravity acts."
+        },
+        {
+          "type": "worked",
+          "title": "Jumping onto a roundabout",
+          "question": "A playground roundabout with a moment of inertia of 180 $\\text{kg m}^{2}$ turns freely at 1.2 $\\text{rad s}^{-1}$. A 30 kg child, running straight towards its axis, steps onto its edge, 1.5 m from the axis. Treat the child as a point mass. Find (a) the new angular velocity and (b) the kinetic energy lost.",
+          "hint": "The child has no angular momentum about the axis before stepping on. Afterwards, the child's moment of inertia is $mr^{2}$, added to the roundabout's.",
+          "steps": [
+            {
+              "text": "(a) The child's moment of inertia on the edge.",
+              "latex": "I_c = 30 \\times 1.5^{2} = 67.5\\ \\text{kg m}^{2}"
+            },
+            {
+              "text": "Conservation of angular momentum.",
+              "latex": "180 \\times 1.2 = (180 + 67.5)\\,\\omega"
+            },
+            {
+              "text": "Solve.",
+              "latex": "\\omega = \\dfrac{216}{247.5} = 0.87\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "(b) $E_k = \\tfrac{1}{2}I\\omega^{2}$ before and after: 129.6 J and 94.3 J.",
+              "latex": "\\Delta E_k = 129.6 - 94.3 = 35\\ \\text{J}"
+            }
+          ],
+          "notes": "The energy goes into thermal energy as the child's feet grip the roundabout, just as in a perfectly inelastic collision."
+        }
+      ]
+    },
+    {
+      "id": "impulse",
+      "short": "Angular impulse",
+      "hl": true,
+      "guide": "The action of a resultant torque constitutes an angular impulse $\\Delta L$ as given by $\\Delta L = \\tau\\Delta t = \\Delta(I\\omega)$.",
+      "sections": [
+        "impulse"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Calculate angular impulse from a torque and a time, or from the area under a torque–time graph."
+      ],
+      "checks": [
+        "A4-011"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Angular impulse",
+          "latex": "\\Delta L = \\tau\\Delta t = \\Delta(I\\omega)",
+          "bullets": [
+            "The rotational version of impulse, $F\\Delta t = \\Delta p$",
+            "Unit: N m s, the same as $\\text{kg m}^{2}\\ \\text{s}^{-1}$",
+            "For a changing torque: the area under the torque–time graph",
+            "In the data booklet"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Angular impulse from the second law",
+          "start": "A constant resultant torque $\\tau$ acts on a body with constant moment of inertia $I$ for a time $\\Delta t$.",
+          "steps": [
+            {
+              "text": "Newton's second law for rotation",
+              "latex": "\\tau = I\\alpha"
+            },
+            {
+              "text": "The angular acceleration is the rate of change of $\\omega$",
+              "latex": "\\tau = I\\dfrac{\\Delta\\omega}{\\Delta t}"
+            },
+            {
+              "text": "Multiply by $\\Delta t$",
+              "latex": "\\tau\\Delta t = I\\Delta\\omega"
+            },
+            {
+              "text": "$I\\omega$ is the angular momentum",
+              "latex": "\\tau\\Delta t = \\Delta(I\\omega) = \\Delta L"
+            }
+          ],
+          "notes": "The form $\\tau = \\dfrac{\\Delta L}{\\Delta t}$ also holds when $I$ changes, which is why the guide writes $\\Delta(I\\omega)$."
+        },
+        {
+          "type": "diagram",
+          "title": "A torque that changes",
+          "figure": "a4et",
+          "bullets": [
+            "The shaded area is the angular impulse",
+            "Split it into triangles and rectangles"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Starting a potter's wheel",
+          "question": "A potter's wheel with a moment of inertia of 0.85 $\\text{kg m}^{2}$ starts at rest. Its motor's torque rises steadily from zero to 6.0 N m in 1.5 s and then stays at 6.0 N m for a further 2.5 s. Friction is negligible. Find (a) the angular impulse and (b) the wheel's final angular velocity.",
+          "hint": "Sketch the torque–time graph: the angular impulse is the area under it. Then use the link between angular impulse and the change in angular momentum.",
+          "steps": [
+            {
+              "text": "(a) Area: a triangle, then a rectangle.",
+              "latex": "\\tfrac{1}{2}(1.5)(6.0) + (2.5)(6.0) = 4.5 + 15"
+            },
+            {
+              "text": "Total angular impulse.",
+              "latex": "\\Delta L = 19.5 \\approx 20\\ \\text{N m s}"
+            },
+            {
+              "text": "(b) $\\Delta L = I\\Delta\\omega$, from rest.",
+              "latex": "\\omega = \\dfrac{19.5}{0.85} = 23\\ \\text{rad s}^{-1}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "energy",
+      "short": "Rotational kinetic energy",
+      "hl": true,
+      "guide": "The kinetic energy of rotational motion as given by $E_k = \\tfrac{1}{2}I\\omega^{2} = \\dfrac{L^{2}}{2I}$.",
+      "sections": [
+        "energy"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Calculate rotational kinetic energy using $E_k = \\tfrac{1}{2}I\\omega^{2} = \\dfrac{L^{2}}{2I}$.",
+        "Apply conservation of energy to bodies that roll without slipping."
+      ],
+      "challenge": "CC-A4-01",
+      "checks": [
+        "A4-012"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Kinetic energy of rotation",
+          "bullets": [
+            "A spinning body has kinetic energy even if its centre stays still: every part moves in a circle",
+            "Work done by a torque, $W = \\tau\\Delta\\theta$, changes the rotational kinetic energy",
+            "<strong>Rolling without slipping</strong>: the centre moves at $v = \\omega R$, and the body both translates and rotates",
+            [
+              "total $E_k = \\tfrac{1}{2}mv^{2} + \\tfrac{1}{2}I\\omega^{2}$"
+            ],
+            "Rolling down a slope, the lost gravitational potential energy is shared between the two",
+            "More mass far from the centre: more energy goes into spinning, so the body rolls more slowly"
+          ],
+          "notes": "Race a solid cylinder and a hollow tube of the same size down a ramp. Students usually predict the heavier one wins; the solid one wins whatever the masses."
+        },
+        {
+          "type": "equation",
+          "title": "Rotational kinetic energy",
+          "latex": "E_k = \\tfrac{1}{2}I\\omega^{2} = \\dfrac{L^{2}}{2I}",
+          "bullets": [
+            "Mirrors $E_k = \\tfrac{1}{2}mv^{2} = \\dfrac{p^{2}}{2m}$",
+            "In the data booklet"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Where the rotational kinetic energy comes from",
+          "start": "A rigid body rotates at angular velocity $\\omega$. Think of it as many small masses $m$, each at its own distance $r$ from the axis.",
+          "steps": [
+            {
+              "text": "Each small mass moves at $v = \\omega r$",
+              "latex": "E_k = \\sum \\tfrac{1}{2}mv^{2} = \\sum \\tfrac{1}{2}m\\omega^{2}r^{2}"
+            },
+            {
+              "text": "$\\omega$ is the same for every mass, so take it outside the sum",
+              "latex": "E_k = \\tfrac{1}{2}\\left(\\sum mr^{2}\\right)\\omega^{2}"
+            },
+            {
+              "text": "The sum is the moment of inertia",
+              "latex": "E_k = \\tfrac{1}{2}I\\omega^{2}"
+            },
+            {
+              "text": "Substitute $\\omega = L/I$",
+              "latex": "E_k = \\tfrac{1}{2}I\\dfrac{L^{2}}{I^{2}} = \\dfrac{L^{2}}{2I}"
+            }
+          ],
+          "notes": "The $L^{2}/2I$ form explains the skater: with $L$ constant, a smaller $I$ means a larger $E_k$. The extra energy is the work done pulling the arms in."
+        },
+        {
+          "type": "derivation",
+          "title": "Work done by a torque",
+          "start": "A constant force $F$ acts perpendicular to the radius at distance $r$ from the axis while the body turns through an angle $\\Delta\\theta$.",
+          "steps": [
+            {
+              "text": "The point where the force acts moves along an arc",
+              "latex": "\\Delta s = r\\Delta\\theta"
+            },
+            {
+              "text": "Work = force × distance moved in the direction of the force",
+              "latex": "W = F\\Delta s = Fr\\Delta\\theta"
+            },
+            {
+              "text": "$Fr$ is the torque",
+              "latex": "W = \\tau\\Delta\\theta"
+            }
+          ],
+          "notes": "Not in the data booklet. Dividing by time gives the power delivered by a torque, $P = \\tau\\omega$, the rotational version of $P = Fv$."
+        },
+        {
+          "type": "derivation",
+          "title": "Rolling down a slope",
+          "start": "A body of mass $m$, radius $R$ and moment of inertia $I$ rolls without slipping from rest down a slope, dropping a height $h$.",
+          "steps": [
+            {
+              "text": "Conservation of energy: no energy is lost, because the contact point is momentarily at rest",
+              "latex": "mgh = \\tfrac{1}{2}mv^{2} + \\tfrac{1}{2}I\\omega^{2}"
+            },
+            {
+              "text": "Rolling without slipping, $\\omega = v/R$",
+              "latex": "mgh = \\tfrac{1}{2}mv^{2} + \\tfrac{1}{2}\\dfrac{I}{R^{2}}v^{2}"
+            },
+            {
+              "text": "Solve for the speed at the bottom",
+              "latex": "v = \\sqrt{\\dfrac{2gh}{1 + I/(mR^{2})}}"
+            }
+          ],
+          "notes": "With $I = 0$ this gives the sliding result, $v = \\sqrt{2gh}$. For a sphere $I/(mR^{2}) = 0.4$, for a solid cylinder 0.5 and for a hoop 1: the order of a race down a ramp, whatever the masses and radii."
+        },
+        {
+          "type": "worked",
+          "title": "A flywheel energy store",
+          "question": "A flywheel is a uniform solid disc ($I = \\tfrac{1}{2}MR^{2}$) of mass 120 kg and radius 0.40 m. Find (a) its kinetic energy when it spins at 300 $\\text{rad s}^{-1}$ and (b) the average power it delivers if it slows to 150 $\\text{rad s}^{-1}$ in 20 s.",
+          "hint": "Find the moment of inertia first. The power is the kinetic energy given out divided by the time.",
+          "steps": [
+            {
+              "text": "Moment of inertia.",
+              "latex": "I = \\tfrac{1}{2}(120)(0.40)^{2} = 9.6\\ \\text{kg m}^{2}"
+            },
+            {
+              "text": "(a) Kinetic energy at 300 $\\text{rad s}^{-1}$.",
+              "latex": "E_k = \\tfrac{1}{2}(9.6)(300)^{2} = 4.3 \\times 10^{5}\\ \\text{J}"
+            },
+            {
+              "text": "(b) At 150 $\\text{rad s}^{-1}$, $E_k = 1.08 \\times 10^{5}$ J.",
+              "latex": "P = \\dfrac{4.32 \\times 10^{5} - 1.08 \\times 10^{5}}{20} = 1.6 \\times 10^{4}\\ \\text{W}"
+            }
+          ],
+          "notes": "Halving the angular velocity removes three quarters of the energy, because the energy depends on ω²."
+        },
+        {
+          "type": "worked",
+          "title": "A hoop rolling up a slope",
+          "question": "A hoop ($I = mR^{2}$) rolls without slipping along level ground at 2.5 $\\text{m s}^{-1}$ and then rolls up a slope. Air resistance is negligible. Find (a) the height it rises before stopping and (b) the height a block sliding at the same speed would reach on a frictionless slope.",
+          "hint": "Write the hoop's total kinetic energy, translational plus rotational, using $\\omega = v/R$. All of it becomes gravitational potential energy.",
+          "steps": [
+            {
+              "text": "(a) Total kinetic energy of the hoop.",
+              "latex": "E_k = \\tfrac{1}{2}mv^{2} + \\tfrac{1}{2}(mR^{2})\\left(\\dfrac{v}{R}\\right)^{2} = mv^{2}"
+            },
+            {
+              "text": "All of it becomes gravitational potential energy.",
+              "latex": "mgh = mv^{2}"
+            },
+            {
+              "text": "Solve for the height.",
+              "latex": "h = \\dfrac{v^{2}}{g} = \\dfrac{2.5^{2}}{9.8} = 0.64\\ \\text{m}"
+            },
+            {
+              "text": "(b) The block has only translational kinetic energy.",
+              "latex": "h = \\dfrac{v^{2}}{2g} = 0.32\\ \\text{m}"
+            }
+          ],
+          "notes": "The hoop rises twice as high: half of its kinetic energy is rotational, and that energy also lifts it. Mass and radius cancel."
+        }
+      ]
+    }
+  ]
+}

@@ -121,6 +121,7 @@
     });
     $('sl-all').addEventListener('click', () => { state.points = new Set(data.points.map((p) => p.id)); drawPoints(); update(); });
     $('sl-none').addEventListener('click', () => { state.points = new Set(); drawPoints(); update(); });
+    $('sl-sl').addEventListener('click', () => { state.points = new Set(data.points.filter((p) => !p.hl).map((p) => p.id)); drawPoints(); update(); });
     $('sl-download').addEventListener('click', download);
     loadTopic();
   }
@@ -135,6 +136,7 @@
     $('sl-tokq').innerHTML = tokQuestions.map((q, i) => `<option value="${i}">${esc(q)}</option>`).join('');
     $('sl-tokq').value = String(state.tokQ);
     paper2 = (qs || []).filter((q) => q.topic === state.topic && q.paper === '2');
+    $('sl-sl-wrap').hidden = !(data.points.some((p) => p.hl) && data.points.some((p) => !p.hl));
     drawPoints();
     drawHook();
     drawPaper2();
@@ -143,7 +145,7 @@
   }
   function drawPoints() {
     $('sl-points').innerHTML = data.points.map((p) => `<label class="sl-point"><input type="checkbox" data-point="${p.id}"${state.points.has(p.id) ? ' checked' : ''}>`
-      + `<span><strong>${esc(p.short)}</strong> <span class="sl-min">${minutesText(p.minutes)}</span><br><span class="sl-guide">${p.extra ? '<span class="tag">Not in the guide\'s A.1 list</span> ' : ''}${esc(p.guide)}</span></span></label>`).join('');
+      + `<span><strong>${esc(p.short)}</strong>${p.hl ? ' <span class="tag hl">HL</span>' : ''} <span class="sl-min">${minutesText(p.minutes)}</span><br><span class="sl-guide">${p.extra ? `<span class="tag">Not in the guide's ${esc(data.topic)} list</span> ` : ''}${esc(p.guide)}</span></span></label>`).join('');
   }
   // The hook: every concept challenge in the subtopic's theme, this subtopic's first
   function drawHook() {
@@ -192,6 +194,12 @@
   // the hook discussion: about 8 minutes, and 4 more for coming back to it at the end
   // plus about 10 minutes for a ToK discussion
   const talkMinutes = () => (state.types.has('c') && state.hookTalk && state.hook ? 12 : 0) + (state.types.has('t') && state.tokTalk && tokQuestions.length ? 10 : 0);
+  // "The guide gives 10 hours for A.2 (SL and HL), plus 2 hours of HL-only content."
+  function guideHours() {
+    const extra = data.points.some((p) => p.extra) ? ', not counting the extra point' : '';
+    if (!data.hours) return `The guide gives ${data.hlHours} hours for ${data.topic} (HL only)${extra}.`;
+    return `The guide gives ${data.hours} hours for ${data.topic}${data.hlHours ? ` (SL and HL), plus ${data.hlHours} hours of HL-only content` : ''}${extra}.`;
+  }
   function update() {
     const chosen = data.points.filter((p) => state.points.has(p.id));
     const total = chosen.reduce((s, p) => s + p.minutes, 0);
@@ -199,7 +207,7 @@
     const talk = chosen.length ? talkMinutes() : 0;
     const incl = [extra ? `about ${extra} min for the Paper 2 question${state.p2.size > 1 ? 's' : ''} (2 min a mark: answering, then the mark scheme)` : '', talk ? `about ${talk} min for the discussions (oracy)` : ''].filter(Boolean);
     $('sl-time').innerHTML = chosen.length
-      ? `Estimated teaching time: <strong>${minutesText(total + extra + talk)}</strong> for ${chosen.length} of ${data.points.length} points${incl.length ? `, including ${incl.join(' and ')}` : ''}. The guide gives ${data.hours} hours for ${data.topic}${data.points.some((p) => p.extra) ? ', not counting the extra point' : ''}.`
+      ? `Estimated teaching time: <strong>${minutesText(total + extra + talk)}</strong> for ${chosen.length} of ${data.points.length} points${incl.length ? `, including ${incl.join(' and ')}` : ''}. ${guideHours()}`
       : 'Tick at least one curriculum point.';
     document.querySelectorAll('.sl-sub').forEach((el) => { el.hidden = !state.types.has(el.dataset.for); });
     $('sl-tokq-box').hidden = !state.tokTalk || !tokQuestions.length;
@@ -450,6 +458,41 @@
   const LETTERS = 'ABCD';
   function chunk(list, n) { const out = []; for (let i = 0; i < list.length; i += n) out.push(list.slice(i, i + n)); return out; }
 
+  // A step's equation: 24 pt, or 20 pt when it is too wide for the space beside the step's text (7.7 in)
+  async function stepMath(latex) {
+    const eq = await displayMath(latex, 2400);
+    return eq.wIn * 1.08 > 7.7 ? displayMath(latex, 2000) : eq;
+  }
+  // Numbered steps over as many slides as they need: each step gets the height of its equation (or its text),
+  // at most five on a slide, and any spare height is shared out
+  function stepGroups(steps, stepsTop) {
+    const avail = 6.85 - stepsTop;
+    const need = (st) => Math.max(0.75, (st.eq?.hIn || 0) + 0.2, linesNeeded([st.text || ''], st.eq ? 5.0 : 11.0, 20) * 20 * 1.2 / 72 + 0.15);
+    const groups = [];
+    let cur = [], used = 0;
+    steps.forEach((st, i) => {
+      const h = need(st);
+      if (cur.length && (used + h > avail || cur.length === 5)) { groups.push(cur); cur = []; used = 0; }
+      cur.push({ ...st, n: i + 1, need: h }); used += h;
+    });
+    if (cur.length) groups.push(cur);
+    return groups.map((g) => {
+      const total = g.reduce((n, st) => n + st.need, 0);
+      const k = Math.min(1.4, avail / total);
+      return g.map(({ need: h, ...st }) => ({ ...st, h: h * k }));
+    });
+  }
+  // aims over as many slides as they need at 24 pt
+  function aimGroups(aims) {
+    const groups = [];
+    let cur = [];
+    for (const a of aims) {
+      if (cur.length && (cur.length === 6 || !fitSize([...cur, a], 10.0, 5.1, [2400]))) { groups.push(cur); cur = []; }
+      cur.push(a);
+    }
+    if (cur.length) groups.push(cur);
+    return groups;
+  }
   function allQuestions() {
     return get('../questions/index.json')
       .then((idx) => Promise.all((idx.files || idx).map((f) => optional(get(`../questions/${typeof f === 'string' ? f : f.file}`)))))
@@ -572,7 +615,14 @@
     status('Writing the title and aims…');
     slides.push({
       kind: 'title',
-      points: chosen.length > 6 ? paras(chosen.map((p) => p.short).join(' · '), { size: 2000, bullet: false }) : chosen.flatMap((p) => paras(p.short, { size: 2000 })),
+      // a list of up to six points; more run on in one paragraph, smaller if need be, or just their number if even that won't fit
+      ...(() => {
+        if (chosen.length <= 6) return { points: chosen.flatMap((p) => paras(p.short, { size: 2000 })) };
+        const line = chosen.map((p) => p.short).join(' · ');
+        const size = fitSize([line], 6.8, 2.8, [2000, 1800, 1600]);
+        return size ? { points: paras(line, { size, bullet: false }), pointsSize: size }
+          : { points: paras(`${chosen.length} curriculum points (listed in the speaker notes)`, { size: 2000, bullet: false }) };
+      })(),
       time: `Estimated teaching time: about ${minutesText(total)}`,
       notes: notes(`Curriculum points (IB DP Physics guide, ${data.topic}):`, ...chosen.map((p) => `• ${p.guide}`)),
     });
@@ -582,8 +632,9 @@
       if (hookSlides.talk) slides.push(hookSlides.talk);
     }
     if (t.has('a')) {
-      const aims = chosen.flatMap((p) => p.aims);
-      chunk(aims, 6).forEach((group, i, all) => slides.push({
+      // "(HL)" after HL aims, except in an HL-only subtopic, where every slide is HL
+      const aims = chosen.flatMap((p) => p.aims.map((a) => (p.hl && data.hours ? `${a} <strong>(HL)</strong>` : a)));
+      aimGroups(aims).forEach((group, i, all) => slides.push({
         kind: 'aims', title: all.length > 1 ? `Aims (${i + 1} of ${all.length})` : 'Aims',
         paras: group.flatMap((a) => paras(a)),
         notes: notes(i === 0 ? `By the end of these lessons, students should be able to do the following. Estimated teaching time: about ${minutesText(total)}.` : ''),
@@ -592,14 +643,22 @@
 
     for (const p of chosen) {
       status(`Writing "${p.short}"…`);
+      const first = slides.length;
       for (const s of p.slides || []) {
         if (s.type === 'bullets' && t.has('b')) {
           slides.push({ kind: 'content', title: s.title, paras: bulletParas(s.bullets), notes: notes(s.notes) });
         } else if (s.type === 'equation' && t.has('e')) {
           const list = [].concat(s.latex);
-          const eqs = [];
+          const rowH = list.length > 1 ? 2.0 / Math.ceil(list.length / 2) : 1.75;
+          let eqs = [];
           for (const l of list) eqs.push(await displayMath(l, list.length > 1 ? 2800 : 3200));
-          slides.push({ kind: 'equation', title: s.title, eqs, paras: bulletParas(s.bullets, 2200), notes: notes(s.notes) });
+          for (const sz of list.length > 1 ? [2200, 1900] : [2600, 2200]) {
+            if (!eqs.some((e) => e.hIn > rowH - 0.08)) break;
+            eqs = [];
+            for (const l of list) eqs.push(await displayMath(l, sz));
+          }
+          const size = fitSize((s.bullets || []).flat(), 11.4, 2.3, [2200, 2000, 1800]) || 1800;
+          slides.push({ kind: 'equation', title: s.title, eqs, size, paras: bulletParas(s.bullets, size), notes: notes(s.notes) });
         } else if (s.type === 'diagram' && t.has('d') && page) {
           const fig = await figureFromPage(page, s.figure);
           if (!fig) continue;
@@ -617,28 +676,27 @@
           const q = paras(s.question, { size: 2000, bullet: false });
           const stepsTop = 1.55 + linesNeeded([s.question], 12.13, 20) * 20 * 1.2 / 72 + 0.3;
           const steps = [];
-          for (const st of s.steps) steps.push({ paras: st.text ? paras(st.text, { size: 2000, bullet: false }) : [], eq: st.latex ? await displayMath(st.latex, 2400) : null });
-          const perSlide = Math.max(2, Math.min(4, Math.floor((6.85 - stepsTop) / 0.85)));
-          chunk(steps, perSlide).forEach((group, i, all) => slides.push({
+          for (const st of s.steps) steps.push({ text: st.text, paras: st.text ? paras(st.text, { size: 2000, bullet: false }) : [], eq: st.latex ? await stepMath(st.latex) : null });
+          stepGroups(steps, stepsTop).forEach((group, i, all) => slides.push({
             kind: 'worked', title: suffix(title, `solution${all.length > 1 ? ` (${i + 1} of ${all.length})` : ''}`),
-            question: q, questionSize: 2000, stepsTop, steps: group.map((st, k) => ({ ...st, n: i * perSlide + k + 1 })), notes: notes(s.notes),
+            question: q, questionSize: 2000, stepsTop, steps: group, notes: notes(s.notes),
           }));
         } else if (s.type === 'derivation' && t.has('r')) {
           // what we start from, then numbered steps (each a reason and an equation), like a worked solution
           const top = paras(s.start, { size: 2000, bullet: false });
           const stepsTop = 1.55 + linesNeeded([s.start], 12.13, 20) * 20 * 1.2 / 72 + 0.3;
           const steps = [];
-          for (const st of s.steps) steps.push({ paras: st.text ? paras(st.text, { size: 2000, bullet: false }) : [], eq: st.latex ? await displayMath(st.latex, 2400) : null });
-          const perSlide = Math.max(2, Math.min(4, Math.floor((6.85 - stepsTop) / 0.85)));
-          chunk(steps, perSlide).forEach((group, i, all) => slides.push({
+          for (const st of s.steps) steps.push({ text: st.text, paras: st.text ? paras(st.text, { size: 2000, bullet: false }) : [], eq: st.latex ? await stepMath(st.latex) : null });
+          stepGroups(steps, stepsTop).forEach((group, i, all) => slides.push({
             kind: 'derivation', title: all.length > 1 ? `${s.title} (${i + 1} of ${all.length})` : s.title,
-            question: top, questionSize: 2000, stepsTop, steps: group.map((st, k) => ({ ...st, n: i * perSlide + k + 1 })), notes: notes(s.notes),
+            question: top, questionSize: 2000, stepsTop, steps: group, notes: notes(s.notes),
           }));
         }
       }
       if (t.has('q')) {
         const pick = (p.checks || []).map((id) => questions.find((q) => q.id === id)).filter(Boolean)[0]
-          || questions.filter((q) => !q.diagram && p.sections.includes((q.sections || [])[0])).sort((a, b) => a.id.localeCompare(b.id))[0];
+          // an SL point gets an SL question; an HL point can have either
+          || questions.filter((q) => !q.diagram && (p.hl || q.level !== 'HL') && p.sections.includes((q.sections || [])[0])).sort((a, b) => a.id.localeCompare(b.id))[0];
         if (pick) {
           const image = pick.diagram ? await optional(questionFigure(pick.diagram, pick.diagramAlt)) : null;
           const texts = [...blocks(pick.stem), ...pick.options];
@@ -650,6 +708,7 @@
           slides.push({ kind, image, ...fit, title: 'Quick check: the answer', paras: [...stem, ...pick.options.map((_, i) => opt(i, i === pick.answer))], notes: notes(`Answer: ${LETTERS[pick.answer]}.`, pick.explanation) });
         }
       }
+      if (p.hl) for (let i = first; i < slides.length; i++) slides[i].hl = true; // every slide of an HL point gets the HL label
     }
 
     // near the end: the Paper 2 questions, then back to the hook
