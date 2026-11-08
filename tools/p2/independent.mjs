@@ -162,4 +162,37 @@ export const INDEPENDENT = {
     const mev = defect * 931.5;
     return { dm: defect, E: mev, N: L.value / (mev * 1.60e-13) };
   },
+  // Window: Fourier's law as power = conductivity × area × temperature gradient, with the gradient worked out in
+  // K per metre from the two surface temperatures (°C differences equal K differences) and the thickness in mm;
+  // energy over t days with 24 × 60 × 60 seconds in a day, in MJ.
+  'B1-P01': ({ A, d, Ti, To, k, t, kair }) => {
+    const gradient = (Ti.value - To.value) / (d.value / 1000); // K per metre
+    const watts = k.value * A.value * gradient;
+    const seconds = t.value * 24 * 60 * 60;
+    return { dT: Ti.value - To.value, P: watts, tsec: seconds, E: watts * seconds / 1e6, kratio: k.value / kair.value };
+  },
+  // Venus: the sunlight intercepted by the disc πR² and spread over the sphere 4πR², the reflected fraction removed;
+  // the fourth root taken by two square roots; the T⁴ ratio multiplied out; warmings as plain differences.
+  'B2-P01': ({ Iv, alpha, Tv, TEeq, TE }) => {
+    const sigma = 5.67e-8;
+    const R = 1; // any radius: it cancels
+    const absorbed = Iv.value * (1 - alpha.value) * Math.PI * R * R / (4 * Math.PI * R * R);
+    const Teq = Math.sqrt(Math.sqrt(absorbed / sigma));
+    const Teq2 = Number(Teq.toPrecision(2));
+    const quart = (x) => x * x * x * x;
+    return { Iabs: absorbed, Teq, ratio: quart(Tv.value) / quart(Teq), ratio2: quart(Tv.value) / quart(Teq2), dTv: Tv.value - Teq, dTE: TE.value - TEeq.value };
+  },
+  // Drill pack: a least-squares straight line through all five (I, V) readings gives the intercept (emf) and the
+  // gradient (−r); power to the drill from the fourth reading; internal dissipation I²r; short-circuit current ε/r.
+  'B5-P02': ({ I1, I2, I3, I4, I5, V1, V2, V3, V4, V5 }) => {
+    const xs = [I1, I2, I3, I4, I5].map((g) => g.value), ys = [V1, V2, V3, V4, V5].map((g) => g.value);
+    const n = xs.length;
+    const mx = xs.reduce((s, x) => s + x, 0) / n, my = ys.reduce((s, y) => s + y, 0) / n;
+    let sxy = 0, sxx = 0;
+    for (let i = 0; i < n; i++) { sxy += (xs[i] - mx) * (ys[i] - my); sxx += (xs[i] - mx) ** 2; }
+    const gradient = sxy / sxx;
+    const intercept = my - gradient * mx;
+    const r = -gradient;
+    return { eps: intercept, r, grad: gradient, P: V4.value * I4.value, Pint: I4.value * I4.value * r, Imax: intercept / r };
+  },
 };
