@@ -15,6 +15,7 @@ This folder (`physics-site`) is a static website for IB DP Physics students, hos
 1. **Start of every session:** run `git pull` before doing anything else. If it reports a conflict or error, stop and explain it simply before continuing.
 2. **Before every commit:** run `node tools/check.mjs` and fix any errors (✗). It checks the question files, links, page set-up and answer marking. GitHub runs it again after each push (`.github/workflows/check.yml`) and emails the user if it fails. Needs Node.js: if `node` isn't found, install it with `winget install OpenJS.NodeJS.LTS`.
 3. **End of every session, or whenever the user says they're done:** commit all changes with a clear message, then run `git push`. Confirm that the push worked.
+4. **Several sessions often work in this folder at once** (agreed 8 November 2026, after one session's commit swept up another's staged files). So: before `git commit`, run `git status` and stage only this task's files **by name** (never `git add -A`, `git add .` or `git commit -a`), and stage and commit in one go rather than leaving files staged. Before `git push`, show the user the commits and files about to go up and wait for a yes. If `git status` shows changes you didn't make, leave them alone: they belong to another session.
 - If `git` is not installed or the folder is not yet linked to GitHub, say so and help the user set it up.
 
 ## The source folder (physics-source)
