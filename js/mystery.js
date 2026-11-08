@@ -49,6 +49,7 @@
     S.pins = S.pins || {};
     S.clues = S.clues || {};
     S.asked = S.asked || {};
+    S.seen = S.seen || {};
     S.acc = S.acc || { tries: 0, done: false, suspect: '', cards: [], text: '', ticks: [] };
   }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* storage blocked: fine */ } }
@@ -59,7 +60,7 @@
       const res = await fetch(`mysteries/${caseId}.json`, { cache: 'no-cache' });
       if (!res.ok) throw new Error(res.status);
       C = await res.json();
-      const files = [...new Set(C.evidence.filter((e) => e.figure && e.figure.svg).map((e) => e.figure.svg))];
+      const files = [...new Set([...C.evidence.filter((e) => e.figure && e.figure.svg).map((e) => e.figure.svg), ...(C.scene ? [C.scene.svg] : [])])];
       await Promise.all(files.map(async (f) => {
         const r = await fetch('mysteries/' + f);
         svgs[f] = r.ok ? await r.text() : '';
@@ -183,10 +184,23 @@
     return `<details class="my-ev" data-ev="${ev.id}"${open ? ' open' : ''}><summary>${ev.title}</summary>
       <div class="my-ev-body">${ev.html}${figureHtml(ev.figure)}</div></details>`;
   }
+  // An optional crime-scene picture: numbered markers that open pieces of evidence (the case's "scene").
+  function sceneHtml() {
+    const sc = C.scene;
+    if (!sc) return '';
+    const svg = (svgs[sc.svg] || '').replace('<svg ', `<svg role="img" aria-label="${esc(sc.alt)}" `);
+    const spots = sc.spots.map((s, i) => {
+      const ev = C.evidence.find((x) => x.id === s.ev);
+      return `<button type="button" class="my-spot${S.seen[s.ev] ? ' seen' : ''}" style="left:${s.x}%;top:${s.y}%" data-act="spot" data-spot="${s.ev}"
+        aria-label="Evidence ${i + 1}: ${esc(ev.title)}">${i + 1}</button>`;
+    }).join('');
+    return `<figure class="diagram my-scene"><div class="my-scene-pic">${svg}${spots}</div><figcaption>${sc.caption}</figcaption></figure>`;
+  }
   function caseHtml() {
     return `<h2>Case file</h2>
+      ${sceneHtml()}
       <p>Everything the police collected. Open each item to read it.</p>
-      ${C.evidence.map((ev, i) => evidenceHtml(ev, i === 0)).join('')}
+      ${C.evidence.map((ev, i) => evidenceHtml(ev, i === 0 && !C.scene)).join('')}
       <p class="my-next"><button type="button" class="button small" data-go="suspects">Read the statements →</button></p>`;
   }
 
@@ -497,6 +511,14 @@
       ta.value = (ta.value.trim() ? ta.value.replace(/\s*$/, '\n\n') : '') + C.accusation.frame;
       S.acc.text = ta.value; save();
       ta.focus();
+    } else if (act === 'spot') {
+      S.seen[b.dataset.spot] = true;
+      save();
+      b.classList.add('seen');
+      const item = app.querySelector(`#panel-case .my-ev[data-ev="${b.dataset.spot}"]`);
+      item.open = true;
+      item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      item.querySelector('summary').focus({ preventScroll: true });
     } else if (act === 'board') {
       toggleBoard();
     } else if (act === 'print') {

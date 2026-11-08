@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics teacher notes: The crime scene at Fenwick Hall · Mr Silkstone's Physics</title>
+  <meta name="description" content="Teacher notes and answer key for the physics mystery The crime scene at Fenwick Hall: timing, set-up, where groups get stuck, differentiation and the full solution.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://physics.silkstone.xyz/teachers/mystery-fenwick.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics teacher notes: The crime scene at Fenwick Hall · Mr Silkstone's Physics">
+  <meta property="og:description" content="Teacher notes and answer key for the physics mystery The crime scene at Fenwick Hall: timing, set-up, where groups get stuck, differentiation and the full solution.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/teachers/mystery-fenwick.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tn-glance { width: 100%; border-collapse: collapse; }
+    .tn-glance th, .tn-glance td, .tn-table th, .tn-table td { text-align: left; vertical-align: top; padding: 6px 9px; border-bottom: 1px solid var(--border); }
+    .tn-glance th { width: 30%; }
+    .tn-table { width: 100%; border-collapse: collapse; }
+    .tn-key { border: 2px solid var(--bad); border-radius: var(--radius); padding: 0 16px; margin: 16px 0; background: var(--surface); }
+    .tn-key > summary { cursor: pointer; font-weight: 700; padding: 12px 0; }
+    .tn-plan li { margin: 6px 0; }
+    @media print {
+      #site-header, #site-footer, .page-back, .tn-print { display: none !important; }
+      .tn-key { border-width: 1px; }
+      h2, h3 { break-after: avoid; }
+      tr, .worked { break-inside: avoid; }
+    }
+  </style>
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+</head>
+<body data-root="../" data-section="teachers">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">← For teachers</a></p>
+    <h1>Teacher notes: The crime scene at Fenwick Hall</h1>
+    <p class="lead">How to run the physics mystery <a href="../mystery.html?case=fenwick">The crime scene at Fenwick Hall</a> with a class: timing, set-up, where groups get stuck and what to say, ways to make it easier or harder, and the full answer key.</p>
+    <p class="notice">This page isn't linked from any student page and is hidden from search engines and the site search, but it is public: a student who knows the address can open it. The answer key stays folded until you open it.</p>
+    <p class="tn-print"><button type="button" class="button ghost" onclick="window.print()">Print these notes (with the answer key)</button></p>
+
+    <nav class="toc" aria-label="Contents">
+      <ol>
+        <li><a href="#glance">At a glance</a></li>
+        <li><a href="#before">Before the lesson</a></li>
+        <li><a href="#plan">A lesson plan</a></li>
+        <li><a href="#how">How the game works</a></li>
+        <li><a href="#stuck">Where groups get stuck</a></li>
+        <li><a href="#adapt">Making it easier or harder</a></li>
+        <li><a href="#literacy">Literacy, oracy and NoS</a></li>
+        <li><a href="#key">Answer key</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="glance">1. At a glance</h2>
+    <table class="tn-glance">
+      <tbody>
+        <tr><th scope="row">The story</th><td>During a dinner party a professor is drugged and a wooden idol is stolen from her study. Everyone agrees that the window was smashed as the hall clock struck ten. Four suspects give statements. Students search a drawing of the crime scene, test the alibis with physics and write an accusation. (The thief is Julian Marsh, the dealer who sold the idol. The clock had been tampered with.)</td></tr>
+        <tr><th scope="row">Physics</th><td>All SL: A.2 friction with $F = ma$, and A.1 kinematics; C.1 period of a simple pendulum; C.3 Snell's law; E.3 half-life with a whole number of half-lives. Students need all of these taught first, so it suits DP2 better than the first case does.</td></tr>
+        <tr><th scope="row">Group size</th><td>3–4 students, one device per group. It also works for one student alone, and on phones.</td></tr>
+        <tr><th scope="row">Time</th><td>A strong, focused group: 30–35 minutes. A typical group sharing one device: 45–55 minutes. Plan a full 60-minute lesson with a debrief, or two shorter sessions.</td></tr>
+        <tr><th scope="row">Reading</th><td>About 1,600 words that students must read (story, statements, evidence and clue tasks), plus about 1,900 words of feedback, interviews and the ending: about 3,500 in all. That's a real load for EAL students (see <a href="#adapt">making it easier</a>).</td></tr>
+        <tr><th scope="row">Difficulty</th><td>A little harder than <a href="mystery-meteorite.html">The vanishing meteorite</a>. Each calculation is routine except the clock, and the real challenge is working in two kinds of time: what the clock showed and what the time really was.</td></tr>
+        <tr><th scope="row">Sensitive content</th><td>The plot depends on a drink being spiked with a sedative. The tone is mild and the professor recovers fully, but please decide whether this suits your class. If you use it, it may be worth saying so beforehand.</td></tr>
+        <tr><th scope="row">Accounts and data</th><td>None. Progress is saved only in the browser on that device; nothing is sent anywhere.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="before">2. Before the lesson</h2>
+    <ul>
+      <li><strong>Check each device.</strong> Open <a href="../mystery.html?case=fenwick">the case</a>. If it opens part-way through (another class used that computer), press <strong>Start again</strong>. Progress is saved in that browser only.</li>
+      <li><strong>Pre-teach a few words</strong> if your class needs it: <em>alibi, suspect, statement, sedative, long-case clock, pendulum, carbon dating, certificate, refund, unaccounted for, motive, red herring</em>.</li>
+      <li><strong>Decide on hints.</strong> They're always available. Hints and "show me the working" lower the group's detective rank; you can also ban them for strong groups.</li>
+      <li><strong>Printing (optional).</strong> The <strong>Print the case file</strong> button prints the story, the scene, statements, all the evidence and the four clue tasks, without answers. Paper can't mark answers, so use the <a href="#key">answer key</a> as you go round.</li>
+      <li><strong>On the board:</strong> <strong>Show on the board</strong> makes the case fill the screen in large text, good for showing the crime scene and for the debrief.</li>
+    </ul>
+
+    <h2 id="plan">3. A lesson plan (60 minutes)</h2>
+    <ol class="tn-plan">
+      <li><strong>0–5 min: the hook.</strong> Show the crime scene on the board and read the story aloud. Ask: "If everyone agrees what time something happened, could they all be wrong?"</li>
+      <li><strong>5–15 min: search the scene.</strong> Groups tap the numbered markers on the picture to open the evidence, then read the statements. Ask them to tap every sentence that makes a claim they could test with physics (this pins it to their notebook).</li>
+      <li><strong>15–40 min: the clues.</strong> Work through them together, or run a <strong>jigsaw</strong>, with each student in a group of four taking one clue and reporting back. Give the slow clock (clue 4, the hardest) to your strongest student and the Idol's age (clue 1, the easiest) to someone who needs a confident start. It works best if the clock comes last, as the numbering suggests: it turns the case upside down.</li>
+      <li><strong>40–50 min: the accusation.</strong> The Accuse tab opens once all four clues are solved. Each group chooses the thief, ticks the evidence that proves it, and writes 4–6 sentences. A wrong suspect gets an explanation and costs rank.</li>
+      <li><strong>50–60 min: debrief.</strong> Show "What really happened" on the board. Groups mark an accusation with the 6-point checklist, and compare ranks. Finish with the <a href="#literacy">discussion question</a>.</li>
+    </ol>
+    <p>Short of time? Set the reading (steps 1–2) as homework the night before, or let groups finish the accusation at home: their progress is saved on that device.</p>
+
+    <h2 id="how">4. How the game works</h2>
+    <ul>
+      <li><strong>The crime scene:</strong> at the top of the Case file tab, a drawing of the study and the lane has eight numbered markers. Each one opens a piece of evidence and turns green once visited. All 12 pieces of evidence are also listed below the picture, so nothing depends on tapping the markers.</li>
+      <li><strong>Each clue has four steps:</strong> the evidence for that clue; a typed calculation, marked automatically; a multiple-choice "What does this prove?"; then a short detective's note, which they can compare with our model note.</li>
+      <li><strong>Interviews:</strong> solving a clue unlocks one suspect's interview (three questions each). Several answers contain extra evidence, so encourage groups to read them.</li>
+      <li><strong>The accusation</strong> is locked until all four clues are solved.</li>
+      <li><strong>Detective rank:</strong> the group starts on 100 points. A hint costs 8, "show me the working" 15, each wrong typed answer 3 (at most 12 per clue), each wrong "What does this prove?" choice 5, and each wrong accusation 15. Chief Inspector 90+, Inspector 75+, Sergeant 55+, otherwise Constable.</li>
+      <li><strong>Free help:</strong> the <strong>Σ Equations</strong> button shows the data-booklet equations for the clue's topic.</li>
+    </ul>
+
+    <h2 id="stuck">5. Where groups get stuck, and what to say</h2>
+    <p>Questions to ask, rather than answers to give:</p>
+    <div class="table-wrap"><table class="tn-table">
+      <thead><tr><th scope="col">Sticking point</th><th scope="col">Try asking</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Clue 1 (Idol):</strong> halving once, or not seeing that 11 460 years is a whole number of half-lives.</td><td>"How many half-lives is that? What happens to the activity in each one?"</td></tr>
+        <tr><td><strong>Clue 1:</strong> thinking that a larger activity means an older object.</td><td>"As wood gets older, is there more or less carbon-14 left to decay?"</td></tr>
+        <tr><td><strong>Clue 2 (glass):</strong> dividing the angles instead of their sines, or a calculator in radians.</td><td>"What does Snell's law actually use?" "What should $\sin 30°$ give on your calculator?"</td></tr>
+        <tr><td><strong>Clue 3 (skid):</strong> looking for the car's mass in the answer.</td><td>"Write the friction force and $F = ma$ using symbols. What happens to $m$?"</td></tr>
+        <tr><td><strong>Clue 3:</strong> forgetting the speed is in $\text{m s}^{-1}$ when comparing it with 30 km/h.</td><td>"How do you turn km/h into $\text{m s}^{-1}$?"</td></tr>
+        <tr><td><strong>Clue 4 (clock), the hardest:</strong> finding 2.10 s and not knowing what to do next.</td><td>"Each swing takes 2.10 s, but how far does it move the hands?" "So for every 2.00 s shown on the clock face, how much real time has passed?"</td></tr>
+        <tr><td><strong>Clue 4:</strong> deciding that the clock runs fast.</td><td>"If each swing takes longer, does the clock get to ten o'clock sooner or later?"</td></tr>
+        <tr><td><strong>The timeline:</strong> mixing times from the clock with times from the logs.</td><td>"Which times here come from the hall clock, and which from a device that's known to be correct?" Suggest two columns.</td></tr>
+        <tr><td><strong>The accusation:</strong> naming Marsh, but saying only that the clock was wrong.</td><td>"How does the clock being wrong connect with the gate log? What exactly does his receipt prove now?"</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="adapt">6. Making it easier or harder</h2>
+    <h3>More support</h3>
+    <ul>
+      <li>Read the story and statements aloud, and pre-teach the vocabulary above.</li>
+      <li>Run the jigsaw, so each student does one calculation in depth.</li>
+      <li>Give a blank two-column timeline, headed "Hall clock" and "True time".</li>
+      <li>Allow hints freely, and point everyone to the writing frame for the accusation.</li>
+      <li>Accept a spoken accusation instead of a written one.</li>
+    </ul>
+    <h3>More challenge</h3>
+    <ul>
+      <li>No hints or "show me the working": aim for Chief Inspector.</li>
+      <li>Ask groups to spot the warning signs before clue 4. Dr Sato's clock reading and the emergency call record disagree, and so do Marsh's departure time and the gate log. Mr Marsh is also seen walking in at 22:08 by the clock, before his car came through the gate at 22:10:30.</li>
+      <li>Ask them to convert every clock reading in the case into true time, and to build the whole timeline themselves before the reveal.</li>
+      <li>Ask them to find the weak points. Is a simple pendulum a fair model of a clock pendulum? Does the skid calculation give a minimum speed? Why might the clock's error not be exactly constant?</li>
+      <li>Extension: groups design a fifth clue that would also expose him.</li>
+    </ul>
+
+    <h2 id="literacy">7. Literacy, oracy and the nature of science</h2>
+    <ul>
+      <li><strong>Close reading:</strong> pinning claims makes students read the statements as evidence. At the end the game tells them how many of the tested claims they pinned.</li>
+      <li><strong>Writing:</strong> the accusation is an extended "explain" answer, and the 6-point checklist works like a mark scheme.</li>
+      <li><strong>Oracy:</strong> in the debrief, ask groups to argue for the defence. What would Mr Marsh's lawyer say about each piece of evidence?</li>
+      <li><strong>NoS (Measurement; Evidence):</strong> several witnesses honestly agreed on a time that was wrong. Ask: <em>"How do we know that an instrument is telling the truth? What would you need to check before trusting one?"</em> Carbon dating makes a good second example: it depends on assuming what the activity was to begin with.</li>
+    </ul>
+
+    <h2 id="key">8. Answer key</h2>
+    <details class="tn-key">
+      <summary>Show the answer key (contains the solution)</summary>
+
+      <h3>The thief: Julian Marsh</h3>
+      <p>His alibi is that the glass broke at ten o'clock, while the gate log and his receipt show him off the estate. But he had lengthened the pendulum, so the clock was 12 minutes slow when it struck ten. The glass really broke at about 22:12, after his car had come back through the gate at 22:10:30.</p>
+
+      <h3>The clues</h3>
+      <div class="table-wrap"><table class="tn-table">
+        <thead><tr><th scope="col">Clue</th><th scope="col">Answer (accepted)</th><th scope="col">Working</th><th scope="col">What it proves</th></tr></thead>
+        <tbody>
+          <tr><td>1. The Idol's age (E.3)</td><td>0.0575 Bq per gram (0.056–0.059)</td><td>11 460 ÷ 5730 = 2 half-lives; $0.23 \div 4 = 0.0575$. The measured value is 0.225.</td><td><strong>Option C.</strong> The wood is far too young, so the Idol is a fake.</td></tr>
+          <tr><td>2. The glass on the coat (C.3)</td><td>1.52 (1.51–1.53)</td><td>$n = \sin 40.0° / \sin 25.0° = 0.643 / 0.423 = 1.52$.</td><td><strong>Option A.</strong> It matches the study window, contradicting Marsh. Reyes's sliver (1.58) matches the wine glass.</td></tr>
+          <tr><td>3. The skid marks (A.2)</td><td>14.3 m s⁻¹ (14.0–14.7)</td><td>$a = \mu_d g = 6.86$ m s⁻²; $u = \sqrt{2 \times 6.86 \times 15.0} = 14.3$ m s⁻¹, about 52 km/h. The mass cancels.</td><td><strong>Option C.</strong> He was going about 52 km/h as he braked, not 30 km/h.</td></tr>
+          <tr><td>4. The slow clock (C.1)</td><td>12 minutes (11.6–12.4)</td><td>$T = 2\pi\sqrt{1.095/9.8} = 2.10$ s; true time = clock time × 2.10/2.00 = 240 × 1.05 = 252 minutes, so 12 minutes behind.</td><td><strong>Option B.</strong> The glass really broke at about 22:12, after he had returned.</td></tr>
+        </tbody>
+      </table></div>
+      <p>Common wrong answers with their own feedback: clue 1: 0.115, 0.0288, 0.225; clue 2: 0.657, 1.6; clue 3: 205.8, 10.1, 51.6, 6.86; clue 4: 2.1, 252, 11.4, 0.05, 720, 24, 24.7.</p>
+
+      <h3>Why the others are innocent</h3>
+      <ul>
+        <li><strong>Tomas Reyes:</strong> a debt gives him a motive, and he has glass on his cuff, but it matches the wine glass (clue 2). Dr Sato and Rosa could see him on the west terrace when the glass broke.</li>
+        <li><strong>Dr Hana Sato:</strong> her article gives her a reason to fear the report (clue 1), but she was in the drawing room with Rosa when the glass was broken from outside.</li>
+        <li><strong>Rosa Ferreira:</strong> she made the cocoa and may lose her job, but the professor remembers Marsh bringing it in, and Rosa was with Dr Sato in the drawing room.</li>
+      </ul>
+
+      <h3>What really happened</h3>
+      <div class="table-wrap"><table class="tn-table">
+        <thead><tr><th scope="col">True time</th><th scope="col">Hall clock</th><th scope="col">Event</th><th scope="col">How students can know</th></tr></thead>
+        <tbody>
+          <tr><td>18:00</td><td>18:00</td><td>The professor sets the clock correctly and goes upstairs.</td><td>Clock record book; Rosa</td></tr>
+          <tr><td>Just after 18:00</td><td>Just after 18:00</td><td>Marsh fits the extension to the pendulum.</td><td>Clockmaker's report; Rosa's interview</td></tr>
+          <tr><td>21:09</td><td>21:00</td><td>Marsh carries the drugged cocoa to the study.</td><td>Rosa's statement and interview</td></tr>
+          <tr><td>21:51</td><td>21:40</td><td>Rosa unlocks the cupboard for his phone. He puts on his coat, takes the Idol and the report and hides them under the coat.</td><td>Marsh's statement; Rosa's interview</td></tr>
+          <tr><td>21:56:20</td><td>About 21:45</td><td>His car leaves through the gate.</td><td>Gate log</td></tr>
+          <tr><td>22:05:14</td><td>About 21:53</td><td>He buys a little petrol, after dumping the Idol and report in the bin behind the station.</td><td>Receipt; the ending</td></tr>
+          <tr><td>22:10:30</td><td>About 21:58</td><td>He skids to a stop at the gate and drives in.</td><td>Skid marks; gate log</td></tr>
+          <tr><td>About 22:12</td><td>22:00</td><td>The clock strikes ten and he smashes the window from outside.</td><td>Clue 4; statements</td></tr>
+          <tr><td>22:15:09</td><td>22:03</td><td>Dr Sato's emergency call.</td><td>Call record; her statement</td></tr>
+          <tr><td>About 22:20</td><td>22:08</td><td>Marsh walks in through the front door.</td><td>Dr Sato's statement</td></tr>
+          <tr><td>22:31:45</td><td>About 22:19</td><td>The police arrive.</td><td>Gate log</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Extra evidence in the interviews</h3>
+      <ul>
+        <li><strong>Dr Sato</strong> (after clue 1): she didn't know about the fake; Marsh already knew of the test and stopped eating when the result was announced; the evening "felt long".</li>
+        <li><strong>Mr Reyes</strong> (after clue 2): the terrace is on the opposite side of the house from the study; car doors behind the stables, just before the clock struck and a few minutes after.</li>
+        <li><strong>Rosa</strong> (after clue 3): Marsh carried the cocoa; he had the clock's case open just after six; he put his coat on before leaving, though he says that it stayed in his car.</li>
+        <li><strong>Mr Marsh</strong> (after clue 4): he can't account for the time between the gate and the front door, or for buying only 3.1 litres, or for the glass.</li>
+      </ul>
+
+      <h3>The claims the clues test (for the pinning score)</h3>
+      <ul>
+        <li>Mr Marsh: "…it is perfectly genuine…"; "I never went near the study after dinner."; "So when the glass broke at ten o'clock I was nowhere near the house…"; "…never above 30 kilometres an hour."</li>
+        <li>Mr Reyes: "The police found a sliver of glass on my shirt cuff…"</li>
+        <li>Dr Sato: "The clock was just striking ten when the glass broke…"; "…it was three minutes past ten."</li>
+        <li>Rosa: "That clock has never been more than a few seconds out…"</li>
+      </ul>
+
+      <h3>Evidence cards in the accusation</h3>
+      <ul>
+        <li><strong>Key evidence:</strong> the clock was 12 minutes slow; the gate log; the fragment in his sleeve.</li>
+        <li><strong>Supporting:</strong> the skid marks; Rosa seeing him at the clock; the fake Idol and refund; Mr Reyes's sliver matching the wine glass.</li>
+        <li><strong>Red herrings:</strong> Mr Reyes's debt; Rosa's job.</li>
+      </ul>
+
+      <h3>The accusation checklist (6 points)</h3>
+      <ol>
+        <li>Names Julian Marsh as the thief.</li>
+        <li>Uses the period of the lengthened pendulum to show that the clock was about 12 minutes slow.</li>
+        <li>Uses the gate log to show that he was back on the estate before the glass really broke.</li>
+        <li>Uses the refractive index to link him to the window.</li>
+        <li>Explains why at least one other suspect is cleared, with evidence.</li>
+        <li>Gives a physics reason each time, not just "it doesn't add up".</li>
+      </ol>
+    </details>
+  </main>
+  <footer id="site-footer"></footer>
+  <script>
+    // Printing opens the answer key, so the printed notes are complete.
+    window.addEventListener('beforeprint', () => document.querySelectorAll('details.tn-key').forEach((d) => { d.dataset.was = d.open ? '1' : ''; d.open = true; }));
+    window.addEventListener('afterprint', () => document.querySelectorAll('details.tn-key').forEach((d) => { d.open = !!d.dataset.was; }));
+  </script>
+</body>
+</html>

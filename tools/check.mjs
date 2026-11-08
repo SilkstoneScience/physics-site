@@ -433,6 +433,16 @@ for (const name of exists('mysteries') ? fs.readdirSync(path.join(ROOT, 'mysteri
       else if (/\sid="/.test(read(`mysteries/${ev.figure.svg}`)) || /<defs[\s>]/.test(read(`mysteries/${ev.figure.svg}`))) err(where, 'the picture contains an id or <defs>: it can appear twice on the page (case file and clue), so ids would clash');
     }
   }
+  if (M.scene) {
+    const where = `${rel} scene`;
+    if (!M.scene.alt) err(where, 'the scene picture has no alt text');
+    if (!M.scene.svg || !exists(`mysteries/${M.scene.svg}`)) err(where, `picture not found: mysteries/${M.scene.svg}`);
+    else if (/\sid="/.test(read(`mysteries/${M.scene.svg}`)) || /<defs[\s>]/.test(read(`mysteries/${M.scene.svg}`))) err(where, 'the picture contains an id or <defs>');
+    for (const s of M.scene.spots || []) {
+      if (!evidence.has(s.ev)) err(where, `marker points to unknown evidence "${s.ev}"`);
+      if (!(s.x >= 0 && s.x <= 100 && s.y >= 0 && s.y <= 100)) err(where, `marker for "${s.ev}" needs x and y between 0 and 100 (percent)`);
+    }
+  }
   const clues = new Set();
   for (const c of M.clues || []) {
     const where = `${rel} clue ${c.id}`;

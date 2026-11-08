@@ -128,7 +128,8 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Case 1, "The vanishing meteorite" (SL; A.1, B.1, B.5, C.2): four clues with typed answers, "what does this prove?" choices, detective's notes, interviews, and a written accusation checked against a model and a checklist. Rank from hints and wrong answers. Board view and a printable case file. Independent review done; the teacher's check still to do.
 - Checker rules for case files are in `tools/check.mjs` (2f).
 - Teacher notes and answer key: `teachers/mystery-meteorite.html` (hidden page, linked from the For teachers page), with a lesson plan, sticking points, differentiation and the full solution timeline.
-- Next: more cases (e.g. themes D and E, or an HL case), once the teacher has tried the first.
+- Case 2, "The crime scene at Fenwick Hall" (SL; A.2, C.1, C.3, E.3), waiting for the teacher's check: a tappable crime-scene picture (the optional `scene` in the case file) and a tampered pendulum clock. Teacher notes: `teachers/mystery-fenwick.html`.
+- Next: more cases (e.g. themes D and E, or an HL case), once the teacher has tried these.
 
 ## Newsroom, Explanation builder and word games (November 2026, waiting for the teacher's check)
 - On the Review games page. Newsroom: 5 articles (A, B.1/B.3, B.5, C/D, E), 5 errors each. Explanation builder: 17 SL questions. Word games: Forbidden words and crossword (61 terms), Odd one out (22 sets).

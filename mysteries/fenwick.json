@@ -1,0 +1,565 @@
+{
+  "id": "fenwick",
+  "title": "The crime scene at Fenwick Hall",
+  "topics": [
+    "A.2",
+    "C.1",
+    "C.3",
+    "E.3"
+  ],
+  "level": "SL",
+  "time": "30–50 minutes",
+  "summary": "A professor is drugged and a priceless carving vanishes during a dinner party. Search the crime scene, test four alibis, and find out why the clock matters.",
+  "intro": "<p>A wet Saturday night at Fenwick Hall. Professor Amara Voss has held a small dinner party at home, and her house rule is strict: <strong>every phone and watch goes into a locked cupboard in the hall</strong> until the evening is over. The only timepiece anyone can see is the tall clock in the hall.</p><p>Just as that clock <strong>struck ten</strong>, there was a crash of glass from the study. Hana Sato and Rosa Ferreira ran in and found the professor slumped over her desk, deeply asleep. (She had been drugged, and she made a full recovery in hospital.) The window was smashed, and the <strong>Fenwick Idol</strong>, a carved wooden figure said to be 11 460 years old, was gone.</p><p>The police are sure that no outsider was involved: the estate is walled, and the only way in for a car is the gate on the drive. One of the four people below did it. Search the scene, test their stories with physics, and make your accusation.</p>",
+  "scene": {
+    "svg": "diagrams/fenwick-study.svg",
+    "alt": "A sketch of the professor's study. On the left, a window with one pane smashed and broken glass on the floor beneath it. In the middle, a desk with a lamp, a mug and an empty torn envelope. To the right, a display cabinet with an empty stand, and a doorway showing the tall clock in the hall. Below, a separate strip shows two dark tyre marks in the lane, leading to a gate.",
+    "caption": "The crime scene, drawn by the first police officer to arrive. Not to scale. Tap a number to open that piece of evidence.",
+    "spots": [
+      {
+        "ev": "study",
+        "x": 14,
+        "y": 13
+      },
+      {
+        "ev": "glass",
+        "x": 21,
+        "y": 60
+      },
+      {
+        "ev": "cocoa",
+        "x": 47,
+        "y": 34
+      },
+      {
+        "ev": "report",
+        "x": 58,
+        "y": 39
+      },
+      {
+        "ev": "sale",
+        "x": 76,
+        "y": 12
+      },
+      {
+        "ev": "clock",
+        "x": 91,
+        "y": 7
+      },
+      {
+        "ev": "skid",
+        "x": 47,
+        "y": 80
+      },
+      {
+        "ev": "gate",
+        "x": 85,
+        "y": 77
+      }
+    ]
+  },
+  "suspects": [
+    {
+      "id": "marsh",
+      "name": "Julian Marsh",
+      "role": "Antiques dealer, guest",
+      "statement": [
+        "I sold the Idol to the professor myself, and it is perfectly genuine: I'd stake my reputation on it.",
+        "I never went near the study after dinner.",
+        "At about twenty to ten by the hall clock, Rosa unlocked the cupboard for my phone, and I drove off to buy petrol for the journey home.",
+        "So when the glass broke at ten o'clock I was nowhere near the house. The gate log and my receipt will prove it.",
+        "It's a dark, narrow lane, so I took it steadily both ways, never above 30 kilometres an hour.",
+        "I came back to find everyone in an uproar."
+      ],
+      "claims": [
+        0,
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "reyes",
+      "name": "Tomas Reyes",
+      "role": "The professor's nephew",
+      "statement": [
+        "Yes, I owe money. I've asked my aunt for help and she said no. That doesn't make me a thief.",
+        "After coffee I went out on the west terrace to look at the sky, now the rain had stopped.",
+        "I was out there when the clock struck ten and I heard the crash from the far side of the house.",
+        "The police found a sliver of glass on my shirt cuff, and that's easily explained: I knocked over a crystal wine glass at dinner and picked up the pieces."
+      ],
+      "claims": [
+        3
+      ]
+    },
+    {
+      "id": "sato",
+      "name": "Dr Hana Sato",
+      "role": "The professor's research assistant",
+      "statement": [
+        "I catalogued the Idol, and I wrote the article that made it famous, so my name is on it too.",
+        "At the professor's request I sent a splinter of it to the radiocarbon laboratory.",
+        "After coffee I sat in the drawing room with Rosa. Through the French windows we could see Mr Reyes on the terrace, under the lamp, and he was still out there when we heard the glass break.",
+        "The clock was just striking ten when the glass broke. We ran to the study together.",
+        "I telephoned for an ambulance and the police from the hall, and I looked at the clock as I dialled: it was three minutes past ten.",
+        "Mr Marsh walked in through the front door at eight minutes past ten by the same clock."
+      ],
+      "claims": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "ferreira",
+      "name": "Rosa Ferreira",
+      "role": "Housekeeper",
+      "statement": [
+        "I have looked after this house for thirty years, and last week the professor told me she may have to let me go.",
+        "I made the cocoa myself at nine o'clock, as I do every night.",
+        "After coffee I was sitting with Dr Sato in the drawing room, doing my mending.",
+        "That clock has never been more than a few seconds out in all my years here. The professor checks it herself against the radio, every evening at six."
+      ],
+      "claims": [
+        3
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "study",
+      "title": "Police notes: the study",
+      "html": "<p>One pane of the study window (on the <strong>east</strong> side of the house) is smashed, and almost all of the glass lies on the floor <strong>inside</strong> the room, so it was broken from outside. The ground below the window is gravel and shows no clear footprints.</p><p>The Idol's stand in the display cabinet is empty. The cabinet was not locked: the professor had shown the Idol to her guests that evening.</p><p>There were no signs of anyone else having been on the estate.</p><p>That night the police searched the house, the grounds and everyone there: neither the Idol nor the report was found.</p>"
+    },
+    {
+      "id": "cocoa",
+      "title": "The mug on the desk",
+      "html": "<p>The hospital and the police laboratory agree: the cocoa left in the mug contains a strong sedative. The professor would have been asleep within about twenty minutes of drinking it.</p>"
+    },
+    {
+      "id": "report",
+      "title": "The empty envelope, and the laboratory's copy",
+      "html": "<p>An empty envelope from the Brandon Radiocarbon Laboratory lay on the desk. The professor says she opened it at her desk but felt too sleepy to read it. Whatever was inside was taken. At dinner the professor had told her guests that the Idol's test result had arrived that day and that she would read it before bed. The laboratory gave the police its own copy:</p><table class='ev-table'><tbody><tr><th scope='row'>Sample</th><td>Wood splinter from the Fenwick Idol</td></tr><tr><th scope='row'>Carbon-14 activity of the sample</th><td>0.225 Bq per gram of carbon</td></tr><tr><th scope='row'>Carbon-14 activity of living wood</th><td>0.23 Bq per gram of carbon</td></tr><tr><th scope='row'>Half-life of carbon-14</th><td>5730 years</td></tr></tbody></table>"
+    },
+    {
+      "id": "sale",
+      "title": "The Idol's certificate of sale",
+      "html": "<div class='ev-letter'><p><strong>Marsh Antiquities</strong></p><p>Sold to Professor A. Voss: one carved wooden figure, recovered from peat. <strong>Age: 11 460 years.</strong> Price: £180 000.</p><p>I certify that this object is genuine, and I will refund the full price if it is ever shown not to be.</p><p>J. Marsh</p></div>"
+    },
+    {
+      "id": "clock",
+      "title": "The hall clock: a clockmaker's report",
+      "html": "<p>The police asked a clockmaker to examine the tall clock in the hall on Sunday morning.</p><div class='ev-plate'><p>MAKER'S PLATE</p><p>Seconds pendulum · length 0.993 m</p><p>Period of one full swing (there and back): 2.00 s</p></div><p><strong>Clockmaker's findings.</strong> A brass extension has recently been fitted to the pendulum rod, and the marks on it are fresh. The pendulum's length is now <strong>1.095 m</strong>. The rest of the clock is in perfect order. Its bell is loud enough to be heard all round the outside of the house. The clock works by counting swings: <strong>every full swing moves the hands on by 2.00 s</strong>, however long that swing really takes.</p><p>You can treat it as a simple pendulum. Take $g = 9.8$ $\\text{m s}^{-2}$.</p><div class='ev-letter'><p><strong>From the clock's record book, in the professor's writing:</strong> Saturday. Set at 18:00 exactly, by the radio time signal.</p></div>"
+    },
+    {
+      "id": "call",
+      "title": "Emergency call record",
+      "html": "<table class='ev-table'><tbody><tr><th scope='row'>Line</th><td>Fenwick Hall (landline in the hall)</td></tr><tr><th scope='row'>Call received</th><td>Saturday 22:15:09</td></tr><tr><th scope='row'>Caller</th><td>Dr H. Sato</td></tr></tbody></table><p>The emergency service's clock is checked automatically and is correct.</p>"
+    },
+    {
+      "id": "gate",
+      "title": "The automatic gate's log",
+      "html": "<p>A car must stop on a sensor strip for the gate to open. The log's clock is set by radio signal, and it is correct. These are all of the entries from 21:30 until the police arrived.</p><p>The gate is about 300 m down the drive from the house.</p><table class='ev-table'><thead><tr><th scope='col'>Time</th><th scope='col'>Direction</th><th scope='col'>Vehicle</th></tr></thead><tbody><tr><td>21:56:20</td><td>Out</td><td>Mr Marsh's car</td></tr><tr><td>22:10:30</td><td>In</td><td>Mr Marsh's car</td></tr><tr><td>22:31:45</td><td>In</td><td>Police</td></tr></tbody></table>"
+    },
+    {
+      "id": "receipt",
+      "title": "Mr Marsh's petrol receipt",
+      "html": "<div class='ev-receipt'><p>MILL LANE SERVICE STATION</p><p>Saturday 22:05:14</p><p>Unleaded, 3.1 litres ... 4.65</p><p>TOTAL ............... 4.65</p><p>Thank you!</p></div><p>The till's clock was checked and is correct. Mill Lane is 4.5 km from the gate, by the only road.</p>"
+    },
+    {
+      "id": "glass",
+      "title": "Glass found on clothing: laboratory report",
+      "html": "<p>The police collected the clothes the guests wore that evening. The laboratory found the sliver on Mr Reyes's shirt cuff and a fragment caught in the sleeve of Mr Marsh's overcoat, which he says stayed in his car. Glass can be identified by its refractive index.</p><table class='ev-table'><thead><tr><th scope='col'>Glass</th><th scope='col'>Refractive index</th></tr></thead><tbody><tr><td>Study window (sample from the broken pane)</td><td>1.52</td></tr><tr><td>The professor's crystal wine glasses</td><td>1.58</td></tr><tr><td>Sliver from Mr Reyes's cuff</td><td>1.58</td></tr><tr><td>Fragment from Mr Marsh's overcoat</td><td>to be calculated</td></tr></tbody></table><p>A narrow beam of light in air was aimed at a polished face of the coat fragment. <strong>Angle of incidence: 40.0°. Angle of refraction in the glass: 25.0°.</strong> The refractive index of air can be taken as 1.00.</p><p>The fragment's greenish tint also matches the broken pane, and none of the windows on Mr Marsh's car is broken.</p>"
+    },
+    {
+      "id": "skid",
+      "title": "Tyre marks in the lane",
+      "html": "<p>Two straight, dark skid marks, each <strong>15.0 m</strong> long, are scraped through the film of wet grit on the level lane outside the gate and end at the gate's sensor strip, where the car stopped. Heavy rain fell until 21:30, and it would have washed away any earlier marks, so these were made after that.</p><p>The tread pattern matches Mr Marsh's car, a saloon of mass 1500 kg, and it doesn't match the police car. The direction of the marks shows that the car was coming <strong>along the lane towards the gate</strong>, so it was arriving, not leaving.</p><p>The police road-tested the same stretch with the surface wetted to match that night: coefficient of dynamic friction between those tyres and the surface, $\\mu_d = 0.70$.</p>"
+    },
+    {
+      "id": "debt",
+      "title": "A letter to Mr Reyes",
+      "html": "<div class='ev-letter'><p>Dear Mr Reyes,</p><p>We note that your loan of £12 000 is now three months overdue. Please contact us within seven days.</p><p>Yours faithfully,<br>Northern Credit Ltd</p></div><p>Found in the pocket of Mr Reyes's jacket.</p>"
+    },
+    {
+      "id": "notice",
+      "title": "A note on the kitchen table",
+      "html": "<div class='ev-letter'><p>Rosa, I'm so sorry. The roof has cost far more than I expected, and I may not be able to keep you on after the summer. Let us talk properly next week.</p><p>A.V.</p></div>"
+    }
+  ],
+  "clues": [
+    {
+      "id": "idol",
+      "number": 1,
+      "title": "The Idol's age",
+      "topic": "E.3",
+      "section": "halflife",
+      "evidence": [
+        "report",
+        "sale"
+      ],
+      "task": "<p>The certificate says that the Idol is 11 460 years old. <strong>Calculate</strong> the carbon-14 activity, per gram of carbon, that a sample of wood of that age should have.</p>",
+      "numeric": {
+        "answer": 0.0575,
+        "unit": "Bq per gram of carbon",
+        "range": [
+          0.056,
+          0.059
+        ],
+        "mistakes": [
+          {
+            "value": 0.115,
+            "feedback": "That's the activity after one half-life. How many half-lives is 11 460 years?"
+          },
+          {
+            "value": 0.0288,
+            "feedback": "That's three halvings. Work out how many half-lives 11 460 years is."
+          },
+          {
+            "value": 0.225,
+            "feedback": "That's what the laboratory measured. What should it be if the certificate is right?"
+          }
+        ]
+      },
+      "hint": "Divide the age by the half-life to find the number of half-lives. The activity halves in every half-life, starting from the activity of living wood.",
+      "working": "<p>Number of half-lives = 11 460 ÷ 5730 = 2.</p><p>Activity = $0.23 \\times \\left(\\tfrac{1}{2}\\right)^2 = 0.23 \\div 4 =$ <strong>0.0575 Bq per gram of carbon</strong>.</p>",
+      "prove": {
+        "question": "The laboratory measured 0.225 Bq per gram. What does this tell you?",
+        "options": [
+          "The Idol is genuine, because 0.225 and 0.0575 are both small activities.",
+          "The Idol is about four times older than the certificate says, because its activity is about four times larger.",
+          "The wood is far too young: its activity is almost the same as living wood's, so the Idol is a fake.",
+          "We can't tell, because the decay of each nucleus is random."
+        ],
+        "answer": 2,
+        "feedback": [
+          "Size alone isn't the test. The measured activity is about four times what a real 11 460-year-old piece of wood would have.",
+          "A higher activity means less decay, so younger wood, not older.",
+          "",
+          "Each nucleus decays at random, but a sample contains so many nuclei that its activity falls in a very predictable way."
+        ]
+      },
+      "notePrompt": "What does the result show, and who was in trouble if it came out?",
+      "modelNote": "If the Idol were 11 460 years old (two half-lives) its activity would be about 0.058 Bq per gram, but it is 0.225 Bq per gram, almost the same as living wood. It is a modern fake. Julian Marsh sold it and guaranteed a full refund of £180 000, and Dr Sato's article about it would be embarrassing, so both had a reason to fear the report."
+    },
+    {
+      "id": "shard",
+      "number": 2,
+      "title": "The glass on the coat",
+      "topic": "C.3",
+      "section": "refraction",
+      "evidence": [
+        "glass",
+        "study"
+      ],
+      "task": "<p><strong>Calculate</strong> the refractive index of the glass fragment found in the sleeve of Mr Marsh's overcoat.</p>",
+      "numeric": {
+        "answer": 1.521,
+        "unit": "(no unit)",
+        "range": [
+          1.51,
+          1.53
+        ],
+        "mistakes": [
+          {
+            "value": 0.657,
+            "feedback": "You've got the ratio upside down. Light slows down and bends towards the normal in glass, so the index of glass must be greater than 1."
+          },
+          {
+            "value": 1.6,
+            "feedback": "Snell's law uses the sines of the angles, not the angles themselves."
+          }
+        ]
+      },
+      "hint": "Use Snell's law, $n_1 \\sin\\theta_1 = n_2 \\sin\\theta_2$, with medium 1 as air. Check that your calculator is in degrees.",
+      "working": "<p>$1.00 \\times \\sin 40.0° = n \\times \\sin 25.0°$</p><p>$n = \\dfrac{\\sin 40.0°}{\\sin 25.0°} = \\dfrac{0.643}{0.423} =$ <strong>1.52</strong>.</p>",
+      "prove": {
+        "question": "What does this tell you?",
+        "options": [
+          "The fragment matches the study window, which contradicts Mr Marsh's story. Mr Reyes's sliver fits his.",
+          "The fragment matches the wine glasses, so Mr Marsh must have helped Mr Reyes to pick up the broken glass at dinner.",
+          "Both pieces of glass match the window, so Mr Marsh and Mr Reyes were working together.",
+          "It proves nothing, because all glass has a refractive index of about 1.5."
+        ],
+        "answer": 0,
+        "feedback": [
+          "",
+          "The wine glasses have a refractive index of 1.58, and the fragment's is 1.52. Check it against the table.",
+          "Mr Reyes's sliver has a refractive index of 1.58, the same as the wine glasses, not the window.",
+          "The laboratory's table shows that these two kinds of glass can be told apart: 1.52 and 1.58 are clearly different."
+        ]
+      },
+      "notePrompt": "Why is the glass a problem for one suspect but not for the other? What's still puzzling?",
+      "modelNote": "The coat fragment has a refractive index of 1.52, matching the study window, so Mr Marsh's coat was near that window when it broke. Mr Reyes's sliver is 1.58, which fits the wine glass he broke at dinner. The puzzle is that the gate log seems to put Mr Marsh outside the estate at ten o'clock."
+    },
+    {
+      "id": "brake",
+      "number": 3,
+      "title": "The skid marks",
+      "topic": "A.2",
+      "section": "contact",
+      "evidence": [
+        "skid",
+        "gate",
+        "receipt"
+      ],
+      "task": "<p>Mr Marsh says he never drove above 30 kilometres an hour. Assume that the wheels were locked for the whole skid and that friction was the only horizontal force. <strong>Calculate</strong> the speed of his car at the start of the skid marks.</p>",
+      "numeric": {
+        "answer": 14.3,
+        "unit": "$\\text{m s}^{-1}$",
+        "range": [
+          14,
+          14.7
+        ],
+        "mistakes": [
+          {
+            "value": 205.8,
+            "feedback": "That's $v^2$. Take the square root to find the speed."
+          },
+          {
+            "value": 10.1,
+            "feedback": "Check $v^2 = u^2 + 2as$: don't forget the 2."
+          },
+          {
+            "value": 51.6,
+            "feedback": "That's the speed in kilometres per hour. Give it in metres per second."
+          },
+          {
+            "value": 6.86,
+            "feedback": "That's the size of the deceleration, in $\\text{m s}^{-2}$. Now use a kinematics equation to find the speed."
+          }
+        ]
+      },
+      "hint": "The friction force is $F_f = \\mu_d F_N$, and on a level road $F_N = mg$. Use $F = ma$ to find the deceleration (does the mass matter?). Then use $v^2 = u^2 + 2as$, with the car's final speed equal to zero.",
+      "working": "<p>Friction: $F_f = \\mu_d mg$, so $a = \\dfrac{F_f}{m} = \\mu_d g = 0.70 \\times 9.8 = 6.86$ $\\text{m s}^{-2}$. The mass cancels.</p><p>From $v^2 = u^2 + 2as$ with $v = 0$: $u = \\sqrt{2 \\times 6.86 \\times 15.0} = \\sqrt{205.8} =$ <strong>14.3 $\\text{m s}^{-1}$</strong>, about 52 km/h.</p>",
+      "prove": {
+        "question": "30 km/h is about 8.3 $\\text{m s}^{-1}$. What does this tell you?",
+        "options": [
+          "Nothing, because a heavier car would skid further, and we don't know exactly how heavy his car was on the night.",
+          "His story is true: skid marks always make a car seem to be going faster than it was.",
+          "He was going about 52 km/h as he braked, so he's lying about driving steadily: he was in a hurry to get back to the house.",
+          "He was going about 14 km/h, well within what he said."
+        ],
+        "answer": 2,
+        "feedback": [
+          "The mass cancels: a heavier car has more friction but also more inertia, so the deceleration is the same.",
+          "The calculation gives his speed at the start of the marks. If anything he was going faster before that, because he began braking before the wheels locked.",
+          "",
+          "14.3 is in metres per second. Multiply by 3.6 to get kilometres per hour."
+        ]
+      },
+      "notePrompt": "Compare the speed with his statement, and look at the times in the receipt and the gate log. What do they suggest?",
+      "modelNote": "The skid marks show that he was doing about 14 $\\text{m s}^{-1}$ (52 km/h), not 30 km/h. The receipt and gate log agree: 4.5 km in at most 5 minutes 16 s is an average of at least 51 km/h. He hurried back, and he lied about it."
+    },
+    {
+      "id": "pendulum",
+      "number": 4,
+      "title": "The slow clock",
+      "topic": "C.1",
+      "section": "systems",
+      "evidence": [
+        "clock",
+        "call",
+        "gate"
+      ],
+      "task": "<p>The professor set the clock correctly at 18:00, and the pendulum's extension was fitted very soon afterwards. <strong>Calculate</strong> how many minutes behind the true time the clock was when it struck ten (22:00 on the clock face).</p>",
+      "numeric": {
+        "answer": 12,
+        "unit": "minutes",
+        "range": [
+          11.6,
+          12.4
+        ],
+        "mistakes": [
+          {
+            "value": 2.1,
+            "feedback": "That's the new period, in seconds. Now find how much slower than 2.00 s it is, and what that does over 240 minutes on the clock face."
+          },
+          {
+            "value": 252,
+            "feedback": "That's the true time passed since 18:00, in minutes. How far behind does that leave the clock?"
+          },
+          {
+            "value": 11.4,
+            "feedback": "Careful with the direction. The clock face shows 240 minutes, and the true time is longer than that by a factor of (new period ÷ 2.00 s). So multiply 240 by that factor."
+          },
+          {
+            "value": 0.05,
+            "feedback": "That's the fraction by which each swing is too long. Apply it to the 240 minutes shown on the clock face."
+          },
+          {
+            "value": 720,
+            "feedback": "That's the delay in seconds. The question asks for minutes."
+          },
+          {
+            "value": 24,
+            "feedback": "You've multiplied 240 by the extra 0.10 s per swing, but 240 is the number of minutes, not the number of swings. Compare the two periods as a ratio."
+          },
+          {
+            "value": 24.7,
+            "feedback": "The length is about 10% greater, but the period depends on the square root of the length, so it isn't 10% greater."
+          }
+        ]
+      },
+      "hint": "Find the new period with $T = 2\\pi\\sqrt{l/g}$. Each swing still moves the hands on by only 2.00 s, however long it takes. So from 18:00 to 22:00 on the face (240 minutes of swings), the true time is 240 minutes × (new period ÷ 2.00 s).",
+      "working": "<p>New period: $T = 2\\pi\\sqrt{\\dfrac{1.095}{9.8}} = 2.10$ s.</p><p>Each swing takes 2.10 s but moves the hands on by 2.00 s, so true time = clock time × $\\dfrac{2.10}{2.00} = 1.05 \\times$ clock time.</p><p>From 18:00 to 22:00 on the face is 240 minutes, so the true time passed = $240 \\times 1.05 = 252$ minutes. The clock was <strong>12 minutes</strong> behind: the true time was about 22:12.</p>",
+      "prove": {
+        "question": "What does this do to the alibi that depends on ten o'clock?",
+        "options": [
+          "Nothing: the clock's error is too small to matter, as the glass still broke at about ten.",
+          "The glass really broke at about 22:12, after Mr Marsh's car came back through the gate.",
+          "The clock was running fast, so the glass broke at about 21:48, before Mr Marsh left.",
+          "The emergency call at 22:15 proves that the clock was correct."
+        ],
+        "answer": 1,
+        "feedback": [
+          "Twelve minutes matters a great deal here: compare 22:12 with the gate log.",
+          "",
+          "A longer pendulum has a longer period, so the clock runs slow, not fast.",
+          "Dr Sato saw 22:03 on the clock when she dialled, but the call was logged at 22:15:09, about twelve minutes later. That confirms the calculation: it doesn't contradict it."
+        ]
+      },
+      "notePrompt": "How does the slow clock change what Mr Marsh's receipt and gate log really prove?",
+      "modelNote": "The clock was 12 minutes slow at ten o'clock, so the glass broke at about 22:12. The gate log puts Mr Marsh back on the estate at 22:10:30, before the glass broke. His receipt at 22:05 proves only that he was at the petrol station seven minutes before. The emergency call time (22:15:09, when the clock said 22:03) confirms the error."
+    }
+  ],
+  "interviews": [
+    {
+      "suspect": "sato",
+      "after": "idol",
+      "questions": [
+        {
+          "q": "Did you know that the Idol was a fake?",
+          "a": "No, and I feel sick about it. I catalogued what I was told. I've already written to the journal to withdraw my article."
+        },
+        {
+          "q": "Who knew that the test result had arrived?",
+          "a": "Everyone at the table: the professor announced it over the soup. Mr Marsh already knew that a splinter had gone off for testing, but when she said that the result had come, he stopped eating."
+        },
+        {
+          "q": "Did the evening seem strange to you?",
+          "a": "It felt long, somehow. I remember thinking that the clock must be wrong, but with no phones, how would I know?"
+        }
+      ]
+    },
+    {
+      "suspect": "reyes",
+      "after": "shard",
+      "questions": [
+        {
+          "q": "Could anyone see you on the terrace?",
+          "a": "Dr Sato and Rosa, through the French windows. I waved at them. The terrace is on the west side, and the study is on the east, with the whole house between."
+        },
+        {
+          "q": "Did you hear anything else?",
+          "a": "A car door shut behind the stables just before the clock struck, and another a few minutes after the crash. It seemed odd, since nobody parks there."
+        },
+        {
+          "q": "Do you want the money your aunt has?",
+          "a": "I want to pay my debts. I also want my aunt to wake up, and she has. Check my pockets all you like."
+        }
+      ]
+    },
+    {
+      "suspect": "ferreira",
+      "after": "brake",
+      "questions": [
+        {
+          "q": "Who carried the cocoa to the professor?",
+          "a": "Mr Marsh offered to. He took the tray from me in the hall at nine by the clock. Such nice manners, I thought. The professor remembers him bringing it in."
+        },
+        {
+          "q": "Did you see anyone near the hall clock?",
+          "a": "Just after six, when the professor had set it and gone up to change, Mr Marsh had the case door open. He told me that he collects old clocks."
+        },
+        {
+          "q": "Where did you put the coats?",
+          "a": "On the hall stand, all of them. At about twenty to ten by the clock I unlocked the phone cupboard for Mr Marsh. He took his coat down and he had it on when I went back to my mending."
+        }
+      ]
+    },
+    {
+      "suspect": "marsh",
+      "after": "pendulum",
+      "questions": [
+        {
+          "q": "The gate shows you back at 22:10:30. You walked in at about 22:20. Where were you?",
+          "a": "I sat in the car and listened to the end of a programme on the radio. Is that a crime?"
+        },
+        {
+          "q": "Why drive out for only 3.1 litres of petrol?",
+          "a": "It was enough to get me home. I don't see that it's anybody's business."
+        },
+        {
+          "q": "How did the window glass get onto your coat?",
+          "a": "I've no idea. Glass gets everywhere. I want to speak to my solicitor now."
+        }
+      ]
+    }
+  ],
+  "accusation": {
+    "culprit": "marsh",
+    "wrong": {
+      "reyes": "Mr Reyes has a motive, and glass on his cuff, but the sliver's refractive index of 1.58 matches the wine glass, not the window (clue 2). Dr Sato and Rosa could see him on the west terrace when the glass broke, with the whole house between him and the study.",
+      "sato": "Dr Sato's article gave her a reason to fear the report (clue 1), but she was in the drawing room with Rosa when the glass broke, and it was broken from outside. Her careful note of the time is what exposes the clock.",
+      "ferreira": "Rosa made the cocoa and was about to lose her job, but the professor remembers Mr Marsh bringing it in, and Rosa was in the drawing room with Dr Sato, watching Mr Reyes on the terrace, when the glass was broken from outside."
+    },
+    "cards": [
+      {
+        "text": "The clock was 12 minutes slow at ten o'clock, so the glass really broke at about 22:12.",
+        "use": "key",
+        "why": "This destroys the alibi."
+      },
+      {
+        "text": "The gate log puts Mr Marsh's car back on the estate at 22:10:30.",
+        "use": "key",
+        "why": "Once the clock is corrected, he was on the estate before the glass broke."
+      },
+      {
+        "text": "The fragment in his coat sleeve has a refractive index of 1.52, matching the study window.",
+        "use": "key",
+        "why": "It links him to the window, although he said that he never went near it."
+      },
+      {
+        "text": "The skid marks show that he was doing about 52 km/h, not 30 km/h.",
+        "use": "support",
+        "why": "It shows that he lied and hurried back, but fast driving alone doesn't put him at the window."
+      },
+      {
+        "text": "Rosa saw Mr Marsh with the clock's case door open just after six.",
+        "use": "support",
+        "why": "It puts him at the clock at the right time, but only on one witness's word."
+      },
+      {
+        "text": "The Idol's activity shows it is a modern fake, and Mr Marsh had guaranteed a refund of £180 000.",
+        "use": "support",
+        "why": "A strong motive, which supports the case but doesn't prove it alone."
+      },
+      {
+        "text": "The sliver on Mr Reyes's cuff matches the wine glass.",
+        "use": "support",
+        "why": "It clears up a misleading clue, but it doesn't point to the thief."
+      },
+      {
+        "text": "Mr Reyes owed £12 000.",
+        "use": "no",
+        "why": "A motive for someone who was in plain sight when the glass broke. A red herring."
+      },
+      {
+        "text": "Rosa might lose her job.",
+        "use": "no",
+        "why": "A reason to be unhappy, but she was in the drawing room and didn't carry the tray. A red herring."
+      }
+    ],
+    "frame": "The thief was … because … .\nThe alibi fails because the [evidence] shows that … .\nThe physics shows that … , and since … , this means … .\nThe other suspects could not have done it because … .",
+    "model": "<p>Julian Marsh stole the Idol. His alibi was that the glass broke at ten o'clock, while the gate log and his receipt showed him off the estate. But the pendulum had been lengthened to 1.095 m, giving a period of 2.10 s, so the clock lost 12 minutes between 18:00 and 22:00 on its face. The glass really broke at about 22:12, and the emergency call at 22:15:09, when the clock read 22:03, confirms this. His car had come back through the gate at 22:10:30, before the glass broke.</p><p>The fragment in his coat has a refractive index of 1.52, matching the window and not the wine glasses, though he said that he never went near the study. His skid marks show about 14 $\\text{m s}^{-1}$ (52 km/h), not the 30 km/h he claimed. His motive was that the Idol's activity of 0.225 Bq per gram, close to living wood's, shows it is a recent fake, and he had guaranteed a full refund. Mr Reyes, Dr Sato and Rosa could all see or be seen by each other when the glass broke.</p>",
+    "solution": "<p>Julian Marsh knew that the Idol he had sold was a fake, and the professor had told him that a splinter had gone off for testing. He came to dinner prepared. Just after 18:00 on Saturday, once the professor had set the hall clock and gone upstairs, he fitted an extension to its pendulum so that the clock would lose time. At nine by the clock (21:09 by true time) he carried the professor's cocoa to the study, with a sedative in it. At about twenty to ten by the clock (21:51 by true time), with the professor long asleep, he had Rosa unlock the cupboard for his phone, put on his coat, slipped into the study and hid the Idol and the report under the coat.</p><p>He passed the gate at 21:56:20 and drove to Mill Lane, where he pushed the Idol and the report, wrapped in a bag, into the waste bin behind the station. The police later found them there. With the Idol gone, nobody could test it again, and he could claim that the splinter had come from a later repair, so he would never have to pay the refund. He bought a little petrol to get a receipt showing the true time. He raced back because he had to be under the window before the clock struck: he braked hard at the gate at 22:10:30, parked behind the stables and walked round to the study's east window. His phone told him that the strike was due at about 22:12. When the clock began to strike ten he smashed a pane from outside, so that everyone would swear the crime happened at ten o'clock, while he was 'provably' away. Then he went back to his car, drove round to the front, and walked in at about 22:20. He meant to take the extension off and put the hands right as soon as the hall was empty, but Dr Sato was at the telephone and then the police arrived, so the clock was still slow when the clockmaker opened it.</p>",
+    "checklist": [
+      "Names Julian Marsh as the thief.",
+      "Uses the period of the lengthened pendulum to show that the clock was about 12 minutes slow.",
+      "Uses the gate log to show that he was back on the estate before the glass really broke.",
+      "Uses the refractive index to link him to the window.",
+      "Explains why at least one other suspect is cleared, with evidence.",
+      "Gives a physics reason each time, not just \"it doesn't add up\"."
+    ]
+  }
+}
