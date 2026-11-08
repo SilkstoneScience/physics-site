@@ -134,6 +134,7 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 ## Newsroom, Explanation builder and word games (November 2026, waiting for the teacher's check)
 - On the Review games page. Newsroom: 5 articles (A, B.1/B.3, B.5, C/D, E), 5 errors each. Explanation builder: 17 SL questions. Word games: Forbidden words and crossword (61 terms), Odd one out (22 sets).
 - Checker rules are in `tools/check.mjs` (2e-games). Next: more articles and HL items, once the teacher has tried them.
+- Estimation challenges (`estimate.html`), 10 SL items, waiting for the teacher's check. Choose your own adventure ("Mission log") is still to build, in stages: outline, first chapter, the rest, check and publish.
 
 ## Grouped main menu (8 November 2026, waiting for the teacher's check)
 - The nine flat menu items became seven groups, each a link to its hub page with a dropdown: Notes (themes A–E, Physics skills), Practise (question bank, review games, concept challenges and big questions), Exams (exam tips, both exam-copy data booklets), Experimental (practicals, CSP, IA, Extended essay), Resources (lesson slides, annotated data booklet, videos, software and tools, simulations, Science news), For teachers (slide generator, revision sheet builder) and About (about me, contact, copyright). Review games, Think deeper and For teachers are now in the menu; the home page is unchanged.

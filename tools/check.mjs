@@ -373,6 +373,25 @@ if (exists('explain/items.json')) {
     if (!Number.isInteger(q.marks) || q.marks < 1) err(where, 'marks must be a whole number');
   }
 }
+if (exists('estimate/items.json')) {
+  const rel = 'estimate/items.json';
+  let items = [];
+  try { items = JSON.parse(read(rel)); } catch (e) { err(rel, "isn't valid JSON: " + e.message); }
+  const ids = new Set();
+  for (const q of items) {
+    const where = rel + ' ' + q.id;
+    if (!/^ES-[A-E]\d-\d\d$/.test(q.id || '')) err(where, 'id must look like ES-A1-01');
+    if (ids.has(q.id)) err(where, 'duplicate id');
+    ids.add(q.id);
+    checkSection(where, q.topic, q.section, q.level);
+    for (const k of ['title', 'question', 'unit', 'note']) checkText(where, q[k], k);
+    if (!(q.answer > 0)) err(where, 'answer must be a positive number');
+    for (const k of ['think', 'steps']) {
+      if (!Array.isArray(q[k]) || !q[k].length) err(where, k + ' needs at least one entry');
+      else q[k].forEach((t) => checkText(where, t, k));
+    }
+  }
+}
 if (exists('wordgames/terms.json')) {
   const rel = 'wordgames/terms.json';
   const terms = JSON.parse(read(rel));

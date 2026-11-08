@@ -91,6 +91,14 @@ body.nr-on-board main { max-width: 1400px; font-size: 1.3rem; }
 .ex-done { background: var(--good-soft); border-radius: var(--radius); padding: 10px 16px; margin: 12px 0; }
 .ex-para { background: var(--surface); border-radius: 8px; padding: 8px 12px; }
 
+/* ----- Estimation challenges ----- */
+.es-label { display: block; margin: 12px 0 4px; }
+.es-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
+.es-row input { width: 9em; font: inherit; padding: 7px 9px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); }
+.ex-row-verdict { border-radius: 8px; padding: 8px 12px; margin: 12px 0 8px; }
+.ex-row-verdict.good { background: var(--good-soft); }
+.ex-row-verdict.order { background: var(--warn-soft); }
+
 /* ----- Word games ----- */
 .wg-themes { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 6px 14px 10px; margin: 10px 0; }
 .wg-themes label { display: inline-block; margin-right: 16px; font-weight: 600; }
