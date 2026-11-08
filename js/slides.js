@@ -56,7 +56,7 @@
   function save() {
     const p = new URLSearchParams();
     p.set('topic', state.topic);
-    if (data && state.points.size !== data.points.length) p.set('points', data.points.filter((pt) => state.points.has(pt.id)).map((pt) => pt.id).join(','));
+    if (data && state.points.size) p.set('points', data.points.filter((pt) => state.points.has(pt.id)).map((pt) => pt.id).join(','));
     const order = TYPES.map((t) => t[0]).filter((t) => state.types.has(t)).join('');
     if (order !== DEFAULT_TYPES.join('')) p.set('types', TYPES.map((t) => t[0]).filter((t) => state.types.has(t)).join(''));
     if (state.types.has('c')) {
@@ -128,7 +128,7 @@
   async function loadTopic() {
     $('sl-status').textContent = 'Loading…';
     data = await get(`slides/${slugOf(state.topic)}.json`);
-    if (!state.points) state.points = new Set(data.points.map((p) => p.id));
+    if (!state.points) state.points = new Set(); // every point starts unticked (teacher's decision)
     const [cc, qs, teacher] = await Promise.all([optional(get('../think/concepts.json')), optional(allQuestions()), optional(get(`${slugOf(state.topic)}.json`))]);
     concepts = cc || [];
     tokQuestions = Object.keys(teacher?.tokPrompts || {});
@@ -143,9 +143,15 @@
     $('sl-status').textContent = '';
     update();
   }
+  // Text drawn after the page has loaded needs MathJax to turn its $…$ into equations. (If MathJax is still loading, it does the whole page when it starts.)
+  function typeset(el) {
+    const mj = window.MathJax;
+    if (mj?.startup?.promise) mj.startup.promise.then(() => mj.typesetPromise([el])).catch(() => {});
+  }
   function drawPoints() {
     $('sl-points').innerHTML = data.points.map((p) => `<label class="sl-point"><input type="checkbox" data-point="${p.id}"${state.points.has(p.id) ? ' checked' : ''}>`
       + `<span><strong>${esc(p.short)}</strong>${p.hl ? ' <span class="tag hl">HL</span>' : ''} <span class="sl-min">${minutesText(p.minutes)}</span><br><span class="sl-guide">${p.extra ? `<span class="tag">Not in the guide's ${esc(data.topic)} list</span> ` : ''}${esc(p.guide)}</span></span></label>`).join('');
+    typeset($('sl-points'));
   }
   // The hook: every concept challenge in the subtopic's theme, this subtopic's first
   function drawHook() {
@@ -187,7 +193,7 @@
         + `<span><strong>${q.id}</strong> <span class="sl-min">${p2Marks(q)} marks${q.level === 'HL' ? ' · HL' : ''}</span> <a href="../questions.html?topic=${q.topic}&amp;q=${q.id}" target="_blank" rel="noopener">see it in the question bank</a><br>`
         + `<span class="sl-guide">${esc(first)}${covers.length ? ` Covers: ${esc(covers.join(', '))}.` : ''}</span></span></label>`;
     }).join('');
-    window.MathJax?.typesetPromise?.([box]).catch(() => {});
+    typeset(box);
   }
   // about 2 minutes a mark: students answer it, then the class goes through the mark scheme
   const paper2Minutes = () => (state.types.has('p') ? paper2.filter((q) => state.p2.has(q.id)).reduce((n, q) => n + 2 * p2Marks(q), 0) : 0);
