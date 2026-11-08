@@ -1,0 +1,193 @@
+{
+  "question": {
+    "id": "A1-P03",
+    "theme": "A",
+    "topic": "A.1",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>Firefighters direct a jet of water from a hose. The water leaves the nozzle, which is at ground level, at a speed of 18 $\\text{m s}^{-1}$ at an angle of 35° above the horizontal and lands on level ground. Each drop of water moves as a projectile. Air resistance is negligible unless stated.</p>",
+    "diagram": "questions/diagrams/p2-a1-hose.svg",
+    "diagramAlt": "A hose nozzle on level ground points up and to the right. An arrow labelled u shows the velocity of the water leaving the nozzle at an angle theta above the horizontal, and a curved blue line shows the path of the water, which comes back down to the ground further along. Not to scale.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "State the magnitude and direction of the acceleration of a drop of water at the highest point of its path.",
+        "marks": 1,
+        "markscheme": [
+          "$9.8\\ \\text{m s}^{-2}$ vertically downwards ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Show that the maximum height reached by the water is about 5.4 m.",
+        "marks": 2,
+        "markscheme": [
+          "vertical component of the initial velocity $u_y = 18 \\sin 35^{\\circ} = 10.3\\ \\text{m s}^{-1}$ ✓",
+          "at the top $v_y = 0$, so $0 = u_y^2 - 2gH$ and $H = \\dfrac{10.3^2}{2 \\times 9.8} = 5.44\\ \\text{m}$ ✓",
+          "OR time to the top $= \\dfrac{10.3}{9.8}$ s, then $H = u_y t - \\tfrac{1}{2} g t^2$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "question": "Determine the horizontal distance from the nozzle at which the water hits the ground.",
+        "marks": 2,
+        "markscheme": [
+          "time of flight $t = \\dfrac{2 u_y}{g} = \\dfrac{2 \\times 10.3}{9.8} = 2.11\\ \\text{s}$ ✓",
+          "horizontal distance $= u \\cos \\theta \\times t = 14.7 \\times 2.11 = 31.1\\ \\text{m}$ ✓",
+          "Allow ECF from (b) if the time of flight is found from the maximum height; accept 30.1 to 32.0 m"
+        ],
+        "numeric": {
+          "answer": 31.0674,
+          "unit": "m",
+          "range": [
+            30.1,
+            32
+          ],
+          "mistakes": [
+            {
+              "value": 37.9263,
+              "feedback": "Only the horizontal component of the velocity carries the water along the ground: use u cos θ, not u."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "Sketch, on the same axes, the path of the water with negligible air resistance and the path of the water when air resistance is significant. Label the two paths.",
+        "marks": 2,
+        "markscheme": [
+          "the path with air resistance has a lower maximum height and a shorter horizontal range than the path without ✓",
+          "the path with air resistance is not symmetrical: it descends more steeply than it rises, so its highest point is nearer the landing point than the launch point ✓",
+          "Note: examiner's sketch (blue: negligible air resistance; orange: significant air resistance). <img src=\"questions/diagrams/p2-a1-hose-ms.svg\" alt=\"Two paths from the same launch point on the same axes: a symmetrical blue parabola, and a lower orange path that lands much closer to the launch point and drops more steeply than it rises\" style=\"display:block;max-width:100%;height:auto;background:#fff;border-radius:8px;padding:6px;margin-top:6px\">",
+          "Accept a path without air resistance that is a symmetrical parabola; do not accept a path with air resistance that is symmetrical"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "Outline why air resistance reduces the horizontal distance travelled by the water.",
+        "marks": 2,
+        "markscheme": [
+          "the resultant force on the water is no longer vertical: air resistance acts against the motion and so has a component opposite to the horizontal velocity ✓",
+          "the horizontal velocity is therefore no longer constant but decreases during the flight, so less horizontal distance is covered in each second ✓",
+          "air resistance also increases the downward deceleration on the way up, so the water does not rise as high and spends less time in the air ✓",
+          "Any 2 from the points above"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "A.1"
+  ],
+  "given": {
+    "u": {
+      "value": 18,
+      "sf": 2,
+      "unit": "m s^-1",
+      "range": [
+        8,
+        40
+      ],
+      "what": "speed of the water leaving the nozzle"
+    },
+    "theta": {
+      "value": 35,
+      "sf": 2,
+      "unit": "°",
+      "range": [
+        15,
+        60
+      ],
+      "what": "angle of the jet above the horizontal"
+    }
+  },
+  "results": {
+    "uy": {
+      "value": 10.324375854318829,
+      "unit": "m s^-1",
+      "sf": 3
+    },
+    "ux": {
+      "value": 14.744736797201853,
+      "unit": "m s^-1",
+      "sf": 3
+    },
+    "H": {
+      "value": 5.438404937818451,
+      "unit": "m",
+      "sf": 2
+    },
+    "t": {
+      "value": 2.10701548047323,
+      "unit": "s",
+      "sf": 3
+    },
+    "R": {
+      "value": 31.06738868720758,
+      "unit": "m",
+      "sf": 3
+    },
+    "wrong_R": {
+      "value": 37.92627864851814,
+      "unit": "m",
+      "sf": 3
+    },
+    "wrong_H": {
+      "value": 16.53061224489796,
+      "unit": "m",
+      "sf": 2
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "State",
+      "syllabus": [
+        "A.1.7"
+      ],
+      "examinerNote": "The acceleration is g throughout the flight, including at the top where the vertical velocity is zero. Both magnitude and direction are needed for the mark; \"zero\" earns nothing."
+    },
+    {
+      "label": "b",
+      "command": "Show that",
+      "syllabus": [
+        "A.1.5",
+        "A.1.7"
+      ],
+      "examinerNote": "Resolve first, then v² = u² + 2as vertically (or find the time to the top and use s = ut + ½at²). The unrounded value must be seen for the second mark."
+    },
+    {
+      "label": "c",
+      "command": "Determine",
+      "syllabus": [
+        "A.1.7",
+        "A.1.5"
+      ],
+      "examinerNote": "The horizontal velocity is constant. The time of flight is twice the time to the top (or found from the height in (b): t = 2√(2H/g), which gives 31.0 m with H = 5.4 m).",
+      "dependsOn": [
+        "b"
+      ]
+    },
+    {
+      "label": "d",
+      "command": "Sketch",
+      "syllabus": [
+        "A.1.8"
+      ],
+      "examinerNote": "The guide asks for the qualitative effect of fluid resistance on the trajectory, range and time of flight. A sketch that only shows a shorter range, with a symmetrical shape, earns the first mark only."
+    },
+    {
+      "label": "e",
+      "command": "Outline",
+      "syllabus": [
+        "A.1.8"
+      ],
+      "examinerNote": "Two separate physics points: the force has a backward horizontal component (so the horizontal velocity falls), and the shorter time of flight. \"It slows down\" alone is not enough."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-a1-hose.svg": "47fc941164beff06b39da2ed7b5b0a51f6a35fbada4091e417c371f2002bdb44",
+    "questions/diagrams/p2-a1-hose-ms.svg": "aba9eff2519b66a4d7ded30b42a24bb769001d10990eae740d0b6c50717ad052"
+  }
+}

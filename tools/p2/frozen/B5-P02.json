@@ -1,0 +1,303 @@
+{
+  "question": {
+    "id": "B5-P02",
+    "theme": "B",
+    "topic": "B.5",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A cordless drill is powered by a rechargeable pack of lithium cells. To test the pack, a technician uses a variable resistor to draw a range of currents $I$ from it and measures the terminal potential difference $V$ of the pack at each current. The readings are shown in the table.</p><table><tr><th>$I$ / A</th><th>$V$ / V</th></tr><tr><td>2.0</td><td>19.5</td></tr><tr><td>6.0</td><td>18.5</td></tr><tr><td>10.0</td><td>17.5</td></tr><tr><td>14.0</td><td>16.5</td></tr><tr><td>18.0</td><td>15.5</td></tr></table>",
+    "diagram": "questions/diagrams/p2-b5-drill-axes.svg",
+    "diagramAlt": "Empty axes for a graph of terminal potential difference V in volts, from 14 to 21 V, against current I in amperes, from 0 to 20 A, with a grid of 1 A by 0.5 V squares.",
+    "diagramLarge": true,
+    "parts": [
+      {
+        "label": "a",
+        "question": "Draw, on the axes provided, a graph of $V$ against $I$ for the readings in the table, with a line of best fit.",
+        "marks": 2,
+        "markscheme": [
+          "all five points plotted correctly, to within half a small square ✓",
+          "a single straight line of best fit through the points, extended to meet the $V$ axis ✓",
+          "Note: the examiner's graph: <img src=\"questions/diagrams/p2-b5-drill-ms.svg\" alt=\"The five points plotted as crosses on the grid, with a straight line of best fit passing through all of them and extended to meet the vertical axis above the highest point.\">"
+        ]
+      },
+      {
+        "label": "b(i)",
+        "question": "Determine the emf of the pack.",
+        "marks": 1,
+        "markscheme": [
+          "$\\varepsilon$ = intercept on the $V$ axis (where $I = 0$) $= 20.0\\ \\text{V}$ ✓"
+        ],
+        "numeric": {
+          "answer": 20,
+          "unit": "V",
+          "range": [
+            19.8,
+            20.2
+          ]
+        }
+      },
+      {
+        "label": "b(ii)",
+        "question": "Determine the internal resistance of the pack.",
+        "marks": 2,
+        "markscheme": [
+          "gradient $= -r$, e.g. gradient $= \\dfrac{15.5 - 19.5}{18.0 - 2.0} = -0.25\\ \\text{V A}^{-1}$ ✓",
+          "$r = 0.25\\ \\Omega$ ✓",
+          "Accept 0.230 to 0.270 Ω from a correctly drawn line, or the same value from $\\varepsilon = I(R + r)$ with one pair of readings and the emf from (b)(i)."
+        ],
+        "numeric": {
+          "answer": 0.25,
+          "unit": "Ω",
+          "range": [
+            0.23,
+            0.27
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "The pack is then fitted to the drill. Calculate the power delivered to the drill when the current is 14.0 A.",
+        "marks": 1,
+        "markscheme": [
+          "$P = VI = 16.5 \\times 14.0 = 231\\ \\text{W}$ ✓"
+        ],
+        "numeric": {
+          "answer": 231,
+          "unit": "W",
+          "range": [
+            226,
+            236
+          ],
+          "mistakes": [
+            {
+              "value": 280,
+              "feedback": "The power delivered to the drill is the terminal p.d. (the p.d. across the drill) times the current, not the emf times the current: part of the emf is used inside the pack."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "Explain, in terms of energy, why the terminal potential difference is lower at higher currents.",
+        "marks": 2,
+        "markscheme": [
+          "the emf is the energy transferred to each coulomb of charge by the chemical reactions inside the pack, and it does not change ✓",
+          "some of this energy, $Ir$ per coulomb, is transferred to internal energy (heating) in the internal resistance of the pack, and this share grows as the current increases, so less energy per coulomb, $V = \\varepsilon - Ir$, is delivered to the external circuit ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "Outline why a pack of cells for a power tool should have a small internal resistance.",
+        "marks": 2,
+        "markscheme": [
+          "a power tool draws a large current, so with a larger internal resistance the p.d. lost inside the pack ($Ir$) would be large and the terminal p.d., and so the power available to the motor, would fall sharply under load ✓",
+          "the power dissipated inside the pack, $I^2 r$, would be large, wasting the stored energy and heating the pack ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "B.5"
+  ],
+  "given": {
+    "I1": {
+      "value": 2,
+      "sf": 2,
+      "unit": "A",
+      "range": [
+        0.5,
+        40
+      ],
+      "what": "first current in the table"
+    },
+    "I2": {
+      "value": 6,
+      "sf": 2,
+      "unit": "A",
+      "range": [
+        0.5,
+        40
+      ],
+      "what": "second current in the table"
+    },
+    "I3": {
+      "value": 10,
+      "sf": 3,
+      "unit": "A",
+      "range": [
+        0.5,
+        40
+      ],
+      "what": "third current in the table"
+    },
+    "I4": {
+      "value": 14,
+      "sf": 3,
+      "unit": "A",
+      "range": [
+        0.5,
+        40
+      ],
+      "what": "fourth current in the table (used for the power)"
+    },
+    "I5": {
+      "value": 18,
+      "sf": 3,
+      "unit": "A",
+      "range": [
+        0.5,
+        40
+      ],
+      "what": "fifth current in the table"
+    },
+    "V1": {
+      "value": 19.5,
+      "sf": 3,
+      "unit": "V",
+      "range": [
+        10,
+        25
+      ],
+      "what": "terminal p.d. at the first current"
+    },
+    "V2": {
+      "value": 18.5,
+      "sf": 3,
+      "unit": "V",
+      "range": [
+        10,
+        25
+      ],
+      "what": "terminal p.d. at the second current"
+    },
+    "V3": {
+      "value": 17.5,
+      "sf": 3,
+      "unit": "V",
+      "range": [
+        10,
+        25
+      ],
+      "what": "terminal p.d. at the third current"
+    },
+    "V4": {
+      "value": 16.5,
+      "sf": 3,
+      "unit": "V",
+      "range": [
+        10,
+        25
+      ],
+      "what": "terminal p.d. at the fourth current"
+    },
+    "V5": {
+      "value": 15.5,
+      "sf": 3,
+      "unit": "V",
+      "range": [
+        10,
+        25
+      ],
+      "what": "terminal p.d. at the fifth current"
+    }
+  },
+  "results": {
+    "eps": {
+      "value": 20,
+      "unit": "V",
+      "sf": 3
+    },
+    "r": {
+      "value": 0.25,
+      "unit": "Ω",
+      "sf": 2
+    },
+    "grad": {
+      "value": -0.25,
+      "unit": "V A^-1",
+      "sf": 2
+    },
+    "P": {
+      "value": 231,
+      "unit": "W",
+      "sf": 3
+    },
+    "Pint": {
+      "value": 49,
+      "unit": "W",
+      "sf": 2
+    },
+    "Imax": {
+      "value": 80,
+      "unit": "A",
+      "sf": 2
+    },
+    "wrong_P": {
+      "value": 280,
+      "unit": "W",
+      "sf": 3
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Draw",
+      "syllabus": [
+        "T.4",
+        "B.5.11"
+      ],
+      "examinerNote": "The points lie exactly on a straight line. The second mark needs a ruled line extended to the V axis, so the intercept can be read in (b)."
+    },
+    {
+      "label": "b(i)",
+      "command": "Determine",
+      "syllabus": [
+        "B.5.11",
+        "T.4"
+      ],
+      "examinerNote": "From V = ε − Ir, the intercept is the emf: the terminal p.d. when no current is drawn."
+    },
+    {
+      "label": "b(ii)",
+      "command": "Determine",
+      "syllabus": [
+        "B.5.11",
+        "T.4"
+      ],
+      "examinerNote": "Comparing V = ε − Ir with y = mx + c: the gradient is −r. Any two well-separated points on the line give 0.25 Ω."
+    },
+    {
+      "label": "c",
+      "command": "Calculate",
+      "syllabus": [
+        "B.5.9",
+        "B.5.11"
+      ],
+      "examinerNote": "The terminal p.d. at 14.0 A is in the table (or read from the graph). ε × I = 280 W is the expected wrong answer; it includes the power dissipated inside the pack."
+    },
+    {
+      "label": "d",
+      "command": "Explain",
+      "syllabus": [
+        "B.5.11",
+        "B.5.4"
+      ],
+      "examinerNote": "Potential difference as energy per unit charge (B.5.4) applied to the cell: fixed emf, a growing \"lost\" Ir inside the pack. Quoting V = ε − Ir without the energy interpretation earns at most one mark."
+    },
+    {
+      "label": "e",
+      "command": "Outline",
+      "syllabus": [
+        "B.5.11",
+        "B.5.9"
+      ],
+      "examinerNote": "Aim 7 (technology). At 14 A even this pack dissipates I²r = 49 W internally against 231 W delivered; a pack with four times the internal resistance would lose 14 V at 14 A. Accept the shorter run time or the risk of overheating as the second point."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-b5-drill-axes.svg": "eb8ad6df51f5860e7dfcd8b1203d5e82316e4a95e7c3c0412ce78afdba738817",
+    "questions/diagrams/p2-b5-drill-ms.svg": "440d12ad033d182e82c81595a90b7762665c29cd804a94a087cb389d9c94672e"
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "question": {
+    "id": "A2-P01",
+    "theme": "A",
+    "topic": "A.2",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>A wooden crate of mass 45 kg rests on a rough, horizontal concrete floor. A horizontal elastic cord of spring constant 1200 $\\text{N m}^{-1}$ is attached to the crate and pulled so that its extension increases slowly. The crate stays at rest until the extension of the cord reaches 14.5 cm, when it starts to slide. The cord is then pulled so that the crate slides at constant velocity; the extension of the cord is now 11.0 cm. The cord obeys Hooke's law throughout.</p>",
+    "diagram": "questions/diagrams/p2-a2-crate.svg",
+    "diagramAlt": "Side view of a wooden crate resting on a rough concrete floor. A horizontal elastic cord, drawn stretched, runs from the right side of the crate to a hand pulling it to the right. No forces are drawn. Not to scale.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Draw a free-body diagram of the crate while it slides at constant velocity.",
+        "marks": 2,
+        "markscheme": [
+          "weight vertically downwards and normal force vertically upwards, drawn from the crate with equal lengths and labelled ✓",
+          "tension (pull of the cord) horizontally in the direction of motion and friction horizontally against it, with equal lengths and labelled ✓",
+          "Note: examiner's diagram. <img src=\"questions/diagrams/p2-a2-crate-ms.svg\" alt=\"Free-body diagram of the crate drawn as a small square: blue arrows of equal length point down (weight W) and up (normal force N); shorter orange arrows of equal length point right (tension T) and left (friction Ff)\" style=\"display:block;max-width:100%;height:auto;background:#fff;border-radius:8px;padding:6px;margin-top:6px\">",
+          "Do not accept a forward \"force of motion\" or arrows that do not start on the crate; the horizontal pair should be noticeably shorter than the vertical pair"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the force exerted by the cord on the crate at the moment it starts to slide.",
+        "marks": 2,
+        "markscheme": [
+          "$F = k \\Delta x = 1200 \\times 14.5 \\times 10^{-2}$ ✓",
+          "$F = 174\\ \\text{N}$ ✓"
+        ],
+        "numeric": {
+          "answer": 174,
+          "unit": "N",
+          "range": [
+            170,
+            178
+          ],
+          "mistakes": [
+            {
+              "value": 17400,
+              "feedback": "The extension must be in metres before using F = kΔx: convert the centimetres."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Determine $\\mu_d$, the coefficient of dynamic friction for the crate sliding on the concrete floor.",
+        "marks": 3,
+        "markscheme": [
+          "at constant velocity the resultant force is zero, so friction $= $ tension $= 1200 \\times 11.0 \\times 10^{-2} = 132\\ \\text{N}$ ✓",
+          "normal force $= $ weight $= 45 \\times 9.8 = 441\\ \\text{N}$ ✓",
+          "$\\mu_d = \\dfrac{F_f}{F_N} = \\dfrac{132}{441} = 0.30$ ✓",
+          "Accept 0.290 to 0.309. Award [2 max] for 0.39 (the extension at which sliding begins used: that gives the maximum static friction, not the dynamic friction)"
+        ],
+        "numeric": {
+          "answer": 0.29932,
+          "range": [
+            0.29,
+            0.309
+          ],
+          "mistakes": [
+            {
+              "value": 0.394558,
+              "feedback": "While the crate slides, the friction equals the pull at constant velocity, not the pull at the moment it started to move. Use the smaller extension."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "Explain why the extension of the cord while the crate slides at constant velocity is smaller than its extension at the moment the crate starts to slide.",
+        "marks": 2,
+        "markscheme": [
+          "the dynamic friction force is smaller than the maximum static friction force ✓",
+          "at constant velocity the tension equals the (smaller) dynamic friction, and by Hooke's law a smaller tension means a smaller extension ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "A second identical crate is placed on top of the first. Predict, without calculation, the extension of the cord when the two crates slide together at constant velocity.",
+        "marks": 1,
+        "markscheme": [
+          "the normal force doubles, so the friction doubles and the extension doubles to 22.0 cm ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "A.2"
+  ],
+  "given": {
+    "m": {
+      "value": 45,
+      "sf": 2,
+      "unit": "kg",
+      "range": [
+        10,
+        200
+      ],
+      "what": "mass of the crate"
+    },
+    "k": {
+      "value": 1200,
+      "sf": 2,
+      "unit": "N m^-1",
+      "range": [
+        200,
+        5000
+      ],
+      "what": "spring constant of the elastic cord"
+    },
+    "xs": {
+      "value": 14.5,
+      "sf": 3,
+      "unit": "cm",
+      "range": [
+        2,
+        40
+      ],
+      "what": "extension of the cord when the crate starts to slide"
+    },
+    "xd": {
+      "value": 11,
+      "sf": 3,
+      "unit": "cm",
+      "range": [
+        1,
+        40
+      ],
+      "what": "extension of the cord while the crate slides at constant velocity"
+    }
+  },
+  "results": {
+    "Fs": {
+      "value": 174,
+      "unit": "N",
+      "sf": 3
+    },
+    "Fd": {
+      "value": 132,
+      "unit": "N",
+      "sf": 3
+    },
+    "N": {
+      "value": 441.00000000000006,
+      "unit": "N",
+      "sf": 3
+    },
+    "mud": {
+      "value": 0.2993197278911564,
+      "unit": "",
+      "sf": 2
+    },
+    "x2": {
+      "value": 22,
+      "unit": "cm",
+      "sf": 3
+    },
+    "wrong_Fs": {
+      "value": 17400,
+      "unit": "N",
+      "sf": 3
+    },
+    "wrong_mud": {
+      "value": 0.39455782312925164,
+      "unit": "",
+      "sf": 2
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Draw",
+      "syllabus": [
+        "A.2.2",
+        "A.2.3"
+      ],
+      "examinerNote": "Constant velocity means translational equilibrium, so the two pairs balance. Forces on the crate only (not the force of the crate on the floor). The guide asks for commonly accepted names or symbols as labels."
+    },
+    {
+      "label": "b",
+      "command": "Calculate",
+      "syllabus": [
+        "A.2.5",
+        "A.2.4"
+      ],
+      "examinerNote": "Hooke's law with the extension converted to metres. This force equals the maximum static friction on the crate."
+    },
+    {
+      "label": "c",
+      "command": "Determine",
+      "syllabus": [
+        "A.2.4",
+        "A.2.1",
+        "A.2.5"
+      ],
+      "examinerNote": "Newton's first law horizontally (friction = tension) and vertically (normal force = weight), then F = μd FN."
+    },
+    {
+      "label": "d",
+      "command": "Explain",
+      "syllabus": [
+        "A.2.4",
+        "A.2.5"
+      ],
+      "examinerNote": "Two points: μd FN < μs FN (the surfaces grip less once sliding), and F = kΔx links the smaller tension to the smaller extension."
+    },
+    {
+      "label": "e",
+      "command": "Predict",
+      "syllabus": [
+        "A.2.4",
+        "A.2.3"
+      ],
+      "examinerNote": "Friction is proportional to the normal force (same μd, same floor): twice the weight pressing down needs twice the pull. \"It doubles\" with a reason earns the mark."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-a2-crate.svg": "c7dba9e8c89ba61f65fc69dab79acf46e8af4dfec58b3757579a7ac05a385817",
+    "questions/diagrams/p2-a2-crate-ms.svg": "7182452fe7df503b3b98c17b212555aa55d6871d361e5cde792fc23b719df78e"
+  }
+}

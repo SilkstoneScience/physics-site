@@ -190,6 +190,222 @@
     }
   },
   {
+    "id": "A1-P03",
+    "theme": "A",
+    "topic": "A.1",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "projectiles",
+      "suvat",
+      "drag"
+    ],
+    "stem": "<p>Firefighters direct a jet of water from a hose. The water leaves the nozzle, which is at ground level, at a speed of 18 $\\text{m s}^{-1}$ at an angle of 35° above the horizontal and lands on level ground. Each drop of water moves as a projectile. Air resistance is negligible unless stated.</p>",
+    "diagram": "questions/diagrams/p2-a1-hose.svg",
+    "diagramAlt": "A hose nozzle on level ground points up and to the right. An arrow labelled u shows the velocity of the water leaving the nozzle at an angle theta above the horizontal, and a curved blue line shows the path of the water, which comes back down to the ground further along. Not to scale.",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "projectiles"
+        ],
+        "question": "State the magnitude and direction of the acceleration of a drop of water at the highest point of its path.",
+        "marks": 1,
+        "markscheme": [
+          "$9.8\\ \\text{m s}^{-2}$ vertically downwards ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "projectiles",
+          "suvat"
+        ],
+        "question": "Show that the maximum height reached by the water is about 5.4 m.",
+        "marks": 2,
+        "markscheme": [
+          "vertical component of the initial velocity $u_y = 18 \\sin 35^{\\circ} = 10.3\\ \\text{m s}^{-1}$ ✓",
+          "at the top $v_y = 0$, so $0 = u_y^2 - 2gH$ and $H = \\dfrac{10.3^2}{2 \\times 9.8} = 5.44\\ \\text{m}$ ✓",
+          "OR time to the top $= \\dfrac{10.3}{9.8}$ s, then $H = u_y t - \\tfrac{1}{2} g t^2$ ✓"
+        ]
+      },
+      {
+        "label": "c",
+        "sections": [
+          "projectiles",
+          "suvat"
+        ],
+        "question": "Determine the horizontal distance from the nozzle at which the water hits the ground.",
+        "marks": 2,
+        "markscheme": [
+          "time of flight $t = \\dfrac{2 u_y}{g} = \\dfrac{2 \\times 10.3}{9.8} = 2.11\\ \\text{s}$ ✓",
+          "horizontal distance $= u \\cos \\theta \\times t = 14.7 \\times 2.11 = 31.1\\ \\text{m}$ ✓",
+          "Allow ECF from (b) if the time of flight is found from the maximum height; accept 30.1 to 32.0 m"
+        ],
+        "numeric": {
+          "answer": 31.0674,
+          "unit": "m",
+          "range": [
+            30.1,
+            32
+          ],
+          "mistakes": [
+            {
+              "value": 37.9263,
+              "feedback": "Only the horizontal component of the velocity carries the water along the ground: use u cos θ, not u."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "sections": [
+          "drag",
+          "projectiles"
+        ],
+        "question": "Sketch, on the same axes, the path of the water with negligible air resistance and the path of the water when air resistance is significant. Label the two paths.",
+        "marks": 2,
+        "markscheme": [
+          "the path with air resistance has a lower maximum height and a shorter horizontal range than the path without ✓",
+          "the path with air resistance is not symmetrical: it descends more steeply than it rises, so its highest point is nearer the landing point than the launch point ✓",
+          "Note: examiner's sketch (blue: negligible air resistance; orange: significant air resistance). <img src=\"questions/diagrams/p2-a1-hose-ms.svg\" alt=\"Two paths from the same launch point on the same axes: a symmetrical blue parabola, and a lower orange path that lands much closer to the launch point and drops more steeply than it rises\" style=\"display:block;max-width:100%;height:auto;background:#fff;border-radius:8px;padding:6px;margin-top:6px\">",
+          "Accept a path without air resistance that is a symmetrical parabola; do not accept a path with air resistance that is symmetrical"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "drag"
+        ],
+        "question": "Outline why air resistance reduces the horizontal distance travelled by the water.",
+        "marks": 2,
+        "markscheme": [
+          "the resultant force on the water is no longer vertical: air resistance acts against the motion and so has a component opposite to the horizontal velocity ✓",
+          "the horizontal velocity is therefore no longer constant but decreases during the flight, so less horizontal distance is covered in each second ✓",
+          "air resistance also increases the downward deceleration on the way up, so the water does not rise as high and spends less time in the air ✓",
+          "Any 2 from the points above"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "A2-P01",
+    "theme": "A",
+    "topic": "A.2",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "contact",
+      "forces",
+      "first"
+    ],
+    "stem": "<p>A wooden crate of mass 45 kg rests on a rough, horizontal concrete floor. A horizontal elastic cord of spring constant 1200 $\\text{N m}^{-1}$ is attached to the crate and pulled so that its extension increases slowly. The crate stays at rest until the extension of the cord reaches 14.5 cm, when it starts to slide. The cord is then pulled so that the crate slides at constant velocity; the extension of the cord is now 11.0 cm. The cord obeys Hooke's law throughout.</p>",
+    "diagram": "questions/diagrams/p2-a2-crate.svg",
+    "diagramAlt": "Side view of a wooden crate resting on a rough concrete floor. A horizontal elastic cord, drawn stretched, runs from the right side of the crate to a hand pulling it to the right. No forces are drawn. Not to scale.",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "forces",
+          "contact"
+        ],
+        "question": "Draw a free-body diagram of the crate while it slides at constant velocity.",
+        "marks": 2,
+        "markscheme": [
+          "weight vertically downwards and normal force vertically upwards, drawn from the crate with equal lengths and labelled ✓",
+          "tension (pull of the cord) horizontally in the direction of motion and friction horizontally against it, with equal lengths and labelled ✓",
+          "Note: examiner's diagram. <img src=\"questions/diagrams/p2-a2-crate-ms.svg\" alt=\"Free-body diagram of the crate drawn as a small square: blue arrows of equal length point down (weight W) and up (normal force N); shorter orange arrows of equal length point right (tension T) and left (friction Ff)\" style=\"display:block;max-width:100%;height:auto;background:#fff;border-radius:8px;padding:6px;margin-top:6px\">",
+          "Do not accept a forward \"force of motion\" or arrows that do not start on the crate; the horizontal pair should be noticeably shorter than the vertical pair"
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "contact"
+        ],
+        "question": "Calculate the force exerted by the cord on the crate at the moment it starts to slide.",
+        "marks": 2,
+        "markscheme": [
+          "$F = k \\Delta x = 1200 \\times 14.5 \\times 10^{-2}$ ✓",
+          "$F = 174\\ \\text{N}$ ✓"
+        ],
+        "numeric": {
+          "answer": 174,
+          "unit": "N",
+          "range": [
+            170,
+            178
+          ],
+          "mistakes": [
+            {
+              "value": 17400,
+              "feedback": "The extension must be in metres before using F = kΔx: convert the centimetres."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "contact",
+          "first"
+        ],
+        "question": "Determine $\\mu_d$, the coefficient of dynamic friction for the crate sliding on the concrete floor.",
+        "marks": 3,
+        "markscheme": [
+          "at constant velocity the resultant force is zero, so friction $= $ tension $= 1200 \\times 11.0 \\times 10^{-2} = 132\\ \\text{N}$ ✓",
+          "normal force $= $ weight $= 45 \\times 9.8 = 441\\ \\text{N}$ ✓",
+          "$\\mu_d = \\dfrac{F_f}{F_N} = \\dfrac{132}{441} = 0.30$ ✓",
+          "Accept 0.290 to 0.309. Award [2 max] for 0.39 (the extension at which sliding begins used: that gives the maximum static friction, not the dynamic friction)"
+        ],
+        "numeric": {
+          "answer": 0.29932,
+          "range": [
+            0.29,
+            0.309
+          ],
+          "mistakes": [
+            {
+              "value": 0.394558,
+              "feedback": "While the crate slides, the friction equals the pull at constant velocity, not the pull at the moment it started to move. Use the smaller extension."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "sections": [
+          "contact"
+        ],
+        "question": "Explain why the extension of the cord while the crate slides at constant velocity is smaller than its extension at the moment the crate starts to slide.",
+        "marks": 2,
+        "markscheme": [
+          "the dynamic friction force is smaller than the maximum static friction force ✓",
+          "at constant velocity the tension equals the (smaller) dynamic friction, and by Hooke's law a smaller tension means a smaller extension ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "contact"
+        ],
+        "question": "A second identical crate is placed on top of the first. Predict, without calculation, the extension of the cord when the two crates slide together at constant velocity.",
+        "marks": 1,
+        "markscheme": [
+          "the normal force doubles, so the friction doubles and the extension doubles to 22.0 cm ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
     "id": "A2-P02",
     "theme": "A",
     "topic": "A.2",
@@ -276,6 +492,129 @@
           "the change in momentum of the head, and so the impulse, is the same whether it is stopped by the airbag or by the steering wheel ✓",
           "the airbag increases the time over which the head is brought to rest ✓",
           "since $F = \\dfrac{\\Delta p}{\\Delta t}$, the force on the head is smaller: the graph for the steering wheel would be a taller, narrower hump with the same area ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "A3-P01",
+    "theme": "A",
+    "topic": "A.3",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "potential",
+      "power",
+      "efficiency",
+      "conservation",
+      "mechanical"
+    ],
+    "stem": "<p>An energy-storage scheme in a mountain valley links two reservoirs. At night, when the demand for electrical energy is low, pumps raise water from the lower reservoir to the upper one. During the day the water flows back down through turbines, which drive generators. The upper reservoir holds $1.2 \\times 10^{6}$ $\\text{m}^{3}$ of water of density 1000 $\\text{kg m}^{-3}$, and the surface of this water is on average 320 m above the turbines. Pumping the full volume up takes 5.5 h with an electrical input power of 240 MW. Emptying the upper reservoir through the turbines takes 5.0 h and gives an average electrical output power of 190 MW.</p>",
+    "diagram": "questions/diagrams/p2-a3-reservoirs.svg",
+    "diagramAlt": "A mountain valley with an upper reservoir high on the left and a lower reservoir at the bottom right. A pipe runs from the upper reservoir down to a building housing the pumps and turbines next to the lower reservoir. The average height h of the upper water above the turbines is marked. Arrows show water pumped up at night and flowing down by day. Not to scale.",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "potential"
+        ],
+        "question": "Show that the gravitational potential energy stored when the upper reservoir is full is about $3.8 \\times 10^{12}$ J.",
+        "marks": 2,
+        "markscheme": [
+          "mass of water $= \\rho V = 1000 \\times 1.2 \\times 10^{6} = 1.2 \\times 10^{9}\\ \\text{kg}$ ✓",
+          "$\\Delta E_p = mg\\Delta h = 1.2 \\times 10^{9} \\times 9.8 \\times 320 = 3.76 \\times 10^{12}\\ \\text{J}$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "power"
+        ],
+        "question": "Calculate the average rate at which the water loses gravitational potential energy while the upper reservoir empties through the turbines.",
+        "marks": 2,
+        "markscheme": [
+          "$P = \\dfrac{\\Delta E_p}{\\Delta t} = \\dfrac{3.76 \\times 10^{12}}{5.0 \\times 3600}$ ✓",
+          "$P = 209\\ \\text{MW}$ ✓",
+          "Allow ECF from (a); accept 202 to 216 MW (the rounded value $3.8 \\times 10^{12}$ J from (a) gives an answer about 1 % larger, inside this range)"
+        ],
+        "numeric": {
+          "answer": 209.067,
+          "unit": "MW",
+          "range": [
+            202,
+            216
+          ],
+          "mistakes": [
+            {
+              "value": 752640,
+              "feedback": "Power is energy per second: convert the time from hours to seconds."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "efficiency",
+          "conservation"
+        ],
+        "question": "Determine the overall efficiency of the scheme, defined as the electrical energy delivered by the generators as a percentage of the electrical energy used by the pumps.",
+        "marks": 3,
+        "markscheme": [
+          "electrical energy in $= 240 \\times 10^{6} \\times 5.5 \\times 3600 = 4.75 \\times 10^{12}\\ \\text{J}$ ✓",
+          "electrical energy out $= 190 \\times 10^{6} \\times 5.0 \\times 3600 = 3.42 \\times 10^{12}\\ \\text{J}$ ✓",
+          "efficiency $= \\dfrac{3.42 \\times 10^{12}}{4.75 \\times 10^{12}} = 72\\%$ ✓",
+          "Accept 70.5 to 73.5 %. Award [2 max] for 91 % (generating stage only) or 79 % (pumping stage only)"
+        ],
+        "numeric": {
+          "answer": 71.9697,
+          "unit": "%",
+          "range": [
+            70.5,
+            73.5
+          ],
+          "mistakes": [
+            {
+              "value": 90.8801,
+              "feedback": "That compares the output with the energy stored in the water: it is the efficiency of the generating stage only. The question asks for electrical energy out over electrical energy in."
+            },
+            {
+              "value": 79.1919,
+              "feedback": "That is the efficiency of the pumping stage only (energy stored over electrical energy in). Compare the electrical energy out with the electrical energy in."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "sections": [
+          "mechanical",
+          "conservation"
+        ],
+        "question": "Outline what happens to the energy that is not returned to the electrical supply.",
+        "marks": 2,
+        "markscheme": [
+          "work is done against friction and viscous forces as the water flows through the pipes, pumps and turbines (turbulence), so energy is transferred to the internal energy of the water and the pipes ✓",
+          "friction in the moving parts of the pumps, turbines and generators and the heating effect of the current in the windings and cables transfer energy to the surroundings as thermal energy ✓",
+          "the water leaving the turbines still has kinetic energy, which is not transferred to the generators ✓",
+          "Any 2 from the points above"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "conservation",
+          "efficiency"
+        ],
+        "question": "The electrical energy in the region is generated mainly by wind and solar sources. Suggest why the storage scheme is valuable alongside these sources.",
+        "marks": 2,
+        "markscheme": [
+          "the output of wind and solar sources depends on the weather and the time of day, so it cannot be adjusted to match the demand ✓",
+          "surplus electrical energy at times of high supply or low demand is stored as gravitational potential energy and most of it is returned quickly when demand exceeds supply, reducing the need for other generators and the wasting of the surplus ✓"
         ]
       }
     ],
@@ -815,6 +1154,135 @@
           "As the temperature falls, the resistance of the thermistor increases (so the total resistance increases) ✓",
           "so the current decreases and the potential difference across the fixed resistor ($IR$) decreases ✓",
           "the emf is shared between the two components, so the potential difference across the thermistor increases above 5.4 V ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "B5-P02",
+    "theme": "B",
+    "topic": "B.5",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "internal",
+      "emf",
+      "power",
+      "pd"
+    ],
+    "stem": "<p>A cordless drill is powered by a rechargeable pack of lithium cells. To test the pack, a technician uses a variable resistor to draw a range of currents $I$ from it and measures the terminal potential difference $V$ of the pack at each current. The readings are shown in the table.</p><table><tr><th>$I$ / A</th><th>$V$ / V</th></tr><tr><td>2.0</td><td>19.5</td></tr><tr><td>6.0</td><td>18.5</td></tr><tr><td>10.0</td><td>17.5</td></tr><tr><td>14.0</td><td>16.5</td></tr><tr><td>18.0</td><td>15.5</td></tr></table>",
+    "diagram": "questions/diagrams/p2-b5-drill-axes.svg",
+    "diagramAlt": "Empty axes for a graph of terminal potential difference V in volts, from 14 to 21 V, against current I in amperes, from 0 to 20 A, with a grid of 1 A by 0.5 V squares.",
+    "diagramLarge": true,
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "internal"
+        ],
+        "question": "Draw, on the axes provided, a graph of $V$ against $I$ for the readings in the table, with a line of best fit.",
+        "marks": 2,
+        "markscheme": [
+          "all five points plotted correctly, to within half a small square ✓",
+          "a single straight line of best fit through the points, extended to meet the $V$ axis ✓",
+          "Note: the examiner's graph: <img src=\"questions/diagrams/p2-b5-drill-ms.svg\" alt=\"The five points plotted as crosses on the grid, with a straight line of best fit passing through all of them and extended to meet the vertical axis above the highest point.\">"
+        ]
+      },
+      {
+        "label": "b(i)",
+        "sections": [
+          "internal",
+          "emf"
+        ],
+        "question": "Determine the emf of the pack.",
+        "marks": 1,
+        "markscheme": [
+          "$\\varepsilon$ = intercept on the $V$ axis (where $I = 0$) $= 20.0\\ \\text{V}$ ✓"
+        ],
+        "numeric": {
+          "answer": 20,
+          "unit": "V",
+          "range": [
+            19.8,
+            20.2
+          ]
+        }
+      },
+      {
+        "label": "b(ii)",
+        "sections": [
+          "internal"
+        ],
+        "question": "Determine the internal resistance of the pack.",
+        "marks": 2,
+        "markscheme": [
+          "gradient $= -r$, e.g. gradient $= \\dfrac{15.5 - 19.5}{18.0 - 2.0} = -0.25\\ \\text{V A}^{-1}$ ✓",
+          "$r = 0.25\\ \\Omega$ ✓",
+          "Accept 0.230 to 0.270 Ω from a correctly drawn line, or the same value from $\\varepsilon = I(R + r)$ with one pair of readings and the emf from (b)(i)."
+        ],
+        "numeric": {
+          "answer": 0.25,
+          "unit": "Ω",
+          "range": [
+            0.23,
+            0.27
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "power",
+          "internal"
+        ],
+        "question": "The pack is then fitted to the drill. Calculate the power delivered to the drill when the current is 14.0 A.",
+        "marks": 1,
+        "markscheme": [
+          "$P = VI = 16.5 \\times 14.0 = 231\\ \\text{W}$ ✓"
+        ],
+        "numeric": {
+          "answer": 231,
+          "unit": "W",
+          "range": [
+            226,
+            236
+          ],
+          "mistakes": [
+            {
+              "value": 280,
+              "feedback": "The power delivered to the drill is the terminal p.d. (the p.d. across the drill) times the current, not the emf times the current: part of the emf is used inside the pack."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "sections": [
+          "internal",
+          "pd"
+        ],
+        "question": "Explain, in terms of energy, why the terminal potential difference is lower at higher currents.",
+        "marks": 2,
+        "markscheme": [
+          "the emf is the energy transferred to each coulomb of charge by the chemical reactions inside the pack, and it does not change ✓",
+          "some of this energy, $Ir$ per coulomb, is transferred to internal energy (heating) in the internal resistance of the pack, and this share grows as the current increases, so less energy per coulomb, $V = \\varepsilon - Ir$, is delivered to the external circuit ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "internal",
+          "power"
+        ],
+        "question": "Outline why a pack of cells for a power tool should have a small internal resistance.",
+        "marks": 2,
+        "markscheme": [
+          "a power tool draws a large current, so with a larger internal resistance the p.d. lost inside the pack ($Ir$) would be large and the terminal p.d., and so the power available to the motor, would fall sharply under load ✓",
+          "the power dissipated inside the pack, $I^2 r$, would be large, wasting the stored energy and heating the pack ✓"
         ]
       }
     ],

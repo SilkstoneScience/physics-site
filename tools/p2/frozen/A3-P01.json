@@ -1,0 +1,278 @@
+{
+  "question": {
+    "id": "A3-P01",
+    "theme": "A",
+    "topic": "A.3",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "stem": "<p>An energy-storage scheme in a mountain valley links two reservoirs. At night, when the demand for electrical energy is low, pumps raise water from the lower reservoir to the upper one. During the day the water flows back down through turbines, which drive generators. The upper reservoir holds $1.2 \\times 10^{6}$ $\\text{m}^{3}$ of water of density 1000 $\\text{kg m}^{-3}$, and the surface of this water is on average 320 m above the turbines. Pumping the full volume up takes 5.5 h with an electrical input power of 240 MW. Emptying the upper reservoir through the turbines takes 5.0 h and gives an average electrical output power of 190 MW.</p>",
+    "diagram": "questions/diagrams/p2-a3-reservoirs.svg",
+    "diagramAlt": "A mountain valley with an upper reservoir high on the left and a lower reservoir at the bottom right. A pipe runs from the upper reservoir down to a building housing the pumps and turbines next to the lower reservoir. The average height h of the upper water above the turbines is marked. Arrows show water pumped up at night and flowing down by day. Not to scale.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Show that the gravitational potential energy stored when the upper reservoir is full is about $3.8 \\times 10^{12}$ J.",
+        "marks": 2,
+        "markscheme": [
+          "mass of water $= \\rho V = 1000 \\times 1.2 \\times 10^{6} = 1.2 \\times 10^{9}\\ \\text{kg}$ ✓",
+          "$\\Delta E_p = mg\\Delta h = 1.2 \\times 10^{9} \\times 9.8 \\times 320 = 3.76 \\times 10^{12}\\ \\text{J}$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Calculate the average rate at which the water loses gravitational potential energy while the upper reservoir empties through the turbines.",
+        "marks": 2,
+        "markscheme": [
+          "$P = \\dfrac{\\Delta E_p}{\\Delta t} = \\dfrac{3.76 \\times 10^{12}}{5.0 \\times 3600}$ ✓",
+          "$P = 209\\ \\text{MW}$ ✓",
+          "Allow ECF from (a); accept 202 to 216 MW (the rounded value $3.8 \\times 10^{12}$ J from (a) gives an answer about 1 % larger, inside this range)"
+        ],
+        "numeric": {
+          "answer": 209.067,
+          "unit": "MW",
+          "range": [
+            202,
+            216
+          ],
+          "mistakes": [
+            {
+              "value": 752640,
+              "feedback": "Power is energy per second: convert the time from hours to seconds."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Determine the overall efficiency of the scheme, defined as the electrical energy delivered by the generators as a percentage of the electrical energy used by the pumps.",
+        "marks": 3,
+        "markscheme": [
+          "electrical energy in $= 240 \\times 10^{6} \\times 5.5 \\times 3600 = 4.75 \\times 10^{12}\\ \\text{J}$ ✓",
+          "electrical energy out $= 190 \\times 10^{6} \\times 5.0 \\times 3600 = 3.42 \\times 10^{12}\\ \\text{J}$ ✓",
+          "efficiency $= \\dfrac{3.42 \\times 10^{12}}{4.75 \\times 10^{12}} = 72\\%$ ✓",
+          "Accept 70.5 to 73.5 %. Award [2 max] for 91 % (generating stage only) or 79 % (pumping stage only)"
+        ],
+        "numeric": {
+          "answer": 71.9697,
+          "unit": "%",
+          "range": [
+            70.5,
+            73.5
+          ],
+          "mistakes": [
+            {
+              "value": 90.8801,
+              "feedback": "That compares the output with the energy stored in the water: it is the efficiency of the generating stage only. The question asks for electrical energy out over electrical energy in."
+            },
+            {
+              "value": 79.1919,
+              "feedback": "That is the efficiency of the pumping stage only (energy stored over electrical energy in). Compare the electrical energy out with the electrical energy in."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "Outline what happens to the energy that is not returned to the electrical supply.",
+        "marks": 2,
+        "markscheme": [
+          "work is done against friction and viscous forces as the water flows through the pipes, pumps and turbines (turbulence), so energy is transferred to the internal energy of the water and the pipes ✓",
+          "friction in the moving parts of the pumps, turbines and generators and the heating effect of the current in the windings and cables transfer energy to the surroundings as thermal energy ✓",
+          "the water leaving the turbines still has kinetic energy, which is not transferred to the generators ✓",
+          "Any 2 from the points above"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "The electrical energy in the region is generated mainly by wind and solar sources. Suggest why the storage scheme is valuable alongside these sources.",
+        "marks": 2,
+        "markscheme": [
+          "the output of wind and solar sources depends on the weather and the time of day, so it cannot be adjusted to match the demand ✓",
+          "surplus electrical energy at times of high supply or low demand is stored as gravitational potential energy and most of it is returned quickly when demand exceeds supply, reducing the need for other generators and the wasting of the surplus ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "A.3",
+    "B.1"
+  ],
+  "given": {
+    "V": {
+      "value": 1200000,
+      "sf": 2,
+      "unit": "m^3",
+      "range": [
+        100000,
+        100000000
+      ],
+      "what": "volume of water the upper reservoir holds"
+    },
+    "rho": {
+      "value": 1000,
+      "sf": 2,
+      "unit": "kg m^-3",
+      "range": [
+        990,
+        1030
+      ],
+      "what": "density of water"
+    },
+    "h": {
+      "value": 320,
+      "sf": 2,
+      "unit": "m",
+      "range": [
+        50,
+        800
+      ],
+      "what": "average height of the upper reservoir's water above the turbines"
+    },
+    "Pp": {
+      "value": 240,
+      "sf": 2,
+      "unit": "MW",
+      "range": [
+        10,
+        3000
+      ],
+      "what": "electrical input power of the pumps"
+    },
+    "tp": {
+      "value": 5.5,
+      "sf": 2,
+      "unit": "h",
+      "range": [
+        1,
+        24
+      ],
+      "what": "time to pump the full volume up"
+    },
+    "Pg": {
+      "value": 190,
+      "sf": 2,
+      "unit": "MW",
+      "range": [
+        10,
+        3000
+      ],
+      "what": "average electrical output power while generating"
+    },
+    "tg": {
+      "value": 5,
+      "sf": 2,
+      "unit": "h",
+      "range": [
+        1,
+        24
+      ],
+      "what": "time to empty the upper reservoir through the turbines"
+    }
+  },
+  "results": {
+    "mass": {
+      "value": 1200000000,
+      "unit": "kg",
+      "sf": 2
+    },
+    "E": {
+      "value": 3763200000000,
+      "unit": "J",
+      "sf": 2
+    },
+    "Pgpe": {
+      "value": 209.06666666666666,
+      "unit": "MW",
+      "sf": 3
+    },
+    "Ein": {
+      "value": 4752000000000,
+      "unit": "J",
+      "sf": 3
+    },
+    "Eout": {
+      "value": 3420000000000,
+      "unit": "J",
+      "sf": 3
+    },
+    "eff": {
+      "value": 71.96969696969697,
+      "unit": "%",
+      "sf": 2
+    },
+    "perkg": {
+      "value": 3136,
+      "unit": "J kg^-1",
+      "sf": 2
+    },
+    "wrong_eff": {
+      "value": 90.88010204081633,
+      "unit": "%",
+      "sf": 2
+    },
+    "wrong_eff2": {
+      "value": 79.19191919191918,
+      "unit": "%",
+      "sf": 2
+    },
+    "wrong_P": {
+      "value": 752640,
+      "unit": "MW",
+      "sf": 3
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Show that",
+      "syllabus": [
+        "A.3.5",
+        "B.1.2"
+      ],
+      "examinerNote": "m = ρV, then ΔEp = mgΔh with the average height. The unrounded value (3.76 × 10¹² J) must be seen."
+    },
+    {
+      "label": "b",
+      "command": "Calculate",
+      "syllabus": [
+        "A.3.7"
+      ],
+      "examinerNote": "P = ΔW/Δt with the hours converted to seconds. The electrical output (190 MW) is less than this because the generating stage is not 100 % efficient.",
+      "dependsOn": [
+        "a"
+      ]
+    },
+    {
+      "label": "c",
+      "command": "Determine",
+      "syllabus": [
+        "A.3.8",
+        "A.3.1"
+      ],
+      "examinerNote": "Useful energy out over total energy in, both electrical. Equivalent routes: the pumping stage stores 79 % of the energy supplied and the generating stage returns 91 % of what is stored; the product is 72 %."
+    },
+    {
+      "label": "d",
+      "command": "Outline",
+      "syllabus": [
+        "A.3.6",
+        "A.3.1"
+      ],
+      "examinerNote": "Energy is conserved: the missing 28 % is transferred by non-conservative forces (friction, viscous forces) and electrical heating to internal energy and dissipated to the surroundings. Accept \"sound\" as a minor route. Two distinct routes are needed for both marks."
+    },
+    {
+      "label": "e",
+      "command": "Suggest",
+      "syllabus": [
+        "A.3.1",
+        "A.3.8"
+      ],
+      "examinerNote": "Aims 5 and 9: a stored-energy buffer makes variable sources usable. Credit any clear link between variable supply, storage as potential energy and release on demand; the efficiency found in (c) shows that most of the stored energy is recovered."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-a3-reservoirs.svg": "ad79d36d92e4825029662587e77d529dfa32677a87ffc254129402efd7e87eb9"
+  }
+}
