@@ -299,26 +299,37 @@
     <h2 id="flows">9. Energy flows between the surface and the atmosphere</h2>
     <p>A better model treats the <strong>surface</strong> and the <strong>atmosphere</strong> as two separate systems that exchange energy. Each one is in equilibrium when its energy in equals its energy out. The diagram shows average flows, in $\text{W m}^{-2}$, for a simplified model of the Earth.</p>
     <figure class="diagram">
-      <svg viewBox="0 0 400 278" role="img" aria-labelledby="b2et">
-        <title id="b2et">Average energy flows in watts per square metre. Of 340 arriving from the Sun, 100 is reflected to space, 75 is absorbed by the atmosphere and 165 is absorbed by the surface. The surface emits 395 as infrared: 35 escapes directly to space and 360 is absorbed by the atmosphere. The surface also transfers 105 to the atmosphere by convection and evaporation. The atmosphere radiates 335 back down to the surface and 205 out to space.</title>
-        <rect x="0" y="95" width="400" height="70" class="area" opacity="0.7"/>
-        <rect x="0" y="248" width="400" height="22" class="f3" opacity="0.25"/>
-        <line class="l2" x1="20" y1="18" x2="20" y2="246" marker-end="url(#ah2)"/>
-        <line class="l2 dash" x1="58" y1="246" x2="58" y2="18" marker-end="url(#ah2)"/>
-        <line class="l2" x1="96" y1="18" x2="96" y2="128" marker-end="url(#ah2)"/>
-        <line class="l1" x1="140" y1="246" x2="140" y2="132" marker-end="url(#ah1)"/>
-        <line class="l1" x1="178" y1="246" x2="178" y2="18" marker-end="url(#ah1)"/>
-        <line class="l3" x1="216" y1="246" x2="216" y2="132" marker-end="url(#ah3)"/>
-        <line class="l1" x1="256" y1="132" x2="256" y2="246" marker-end="url(#ah1)"/>
-        <line class="l1" x1="296" y1="128" x2="296" y2="18" marker-end="url(#ah1)"/>
-        <g style="font-size:14px">
-          <text style="font-size:14px" class="t2" x="24" y="62">340</text><text style="font-size:14px" class="t2" x="62" y="62">100</text><text style="font-size:14px" class="t2" x="100" y="62">75</text>
-          <text style="font-size:14px" class="t1" x="182" y="62">35</text><text style="font-size:14px" class="t1" x="300" y="62">205</text>
-          <text style="font-size:14px" class="t1" x="144" y="210">360</text><text style="font-size:14px" x="220" y="210">105</text><text style="font-size:14px" class="t1" x="260" y="210">335</text>
-        </g>
-        <g text-anchor="end" style="font-size:14px"><text style="font-size:14px" x="396" y="40">space</text><text style="font-size:14px" x="396" y="135">atmosphere</text><text style="font-size:14px" x="396" y="264">surface</text></g>
+      <svg viewBox="0 0 432 342" role="img" aria-labelledby="b2et">
+        <title id="b2et">Sankey diagram of average energy flows in watts per square metre, with arrow widths to scale. A band of 340 arrives from the Sun and splits: 100 turns round and is reflected to space, 75 ends in the atmosphere, and 165 continues to the surface. The surface emits 395 as infrared in a band that splits into 360, which ends in the atmosphere, and a thin 35, which escapes to space. The surface also transfers 105 to the atmosphere by convection and evaporation. The atmosphere radiates 335 back down to the surface and 205 out to space.</title>
+        <rect x="0" y="125" width="432" height="80" class="area"/>
+        <rect x="0" y="300" width="432" height="40" class="f3" opacity="0.25"/>
+        <rect x="51" y="24" width="85" height="56" style="fill:#d9a400"/>
+        <path d="M76,80 A31,31 0 0 1 14,80 V40 L26.5,24 L39,40 V80 A6,6 0 0 0 51,80 Z" style="fill:#d9a400;opacity:0.55"/>
+        <rect x="76" y="80" width="41.25" height="204" style="fill:#d9a400"/>
+        <polygon points="76,284 76,284 96.63,300 117.25,284 117.25,284" style="fill:#d9a400"/>
+        <polygon points="117.25,80 117.25,112.81 126.63,125 136,112.81 136,80" style="fill:#d9a400"/>
+        <polygon points="150,205 150,284 191.88,300 233.75,284 233.75,205" style="fill:var(--theme-b)"/>
+        <polygon points="250,300 250,221 295,205 340,221 340,300" style="fill:var(--theme-b)"/>
+        <polygon points="340,300 340,29.69 344.38,24 348.75,29.69 348.75,300" style="fill:var(--theme-b)"/>
+        <polygon points="365,300 365,221 378.13,205 391.25,221 391.25,300" style="fill:var(--muted)"/>
+        <polygon points="262,125 262,40 287.63,24 313.25,40 313.25,125" style="fill:var(--theme-b)"/>
+        <text x="93.5" y="46" text-anchor="middle" style="font-weight:700;fill:#1c2430">solar</text>
+        <text x="93.5" y="70" text-anchor="middle" style="font-weight:700;fill:#1c2430">340</text>
+        <text x="26.5" y="18" text-anchor="middle" style="font-weight:700;">100</text>
+        <text x="96.63" y="262" text-anchor="middle" style="font-weight:700;fill:#1c2430">165</text>
+        <text x="154" y="112" text-anchor="middle" style="font-weight:700;">75</text>
+        <text x="191.88" y="238" text-anchor="middle" style="font-weight:700;fill:var(--surface)">infrared</text>
+        <text x="191.88" y="262" text-anchor="middle" style="font-weight:700;fill:var(--surface)">335</text>
+        <text x="295" y="250" text-anchor="middle" style="font-weight:700;fill:var(--surface)">infrared</text>
+        <text x="295" y="274" text-anchor="middle" style="font-weight:700;fill:var(--surface)">360</text>
+        <text x="287.63" y="84" text-anchor="middle" style="font-weight:700;fill:var(--surface)">205</text>
+        <text x="344.38" y="18" text-anchor="middle" style="font-weight:700;">35</text>
+        <text x="413.25" y="262" text-anchor="middle" style="font-weight:700;">105</text>
+        <text x="170" y="60">space</text>
+        <text x="175" y="171">atmosphere</text>
+        <text x="8" y="326">surface</text>
       </svg>
-      <figcaption><span class="key-2">Solar radiation</span> (dashed: reflected), <span class="key-1">infrared radiation</span>, and convection and evaporation (black). The surface absorbs 340 − 100 − 75 = 165 of sunlight.</figcaption>
+      <figcaption>Arrow widths are to scale. Yellow: solar radiation (faded: reflected to space). <span class="key-2">Orange: infrared radiation</span>. Grey: convection and evaporation. The surface absorbs 340 − 100 − 75 = 165 of sunlight.</figcaption>
     </figure>
     <div class="worked">
       <h3>Worked example: checking the balance</h3>
