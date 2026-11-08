@@ -105,7 +105,8 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - **Theme A done** (pilot, teacher-checked and pushed): 10 scientists in `scientists.json` with public-domain pictures in `images/scientists/`. Each box sits in the section the work fits best and is drawn by `js/site.js`. There's a "Famous scientists" part in the revision sheet builder, and the checker rules are in `tools/check.mjs` (3a).
 - **Theme B done** (teacher-checked, 8 November 2026): Black, Telkes, Foote (her 1856 paper instead of a portrait), Manabe, Boyle, Bernoulli, Carnot, Boltzmann, Latimer, Ohm.
 - **Theme C done** (teacher-checked, 8 November 2026): Zhang Heng (a model of his seismoscope), Huygens, Lehmann, J. C. Bose, Ibn al-Haytham and Ibn Sahl (manuscript pages: no portraits exist), Germain, Raman, Doppler, Rubin.
-- Next: themes D–E (18 scientists), in batches by theme, each fact-checked, with openly licensed pictures.
+- **Theme D done** (teacher-checked, 8 November 2026): Katherine Johnson, Mary Golda Ross (HL, shown on the 2019 one-dollar coin), Coulomb, Shen Kuo (a modern statue), J. J. Thomson, Joan Feynman, Faraday, Tesla.
+- Next: theme E (10 scientists), fact-checked, with openly licensed pictures.
 
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
