@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 170" class="small">
+  <!-- The last two camera frames, overlaid. Key drawn faint (frame 1) and solid (frame 2), 0.23 m apart (60 px). -->
+  <rect x="6" y="6" width="248" height="158" rx="4" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <!-- Rain -->
+  <g class="grid">
+    <line x1="30" y1="20" x2="24" y2="40"/><line x1="60" y1="70" x2="54" y2="90"/><line x1="40" y1="110" x2="34" y2="130"/>
+    <line x1="210" y1="30" x2="204" y2="50"/><line x1="230" y1="90" x2="224" y2="110"/><line x1="200" y1="105" x2="194" y2="125"/>
+    <line x1="80" y1="25" x2="74" y2="45"/><line x1="90" y1="115" x2="84" y2="135"/>
+  </g>
+  <!-- Flowerbed -->
+  <rect x="6" y="144" width="248" height="20" style="fill: var(--theme-e); opacity: 0.55"/>
+  <line x1="6" y1="144" x2="254" y2="144" stroke="currentColor" stroke-width="1.5"/>
+  <!-- Key, frame 1 (faint) -->
+  <g style="opacity: 0.4" stroke="currentColor" stroke-width="2.5" fill="none">
+    <circle cx="124" cy="60" r="6"/><line x1="130" y1="60" x2="150" y2="60"/><line x1="144" y1="60" x2="144" y2="66"/><line x1="149" y1="60" x2="149" y2="66"/>
+  </g>
+  <!-- Key, frame 2 -->
+  <g stroke="currentColor" stroke-width="2.5" fill="none">
+    <circle cx="124" cy="120" r="6"/><line x1="130" y1="120" x2="150" y2="120"/><line x1="144" y1="120" x2="144" y2="126"/><line x1="149" y1="120" x2="149" y2="126"/>
+  </g>
+  <text x="112" y="65" text-anchor="end" font-size="13">frame 1</text>
+  <text x="112" y="125" text-anchor="end" font-size="13">frame 2</text>
+  <!-- Measurement -->
+  <line x1="168" y1="60" x2="168" y2="120" class="l1 thin"/>
+  <line x1="162" y1="60" x2="174" y2="60" class="l1 thin"/>
+  <line x1="162" y1="120" x2="174" y2="120" class="l1 thin"/>
+  <text x="178" y="95" font-size="13" class="t1">0.23 m</text>
+  <text x="14" y="24" font-size="12">50 frames/s</text>
+  <text x="246" y="24" text-anchor="end" font-size="12">20:14:40</text>
+</svg>

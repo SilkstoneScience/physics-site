@@ -302,6 +302,79 @@ for (const it of readThink('think/big-questions.json')) {
   }
 }
 
+// ---------- 2f. Physics mysteries (mysteries/*.json, played by mystery.html and js/mystery.js) ----------
+// Plan: docs/MYSTERY_PLAN.md. Each case's clue answers are marked by js/numeric.js, so they get the same checks as the question bank.
+for (const name of exists('mysteries') ? fs.readdirSync(path.join(ROOT, 'mysteries')).filter((n) => n.endsWith('.json')) : []) {
+  const rel = `mysteries/${name}`;
+  let M;
+  try { M = JSON.parse(read(rel)); } catch (e) { err(rel, `isn't valid JSON: ${e.message}`); continue; }
+  if (M.id !== name.replace(/\.json$/, '')) err(rel, `"id" must match the file name (${name.replace(/\.json$/, '')})`);
+  if (!exists('games.html') || !read('games.html').includes(`mystery.html?case=${M.id}`)) warn(rel, 'not linked from games.html yet');
+  for (const k of ['title', 'intro', 'summary', 'time']) checkText(rel, M[k], k);
+  if (!['SL', 'HL'].includes(M.level)) err(rel, 'level must be "SL" or "HL"');
+  for (const t of M.topics || []) if (!TOPICS.has(t)) err(rel, `unknown topic "${t}"`);
+  if (M.level === 'SL' && (M.topics || []).some((t) => TOPICS.get(t)?.hl)) err(rel, 'an SL case uses an HL-only topic');
+  const suspects = new Set();
+  for (const s of M.suspects || []) {
+    const where = `${rel} suspect ${s.id}`;
+    suspects.add(s.id);
+    if (!s.name || !s.role || !Array.isArray(s.statement) || !s.statement.length) err(where, 'needs a name, a role and a statement (a list of sentences)');
+    else s.statement.forEach((t, i) => checkText(where, t, `statement ${i + 1}`));
+    for (const i of s.claims || []) if (!s.statement || !s.statement[i]) err(where, `claims lists sentence ${i}, which doesn't exist (0 = first)`);
+  }
+  if (suspects.size < 3) err(rel, 'a case needs at least 3 suspects');
+  const evidence = new Set();
+  for (const ev of M.evidence || []) {
+    const where = `${rel} evidence ${ev.id}`;
+    if (evidence.has(ev.id)) err(where, 'duplicate id');
+    evidence.add(ev.id);
+    checkText(where, ev.title, 'title');
+    checkText(where, ev.html, 'html');
+    if (ev.figure) {
+      if (!ev.figure.alt) err(where, 'figure has no alt text');
+      if (!ev.figure.svg || !exists(`mysteries/${ev.figure.svg}`)) err(where, `figure file not found: mysteries/${ev.figure.svg}`);
+      else if (/\sid="/.test(read(`mysteries/${ev.figure.svg}`)) || /<defs[\s>]/.test(read(`mysteries/${ev.figure.svg}`))) err(where, 'the picture contains an id or <defs>: it can appear twice on the page (case file and clue), so ids would clash');
+    }
+  }
+  const clues = new Set();
+  for (const c of M.clues || []) {
+    const where = `${rel} clue ${c.id}`;
+    if (clues.has(c.id)) err(where, 'duplicate id');
+    clues.add(c.id);
+    for (const k of ['title', 'task', 'hint', 'working', 'notePrompt', 'modelNote']) checkText(where, c[k], k);
+    if (!TOPICS.has(c.topic)) err(where, `unknown topic "${c.topic}"`);
+    else if (!(M.topics || []).includes(c.topic)) err(where, `topic ${c.topic} isn't in the case's "topics" list`);
+    else if (c.section) {
+      const page = `themes/${c.topic.replace('.', '').toLowerCase()}.html`;
+      if (!new RegExp(`\\sid="${c.section}"`).test(read(page))) err(where, `section "${c.section}" isn't an id on ${page}`);
+    }
+    for (const id of c.evidence || []) if (!evidence.has(id)) err(where, `evidence "${id}" doesn't exist`);
+    if (!c.numeric) err(where, 'needs a "numeric" answer');
+    else { checkNumericField(where, c.numeric); if (!c.numeric.unit) warn(where, 'numeric answer has no unit'); }
+    const p = c.prove;
+    if (!p || !Array.isArray(p.options) || p.options.length < 2 || p.options.length > 4) err(where, 'prove needs 2 to 4 options');
+    else {
+      checkText(where, p.question, 'prove.question');
+      p.options.forEach((o, i) => checkText(where, o, `prove option ${i + 1}`));
+      if (!Number.isInteger(p.answer) || p.answer < 0 || p.answer >= p.options.length) err(where, 'prove.answer must be the number of the correct option (0 = first)');
+      p.options.forEach((o, i) => { if (i !== p.answer && !(p.feedback && p.feedback[i])) err(where, `prove option ${i + 1} is wrong but has no feedback`); });
+    }
+  }
+  for (const iv of M.interviews || []) {
+    if (!suspects.has(iv.suspect)) err(`${rel} interview`, `unknown suspect "${iv.suspect}"`);
+    if (!clues.has(iv.after)) err(`${rel} interview ${iv.suspect}`, `unknown clue "${iv.after}"`);
+    for (const q of iv.questions || []) { checkText(`${rel} interview ${iv.suspect}`, q.q, 'question'); checkText(`${rel} interview ${iv.suspect}`, q.a, 'answer'); }
+  }
+  const A = M.accusation || {};
+  if (!suspects.has(A.culprit)) err(`${rel} accusation`, 'culprit must be one of the suspects');
+  for (const s of suspects) if (s !== A.culprit && !(A.wrong || {})[s]) err(`${rel} accusation`, `no "wrong" explanation for ${s}`);
+  if (!Array.isArray(A.cards) || !A.cards.some((c) => c.use === 'key')) err(`${rel} accusation`, 'needs evidence cards, at least one with use "key"');
+  for (const c of A.cards || []) if (!['key', 'support', 'no'].includes(c.use) || !c.text || !c.why) err(`${rel} accusation`, 'each card needs text, why, and use "key", "support" or "no"');
+  checkText(`${rel} accusation`, A.model, 'model');
+  if (A.solution !== undefined) checkText(`${rel} accusation`, A.solution, 'solution');
+  if (!Array.isArray(A.checklist) || !A.checklist.length) err(`${rel} accusation`, 'needs a checklist');
+}
+
 // ---------- 3. Pages: set-up and links ----------
 function htmlFiles(dir = '') {
   return fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true }).flatMap((d) => {

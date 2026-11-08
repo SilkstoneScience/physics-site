@@ -1,0 +1,118 @@
+/* Physics mysteries (mystery.html). Colours come from the tokens in style.css, so dark mode follows. */
+
+.button.small { padding: 7px 12px; font-size: 0.92rem; }
+.my-help { color: var(--muted); font-size: 0.93rem; margin: 4px 0 8px; }
+.my-empty { color: var(--muted); font-style: italic; }
+.my-role { color: var(--muted); font-weight: 400; font-size: 0.9rem; }
+.my-meta { margin: 6px 0 10px; }
+.my-meta .tag { text-decoration: none; }
+.my-how { margin: 8px 0 14px; }
+.my-how summary { cursor: pointer; font-weight: 600; }
+
+/* Progress bar and tabs */
+.my-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 10px 14px; margin: 12px 0; }
+.my-bar-btns { margin-left: auto; display: flex; flex-wrap: wrap; gap: 8px; }
+.my-dot { color: var(--muted); }
+.my-tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 2px solid var(--border); margin: 16px 0 0; }
+.my-tabs button { font: inherit; background: none; border: 0; border-bottom: 3px solid transparent; margin-bottom: -2px; padding: 8px 12px;
+  color: var(--muted); cursor: pointer; }
+.my-tabs button[aria-selected="true"] { color: var(--text); font-weight: 700; border-bottom-color: var(--accent); }
+.my-tabs button:hover { color: var(--text); }
+.my-tabs button.ready::after { content: " ●"; color: var(--good); }
+.my-panel { padding-top: 6px; }
+.my-panel h2 { margin-top: 14px; }
+
+/* Evidence */
+.my-ev { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); margin: 8px 0; }
+.my-ev summary { cursor: pointer; padding: 10px 14px; font-weight: 600; }
+.my-ev-body { padding: 0 14px 12px; }
+.ev-table { border-collapse: collapse; margin: 8px 0; }
+.ev-table th, .ev-table td { border: 1px solid var(--border); padding: 5px 9px; text-align: left; vertical-align: top; }
+.ev-receipt { font-family: "Courier New", Courier, monospace; background: var(--bg); border: 1px dashed var(--border); max-width: 280px;
+  padding: 8px 14px; }
+.ev-receipt p { margin: 4px 0; }
+.ev-plate { display: inline-block; font-family: system-ui, sans-serif; letter-spacing: 0.04em; background: var(--bg); border: 2px solid var(--muted);
+  border-radius: 6px; padding: 6px 14px; }
+.ev-plate p { margin: 3px 0; }
+.ev-letter { background: var(--bg); border-left: 4px solid var(--border); padding: 4px 14px; font-style: italic; }
+
+/* Suspects */
+.my-suspect { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 12px 16px; margin: 12px 0; }
+.my-suspect h3 { margin-top: 0; }
+.my-statement { line-height: 1.7; }
+.my-sent { font: inherit; color: inherit; background: none; border: 0; padding: 1px 2px; margin: 0; text-align: left; display: inline;
+  cursor: pointer; border-radius: 3px; border-bottom: 1px dotted var(--muted); }
+.my-sent:hover { background: var(--accent-soft); }
+.my-sent.pinned { background: var(--warn-soft); border-bottom: 2px solid var(--theme-b); }
+.my-sent.pinned::before { content: "📌 "; }
+.my-locked { color: var(--muted); font-style: italic; }
+.my-interview h4 { margin: 12px 0 2px; }
+.my-qa { margin: 8px 0; }
+.my-q { margin: 0; font-weight: 600; }
+.my-a { margin: 2px 0 0 14px; font-style: italic; }
+
+/* Clues */
+.my-clue { border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: var(--radius); background: var(--surface);
+  padding: 12px 16px; margin: 14px 0; scroll-margin-top: 80px; }
+.my-clue.solved { border-left-color: var(--good); }
+.my-clue h3 { margin-top: 0; }
+.my-solved { font-size: 0.85rem; color: var(--good); font-weight: 700; margin-left: 6px; }
+.my-clue-ev .my-ev { background: var(--bg); }
+.my-calc label { font-weight: 600; display: block; margin-top: 8px; }
+.my-calc-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 4px; }
+.my-calc input { width: 9em; font: inherit; padding: 7px 9px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); }
+.my-help-btns { font-size: 0.93rem; }
+.my-prove h4 { margin: 14px 0 4px; }
+.my-why { font-size: 0.92rem; color: var(--muted); margin: 4px 0 0 12px; }
+.my-note { margin-top: 12px; }
+.my-note label { display: block; margin-bottom: 4px; }
+.my-note textarea, .my-accuse textarea { width: 100%; font: inherit; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px;
+  background: var(--bg); color: var(--text); box-sizing: border-box; }
+.my-model { background: var(--accent-soft); border-radius: 8px; padding: 8px 12px; margin: 8px 0; }
+.my-model p { margin: 4px 0; }
+.my-next { margin-top: 12px; }
+
+/* Notebook */
+.my-nb-note { border-bottom: 1px solid var(--border); padding: 4px 0 8px; }
+
+/* Accusation */
+.my-accuse fieldset { border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; margin: 0 0 14px; background: var(--surface); }
+.my-accuse legend { font-weight: 700; padding: 0 6px; }
+.my-choice { display: block; margin: 7px 0; cursor: pointer; }
+.my-choice input { width: auto; margin: 0 6px 0 0; vertical-align: -0.1em; }
+.my-rank { font-size: 1.3rem; }
+.my-quote { border-left: 4px solid var(--border); margin: 8px 0; padding: 4px 14px; }
+.my-cards { list-style: none; padding: 0; }
+.my-cards li { border: 1px solid var(--border); border-left: 5px solid var(--border); border-radius: 8px; padding: 8px 12px; margin: 8px 0; background: var(--surface); }
+.my-cards li.use-key { border-left-color: var(--good); }
+.my-cards li.use-support { border-left-color: var(--accent); }
+.my-cards li.use-no { border-left-color: var(--bad); }
+.my-card-tag { font-weight: 700; font-size: 0.85rem; }
+.my-chosen { font-size: 0.85rem; background: var(--accent-soft); border-radius: 999px; padding: 1px 8px; }
+.my-cards .my-why { display: block; margin: 4px 0 0; }
+
+/* Phones */
+@media (max-width: 600px) {
+  .my-bar-btns { margin-left: 0; }
+  [data-act="board"] { display: none; }
+  .my-tabs button { padding: 8px 8px; font-size: 0.93rem; }
+  .my-suspect, .my-clue { padding: 10px 12px; }
+}
+
+/* Board view: full screen, large text for the class */
+body.my-on-board #site-header, body.my-on-board #site-footer, body.my-on-board .crumbs, body.my-on-board .page-back,
+body.my-on-board .eq-fab { display: none; }
+body.my-on-board main { max-width: 1400px; font-size: 1.3rem; }
+
+/* Printing the case file: story, statements, evidence and clue tasks, without answers */
+@media print {
+  #site-header, #site-footer, .crumbs, .page-back, .eq-fab, .my-bar, .my-tabs, .my-how, .my-next, .my-calc, .my-fb, .my-help-btns,
+  .my-prove, .my-note, .feedback, .hint, .my-interview, .my-locked, #panel-notebook, #panel-accuse { display: none !important; }
+  .my-panel[hidden] { display: block !important; }
+  #panel-notebook[hidden], #panel-accuse[hidden] { display: none !important; }
+  .my-clue-ev { display: none; }
+  .my-ev, .my-suspect, .my-clue { break-inside: avoid; }
+  .my-sent { border: 0; }
+  .my-sent.pinned::before { content: ""; }
+}

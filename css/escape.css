@@ -1,0 +1,106 @@
+/* Physics escape room (escape.html). Colours come from the tokens in style.css, so dark mode follows. */
+
+.button.small { padding: 7px 12px; font-size: 0.92rem; }
+.er-help { color: var(--muted); margin: 0 0 10px; font-size: 0.95rem; }
+
+/* ----- Set-up ----- */
+.er-setup fieldset { border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; margin: 0 0 14px; background: var(--surface); }
+.er-setup legend { font-weight: 700; padding: 0 6px; }
+.er-theme-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.er-theme { border-left: 5px solid var(--theme-color, var(--accent)); padding: 4px 0 4px 10px; }
+.er-theme ul { list-style: none; margin: 6px 0 0; padding: 0 0 0 22px; }
+.er-theme li { margin: 3px 0; }
+.er-theme label, .er-options label { cursor: pointer; }
+.er-setup input[type="checkbox"], .er-setup input[type="radio"] { width: auto; margin: 0 6px 0 0; vertical-align: -0.1em; }
+.er-theme-label { display: block; }
+.er-options { display: grid; gap: 0 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.er-options label { display: block; margin: 5px 0; }
+.er-quick { margin: 10px 0 0; }
+.er-count { font-weight: 600; }
+.er-count.bad { color: var(--bad); }
+.er-rules { margin-top: 18px; }
+.er-rules summary { cursor: pointer; font-weight: 600; }
+
+/* ----- Heads-up display ----- */
+.er-hud { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 10px 14px; position: sticky; top: var(--er-top, 0); z-index: 5; }
+.er-stat { white-space: nowrap; }
+.er-stat-label { color: var(--muted); font-size: 0.85rem; margin-right: 4px; }
+.er-time { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1.15rem; }
+.er-time.low { color: var(--bad); }
+.er-time.over { color: var(--bad); }
+.er-hud-btns { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+.er-story { color: var(--muted); font-style: italic; }
+
+/* ----- Locks ----- */
+.er-locks { list-style: none; padding: 0; margin: 16px 0; display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); }
+.er-lock { width: 100%; display: grid; justify-items: center; gap: 4px; padding: 12px 6px 10px; font: inherit; color: var(--text); cursor: pointer;
+  background: var(--surface); border: 1px solid var(--border); border-top: 5px solid var(--theme-color, var(--accent)); border-radius: var(--radius);
+  transition: transform 0.15s, box-shadow 0.15s; }
+.er-lock:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12); }
+.er-lock.is-current { outline: 3px solid var(--accent); outline-offset: 2px; }
+.er-padlock { width: 44px; height: 52px; }
+.er-padlock .shackle { fill: none; stroke: var(--muted); stroke-width: 5; stroke-linecap: round; }
+.er-padlock .body { fill: var(--theme-color, var(--accent)); }
+.er-lock.is-open .er-padlock .body { fill: var(--good); }
+.er-lock.is-open .er-padlock .shackle { stroke: var(--good); }
+.er-lock.is-open { background: var(--good-soft); }
+.er-sym { width: 26px; height: 26px; fill: none; stroke: var(--text); stroke-width: 2.2; stroke-linejoin: round; }
+.er-sym.inline { width: 1.1em; height: 1.1em; vertical-align: -0.15em; }
+.er-lock-digit { font-size: 1.6rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.er-lock:not(.is-open) .er-lock-digit { color: var(--muted); }
+.er-lock-topic { font-size: 0.82rem; color: var(--muted); }
+.er-lock.is-open .er-padlock { animation: er-pop 0.4s ease-out; }
+@keyframes er-pop { 0% { transform: scale(0.85); } 60% { transform: scale(1.12); } 100% { transform: scale(1); } }
+
+/* ----- A lock's question ----- */
+.er-puzzle, .er-door { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin: 16px 0;
+  scroll-margin-top: 80px; }
+.er-puzzle h3 { margin-top: 0; }
+.er-puzzle h3 .tag { font-size: 0.8rem; font-weight: 400; vertical-align: 0.1em; margin-left: 4px; }
+.er-fig { margin: 12px 0; text-align: center; }
+.er-fig img { background: #fff; border-radius: 8px; padding: 6px; width: 100%; max-width: 420px; }
+.option.is-out { opacity: 0.5; }
+.option.is-out > span:last-child { text-decoration: line-through; }
+.er-puzzle-btns { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
+.er-big-digit { display: inline-block; font-size: 1.8rem; font-weight: 800; padding: 0 6px; vertical-align: -0.2em; }
+.shake { animation: er-shake 0.35s; }
+@keyframes er-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+/* ----- The door keypad ----- */
+.er-door h3 { margin-top: 0; }
+.er-keypad { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
+.er-key { display: grid; justify-items: center; gap: 4px; }
+.er-key .er-sym { width: 32px; height: 32px; }
+.er-key input { width: 2.4em; font: inherit; font-size: 1.6rem; font-weight: 700; text-align: center; padding: 6px 0; border: 2px solid var(--border);
+  border-radius: 8px; background: var(--bg); color: var(--text); }
+.er-key input:focus { border-color: var(--accent); outline: none; }
+
+/* ----- The end ----- */
+.er-final { font-size: 1.25rem; }
+.er-review { width: 100%; border-collapse: collapse; }
+.er-review th, .er-review td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.er-res.good { color: var(--good); font-weight: 600; }
+.er-res.mid { color: var(--text); }
+.er-res.bad { color: var(--bad); font-weight: 600; }
+
+/* ----- Phones ----- */
+@media (max-width: 600px) {
+  .er-locks { grid-template-columns: repeat(2, 1fr); }
+  .er-hud { gap: 6px 12px; padding: 8px 10px; }
+  .er-hud-btns { margin-left: auto; }
+  #er-board { display: none; }
+  .er-review th:nth-child(1), .er-review td:nth-child(1) { display: none; }
+}
+
+/* ----- Board view: full screen, large text for the class ----- */
+body.er-on-board #site-header, body.er-on-board #site-footer, body.er-on-board main > h1, body.er-on-board main > .lead,
+body.er-on-board .page-back, body.er-on-board .eq-fab { display: none; }
+body.er-on-board main { max-width: 1400px; font-size: 1.35rem; }
+body.er-on-board .er-padlock { width: 64px; height: 76px; }
+body.er-on-board .er-lock-digit { font-size: 2.4rem; }
+body.er-on-board .er-fig img { max-width: 620px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .er-lock, .er-lock.is-open .er-padlock, .shake { animation: none; transition: none; }
+}

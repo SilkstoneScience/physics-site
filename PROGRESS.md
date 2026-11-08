@@ -111,6 +111,20 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - **Theme E done** (teacher-checked, 8 November 2026): Rutherford, Nagaoka, S. N. Bose, Elmer Imes (a measured HCl infrared spectrum: no open photo exists), Marie Curie, Chien-Shiung Wu, Meitner, Fermi, Payne-Gaposchkin, Chandrasekhar.
 - **All 48 scientists are on the site.** Possible later step: make the checker warn about any subtopic page without two scientists.
 
+## Escape room (November 2026, first version, waiting for the teacher's check)
+- `escape.html` (code `js/escape.js`, styles `css/escape.css`), on the Review games page (`games.html`).
+- Students choose topics (by theme or one by one), SL or HL, length (1–3 rooms of 4 locks) and stopwatch or "race the clock" (2½ minutes per lock).
+- Each lock is a Paper 1A question from the question bank, so new questions appear automatically. Wrong answer: option crossed out, +30 s. Hint: rules out one wrong answer, +1 min. Each open lock shows a symbol and a digit; the door asks for the digits in the order of its symbols (+30 s for a wrong code).
+- The explanation shows after each lock opens; the end screen lists every lock with links to the notes section and the question. Σ Equations panel follows the current lock. "Show on the board" for class play. Best times saved only in the browser.
+- Ideas for later: escape-room-only puzzles (typed numerical codes, word locks), team names, a printable answer sheet.
+
+## Review games page and mysteries (November 2026, first case waiting for the teacher's check)
+- `games.html` holds the escape room and the mysteries; the home-page card "Review games" replaces the escape-room card.
+- Mysteries: `mystery.html?case=<id>` plays any case in `mysteries/<id>.json` (code `js/mystery.js`, styles `css/mystery.css`, pictures in `mysteries/diagrams/`). Plan and decisions: `docs/MYSTERY_PLAN.md`.
+- Case 1, "The vanishing meteorite" (SL; A.1, B.1, B.5, C.2): four clues with typed answers, "what does this prove?" choices, detective's notes, interviews, and a written accusation checked against a model and a checklist. Rank from hints and wrong answers. Board view and a printable case file. Independent review done; the teacher's check still to do.
+- Checker rules for case files are in `tools/check.mjs` (2f).
+- Next: more cases (e.g. themes D and E, or an HL case), once the teacher has tried the first.
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".

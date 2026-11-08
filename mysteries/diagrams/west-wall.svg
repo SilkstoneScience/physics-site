@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -24 380 326">
+  <!-- West wall of the museum. Vertical scale: 20 px per metre, ground at y = 270. Window sills: 3.5 m (y 200), 7.0 m (y 130), 10.5 m (y 60). -->
+  <!-- Dome and lightning rod -->
+  <path d="M110 70 A70 70 0 0 1 250 70 Z" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <line x1="180" y1="0" x2="180" y2="-16" stroke="currentColor" stroke-width="2"/>
+  <circle cx="180" cy="-18" r="2.5" class="f3"/>
+  <!-- Building -->
+  <rect x="80" y="70" width="200" height="200" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <line x1="80" y1="218" x2="280" y2="218" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="80" y1="148" x2="280" y2="148" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="180" y1="70" x2="180" y2="148" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="180" y1="218" x2="180" y2="270" stroke="currentColor" stroke-width="1.5"/>
+  <!-- Windows -->
+  <rect x="165" y="40" width="30" height="20" class="area" style="stroke: currentColor; stroke-width: 1.5"/>
+  <rect x="110" y="102" width="40" height="28" class="area" style="stroke: currentColor; stroke-width: 1.5"/>
+  <rect x="210" y="102" width="40" height="28" class="area" style="stroke: currentColor; stroke-width: 1.5"/>
+  <rect x="100" y="172" width="40" height="28" class="area" style="stroke: currentColor; stroke-width: 1.5"/>
+  <rect x="220" y="172" width="40" height="28" class="area" style="stroke: currentColor; stroke-width: 1.5"/>
+  <!-- Room names -->
+  <text x="180" y="32" text-anchor="middle" font-size="13">Dome</text>
+  <text x="130" y="94" text-anchor="middle" font-size="13">Workshop</text>
+  <text x="230" y="94" text-anchor="middle" font-size="13">Office</text>
+  <text x="180" y="166" text-anchor="middle" font-size="13">Gallery</text>
+  <text x="130" y="250" text-anchor="middle" font-size="13">Café</text>
+  <text x="230" y="250" text-anchor="middle" font-size="13">Foyer</text>
+  <!-- Sill heights -->
+  <line x1="195" y1="60" x2="296" y2="60" class="grid dash"/>
+  <line x1="250" y1="130" x2="296" y2="130" class="grid dash"/>
+  <line x1="260" y1="200" x2="296" y2="200" class="grid dash"/>
+  <text x="300" y="65" font-size="13" class="t1">10.5 m</text>
+  <text x="300" y="135" font-size="13" class="t1">7.0 m</text>
+  <text x="300" y="205" font-size="13" class="t1">3.5 m</text>
+  <!-- Ground, flowerbed and camera -->
+  <rect x="80" y="270" width="200" height="8" style="fill: var(--theme-e); opacity: 0.55"/>
+  <line x1="10" y1="270" x2="370" y2="270" stroke="currentColor" stroke-width="2"/>
+  <line x1="31" y1="262" x2="31" y2="270" stroke="currentColor" stroke-width="2"/>
+  <rect x="20" y="249" width="22" height="13" rx="2" class="f3"/>
+  <path d="M42 252 L50 249 L50 262 L42 259 Z" class="f3"/>
+  <text x="180" y="295" text-anchor="middle" font-size="13">Flowerbed</text>
+  <text x="34" y="295" text-anchor="middle" font-size="13">Camera</text>
+</svg>

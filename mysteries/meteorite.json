@@ -1,0 +1,354 @@
+{
+  "id": "meteorite",
+  "title": "The vanishing meteorite",
+  "topics": ["A.1", "B.1", "B.5", "C.2"],
+  "level": "SL",
+  "time": "25–35 minutes",
+  "summary": "A meteorite vanishes from a museum on a stormy night. Four suspects, four alibis, and the physics to test them.",
+  "intro": "<p>A stormy Friday evening at the Hilltop Science Museum. The doors closed to visitors at 18:00, but four people were still in or near the building.</p><p>At <strong>20:14:00</strong> the alarm on a display case in the <strong>first-floor gallery</strong> went off. When people reached the gallery, the glass was smashed and the museum's prize exhibit, a 4 kg iron meteorite, was gone. The brass key to the case, which hangs on a hook beside it, was missing too. Next morning the police found it in the flowerbed below the museum's west wall.</p><p>One of the four is the thief. Read their statements, test their claims with physics, and make your accusation.</p>",
+  "suspects": [
+    {
+      "id": "navarro",
+      "name": "Dr Ines Navarro",
+      "role": "Visiting astronomer",
+      "statement": [
+        "I've been working at the radio-telescope hut on the far side of the field all week, about 900 m from the museum.",
+        "On Friday evening I was filming the storm from the hut's doorway: lightning over the museum dome makes a lovely shot.",
+        "At about a quarter past eight a bolt hit the museum's lightning rod, and my camera caught it, the flash and the thunder.",
+        "I didn't go near the building until the police rang me later.",
+        "Yes, I asked to borrow the meteorite for my research, and yes, the director said no. That's academic life. I don't steal from museums."
+      ],
+      "claims": [0, 2]
+    },
+    {
+      "id": "okafor",
+      "name": "Sam Okafor",
+      "role": "Runs the museum café",
+      "statement": [
+        "I close the café at eight, but a customer came in late, so I served him just after ten past.",
+        "As soon as he left, I filled the big kettle to the 1.5 litre line from the cold tap and switched it on, for the cleaners' tea.",
+        "I stayed by it, wiping the counters.",
+        "The alarm went off a few seconds before the kettle clicked off.",
+        "I ran out into the foyer and saw Lena coming off the bottom of the stairs, and we ran up to the gallery together.",
+        "The glass was all over the floor. We stayed there until Mr Hale, and then the police, arrived."
+      ],
+      "claims": [1, 3]
+    },
+    {
+      "id": "fischer",
+      "name": "Lena Fischer",
+      "role": "Student intern",
+      "statement": [
+        "I was in the second-floor workshop, wiring a lamp for the new exhibit.",
+        "The workshop is on the west side, next to Mr Hale's office.",
+        "When the alarm went, I dropped everything and ran down the stairs.",
+        "The stairwell lights were off and I ran straight past the first floor by mistake, down to the foyer, where Sam came out of the café.",
+        "We went up to the gallery together and got there about half a minute after the alarm.",
+        "I didn't see anyone else on the stairs."
+      ],
+      "claims": []
+    },
+    {
+      "id": "hale",
+      "name": "Victor Hale",
+      "role": "Deputy director",
+      "statement": [
+        "At about 20:13 the power went off, and the lift I was in stopped between the ground floor and the first floor.",
+        "The lift light went out, so I used my phone's torch.",
+        "The phone was only on about 20 % when I got in, and after ten minutes or so of torch it went flat, so I couldn't ring for help.",
+        "The lift's emergency phone has been broken for weeks.",
+        "I heard the alarm, but I was trapped.",
+        "At about 20:25 the power came back, the lift moved, and I came out in the foyer and went up to find everyone in the gallery.",
+        "I've given twenty years to this museum. The idea that I'd steal from it is insulting."
+      ],
+      "claims": [0, 2]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "wall",
+      "title": "The museum's west wall",
+      "html": "<p>The rooms on each floor, as seen from the west. Every room drawn here has a window in the west wall. The second floor also has a library, on the east side. The lift and the stairs are at the back of the foyer. The gallery windows are sealed to protect the exhibits. The lift, the café and all the lights run on the museum's single mains supply.</p>",
+      "figure": {
+        "svg": "diagrams/west-wall.svg",
+        "alt": "Side view of the museum's west wall. Ground floor: café and foyer. First floor: gallery, with window sills 3.5 m above the ground. Second floor: workshop and the deputy director's office, with window sills 7.0 m above the ground. Dome on top, with a window sill 10.5 m above the ground and a lightning rod. A flowerbed runs along the foot of the wall, and a security camera on a short post films it.",
+        "caption": "Heights are the window sills above the ground. \"Office\" is the deputy director's office. Not to scale sideways."
+      }
+    },
+    {
+      "id": "rodlog",
+      "title": "Lightning-rod strike counter",
+      "html": "<p>The museum's lightning rod has a counter that records every strike. Its clock is checked against the alarm system's clock.</p><table class='ev-table'><thead><tr><th scope='col'>Date</th><th scope='col'>Time</th><th scope='col'>Event</th></tr></thead><tbody><tr><td>Friday</td><td>20:14:05</td><td>Strike recorded</td></tr></tbody></table><p>Only one strike was recorded all evening.</p>"
+    },
+    {
+      "id": "video",
+      "title": "Dr Navarro's video of the storm",
+      "html": "<p>Dr Navarro handed over her camera. The camera has no GPS, so the file doesn't say where it was filmed. Its clock was checked and is correct. The camera is hand-held (the picture shakes as it follows the storm), and Dr Navarro's voice can be heard on the soundtrack.</p><table class='ev-table'><thead><tr><th scope='col'>Time on the video</th><th scope='col'>What happens</th></tr></thead><tbody><tr><td>20:14:05.0</td><td>A bright flash: lightning strikes the rod on the museum dome</td></tr><tr><td>20:14:07.7</td><td>The thunder starts on the soundtrack</td></tr></tbody></table><p>Speed of sound in air that evening: 340 $\\text{m s}^{-1}$.</p>"
+    },
+    {
+      "id": "receipt",
+      "title": "Café till receipt",
+      "html": "<div class='ev-receipt'><p>HILLTOP MUSEUM CAFÉ</p><p>Friday 20:10:52</p><p>Cheese sandwich ...... 3.50<br>Tea ................. 1.80</p><p>TOTAL ............... 5.30</p><p>Thank you!</p></div><p>The last sale of the day. The till's clock was checked and is correct.</p>"
+    },
+    {
+      "id": "kettle",
+      "title": "The café kettle",
+      "html": "<div class='ev-plate'><p>HILLTOP CATERING · MODEL HK-3</p><p>230 V ~ 50 Hz · <strong>3.0 kW</strong></p><p>MAX 1.7 L · MIN 0.5 L</p></div><p>The rating plate from the café's kettle. Next morning the police measured the water from the café's cold tap: <strong>10 °C</strong>.</p><p>Data: specific heat capacity of water $c = 4200$ $\\text{J kg}^{-1}\\text{ K}^{-1}$. 1 litre of water has a mass of 1.0 kg. Water boils at 100 °C.</p>"
+    },
+    {
+      "id": "camera",
+      "title": "Flowerbed camera footage",
+      "html": "<p>A security camera on a short post films the flowerbed along the west wall at <strong>50 frames per second</strong>. Rain hides the upper windows. At <strong>20:14:40</strong> a small dark object falls into view and lands in the flowerbed. Between the last two frames before it lands, it moves <strong>0.23 m</strong> downwards.</p><p>The object is the brass display-case key (mass 85 g), found in that spot next morning. A small, heavy key: air resistance on it is negligible.</p>",
+      "figure": {
+        "svg": "diagrams/camera.svg",
+        "alt": "The last two camera frames laid over each other. The key is shown faintly in the first frame and solid in the second frame, 0.23 m lower, just above the flowerbed. Text: 50 frames per second, 20:14:40.",
+        "caption": "The last two frames before the key lands, laid over each other."
+      }
+    },
+    {
+      "id": "phone",
+      "title": "Mr Hale's phone: the maker's specifications",
+      "html": "<table class='ev-table'><tbody><tr><th scope='row'>Battery</th><td>3.85 V, 4000 mAh</td></tr><tr><th scope='row'>Charge that can flow before a full battery is flat</th><td>14 400 C</td></tr><tr><th scope='row'>Current with torch and screen on</th><td>0.40 A</td></tr></tbody></table><p>Mr Hale says the phone is at home, charging.</p>"
+    },
+    {
+      "id": "jobsheet",
+      "title": "Workshop job sheet",
+      "html": "<div class='ev-letter'><p><strong>Job:</strong> wire the display lamp for the new \"Stars\" exhibit.<br><strong>Who:</strong> L. Fischer<br><strong>When:</strong> Friday 18:00–20:30, second-floor workshop</p></div>"
+    },
+    {
+      "id": "email",
+      "title": "An email to Dr Navarro",
+      "html": "<div class='ev-letter'><p>Dear Dr Navarro,</p><p>Thank you for your request to borrow the Hilltop iron meteorite for your research. I'm afraid the museum cannot lend it out this year.</p><p>With best wishes,<br>The Director</p></div>"
+    },
+    {
+      "id": "letter",
+      "title": "A letter in the deputy director's bin",
+      "html": "<div class='ev-letter'><p>Dear Mr Hale,</p><p>Thank you for your telephone call. As discussed, our client would be very interested in buying an iron meteorite like the one in your gallery, should one ever come onto the private market. Discretion is assured.</p><p>Yours sincerely,<br>A dealer in rare objects</p></div><p>Found, crumpled up, in the wastepaper bin in Mr Hale's office.</p>"
+    }
+  ],
+  "clues": [
+    {
+      "id": "thunder",
+      "number": 1,
+      "title": "The thunderclap",
+      "topic": "C.2",
+      "section": "sound",
+      "evidence": ["rodlog", "video"],
+      "task": "<p>Dr Navarro says she filmed the lightning strike on the museum's rod from the radio-telescope hut, about 900 m away. <strong>Calculate</strong> how far her camera was from the lightning rod.</p>",
+      "numeric": {
+        "answer": 918,
+        "unit": "m",
+        "range": [900, 940],
+        "mistakes": [
+          { "value": 0.0079, "feedback": "You divided the time by the speed. Distance = speed × time." },
+          { "value": 126, "feedback": "You divided the speed by the time. Distance = speed × time." },
+          { "value": 2618, "feedback": "Use the time the sound took: the difference between the two times on the video, not the seconds after 20:14." }
+        ]
+      },
+      "hint": "The light reaches the camera almost instantly, but the sound takes longer. Find how long the sound took, then use distance = speed × time.",
+      "working": "<p>Time taken by the sound: 20:14:07.7 − 20:14:05.0 = 2.7 s.</p><p>Distance = 340 × 2.7 ≈ <strong>920 m</strong>.</p><p>The light took only about $900 \\div (3.0 \\times 10^{8})$ ≈ 3 µs, so treating the flash as arriving instantly makes no difference.</p>",
+      "prove": {
+        "question": "What does this tell you about Dr Navarro?",
+        "options": [
+          "Her hand-held camera was about 900 m from the museum, so she was at the hut 5 seconds after the alarm: she can't have smashed the case.",
+          "The thunder came late, so she must have edited the times on her video.",
+          "She was close to the museum: sound travels about 900 m every second, so 2.7 s is a short delay.",
+          "It proves nothing, because light and sound travel at the same speed through air."
+        ],
+        "answer": 0,
+        "feedback": [
+          "",
+          "A delay is exactly what physics predicts: sound is almost a million times slower than light. The delay is evidence, not a sign of editing.",
+          "Sound travels about 340 m every second in air, not 900 m. A 2.7 s delay puts the camera about 920 m away.",
+          "Light travels at about $3 \\times 10^{8}$ $\\text{m s}^{-1}$ and sound at about 340 $\\text{m s}^{-1}$: that difference is why you see lightning before you hear thunder."
+        ]
+      },
+      "notePrompt": "In one or two sentences: what does the thunder prove, and how?",
+      "modelNote": "The thunder arrived 2.7 s after the flash, so the camera was about 920 m from the lightning rod, where the hut is. Dr Navarro was there 5 s after the alarm, far too far away to have smashed the case."
+    },
+    {
+      "id": "kettle",
+      "number": 2,
+      "title": "The café kettle",
+      "topic": "B.1",
+      "section": "shc",
+      "evidence": ["receipt", "kettle"],
+      "task": "<p>Sam says he switched the kettle on as soon as his last customer left, and that the alarm went off a few seconds before it boiled. <strong>Calculate</strong> the shortest possible time the kettle needed to bring the water to the boil.</p>",
+      "numeric": {
+        "answer": 189,
+        "unit": "s",
+        "range": [185, 195],
+        "mistakes": [
+          { "value": 210, "feedback": "The water starts at 10 °C, so its temperature rises by 90 K, not 100 K." },
+          { "value": 214, "feedback": "Sam filled it to the 1.5 litre line. 1.7 L is only the most the kettle can hold." },
+          { "value": 3.15, "feedback": "That's in minutes. Give your answer in seconds." },
+          { "value": 189000, "feedback": "The power is 3.0 kW, which is 3000 W." }
+        ]
+      },
+      "hint": "First find the energy needed to heat the water, using $Q = mc\\Delta T$. Then use power = energy ÷ time. The shortest time assumes that no energy is lost.",
+      "working": "<p>Mass of water $m = 1.5$ kg, and $\\Delta T = 100 - 10 = 90$ K.</p><p>$Q = mc\\Delta T = 1.5 \\times 4200 \\times 90 = 567\\,000$ J</p><p>Time = energy ÷ power = 567 000 ÷ 3000 = <strong>189 s</strong>, about 3 minutes 9 seconds.</p><p>Some energy also heats the kettle itself and the surrounding air, so the real time is a little longer.</p>",
+      "prove": {
+        "question": "The receipt shows the last sale at 20:10:52. What does the kettle tell you?",
+        "options": [
+          "189 s is 3.15 minutes, so the kettle boiled at exactly 20:14:07, which proves Sam's story is false.",
+          "It couldn't boil until just after 20:14, which fits Sam's story, and the café must still have had power after 20:14.",
+          "Kettles lose energy to the air, so this calculation can't tell us anything useful.",
+          "The kettle shows that the power went off at 20:13."
+        ],
+        "answer": 1,
+        "feedback": [
+          "189 s is 3 min 9 s, not 3 min 15 s (0.15 of a minute is 9 s). The kettle can't boil before 20:10:52 + 189 s = 20:14:01, plus the few seconds it took to fill: just after 20:14, which fits Sam's story.",
+          "",
+          "Losses only make the kettle slower. That makes 189 s the shortest possible time, which is still useful: it can't have boiled any earlier.",
+          "A kettle with no power stops heating. This one needed at least 189 s of full power after about 20:11, so the power stayed on until after 20:14."
+        ]
+      },
+      "notePrompt": "Why does the calculation still work, even though some energy is lost to the surroundings? And what else does it show?",
+      "modelNote": "Energy losses make the kettle slower, so 189 s is the shortest possible time: it can't have boiled until just after 20:14. That fits Sam's story, and it shows the café still had power after 20:14."
+    },
+    {
+      "id": "key",
+      "number": 3,
+      "title": "The falling key",
+      "topic": "A.1",
+      "section": "freefall",
+      "evidence": ["camera", "wall"],
+      "task": "<p>The key was dropped, or thrown sideways, from one of the windows in the west wall. <strong>Calculate</strong> the height it fell from.</p>",
+      "numeric": {
+        "answer": 6.75,
+        "unit": "m",
+        "range": [6.4, 7.1],
+        "mistakes": [
+          { "value": 11.5, "feedback": "That's the key's speed (in $\\text{m s}^{-1}$) just before it lands. Now use it to find the height." },
+          { "value": 13.5, "feedback": "Check the ½: $v^2 = 2gh$, so $h = v^2 \\div 2g$." },
+          { "value": 0.59, "feedback": "Remember to square the speed: $h = v^2 \\div 2g$." }
+        ]
+      },
+      "hint": "The key's speed just before it lands is about (distance moved between the last two frames) ÷ (time between frames). Its vertical velocity started at zero, so use $v^2 = u^2 + 2as$ with $u = 0$.",
+      "working": "<p>Time between frames = 1 ÷ 50 = 0.020 s, so the speed just before landing is about 0.23 ÷ 0.020 = 11.5 $\\text{m s}^{-1}$.</p><p>From $v^2 = 2gh$: $h = 11.5^2 \\div (2 \\times 9.8)$ ≈ <strong>6.7 m</strong>.</p><p>This is the average speed during the last frame, so it's slightly less than the landing speed, and the real height is a little more: close to 7 m.</p>",
+      "prove": {
+        "question": "Which window did the key come from, and what follows?",
+        "options": [
+          "A first-floor gallery window: the thief threw it straight out of the gallery.",
+          "A second-floor window: 40 s after the alarm, someone was in the workshop or the deputy director's office.",
+          "The dome window: 11.5 $\\text{m s}^{-1}$ is so fast that the key must have fallen from the top of the building.",
+          "We can't tell, because the thief may have thrown the key sideways instead of dropping it."
+        ],
+        "answer": 1,
+        "feedback": [
+          "From the first floor (3.5 m) the key would land at only about 8.3 $\\text{m s}^{-1}$, moving about 0.17 m between frames, not 0.23 m. (And the gallery windows are sealed.)",
+          "",
+          "From the dome (10.5 m) the key would land at about 14.3 $\\text{m s}^{-1}$, moving about 0.29 m between frames, not 0.23 m.",
+          "A sideways throw doesn't change the vertical motion: the horizontal and vertical motions are independent, so the vertical speed still gives the height."
+        ]
+      },
+      "notePrompt": "Who could have been at a second-floor west window at 20:14:40? Use the statements as well.",
+      "modelNote": "The key fell about 6.7 m, so it came from a second-floor west window: the workshop or the deputy director's office. Lena works in the workshop, but at 20:14:40 she was with Sam, reaching the gallery, so the key was thrown by someone else."
+    },
+    {
+      "id": "phone",
+      "number": 4,
+      "title": "The flat phone",
+      "topic": "B.5",
+      "section": "current",
+      "evidence": ["phone"],
+      "task": "<p>Victor Hale says his phone was on about 20 % when he got into the lift, and that ten minutes of torch made it go flat. <strong>Calculate</strong> the charge that flowed through the circuit in 10 minutes of torch.</p>",
+      "numeric": {
+        "answer": 240,
+        "unit": "C",
+        "mistakes": [
+          { "value": 4, "feedback": "Put the time in seconds: 10 minutes = 600 s." },
+          { "value": 924, "feedback": "Multiplying by the voltage gives the energy in joules. The question asks for the charge." },
+          { "value": 2880, "feedback": "That's how much charge 20 % of the battery holds. Now find how much the torch used in 10 minutes." },
+          { "value": 0.000667, "feedback": "Current = charge ÷ time, so charge = current × time." }
+        ]
+      },
+      "hint": "Current is the rate of flow of charge: $I = \\dfrac{\\Delta q}{\\Delta t}$. Put the time in seconds.",
+      "working": "<p>$\\Delta q = I \\Delta t = 0.40 \\times 600 =$ <strong>240 C</strong>.</p><p>A full battery can drive 14 400 C round the circuit, so 20 % is 2880 C. Ten minutes of torch uses only 240 ÷ 14 400 ≈ 1.7 % of a full battery. On 20 %, the torch would last 2880 ÷ 0.40 = 7200 s: about two hours.</p>",
+      "prove": {
+        "question": "What does this tell you about Victor Hale's story?",
+        "options": [
+          "His story is fine: phone batteries often go flat suddenly.",
+          "The torch used 240 C out of 2880 C, so the phone would have been flat after about a minute.",
+          "The battery couldn't have gone flat in ten minutes, so his reason for not ringing for help is false.",
+          "Charge gets used up in the torch's LED, so the battery would run out faster than this."
+        ],
+        "answer": 2,
+        "feedback": [
+          "That's a guess, not evidence. The physics says ten minutes of torch uses less than 2 % of a full battery.",
+          "In one minute the torch uses only 0.40 × 60 = 24 C, a tiny part of the 2880 C left. Ten minutes uses 240 C, less than a tenth of it.",
+          "",
+          "Charge isn't used up: it flows round the circuit and back to the battery. It's the energy that the LED transfers. The current is the same all the way round."
+        ]
+      },
+      "notePrompt": "Put this clue together with the kettle (clue 2). What happens to Victor Hale's story?",
+      "modelNote": "Ten minutes of torch uses only 240 C, under 2 % of a full battery, so a phone on 20 % could not have gone flat. And the kettle shows the power was still on after 20:14, so there was no power cut at 20:13 to trap him in the lift. Both parts of his alibi are false."
+    }
+  ],
+  "interviews": [
+    {
+      "suspect": "navarro",
+      "after": "thunder",
+      "questions": [
+        { "q": "Can anyone confirm you were at the hut?", "a": "The hut has an electronic gate. It will show I badged in at 19:30 and out at 21:50. And you have my video." },
+        { "q": "Why did you want to borrow the meteorite?", "a": "Iron meteorites are pieces of the cores of broken-up asteroids. I wanted to measure its magnetism. The director said no, so I'll find another one. There are plenty in other collections." },
+        { "q": "Did you see anyone near the museum?", "a": "At that distance, in the rain? Only lights. A light came on in a second-floor window about twenty seconds after the strike. I remember because it spoiled my next shot." }
+      ]
+    },
+    {
+      "suspect": "okafor",
+      "after": "kettle",
+      "questions": [
+        { "q": "Did the lights flicker at all that evening?", "a": "Not once. The café lights and the fridge were on all evening. The cleaners got their tea." },
+        { "q": "Did you hear the lift?", "a": "Yes, it hummed for a few seconds, maybe a minute before the alarm. You can't miss it: the motor is right behind the café wall." },
+        { "q": "When did you see Mr Hale?", "a": "At about 20:25 he walked into the gallery and said he'd just got out of the lift. He looked very calm for someone who'd been trapped in the dark." }
+      ]
+    },
+    {
+      "suspect": "fischer",
+      "after": "key",
+      "questions": [
+        { "q": "Did you open the workshop window?", "a": "It doesn't open. It was painted shut years ago. I asked to have it fixed because the soldering fumes get bad." },
+        { "q": "Did you hear anything else that evening?", "a": "About a minute before the alarm I heard the lift doors open on our floor. I didn't think anything of it." },
+        { "q": "Why did you run past the gallery floor?", "a": "The stairwell lights are on a timer and they'd gone off. I was counting landings in the dark and lost count. I feel silly about it now." }
+      ]
+    },
+    {
+      "suspect": "hale",
+      "after": "phone",
+      "questions": [
+        { "q": "May we see your phone?", "a": "It's at home, charging. I don't see why it matters." },
+        { "q": "Which floor did you get into the lift on?", "a": "The ground floor, obviously. I was going up to my office." },
+        { "q": "Why was a dealer's letter in your bin?", "a": "Dealers write to every museum. I threw it away, didn't I? That should tell you what I think of it." }
+      ]
+    }
+  ],
+  "accusation": {
+    "culprit": "hale",
+    "wrong": {
+      "navarro": "Dr Navarro's camera was about 920 m from the museum 5 s after the alarm (clue 1). She couldn't have smashed the case.",
+      "okafor": "Sam's kettle story fits the physics (clue 2), Lena saw him come out of the café just after the alarm, and at 20:14:40, when the key was thrown from the second floor (clue 3), he was with Lena in the gallery.",
+      "fischer": "Lena works on the second floor, which looks bad after clue 3. But at 20:14:40 she was with Sam, reaching the gallery, so she couldn't have thrown the key from a second-floor window. And her workshop window is painted shut."
+    },
+    "cards": [
+      { "text": "The kettle needed at least 189 s of power after 20:11, so the power was still on after 20:14.", "use": "key", "why": "This destroys the power-cut story." },
+      { "text": "Ten minutes of torch uses only 240 C, under 2 % of the battery.", "use": "key", "why": "So the phone couldn't have gone flat: his reason for not calling for help is false." },
+      { "text": "The key fell about 6.7 m, from a second-floor west window, 40 s after the alarm.", "use": "key", "why": "It puts the thief on the second floor, where the deputy director's office is." },
+      { "text": "Sam and Lena were together, reaching the gallery, at 20:14:40.", "use": "key", "why": "It rules out the other two people who were in the building." },
+      { "text": "A dealer wrote to Mr Hale about buying an iron meteorite.", "use": "support", "why": "A motive supports the case, but it doesn't prove anything on its own." },
+      { "text": "The thunder arrived 2.7 s after the flash at Dr Navarro's camera.", "use": "support", "why": "It clears Dr Navarro, but it doesn't point to the thief." },
+      { "text": "The museum refused to lend Dr Navarro the meteorite.", "use": "no", "why": "A motive for someone who has an alibi. A red herring." }
+    ],
+    "frame": "The thief was … because … .\nThe [evidence] shows that … , and since … , this means … .\nThe other suspects could not have done it because … .",
+    "model": "<p>Victor Hale stole the meteorite. He said the power failed at 20:13, but Sam's kettle needed at least 189 s of its full 3.0 kW after about 20:11 to boil, so the power was still on after 20:14, and the lift runs on the same mains supply. He also said his phone went flat after ten minutes of torch, but that uses only 240 C, under 2 % of the battery, so his reason for not ringing for help is false.</p><p>The key landed at about 11.5 $\\text{m s}^{-1}$, so it fell about 6.7 m, from a second-floor west window: the workshop or his office. Lena, who works in the workshop, was with Sam reaching the gallery at that moment (and her window is painted shut), and Dr Navarro's video puts her about 920 m away. Only Mr Hale was unaccounted for.</p>",
+    "solution": "<p>At about 20:13 Victor Hale took the lift up to the second floor: Sam heard it hum, and Lena heard its doors open. He crept down the stairs to the dark gallery, took the key from its hook and smashed the glass at 20:14:00, so it would look like a break-in. He waited in the dark while Lena ran past, then went up to his office, switched on the light (Dr Navarro saw it from the hut) and threw the key out of the window at 20:14:40, so it wouldn't be found on him. He hid the meteorite in his office, took the lift down at about 20:25 and walked into the gallery with his story ready.</p>",
+    "checklist": [
+      "Names Victor Hale as the thief.",
+      "Uses the kettle to show the power was still on after 20:14.",
+      "Uses the charge calculation to show the phone couldn't have gone flat.",
+      "Uses the key's fall to place the thief on the second floor at 20:14:40.",
+      "Explains why Lena is cleared, even though she works on the second floor.",
+      "Gives a physics reason each time, not just \"it doesn't add up\"."
+    ]
+  }
+}

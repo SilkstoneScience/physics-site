@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics escape room: revision game · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics escape room for revision: choose the topics, open each lock by answering a physics question, collect the exit code and escape against the clock.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/escape.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics escape room: revision game · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics escape room for revision: choose the topics, open each lock by answering a physics question, collect the exit code and escape against the clock.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/escape.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/escape.css">
+  <script defer src="js/site.js"></script>
+  <script defer src="js/escape.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+</head>
+<body data-root="" data-section="questions" data-eq-topic="A.1">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="games.html">← Review games</a></p>
+    <h1>Physics escape room</h1>
+    <p class="lead">The lab's security system has locked you in. Every lock opens with the answer to a physics
+      question, and every lock you open shows one digit of the exit code. Collect the digits, key in the code
+      and escape. Choose the topics you want to revise, then start the clock.</p>
+
+    <!-- 1. Set-up: topics, level, length and timer -->
+    <section id="er-setup" class="er-setup" aria-labelledby="er-setup-h">
+      <h2 id="er-setup-h">Set up your room</h2>
+      <form id="er-form">
+        <fieldset class="er-topics">
+          <legend>Topics</legend>
+          <p class="er-help">Tick the topics the puzzles should come from. Tick a theme to choose all its topics.</p>
+          <div id="er-topic-list" class="er-theme-grid"><p class="notice">Loading the topics…</p></div>
+          <p class="er-quick"><button type="button" class="link-btn" data-pick="all">Choose all</button>
+            · <button type="button" class="link-btn" data-pick="none">Clear all</button></p>
+        </fieldset>
+
+        <div class="er-options">
+          <fieldset>
+            <legend>Level</legend>
+            <label><input type="radio" name="level" value="SL" checked> SL (leave out HL questions)</label>
+            <label><input type="radio" name="level" value="HL"> HL (include HL questions)</label>
+          </fieldset>
+          <fieldset>
+            <legend>Length</legend>
+            <label><input type="radio" name="rooms" value="1"> Short: 1 room, 4 locks</label>
+            <label><input type="radio" name="rooms" value="2" checked> Standard: 2 rooms, 8 locks</label>
+            <label><input type="radio" name="rooms" value="3"> Long: 3 rooms, 12 locks</label>
+          </fieldset>
+          <fieldset>
+            <legend>Clock</legend>
+            <label><input type="radio" name="clock" value="0" checked> Stopwatch (no time limit)</label>
+            <label><input type="radio" name="clock" value="1"> Race the clock (about 2½ minutes per lock)</label>
+          </fieldset>
+        </div>
+
+        <p id="er-count" class="er-count" aria-live="polite"></p>
+        <p><button type="submit" class="button" id="er-start">Enter the room <span aria-hidden="true">→</span></button></p>
+      </form>
+
+      <details class="er-rules">
+        <summary>How to play</summary>
+        <ul>
+          <li>Choose a lock to see its question. A correct answer opens it and shows a symbol and a digit.</li>
+          <li>A wrong answer jams the lock: that option is crossed out and <strong>30 seconds</strong> are added to your time.</li>
+          <li>Stuck? A <strong>hint</strong> rules out one wrong answer, for <strong>1 minute</strong>.
+            The <strong>Σ Equations</strong> button shows the data-booklet equations for the question's topic, free.</li>
+          <li>When every lock in a room is open, key the digits into the door in the order of the symbols on it.</li>
+          <li>Read the explanation after each lock opens: that's where the revision happens.</li>
+          <li>Playing as a class? Press <strong>Show on the board</strong> to fill the screen.</li>
+        </ul>
+        <p>The questions come from the <a href="questions.html">question bank</a> (multiple choice). Your best times are saved only in this browser.</p>
+      </details>
+    </section>
+
+    <!-- 2. The game -->
+    <section id="er-game" class="er-game" hidden aria-labelledby="er-room-h">
+      <div class="er-hud">
+        <span class="er-stat"><span class="er-stat-label">Time</span> <span id="er-time" class="er-time">0:00</span></span>
+        <span class="er-stat"><span class="er-stat-label">Locks open</span> <span id="er-open">0 / 0</span></span>
+        <span class="er-stat"><span class="er-stat-label">Penalties</span> <span id="er-pen">0:00</span></span>
+        <span class="er-hud-btns">
+          <button type="button" class="button ghost small" id="er-board">Show on the board</button>
+          <button type="button" class="button ghost small" id="er-quit">Give up</button>
+        </span>
+      </div>
+      <h2 id="er-room-h" tabindex="-1"></h2>
+      <p id="er-room-story" class="er-story"></p>
+      <ul id="er-locks" class="er-locks"></ul>
+      <div id="er-puzzle" class="er-puzzle" hidden></div>
+      <div id="er-door" class="er-door" hidden></div>
+    </section>
+
+    <!-- 3. Escaped! -->
+    <section id="er-end" class="er-end" hidden aria-labelledby="er-end-h">
+      <h2 id="er-end-h" tabindex="-1"></h2>
+      <div id="er-end-body"></div>
+      <p><button type="button" class="button" id="er-again">Play again</button>
+        <button type="button" class="button ghost" id="er-change">Change the topics</button></p>
+    </section>
+
+    <div id="er-live" class="visually-hidden" aria-live="polite"></div>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
