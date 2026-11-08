@@ -1,0 +1,163 @@
+{
+  "id": "fix-it",
+  "kind": "Advice column",
+  "paper": "Home and Garden Weekly",
+  "headline": "Ask the Fix-It Expert: your electricity questions answered",
+  "standfirst": "This week: dim fairy lights, big bills and a car that struggles to start",
+  "byline": "By “Sparky” Dan Okafor",
+  "topics": [
+    "B.5"
+  ],
+  "level": "SL",
+  "time": "10 minutes",
+  "brief": "Dan is great with a screwdriver, but his explanations worry us. Check his column before it reaches our readers.",
+  "body": [
+    [
+      {
+        "t": "“Why do my fairy lights get dimmer further along the string?” asks Joan from Leeds."
+      },
+      {
+        "t": "Joan, each lamp in a series string uses up some of the current, so there is less and less of it left for the lamps further along.",
+        "err": {
+          "topic": "B.5",
+          "section": "current",
+          "options": [
+            "Current is used up only in the first lamp, not the others.",
+            "The current increases along the string, because the charges speed up as they pass through each lamp in turn.",
+            "Charge is conserved, so the current is the same throughout a series circuit; lamps transfer energy."
+          ],
+          "answer": 2,
+          "feedback": [
+            "Current isn't used up anywhere in the circuit, in the first lamp or any other.",
+            "The current can't change around a series loop: charge doesn't pile up or disappear.",
+            null
+          ],
+          "fix": "Joan, the current is the same in every lamp in a series string, because charge is conserved; the lamps transfer electrical energy to light and thermal energy, so identical lamps should glow equally brightly, and a dimmer one is probably a different type from the rest.",
+          "keys": [
+            "Current is the same at all points in a series circuit.",
+            "It is energy, not current or charge, that the lamps transfer."
+          ]
+        }
+      },
+      {
+        "t": "When you switch them on, they light at once, even though the electrons in the wire drift along at only a fraction of a millimetre per second.",
+        "ok": "It is correct: drift speeds are very small, but the electric field that sets all the electrons moving is established almost immediately around the whole circuit."
+      },
+      {
+        "t": "With 12 volts flowing through each lamp, even a small fault can show up.",
+        "err": {
+          "topic": "B.5",
+          "section": "pd",
+          "options": [
+            "Potential difference is measured across a component; it is current that flows through one.",
+            "Voltage flows through a wire but not through a lamp.",
+            "It should say 12 amps flowing, because volts and amps are the same thing."
+          ],
+          "answer": 0,
+          "feedback": [
+            null,
+            "Potential difference doesn't flow through anything. It exists between two points.",
+            "Potential difference (volts) and current (amps) are different quantities, so one can't replace the other."
+          ],
+          "fix": "With a potential difference of 12 volts across each lamp, even a small fault can show up.",
+          "keys": [
+            "Potential difference is across two points.",
+            "Current, not voltage, flows through a component."
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "t": "“I fitted more lamps in my kitchen, all in parallel. What will that do to my bill?” asks Ravi from Hull."
+      },
+      {
+        "t": "Good news, Ravi: every extra lamp in parallel increases the total resistance of the circuit, so your supply will deliver less current and your bill will fall.",
+        "err": {
+          "topic": "B.5",
+          "section": "combos",
+          "options": [
+            "Parallel lamps do not change the total resistance at all.",
+            "Each extra parallel path reduces the total resistance, so the current and the power increase.",
+            "The total resistance increases, but the bill rises because the extra lamps are brighter and transfer more energy each second."
+          ],
+          "answer": 1,
+          "feedback": [
+            "Each new branch gives the current another path, so the total resistance does change.",
+            null,
+            "The direction is the problem here: adding a parallel branch makes the total resistance smaller, not larger."
+          ],
+          "fix": "Sorry, Ravi: every extra lamp in parallel reduces the total resistance of the circuit, so your supply will deliver more current and your bill will rise.",
+          "keys": [
+            "Adding a parallel branch reduces the total resistance.",
+            "The total current and power increase, so more energy is transferred."
+          ]
+        }
+      },
+      {
+        "t": "Two identical 12-ohm lamps connected in parallel have a combined resistance of 6 ohms.",
+        "ok": "It is correct: $\\frac{1}{R} = \\frac{1}{12} + \\frac{1}{12} = \\frac{1}{6}$, so $R = 6\\ \\Omega$."
+      },
+      {
+        "t": "A filament lamp does not obey Ohm's law, because its resistance rises as the filament gets hotter.",
+        "ok": "It is correct: the rising temperature increases the filament's resistance, so current is not proportional to potential difference."
+      }
+    ],
+    [
+      {
+        "t": "“How much does my electric heater really cost?” asks Mei from Bristol."
+      },
+      {
+        "t": "Your heater is rated at 2 kW, Mei, which means that it uses up 2 kW of energy every hour.",
+        "err": {
+          "topic": "B.5",
+          "section": "power",
+          "options": [
+            "A 2 kW heater uses 2 kW of energy every second instead, so in one hour it uses 7200 kW.",
+            "The kilowatt is a unit of current, not of energy.",
+            "The kilowatt is a unit of power: 2 kW means 2000 joules every second."
+          ],
+          "answer": 2,
+          "feedback": [
+            "A kilowatt is already “per second” in its meaning, and it still isn't an amount of energy.",
+            "Current is measured in amperes. The watt is the unit of power.",
+            null
+          ],
+          "fix": "Your heater is rated at 2 kW, Mei, which means that it transfers 2000 joules of energy every second, or 2 kilowatt-hours every hour.",
+          "keys": [
+            "Power is the rate of energy transfer.",
+            "Energy = power × time (2 kW for one hour is 2 kW h, which is 7.2 MJ)."
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "t": "“My headlights dim whenever I start the car. Is something wrong?” asks Tom from Cork."
+      },
+      {
+        "t": "Tom, a 12 V battery always delivers exactly 12 V at its terminals, however much current it supplies, so the dimming must be caused by a faulty headlamp.",
+        "err": {
+          "topic": "B.5",
+          "section": "internal",
+          "options": [
+            "A healthy battery delivers more than 12 V when the current is large.",
+            "A real battery has internal resistance, so a large current lowers its terminal potential difference.",
+            "The battery's emf falls to zero while the starter motor runs, and it returns to 12 V only once the engine has started."
+          ],
+          "answer": 1,
+          "feedback": [
+            "When a battery delivers current, its terminal potential difference is below its emf, not above.",
+            null,
+            "The emf doesn't vanish. Look for what reduces the potential difference available at the terminals."
+          ],
+          "fix": "Tom, a battery has internal resistance, so the large current drawn by the starter motor lowers the potential difference at its terminals, and your headlamps dim for a moment; that is normal.",
+          "keys": [
+            "A battery has internal resistance.",
+            "A large current means a large $Ir$, so the terminal potential difference $\\varepsilon - Ir$ falls."
+          ]
+        }
+      }
+    ]
+  ]
+}

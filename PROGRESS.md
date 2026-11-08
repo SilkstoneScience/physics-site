@@ -130,6 +130,10 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Teacher notes and answer key: `teachers/mystery-meteorite.html` (hidden page, linked from the For teachers page), with a lesson plan, sticking points, differentiation and the full solution timeline.
 - Next: more cases (e.g. themes D and E, or an HL case), once the teacher has tried the first.
 
+## Newsroom, Explanation builder and word games (November 2026, waiting for the teacher's check)
+- On the Review games page. Newsroom: 5 articles (A, B.1/B.3, B.5, C/D, E), 5 errors each. Explanation builder: 17 SL questions. Word games: Forbidden words and crossword (61 terms), Odd one out (22 sets).
+- Checker rules are in `tools/check.mjs` (2e-games). Next: more articles and HL items, once the teacher has tried them.
+
 ## Grouped main menu (8 November 2026, waiting for the teacher's check)
 - The nine flat menu items became seven groups, each a link to its hub page with a dropdown: Notes (themes A–E, Physics skills), Practise (question bank, review games, concept challenges and big questions), Exams (exam tips, both exam-copy data booklets), Experimental (practicals, CSP, IA, Extended essay), Resources (lesson slides, annotated data booklet, videos, software and tools, simulations, Science news), For teachers (slide generator, revision sheet builder) and About (about me, contact, copyright). Review games, Think deeper and For teachers are now in the menu; the home page is unchanged.
 - Dropdowns open on mouse hover, the small ▾ button (click, tap, Enter or Space), Space or ↓ on a label; arrow keys, Home/End and Escape work inside them. The orange underline marks the group holding the current page. On wide screens the groups are spread evenly across the header, from under the logo to under the Search button (teacher's choice: no extra items just to fill the width). Below 960 px the Menu button shows every group as a heading with its links underneath, and the open menu scrolls on its own.

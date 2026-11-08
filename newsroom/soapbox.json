@@ -1,0 +1,167 @@
+{
+  "id": "soapbox",
+  "kind": "News story",
+  "paper": "The Ridgeway Courier",
+  "headline": "Local teen smashes soapbox derby record",
+  "standfirst": "Heaviest cart in the field wins, and straw bales save the day",
+  "byline": "By our sports desk",
+  "topics": [
+    "A.1",
+    "A.2",
+    "A.3"
+  ],
+  "level": "SL",
+  "time": "10 minutes",
+  "brief": "The sports desk filed this in a hurry. The story is good, but the physics needs checking before it runs.",
+  "body": [
+    [
+      {
+        "t": "Fifteen-year-old Priya Nair stormed to victory at Saturday's Ridgeway Soapbox Derby, rolling her home-built cart down the 400-metre course in just 40 seconds."
+      },
+      {
+        "t": "That is an average speed of 10 metres per second, the fastest in the event's history.",
+        "ok": "It is correct: average speed = total distance ÷ total time = 400 ÷ 40 = 10 metres per second."
+      },
+      {
+        "t": "Her cart was the heaviest in the race, and because gravity makes heavier objects accelerate faster, she pulled away from the lighter carts at the start.",
+        "err": {
+          "topic": "A.1",
+          "section": "freefall",
+          "options": [
+            "Gravity does not act on a cart once it is rolling.",
+            "Gravity alone gives every mass the same acceleration: a larger weight is matched by a larger mass.",
+            "Heavier objects accelerate more slowly, because the same gravitational pull has more mass to get moving, so the lightest carts should lead."
+          ],
+          "answer": 1,
+          "feedback": [
+            "Gravity acts on the cart for the whole race: its weight is what drives it down the hill.",
+            null,
+            "This is the opposite mistake. Without resistive forces, mass makes no difference to the acceleration."
+          ],
+          "fix": "Her cart was the heaviest in the race; gravity alone would give every cart the same acceleration on the same slope, but resistive forces slow a heavier cart less, so she pulled away from the lighter carts.",
+          "keys": [
+            "Acceleration due to gravity alone does not depend on mass.",
+            "Any advantage of the extra mass comes from resistive forces having less effect."
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "t": "Organisers clocked her at 17 metres per second at the finish line, well above her average because she had been speeding up for most of the race.",
+        "ok": "It is correct: a cart that speeds up during the race finishes faster than its average speed."
+      },
+      {
+        "t": "Nair credits her success to a set of carefully polished axles, which she says let the force of motion inside the cart keep it going.",
+        "err": {
+          "topic": "A.2",
+          "section": "first",
+          "options": [
+            "No force is needed to keep an object moving, and a “force of motion” does not exist.",
+            "Polished axles increase friction, so they could not help.",
+            "The force of motion only exists while the cart is speeding up, and once the cart reaches a steady speed it fades away."
+          ],
+          "answer": 0,
+          "feedback": [
+            null,
+            "Polishing an axle reduces friction, so this part of the story is fine. The problem is the idea of what keeps the cart moving.",
+            "A force is always exerted by one object on another. A moving object has momentum and kinetic energy, but no force “inside” it."
+          ],
+          "fix": "Nair credits her success to a set of carefully polished axles, which reduce friction, so there is less resistive force to slow the cart down.",
+          "keys": [
+            "No force is needed to maintain motion (Newton's first law).",
+            "The axles help by reducing the resistive force."
+          ]
+        }
+      },
+      {
+        "t": "With less friction at the axles, less of the cart's gravitational potential energy was transferred to thermal energy on the way down.",
+        "ok": "It is correct: friction transfers mechanical energy to thermal energy, so less friction means less energy transferred this way."
+      },
+      {
+        "t": "On the final straight the cart settled at a steady top speed, the moment when the resultant force on it was at its greatest.",
+        "err": {
+          "topic": "A.2",
+          "section": "first",
+          "options": [
+            "At a steady top speed the resultant force on the cart is at its smallest but not zero, because it is still moving.",
+            "A steady top speed needs a constant resultant force in the direction of motion.",
+            "At a steady speed in a straight line the acceleration is zero, so the resultant force is zero."
+          ],
+          "answer": 2,
+          "feedback": [
+            "If there were any resultant force, the cart would still be accelerating. Being in motion does not need a resultant force.",
+            "A constant resultant force gives a constant acceleration, not a constant speed.",
+            null
+          ],
+          "fix": "On the final straight the cart settled at a steady top speed, the moment when the forces on it balanced and the resultant force was zero.",
+          "keys": [
+            "Constant velocity means zero acceleration.",
+            "So the resultant force is zero (the forces balance)."
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "t": "Stopping safely took a 20-metre run-off lane lined with straw bales."
+      },
+      {
+        "t": "The bales absorb the cart's momentum, so that its change in momentum is much smaller than it would be if it hit a wall.",
+        "err": {
+          "topic": "A.2",
+          "section": "momentum",
+          "options": [
+            "The change in momentum is actually larger with bales, because they keep pushing back on the cart for a longer time.",
+            "The change in momentum is the same either way; the longer stop means a smaller average force.",
+            "Momentum is not involved in stopping: only energy is."
+          ],
+          "answer": 1,
+          "feedback": [
+            "From the same speed to rest is the same change in momentum, whatever stops the cart.",
+            null,
+            "Stopping a moving cart is a change in momentum, and the force on it equals the rate of that change."
+          ],
+          "fix": "The bales make the cart take longer to stop; its change in momentum is the same as if it stopped dead against a wall, so the rate of change of momentum, and the average force, is much smaller.",
+          "keys": [
+            "The change in momentum is the same.",
+            "A longer stopping time means a smaller average force."
+          ]
+        }
+      },
+      {
+        "t": "Nair's helmet protects her in a similar way, because its foam crushes and lengthens the time of any impact on her head.",
+        "ok": "It is correct: a crushable helmet increases the time over which the head's momentum changes, reducing the average force."
+      }
+    ],
+    [
+      {
+        "t": "Race officials warn that if next year's carts go twice as fast, each one will have twice as much kinetic energy to get rid of in the run-off lane.",
+        "err": {
+          "topic": "A.3",
+          "section": "kinetic",
+          "options": [
+            "Kinetic energy is proportional to the square of the speed, so doubling the speed gives four times the kinetic energy.",
+            "Kinetic energy depends only on mass, so it would not change.",
+            "Doubling the speed halves the kinetic energy, because the cart spends less time on the track."
+          ],
+          "answer": 0,
+          "feedback": [
+            null,
+            "Kinetic energy depends on both mass and speed: $E_\\text{k} = \\frac{1}{2}mv^2$.",
+            "The time on the track has no effect on the kinetic energy at the finish. Look at how $E_\\text{k}$ depends on $v$."
+          ],
+          "fix": "Race officials warn that if next year's carts go twice as fast, each one will have four times as much kinetic energy to get rid of in the run-off lane.",
+          "keys": [
+            "Kinetic energy depends on speed squared.",
+            "Doubling the speed gives four times the kinetic energy."
+          ]
+        }
+      },
+      {
+        "t": "Nair is already working on a more streamlined body for next year, which should reduce the air resistance on the cart at high speed.",
+        "ok": "It is correct: streamlining reduces drag, and drag matters most at high speed."
+      }
+    ]
+  ]
+}

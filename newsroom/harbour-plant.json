@@ -1,0 +1,157 @@
+{
+  "id": "harbour-plant",
+  "kind": "Feature",
+  "paper": "The Harbour Gazette",
+  "headline": "Nuclear plant plan splits Harbour Bay",
+  "standfirst": "Both sides make their case as the town prepares to vote",
+  "byline": "By our community reporter",
+  "topics": [
+    "E.3",
+    "E.4",
+    "E.5"
+  ],
+  "level": "SL",
+  "time": "10 minutes",
+  "brief": "This story will influence a real vote, so accuracy matters. Check the physics in what both sides are reported to have said.",
+  "body": [
+    [
+      {
+        "t": "Harbour Bay residents packed the town hall on Tuesday to debate plans for a new nuclear power station on the old shipyard site."
+      },
+      {
+        "t": "The company behind the plan explained that its reactor would use uranium fuel enriched to contain a higher proportion of uranium-235.",
+        "ok": "It is correct: enrichment increases the proportion of uranium-235, the isotope that undergoes fission with low-energy neutrons."
+      },
+      {
+        "t": "Each fission of a uranium-235 nucleus releases about 200 MeV of energy, along with two or three neutrons that can go on to cause more fissions.",
+        "ok": "It is correct: about 200 MeV per fission is the usual figure, and the released neutrons make a chain reaction possible."
+      },
+      {
+        "t": "The energy appears because the fragments left after fission have more mass in total than the original nucleus had.",
+        "err": {
+          "topic": "E.4",
+          "section": "energy",
+          "options": [
+            "The products have less total mass than the original particles: the mass difference is released as energy.",
+            "The total mass stays exactly the same, and the energy comes from the neutrons' speed alone.",
+            "The energy comes from electrons breaking away from the nucleus."
+          ],
+          "answer": 0,
+          "feedback": [
+            null,
+            "There is a measurable decrease in mass, and $E = mc^2$ links it to the energy released.",
+            "Fission is a nuclear process. The energy doesn't come from the electrons."
+          ],
+          "fix": "The energy appears because the fragments left after fission have less mass in total than the original nucleus and neutron had.",
+          "keys": [
+            "The total mass of the products is smaller.",
+            "The mass difference corresponds to the energy released, $E = mc^2$."
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "t": "Engineers said that the graphite moderator would absorb neutrons, and could be pushed further into the core to shut the reactor down in an emergency.",
+        "err": {
+          "topic": "E.4",
+          "section": "reactor",
+          "options": [
+            "A moderator speeds up neutrons so that they cause more fission, and it is withdrawn from the core to stop the reaction.",
+            "The moderator slows neutrons so they can cause fission; control rods absorb neutrons and stop the reaction.",
+            "Graphite cannot interact with neutrons in any way."
+          ],
+          "answer": 1,
+          "feedback": [
+            "It does the opposite: fission of uranium-235 is much more likely with slow neutrons.",
+            null,
+            "Neutrons lose energy in collisions with graphite nuclei, which is exactly why it is used."
+          ],
+          "fix": "Engineers said that the graphite moderator would slow neutrons down, and that control rods, which absorb neutrons, could be pushed further into the core to shut the reactor down in an emergency.",
+          "keys": [
+            "The moderator slows the neutrons.",
+            "The control rods absorb neutrons and control the reaction rate."
+          ]
+        }
+      },
+      {
+        "t": "Dr Lena Fischer, for the company, added that radioactive waste with a half-life of 30 years, such as caesium-137, would be completely gone after 60 years.",
+        "err": {
+          "topic": "E.3",
+          "section": "halflife",
+          "options": [
+            "After two half-lives, a quarter of the original nuclei remain, so the waste is not gone.",
+            "After 60 years, the waste would be twice as active as it is at the start.",
+            "A half-life means that half of the waste is safe from the start, so only the other half is still dangerous after 60 years."
+          ],
+          "answer": 0,
+          "feedback": [
+            null,
+            "The activity falls as nuclei decay: it doesn't rise.",
+            "Half-life is about how many nuclei remain after a period of time, not which ones are dangerous."
+          ],
+          "fix": "Dr Lena Fischer, for the company, added that radioactive waste with a half-life of 30 years, such as caesium-137, would have only a quarter of its original radioactive nuclei left after 60 years.",
+          "keys": [
+            "Each half-life halves the number of remaining nuclei.",
+            "After two half-lives one quarter remains, so the waste is not completely gone."
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "t": "Opponents were not convinced, and campaigner Sam Whitlock warned that alpha radiation is the most penetrating kind, able to pass through the thick concrete walls.",
+        "err": {
+          "topic": "E.3",
+          "section": "penetration",
+          "options": [
+            "Beta radiation is the most penetrating, and alpha comes second, so the concrete would need to stop beta particles above all.",
+            "All types of radiation are stopped by concrete at the same depth.",
+            "Alpha is the least penetrating (stopped by paper or skin); gamma is the most penetrating."
+          ],
+          "answer": 2,
+          "feedback": [
+            "Alpha is the least penetrating of the three, and gamma the most.",
+            "Each type has a very different penetrating power.",
+            null
+          ],
+          "fix": "Opponents were not convinced, and campaigner Sam Whitlock warned that gamma radiation is the most penetrating kind, though thick concrete walls greatly reduce it.",
+          "keys": [
+            "Alpha is the least penetrating type.",
+            "Gamma is the most penetrating type."
+          ]
+        }
+      },
+      {
+        "t": "Supporters replied that everyone is exposed to some background radiation all the time, from rocks, food and cosmic rays.",
+        "ok": "It is correct: background radiation has natural sources such as rocks, food and cosmic rays."
+      },
+      {
+        "t": "The Sun itself is a giant nuclear fission reactor, one supporter said, splitting hydrogen into helium and giving us all the energy we need.",
+        "err": {
+          "topic": "E.5",
+          "section": "fusion",
+          "options": [
+            "The Sun's energy comes from burning hydrogen in a chemical reaction with oxygen.",
+            "The Sun is powered by nuclear fusion, in which hydrogen nuclei join to form helium.",
+            "The Sun is powered by the fission of helium into hydrogen."
+          ],
+          "answer": 1,
+          "feedback": [
+            "A chemical process would release far too little energy, and it would have run out long ago.",
+            null,
+            "Fission isn't the process here, and the direction is backwards: helium is built up from hydrogen."
+          ],
+          "fix": "The Sun itself is a giant nuclear fusion reactor, one supporter said, joining hydrogen nuclei to form helium and giving us all the energy we need.",
+          "keys": [
+            "The Sun is powered by fusion, not fission.",
+            "Hydrogen nuclei combine to form helium."
+          ]
+        }
+      },
+      {
+        "t": "The council will vote on the proposal next month."
+      }
+    ]
+  ]
+}
