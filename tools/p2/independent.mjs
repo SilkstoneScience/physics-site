@@ -226,6 +226,7 @@ export const INDEPENDENT = {
     const intercept = my - gradient * mx;
     const r = -gradient;
     return { eps: intercept, r, grad: gradient, P: V4.value * I4.value, Pint: I4.value * I4.value * r, Imax: intercept / r };
+  },
   // Precipitator: kV to V, then E = V/d; the field does work qV on a charge crossing the whole gap (J, and eV by
   // dividing by the electron charge); electric force qE against the weight; speed if all the work became KE.
   'D2-P01': ({ V, d, q, m }) => {
@@ -260,6 +261,7 @@ export const INDEPENDENT = {
     const perSecond = thermalW / perFission;
     const nucleus = AU.value * 1.661e-27;
     return { Amiss: AU.value + 1 - AX.value - 2 * 1, Zmiss: ZU.value - ZX.value, Pth: thermalW / 1e6, EfJ: perFission, rate: perSecond, mU: nucleus, mDay: perSecond * 24 * 3600 * nucleus };
+  },
   // Fire hose: the jet is at its highest when the vertical velocity is zero (time uy/g, height from s = ut + ½at²
   // over that time, not from v² = u² + 2as); it lands when the vertical displacement returns to zero, at twice
   // that time; the horizontal velocity is unchanged throughout.
