@@ -131,7 +131,7 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 
 ## Grouped main menu (8 November 2026, waiting for the teacher's check)
 - The nine flat menu items became seven groups, each a link to its hub page with a dropdown: Notes (themes A–E, Physics skills), Practise (question bank, review games, concept challenges and big questions), Exams (exam tips, both exam-copy data booklets), Experimental (practicals, CSP, IA, Extended essay), Resources (lesson slides, annotated data booklet, videos, software and tools, simulations, Science news), For teachers (slide generator, revision sheet builder) and About (about me, contact, copyright). Review games, Think deeper and For teachers are now in the menu; the home page is unchanged.
-- Dropdowns open on mouse hover, the small ▾ button (click, tap, Enter or Space), Space or ↓ on a label; arrow keys, Home/End and Escape work inside them. The orange underline marks the group holding the current page. Below 960 px the Menu button shows every group as a heading with its links underneath, and the open menu scrolls on its own.
+- Dropdowns open on mouse hover, the small ▾ button (click, tap, Enter or Space), Space or ↓ on a label; arrow keys, Home/End and Escape work inside them. The orange underline marks the group holding the current page. On wide screens the groups are spread evenly across the header, from under the logo to under the Search button (teacher's choice: no extra items just to fill the width). Below 960 px the Menu button shows every group as a heading with its links underneath, and the open menu scrolls on its own.
 - The exam-copy data booklet links now live once, in `window.EXAM_BOOKLETS` in `js/site.js`, used by the menu and the Resources cards.
 
 ## Still to do
