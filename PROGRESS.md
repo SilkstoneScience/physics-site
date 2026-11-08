@@ -127,6 +127,7 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Mysteries: `mystery.html?case=<id>` plays any case in `mysteries/<id>.json` (code `js/mystery.js`, styles `css/mystery.css`, pictures in `mysteries/diagrams/`). Plan and decisions: `docs/MYSTERY_PLAN.md`.
 - Case 1, "The vanishing meteorite" (SL; A.1, B.1, B.5, C.2): four clues with typed answers, "what does this prove?" choices, detective's notes, interviews, and a written accusation checked against a model and a checklist. Rank from hints and wrong answers. Board view and a printable case file. Independent review done; the teacher's check still to do.
 - Checker rules for case files are in `tools/check.mjs` (2f).
+- Teacher notes and answer key: `teachers/mystery-meteorite.html` (hidden page, linked from the For teachers page), with a lesson plan, sticking points, differentiation and the full solution timeline.
 - Next: more cases (e.g. themes D and E, or an HL case), once the teacher has tried the first.
 
 ## Grouped main menu (8 November 2026, waiting for the teacher's check)
