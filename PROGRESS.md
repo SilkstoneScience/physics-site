@@ -129,6 +129,11 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Checker rules for case files are in `tools/check.mjs` (2f).
 - Next: more cases (e.g. themes D and E, or an HL case), once the teacher has tried the first.
 
+## Grouped main menu (8 November 2026, waiting for the teacher's check)
+- The nine flat menu items became seven groups, each a link to its hub page with a dropdown: Notes (themes A–E, Physics skills), Practise (question bank, review games, concept challenges and big questions), Exams (exam tips, both exam-copy data booklets), Experimental (practicals, CSP, IA, Extended essay), Resources (lesson slides, annotated data booklet, videos, software and tools, simulations, Science news), For teachers (slide generator, revision sheet builder) and About (about me, contact, copyright). Review games, Think deeper and For teachers are now in the menu; the home page is unchanged.
+- Dropdowns open on mouse hover, the small ▾ button (click, tap, Enter or Space), Space or ↓ on a label; arrow keys, Home/End and Escape work inside them. The orange underline marks the group holding the current page. Below 960 px the Menu button shows every group as a heading with its links underneath, and the open menu scrolls on its own.
+- The exam-copy data booklet links now live once, in `window.EXAM_BOOKLETS` in `js/site.js`, used by the menu and the Resources cards.
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".

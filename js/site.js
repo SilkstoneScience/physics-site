@@ -56,6 +56,13 @@ window.topicFile = (id) => id.replace('.', '').toLowerCase() + '.html';
 // Never put the PDF itself in this website folder: it is copyrighted and this folder is public.
 window.DATA_BOOKLET_URL = 'https://drive.google.com/open?id=1vtP7efHOuywaeqp1YeYcqorHjxl5r49-&usp=drive_fs';
 
+// Clean exam copies of the IB data booklet on Google Drive (school accounts only): 2025 for exams 2025–2027, 2028 for exams from 2028.
+// Used by the main menu (Exams) and the two cards on the Resources page (data-exam-booklet="2025" / "2028").
+window.EXAM_BOOKLETS = {
+  '2025': 'https://drive.google.com/file/d/1JAMZvLZ6jOCbfV-qsI-xjOiwIaSBrtVc/view',
+  '2028': 'https://drive.google.com/file/d/1UMJv_T_bHSSDJqFKM_dzzD-zZcUjCZU2/view',
+};
+
 // Data-booklet equations for each topic, shown in the "Σ Equations" panel.
 // Written from the 2025 IB Physics data booklet (same symbols), updated from the 2028 data booklet (first exams 2028);
 // the labels are ours. Add a topic here when its notes page is written. Backslashes are doubled inside JS strings.
@@ -488,17 +495,61 @@ window.glueUnits = (function () {
   }
 
   // ----- Header and menu -----
-  const links = [
-    ['themes', 'themes/index.html', 'Themes'],
-    ['questions', 'questions.html', 'Question bank'],
-    ['skills', 'skills.html', 'Skills'],
-    ['experimental', 'experimental/index.html', 'Experimental programme'],
-    ['ee', 'ee/index.html', 'Extended essay'],
-    ['exam', 'exam-technique.html', 'Exam tips'],
-    ['resources', 'resources.html', 'Resources'],
-    ['news', 'news.html', 'Science news'],
-    ['about', 'about.html', 'About'],
+  // Seven groups, each a link to its hub page plus a short dropdown of the pages inside it.
+  // "sections" = the <body data-section> values that belong to the group (for the orange current-page underline).
+  // A dropdown item is [label, href] (href relative to the site root), or [label, href, true] to open in a new tab
+  // (Google Drive). An empty href shows the label greyed out as "coming soon".
+  const groups = [
+    { key: 'notes', label: 'Notes', href: 'themes/index.html', sections: ['themes', 'skills'], items: [
+      ...SYLLABUS.map((t) => [`Theme ${t.id}: ${t.title}`, `themes/${t.id.toLowerCase()}.html`]),
+      ['Physics skills', 'skills.html'],
+    ] },
+    { key: 'practise', label: 'Practise', href: 'questions.html', sections: ['questions', 'games', 'think', 'tok'], items: [
+      ['Question bank', 'questions.html'],
+      ['Review games', 'games.html'],
+      ['Concept challenges and big questions', 'think/index.html'],
+    ] },
+    { key: 'exams', label: 'Exams', href: 'exam-technique.html', sections: ['exam'], items: [
+      ['Exam tips', 'exam-technique.html'],
+      ['Data booklet 2025 (exam copy)', EXAM_BOOKLETS['2025'], true],
+      ['Data booklet 2028 (exam copy)', EXAM_BOOKLETS['2028'], true],
+    ] },
+    { key: 'experimental', label: 'Experimental', href: 'experimental/index.html', sections: ['experimental', 'ee'], items: [
+      ['Practicals', 'experimental/practicals.html'],
+      ['Collaborative Sciences Project', 'experimental/csp.html'],
+      ['Internal assessment', 'experimental/ia.html'],
+      ['Extended essay', 'ee/index.html'],
+    ] },
+    { key: 'resources', label: 'Resources', href: 'resources.html', sections: ['resources', 'news'], items: [
+      ['Lesson slides', 'resources.html'],
+      ['Annotated data booklet', DATA_BOOKLET_URL, true],
+      ['Videos', 'resources/youtube.html'],
+      ['Software and tools', 'resources/apps.html'],
+      ['Simulations', 'resources/simulations.html'],
+      ['Science news', 'news.html'],
+    ] },
+    { key: 'teachers', label: 'For teachers', href: 'teachers/index.html', sections: ['teachers'], items: [
+      ['Lesson slide generator', 'teachers/slides.html'],
+      ['Revision sheet builder', 'teachers/worksheets.html'],
+    ] },
+    { key: 'about', label: 'About', href: 'about.html', sections: ['about'], items: [
+      ['About me', 'about.html'],
+      ['Contact', 'about.html#contact'],
+      ['Copyright and permission', 'about.html#copyright'],
+    ] },
   ];
+  // True when a link points at this page ("themes/index.html" and "themes/" are the same page; #links don't count)
+  const samePage = (href) => {
+    const u = new URL(href, location.href);
+    const strip = (p) => p.replace(/index\.html$/, '');
+    return !u.hash && u.origin === location.origin && strip(u.pathname) === strip(location.pathname);
+  };
+  const subLink = ([label, href, newTab]) => {
+    if (!href) return `<li><span class="nav-soon">${label} (coming soon)</span></li>`;
+    const url = /^https?:/.test(href) ? href : root + href;
+    if (newTab) return `<li><a href="${url}" target="_blank" rel="noopener">${label} <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a></li>`;
+    return `<li><a href="${url}"${samePage(url) ? ' aria-current="page"' : ''}>${label}</a></li>`;
+  };
   const header = document.getElementById('site-header');
   if (header) {
     header.className = 'site-header';
@@ -510,8 +561,15 @@ window.glueUnits = (function () {
           <button class="menu-btn" aria-expanded="false" aria-controls="site-nav">Menu</button>
         </div>
         <nav class="site-nav" id="site-nav" aria-label="Main">
-          <ul>${links.map(([key, href, label]) =>
-            `<li><a href="${root}${href}"${key === section ? ' aria-current="page"' : ''}>${label}</a></li>`).join('')}
+          <ul class="nav-top">${groups.map((g) => {
+            // The group holding this page gets the orange underline: aria-current "page" on its hub page, "true" on the pages inside it
+            const current = g.sections.includes(section) ? (samePage(root + g.href) ? 'page' : 'true') : '';
+            return `
+            <li class="nav-group">
+              <div class="nav-head"><a class="nav-label" href="${root}${g.href}"${current ? ` aria-current="${current}"` : ''}>${g.label}</a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-${g.key}"><span class="visually-hidden">${g.label}: more pages</span><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg></button></div>
+              <ul class="nav-sub" id="nav-${g.key}">${g.items.map(subLink).join('')}</ul>
+            </li>`;
+          }).join('')}
           </ul>
         </nav>
       </div>`;
@@ -520,7 +578,83 @@ window.glueUnits = (function () {
     btn.addEventListener('click', () => {
       const open = nav.classList.toggle('open');
       btn.setAttribute('aria-expanded', open);
+      if (!open) closeAll();
     });
+
+    // Dropdowns on wide screens. In the phone menu (Menu button) every group is shown with its links underneath,
+    // and the small ▾ buttons are hidden, so none of this is needed there.
+    const groupsEl = [...nav.querySelectorAll('.nav-group')];
+    const labelOf = (li) => li.querySelector('.nav-label');
+    const toggleOf = (li) => li.querySelector('.nav-toggle');
+    const linksOf = (li) => [...li.querySelectorAll('.nav-sub a')];
+    const setOpen = (li, open) => {
+      li.classList.toggle('open', open);
+      toggleOf(li).setAttribute('aria-expanded', open);
+    };
+    function closeAll(except) { groupsEl.forEach((li) => { if (li !== except) setOpen(li, false); }); }
+    const openAndFocus = (li, which) => {
+      closeAll(li);
+      setOpen(li, true);
+      const links = linksOf(li);
+      if (links.length) links[which === 'last' ? links.length - 1 : 0].focus();
+    };
+    const phoneMenu = () => getComputedStyle(btn).display !== 'none';
+    let hoverTimer;
+    groupsEl.forEach((li, i) => {
+      const label = labelOf(li);
+      const toggle = toggleOf(li);
+      // Click or tap the ▾ (or Enter/Space on it) to open or close; the label itself is an ordinary link to the hub page.
+      toggle.addEventListener('click', () => {
+        const open = !li.classList.contains('open');
+        closeAll(li);
+        setOpen(li, open);
+      });
+      // Mouse hover opens the dropdown; a short delay before closing lets the pointer reach it.
+      li.addEventListener('pointerenter', (e) => {
+        if (e.pointerType !== 'mouse' || phoneMenu()) return;
+        clearTimeout(hoverTimer);
+        closeAll(li);
+        setOpen(li, true);
+      });
+      li.addEventListener('pointerleave', (e) => {
+        if (e.pointerType !== 'mouse' || phoneMenu()) return;
+        hoverTimer = setTimeout(() => { if (!li.contains(document.activeElement)) setOpen(li, false); }, 250);
+      });
+      // Close when the keyboard focus leaves the group.
+      li.addEventListener('focusout', (e) => {
+        if (!li.contains(e.relatedTarget)) setOpen(li, false);
+      });
+      li.addEventListener('keydown', (e) => {
+        if (phoneMenu()) return; // the phone menu is a plain list: Tab moves through it
+        const links = linksOf(li);
+        const el = document.activeElement;
+        const inSub = links.includes(el);
+        const k = e.key;
+        if (k === 'Escape') {
+          if (!li.classList.contains('open')) return;
+          setOpen(li, false);
+          toggle.focus();
+        } else if (k === 'ArrowDown' || k === 'ArrowUp') {
+          if (!inSub) openAndFocus(li, k === 'ArrowUp' ? 'last' : 'first');
+          else links[(links.indexOf(el) + (k === 'ArrowDown' ? 1 : -1) + links.length) % links.length].focus();
+        } else if ((k === 'Home' || k === 'End') && inSub) {
+          links[k === 'Home' ? 0 : links.length - 1].focus();
+        } else if (k === 'ArrowRight' && el === label) {
+          toggle.focus();
+        } else if (k === 'ArrowLeft' && el === toggle) {
+          label.focus();
+        } else if (k === 'ArrowRight' || k === 'ArrowLeft') {
+          // Move to the next or previous group's label
+          setOpen(li, false);
+          const j = (i + (k === 'ArrowRight' ? 1 : -1) + groupsEl.length) % groupsEl.length;
+          labelOf(groupsEl[j]).focus();
+        } else if (k === ' ' && el === label) {
+          openAndFocus(li, 'first'); // Space on a label opens its dropdown; Enter still follows the link
+        } else return;
+        e.preventDefault();
+      });
+    });
+    document.addEventListener('click', (e) => { if (!nav.contains(e.target)) closeAll(); });
   }
 
   // ----- Footer -----
@@ -609,6 +743,7 @@ window.glueUnits = (function () {
       bookletCard.removeAttribute('target');
     }
   }
+  document.querySelectorAll('a[data-exam-booklet]').forEach((a) => { a.href = EXAM_BOOKLETS[a.dataset.examBooklet]; });
 
   // ----- Resources page: "Show slides" loads a Google Drive viewer only when pressed -----
   document.querySelectorAll('button[data-slides]').forEach((btn) => {

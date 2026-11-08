@@ -94,22 +94,44 @@ mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width:
 .search-link:hover, .search-link[aria-current="page"] { border-color: var(--accent); color: var(--accent); }
 .search-link svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
 .menu-btn { display: none; background: none; border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 6px 12px; font: inherit; cursor: pointer; }
-.site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 2px; flex-wrap: wrap; }
+/* Main menu: seven groups. Each has a label (a link to its hub page), a small ▾ button and a dropdown of its pages. */
+.site-nav ul { list-style: none; margin: 0; padding: 0; }
+.nav-top { display: flex; gap: 2px; flex-wrap: wrap; }
+.nav-group { position: relative; }
+.nav-head { display: flex; align-items: center; }
 .site-nav a { display: block; padding: 6px 9px; border-radius: 8px; text-decoration: none; color: var(--text); font-size: 0.95rem; }
 .site-nav a:hover { background: var(--bg); }
-/* Current page: a thin orange underline (a bar on the left in the phone menu) */
-.site-nav a[aria-current="page"] { font-weight: 600; background: linear-gradient(var(--xyz-ink), var(--xyz-ink)) no-repeat left 9px bottom 2px / calc(100% - 18px) 2px; }
-/* Below 960 px the nine menu items no longer fit on one line (they need about 930 px plus the scrollbar), so they move into the Menu button. */
+.nav-head .nav-label { padding-right: 3px; }
+.nav-toggle { background: none; border: 0; border-radius: 6px; color: var(--muted, var(--text)); padding: 8px 6px 6px 2px; margin: 0; cursor: pointer; line-height: 0; }
+.nav-toggle svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.15s; }
+.nav-toggle:hover { color: var(--accent); }
+.nav-group.open .nav-toggle svg { transform: rotate(180deg); }
+/* The dropdown: hidden until its group is opened (hover, the ▾ button or the keyboard) */
+.nav-sub { display: none; position: absolute; left: 0; top: 100%; z-index: 20; min-width: 210px; padding: 6px; margin-top: 2px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14); }
+.nav-group:nth-last-child(-n+2) .nav-sub { left: auto; right: 0; } /* the last two open leftwards so they stay on screen */
+.nav-group.open .nav-sub { display: block; }
+.nav-sub a, .nav-soon { white-space: nowrap; padding: 7px 10px; }
+.nav-sub a[aria-current="page"] { font-weight: 600; background: var(--bg); }
+.nav-soon { display: block; color: var(--muted, var(--text)); opacity: 0.75; font-size: 0.95rem; }
+/* Current page: a thin orange underline under its group's label (a bar on the left in the phone menu) */
+.nav-label[aria-current] { font-weight: 600; background: linear-gradient(var(--xyz-ink), var(--xyz-ink)) no-repeat left 9px bottom 2px / calc(100% - 12px) 2px; }
+/* The seven groups need about 650 px (on their own line under the brand). Below 960 px they move into the Menu button,
+   as before, so phones and tablets held upright (no hover) get the simple list: every group a heading with its links underneath. */
 @media (max-width: 960px) {
   .menu-btn { display: block; }
   /* Phones: the search link shrinks to its magnifying-glass icon (its label stays for screen readers) */
   .search-link { padding: 7px 9px; }
   .search-link span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .site-nav { display: none; width: 100%; }
-  .site-nav.open { display: block; }
-  .site-nav ul { flex-direction: column; padding-bottom: 8px; }
-  .site-nav a { padding: 10px 10px 10px 14px; }
-  .site-nav a[aria-current="page"] { background: var(--bg) linear-gradient(var(--xyz-ink), var(--xyz-ink)) no-repeat left center / 3px 60%; }
+  /* The open menu is taller than a phone screen and the header stays at the top, so the menu scrolls on its own */
+  .site-nav.open { display: block; max-height: calc(100vh - 64px); max-height: calc(100dvh - 64px); overflow-y: auto; overscroll-behavior: contain; }
+  .nav-top { flex-direction: column; gap: 0; padding-bottom: 8px; }
+  .nav-group + .nav-group { border-top: 1px solid var(--border); }
+  .nav-toggle { display: none; }
+  .nav-head .nav-label { flex: 1; padding: 10px 10px 4px 14px; font-weight: 700; }
+  .nav-sub, .nav-group.open .nav-sub { display: block; position: static; min-width: 0; margin: 0; padding: 0 0 6px 14px; border: 0; border-radius: 0; box-shadow: none; background: none; }
+  .nav-sub a, .nav-soon { white-space: normal; padding: 7px 10px 7px 14px; }
+  .nav-label[aria-current] { background: var(--bg) linear-gradient(var(--xyz-ink), var(--xyz-ink)) no-repeat left center / 3px 60%; }
 }
 
 /* ===== Footer ===== */
