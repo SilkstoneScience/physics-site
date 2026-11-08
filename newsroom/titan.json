@@ -1,0 +1,152 @@
+{
+  "id": "titan",
+  "kind": "Film review",
+  "paper": "Cinema Weekly",
+  "headline": "Silence of Titan: the most scientifically accurate space film ever made?",
+  "standfirst": "Five stars for a thriller that “gets every detail right”",
+  "byline": "By our film critic",
+  "topics": [
+    "C.2",
+    "C.5",
+    "D.1"
+  ],
+  "level": "SL",
+  "time": "10 minutes",
+  "brief": "Our critic loved this film and praises its accuracy at length. Letters from physics teachers are already arriving, so check the review before it goes to print.",
+  "body": [
+    [
+      {
+        "t": "From its opening shot, Silence of Titan announces that it takes physics seriously."
+      },
+      {
+        "t": "When an asteroid explodes far from the orbiting station, the crew see the flash and then, realistically, hear the roar a few seconds later, because sound travels through space more slowly than light.",
+        "err": {
+          "topic": "C.2",
+          "section": "sound",
+          "options": [
+            "Sound travels through space faster than light.",
+            "They would hear the roar first and see the flash afterwards, because the sound starts before the light does.",
+            "Sound is a mechanical wave and needs a medium, so no roar can cross the vacuum of space."
+          ],
+          "answer": 2,
+          "feedback": [
+            "Sound doesn't travel through space at all, at any speed.",
+            "The order isn't the problem. Think about what sound needs in order to travel.",
+            null
+          ],
+          "fix": "When an asteroid explodes far from the orbiting station, the crew see the flash but, realistically, hear nothing, because sound needs a medium and cannot travel through the vacuum of space.",
+          "keys": [
+            "Sound is a mechanical wave and needs a medium.",
+            "Space is a vacuum, so the sound cannot reach the crew (light can)."
+          ]
+        }
+      },
+      {
+        "t": "Inside the station, 400 km above the Earth, the crew float freely because they are too far from the planet for its gravity to reach them.",
+        "err": {
+          "topic": "D.1",
+          "section": "weightless",
+          "options": [
+            "Gravity there is still about 90% of its surface value; the crew and station are in free fall together.",
+            "The crew float because the air inside the station holds them up.",
+            "Gravity would reach them, but only if the station were stationary; an object moving this fast no longer feels it."
+          ],
+          "answer": 0,
+          "feedback": [
+            null,
+            "The air provides a negligible buoyancy force compared with an astronaut's weight.",
+            "Gravity acts on an object whether or not it is moving."
+          ],
+          "fix": "Inside the station, 400 km above the Earth, the crew float freely because they and the station are in free fall together, accelerating towards the Earth at the same rate.",
+          "keys": [
+            "Gravity is still strong at this height.",
+            "The crew and the station are in free fall together, so there is no contact force on the crew."
+          ]
+        }
+      },
+      {
+        "t": "In one tense scene, an astronaut pushes a heavy crate away from her and drifts backwards in the opposite direction.",
+        "ok": "It is correct: by Newton's third law the crate pushes back on her with an equal and opposite force."
+      },
+      {
+        "t": "Later, when the station's engines fail, the crew have only minutes before it falls straight to Earth, since an orbit needs the engines to keep pushing against gravity.",
+        "err": {
+          "topic": "D.1",
+          "section": "orbits",
+          "options": [
+            "Without engines, the station would fly off in a straight line away from the Earth, because nothing would then hold it in.",
+            "An orbit needs no thrust: gravity provides the centripetal force that keeps the station moving in a circle.",
+            "The engines push the station towards the Earth, so if they fail the orbit grows."
+          ],
+          "answer": 1,
+          "feedback": [
+            "Gravity still acts when the engines stop, so the station would not move in a straight line.",
+            null,
+            "Engines are not needed for a steady orbit, in either direction."
+          ],
+          "fix": "Later, when the station's engines fail, the crew are in no immediate danger, since gravity alone provides the centripetal force that keeps the station in orbit.",
+          "keys": [
+            "Gravity provides the centripetal force.",
+            "No thrust is needed to maintain a circular orbit."
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "t": "The action then moves to Saturn's moon Titan, which has a thick atmosphere, so the characters can hear sounds around them through their helmets.",
+        "ok": "It is correct: Titan has a dense atmosphere, which is a medium that sound can travel through."
+      },
+      {
+        "t": "A nice detail is that the astronauts' weight is far smaller on Titan, even though their mass has not changed.",
+        "ok": "It is correct: mass stays the same, while weight depends on the gravitational field strength, which is much smaller on Titan."
+      },
+      {
+        "t": "The sound design is equally clever: as the rover drives away, its warning siren rises in pitch, just as it would in real life.",
+        "err": {
+          "topic": "C.5",
+          "section": "source",
+          "options": [
+            "The pitch would not change at all, because the siren's own frequency is constant however the rover moves.",
+            "The pitch would rise only if the air were moving with the rover.",
+            "For a source moving away, the waves reach the listener stretched out, so the pitch is lower."
+          ],
+          "answer": 2,
+          "feedback": [
+            "The siren emits a constant frequency, but the observed frequency changes when the source is moving.",
+            "The motion of the rover alone is enough to change the observed frequency, and it lowers it.",
+            null
+          ],
+          "fix": "The sound design is equally clever: as the rover drives away, its warning siren drops in pitch, just as it would in real life.",
+          "keys": [
+            "A source moving away gives a longer observed wavelength.",
+            "So the observed frequency, and the pitch, are lower."
+          ]
+        }
+      },
+      {
+        "t": "And when the captain radios Earth from 1.4 billion kilometres away, the reply comes back with no delay at all, because radio waves travel instantly.",
+        "err": {
+          "topic": "C.2",
+          "section": "em",
+          "options": [
+            "Radio waves travel at the speed of sound, so the delay would be years.",
+            "Radio waves travel at the speed of light, so even one way takes about 78 minutes over this distance.",
+            "Radio waves travel faster than light through a vacuum, so the delay would be only seconds."
+          ],
+          "answer": 1,
+          "feedback": [
+            "Radio waves are electromagnetic waves, not sound.",
+            null,
+            "Nothing carries a signal faster than light. Try $t = d/c$ with $d = 1.4 \\times 10^{12}$ m."
+          ],
+          "fix": "And when the captain radios Earth from 1.4 billion kilometres away, each message takes about 78 minutes to arrive, because radio waves travel at the speed of light.",
+          "keys": [
+            "Radio waves are electromagnetic and travel at the speed of light.",
+            "$t = \\frac{d}{c} = \\frac{1.4 \\times 10^{12}}{3.0 \\times 10^{8}} \\approx 4.7 \\times 10^{3}$ s, about 78 minutes."
+          ]
+        }
+      }
+    ]
+  ]
+}

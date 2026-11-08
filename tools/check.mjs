@@ -302,6 +302,103 @@ for (const it of readThink('think/big-questions.json')) {
   }
 }
 
+// ---------- 2e-games. Newsroom, Explanation builder and word games (newsroom/*.json, explain/items.json, wordgames/*.json) ----------
+const hlSection = (topic, section) => {
+  const page = read('themes/' + topic.replace('.', '').toLowerCase() + '.html');
+  const at = page.indexOf(' id="' + section + '"');
+  const zone = page.indexOf('class="hl-zone"');
+  return { found: at >= 0, hl: zone >= 0 && at > zone };
+};
+const checkSection = (where, topic, section, level) => {
+  if (!TOPICS.has(topic)) { err(where, 'unknown topic "' + topic + '"'); return; }
+  const r = hlSection(topic, section);
+  if (!r.found) err(where, 'section "' + section + '" isn\'t an id on the ' + topic + ' page');
+  else if (level === 'SL' && (r.hl || TOPICS.get(topic).hl)) warn(where, 'an SL item uses HL-only content (' + topic + ' #' + section + ')');
+};
+if (exists('newsroom/index.json')) {
+  const names = JSON.parse(read('newsroom/index.json'));
+  for (const name of fs.readdirSync(path.join(ROOT, 'newsroom')).filter((n) => n.endsWith('.json') && n !== 'index.json')) {
+    if (!names.includes(name.replace(/\.json$/, ''))) err('newsroom/index.json', name + ' is not listed');
+  }
+  for (const name of names) {
+    const rel = 'newsroom/' + name + '.json';
+    if (!exists(rel)) { err('newsroom/index.json', rel + ' not found'); continue; }
+    let A;
+    try { A = JSON.parse(read(rel)); } catch (e) { err(rel, "isn't valid JSON: " + e.message); continue; }
+    if (A.id !== name) err(rel, '"id" must match the file name');
+    for (const k of ['kind', 'paper', 'headline', 'byline', 'brief', 'time']) checkText(rel, A[k], k);
+    if (!['SL', 'HL'].includes(A.level)) err(rel, 'level must be "SL" or "HL"');
+    for (const t of A.topics || []) if (!TOPICS.has(t)) err(rel, 'unknown topic "' + t + '"');
+    const sentences = (A.body || []).flat();
+    const wrong = sentences.filter((s) => s.err);
+    if (wrong.length < 3) err(rel, 'an article needs at least 3 errors');
+    sentences.forEach((s, i) => {
+      const where = rel + ' sentence ' + (i + 1);
+      checkText(where, s.t, 't');
+      if (s.ok !== undefined) checkText(where, s.ok, 'ok');
+      if (s.err && s.ok !== undefined) err(where, 'has both "err" and "ok"');
+      if (!s.err) return;
+      const e = s.err;
+      if (!(A.topics || []).includes(e.topic)) err(where, 'topic ' + e.topic + ' is not in the article\'s "topics" list');
+      checkSection(where, e.topic, e.section, A.level);
+      checkText(where, e.fix, 'fix');
+      if (e.fix === s.t) err(where, 'the correction is the same as the original sentence');
+      if (!Array.isArray(e.keys) || !e.keys.length) err(where, 'needs "keys" (the points a good rewrite makes)');
+      else e.keys.forEach((k) => checkText(where, k, 'keys'));
+      if (!Array.isArray(e.options) || e.options.length < 2 || e.options.length > 4) err(where, 'needs 2 to 4 options');
+      else {
+        e.options.forEach((o) => checkText(where, o, 'option'));
+        if (!Number.isInteger(e.answer) || e.answer < 0 || e.answer >= e.options.length) err(where, 'answer must be an option number (0 = first)');
+        e.options.forEach((o, n) => { if (n !== e.answer && !(e.feedback && e.feedback[n])) err(where, 'wrong option ' + (n + 1) + ' has no feedback'); });
+      }
+    });
+  }
+}
+if (exists('explain/items.json')) {
+  const rel = 'explain/items.json';
+  let items = [];
+  try { items = JSON.parse(read(rel)); } catch (e) { err(rel, "isn't valid JSON: " + e.message); }
+  const ids = new Set();
+  for (const q of items) {
+    const where = rel + ' ' + q.id;
+    if (!/^EX-[A-E]\d-\d\d$/.test(q.id || '')) err(where, 'id must look like EX-A1-01');
+    if (ids.has(q.id)) err(where, 'duplicate id');
+    ids.add(q.id);
+    checkSection(where, q.topic, q.section, q.level);
+    for (const k of ['question', 'tip']) checkText(where, q[k], k);
+    if (!Array.isArray(q.pieces) || q.pieces.length < 2) err(where, 'needs at least 2 pieces');
+    else q.pieces.forEach((p) => { checkText(where, p.t, 'piece'); if (!Number.isInteger(p.step)) err(where, 'each piece needs a whole-number "step"'); });
+    if (!Array.isArray(q.decoys) || !q.decoys.length) err(where, 'needs at least 1 decoy');
+    else q.decoys.forEach((d) => { checkText(where, d.t, 'decoy'); checkText(where, d.why, 'decoy why'); });
+    if (!Number.isInteger(q.marks) || q.marks < 1) err(where, 'marks must be a whole number');
+  }
+}
+if (exists('wordgames/terms.json')) {
+  const rel = 'wordgames/terms.json';
+  const terms = JSON.parse(read(rel));
+  const seen = new Set();
+  for (const t of terms) {
+    const where = rel + ' ' + t.term;
+    if (seen.has(t.term)) err(where, 'duplicate term');
+    seen.add(t.term);
+    if (!TOPICS.has(t.topic)) err(where, 'unknown topic "' + t.topic + '"');
+    checkText(where, t.clue, 'clue');
+    if (!Array.isArray(t.ban) || t.ban.length !== 4) err(where, 'needs exactly 4 forbidden words');
+    if (t.clue.toLowerCase().includes(t.term.toLowerCase())) err(where, 'the crossword clue contains the answer');
+  }
+  const orel = 'wordgames/odd-one-out.json';
+  const ids = new Set();
+  for (const o of JSON.parse(read(orel))) {
+    const where = orel + ' ' + o.id;
+    if (ids.has(o.id)) err(where, 'duplicate id');
+    ids.add(o.id);
+    if (!TOPICS.has(o.topic)) err(where, 'unknown topic "' + o.topic + '"');
+    if (!Array.isArray(o.items) || o.items.length !== 4) err(where, 'needs exactly 4 items');
+    if (!Number.isInteger(o.answer) || o.answer < 0 || o.answer > 3) err(where, 'answer must be 0 to 3');
+    checkText(where, o.reason, 'reason');
+  }
+}
+
 // ---------- 2f. Physics mysteries (mysteries/*.json, played by mystery.html and js/mystery.js) ----------
 // Plan: docs/MYSTERY_PLAN.md. Each case's clue answers are marked by js/numeric.js, so they get the same checks as the question bank.
 for (const name of exists('mysteries') ? fs.readdirSync(path.join(ROOT, 'mysteries')).filter((n) => n.endsWith('.json')) : []) {
