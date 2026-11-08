@@ -117,6 +117,26 @@
           "notes": "Draw the two sets of axes, with the gap vt between the origins, as in the figure that follows."
         },
         {
+          "type": "derivation",
+          "title": "Length in two frames",
+          "start": "A rod lies along the $x$ axis. At the same time $t$, its ends are at $x_{1}$ and $x_{2}$, so its length in S is $x_{2} - x_{1}$.",
+          "steps": [
+            {
+              "text": "Transform the far end to S′",
+              "latex": "x_{2}' = x_{2} - vt"
+            },
+            {
+              "text": "Transform the near end to S′",
+              "latex": "x_{1}' = x_{1} - vt"
+            },
+            {
+              "text": "Subtract: the $vt$ terms cancel",
+              "latex": "x_{2}' - x_{1}' = x_{2} - x_{1}"
+            }
+          ],
+          "notes": "In Galilean relativity, length is the same in every inertial frame. This relies on $t' = t$: both ends are measured at the same moment in both frames, which special relativity will not allow."
+        },
+        {
           "type": "diagram",
           "title": "Two frames, one event",
           "figure": "a5at"
@@ -443,6 +463,29 @@
         },
         {
           "type": "derivation",
+          "title": "Why absolute time can't be right",
+          "start": "A pulse of light crosses a distance $L$ at right angles to the clock's motion and comes back: one tick. Moving with the clock, $2L = c\\Delta t_{0}$. Suppose time is absolute, so an observer who sees the clock moving at speed $v$ also measures $\\Delta t_{0}$.",
+          "steps": [
+            {
+              "text": "The clock moves $v\\Delta t_{0}$ during the tick, so the pulse takes a longer path",
+              "latex": "\\text{path} = \\sqrt{(2L)^{2} + (v\\Delta t_{0})^{2}}"
+            },
+            {
+              "text": "Replace $2L$ with $c\\Delta t_{0}$",
+              "latex": "\\text{path} = \\Delta t_{0}\\sqrt{c^{2} + v^{2}}"
+            },
+            {
+              "text": "Speed = path ÷ time",
+              "latex": "\\text{speed} = \\sqrt{c^{2} + v^{2}}"
+            },
+            {
+              "text": "That is faster than $c$, which breaks postulate 2. So the two observers cannot measure the same time for a tick."
+            }
+          ],
+          "notes": "Each half of the zigzag is $\\sqrt{L^{2} + \\left(\\dfrac{v\\Delta t_{0}}{2}\\right)^{2}}$, and two halves give the path on the slide. This is the step that forces time dilation: the next slide keeps the speed at c and lets the time change instead."
+        },
+        {
+          "type": "derivation",
           "title": "The light clock",
           "start": "A light clock: a pulse bounces between two mirrors a distance $L$ apart. For an observer moving with it, one tick (up and back) takes $\\Delta t_0 = 2L/c$. Another observer sees the clock move sideways at speed $v$, so each tick takes $\\Delta t$.",
           "steps": [
@@ -451,7 +494,7 @@
               "latex": "\\left(\\dfrac{c\\Delta t}{2}\\right)^{2} = L^{2} + \\left(\\dfrac{v\\Delta t}{2}\\right)^{2}"
             },
             {
-              "text": "Multiply by 4, then replace $2L$ with $cDelta t_0$",
+              "text": "Multiply by 4, then replace $2L$ with $c\\Delta t_0$",
               "latex": "(c\\Delta t)^{2} = (c\\Delta t_0)^{2} + (v\\Delta t)^{2}"
             },
             {
@@ -463,7 +506,7 @@
               "latex": "\\Delta t = \\dfrac{\\Delta t_0}{\\sqrt{1 - \\dfrac{v^{2}}{c^{2}}}} = \\gamma\\,\\Delta t_0"
             }
           ],
-          "notes": "The derivation is not required by the guide, but it shows clearly where time dilation comes from. With Newton's absolute time ($\\Delta t = \\Delta t_0$), the same diagram would need the light to travel faster than $c$ for the moving observer, breaking postulate 2."
+          "notes": "The derivation is not required by the guide, but it shows clearly where time dilation comes from."
         },
         {
           "type": "bullets",
@@ -775,6 +818,30 @@
           "notes": "This is why Newton's mechanics works so well at everyday speeds: it is the low-speed limit of special relativity."
         },
         {
+          "type": "derivation",
+          "title": "From coordinates to intervals",
+          "start": "Two events have coordinates $(x_{1}, t_{1})$ and $(x_{2}, t_{2})$ in S. Transform each one, then subtract.",
+          "steps": [
+            {
+              "text": "The second event",
+              "latex": "x_{2}' = \\gamma(x_{2} - vt_{2})"
+            },
+            {
+              "text": "The first event",
+              "latex": "x_{1}' = \\gamma(x_{1} - vt_{1})"
+            },
+            {
+              "text": "Subtract: $\\gamma$ is the same for both, because $v$ is",
+              "latex": "x_{2}' - x_{1}' = \\gamma\\left((x_{2} - x_{1}) - v(t_{2} - t_{1})\\right)"
+            },
+            {
+              "text": "Write the differences using $\\Delta$",
+              "latex": "\\Delta x' = \\gamma(\\Delta x - v\\Delta t)"
+            }
+          ],
+          "notes": "The same steps give $\\Delta t' = \\gamma\\left(\\Delta t - \\dfrac{v\\Delta x}{c^{2}}\\right)$. Both are in the data booklet."
+        },
+        {
           "type": "diagram",
           "title": "The Lorentz factor",
           "figure": "a5bt",
@@ -1005,10 +1072,9 @@
       "sections": [
         "diagrams"
       ],
-      "minutes": 45,
+      "minutes": 20,
       "aims": [
-        "Draw and interpret world lines on a space-time diagram with $x$ and $ct$ axes.",
-        "Use the axes of a moving frame to show simultaneity, time dilation and length contraction."
+        "Draw and interpret world lines on a space-time diagram with $x$ and $ct$ axes."
       ],
       "slides": [
         {
@@ -1023,28 +1089,6 @@
             "Anything with mass has a world line steeper than 45° (closer to the $ct$ axis)"
           ],
           "notes": "World lines are limited to constant velocity in the guide. Contrast a space diagram of circular motion (a circle) with its space-time diagram (a helix that never repeats its time coordinate) to show what the extra axis adds."
-        },
-        {
-          "type": "bullets",
-          "title": "Adding a moving frame",
-          "bullets": [
-            "The $ct'$ axis is the world line of the origin of S′, tilted from $ct$ by an angle $\\theta$",
-            "The $x'$ axis (all events at $t' = 0$) is tilted up from $x$ by the same angle",
-            "The light line stays at 45°, halfway between both pairs of axes: light has speed $c$ in both frames",
-            "To read coordinates in S′, draw lines through the event parallel to the $x'$ and $ct'$ axes",
-            "The scales on the $x'$ and $ct'$ axes differ from those on $x$ and $ct$: they are set by lines of constant interval"
-          ]
-        },
-        {
-          "type": "diagram",
-          "title": "Simultaneity on a space-time diagram",
-          "figure": "a5ct",
-          "bullets": [
-            "Events on a line parallel to $x$ are simultaneous in S",
-            "Events on a line parallel to $x'$ are simultaneous in S′",
-            "These are different lines, so simultaneity depends on the frame"
-          ],
-          "notes": "Ask students to use the same diagram to show time dilation: two events on the $ct'$ axis (a clock at rest in S′) are further apart in time when measured with lines parallel to the $x$ axis. Remind them that the $ct'$ axis has its own scale, set by lines of constant interval."
         },
         {
           "type": "worked",
@@ -1118,7 +1162,7 @@
         {
           "type": "worked",
           "title": "Angles and speeds",
-          "question": "(a) A comet moves at $0.35c$ relative to the Sun. At what angle to the $ct$ axis is its world line in the Sun's frame? (b) On another diagram, the world line of a spacecraft makes an angle of 40° with the $ct$ axis. Find its speed.",
+          "question": "(a) An electron in an X-ray tube moves at $0.35c$ relative to the tube. At what angle to the $ct$ axis is its world line in the tube's frame? (b) On another diagram, the world line of a spacecraft makes an angle of 40° with the $ct$ axis. Find its speed.",
           "hint": "Use $\\tan\\theta = \\dfrac{v}{c}$ both ways. Check that the angle is measured from the $ct$ axis.",
           "steps": [
             {
@@ -1133,11 +1177,106 @@
               "text": "Check: both angles are less than 45°, so both speeds are less than $c$."
             }
           ],
-          "notes": "A comet at $0.35c$ is unrealistic, but the numbers are easier to see on a diagram. A common slip is measuring from the $x$ axis, which would give $\\tan 50° = 1.19$, faster than light."
+          "notes": "A common slip is measuring from the $x$ axis, which would give $\\tan 50° = 1.19$, faster than light."
         }
       ],
       "checks": [
         "A5-009"
+      ]
+    },
+    {
+      "id": "moving-frame",
+      "short": "Two frames on a diagram",
+      "hl": true,
+      "guide": "Time dilation, length contraction and simultaneity can be visualized using space–time diagrams. The scales on the time and space axes of two inertial reference frames moving relative to one another are not the same and are defined by lines of constant space–time interval.",
+      "sections": [
+        "diagrams"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Use the axes of a moving frame to show simultaneity, time dilation and length contraction."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Adding a moving frame",
+          "bullets": [
+            "The $ct'$ axis is the world line of the origin of S′, tilted from $ct$ by an angle $\\theta$",
+            "The $x'$ axis (all events at $t' = 0$) is tilted up from $x$ by the same angle",
+            "The light line stays at 45°, halfway between both pairs of axes: light has speed $c$ in both frames",
+            "To read coordinates in S′, draw lines through the event parallel to the $x'$ and $ct'$ axes",
+            "The scales on the $x'$ and $ct'$ axes differ from those on $x$ and $ct$: they are set by lines of constant interval"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Simultaneity on a space-time diagram",
+          "figure": "a5ct",
+          "bullets": [
+            "Events on a line parallel to $x$ are simultaneous in S",
+            "Events on a line parallel to $x'$ are simultaneous in S′",
+            "These are different lines, so simultaneity depends on the frame"
+          ],
+          "notes": "Remind students that the $ct'$ axis has its own scale, set by lines of constant interval. The next two slides use those scales."
+        },
+        {
+          "type": "diagram",
+          "title": "Length contraction on a diagram",
+          "svg": "figures/a5-length-contraction.svg",
+          "alt": "Space-time diagram with x and ct axes, tilted x prime and ct prime axes for a frame moving at 0.60 c, and the world lines of the two ends of a rod at rest in the moving frame. The rod is 5.0 metres long along the x prime axis but 4.0 metres long along the x axis. A dashed hyperbola joins x equals 5.0 metres to the point x prime equals 5.0 metres.",
+          "bullets": [
+            "A rod at rest in S′: its ends have world lines parallel to the $ct'$ axis",
+            "$L_{0}$ lies along the $x'$ axis: both ends at the same $t'$",
+            "$L$ lies along the $x$ axis: both ends at the same $t$",
+            "At $v = 0.60c$: 5.0 m in S′ is 4.0 m in S"
+          ],
+          "notes": "The dashed hyperbola, $x^{2} - (ct)^{2} = 25\\ \\text{m}^{2}$, sets the scale: it crosses the $x$ axis at 5.0 m and the $x'$ axis at $x' = 5.0$ m. With $\\gamma = 1.25$, $L = \\dfrac{L_{0}}{\\gamma} = 4.0$ m."
+        },
+        {
+          "type": "diagram",
+          "title": "Time dilation on a diagram",
+          "svg": "figures/a5-time-dilation.svg",
+          "alt": "Space-time diagram with x and ct axes and tilted axes for a frame moving at 0.60 c. A clock at rest in the moving frame follows the ct prime axis from O to P, 4.0 metres of ct prime. A horizontal dashed line from P meets the ct axis at 5.0 metres. A dashed hyperbola joins ct equals 4.0 metres to P.",
+          "bullets": [
+            "A clock at the origin of S′ moves along the $ct'$ axis",
+            "Two ticks, O and P: 4.0 m apart in $ct'$",
+            "Through P, a line parallel to the $x$ axis finds the time in S: 5.0 m in $ct$",
+            "S measures the longer time"
+          ],
+          "notes": "The dashed hyperbola, $(ct)^{2} - x^{2} = 16\\ \\text{m}^{2}$, joins $ct = 4.0$ m on the $ct$ axis to P, so P really is at $ct' = 4.0$ m. With $\\gamma = 1.25$, $\\Delta t = \\gamma\\Delta t_{0}$ gives 5.0 m."
+        },
+        {
+          "type": "worked",
+          "title": "Who goes first?",
+          "question": "Frame S′ moves at $0.50c$ in the positive $x$ direction relative to S, and the origins coincide at $t = 0$. In S, event A is at $x = 0$, $ct = 1.0$ m and event B is at $x = 4.0$ m, $ct = 2.0$ m. (a) Find the angle between the $ct$ and $ct'$ axes. (b) Find $ct'$ for each event. (c) State which event happens first in each frame. (d) Explain how the order can be different.",
+          "hint": "Multiply the Lorentz equation for $t'$ by $c$, which gives $ct'$ in terms of $ct$ and $\\dfrac{v}{c}x$. For (d), find the interval between the events.",
+          "steps": [
+            {
+              "text": "(a) Use the angle of a world line.",
+              "latex": "\\theta = \\tan^{-1}(0.50) = 27^{\\circ}"
+            },
+            {
+              "text": "(b) Find $\\gamma$.",
+              "latex": "\\gamma = \\dfrac{1}{\\sqrt{1 - 0.50^{2}}} = 1.15"
+            },
+            {
+              "text": "Event A.",
+              "latex": "ct'_{\\text{A}} = 1.15(1.0 - 0.50 \\times 0) = 1.2\\ \\text{m}"
+            },
+            {
+              "text": "Event B.",
+              "latex": "ct'_{\\text{B}} = 1.15(2.0 - 0.50 \\times 4.0) = 0"
+            },
+            {
+              "text": "(c) In S, A happens first (1.0 m before 2.0 m). In S′, B happens first (0 before 1.2 m)."
+            },
+            {
+              "text": "(d) $(\\Delta s)^{2}$ is negative, so no signal could travel between the events: neither can cause the other.",
+              "latex": "(\\Delta s)^{2} = 1.0^{2} - 4.0^{2} = -15\\ \\text{m}^{2}"
+            }
+          ],
+          "notes": "On a sketch, B lies on the $x'$ axis, so $ct' = 0$. A line through A parallel to the $x'$ axis meets the $ct'$ axis higher up. To 3 s.f.: $ct'_{\\text{A}} = 1.15$ m."
+        }
       ]
     }
   ]

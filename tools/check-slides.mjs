@@ -12,7 +12,7 @@ const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8').replace(/^ï»
 const exists = (rel) => fs.existsSync(path.join(ROOT, rel));
 const require = createRequire(import.meta.url);
 
-const TYPES = { bullets: ['title', 'bullets'], equation: ['title', 'latex'], diagram: ['title', 'figure'], worked: ['title', 'question', 'hint', 'steps'], derivation: ['title', 'start', 'steps'] };
+const TYPES = { bullets: ['title', 'bullets'], equation: ['title', 'latex'], diagram: ['title'], worked: ['title', 'question', 'hint', 'steps'], derivation: ['title', 'start', 'steps'] };
 
 export function checkSlides({ err, warn, TOPICS }) {
   if (!exists('teachers/slides/index.json')) return;
@@ -73,7 +73,12 @@ export function checkSlides({ err, warn, TOPICS }) {
         (s.bullets || []).flat().forEach((b) => maths(where, b));
         [].concat(s.latex || []).forEach((l) => mathOk(where, l));
         if (s.type === 'equation' && [].concat(s.latex).length > 4) err(file, `${where}: at most four equations fit in the card`);
-        if (s.type === 'diagram' && !figures.has(s.figure)) err(file, `${where}: no figure with <title id="${s.figure}"> on themes/${slug}.html`);
+        if (s.type === 'diagram' && s.svg) {
+          // a figure drawn just for the slides: needs alt text, and no ids or <defs> (the arrowheads are the page's #ah1â€“#ah3)
+          if (!s.alt) err(file, `${where}: a figure file needs "alt" text`);
+          if (!exists(`teachers/slides/${s.svg}`)) err(file, `${where}: teachers/slides/${s.svg} is missing`);
+          else if (/\sid="|<defs/.test(read(`teachers/slides/${s.svg}`))) err(file, `${where}: ${s.svg} must not contain ids or <defs>`);
+        } else if (s.type === 'diagram' && !figures.has(s.figure)) err(file, `${where}: no figure with <title id="${s.figure}"> on themes/${slug}.html`);
         if (s.type === 'bullets' && s.bullets.flat().length > 8) warn(file, `${where}: ${s.bullets.flat().length} bullets may not fit on one slide`);
         if (s.type === 'worked' || s.type === 'derivation') {
           if (!Array.isArray(s.steps) || !s.steps.length) err(file, `${where}: needs steps`);

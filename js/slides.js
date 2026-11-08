@@ -435,6 +435,12 @@
     const cap = fig.querySelector('figcaption');
     return { image, caption: cap ? cap.innerHTML : '' };
   }
+  // A diagram drawn just for the slides, using the same classes as the topic-page diagrams
+  async function slideFigure(s) {
+    const text = await get(`slides/${s.svg}`, 'text');
+    const svg = new DOMParser().parseFromString(text, 'image/svg+xml').documentElement;
+    return { image: await diagramPng(svg, s.alt), caption: '' };
+  }
   // Question-bank diagrams are complete SVG files with their own colours
   async function questionFigure(path, alt) {
     const text = await get(`../${path}`, 'text');
@@ -646,7 +652,8 @@
       const first = slides.length;
       for (const s of p.slides || []) {
         if (s.type === 'bullets' && t.has('b')) {
-          slides.push({ kind: 'content', title: s.title, paras: bulletParas(s.bullets), notes: notes(s.notes) });
+          // a bullet slide can be HL on its own, inside an SL point (A.2's two-dimensional collisions)
+          slides.push({ kind: 'content', hl: s.hl, title: s.title, paras: bulletParas(s.bullets), notes: notes(s.notes) });
         } else if (s.type === 'equation' && t.has('e')) {
           const list = [].concat(s.latex);
           const rowH = list.length > 1 ? 2.0 / Math.ceil(list.length / 2) : 1.75;
@@ -660,7 +667,8 @@
           const size = fitSize((s.bullets || []).flat(), 11.4, 2.3, [2200, 2000, 1800]) || 1800;
           slides.push({ kind: 'equation', title: s.title, eqs, size, paras: bulletParas(s.bullets, size), notes: notes(s.notes) });
         } else if (s.type === 'diagram' && t.has('d') && page) {
-          const fig = await figureFromPage(page, s.figure);
+          // a figure from the topic page, or one drawn just for the slides (teachers/slides/figures/)
+          const fig = s.svg ? await slideFigure(s) : await figureFromPage(page, s.figure);
           if (!fig) continue;
           const texts = s.bullets ? s.bullets.flat() : blocks(fig.caption);
           const fit = besideDiagram(texts, !!s.bullets);

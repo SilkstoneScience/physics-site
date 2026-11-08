@@ -1191,27 +1191,6 @@
             }
           ],
           "notes": "One body's gain in momentum is exactly the other's loss: for the system, the internal forces add up to zero."
-        },
-        {
-          "type": "worked",
-          "title": "Catching a toolbox in space",
-          "question": "An astronaut of mass 70 kg floats at rest beside a space station. She catches a 5.0 kg toolbox that is moving towards her at 3.0 $\\text{m s}^{-1}$. Find her velocity, holding the toolbox, just after the catch.",
-          "hint": "There are no external forces on the astronaut and toolbox. Afterwards they move together.",
-          "steps": [
-            {
-              "text": "Momentum before (the astronaut is at rest).",
-              "latex": "p = 5.0 \\times 3.0 + 70 \\times 0 = 15\\ \\text{kg m s}^{-1}"
-            },
-            {
-              "text": "Momentum after: both move at the same velocity $v$.",
-              "latex": "p = (70 + 5.0)v"
-            },
-            {
-              "text": "Conservation of momentum.",
-              "latex": "v = \\dfrac{15}{75} = 0.20\\ \\text{m s}^{-1}"
-            }
-          ],
-          "notes": "She moves off in the direction the toolbox was moving. Ask how she could stop herself again (throw something the other way)."
         }
       ],
       "challenge": "CC-A2-12",
@@ -1242,7 +1221,7 @@
             "<strong>Perfectly inelastic</strong>: the bodies stick together and move with the same velocity; the largest possible loss of kinetic energy",
             "Draw before-and-after sketches with masses, velocities and a positive direction"
           ],
-          "notes": "SL problems are one-dimensional; HL students also apply conservation in two dimensions (topic page, section 8). Solving simultaneous equations for momentum and energy is not required."
+          "notes": "SL problems are one-dimensional; two-dimensional collisions are for HL students only (the last slide of this point, and section 8 of the topic page). Solving simultaneous equations for momentum and energy is not required."
         },
         {
           "type": "worked",
@@ -1292,6 +1271,19 @@
             }
           ],
           "notes": "Real air-track collisions with spring buffers come close to this, but always lose a little kinetic energy."
+        },
+        {
+          "type": "bullets",
+          "hl": true,
+          "title": "Collisions in two dimensions (HL only)",
+          "bullets": [
+            "<strong>HL only:</strong> SL students need collisions in one dimension only",
+            "Total momentum stays the same along <strong>any</strong> direction, so treat two perpendicular directions as two separate problems",
+            "Split each momentum into components along $x$ and $y$",
+            "Write one conservation equation for $x$ and one for $y$",
+            "Combine the final components: Pythagoras for the size, $\\tan^{-1}$ for the direction"
+          ],
+          "notes": "Worked example: section 8 of the topic page. Kinetic energy is a scalar, so checking whether the collision is elastic works just as it does in one dimension."
         }
       ],
       "checks": [
@@ -1603,27 +1595,6 @@
             }
           ],
           "notes": "A point halfway along a blade has the same ω but half the speed."
-        },
-        {
-          "type": "worked",
-          "title": "The Earth's orbit",
-          "question": "The Earth moves round the Sun in a nearly circular orbit of radius $1.5 \\times 10^{11}$ m, taking 365 days. Find (a) its angular velocity and (b) its orbital speed.",
-          "hint": "Change the period into seconds first.",
-          "steps": [
-            {
-              "text": "Period in seconds.",
-              "latex": "T = 365 \\times 24 \\times 3600 = 3.15\\times10^{7}\\ \\text{s}"
-            },
-            {
-              "text": "(a) Angular velocity.",
-              "latex": "\\omega = \\dfrac{2\\pi}{T} = 2.0\\times10^{-7}\\ \\text{rad s}^{-1}"
-            },
-            {
-              "text": "(b) Orbital speed.",
-              "latex": "v = \\omega r = (1.99\\times10^{-7})(1.5\\times10^{11}) = 3.0\\times10^{4}\\ \\text{m s}^{-1}"
-            }
-          ],
-          "notes": "About 30 km every second. Gravity provides the centripetal force here (D.1)."
         }
       ],
       "checks": [
