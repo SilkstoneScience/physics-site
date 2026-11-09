@@ -1,0 +1,764 @@
+{
+  "topic": "C.2",
+  "hours": 3,
+  "points": [
+    {
+      "id": "energy",
+      "short": "Waves transfer energy",
+      "guide": "Travelling waves transfer energy, even if there is no resultant displacement of the medium.",
+      "sections": [
+        "what"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Describe a travelling wave as a moving disturbance that transfers energy but not matter."
+      ],
+      "checks": [
+        "C2-007"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What travels in a travelling wave?",
+          "bullets": [
+            "The substance a wave passes through is its <strong>medium</strong> (a rope, a spring, air, water)",
+            "One disturbance makes a <strong>pulse</strong>; a repeated disturbance makes a continuous <strong>travelling wave</strong>",
+            "Each bit of the medium moves only around its own <strong>equilibrium position</strong>, then returns to it",
+            "The shape moves along, and it carries <strong>energy</strong> from the source",
+            "Afterwards the medium has <strong>no resultant displacement</strong>: no matter has been carried along"
+          ],
+          "notes": "Tie a ribbon to a rope or a slinky and send a pulse: the ribbon returns to where it started. A stadium wave makes the same point: the wave goes round the ground but nobody leaves their seat."
+        }
+      ]
+    },
+    {
+      "id": "types",
+      "short": "Transverse and longitudinal",
+      "guide": "Transverse and longitudinal travelling waves.",
+      "sections": [
+        "types"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Distinguish between transverse and longitudinal waves by the direction of the oscillations, and give examples of each."
+      ],
+      "checks": [
+        "C2-001"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Two ways to oscillate",
+          "bullets": [
+            "<strong>Transverse</strong>: the medium oscillates at right angles to the direction the wave moves",
+            [
+              "Example: a pulse made by flicking a rope up and down",
+              "Its high and low points are <strong>crests</strong> and <strong>troughs</strong>"
+            ],
+            "<strong>Longitudinal</strong>: the medium oscillates along the line the wave moves in",
+            [
+              "Example: a pulse made by pushing and pulling the end of a spring",
+              "Bunched regions are <strong>compressions</strong>; stretched-out regions are <strong>rarefactions</strong>"
+            ]
+          ],
+          "notes": "Use the same slinky for both, so that students see that on one spring the direction of the hand's motion decides the type."
+        },
+        {
+          "type": "diagram",
+          "title": "Transverse and longitudinal waves",
+          "figure": "c2at",
+          "bullets": [
+            "Black arrows: the direction of travel",
+            "Compare each particle's motion with that arrow"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sound",
+      "short": "Sound waves",
+      "guide": "The nature of sound waves.",
+      "sections": [
+        "sound"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Explain how a vibrating source produces sound as a longitudinal wave in a medium.",
+        "Use the speed of sound in distance and time calculations."
+      ],
+      "challenge": "CC-C2-02",
+      "checks": [
+        "C2-012"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "How sound is made",
+          "bullets": [
+            "As a loudspeaker cone moves out, it squeezes nearby air into a <strong>compression</strong>",
+            "As the cone moves back, the air spreads into a <strong>rarefaction</strong>",
+            "Air molecules oscillate <strong>parallel</strong> to the direction of travel, so sound is <strong>longitudinal</strong>",
+            "Compressions have higher pressure than normal and rarefactions lower",
+            "Around a small source, compressions form spherical <strong>wavefronts</strong>; <strong>rays</strong> point outwards, perpendicular to them (more in C.3)"
+          ],
+          "notes": "Students often picture air streaming away from a loudspeaker. Hold a candle flame near a speaker playing a low note: the flame flickers back and forth instead of being blown away."
+        },
+        {
+          "type": "bullets",
+          "title": "Sound needs a medium",
+          "bullets": [
+            "Pump the air from a jar holding a ringing bell: the sound fades, but we can still see the bell",
+            "So sound needs a <strong>medium</strong>, and light does not",
+            "Speed: about 340 $\\text{m s}^{-1}$ in air, about 1500 $\\text{m s}^{-1}$ in water, and higher still in most solids",
+            "Human hearing covers about 20 Hz to 20 kHz; above that range is <strong>ultrasound</strong>",
+            "A higher frequency sounds higher in <strong>pitch</strong>; a larger amplitude sounds <strong>louder</strong>"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "An echo from the seabed",
+          "question": "A fishing boat's echo sounder sends a short sound pulse straight down. The echo from the seabed returns 0.24 s later. The speed of sound in sea water is 1500 $\\text{m s}^{-1}$. Find the depth of the water.",
+          "hint": "A wave pulse travels at a steady speed, so distance = speed × time. How far has the pulse travelled by the time it returns?",
+          "steps": [
+            {
+              "text": "The total distance travelled by the pulse is",
+              "latex": "d = vt = 1500 \\times 0.24 = 360\\ \\text{m}"
+            },
+            {
+              "text": "The pulse goes down and back, so the depth is half of this.",
+              "latex": "\\text{depth} = \\dfrac{360}{2} = 180\\ \\text{m}"
+            }
+          ],
+          "notes": "Sound is faster in water because water resists compression far more strongly than air. Students sometimes expect the denser medium to be slower."
+        }
+      ]
+    },
+    {
+      "id": "particles",
+      "short": "How the particles move",
+      "guide": "Describing the motion of particles of a medium when a wave passes through it, for both transverse and longitudinal waves.",
+      "sections": [
+        "describing",
+        "graphs"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Define displacement and amplitude for a particle of the medium.",
+        "Deduce the direction in which a particle is moving from a snapshot of the wave."
+      ],
+      "checks": [
+        "C2-009"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The same motion, slightly delayed",
+          "bullets": [
+            "Every particle oscillates with the <strong>same period</strong>, often in simple harmonic motion",
+            "Each particle starts its motion a little later than the one before it: this delay makes the wave shape",
+            "<strong>Displacement</strong>: a particle's signed distance from its equilibrium position",
+            "<strong>Amplitude</strong> $A$: the maximum displacement, measured from equilibrium (not crest to trough)"
+          ],
+          "notes": "Link to C.1: a row of identical oscillators, each slightly behind its neighbour, draws out a sine curve at every instant."
+        },
+        {
+          "type": "bullets",
+          "title": "Which way is a particle moving?",
+          "bullets": [
+            "Sketch the wave again, shifted slightly in its <strong>direction of travel</strong>",
+            "The particle moves to wherever the new curve lies at <strong>its own position</strong>",
+            "A particle moves <strong>only along its oscillation line</strong>; the wave never carries it along",
+            "At a crest or trough, a particle is momentarily <strong>at rest</strong>",
+            "At equilibrium, a particle moves at its <strong>greatest speed</strong>"
+          ],
+          "notes": "Practise with the wave going left and then going right: the same snapshot gives opposite particle motions."
+        },
+        {
+          "type": "worked",
+          "title": "Reading a snapshot",
+          "question": "A wave travels to the right along a horizontal rope. At one instant there is a crest at $x = 1.2$ m and the next trough is at $x = 2.0$ m. Point P on the rope, at $x = 1.6$ m, is at its equilibrium position. Describe, at this instant, the motion of (a) point P and (b) the point of the rope at the crest.",
+          "hint": "Imagine the whole wave moved a short way to the right. What will the displacement of each point be a moment later?",
+          "steps": [
+            {
+              "text": "(a) Moving to the right, the crest approaches P from the left, so the displacement of P is about to become positive."
+            },
+            {
+              "text": "P is therefore moving upwards, and at equilibrium it has its greatest speed."
+            },
+            {
+              "text": "(b) A point at the crest has its maximum displacement, so it is momentarily at rest."
+            },
+            {
+              "text": "The crest then moves on past it, so this point will start to move down."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "intensity",
+      "short": "Intensity and amplitude",
+      "guide": "Intensity of a wave is proportional to the square of the amplitude, $I \\propto A^2$.",
+      "sections": [
+        "compare"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Use $I \\propto A^2$ to compare the intensities of waves of the same frequency in the same medium.",
+        "Show that the amplitude from a point source varies as $A \\propto 1/r$."
+      ],
+      "checks": [
+        "C2-015"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Intensity and amplitude",
+          "latex": "I \\propto A^{2}",
+          "bullets": [
+            "<strong>Intensity</strong> $I$: the power carried per unit area, in $\\text{W m}^{-2}$",
+            "This holds for a wave of <strong>fixed frequency</strong> in a <strong>fixed medium</strong>",
+            "Twice the amplitude gives <strong>four times</strong> the intensity",
+            "Half the amplitude gives <strong>one quarter</strong> of the intensity"
+          ],
+          "notes": "New for exams from 2028. The guide states only the proportionality; the fixed frequency and medium are the conditions that make it true, because the energy of each particle also depends on the frequency and on the medium. Ask students to predict the effect of tripling the amplitude before showing the reasoning."
+        },
+        {
+          "type": "derivation",
+          "title": "Why intensity depends on amplitude squared",
+          "start": "Model each particle as a mass on a spring of constant $k$, oscillating with amplitude $A$. The wave's frequency and medium stay the same.",
+          "steps": [
+            {
+              "text": "At maximum displacement the particle is at rest, so all its energy is elastic",
+              "latex": "E = \\tfrac{1}{2}k(\\Delta x)^{2}"
+            },
+            {
+              "text": "The maximum displacement is the amplitude, $\\Delta x = A$",
+              "latex": "E = \\tfrac{1}{2}kA^{2}"
+            },
+            {
+              "text": "The same frequency and medium mean the same $k$, so each particle's energy depends on",
+              "latex": "E \\propto A^{2}"
+            },
+            {
+              "text": "The wave carries this energy along at a fixed speed, so the energy delivered per second per unit area follows the same pattern",
+              "latex": "I \\propto A^{2}"
+            }
+          ],
+          "notes": "New for exams from 2028. The guide asks only for the proportionality. This argument links it to the energy stored in a spring from A.3."
+        },
+        {
+          "type": "derivation",
+          "title": "Amplitude from a point source",
+          "start": "A point source emits power $P$ equally in all directions, and the medium absorbs none of it.",
+          "steps": [
+            {
+              "text": "The power is spread over a sphere of radius $r$",
+              "latex": "I = \\dfrac{P}{4\\pi r^{2}}"
+            },
+            {
+              "text": "For a constant power, the intensity depends on distance as",
+              "latex": "I \\propto \\dfrac{1}{r^{2}}"
+            },
+            {
+              "text": "The frequency and medium stay the same, so intensity is also proportional to the amplitude squared",
+              "latex": "A^{2} \\propto \\dfrac{1}{r^{2}}"
+            },
+            {
+              "text": "Take the square root",
+              "latex": "A \\propto \\dfrac{1}{r}"
+            }
+          ],
+          "notes": "New for exams from 2028. Students meet the inverse-square law in B.1. The common slip is to say that the amplitude also follows an inverse-square law. Warn them about the symbol: in the booklet's $I = P/A$ the $A$ is an area, but in $I \\propto A^{2}$ it is the amplitude."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips: intensity and amplitude",
+          "bullets": [
+            "Same frequency and medium: use ratios, $\\dfrac{I_2}{I_1} = \\left(\\dfrac{A_2}{A_1}\\right)^{2}$",
+            "Given an amplitude ratio, <strong>square</strong> it to find the intensity ratio",
+            "Given an intensity ratio, take the <strong>square root</strong> to find the amplitude ratio",
+            "A percentage becomes a decimal first: 25% is 0.25",
+            "Use $A \\propto 1/r$ only for a <strong>point source</strong> with no absorption or reflections"
+          ],
+          "notes": "New for exams from 2028. Ask what a graph of $I$ against $A^{2}$ would look like (a straight line through the origin)."
+        },
+        {
+          "type": "worked",
+          "title": "Walking away from a sounder",
+          "question": "A small alarm sounder on a post in an open field gives out a steady tone. At a distance of 1.5 m, the air oscillates with an amplitude of 0.12 $\\mu\\text{m}$. A student walks to a point 6.0 m from the sounder. Assume that the sound spreads equally in all directions and that none is absorbed. Find (a) the new amplitude and (b) the factor by which the intensity has changed.",
+          "hint": "Find how many times further away the student is. Then decide how the amplitude and the intensity each depend on the distance.",
+          "steps": [
+            {
+              "text": "Compare the distances.",
+              "latex": "\\dfrac{r_2}{r_1} = \\dfrac{6.0}{1.5} = 4.0"
+            },
+            {
+              "text": "(a) The amplitude is inversely proportional to $r$.",
+              "latex": "A_2 = \\dfrac{0.12}{4.0} = 0.030\\ \\mu\\text{m}"
+            },
+            {
+              "text": "(b) Intensity is proportional to the amplitude squared.",
+              "latex": "\\dfrac{I_2}{I_1} = \\left(\\dfrac{1}{4.0}\\right)^{2} = \\dfrac{1}{16}"
+            }
+          ],
+          "notes": "New for exams from 2028. The open field matters: indoors, reflections from the walls would stop the simple $1/r$ pattern from holding."
+        },
+        {
+          "type": "worked",
+          "title": "An acoustic screen",
+          "question": "A loudspeaker in a studio plays a steady 1.0 kHz tone. Placing an acoustic screen in front of a microphone reduces the sound intensity at the microphone to 4.0% of its earlier value. Before the screen was placed there, the air at the microphone oscillated with an amplitude of 0.10 $\\mu\\text{m}$. Find the amplitude now.",
+          "hint": "You know the intensity ratio and need the amplitude ratio, so reverse the usual step.",
+          "steps": [
+            {
+              "text": "Write the percentage as a ratio.",
+              "latex": "\\dfrac{I_2}{I_1} = 0.040"
+            },
+            {
+              "text": "Take the square root to find the amplitude ratio.",
+              "latex": "\\dfrac{A_2}{A_1} = \\sqrt{0.040} = 0.20"
+            },
+            {
+              "text": "Multiply by the original amplitude.",
+              "latex": "A_2 = 0.20 \\times 0.10 = 0.020\\ \\mu\\text{m}"
+            }
+          ],
+          "notes": "New for exams from 2028. The tone's frequency and the medium at the microphone do not change, so $I \\propto A^{2}$ applies. Point out the contrast: 96% of the intensity has gone, yet the amplitude is still 20% of its old value."
+        }
+      ]
+    },
+    {
+      "id": "quantities",
+      "short": "The wave equation",
+      "guide": "Wavelength $\\lambda$, frequency $f$, time period $T$ and wave speed $v$ applied to wave motion as given by $v = f\\lambda = \\dfrac{\\lambda}{T}$.",
+      "sections": [
+        "describing"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Define wavelength, period, frequency and wave speed.",
+        "Derive and use $v = f\\lambda = \\dfrac{\\lambda}{T}$, including when a wave changes medium."
+      ],
+      "checks": [
+        "C2-003"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Describing a wave with numbers",
+          "bullets": [
+            "<strong>Wavelength</strong> $\\lambda$: the shortest distance between two points moving in phase, such as neighbouring crests",
+            "<strong>Time period</strong> $T$: how long one particle takes for one full oscillation",
+            "<strong>Frequency</strong> $f$: the number of oscillations each second, in hertz (Hz)",
+            "<strong>Wave speed</strong> $v$: how fast the wave shape, and its energy, moves along",
+            "Points a quarter of a wavelength apart are a quarter of a cycle out of step",
+            "The <strong>source</strong> sets the frequency; the <strong>medium</strong> sets the speed"
+          ],
+          "notes": "Use the PhET simulation on the topic page: double the frequency and watch the wavelength halve while the speed stays the same."
+        },
+        {
+          "type": "equation",
+          "title": "The wave equation",
+          "latex": [
+            "v = f\\lambda = \\dfrac{\\lambda}{T}",
+            "T = \\dfrac{1}{f}"
+          ],
+          "bullets": [
+            "These apply to all travelling waves, mechanical and electromagnetic"
+          ],
+          "notes": "Both equations are in the data booklet."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the wave equation",
+          "start": "Follow one crest of a wave of wavelength $\\lambda$ and period $T$, moving at a steady speed $v$.",
+          "steps": [
+            {
+              "text": "In one period, the crest moves forward to where the next crest was",
+              "latex": "\\text{distance} = \\lambda"
+            },
+            {
+              "text": "Speed is distance divided by time, and the time is $T$",
+              "latex": "v = \\dfrac{\\lambda}{T}"
+            },
+            {
+              "text": "Frequency and period are reciprocals",
+              "latex": "f = \\dfrac{1}{T}"
+            },
+            {
+              "text": "Replace $1/T$ with $f$",
+              "latex": "v = f\\lambda"
+            }
+          ],
+          "notes": "A short derivation that students should be able to reproduce. It also answers the linking question about finding the length of a wave from kinematics."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips: using the wave equation",
+          "bullets": [
+            "Change units first: cm or nm to m, and kHz, MHz or GHz to Hz",
+            "Crest to neighbouring trough is only <strong>half</strong> a wavelength",
+            "In a new medium, the <strong>frequency stays the same</strong>; the speed and wavelength change in proportion",
+            "In one medium, doubling the frequency <strong>halves</strong> the wavelength and leaves the speed alone",
+            "A particle covers $4A$ in each period, while the wave moves on by $\\lambda$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Ocean swell",
+          "question": "A moored buoy rises and falls once every 9.0 s as an ocean swell passes it. The crests of the swell are 125 m apart. Find (a) the frequency and (b) the speed of the swell.",
+          "hint": "The time for one rise and fall is the period. The distance between neighbouring crests is the wavelength.",
+          "steps": [
+            {
+              "text": "(a) Frequency is the reciprocal of the period.",
+              "latex": "f = \\dfrac{1}{T} = \\dfrac{1}{9.0} = 0.11\\ \\text{Hz}"
+            },
+            {
+              "text": "(b) Use the wavelength and the period, to avoid a rounded value.",
+              "latex": "v = \\dfrac{\\lambda}{T} = \\dfrac{125}{9.0}"
+            },
+            {
+              "text": "So the speed of the swell is",
+              "latex": "v = 14\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "Long-period swell travels thousands of kilometres from distant storms. The water itself does not travel with it."
+        },
+        {
+          "type": "worked",
+          "title": "Ultrasound meets bone",
+          "question": "A medical ultrasound pulse of frequency 3.0 MHz travels through soft tissue at 1540 $\\text{m s}^{-1}$ and then enters bone, where its speed is 4000 $\\text{m s}^{-1}$. Find the wavelength (a) in the soft tissue and (b) in the bone.",
+          "hint": "Which of frequency, speed and wavelength stays fixed when a wave enters a new medium? Convert MHz to Hz before you start.",
+          "steps": [
+            {
+              "text": "Convert the frequency.",
+              "latex": "f = 3.0 \\times 10^{6}\\ \\text{Hz}"
+            },
+            {
+              "text": "(a) In soft tissue, the wavelength is $v/f$.",
+              "latex": "\\lambda = \\dfrac{1540}{3.0 \\times 10^{6}} = 5.1 \\times 10^{-4}\\ \\text{m}"
+            },
+            {
+              "text": "(b) The frequency is unchanged in bone.",
+              "latex": "\\lambda = \\dfrac{4000}{3.0 \\times 10^{6}} = 1.3 \\times 10^{-3}\\ \\text{m}"
+            },
+            {
+              "text": "The speed is greater in bone, so the wavelength is longer in the same proportion."
+            }
+          ],
+          "notes": "In millimetres the answers are 0.51 mm and 1.3 mm. Working in metres first avoids slips with the powers of ten."
+        },
+        {
+          "type": "worked",
+          "title": "Particle or wave?",
+          "question": "A wave of amplitude 6.0 cm, wavelength 1.5 m and frequency 3.0 Hz travels along a long rope. In a time of 2.0 s, find (a) the total distance moved by one point on the rope, (b) the distance travelled by the wave and (c) the final displacement of the point compared with where it started.",
+          "hint": "How many full oscillations happen in 2.0 s? In one oscillation, a point travels from equilibrium to one extreme, to the other extreme, and back.",
+          "steps": [
+            {
+              "text": "Count the oscillations in 2.0 s.",
+              "latex": "N = ft = 3.0 \\times 2.0 = 6.0"
+            },
+            {
+              "text": "(a) Each oscillation covers four amplitudes.",
+              "latex": "6.0 \\times 4 \\times 6.0 = 144\\ \\text{cm}"
+            },
+            {
+              "text": "To 2 significant figures, this is",
+              "latex": "1.4\\ \\text{m}"
+            },
+            {
+              "text": "(b) Find the wave speed, then the distance in 2.0 s.",
+              "latex": "v = f\\lambda = 3.0 \\times 1.5 = 4.5\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "The distance the wave travels is",
+              "latex": "d = vt = 4.5 \\times 2.0 = 9.0\\ \\text{m}"
+            },
+            {
+              "text": "(c) After a whole number of oscillations, the point is back where it began: the displacement is zero."
+            }
+          ],
+          "notes": "This contrasts the motion of the medium with the motion of the wave. Doubling the amplitude would double the answer to (a) but leave (b) unchanged."
+        }
+      ]
+    },
+    {
+      "id": "graphs",
+      "short": "Displacement graphs",
+      "guide": "Displacement with respect to the position along the wave and with time.",
+      "sections": [
+        "graphs"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Sketch and interpret displacement–distance and displacement–time graphs for a travelling wave.",
+        "Locate compressions and rarefactions from a displacement–distance graph of a longitudinal wave."
+      ],
+      "checks": [
+        "C2-010"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Check the horizontal axis",
+          "bullets": [
+            "The two graphs look alike but tell you different things",
+            "<strong>Displacement–distance</strong>: a snapshot of the whole wave at one instant",
+            [
+              "One repeat along the axis is the <strong>wavelength</strong>"
+            ],
+            "<strong>Displacement–time</strong>: one particle followed as time passes",
+            [
+              "One repeat along the axis is the <strong>period</strong>"
+            ],
+            "The amplitude can be read from <strong>either</strong> graph"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "A snapshot: displacement against distance",
+          "figure": "c2bt",
+          "bullets": [
+            "Horizontal axis: position",
+            "Repeat length: $\\lambda$"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "One particle: displacement against time",
+          "figure": "c2ct",
+          "bullets": [
+            "Horizontal axis: time",
+            "Repeat time: $T$"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "The same graphs for longitudinal waves",
+          "bullets": [
+            "Displacement now means displacement <strong>along</strong> the direction of travel (say, positive to the right)",
+            "A crest on the graph is <strong>not</strong> a compression: it marks a particle displaced furthest to the right",
+            "Find a <strong>compression</strong> where the particles on both sides are displaced towards one point",
+            "Find a <strong>rarefaction</strong> where the particles on both sides are displaced away from one point",
+            "Both occur where the displacement is <strong>zero</strong>"
+          ],
+          "notes": "Draw a row of evenly spaced dots, then move each one by the amount shown on the graph. The bunching appears by itself, at alternate points of zero displacement; the spreading appears at the others."
+        },
+        {
+          "type": "worked",
+          "title": "A cord on a vibrator",
+          "question": "A vibrator drives a travelling wave along a stretched elastic cord. A displacement–distance graph shows exactly 2.5 waves in 60 cm, with a height of 3.0 cm from crest to trough. A displacement–time graph for one point shows 4 complete cycles in 0.10 s. Find (a) the amplitude, (b) the wavelength, (c) the frequency and (d) the wave speed.",
+          "hint": "Decide which graph gives which quantity. Divide by the number of waves or cycles the graph shows, and remember what amplitude is measured from.",
+          "steps": [
+            {
+              "text": "(a) The amplitude is half the crest-to-trough height.",
+              "latex": "A = \\dfrac{3.0}{2} = 1.5\\ \\text{cm}"
+            },
+            {
+              "text": "(b) From the displacement–distance graph.",
+              "latex": "\\lambda = \\dfrac{60}{2.5} = 24\\ \\text{cm}"
+            },
+            {
+              "text": "(c) From the displacement–time graph.",
+              "latex": "T = \\dfrac{0.10}{4} = 0.025\\ \\text{s}"
+            },
+            {
+              "text": "The frequency is the reciprocal of this.",
+              "latex": "f = \\dfrac{1}{0.025} = 40\\ \\text{Hz}"
+            },
+            {
+              "text": "(d) Use the wavelength in metres.",
+              "latex": "v = 40 \\times 0.24 = 9.6\\ \\text{m s}^{-1}"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Finding a compression",
+          "question": "A longitudinal wave moves along a long spring, with displacements to the right taken as positive. A snapshot shows the displacement is positive from $x = 0$ to 20 cm, negative from 20 cm to 40 cm, and positive from 40 cm to 60 cm. A coil of the spring takes 0.40 s for each oscillation. Find (a) the wavelength, (b) the position of a compression, (c) the position of a rarefaction and (d) the wave speed.",
+          "hint": "A full wavelength contains one positive and one negative section. For (b) and (c), look at which way the coils on each side of a zero are displaced.",
+          "steps": [
+            {
+              "text": "(a) One positive and one negative section make one wave.",
+              "latex": "\\lambda = 40\\ \\text{cm}"
+            },
+            {
+              "text": "(b) At 20 cm, coils on the left are displaced right and coils on the right are displaced left, so both move towards it: a compression is at 20 cm."
+            },
+            {
+              "text": "(c) At 40 cm, coils on the left are displaced left and coils on the right are displaced right: a rarefaction is at 40 cm."
+            },
+            {
+              "text": "(d) Use the wavelength in metres.",
+              "latex": "v = \\dfrac{\\lambda}{T} = \\dfrac{0.40}{0.40} = 1.0\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "Have students draw the row of coils under the graph, with arrows for each displacement, to see the compression at 20 cm."
+        }
+      ]
+    },
+    {
+      "id": "em",
+      "short": "Electromagnetic waves",
+      "guide": "The nature of electromagnetic waves, and the approximate orders of magnitude of the wavelengths of radio, microwave, infrared, visible, ultraviolet, X-rays and gamma rays.",
+      "sections": [
+        "em"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Describe an electromagnetic wave as oscillating electric and magnetic fields that need no medium.",
+        "Use $c = f\\lambda$ and place a wave in the correct region of the electromagnetic spectrum."
+      ],
+      "challenge": "CC-C2-01",
+      "checks": [
+        "C2-005"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What is oscillating?",
+          "bullets": [
+            "An electromagnetic wave is made of oscillating <strong>electric and magnetic fields</strong>",
+            "The fields are perpendicular to each other and to the direction of travel, so the wave is <strong>transverse</strong>",
+            "Electromagnetic waves are produced by <strong>accelerating charges</strong>",
+            "A changing electric field creates a magnetic field, and the reverse: the wave keeps itself going",
+            "Nothing material oscillates, so <strong>no medium</strong> is needed",
+            "All travel through a vacuum at $c = 3.00 \\times 10^{8}\\ \\text{m s}^{-1}$"
+          ],
+          "notes": "Return to the bell jar: light still reaches us when the air has gone. A charge moving at a constant velocity does not radiate; it must accelerate."
+        },
+        {
+          "type": "diagram",
+          "title": "An electromagnetic wave",
+          "svg": "figures/c2-em-wave.svg",
+          "alt": "A sine wave of electric field drawn in a vertical plane and a sine wave of magnetic field drawn in a perpendicular plane, both along one axis labelled direction of travel. The two fields reach their peaks at the same places.",
+          "bullets": [
+            "The electric and magnetic fields are perpendicular",
+            "Both are perpendicular to the direction of travel",
+            "They reach their peaks at the same places"
+          ],
+          "notes": "Drawn in perspective: the magnetic field lies in a plane at right angles to the electric field."
+        },
+        {
+          "type": "bullets",
+          "title": "The electromagnetic spectrum",
+          "bullets": [
+            "Radio: above about $10^{-1}$ m. Microwaves: $10^{-3}$ m to about $10^{-1}$ m",
+            "Infrared: $7 \\times 10^{-7}$ m to $10^{-3}$ m",
+            "<strong>Visible</strong>: 400 nm (violet) to 700 nm (red)",
+            "Ultraviolet: $10^{-8}$ m to $4 \\times 10^{-7}$ m",
+            "X-rays: $10^{-11}$ m to $10^{-8}$ m. Gamma rays: below about $10^{-11}$ m",
+            "From radio to gamma, the wavelength falls and the frequency rises; the boundaries are not sharp"
+          ],
+          "notes": "The spectrum is in the data booklet, so students need to read it rather than memorise it. Remind them that 1 nm is $10^{-9}$ m."
+        },
+        {
+          "type": "diagram",
+          "title": "The spectrum to scale",
+          "svg": "figures/c2-spectrum.svg",
+          "alt": "A bar showing the electromagnetic spectrum on a logarithmic scale of wavelength from ten to the minus 12 metres to 1 metre: gamma, X-rays, ultraviolet, a very narrow visible band, infrared, microwaves and radio. The visible band is enlarged below, from 400 to 700 nanometres.",
+          "bullets": [
+            "Each step on the scale is a factor of $10^{4}$",
+            "Visible light is a very narrow part of the whole",
+            "Frequency increases to the left"
+          ],
+          "notes": "A logarithmic scale: equal distances are equal factors. The boundaries between regions are not sharp."
+        },
+        {
+          "type": "equation",
+          "title": "The wave equation for light",
+          "latex": "c = f\\lambda",
+          "bullets": [
+            "The same equation as before, with $v = c$ in a vacuum",
+            "In air, the speed is very nearly $c$; in glass or water it is less",
+            "Use the booklet's value: $c = 3.00 \\times 10^{8}\\ \\text{m s}^{-1}$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A wifi router",
+          "question": "A wifi router transmits at a frequency of 5.0 GHz. Find (a) the wavelength of the waves and (b) the region of the electromagnetic spectrum they belong to.",
+          "hint": "Giga means $10^{9}$. All electromagnetic waves in air travel at very nearly the same speed.",
+          "steps": [
+            {
+              "text": "Convert the frequency.",
+              "latex": "f = 5.0 \\times 10^{9}\\ \\text{Hz}"
+            },
+            {
+              "text": "(a) Rearrange the wave equation.",
+              "latex": "\\lambda = \\dfrac{c}{f}"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "\\lambda = \\dfrac{3.00 \\times 10^{8}}{5.0 \\times 10^{9}}"
+            },
+            {
+              "text": "So the wavelength is",
+              "latex": "\\lambda = 0.060\\ \\text{m}"
+            },
+            {
+              "text": "(b) This lies between $10^{-3}$ m and $10^{-1}$ m, so these are microwaves."
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "From a field graph to a colour",
+          "question": "A graph shows the electric field at a point in a beam of light in a vacuum, plotted against time. It shows 5 complete cycles in $1.0 \\times 10^{-14}$ s. Find (a) the period, (b) the frequency and (c) the wavelength. (d) State whether the light is visible.",
+          "hint": "Divide the time by the number of cycles for the period. Which speed does every electromagnetic wave have in a vacuum?",
+          "steps": [
+            {
+              "text": "(a) Divide the time by the number of cycles.",
+              "latex": "T = \\dfrac{1.0 \\times 10^{-14}}{5}"
+            },
+            {
+              "text": "So the period is",
+              "latex": "T = 2.0 \\times 10^{-15}\\ \\text{s}"
+            },
+            {
+              "text": "(b) Take the reciprocal.",
+              "latex": "f = \\dfrac{1}{T} = 5.0 \\times 10^{14}\\ \\text{Hz}"
+            },
+            {
+              "text": "(c) Use the speed of light.",
+              "latex": "\\lambda = \\dfrac{c}{f} = 6.0 \\times 10^{-7}\\ \\text{m}"
+            },
+            {
+              "text": "(d) This is 600 nm, between 400 nm and 700 nm, so the light is visible."
+            }
+          ],
+          "notes": "The displacement–time idea carries over from mechanical waves, but the vertical axis is now the field strength, not the movement of a particle."
+        }
+      ]
+    },
+    {
+      "id": "compare",
+      "short": "Mechanical and EM waves",
+      "guide": "The differences between mechanical waves and electromagnetic waves.",
+      "sections": [
+        "compare"
+      ],
+      "minutes": 10,
+      "aims": [
+        "Compare mechanical and electromagnetic waves, stating what they share and how they differ."
+      ],
+      "checks": [
+        "C2-008"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "One model, two kinds of wave",
+          "bullets": [
+            "<strong>What oscillates</strong>: particles of a medium (mechanical); electric and magnetic fields (electromagnetic)",
+            "<strong>Medium</strong>: mechanical waves need one; electromagnetic waves can cross a vacuum",
+            "<strong>Type</strong>: mechanical waves may be transverse or longitudinal; electromagnetic waves are always transverse",
+            "<strong>Speed</strong>: set by the medium for mechanical waves; $c$ in a vacuum for electromagnetic waves, less in materials",
+            "<strong>In common</strong>: they transfer energy without transferring matter, and they obey $v = f\\lambda$"
+          ],
+          "notes": "Ask students to place a sound wave, a guitar string wave and a radio wave on this list. Reflection, refraction, diffraction and interference (also shared) follow in C.3."
+        }
+      ]
+    }
+  ]
+}

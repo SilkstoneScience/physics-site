@@ -1,0 +1,1272 @@
+{
+  "topic": "C.1",
+  "hours": 3,
+  "hlHours": 4,
+  "points": [
+    {
+      "id": "describing",
+      "short": "Describing oscillations",
+      "guide": "A particle undergoing simple harmonic motion can be described using time period $T$, frequency $f$, angular frequency $\\omega$, amplitude, equilibrium position, and displacement.",
+      "sections": [
+        "describing"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Define displacement, amplitude, time period, frequency and angular frequency for an oscillating object."
+      ],
+      "checks": [
+        "C1-008"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What is an oscillation?",
+          "bullets": [
+            "An <strong>oscillation</strong> is a motion that repeats, to and fro, about a central point",
+            "That central point is the <strong>equilibrium position</strong>: if the object were placed there, it would stay",
+            "Examples: a mass on a spring, a swinging pendulum, a plucked guitar string, a tuning fork",
+            "The object stops for an instant at each extreme and moves fastest through the middle"
+          ],
+          "notes": "Start with a real mass on a spring and a pendulum at the front. Ask students where the object is fastest and where it stops, before giving any vocabulary."
+        },
+        {
+          "type": "bullets",
+          "title": "Quantities that describe an oscillation",
+          "bullets": [
+            "<strong>Displacement</strong> $x$: how far the object is from equilibrium, and on which side (it has a sign)",
+            "<strong>Amplitude</strong> $x_0$: the largest displacement, so half the distance from one extreme to the other",
+            "<strong>Time period</strong> $T$: the time for one full cycle, there and back (s)",
+            "<strong>Frequency</strong> $f$: the number of full cycles each second (Hz, or $\\text{s}^{-1}$)",
+            "<strong>Angular frequency</strong> $\\omega$: the angle a matching circular motion sweeps out each second ($\\text{rad s}^{-1}$)"
+          ],
+          "notes": "Mark the extremes on the board. A cycle is the full trip back to the same point moving the same way, so going from one extreme to the other is only half a cycle."
+        },
+        {
+          "type": "diagram",
+          "title": "A mass oscillating on a spring",
+          "figure": "c1at",
+          "bullets": [
+            "Displacement is measured from the dashed line, not from the end of the spring",
+            "The extremes are at $+x_0$ and $-x_0$"
+          ],
+          "notes": "Ask for the sign of the displacement at several positions, then the total distance moved in one cycle ($4x_0$)."
+        },
+        {
+          "type": "bullets",
+          "title": "Oscillators that are out of step",
+          "bullets": [
+            "Two identical oscillators share $T$, $f$ and $x_0$, yet they need not be at the same point of their cycle",
+            "One stretched and released, the other compressed and released: <strong>half a cycle</strong> apart",
+            "One stretched and released, the other pushed from equilibrium: <strong>a quarter of a cycle</strong> apart"
+          ],
+          "notes": "Two identical spring-and-mass sets, started differently, show this well. Call it a phase difference, but keep to fractions of a cycle here: the phase angle in radians belongs to the additional HL content."
+        },
+        {
+          "type": "diagram",
+          "title": "A quarter of a cycle apart",
+          "svg": "figures/c1-phase-difference.svg",
+          "alt": "Displacement against time for two identical oscillators A and B. Both are sine curves of the same amplitude and period. B reaches each peak a quarter of a period, T over 4, after A.",
+          "bullets": [
+            "Same period and amplitude, but not in step",
+            "B reaches each peak $\\dfrac{T}{4}$ after A",
+            "A phase difference of a quarter of a cycle"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "period",
+      "short": "Period, frequency, ω",
+      "guide": "The time period in terms of frequency of oscillation and angular frequency as given by $T = \\dfrac{1}{f} = \\dfrac{2\\pi}{\\omega}$.",
+      "sections": [
+        "describing"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Convert between time period, frequency and angular frequency."
+      ],
+      "checks": [
+        "C1-002"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Time period, frequency and angular frequency",
+          "latex": [
+            "T = \\dfrac{1}{f} = \\dfrac{2\\pi}{\\omega}"
+          ],
+          "bullets": [
+            "In the data booklet",
+            "Rearranged, the angular frequency is $\\omega = 2\\pi f$"
+          ],
+          "notes": "Students often mix up $f$ and $\\omega$: both are \"per second\" but the units differ (Hz and rad s⁻¹), and they differ by a factor of about 6."
+        },
+        {
+          "type": "derivation",
+          "title": "Where the angular frequency comes from",
+          "start": "Picture a point going once round a circle during each oscillation.",
+          "steps": [
+            {
+              "text": "One cycle is one full turn",
+              "latex": "\\Delta\\theta = 2\\pi\\ \\text{rad}"
+            },
+            {
+              "text": "That turn takes one time period",
+              "latex": "\\Delta t = T"
+            },
+            {
+              "text": "Angular frequency is the angle per unit time",
+              "latex": "\\omega = \\dfrac{\\Delta\\theta}{\\Delta t} = \\dfrac{2\\pi}{T}"
+            },
+            {
+              "text": "Frequency is the reciprocal of the period",
+              "latex": "\\omega = 2\\pi f"
+            }
+          ],
+          "notes": "A quick example from A.2: a big wheel that turns once in 40 s has an angular speed of $2\\pi/40 = 0.16\\ \\text{rad s}^{-1}$."
+        },
+        {
+          "type": "worked",
+          "title": "A swaying skyscraper",
+          "question": "In a strong wind, the top of a skyscraper sways between two extremes 0.60 m apart and completes 15 oscillations in 96 s. Find (a) the amplitude, (b) the time period, (c) the frequency and (d) the angular frequency.",
+          "hint": "The amplitude is measured from the middle of the motion. Find the time for one oscillation first.",
+          "steps": [
+            {
+              "text": "(a) Amplitude is half the distance between the extremes.",
+              "latex": "x_0 = \\dfrac{0.60}{2} = 0.30\\ \\text{m}"
+            },
+            {
+              "text": "(b) Divide the total time by the number of oscillations.",
+              "latex": "T = \\dfrac{96}{15} = 6.4\\ \\text{s}"
+            },
+            {
+              "text": "(c) Frequency is the reciprocal of the period.",
+              "latex": "f = \\dfrac{1}{6.4} = 0.16\\ \\text{Hz}"
+            },
+            {
+              "text": "(d) Use the period to find the angular frequency.",
+              "latex": "\\omega = \\dfrac{2\\pi}{6.4} = 0.98\\ \\text{rad s}^{-1}"
+            }
+          ],
+          "notes": "Timing many oscillations and dividing reduces the effect of reaction time: the same idea is used when timing a pendulum."
+        },
+        {
+          "type": "worked",
+          "title": "A quartz watch",
+          "question": "The quartz crystal in a wristwatch vibrates at a frequency of 32 768 Hz. Find (a) its time period, (b) its angular frequency and (c) the number of oscillations it makes in one minute.",
+          "hint": "The frequency tells you the number of oscillations in one second. Use standard form for very small and very large answers.",
+          "steps": [
+            {
+              "text": "(a) Period from frequency.",
+              "latex": "T = \\dfrac{1}{32\\,768} = 3.05 \\times 10^{-5}\\ \\text{s}"
+            },
+            {
+              "text": "(b) Angular frequency, using $\\omega = 2\\pi f$.",
+              "latex": "\\omega = 2.06 \\times 10^{5}\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "(c) Oscillations per second × seconds in a minute.",
+              "latex": "32\\,768 \\times 60 = 1.97 \\times 10^{6}"
+            }
+          ],
+          "notes": "32 768 is $2^{15}$: the watch's circuit halves the frequency 15 times to get one pulse per second."
+        }
+      ]
+    },
+    {
+      "id": "conditions",
+      "short": "Conditions for SHM",
+      "guide": "Conditions that lead to simple harmonic motion.",
+      "sections": [
+        "shm"
+      ],
+      "minutes": 25,
+      "aims": [
+        "State the two conditions on the resultant force that lead to simple harmonic motion.",
+        "Show that a mass on a spring meets these conditions."
+      ],
+      "challenge": "CC-C1-01",
+      "checks": [
+        "C1-001"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The conditions for simple harmonic motion",
+          "bullets": [
+            "The resultant force is <strong>proportional to the displacement</strong> from equilibrium",
+            "The resultant force always points <strong>towards equilibrium</strong>: it is a <strong>restoring force</strong>",
+            "Together: $F \\propto -x$, so Newton's second law gives $a \\propto -x$",
+            "A restoring force alone isn't enough. These oscillate, but not in SHM:",
+            [
+              "A bouncing ball: the force in flight is its constant weight",
+              "A pendulum on a very large swing: the force is no longer proportional to $x$"
+            ]
+          ],
+          "notes": "Use the words \"simple harmonic\" carefully: every SHM is an oscillation, but not every oscillation is SHM. The hook (the bouncing ball) tests exactly this."
+        },
+        {
+          "type": "derivation",
+          "title": "Why a mass on a spring does SHM",
+          "start": "A mass $m$ moves on a smooth horizontal surface, attached to a spring of spring constant $k$. Measure $x$ from the equilibrium position.",
+          "steps": [
+            {
+              "text": "Hooke's law: the spring force opposes the displacement",
+              "latex": "F_H = -kx"
+            },
+            {
+              "text": "This is the resultant force, so use Newton's second law",
+              "latex": "ma = -kx"
+            },
+            {
+              "text": "Divide by the mass",
+              "latex": "a = -\\dfrac{k}{m}x"
+            },
+            {
+              "text": "$k$ and $m$ are positive constants, so the conditions are met",
+              "latex": "a \\propto -x"
+            }
+          ],
+          "notes": "A mass hanging vertically gives the same result if $x$ is measured from its new equilibrium position: the weight is balanced by the extra stretch of the spring."
+        },
+        {
+          "type": "worked",
+          "title": "Testing a trolley for SHM",
+          "question": "A 0.90 kg laboratory trolley is held between two stretched springs. A graph of the resultant force $F$ on it against its displacement $x$ is a straight line through the origin, with $F = -1.8$ N at $x = +0.050$ m. (a) Explain how the graph shows that the motion is simple harmonic. (b) Find the trolley's acceleration at $x = -0.030$ m.",
+          "hint": "Look at both the shape of the line and the sign of its gradient. For (b), find the force per metre first.",
+          "steps": [
+            {
+              "text": "(a) A straight line through the origin means the force is proportional to the displacement."
+            },
+            {
+              "text": "The gradient is negative, so the force is always opposite to the displacement: it is a restoring force."
+            },
+            {
+              "text": "(b) Find the force per metre from the given point.",
+              "latex": "\\dfrac{1.8}{0.050} = 36\\ \\text{N m}^{-1}"
+            },
+            {
+              "text": "Force at the new displacement.",
+              "latex": "F = -36 \\times (-0.030) = +1.08\\ \\text{N}"
+            },
+            {
+              "text": "Newton's second law gives the acceleration.",
+              "latex": "a = \\dfrac{1.08}{0.90} = +1.2\\ \\text{m s}^{-2}"
+            }
+          ],
+          "notes": "The acceleration is positive when the displacement is negative: the trolley is being pulled back towards equilibrium."
+        }
+      ]
+    },
+    {
+      "id": "defining",
+      "short": "The defining equation",
+      "guide": "The defining equation of simple harmonic motion as given by $a = -\\omega^2 x$.",
+      "sections": [
+        "shm",
+        "graphs"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Use $a = -\\omega^2 x$ and explain the significance of the minus sign.",
+        "Interpret graphs of displacement, velocity and acceleration against time for SHM."
+      ],
+      "challenge": "CC-C1-04",
+      "checks": [
+        "C1-010"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "From proportional to the defining equation",
+          "bullets": [
+            "Every simple harmonic motion has acceleration = −(positive constant) × displacement",
+            "The quicker the oscillation, the larger the acceleration needed at the same displacement",
+            "The shadow of a ball on a turning disc moves just like a mass on a spring",
+            "Linked to circular motion, this constant turns out to be the square of the angular frequency"
+          ],
+          "notes": "At SL the form of the equation can be stated rather than proved. A turntable with a ball and a lamp, next to a mass on a spring, makes the match very clear."
+        },
+        {
+          "type": "equation",
+          "title": "The defining equation of SHM",
+          "latex": [
+            "a = -\\omega^2 x"
+          ],
+          "bullets": [
+            "In the data booklet",
+            "For a mass on a spring, comparing equations gives $\\omega^2 = \\dfrac{k}{m}$"
+          ],
+          "notes": "Ask students to say what each symbol means, then to predict the acceleration at $x = 0$ and at $x = +x_0$."
+        },
+        {
+          "type": "bullets",
+          "title": "Reading the defining equation",
+          "bullets": [
+            "<strong>The minus sign</strong>: the acceleration is always opposite to the displacement, so towards equilibrium",
+            "Largest acceleration at the extremes, where its size is $a_{\\max} = \\omega^2 x_0$",
+            "Zero acceleration at equilibrium, which is also where the speed is greatest",
+            "The value of $\\omega$ is set by the system, so the period <strong>doesn't depend on the amplitude</strong>",
+            "To show that a motion is SHM: show that the acceleration equals −(positive constant) × $x$"
+          ],
+          "notes": "A wider oscillation has further to travel, but the larger accelerations make it move faster, and the two effects exactly cancel. A motion whose period doesn't depend on amplitude is called isochronous."
+        },
+        {
+          "type": "diagram",
+          "title": "Acceleration against displacement",
+          "figure": "c1bt",
+          "bullets": [
+            "Straight line through the origin: $a \\propto x$",
+            "Negative gradient: $a$ is opposite to $x$",
+            "The gradient equals $-\\omega^2$"
+          ],
+          "notes": "Ask what the graph would look like if the minus sign were missing: the object would accelerate away from equilibrium and never return."
+        },
+        {
+          "type": "diagram",
+          "title": "Displacement, velocity and acceleration against time",
+          "figure": "c1ct",
+          "bullets": [
+            "All three vary sinusoidally with the same period",
+            "Velocity is the gradient of the $x$–$t$ graph",
+            "The $a$–$t$ graph is the $x$–$t$ graph upside down",
+            "Each graph is a quarter of a cycle out of step with the next"
+          ],
+          "notes": "A pen on an oscillating mass, with paper pulled steadily past it, traces the sine shape. Have students mark on the $x$–$t$ graph where the gradient is zero, and read off the velocity there."
+        },
+        {
+          "type": "worked",
+          "title": "A diving board",
+          "question": "After a diver has left it, the tip of a diving board oscillates. A graph of acceleration against displacement is a straight line through the origin, with $a = -5.9\\ \\text{m s}^{-2}$ at $x = +0.15$ m. (a) Explain how the graph shows that the motion is simple harmonic. (b) Find the angular frequency. (c) Find the time period.",
+          "hint": "Compare the graph with the defining equation: what does its gradient represent?",
+          "steps": [
+            {
+              "text": "(a) A straight line through the origin with a negative gradient: the acceleration is proportional to the displacement and opposite to it."
+            },
+            {
+              "text": "(b) The gradient of the line is $-\\omega^2$.",
+              "latex": "\\omega^2 = \\dfrac{5.9}{0.15} = 39\\ \\text{s}^{-2}"
+            },
+            {
+              "text": "Take the square root.",
+              "latex": "\\omega = 6.3\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "(c) Period from angular frequency.",
+              "latex": "T = \\dfrac{2\\pi}{6.3} = 1.0\\ \\text{s}"
+            }
+          ],
+          "notes": "The unit of $\\omega^2$ is s⁻² (rad is dimensionless), which matches m s⁻² divided by m."
+        },
+        {
+          "type": "worked",
+          "title": "A toy on a spring",
+          "question": "A motion sensor records a toy hanging from a spring above a cot. Its displacement reaches successive maxima of +3.0 cm at $t = 0.40$ s and at $t = 1.20$ s, and the motion is simple harmonic. (a) State the amplitude and the time period. (b) At $t = 1.40$ s, describe the toy's position, the direction of its velocity, and its acceleration.",
+          "hint": "Sketch the displacement–time graph from the two maxima. How much of a cycle passes between $t = 1.20$ s and $t = 1.40$ s?",
+          "steps": [
+            {
+              "text": "(a) The amplitude is the size of the maximum displacement.",
+              "latex": "x_0 = 3.0\\ \\text{cm}"
+            },
+            {
+              "text": "The period is the time between successive maxima.",
+              "latex": "T = 1.20 - 0.40 = 0.80\\ \\text{s}"
+            },
+            {
+              "text": "(b) From $t = 1.20$ s to $t = 1.40$ s is 0.20 s, which is $T/4$."
+            },
+            {
+              "text": "A quarter of a cycle after a maximum, the toy is passing through equilibrium."
+            },
+            {
+              "text": "It is moving in the negative direction, at maximum speed. Its displacement is zero, so its acceleration is zero."
+            }
+          ],
+          "notes": "Ask students to sketch the $v$–$t$ and $a$–$t$ graphs for the same motion and to mark $t = 1.40$ s on each."
+        },
+        {
+          "type": "worked",
+          "title": "A shaker tray",
+          "question": "A flask stands on a laboratory shaker tray that moves to and fro horizontally in simple harmonic motion, with amplitude 1.2 cm and frequency 2.5 Hz. The coefficient of static friction between the flask and the tray is 0.40. (a) Find the greatest acceleration of the tray. (b) Determine whether the flask slides.",
+          "hint": "The greatest acceleration occurs at the extremes. Only friction can accelerate the flask: what is the largest acceleration friction can give it?",
+          "steps": [
+            {
+              "text": "(a) Find the angular frequency.",
+              "latex": "\\omega = 2\\pi \\times 2.5 = 15.7\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "The largest acceleration is at the extremes.",
+              "latex": "a_{\\max} = \\omega^2 x_0 = 3.0\\ \\text{m s}^{-2}"
+            },
+            {
+              "text": "(b) Largest friction force is $\\mu_s mg$, so the largest acceleration it can give is:",
+              "latex": "\\mu_s g = 0.40 \\times 9.8 = 3.9\\ \\text{m s}^{-2}"
+            },
+            {
+              "text": "3.0 is less than 3.9, so friction can supply the acceleration: the flask doesn't slide."
+            }
+          ],
+          "notes": "Remember to change the amplitude to metres: $(15.7)^2 \\times 0.012 = 3.0$. The mass of the flask cancels, as it does for any object moved by friction alone."
+        }
+      ]
+    },
+    {
+      "id": "mass-spring",
+      "short": "Mass–spring period",
+      "guide": "The time period of a mass–spring system as given by $T = 2\\pi\\sqrt{\\dfrac{m}{k}}$.",
+      "sections": [
+        "systems"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Derive and use $T = 2\\pi\\sqrt{\\dfrac{m}{k}}$.",
+        "Predict how changing the mass or the spring constant changes the period."
+      ],
+      "challenge": "CC-C1-02",
+      "checks": [
+        "C1-004"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Time period of a mass–spring system",
+          "latex": [
+            "T = 2\\pi\\sqrt{\\dfrac{m}{k}}"
+          ],
+          "bullets": [
+            "In the data booklet",
+            "$m$ is the oscillating mass and $k$ the spring constant"
+          ],
+          "notes": "Ask students to predict first: what should make the oscillation slower, a larger mass or a stiffer spring?"
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the period of a mass–spring system",
+          "start": "Start from the acceleration of a mass on a spring, found from Hooke's law and Newton's second law.",
+          "steps": [
+            {
+              "text": "Acceleration of the mass",
+              "latex": "a = -\\dfrac{k}{m}x"
+            },
+            {
+              "text": "Compare with the defining equation $a = -\\omega^2 x$",
+              "latex": "\\omega^2 = \\dfrac{k}{m}"
+            },
+            {
+              "text": "Take the square root",
+              "latex": "\\omega = \\sqrt{\\dfrac{k}{m}}"
+            },
+            {
+              "text": "Use $T = 2\\pi/\\omega$",
+              "latex": "T = 2\\pi\\sqrt{\\dfrac{m}{k}}"
+            }
+          ],
+          "notes": "The comparison in step 2 is the general method: get $a = -(\\text{constant})x$, then the constant is $\\omega^2$."
+        },
+        {
+          "type": "bullets",
+          "title": "Using the mass–spring equation",
+          "bullets": [
+            "$T \\propto \\sqrt{m}$: four times the mass gives twice the period",
+            "A stiffer spring (larger $k$) gives a shorter period",
+            "The period doesn't depend on the amplitude, or on $g$",
+            "It is the same for a spring horizontal or vertical",
+            "Use kg and $\\text{N m}^{-1}$, and take the spring's own mass as negligible"
+          ],
+          "notes": "The hook (cutting a spring in half) tests whether students realise that $k$ changes when the spring changes."
+        },
+        {
+          "type": "worked",
+          "title": "Car suspension",
+          "question": "The mass supported by one wheel of a car is 300 kg, and that wheel's suspension spring has $k = 24\\ \\text{kN m}^{-1}$. Treat the motion as undamped. (a) Find the time period and frequency of the oscillation. (b) With passengers and luggage, the mass on that wheel rises to 360 kg. Find the new frequency.",
+          "hint": "Change the spring constant to $\\text{N m}^{-1}$ first. Repeat the calculation with the new mass, or use $f \\propto 1/\\sqrt{m}$.",
+          "steps": [
+            {
+              "text": "(a) Use the period equation with SI units.",
+              "latex": "T = 2\\pi\\sqrt{\\dfrac{300}{24\\,000}} = 0.70\\ \\text{s}"
+            },
+            {
+              "text": "Frequency from the period.",
+              "latex": "f = \\dfrac{1}{0.702} = 1.4\\ \\text{Hz}"
+            },
+            {
+              "text": "(b) Repeat with the larger mass.",
+              "latex": "T = 2\\pi\\sqrt{\\dfrac{360}{24\\,000}} = 0.77\\ \\text{s}"
+            },
+            {
+              "text": "The heavier load gives a lower frequency.",
+              "latex": "f = \\dfrac{1}{0.770} = 1.3\\ \\text{Hz}"
+            }
+          ],
+          "notes": "Passengers feel a loaded car bounce more slowly. Real cars use shock absorbers to stop the bounce quickly: that is damping (C.4)."
+        },
+        {
+          "type": "worked",
+          "title": "Measuring mass in orbit",
+          "question": "Bathroom scales don't work on a space station, so an astronaut's mass can be found with a chair mounted on a spring. The empty 12.0 kg chair oscillates with a period of 0.90 s. With the astronaut in it, the period is 2.30 s. Find the astronaut's mass.",
+          "hint": "The spring constant is the same both times. Use the empty chair to find it, then find the total oscillating mass.",
+          "steps": [
+            {
+              "text": "Make $k$ the subject and use the empty chair.",
+              "latex": "k = \\dfrac{4\\pi^2 m}{T^2} = 585\\ \\text{N m}^{-1}"
+            },
+            {
+              "text": "Make $m$ the subject and use the second period.",
+              "latex": "m = \\dfrac{kT^2}{4\\pi^2} = 78.4\\ \\text{kg}"
+            },
+            {
+              "text": "Subtract the mass of the chair.",
+              "latex": "78.4 - 12.0 = 66\\ \\text{kg}"
+            }
+          ],
+          "notes": "This works in orbit because the mass–spring period doesn't depend on $g$. A quicker route: $m \\propto T^2$, so the total is $12.0 \\times (2.30/0.90)^2$."
+        }
+      ]
+    },
+    {
+      "id": "pendulum",
+      "short": "Pendulum period",
+      "guide": "The time period of a simple pendulum as given by $T = 2\\pi\\sqrt{\\dfrac{l}{g}}$.",
+      "sections": [
+        "systems"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Derive and use $T = 2\\pi\\sqrt{\\dfrac{l}{g}}$ for small swings.",
+        "Explain how a pendulum can be used to measure $g$."
+      ],
+      "challenge": "CC-C1-03",
+      "checks": [
+        "C1-005"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Time period of a simple pendulum",
+          "latex": [
+            "T = 2\\pi\\sqrt{\\dfrac{l}{g}}"
+          ],
+          "bullets": [
+            "In the data booklet",
+            "$l$ is measured to the centre of the bob",
+            "Valid only for small swings"
+          ],
+          "notes": "A \"simple\" pendulum is a small heavy bob on a light, inextensible string. Ask students to predict what happens to the period if the bob is replaced by a heavier one."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the period of a simple pendulum",
+          "start": "A bob of mass $m$ on a string of length $l$ is displaced by a small angle $\\theta$ (in radians). Its displacement along the arc is $x = l\\theta$.",
+          "steps": [
+            {
+              "text": "The restoring force is the component of the weight along the arc",
+              "latex": "F = -mg\\sin\\theta"
+            },
+            {
+              "text": "For small angles, $\\sin\\theta \\approx \\theta = \\dfrac{x}{l}$",
+              "latex": "F \\approx -\\dfrac{mg}{l}x"
+            },
+            {
+              "text": "Newton's second law: the mass cancels",
+              "latex": "a \\approx -\\dfrac{g}{l}x"
+            },
+            {
+              "text": "Compare with $a = -\\omega^2 x$",
+              "latex": "\\omega^2 = \\dfrac{g}{l}"
+            },
+            {
+              "text": "Use $T = 2\\pi/\\omega$",
+              "latex": "T = 2\\pi\\sqrt{\\dfrac{l}{g}}"
+            }
+          ],
+          "notes": "Step 2 is why the swing must be small: for large angles $\\sin\\theta$ is noticeably less than $\\theta$, so the force isn't proportional to $x$. Below about 10° the error in the force is under 1%."
+        },
+        {
+          "type": "bullets",
+          "title": "Using the pendulum equation",
+          "bullets": [
+            "SHM only for small swings: below about 10°",
+            "The period doesn't depend on the mass of the bob, or on the (small) amplitude",
+            "$T \\propto \\sqrt{l}$: four times the length gives twice the period",
+            "<strong>Measuring $g$:</strong> squaring gives $T^2 = \\dfrac{4\\pi^2}{g}l$, so plot $T^2$ against $l$; the gradient is $\\dfrac{4\\pi^2}{g}$",
+            "Time many swings and divide, to reduce the effect of reaction time"
+          ],
+          "notes": "Mention that the timing should start and stop as the bob passes the lowest point, where it moves fastest and its position is easiest to judge."
+        },
+        {
+          "type": "worked",
+          "title": "A museum pendulum",
+          "question": "A Foucault pendulum in a science museum hangs from a wire 22.0 m long. (a) Find its time period. (b) A second museum wants a pendulum with a period of 8.0 s. Find the length of wire it needs.",
+          "hint": "For (b), rearrange the equation: divide by $2\\pi$ first, then square both sides.",
+          "steps": [
+            {
+              "text": "(a) Substitute the length and $g = 9.8\\ \\text{m s}^{-2}$.",
+              "latex": "T = 2\\pi\\sqrt{\\dfrac{22.0}{9.8}} = 9.4\\ \\text{s}"
+            },
+            {
+              "text": "(b) Rearrange for the length.",
+              "latex": "l = g\\left(\\dfrac{T}{2\\pi}\\right)^2"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "l = 9.8 \\times \\left(\\dfrac{8.0}{2\\pi}\\right)^2 = 16\\ \\text{m}"
+            }
+          ],
+          "notes": "The heavy bob doesn't change the period, but it keeps the pendulum swinging for hours. A Foucault pendulum's swing direction slowly turns because the Earth rotates beneath it."
+        },
+        {
+          "type": "worked",
+          "title": "Finding g from a graph",
+          "question": "Students measure the period of a pendulum for six lengths. Plotted against $l$, their values of $T^2$ lie on a line that passes through the origin and has a gradient of $4.10\\ \\text{s}^2\\ \\text{m}^{-1}$. (a) Show that this graph is expected to be a straight line through the origin. (b) Find their value of $g$.",
+          "hint": "Square the pendulum equation, then compare it with the equation of a straight line.",
+          "steps": [
+            {
+              "text": "(a) Square both sides of the equation.",
+              "latex": "T^2 = \\dfrac{4\\pi^2}{g}l"
+            },
+            {
+              "text": "This has the form $y = mx$, with $T^2$ as $y$ and $l$ as $x$, so the line passes through the origin."
+            },
+            {
+              "text": "(b) The gradient is $4\\pi^2/g$.",
+              "latex": "g = \\dfrac{4\\pi^2}{4.10}"
+            },
+            {
+              "text": "Give the result to 3 s.f., like the gradient.",
+              "latex": "g = 9.63\\ \\text{m s}^{-2}"
+            }
+          ],
+          "notes": "A constant error in measuring the length (for example, leaving out the radius of the bob) shifts the line but doesn't change its gradient, which is a strength of the graph method."
+        }
+      ]
+    },
+    {
+      "id": "energy",
+      "short": "Energy changes",
+      "guide": "A qualitative approach to energy changes during one cycle of an oscillation.",
+      "sections": [
+        "energy"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Describe the kinetic, potential and total energy changes during one cycle of SHM.",
+        "Sketch how these energies vary with displacement and with time."
+      ],
+      "checks": [
+        "C1-009"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Energy during one cycle",
+          "bullets": [
+            "Energy is passed back and forth between <strong>kinetic</strong> and <strong>potential</strong> energy",
+            "The potential energy is elastic for a spring and gravitational for a pendulum",
+            "At the extremes: $E_k = 0$ and the potential energy is greatest",
+            "At equilibrium: $E_k$ is greatest and the potential energy is least",
+            "With no friction or drag, the <strong>total energy stays constant</strong>"
+          ],
+          "notes": "Hold a pendulum at its extreme and ask where the energy is, then release it. The guide asks for this qualitatively at SL; calculations of these energies are additional HL content."
+        },
+        {
+          "type": "bullets",
+          "title": "Energy graphs",
+          "bullets": [
+            "Against <strong>displacement</strong>: $E_k$ is an upside-down parabola, potential energy an upright one",
+            "Against <strong>time</strong>: neither curve goes below zero, and one is high when the other is low",
+            "Each energy reaches its maximum <strong>twice</strong> per cycle, so it varies at twice the oscillation's frequency",
+            "At any moment the two energies add up to the same total: a horizontal line"
+          ],
+          "notes": "Sketch the energy–time graphs under an $x$–$t$ graph on the board, lining up the extremes and the moments of zero displacement."
+        },
+        {
+          "type": "diagram",
+          "title": "Energy against time",
+          "svg": "figures/c1-energy-time.svg",
+          "alt": "Energy against time over one period T. Kinetic energy starts at zero and potential energy starts at its maximum. Each rises and falls twice per period, never below zero, one high while the other is low. A horizontal line shows the constant total energy.",
+          "bullets": [
+            "Kinetic energy is greatest when potential energy is least",
+            "Each reaches its maximum twice in one period",
+            "The total stays constant with no energy losses"
+          ],
+          "notes": "Drawn for an oscillator released from rest at maximum displacement."
+        },
+        {
+          "type": "diagram",
+          "title": "Energy against displacement",
+          "figure": "c1dt",
+          "bullets": [
+            "The two curves always add up to the dashed line",
+            "Both curves are symmetrical about $x = 0$"
+          ],
+          "notes": "Ask where kinetic and potential energy are equal, as a prompt for discussion. SL students need only say that it is somewhere between equilibrium and the extreme."
+        },
+        {
+          "type": "worked",
+          "title": "A tyre swing",
+          "question": "A tyre swing is released from rest at its highest point and swings with a period of 4.2 s. Air resistance is negligible. (a) Describe the energy changes during the first half cycle. (b) State the time between successive maxima of the kinetic energy. (c) Find the frequency at which the kinetic energy varies.",
+          "hint": "Follow the swing from one extreme through the lowest point to the other extreme. How many times per cycle does it pass the lowest point?",
+          "steps": [
+            {
+              "text": "(a) From release to the lowest point, gravitational potential energy is transferred to kinetic energy."
+            },
+            {
+              "text": "From the lowest point to the opposite extreme, kinetic energy is transferred back to gravitational potential energy."
+            },
+            {
+              "text": "(b) The swing passes its lowest point twice per cycle.",
+              "latex": "\\dfrac{T}{2} = \\dfrac{4.2}{2} = 2.1\\ \\text{s}"
+            },
+            {
+              "text": "(c) The kinetic energy repeats every 2.1 s.",
+              "latex": "f = \\dfrac{1}{2.1} = 0.48\\ \\text{Hz}"
+            }
+          ],
+          "notes": "Common error: giving the frequency of the swing (0.24 Hz) for the frequency of the energy."
+        }
+      ]
+    },
+    {
+      "id": "phase-angle",
+      "short": "Phase angle",
+      "hl": true,
+      "guide": "That a particle undergoing simple harmonic motion can be described using phase angle.",
+      "sections": [
+        "phase"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Relate SHM to the projection of uniform circular motion.",
+        "Find a phase angle, and convert between phase difference and time difference, in radians."
+      ],
+      "checks": [
+        "C1-015"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "SHM as the shadow of circular motion",
+          "bullets": [
+            "A point moves round a circle of radius $x_0$ at constant angular velocity $\\omega$",
+            "Its shadow on a line moves back and forth in <strong>simple harmonic motion</strong>",
+            "The angle of the point round the circle tells us where the shadow is in its cycle: the <strong>phase</strong>",
+            "The <strong>phase angle</strong> $\\phi$ is the phase at $t = 0$, measured in radians"
+          ],
+          "notes": "If you have a turntable and a lamp, show the shadow beside a mass on a spring. It gives a picture for the word \"phase\" before any algebra."
+        },
+        {
+          "type": "diagram",
+          "title": "A point on a circle and its projection",
+          "figure": "c1et",
+          "bullets": [
+            "The radius of the circle is the amplitude",
+            "The point's angular velocity is the angular frequency of the SHM",
+            "Here the angle is measured from the horizontal"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "The equations of SHM from circular motion",
+          "start": "The point starts on the horizontal axis at $t = 0$. Its shadow gives the displacement. Use the circular motion equations from A.2.",
+          "steps": [
+            {
+              "text": "Angle turned through in time $t$",
+              "latex": "\\theta = \\omega t"
+            },
+            {
+              "text": "The shadow's position is the horizontal coordinate",
+              "latex": "x = x_0\\cos\\omega t"
+            },
+            {
+              "text": "The point's speed is $\\omega x_0$: take its horizontal component",
+              "latex": "v = -\\omega x_0\\sin\\omega t"
+            },
+            {
+              "text": "The centripetal acceleration $\\omega^2 x_0$ points to the centre",
+              "latex": "a = -\\omega^2 x_0\\cos\\omega t"
+            },
+            {
+              "text": "Replace $x_0\\cos\\omega t$ with $x$: the defining equation",
+              "latex": "a = -\\omega^2 x"
+            }
+          ],
+          "notes": "This answers a guiding question: why the defining equation has the form it does. Students who differentiate can also get $v$ and $a$ directly from $x$: differentiate $x_0\\cos\\omega t$ twice, using the chain rule."
+        },
+        {
+          "type": "derivation",
+          "title": "Adding a phase angle",
+          "start": "The data booklet uses a sine, which counts the phase from equilibrium, not from the extreme. Any other starting point gives the same curve moved along the time axis.",
+          "steps": [
+            {
+              "text": "Starting at equilibrium, moving in the positive direction",
+              "latex": "x = x_0\\sin\\omega t"
+            },
+            {
+              "text": "Shift the curve by adding a phase angle",
+              "latex": "x = x_0\\sin(\\omega t + \\phi)"
+            },
+            {
+              "text": "The velocity is the gradient, a cosine with the same phase",
+              "latex": "v = \\omega x_0\\cos(\\omega t + \\phi)"
+            },
+            {
+              "text": "Check: a phase angle of $\\pi/2$ gives a start at $+x_0$",
+              "latex": "\\sin(\\omega t + \\tfrac{\\pi}{2}) = \\cos\\omega t"
+            }
+          ],
+          "notes": "Step 4 ties the booklet's sine form back to the cosine form from the previous slide, so students see they are one family of curves."
+        },
+        {
+          "type": "bullets",
+          "title": "Phase angles and starting points",
+          "bullets": [
+            "$\\phi = 0$: at equilibrium, moving in the positive direction",
+            "$\\phi = \\dfrac{\\pi}{2}$: at $+x_0$, about to move back",
+            "$\\phi = \\pi$: at equilibrium, moving in the negative direction",
+            "$\\phi = \\dfrac{3\\pi}{2}$: at $-x_0$, about to move back",
+            "Work in radians whenever you calculate with a phase angle"
+          ],
+          "notes": "Have students sketch all four curves on the same axes. Each is the previous one moved a quarter of a cycle to the left."
+        },
+        {
+          "type": "equation",
+          "title": "Phase difference and time difference",
+          "latex": [
+            "\\Delta\\phi = \\dfrac{2\\pi\\,\\Delta t}{T}"
+          ],
+          "bullets": [
+            "Not in the data booklet: one full period is $2\\pi$ radians",
+            "Quarter of a cycle: $\\dfrac{\\pi}{2}$. Half a cycle: $\\pi$",
+            "In SHM, $v$ is $\\dfrac{\\pi}{2}$ ahead of $x$, and $a$ is $\\pi$ out of phase with $x$"
+          ],
+          "notes": "One oscillator \"leads\" if it reaches the same point of its cycle earlier. Two oscillators a quarter of a cycle apart can also be described as three-quarters of a cycle apart, the other way round, so state which one leads."
+        },
+        {
+          "type": "worked",
+          "title": "Two metronomes",
+          "question": "Two identical metronomes oscillate with a period of 1.2 s. The second reaches its maximum displacement 0.40 s after the first. (a) Find the phase difference in radians. (b) Find the time difference that would give a phase difference of $\\pi/2$.",
+          "hint": "A whole period corresponds to $2\\pi$ radians. What fraction of a period is 0.40 s?",
+          "steps": [
+            {
+              "text": "(a) Find the fraction of a cycle, then multiply by $2\\pi$.",
+              "latex": "\\Delta\\phi = 2\\pi \\times \\dfrac{0.40}{1.2}"
+            },
+            {
+              "text": "The second metronome lags the first by:",
+              "latex": "\\Delta\\phi = \\dfrac{2\\pi}{3} = 2.1\\ \\text{rad}"
+            },
+            {
+              "text": "(b) A phase difference of $\\pi/2$ is a quarter of a cycle.",
+              "latex": "\\Delta t = \\dfrac{T}{4} = 0.30\\ \\text{s}"
+            }
+          ],
+          "notes": "Ask students to say the result in words as well: the second metronome is a third of a cycle behind the first."
+        },
+        {
+          "type": "worked",
+          "title": "Modelling the tide",
+          "question": "The water level at a harbour is modelled as SHM about its mean level, with amplitude 1.6 m and period 12.4 hours. At $t = 0$ the level is 0.80 m above the mean and rising. (a) Find the phase angle. (b) Find the height above the mean level at $t = 4.0$ hours.",
+          "hint": "Use $x = x_0\\sin(\\omega t + \\phi)$ at $t = 0$. Two angles between 0 and $\\pi$ have the same sine: which one means that the level is rising?",
+          "steps": [
+            {
+              "text": "Use time in hours, with $\\omega$ in rad per hour.",
+              "latex": "\\omega = \\dfrac{2\\pi}{12.4} = 0.507\\ \\text{rad h}^{-1}"
+            },
+            {
+              "text": "(a) At $t = 0$, the displacement equation gives:",
+              "latex": "\\sin\\phi = \\dfrac{0.80}{1.6} = 0.50"
+            },
+            {
+              "text": "Rising means $v > 0$, so $\\cos\\phi$ is positive.",
+              "latex": "\\phi = \\dfrac{\\pi}{6} = 0.52\\ \\text{rad}"
+            },
+            {
+              "text": "(b) Find the phase at 4.0 hours, in radians.",
+              "latex": "\\omega t + \\phi = 2.55\\ \\text{rad}"
+            },
+            {
+              "text": "Substitute into the displacement equation.",
+              "latex": "x = 1.6\\sin(2.55) = 0.89\\ \\text{m}"
+            }
+          ],
+          "notes": "The other solution, $5\\pi/6$, describes the same height with the level falling. Check that calculators are in radians: in degrees, the last line gives a very different answer."
+        }
+      ]
+    },
+    {
+      "id": "motion-equations",
+      "short": "SHM motion equations",
+      "hl": true,
+      "guide": "Problems can be solved using the equations for simple harmonic motion as given by $x = x_0\\sin(\\omega t + \\phi)$, $v = \\omega x_0\\cos(\\omega t + \\phi)$ and $v = \\pm\\,\\omega\\sqrt{x_0^2 - x^2}$.",
+      "sections": [
+        "phase"
+      ],
+      "minutes": 100,
+      "aims": [
+        "Calculate displacement, velocity and acceleration at any time using the equations of SHM.",
+        "Use $v = \\pm\\,\\omega\\sqrt{x_0^2 - x^2}$, and values read from graphs, to solve problems."
+      ],
+      "checks": [
+        "C1-012"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "The equations of SHM",
+          "latex": [
+            "x = x_0\\sin(\\omega t + \\phi)",
+            "v = \\omega x_0\\cos(\\omega t + \\phi)",
+            "v = \\pm\\,\\omega\\sqrt{x_0^2 - x^2}",
+            "a = -\\omega^2 x"
+          ],
+          "bullets": [
+            "All four are in the data booklet",
+            "Maximum speed: $v_{\\max} = \\omega x_0$"
+          ],
+          "notes": "Point out that $x$ and $v$ are functions of time, whereas the third equation links $v$ directly to position, with no $t$ in it."
+        },
+        {
+          "type": "derivation",
+          "title": "Velocity at a given displacement",
+          "start": "Eliminate the time from the equations for $x$ and $v$. Write $\\theta$ for the phase $\\omega t + \\phi$.",
+          "steps": [
+            {
+              "text": "From the displacement equation",
+              "latex": "\\sin\\theta = \\dfrac{x}{x_0}"
+            },
+            {
+              "text": "From the velocity equation",
+              "latex": "\\cos\\theta = \\dfrac{v}{\\omega x_0}"
+            },
+            {
+              "text": "Use the identity $\\sin^2\\theta + \\cos^2\\theta = 1$",
+              "latex": "\\dfrac{x^2}{x_0^2} + \\dfrac{v^2}{\\omega^2 x_0^2} = 1"
+            },
+            {
+              "text": "Multiply through by $\\omega^2 x_0^2$",
+              "latex": "\\omega^2 x^2 + v^2 = \\omega^2 x_0^2"
+            },
+            {
+              "text": "Make $v$ the subject: at each $x$ it can move either way",
+              "latex": "v = \\pm\\,\\omega\\sqrt{x_0^2 - x^2}"
+            }
+          ],
+          "notes": "The result gives the speed correctly at the limits: setting $x = 0$ gives $\\omega x_0$ and setting $x = x_0$ gives zero."
+        },
+        {
+          "type": "bullets",
+          "title": "Using the equations of SHM",
+          "bullets": [
+            "Put your calculator in <strong>radians</strong> before using $\\sin(\\omega t + \\phi)$",
+            "Find the angular frequency first, from $T$, $f$, or $\\sqrt{k/m}$",
+            "Choose $\\phi$ from the starting conditions: position and direction of motion",
+            "The $\\pm$ equation gives the speed; the direction comes from the motion, or the gradient of the $x$–$t$ graph",
+            "Largest values: speed $\\omega x_0$ at $x = 0$, acceleration $\\omega^2 x_0$ at $x = \\pm x_0$"
+          ],
+          "notes": "The wrong calculator mode is the most common source of error. Have every student check it by finding $\\sin(\\pi/2)$, which should be 1."
+        },
+        {
+          "type": "worked",
+          "title": "Released from rest",
+          "question": "A 1.5 kg metal block on a smooth horizontal surface is attached to a spring with $k = 240\\ \\text{N m}^{-1}$. It is pulled 5.0 cm in the positive direction and released from rest at $t = 0$. (a) Find the angular frequency. (b) Write equations for its displacement and velocity. (c) Find its displacement and velocity at $t = 0.40$ s.",
+          "hint": "Released from rest at the positive extreme: which phase angle does that correspond to? Then use the booklet's forms.",
+          "steps": [
+            {
+              "text": "(a) Use the mass–spring result.",
+              "latex": "\\omega = \\sqrt{\\dfrac{240}{1.5}} = 12.65\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "(b) It starts at $+x_0$, so the phase angle is $\\pi/2$.",
+              "latex": "x = 0.050\\sin(12.65t + \\tfrac{\\pi}{2})"
+            },
+            {
+              "text": "The velocity amplitude is $\\omega x_0 = 0.63\\ \\text{m s}^{-1}$.",
+              "latex": "v = 0.63\\cos(12.65t + \\tfrac{\\pi}{2})"
+            },
+            {
+              "text": "(c) The phase at $t = 0.40$ s, in radians, is 6.63.",
+              "latex": "x = 0.050\\sin(6.63) = 0.017\\ \\text{m}"
+            },
+            {
+              "text": "Same phase in the velocity equation.",
+              "latex": "v = 0.63\\cos(6.63) = +0.59\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "Students may prefer $x = x_0\\cos\\omega t$, which is equal. Both $x$ and $v$ are positive here: the block has passed equilibrium and is moving out again, about 0.8 of the way through its cycle."
+        },
+        {
+          "type": "worked",
+          "title": "An engine piston",
+          "question": "A car engine runs at 3000 revolutions per minute, and its pistons have a stroke (the distance between the extremes) of 86 mm. Model the piston's motion as SHM. Find (a) the angular frequency, (b) the maximum speed, (c) the maximum acceleration and (d) the speed when the piston is 20 mm from the middle of its motion.",
+          "hint": "The stroke isn't the amplitude. Change revolutions per minute into revolutions per second to find the frequency.",
+          "steps": [
+            {
+              "text": "The amplitude is half the stroke.",
+              "latex": "x_0 = 43\\ \\text{mm} = 0.043\\ \\text{m}"
+            },
+            {
+              "text": "(a) One cycle per revolution: $f = 3000/60 = 50$ Hz.",
+              "latex": "\\omega = 2\\pi \\times 50 = 314\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "(b) Maximum speed.",
+              "latex": "\\omega x_0 = 13.5\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(c) Maximum acceleration.",
+              "latex": "\\omega^2 x_0 = 4.2 \\times 10^{3}\\ \\text{m s}^{-2}"
+            },
+            {
+              "text": "(d) Speed at a given displacement.",
+              "latex": "314\\sqrt{0.043^2 - 0.020^2} = 12\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "A real piston isn't exactly in SHM because of the angle of the connecting rod, but this model gives the right order of size. The acceleration is more than 400 times $g$, which is why pistons are made light."
+        },
+        {
+          "type": "worked",
+          "title": "A shaking table",
+          "question": "An engineering shaking table carries a 120 kg model building in SHM with amplitude 8.0 cm and frequency 1.5 Hz. At $t = 0$ the table is at equilibrium, moving in the negative direction. Find, at $t = 0.20$ s, (a) the displacement, (b) the velocity and (c) the resultant force on the model.",
+          "hint": "At equilibrium moving in the negative direction: which phase angle does that correspond to? Find the acceleration from the displacement.",
+          "steps": [
+            {
+              "text": "Find $\\omega$; the starting condition gives $\\phi = \\pi$.",
+              "latex": "\\omega = 2\\pi \\times 1.5 = 9.42\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "The phase at $t = 0.20$ s.",
+              "latex": "\\omega t + \\phi = 5.03\\ \\text{rad}"
+            },
+            {
+              "text": "(a) Displacement.",
+              "latex": "x = 0.080\\sin(5.03) = -0.076\\ \\text{m}"
+            },
+            {
+              "text": "(b) Velocity, with $\\omega x_0 = 0.754\\ \\text{m s}^{-1}$.",
+              "latex": "v = 0.754\\cos(5.03) = +0.23\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(c) Acceleration from the defining equation.",
+              "latex": "a = -\\omega^2 x = +6.76\\ \\text{m s}^{-2}"
+            },
+            {
+              "text": "Newton's second law.",
+              "latex": "F = 120 \\times 6.76 = 8.1 \\times 10^{2}\\ \\text{N}"
+            }
+          ],
+          "notes": "At $t = 0.20$ s the table has passed $-x_0$ (reached at $T/4 = 0.167$ s) and is on its way back, which is why the velocity is positive while the displacement is negative."
+        },
+        {
+          "type": "worked",
+          "title": "Reading a loudspeaker graph",
+          "question": "A displacement–time graph of a loudspeaker cone shows SHM with amplitude 5.0 mm and frequency 40 Hz. At one instant, the graph shows a displacement of −3.0 mm, and its gradient there is negative. Find the cone's velocity and acceleration at that instant.",
+          "hint": "The equation with $\\pm$ gives the size of the velocity. What does the gradient of the graph tell you about its sign?",
+          "steps": [
+            {
+              "text": "Find the angular frequency.",
+              "latex": "\\omega = 2\\pi \\times 40 = 251\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "The speed, using lengths in metres.",
+              "latex": "251\\sqrt{0.0050^2 - 0.0030^2} = 1.0\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "The gradient is negative, so the velocity is negative.",
+              "latex": "v = -1.0\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "Acceleration: the minus sign and negative $x$ make it positive.",
+              "latex": "a = -\\omega^2 x = +1.9 \\times 10^{2}\\ \\text{m s}^{-2}"
+            }
+          ],
+          "notes": "Sketch the moment on a sine curve: the cone is below equilibrium and still moving down, so it is slowing down. Velocity and acceleration have opposite signs."
+        }
+      ]
+    },
+    {
+      "id": "energy-equations",
+      "short": "SHM energy equations",
+      "hl": true,
+      "guide": "Problems can be solved using the equations for simple harmonic motion as given by $E_T = \\tfrac{1}{2}m\\omega^2 x_0^2$ and $E_p = \\tfrac{1}{2}m\\omega^2 x^2$.",
+      "sections": [
+        "energy-hl"
+      ],
+      "minutes": 80,
+      "aims": [
+        "Derive and use the equations for the total, potential and kinetic energy in SHM.",
+        "Solve energy problems, including from graphs of energy against displacement."
+      ],
+      "checks": [
+        "C1-014"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Energy in SHM",
+          "latex": [
+            "E_T = \\tfrac{1}{2}m\\omega^2 x_0^2",
+            "E_p = \\tfrac{1}{2}m\\omega^2 x^2",
+            "E_k = E_T - E_p"
+          ],
+          "bullets": [
+            "$E_T$ and $E_p$ are in the data booklet",
+            "Find $E_k$ by subtracting: $E_k = \\tfrac{1}{2}m\\omega^2(x_0^2 - x^2)$"
+          ],
+          "notes": "Remind students that the kinetic energy formula in this form isn't in the data booklet, so they should be ready to get it by subtraction."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the energy equations",
+          "start": "Combine the kinetic energy equation with the relation between velocity and displacement.",
+          "steps": [
+            {
+              "text": "Kinetic energy",
+              "latex": "E_k = \\tfrac{1}{2}mv^2"
+            },
+            {
+              "text": "Square the velocity–displacement relation",
+              "latex": "v^2 = \\omega^2(x_0^2 - x^2)"
+            },
+            {
+              "text": "Substitute",
+              "latex": "E_k = \\tfrac{1}{2}m\\omega^2(x_0^2 - x^2)"
+            },
+            {
+              "text": "At $x = 0$ all the energy is kinetic: the total",
+              "latex": "E_T = \\tfrac{1}{2}m\\omega^2 x_0^2"
+            },
+            {
+              "text": "The rest is potential energy",
+              "latex": "E_p = E_T - E_k = \\tfrac{1}{2}m\\omega^2 x^2"
+            }
+          ],
+          "notes": "Expand the kinetic energy as $\\tfrac{1}{2}m\\omega^2 x_0^2 - \\tfrac{1}{2}m\\omega^2 x^2$: the first term doesn't depend on $x$ (it is the total) and the second is the potential energy."
+        },
+        {
+          "type": "bullets",
+          "title": "Using the energy equations",
+          "bullets": [
+            "$E_T \\propto x_0^2$: doubling the amplitude gives four times the energy",
+            "Halfway to the extreme, just one quarter of the energy is potential; the other three quarters are kinetic",
+            "$E_k = E_p$ when $x = \\dfrac{x_0}{\\sqrt{2}}$, about $0.71x_0$",
+            "For a spring, $m\\omega^2 = k$, so $E_p$ is the elastic energy $\\tfrac{1}{2}k(\\Delta x)^2$ from A.3, with $\\Delta x = x$",
+            "These equations assume no friction or drag, so the total stays constant"
+          ],
+          "notes": "Ask students to derive the $0.71x_0$ result by setting the two energy equations equal: it is a short, popular exam step."
+        },
+        {
+          "type": "worked",
+          "title": "A tuned mass damper",
+          "question": "A skyscraper contains a 660-tonne steel ball, hung as a pendulum with a period of 6.8 s, to reduce swaying. In a storm its amplitude reaches 0.50 m. Find (a) the total energy of its oscillation, (b) its potential and kinetic energy when its displacement is 0.20 m, and (c) its maximum speed. Treat the motion as SHM.",
+          "hint": "Find $\\omega$ first and keep it unrounded. Then use the booklet's energy equations with the mass in kilograms.",
+          "steps": [
+            {
+              "text": "Find the angular frequency.",
+              "latex": "\\omega = \\dfrac{2\\pi}{6.8} = 0.924\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "(a) Total energy, with $m = 6.6 \\times 10^{5}$ kg.",
+              "latex": "E_T = 7.0 \\times 10^{4}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Potential energy at $x = 0.20$ m.",
+              "latex": "E_p = 1.1 \\times 10^{4}\\ \\text{J}"
+            },
+            {
+              "text": "The remainder is kinetic.",
+              "latex": "E_k = E_T - E_p = 5.9 \\times 10^{4}\\ \\text{J}"
+            },
+            {
+              "text": "(c) Maximum speed.",
+              "latex": "v_{\\max} = \\omega x_0 = 0.46\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "Show one substitution in full: $E_T = \\tfrac{1}{2}(6.6 \\times 10^{5})(0.924)^2(0.50)^2$. A real damper is designed to lose energy, so this oscillation would die away."
+        },
+        {
+          "type": "worked",
+          "title": "Reading an energy graph",
+          "question": "A 0.40 kg glider on an air track is held between two springs. A graph of its kinetic energy against displacement is an upside-down parabola, with a maximum of 0.072 J at $x = 0$, falling to zero at $x = \\pm 12$ cm. Find (a) the maximum speed, (b) the angular frequency and the effective spring constant, and (c) the glider's speed at $x = 6.0$ cm.",
+          "hint": "The maximum of the graph is the total energy. Where the curve reaches zero tells you the amplitude.",
+          "steps": [
+            {
+              "text": "(a) All the energy is kinetic at $x = 0$.",
+              "latex": "v_{\\max} = \\sqrt{\\dfrac{2 \\times 0.072}{0.40}} = 0.60\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(b) Use $v_{\\max} = \\omega x_0$ with $x_0 = 0.12$ m.",
+              "latex": "\\omega = \\dfrac{0.60}{0.12} = 5.0\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "Use $k = m\\omega^2$.",
+              "latex": "k = 0.40 \\times 5.0^2 = 10\\ \\text{N m}^{-1}"
+            },
+            {
+              "text": "(c) Potential energy at $x = 0.060$ m.",
+              "latex": "E_p = \\tfrac{1}{2}m\\omega^2 x^2 = 0.018\\ \\text{J}"
+            },
+            {
+              "text": "So $E_k = 0.072 - 0.018 = 0.054$ J.",
+              "latex": "v = \\sqrt{\\dfrac{2 \\times 0.054}{0.40}} = 0.52\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "Ask students to sketch the potential energy curve on the same axes, and check by using $v = \\omega\\sqrt{x_0^2 - x^2}$."
+        },
+        {
+          "type": "worked",
+          "title": "A clock winding down",
+          "question": "The 1.2 kg bob of a clock's pendulum oscillates with a period of 2.0 s. As the clock runs down, its amplitude falls from 5.0 cm to 4.0 cm. Treat the motion as simple harmonic. Find (a) the energy lost and (b) the percentage of the original energy that has been lost.",
+          "hint": "Find the total energy at each amplitude. For (b), use the fact that the total energy is proportional to the amplitude squared.",
+          "steps": [
+            {
+              "text": "Find the angular frequency.",
+              "latex": "\\omega = \\dfrac{2\\pi}{2.0} = 3.14\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "Total energy at the larger amplitude.",
+              "latex": "E_T = 1.48 \\times 10^{-2}\\ \\text{J}"
+            },
+            {
+              "text": "Total energy at the smaller amplitude.",
+              "latex": "E_T = 9.5 \\times 10^{-3}\\ \\text{J}"
+            },
+            {
+              "text": "(a) Subtract.",
+              "latex": "\\Delta E = 5.3 \\times 10^{-3}\\ \\text{J}"
+            },
+            {
+              "text": "(b) The fraction remaining is the ratio of squares, 0.64.",
+              "latex": "1 - \\left(\\dfrac{4.0}{5.0}\\right)^2 = 36\\%"
+            }
+          ],
+          "notes": "A 20% fall in amplitude means a 36% fall in energy: a clear way to show the square law. The period stays the same, which is why a clock keeps time as it runs down."
+        },
+        {
+          "type": "worked",
+          "title": "A vibrating molecule",
+          "question": "In a hydrogen chloride molecule, model the hydrogen atom (mass $1.7 \\times 10^{-27}$ kg) as a mass on a spring with $k = 480\\ \\text{N m}^{-1}$, with the chlorine atom fixed. The amplitude is $1.0 \\times 10^{-11}$ m. Find (a) the angular frequency, (b) the frequency, (c) the wavelength of electromagnetic radiation with this frequency and (d) the total energy.",
+          "hint": "Use the mass–spring result for $\\omega$. For (c), use the speed of light; for (d), the booklet's equation for total energy.",
+          "steps": [
+            {
+              "text": "(a) Use $\\omega^2 = k/m$.",
+              "latex": "\\omega = 5.3 \\times 10^{14}\\ \\text{rad s}^{-1}"
+            },
+            {
+              "text": "(b) Divide by $2\\pi$.",
+              "latex": "f = 8.5 \\times 10^{13}\\ \\text{Hz}"
+            },
+            {
+              "text": "(c) This wavelength is in the infrared.",
+              "latex": "\\lambda = \\dfrac{c}{f} = 3.5 \\times 10^{-6}\\ \\text{m}"
+            },
+            {
+              "text": "(d) Total energy.",
+              "latex": "E_T = \\tfrac{1}{2}m\\omega^2 x_0^2 = 2.4 \\times 10^{-20}\\ \\text{J}"
+            }
+          ],
+          "notes": "This links to the guide's question about modelling greenhouse gases as oscillators (B.2): molecules absorb infrared at frequencies near their natural frequency. A real molecule's energy is quantised, but the simple model gets the frequency about right."
+        }
+      ]
+    }
+  ]
+}

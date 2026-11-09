@@ -1,0 +1,1818 @@
+{
+  "topic": "C.3",
+  "hours": 5,
+  "hlHours": 6,
+  "points": [
+    {
+      "id": "wavefronts",
+      "short": "Wavefronts and rays",
+      "guide": "Waves travelling in two and three dimensions can be described through the concepts of wavefronts and rays.",
+      "sections": [
+        "wavefronts"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Describe waves in two and three dimensions using wavefronts and rays.",
+        "Read a wavelength from a wavefront diagram and draw rays at right angles to the wavefronts."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Wavefronts",
+          "bullets": [
+            "A <strong>wavefront</strong> is a line or surface through neighbouring points that oscillate in phase",
+            "On transverse waves we normally draw them along the <strong>crests</strong>; on sound waves, along the <strong>compressions</strong>",
+            "The gap between one wavefront and the next is <strong>one wavelength</strong>",
+            "Looking down on ripples turns the wave into a simple family of lines"
+          ],
+          "notes": "Show a ripple tank, or a photograph of ripples from above, and trace the crests with a finger. Wavefronts don't have to be straight: ask what shape a dropped stone makes."
+        },
+        {
+          "type": "bullets",
+          "title": "Rays",
+          "bullets": [
+            "A <strong>ray</strong> is an arrow showing the direction in which the wave and its energy move",
+            "Rays always cross wavefronts at <strong>right angles</strong>",
+            "Straight (plane) wavefronts have parallel rays",
+            "A point source in three dimensions sends out spherical wavefronts, with rays pointing radially outwards",
+            "Far from the source, a small patch of a spherical wavefront is almost flat"
+          ],
+          "notes": "The same language works for longitudinal waves. Sunlight reaching a classroom is a good example of the last bullet: the Sun is so far away that the wavefronts here are effectively plane."
+        },
+        {
+          "type": "diagram",
+          "title": "Plane and circular wavefronts",
+          "figure": "c3at",
+          "bullets": [
+            "Ask: where would the next wavefront be?",
+            "Check the right angle wherever a ray crosses a wavefront"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Reading a ripple tank photograph",
+          "question": "A photograph taken from above a ripple tank shows six neighbouring straight wavefronts. The distance from the first to the sixth is 7.5 cm. The dipper vibrates at 14 Hz. Find (a) the wavelength and (b) the speed of the waves.",
+          "hint": "How many gaps are there between six lines? Each gap is one wavelength.",
+          "steps": [
+            {
+              "text": "(a) Six wavefronts have five gaps between them.",
+              "latex": "\\lambda = \\dfrac{7.5}{5} = 1.5\\ \\text{cm}"
+            },
+            {
+              "text": "(b) Use the wave equation, with the wavelength in metres.",
+              "latex": "v = f\\lambda = 14 \\times 0.015"
+            },
+            {
+              "text": "The speed of the ripples:",
+              "latex": "v = 0.21\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "The classic slip is dividing by six. The same care applies later when measuring across several fringes."
+        }
+      ]
+    },
+    {
+      "id": "boundaries",
+      "short": "Waves at boundaries",
+      "guide": "Wave behaviour at boundaries in terms of reflection, refraction and transmission.",
+      "sections": [
+        "reflection",
+        "refraction"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Describe what happens to a wave at a boundary, using reflection, refraction and transmission.",
+        "State which wave quantities change on reflection and on refraction."
+      ],
+      "checks": [
+        "C3-001",
+        "C3-002"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Meeting a boundary between two media",
+          "bullets": [
+            "Some of the wave usually bounces back: it is <strong>reflected</strong>",
+            "The rest carries on into the second medium: it is <strong>transmitted</strong>",
+            "If the transmitted wave changes speed and arrives at an angle, it changes direction: <strong>refraction</strong>",
+            "Every angle is measured from the <strong>normal</strong>, the line at right angles to the boundary"
+          ],
+          "notes": "A window shows this at a glance: you can see through it, and at night you can see your reflection in it. The guide limits sketching problems to incident, reflected and transmitted waves."
+        },
+        {
+          "type": "bullets",
+          "title": "Reflection",
+          "bullets": [
+            "<strong>Law of reflection:</strong> the angle of incidence equals the angle of reflection",
+            "The wave stays in the same medium, so its speed, frequency and wavelength don't change",
+            "Plane wavefronts stay plane after a flat mirror",
+            "Circular wavefronts reflect as circles centred on a point behind the mirror",
+            "The law applies to all waves: light, echoes, water waves, radar"
+          ],
+          "notes": "Have students say why the speed can't change here. A sound pulse echoing from a wall straight on has an angle of incidence of 0°, which many find odd."
+        },
+        {
+          "type": "bullets",
+          "title": "Refraction: why the direction changes",
+          "bullets": [
+            "The frequency is set by the source, so frequency and period <strong>don't change</strong>",
+            "The speed changes, so the wavelength changes in proportion",
+            "Slowing down: the wave bends <strong>towards</strong> the normal",
+            "Speeding up: the wave bends <strong>away from</strong> the normal",
+            "A wave arriving head-on doesn't turn, although its speed and wavelength do change"
+          ],
+          "notes": "Picture a row of students walking arm in arm from a pavement onto soft sand at an angle. Those who reach the sand first slow down, so the row swings round. The step rate doesn't change, but the steps get shorter."
+        },
+        {
+          "type": "diagram",
+          "title": "Wavefronts crossing into a slower medium",
+          "figure": "c3bt",
+          "bullets": [
+            "Closer wavefronts mean a shorter wavelength and a lower speed",
+            "The ray stays at right angles to the wavefronts on both sides"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Wavelength and speed across a boundary",
+          "start": "The frequency is the same on both sides of the boundary.",
+          "steps": [
+            {
+              "text": "In the first medium",
+              "latex": "v_{1} = f\\lambda_{1}"
+            },
+            {
+              "text": "In the second medium",
+              "latex": "v_{2} = f\\lambda_{2}"
+            },
+            {
+              "text": "Divide: the frequency cancels",
+              "latex": "\\dfrac{\\lambda_{2}}{\\lambda_{1}} = \\dfrac{v_{2}}{v_{1}}"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Ultrasound reaching bone",
+          "question": "A medical scanner sends a 2.0 MHz ultrasound pulse through soft tissue, where the speed of sound is 1540 $\\text{m s}^{-1}$. The pulse reaches bone, where the speed is 4080 $\\text{m s}^{-1}$. Find the wavelength in (a) the tissue and (b) the bone, and (c) state the frequency in the bone.",
+          "hint": "Which quantity is fixed by the source? Use the wave equation in each material.",
+          "steps": [
+            {
+              "text": "(a) Rearrange the wave equation for the tissue.",
+              "latex": "\\lambda_{1} = \\dfrac{1540}{2.0\\times 10^{6}}"
+            },
+            {
+              "text": "The wavelength in tissue:",
+              "latex": "\\lambda_{1} = 7.7\\times 10^{-4}\\ \\text{m}"
+            },
+            {
+              "text": "(b) The same frequency, with the speed in bone.",
+              "latex": "\\lambda_{2} = \\dfrac{4080}{2.0\\times 10^{6}}"
+            },
+            {
+              "text": "The wavelength in bone:",
+              "latex": "\\lambda_{2} = 2.0\\times 10^{-3}\\ \\text{m}"
+            },
+            {
+              "text": "(c) The frequency doesn't change at a boundary.",
+              "latex": "f = 2.0\\ \\text{MHz}"
+            }
+          ],
+          "notes": "Check with the ratio: 4080 ÷ 1540 = 2.6, and the wavelength in bone is 2.6 times larger."
+        }
+      ]
+    },
+    {
+      "id": "snell",
+      "short": "Snell's law",
+      "guide": "Snell's law as given by $\\dfrac{n_1}{n_2} = \\dfrac{\\sin\\theta_2}{\\sin\\theta_1} = \\dfrac{v_2}{v_1}$ where $n$ is the refractive index and $\\theta$ is the angle between the normal and the ray.",
+      "sections": [
+        "refraction"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Apply Snell's law to find angles, speeds and refractive indices.",
+        "Derive $n_1\\sin\\theta_1 = n_2\\sin\\theta_2$ from the speed form of Snell's law."
+      ],
+      "challenge": "CC-C3-01",
+      "checks": [
+        "C3-003",
+        "C3-004"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Refractive index",
+          "bullets": [
+            "The <strong>refractive index</strong> of a material compares the speed of light in a vacuum with its speed in the material",
+            "It is a ratio, so it has no unit",
+            "Transparent materials have $n$ greater than 1, because light is slower in them",
+            "Typical values: air 1.00, water 1.33, glass about 1.5, diamond 2.4",
+            "A larger $n$ means slower light, and a ray nearer to the normal"
+          ],
+          "notes": "Refractive index is a way of writing the speed of light. For sound or water waves, use the speed form of Snell's law instead."
+        },
+        {
+          "type": "equation",
+          "title": "Snell's law",
+          "latex": [
+            "\\dfrac{n_{1}}{n_{2}} = \\dfrac{\\sin\\theta_{2}}{\\sin\\theta_{1}} = \\dfrac{v_{2}}{v_{1}}",
+            "n = \\dfrac{c}{v}"
+          ],
+          "bullets": [
+            "Medium 1 is the one the wave is coming from",
+            "Both angles are measured from the normal"
+          ],
+          "notes": "The first equation is in the data booklet. The definition $n = c/v$ must be learned."
+        },
+        {
+          "type": "diagram",
+          "title": "Wavefronts crossing a boundary",
+          "svg": "figures/c3-snell-triangles.svg",
+          "alt": "A boundary between medium 1 above and medium 2 below, with two points a distance L apart on it. In medium 1, a right-angled triangle has hypotenuse L, one side along the wavefront, and a side v 1 t. In medium 2, a second right-angled triangle has hypotenuse L and a side v 2 t. The angles between the wavefronts and the boundary are theta 1 and theta 2.",
+          "bullets": [
+            "Both triangles share the hypotenuse $L$",
+            "In time $t$, one end of the wavefront travels $v_{1}t$ and the other $v_{2}t$",
+            "The next slide uses these triangles"
+          ],
+          "notes": "Drawn with $\\theta_{1} = 50°$ and a speed ratio of 0.65."
+        },
+        {
+          "type": "derivation",
+          "title": "Snell's law from wavefronts",
+          "start": "A wavefront meets the boundary at an angle. Its two ends touch the boundary a time $t$ apart, at points a distance $L$ apart along the boundary.",
+          "steps": [
+            {
+              "text": "The end still in medium 1 has this far to go",
+              "latex": "\\text{distance} = v_{1}t"
+            },
+            {
+              "text": "That distance and $L$ form a right-angled triangle with the wavefront",
+              "latex": "\\sin\\theta_{1} = \\dfrac{v_{1}t}{L}"
+            },
+            {
+              "text": "In the same time, the other end moves $v_2t$ into medium 2, making a second triangle on $L$",
+              "latex": "\\sin\\theta_{2} = \\dfrac{v_{2}t}{L}"
+            },
+            {
+              "text": "Divide: $t$ and $L$ cancel",
+              "latex": "\\dfrac{\\sin\\theta_{2}}{\\sin\\theta_{1}} = \\dfrac{v_{2}}{v_{1}}"
+            }
+          ],
+          "notes": "Draw this on the board, on top of a sketch like the wavefront figure. The angle between a wavefront and the boundary equals the angle between the ray and the normal, because each pair of lines is at right angles."
+        },
+        {
+          "type": "derivation",
+          "title": "From speeds to refractive indices",
+          "start": "Start from the speed form of Snell's law and use $v = c/n$ in each medium.",
+          "steps": [
+            {
+              "text": "The speed form",
+              "latex": "\\dfrac{\\sin\\theta_{2}}{\\sin\\theta_{1}} = \\dfrac{v_{2}}{v_{1}}"
+            },
+            {
+              "text": "Write each speed using its refractive index",
+              "latex": "\\dfrac{v_{2}}{v_{1}} = \\dfrac{c/n_{2}}{c/n_{1}} = \\dfrac{n_{1}}{n_{2}}"
+            },
+            {
+              "text": "Combine the two lines",
+              "latex": "\\dfrac{\\sin\\theta_{2}}{\\sin\\theta_{1}} = \\dfrac{n_{1}}{n_{2}}"
+            },
+            {
+              "text": "Cross-multiply: the form easiest to use",
+              "latex": "n_{1}\\sin\\theta_{1} = n_{2}\\sin\\theta_{2}"
+            }
+          ],
+          "notes": "Notice that the indices are upside down compared with the speeds and the sines. Students who remember only that a larger index goes with a smaller angle can always check their answer."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for using Snell's law",
+          "bullets": [
+            "Mark the normal first, and read both angles from it",
+            "If an angle is given from the surface, subtract it from 90°",
+            "Use $n_1\\sin\\theta_1 = n_2\\sin\\theta_2$ for light, and the speed form for other waves",
+            "Check the bending: slower means a smaller angle in the new medium",
+            "Calculators must be in degree mode"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A laser entering acrylic",
+          "question": "A laser beam in air meets the flat side of an acrylic block with an angle of incidence of 37°. The refractive index of acrylic is 1.49. Find (a) the angle of refraction and (b) the speed of the light in the acrylic.",
+          "hint": "Use $n_1\\sin\\theta_1 = n_2\\sin\\theta_2$ with $n = 1.00$ for air, then use the definition of the refractive index.",
+          "steps": [
+            {
+              "text": "(a) Rearrange Snell's law for $\\sin\\theta_2$.",
+              "latex": "\\sin\\theta_{2} = \\dfrac{1.00\\sin 37^{\\circ}}{1.49}"
+            },
+            {
+              "text": "Evaluate the right-hand side.",
+              "latex": "\\sin\\theta_{2} = 0.404"
+            },
+            {
+              "text": "The angle of refraction, towards the normal:",
+              "latex": "\\theta_{2} = 24^{\\circ}"
+            },
+            {
+              "text": "(b) Use the definition of the refractive index.",
+              "latex": "v = \\dfrac{3.00\\times 10^{8}}{1.49}"
+            },
+            {
+              "text": "The speed in acrylic:",
+              "latex": "v = 2.0\\times 10^{8}\\ \\text{m s}^{-1}"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Ocean swell crossing onto a sandbank",
+          "question": "Ocean swell with a period of 8.0 s travels at 9.0 $\\text{m s}^{-1}$ and then crosses onto a shallower sandbank, where its speed is 6.0 $\\text{m s}^{-1}$. In the deeper water the rays make an angle of 42° with the normal to the edge of the sandbank. Find (a) the angle of the rays over the sandbank and (b) the wavelength in each region.",
+          "hint": "There is no refractive index here, so use the speed form of Snell's law. What stays the same as the swell crosses?",
+          "steps": [
+            {
+              "text": "(a) Use the speed form of Snell's law.",
+              "latex": "\\sin\\theta_{2} = \\dfrac{6.0}{9.0}\\sin 42^{\\circ} = 0.446"
+            },
+            {
+              "text": "The rays bend towards the normal:",
+              "latex": "\\theta_{2} = 26^{\\circ}"
+            },
+            {
+              "text": "(b) The period doesn't change: $\\lambda = vT$.",
+              "latex": "\\lambda_{1} = 9.0 \\times 8.0 = 72\\ \\text{m}"
+            },
+            {
+              "text": "Over the sandbank:",
+              "latex": "\\lambda_{2} = 6.0 \\times 8.0 = 48\\ \\text{m}"
+            }
+          ],
+          "notes": "This is why waves arrive almost parallel to a beach, whatever direction they came from out at sea."
+        },
+        {
+          "type": "worked",
+          "title": "Identifying a clear liquid",
+          "question": "A ray of light in glass of refractive index 1.52 reaches a flat boundary with a clear liquid. The angle of incidence is 30° and the angle of refraction in the liquid is 34°. Find (a) the refractive index of the liquid and (b) the speed of light in the liquid.",
+          "hint": "Neither medium is air here, so keep both refractive indices in Snell's law.",
+          "steps": [
+            {
+              "text": "(a) Rearrange Snell's law for $n_2$.",
+              "latex": "n_{2} = \\dfrac{1.52\\sin 30^{\\circ}}{\\sin 34^{\\circ}}"
+            },
+            {
+              "text": "The refractive index of the liquid:",
+              "latex": "n_{2} = 1.36"
+            },
+            {
+              "text": "(b) Use the definition of the refractive index.",
+              "latex": "v = \\dfrac{3.00\\times 10^{8}}{1.36}"
+            },
+            {
+              "text": "The speed in the liquid:",
+              "latex": "v = 2.2\\times 10^{8}\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "The ray bends away from the normal, as expected, because the liquid has the lower index."
+        }
+      ]
+    },
+    {
+      "id": "tir",
+      "short": "Critical angle and TIR",
+      "guide": "Snell's law, critical angle and total internal reflection.",
+      "sections": [
+        "tir"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Explain total internal reflection and state the conditions needed for it.",
+        "Derive and use $\\sin\\theta_c = n_2/n_1$."
+      ],
+      "challenge": "CC-C3-04",
+      "checks": [
+        "C3-005",
+        "C3-006"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Light trying to leave a slower medium",
+          "bullets": [
+            "Going to a lower refractive index, the ray bends <strong>away from</strong> the normal",
+            "As the angle of incidence grows, the refracted ray swings towards the boundary and fades",
+            "At the <strong>critical angle</strong> the refracted ray just skims the surface: the angle of refraction is 90°",
+            "Beyond it there is no refracted ray at all: <strong>total internal reflection</strong> (TIR)",
+            "TIR needs the wave to be heading into a medium where it would travel <strong>faster</strong>"
+          ],
+          "notes": "A semicircular glass block and a ray box show the refracted ray fading and the reflected ray brightening."
+        },
+        {
+          "type": "diagram",
+          "title": "Three rays leaving glass",
+          "figure": "c3ct",
+          "bullets": [
+            "Small angle: refracted out, with a weak reflection (not drawn)",
+            "At the critical angle: along the surface",
+            "Larger angle: all reflected, obeying the law of reflection"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "The critical angle",
+          "latex": "\\sin\\theta_{c} = \\dfrac{n_{2}}{n_{1}}",
+          "bullets": [
+            "$n_1$ is the medium the wave is inside, and $n_1 > n_2$",
+            "When the outside medium is air: $\\sin\\theta_c = 1/n_1$"
+          ],
+          "notes": "Not in the data booklet: students get it from Snell's law in one line."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the critical angle",
+          "start": "Start from Snell's law, with the wave going from medium 1 into medium 2.",
+          "steps": [
+            {
+              "text": "Snell's law",
+              "latex": "n_{1}\\sin\\theta_{1} = n_{2}\\sin\\theta_{2}"
+            },
+            {
+              "text": "At the critical angle, the refracted ray is at 90°",
+              "latex": "n_{1}\\sin\\theta_{c} = n_{2}\\sin 90^{\\circ}"
+            },
+            {
+              "text": "Since $\\sin 90^{\\circ} = 1$",
+              "latex": "\\sin\\theta_{c} = \\dfrac{n_{2}}{n_{1}}"
+            }
+          ],
+          "notes": "If $n_2 > n_1$ this gives a sine greater than 1, so no critical angle exists. Light entering a slower medium can always refract."
+        },
+        {
+          "type": "bullets",
+          "title": "Uses of total internal reflection",
+          "bullets": [
+            "<strong>Optical fibres:</strong> a thin glass core inside a cladding of slightly lower index; light zigzags along by repeated TIR",
+            "Fibres can carry far more data than copper, with less loss and no electrical interference",
+            "<strong>Endoscopes:</strong> bundles of fibres carry light into the body and an image back out",
+            "<strong>Prisms</strong> in binoculars turn light round without the losses of a mirror"
+          ],
+          "notes": "Fibres are not chosen for speed: light in glass travels at about two-thirds of $c$, roughly the same as an electrical signal in a good cable. Their advantages are capacity and low loss."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for critical angle questions",
+          "bullets": [
+            "First ask: is the wave going to a <strong>lower</strong> refractive index? If not, there is no TIR",
+            "The larger index always goes on the bottom of the fraction",
+            "To test a ray, compare its angle of incidence with the critical angle",
+            "Surrounding the glass with water makes the critical angle bigger, so TIR is harder"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Trapping light in a fibre",
+          "question": "An optical fibre has a core of refractive index 1.48 and a cladding of refractive index 1.46. Find (a) the critical angle at the boundary between core and cladding and (b) the largest angle that a ray can make with the axis of the fibre and still be trapped.",
+          "hint": "Which index goes on top? For part (b), the angle of incidence is measured from the normal to the wall, not from the axis.",
+          "steps": [
+            {
+              "text": "(a) The light is inside the core.",
+              "latex": "\\sin\\theta_{c} = \\dfrac{1.46}{1.48} = 0.986"
+            },
+            {
+              "text": "The critical angle:",
+              "latex": "\\theta_{c} = 80.6^{\\circ}"
+            },
+            {
+              "text": "(b) The axis is at right angles to the normal to the wall.",
+              "latex": "90^{\\circ} - 80.6^{\\circ} = 9.4^{\\circ}"
+            },
+            {
+              "text": "So the ray must stay within about 9° of the axis."
+            }
+          ],
+          "notes": "Ask why the two indices are made so close: rays that stay near the axis take nearly equal paths, so pulses spread less."
+        },
+        {
+          "type": "worked",
+          "title": "A lamp under water",
+          "question": "A small lamp is fixed 1.5 m below the surface of a still swimming pool. The refractive index of water is 1.33. Light from the lamp can leave the water only through a circle on the surface, directly above the lamp. Find the radius of this circle.",
+          "hint": "Which rays only just get out? Draw the right-angled triangle formed by the depth, the radius and such a ray.",
+          "steps": [
+            {
+              "text": "Rays at the edge of the circle meet the surface at the critical angle.",
+              "latex": "\\sin\\theta_{c} = \\dfrac{1.00}{1.33} = 0.752"
+            },
+            {
+              "text": "The critical angle:",
+              "latex": "\\theta_{c} = 48.8^{\\circ}"
+            },
+            {
+              "text": "In the triangle, the radius is opposite the angle at the lamp.",
+              "latex": "r = 1.5\\tan 48.8^{\\circ}"
+            },
+            {
+              "text": "The radius of the circle:",
+              "latex": "r = 1.7\\ \\text{m}"
+            }
+          ],
+          "notes": "Outside this circle, the water surface acts as a mirror for anyone swimming below it."
+        }
+      ]
+    },
+    {
+      "id": "superposition",
+      "short": "Superposition",
+      "guide": "Superposition of waves and wave pulses.",
+      "sections": [
+        "superposition"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Apply the principle of superposition to wave pulses and continuous waves.",
+        "Find the resultant displacement where waves overlap, using signs."
+      ],
+      "checks": [
+        "C3-012"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The principle of superposition",
+          "bullets": [
+            "Where waves overlap, the resultant displacement is the <strong>sum</strong> of the separate displacements",
+            "Displacements have signs: above the rest position positive, below it negative",
+            "Two pulses on the same side add to a bigger pulse for a moment: <strong>constructive</strong> interference",
+            "Two equal and opposite pulses cancel for a moment: <strong>destructive</strong> interference",
+            "Afterwards, each pulse travels on exactly as before"
+          ],
+          "notes": "Send two pulses along a long spring from opposite ends. Students are often surprised that the pulses pass through each other, rather than bouncing. At the moment of complete cancellation, the energy hasn't vanished: the string is moving."
+        },
+        {
+          "type": "diagram",
+          "title": "Two pulses passing through each other",
+          "svg": "figures/c3-overlapping-pulses.svg",
+          "alt": "Three rows. Before: a taller pulse moving right and a shorter pulse moving left along a line. Overlapping: each pulse drawn dashed, and a solid curve showing their sum, which is higher than either. After: the two pulses have passed through each other, unchanged.",
+          "bullets": [
+            "Where the pulses overlap, the displacements add",
+            "Solid line: the resultant. Dashed lines: each pulse",
+            "Afterwards, each pulse carries on unchanged"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Adding continuous waves",
+          "bullets": [
+            "Add the two displacements at each moment, then repeat to build the resultant",
+            "Same frequency, in phase: the resultant amplitude is $A_1 + A_2$",
+            "Same frequency, half a cycle apart: the resultant amplitude is the difference of the amplitudes",
+            "If the two crests don't line up, the largest resultant is less than the sum of the amplitudes",
+            "Any repeating wave shape can be built from sine waves added together"
+          ],
+          "notes": "The last bullet (Fourier's idea) goes beyond the guide. It can be shown with a graphing tool, by adding a few sine curves to approach a square wave."
+        },
+        {
+          "type": "worked",
+          "title": "Two pulses on a rope",
+          "question": "Two rectangular pulses, each 20 cm long, travel towards each other along a rope, each at 0.50 $\\text{m s}^{-1}$. One has a displacement of +4.0 cm and the other −1.5 cm. At $t = 0$ their leading edges are 60 cm apart. Find (a) the time at which the leading edges meet, (b) the displacement of the rope where the pulses overlap and (c) the time at which the two pulses have completely passed each other.",
+          "hint": "Each pulse moves, so the gap closes at the sum of the two speeds. Add the displacements with their signs.",
+          "steps": [
+            {
+              "text": "(a) The gap closes at 1.0 $\\text{m s}^{-1}$.",
+              "latex": "t = \\dfrac{0.60}{1.0} = 0.60\\ \\text{s}"
+            },
+            {
+              "text": "(b) Add the signed displacements.",
+              "latex": "y = +4.0 + (-1.5) = +2.5\\ \\text{cm}"
+            },
+            {
+              "text": "(c) After meeting, the pulses move a further 40 cm relative to each other.",
+              "latex": "t = 0.60 + \\dfrac{0.40}{1.0}"
+            },
+            {
+              "text": "The pulses have fully separated at:",
+              "latex": "t = 1.0\\ \\text{s}"
+            }
+          ],
+          "notes": "Ask students to sketch the rope at 0.5 s, 0.8 s and 1.2 s. At 1.2 s, each pulse has the shape it started with."
+        },
+        {
+          "type": "worked",
+          "title": "Noise-cancelling headphones",
+          "question": "A microphone in a pair of headphones detects aircraft noise with a pressure amplitude of 60 mPa at a certain frequency. The headphones produce a sound of the same frequency, half a cycle out of phase with the noise, with a pressure amplitude of 54 mPa. Find (a) the resultant amplitude at the ear and (b) this amplitude as a percentage of the original.",
+          "hint": "Half a cycle out of phase means a crest of one meets a trough of the other.",
+          "steps": [
+            {
+              "text": "(a) The two amplitudes oppose each other.",
+              "latex": "A = 60 - 54 = 6\\ \\text{mPa}"
+            },
+            {
+              "text": "(b) Compare with the original noise.",
+              "latex": "\\dfrac{6}{60} \\times 100\\% = 10\\%"
+            }
+          ],
+          "notes": "In the real device the cancellation isn't perfect, and works best for steady low notes. Links ahead to the destructive interference condition."
+        }
+      ]
+    },
+    {
+      "id": "diffraction",
+      "short": "Diffraction",
+      "guide": "Wave diffraction around a body and through an aperture.",
+      "sections": [
+        "diffraction"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Describe diffraction through an aperture and around a body.",
+        "Predict how much a wave diffracts by comparing its wavelength with the size of the gap or obstacle."
+      ],
+      "checks": [
+        "C3-007",
+        "C3-014"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Diffraction",
+          "bullets": [
+            "<strong>Diffraction</strong>: a wave spreads out when it passes through a gap or round the edge of an object",
+            "Wavelength, frequency and speed <strong>stay the same</strong>; only the shape of the wavefronts changes",
+            "The spreading is strongest when the gap or object is about the <strong>same size as the wavelength</strong>",
+            "When the gap is much wider than the wavelength, the spreading is very slight",
+            "All waves diffract, including sound, water waves and light"
+          ],
+          "notes": "Diffraction needs no change of medium or boundary between two media. Waves still diffract a little at wide gaps, but only at the edges, so it is hard to notice. A gap narrower than the wavelength still gives semicircular wavefronts, but very little of the wave gets through."
+        },
+        {
+          "type": "diagram",
+          "title": "A wide gap and a narrow gap",
+          "figure": "c3dt",
+          "bullets": [
+            "Compare the gap with the wavelength in each picture",
+            "The wavefront spacing doesn't change on passing through the gap"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Huygens' principle",
+          "bullets": [
+            "Each point on a wavefront behaves like a small source of new circular <strong>wavelets</strong>",
+            "The new wavefront is the line that touches all the wavelets",
+            "A narrow gap lets through only a tiny piece of wavefront, which acts like a point source",
+            "At a wide gap, wavelets add to give a straight wavefront, except near the edges"
+          ],
+          "notes": "Christiaan Huygens set out the idea in his 1690 treatise on light. It connects to the debate between Newton's particle model and the wave model of light."
+        },
+        {
+          "type": "bullets",
+          "title": "Diffraction around a body",
+          "bullets": [
+            "Waves curl round the sides of an object into the region behind it",
+            "An object much smaller than the wavelength hardly disturbs the wave",
+            "Sound reaches you round a corner, but light doesn't, because of the sizes of their wavelengths",
+            "Long radio waves bend over hills; short ones are blocked"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Phone signal through a window",
+          "question": "A phone mast sends signals at 800 MHz and at 28 GHz. The signals reach a window 0.40 m wide in a metal-clad building. Calculate the wavelength of each signal and use your answers to compare how much each spreads out inside the room.",
+          "hint": "Find each wavelength using the speed of light, then compare it with the width of the window.",
+          "steps": [
+            {
+              "text": "At 800 MHz:",
+              "latex": "\\lambda = \\dfrac{3.00\\times 10^{8}}{8.00\\times 10^{8}} = 0.38\\ \\text{m}"
+            },
+            {
+              "text": "At 28 GHz:",
+              "latex": "\\lambda = \\dfrac{3.00\\times 10^{8}}{2.8\\times 10^{10}} = 0.011\\ \\text{m}"
+            },
+            {
+              "text": "The 800 MHz wavelength is similar to the window width, so it spreads strongly into the room."
+            },
+            {
+              "text": "The 28 GHz wavelength is much smaller than the window, so this signal continues as a narrow beam."
+            }
+          ],
+          "notes": "This is one reason why high-frequency networks need many more transmitters."
+        }
+      ]
+    },
+    {
+      "id": "wave-diagrams",
+      "short": "Wavefront-ray diagrams",
+      "guide": "Wavefront-ray diagrams showing refraction and diffraction.",
+      "sections": [
+        "refraction",
+        "diffraction"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Sketch wavefront-ray diagrams for refraction and diffraction.",
+        "Interpret the spacing and direction of wavefronts in a diagram."
+      ],
+      "checks": [
+        "C3-013"
+      ],
+      "slides": [
+        {
+          "type": "diagram",
+          "title": "Sketching refraction",
+          "figure": "c3bt",
+          "bullets": [
+            "Each wavefront must be <strong>continuous</strong> at the boundary, with a kink there",
+            "Spacing is proportional to speed",
+            "Draw the ray at right angles to the wavefronts on each side",
+            "Check the bending against the change of speed"
+          ],
+          "notes": "Exam sketches are limited to incident, reflected and transmitted waves. Blank the screen (press B) and have students draw this from memory, then show the slide so they can swap and mark each other's work using the four bullets."
+        },
+        {
+          "type": "diagram",
+          "title": "Sketching diffraction",
+          "figure": "c3dt",
+          "bullets": [
+            "Keep the wavefront spacing <strong>the same</strong> before and after the gap",
+            "Gap about one wavelength: nearly semicircular wavefronts",
+            "Gap much wider: straight in the middle, slightly curved at the edges",
+            "Rays point radially out from the gap"
+          ],
+          "notes": "The commonest fault is drawing a different wavelength after the gap."
+        },
+        {
+          "type": "worked",
+          "title": "Drawing refraction to scale",
+          "question": "A student is drawing wavefronts for water waves crossing from deep water into shallow water, where the speed is 0.75 times its value in deep water. On the diagram, the wavefronts in the deep water are 12 mm apart and the rays make 40° with the normal to the boundary. Find (a) the spacing to draw in the shallow water and (b) the angle the rays should make with the normal there.",
+          "hint": "The frequency doesn't change, so how is the wavelength related to the speed? Use the speed form of Snell's law for the angle.",
+          "steps": [
+            {
+              "text": "(a) Spacing is proportional to speed.",
+              "latex": "0.75 \\times 12 = 9.0\\ \\text{mm}"
+            },
+            {
+              "text": "(b) Use the speed form of Snell's law.",
+              "latex": "\\sin\\theta_{2} = 0.75\\sin 40^{\\circ} = 0.482"
+            },
+            {
+              "text": "The angle to draw:",
+              "latex": "\\theta_{2} = 29^{\\circ}"
+            }
+          ],
+          "notes": "The wavefronts turn through the same angle as the rays do, so a wave that bends by 11° has wavefronts that kink by 11° at the boundary."
+        }
+      ]
+    },
+    {
+      "id": "coherent",
+      "short": "Coherent sources",
+      "guide": "Double-source interference requires coherent sources.",
+      "sections": [
+        "interference"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Define coherent sources and explain why interference needs them.",
+        "Describe how coherent sources are made for sound and for light."
+      ],
+      "checks": [
+        "C3-008"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Coherent sources",
+          "bullets": [
+            "Two sources are <strong>coherent</strong> when they have the same frequency and a <strong>constant phase difference</strong>",
+            "They don't need to be in phase, but the phase difference must not change",
+            "A steady interference pattern needs coherent sources",
+            "Incoherent sources still interfere, but the pattern shifts too fast to be seen"
+          ],
+          "notes": "Ask why two ordinary light bulbs in a room don't give bright and dark bands on the wall."
+        },
+        {
+          "type": "bullets",
+          "title": "Making coherent sources",
+          "bullets": [
+            "Sound: drive two loudspeakers from the <strong>same signal generator</strong>",
+            "Water: fix two dippers to the <strong>same vibrating bar</strong>",
+            "Light: split the light from <strong>one source</strong>, for example a laser shining on two slits",
+            "Separate lamps can't be used, because each atom emits independently and at random"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constructive",
+      "short": "Constructive interference",
+      "guide": "The condition for constructive interference as given by path difference $= n\\lambda$.",
+      "sections": [
+        "interference"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Define path difference and find it from a pair of distances.",
+        "Apply the condition path difference $= n\\lambda$ for sources in phase."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Path difference",
+          "bullets": [
+            "<strong>Path difference</strong>: how much further one wave has travelled than the other to reach a point",
+            "For sources in phase, it decides what happens at that point",
+            "A whole number of wavelengths: the waves arrive in step, crest on crest",
+            "The result is a point of large amplitude, a <strong>maximum</strong>"
+          ],
+          "notes": "Use a long spring or a chalk-marked wave on the board. Slide one wave along by one whole wavelength and see that it still lines up."
+        },
+        {
+          "type": "diagram",
+          "title": "Two sources of waves",
+          "svg": "figures/c3-two-sources.svg",
+          "alt": "Circular wavefronts spreading from two sources S1 and S2 two wavelengths apart, one set blue and the other orange. Dark lines mark where crests from both sources arrive together: a straight line with path difference zero, and curved lines on each side with a path difference of one wavelength.",
+          "bullets": [
+            "Blue and orange arcs: crests from each source",
+            "Dark lines: crests arrive together, so path difference $= n\\lambda$",
+            "Between the dark lines the waves cancel"
+          ],
+          "notes": "Drawn with the sources two wavelengths apart, so the lines for $n = 0$ and $n = \\pm 1$ are shown."
+        },
+        {
+          "type": "equation",
+          "title": "Constructive interference",
+          "latex": "\\text{path difference} = n\\lambda",
+          "bullets": [
+            "$n$ is a whole number: 0, 1, 2, …",
+            "Applies to sources that are in phase"
+          ],
+          "notes": "In the data booklet. Every point on the centre line between in-phase sources has a path difference of zero."
+        },
+        {
+          "type": "worked",
+          "title": "Two radio masts",
+          "question": "Two radio masts broadcast the same signal in phase, at a frequency of 1.2 MHz. A car is 3.50 km from one mast and 4.00 km from the other. Show that the car is at a position of constructive interference.",
+          "hint": "Find the wavelength first, then express the path difference as a number of wavelengths.",
+          "steps": [
+            {
+              "text": "Find the wavelength of the radio waves.",
+              "latex": "\\lambda = \\dfrac{3.00\\times 10^{8}}{1.2\\times 10^{6}} = 250\\ \\text{m}"
+            },
+            {
+              "text": "Find the path difference.",
+              "latex": "4000 - 3500 = 500\\ \\text{m}"
+            },
+            {
+              "text": "Divide by the wavelength.",
+              "latex": "\\dfrac{500}{250} = 2"
+            },
+            {
+              "text": "The path difference is exactly $2\\lambda$, so the signal is strong at the car."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "destructive",
+      "short": "Destructive interference",
+      "guide": "The condition for destructive interference as given by path difference $= \\left(n + \\tfrac{1}{2}\\right)\\lambda$.",
+      "sections": [
+        "interference"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Apply the condition path difference $= \\left(n + \\tfrac{1}{2}\\right)\\lambda$ for sources in phase.",
+        "Locate maxima and minima in a two-source pattern."
+      ],
+      "challenge": "CC-C3-02",
+      "checks": [
+        "C3-009"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Arriving half a cycle out of step",
+          "bullets": [
+            "A path difference of half a wavelength puts a crest of one wave on a trough of the other",
+            "The same happens for $1.5\\lambda$, $2.5\\lambda$ and so on",
+            "Equal amplitudes cancel completely; unequal ones leave a small amplitude",
+            "The result is a point of small amplitude, a <strong>minimum</strong>"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Destructive interference",
+          "latex": "\\text{path difference} = \\left(n + \\tfrac{1}{2}\\right)\\lambda",
+          "bullets": [
+            "$n$ is a whole number: 0, 1, 2, …",
+            "Applies to sources that are in phase"
+          ],
+          "notes": "In the data booklet."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for interference questions",
+          "bullets": [
+            "Find the path difference first, then <strong>divide by the wavelength</strong>",
+            "Whole number: maximum. Whole number + ½: minimum. Anything else: in between",
+            "Lines of maxima and minima alternate: out from the centre line, the path difference goes $0$, $0.5\\lambda$, $\\lambda$, $1.5\\lambda$, …",
+            "If the sources are half a cycle out of phase, the two conditions <strong>swap</strong>"
+          ],
+          "notes": "Ripple-tank photographs show the alternating lines clearly. The swap in the last bullet is exactly the idea in the concept challenge about reversed speaker wires."
+        },
+        {
+          "type": "worked",
+          "title": "A dead spot for wi-fi",
+          "question": "The two aerials of a wi-fi router are 20 cm apart and send the same signal in phase. A laptop is placed where the path difference between the two signals is 9.0 cm. Find what happens to the signal at the laptop for (a) a 5.0 GHz signal and (b) a 2.4 GHz signal.",
+          "hint": "Find each wavelength and divide the path difference by it. What does the result tell you?",
+          "steps": [
+            {
+              "text": "(a) Find the wavelength.",
+              "latex": "\\lambda = \\dfrac{3.00\\times 10^{8}}{5.0\\times 10^{9}} = 6.0\\ \\text{cm}"
+            },
+            {
+              "text": "Divide the path difference by it.",
+              "latex": "\\dfrac{9.0}{6.0} = 1.5"
+            },
+            {
+              "text": "This is $(n + \\tfrac{1}{2})\\lambda$ with $n = 1$: destructive, so the signal is weak."
+            },
+            {
+              "text": "(b) At 2.4 GHz, the wavelength is longer.",
+              "latex": "\\lambda = 12.5\\ \\text{cm}"
+            },
+            {
+              "text": "Divide again.",
+              "latex": "\\dfrac{9.0}{12.5} = 0.72"
+            },
+            {
+              "text": "Neither a whole number nor a half: partial interference, so the signal is moderate."
+            }
+          ],
+          "notes": "Moving the laptop by a few centimetres can change the signal. Real routers adjust the phases to steer the signal, to avoid dead spots."
+        }
+      ]
+    },
+    {
+      "id": "young",
+      "short": "Young's double slit",
+      "guide": "Young's double-slit interference as given by $s = \\dfrac{\\lambda D}{d}$ where $s$ is the separation of fringes, $d$ is the separation of the slits, and $D$ is the distance from the slits to the screen.",
+      "sections": [
+        "young"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Describe Young's double-slit experiment and the pattern it produces.",
+        "Derive and use $s = \\dfrac{\\lambda D}{d}$."
+      ],
+      "challenge": "CC-C3-03",
+      "checks": [
+        "C3-010",
+        "C3-011"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Young's double-slit experiment",
+          "bullets": [
+            "Thomas Young sent a single beam of light through two narrow, close slits (about 1801)",
+            "The slits act as two <strong>coherent</strong> sources, because the light in both comes from the same beam",
+            "Each slit diffracts the light, so the two beams overlap",
+            "On a distant screen: equally spaced bright and dark <strong>fringes</strong>",
+            "It was strong evidence that light behaves as a wave"
+          ],
+          "notes": "Show it with a laser and a slide of two slits. Laser safety: no direct eye exposure, no reflective jewellery, and keep the beam below eye level."
+        },
+        {
+          "type": "diagram",
+          "title": "The double-slit set-up",
+          "figure": "c3et",
+          "bullets": [
+            "$d$: slit separation",
+            "$D$: distance from slits to screen",
+            "$s$: fringe separation"
+          ],
+          "notes": "Not to scale: $D$ is thousands of times bigger than $d$."
+        },
+        {
+          "type": "equation",
+          "title": "Double-slit fringes",
+          "latex": "s = \\dfrac{\\lambda D}{d}",
+          "bullets": [
+            "Wider fringes: a longer wavelength, a more distant screen, or slits closer together"
+          ],
+          "notes": "In the data booklet."
+        },
+        {
+          "type": "diagram",
+          "title": "The path difference",
+          "svg": "figures/c3-young-triangle.svg",
+          "alt": "Two slits a distance d apart in a barrier. Parallel rays leave both slits at an angle theta to the straight-ahead direction. A dashed line perpendicular to the rays from the upper slit marks off the extra distance travelled by the lower ray, labelled d sin theta.",
+          "bullets": [
+            "To a distant screen, the two rays are nearly parallel",
+            "The lower ray travels further by $d\\sin\\theta$",
+            "Bright fringe: $d\\sin\\theta = n\\lambda$"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the fringe separation",
+          "start": "Light leaves slits a distance $d$ apart towards a point on a distant screen, at a height $y$ above the centre and at a small angle $\\theta$.",
+          "steps": [
+            {
+              "text": "The rays are nearly parallel, so the extra path is",
+              "latex": "\\text{path difference} = d\\sin\\theta"
+            },
+            {
+              "text": "At the $n$th bright fringe",
+              "latex": "d\\sin\\theta = n\\lambda"
+            },
+            {
+              "text": "For small angles",
+              "latex": "\\sin\\theta \\approx \\tan\\theta = \\dfrac{y}{D}"
+            },
+            {
+              "text": "So the $n$th fringe is at",
+              "latex": "y_{n} = \\dfrac{n\\lambda D}{d}"
+            },
+            {
+              "text": "Neighbouring fringes differ by one step in $n$",
+              "latex": "s = y_{n+1} - y_{n} = \\dfrac{\\lambda D}{d}"
+            }
+          ],
+          "notes": "Draw the slits and the small triangle on the board. The small-angle step is why the fringes are equally spaced near the centre."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for double-slit questions",
+          "bullets": [
+            "Convert all lengths to metres first",
+            "Don't confuse $d$ (tiny) with $D$ (metres)",
+            "Measure across <strong>several fringes</strong> and divide, to cut the percentage uncertainty",
+            "Count gaps, not bright bands"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A green laser pointer",
+          "question": "A green laser pointer of wavelength 532 nm shines on two slits with a separation of 0.25 mm. A wall is 2.4 m beyond the slits. Find (a) the separation of the fringes and (b) the distance between the central bright fringe and the third bright fringe on one side.",
+          "hint": "Write every length in metres before using $s = \\lambda D/d$.",
+          "steps": [
+            {
+              "text": "(a) Substitute, in metres.",
+              "latex": "s = \\dfrac{532\\times 10^{-9} \\times 2.4}{0.25\\times 10^{-3}}"
+            },
+            {
+              "text": "The fringe separation:",
+              "latex": "s = 5.1\\times 10^{-3}\\ \\text{m}"
+            },
+            {
+              "text": "(b) The third bright fringe is three spacings from the centre.",
+              "latex": "3s = 3 \\times 5.11\\ \\text{mm}"
+            },
+            {
+              "text": "The distance from the centre:",
+              "latex": "3s = 15\\ \\text{mm}"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Finding the slit separation",
+          "question": "A violet laser of wavelength 405 nm is used with a pair of slits of unknown separation. The screen is 1.6 m from the slits. A student measures 14.4 mm across 8 fringe spacings. Find the separation of the slits.",
+          "hint": "First find one fringe spacing, then rearrange the double-slit equation for $d$.",
+          "steps": [
+            {
+              "text": "Find one fringe spacing.",
+              "latex": "s = \\dfrac{14.4}{8} = 1.8\\ \\text{mm}"
+            },
+            {
+              "text": "Rearrange the equation for $d$.",
+              "latex": "d = \\dfrac{\\lambda D}{s}"
+            },
+            {
+              "text": "Substitute, in metres.",
+              "latex": "d = \\dfrac{405\\times 10^{-9} \\times 1.6}{1.8\\times 10^{-3}}"
+            },
+            {
+              "text": "The slit separation:",
+              "latex": "d = 3.6\\times 10^{-4}\\ \\text{m}"
+            }
+          ],
+          "notes": "That is 0.36 mm. Ask how the percentage uncertainty would compare if only one spacing had been measured."
+        }
+      ]
+    },
+    {
+      "id": "single",
+      "short": "Single-slit diffraction",
+      "hl": true,
+      "guide": "Single-slit diffraction as given by $\\theta = \\dfrac{\\lambda}{b}$ where $b$ is the slit width.",
+      "sections": [
+        "single"
+      ],
+      "minutes": 90,
+      "aims": [
+        "Derive $\\theta = \\dfrac{\\lambda}{b}$ for the first minimum of a single slit.",
+        "Calculate the angular and linear width of the central maximum."
+      ],
+      "checks": [
+        "C3-015"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Why a single slit gives bands",
+          "bullets": [
+            "Every point across the slit is a source of wavelets (Huygens)",
+            "Beyond the slit, these wavelets <strong>interfere with each other</strong>",
+            "Straight ahead they all arrive in step: a bright central maximum",
+            "At certain angles, they cancel in pairs: a minimum",
+            "We work with monochromatic light and rectangular slits at normal incidence"
+          ],
+          "notes": "The guide limits single-slit work to monochromatic light and rectangular slits. If students ask about white light: the centre stays white with coloured edges, since each colour has its own width."
+        },
+        {
+          "type": "equation",
+          "title": "First minimum of a single slit",
+          "latex": "\\theta = \\dfrac{\\lambda}{b}",
+          "bullets": [
+            "$\\theta$ is the angle from the centre to the <strong>first minimum</strong>, in <strong>radians</strong>",
+            "$b$ is the slit width"
+          ],
+          "notes": "In the data booklet. Further minima are at about $2\\lambda/b$, $3\\lambda/b$ and so on."
+        },
+        {
+          "type": "diagram",
+          "title": "Pairing up wavelets",
+          "svg": "figures/c3-single-slit-triangle.svg",
+          "alt": "A slit of width b divided into two halves of b over 2. Parallel rays leave the top edge, the centre and the bottom edge at an angle theta. A dashed line perpendicular to the rays from the top edge marks off the extra distance travelled by the ray from the centre, labelled b over 2 times sin theta, equal to lambda over 2.",
+          "bullets": [
+            "Pair a wavelet from the top half with one $\\dfrac{b}{2}$ below it",
+            "Their path difference is $\\dfrac{b}{2}\\sin\\theta$",
+            "If that is $\\dfrac{\\lambda}{2}$, every pair cancels"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the first minimum",
+          "start": "Divide the slit, of width $b$, into two halves. Pair each wavelet from the upper half with one from the lower half, a distance $b/2$ below it.",
+          "steps": [
+            {
+              "text": "The edge and the centre of the slit form the first pair. They cancel if",
+              "latex": "\\text{path difference} = \\dfrac{\\lambda}{2}"
+            },
+            {
+              "text": "The right-angled triangle with hypotenuse $b/2$ gives",
+              "latex": "\\dfrac{b}{2}\\sin\\theta = \\dfrac{\\lambda}{2}"
+            },
+            {
+              "text": "Every other pair has this same path difference and cancels too. Simplify:",
+              "latex": "\\sin\\theta = \\dfrac{\\lambda}{b}"
+            },
+            {
+              "text": "For a small angle in radians, $\\sin\\theta \\approx \\theta$",
+              "latex": "\\theta = \\dfrac{\\lambda}{b}"
+            }
+          ],
+          "notes": "Ask why the path difference has to be half a wavelength, and not a whole one: it is the destructive condition with $n = 0$, applied to each pair. Draw the triangle."
+        },
+        {
+          "type": "derivation",
+          "title": "Width of the central maximum",
+          "start": "The screen is a distance $D$ from the slit, and the first minimum is at a distance $y$ from the centre of the pattern.",
+          "steps": [
+            {
+              "text": "From the geometry",
+              "latex": "\\tan\\theta = \\dfrac{y}{D}"
+            },
+            {
+              "text": "For small angles",
+              "latex": "y \\approx D\\theta = \\dfrac{\\lambda D}{b}"
+            },
+            {
+              "text": "The central maximum stretches to the first minimum on each side",
+              "latex": "W = 2y = \\dfrac{2\\lambda D}{b}"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for single-slit questions",
+          "bullets": [
+            "The equation gives radians: don't use degrees",
+            "It gives the angle from the centre to the first minimum, which is half the angular width of the central maximum",
+            "Use the slit <strong>width</strong> $b$ here, not the separation $d$",
+            "Check that $\\theta$ is small: if $b$ is close to $\\lambda$, the approximation fails"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Green laser through a narrow slit",
+          "question": "Green light of wavelength 532 nm passes through a slit 0.070 mm wide and onto a screen 1.8 m away. Find (a) the angle to the first minimum and (b) the width of the central maximum on the screen.",
+          "hint": "Use lengths in metres. The first minimum lies on one side of the central maximum only.",
+          "steps": [
+            {
+              "text": "(a) Use the first-minimum equation.",
+              "latex": "\\theta = \\dfrac{532\\times 10^{-9}}{0.070\\times 10^{-3}}"
+            },
+            {
+              "text": "The angle, in radians:",
+              "latex": "\\theta = 7.6\\times 10^{-3}\\ \\text{rad}"
+            },
+            {
+              "text": "(b) The distance from centre to first minimum:",
+              "latex": "y = 1.8 \\times 7.6\\times 10^{-3}"
+            },
+            {
+              "text": "So the first minimum is at:",
+              "latex": "y = 0.0137\\ \\text{m}"
+            },
+            {
+              "text": "Double this for the full width.",
+              "latex": "W = 2y = 27\\ \\text{mm}"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Measuring a hair with a laser",
+          "question": "A thin hair placed in a laser beam gives the same diffraction pattern as a slit of the same width. Light of wavelength 650 nm gives a central maximum 36 mm wide on a wall 2.50 m from the hair. Find the width of the hair.",
+          "hint": "Start by finding the distance from the centre of the pattern to the first minimum, and use it to get an angle.",
+          "steps": [
+            {
+              "text": "Half of the central maximum:",
+              "latex": "y = 18\\ \\text{mm}"
+            },
+            {
+              "text": "The angle to the first minimum:",
+              "latex": "\\theta = \\dfrac{0.018}{2.50} = 7.2\\times 10^{-3}\\ \\text{rad}"
+            },
+            {
+              "text": "Rearrange $\\theta = \\lambda/b$.",
+              "latex": "b = \\dfrac{650\\times 10^{-9}}{7.2\\times 10^{-3}}"
+            },
+            {
+              "text": "The width of the hair:",
+              "latex": "b = 9.0\\times 10^{-5}\\ \\text{m}"
+            }
+          ],
+          "notes": "That is 90 µm, a sensible width for a human hair. Students can try this at home with a laser pointer, using sensible laser safety."
+        },
+        {
+          "type": "worked",
+          "title": "The footprint of a satellite beam",
+          "question": "A geostationary communications satellite, $3.6\\times 10^{7}$ m above the Earth's surface, has a rectangular antenna 2.0 m wide that sends out signals at 12 GHz. Treating the antenna as a slit of width 2.0 m, estimate the width of the central maximum of the beam at the Earth's surface.",
+          "hint": "Find the wavelength, then the angle to the first minimum. The beam spreads to that angle on both sides of the centre.",
+          "steps": [
+            {
+              "text": "Find the wavelength.",
+              "latex": "\\lambda = \\dfrac{3.00\\times 10^{8}}{1.2\\times 10^{10}} = 0.025\\ \\text{m}"
+            },
+            {
+              "text": "The angle to the first minimum:",
+              "latex": "\\theta = \\dfrac{0.025}{2.0} = 0.0125\\ \\text{rad}"
+            },
+            {
+              "text": "Distance from the centre to the edge:",
+              "latex": "y = 3.6\\times 10^{7} \\times 0.0125"
+            },
+            {
+              "text": "Double this for the full width.",
+              "latex": "W = 9.0\\times 10^{5}\\ \\text{m}"
+            }
+          ],
+          "notes": "About 900 km. Ask what a satellite operator would do to shrink the footprint: a bigger dish or a higher frequency."
+        }
+      ]
+    },
+    {
+      "id": "single-intensity",
+      "short": "Single-slit intensity",
+      "hl": true,
+      "guide": "Single-slit diffraction including intensity patterns.",
+      "sections": [
+        "single"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Sketch the intensity pattern of a single slit and describe its main features.",
+        "Describe qualitatively how the slit width and the wavelength affect the pattern."
+      ],
+      "checks": [
+        "C3-016"
+      ],
+      "slides": [
+        {
+          "type": "diagram",
+          "title": "The single-slit intensity pattern",
+          "figure": "c3ft",
+          "bullets": [
+            "The central maximum is the tallest and <strong>twice as wide</strong> as the side maxima",
+            "Minima fall at equal angular steps: $\\lambda/b$, $2\\lambda/b$, …",
+            "The side maxima are far dimmer"
+          ],
+          "notes": "Sketching this graph, with the axes labelled, is a likely exam task."
+        },
+        {
+          "type": "bullets",
+          "title": "Reading the pattern",
+          "bullets": [
+            "Intensity is greatest at the centre, where all the wavelets arrive in step",
+            "The brightest side maximum reaches only about 5% of the central intensity",
+            "The next one is below 2%",
+            "Each minimum has zero intensity",
+            "Each pattern is symmetrical about the centre"
+          ],
+          "notes": "Students don't need exact percentages. The values for the first three side maxima are about 4.7%, 1.7% and 0.8%."
+        },
+        {
+          "type": "bullets",
+          "title": "Changing the slit width or the wavelength",
+          "bullets": [
+            "A <strong>narrower</strong> slit widens the pattern, since $\\theta$ is proportional to $1/b$",
+            "A narrower slit also makes the pattern <strong>dimmer</strong>, because less light gets through",
+            "A <strong>longer wavelength</strong> widens the pattern",
+            "A slit about as wide as $\\lambda$ spreads the central maximum across nearly the whole screen",
+            "A very wide slit gives a tight central maximum, almost like the geometric shadow"
+          ],
+          "notes": "The guide asks for the effect of slit width on the intensity qualitatively only."
+        },
+        {
+          "type": "worked",
+          "title": "Two lasers and one slit",
+          "question": "Red light of wavelength 640 nm and blue light of wavelength 440 nm in turn pass through a slit 0.080 mm wide. A screen is 2.0 m from the slit. Find the width of the central maximum for (a) red light and (b) blue light. (c) Describe the change in the pattern if the slit is then made narrower, using red light.",
+          "hint": "The full width on the screen is twice the distance from the centre to the first minimum.",
+          "steps": [
+            {
+              "text": "(a) Use $W = 2\\lambda D/b$ for red.",
+              "latex": "W = \\dfrac{2 \\times 640\\times 10^{-9} \\times 2.0}{0.080\\times 10^{-3}}"
+            },
+            {
+              "text": "The width for red light:",
+              "latex": "W = 32\\ \\text{mm}"
+            },
+            {
+              "text": "(b) The width is proportional to the wavelength.",
+              "latex": "W = 32 \\times \\dfrac{440}{640} = 22\\ \\text{mm}"
+            },
+            {
+              "text": "(c) The maxima and minima spread further apart, and the whole pattern becomes dimmer."
+            }
+          ],
+          "notes": "Check: blue is a shorter wavelength and so gives a narrower pattern."
+        }
+      ]
+    },
+    {
+      "id": "modulation",
+      "short": "Modulated double-slit pattern",
+      "hl": true,
+      "guide": "The single-slit pattern modulates the double slit interference pattern.",
+      "sections": [
+        "modulation"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Explain how the single-slit pattern modulates the double-slit interference pattern.",
+        "Predict which fringes appear within the central envelope, and which are missing."
+      ],
+      "checks": [
+        "C3-020"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Each slit also diffracts",
+          "bullets": [
+            "Real slits have a width, so each one produces its own single-slit pattern",
+            "The double-slit fringes keep their equal spacing $s$",
+            "But their <strong>brightness</strong> follows the single-slit pattern",
+            "We say the single-slit pattern <strong>modulates</strong> the interference pattern",
+            "The single-slit curve is called the <strong>envelope</strong>"
+          ],
+          "notes": "Cover one slit in your mind: the fringes vanish, but the single-slit pattern stays. The SL formula works without any mention of this, which is a good moment for the ToK question about leaving parts out of a model."
+        },
+        {
+          "type": "diagram",
+          "title": "Fringes inside the single-slit envelope",
+          "figure": "c3gt",
+          "bullets": [
+            "The fringe positions are set by the slit <strong>separation</strong> $d$",
+            "The envelope is set by the slit <strong>width</strong> $b$",
+            "A fringe at an envelope minimum is <strong>missing</strong>"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Which fringe goes missing?",
+          "start": "A bright fringe is missing when it falls on the first minimum of the single-slit pattern. Compare the two conditions.",
+          "steps": [
+            {
+              "text": "$n$th bright fringe of the double slit",
+              "latex": "\\sin\\theta = \\dfrac{n\\lambda}{d}"
+            },
+            {
+              "text": "First minimum of the single slit",
+              "latex": "\\sin\\theta = \\dfrac{\\lambda}{b}"
+            },
+            {
+              "text": "Set these equal, and $\\lambda$ cancels",
+              "latex": "n = \\dfrac{d}{b}"
+            }
+          ],
+          "notes": "Missing orders depend only on the ratio of $d$ to $b$, not on the wavelength or the screen distance."
+        },
+        {
+          "type": "worked",
+          "title": "Counting fringes in the central envelope",
+          "question": "Light of wavelength 650 nm passes through two slits, each 0.060 mm wide, with their centres 0.24 mm apart. The screen is 2.0 m away. Find (a) the fringe separation, (b) the width of the single-slit central maximum, and (c) the number of bright fringes inside the central maximum.",
+          "hint": "The first single-slit minimum removes one fringe. Which order is it, and how many fringes lie inside it on each side?",
+          "steps": [
+            {
+              "text": "(a) Use the double-slit equation.",
+              "latex": "s = \\dfrac{650\\times 10^{-9} \\times 2.0}{0.24\\times 10^{-3}}"
+            },
+            {
+              "text": "The fringe separation:",
+              "latex": "s = 5.4\\ \\text{mm}"
+            },
+            {
+              "text": "(b) Use the width of the central maximum.",
+              "latex": "W = \\dfrac{2 \\times 650\\times 10^{-9} \\times 2.0}{0.060\\times 10^{-3}}"
+            },
+            {
+              "text": "The full width:",
+              "latex": "W = 43\\ \\text{mm}"
+            },
+            {
+              "text": "(c) The first missing order:",
+              "latex": "n = \\dfrac{0.24}{0.060} = 4"
+            },
+            {
+              "text": "Orders 0, ±1, ±2 and ±3 remain inside it.",
+              "latex": "1 + 2 \\times 3 = 7\\ \\text{fringes}"
+            }
+          ],
+          "notes": "Check: 43 ÷ 5.4 = 8 spacings across the envelope, and the two end fringes, at ±4, fall on the minima."
+        },
+        {
+          "type": "worked",
+          "title": "Narrowing the slits",
+          "question": "A double slit has a slit separation of 0.30 mm and a slit width of 0.10 mm. The slit width is halved, with the separation unchanged. State the effect on the fringe separation and find how many bright fringes lie within the central envelope before and after the change.",
+          "hint": "Which equation contains $b$, and which contains $d$? Find the first missing order in each case.",
+          "steps": [
+            {
+              "text": "The fringe separation depends on $d$ only.",
+              "latex": "s = \\dfrac{\\lambda D}{d}\\ \\text{is unchanged}"
+            },
+            {
+              "text": "Before: the first missing order is",
+              "latex": "n = \\dfrac{0.30}{0.10} = 3"
+            },
+            {
+              "text": "Orders 0, ±1 and ±2 fit inside the envelope.",
+              "latex": "1 + 2 \\times 2 = 5"
+            },
+            {
+              "text": "After: the first missing order is",
+              "latex": "n = \\dfrac{0.30}{0.050} = 6"
+            },
+            {
+              "text": "Orders up to ±5 fit inside the envelope.",
+              "latex": "1 + 2 \\times 5 = 11"
+            }
+          ],
+          "notes": "The fringes stay put, but the envelope doubles in width. The pattern is also dimmer, because less light gets through."
+        }
+      ]
+    },
+    {
+      "id": "multiple-slits",
+      "short": "Multiple slits",
+      "hl": true,
+      "guide": "Interference patterns from multiple slits.",
+      "sections": [
+        "grating"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Describe how the interference pattern changes as the number of equally spaced slits increases.",
+        "Identify primary and secondary maxima in a multiple-slit pattern."
+      ],
+      "checks": [
+        "C3-019"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Adding more slits",
+          "bullets": [
+            "Keeping the spacing $d$ the same, the <strong>primary maxima stay in the same places</strong>",
+            "They become <strong>narrower</strong> and <strong>much brighter</strong>",
+            "Between neighbouring primary maxima, $N$ slits give $N - 2$ small <strong>secondary maxima</strong>",
+            "The single-slit envelope still controls the heights of the primary maxima",
+            "The peak intensity grows as $N^2$, because amplitudes add and $I \\propto A^2$"
+          ],
+          "notes": "New for exams from 2028. The link $I \\propto A^2$ in the last bullet is from C.2. Two slits give a central peak 4 times as intense as one slit; three give 9 times. The $N^2$ rule itself isn't required by the guide."
+        },
+        {
+          "type": "diagram",
+          "title": "Two slits and six slits",
+          "figure": "c3ht",
+          "bullets": [
+            "The peaks are at the same positions",
+            "Six slits give far narrower maxima",
+            "The heights have been scaled for comparison"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Why the maxima get sharper",
+          "bullets": [
+            "At a primary maximum, the waves from <strong>all</strong> the slits are in step",
+            "A small shift in angle puts some slits out of step with others",
+            "With many slits, there is always a slit that cancels another, so the brightness falls quickly",
+            "Sharper peaks mean positions can be measured more precisely"
+          ],
+          "notes": "The guide also asks for white light and a range of monochromatic wavelengths to be discussed. That comes with diffraction gratings, where the sharp maxima make it clearest."
+        },
+        {
+          "type": "worked",
+          "title": "A six-slit pattern",
+          "question": "Blue light of wavelength 488 nm falls on six equally spaced slits, each 10 µm wide, with a spacing of 32 µm. The screen is 1.5 m away. Find (a) the separation of the primary maxima, (b) the width of the central single-slit envelope, (c) the number of primary maxima inside it and (d) the number of secondary maxima between neighbouring primary maxima.",
+          "hint": "Use $d$ for the positions of the maxima, and $b$ for the envelope. Compare the two distances to count.",
+          "steps": [
+            {
+              "text": "(a) The primary maxima are spaced as for two slits.",
+              "latex": "s = \\dfrac{488\\times 10^{-9} \\times 1.5}{32\\times 10^{-6}}"
+            },
+            {
+              "text": "The separation of the primary maxima:",
+              "latex": "s = 23\\ \\text{mm}"
+            },
+            {
+              "text": "(b) Use the width of the central maximum.",
+              "latex": "W = \\dfrac{2 \\times 488\\times 10^{-9} \\times 1.5}{10\\times 10^{-6}}"
+            },
+            {
+              "text": "The envelope width:",
+              "latex": "W = 0.15\\ \\text{m}"
+            },
+            {
+              "text": "(c) Half of the width, in units of $s$: $73.2 / 22.9 = 3.2$, so orders up to ±3.",
+              "latex": "1 + 2 \\times 3 = 7"
+            },
+            {
+              "text": "(d) With $N = 6$ slits:",
+              "latex": "N - 2 = 4"
+            }
+          ],
+          "notes": "Comparing $d/b = 3.2$ with part (c) gives a quick check. Fractional values mean that no maximum is exactly missing."
+        }
+      ]
+    },
+    {
+      "id": "grating",
+      "short": "Diffraction gratings",
+      "hl": true,
+      "guide": "Interference patterns from diffraction gratings as given by $n\\lambda = d\\sin\\theta$.",
+      "sections": [
+        "grating"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Derive and use $n\\lambda = d\\sin\\theta$ for a diffraction grating.",
+        "Find the line spacing of a grating and the highest order that can be seen."
+      ],
+      "checks": [
+        "C3-017",
+        "C3-018"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The diffraction grating",
+          "bullets": [
+            "A <strong>diffraction grating</strong> has a very large number of parallel, equally spaced lines",
+            "Typical gratings have hundreds of lines per millimetre",
+            "It gives extremely sharp, bright maxima at large angles",
+            "The maxima are labelled by their <strong>order</strong> $n$: 0 straight through, then 1, 2, … on both sides",
+            "Used in spectrometers to measure wavelengths"
+          ],
+          "notes": "A CD or DVD shows the same effect in reflection, because its tracks act as closely spaced lines."
+        },
+        {
+          "type": "equation",
+          "title": "The grating equation",
+          "latex": [
+            "n\\lambda = d\\sin\\theta",
+            "d = \\dfrac{1}{N}"
+          ],
+          "bullets": [
+            "$d$ is the spacing of the lines, in metres",
+            "$N$ is the number of lines per metre",
+            "$\\theta$ is measured from the straight-through direction"
+          ],
+          "notes": "The first equation is in the data booklet. Only normal incidence is required. Careful: $N$ here is lines per metre, whereas on the multiple-slit slides it was the number of slits."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the grating equation",
+          "start": "Light of wavelength $\\lambda$ falls normally on the grating. Consider the light leaving two neighbouring lines at an angle $\\theta$.",
+          "steps": [
+            {
+              "text": "The rays are parallel, so the extra path is",
+              "latex": "\\text{path difference} = d\\sin\\theta"
+            },
+            {
+              "text": "All the lines are in step if this is a whole number of wavelengths",
+              "latex": "d\\sin\\theta = n\\lambda"
+            },
+            {
+              "text": "To be seen, a maximum must be at less than 90°",
+              "latex": "\\sin\\theta = \\dfrac{n\\lambda}{d} \\lt 1"
+            },
+            {
+              "text": "So the highest order is the largest whole number with",
+              "latex": "n \\lt \\dfrac{d}{\\lambda}"
+            }
+          ],
+          "notes": "Compare with the double-slit derivation. There's no small-angle step here, because the screen distance isn't used and grating angles are large."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for grating questions",
+          "bullets": [
+            "Convert lines per mm to lines per metre, then take the reciprocal",
+            "Don't use the small-angle approximation: the angles are large",
+            "Calculators in degree mode here, unlike $\\theta = \\lambda/b$",
+            "If $\\sin\\theta$ comes out above 1, that order doesn't exist",
+            "Count the total number of maxima: the highest order on each side, plus the centre"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Light on a compact disc",
+          "question": "The tracks of a compact disc are $1.6\\times 10^{-6}$ m apart and act as a grating in reflection. Red light of wavelength 650 nm falls on the disc at right angles to its surface. Find the angles of the maxima, and state the highest order.",
+          "hint": "Try $n = 1, 2, 3$ in the grating equation. What happens when the value of $\\sin\\theta$ would be more than 1?",
+          "steps": [
+            {
+              "text": "First order:",
+              "latex": "\\sin\\theta = \\dfrac{650\\times 10^{-9}}{1.6\\times 10^{-6}} = 0.406"
+            },
+            {
+              "text": "The first-order angle:",
+              "latex": "\\theta = 24^{\\circ}"
+            },
+            {
+              "text": "Second order: double the value of the sine.",
+              "latex": "\\sin\\theta = 0.813"
+            },
+            {
+              "text": "The second-order angle:",
+              "latex": "\\theta = 54^{\\circ}"
+            },
+            {
+              "text": "Third order would need a sine of 1.22, which is impossible.",
+              "latex": "n_{\\text{max}} = 2"
+            }
+          ],
+          "notes": "Remind students that the two orders appear on each side of the central maximum."
+        },
+        {
+          "type": "worked",
+          "title": "Finding the line density of a grating",
+          "question": "The green line of a mercury lamp, of wavelength 546 nm, falls normally on a grating with an unknown number of lines. The first-order maximum is at 19.1° to the straight-through direction. Find the number of lines per millimetre.",
+          "hint": "Find $d$ from the grating equation with $n = 1$. The number of lines per metre is its reciprocal.",
+          "steps": [
+            {
+              "text": "Rearrange the grating equation with $n = 1$.",
+              "latex": "d = \\dfrac{546\\times 10^{-9}}{\\sin 19.1^{\\circ}}"
+            },
+            {
+              "text": "The line spacing:",
+              "latex": "d = 1.67\\times 10^{-6}\\ \\text{m}"
+            },
+            {
+              "text": "Take the reciprocal.",
+              "latex": "N = \\dfrac{1}{d} = 6.0\\times 10^{5}\\ \\text{m}^{-1}"
+            },
+            {
+              "text": "Lines per millimetre:",
+              "latex": "N = 600\\ \\text{mm}^{-1}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grating-spectra",
+      "short": "White light and spectra",
+      "hl": true,
+      "guide": "Multiple slit and diffraction grating patterns produced from white light and a range of monochromatic light wavelengths.",
+      "sections": [
+        "grating"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Describe the pattern a grating gives with white light and with several wavelengths.",
+        "Calculate the angular spread of a spectrum and the separation of two wavelengths."
+      ],
+      "checks": [
+        "C3-021"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "White light through a grating",
+          "bullets": [
+            "The central maximum ($n = 0$) is <strong>white</strong>, because all wavelengths are in step there",
+            "Each other order is a <strong>spectrum</strong>, with violet nearest the centre and red furthest out",
+            "Longer wavelengths are diffracted through larger angles",
+            "Higher orders are more spread out, and they can <strong>overlap</strong>",
+            "A few slits give the same order of colours, but their broad maxima overlap and blur"
+          ],
+          "notes": "Hold a cheap plastic grating up to a filament lamp. Note that this order of colours is the opposite of what a prism gives: there, violet bends most."
+        },
+        {
+          "type": "bullets",
+          "title": "A range of single wavelengths",
+          "bullets": [
+            "Each wavelength gives its own sharp set of maxima",
+            "A lamp containing a gas gives a separate bright line for each wavelength it emits",
+            "Each element has its own set of lines, like a fingerprint",
+            "Using more lines sharpens the peaks, so close wavelengths can be told apart"
+          ],
+          "notes": "Emission and absorption spectra are taught in E.1. A double slit would give blurred, overlapping bands instead of lines."
+        },
+        {
+          "type": "worked",
+          "title": "The first-order spectrum",
+          "question": "White light with wavelengths from 380 nm to 740 nm falls normally on a grating with 250 lines per millimetre. Find (a) the line spacing and (b) the angular width of the first-order spectrum.",
+          "hint": "Find the angles for the shortest and the longest wavelength with $n = 1$, then subtract.",
+          "steps": [
+            {
+              "text": "(a) Take the reciprocal of the lines per metre.",
+              "latex": "d = \\dfrac{1}{250\\times 10^{3}} = 4.0\\times 10^{-6}\\ \\text{m}"
+            },
+            {
+              "text": "(b) For violet:",
+              "latex": "\\sin\\theta = \\dfrac{380\\times 10^{-9}}{4.0\\times 10^{-6}}"
+            },
+            {
+              "text": "The violet angle:",
+              "latex": "\\theta = 5.45^{\\circ}"
+            },
+            {
+              "text": "For red:",
+              "latex": "\\sin\\theta = \\dfrac{740\\times 10^{-9}}{4.0\\times 10^{-6}}"
+            },
+            {
+              "text": "The red angle:",
+              "latex": "\\theta = 10.66^{\\circ}"
+            },
+            {
+              "text": "Subtract.",
+              "latex": "10.66^{\\circ} - 5.45^{\\circ} = 5.2^{\\circ}"
+            }
+          ],
+          "notes": "Ask whether the second and third orders overlap: $2 \\times 740 = 1480$ nm and $3 \\times 380 = 1140$ nm, so yes."
+        },
+        {
+          "type": "worked",
+          "title": "Telling two yellow lines apart",
+          "question": "A sodium lamp emits two yellow lines of wavelengths 589.0 nm and 589.6 nm. The light falls normally on a grating with 600 lines per millimetre. Find the angular separation of the two lines in the second order.",
+          "hint": "Find both angles using plenty of significant figures, because the difference is small.",
+          "steps": [
+            {
+              "text": "The line spacing (keep the full calculator value):",
+              "latex": "d = 1.667\\times 10^{-6}\\ \\text{m}"
+            },
+            {
+              "text": "For the first line:",
+              "latex": "\\sin\\theta_{1} = \\dfrac{2 \\times 589.0\\times 10^{-9}}{d}"
+            },
+            {
+              "text": "The first angle:",
+              "latex": "\\theta_{1} = 44.975^{\\circ}"
+            },
+            {
+              "text": "For the second line:",
+              "latex": "\\sin\\theta_{2} = \\dfrac{2 \\times 589.6\\times 10^{-9}}{d}"
+            },
+            {
+              "text": "The second angle:",
+              "latex": "\\theta_{2} = 45.033^{\\circ}"
+            },
+            {
+              "text": "Subtract.",
+              "latex": "\\Delta\\theta = 0.058^{\\circ}"
+            }
+          ],
+          "notes": "Carry the full calculator values: the two angles differ by less than 0.1°. With only two slits, the two lines would merge into one blurred band."
+        }
+      ]
+    }
+  ]
+}

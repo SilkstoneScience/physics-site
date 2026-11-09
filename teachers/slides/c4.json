@@ -1,0 +1,802 @@
+{
+  "topic": "C.4",
+  "hours": 4,
+  "points": [
+    {
+      "id": "formation",
+      "short": "Forming a standing wave",
+      "guide": "The nature and formation of standing waves in terms of superposition of two identical waves travelling in opposite directions.",
+      "sections": [
+        "formation"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Explain how two identical waves travelling in opposite directions superpose to form a standing wave."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Two waves, opposite directions",
+          "bullets": [
+            "A <strong>standing wave</strong> (or stationary wave) comes from superposing two waves that travel in opposite directions",
+            "The two waves must be <strong>identical</strong>: same frequency, wavelength and amplitude",
+            "To find the resultant, add the two displacements at each point, at each instant",
+            "The resultant grows, shrinks and flips over, but its shape doesn't travel left or right"
+          ],
+          "notes": "The guide limits this to two waves: combinations of more than two aren't needed. On the board, draw the two waves a quarter of a period apart and add them point by point."
+        },
+        {
+          "type": "diagram",
+          "title": "Adding the two waves",
+          "figure": "c4at"
+        },
+        {
+          "type": "bullets",
+          "title": "Where does the second wave come from?",
+          "bullets": [
+            "Usually it is a <strong>reflection</strong> of the first wave",
+            "A wave reaches the end of a string or pipe, reflects, and passes back through the waves still arriving",
+            "The reflected wave has the same frequency and wavelength as the incoming one",
+            "A steady pattern builds up only at frequencies that suit the length of the string or pipe"
+          ],
+          "notes": "Ask students why plucking a guitar string gives a steady note rather than a pulse that runs off the end. The answer leads to reflection at the two fixed ends."
+        },
+        {
+          "type": "worked",
+          "title": "A spring fixed to a wall",
+          "question": "One end of a long spring is fixed to a wall. A student shakes the other end from side to side at a steady, carefully chosen frequency, and a steady pattern of large and small vibrations appears. Explain how this pattern forms.",
+          "hint": "Where does a second wave come from? What happens where the two waves overlap?",
+          "steps": [
+            {
+              "text": "The student sends a travelling wave along the spring towards the wall."
+            },
+            {
+              "text": "At the wall it reflects, so an identical wave now travels back in the opposite direction."
+            },
+            {
+              "text": "The two waves superpose: at each point the displacements add."
+            },
+            {
+              "text": "In some places they always cancel, and in others they combine to give large vibrations. The pattern stays in place: a standing wave."
+            }
+          ],
+          "notes": "A long spring on the bench or floor makes a quick demonstration. Ask what happens to the pattern if the student shakes a little faster: it breaks up until the next suitable frequency."
+        }
+      ],
+      "checks": [
+        "C4-001"
+      ]
+    },
+    {
+      "id": "nodes",
+      "short": "Nodes, antinodes and phase",
+      "guide": "Nodes and antinodes, relative amplitude and phase difference of points along a standing wave.",
+      "sections": [
+        "nodes"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Identify nodes and antinodes, and relate the distances between them to the wavelength.",
+        "Compare the amplitude and phase of different points along a standing wave."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Nodes and antinodes",
+          "bullets": [
+            "<strong>Node</strong>: a point that stays at rest, because the two waves cancel there at every instant",
+            "<strong>Antinode</strong>: a point where the oscillation has its largest amplitude",
+            "Neighbouring nodes are half a wavelength apart: $\\tfrac{\\lambda}{2}$",
+            "Neighbouring antinodes are also $\\tfrac{\\lambda}{2}$ apart",
+            "From a node to the nearest antinode is $\\tfrac{\\lambda}{4}$, a quarter of a wavelength",
+            "The section of the wave between two neighbouring nodes is called a <strong>loop</strong>"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "A standing wave at several moments",
+          "figure": "c4bt",
+          "notes": "Sand on a vibrating drum skin collects along the nodes, where nothing throws it off: a good two-dimensional example to show or to look up."
+        },
+        {
+          "type": "bullets",
+          "title": "Amplitude, phase and energy",
+          "bullets": [
+            "<strong>Amplitude</strong> depends on position: zero at a node, up to the maximum at an antinode",
+            "<strong>Frequency</strong>: all the moving points oscillate at the same frequency",
+            "<strong>Phase</strong>: points in the same loop are in phase, rising and falling together",
+            "Neighbouring loops are in antiphase: their phase difference is $\\pi$ (180°)",
+            "<strong>Energy of oscillation</strong> is proportional to amplitude squared: greatest at antinodes, zero at nodes"
+          ],
+          "notes": "A common slip is to work out phase difference from the distance between two points, as for a travelling wave. On a standing wave, only the loops matter."
+        },
+        {
+          "type": "worked",
+          "title": "Melted spots in a microwave oven",
+          "question": "The turntable is removed from a microwave oven and a tray of grated cheese is heated briefly. Melted spots appear at the antinodes of a standing wave, and neighbouring spots are 6.1 cm apart. Find (a) the wavelength of the microwaves and (b) their frequency.",
+          "hint": "What fraction of a wavelength separates neighbouring antinodes? Microwaves travel at the speed of light.",
+          "steps": [
+            {
+              "text": "(a) Neighbouring antinodes are half a wavelength apart.",
+              "latex": "\\dfrac{\\lambda}{2} = 6.1\\ \\text{cm}"
+            },
+            {
+              "text": "Double it, and convert to metres.",
+              "latex": "\\lambda = 12.2\\ \\text{cm} = 0.122\\ \\text{m}"
+            },
+            {
+              "text": "(b) Use $c = f\\lambda$.",
+              "latex": "f = \\dfrac{3.00 \\times 10^{8}}{0.122}"
+            },
+            {
+              "text": "The frequency is",
+              "latex": "f = 2.5 \\times 10^{9}\\ \\text{Hz}"
+            }
+          ],
+          "notes": "Most ovens state 2.45 GHz on the back panel, so students can compare. The real pattern is three-dimensional, and the turntable is there to carry the food through the hot spots."
+        },
+        {
+          "type": "worked",
+          "title": "Points on an elastic cord",
+          "question": "An elastic cord is stretched between two fixed points 2.4 m apart and vibrates in a standing wave with four loops. Points P, Q and R are 0.30 m, 0.10 m and 0.90 m from the left-hand end. Find (a) the wavelength. State (b) the phase difference between P and Q, (c) the phase difference between P and R and (d) which of the three points has the smallest amplitude.",
+          "hint": "Find the length of one loop first, then mark where each loop starts and ends.",
+          "steps": [
+            {
+              "text": "(a) Four loops fill the length, and each loop is $\\tfrac{\\lambda}{2}$ long.",
+              "latex": "4 \\times \\dfrac{\\lambda}{2} = 2.4\\ \\text{m}"
+            },
+            {
+              "text": "So the wavelength is",
+              "latex": "\\lambda = 1.2\\ \\text{m}"
+            },
+            {
+              "text": "(b) Each loop is 0.60 m long, so P and Q are both in the first loop: in phase.",
+              "latex": "\\Delta\\phi = 0"
+            },
+            {
+              "text": "(c) R is in the second loop (0.60 m to 1.20 m): in antiphase with P.",
+              "latex": "\\Delta\\phi = \\pi\\ \\text{rad}"
+            },
+            {
+              "text": "(d) P and R are at the middle of their loops, so they are antinodes. Q has the smallest amplitude."
+            }
+          ],
+          "notes": "Follow up: when P is moving upwards, in which direction is R moving? (Downwards.) And Q? (Upwards, with P.)"
+        }
+      ],
+      "challenge": "CC-C4-01",
+      "checks": [
+        "C4-004"
+      ]
+    },
+    {
+      "id": "strings",
+      "short": "Standing waves on strings",
+      "guide": "Standing wave patterns in strings, with two fixed boundaries, one fixed and one free boundary, and two free boundaries.",
+      "sections": [
+        "strings",
+        "summary"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Sketch the standing wave patterns on a string for each set of boundary conditions.",
+        "Determine the wavelength and frequency of the $n$th harmonic from the length of the string and the wave speed."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Boundary conditions on a string",
+          "bullets": [
+            "<strong>Boundary conditions</strong> say what happens at the two ends, and only patterns that fit them can form",
+            "Three cases to know: two fixed ends, one fixed and one free end, two free ends",
+            "A <strong>fixed end</strong> can't move, so it must be a <strong>node</strong>",
+            "A <strong>free end</strong> (e.g. tied to a light ring sliding on a rod) is an <strong>antinode</strong>",
+            "Each pattern that fits is a <strong>harmonic</strong>",
+            "The pattern with the lowest frequency is the <strong>first harmonic</strong>"
+          ],
+          "notes": "The guide asks for \"first harmonic\", \"second harmonic\" and so on, and rules out \"fundamental\" and \"overtone\"."
+        },
+        {
+          "type": "diagram",
+          "title": "A string fixed at both ends",
+          "figure": "c4ct"
+        },
+        {
+          "type": "derivation",
+          "title": "Harmonics of a string fixed at both ends",
+          "start": "A string of length $L$ has a node at each end, and waves travel along it at speed $v$. A whole number of loops must fit, each one $\\tfrac{\\lambda}{2}$ long.",
+          "steps": [
+            {
+              "text": "First harmonic: one loop",
+              "latex": "L = \\dfrac{\\lambda_{1}}{2}"
+            },
+            {
+              "text": "The second harmonic has two loops, and the $n$th harmonic has $n$ loops",
+              "latex": "L = \\dfrac{n\\lambda_{n}}{2}"
+            },
+            {
+              "text": "Rearrange for the wavelength of the $n$th harmonic",
+              "latex": "\\lambda_{n} = \\dfrac{2L}{n}"
+            },
+            {
+              "text": "Use $v = f\\lambda$ for its frequency",
+              "latex": "f_{n} = \\dfrac{v}{\\lambda_{n}} = \\dfrac{nv}{2L}"
+            },
+            {
+              "text": "Compare with the first harmonic, where $n = 1$",
+              "latex": "f_{n} = nf_{1}"
+            }
+          ],
+          "notes": "A string with two free ends has an antinode at each end, and gives the same wavelengths and frequencies with the nodes and antinodes swapped. All values $n = 1, 2, 3, \\ldots$ are possible in both cases."
+        },
+        {
+          "type": "diagram",
+          "title": "One fixed end, one free end",
+          "figure": "c4dt",
+          "bullets": [
+            "Node at one end, antinode at the other: an odd number of quarter-wavelengths must fit",
+            "The relationship is $L = \\dfrac{n\\lambda_{n}}{4}$ with $n$ odd",
+            "So the wavelength is $\\lambda_{n} = \\dfrac{4L}{n}$",
+            "Only the 1st, 3rd, 5th… harmonics exist"
+          ],
+          "notes": "New for exams from 2028. The harmonic number comes from the relationship between $L$ and $\\lambda$, so the pattern after the first is the 3rd harmonic, with frequency $3f_{1}$."
+        },
+        {
+          "type": "bullets",
+          "title": "Using the harmonic relationships",
+          "bullets": [
+            "They aren't in the data booklet: sketch the pattern and count the loops",
+            "Start by marking each end as a node or an antinode",
+            "Two free ends: the same $\\lambda_{n}$ and $f_{n}$ as two fixed ends, with nodes and antinodes swapped",
+            "The harmonic number $n$ gives the frequency as a multiple of $f_{1}$",
+            "The wave speed depends on the tension and the mass per unit length, not on the harmonic",
+            "A tighter string or a shorter vibrating length gives higher frequencies"
+          ],
+          "notes": "Plucking harder changes the amplitude only: the frequency and the wave speed stay the same."
+        },
+        {
+          "type": "worked",
+          "title": "A harp string",
+          "question": "A harp string is 0.90 m long and fixed at both ends. Waves travel along it at 235 $\\text{m s}^{-1}$. Find (a) the wavelength and frequency of the first harmonic, (b) the frequency of the fourth harmonic and (c) the number of nodes in the fourth harmonic, including the two ends.",
+          "hint": "Sketch the first harmonic: how much of a wavelength fits between the two fixed ends?",
+          "steps": [
+            {
+              "text": "(a) One loop fills the string.",
+              "latex": "\\lambda_{1} = 2L = 1.80\\ \\text{m}"
+            },
+            {
+              "text": "Use $f = \\dfrac{v}{\\lambda}$.",
+              "latex": "f_{1} = \\dfrac{235}{1.80} = 131\\ \\text{Hz}"
+            },
+            {
+              "text": "(b) The $n$th harmonic has $n$ times the frequency.",
+              "latex": "f_{4} = 4 \\times 130.6 = 522\\ \\text{Hz}"
+            },
+            {
+              "text": "(c) Four loops have three nodes between them, plus one at each end: 5 nodes."
+            }
+          ],
+          "notes": "Keep the unrounded value of the first frequency for part (b). A sketch of the four loops makes part (c) obvious."
+        },
+        {
+          "type": "worked",
+          "title": "Finding the harmonics of a cord",
+          "question": "An elastic cord 1.6 m long is stretched between a clamp and a vibration generator. As the frequency is slowly raised, a standing wave appears at 36 Hz, and the next one appears at 54 Hz. Treat both ends as nodes. Find (a) the frequency of the first harmonic, (b) which harmonics these two are and (c) the speed of the waves on the cord.",
+          "hint": "With a node at each end, by how much do neighbouring harmonics differ in frequency?",
+          "steps": [
+            {
+              "text": "(a) Neighbouring harmonics differ by $f_{1}$.",
+              "latex": "f_{1} = 54 - 36 = 18\\ \\text{Hz}"
+            },
+            {
+              "text": "(b) Divide each frequency by $f_{1}$: 36 Hz is the 2nd harmonic and 54 Hz is the 3rd."
+            },
+            {
+              "text": "(c) Use the first harmonic.",
+              "latex": "\\lambda_{1} = 2L = 3.2\\ \\text{m}"
+            },
+            {
+              "text": "Then the wave speed is",
+              "latex": "v = f_{1}\\lambda_{1} = 18 \\times 3.2 = 58\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "Ask what the gap between neighbouring frequencies would be with one free end: $2f_{1}$, because only odd harmonics exist."
+        }
+      ],
+      "challenge": "CC-C4-02",
+      "checks": [
+        "C4-005"
+      ]
+    },
+    {
+      "id": "pipes",
+      "short": "Standing waves in pipes",
+      "guide": "Standing wave patterns in pipes. Determine the relationship between wavelength and the length for the $n$th harmonic, and recognize that the harmonic names are set by these relationships, hence the standing waves formed in a pipe with one open and one closed end start with the 1st, 3rd and 5th harmonics.",
+      "sections": [
+        "pipes",
+        "summary"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Sketch the displacement patterns in pipes with open and closed ends.",
+        "Determine the wavelength and frequency of the $n$th harmonic, and explain why a pipe with one closed end has only odd harmonics."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Standing sound waves in pipes",
+          "bullets": [
+            "Sound is <strong>longitudinal</strong>: the air molecules oscillate along the pipe",
+            "Describe the patterns with <strong>displacement</strong> nodes and antinodes",
+            "<strong>Closed end</strong>: the air can't move there, so it is a displacement node",
+            "<strong>Open end</strong>: the air moves in and out freely, so it is a displacement antinode",
+            "The curves in a pipe diagram show how far the air moves, not a shape in the pipe"
+          ],
+          "notes": "The guide says that pressure nodes and antinodes, and end corrections for open pipes, are not required. Pipes are described only as open or closed at each end."
+        },
+        {
+          "type": "diagram",
+          "title": "Patterns in three kinds of pipe",
+          "figure": "c4et"
+        },
+        {
+          "type": "derivation",
+          "title": "A pipe closed at one end",
+          "start": "A pipe of length $L$ has a node at the closed end and an antinode at the open end, so an odd number of quarter-wavelengths must fit. Sound travels at speed $v$.",
+          "steps": [
+            {
+              "text": "Lowest-frequency pattern: one quarter-wavelength",
+              "latex": "L = \\dfrac{\\lambda_{1}}{4}"
+            },
+            {
+              "text": "The next pattern has three quarter-wavelengths, so it is the 3rd harmonic",
+              "latex": "L = \\dfrac{3\\lambda_{3}}{4}"
+            },
+            {
+              "text": "In general, $n$ quarter-wavelengths, with $n$ odd",
+              "latex": "L = \\dfrac{n\\lambda_{n}}{4}"
+            },
+            {
+              "text": "Rearrange for the wavelength",
+              "latex": "\\lambda_{n} = \\dfrac{4L}{n}"
+            },
+            {
+              "text": "Use $v = f\\lambda$ for the frequency",
+              "latex": "f_{n} = \\dfrac{nv}{4L}"
+            }
+          ],
+          "notes": "New for exams from 2028. Students should be able to find this relationship from a sketch. The next pattern after the 3rd harmonic has five quarter-wavelengths: the 5th harmonic."
+        },
+        {
+          "type": "derivation",
+          "title": "A pipe open at both ends",
+          "start": "A pipe of length $L$ has an antinode at each end. Neighbouring antinodes are $\\tfrac{\\lambda}{2}$ apart, so a whole number of half-wavelengths must fit.",
+          "steps": [
+            {
+              "text": "First harmonic: one half-wavelength",
+              "latex": "L = \\dfrac{\\lambda_{1}}{2}"
+            },
+            {
+              "text": "Second harmonic: one whole wavelength",
+              "latex": "L = \\lambda_{2}"
+            },
+            {
+              "text": "In general, $n$ half-wavelengths, with $n = 1, 2, 3, \\ldots$",
+              "latex": "L = \\dfrac{n\\lambda_{n}}{2}"
+            },
+            {
+              "text": "Rearrange, then use $v = f\\lambda$",
+              "latex": "f_{n} = \\dfrac{nv}{2L}"
+            }
+          ],
+          "notes": "A pipe closed at both ends has a node at each end, and gives the same relationships with the nodes and antinodes swapped."
+        },
+        {
+          "type": "bullets",
+          "title": "Naming the harmonics",
+          "bullets": [
+            "For each pattern, find how $\\lambda$ is related to $L$: this sets the harmonic's name",
+            "Both ends alike: $L = \\dfrac{n\\lambda_{n}}{2}$, with $n = 1, 2, 3, \\ldots$",
+            "One open and one closed end: $L = \\dfrac{n\\lambda_{n}}{4}$, with only odd $n$",
+            "So that pipe has the <strong>1st, 3rd and 5th</strong> harmonics, and no 2nd or 4th",
+            "Its frequencies are $f_{1}$, $3f_{1}$, $5f_{1}$, and so on"
+          ],
+          "notes": "New for exams from 2028. In any system, the $n$th harmonic has frequency $nf_{1}$, so the name always tells you the frequency multiple."
+        },
+        {
+          "type": "equation",
+          "title": "Harmonics: the relationships",
+          "latex": [
+            "\\lambda_{n} = \\dfrac{2L}{n}",
+            "\\lambda_{n} = \\dfrac{4L}{n}",
+            "f_{n} = \\dfrac{nv}{2L}",
+            "f_{n} = \\dfrac{nv}{4L}"
+          ],
+          "bullets": [
+            "Left: same type of boundary at both ends, all whole numbers $n$",
+            "Right: different types of boundary, $n$ odd only",
+            "None of these is in the data booklet: work them out from a sketch"
+          ],
+          "notes": "New for exams from 2028. The change is the naming on the right, where $n$ is odd. The same results apply to strings and to pipes, because only the type of boundary at each end matters."
+        },
+        {
+          "type": "diagram",
+          "title": "Two resonances in one tube",
+          "figure": "c4ft"
+        },
+        {
+          "type": "derivation",
+          "title": "Wavelength from two resonance lengths",
+          "start": "A tuning fork is held above a tube containing water. The water is lowered, so the air column gets longer. The sound is loudest at lengths where a standing wave fits, with a node at the water and an antinode at the top.",
+          "steps": [
+            {
+              "text": "First resonance, at length $L_{1}$",
+              "latex": "L_{1} = \\dfrac{\\lambda}{4}"
+            },
+            {
+              "text": "Next resonance, at length $L_{2}$",
+              "latex": "L_{2} = \\dfrac{3\\lambda}{4}"
+            },
+            {
+              "text": "Subtract the first from the second",
+              "latex": "L_{2} - L_{1} = \\dfrac{\\lambda}{2}"
+            },
+            {
+              "text": "So the wavelength is",
+              "latex": "\\lambda = 2(L_{2} - L_{1})"
+            }
+          ],
+          "notes": "The fork fixes the frequency, so the wavelength stays the same as the column gets longer. The antinode really sits just above the top of the tube. Subtracting removes that small difference, which students are not required to calculate."
+        },
+        {
+          "type": "bullets",
+          "title": "Solving problems on pipes",
+          "bullets": [
+            "Mark each end first, then count quarter-wavelengths along the pipe",
+            "The speed of sound depends on the air (mainly its temperature), not on the pipe",
+            "In a resonance tube, the source sets the frequency, so the pitch doesn't change as the column gets longer",
+            "Closing one end of an open pipe halves the frequency of the first harmonic",
+            "The pattern after the first harmonic in a pipe with one closed end is the 3rd harmonic"
+          ],
+          "notes": "New for exams from 2028. Only the last bullet is the change; the others apply to every exam session."
+        },
+        {
+          "type": "worked",
+          "title": "A didgeridoo",
+          "question": "A didgeridoo is 1.30 m long. Treat it as a uniform pipe, closed at the player's lips and open at the far end. The speed of sound is 343 $\\text{m s}^{-1}$. Find (a) the frequency of the first harmonic, (b) the frequencies of the next two standing waves, naming each harmonic, and (c) the wavelength of the lower of these two.",
+          "hint": "Sketch the pattern with a node at the lips and an antinode at the far end. Which harmonics can exist in this pipe?",
+          "steps": [
+            {
+              "text": "(a) One quarter-wavelength fits in the pipe.",
+              "latex": "\\lambda_{1} = 4L = 5.20\\ \\text{m}"
+            },
+            {
+              "text": "Use $f = \\dfrac{v}{\\lambda}$.",
+              "latex": "f_{1} = \\dfrac{343}{5.20} = 66\\ \\text{Hz}"
+            },
+            {
+              "text": "(b) Only odd harmonics exist: the next is the 3rd harmonic.",
+              "latex": "f_{3} = 3 f_{1} = 198\\ \\text{Hz}"
+            },
+            {
+              "text": "After it comes the 5th harmonic.",
+              "latex": "f_{5} = 5 f_{1} = 330\\ \\text{Hz}"
+            },
+            {
+              "text": "(c) Three quarter-wavelengths fit in the pipe.",
+              "latex": "\\lambda_{3} = \\dfrac{4L}{3} = 1.73\\ \\text{m}"
+            }
+          ],
+          "notes": "New for exams from 2028. Students must name these the 3rd and 5th harmonics. A check on (c): $198 \\times 1.73 \\approx 343$ $\\text{m s}^{-1}$."
+        },
+        {
+          "type": "worked",
+          "title": "A flute on a hot stage",
+          "question": "The air column in a concert flute is 0.66 m long and behaves as a pipe open at both ends. The speed of sound is 343 $\\text{m s}^{-1}$. Find (a) the frequency of the first harmonic and (b) the wavelength and frequency of the second harmonic. (c) On a hot stage, the speed of sound rises to 350 $\\text{m s}^{-1}$. Find the new frequency of the first harmonic.",
+          "hint": "Sketch the pattern with an antinode at each end. For part (c), does the wavelength of the first harmonic change?",
+          "steps": [
+            {
+              "text": "(a) Half a wavelength fits in the pipe.",
+              "latex": "\\lambda_{1} = 2L = 1.32\\ \\text{m}"
+            },
+            {
+              "text": "Then the frequency is",
+              "latex": "f_{1} = \\dfrac{343}{1.32} = 260\\ \\text{Hz}"
+            },
+            {
+              "text": "(b) One whole wavelength fits in the pipe.",
+              "latex": "\\lambda_{2} = L = 0.66\\ \\text{m}"
+            },
+            {
+              "text": "The frequency is twice the first harmonic.",
+              "latex": "f_{2} = 2 f_{1} = 520\\ \\text{Hz}"
+            },
+            {
+              "text": "(c) The length sets the wavelength, which stays 1.32 m.",
+              "latex": "f_{1} = \\dfrac{350}{1.32} = 265\\ \\text{Hz}"
+            }
+          ],
+          "notes": "This is why wind players warm up their instruments and tune after a change of temperature."
+        },
+        {
+          "type": "worked",
+          "title": "A piston and a phone speaker",
+          "question": "A student slides a piston along a plastic tube that is open at one end, while a phone speaker held at the opening plays a steady note of 860 Hz. The sound is loudest when the air column is 9.4 cm long, and next loudest when it is 29.3 cm long. Find (a) the wavelength of the sound, (b) the speed of sound and (c) the next length at which the sound is loudest.",
+          "hint": "What fraction of a wavelength is added to the column between one resonance and the next?",
+          "steps": [
+            {
+              "text": "(a) Successive resonances differ by half a wavelength.",
+              "latex": "\\dfrac{\\lambda}{2} = 29.3 - 9.4 = 19.9\\ \\text{cm}"
+            },
+            {
+              "text": "Double it, and convert to metres.",
+              "latex": "\\lambda = 0.398\\ \\text{m}"
+            },
+            {
+              "text": "(b) Use $v = f\\lambda$.",
+              "latex": "v = 860 \\times 0.398 = 342\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(c) Add another half-wavelength.",
+              "latex": "L = 29.3 + 19.9 = 49.2\\ \\text{cm}"
+            }
+          ],
+          "notes": "Ask why 9.4 cm isn't quite $\\tfrac{\\lambda}{4}$. (The antinode sits slightly beyond the open end.) Using the difference between two lengths avoids this problem."
+        }
+      ],
+      "checks": [
+        "C4-021"
+      ]
+    },
+    {
+      "id": "compare",
+      "short": "Standing or travelling?",
+      "guide": "Guiding question: What distinguishes standing waves from travelling waves?",
+      "sections": [
+        "formation",
+        "nodes"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Compare standing waves and travelling waves in terms of energy transfer, amplitude, phase and wave shape."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Standing or travelling?",
+          "bullets": [
+            "<strong>Energy</strong>: a travelling wave transfers it; in a standing wave, two equal and opposite flows give no net transfer",
+            "<strong>Amplitude</strong>: the same at every point of a travelling wave (if no energy is lost); varies with position on a standing wave",
+            "<strong>Phase</strong>: changes steadily along a travelling wave; on a standing wave, the same within a loop and opposite in the next",
+            "<strong>Shape</strong>: a travelling wave's shape moves at speed $v$; a standing wave's nodes and antinodes stay in place"
+          ],
+          "notes": "Exam answers should compare the same property for both kinds of wave. \"A standing wave has nodes\" on its own doesn't make a comparison."
+        },
+        {
+          "type": "worked",
+          "title": "Two points, two kinds of wave",
+          "question": "Points X and Y are 0.20 m apart on a stretched cord, and waves on the cord have a wavelength of 0.80 m. Find the phase difference between X and Y (a) when a travelling wave passes along the cord and (b) when the cord carries a standing wave, with X 0.05 m and Y 0.25 m from the same node, on the same side of it. (c) Compare the amplitudes of X and Y in each case.",
+          "hint": "For the standing wave, work out where the next node is. Are X and Y in the same loop?",
+          "steps": [
+            {
+              "text": "(a) The points are a quarter of a wavelength apart.",
+              "latex": "\\Delta\\phi = \\dfrac{0.20}{0.80} \\times 2\\pi = \\dfrac{\\pi}{2}\\ \\text{rad}"
+            },
+            {
+              "text": "(b) Neighbouring nodes are 0.40 m apart, so X and Y are in the same loop: in phase.",
+              "latex": "\\Delta\\phi = 0"
+            },
+            {
+              "text": "(c) Travelling wave: X and Y have the same amplitude."
+            },
+            {
+              "text": "Standing wave: the antinode is 0.20 m from the node. Y is closer to it than X, so Y has the larger amplitude."
+            }
+          ],
+          "notes": "The answers are in radians. Y is 0.05 m from the antinode and X is 0.15 m from it."
+        }
+      ],
+      "checks": [
+        "C4-015"
+      ],
+      "extra": true
+    },
+    {
+      "id": "damping",
+      "short": "Light, critical, heavy damping",
+      "guide": "The effects of light, critical and heavy damping on the system.",
+      "sections": [
+        "damping"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Describe how a system moves under light, critical and heavy damping, and give an example of each."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Damping",
+          "bullets": [
+            "<strong>Damping</strong> removes energy from an oscillating system, so its amplitude falls",
+            "Resistive forces cause it: friction, air resistance, drag in a liquid",
+            "<strong>Light</strong>: it keeps oscillating, with a slowly falling amplitude and almost the same period",
+            "<strong>Critical</strong>: it returns to equilibrium in the shortest possible time without passing through it (no overshoot)",
+            "<strong>Heavy</strong>: it also returns without oscillating, but takes longer than with critical damping"
+          ],
+          "notes": "Examples: a guitar string fading (light), car shock absorbers and door closers (close to critical), a pendulum in thick oil (heavy). Students often think that heavy damping gives the fastest return."
+        },
+        {
+          "type": "diagram",
+          "title": "Three levels of damping",
+          "figure": "c4gt"
+        },
+        {
+          "type": "worked",
+          "title": "The pointer of a kitchen scale",
+          "question": "The pointer of an analogue kitchen scale is attached to a spring. Explain what a user would see with light, critical and heavy damping when a bag of flour is placed on the scale, and why a designer would choose critical damping.",
+          "hint": "For each level of damping, think about whether the pointer overshoots, and how soon it settles.",
+          "steps": [
+            {
+              "text": "Light damping: the pointer swings to and fro about the reading, with a slowly shrinking amplitude, so the user must wait."
+            },
+            {
+              "text": "Heavy damping: the pointer creeps towards the reading without overshooting, but takes a long time."
+            },
+            {
+              "text": "Critical damping: the pointer reaches the reading in the shortest time, without overshooting."
+            },
+            {
+              "text": "So critical damping gives a steady, correct reading soonest."
+            }
+          ]
+        }
+      ],
+      "checks": [
+        "C4-010"
+      ]
+    },
+    {
+      "id": "resonance",
+      "short": "Resonance",
+      "guide": "The nature of resonance including natural frequency and amplitude of oscillation based on driving frequency. Knowledge of the useful and destructive effects of resonance is required.",
+      "sections": [
+        "resonance",
+        "uses"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Explain resonance in terms of natural frequency, driving frequency and energy transfer.",
+        "Describe useful and destructive effects of resonance."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Natural frequency and forced oscillations",
+          "bullets": [
+            "<strong>Natural frequency</strong> $f_{0}$: the frequency of a system disturbed once and left to oscillate freely",
+            "<strong>Forced oscillation</strong>: a periodic driving force makes a system oscillate at the <strong>driving frequency</strong> $f$",
+            "Pushes timed to match a swing's natural frequency add energy on every cycle",
+            "Pushes at another rate work against the motion for part of the time, so the amplitude stays small"
+          ],
+          "notes": "Ask students what happens if they push a swing three-quarters of the way through each cycle. Then ask how they would push to get the largest swing."
+        },
+        {
+          "type": "bullets",
+          "title": "Resonance",
+          "bullets": [
+            "<strong>Resonance</strong>: driving a system at a frequency equal, or very close, to its natural frequency",
+            "Energy is transferred to the system most effectively, and the amplitude is greatest",
+            "Once the energy lost in a cycle matches the energy supplied in a cycle, the amplitude stops growing",
+            "Far below $f_{0}$, the system just follows the pushes; far above $f_{0}$, the amplitude falls towards zero",
+            "A string or pipe has many natural frequencies, one for each harmonic"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Joints in a concrete road",
+          "question": "A car bounces on its springs with a natural frequency of 1.25 Hz. It drives along a concrete road with expansion joints every 24 m, and each joint gives the car one upward push. Find (a) the speed at which the bouncing is greatest and (b) the frequency of the pushes at a speed of 20 $\\text{m s}^{-1}$, and explain why the bouncing is much smaller at that speed.",
+          "hint": "How many joints per second would match the natural frequency?",
+          "steps": [
+            {
+              "text": "(a) At resonance, the joints are crossed at the natural frequency.",
+              "latex": "v = fd = 1.25 \\times 24"
+            },
+            {
+              "text": "So the speed is",
+              "latex": "v = 30\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(b) Driving frequency at the lower speed.",
+              "latex": "f = \\dfrac{20}{24} = 0.83\\ \\text{Hz}"
+            },
+            {
+              "text": "The natural period is 0.80 s, and the joints are 1.2 s apart: one and a half periods."
+            },
+            {
+              "text": "So alternate pushes act against the motion, and little energy builds up."
+            }
+          ],
+          "notes": "30 m/s is about 108 km/h, a realistic motorway speed. Well-damped shock absorbers keep the bouncing small even at resonance."
+        },
+        {
+          "type": "bullets",
+          "title": "Useful resonance",
+          "bullets": [
+            "<strong>Musical instruments</strong>: strings, air columns, drum skins and hollow bodies",
+            "<strong>Radio tuning</strong>: the circuit's natural frequency is matched to one station",
+            "<strong>Quartz clocks</strong>: a crystal vibrating at a very steady natural frequency keeps time",
+            "<strong>MRI scanners</strong>: nuclei in the body resonate with radio waves",
+            "<strong>Greenhouse effect</strong> (B.2): gas molecules absorb infrared at their natural vibration frequencies"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Destructive resonance",
+          "bullets": [
+            "<strong>Bridges</strong>: footsteps or wind near a natural frequency (London's Millennium Bridge needed dampers)",
+            "<strong>Buildings</strong>: ground shaking near a natural frequency does the most damage in earthquakes",
+            "<strong>Machines</strong>: engines and rotors can shake parts violently at certain speeds",
+            "<strong>Glass</strong>: a loud note at its natural frequency can shatter it",
+            "Reduce the effects by adding damping, or by designing the natural frequency away from likely driving frequencies"
+          ],
+          "notes": "The Tacoma Narrows collapse is often called resonance, but engineers explain it as flutter: the twisting of the deck changed how the wind pushed on it."
+        }
+      ],
+      "checks": [
+        "C4-012"
+      ]
+    },
+    {
+      "id": "damping-resonance",
+      "short": "Damping and resonance",
+      "guide": "The effect of damping on the maximum amplitude and resonant frequency of oscillation.",
+      "sections": [
+        "damping"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Describe how increasing the damping changes the maximum amplitude, the width of the peak and the resonant frequency on a resonance curve."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Resonance curves",
+          "bullets": [
+            "A <strong>resonance curve</strong> shows amplitude against driving frequency",
+            "More damping gives a <strong>lower maximum amplitude</strong>, because more energy is lost each cycle",
+            "The peak becomes <strong>broader</strong>: the response is spread over a wider range of frequencies",
+            "The resonant (peak) frequency moves <strong>slightly below</strong> $f_{0}$; light damping barely shifts it",
+            "The natural frequency $f_{0}$ doesn't change: it depends only on the system"
+          ],
+          "notes": "Only a qualitative treatment is required. Students should be able to sketch the curves for different damping on the same axes."
+        },
+        {
+          "type": "diagram",
+          "title": "Damping and the resonance peak",
+          "figure": "c4ht"
+        },
+        {
+          "type": "worked",
+          "title": "Damping a tall chimney",
+          "question": "A tall steel chimney has a natural frequency of 0.80 Hz, and the wind pushes it from side to side with a periodic force. Engineers fit dampers to it. State the effect of the dampers on (a) the natural frequency, (b) the maximum amplitude of the sway and (c) the driving frequency at which the sway is greatest. Give a reason for (a) and (b).",
+          "hint": "Separate what belongs to the structure itself from how it responds to a driving force.",
+          "steps": [
+            {
+              "text": "(a) No change to the natural frequency: it depends on the structure itself, and is still 0.80 Hz."
+            },
+            {
+              "text": "(b) The maximum amplitude is smaller, because more energy is removed in each cycle."
+            },
+            {
+              "text": "(c) The sway is now greatest at a driving frequency slightly below 0.80 Hz."
+            }
+          ],
+          "notes": "The peak also becomes broader, so the chimney responds moderately over a wider range of frequencies, but never as strongly."
+        }
+      ],
+      "checks": [
+        "C4-011"
+      ]
+    }
+  ]
+}
