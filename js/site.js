@@ -55,6 +55,8 @@ window.topicFile = (id) => id.replace('.', '').toLowerCase() + '.html';
 // Used by the "Σ Equations" panel and the Resources page. Leave empty until there is a link.
 // Never put the PDF itself in this website folder: it is copyrighted and this folder is public.
 window.DATA_BOOKLET_URL = 'https://drive.google.com/open?id=1vtP7efHOuywaeqp1YeYcqorHjxl5r49-&usp=drive_fs';
+// The annotated 2028 data booklet (first exams 2028), shared with school accounts. Used in the same places as DATA_BOOKLET_URL.
+window.DATA_BOOKLET_2028_URL = 'https://drive.google.com/file/d/1qBKKdonH8niolrCUezJUjftQBiIURMZ3/view';
 
 // Clean exam copies of the IB data booklet on Google Drive (school accounts only): 2025 for exams 2025–2027, 2028 for exams from 2028.
 // Used by the main menu (Exams) and the two cards on the Resources page (data-exam-booklet="2025" / "2028").
@@ -522,7 +524,8 @@ window.glueUnits = (function () {
     ] },
     { key: 'resources', label: 'Resources', href: 'resources.html', sections: ['resources', 'news'], items: [
       ['Lesson slides', 'resources.html'],
-      ['Annotated data booklet', DATA_BOOKLET_URL, true],
+      ['Annotated data booklet 2025', DATA_BOOKLET_URL, true],
+      ['Annotated data booklet 2028', DATA_BOOKLET_2028_URL, true],
       ['Videos', 'resources/youtube.html'],
       ['Software and tools', 'resources/apps.html'],
       ['Simulations', 'resources/simulations.html'],
@@ -743,6 +746,8 @@ window.glueUnits = (function () {
       bookletCard.removeAttribute('target');
     }
   }
+  const booklet2028Card = document.querySelector('#data-booklet-2028 a');
+  if (booklet2028Card) booklet2028Card.href = DATA_BOOKLET_2028_URL;
   document.querySelectorAll('a[data-exam-booklet]').forEach((a) => { a.href = EXAM_BOOKLETS[a.dataset.examBooklet]; });
 
   // ----- Resources page: "Show slides" loads a Google Drive viewer only when pressed -----
@@ -1107,7 +1112,7 @@ window.glueUnits = (function () {
       </label>
       <div class="eq-body" aria-live="polite"></div>
       <p class="eq-foot">${DATA_BOOKLET_URL
-        ? `<a href="${DATA_BOOKLET_URL}" target="_blank" rel="noopener">Open the annotated data booklet ↗</a>`
+        ? `Open the annotated data booklet: <a href="${DATA_BOOKLET_URL}" target="_blank" rel="noopener">2025 ↗</a> · <a href="${DATA_BOOKLET_2028_URL}" target="_blank" rel="noopener">2028 ↗</a>`
         : '<span class="eq-note">A link to the full data booklet is coming soon.</span>'}</p>`;
     document.body.append(fab, panel);
     body.classList.add('has-eq');
