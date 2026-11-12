@@ -78,6 +78,11 @@ export function checkSlides({ err, warn, TOPICS }) {
           if (!s.alt) err(file, `${where}: a figure file needs "alt" text`);
           if (!exists(`teachers/slides/${s.svg}`)) err(file, `${where}: teachers/slides/${s.svg} is missing`);
           else if (/\sid="|<defs/.test(read(`teachers/slides/${s.svg}`))) err(file, `${where}: ${s.svg} must not contain ids or <defs>`);
+        } else if (s.type === 'diagram' && s.img) {
+          // an openly licensed picture: needs alt text and a credit (also listed on about.html)
+          if (!s.alt) err(file, `${where}: a picture needs "alt" text`);
+          if (!s.credit) err(file, `${where}: a picture needs a "credit" (author, source, licence)`);
+          if (!exists(`teachers/slides/${s.img}`)) err(file, `${where}: teachers/slides/${s.img} is missing`);
         } else if (s.type === 'diagram' && !figures.has(s.figure)) err(file, `${where}: no figure with <title id="${s.figure}"> on themes/${slug}.html`);
         if (s.type === 'bullets' && s.bullets.flat().length > 8) warn(file, `${where}: ${s.bullets.flat().length} bullets may not fit on one slide`);
         if (s.type === 'worked' || s.type === 'derivation') {

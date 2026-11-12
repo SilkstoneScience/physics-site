@@ -1,0 +1,952 @@
+{
+  "topic": "D.4",
+  "hours": 0,
+  "hlHours": 6,
+  "points": [
+    {
+      "id": "motional",
+      "short": "Emf in a moving conductor",
+      "hl": true,
+      "guide": "A uniform magnetic field induces an emf in a straight conductor moving perpendicularly to it as given by $\\varepsilon = BvL$. (Guidance: relative motion between a conductor and a magnetic field.)",
+      "sections": [
+        "rod"
+      ],
+      "minutes": 55,
+      "aims": [
+        "Explain why an emf is induced in a straight conductor moving through a magnetic field.",
+        "Derive and use $\\varepsilon = BvL$ for a conductor moving at right angles to a uniform field."
+      ],
+      "checks": [
+        "D4-003"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Charges on the move",
+          "bullets": [
+            "A charge at rest in a magnetic field feels no magnetic force",
+            "A charge moving at speed $v$ at right angles to a field $B$ feels a force $qvB$ (D.3)",
+            "A metal rod is full of free electrons: move the rod and they move with it",
+            "So moving the rod through a field pushes its free electrons along the rod",
+            "One end becomes negative and the other positive: an <strong>induced emf</strong> appears between the ends"
+          ],
+          "notes": "Use the right-hand rule from D.3 for a positive charge; the electrons drift the opposite way. Quick demonstration: move a wire between the poles of a horseshoe magnet with a sensitive centre-zero meter connected."
+        },
+        {
+          "type": "bullets",
+          "title": "Relative motion is what matters",
+          "bullets": [
+            "Push a magnet into a coil joined to a meter: the needle moves only <strong>while the magnet moves</strong>",
+            "Pull it out again: the deflection reverses",
+            "Hold the magnet still and move the coil instead: the same readings",
+            "Move faster: a bigger deflection",
+            "An emf is induced whenever a conductor and a magnetic field move relative to each other"
+          ],
+          "notes": "Ask for predictions before each step. Faraday first saw induction in 1831 as a brief flick of a galvanometer needle, so this is a good moment for the Nature of science point about careful observation."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving ε = BvL",
+          "start": "Take a straight conductor of length $L$ travelling at speed $v$, perpendicular to a uniform field $B$. Its free charges move with it, so each one feels a magnetic force along the conductor.",
+          "steps": [
+            {
+              "text": "The magnetic force on each free charge",
+              "latex": "F_B = qvB"
+            },
+            {
+              "text": "Charge piles up at the ends, making an electric field along the conductor",
+              "latex": "E = \\dfrac{\\varepsilon}{L}"
+            },
+            {
+              "text": "The electric force on each charge",
+              "latex": "F_E = qE = \\dfrac{q\\varepsilon}{L}"
+            },
+            {
+              "text": "Charges stop drifting when the two forces balance",
+              "latex": "\\dfrac{q\\varepsilon}{L} = qvB"
+            },
+            {
+              "text": "Cancel $q$ and multiply by $L$",
+              "latex": "\\varepsilon = BvL"
+            }
+          ],
+          "notes": "Step 2 uses $E = \\dfrac{V}{d}$ for a uniform field (D.2). The same result comes from Faraday's law later in the lesson."
+        },
+        {
+          "type": "equation",
+          "title": "Emf in a moving conductor",
+          "latex": "\\varepsilon = BvL",
+          "bullets": [
+            "$L$ is the length of the conductor inside the field",
+            "The conductor, its velocity and the field are all at right angles",
+            "Twice the speed gives twice the emf"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for using ε = BvL",
+          "bullets": [
+            "Use only the length of conductor that is inside the field",
+            "Use the field component at right angles to both the conductor and its velocity",
+            "An aircraft wing moving horizontally cuts only the <strong>vertical</strong> component of the Earth's field",
+            "Convert µT and mT to T, and cm to m, before you substitute",
+            "An emf appears even in an open circuit; a current flows only if the circuit is complete"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A car aerial",
+          "question": "A car drives due east at 30 $\\text{m s}^{-1}$. Its radio aerial is a straight vertical metal rod 0.80 m long. The horizontal component of the Earth's magnetic field there is 20 µT, pointing north. Find the emf induced between the ends of the aerial.",
+          "hint": "Check that the aerial, its velocity and this field component are all at right angles to each other, then use $\\varepsilon = BvL$. Convert µT to T first.",
+          "steps": [
+            {
+              "text": "Vertical rod, moving east, field pointing north: all at right angles",
+              "latex": "B = 20 \\times 10^{-6}\\ \\text{T}"
+            },
+            {
+              "text": "Use the moving-conductor equation",
+              "latex": "\\varepsilon = BvL"
+            },
+            {
+              "text": "Substitute",
+              "latex": "\\varepsilon = 20 \\times 10^{-6} \\times 30 \\times 0.80"
+            },
+            {
+              "text": "The emf is less than a millivolt",
+              "latex": "\\varepsilon = 4.8 \\times 10^{-4}\\ \\text{V}"
+            }
+          ],
+          "notes": "The vertical component of the field would push charges sideways across the rod, not along it, so it adds nothing to the emf between the ends."
+        },
+        {
+          "type": "worked",
+          "title": "Finding the speed",
+          "question": "In a demonstration, a copper rod 0.15 m long is moved at right angles to a uniform field of 0.060 T between two large magnets. A voltmeter connected across the ends of the rod by long flexible leads reads 6.3 mV. Find the speed of the rod.",
+          "hint": "Rearrange $\\varepsilon = BvL$ to make $v$ the subject, and write the emf in volts.",
+          "steps": [
+            {
+              "text": "Rearrange the equation",
+              "latex": "v = \\dfrac{\\varepsilon}{BL}"
+            },
+            {
+              "text": "Emf in volts",
+              "latex": "\\varepsilon = 6.3 \\times 10^{-3}\\ \\text{V}"
+            },
+            {
+              "text": "Substitute",
+              "latex": "v = \\dfrac{6.3 \\times 10^{-3}}{0.060 \\times 0.15}"
+            },
+            {
+              "text": "The speed of the rod",
+              "latex": "v = 0.70\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "The leads stay still while the rod moves, so they do not have the same emf induced in them."
+        }
+      ]
+    },
+    {
+      "id": "flux",
+      "short": "Magnetic flux",
+      "hl": true,
+      "guide": "Magnetic flux $\\Phi$ as given by $\\Phi = BA\\cos\\theta$.",
+      "sections": [
+        "flux"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Calculate magnetic flux using $\\Phi = BA\\cos\\theta$, with $\\theta$ measured from the normal to the area.",
+        "Calculate the flux linkage $N\\Phi$ of a coil of $N$ turns."
+      ],
+      "checks": [
+        "D4-001"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Field through an area",
+          "bullets": [
+            "The emf a loop gets depends on how much field passes <strong>through</strong> it",
+            "Field parallel to the plane of the loop: no field lines cross it",
+            "Field at right angles to the plane: the most field lines cross it",
+            "Describe the loop's direction by its <strong>normal</strong>, the line at right angles to its plane",
+            "<strong>Magnetic flux</strong> $\\Phi$ measures how much field passes through an area"
+          ],
+          "notes": "Hold up a hoop in front of a row of parallel metre rules (the field lines) and tilt it: students can count how many rules pass through it."
+        },
+        {
+          "type": "equation",
+          "title": "Magnetic flux",
+          "latex": "\\Phi = BA\\cos\\theta",
+          "bullets": [
+            "$\\theta$ is the angle between $B$ and the <strong>normal</strong> to the area",
+            "Unit: the weber, $1\\ \\text{Wb} = 1\\ \\text{T m}^{2}$",
+            "Largest when $\\theta = 0$; zero when $\\theta = 90^\\circ$"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Flux density and flux linkage",
+          "bullets": [
+            "With the field at right angles to the area, $B = \\dfrac{\\Phi}{A}$: so $B$ is also called the <strong>magnetic flux density</strong>",
+            "Flux can be negative: turning a loop over, from $\\theta = 0$ to $180^\\circ$, reverses its sign",
+            "In a coil of $N$ turns, the same flux passes through every turn",
+            "<strong>Flux linkage</strong> $= N\\Phi$, also measured in Wb"
+          ],
+          "notes": "Some books write the unit of flux linkage as Wb-turns. Either is accepted."
+        },
+        {
+          "type": "diagram",
+          "title": "Measuring θ from the normal",
+          "figure": "d4at",
+          "bullets": [
+            "$\\theta$ is between $B$ and the normal, <strong>not</strong> between $B$ and the loop",
+            "If you are given the angle to the plane, the angle to the normal is $90^\\circ$ minus it"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for flux calculations",
+          "bullets": [
+            "Check which angle you are given: to the normal, or to the plane?",
+            "If the angle $\\alpha$ is to the plane, then $\\Phi = BA\\sin\\alpha$",
+            "Area in $\\text{m}^{2}$: $1\\ \\text{cm}^{2} = 10^{-4}\\ \\text{m}^{2}$",
+            "Circle: $A = \\pi r^{2}$; rectangle: length × width",
+            "Flux has no $N$ in it; flux linkage does"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A loop at three angles",
+          "question": "A square wire loop of side 12 cm is in a uniform magnetic field of 0.35 T. Find the flux through the loop when the normal to the loop is at (a) $0^\\circ$, (b) $50^\\circ$ and (c) $90^\\circ$ to the field.",
+          "hint": "Find the area in $\\text{m}^{2}$ first, then use $\\Phi = BA\\cos\\theta$ three times.",
+          "steps": [
+            {
+              "text": "Area of the loop",
+              "latex": "A = 0.12^{2} = 0.0144\\ \\text{m}^{2}"
+            },
+            {
+              "text": "(a) $\\cos 0^\\circ = 1$",
+              "latex": "\\Phi = 0.35 \\times 0.0144"
+            },
+            {
+              "text": "So the flux is",
+              "latex": "\\Phi = 5.0 \\times 10^{-3}\\ \\text{Wb}"
+            },
+            {
+              "text": "(b) Multiply by the cosine",
+              "latex": "\\Phi = 5.04 \\times 10^{-3} \\times \\cos 50^\\circ"
+            },
+            {
+              "text": "So the flux is",
+              "latex": "\\Phi = 3.2 \\times 10^{-3}\\ \\text{Wb}"
+            },
+            {
+              "text": "(c) $\\cos 90^\\circ = 0$: the field runs along the plane of the loop",
+              "latex": "\\Phi = 0"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Angle to the plane",
+          "question": "A 150-turn rectangular coil measures 8.0 cm by 5.0 cm. A uniform field of 0.20 T makes an angle of $30^\\circ$ with the <strong>plane</strong> of the coil. Find (a) the flux through one turn and (b) the flux linkage of the coil.",
+          "hint": "The angle given is to the plane, not to the normal. What is the angle between the field and the normal?",
+          "steps": [
+            {
+              "text": "Angle between the field and the normal",
+              "latex": "\\theta = 90^\\circ - 30^\\circ = 60^\\circ"
+            },
+            {
+              "text": "Area of one turn",
+              "latex": "A = 0.080 \\times 0.050 = 4.0 \\times 10^{-3}\\ \\text{m}^{2}"
+            },
+            {
+              "text": "(a) Flux through one turn",
+              "latex": "\\Phi = 0.20 \\times 4.0 \\times 10^{-3} \\times \\cos 60^\\circ"
+            },
+            {
+              "text": "So the flux is",
+              "latex": "\\Phi = 4.0 \\times 10^{-4}\\ \\text{Wb}"
+            },
+            {
+              "text": "(b) Multiply by the number of turns",
+              "latex": "N\\Phi = 150 \\times 4.0 \\times 10^{-4}"
+            },
+            {
+              "text": "The flux linkage",
+              "latex": "N\\Phi = 0.060\\ \\text{Wb}"
+            }
+          ],
+          "notes": "Using $\\cos 30^\\circ$ by mistake gives $6.9 \\times 10^{-4}$ Wb: a favourite trap in exam questions."
+        }
+      ]
+    },
+    {
+      "id": "faraday",
+      "short": "Faraday's law",
+      "hl": true,
+      "guide": "A time-changing magnetic flux induces an emf $\\varepsilon$ as given by Faraday's law of induction $\\varepsilon = -N\\frac{\\Delta\\Phi}{\\Delta t}$. (Guidance: time-varying magnetic fields; a magnet oscillating on a spring above a conducting coil.)",
+      "sections": [
+        "faraday"
+      ],
+      "minutes": 70,
+      "aims": [
+        "State Faraday's law and use $\\varepsilon = -N\\dfrac{\\Delta\\Phi}{\\Delta t}$ to calculate induced emfs.",
+        "Describe how a time-varying field or a magnet oscillating near a coil changes the flux linkage and induces an emf."
+      ],
+      "challenge": "CC-D4-01",
+      "checks": [
+        "D4-002"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Only a changing flux induces an emf",
+          "bullets": [
+            "A steady flux, however large, induces nothing",
+            "Since $\\Phi = BA\\cos\\theta$, the flux changes when:",
+            [
+              "$B$ changes: a magnet moves, or a nearby current switches on or off",
+              "the area $A$ inside the field changes: a coil moves into or out of a field",
+              "the angle $\\theta$ changes: a coil rotates"
+            ],
+            "A faster change gives a bigger emf"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Two coils, no connection",
+          "bullets": [
+            "Coil 1 is joined to a cell and a switch; coil 2, close by, only to a meter",
+            "Close the switch: the meter kicks once, then returns to zero",
+            "While the current is steady: no reading at all",
+            "Open the switch: a kick the other way",
+            "The growing or collapsing field of coil 1 changes the flux through coil 2",
+            "Transformers and wireless phone chargers use this idea"
+          ],
+          "notes": "This is close to the experiment Faraday did in 1831, with two coils wound on an iron ring. Winding both coils on one iron core makes the kicks much bigger."
+        },
+        {
+          "type": "diagram",
+          "title": "Two coils on one iron core",
+          "svg": "figures/d4-two-coils.svg",
+          "alt": "An iron ring with two coils wound on opposite sides. Coil 1 is joined to a cell and a switch. Coil 2 is joined only to a meter, G.",
+          "bullets": [
+            "Coil 1: a cell and a switch. Coil 2: only a meter",
+            "The iron core carries coil 1's flux through coil 2",
+            "The meter kicks only while the switch closes or opens"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Faraday's law",
+          "latex": "\\varepsilon = -N\\frac{\\Delta\\Phi}{\\Delta t}",
+          "bullets": [
+            "The size of the induced emf equals the rate of change of flux linkage",
+            "$N\\Delta\\Phi$ is the change in flux linkage in a time $\\Delta t$",
+            "The minus sign is Lenz's law: the emf opposes the change"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "ε = BvL from Faraday's law",
+          "start": "A rod of length $L$ slides at speed $v$ along two rails joined by a resistor, so rod, rails and resistor make a circuit. A uniform field $B$ is at right angles to the plane of the circuit.",
+          "steps": [
+            {
+              "text": "In a time $\\Delta t$ the rod moves a distance",
+              "latex": "\\Delta x = v\\Delta t"
+            },
+            {
+              "text": "The area of the circuit grows by",
+              "latex": "\\Delta A = Lv\\Delta t"
+            },
+            {
+              "text": "So the flux through the circuit grows by",
+              "latex": "\\Delta\\Phi = BLv\\Delta t"
+            },
+            {
+              "text": "Faraday's law for one turn, size only",
+              "latex": "\\varepsilon = \\dfrac{\\Delta\\Phi}{\\Delta t}"
+            },
+            {
+              "text": "Cancel $\\Delta t$",
+              "latex": "\\varepsilon = BvL"
+            }
+          ],
+          "notes": "Two pictures, one result: the force on the moving charges, and the changing flux through the circuit."
+        },
+        {
+          "type": "bullets",
+          "title": "A magnet on a spring",
+          "bullets": [
+            "A magnet bounces on a spring above a coil joined to a data logger",
+            "As the magnet moves, the flux linkage of the coil rises and falls",
+            "The emf is largest near the middle of the motion, where the magnet moves fastest",
+            "The emf is zero at the top and the bottom, where the magnet is momentarily at rest",
+            "The emf alternates: its sign changes each time the magnet changes direction",
+            "If a current flows, it takes energy from the magnet, so the oscillation dies away faster"
+          ],
+          "notes": "Data loggers show this well. Let students sketch the emf–time graph before you show it."
+        },
+        {
+          "type": "diagram",
+          "title": "The emf from a bouncing magnet",
+          "svg": "figures/d4-magnet-spring.svg",
+          "alt": "Left: a bar magnet hangs on a spring above a coil joined to a data logger, and moves up and down. Right: graphs against time of the magnet's height, a dashed cosine curve, and the induced emf, a sine curve a quarter of a cycle out of step. The emf is zero when the magnet is at the top or the bottom.",
+          "bullets": [
+            "The emf is zero at the top and the bottom, where the magnet stops",
+            "It is greatest as the magnet passes the middle, moving fastest",
+            "So the emf is a quarter of a cycle out of step with the height"
+          ],
+          "notes": "Drawn without damping, for small oscillations. A real trace is not a perfect sine curve, and the sign of the emf depends on how the coil is connected."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for Faraday's law",
+          "bullets": [
+            "It is the <strong>rate of change</strong> of the flux that matters, not its size",
+            "Find $\\Delta\\Phi$ first: $\\Delta B \\times A$, or $B \\times \\Delta A$, or a change in $\\cos\\theta$",
+            "Turning a coil over changes its flux from $+BA$ to $-BA$, so $\\Delta\\Phi = 2BA$",
+            "On a graph of $N\\Phi$ against $t$, the emf is minus the gradient",
+            "Leave out the minus sign when only the size is asked for, and use Lenz's law for the direction",
+            "If the rate of change is not steady, $N\\dfrac{\\Delta\\Phi}{\\Delta t}$ gives the average emf"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Switching on an electromagnet",
+          "question": "A 120-turn coil of area $3.0 \\times 10^{-3}\\ \\text{m}^{2}$ sits between the poles of an electromagnet, with its plane at right angles to the field. When the electromagnet is switched on, the field rises steadily from zero to 0.45 T in 0.15 s. Find the size of the emf induced in the coil.",
+          "hint": "Only $B$ changes, so find $\\Delta\\Phi = \\Delta B \\times A$ for one turn, then use Faraday's law.",
+          "steps": [
+            {
+              "text": "Change in flux through one turn",
+              "latex": "\\Delta\\Phi = 0.45 \\times 3.0 \\times 10^{-3}"
+            },
+            {
+              "text": "So",
+              "latex": "\\Delta\\Phi = 1.35 \\times 10^{-3}\\ \\text{Wb}"
+            },
+            {
+              "text": "Faraday's law, size only",
+              "latex": "\\varepsilon = N\\dfrac{\\Delta\\Phi}{\\Delta t}"
+            },
+            {
+              "text": "Substitute",
+              "latex": "\\varepsilon = \\dfrac{120 \\times 1.35 \\times 10^{-3}}{0.15}"
+            },
+            {
+              "text": "The induced emf",
+              "latex": "\\varepsilon = 1.1\\ \\text{V}"
+            }
+          ],
+          "notes": "Once the field is steady, the emf drops to zero, even though the flux is now at its largest."
+        },
+        {
+          "type": "worked",
+          "title": "Turning a coil over in the Earth's field",
+          "question": "A flat coil of 500 turns, each of area $1.2 \\times 10^{-2}\\ \\text{m}^{2}$, is held with its normal along the Earth's magnetic field, of strength 50 µT. It is turned over through $180^\\circ$ in 0.10 s. Find the average emf induced in the coil.",
+          "hint": "After half a turn, the same field passes through the coil the opposite way. What is the change in flux through one turn?",
+          "steps": [
+            {
+              "text": "Flux through one turn at the start",
+              "latex": "\\Phi = BA = 50 \\times 10^{-6} \\times 1.2 \\times 10^{-2}"
+            },
+            {
+              "text": "So",
+              "latex": "\\Phi = 6.0 \\times 10^{-7}\\ \\text{Wb}"
+            },
+            {
+              "text": "The flux goes from $+\\Phi$ to $-\\Phi$",
+              "latex": "\\Delta\\Phi = 2\\Phi = 1.2 \\times 10^{-6}\\ \\text{Wb}"
+            },
+            {
+              "text": "Average emf",
+              "latex": "\\varepsilon = \\dfrac{500 \\times 1.2 \\times 10^{-6}}{0.10}"
+            },
+            {
+              "text": "A few millivolts",
+              "latex": "\\varepsilon = 6.0 \\times 10^{-3}\\ \\text{V}"
+            }
+          ],
+          "notes": "Students who use $\\Delta\\Phi = \\Phi$ get half the answer. Coils like this were once used to measure the Earth's field."
+        }
+      ]
+    },
+    {
+      "id": "lenz",
+      "short": "Lenz's law and energy",
+      "hl": true,
+      "guide": "The direction of induced emf is determined by Lenz's law and is a consequence of energy conservation.",
+      "sections": [
+        "lenz",
+        "self"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Use Lenz's law to find the direction of an induced current.",
+        "Explain why Lenz's law is a consequence of the conservation of energy."
+      ],
+      "challenge": "CC-D4-02",
+      "checks": [
+        "D4-004"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Lenz's law",
+          "bullets": [
+            "The induced emf, and any induced current, acts to <strong>oppose the change</strong> that produces it",
+            "This is the minus sign in Faraday's law",
+            "Push a north pole towards a coil: the near end of the coil becomes a north pole and repels it",
+            "Pull the north pole away: the near end becomes a south pole and attracts it back",
+            "The coil opposes the <strong>change</strong> in flux, not the flux itself"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Opposing the magnet",
+          "figure": "d4ct",
+          "bullets": [
+            "You have to do work to push the magnet in",
+            "That work becomes electrical energy in the circuit"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Why it must be so: energy",
+          "bullets": [
+            "Imagine the induced current <strong>helped</strong> the change instead",
+            "The magnet would speed up, the current would grow, and so would the pull on the magnet",
+            "Kinetic and electrical energy would grow from nothing: impossible",
+            "So the induced current must oppose the change",
+            "The electrical energy always comes from work done against the opposing force"
+          ],
+          "notes": "This is an argument by contradiction: assume the opposite and show that it breaks conservation of energy."
+        },
+        {
+          "type": "bullets",
+          "title": "Finding the direction",
+          "bullets": [
+            "Is the flux through the circuit increasing or decreasing, and which way does it point?",
+            "The induced current makes its own field to oppose that change:",
+            [
+              "flux increasing: the induced field points the opposite way",
+              "flux decreasing: the induced field points the same way"
+            ],
+            "Use the right-hand grip rule to turn that field direction into a current direction",
+            "In a broken circuit an emf is still induced, but no current flows, so there is no opposing force"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "A rod on rails",
+          "figure": "d4bt",
+          "bullets": [
+            "Pulling the rod to the right increases the flux into the page",
+            "The induced current is anticlockwise: its field is out of the page inside the loop",
+            "The current in the rod feels a force $BIL$ that opposes the motion"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Electromagnetic braking",
+          "bullets": [
+            "A strong magnet falls slowly down a copper pipe: currents induced in the pipe oppose its motion",
+            "Some trains, roller coasters and exercise bikes brake with magnets near metal discs or fins, without touching them",
+            "The kinetic energy becomes thermal energy in the metal",
+            "Slots cut in the metal break up the current loops and weaken the braking"
+          ],
+          "notes": "Drop a neodymium magnet and a similar unmagnetised piece of metal down a copper pipe side by side. The concept challenge on the two hanging rings makes a good follow-up."
+        },
+        {
+          "type": "diagram",
+          "title": "A magnet in a copper pipe",
+          "svg": "figures/d4-copper-pipe.svg",
+          "alt": "A bar magnet, N pole down, falls inside a copper pipe. Induced current loops circle the pipe above and below the magnet. The loop above attracts the S pole; the loop below repels the N pole.",
+          "bullets": [
+            "Below the magnet the flux is increasing: the induced current repels the N pole",
+            "Above it the flux is decreasing: the induced current attracts the S pole",
+            "Both forces act upwards, opposing the fall"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Self-induction",
+          "bullets": [
+            "A changing current in a coil changes the flux through that same coil",
+            "So it induces an emf in the coil itself: <strong>self-induction</strong>",
+            "This back emf acts against the change in current: Lenz's law again",
+            "Switching on: the current rises gradually rather than instantly",
+            "Switching off a large coil suddenly: the emf can be big enough to make a spark jump across the switch"
+          ],
+          "notes": "Required for exams in 2025–2027, qualitatively only (inductance and RL circuits are not required). Changed for exams from 2028: the 2028 guide no longer includes self-induction, so for those students this slide is background that helps with Lenz’s law."
+        },
+        {
+          "type": "worked",
+          "title": "A magnet pulled away",
+          "question": "The south pole of a bar magnet is held close to one end of a coil joined to a meter. The magnet is then pulled quickly away from the coil, along its axis. State the magnetic pole induced at the near end of the coil, and explain whether the coil helps or hinders the movement.",
+          "hint": "Is the flux from the magnet through the coil increasing or decreasing? The coil acts to oppose that change.",
+          "steps": [
+            {
+              "text": "Moving the magnet away decreases the flux through the coil"
+            },
+            {
+              "text": "To oppose the decrease, the coil pulls the magnet back: it attracts it"
+            },
+            {
+              "text": "Unlike poles attract, so the near end of the coil becomes a <strong>north</strong> pole"
+            },
+            {
+              "text": "The attraction hinders the movement: the work done pulling the magnet away becomes electrical energy"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A loop on the bench",
+          "question": "A rectangular wire loop lies flat on a bench. A uniform magnetic field passes vertically upwards through it, and the field is getting weaker. Viewed from above, is the induced current in the loop clockwise or anticlockwise?",
+          "hint": "Decide which way the loop's own field must point, inside the loop, to oppose the change. Then use the right-hand grip rule.",
+          "steps": [
+            {
+              "text": "The upward flux through the loop is decreasing"
+            },
+            {
+              "text": "To oppose the decrease, the induced current makes an <strong>upward</strong> field inside the loop"
+            },
+            {
+              "text": "Right-hand grip: with the thumb pointing up, the fingers curl anticlockwise seen from above"
+            },
+            {
+              "text": "The induced current is <strong>anticlockwise</strong>, viewed from above"
+            }
+          ],
+          "notes": "Ask what changes if the field is getting stronger instead (the current reverses), or if the loop is cut (no current, but still an emf)."
+        }
+      ]
+    },
+    {
+      "id": "coil",
+      "short": "Coils entering and leaving fields",
+      "hl": true,
+      "guide": "Guidance: a quantitative treatment of rectangular coils moving in and out of fields (for example, a coil moved in or out of the region of a magnetic field).",
+      "sections": [
+        "coil"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Use $\\varepsilon = NBvL$ for a rectangular coil moving into or out of a uniform field.",
+        "Sketch how the flux linkage and the emf change as a coil crosses a field region."
+      ],
+      "checks": [
+        "D4-006"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "A coil crossing a field",
+          "bullets": [
+            "Entering: only the leading side cuts the field, so $\\varepsilon = NBvL$",
+            "$L$ is the length of the side crossing the edge of the field",
+            "Fully inside a uniform field: the flux is constant, so $\\varepsilon = 0$",
+            "Leaving: $\\varepsilon = NBvL$ again, with the opposite sign",
+            "While a current flows in the coil, a force opposes its motion"
+          ],
+          "notes": "Inside the field both sides cut field lines, but their emfs act in opposite senses around the coil and cancel."
+        },
+        {
+          "type": "diagram",
+          "title": "Flux and emf against time",
+          "figure": "d4dt",
+          "bullets": [
+            "The emf is minus the gradient of the flux graph",
+            "Each pulse of emf lasts the time the coil takes to move its own width"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Timing the pulses",
+          "question": "A square 100-turn coil of side 5.0 cm moves at a steady 3.0 $\\text{cm s}^{-1}$ through a region of uniform field 0.30 T, at right angles to its plane. The region is 12 cm wide. Find (a) the emf while the coil is entering the field and (b) how long the coil is completely inside the field.",
+          "hint": "While entering, only one side cuts the field. For (b), the coil is fully inside from the moment its back edge enters until its front edge reaches the far side of the region.",
+          "steps": [
+            {
+              "text": "(a) Only the leading side cuts the field",
+              "latex": "\\varepsilon = NBvL"
+            },
+            {
+              "text": "Substitute, in SI units",
+              "latex": "\\varepsilon = 100 \\times 0.30 \\times 0.030 \\times 0.050"
+            },
+            {
+              "text": "The emf while entering",
+              "latex": "\\varepsilon = 0.045\\ \\text{V}"
+            },
+            {
+              "text": "(b) Distance moved while fully inside",
+              "latex": "d = 12 - 5.0 = 7.0\\ \\text{cm}"
+            },
+            {
+              "text": "Time fully inside",
+              "latex": "t = \\dfrac{7.0}{3.0} = 2.3\\ \\text{s}"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Pulling a coil out of a field",
+          "question": "A 20-turn square coil of side 10 cm and resistance 2.0 Ω is pulled at a steady 0.40 $\\text{m s}^{-1}$ out of a uniform field of 0.50 T at right angles to its plane. Find (a) the induced current and (b) the force needed to pull the coil at constant speed, and (c) show that the power you supply equals the power dissipated in the coil.",
+          "hint": "Only the side still in the field cuts it, so use $\\varepsilon = NBvL$ and Ohm's law. That side carries the current in $N$ turns, so the opposing force is $NBIL$.",
+          "steps": [
+            {
+              "text": "(a) The side still in the field gives an emf of 0.40 V",
+              "latex": "\\varepsilon = 20 \\times 0.50 \\times 0.40 \\times 0.10"
+            },
+            {
+              "text": "Ohm's law",
+              "latex": "I = \\dfrac{0.40}{2.0} = 0.20\\ \\text{A}"
+            },
+            {
+              "text": "(b) The force on that side opposes the motion",
+              "latex": "F = NBIL = 20 \\times 0.50 \\times 0.20 \\times 0.10"
+            },
+            {
+              "text": "So the pulling force is",
+              "latex": "F = 0.20\\ \\text{N}"
+            },
+            {
+              "text": "(c) Power you supply",
+              "latex": "P = Fv = 0.20 \\times 0.40 = 0.080\\ \\text{W}"
+            },
+            {
+              "text": "Power dissipated in the coil: the same, so energy is conserved",
+              "latex": "I^{2}R = 0.20^{2} \\times 2.0 = 0.080\\ \\text{W}"
+            }
+          ],
+          "notes": "This links Lenz's law to energy: the work done by the pulling force becomes thermal energy in the coil."
+        }
+      ]
+    },
+    {
+      "id": "generator",
+      "short": "Rotating coils: the ac generator",
+      "hl": true,
+      "guide": "A uniform magnetic field induces a sinusoidal varying emf in a coil rotating within it.",
+      "sections": [
+        "generator"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Explain why a coil rotating at a steady rate in a uniform field produces a sinusoidal emf.",
+        "Identify the positions of the coil at which the emf is zero and at which it is greatest."
+      ],
+      "challenge": "CC-D4-03",
+      "checks": [
+        "D4-008"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The ac generator",
+          "bullets": [
+            "A coil turns at a steady rate in a uniform field, driven by a turbine or an engine",
+            "$B$ and $A$ stay the same, but the angle changes steadily: $\\theta = \\omega t$",
+            "So the flux linkage, $NBA\\cos\\omega t$, varies like a cosine",
+            "The emf is the rate of change of flux linkage, so it varies sinusoidally too: an <strong>alternating</strong> emf",
+            "Slip rings and brushes connect the turning coil to the outside circuit"
+          ],
+          "notes": "$\\omega = 2\\pi f$ comes from circular motion (A.2). A hand-cranked generator joined to an oscilloscope or data logger shows the sine wave."
+        },
+        {
+          "type": "bullets",
+          "title": "When is the emf zero?",
+          "bullets": [
+            "Plane of the coil at right angles to the field: the flux is greatest but not changing at that instant, so $\\varepsilon = 0$",
+            "Plane of the coil parallel to the field: the flux is zero but changing fastest, so $\\varepsilon$ is greatest",
+            "The emf peaks a quarter of a turn after the flux linkage peaks",
+            "Think of the sides: the emf is greatest when they cut straight across the field lines"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Inside an ac generator",
+          "svg": "figures/d4-generator.svg",
+          "alt": "A rectangular coil turns about a horizontal axle between an N pole above and an S pole below, with the field B pointing down. The axle carries two slip rings, joined to the two ends of the coil. Two fixed brushes press on the rings and are joined to the circuit.",
+          "bullets": [
+            "The coil turns in the field, driven by a turbine or an engine",
+            "Each end of the coil is joined to its own slip ring, which turns with it",
+            "Fixed brushes press on the rings and carry the current to the circuit"
+          ],
+          "notes": "Drawn at the instant when the plane of the coil is parallel to the field, so the flux through it is zero."
+        },
+        {
+          "type": "diagram",
+          "title": "The coil at four positions",
+          "svg": "figures/d4-rotating-coil.svg",
+          "alt": "The coil seen end-on at the start and after a quarter, a half and three-quarters of a turn, with the field pointing down the page. At the start and after half a turn the coil is at right angles to the field: flux greatest, emf zero. After a quarter and three-quarters of a turn the coil is parallel to the field: flux zero, emf greatest, and the current in each side has reversed between the two.",
+          "bullets": [
+            "Coil at right angles to $B$: $\\Phi$ greatest, $\\varepsilon = 0$",
+            "Coil parallel to $B$: $\\Phi = 0$, $\\varepsilon$ greatest",
+            "The current in each side reverses every half turn"
+          ],
+          "notes": "In the end-on views, a dot is current out of the page and a cross is current into it. The blue side carries current out of the page after a quarter turn and into it after three-quarters."
+        },
+        {
+          "type": "diagram",
+          "title": "Flux linkage and emf against time",
+          "figure": "d4et",
+          "bullets": [
+            "The emf is minus the gradient of the flux-linkage graph",
+            "Zero emf where the flux graph is flat; largest emf where it is steepest"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Generators in power stations",
+          "bullets": [
+            "Steam, water or wind turns a turbine, which turns the generator",
+            "Large generators usually turn electromagnets inside fixed coils: only the relative motion matters",
+            "Mains electricity is generated at 50 Hz or 60 Hz, so the generators run at a fixed speed",
+            "The induced current in the coils feels a force that opposes the rotation, so the turbine must keep doing work"
+          ],
+          "notes": "Guide linking question: the efficiency of generating electricity depends on the energy source (B.5 sources, A.3 efficiency)."
+        },
+        {
+          "type": "worked",
+          "title": "Average emf in a quarter turn",
+          "question": "A generator coil has 150 turns, each 5.0 cm by 3.0 cm, and turns at 50 revolutions per second in a uniform field of 0.20 T. Find (a) the greatest flux linkage of the coil and (b) the average emf during the quarter turn from the position of greatest flux to the position of zero flux.",
+          "hint": "(a) The flux linkage is greatest when the field passes straight through the coil. (b) A quarter turn takes a quarter of the period; use Faraday's law with the change in flux linkage.",
+          "steps": [
+            {
+              "text": "(a) Area of one turn",
+              "latex": "A = 0.050 \\times 0.030 = 1.5 \\times 10^{-3}\\ \\text{m}^{2}"
+            },
+            {
+              "text": "Greatest flux linkage, with $\\theta = 0$",
+              "latex": "N\\Phi = 150 \\times 0.20 \\times 1.5 \\times 10^{-3}"
+            },
+            {
+              "text": "So",
+              "latex": "N\\Phi = 0.045\\ \\text{Wb}"
+            },
+            {
+              "text": "(b) Time for a quarter turn",
+              "latex": "\\Delta t = \\dfrac{1}{4} \\times \\dfrac{1}{50} = 0.0050\\ \\text{s}"
+            },
+            {
+              "text": "Average emf over the quarter turn",
+              "latex": "\\varepsilon = \\dfrac{0.045}{0.0050} = 9.0\\ \\text{V}"
+            }
+          ],
+          "notes": "The peak emf is higher than this average: calculus gives $\\varepsilon_0 = NBA\\omega \\approx 14$ V. That formula is not in the data booklet and is not needed."
+        },
+        {
+          "type": "worked",
+          "title": "Timing the peaks",
+          "question": "A coil turns steadily at 20 revolutions per second in a uniform field. At $t = 0$ the coil's plane is perpendicular to the field. State the emf at $t = 0$, and find the first time after that at which the emf is greatest.",
+          "hint": "At which position is the flux not changing at all, and at which is it changing fastest? How far must the coil turn between them?",
+          "steps": [
+            {
+              "text": "At $t = 0$ the flux is greatest and momentarily not changing",
+              "latex": "\\varepsilon = 0"
+            },
+            {
+              "text": "Period of rotation",
+              "latex": "T = \\dfrac{1}{20} = 0.050\\ \\text{s}"
+            },
+            {
+              "text": "The emf is greatest a quarter turn later, when the plane of the coil is parallel to the field",
+              "latex": "t = \\dfrac{T}{4} = 0.013\\ \\text{s}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequency",
+      "short": "Changing the rotation frequency",
+      "hl": true,
+      "guide": "The effect on induced emf caused by changing the frequency of rotation.",
+      "sections": [
+        "generator"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Explain how changing the frequency of rotation affects the peak emf and the period of the alternating emf.",
+        "Describe ways of increasing the emf from a generator."
+      ],
+      "checks": [
+        "D4-007"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Turning faster",
+          "bullets": [
+            "Double the rotation frequency: the same change in flux happens in half the time",
+            "So the rate of change of flux linkage doubles: the <strong>peak emf doubles</strong>",
+            "The period halves, so the frequency of the ac doubles too",
+            "The peak emf is proportional to the rotation frequency"
+          ],
+          "notes": "The dashed curve on the generator graph shows both effects at once."
+        },
+        {
+          "type": "bullets",
+          "title": "Increasing a generator's emf",
+          "bullets": [
+            "More turns $N$: more flux linkage to change",
+            "A larger coil area $A$",
+            "A stronger field $B$, for example from electromagnets",
+            "An iron core inside the coil, to strengthen the field through it",
+            "Faster rotation, where the frequency of the supply does not have to stay fixed"
+          ],
+          "notes": "This answers one of the guiding questions for D.4, on increasing the power output of generators."
+        },
+        {
+          "type": "worked",
+          "title": "A bicycle dynamo",
+          "question": "A bicycle dynamo gives an alternating emf with a peak of 6.0 V when its magnet spins at 20 Hz inside a fixed coil. The cyclist slows down, and the magnet now spins at 15 Hz. Find the new peak emf and the new period of the ac.",
+          "hint": "The peak emf is proportional to the rotation frequency. For the period, use $T = \\dfrac{1}{f}$.",
+          "steps": [
+            {
+              "text": "Peak emf is proportional to frequency",
+              "latex": "\\dfrac{\\varepsilon_2}{\\varepsilon_1} = \\dfrac{f_2}{f_1} = \\dfrac{15}{20}"
+            },
+            {
+              "text": "New peak emf",
+              "latex": "\\varepsilon_2 = 0.75 \\times 6.0 = 4.5\\ \\text{V}"
+            },
+            {
+              "text": "New period",
+              "latex": "T = \\dfrac{1}{15} = 0.067\\ \\text{s}"
+            }
+          ],
+          "notes": "This is why bicycle lights powered by a dynamo dim when the cyclist slows down. The period was 0.050 s before."
+        },
+        {
+          "type": "worked",
+          "title": "Two changes at once",
+          "question": "A small generator gives a peak emf of 40 V when its coil turns at 60 revolutions per second. It is rebuilt with twice as many turns on the coil, and then turned at 30 revolutions per second in the same field. Find the new peak emf and the new frequency of the ac.",
+          "hint": "Deal with each change separately: what does doubling the turns do to the emf, and what does halving the rotation frequency do?",
+          "steps": [
+            {
+              "text": "Twice the turns: twice the flux linkage, so twice the emf",
+              "latex": "40 \\times 2 = 80\\ \\text{V}"
+            },
+            {
+              "text": "Half the rotation frequency: half the rate of change",
+              "latex": "80 \\times \\tfrac{1}{2} = 40\\ \\text{V}"
+            },
+            {
+              "text": "The two effects cancel",
+              "latex": "\\varepsilon_0 = 40\\ \\text{V}"
+            },
+            {
+              "text": "The ac frequency equals the rotation frequency",
+              "latex": "f = 30\\ \\text{Hz}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
