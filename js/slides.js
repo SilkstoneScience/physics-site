@@ -25,7 +25,7 @@
     ['v', 'Learn more: videos', ''],
   ];
   const DEFAULT_TYPES = TYPES.map((t) => t[0]).filter((t) => t !== 'p' && t !== 'c'); // the hook and Paper 2 questions start unticked (teacher's decision)
-  const THEME_COLOURS = { A: '1f5fbf', B: 'c2561a', C: '0f8077', D: '7b3fbf', E: '2e7d32' };
+  const THEME_COLOURS = { A: '1f5fbf', B: 'b0256f', C: '0f8077', D: '7b3fbf', E: '2e7d32' };
   // Light colours for drawing diagrams into pictures, whatever the page's own theme (the same as the print colours)
   const LIGHT = { '--bg': '#ffffff', '--surface': '#ffffff', '--text': '#1c2430', '--muted': '#4a5464', '--border': '#c9d0da', '--accent': '#1f5fbf', '--accent-soft': '#e6eefb',
     '--good': '#1e7a46', '--good-soft': '#e3f4ea', '--bad': '#b3261e', '--bad-soft': '#fbe9e7', '--warn-soft': '#fff6dc',

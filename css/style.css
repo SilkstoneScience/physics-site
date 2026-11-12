@@ -13,11 +13,12 @@
   --bad-soft: #fbe9e7;
   --warn-soft: #fff6dc;
   --theme-a: #1f5fbf;
-  --theme-b: #c2561a;
+  --theme-b: #c2561a;      /* the notes orange: HL, worked examples, key-2 in diagrams (NOT Theme B's own colour) */
+  --theme-b-id: #b0256f;   /* Theme B's own colour (raspberry): cards, strips and headings for the theme */
   --theme-c: #0f8077;
   --theme-d: #7b3fbf;
   --theme-e: #2e7d32;
-  /* XYZ identity accent: orange ONLY for the motif, header, home page and menu (orange already means HL, theme B and key-2 in diagrams) */
+  /* XYZ identity accent: orange ONLY for the motif, header, home page and menu (orange already means HL, worked examples and key-2 in diagrams) */
   --xyz: #f5a15a;       /* fills: dots, button backgrounds (always with dark text) */
   --xyz-ink: #b45309;   /* thin lines and text: 5:1 contrast on white */
   --xyz-soft: #fdf1e6;
@@ -40,6 +41,7 @@
     --warn-soft: #3a3218;
     --theme-a: #7fb0ff;
     --theme-b: #ffa36c;
+    --theme-b-id: #ff8fc4;
     --theme-c: #5fd3c6;
     --theme-d: #c39bff;
     --theme-e: #85d68a;
@@ -163,7 +165,7 @@ a.card:hover { border-color: var(--accent); }
 .card p { margin: 0; color: var(--muted); font-size: 0.92rem; }
 .card[data-theme] { border-left: 5px solid var(--theme-color, var(--accent)); }
 [data-theme="A"] { --theme-color: var(--theme-a); }
-[data-theme="B"] { --theme-color: var(--theme-b); }
+[data-theme="B"] { --theme-color: var(--theme-b-id); }
 [data-theme="C"] { --theme-color: var(--theme-c); }
 [data-theme="D"] { --theme-color: var(--theme-d); }
 [data-theme="E"] { --theme-color: var(--theme-e); }
