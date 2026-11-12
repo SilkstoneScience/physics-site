@@ -24,7 +24,8 @@ the published website.
 > (individual approvals, recorded in `tools/1b/reviews.json`): 20 approved datasets are in production.
 >
 > **A2-B02, B5-B01 and C1-B01** gained the same line-of-best-fit graph (12 November 2026; wording, data, answers and mark
-> schemes unchanged). They were reset and wait in the preview for the teacher's approval.
+> schemes unchanged). The teacher tried all three in the preview and approved them the same day (individual approvals,
+> recorded in `tools/1b/reviews.json`): 20 approved datasets are in production, 8 of them with an on-screen graph.
 >
 > **Teacher's rule (12 November 2026):** every new dataset with a straight-line graph includes an on-screen plot on the
 > part that first needs the line. The validator warns (`plot-missing`) otherwise; `noPlot: '<reason>'` records why a
