@@ -184,6 +184,7 @@ Every question file has an `originality` note: its inspiration (if any) and why 
 7. Built twice, identical output.
 8. Similarity (teacher's rule, 7 November 2026): a question may test the same concepts as an existing one, but its situation must differ and its sequence of parts should differ. Checked by `tools/p2/similarity.mjs` against every live Paper 2 question, generated or hand-written: shared content words of the stem and parts (warning at 20 %, error at 40 %, calibrated so that only the known look-alikes of November 2026 warn), the declared `situation` (error when two generated questions share it) and runs of parts with the same command term and syllabus id (warning at 3, error at 4). The reviewer still compares the closest pair by eye.
 9. "Show that" values: the true value's next significant figure must not be 0, so a student can show one more figure than the question states (warning).
+10. Click-to-plot graphs (teacher's request, November 2026): a "Draw" part may carry a `plot` so students plot the points and the line of best fit on screen (`js/plot.js`). The build checks the axes, that the points and line come from named values, that the marking accepts the right graph and rejects wrong ones, and that the printable axes and the examiner's graph are the pictures written from the same settings (`tools/p2/plot-axes.mjs`).
 
 `node tools/p2/build.mjs --audit` prints each question's physics, syllabus IDs, inspiration and independent-check
 results for the reviewer.

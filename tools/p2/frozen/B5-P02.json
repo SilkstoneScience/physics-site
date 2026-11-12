@@ -19,7 +19,54 @@
           "all five points plotted correctly, to within half a small square ✓",
           "a single straight line of best fit through the points, extended to meet the $V$ axis ✓",
           "Note: the examiner's graph: <img src=\"questions/diagrams/p2-b5-drill-ms.svg\" alt=\"The five points plotted as crosses on the grid, with a straight line of best fit passing through all of them and extended to meet the vertical axis above the highest point.\">"
-        ]
+        ],
+        "plot": {
+          "title": "Axes for a graph of terminal potential difference V in volts against current I in amperes: I from 0 to 20 A and V from 14 to 21 V, with a grid of 1 A by 0.5 V",
+          "x": {
+            "min": 0,
+            "max": 20,
+            "step": 1,
+            "major": 2,
+            "symbol": "I",
+            "unit": "A"
+          },
+          "y": {
+            "min": 14,
+            "max": 21,
+            "step": 0.5,
+            "major": 1,
+            "symbol": "V",
+            "unit": "V"
+          },
+          "points": [
+            [
+              2,
+              19.5
+            ],
+            [
+              6,
+              18.5
+            ],
+            [
+              10,
+              17.5
+            ],
+            [
+              14,
+              16.5
+            ],
+            [
+              18,
+              15.5
+            ]
+          ],
+          "line": {
+            "gradient": -0.25,
+            "intercept": 20,
+            "toYAxis": true
+          },
+          "axes": "questions/diagrams/p2-b5-drill-axes.svg"
+        }
       },
       {
         "label": "b(i)",
@@ -298,6 +345,6 @@
   ],
   "diagrams": {
     "questions/diagrams/p2-b5-drill-axes.svg": "eb8ad6df51f5860e7dfcd8b1203d5e82316e4a95e7c3c0412ce78afdba738817",
-    "questions/diagrams/p2-b5-drill-ms.svg": "440d12ad033d182e82c81595a90b7762665c29cd804a94a087cb389d9c94672e"
+    "questions/diagrams/p2-b5-drill-ms.svg": "7b781c3bb4a31e78f454393de21c8a784eb089cf59cfb64efca3d2547fa199d1"
   }
 }

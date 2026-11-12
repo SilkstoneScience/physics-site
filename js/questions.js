@@ -308,6 +308,7 @@
   function onKey(e) {
     if (!oneAtATime() || e.altKey || e.ctrlKey || e.metaKey) return;
     if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) return;
+    if (document.activeElement.closest && document.activeElement.closest('.plot')) return; // the arrow keys move the graph's cursor
     if (e.key === 'ArrowRight') goTo(current + 1);
     if (e.key === 'ArrowLeft') goTo(current - 1);
   }
@@ -362,7 +363,7 @@
         <span class="q-status ${status}">${statusLabel(q)}</span>
       </div>
       <div class="stem">${q.stem}</div>
-      ${q.diagram ? `<figure${q.diagramLarge ? ' class="large"' : ''}><img src="${q.diagram}" alt="${escapeAttr(q.diagramAlt || 'Diagram for this question')}"></figure>` : ''}
+      ${q.diagram && !plotsOnDiagram(q) ? `<figure${q.diagramLarge ? ' class="large"' : ''}><img src="${q.diagram}" alt="${escapeAttr(q.diagramAlt || 'Diagram for this question')}"></figure>` : ''}
       ${dataBlockHtml(q)}
       <div class="answer-area"></div>`;
 
@@ -478,7 +479,7 @@
              <span class="marks">[${pt.marks}]</span>
              ${hasData(q) ? `<a class="data-link" href="#data-${q.id}">↑ Data</a>` : ''}</p>
           ${pt.figure ? msFigureHtml(q, pt.figure) : ''}
-          ${pt.numeric ? numericHtml(pt, s) : `<textarea rows="3" aria-label="Your answer to part (${pt.label})" placeholder="Write your answer here, then check the mark scheme.">${escapeHtml(s.answer || '')}</textarea>`}
+          ${canPlot(pt) ? plotHtml(pt, s) : pt.numeric ? numericHtml(pt, s) : `<textarea rows="3" aria-label="Your answer to part (${pt.label})" placeholder="Write your answer here, then check the mark scheme.">${escapeHtml(s.answer || '')}</textarea>`}
           ${s.revealed ? `
             <div class="markscheme">
               <strong>Mark scheme</strong>
@@ -496,11 +497,37 @@
       const pt = q.parts.find((x) => x.label === label);
       // Save typed answers as the student writes (no redraw, so typing isn't interrupted).
       const box = partEl.querySelector('textarea, input');
-      box.addEventListener('input', (e) => {
+      if (box) box.addEventListener('input', (e) => {
         partState(q, label).answer = e.target.value;
         saveProgress();
       });
-      if (pt.numeric) {
+      if (canPlot(pt)) {
+        // The graph saves itself after every change (no redraw); old feedback is removed, as it no longer applies.
+        const mine = saved[label] || {};
+        window.Plot.mount(partEl.querySelector('[data-plot]'), pt.plot, mine.plot, {
+          locked: !!mine.revealed,
+          onChange: (state) => {
+            const st = partState(q, label);
+            st.plot = state;
+            delete st.plotCheck;
+            saveProgress();
+            const old = partEl.querySelector('.feedback');
+            if (old) old.remove();
+          },
+        });
+        const checkBtn = partEl.querySelector('[data-action="check-plot"]');
+        if (checkBtn) checkBtn.addEventListener('click', () => {
+          const st = partState(q, label);
+          const res = window.Plot.check(pt.plot, st.plot, pt.marks);
+          st.plotCheck = { right: res.right, score: res.score, max: res.max, feedback: res.feedback };
+          if (res.right) { st.score = pt.marks; st.revealed = true; st.auto = true; }
+          saveProgress();
+          const fresh = refreshCard(q, card);
+          const fb = fresh && fresh.querySelector(`[data-part="${label}"] .feedback`);
+          if (fb) announce(fb.textContent);
+          focusIn(fresh, `[data-part="${label}"] .feedback`);
+        });
+      } else if (pt.numeric) {
         const check = () => {
           const st = partState(q, label);
           const res = checkNumeric(pt.numeric, box.value);
@@ -527,7 +554,10 @@
       }
       const reveal = partEl.querySelector('[data-action="reveal"]');
       if (reveal) reveal.addEventListener('click', () => {
-        partState(q, label).revealed = true;
+        const st = partState(q, label);
+        st.revealed = true;
+        // A graph the student drew on screen is marked for them (they can still change the marks).
+        if (canPlot(pt) && typeof st.score !== 'number' && st.plot && (st.plot.points.length || st.plot.line)) st.score = window.Plot.check(pt.plot, st.plot, pt.marks).score;
         saveProgress();
         focusIn(refreshCard(q, card), `[data-part="${label}"] .markscheme`);
       });
@@ -545,6 +575,32 @@
       focusIn(refreshCard(q, card), 'textarea, input');
     });
     wireNextButtons(area);
+  }
+
+  // ----- Click-to-plot graphs (parts with a "plot" field; drawing and marking are in js/plot.js) -----
+  // The student plots the points and draws the line of best fit on the screen. "Check my graph" marks it:
+  // full marks are awarded automatically; otherwise the feedback says what to fix and they can try again,
+  // or open the mark scheme (which shows the examiner's graph) and mark themselves.
+  // The blank axes picture (plot.axes) is the question's diagram on printed sheets, so it isn't shown twice here.
+  const canPlot = (pt) => !!(pt.plot && window.Plot);
+  const plotsOnDiagram = (q) => (q.parts || []).some((pt) => canPlot(pt) && pt.plot.axes === q.diagram);
+  function plotHtml(pt, s) {
+    const locked = !!s.revealed;
+    let feedback = '';
+    if (s.plotCheck) {
+      const r = s.plotCheck;
+      const head = r.right ? `Correct! ${r.max} mark${r.max === 1 ? '' : 's'}.` : r.score ? `${r.score} of ${r.max} marks so far.` : 'Not quite.';
+      feedback = `<div class="feedback ${r.right ? 'good' : 'bad'}"><strong>${head}</strong>
+        <ul class="plot-fb">${r.feedback.map((f) => `<li>${f.ok ? '✓' : '✗'} ${escapeHtml(f.text)}</li>`).join('')}</ul>
+        ${r.right ? '' : '<p class="num-hint">Change your graph and check again, or look at the mark scheme.</p>'}</div>`;
+    }
+    return `
+      <div data-plot></div>
+      ${locked ? '' : `<div class="num-row">
+        <button class="primary" data-action="check-plot">Check my graph</button>
+        ${pt.plot.axes ? `<a class="plot-print" href="${escapeAttr(pt.plot.axes)}" target="_blank" rel="noopener">Blank axes to print</a>` : ''}
+      </div>`}
+      ${feedback}`;
   }
 
   // ----- Typed numerical answers (parts with a "numeric" field) -----

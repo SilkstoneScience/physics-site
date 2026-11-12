@@ -53,7 +53,7 @@
         <li><a class="card" href="newsroom.html?article=${a.id}">
           <h3>${esc(a.headline)}</h3>
           <p>${esc(a.kind)}, <em>${esc(a.paper)}</em></p>
-          <p>${a.topics.map((t) => `<span class="tag">${t}</span>`).join(' ')} <span class="tag">${a.level}</span>
+          <p>${a.topics.map((t) => `<span class="tag">${t}</span>`).join(' ')} <span class="tag${a.level === 'HL' ? ' hl' : ''}">${a.level}</span>
           ${best[a.id] !== undefined ? `<span class="tag sim-tag">✓ ${best[a.id]}%</span>` : ''}</p>
         </a></li>`).join('')}
       </ul>`;

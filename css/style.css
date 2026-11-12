@@ -554,6 +554,21 @@ select, textarea, input { font: inherit; color: var(--text); background: var(--b
 .num-row .unit { font-weight: 600; }
 .num-hint { font-size: 0.85rem; color: var(--muted); margin: 0 0 6px; }
 .auto-mark { font-weight: 600; margin: 8px 0 4px; }
+/* Click-to-plot graphs (js/plot.js): the grid is always dark on white, like the question diagrams */
+.plot { margin: 8px 0; }
+.plot-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
+.plot-tools .plot-mode { padding: 7px 14px; }
+.plot-tools .plot-mode[aria-pressed="true"] { background: var(--accent); color: var(--surface); }
+.plot-surface { background: #fff; border-radius: 8px; padding: 6px; max-width: 620px; margin: 0 auto; }
+.plot-surface svg { display: block; width: 100%; height: auto; touch-action: none; cursor: crosshair; user-select: none; -webkit-user-select: none; }
+.plot-surface svg:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.plot.is-locked .plot-surface svg { cursor: default; touch-action: auto; }
+.plot-readout { font-size: 0.9rem; color: var(--muted); margin: 6px 0 0; min-height: 2.8em; text-align: center; }
+.plot-fb { list-style: none; padding: 0; margin: 6px 0 0; }
+.plot-fb li + li { margin-top: 4px; }
+.plot-print { font-size: 0.9rem; }
+/* an examiner's graph or sketch inside a mark-scheme point: on its own line, no wider than a question diagram */
+.markscheme li img { display: block; max-width: min(100%, 460px); height: auto; margin-top: 6px; }
 .q-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 16px 0 -4px; }
 .q-nav button { padding: 8px 14px; border-radius: 8px; font: inherit; font-weight: 600; cursor: pointer; }
 .q-nav button:disabled { opacity: 0.4; cursor: default; }
