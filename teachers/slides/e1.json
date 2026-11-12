@@ -1,0 +1,1200 @@
+{
+  "topic": "E.1",
+  "hours": 6,
+  "hlHours": 3,
+  "points": [
+    {
+      "id": "gmr",
+      "short": "Discovering the nucleus",
+      "guide": "The Geiger–Marsden–Rutherford experiment and the discovery of the nucleus.",
+      "sections": [
+        "gmr",
+        "model"
+      ],
+      "minutes": 75,
+      "aims": [
+        "Describe the Geiger–Marsden–Rutherford experiment and its results.",
+        "Explain how the results ruled out the plum pudding model and led to the nuclear model of the atom."
+      ],
+      "checks": [
+        "E1-018"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Before the nucleus: the plum pudding model",
+          "bullets": [
+            "J. J. Thomson found the electron in 1897: atoms contain light, negative particles",
+            "Atoms are neutral, so they must also contain positive charge",
+            "His model (1904): electrons dotted through a sphere of positive charge as wide as the atom",
+            "Prediction: a fast, heavy alpha particle should pass through with only a tiny deflection",
+            [
+              "The positive charge is spread out, so its electric field is weak everywhere",
+              "The electrons are about 7000 times lighter than an alpha particle, so they can barely move it"
+            ]
+          ],
+          "notes": "An alpha particle is a helium nucleus, charge $+2e$ (E.3). Ask students to predict, before the next slide, what alpha particles fired at a thin foil of plum pudding atoms would do."
+        },
+        {
+          "type": "bullets",
+          "title": "The Geiger–Marsden–Rutherford experiment",
+          "bullets": [
+            "Hans Geiger and Ernest Marsden, in Ernest Rutherford's laboratory, around 1909",
+            "A narrow beam of alpha particles aimed at gold foil less than a micrometre thick",
+            "Everything inside an evacuated chamber, so air does not stop the alpha particles",
+            "A zinc sulfide screen flashes where an alpha particle hits it",
+            "The flashes were counted by eye through a microscope, which could be turned to any angle"
+          ],
+          "notes": "Gold was used because it can be beaten into very thin foil and its nuclei have a large charge. Counting flashes in a dark room for hours at a time was slow, tiring work."
+        },
+        {
+          "type": "diagram",
+          "title": "The apparatus, seen from above",
+          "svg": "figures/e1-geiger-marsden.svg",
+          "alt": "An evacuated circular chamber, seen from above. Alpha particles from a source pass through thin gold foil at the centre. Most go straight on or are deflected slightly; a few are deflected through large angles, one almost straight back. A zinc sulfide screen with a microscope sits on a dashed circle around the foil and can be moved to any angle.",
+          "bullets": [
+            "A narrow beam of alpha particles hits a very thin gold foil",
+            "Each alpha particle hitting the zinc sulfide screen makes a tiny flash",
+            "The microscope is moved round to count flashes at each angle",
+            "The chamber is a vacuum, so air doesn't stop the alpha particles"
+          ],
+          "notes": "Not to scale. Geiger and Marsden counted the flashes by eye, in a darkened room."
+        },
+        {
+          "type": "diagram",
+          "title": "Alpha particles passing a nucleus",
+          "figure": "e1at",
+          "bullets": [
+            "Paths far from the nucleus are hardly bent",
+            "Close paths are bent through large angles",
+            "A nearly head-on alpha particle comes back",
+            "The paths curve smoothly: the repulsion grows as the distance shrinks"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "What they saw and what it means",
+          "bullets": [
+            "Most alpha particles went straight through or were deflected slightly: <strong>the atom is mostly empty space</strong>",
+            "A few turned through large angles: <strong>the positive charge sits in a very small region</strong>",
+            "About 1 in 8000 came back (deflected by more than 90°): <strong>that region also holds almost all the mass</strong>",
+            "Rutherford (1911) called this tiny, dense, positive centre the <strong>nucleus</strong>"
+          ],
+          "notes": "Only a qualitative account is needed at SL. Rutherford's famous reaction was that it was like firing a heavy shell at tissue paper and having it come back. Stress that \"most bounced back\" is a common wrong answer."
+        },
+        {
+          "type": "bullets",
+          "title": "The nuclear model of the atom",
+          "bullets": [
+            "Nucleus about $10^{-15}$ m across; whole atom about $10^{-10}$ m across",
+            "The nucleus contains <strong>protons</strong> (charge $+e$) and <strong>neutrons</strong> (no charge), together called <strong>nucleons</strong>",
+            "Electrons (charge $-e$) occupy the much larger space around the nucleus",
+            "The neutron was found only in 1932 (James Chadwick): until then nuclei seemed too heavy for their charge",
+            "NoS: one surprising result falsified a model that had explained everything known before"
+          ],
+          "notes": "The nuclear model had its own problem: an orbiting electron should radiate and spiral inwards. Bohr's answer is HL (E.1 HL). This links to the guiding question on how evidence changes models of the atom."
+        },
+        {
+          "type": "worked",
+          "title": "A scale model of the atom",
+          "question": "An atom is about $10^{-10}$ m across and its nucleus about $10^{-15}$ m across. In a model, the nucleus is a bead 1 cm wide. Find (a) how wide the model atom must be and (b) the fraction of the atom's volume that the nucleus fills.",
+          "hint": "Find how many times wider the atom is than its nucleus, and scale the bead by the same factor. Volume depends on the cube of the width.",
+          "steps": [
+            {
+              "text": "(a) Ratio of the widths.",
+              "latex": "\\dfrac{10^{-10}}{10^{-15}} = 10^{5}"
+            },
+            {
+              "text": "Scale up the 1 cm bead.",
+              "latex": "10^{5} \\times 1\\ \\text{cm} = 10^{5}\\ \\text{cm} = 1\\ \\text{km}"
+            },
+            {
+              "text": "(b) Volume scales as width cubed.",
+              "latex": "\\left(\\dfrac{1}{10^{5}}\\right)^{3} = 10^{-15}"
+            }
+          ],
+          "notes": "A bead in the middle of a sphere 1 km wide, with a few specks (electrons) somewhere in it. This is why most alpha particles never come near a nucleus. These are orders of magnitude only."
+        }
+      ]
+    },
+    {
+      "id": "spectra-evidence",
+      "short": "Spectra and energy levels",
+      "guide": "Emission and absorption spectra provide evidence for discrete atomic energy levels.",
+      "sections": [
+        "spectra"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Describe continuous, emission and absorption spectra and how each is produced.",
+        "Explain why line spectra are evidence for discrete energy levels."
+      ],
+      "challenge": "CC-E1-01",
+      "checks": [
+        "E1-009"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Three kinds of spectrum",
+          "bullets": [
+            "A spectroscope or diffraction grating (C.3) spreads light out by wavelength",
+            "<strong>Continuous spectrum</strong>: every wavelength present, from a hot dense source such as a lamp filament",
+            "<strong>Emission line spectrum</strong>: bright lines on a dark background, from a hot gas at low pressure",
+            "<strong>Absorption line spectrum</strong>: dark lines across a continuous spectrum, after white light passes through a cool gas",
+            "A gas absorbs at exactly the wavelengths it emits"
+          ],
+          "notes": "If you have discharge tubes and handheld spectroscopes, let students look at hydrogen, helium and neon before naming anything. A low-pressure gas glows when a high voltage across the tube excites its atoms."
+        },
+        {
+          "type": "diagram",
+          "title": "Continuous, emission and absorption spectra",
+          "figure": "e1bt",
+          "bullets": [
+            "Hydrogen's visible lines: 410, 434, 486 and 656 nm",
+            "The dark lines line up with the bright ones",
+            "Each element has its own pattern, like a fingerprint"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Making the three spectra",
+          "svg": "figures/e1-spectra-setups.svg",
+          "alt": "Three set-ups. A lamp shining straight into a spectroscope gives a continuous spectrum. A tube of hot gas at low pressure gives bright lines on a dark background. White light passing through a cell of cooler gas gives a continuous spectrum crossed by dark lines. The lines shown are those of hydrogen.",
+          "bullets": [
+            "Hot, dense source: a continuous spectrum",
+            "Hot gas at low pressure: bright emission lines",
+            "White light through cooler gas: dark absorption lines",
+            "For one gas, the lines are at the same wavelengths in both"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Why lines mean energy levels",
+          "bullets": [
+            "Each line is light of one wavelength, so of one photon energy",
+            "A photon's energy comes from a change in the energy of the atom",
+            "Only certain photon energies appear, so the atom can only change its energy by certain amounts",
+            "So the atom's electrons can only have certain energies: <strong>discrete energy levels</strong>",
+            "If any energy were allowed, the spectrum would be continuous"
+          ],
+          "notes": "The word \"discrete\" means separate, with gaps between the allowed values (like steps rather than a ramp). The guide asks for this chain of reasoning: build it with the class, one link at a time."
+        },
+        {
+          "type": "bullets",
+          "title": "Why absorption lines look dark",
+          "bullets": [
+            "A photon is absorbed only if its energy exactly matches a gap between two levels",
+            "The excited atom soon emits the energy again, but in a random direction",
+            "So fewer photons of that wavelength carry on towards the observer",
+            "The lines are <strong>dimmer</strong> than their surroundings, not completely black"
+          ],
+          "notes": "Light re-emitted in other directions is why a sodium flame looks bright from the side even while it casts a shadow in sodium light (see the concept challenge \"The flame that casts a shadow\")."
+        },
+        {
+          "type": "worked",
+          "title": "Fewer lines in absorption",
+          "question": "An atom has just three energy levels: $-8.0$ eV (the ground state), $-5.0$ eV and $-3.0$ eV. Find the photon energies in (a) the emission spectrum of the hot gas and (b) the absorption spectrum of the cool gas, whose atoms are all in the ground state.",
+          "hint": "Every pair of levels can give an emission line. In a cool gas, every absorption has to start from the ground state.",
+          "steps": [
+            {
+              "text": "(a) Emission: one line for each pair of levels.",
+              "latex": "8.0 - 5.0 = 3.0\\ \\text{eV}"
+            },
+            {
+              "latex": "8.0 - 3.0 = 5.0\\ \\text{eV}"
+            },
+            {
+              "latex": "5.0 - 3.0 = 2.0\\ \\text{eV}"
+            },
+            {
+              "text": "(b) Absorption from the ground state only: the 3.0 eV and 5.0 eV lines."
+            },
+            {
+              "text": "The 2.0 eV jump starts from an excited level, which cool atoms aren't in, so the absorption spectrum has fewer lines."
+            }
+          ],
+          "notes": "Every absorption line is at the same wavelength as an emission line, but not every emission line appears in absorption. The level values are made up to keep the arithmetic simple."
+        }
+      ]
+    },
+    {
+      "id": "transitions",
+      "short": "Photons and transitions",
+      "guide": "Photons are emitted and absorbed during atomic transitions.",
+      "sections": [
+        "levels",
+        "hydrogen"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Describe emission and absorption of photons as transitions between energy levels.",
+        "Use an energy level diagram to find the possible transitions of an atom."
+      ],
+      "checks": [
+        "E1-007"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Energy levels",
+          "bullets": [
+            "The lowest level is the <strong>ground state</strong>; higher levels are <strong>excited states</strong>",
+            "Energies are usually given in electronvolts: $1\\ \\text{eV} = 1.60 \\times 10^{-19}$ J",
+            "Zero is the energy of an electron that has just escaped, so the levels are <strong>negative</strong>",
+            "<strong>Ionization energy</strong>: what it takes to remove an electron from the ground state altogether",
+            "The levels get closer together towards zero"
+          ],
+          "notes": "The electronvolt is the energy gained by one electron accelerated through 1 V (D.2). It suits atomic energies, which are a few eV."
+        },
+        {
+          "type": "bullets",
+          "title": "Transitions",
+          "bullets": [
+            "<strong>Emission</strong>: an electron drops to a lower level and the atom emits one photon",
+            "<strong>Absorption</strong>: a photon whose energy exactly matches a gap lifts an electron to a higher level",
+            "Photon energy = difference between the two levels",
+            "An atom can also be excited by collisions (heating, or electrons in a discharge tube)",
+            "A photon carrying more than the ionization energy can knock the electron out of the atom"
+          ],
+          "notes": "Common mistake: believing that any photon with \"enough\" energy will be absorbed. Between bound levels the match must be exact."
+        },
+        {
+          "type": "diagram",
+          "title": "The energy levels of hydrogen",
+          "figure": "e1ct",
+          "bullets": [
+            "Drops to $n = 1$: the Lyman series (ultraviolet)",
+            "Drops to $n = 2$: the Balmer series (visible)",
+            "Drops to $n = 3$: the Paschen series (infrared)",
+            "Not to scale"
+          ],
+          "notes": "The series names are useful context but students don't need to remember them. They should be able to say which region a line is in from its energy."
+        },
+        {
+          "type": "worked",
+          "title": "How many lines?",
+          "question": "Hydrogen atoms in a discharge tube are excited to the $n = 5$ level and fall back in any combination of steps. Find (a) the largest number of different lines they can emit and (b) how many of these are in the visible (Balmer) series.",
+          "hint": "List every pair of levels from $n = 1$ to $n = 5$: each pair gives one line. The visible lines are drops that end on $n = 2$.",
+          "steps": [
+            {
+              "text": "(a) Drops to $n = 1$ can start from $n = 2$, 3, 4 or 5: four lines."
+            },
+            {
+              "text": "Drops to $n = 2$, $n = 3$ and $n = 4$ add three, two and one more.",
+              "latex": "4 + 3 + 2 + 1 = 10"
+            },
+            {
+              "text": "(b) Drops ending on $n = 2$: from $n = 3$, 4 and 5.",
+              "latex": "3\\ \\text{visible lines}"
+            }
+          ],
+          "notes": "The four drops to $n = 1$ are ultraviolet, the two to $n = 3$ and the one from 5 to 4 are infrared. A quick rule: $n$ levels give $\\tfrac{1}{2}n(n-1)$ pairs."
+        },
+        {
+          "type": "worked",
+          "title": "Which photons are absorbed?",
+          "question": "Cool hydrogen gas, with every atom in the ground state, is lit by ultraviolet photons of energy (a) 11.0 eV and (b) 12.09 eV. Use the hydrogen energy levels to decide which photons can be absorbed, and what happens to the atoms that absorb them.",
+          "hint": "Find the gaps from $n = 1$ to each higher level. A photon is absorbed only if its energy equals one of these gaps.",
+          "steps": [
+            {
+              "text": "Gap from $n = 1$ to $n = 2$.",
+              "latex": "13.6 - 3.40 = 10.2\\ \\text{eV}"
+            },
+            {
+              "text": "Gap from $n = 1$ to $n = 3$.",
+              "latex": "13.6 - 1.51 = 12.09\\ \\text{eV}"
+            },
+            {
+              "text": "(a) 11.0 eV matches no gap: these photons pass straight through."
+            },
+            {
+              "text": "(b) 12.09 eV matches the gap to $n = 3$: these are absorbed, and the atoms then fall back, emitting up to three different lines."
+            }
+          ],
+          "notes": "The next gap, to $n = 4$, is 12.75 eV, so 11.0 eV falls between gaps. A photon of more than 13.6 eV, however, would be absorbed: it ionizes the atom and the extra energy becomes the electron's kinetic energy."
+        }
+      ]
+    },
+    {
+      "id": "photon-frequency",
+      "short": "Photon energy E = hf",
+      "guide": "The frequency of the photon released during an atomic transition depends on the difference in energy level as given by $E = hf$.",
+      "sections": [
+        "levels",
+        "hydrogen"
+      ],
+      "minutes": 75,
+      "aims": [
+        "Use $E = hf$ and $c = f\\lambda$ to link an energy gap to the frequency and wavelength of a photon.",
+        "Identify a transition from the wavelength of a spectral line."
+      ],
+      "checks": [
+        "E1-003"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Photon energy",
+          "bullets": [
+            "Light comes in packets of energy called <strong>photons</strong>",
+            "A photon's energy is proportional to its frequency",
+            "In a transition, the photon's energy equals the difference between the two levels",
+            "A bigger gap gives a higher frequency and a shorter wavelength",
+            "Visible light: about 1.8 eV (700 nm, red) to 3.1 eV (400 nm, violet)"
+          ],
+          "notes": "Students meet the photon properly in E.2 (HL). At SL it is enough to know that light is emitted and absorbed in packets of energy $hf$."
+        },
+        {
+          "type": "equation",
+          "title": "Photon energy",
+          "latex": [
+            "E = hf",
+            "c = f\\lambda"
+          ],
+          "bullets": [
+            "$E = hf$ is in the data booklet; $c = f\\lambda$ is the wave equation for light",
+            "$h = 6.63 \\times 10^{-34}$ J s, the Planck constant",
+            "For a transition, $E$ is the difference between the levels"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "From an energy gap to a wavelength",
+          "start": "An electron drops from a level of energy $E_{\\text{upper}}$ to one of energy $E_{\\text{lower}}$, and the atom emits one photon.",
+          "steps": [
+            {
+              "text": "Energy is conserved: the photon carries the difference",
+              "latex": "E = E_{\\text{upper}} - E_{\\text{lower}}"
+            },
+            {
+              "text": "Photon energy and frequency",
+              "latex": "E = hf"
+            },
+            {
+              "text": "For light, $f = c/\\lambda$",
+              "latex": "E = \\dfrac{hc}{\\lambda}"
+            },
+            {
+              "text": "Rearrange for the wavelength",
+              "latex": "\\lambda = \\dfrac{hc}{E}"
+            }
+          ],
+          "notes": "The wavelength is inversely proportional to the energy gap, so the largest gaps give the shortest wavelengths."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for photon calculations",
+          "bullets": [
+            "Convert eV to J (multiply by $1.60 \\times 10^{-19}$) before using $h$ in J s",
+            "Use the <strong>difference</strong> between two levels, never one level on its own",
+            "Take the size of the difference: a photon's energy is positive",
+            "A useful product: $hc = 1.99 \\times 10^{-25}$ J m",
+            "Check the answer: does the region (UV, visible, IR) make sense for the gap?"
+          ],
+          "notes": "A quick check students like: the wavelength in nm is about 1240 divided by the energy in eV."
+        },
+        {
+          "type": "worked",
+          "title": "A germicidal lamp",
+          "question": "Lamps that disinfect water use mercury vapour. Their main ultraviolet line comes from a transition in mercury atoms from a level at $-5.55$ eV to the ground state at $-10.44$ eV. Find (a) the photon energy in joules, (b) its frequency and (c) its wavelength.",
+          "hint": "Find the difference between the two levels in eV and convert it to joules. Then use $E = hf$, and $c = f\\lambda$ for the wavelength.",
+          "steps": [
+            {
+              "text": "(a) Difference between the levels.",
+              "latex": "\\Delta E = 10.44 - 5.55 = 4.89\\ \\text{eV}"
+            },
+            {
+              "text": "Convert to joules.",
+              "latex": "4.89 \\times 1.60 \\times 10^{-19} = 7.82 \\times 10^{-19}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Frequency from $E = hf$.",
+              "latex": "f = \\dfrac{7.82 \\times 10^{-19}}{6.63 \\times 10^{-34}}"
+            },
+            {
+              "latex": "f = 1.18 \\times 10^{15}\\ \\text{Hz}"
+            },
+            {
+              "text": "(c) Wavelength from $c = f\\lambda$.",
+              "latex": "\\lambda = \\dfrac{c}{f} = 2.54 \\times 10^{-7}\\ \\text{m}"
+            }
+          ],
+          "notes": "That is 254 nm, in the ultraviolet: these photons damage the DNA of bacteria. Ultraviolet at this wavelength is also harmful to eyes and skin, so the lamps are always shielded."
+        },
+        {
+          "type": "worked",
+          "title": "A helium–neon laser",
+          "question": "The red light of a helium–neon laser has a wavelength of 632.8 nm and comes from a transition between two energy levels of neon atoms. Find (a) the frequency of the light and (b) the energy gap between the two levels, in eV.",
+          "hint": "Change nanometres to metres and use $c = f\\lambda$. The photon energy $hf$ equals the energy gap.",
+          "steps": [
+            {
+              "text": "(a) Frequency, with $\\lambda = 632.8 \\times 10^{-9}$ m.",
+              "latex": "f = \\dfrac{c}{\\lambda} = 4.74 \\times 10^{14}\\ \\text{Hz}"
+            },
+            {
+              "text": "(b) Photon energy in joules.",
+              "latex": "E = hf = 3.14 \\times 10^{-19}\\ \\text{J}"
+            },
+            {
+              "text": "Convert to eV.",
+              "latex": "E = \\dfrac{3.14 \\times 10^{-19}}{1.60 \\times 10^{-19}} = 1.96\\ \\text{eV}"
+            }
+          ],
+          "notes": "Neither level is the ground state of neon: both are excited levels, kept supplied with atoms by collisions with excited helium atoms. Every photon in the beam has the same energy, which is why the colour is so pure."
+        },
+        {
+          "type": "worked",
+          "title": "Identifying a hydrogen line",
+          "question": "An ultraviolet telescope records a line from hot hydrogen gas at a wavelength of 103 nm. Use the hydrogen energy levels to identify the transition that produces it.",
+          "hint": "Find the photon energy from the wavelength and convert it to eV. Then look for the pair of levels whose difference matches.",
+          "steps": [
+            {
+              "text": "Photon energy.",
+              "latex": "E = \\dfrac{hc}{\\lambda} = \\dfrac{1.99 \\times 10^{-25}}{103 \\times 10^{-9}}"
+            },
+            {
+              "latex": "E = 1.93 \\times 10^{-18}\\ \\text{J} = 12.1\\ \\text{eV}"
+            },
+            {
+              "text": "Ultraviolet, so try drops to $n = 1$: from $n = 3$.",
+              "latex": "13.6 - 1.51 = 12.09\\ \\text{eV}"
+            },
+            {
+              "text": "The line comes from a drop from $n = 3$ to $n = 1$."
+            }
+          ],
+          "notes": "Check the neighbours: $n = 2 \\to 1$ gives 10.2 eV and $n = 4 \\to 1$ gives 12.75 eV, both clearly different. This line, in the Lyman series, can only be observed from space, because air absorbs it."
+        }
+      ]
+    },
+    {
+      "id": "composition",
+      "short": "Spectra and composition",
+      "guide": "Emission and absorption spectra provide information on the chemical composition.",
+      "sections": [
+        "composition"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Explain how emission and absorption spectra identify the elements in a sample or a star."
+      ],
+      "checks": [
+        "E1-005"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Spectra reveal composition",
+          "bullets": [
+            "Every element has its own set of lines, so its lines identify it",
+            "Laboratories: flame tests and emission spectroscopy find elements in tiny samples",
+            "Stars: light from the hot interior passes through cooler outer gas, which absorbs its own wavelengths",
+            "Matching a star's dark lines with laboratory spectra shows what its atmosphere contains",
+            "Helium was discovered from a yellow line in the Sun's spectrum in 1868, decades before it was found on Earth"
+          ],
+          "notes": "NoS: spectra let us analyse matter we can never touch. Linking questions: the properties of stars (E.5) and the Doppler shift of whole patterns of lines, which gives speeds of stars and galaxies (C.5)."
+        },
+        {
+          "type": "worked",
+          "title": "What is in the star?",
+          "question": "Dark lines in the spectrum of a star are at 393, 397, 410, 434, 486, 589, 590 and 656 nm. Laboratory lines (in nm) are: hydrogen 410, 434, 486, 656; sodium 589, 590; calcium 393, 397; magnesium 517, 518; helium 447, 588, 668. Which of these elements does the star's atmosphere show?",
+          "hint": "An element is identified only if all of its lines appear in the star's spectrum, at the same wavelengths.",
+          "steps": [
+            {
+              "text": "Hydrogen: 410, 434, 486 and 656 nm are all there."
+            },
+            {
+              "text": "Sodium: 589 and 590 nm are both there. Calcium: 393 and 397 nm are both there."
+            },
+            {
+              "text": "Magnesium: no lines at 517 or 518 nm, so not detected."
+            },
+            {
+              "text": "Helium: no lines at 447 or 668 nm, so not detected; the 589 nm line is sodium's, not helium's 588 nm line."
+            },
+            {
+              "text": "The star shows hydrogen, sodium and calcium."
+            }
+          ],
+          "notes": "These are real wavelengths, rounded to the nearest nanometre. The helium trap shows why spectroscopes must measure wavelengths precisely. An element that isn't detected might still be present, if its atoms aren't in a state that absorbs at these wavelengths."
+        }
+      ]
+    },
+    {
+      "id": "notation",
+      "short": "Nuclear notation",
+      "guide": "Nuclear notation $^{A}_{Z}\\text{X}$ where $A$ is the nucleon number, $Z$ is the proton number and X is the chemical symbol.",
+      "sections": [
+        "notation"
+      ],
+      "minutes": 65,
+      "aims": [
+        "Use the notation $^{A}_{Z}\\text{X}$ to find the numbers of protons, neutrons and electrons in an atom.",
+        "Define isotopes and compare their properties."
+      ],
+      "challenge": "CC-E1-02",
+      "checks": [
+        "E1-006"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Inside the nucleus",
+          "bullets": [
+            "<strong>Proton</strong>: charge $+e$, mass about 1 u",
+            "<strong>Neutron</strong>: no charge, mass about 1 u",
+            "Protons and neutrons are both <strong>nucleons</strong>",
+            "<strong>Electron</strong>: charge $-e$, about 1/1800 of the mass of a proton",
+            "The number of protons decides the element"
+          ],
+          "notes": "1 u is the unified atomic mass unit, $1.661 \\times 10^{-27}$ kg (in the data booklet). The proton and neutron masses are in the data booklet too."
+        },
+        {
+          "type": "equation",
+          "title": "Nuclear notation",
+          "latex": [
+            "^{A}_{Z}\\text{X}",
+            "N = A - Z"
+          ],
+          "bullets": [
+            "$A$: <strong>nucleon number</strong> (protons + neutrons), on top",
+            "$Z$: <strong>proton number</strong>, underneath; the nucleus has charge $+Ze$",
+            "X: the chemical symbol (you don't need to remember symbols)",
+            "$N$: the neutron number. A neutral atom has $Z$ electrons"
+          ],
+          "notes": "A nucleus of a particular kind is a <em>nuclide</em>. \"Carbon-14\" names the same nuclide as $^{14}_{\\;6}\\text{C}$: the number after the name is $A$."
+        },
+        {
+          "type": "bullets",
+          "title": "Isotopes",
+          "bullets": [
+            "<strong>Isotopes</strong>: nuclides with the same proton number but different numbers of neutrons",
+            "Same number of electrons, so almost the same chemistry",
+            "Different masses, so different densities and different speeds of diffusion",
+            "Some isotopes are stable and others radioactive (E.3)",
+            "Hydrogen has three: $^{1}_{1}\\text{H}$, deuterium $^{2}_{1}\\text{H}$ and tritium $^{3}_{1}\\text{H}$"
+          ],
+          "notes": "Heavy water, $\\text{D}_2\\text{O}$, behaves almost like ordinary water but is about 11% denser: an ice cube of heavy water sinks in ordinary water."
+        },
+        {
+          "type": "bullets",
+          "title": "Particles in the same notation",
+          "bullets": [
+            "Proton $^{1}_{1}\\text{p}$ and neutron $^{1}_{0}\\text{n}$",
+            "Electron $^{\\;\\,0}_{-1}\\text{e}$: the bottom number is its charge in units of $e$",
+            "Alpha particle $^{4}_{2}\\alpha$, the same as a helium nucleus",
+            "In E.3 these numbers must balance in every nuclear equation"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A medical isotope",
+          "question": "Iodine-131, used to treat thyroid disease, has proton number 53. (a) Write its nuclear notation. (b) Find the numbers of protons, neutrons and electrons in a neutral atom. (c) How many electrons does an iodide ion, $\\text{I}^{-}$, of this isotope have?",
+          "hint": "The number after the name is the nucleon number $A$. Neutrons make up the rest of the nucleons. A negative ion has gained an electron.",
+          "steps": [
+            {
+              "text": "(a) $A = 131$ and $Z = 53$.",
+              "latex": "^{131}_{\\;53}\\text{I}"
+            },
+            {
+              "text": "(b) Protons: $Z = 53$. Neutrons:",
+              "latex": "N = 131 - 53 = 78"
+            },
+            {
+              "text": "Electrons: 53, the same as the protons, because the atom is neutral."
+            },
+            {
+              "text": "(c) The ion has one extra electron: 54 electrons."
+            }
+          ],
+          "notes": "The ion has the same nucleus as the atom: ionization changes only the electrons. Stable iodine is iodine-127, with 74 neutrons."
+        },
+        {
+          "type": "worked",
+          "title": "Two isotopes of uranium",
+          "question": "Natural uranium ($Z = 92$) is mostly uranium-238 with a little uranium-235. Compare their nuclei: find (a) the number of neutrons in each and (b) the charge of each nucleus, in coulombs. (c) Explain why the two can't be separated by a chemical reaction.",
+          "hint": "Isotopes share $Z$, so they share the nuclear charge $+Ze$ and the number of electrons. Only the number of neutrons differs.",
+          "steps": [
+            {
+              "text": "(a) Uranium-238.",
+              "latex": "N = 238 - 92 = 146"
+            },
+            {
+              "text": "Uranium-235.",
+              "latex": "N = 235 - 92 = 143"
+            },
+            {
+              "text": "(b) Same charge for both: $Q = Ze$.",
+              "latex": "Q = 92 \\times 1.60 \\times 10^{-19}\\ \\text{C}"
+            },
+            {
+              "latex": "Q = 1.47 \\times 10^{-17}\\ \\text{C}"
+            },
+            {
+              "text": "(c) Both have 92 electrons, which decide the chemistry, so they react in the same way."
+            }
+          ],
+          "notes": "Enrichment for nuclear fuel (E.4) uses the small difference in mass instead, for example in gas centrifuges."
+        }
+      ]
+    },
+    {
+      "id": "bohr-quantization",
+      "short": "Bohr: quantized orbits",
+      "hl": true,
+      "guide": "The existence of quantized energy and orbits arise from the quantization of angular momentum in the Bohr model for hydrogen as given by $mvr = \\dfrac{nh}{2\\pi}$.",
+      "sections": [
+        "bohr"
+      ],
+      "minutes": 35,
+      "aims": [
+        "State Bohr's assumptions, including the quantization of angular momentum $mvr = \\dfrac{nh}{2\\pi}$.",
+        "Show how this rule leads to orbits whose radii are proportional to $n^2$."
+      ],
+      "checks": [
+        "E1-015"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The Bohr model of hydrogen",
+          "bullets": [
+            "Problem with Rutherford's atom: an orbiting electron accelerates, so it should radiate and spiral into the nucleus",
+            "Niels Bohr (1913): the electron moves in a circle round the proton, held by the electric force",
+            "Its <strong>angular momentum</strong> $mvr$ can only be a whole number of units of $h/2\\pi$",
+            "In these allowed orbits the electron does not radiate",
+            "It emits or absorbs a photon only when it jumps between orbits"
+          ],
+          "notes": "Bohr gave no reason for his rule: he chose it because it worked. The reason came later, from the wave nature of the electron (E.2): a whole number of de Broglie wavelengths fits round each allowed orbit."
+        },
+        {
+          "type": "equation",
+          "title": "Quantization of angular momentum",
+          "latex": "mvr = \\dfrac{nh}{2\\pi}",
+          "bullets": [
+            "In the data booklet",
+            "$m$: electron mass; $v$: its speed; $r$: orbit radius",
+            "$n = 1, 2, 3, \\ldots$ is the principal quantum number"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Allowed orbit radii",
+          "start": "An electron of mass $m$ and charge $-e$ orbits a proton at radius $r$ with speed $v$. The electric force provides the centripetal force (A.2, D.2).",
+          "steps": [
+            {
+              "text": "Electric force = centripetal force",
+              "latex": "\\dfrac{ke^{2}}{r^{2}} = \\dfrac{mv^{2}}{r}"
+            },
+            {
+              "text": "So",
+              "latex": "mv^{2} = \\dfrac{ke^{2}}{r}"
+            },
+            {
+              "text": "Bohr's rule gives the speed",
+              "latex": "v = \\dfrac{nh}{2\\pi mr}"
+            },
+            {
+              "text": "Substitute for $v$ and rearrange for $r$",
+              "latex": "r = \\dfrac{n^{2}h^{2}}{4\\pi^{2}kme^{2}}"
+            },
+            {
+              "text": "With the constants, for $n = 1$",
+              "latex": "r = 5.3 \\times 10^{-11}\\ \\text{m}"
+            }
+          ],
+          "notes": "This derivation is not required by the guide, but it shows how quantized angular momentum leads to quantized orbits: $r \\propto n^2$, so the radii are in the ratio 1 : 4 : 9 : … . The ground-state radius is the Bohr radius."
+        },
+        {
+          "type": "diagram",
+          "title": "Bohr orbits",
+          "figure": "e1dt",
+          "bullets": [
+            "Radii in the ratio 1 : 4 : 9",
+            "A drop to a lower orbit emits one photon",
+            "Not to scale with the nucleus"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "The second orbit",
+          "question": "In the Bohr model, the electron in the $n = 2$ orbit of hydrogen moves at $1.09 \\times 10^{6}\\ \\text{m s}^{-1}$. Find the radius of this orbit.",
+          "hint": "Rearrange $mvr = \\dfrac{nh}{2\\pi}$ for $r$, with $n = 2$ and the electron mass from the data booklet.",
+          "steps": [
+            {
+              "text": "Rearrange the quantization rule.",
+              "latex": "r = \\dfrac{nh}{2\\pi mv}"
+            },
+            {
+              "text": "Bottom of the fraction.",
+              "latex": "2\\pi \\times 9.11 \\times 10^{-31} \\times 1.09 \\times 10^{6}"
+            },
+            {
+              "latex": "= 6.24 \\times 10^{-24}"
+            },
+            {
+              "text": "Divide, with $n = 2$.",
+              "latex": "r = \\dfrac{2 \\times 6.63 \\times 10^{-34}}{6.24 \\times 10^{-24}}"
+            },
+            {
+              "latex": "r = 2.13 \\times 10^{-10}\\ \\text{m}"
+            }
+          ],
+          "notes": "This is four times the ground-state radius, as $r \\propto n^2$ predicts. The speed is half the ground-state speed: in the Bohr model $v \\propto 1/n$."
+        }
+      ]
+    },
+    {
+      "id": "bohr-levels",
+      "short": "Bohr: energy levels",
+      "hl": true,
+      "guide": "The discrete energy levels in the Bohr model for hydrogen as given by $E = -\\dfrac{13.6}{n^{2}}$ eV.",
+      "sections": [
+        "bohr"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Use $E = -\\dfrac{13.6}{n^{2}}$ eV to find hydrogen's energy levels and the photons emitted between them.",
+        "Describe where the Bohr model fails."
+      ],
+      "checks": [
+        "E1-014"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Energy levels of hydrogen",
+          "latex": "E = -\\dfrac{13.6}{n^{2}}\\ \\text{eV}",
+          "bullets": [
+            "In the data booklet",
+            "$n = 1$: $-13.6$ eV; $n = 2$: $-3.40$ eV; $n = 3$: $-1.51$ eV",
+            "These match the levels found from the hydrogen spectrum"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Allowed energies",
+          "start": "Continue from the allowed radii. The electron has kinetic energy and electric potential energy (D.2).",
+          "steps": [
+            {
+              "text": "Total energy",
+              "latex": "E = \\tfrac{1}{2}mv^{2} - \\dfrac{ke^{2}}{r}"
+            },
+            {
+              "text": "From the force equation, $mv^2 = ke^2/r$",
+              "latex": "E = -\\dfrac{ke^{2}}{2r}"
+            },
+            {
+              "text": "Substitute the allowed radii",
+              "latex": "E = -\\dfrac{2\\pi^{2}k^{2}me^{4}}{n^{2}h^{2}}"
+            },
+            {
+              "text": "With precise values of the constants",
+              "latex": "E = -\\dfrac{13.6}{n^{2}}\\ \\text{eV}"
+            }
+          ],
+          "notes": "Not required by the guide. The booklet's constants, rounded to three significant figures, give 13.5 eV, because $e$ appears to the fourth power and $h$ squared, so small rounding errors add up. Precise values give 13.6 eV, which matches hydrogen's measured ionization energy: the formula is right. The total energy is negative because the electron is bound: it is half the potential energy."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips and limits",
+          "bullets": [
+            "Keep the minus sign: $E_n$ is negative, and the photon energy is the difference between two levels",
+            "Ionization from level $n$ needs $13.6/n^2$ eV",
+            "The model works only for one-electron atoms and ions such as $\\text{He}^{+}$",
+            "It can't explain why some lines are brighter than others",
+            "Quantum mechanics replaced definite orbits with electron \"clouds\", but kept the energy levels"
+          ],
+          "notes": "Linking question (NoS): under what circumstances does the Bohr model fail? A good discussion for the guiding question on why older models are still taught."
+        },
+        {
+          "type": "worked",
+          "title": "The violet hydrogen line",
+          "question": "Use the Bohr model to calculate the wavelength of the light given out when hydrogen's electron falls from $n = 6$ to $n = 2$.",
+          "hint": "Find the energy of each level with $E = -\\dfrac{13.6}{n^2}$ eV. The photon carries the difference: convert it to joules before using $\\lambda = \\dfrac{hc}{E}$.",
+          "steps": [
+            {
+              "text": "The two levels.",
+              "latex": "E_{6} = -\\dfrac{13.6}{36} = -0.378\\ \\text{eV}"
+            },
+            {
+              "latex": "E_{2} = -\\dfrac{13.6}{4} = -3.40\\ \\text{eV}"
+            },
+            {
+              "text": "Photon energy.",
+              "latex": "\\Delta E = 3.40 - 0.378 = 3.02\\ \\text{eV}"
+            },
+            {
+              "text": "In joules.",
+              "latex": "\\Delta E = 4.84 \\times 10^{-19}\\ \\text{J}"
+            },
+            {
+              "text": "Wavelength, with $hc = 1.99 \\times 10^{-25}$ J m.",
+              "latex": "\\lambda = \\dfrac{hc}{\\Delta E} = 4.11 \\times 10^{-7}\\ \\text{m}"
+            }
+          ],
+          "notes": "About 411 nm: the violet line of hydrogen, measured at 410 nm. The small difference comes from rounding."
+        },
+        {
+          "type": "worked",
+          "title": "The end of the Balmer series",
+          "question": "The Balmer series lines are drops to $n = 2$. As the upper level increases, the lines crowd together towards a shortest wavelength, the series limit. Find this wavelength.",
+          "hint": "The largest possible drop to $n = 2$ starts from $n = \\infty$, where the energy is zero.",
+          "steps": [
+            {
+              "text": "The largest drop ends on $n = 2$ and starts at zero energy.",
+              "latex": "\\Delta E = 0 - (-3.40) = 3.40\\ \\text{eV}"
+            },
+            {
+              "text": "Convert to joules.",
+              "latex": "3.40 \\times 1.60 \\times 10^{-19} = 5.44 \\times 10^{-19}\\ \\text{J}"
+            },
+            {
+              "text": "Wavelength.",
+              "latex": "\\lambda = \\dfrac{hc}{\\Delta E} = 3.66 \\times 10^{-7}\\ \\text{m}"
+            }
+          ],
+          "notes": "About 366 nm, just beyond the violet end of the visible spectrum (measured at 365 nm). Free electrons captured into $n = 2$ with some kinetic energy give a faint continuous glow beyond the limit."
+        }
+      ]
+    },
+    {
+      "id": "closest-approach",
+      "short": "Distance of closest approach",
+      "hl": true,
+      "guide": "The distance of closest approach in head-on scattering experiments.",
+      "sections": [
+        "approach"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Use energy conservation to find the distance of closest approach in a head-on collision.",
+        "Explain why this distance is an upper limit for the radius of the nucleus."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "A head-on approach",
+          "bullets": [
+            "An alpha particle heads straight for a nucleus; only the electric force acts",
+            "The repulsion slows it down: kinetic energy becomes electric potential energy",
+            "At the <strong>distance of closest approach</strong> $d$ it stops for an instant, then comes back",
+            "There, all the starting kinetic energy is electric potential energy",
+            "The alpha particle never touched the nucleus, so $d$ is an <strong>upper limit</strong> for the nuclear radius"
+          ],
+          "notes": "Assume the nucleus does not recoil. This is reasonable for heavy targets: a gold nucleus is about 50 times more massive than an alpha particle."
+        },
+        {
+          "type": "diagram",
+          "title": "Kinetic energy becomes potential energy",
+          "svg": "figures/e1-closest-approach.svg",
+          "alt": "Top: an alpha particle heads straight towards a nucleus of charge plus Z e and stops at distance d from it. Below: a graph of energy against distance from the nucleus. The electric potential energy curve rises steeply as the distance falls. A horizontal dashed line shows the starting kinetic energy; it meets the curve at distance d.",
+          "bullets": [
+            "The electric potential energy rises as the alpha particle gets closer",
+            "It stops where the potential energy equals its starting kinetic energy",
+            "That distance is $d$, the distance of closest approach"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Electric potential energy",
+          "latex": "E_p = \\dfrac{kq_{1}q_{2}}{r}",
+          "bullets": [
+            "In the data booklet (D.2)",
+            "Alpha particle: $q_1 = 2e$; nucleus: $q_2 = Ze$",
+            "$k = 8.99 \\times 10^{9}\\ \\text{N m}^{2}\\,\\text{C}^{-2}$"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Distance of closest approach",
+          "start": "An alpha particle with kinetic energy $E_k$ starts far from a nucleus of proton number $Z$, where its potential energy is zero, and moves straight towards it.",
+          "steps": [
+            {
+              "text": "Energy far away",
+              "latex": "E = E_k + 0"
+            },
+            {
+              "text": "Energy at closest approach: at rest",
+              "latex": "E = 0 + \\dfrac{k(2e)(Ze)}{d}"
+            },
+            {
+              "text": "Energy is conserved",
+              "latex": "E_k = \\dfrac{k(2e)(Ze)}{d}"
+            },
+            {
+              "text": "Rearrange",
+              "latex": "d = \\dfrac{2kZe^{2}}{E_k}"
+            }
+          ],
+          "notes": "The guide's phrase is \"Rutherford's simple energy conservation considerations\". The same method works for any charged particle: replace $2e$ by its charge."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for closest approach",
+          "bullets": [
+            "Convert MeV to joules: $1\\ \\text{MeV} = 1.60 \\times 10^{-13}$ J",
+            "Use the proton number $Z$ for the charge, not the nucleon number $A$",
+            "The alpha particle's charge is $2e$",
+            "$d \\propto 1/E_k$: doubling the energy halves the distance",
+            "$d \\propto Z$: a smaller nuclear charge lets the alpha particle get closer"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Alpha particles and copper",
+          "question": "Polonium-214 emits alpha particles with kinetic energy 7.7 MeV. One heads straight for a copper nucleus ($Z = 29$). Find the distance of closest approach.",
+          "hint": "When the alpha particle stops, its kinetic energy has all been converted to electric potential energy. Convert MeV to joules, and use charges $2e$ and $29e$.",
+          "steps": [
+            {
+              "text": "Kinetic energy in joules: $7.7 \\times 1.60 \\times 10^{-13}$.",
+              "latex": "E_k = 1.23 \\times 10^{-12}\\ \\text{J}"
+            },
+            {
+              "text": "Top of the fraction.",
+              "latex": "2kZe^{2} = 1.33 \\times 10^{-26}\\ \\text{J m}"
+            },
+            {
+              "text": "Divide by the kinetic energy.",
+              "latex": "d = \\dfrac{1.33 \\times 10^{-26}}{1.23 \\times 10^{-12}}"
+            },
+            {
+              "latex": "d = 1.1 \\times 10^{-14}\\ \\text{m}"
+            }
+          ],
+          "notes": "Top of the fraction: $2 \\times 8.99 \\times 10^{9} \\times 29 \\times (1.60 \\times 10^{-19})^2$. A copper-63 nucleus has a radius of about $4.8 \\times 10^{-15}$ m, so the alpha particle still stops more than twice that distance away."
+        },
+        {
+          "type": "worked",
+          "title": "Getting close to platinum",
+          "question": "What kinetic energy, in MeV, would an alpha particle need to reach $3.0 \\times 10^{-14}$ m from the centre of a platinum nucleus ($Z = 78$) in a head-on approach?",
+          "hint": "Use the same energy equation, but this time the distance is known and the kinetic energy is the unknown.",
+          "steps": [
+            {
+              "text": "Energy conservation.",
+              "latex": "E_k = \\dfrac{2kZe^{2}}{d}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "E_k = \\dfrac{3.59 \\times 10^{-26}}{3.0 \\times 10^{-14}}"
+            },
+            {
+              "latex": "E_k = 1.20 \\times 10^{-12}\\ \\text{J}"
+            },
+            {
+              "text": "Convert to MeV.",
+              "latex": "E_k = \\dfrac{1.20 \\times 10^{-12}}{1.60 \\times 10^{-13}} = 7.5\\ \\text{MeV}"
+            }
+          ],
+          "notes": "Top of the fraction: $2 \\times 8.99 \\times 10^{9} \\times 78 \\times (1.60 \\times 10^{-19})^2 = 3.59 \\times 10^{-26}$ J m. Natural alpha particles have energies of about 4 to 9 MeV, so this is reachable."
+        }
+      ]
+    },
+    {
+      "id": "radius-density",
+      "short": "Nuclear radius and density",
+      "hl": true,
+      "guide": "The relationship between the radius and the nucleon number for a nucleus as given by $R = R_0A^{1/3}$ and implications for nuclear densities.",
+      "sections": [
+        "radius"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Use $R = R_0A^{1/3}$ to find nuclear radii.",
+        "Show that all nuclei have about the same density, and describe what this implies."
+      ],
+      "checks": [
+        "E1-013"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "How big is a nucleus?",
+          "bullets": [
+            "Closest-approach experiments give upper limits; high-energy scattering experiments measure radii",
+            "The radius grows with the nucleon number $A$, but slowly",
+            "$R_0$ is about the radius of a single nucleon",
+            "Multiply $A$ by 8 and the radius only doubles"
+          ],
+          "notes": "Radii are often given in femtometres (fm): $1\\ \\text{fm} = 10^{-15}$ m. Nuclear radii range from about 1 fm (a proton) to about 7 fm (the heaviest nuclei)."
+        },
+        {
+          "type": "equation",
+          "title": "Nuclear radius",
+          "latex": "R = R_0A^{1/3}",
+          "bullets": [
+            "In the data booklet",
+            "$R_0 = 1.20 \\times 10^{-15}$ m (the Fermi radius)",
+            "$A$: the nucleon number. Take the cube root, not the cube"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Nuclear density",
+          "start": "A nucleus has $A$ nucleons, each of mass about 1 u, in a sphere of radius $R = R_0A^{1/3}$.",
+          "steps": [
+            {
+              "text": "Mass",
+              "latex": "M \\approx Au"
+            },
+            {
+              "text": "Volume",
+              "latex": "V = \\tfrac{4}{3}\\pi R^{3} = \\tfrac{4}{3}\\pi R_0^{3}A"
+            },
+            {
+              "text": "Density: $A$ cancels",
+              "latex": "\\rho = \\dfrac{Au}{\\tfrac{4}{3}\\pi R_0^{3}A} = \\dfrac{3u}{4\\pi R_0^{3}}"
+            },
+            {
+              "text": "With the constants",
+              "latex": "\\rho \\approx 2.3 \\times 10^{17}\\ \\text{kg m}^{-3}"
+            }
+          ],
+          "notes": "With $u = 1.661 \\times 10^{-27}$ kg and $R_0 = 1.20 \\times 10^{-15}$ m. This is about $10^{14}$ times the density of water."
+        },
+        {
+          "type": "bullets",
+          "title": "What the density tells us",
+          "bullets": [
+            "Every nucleus, light or heavy, has about the same density",
+            "The volume is proportional to $A$: each nucleon takes up the same space, like marbles packed in a bag",
+            "Nuclear matter is about $10^{14}$ times denser than water",
+            "Neutron stars (E.5) are made of matter about this dense",
+            "Atoms are far less dense, because almost all of their volume is empty space"
+          ],
+          "notes": "The marble picture suggests that the strong force holds each nucleon only to its nearest neighbours, and that nucleons can't be squeezed closer together. Both are true to a good approximation."
+        },
+        {
+          "type": "worked",
+          "title": "Twice the size",
+          "question": "Find (a) the radius of an oxygen-16 nucleus and (b) the nucleon number of a nucleus with twice this radius.",
+          "hint": "Use $R = R_0A^{1/3}$. If $R$ doubles, how must $A$ change, given that $R$ depends on the cube root of $A$?",
+          "steps": [
+            {
+              "text": "(a) Cube root of 16.",
+              "latex": "16^{1/3} = 2.52"
+            },
+            {
+              "text": "Radius.",
+              "latex": "R = 1.20 \\times 10^{-15} \\times 2.52"
+            },
+            {
+              "latex": "R = 3.0 \\times 10^{-15}\\ \\text{m}"
+            },
+            {
+              "text": "(b) $A \\propto R^{3}$, so doubling $R$ multiplies $A$ by $2^3$.",
+              "latex": "A = 16 \\times 8 = 128"
+            }
+          ],
+          "notes": "Tellurium-128 is a nucleus with this nucleon number. Ask: how does its density compare with oxygen-16's? (The same.)"
+        },
+        {
+          "type": "worked",
+          "title": "The Earth at nuclear density",
+          "question": "Imagine the Earth's mass, $5.97 \\times 10^{24}$ kg, squeezed to the density of nuclear matter, $2.3 \\times 10^{17}\\ \\text{kg m}^{-3}$. Find the radius of the sphere it would form.",
+          "hint": "Find the volume from the mass and the density, then find the radius of a sphere with that volume.",
+          "steps": [
+            {
+              "text": "Volume.",
+              "latex": "V = \\dfrac{M}{\\rho} = \\dfrac{5.97 \\times 10^{24}}{2.3 \\times 10^{17}}"
+            },
+            {
+              "latex": "V = 2.6 \\times 10^{7}\\ \\text{m}^{3}"
+            },
+            {
+              "text": "Radius of a sphere.",
+              "latex": "r = \\left(\\dfrac{3V}{4\\pi}\\right)^{1/3}"
+            },
+            {
+              "latex": "r = 1.8 \\times 10^{2}\\ \\text{m}"
+            }
+          ],
+          "notes": "A ball less than 400 m across, smaller than many towns. Nothing could squeeze the Earth like this: only stars much heavier than the Sun collapse into neutron stars (E.5)."
+        }
+      ]
+    },
+    {
+      "id": "deviations",
+      "short": "Deviations from Rutherford",
+      "hl": true,
+      "guide": "Deviations from Rutherford scattering at high energies.",
+      "sections": [
+        "deviations"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Explain why Rutherford scattering fails at high energies, and what the deviations tell us about the nucleus."
+      ],
+      "checks": [
+        "E1-016"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Rutherford's prediction",
+          "bullets": [
+            "Rutherford assumed that only the electric force acts between the alpha particle and the nucleus",
+            "His formula predicts how many alpha particles scatter at each angle: fewer and fewer at larger angles",
+            "At low energies, experiments match the prediction very well",
+            "In exam questions the energies are low, so only the electric force needs to be considered"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "At high energies",
+          "bullets": [
+            "Faster alpha particles get closer; at a high enough energy they reach the surface of the nucleus",
+            "Then the short-range <strong>strong nuclear force</strong> acts as well",
+            "Fewer alpha particles scatter at large angles than Rutherford's formula predicts",
+            "The energy at which this starts gives the radius of the nucleus",
+            "A smaller nuclear charge lets alpha particles reach the surface at a lower energy"
+          ],
+          "notes": "Deviations from Rutherford scattering are evidence for the strong nuclear force, which acts only over very short distances (E.3). Some alpha particles are absorbed by the nucleus instead of being scattered."
+        },
+        {
+          "type": "diagram",
+          "title": "Fewer than predicted",
+          "svg": "figures/e1-large-angle.svg",
+          "alt": "Graph of the number of alpha particles scattered through a fixed large angle against the alpha-particle energy, on a log scale. Rutherford's prediction is a smooth falling dashed curve. The measured points follow it at low energies, then fall well below it above the energy at which the alpha particles start to reach the nucleus.",
+          "bullets": [
+            "Low energies: the measurements follow Rutherford's prediction",
+            "Above a certain energy, fewer alpha particles scatter than predicted",
+            "There the alpha particles reach the nucleus and the strong force acts"
+          ],
+          "notes": "A sketch of the shape only, with no values: the energy at which the deviation starts depends on the nucleus."
+        },
+        {
+          "type": "worked",
+          "title": "When does calcium deviate?",
+          "question": "Estimate the alpha-particle energy, in MeV, at which deviations from Rutherford scattering begin for calcium-40 ($Z = 20$).",
+          "hint": "Deviations begin when the distance of closest approach equals the nuclear radius. Find the radius with $R = R_0A^{1/3}$, then the energy that gives that distance.",
+          "steps": [
+            {
+              "text": "Radius of the nucleus.",
+              "latex": "R = 1.20 \\times 10^{-15} \\times 40^{1/3}"
+            },
+            {
+              "latex": "R = 4.1 \\times 10^{-15}\\ \\text{m}"
+            },
+            {
+              "text": "Set $d = R$ in the energy equation.",
+              "latex": "E_k = \\dfrac{2kZe^{2}}{R}"
+            },
+            {
+              "latex": "E_k = \\dfrac{9.21 \\times 10^{-27}}{4.1 \\times 10^{-15}}"
+            },
+            {
+              "latex": "E_k = 2.2 \\times 10^{-12}\\ \\text{J}"
+            },
+            {
+              "text": "Convert to MeV.",
+              "latex": "E_k \\approx 14\\ \\text{MeV}"
+            }
+          ],
+          "notes": "This is a rough estimate: the alpha particle has its own radius of about 2 fm, so the two touch a little sooner, at a somewhat lower energy. Heavier nuclei, with larger charges, need higher energies (about 30 MeV for gold)."
+        }
+      ]
+    }
+  ]
+}

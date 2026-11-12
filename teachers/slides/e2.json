@@ -1,0 +1,1152 @@
+{
+  "topic": "E.2",
+  "hours": 0,
+  "hlHours": 8,
+  "points": [
+    {
+      "id": "photoelectric",
+      "short": "The photoelectric effect",
+      "hl": true,
+      "guide": "The photoelectric effect as evidence of the particle nature of light; photons of a certain frequency, known as the threshold frequency, are required to release photoelectrons from the metal. (Guidance: a discussion of which features of the photoelectric effect cannot be explained using the classical wave theory of light.)",
+      "sections": [
+        "photoelectric",
+        "classical"
+      ],
+      "minutes": 70,
+      "aims": [
+        "Describe the results of photoelectric experiments, including the threshold frequency $f_0$.",
+        "Explain which results the wave model of light cannot account for, and calculate photon energies with $E = hf$."
+      ],
+      "challenge": "CC-E2-01",
+      "checks": [
+        "E2-015"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Light that knocks out electrons",
+          "bullets": [
+            "Put a clean zinc plate on a gold-leaf electroscope and charge it <strong>negatively</strong>",
+            "Shine ultraviolet light on the plate: the leaves fall at once",
+            "Shine a very bright visible lamp instead: the leaves stay apart",
+            "The ultraviolet light is releasing electrons from the zinc surface",
+            "Electrons released by light are called <strong>photoelectrons</strong>; the process is the <strong>photoelectric effect</strong>"
+          ],
+          "notes": "Rub the zinc with emery paper first: an oxide layer stops the effect. A sheet of glass between the lamp and the plate absorbs the ultraviolet and stops the discharge, which makes a good second demonstration. Hertz noticed the effect in 1887; Lenard studied it in detail around 1900."
+        },
+        {
+          "type": "diagram",
+          "title": "A photocell",
+          "figure": "e2at",
+          "bullets": [
+            "Light falls on the metal cathode inside a vacuum tube",
+            "Photoelectrons cross the vacuum to the anode",
+            "The ammeter reads the <strong>photocurrent</strong>",
+            "The supply can be reversed to slow the electrons down"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "What the experiments show",
+          "bullets": [
+            "Below a <strong>threshold frequency</strong> $f_0$ no electrons leave the metal, however bright the light",
+            "Above $f_0$, emission starts <strong>straight away</strong>, even in very dim light",
+            "The <strong>maximum kinetic energy</strong> of the electrons rises with the frequency of the light",
+            "Changing the brightness does not change that maximum kinetic energy",
+            "Brighter light above $f_0$ releases <strong>more electrons per second</strong>: a bigger photocurrent",
+            "Each metal has its own threshold frequency"
+          ],
+          "notes": "Ask students to predict each result before you give it, using what they know about waves (C.2): most predict that bright red light will eventually work."
+        },
+        {
+          "type": "bullets",
+          "title": "Where the wave model fails",
+          "bullets": [
+            "In a wave, energy arrives continuously, spread over the wavefront, and grows with the amplitude",
+            "Prediction: light of any frequency should work if it is bright enough. <strong>Wrong</strong>: nothing below $f_0$",
+            "Prediction: dim light needs time to build up energy in an electron. <strong>Wrong</strong>: no delay",
+            "Prediction: brighter light gives faster electrons. <strong>Wrong</strong>: the maximum kinetic energy depends only on $f$",
+            "Only one result fits: brighter light gives more electrons"
+          ],
+          "notes": "For very dim light, a wave calculation predicts that an electron would need minutes or longer to collect enough energy, yet emission is seen within about a nanosecond. Guide linking question (NoS): how did the explanation of the photoelectric effect falsify the idea that light is purely a wave?"
+        },
+        {
+          "type": "bullets",
+          "title": "Packets of energy",
+          "bullets": [
+            "1900: Planck could only explain black-body spectra (B.1) if energy was emitted in packets, or <strong>quanta</strong>, of size $hf$",
+            "1905: Einstein went further: light itself travels as packets of energy, later called <strong>photons</strong>",
+            "A photon of frequency $f$ carries energy $E = hf$",
+            "$h$ is the Planck constant, $6.63 \\times 10^{-34}$ J s",
+            "Brighter light means more photons per second, not bigger photons"
+          ],
+          "notes": "The black-body background is context only: E.2 does not examine Planck's hypothesis. Einstein's Nobel Prize (1921) was awarded for this explanation, not for relativity."
+        },
+        {
+          "type": "equation",
+          "title": "Photon energy",
+          "latex": [
+            "E = hf",
+            "E = \\dfrac{hc}{\\lambda}"
+          ],
+          "bullets": [
+            "Energy is proportional to frequency: violet photons carry more energy than red ones",
+            "Small energies are often given in electronvolts: $1\\ \\text{eV} = 1.60 \\times 10^{-19}$ J",
+            "Visible photons carry about 1.8 eV (red) to 3.1 eV (violet)"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Photon energy from the wavelength",
+          "start": "A photon of frequency $f$ carries energy $E = hf$. Wavelengths are usually easier to measure than frequencies, so write the energy in terms of $\\lambda$.",
+          "steps": [
+            {
+              "text": "The wave equation for light (C.2)",
+              "latex": "c = f\\lambda"
+            },
+            {
+              "text": "Make the frequency the subject",
+              "latex": "f = \\dfrac{c}{\\lambda}"
+            },
+            {
+              "text": "Substitute into the photon energy",
+              "latex": "E = hf = \\dfrac{hc}{\\lambda}"
+            },
+            {
+              "text": "A useful product to remember",
+              "latex": "hc = 1.99 \\times 10^{-25}\\ \\text{J m}"
+            }
+          ],
+          "notes": "Shorter wavelength, more energy per photon: ultraviolet photons can do what bright red light cannot."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for photon energies",
+          "bullets": [
+            "Put the wavelength in metres: $1\\ \\text{nm} = 10^{-9}$ m",
+            "To change joules to electronvolts, divide by $1.60 \\times 10^{-19}$",
+            "One photon interacts with one electron: energy from two photons cannot be added",
+            "Intensity tells you how many photons arrive per second, not how much energy each one has",
+            "Number of photons per second $= \\dfrac{\\text{power}}{hf}$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Red or blue?",
+          "question": "Potassium has a work function of 2.30 eV: an electron needs at least this much energy to escape from its surface. A potassium plate is lit first by a red laser of wavelength 650 nm, then by a blue LED of wavelength 450 nm. Find the energy of a photon of each colour, in eV, and state which light releases electrons.",
+          "hint": "Use $E = \\dfrac{hc}{\\lambda}$ for each wavelength, then divide by $1.60 \\times 10^{-19}$ to get electronvolts. Compare each photon's energy with 2.30 eV.",
+          "steps": [
+            {
+              "text": "Red photon",
+              "latex": "E = \\dfrac{1.99 \\times 10^{-25}}{650 \\times 10^{-9}} = 3.06 \\times 10^{-19}\\ \\text{J}"
+            },
+            {
+              "text": "In electronvolts: less than 2.30 eV",
+              "latex": "E = 1.91\\ \\text{eV}"
+            },
+            {
+              "text": "Blue photon",
+              "latex": "E = \\dfrac{1.99 \\times 10^{-25}}{450 \\times 10^{-9}} = 4.42 \\times 10^{-19}\\ \\text{J}"
+            },
+            {
+              "text": "In electronvolts: more than 2.30 eV",
+              "latex": "E = 2.76\\ \\text{eV}"
+            },
+            {
+              "text": "Only the <strong>blue</strong> light releases electrons, however bright the red laser is"
+            }
+          ],
+          "notes": "The red laser concentrates its energy into a narrow beam and can be far more intense than the LED, yet it releases nothing. That is the point to stress."
+        },
+        {
+          "type": "worked",
+          "title": "Photons from a laser pointer",
+          "question": "A green laser pointer emits light of wavelength 532 nm with a power of 5.0 mW. Find (a) the energy of one photon and (b) the number of photons it emits each second.",
+          "hint": "Find the energy of one photon with $E = \\dfrac{hc}{\\lambda}$. The power is the energy emitted per second, so divide it by the energy of one photon.",
+          "steps": [
+            {
+              "text": "(a) Energy of one photon",
+              "latex": "E = \\dfrac{1.99 \\times 10^{-25}}{532 \\times 10^{-9}}"
+            },
+            {
+              "text": "So",
+              "latex": "E = 3.74 \\times 10^{-19}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Photons per second = power ÷ photon energy",
+              "latex": "N = \\dfrac{5.0 \\times 10^{-3}}{3.74 \\times 10^{-19}}"
+            },
+            {
+              "text": "Photons emitted each second",
+              "latex": "N = 1.3 \\times 10^{16}\\ \\text{s}^{-1}"
+            }
+          ],
+          "notes": "With so many photons arriving every second, the beam looks perfectly smooth: the graininess of light only shows up in experiments that detect single photons."
+        }
+      ]
+    },
+    {
+      "id": "einstein",
+      "short": "Einstein's photoelectric equation",
+      "hl": true,
+      "guide": "Einstein’s explanation using the work function and the maximum kinetic energy of the photoelectrons as given by $E_{\\max} = hf - \\Phi$ where $\\Phi$ is the work function of the metal.",
+      "sections": [
+        "einstein",
+        "stopping",
+        "graph"
+      ],
+      "minutes": 110,
+      "aims": [
+        "Explain the photoelectric results with photons and the work function, and use $E_{\\max} = hf - \\Phi$.",
+        "Find $E_{\\max}$ from a stopping voltage, and find $h$, $f_0$ and $\\Phi$ from a graph."
+      ],
+      "checks": [
+        "E2-002"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Einstein's explanation",
+          "bullets": [
+            "Each photon gives <strong>all</strong> of its energy to <strong>one</strong> electron",
+            "The <strong>work function</strong> $\\Phi$ is the least energy an electron needs to escape from the metal's surface",
+            "Any energy left over becomes the electron's kinetic energy",
+            "Electrons from below the surface lose extra energy on the way out",
+            "So only the electrons nearest the surface leave with the <strong>maximum</strong> kinetic energy $E_{\\max}$"
+          ],
+          "notes": "Einstein was a theorist: the measurements came from Lenard and others, and Millikan tested Einstein's equation carefully between 1914 and 1916, expecting to disprove it."
+        },
+        {
+          "type": "bullets",
+          "title": "Every result explained",
+          "bullets": [
+            "<strong>No emission below $f_0$:</strong> each photon has less energy than $\\Phi$, and an electron cannot combine two photons",
+            "<strong>No delay:</strong> a single photon delivers enough energy in one go",
+            "<strong>Higher frequency, faster electrons:</strong> each photon brings more energy",
+            "<strong>Brighter light, more electrons:</strong> more photons arrive each second",
+            "<strong>Brightness does not change $E_{\\max}$:</strong> the energy per photon is unchanged"
+          ],
+          "notes": "Guide linking question (NoS): can the Bohr model help explain the photoelectric effect? Both rest on an electron absorbing one whole photon, with energy conserved (E.1). But the electrons in a metal are not in single sharp levels, so $\\Phi$ is the least energy needed, not one exact jump."
+        },
+        {
+          "type": "equation",
+          "title": "The photoelectric equation",
+          "latex": "E_{\\max} = hf - \\Phi",
+          "bullets": [
+            "$hf$: the energy of one photon",
+            "$\\Phi$: the work function, a property of the metal (a few eV)",
+            "$E_{\\max}$: the maximum kinetic energy of the photoelectrons"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "The photoelectric equation",
+          "start": "Follow the energy of one photon as it is absorbed by one electron near the surface of a metal.",
+          "steps": [
+            {
+              "text": "Energy brought by the photon",
+              "latex": "E = hf"
+            },
+            {
+              "text": "At least $\\Phi$ is used to free the electron from the metal",
+              "latex": "\\text{energy to escape} \\geq \\Phi"
+            },
+            {
+              "text": "For an electron at the surface, exactly $\\Phi$ is used",
+              "latex": "hf = \\Phi + E_{\\max}"
+            },
+            {
+              "text": "Rearrange",
+              "latex": "E_{\\max} = hf - \\Phi"
+            }
+          ],
+          "notes": "This is just conservation of energy for one photon and one electron."
+        },
+        {
+          "type": "derivation",
+          "title": "The threshold frequency",
+          "start": "Right at the threshold, each photon can only just free an electron, with nothing left over for kinetic energy.",
+          "steps": [
+            {
+              "text": "At the threshold, the kinetic energy is zero",
+              "latex": "hf_0 - \\Phi = 0"
+            },
+            {
+              "text": "So the threshold frequency is",
+              "latex": "f_0 = \\dfrac{\\Phi}{h}"
+            },
+            {
+              "text": "The matching threshold wavelength, using $c = f\\lambda$",
+              "latex": "\\lambda_0 = \\dfrac{c}{f_0} = \\dfrac{hc}{\\Phi}"
+            },
+            {
+              "text": "Light with a <strong>longer</strong> wavelength than $\\lambda_0$ releases no electrons"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Measuring the fastest electrons",
+          "bullets": [
+            "Reverse the supply, so the anode is negative and pushes the photoelectrons back",
+            "Increase this reverse p.d.: fewer and fewer electrons reach the anode",
+            "At the <strong>stopping voltage</strong> $V_s$ no electron gets across, not even the fastest: the current is zero",
+            "The field does work $eV_s$ on the fastest electrons, removing all their kinetic energy",
+            "So the stopping voltage in volts equals $E_{\\max}$ in electronvolts"
+          ],
+          "notes": "Some books and older slides call $V_s$ the cut-off voltage or write it $V_0$. The meaning is the same."
+        },
+        {
+          "type": "derivation",
+          "title": "Stopping voltage and the straight line",
+          "start": "A reverse p.d. $V_s$ just stops the fastest photoelectrons, which start with kinetic energy $E_{\\max}$.",
+          "steps": [
+            {
+              "text": "Work done by the field on an electron of charge $e$",
+              "latex": "W = eV_s"
+            },
+            {
+              "text": "It removes all of the kinetic energy",
+              "latex": "eV_s = E_{\\max}"
+            },
+            {
+              "text": "Combine with the photoelectric equation",
+              "latex": "eV_s = hf - \\Phi"
+            },
+            {
+              "text": "Divide by $e$",
+              "latex": "V_s = \\dfrac{h}{e}f - \\dfrac{\\Phi}{e}"
+            },
+            {
+              "text": "This has the form $y = mx + c$: a graph of $V_s$ against $f$ is a straight line of gradient $\\dfrac{h}{e}$"
+            }
+          ],
+          "notes": "Millikan used exactly this graph to measure $h$, and found agreement with Planck's value."
+        },
+        {
+          "type": "diagram",
+          "title": "Current against p.d.",
+          "figure": "e2bt",
+          "bullets": [
+            "Brighter light, same frequency: a bigger current, but the same stopping voltage",
+            "Higher frequency: a bigger stopping voltage is needed",
+            "With a large forward p.d. the current stops rising: the anode already collects every emitted electron"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Maximum kinetic energy against frequency",
+          "figure": "e2ct",
+          "bullets": [
+            "Gradient $= h$, the same for every metal",
+            "Intercept on the frequency axis $= f_0$",
+            "Extended back, the intercept on the energy axis $= -\\Phi$",
+            "A larger work function gives a parallel line further to the right"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for photoelectric calculations",
+          "bullets": [
+            "Put $hf$ and $\\Phi$ in the same unit (all J or all eV) before subtracting",
+            "A stopping voltage of $x$ V means $E_{\\max} = x$ eV",
+            "For the electrons' maximum speed, use $E_{\\max} = \\tfrac{1}{2}m_ev^2$ with $E_{\\max}$ in joules",
+            "Changing the intensity never changes $E_{\\max}$, $V_s$ or $f_0$",
+            "On a graph of $V_s$ against $f$, the gradient is $\\dfrac{h}{e}$, not $h$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A germicidal lamp on magnesium",
+          "question": "A germicidal lamp emits ultraviolet light of wavelength 254 nm. The light falls on a magnesium plate, whose work function is 3.7 eV. Find (a) the maximum kinetic energy of the photoelectrons, in eV, and (b) the stopping voltage.",
+          "hint": "Find the photon energy with $E = \\dfrac{hc}{\\lambda}$ and convert it to eV, so that both energies are in the same unit. Then use $E_{\\max} = hf - \\Phi$ and $eV_s = E_{\\max}$.",
+          "steps": [
+            {
+              "text": "(a) Photon energy",
+              "latex": "hf = \\dfrac{1.99 \\times 10^{-25}}{254 \\times 10^{-9}} = 7.83 \\times 10^{-19}\\ \\text{J}"
+            },
+            {
+              "text": "In electronvolts",
+              "latex": "hf = \\dfrac{7.83 \\times 10^{-19}}{1.60 \\times 10^{-19}} = 4.89\\ \\text{eV}"
+            },
+            {
+              "text": "Photoelectric equation",
+              "latex": "E_{\\max} = 4.89 - 3.7 = 1.2\\ \\text{eV}"
+            },
+            {
+              "text": "(b) In eV, the stopping voltage has the same number",
+              "latex": "V_s = 1.2\\ \\text{V}"
+            }
+          ],
+          "notes": "These lamps contain low-pressure mercury vapour; 254 nm is mercury's strongest ultraviolet line."
+        },
+        {
+          "type": "worked",
+          "title": "The longest wavelength for calcium",
+          "question": "Calcium has a work function of 2.9 eV. Find (a) its threshold frequency and (b) the longest wavelength of light that can release electrons from it. (c) State whether violet light of wavelength 400 nm releases electrons from calcium.",
+          "hint": "At the threshold, $hf_0 = \\Phi$, with $\\Phi$ in joules. Then use $c = f\\lambda$ for the wavelength.",
+          "steps": [
+            {
+              "text": "(a) Work function in joules: multiply by $1.60 \\times 10^{-19}$",
+              "latex": "\\Phi = 4.64 \\times 10^{-19}\\ \\text{J}"
+            },
+            {
+              "text": "Threshold frequency",
+              "latex": "f_0 = \\dfrac{4.64 \\times 10^{-19}}{6.63 \\times 10^{-34}} = 7.0 \\times 10^{14}\\ \\text{Hz}"
+            },
+            {
+              "text": "(b) Threshold wavelength",
+              "latex": "\\lambda_0 = \\dfrac{3.00 \\times 10^{8}}{7.0 \\times 10^{14}} = 4.3 \\times 10^{-7}\\ \\text{m}"
+            },
+            {
+              "text": "(c) 400 nm is shorter than 430 nm, so each photon has more than 2.9 eV: <strong>yes</strong>, electrons are released"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Measuring h with a mercury lamp",
+          "question": "A photocell is lit in turn by two lines from a mercury lamp. Green light of frequency $5.49 \\times 10^{14}$ Hz gives a stopping voltage of 0.18 V; ultraviolet light of frequency $11.8 \\times 10^{14}$ Hz gives 2.79 V. Use these results to find (a) the Planck constant and (b) the work function of the cathode, in eV.",
+          "hint": "The two points lie on the straight line $V_s = \\dfrac{h}{e}f - \\dfrac{\\Phi}{e}$. Its gradient gives $\\dfrac{h}{e}$; then use either point to find $\\Phi$.",
+          "steps": [
+            {
+              "text": "(a) Gradient of the line",
+              "latex": "\\dfrac{h}{e} = \\dfrac{2.79 - 0.18}{6.31 \\times 10^{14}}"
+            },
+            {
+              "text": "So",
+              "latex": "\\dfrac{h}{e} = 4.14 \\times 10^{-15}\\ \\text{V s}"
+            },
+            {
+              "text": "Multiply by $e = 1.60 \\times 10^{-19}$ C",
+              "latex": "h = 6.6 \\times 10^{-34}\\ \\text{J s}"
+            },
+            {
+              "text": "(b) Energy of a green photon, in eV",
+              "latex": "\\dfrac{hf}{e} = 4.14 \\times 10^{-15} \\times 5.49 \\times 10^{14}"
+            },
+            {
+              "text": "That is 2.27 eV, so subtract $E_{\\max}$",
+              "latex": "\\Phi = 2.27 - 0.18 = 2.1\\ \\text{eV}"
+            }
+          ],
+          "notes": "In class, use more than two lines and a best-fit line: a mercury lamp also gives lines at 365, 405 and 436 nm. Two points make the method clear but give no check on the scatter."
+        }
+      ]
+    },
+    {
+      "id": "duality",
+      "short": "Wave–particle duality",
+      "hl": true,
+      "guide": "Matter exhibits wave–particle duality.",
+      "sections": [
+        "duality"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Describe evidence for both wave and particle behaviour of light and of matter.",
+        "Explain how $E = hf$ and $p = \\dfrac{h}{\\lambda}$ link particle quantities to wave quantities."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Wave or particle?",
+          "bullets": [
+            "Light interferes and diffracts: wave behaviour (C.3)",
+            "Yet in the photoelectric effect it delivers energy in single packets: particle behaviour",
+            "1924: de Broglie suggested that the same double nature should hold for matter",
+            "If light waves can act as particles, then electrons might act as waves",
+            "1927: electron diffraction confirmed it"
+          ],
+          "notes": "De Broglie's argument came from symmetry rather than from data: a good NoS point about hypotheses that make testable predictions."
+        },
+        {
+          "type": "bullets",
+          "title": "The evidence on both sides",
+          "bullets": [
+            "<strong>Light as a wave:</strong> double-slit interference, single-slit and grating diffraction",
+            "<strong>Light as particles:</strong> the photoelectric effect, Compton scattering (coming next)",
+            "<strong>Electrons as particles:</strong> a definite charge and mass, deflection in fields, tracks in detectors",
+            "<strong>Electrons as waves:</strong> diffraction by crystals and by nuclei"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Two pictures of one thing",
+          "bullets": [
+            "Light and matter show wave <strong>or</strong> particle behaviour, depending on the experiment",
+            "The wave picture describes how they travel, and where they are likely to arrive",
+            "The particle picture describes how they interact: in whole, single events",
+            "$E = hf$ and $p = \\dfrac{h}{\\lambda}$ link the particle quantities (energy, momentum) to the wave quantities (frequency, wavelength)",
+            "Neither picture is complete on its own"
+          ],
+          "notes": "Guiding question: what is meant by wave–particle duality? A ToK prompt: can something be \"both\" a wave and a particle, or are these just two models that each work in their own domain?"
+        }
+      ]
+    },
+    {
+      "id": "debroglie",
+      "short": "The de Broglie wavelength",
+      "hl": true,
+      "guide": "The de Broglie wavelength for particles as given by $\\lambda = \\dfrac{h}{p}$.",
+      "sections": [
+        "debroglie"
+      ],
+      "minutes": 70,
+      "aims": [
+        "Calculate the de Broglie wavelength of a particle with $\\lambda = \\dfrac{h}{p}$, including electrons accelerated through a p.d.",
+        "Explain why wave effects are noticeable for electrons but not for everyday objects."
+      ],
+      "checks": [
+        "E2-007"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "De Broglie's hypothesis",
+          "bullets": [
+            "Every moving particle has a wave associated with it",
+            "Its wavelength depends on the particle's momentum: $\\lambda = \\dfrac{h}{p}$",
+            "For a particle of mass $m$ moving at speed $v$ (much less than $c$), $p = mv$",
+            "More momentum means a shorter wavelength",
+            "Photons follow the same rule: a photon has momentum $p = \\dfrac{h}{\\lambda}$, although it has no mass"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "The de Broglie wavelength",
+          "latex": "\\lambda = \\dfrac{h}{p}",
+          "bullets": [
+            "$p$: the momentum of the particle, in $\\text{kg m s}^{-1}$",
+            "$h = 6.63 \\times 10^{-34}$ J s",
+            "It applies to any particle: electrons, neutrons, atoms, even molecules"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Why a walker does not diffract",
+          "bullets": [
+            "A 60 kg person walking at 1.5 $\\text{m s}^{-1}$ has $p = 90\\ \\text{kg m s}^{-1}$",
+            "So $\\lambda = 7.4 \\times 10^{-36}$ m: far smaller than a nucleus",
+            "No gap is small enough to diffract a wave like that",
+            "An electron accelerated through about 100 V has $\\lambda \\approx 10^{-10}$ m",
+            "That is the spacing of atoms in a crystal, so electron waves <strong>can</strong> be diffracted"
+          ],
+          "notes": "Check: $\\lambda = \\dfrac{6.63 \\times 10^{-34}}{90} = 7.4 \\times 10^{-36}$ m. A nucleus is about $10^{-15}$ m across."
+        },
+        {
+          "type": "derivation",
+          "title": "Wavelength of an accelerated electron",
+          "start": "An electron of mass $m_e$ and charge $e$ starts from rest and is accelerated through a p.d. $V$. Find its de Broglie wavelength.",
+          "steps": [
+            {
+              "text": "Energy gained from the field",
+              "latex": "E_k = eV"
+            },
+            {
+              "text": "Kinetic energy in terms of momentum, since $p = m_ev$",
+              "latex": "E_k = \\dfrac{1}{2}m_ev^2 = \\dfrac{p^2}{2m_e}"
+            },
+            {
+              "text": "Make the momentum the subject",
+              "latex": "p = \\sqrt{2m_eE_k} = \\sqrt{2m_eeV}"
+            },
+            {
+              "text": "De Broglie wavelength",
+              "latex": "\\lambda = \\dfrac{h}{\\sqrt{2m_eeV}}"
+            },
+            {
+              "text": "So the wavelength falls as the voltage rises",
+              "latex": "\\lambda \\propto \\dfrac{1}{\\sqrt{V}}"
+            }
+          ],
+          "notes": "This holds while the electrons are much slower than light, which is true for the few kilovolts used in school diffraction tubes."
+        },
+        {
+          "type": "derivation",
+          "title": "Kinetic energy and wavelength",
+          "start": "How does a particle's kinetic energy depend on its de Broglie wavelength?",
+          "steps": [
+            {
+              "text": "Momentum from the wavelength",
+              "latex": "p = \\dfrac{h}{\\lambda}"
+            },
+            {
+              "text": "Kinetic energy from the momentum",
+              "latex": "E_k = \\dfrac{p^2}{2m}"
+            },
+            {
+              "text": "Substitute",
+              "latex": "E_k = \\dfrac{h^2}{2m\\lambda^2}"
+            },
+            {
+              "text": "For a given particle",
+              "latex": "E_k \\propto \\lambda^{-2}"
+            }
+          ],
+          "notes": "Halving the wavelength needs four times the kinetic energy. This is why probing smaller structures needs higher-energy beams."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for de Broglie calculations",
+          "bullets": [
+            "Find the <strong>momentum</strong> first: $\\lambda = \\dfrac{h}{p}$, never $\\dfrac{h}{E_k}$",
+            "From a kinetic energy: $p = \\sqrt{2mE_k}$, with $E_k$ in joules",
+            "From an accelerating p.d.: $E_k = eV$",
+            "Use the right mass: electron, proton or neutron (data booklet)",
+            "At the same kinetic energy, a heavier particle has the shorter wavelength"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Neutrons for crystal studies",
+          "question": "Neutrons leaving a research reactor are slowed until they move at about 2200 $\\text{m s}^{-1}$. The mass of a neutron is $1.675 \\times 10^{-27}$ kg. Find the de Broglie wavelength of these neutrons, and explain why they are useful for studying crystals, whose atoms are about $2 \\times 10^{-10}$ m apart.",
+          "hint": "Find the momentum with $p = mv$, then use $\\lambda = \\dfrac{h}{p}$. Diffraction is strongest when the wavelength is similar to the spacing of the obstacles.",
+          "steps": [
+            {
+              "text": "Momentum of a neutron",
+              "latex": "p = 1.675 \\times 10^{-27} \\times 2200"
+            },
+            {
+              "text": "So",
+              "latex": "p = 3.69 \\times 10^{-24}\\ \\text{kg m s}^{-1}"
+            },
+            {
+              "text": "De Broglie wavelength",
+              "latex": "\\lambda = \\dfrac{6.63 \\times 10^{-34}}{3.69 \\times 10^{-24}}"
+            },
+            {
+              "text": "So",
+              "latex": "\\lambda = 1.8 \\times 10^{-10}\\ \\text{m}"
+            },
+            {
+              "text": "This is close to the atomic spacing, so the crystal diffracts the neutrons strongly, and the pattern reveals how its atoms are arranged"
+            }
+          ],
+          "notes": "Neutrons are uncharged, so they pass deep into a sample, and they are scattered well by light atoms such as hydrogen, which X-rays barely notice."
+        },
+        {
+          "type": "worked",
+          "title": "An electron accelerated through 600 V",
+          "question": "In an electron microscope test, electrons start from rest and are accelerated through a p.d. of 600 V. Find (a) their kinetic energy, (b) their momentum and (c) their de Broglie wavelength.",
+          "hint": "The kinetic energy gained is $eV$. Then use $p = \\sqrt{2m_eE_k}$ and $\\lambda = \\dfrac{h}{p}$.",
+          "steps": [
+            {
+              "text": "(a) Kinetic energy gained, $eV$",
+              "latex": "E_k = 1.60 \\times 10^{-19} \\times 600"
+            },
+            {
+              "text": "So",
+              "latex": "E_k = 9.6 \\times 10^{-17}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Momentum",
+              "latex": "p = \\sqrt{2 \\times 9.11 \\times 10^{-31} \\times 9.6 \\times 10^{-17}}"
+            },
+            {
+              "text": "So",
+              "latex": "p = 1.32 \\times 10^{-23}\\ \\text{kg m s}^{-1}"
+            },
+            {
+              "text": "(c) De Broglie wavelength",
+              "latex": "\\lambda = \\dfrac{6.63 \\times 10^{-34}}{1.32 \\times 10^{-23}}"
+            },
+            {
+              "text": "So",
+              "latex": "\\lambda = 5.0 \\times 10^{-11}\\ \\text{m}"
+            }
+          ],
+          "notes": "Real electron microscopes use tens to hundreds of kilovolts, giving wavelengths of a few picometres: about a hundred thousand times shorter than visible light, which is why they resolve much finer detail."
+        },
+        {
+          "type": "worked",
+          "title": "Four times the energy",
+          "question": "An electron has a de Broglie wavelength of 0.20 nm. Its kinetic energy is then made four times larger. Find its new de Broglie wavelength.",
+          "hint": "Use $E_k = \\dfrac{p^2}{2m}$ to see how the momentum changes when the kinetic energy is multiplied by 4. Then use $\\lambda = \\dfrac{h}{p}$.",
+          "steps": [
+            {
+              "text": "Since $p = \\sqrt{2mE_k}$, the momentum depends on the energy as",
+              "latex": "p \\propto \\sqrt{E_k}"
+            },
+            {
+              "text": "Four times the energy: twice the momentum",
+              "latex": "p_2 = \\sqrt{4}\\,p_1 = 2p_1"
+            },
+            {
+              "text": "Wavelength is inversely proportional to momentum",
+              "latex": "\\lambda_2 = \\dfrac{\\lambda_1}{2}"
+            },
+            {
+              "text": "New wavelength",
+              "latex": "\\lambda_2 = 0.10\\ \\text{nm}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diffraction",
+      "short": "Diffraction of particles",
+      "hl": true,
+      "guide": "Diffraction of particles as evidence of the wave nature of matter. (Guidance: a description of a scattering experiment including the location of minimum intensity for the diffracted particles based on their de Broglie wavelength.)",
+      "sections": [
+        "diffraction"
+      ],
+      "minutes": 75,
+      "aims": [
+        "Describe electron diffraction experiments and explain why they are evidence for the wave nature of matter.",
+        "Use $\\sin\\theta \\approx \\dfrac{\\lambda}{D}$ to locate the first minimum when electrons are scattered by nuclei."
+      ],
+      "checks": [
+        "E2-009"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Testing de Broglie",
+          "bullets": [
+            "Waves diffract noticeably when the gap or obstacle is about the size of the wavelength (C.3)",
+            "Electron wavelengths of about $10^{-10}$ m need gaps that small: the rows of atoms in a crystal",
+            "1927: Davisson and Germer fired electrons at a nickel crystal and found strong reflection only at certain angles",
+            "1927: G. P. Thomson sent electrons through thin metal foils and saw rings",
+            "The angles matched the wavelengths predicted by $\\lambda = \\dfrac{h}{p}$"
+          ],
+          "notes": "A nice irony for NoS: J. J. Thomson won a Nobel Prize for showing that electrons are particles, and his son G. P. Thomson shared one for showing that they behave as waves."
+        },
+        {
+          "type": "diagram",
+          "title": "The electron diffraction tube",
+          "figure": "e2dt",
+          "bullets": [
+            "Electrons pass through a thin layer of graphite",
+            "Bright rings on the screen: maxima where waves scattered by layers of atoms interfere constructively",
+            "Raise the accelerating voltage: the wavelength falls and the rings get smaller",
+            "Bring a magnet near: the rings move, so they are made by charged particles"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Davisson and Germer",
+          "svg": "figures/e2-davisson-germer.svg",
+          "alt": "An electron gun fires a beam of 54 eV electrons straight down onto a nickel crystal. A detector on an arc measures how many electrons are scattered at angle phi from the incoming beam. A graph of intensity against detector angle shows a clear peak at 50 degrees.",
+          "bullets": [
+            "Electrons of 54 eV were aimed at a nickel crystal",
+            "Far more were scattered at 50° than at nearby angles",
+            "The angle matched diffraction by the rows of atoms, with $\\lambda = \\dfrac{h}{p}$"
+          ],
+          "notes": "The rows of nickel atoms on the surface are 0.215 nm apart. For 54 eV electrons, the de Broglie wavelength is 0.167 nm, and $d\\sin\\phi = \\lambda$ gives $\\phi \\approx 51°$, close to the 50° measured."
+        },
+        {
+          "type": "bullets",
+          "title": "Why the rings show waves",
+          "bullets": [
+            "Maxima and minima are made by superposition: a wave property",
+            "A beam of classical particles would just give a blurred spot",
+            "The ring sizes fit the de Broglie wavelength worked out from the voltage",
+            "They change with voltage exactly as $\\lambda \\propto \\dfrac{1}{\\sqrt{V}}$ predicts",
+            "Each electron still lands at a single point: the wave tells us where it is likely to land"
+          ],
+          "notes": "Guide linking questions: how can particles diffract, and what evidence indicates the diffraction of a wave? Link to C.3 diffraction."
+        },
+        {
+          "type": "bullets",
+          "title": "Scattering electrons off nuclei",
+          "bullets": [
+            "High-energy electrons (hundreds of MeV) have wavelengths of a few times $10^{-15}$ m, about the size of a nucleus",
+            "A beam fired at a thin target is diffracted by individual nuclei, like light passing a tiny disc",
+            "A detector moved round the target counts electrons at each angle",
+            "The count falls to a <strong>first minimum</strong> at an angle that depends on $\\dfrac{\\lambda}{D}$",
+            "Measuring that angle gives the nuclear diameter $D$"
+          ],
+          "notes": "Electrons are used because they do not feel the strong force: they interact with the nucleus only through its charge, which makes the pattern simpler to interpret. Experiments like these, by Hofstadter in the 1950s, gave the relationship $R = R_0A^{1/3}$ of E.1."
+        },
+        {
+          "type": "equation",
+          "title": "Locating the first minimum",
+          "latex": [
+            "\\lambda = \\dfrac{h}{p}",
+            "\\sin\\theta \\approx \\dfrac{\\lambda}{D}"
+          ],
+          "bullets": [
+            "$\\theta$ is measured from the direction of the incoming beam",
+            "$D$ is the diameter of the nucleus",
+            "The same idea as the first minimum of single-slit diffraction (C.3)"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Intensity against scattering angle",
+          "figure": "e2et",
+          "bullets": [
+            "A central maximum, then a first minimum, then smaller maxima",
+            "A smaller nucleus, or a longer wavelength, moves the minimum to a larger angle"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for diffraction questions",
+          "bullets": [
+            "Work out $\\lambda$ from the momentum first",
+            "If $\\dfrac{\\lambda}{D}$ comes out larger than 1, there is no minimum: the wavelength is too long to resolve the nucleus",
+            "Higher-momentum electrons give the minimum at a smaller angle",
+            "For \"evidence of waves\", name the pattern: maxima and minima from interference",
+            "Check your calculator is in degrees"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Predicting the minimum for carbon-12",
+          "question": "A carbon-12 nucleus has a diameter of about $5.5 \\times 10^{-15}$ m. A beam of electrons, each with momentum $1.6 \\times 10^{-19}\\ \\text{kg m s}^{-1}$, is fired at a thin carbon target. Find (a) the de Broglie wavelength of the electrons and (b) the angle at which the first minimum of the scattered electrons is expected.",
+          "hint": "Use $\\lambda = \\dfrac{h}{p}$, then $\\sin\\theta \\approx \\dfrac{\\lambda}{D}$ for the first minimum.",
+          "steps": [
+            {
+              "text": "(a) De Broglie wavelength",
+              "latex": "\\lambda = \\dfrac{6.63 \\times 10^{-34}}{1.6 \\times 10^{-19}}"
+            },
+            {
+              "text": "So",
+              "latex": "\\lambda = 4.1 \\times 10^{-15}\\ \\text{m}"
+            },
+            {
+              "text": "(b) First minimum",
+              "latex": "\\sin\\theta \\approx \\dfrac{4.14 \\times 10^{-15}}{5.5 \\times 10^{-15}} = 0.75"
+            },
+            {
+              "text": "The first minimum is at about",
+              "latex": "\\theta \\approx 49^\\circ"
+            }
+          ],
+          "notes": "Electrons with this momentum have an energy of about 300 MeV. Faster electrons would bring the minimum in to a smaller angle."
+        },
+        {
+          "type": "worked",
+          "title": "Turning up the voltage",
+          "question": "In an electron diffraction tube, the accelerating voltage is raised from 2.0 kV to 4.5 kV. By what factor does the de Broglie wavelength of the electrons change, and what happens to the rings?",
+          "hint": "For electrons accelerated from rest, $\\lambda = \\dfrac{h}{\\sqrt{2m_eeV}}$, so how does $\\lambda$ depend on $V$?",
+          "steps": [
+            {
+              "text": "The wavelength depends on the voltage as",
+              "latex": "\\lambda \\propto \\dfrac{1}{\\sqrt{V}}"
+            },
+            {
+              "text": "Ratio of the new wavelength to the old",
+              "latex": "\\dfrac{\\lambda_2}{\\lambda_1} = \\sqrt{\\dfrac{2.0}{4.5}}"
+            },
+            {
+              "text": "So the wavelength falls to two-thirds",
+              "latex": "\\dfrac{\\lambda_2}{\\lambda_1} = 0.67"
+            },
+            {
+              "text": "A shorter wavelength is diffracted through smaller angles, so the rings get <strong>smaller</strong>"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compton",
+      "short": "Compton scattering as evidence",
+      "hl": true,
+      "guide": "Compton scattering of light by electrons as additional evidence of the particle nature of light; photons scatter off electrons with increased wavelength.",
+      "sections": [
+        "compton"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Describe Compton scattering and explain why the scattered photons have a longer wavelength.",
+        "Explain why Compton scattering is strong evidence that photons carry momentum, $p = \\dfrac{h}{\\lambda}$."
+      ],
+      "challenge": "CC-E2-02",
+      "checks": [
+        "E2-011"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Compton's experiment",
+          "bullets": [
+            "1923: Compton aimed X-rays of one wavelength at a block of carbon",
+            "A detector measured the wavelength of the X-rays scattered at different angles",
+            "At each angle he found the original wavelength <strong>and</strong> a longer one",
+            "The larger the scattering angle, the bigger the increase in wavelength",
+            "Wave model: electrons shaken by the wave re-emit at the <strong>same</strong> frequency, so no shift is expected"
+          ],
+          "notes": "The unshifted line comes from X-rays scattered by tightly bound inner electrons, where the whole atom recoils and the shift is far too small to see."
+        },
+        {
+          "type": "diagram",
+          "title": "Compton's apparatus and results",
+          "svg": "figures/e2-compton-setup.svg",
+          "alt": "Top: X-rays from a tube hit a carbon block; a detector measures the X-rays scattered through angle theta. Bottom: intensity against wavelength at that angle, with two peaks: one at the original wavelength lambda i and a taller one at a longer wavelength lambda f. The gap between them is delta lambda.",
+          "bullets": [
+            "X-rays of a single wavelength are scattered by carbon",
+            "At angle $\\theta$, the detector finds two peaks",
+            "One at the original wavelength $\\lambda_i$, one at a longer wavelength $\\lambda_f$"
+          ],
+          "notes": "The peak at the original wavelength comes from inner electrons, which are tightly bound: the whole atom recoils, so the shift is far too small to see."
+        },
+        {
+          "type": "bullets",
+          "title": "A photon–electron collision",
+          "bullets": [
+            "Treat the X-ray photon as a particle with energy and momentum",
+            "It hits one loosely bound electron, which is effectively free and at rest",
+            "The electron recoils, carrying away kinetic energy",
+            "So the scattered photon has <strong>less</strong> energy: a lower frequency and a longer wavelength",
+            "Energy and momentum are both conserved in the collision"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Why the wavelength increases",
+          "start": "A photon of wavelength $\\lambda_i$ scatters off an electron at rest, which recoils with kinetic energy $E_k$.",
+          "steps": [
+            {
+              "text": "Conservation of energy",
+              "latex": "E_f = E_i - E_k"
+            },
+            {
+              "text": "The electron gains energy, so",
+              "latex": "E_f < E_i"
+            },
+            {
+              "text": "Photon energy and wavelength",
+              "latex": "\\lambda = \\dfrac{hc}{E}"
+            },
+            {
+              "text": "Less energy, longer wavelength",
+              "latex": "\\lambda_f > \\lambda_i"
+            }
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "The momentum of a photon",
+          "start": "Relativity shows that a massless particle carrying energy $E$ has momentum $p = \\dfrac{E}{c}$. Take this as given.",
+          "steps": [
+            {
+              "text": "Momentum of a photon",
+              "latex": "p = \\dfrac{E}{c}"
+            },
+            {
+              "text": "Photon energy",
+              "latex": "E = \\dfrac{hc}{\\lambda}"
+            },
+            {
+              "text": "Substitute and cancel $c$",
+              "latex": "p = \\dfrac{h}{\\lambda}"
+            },
+            {
+              "text": "The same relationship as de Broglie's, read the other way round"
+            }
+          ],
+          "notes": "Students do not need $p = \\dfrac{E}{c}$ for the exam, but it shows why photons can push electrons about. Solar sails use the same momentum."
+        },
+        {
+          "type": "diagram",
+          "title": "Compton scattering",
+          "figure": "e2ft",
+          "bullets": [
+            "$\\theta$ is the photon's scattering angle",
+            "The electron recoils forward, at an angle on the other side of the original direction",
+            "The scattered photon has the longer wavelength"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Like two balls colliding?",
+          "bullets": [
+            "<strong>Similar:</strong> momentum and energy are conserved, as in a two-dimensional collision (A.2)",
+            "<strong>Similar:</strong> the bigger the deflection, the more energy the target takes",
+            "<strong>Different:</strong> the photon has no mass and always travels at $c$",
+            "<strong>Different:</strong> the photon loses energy by changing its wavelength, not its speed"
+          ],
+          "notes": "This is one of the guide's linking questions for E.2 (to A.2 collisions)."
+        },
+        {
+          "type": "bullets",
+          "title": "Stronger evidence for photons",
+          "bullets": [
+            "The photoelectric effect shows that light delivers energy in packets of $hf$",
+            "Compton scattering shows that each packet also carries <strong>momentum</strong> $\\dfrac{h}{\\lambda}$",
+            "It is a single, measurable collision between one photon and one electron",
+            "The shift at every angle matches what particle collisions predict",
+            "No wave model predicts a wavelength shift that depends on the scattering angle"
+          ],
+          "notes": "Guide NoS question: why is Compton scattering more convincing evidence for the particle nature of light than the photoelectric effect? One reason: the photoelectric effect is only about energy, and can be partly explained by treating the electrons in the metal as quantized while keeping light as a classical wave; Compton's angle-dependent shift needs each photon to carry momentum $\\dfrac{h}{\\lambda}$."
+        },
+        {
+          "type": "worked",
+          "title": "The momentum of an X-ray photon",
+          "question": "An X-ray tube produces photons of energy 60 keV. Find (a) the energy of one photon in joules, (b) its momentum and (c) its wavelength.",
+          "hint": "Change keV to J using $1\\ \\text{eV} = 1.60 \\times 10^{-19}$ J. A photon's momentum is $p = \\dfrac{E}{c}$, and its wavelength is $\\dfrac{h}{p}$.",
+          "steps": [
+            {
+              "text": "(a) Energy in joules",
+              "latex": "E = 60 \\times 10^{3} \\times 1.60 \\times 10^{-19}"
+            },
+            {
+              "text": "So",
+              "latex": "E = 9.6 \\times 10^{-15}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Momentum",
+              "latex": "p = \\dfrac{E}{c} = \\dfrac{9.6 \\times 10^{-15}}{3.00 \\times 10^{8}}"
+            },
+            {
+              "text": "So",
+              "latex": "p = 3.2 \\times 10^{-23}\\ \\text{kg m s}^{-1}"
+            },
+            {
+              "text": "(c) Wavelength",
+              "latex": "\\lambda = \\dfrac{6.63 \\times 10^{-34}}{3.2 \\times 10^{-23}}"
+            },
+            {
+              "text": "So",
+              "latex": "\\lambda = 2.1 \\times 10^{-11}\\ \\text{m}"
+            }
+          ],
+          "notes": "An electron would need to move at about $3.5 \\times 10^{7}\\ \\text{m s}^{-1}$ to have the same momentum, so a collision can easily send an electron flying."
+        }
+      ]
+    },
+    {
+      "id": "compton-shift",
+      "short": "The Compton shift",
+      "hl": true,
+      "guide": "The shift in photon wavelength after scattering off an electron as given by $\\lambda_f - \\lambda_i = \\Delta\\lambda = \\dfrac{h}{m_ec}(1 - \\cos\\theta)$. (Guidance: the derivation of the Compton formula is not required.)",
+      "sections": [
+        "compton"
+      ],
+      "minutes": 75,
+      "aims": [
+        "Use $\\Delta\\lambda = \\dfrac{h}{m_ec}(1 - \\cos\\theta)$ to find scattered wavelengths and scattering angles.",
+        "Calculate the energy given to the recoiling electron, and explain why the shift is noticeable only for X-rays and gamma rays."
+      ],
+      "checks": [
+        "E2-008"
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "The Compton shift",
+          "latex": "\\lambda_f - \\lambda_i = \\Delta\\lambda = \\dfrac{h}{m_ec}(1 - \\cos\\theta)",
+          "bullets": [
+            "$\\theta$: the angle through which the photon is scattered",
+            "$m_e$: the electron's mass; $\\dfrac{h}{m_ec} = 2.43 \\times 10^{-12}$ m",
+            "The shift depends only on the angle, not on the incoming wavelength",
+            "It comes from conservation of energy and momentum; you do not need to derive it"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Reading the equation",
+          "bullets": [
+            "$\\theta = 0$: the photon carries straight on, $\\cos\\theta = 1$, so there is no shift",
+            "$\\theta = 90^\\circ$: $\\Delta\\lambda = 2.43 \\times 10^{-12}$ m",
+            "$\\theta = 180^\\circ$: the photon bounces straight back and the shift is greatest, $4.85 \\times 10^{-12}$ m",
+            "A fixed shift of a few picometres is a large fraction of an X-ray wavelength",
+            "For visible light it is about a hundred-thousandth of the wavelength: far too small to notice"
+          ],
+          "notes": "Check: $\\dfrac{6.63 \\times 10^{-34}}{9.11 \\times 10^{-31} \\times 3.00 \\times 10^{8}} = 2.43 \\times 10^{-12}$ m."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for Compton calculations",
+          "bullets": [
+            "Work out $\\dfrac{h}{m_ec} = 2.43 \\times 10^{-12}$ m once and reuse it",
+            "Add the shift: $\\lambda_f = \\lambda_i + \\Delta\\lambda$",
+            "$\\theta$ is the <strong>photon's</strong> scattering angle, not the angle at which the electron recoils",
+            "Find each photon's energy with $E = \\dfrac{hc}{\\lambda}$; the electron gains $E_i - E_f$",
+            "To change keV to J, multiply by $1.60 \\times 10^{-16}$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Backscattered gamma rays",
+          "question": "Caesium-137 sources emit gamma-ray photons of energy 662 keV. In a detector, one of these photons is scattered straight back ($\\theta = 180^\\circ$) by a free electron. Find (a) the wavelength of the incident photon, (b) the wavelength of the scattered photon and (c) the energy, in keV, of the scattered photon and of the recoiling electron.",
+          "hint": "Find the incident wavelength with $\\lambda = \\dfrac{hc}{E}$, with $E$ in joules. At $180^\\circ$, $1 - \\cos\\theta = 2$. Energy is conserved, so the electron gains what the photon loses.",
+          "steps": [
+            {
+              "text": "(a) Photon energy in joules: 1 keV is $1.60 \\times 10^{-16}$ J",
+              "latex": "E_i = 662 \\times 1.60 \\times 10^{-16}"
+            },
+            {
+              "text": "So",
+              "latex": "E_i = 1.059 \\times 10^{-13}\\ \\text{J}"
+            },
+            {
+              "text": "Incident wavelength",
+              "latex": "\\lambda_i = \\dfrac{1.99 \\times 10^{-25}}{1.059 \\times 10^{-13}} = 1.88 \\times 10^{-12}\\ \\text{m}"
+            },
+            {
+              "text": "(b) At $180^\\circ$ the shift is twice $\\dfrac{h}{m_ec}$, so $\\Delta\\lambda = 4.85 \\times 10^{-12}$ m",
+              "latex": "\\lambda_f = 6.73 \\times 10^{-12}\\ \\text{m}"
+            },
+            {
+              "text": "(c) Scattered photon, using $E = \\dfrac{hc}{\\lambda}$",
+              "latex": "E_f = 2.96 \\times 10^{-14}\\ \\text{J} = 185\\ \\text{keV}"
+            },
+            {
+              "text": "The electron gains the difference",
+              "latex": "E_k = 662 - 185 = 477\\ \\text{keV}"
+            }
+          ],
+          "notes": "Gamma-ray spectra really do show a \"backscatter peak\" near 185 keV for caesium-137, and the edge of the Compton spread at 477 keV. More than two-thirds of the photon's energy goes to the electron here."
+        },
+        {
+          "type": "worked",
+          "title": "Finding the scattering angle",
+          "question": "X-rays of wavelength $7.10 \\times 10^{-11}$ m are scattered by the electrons in a carbon block. A detector placed at a certain angle records scattered X-rays of wavelength $7.24 \\times 10^{-11}$ m. Find the scattering angle.",
+          "hint": "Find $\\Delta\\lambda$, then rearrange the Compton equation to find $1 - \\cos\\theta$.",
+          "steps": [
+            {
+              "text": "Wavelength shift",
+              "latex": "\\Delta\\lambda = 7.24 \\times 10^{-11} - 7.10 \\times 10^{-11}"
+            },
+            {
+              "text": "So",
+              "latex": "\\Delta\\lambda = 1.4 \\times 10^{-12}\\ \\text{m}"
+            },
+            {
+              "text": "Divide by $\\dfrac{h}{m_ec}$",
+              "latex": "1 - \\cos\\theta = \\dfrac{1.4 \\times 10^{-12}}{2.43 \\times 10^{-12}} = 0.58"
+            },
+            {
+              "text": "So",
+              "latex": "\\cos\\theta = 0.42"
+            },
+            {
+              "text": "Scattering angle",
+              "latex": "\\theta = 65^\\circ"
+            }
+          ],
+          "notes": "$7.10 \\times 10^{-11}$ m is the wavelength of the strongest X-ray line from a molybdenum target, the kind of source Compton used."
+        },
+        {
+          "type": "worked",
+          "title": "Why not visible light?",
+          "question": "Find the largest possible Compton shift as a fraction of the wavelength for (a) green light of wavelength 500 nm and (b) X-rays of wavelength $7.10 \\times 10^{-11}$ m. Explain why Compton scattering is studied with X-rays.",
+          "hint": "The largest shift is at $\\theta = 180^\\circ$, and it is the same for every wavelength. Divide it by each wavelength.",
+          "steps": [
+            {
+              "text": "Largest shift, at $180^\\circ$",
+              "latex": "\\Delta\\lambda = 4.85 \\times 10^{-12}\\ \\text{m}"
+            },
+            {
+              "text": "(a) Green light",
+              "latex": "\\dfrac{4.85 \\times 10^{-12}}{5.00 \\times 10^{-7}} = 9.7 \\times 10^{-6}"
+            },
+            {
+              "text": "(b) X-rays",
+              "latex": "\\dfrac{4.85 \\times 10^{-12}}{7.10 \\times 10^{-11}} = 0.068"
+            },
+            {
+              "text": "The X-ray shift is about 7% of the wavelength and easy to measure; for visible light it is lost in the width of the spectral line"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

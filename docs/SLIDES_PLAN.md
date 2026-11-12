@@ -1,6 +1,6 @@
 # Lesson slide generator for teachers (plan)
 
-Status: **step 1 done, and step 2 done for Themes A to D (A.1–D.4; November 2026), each checked by the teacher.** The page is `teachers/slides.html`, linked from the "For teachers" landing page (`teachers/index.html`), which the home page's card opens. Next: step 2 for Theme E. How it was built: section 8.
+Status: **step 1 done, and step 2 done for all five themes (A.1–E.5; November 2026), each checked by the teacher.** The page is `teachers/slides.html`, linked from the "For teachers" landing page (`teachers/index.html`), which the home page's card opens. Next: credit the guide's wording on the About page, then (with the teacher's OK) remove the "In development" tag. How it was built: section 8.
 
 ## 1. What it does
 

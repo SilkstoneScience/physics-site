@@ -1,0 +1,553 @@
+{
+  "topic": "E.4",
+  "hours": 4,
+  "points": [
+    {
+      "id": "energy",
+      "short": "Energy from fission",
+      "guide": "That energy is released in spontaneous and neutron-induced fission.",
+      "sections": [
+        "fission",
+        "energy"
+      ],
+      "minutes": 80,
+      "aims": [
+        "Describe neutron-induced and spontaneous fission, and complete fission equations.",
+        "Calculate the change in mass and the energy released in a fission reaction, using $E = mc^{2}$ or binding energies."
+      ],
+      "challenge": "CC-E4-01",
+      "checks": [
+        "E4-015"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What is fission?",
+          "bullets": [
+            "A heavy nucleus splits into two medium-sized nuclei, the <strong>fission fragments</strong>, plus two or three free neutrons",
+            "<strong>Neutron-induced</strong> fission: uranium-235 absorbs a neutron, becoming $^{236}\\text{U}^{*}$, which is unstable and splits almost at once",
+            "<strong>Spontaneous</strong> fission: a very heavy nucleus splits with no trigger (very rare in uranium; about 3% of californium-252 decays)",
+            "The fragments differ from one fission to the next",
+            "Nucleon number and proton number are conserved, so count the neutrons on both sides"
+          ],
+          "notes": "Rutherford's first artificial transmutation (nitrogen-14 hit by an alpha particle, giving oxygen-17 and a proton) is a good warm-up for balancing nuclear equations. The asterisk on uranium-236 means it is in an excited state."
+        },
+        {
+          "type": "bullets",
+          "title": "Why is energy released?",
+          "bullets": [
+            "Recall from E.3: binding energy is the energy needed to pull a nucleus apart into separate nucleons",
+            "Uranium has about 7.6 MeV per nucleon; medium-sized nuclei have about 8.5 MeV per nucleon",
+            "After fission, every nucleon is more tightly bound, so the products have <strong>less mass</strong> than the reactants",
+            "The missing mass appears as energy: $E = \\Delta m\\,c^{2}$",
+            "Most of it is kinetic energy of the fragments, pushed apart by their electric repulsion; the rest goes to neutrons, gamma rays and later decays"
+          ],
+          "notes": "A common error is \"energy is released because bonds break\". Breaking anything apart needs energy; here the products are more tightly bound than the original nucleus."
+        },
+        {
+          "type": "diagram",
+          "title": "Fission on the binding energy curve",
+          "figure": "e4at",
+          "bullets": [
+            "Heavy nuclei sit to the right of the peak",
+            "Splitting one moves its nucleons up the curve, towards iron",
+            "Energy released ≈ gain in binding energy per nucleon × number of nucleons"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Mass and energy",
+          "latex": [
+            "E = mc^{2}",
+            "1\\ \\text{u} = 931.5\\ \\text{MeV}\\,c^{-2}"
+          ],
+          "bullets": [
+            "Change in mass: $\\Delta m$ = total mass before − total mass after",
+            "Masses in u: multiply the change in mass by 931.5 to get the energy in MeV",
+            "Masses in kg: use $E = \\Delta m\\,c^{2}$ to get the energy in J"
+          ],
+          "notes": "Both are in the data booklet (the second among the constants, with $1\\ \\text{u} = 1.661 \\times 10^{-27}$ kg). The definition of the change in mass is not, so students must learn it."
+        },
+        {
+          "type": "derivation",
+          "title": "Energy released from binding energies",
+          "start": "A nucleus with $Z$ protons and $N$ neutrons has less mass than its separate nucleons. The difference, times $c^{2}$, is its binding energy $E_{b}$.",
+          "steps": [
+            {
+              "text": "Mass of a nucleus",
+              "latex": "M = Zm_{p} + Nm_{n} - \\dfrac{E_{b}}{c^{2}}"
+            },
+            {
+              "text": "Fission conserves protons and neutrons, so the $Zm_{p} + Nm_{n}$ terms add up to the same total on both sides",
+              "latex": "\\Delta m = M_{\\text{before}} - M_{\\text{after}}"
+            },
+            {
+              "text": "Only the binding energy terms are left",
+              "latex": "\\Delta m\\,c^{2} = E_{b,\\text{after}} - E_{b,\\text{before}}"
+            },
+            {
+              "text": "So the <strong>energy released</strong> is the increase in total binding energy",
+              "latex": "E = \\Sigma E_{b,\\text{after}} - \\Sigma E_{b,\\text{before}}"
+            }
+          ],
+          "notes": "Free neutrons have no binding energy, so they add nothing to either total. This is the link the guide asks about: binding energy per nucleon tells us how much energy each fission releases, and so the rate of energy production in a reactor."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for fission calculations",
+          "bullets": [
+            "Balance the equation first: nucleon numbers and proton numbers must match on both sides",
+            "Include <strong>every</strong> neutron: the one absorbed before, and all those released after",
+            "Keep all the decimal places in the masses: the change is a small difference between large numbers",
+            "Atomic masses are fine: the electrons are the same on both sides, so they cancel",
+            "To convert MeV to J, multiply by $1.60 \\times 10^{-13}$"
+          ],
+          "notes": "A quick check: one fission of uranium-235 releases roughly 200 MeV, so an answer of 2 MeV or 2000 MeV means a slip, usually a missing neutron or a rounded mass."
+        },
+        {
+          "type": "worked",
+          "title": "Naming a fragment",
+          "question": "A uranium-235 nucleus absorbs a neutron and splits into lanthanum-147 ($Z = 57$), a second nucleus X and two neutrons. Find (a) the nucleon number and (b) the proton number of X, and (c) identify X, given that bromine has $Z = 35$.",
+          "hint": "Write the equation with the incoming neutron on the left. Nucleon numbers must add up to the same total on each side, and so must proton numbers.",
+          "steps": [
+            {
+              "text": "Write the equation.",
+              "latex": "{}^{1}_{0}\\text{n} + {}^{235}_{92}\\text{U} \\rightarrow {}^{147}_{57}\\text{La} + {}^{A}_{Z}\\text{X} + 2\\,{}^{1}_{0}\\text{n}"
+            },
+            {
+              "text": "(a) Nucleon numbers.",
+              "latex": "1 + 235 = 147 + A + 2 \\;\\Rightarrow\\; A = 87"
+            },
+            {
+              "text": "(b) Proton numbers (a neutron has none).",
+              "latex": "92 = 57 + Z \\;\\Rightarrow\\; Z = 35"
+            },
+            {
+              "text": "(c) $Z = 35$, so X is bromine-87.",
+              "latex": "{}^{87}_{35}\\text{Br}"
+            }
+          ],
+          "notes": "Students often forget the incoming neutron, and get 86 instead of 87. Bromine-87 has more neutrons than stable bromine (52 rather than 44 or 46), which is why fission fragments are radioactive: a link to the last point."
+        },
+        {
+          "type": "worked",
+          "title": "Energy from one fission",
+          "question": "One fission of uranium-235 is $^{1}_{0}\\text{n} + {}^{235}_{92}\\text{U} \\rightarrow {}^{140}_{55}\\text{Cs} + {}^{93}_{37}\\text{Rb} + 3\\,{}^{1}_{0}\\text{n}$. The masses are: uranium-235 235.043930 u, neutron 1.008665 u, caesium-140 139.917283 u, rubidium-93 92.922039 u. Find (a) the change in mass in u and in kg and (b) the energy released in MeV and in J.",
+          "hint": "Add up all the masses on each side, counting one neutron before and three after. Subtract, then convert using the data booklet.",
+          "steps": [
+            {
+              "text": "Mass before.",
+              "latex": "235.043930 + 1.008665 = 236.052595\\ \\text{u}"
+            },
+            {
+              "text": "Mass after, with three neutrons.",
+              "latex": "235.865317\\ \\text{u}"
+            },
+            {
+              "text": "(a) Change in mass.",
+              "latex": "\\Delta m = 0.187278\\ \\text{u}"
+            },
+            {
+              "text": "In kilograms.",
+              "latex": "\\Delta m = 3.11 \\times 10^{-28}\\ \\text{kg}"
+            },
+            {
+              "text": "(b) Multiply by 931.5 MeV per u.",
+              "latex": "E = 174\\ \\text{MeV} = 2.79 \\times 10^{-11}\\ \\text{J}"
+            }
+          ],
+          "notes": "The mass after is $139.917283 + 92.922039 + 3(1.008665)$. The change is only $7.9 \\times 10^{-4}$ of the mass before: less than 0.1% of the mass becomes energy. Rounding the masses to 2 decimal places would make the answer useless."
+        },
+        {
+          "type": "worked",
+          "title": "Estimating from binding energies",
+          "question": "A uranium-235 nucleus absorbs a neutron and splits into molybdenum-102, tin-132 and two neutrons. The binding energies per nucleon are: uranium-235 7.59 MeV, molybdenum-102 8.57 MeV, tin-132 8.35 MeV. Estimate the energy released.",
+          "hint": "Find the total binding energy of each nucleus (binding energy per nucleon × nucleon number). The energy released is the increase in total binding energy.",
+          "steps": [
+            {
+              "text": "Before: only uranium-235 is bound.",
+              "latex": "235 \\times 7.59 = 1784\\ \\text{MeV}"
+            },
+            {
+              "text": "After: the two fragments.",
+              "latex": "102 \\times 8.57 = 874\\ \\text{MeV}"
+            },
+            {
+              "text": "",
+              "latex": "132 \\times 8.35 = 1102\\ \\text{MeV}"
+            },
+            {
+              "text": "Energy released = increase in binding energy.",
+              "latex": "E = 874 + 1102 - 1784 \\approx 190\\ \\text{MeV}"
+            }
+          ],
+          "notes": "The free neutrons have no binding energy. Ask why this is only an estimate: the binding energies per nucleon are given to 3 significant figures, and the answer is a small difference between large totals."
+        },
+        {
+          "type": "worked",
+          "title": "Mass lost in one fuel cycle",
+          "question": "A reactor runs at a steady thermal power of 3.0 GW for its whole fuel cycle of 540 days, after which part of the fuel is replaced. Find (a) the energy released and (b) the total change in mass of the fuel over the cycle.",
+          "hint": "1 W is 1 J every second, so convert the 540 days to seconds first. Then use $E = mc^{2}$ to find the mass.",
+          "steps": [
+            {
+              "text": "Time in seconds.",
+              "latex": "t = 540 \\times 86\\,400 = 4.67 \\times 10^{7}\\ \\text{s}"
+            },
+            {
+              "text": "(a) Energy = power × time.",
+              "latex": "E = 3.0 \\times 10^{9} \\times 4.67 \\times 10^{7}"
+            },
+            {
+              "text": "",
+              "latex": "E = 1.4 \\times 10^{17}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Rearrange $E = \\Delta m\\,c^{2}$.",
+              "latex": "\\Delta m = \\dfrac{1.40 \\times 10^{17}}{(3.00 \\times 10^{8})^{2}}"
+            },
+            {
+              "text": "",
+              "latex": "\\Delta m = 1.6\\ \\text{kg}"
+            }
+          ],
+          "notes": "A large reactor holds roughly 100 tonnes of uranium fuel, so the mass that becomes energy over a whole 18-month cycle is about the mass of a bag of sugar. Keep the unrounded $E = 1.3997 \\times 10^{17}$ J in the calculator."
+        }
+      ]
+    },
+    {
+      "id": "chain",
+      "short": "Chain reactions",
+      "guide": "The role of chain reactions in nuclear fission reactions.",
+      "sections": [
+        "chain"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Explain how a chain reaction happens, and the difference between a controlled and an uncontrolled one.",
+        "Explain what is meant by critical mass, and why uranium is enriched."
+      ],
+      "challenge": "CC-E4-02",
+      "checks": [
+        "E4-007"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Chain reactions",
+          "bullets": [
+            "One neutron triggers each fission, but each fission releases two or three new neutrons",
+            "If at least one of them causes another fission, the reaction keeps itself going: a <strong>chain reaction</strong>",
+            "Some neutrons are wasted: they leave the fuel through its surface, or are captured by nuclei that do not split",
+            "Whether the chain grows, stays steady or dies out depends on how many neutrons per fission go on to cause another"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "A growing chain reaction",
+          "figure": "e4bt",
+          "bullets": [
+            "Here two neutrons from every fission cause further fissions",
+            "The number of fissions doubles every generation: 1, 2, 4, 8, …",
+            "This is exponential growth"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Controlled or uncontrolled?",
+          "bullets": [
+            "<strong>Controlled</strong> (a reactor): each fission leads, on average, to just one more, so the fission rate is constant",
+            "<strong>Uncontrolled</strong> (a bomb): each fission leads to more than one more, so the rate grows exponentially and the energy comes out in under a microsecond",
+            "If fewer than one does, the reaction dies away: this is how a reactor is shut down",
+            "A reactor cannot explode like a bomb: its fuel is not enriched enough. Reactor accidents involve overheating, fires and steam explosions"
+          ],
+          "notes": "With two neutrons per fission, a steady reactor must lose or absorb one of them each time, on average."
+        },
+        {
+          "type": "bullets",
+          "title": "Critical mass",
+          "bullets": [
+            "<strong>Critical mass</strong>: the minimum mass of fuel in which a chain reaction can sustain itself",
+            "Neutrons escape through the surface, and fissions happen throughout the volume",
+            "A small lump has a large surface area compared with its volume, so too many neutrons escape",
+            "The critical mass depends on the shape (a sphere is best), the density and the surroundings (a reflector returns neutrons)"
+          ],
+          "notes": "The hook challenge \"A sphere or a sheet?\" (CC-E4-02) tests exactly this. A bomb design brings sub-critical pieces together very quickly to make a supercritical mass."
+        },
+        {
+          "type": "bullets",
+          "title": "Enriching uranium",
+          "bullets": [
+            "Natural uranium is 99.3% uranium-238, which rarely splits, and only 0.7% uranium-235",
+            "Most reactors need 3–5% uranium-235: the fuel is <strong>enriched</strong>",
+            "Uranium is made into a gas, uranium hexafluoride ($\\text{UF}_{6}$); molecules containing uranium-235 are about 1% lighter",
+            "Gas centrifuges (or, in older plants, diffusion through membranes) separate the isotopes a little at each stage, so many stages are needed",
+            "Enrichment uses a lot of energy, which should be counted in the energy budget of nuclear power"
+          ],
+          "notes": "The mass difference: $\\text{UF}_{6}$ with uranium-238 has a molar mass of about 352 g, and with uranium-235 about 349 g, under 1% lighter. Weapons need more than 80% uranium-235, which is why enrichment is closely monitored internationally."
+        },
+        {
+          "type": "worked",
+          "title": "How fast does a chain grow?",
+          "question": "In a lump of fuel, each fission leads to exactly two more fissions in the next generation, and each generation takes about 10 ns. Starting with one fission, find (a) the number of fissions in the 11th generation and (b) the number in the 81st generation, and the time taken to reach it.",
+          "hint": "Write down the number of fissions in the first few generations and look for the pattern. Each new generation multiplies the number by 2.",
+          "steps": [
+            {
+              "text": "Generations 1, 2, 3, 4 have 1, 2, 4, 8 fissions, so generation $n$ has",
+              "latex": "2^{\\,n-1}\\ \\text{fissions}"
+            },
+            {
+              "text": "(a) The 11th generation.",
+              "latex": "2^{10} = 1024"
+            },
+            {
+              "text": "(b) The 81st generation.",
+              "latex": "2^{80} = 1.2 \\times 10^{24}"
+            },
+            {
+              "text": "That is 80 generations after the first.",
+              "latex": "t = 80 \\times 10\\ \\text{ns} = 0.8\\ \\mu\\text{s}"
+            }
+          ],
+          "notes": "$1.2 \\times 10^{24}$ uranium-235 nuclei have a mass of about 0.5 kg. This is why an uncontrolled chain reaction releases its energy in less than a microsecond, and why a reactor must keep exactly one neutron per fission causing another."
+        }
+      ]
+    },
+    {
+      "id": "reactor",
+      "short": "Nuclear power stations",
+      "guide": "The role of control rods, moderators, heat exchangers and shielding in a nuclear power plant.",
+      "sections": [
+        "reactor",
+        "calc"
+      ],
+      "minutes": 70,
+      "aims": [
+        "Describe the role of the moderator, control rods, coolant, heat exchanger and shielding in a nuclear power station.",
+        "Calculate fission rates, fuel use and energy flows in a nuclear power station."
+      ],
+      "checks": [
+        "E4-014"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "A nuclear power station",
+          "bullets": [
+            "A nuclear power station is a <strong>thermal</strong> power station: the reactor replaces the furnace of a coal-fired one",
+            "From the steam onwards it is the same: turbine, generator, condenser and cooling tower",
+            "The reactor core holds <strong>fuel rods</strong> of enriched uranium oxide, surrounded by a <strong>moderator</strong>",
+            "<strong>Control rods</strong> can be moved in and out of the core",
+            "A <strong>coolant</strong> carries thermal energy from the core to a <strong>heat exchanger</strong>"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Inside a pressurized-water reactor",
+          "figure": "e4ct",
+          "bullets": [
+            "The coolant loop and the steam loop are separate",
+            "Thick shielding surrounds the core"
+          ],
+          "notes": "Ask students to trace the energy: fragments → coolant → steam → turbine → generator. Point out the three separate water circuits: reactor coolant, the steam circuit and the cooling water."
+        },
+        {
+          "type": "bullets",
+          "title": "The moderator",
+          "bullets": [
+            "Fission releases <strong>fast</strong> neutrons, about 2 MeV on average",
+            "Uranium-235 is far more likely to absorb a <strong>slow</strong> (thermal) neutron, about 0.025 eV, and split",
+            "The moderator slows the neutrons down as they collide with light nuclei: hydrogen (in ordinary or heavy water) or carbon (in graphite)",
+            "The closer a nucleus is in mass to a neutron, the more energy the neutron loses in each collision",
+            "A good moderator absorbs very few neutrons: it slows them, it does not remove them"
+          ],
+          "notes": "Link to A.2: in a head-on elastic collision with an equal mass (a proton), the neutron stops and passes on all its kinetic energy. Against a heavy nucleus it bounces back at almost the same speed. Students often mix up the moderator (slows neutrons) with the control rods (absorb them)."
+        },
+        {
+          "type": "bullets",
+          "title": "Control rods",
+          "bullets": [
+            "<strong>Control rods</strong> absorb neutrons; they contain boron or cadmium",
+            "Lowering them further into the core absorbs more neutrons, so there are fewer fissions per second and less power",
+            "Raising them increases the rate of fission",
+            "They are adjusted so that, on average, one neutron per fission causes another",
+            "Dropping them fully into the core stops the chain reaction: an emergency shutdown"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Coolant, heat exchanger and shielding",
+          "bullets": [
+            "<strong>Coolant</strong> (water under high pressure, carbon dioxide gas or liquid sodium) carries thermal energy out of the core",
+            "<strong>Heat exchanger</strong>: the coolant heats water in a separate circuit, turning it to steam for the turbine",
+            "Keeping the circuits separate stops radioactive material reaching the turbine and the environment",
+            "<strong>Shielding</strong>: a steel pressure vessel and thick concrete absorb neutrons and gamma rays, protecting workers and the public"
+          ],
+          "notes": "In a pressurized-water reactor the coolant stays liquid at about 300 °C because it is kept at very high pressure."
+        },
+        {
+          "type": "bullets",
+          "title": "Energy flow in a nuclear power station",
+          "bullets": [
+            "Nuclear energy → kinetic energy of the fragments → thermal energy of the coolant → steam → kinetic energy of the turbine → electrical energy",
+            "Efficiency = electrical power output ÷ thermal power of the reactor, typically about 33%",
+            "Most of the wasted energy goes into the cooling water at the condenser",
+            "A full Sankey diagram also shows the energy used to mine, enrich and process the fuel",
+            "Fission rate = thermal power ÷ energy released per fission"
+          ],
+          "notes": "The next slide shows the Sankey diagram for a station with 3 GW thermal power and 1 GW electrical output (link to A.3)."
+        },
+        {
+          "type": "diagram",
+          "title": "A Sankey diagram",
+          "svg": "figures/e4-sankey.svg",
+          "alt": "A Sankey diagram. An input band of 3.0 GW of thermal power from fission splits into an electrical output band of 1.0 GW, labelled 33 percent, and a wider band of 2.0 GW of waste heat to the cooling water, labelled 67 percent.",
+          "bullets": [
+            "Thermal power from fission: 3.0 GW",
+            "Electrical output: 1.0 GW, so the efficiency is 33%",
+            "The other 2.0 GW heats the cooling water",
+            "The widths of the arrows are in proportion to the powers"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Fuel for an icebreaker",
+          "question": "The reactor of a nuclear-powered icebreaker ship produces an average thermal power of 60 MW. Each fission of uranium-235 releases 200 MeV. Find (a) the number of fissions each second and (b) the mass of uranium-235 used up in a year of 365 days.",
+          "hint": "Convert 200 MeV into joules. Power is energy per second, so dividing it by the energy per fission gives fissions per second.",
+          "steps": [
+            {
+              "text": "Energy per fission in joules.",
+              "latex": "200 \\times 1.60 \\times 10^{-13} = 3.2 \\times 10^{-11}\\ \\text{J}"
+            },
+            {
+              "text": "(a) Fissions per second.",
+              "latex": "\\dfrac{6.0 \\times 10^{7}}{3.2 \\times 10^{-11}} = 1.9 \\times 10^{18}\\ \\text{s}^{-1}"
+            },
+            {
+              "text": "(b) Nuclei used in a year ($3.15 \\times 10^{7}$ s).",
+              "latex": "N = 5.9 \\times 10^{25}"
+            },
+            {
+              "text": "Each nucleus has a mass of about 235 u.",
+              "latex": "m = 5.9 \\times 10^{25} \\times 235 \\times 1.661 \\times 10^{-27}"
+            },
+            {
+              "text": "",
+              "latex": "m = 23\\ \\text{kg}"
+            }
+          ],
+          "notes": "In (b), $N = 1.875 \\times 10^{18} \\times 3.15 \\times 10^{7}$. Keep the unrounded values in the calculator. An oil-fired ship of the same power would burn around 45 000 tonnes of fuel oil in a year, which is why nuclear icebreakers can stay at sea for years."
+        },
+        {
+          "type": "worked",
+          "title": "Warming the sea",
+          "question": "A coastal nuclear power station has an electrical output of 1.1 GW and an efficiency of 34%. Its waste thermal energy is carried away by sea water pumped through the condenser at $5.6 \\times 10^{4}$ kg every second. Assume all the waste energy goes into this water. The specific heat capacity of sea water is 4000 $\\text{J kg}^{-1}\\,\\text{K}^{-1}$. Find (a) the thermal power of the reactor and (b) the temperature rise of the sea water.",
+          "hint": "Efficiency compares the electrical output with the thermal power. The waste power heats the water: use $Q = mc\\Delta T$ for the water that flows through in one second.",
+          "steps": [
+            {
+              "text": "(a) Thermal power = output ÷ efficiency.",
+              "latex": "P = \\dfrac{1.1}{0.34} = 3.24\\ \\text{GW}"
+            },
+            {
+              "text": "Waste power.",
+              "latex": "3.24 - 1.1 = 2.14\\ \\text{GW}"
+            },
+            {
+              "text": "(b) In one second, $Q = mc\\Delta T$.",
+              "latex": "\\Delta T = \\dfrac{2.14 \\times 10^{9}}{5.6 \\times 10^{4} \\times 4000}"
+            },
+            {
+              "text": "",
+              "latex": "\\Delta T = 9.5\\ \\text{K}"
+            }
+          ],
+          "notes": "This links to B.1. Ask students why stations are built by the sea or large rivers, and what a 10 K rise might do to marine life near the outlet."
+        }
+      ]
+    },
+    {
+      "id": "waste",
+      "short": "Fission products and waste",
+      "guide": "The properties of the products of nuclear fission and their management.",
+      "sections": [
+        "waste",
+        "debate"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Explain why fission products are radioactive, and describe how spent fuel is managed.",
+        "Discuss the impact of long-term storage of nuclear waste, and the role of fission in addressing climate change."
+      ],
+      "checks": [
+        "E4-006"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Properties of the fission products",
+          "bullets": [
+            "The fragments are neutron-rich (E.3), so they are <strong>highly radioactive</strong>, mostly beta-minus and gamma emitters",
+            "Short half-lives make some products fiercely active for the first days; longer-lived ones, such as caesium-137 (about 30 years), remain for decades",
+            "Uranium-238 in the fuel can absorb a neutron and become plutonium-239, an alpha emitter with a half-life of 24 000 years",
+            "The decaying products keep releasing thermal energy long after the reactor is shut down"
+          ],
+          "notes": "The heat from decaying fission products is why a reactor must be cooled even after shutdown: losing this cooling caused the meltdowns at Fukushima in 2011."
+        },
+        {
+          "type": "bullets",
+          "title": "Managing spent fuel",
+          "bullets": [
+            "<strong>Cooling ponds</strong>: used fuel rods spend several years in deep water, which absorbs the radiation and removes the heat",
+            "<strong>Reprocessing</strong> (in some countries): unused uranium and plutonium are separated out for reuse",
+            "<strong>Vitrification</strong>: high-level waste is set into glass and sealed in steel containers so it cannot dissolve or leak",
+            "<strong>Deep geological storage</strong>: hundreds of metres underground in stable rock",
+            "Low-level waste, such as used protective clothing and tools, is squashed into a small volume and buried near the surface"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "How long must waste be stored?",
+          "question": "Spent fuel contains caesium-137 (half-life 30 years) and plutonium-239 (half-life 24 000 years). (a) What fraction of the caesium-137 remains after 300 years? (b) How long does it take for the plutonium-239 to fall to the same fraction?",
+          "hint": "Count how many half-lives fit into the time. Each half-life halves the amount that remains.",
+          "steps": [
+            {
+              "text": "(a) Number of half-lives.",
+              "latex": "n = \\dfrac{300}{30} = 10"
+            },
+            {
+              "text": "Fraction remaining.",
+              "latex": "\\left(\\tfrac{1}{2}\\right)^{10} = \\dfrac{1}{1024} \\approx 0.001"
+            },
+            {
+              "text": "(b) The same fraction needs 10 half-lives of plutonium-239.",
+              "latex": "t = 10 \\times 24\\,000 = 240\\,000\\ \\text{years}"
+            }
+          ],
+          "notes": "Ask: which human institutions have lasted 300 years? 240 000 years? This is the heart of the guide's \"impact of long-term storage\": the waste must stay isolated from groundwater for far longer than any human record."
+        },
+        {
+          "type": "bullets",
+          "title": "The impact of long-term storage",
+          "bullets": [
+            "High-level waste must be kept away from people and groundwater for many thousands of years",
+            "Containers and rock must stay sound through earthquakes and changes in climate",
+            "Future generations inherit the waste, and warnings must remain understandable",
+            "Plutonium must be kept secure so it cannot be used for weapons",
+            "Very few deep repositories are yet operating, so the cost and the long-term behaviour are still uncertain"
+          ],
+          "notes": "A good discussion: should we store waste so that future generations can reach it (perhaps to reuse it), or seal it away for ever?"
+        },
+        {
+          "type": "bullets",
+          "title": "Fission and climate change",
+          "bullets": [
+            "A nuclear station emits almost no carbon dioxide while running; counting mining, building and dismantling, its emissions per kilowatt-hour are close to those of wind farms",
+            "<strong>For</strong>: steady output whatever the weather; little fuel and land needed",
+            "<strong>Against</strong>: long-lived waste; rare but serious accidents; expensive and slow to build; risk of weapons proliferation",
+            "Linking question (NoS): to what extent is there a role for fission in addressing climate change?"
+          ],
+          "notes": "Students can compare deaths and carbon emissions per unit of electricity for different sources, using reliable data, and discuss why public perception of risk differs from the figures (link to B.2, the enhanced greenhouse effect)."
+        }
+      ]
+    }
+  ]
+}
