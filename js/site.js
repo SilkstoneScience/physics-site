@@ -269,7 +269,7 @@ window.DATA_BOOKLET = {
     equations: [
       ['Photoelectric equation', 'E_{\\max} = hf - \\Phi', true],
       ['de Broglie wavelength', '\\lambda = \\frac{h}{p}', true],
-      ['Compton shift', '\\Delta\\lambda = \\frac{h}{m_ec}(1 - \\cos\\theta)', true],
+      ['Compton shift', '\\Delta\\lambda = \\lambda_f - \\lambda_i = \\frac{h}{m_ec}(1 - \\cos\\theta)', true],
     ],
     note: 'All of E.2 is HL. Threshold frequency $f_0 = \\frac{\\Phi}{h}$. Stopping voltage: $eV_s = E_{\\max}$. For a particle accelerated through p.d. $V$: $p = \\sqrt{2meV}$. First diffraction minimum: $\\sin\\theta \\approx \\frac{\\lambda}{D}$.',
     constants: ['h', 'c', 'e', 'me'],
