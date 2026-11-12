@@ -15,6 +15,9 @@ the published website.
 > (±1 kPa), with a scatter of 0.4 kPa. The readings and every part's mark-scheme numbers were regenerated; the wording is
 > unchanged. −273 °C now lies about 7 % inside the range from the two lines, so the "verdict-borderline" review flag
 > could be dropped: that is the teacher's decision, and until then the flag and the wording of part (e) stay.
+>
+> **The teacher tried the new B3-B01 in the preview and approved it on 12 November 2026** (individual approval, recorded in
+> `tools/1b/reviews.json`), so 20 approved datasets are in production again.
 
 Related documents (all in this repository):
 - `docs/PAPER1B_SPECIFICATION.md`: the authoritative design rules (what a Paper 1B question must be, validation, review model).

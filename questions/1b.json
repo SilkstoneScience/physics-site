@@ -1054,6 +1054,279 @@
     "dataFile": "questions/1b/B2-B01.json"
   },
   {
+    "id": "B3-B01",
+    "theme": "B",
+    "topic": "B.3",
+    "paper": "1B",
+    "difficulty": 2,
+    "level": "SL_HL",
+    "sections": [
+      "laws"
+    ],
+    "skills": [
+      "proportionality-from-table",
+      "extrapolation",
+      "intercept-meaning",
+      "intercept-uncertainty",
+      "accepted-value",
+      "prediction"
+    ],
+    "context": "experimental",
+    "stem": "<p>A student investigates how the pressure $p$ of a fixed mass of air at constant volume depends on its temperature $T$. A sealed flask of air is held in a water bath and connected by a short tube to a Bourdon pressure gauge. The bath is heated in steps, and at each step the student waits until the reading is steady.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "laws"
+        ],
+        "marks": 2,
+        "question": "Show, using two rows of the table, that $p$ is not proportional to $T$.",
+        "markscheme": [
+          "$\\dfrac{p}{T}$ is 8.17 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 12.0 °C but 1.54 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 78.5 °C (or any two non-adjacent rows) ✓",
+          "The ratio is not constant, so $p$ is not proportional to $T$ ✓"
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "laws"
+        ],
+        "marks": 2,
+        "question": "Draw the line of best fit on the graph. Determine its gradient and its intercept on the $p$ axis.",
+        "markscheme": [
+          "Gradient $= 0.34\\ \\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ (accept 0.32 to 0.37) ✓",
+          "Intercept $= 93.7\\ \\text{kPa}$ (accept 92.6 to 95.2) ✓"
+        ],
+        "msFigure": "graph-ms",
+        "plot": {
+          "title": "Graph of pressure against temperature, with 6 plotted points and error bars, to draw on",
+          "height": 343,
+          "x": {
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "major": 20,
+            "symbol": "T",
+            "unit": "°C"
+          },
+          "y": {
+            "min": 90,
+            "max": 130,
+            "step": 2,
+            "major": 10,
+            "symbol": "p",
+            "unit": "kPa",
+            "snap": 0.2
+          },
+          "given": [
+            [
+              12,
+              98,
+              1
+            ],
+            [
+              23.5,
+              102,
+              1
+            ],
+            [
+              37,
+              106,
+              1
+            ],
+            [
+              51.5,
+              111,
+              1
+            ],
+            [
+              64,
+              115,
+              1
+            ],
+            [
+              78.5,
+              121,
+              1
+            ]
+          ],
+          "points": [],
+          "lines": [
+            {
+              "key": "best",
+              "role": "best",
+              "label": "Line of best fit",
+              "gradient": 0.3396036055,
+              "intercept": 93.74927319,
+              "bars": true,
+              "toYAxis": true
+            }
+          ],
+          "fit": {
+            "gradient": 0.3396036055,
+            "intercept": 93.74927319
+          },
+          "worth": 0,
+          "on": "graph"
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "laws"
+        ],
+        "marks": 2,
+        "question": "Hence determine the temperature at which the pressure of the air would be zero, according to these data.",
+        "numeric": {
+          "answer": -276.0549996091001,
+          "range": [
+            -301.50000000000006,
+            -253.47368421052633
+          ],
+          "unit": "${}^{\\circ}\\text{C}$",
+          "source": "absZeroAnswer"
+        },
+        "markscheme": [
+          "At $p = 0$: $T = -\\dfrac{\\text{intercept}}{\\text{gradient}}$ (extrapolating the line) ✓",
+          "$T = −276\\ {}^{\\circ}\\text{C}$ (accept −302 to −253; allow ECF from (b)) ✓"
+        ]
+      },
+      {
+        "label": "d",
+        "sections": [
+          "laws"
+        ],
+        "marks": 3,
+        "question": "Draw the steepest and shallowest straight lines that pass through all the error bars. Use them to determine the absolute uncertainty in your answer to (c).",
+        "markscheme": [
+          "Steepest and shallowest lines drawn through all the error bars ✓",
+          "Their temperatures at $p = 0$, found in the same way, are about −302 °C and −253 °C ✓",
+          "Uncertainty $= \\dfrac{\\text{difference}}{2} \\approx 24\\ {}^{\\circ}\\text{C}$ (allow values from the candidate's own lines) ✓"
+        ],
+        "msFigure": "graph-ms",
+        "plot": {
+          "title": "Graph of pressure against temperature, with 6 plotted points and error bars, to draw on",
+          "height": 343,
+          "x": {
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "major": 20,
+            "symbol": "T",
+            "unit": "°C"
+          },
+          "y": {
+            "min": 90,
+            "max": 130,
+            "step": 2,
+            "major": 10,
+            "symbol": "p",
+            "unit": "kPa",
+            "snap": 0.2
+          },
+          "given": [
+            [
+              12,
+              98,
+              1
+            ],
+            [
+              23.5,
+              102,
+              1
+            ],
+            [
+              37,
+              106,
+              1
+            ],
+            [
+              51.5,
+              111,
+              1
+            ],
+            [
+              64,
+              115,
+              1
+            ],
+            [
+              78.5,
+              121,
+              1
+            ]
+          ],
+          "points": [],
+          "lines": [
+            {
+              "key": "steep",
+              "role": "steep",
+              "label": "Steepest line",
+              "gradient": 0.3653846154,
+              "intercept": 92.61538462,
+              "bars": true
+            },
+            {
+              "key": "shallow",
+              "role": "shallow",
+              "label": "Shallowest line",
+              "gradient": 0.3157894737,
+              "intercept": 95.21052632,
+              "bars": true
+            }
+          ],
+          "fit": {
+            "gradient": 0.3396036055,
+            "intercept": 93.74927319
+          },
+          "worth": 1,
+          "on": "graph"
+        }
+      },
+      {
+        "label": "e",
+        "sections": [
+          "laws"
+        ],
+        "marks": 2,
+        "question": "The accepted value of absolute zero is $−273\\ {}^{\\circ}\\text{C}$. Calculate the percentage difference between your answer to (c) and this value. Hence discuss whether your result is consistent with the accepted value.",
+        "markscheme": [
+          "Percentage difference $= \\dfrac{|−276 - (−273)|}{273} \\times 100 \\approx 1\\,\\%$ ✓",
+          "This is smaller than the percentage uncertainty from (d) (about 9 %), so the result is consistent with the accepted value (award for a conclusion consistent with the candidate's own uncertainty) ✓"
+        ]
+      },
+      {
+        "label": "f",
+        "sections": [
+          "laws"
+        ],
+        "marks": 1,
+        "question": "The flask is then placed in boiling water at 100 °C. Use your line of best fit to predict the reading of the pressure gauge.",
+        "numeric": {
+          "answer": 127.7096337399939,
+          "range": [
+            126.78947368421053,
+            129.15384615384613
+          ],
+          "unit": "$\\text{kPa}$",
+          "source": "pred"
+        },
+        "markscheme": [
+          "$p = 128\\ \\text{kPa}$ (accept 127 to 129) ✓"
+        ],
+        "msFigure": "graph-ms"
+      }
+    ],
+    "generated": {
+      "version": 2,
+      "seed": 51
+    },
+    "review": {
+      "status": "APPROVED"
+    },
+    "dataFile": "questions/1b/B3-B01.json"
+  },
+  {
     "id": "B5-B01",
     "theme": "B",
     "topic": "B.5",
