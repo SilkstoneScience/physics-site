@@ -114,7 +114,7 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - **Theme C done** (teacher-checked, 8 November 2026): Zhang Heng (a model of his seismoscope), Huygens, Lehmann, J. C. Bose, Ibn al-Haytham and Ibn Sahl (manuscript pages: no portraits exist), Germain, Raman, Doppler, Rubin.
 - **Theme D done** (teacher-checked, 8 November 2026): Katherine Johnson, Mary Golda Ross (HL, shown on the 2019 one-dollar coin), Coulomb, Shen Kuo (a modern statue), J. J. Thomson, Joan Feynman, Faraday, Tesla.
 - **Theme E done** (teacher-checked, 8 November 2026): Rutherford, Nagaoka, S. N. Bose, Elmer Imes (a measured HCl infrared spectrum: no open photo exists), Marie Curie, Chien-Shiung Wu, Meitner, Fermi, Payne-Gaposchkin, Chandrasekhar.
-- **All 48 scientists are on the site.** Possible later step: make the checker warn about any subtopic page without two scientists.
+- **All 48 scientists are on the site.** The checker warns if any subtopic page doesn't have exactly two (12 November 2026).
 
 ## Escape room (November 2026, first version, waiting for the teacher's check)
 - `escape.html` (code `js/escape.js`, styles `css/escape.css`), on the Review games page (`games.html`).

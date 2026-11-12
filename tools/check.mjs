@@ -570,6 +570,11 @@ if (exists('scientists.json')) {
       }
     }
   }
+  // Every subtopic page has two scientists (teacher's decision, November 2026; all 48 written 8 November 2026).
+  for (const [topic] of TOPICS) {
+    const n = Array.isArray(sci[topic]) ? sci[topic].length : 0;
+    if (n !== 2) warn('scientists.json', `${topic} has ${n} famous scientist${n === 1 ? '' : 's'} (every subtopic page should have 2)`);
+  }
 }
 
 for (const page of pages) {
