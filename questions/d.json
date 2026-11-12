@@ -24,7 +24,7 @@
         "sections": ["orbits"],
         "question": "Calculate the orbital period of the satellite in minutes.",
         "marks": 2,
-        "numeric": { "answer": 92.5, "range": [92, 93.5], "unit": "minutes", "mistakes": [{ "value": 5550, "feedback": "That's in seconds. Divide by 60 to give the period in minutes." }] },
+        "numeric": { "answer": 92.82, "range": [92, 93.5], "unit": "minutes", "mistakes": [{ "value": 5569, "feedback": "That's in seconds. Divide by 60 to give the period in minutes." }] },
         "markscheme": [
           "$T = \\dfrac{2\\pi r}{v} = \\dfrac{2\\pi \\times 6.8 \\times 10^{6}}{7.7 \\times 10^{3}}$ ✓",
           "$T \\approx 5.5 \\times 10^{3}$ s $\\approx 93$ minutes (accept 92 to 93 minutes) ✓"
@@ -220,7 +220,7 @@
       "97 min"
     ],
     "answer": 3,
-    "explanation": "$T = 2\\pi\\sqrt{\\frac{r^3}{GM}} = 2\\pi\\sqrt{\\frac{(7.0 \\times 10^6)^3}{4.0 \\times 10^{14}}} = 5.8 \\times 10^3$ s $= 97$ min. Leaving out the $2\\pi$ gives 15 min, using $\\pi$ gives 49 min, and using the Earth's radius instead of the orbital radius gives 84 min."
+    "explanation": "$T = 2\\pi\\sqrt{\\frac{r^3}{GM}} = 2\\pi\\sqrt{\\frac{(7.0 \\times 10^6)^3}{4.0 \\times 10^{14}}} = 5.8 \\times 10^3$ s $= 97$ min. Leaving out the $2\\pi$ gives 15 min, using $\\pi$ gives about 48.5 min (option B), and using the Earth's radius instead of the orbital radius gives 84 min."
   },
   {
     "id": "D1-012",
@@ -368,7 +368,7 @@
         "sections": ["strength"],
         "question": "Calculate the gravitational field strength at the surface of Mars.",
         "marks": 2,
-        "numeric": { "answer": 3.73, "unit": "$\\text{N kg}^{-1}$" },
+        "numeric": { "answer": 3.738, "unit": "$\\text{N kg}^{-1}$" },
         "markscheme": [
           "$g = \\dfrac{GM}{R^2} = \\dfrac{6.67 \\times 10^{-11} \\times 6.4 \\times 10^{23}}{(3.39 \\times 10^6)^2}$ ✓",
           "$g = 3.7\\ \\text{N kg}^{-1}$ ✓ (allow ECF from (b))"
@@ -421,7 +421,7 @@
         "sections": ["energy", "potential"],
         "question": "Determine the minimum energy that was needed to put the satellite into this orbit from rest on the surface of a non-rotating Earth.",
         "marks": 2,
-        "numeric": { "answer": 22900000000, "unit": "J" },
+        "numeric": { "answer": 22949000000, "unit": "J" },
         "markscheme": [
           "Energy on the surface $= -\\dfrac{GMm}{R} = -3.12 \\times 10^{10}$ J ✓",
           "Energy needed $= -8.3 \\times 10^9 - (-3.12 \\times 10^{10}) = 2.3 \\times 10^{10}$ J ✓ (allow ECF from (b))"
@@ -771,7 +771,7 @@
         "sections": ["plates"],
         "question": "Calculate the electric field strength between the plates.",
         "marks": 1,
-        "numeric": { "answer": 61300, "unit": "$\\text{V m}^{-1}$", "mistakes": [{ "value": 61.3, "feedback": "Convert 6.0 mm to metres first." }] },
+        "numeric": { "answer": 61333.33, "unit": "$\\text{V m}^{-1}$", "mistakes": [{ "value": 61.3, "feedback": "Convert 6.0 mm to metres first." }] },
         "markscheme": [
           "$E = \\dfrac{V}{d} = \\dfrac{368}{6.0 \\times 10^{-3}} = 6.1 \\times 10^4\\ \\text{V m}^{-1}$ ✓"
         ]
@@ -781,7 +781,7 @@
         "sections": ["charge", "plates"],
         "question": "Determine the charge on the drop.",
         "marks": 2,
-        "numeric": { "answer": 3.2E-19, "unit": "C" },
+        "numeric": { "answer": 3.1957E-19, "unit": "C" },
         "markscheme": [
           "$qE = mg$ ✓",
           "$q = \\dfrac{2.0 \\times 10^{-15} \\times 9.8}{6.13 \\times 10^4} = 3.2 \\times 10^{-19}$ C ✓ (allow ECF from (a))"
@@ -832,7 +832,7 @@
         "sections": ["potential"],
         "question": "Calculate the charge on the sphere.",
         "marks": 2,
-        "numeric": { "answer": 6.67E-07, "unit": "C" },
+        "numeric": { "answer": 6.6741E-07, "unit": "C" },
         "markscheme": [
           "$V = \\dfrac{kQ}{R}$ so $Q = \\dfrac{VR}{k}$ ✓",
           "$Q = \\dfrac{3.0 \\times 10^4 \\times 0.20}{8.99 \\times 10^9} = 6.7 \\times 10^{-7}$ C ✓"
