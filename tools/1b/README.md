@@ -189,6 +189,19 @@ Copy the closest existing dataset and change it. The parts, in order:
    - **Graphs**: `fit: 'none'` (points only), `modelCurve: (d) => (x) => y` with `modelCurveLabel` (examiner's graph),
      `referenceLine: { m, c, label }` (both graphs), `style: 'trace'` (sensor data), `shade: { from, to, baseline, label }`
      (examiner's graph).
+   - **Click-to-plot** (November 2026, first used in B3-B01): a part can let the student draw on the graph in the question
+     bank with `plot: { lines: ['best'], toYAxis: true }` or `plot: { lines: ['steep', 'shallow'], worth: 1 }` (line names:
+     `best`, `steep`, `shallow`). The generator builds the on-screen graph (`plotFor` in generate.mjs: the picture's axes
+     and grid, the points and error bars already shown, the lines from the fit and the steepest and shallowest lines);
+     drawing and marking are in `js/plot.js`. `worth` is how many of the part's marks are for the drawing itself (default
+     0: the marks are for values read from the line, so the check only gives feedback and the part is self-marked as
+     usual). With error bars, a line of best fit must pass through every bar; the steepest and shallowest lines must pass
+     through every bar and be at least half-way from the best fit to the true extreme line; a line may miss a bar by a
+     tenth of a small square. The part needs `msFigure: 'graph-ms'`. The validator (`plot` errors) reads the axes back
+     from the picture, recalculates the lines from the table and tries the marking (the examiner's lines pass; an empty
+     graph, a shifted, flat or half-length line, the best fit offered as an extreme line and swapped lines fail). What a
+     plot asks for is in the review fingerprint, so adding one to an approved dataset means a reset and the teacher's
+     approval again. Not yet supported: x error bars, plotting a missing point, curves.
    - **Claims**: `constantValue` and `constantRatio` (`{ column, rows?, expect }`), `integerMultiples` (`{ column, factor, expect: true }`).
    - **Area**: a result with `check: 'area'`, `area: { from, to, baseline }`, `dims: { of: 'xy' }` and a range (policy:
      covers ±5 % and the count-the-squares estimate; no wider than ±20 %).

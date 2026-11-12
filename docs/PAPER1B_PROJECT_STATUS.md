@@ -4,6 +4,12 @@ Last updated **8 October 2026**. This is the document to read first when resumin
 computer. It supersedes `docs/PAPER1B_HANDOFF.md` (kept for history). It is in `docs/`, which `_config.yml` keeps off
 the published website.
 
+> **Note, 12 November 2026 (click-to-plot).** B3-B01 parts (b) and (d) gained on-screen graphs for the question bank
+> (the student draws the line of best fit, and the steepest and shallowest lines; `tools/1b/README.md`, "Click-to-plot").
+> Its wording, data, answers and mark scheme are unchanged, but what a plot asks for is part of the review fingerprint, so
+> B3-B01 was reset and must be approved by the teacher again before it returns to production. The rest of this document
+> describes the state on 8 October 2026.
+
 Related documents (all in this repository):
 - `docs/PAPER1B_SPECIFICATION.md`: the authoritative design rules (what a Paper 1B question must be, validation, review model).
 - `docs/PAPER1B_ARCHETYPE_MATRIX.md`: the 26 question archetypes, their risk levels and the original Batch 1 plan.

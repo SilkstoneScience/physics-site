@@ -25,6 +25,7 @@ import { MARKER_R } from './graph.mjs';
 const generateRowsSafe = (def) => { try { return generateRows(def, { ideal: true }).rows; } catch (e) { return []; } };
 
 const { checkNumeric } = createRequire(import.meta.url)('../../js/numeric.js');
+const Plot = createRequire(import.meta.url)('../../js/plot.js'); // click-to-plot graphs
 
 const CONTEXTS = ['experimental', 'observational', 'unfamiliar'];
 // A verdict students must reach from the max/min lines ("is the claimed value inside the range?") must
@@ -515,6 +516,8 @@ function run(def, q, topics, fail, warn) {
     if (!student) fail('graph-point', 'graph', 'the dataset has a graph, but the question doesn\'t show it');
     for (const fig of figures.filter((f) => /data-graph=/.test(f.svg))) checkGraph(fig, def, d, rows, fail, warn);
   }
+  // ---------- 6b. Click-to-plot parts: the on-screen graph must match the picture, and its marking must be sound ----------
+  for (const pt of q.parts || []) if (pt.plot) checkPlot(def, q, pt, d, rows, fail);
 
   // ---------- 7. Diagrams and all SVG ----------
   for (const fig of figures) checkSvg(fig, def, fail);
@@ -1301,6 +1304,84 @@ function checkGraph(fig, def, d, rows, fail, warn) {
 }
 
 // ---------- SVG: accessibility, colours, labels and vector directions ----------
+// A click-to-plot part (plot: {…} on a part; js/plot.js). The on-screen graph is checked against what students see in
+// the picture (axes and grid read back from the SVG, points from the table), its lines are recalculated here from
+// those points, and the marking is tried out: the examiner's lines must pass and clearly wrong ones must fail.
+function checkPlot(def, q, pt, d, rows, failTo) {
+  let bad = 0;
+  const fail = (...a) => { bad += 1; failTo(...a); };
+  const where = `part (${pt.label}) click-to-plot graph`;
+  const p = pt.plot;
+  const g = def.graph;
+  const student = (q.data || []).find((x) => x.kind === 'figure' && x.figure === 'graph');
+  if (!g || g.fit !== 'linear' || !student) { fail('plot', where, 'a click-to-plot part needs the dataset\'s graph (points with a straight-line fit), shown in the question'); return; }
+  if (p.on !== 'graph') fail('plot', where, 'the plot must be drawn on the figure "graph"');
+  if (!pt.msFigure) fail('plot', where, 'the part needs msFigure: \'graph-ms\', so the mark scheme shows the examiner\'s lines');
+  if (!Number.isInteger(p.worth) || p.worth < 0 || p.worth > pt.marks) fail('plot', where, `worth must be a whole number of marks from 0 to ${pt.marks}`);
+  const close = (a, b, tol = 1e-6) => typeof a === 'number' && typeof b === 'number' && rel(a, b) <= tol;
+
+  // 1. The same axes, grid and labels as the picture.
+  const G = parseGraph(student.svg);
+  const A = axisInfo(student.svg);
+  for (const [name, a, range, minor, ticks, title] of [['x', p.x, A.x, A.xMinor, G.xTicks, G.xTitle], ['y', p.y, A.y, A.yMinor, G.yTicks, G.yTitle]]) {
+    if (!a || !range || ticks.length < 2) { fail('plot', where, `the ${name} axis is missing`); return; }
+    const major = Math.abs(ticks[1].v - ticks[0].v);
+    if (Math.abs(a.min - range[0]) > 1e-9 || Math.abs(a.max - range[1]) > 1e-9 || !close(a.major, major)) fail('plot', where, `the ${name} axis doesn't match the picture`, { expected: `${range[0]} to ${range[1]} in steps of ${major}`, got: `${a.min} to ${a.max} in steps of ${a.major}` });
+    if (!close(a.step, minor, 0.03)) fail('plot', where, `the small squares on the ${name} axis don't match the picture`, { expected: minor, got: a.step });
+    if (/[$\\{}]/.test(a.symbol || '') || `${a.symbol}${a.unit ? ' / ' + a.unit : ''}` !== title) fail('plot', where, `the ${name}-axis label doesn't match the picture`, { expected: title, got: `${a.symbol} / ${a.unit}` });
+  }
+
+  // 2. The points already on the graph: the rows the picture shows, with the error bars it draws.
+  const shownRows = rows.map((_, i) => i).filter((i) => !(g.omit || []).includes(i));
+  const barred = new Set(G.ebars.filter((b) => b.axis === 'y').map((b) => b.row));
+  if (G.ebars.some((b) => b.axis === 'x')) fail('plot', where, 'click-to-plot graphs can\'t show x error bars yet');
+  const want = shownRows.map((i) => [rows[i][g.x], rows[i][g.y], barred.has(i) ? d.unc(g.y, i) : 0]);
+  if ((p.given || []).length !== want.length || want.some((w, j) => w.some((v, k) => Math.abs(v - p.given[j][k]) > 1e-9))) fail('plot', where, 'the points on the on-screen graph are not the points (and error bars) of the picture');
+  if ((p.points || []).length) fail('plot', where, 'plotting missing points on screen is not set up for Paper 1B yet');
+
+  // 3. The lines, recalculated from the table.
+  const pts = d.fitRows.map((i) => ({ x: rows[i][g.x], y: rows[i][g.y], ex: 0, ey: d.unc(g.y, i) || 0 }));
+  const fit = linearFit(pts.map((k) => k.x), pts.map((k) => k.y));
+  const band = g.band ? gradientBand(pts) : null;
+  const own = { best: fit, steep: band && band.steep, shallow: band && band.shallow };
+  if (!p.fit || !close(p.fit.gradient, fit.m) || !close(p.fit.intercept, fit.c)) fail('plot', where, 'the line of best fit stored with the plot is not the least-squares line through the points');
+  const lines = p.lines || [];
+  if (!lines.length) fail('plot', where, 'the plot has no line for the student to draw');
+  for (const L of lines) {
+    const mine = own[L.role];
+    if (!mine || L.key !== L.role) { fail('plot', where, `the plot can't have a "${L.role}" line (the steepest and shallowest lines need graph.band)`); continue; }
+    if (!close(L.gradient, mine.m) || !close(L.intercept, mine.c)) fail('plot', where, `the ${L.role} line is not the one calculated from the table`, { expected: `gradient ${mine.m}, intercept ${mine.c}`, got: `gradient ${L.gradient}, intercept ${L.intercept}` });
+    if (L.role !== 'best' && !(L.bars && barred.size === shownRows.length)) fail('plot', where, 'the steepest and shallowest lines need an error bar on every point of the picture');
+    if (L.toYAxis && p.x.min !== 0) fail('plot', where, 'toYAxis asks for the line to meet the vertical axis, but the x axis doesn\'t start at 0');
+  }
+  if (bad) return;
+
+  // 4. The marking: the examiner's lines pass, an empty graph and clearly wrong lines don't.
+  const ideal = Plot.ideal(p);
+  const marked = (state) => Plot.check(p, state, pt.marks);
+  const full = marked(ideal);
+  if (!full.right || full.score !== p.worth) fail('plot', where, `the examiner's own lines are not accepted (${full.feedback.filter((f) => !f.ok).map((f) => f.text).join(' ')})`);
+  const empty = marked({ points: [], line: null, lines: {} });
+  if (empty.right || empty.score !== 0) fail('plot', where, 'an empty graph is accepted');
+  const withLine = (key, seg) => ({ ...ideal, lines: { ...ideal.lines, [key]: seg } });
+  const okFor = (key, seg) => marked(withLine(key, seg)).lines.find((r) => r.key === key).ok;
+  for (const L of lines) {
+    const up = ideal.lines[L.key].map(([x, y]) => [x, y + 2 * p.y.step]);
+    if (okFor(L.key, up)) fail('plot', where, `a ${L.role} line two small squares too high is accepted`);
+    const flat = [[p.x.min, (p.y.min + p.y.max) / 2], [p.x.max, (p.y.min + p.y.max) / 2]];
+    if (okFor(L.key, flat)) fail('plot', where, `a horizontal line is accepted as the ${L.role} line`);
+    const half = ideal.lines[L.key].map(([x, y], i) => (i ? [(ideal.lines[L.key][0][0] + x) / 2, (ideal.lines[L.key][0][1] + y) / 2] : [x, y]));
+    const xsData = p.given.map((k) => k[0]);
+    if (Math.max(...half.map((k) => k[0])) < Math.max(...xsData) - p.x.step && okFor(L.key, half)) fail('plot', where, `a ${L.role} line that stops half-way across the points is accepted`);
+    if (L.role !== 'best') {
+      const bestSeg = Plot.ideal({ ...p, lines: [{ key: 'best', role: 'best', gradient: p.fit.gradient, intercept: p.fit.intercept }] }).lines.best;
+      if (okFor(L.key, bestSeg)) fail('plot', where, `the line of best fit is accepted as the ${L.role} line`);
+      const other = lines.find((k) => k.role !== 'best' && k.role !== L.role);
+      if (other && okFor(L.key, ideal.lines[other.key])) fail('plot', where, `the ${other.role} line is accepted as the ${L.role} line`);
+    }
+  }
+}
+
 function checkSvg(fig, def, fail) {
   const where = `figure ${fig.figure}`;
   if (!fig.alt || !fig.svg.includes('aria-label=')) fail('alt', where, 'needs a text description (alt) for screen readers');

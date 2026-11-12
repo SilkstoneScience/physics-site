@@ -127,6 +127,8 @@ export default {
       },
       {
         label: 'b', sections: ['laws'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        // Click-to-plot (question bank): the student draws the line on the graph; the marks are for the values read from it.
+        plot: { lines: ['best'], toYAxis: true },
         reads: [{ figure: 'graph', x: 0, y: d.r.intercept.value }],
         question: 'Draw the line of best fit on the graph. Determine its gradient and its intercept on the $p$ axis.',
         markscheme: [
@@ -145,6 +147,7 @@ export default {
       },
       {
         label: 'd', sections: ['laws'], marks: 3, ao: { AO2: 2, AO3: 1 }, msFigure: 'graph-ms',
+        plot: { lines: ['steep', 'shallow'], worth: 1 }, // the first marking point is for the two lines
         question: 'Draw the steepest and shallowest straight lines that pass through all the error bars. Use them to determine the absolute uncertainty in your answer to (c).',
         markscheme: [
           'Steepest and shallowest lines drawn through all the error bars ✓',

@@ -191,7 +191,19 @@
         "Gradient $= 0.34\\ \\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ (accept 0.33 to 0.36) ✓",
         "Intercept $= 93.2\\ \\text{kPa}$ (accept 92.7 to 93.7) ✓"
       ],
-      "msFigure": "graph-ms"
+      "msFigure": "graph-ms",
+      "plot": {
+        "worth": 0,
+        "points": 0,
+        "lines": [
+          {
+            "key": "best",
+            "role": "best",
+            "bars": true,
+            "toYAxis": true
+          }
+        ]
+      }
     },
     {
       "label": "c",
@@ -220,7 +232,25 @@
         "Their temperatures at $p = 0$, found in the same way, are about −277 °C and −262 °C ✓",
         "Uncertainty $= \\dfrac{\\text{difference}}{2} \\approx 8\\ {}^{\\circ}\\text{C}$ (allow values from the candidate's own lines) ✓"
       ],
-      "msFigure": "graph-ms"
+      "msFigure": "graph-ms",
+      "plot": {
+        "worth": 1,
+        "points": 0,
+        "lines": [
+          {
+            "key": "steep",
+            "role": "steep",
+            "bars": true,
+            "toYAxis": false
+          },
+          {
+            "key": "shallow",
+            "role": "shallow",
+            "bars": true,
+            "toYAxis": false
+          }
+        ]
+      }
     },
     {
       "label": "e",
