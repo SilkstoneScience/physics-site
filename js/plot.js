@@ -23,6 +23,11 @@
 // With error bars ("bars": true) a line of best fit must pass through every bar; the steepest and shallowest
 // lines must pass through every bar and be at least half-way from the best fit to the true extreme line.
 // A line may miss a bar by a tenth of a small square ("slack").
+// A line of best fit can also carry:
+//     "tolerance": 0.5,          without error bars: how far the line may be from the expected line at each end of the data
+//     "gradients": [0.31, 0.34], the gradients the mark scheme accepts: a line outside them is "tilted too far"
+//     "skip": [4],               points in "given" that the line should not follow (an anomalous reading, or the readings
+//                                beyond the straight part of the data); the line is judged against the others only
 //
 // The drawing of the axes (axesSvg) is shared with tools/p2/plot-axes.mjs, which writes the printable picture,
 // so the worksheet and the website always show the same grid. Marking is tested by tools/p2/test.mjs and tools/1b/test.mjs.
@@ -73,8 +78,6 @@
   }
   const NAMES = { best: 'line of best fit', steep: 'steepest line', shallow: 'shallowest line' };
   const styleOf = (L) => (L.legacy ? { stroke: ORANGE } : L.role === 'best' ? { stroke: BLUE } : { stroke: ORANGE, dash: '7 4' });
-  // Every point on the graph, given or to be plotted: the data a line has to cover.
-  const dataPoints = (plot) => [...(plot.given || []), ...(plot.points || [])];
   // The student's lines by key, from a saved state.
   function linesIn(plot, state) {
     const map = {};
@@ -207,12 +210,16 @@
     const g = (seg[1][1] - seg[0][1]) / (seg[1][0] - seg[0][0]);
     const at = (x) => seg[0][1] + g * (x - seg[0][0]);
     const want = (x) => L.gradient * x + L.intercept;
-    const xs = dataPoints(plot).map((p) => p[0]);
+    // "skip": points on the graph that the line should not follow (an anomalous reading, or the readings beyond the
+    // straight part of the data), as positions in "given". The line is judged against the other points only.
+    const skip = new Set(L.skip || []);
+    const followed = (plot.given || []).filter((p, i) => !skip.has(i));
+    const xs = [...followed, ...(plot.points || [])].map((p) => p[0]);
     const xa = Math.min(...xs); const xb = Math.max(...xs);
     const lo = Math.min(seg[0][0], seg[1][0]); const hi = Math.max(seg[0][0], seg[1][0]);
     const covers = lo <= xa + tolX && hi >= xb - tolX;
     const reaches = !L.toYAxis || lo <= plot.x.min + tolX;
-    const bars = L.bars ? (plot.given || []).filter((p) => p[2] > 0) : [];
+    const bars = L.bars ? followed.filter((p) => p[2] > 0) : [];
     const slack = (typeof plot.slack === 'number' ? plot.slack : plot.y.step / 10) + EPS;
     const misses = bars.filter(([x, y, e]) => Math.abs(at(x) - y) > e + slack).length;
     const missText = `${mine} misses ${misses} of the ${bars.length} error bars`;
@@ -239,10 +246,12 @@
     const tilted = Array.isArray(L.gradients) && (g < L.gradients[0] - EPS || g > L.gradients[1] + EPS);
     res.ok = close && !tilted && covers && reaches;
     if (res.ok) res.text = `${mine}${L.legacy ? ' of best fit' : ''} is good.`;
+    else if (!close && skip.size) res.text = bars.length ? `${mine} misses ${misses} of the error bars it should pass through: follow the trend of the points, and leave out only a point that clearly does not fit it.`
+      : `${mine} is not close enough to the points that follow the straight-line trend: draw it through those points only.`;
     else if (!close) res.text = bars.length ? `${missText}: here a line of best fit passes through all of them, with the points balanced on either side.`
       : `${mine} is not close enough to the points: a line of best fit passes as near as possible to all of them.`;
     else if (tilted) res.text = `${mine} is close to the points, but it is tilted too far: balance the points on either side of it along its whole length.`;
-    else if (!covers) res.text = `${mine} follows the points, but it should run across the whole range of the points.`;
+    else if (!covers) res.text = skip.size ? `${mine} follows the points, but it should run across the whole of the straight-line trend.` : `${mine} follows the points, but it should run across the whole range of the points.`;
     else res.text = `${mine} follows the points: now extend it back to meet the vertical axis.`;
     return res;
   }

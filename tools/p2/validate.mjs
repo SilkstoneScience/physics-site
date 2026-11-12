@@ -323,6 +323,10 @@ export function validateQuestion(def, built, { root, topics, originality, indepe
     } else if (['Calculate', 'Determine'].includes(pt.command) && pt.noNumeric !== true) warn('numeric', `(${pt.label}) is a calculation without a typed answer (add numeric, or noNumeric: true with a reason in the examinerNote)`);
     // Click-to-plot graphs (js/plot.js)
     if (q.parts[i].plot) for (const m of plotProblems(def, pt, q.parts[i], root)) err('plot', `(${pt.label}) ${m}`);
+    // Teacher's rule (12 November 2026): new questions that ask for a graph of data use the click-to-plot tool.
+    else if (['Draw', 'Plot'].includes(pt.command) && /\bgraph\b|\baxes\b|line of best fit|\bplot\b/i.test(pt.question) && typeof pt.noPlot !== 'string') {
+      warn('plot-missing', `(${pt.label}) asks for a graph but has no on-screen plot: add a plot (tools/p2/README.md, "Click-to-plot graphs"), or say why not with noPlot: '<reason>' (a sketched curve, for example)`);
+    }
   });
 
   // ---- 6. Diagrams ----

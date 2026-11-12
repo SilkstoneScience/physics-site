@@ -206,7 +206,13 @@ Copy the closest existing dataset and change it. The parts, in order:
      from the picture, recalculates the lines from the table and tries the marking (the examiner's lines pass; an empty
      graph, a shifted, flat or half-length line, the best fit offered as an extreme line and swapped lines fail). What a
      plot asks for is in the review fingerprint, so adding one to an approved dataset means a reset and the teacher's
-     approval again. Not yet supported: x error bars, plotting a missing point, curves.
+     approval again. Points left out of the fit (`graph.exclude`) stay on the on-screen graph, and the line is judged
+     against the other points only (`skip`); the feedback never says which points those are. If a part reveals the graph
+     (`figure: 'graph'` on the part), the plot goes on that part or a later one, and the question bank then shows only
+     the drawable graph in that part. **Rule (teacher, 12 November 2026): every new dataset with a straight-line graph has
+     a plot on the part that first needs the line.** The validator warns (`plot-missing`) otherwise; a dataset that can't
+     use it yet gives the reason in a top-level `noPlot: '<reason>'`. Not yet supported: x error bars, plotting a
+     missing point, curves.
    - **Claims**: `constantValue` and `constantRatio` (`{ column, rows?, expect }`), `integerMultiples` (`{ column, factor, expect: true }`).
    - **Area**: a result with `check: 'area'`, `area: { from, to, baseline }`, `dims: { of: 'xy' }` and a range (policy:
      covers ±5 % and the count-the-squares estimate; no wider than ±20 %).

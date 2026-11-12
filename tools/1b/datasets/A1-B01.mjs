@@ -86,6 +86,9 @@ export default {
   trialsTable: { column: 'R', row: ROW, caption: 'The five ranges for h = 0.700 m.' },
   present: ['diagram', 'table', 'trials', 'graph'],
   graph: { x: 'h', y: 'R2', fit: 'linear', band: true, xErrorBars: true, zero: { x: true, y: true } },
+  // No on-screen line drawing yet (teacher's rule of 12 November 2026 asks for it on straight-line graphs): this
+  // graph has x error bars, which the click-to-plot graph cannot show. Remove this line once it can.
+  noPlot: 'the graph has x error bars, which the on-screen graph cannot show yet',
 
   // ----- 3. Results -----
   results: {

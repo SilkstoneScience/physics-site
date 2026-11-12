@@ -322,10 +322,14 @@ export function plotFor(def, d, want, label) {
   let tolerance = null;
   const gradRes = Object.entries(def.results || {}).find(([, r]) => r.check === 'gradient');
   const accepted = gradRes && d.r[gradRes[0]] && d.r[gradRes[0]].range ? [...d.r[gradRes[0]].range].sort((a, b) => a - b) : null;
+  // Points left out of the fit (graph.exclude: an anomalous reading, or the readings beyond the straight part) stay on
+  // the graph, but the lines are judged against the other points only ("skip": their positions among the given points).
+  const skip = points.map((p, i) => ((g.exclude || []).includes(p.row) ? i : -1)).filter((i) => i >= 0);
+  const followed = points.filter((p) => !(g.exclude || []).includes(p.row));
   if (!bars && keys.includes('best')) {
     tolerance = ys.minor;
     if (accepted) {
-      const span = Math.max(...points.map((p) => p.x)) - Math.min(...points.map((p) => p.x));
+      const span = Math.max(...followed.map((p) => p.x)) - Math.min(...followed.map((p) => p.x));
       const room = Math.min(Math.abs(d.fit.m - accepted[0]), Math.abs(accepted[1] - d.fit.m));
       tolerance = Math.min(tolerance, (room * span) / 2);
     }
@@ -349,6 +353,7 @@ export function plotFor(def, d, want, label) {
       key: k, role: k, label: PLOT_LINES[k], gradient: num(from[k].m), intercept: num(from[k].c),
       ...(bars ? { bars: true } : {}), ...(k === 'best' && tolerance !== null ? { tolerance: num(tolerance) } : {}),
       ...(k === 'best' && accepted ? { gradients: accepted.map(num) } : {}),
+      ...(skip.length ? { skip } : {}),
       ...(k === 'best' && want.toYAxis ? { toYAxis: true } : {}),
     })),
     fit: { gradient: num(d.fit.m), intercept: num(d.fit.c) },

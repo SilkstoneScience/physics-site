@@ -796,18 +796,18 @@ export async function runTests() {
       fp(editPartLocal(b3, 'd', (pt) => ({ ...pt, plot: { ...pt.plot, worth: 0 } }))) !== fp(b3) && fp(editPartLocal(b3, 'b', (pt) => ({ ...pt, plot: undefined }))) !== fp(b3));
     // Lines of best fit before reading a gradient: without error bars (A2-B01, C4-B01, D1-B01) and with them (D3-B01).
     const withPlot = datasets.filter((x) => buildQuestion(x.def).question.parts.some((pt) => pt.plot)).map((x) => x.def.id).sort().join(' ');
-    check('Plot: the datasets with an on-screen graph are the ones the teacher asked for', withPlot === 'A2-B01 B3-B01 C4-B01 D1-B01 D3-B01', withPlot);
-    for (const [id, label] of [['A2-B01', 'b'], ['C4-B01', 'c'], ['D1-B01', 'c'], ['D3-B01', 'b']]) {
+    check('Plot: the datasets with an on-screen graph are the ones the teacher asked for', withPlot === 'A2-B01 A2-B02 B3-B01 B5-B01 C1-B01 C4-B01 D1-B01 D3-B01', withPlot);
+    for (const [id, label] of [['A2-B01', 'b'], ['A2-B02', 'b'], ['C1-B01', 'd'], ['C4-B01', 'c'], ['D1-B01', 'c'], ['D3-B01', 'b']]) {
       const def = datasets.find((x) => x.def.id === id).def;
       const b = buildQuestion(def);
       const pt = b.question.parts.find((x) => x.label === label);
       const p = pt.plot;
       const L = p.lines[0];
-      const xs = p.given.map((g) => g[0]);
+      const xs = p.given.filter((g, i) => !(L.skip || []).includes(i)).map((g) => g[0]); // the points the line follows
       const mid = (Math.min(...xs) + Math.max(...xs)) / 2;
       const tilt = (m) => Plot.ideal({ ...p, lines: [{ key: 'best', role: 'best', gradient: m, intercept: L.gradient * mid + L.intercept - m * mid }] }).lines.best;
       const ok = (s) => Plot.check(p, { points: [], line: null, lines: { best: s } }, pt.marks).right;
-      const [lo, hi] = b.d.r.gradient.range;
+      const [lo, hi] = L.gradients;
       check(`Plot: ${id} (${label}) passes the plot checks and accepts the least-squares line`, errs(def).length === 0 && ok(Plot.ideal(p).lines.best), errs(def).join('; '));
       check(`Plot: ${id} (${label}) rejects a line whose gradient is outside the range the mark scheme accepts`, !ok(tilt(lo - 0.05 * (L.gradient - lo))) && !ok(tilt(hi + 0.05 * (hi - L.gradient))));
       check(`Plot: ${id} (${label}) accepts a line tilted half-way to the edge of the accepted range`, ok(tilt(L.gradient + 0.5 * Math.min(L.gradient - lo, hi - L.gradient))) && ok(tilt(L.gradient - 0.5 * Math.min(L.gradient - lo, hi - L.gradient))));
@@ -824,6 +824,46 @@ export async function runTests() {
       const r = Plot.check(p, { points: [], line: null, lines: { best: seg(band.steep.m, band.steep.c) } }, 2);
       return !r.right && /tilted too far/.test(r.feedback[0].text);
     })());
+
+    // Lines that leave out some of the points on the graph (graph.exclude): the curved region of A2-B02 and the
+    // anomalous reading of B5-B01. Nothing on the screen says which points are left out.
+    const plotOf = (id, label) => { const b = buildQuestion(datasets.find((x) => x.def.id === id).def); const pt = b.question.parts.find((x) => x.label === label); return { b, pt, p: pt.plot, L: pt.plot.lines[0] }; };
+    const judge = ({ p, pt }, s) => Plot.check(p, { points: [], line: null, lines: { best: s } }, pt.marks);
+    const through = ({ p }, m, c, x1 = p.x.min, x2 = p.x.max) => [[x1, m * x1 + c], [x2, m * x2 + c]];
+    const lsAll = ({ p }) => linearFit(p.given.map((g) => g[0]), p.given.map((g) => g[1]));
+    const a2 = plotOf('A2-B02', 'b');
+    check('Plot: A2-B02 leaves the four readings beyond the straight region out of the line', JSON.stringify(a2.L.skip) === '[5,6,7,8]' && a2.p.given.length === 9);
+    check('Plot: A2-B02 accepts a line drawn only across the straight region', judge(a2, through(a2, a2.L.gradient, a2.L.intercept, a2.p.given[0][0], a2.p.given[4][0])).right);
+    check('Plot: A2-B02 rejects one line through all nine points (the mistake part (d) is about), without naming the points',
+      (() => { const f = lsAll(a2); const r = judge(a2, through(a2, f.m, f.c)); return !r.right && /straight-line trend/.test(r.feedback[0].text) && !/\d/.test(r.feedback[0].text); })());
+    check('Plot: A2-B02 asks a line that stops half-way along the straight region to run across the whole trend',
+      (() => { const r = judge(a2, through(a2, a2.L.gradient, a2.L.intercept, a2.p.given[0][0], a2.p.given[2][0])); return !r.right && /whole of the straight-line trend/.test(r.feedback[0].text); })());
+    const b5 = plotOf('B5-B01', 'b');
+    check('Plot: B5-B01 leaves the anomalous reading out of the line, and the line must reach the V axis', JSON.stringify(b5.L.skip) === '[4]' && b5.L.bars === true && b5.L.toYAxis === true);
+    check('Plot: B5-B01 accepts the line through the other error bars', judge(b5, through(b5, b5.L.gradient, b5.L.intercept)).right);
+    check('Plot: B5-B01 rejects the line through every point including the anomalous one',
+      (() => { const f = lsAll(b5); const r = judge(b5, through(b5, f.m, f.c)); return !r.right && /leave out only a point that clearly does not fit/.test(r.feedback[0].text); })());
+    check('Plot: B5-B01 passes the plot checks', errs(datasets.find((x) => x.def.id === 'B5-B01').def).length === 0);
+    check('Plot: the validator refuses a line that does not leave out the points the fit leaves out',
+      (() => { const def = datasets.find((x) => x.def.id === 'B5-B01').def; const q = JSON.parse(JSON.stringify(buildQuestion(def).question)); delete q.parts.find((x) => x.label === 'b').plot.lines[0].skip;
+        return validateDataset(def, q, { topics }).some((x) => x.code === 'plot' && /leave out exactly the points/.test(x.message)); })());
+
+    // A graph that a part reveals (C1-B01 part (d)): the plot goes on that part, not on an earlier one.
+    const c1 = plotOf('C1-B01', 'd');
+    check('Plot: C1-B01 part (d) draws on the graph that the part itself shows', c1.pt.figure.figure === 'graph' && c1.p.on === 'graph' && !c1.b.question.data.some((x) => x.figure === 'graph'));
+    check('Plot: a plot on a part before the one that reveals the graph is refused', (() => {
+      const def = datasets.find((x) => x.def.id === 'C1-B01').def;
+      const early = { ...def, parts: (d) => def.parts(d).map((pt) => (pt.label === 'd' ? { ...pt, plot: undefined } : pt.label === 'b' ? { ...pt, msFigure: 'graph-ms', plot: { lines: ['best'] } } : pt)) };
+      return errs(early).some((m) => /only shown in a later part/.test(m));
+    })());
+
+    // Teacher's rule (12 November 2026): a new dataset with a straight-line graph has an on-screen plot, or says why not.
+    const warnsMissing = (def) => validateDataset(def, buildQuestion(def).question, { topics }).some((x) => x.level === 'warning' && x.code === 'plot-missing');
+    const d3def = datasets.find((x) => x.def.id === 'D3-B01').def;
+    const noPlots = { ...d3def, parts: (d) => d3def.parts(d).map((pt) => ({ ...pt, plot: undefined })) };
+    check('Plot rule: a straight-line graph with no on-screen plot gets a warning', warnsMissing(noPlots));
+    check('Plot rule: a stated reason (noPlot) or a plot removes the warning', !warnsMissing({ ...noPlots, noPlot: 'a reason' }) && !warnsMissing(d3def));
+    check('Plot rule: no published dataset is missing its plot without a reason', datasets.every((x) => !warnsMissing(x.def)));
   }
   return { count, failures };
 }

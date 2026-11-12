@@ -225,6 +225,11 @@ export async function runTests() {
   check('plot: the marks must leave one for the points', plotProblemsFor((p) => { p.marks = { line: 2 }; }).some((m) => /at least 1 to the points/.test(m)));
   check('plot: only Draw or Plot parts get a graph', plotProblemsFor((p, d) => { d.parts[0].command = 'Sketch'; d.parts[0].question = d.parts[0].question.replace('Draw', 'Sketch'); }).some((m) => /only "Draw" or "Plot"/.test(m)));
   check('plot: the examiner\'s graph must be in the mark scheme', plotProblemsFor((p, d) => { d.parts[0].markscheme.pop(); }).some((m) => /should show the examiner's graph/.test(m)));
+  // Teacher's rule (12 November 2026): a new "Draw" or "Plot" graph part has an on-screen plot, or says why not.
+  const plotWarnings = (change) => { const d = clone(drill); change(d.parts[0]); return build([d]).diags.filter((x) => x.level === 'warning' && x.code === 'plot-missing').length; };
+  check('plot rule: a Draw-the-graph part without an on-screen plot gets a warning', plotWarnings((pt) => { delete pt.plot; }) === 1);
+  check('plot rule: a stated reason (noPlot) or a plot removes the warning', plotWarnings((pt) => { delete pt.plot; pt.noPlot = 'a sketched curve'; }) === 0 && plotWarnings(() => {}) === 0);
+  check('plot rule: the reason is not published with the question', (() => { const d = clone(drill); d.parts[0].noPlot = 'x'; return !('noPlot' in build([d]).results[0].built.question.parts[0]); })());
 
   return { count, failures };
 }

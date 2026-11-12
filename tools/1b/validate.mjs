@@ -518,6 +518,11 @@ function run(def, q, topics, fail, warn) {
   }
   // ---------- 6b. Click-to-plot parts: the on-screen graph must match the picture, and its marking must be sound ----------
   for (const pt of q.parts || []) if (pt.plot) checkPlot(def, q, pt, d, rows, fail);
+  // Teacher's rule (12 November 2026): questions with a straight-line graph let the student draw the line on screen.
+  // A dataset that can't yet (for example, its graph has x error bars) says why in noPlot: '<reason>'.
+  if (g && g.fit === 'linear' && g.style !== 'trace' && !(q.parts || []).some((pt) => pt.plot) && !(typeof def.noPlot === 'string' && def.noPlot.trim())) {
+    warn('plot-missing', 'graph', 'the graph has a straight-line fit, but no part lets the student draw the line on screen: add plot: { lines: [\'best\'] } to the part that first needs the line (tools/1b/README.md, "Click-to-plot"), or give the reason in noPlot');
+  }
 
   // ---------- 7. Diagrams and all SVG ----------
   for (const fig of figures) checkSvg(fig, def, fail);
@@ -1313,8 +1318,13 @@ function checkPlot(def, q, pt, d, rows, failTo) {
   const where = `part (${pt.label}) click-to-plot graph`;
   const p = pt.plot;
   const g = def.graph;
-  const student = (q.data || []).find((x) => x.kind === 'figure' && x.figure === 'graph');
+  // The graph is usually with the data under the stem; a part may reveal it instead (figure: 'graph' on the part),
+  // and then only that part or a later one can draw on it.
+  const inData = (q.data || []).find((x) => x.kind === 'figure' && x.figure === 'graph');
+  const revealedBy = (q.parts || []).findIndex((x) => x.figure && typeof x.figure === 'object' && x.figure.figure === 'graph');
+  const student = inData || (revealedBy >= 0 ? q.parts[revealedBy].figure : null);
   if (!g || g.fit !== 'linear' || !student) { fail('plot', where, 'a click-to-plot part needs the dataset\'s graph (points with a straight-line fit), shown in the question'); return; }
+  if (!inData && (q.parts || []).indexOf(pt) < revealedBy) fail('plot', where, 'the graph is only shown in a later part, so this part can\'t draw on it');
   if (p.on !== 'graph') fail('plot', where, 'the plot must be drawn on the figure "graph"');
   if (!pt.msFigure) fail('plot', where, 'the part needs msFigure: \'graph-ms\', so the mark scheme shows the examiner\'s lines');
   if (!Number.isInteger(p.worth) || p.worth < 0 || p.worth > pt.marks) fail('plot', where, `worth must be a whole number of marks from 0 to ${pt.marks}`);
@@ -1340,6 +1350,8 @@ function checkPlot(def, q, pt, d, rows, failTo) {
   if ((p.points || []).length) fail('plot', where, 'plotting missing points on screen is not set up for Paper 1B yet');
 
   // 3. The lines, recalculated from the table.
+  const wantSkip = shownRows.map((row, j) => ((g.exclude || []).includes(row) ? j : -1)).filter((j) => j >= 0);
+  const followedRows = shownRows.filter((row) => !(g.exclude || []).includes(row));
   const pts = d.fitRows.map((i) => ({ x: rows[i][g.x], y: rows[i][g.y], ex: 0, ey: d.unc(g.y, i) || 0 }));
   const fit = linearFit(pts.map((k) => k.x), pts.map((k) => k.y));
   const band = g.band ? gradientBand(pts) : null;
@@ -1351,8 +1363,10 @@ function checkPlot(def, q, pt, d, rows, failTo) {
     const mine = own[L.role];
     if (!mine || L.key !== L.role) { fail('plot', where, `the plot can't have a "${L.role}" line (the steepest and shallowest lines need graph.band)`); continue; }
     if (!close(L.gradient, mine.m) || !close(L.intercept, mine.c)) fail('plot', where, `the ${L.role} line is not the one calculated from the table`, { expected: `gradient ${mine.m}, intercept ${mine.c}`, got: `gradient ${L.gradient}, intercept ${L.intercept}` });
-    if (L.role !== 'best' && !(L.bars && barred.size === shownRows.length)) fail('plot', where, 'the steepest and shallowest lines need an error bar on every point of the picture');
+    if (L.role !== 'best' && !(L.bars && followedRows.every((i) => barred.has(i)))) fail('plot', where, 'the steepest and shallowest lines need an error bar on every point they must pass through');
     if (L.toYAxis && p.x.min !== 0) fail('plot', where, 'toYAxis asks for the line to meet the vertical axis, but the x axis doesn\'t start at 0');
+    // Points left out of the fit (an anomalous reading, or readings beyond the straight part) are shown but not followed.
+    if (JSON.stringify(L.skip || []) !== JSON.stringify(wantSkip)) fail('plot', where, `the ${L.role} line must leave out exactly the points that the fit leaves out (graph.exclude)`, { expected: JSON.stringify(wantSkip), got: JSON.stringify(L.skip || []) });
   }
   if (bad) return;
 
@@ -1371,7 +1385,7 @@ function checkPlot(def, q, pt, d, rows, failTo) {
     const flat = [[p.x.min, (p.y.min + p.y.max) / 2], [p.x.max, (p.y.min + p.y.max) / 2]];
     if (okFor(L.key, flat)) fail('plot', where, `a horizontal line is accepted as the ${L.role} line`);
     const half = ideal.lines[L.key].map(([x, y], i) => (i ? [(ideal.lines[L.key][0][0] + x) / 2, (ideal.lines[L.key][0][1] + y) / 2] : [x, y]));
-    const xsData = p.given.map((k) => k[0]);
+    const xsData = p.given.filter((k, j) => !wantSkip.includes(j)).map((k) => k[0]); // the points the line follows
     if (Math.max(...half.map((k) => k[0])) < Math.max(...xsData) - p.x.step && okFor(L.key, half)) fail('plot', where, `a ${L.role} line that stops half-way across the points is accepted`);
     if (L.role !== 'best') {
       const bestSeg = Plot.ideal({ ...p, lines: [{ key: 'best', role: 'best', gradient: p.fit.gradient, intercept: p.fit.intercept }] }).lines.best;

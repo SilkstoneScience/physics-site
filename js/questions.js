@@ -478,7 +478,7 @@
           <p><span class="part-label">(${pt.label})</span>${pt.question}
              <span class="marks">[${pt.marks}]</span>
              ${hasData(q) ? `<a class="data-link" href="#data-${q.id}">↑ Data</a>` : ''}</p>
-          ${pt.figure ? msFigureHtml(q, pt.figure) : ''}
+          ${pt.figure && !plotsOnOwnFigure(pt) ? msFigureHtml(q, pt.figure) : ''}
           ${canPlot(pt) ? plotHtml(pt, s) : ''}
           ${canPlot(pt) && wholePlot(pt) ? '' : pt.numeric ? numericHtml(pt, s) : `<textarea rows="3" aria-label="Your answer to part (${pt.label})" placeholder="Write your answer here, then check the mark scheme.">${escapeHtml(s.answer || '')}</textarea>`}
           ${s.revealed ? `
@@ -613,6 +613,9 @@
   const canPlot = (pt) => !!(pt.plot && window.Plot);
   const wholePlot = (pt) => window.Plot.worthOf(pt.plot, pt.marks) === pt.marks; // every mark of the part is for the graph
   const plotsOnDiagram = (q) => (q.parts || []).some((pt) => canPlot(pt) && pt.plot.axes === q.diagram);
+  // A part that reveals a graph and lets the student draw on it shows only the graph they can draw on, not the
+  // same picture twice (printed sheets still get the picture).
+  const plotsOnOwnFigure = (pt) => canPlot(pt) && !!pt.plot.on && (typeof pt.figure === 'object' ? pt.figure.figure : pt.figure) === pt.plot.on;
   function plotHtml(pt, s) {
     const locked = !!s.revealed;
     const whole = wholePlot(pt);
