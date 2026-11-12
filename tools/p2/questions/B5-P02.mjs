@@ -50,6 +50,17 @@ export default {
         'Note: the examiner\'s graph: <img src="questions/diagrams/p2-b5-drill-ms.svg" alt="The five points plotted as crosses on the grid, with a straight line of best fit passing through all of them and extended to meet the vertical axis above the highest point.">',
       ],
       examinerNote: 'The points lie exactly on a straight line. The second mark needs a ruled line extended to the V axis, so the intercept can be read in (b).',
+      // Click-to-plot graph on the website (js/plot.js); printed sheets use the blank axes picture.
+      plot: {
+        title: 'Axes for a graph of terminal potential difference V in volts against current I in amperes: I from 0 to 20 A and V from 14 to 21 V, with a grid of 1 A by 0.5 V',
+        x: { min: 0, max: 20, step: 1, major: 2, symbol: 'I', unit: 'A' },
+        y: { min: 14, max: 21, step: 0.5, major: 1, symbol: 'V', unit: 'V' },
+        points: [['I1', 'V1'], ['I2', 'V2'], ['I3', 'V3'], ['I4', 'V4'], ['I5', 'V5']],
+        line: { gradient: 'grad', intercept: 'eps', toYAxis: true },
+        axes: 'questions/diagrams/p2-b5-drill-axes.svg',
+        ms: 'questions/diagrams/p2-b5-drill-ms.svg',
+        msTitle: 'Examiner\'s graph: the five points plotted as crosses and a straight line of best fit through them, which meets the V axis at the emf of the pack',
+      },
     },
     {
       label: 'b(i)', sections: ['internal', 'emf'], command: 'Determine', marks: 1, syllabus: ['B.5.11', 'T.4'],

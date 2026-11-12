@@ -1,0 +1,163 @@
+{
+  "id": "spin-cycle",
+  "kind": "Sports report",
+  "paper": "Northgate Evening Post",
+  "headline": "Spin doctors: how Northgate's skaters keep turning",
+  "standfirst": "Our reporter goes behind the boards at the regional figure skating finals",
+  "byline": "By Imani Okafor, sports reporter",
+  "topics": [
+    "A.4"
+  ],
+  "level": "HL",
+  "time": "12 minutes",
+  "brief": "The finals were thrilling, but the rotation physics in this report has gone astray. Find the sentences a coach would wince at.",
+  "body": [
+    [
+      {
+        "t": "The crowd at Northgate Arena held its breath as junior champion Mei Tanaka began her final spin, arms stretched wide."
+      },
+      {
+        "t": "Coach Alvarez says her spin rate depends on her moment of inertia, which is a property of her mass alone and does not change however she holds her arms.",
+        "err": {
+          "topic": "A.4",
+          "section": "inertia",
+          "options": [
+            "Moment of inertia depends only on the speed of rotation, so it is larger when she spins faster.",
+            "It depends on how the mass is distributed about the axis: mass far out gives a larger value.",
+            "It depends on her mass and her height, but a skater's arm position cannot make a measurable difference."
+          ],
+          "answer": 1,
+          "feedback": [
+            "Moment of inertia is a property of the object and the chosen axis, not of how fast it is turning.",
+            null,
+            "Arm position makes a large difference. Moving mass closer to the axis is exactly how skaters reduce their moment of inertia."
+          ],
+          "fix": "Coach Alvarez says her spin rate depends on her moment of inertia, which depends on how her mass is distributed about her axis, so it falls as she pulls her arms in.",
+          "keys": [
+            "$I = \\sum mr^2$ depends on the distribution of mass about the axis.",
+            "Mass closer to the axis means a smaller moment of inertia."
+          ]
+        }
+      },
+      {
+        "t": "As Tanaka pulled her arms in, her angular momentum increased, which is why she spun faster.",
+        "err": {
+          "topic": "A.4",
+          "section": "momentum",
+          "options": [
+            "Angular momentum is conserved, so her angular speed stayed the same and only looked faster because her arms were closer.",
+            "Her angular momentum did increase, because the muscles in her arms supplied the extra angular momentum as they pulled.",
+            "No external torque acts on her, so angular momentum is conserved and a smaller moment of inertia means faster spin."
+          ],
+          "answer": 2,
+          "feedback": [
+            "Angular momentum is conserved, but $L = I\\omega$. With a smaller $I$, $\\omega$ must be larger. It is not just an illusion.",
+            "Her muscle forces are internal forces and cannot change her total angular momentum. They change how it is shared between $I$ and $\\omega$.",
+            null
+          ],
+          "fix": "As Tanaka pulled her arms in, her angular momentum stayed constant, because (with ice friction negligible) no external torque acted on her, and her moment of inertia fell, so her angular speed increased.",
+          "keys": [
+            "No external torque, so $L = I\\omega$ is conserved.",
+            "Smaller $I$ means larger $\\omega$."
+          ]
+        }
+      },
+      {
+        "t": "Her rotational kinetic energy also increased during the pull-in, because she did work moving her arms inwards.",
+        "ok": "It is correct: with $L$ constant, $E_\\text{k} = L^2/2I$ rises as $I$ falls. The extra energy comes from the work her muscles do."
+      }
+    ],
+    [
+      {
+        "t": "Backstage, a rink-side gate hinged at one edge was pushed shut by a steward with a force of 40 newtons, applied 0.80 metres from the hinge and directed at 30° to the line from the hinge to the point of push."
+      },
+      {
+        "t": "The torque about the hinge was therefore 32 newton metres.",
+        "err": {
+          "topic": "A.4",
+          "section": "torque",
+          "options": [
+            "Only the perpendicular component counts: 40 × 0.80 × sin 30° = 16 N m.",
+            "The torque is force times distance, so 40 × 0.80 = 32 N m, whatever the angle of the force.",
+            "The torque uses the component along the line from the hinge: 40 × 0.80 × cos 30° ≈ 28 N m."
+          ],
+          "answer": 0,
+          "feedback": [
+            null,
+            "Torque depends on the angle between the force and the lever arm: $\\tau = Fr\\sin\\theta$. 32 N m is the maximum, for a push at 90°.",
+            "The component along the line from the hinge has no turning effect. Use the perpendicular component, which has sin θ."
+          ],
+          "fix": "The torque about the hinge was therefore 16 newton metres, since only the component of the force perpendicular to the line from the hinge contributes.",
+          "keys": [
+            "$\\tau = Fr\\sin\\theta$ with $\\theta = 30^\\circ$.",
+            "40 × 0.80 × 0.5 = 16 N m."
+          ]
+        }
+      },
+      {
+        "t": "A push whose line of action passes straight through the hinge would produce no torque about it, however large the force.",
+        "ok": "It is correct: the lever arm (perpendicular distance from the pivot to the line of action) is zero, so the torque is zero."
+      }
+    ],
+    [
+      {
+        "t": "In the training hall, a rink worker tested a solid steel drum on a ramp, releasing it from rest so it rolled down without slipping."
+      },
+      {
+        "t": "Because the drum was not slipping, friction at the contact point converts part of its gravitational potential energy into thermal energy.",
+        "err": {
+          "topic": "A.4",
+          "section": "energy",
+          "options": [
+            "Static friction acts over the whole distance the drum travels, so it must always transfer energy to thermal energy.",
+            "The friction does work, but this energy is regained as the drum slows at the bottom, so none is lost overall.",
+            "The contact point is momentarily at rest, so static friction does no work."
+          ],
+          "answer": 2,
+          "feedback": [
+            "Static friction acts at a point that is instantaneously at rest, so no distance is moved by that point and no work is done.",
+            "There is no energy loss to recover in the first place. Static friction on a non-slipping drum does no net work.",
+            null
+          ],
+          "fix": "Because the drum was not slipping, the contact point was momentarily at rest, so friction did no work and none of the gravitational potential energy was transferred to thermal energy.",
+          "keys": [
+            "Contact point is instantaneously at rest, so static friction does no work.",
+            "Potential energy goes into translational and rotational kinetic energy."
+          ]
+        }
+      },
+      {
+        "t": "Compared with a block sliding down the same ramp without friction, the drum reached the bottom more slowly, because part of its energy was transferred to rotational kinetic energy.",
+        "ok": "It is correct: for the same fall in height the drum shares its energy between translation and rotation, so its centre of mass moves more slowly than the block."
+      }
+    ],
+    [
+      {
+        "t": "Finally, the rink's ice-resurfacer has a heavy flywheel that is started by a motor."
+      },
+      {
+        "t": "The reporter was told that a constant resultant torque on the flywheel makes it turn at a constant angular velocity.",
+        "err": {
+          "topic": "A.4",
+          "section": "second-law",
+          "options": [
+            "A constant resultant torque gives a constant angular velocity once the motor reaches its top speed, after which the torque is no longer needed.",
+            "A constant resultant torque produces constant angular acceleration, because $\\tau = I\\alpha$, so the angular velocity increases steadily.",
+            "A constant resultant torque gives a constant angular velocity only if the moment of inertia is large enough."
+          ],
+          "answer": 1,
+          "feedback": [
+            "A resultant torque of zero, not a constant one, gives a constant angular velocity. A steady torque keeps adding angular velocity.",
+            null,
+            "The size of the moment of inertia changes how large the acceleration is, not whether there is one."
+          ],
+          "fix": "The reporter was told that a constant resultant torque on the flywheel makes its angular velocity increase at a steady rate, because the torque gives it a constant angular acceleration.",
+          "keys": [
+            "$\\tau = I\\alpha$: constant torque gives constant angular acceleration.",
+            "Constant angular velocity needs zero resultant torque."
+          ]
+        }
+      }
+    ]
+  ]
+}
