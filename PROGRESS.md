@@ -143,6 +143,11 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - The exam-copy data booklet links now live once, in `window.EXAM_BOOKLETS` in `js/site.js`, used by the menu and the Resources cards.
 - Annotated 2028 data booklet added (12 November 2026) beside the 2025 one: `window.DATA_BOOKLET_2028_URL` in `js/site.js`, used by a Resources card, the Resources menu and the Σ Equations panel.
 
+## Accuracy audit of the topic pages (12 November 2026)
+- All 24 topic pages were audited by one independent reviewer each (every number recalculated, checked against the guide and data booklets), then every finding was re-checked by a second reviewer per theme. Reports and the exact old/new text are in `C:\dp-physics\accuracy-audit-2026-11` (outside this repository).
+- **31 clear slips fixed** (C1–C31 in the fix list): among them the B.4 coins entropy (10⁻²⁴ → 10⁻²³), the C.1 a–x graph (now a negative gradient; the C.1 slide deck uses the same figure), the D.2 solenoid field lines (no longer cross), the D.4 coil emf graph sign, E.3 "binding energy per nucleon" and neutrino numbers, B.4 483 °C, plus working lines that didn't reproduce their answers. Also the same spin-dryer slip in `teachers/slides/a4.json`. Diagrams checked in the preview.
+- **Waiting for the teacher's decisions:** 33 confirmed points (D1–D33, e.g. "New for 2028" tags on clarified wording in A.1, A.2, A.3 and B.1, and untagged 2028 content in C.2 and E.5) and 46 optional ones (J1–J46). Not covered by the audit: layout at 375 px and in dark mode, the question bank, the Skills page and the games.
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".
