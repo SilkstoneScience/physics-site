@@ -42,7 +42,7 @@
       app.innerHTML = '<p class="notice">Sorry, the puzzles could not be loaded. (If you opened this page straight from your computer, use the preview server instead.)</p>';
       return;
     }
-    if (filter !== 'all' && !items.some((q) => q.topic === filter)) filter = 'all';
+    if (filter !== 'all' && filter !== 'SL' && !items.some((q) => q.topic === filter)) filter = 'all';
     app.addEventListener('click', onClick);
     app.addEventListener('change', (e) => { if (e.target.id === 'ex-topic') { filter = e.target.value; choose(0); } });
     document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement) document.body.classList.remove('nr-on-board'); });
@@ -50,7 +50,7 @@
   }
 
   function choose(i) {
-    shown = filter === 'all' ? items : items.filter((q) => q.topic === filter);
+    shown = filter === 'all' ? items : filter === 'SL' ? items.filter((q) => q.level === 'SL') : items.filter((q) => q.topic === filter);
     at = Math.max(0, Math.min(i, shown.length - 1));
     const q = shown[at];
     bank = shuffle([
@@ -65,13 +65,14 @@
   function render() {
     const q = shown[at];
     const done = readDone();
-    const topics = [...new Set(items.map((x) => x.topic))];
+    const topics = [...new Set(items.map((x) => x.topic))].sort();
     const free = bank.filter((b) => !answer.includes(b.key));
     app.innerHTML = `
       <div class="ex-head">
         <label for="ex-topic">Topic</label>
         <select id="ex-topic">
-          <option value="all"${filter === 'all' ? ' selected' : ''}>All topics (${items.length})</option>
+          <option value="all"${filter === 'all' ? ' selected' : ''}>All topics, SL and HL (${items.length})</option>
+          <option value="SL"${filter === 'SL' ? ' selected' : ''}>SL only (${items.filter((x) => x.level === 'SL').length})</option>
           ${topics.map((t) => `<option value="${t}"${filter === t ? ' selected' : ''}>${t} ${topicTitle(t)}</option>`).join('')}
         </select>
         <span class="ex-count">Question ${at + 1} of ${shown.length}</span>
@@ -79,7 +80,7 @@
       </div>
       <section class="ex-question">
         <p class="my-meta"><a class="tag" href="themes/${window.topicFile(q.topic)}#${q.section}">${q.topic} ${topicTitle(q.topic)}</a>
-          <span class="tag">${q.level}</span> <span class="tag">[${q.marks} marks]</span>
+          <span class="tag${q.level === 'HL' ? ' hl' : ''}">${q.level}</span> <span class="tag">[${q.marks} marks]</span>
           ${done[q.id] ? '<span class="tag sim-tag">✓ Done</span>' : ''}</p>
         <p class="ex-stem">${q.question}</p>
       </section>

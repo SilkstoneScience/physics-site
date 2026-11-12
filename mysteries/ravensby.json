@@ -1,0 +1,558 @@
+{
+  "id": "ravensby",
+  "title": "The flywheel at Ravensby",
+  "topics": [
+    "B.4",
+    "D.4",
+    "E.2",
+    "A.4"
+  ],
+  "level": "HL",
+  "time": "30–50 minutes",
+  "summary": "A priceless notebook vanishes from a dark archive during an evening talk. Two alarms stayed silent and a giant flywheel was still turning: work out what they really prove.",
+  "intro": "<p>A cold November evening at the <strong>Ravensby Pumping Station Museum</strong>, an old waterworks full of Victorian engines. Thirty guests are in the West Wing for a fundraising talk. The <strong>East Wing</strong>, with the Engine Hall and its great flywheel, is closed for the night.</p><p>Off the Engine Hall is a small, dark archive. It holds the museum's greatest treasure: the <strong>Wren Notebook</strong>, written in 1871 by the engineer Eliza Wren. Its door has a sensor that logs every opening, and a light alarm guards the room itself.</p><p>On his round just after ten, the night guard found the East Wing in darkness, the flywheel still turning, and the notebook gone. The door log seems to show that nobody went in before him, and the alarm stayed silent until he walked in. So did the guard take it? One of the four people below is the thief. Search the scene, test their stories with physics, and make your accusation.</p>",
+  "scene": {
+    "svg": "diagrams/ravensby-scene.svg",
+    "alt": "A sketch of the museum's East Wing. On the left, the Engine Hall with a huge spoked flywheel on a stand, and a phone lying on the rail in front of it. In the middle, a wall with the shut archive door, a small magnet on its edge and a coil in the frame. On the right, the archive: a small photocell box high on the wall, a display cabinet with its lid prised up and an empty space inside, and a small object on the floor behind the cabinet.",
+    "caption": "The scene, drawn by the first police officer to arrive. Not to scale. Tap a number to open that piece of evidence.",
+    "spots": [
+      {
+        "ev": "flywheel",
+        "x": 31,
+        "y": 30
+      },
+      {
+        "ev": "video",
+        "x": 53,
+        "y": 70
+      },
+      {
+        "ev": "doorlog",
+        "x": 68,
+        "y": 42
+      },
+      {
+        "ev": "alarm",
+        "x": 92,
+        "y": 14
+      },
+      {
+        "ev": "archive",
+        "x": 80,
+        "y": 56
+      },
+      {
+        "ev": "redlight",
+        "x": 95,
+        "y": 76
+      }
+    ]
+  },
+  "suspects": [
+    {
+      "id": "kessler",
+      "name": "Adrian Kessler",
+      "role": "Inventor, guest at the talk",
+      "statement": [
+        "I'm an engineer. My Kessler engine runs on nothing but warm water, and it turns 35% of the heat it takes in into useful work.",
+        "I've told my investors that it follows Eliza Wren's own design, and her notebook will prove it once it's scanned.",
+        "At about twenty-five to ten I slipped out of the talk to take a long phone call: a quarter of an hour at least.",
+        "Then I left by the front door at ten to ten and crossed the road to the café for a coffee.",
+        "The flywheel was still turning when Desmond found it, so the theft happened just before his ten o'clock round, and by then I was sitting in the café, on their camera.",
+        "When I came back for my bike at twenty past ten, the police searched me and found nothing."
+      ],
+      "claims": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "id": "achebe",
+      "name": "Desmond Achebe",
+      "role": "Night security guard",
+      "statement": [
+        "I drove buses for twenty years before I took this job, and I've guarded this museum for eleven.",
+        "I was at the front desk all evening until my ten o'clock round of the East Wing.",
+        "The East Wing was pitch dark, but the great flywheel was still turning, so the power can only have gone off a minute or two before.",
+        "I filmed the flywheel on my phone, because Ms Haldane never believes me about faults.",
+        "The archive door was shut. I opened it, shone my torch in, and the alarm went off straight away.",
+        "The cabinet had been forced, and the notebook was gone."
+      ],
+      "claims": [
+        2
+      ]
+    },
+    {
+      "id": "haldane",
+      "name": "Ruth Haldane",
+      "role": "The museum's operations manager",
+      "statement": [
+        "I proposed selling the notebook. The auction in December would pay for the roof, and I'm not ashamed of that.",
+        "I set the archive alarm myself at six o'clock, and I ran the projector at the back of the talk all evening.",
+        "That door sensor records every single opening, so nobody went into the archive before Desmond.",
+        "And the photocell goes off at the slightest glimmer of light, so no thief with a torch could have worked in there unnoticed.",
+        "I'm sorry, but Desmond was the only person in that room."
+      ],
+      "claims": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "zhou",
+      "name": "Dr Mei-Lin Zhou",
+      "role": "The museum's historian",
+      "statement": [
+        "I've spent a year reading the Wren Notebook, page by page.",
+        "I opposed the sale at the board meeting. I said that a national treasure shouldn't leave the country.",
+        "I was due to start scanning every page next Tuesday, so that its contents would stay public whoever bought it.",
+        "I stayed in the talk until the end, and I asked the speaker a question at about twenty to ten.",
+        "After the talk I was in the West foyer with everyone else until the police arrived."
+      ],
+      "claims": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "archive",
+      "title": "Police notes: the archive",
+      "html": "<p>The archive is a small room with no windows, off the Engine Hall in the <strong>East Wing</strong>. It is kept dark, because the notebook's ink fades in light. The glass-topped cabinet's lock had been <strong>forced</strong> with a tool, not opened with a key. The notebook was gone.</p><p>The switch (circuit breaker) for the East Wing's lights and the flywheel's motor, in a cupboard in the back corridor, was found <strong>switched off by hand</strong>. It has no timer, and the electrician found no fault. Nothing else in the building was on that circuit.</p><p>The only way in or out of the building is the front door, past reception: the fire doors are alarmed, and none was opened. The police arrived at 22:25 and searched the building, its grounds and everyone present. The notebook was not found. The tool used to force the lock was not found anywhere in the building. Mr Achebe was carrying only his torch, his phone and his keys.</p><p>Guests arriving at 20:50 saw the Engine Hall lit, with the flywheel turning normally.</p>"
+    },
+    {
+      "id": "doorlog",
+      "title": "The archive door sensor",
+      "html": "<p>A small magnet is fixed to the edge of the archive door, and a coil of <strong>500 turns</strong> is set into the frame beside it. With the door shut, the magnetic flux through each turn of the coil is <strong>$4.0 \\times 10^{-5}$ Wb</strong>. As the door swings through its first few centimetres, the flux falls to almost zero. The logger records a door event only if the induced emf reaches <strong>10 mV</strong> as the door opens. (It doesn't record the door closing again.)</p><p>The installer's test: a door opened in the normal way takes about 0.2 s to swing through those first few centimetres.</p><table class='ev-table'><thead><tr><th scope='col'>Time</th><th scope='col'>Log entry</th></tr></thead><tbody><tr><td>17:52:08</td><td>Door event</td></tr><tr><td>22:05:20</td><td>Door event</td></tr></tbody></table><p>These are all of the entries from 17:00 until the police arrived. Dr Zhou left the archive at 17:52 after her day's work, and the logger's clock is correct.</p>"
+    },
+    {
+      "id": "alarm",
+      "title": "The archive's light alarm",
+      "html": "<p>A photocell high on the archive wall faces the cabinet and the door. Light falling on its metal surface can release electrons, and if any current flows, the alarm sounds at once. The metal's <strong>work function is 2.30 eV</strong>. The alarm and its log run on their own supply, separate from the East Wing circuit.</p><table class='ev-table'><thead><tr><th scope='col'>Time</th><th scope='col'>Log entry</th></tr></thead><tbody><tr><td>18:00:00</td><td>Set (R. Haldane)</td></tr><tr><td>22:05:22</td><td>Triggered</td></tr></tbody></table><p>Mr Achebe's torch is a white LED torch. Its light contains all wavelengths from about 420 nm to 700 nm.</p>"
+    },
+    {
+      "id": "redlight",
+      "title": "The light behind the cabinet",
+      "html": "<p>Found switched off, on the floor behind the cabinet: a small red LED bicycle rear light. The maker's data sheet: <strong>wavelength 630 nm</strong>, red light only.</p><p>The police checked the bicycles in the rack outside the front door. Mr Kessler's bicycle has an empty rear-light clip, and this light fits it exactly. No other bicycle is missing a light.</p><p>Take $h = 6.63 \\times 10^{-34}$ J s, $c = 3.00 \\times 10^{8}$ $\\text{m s}^{-1}$ and $e = 1.60 \\times 10^{-19}$ C.</p>"
+    },
+    {
+      "id": "flywheel",
+      "title": "The great flywheel",
+      "html": "<div class='ev-plate'><p>RAVENSBY GREAT FLYWHEEL · 1889</p><p>Moment of inertia about the axle: $1.2 \\times 10^{5}$ $\\text{kg m}^{2}$</p></div><p>Whenever the East Wing power is on, an electric motor keeps the flywheel turning at <strong>10 turns per minute</strong>, so that it looks as if the old engine is running. When the power goes off, a clutch lets go, and the flywheel coasts freely until friction in its bearings stops it.</p><p><strong>Engineer's test, the next morning.</strong> With the motor disconnected, a rope wrapped round the rim (radius 2.5 m) needed a steady pull of <strong>20 N</strong> to keep the flywheel turning at a slow, steady speed. The frictional torque in the bearings can be taken as the same at every speed up to 10 turns per minute.</p>"
+    },
+    {
+      "id": "video",
+      "title": "Mr Achebe's phone video",
+      "html": "<p>Mr Achebe filmed the dark Engine Hall by torchlight from 22:04:10 to 22:04:50. The flywheel's white-painted spoke passes the top at <strong>22:04:12, 22:04:27 and 22:04:42</strong>: one turn every 15.0 s. The phone's clock was checked and is correct (times rounded to the nearest second). He put the phone down on the rail to open the archive door, and left it there when the alarm went off.</p>"
+    },
+    {
+      "id": "talk",
+      "title": "The talk recording and the foyer camera",
+      "html": "<p>The talk ran from 21:00 to 22:00 in the lecture room in the West Wing. It was filmed from the back: the camera shows the whole audience, the projector desk and the room's only door, and its clock is correct.</p><ul><li>Ms Haldane is at the projector desk the whole time.</li><li>Mr Kessler leaves at 21:34 and doesn't come back.</li><li>Dr Zhou stands to ask a question from 21:38 to 21:43.</li><li>Nobody else leaves before the end.</li></ul><p>The foyer camera shows Dr Zhou, Ms Haldane and all the guests in the West foyer from 22:00 until the police arrived.</p>"
+    },
+    {
+      "id": "desk",
+      "title": "The reception camera",
+      "html": "<p>This camera covers the front desk and the front door only. It can't see the back corridor behind reception, which joins the West and East Wings. Its clock is correct. A notice on the desk reads: <em>Guard's rounds of the East Wing: 20:00, 22:00, 00:00.</em></p><table class='ev-table'><thead><tr><th scope='col'>Time</th><th scope='col'>What the camera shows</th></tr></thead><tbody><tr><td>20:45</td><td>Mr Kessler arrives, unclips the rear light from his bike at the door and puts it in his coat pocket</td></tr><tr><td>20:45 to 22:01</td><td>Mr Achebe at the desk the whole time</td></tr><tr><td>21:50:15</td><td>Mr Kessler goes out by the front door, carrying a laptop bag</td></tr><tr><td>22:01</td><td>Mr Achebe leaves the desk for his round</td></tr><tr><td>22:09</td><td>Mr Achebe comes back and telephones the police</td></tr><tr><td>22:20</td><td>Mr Kessler comes in by the front door</td></tr><tr><td>22:25</td><td>The police arrive</td></tr></tbody></table><p>Apart from the guests arriving for the talk before 21:00, nobody else passes through the front door between 20:45 and 22:25.</p>"
+    },
+    {
+      "id": "cafe",
+      "title": "The café, and Mr Kessler's phone",
+      "html": "<p>The café is across the road, a minute's walk from the front door. Its camera shows Mr Kessler arriving at 21:52 and leaving at 22:19. His receipt, for one coffee, is timed 21:53:40. On the street camera he stops for a few seconds at the post box outside the café.</p><p>The phone company's record for Mr Kessler's mobile: one incoming call at <strong>21:35:02</strong>, lasting <strong>2 min 10 s</strong>. There were no other calls between 21:00 and 22:30.</p>"
+    },
+    {
+      "id": "brochure",
+      "title": "A Kessler Thermal brochure",
+      "html": "<div class='ev-letter'><p><strong>KESSLER THERMAL: power from warm water</strong></p><p>Our engine takes in heat from water at <strong>85 °C</strong> and gives out its waste heat to the air at <strong>15 °C</strong>. It turns <strong>35%</strong> of the heat it takes in into useful work, a figure first reached by the Victorian engineer Eliza Wren, whose design it follows.</p><p>Investors' meeting: next Monday. Target: £1 000 000.</p></div><p>Found in Mr Kessler's laptop bag.</p>"
+    },
+    {
+      "id": "email",
+      "title": "An email to Mr Kessler",
+      "html": "<div class='ev-letter'><p>Dear Mr Kessler,</p><p>I have now read every engine page in the Wren Notebook. I'm afraid that they don't describe the engine in your brochure: Eliza Wren measured her own engine's efficiency at 6%, and she never claimed more. I start scanning the pages next Tuesday, and they will then be online for anyone to read.</p><p>Mei-Lin Zhou</p></div><p>Sent ten days before the theft. Found later on Mr Kessler's laptop.</p>"
+    },
+    {
+      "id": "minutes",
+      "title": "Minutes of the museum's board meeting",
+      "html": "<div class='ev-letter'><p><strong>Item 4: the Wren Notebook.</strong> Ms Haldane proposed that the notebook be sold at auction in December to pay for the roof repairs. Dr Zhou objected strongly: a national treasure should not leave the country. Agreed: the sale goes ahead once every page has been scanned. Ms Haldane holds the only key to the archive cabinet.</p></div>"
+    }
+  ],
+  "clues": [
+    {
+      "id": "engine",
+      "number": 1,
+      "title": "The warm-water engine",
+      "topic": "B.4",
+      "section": "carnot",
+      "evidence": [
+        "brochure",
+        "email"
+      ],
+      "task": "<p>Mr Kessler's engine works between water at 85 °C and air at 15 °C. <strong>Calculate</strong> the greatest possible efficiency, as a percentage, of any heat engine working between these two temperatures.</p>",
+      "numeric": {
+        "answer": 19.55,
+        "unit": "%",
+        "range": [
+          19.3,
+          19.8
+        ],
+        "mistakes": [
+          {
+            "value": 82.4,
+            "feedback": "You've used the temperatures in degrees Celsius. The Carnot efficiency needs absolute temperatures, in kelvin."
+          },
+          {
+            "value": 80.4,
+            "feedback": "That's $T_c / T_h$. The efficiency is 1 minus this ratio."
+          },
+          {
+            "value": 0.196,
+            "feedback": "That's the efficiency as a fraction. Give it as a percentage."
+          }
+        ]
+      },
+      "hint": "The most efficient possible engine is a Carnot engine, with $\\eta_{\\text{Carnot}} = 1 - \\dfrac{T_c}{T_h}$. Convert both temperatures to kelvin first.",
+      "working": "<p>$T_h = 85 + 273 = 358$ K and $T_c = 15 + 273 = 288$ K.</p><p>$\\eta_{\\text{Carnot}} = 1 - \\dfrac{288}{358} = 1 - 0.804 = 0.196$, so the greatest possible efficiency is <strong>about 19.6%</strong>.</p>",
+      "prove": {
+        "question": "The brochure claims 35%. What does this tell you?",
+        "options": [
+          "The claim could be true, as long as the engine is built so well that there is no friction in it at all.",
+          "No engine working between these temperatures can beat about 20%, so the 35% claim is false.",
+          "The claim is fine: 35% is less than 100%, so the engine isn't creating any energy.",
+          "We can't tell without knowing how much power the engine produces."
+        ],
+        "answer": 1,
+        "feedback": [
+          "The Carnot efficiency is already the limit for a perfect engine with no friction or other losses. A real engine does worse, never better.",
+          "",
+          "Conserving energy (the first law) isn't enough. The second law sets a stricter limit: some heat must always be given out to the cold air, so no engine can beat the Carnot efficiency.",
+          "Efficiency is a ratio of useful work to heat taken in, so the limit depends only on the two temperatures, not on the size or power of the engine."
+        ]
+      },
+      "notePrompt": "What does this show about Mr Kessler's claims, and why might the notebook matter to him?",
+      "modelNote": "No engine working between 358 K and 288 K can be more than about 19.6% efficient, so the brochure's 35% is impossible. Mr Kessler has told investors that his engine follows Eliza Wren's design, but Dr Zhou's email says the notebook shows only 6%. Once the pages were scanned and online, his story would collapse before he could raise his £1 000 000, so he had a strong reason to make the notebook disappear before Tuesday. Without the notebook, it would be only Dr Zhou's word against his."
+    },
+    {
+      "id": "door",
+      "number": 2,
+      "title": "The silent door",
+      "topic": "D.4",
+      "section": "faraday",
+      "evidence": [
+        "doorlog",
+        "archive"
+      ],
+      "task": "<p>Assume that the flux through the coil falls at a steady rate as the door opens. <strong>Calculate</strong> the longest time that this fall in flux can take if the logger is still to record a door event.</p>",
+      "numeric": {
+        "answer": 2,
+        "unit": "s",
+        "range": [
+          1.95,
+          2.05
+        ],
+        "mistakes": [
+          {
+            "value": 0.004,
+            "feedback": "The emf is induced in every turn of the coil. Don't forget the 500 turns."
+          },
+          {
+            "value": 0.5,
+            "feedback": "You've got the ratio upside down. Rearrange $\\varepsilon = N\\dfrac{\\Delta\\Phi}{\\Delta t}$ to make $\\Delta t$ the subject."
+          },
+          {
+            "value": 0.002,
+            "feedback": "10 mV is 0.010 V, not 10 V."
+          },
+          {
+            "value": 0.1,
+            "feedback": "That's the emf, in volts, for a normal opening in 0.2 s. The question asks for the longest time that still gives 10 mV."
+          }
+        ]
+      },
+      "hint": "Use Faraday's law, $\\varepsilon = -N\\dfrac{\\Delta\\Phi}{\\Delta t}$ (you only need the size of the emf). The slower the change in flux, the smaller the emf. Find the $\\Delta t$ that gives exactly 10 mV.",
+      "working": "<p>Change in flux linkage: $N\\Delta\\Phi = 500 \\times 4.0 \\times 10^{-5} = 0.020$ Wb.</p><p>$\\varepsilon = \\dfrac{N\\Delta\\Phi}{\\Delta t}$, so $\\Delta t = \\dfrac{0.020}{0.010} =$ <strong>2.0 s</strong>.</p><p>A normal opening (0.2 s) gives 0.10 V, ten times the threshold. A door eased open over more than 2.0 s gives less than 10 mV and isn't recorded.</p>",
+      "prove": {
+        "question": "The log shows no event between 17:52 and Mr Achebe's opening at 22:05:20. What does this tell you?",
+        "options": [
+          "Only Mr Achebe went into the archive, so he must have taken the notebook himself.",
+          "Opening the door slowly would give a bigger emf, because the magnet stays near the coil for longer, so a slow opening would certainly be logged.",
+          "A door eased open over more than 2 s leaves no record, so the log can't show who went in first.",
+          "The sensor can't induce anything unless a current is already flowing in the coil, so the log means nothing at all."
+        ],
+        "answer": 2,
+        "feedback": [
+          "That's only true if the logger records every opening. Your calculation shows that it doesn't.",
+          "The emf depends on the rate of change of flux linkage, not on how long the magnet is nearby. A slower change gives a smaller emf.",
+          "",
+          "A changing flux induces an emf in the coil by itself: no current is needed beforehand. The log does record normal openings, such as Mr Achebe's."
+        ]
+      },
+      "notePrompt": "Whose claim does this test, and what does the log really prove?",
+      "modelNote": "Ms Haldane says the sensor records every opening, but an opening slower than 2.0 s induces less than 10 mV and leaves no record. So the log proves only that nobody opened the door quickly between 17:52 and 22:05. A careful thief could have eased it open before Mr Achebe arrived, and closing it again is never logged."
+    },
+    {
+      "id": "photocell",
+      "number": 3,
+      "title": "The red light",
+      "topic": "E.2",
+      "section": "einstein",
+      "evidence": [
+        "redlight",
+        "alarm"
+      ],
+      "task": "<p><strong>Calculate</strong> the energy, in electronvolts, of one photon from the red bicycle light.</p>",
+      "numeric": {
+        "answer": 1.973,
+        "unit": "eV",
+        "range": [
+          1.94,
+          2
+        ],
+        "mistakes": [
+          {
+            "value": 3.16e-19,
+            "feedback": "That's the energy in joules. Divide by $e$ to convert it to electronvolts."
+          },
+          {
+            "value": 3.16e-28,
+            "feedback": "Convert the wavelength to metres first: 630 nm = $630 \\times 10^{-9}$ m."
+          },
+          {
+            "value": 0.327,
+            "feedback": "That's the difference between the work function and the photon energy. The question asks for the photon energy itself."
+          },
+          {
+            "value": 2.3,
+            "feedback": "That's the work function of the photocell's metal. Work out the photon energy from the light's wavelength."
+          }
+        ]
+      },
+      "hint": "Use $E = hf$ with $f = \\dfrac{c}{\\lambda}$, so $E = \\dfrac{hc}{\\lambda}$. Then divide by $e$ to change joules into electronvolts.",
+      "working": "<p>$E = \\dfrac{hc}{\\lambda} = \\dfrac{6.63 \\times 10^{-34} \\times 3.00 \\times 10^{8}}{630 \\times 10^{-9}} = 3.16 \\times 10^{-19}$ J.</p><p>$E = \\dfrac{3.16 \\times 10^{-19}}{1.60 \\times 10^{-19}} =$ <strong>1.97 eV</strong>.</p>",
+      "prove": {
+        "question": "Ms Haldane says the photocell goes off at the slightest glimmer of light. What does this tell you?",
+        "options": [
+          "A bright enough red light would have set it off, so the thief must have kept the light very dim and well away from the photocell.",
+          "The alarm can't have been working until Mr Achebe arrived, because the photocell wasn't switched on.",
+          "Red light does free electrons, but only after a delay of a few minutes, which gave the thief time to get out before the alarm rang.",
+          "Each red photon has less energy than the 2.30 eV work function, so no electrons are freed, however bright the light."
+        ],
+        "answer": 3,
+        "feedback": [
+          "A brighter light means more photons, but each one still has only 1.97 eV. Below the threshold frequency, no electrons are released at any intensity.",
+          "The alarm log shows it was set at 18:00, and it went off two seconds after Mr Achebe opened the door, as soon as his white torch shone in.",
+          "Photoelectrons are released at once or not at all: there is no build-up of energy over time. That was one of the things the wave model couldn't explain.",
+          ""
+        ]
+      },
+      "notePrompt": "Why did the alarm stay silent until 22:05:22? Why did the thief need the East Wing to be dark? Whose light was it?",
+      "modelNote": "Each 630 nm photon has 1.97 eV, less than the 2.30 eV work function, so red light can't release electrons at any brightness: the thief could work in the archive by red light without setting off the alarm. White light has photons up to about 2.96 eV (at 420 nm), so Mr Achebe's torch set it off at once. The Engine Hall lights would have done the same when the door opened, which is why the East Wing was switched off. The red light fits Mr Kessler's bicycle."
+    },
+    {
+      "id": "flywheel",
+      "number": 4,
+      "title": "The flywheel that kept turning",
+      "topic": "A.4",
+      "section": "second-law",
+      "evidence": [
+        "flywheel",
+        "video",
+        "talk",
+        "desk"
+      ],
+      "task": "<p>The flywheel was turning at 10 turns per minute when the East Wing power was switched off. Assume that the frictional torque in the bearings was constant and was the only torque acting. <strong>Calculate</strong> how many minutes before 22:04:27 the power was switched off.</p>",
+      "numeric": {
+        "answer": 25.13,
+        "unit": "minutes",
+        "range": [
+          24.5,
+          25.8
+        ],
+        "mistakes": [
+          {
+            "value": 4,
+            "feedback": "You've used turns per second instead of angular speed. Convert with $\\omega = \\dfrac{2\\pi}{T}$, in $\\text{rad s}^{-1}$."
+          },
+          {
+            "value": 16.76,
+            "feedback": "That's how long the flywheel would take to stop from 22:04:27. You need the time it took to slow down from 10 turns per minute to one turn every 15.0 s."
+          },
+          {
+            "value": 41.9,
+            "feedback": "That's the time to stop completely from 10 turns per minute. But it hadn't stopped: it was still making one turn every 15.0 s."
+          },
+          {
+            "value": 62.8,
+            "feedback": "Torque is force × radius. The 20 N pull acts at 2.5 m from the axle."
+          },
+          {
+            "value": 240,
+            "feedback": "You've used turns per minute directly. Convert both speeds to angular speeds in $\\text{rad s}^{-1}$."
+          },
+          {
+            "value": 1508,
+            "feedback": "That's the time in seconds. The question asks for minutes."
+          }
+        ]
+      },
+      "hint": "In the engineer's test the flywheel turned at a steady speed, so the pull's torque balanced the frictional torque: $\\tau = Fr$. Use $\\tau = I\\alpha$ for the angular deceleration. Change both speeds to $\\omega = \\dfrac{2\\pi}{T}$, then use $\\omega_f = \\omega_i + \\alpha t$, where $\\alpha$ is negative because the flywheel is slowing down.",
+      "working": "<p>Frictional torque: $\\tau = Fr = 20 \\times 2.5 = 50$ N m. The torque opposes the motion, so $\\alpha = -\\dfrac{\\tau}{I} = -\\dfrac{50}{1.2 \\times 10^{5}} = -4.17 \\times 10^{-4}$ $\\text{rad s}^{-2}$.</p><p>At 10 turns per minute, $T = 6.0$ s, so $\\omega_i = \\dfrac{2\\pi}{6.0} = 1.047$ $\\text{rad s}^{-1}$. At one turn every 15.0 s, $\\omega_f = \\dfrac{2\\pi}{15.0} = 0.419$ $\\text{rad s}^{-1}$.</p><p>$t = \\dfrac{\\omega_f - \\omega_i}{\\alpha} = \\dfrac{-0.628}{-4.17 \\times 10^{-4}} = 1508$ s, which is <strong>about 25 minutes</strong>. The power went off at about 21:39.</p>",
+      "prove": {
+        "question": "What does this tell you?",
+        "options": [
+          "The power went off at about 21:39, when Mr Kessler was the only one not in the talk or at the desk.",
+          "The power went off just before the round: a flywheel always stops within a minute or two once its motor is switched off.",
+          "Nothing: angular momentum is conserved, so the flywheel's speed can't tell us when the power went off.",
+          "The flywheel is so heavy that it must have slowed down faster than this, so the power really went off much later."
+        ],
+        "answer": 0,
+        "feedback": [
+          "",
+          "With a huge moment of inertia and only 50 N m of friction, the angular deceleration is tiny. From 10 turns per minute it would take about 42 minutes to stop.",
+          "Angular momentum stays constant only when there is no resultant torque. Here the frictional torque steadily reduces it.",
+          "A larger moment of inertia gives a smaller angular deceleration for the same torque, so a heavy flywheel slows down more slowly, not faster."
+        ]
+      },
+      "notePrompt": "Where was each suspect at 21:39? What does this do to Mr Kessler's alibi?",
+      "modelNote": "The flywheel took about 25 minutes to slow from 10 turns per minute to one turn every 15.0 s, so the East Wing power went off at about 21:39, not just before ten. At that time Ms Haldane and Dr Zhou were on the talk recording and Mr Achebe was on the reception camera. Mr Kessler had left the talk at 21:34, and his call ended at 21:37. The café gives him an alibi only for a theft after 21:52."
+    }
+  ],
+  "interviews": [
+    {
+      "suspect": "zhou",
+      "after": "engine",
+      "questions": [
+        {
+          "q": "Did Mr Kessler reply to your email?",
+          "a": "No. But before the talk tonight he came over and asked me, very casually, whether I'd photographed any pages yet. I told him not until Tuesday."
+        },
+        {
+          "q": "You opposed the sale. Did you want to keep the notebook here?",
+          "a": "Of course I did. But I wanted it scanned, so that everyone could read it. A stolen notebook helps nobody, and it certainly doesn't help me."
+        },
+        {
+          "q": "Who knew how the archive's alarms work?",
+          "a": "Ruth explains them on every staff tour. She's very proud of them."
+        }
+      ]
+    },
+    {
+      "suspect": "achebe",
+      "after": "door",
+      "questions": [
+        {
+          "q": "Could you see anyone in the back corridor from the desk?",
+          "a": "No. The corridor runs behind reception: from the desk I see the front door and nothing else."
+        },
+        {
+          "q": "Did anyone leave the building during the talk?",
+          "a": "Only Mr Kessler, out of the front door at ten to ten. He said goodnight and that he was going for a coffee. Nobody else went out until the police came."
+        },
+        {
+          "q": "Why did you think the power had only just gone off?",
+          "a": "The flywheel was still going round. I thought a wheel stops pretty quickly once nothing's driving it."
+        }
+      ]
+    },
+    {
+      "suspect": "haldane",
+      "after": "photocell",
+      "questions": [
+        {
+          "q": "Has anyone asked you about the alarms recently?",
+          "a": "Mr Kessler, when I showed him round last month. He asked what kind of light the photocell reacts to, and whether the door sensor would notice someone opening the door very gently. I thought he was just an engineer being curious."
+        },
+        {
+          "q": "What else is on the East Wing circuit?",
+          "a": "Only the lights and the flywheel's motor. The alarms and the cameras have their own supply, so the thief couldn't switch those off."
+        },
+        {
+          "q": "You hold the only cabinet key. Where was it tonight?",
+          "a": "On my key ring, in my pocket, at the projector desk. And the cabinet wasn't unlocked: it was forced."
+        }
+      ]
+    },
+    {
+      "suspect": "kessler",
+      "after": "flywheel",
+      "questions": [
+        {
+          "q": "Your call lasted 2 minutes 10 seconds. Where were you from 21:37 until 21:50?",
+          "a": "Walking about, thinking. I had a lot on my mind. Is that a crime?"
+        },
+        {
+          "q": "Why was your bicycle light behind the archive cabinet?",
+          "a": "Anyone could have taken it off my bike. I want to speak to my solicitor."
+        },
+        {
+          "q": "Is your engine really 35% efficient?",
+          "a": "That's commercially confidential. I'm not answering any more questions."
+        }
+      ]
+    }
+  ],
+  "accusation": {
+    "culprit": "kessler",
+    "wrong": {
+      "achebe": "The door log made Mr Achebe look like the only person who went in, but a door eased open over more than 2 s leaves no record (clue 2). The flywheel shows that the power went off at about 21:39 (clue 4), when the reception camera shows him at the desk. And he never went out of the building, yet the police found neither the notebook nor the tool used on the lock.",
+      "haldane": "Ms Haldane holds the cabinet key and knows the alarms, but the cabinet was forced, not unlocked, and the talk recording shows her at the projector desk all through the talk, including at 21:39, when the power went off (clue 4). After 22:00 she was in the foyer with the guests.",
+      "zhou": "Dr Zhou opposed the sale, but the talk recording shows her on her feet asking a question from 21:38 to 21:43, just when the power went off (clue 4), and she was in the foyer with the guests after 22:00. She wanted the notebook scanned and public, not hidden."
+    },
+    "cards": [
+      {
+        "text": "The flywheel took about 25 minutes to slow down, so the East Wing power went off at about 21:39.",
+        "use": "key",
+        "why": "This moves the theft to a time when Mr Kessler's café alibi doesn't cover him."
+      },
+      {
+        "text": "At 21:39 Ms Haldane and Dr Zhou were on the talk recording and Mr Achebe was on the reception camera; only Mr Kessler was unaccounted for.",
+        "use": "key",
+        "why": "Once the time is corrected, he is the only suspect who could have been in the East Wing."
+      },
+      {
+        "text": "The red light behind the cabinet fits Mr Kessler's bicycle, and its 1.97 eV photons can't set off the photocell.",
+        "use": "key",
+        "why": "It explains how the thief worked unseen by the alarm, and it links him to the archive."
+      },
+      {
+        "text": "A door eased open over more than 2 s isn't recorded by the door sensor.",
+        "use": "support",
+        "why": "It shows that the log doesn't prove Mr Achebe was first in, but it doesn't say who was."
+      },
+      {
+        "text": "His 35% claim is impossible (the limit is about 19.6%), and the notebook's scans would have exposed him before his investors' meeting.",
+        "use": "support",
+        "why": "A strong motive, which supports the case but doesn't prove it alone."
+      },
+      {
+        "text": "His 'long phone call' lasted only 2 minutes 10 seconds.",
+        "use": "support",
+        "why": "It shows that he lied about where he was from 21:37 to 21:50, when the power went off, but a lie alone doesn't put him in the archive."
+      },
+      {
+        "text": "The door log shows no opening between 17:52 and Mr Achebe's at 22:05:20.",
+        "use": "no",
+        "why": "Misleading: a slow opening isn't logged. A red herring."
+      },
+      {
+        "text": "Ms Haldane holds the only key to the cabinet.",
+        "use": "no",
+        "why": "The cabinet was forced, not unlocked. A red herring."
+      },
+      {
+        "text": "Dr Zhou wanted to keep the notebook in the country.",
+        "use": "no",
+        "why": "A reason to dislike the sale, but she was on camera when the power went off. A red herring."
+      }
+    ],
+    "frame": "The thief was … because … .\nThe alibi fails because the [evidence] shows that … .\nThe physics shows that … , and since … , this means … .\nThe other suspects could not have done it because … .",
+    "model": "<p>Adrian Kessler stole the Wren Notebook. His alibi depends on the theft happening just before the 22:00 round, because the flywheel was still turning. But the flywheel's frictional torque is only 50 N m and its moment of inertia is $1.2 \\times 10^{5}$ $\\text{kg m}^{2}$, so its angular deceleration is tiny: slowing from 10 turns per minute to one turn every 15.0 s took about 25 minutes. The power went off at about 21:39, when Ms Haldane and Dr Zhou were on the talk recording and Mr Achebe was on the reception camera. Mr Kessler had left the talk at 21:34, and his call ended at 21:37.</p><p>The alarms prove nothing against Mr Achebe. A door eased open over more than 2 s induces less than 10 mV, so it isn't logged, and each 630 nm photon from a red light has 1.97 eV, below the photocell's 2.30 eV work function, so red light can't set off the alarm at any brightness. The red light behind the cabinet fits Mr Kessler's bicycle. His motive: his brochure claims 35%, but no engine between 358 K and 288 K can beat 19.6%, and the scans would have exposed him before his investors' meeting.</p>",
+    "solution": "<p>Adrian Kessler had raised money by claiming that his engine followed Eliza Wren's design. Dr Zhou's email told him the notebook would prove the opposite as soon as it was scanned, and his investors' meeting was on Monday. On a tour last month he had found out exactly how the archive's alarms worked.</p><p>He cycled to the talk and, at the door, slipped his red rear light into his coat pocket, as cyclists often do. At 21:34 he left the lecture room and took a short call in the back corridor, which ended at 21:37. At about 21:39 he switched off the East Wing at the breaker, so that no white light would reach the photocell when the door opened. The flywheel's motor went off with the lights, and he knew that a heavy, well-oiled flywheel would still be turning at the 22:00 round, making the theft look only minutes old. By the red light he eased the archive door open over several seconds, too slowly for the sensor, forced the cabinet and put the notebook in his laptop bag. As he forced the lock he knocked the light off the cabinet. It switched off as it fell and rolled behind the cabinet, and in total darkness he couldn't find it. He pulled the door shut behind him, which the sensor doesn't record.</p><p>At 21:50:15 he walked out of the front door. On his way across the road he posted the notebook and the small crowbar, in a padded envelope addressed to himself, in the post box outside the café, then sat in the café on camera until 22:19. When he came back for his bike at 22:20, the police searched him and found nothing. Once he had been charged, the police recovered the envelope from the sorting office, and the notebook was unharmed.</p>",
+    "checklist": [
+      "Names Adrian Kessler as the thief.",
+      "Uses the frictional torque and moment of inertia to show that the power went off about 25 minutes before the video, at about 21:39.",
+      "Uses the talk recording and the reception camera to show that only Mr Kessler was unaccounted for at that time.",
+      "Explains why the door sensor and the photocell stayed silent: a slow change in flux gives a small emf, and red photons have less energy than the work function.",
+      "Explains why at least one other suspect is cleared, with evidence.",
+      "Gives a physics reason each time, not just \"it doesn't add up\"."
+    ]
+  }
+}

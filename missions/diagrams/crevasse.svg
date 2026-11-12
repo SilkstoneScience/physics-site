@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 230">
+  <!-- Near edge at x = 110 (top y = 80); far side at x = 350 (top y = 147). 240 px = 18 m, so 5.0 m = 67 px. No path drawn. -->
+  <polygon points="10,80 110,80 110,220 10,220" style="fill: var(--accent-soft)" stroke="currentColor" stroke-width="2"/>
+  <polygon points="350,147 450,147 450,220 350,220" style="fill: var(--accent-soft)" stroke="currentColor" stroke-width="2"/>
+  <!-- Rover at the near edge, moving right -->
+  <rect x="58" y="56" width="46" height="16" rx="3" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <circle cx="68" cy="74" r="6" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <circle cx="94" cy="74" r="6" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <line x1="112" y1="64" x2="140" y2="64" class="l1 thin"/>
+  <polygon points="138,58 150,64 138,70" class="f1"/>
+  <!-- 18 m width -->
+  <line x1="110" y1="30" x2="350" y2="30" class="l3 thin"/>
+  <polygon points="110,30 120,25 120,35" class="f3"/><polygon points="350,30 340,25 340,35" class="f3"/>
+  <line x1="110" y1="22" x2="110" y2="78" class="grid" stroke-dasharray="4 4"/>
+  <line x1="350" y1="22" x2="350" y2="145" class="grid" stroke-dasharray="4 4"/>
+  <text x="230" y="22" text-anchor="middle" font-size="13">18 m</text>
+  <!-- 5.0 m drop -->
+  <line x1="350" y1="80" x2="450" y2="80" class="grid" stroke-dasharray="4 4"/>
+  <line x1="442" y1="84" x2="442" y2="143" class="l3 thin"/>
+  <polygon points="437,92 442,82 447,92" class="f3"/><polygon points="437,135 442,145 447,135" class="f3"/>
+  <text x="434" y="118" text-anchor="end" font-size="13">5.0 m</text>
+  <!-- Labels -->
+  <text x="60" y="44" text-anchor="middle" font-size="13">rover</text>
+</svg>

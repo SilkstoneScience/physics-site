@@ -4,6 +4,33 @@ Last updated **8 October 2026**. This is the document to read first when resumin
 computer. It supersedes `docs/PAPER1B_HANDOFF.md` (kept for history). It is in `docs/`, which `_config.yml` keeps off
 the published website.
 
+> **Note, 12 November 2026 (click-to-plot).** B3-B01 parts (b) and (d) gained on-screen graphs for the question bank
+> (the student draws the line of best fit, and the steepest and shallowest lines; `tools/1b/README.md`, "Click-to-plot").
+> Its wording, data, answers and mark scheme are unchanged, but what a plot asks for is part of the review fingerprint, so
+> B3-B01 was reset and must be approved by the teacher again before it returns to production. The rest of this document
+> describes the state on 8 October 2026.
+>
+> **B3-B01's gauge was also changed on 12 November 2026** (teacher's request): with ±0.5 kPa error bars the steepest and
+> shallowest lines were under half a small square apart. The gauge now has 2 kPa divisions, read to the nearest 1 kPa
+> (±1 kPa), with a scatter of 0.4 kPa. The readings and every part's mark-scheme numbers were regenerated; the wording is
+> unchanged. −273 °C now lies about 7 % inside the range from the two lines, so the "verdict-borderline" review flag
+> could be dropped: that is the teacher's decision, and until then the flag and the wording of part (e) stay.
+>
+> **The teacher tried the new B3-B01 in the preview and approved it on 12 November 2026** (individual approval, recorded in
+> `tools/1b/reviews.json`), so 20 approved datasets are in production again.
+>
+> **A2-B01, C4-B01, D1-B01 and D3-B01** gained a "Line of best fit" graph on one part each (12 November 2026; wording,
+> data, answers and mark schemes unchanged). The teacher tried all four in the preview and approved them the same day
+> (individual approvals, recorded in `tools/1b/reviews.json`): 20 approved datasets are in production.
+>
+> **A2-B02, B5-B01 and C1-B01** gained the same line-of-best-fit graph (12 November 2026; wording, data, answers and mark
+> schemes unchanged). The teacher tried all three in the preview and approved them the same day (individual approvals,
+> recorded in `tools/1b/reviews.json`): 20 approved datasets are in production, 8 of them with an on-screen graph.
+>
+> **Teacher's rule (12 November 2026):** every new dataset with a straight-line graph includes an on-screen plot on the
+> part that first needs the line. The validator warns (`plot-missing`) otherwise; `noPlot: '<reason>'` records why a
+> dataset can't yet (A1-B01: its graph has x error bars).
+
 Related documents (all in this repository):
 - `docs/PAPER1B_SPECIFICATION.md`: the authoritative design rules (what a Paper 1B question must be, validation, review model).
 - `docs/PAPER1B_ARCHETYPE_MATRIX.md`: the 26 question archetypes, their risk levels and the original Batch 1 plan.

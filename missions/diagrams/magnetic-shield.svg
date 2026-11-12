@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 240">
+  <!-- Magnetic shield layer (0.50 m deep) between its outer edge (y = 50) and the habitat wall (y = 170). Field into the page. No proton path drawn. -->
+  <line x1="40" y1="50" x2="420" y2="50" class="grid" style="stroke-width: 2" stroke-dasharray="6 5"/>
+  <rect x="40" y="170" width="380" height="22" style="fill: var(--surface)" stroke="currentColor" stroke-width="2.5"/>
+  <!-- Field into the page: crosses -->
+  <path d="M100 82 l10 10 M110 82 l-10 10 M170 82 l10 10 M180 82 l-10 10 M240 82 l10 10 M250 82 l-10 10 M310 82 l10 10 M320 82 l-10 10 M380 82 l10 10 M390 82 l-10 10
+           M100 128 l10 10 M110 128 l-10 10 M170 128 l10 10 M180 128 l-10 10 M240 128 l10 10 M250 128 l-10 10 M310 128 l10 10 M320 128 l-10 10 M380 128 l10 10 M390 128 l-10 10" class="l1 thin"/>
+  <!-- Incoming proton -->
+  <line x1="320" y1="8" x2="320" y2="38" class="l2 thin"/>
+  <polygon points="314,36 320,48 326,36" class="f2"/>
+  <circle cx="320" cy="8" r="5" class="f2"/>
+  <text x="332" y="24" text-anchor="start" font-size="13" class="t2">proton</text>
+  <!-- Depth of the layer -->
+  <line x1="60" y1="54" x2="60" y2="166" class="l3 thin"/>
+  <polygon points="55,62 60,52 65,62" class="f3"/><polygon points="55,158 60,168 65,158" class="f3"/>
+  <text x="68" y="114" text-anchor="start" font-size="13">0.50 m</text>
+  <!-- Labels -->
+  <text x="40" y="38" text-anchor="start" font-size="13">shield's outer edge</text>
+  <text x="230" y="218" text-anchor="middle" font-size="13">habitat wall</text>
+  <text x="420" y="160" text-anchor="end" font-size="13" class="t1">B (into the page)</text>
+</svg>

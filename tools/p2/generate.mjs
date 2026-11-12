@@ -197,7 +197,35 @@ export function buildQuestion(def) {
       marks: pt.marks,
       markscheme: (pt.markscheme || []).map((m, i) => fill(m, ctx, `(${pt.label}) mark scheme ${i + 1}`)),
       ...(numerics[pt.label] ? { numeric: numerics[pt.label] } : {}),
+      ...(pt.plot ? { plot: buildPlot(def, pt, results) } : {}),
     })),
   };
   return { question: q, results, ranges };
+}
+
+// A click-to-plot graph (js/plot.js). In the question file a part can have:
+//   plot: { title, x: { min, max, step, major, symbol, unit }, y: { … },
+//           points: [['I1', 'V1'], …],                            names of given values or results
+//           line: { gradient: 'grad', intercept: 'eps', toYAxis: true },   optional; names of results
+//           marks: { line: 1 }, axes: 'questions/diagrams/….svg', ms: '…-ms.svg', msTitle: '…' }
+// The points and the line are named, never typed, so they can't disagree with the table or the answers.
+// `ms` and `msTitle` (the examiner's graph) are only for tools/p2/plot-axes.mjs and the checks.
+function buildPlot(def, pt, results) {
+  const p = pt.plot;
+  const value = (name, what) => {
+    if (typeof name !== 'string') throw new QuestionError('plot', `part (${pt.label}): ${what} must name a given value or a result, not a typed number`);
+    if (def.given && def.given[name]) return def.given[name].value;
+    if (results[name]) return Number(shownValue(results[name]).toPrecision(6));
+    throw new QuestionError('plot', `part (${pt.label}): ${what} "${name}" isn't a given value or a result`);
+  };
+  if (!p.x || !p.y || !Array.isArray(p.points)) throw new QuestionError('plot', `part (${pt.label}): plot needs x, y and points`);
+  return {
+    title: p.title,
+    x: { ...p.x },
+    y: { ...p.y },
+    points: p.points.map((pair) => [value(pair[0], 'a point\'s x value'), value(pair[1], 'a point\'s y value')]),
+    ...(p.line ? { line: { gradient: value(p.line.gradient, 'the line\'s gradient'), intercept: value(p.line.intercept, 'the line\'s intercept'), ...(p.line.toYAxis ? { toYAxis: true } : {}), ...(typeof p.line.tolerance === 'number' ? { tolerance: p.line.tolerance } : {}) } } : {}),
+    ...(p.marks ? { marks: { ...p.marks } } : {}),
+    axes: p.axes,
+  };
 }

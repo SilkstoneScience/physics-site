@@ -9,12 +9,88 @@ import { PLACEHOLDER, shownValue } from './generate.mjs';
 import { sigFig } from './units.mjs';
 
 const { checkNumeric } = createRequire(import.meta.url)('../../js/numeric.js');
+const Plot = createRequire(import.meta.url)('../../js/plot.js');
 export const NOT_A_PERSON = /\b(claude|assistant|ai|automated|bot|script)\b/i;
 const NOTE_LINE = /^(OR|Allow|Accept|Do not accept|Award|Note|Examiners|Any)\b/i;
 export const INDEPENDENT_TOLERANCE = 1e-4; // stricter than the spec's 0.5 %
 export const SHOW_THAT_TOLERANCE = 0.05;
 
 const plain = (s) => String(s).replace(/<[^>]*>/g, ' ').replace(/\$[^$]*\$/g, ' ');
+
+// Everything that must hold for a click-to-plot part: sensible axes, points on the axes and in the axes' units,
+// a line that agrees with the points, marking that accepts the right graph and rejects wrong ones, and picture
+// files (the printable axes and the examiner's graph) that match the settings exactly.
+export function plotProblems(def, pt, built, root) {
+  const out = [];
+  const p = built.plot;
+  const src = pt.plot;
+  if (!['Draw', 'Plot'].includes(pt.command)) out.push('only "Draw" or "Plot" parts get a click-to-plot graph');
+  if (built.numeric) out.push('a part has either a typed answer or a graph, not both');
+  if (!p.title || p.title.length < 30) out.push('plot.title must describe the axes (30+ characters): it is read out by screen readers');
+  const whole = (v) => Math.abs(v - Math.round(v)) < 1e-6;
+  let axesOk = true;
+  for (const k of ['x', 'y']) {
+    const a = p[k];
+    if (!a || ![a.min, a.max, a.step, a.major].every(Number.isFinite) || !(a.max > a.min) || !(a.step > 0) || !(a.major > 0)) { out.push(`the ${k} axis needs min, max, step (one small square) and major (the numbered lines)`); axesOk = false; continue; }
+    if (!whole((a.max - a.min) / a.step) || (a.max - a.min) / a.step > 60) out.push(`the ${k} axis must be a whole number of small squares (at most 60)`);
+    if (!whole((a.max - a.min) / a.major) || (a.max - a.min) / a.major > 12) out.push(`the ${k} axis must be a whole number of numbered intervals (at most 12)`);
+    if (!whole(a.major / a.step)) out.push(`on the ${k} axis, major must be a whole number of steps`);
+    if (!a.symbol) out.push(`the ${k} axis needs a symbol (and usually a unit)`);
+  }
+  if (!axesOk) return out;
+  if (!Array.isArray(p.points) || p.points.length < 2) { out.push('plot.points needs at least two points'); return out; }
+  const unitOf = (name) => (def.given && def.given[name] ? def.given[name].unit : null); // results are checked by eye in the audit
+  src.points.forEach((pair, j) => {
+    const [x, y] = p.points[j];
+    if (x < p.x.min - 1e-9 || x > p.x.max + 1e-9 || y < p.y.min - 1e-9 || y > p.y.max + 1e-9) out.push(`the point (${x}, ${y}) is off the axes`);
+    for (const [k, name] of [['x', pair[0]], ['y', pair[1]]]) {
+      const u = unitOf(name);
+      if (u != null && (u || '') !== (p[k].unit || '')) out.push(`${name} is in ${u || 'no unit'} but the ${k} axis is in ${p[k].unit || 'no unit'}`);
+    }
+  });
+  const keys = new Set(p.points.map((pp) => pp.join(',')));
+  if (keys.size !== p.points.length) out.push('two of the points are the same');
+  const sp = Plot.split(p, pt.marks);
+  if (sp.points < 1 || (p.line && sp.line < 1)) out.push(`the part's ${pt.marks} mark(s) must give at least 1 to the points${p.line ? ' and 1 to the line' : ''}`);
+  const expected = Plot.expectedLine(p);
+  if (p.line) {
+    if (expected.some(([, y]) => y < p.y.min - 1e-9 || y > p.y.max + 1e-9)) out.push('the line of best fit leaves the axes: widen the y axis');
+    // The named gradient and intercept must agree with the least-squares line through the points.
+    const n = p.points.length;
+    const mx = p.points.reduce((s, pp) => s + pp[0], 0) / n;
+    const my = p.points.reduce((s, pp) => s + pp[1], 0) / n;
+    const sxx = p.points.reduce((s, pp) => s + (pp[0] - mx) ** 2, 0);
+    const g = p.points.reduce((s, pp) => s + (pp[0] - mx) * (pp[1] - my), 0) / sxx;
+    const c = my - g * mx;
+    const xs = p.points.map((pp) => pp[0]);
+    for (const x of [Math.min(...xs), Math.max(...xs)]) {
+      if (Math.abs((g * x + c) - (p.line.gradient * x + p.line.intercept)) > p.y.step / 2) out.push(`the named gradient and intercept don't match the best-fit line through the points (at x = ${x})`);
+    }
+  }
+  // The marking must accept the right graph and reject wrong ones.
+  const right = { points: p.points, line: expected };
+  if (!Plot.check(p, right, pt.marks).right) out.push('the correct graph is not given full marks');
+  if (Plot.check(p, { points: [], line: null }, pt.marks).score !== 0) out.push('an empty graph earns marks');
+  const moved = p.points.map((pp, j) => (j ? pp : [pp[0], pp[1] + p.y.step]));
+  if (Plot.check(p, { points: moved, line: expected }, pt.marks).points.ok) out.push('a point one small square out is accepted');
+  if (p.line) {
+    const shifted = expected.map(([x, y]) => [x, y + 2 * p.y.step]);
+    if (Plot.check(p, { points: p.points, line: shifted }, pt.marks).line.ok) out.push('a line two small squares out is accepted');
+  }
+  // Picture files: the printable axes are the question's diagram, and both files match the settings.
+  const same = (file, want) => {
+    const full = path.join(root, file);
+    return fs.existsSync(full) && fs.readFileSync(full, 'utf8').replace(/\r\n?/g, '\n') === want;
+  };
+  if (!p.axes || !def.diagram || def.diagram.file !== p.axes) out.push('plot.axes must be the question\'s diagram file (the blank axes, used on printed sheets)');
+  else if (!same(p.axes, Plot.axesSvg(p))) out.push(`${p.axes} doesn't match the plot settings: run node tools/p2/plot-axes.mjs ${def.id}`);
+  if (src.ms) {
+    if (!src.msTitle || src.msTitle.length < 30) out.push('plot.msTitle must describe the examiner\'s graph (30+ characters)');
+    else if (!same(src.ms, Plot.axesSvg(p, { title: src.msTitle, background: true, points: p.points, line: expected }))) out.push(`${src.ms} doesn't match the plot settings: run node tools/p2/plot-axes.mjs ${def.id}`);
+    if (!built.markscheme.some((m) => m.includes(src.ms))) out.push(`the mark scheme should show the examiner's graph (<img src="${src.ms}" …>)`);
+  } else out.push('plot.ms must name the examiner\'s graph file shown in the mark scheme');
+  return out;
+}
 const CONTROL = /[\t\b\f\r]/;
 
 export function validateQuestion(def, built, { root, topics, originality, independent }) {
@@ -245,6 +321,12 @@ export function validateQuestion(def, built, { root, topics, originality, indepe
       for (const mk of n.mistakes || []) if (checkNumeric(n, String(mk.value)).status === 'right') err('numeric', `(${pt.label}) the mistake value ${mk.value} would be marked right`);
       if (['Show that', 'Explain', 'Outline', 'Describe'].includes(pt.command)) err('numeric', `(${pt.label}) "${pt.command}" parts don't get a typed numeric answer`);
     } else if (['Calculate', 'Determine'].includes(pt.command) && pt.noNumeric !== true) warn('numeric', `(${pt.label}) is a calculation without a typed answer (add numeric, or noNumeric: true with a reason in the examinerNote)`);
+    // Click-to-plot graphs (js/plot.js)
+    if (q.parts[i].plot) for (const m of plotProblems(def, pt, q.parts[i], root)) err('plot', `(${pt.label}) ${m}`);
+    // Teacher's rule (12 November 2026): new questions that ask for a graph of data use the click-to-plot tool.
+    else if (['Draw', 'Plot'].includes(pt.command) && /\bgraph\b|\baxes\b|line of best fit|\bplot\b/i.test(pt.question) && typeof pt.noPlot !== 'string') {
+      warn('plot-missing', `(${pt.label}) asks for a graph but has no on-screen plot: add a plot (tools/p2/README.md, "Click-to-plot graphs"), or say why not with noPlot: '<reason>' (a sketched curve, for example)`);
+    }
   });
 
   // ---- 6. Diagrams ----

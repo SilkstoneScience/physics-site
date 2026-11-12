@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 import { parseUnit, toSI, fmtSig, fmtQuantity } from './units.mjs';
 import { CONSTANTS } from './constants.mjs';
 import { UNDERSTANDINGS, SYLLABUS_IDS, EXCLUDED, LIMITS, COMMAND_TERMS } from './syllabus.mjs';
@@ -187,6 +188,48 @@ export async function runTests() {
   check('an assistant can\'t record APPROVED', !!reviewProblem({ status: 'TEACHER-REVIEWED' }, 'APPROVED', 'Claude', {}));
   check('reviews can\'t skip a stage', !!reviewProblem({ status: 'AUTO-VALIDATED' }, 'APPROVED', 'Mr Silkstone', {}));
   check('the next stage in order is allowed', reviewProblem({ status: 'AUTO-VALIDATED' }, 'PHYSICS-REVIEWED', 'Mr Silkstone', {}) === null);
+
+  // ----- Click-to-plot graphs (js/plot.js): the marking, then the checks on a plot part -----
+  // The real question B5-P02 is the example: 5 points on V = 20.0 − 0.25 I, small squares of 1 A by 0.5 V.
+  const Plot = createRequire(import.meta.url)('../../js/plot.js');
+  const drill = (await import('./questions/B5-P02.mjs')).default;
+  const pl = build([drill]).results[0].built.question.parts[0].plot;
+  const ideal = Plot.expectedLine(pl);
+  const marked = (points, line) => Plot.check(pl, { points, line }, 2);
+  const nudged = (dy) => pl.points.map((p, i) => (i ? p : [p[0], p[1] + dy]));
+  check('plot: the correct graph earns full marks', marked(pl.points, ideal).right);
+  check('plot: an empty graph earns nothing', marked([], null).score === 0);
+  check('plot: the points alone earn the points mark only', marked(pl.points, null).score === 1);
+  check('plot: a point half a small square out is accepted', marked(nudged(0.25), ideal).points.ok);
+  check('plot: a point more than half a small square out is not', !marked(nudged(0.3), ideal).points.ok);
+  check('plot: a missing point loses the points mark', !marked(pl.points.slice(1), ideal).points.ok);
+  check('plot: an extra point loses the points mark', !marked([...pl.points, [4, 16]], ideal).points.ok);
+  check('plot: two points on the same reading count once', !marked([...pl.points.slice(1), pl.points[1]], ideal).points.ok);
+  check('plot: a line one small square out is accepted', marked(pl.points, ideal.map(([x, y]) => [x, y + 0.5])).line.ok);
+  check('plot: a line further out is not', !marked(pl.points, ideal.map(([x, y]) => [x, y + 0.75])).line.ok);
+  check('plot: a line with the wrong gradient is not accepted', !marked(pl.points, [[0, 17.5], [18, 17.5]]).line.ok);
+  check('plot: a line that stops short of the axis is not accepted', !marked(pl.points, [[2, 19.5], [18, 15.5]]).line.ok);
+  check('plot: a line that stops short of the last point is not accepted', !marked(pl.points, [[0, 20], [10, 17.5]]).line.ok);
+  check('plot: the line may be drawn from either end', marked(pl.points, [ideal[1], ideal[0]]).right);
+  check('plot: a vertical line is not accepted', !marked(pl.points, [[10, 15], [10, 20]]).line.ok);
+  check('plot: every failed check gives feedback', marked(nudged(1), null).feedback.filter((f) => !f.ok).length === 2);
+  check('plot: the axes picture has a title and sizes on each text', /<title>[^<]{30,}<\/title>/.test(Plot.axesSvg(pl)) && !/<g\b[^>]*font-size/.test(Plot.axesSvg(pl)) && Plot.axesSvg(pl) === Plot.axesSvg(pl));
+  const plotProblemsFor = (change) => { const d = clone(drill); change(d.parts[0].plot, d); return build([d]).diags.filter((x) => x.level === 'error' && x.code === 'plot').map((x) => x.message); };
+  check('plot: the real question passes every plot check', plotProblemsFor(() => {}).length === 0, plotProblemsFor(() => {}).join('; '));
+  check('plot: axes that differ from the picture file are caught', plotProblemsFor((p) => { p.y.max = 22; }).some((m) => /doesn't match the plot settings/.test(m)));
+  check('plot: a point off the axes is caught', plotProblemsFor((p) => { p.y.min = 16; }).some((m) => /off the axes/.test(m)));
+  check('plot: a line that disagrees with the points is caught', plotProblemsFor((p) => { p.line.gradient = 'r'; }).some((m) => /don't match the best-fit line/.test(m)));
+  check('plot: an axis in the wrong unit is caught', plotProblemsFor((p) => { p.x.unit = 'mA'; }).some((m) => /axis is in mA/.test(m)));
+  check('plot: typed numbers instead of names are refused', plotProblemsFor((p) => { p.points[0] = [2, 19.5]; }).some((m) => /not a typed number/.test(m)));
+  check('plot: an unknown name is refused', plotProblemsFor((p) => { p.line.intercept = 'nothing'; }).some((m) => /isn't a given value or a result/.test(m)));
+  check('plot: the marks must leave one for the points', plotProblemsFor((p) => { p.marks = { line: 2 }; }).some((m) => /at least 1 to the points/.test(m)));
+  check('plot: only Draw or Plot parts get a graph', plotProblemsFor((p, d) => { d.parts[0].command = 'Sketch'; d.parts[0].question = d.parts[0].question.replace('Draw', 'Sketch'); }).some((m) => /only "Draw" or "Plot"/.test(m)));
+  check('plot: the examiner\'s graph must be in the mark scheme', plotProblemsFor((p, d) => { d.parts[0].markscheme.pop(); }).some((m) => /should show the examiner's graph/.test(m)));
+  // Teacher's rule (12 November 2026): a new "Draw" or "Plot" graph part has an on-screen plot, or says why not.
+  const plotWarnings = (change) => { const d = clone(drill); change(d.parts[0]); return build([d]).diags.filter((x) => x.level === 'warning' && x.code === 'plot-missing').length; };
+  check('plot rule: a Draw-the-graph part without an on-screen plot gets a warning', plotWarnings((pt) => { delete pt.plot; }) === 1);
+  check('plot rule: a stated reason (noPlot) or a plot removes the warning', plotWarnings((pt) => { delete pt.plot; pt.noPlot = 'a sketched curve'; }) === 0 && plotWarnings(() => {}) === 0);
+  check('plot rule: the reason is not published with the question', (() => { const d = clone(drill); d.parts[0].noPlot = 'x'; return !('noPlot' in build([d]).results[0].built.question.parts[0]); })());
 
   return { count, failures };
 }

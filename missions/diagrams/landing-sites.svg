@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 190">
+  <!-- Europa's surface: smooth plains (left), chaos terrain of tilted ice blocks (right). Not to scale. -->
+  <rect x="10" y="110" width="440" height="60" style="fill: var(--accent-soft)"/>
+  <line x1="10" y1="110" x2="250" y2="110" class="l3"/>
+  <!-- Chaos terrain: tilted blocks with cracks between them -->
+  <polygon points="262,110 300,98 312,110" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <polygon points="318,110 330,92 368,104 362,110" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <polygon points="372,110 380,100 412,96 410,110" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <polygon points="416,110 424,90 448,102 448,110" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <line x1="250" y1="110" x2="262" y2="110" class="l3"/>
+  <!-- Rover route from the plains to the chaos terrain -->
+  <line x1="90" y1="76" x2="300" y2="76" class="l2 thin dash"/>
+  <polygon points="300,70 312,76 300,82" class="f2"/>
+  <!-- Landing marks -->
+  <polygon points="80,104 90,90 100,104" class="f1"/>
+  <polygon points="380,99 390,85 400,99" class="f1"/>
+  <!-- Labels -->
+  <text x="110" y="140" text-anchor="middle" font-size="13">smooth plains</text>
+  <text x="345" y="140" text-anchor="middle" font-size="13">chaos terrain</text>
+  <text x="195" y="66" text-anchor="middle" font-size="13" class="t2">40 km drive</text>
+  <text x="230" y="30" text-anchor="middle" font-size="13" class="t1">▲ possible landing sites</text>
+</svg>

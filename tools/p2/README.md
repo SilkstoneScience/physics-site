@@ -96,6 +96,8 @@ Award, Note or "Any n from"), `examinerNote`, and optionally `dependsOn: ['a']` 
 ECF), `numeric: { result, accept?: 0.05 or [lo, hi], tolerance?, anySign?, mistakes?: [{ result, feedback }] }`,
 `anyOf: n` and `showThat: { result, sf }`.
 
+**Click-to-plot graphs** (November 2026; `js/plot.js`). **Rule (teacher, 12 November 2026): every new "Draw" or "Plot" part that asks for a graph of data has a `plot`.** The validator warns (`plot-missing`) otherwise; a part that can't use it (a sketched curve, for example) gives the reason in `noPlot: '<reason>'`, which is not published. How it works: a "Draw" or "Plot" part can have `plot: { title, x: { min, max, step, major, symbol, unit }, y: { … }, points: [['I1', 'V1'], …], line: { gradient: 'grad', intercept: 'eps', toYAxis: true }, axes: 'questions/diagrams/….svg', ms: '…-ms.svg', msTitle }`. `step` is one small square and `major` the numbered lines; the points and the line are **named** given values or results, never typed. On the website the student taps to plot the points and drags to draw the line, and "Check my graph" marks it (every point within half a small square and no extra points; the line within one small square of the expected line across the data, reaching the y axis when `toYAxis`); the marks split as `marks: { line: 1 }` (default) with the rest for the points. `axes` must be the question's `diagram` (the blank axes, which printed revision sheets use), and `ms` the examiner's graph shown in the mark scheme. Both pictures are written from the same settings by `node tools/p2/plot-axes.mjs <ID>`: run it after changing a plot, or the build fails.
+
 Units: written like `m s^-1`, `J kg^-1 K^-1`, `MeV c^-2`; `°C` is a temperature (+ 273, as in the booklet), `Δ°C` a
 temperature change. The list is in `units.mjs`.
 
@@ -118,6 +120,7 @@ temperature change. The list is in `units.mjs`.
 | Plausible values | every given value (and any result with a range) inside its plausible range; given values not more precise than stated |
 | Diagrams | file exists, alt text, `<title>`, font sizes on `<text>` not `<g>` |
 | Originality | no 8-word run shared with an IB Paper 2 or mark scheme (2016–2025; runs in 5+ papers are stock phrasing and ignored); no 6-word run shared with the transcript of the Daily Question that inspired it. Needs the reference cache (found from `CLAUDE.local.md`) |
+| Click-to-plot graphs | axes a whole number of small squares; every point on the axes and in the axis's unit; the named gradient and intercept agree with the least-squares line through the points; the correct graph earns full marks, and an empty graph, a point one small square out and a line two small squares out do not; the axes and examiner's-graph pictures match the settings exactly; the mark scheme shows the examiner's graph |
 | Similarity | against every other Paper 2 question, generated or hand-written (`similarity.mjs`): a warning when the two share 20 % or more of their content words (same situation described twice?), an error at 40 % or when two generated questions declare the same `situation`; a warning when 3, and an error when 4, consecutive parts have the same command term and syllabus id as another generated question (vary the sequence of parts). Teacher's rule of 7 November 2026: the same concepts may be tested, but in a different situation and with a different sequence of parts |
 | Show that (next figure) | a warning when the true value's next significant figure is 0 ("about 5.4" with 5.40): a student shows the value by giving one more figure, so change a given value |
 | Determinism | building twice gives the same question |
@@ -134,6 +137,7 @@ temperature change. The list is in `units.mjs`.
 | `validate.mjs` | every check above |
 | `independent.mjs` | the independent calculation of every question's results (imports nothing) |
 | `originality.mjs` | the overlap checks against the reference cache |
+| `plot-axes.mjs` | writes the blank axes and the examiner's graph for click-to-plot parts (drawing shared with the website's `js/plot.js`) |
 | `build.mjs` | builds everything, review status, the freeze, the outputs and the audit |
 | `registry.mjs`, `review.mjs`, `reviews.json`, `frozen/` | review records and the review tool (rules shared with Paper 1B) |
 | `test.mjs`, `fixtures/` | the tests and the example questions they use |

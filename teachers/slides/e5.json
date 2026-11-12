@@ -1,0 +1,1008 @@
+{
+  "topic": "E.5",
+  "hours": 6,
+  "points": [
+    {
+      "id": "fusion",
+      "short": "Fusion powers stars",
+      "guide": "That fusion is a source of energy in stars.",
+      "sections": [
+        "fusion"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Explain, using the binding energy curve, why fusing light nuclei releases energy.",
+        "Calculate the change in mass and the energy released in a fusion reaction."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Nuclear fusion",
+          "bullets": [
+            "<strong>Fusion</strong>: two light nuclei join to make one heavier nucleus",
+            "Light nuclei sit on the steep rising side of the binding energy per nucleon curve, below the peak near iron-56",
+            "The product is more tightly bound, so the total mass goes down and energy is released",
+            "The energy appears as kinetic energy of the products, and as gamma photons and neutrinos",
+            "Fission splits heavy nuclei (beyond the peak); fusion joins light ones. Both move towards the peak",
+            "Per kilogram of fuel, fusion releases several times more energy than fission"
+          ],
+          "notes": "Sketch the binding energy per nucleon curve from E.3 and mark which way fission and fusion move along it. This answers the guide's linking question: how is fusion like, and unlike, fission?"
+        },
+        {
+          "type": "diagram",
+          "title": "Fusion and fission on the curve",
+          "svg": "figures/e5-be-fusion-fission.svg",
+          "alt": "Graph of binding energy per nucleon against nucleon number, rising steeply for light nuclei to a peak near iron-56, then falling slowly. An orange arrow labelled fusion points up the curve from light nuclei; a blue arrow labelled fission points up the curve from the heaviest nuclei. Both move towards the peak.",
+          "bullets": [
+            "Both fusion and fission move nuclei towards iron-56",
+            "Binding energy per nucleon rises, so energy is released",
+            "The rise is much steeper for light nuclei: fusion releases more energy per nucleon"
+          ],
+          "notes": "The curve for A above 20 is calculated from a model of the nucleus and matches measured values to within about 1%; the light nuclei are measured values."
+        },
+        {
+          "type": "bullets",
+          "title": "Fusion in stars",
+          "bullets": [
+            "Main-sequence stars fuse hydrogen into helium in their cores",
+            "In the Sun, the proton–proton chain has the overall effect",
+            [
+              "four protons → one helium-4 nucleus + two positrons + two neutrinos",
+              "the positrons annihilate with electrons, releasing gamma rays"
+            ],
+            "Older and more massive stars go on to fuse helium into carbon and oxygen, and the heaviest stars continue up to iron",
+            "So the elements up to iron are made by fusion inside stars"
+          ],
+          "notes": "Students do not need the individual steps of the proton–proton chain, only its overall effect. The neutrinos escape the Sun almost without interacting, which is why neutrino detectors can \"see\" the core directly."
+        },
+        {
+          "type": "equation",
+          "title": "Energy from a change in mass",
+          "latex": [
+            "E = mc^{2}",
+            "\\Delta m = m_{\\text{before}} - m_{\\text{after}}",
+            "1\\ \\text{u} = 931.5\\ \\text{MeV}\\,c^{-2}",
+            "1\\ \\text{u} = 1.661 \\times 10^{-27}\\ \\text{kg}"
+          ],
+          "bullets": [
+            "$E = mc^{2}$ and the value of u are in the data booklet",
+            "The energy released is $\\Delta m\\,c^{2}$: with $\\Delta m$ in u, multiply by 931.5 to get MeV"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "How fast does a star lose mass?",
+          "start": "A star radiates energy at a rate equal to its luminosity $L$ (in watts). All of that energy comes from mass converted in fusion.",
+          "steps": [
+            {
+              "text": "Luminosity is the energy radiated per unit time",
+              "latex": "L = \\dfrac{\\Delta E}{\\Delta t}"
+            },
+            {
+              "text": "The energy comes from a loss of mass",
+              "latex": "\\Delta E = \\Delta m\\,c^{2}"
+            },
+            {
+              "text": "Substitute for $\\Delta E$",
+              "latex": "L = \\dfrac{\\Delta m\\,c^{2}}{\\Delta t}"
+            },
+            {
+              "text": "Rearrange: the rate of loss of mass",
+              "latex": "\\dfrac{\\Delta m}{\\Delta t} = \\dfrac{L}{c^{2}}"
+            }
+          ],
+          "notes": "This is the \"working backwards\" calculation the guide expects: from a power to a mass change. The Sun loses about four million tonnes a second, yet less than 0.1% of its mass in its whole life."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for fusion calculations",
+          "bullets": [
+            "Add all the masses on each side, including any neutrons or protons released",
+            "Keep every decimal place until the subtraction: the difference is tiny",
+            "Atomic masses are fine when the electrons balance on both sides",
+            "Give the change in mass in u, or in kg (multiply by $1.661 \\times 10^{-27}$)",
+            "To change MeV into joules, multiply by $1.60 \\times 10^{-13}$",
+            "A positive $\\Delta m$ means energy is released"
+          ],
+          "notes": "Rounding the masses to four decimal places before subtracting can change the answer by several per cent: a good point to show on the board."
+        },
+        {
+          "type": "worked",
+          "title": "A cleaner fusion fuel",
+          "question": "Some researchers hope to build reactors that fuse deuterium with helium-3: ²H + ³He → ⁴He + ¹H. The atomic masses are deuterium 2.014102 u, helium-3 3.016029 u, helium-4 4.002603 u and hydrogen-1 1.007825 u. Find (a) the change in mass in one reaction, in u and in kg, and (b) the energy released, in MeV and in J.",
+          "hint": "Add the masses before and after the reaction separately, then subtract. Use 931.5 MeV for each u of mass lost.",
+          "steps": [
+            {
+              "text": "(a) Total mass before minus total mass after.",
+              "latex": "\\Delta m = 5.030131 - 5.010428"
+            },
+            {
+              "text": "The change in mass, in u.",
+              "latex": "\\Delta m = 0.019703\\ \\text{u}"
+            },
+            {
+              "text": "In kilograms: multiply by $1.661 \\times 10^{-27}$.",
+              "latex": "\\Delta m = 3.273 \\times 10^{-29}\\ \\text{kg}"
+            },
+            {
+              "text": "(b) Convert u into MeV.",
+              "latex": "E = 0.019703 \\times 931.5 = 18.4\\ \\text{MeV}"
+            },
+            {
+              "text": "In joules: multiply 18.35 MeV by $1.60 \\times 10^{-13}$.",
+              "latex": "E = 2.94 \\times 10^{-12}\\ \\text{J}"
+            }
+          ],
+          "notes": "The electrons balance (three on each side), so atomic masses can be used directly. The products are both charged, which is why this reaction appeals to reactor designers: fewer fast neutrons making the reactor walls radioactive. Helium-3 is very rare on Earth, though."
+        },
+        {
+          "type": "worked",
+          "title": "Making oxygen in a red giant",
+          "question": "In the core of a red giant, a helium-4 nucleus can fuse with a carbon-12 nucleus to form oxygen-16. The atomic masses are helium-4 4.002603 u, carbon-12 12.000000 u and oxygen-16 15.994915 u. Find the energy released in one reaction, in MeV.",
+          "hint": "Find the total mass before the reaction and subtract the mass of the oxygen atom. Then convert u into MeV.",
+          "steps": [
+            {
+              "text": "Total mass before the reaction.",
+              "latex": "4.002603 + 12.000000 = 16.002603\\ \\text{u}"
+            },
+            {
+              "text": "Subtract the mass after.",
+              "latex": "\\Delta m = 16.002603 - 15.994915"
+            },
+            {
+              "text": "The change in mass.",
+              "latex": "\\Delta m = 0.007688\\ \\text{u}"
+            },
+            {
+              "text": "Convert u into MeV.",
+              "latex": "E = 0.007688 \\times 931.5 = 7.16\\ \\text{MeV}"
+            }
+          ],
+          "notes": "Per nucleon this is much less than hydrogen fusion releases: the curve flattens as it nears iron, so each later stage of fusion gives less energy, and the star burns through it faster."
+        }
+      ],
+      "challenge": "CC-E5-02",
+      "checks": [
+        "E5-009"
+      ]
+    },
+    {
+      "id": "conditions",
+      "short": "Conditions for fusion",
+      "guide": "The conditions leading to fusion in stars in terms of density and temperature.",
+      "sections": [
+        "conditions"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Explain why fusion needs a very high temperature and a very high density.",
+        "Describe how gravity creates these conditions as a star forms."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What does fusion need?",
+          "bullets": [
+            "Nuclei are positive, so they repel each other electrically",
+            "They fuse only if they come within about $10^{-15}$ m, where the strong force takes over",
+            "<strong>Very high temperature</strong> (about $10^{7}$ K in the Sun's core): the nuclei move fast enough to get that close",
+            "At this temperature atoms are fully ionized: the gas is a <strong>plasma</strong> of nuclei and electrons",
+            "<strong>Very high density</strong>: collisions are frequent enough to give a useful rate of fusion"
+          ],
+          "notes": "A common mistake is to say gravity pushes the nuclei together. Gravity compresses and heats the core; it is the high kinetic energy of the nuclei (temperature) that overcomes the repulsion."
+        },
+        {
+          "type": "bullets",
+          "title": "How a star gets hot enough",
+          "bullets": [
+            "A cold cloud of gas and dust (a <strong>nebula</strong>) collapses under its own gravity",
+            "As it falls inwards, gravitational potential energy becomes thermal energy",
+            "The shrinking ball (a <strong>protostar</strong>) becomes hotter and denser, especially at the centre",
+            "When the core reaches about $10^{7}$ K, hydrogen fusion starts",
+            "The outward pressure stops the collapse: a main-sequence star is born"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Fusion on Earth",
+          "bullets": [
+            "Reactors cannot match the density of a star's core, so they need even higher temperatures: over $10^{8}$ K",
+            "No material can hold a plasma that hot, so tokamaks hold it away from the walls with strong <strong>magnetic fields</strong>",
+            "Lasers can also compress and heat a tiny fuel pellet for a very short time",
+            "Releasing more energy than the whole plant uses, for long periods, is still being worked on"
+          ],
+          "notes": "The magnetic field confines the plasma; it does not push the nuclei together. Some laser experiments have released more fusion energy than the laser light delivered to the fuel, but far less than the plant used overall."
+        },
+        {
+          "type": "worked",
+          "title": "Fast enough to fuse?",
+          "question": "The core of the Sun is at about $1.5 \\times 10^{7}$ K. Compare the average kinetic energy of a proton there with the electric potential energy of two protons $1.0 \\times 10^{-15}$ m apart, and comment on the result.",
+          "hint": "The average kinetic energy of a particle in a gas is $\\tfrac{3}{2}k_{\\text{B}}T$ (B.3). The electric potential energy of two charges is $\\dfrac{kq_{1}q_{2}}{r}$ (D.2).",
+          "steps": [
+            {
+              "text": "Average kinetic energy of a proton.",
+              "latex": "\\bar{E}_{\\text{k}} = \\tfrac{3}{2}k_{\\text{B}}T"
+            },
+            {
+              "text": "Substitute the core temperature.",
+              "latex": "\\bar{E}_{\\text{k}} = \\tfrac{3}{2}(1.38 \\times 10^{-23})(1.5 \\times 10^{7})"
+            },
+            {
+              "text": "The average kinetic energy.",
+              "latex": "\\bar{E}_{\\text{k}} = 3.1 \\times 10^{-16}\\ \\text{J}"
+            },
+            {
+              "text": "Potential energy at $1.0 \\times 10^{-15}$ m.",
+              "latex": "E_{\\text{p}} = \\dfrac{(8.99 \\times 10^{9})(1.60 \\times 10^{-19})^{2}}{1.0 \\times 10^{-15}}"
+            },
+            {
+              "text": "The potential energy: about 700 times the average kinetic energy.",
+              "latex": "E_{\\text{p}} = 2.3 \\times 10^{-13}\\ \\text{J}"
+            },
+            {
+              "text": "Comment: almost no protons have anywhere near this much energy, so fusion happens only rarely, and the core must be very dense to give enough collisions."
+            }
+          ],
+          "notes": "Classically, almost no protons would ever get close enough; a quantum effect (tunnelling, beyond the course) lets a few fuse. This slow rate is why the Sun lasts about 10 billion years. The example links B.3 and D.2."
+        }
+      ],
+      "checks": [
+        "E5-006"
+      ]
+    },
+    {
+      "id": "equilibrium",
+      "short": "Stability of stars",
+      "guide": "That the stability of stars relies on an equilibrium between outward thermal or radiation pressure and inward pressure due to gravitational forces.",
+      "sections": [
+        "equilibrium"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Explain the stability of a main-sequence star as a balance between gravity and pressure.",
+        "Describe how the balance corrects itself when the core is disturbed."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "A star in balance",
+          "bullets": [
+            "<strong>Inwards</strong>: gravity pulls every layer of the star towards the centre",
+            "<strong>Outwards</strong>: pressure pushes back, from two sources",
+            [
+              "thermal (gas) pressure of the hot plasma",
+              "radiation pressure of the photons produced by fusion"
+            ],
+            "In a stable star these balance at every layer, so it neither expands nor contracts",
+            "Gas pressure matters most in low- and medium-mass stars like the Sun; radiation pressure matters most in very massive stars"
+          ],
+          "notes": "The guide added \"thermal\" to this understanding because of the difference between low-mass and high-mass stars. The linking question \"How can gas laws be used to model stars?\" fits here: hotter gas at the same density has a higher pressure."
+        },
+        {
+          "type": "diagram",
+          "title": "Gravity against pressure",
+          "figure": "e5at"
+        },
+        {
+          "type": "bullets",
+          "title": "A self-correcting balance",
+          "bullets": [
+            "If the core contracts a little, it heats up",
+            [
+              "fusion speeds up, the pressure rises, and the core expands back"
+            ],
+            "If the core expands a little, it cools",
+            [
+              "fusion slows, the pressure falls, and gravity pulls it back"
+            ],
+            "So a main-sequence star stays steady for millions or billions of years",
+            "When the core's hydrogen runs out, the balance is lost and the star starts to change"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Why the Sun doesn't collapse",
+          "question": "Explain why the Sun has kept almost the same size for billions of years, even though gravity pulls all of its matter towards its centre.",
+          "hint": "Name the outward effects, say where their energy comes from, and explain what happens if the balance is disturbed.",
+          "steps": [
+            {
+              "text": "Gravity pulls every layer of the Sun inwards."
+            },
+            {
+              "text": "Fusion in the core releases energy, which keeps the plasma hot."
+            },
+            {
+              "text": "The hot plasma and the radiation it produces exert an outward pressure."
+            },
+            {
+              "text": "At every layer, this pressure balances the inward pull of gravity, so there is no resultant force."
+            },
+            {
+              "text": "Any small contraction heats the core and speeds up fusion, which pushes the layers back out: the balance is stable."
+            }
+          ],
+          "notes": "Award-style checklist: names gravity and pressure; links pressure to fusion; says \"balance\" or \"equilibrium\"; explains why it is stable. Ask what will happen when the hydrogen in the core runs out (gravity wins and the core contracts)."
+        }
+      ],
+      "checks": [
+        "E5-007"
+      ]
+    },
+    {
+      "id": "parallax",
+      "short": "Distances and parallax",
+      "guide": "The use of stellar parallax as a method to determine the distance d to celestial bodies, d (parsec) = 1/p (arc-second); the conversion between AU, ly and pc.",
+      "sections": [
+        "units",
+        "parallax"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Convert distances between astronomical units, light years, parsecs and metres.",
+        "Use the parallax angle to find the distance to a nearby star, and state the limits of the method."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Astronomical distances",
+          "bullets": [
+            "<strong>Astronomical unit (AU)</strong>: the average Earth–Sun distance, $1.50 \\times 10^{11}$ m",
+            "<strong>Light year (ly)</strong>: how far light goes through a vacuum in a year, $9.46 \\times 10^{15}$ m. It is a distance, not a time",
+            "<strong>Parsec (pc)</strong>: the distance of a star whose parallax angle is one arcsecond; 1 pc = 3.26 ly",
+            "One arcsecond (1″) is $\\tfrac{1}{3600}$ of a degree",
+            "All three conversions are in the data booklet"
+          ],
+          "notes": "Scale: sunlight takes about 8 minutes to reach us, the nearest star is about 4.2 ly away, and the Milky Way is about 100 000 ly across."
+        },
+        {
+          "type": "equation",
+          "title": "Parallax distance",
+          "latex": "d\\,(\\text{parsec}) = \\dfrac{1}{p\\,(\\text{arc-second})}",
+          "bullets": [
+            "$p$ is the parallax angle, in arcseconds",
+            "This gives the distance $d$ in parsecs",
+            "The smaller the parallax angle, the further away the star"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Stellar parallax",
+          "figure": "e5bt",
+          "bullets": [
+            "Observe the star twice, six months apart, from opposite sides of the Earth's orbit",
+            "The nearby star shifts against the far more distant background stars",
+            "The parallax angle $p$ is half the total angular shift",
+            "The diagram is hugely exaggerated: real angles are below 1″"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Where the parallax equation comes from",
+          "start": "The Sun, the Earth and the star form a right-angled triangle. The side from the Sun to the Earth is 1 AU, and the angle at the star is the parallax angle $p$.",
+          "steps": [
+            {
+              "text": "Trigonometry in the right-angled triangle",
+              "latex": "\\tan p = \\dfrac{1\\ \\text{AU}}{d}"
+            },
+            {
+              "text": "The angle is tiny, so $\\tan p \\approx p$ (in radians)",
+              "latex": "d = \\dfrac{1\\ \\text{AU}}{p}"
+            },
+            {
+              "text": "One arcsecond in radians",
+              "latex": "1'' = \\dfrac{\\pi}{180 \\times 3600} = 4.85 \\times 10^{-6}\\ \\text{rad}"
+            },
+            {
+              "text": "The distance at which $p$ is one arcsecond is one parsec",
+              "latex": "1\\ \\text{pc} = \\dfrac{1.50 \\times 10^{11}}{4.85 \\times 10^{-6}}"
+            },
+            {
+              "text": "So with $d$ in pc and $p$ in arcseconds",
+              "latex": "d = \\dfrac{1}{p}"
+            }
+          ],
+          "notes": "Step 4 gives $3.09 \\times 10^{16}$ m, the value of the parsec in the data booklet. The equation only works in these units: $p$ must be in arcseconds for $d$ to come out in parsecs."
+        },
+        {
+          "type": "bullets",
+          "title": "Using parallax",
+          "bullets": [
+            "Change an angle in degrees into arcseconds by multiplying by 3600",
+            "Find $d$ in parsecs first, then convert to light years or metres",
+            "From the ground, the atmosphere blurs images: angles below about 0.01″ can't be measured, so the limit is about 100 pc",
+            "Space telescopes such as Gaia reach thousands of parsecs: still only part of our galaxy",
+            "Further away, other methods are needed, such as comparing a star's brightness with its luminosity"
+          ],
+          "notes": "Parallax was first measured only in 1838 (Bessel, 61 Cygni). Its absence had been used as evidence that the Earth does not move: a good NoS discussion about measurement limits."
+        },
+        {
+          "type": "worked",
+          "title": "Our neighbour galaxy",
+          "question": "The Andromeda galaxy is about $2.5 \\times 10^{6}$ ly from the Earth. Express this distance (a) in parsecs and (b) in metres.",
+          "hint": "Use the conversion factors from the data booklet: how many light years make a parsec, and how many metres make a light year?",
+          "steps": [
+            {
+              "text": "(a) One parsec is 3.26 ly.",
+              "latex": "d = \\dfrac{2.5 \\times 10^{6}}{3.26}"
+            },
+            {
+              "text": "The distance in parsecs.",
+              "latex": "d = 7.7 \\times 10^{5}\\ \\text{pc}"
+            },
+            {
+              "text": "(b) One light year is $9.46 \\times 10^{15}$ m.",
+              "latex": "d = 2.5 \\times 10^{6} \\times 9.46 \\times 10^{15}"
+            },
+            {
+              "text": "The distance in metres.",
+              "latex": "d = 2.4 \\times 10^{22}\\ \\text{m}"
+            }
+          ],
+          "notes": "About 770 kpc. The light we see from Andromeda tonight left it about 2.5 million years ago, before modern humans existed: a link to the ToK question about observing the past."
+        },
+        {
+          "type": "worked",
+          "title": "A fast-moving neighbour",
+          "question": "Barnard's star has a parallax angle of 0.548 arcseconds. Find (a) its distance in parsecs and in light years, and (b) the greatest distance, in light years, at which a ground-based telescope that can measure angles down to 0.01 arcseconds could use parallax.",
+          "hint": "With $p$ in arcseconds, $d = 1/p$ gives parsecs. For (b), use the smallest measurable angle.",
+          "steps": [
+            {
+              "text": "(a) Distance in parsecs.",
+              "latex": "d = \\dfrac{1}{0.548} = 1.82\\ \\text{pc}"
+            },
+            {
+              "text": "Convert to light years.",
+              "latex": "d = 1.825 \\times 3.26 = 5.95\\ \\text{ly}"
+            },
+            {
+              "text": "(b) The smallest angle gives the largest distance.",
+              "latex": "d_{\\max} = \\dfrac{1}{0.01} = 100\\ \\text{pc}"
+            },
+            {
+              "text": "Convert to light years.",
+              "latex": "d_{\\max} = 100 \\times 3.26 \\approx 330\\ \\text{ly}"
+            }
+          ],
+          "notes": "Barnard's star is a red dwarf, one of the closest stars to the Sun. It moves across our sky faster than any other star, but too dim to see without a telescope."
+        },
+        {
+          "type": "worked",
+          "title": "How sure is the distance?",
+          "question": "A star's parallax angle is measured as $(0.0125 \\pm 0.0005)$ arcseconds. Find its distance, with its absolute uncertainty.",
+          "hint": "Find the distance first. For $d = 1/p$, the fractional uncertainty in $d$ is the same as the fractional uncertainty in $p$.",
+          "steps": [
+            {
+              "text": "The distance.",
+              "latex": "d = \\dfrac{1}{0.0125} = 80.0\\ \\text{pc}"
+            },
+            {
+              "text": "Fractional uncertainty in $p$.",
+              "latex": "\\dfrac{\\Delta p}{p} = \\dfrac{0.0005}{0.0125} = 0.04"
+            },
+            {
+              "text": "The same fraction of $d$.",
+              "latex": "\\Delta d = 0.04 \\times 80.0 = 3.2\\ \\text{pc}"
+            },
+            {
+              "text": "Round the uncertainty and match the distance to it.",
+              "latex": "d = (80 \\pm 3)\\ \\text{pc}"
+            }
+          ],
+          "notes": "A 4% uncertainty from an angle of only 0.0005″: this is why the parallax method gets worse with distance. A star twice as far away has half the parallax angle, so the same angle uncertainty becomes twice the fractional uncertainty."
+        }
+      ],
+      "checks": [
+        "E5-001"
+      ]
+    },
+    {
+      "id": "radius",
+      "short": "Starlight and stellar radii",
+      "guide": "How to determine stellar radii (using luminosity and surface temperature); the surface temperature and composition of a star can be determined from its spectrum.",
+      "sections": [
+        "spectra",
+        "radius"
+      ],
+      "minutes": 60,
+      "aims": [
+        "Describe how a star's spectrum gives its surface temperature and composition.",
+        "Determine a star's radius from its luminosity and surface temperature."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What starlight tells us",
+          "bullets": [
+            "<strong>Surface temperature</strong>: a star is close to a black body, so its peak wavelength gives its temperature (Wien's law)",
+            "<strong>Composition</strong>: dark absorption lines show which elements are in the star's outer layers",
+            "<strong>Spectral class</strong>: O, B, A, F, G, K, M, from the hottest (blue, above 30 000 K) to the coolest (red, below about 3500 K)",
+            "The Sun is a G star, with a surface temperature of about 5800 K",
+            "<strong>Luminosity</strong>: from the apparent brightness and the distance"
+          ],
+          "notes": "The pattern of lines in a spectral class depends mainly on temperature, not on composition: nearly every star is roughly three-quarters hydrogen and one-quarter helium by mass. Cecilia Payne-Gaposchkin showed this in 1925."
+        },
+        {
+          "type": "bullets",
+          "title": "Absorption lines",
+          "bullets": [
+            "The hot, dense interior gives a continuous spectrum",
+            "Atoms in the cooler outer layers absorb photons of particular wavelengths, matching their own energy level differences (E.1)",
+            "The re-emitted photons go off in all directions, so those wavelengths are dim in the light reaching us: dark lines",
+            "Each element has its own pattern of lines, matched with spectra measured in the laboratory"
+          ],
+          "notes": "Show a hydrogen emission spectrum beside the Sun's absorption spectrum: the dark lines are at the same wavelengths as the bright ones (for example 656 nm and 486 nm). This answers the guide's linking question about emission spectra and the cosmos."
+        },
+        {
+          "type": "equation",
+          "title": "Equations for stars",
+          "latex": [
+            "\\lambda_{\\max}T = 2.9 \\times 10^{-3}\\ \\text{m K}",
+            "L = \\sigma AT^{4}",
+            "b = \\dfrac{L}{4\\pi d^{2}}"
+          ],
+          "bullets": [
+            "All three are in the data booklet (B.1)",
+            "$L$ is the luminosity (total power emitted); $b$ is the apparent brightness (power received per unit area)",
+            "$\\sigma = 5.67 \\times 10^{-8}\\ \\text{W m}^{-2}\\,\\text{K}^{-4}$"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Finding a star's radius",
+          "start": "Treat the star as a black-body sphere of radius $R$ and surface temperature $T$.",
+          "steps": [
+            {
+              "text": "The Stefan–Boltzmann law",
+              "latex": "L = \\sigma AT^{4}"
+            },
+            {
+              "text": "The surface area of a sphere",
+              "latex": "A = 4\\pi R^{2}"
+            },
+            {
+              "text": "Substitute for $A$",
+              "latex": "L = 4\\pi R^{2}\\sigma T^{4}"
+            },
+            {
+              "text": "Make $R$ the subject",
+              "latex": "R = \\sqrt{\\dfrac{L}{4\\pi\\sigma T^{4}}}"
+            },
+            {
+              "text": "Divide by the same equation for the Sun: $4\\pi$ and $\\sigma$ cancel",
+              "latex": "\\dfrac{R}{R_{\\odot}} = \\sqrt{\\dfrac{L}{L_{\\odot}}}\\left(\\dfrac{T_{\\odot}}{T}\\right)^{2}"
+            }
+          ],
+          "notes": "The ratio form is quicker when data are given as multiples of the Sun's values. Ask: at the same temperature, how does the radius depend on luminosity? (R is proportional to the square root of L.)"
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for finding radii",
+          "bullets": [
+            "The method: $T$ from the peak wavelength, $L$ from $b$ and $d$, then $R$",
+            "Convert nm into m before using Wien's law, and use temperatures in kelvin",
+            "The distance often comes from parallax: change pc into m first",
+            "Raise $T$ to the fourth power: small errors in $T$ grow quickly",
+            "With ratios, check which way up the temperature ratio goes: a hotter star of the same luminosity is smaller"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "From observations to a radius",
+          "question": "A star has a parallax angle of 0.0100 arcseconds and an apparent brightness of $8.0 \\times 10^{-11}\\ \\text{W m}^{-2}$, and its spectrum peaks at 300 nm. Find (a) its distance in metres, (b) its luminosity, (c) its surface temperature and (d) its radius.",
+          "hint": "Work through the chain: parallax gives the distance, the brightness and distance give the luminosity, Wien's law gives the temperature, and the Stefan–Boltzmann law then gives the radius.",
+          "steps": [
+            {
+              "text": "(a) Parallax gives $d = 1/0.0100 = 100$ pc. Change parsecs into metres.",
+              "latex": "d = 3.09 \\times 10^{18}\\ \\text{m}"
+            },
+            {
+              "text": "(b) Rearrange $b = L/4\\pi d^{2}$.",
+              "latex": "L = 4\\pi(3.09 \\times 10^{18})^{2}(8.0 \\times 10^{-11})"
+            },
+            {
+              "text": "The luminosity.",
+              "latex": "L = 9.6 \\times 10^{27}\\ \\text{W}"
+            },
+            {
+              "text": "(c) Wien's law.",
+              "latex": "T = \\dfrac{2.9 \\times 10^{-3}}{3.00 \\times 10^{-7}} = 9.7 \\times 10^{3}\\ \\text{K}"
+            },
+            {
+              "text": "(d) Radius.",
+              "latex": "R = \\sqrt{\\dfrac{9.6 \\times 10^{27}}{4\\pi(5.67 \\times 10^{-8})(9670)^{4}}}"
+            },
+            {
+              "text": "The radius of the star.",
+              "latex": "R = 1.2 \\times 10^{9}\\ \\text{m}"
+            }
+          ],
+          "notes": "The star is about 25 times as luminous as the Sun and about 1.8 times its radius ($R_{\\odot} = 6.96 \\times 10^{8}$ m): a hot white main-sequence star of class A. Keep unrounded values in the calculator between steps."
+        },
+        {
+          "type": "worked",
+          "title": "How small is a white dwarf?",
+          "question": "A white dwarf has a luminosity of $0.010\\,L_{\\odot}$ and a surface temperature of 15 000 K. The Sun's surface temperature is 5800 K and its radius is $6.96 \\times 10^{5}$ km. Find the radius of the white dwarf (a) as a fraction of the Sun's radius and (b) in kilometres.",
+          "hint": "Use the ratio form of the Stefan–Boltzmann law, so $4\\pi$ and $\\sigma$ cancel. Be careful which way up the temperature ratio goes.",
+          "steps": [
+            {
+              "text": "(a) Ratio form of the Stefan–Boltzmann law.",
+              "latex": "\\dfrac{R}{R_{\\odot}} = \\sqrt{\\dfrac{L}{L_{\\odot}}}\\left(\\dfrac{T_{\\odot}}{T}\\right)^{2}"
+            },
+            {
+              "text": "Substitute the ratios.",
+              "latex": "\\dfrac{R}{R_{\\odot}} = \\sqrt{0.010}\\left(\\dfrac{5800}{15000}\\right)^{2}"
+            },
+            {
+              "text": "The radius as a fraction of the Sun's.",
+              "latex": "\\dfrac{R}{R_{\\odot}} = 0.10 \\times 0.150 = 0.015"
+            },
+            {
+              "text": "(b) Multiply by the Sun's radius.",
+              "latex": "R = 0.015 \\times 6.96 \\times 10^{5} = 1.0 \\times 10^{4}\\ \\text{km}"
+            }
+          ],
+          "notes": "About 1.6 times the Earth's radius (6370 km): hot but dim means tiny. White dwarfs have typically about 0.6 of the Sun's mass packed into a planet-sized ball."
+        }
+      ],
+      "challenge": "CC-E5-03",
+      "checks": [
+        "E5-004"
+      ]
+    },
+    {
+      "id": "hr",
+      "short": "The HR diagram",
+      "guide": "The main regions of the Hertzsprung–Russell (HR) diagram and how to describe the main properties of stars in these regions.",
+      "sections": [
+        "hr"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Sketch an HR diagram, showing the main sequence, red giants, supergiants, white dwarfs, the instability strip and lines of constant radius.",
+        "Describe and compare the properties of stars in each region."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The Hertzsprung–Russell diagram",
+          "bullets": [
+            "Each star is plotted by its <strong>luminosity</strong> (vertical axis) and its <strong>surface temperature</strong> (horizontal axis)",
+            "Luminosity is often given as a multiple of the Sun's, $L_{\\odot}$",
+            "Both scales are logarithmic: each step is a factor of 10",
+            "Temperature <strong>increases to the left</strong>, from about 3000 K up to 40 000 K",
+            "Stars fall into a few distinct groups, not scattered at random"
+          ],
+          "notes": "Hertzsprung and Russell (around 1910) each plotted stars this way and found the pattern: a good example of the NoS aspect \"Patterns and trends\"."
+        },
+        {
+          "type": "diagram",
+          "title": "The regions of the HR diagram",
+          "img": "../../images/e5/hr-diagram-eso.jpg",
+          "alt": "An HR diagram: luminosity compared with the Sun on the vertical axis and temperature, increasing to the left, on the horizontal axis. The main sequence runs diagonally from large blue stars at the top left, through the Sun, to small red stars at the bottom right. Giants lie above it on the right, supergiants across the top, and white dwarfs in a band below and to the left.",
+          "credit": "ESO, via Wikimedia Commons, CC BY 4.0. Resized.",
+          "bullets": [
+            "Main sequence: a diagonal band from top left to bottom right",
+            "Red giants: above the main sequence on the right",
+            "Supergiants: across the top",
+            "White dwarfs: below and to the left"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Properties of each region",
+          "bullets": [
+            "<strong>Main sequence</strong>: about 90% of stars, fusing hydrogen into helium in their cores. Higher up means more massive, hotter and larger",
+            "<strong>Red giants</strong>: cool but luminous, so large (about 10–100 $R_{\\odot}$)",
+            "<strong>Supergiants</strong>: up to about $10^{6}\\,L_{\\odot}$ and 1000 $R_{\\odot}$, red or blue",
+            "<strong>White dwarfs</strong>: hot but dim, so tiny (about the size of the Earth), with no fusion",
+            "<strong>Instability strip</strong>: a nearly vertical band crossing the main sequence, where stars pulsate and their luminosity varies regularly"
+          ],
+          "notes": "The ESO diagram does not show the instability strip: sketch it on the board as a narrow, nearly vertical band above the main sequence at about 6000–7500 K. Cepheid variables themselves are not required."
+        },
+        {
+          "type": "derivation",
+          "title": "Why lines of constant radius are straight",
+          "start": "The HR diagram has logarithmic scales on both axes. Start from the Stefan–Boltzmann law for a spherical star.",
+          "steps": [
+            {
+              "text": "Luminosity of a star of radius $R$",
+              "latex": "L = 4\\pi\\sigma R^{2}T^{4}"
+            },
+            {
+              "text": "Take logarithms of both sides",
+              "latex": "\\log L = 4\\log T + \\log(4\\pi\\sigma R^{2})"
+            },
+            {
+              "text": "For stars of the same radius, the last term is a constant",
+              "latex": "\\log L = 4\\log T + \\text{constant}"
+            },
+            {
+              "text": "So stars of equal radius lie on a straight line on log–log axes. Temperature increases to the left, so the line slopes down to the right"
+            }
+          ],
+          "notes": "Only the result is needed in exams: lines of constant radius are straight, parallel and slope down from top left to bottom right, with larger radii further up and to the right. The logarithms are for students who take Maths at a level that covers them."
+        },
+        {
+          "type": "diagram",
+          "title": "Lines of constant radius",
+          "img": "../../images/e5/hr-radius-lines.png",
+          "alt": "An HR diagram with parallel dotted lines sloping down from top left to bottom right, labelled 0.001 to 1000 solar radii, with bigger radii further up and to the right. The main sequence crosses them, marked with star masses from 40 solar masses at the top to 0.1 at the bottom. The Sun lies on the 1 solar radius line; giants such as Betelgeuse lie near the 1000 solar radius line, and white dwarfs near the 0.01 line.",
+          "credit": "AstroOgier, via Wikimedia Commons, CC0 (public domain). Resized.",
+          "bullets": [
+            "Up and to the right: larger stars",
+            "Masses along the main sequence: the more massive, the hotter and more luminous",
+            "Ignore the right-hand scale (absolute magnitude): it is not in the course"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for HR diagrams",
+          "bullets": [
+            "Label the axes: luminosity / $L_{\\odot}$ (about $10^{-4}$ to $10^{6}$) and temperature / K (hot on the left)",
+            "Mark the Sun at $1\\,L_{\\odot}$ and about 5800 K, on the main sequence",
+            "Draw lines of constant radius as straight parallel lines sloping down to the right",
+            "To compare two stars at the same temperature, use $R \\propto \\sqrt{L}$",
+            "For a main-sequence star, reading $L$ off the diagram at its temperature, then measuring $b$, gives its distance"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Two orange stars",
+          "question": "Stars P and Q both have a surface temperature of 4500 K. P has a luminosity of $150\\,L_{\\odot}$ and Q a luminosity of $0.20\\,L_{\\odot}$. (a) Identify the region of the HR diagram in which each star lies. (b) Calculate the ratio of the radius of P to the radius of Q.",
+          "hint": "Place each star on the diagram using its temperature and luminosity. For (b), the temperatures are equal, so $L \\propto R^{2}$.",
+          "steps": [
+            {
+              "text": "(a) P is cool but much more luminous than a main-sequence star at this temperature: a red giant."
+            },
+            {
+              "text": "Q is cool and dim, on the main sequence below the Sun."
+            },
+            {
+              "text": "(b) Same temperature, so the luminosity depends only on the area.",
+              "latex": "\\dfrac{L_{\\text{P}}}{L_{\\text{Q}}} = \\dfrac{R_{\\text{P}}^{2}}{R_{\\text{Q}}^{2}}"
+            },
+            {
+              "text": "Take the square root.",
+              "latex": "\\dfrac{R_{\\text{P}}}{R_{\\text{Q}}} = \\sqrt{\\dfrac{150}{0.20}} = \\sqrt{750}"
+            },
+            {
+              "text": "The ratio of the radii.",
+              "latex": "\\dfrac{R_{\\text{P}}}{R_{\\text{Q}}} = 27"
+            }
+          ],
+          "notes": "Using the Sun (5800 K) as a reference: P is about 20 solar radii and Q about 0.74 solar radii. Both are orange, class K stars."
+        },
+        {
+          "type": "worked",
+          "title": "Too far for parallax",
+          "question": "A main-sequence star has the same spectral class and surface temperature as the Sun, so its luminosity is taken to be the Sun's, $3.83 \\times 10^{26}$ W. Its apparent brightness is $1.0 \\times 10^{-12}\\ \\text{W m}^{-2}$. Find its distance in parsecs.",
+          "hint": "Rearrange $b = \\dfrac{L}{4\\pi d^{2}}$ for $d$, then change metres into parsecs.",
+          "steps": [
+            {
+              "text": "Rearrange the brightness equation.",
+              "latex": "d = \\sqrt{\\dfrac{L}{4\\pi b}}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "d = \\sqrt{\\dfrac{3.83 \\times 10^{26}}{4\\pi(1.0 \\times 10^{-12})}}"
+            },
+            {
+              "text": "The distance in metres.",
+              "latex": "d = 5.5 \\times 10^{18}\\ \\text{m}"
+            },
+            {
+              "text": "Convert into parsecs.",
+              "latex": "d = \\dfrac{5.5 \\times 10^{18}}{3.09 \\times 10^{16}} = 180\\ \\text{pc}"
+            }
+          ],
+          "notes": "This is beyond the reach of ground-based parallax (about 100 pc), which is why the HR diagram is useful for distances. The method relies on the star really being on the main sequence."
+        }
+      ],
+      "challenge": "CC-E5-01",
+      "checks": [
+        "E5-010"
+      ]
+    },
+    {
+      "id": "evolution",
+      "short": "Stellar mass and evolution",
+      "guide": "The effect of stellar mass on the evolution of a star.",
+      "sections": [
+        "evolution"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Describe how the evolution of a star, and its path on the HR diagram, depend on its mass.",
+        "Explain why massive stars have much shorter lives."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Mass decides a star's life",
+          "bullets": [
+            "About 90% of a star's life is spent on the main sequence, fusing hydrogen in its core",
+            "Extra mass means stronger gravity, so the core is squeezed to a higher temperature and density",
+            "Fusion then runs much faster: luminosity rises far more steeply than mass",
+            "The larger fuel supply is used up sooner, so heavier stars live <strong>much shorter</strong> lives",
+            [
+              "Sun: roughly $10^{10}$ years on the main sequence",
+              "a 25-solar-mass star: only a few million years (about $7 \\times 10^{6}$)"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Stars up to about 8 solar masses",
+          "bullets": [
+            "The core runs out of hydrogen; gravity makes it contract and heat up",
+            "Hydrogen fuses in a shell around the core; the outer layers swell and cool: a <strong>red giant</strong>",
+            "Its core then heats up enough for helium to fuse into carbon and oxygen",
+            "The outer layers are gently blown off, forming a glowing <strong>planetary nebula</strong>",
+            "The core is left as a <strong>white dwarf</strong>: no fusion, held up by electron degeneracy pressure, slowly cooling"
+          ],
+          "notes": "Electron degeneracy pressure is not ordinary electric repulsion: electrons can't be squeezed into the same quantum state. The Sun will become a red giant in about 5 billion years."
+        },
+        {
+          "type": "bullets",
+          "title": "Stars above about 8 solar masses",
+          "bullets": [
+            "The star becomes a <strong>red supergiant</strong>, fusing heavier and heavier elements in layers like an onion, up to iron",
+            "Iron-56 has the highest binding energy per nucleon, so fusing iron releases no energy",
+            "With no energy source, the core collapses in under a second",
+            "The outer layers rebound in a <strong>supernova</strong>, which can briefly outshine a whole galaxy",
+            "The collapsed core becomes a <strong>neutron star</strong> or a <strong>black hole</strong>, depending on its mass"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Inside a red supergiant",
+          "svg": "figures/e5-onion.svg",
+          "alt": "Concentric shells of a red supergiant, labelled from the outside in: hydrogen, helium, carbon, neon, oxygen, silicon and an iron core.",
+          "bullets": [
+            "Each shell fuses a heavier element than the one outside it",
+            "The iron core can't release energy by fusion",
+            "When the core collapses, the star explodes as a supernova"
+          ],
+          "notes": "Not to scale: the shells are tiny compared with the star, and the inner ones last only days to years."
+        },
+        {
+          "type": "bullets",
+          "title": "Paths on the HR diagram, and where elements come from",
+          "bullets": [
+            "The Sun: leaves the main sequence moving up and right into the red giant region, then crosses down and left to become a white dwarf",
+            "A massive star: from high on the main sequence, across to the right as a supergiant",
+            "Hydrogen and most helium were made in the Big Bang",
+            "Elements up to iron are made by fusion in stars",
+            "Heavier elements are made in supernovae and in collisions between neutron stars, then scattered into space"
+          ],
+          "notes": "This answers the guiding question \"How are elements created?\" The carbon and oxygen in our bodies were made in red giants."
+        },
+        {
+          "type": "diagram",
+          "title": "Two life stories on the HR diagram",
+          "svg": "figures/e5-hr-paths.svg",
+          "alt": "An HR diagram, luminosity against surface temperature on log scales, with temperature increasing to the left. The Sun starts on the main sequence, moves up and right to the red giant region, crosses to the left at high luminosity, then drops to the white dwarf region. A massive star starts high on the main sequence, moves to the right across the top as a red supergiant, and ends as a supernova.",
+          "bullets": [
+            "Sun: main sequence, red giant, then a white dwarf",
+            "The dashed part: the outer layers drift off as a planetary nebula",
+            "Massive star: across the top as a supergiant, then a supernova"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A short, bright life",
+          "question": "A main-sequence star of 10 solar masses has a luminosity of about $5000\\,L_{\\odot}$. The Sun will spend about $1 \\times 10^{10}$ years on the main sequence. Assuming that both stars fuse the same fraction of their mass before leaving the main sequence, estimate the main-sequence lifetime of the massive star.",
+          "hint": "The amount of fuel is proportional to the mass, and the rate of using it is proportional to the luminosity. Lifetime = fuel ÷ rate.",
+          "steps": [
+            {
+              "text": "The massive star has 10 times as much fuel.",
+              "latex": "\\dfrac{\\text{fuel}}{\\text{fuel}_{\\odot}} = 10"
+            },
+            {
+              "text": "It uses its fuel 5000 times as fast.",
+              "latex": "\\dfrac{\\text{rate}}{\\text{rate}_{\\odot}} = 5000"
+            },
+            {
+              "text": "Lifetime is fuel divided by rate.",
+              "latex": "\\dfrac{t}{t_{\\odot}} = \\dfrac{10}{5000} = \\dfrac{1}{500}"
+            },
+            {
+              "text": "The lifetime of the massive star.",
+              "latex": "t = \\dfrac{1 \\times 10^{10}}{500} = 2 \\times 10^{7}\\ \\text{years}"
+            }
+          ],
+          "notes": "About 20 million years, which agrees with models of 10-solar-mass stars. Ten times the mass gives thousands of times the luminosity, so the lifetime falls steeply with mass."
+        },
+        {
+          "type": "worked",
+          "title": "Why stop at iron?",
+          "question": "Explain why fusion in the core of a massive star stops once the core is made of iron, and what happens next.",
+          "hint": "Think about the binding energy per nucleon curve, and about what was holding the core up.",
+          "steps": [
+            {
+              "text": "Iron-56 is at the peak of the binding energy per nucleon curve."
+            },
+            {
+              "text": "Fusing iron into heavier nuclei would lower the binding energy per nucleon, so it would absorb energy rather than release it."
+            },
+            {
+              "text": "With no energy released in the core, nothing keeps up the thermal and radiation pressure."
+            },
+            {
+              "text": "Gravity is no longer balanced, so the core collapses within a second, leading to a supernova."
+            }
+          ],
+          "notes": "Students sometimes say the Coulomb repulsion of iron nuclei is too strong. The repulsion does make heavy nuclei harder to fuse, but the reason fusion stops releasing energy is the peak of the binding energy curve."
+        }
+      ],
+      "checks": [
+        "E5-016"
+      ]
+    },
+    {
+      "id": "limits",
+      "short": "Chandrasekhar and Oppenheimer–Volkoff limits",
+      "guide": "The role of the Chandrasekhar and Oppenheimer-Volkoff limits (from the guide for exams from 2028).",
+      "sections": [
+        "evolution"
+      ],
+      "minutes": 15,
+      "aims": [
+        "Explain how the Chandrasekhar and Oppenheimer–Volkoff limits decide whether a remnant core becomes a white dwarf, a neutron star or a black hole."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Limits on dead stars",
+          "bullets": [
+            "When fusion stops, gravity squeezes the core; only <strong>degeneracy pressure</strong> can stop the collapse, and only up to a limiting mass",
+            "<strong>Chandrasekhar limit</strong>, about 1.4 $M_{\\odot}$: the largest mass electron degeneracy pressure can hold up",
+            [
+              "below it, the core becomes a <strong>white dwarf</strong>"
+            ],
+            "<strong>Oppenheimer–Volkoff limit</strong>, about 2–3 $M_{\\odot}$: the largest mass neutron degeneracy pressure can hold up",
+            [
+              "between the limits: a <strong>neutron star</strong>, with the density of a nucleus",
+              "above it, nothing stops the collapse: a <strong>black hole</strong>"
+            ],
+            "The limits refer to the mass of the core that remains, not the star's main-sequence mass"
+          ],
+          "notes": "New for exams from 2028. The Oppenheimer–Volkoff limit is not known precisely, because the behaviour of matter at nuclear densities is uncertain: quote \"about 2–3 solar masses\". Most stars lose much of their mass before they die, so a star of several solar masses can still leave a white dwarf."
+        },
+        {
+          "type": "diagram",
+          "title": "What the core becomes",
+          "svg": "figures/e5-remnants.svg",
+          "alt": "A flowchart. The core left when fusion stops becomes a white dwarf if its mass is below 1.4 solar masses, held up by electron degeneracy pressure; a neutron star if its mass is between 1.4 and about 2 to 3 solar masses, held up by neutron degeneracy pressure; or a black hole above about 2 to 3 solar masses, where nothing stops the collapse.",
+          "bullets": [
+            "Below the Chandrasekhar limit: a white dwarf",
+            "Between the two limits: a neutron star",
+            "Above the Oppenheimer–Volkoff limit: a black hole"
+          ],
+          "notes": "New for exams from 2028."
+        },
+        {
+          "type": "worked",
+          "title": "Three remnants",
+          "question": "Three dying stars leave remnant cores of 0.6 $M_{\\odot}$, 1.8 $M_{\\odot}$ and 5 $M_{\\odot}$. For each, state what it becomes and what, if anything, stops its collapse.",
+          "hint": "Compare each mass with the Chandrasekhar limit (about 1.4 solar masses) and the Oppenheimer–Volkoff limit (about 2–3 solar masses).",
+          "steps": [
+            {
+              "text": "0.6 $M_{\\odot}$ is below the Chandrasekhar limit: a white dwarf, held up by electron degeneracy pressure."
+            },
+            {
+              "text": "1.8 $M_{\\odot}$ is between the two limits: a neutron star, held up by neutron degeneracy pressure."
+            },
+            {
+              "text": "5 $M_{\\odot}$ is above the Oppenheimer–Volkoff limit: nothing can stop the collapse, so it becomes a black hole."
+            }
+          ],
+          "notes": "New for exams from 2028. A core of 0.6 solar masses is typical of a white dwarf left by a Sun-like star. Ask students why the second star must have exploded as a supernova, but the first did not."
+        }
+      ],
+      "checks": [
+        "E5-017"
+      ]
+    }
+  ]
+}

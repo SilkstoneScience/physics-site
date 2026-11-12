@@ -1,0 +1,1660 @@
+{
+  "topic": "E.3",
+  "hours": 7,
+  "hlHours": 5,
+  "points": [
+    {
+      "id": "isotopes",
+      "short": "Isotopes",
+      "guide": "Isotopes.",
+      "sections": [
+        "strong"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Use the notation $^{A}_{Z}\\text{X}$ to find the numbers of protons, neutrons and nucleons in a nuclide.",
+        "Explain what isotopes of an element have in common and how they differ."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Nuclides and isotopes",
+          "bullets": [
+            "A <strong>nuclide</strong> is one particular kind of nucleus, written $^{A}_{Z}\\text{X}$",
+            [
+              "$Z$: the proton number (it fixes the element)",
+              "$A$: the nucleon number (protons + neutrons)",
+              "neutron number $N = A - Z$"
+            ],
+            "<strong>Isotopes</strong>: nuclides of the same element, so the same number of protons but different numbers of neutrons",
+            "Isotopes have the same chemistry (same number of electrons) but different masses",
+            "Some isotopes of an element are stable; others are radioactive"
+          ],
+          "notes": "Protons, neutrons and the nuclear notation were met in E.1. A quick quiz on a few symbols from the periodic table (how many protons, neutrons and electrons in the neutral atom?) checks the notation before decay equations."
+        },
+        {
+          "type": "worked",
+          "title": "Two isotopes of chlorine",
+          "question": "Natural chlorine is a mixture of chlorine-35 and chlorine-37. Chlorine has proton number 17. For a neutral atom of each isotope, find (a) the number of protons, (b) the number of neutrons and (c) the number of electrons.",
+          "hint": "The proton number is the same for every isotope of an element. The nucleon number counts protons and neutrons together.",
+          "steps": [
+            {
+              "text": "(a) Both are chlorine, so both have the same proton number.",
+              "latex": "Z = 17"
+            },
+            {
+              "text": "(b) Chlorine-35: subtract the protons from the nucleons.",
+              "latex": "N = 35 - 17 = 18"
+            },
+            {
+              "text": "Chlorine-37:",
+              "latex": "N = 37 - 17 = 20"
+            },
+            {
+              "text": "(c) A neutral atom has as many electrons as protons: 17 in each."
+            }
+          ],
+          "notes": "Ask why the two isotopes react in the same way with sodium (same number of electrons), but could be separated by a mass spectrometer or by diffusion (different masses)."
+        }
+      ]
+    },
+    {
+      "id": "changes",
+      "short": "Alpha, beta and gamma decay",
+      "guide": "The changes in the state of the nucleus following alpha, beta and gamma radioactive decay.",
+      "sections": [
+        "types"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Describe what is emitted in alpha, beta-minus, beta-plus and gamma decay.",
+        "State how $A$ and $Z$ change in each type of decay."
+      ],
+      "checks": [
+        "E3-002"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Three kinds of decay",
+          "bullets": [
+            "<strong>Alpha (α)</strong>: the nucleus emits a helium-4 nucleus (2 protons + 2 neutrons)",
+            [
+              "$A$ falls by 4 and $Z$ falls by 2"
+            ],
+            "<strong>Beta-minus (β⁻)</strong>: a neutron becomes a proton; an electron and an antineutrino are emitted",
+            [
+              "$A$ unchanged, $Z$ rises by 1"
+            ],
+            "<strong>Beta-plus (β⁺)</strong>: a proton becomes a neutron; a positron and a neutrino are emitted",
+            [
+              "$A$ unchanged, $Z$ falls by 1"
+            ]
+          ],
+          "notes": "A change of Z means a new element: this is transmutation. The beta particle is made in the decay; it was never \"inside\" the nucleus."
+        },
+        {
+          "type": "bullets",
+          "title": "Gamma decay and decay chains",
+          "bullets": [
+            "<strong>Gamma (γ)</strong>: a nucleus in an excited state drops to a lower energy state and emits a high-energy photon",
+            "$A$ and $Z$ do not change: same nuclide, less energy. An asterisk marks the excited nucleus",
+            "Gamma emission often follows an alpha or beta decay that leaves the daughter excited",
+            "A heavy nucleus may need many decays to reach a stable one: a <strong>decay chain</strong>",
+            "Uranium-238 reaches stable lead-206 after 8 alpha and 6 beta-minus decays"
+          ],
+          "notes": "If you have a chart of the nuclides (N against Z), trace a chain on it: each alpha decay moves two down and two left, each beta-minus decay one down and one right."
+        },
+        {
+          "type": "diagram",
+          "title": "A decay chain on a chart",
+          "svg": "figures/e3-nz-chain.svg",
+          "alt": "A chart of neutron number N against proton number Z, from Z = 88 to 93 and N = 140 to 146. Uranium-238 decays by alpha to thorium-234, by beta minus to protactinium-234, by beta minus to uranium-234, then by alpha to thorium-230. Alpha steps go down two and left two; beta minus steps go down one and right one.",
+          "bullets": [
+            "Alpha decay: two steps down and two to the left",
+            "Beta-minus decay: one step down and one to the right",
+            "Two beta-minus decays after an alpha decay give an isotope of the starting element"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Two ways to decay",
+          "question": "Bismuth-212, $^{212}_{\\;83}\\text{Bi}$, can decay in two ways: by alpha emission or by beta-minus emission. Find the nucleon number and proton number of the daughter nucleus in each case. The daughters are thallium (Tl, $Z = 81$) and polonium (Po, $Z = 84$): which is which?",
+          "hint": "Alpha decay takes away 2 protons and 2 neutrons. In beta-minus decay one neutron turns into a proton.",
+          "steps": [
+            {
+              "text": "Alpha: nucleon number falls by 4, proton number by 2.",
+              "latex": "A = 212 - 4 = 208"
+            },
+            {
+              "text": "Its proton number matches thallium.",
+              "latex": "Z = 83 - 2 = 81"
+            },
+            {
+              "text": "Beta-minus: the nucleon number stays 212 and the proton number rises by 1.",
+              "latex": "Z = 83 + 1 = 84"
+            },
+            {
+              "text": "So alpha decay gives thallium-208 and beta-minus decay gives polonium-212."
+            }
+          ],
+          "notes": "Bismuth-212 is part of the thorium decay chain, and really does branch this way (about one third alpha, two thirds beta-minus)."
+        },
+        {
+          "type": "worked",
+          "title": "Counting the steps in a chain",
+          "question": "Uranium-235 ($Z = 92$) decays through a chain of alpha and beta-minus decays to stable lead-207 ($Z = 82$). How many alpha decays and how many beta-minus decays are there in the chain?",
+          "hint": "Only alpha decay changes the nucleon number. Count the alpha decays first, then see how the proton number must be corrected.",
+          "steps": [
+            {
+              "text": "The nucleon number falls by 28, and each alpha decay removes 4. Number of alpha decays:",
+              "latex": "\\dfrac{235 - 207}{4} = 7"
+            },
+            {
+              "text": "Seven alpha decays alone would lower the proton number by 14.",
+              "latex": "Z = 92 - 14 = 78"
+            },
+            {
+              "text": "Lead has 82, so the proton number must rise by 4: each beta-minus decay adds 1. Number of beta-minus decays:",
+              "latex": "82 - 78 = 4"
+            }
+          ],
+          "notes": "The order of the decays doesn't matter for the count. A good follow-up: why can't a chain from uranium-235 ever reach lead-206? (Nucleon numbers in the chain always differ from 235 by a multiple of 4.)"
+        }
+      ]
+    },
+    {
+      "id": "equations",
+      "short": "Decay equations",
+      "guide": "The radioactive decay equations involving α, β⁻, β⁺, γ.",
+      "sections": [
+        "types"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Write balanced equations for alpha, beta-minus, beta-plus and gamma decay.",
+        "Use conservation of nucleon number and charge to find a missing particle or nucleus."
+      ],
+      "checks": [
+        "E3-001"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Balancing a nuclear equation",
+          "bullets": [
+            "<strong>Nucleon number</strong> is conserved: the top numbers add up to the same total on each side",
+            "<strong>Charge</strong> is conserved: the bottom numbers add up to the same total on each side",
+            "Particles in nuclear notation: alpha $^{4}_{2}\\alpha$, electron $^{\\;\\;0}_{-1}\\text{e}$, positron $^{\\;\\;0}_{+1}\\text{e}$, proton $^{1}_{1}\\text{p}$, neutron $^{1}_{0}\\text{n}$",
+            "Neutrinos and gamma photons have no charge and no nucleon number",
+            "Never forget the antineutrino (β⁻) or the neutrino (β⁺)"
+          ],
+          "notes": "For an electron, the bottom number is its charge (−1), not a proton number. Students who think of it as \"charge number\" balance beta equations without trouble."
+        },
+        {
+          "type": "equation",
+          "title": "The four decays in symbols",
+          "latex": [
+            "^{234}_{\\;92}\\text{U} \\rightarrow {}^{230}_{\\;90}\\text{Th} + {}^{4}_{2}\\alpha",
+            "^{90}_{38}\\text{Sr} \\rightarrow {}^{90}_{39}\\text{Y} + {}^{\\;\\;0}_{-1}\\text{e} + \\bar{\\nu}_{e}",
+            "^{22}_{11}\\text{Na} \\rightarrow {}^{22}_{10}\\text{Ne} + {}^{\\;\\;0}_{+1}\\text{e} + \\nu_{e}",
+            "^{99}_{43}\\text{Tc}^{*} \\rightarrow {}^{99}_{43}\\text{Tc} + \\gamma"
+          ],
+          "bullets": [
+            "Alpha, beta-minus, beta-plus and gamma, from top to bottom",
+            "Check each one: the top numbers and the bottom numbers balance"
+          ],
+          "notes": "These are general examples, not data-booklet equations. Technetium-99m (written with an asterisk here) is the gamma emitter used in most medical scans."
+        },
+        {
+          "type": "worked",
+          "title": "Writing two equations",
+          "question": "Write balanced decay equations for (a) the beta-plus decay of nitrogen-13 ($Z = 7$), which produces carbon (C), and (b) the alpha decay of thorium-230 ($Z = 90$), which produces radium (Ra).",
+          "hint": "Write the parent and the emitted particles first, with their numbers. Then choose the daughter's numbers so that both rows balance.",
+          "steps": [
+            {
+              "text": "(a) A positron has nucleon number 0 and charge +1, so the proton number falls by 1.",
+              "latex": "^{13}_{\\;7}\\text{N} \\rightarrow {}^{13}_{\\;6}\\text{C} + {}^{\\;\\;0}_{+1}\\text{e} + \\nu_{e}"
+            },
+            {
+              "text": "Check: 13 = 13 + 0 and 7 = 6 + 1."
+            },
+            {
+              "text": "(b) Alpha decay removes 4 nucleons and 2 protons.",
+              "latex": "^{230}_{\\;90}\\text{Th} \\rightarrow {}^{226}_{\\;88}\\text{Ra} + {}^{4}_{2}\\alpha"
+            },
+            {
+              "text": "Check: 230 = 226 + 4 and 90 = 88 + 2."
+            }
+          ],
+          "notes": "The neutrino in (a) is needed for full marks in an exam equation. Nitrogen-13 is another positron emitter used in PET scans."
+        },
+        {
+          "type": "worked",
+          "title": "Carbon-14 in the atmosphere",
+          "question": "Carbon-14 is made in the upper atmosphere when a neutron from a cosmic ray is absorbed by a nitrogen-14 nucleus ($Z = 7$). The products are a carbon-14 nucleus ($Z = 6$) and one other particle. Identify the other particle.",
+          "hint": "Write the equation with an unknown particle X. Balance the top numbers and the bottom numbers separately.",
+          "steps": [
+            {
+              "text": "Write the equation with the unknown particle.",
+              "latex": "^{14}_{\\;7}\\text{N} + {}^{1}_{0}\\text{n} \\rightarrow {}^{14}_{\\;6}\\text{C} + {}^{A}_{Z}\\text{X}"
+            },
+            {
+              "text": "Nucleon number: 14 + 1 = 14 + A.",
+              "latex": "A = 1"
+            },
+            {
+              "text": "Charge: 7 + 0 = 6 + Z.",
+              "latex": "Z = 1"
+            },
+            {
+              "text": "A particle with one nucleon and charge +1 is a proton.",
+              "latex": "^{1}_{1}\\text{p}"
+            }
+          ],
+          "notes": "This is an induced reaction, not a spontaneous decay, but the same two conservation laws balance it. The carbon-14 made this way is what radiocarbon dating relies on."
+        }
+      ]
+    },
+    {
+      "id": "neutrinos",
+      "short": "Neutrinos and antineutrinos",
+      "guide": "The existence of neutrinos ν and antineutrinos ν̄.",
+      "sections": [
+        "neutrino"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Describe the properties of neutrinos and antineutrinos.",
+        "State which beta decay emits a neutrino and which an antineutrino."
+      ],
+      "checks": [
+        "E3-010"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Neutrinos and antineutrinos",
+          "bullets": [
+            "Uncharged, with a tiny mass, and they barely interact with matter",
+            "Trillions from the Sun pass through each of us every second, almost all without a single interaction",
+            "β⁻ decay: electron + <strong>antineutrino</strong> $\\bar{\\nu}_{e}$",
+            "β⁺ decay: positron + <strong>neutrino</strong> $\\nu_{e}$",
+            "The neutrino was proposed in 1930 to rescue conservation of energy in beta decay, and only detected in 1956, beside a nuclear reactor"
+          ],
+          "notes": "A pairing rule that helps: the electron is matter, so it comes with an antimatter partner (the antineutrino); the positron is antimatter, so it comes with a neutrino. HL students meet the evidence (the beta spectrum) later. Why they were so hard to find: most would pass through a light-year of lead without interacting; the first detection (1956) used the huge flux from a reactor."
+        }
+      ]
+    },
+    {
+      "id": "penetration",
+      "short": "Penetration and ionization",
+      "guide": "The penetration and ionizing ability of alpha particles, beta particles and gamma rays.",
+      "sections": [
+        "penetration",
+        "uses"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Compare the ionizing ability and penetration of alpha, beta and gamma radiation.",
+        "Identify the radiation from a source using absorbers."
+      ],
+      "checks": [
+        "E3-005"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Ionizing radiation",
+          "bullets": [
+            "Each radiation knocks electrons out of the atoms it passes: it <strong>ionizes</strong> them",
+            "Each ionization costs only a few tens of eV, so one particle of a few MeV can ionize around a hundred thousand atoms",
+            "Strong ionizers use up their energy over a short distance, so they have the shortest range",
+            "Ionization in living cells damages DNA: this is why radiation is harmful, and also why it can kill cancer cells"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Comparing alpha, beta and gamma",
+          "bullets": [
+            "<strong>Alpha</strong>: charge +2, heavy. Strongly ionizing; a few cm of air or a sheet of paper stops it",
+            "<strong>Beta</strong>: charge −1 (β⁻) or +1 (β⁺), light. Moderately ionizing; stopped by a few mm of aluminium",
+            "<strong>Gamma</strong>: no charge, a photon. Weakly ionizing; reduced, but never completely stopped, by several cm of lead",
+            "In a magnetic or electric field, alpha and beta-minus bend in opposite directions; gamma is undeflected"
+          ],
+          "notes": "Outside the body, alpha is the least dangerous (it cannot pass the dead outer layer of skin). Swallowed or breathed in, it does the most harm, as it dumps all its energy in a tiny volume of living tissue."
+        },
+        {
+          "type": "diagram",
+          "title": "In a magnetic field",
+          "svg": "figures/e3-bending.svg",
+          "alt": "Alpha, beta minus and gamma radiation from a source enter a magnetic field directed into the page. Gamma rays go straight on. Alpha particles curve gently upwards. Beta-minus particles curve sharply downwards.",
+          "bullets": [
+            "Gamma rays are uncharged: no deflection",
+            "Alpha and beta-minus are deflected in opposite directions: opposite charges",
+            "Beta particles curve much more: their mass is far smaller"
+          ],
+          "notes": "Not to scale: in a real field the alpha particles' path would barely curve at all. Students can check the directions with Fleming's left-hand rule (D.3), remembering that the current for beta-minus particles is opposite to their motion."
+        },
+        {
+          "type": "diagram",
+          "title": "Stopping the three radiations",
+          "figure": "e3bt"
+        },
+        {
+          "type": "worked",
+          "title": "Identifying a source",
+          "question": "A Geiger–Müller tube is placed 2 cm from a source. The background count rate is 25 counts per minute. The count rates recorded with different absorbers between the source and the tube are: no absorber 480; a sheet of paper 472; 5 mm of aluminium 140; 2 cm of lead 50 (all in counts per minute). Which radiations does the source emit?",
+          "hint": "Look at what each absorber removes. Compare each change with the random variation you would expect, and with the background.",
+          "steps": [
+            {
+              "text": "Paper removes only 8 counts per minute, which is within the random variation: no alpha."
+            },
+            {
+              "text": "Aluminium removes about 330 counts per minute: the source emits beta."
+            },
+            {
+              "text": "After the aluminium, the rate is still well above background: something gets through.",
+              "latex": "140 - 25 = 115\\ \\text{min}^{-1}"
+            },
+            {
+              "text": "Lead reduces this a lot, but not to background: the source also emits gamma. So it emits beta and gamma."
+            }
+          ],
+          "notes": "The tube is close to the source so that alpha would reach it if it were present (alpha travels only a few cm in air). Ask what result would show a pure gamma emitter."
+        }
+      ]
+    },
+    {
+      "id": "strong",
+      "short": "The strong nuclear force",
+      "guide": "The existence of the strong nuclear force, a short-range, attractive force between nucleons.",
+      "sections": [
+        "strong"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Explain why an attractive force must act between nucleons.",
+        "Describe the strong nuclear force and explain why heavy nuclei need extra neutrons."
+      ],
+      "checks": [
+        "E3-023"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What holds a nucleus together?",
+          "bullets": [
+            "Protons repel each other electrically, and the repulsion is huge at nuclear distances",
+            "Gravity between nucleons is far too weak to balance it",
+            "So a nucleus can only exist if another <strong>attractive</strong> force acts: the <strong>strong nuclear force</strong>",
+            "It acts on protons and neutrons (nucleons), but not on electrons",
+            "It has a very short range: each nucleon only feels its nearest neighbours"
+          ],
+          "notes": "This matches the guide's added guidance on the strong force. (The HL point on evidence for the strong force adds its range.)"
+        },
+        {
+          "type": "bullets",
+          "title": "Why heavy nuclei need extra neutrons",
+          "bullets": [
+            "The electric repulsion acts between <strong>every</strong> pair of protons, however far apart in the nucleus",
+            "The strong force only acts between <strong>neighbouring</strong> nucleons",
+            "Neutrons add strong-force attraction without adding any repulsion",
+            "Light stable nuclei have about equal numbers of protons and neutrons; heavy ones need more neutrons than protons (lead-208: 82 protons, 126 neutrons)"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Two protons in a nucleus",
+          "question": "Two protons in a nucleus are $2.0 \\times 10^{-15}$ m apart. Calculate (a) the electric force and (b) the gravitational force between them, and (c) compare the two.",
+          "hint": "Use Coulomb's law and Newton's law of gravitation, with the charge and mass of a proton from the data booklet.",
+          "steps": [
+            {
+              "text": "(a) Coulomb's law.",
+              "latex": "F_{E} = \\dfrac{ke^{2}}{r^{2}}"
+            },
+            {
+              "text": "Substitute the values.",
+              "latex": "F_{E} = \\dfrac{8.99 \\times 10^{9}(1.60 \\times 10^{-19})^{2}}{(2.0 \\times 10^{-15})^{2}}"
+            },
+            {
+              "text": "The electric repulsion.",
+              "latex": "F_{E} = 58\\ \\text{N}"
+            },
+            {
+              "text": "(b) Newton's law of gravitation.",
+              "latex": "F_{G} = \\dfrac{Gm_{p}^{2}}{r^{2}} = 4.7 \\times 10^{-35}\\ \\text{N}"
+            },
+            {
+              "text": "(c) The electric repulsion is about 10³⁶ times stronger.",
+              "latex": "\\dfrac{F_{E}}{F_{G}} \\approx 1 \\times 10^{36}"
+            }
+          ],
+          "notes": "About 58 N on a particle of mass 1.7 × 10⁻²⁷ kg. Gravity cannot possibly hold the nucleus together, which answers one of the guide's linking questions: could gravity and electric forces alone hold a nucleus together?"
+        }
+      ]
+    },
+    {
+      "id": "random",
+      "short": "Random and spontaneous decay",
+      "guide": "The random and spontaneous nature of radioactive decay.",
+      "sections": [
+        "random"
+      ],
+      "minutes": 25,
+      "challenge": "CC-E3-01",
+      "aims": [
+        "Explain what is meant by the random and spontaneous nature of radioactive decay.",
+        "Explain how a large number of nuclei makes the decay of a sample predictable."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Random and spontaneous",
+          "bullets": [
+            "<strong>Random</strong>: there is no way to predict when a particular nucleus will decay, or which one will decay next",
+            "Every nucleus of a nuclide has the same chance of decaying in a given time, however long it has existed",
+            "<strong>Spontaneous</strong>: the decay is not affected by temperature, pressure, chemical bonding or anything else outside the nucleus",
+            "Evidence: a counter near a source clicks irregularly, and repeated counts over equal times vary"
+          ],
+          "notes": "Spontaneous does not mean \"happens suddenly\": it means nothing outside triggers or changes it."
+        },
+        {
+          "type": "bullets",
+          "title": "Predictable in large numbers",
+          "bullets": [
+            "One nucleus is unpredictable, but a sample has an enormous number of them",
+            "The <strong>fraction</strong> that decays in a given time is then very nearly fixed",
+            "Model: throw a big pile of dice, remove every six, and repeat. The number removed each throw is close to one sixth of those left",
+            "The fewer nuclei are left, the larger the random scatter in the counts"
+          ],
+          "notes": "The dice (or coin) simulation takes ten minutes and gives a decay curve with a \"half-life\". With 100 dice the curve is clearly bumpy; pooling the class's results smooths it, which shows why large numbers make predictions possible."
+        }
+      ]
+    },
+    {
+      "id": "activity",
+      "short": "Activity, count rate and half-life",
+      "guide": "The activity, count rate and half-life in radioactive decay.",
+      "sections": [
+        "halflife"
+      ],
+      "minutes": 45,
+      "challenge": "CC-E3-02",
+      "checks": [
+        "E3-022"
+      ],
+      "aims": [
+        "Define activity, count rate and half-life, and distinguish between activity and count rate.",
+        "Determine a half-life from experimental data or a decay curve."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Activity and count rate",
+          "bullets": [
+            "<strong>Activity</strong> $A$: the number of nuclei in a sample that decay per second",
+            [
+              "unit: the becquerel, 1 Bq = 1 decay per second"
+            ],
+            "<strong>Count rate</strong>: how many counts per second (or per minute) a detector registers",
+            "The count rate is always less than the activity: radiation leaves in all directions, and the detector misses some of what reaches it",
+            "Both are proportional to the number of undecayed nuclei, so both fall as the sample decays"
+          ],
+          "notes": "It is much easier to measure a count rate than to count the undecayed nuclei, which is why experiments use count rate."
+        },
+        {
+          "type": "bullets",
+          "title": "Half-life",
+          "bullets": [
+            "<strong>Half-life</strong> $T_{1/2}$: the time taken for half the undecayed nuclei of a nuclide to decay, so the activity halves too",
+            "It is the same whatever the starting amount, and whenever you start timing",
+            "Each nuclide has its own half-life, from a tiny fraction of a second to billions of years",
+            "Examples: oxygen-19, 27 s; iodine-131, 8 days; strontium-90, 29 years; uranium-238, 4.5 billion years"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Parent and daughter nuclei",
+          "figure": "e3ct",
+          "bullets": [
+            "The parent falls by half in every half-life",
+            "The daughter nuclei are still there: the two always add up to the starting number",
+            "The mass of the sample hardly changes"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Measuring a half-life",
+          "bullets": [
+            "Measure the background count rate first, with the source away",
+            "Record the count rate from the source at regular time intervals",
+            "Subtract the background, then plot the corrected count rate against time",
+            "Draw a smooth curve; read the time for the count rate to halve, from several different starting points, and average",
+            "Long counting times reduce the random scatter in each reading"
+          ],
+          "notes": "Protactinium-234 (from a sealed generator) or a short-lived source from a simulation work well in school. HL students also linearize the data with ln (count rate) against time."
+        },
+        {
+          "type": "worked",
+          "title": "How much does the detector catch?",
+          "question": "A source with an activity of 3.0 kBq is placed in front of a detector, which records 450 counts per minute. The background is negligible. What fraction of the decays in the source does the detector record?",
+          "hint": "The activity is per second and the count rate is per minute: put them in the same unit first.",
+          "steps": [
+            {
+              "text": "Decays per minute in the source.",
+              "latex": "3000 \\times 60 = 1.8 \\times 10^{5}\\ \\text{min}^{-1}"
+            },
+            {
+              "text": "Fraction recorded.",
+              "latex": "\\dfrac{450}{1.8 \\times 10^{5}} = 2.5 \\times 10^{-3}"
+            },
+            {
+              "text": "Only 0.25% of the decays are counted."
+            }
+          ],
+          "notes": "Ask why: most of the radiation misses the window of the tube, some is absorbed on the way, and not every particle that enters the tube is counted."
+        },
+        {
+          "type": "worked",
+          "title": "Half-life from a table",
+          "question": "A student records the corrected count rate from a source every 10 minutes. The values, from t = 0 to t = 40 min, are 400, 317, 252, 200 and 159 counts per minute. Determine the half-life, using two different starting points.",
+          "hint": "Pick a reading, find the time at which the count rate is half of it, and repeat from another reading.",
+          "steps": [
+            {
+              "text": "From t = 0: the rate falls from 400 to 200 at t = 30 min.",
+              "latex": "T_{1/2} = 30 - 0 = 30\\ \\text{min}"
+            },
+            {
+              "text": "From t = 10 min: it falls from 317 to 159 at t = 40 min.",
+              "latex": "T_{1/2} = 40 - 10 = 30\\ \\text{min}"
+            },
+            {
+              "text": "Both give the same value, so the half-life is 30 min."
+            }
+          ],
+          "notes": "Real data scatter, so in practice the values differ a little and are averaged. The counts here have no scatter so the method is clear."
+        }
+      ]
+    },
+    {
+      "id": "halving",
+      "short": "Whole numbers of half-lives",
+      "guide": "The changes in activity and count rate during radioactive decay using integer values of half-life.",
+      "sections": [
+        "halflife",
+        "uses"
+      ],
+      "minutes": 40,
+      "checks": [
+        "E3-006"
+      ],
+      "aims": [
+        "Calculate the activity, count rate or fraction remaining after a whole number of half-lives.",
+        "Explain how half-life and type of radiation affect the choice of isotope for an application."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Fraction left after n half-lives",
+          "latex": [
+            "N = N_{0}\\left(\\tfrac{1}{2}\\right)^{n}",
+            "A = A_{0}\\left(\\tfrac{1}{2}\\right)^{n}"
+          ],
+          "bullets": [
+            "$n$ is the number of half-lives that have passed; at SL, a whole number",
+            "The same fraction applies to the count rate (after the background is removed)"
+          ],
+          "notes": "Not in the data booklet: students can always halve step by step instead."
+        },
+        {
+          "type": "derivation",
+          "title": "Where the halving rule comes from",
+          "start": "A sample starts with $N_{0}$ undecayed nuclei. In each half-life, half of those still undecayed decay.",
+          "steps": [
+            {
+              "text": "After one half-life",
+              "latex": "N = \\tfrac{1}{2}N_{0}"
+            },
+            {
+              "text": "After two half-lives, half of that is left",
+              "latex": "N = \\tfrac{1}{2} \\times \\tfrac{1}{2}N_{0} = \\tfrac{1}{4}N_{0}"
+            },
+            {
+              "text": "After three half-lives",
+              "latex": "N = \\tfrac{1}{8}N_{0}"
+            },
+            {
+              "text": "After $n$ half-lives, $n$ factors of one half",
+              "latex": "N = N_{0}\\left(\\tfrac{1}{2}\\right)^{n}"
+            }
+          ],
+          "notes": "The fraction that has decayed is 1 − (1/2)ⁿ: after three half-lives, 7/8 has decayed and 1/8 is left. Many exam slips come from mixing up the two."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for half-life problems",
+          "bullets": [
+            "Find the number of half-lives first: elapsed time ÷ half-life",
+            "Read carefully: is the question about the fraction <strong>left</strong> or the fraction <strong>decayed</strong>?",
+            "A ratio of daughter to parent of 3 : 1 means 1/4 of the parent is left (two half-lives)",
+            "Remove the background before halving a count rate, then add it back for what the detector reads",
+            "A half-life of 5 days does not mean the sample is gone in 10 days: a quarter is left"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A tracer for a PET scan",
+          "question": "Fluorine-18, used in PET scans, has a half-life of 110 minutes. A hospital receives a sample with an activity of 1600 MBq at 08:00. What is its activity at 13:30?",
+          "hint": "Work out the time that has passed in minutes, and how many half-lives that is.",
+          "steps": [
+            {
+              "text": "Time elapsed: 5.5 hours.",
+              "latex": "t = 5.5 \\times 60 = 330\\ \\text{min}"
+            },
+            {
+              "text": "Number of half-lives.",
+              "latex": "n = \\dfrac{330}{110} = 3"
+            },
+            {
+              "text": "Halve three times.",
+              "latex": "1600 \\rightarrow 800 \\rightarrow 400 \\rightarrow 200\\ \\text{MBq}"
+            }
+          ],
+          "notes": "Fluorine-18 is made in a cyclotron, often at another site. Its short half-life is why the delivery has to be fast and the dose ordered with the decay in mind."
+        },
+        {
+          "type": "worked",
+          "title": "Parent and daughter",
+          "question": "Phosphorus-32 decays by beta-minus emission to stable sulfur-32, with a half-life of 14.3 days. A sample is pure phosphorus-32 at first. After how long are there 7 sulfur-32 nuclei for every phosphorus-32 nucleus?",
+          "hint": "Out of every 8 nuclei, how many are still phosphorus-32? Express that as a fraction of the starting number.",
+          "steps": [
+            {
+              "text": "A ratio of 7 : 1 means 1 nucleus in 8 is still phosphorus-32.",
+              "latex": "\\dfrac{N}{N_{0}} = \\dfrac{1}{8} = \\left(\\tfrac{1}{2}\\right)^{3}"
+            },
+            {
+              "text": "So three half-lives have passed.",
+              "latex": "t = 3 \\times 14.3 = 42.9 \\approx 43\\ \\text{days}"
+            }
+          ],
+          "notes": "The common slip is to take the ratio 7 : 1 as \"1/7 left\". Each decay turns one parent into one daughter, so the total number of nuclei stays the same."
+        },
+        {
+          "type": "bullets",
+          "title": "Choosing an isotope",
+          "bullets": [
+            "<strong>Medical tracer</strong>: a gamma emitter (it must escape the body), with a half-life of hours: long enough for the scan, short enough to limit the dose",
+            "<strong>Leak in an underground pipe</strong>: a gamma emitter with a short half-life, added to the fluid; the count rate rises above the leak",
+            "<strong>Thickness of paper or plastic</strong>: a beta source with a long half-life, so that changes in count rate come from the thickness, not from decay",
+            "<strong>Dating</strong>: carbon-14 (half-life 5730 years) for wood, bone or cloth up to tens of thousands of years old; nuclides with half-lives of billions of years for rocks"
+          ],
+          "notes": "These are the guide's required real-life contexts. For each, ask students to justify both the radiation and the half-life; an alpha source for the paper gauge, for example, would be stopped completely."
+        }
+      ]
+    },
+    {
+      "id": "background",
+      "short": "Background radiation",
+      "guide": "The effect of background radiation on count rate.",
+      "sections": [
+        "background"
+      ],
+      "minutes": 25,
+      "checks": [
+        "E3-007"
+      ],
+      "aims": [
+        "List the main sources of background radiation.",
+        "Correct count rates for background, and explain why the background does not halve."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Background radiation",
+          "bullets": [
+            "Ionizing radiation that is always present, from natural and artificial sources",
+            "Natural: radon gas from rocks and soil (the largest part), the ground and building materials, food and drink, cosmic rays",
+            "Artificial: mostly medical (X-rays and CT scans), with tiny amounts from past weapons tests and the nuclear industry",
+            "It varies from place to place (rock type, altitude) but is roughly constant in one place",
+            "World average: about 3 mSv per year per person"
+          ],
+          "notes": "The sievert (dose) is not on the syllabus; the figure is only for scale. Medical exposure is a much bigger share in some countries than the world average."
+        },
+        {
+          "type": "bullets",
+          "title": "Correcting for background",
+          "bullets": [
+            "Measure the background with the source removed, over a long time (several minutes) to reduce the random scatter",
+            "Corrected count rate = measured count rate − background count rate",
+            "Only the source decays: the background stays the same",
+            "When the source is weak, the background is a large part of every reading, so the correction matters most"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A half-life hidden by background",
+          "question": "A detector near a source records 290 counts per minute. Two hours later it records 80 counts per minute. The background count rate is 10 counts per minute. Find the half-life of the source.",
+          "hint": "Correct both readings for background first, then see how many times the corrected rate has halved.",
+          "steps": [
+            {
+              "text": "Correct the first reading for background.",
+              "latex": "290 - 10 = 280\\ \\text{min}^{-1}"
+            },
+            {
+              "text": "Correct the second reading.",
+              "latex": "80 - 10 = 70\\ \\text{min}^{-1}"
+            },
+            {
+              "text": "Halving: 280 → 140 → 70, so two half-lives in 2.0 hours.",
+              "latex": "T_{1/2} = \\dfrac{2.0}{2} = 1.0\\ \\text{h}"
+            }
+          ],
+          "notes": "Without the correction, 290 → 80 is a fall by a factor of 3.6, which is not a whole number of halvings and would give a half-life that is too long."
+        }
+      ]
+    },
+    {
+      "id": "mass-energy",
+      "short": "Mass–energy equivalence",
+      "guide": "The mass-energy equivalence as given by E = mc² in nuclear reactions.",
+      "sections": [
+        "binding"
+      ],
+      "minutes": 30,
+      "checks": [
+        "E3-011"
+      ],
+      "aims": [
+        "Use $E = mc^{2}$ to find the energy released in a nuclear reaction or decay from the change in mass.",
+        "Convert masses between kg, u and $\\text{MeV}\\,c^{-2}$."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Mass–energy equivalence",
+          "latex": "E = mc^{2}",
+          "bullets": [
+            "Mass and energy are equivalent: a change in one is a change in the other",
+            "The energy a nuclear reaction releases equals $\\Delta m\\,c^{2}$, with $\\Delta m$ = mass before − mass after",
+            "$1\\ \\text{u} = 1.661 \\times 10^{-27}\\ \\text{kg} = 931.5\\ \\text{MeV}\\,c^{-2}$"
+          ],
+          "notes": "The equation and both values of u are in the data booklet. The unified atomic mass unit is one twelfth of the mass of a carbon-12 atom."
+        },
+        {
+          "type": "derivation",
+          "title": "Where 931.5 MeV comes from",
+          "start": "Find the energy equivalent of a mass of 1 u, in MeV. The constants are needed to five significant figures, because the answer is quoted to four.",
+          "steps": [
+            {
+              "text": "Mass–energy equivalence",
+              "latex": "E = mc^{2}"
+            },
+            {
+              "text": "Square the speed of light, $c = 2.99792 \\times 10^{8}\\ \\text{m s}^{-1}$",
+              "latex": "c^{2} = 8.98755 \\times 10^{16}\\ \\text{m}^{2}\\,\\text{s}^{-2}"
+            },
+            {
+              "text": "Multiply by 1 u in kg",
+              "latex": "E = 1.66054 \\times 10^{-27} \\times c^{2}"
+            },
+            {
+              "text": "In joules",
+              "latex": "E = 1.49241 \\times 10^{-10}\\ \\text{J}"
+            },
+            {
+              "text": "Divide by the joules in 1 MeV ($1.60218 \\times 10^{-13}$ J)",
+              "latex": "E = \\dfrac{1.49241 \\times 10^{-10}}{1.60218 \\times 10^{-13}} = 931.5\\ \\text{MeV}"
+            }
+          ],
+          "notes": "If students repeat this with the booklet's rounded values (c = 3.00 × 10⁸ m s⁻¹, e = 1.60 × 10⁻¹⁹ C), they get about 934 MeV: rounding to three figures changes the fourth. That is why the booklet gives 931.5 MeV separately, and they should use it rather than recalculate it. So a mass in u times 931.5 gives an energy in MeV, and a mass in MeV c⁻² is an energy in MeV divided by c²."
+        },
+        {
+          "type": "bullets",
+          "title": "Using mass–energy equivalence",
+          "bullets": [
+            "With masses in u, multiply $\\Delta m$ by 931.5 to get the energy in MeV; for joules, use kg and $c^{2}$",
+            "Keep every decimal place until after the subtraction: the mass change is tiny compared with the masses",
+            "Atomic masses include electrons; they cancel in alpha decay when you use atomic masses on both sides",
+            "1 MeV = $1.60 \\times 10^{-13}$ J"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A year of electricity",
+          "question": "A power station delivers 1.0 GW of electrical power for one year ($3.16 \\times 10^{7}$ s). Find the mass equivalent of the electrical energy delivered.",
+          "hint": "Find the energy from power × time, then rearrange $E = mc^{2}$.",
+          "steps": [
+            {
+              "text": "Energy delivered.",
+              "latex": "E = Pt = 1.0 \\times 10^{9} \\times 3.16 \\times 10^{7}"
+            },
+            {
+              "latex": "E = 3.16 \\times 10^{16}\\ \\text{J}"
+            },
+            {
+              "text": "Rearrange for the mass.",
+              "latex": "m = \\dfrac{E}{c^{2}} = \\dfrac{3.16 \\times 10^{16}}{(3.00 \\times 10^{8})^{2}} = 0.35\\ \\text{kg}"
+            }
+          ],
+          "notes": "A third of a kilogram for a year of a large power station's output. In a nuclear power station, the fuel loses more than this, because only about a third of the energy released becomes electrical energy (E.4)."
+        },
+        {
+          "type": "worked",
+          "title": "Energy from an alpha decay",
+          "question": "Uranium-238 decays by alpha emission to thorium-234. The atomic masses are: uranium-238, 238.050788 u; thorium-234, 234.043601 u; helium-4, 4.002603 u. Find the energy released, in MeV and in J.",
+          "hint": "Find the total mass of the products and subtract it from the mass of the uranium atom. Then convert using 931.5 MeV per u.",
+          "steps": [
+            {
+              "text": "Total mass after the decay.",
+              "latex": "234.043601 + 4.002603 = 238.046204\\ \\text{u}"
+            },
+            {
+              "text": "Mass lost: 238.050788 − 238.046204.",
+              "latex": "\\Delta m = 0.004584\\ \\text{u}"
+            },
+            {
+              "text": "Energy in MeV.",
+              "latex": "E = 0.004584 \\times 931.5 = 4.27\\ \\text{MeV}"
+            },
+            {
+              "text": "Energy in joules, using 1 MeV = 1.60 × 10⁻¹³ J.",
+              "latex": "E = 6.83 \\times 10^{-13}\\ \\text{J}"
+            }
+          ],
+          "notes": "Nearly all of this energy is carried away by the alpha particle as kinetic energy (the heavy thorium nucleus recoils slowly, as in an explosion in A.2)."
+        }
+      ]
+    },
+    {
+      "id": "binding",
+      "short": "Binding energy and mass defect",
+      "guide": "Nuclear binding energy and mass defect.",
+      "sections": [
+        "binding"
+      ],
+      "minutes": 40,
+      "checks": [
+        "E3-003"
+      ],
+      "aims": [
+        "Define mass defect and nuclear binding energy.",
+        "Calculate the binding energy and the binding energy per nucleon of a nucleus."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Mass defect and binding energy",
+          "bullets": [
+            "A nucleus has <strong>less</strong> mass than the protons and neutrons that make it up, measured separately",
+            "<strong>Mass defect</strong> $\\Delta m$: the total mass of the separate nucleons minus the mass of the nucleus",
+            "<strong>Binding energy</strong>: the work that must be done to pull a nucleus apart into separate protons and neutrons",
+            "The same energy is released when the nucleus forms from separate nucleons",
+            "Binding energy is not energy stored in the nucleus: a nucleus with more binding energy has less energy and less mass"
+          ],
+          "notes": "The last point is the most common misconception. Compare with a ball in a hole: the deeper the hole, the more energy is needed to get it out, and the less energy the ball has."
+        },
+        {
+          "type": "equation",
+          "title": "Mass defect and binding energy",
+          "latex": [
+            "\\Delta m = Zm_{p} + (A - Z)m_{n} - M_{\\text{nucleus}}",
+            "E_{b} = \\Delta m\\,c^{2}"
+          ],
+          "bullets": [
+            "$m_{p}$ and $m_{n}$ are in the data booklet, in kg, u and $\\text{MeV}\\,c^{-2}$",
+            "Binding energy per nucleon = $E_{b}/A$"
+          ],
+          "notes": "Neither of these is printed in the data booklet; students build them from the definitions. If an atomic mass is given, subtract Z electron masses to get the nuclear mass (or use hydrogen-1 atoms in place of protons, so the electrons cancel)."
+        },
+        {
+          "type": "worked",
+          "title": "The deuteron",
+          "question": "A deuteron (the nucleus of hydrogen-2) has a mass of 2.013553 u. Find (a) its mass defect, (b) its binding energy in MeV and (c) its binding energy per nucleon.",
+          "hint": "A deuteron has one proton and one neutron. Take their masses from the data booklet.",
+          "steps": [
+            {
+              "text": "Mass of the separate nucleons.",
+              "latex": "1.007276 + 1.008665 = 2.015941\\ \\text{u}"
+            },
+            {
+              "text": "(a) Mass defect: 2.015941 − 2.013553.",
+              "latex": "\\Delta m = 0.002388\\ \\text{u}"
+            },
+            {
+              "text": "(b) Binding energy.",
+              "latex": "E_{b} = 0.002388 \\times 931.5 = 2.22\\ \\text{MeV}"
+            },
+            {
+              "text": "(c) Two nucleons.",
+              "latex": "\\dfrac{2.22}{2} = 1.11\\ \\text{MeV per nucleon}"
+            }
+          ],
+          "notes": "Experiments confirm this: a gamma photon needs at least 2.22 MeV to split a deuteron, and a photon of this energy is emitted when a neutron is captured by a proton."
+        }
+      ]
+    },
+    {
+      "id": "curve",
+      "short": "Binding energy per nucleon",
+      "guide": "The variation of the binding energy per nucleon with nucleon number.",
+      "sections": [
+        "curve"
+      ],
+      "minutes": 30,
+      "checks": [
+        "E3-008"
+      ],
+      "aims": [
+        "Describe and explain the shape of the graph of binding energy per nucleon against nucleon number.",
+        "Use the graph to explain why fusion of light nuclei and fission of heavy nuclei release energy."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The binding energy curve",
+          "bullets": [
+            "Binding energy per nucleon shows how tightly each nucleon is held: the higher, the more stable the nucleus",
+            "It rises steeply for light nuclei, as each added nucleon has more neighbours to bond with",
+            "Helium-4 is unusually high for its size",
+            "It peaks around iron and nickel (A ≈ 56–62), the most tightly bound nuclei",
+            "It falls slowly for heavy nuclei, as the repulsion between all the protons grows"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Binding energy per nucleon",
+          "figure": "e3at",
+          "bullets": [
+            "Fusion: light nuclei join and move up the curve",
+            "Fission: a heavy nucleus splits and its fragments move up the curve",
+            "Moving up the curve releases energy"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Reading the curve",
+          "bullets": [
+            "Total binding energy of a nucleus = binding energy per nucleon × A",
+            "Energy released in a reaction = total binding energy after − total binding energy before",
+            "Nucleons are only rearranged, so a rise in binding energy means a fall in mass",
+            "No energy can be released by fusing or splitting iron-56: either way moves down the curve"
+          ],
+          "notes": "This is the \"interpretation of binding energy curves\" the guide requires. E.4 and E.5 use it for fission and fusion."
+        },
+        {
+          "type": "worked",
+          "title": "Two deuterons make helium",
+          "question": "The binding energy of a deuteron is 2.22 MeV. The binding energy per nucleon of helium-4, read from the curve, is about 7.1 MeV. Estimate the energy released if two deuterons join to form a helium-4 nucleus.",
+          "hint": "Find the total binding energy before and after. The energy released is the increase.",
+          "steps": [
+            {
+              "text": "Total binding energy before: two deuterons.",
+              "latex": "2 \\times 2.22 = 4.4\\ \\text{MeV}"
+            },
+            {
+              "text": "After: four nucleons in helium-4.",
+              "latex": "4 \\times 7.1 = 28\\ \\text{MeV}"
+            },
+            {
+              "text": "Energy released.",
+              "latex": "28 - 4.4 \\approx 24\\ \\text{MeV}"
+            }
+          ],
+          "notes": "This is a fusion reaction (E.5). The large jump from deuterium to helium-4 on the curve is why fusing hydrogen into helium powers the stars."
+        }
+      ]
+    },
+    {
+      "id": "beta-spectrum",
+      "hl": true,
+      "short": "Beta spectrum and the neutrino",
+      "guide": "The continuous spectrum of beta decay as evidence for the neutrino.",
+      "sections": [
+        "betaspec"
+      ],
+      "minutes": 30,
+      "checks": [
+        "E3-018"
+      ],
+      "aims": [
+        "Describe the energy spectrum of beta particles.",
+        "Explain why a continuous beta spectrum is evidence for the neutrino."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The puzzle of the beta spectrum",
+          "bullets": [
+            "Each beta decay of a nuclide releases the same energy, fixed by the masses before and after",
+            "If only the electron and the daughter nucleus were produced, conservation of energy and momentum would give the electron the same energy every time",
+            "Instead, beta particles have a <strong>continuous</strong> range of energies, from almost zero up to a maximum",
+            "The maximum equals the energy released in the decay"
+          ],
+          "notes": "Compare alpha decay, a genuine two-body decay: its alpha particles all come out with the same energy (or one of a few energies)."
+        },
+        {
+          "type": "bullets",
+          "title": "A third particle",
+          "bullets": [
+            "Pauli (1930) proposed a third, uncharged particle that carries off the missing energy and momentum",
+            "In each decay the energy is shared differently between the electron and the (anti)neutrino",
+            "So the continuous spectrum is evidence for the neutrino, and energy is conserved in every single decay",
+            "The neutrino was detected directly in 1956"
+          ],
+          "notes": "Some physicists, including Bohr, were ready to give up exact energy conservation. Keeping the conservation law and predicting a new particle turned out to be right: a good NoS example of a hypothesis tested later."
+        },
+        {
+          "type": "diagram",
+          "title": "Alpha and beta spectra",
+          "figure": "e3et"
+        },
+        {
+          "type": "worked",
+          "title": "Sharing the energy",
+          "question": "In the beta-minus decay of tritium (hydrogen-3), the maximum kinetic energy of the electrons is 18.6 keV. In one decay, the electron has a kinetic energy of 5.0 keV. Estimate the energy of the antineutrino in that decay. Ignore the recoil of the helium-3 nucleus.",
+          "hint": "The maximum electron energy is the total energy released. Where does the rest go when the electron gets less?",
+          "steps": [
+            {
+              "text": "The total energy released is the maximum electron energy, 18.6 keV."
+            },
+            {
+              "text": "The antineutrino carries the rest.",
+              "latex": "E_{\\bar{\\nu}} = 18.6 - 5.0 = 13.6\\ \\text{keV}"
+            }
+          ],
+          "notes": "Tritium's low maximum energy makes it the nuclide used to measure the neutrino's tiny mass: the shape of the spectrum right at the end point depends on it."
+        }
+      ]
+    },
+    {
+      "id": "levels",
+      "hl": true,
+      "short": "Nuclear energy levels",
+      "guide": "That the spectrum of alpha and gamma radiations provides evidence for discrete nuclear energy levels.",
+      "sections": [
+        "levels"
+      ],
+      "minutes": 35,
+      "checks": [
+        "E3-020"
+      ],
+      "aims": [
+        "Explain how the discrete energies of alpha particles and gamma rays show that nuclei have energy levels.",
+        "Calculate a gamma-ray photon energy from the energies of alpha particles."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Evidence for nuclear energy levels",
+          "bullets": [
+            "Alpha particles from one nuclide have one or a few sharp, <strong>discrete</strong> energies",
+            "Each alpha energy matches a different energy level in which the daughter is left",
+            "A daughter left in an excited level then emits a gamma photon as it drops to a lower level",
+            "Gamma rays from a nuclide form a <strong>line spectrum</strong>: each photon energy is the difference between two levels",
+            "The energies fit together: alpha energy + gamma energy is the same for each route"
+          ],
+          "notes": "This parallels atomic line spectra in E.1, but nuclear levels are spaced by keV to MeV, thousands to millions of times the eV spacing of atomic levels. That links to the guide's question about photons from atomic and nuclear transitions."
+        },
+        {
+          "type": "diagram",
+          "title": "Alpha decay, then gamma",
+          "svg": "figures/e3-alpha-gamma-levels.svg",
+          "alt": "An energy-level diagram. From the parent nucleus, a higher-energy alpha decay goes straight to the ground state of the daughter nucleus; a lower-energy alpha decay goes to an excited state of the daughter. The excited state then drops to the ground state by emitting a gamma photon.",
+          "bullets": [
+            "Some decays go straight to the daughter's ground state",
+            "Others leave the daughter in an excited state",
+            "The excited state then emits a gamma photon with a definite energy"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Two alpha groups",
+          "question": "A nuclide emits alpha particles with two energies, 6.05 MeV and 5.68 MeV. The lower-energy alpha decays leave the daughter nucleus in an excited state, which then emits a gamma photon. Ignore the recoil of the nucleus. Find (a) the energy of the gamma photon and (b) its wavelength.",
+          "hint": "Both routes start and end at the same energies. Whatever the alpha particle doesn't carry, the photon must.",
+          "steps": [
+            {
+              "text": "(a) Difference between the two alpha energies.",
+              "latex": "E_{\\gamma} = 6.05 - 5.68 = 0.37\\ \\text{MeV}"
+            },
+            {
+              "text": "(b) Photon energy in joules, using 1 MeV = 1.60 × 10⁻¹³ J.",
+              "latex": "E_{\\gamma} = 5.9 \\times 10^{-14}\\ \\text{J}"
+            },
+            {
+              "text": "Photon wavelength.",
+              "latex": "\\lambda = \\dfrac{hc}{E} = \\dfrac{6.63 \\times 10^{-34} \\times 3.00 \\times 10^{8}}{5.9 \\times 10^{-14}}"
+            },
+            {
+              "latex": "\\lambda = 3.4 \\times 10^{-12}\\ \\text{m}"
+            }
+          ],
+          "notes": "A picometre wavelength: far shorter than visible light (about 500 nm), which is why nuclear photons are gamma rays. Sketching the two routes on an energy-level diagram helps."
+        }
+      ]
+    },
+    {
+      "id": "stability",
+      "hl": true,
+      "short": "Neutron–proton ratio",
+      "guide": "The role of the ratio of neutrons to protons for the stability of nuclides.",
+      "sections": [
+        "stability"
+      ],
+      "minutes": 30,
+      "checks": [
+        "E3-019"
+      ],
+      "aims": [
+        "Describe the band of stability on a graph of neutron number against proton number.",
+        "Predict how an unstable nuclide will decay from its position relative to the band."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The band of stability",
+          "bullets": [
+            "Plot neutron number $N$ against proton number $Z$ for all stable nuclides: they lie in a narrow band",
+            "Light stable nuclides: $N \\approx Z$",
+            "Heavier ones need more neutrons, to dilute the electric repulsion: about 1.5 neutrons per proton by lead",
+            "No nuclide beyond bismuth (Z = 83) is stable"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Neutron number against proton number",
+          "figure": "e3dt",
+          "bullets": [
+            "Above the band (too many neutrons): β⁻ decay",
+            "Below the band (too many protons): β⁺ decay",
+            "Very heavy nuclides: alpha decay"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Moving towards the band",
+          "bullets": [
+            "β⁻ decay turns a neutron into a proton: N falls by 1, Z rises by 1",
+            "β⁺ decay turns a proton into a neutron: N rises by 1, Z falls by 1",
+            "Alpha decay removes 2 of each, so it reduces A quickly; for heavy nuclides it also raises N/Z slightly",
+            "A decay chain usually needs both alpha and beta-minus decays to reach the band"
+          ],
+          "notes": "On the graph, a beta-minus decay moves a nuclide diagonally one step down and to the right, towards the band."
+        },
+        {
+          "type": "worked",
+          "title": "Two isotopes of carbon",
+          "question": "Carbon ($Z = 6$) has two radioactive isotopes, carbon-11 and carbon-14. The stable isotopes are carbon-12 and carbon-13. Predict how each radioactive isotope decays, and name the daughter nuclide.",
+          "hint": "Compare each isotope's neutron number with those of the stable isotopes. Too many neutrons, or too few?",
+          "steps": [
+            {
+              "text": "Carbon-14: 8 neutrons, more than the stable isotopes. Too many neutrons: β⁻ decay.",
+              "latex": "\\dfrac{N}{Z} = \\dfrac{8}{6} = 1.33"
+            },
+            {
+              "text": "Z rises to 7: the daughter is nitrogen-14."
+            },
+            {
+              "text": "Carbon-11: 5 neutrons, fewer than the stable isotopes. Too few neutrons: β⁺ decay.",
+              "latex": "\\dfrac{N}{Z} = \\dfrac{5}{6} = 0.83"
+            },
+            {
+              "text": "Z falls to 5: the daughter is boron-11."
+            }
+          ],
+          "notes": "Carbon-11 is used in PET scans, because the positron it emits annihilates with an electron to give two gamma photons travelling in opposite directions."
+        }
+      ]
+    },
+    {
+      "id": "strong-evidence",
+      "hl": true,
+      "short": "Evidence for the strong force",
+      "guide": "The evidence for the strong nuclear force.",
+      "sections": [
+        "evidence",
+        "strong"
+      ],
+      "minutes": 30,
+      "checks": [
+        "E3-024"
+      ],
+      "aims": [
+        "Outline the evidence for the strong nuclear force.",
+        "State the range of the strong nuclear force (of order $10^{-15}$ m)."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Evidence for the strong nuclear force",
+          "bullets": [
+            "<strong>Nuclei exist</strong>: protons stay packed together despite their electric repulsion, and gravity is about 10³⁶ times too weak to help",
+            "<strong>Scattering</strong>: high-energy alpha particles that get close enough to a nucleus do not follow the pattern the electric force alone predicts (E.1)",
+            "<strong>Constant nuclear density</strong>: nucleons pack like drops of liquid, so the force holds only near neighbours",
+            "<strong>Binding energy per nucleon</strong> is roughly constant for large nuclei (next point)"
+          ],
+          "notes": "Rutherford's own scattering results followed the Coulomb prediction because his alpha particles never got close enough; higher-energy alphas on light nuclei showed the deviations."
+        },
+        {
+          "type": "bullets",
+          "title": "The range of the strong force",
+          "bullets": [
+            "Its range: of order $10^{-15}$ m, roughly one nucleon diameter",
+            "It is attractive between neighbouring nucleons, and acts on protons and neutrons alike",
+            "Beyond a few nucleon diameters it is negligible, while the electric repulsion continues across the whole nucleus",
+            "This is why large nuclei need extra neutrons, and why the heaviest nuclei are unstable"
+          ],
+          "notes": "New for exams from 2028. The 2028 guide asks HL students to know that the range is of order 10⁻¹⁵ m. At even shorter distances (below about 0.5 × 10⁻¹⁵ m) the force becomes repulsive, which stops nucleons merging; this is background, not required."
+        }
+      ]
+    },
+    {
+      "id": "constancy",
+      "hl": true,
+      "short": "Binding energy above A = 60",
+      "guide": "The approximate constancy of binding energy curve above a nucleon number of 60.",
+      "sections": [
+        "evidence",
+        "curve"
+      ],
+      "minutes": 25,
+      "checks": [
+        "E3-008"
+      ],
+      "aims": [
+        "Describe the approximate constancy of the binding energy per nucleon above A = 60.",
+        "Explain how this shows that the strong force acts only between neighbouring nucleons."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What the flat curve tells us",
+          "bullets": [
+            "If every nucleon attracted every other, the number of attracting pairs would grow like A², and the binding energy per nucleon would grow steadily with A",
+            "Instead, each nucleon bonds only to the few nucleons touching it, so adding nucleons adds a fixed amount of binding energy each",
+            "So the strong force has a short range",
+            "The slow fall for the heaviest nuclei comes from the long-range electric repulsion, which acts between every pair of protons"
+          ],
+          "notes": "A crowd analogy: in a large crowd, each person can only hold hands with their neighbours, so the number of handholds per person stays the same however big the crowd."
+        },
+        {
+          "type": "worked",
+          "title": "Testing a long-range force",
+          "question": "Suppose every nucleon attracted every other one equally. Then the binding energy per nucleon would be proportional to $(A - 1)$, the number of other nucleons each one attracts. (a) By what factor would the binding energy per nucleon increase from A = 56 to A = 238? (b) The measured values are 8.79 MeV (iron-56) and 7.57 MeV (uranium-238). What does this show?",
+          "hint": "Compare the number of partners each nucleon would have in the two nuclei. Then compare the prediction with the measured ratio.",
+          "steps": [
+            {
+              "text": "(a) Ratio of the numbers of partners.",
+              "latex": "\\dfrac{238 - 1}{56 - 1} = \\dfrac{237}{55} = 4.3"
+            },
+            {
+              "text": "(b) Measured ratio.",
+              "latex": "\\dfrac{7.57}{8.79} = 0.86"
+            },
+            {
+              "text": "Instead of rising more than four times, it falls slightly: each nucleon does not attract all the others, so the force must be short-range."
+            }
+          ],
+          "notes": "The slight fall comes from the extra electric repulsion in uranium, which a short-range attraction cannot fully balance."
+        }
+      ]
+    },
+    {
+      "id": "decay-law",
+      "hl": true,
+      "short": "The radioactive decay law",
+      "guide": "The decay constant λ and the radioactive decay law as given by $N = N_0e^{-\\lambda t}$.",
+      "sections": [
+        "law"
+      ],
+      "minutes": 30,
+      "checks": [
+        "E3-016"
+      ],
+      "aims": [
+        "Use $N = N_{0}e^{-\\lambda t}$ to describe the number of undecayed nuclei at any time.",
+        "Explain why a graph of $\\ln A$ against time is a straight line with gradient $-\\lambda$."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The decay constant",
+          "bullets": [
+            "The rate of decay of a sample is proportional to the number of undecayed nuclei: twice as many nuclei, twice as many decays per second",
+            "The constant of proportionality is the <strong>decay constant</strong> $\\lambda$, fixed for each nuclide",
+            "Unit: $\\text{s}^{-1}$ (or $\\text{h}^{-1}$, $\\text{y}^{-1}$...)",
+            "A large $\\lambda$ means a fast decay and a short half-life",
+            "A quantity that falls at a rate proportional to itself decays exponentially"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "The radioactive decay law",
+          "latex": "N = N_{0}e^{-\\lambda t}",
+          "bullets": [
+            "$N_{0}$: the number of undecayed nuclei at $t = 0$",
+            "It works for any time, not just whole numbers of half-lives",
+            "$\\lambda$ and $t$ must use the same time unit"
+          ],
+          "notes": "In the data booklet. The same form applies to activity and to corrected count rate."
+        },
+        {
+          "type": "derivation",
+          "title": "A straight-line graph from the decay law",
+          "start": "Experiments give count rates, which are proportional to $N$, so $A = A_{0}e^{-\\lambda t}$ too. Take natural logs to get a straight line.",
+          "steps": [
+            {
+              "text": "Start from the decay law for activity",
+              "latex": "A = A_{0}e^{-\\lambda t}"
+            },
+            {
+              "text": "Take natural logs of both sides",
+              "latex": "\\ln A = \\ln\\left(A_{0}e^{-\\lambda t}\\right)"
+            },
+            {
+              "text": "The log of a product is a sum, and $\\ln e^{x} = x$",
+              "latex": "\\ln A = \\ln A_{0} - \\lambda t"
+            },
+            {
+              "text": "Compare with $y = c + mx$: a graph of $\\ln A$ against $t$ is a straight line",
+              "latex": "\\text{gradient} = -\\lambda"
+            }
+          ],
+          "notes": "This is the most reliable way to find λ, and so the half-life, from experimental data: the line of best fit uses every reading."
+        },
+        {
+          "type": "diagram",
+          "title": "A graph of ln A against time",
+          "svg": "figures/e3-ln-activity.svg",
+          "alt": "Graph of ln A against time t. Experimental points scatter slightly about a straight line of best fit with negative gradient. The intercept on the vertical axis is ln A zero. A gradient triangle shows a change in time and the corresponding change in ln A, with the gradient labelled minus lambda.",
+          "bullets": [
+            "The points lie close to a straight line",
+            "Gradient $= -\\lambda$; intercept $= \\ln A_0$",
+            "A line of best fit uses every reading, not just two"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Using the decay law",
+          "bullets": [
+            "To find a time, rearrange with logs: $t = \\dfrac{1}{\\lambda}\\ln\\dfrac{N_{0}}{N}$",
+            "Use $\\ln$, not $\\log_{10}$",
+            "Activity in Bq needs $\\lambda$ in $\\text{s}^{-1}$; a time in years needs $\\lambda$ in $\\text{y}^{-1}$",
+            "Check with half-lives: after 2.5 half-lives the fraction left is between 1/4 and 1/8 (about 0.18)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "half-life-constant",
+      "hl": true,
+      "short": "Half-life and the decay constant",
+      "guide": "The relationship between half-life and the decay constant as given by $T_{\\frac{1}{2}} = \\dfrac{\\ln 2}{\\lambda}$.",
+      "sections": [
+        "activity",
+        "law"
+      ],
+      "minutes": 60,
+      "checks": [
+        "E3-015"
+      ],
+      "aims": [
+        "Derive $T_{1/2} = \\dfrac{\\ln 2}{\\lambda}$ from the decay law.",
+        "Use the half-life and decay constant for any time interval, including finding them from a graph of ln A against time."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Half-life and decay constant",
+          "latex": "T_{1/2} = \\dfrac{\\ln 2}{\\lambda}",
+          "bullets": [
+            "$\\ln 2 = 0.693$",
+            "The half-life and the decay constant are inversely proportional"
+          ],
+          "notes": "In the data booklet."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the half-life",
+          "start": "After one half-life, half of the nuclei are left: $N = \\tfrac{1}{2}N_{0}$ when $t = T_{1/2}$.",
+          "steps": [
+            {
+              "text": "Substitute into the decay law",
+              "latex": "\\tfrac{1}{2}N_{0} = N_{0}e^{-\\lambda T_{1/2}}"
+            },
+            {
+              "text": "Cancel $N_{0}$",
+              "latex": "\\tfrac{1}{2} = e^{-\\lambda T_{1/2}}"
+            },
+            {
+              "text": "Take the reciprocal of both sides",
+              "latex": "2 = e^{\\lambda T_{1/2}}"
+            },
+            {
+              "text": "Take natural logs and rearrange",
+              "latex": "\\lambda T_{1/2} = \\ln 2 \\;\\Rightarrow\\; T_{1/2} = \\dfrac{\\ln 2}{\\lambda}"
+            }
+          ],
+          "notes": "Taking the reciprocal avoids the minus sign that comes from ln(1/2) = −ln 2. Either route is fine."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips",
+          "bullets": [
+            "For a fraction left after a time that isn't a whole number of half-lives, use $e^{-\\lambda t}$ or $\\left(\\tfrac{1}{2}\\right)^{t/T_{1/2}}$: they give the same answer",
+            "Keep units consistent: a half-life in days gives λ per day",
+            "Check that a long half-life gives a small decay constant"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Radon in a sealed jar",
+          "question": "Radon-222 has a half-life of 3.82 days. A sealed jar contains a sample of radon-222. Find (a) the decay constant in $\\text{s}^{-1}$ and (b) the time for the activity to fall to 10% of its starting value.",
+          "hint": "Convert the half-life to seconds for (a). For (b), any time unit works if $\\lambda$ and $t$ match: try days.",
+          "steps": [
+            {
+              "text": "(a) Half-life in seconds.",
+              "latex": "T_{1/2} = 3.82 \\times 86\\,400 = 3.30 \\times 10^{5}\\ \\text{s}"
+            },
+            {
+              "text": "Decay constant.",
+              "latex": "\\lambda = \\dfrac{\\ln 2}{3.30 \\times 10^{5}} = 2.10 \\times 10^{-6}\\ \\text{s}^{-1}"
+            },
+            {
+              "text": "(b) In days, the decay constant is 0.693 ÷ 3.82.",
+              "latex": "\\lambda = 0.181\\ \\text{d}^{-1}"
+            },
+            {
+              "text": "Rearrange the decay law with logs.",
+              "latex": "t = \\dfrac{\\ln(1/0.10)}{0.181} = 12.7\\ \\text{days}"
+            }
+          ],
+          "notes": "A check: 10% is between 1/8 (3 half-lives, 11.5 days) and 1/16 (4 half-lives, 15.3 days), so 12.7 days is sensible. Radon from rocks is the largest natural source of background radiation."
+        },
+        {
+          "type": "worked",
+          "title": "Half-life from a log graph",
+          "question": "A student plots $\\ln(\\text{corrected count rate})$ against time $t$ in minutes. The best-fit line passes through (0, 6.709) and (25.0, 5.541). Find (a) the decay constant and (b) the half-life.",
+          "hint": "The gradient of the line is $-\\lambda$. Then use the half-life relationship.",
+          "steps": [
+            {
+              "text": "(a) Gradient of the line: (5.541 − 6.709) ÷ 25.0.",
+              "latex": "\\text{gradient} = -0.0467\\ \\text{min}^{-1}"
+            },
+            {
+              "text": "So the decay constant is",
+              "latex": "\\lambda = 0.0467\\ \\text{min}^{-1}"
+            },
+            {
+              "text": "(b) Half-life.",
+              "latex": "T_{1/2} = \\dfrac{\\ln 2}{0.0467} = 14.8\\ \\text{min}"
+            }
+          ],
+          "notes": "The intercept 6.709 = ln 820, so the starting corrected count rate was 820 per minute. Ask why the background must be subtracted before taking logs."
+        }
+      ]
+    },
+    {
+      "id": "probability",
+      "hl": true,
+      "short": "Decay constant as a probability",
+      "guide": "That the decay constant approximates the probability of decay in unit time only in the limit of sufficiently small λt.",
+      "sections": [
+        "law"
+      ],
+      "minutes": 25,
+      "aims": [
+        "Explain why, over a short time $\\Delta t$, $\\lambda\\Delta t$ approximates the chance of one nucleus decaying.",
+        "Show that the approximation fails when $\\lambda t$ is not small."
+      ],
+      "slides": [
+        {
+          "type": "derivation",
+          "title": "The probability of decay",
+          "start": "Any one nucleus survives a time $t$ with probability $N/N_{0}$, the fraction of the sample that survives.",
+          "steps": [
+            {
+              "text": "Probability of surviving",
+              "latex": "\\dfrac{N}{N_{0}} = e^{-\\lambda t}"
+            },
+            {
+              "text": "Probability of decaying",
+              "latex": "P = 1 - e^{-\\lambda t}"
+            },
+            {
+              "text": "For small $x$, $e^{-x} \\approx 1 - x$",
+              "latex": "P \\approx 1 - (1 - \\lambda t)"
+            },
+            {
+              "text": "So, only when $\\lambda t$ is small,",
+              "latex": "P \\approx \\lambda t"
+            }
+          ],
+          "notes": "Calculators show the approximation: e^(−0.01) = 0.990, but e^(−1) = 0.368, not 0. So \"λ is the probability of decay per unit time\" is only true for a time interval short enough that λt ≪ 1."
+        },
+        {
+          "type": "bullets",
+          "title": "What the decay constant means",
+          "bullets": [
+            "For a short time $\\Delta t$, the chance that a given nucleus decays is about $\\lambda\\Delta t$",
+            "So $\\lambda$ is roughly the probability of decay per unit time, if that unit time is short compared with the half-life",
+            "Over a long time the rule fails: $\\lambda t$ can exceed 1, but no probability can",
+            "The probability is the same for every nucleus of the nuclide, whatever its age"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "When does the approximation work?",
+          "question": "A nuclide has a decay constant of 0.10 $\\text{h}^{-1}$. For a single nucleus, compare $\\lambda t$ with the exact probability of decay, $1 - e^{-\\lambda t}$, for (a) 1 minute, (b) 1 hour and (c) 10 hours.",
+          "hint": "Convert each time to hours, so that $\\lambda t$ has no unit.",
+          "steps": [
+            {
+              "text": "(a) 1 min = 1/60 h, so λt = 0.00167. Almost identical:",
+              "latex": "P = 1 - e^{-0.00167} = 0.00167"
+            },
+            {
+              "text": "(b) 1 h, so λt = 0.100, about 5% too high:",
+              "latex": "P = 1 - e^{-0.100} = 0.095"
+            },
+            {
+              "text": "(c) 10 h, so λt = 1.0, but the approximation fails badly:",
+              "latex": "P = 1 - e^{-1.0} = 0.63"
+            }
+          ],
+          "notes": "In (c), λt = 1 would say decay is certain, yet more than a third of the nuclei survive 10 hours."
+        }
+      ]
+    },
+    {
+      "id": "activity-law",
+      "hl": true,
+      "short": "Activity and the decay constant",
+      "guide": "The activity as the rate of decay as given by $A = \\lambda N = \\lambda N_0e^{-\\lambda t}$.",
+      "sections": [
+        "activity"
+      ],
+      "minutes": 35,
+      "checks": [
+        "E3-017"
+      ],
+      "aims": [
+        "Use $A = \\lambda N$ to link the activity of a sample to the number of undecayed nuclei.",
+        "Find the number of nuclei in a sample from its mass."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Activity",
+          "latex": "A = \\lambda N = \\lambda N_{0}e^{-\\lambda t}",
+          "bullets": [
+            "The activity is the rate of decay: the number of nuclei decaying per second",
+            "It falls exponentially, with the same decay constant as the number of nuclei"
+          ],
+          "notes": "In the data booklet."
+        },
+        {
+          "type": "derivation",
+          "title": "Where A = λN comes from",
+          "start": "A sample has $N$ undecayed nuclei. In a short time $\\Delta t$, each one decays with probability $\\lambda\\Delta t$.",
+          "steps": [
+            {
+              "text": "Number decaying in $\\Delta t$ (the number of nuclei falls)",
+              "latex": "-\\Delta N = N\\lambda\\Delta t"
+            },
+            {
+              "text": "Activity is the number of decays per unit time",
+              "latex": "A = -\\dfrac{\\Delta N}{\\Delta t}"
+            },
+            {
+              "text": "Divide the first line by $\\Delta t$",
+              "latex": "A = \\lambda N"
+            },
+            {
+              "text": "Substitute the decay law",
+              "latex": "A = \\lambda N_{0}e^{-\\lambda t}"
+            }
+          ],
+          "notes": "The minus sign makes the activity positive, because ΔN is negative. The first step uses the short-time probability from the previous point."
+        },
+        {
+          "type": "bullets",
+          "title": "Using A = λN",
+          "bullets": [
+            "Activity in Bq needs $\\lambda$ in $\\text{s}^{-1}$",
+            "Number of nuclei from a mass: $N = \\dfrac{\\text{mass of sample}}{\\text{mass of one atom}}$, with one atom ≈ $A \\times 1.661 \\times 10^{-27}$ kg",
+            "A long half-life means a small activity for the same number of nuclei"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A radioactive banana",
+          "question": "A banana contains about 0.50 g of potassium, of which 0.0117% by mass is potassium-40. Potassium-40 has a half-life of $1.25 \\times 10^{9}$ years (1 year = $3.16 \\times 10^{7}$ s). Estimate the activity of the potassium-40 in the banana.",
+          "hint": "Find the mass of potassium-40, then the number of nuclei (each about 40 u). Find $\\lambda$ in $\\text{s}^{-1}$, then use $A = \\lambda N$.",
+          "steps": [
+            {
+              "text": "Mass of potassium-40: 0.0117% of 0.50 g.",
+              "latex": "m = 5.85 \\times 10^{-8}\\ \\text{kg}"
+            },
+            {
+              "text": "Number of nuclei.",
+              "latex": "N = \\dfrac{5.85 \\times 10^{-8}}{40 \\times 1.661 \\times 10^{-27}} = 8.8 \\times 10^{17}"
+            },
+            {
+              "text": "Half-life in seconds.",
+              "latex": "T_{1/2} = 1.25 \\times 10^{9} \\times 3.16 \\times 10^{7}"
+            },
+            {
+              "text": "So the half-life is $3.95 \\times 10^{16}$ s, and the decay constant is",
+              "latex": "\\lambda = \\dfrac{\\ln 2}{3.95 \\times 10^{16}} = 1.75 \\times 10^{-17}\\ \\text{s}^{-1}"
+            },
+            {
+              "text": "Activity.",
+              "latex": "A = \\lambda N \\approx 15\\ \\text{Bq}"
+            }
+          ],
+          "notes": "About 15 decays a second. Nearly 10¹⁸ nuclei give only a small activity because the half-life is so long. Potassium-40 in food is one source of background radiation."
+        }
+      ]
+    }
+  ]
+}
