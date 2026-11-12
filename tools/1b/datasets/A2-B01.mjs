@@ -119,6 +119,9 @@ export default {
       },
       {
         label: 'b', sections: ['contact'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        // Click-to-plot (question bank): the student draws the line of best fit on the graph before reading values from it.
+        // The line must reach the extension axis: part (d) reads its intercept.
+        plot: { lines: ['best'], toYAxis: true },
         question: 'Determine the spring constant $k$ of the spring.',
         numeric: d.num('k'),
         markscheme: [

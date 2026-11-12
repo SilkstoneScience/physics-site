@@ -308,16 +308,34 @@ export function plotFor(def, d, want, label) {
   const keys = want.lines || [];
   if (!keys.length || keys.some((k) => !PLOT_LINES[k]) || new Set(keys).size !== keys.length) stop(`plot.lines must list some of ${Object.keys(PLOT_LINES).join(', ')}, each once`);
   const points = graphPoints(d, g, 'student');
-  if (points.some((p) => p.ex)) stop('click-to-plot graphs can\'t show x error bars yet');
+  // x error bars can't be shown on screen yet: the validator reports a plot on a graph that draws them.
   const bars = points.some((p) => p.ey) && !!d.band;
   if (keys.some((k) => k !== 'best') && !bars) stop('the steepest and shallowest lines need visible error bars and graph.band');
   const [cx, cy] = [def.columns[g.x], def.columns[g.y]];
   const { xs, ys } = graphScales({ x: axisSpec(cx, g.zero && g.zero.x, g.xRange), y: axisSpec(cy, g.zero && g.zero.y, g.yRange), points });
   const num = (v) => Number(v.toPrecision(10));
-  // Line ends snap to a fifth of a small square, or finer where the error bars are shorter than that.
+  // Without error bars a line of best fit is judged by how close it is to the least-squares line at the two ends of
+  // the data. The allowance is one small square at most, and no more than keeps the line's gradient inside the range
+  // the mark scheme accepts (the result with check: 'gradient'): a line the screen calls good must not lead to a
+  // gradient the mark scheme rejects.
+  // With or without error bars, the line's gradient must itself be inside that accepted range ("gradients").
+  let tolerance = null;
+  const gradRes = Object.entries(def.results || {}).find(([, r]) => r.check === 'gradient');
+  const accepted = gradRes && d.r[gradRes[0]] && d.r[gradRes[0]].range ? [...d.r[gradRes[0]].range].sort((a, b) => a - b) : null;
+  if (!bars && keys.includes('best')) {
+    tolerance = ys.minor;
+    if (accepted) {
+      const span = Math.max(...points.map((p) => p.x)) - Math.min(...points.map((p) => p.x));
+      const room = Math.min(Math.abs(d.fit.m - accepted[0]), Math.abs(accepted[1] - d.fit.m));
+      tolerance = Math.min(tolerance, (room * span) / 2);
+    }
+  }
+  // Line ends snap to a fifth of a small square, or finer where the error bars are shorter than that or the
+  // allowance for the line is tighter than that.
   const smallest = Math.min(...points.map((p) => p.ey).filter(Boolean), Infinity);
+  const fine = Math.min(smallest / 5, tolerance === null ? Infinity : tolerance / 2);
   let snapY = ys.minor / 5;
-  for (const k of [10, 20, 50]) if (snapY > smallest / 5 + 1e-12) snapY = ys.minor / k;
+  for (const k of [10, 20, 50]) if (snapY > fine + 1e-12) snapY = ys.minor / k;
   const from = { best: d.fit, steep: d.band && d.band.steep, shallow: d.band && d.band.shallow };
   const what = g.what || `${cy.name} against ${cx.name}`;
   return {
@@ -329,7 +347,9 @@ export function plotFor(def, d, want, label) {
     points: [],
     lines: keys.map((k) => ({
       key: k, role: k, label: PLOT_LINES[k], gradient: num(from[k].m), intercept: num(from[k].c),
-      ...(bars ? { bars: true } : {}), ...(k === 'best' && want.toYAxis ? { toYAxis: true } : {}),
+      ...(bars ? { bars: true } : {}), ...(k === 'best' && tolerance !== null ? { tolerance: num(tolerance) } : {}),
+      ...(k === 'best' && accepted ? { gradients: accepted.map(num) } : {}),
+      ...(k === 'best' && want.toYAxis ? { toYAxis: true } : {}),
     })),
     fit: { gradient: num(d.fit.m), intercept: num(d.fit.c) },
     worth: want.worth || 0,

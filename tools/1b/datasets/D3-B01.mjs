@@ -140,6 +140,9 @@ export default {
       },
       {
         label: 'b', sections: ['wire'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        // Click-to-plot (question bank): the student draws the line of best fit on the graph before reading values from it.
+        // The line must reach the vertical axis: part (d) asks whether it can pass through the origin.
+        plot: { lines: ['best'], toYAxis: true },
         question: 'Determine the gradient of the graph of $\\Delta m$ against $I$.',
         numeric: d.num('gradient'),
         markscheme: [

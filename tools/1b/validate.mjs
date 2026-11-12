@@ -1379,6 +1379,21 @@ function checkPlot(def, q, pt, d, rows, failTo) {
       const other = lines.find((k) => k.role !== 'best' && k.role !== L.role);
       if (other && okFor(L.key, ideal.lines[other.key])) fail('plot', where, `the ${other.role} line is accepted as the ${L.role} line`);
     }
+    // Without error bars the line is judged by an allowance at each end of the data.
+    if (L.role === 'best' && !L.bars && (!(L.tolerance > 0) || L.tolerance > p.y.step * (1 + 1e-9))) fail('plot', where, 'a line of best fit without error bars needs an allowance of at most one small square');
+    // A line the screen calls good must not give a gradient the mark scheme rejects: tilt the line about the middle
+    // of the data to just outside the accepted range (the result with check: 'gradient') and it must fail.
+    if (L.role === 'best') {
+      const res = Object.entries(def.results || {}).find(([, r]) => r.check === 'gradient');
+      const range = res && d.r[res[0]] && d.r[res[0]].range;
+      if (range && (!Array.isArray(L.gradients) || !close(L.gradients[0], Math.min(...range)) || !close(L.gradients[1], Math.max(...range)))) fail('plot', where, 'the line of best fit must carry the range of gradients the mark scheme accepts');
+      const mid = (Math.min(...xsData) + Math.max(...xsData)) / 2;
+      for (const edge of range || []) {
+        const m2 = edge + 0.05 * (edge - L.gradient); // just outside the accepted range
+        const tilted = Plot.ideal({ ...p, lines: [{ key: 't', role: 'best', gradient: m2, intercept: L.gradient * mid + L.intercept - m2 * mid }] }).lines.t;
+        if (tilted && okFor(L.key, tilted)) fail('plot', where, `a line with gradient ${sigFig(m2, 3)}, outside the range the mark scheme accepts (${sigFig(range[0], 3)} to ${sigFig(range[1], 3)}), is accepted as the line of best fit`);
+      }
+    }
   }
 }
 

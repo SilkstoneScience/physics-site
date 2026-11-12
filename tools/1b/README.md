@@ -197,7 +197,12 @@ Copy the closest existing dataset and change it. The parts, in order:
      0: the marks are for values read from the line, so the check only gives feedback and the part is self-marked as
      usual). With error bars, a line of best fit must pass through every bar; the steepest and shallowest lines must pass
      through every bar and be at least half-way from the best fit to the true extreme line; a line may miss a bar by a
-     tenth of a small square. The part needs `msFigure: 'graph-ms'`. The validator (`plot` errors) reads the axes back
+     tenth of a small square. Without error bars the line must be within an allowance of the least-squares line at both
+     ends of the data: one small square at most, and no more than keeps its gradient inside the range the mark scheme
+     accepts (the result with `check: 'gradient'`). With or without bars, the line's gradient must be inside that range
+     (`gradients`), so a line the screen calls good never leads to a gradient the mark scheme rejects. Set `toYAxis: true`
+     when a later part needs the intercept (the graph locks once the part's mark scheme is open). The part needs
+     `msFigure: 'graph-ms'`. The validator (`plot` errors) reads the axes back
      from the picture, recalculates the lines from the table and tries the marking (the examiner's lines pass; an empty
      graph, a shifted, flat or half-length line, the best fit offered as an extreme line and swapped lines fail). What a
      plot asks for is in the review fingerprint, so adding one to an approved dataset means a reset and the teacher's

@@ -408,7 +408,7 @@ export async function runTests() {
     check('the input registry is not changed by a successful acceptance', !regT.batches && regT.datasets.G7.status === 'PHYSICS-REVIEWED');
     check('a batch can\'t be decided twice', acceptBatch(plan, ok.registry, { ...base, waive: { A1x: 'r' } }).errors.some((e) => e.includes('already been decided')));
     check('a batch approval without inspection does not establish an archetype', !individuallyApproved(g7) && individuallyApproved(g1));
-    check('older approvals (no basis recorded) count as individual', individuallyApproved(reg0.datasets['D3-B01']));
+    check('older approvals (no basis recorded) count as individual', individuallyApproved({ status: 'APPROVED', history: [{ status: 'PHYSICS-REVIEWED', by: 'reviewer' }, { status: 'APPROVED', by: 'teacher', date: '2026-10-06' }] }));
     // A batch-approved dataset is published like any APPROVED dataset (production still needs APPROVED + unchanged).
     const d3b = datasets.find((x) => x.def.id === 'D3-B01');
     const fpD3 = fingerprintOf(canonicalContent(d3b.def, buildQuestion(d3b.def)));
@@ -794,7 +794,36 @@ export async function runTests() {
     const fp = (def) => fingerprintOf(canonicalContent(def, buildQuestion(def)));
     check('Plot: changing what a part\'s plot asks for changes the fingerprint',
       fp(editPartLocal(b3, 'd', (pt) => ({ ...pt, plot: { ...pt.plot, worth: 0 } }))) !== fp(b3) && fp(editPartLocal(b3, 'b', (pt) => ({ ...pt, plot: undefined }))) !== fp(b3));
-    check('Plot: every other dataset builds without a plot, as before', datasets.filter((x) => x.def.id !== 'B3-B01').every((x) => buildQuestion(x.def).question.parts.every((pt) => !pt.plot)));
+    // Lines of best fit before reading a gradient: without error bars (A2-B01, C4-B01, D1-B01) and with them (D3-B01).
+    const withPlot = datasets.filter((x) => buildQuestion(x.def).question.parts.some((pt) => pt.plot)).map((x) => x.def.id).sort().join(' ');
+    check('Plot: the datasets with an on-screen graph are the ones the teacher asked for', withPlot === 'A2-B01 B3-B01 C4-B01 D1-B01 D3-B01', withPlot);
+    for (const [id, label] of [['A2-B01', 'b'], ['C4-B01', 'c'], ['D1-B01', 'c'], ['D3-B01', 'b']]) {
+      const def = datasets.find((x) => x.def.id === id).def;
+      const b = buildQuestion(def);
+      const pt = b.question.parts.find((x) => x.label === label);
+      const p = pt.plot;
+      const L = p.lines[0];
+      const xs = p.given.map((g) => g[0]);
+      const mid = (Math.min(...xs) + Math.max(...xs)) / 2;
+      const tilt = (m) => Plot.ideal({ ...p, lines: [{ key: 'best', role: 'best', gradient: m, intercept: L.gradient * mid + L.intercept - m * mid }] }).lines.best;
+      const ok = (s) => Plot.check(p, { points: [], line: null, lines: { best: s } }, pt.marks).right;
+      const [lo, hi] = b.d.r.gradient.range;
+      check(`Plot: ${id} (${label}) passes the plot checks and accepts the least-squares line`, errs(def).length === 0 && ok(Plot.ideal(p).lines.best), errs(def).join('; '));
+      check(`Plot: ${id} (${label}) rejects a line whose gradient is outside the range the mark scheme accepts`, !ok(tilt(lo - 0.05 * (L.gradient - lo))) && !ok(tilt(hi + 0.05 * (hi - L.gradient))));
+      check(`Plot: ${id} (${label}) accepts a line tilted half-way to the edge of the accepted range`, ok(tilt(L.gradient + 0.5 * Math.min(L.gradient - lo, hi - L.gradient))) && ok(tilt(L.gradient - 0.5 * Math.min(L.gradient - lo, hi - L.gradient))));
+      check(`Plot: ${id} (${label}) keeps its typed answer beside the graph, and the drawing carries no marks`, !!pt.numeric && p.worth === 0);
+      if (!L.bars) {
+        check(`Plot: ${id} (${label}) has an allowance of at most one small square, and line ends that snap at least twice as finely`,
+          L.tolerance > 0 && L.tolerance <= p.y.step * (1 + 1e-9) && (p.y.snap || p.y.step / 5) <= L.tolerance / 2 + 1e-12);
+      }
+    }
+    check('Plot: A2-B01 and D3-B01 ask for the line to reach the vertical axis (later parts use the intercept)',
+      ['A2-B01', 'D3-B01'].every((id) => buildQuestion(datasets.find((x) => x.def.id === id).def).question.parts.some((pt) => pt.plot && pt.plot.lines[0].toYAxis)));
+    check('Plot: a line through all the error bars but tilted outside the accepted gradients is told it is tilted too far', (() => {
+      const p = { ...pb, lines: [{ ...pb.lines[0], gradients: [fit.m - 0.001, fit.m + 0.001] }] };
+      const r = Plot.check(p, { points: [], line: null, lines: { best: seg(band.steep.m, band.steep.c) } }, 2);
+      return !r.right && /tilted too far/.test(r.feedback[0].text);
+    })());
   }
   return { count, failures };
 }

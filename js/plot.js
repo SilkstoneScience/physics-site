@@ -234,10 +234,14 @@
       const tol = (typeof L.tolerance === 'number' ? L.tolerance : plot.y.step) + EPS;
       close = Math.abs(at(xa) - want(xa)) <= tol && Math.abs(at(xb) - want(xb)) <= tol;
     }
-    res.ok = close && covers && reaches;
+    // "gradients": the range of gradients the mark scheme accepts. A line the screen calls good must not lead to a
+    // gradient that the mark scheme rejects.
+    const tilted = Array.isArray(L.gradients) && (g < L.gradients[0] - EPS || g > L.gradients[1] + EPS);
+    res.ok = close && !tilted && covers && reaches;
     if (res.ok) res.text = `${mine}${L.legacy ? ' of best fit' : ''} is good.`;
     else if (!close) res.text = bars.length ? `${missText}: here a line of best fit passes through all of them, with the points balanced on either side.`
       : `${mine} is not close enough to the points: a line of best fit passes as near as possible to all of them.`;
+    else if (tilted) res.text = `${mine} is close to the points, but it is tilted too far: balance the points on either side of it along its whole length.`;
     else if (!covers) res.text = `${mine} follows the points, but it should run across the whole range of the points.`;
     else res.text = `${mine} follows the points: now extend it back to meet the vertical axis.`;
     return res;
