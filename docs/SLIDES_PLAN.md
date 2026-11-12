@@ -1,6 +1,6 @@
 # Lesson slide generator for teachers (plan)
 
-Status: **step 1 done, and step 2 done for Themes A, B and C (A.1–C.5; November 2026), each checked by the teacher.** The page is `teachers/slides.html`, linked from the "For teachers" landing page (`teachers/index.html`), which the home page's card opens. Next: step 2 for themes D and E. How it was built: section 8.
+Status: **step 1 done, and step 2 done for Themes A to D (A.1–D.4; November 2026), each checked by the teacher.** The page is `teachers/slides.html`, linked from the "For teachers" landing page (`teachers/index.html`), which the home page's card opens. Next: step 2 for Theme E. How it was built: section 8.
 
 ## 1. What it does
 
@@ -66,7 +66,7 @@ Progress: step 1 is done (8 November 2026). From step 3, the checker rules and t
   - `{ "type": "bullets", "title", "bullets": [string or [sub-bullets]], "notes" }` (any slide type can have `"hl": true`, which marks that slide as HL inside an SL point: say "HL only" on the slide too)
   - `{ "type": "equation", "title", "latex": string or up to 4 strings, "bullets" }`
   - `{ "type": "derivation", "title", "start", "steps": [{ "text", "latex" }], "notes" }`
-  - `{ "type": "diagram", "title", "figure": "<title id of a figure on the topic page>", "bullets" }` (or `"svg": "figures/<file>.svg"` and `"alt"` for a figure drawn just for the slides, in `teachers/slides/figures/`: no ids or `<defs>`, and the same classes as the topic-page diagrams)
+  - `{ "type": "diagram", "title", "figure": "<title id of a figure on the topic page>", "bullets" }` (or `"svg": "figures/<file>.svg"` and `"alt"` for a figure drawn just for the slides, in `teachers/slides/figures/`: no ids or `<defs>`, and the same classes as the topic-page diagrams; or `"img": "figures/<file>.png"` for an openly licensed picture, with `"alt"` and `"credit"` (shown small under the slide text, and listed under Image credits on `about.html`))
   - `{ "type": "worked", "title", "question", "hint", "steps": [{ "text", "latex" }], "notes" }`
 - **Text fitting:** PowerPoint doesn't shrink text when a file opens, so `js/slides.js` estimates the space text needs (an average Arial character is about 0.53 of the font size wide) and picks the size, the text width beside a picture, or how to split long Paper 2 questions and mark schemes over several slides. Aims, worked-solution steps and derivation steps are spread over as many slides as their measured heights need (at most five steps on a slide), and key equations too tall for the card are drawn smaller.
 - **Testing:** build a deck in the preview, open it in PowerPoint through COM, count the equation objects, look for text taller than its box, and export the slides as pictures to look at. Write LaTeX into the data files with a script using `String.raw`: shell heredocs drop backslashes (the checker reports control characters and commands without their backslash).

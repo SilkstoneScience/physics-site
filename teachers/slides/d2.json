@@ -1,0 +1,1769 @@
+{
+  "topic": "D.2",
+  "hours": 8,
+  "hlHours": 6,
+  "points": [
+    {
+      "id": "charge-forces",
+      "short": "Two types of charge",
+      "guide": "The direction of forces between the two types of electric charge.",
+      "sections": [
+        "charge"
+      ],
+      "minutes": 20,
+      "aims": [
+        "State the forces between like and unlike charges, and explain charge in terms of electrons and protons."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Positive and negative charge",
+          "bullets": [
+            "There are <strong>two types</strong> of electric charge: positive and negative",
+            "<strong>Like charges repel; unlike charges attract</strong>",
+            "In atoms, protons carry positive charge and electrons negative charge; neutrons are neutral",
+            "An atom with equal numbers of protons and electrons is neutral overall",
+            "An atom that loses electrons becomes a positive ion; one that gains electrons becomes a negative ion",
+            "Charge is measured in coulombs (C)"
+          ],
+          "notes": "\"Positive\" and \"negative\" are just labels (Benjamin Franklin's choice): what matters is that there are two kinds that behave oppositely. Rubbed balloons repelling each other but sticking to the wool makes a quick demonstration."
+        },
+        {
+          "type": "worked",
+          "title": "Three charged spheres",
+          "question": "Three small charged spheres, X, Y and Z, hang on insulating threads. X repels Y, and Y attracts Z. Z is known to be negative. Deduce the signs of X and Y.",
+          "hint": "Start with the sphere whose sign you know, and work back one pair at a time.",
+          "steps": [
+            {
+              "text": "Y attracts Z, and Z is negative: unlike charges attract, so Y is positive."
+            },
+            {
+              "text": "X repels Y, and Y is positive: like charges repel, so X is positive."
+            },
+            {
+              "text": "Check: X and Z should then attract each other, because their charges are unlike."
+            }
+          ],
+          "notes": "Ask what else could cause attraction: a charged object also attracts a neutral one (by induction, later in this topic). That's why repulsion, not attraction, is the reliable test for charge."
+        }
+      ]
+    },
+    {
+      "id": "conservation",
+      "short": "Conservation of charge",
+      "guide": "The conservation of electric charge.",
+      "sections": [
+        "charge"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Use the conservation of charge to find the charges after objects touch, or in particle changes."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Charge is conserved",
+          "bullets": [
+            "The total charge of an isolated system <strong>never changes</strong>",
+            "Charge can move from one object to another, but it is never created or destroyed",
+            "Charging an object usually means moving <strong>electrons</strong>: protons stay in their nuclei",
+            "When identical conducting spheres touch, they share their total charge equally",
+            "It holds in particle changes too: in beta-minus decay, a neutron (0) becomes a proton $(+e)$ and an electron $(-e)$"
+          ],
+          "notes": "Conservation of charge is one of the most thoroughly tested laws in physics: no experiment has ever found it broken. The beta-decay example links to E.3."
+        },
+        {
+          "type": "worked",
+          "title": "Two spheres touch",
+          "question": "Two identical metal spheres on insulating stands carry charges of $+6.0$ nC and $-2.0$ nC. They are touched together and then separated. Find (a) the charge on each sphere afterwards and (b) the number of electrons that moved, and in which direction.",
+          "hint": "Find the total charge first: it is shared equally between identical spheres. Then look at how much the negative sphere's charge changed.",
+          "steps": [
+            {
+              "text": "(a) Total charge, which is conserved.",
+              "latex": "Q = +6.0 + (-2.0) = +4.0\\ \\text{nC}"
+            },
+            {
+              "text": "Identical spheres share it equally.",
+              "latex": "q = +2.0\\ \\text{nC each}"
+            },
+            {
+              "text": "(b) The second sphere changed from $-2.0$ nC to $+2.0$ nC, so it lost electrons.",
+              "latex": "\\Delta q = 4.0 \\times 10^{-9}\\ \\text{C}"
+            },
+            {
+              "text": "Divide by the elementary charge.",
+              "latex": "N = \\dfrac{4.0 \\times 10^{-9}}{1.60 \\times 10^{-19}} = 2.5 \\times 10^{10}"
+            },
+            {
+              "text": "So $2.5 \\times 10^{10}$ electrons moved from the negative sphere to the positive one."
+            }
+          ],
+          "notes": "Only electrons move. Saying \"positive charge flowed the other way\" gives the same final charges, but it isn't what happens in a metal."
+        }
+      ]
+    },
+    {
+      "id": "millikan",
+      "short": "Millikan's experiment",
+      "guide": "Millikan's experiment as evidence for quantization of electric charge.",
+      "sections": [
+        "charge",
+        "plates"
+      ],
+      "minutes": 70,
+      "checks": [
+        "D2-003"
+      ],
+      "aims": [
+        "Describe Millikan's oil-drop experiment and explain how it shows that charge is quantized.",
+        "Calculate the charge on a drop held still between charged plates."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The elementary charge",
+          "bullets": [
+            "Charge is <strong>quantized</strong>: it only comes in whole-number multiples of the elementary charge",
+            "The elementary charge is $e = 1.60 \\times 10^{-19}$ C",
+            "An electron has charge $-e$; a proton has charge $+e$",
+            "In 1897 J. J. Thomson showed that cathode rays are streams of tiny negative particles: electrons",
+            "From 1909, Robert Millikan and Harvey Fletcher measured the charges on tiny oil drops"
+          ],
+          "notes": "This answers one of the guiding questions: which experiments showed the nature of the electron? Thomson's measured the charge-to-mass ratio (D.3); Millikan's measured the charge itself."
+        },
+        {
+          "type": "bullets",
+          "title": "Millikan's oil-drop experiment",
+          "bullets": [
+            "Oil is sprayed as a mist of tiny drops, which pick up charge by friction in the nozzle",
+            "Drops drift between two horizontal metal plates, watched through a microscope",
+            "With the plates uncharged, a drop falls at a steady terminal speed: this gives its size and mass",
+            "A p.d. across the plates makes a uniform field; it is adjusted until the drop <strong>hangs still</strong>",
+            "Then the electric force balances the weight: $qE = mg$",
+            "Every charge found was a whole-number multiple of $e$, never a fraction of it"
+          ],
+          "notes": "Between parallel plates the field is $E = V/d$: this is covered fully later in the topic, so it can be quoted here. Air ionized by X-rays can change a drop's charge while it is watched: the charge always changed in steps of $e$."
+        },
+        {
+          "type": "derivation",
+          "title": "The charge on a stationary drop",
+          "start": "The drop is held still, so the forces on it balance. The field between the plates is uniform.",
+          "steps": [
+            {
+              "text": "The upward electric force equals the weight",
+              "latex": "qE = mg"
+            },
+            {
+              "text": "The field between plates a distance $d$ apart",
+              "latex": "E = \\dfrac{V}{d}"
+            },
+            {
+              "text": "Substitute for $E$",
+              "latex": "\\dfrac{qV}{d} = mg"
+            },
+            {
+              "text": "Make $q$ the subject",
+              "latex": "q = \\dfrac{mgd}{V}"
+            }
+          ],
+          "notes": "The buoyancy force of the air is less than 0.2% of the weight of an oil drop, so it is neglected here."
+        },
+        {
+          "type": "derivation",
+          "title": "The size of a drop from its terminal speed",
+          "start": "With no field, the drop falls at a steady terminal speed $v$. Its weight is balanced by viscous drag, $F_d = 6\\pi\\eta rv$ (A.2). The oil has density $\\rho$.",
+          "steps": [
+            {
+              "text": "The mass of a sphere of radius $r$",
+              "latex": "m = \\tfrac{4}{3}\\pi r^{3}\\rho"
+            },
+            {
+              "text": "At terminal speed, the drag equals the weight",
+              "latex": "6\\pi\\eta rv = \\tfrac{4}{3}\\pi r^{3}\\rho g"
+            },
+            {
+              "text": "Cancel $\\pi r$ and rearrange for $r^{2}$",
+              "latex": "r^{2} = \\dfrac{9\\eta v}{2\\rho g}"
+            },
+            {
+              "text": "Take the square root",
+              "latex": "r = \\sqrt{\\dfrac{9\\eta v}{2\\rho g}}"
+            }
+          ],
+          "notes": "This is how Millikan found the mass of each drop: the drops were far too small to weigh. The terminal speeds are tiny, a fraction of a millimetre per second."
+        },
+        {
+          "type": "derivation",
+          "title": "The charge from a drop rising steadily",
+          "start": "If the field is made a little stronger, the drop rises at a steady speed $v_2$. It fell at $v_1$ with the field off. Drag now acts downwards.",
+          "steps": [
+            {
+              "text": "Falling with the field off: drag balances weight",
+              "latex": "mg = 6\\pi\\eta rv_1"
+            },
+            {
+              "text": "Rising steadily: the electric force balances weight and drag",
+              "latex": "qE = mg + 6\\pi\\eta rv_2"
+            },
+            {
+              "text": "Substitute for $mg$",
+              "latex": "qE = 6\\pi\\eta r(v_1 + v_2)"
+            },
+            {
+              "text": "Use $E = V/d$ and rearrange",
+              "latex": "q = \\dfrac{6\\pi\\eta rd(v_1 + v_2)}{V}"
+            }
+          ],
+          "notes": "Millikan timed drops moving both ways, many times each, rather than trying to hold a drop perfectly still. This extension uses only A.2 ideas; it isn't required by the guide."
+        },
+        {
+          "type": "diagram",
+          "title": "A drop held still",
+          "figure": "d2at",
+          "bullets": [
+            "The electric force $qE$ acts upwards; the weight $mg$ acts downwards",
+            "For a negative drop, the top plate must be positive",
+            "Field strength between the plates: $E = V/d$"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A drop held still",
+          "question": "An oil drop of mass $4.9 \\times 10^{-15}$ kg is held stationary between two horizontal plates 5.0 mm apart when the p.d. between them is 375 V. Find (a) the charge on the drop and (b) the number of elementary charges this is.",
+          "hint": "The forces balance, so $qE = mg$. Find the field from the p.d. and the plate separation, in metres.",
+          "steps": [
+            {
+              "text": "(a) The field between the plates.",
+              "latex": "E = \\dfrac{375}{5.0 \\times 10^{-3}} = 7.5 \\times 10^{4}\\ \\text{V m}^{-1}"
+            },
+            {
+              "text": "The electric force balances the weight.",
+              "latex": "q = \\dfrac{mg}{E} = \\dfrac{4.9 \\times 10^{-15} \\times 9.8}{7.5 \\times 10^{4}}"
+            },
+            {
+              "text": "So the charge is",
+              "latex": "q = 6.4 \\times 10^{-19}\\ \\text{C}"
+            },
+            {
+              "text": "(b) Divide by $e$.",
+              "latex": "\\dfrac{6.4 \\times 10^{-19}}{1.60 \\times 10^{-19}} = 4.0"
+            },
+            {
+              "text": "The drop carries 4 elementary charges."
+            }
+          ],
+          "notes": "If the drop is negative, it has 4 extra electrons, and the top plate is positive."
+        },
+        {
+          "type": "worked",
+          "title": "Sizing a drop",
+          "question": "With no field, an oil drop falls at a terminal speed of $8.6 \\times 10^{-5}$ $\\text{m s}^{-1}$ through air of viscosity $1.8 \\times 10^{-5}$ Pa s. The oil's density is 870 $\\text{kg m}^{-3}$. Find (a) the radius of the drop and (b) its mass. (c) The drop is then held still between plates 6.0 mm apart by a p.d. of 330 V. Find its charge as a multiple of $e$.",
+          "hint": "At terminal speed, the viscous drag balances the weight. Use the radius to find the volume, then the mass, then use $qE = mg$.",
+          "steps": [
+            {
+              "text": "(a) Use the terminal-speed result.",
+              "latex": "r^{2} = \\dfrac{9 \\times 1.8 \\times 10^{-5} \\times 8.6 \\times 10^{-5}}{2 \\times 870 \\times 9.8}"
+            },
+            {
+              "text": "Take the square root.",
+              "latex": "r = 9.0 \\times 10^{-7}\\ \\text{m}"
+            },
+            {
+              "text": "(b) Mass = volume × density.",
+              "latex": "m = \\tfrac{4}{3}\\pi r^{3}\\rho = 2.7 \\times 10^{-15}\\ \\text{kg}"
+            },
+            {
+              "text": "(c) The charge on the stationary drop.",
+              "latex": "q = \\dfrac{mgd}{V} = 4.8 \\times 10^{-19}\\ \\text{C}"
+            },
+            {
+              "text": "Divide by $e$: the drop carries 3 elementary charges.",
+              "latex": "\\dfrac{4.8 \\times 10^{-19}}{1.60 \\times 10^{-19}} = 3.0"
+            }
+          ],
+          "notes": "Keep the unrounded radius ($9.04 \\times 10^{-7}$ m) for the mass: rounding it first changes the mass by about 1%. A drop under a micrometre across is far too small to see except as a point of scattered light in the microscope."
+        }
+      ]
+    },
+    {
+      "id": "charging",
+      "short": "Charging and grounding",
+      "guide": "That the electric charge can be transferred between bodies using friction, electrostatic induction and by contact, including the role of grounding (earthing).",
+      "sections": [
+        "charging"
+      ],
+      "minutes": 55,
+      "challenge": "CC-D2-03",
+      "checks": [
+        "D2-007"
+      ],
+      "aims": [
+        "Explain charging by friction, by contact and by electrostatic induction.",
+        "Explain the role of grounding (earthing) in charging and discharging."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Three ways to charge an object",
+          "bullets": [
+            "<strong>Friction</strong>: rubbing two different insulators moves electrons from one to the other; they gain equal and opposite charges",
+            "<strong>Contact</strong>: a charged object touching a conductor shares its charge, so both end up with the <strong>same sign</strong>",
+            "<strong>Electrostatic induction</strong>: a charged object brought near a conductor, without touching, pushes or pulls its free electrons and separates the charges",
+            "Conductors (metals) have free electrons that move easily; insulators don't"
+          ],
+          "notes": "Which material gains electrons when two are rubbed together depends on the pair: polythene rubbed with wool becomes negative, acetate rubbed with cloth becomes positive."
+        },
+        {
+          "type": "bullets",
+          "title": "Grounding (earthing)",
+          "bullets": [
+            "<strong>Grounding</strong> means connecting a conductor to the Earth",
+            "The Earth is so large that it can give or take electrons with no noticeable change in its own charge",
+            "So a grounded conductor loses its charge: it is discharged",
+            "In induction, grounding the conductor briefly lets electrons flow to or from the Earth, leaving it with a charge <strong>opposite</strong> to the nearby object",
+            "Uses: fuel tankers are grounded before refuelling; lightning conductors carry charge safely to the ground"
+          ],
+          "notes": "The order of the last steps of induction matters: break the earth connection first, then remove the charged object. Done the other way round, the electrons flow back and the conductor is left neutral."
+        },
+        {
+          "type": "diagram",
+          "title": "Charging a sphere by induction",
+          "figure": "d2bt",
+          "bullets": [
+            "The negative rod pushes electrons to the far side of the sphere",
+            "Grounding lets those electrons escape to the Earth",
+            "Remove the ground, then the rod: the sphere is left positive"
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "The gold-leaf electroscope",
+          "bullets": [
+            "A metal cap, rod and thin gold leaf, insulated from the case",
+            "When it is charged, the leaf and rod carry the same sign of charge and repel, so the leaf rises",
+            "Touching the cap with a charged rod charges it <strong>by contact</strong>: the leaf stays up when the rod is removed",
+            "Holding a charged rod <strong>near</strong> the cap separates the charges by induction: the leaf rises, then falls when the rod is taken away",
+            "A bigger divergence of the leaf means more charge, but the leaf alone can't show the sign"
+          ],
+          "notes": "To find the sign: charge the electroscope with a known sign, then bring the unknown object near. If the leaf rises further, the object has the same sign."
+        },
+        {
+          "type": "diagram",
+          "title": "Charging an electroscope",
+          "svg": "figures/d2-electroscope.svg",
+          "alt": "Two gold-leaf electroscopes. Left: a negatively charged rod touches the cap; the cap, rod and leaf all carry negative charge and the leaf stands out. Right: a negatively charged rod is held just above the cap without touching; the cap has positive charge, the rod and leaf negative charge, and the leaf stands out.",
+          "bullets": [
+            "Touching: charge flows onto the cap, rod and leaf",
+            "Held near: the charges separate, but the total charge stays zero",
+            "Either way, the leaf and rod repel because they carry like charges"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Rubbing a rod",
+          "question": "A polythene rod is rubbed with a woollen cloth, and $1.5 \\times 10^{11}$ electrons move from the cloth to the rod. (a) Find the charge on the rod and on the cloth. (b) The rod is then touched on the cap of an uncharged electroscope. Explain why the leaf rises.",
+          "hint": "Each electron carries $-e$. Charge is conserved, so whatever the rod gains, the cloth loses.",
+          "steps": [
+            {
+              "text": "(a) Charge gained by the rod.",
+              "latex": "q = -1.5 \\times 10^{11} \\times 1.60 \\times 10^{-19}"
+            },
+            {
+              "text": "So the rod has",
+              "latex": "q = -2.4 \\times 10^{-8}\\ \\text{C} = -24\\ \\text{nC}"
+            },
+            {
+              "text": "The cloth lost the same electrons, so it has $+24$ nC."
+            },
+            {
+              "text": "(b) Some electrons flow from the rod onto the cap, rod and leaf (charging by contact)."
+            },
+            {
+              "text": "The leaf and rod are now both negative, so they repel and the leaf rises."
+            }
+          ],
+          "notes": "Rubbed rods typically carry tens of nanocoulombs: a tiny fraction of their electrons. The rod is an insulator, so only the charge near the point of contact flows off."
+        }
+      ]
+    },
+    {
+      "id": "coulomb",
+      "short": "Coulomb's law",
+      "guide": "Coulomb's law as given by $F = k\\dfrac{q_1q_2}{r^2}$ for charged bodies treated as point charges where $k = \\dfrac{1}{4\\pi\\varepsilon_0}$.",
+      "sections": [
+        "coulomb"
+      ],
+      "minutes": 70,
+      "challenge": "CC-D2-01",
+      "checks": [
+        "D2-002"
+      ],
+      "aims": [
+        "Use Coulomb's law to calculate the force between point charges, in a vacuum and in other materials.",
+        "Use the inverse-square law to predict how the force changes with distance."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Coulomb's law",
+          "latex": [
+            "F = k\\dfrac{q_1q_2}{r^{2}}",
+            "k = \\dfrac{1}{4\\pi\\varepsilon_0}"
+          ],
+          "bullets": [
+            "$k = 8.99 \\times 10^{9}$ $\\text{N m}^{2}\\,\\text{C}^{-2}$, the Coulomb constant",
+            "$\\varepsilon_0 = 8.85 \\times 10^{-12}$ $\\text{C}^{2}\\,\\text{N}^{-1}\\,\\text{m}^{-2}$, the permittivity of free space",
+            "$r$ is measured between the <strong>centres</strong> of the charges"
+          ],
+          "notes": "Both forms are in the data booklet. A quick check for students: work out $1/(4\\pi \\times 8.85 \\times 10^{-12})$ and get $8.99 \\times 10^{9}$. Don't confuse this $k$ with the Boltzmann constant from B.3."
+        },
+        {
+          "type": "bullets",
+          "title": "Using Coulomb's law",
+          "bullets": [
+            "It applies to <strong>point charges</strong>; a charged sphere acts on charges outside it as if its charge were at its centre",
+            "It is an <strong>inverse-square law</strong>: double the distance and the force falls to a quarter",
+            "A positive answer (like charges) means repulsion; a negative one (unlike charges) means attraction",
+            "The two charges feel forces of <strong>equal size</strong> in opposite directions (Newton's third law)",
+            "Watch the prefixes: $1\\ \\mu\\text{C} = 10^{-6}$ C and $1$ nC $= 10^{-9}$ C"
+          ],
+          "notes": "Many students think the bigger charge pushes harder: the Newton's third law point is worth a vote first (the hook challenge does this)."
+        },
+        {
+          "type": "bullets",
+          "title": "Permittivity",
+          "bullets": [
+            "In a material, replace $\\varepsilon_0$ with the material's <strong>permittivity</strong> $\\varepsilon$",
+            "$F = \\dfrac{q_1q_2}{4\\pi\\varepsilon r^{2}}$: a larger permittivity gives a <strong>smaller</strong> force",
+            "Air: about $\\varepsilon_0$. Paper: about $3\\varepsilon_0$. Ethanol: about $25\\varepsilon_0$. Water: about $80\\varepsilon_0$",
+            "The molecules of the material line up in the field and partly cancel it"
+          ],
+          "notes": "The guide asks for \"a range of permittivity values\": students should be able to use a given permittivity, often stated as a multiple of $\\varepsilon_0$."
+        },
+        {
+          "type": "worked",
+          "title": "Two charged beads",
+          "question": "Two small charged polystyrene beads carry charges of $+15$ nC and $+25$ nC. Their centres are 4.0 cm apart in air. Find the size and direction of the force on each bead.",
+          "hint": "Treat the beads as point charges in a vacuum. Convert nC to C and cm to m before substituting.",
+          "steps": [
+            {
+              "text": "Write down the values in SI units.",
+              "latex": "r = 0.040\\ \\text{m}"
+            },
+            {
+              "text": "Substitute into Coulomb's law: the top line first.",
+              "latex": "kq_1q_2 = 3.37 \\times 10^{-6}\\ \\text{N m}^{2}"
+            },
+            {
+              "text": "Divide by $r^{2}$.",
+              "latex": "F = \\dfrac{3.37 \\times 10^{-6}}{0.040^{2}} = 2.1 \\times 10^{-3}\\ \\text{N}"
+            },
+            {
+              "text": "Both are positive, so the beads repel. Each feels 2.1 mN, directed away from the other."
+            }
+          ],
+          "notes": "2.1 mN is about the weight of a 0.2 g mass: enough to swing a light bead on a thread."
+        },
+        {
+          "type": "worked",
+          "title": "Moving the charges apart",
+          "question": "Two small charged spheres 2.0 cm apart attract each other with a force of 3.6 mN. They are moved until they are 6.0 cm apart. Find the new force.",
+          "hint": "Coulomb's law is an inverse-square law. By what factor has the distance changed?",
+          "steps": [
+            {
+              "text": "The distance is 3 times larger.",
+              "latex": "\\dfrac{r_2}{r_1} = \\dfrac{6.0}{2.0} = 3.0"
+            },
+            {
+              "text": "$F \\propto 1/r^{2}$, so the force is $3^{2} = 9$ times smaller.",
+              "latex": "F_2 = \\dfrac{3.6}{9} = 0.40\\ \\text{mN}"
+            },
+            {
+              "text": "It is still an attraction."
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Ions in a liquid",
+          "question": "Two ions with charges $+e$ and $-e$ are 0.28 nm apart. Find the force between them (a) in a vacuum and (b) in ethanol, which has a permittivity of about $25\\varepsilon_0$.",
+          "hint": "Use Coulomb's law with $e = 1.60 \\times 10^{-19}$ C. In the liquid, $\\varepsilon_0$ is replaced by $25\\varepsilon_0$.",
+          "steps": [
+            {
+              "text": "(a) Convert the distance.",
+              "latex": "r = 0.28 \\times 10^{-9} = 2.8 \\times 10^{-10}\\ \\text{m}"
+            },
+            {
+              "text": "Substitute into Coulomb's law.",
+              "latex": "F = \\dfrac{8.99 \\times 10^{9}\\,(1.60 \\times 10^{-19})^{2}}{(2.8 \\times 10^{-10})^{2}}"
+            },
+            {
+              "text": "So the attraction is",
+              "latex": "F = 2.9 \\times 10^{-9}\\ \\text{N}"
+            },
+            {
+              "text": "(b) $F \\propto 1/\\varepsilon$, so the force is 25 times smaller.",
+              "latex": "F = \\dfrac{2.94 \\times 10^{-9}}{25} = 1.2 \\times 10^{-10}\\ \\text{N}"
+            }
+          ],
+          "notes": "This is why many ionic solids dissolve in liquids with a high permittivity: the attraction holding the ions together is much weaker."
+        }
+      ]
+    },
+    {
+      "id": "field-strength",
+      "short": "Electric field strength",
+      "guide": "The electric field strength as given by $E = \\dfrac{F}{q}$.",
+      "sections": [
+        "efield"
+      ],
+      "minutes": 55,
+      "checks": [
+        "D2-004"
+      ],
+      "aims": [
+        "Define electric field strength, and find the field of a point charge.",
+        "Add the fields of two charges as vectors."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The electric field",
+          "bullets": [
+            "A charge creates an <strong>electric field</strong> around it: a region where other charges feel a force",
+            "The field, not the distant charge, acts directly on each charge: a change in one charge's position is felt elsewhere only after a delay",
+            "We explore a field with a small <strong>positive test charge</strong>, too small to disturb the charges that make the field",
+            "The direction of the field is the direction of the force on a positive charge"
+          ],
+          "notes": "Changes in a field spread out at the speed of light. This is one reason physicists replaced \"action at a distance\" with fields. Link to D.1: a test mass plays the same role in a gravitational field."
+        },
+        {
+          "type": "equation",
+          "title": "Electric field strength",
+          "latex": [
+            "E = \\dfrac{F}{q}"
+          ],
+          "bullets": [
+            "The force per unit charge on a small positive test charge",
+            "A <strong>vector</strong>, in $\\text{N C}^{-1}$ (the same as $\\text{V m}^{-1}$)",
+            "A negative charge feels a force opposite to the field"
+          ],
+          "notes": "In the data booklet. Students should be able to show that $\\text{N C}^{-1}$ and $\\text{V m}^{-1}$ are the same unit, using $1\\ \\text{V} = 1\\ \\text{J C}^{-1}$ and $1\\ \\text{J} = 1\\ \\text{N m}$."
+        },
+        {
+          "type": "derivation",
+          "title": "The field of a point charge",
+          "start": "Put a small positive test charge $q$ a distance $r$ from a point charge $Q$. Combine the definition of $E$ with Coulomb's law.",
+          "steps": [
+            {
+              "text": "The force on the test charge (Coulomb's law)",
+              "latex": "F = \\dfrac{kQq}{r^{2}}"
+            },
+            {
+              "text": "The field strength is the force per unit charge",
+              "latex": "E = \\dfrac{F}{q}"
+            },
+            {
+              "text": "Divide: $q$ cancels",
+              "latex": "E = \\dfrac{kQ}{r^{2}}"
+            }
+          ],
+          "notes": "The field doesn't depend on the test charge: it belongs to $Q$ alone. This equation is not in the data booklet, but students can derive it in one line. It also gives the field outside a charged sphere, with $r$ measured from the centre."
+        },
+        {
+          "type": "bullets",
+          "title": "Working with electric fields",
+          "bullets": [
+            "For a positive $Q$ the field points <strong>away</strong> from it; for a negative $Q$, <strong>towards</strong> it",
+            "Use the size of $Q$ in $E = \\dfrac{kQ}{r^{2}}$, and find the direction from a sketch",
+            "Fields from several charges add as <strong>vectors</strong>",
+            "At right angles: $E = \\sqrt{E_1^{2} + E_2^{2}}$",
+            "Along one line: add or subtract, depending on the directions",
+            "Once you know $E$, the force on any charge is $F = qE$"
+          ],
+          "notes": "The commonest mistake is adding the field sizes without thinking about directions. A quick arrow sketch at the point avoids it."
+        },
+        {
+          "type": "worked",
+          "title": "Near a charged dome",
+          "question": "The dome of a small Van de Graaff generator acts as a point charge of $+0.30\\ \\mu$C at its centre. Find (a) the field strength 0.20 m from the centre and (b) the force on a dust particle with a charge of $+2.0$ nC at that point.",
+          "hint": "Use the field of a point charge, measuring from the centre. Then the force is the charge times the field.",
+          "steps": [
+            {
+              "text": "(a) Field of a point charge.",
+              "latex": "E = \\dfrac{8.99 \\times 10^{9} \\times 0.30 \\times 10^{-6}}{0.20^{2}}"
+            },
+            {
+              "text": "So the field strength is",
+              "latex": "E = 6.7 \\times 10^{4}\\ \\text{N C}^{-1}"
+            },
+            {
+              "text": "It points away from the dome, because the dome is positive."
+            },
+            {
+              "text": "(b) Force on the dust particle.",
+              "latex": "F = qE = 2.0 \\times 10^{-9} \\times 6.74 \\times 10^{4}"
+            },
+            {
+              "text": "So the force is $1.3 \\times 10^{-4}$ N, away from the dome.",
+              "latex": "F = 1.3 \\times 10^{-4}\\ \\text{N}"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Two fields at right angles",
+          "question": "Point P is 0.40 m from a charge of $+8.0$ nC and 0.30 m from a charge of $+6.0$ nC. The lines from P to the two charges are at right angles. Find the size of the electric field at P and the angle it makes with the field of the 8.0 nC charge.",
+          "hint": "Find each field separately, then add them as vectors. Two vectors at right angles combine by Pythagoras.",
+          "steps": [
+            {
+              "text": "Field of the 8.0 nC charge.",
+              "latex": "E_1 = \\dfrac{8.99 \\times 10^{9} \\times 8.0 \\times 10^{-9}}{0.40^{2}} = 450\\ \\text{N C}^{-1}"
+            },
+            {
+              "text": "Field of the 6.0 nC charge.",
+              "latex": "E_2 = \\dfrac{8.99 \\times 10^{9} \\times 6.0 \\times 10^{-9}}{0.30^{2}} = 599\\ \\text{N C}^{-1}"
+            },
+            {
+              "text": "The two fields are at right angles.",
+              "latex": "E = \\sqrt{450^{2} + 599^{2}} = 750\\ \\text{N C}^{-1}"
+            },
+            {
+              "text": "Angle from the direction of $E_1$.",
+              "latex": "\\theta = \\tan^{-1}\\dfrac{599}{450} = 53°"
+            }
+          ],
+          "notes": "Both fields point away from their charges. Ask students to sketch the two arrows at P before calculating."
+        },
+        {
+          "type": "worked",
+          "title": "Where the field is zero",
+          "question": "Charges of $+16$ nC and $+4.0$ nC are fixed 0.90 m apart. Find the point on the line between them where the electric field is zero.",
+          "hint": "Between two positive charges the fields point in opposite directions. Let the point be a distance $x$ from the larger charge, and set the two field sizes equal.",
+          "steps": [
+            {
+              "text": "Equal field sizes ($k$ cancels).",
+              "latex": "\\dfrac{16}{x^{2}} = \\dfrac{4.0}{(0.90 - x)^{2}}"
+            },
+            {
+              "text": "Take the square root of both sides.",
+              "latex": "\\dfrac{4}{x} = \\dfrac{2}{0.90 - x}"
+            },
+            {
+              "text": "Cross-multiply.",
+              "latex": "4(0.90 - x) = 2x"
+            },
+            {
+              "text": "Solve.",
+              "latex": "x = 0.60\\ \\text{m}"
+            },
+            {
+              "text": "So the field is zero 0.60 m from the 16 nC charge, which is 0.30 m from the 4.0 nC charge."
+            }
+          ],
+          "notes": "Check: the zero point is nearer the smaller charge, as it must be. The nC values could be left in because the units cancel in the ratio."
+        }
+      ]
+    },
+    {
+      "id": "field-lines",
+      "short": "Electric field lines",
+      "guide": "Electric field lines.",
+      "sections": [
+        "elines"
+      ],
+      "minutes": 40,
+      "challenge": "CC-D2-02",
+      "checks": [
+        "D2-006"
+      ],
+      "aims": [
+        "Sketch and interpret the electric field lines of point charges, pairs of charges and a charged conducting sphere."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Rules for electric field lines",
+          "bullets": [
+            "A field line shows the direction of the force on a <strong>positive</strong> test charge",
+            "Lines start on positive charges and end on negative charges",
+            "Lines <strong>never cross</strong>: the field has only one direction at each point",
+            "Lines meet the surface of a conductor at <strong>right angles</strong>",
+            "The number of lines drawn from a charge is proportional to its charge"
+          ],
+          "notes": "If two lines crossed, a test charge at the crossing point would have to move in two directions at once. Asking why lines can't cross is a good discussion starter."
+        },
+        {
+          "type": "bullets",
+          "title": "Patterns to know",
+          "bullets": [
+            "<strong>Single point charge</strong>: radial lines, outwards from a positive charge, inwards to a negative charge",
+            "<strong>Charged conducting sphere</strong>: outside, the lines spread radially, exactly as if all the charge were at the centre",
+            "Inside a charged conductor the field is <strong>zero</strong>: the charge sits on the outer surface",
+            "<strong>Two charges</strong>: unlike charges are joined by curved lines; like charges' lines push apart, with a zero-field point between them",
+            "<strong>Parallel plates</strong>: straight, evenly spaced lines between them (next point)"
+          ],
+          "notes": "The hollow-sphere hook challenge tests the zero field inside a conductor: students often expect the field to be strongest near the wall."
+        },
+        {
+          "type": "diagram",
+          "title": "Single point charges",
+          "svg": "figures/d2-point-charges.svg",
+          "alt": "Two point charges. Field lines point radially outwards from a positive charge and radially inwards to a negative charge.",
+          "bullets": [
+            "Field lines start on positive charges and end on negative charges",
+            "The lines spread out, so the field weakens with distance",
+            "The arrows show the force on a small positive test charge"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Two opposite charges",
+          "figure": "d2ct",
+          "bullets": [
+            "Lines leave the positive charge and end on the negative charge",
+            "The field is strongest between and close to the charges"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Two like charges",
+          "figure": "d2dt",
+          "bullets": [
+            "The lines from the two charges push apart and never meet",
+            "At the midpoint the two fields cancel: the field there is zero"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Unequal charges",
+          "question": "A charge of $+2Q$ is placed near a charge of $-Q$. Describe the field-line pattern a student should draw.",
+          "hint": "The number of lines is proportional to the charge. How many lines leave $+2Q$, and how many can end on $-Q$?",
+          "steps": [
+            {
+              "text": "Draw twice as many lines leaving $+2Q$ as ending on $-Q$ (for example 16 and 8)."
+            },
+            {
+              "text": "Half the lines from $+2Q$ curve round and end on $-Q$."
+            },
+            {
+              "text": "The other half go off to infinity: far away, the pattern looks like a single charge of $+Q$."
+            },
+            {
+              "text": "Near each charge the lines are radial, and no lines cross."
+            }
+          ],
+          "notes": "PhET's \"Charges and Fields\" simulation (on the topic page) lets students check their sketch."
+        },
+        {
+          "type": "diagram",
+          "title": "Checking the sketch: +2Q and −Q",
+          "svg": "figures/d2-unequal-charges.svg",
+          "alt": "Field lines of a charge of plus 2Q next to a charge of minus Q. Sixteen lines leave plus 2Q. Eight curve round and end on minus Q; the other eight spread out to the edges of the picture.",
+          "bullets": [
+            "16 lines leave $+2Q$; 8 of them end on $-Q$",
+            "The other 8 go off to infinity",
+            "Far away, the pattern looks like a single charge of $+Q$"
+          ],
+          "notes": "Calculated from Coulomb's law. The lines that just miss −Q swing out round it before ending on it."
+        }
+      ]
+    },
+    {
+      "id": "line-density",
+      "short": "Field line density",
+      "guide": "The relationship between field line density and field strength.",
+      "sections": [
+        "elines"
+      ],
+      "minutes": 20,
+      "aims": [
+        "Use the spacing of field lines to compare field strengths."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Line density and field strength",
+          "bullets": [
+            "The field is stronger where the lines are <strong>closer together</strong>",
+            "The field strength is proportional to the number of lines passing through each unit area at right angles to them",
+            "Around a point charge the lines spread over a sphere of area $4\\pi r^{2}$, so the density falls as $1/r^{2}$, matching $E = \\dfrac{kQ}{r^{2}}$",
+            "Evenly spaced parallel lines mean a <strong>uniform</strong> field",
+            "A gap between lines does not mean there is no field there"
+          ],
+          "notes": "The sphere argument shows why the field of a point charge is an inverse-square law: the same number of lines spread over an area that grows as $r^{2}$. The same picture works for D.1 and for the intensity of light (B.2)."
+        },
+        {
+          "type": "worked",
+          "title": "Spreading lines",
+          "question": "On a diagram, 24 field lines leave a small positive sphere. Compare the field strength at 3.0 cm and at 6.0 cm from its centre.",
+          "hint": "The same lines pass through a sphere at each distance. How does the area of a sphere change when its radius doubles?",
+          "steps": [
+            {
+              "text": "All 24 lines cross a sphere of each radius."
+            },
+            {
+              "text": "Doubling the radius makes the area 4 times larger.",
+              "latex": "\\dfrac{4\\pi(6.0)^{2}}{4\\pi(3.0)^{2}} = 4"
+            },
+            {
+              "text": "So the line density, and the field strength, at 6.0 cm is a quarter of that at 3.0 cm."
+            }
+          ],
+          "notes": "This is an inverse-square law reached without Coulomb's law: a good \"how do we know\" moment."
+        }
+      ]
+    },
+    {
+      "id": "plates",
+      "short": "Uniform field between plates",
+      "guide": "The uniform electric field strength between parallel plates as given by $E = \\dfrac{V}{d}$.",
+      "sections": [
+        "plates",
+        "ev"
+      ],
+      "minutes": 70,
+      "checks": [
+        "D2-005"
+      ],
+      "aims": [
+        "Describe the field between parallel plates, including edge effects, and calculate it with $E = \\dfrac{V}{d}$.",
+        "Calculate the work done on a charge moving through a p.d., in joules and electronvolts."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The field between parallel plates",
+          "bullets": [
+            "Two parallel metal plates connected to a supply carry equal and opposite charges",
+            "Between them the field lines are straight, parallel and equally spaced: a <strong>uniform field</strong>",
+            "A charge feels the <strong>same force</strong> $qE$ anywhere between the plates",
+            "Near the edges the lines bulge outwards and the field weakens: <strong>edge effects</strong>",
+            "The lines run from the positive plate to the negative plate, meeting each plate at right angles"
+          ]
+        },
+        {
+          "type": "equation",
+          "title": "Uniform field strength",
+          "latex": [
+            "E = \\dfrac{V}{d}"
+          ],
+          "bullets": [
+            "$V$: the potential difference between the plates",
+            "$d$: the separation of the plates",
+            "Unit: $\\text{V m}^{-1}$, the same as $\\text{N C}^{-1}$"
+          ],
+          "notes": "In the data booklet. Doubling both $V$ and $d$ leaves the field unchanged: a common quick check."
+        },
+        {
+          "type": "derivation",
+          "title": "Why the field is V / d",
+          "start": "Move a positive charge $q$ from the negative plate to the positive plate, a distance $d$, against the uniform field. The p.d. is the work done per unit charge (B.5).",
+          "steps": [
+            {
+              "text": "The force is constant, so the work done is force × distance",
+              "latex": "W = Fd"
+            },
+            {
+              "text": "The force on the charge is $qE$",
+              "latex": "W = qEd"
+            },
+            {
+              "text": "The p.d. is the work done per unit charge",
+              "latex": "V = \\dfrac{W}{q} = Ed"
+            },
+            {
+              "text": "Rearrange",
+              "latex": "E = \\dfrac{V}{d}"
+            }
+          ],
+          "notes": "This also shows why $\\text{V m}^{-1}$ equals $\\text{N C}^{-1}$. HL students meet the general form, $E = -\\Delta V_e/\\Delta r$, later."
+        },
+        {
+          "type": "bullets",
+          "title": "Work done and the electronvolt",
+          "bullets": [
+            "A charge $q$ moving through a p.d. $V$ has work $W = qV$ done on it",
+            "For single particles, joules are inconveniently large",
+            "<strong>One electronvolt</strong> (1 eV) is the energy transferred to a particle with charge $e$ when it moves through a p.d. of 1 V",
+            "$1\\ \\text{eV} = 1.60 \\times 10^{-19}$ J",
+            "A particle of charge $2e$ accelerated through 300 V gains 600 eV",
+            "To convert eV to J, multiply by $1.60 \\times 10^{-19}$"
+          ],
+          "notes": "The guide asks for work in fields in both joules and electronvolts. Electronvolts appear again in D.3 and throughout Theme E (keV, MeV)."
+        },
+        {
+          "type": "diagram",
+          "title": "Parallel plates and edge effects",
+          "figure": "d2et",
+          "bullets": [
+            "Uniform between the plates: parallel, equally spaced lines",
+            "Weaker and curved at the edges"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Steering ink drops",
+          "question": "In an industrial ink-jet printer, charged ink drops pass between two deflecting plates 1.5 mm apart with a p.d. of 1200 V between them. Find (a) the field strength between the plates and (b) the force on a drop carrying a charge of $-1.0 \\times 10^{-13}$ C.",
+          "hint": "The field between the plates is uniform: use the p.d. and the separation, in metres. Then use $F = qE$.",
+          "steps": [
+            {
+              "text": "(a) Convert the separation and use $E = V/d$.",
+              "latex": "E = \\dfrac{1200}{1.5 \\times 10^{-3}} = 8.0 \\times 10^{5}\\ \\text{V m}^{-1}"
+            },
+            {
+              "text": "(b) Force on the drop (size).",
+              "latex": "F = qE = 1.0 \\times 10^{-13} \\times 8.0 \\times 10^{5}"
+            },
+            {
+              "text": "So the force is",
+              "latex": "F = 8.0 \\times 10^{-8}\\ \\text{N}"
+            },
+            {
+              "text": "The drop is negative, so it is pushed towards the positive plate."
+            }
+          ],
+          "notes": "Different drops are given different charges, so they are deflected by different amounts and land in different places. The field is safely below the 3 MV m⁻¹ at which air breaks down and sparks."
+        },
+        {
+          "type": "worked",
+          "title": "An electron gun",
+          "question": "Electrons start from rest and are accelerated through a p.d. of 2.5 kV. Find (a) the energy each electron gains, in eV and in J, and (b) its final speed. ($m_e = 9.11 \\times 10^{-31}$ kg)",
+          "hint": "An electron accelerated through 1 V gains 1 eV. The energy gained becomes kinetic energy.",
+          "steps": [
+            {
+              "text": "(a) In electronvolts.",
+              "latex": "E = 2.5 \\times 10^{3}\\ \\text{eV}"
+            },
+            {
+              "text": "In joules.",
+              "latex": "E = 2500 \\times 1.60 \\times 10^{-19} = 4.0 \\times 10^{-16}\\ \\text{J}"
+            },
+            {
+              "text": "(b) The energy becomes kinetic energy.",
+              "latex": "\\tfrac{1}{2}m_ev^{2} = 4.0 \\times 10^{-16}"
+            },
+            {
+              "text": "Solve for $v$.",
+              "latex": "v = \\sqrt{\\dfrac{2 \\times 4.0 \\times 10^{-16}}{9.11 \\times 10^{-31}}}"
+            },
+            {
+              "text": "So the speed is",
+              "latex": "v = 3.0 \\times 10^{7}\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "This is about a tenth of the speed of light, so the non-relativistic kinetic energy is still accurate to better than 1%. Electron guns like this were used in old television tubes."
+        }
+      ]
+    },
+    {
+      "id": "magnetic",
+      "short": "Magnetic field lines",
+      "guide": "Magnetic field lines.",
+      "sections": [
+        "bfield",
+        "compare"
+      ],
+      "minutes": 60,
+      "checks": [
+        "D2-010"
+      ],
+      "aims": [
+        "Sketch and interpret the magnetic fields of a bar magnet, a straight wire, a flat coil and a solenoid.",
+        "Use the right-hand grip rule to find the direction of the field from the current."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Magnetic fields",
+          "bullets": [
+            "Magnets and electric currents (moving charges) produce <strong>magnetic fields</strong>",
+            "Like poles repel, unlike poles attract",
+            "A field line shows the direction a compass's north pole would point",
+            "Outside a magnet the lines run from <strong>N to S</strong>; they form <strong>closed loops</strong> and never cross",
+            "The field is stronger where the lines are closer together",
+            "Magnetic field strength $B$ is measured in tesla (T)"
+          ],
+          "notes": "A compass's north pole points to the Earth's geographic north, so there is a magnetic south pole near the geographic North Pole. Iron filings over a bar magnet (photo on the topic page) show the pattern quickly."
+        },
+        {
+          "type": "bullets",
+          "title": "Drawing fields in three dimensions",
+          "bullets": [
+            "A dot ⊙ means a field or current <strong>out of</strong> the page",
+            "A cross ⊗ means a field or current <strong>into</strong> the page",
+            "Think of an arrow: you see its tip coming towards you, or its tail going away",
+            "Conventional current flows from + to −, the opposite way to the electrons"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "The field of a bar magnet",
+          "figure": "d2ft",
+          "bullets": [
+            "Lines leave the north pole and enter the south pole",
+            "Densest, so strongest, near the poles"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "The field of a straight wire",
+          "figure": "d2gt",
+          "bullets": [
+            "Concentric circles around the wire, spreading out with distance",
+            "<strong>Right-hand grip rule</strong>: point the right thumb along the conventional current; the curled fingers show the field direction",
+            "Reverse the current and the field reverses",
+            "The field weakens with distance; for a long wire, $B = \\dfrac{\\mu_0 I}{2\\pi r}$ (used in D.3)"
+          ],
+          "notes": "New for exams from 2028. $B = \\mu_0 I/2\\pi r$ is now in the data booklet; the guide lists it under D.3, where students calculate with it, so here it only explains why the circles are drawn further apart further out. The guide requires students to find the field direction from the current direction in a straight wire."
+        },
+        {
+          "type": "diagram",
+          "title": "The field of a flat coil",
+          "figure": "d2ht",
+          "bullets": [
+            "Each side of the coil has circular field lines around it",
+            "Inside the coil, the fields from all parts of the loop point the same way: a strong field along the axis"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "The field of a solenoid",
+          "figure": "d2it",
+          "bullets": [
+            "Inside: strong, nearly uniform, parallel lines",
+            "Outside: like a bar magnet's field",
+            "Curl the right-hand fingers with the current: the thumb points to the north-pole end",
+            "Seen from one end, an anticlockwise current means that end is a north pole"
+          ],
+          "notes": "An iron core inside a solenoid makes the field far stronger: an electromagnet. The guide only asks for the air-core solenoid's field pattern."
+        },
+        {
+          "type": "worked",
+          "title": "Which end is north?",
+          "question": "A solenoid lies along a bench. Looking at its left-hand end, the current flows clockwise round the turns. (a) Is the left-hand end a north or a south pole? (b) A compass is placed just beyond the left-hand end. Which way does its north pole point?",
+          "hint": "Use the end rule: seen from an end, an anticlockwise current means a north pole. Then remember that a compass's north pole lines up with the field.",
+          "steps": [
+            {
+              "text": "(a) Seen from the left end the current is clockwise, so the left end is a <strong>south</strong> pole."
+            },
+            {
+              "text": "Check with the grip rule: fingers curl clockwise (as seen from the left), so the thumb points away from the viewer, to the right: the right end is north."
+            },
+            {
+              "text": "(b) Outside the solenoid, the field lines enter the south-pole end."
+            },
+            {
+              "text": "So the compass's north pole points towards the solenoid, to the right."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Comparing fields",
+          "bullets": [
+            "Gravitational and electric fields of point sources are both inverse-square: $g = \\dfrac{GM}{r^{2}}$ and $E = \\dfrac{kQ}{r^{2}}$",
+            "Gravity only attracts; electric forces attract or repel",
+            "Electric forces between particles are far stronger, but large objects are nearly neutral, so gravity dominates on the scale of planets",
+            "Magnetic field lines always form closed loops: no isolated magnetic pole (monopole) has ever been found",
+            "Breaking a magnet in two gives two complete magnets, each with its own N and S pole"
+          ],
+          "notes": "This answers the linking question \"How are electric and magnetic fields like gravitational fields?\" Using the same words (field strength, field lines, inverse-square) across D.1 and D.2 is the NoS point about consistent terminology."
+        }
+      ]
+    },
+    {
+      "id": "epe-work",
+      "short": "Potential energy as work",
+      "hl": true,
+      "guide": "The electric potential energy $E_p$ in terms of work done to assemble the system from infinite separation.",
+      "sections": [
+        "epe"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Explain electric potential energy as the work done to assemble a system of charges from infinite separation."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "What electric potential energy means",
+          "bullets": [
+            "The electric force is <strong>conservative</strong>: the work done moving a charge depends only on where it starts and ends, not on the path",
+            "So a system of charges has an <strong>electric potential energy</strong> $E_p$",
+            "$E_p$ is the work done to <strong>assemble</strong> the system, bringing the charges together from infinite separation",
+            "Zero is defined at infinite separation, where the charges don't interact",
+            "Like charges: work must be done to push them together, so $E_p$ is <strong>positive</strong>",
+            "Unlike charges: they pull together and energy is released, so $E_p$ is <strong>negative</strong>"
+          ],
+          "notes": "Friction is the standard example of a force that isn't conservative: a longer path means more work. Compare with D.1, where every gravitational potential energy is negative because gravity only attracts."
+        },
+        {
+          "type": "bullets",
+          "title": "Assembling several charges",
+          "bullets": [
+            "Bring the charges in from infinity <strong>one at a time</strong>",
+            "The first charge needs no work: there is nothing to push against yet",
+            "Each new charge needs work against every charge already in place",
+            "So the total $E_p$ is the sum over <strong>every pair</strong> of charges",
+            "Three charges make 3 pairs; four charges make 6 pairs",
+            "$E_p$ is a scalar: add the pairs' energies with their signs"
+          ],
+          "notes": "The order in which the charges are brought in doesn't change the total, because the force is conservative. Students can check this with the worked example by bringing the charges in a different order."
+        },
+        {
+          "type": "worked",
+          "title": "Building a triangle of charges",
+          "question": "Charges of $+3.0$ nC, $+3.0$ nC and $-1.0$ nC are brought from far apart to the corners of an equilateral triangle of side 0.10 m. Find the total work done to assemble them.",
+          "hint": "Add the potential energies of the three pairs, keeping the signs. All the pairs are the same distance apart.",
+          "steps": [
+            {
+              "text": "Three pairs, all 0.10 m apart.",
+              "latex": "E_p = \\dfrac{k}{r}(q_1q_2 + q_1q_3 + q_2q_3)"
+            },
+            {
+              "text": "Products of the charges, in $\\text{nC}^{2}$.",
+              "latex": "9.0 - 3.0 - 3.0 = 3.0"
+            },
+            {
+              "text": "So the sum of the products is",
+              "latex": "3.0 \\times 10^{-18}\\ \\text{C}^{2}"
+            },
+            {
+              "text": "Multiply by $k/r$.",
+              "latex": "E_p = \\dfrac{8.99 \\times 10^{9} \\times 3.0 \\times 10^{-18}}{0.10}"
+            },
+            {
+              "text": "So the work done is",
+              "latex": "E_p = 2.7 \\times 10^{-7}\\ \\text{J}"
+            }
+          ],
+          "notes": "The answer is positive: overall, work had to be done on the system. With $+2.0$, $+2.0$ and $-1.0$ nC the total comes to exactly zero: a nice follow-up question."
+        }
+      ]
+    },
+    {
+      "id": "epe-two",
+      "short": "Potential energy of two charges",
+      "hl": true,
+      "guide": "The electric potential energy for a system of two charged bodies as given by $E_p = k\\dfrac{q_1q_2}{r}$.",
+      "sections": [
+        "epe"
+      ],
+      "minutes": 50,
+      "checks": [
+        "D2-012"
+      ],
+      "aims": [
+        "Calculate the electric potential energy of two point charges, in joules and electronvolts, and use changes in it."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Electric potential energy of two charges",
+          "latex": [
+            "E_p = k\\dfrac{q_1q_2}{r}"
+          ],
+          "bullets": [
+            "No built-in minus sign: the sign comes from the charges",
+            "$E_p \\propto 1/r$, not $1/r^{2}$",
+            "$E_p \\to 0$ as $r \\to \\infty$"
+          ],
+          "notes": "In the data booklet. Students mix it up with Coulomb's law: point out that energy is force × distance, so one power of $r$ cancels. The proof needs calculus and is beyond the course."
+        },
+        {
+          "type": "bullets",
+          "title": "Using electric potential energy",
+          "bullets": [
+            "Keep the signs of both charges: a negative $E_p$ means a bound (attracting) pair",
+            "The work needed to separate a pair completely is $0 - E_p$",
+            "Energy is conserved: as charges move, $\\Delta E_k = -\\Delta E_p$",
+            "For particles, convert to electronvolts by dividing by $1.60 \\times 10^{-19}$",
+            "Don't confuse $E_p$ (an energy) with $E$ (field strength)"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Two protons in a nucleus",
+          "question": "Two protons in a nucleus are 2.4 fm apart ($1\\ \\text{fm} = 10^{-15}$ m). Find (a) their electric potential energy in J and in MeV and (b) explain why the nucleus does not fly apart.",
+          "hint": "Both charges are $+e$. To convert joules to MeV, divide by $1.60 \\times 10^{-19}$ and then by $10^{6}$.",
+          "steps": [
+            {
+              "text": "(a) Substitute, with $q_1 = q_2 = e$.",
+              "latex": "E_p = \\dfrac{8.99 \\times 10^{9}\\,(1.60 \\times 10^{-19})^{2}}{2.4 \\times 10^{-15}}"
+            },
+            {
+              "text": "So the potential energy is",
+              "latex": "E_p = 9.6 \\times 10^{-14}\\ \\text{J}"
+            },
+            {
+              "text": "Convert to electronvolts.",
+              "latex": "\\dfrac{9.6 \\times 10^{-14}}{1.60 \\times 10^{-19}} = 6.0 \\times 10^{5}\\ \\text{eV}"
+            },
+            {
+              "text": "That is 0.60 MeV, positive, because the protons repel."
+            },
+            {
+              "text": "(b) The attractive strong nuclear force between nucleons is stronger than the electric repulsion at this range."
+            }
+          ],
+          "notes": "Energies of around an MeV per nucleon pair are typical of nuclear physics (E.3), compared with a few eV for electrons in atoms."
+        },
+        {
+          "type": "worked",
+          "title": "Pulling a pair apart",
+          "question": "A $+4.0\\ \\mu$C charge and a $-1.5\\ \\mu$C charge are 12 cm apart. Find (a) their electric potential energy and (b) the work needed to move them until they are 36 cm apart.",
+          "hint": "Keep the signs. The work done equals the change in potential energy: final minus initial.",
+          "steps": [
+            {
+              "text": "(a) The top line of the equation.",
+              "latex": "kq_1q_2 = -5.39 \\times 10^{-2}\\ \\text{J m}"
+            },
+            {
+              "text": "Divide by $r = 0.12$ m.",
+              "latex": "E_p = \\dfrac{-5.39 \\times 10^{-2}}{0.12} = -0.45\\ \\text{J}"
+            },
+            {
+              "text": "(b) At 0.36 m, three times further apart, $E_p$ is a third as large.",
+              "latex": "E_p = -0.15\\ \\text{J}"
+            },
+            {
+              "text": "Work done = change in $E_p$.",
+              "latex": "W = -0.15 - (-0.45) = +0.30\\ \\text{J}"
+            }
+          ],
+          "notes": "The work is positive: the charges attract, so an external force must pull them apart. Students who lose a sign get −0.30 J: ask them whether a pull against an attraction can give energy out."
+        }
+      ]
+    },
+    {
+      "id": "potential-scalar",
+      "short": "Potential is a scalar",
+      "hl": true,
+      "guide": "That the electric potential is a scalar quantity with zero defined at infinity.",
+      "sections": [
+        "potential"
+      ],
+      "minutes": 30,
+      "checks": [
+        "D2-011"
+      ],
+      "aims": [
+        "Explain why electric potential is a scalar, and add the potentials of several charges."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Electric potential",
+          "bullets": [
+            "The <strong>electric potential</strong> $V_e$ at a point is the electric potential energy per unit charge there",
+            "It is a <strong>scalar</strong>: it has a sign but no direction",
+            "Its zero is defined at <strong>infinity</strong>",
+            "Positive near a positive charge, negative near a negative charge",
+            "The potential of several charges is the <strong>sum</strong> of their potentials, with signs: no vectors needed",
+            "Unit: the volt, $1\\ \\text{V} = 1\\ \\text{J C}^{-1}$"
+          ],
+          "notes": "Students have used potential differences since B.5; now each point gets its own potential, measured from a zero at infinity. Only differences of potential have a physical effect, so the zero is a choice, like sea level for heights."
+        },
+        {
+          "type": "worked",
+          "title": "Where the potential is zero",
+          "question": "A charge of $+6.0$ nC and a charge of $-2.0$ nC are 0.40 m apart. Find the point on the line between them where the electric potential is zero. Is the electric field also zero there?",
+          "hint": "The potentials are scalars with opposite signs: set their sizes equal. Let the point be $x$ from the $+6.0$ nC charge.",
+          "steps": [
+            {
+              "text": "Equal sizes of potential ($k$ cancels).",
+              "latex": "\\dfrac{6.0}{x} = \\dfrac{2.0}{0.40 - x}"
+            },
+            {
+              "text": "Cross-multiply.",
+              "latex": "6.0(0.40 - x) = 2.0x"
+            },
+            {
+              "text": "Solve.",
+              "latex": "x = 0.30\\ \\text{m}"
+            },
+            {
+              "text": "The field is not zero: both fields point towards the negative charge there, so they add."
+            }
+          ],
+          "notes": "A zero of potential and a zero of field are different things: here $V_e = 0$ but $E$ is large. For two like charges it is the other way round at the zero-field point."
+        }
+      ]
+    },
+    {
+      "id": "potential",
+      "short": "Potential of a point charge",
+      "hl": true,
+      "guide": "That the electric potential $V_e$ at a point is the work done per unit charge to bring a test charge from infinity to that point as given by $V_e = \\dfrac{kQ}{r}$.",
+      "sections": [
+        "potential"
+      ],
+      "minutes": 60,
+      "checks": [
+        "D2-016"
+      ],
+      "aims": [
+        "Define electric potential, and calculate it for one or more point charges.",
+        "Use $E_p = qV_e$ to find the potential energy of a charge placed at a point."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Potential of a point charge",
+          "latex": [
+            "V_e = \\dfrac{kQ}{r}"
+          ],
+          "bullets": [
+            "The work done per unit charge to bring a small positive test charge from infinity to the point",
+            "It takes its sign from $Q$",
+            "Falls as $1/r$"
+          ],
+          "notes": "In the data booklet. Only gravitational potential has a built-in minus sign: electric potential inherits its sign from the charge."
+        },
+        {
+          "type": "derivation",
+          "title": "From potential energy to potential",
+          "start": "A small test charge $q$ is placed a distance $r$ from a point charge $Q$. Potential is potential energy per unit charge.",
+          "steps": [
+            {
+              "text": "The potential energy of the pair",
+              "latex": "E_p = \\dfrac{kQq}{r}"
+            },
+            {
+              "text": "Divide by the test charge",
+              "latex": "V_e = \\dfrac{E_p}{q}"
+            },
+            {
+              "text": "$q$ cancels",
+              "latex": "V_e = \\dfrac{kQ}{r}"
+            },
+            {
+              "text": "So any charge $q$ placed there has",
+              "latex": "E_p = qV_e"
+            }
+          ],
+          "notes": "The same step links $E = F/q$ to Coulomb's law: field is force per unit charge, potential is energy per unit charge."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for potential problems",
+          "bullets": [
+            "Measure $r$ from the charge (or from the centre of a charged sphere)",
+            "Keep the sign of every charge: the signs do the work of directions",
+            "For several charges, add the potentials as numbers",
+            "Potential belongs to a point; potential energy belongs to a charge placed at that point",
+            "Convert $\\mu$C and nC, and cm or mm, before substituting"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Potential from two charges",
+          "question": "Point P is 0.20 m from a charge of $+4.0$ nC and 0.40 m from a charge of $-6.0$ nC. Find (a) the electric potential at P and (b) the electric potential energy of a $-2.0$ nC charge placed at P.",
+          "hint": "Add the two potentials as scalars, keeping their signs. Then use $E_p = qV_e$.",
+          "steps": [
+            {
+              "text": "(a) Sum of the two potentials.",
+              "latex": "V_e = k\\left(\\dfrac{4.0}{0.20} - \\dfrac{6.0}{0.40}\\right) \\times 10^{-9}"
+            },
+            {
+              "text": "The bracket.",
+              "latex": "(20 - 15) \\times 10^{-9} = 5.0 \\times 10^{-9}\\ \\text{C m}^{-1}"
+            },
+            {
+              "text": "Multiply by $k$.",
+              "latex": "V_e = 8.99 \\times 10^{9} \\times 5.0 \\times 10^{-9} = 45\\ \\text{V}"
+            },
+            {
+              "text": "(b) Potential energy of the charge at P.",
+              "latex": "E_p = qV_e = -2.0 \\times 10^{-9} \\times 45"
+            },
+            {
+              "text": "So the potential energy is",
+              "latex": "E_p = -9.0 \\times 10^{-8}\\ \\text{J}"
+            }
+          ],
+          "notes": "No angles were needed: the arrangement of the charges around P doesn't matter for the potential, only their distances."
+        }
+      ]
+    },
+    {
+      "id": "gradient",
+      "short": "Field as potential gradient",
+      "hl": true,
+      "guide": "The electric field strength $E$ as the electric potential gradient as given by $E = -\\dfrac{\\Delta V_e}{\\Delta r}$.",
+      "sections": [
+        "gradient"
+      ],
+      "minutes": 60,
+      "checks": [
+        "D2-015"
+      ],
+      "aims": [
+        "Find the field strength from the potential gradient, and its direction.",
+        "Describe the field and potential inside and outside a charged conducting sphere."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Field strength and potential gradient",
+          "latex": [
+            "E = -\\dfrac{\\Delta V_e}{\\Delta r}"
+          ],
+          "bullets": [
+            "The field strength is minus the <strong>potential gradient</strong>",
+            "The field points from high potential to low potential",
+            "On a graph of $V_e$ against $r$, $E$ is minus the gradient of the tangent"
+          ],
+          "notes": "In the data booklet. The same relationship holds in D.1, with $g = -\\Delta V_g/\\Delta r$. The minus sign says that a positive charge is pushed \"downhill\" in potential."
+        },
+        {
+          "type": "derivation",
+          "title": "The uniform field again",
+          "start": "Between parallel plates the potential changes steadily from one plate to the other. Apply the potential gradient across the gap.",
+          "steps": [
+            {
+              "text": "Start from the potential gradient",
+              "latex": "E = -\\dfrac{\\Delta V_e}{\\Delta r}"
+            },
+            {
+              "text": "From the positive plate to the negative plate, the potential falls by $V$",
+              "latex": "\\Delta V_e = -V"
+            },
+            {
+              "text": "over a distance equal to the plate separation",
+              "latex": "\\Delta r = d"
+            },
+            {
+              "text": "Substitute",
+              "latex": "E = -\\dfrac{(-V)}{d}"
+            },
+            {
+              "text": "The SL result for parallel plates",
+              "latex": "E = \\dfrac{V}{d}"
+            }
+          ],
+          "notes": "A uniform field means a constant gradient: the potential falls in a straight line between the plates, so equipotentials are equally spaced."
+        },
+        {
+          "type": "bullets",
+          "title": "Charged conducting spheres",
+          "bullets": [
+            "The charge on a conductor sits on its <strong>outer surface</strong>; solid and hollow spheres behave the same",
+            "Inside: $E = 0$, so the potential is <strong>constant</strong>, equal to its surface value $\\dfrac{kQ}{R}$",
+            "Outside: $E = \\dfrac{kQ}{r^{2}}$ and $V_e = \\dfrac{kQ}{r}$, the same as if all the charge were concentrated at the centre",
+            "So at the surface, $E = \\dfrac{V_e}{R}$",
+            "Zero field does <strong>not</strong> mean zero potential"
+          ],
+          "notes": "The guide asks for equipotentials inside and outside both solid and hollow conducting spheres: the whole conductor, inside included, is one equipotential."
+        },
+        {
+          "type": "diagram",
+          "title": "A charged sphere: field and equipotentials",
+          "svg": "figures/d2-conducting-sphere.svg",
+          "alt": "A positively charged conducting sphere with its charge on the surface. Inside, E equals 0 and V is the same everywhere. Outside, blue field lines point radially outwards, and two orange dashed circles show equipotentials.",
+          "bullets": [
+            "Outside: radial field lines, as if the charge were at the centre",
+            "Equipotentials at equal steps of $V_e$ get further apart",
+            "Inside: no field, and the whole conductor is one equipotential"
+          ],
+          "notes": "The dashed circles are at three-quarters and half of the surface potential, so at radii of $\\dfrac{4}{3}R$ and $2R$."
+        },
+        {
+          "type": "diagram",
+          "title": "Field and potential of a charged sphere",
+          "figure": "d2jt",
+          "bullets": [
+            "$E$: zero inside, largest at the surface, then falls as $1/r^{2}$",
+            "$V_e$: constant inside, then falls as $1/r$",
+            "Outside, $E$ is minus the gradient of the $V_e$ curve"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A potential gradient",
+          "question": "Near a small charged sphere, the potential is 900 V at 0.20 m from its centre and 600 V at 0.30 m. (a) Estimate the field strength midway between these points. (b) Use the potential to find $kQ$, and calculate the actual field at 0.25 m.",
+          "hint": "Use the change in potential over the change in distance. For (b), $V_e = kQ/r$ gives $kQ = V_er$, then use $E = kQ/r^{2}$.",
+          "steps": [
+            {
+              "text": "(a) The average potential gradient.",
+              "latex": "E = -\\dfrac{600 - 900}{0.30 - 0.20}"
+            },
+            {
+              "text": "So the estimate is $3.0 \\times 10^{3}$ $\\text{V m}^{-1}$, pointing outwards.",
+              "latex": "E = 3.0 \\times 10^{3}\\ \\text{V m}^{-1}"
+            },
+            {
+              "text": "(b) From either reading.",
+              "latex": "kQ = 900 \\times 0.20 = 180\\ \\text{V m}"
+            },
+            {
+              "text": "Field at 0.25 m.",
+              "latex": "E = \\dfrac{180}{0.25^{2}} = 2.9 \\times 10^{3}\\ \\text{V m}^{-1}"
+            }
+          ],
+          "notes": "The estimate is slightly too high because the potential curve is not a straight line: the average gradient over a chord is not the gradient of the tangent at the middle. Compare the tangent and chord ideas from A.1."
+        },
+        {
+          "type": "worked",
+          "title": "A Van de Graaff dome",
+          "question": "The spherical dome of a Van de Graaff generator has a radius of 0.12 m and is at a potential of 60 kV. Find (a) the charge on the dome, (b) the field strength just outside its surface and (c) the field and potential at its centre.",
+          "hint": "Outside, the dome acts as a point charge at its centre. Inside a conductor the field is zero; what does that mean for the potential?",
+          "steps": [
+            {
+              "text": "(a) Rearrange $V_e = kQ/R$.",
+              "latex": "Q = \\dfrac{V_eR}{k} = \\dfrac{6.0 \\times 10^{4} \\times 0.12}{8.99 \\times 10^{9}}"
+            },
+            {
+              "text": "So the charge is",
+              "latex": "Q = 8.0 \\times 10^{-7}\\ \\text{C}"
+            },
+            {
+              "text": "(b) At the surface, $E = V_e/R$.",
+              "latex": "E = \\dfrac{6.0 \\times 10^{4}}{0.12} = 5.0 \\times 10^{5}\\ \\text{V m}^{-1}"
+            },
+            {
+              "text": "(c) At the centre $E = 0$, and the potential equals the surface value, 60 kV."
+            }
+          ],
+          "notes": "Air breaks down at about $3 \\times 10^{6}$ $\\text{V m}^{-1}$, so this dome is safe; a smaller dome at the same potential would have a stronger surface field and would spark sooner."
+        }
+      ]
+    },
+    {
+      "id": "work-done",
+      "short": "Work done moving a charge",
+      "hl": true,
+      "guide": "The work done in moving a charge $q$ in an electric field as given by $W = q\\Delta V_e$.",
+      "sections": [
+        "gradient",
+        "ev"
+      ],
+      "minutes": 45,
+      "checks": [
+        "D2-013"
+      ],
+      "aims": [
+        "Calculate the work done moving a charge between two points, in joules and electronvolts, and use it to find speeds."
+      ],
+      "slides": [
+        {
+          "type": "equation",
+          "title": "Work done moving a charge",
+          "latex": [
+            "W = q\\Delta V_e"
+          ],
+          "bullets": [
+            "$W$: the work done by an external force moving $q$ slowly between two points",
+            "$\\Delta V_e$ = final potential − initial potential",
+            "The work done <strong>by the field</strong> is $-q\\Delta V_e$"
+          ],
+          "notes": "In the data booklet. Questions use both \"work done on the charge\" and \"work done by the field\": students should say which they mean. The result doesn't depend on the path, because the electric force is conservative."
+        },
+        {
+          "type": "bullets",
+          "title": "Tips for work and energy",
+          "bullets": [
+            "Keep the sign of $q$: an electron has $q = -e$",
+            "Positive charges speed up moving to <strong>lower</strong> potential; negative charges speed up moving to <strong>higher</strong> potential",
+            "If a charge moves freely, the kinetic energy gained is $-q\\Delta V_e$",
+            "For particles of charge $e$ or $2e$, the work in eV is the charge in units of $e$ × the p.d. in volts",
+            "No work is done moving along an equipotential"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A proton speeds up",
+          "question": "A proton is released from rest at a point where the potential is 1500 V and moves freely to a point where it is 300 V. Find (a) the kinetic energy it gains, in eV and in J, and (b) its final speed. ($m_p = 1.67 \\times 10^{-27}$ kg)",
+          "hint": "A positive charge speeds up as it moves to lower potential. The kinetic energy gained is the work done by the field, $-q\\Delta V_e$.",
+          "steps": [
+            {
+              "text": "(a) The change in potential.",
+              "latex": "\\Delta V_e = 300 - 1500 = -1200\\ \\text{V}"
+            },
+            {
+              "text": "Kinetic energy gained, with $q = +e$.",
+              "latex": "E_k = -q\\Delta V_e = 1200\\ \\text{eV}"
+            },
+            {
+              "text": "In joules.",
+              "latex": "E_k = 1200 \\times 1.60 \\times 10^{-19} = 1.9 \\times 10^{-16}\\ \\text{J}"
+            },
+            {
+              "text": "(b) Solve $\\tfrac{1}{2}mv^{2} = E_k$ for $v$.",
+              "latex": "v = \\sqrt{\\dfrac{2 \\times 1.92 \\times 10^{-16}}{1.67 \\times 10^{-27}}}"
+            },
+            {
+              "text": "So the speed is",
+              "latex": "v = 4.8 \\times 10^{5}\\ \\text{m s}^{-1}"
+            }
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Pushing an alpha particle",
+          "question": "An alpha particle (charge $+2e$) is moved slowly from a point at $-200$ V to a point at $+300$ V. Find the work done on it by the external force, in eV and in J.",
+          "hint": "Use $W = q\\Delta V_e$ with $\\Delta V_e$ = final − initial. Working in eV with $q = 2e$ makes the arithmetic quick.",
+          "steps": [
+            {
+              "text": "The change in potential.",
+              "latex": "\\Delta V_e = 300 - (-200) = 500\\ \\text{V}"
+            },
+            {
+              "text": "Work done, with $q = 2e$.",
+              "latex": "W = 2e \\times 500\\ \\text{V} = 1000\\ \\text{eV}"
+            },
+            {
+              "text": "In joules.",
+              "latex": "W = 1000 \\times 1.60 \\times 10^{-19} = 1.6 \\times 10^{-16}\\ \\text{J}"
+            },
+            {
+              "text": "The work is positive: the alpha particle is pushed towards higher potential, against the field."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "equipotentials",
+      "short": "Equipotential surfaces",
+      "hl": true,
+      "guide": "Equipotential surfaces for electric fields.",
+      "sections": [
+        "equip"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Sketch and recognise equipotential surfaces for point charges, groups of charges, charged spheres and parallel plates."
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Equipotential surfaces",
+          "bullets": [
+            "An <strong>equipotential surface</strong> joins points at the same potential",
+            "<strong>No work</strong> is done moving a charge along an equipotential, because $\\Delta V_e = 0$",
+            "They are usually drawn at <strong>equal steps</strong> of potential, like the contour lines on a map",
+            "In a diagram they appear as lines, but they are really surfaces in three dimensions",
+            "Two equipotentials can never cross: a point has only one potential"
+          ],
+          "notes": "The contour-map comparison from the HL deck works well: walking along a contour needs no work against gravity, and the slope is steepest where the contours are closest."
+        },
+        {
+          "type": "bullets",
+          "title": "Equipotentials to recognise",
+          "bullets": [
+            "<strong>Point charge</strong>: concentric spheres, further apart with distance (because $V_e \\propto 1/r$)",
+            "<strong>Charged conducting sphere</strong>: concentric spheres outside; the whole conductor, inside too, is one equipotential",
+            "<strong>Parallel plates</strong>: flat planes parallel to the plates, equally spaced",
+            "<strong>Up to four point charges</strong>: add the potentials; close to each charge, the equipotentials are small loops around it",
+            "Equal and opposite charges: the plane midway between them is the zero equipotential"
+          ],
+          "notes": "The next slide shows the point-charge and parallel-plate patterns."
+        },
+        {
+          "type": "diagram",
+          "title": "Point charge and parallel plates",
+          "svg": "figures/d2-equipotentials.svg",
+          "alt": "Left: a positive point charge with radial field lines and dashed circular equipotentials that get further apart with distance. Right: two parallel plates, positive on the left, with evenly spaced horizontal field lines and evenly spaced dashed equipotentials parallel to the plates.",
+          "bullets": [
+            "Point charge: equal steps of $V_e$ give circles further and further apart",
+            "Parallel plates: equally spaced planes, because the field is uniform",
+            "Field lines (blue) cross equipotentials (orange) at right angles"
+          ],
+          "notes": "The circles are at equal steps of potential (5, 4, 3 and 2 units), so their radii are in the ratio 1/5 : 1/4 : 1/3 : 1/2."
+        },
+        {
+          "type": "diagram",
+          "title": "Equipotentials of two opposite charges",
+          "figure": "d2kt",
+          "bullets": [
+            "Dashed lines: equipotentials; grey lines: field lines",
+            "The vertical line midway is the zero equipotential"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Spacing the equipotentials",
+          "question": "A small sphere has a positive charge for which $kQ = 60$ V m. Find the distances from its centre of the 300 V, 200 V and 100 V equipotentials, and describe their spacing.",
+          "hint": "Rearrange $V_e = kQ/r$ to find $r$ for each potential.",
+          "steps": [
+            {
+              "text": "Rearrange the potential equation.",
+              "latex": "r = \\dfrac{kQ}{V_e}"
+            },
+            {
+              "text": "For 300 V and 200 V.",
+              "latex": "r = 0.20\\ \\text{m and}\\ 0.30\\ \\text{m}"
+            },
+            {
+              "text": "For 100 V.",
+              "latex": "r = \\dfrac{60}{100} = 0.60\\ \\text{m}"
+            },
+            {
+              "text": "Equal steps of 100 V are 0.10 m apart near the sphere, then 0.30 m apart further out: the gaps widen as the field weakens."
+            }
+          ],
+          "notes": "The $kQ$ value corresponds to a charge of about 6.7 nC. The widening gaps are the potential-gradient idea in pictures."
+        }
+      ]
+    },
+    {
+      "id": "equip-lines",
+      "short": "Equipotentials and field lines",
+      "hl": true,
+      "guide": "The relationship between equipotential surfaces and electric field lines.",
+      "sections": [
+        "equip"
+      ],
+      "minutes": 30,
+      "aims": [
+        "Use the rule that field lines cross equipotentials at right angles, and find field strengths from their spacing."
+      ],
+      "checks": [
+        "D2-014"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Field lines and equipotentials",
+          "bullets": [
+            "Field lines always cross equipotentials at <strong>right angles</strong>",
+            "The field points from higher to lower potential",
+            "Where equal-step equipotentials are <strong>closer together</strong>, the field is stronger",
+            "The field strength is about $\\dfrac{\\Delta V_e}{\\Delta r}$, measured at right angles to the equipotentials",
+            "A conductor's surface is an equipotential, so field lines meet it at right angles"
+          ],
+          "notes": "Why at right angles? If the field had a component along an equipotential, moving a charge along it would need work, which contradicts the definition. This ties the SL rule about field lines and conductors to the HL idea."
+        },
+        {
+          "type": "worked",
+          "title": "A route round a field",
+          "question": "A $+2.0\\ \\mu$C charge is moved from A to B, which both lie on the 40 V equipotential, and then from B to C, on the 10 V equipotential. Find (a) the work done from A to B and (b) the work done by the external force from B to C. (c) What work does the field do from B to C?",
+          "hint": "No work is done along an equipotential. Otherwise use $W = q\\Delta V_e$, with final minus initial potential.",
+          "steps": [
+            {
+              "text": "(a) A and B are at the same potential, so $W = 0$, whatever the route."
+            },
+            {
+              "text": "(b) The change in potential from B to C.",
+              "latex": "\\Delta V_e = 10 - 40 = -30\\ \\text{V}"
+            },
+            {
+              "text": "Work done by the external force.",
+              "latex": "W = 2.0 \\times 10^{-6} \\times (-30)"
+            },
+            {
+              "text": "So the work is",
+              "latex": "W = -6.0 \\times 10^{-5}\\ \\text{J}"
+            },
+            {
+              "text": "(c) The field does $+6.0 \\times 10^{-5}$ J: the positive charge moves \"downhill\" in potential, in the direction of the field."
+            }
+          ],
+          "notes": "The negative answer in (b) means the external force holds the charge back: the field would speed it up otherwise."
+        }
+      ]
+    }
+  ]
+}

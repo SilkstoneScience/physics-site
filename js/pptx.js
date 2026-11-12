@@ -49,18 +49,19 @@
   // One paragraph. withMath = false writes the plain-text copy of any equations (for the fallback shape).
   // link(url) returns the relationship id of a web link (for runs with { link }).
   function para(p, { size, withMath = true, defaultBullet = true, link } = {}) {
+    const sz = p.size || size; // a paragraph may set its own size (e.g. a picture credit)
     const lvl = p.level ? ` lvl="${p.level}"` : '';
     const algn = p.align ? ` algn="${p.align}"` : '';
     const bullet = p.bullet ?? defaultBullet;
     const pPr = `<a:pPr${lvl}${algn}${bullet ? '' : ' marL="0" indent="0"'}>${p.spaceBefore != null ? `<a:spcBef><a:spcPts val="${p.spaceBefore * 100}"/></a:spcBef>` : ''}${bullet ? '' : '<a:buNone/>'}</a:pPr>`;
     const runs = (p.runs || []).map((r) => {
       if (r.m) {
-        return withMath ? `<a14:m>${r.m.omml}</a14:m>` : `<a:r>${rPr({ i: false }, size)}<a:t>${xml(r.m.plain)}</a:t></a:r>`;
+        return withMath ? `<a14:m>${r.m.omml}</a14:m>` : `<a:r>${rPr({ i: false }, sz)}<a:t>${xml(r.m.plain)}</a:t></a:r>`;
       }
       const lr = r.link && link ? link(r.link) : null;
-      return String(r.t).split('\n').map((line, i) => `${i ? `<a:br>${rPr(r, size)}</a:br>` : ''}<a:r>${rPr(r, size, lr)}<a:t>${xml(line)}</a:t></a:r>`).join('');
+      return String(r.t).split('\n').map((line, i) => `${i ? `<a:br>${rPr(r, sz)}</a:br>` : ''}<a:r>${rPr(r, sz, lr)}<a:t>${xml(line)}</a:t></a:r>`).join('');
     }).join('');
-    return `<a:p>${pPr}${runs}<a:endParaRPr lang="en-GB"${size ? ` sz="${size}"` : ''} dirty="0"/></a:p>`;
+    return `<a:p>${pPr}${runs}<a:endParaRPr lang="en-GB"${sz ? ` sz="${sz}"` : ''} dirty="0"/></a:p>`;
   }
   const hasMath = (paras) => (paras || []).some((p) => (p.runs || []).some((r) => r.m));
 

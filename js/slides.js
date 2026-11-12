@@ -443,6 +443,8 @@
   }
   // A diagram drawn just for the slides, using the same classes as the topic-page diagrams
   async function slideFigure(s) {
+    // an openly licensed picture (PNG or JPEG), credited on the slide
+    if (s.img) return { image: await photoPng(`slides/${s.img}`, s.alt), caption: '' };
     const text = await get(`slides/${s.svg}`, 'text');
     const svg = new DOMParser().parseFromString(text, 'image/svg+xml').documentElement;
     return { image: await diagramPng(svg, s.alt), caption: '' };
@@ -676,11 +678,12 @@
           slides.push({ kind: 'equation', title: s.title, eqs, size, paras: bulletParas(s.bullets, size), notes: notes(s.notes) });
         } else if (s.type === 'diagram' && t.has('d') && page) {
           // a figure from the topic page, or one drawn just for the slides (teachers/slides/figures/)
-          const fig = s.svg ? await slideFigure(s) : await figureFromPage(page, s.figure);
+          const fig = s.svg || s.img ? await slideFigure(s) : await figureFromPage(page, s.figure);
           if (!fig) continue;
           const texts = s.bullets ? s.bullets.flat() : blocks(fig.caption);
           const fit = besideDiagram(texts, !!s.bullets);
           const text = s.bullets ? bulletParas(s.bullets, fit.size) : paras(fig.caption, { size: fit.size, bullet: false });
+          if (s.credit) text.push(...paras(s.credit, { bullet: false }).map((p) => ({ ...p, size: 1200, spaceBefore: 12, runs: p.runs.map((r) => ({ ...r, color: 'muted' })) })));
           slides.push({ kind: 'diagram', title: s.title, image: fig.image, paras: text, ...fit, notes: notes(s.notes, s.bullets && fig.caption ? `Caption on the topic page: ${fig.caption}` : '') });
         } else if (s.type === 'worked' && t.has('w')) {
           // the worked-example pill on the layout already says "Worked example", so the title doesn't need to

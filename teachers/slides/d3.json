@@ -1,0 +1,983 @@
+{
+  "topic": "D.3",
+  "hours": 6,
+  "points": [
+    {
+      "id": "wire-field",
+      "short": "Field of a straight wire",
+      "guide": "The magnetic field strength of an infinitely long current-carrying wire as given by $B = \\dfrac{\\mu_0 I}{2\\pi r}$ (and the direction of the field from the direction of the current).",
+      "sections": [
+        "parallel"
+      ],
+      "minutes": 40,
+      "aims": [
+        "Determine the direction of the magnetic field around a straight current-carrying wire with the right-hand grip rule.",
+        "Calculate the field strength near a long straight wire using $B = \\dfrac{\\mu_0 I}{2\\pi r}$."
+      ],
+      "checks": [
+        "D3-018"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The field around a straight wire",
+          "bullets": [
+            "The field lines are <strong>circles centred on the wire</strong>, in planes at right angles to it",
+            "<strong>Right-hand grip rule</strong>: thumb along the conventional current, and the fingers curl the way the field goes",
+            "Reverse the current and the field reverses",
+            "The field gets weaker further out, so the circles are drawn further apart",
+            "Seen end-on: a dot means current out of the page (an arrow coming towards you), a cross means into the page"
+          ],
+          "notes": "A quick reminder of D.2: put plotting compasses round a vertical wire carrying a few amps and reverse the current. The guide expects students to find the field direction from the current direction."
+        },
+        {
+          "type": "diagram",
+          "title": "Circles round a wire",
+          "svg": "figures/d3-wire-field.svg",
+          "alt": "Left: a vertical wire with the current I upwards and two circular field lines round it, drawn in perspective; the field goes anticlockwise seen from above. Right: two end-on views. A dot means current out of the page, with the field circling anticlockwise. A cross means current into the page, with the field circling clockwise.",
+          "bullets": [
+            "Current up the wire: the field circles anticlockwise, seen from above",
+            "Dot (current out of the page): anticlockwise",
+            "Cross (current into the page): clockwise"
+          ],
+          "notes": "Check each view with the right-hand grip rule."
+        },
+        {
+          "type": "equation",
+          "title": "Field strength near a long straight wire",
+          "latex": [
+            "B = \\dfrac{\\mu_0 I}{2\\pi r}"
+          ],
+          "bullets": [
+            "$\\mu_0 = 4\\pi \\times 10^{-7}$ $\\text{T m A}^{-1}$, the permeability of free space",
+            "Twice as far from the wire, half the field: $B \\propto \\dfrac{1}{r}$",
+            "Strictly for an infinitely long wire: a good model when the distance is much smaller than the length of the wire"
+          ],
+          "notes": "New for exams from 2028. The 2028 data booklet adds this equation. Point out that $\\dfrac{\\mu_0}{2\\pi} = 2 \\times 10^{-7}$ $\\text{T m A}^{-1}$, which makes mental estimates quick."
+        },
+        {
+          "type": "worked",
+          "title": "A lightning stroke",
+          "question": "A lightning stroke carries a peak current of 30 kA. Treating the stroke as a long straight vertical wire, find the magnetic field strength 100 m from it at that moment, and compare it with the Earth's field of about $5 \\times 10^{-5}$ T.",
+          "hint": "Change kA to A first. The field falls off as $1/r$, and the $\\pi$ in the equation cancels.",
+          "steps": [
+            {
+              "text": "Use the field of a long straight wire.",
+              "latex": "B = \\dfrac{\\mu_0 I}{2\\pi r}"
+            },
+            {
+              "text": "Substitute, with $I = 3.0 \\times 10^{4}$ A.",
+              "latex": "B = \\dfrac{4\\pi \\times 10^{-7} \\times 3.0 \\times 10^{4}}{2\\pi \\times 100}"
+            },
+            {
+              "text": "The field 100 m away:",
+              "latex": "B = 6.0 \\times 10^{-5}\\ \\text{T}"
+            },
+            {
+              "text": "That is about the same as the Earth's field, but it lasts only a fraction of a millisecond."
+            }
+          ],
+          "notes": "New for exams from 2028. Lightning currents are typically tens of kiloamperes, so even 100 m away the brief magnetic pulse is as strong as the Earth's field."
+        },
+        {
+          "type": "worked",
+          "title": "A compass beside a vertical wire",
+          "question": "A long vertical wire carries a current of 6.0 A upwards. A small compass sits on the bench 2.0 cm due east of the wire. Find (a) the direction and (b) the size of the magnetic field of the wire at the compass.",
+          "hint": "Point your right thumb up along the current and look at which way your fingers move as they pass the east side of the wire.",
+          "steps": [
+            {
+              "text": "(a) Seen from above, the field circles anticlockwise round a current coming up towards you."
+            },
+            {
+              "text": "On the east side of the wire, anticlockwise means pointing <strong>north</strong>."
+            },
+            {
+              "text": "(b) Substitute, with $r = 0.020$ m.",
+              "latex": "B = \\dfrac{4\\pi \\times 10^{-7} \\times 6.0}{2\\pi \\times 0.020}"
+            },
+            {
+              "text": "The field at the compass, pointing north:",
+              "latex": "B = 6.0 \\times 10^{-5}\\ \\text{T}"
+            }
+          ],
+          "notes": "New for exams from 2028 (part b). Here the wire's field points the same way as the Earth's horizontal field, so the needle still points north. Ask where on the bench the compass would swing the most."
+        }
+      ]
+    },
+    {
+      "id": "charge-force",
+      "short": "Force on a moving charge",
+      "guide": "The magnitude and direction of the force on a charge moving in a magnetic field as given by $F = qvB\\sin\\theta$, where $B$ is the magnetic field strength.",
+      "sections": [
+        "force"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Calculate the magnetic force on a moving charge using $F = qvB\\sin\\theta$.",
+        "Find the direction of the force, and explain why it leaves the kinetic energy unchanged."
+      ],
+      "challenge": "CC-D3-01",
+      "checks": [
+        "D3-010"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Magnetic forces need moving charges",
+          "bullets": [
+            "A magnetic field exerts a force on a charge only while the charge is <strong>moving</strong>",
+            "A stationary charge, or one moving along the field lines, feels no magnetic force",
+            "The force is largest when the charge moves at right angles to the field",
+            "A current is moving charge, which is why a wire carrying a current feels a force too"
+          ],
+          "notes": "A moving charge has a magnetic field of its own, which is one way of seeing why only moving charges are affected. Contrast with an electric field, which pushes on a charge whether or not it moves."
+        },
+        {
+          "type": "equation",
+          "title": "The force on a moving charge",
+          "latex": [
+            "F = qvB\\sin\\theta"
+          ],
+          "bullets": [
+            "$\\theta$: the angle between the velocity and the field",
+            "$B$: the magnetic field strength, in tesla (T)",
+            "A charge of 1 C moving at 1 $\\text{m s}^{-1}$ at right angles to a 1 T field feels a force of 1 N"
+          ],
+          "notes": "In the data booklet. The last bullet gives students a feel for the tesla: 1 T is a strong field (a school magnet is a few tenths of a tesla at most)."
+        },
+        {
+          "type": "bullets",
+          "title": "Which way is the force?",
+          "bullets": [
+            "The force is at right angles to <strong>both</strong> the velocity and the field",
+            "<strong>Fleming's left-hand rule</strong>: First finger along the Field, seCond finger along the Current, thuMb gives the force (Motion)",
+            "The \"current\" is the direction a <strong>positive</strong> charge moves",
+            "For an electron, point the second finger opposite to its velocity",
+            "Field drawn as dots: out of the page; as crosses: into the page"
+          ],
+          "notes": "The deck also shows a right-hand rule (fingers curl from v towards B, thumb gives the force on a positive charge). It gives the same answer: let students choose one rule and use it every time. The topic page uses Fleming's left-hand rule."
+        },
+        {
+          "type": "diagram",
+          "title": "Fleming's left-hand rule",
+          "img": "figures/fleming-left-hand-rule.png",
+          "alt": "A left hand with the thumb pointing up, labelled F, the first finger pointing forwards and to the right, labelled B, and the second finger pointing down and to the right, labelled I. The three are at right angles to each other.",
+          "credit": "Picture: Jfmelero, <a href=\"https://commons.wikimedia.org/wiki/File:LeftHandRule.svg\">Wikimedia Commons</a>, CC BY-SA 4.0",
+          "bullets": [
+            "<strong>F</strong>irst finger: the <strong>F</strong>ield, $B$",
+            "Se<strong>c</strong>ond finger: the <strong>c</strong>urrent, $I$ (the way a positive charge moves)",
+            "Thu<strong>m</strong>b: the force, or <strong>m</strong>otion, $F$"
+          ],
+          "notes": "The three directions must be at right angles. For an electron, point the second finger opposite to its velocity."
+        },
+        {
+          "type": "bullets",
+          "title": "No work done, no change of speed",
+          "bullets": [
+            "The magnetic force is always perpendicular to the velocity",
+            "So it does no work on the particle: $W = Fs\\cos 90^{\\circ} = 0$",
+            "The speed and the <strong>kinetic energy stay constant</strong>; only the direction of motion changes",
+            "An electric field, by contrast, can speed a charge up or slow it down"
+          ],
+          "notes": "The guide's guidance asks for this point specifically: in a magnetic field alone, a charged particle's kinetic energy never changes. It is a common exam explanation."
+        },
+        {
+          "type": "worked",
+          "title": "An alpha particle in a field",
+          "question": "An alpha particle (charge $+2e$) moves at $1.5 \\times 10^{7}$ $\\text{m s}^{-1}$ at an angle of 40° to a uniform magnetic field of 0.60 T. Find the size of the magnetic force on it.",
+          "hint": "Use the angle between the velocity and the field, and remember that an alpha particle carries two elementary charges.",
+          "steps": [
+            {
+              "text": "The charge of the alpha particle:",
+              "latex": "q = 2 \\times 1.60 \\times 10^{-19} = 3.20 \\times 10^{-19}\\ \\text{C}"
+            },
+            {
+              "text": "First work out $qvB$.",
+              "latex": "qvB = 3.20 \\times 10^{-19} \\times 1.5 \\times 10^{7} \\times 0.60"
+            },
+            {
+              "text": "This gives",
+              "latex": "qvB = 2.88 \\times 10^{-12}\\ \\text{N}"
+            },
+            {
+              "text": "Multiply by the sine of the angle.",
+              "latex": "F = 2.88 \\times 10^{-12} \\times \\sin 40^{\\circ}"
+            },
+            {
+              "text": "The magnetic force:",
+              "latex": "F = 1.9 \\times 10^{-12}\\ \\text{N}"
+            }
+          ],
+          "notes": "Alpha particles from radioactive decay do move at around this speed. Ask: at what angle would the force be zero, and at what angle largest?"
+        },
+        {
+          "type": "worked",
+          "title": "Which way does the electron go?",
+          "question": "An electron moves due north through a region where the magnetic field points vertically downwards. In which direction is the magnetic force on it?",
+          "hint": "Find the direction of the conventional current first: an electron moving north counts as a current flowing south.",
+          "steps": [
+            {
+              "text": "The electron is negative, so the conventional current is to the <strong>south</strong>."
+            },
+            {
+              "text": "Left hand: first finger down (field), second finger south (current)."
+            },
+            {
+              "text": "The thumb points <strong>east</strong>: the force on the electron is due east."
+            }
+          ],
+          "notes": "A positive charge moving north in the same field would be pushed west. Students who forget to reverse for the electron get exactly that answer."
+        }
+      ]
+    },
+    {
+      "id": "b-motion",
+      "short": "Motion in a magnetic field",
+      "guide": "The motion of a charged particle in a uniform magnetic field (including the determination of the charge-to-mass ratio from its path).",
+      "sections": [
+        "circle",
+        "qm"
+      ],
+      "minutes": 90,
+      "aims": [
+        "Explain why a charged particle moving at right angles to a uniform magnetic field follows a circle, and derive $r = \\dfrac{mv}{qB}$.",
+        "Determine the charge-to-mass ratio of a particle from the radius of its path."
+      ],
+      "checks": [
+        "D3-003"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Why the path is a circle",
+          "bullets": [
+            "Moving at right angles to a uniform field, the particle feels a force $qvB$ of constant size",
+            "The force is always perpendicular to the velocity, so it changes only the direction",
+            "A force of constant size, always at right angles to the motion, gives <strong>uniform circular motion</strong> (A.2)",
+            "The magnetic force is the <strong>centripetal force</strong>",
+            "Positive and negative particles curve in opposite directions"
+          ],
+          "notes": "Be careful with the wording: the size of the force is constant, but its direction keeps turning so that it always points to the centre."
+        },
+        {
+          "type": "diagram",
+          "title": "Circling in a magnetic field",
+          "figure": "d3bt",
+          "bullets": [
+            "Ask: which way round would a negative particle go?",
+            "Ask: what would happen to the circle if the particle moved faster?"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the radius of the path",
+          "start": "A particle of mass $m$ and charge $q$ moves at speed $v$ at right angles to a uniform field $B$, so $\\sin\\theta = 1$.",
+          "steps": [
+            {
+              "text": "The magnetic force provides the centripetal force",
+              "latex": "qvB = \\dfrac{mv^{2}}{r}"
+            },
+            {
+              "text": "Cancel one factor of $v$",
+              "latex": "qB = \\dfrac{mv}{r}"
+            },
+            {
+              "text": "Rearrange for the radius",
+              "latex": "r = \\dfrac{mv}{qB}"
+            }
+          ],
+          "notes": "This is not in the data booklet: students should be able to derive it every time."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the time for one orbit",
+          "start": "Use the radius just found and the time to travel once round the circle.",
+          "steps": [
+            {
+              "text": "One orbit is a distance $2\\pi r$ at speed $v$",
+              "latex": "T = \\dfrac{2\\pi r}{v}"
+            },
+            {
+              "text": "Substitute $r = \\dfrac{mv}{qB}$",
+              "latex": "T = \\dfrac{2\\pi}{v} \\cdot \\dfrac{mv}{qB}"
+            },
+            {
+              "text": "The speed cancels",
+              "latex": "T = \\dfrac{2\\pi m}{qB}"
+            }
+          ],
+          "notes": "A faster particle moves in a bigger circle but takes the same time to go round. This is the idea behind the cyclotron (not on the syllabus)."
+        },
+        {
+          "type": "bullets",
+          "title": "Reading the circle",
+          "bullets": [
+            "$r \\propto mv$: faster or heavier particles make bigger circles",
+            "A bigger charge or a stronger field makes a tighter circle",
+            "The time for one orbit does not depend on the speed",
+            "A velocity component along the field is not affected, so the path becomes a <strong>helix</strong>",
+            "Charged particles from the Sun spiral along the Earth's field lines into the polar atmosphere, where they cause the aurora"
+          ],
+          "notes": "The particles come mainly in the solar wind and in coronal mass ejections. They excite oxygen and nitrogen in the upper atmosphere, which then emit light: oxygen mostly green (and some red), nitrogen blue to violet."
+        },
+        {
+          "type": "worked",
+          "title": "An electron in a weak field",
+          "question": "An electron moving at $4.0 \\times 10^{6}$ $\\text{m s}^{-1}$ enters a uniform magnetic field of 2.5 mT at right angles to the field. Find (a) the radius of its path and (b) the time it takes to go once round.",
+          "hint": "Convert mT to T first. The magnetic force supplies the centripetal force; the time follows from the circumference and the speed.",
+          "steps": [
+            {
+              "text": "(a) Use the radius of the path.",
+              "latex": "r = \\dfrac{mv}{qB}"
+            },
+            {
+              "text": "The momentum of the electron:",
+              "latex": "mv = 9.11 \\times 10^{-31} \\times 4.0 \\times 10^{6}"
+            },
+            {
+              "text": "Divide by $qB$, with $B = 2.5 \\times 10^{-3}$ T.",
+              "latex": "r = \\dfrac{3.64 \\times 10^{-24}}{1.60 \\times 10^{-19} \\times 2.5 \\times 10^{-3}}"
+            },
+            {
+              "text": "The radius, about 9 mm:",
+              "latex": "r = 9.1 \\times 10^{-3}\\ \\text{m}"
+            },
+            {
+              "text": "(b) Circumference ÷ speed.",
+              "latex": "T = \\dfrac{2\\pi \\times 9.11 \\times 10^{-3}}{4.0 \\times 10^{6}}"
+            },
+            {
+              "text": "The time for one orbit:",
+              "latex": "T = 1.4 \\times 10^{-8}\\ \\text{s}"
+            }
+          ],
+          "notes": "Part (b) can also be done with $T = \\dfrac{2\\pi m}{qB}$, without the radius: a good check."
+        },
+        {
+          "type": "bullets",
+          "title": "Measuring the charge-to-mass ratio",
+          "bullets": [
+            "Rearranging $r = \\dfrac{mv}{qB}$ gives $\\dfrac{q}{m} = \\dfrac{v}{Br}$",
+            "So the radius of the path in a known field, and the speed, give the particle's charge-to-mass ratio",
+            "In a <strong>fine-beam tube</strong>, electrons accelerated through a p.d. $V$ move in a circle in the uniform field of a pair of coils; a little gas makes the path glow",
+            "Measure $V$, the field $B$ (set by the coil current) and the radius $r$",
+            "The ratio helps identify the particle: the electron's is about 1800 times the proton's"
+          ],
+          "notes": "The guide requires this determination. If a fine-beam tube is available, show it in a darkened room and let students read the radius off the scale inside the bulb."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving e/m for the fine-beam tube",
+          "start": "Electrons start from rest, are accelerated through a p.d. $V$, then move in a circle of radius $r$ in a field $B$.",
+          "steps": [
+            {
+              "text": "Energy gained from the accelerating field",
+              "latex": "\\tfrac{1}{2}mv^{2} = eV"
+            },
+            {
+              "text": "Speed from the radius of the circle",
+              "latex": "v = \\dfrac{eBr}{m}"
+            },
+            {
+              "text": "Substitute for $v$",
+              "latex": "\\tfrac{1}{2}m \\cdot \\dfrac{e^{2}B^{2}r^{2}}{m^{2}} = eV"
+            },
+            {
+              "text": "Simplify and rearrange",
+              "latex": "\\dfrac{e}{m} = \\dfrac{2V}{B^{2}r^{2}}"
+            }
+          ],
+          "notes": "Because the radius is squared, its percentage uncertainty counts twice: measure it as carefully as possible (a diameter is easier to read than a radius)."
+        },
+        {
+          "type": "worked",
+          "title": "A fine-beam tube reading",
+          "question": "In a fine-beam tube, electrons accelerated from rest through 180 V move in a circle of diameter 10.0 cm in a uniform magnetic field of 0.90 mT. Find the charge-to-mass ratio of the electron.",
+          "hint": "Halve the diameter, and convert mT to T, before substituting into the equation just derived.",
+          "steps": [
+            {
+              "text": "Radius and field in SI units:",
+              "latex": "r = 0.0500\\ \\text{m},\\ B = 9.0 \\times 10^{-4}\\ \\text{T}"
+            },
+            {
+              "text": "Use the result of the derivation.",
+              "latex": "\\dfrac{e}{m} = \\dfrac{2V}{B^{2}r^{2}}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "\\dfrac{e}{m} = \\dfrac{2 \\times 180}{(9.0 \\times 10^{-4})^{2}(0.0500)^{2}}"
+            },
+            {
+              "text": "The charge-to-mass ratio:",
+              "latex": "\\dfrac{e}{m} = 1.8 \\times 10^{11}\\ \\text{C kg}^{-1}"
+            }
+          ],
+          "notes": "The accepted value is $1.76 \\times 10^{11}$ $\\text{C kg}^{-1}$, so this is about 1% high. Ask which measurement most affects the result."
+        },
+        {
+          "type": "diagram",
+          "title": "A mass spectrometer",
+          "svg": "figures/d3-mass-spectrometer.svg",
+          "alt": "Positive ions with speed v enter a region of uniform magnetic field, directed out of the page, through a slit. They travel round a semicircle of radius r and hit a detector a distance x equal to 2r from the slit. A dashed, wider semicircle shows the path of heavier ions.",
+          "bullets": [
+            "Positive ions enter at right angles to $B$ and go round half a circle",
+            "They land one diameter, $x = 2r$, from the entrance",
+            "Heavier ions, with the same charge and speed, follow a wider circle"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the mass in a mass spectrometer",
+          "start": "Ions of charge $q$ and speed $v$ enter a uniform field $B$ at right angles, travel round half a circle and hit a detector a distance $x$ from where they entered.",
+          "steps": [
+            {
+              "text": "Radius of the path",
+              "latex": "r = \\dfrac{mv}{qB}"
+            },
+            {
+              "text": "The ions land one diameter away",
+              "latex": "x = 2r"
+            },
+            {
+              "text": "Substitute $r = \\dfrac{x}{2}$",
+              "latex": "\\dfrac{x}{2} = \\dfrac{mv}{qB}"
+            },
+            {
+              "text": "Rearrange for the mass",
+              "latex": "m = \\dfrac{qBx}{2v}"
+            }
+          ],
+          "notes": "Ions with the same charge and speed (given a single speed by a velocity selector) land at distances proportional to their masses, so the isotopes of an element separate."
+        },
+        {
+          "type": "worked",
+          "title": "Identifying an isotope",
+          "question": "In a mass spectrometer, singly charged positive ions moving at $1.2 \\times 10^{5}$ $\\text{m s}^{-1}$ enter a uniform magnetic field of 0.50 T at right angles. After half a circle they hit the detector 10.0 cm from the entrance. Find the mass of one ion in kg and in unified atomic mass units ($1\\ \\text{u} = 1.66 \\times 10^{-27}$ kg).",
+          "hint": "The distance to the detector is the diameter of the circle, not its radius.",
+          "steps": [
+            {
+              "text": "Use the result of the derivation.",
+              "latex": "m = \\dfrac{qBx}{2v}"
+            },
+            {
+              "text": "Substitute, with $x = 0.100$ m.",
+              "latex": "m = \\dfrac{1.60 \\times 10^{-19} \\times 0.50 \\times 0.100}{2 \\times 1.2 \\times 10^{5}}"
+            },
+            {
+              "text": "The mass of one ion:",
+              "latex": "m = 3.3 \\times 10^{-26}\\ \\text{kg}"
+            },
+            {
+              "text": "Convert to atomic mass units.",
+              "latex": "\\dfrac{3.33 \\times 10^{-26}}{1.66 \\times 10^{-27}} = 20\\ \\text{u}"
+            }
+          ],
+          "notes": "An ion of mass 20 u is neon-20, the commonest isotope of neon. Ions of neon-22 would land about 11 cm away."
+        }
+      ]
+    },
+    {
+      "id": "wire-force",
+      "short": "Force on a current-carrying wire",
+      "guide": "The magnitude and direction of the force on a current-carrying conductor in a magnetic field as given by $F = BIL\\sin\\theta$.",
+      "sections": [
+        "wire"
+      ],
+      "minutes": 45,
+      "aims": [
+        "Derive and use $F = BIL\\sin\\theta$ for the force on a current-carrying conductor.",
+        "Find the direction of the force with Fleming's left-hand rule."
+      ],
+      "challenge": "CC-D3-02",
+      "checks": [
+        "D3-014"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "The motor effect",
+          "bullets": [
+            "A current is a flow of charge, so each moving charge in the wire feels a magnetic force",
+            "These forces add up to a force on the whole wire",
+            "No current, no force; reverse either the current or the field and the force reverses",
+            "The force is zero when the wire lies along the field, and largest at right angles to it"
+          ],
+          "notes": "Demonstration: a strip of aluminium foil between the poles of a strong magnet jumps when a current passes through it. Reverse the current and it jumps the other way."
+        },
+        {
+          "type": "equation",
+          "title": "Force on a current-carrying conductor",
+          "latex": [
+            "F = BIL\\sin\\theta"
+          ],
+          "bullets": [
+            "$\\theta$: the angle between the wire (the current) and the field",
+            "$L$: the length of wire inside the field",
+            "Direction: Fleming's left-hand rule, with the second finger along the conventional current"
+          ],
+          "notes": "In the data booklet. Note the order of the letters in the booklet (B I L), different from qvB."
+        },
+        {
+          "type": "derivation",
+          "title": "From moving charges to a force on a wire",
+          "start": "Charge $q$ flows along a length $L$ of wire in a time $t$, so it moves at speed $v = L/t$.",
+          "steps": [
+            {
+              "text": "Start from the force on a moving charge",
+              "latex": "F = qvB\\sin\\theta"
+            },
+            {
+              "text": "Replace $v$ by $L/t$",
+              "latex": "F = q\\dfrac{L}{t}B\\sin\\theta"
+            },
+            {
+              "text": "Group the charge and the time",
+              "latex": "F = \\dfrac{q}{t}LB\\sin\\theta"
+            },
+            {
+              "text": "Current is charge per unit time, $I = q/t$",
+              "latex": "F = BIL\\sin\\theta"
+            }
+          ],
+          "notes": "The same angle appears in both equations: the current flows in the direction the positive charges move."
+        },
+        {
+          "type": "diagram",
+          "title": "A wire between magnet poles",
+          "figure": "d3dt",
+          "bullets": [
+            "Ask: what happens if the current is reversed?",
+            "Ask: and if the magnet is turned round as well?"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "A loudspeaker coil",
+          "question": "The coil of a loudspeaker sits in a radial magnetic field of 0.80 T, which is at right angles to the wire everywhere. The coil contains 4.5 m of wire. Find the force on the coil when the current in it is 0.50 A.",
+          "hint": "The field is perpendicular to every part of the wire, so use the whole length of wire in the field.",
+          "steps": [
+            {
+              "text": "The field is at right angles to the wire.",
+              "latex": "\\theta = 90^{\\circ},\\ \\sin\\theta = 1"
+            },
+            {
+              "text": "Substitute into the force equation.",
+              "latex": "F = BIL = 0.80 \\times 0.50 \\times 4.5"
+            },
+            {
+              "text": "The force on the coil:",
+              "latex": "F = 1.8\\ \\text{N}"
+            }
+          ],
+          "notes": "With an alternating current the force keeps reversing, so the coil and the cone attached to it vibrate and make sound."
+        },
+        {
+          "type": "worked",
+          "title": "A power cable in the Earth's field",
+          "question": "A straight 100 m span of power cable runs north–south and carries a current of 250 A northwards. The Earth's field there is $5.0 \\times 10^{-5}$ T, directed northwards and downwards at 60° to the horizontal. Find the size and direction of the force on the span.",
+          "hint": "The angle you need is the one between the current and the field. Only the part of the field at right angles to the cable produces a force.",
+          "steps": [
+            {
+              "text": "The angle between the current (north) and the field is 60°.",
+              "latex": "F = BIL\\sin\\theta"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "F = 5.0 \\times 10^{-5} \\times 250 \\times 100 \\times \\sin 60^{\\circ}"
+            },
+            {
+              "text": "The size of the force:",
+              "latex": "F = 1.1\\ \\text{N}"
+            },
+            {
+              "text": "Direction: the downward part of the field and the northward current give, by the left-hand rule, a force to the <strong>west</strong>."
+            }
+          ],
+          "notes": "About 1 N on 100 m of heavy cable is negligible, but the method is the point. A cable running east–west would feel a force of 1.25 N, because then the whole field is at right angles to it."
+        }
+      ]
+    },
+    {
+      "id": "parallel",
+      "short": "Force between parallel wires",
+      "guide": "The force per unit length between parallel wires as given by $\\dfrac{F}{L} = \\mu_0\\dfrac{I_1I_2}{2\\pi r}$, where $r$ is the separation between the two wires.",
+      "sections": [
+        "parallel"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Derive and use $\\dfrac{F}{L} = \\mu_0\\dfrac{I_1I_2}{2\\pi r}$ for the force between parallel wires.",
+        "Explain why currents in the same direction attract, and why the forces on the two wires are equal."
+      ],
+      "checks": [
+        "D3-009"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Two parallel currents",
+          "bullets": [
+            "Each wire sits in the magnetic field of the other, so each feels a force",
+            "Currents in the <strong>same</strong> direction <strong>attract</strong>; in <strong>opposite</strong> directions they <strong>repel</strong>",
+            "Careful: this is the opposite of the rule for electric charges",
+            "The two forces are a Newton's third law pair: equal in size, even when the currents are different"
+          ],
+          "notes": "Demonstration: two strips of aluminium foil hanging side by side, connected so that a large current from a low-voltage supply flows up one and down the other (they spring apart), then the same way in both (they pull together)."
+        },
+        {
+          "type": "equation",
+          "title": "Force between parallel wires",
+          "latex": [
+            "\\dfrac{F}{L} = \\mu_0\\dfrac{I_1I_2}{2\\pi r}"
+          ],
+          "bullets": [
+            "$\\dfrac{F}{L}$: the force on each metre of either wire, in $\\text{N m}^{-1}$",
+            "$r$: the separation of the wires",
+            "$\\dfrac{\\mu_0}{2\\pi} = 2 \\times 10^{-7}$ $\\text{T m A}^{-1}$"
+          ],
+          "notes": "In the data booklet."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the force per unit length",
+          "start": "Two long parallel wires a distance $r$ apart carry currents $I_1$ and $I_2$.",
+          "steps": [
+            {
+              "text": "The field of wire 1 at wire 2",
+              "latex": "B_1 = \\dfrac{\\mu_0 I_1}{2\\pi r}"
+            },
+            {
+              "text": "This field is at right angles to wire 2, so the force on a length $L$ of wire 2 is",
+              "latex": "F = B_1 I_2 L"
+            },
+            {
+              "text": "Substitute for $B_1$",
+              "latex": "F = \\dfrac{\\mu_0 I_1}{2\\pi r} \\cdot I_2 L"
+            },
+            {
+              "text": "Divide by $L$",
+              "latex": "\\dfrac{F}{L} = \\mu_0\\dfrac{I_1I_2}{2\\pi r}"
+            }
+          ],
+          "notes": "New for exams from 2028 (step 1 only): the field of a long straight wire is now in the guide and data booklet. The force between parallel wires was already on the syllabus. Starting from wire 2's field at wire 1 gives the same force, as Newton's third law requires."
+        },
+        {
+          "type": "bullets",
+          "title": "Using the parallel-wire equation",
+          "bullets": [
+            "Ordinary currents give tiny forces: two 1 A wires 1 m apart feel $2 \\times 10^{-7}$ N on each metre",
+            "This once defined the ampere; since 2019 the ampere has been defined by fixing the size of the elementary charge",
+            "Very large currents, such as in a short circuit, give forces big enough to make cables jump",
+            "Convert the separation to metres, and multiply the force per metre by the length when the total force is wanted"
+          ],
+          "notes": "Some older resources still give the force between wires as the definition of the ampere: it was replaced in the 2019 redefinition of the SI units."
+        },
+        {
+          "type": "diagram",
+          "title": "Currents in the same direction",
+          "figure": "d3et",
+          "bullets": [
+            "Use the grip rule to find the field of each wire at the other wire",
+            "Then use Fleming's left-hand rule for each force"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Jump leads",
+          "question": "While a car is being jump-started, its two jump leads lie side by side, 1.5 cm apart. Each carries a current of 150 A, in opposite directions. Find the force on each metre of lead, and say whether the leads attract or repel.",
+          "hint": "Both currents are 150 A. Remember to change the separation into metres.",
+          "steps": [
+            {
+              "text": "Use the force per unit length.",
+              "latex": "\\dfrac{F}{L} = \\mu_0\\dfrac{I_1I_2}{2\\pi r}"
+            },
+            {
+              "text": "Substitute, with $r = 0.015$ m.",
+              "latex": "\\dfrac{F}{L} = \\dfrac{4\\pi \\times 10^{-7} \\times 150 \\times 150}{2\\pi \\times 0.015}"
+            },
+            {
+              "text": "The force on each metre:",
+              "latex": "\\dfrac{F}{L} = 0.30\\ \\text{N m}^{-1}"
+            },
+            {
+              "text": "The currents are in opposite directions, so the leads <strong>repel</strong>."
+            }
+          ],
+          "notes": "Starter motors draw well over 100 A for a second or two, so the leads really do twitch apart."
+        },
+        {
+          "type": "worked",
+          "title": "Finding the current",
+          "question": "Two straight parallel rods in a laboratory, each 2.0 m long and 3.0 cm apart, carry equal currents in the same direction. They attract each other with a force of $4.0 \\times 10^{-3}$ N. Find the current in each rod.",
+          "hint": "Find the force per metre first, then put $I_1 = I_2 = I$ and rearrange for $I^{2}$.",
+          "steps": [
+            {
+              "text": "The force per metre:",
+              "latex": "\\dfrac{F}{L} = \\dfrac{4.0 \\times 10^{-3}}{2.0} = 2.0 \\times 10^{-3}\\ \\text{N m}^{-1}"
+            },
+            {
+              "text": "Rearrange, using $\\dfrac{\\mu_0}{2\\pi} = 2 \\times 10^{-7}$.",
+              "latex": "I^{2} = \\dfrac{r}{2 \\times 10^{-7}} \\cdot \\dfrac{F}{L}"
+            },
+            {
+              "text": "Substitute.",
+              "latex": "I^{2} = \\dfrac{0.030 \\times 2.0 \\times 10^{-3}}{2 \\times 10^{-7}} = 300\\ \\text{A}^{2}"
+            },
+            {
+              "text": "The current in each rod:",
+              "latex": "I = 17\\ \\text{A}"
+            }
+          ],
+          "notes": "The rods are 2.0 m long and only 3.0 cm apart, so treating them as infinitely long is reasonable."
+        }
+      ]
+    },
+    {
+      "id": "efield",
+      "short": "Motion in an electric field",
+      "guide": "The motion of a charged particle in a uniform electric field.",
+      "sections": [
+        "efield"
+      ],
+      "minutes": 50,
+      "aims": [
+        "Describe the motion of a charged particle in a uniform electric field, both along the field and entering it at right angles.",
+        "Calculate the speed of a particle accelerated from rest through a p.d. $V$, and its deflection between parallel plates."
+      ],
+      "checks": [
+        "D3-011"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "A charge in a uniform electric field",
+          "bullets": [
+            "Between parallel plates the field is uniform, so the force $F = qE$ is constant",
+            "Positive charges are pushed along the field; negative charges the opposite way",
+            "A constant force gives a constant acceleration, $\\dfrac{qE}{m}$, so the equations of motion (A.1) apply",
+            "The field does work on the charge, so it <strong>can</strong> change its speed and kinetic energy",
+            "The weight of a particle such as an electron is negligible by comparison"
+          ],
+          "notes": "For an electron in a field of $10^{4}$ $\\text{V m}^{-1}$, the electric force is about $10^{-15}$ N and the weight about $10^{-29}$ N."
+        },
+        {
+          "type": "equation",
+          "title": "Electric field equations (D.2)",
+          "latex": [
+            "E = \\dfrac{F}{q}",
+            "E = \\dfrac{V}{d}"
+          ],
+          "bullets": [
+            "Both are in the data booklet, under D.2",
+            "$V$: the p.d. between the plates; $d$: their separation"
+          ]
+        },
+        {
+          "type": "derivation",
+          "title": "Speed after accelerating from rest",
+          "start": "A particle of charge $q$ and mass $m$ starts at rest and is accelerated through a p.d. $V$.",
+          "steps": [
+            {
+              "text": "Work done on the particle by the field",
+              "latex": "W = qV"
+            },
+            {
+              "text": "All of it becomes kinetic energy",
+              "latex": "\\tfrac{1}{2}mv^{2} = qV"
+            },
+            {
+              "text": "Rearrange for the speed",
+              "latex": "v = \\sqrt{\\dfrac{2qV}{m}}"
+            }
+          ],
+          "notes": "This works only well below the speed of light. For electrons, keep accelerating p.d.s below a few kilovolts in questions."
+        },
+        {
+          "type": "derivation",
+          "title": "Why the path between the plates is a parabola",
+          "start": "A particle enters the field at right angles to it with speed $u$. The field gives it an acceleration $a$ across the plates.",
+          "steps": [
+            {
+              "text": "Along the plates there is no force: constant velocity",
+              "latex": "x = ut"
+            },
+            {
+              "text": "Across the plates: uniform acceleration from rest",
+              "latex": "y = \\tfrac{1}{2}at^{2}"
+            },
+            {
+              "text": "Eliminate the time, $t = \\dfrac{x}{u}$",
+              "latex": "y = \\dfrac{a}{2u^{2}}x^{2}"
+            },
+            {
+              "text": "Since $y \\propto x^{2}$, the path is a parabola, like a ball thrown horizontally"
+            }
+          ],
+          "notes": "Compare with projectile motion in A.1: the electric force across the plates plays the part of gravity."
+        },
+        {
+          "type": "bullets",
+          "title": "Solving deflection problems",
+          "bullets": [
+            "Split the motion into two directions at right angles, as for a projectile",
+            "Along the plates: constant speed, so the time in the field is the plate length divided by $u$",
+            "Across the plates: acceleration $\\dfrac{qE}{m}$, starting from zero velocity",
+            "After leaving the plates: no force, so a straight line",
+            "Check the deflection is less than the gap: otherwise the particle hits a plate"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "Deflection between parallel plates",
+          "figure": "d3at",
+          "bullets": [
+            "Ask: how would the path of a proton at the same speed differ?",
+            "Ask: what happens to the path if the p.d. is doubled?"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Accelerating protons",
+          "question": "In a small accelerator, protons start from rest and are accelerated through a potential difference of 5.0 kV. Find their final speed. ($m_p = 1.673 \\times 10^{-27}$ kg)",
+          "hint": "The work done by the field becomes the protons' kinetic energy.",
+          "steps": [
+            {
+              "text": "Work done = kinetic energy gained.",
+              "latex": "\\tfrac{1}{2}mv^{2} = qV"
+            },
+            {
+              "text": "Rearrange for the speed.",
+              "latex": "v = \\sqrt{\\dfrac{2qV}{m}}"
+            },
+            {
+              "text": "Substitute, with $V = 5000$ V.",
+              "latex": "v = \\sqrt{\\dfrac{2 \\times 1.60 \\times 10^{-19} \\times 5000}{1.673 \\times 10^{-27}}}"
+            },
+            {
+              "text": "The final speed:",
+              "latex": "v = 9.8 \\times 10^{5}\\ \\text{m s}^{-1}"
+            }
+          ],
+          "notes": "An electron through the same p.d. would be about 43 times faster (the square root of the mass ratio, 1836)."
+        },
+        {
+          "type": "worked",
+          "title": "An oscilloscope beam",
+          "question": "In an oscilloscope tube, electrons moving at $3.0 \\times 10^{7}$ $\\text{m s}^{-1}$ pass between two parallel plates 4.0 cm long and 2.0 cm apart, entering at right angles to the field. The p.d. between the plates is 150 V. Find (a) the electric field strength, (b) the time the electrons spend between the plates and (c) how far they are deflected sideways.",
+          "hint": "The speed along the plates sets the time in the field. Across the plates the electrons start with zero velocity and accelerate steadily.",
+          "steps": [
+            {
+              "text": "(a) Field between the plates:",
+              "latex": "E = \\dfrac{V}{d} = \\dfrac{150}{0.020} = 7500\\ \\text{V m}^{-1}"
+            },
+            {
+              "text": "(b) Plate length ÷ speed:",
+              "latex": "t = \\dfrac{0.040}{3.0 \\times 10^{7}} = 1.33 \\times 10^{-9}\\ \\text{s}"
+            },
+            {
+              "text": "(c) Acceleration across the plates:",
+              "latex": "a = \\dfrac{eE}{m} = 1.32 \\times 10^{15}\\ \\text{m s}^{-2}"
+            },
+            {
+              "text": "Sideways deflection from rest:",
+              "latex": "y = \\tfrac{1}{2}at^{2} = 1.2 \\times 10^{-3}\\ \\text{m}"
+            }
+          ],
+          "notes": "The deflection (1.2 mm) is well under half the gap, so the electrons get through. On the screen, some distance beyond the plates, the spot moves much further because the beam leaves at an angle."
+        }
+      ]
+    },
+    {
+      "id": "crossed",
+      "short": "Crossed fields",
+      "guide": "The motion of a charged particle in perpendicularly orientated uniform electric and magnetic fields.",
+      "sections": [
+        "crossed"
+      ],
+      "minutes": 35,
+      "aims": [
+        "Explain how perpendicular electric and magnetic fields can let a charged particle pass through undeflected.",
+        "Derive and use $v = \\dfrac{E}{B}$ for a velocity selector."
+      ],
+      "checks": [
+        "D3-005"
+      ],
+      "slides": [
+        {
+          "type": "bullets",
+          "title": "Crossed electric and magnetic fields",
+          "bullets": [
+            "Set up the electric field, the magnetic field and the velocity all at right angles to each other",
+            "The electric force $qE$ doesn't depend on the speed; the magnetic force $qvB$ does",
+            "With the fields the right way round, the two forces point in opposite directions",
+            "If they are equal, the net force is zero: the particle goes straight through at constant speed"
+          ],
+          "notes": "Use the left-hand rule to check that the forces oppose in the arrangement on the board before doing any calculation."
+        },
+        {
+          "type": "derivation",
+          "title": "Deriving the selected speed",
+          "start": "For a particle that passes through undeflected, the electric and magnetic forces are equal and opposite.",
+          "steps": [
+            {
+              "text": "Balance the two forces",
+              "latex": "qE = qvB"
+            },
+            {
+              "text": "Cancel the charge",
+              "latex": "E = vB"
+            },
+            {
+              "text": "Rearrange for the speed",
+              "latex": "v = \\dfrac{E}{B}"
+            },
+            {
+              "text": "The charge and the mass have gone: any particle with this speed passes straight through"
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "title": "Faster, slower, other particles",
+          "bullets": [
+            "Slower particles: the magnetic force is too small, so they are pushed in the direction of the electric force",
+            "Faster particles: the magnetic force wins",
+            "A negative particle at the same speed also passes: both forces reverse together",
+            "Used to give ions a single speed before they enter a mass spectrometer"
+          ]
+        },
+        {
+          "type": "diagram",
+          "title": "A velocity selector",
+          "figure": "d3ct",
+          "bullets": [
+            "Ask: which way would a slower particle be deflected?"
+          ]
+        },
+        {
+          "type": "worked",
+          "title": "Setting up a velocity selector",
+          "question": "Two parallel plates 8.0 mm apart have a p.d. of 1200 V between them, and a uniform magnetic field of 0.30 T acts at right angles to the electric field. Find (a) the speed of the ions that pass straight through and (b) what happens to electrons moving at the same speed.",
+          "hint": "Find the electric field strength from the plates first. For (b), think about what happens to each force when the sign of the charge changes.",
+          "steps": [
+            {
+              "text": "(a) Field between the plates:",
+              "latex": "E = \\dfrac{1200}{8.0 \\times 10^{-3}} = 1.5 \\times 10^{5}\\ \\text{V m}^{-1}"
+            },
+            {
+              "text": "Balance the forces.",
+              "latex": "v = \\dfrac{E}{B} = \\dfrac{1.5 \\times 10^{5}}{0.30}"
+            },
+            {
+              "text": "The selected speed:",
+              "latex": "v = 5.0 \\times 10^{5}\\ \\text{m s}^{-1}"
+            },
+            {
+              "text": "(b) Both forces reverse but stay equal, so the electrons also pass straight through."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
