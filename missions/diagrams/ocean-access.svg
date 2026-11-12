@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 240">
+  <!-- Ice shell (y 70 to 190) above the ocean. Left: melt probe in its channel. Right: crack and plume. Not to scale. -->
+  <rect x="10" y="70" width="440" height="120" style="fill: var(--accent-soft)"/>
+  <rect x="10" y="190" width="440" height="40" style="fill: var(--accent); opacity: 0.3"/>
+  <line x1="10" y1="70" x2="450" y2="70" class="l3"/>
+  <line x1="10" y1="190" x2="450" y2="190" class="l3 thin"/>
+  <!-- Melt probe -->
+  <line x1="110" y1="70" x2="110" y2="128" class="l1 thin" stroke-dasharray="4 4"/>
+  <rect x="100" y="128" width="20" height="34" rx="8" class="f1"/>
+  <line x1="110" y1="40" x2="110" y2="70" class="l3 thin"/>
+  <rect x="96" y="30" width="28" height="12" rx="2" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <!-- Crack and plume -->
+  <polyline points="330,190 336,160 326,130 338,100 330,70" class="l3 thin"/>
+  <path d="M330 62 l-6 -10 M330 62 l0 -14 M330 62 l6 -10" class="l2 thin"/>
+  <circle cx="318" cy="40" r="3" class="f2"/><circle cx="330" cy="34" r="3" class="f2"/><circle cx="342" cy="40" r="3" class="f2"/>
+  <circle cx="310" cy="22" r="3" class="f2"/><circle cx="326" cy="16" r="3" class="f2"/><circle cx="340" cy="20" r="3" class="f2"/><circle cx="352" cy="26" r="3" class="f2"/>
+  <!-- Labels -->
+  <text x="132" y="150" text-anchor="start" font-size="13" class="t1">melt probe</text>
+  <text x="366" y="36" text-anchor="start" font-size="13" class="t2">plume</text>
+  <text x="410" y="150" text-anchor="middle" font-size="13">ice</text>
+  <text x="230" y="216" text-anchor="middle" font-size="13">ocean</text>
+</svg>

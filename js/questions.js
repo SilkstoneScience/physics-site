@@ -478,8 +478,9 @@
           <p><span class="part-label">(${pt.label})</span>${pt.question}
              <span class="marks">[${pt.marks}]</span>
              ${hasData(q) ? `<a class="data-link" href="#data-${q.id}">↑ Data</a>` : ''}</p>
-          ${pt.figure ? msFigureHtml(q, pt.figure) : ''}
-          ${canPlot(pt) ? plotHtml(pt, s) : pt.numeric ? numericHtml(pt, s) : `<textarea rows="3" aria-label="Your answer to part (${pt.label})" placeholder="Write your answer here, then check the mark scheme.">${escapeHtml(s.answer || '')}</textarea>`}
+          ${pt.figure && !plotsOnOwnFigure(pt) ? msFigureHtml(q, pt.figure) : ''}
+          ${canPlot(pt) ? plotHtml(pt, s) : ''}
+          ${canPlot(pt) && wholePlot(pt) ? '' : pt.numeric ? numericHtml(pt, s) : `<textarea rows="3" aria-label="Your answer to part (${pt.label})" placeholder="Write your answer here, then check the mark scheme.">${escapeHtml(s.answer || '')}</textarea>`}
           ${s.revealed ? `
             <div class="markscheme">
               <strong>Mark scheme</strong>
@@ -491,6 +492,24 @@
     }).join('') +
       '<p><button class="link-btn" data-action="clear">Clear my answers to this question</button></p>' +
       (marksOf(q).allMarked ? nextButtonHtml() : '');
+
+    // Graphs drawn on screen. Parts that draw on the same figure show each other's lines faintly, as on paper,
+    // where every line goes on the one graph.
+    const mounts = {};
+    const shownFor = (label) => {
+      const me = q.parts.find((x) => x.label === label);
+      const out = [];
+      for (const other of q.parts) {
+        if (other === me || !canPlot(other) || !me.plot.on || other.plot.on !== me.plot.on) continue;
+        const st = ((progress[q.id] && progress[q.id].parts) || {})[other.label];
+        if (!st || !st.plot) continue;
+        for (const L of window.Plot.linesOf(other.plot)) {
+          const seg = L.key === 'line' && other.plot.line ? st.plot.line : st.plot.lines && st.plot.lines[L.key];
+          if (seg) out.push({ role: L.role, seg });
+        }
+      }
+      return out;
+    };
 
     area.querySelectorAll('.part').forEach((partEl) => {
       const label = partEl.dataset.part;
@@ -504,15 +523,17 @@
       if (canPlot(pt)) {
         // The graph saves itself after every change (no redraw); old feedback is removed, as it no longer applies.
         const mine = saved[label] || {};
-        window.Plot.mount(partEl.querySelector('[data-plot]'), pt.plot, mine.plot, {
+        mounts[label] = window.Plot.mount(partEl.querySelector('[data-plot]'), pt.plot, mine.plot, {
           locked: !!mine.revealed,
+          shown: shownFor(label),
           onChange: (state) => {
             const st = partState(q, label);
             st.plot = state;
             delete st.plotCheck;
             saveProgress();
-            const old = partEl.querySelector('.feedback');
+            const old = partEl.querySelector('.plot-feedback');
             if (old) old.remove();
+            for (const other of Object.keys(mounts)) if (other !== label) mounts[other].setShown(shownFor(other));
           },
         });
         const checkBtn = partEl.querySelector('[data-action="check-plot"]');
@@ -520,14 +541,16 @@
           const st = partState(q, label);
           const res = window.Plot.check(pt.plot, st.plot, pt.marks);
           st.plotCheck = { right: res.right, score: res.score, max: res.max, feedback: res.feedback };
-          if (res.right) { st.score = pt.marks; st.revealed = true; st.auto = true; }
+          // Full marks are given automatically only when the whole part is the graph.
+          if (res.right && wholePlot(pt)) { st.score = pt.marks; st.revealed = true; st.auto = true; }
           saveProgress();
           const fresh = refreshCard(q, card);
-          const fb = fresh && fresh.querySelector(`[data-part="${label}"] .feedback`);
+          const fb = fresh && fresh.querySelector(`[data-part="${label}"] .plot-feedback`);
           if (fb) announce(fb.textContent);
-          focusIn(fresh, `[data-part="${label}"] .feedback`);
+          focusIn(fresh, `[data-part="${label}"] .plot-feedback`);
         });
-      } else if (pt.numeric) {
+      }
+      if (pt.numeric && !(canPlot(pt) && wholePlot(pt))) {
         const check = () => {
           const st = partState(q, label);
           const res = checkNumeric(pt.numeric, box.value);
@@ -557,7 +580,7 @@
         const st = partState(q, label);
         st.revealed = true;
         // A graph the student drew on screen is marked for them (they can still change the marks).
-        if (canPlot(pt) && typeof st.score !== 'number' && st.plot && (st.plot.points.length || st.plot.line)) st.score = window.Plot.check(pt.plot, st.plot, pt.marks).score;
+        if (canPlot(pt) && wholePlot(pt) && typeof st.score !== 'number' && window.Plot.hasWork(pt.plot, st.plot)) st.score = window.Plot.check(pt.plot, st.plot, pt.marks).score;
         saveProgress();
         focusIn(refreshCard(q, card), `[data-part="${label}"] .markscheme`);
       });
@@ -582,22 +605,38 @@
   // full marks are awarded automatically; otherwise the feedback says what to fix and they can try again,
   // or open the mark scheme (which shows the examiner's graph) and mark themselves.
   // The blank axes picture (plot.axes) is the question's diagram on printed sheets, so it isn't shown twice here.
+  //
+  // Paper 1B graphs already show the data (plot.given), so the student only draws lines on them: the line of best
+  // fit, or the steepest and shallowest lines through the error bars. There the marks are mostly for the values read
+  // from the lines (plot.worth says how many are for the drawing), so the check gives feedback, the written answer
+  // keeps its box, and the student marks the part from the mark scheme as usual.
   const canPlot = (pt) => !!(pt.plot && window.Plot);
+  const wholePlot = (pt) => window.Plot.worthOf(pt.plot, pt.marks) === pt.marks; // every mark of the part is for the graph
   const plotsOnDiagram = (q) => (q.parts || []).some((pt) => canPlot(pt) && pt.plot.axes === q.diagram);
+  // A part that reveals a graph and lets the student draw on it shows only the graph they can draw on, not the
+  // same picture twice (printed sheets still get the picture).
+  const plotsOnOwnFigure = (pt) => canPlot(pt) && !!pt.plot.on && (typeof pt.figure === 'object' ? pt.figure.figure : pt.figure) === pt.plot.on;
   function plotHtml(pt, s) {
     const locked = !!s.revealed;
+    const whole = wholePlot(pt);
+    const nLines = window.Plot.linesOf(pt.plot).length;
+    const linesOnly = !(pt.plot.points || []).length && nLines > 0;
+    const thing = linesOnly ? (nLines > 1 ? 'lines' : 'line') : 'graph';
     let feedback = '';
     if (s.plotCheck) {
       const r = s.plotCheck;
-      const head = r.right ? `Correct! ${r.max} mark${r.max === 1 ? '' : 's'}.` : r.score ? `${r.score} of ${r.max} marks so far.` : 'Not quite.';
-      feedback = `<div class="feedback ${r.right ? 'good' : 'bad'}"><strong>${head}</strong>
+      let head;
+      if (whole) head = r.right ? `Correct! ${r.max} mark${r.max === 1 ? '' : 's'}.` : r.score ? `${r.score} of ${r.max} marks so far.` : 'Not quite.';
+      else if (!r.right) head = 'Not quite.';
+      else head = r.max ? `Good: that earns ${r.max} of this part's ${pt.marks} marks. Count it when you mark yourself.` : `Good: now use your ${thing} to answer the question.`;
+      feedback = `<div class="feedback plot-feedback ${r.right ? 'good' : 'bad'}"><strong>${head}</strong>
         <ul class="plot-fb">${r.feedback.map((f) => `<li>${f.ok ? '✓' : '✗'} ${escapeHtml(f.text)}</li>`).join('')}</ul>
-        ${r.right ? '' : '<p class="num-hint">Change your graph and check again, or look at the mark scheme.</p>'}</div>`;
+        ${r.right ? '' : `<p class="num-hint">Change your ${thing} and check again, or look at the mark scheme.</p>`}</div>`;
     }
     return `
       <div data-plot></div>
       ${locked ? '' : `<div class="num-row">
-        <button class="primary" data-action="check-plot">Check my graph</button>
+        <button class="${whole ? 'primary' : 'secondary'}" data-action="check-plot">Check my ${thing}</button>
         ${pt.plot.axes ? `<a class="plot-print" href="${escapeAttr(pt.plot.axes)}" target="_blank" rel="noopener">Blank axes to print</a>` : ''}
       </div>`}
       ${feedback}`;

@@ -113,6 +113,9 @@ export default {
       },
       {
         label: 'd', sections: ['systems'], marks: 2, ao: 'AO2', figure: 'graph', msFigure: 'graph-ms',
+        // Click-to-plot (question bank): the student draws the line of best fit on the graph before reading values from it.
+        // The line must reach the vertical axis: part (e) is about its intercept.
+        plot: { lines: ['best'], toYAxis: true },
         question: 'The student plots a graph of $T^2$ against $m$, shown below. Determine $k$.',
         numeric: d.num('k'),
         markscheme: [

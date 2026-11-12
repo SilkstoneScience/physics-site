@@ -119,6 +119,9 @@ export default {
       },
       {
         label: 'b', sections: ['contact'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        // Click-to-plot (question bank): the student draws the line of best fit on the graph before reading values from it.
+        // The line follows only the straight part of the data (graph.exclude lists the readings beyond it).
+        plot: { lines: ['best'] },
         question: 'Determine $k$, the load per unit extension, in the region where Hooke\'s law holds.',
         numeric: d.num('k'),
         markscheme: [

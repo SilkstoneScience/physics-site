@@ -128,12 +128,18 @@ function checkQuestion(q, file) {
   });
 }
 
-// A click-to-plot graph (js/plot.js): the correct graph must earn the part's full marks, and an empty one nothing.
+// A click-to-plot graph (js/plot.js): the correct graph must earn the marks the graph carries, and an empty one nothing.
+// The graph either has points for the student to plot, or already shows the data (given) and asks for lines.
 function checkPlotField(where, p, marks) {
   const axis = (a) => a && [a.min, a.max, a.step, a.major].every(Number.isFinite) && a.max > a.min && a.step > 0 && a.symbol;
-  if (!axis(p.x) || !axis(p.y) || !Array.isArray(p.points) || p.points.length < 2) { err(where, 'plot needs x and y axes (min, max, step, major, symbol) and at least two points'); return; }
-  if (!Plot.check(p, { points: p.points, line: Plot.expectedLine(p) }, marks).right) err(where, 'plot: the correct graph is not given full marks');
-  if (Plot.check(p, { points: [], line: null }, marks).score !== 0) err(where, 'plot: an empty graph earns marks');
+  const enough = Array.isArray(p.points) && (p.points.length >= 2 || (Array.isArray(p.given) && p.given.length >= 2 && Plot.linesOf(p).length > 0));
+  if (!axis(p.x) || !axis(p.y) || !enough) { err(where, 'plot needs x and y axes (min, max, step, major, symbol) and at least two points to plot, or given points and a line to draw'); return; }
+  const worth = Plot.worthOf(p, marks);
+  if (!Number.isInteger(worth) || worth < 0 || worth > marks) { err(where, `plot: worth must be a whole number from 0 to the part's ${marks} marks`); return; }
+  const full = Plot.check(p, Plot.ideal(p), marks);
+  if (!full.right || full.score !== worth) err(where, 'plot: the correct graph is not accepted');
+  const empty = Plot.check(p, { points: [], line: null }, marks);
+  if (empty.right || empty.score !== 0) err(where, 'plot: an empty graph is accepted');
 }
 
 function checkNumericField(where, n) {
@@ -509,6 +515,128 @@ for (const name of exists('mysteries') ? fs.readdirSync(path.join(ROOT, 'mysteri
   checkText(`${rel} accusation`, A.model, 'model');
   if (A.solution !== undefined) checkText(`${rel} accusation`, A.solution, 'solution');
   if (!Array.isArray(A.checklist) || !A.checklist.length) err(`${rel} accusation`, 'needs a checklist');
+}
+
+// ---------- 2g. Mission log adventures (missions/*.json, played by mission.html and js/mission.js) ----------
+// Plan: docs/MISSION_LOG_PLAN.md. A mission is a list of scenes joined by "next" (and "detour"); every scene must be
+// reachable from "start", and the story may only stop at a "pause" or "ending" scene.
+for (const name of exists('missions') ? fs.readdirSync(path.join(ROOT, 'missions')).filter((n) => n.endsWith('.json')) : []) {
+  const rel = `missions/${name}`;
+  let M;
+  try { M = JSON.parse(read(rel)); } catch (e) { err(rel, `isn't valid JSON: ${e.message}`); continue; }
+  if (M.id !== name.replace(/\.json$/, '')) err(rel, `"id" must match the file name (${name.replace(/\.json$/, '')})`);
+  if (!exists('games.html') || !read('games.html').includes(`mission.html?mission=${M.id}`)) warn(rel, 'not linked from games.html yet');
+  for (const k of ['title', 'intro', 'summary', 'time']) checkText(rel, M[k], k);
+  if (!['SL', 'HL'].includes(M.level)) err(rel, 'level must be "SL" or "HL"');
+  for (const t of M.topics || []) if (!TOPICS.has(t)) err(rel, `unknown topic "${t}"`);
+  const gauges = new Set((M.gauges || []).map((g) => g.id));
+  if (!gauges.size || (M.gauges || []).some((g) => !g.id || !g.label)) err(rel, 'needs "gauges", each with an id and a label');
+  const scenes = new Map();
+  for (const sc of M.scenes || []) {
+    if (scenes.has(sc.id)) err(`${rel} scene ${sc.id}`, 'duplicate id');
+    scenes.set(sc.id, sc);
+  }
+  if (!scenes.has(M.start)) err(rel, `"start" scene "${M.start}" doesn't exist`);
+  const TYPES = ['story', 'decision', 'detour', 'fork', 'log', 'pause', 'finale', 'ending'];
+  for (const sc of scenes.values()) {
+    const where = `${rel} scene ${sc.id}`;
+    if (!TYPES.includes(sc.type)) { err(where, `type must be one of ${TYPES.join(', ')}`); continue; }
+    checkText(where, sc.title, 'title');
+    if (sc.type === 'ending') { if (sc.next) err(where, 'an ending scene ends the story, so it can\'t have "next"'); }
+    else if (sc.type === 'pause' && !sc.next) { /* the end of what has been written so far */ }
+    else if (sc.type === 'finale') {
+      // Picks the first ending whose conditions are met; the last one must have none, so there is always an ending.
+      if (sc.next) err(where, 'a finale goes on through its "endings", so it can\'t have its own "next"');
+      const ends = sc.endings || [];
+      if (ends.length < 2) err(where, 'a finale needs at least 2 endings');
+      ends.forEach((e, i) => {
+        if ((scenes.get(e.next) || {}).type !== 'ending') err(where, `ending ${i + 1}: "${e.next}" isn't an ending scene`);
+        for (const k of Object.keys(e)) if (!['next', 'minTotal', 'maxWrong', 'minLog'].includes(k)) err(where, `ending ${i + 1}: unknown condition "${k}"`);
+      });
+      const last = ends[ends.length - 1];
+      if (last && Object.keys(last).length !== 1) err(where, 'the last ending must have no conditions, so that every player reaches an ending');
+    }
+    else if (sc.type === 'fork') {
+      if (sc.next) err(where, 'a fork goes on through its options\' "next", so it can\'t have its own "next"');
+      checkText(where, sc.html, 'html');
+      checkText(where, sc.question, 'question');
+      const opts = sc.options || [];
+      if (opts.length < 2 || opts.length > 4) err(where, 'a fork needs 2 to 4 options');
+      opts.forEach((o, i) => {
+        for (const k of ['label', 'text', 'result']) checkText(where, o[k], `option ${i + 1} ${k}`);
+        if (!gauges.has(o.gauge)) err(where, `option ${i + 1}: unknown gauge "${o.gauge}"`);
+        if (!(o.cost > 0)) err(where, `option ${i + 1} needs a "cost"`);
+        if (!scenes.has(o.next)) err(where, `option ${i + 1}: "next" scene "${o.next}" doesn't exist`);
+      });
+    }
+    else if (!scenes.has(sc.next)) err(where, `"next" scene "${sc.next}" doesn't exist`);
+    if (sc.hl) {
+      if (sc.type !== 'decision') err(where, 'only a decision can have an "hl" extra');
+      for (const k of ['task', 'hint', 'working']) checkText(where, sc.hl[k], `hl.${k}`);
+      if (!sc.hl.numeric) err(where, 'the "hl" extra needs a "numeric" answer');
+      else checkNumericField(`${where} hl`, sc.hl.numeric);
+    }
+    if (sc.figure) {
+      if (!sc.figure.alt) err(where, 'figure has no alt text');
+      if (!sc.figure.svg || !exists(`missions/${sc.figure.svg}`)) err(where, `figure file not found: missions/${sc.figure.svg}`);
+      else if (/\sid="/.test(read(`missions/${sc.figure.svg}`)) || /<defs[\s>]/.test(read(`missions/${sc.figure.svg}`))) err(where, 'the picture contains an id or <defs>');
+    }
+    if (['story', 'pause', 'ending'].includes(sc.type)) checkText(where, sc.html, 'html');
+    if (sc.type === 'log') {
+      checkText(where, sc.prompt, 'prompt');
+      checkText(where, sc.model, 'model');
+      if (!Array.isArray(sc.checklist) || !sc.checklist.length) err(where, 'needs a checklist');
+    }
+    if (sc.type === 'decision' || sc.type === 'detour') {
+      for (const k of ['task', 'hint', 'working', 'success', 'failure']) checkText(where, sc[k], k);
+      if (sc.type === 'decision') checkText(where, sc.log, 'log'); else checkText(where, sc.html, 'html');
+      if (!gauges.has(sc.gauge)) err(where, `unknown gauge "${sc.gauge}"`);
+      if (!TOPICS.has(sc.topic)) err(where, `unknown topic "${sc.topic}"`);
+      else {
+        if (!(M.topics || []).includes(sc.topic)) err(where, `topic ${sc.topic} isn't in the mission's "topics" list`);
+        if (M.level === 'SL' && TOPICS.get(sc.topic)?.hl) err(where, 'an SL mission uses an HL-only topic');
+        if (sc.section) {
+          const page = `themes/${sc.topic.replace('.', '').toLowerCase()}.html`;
+          if (!new RegExp(`\\sid="${sc.section}"`).test(read(page))) err(where, `section "${sc.section}" isn't an id on ${page}`);
+        }
+      }
+      if (!sc.numeric) err(where, 'needs a "numeric" answer');
+      else { checkNumericField(where, sc.numeric); if (!sc.numeric.unit) warn(where, 'numeric answer has no unit'); }
+    }
+    if (sc.type === 'decision') {
+      if (!Number.isInteger(sc.number)) err(where, 'needs a decision "number"');
+      if (sc.detour) {
+        const d = scenes.get(sc.detour);
+        if (!d || d.type !== 'detour') err(where, `"detour" must be a detour scene ("${sc.detour}" isn't)`);
+        else if (d.next !== sc.next) err(where, `its detour ${d.id} must rejoin the story at "${sc.next}"`);
+        if (sc.cost !== 15) err(where, 'a decision with a detour costs 15');
+      } else if (sc.cost !== 10) err(where, 'a decision without a detour costs 10');
+      const c = sc.choice;
+      if (!c || !Array.isArray(c.options) || c.options.length < 2 || c.options.length > 4) err(where, 'choice needs 2 to 4 options');
+      else {
+        checkText(where, c.question, 'choice.question');
+        checkText(where, c.explain, 'choice.explain');
+        c.options.forEach((o, i) => checkText(where, o, `choice option ${i + 1}`));
+        if (!Number.isInteger(c.answer) || c.answer < 0 || c.answer >= c.options.length) err(where, 'choice.answer must be the number of the correct option (0 = first)');
+        c.options.forEach((o, i) => { if (i !== c.answer && !(c.feedback && c.feedback[i])) err(where, `choice option ${i + 1} is wrong but has no feedback`); });
+      }
+    }
+    if (sc.type === 'detour' && !(sc.refund > 0)) err(where, 'a detour needs a "refund" (points won back when it is solved)');
+  }
+  // Every scene must be reachable from the start.
+  const seen = new Set();
+  const todo = [M.start];
+  while (todo.length) {
+    const sid = todo.pop();
+    if (seen.has(sid) || !scenes.has(sid)) continue;
+    seen.add(sid);
+    const sc = scenes.get(sid);
+    if (sc.next) todo.push(sc.next);
+    if (sc.detour) todo.push(sc.detour);
+    for (const o of sc.type === 'fork' ? sc.options || [] : []) todo.push(o.next);
+    for (const e of sc.type === 'finale' ? sc.endings || [] : []) todo.push(e.next);
+  }
+  for (const sid of scenes.keys()) if (!seen.has(sid)) err(`${rel} scene ${sid}`, 'can never be reached from the start');
 }
 
 // ---------- 3. Pages: set-up and links ----------

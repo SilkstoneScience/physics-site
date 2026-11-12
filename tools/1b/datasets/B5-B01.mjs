@@ -127,6 +127,9 @@ export default {
       },
       {
         label: 'b', sections: ['internal'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        // Click-to-plot (question bank): the student draws the line of best fit on the graph before reading values from it.
+        // The line leaves out the anomalous reading (graph.exclude) and must reach the V axis, where the emf is read.
+        plot: { lines: ['best'], toYAxis: true },
         reads: [{ figure: 'graph', x: 0, y: d.r.emf.value }],
         question: 'Determine the emf $\\varepsilon$ of the cell.',
         numeric: d.num('emf'),

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 230">
+  <!-- Ice shell (y 50 to 170) above the ocean. Sound pulse from the charge (x 170) down to the boundary (x 200) and back up to the detector (x 230). Not to scale. -->
+  <rect x="10" y="50" width="400" height="120" style="fill: var(--accent-soft)"/>
+  <rect x="10" y="170" width="400" height="50" style="fill: var(--accent); opacity: 0.3"/>
+  <line x1="10" y1="50" x2="410" y2="50" class="l3"/>
+  <line x1="10" y1="170" x2="410" y2="170" class="l3 thin"/>
+  <!-- Pulse path -->
+  <polyline points="170,54 200,166 230,54" class="l1 thin"/>
+  <polygon points="178,103 188,101 187,118" class="f1"/>
+  <polygon points="208,117 218,119 217,102" class="f1"/>
+  <!-- Charge and detector -->
+  <circle cx="170" cy="44" r="6" class="f3"/>
+  <rect x="224" y="38" width="12" height="12" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <!-- Labels -->
+  <text x="160" y="30" text-anchor="end" font-size="13">charge</text>
+  <text x="242" y="30" text-anchor="start" font-size="13">detector</text>
+  <text x="330" y="116" text-anchor="middle" font-size="13">ice</text>
+  <text x="330" y="202" text-anchor="middle" font-size="13">ocean</text>
+</svg>

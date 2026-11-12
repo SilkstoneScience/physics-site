@@ -1,0 +1,77 @@
+/* Mission log adventures (mission.html). Colours come from the tokens in style.css, so dark mode follows. */
+
+.button.small { padding: 7px 12px; font-size: 0.92rem; }
+.ml-meta { margin: 6px 0 10px; }
+.ml-meta .tag { text-decoration: none; }
+.ml-how { margin: 8px 0 14px; }
+.ml-how summary { cursor: pointer; font-weight: 600; }
+.ml-help { color: var(--muted); font-size: 0.93rem; }
+
+/* Gauges and status: stays in view while the student scrolls through a scene */
+.ml-status { position: sticky; top: 0; z-index: 5; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 8px 14px; margin: 12px 0; }
+.ml-gauges { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 16px; }
+.ml-gauge { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; font-size: 0.92rem; }
+.ml-g-label { font-weight: 600; }
+.ml-g-bar { display: block; height: 10px; border-radius: 999px; background: var(--bg); border: 1px solid var(--border); overflow: hidden; }
+.ml-g-bar span { display: block; height: 100%; background: var(--good); transition: width 0.6s ease; }
+.ml-gauge.low .ml-g-bar span { background: var(--bad); }
+.ml-g-num { font-variant-numeric: tabular-nums; min-width: 2ch; text-align: right; }
+.ml-status-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin: 6px 0 0; font-size: 0.92rem; }
+.ml-status-btns { margin-left: auto; display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* The current scene */
+.ml-scene { border: 1px solid var(--border); border-left: 5px solid var(--theme-d); border-radius: var(--radius); background: var(--surface);
+  padding: 4px 18px 14px; margin: 14px 0; }
+.ml-scene[data-type="detour"] { border-left-color: var(--bad); }
+.ml-scene[data-type="log"] { border-left-color: var(--accent); }
+.ml-scene h2 { margin-top: 4px; }
+.ml-scene h2:focus { outline: none; }
+.ml-kicker { margin: 12px 0 0; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.ml-stake { background: var(--warn-soft); }
+.ml-task { margin-top: 10px; }
+.ml-calc label { font-weight: 600; display: block; margin-top: 8px; }
+.ml-calc-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 4px; }
+.ml-calc input { width: 9em; font: inherit; padding: 7px 9px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); }
+.ml-help-btns { font-size: 0.93rem; }
+.ml-choice h3 { margin: 16px 0 4px; }
+.ml-why { font-size: 0.92rem; color: var(--muted); margin: 4px 0 0 12px; }
+.ml-explain { background: var(--accent-soft); border-radius: 8px; padding: 8px 12px; }
+.ml-choice .option.is-chosen { border-color: var(--accent); background: var(--accent-soft); opacity: 1; }
+.ml-fact { margin: 16px 0; }
+.ml-fact summary { cursor: pointer; font-weight: 600; }
+.ml-hl { border-left: 4px solid var(--theme-b); padding: 2px 0 2px 12px; margin: 16px 0 0; }
+.ml-outcome { border-radius: 8px; padding: 4px 14px; margin: 14px 0 0; }
+.ml-outcome.good { background: var(--good-soft); }
+.ml-outcome.bad { background: var(--bad-soft); }
+.ml-change { font-weight: 700; }
+.ml-next { margin-top: 12px; }
+textarea[data-log] { width: 100%; box-sizing: border-box; font: inherit; padding: 8px 10px; margin-top: 6px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--bg); color: var(--text); }
+.ml-model { background: var(--accent-soft); border-radius: 8px; padding: 8px 12px; margin: 10px 0; }
+.ml-model p { margin: 4px 0; }
+.ml-ticks { border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin: 10px 0 0; }
+.ml-ticks legend { font-weight: 700; padding: 0 6px; }
+.ml-tick { display: block; margin: 6px 0; cursor: pointer; }
+.ml-tick input { margin-right: 6px; }
+
+/* The mission so far */
+.ml-trail { margin: 10px 0 20px; }
+.ml-trail summary { cursor: pointer; font-weight: 600; }
+.ml-trail li.ok::marker { color: var(--good); }
+.ml-trail li.bad::marker { color: var(--bad); }
+.ml-trail-note { color: var(--muted); font-size: 0.9rem; }
+
+/* Phones */
+@media (max-width: 600px) {
+  .ml-gauges { grid-template-columns: 1fr; }
+  .ml-status { position: static; padding: 6px 10px; }
+  .ml-status-btns { margin-left: 0; }
+  [data-act="board"] { display: none; }
+  .ml-scene { padding: 2px 12px 12px; }
+}
+
+/* Board view: full screen, large text for the class */
+body.ml-on-board #site-header, body.ml-on-board #site-footer, body.ml-on-board .crumbs, body.ml-on-board .page-back,
+body.ml-on-board .eq-fab { display: none; }
+body.ml-on-board main { max-width: 1400px; font-size: 1.3rem; }
