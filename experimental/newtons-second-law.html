@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: Newton's second law · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab with Vernier sensors: pull a cart along a track with a falling mass, measure the force and the acceleration, and find the cart's mass from the gradient.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/newtons-second-law.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: Newton's second law · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab with Vernier sensors: pull a cart along a track with a falling mass, measure the force and the acceleration, and find the cart's mass from the gradient.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/newtons-second-law.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-newton2",
+    "title": "Newton's second law",
+    "file": "Newton's second law lab",
+    "tables": {
+      "runs": {
+        "note": "One row for each hanging mass. Work out the means and their uncertainties (half the range) as you go.",
+        "csvFile": "newtons-second-law.csv",
+        "x": 10, "y": 5,
+        "cols": [
+          { "html": "Hanging mass / kg", "csv": "hanging mass / kg", "aria": "hanging mass in kilograms" },
+          { "html": "<i>F</i><sub>1</sub> / N", "csv": "force F1 / N", "aria": "force, trial 1, in newtons" },
+          { "html": "<i>F</i><sub>2</sub> / N", "csv": "force F2 / N", "aria": "force, trial 2, in newtons" },
+          { "html": "<i>F</i><sub>3</sub> / N", "csv": "force F3 / N", "aria": "force, trial 3, in newtons" },
+          { "html": "Mean <i>F</i> / N", "csv": "mean force F / N", "aria": "mean force in newtons" },
+          { "html": "Δ<i>F</i> / N", "csv": "uncertainty in F / N", "aria": "uncertainty in the mean force in newtons" },
+          { "html": "<i>a</i><sub>1</sub> / m s<sup>−2</sup>", "csv": "acceleration a1 / m s^-2", "aria": "acceleration, trial 1, in metres per second squared" },
+          { "html": "<i>a</i><sub>2</sub> / m s<sup>−2</sup>", "csv": "acceleration a2 / m s^-2", "aria": "acceleration, trial 2, in metres per second squared" },
+          { "html": "<i>a</i><sub>3</sub> / m s<sup>−2</sup>", "csv": "acceleration a3 / m s^-2", "aria": "acceleration, trial 3, in metres per second squared" },
+          { "html": "Mean <i>a</i> / m s<sup>−2</sup>", "csv": "mean acceleration a / m s^-2", "aria": "mean acceleration in metres per second squared" },
+          { "html": "Δ<i>a</i> / m s<sup>−2</sup>", "csv": "uncertainty in a / m s^-2", "aria": "uncertainty in the mean acceleration in metres per second squared" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Newton's second law</p>
+    <h1>Newton's second law</h1>
+    <p class="lead">A lab with Vernier sensors: a falling mass pulls a cart along a level track, a force sensor on the cart measures the pull, and a motion encoder tracks the cart's motion. <span class="tag">A.2 Forces and momentum</span> <span class="tag vernier-tag">Vernier</span></p>
+    <p><strong>Aim:</strong> to find how the acceleration of a cart depends on the resultant force on it, and to find the cart's mass from a graph.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#setup">Setting up</a></li>
+        <li><a href="#collect">Collecting data</a></li>
+        <li><a href="#graph">Your graph</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Writing every measurement with its uncertainty, and the result to a sensible number of significant figures.</li>
+      <li>Using repeated trials, with half the range as the uncertainty of the mean.</li>
+      <li>Plotting a graph with uncertainty bars and a line of best fit.</li>
+      <li>Explaining what a gradient means physically, and finding its uncertainty from the steepest and shallowest lines.</li>
+      <li>Comparing a value from a graph with one measured directly.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring mass and force (Tool 1); collecting data with sensors, and processing it with graphs (Tool 2); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="equipment">2. Equipment and safety</h2>
+    <ul>
+      <li>Vernier interface and a laptop with Logger Pro 3</li>
+      <li>Vernier Dynamics Track with a pulley and pulley bracket, and a dynamics cart</li>
+      <li>Vernier Dual-Range Force Sensor, fixed to the cart</li>
+      <li>Vernier Motion Encoder (or a Motion Detector)</li>
+      <li>String, a mass hanger and slotted masses, and a balance</li>
+    </ul>
+    <div class="notice">
+      <p style="margin:0"><strong>Safety:</strong> put something soft on the floor under the hanging mass. Catch the cart before it reaches the pulley, and before the hanging mass hits the floor. Keep fingers and hair away from the pulley while the string is moving.</p>
+    </div>
+
+    <h2 id="prelab">3. Before the lab</h2>
+    <p>Your teacher will show you the apparatus: a mass hangs from a string that runs over a pulley and pulls the cart along the track. The force sensor rides on the cart, so it measures the pull of the string on the cart.</p>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> How could you find the cart's acceleration from the data the sensors collect?</label><textarea id="pre1" data-save="pre1" rows="3"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> Predict how the acceleration will change as the pulling force increases. Describe the shape of the graph of acceleration against force that you expect, before you collect any data.</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> Name the forces on the cart while it rolls along a level track at a steady speed. Why must the track be level, and how will you check that it is?</label><textarea id="pre3" data-save="pre3" rows="3"></textarea></div>
+    </div>
+
+    <h3>Uncertainties</h3>
+    <p>The measurement you make by hand is the mass of the cart. Write it with the balance's uncertainty: for a digital balance, ± the smallest division (see <a href="../skills.html">Physics skills</a>). For example, $m = (0.523 \pm 0.001)$ kg. Each trial gives a slightly different force and acceleration, and this spread is usually bigger than the sensors' resolution, so the uncertainty of each mean is <strong>half the range</strong> of your three trials.</p>
+
+    <h2 id="setup">4. Setting up</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 210" role="img" aria-labelledby="n2t">
+        <title id="n2t">Set-up: a level track on the bench. A motion encoder sits at the left end. A cart carrying a force sensor is on the track. A string runs from the force sensor's hook to a pulley at the right end of the track, then down to a hanging mass.</title>
+        <line class="axis" x1="10" y1="120" x2="300" y2="120"/>
+        <rect class="axis" x="20" y="96" width="22" height="22" rx="3" style="fill:none"/>
+        <text x="12" y="88" font-size="12">motion encoder</text>
+        <rect class="l1" x="120" y="96" width="70" height="18" rx="4" style="fill:var(--surface)"/>
+        <rect class="l2" x="160" y="80" width="26" height="16" rx="3" style="fill:var(--surface)"/>
+        <circle class="axis" cx="135" cy="116" r="5" style="fill:var(--surface)"/>
+        <circle class="axis" cx="175" cy="116" r="5" style="fill:var(--surface)"/>
+        <text class="t1" x="112" y="140" font-size="12">cart</text>
+        <text class="t2" x="173" y="58" font-size="12" text-anchor="middle">force sensor</text>
+        <line class="l3" x1="186" y1="88" x2="290" y2="88"/>
+        <circle class="axis" cx="296" cy="100" r="12" style="fill:var(--surface)"/>
+        <line class="axis" x1="296" y1="100" x2="296" y2="120"/>
+        <line class="l3" x1="308" y1="100" x2="308" y2="160"/>
+        <rect class="axis" x="298" y="160" width="20" height="24" style="fill:none"/>
+        <text x="352" y="200" font-size="12" text-anchor="end">hanging mass</text>
+        <text x="300" y="58" font-size="12" text-anchor="middle">pulley</text>
+      </svg>
+      <figcaption>The <span class="key-2">force sensor</span> is fixed to the <span class="key-1">cart</span> and measures the pull of the string. The motion encoder measures the cart's position without touching it.</figcaption>
+    </figure>
+    <ol>
+      <li>Fix the pulley and its bracket to one end of the track. Level the track: a cart given a gentle push should roll at a steady speed in both directions, without speeding up or slowing down.</li>
+      <li>Fix the force sensor to the cart so that its hook points along the track towards the pulley. Set its switch to <strong>±10 N</strong>.</li>
+      <li>Tie a string from the sensor's hook, over the pulley, to the mass hanger. The string between the cart and the pulley should be horizontal. Let the force sensor's cable hang loosely, so that it doesn't pull on the cart.</li>
+      <li>Put the motion encoder at the other end of the track, with nothing in the way between it and the cart. (If you use a Motion Detector instead, keep the cart more than 0.15 m from it.)</li>
+      <li>Plug the force sensor into <strong>CH 1</strong>, and connect the motion encoder as its instructions say. Open <strong>Logger Pro 3</strong>: you should see readings from both sensors at the bottom of the window. You need two graphs, force against time and velocity against time: if only one shows, choose <strong>Insert ▸ Graph</strong>, then click each vertical-axis label to choose what it shows.</li>
+      <li>Weigh the cart <strong>with the force sensor on it</strong> (and anything else that will ride on it), and record its mass below.</li>
+      <li>Unhook the string, so that nothing pulls on the sensor, and choose <strong>Experiment ▸ Zero</strong>. Then hook the string back on.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Measurements</h3>
+      <label class="vlab-field">Mass of the cart with the force sensor <i>M</i> / kg <input data-save="M" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in <i>M</i> / kg <input data-save="dM" inputmode="decimal"></label>
+    </div>
+
+    <h2 id="collect">5. Collecting data</h2>
+    <ol>
+      <li>Put a small mass (for example 10 g) on the hanger. Pull the cart back so that the hanging mass can fall 40–50 cm before it reaches the floor.</li>
+      <li>Click <strong>Collect</strong>, then let go of the cart. Catch it before it reaches the pulley.</li>
+      <li><strong>Force:</strong> on the force–time graph, drag across the part where the cart was speeding up smoothly (not the flat part before you let go). Choose <strong>Analyze ▸ Statistics</strong> and read the <strong>mean</strong> force.</li>
+      <li><strong>Acceleration:</strong> drag across the same time interval on the velocity–time graph, and choose <strong>Analyze ▸ Linear Fit</strong>. The gradient is the acceleration.</li>
+      <li>Record both values in the table. Repeat twice more with the same hanging mass, so you have three trials.</li>
+      <li>Increase the hanging mass and repeat, until you have <strong>at least five</strong> different hanging masses.</li>
+    </ol>
+    <div class="vlab-panel" data-lab-table="runs" data-report-title="Readings"></div>
+
+    <h2 id="graph">6. Your graph</h2>
+    <p>The graph updates as you type. It starts with <strong>mean force</strong> on the vertical axis and <strong>mean acceleration</strong> on the horizontal axis, so the gradient is a mass.</p>
+    <p class="vlab-small">The graph tool uses one uncertainty for every point on each axis. Type your largest Δ<i>F</i> in the vertical axis's uncertainty box and your largest Δ<i>a</i> in the horizontal axis's box (a cautious choice), then tick <strong>Steepest and shallowest lines</strong>. The uncertainty in the gradient is half the difference between their gradients. Press <strong>Add this graph to my report</strong> to keep it.</p>
+    <div class="dgraph" data-lab-graph="runs"></div>
+
+    <h2 id="analysis">7. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> How does your graph compare with the prediction you made before the lab?</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> The force sensor rides on the cart. Explain why its reading is the resultant force on the cart and sensor, so that you don't need to know how the hanging mass moves. What have you assumed about friction?</label><textarea id="a2" data-save="a2" rows="3"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> What are the units of the gradient of your graph? Write them in SI base units (m, kg, s) and show that they simplify to kilograms.</label><textarea id="a3" data-save="a3" rows="3"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> State the gradient of your graph with its uncertainty, to a sensible number of significant figures.</label><textarea id="a4" data-save="a4" rows="2"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Compare your gradient with the mass of the cart you measured on the balance. Calculate the percentage difference. Do the two values agree within their uncertainties?</label><textarea id="a5" data-save="a5" rows="3"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Does your line pass through the origin, within its uncertainty? What could a non-zero intercept tell you about the track (for example friction, or a slight slope) or about the force sensor?</label><textarea id="a6" data-save="a6" rows="3"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> Write an equation that links force, mass and acceleration, based on your results.</label><textarea id="a7" data-save="a7" rows="2"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> Compare your gradient with another group's, ideally one whose cart had a different mass. What does this suggest about the gradient of a graph of force against acceleration?</label><textarea id="a8" data-save="a8" rows="3"></textarea></div>
+      <div class="answer"><label for="a9"><strong>9.</strong> Evaluate your method: what were the main sources of uncertainty, and how could you reduce them?</label><textarea id="a9" data-save="a9" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="extension">8. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> Look at the force–time graph of one trial. The force drops suddenly at the moment you let go of the cart. Explain why, using a free-body diagram of the hanging mass before and after you let go.</label><textarea id="e1" data-save="e1" rows="3"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Suppose you kept the resultant force the same and changed the mass of the cart instead. Sketch the graph of acceleration against mass that you would expect. Why would it be hard to keep the force the same with this apparatus?</label><textarea id="e2" data-save="e2" rows="3"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your measurements, your table, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

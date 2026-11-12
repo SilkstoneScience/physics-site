@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: single-slit diffraction · Mr Silkstone's Physics</title>
+  <meta name="description" content="An HL IB DP Physics lab with Vernier sensors: scan a laser's single-slit diffraction pattern with a light sensor, plot the dark fringes and measure a slit less than a tenth of a millimetre wide.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/single-slit.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: single-slit diffraction · Mr Silkstone's Physics">
+  <meta property="og:description" content="An HL IB DP Physics lab with Vernier sensors: scan a laser's single-slit diffraction pattern with a light sensor, plot the dark fringes and measure a slit less than a tenth of a millimetre wide.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/single-slit.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-single-slit",
+    "title": "Single-slit diffraction",
+    "file": "Single-slit lab",
+    "tables": {
+      "p2": {
+        "note": "One row for each dark fringe, n = −3 to +3 (there is no n = 0: that is the central maximum). Use the last two columns for your second slit.",
+        "csvFile": "single-slit.csv",
+        "x": 1, "y": 2,
+        "cols": [
+          { "html": "Order <i>n</i>", "csv": "order n", "aria": "fringe order" },
+          { "html": "Slit 1: <i>x<sub>n</sub></i> / mm", "csv": "slit 1 position x / mm", "aria": "slit 1, position of the dark fringe in millimetres" },
+          { "html": "Slit 1: Δ<i>x<sub>n</sub></i> / mm", "csv": "slit 1 uncertainty in x / mm", "aria": "slit 1, uncertainty in the position in millimetres" },
+          { "html": "Slit 2: <i>x<sub>n</sub></i> / mm", "csv": "slit 2 position x / mm", "aria": "slit 2, position of the dark fringe in millimetres" },
+          { "html": "Slit 2: Δ<i>x<sub>n</sub></i> / mm", "csv": "slit 2 uncertainty in x / mm", "aria": "slit 2, uncertainty in the position in millimetres" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Single-slit diffraction</p>
+    <h1>Single-slit diffraction <span class="tag hl">HL</span></h1>
+    <p class="lead">A lab with Vernier sensors: a light sensor scans the pattern a laser makes after passing through a narrow slit, and the positions of the dark fringes give you the width of the slit. <span class="tag">C.3 Wave phenomena</span> <span class="tag vernier-tag">Vernier</span></p>
+    <p class="notice"><strong>HL only:</strong> single-slit diffraction is in the additional higher level content of C.3. The first part (comparing single- and double-slit patterns) is useful for SL students too.</p>
+    <p><strong>Aim:</strong> to test the theory of single-slit diffraction, and to use it to measure the width of a slit.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#theory">Theory: where are the dark fringes?</a></li>
+        <li><a href="#equipment">Equipment and laser safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#observe">Observing the patterns</a></li>
+        <li><a href="#part1">Part 1: single and double slits compared</a></li>
+        <li><a href="#part2">Part 2: scanning the single-slit pattern</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Judging realistic uncertainties, not just an instrument's resolution.</li>
+      <li>Rearranging a relationship to get a straight-line graph, and explaining its gradient and intercept.</li>
+      <li>Finding the uncertainty in a gradient from the steepest and shallowest lines.</li>
+      <li>Propagating uncertainties, and comparing a result with an accepted value.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring length and light intensity, and working safely with a laser (Tool 1); collecting data with sensors, and processing it with graphs (Tool 2); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="theory">2. Theory: where are the dark fringes?</h2>
+    <p>Treat every point across the slit as a source of wavelets (Huygens' principle). At some angles, the wavelets from the top half of the slit arrive exactly out of step with those from the bottom half and cancel: a dark fringe. For a slit of width $b$, the first dark fringe is at an angle $\theta$ given by</p>
+    $$\theta = \frac{\lambda}{b}$$
+    <p>(for small angles, in radians: see <a href="../themes/c3.html">C.3 Wave phenomena</a>). The other dark fringes follow the same pattern: the $n$th dark fringe is at $\theta_n \approx n\lambda/b$. On a sensor a distance $D$ from the slit, the $n$th dark fringe is a distance $y_n \approx D\theta_n$ from the centre, so</p>
+    $$y_n = \frac{\lambda D}{b}\,n$$
+    <p>The dark fringes should be <strong>equally spaced</strong>. The sensor measures positions $x_n$ from wherever it started, not from the centre, so</p>
+    $$x_n = \frac{\lambda D}{b}\,n + x_0$$
+    <p>A graph of $x_n$ against $n$ should be a straight line with gradient $\lambda D/b$. Its intercept $x_0$ is the position of the centre of the pattern, so you never need to find the centre yourself.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 190" role="img" aria-labelledby="ss1t">
+        <title id="ss1t">The intensity of a single-slit pattern plotted against position. A tall central maximum, cut off at the top, is surrounded by smaller maxima on each side. The dark fringes between them are labelled n = −3, −2, −1 to the left of centre and +1, +2, +3 to the right.</title>
+        <line class="axis" x1="10" y1="150" x2="350" y2="150"/>
+        <polyline class="l1" style="fill:none" points="18.0,146.6 18.9,146.4 19.8,146.3 20.7,146.2 21.6,146.1 22.5,146.0 23.4,146.0 24.3,146.0 25.2,146.0 26.1,146.1 27.0,146.2 27.9,146.3 28.8,146.5 29.7,146.7 30.6,146.9 31.5,147.1 32.4,147.3 33.3,147.6 34.2,147.8 35.1,148.1 36.0,148.4 36.9,148.6 37.8,148.9 38.7,149.1 39.6,149.3 40.5,149.5 41.4,149.7 42.3,149.8 43.2,149.9 44.1,150.0 45.0,150.0 45.9,150.0 46.8,149.9 47.7,149.8 48.6,149.6 49.5,149.4 50.4,149.2 51.3,148.9 52.2,148.6 53.1,148.2 54.0,147.9 54.9,147.4 55.8,147.0 56.7,146.6 57.6,146.1 58.5,145.6 59.4,145.2 60.3,144.7 61.2,144.3 62.1,143.9 63.0,143.5 63.9,143.1 64.8,142.8 65.7,142.6 66.6,142.4 67.5,142.2 68.4,142.1 69.3,142.1 70.2,142.1 71.1,142.2 72.0,142.4 72.9,142.6 73.8,142.9 74.7,143.2 75.6,143.6 76.5,144.0 77.4,144.4 78.3,144.9 79.2,145.5 80.1,146.0 81.0,146.5 81.9,147.1 82.8,147.6 83.7,148.1 84.6,148.5 85.5,148.9 86.4,149.3 87.3,149.6 88.2,149.8 89.1,150.0 90.0,150.0 90.9,150.0 91.8,149.8 92.7,149.5 93.6,149.2 94.5,148.7 95.4,148.1 96.3,147.5 97.2,146.7 98.1,145.8 99.0,144.8 99.9,143.8 100.8,142.6 101.7,141.5 102.6,140.2 103.5,139.0 104.4,137.7 105.3,136.4 106.2,135.2 107.1,134.0 108.0,132.8 108.9,131.7 109.8,130.7 110.7,129.8 111.6,129.0 112.5,128.4 113.4,127.9 114.3,127.5 115.2,127.4 116.1,127.4 117.0,127.6 117.9,127.9 118.8,128.5 119.7,129.2 120.6,130.1 121.5,131.2 122.4,132.4 123.3,133.7 124.2,135.2 125.1,136.7 126.0,138.3 126.9,140.0 127.8,141.6 128.7,143.2 129.6,144.7 130.5,146.2 131.4,147.4 132.3,148.5 133.2,149.3 134.1,149.8 135.0,150.0 135.9,149.8 136.8,149.2 137.7,148.1 138.6,146.4 139.5,144.3 140.4,141.5 141.3,138.1 142.2,134.0 143.1,129.2 144.0,123.7 144.9,117.5 145.8,110.5 146.7,102.8 147.6,94.3 148.5,85.0 149.4,75.0 150.3,64.3 151.2,52.8 152.1,40.6 153.0,30.0 153.9,30.0 154.8,30.0 155.7,30.0 156.6,30.0 157.5,30.0 158.4,30.0 159.3,30.0 160.2,30.0 161.1,30.0 162.0,30.0 162.9,30.0 163.8,30.0 164.7,30.0 165.6,30.0 166.5,30.0 167.4,30.0 168.3,30.0 169.2,30.0 170.1,30.0 171.0,30.0 171.9,30.0 172.8,30.0 173.7,30.0 174.6,30.0 175.5,30.0 176.4,30.0 177.3,30.0 178.2,30.0 179.1,30.0 180.0,30.0 180.9,30.0 181.8,30.0 182.7,30.0 183.6,30.0 184.5,30.0 185.4,30.0 186.3,30.0 187.2,30.0 188.1,30.0 189.0,30.0 189.9,30.0 190.8,30.0 191.7,30.0 192.6,30.0 193.5,30.0 194.4,30.0 195.3,30.0 196.2,30.0 197.1,30.0 198.0,30.0 198.9,30.0 199.8,30.0 200.7,30.0 201.6,30.0 202.5,30.0 203.4,30.0 204.3,30.0 205.2,30.0 206.1,30.0 207.0,30.0 207.9,40.6 208.8,52.8 209.7,64.3 210.6,75.0 211.5,85.0 212.4,94.3 213.3,102.8 214.2,110.5 215.1,117.5 216.0,123.7 216.9,129.2 217.8,134.0 218.7,138.1 219.6,141.5 220.5,144.3 221.4,146.4 222.3,148.1 223.2,149.2 224.1,149.8 225.0,150.0 225.9,149.8 226.8,149.3 227.7,148.5 228.6,147.4 229.5,146.2 230.4,144.7 231.3,143.2 232.2,141.6 233.1,140.0 234.0,138.3 234.9,136.7 235.8,135.2 236.7,133.7 237.6,132.4 238.5,131.2 239.4,130.1 240.3,129.2 241.2,128.5 242.1,127.9 243.0,127.6 243.9,127.4 244.8,127.4 245.7,127.5 246.6,127.9 247.5,128.4 248.4,129.0 249.3,129.8 250.2,130.7 251.1,131.7 252.0,132.8 252.9,134.0 253.8,135.2 254.7,136.4 255.6,137.7 256.5,139.0 257.4,140.2 258.3,141.5 259.2,142.6 260.1,143.8 261.0,144.8 261.9,145.8 262.8,146.7 263.7,147.5 264.6,148.1 265.5,148.7 266.4,149.2 267.3,149.5 268.2,149.8 269.1,150.0 270.0,150.0 270.9,150.0 271.8,149.8 272.7,149.6 273.6,149.3 274.5,148.9 275.4,148.5 276.3,148.1 277.2,147.6 278.1,147.1 279.0,146.5 279.9,146.0 280.8,145.5 281.7,144.9 282.6,144.4 283.5,144.0 284.4,143.6 285.3,143.2 286.2,142.9 287.1,142.6 288.0,142.4 288.9,142.2 289.8,142.1 290.7,142.1 291.6,142.1 292.5,142.2 293.4,142.4 294.3,142.6 295.2,142.8 296.1,143.1 297.0,143.5 297.9,143.9 298.8,144.3 299.7,144.7 300.6,145.2 301.5,145.6 302.4,146.1 303.3,146.6 304.2,147.0 305.1,147.4 306.0,147.9 306.9,148.2 307.8,148.6 308.7,148.9 309.6,149.2 310.5,149.4 311.4,149.6 312.3,149.8 313.2,149.9 314.1,150.0 315.0,150.0 315.9,150.0 316.8,149.9 317.7,149.8 318.6,149.7 319.5,149.5 320.4,149.3 321.3,149.1 322.2,148.9 323.1,148.6 324.0,148.4 324.9,148.1 325.8,147.8 326.7,147.6 327.6,147.3 328.5,147.1 329.4,146.9 330.3,146.7 331.2,146.5 332.1,146.3 333.0,146.2 333.9,146.1 334.8,146.0 335.7,146.0 336.6,146.0 337.5,146.0 338.4,146.1 339.3,146.2 340.2,146.3 341.1,146.4 342.0,146.6"/>
+        <text x="45" y="170" font-size="11" text-anchor="middle">−3</text>
+        <text x="90" y="170" font-size="11" text-anchor="middle">−2</text>
+        <text x="135" y="170" font-size="11" text-anchor="middle">−1</text>
+        <text x="225" y="170" font-size="11" text-anchor="middle">+1</text>
+        <text x="270" y="170" font-size="11" text-anchor="middle">+2</text>
+        <text x="315" y="170" font-size="11" text-anchor="middle">+3</text>
+        <text x="180" y="186" font-size="12" text-anchor="middle">position</text>
+        <text x="190" y="24" font-size="12">central maximum</text>
+      </svg>
+      <figcaption>Numbering the <span class="key-1">dark fringes</span>: positions to the left of centre take negative orders. The central maximum is drawn cut off (its real top is a smooth peak, not flat) so that the side maxima show; it is about 20 times brighter than the first side maximum.</figcaption>
+    </figure>
+
+    <h2 id="equipment">3. Equipment and laser safety</h2>
+    <ul>
+      <li>Vernier interface and a laptop with Logger Pro 3</li>
+      <li>Vernier Optics Expansion Kit: High Sensitivity Light Sensor and Linear Position Sensor</li>
+      <li>Vernier Diffraction Apparatus (laser and slit plate) on the Vernier Dynamics Track</li>
+      <li>A metre rule, and a green laser if one is available</li>
+    </ul>
+    <div class="notice">
+      <p style="margin:0"><strong>Laser safety:</strong> use only the school's low-power (Class 2) laser. Never look into the beam or point it at anyone, however weak it is, and keep your eyes above the height of the beam: don't bend down to look along it. Switch the laser on only when everything is in place, and watch for reflections from shiny surfaces, including the slit plate, watches and jewellery.</p>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> Split the slit into a top half and a bottom half. Pair each wavelet in the top half with the one exactly half a slit-width below it. Explain why the first dark fringe appears when the path difference between each pair is half a wavelength, and show that this happens when sin <i>θ</i> = <i>λ</i> / <i>b</i>.</label><textarea id="pre1" data-save="pre1" rows="4"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> Predict what will happen to the spacing of the dark fringes if (a) the slit is narrower, (b) the sensor is further from the slit, (c) a green laser is used instead of a red one.</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> Why is a graph of <i>x<sub>n</sub></i> against <i>n</i> a better way to find <i>λD</i> / <i>b</i> than measuring the position of one dark fringe?</label><textarea id="pre3" data-save="pre3" rows="3"></textarea></div>
+    </div>
+    <h3>Uncertainties</h3>
+    <ul>
+      <li><strong>Distance $D$ from the slit to the sensor:</strong> judge how precisely you can line up the slit and the sensor's opening with the track's scale. This is usually more than the scale's smallest division.</li>
+      <li><strong>Wavelength $\lambda$:</strong> read it, with its tolerance, from the laser's label, or ask your teacher.</li>
+      <li><strong>Position $x_n$ of each dark fringe:</strong> the minima are broad. Move the cursor across each one and note the range of positions where the intensity looks as low as it gets. Half of that range is a sensible uncertainty.</li>
+    </ul>
+    <p>Give uncertainties to 1 significant figure (2 if the uncertainty itself is known precisely), and round each value to the same decimal place. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <h2 id="observe">5. Observing the patterns</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 140" role="img" aria-labelledby="ss2t">
+        <title id="ss2t">Set-up on a track: a laser at the left end shines through a slit plate about 10 cm away. At the right end, a light sensor sits on the moving stage of a linear position sensor, which slides across the pattern at right angles to the beam. D is the distance from the slit to the light sensor.</title>
+        <line class="axis" x1="10" y1="96" x2="350" y2="96"/>
+        <rect class="axis" x="16" y="70" width="44" height="22" rx="3" style="fill:var(--surface)"/>
+        <line class="l2" x1="60" y1="81" x2="300" y2="81"/>
+        <rect class="l1" x="84" y="62" width="6" height="34" style="fill:var(--surface)"/>
+        <rect class="axis" x="300" y="58" width="34" height="38" rx="3" style="fill:var(--surface)"/>
+        <line class="l3 thin" x1="317" y1="50" x2="317" y2="104"/>
+        <text x="16" y="62" font-size="12">laser</text>
+        <text class="t1" x="70" y="118" font-size="12">slit</text>
+        <text x="250" y="44" font-size="12">light sensor</text>
+        <line class="axis thin" x1="87" y1="128" x2="317" y2="128"/>
+        <line class="axis thin" x1="87" y1="122" x2="87" y2="134"/>
+        <line class="axis thin" x1="317" y1="122" x2="317" y2="134"/>
+        <text x="196" y="124" font-size="13">D</text>
+      </svg>
+      <figcaption>The <span class="key-2">laser beam</span> passes through the <span class="key-1">slit</span>. The light sensor slides across the pattern on the linear position sensor, at right angles to the beam: into and out of the page in this view (not to scale).</figcaption>
+    </figure>
+    <ol>
+      <li>Fix the laser at one end of the track, facing along it. Connect its power supply, but leave it switched off.</li>
+      <li>Turn the slit plate to a single slit of width 0.08 mm. Fix it to the track about 10 cm from the laser, with its shiny side towards the laser.</li>
+      <li>Fix the light sensor and the linear position sensor at the other end of the track, with the light sensor facing the slit.</li>
+      <li>Switch the laser on. Adjust it sideways until the pattern is brightest, and up or down until the pattern is level with the light sensor's opening. Do this again every time you change the slit.</li>
+      <li>Slide the sensor so that the pattern falls on the white screen beside its opening, and describe the pattern below.</li>
+      <li>Change to a double slit (slit width 0.08 mm, separation 0.25 mm). Line up the laser again and describe the pattern. Switch the laser off.</li>
+    </ol>
+    <div data-report-section="Observing the patterns">
+      <div class="answer"><label for="o1"><strong>O1.</strong> Describe the single-slit pattern.</label><textarea id="o1" data-save="o1" rows="3"></textarea></div>
+      <div class="answer"><label for="o2"><strong>O2.</strong> Describe the double-slit pattern. What do the two patterns have in common, and how are they different?</label><textarea id="o2" data-save="o2" rows="3"></textarea></div>
+    </div>
+
+    <h2 id="part1">6. Part 1: single and double slits compared</h2>
+    <p>Measure on the white screen with a ruler. Write each distance with its uncertainty.</p>
+    <div class="vlab-panel measure-panel">
+      <h3>Part 1 measurements (single slit, width 0.08 mm)</h3>
+      <label class="vlab-field">Centre of the pattern to the middle of the 1st dark fringe / mm <input data-save="s-d1"></label>
+      <label class="vlab-field">Centre of the pattern to the middle of the 2nd dark fringe / mm <input data-save="s-d2"></label>
+      <label class="vlab-field">Width of the central bright region (dark fringe to dark fringe) / mm <input data-save="s-w"></label>
+    </div>
+    <div class="vlab-panel measure-panel">
+      <h3>Part 1 measurements (double slit, width 0.08 mm, separation 0.25 mm)</h3>
+      <label class="vlab-field">Centre of the pattern to where the fringes seem to disappear / mm <input data-save="d-d1"></label>
+      <label class="vlab-field">Width of the central bright region / mm <input data-save="d-w"></label>
+    </div>
+    <div data-report-section="Part 1: evaluation">
+      <div class="answer"><label for="q1"><strong>1.</strong> Compare your measurements of the two patterns. Which feature seems to come from each single slit, and which from having two slits? Compare with other groups.</label><textarea id="q1" data-save="q1" rows="3"></textarea></div>
+      <div class="answer"><label for="q2"><strong>2.</strong> Which feature of the single-slit pattern should change if the slit is wider? Predict, then test it.</label><textarea id="q2" data-save="q2" rows="3"></textarea></div>
+      <div class="answer"><label for="q3"><strong>3.</strong> Which feature of the double-slit pattern should change if the slits are further apart but just as wide? Predict, then test it.</label><textarea id="q3" data-save="q3" rows="3"></textarea></div>
+      <div class="answer"><label for="q4"><strong>4.</strong> Measure the spacing <i>s</i> of the bright fringes in the double-slit pattern. Use <i>s</i> = <i>λD</i> / <i>d</i> to predict it from the slit separation, and compare.</label><textarea id="q4" data-save="q4" rows="3"></textarea></div>
+    </div>
+
+    <h2 id="part2">7. Part 2: scanning the single-slit pattern</h2>
+    <ol>
+      <li>Connect the light sensor and the linear position sensor to the interface and open <strong>Logger Pro 3</strong>.</li>
+      <li>Choose the single slit of width 0.08 mm and line up the laser as before.</li>
+      <li>Measure $D$, the distance from the slit to the light sensor, and record it with $\lambda$ and the slit width the plate states, each with its uncertainty.</li>
+      <li>Fit the 0.5 mm opening to the light sensor. Set its sensitivity so that the top of the central maximum is not flat (a flat top means the sensor is overloaded). Your teacher may suggest a setting.</li>
+      <li>Slide the sensor all the way to the right (as seen from the laser) and choose <strong>Experiment ▸ Zero</strong> for both sensors.</li>
+      <li>Click <strong>Collect</strong>, then slide the sensor smoothly to the other end, taking at least 20 seconds and moving more slowly across the bright parts. Click <strong>Stop</strong> when it reaches the end.</li>
+      <li>Choose <strong>Experiment ▸ Store Latest Run</strong>, then collect a second run, sliding the other way. The two traces should lie on top of each other; if they don't, repeat more smoothly.</li>
+      <li>Zoom in, and use <strong>Analyze ▸ Examine</strong> to find the position $x_n$ of the middle of the first three dark fringes on each side, $n = -3$ to $+3$. Move the cursor either side of each minimum to judge its uncertainty. Record them in the table.</li>
+      <li>Save the file. Repeat steps 2–8 with a second slit width, changing the sensor's opening if you need to see more detail. Switch the laser off when you finish.</li>
+    </ol>
+    <p class="vlab-small"><strong>Note:</strong> light reflected from the front of the slit plate can make a sharp dip at the very top of the central maximum. It doesn't change where the dark fringes are.</p>
+    <div class="vlab-panel measure-panel">
+      <h3>Part 2 measurements</h3>
+      <label class="vlab-field">Distance from the slit to the sensor <i>D</i> / mm (with its uncertainty) <input data-save="D"></label>
+      <label class="vlab-field">Wavelength <i>λ</i> / nm (with its uncertainty) <input data-save="lambda"></label>
+      <label class="vlab-field">Slit width stated on the plate, slit 1 / mm <input data-save="b1"></label>
+      <label class="vlab-field">Slit width stated on the plate, slit 2 / mm <input data-save="b2"></label>
+    </div>
+    <div class="vlab-panel" data-lab-table="p2" data-report-title="Part 2 readings"></div>
+    <h3>Graph of your Part 2 readings</h3>
+    <p class="vlab-small">The graph starts with slit 1's positions against $n$. Change the vertical axis to slit 2's positions for your second graph. The order $n$ is exact, so it needs no uncertainty bar. Type the largest $\Delta x_n$ as the vertical uncertainty, then tick <strong>Steepest and shallowest lines</strong>. Press <strong>Add this graph to my report</strong> for each graph.</p>
+    <div class="dgraph" data-lab-graph="p2"></div>
+
+    <h2 id="analysis">8. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Is your graph of <i>x<sub>n</sub></i> against <i>n</i> a straight line? What does this tell you about the spacing of the dark fringes? Does it support the theory?</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> State the gradient, with its uncertainty and units, for each slit. Which slit gave the bigger gradient? Is that what you predicted?</label><textarea id="a2" data-save="a2" rows="3"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> What does the intercept represent? Compare it with where the centre of the pattern is on your Logger Pro graph.</label><textarea id="a3" data-save="a3" rows="3"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> The gradient is <i>λD</i> / <i>b</i>. Rearrange this to calculate the width <i>b</i> of each slit.</label><textarea id="a4" data-save="a4" rows="3"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Find the uncertainty in <i>b</i>: the fractional uncertainty in <i>b</i> is the sum of the fractional uncertainties in <i>λ</i>, <i>D</i> and the gradient. Which one contributes most? Give <i>b</i> ± Δ<i>b</i> to a sensible number of significant figures.</label><textarea id="a5" data-save="a5" rows="4"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Is the width stated on the plate inside your range <i>b</i> ± Δ<i>b</i>? Calculate the percentage difference. Suggest one systematic error that could explain any disagreement.</label><textarea id="a6" data-save="a6" rows="3"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> Suggest one change to the method that would reduce the biggest uncertainty.</label><textarea id="a7" data-save="a7" rows="3"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> Optional: read the peak intensities of the central maximum (<i>I</i><sub>0</sub>) and of the first two side maxima, after subtracting any background reading. Theory predicts that the first side maximum is about 0.047 <i>I</i><sub>0</sub> and the second about 0.016 <i>I</i><sub>0</sub>. How do yours compare? (Because of the dip at the top, you will have to estimate <i>I</i><sub>0</sub>.)</label><textarea id="a8" data-save="a8" rows="3"></textarea></div>
+    </div>
+
+    <h2 id="extension">9. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> What would you expect to see if the slit were ten times wider? Which model of light explains what you have seen in this lab?</label><textarea id="e1" data-save="e1" rows="3"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Predict the effect of a green laser (wavelength 532 nm) on the same slit. If one is available, test your prediction and use your graph to measure its wavelength.</label><textarea id="e2" data-save="e2" rows="3"></textarea></div>
+      <div class="answer"><label for="e3"><strong>E3.</strong> If the slit were narrower than the wavelength of the light, would there be any dark fringes? Explain, using sin <i>θ</i> = <i>nλ</i> / <i>b</i>.</label><textarea id="e3" data-save="e3" rows="3"></textarea></div>
+      <div class="answer"><label for="e4"><strong>E4.</strong> Plan how to find <i>λ</i> / <i>b</i> by moving the slit along the track to change <i>D</i>. Which graph would you plot, and what would its gradient be?</label><textarea id="e4" data-save="e4" rows="3"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your measurements, your table, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

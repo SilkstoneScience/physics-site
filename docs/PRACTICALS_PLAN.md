@@ -32,7 +32,7 @@ The Practicals page (`experimental/practicals.html`) has 10 cards:
 
 ## 3. Strategy (recommended)
 
-1. **Finish what's started first.** The three Vernier handouts in `physics-source/experimental-programme/practicals` (Newton's second law, friction, single-slit) become full pages, built like `centripetal.html`.
+1. **Finish what's started first** (done 13 November 2026, waiting for the teacher's check). The three Vernier handouts in `physics-source/experimental-programme/practicals` (Newton's second law, friction, single-slit) become full pages, built like `centripetal.html`.
 2. **One template for every hands-on lab**, copied from `centripetal.html`: aim, skills practised, equipment, safety, method (Logger Pro 3 steps for Vernier labs), readings tables with live graphs, answer boxes saved in the browser, and "Download my lab report" (.docx). Two additions:
    - A short **"Tools and inquiry" box** listing which Tool 1/Tool 2 skills the lab practises (this also fixes the "Tools 1–2" gap in `PROGRESS.md`).
    - For Vernier labs, an optional one-line **"No sensors?" alternative** (e.g. stopwatch and metre rule) so the page still helps students elsewhere.

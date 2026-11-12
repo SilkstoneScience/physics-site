@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: static and dynamic friction · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab with Vernier sensors: pull a block with a force sensor, find the coefficients of static and dynamic friction from graphs, and check the dynamic one with a motion detector.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/friction.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: static and dynamic friction · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab with Vernier sensors: pull a block with a force sensor, find the coefficients of static and dynamic friction from graphs, and check the dynamic one with a motion detector.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/friction.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-friction",
+    "title": "Static and dynamic friction",
+    "file": "Friction lab",
+    "tables": {
+      "p2": {
+        "note": "One row for each total mass. Work out the normal force and the means (with half the range as their uncertainty).",
+        "csvFile": "friction-part-2.csv",
+        "x": 2, "y": 7,
+        "cols": [
+          { "html": "Total mass <i>m</i> / kg", "csv": "total mass m / kg", "aria": "total mass in kilograms" },
+          { "html": "Normal force <i>F</i><sub>N</sub> / N", "csv": "normal force FN / N", "aria": "normal force in newtons" },
+          { "html": "Δ<i>F</i><sub>N</sub> / N", "csv": "uncertainty in FN / N", "aria": "uncertainty in the normal force in newtons" },
+          { "html": "Peak static 1 / N", "csv": "peak static friction 1 / N", "aria": "peak static friction, trial 1, in newtons" },
+          { "html": "Peak static 2 / N", "csv": "peak static friction 2 / N", "aria": "peak static friction, trial 2, in newtons" },
+          { "html": "Peak static 3 / N", "csv": "peak static friction 3 / N", "aria": "peak static friction, trial 3, in newtons" },
+          { "html": "Mean peak static <i>F</i><sub>s</sub> / N", "csv": "mean peak static friction Fs / N", "aria": "mean peak static friction in newtons" },
+          { "html": "Δ<i>F</i><sub>s</sub> / N", "csv": "uncertainty in Fs / N", "aria": "uncertainty in the mean peak static friction in newtons" },
+          { "html": "Dynamic 1 / N", "csv": "dynamic friction 1 / N", "aria": "dynamic friction, trial 1, in newtons" },
+          { "html": "Dynamic 2 / N", "csv": "dynamic friction 2 / N", "aria": "dynamic friction, trial 2, in newtons" },
+          { "html": "Dynamic 3 / N", "csv": "dynamic friction 3 / N", "aria": "dynamic friction, trial 3, in newtons" },
+          { "html": "Mean dynamic <i>F</i><sub>d</sub> / N", "csv": "mean dynamic friction Fd / N", "aria": "mean dynamic friction in newtons" },
+          { "html": "Δ<i>F</i><sub>d</sub> / N", "csv": "uncertainty in Fd / N", "aria": "uncertainty in the mean dynamic friction in newtons" }
+        ]
+      },
+      "p3": {
+        "note": "Five slides with the block alone, then five with 0.500 kg added. Fill in the last two columns during the analysis (question 9).",
+        "csvFile": "friction-part-3.csv",
+        "x": 1, "y": 4,
+        "cols": [
+          { "html": "Total mass <i>m</i> / kg", "csv": "total mass m / kg", "aria": "total mass in kilograms" },
+          { "html": "Acceleration <i>a</i> / m s<sup>−2</sup>", "csv": "acceleration a / m s^-2", "aria": "acceleration in metres per second squared" },
+          { "html": "Friction force / N", "csv": "friction force / N", "aria": "friction force in newtons" },
+          { "html": "<i>μ</i><sub>d</sub>", "csv": "coefficient of dynamic friction", "aria": "coefficient of dynamic friction" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Static and dynamic friction</p>
+    <h1>Static and dynamic friction</h1>
+    <p class="lead">A lab with Vernier sensors: pull a wooden block with a force sensor to measure friction, then check your result a second way with a motion detector. <span class="tag">A.2 Forces and momentum</span> <span class="tag vernier-tag">Vernier</span></p>
+    <p><strong>Aim:</strong> to find how static and dynamic friction depend on the normal force, and to measure the coefficients of static and dynamic friction between a block and a track.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#part1">Part 1: starting friction</a></li>
+        <li><a href="#part2">Part 2: friction and the normal force</a></li>
+        <li><a href="#part3">Part 3: dynamic friction a second way</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Writing every measurement with its uncertainty, and propagating uncertainties through calculations.</li>
+      <li>Plotting graphs with uncertainty bars and a line of best fit.</li>
+      <li>Explaining what a gradient and an intercept mean physically, and finding the gradient's uncertainty.</li>
+      <li>Comparing two independent measurements of the same quantity.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring mass, force and time (Tool 1); collecting data with sensors, and processing it with graphs and a spreadsheet (Tool 2); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="background">2. Background</h2>
+    <p>Push gently on a heavy box and it doesn't move: <strong>static friction</strong> matches your push. Push harder and static friction grows to match, but only up to a limit:</p>
+    $F_f \le \mu_s F_N$
+    <p>where $\mu_s$ is the <strong>coefficient of static friction</strong> and $F_N$ is the normal force. Once your push is bigger than $\mu_s F_N$, the box starts to slide. On a level surface, the normal force on the block is equal in size to its weight.</p>
+    <p>While the box slides, <strong>dynamic friction</strong> acts against its motion:</p>
+    $$F_f = \mu_d F_N$$
+    <p>where $\mu_d$ is the <strong>coefficient of dynamic friction</strong>. Both coefficients depend on the two surfaces in contact. (See <a href="../themes/a2.html">A.2 Forces and momentum</a>.)</p>
+
+    <h2 id="equipment">3. Equipment and safety</h2>
+    <ul>
+      <li>Vernier interface and a laptop with Logger Pro 3</li>
+      <li>Vernier Dual-Range Force Sensor and Vernier Motion Detector</li>
+      <li>A wooden block with a hook, string, and slotted masses (four of 250 g, or similar)</li>
+      <li>A balance, and a long, smooth, level bench or track</li>
+    </ul>
+    <div class="notice">
+      <p style="margin:0"><strong>Safety:</strong> fix the masses to the block (with tape or a rubber band) so they can't slide off. Keep the floor along the pulling path clear of bags and feet, and don't let the block or masses fall off the end of the bench.</p>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> To push a heavy box across the floor, do you need a bigger force to start it moving, or to keep it moving at a steady speed? What is your answer based on?</label><textarea id="pre1" data-save="pre1" rows="3"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> How do you think the friction force depends on the weight of the box? Explain your thinking.</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> Each force reading has an uncertainty. Would the gradient of a line of best fit through five or six readings have a bigger or a smaller percentage uncertainty than one reading? Why is a graph often better than a single measurement?</label><textarea id="pre3" data-save="pre3" rows="3"></textarea></div>
+    </div>
+    <h3>Uncertainties</h3>
+    <p>Before Part 1, find the uncertainty of the balance (for a digital balance, ± the smallest division) and the resolution of the force sensor on the range you use. For three repeated readings, use half the range, $\frac{\text{max} - \text{min}}{2}$, or the instrument's uncertainty if that is bigger. Give uncertainties to 1 significant figure (2 if the uncertainty itself is known precisely), and round each value to the same decimal place, e.g. $(4.8 \pm 0.2)$ N. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <h2 id="part1">5. Part 1: starting friction</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 150" role="img" aria-labelledby="fr1t">
+        <title id="fr1t">A wooden block with slotted masses on top sits on a bench. A string runs horizontally from the block's hook to a force sensor, which is pulled by hand along the bench.</title>
+        <line class="axis" x1="10" y1="110" x2="350" y2="110"/>
+        <rect class="l1" x="40" y="76" width="90" height="34" rx="2" style="fill:var(--surface)"/>
+        <rect class="axis" x="62" y="60" width="46" height="8" style="fill:var(--surface)"/>
+        <rect class="axis" x="62" y="68" width="46" height="8" style="fill:var(--surface)"/>
+        <line class="l3" x1="130" y1="93" x2="236" y2="93"/>
+        <rect class="l2" x="236" y="80" width="44" height="26" rx="4" style="fill:var(--surface)"/>
+        <text class="t1" x="54" y="135" font-size="12">wooden block</text>
+        <text x="58" y="50" font-size="12">masses</text>
+        <text class="t2" x="220" y="70" font-size="12">force sensor</text>
+        <text x="160" y="85" font-size="12">string</text>
+      </svg>
+      <figcaption>Pull the <span class="key-1">block</span> with the <span class="key-2">force sensor</span>, keeping the string horizontal.</figcaption>
+    </figure>
+    <div class="vlab-panel measure-panel">
+      <h3>Mass of the block</h3>
+      <label class="vlab-field">Mass of the block / kg <input data-save="mb" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in the mass / kg <input data-save="dmb" inputmode="decimal"></label>
+    </div>
+    <ol>
+      <li>Weigh the block and record its mass above.</li>
+      <li>Plug the force sensor into <strong>CH 1</strong> and set its switch to <strong>±50 N</strong>. Open <strong>Logger Pro 3</strong>. Choose <strong>Experiment ▸ Data Collection…</strong> and set the length to <strong>5 seconds</strong>.</li>
+      <li>Tie the block's hook to the force sensor's hook with string. Put 1 kg on the block and fix it in place.</li>
+      <li>Practise the pull without collecting data. Pull horizontally and gently, and increase the force slowly, so that the block starts to slide after about one second. Then keep it sliding at a <strong>steady speed</strong> for another second.</li>
+      <li>Hold the sensor ready to pull, with the string slack, and choose <strong>Experiment ▸ Zero</strong>.</li>
+      <li>Click <strong>Collect</strong> and pull as you practised. Repeat until the graph shows the block at rest, starting to move, and sliding at a steady speed. Keep this graph for the analysis (for example with <strong>File ▸ Save As</strong>, or a screenshot).</li>
+    </ol>
+    <div data-report-section="Part 1">
+      <div class="answer"><label for="p1a"><strong>1a.</strong> Before you collect data, describe (or sketch on paper) how you expect the force to change with time: while the block is at rest, as it starts to move, and while it slides at a steady speed.</label><textarea id="p1a" data-save="p1a" rows="3"></textarea></div>
+      <div class="answer"><label for="p1b"><strong>1b.</strong> Describe your actual force–time graph. Label (in words) the part where the block is at rest, the moment it starts to move, and the part where it slides at a steady speed.</label><textarea id="p1b" data-save="p1b" rows="3"></textarea></div>
+    </div>
+
+    <h2 id="part2">6. Part 2: friction and the normal force</h2>
+    <ol>
+      <li>Take all the masses off the block. Zero the sensor, click <strong>Collect</strong> and pull as before.</li>
+      <li><strong>Peak static friction:</strong> choose <strong>Analyze ▸ Statistics</strong> for the whole graph and read the <strong>maximum</strong> force.</li>
+      <li><strong>Dynamic friction:</strong> drag across the part where the block slid at a steady speed, choose <strong>Analyze ▸ Statistics</strong> again and read the <strong>mean</strong> force.</li>
+      <li>Record both values. Repeat twice more, so you have three trials.</li>
+      <li>Add 250 g to the block and repeat. Then repeat with 500 g, 750 g and 1000 g added.</li>
+      <li>Work out the normal force for each total mass ($F_N = mg$, with $g = 9.8\ \text{m s}^{-2}$) and its uncertainty.</li>
+    </ol>
+    <div class="vlab-panel" data-lab-table="p2" data-report-title="Part 2 readings"></div>
+    <h3>Graphs of your Part 2 readings</h3>
+    <p class="vlab-small">The graph starts with mean peak static friction against normal force. Change the vertical axis to mean dynamic friction for the second graph. The tool uses one uncertainty for every point on each axis, so type your largest Δ<i>F</i> (static or dynamic, to match the graph) in the vertical axis's uncertainty box and your largest Δ<i>F</i><sub>N</sub> in the horizontal axis's box, then tick <strong>Steepest and shallowest lines</strong>. Press <strong>Add this graph to my report</strong> for each graph.</p>
+    <div class="dgraph" data-lab-graph="p2"></div>
+
+    <h2 id="part3">7. Part 3: dynamic friction a second way</h2>
+    <p>Now measure $\mu_d$ independently, with no string. Once the block leaves your hand, the only horizontal force on it is friction, so its acceleration gives the friction force through Newton's second law.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 130" role="img" aria-labelledby="fr2t">
+        <title id="fr2t">A wooden block slides along a bench towards a motion detector at the far end, slowing to a stop at least 0.4 metres from the detector.</title>
+        <line class="axis" x1="10" y1="90" x2="350" y2="90"/>
+        <rect class="l1" x="40" y="62" width="60" height="28" rx="2" style="fill:var(--surface)"/>
+        <rect class="l2" x="306" y="56" width="30" height="34" rx="4" style="fill:var(--surface)"/>
+        <line class="axis dash" x1="110" y1="76" x2="196" y2="76"/>
+        <path class="axis" d="M204 76 L194 71 L194 81 z" style="fill:var(--text)"/>
+        <text class="t1" x="34" y="112" font-size="12">sliding block</text>
+        <text class="t2" x="352" y="112" font-size="12" text-anchor="end">motion detector</text>
+        <text x="112" y="68" font-size="12">slides to a stop</text>
+      </svg>
+      <figcaption>Push the <span class="key-1">block</span> towards the <span class="key-2">motion detector</span> and let go. It should stop at least 0.4 m from the detector.</figcaption>
+    </figure>
+    <ol>
+      <li>Plug the motion detector into <strong>DIG 1</strong>. Put it on the bench 2–3 m from the block, facing it. Logger Pro should now show position and velocity graphs.</li>
+      <li>Practise giving the block a short push towards the detector, so that it leaves your hand and slides about 1 m before stopping, without turning. It must stop at least 0.4 m from the detector.</li>
+      <li>Click <strong>Collect</strong> and push the block. The velocity–time graph should have a straight, sloping part while the block slides freely. Repeat if it doesn't.</li>
+      <li>Drag across that straight part and choose <strong>Analyze ▸ Linear Fit</strong>. The gradient is the block's acceleration. Record it. (The block moves towards the detector, so Logger Pro gives its velocity a negative sign, and the gradient comes out <strong>positive</strong> even though the block is slowing down. Use its size, |<i>a</i>|.)</li>
+      <li>Do five slides in all. Then fix 500 g to the block and do five more.</li>
+    </ol>
+    <div class="vlab-panel" data-lab-table="p3" data-report-title="Part 3 readings"></div>
+
+    <h2 id="analysis">8. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> From your Part 1 graph, compare the force needed to start the block sliding with the force needed to keep it sliding. Does this match your answer to P1?</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> From the same graph, would you expect <i>μ</i><sub>s</sub> to be greater than, less than or equal to <i>μ</i><sub>d</sub>? Explain.</label><textarea id="a2" data-save="a2" rows="3"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> Show how you calculated one normal force and its uncertainty from the mass and its uncertainty.</label><textarea id="a3" data-save="a3" rows="3"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> Use your graph of peak static friction against normal force. Since <i>F</i><sub>f</sub> = <i>μ</i><sub>s</sub><i>F</i><sub>N</sub> at the moment the block starts to slide, what does the gradient represent? State the gradient with its uncertainty and units (if any). Should the line pass through the origin? Does it?</label><textarea id="a4" data-save="a4" rows="4"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Do the same for your graph of dynamic friction against normal force, to find <i>μ</i><sub>d</sub> with its uncertainty.</label><textarea id="a5" data-save="a5" rows="4"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Does the dynamic friction force depend on the weight of the block? Does the coefficient of dynamic friction? Use your data.</label><textarea id="a6" data-save="a6" rows="3"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> Draw a free-body diagram (on paper) of the block sliding freely in Part 3. Describe it here, and explain why friction is the resultant force.</label><textarea id="a7" data-save="a7" rows="3"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> Show that, for the freely sliding block, <i>μ</i><sub>d</sub> = |<i>a</i>| / <i>g</i>, so the mass cancels.</label><textarea id="a8" data-save="a8" rows="3"></textarea></div>
+      <div class="answer"><label for="a9"><strong>9.</strong> Fill in the friction force and <i>μ</i><sub>d</sub> for every Part 3 slide in the table. Give the mean <i>μ</i><sub>d</sub>, with half the range as its uncertainty, for the block alone and for the block with 500 g added.</label><textarea id="a9" data-save="a9" rows="3"></textarea></div>
+      <div class="answer"><label for="a10"><strong>10.</strong> In Part 3, the block's speed fell steadily to zero. Does the coefficient of dynamic friction depend on speed? Use the shape of your velocity–time graphs to justify your answer.</label><textarea id="a10" data-save="a10" rows="3"></textarea></div>
+      <div class="answer"><label for="a11"><strong>11.</strong> Compare your two values of <i>μ</i><sub>d</sub> (Part 2 and Part 3). Do their uncertainty ranges overlap? Should the two methods agree exactly? Suggest a reason why they might not.</label><textarea id="a11" data-save="a11" rows="4"></textarea></div>
+      <div class="answer"><label for="a12"><strong>12.</strong> Evaluate your method: what were the main sources of uncertainty, and how could you reduce them?</label><textarea id="a12" data-save="a12" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="extension">9. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> Does the area of the block in contact with the bench affect the friction force? Write a hypothesis, then plan (and if you can, carry out) an experiment to test it.</label><textarea id="e1" data-save="e1" rows="3"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Put the block on a board and slowly tilt it until the block just starts to slide. Show that <i>μ</i><sub>s</sub> = tan <i>θ</i> at that angle, measure <i>θ</i>, and compare your value with Part 2.</label><textarea id="e2" data-save="e2" rows="3"></textarea></div>
+      <div class="answer"><label for="e3"><strong>E3.</strong> Predict, then test, how polishing or waxing the bench changes the coefficients of friction.</label><textarea id="e3" data-save="e3" rows="3"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your measurements, both tables, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
