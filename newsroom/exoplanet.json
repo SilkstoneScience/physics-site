@@ -1,0 +1,162 @@
+{
+  "id": "exoplanet",
+  "kind": "Podcast transcript",
+  "paper": "Starlight Weekly",
+  "headline": "Episode 42: Is Lumen b a second Earth?",
+  "standfirst": "The hosts chat about a newly found planet, its climate and its star",
+  "byline": "Transcript of the Starlight Weekly podcast",
+  "topics": [
+    "B.2",
+    "E.1",
+    "E.5"
+  ],
+  "level": "SL",
+  "time": "10 minutes",
+  "brief": "The hosts are enthusiastic, and a little careless. Find the claims that would not survive a physics check.",
+  "body": [
+    [
+      {
+        "t": "Welcome back, everyone. Today we look at Lumen b, a rocky planet orbiting a star about 40 light-years away."
+      },
+      {
+        "t": "Lumen b reflects 40% of the starlight that reaches it, an albedo of 0.40, so it absorbs only 40% of the incoming radiation.",
+        "err": {
+          "topic": "B.2",
+          "section": "albedo",
+          "options": [
+            "A planet that reflects 40% absorbs 40% and emits the other 20%, because the three amounts must add up to 100%.",
+            "The reflected 40% is absorbed lower down in the atmosphere, so the planet absorbs all of the starlight.",
+            "Albedo is the fraction reflected, so the fraction absorbed is 1 − 0.40 = 0.60, or 60%."
+          ],
+          "answer": 2,
+          "feedback": [
+            "Emission is a separate process: the planet radiates its own thermal energy. The starlight arriving is either reflected or absorbed, nothing else.",
+            "Radiation that is reflected goes back into space. It is not absorbed by the planet.",
+            null
+          ],
+          "fix": "Lumen b reflects 40% of the starlight that reaches it, an albedo of 0.40, so it absorbs the other 60% of the incoming radiation.",
+          "keys": [
+            "Albedo is the fraction of incident radiation that is reflected.",
+            "The fraction absorbed is 1 − albedo = 0.60."
+          ]
+        }
+      },
+      {
+        "t": "Averaged over the whole planet, the intensity arriving is a quarter of the solar constant at that distance, because the planet's cross-section πr² is a quarter of its surface area 4πr².",
+        "ok": "It is correct: the planet intercepts light over a disc of area πr², but that energy is shared over a sphere of area 4πr², so the average intensity is S/4."
+      }
+    ],
+    [
+      {
+        "t": "At the temperature it has now, the planet radiates away exactly as much power as it absorbs, which is why its average temperature is steady.",
+        "ok": "It is correct: a steady average temperature means absorbed power and emitted power are equal."
+      },
+      {
+        "t": "Its atmosphere is rich in carbon dioxide, and these greenhouse gases warm the surface because they absorb the incoming visible light from the star.",
+        "err": {
+          "topic": "B.2",
+          "section": "greenhouse",
+          "options": [
+            "Greenhouse gases warm the surface by acting like a mirror, reflecting the star's visible light back down onto the ground before it can escape.",
+            "They absorb the infrared that the surface emits and re-radiate it in all directions, some of it back down.",
+            "They absorb the star's visible light and re-emit it as visible light in every direction, which is why the surface ends up warmer than expected."
+          ],
+          "answer": 1,
+          "feedback": [
+            "Reflection of starlight would cool the planet by reducing the energy absorbed. The warming comes from absorbing infrared, not reflecting visible light.",
+            null,
+            "Most of the star's visible light passes through a thin gas layer. The gases interact with the longer-wavelength infrared from the surface."
+          ],
+          "fix": "Its atmosphere is rich in carbon dioxide, and these greenhouse gases warm the surface because they absorb the infrared radiation emitted by the surface and re-radiate some of it back down.",
+          "keys": [
+            "Visible light mostly passes through; the surface re-emits as infrared.",
+            "Greenhouse gases absorb infrared and re-radiate it in all directions, returning some to the surface."
+          ]
+        }
+      },
+      {
+        "t": "If the planet's greenhouse gases increase, less power escapes to space than the planet absorbs, and its average temperature falls until the two powers are equal again.",
+        "err": {
+          "topic": "B.2",
+          "section": "enhanced",
+          "options": [
+            "The temperature falls, because a thicker atmosphere always blocks more of the star's light.",
+            "The temperature stays the same, because the planet is already in equilibrium and more gas cannot change that.",
+            "Less power leaving than arriving is a net energy gain, so the temperature rises until the powers match."
+          ],
+          "answer": 2,
+          "feedback": [
+            "A thicker greenhouse layer mainly affects the planet's emitted infrared. If emission drops below absorption, energy builds up and the planet warms.",
+            "More greenhouse gas upsets the old balance. The planet warms until a new equilibrium, at a higher temperature, is reached.",
+            null
+          ],
+          "fix": "If the planet's greenhouse gases increase, less power escapes to space than the planet absorbs, and its average temperature rises until the two powers are equal again.",
+          "keys": [
+            "Absorbed power greater than emitted power means a net energy gain.",
+            "The temperature rises until a new, warmer equilibrium is reached."
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "t": "To learn what the atmosphere holds, astronomers study the star's light after it has passed through the planet's atmosphere."
+      },
+      {
+        "t": "The dark lines they see appear because the atoms in the gas emit photons at those wavelengths, which makes the starlight at those wavelengths dimmer.",
+        "err": {
+          "topic": "E.1",
+          "section": "spectra",
+          "options": [
+            "Atoms emit extra photons at those wavelengths, and the dark lines show where the emission is weakest.",
+            "Atoms absorb photons whose energy matches the gap between two energy levels, removing those wavelengths from the starlight.",
+            "The gas is transparent at those wavelengths, so the dark lines are wavelengths the star never produced."
+          ],
+          "answer": 1,
+          "feedback": [
+            "Emission would add light at those wavelengths and give bright lines, not dark ones.",
+            null,
+            "The star does emit those wavelengths. The atoms in the gas absorb them, because they have matching energy-level gaps. The lines identify the gas."
+          ],
+          "fix": "The dark lines they see appear because the atoms in the gas absorb photons at those wavelengths, which removes light at those wavelengths from the starlight.",
+          "keys": [
+            "Absorption lines are dark: atoms absorb photons matching energy-level gaps.",
+            "Photons of those wavelengths are missing from the transmitted light."
+          ]
+        }
+      },
+      {
+        "t": "The wavelengths of those dark lines match the wavelengths of the bright lines the same gas would give when hot, because both come from the same gaps between energy levels.",
+        "ok": "It is correct: absorption and emission by the same element involve the same energy-level differences, so the line wavelengths coincide."
+      }
+    ],
+    [
+      {
+        "t": "Lumen itself is a main-sequence star, steadily fusing hydrogen in its core."
+      },
+      {
+        "t": "A second star has the same surface temperature as Lumen but twice its radius, so it radiates twice the power.",
+        "err": {
+          "topic": "E.5",
+          "section": "radius",
+          "options": [
+            "Luminosity goes as surface area, which goes as radius squared, so the star radiates four times the power.",
+            "Luminosity is proportional to the volume, which goes as the radius cubed, so the star radiates eight times the power.",
+            "Luminosity is proportional to the radius, so twice the radius gives twice the power."
+          ],
+          "answer": 0,
+          "feedback": [
+            null,
+            "A star radiates from its surface, not from its whole volume. The power radiated depends on surface area.",
+            "Power depends on surface area, not radius alone. Use $L = 4\\pi R^2 \\sigma T^4$ at the same temperature."
+          ],
+          "fix": "A second star has the same surface temperature as Lumen but twice its radius, so it radiates four times the power.",
+          "keys": [
+            "$L = 4\\pi R^2 \\sigma T^4$: at constant $T$, $L \\propto R^2$.",
+            "Doubling the radius gives four times the luminosity."
+          ]
+        }
+      }
+    ]
+  ]
+}

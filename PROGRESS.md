@@ -114,7 +114,7 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - **Theme C done** (teacher-checked, 8 November 2026): Zhang Heng (a model of his seismoscope), Huygens, Lehmann, J. C. Bose, Ibn al-Haytham and Ibn Sahl (manuscript pages: no portraits exist), Germain, Raman, Doppler, Rubin.
 - **Theme D done** (teacher-checked, 8 November 2026): Katherine Johnson, Mary Golda Ross (HL, shown on the 2019 one-dollar coin), Coulomb, Shen Kuo (a modern statue), J. J. Thomson, Joan Feynman, Faraday, Tesla.
 - **Theme E done** (teacher-checked, 8 November 2026): Rutherford, Nagaoka, S. N. Bose, Elmer Imes (a measured HCl infrared spectrum: no open photo exists), Marie Curie, Chien-Shiung Wu, Meitner, Fermi, Payne-Gaposchkin, Chandrasekhar.
-- **All 48 scientists are on the site.** Possible later step: make the checker warn about any subtopic page without two scientists.
+- **All 48 scientists are on the site.** The checker warns if any subtopic page doesn't have exactly two (12 November 2026).
 
 ## Escape room (November 2026, first version, waiting for the teacher's check)
 - `escape.html` (code `js/escape.js`, styles `css/escape.css`), on the Review games page (`games.html`).
@@ -135,7 +135,8 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 ## Newsroom, Explanation builder and word games (November 2026, waiting for the teacher's check)
 - On the Review games page. Newsroom: 5 articles (A, B.1/B.3, B.5, C/D, E), 5 errors each. Explanation builder: 17 SL questions. Word games: Forbidden words and crossword (61 terms), Odd one out (22 sets).
 - Checker rules are in `tools/check.mjs` (2e-games). Next: more articles and HL items, once the teacher has tried them.
-- Estimation challenges (`estimate.html`), 10 SL items, waiting for the teacher's check. Choose your own adventure ("Mission log") is still to build, in stages: outline, first chapter, the rest, check and publish.
+- Estimation challenges (`estimate.html`), 10 SL items, waiting for the teacher's check.
+- HL content (November 2026, waiting for the teacher's check): Newsroom now has 9 articles (new: festival and exoplanet, SL; spin-cycle and museum-guide, HL); the Explanation builder has 31 items (14 new, 8 of them HL) and an "SL only" choice; a third mystery, "The flywheel at Ravensby" (HL; A.4, B.4, D.4, E.2), with teacher notes in `teachers/mystery-ravensby.html`. Choose your own adventure ("Mission log") is still to build, in stages: outline, first chapter, the rest, check and publish.
 
 ## Grouped main menu (8 November 2026, waiting for the teacher's check)
 - The nine flat menu items became seven groups, each a link to its hub page with a dropdown: Notes (themes A–E, Physics skills), Practise (question bank, review games, concept challenges and big questions), Exams (exam tips, both exam-copy data booklets), Experimental (practicals, CSP, IA, Extended essay), Resources (lesson slides, annotated data booklet, videos, software and tools, simulations, Science news), For teachers (slide generator, revision sheet builder) and About (about me, contact, copyright). Review games, Think deeper and For teachers are now in the menu; the home page is unchanged.

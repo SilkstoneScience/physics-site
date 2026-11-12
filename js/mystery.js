@@ -148,12 +148,19 @@
     e.preventDefault();
     showTab(TABS[j].id);
   }
+  // Scroll so the element's top sits just below the sticky site header,
+  // whose height changes with the screen width.
+  function scrollToTop(el) {
+    const hdr = document.getElementById('site-header');
+    const gap = (hdr ? hdr.getBoundingClientRect().height : 0) + 12;
+    window.scrollTo({ top: window.scrollY + el.getBoundingClientRect().top - gap, behavior: 'smooth' });
+  }
   function goTo(tab, selector) {
     showTab(tab, false);
     const el = selector ? app.querySelector(selector) : document.getElementById('tab-' + tab);
     if (el) {
       if (el.tabIndex < 0 && !el.hasAttribute('tabindex')) el.tabIndex = -1;
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollToTop(el);
       el.focus({ preventScroll: true });
     }
   }
@@ -449,7 +456,7 @@
     S.acc.done = true;
     rerender('accuse');
     const h = document.querySelector('#panel-accuse h2');
-    h.tabIndex = -1; h.focus(); h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    h.tabIndex = -1; h.focus({ preventScroll: true }); scrollToTop(h);
     announce('Case closed!');
   }
 
@@ -517,7 +524,7 @@
       b.classList.add('seen');
       const item = app.querySelector(`#panel-case .my-ev[data-ev="${b.dataset.spot}"]`);
       item.open = true;
-      item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollToTop(item);
       item.querySelector('summary').focus({ preventScroll: true });
     } else if (act === 'board') {
       toggleBoard();
