@@ -1,0 +1,166 @@
+{
+  "id": "museum-guide",
+  "kind": "Museum audio guide",
+  "paper": "Brightwell Science Museum",
+  "headline": "Audio guide, Gallery 3: Engines, Currents and Light",
+  "standfirst": "Transcript of the self-guided tour. Some of the narration was recorded before the exhibits were checked.",
+  "byline": "Narrated by the museum's education team",
+  "topics": [
+    "B.4",
+    "D.4",
+    "E.2"
+  ],
+  "level": "HL",
+  "time": "12 minutes",
+  "brief": "The museum is about to reprint its audio guide. Find the sentences that give visitors the wrong physics.",
+  "body": [
+    [
+      {
+        "t": "Welcome to Gallery 3. Please start at the great steam engine in front of you."
+      },
+      {
+        "t": "If its designers removed every last trace of friction, the engine could convert all of the thermal energy taken from the boiler into useful work.",
+        "err": {
+          "topic": "B.4",
+          "section": "second",
+          "options": [
+            "It could, because friction is the only reason any energy is wasted in a heat engine.",
+            "It could, as long as the boiler is hot enough, because a high enough temperature allows full conversion.",
+            "It cannot: some thermal energy must always be rejected to a colder reservoir."
+          ],
+          "answer": 2,
+          "feedback": [
+            "Even a perfect engine must reject thermal energy to a cold reservoir. This follows from the second law, not from friction.",
+            "A higher boiler temperature improves the limit, but a limit of 100% would need a cold reservoir at absolute zero.",
+            null
+          ],
+          "fix": "Even if its designers removed every last trace of friction, the engine could not convert all of the thermal energy taken from the boiler into work, because some must be rejected to a colder reservoir.",
+          "keys": [
+            "Second law: no engine can convert all of its input heat to work.",
+            "Some thermal energy must be rejected to a cold reservoir."
+          ]
+        }
+      },
+      {
+        "t": "A reversible engine working between a boiler at 600 kelvin and a condenser at 300 kelvin could have an efficiency of at most 50 per cent.",
+        "ok": "It is correct: the Carnot limit is $1 - T_\\text{c}/T_\\text{h} = 1 - 300/600 = 0.50$."
+      }
+    ],
+    [
+      {
+        "t": "Next, try the glass bicycle pump. When you push the handle down quickly, the air inside is compressed too fast for thermal energy to enter or leave, so the air's temperature stays the same.",
+        "err": {
+          "topic": "B.4",
+          "section": "adiabatic",
+          "options": [
+            "Work done on the gas raises its internal energy, so its temperature rises.",
+            "With no thermal energy transferred, no energy of any kind enters the gas, so its internal energy is unchanged.",
+            "The temperature falls, because the gas expands into the space left behind by the handle."
+          ],
+          "answer": 0,
+          "feedback": [
+            null,
+            "Work is also a way of transferring energy. The first law is $Q = \\Delta U + W$, where $W$ is the work done by the gas. With $Q = 0$, $\\Delta U = -W$. The gas is compressed, so $W$ is negative and $\\Delta U$ is positive.",
+            "The handle is pushing in, so the gas is compressed, not expanded. Work is done on it."
+          ],
+          "fix": "When you push the handle down quickly, the air inside is compressed too fast for thermal energy to enter or leave, so the work done on it raises its internal energy and its temperature rises.",
+          "keys": [
+            "Adiabatic: $Q = 0$.",
+            "$Q = \\Delta U + W$ with $Q = 0$ gives $\\Delta U = -W$; the gas is compressed, so $W$ is negative and its internal energy rises."
+          ]
+        }
+      },
+      {
+        "t": "The freezer display shows water turning to ice, which lowers the entropy of the water, but the total entropy of the water and its surroundings still increases.",
+        "ok": "It is correct: the freezer releases thermal energy to the room, increasing the entropy of the surroundings by more than the water's entropy decreases."
+      }
+    ],
+    [
+      {
+        "t": "In the next bay, spin the handle on the model generator and watch the lamp glow."
+      },
+      {
+        "t": "The emf induced in the coil is proportional to the magnetic flux through it, so a coil resting in a strong steady field has a large emf.",
+        "err": {
+          "topic": "D.4",
+          "section": "faraday",
+          "options": [
+            "The emf is proportional to the flux, but only while the coil is moving.",
+            "The emf depends on the rate of change of the magnetic flux, so a steady field gives none.",
+            "The emf is proportional to the rate of change of the field's strength only, and not to changes in the coil's area or angle."
+          ],
+          "answer": 1,
+          "feedback": [
+            "It depends on how fast the magnetic flux changes, not on the flux itself. Moving the coil changes the flux only if the flux through it actually changes.",
+            null,
+            "A change in the field, the coil's area or the angle between them all change the flux, and all of them can induce an emf."
+          ],
+          "fix": "The emf induced in the coil is proportional to the rate of change of the magnetic flux through it, so a coil resting in a steady field has no emf however strong the field.",
+          "keys": [
+            "Faraday's law: emf = −N × (rate of change of magnetic flux).",
+            "A steady flux induces no emf."
+          ]
+        }
+      },
+      {
+        "t": "The direction of the induced current is always such that it opposes the change that produces it, which follows from the conservation of energy.",
+        "ok": "It is correct: this is Lenz's law. If the induced current aided the change, energy would be created from nothing."
+      }
+    ],
+    [
+      {
+        "t": "At the last exhibit, shine the ultraviolet lamp on the metal plate. Electrons are emitted from the surface."
+      },
+      {
+        "t": "Turning the lamp up to a brighter setting, without changing its frequency, gives the emitted electrons a larger maximum kinetic energy.",
+        "err": {
+          "topic": "E.2",
+          "section": "einstein",
+          "options": [
+            "A brighter lamp gives each photon more energy, so the maximum kinetic energy rises.",
+            "Brighter light makes electrons easier to release, because it lowers the work function of the metal.",
+            "More photons arrive each second, so more electrons are emitted, each with the same maximum kinetic energy."
+          ],
+          "answer": 2,
+          "feedback": [
+            "Photon energy is $hf$ and depends only on frequency. Brightness changes the number of photons, not the energy of each one.",
+            "The work function belongs to the metal and does not change with the light. Maximum kinetic energy is $hf - \\Phi$.",
+            null
+          ],
+          "fix": "Turning the lamp up to a brighter setting, without changing its frequency, releases more electrons per second, but their maximum kinetic energy is unchanged.",
+          "keys": [
+            "Photon energy is $hf$, which is set by frequency.",
+            "Greater intensity means more photons and more electrons, not more energy each."
+          ]
+        }
+      },
+      {
+        "t": "Using light of a higher frequency, but still above the threshold, does increase the maximum kinetic energy, because each photon carries more energy.",
+        "ok": "It is correct: $E_\\text{max} = hf - \\Phi$, so a higher frequency gives a higher maximum kinetic energy."
+      },
+      {
+        "t": "The gallery's electron microscope uses faster electrons so that their de Broglie wavelength is longer, which lets it see finer detail.",
+        "err": {
+          "topic": "E.2",
+          "section": "debroglie",
+          "options": [
+            "Faster electrons have a longer wavelength, and longer waves are better at resolving detail.",
+            "Faster electrons have more momentum, so a shorter wavelength, which resolves finer detail.",
+            "The de Broglie wavelength does not depend on the electron's speed, so only the number of electrons matters."
+          ],
+          "answer": 1,
+          "feedback": [
+            "Longer waves diffract more and blur fine detail. A shorter wavelength resolves smaller features.",
+            null,
+            "$\\lambda = h/p$, and the momentum $p$ depends on speed. Faster electrons have shorter wavelengths."
+          ],
+          "fix": "The gallery's electron microscope uses faster electrons so that their de Broglie wavelength is shorter, which lets it see finer detail.",
+          "keys": [
+            "$\\lambda = h/p$: greater momentum, shorter wavelength.",
+            "A shorter wavelength resolves finer detail."
+          ]
+        }
+      }
+    ]
+  ]
+}

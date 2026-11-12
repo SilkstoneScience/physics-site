@@ -1,0 +1,162 @@
+{
+  "id": "festival",
+  "kind": "Festival blog",
+  "paper": "Lakeside Weekender Live Blog",
+  "headline": "Day one at the Lakeside Weekender: confetti, pipes and static",
+  "standfirst": "Our volunteer blogger tries to explain the science behind the weekend's opening acts",
+  "byline": "Posted by Dev, volunteer blogger",
+  "topics": [
+    "A.1",
+    "C.4",
+    "D.2"
+  ],
+  "level": "SL",
+  "time": "10 minutes",
+  "brief": "Dev is great with crowds and not so great with physics. Spot the sentences that need fixing before the blog goes live.",
+  "body": [
+    [
+      {
+        "t": "The weekend opened with the confetti cannon, which fires a paper capsule at 20 metres per second at 30° above the horizontal."
+      },
+      {
+        "t": "At the highest point of its flight the capsule's acceleration is zero, because for that instant it has stopped rising.",
+        "err": {
+          "topic": "A.1",
+          "section": "projectiles",
+          "options": [
+            "Once the capsule has left the cannon, gravity stops acting on it, so there is no acceleration at any point of the flight.",
+            "The acceleration is 9.8 m s⁻² downwards all the way, including at the top, because gravity still acts.",
+            "The acceleration is largest at the top, because the capsule is moving slowest there and so gravity has the most effect on it."
+          ],
+          "answer": 1,
+          "feedback": [
+            "Gravity acts on the capsule for the whole flight. Only the cannon's push stops when the capsule leaves it.",
+            null,
+            "Gravity gives the same acceleration at every point, whatever the speed. Being slowest at the top does not change that."
+          ],
+          "fix": "At the highest point of its flight the capsule's vertical velocity is momentarily zero, but its acceleration is still 9.8 m s⁻² downwards, because gravity is still acting on it.",
+          "keys": [
+            "Zero velocity is not zero acceleration.",
+            "Acceleration is 9.8 m s⁻² downwards throughout the flight, ignoring air resistance."
+          ]
+        }
+      },
+      {
+        "t": "Ignoring air resistance, its horizontal velocity stays at about 17 metres per second for the whole flight.",
+        "ok": "It is correct: the horizontal component is 20 cos 30° ≈ 17 m s⁻¹, and with no horizontal force it stays constant."
+      }
+    ],
+    [
+      {
+        "t": "The festival's laptop plotted a graph of the capsule's vertical displacement against time, and the gradient of that graph at any instant gives the capsule's acceleration at that instant.",
+        "err": {
+          "topic": "A.1",
+          "section": "graphs",
+          "options": [
+            "The gradient of a displacement–time graph is the velocity; acceleration is the gradient of a velocity–time graph.",
+            "The gradient of a displacement–time graph gives the total distance travelled so far, and the acceleration is the area under it.",
+            "The gradient of a displacement–time graph does give the acceleration, but only on the parts where the line is perfectly straight."
+          ],
+          "answer": 0,
+          "feedback": [
+            null,
+            "Distance is not a gradient. A gradient is a rate of change: change in displacement per unit time.",
+            "Straight or curved, the gradient of a displacement–time graph is the velocity. On a curve you find it from the tangent at that point."
+          ],
+          "fix": "The festival's laptop plotted a graph of the capsule's vertical displacement against time, and the gradient of that graph at any instant gives the capsule's velocity at that instant.",
+          "keys": [
+            "Gradient of displacement–time = velocity.",
+            "Acceleration is the gradient of velocity–time."
+          ]
+        }
+      }
+    ],
+    [
+      {
+        "t": "Backstage, the sound crew tested a tuning pipe that is closed at one end and 0.34 metres long."
+      },
+      {
+        "t": "Its fundamental standing wave has a wavelength of 0.34 metres, the same as the length of the pipe.",
+        "err": {
+          "topic": "C.4",
+          "section": "pipes",
+          "options": [
+            "The wavelength is half the pipe length, 0.17 m, because the wave must have an antinode at each end of the pipe.",
+            "The wavelength is twice the pipe length, 0.68 m, because any pipe holds exactly half a wavelength in its fundamental.",
+            "A node at the closed end and an antinode at the open end: a quarter of a wavelength fits, so 1.36 m."
+          ],
+          "answer": 2,
+          "feedback": [
+            "An antinode at each end describes a pipe open at both ends. This pipe is closed at one end, which forces a node there.",
+            "Half a wavelength fits in a pipe open at both ends. Here one end is closed, which changes the pattern.",
+            null
+          ],
+          "fix": "Its fundamental standing wave has a wavelength of 1.36 metres, four times the length of the pipe, because the pipe holds a quarter of a wavelength.",
+          "keys": [
+            "Closed end = node, open end = antinode.",
+            "So $L = \\lambda/4$ and $\\lambda = 4L = 1.36$ m."
+          ]
+        }
+      },
+      {
+        "t": "The next note this pipe can sound is at three times the fundamental frequency, because a pipe closed at one end supports only odd harmonics.",
+        "ok": "It is correct: with a node at one end and an antinode at the other, only odd numbers of quarter-wavelengths fit, giving frequencies f, 3f, 5f and so on."
+      }
+    ],
+    [
+      {
+        "t": "Over in the craft tent, volunteers rubbed two balloons on a wool jumper so that each carried the same charge, and held them apart for visitors."
+      },
+      {
+        "t": "Dev explained that if you double the distance between the balloons, the repulsive force between them halves.",
+        "err": {
+          "topic": "D.2",
+          "section": "coulomb",
+          "options": [
+            "The force stays the same, because it depends only on the size of the two charges and not on how far apart they are.",
+            "The force becomes four times smaller, because Coulomb's law is an inverse square law.",
+            "The force doubles, because the balloons have more room in which to push against each other, so the repulsion builds up."
+          ],
+          "answer": 1,
+          "feedback": [
+            "The force depends on the distance as well as on the charges: $F \\propto q_1 q_2 / r^2$.",
+            null,
+            "Moving charges further apart weakens the force between them. It does not strengthen it."
+          ],
+          "fix": "Dev explained that if you double the distance between the balloons, the repulsive force between them becomes a quarter of its original value.",
+          "keys": [
+            "Coulomb's law: $F \\propto 1/r^2$.",
+            "Doubling $r$ divides the force by 4."
+          ]
+        }
+      },
+      {
+        "t": "A balloon that has gained electrons can still stick to a neutral wall, because the wall's charges are slightly separated, with the nearer ones opposite in sign to the balloon's.",
+        "ok": "It is correct: the wall becomes polarised, with its nearer charges opposite in sign to the balloon's. The attraction to the nearer charges is slightly stronger than the repulsion from the farther ones."
+      },
+      {
+        "t": "The electric field lines around one of these balloons point away from it, because it has gained electrons.",
+        "err": {
+          "topic": "D.2",
+          "section": "elines",
+          "options": [
+            "Field lines always point away from any charged object, whatever its sign, because they show where the field spreads out to.",
+            "Field lines show the path the electrons take as they leave the balloon, so they point away from it.",
+            "Field lines show the force on a positive test charge, so around a negative balloon they point towards it."
+          ],
+          "answer": 2,
+          "feedback": [
+            "The direction depends on the sign of the charge. Lines point away from positive charges and towards negative ones.",
+            "Field lines show the force on a positive test charge. They are not the paths of electrons, which in any case stay on the balloon.",
+            null
+          ],
+          "fix": "The electric field lines around one of these balloons point towards it, because it has gained electrons and so is negatively charged.",
+          "keys": [
+            "Field lines show the direction of the force on a positive test charge.",
+            "A negatively charged object has lines pointing towards it."
+          ]
+        }
+      }
+    ]
+  ]
+}
