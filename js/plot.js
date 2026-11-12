@@ -136,7 +136,9 @@
     if (points.ok) feedback.push({ ok: true, text: `All ${total} points are plotted correctly.` });
     else if (!drawn.length) feedback.push({ ok: false, text: `Plot the ${total} points from the table.` });
     else {
-      let text = matched === total ? `All ${total} points are in the right place,` : `${matched} of your ${plural(drawn.length, 'point')} ${matched === 1 ? 'is' : 'are'} within half a small square of where ${matched === 1 ? 'it' : 'they'} should be (there should be ${total}).`;
+      const others = drawn.length - matched;
+      const tail = drawn.length === total ? `: check the other ${others === 1 ? 'one' : others}.` : ` (the table has ${total} readings).`;
+      let text = matched === total ? `All ${total} points are in the right place,` : `${matched} of your ${plural(drawn.length, 'point')} ${matched === 1 ? 'is' : 'are'} within half a small square of where ${matched === 1 ? 'it' : 'they'} should be${tail}`;
       if (matched === total) text += ` but there ${extra === 1 ? 'is' : 'are'} ${plural(extra, 'extra point')}: remove ${extra === 1 ? 'it' : 'them'}.`;
       feedback.push({ ok: false, text });
     }
@@ -220,10 +222,11 @@
         const gx = px(s.X(guide[0])); const gy = px(s.Y(guide[1]));
         parts.push(`<g stroke="${BLUE}" stroke-width="1" stroke-dasharray="3 3" opacity="0.7"><line x1="${gx}" y1="${gy}" x2="${gx}" y2="${G.bottom}"/><line x1="${gx}" y1="${gy}" x2="${G.left}" y2="${gy}"/></g>`);
       }
-      parts.push(...overlay(plot, points, line));
+      parts.push(...overlay(plot, null, line));
       if (line && !locked && mode === 'line') {
         for (const end of line) parts.push(`<circle cx="${px(s.X(end[0]))}" cy="${px(s.Y(end[1]))}" r="6" fill="#fff" stroke="${ORANGE}" stroke-width="2"/>`);
       }
+      parts.push(...overlay(plot, points, null)); // the points last, so a handle never hides one
       if (cursor) {
         const cx = px(s.X(cursor[0])); const cy = px(s.Y(cursor[1]));
         parts.push(`<circle cx="${cx}" cy="${cy}" r="8" fill="none" stroke="${INK}" stroke-width="1.5" stroke-dasharray="2 2"/>`);

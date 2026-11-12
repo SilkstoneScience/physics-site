@@ -60,6 +60,7 @@ if (!site.DATA_BOOKLET_MATHS) err('js/site.js', 'DATA_BOOKLET_MATHS (the maths a
 
 // ---------- 2. Question bank ----------
 const { checkNumeric, parseNumber } = createRequire(import.meta.url)('../js/numeric.js');
+const Plot = createRequire(import.meta.url)('../js/plot.js'); // click-to-plot graphs
 const questionIds = new Map(); // id -> topic
 
 // A single backslash in JSON turns \theta into a tab, \frac into a form feed, \nu into a new line...
@@ -123,7 +124,16 @@ function checkQuestion(q, file) {
     if (!Array.isArray(pt.markscheme) || !pt.markscheme.length) err(pw, 'needs a markscheme list');
     else pt.markscheme.forEach((m, j) => checkText(pw, m, `markscheme point ${j + 1}`));
     if (pt.numeric) checkNumericField(pw, pt.numeric);
+    if (pt.plot) checkPlotField(pw, pt.plot, pt.marks);
   });
+}
+
+// A click-to-plot graph (js/plot.js): the correct graph must earn the part's full marks, and an empty one nothing.
+function checkPlotField(where, p, marks) {
+  const axis = (a) => a && [a.min, a.max, a.step, a.major].every(Number.isFinite) && a.max > a.min && a.step > 0 && a.symbol;
+  if (!axis(p.x) || !axis(p.y) || !Array.isArray(p.points) || p.points.length < 2) { err(where, 'plot needs x and y axes (min, max, step, major, symbol) and at least two points'); return; }
+  if (!Plot.check(p, { points: p.points, line: Plot.expectedLine(p) }, marks).right) err(where, 'plot: the correct graph is not given full marks');
+  if (Plot.check(p, { points: [], line: null }, marks).score !== 0) err(where, 'plot: an empty graph earns marks');
 }
 
 function checkNumericField(where, n) {
