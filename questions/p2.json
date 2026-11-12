@@ -1162,6 +1162,182 @@
     }
   },
   {
+    "id": "B5-P02",
+    "theme": "B",
+    "topic": "B.5",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "internal",
+      "emf",
+      "power",
+      "pd"
+    ],
+    "stem": "<p>A cordless drill is powered by a rechargeable pack of lithium cells. To test the pack, a technician uses a variable resistor to draw a range of currents $I$ from it and measures the terminal potential difference $V$ of the pack at each current. The readings are shown in the table.</p><table><tr><th>$I$ / A</th><th>$V$ / V</th></tr><tr><td>2.0</td><td>19.5</td></tr><tr><td>6.0</td><td>18.5</td></tr><tr><td>10.0</td><td>17.5</td></tr><tr><td>14.0</td><td>16.5</td></tr><tr><td>18.0</td><td>15.5</td></tr></table>",
+    "diagram": "questions/diagrams/p2-b5-drill-axes.svg",
+    "diagramAlt": "Empty axes for a graph of terminal potential difference V in volts, from 14 to 21 V, against current I in amperes, from 0 to 20 A, with a grid of 1 A by 0.5 V squares.",
+    "diagramLarge": true,
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "internal"
+        ],
+        "question": "Draw, on the axes provided, a graph of $V$ against $I$ for the readings in the table, with a line of best fit.",
+        "marks": 2,
+        "markscheme": [
+          "all five points plotted correctly, to within half a small square ✓",
+          "a single straight line of best fit through the points, extended to meet the $V$ axis ✓",
+          "Note: the examiner's graph: <img src=\"questions/diagrams/p2-b5-drill-ms.svg\" alt=\"The five points plotted as crosses on the grid, with a straight line of best fit passing through all of them and extended to meet the vertical axis above the highest point.\">"
+        ],
+        "plot": {
+          "title": "Axes for a graph of terminal potential difference V in volts against current I in amperes: I from 0 to 20 A and V from 14 to 21 V, with a grid of 1 A by 0.5 V",
+          "x": {
+            "min": 0,
+            "max": 20,
+            "step": 1,
+            "major": 2,
+            "symbol": "I",
+            "unit": "A"
+          },
+          "y": {
+            "min": 14,
+            "max": 21,
+            "step": 0.5,
+            "major": 1,
+            "symbol": "V",
+            "unit": "V"
+          },
+          "points": [
+            [
+              2,
+              19.5
+            ],
+            [
+              6,
+              18.5
+            ],
+            [
+              10,
+              17.5
+            ],
+            [
+              14,
+              16.5
+            ],
+            [
+              18,
+              15.5
+            ]
+          ],
+          "line": {
+            "gradient": -0.25,
+            "intercept": 20,
+            "toYAxis": true
+          },
+          "axes": "questions/diagrams/p2-b5-drill-axes.svg"
+        }
+      },
+      {
+        "label": "b(i)",
+        "sections": [
+          "internal",
+          "emf"
+        ],
+        "question": "Determine the emf of the pack.",
+        "marks": 1,
+        "markscheme": [
+          "$\\varepsilon$ = intercept on the $V$ axis (where $I = 0$) $= 20.0\\ \\text{V}$ ✓"
+        ],
+        "numeric": {
+          "answer": 20,
+          "unit": "V",
+          "range": [
+            19.8,
+            20.2
+          ]
+        }
+      },
+      {
+        "label": "b(ii)",
+        "sections": [
+          "internal"
+        ],
+        "question": "Determine the internal resistance of the pack.",
+        "marks": 2,
+        "markscheme": [
+          "gradient $= -r$, e.g. gradient $= \\dfrac{15.5 - 19.5}{18.0 - 2.0} = -0.25\\ \\text{V A}^{-1}$ ✓",
+          "$r = 0.25\\ \\Omega$ ✓",
+          "Accept 0.230 to 0.270 Ω from a correctly drawn line, or the same value from $\\varepsilon = I(R + r)$ with one pair of readings and the emf from (b)(i)."
+        ],
+        "numeric": {
+          "answer": 0.25,
+          "unit": "Ω",
+          "range": [
+            0.23,
+            0.27
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "power",
+          "internal"
+        ],
+        "question": "The pack is then fitted to the drill. Calculate the power delivered to the drill when the current is 14.0 A.",
+        "marks": 1,
+        "markscheme": [
+          "$P = VI = 16.5 \\times 14.0 = 231\\ \\text{W}$ ✓"
+        ],
+        "numeric": {
+          "answer": 231,
+          "unit": "W",
+          "range": [
+            226,
+            236
+          ],
+          "mistakes": [
+            {
+              "value": 280,
+              "feedback": "The power delivered to the drill is the terminal p.d. (the p.d. across the drill) times the current, not the emf times the current: part of the emf is used inside the pack."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "sections": [
+          "internal",
+          "pd"
+        ],
+        "question": "Explain, in terms of energy, why the terminal potential difference is lower at higher currents.",
+        "marks": 2,
+        "markscheme": [
+          "the emf is the energy transferred to each coulomb of charge by the chemical reactions inside the pack, and it does not change ✓",
+          "some of this energy, $Ir$ per coulomb, is transferred to internal energy (heating) in the internal resistance of the pack, and this share grows as the current increases, so less energy per coulomb, $V = \\varepsilon - Ir$, is delivered to the external circuit ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "internal",
+          "power"
+        ],
+        "question": "Outline why a pack of cells for a power tool should have a small internal resistance.",
+        "marks": 2,
+        "markscheme": [
+          "a power tool draws a large current, so with a larger internal resistance the p.d. lost inside the pack ($Ir$) would be large and the terminal p.d., and so the power available to the motor, would fall sharply under load ✓",
+          "the power dissipated inside the pack, $I^2 r$, would be large, wasting the stored energy and heating the pack ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
     "id": "C1-P01",
     "theme": "C",
     "topic": "C.1",
