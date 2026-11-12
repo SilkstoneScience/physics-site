@@ -596,9 +596,41 @@
           "date": "2026-11-12",
           "note": "Physics, data, wording and mark scheme unchanged since the approval of 8 October 2026; only the on-screen plotting was added. The validator recalculates the three lines from the table and tries out the marking.",
           "fingerprint": "f64627c005c51a9467846ac57fb663af42f069b82ea2dbaa46e6bc02ce481085"
+        },
+        {
+          "status": "RESET",
+          "by": "Claude (12 November 2026)",
+          "date": "2026-11-12",
+          "note": "Pressure gauge changed from 1 kPa divisions (uncertainty 0.5 kPa) to 2 kPa divisions read to the nearest 1 kPa (uncertainty 1 kPa), at the teacher's request of 12 November 2026: with 0.5 kPa error bars the steepest and shallowest lines were under half a small square apart and could not be drawn apart. The readings, and the numbers in the mark schemes of all six parts, are regenerated; the wording of the stem and parts is unchanged.",
+          "previousStatus": "PHYSICS-REVIEWED",
+          "previousFingerprint": "f64627c005c51a9467846ac57fb663af42f069b82ea2dbaa46e6bc02ce481085",
+          "newFingerprint": "1647c90bb7e03447deaf670ab0cc93bd20a46d00f03ec8f37bdf9fc2d29d04b9"
+        },
+        {
+          "status": "PHYSICS-REVIEWED",
+          "by": "Claude (12 November 2026)",
+          "date": "2026-11-12",
+          "note": "Physics model unchanged (pressure law; noise-free analysis recovers -273.15 C). New readings 98, 101, 106, 111, 115, 120 kPa: straight line (r2 0.999), not through the origin, largest residual 0.48 kPa against 1 kPa bars. Absolute zero -279 C with -307 to -257 C from the steepest and shallowest lines, so -273 C is about 6 % inside. Validator and independent audit pass with no errors or warnings; the audit's own gauge uncertainty was updated to 1 kPa.",
+          "fingerprint": "1647c90bb7e03447deaf670ab0cc93bd20a46d00f03ec8f37bdf9fc2d29d04b9"
+        },
+        {
+          "status": "RESET",
+          "by": "Claude (12 November 2026)",
+          "date": "2026-11-12",
+          "note": "Reading scatter raised from 0.2 to 0.4 kPa to match the coarser gauge (the same fraction of a division as before). With 0.2 kPa the rounding to 1 kPa alone decided every reading, so the data did not depend on the random seed.",
+          "previousStatus": "PHYSICS-REVIEWED",
+          "previousFingerprint": "1647c90bb7e03447deaf670ab0cc93bd20a46d00f03ec8f37bdf9fc2d29d04b9",
+          "newFingerprint": "b80241f407931c94ec7cca3f1319f4da550d91b1cf9d5b25933812873352ccb0"
+        },
+        {
+          "status": "PHYSICS-REVIEWED",
+          "by": "Claude (12 November 2026)",
+          "date": "2026-11-12",
+          "note": "Physics model unchanged (pressure law; noise-free analysis recovers -273.15 C). Gauge: 2 kPa divisions read to 1 kPa, uncertainty 1 kPa, scatter 0.4 kPa. Readings 98, 102, 106, 111, 115, 121 kPa: straight line (r2 0.998), not through the origin, largest residual 0.59 kPa against 1 kPa bars. Absolute zero -276 C, with -302 to -253 C from the steepest and shallowest lines, so -273 C is about 7 % inside. Validator and independent audit pass with no errors or warnings; the audit's own gauge uncertainty was updated to 1 kPa.",
+          "fingerprint": "b80241f407931c94ec7cca3f1319f4da550d91b1cf9d5b25933812873352ccb0"
         }
       ],
-      "fingerprint": "f64627c005c51a9467846ac57fb663af42f069b82ea2dbaa46e6bc02ce481085"
+      "fingerprint": "b80241f407931c94ec7cca3f1319f4da550d91b1cf9d5b25933812873352ccb0"
     },
     "C1-B01": {
       "status": "APPROVED",

@@ -9,6 +9,12 @@ the published website.
 > Its wording, data, answers and mark scheme are unchanged, but what a plot asks for is part of the review fingerprint, so
 > B3-B01 was reset and must be approved by the teacher again before it returns to production. The rest of this document
 > describes the state on 8 October 2026.
+>
+> **B3-B01's gauge was also changed on 12 November 2026** (teacher's request): with ±0.5 kPa error bars the steepest and
+> shallowest lines were under half a small square apart. The gauge now has 2 kPa divisions, read to the nearest 1 kPa
+> (±1 kPa), with a scatter of 0.4 kPa. The readings and every part's mark-scheme numbers were regenerated; the wording is
+> unchanged. −273 °C now lies about 7 % inside the range from the two lines, so the "verdict-borderline" review flag
+> could be dropped: that is the teacher's decision, and until then the flag and the wording of part (e) stay.
 
 Related documents (all in this repository):
 - `docs/PAPER1B_SPECIFICATION.md`: the authoritative design rules (what a Paper 1B question must be, validation, review model).

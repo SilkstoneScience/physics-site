@@ -750,8 +750,8 @@ export async function runTests() {
     check('Plot: B3-B01 parts (b) and (d) carry an on-screen graph, drawn on the same figure', !!pb && !!pd && pb.on === 'graph' && pd.on === 'graph');
     check('Plot: the on-screen graph has the picture\'s axes (0–100 °C in 5s, 90–130 kPa in 2s)',
       pb.x.min === 0 && pb.x.max === 100 && pb.x.step === 5 && pb.x.major === 20 && pb.y.min === 90 && pb.y.max === 130 && pb.y.step === 2 && pb.y.major === 10);
-    check('Plot: it shows the six readings with their ±0.5 kPa error bars, and nothing to plot', pb.given.length === 6 && pb.given.every((g) => g[2] === 0.5) && pb.points.length === 0);
-    check('Plot: line ends snap finely enough for the error bars (0.1 kPa)', near(pb.y.snap, 0.1));
+    check('Plot: it shows the six readings with their ±1 kPa error bars, and nothing to plot', pb.given.length === 6 && pb.given.every((g) => g[2] === 1) && pb.points.length === 0);
+    check('Plot: line ends snap finely enough for the error bars (0.2 kPa, a fifth of a bar)', near(pb.y.snap, 0.2));
     const mark = (p, lines, marks) => Plot.check(p, { points: [], line: null, lines }, marks);
     const seg = (m, c) => [[0, c], [100, m * 100 + c]];
     const { fit, band } = built.d;
@@ -761,7 +761,7 @@ export async function runTests() {
     check('Plot: any line through all six error bars is accepted as a line of best fit (the mark scheme\'s accepted range)',
       mark(pb, { best: seg(band.steep.m, band.steep.c) }, 2).right && mark(pb, { best: seg(band.shallow.m, band.shallow.c) }, 2).right);
     check('Plot: a line of best fit that misses error bars is rejected, and the feedback counts them',
-      (() => { const r = mark(pb, { best: seg(fit.m, fit.c + 1.5) }, 2); return !r.right && /misses 6 of the 6 error bars/.test(r.feedback[0].text); })());
+      (() => { const r = mark(pb, { best: seg(fit.m, fit.c + 2.5) }, 2); return !r.right && /misses 6 of the 6 error bars/.test(r.feedback[0].text); })());
     check('Plot: a line of best fit that stops short of the p axis is asked to be extended',
       (() => { const r = mark(pb, { best: [[10, fit.m * 10 + fit.c], [100, fit.m * 100 + fit.c]] }, 2); return !r.right && /meet the vertical axis/.test(r.feedback[0].text); })());
     check('Plot: with no line drawn the feedback says how to draw one',
