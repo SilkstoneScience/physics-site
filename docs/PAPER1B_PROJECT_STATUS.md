@@ -20,7 +20,8 @@ the published website.
 > `tools/1b/reviews.json`), so 20 approved datasets are in production again.
 >
 > **A2-B01, C4-B01, D1-B01 and D3-B01** gained a "Line of best fit" graph on one part each (12 November 2026; wording,
-> data, answers and mark schemes unchanged). They were reset and wait in the preview for the teacher's approval.
+> data, answers and mark schemes unchanged). The teacher tried all four in the preview and approved them the same day
+> (individual approvals, recorded in `tools/1b/reviews.json`): 20 approved datasets are in production.
 
 Related documents (all in this repository):
 - `docs/PAPER1B_SPECIFICATION.md`: the authoritative design rules (what a Paper 1B question must be, validation, review model).
