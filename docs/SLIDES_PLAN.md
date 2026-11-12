@@ -1,6 +1,6 @@
 # Lesson slide generator for teachers (plan)
 
-Status: **step 1 done, and step 2 done for all five themes (A.1–E.5; November 2026), each checked by the teacher.** The page is `teachers/slides.html`, linked from the "For teachers" landing page (`teachers/index.html`), which the home page's card opens. Next: credit the guide's wording on the About page, then (with the teacher's OK) remove the "In development" tag. How it was built: section 8.
+Status: **step 1 done, and step 2 done for all five themes (A.1–E.5; November 2026), each checked by the teacher.** The page is `teachers/slides.html`, linked from the "For teachers" landing page (`teachers/index.html`), which the home page's card opens. The About page credits the guide's wording. Next: (with the teacher's OK) remove the "In development" tag. How it was built: section 8.
 
 ## 1. What it does
 
@@ -56,7 +56,7 @@ A new data file per subtopic (e.g. `teachers/slides/a1.json`), drafted by theme 
 2. **Content for the other 23 subtopics**, by theme, drafted and reviewed.
 3. Checker rules (missing aims or times, unknown sections, equations the converter can't handle), links from the builder and the home card, About page credit for the guide wording.
 
-Progress: step 1 is done (8 November 2026). From step 3, the checker rules and the links are done; the About page credit for the guide wording is still to do.
+Progress: step 1 is done (8 November 2026). From step 3, the checker rules and the links are done; the About page credit for the guide wording is done (November 2026).
 
 ## 8. How it is built (step 1)
 
