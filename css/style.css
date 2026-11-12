@@ -221,7 +221,7 @@ body:is([data-topic], [data-section="skills"], [data-section="tok"], [data-secti
 .worked-sol[hidden] { display: none; }
 .worked .hint { margin: 4px 0 10px; padding: 6px 12px; border-left: 4px solid var(--theme-b); border-radius: 6px; background: var(--warn-soft); }
 .worked .hint[hidden] { display: none; }
-.table-wrap { overflow-x: auto; }
+.table-wrap { overflow-x: auto; position: relative; } /* relative: keeps hidden screen-reader text inside the scrolling box, so it can't widen the page on phones */
 table.notes { border-collapse: collapse; margin: 12px 0; width: 100%; }
 table.notes th, table.notes td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; }
 table.notes th { background: var(--accent-soft); }
