@@ -156,6 +156,8 @@ export default {
     },
     {
       label: 'c', sections: ['kepler'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+      // Click-to-plot (question bank): the student draws the line of best fit on the graph before reading values from it.
+      plot: { lines: ['best'] },
       question: 'Determine the gradient of the graph.',
       numeric: d.num('gradient'),
       markscheme: ['Line of best fit; gradient from two well-separated points on the line ✓', `Gradient $= ${d.sf(d.r.gradient.value, 3)}$ (accept ${d.sf(d.r.gradient.range[0], 3)} to ${d.sf(d.r.gradient.range[1], 3)}) ✓`],

@@ -157,6 +157,8 @@ export default {
       },
       {
         label: 'c', sections: ['strings'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        // Click-to-plot (question bank): the student draws the line of best fit on the graph before reading values from it.
+        plot: { lines: ['best'] },
         question: 'Determine the gradient of the graph of $f$ against $1/L$.',
         numeric: d.num('gradient'),
         markscheme: [

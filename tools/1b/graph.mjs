@@ -56,6 +56,17 @@ function clipLine(m, c, xs, ys) {
   return [...pts[0], ...pts[pts.length - 1]];
 }
 
+// The two axis scales of a graph: they cover every point with its error bar.
+// An axis may be extended to include a stated range (x.range, y.range), e.g. to extrapolate to an intercept.
+// Also used for the click-to-plot version of the graph (generate.mjs, plotFor), so both show the same grid.
+export function graphScales({ x, y, points }) {
+  const ext = (ax, lo, hi) => (ax.range ? [Math.min(lo, ax.range[0]), Math.max(hi, ax.range[1])] : [lo, hi]);
+  return {
+    xs: niceScale(...ext(x, Math.min(...points.map((p) => p.x - (p.ex || 0))), Math.max(...points.map((p) => p.x + (p.ex || 0)))), x.includeZero),
+    ys: niceScale(...ext(y, Math.min(...points.map((p) => p.y - (p.ey || 0))), Math.max(...points.map((p) => p.y + (p.ey || 0)))), y.includeZero),
+  };
+}
+
 // spec: { x: {symbol, unit, includeZero}, y: {…}, points: [{x, y, ex, ey, row}],
 //         lines: [{m, c, cls, fit}], curves: [{f, cls}], alt, kind: 'student' | 'examiner' }
 export function renderGraph(spec) {
@@ -65,10 +76,7 @@ export function renderGraph(spec) {
   const H = spec.height || BOX.H;
   const pw = W - l - r;
   const ph = H - t - b;
-  // An axis may be extended to include a stated range (x.range, y.range), e.g. to extrapolate to an intercept.
-  const ext = (ax, lo, hi) => (ax.range ? [Math.min(lo, ax.range[0]), Math.max(hi, ax.range[1])] : [lo, hi]);
-  const xs = niceScale(...ext(x, Math.min(...points.map((p) => p.x - (p.ex || 0))), Math.max(...points.map((p) => p.x + (p.ex || 0)))), x.includeZero);
-  const ys = niceScale(...ext(y, Math.min(...points.map((p) => p.y - (p.ey || 0))), Math.max(...points.map((p) => p.y + (p.ey || 0)))), y.includeZero);
+  const { xs, ys } = graphScales(spec);
   const X = (v) => r1(l + ((v - xs.min) / (xs.max - xs.min)) * pw);
   const Y = (v) => r1(t + ph - ((v - ys.min) / (ys.max - ys.min)) * ph);
   const out = [`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${escapeAttr(alt)}" data-graph="${kind}">`];

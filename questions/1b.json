@@ -337,7 +337,82 @@
           "Gradient $= \\dfrac{1}{k}$: about 40.3 $\\text{mm N}^{-1}$, converted to $\\text{m N}^{-1}$ ✓",
           "$k = 24.8\\ \\text{N m}^{-1}$ (accept 23.9 to 25.9) ✓"
         ],
-        "msFigure": "graph-ms"
+        "msFigure": "graph-ms",
+        "plot": {
+          "title": "Graph of extension against load recorded, with 6 plotted points, to draw on",
+          "height": 286,
+          "x": {
+            "min": 0,
+            "max": 3,
+            "step": 0.1,
+            "major": 0.5,
+            "symbol": "F",
+            "unit": "N"
+          },
+          "y": {
+            "min": 0,
+            "max": 150,
+            "step": 10,
+            "major": 50,
+            "symbol": "x",
+            "unit": "mm",
+            "snap": 1
+          },
+          "given": [
+            [
+              0.5,
+              39,
+              0
+            ],
+            [
+              1,
+              59,
+              0
+            ],
+            [
+              1.5,
+              79,
+              0
+            ],
+            [
+              2,
+              99,
+              0
+            ],
+            [
+              2.5,
+              119,
+              0
+            ],
+            [
+              3,
+              140,
+              0
+            ]
+          ],
+          "points": [],
+          "lines": [
+            {
+              "key": "best",
+              "role": "best",
+              "label": "Line of best fit",
+              "gradient": 40.28571429,
+              "intercept": 18.66666667,
+              "tolerance": 2.014285714,
+              "gradients": [
+                38.67428571,
+                41.89714286
+              ],
+              "toYAxis": true
+            }
+          ],
+          "fit": {
+            "gradient": 40.28571429,
+            "intercept": 18.66666667
+          },
+          "worth": 0,
+          "on": "graph"
+        }
       },
       {
         "label": "c",
@@ -1082,7 +1157,7 @@
         "marks": 2,
         "question": "Show, using two rows of the table, that $p$ is not proportional to $T$.",
         "markscheme": [
-          "$\\dfrac{p}{T}$ is 8.13 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 12.0 °C but 1.54 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 78.5 °C (or any two non-adjacent rows) ✓",
+          "$\\dfrac{p}{T}$ is 8.17 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 12.0 °C but 1.54 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 78.5 °C (or any two non-adjacent rows) ✓",
           "The ratio is not constant, so $p$ is not proportional to $T$ ✓"
         ]
       },
@@ -1094,10 +1169,85 @@
         "marks": 2,
         "question": "Draw the line of best fit on the graph. Determine its gradient and its intercept on the $p$ axis.",
         "markscheme": [
-          "Gradient $= 0.34\\ \\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ (accept 0.33 to 0.36) ✓",
-          "Intercept $= 93.2\\ \\text{kPa}$ (accept 92.7 to 93.7) ✓"
+          "Gradient $= 0.34\\ \\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ (accept 0.32 to 0.37) ✓",
+          "Intercept $= 93.7\\ \\text{kPa}$ (accept 92.6 to 95.2) ✓"
         ],
-        "msFigure": "graph-ms"
+        "msFigure": "graph-ms",
+        "plot": {
+          "title": "Graph of pressure against temperature, with 6 plotted points and error bars, to draw on",
+          "height": 343,
+          "x": {
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "major": 20,
+            "symbol": "T",
+            "unit": "°C"
+          },
+          "y": {
+            "min": 90,
+            "max": 130,
+            "step": 2,
+            "major": 10,
+            "symbol": "p",
+            "unit": "kPa",
+            "snap": 0.2
+          },
+          "given": [
+            [
+              12,
+              98,
+              1
+            ],
+            [
+              23.5,
+              102,
+              1
+            ],
+            [
+              37,
+              106,
+              1
+            ],
+            [
+              51.5,
+              111,
+              1
+            ],
+            [
+              64,
+              115,
+              1
+            ],
+            [
+              78.5,
+              121,
+              1
+            ]
+          ],
+          "points": [],
+          "lines": [
+            {
+              "key": "best",
+              "role": "best",
+              "label": "Line of best fit",
+              "gradient": 0.3396036055,
+              "intercept": 93.74927319,
+              "bars": true,
+              "gradients": [
+                0.3157894737,
+                0.3653846154
+              ],
+              "toYAxis": true
+            }
+          ],
+          "fit": {
+            "gradient": 0.3396036055,
+            "intercept": 93.74927319
+          },
+          "worth": 0,
+          "on": "graph"
+        }
       },
       {
         "label": "c",
@@ -1107,17 +1257,17 @@
         "marks": 2,
         "question": "Hence determine the temperature at which the pressure of the air would be zero, according to these data.",
         "numeric": {
-          "answer": -271.9221443235077,
+          "answer": -276.0549996091001,
           "range": [
-            -280.079808653213,
-            -261.67857142857144
+            -301.50000000000006,
+            -253.47368421052633
           ],
           "unit": "${}^{\\circ}\\text{C}$",
           "source": "absZeroAnswer"
         },
         "markscheme": [
           "At $p = 0$: $T = -\\dfrac{\\text{intercept}}{\\text{gradient}}$ (extrapolating the line) ✓",
-          "$T = −272\\ {}^{\\circ}\\text{C}$ (accept −280 to −262; allow ECF from (b)) ✓"
+          "$T = −276\\ {}^{\\circ}\\text{C}$ (accept −302 to −253; allow ECF from (b)) ✓"
         ]
       },
       {
@@ -1129,10 +1279,88 @@
         "question": "Draw the steepest and shallowest straight lines that pass through all the error bars. Use them to determine the absolute uncertainty in your answer to (c).",
         "markscheme": [
           "Steepest and shallowest lines drawn through all the error bars ✓",
-          "Their temperatures at $p = 0$, found in the same way, are about −277 °C and −262 °C ✓",
-          "Uncertainty $= \\dfrac{\\text{difference}}{2} \\approx 8\\ {}^{\\circ}\\text{C}$ (allow values from the candidate's own lines) ✓"
+          "Their temperatures at $p = 0$, found in the same way, are about −302 °C and −253 °C ✓",
+          "Uncertainty $= \\dfrac{\\text{difference}}{2} \\approx 24\\ {}^{\\circ}\\text{C}$ (allow values from the candidate's own lines) ✓"
         ],
-        "msFigure": "graph-ms"
+        "msFigure": "graph-ms",
+        "plot": {
+          "title": "Graph of pressure against temperature, with 6 plotted points and error bars, to draw on",
+          "height": 343,
+          "x": {
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "major": 20,
+            "symbol": "T",
+            "unit": "°C"
+          },
+          "y": {
+            "min": 90,
+            "max": 130,
+            "step": 2,
+            "major": 10,
+            "symbol": "p",
+            "unit": "kPa",
+            "snap": 0.2
+          },
+          "given": [
+            [
+              12,
+              98,
+              1
+            ],
+            [
+              23.5,
+              102,
+              1
+            ],
+            [
+              37,
+              106,
+              1
+            ],
+            [
+              51.5,
+              111,
+              1
+            ],
+            [
+              64,
+              115,
+              1
+            ],
+            [
+              78.5,
+              121,
+              1
+            ]
+          ],
+          "points": [],
+          "lines": [
+            {
+              "key": "steep",
+              "role": "steep",
+              "label": "Steepest line",
+              "gradient": 0.3653846154,
+              "intercept": 92.61538462,
+              "bars": true
+            },
+            {
+              "key": "shallow",
+              "role": "shallow",
+              "label": "Shallowest line",
+              "gradient": 0.3157894737,
+              "intercept": 95.21052632,
+              "bars": true
+            }
+          ],
+          "fit": {
+            "gradient": 0.3396036055,
+            "intercept": 93.74927319
+          },
+          "worth": 1,
+          "on": "graph"
+        }
       },
       {
         "label": "e",
@@ -1142,8 +1370,8 @@
         "marks": 2,
         "question": "The accepted value of absolute zero is $−273\\ {}^{\\circ}\\text{C}$. Calculate the percentage difference between your answer to (c) and this value. Hence discuss whether your result is consistent with the accepted value.",
         "markscheme": [
-          "Percentage difference $= \\dfrac{|−272 - (−273)|}{273} \\times 100 \\approx 0.4\\,\\%$ ✓",
-          "This is smaller than the percentage uncertainty from (d) (about 3 %), so the result is consistent with the accepted value (award for a conclusion consistent with the candidate's own uncertainty) ✓"
+          "Percentage difference $= \\dfrac{|−276 - (−273)|}{273} \\times 100 \\approx 1\\,\\%$ ✓",
+          "This is smaller than the percentage uncertainty from (d) (about 9 %), so the result is consistent with the accepted value (award for a conclusion consistent with the candidate's own uncertainty) ✓"
         ]
       },
       {
@@ -1154,16 +1382,16 @@
         "marks": 1,
         "question": "The flask is then placed in boiling water at 100 °C. Use your line of best fit to predict the reading of the pressure gauge.",
         "numeric": {
-          "answer": 127.4663675344157,
+          "answer": 127.7096337399939,
           "range": [
-            126.82903569674362,
-            128.18987341772151
+            126.78947368421053,
+            129.15384615384613
           ],
           "unit": "$\\text{kPa}$",
           "source": "pred"
         },
         "markscheme": [
-          "$p = 127\\ \\text{kPa}$ (accept 127 to 128) ✓"
+          "$p = 128\\ \\text{kPa}$ (accept 127 to 129) ✓"
         ],
         "msFigure": "graph-ms"
       }
@@ -1456,7 +1684,81 @@
           "Draws a line of best fit and uses two well-separated points on it ✓",
           "Gradient $= 20.7\\ \\text{m s}^{-1}$ (accept 19.6 to 21.8) ✓"
         ],
-        "msFigure": "graph-ms"
+        "msFigure": "graph-ms",
+        "plot": {
+          "title": "Graph of frequency against reciprocal of length, with 6 plotted points, to draw on",
+          "height": 286,
+          "x": {
+            "min": 0,
+            "max": 2,
+            "step": 0.1,
+            "major": 0.5,
+            "symbol": "1/L",
+            "unit": "m⁻¹"
+          },
+          "y": {
+            "min": 0,
+            "max": 50,
+            "step": 2,
+            "major": 10,
+            "symbol": "f",
+            "unit": "Hz",
+            "snap": 0.2
+          },
+          "given": [
+            [
+              2,
+              40.7,
+              0
+            ],
+            [
+              1.667,
+              33.9,
+              0
+            ],
+            [
+              1.429,
+              28.8,
+              0
+            ],
+            [
+              1.25,
+              25.6,
+              0
+            ],
+            [
+              1.111,
+              22.1,
+              0
+            ],
+            [
+              1,
+              20,
+              0
+            ]
+          ],
+          "points": [],
+          "lines": [
+            {
+              "key": "best",
+              "role": "best",
+              "label": "Line of best fit",
+              "gradient": 20.71954295,
+              "intercept": -0.6875291263,
+              "tolerance": 0.5333273054,
+              "gradients": [
+                19.57730812,
+                21.78619756
+              ]
+            }
+          ],
+          "fit": {
+            "gradient": 20.71954295,
+            "intercept": -0.6875291263
+          },
+          "worth": 0,
+          "on": "graph"
+        }
       },
       {
         "label": "d",
@@ -1706,7 +2008,86 @@
           "Line of best fit; gradient from two well-separated points on the line ✓",
           "Gradient $= 1.50$ (accept 1.47 to 1.53) ✓"
         ],
-        "msFigure": "graph-ms"
+        "msFigure": "graph-ms",
+        "plot": {
+          "title": "Graph of log of period against log of semi-major axis, with 7 plotted points, to draw on",
+          "height": 286,
+          "x": {
+            "min": 5,
+            "max": 7.5,
+            "step": 0.1,
+            "major": 0.5,
+            "symbol": "lg(a/km)",
+            "unit": ""
+          },
+          "y": {
+            "min": -1,
+            "max": 2.5,
+            "step": 0.1,
+            "major": 0.5,
+            "symbol": "lg(T/day)",
+            "unit": "",
+            "snap": 0.01
+          },
+          "given": [
+            [
+              5.107,
+              -0.53,
+              0
+            ],
+            [
+              5.259,
+              -0.303,
+              0
+            ],
+            [
+              5.346,
+              -0.171,
+              0
+            ],
+            [
+              5.625,
+              0.248,
+              0
+            ],
+            [
+              6.03,
+              0.855,
+              0
+            ],
+            [
+              6.275,
+              1.222,
+              0
+            ],
+            [
+              7.059,
+              2.399,
+              0
+            ]
+          ],
+          "points": [],
+          "lines": [
+            {
+              "key": "best",
+              "role": "best",
+              "label": "Line of best fit",
+              "gradient": 1.500515676,
+              "intercept": -8.193249172,
+              "tolerance": 0.029290066,
+              "gradients": [
+                1.470505363,
+                1.53052599
+              ]
+            }
+          ],
+          "fit": {
+            "gradient": 1.500515676,
+            "intercept": -8.193249172
+          },
+          "worth": 0,
+          "on": "graph"
+        }
       },
       {
         "label": "d",
@@ -1925,7 +2306,82 @@
           "Draws a line of best fit and uses two well-separated points on it ✓",
           "Gradient $= 0.325\\ \\text{g A}^{-1}$ (accept 0.312 to 0.340) ✓"
         ],
-        "msFigure": "graph-ms"
+        "msFigure": "graph-ms",
+        "plot": {
+          "title": "Graph of change in reading against current, with 6 plotted points and error bars, to draw on",
+          "height": 286,
+          "x": {
+            "min": 0,
+            "max": 3,
+            "step": 0.1,
+            "major": 0.5,
+            "symbol": "I",
+            "unit": "A"
+          },
+          "y": {
+            "min": 0,
+            "max": 1.2,
+            "step": 0.05,
+            "major": 0.2,
+            "symbol": "Δm",
+            "unit": "g",
+            "snap": 0.0025
+          },
+          "given": [
+            [
+              0.5,
+              0.18,
+              0.02
+            ],
+            [
+              1,
+              0.33,
+              0.02
+            ],
+            [
+              1.5,
+              0.48,
+              0.02
+            ],
+            [
+              2,
+              0.65,
+              0.02
+            ],
+            [
+              2.5,
+              0.82,
+              0.02
+            ],
+            [
+              3,
+              0.99,
+              0.02
+            ]
+          ],
+          "points": [],
+          "lines": [
+            {
+              "key": "best",
+              "role": "best",
+              "label": "Line of best fit",
+              "gradient": 0.3251428571,
+              "intercept": 0.006,
+              "bars": true,
+              "gradients": [
+                0.3121371429,
+                0.34
+              ],
+              "toYAxis": true
+            }
+          ],
+          "fit": {
+            "gradient": 0.3251428571,
+            "intercept": 0.006
+          },
+          "worth": 0,
+          "on": "graph"
+        }
       },
       {
         "label": "c",

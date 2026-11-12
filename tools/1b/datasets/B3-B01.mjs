@@ -54,15 +54,19 @@ export default {
       model: { law: 'pressure-law', inputs: { p0: 'p.p0', T0: 'p.T0', T: 'row.theta' } },
       expect: [90, 130],
       measurement: {
-        instrument: 'Bourdon pressure gauge, smallest division 1 kPa, read to the nearest 0.5 kPa (uncertainty ±0.5 kPa)',
+        // Gauge changed from 1 kPa divisions (±0.5 kPa) on 12 November 2026 (teacher): with ±0.5 kPa the steepest and
+        // shallowest lines were under half a small square apart at the edges of the graph, too close to draw apart.
+        instrument: 'Bourdon pressure gauge, smallest division 2 kPa, read to the nearest 1 kPa (uncertainty ±1 kPa)',
         reading: 'reading once the pointer is steady, several minutes after the bath reaches each temperature',
-        noise: 'judging the pointer between divisions and small differences between the air and bath temperatures: normal scatter with standard deviation 0.2 kPa',
+        // The scatter is the same fraction of a division as with the first gauge (0.2 of a division): a coarser scale is
+        // judged less finely. With 0.2 kPa the rounding to 1 kPa alone decided every reading.
+        noise: 'judging the pointer between divisions and small differences between the air and bath temperatures: normal scatter with standard deviation 0.4 kPa',
       },
-      noise: { type: 'gauss', sd: 0.2 }, resolution: 0.5, uncertainty: 0.5,
+      noise: { type: 'gauss', sd: 0.4 }, resolution: 1, uncertainty: 1,
     },
   },
-  // Graph zoomed to 0–100 °C (teacher, 8 October 2026), so the ±0.5 kPa error bars are visible and students draw the best,
-  // steepest and shallowest lines through them; absolute zero is then found by algebraic extrapolation (T = −c/m).
+  // Graph zoomed to 0–100 °C (teacher, 8 October 2026), so the error bars (±1 kPa since 12 November 2026) are visible and
+  // students draw the best, steepest and shallowest lines through them; absolute zero is then found by algebraic extrapolation (T = −c/m).
   // y error bars only; the plot is taller (height 480) so each bar clears its marker.
   graph: { x: 'theta', y: 'p', fit: 'linear', band: true, zero: { x: true }, xRange: [0, 100], yRange: [90, 130], height: 480 },
 
@@ -92,16 +96,18 @@ export default {
     ratioHigh: { unit: 'kPa Δ°C^-1', value: (d) => d.rows[5].p / d.rows[5].theta },
   },
 
-  // Part (e) has no verdict claim: with y error bars only, −273 °C lies about 1.5 % inside the steepest/shallowest-line
-  // range (the verdict rule needs 4 %), so students' own lines could give either conclusion. Teacher's decision
-  // (8 October 2026): keep (e) and credit a conclusion consistent with the candidate's own uncertainty. The review flag
-  // records this and keeps the dataset AMBER, so it is always inspected rather than batch-approved unseen.
+  // Part (e) has no verdict claim. With the first gauge (±0.5 kPa) −273 °C lay only about 1.5 % inside the
+  // steepest/shallowest-line range (the verdict rule needs 4 %), so students' own lines could give either conclusion, and
+  // the teacher decided (8 October 2026) to keep (e) and credit a conclusion consistent with the candidate's own
+  // uncertainty. With the ±1 kPa gauge (12 November 2026) −273 °C is about 6 % inside the range, so the verdict is no
+  // longer borderline; the wording of (e) and the review flag are kept until the teacher decides otherwise (the flag
+  // keeps the dataset AMBER, so it is always inspected rather than batch-approved unseen).
   claims: [
     { type: 'linear', minR2: 0.995 },
     { type: 'throughOrigin', expect: false },
     { type: 'trend', direction: 'increasing' },
   ],
-  reviewFlags: [{ flag: 'verdict-borderline', note: 'part (e): −273 °C is only about 1.5 % inside the max/min-line range; teacher decided (8 October 2026) to credit a conclusion consistent with the candidate\'s own uncertainty' }],
+  reviewFlags: [{ flag: 'verdict-borderline', note: 'part (e): teacher decided (8 October 2026) to credit a conclusion consistent with the candidate\'s own uncertainty, when −273 °C was only about 1.5 % inside the max/min-line range; with the ±1 kPa gauge (12 November 2026) it is about 6 % inside, and the flag is kept until the teacher decides otherwise' }],
 
   stated: {
     accepted: { value: -273, dp: 0, unit: '°C', source: 'data booklet: absolute zero is 0 K = −273 °C' },
@@ -127,6 +133,8 @@ export default {
       },
       {
         label: 'b', sections: ['laws'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        // Click-to-plot (question bank): the student draws the line on the graph; the marks are for the values read from it.
+        plot: { lines: ['best'], toYAxis: true },
         reads: [{ figure: 'graph', x: 0, y: d.r.intercept.value }],
         question: 'Draw the line of best fit on the graph. Determine its gradient and its intercept on the $p$ axis.',
         markscheme: [
@@ -145,6 +153,7 @@ export default {
       },
       {
         label: 'd', sections: ['laws'], marks: 3, ao: { AO2: 2, AO3: 1 }, msFigure: 'graph-ms',
+        plot: { lines: ['steep', 'shallow'], worth: 1 }, // the first marking point is for the two lines
         question: 'Draw the steepest and shallowest straight lines that pass through all the error bars. Use them to determine the absolute uncertainty in your answer to (c).',
         markscheme: [
           'Steepest and shallowest lines drawn through all the error bars ✓',

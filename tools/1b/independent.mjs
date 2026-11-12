@@ -386,7 +386,8 @@ export const AUDITS = {
       const x = pub.rows.map((r) => r.theta);
       const y = pub.rows.map((r) => r.p);
       const fit = fitLine(x, y);
-      const b = maxMin(x, y, x.map(() => 0.5), x.map(() => 0.5));
+      // This audit's own reading of the instruments: thermometer ±0.5 °C, pressure gauge ±1 kPa (2 kPa divisions, 12 November 2026).
+      const b = maxMin(x, y, x.map(() => 0.5), x.map(() => 1));
       const abs = -fit.c / fit.m;
       const lo = -b.cMax / b.mMin;
       const hi = -b.cMin / b.mMax;

@@ -62,7 +62,10 @@ export function canonicalContent(def, built) {
     if (typeof pt.msFigure === 'string') figureOf({ figure: ms, ...(q.figures || {})[ms] });
     if (pt.figure && typeof pt.figure === 'object') figureOf(pt.figure);
     const fig = pt.figure && (typeof pt.figure === 'string' ? pt.figure : pt.figure.figure);
-    return { label: pt.label, question: pt.question, marks: pt.marks, markscheme: pt.markscheme, numeric: pt.numeric, msFigure: ms, ...(fig ? { figure: fig } : {}) };
+    // A click-to-plot part: what the student draws and how many marks the drawing carries are part of the question.
+    // The axes and the lines' values are not listed: they follow from the data and the graph, which are frozen above.
+    const plot = pt.plot ? { worth: pt.plot.worth, points: (pt.plot.points || []).length, lines: (pt.plot.lines || []).map((L) => ({ key: L.key, role: L.role, bars: !!L.bars, toYAxis: !!L.toYAxis })) } : null;
+    return { label: pt.label, question: pt.question, marks: pt.marks, markscheme: pt.markscheme, numeric: pt.numeric, msFigure: ms, ...(fig ? { figure: fig } : {}), ...(plot ? { plot } : {}) };
   });
   return {
     id: q.id, topic: q.topic, paper: q.paper, level: q.level, difficulty: q.difficulty, skills: q.skills, context: q.context,

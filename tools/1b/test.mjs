@@ -22,6 +22,7 @@ import { contextRepetition, contextProblems } from './contexts.mjs';
 import { regularityFindings, constancy, successiveRatios, multiplesProblems } from './safeguards.mjs';
 import { areaUnder, squaresEstimate, setSourcesDir } from './validate.mjs';
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
 import os from 'node:os';
 import crypto from 'node:crypto';
 import { D3_MODEL, E3_AREA, D3_SCALE, P12_BROKEN } from './fixtures/phase12.mjs';
@@ -407,7 +408,7 @@ export async function runTests() {
     check('the input registry is not changed by a successful acceptance', !regT.batches && regT.datasets.G7.status === 'PHYSICS-REVIEWED');
     check('a batch can\'t be decided twice', acceptBatch(plan, ok.registry, { ...base, waive: { A1x: 'r' } }).errors.some((e) => e.includes('already been decided')));
     check('a batch approval without inspection does not establish an archetype', !individuallyApproved(g7) && individuallyApproved(g1));
-    check('older approvals (no basis recorded) count as individual', individuallyApproved(reg0.datasets['D3-B01']));
+    check('older approvals (no basis recorded) count as individual', individuallyApproved({ status: 'APPROVED', history: [{ status: 'PHYSICS-REVIEWED', by: 'reviewer' }, { status: 'APPROVED', by: 'teacher', date: '2026-10-06' }] }));
     // A batch-approved dataset is published like any APPROVED dataset (production still needs APPROVED + unchanged).
     const d3b = datasets.find((x) => x.def.id === 'D3-B01');
     const fpD3 = fingerprintOf(canonicalContent(d3b.def, buildQuestion(d3b.def)));
@@ -737,6 +738,92 @@ export async function runTests() {
       check(`Safeguard index: "${s.area}" is proved by broken datasets and tests`, (s.codes.length + s.tests.length) > 0 && !missingCodes.length && !missingTests.length,
         `${missingCodes.length ? 'no broken dataset for ' + missingCodes.join(', ') : ''}${missingTests.length ? ' no test matching ' + missingTests.join(', ') : ''}`);
     }
+  }
+
+  // ----- Click-to-plot graphs on Paper 1B (js/plot.js; first used in B3-B01, November 2026) -----
+  {
+    const Plot = createRequire(import.meta.url)('../../js/plot.js');
+    const b3 = datasets.find((x) => x.def.id === 'B3-B01').def;
+    const built = buildQuestion(b3);
+    const pb = built.question.parts.find((p) => p.label === 'b').plot;
+    const pd = built.question.parts.find((p) => p.label === 'd').plot;
+    check('Plot: B3-B01 parts (b) and (d) carry an on-screen graph, drawn on the same figure', !!pb && !!pd && pb.on === 'graph' && pd.on === 'graph');
+    check('Plot: the on-screen graph has the picture\'s axes (0–100 °C in 5s, 90–130 kPa in 2s)',
+      pb.x.min === 0 && pb.x.max === 100 && pb.x.step === 5 && pb.x.major === 20 && pb.y.min === 90 && pb.y.max === 130 && pb.y.step === 2 && pb.y.major === 10);
+    check('Plot: it shows the six readings with their ±1 kPa error bars, and nothing to plot', pb.given.length === 6 && pb.given.every((g) => g[2] === 1) && pb.points.length === 0);
+    check('Plot: line ends snap finely enough for the error bars (0.2 kPa, a fifth of a bar)', near(pb.y.snap, 0.2));
+    const mark = (p, lines, marks) => Plot.check(p, { points: [], line: null, lines }, marks);
+    const seg = (m, c) => [[0, c], [100, m * 100 + c]];
+    const { fit, band } = built.d;
+    // Part (b): the line of best fit.
+    check('Plot: the least-squares line is accepted as the line of best fit, for no marks of its own',
+      (() => { const r = mark(pb, { best: seg(fit.m, fit.c) }, 2); return r.right && r.score === 0 && r.max === 0; })());
+    check('Plot: any line through all six error bars is accepted as a line of best fit (the mark scheme\'s accepted range)',
+      mark(pb, { best: seg(band.steep.m, band.steep.c) }, 2).right && mark(pb, { best: seg(band.shallow.m, band.shallow.c) }, 2).right);
+    check('Plot: a line of best fit that misses error bars is rejected, and the feedback counts them',
+      (() => { const r = mark(pb, { best: seg(fit.m, fit.c + 2.5) }, 2); return !r.right && /misses 6 of the 6 error bars/.test(r.feedback[0].text); })());
+    check('Plot: a line of best fit that stops short of the p axis is asked to be extended',
+      (() => { const r = mark(pb, { best: [[10, fit.m * 10 + fit.c], [100, fit.m * 100 + fit.c]] }, 2); return !r.right && /meet the vertical axis/.test(r.feedback[0].text); })());
+    check('Plot: with no line drawn the feedback says how to draw one',
+      (() => { const r = mark(pb, {}, 2); return !r.right && r.score === 0 && /choose "Line of best fit"/.test(r.feedback[0].text); })());
+    // Part (d): the steepest and shallowest lines.
+    const good = { steep: seg(band.steep.m, band.steep.c), shallow: seg(band.shallow.m, band.shallow.c) };
+    check('Plot: the true steepest and shallowest lines earn the one mark for the lines',
+      (() => { const r = mark(pd, good, 3); return r.right && r.score === 1 && r.max === 1; })());
+    check('Plot: the line of best fit is not accepted as the steepest or the shallowest line',
+      (() => { const r = mark(pd, { steep: seg(fit.m, fit.c), shallow: seg(fit.m, fit.c) }, 3); return !r.right && r.lines.every((l) => !l.ok) && /a steeper line still would/.test(r.feedback[0].text) && /a shallower line still would/.test(r.feedback[1].text); })());
+    check('Plot: swapped steepest and shallowest lines are rejected', !mark(pd, { steep: good.shallow, shallow: good.steep }, 3).lines.some((l) => l.ok));
+    check('Plot: a steepest line that is too steep misses error bars and is rejected, while the good shallowest line still passes',
+      (() => { const r = mark(pd, { ...good, steep: [[0, 91.5], [100, 130]] }, 3); return !r.right && /Your steepest line misses \d of the 6 error bars/.test(r.feedback[0].text) && r.lines[1].ok; })());
+    check('Plot: one good line of the two earns nothing yet', mark(pd, { steep: good.steep }, 3).score === 0);
+    check('Plot: a line three-quarters of the way to the extreme is accepted, one a quarter of the way is not', (() => {
+      const mix = (t, L) => seg(fit.m + t * (L.m - fit.m), fit.c + t * (L.c - fit.c));
+      return mark(pd, { ...good, steep: mix(0.75, band.steep) }, 3).right && !mark(pd, { ...good, steep: mix(0.25, band.steep) }, 3).right;
+    })());
+    check('Plot: Plot.ideal gives lines cut to the axes that earn full credit',
+      (() => { const s = Plot.ideal(pd); return s.lines.steep[0][0] === 0 && s.lines.steep[1][0] === 100 && Plot.check(pd, s, 3).right; })());
+    // The validator and the generator.
+    const errs = (def) => validateDataset(def, buildQuestion(def).question, { topics }).filter((x) => x.level === 'error' && x.code === 'plot').map((x) => x.message);
+    check('Plot: B3-B01 passes the plot checks', errs(b3).length === 0, errs(b3).join('; '));
+    check('Plot: the validator refuses a plot on a part without the examiner\'s graph', errs(editPartLocal(b3, 'b', (pt) => ({ ...pt, msFigure: undefined }))).some((m) => /msFigure/.test(m)));
+    check('Plot: the validator refuses worth above the part\'s marks', errs(editPartLocal(b3, 'd', (pt) => ({ ...pt, plot: { ...pt.plot, worth: 4 } }))).some((m) => /worth/.test(m)));
+    const refuses = (def, re) => { try { buildQuestion(def); return false; } catch (e) { return re.test(e.message); } };
+    check('Plot: a graph without visible error bars can\'t ask for steepest and shallowest lines', refuses({ ...b3, graph: { ...b3.graph, errorBars: 'too-small' } }, /error bars/));
+    check('Plot: an unknown line name is refused', refuses(editPartLocal(b3, 'b', (pt) => ({ ...pt, plot: { lines: ['curve'] } })), /plot\.lines/));
+    // The review fingerprint covers what the student is asked to draw.
+    const fp = (def) => fingerprintOf(canonicalContent(def, buildQuestion(def)));
+    check('Plot: changing what a part\'s plot asks for changes the fingerprint',
+      fp(editPartLocal(b3, 'd', (pt) => ({ ...pt, plot: { ...pt.plot, worth: 0 } }))) !== fp(b3) && fp(editPartLocal(b3, 'b', (pt) => ({ ...pt, plot: undefined }))) !== fp(b3));
+    // Lines of best fit before reading a gradient: without error bars (A2-B01, C4-B01, D1-B01) and with them (D3-B01).
+    const withPlot = datasets.filter((x) => buildQuestion(x.def).question.parts.some((pt) => pt.plot)).map((x) => x.def.id).sort().join(' ');
+    check('Plot: the datasets with an on-screen graph are the ones the teacher asked for', withPlot === 'A2-B01 B3-B01 C4-B01 D1-B01 D3-B01', withPlot);
+    for (const [id, label] of [['A2-B01', 'b'], ['C4-B01', 'c'], ['D1-B01', 'c'], ['D3-B01', 'b']]) {
+      const def = datasets.find((x) => x.def.id === id).def;
+      const b = buildQuestion(def);
+      const pt = b.question.parts.find((x) => x.label === label);
+      const p = pt.plot;
+      const L = p.lines[0];
+      const xs = p.given.map((g) => g[0]);
+      const mid = (Math.min(...xs) + Math.max(...xs)) / 2;
+      const tilt = (m) => Plot.ideal({ ...p, lines: [{ key: 'best', role: 'best', gradient: m, intercept: L.gradient * mid + L.intercept - m * mid }] }).lines.best;
+      const ok = (s) => Plot.check(p, { points: [], line: null, lines: { best: s } }, pt.marks).right;
+      const [lo, hi] = b.d.r.gradient.range;
+      check(`Plot: ${id} (${label}) passes the plot checks and accepts the least-squares line`, errs(def).length === 0 && ok(Plot.ideal(p).lines.best), errs(def).join('; '));
+      check(`Plot: ${id} (${label}) rejects a line whose gradient is outside the range the mark scheme accepts`, !ok(tilt(lo - 0.05 * (L.gradient - lo))) && !ok(tilt(hi + 0.05 * (hi - L.gradient))));
+      check(`Plot: ${id} (${label}) accepts a line tilted half-way to the edge of the accepted range`, ok(tilt(L.gradient + 0.5 * Math.min(L.gradient - lo, hi - L.gradient))) && ok(tilt(L.gradient - 0.5 * Math.min(L.gradient - lo, hi - L.gradient))));
+      check(`Plot: ${id} (${label}) keeps its typed answer beside the graph, and the drawing carries no marks`, !!pt.numeric && p.worth === 0);
+      if (!L.bars) {
+        check(`Plot: ${id} (${label}) has an allowance of at most one small square, and line ends that snap at least twice as finely`,
+          L.tolerance > 0 && L.tolerance <= p.y.step * (1 + 1e-9) && (p.y.snap || p.y.step / 5) <= L.tolerance / 2 + 1e-12);
+      }
+    }
+    check('Plot: A2-B01 and D3-B01 ask for the line to reach the vertical axis (later parts use the intercept)',
+      ['A2-B01', 'D3-B01'].every((id) => buildQuestion(datasets.find((x) => x.def.id === id).def).question.parts.some((pt) => pt.plot && pt.plot.lines[0].toYAxis)));
+    check('Plot: a line through all the error bars but tilted outside the accepted gradients is told it is tilted too far', (() => {
+      const p = { ...pb, lines: [{ ...pb.lines[0], gradients: [fit.m - 0.001, fit.m + 0.001] }] };
+      const r = Plot.check(p, { points: [], line: null, lines: { best: seg(band.steep.m, band.steep.c) } }, 2);
+      return !r.right && /tilted too far/.test(r.feedback[0].text);
+    })());
   }
   return { count, failures };
 }

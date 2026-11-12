@@ -4,7 +4,7 @@
 //   → fits → results → table, graph, diagrams and the question/mark-scheme text.
 // See tools/1b/README.md for how to write a dataset.
 import { makeRng, roundTo, decimalsOf, fmtNum, sigFig, parseUnit, sameDim, linearFit, gradientBand, toSI, fromSI, baseUnitExpr, valuePm, sciParts } from './lib.mjs';
-import { renderGraph } from './graph.mjs';
+import { renderGraph, graphScales, BOX } from './graph.mjs';
 import { propagate } from './uncertainty.mjs';
 import { applySystematic } from './systematic.mjs';
 import { LAWS } from './laws.mjs';
@@ -280,17 +280,88 @@ export function trialsTableHtml(def, d) {
 
 // spec: def.graph (the analysed graph: 'graph' and 'graph-ms') or def.rawGraph (raw data before a
 // transformation: 'graph-raw', students' version only, never with a fitted line).
-export function graphFigure(def, d, kind, g = def.graph, name = kind === 'student' ? 'graph' : 'graph-ms') {
-  const [cx, cy] = [def.columns[g.x], def.columns[g.y]];
+// The points a graph shows, each with the error bars that are drawn for it.
+function graphPoints(d, g, kind) {
   const omit = kind === 'student' ? g.omit || [] : [];
   // errorBars: 'too-small' (see safeguards.mjs, P1): the uncertainties are too small to see as bars, so none are drawn
   // and the caption states them instead. They are still used for every max/min line and verdict.
   // errorBars 'none': no part uses the uncertainty, so nothing about it is drawn or said.
   const hideBars = g.errorBars === 'too-small' || g.errorBars === 'none';
-  const points = d.rows.map((row, i) => ({
+  return d.rows.map((row, i) => ({
     x: row[g.x], y: row[g.y], row: i,
     ex: (!hideBars && g.xErrorBars && d.unc(g.x, i)) || 0, ey: (!hideBars && d.unc(g.y, i)) || 0,
   })).filter((pt) => !omit.includes(pt.row));
+}
+const axisSpec = (c, zero, range) => ({ symbol: c.symbolText || c.symbol, unit: parseUnit(c.unit || '').text, includeZero: !!zero, range });
+
+// ---------- 3b. Click-to-plot ----------
+// A part may ask the student to draw on the graph:  plot: { lines: ['best'], toYAxis: true }  or
+// plot: { lines: ['steep', 'shallow'], worth: 1 }.  This builds the interactive version of the students' graph for the
+// question bank (js/plot.js): the same axes and grid as the picture, the points and error bars already shown, and
+// the lines the student must draw, taken from the fit and the steepest and shallowest lines. `worth` is how many of
+// the part's marks are for the drawing itself (default 0: the marks are for the values read from the lines).
+const PLOT_LINES = { best: 'Line of best fit', steep: 'Steepest line', shallow: 'Shallowest line' };
+export function plotFor(def, d, want, label) {
+  const g = def.graph;
+  const stop = (msg) => { throw new Error(`${def.id} part (${label}): ${msg}`); };
+  if (!g || g.fit !== 'linear' || g.style === 'trace') stop('a plot needs a graph of points with a straight-line fit');
+  const keys = want.lines || [];
+  if (!keys.length || keys.some((k) => !PLOT_LINES[k]) || new Set(keys).size !== keys.length) stop(`plot.lines must list some of ${Object.keys(PLOT_LINES).join(', ')}, each once`);
+  const points = graphPoints(d, g, 'student');
+  // x error bars can't be shown on screen yet: the validator reports a plot on a graph that draws them.
+  const bars = points.some((p) => p.ey) && !!d.band;
+  if (keys.some((k) => k !== 'best') && !bars) stop('the steepest and shallowest lines need visible error bars and graph.band');
+  const [cx, cy] = [def.columns[g.x], def.columns[g.y]];
+  const { xs, ys } = graphScales({ x: axisSpec(cx, g.zero && g.zero.x, g.xRange), y: axisSpec(cy, g.zero && g.zero.y, g.yRange), points });
+  const num = (v) => Number(v.toPrecision(10));
+  // Without error bars a line of best fit is judged by how close it is to the least-squares line at the two ends of
+  // the data. The allowance is one small square at most, and no more than keeps the line's gradient inside the range
+  // the mark scheme accepts (the result with check: 'gradient'): a line the screen calls good must not lead to a
+  // gradient the mark scheme rejects.
+  // With or without error bars, the line's gradient must itself be inside that accepted range ("gradients").
+  let tolerance = null;
+  const gradRes = Object.entries(def.results || {}).find(([, r]) => r.check === 'gradient');
+  const accepted = gradRes && d.r[gradRes[0]] && d.r[gradRes[0]].range ? [...d.r[gradRes[0]].range].sort((a, b) => a - b) : null;
+  if (!bars && keys.includes('best')) {
+    tolerance = ys.minor;
+    if (accepted) {
+      const span = Math.max(...points.map((p) => p.x)) - Math.min(...points.map((p) => p.x));
+      const room = Math.min(Math.abs(d.fit.m - accepted[0]), Math.abs(accepted[1] - d.fit.m));
+      tolerance = Math.min(tolerance, (room * span) / 2);
+    }
+  }
+  // Line ends snap to a fifth of a small square, or finer where the error bars are shorter than that or the
+  // allowance for the line is tighter than that.
+  const smallest = Math.min(...points.map((p) => p.ey).filter(Boolean), Infinity);
+  const fine = Math.min(smallest / 5, tolerance === null ? Infinity : tolerance / 2);
+  let snapY = ys.minor / 5;
+  for (const k of [10, 20, 50]) if (snapY > fine + 1e-12) snapY = ys.minor / k;
+  const from = { best: d.fit, steep: d.band && d.band.steep, shallow: d.band && d.band.shallow };
+  const what = g.what || `${cy.name} against ${cx.name}`;
+  return {
+    title: `Graph of ${what}, with ${points.length} plotted points${points.some((p) => p.ey) ? ' and error bars' : ''}, to draw on`,
+    height: Math.round((400 * (g.height || BOX.H)) / BOX.W),
+    x: { min: xs.min, max: xs.max, step: xs.minor, major: xs.step, symbol: stripMath(cx.symbolText || cx.symbol), unit: parseUnit(cx.unit || '').text },
+    y: { min: ys.min, max: ys.max, step: ys.minor, major: ys.step, symbol: stripMath(cy.symbolText || cy.symbol), unit: parseUnit(cy.unit || '').text, snap: num(snapY) },
+    given: points.map((p) => [p.x, p.y, p.ey]),
+    points: [],
+    lines: keys.map((k) => ({
+      key: k, role: k, label: PLOT_LINES[k], gradient: num(from[k].m), intercept: num(from[k].c),
+      ...(bars ? { bars: true } : {}), ...(k === 'best' && tolerance !== null ? { tolerance: num(tolerance) } : {}),
+      ...(k === 'best' && accepted ? { gradients: accepted.map(num) } : {}),
+      ...(k === 'best' && want.toYAxis ? { toYAxis: true } : {}),
+    })),
+    fit: { gradient: num(d.fit.m), intercept: num(d.fit.c) },
+    worth: want.worth || 0,
+    on: 'graph',
+  };
+}
+const stripMath = (s) => String(s).replace(/[$\\{}]/g, '');
+
+export function graphFigure(def, d, kind, g = def.graph, name = kind === 'student' ? 'graph' : 'graph-ms') {
+  const [cx, cy] = [def.columns[g.x], def.columns[g.y]];
+  const hideBars = g.errorBars === 'too-small' || g.errorBars === 'none';
+  const points = graphPoints(d, g, kind);
   const lines = [];
   const curves = [];
   if (kind === 'examiner' && g === def.graph && g.fit === 'linear') {
@@ -317,8 +388,8 @@ export function graphFigure(def, d, kind, g = def.graph, name = kind === 'studen
     // Data without a student table (tableless): there is no table to point to, so describe the graph's shape instead.
     + (def.tableless ? `. ${g.altDescription || 'The readings are shown only on this graph.'}` : '. The values are in the data table.');
   const svg = renderGraph({
-    x: { symbol: cx.symbolText || cx.symbol, unit: parseUnit(cx.unit || '').text, includeZero: !!(g.zero && g.zero.x), range: g.xRange },
-    y: { symbol: cy.symbolText || cy.symbol, unit: parseUnit(cy.unit || '').text, includeZero: !!(g.zero && g.zero.y), range: g.yRange },
+    x: axisSpec(cx, g.zero && g.zero.x, g.xRange),
+    y: axisSpec(cy, g.zero && g.zero.y, g.yRange),
     points, lines, curves, refs: ref ? [ref] : [], alt, kind, height: g.height,
     trace: g.style === 'trace',
     shade: kind === 'examiner' && g.shade ? { from: g.shade.from, to: g.shade.to, baseline: typeof g.shade.baseline === 'function' ? g.shade.baseline(d) : g.shade.baseline } : null,
@@ -359,11 +430,12 @@ export function buildQuestion(def) {
   // Design metadata for the validator and reports (AO tags, what a part asks for): not published.
   const meta = rawParts.map((pt) => ({ label: pt.label, marks: pt.marks, ao: pt.ao, asks: pt.asks, reads: pt.reads }));
   const parts = rawParts.map((pt) => {
-    const { msFigure, figure, ao: _ao, asks: _asks, reads: _reads, ...rest } = pt;
+    const { msFigure, figure, plot, ao: _ao, asks: _asks, reads: _reads, ...rest } = pt;
     if (msFigure && !figures[msFigure]) throw new Error(`${def.id} part (${pt.label}): no figure called "${msFigure}"`);
     // figure: shown with the part's question (data revealed by the part, as in a printed paper).
     if (figure && !figures[figure]) throw new Error(`${def.id} part (${pt.label}): no figure called "${figure}"`);
-    return { ...rest, ...(figure ? { figure: figures[figure] } : {}), ...(msFigure ? { msFigure: figures[msFigure] } : {}) };
+    // plot: the student draws on the graph (click-to-plot in the question bank; the printed graph is unchanged).
+    return { ...rest, ...(figure ? { figure: figures[figure] } : {}), ...(msFigure ? { msFigure: figures[msFigure] } : {}), ...(plot ? { plot: plotFor(def, d, plot, pt.label) } : {}) };
   });
   const question = {
     id: def.id,

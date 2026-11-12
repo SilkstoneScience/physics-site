@@ -128,12 +128,18 @@ function checkQuestion(q, file) {
   });
 }
 
-// A click-to-plot graph (js/plot.js): the correct graph must earn the part's full marks, and an empty one nothing.
+// A click-to-plot graph (js/plot.js): the correct graph must earn the marks the graph carries, and an empty one nothing.
+// The graph either has points for the student to plot, or already shows the data (given) and asks for lines.
 function checkPlotField(where, p, marks) {
   const axis = (a) => a && [a.min, a.max, a.step, a.major].every(Number.isFinite) && a.max > a.min && a.step > 0 && a.symbol;
-  if (!axis(p.x) || !axis(p.y) || !Array.isArray(p.points) || p.points.length < 2) { err(where, 'plot needs x and y axes (min, max, step, major, symbol) and at least two points'); return; }
-  if (!Plot.check(p, { points: p.points, line: Plot.expectedLine(p) }, marks).right) err(where, 'plot: the correct graph is not given full marks');
-  if (Plot.check(p, { points: [], line: null }, marks).score !== 0) err(where, 'plot: an empty graph earns marks');
+  const enough = Array.isArray(p.points) && (p.points.length >= 2 || (Array.isArray(p.given) && p.given.length >= 2 && Plot.linesOf(p).length > 0));
+  if (!axis(p.x) || !axis(p.y) || !enough) { err(where, 'plot needs x and y axes (min, max, step, major, symbol) and at least two points to plot, or given points and a line to draw'); return; }
+  const worth = Plot.worthOf(p, marks);
+  if (!Number.isInteger(worth) || worth < 0 || worth > marks) { err(where, `plot: worth must be a whole number from 0 to the part's ${marks} marks`); return; }
+  const full = Plot.check(p, Plot.ideal(p), marks);
+  if (!full.right || full.score !== worth) err(where, 'plot: the correct graph is not accepted');
+  const empty = Plot.check(p, { points: [], line: null }, marks);
+  if (empty.right || empty.score !== 0) err(where, 'plot: an empty graph is accepted');
 }
 
 function checkNumericField(where, n) {
