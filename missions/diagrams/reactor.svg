@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 270">
+  <!-- The ship's reactor, simplified. Control rods partly inserted between the fuel rods. -->
+  <!-- Coolant loop: out of the core at the top right, through the heat exchanger, back in at the bottom -->
+  <polyline points="230,120 340,120 340,140" class="l1"/>
+  <polyline points="340,190 340,210 230,210" class="l1"/>
+  <polygon points="285,114 297,120 285,126" style="fill: var(--accent)"/>
+  <polygon points="277,204 265,210 277,216" style="fill: var(--accent)"/>
+  <!-- Heat exchanger -->
+  <rect x="300" y="140" width="80" height="50" rx="6" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <polyline points="312,165 322,152 332,178 342,152 352,178 362,152 370,165" class="l3 thin"/>
+  <line x1="380" y1="165" x2="430" y2="165" class="l3 thin"/>
+  <polygon points="430,159 442,165 430,171" class="f3"/>
+  <!-- Core vessel filled with moderator -->
+  <rect x="60" y="90" width="170" height="140" rx="10" style="fill: var(--warn-soft)" stroke="currentColor" stroke-width="2.5"/>
+  <!-- Fuel rods -->
+  <rect x="82" y="110" width="12" height="100" rx="3" class="f2"/>
+  <rect x="122" y="110" width="12" height="100" rx="3" class="f2"/>
+  <rect x="162" y="110" width="12" height="100" rx="3" class="f2"/>
+  <rect x="202" y="110" width="12" height="100" rx="3" class="f2"/>
+  <!-- Control rods, hanging from a bar above the core -->
+  <line x1="90" y1="44" x2="200" y2="44" class="l3"/>
+  <rect x="104" y="44" width="8" height="96" class="f3"/>
+  <rect x="144" y="44" width="8" height="96" class="f3"/>
+  <rect x="184" y="44" width="8" height="96" class="f3"/>
+  <!-- Labels -->
+  <text x="145" y="30" text-anchor="middle" font-size="13">control rods</text>
+  <text x="145" y="254" text-anchor="middle" font-size="13">fuel rods in moderator</text>
+  <text x="285" y="105" text-anchor="middle" font-size="13" class="t1">coolant</text>
+  <text x="350" y="224" text-anchor="middle" font-size="13">heat exchanger</text>
+</svg>

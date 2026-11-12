@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <!-- Europa's orbit (radius r = 60 px) and the parking orbit (2r = 120 px), centred on Jupiter (named in the caption). -->
+  <circle cx="200" cy="150" r="120" class="l1 thin" stroke-dasharray="7 5"/>
+  <circle cx="200" cy="150" r="60" class="l3 thin"/>
+  <circle cx="200" cy="150" r="18" style="fill: var(--warn-soft)" stroke="currentColor" stroke-width="2"/>
+  <!-- Europa at the bottom of its orbit, the ship at the top of the parking orbit -->
+  <circle cx="200" cy="210" r="6" style="fill: var(--surface)" stroke="currentColor" stroke-width="2"/>
+  <polygon points="194,24 208,30 194,36" class="f1"/>
+  <!-- Radii: r up and to the left (135 degrees), 2r to the right (0 degrees) -->
+  <line x1="200" y1="150" x2="157.6" y2="107.6" class="l3 thin"/>
+  <line x1="200" y1="150" x2="320" y2="150" class="l1 thin"/>
+  <text x="188" y="116" text-anchor="start" font-size="13">r</text>
+  <text x="290" y="142" text-anchor="middle" font-size="13" class="t1">2r</text>
+  <!-- Labels -->
+  <text x="200" y="236" text-anchor="middle" font-size="13">Europa</text>
+  <text x="214" y="18" text-anchor="start" font-size="13" class="t1">ship</text>
+</svg>

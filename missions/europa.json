@@ -1,0 +1,1447 @@
+{
+  "id": "europa",
+  "title": "Mission to Europa",
+  "topics": [
+    "A.1",
+    "A.2",
+    "A.3",
+    "B.1",
+    "B.5",
+    "C.2",
+    "D.1",
+    "D.2",
+    "D.3",
+    "E.3",
+    "E.4"
+  ],
+  "level": "SL",
+  "time": "about 60–75 minutes (progress is saved, so it can be played over two lessons)",
+  "summary": "Command the first crewed ship to Europa. Every decision needs physics, and every mistake costs the mission fuel, power or shielding.",
+  "intro": "<p>You command the <em>Kittiwake</em>, the first crewed ship to set out for Europa, Jupiter's ice-covered moon. At each decision you calculate, then give an order. Good physics keeps the ship healthy. A mistake costs fuel, power or shielding, but there is always a way to recover.</p>",
+  "gauges": [
+    {
+      "id": "fuel",
+      "label": "Fuel"
+    },
+    {
+      "id": "power",
+      "label": "Power"
+    },
+    {
+      "id": "shield",
+      "label": "Shielding"
+    }
+  ],
+  "start": "ch1-intro",
+  "scenes": [
+    {
+      "id": "ch1-intro",
+      "type": "story",
+      "chapter": 1,
+      "title": "Chapter 1: Leaving home",
+      "html": "<p><strong>Mission log, day 1. The year is 2071.</strong></p><p>Under Europa's ice there is almost certainly a salty ocean, holding more water than all of Earth's oceans put together. Nobody has ever seen it. Your mission: fly to Jupiter, land the <em>Petrel</em> lander on Europa, bring back a sample of that ocean, and get everyone home safely.</p><p>Your crew are <strong>Lucía Ferreira</strong> (pilot), <strong>Kenji Arai</strong> (engineer) and <strong>Dr Amara Nwosu</strong> (geophysicist). Twelve big decisions lie ahead, and every one of them needs physics.</p>",
+      "figure": {
+        "svg": "diagrams/kittiwake.svg",
+        "alt": "Side view of the Kittiwake: a long frame with the drive's nozzle at the back, then the reactor behind a radiation shield, two propellant tanks, radiator panels, solar panels, and the crew's habitat at the front with the Petrel lander docked on top.",
+        "caption": "The <em>Kittiwake</em> (not to scale). Both the <span class=\"key-1\">solar panels</span> and the reactor can power the ship."
+      },
+      "button": "Start the mission",
+      "next": "d1"
+    },
+    {
+      "id": "d1",
+      "type": "decision",
+      "chapter": 1,
+      "number": 1,
+      "title": "The departure burn",
+      "topic": "A.2",
+      "section": "momentum",
+      "gauge": "fuel",
+      "cost": 15,
+      "detour": "d1-fix",
+      "log": "<p><strong>Day 1, Orbital Yard 3.</strong> The <em>Kittiwake</em> is ready to leave Earth orbit. In its departure burn, the ship must speed up by exactly 900 $\\text{m s}^{-1}$.</p><p>Then a problem: the new flight software won't load, so the burn has to be timed by hand. Kenji reads out the figures:</p><ul><li>mass of the ship: $2.4 \\times 10^5$ kg</li><li>the drive (a fusion drive with its own power supply) throws out 8.0 kg of propellant every second, at 30 $\\text{km s}^{-1}$ relative to the ship</li><li>the burn uses only about 3% of the ship's mass, so treat the mass as constant.</li></ul>",
+      "figure": {
+        "svg": "diagrams/kittiwake.svg",
+        "alt": "The Kittiwake, with its drive at the back throwing propellant out behind it.",
+        "caption": "The drive pushes propellant out of the back. By Newton's third law, the propellant pushes the ship forwards."
+      },
+      "task": "<p><strong>Calculate</strong> how long the burn must last.</p>",
+      "hint": "Find the thrust first: the force on the ship equals the momentum the propellant carries away each second. Then use Newton's second law to find the acceleration.",
+      "working": "<p>Thrust: $F = \\dfrac{\\Delta p}{\\Delta t} = 8.0 \\times 30\\,000 = 2.4 \\times 10^5$ N</p><p>Acceleration: $a = \\dfrac{F}{m} = \\dfrac{2.4 \\times 10^5}{2.4 \\times 10^5} = 1.0$ $\\text{m s}^{-2}$</p><p>Burn time: $t = \\dfrac{\\Delta v}{a} = \\dfrac{900}{1.0} = 900$ s, which is 15 minutes.</p>",
+      "numeric": {
+        "answer": 900,
+        "unit": "s",
+        "mistakes": [
+          {
+            "value": 900000,
+            "feedback": "Change 30 $\\text{km s}^{-1}$ into 30 000 $\\text{m s}^{-1}$ before you work out the force."
+          },
+          {
+            "value": 15,
+            "feedback": "That's the time in minutes. Give it in seconds."
+          },
+          {
+            "value": 0.00375,
+            "feedback": "You divided the change in speed by the force. Find the acceleration first: $a = F/m$."
+          }
+        ]
+      },
+      "choice": {
+        "question": "The burn is set. Lucía has one worry: \"After the burn, shouldn't we keep the engine running at low power, so we don't slow down on the way to Jupiter?\" What do you tell her?",
+        "options": [
+          "Yes: anything that's moving needs a force to keep it going, or it slows down.",
+          "No: in space there's no air resistance or friction to slow us down, so we don't need the engine to keep moving.",
+          "No: the force from the burn stays inside the ship and carries it along."
+        ],
+        "answer": 1,
+        "feedback": {
+          "0": "That's how things seem on Earth, where friction and air resistance always act. A force is needed to <em>change</em> velocity, not to keep it (Newton's first law). Running the engine on would just keep speeding the ship up.",
+          "2": "A moving object doesn't carry a force with it. It has momentum, and a force is needed only to change that momentum."
+        },
+        "explain": "Newton's first law: with no resultant force, an object keeps the same velocity. A force is needed only to change the velocity. The ship <em>will</em> slow down as it climbs away from the Sun, but that is the Sun's gravity at work, and the planned route already allows for it: running the engine is not needed for it."
+      },
+      "success": "<p>The engine fires for exactly 900 s and shuts down. <em>Kittiwake</em> coasts away from Earth, right on the planned path. \"Fifteen minutes of pushing,\" says Lucía, \"then months of coasting.\"</p>",
+      "failure": "<p>Kenji spots the mistake, but too late: the engine has run 100 s longer than it should, and <em>Kittiwake</em> is now going 100 $\\text{m s}^{-1}$ too fast. If nothing is done, the ship will miss Jupiter by millions of kilometres.</p>",
+      "next": "d2"
+    },
+    {
+      "id": "d1-fix",
+      "type": "detour",
+      "chapter": 1,
+      "title": "Fixing the overshoot",
+      "topic": "A.2",
+      "section": "second",
+      "gauge": "fuel",
+      "refund": 5,
+      "html": "<p>The main drive can't fire forwards, but the steering thrusters can. Together they give a force of $6.0 \\times 10^4$ N, opposite to the ship's motion. The ship's mass is still about $2.4 \\times 10^5$ kg.</p>",
+      "task": "<p><strong>Calculate</strong> how long the thrusters must fire to take away the extra 100 $\\text{m s}^{-1}$.</p>",
+      "hint": "Find the deceleration the thrusters give the ship, then use $\\Delta v = a t$.",
+      "working": "<p>Deceleration: $a = \\dfrac{F}{m} = \\dfrac{6.0 \\times 10^4}{2.4 \\times 10^5} = 0.25$ $\\text{m s}^{-2}$</p><p>Time: $t = \\dfrac{\\Delta v}{a} = \\dfrac{100}{0.25} = 400$ s</p>",
+      "numeric": {
+        "answer": 400,
+        "unit": "s",
+        "mistakes": [
+          {
+            "value": 25,
+            "feedback": "You divided the mass by the force. The acceleration is $a = F/m$."
+          },
+          {
+            "value": 4000,
+            "feedback": "Check the force: $6.0 \\times 10^4$ N is 60 000 N."
+          }
+        ]
+      },
+      "success": "<p>The thrusters fire for 400 s, and <em>Kittiwake</em> is back on course. Some fuel is gone, but the mission is saved.</p>",
+      "failure": "<p>Lucía fixes the course herself with a string of short, careful bursts. It works, but guesswork costs more fuel than a calculation would have.</p>",
+      "next": "d2"
+    },
+    {
+      "id": "d2",
+      "type": "decision",
+      "chapter": 1,
+      "number": 2,
+      "title": "Sunlight at Jupiter",
+      "topic": "B.1",
+      "section": "luminosity",
+      "gauge": "power",
+      "cost": 10,
+      "log": "<p><strong>Day 40.</strong> The ship's systems (life support, heaters, computers and instruments) need 30 kW of electrical power. Near Earth this comes from the solar panels, and the reactor is kept on standby. Kenji is planning ahead: will the panels still be enough when the ship reaches Jupiter?</p><ul><li>apparent brightness (intensity) of sunlight at Earth's distance from the Sun (1.0 AU): 1360 $\\text{W m}^{-2}$</li><li>Jupiter's distance from the Sun: 5.2 AU</li><li>the panels turn 20% of the light that falls on them into electrical energy</li><li>the ship has 600 $\\text{m}^2$ of panels, always kept facing the Sun.</li></ul>",
+      "figure": {
+        "svg": "diagrams/sun-distance.svg",
+        "alt": "The Sun on the left, Earth 1.0 AU from it, and Jupiter much further out at 5.2 AU, with the Kittiwake travelling outwards between them.",
+        "caption": "Earth and Jupiter's distances from the Sun (the sizes are not to scale). 1 AU is Earth's average distance from the Sun."
+      },
+      "task": "<p><strong>Calculate</strong> the area of panels the ship would need at Jupiter's distance to supply 30 kW.</p>",
+      "hint": "Sunlight spreads out over bigger and bigger spheres, so its apparent brightness (power per unit area) falls with the square of the distance from the Sun: $b = \\dfrac{L}{4\\pi d^2}$. Find it at 5.2 AU first.",
+      "working": "<p>Apparent brightness at Jupiter's distance: $b = \\dfrac{1360}{5.2^2} = 50.3$ $\\text{W m}^{-2}$</p><p>Electrical power from each square metre: $0.20 \\times 50.3 = 10.1$ W</p><p>Area needed: $A = \\dfrac{30\\,000}{10.1} \\approx 3.0 \\times 10^3$ $\\text{m}^2$, five times the area the ship has.</p>",
+      "numeric": {
+        "answer": 2982,
+        "unit": "$\\text{m}^2$",
+        "range": [
+          2900,
+          3100
+        ],
+        "mistakes": [
+          {
+            "value": 574,
+            "feedback": "The intensity falls with the <em>square</em> of the distance: divide by $5.2^2$, not by 5.2."
+          },
+          {
+            "value": 596,
+            "feedback": "That would be enough if all the light became electrical energy. Only 20% of it does."
+          },
+          {
+            "value": 110,
+            "feedback": "That's the area needed at Earth's distance. At Jupiter the sunlight is much weaker."
+          }
+        ]
+      },
+      "choice": {
+        "question": "Kenji asks for your decision: \"We've got 600 m² of panels. Do we keep them as our main power supply all the way to Jupiter?\"",
+        "options": [
+          "Keep the panels, and tilt them at an angle to the sunlight to catch more of it.",
+          "Keep the panels: the sunlight is only 5.2 times weaker at Jupiter, so they'll cope.",
+          "Switch the ship's systems over to the reactor before we reach Jupiter.",
+          "Keep the panels: they work better in the cold, so that makes up the difference."
+        ],
+        "answer": 2,
+        "feedback": {
+          "0": "The panels already face the Sun directly, which catches the most light; tilting them would catch less. At 5.2 AU, 600 m² gives only about 6 kW, a fifth of what's needed.",
+          "1": "The intensity falls with the square of the distance, so the light is $5.2^2 \\approx 27$ times weaker, not 5.2 times.",
+          "3": "Cold panels are a little more efficient, but nowhere near enough to make up for light that is 27 times weaker."
+        },
+        "explain": "At Jupiter, 600 m² × 10.1 $\\text{W m}^{-2}$ ≈ 6 kW. The panels can't supply 30 kW, so the reactor has to take over."
+      },
+      "success": "<p>Kenji plans the switch-over. Months later, beyond Mars, the reactor takes over smoothly while the panels can still cope, and they stay out as a back-up for the instruments.</p>",
+      "failure": "<p>The switch to the reactor was planned too late. Months later, beyond Mars, as the sunlight weakened, the panels fell further and further behind, and Kenji had to run the batteries flat and switch off some heaters before the reactor was ready.</p>",
+      "next": "d3"
+    },
+    {
+      "id": "d3",
+      "type": "decision",
+      "chapter": 1,
+      "number": 3,
+      "title": "A restless reactor",
+      "topic": "E.4",
+      "section": "reactor",
+      "gauge": "power",
+      "cost": 15,
+      "detour": "d3-fix",
+      "log": "<p><strong>Day 400, beyond Mars.</strong> The reactor now powers the ship. It turns 20% of the thermal energy released in its core into electrical energy, and the ship needs 30 kW of electrical power. Each fission of a uranium-235 nucleus releases about 200 MeV.</p>",
+      "figure": {
+        "svg": "diagrams/reactor.svg",
+        "alt": "Cross-section of the ship's reactor: fuel rods in a core surrounded by moderator, control rods hanging above the core, and a coolant loop carrying heat to a heat exchanger.",
+        "caption": "The ship's reactor (simplified). <span class=\"key-1\">Coolant</span> carries thermal energy from the core to the heat exchanger, which passes it on to the generator (arrow)."
+      },
+      "task": "<p><strong>Calculate</strong> the number of fissions needed in the core each second.</p>",
+      "hint": "First find the thermal power the core must produce, if only 20% of it becomes electrical power. Then change 200 MeV into joules.",
+      "working": "<p>Thermal power: $P = \\dfrac{30\\text{ kW}}{0.20} = 150$ kW</p><p>Energy per fission: $200 \\times 10^6 \\times 1.60 \\times 10^{-19} = 3.2 \\times 10^{-11}$ J</p><p>Fissions per second: $\\dfrac{1.5 \\times 10^5}{3.2 \\times 10^{-11}} = 4.7 \\times 10^{15}$</p>",
+      "numeric": {
+        "answer": 4687500000000000,
+        "unit": "fissions per second",
+        "range": [
+          4600000000000000,
+          4800000000000000
+        ],
+        "mistakes": [
+          {
+            "value": 937500000000000,
+            "feedback": "That gives 30 kW. The core must produce 150 kW of thermal power, because only 20% of it becomes electrical power."
+          },
+          {
+            "value": 4687500000000000000,
+            "feedback": "200 MeV is $200 \\times 10^6$ eV."
+          },
+          {
+            "value": 0.00075,
+            "feedback": "Change the energy per fission into joules: 1 eV = $1.60 \\times 10^{-19}$ J."
+          }
+        ]
+      },
+      "choice": {
+        "question": "A week later an alarm sounds. The fission rate is creeping above $4.7 \\times 10^{15}$ per second, and still rising: on average, each fission is now causing slightly more than one new fission. What is your order?",
+        "options": [
+          "Push the control rods further into the core.",
+          "Pull the control rods out a little, to let more heat escape.",
+          "Add more moderator around the fuel.",
+          "Pump the coolant round faster."
+        ],
+        "answer": 0,
+        "feedback": {
+          "1": "Control rods absorb neutrons; they don't let heat out. Pulling them out leaves more neutrons free to cause fissions, so the rate rises even faster.",
+          "2": "The moderator is chosen to absorb very few neutrons: it slows them down so that they are <em>more</em> likely to cause fission. Adding moderator can't stop the growth.",
+          "3": "Faster coolant carries more thermal energy to the heat exchanger, but the coolant isn't there to absorb neutrons, so the chain reaction keeps growing."
+        },
+        "explain": "Control rods absorb neutrons. Pushing them in a little further makes the rate fall; then they are set so that each fission causes, on average, exactly one more, and the fission rate stays steady."
+      },
+      "success": "<p>Kenji lowers the rods a few centimetres. The fission rate settles back to $4.7 \\times 10^{15}$ per second, and the core temperature steadies.</p>",
+      "failure": "<p>The fission rate kept climbing until the safety system dropped the control rods in automatically. The chain reaction is under control, but the core overheated on the way, and the coolant system has to be reset before the reactor can run normally again.</p>",
+      "next": "log1"
+    },
+    {
+      "id": "d3-fix",
+      "type": "detour",
+      "chapter": 1,
+      "title": "Resetting the coolant pumps",
+      "topic": "B.1",
+      "section": "shc",
+      "gauge": "power",
+      "refund": 5,
+      "html": "<p>Kenji restarts the reactor slowly. The coolant must carry the core's 150 kW of thermal power to the heat exchanger, and it may warm up by no more than 50 K as it passes through the core. The coolant's specific heat capacity is 1500 $\\text{J kg}^{-1}\\text{ K}^{-1}$.</p>",
+      "task": "<p><strong>Calculate</strong> the minimum mass of coolant that must flow through the core each second.</p>",
+      "hint": "Each second the coolant must carry away 150 000 J. Each kilogram of coolant carries away $c\\Delta T$.",
+      "working": "<p>Energy carried away each second: 150 000 J</p><p>Energy carried by each kilogram: $Q = mc\\Delta T = 1 \\times 1500 \\times 50 = 75\\,000$ J</p><p>Mass each second: $\\dfrac{150\\,000}{75\\,000} = 2.0$ kg</p>",
+      "numeric": {
+        "answer": 2,
+        "unit": "$\\text{kg s}^{-1}$",
+        "mistakes": [
+          {
+            "value": 100,
+            "feedback": "Include the temperature rise: each kilogram carries $c \\Delta T$ joules, not $c$ joules."
+          },
+          {
+            "value": 0.002,
+            "feedback": "150 kW is 150 000 W, so 150 000 J must be carried away each second."
+          }
+        ]
+      },
+      "success": "<p>The pumps settle at 2.0 kg of coolant per second, and the reactor climbs back to full power.</p>",
+      "failure": "<p>Kenji works out the flow rate himself, but the delay keeps the reactor at low power for days.</p>",
+      "next": "log1"
+    },
+    {
+      "id": "log1",
+      "type": "log",
+      "chapter": 1,
+      "title": "Captain's log: end of Chapter 1",
+      "prompt": "Write two sentences for Mission Control: why does the ship now run on its reactor, and how is the reactor kept steady? Give the physics reasons, not just \"the panels weren't enough\".",
+      "model": "<p>At Jupiter's distance the sunlight is $5.2^2 \\approx 27$ times weaker than at Earth, because its intensity falls with the square of the distance from the Sun, so our 600 m² of panels would give only about 6 kW of the 30 kW we need. The reactor supplies 150 kW of thermal power from about $4.7 \\times 10^{15}$ fissions per second, and its control rods absorb neutrons so that each fission causes, on average, exactly one more.</p>",
+      "checklist": [
+        "I used the inverse-square law (intensity falls with the square of the distance) to explain why the panels aren't enough.",
+        "I explained that the control rods keep the chain reaction steady by absorbing neutrons."
+      ],
+      "next": "ch1-end"
+    },
+    {
+      "id": "ch1-end",
+      "type": "pause",
+      "chapter": 1,
+      "title": "End of Chapter 1",
+      "html": "<p><em>Kittiwake</em> is on her way to Jupiter, powered by her reactor.</p>",
+      "button": "Start Chapter 2",
+      "next": "ch2-intro"
+    },
+    {
+      "id": "ch2-intro",
+      "type": "story",
+      "chapter": 2,
+      "title": "Chapter 2: Jupiter's realm",
+      "html": "<p><strong>Mission log, day 600.</strong> Jupiter fills the forward windows: a striped ball more than ten times as wide as Earth, with four large moons around it. The innermost of those four moons, Io, is a pale yellow dot; Europa, the next one out, gleams white.</p><p>Jupiter is beautiful and dangerous. Its huge magnetic field traps fast-moving charged particles in belts around the planet, and Europa's orbit runs right through them. Over the next few weeks you'll have to decide when to act alone, where to park the ship, and how to shield the crew.</p>",
+      "figure": {
+        "svg": "diagrams/jupiter-orbits.svg",
+        "alt": "Jupiter at the centre, with Europa on a circular orbit around it and the Kittiwake approaching from the left.",
+        "caption": "Europa's orbit around Jupiter (not to scale). Charged particles trapped by Jupiter's magnetic field make the space near Europa's orbit dangerous."
+      },
+      "button": "Continue",
+      "next": "d4"
+    },
+    {
+      "id": "d4",
+      "type": "decision",
+      "chapter": 2,
+      "number": 4,
+      "title": "A message from far away",
+      "topic": "C.2",
+      "section": "em",
+      "gauge": "fuel",
+      "cost": 10,
+      "log": "<p><strong>Day 612.</strong> An alarm: a valve on one of the propellant tanks has stuck half open, and propellant is leaking into space. Kenji has a repair plan. It must start within <strong>90 minutes</strong>, or so much propellant will be lost that the trip home is at risk.</p><p>The mission rules say Mission Control on Earth must approve every repair, unless waiting would put the ship in danger. Messages travel by radio. Today Earth is almost on the opposite side of the Sun from Jupiter (but not hidden behind it), and the ship is <strong>6.3 AU</strong> from Earth.</p><ul><li>1 AU = $1.50 \\times 10^{11}$ m</li></ul>",
+      "task": "<p><strong>Calculate</strong> how long a radio message takes to travel from the ship to Earth.</p>",
+      "hint": "Radio waves are electromagnetic waves, so they travel at the speed of light, $c = 3.00 \\times 10^8$ $\\text{m s}^{-1}$. Change the distance into metres first.",
+      "working": "<p>Distance: $6.3 \\times 1.50 \\times 10^{11} = 9.45 \\times 10^{11}$ m</p><p>Time: $t = \\dfrac{d}{c} = \\dfrac{9.45 \\times 10^{11}}{3.00 \\times 10^8} = 3150$ s, which is 52.5 minutes.</p><p>A reply would take another 52.5 minutes, so asking and hearing back takes 105 minutes.</p>",
+      "numeric": {
+        "answer": 52.5,
+        "unit": "minutes",
+        "range": [
+          52,
+          53
+        ],
+        "mistakes": [
+          {
+            "value": 3150,
+            "feedback": "That is the time in seconds. Give it in minutes."
+          },
+          {
+            "value": 105,
+            "feedback": "That is there and back. The question asks for the time to reach Earth only."
+          },
+          {
+            "value": 3.5e-10,
+            "feedback": "Change AU into metres before you divide: 1 AU = $1.50 \\times 10^{11}$ m."
+          }
+        ]
+      },
+      "choice": {
+        "question": "\"Do we send the plan to Mission Control and wait for their go-ahead?\" asks Kenji. What is your order?",
+        "options": [
+          "Send the plan and wait for the reply: the rules say Earth must approve every repair.",
+          "Send the plan on a higher-frequency radio channel, because those signals travel faster.",
+          "Send the plan by laser instead of radio, because light travels faster than radio waves.",
+          "Start the repair now, and send Earth a report of what we did and why."
+        ],
+        "answer": 3,
+        "feedback": {
+          "0": "The reply would arrive 105 minutes after we ask, but the repair has to start within 90 minutes. The rules allow us to act alone when waiting would put the ship in danger.",
+          "1": "All electromagnetic waves travel through a vacuum at the same speed, $c$, whatever their frequency.",
+          "2": "Light and radio waves are both electromagnetic waves, so they travel through a vacuum at the same speed, $c$."
+        },
+        "explain": "A message there and an answer back take $2 \\times 52.5 = 105$ minutes, longer than the 90 minutes available. Every electromagnetic wave travels at $c$ in a vacuum, so no other channel would be faster. The crew must act on their own."
+      },
+      "success": "<p>Kenji closes the valve by hand and moves the propellant to a sound tank, all within the hour. Your report reaches Earth 52½ minutes later. The reply arrives 52½ minutes after that: \"Agreed. Good work.\"</p>",
+      "failure": "<p>The crew waited. When the reply came, 105 minutes after the question, the repair started at once, but a lot of propellant had leaked away in the meantime.</p>",
+      "next": "d5"
+    },
+    {
+      "id": "d5",
+      "type": "decision",
+      "chapter": 2,
+      "number": 5,
+      "title": "Where to park the ship",
+      "topic": "D.1",
+      "section": "kepler",
+      "gauge": "shield",
+      "cost": 10,
+      "log": "<p><strong>Day 640.</strong> Soon Lucía and Amara will take the <em>Petrel</em> down to Europa, while Kenji stays with the <em>Kittiwake</em> in a circular orbit around Jupiter. The radiation is fiercest close to Jupiter and gets weaker further out, so the further out the ship waits, the safer it is.</p><p>But there is a limit. Lucía's plan is for the ship to go round Jupiter <strong>once</strong> while the lander is on Europa, and at the end of that orbit the <em>Petrel</em> will climb out from Europa to meet it. The lander's supplies last <strong>12 days</strong>, so one orbit must take no longer than that.</p><ul><li>Europa orbits Jupiter in 3.55 days.</li><li>Lucía suggests an orbit with <strong>twice</strong> the radius of Europa's orbit.</li></ul>",
+      "figure": {
+        "svg": "diagrams/parking-orbit.svg",
+        "alt": "Jupiter at the centre with two circles around it: Europa's orbit of radius r, and a larger circle of radius 2r for the ship.",
+        "caption": "Jupiter at the centre, Europa's orbit (radius $r$) and the <span class=\"key-1\">suggested parking orbit</span> for the ship (radius $2r$). Not to scale."
+      },
+      "task": "<p><strong>Calculate</strong> the time the ship would take to go once round Jupiter in the suggested orbit.</p>",
+      "hint": "Both Europa and the ship orbit the same body, Jupiter, so Kepler's third law applies to both: $T^2 \\propto r^3$. Compare the ship's orbit with Europa's.",
+      "working": "<p>Kepler's third law for two bodies orbiting Jupiter: $\\dfrac{T_{\\text{ship}}^2}{T_{\\text{Europa}}^2} = \\dfrac{r_{\\text{ship}}^3}{r_{\\text{Europa}}^3} = 2^3 = 8$</p><p>$T_{\\text{ship}} = 3.55 \\times \\sqrt{8} = 3.55 \\times 2.83 = 10.0$ days</p>",
+      "numeric": {
+        "answer": 10.04,
+        "unit": "days",
+        "range": [
+          9.9,
+          10.2
+        ],
+        "mistakes": [
+          {
+            "value": 7.1,
+            "feedback": "The period doesn't simply double when the radius doubles. Kepler's third law says $T^2 \\propto r^3$."
+          },
+          {
+            "value": 14.2,
+            "feedback": "That uses $T \\propto r^2$. Kepler's third law says $T^2 \\propto r^3$, so $T \\propto r^{3/2}$."
+          },
+          {
+            "value": 5.635,
+            "feedback": "You have the law the wrong way round. It is $T^2 \\propto r^3$, so the period grows faster than the radius."
+          }
+        ]
+      },
+      "choice": {
+        "question": "Lucía asks: \"Should we go out to twice Europa's orbital radius, or even further, to three times, where the radiation is weaker still?\" What is your order?",
+        "options": [
+          "Go to twice Europa's orbital radius.",
+          "Stay in Europa's orbit: then the ship is always close to the lander.",
+          "Go to three times Europa's orbital radius: the period goes up in proportion to the radius, so it's still under 12 days.",
+          "Go to three times Europa's orbital radius: further out, the ship moves faster, so it gets round sooner."
+        ],
+        "answer": 0,
+        "feedback": {
+          "1": "That's safe for the timing, but it keeps the ship in the strongest radiation for the whole time. Twice the radius still gets the ship back within 12 days.",
+          "2": "The period isn't proportional to the radius. At three times the radius, $T = 3.55 \\times \\sqrt{27} = 18.4$ days, far more than 12.",
+          "3": "It's the other way round. Further from Jupiter the gravitational pull is weaker, and a weaker pull can only keep a slower ship moving in a circle. The ship also has further to go, so at three times the radius one orbit takes 18.4 days."
+        },
+        "explain": "At twice the radius one orbit takes 10.0 days, inside the 12-day limit. At three times the radius it would take $3.55 \\times 3^{3/2} = 18.4$ days, too long. Of the options, twice the radius is the furthest out, and so the safest, that keeps inside the limit."
+      },
+      "hl": {
+        "task": "<p>The mass of Jupiter is $1.90 \\times 10^{27}$ kg and the radius of Europa's orbit is $6.71 \\times 10^8$ m. <strong>Calculate</strong> the ship's orbital speed in Lucía's suggested orbit, at twice Europa's orbital radius.</p>",
+        "hint": "For a circular orbit, the gravitational force provides the centripetal force, which gives $v = \\sqrt{\\dfrac{GM}{r}}$. Remember that the parking orbit's radius is $2r$.",
+        "working": "<p>Orbit radius: $2 \\times 6.71 \\times 10^8 = 1.342 \\times 10^9$ m</p><p>$v = \\sqrt{\\dfrac{GM}{r}} = \\sqrt{\\dfrac{6.67 \\times 10^{-11} \\times 1.90 \\times 10^{27}}{1.342 \\times 10^9}} = 9.7 \\times 10^3$ $\\text{m s}^{-1}$</p><p>Check: $v = \\dfrac{2\\pi r}{T} = \\dfrac{2\\pi \\times 1.342 \\times 10^9}{10.04 \\times 86\\,400} = 9.7 \\times 10^3$ $\\text{m s}^{-1}$. The two methods agree.</p>",
+        "numeric": {
+          "answer": 9718,
+          "unit": "$\\text{m s}^{-1}$",
+          "range": [
+            9600,
+            9800
+          ],
+          "mistakes": [
+            {
+              "value": 13743,
+              "feedback": "That is the speed in Europa's orbit. The parking orbit's radius is $2 \\times 6.71 \\times 10^8$ m."
+            },
+            {
+              "value": 94400000,
+              "feedback": "Take the square root: $v = \\sqrt{GM/r}$."
+            }
+          ]
+        }
+      },
+      "success": "<p>Lucía plots the parking orbit at twice Europa's distance from Jupiter. The radiation counters on board drop to a fraction of what they read near Europa.</p>",
+      "failure": "<p>The ship ended up waiting in a poor orbit, and Lucía had to spend days fixing it. Meanwhile the crew soaked up more radiation than planned, and the shielding took extra wear.</p>",
+      "next": "d6"
+    },
+    {
+      "id": "d6",
+      "type": "decision",
+      "chapter": 2,
+      "number": 6,
+      "title": "The proton storm",
+      "topic": "D.3",
+      "section": "circle",
+      "gauge": "shield",
+      "cost": 15,
+      "detour": "d6-fix",
+      "log": "<p><strong>Day 645.</strong> Kenji's instruments pick up a burst of fast protons heading for the ship. They will arrive in 20 minutes.</p><p>The crew's habitat is an inflatable module. Its wall, a thin multi-layer skin, would stop these protons, but every proton that hits it damages the skin's material, and a big storm could wear it dangerously thin. So the habitat is wrapped in a magnetic shield: superconducting coils make a magnetic field, parallel to the hull, in a layer <strong>0.50 m</strong> deep around the habitat. A proton that enters the layer moving straight towards the hull, at right angles to the field, moves on a circular path. If the radius of that circle is less than 0.50 m, the proton turns round before it reaches the habitat wall.</p><ul><li>speed of the protons: $2.0 \\times 10^7$ $\\text{m s}^{-1}$</li><li>the coils normally run at 0.30 T; at full power they give 0.50 T, but that strains their cooling system, so full power is kept for emergencies</li></ul>",
+      "figure": {
+        "svg": "diagrams/magnetic-shield.svg",
+        "alt": "A layer 0.50 m deep between the outer edge of the shield and the habitat wall. Crosses show a magnetic field pointing into the page. A proton arrives from outside, moving straight towards the wall.",
+        "caption": "The magnetic shield (simplified). The <span class=\"key-1\">magnetic field</span> points into the page, and a <span class=\"key-2\">proton</span> arrives moving straight towards the habitat wall."
+      },
+      "task": "<p><strong>Calculate</strong> the radius of a proton's path when the coils run at their normal 0.30 T.</p>",
+      "hint": "The magnetic force provides the centripetal force: $qvB = \\dfrac{mv^2}{r}$. Rearrange for $r$, and find the proton's mass and charge in the data booklet.",
+      "working": "<p>$qvB = \\dfrac{mv^2}{r}$, so $r = \\dfrac{mv}{qB}$</p><p>$r = \\dfrac{1.673 \\times 10^{-27} \\times 2.0 \\times 10^7}{1.60 \\times 10^{-19} \\times 0.30} = 0.70$ m</p><p>That is more than the 0.50 m layer, so at 0.30 T the protons would reach the habitat wall.</p>",
+      "numeric": {
+        "answer": 0.6971,
+        "unit": "m",
+        "range": [
+          0.68,
+          0.71
+        ],
+        "mistakes": [
+          {
+            "value": 0.4183,
+            "feedback": "That is the radius at full power, 0.50 T. The coils are running at 0.30 T now."
+          },
+          {
+            "value": 0.0003796,
+            "feedback": "That uses the electron's mass. A proton's mass is $1.673 \\times 10^{-27}$ kg."
+          },
+          {
+            "value": 1.4345,
+            "feedback": "That is $\\dfrac{qB}{mv}$, the wrong way up. The radius is $r = \\dfrac{mv}{qB}$."
+          }
+        ]
+      },
+      "choice": {
+        "question": "Twenty minutes until the storm arrives. What is your order for the coils?",
+        "options": [
+          "Keep them at 0.30 T: the field bends every proton, so they will miss the habitat anyway.",
+          "Keep 0.30 T but reverse the field, so that the protons curve the other way.",
+          "Turn them up to full power, 0.50 T.",
+          "Switch the coils off to save power: the habitat's walls will stop the protons."
+        ],
+        "answer": 2,
+        "feedback": {
+          "0": "Bending the protons isn't enough. At 0.30 T the radius (0.70 m) is bigger than the layer (0.50 m), so they curve but still reach the wall.",
+          "1": "Reversing the field changes which way the protons curve, but not the radius: $r = \\dfrac{mv}{qB}$ doesn't depend on the field's direction. They would still reach the wall.",
+          "3": "The wall would stop the protons, but every one that hits damages the skin's material, and a storm this big could wear it dangerously thin. The magnetic shield is there so that the protons don't reach the wall at all."
+        },
+        "explain": "The radius is inversely proportional to the field strength. At 0.50 T, $r = \\dfrac{1.673 \\times 10^{-27} \\times 2.0 \\times 10^7}{1.60 \\times 10^{-19} \\times 0.50} = 0.42$ m, less than the 0.50 m layer, so the protons turn round before they reach the wall."
+      },
+      "success": "<p>Kenji brings the coils up to 0.50 T with two minutes to spare. The storm sweeps past, and the protons are turned back 0.42 m into the layer, just short of the habitat wall. The crew's radiation badges barely change.</p>",
+      "failure": "<p>The storm hit the ship with the coils at the wrong setting. Many protons hit the habitat wall, damaging its skin. Kenji orders everyone into the storm shelter, the most heavily shielded room on board, until it passes, and then checks the skin for weak spots.</p>",
+      "next": "log2"
+    },
+    {
+      "id": "d6-fix",
+      "type": "detour",
+      "chapter": 2,
+      "title": "The electrons behind the storm",
+      "topic": "D.3",
+      "section": "circle",
+      "gauge": "shield",
+      "refund": 5,
+      "html": "<p>Kenji has turned the coils up to 0.50 T now. A second wave is coming: <strong>electrons</strong> at $3.0 \\times 10^7$ $\\text{m s}^{-1}$. Amara wonders whether the shield can stop them too. Because their charge is negative, they will curve the opposite way to the protons.</p>",
+      "task": "<p><strong>Calculate</strong> the radius of an electron's path in the 0.50 T field, in millimetres.</p>",
+      "hint": "Use $r = \\dfrac{mv}{qB}$ again, with the electron's mass from the data booklet. The size of an electron's charge is the same as a proton's.",
+      "working": "<p>$r = \\dfrac{mv}{qB} = \\dfrac{9.11 \\times 10^{-31} \\times 3.0 \\times 10^7}{1.60 \\times 10^{-19} \\times 0.50} = 3.4 \\times 10^{-4}$ m, which is 0.34 mm.</p><p>That is tiny compared with the 0.50 m layer: an electron's mass is about 1800 times smaller than a proton's, so the field turns it round easily.</p>",
+      "numeric": {
+        "answer": 0.3416,
+        "unit": "mm",
+        "range": [
+          0.33,
+          0.35
+        ],
+        "mistakes": [
+          {
+            "value": 0.0003416,
+            "feedback": "That is the radius in metres. Give it in millimetres."
+          },
+          {
+            "value": 627.4,
+            "feedback": "That uses the proton's mass. Use the electron's mass, $9.11 \\times 10^{-31}$ kg."
+          },
+          {
+            "value": 0.5694,
+            "feedback": "The coils are at 0.50 T now, not 0.30 T."
+          }
+        ]
+      },
+      "success": "<p>The electrons spiral away within a millimetre of the layer's outer edge. The shield holds, and Kenji starts repairing the damage from the first wave.</p>",
+      "failure": "<p>Amara runs the numbers herself: the electrons are turned back easily. The shield holds, but repairs from the first wave take days.</p>",
+      "next": "log2"
+    },
+    {
+      "id": "log2",
+      "type": "log",
+      "chapter": 2,
+      "title": "Captain's log: end of Chapter 2",
+      "prompt": "Write two sentences for Mission Control: why did you start the valve repair without waiting for their approval, and why did the magnetic shield need its full 0.50 T?",
+      "model": "<p>Radio waves travel at the speed of light, so a message to Earth takes 52.5 minutes and a reply takes another 52.5 minutes, and we couldn't wait 105 minutes when the repair had to start within 90. The radius of a proton's path in the shield is $r = \\dfrac{mv}{qB}$: at 0.30 T it is 0.70 m, more than the 0.50 m layer, but at 0.50 T it falls to 0.42 m, so the protons turn round before they reach the habitat.</p>",
+      "checklist": [
+        "I explained that the reply would take too long, because radio waves travel at the speed of light and the round trip takes 105 minutes (more than 90).",
+        "I explained that a stronger field makes the radius smaller ($r = mv/qB$), so the protons turn round inside the 0.50 m layer."
+      ],
+      "next": "ch2-end"
+    },
+    {
+      "id": "ch2-end",
+      "type": "pause",
+      "chapter": 2,
+      "title": "End of Chapter 2",
+      "html": "<p>The <em>Kittiwake</em> is parked far out from Jupiter, and the <em>Petrel</em> is ready to go down to Europa.</p>",
+      "button": "Start Chapter 3",
+      "next": "ch3-intro"
+    },
+    {
+      "id": "ch3-intro",
+      "type": "story",
+      "chapter": 3,
+      "title": "Chapter 3: Europa",
+      "html": "<p><strong>Mission log, day 660.</strong> The <em>Petrel</em> undocks. Kenji's voice crackles over the radio: \"Bring me back some ocean.\" Lucía flies, and Amara watches Europa grow in the window: a white ball criss-crossed with long brown cracks.</p><p>Europa has almost no atmosphere, so there is no air to slow the lander down: every metre per second of speed must be removed by the engine. The gravitational field strength at the surface is only <strong>1.3 $\\text{N kg}^{-1}$</strong>, less than a seventh of Earth's.</p>",
+      "button": "Continue",
+      "next": "fork1"
+    },
+    {
+      "id": "fork1",
+      "type": "fork",
+      "chapter": 3,
+      "title": "Choosing a landing site",
+      "html": "<p>The orbital radar has found two possible landing sites. Neither is perfect, and neither choice is wrong: it is a trade-off.</p>",
+      "figure": {
+        "svg": "diagrams/landing-sites.svg",
+        "alt": "A strip of Europa's surface. On the left, flat smooth plains. On the right, chaos terrain: tilted blocks of ice separated by cracks. A long dashed line runs from the plains to the chaos terrain.",
+        "caption": "The two landing sites (not to scale). The radar hints that the ice may be thinner around the chaos terrain."
+      },
+      "question": "Where do you land?",
+      "options": [
+        {
+          "label": "The smooth plains",
+          "text": "An easy, flat landing, but 40 km from the chaos terrain, so the rover has a long drive on battery power.",
+          "gauge": "power",
+          "cost": 10,
+          "next": "d7a",
+          "result": "<p>\"Plains it is,\" says Lucía, and lines the lander up for a straight-down descent.</p>"
+        },
+        {
+          "label": "The chaos terrain",
+          "text": "Close to where the ice may be thin, but the lander must hover to find a flat block to land on, and the rover will have to cross cracks.",
+          "gauge": "fuel",
+          "cost": 10,
+          "next": "d7b",
+          "result": "<p>Lucía hovers over the jumbled blocks for two long minutes, then sets the <em>Petrel</em> down on a flat slab of ice.</p>"
+        }
+      ]
+    },
+    {
+      "id": "d7a",
+      "type": "decision",
+      "chapter": 3,
+      "number": 7,
+      "title": "The braking burn",
+      "topic": "A.2",
+      "section": "second",
+      "gauge": "fuel",
+      "cost": 15,
+      "detour": "d7a-fix",
+      "log": "<p><strong>Day 661, above the plains.</strong> The descent is set up so that, whatever height the braking burn starts at, the <em>Petrel</em> is then moving straight down at 45 $\\text{m s}^{-1}$. The engine must slow it to rest just as it touches the ice, with a constant deceleration.</p><p>Lucía wants to start the braking burn at a height of 200 m: a shorter burn saves fuel. But the engine can give a thrust of at most <strong>40 kN</strong>.</p><ul><li>mass of the lander: 8000 kg</li><li>gravitational field strength on Europa: 1.3 $\\text{N kg}^{-1}$</li><li>ignore the change in the lander's mass as fuel is burned.</li></ul>",
+      "task": "<p><strong>Calculate</strong> the thrust needed if braking starts at 200 m.</p>",
+      "hint": "Find the deceleration needed to stop from 45 $\\text{m s}^{-1}$ in 200 m, using $v^2 = u^2 + 2as$. Then draw a free-body diagram: the thrust must slow the lander <em>and</em> hold up its weight.",
+      "working": "<p>Deceleration: $a = \\dfrac{u^2}{2s} = \\dfrac{45^2}{2 \\times 200} = 5.06$ $\\text{m s}^{-2}$</p><p>Weight: $mg = 8000 \\times 1.3 = 10\\,400$ N</p><p>Newton's second law (upwards positive): $F - mg = ma$, so $F = 8000 \\times (5.06 + 1.3) = 5.09 \\times 10^4$ N, about 51 kN.</p><p>That is more than the engine's 40 kN.</p>",
+      "numeric": {
+        "answer": 50900,
+        "unit": "N",
+        "range": [
+          50000,
+          51500
+        ],
+        "mistakes": [
+          {
+            "value": 40500,
+            "feedback": "That force would only slow the lander down. The thrust must also hold up its weight, $mg$."
+          },
+          {
+            "value": 118900,
+            "feedback": "Use the gravitational field strength on Europa, 1.3 $\\text{N kg}^{-1}$, not Earth's."
+          },
+          {
+            "value": 91400,
+            "feedback": "Check the deceleration: $v^2 = u^2 + 2as$ gives $a = \\dfrac{u^2}{2s}$."
+          }
+        ]
+      },
+      "choice": {
+        "question": "\"So do we start at 200 m?\" asks Lucía. What is your order?",
+        "options": [
+          "Start at 200 m: Europa's gravity is so weak that the engine will manage.",
+          "Start at 200 m, with the engine at its full 40 kN: we'll be going slowly enough at the bottom.",
+          "Start lower, at 100 m, to save even more fuel.",
+          "Start higher, at 300 m."
+        ],
+        "answer": 3,
+        "feedback": {
+          "0": "Even with weak gravity, stopping from 45 $\\text{m s}^{-1}$ in 200 m needs about 51 kN, more than the engine can give.",
+          "1": "With only 40 kN the deceleration would be $\\dfrac{40\\,000 - 10\\,400}{8000} = 3.7$ $\\text{m s}^{-2}$, too small to stop in 200 m: the lander would hit the ice at about 23 $\\text{m s}^{-1}$.",
+          "2": "Stopping in a shorter distance needs a bigger deceleration, and so even more thrust: about 91 kN from 100 m."
+        },
+        "explain": "From 300 m: $a = \\dfrac{45^2}{2 \\times 300} = 3.4$ $\\text{m s}^{-2}$, so $F = 8000 \\times (3.375 + 1.3) = 3.7 \\times 10^4$ N, about 37 kN. That is inside the engine's 40 kN limit. (At full thrust the burn must start at least 274 m up, so 300 m leaves a margin.) A longer, gentler burn uses a little more fuel, but it is one the engine can actually do."
+      },
+      "success": "<p>The engine roars at 300 m. The lander slows smoothly and settles onto the plains with barely a bump. \"Welcome to Europa,\" says Lucía quietly.</p>",
+      "failure": "<p>The engine couldn't give enough thrust in time. Lucía fired the emergency thrusters at the last moment, but the <em>Petrel</em> still hit the ice at 3.0 $\\text{m s}^{-1}$, and the landing legs took a hard jolt.</p>",
+      "next": "d8"
+    },
+    {
+      "id": "d7a-fix",
+      "type": "detour",
+      "chapter": 3,
+      "title": "Checking the landing legs",
+      "topic": "A.2",
+      "section": "momentum",
+      "gauge": "fuel",
+      "refund": 5,
+      "html": "<p>Amara reads the instruments: the lander hit the ice at 3.0 $\\text{m s}^{-1}$ and stopped in 0.40 s. The landing legs are built to take an average force of up to 80 kN. If they took more, the <em>Petrel</em> may not be able to take off again.</p>",
+      "task": "<p><strong>Calculate</strong> the average force the legs exerted on the lander while it stopped.</p>",
+      "hint": "While it stops, two forces act on the lander: its weight and the force from the legs. The resultant force equals the rate of change of momentum, $\\dfrac{\\Delta p}{\\Delta t}$.",
+      "working": "<p>Rate of change of momentum: $\\dfrac{\\Delta p}{\\Delta t} = \\dfrac{8000 \\times 3.0}{0.40} = 6.0 \\times 10^4$ N (upwards)</p><p>The legs must provide this <em>and</em> hold up the weight: $F = 6.0 \\times 10^4 + 8000 \\times 1.3 = 7.0 \\times 10^4$ N, about 70 kN.</p><p>That is under 80 kN: the legs survived.</p>",
+      "numeric": {
+        "answer": 70400,
+        "unit": "N",
+        "range": [
+          69500,
+          71000
+        ],
+        "mistakes": [
+          {
+            "value": 60000,
+            "feedback": "That is the resultant force. The legs must also hold up the lander's weight."
+          },
+          {
+            "value": 138400,
+            "feedback": "Use the gravitational field strength on Europa, 1.3 $\\text{N kg}^{-1}$, not Earth's."
+          },
+          {
+            "value": 49600,
+            "feedback": "The weight acts downwards, so the legs must push up with <em>more</em> than the resultant force, not less."
+          }
+        ]
+      },
+      "success": "<p>About 70 kN: under the legs' limit. Lucía walks round the lander and finds only scuffed paint. The <em>Petrel</em> can still fly.</p>",
+      "failure": "<p>Lucía inspects every leg by hand. They held, but the inspection takes a day, and the lander burns fuel keeping its systems warm meanwhile.</p>",
+      "next": "d8"
+    },
+    {
+      "id": "d7b",
+      "type": "decision",
+      "chapter": 3,
+      "number": 7,
+      "title": "The crevasse",
+      "topic": "A.1",
+      "section": "projectiles",
+      "gauge": "power",
+      "cost": 15,
+      "detour": "d7b-fix",
+      "log": "<p><strong>Day 662, the chaos terrain.</strong> Amara drives the rover towards the area where the ice may be thin. A crevasse blocks the way: it is <strong>18 m</strong> wide, and the far side is <strong>5.0 m</strong> lower than this one. The only way across is to drive off the edge horizontally and fly over it.</p><ul><li>gravitational field strength on Europa: 1.3 $\\text{N kg}^{-1}$</li><li>air resistance is negligible (Europa's atmosphere is extremely thin)</li><li>treat the rover as a point</li><li>the rover can drive at 5.0 $\\text{m s}^{-1}$ on its normal setting, or 7.0 $\\text{m s}^{-1}$ on its fast setting</li></ul>",
+      "figure": {
+        "svg": "diagrams/crevasse.svg",
+        "alt": "The rover at the edge of a crevasse 18 m wide. The far side is 5.0 m lower than the near side.",
+        "caption": "The crevasse, drawn to scale (the rover is not). The rover leaves the edge moving horizontally."
+      },
+      "task": "<p><strong>Calculate</strong> the minimum speed at which the rover must leave the edge to reach the far side.</p>",
+      "hint": "Treat the vertical and horizontal motions separately. The vertical fall of 5.0 m starts from rest, so it sets the time in the air. In that time the rover must travel 18 m horizontally at a constant speed.",
+      "working": "<p>Time to fall 5.0 m from rest: $s = \\tfrac{1}{2}gt^2$, so $t = \\sqrt{\\dfrac{2 \\times 5.0}{1.3}} = 2.77$ s</p><p>Minimum horizontal speed: $v = \\dfrac{18}{2.77} = 6.5$ $\\text{m s}^{-1}$</p>",
+      "numeric": {
+        "answer": 6.49,
+        "unit": "$\\text{m s}^{-1}$",
+        "range": [
+          6.4,
+          6.6
+        ],
+        "mistakes": [
+          {
+            "value": 17.82,
+            "feedback": "Use the gravitational field strength on Europa, 1.3 $\\text{N kg}^{-1}$, not Earth's."
+          },
+          {
+            "value": 9.178,
+            "feedback": "Check the time: $s = \\tfrac{1}{2}gt^2$, so $t = \\sqrt{2s/g}$."
+          },
+          {
+            "value": 2.774,
+            "feedback": "That is the time in the air. Now find the horizontal speed that covers 18 m in that time."
+          }
+        ]
+      },
+      "choice": {
+        "question": "\"Normal or fast?\" asks Amara, her hand on the controls. What is your order?",
+        "options": [
+          "Fast setting, 7.0 m/s.",
+          "Normal setting, 5.0 m/s: in Europa's weak gravity the rover will float across.",
+          "Normal setting, but unload the heavy drill first, so that the lighter rover falls more slowly."
+        ],
+        "answer": 0,
+        "feedback": {
+          "1": "The weak gravity is already in the calculation: it gives 2.77 s in the air. At 5.0 $\\text{m s}^{-1}$ the rover only covers $5.0 \\times 2.77 = 13.9$ m, short of the 18 m.",
+          "2": "With no air resistance, every object falls with the same acceleration, whatever its mass. A lighter rover takes the same 2.77 s to fall 5.0 m."
+        },
+        "explain": "The rover needs at least 6.5 $\\text{m s}^{-1}$. At 7.0 $\\text{m s}^{-1}$ it covers $7.0 \\times 2.77 = 19.4$ m before it has fallen 5.0 m, so it clears the 18 m gap."
+      },
+      "success": "<p>The rover sails over the crevasse in a slow, silent arc and thumps down on the far side with more than a metre to spare. Amara lets out her breath.</p>",
+      "failure": "<p>The rover fell short. It hit the far wall of the crevasse and slid down onto a ledge, wedged and undamaged, but stuck.</p>",
+      "next": "d8"
+    },
+    {
+      "id": "d7b-fix",
+      "type": "detour",
+      "chapter": 3,
+      "title": "Winching out the rover",
+      "topic": "A.3",
+      "section": "power",
+      "gauge": "power",
+      "refund": 5,
+      "html": "<p>Lucía anchors a winch at the top of the crevasse. It will pull the 900 kg rover straight up the wall at a steady 0.30 $\\text{m s}^{-1}$. The winch runs from the lander's batteries.</p>",
+      "task": "<p><strong>Calculate</strong> the useful power the winch must supply. Assume friction with the wall is negligible.</p>",
+      "hint": "At a steady speed the winch's pull equals the rover's weight, $mg$. Power is force × velocity.",
+      "working": "<p>Force needed at a steady speed: $F = mg = 900 \\times 1.3 = 1170$ N</p><p>Power: $P = Fv = 1170 \\times 0.30 = 351$ W, about 350 W.</p>",
+      "numeric": {
+        "answer": 351,
+        "unit": "W",
+        "range": [
+          345,
+          360
+        ],
+        "mistakes": [
+          {
+            "value": 2646,
+            "feedback": "Use the gravitational field strength on Europa, 1.3 $\\text{N kg}^{-1}$, not Earth's."
+          },
+          {
+            "value": 270,
+            "feedback": "The force needed is the rover's weight, $mg$, not its mass."
+          }
+        ]
+      },
+      "success": "<p>The winch hums for a few minutes, and the rover rolls back onto the ice. This time Amara finds a narrower crossing.</p>",
+      "failure": "<p>Lucía sets the winch by trial and error. The rover comes out, but the stop-start pulling drains more battery than it needed to.</p>",
+      "next": "d8"
+    },
+    {
+      "id": "d8",
+      "type": "decision",
+      "chapter": 3,
+      "number": 8,
+      "title": "How thick is the ice?",
+      "topic": "C.2",
+      "section": "sound",
+      "gauge": "power",
+      "cost": 10,
+      "log": "<p><strong>Day 664.</strong> The rover is now at the edge of the chaos terrain. To reach the ocean, the crew must find where the ice is thinnest. Amara sets off a small charge on the surface. The sound wave travels straight down through the ice, reflects from the ice–water boundary and comes back up to a detector next to the charge.</p><ul><li>speed of sound in the ice: 3800 $\\text{m s}^{-1}$</li><li>site 1: the echo returns after 3.2 s</li><li>site 2: the echo returns after 0.16 s</li></ul>",
+      "figure": {
+        "svg": "diagrams/ice-echo.svg",
+        "alt": "Cross-section of the ice shell with the ocean underneath. A pulse travels down from the charge at the surface, reflects at the bottom of the ice and returns to a detector beside the charge.",
+        "caption": "Measuring the ice by echo (not to scale). The <span class=\"key-1\">sound pulse</span> goes down and back up."
+      },
+      "task": "<p><strong>Calculate</strong> the thickness of the ice at site 2.</p>",
+      "hint": "The echo time is for the journey down <em>and</em> back up.",
+      "working": "<p>Distance travelled by the pulse: $3800 \\times 0.16 = 608$ m (down and back)</p><p>Thickness: $\\dfrac{608}{2} = 304$ m, about 300 m.</p><p>At site 1: $\\dfrac{3800 \\times 3.2}{2} = 6080$ m, about 6 km.</p>",
+      "numeric": {
+        "answer": 304,
+        "unit": "m",
+        "range": [
+          300,
+          308
+        ],
+        "mistakes": [
+          {
+            "value": 608,
+            "feedback": "That is the distance down <em>and</em> back. The ice is half as thick."
+          },
+          {
+            "value": 6080,
+            "feedback": "That is site 1. The question asks about site 2, where the echo returns after 0.16 s."
+          },
+          {
+            "value": 23750,
+            "feedback": "Distance = speed × time, not speed ÷ time."
+          }
+        ]
+      },
+      "choice": {
+        "question": "The crew can drill, or melt, through about 1 km of ice at most. Where do you set up?",
+        "options": [
+          "Site 1: a longer echo means a stronger reflection, so the ocean there is closer.",
+          "Either: the times are too short to tell the two sites apart.",
+          "Site 2."
+        ],
+        "answer": 2,
+        "feedback": {
+          "0": "The echo time measures how far the sound travelled, not how strong the reflection is. A longer time means the ice is <em>thicker</em>: about 6 km at site 1.",
+          "1": "The two times differ by a factor of 20, and so do the thicknesses: about 6 km against about 300 m."
+        },
+        "explain": "The thickness is proportional to the echo time. Site 2 has about 300 m of ice, within reach; site 1 has about 6 km, far too much. <em>Fact or fiction?</em> Ice this thin is invented for the story: real estimates of Europa's ice shell range from a few kilometres to about 30 km or more, and some models suggest pockets of water a few kilometres down beneath chaos terrain."
+      },
+      "success": "<p>Site 2 it is. The crew sets up camp at the edge of a smooth patch of ice, about 300 m above the ocean.</p>",
+      "failure": "<p>The crew set up at the wrong site and lost a day of drilling (and battery power) before the numbers were rechecked and they moved to site 2.</p>",
+      "next": "d9"
+    },
+    {
+      "id": "d9",
+      "type": "decision",
+      "chapter": 3,
+      "number": 9,
+      "title": "Keeping the instruments warm",
+      "topic": "B.5",
+      "section": "internal",
+      "gauge": "power",
+      "cost": 10,
+      "log": "<p><strong>Day 665, night at site 2.</strong> The surface is at about 100 K (−170 °C). The seismometers must be kept warm in their insulated box overnight, which needs at least <strong>300 W</strong> of heating.</p><ul><li>two identical heaters, each with a resistance of 12 Ω</li><li>an old battery, chilled by the night, with emf 48 V and internal resistance 0.50 Ω (a cold battery has a higher internal resistance)</li></ul>",
+      "task": "<p><strong>Calculate</strong> the total power delivered to the two heaters when they are connected in <strong>parallel</strong> across the battery.</p>",
+      "hint": "Find the combined resistance of the two heaters in parallel, then the current: $\\varepsilon = I(R + r)$. Only the power in the heaters, $I^2R$, warms the box; the rest is wasted inside the battery.",
+      "working": "<p>Two 12 Ω heaters in parallel: $R = \\left(\\dfrac{1}{12} + \\dfrac{1}{12}\\right)^{-1} = 6.0$ Ω</p><p>Current: $I = \\dfrac{\\varepsilon}{R + r} = \\dfrac{48}{6.0 + 0.50} = 7.38$ A</p><p>Power in the heaters: $P = I^2R = 7.38^2 \\times 6.0 = 327$ W</p>",
+      "numeric": {
+        "answer": 327.2,
+        "unit": "W",
+        "range": [
+          323,
+          331
+        ],
+        "mistakes": [
+          {
+            "value": 384,
+            "feedback": "Include the battery's internal resistance: the current is $I = \\dfrac{\\varepsilon}{R + r}$."
+          },
+          {
+            "value": 92.12,
+            "feedback": "That is for the heaters in series. In parallel, their combined resistance is 6.0 Ω."
+          },
+          {
+            "value": 354.5,
+            "feedback": "That is the total power from the battery, including what is wasted in its internal resistance. Find the power in the heaters, $I^2R$."
+          }
+        ]
+      },
+      "choice": {
+        "question": "How do you wire the heaters?",
+        "options": [
+          "In parallel.",
+          "In series: more resistance makes more heat.",
+          "Use just one heater, to save the battery for later."
+        ],
+        "answer": 0,
+        "feedback": {
+          "1": "In series the resistance is bigger, so the current is much smaller: $I = \\dfrac{48}{24.5} = 1.96$ A, and the heaters get only about 92 W.",
+          "2": "One heater alone gets $I = \\dfrac{48}{12.5} = 3.84$ A and $3.84^2 \\times 12 = 177$ W, not enough to keep the instruments warm."
+        },
+        "explain": "In parallel the heaters get 327 W, enough. In series they would get only 92 W, and one heater alone 177 W. A smaller total resistance lets more current flow, and here that delivers more power to the heaters."
+      },
+      "success": "<p>The heaters keep the box warm all night. In the morning the seismometers are warm, and their readings are clean.</p>",
+      "failure": "<p>By morning two of the seismometers had frozen. Amara thawed them out and recalibrated them, but it cost a day of battery power.</p>",
+      "next": "log3"
+    },
+    {
+      "id": "log3",
+      "type": "log",
+      "chapter": 3,
+      "title": "Captain's log: end of Chapter 3",
+      "prompt": "Write two sentences for Mission Control: why did you choose site 2, and why did you wire the heaters in parallel?",
+      "model": "<p>The echo time is for the sound's journey down and back, so the ice at site 2 is $\\dfrac{3800 \\times 0.16}{2} \\approx 300$ m thick, compared with about 6 km at site 1, and only site 2 is within our reach. In parallel the two heaters have a smaller total resistance (6.0 Ω), so more current flows and they receive 327 W, compared with only 92 W in series.</p>",
+      "checklist": [
+        "I used thickness = speed × time ÷ 2, because the echo travels down and back up.",
+        "I explained that the parallel heaters have less total resistance, so more current flows and more power reaches the heaters."
+      ],
+      "next": "ch3-end"
+    },
+    {
+      "id": "ch3-end",
+      "type": "pause",
+      "chapter": 3,
+      "title": "End of Chapter 3",
+      "html": "<p>The camp is set up on 300 m of ice, with Europa's hidden ocean underneath.</p>",
+      "button": "Start Chapter 4",
+      "next": "ch4-intro"
+    },
+    {
+      "id": "ch4-intro",
+      "type": "story",
+      "chapter": 4,
+      "title": "Chapter 4: The ocean and home",
+      "html": "<p><strong>Mission log, day 666.</strong> Somewhere beneath the camp, 300 m down, is water that has never seen sunlight. Amara can hardly sit still. \"We are closer to an alien ocean than anyone has ever been,\" she says.</p><p>The <em>Kittiwake</em> will be back overhead in a few days. Before then the crew must reach the ocean, keep the sample safe, climb back to the ship and dock.</p>",
+      "button": "Continue",
+      "next": "fork2"
+    },
+    {
+      "id": "fork2",
+      "type": "fork",
+      "chapter": 4,
+      "title": "Reaching the ocean",
+      "html": "<p>There are two ways to get a sample of the ocean. Again, neither is wrong: each one costs something different.</p>",
+      "figure": {
+        "svg": "diagrams/ocean-access.svg",
+        "alt": "Cross-section of the ice above the ocean. On the left a melt probe hangs on a cable inside the ice, below a winch on the surface. On the right a plume of ice grains rises from a crack in the surface.",
+        "caption": "The two ways to reach the ocean (not to scale): a <span class=\"key-1\">melt probe</span>, or catching grains from a <span class=\"key-2\">plume</span>."
+      },
+      "question": "Which way do you go?",
+      "options": [
+        {
+          "label": "The melt probe",
+          "text": "A heated probe melts its way down through the ice and pumps up real ocean water. It needs a lot of electrical energy.",
+          "gauge": "power",
+          "cost": 15,
+          "next": "d10a",
+          "result": "<p>Kenji powers up the melt probe, and the crew lower it into a shallow pit in the ice.</p>"
+        },
+        {
+          "label": "Catch the plume",
+          "text": "Near the camp, a crack in the ice sends up a plume of ice grains from below. The lander can fly up and catch some, with no drilling, but hovering uses fuel.",
+          "gauge": "fuel",
+          "cost": 15,
+          "next": "d10b",
+          "result": "<p>Lucía fires up the <em>Petrel</em>'s engine, and Amara fits the grain collector to its nose.</p>"
+        }
+      ]
+    },
+    {
+      "id": "d10a",
+      "type": "decision",
+      "chapter": 4,
+      "number": 10,
+      "title": "The melt probe",
+      "topic": "B.1",
+      "section": "phase",
+      "gauge": "power",
+      "cost": 15,
+      "detour": "d10a-fix",
+      "log": "<p><strong>Day 667.</strong> To reach the ocean, the probe must melt all the ice in its path: <strong>9000 kg</strong> of it. Deep ice is warmer than the surface, and the ice in the probe's path has an average temperature of <strong>150 K</strong>. To leave time for the climb back to the <em>Kittiwake</em>, the probe must break through within <strong>36 hours</strong>.</p><ul><li>power of the probe's heater: 50 kW</li><li>specific heat capacity of ice: 2100 $\\text{J kg}^{-1}\\text{ K}^{-1}$</li><li>specific latent heat of fusion of ice: $3.34 \\times 10^5$ $\\text{J kg}^{-1}$</li><li>melting point of ice: 273 K</li><li>assume that all the heater's energy goes into the ice in the probe's path.</li></ul>",
+      "task": "<p><strong>Calculate</strong> the time the probe needs to melt its way through, in hours.</p>",
+      "hint": "Two steps: warm the ice from 150 K to its melting point ($Q = mc\\Delta T$), then melt it ($Q = mL$). Then use $t = \\dfrac{Q}{P}$.",
+      "working": "<p>Warming the ice: $Q_1 = mc\\Delta T = 9000 \\times 2100 \\times (273 - 150) = 2.32 \\times 10^9$ J</p><p>Melting it: $Q_2 = mL = 9000 \\times 3.34 \\times 10^5 = 3.01 \\times 10^9$ J</p><p>Total: $Q = 5.33 \\times 10^9$ J</p><p>Time: $t = \\dfrac{Q}{P} = \\dfrac{5.33 \\times 10^9}{5.0 \\times 10^4} = 1.07 \\times 10^5$ s, which is 29.6 hours.</p>",
+      "numeric": {
+        "answer": 29.6,
+        "unit": "hours",
+        "range": [
+          29.3,
+          30
+        ],
+        "mistakes": [
+          {
+            "value": 12.9,
+            "feedback": "That only warms the ice to its melting point. Melting it needs the latent heat, $mL$, as well."
+          },
+          {
+            "value": 16.7,
+            "feedback": "That only melts the ice. First it must be warmed from 150 K to 273 K."
+          },
+          {
+            "value": 32.45,
+            "feedback": "Check the temperature rise: the ice warms from 150 K to 273 K, a rise of 123 K."
+          },
+          {
+            "value": 106614,
+            "feedback": "That is the time in seconds. Give it in hours."
+          }
+        ]
+      },
+      "choice": {
+        "question": "\"Do we start the melt?\" asks Kenji. What is your order?",
+        "options": [
+          "Don't start: melting that much ice will take far longer than 36 hours.",
+          "Start the melt, but switch the heater off once the ice reaches 273 K: ice at its melting point turns to water by itself.",
+          "Start the melt."
+        ],
+        "answer": 2,
+        "feedback": {
+          "0": "The calculation says about 30 hours, inside the 36-hour limit.",
+          "1": "Ice at 273 K stays solid until it receives its latent heat: $3.34 \\times 10^5$ J for every kilogram. Switching off at 273 K would leave the probe stuck in solid ice."
+        },
+        "explain": "About 30 hours: inside the 36-hour limit, with a few hours to spare. More than half of the energy goes into melting the ice, not warming it."
+      },
+      "success": "<p>Twenty-nine and a half hours later the probe breaks through into liquid water. Its pump sends up the first sample of an alien ocean: cold, salty and clear.</p>",
+      "failure": "<p>The melt started hours late. To make up time Kenji runs the probe hot, and an alarm warns that heat is leaking through the insulating jacket around its electronics.</p>",
+      "next": "d11"
+    },
+    {
+      "id": "d10a-fix",
+      "type": "detour",
+      "chapter": 4,
+      "title": "A leaking jacket",
+      "topic": "B.1",
+      "section": "transfer",
+      "gauge": "power",
+      "refund": 5,
+      "html": "<p>The probe's electronics sit inside an insulating jacket with a surface area of 1.5 $\\text{m}^2$ and a thickness of 2.0 cm. The thermal conductivity of the jacket is 0.050 $\\text{W m}^{-1}\\text{ K}^{-1}$. The heater side of the jacket is 130 K hotter than the electronics side.</p>",
+      "task": "<p><strong>Calculate</strong> the rate at which thermal energy is conducted through the jacket.</p>",
+      "hint": "Use the conduction equation, $\\dfrac{\\Delta Q}{\\Delta t} = kA\\dfrac{\\Delta T}{\\Delta x}$, with the thickness in metres.",
+      "working": "<p>$\\dfrac{\\Delta Q}{\\Delta t} = kA\\dfrac{\\Delta T}{\\Delta x} = 0.050 \\times 1.5 \\times \\dfrac{130}{0.020} = 490$ W, about 0.5 kW.</p>",
+      "numeric": {
+        "answer": 487.5,
+        "unit": "W",
+        "range": [
+          480,
+          495
+        ],
+        "mistakes": [
+          {
+            "value": 4.875,
+            "feedback": "Change the thickness into metres: 2.0 cm = 0.020 m."
+          },
+          {
+            "value": 325,
+            "feedback": "Include the area of the jacket, 1.5 $\\text{m}^2$."
+          }
+        ]
+      },
+      "success": "<p>About 0.5 kW: only 1% of the heater's power, so the probe can carry on. Kenji adds a cooling loop for the electronics, and the probe breaks through into the ocean a few hours later.</p>",
+      "failure": "<p>Kenji turns the probe down until the alarm stops. It breaks through in the end, but late, and the batteries are low.</p>",
+      "next": "d11"
+    },
+    {
+      "id": "d10b",
+      "type": "decision",
+      "chapter": 4,
+      "number": 10,
+      "title": "Into the plume",
+      "topic": "A.1",
+      "section": "suvat",
+      "gauge": "fuel",
+      "cost": 15,
+      "detour": "d10b-fix",
+      "log": "<p><strong>Day 667.</strong> The ice grains leave the crack at <strong>120 $\\text{m s}^{-1}$</strong>, moving straight up. To catch them gently, Lucía will hover the lander where the grains are momentarily at rest, at the top of their flight.</p><ul><li>gravitational field strength on Europa: 1.3 $\\text{N kg}^{-1}$</li><li>air resistance is negligible</li></ul>",
+      "task": "<p><strong>Calculate</strong> the maximum height the grains reach above the crack.</p>",
+      "hint": "At the top, the grains' velocity is zero. Use $v^2 = u^2 + 2as$ with $a = -1.3$ $\\text{m s}^{-2}$.",
+      "working": "<p>At the top $v = 0$: $0 = 120^2 - 2 \\times 1.3 \\times s$</p><p>$s = \\dfrac{120^2}{2 \\times 1.3} = 5.5 \\times 10^3$ m, about 5.5 km.</p><p>(They take $t = \\dfrac{120}{1.3} = 92$ s to get there.)</p>",
+      "numeric": {
+        "answer": 5538,
+        "unit": "m",
+        "range": [
+          5450,
+          5620
+        ],
+        "mistakes": [
+          {
+            "value": 11077,
+            "feedback": "Check the rearrangement: $s = \\dfrac{u^2}{2g}$, with the 2."
+          },
+          {
+            "value": 734.7,
+            "feedback": "Use the gravitational field strength on Europa, 1.3 $\\text{N kg}^{-1}$, not Earth's."
+          },
+          {
+            "value": 92.31,
+            "feedback": "That is the time to reach the top, in seconds. The question asks for the height."
+          }
+        ]
+      },
+      "choice": {
+        "question": "At what height do you hover?",
+        "options": [
+          "About 2.8 km, halfway up, where the grains have slowed to half their speed.",
+          "About 5.5 km.",
+          "About 11 km, above the plume, so that the grains fall onto the collector."
+        ],
+        "answer": 1,
+        "feedback": {
+          "0": "Halfway up the grains are still moving at $\\sqrt{120^2 - 2 \\times 1.3 \\times 2770} \\approx 85$ $\\text{m s}^{-1}$, not 60: the speed doesn't fall in proportion to the height. They would smash into the collector.",
+          "2": "The grains never get above 5.5 km, so a collector at 11 km would catch nothing."
+        },
+        "explain": "At 5.5 km the grains are momentarily at rest, so they settle into the collector gently instead of smashing into it."
+      },
+      "success": "<p>Lucía holds the lander steady at 5.5 km. Grains drift up, slow, stop and settle into the collector like snow. Twenty minutes later Amara has a jar of melted plume: cold, salty water from the ocean below.</p>",
+      "failure": "<p>At the wrong height the collector caught almost nothing. As fuel runs down, Amara switches to the back-up: a pair of charged plates to pull passing grains in.</p>",
+      "next": "d11"
+    },
+    {
+      "id": "d10b-fix",
+      "type": "detour",
+      "chapter": 4,
+      "title": "Charged plates",
+      "topic": "D.2",
+      "section": "plates",
+      "gauge": "fuel",
+      "refund": 5,
+      "html": "<p>Each grain carries a charge of $1.6 \\times 10^{-15}$ C. The back-up collector is a pair of parallel plates 3.0 cm apart, with a potential difference of 6000 V between them. A grain that drifts between the plates is pulled onto one of them.</p>",
+      "task": "<p><strong>Calculate</strong> the electric force on a grain between the plates.</p>",
+      "hint": "The field between parallel plates is uniform: $E = \\dfrac{V}{d}$. Then $F = qE$.",
+      "working": "<p>Field: $E = \\dfrac{V}{d} = \\dfrac{6000}{0.030} = 2.0 \\times 10^5$ $\\text{V m}^{-1}$</p><p>Force: $F = qE = 1.6 \\times 10^{-15} \\times 2.0 \\times 10^5 = 3.2 \\times 10^{-10}$ N</p>",
+      "numeric": {
+        "answer": 3.2e-10,
+        "unit": "N",
+        "range": [
+          3.1e-10,
+          3.3e-10
+        ],
+        "mistakes": [
+          {
+            "value": 3.2e-12,
+            "feedback": "Change the separation into metres: 3.0 cm = 0.030 m."
+          },
+          {
+            "value": 9.6e-12,
+            "feedback": "That is $qV$, an energy in joules. Find the field first: $E = V/d$."
+          }
+        ]
+      },
+      "success": "<p>The force is tiny, but so are the grains: the plates fill steadily, and within the hour Amara has her sample of the ocean.</p>",
+      "failure": "<p>Amara sets the plates by trial and error. They work in the end, but the lander hovers for much longer than planned.</p>",
+      "next": "d11"
+    },
+    {
+      "id": "d11",
+      "type": "decision",
+      "chapter": 4,
+      "number": 11,
+      "title": "A radioactive sample",
+      "topic": "E.3",
+      "section": "halflife",
+      "gauge": "shield",
+      "cost": 10,
+      "log": "<p><strong>Day 669.</strong> The ocean sample is aboard the <em>Petrel</em>. But it was stored next to the lander's neutron instrument, and some of the sodium in the salty water has absorbed neutrons and become radioactive sodium-24, with a half-life of <strong>15 hours</strong>.</p><p>A detector held against the sample reads <strong>1800 counts per minute</strong>. With the sample taken away, it reads <strong>200 counts per minute</strong>: the background. The sample can be packed into the crew cabin for the trip home once the count rate <em>from the sample</em> has fallen to 100 counts per minute. The <em>Petrel</em> must lift off within <strong>72 hours</strong>.</p>",
+      "task": "<p><strong>Calculate</strong> how long the crew must wait before the sample can be packed, in hours.</p>",
+      "hint": "Subtract the background first. Then count how many half-lives it takes for the count rate from the sample to fall to 100 counts per minute.",
+      "working": "<p>Count rate from the sample: $1800 - 200 = 1600$ counts per minute</p><p>Halving: $1600 \\to 800 \\to 400 \\to 200 \\to 100$, which is 4 half-lives.</p><p>Time: $4 \\times 15 = 60$ hours</p>",
+      "numeric": {
+        "answer": 60,
+        "unit": "hours",
+        "range": [
+          59,
+          61
+        ],
+        "mistakes": [
+          {
+            "value": 62.5,
+            "feedback": "Subtract the background first: the count rate from the sample is $1800 - 200 = 1600$ counts per minute."
+          },
+          {
+            "value": 4,
+            "feedback": "That is the number of half-lives. Each one is 15 hours."
+          },
+          {
+            "value": 38.77,
+            "feedback": "The limit is 100 counts per minute from the sample alone. Subtract the background, then halve until you reach 100."
+          }
+        ]
+      },
+      "choice": {
+        "question": "What is your order?",
+        "options": [
+          "Warm the sample up: radioactive nuclei decay faster when they are hot.",
+          "Wait 15 hours: after one half-life all the sodium-24 will have decayed.",
+          "Leave the sample behind: once something is radioactive, it stays radioactive forever.",
+          "Wait 60 hours, then pack the sample and lift off."
+        ],
+        "answer": 3,
+        "feedback": {
+          "0": "The half-life isn't affected by physical conditions such as temperature: radioactive decay is a random, spontaneous process inside the nucleus.",
+          "1": "After one half-life only <em>half</em> of the sodium-24 nuclei have decayed, so the count rate from the sample is still 800 counts per minute.",
+          "2": "The activity halves every 15 hours. After 60 hours it is down to a sixteenth of its starting value."
+        },
+        "explain": "Four half-lives take 60 hours, inside the 72-hour window. The count rate from the sample falls to 100 counts per minute, and the crew can lift off with 12 hours to spare."
+      },
+      "hl": {
+        "task": "<p><strong>Calculate</strong> the count rate from the sample (not including the background) after <strong>40 hours</strong>, using the decay constant.</p>",
+        "hint": "The decay constant is $\\lambda = \\dfrac{\\ln 2}{T_{1/2}}$. Then use $A = A_0 e^{-\\lambda t}$, with the time in the same units as the half-life.",
+        "working": "<p>Decay constant: $\\lambda = \\dfrac{\\ln 2}{15} = 0.0462$ $\\text{h}^{-1}$ (or $1.28 \\times 10^{-5}$ $\\text{s}^{-1}$)</p><p>Count rate from the sample after 40 h: $1600 \\times e^{-0.0462 \\times 40} = 1600 \\times 0.157 = 252$ counts per minute</p><p>(40 hours is not a whole number of half-lives, so this needs the exponential law.)</p>",
+        "numeric": {
+          "answer": 252,
+          "unit": "counts per minute",
+          "range": [
+            248,
+            256
+          ],
+          "mistakes": [
+            {
+              "value": 452,
+              "feedback": "The question asks for the count rate from the sample alone, without the background."
+            },
+            {
+              "value": 283.5,
+              "feedback": "Subtract the background first: start from 1600 counts per minute."
+            },
+            {
+              "value": 600,
+              "feedback": "Don't divide by the number of half-lives. Use $A = A_0 e^{-\\lambda t}$."
+            }
+          ]
+        }
+      },
+      "success": "<p>The crew wait, checking the count rate every few hours. Sixty hours later it is down to 100 counts per minute from the sample, and Amara packs it into the cabin.</p>",
+      "failure": "<p>The order was wrong, and the crew took more radiation than they needed to while it was sorted out. In the end they waited the full 60 hours and packed the sample just in time.</p>",
+      "next": "d12"
+    },
+    {
+      "id": "d12",
+      "type": "decision",
+      "chapter": 4,
+      "number": 12,
+      "title": "Docking",
+      "topic": "A.2",
+      "section": "conservation",
+      "gauge": "fuel",
+      "cost": 15,
+      "detour": "d12-fix",
+      "log": "<p><strong>Day 672.</strong> The <em>Petrel</em> climbs away from Europa and catches up with the <em>Kittiwake</em>. On the final approach, seen from the <em>Kittiwake</em>, the ship is at rest and the lander moves straight towards it at <strong>0.60 $\\text{m s}^{-1}$</strong>. When they touch, the latches lock, and the two craft move off together. The latches always take <strong>2.0 s</strong> to lock, whatever the approach speed, and the latches can take an average force of at most <strong>1.5 kN</strong>.</p><ul><li>mass of the <em>Petrel</em>: 6000 kg</li><li>mass of the <em>Kittiwake</em>: $1.8 \\times 10^5$ kg</li></ul>",
+      "figure": {
+        "svg": "diagrams/docking.svg",
+        "alt": "The Petrel, on the left, moving towards the much larger Kittiwake, on the right, which is at rest.",
+        "caption": "The final approach (not to scale), seen from the <em>Kittiwake</em>."
+      },
+      "task": "<p><strong>Calculate</strong> the average force on the latches if the lander docks at 0.60 $\\text{m s}^{-1}$.</p>",
+      "hint": "Momentum is conserved: find the velocity of the joined craft first. The force on the latches is the lander's change of momentum divided by the contact time.",
+      "working": "<p>Momentum is conserved: $6000 \\times 0.60 = (6000 + 1.8 \\times 10^5)\\,v$, so $v = 0.0194$ $\\text{m s}^{-1}$</p><p>The lander's change of momentum: $\\Delta p = 6000 \\times (0.60 - 0.0194) = 3484$ $\\text{kg m s}^{-1}$</p><p>Average force: $F = \\dfrac{\\Delta p}{\\Delta t} = \\dfrac{3484}{2.0} = 1.74 \\times 10^3$ N, about 1.7 kN.</p><p>That is more than the latches' 1.5 kN.</p>",
+      "numeric": {
+        "answer": 1742,
+        "unit": "N",
+        "range": [
+          1700,
+          1765
+        ],
+        "mistakes": [
+          {
+            "value": 1800,
+            "feedback": "The ship moves a little too after docking, so the lander doesn't stop completely. Find the common velocity first."
+          },
+          {
+            "value": 3484,
+            "feedback": "That is the change of momentum. Divide by the contact time, 2.0 s, to get the force."
+          }
+        ]
+      },
+      "choice": {
+        "question": "\"Approach speed 0.60 and holding,\" says Lucía. What is your order?",
+        "options": [
+          "Dock at 0.60 m/s: the ship is so massive that it hardly moves, so the force will be tiny.",
+          "Speed up to 0.80 m/s: the docking will be over faster, so the force will be smaller.",
+          "Slow the lander to 0.50 m/s, then dock."
+        ],
+        "answer": 2,
+        "feedback": {
+          "0": "Because the ship hardly moves, the lander must lose almost all of its momentum in 2.0 s: that takes 1.74 kN, more than the latches can take.",
+          "1": "The contact time is set by the latches (2.0 s). A faster approach means more momentum to remove in that time: about 2.3 kN."
+        },
+        "explain": "At 0.50 $\\text{m s}^{-1}$: $v = \\dfrac{6000 \\times 0.50}{1.86 \\times 10^5} = 0.016$ $\\text{m s}^{-1}$, and $F = \\dfrac{6000 \\times (0.50 - 0.016)}{2.0} = 1.45$ kN, just under the 1.5 kN limit."
+      },
+      "hl": {
+        "task": "<p>Looking back at the lift-off: Europa's mass is $4.80 \\times 10^{22}$ kg and its radius is $1.56 \\times 10^6$ m. <strong>Calculate</strong> the escape speed from Europa's surface.</p>",
+        "hint": "The escape speed is $v_{\\text{esc}} = \\sqrt{\\dfrac{2GM}{r}}$.",
+        "working": "<p>$v_{\\text{esc}} = \\sqrt{\\dfrac{2 \\times 6.67 \\times 10^{-11} \\times 4.80 \\times 10^{22}}{1.56 \\times 10^6}} = 2.03 \\times 10^3$ $\\text{m s}^{-1}$, about 2 km per second.</p><p>That is less than a fifth of Earth's escape speed (11.2 km per second), which is why leaving Europa takes far less fuel than leaving Earth.</p>",
+        "numeric": {
+          "answer": 2026,
+          "unit": "$\\text{m s}^{-1}$",
+          "range": [
+            2000,
+            2050
+          ],
+          "mistakes": [
+            {
+              "value": 1433,
+              "feedback": "Check the equation: the escape speed has a 2 inside the square root, $\\sqrt{2GM/r}$."
+            },
+            {
+              "value": 4104615,
+              "feedback": "Take the square root."
+            }
+          ]
+        }
+      },
+      "success": "<p>Lucía trims the speed to 0.50 $\\text{m s}^{-1}$. A soft clunk, a hiss of air, and the hatch opens. Kenji floats through with a grin: \"Welcome home. Did you bring me some ocean?\"</p>",
+      "failure": "<p>The latches locked with a bang that shook both craft. They held, but they are strained, and the joined craft is drifting off its planned orbit.</p>",
+      "next": "log4"
+    },
+    {
+      "id": "d12-fix",
+      "type": "detour",
+      "chapter": 4,
+      "title": "Stopping the drift",
+      "topic": "A.2",
+      "section": "conservation",
+      "gauge": "fuel",
+      "refund": 5,
+      "html": "<p>To cancel the drift, Lucía needs to know how fast the joined craft are moving after that first dock, when the 6000 kg lander arrived at 0.60 $\\text{m s}^{-1}$ and the 1.8 × 10<sup>5</sup> kg ship was at rest.</p>",
+      "task": "<p><strong>Calculate</strong> the velocity of the joined craft just after docking.</p>",
+      "hint": "Total momentum before = total momentum after. After docking, both craft move together.",
+      "working": "<p>$6000 \\times 0.60 = (6000 + 1.8 \\times 10^5) \\times v$</p><p>$v = \\dfrac{3600}{1.86 \\times 10^5} = 0.019$ $\\text{m s}^{-1}$, about 2 cm per second.</p>",
+      "numeric": {
+        "answer": 0.01935,
+        "unit": "$\\text{m s}^{-1}$",
+        "range": [
+          0.019,
+          0.0197
+        ],
+        "mistakes": [
+          {
+            "value": 0.02,
+            "feedback": "After docking, both craft move together: divide by the total mass, $1.86 \\times 10^5$ kg."
+          },
+          {
+            "value": 0.6,
+            "feedback": "The lander shares its momentum with the much heavier ship, so the joined craft move far more slowly."
+          }
+        ]
+      },
+      "success": "<p>A short, gentle burn cancels the 2 cm per second drift. The <em>Kittiwake</em> is back on course for home.</p>",
+      "failure": "<p>Lucía stops the drift by eye, with a string of small burns. It works, but it uses more fuel than a calculation would have.</p>",
+      "next": "log4"
+    },
+    {
+      "id": "log4",
+      "type": "log",
+      "chapter": 4,
+      "title": "Captain's log: end of Chapter 4",
+      "prompt": "Write two sentences for Mission Control: why did the crew wait 60 hours before packing the sample, and why should the lander dock at 0.50 m/s rather than 0.60 m/s?",
+      "model": "<p>The count rate from the sample (after subtracting the 200 counts per minute background) was 1600 counts per minute and halves every 15 hours, so it took four half-lives, 60 hours, to fall to the safe limit of 100 counts per minute. Momentum is conserved when the craft join, so at 0.60 $\\text{m s}^{-1}$ the lander would have lost about 3500 $\\text{kg m s}^{-1}$ of momentum in 2.0 s, a force of 1.74 kN, more than the latches' 1.5 kN; at 0.50 $\\text{m s}^{-1}$ the force is only 1.45 kN.</p>",
+      "checklist": [
+        "I subtracted the background and counted the half-lives: 1600 → 100 counts per minute is four half-lives, 60 hours.",
+        "I used conservation of momentum and force = change of momentum ÷ contact time to explain the slower approach."
+      ],
+      "next": "finale"
+    },
+    {
+      "id": "finale",
+      "type": "finale",
+      "chapter": 4,
+      "title": "Mission debrief",
+      "endings": [
+        {
+          "next": "end-signal",
+          "minTotal": 250,
+          "maxWrong": 1,
+          "minLog": 6
+        },
+        {
+          "next": "end-success",
+          "minTotal": 215
+        },
+        {
+          "next": "end-limping",
+          "minTotal": 165
+        },
+        {
+          "next": "end-aborted"
+        }
+      ]
+    },
+    {
+      "id": "end-signal",
+      "type": "ending",
+      "chapter": 4,
+      "title": "The deep signal",
+      "html": "<p><strong>Mission log, day 1300. Earth.</strong> The <em>Kittiwake</em> comes home with every gauge healthy and a perfect sample of Europa's ocean.</p><p>Months later, Amara's team publishes its first results. The water holds dissolved salts, simple organic molecules and a mix of chemicals that, on Earth, living things often produce. But non-living chemistry can make all of them too.</p><p>At the press conference a reporter asks: \"So is there life on Europa?\" Amara smiles. \"This is interesting evidence, not proof. Other laboratories must test our samples, and future missions must look again. That's how science works.\"</p><p>It's the best ending: your physics was sound all the way, and your logs explained it clearly.</p>"
+    },
+    {
+      "id": "end-success",
+      "type": "ending",
+      "chapter": 4,
+      "title": "Mission accomplished",
+      "html": "<p><strong>Mission log, day 1300. Earth.</strong> The <em>Kittiwake</em> comes home with her crew safe and her sample of Europa's ocean intact: the first water ever brought back from another world's ocean.</p><p>Scientists around the world queue up for a few drops of it. Whatever they find, this mission will be in the textbooks.</p><p>Something held you back from the best ending, but you always recovered. For the best ending next time, aim for no more than one decision going wrong, strong captain's logs and healthy gauges.</p>"
+    },
+    {
+      "id": "end-limping",
+      "type": "ending",
+      "chapter": 4,
+      "title": "Limping home",
+      "html": "<p><strong>Mission log, day 1320. Earth.</strong> The <em>Kittiwake</em> limps home on her last reserves, weeks late. The crew are safe, but the sample container cracked during a power cut on the long journey, and most of the sample was spoiled.</p><p>A few grams survive, enough to prove that Europa's ocean is salty water, but not enough for the detailed tests the scientists hoped for. \"We'll be back,\" says Lucía.</p><p>Look at the list of topics to revise below, then try the mission again.</p>"
+    },
+    {
+      "id": "end-aborted",
+      "type": "ending",
+      "chapter": 4,
+      "title": "Mission aborted",
+      "html": "<p><strong>Mission log, day 1330. Earth.</strong> With fuel, power and shielding all running low, Mission Control ordered the crew to switch off the sample's freezer: the journey home needed every watt of power. The sample thawed and spoiled on the way.</p><p>Everyone gets home safely, and that matters most. The engineers will learn a great deal from what went wrong, and so can you: look at the topics to revise below, then try the mission again.</p>"
+    }
+  ],
+  "endingsNote": "Your ending depended on the total of your three gauges, how many decisions went wrong, and your captain's log points. Play again and try a different route.",
+  "factOrFiction": "<p><strong>Real:</strong> Europa's mass, radius and orbit; the strong evidence for a salty ocean under its ice; chaos terrain; the intense radiation around Jupiter; the 3.55-day orbit and Kepler's third law; the speed of sound in ice; the half-life of sodium-24 (about 15 hours); and the radio delay between Earth and Jupiter. NASA's <em>Europa Clipper</em> (launched 2024) and ESA's <em>JUICE</em> are on their way to study Europa and Jupiter's other icy moons.</p><p><strong>Invented or simplified:</strong> the crewed ship, its fusion drive and the year 2071; ice only 300 m thick (real estimates range from a few kilometres to about 30 km or more); the plumes (the evidence for them is tentative and still debated); the magnetic shield's uniform field; the sample made radioactive by the lander's neutron instrument (though sodium-23 really does become sodium-24 when it absorbs a neutron); and any sign of life. Nobody yet knows whether Europa's ocean holds life.</p>"
+}
