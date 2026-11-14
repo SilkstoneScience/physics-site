@@ -130,7 +130,7 @@ export default {
         numeric: d.num('v', { mistakes: [{ value: L_CM / d.r.tMean.value, feedback: 'Convert the card length to metres before dividing.' }] }),
         markscheme: [
           '$v = \\dfrac{L}{\\bar{t}}$ with $L$ in metres ✓',
-          `$v = ${d.sf(d.r.v.value, 3)}\\ \\text{m s}^{-1}$ (allow ECF from (c)) ✓`,
+          `$v = ${d.sf(d.r.v.value, 3)}\\ \\text{m s}^{-1}$ (${d.sf((L_CM / 100) / Number(d.sf(d.r.tMean.value, 3)), 3)} if the rounded mean is used; allow ECF from (c)) ✓`,
         ],
       },
       {

@@ -168,7 +168,7 @@
           "unit": "$\\text{m s}^{-2}$",
           "range": [
             1.23,
-            1.37
+            1.4
           ]
         }
       },
@@ -748,7 +748,7 @@
       "emissivity",
       "solar"
     ],
-    "stem": "<p>Venus orbits closer to the Sun than Earth does. At the orbit of Venus, sunlight delivers 2600 $\\text{W m}^{-2}$ to a surface facing the Sun, and the thick clouds of Venus give it an albedo of 0.76. Spacecraft have measured the temperature of the surface of Venus to be 735 K. The atmosphere of Venus is almost entirely carbon dioxide, and the pressure at its surface is about 90 times the pressure at the surface of Earth.</p><p>For comparison, Earth would have an equilibrium temperature of about 255 K if it had no atmosphere; its actual surface temperature is 288 K.</p>",
+    "stem": "<p>Venus orbits closer to the Sun than Earth does. At the orbit of Venus, sunlight delivers 2600 $\\text{W m}^{-2}$ to a surface facing the Sun, and the thick clouds of Venus give it an albedo of 0.76. Spacecraft have measured the temperature of the surface of Venus to be 735 K. The atmosphere of Venus is almost entirely carbon dioxide, and the pressure at its surface is about 90 times the pressure at the surface of Earth.</p><p>For comparison, Earth would have an equilibrium temperature of about 255 K without the greenhouse gases in its atmosphere; its actual surface temperature is 288 K.</p>",
     "parts": [
       {
         "label": "a",
@@ -768,7 +768,7 @@
           "equilibrium",
           "solar"
         ],
-        "question": "Venus is modelled as a black body with no atmosphere. Show that its equilibrium temperature would then be about 230 K.",
+        "question": "Venus is modelled as a black body with no greenhouse gases in its atmosphere. Show that its equilibrium temperature would then be about 230 K.",
         "marks": 2,
         "markscheme": [
           "mean absorbed intensity $= \\dfrac{I(1 - \\alpha)}{4} = \\dfrac{2600 \\times (1 - 0.76)}{4} = 156\\ \\text{W m}^{-2}$ ✓",
@@ -1125,13 +1125,13 @@
         "markscheme": [
           "$P = I^2 R = (1.64 \\times 10^{-3})^2 \\times 2.2 \\times 10^{3}$ ✓",
           "$P = 5.89\\ \\text{mW}$ ✓",
-          "Allow ECF from (b); accept 5.65 to 6.13 mW"
+          "Allow ECF from (b); accept 5.59 to 6.13 mW"
         ],
         "numeric": {
           "answer": 5.89091,
           "unit": "mW",
           "range": [
-            5.65,
+            5.59,
             6.13
           ],
           "mistakes": [
@@ -1500,7 +1500,7 @@
         "sections": [
           "graphs"
         ],
-        "question": "The graph shows how the vertical displacement of the ground at the station varies with time as the S wave passes. <img src=\"questions/diagrams/p2-c2-swave.svg\" alt=\"A sine-shaped graph of displacement in millimetres against time in seconds from 0 to 2.5 s. The displacement varies between plus and minus 3.0 mm and completes two full cycles in the time shown, so each cycle takes 1.25 s.\"> Determine, in km, the wavelength of the S wave.",
+        "question": "The graph shows how the vertical displacement of the ground at the station varies with time as the S wave passes. <img src=\"questions/diagrams/p2-c2-swave.svg\" alt=\"A sine-shaped graph of displacement in millimetres against time in seconds from 0 to 2.5 s. The displacement varies between plus and minus 3.0 mm and completes two full cycles in the time shown.\"> Determine, in km, the wavelength of the S wave.",
         "marks": 2,
         "markscheme": [
           "period read from the graph: $T = 1.25$ s (or $f = 1/T$) ✓",
@@ -2966,7 +2966,10 @@
         ],
         "numeric": {
           "answer": 1.01881,
-          "tolerance": 0.002
+          "range": [
+            1.01,
+            1.02
+          ]
         }
       },
       {
@@ -2990,7 +2993,7 @@
           "unit": "$\\text{s}^{-1}$",
           "range": [
             0.000101,
-            0.000109
+            0.000111
           ],
           "mistakes": [
             {
@@ -3034,7 +3037,7 @@
         "numeric": {
           "answer": 358542000000000,
           "range": [
-            344000000000000,
+            335000000000000,
             373000000000000
           ]
         }

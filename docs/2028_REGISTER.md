@@ -248,9 +248,9 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 - `scientists.json` (1)
   - line 813: …her. This is the Chandrasekhar limit (new in the guide for exams from 2028), and he won the 1983 Nobel Prize in Physics. ",
 - `skills.html` (3)
-  - line 242: … volume $= \frac{4}{3}\pi r^{3}$; surface area $= 4\pi r^{2}$ New for 2028 (in the data booklet from 2028)
-  - line 258: the box drawn round a "New for 2028" block (class new2028)
-  - line 259: New for 2028 From the 2028 exams, all four are printed in the data booklet, so every exam uses the same definitions. The booklet writes them in words:
+  - line 246: … volume $= \frac{4}{3}\pi r^{3}$; surface area $= 4\pi r^{2}$ New for 2028 (in the data booklet from 2028)
+  - line 262: the box drawn round a "New for 2028" block (class new2028)
+  - line 263: New for 2028 From the 2028 exams, all four are printed in the data booklet, so every exam uses the same definitions. The booklet writes them in words:
 - `think/concepts.json` (1)
   - line 1350: …\"intensity ∝ amplitude²\" in so many words; the guide for exams from 2028 does.) Cover one slit and the amplitude at the centre drops from $2A$ to $A$, so the intensity …
 <!-- LIST:END -->

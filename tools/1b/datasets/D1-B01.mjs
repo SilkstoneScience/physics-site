@@ -185,7 +185,7 @@ export default {
     {
       label: 'f', sections: ['kepler'], marks: 1, ao: 'AO3',
       question: 'The data come from a database, so the graph has no error bars. Suggest one reason why the gradient could still differ slightly from the value predicted by Kepler\'s third law.',
-      markscheme: [`Any one of: the orbits are not perfect circles (Himalia's eccentricity is about ${d.stated('eHim')}) / the moons pull on each other / Jupiter is not a perfect sphere, so it does not act exactly as a point mass ✓`],
+      markscheme: [`Any one of: the published values are rounded (Metis's period is given to only 3 significant figures) / the Sun and the other moons also pull on each moon / Jupiter is not a perfect sphere, so it does not act exactly as a point mass. Do not accept "the orbits are not circles": $a$ is the semi-major axis, and the law holds for an ellipse when $a$ is used ✓`],
     },
   ],
 };

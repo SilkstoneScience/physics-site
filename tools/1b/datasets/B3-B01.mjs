@@ -48,7 +48,7 @@ export default {
   },
 
   columns: {
-    theta: { kind: 'set', name: 'temperature', symbol: 'T', symbolText: 'T', unit: '°C', values: [12.0, 23.5, 37.0, 51.5, 64.0, 78.5], resolution: 0.5, uncertainty: 0.5 },
+    theta: { kind: 'set', name: 'temperature', symbol: '\\theta', symbolText: 'θ', unit: '°C', values: [12.0, 23.5, 37.0, 51.5, 64.0, 78.5], resolution: 0.5, uncertainty: 0.5 },
     p: {
       kind: 'measured', name: 'pressure', symbol: 'p', unit: 'kPa',
       model: { law: 'pressure-law', inputs: { p0: 'p.p0', T0: 'p.T0', T: 'row.theta' } },
@@ -113,7 +113,7 @@ export default {
     accepted: { value: -273, dp: 0, unit: '°C', source: 'data booklet: absolute zero is 0 K = −273 °C' },
   },
 
-  intro: () => '<p>A student investigates how the pressure $p$ of a fixed mass of air at constant volume depends on its temperature $T$. '
+  intro: () => '<p>A student investigates how the pressure $p$ of a fixed mass of air at constant volume depends on its temperature $\\theta$. '
     + 'A sealed flask of air is held in a water bath and connected by a short tube to a Bourdon pressure gauge. The bath is heated in steps, '
     + 'and at each step the student waits until the reading is steady.</p>',
 
@@ -125,10 +125,10 @@ export default {
     return [
       {
         label: 'a', sections: ['laws'], marks: 2, ao: 'AO3',
-        question: 'Show, using two rows of the table, that $p$ is not proportional to $T$.',
+        question: 'Show, using two rows of the table, that $p$ is not proportional to $\\theta$.',
         markscheme: [
-          `$\\dfrac{p}{T}$ is ${d.sf(d.r.ratioLow.value, 3)} $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at ${d.text('theta', 0)} °C but ${d.sf(d.r.ratioHigh.value, 3)} $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at ${d.text('theta', 5)} °C (or any two non-adjacent rows) ✓`,
-          'The ratio is not constant, so $p$ is not proportional to $T$ ✓',
+          `$\\dfrac{p}{\\theta}$ is ${d.sf(d.r.ratioLow.value, 3)} $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at ${d.text('theta', 0)} °C but ${d.sf(d.r.ratioHigh.value, 3)} $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at ${d.text('theta', 5)} °C (or any two non-adjacent rows) ✓`,
+          'The ratio is not constant, so $p$ is not proportional to $\\theta$ ✓',
         ],
       },
       {
@@ -147,8 +147,8 @@ export default {
         question: 'Hence determine the temperature at which the pressure of the air would be zero, according to these data.',
         numeric: d.num('absZeroAnswer'),
         markscheme: [
-          'At $p = 0$: $T = -\\dfrac{\\text{intercept}}{\\text{gradient}}$ (extrapolating the line) ✓',
-          `$T = ${d.int(d.r.absZero.value)}\\ {}^{\\circ}\\text{C}$ (accept ${d.int(d.r.absZeroAnswer.range[0])} to ${d.int(d.r.absZeroAnswer.range[1])}; allow ECF from (b)) ✓`,
+          'At $p = 0$: $\\theta = -\\dfrac{\\text{intercept}}{\\text{gradient}}$ (extrapolating the line) ✓',
+          `$\\theta = ${d.int(d.r.absZero.value)}\\ {}^{\\circ}\\text{C}$ (accept ${d.int(d.r.absZeroAnswer.range[0])} to ${d.int(d.r.absZeroAnswer.range[1])}; allow ECF from (b)) ✓`,
         ],
       },
       {
