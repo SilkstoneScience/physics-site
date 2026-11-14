@@ -128,7 +128,8 @@ E.3 radioactivity: no sealed sources, so the Pa-234m simulation stays the main h
 ## 4a. Progress
 
 - **Theme B priority 1 handouts drafted (14 November 2026), waiting for the teacher's review:** specific heat capacity (B.1), Boyle's law and absolute zero (B.3), I–V characteristics and EMF and internal resistance (B.5), as Word files in `physics-source/experimental-programme/adapted-for-review` ("… - DP Lab (draft).docx"), in the layout of the teacher's DP Lab handouts. Ideas from the Vernier lab books, the Cambridge practical sheets and older school sheets; all wording, questions and numbers new. Independent physics review done and fixed. Diagrams are described in boxes, to be drawn as SVG for the web pages. The builder (`build.js`, needs the `docx` npm package) and each handout's text are kept outside the repository in `reference-cache/handout-builder`.
-- Next: the teacher's comments, then the web pages; A.1 free fall is the last priority 1 lab in Theme A.
+- **A.1 free fall (picket fence and photogate) drafted (14 November 2026), waiting for the teacher's review:** `A.1 Free Fall - DP Lab (draft).docx` in the same folder, independently reviewed and fixed. To check against the school's Logger Pro: the menu path Experiment ▸ Set Up Timers… and how many velocity points Logger Pro gives per drop.
+- Next: the teacher's comments, then the web pages. Then the next batch of priority 1 labs (Theme C).
 
 ## 5. Equipment (teacher's answers, 13 November 2026)
 
