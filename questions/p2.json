@@ -925,6 +925,134 @@
     }
   },
   {
+    "id": "B4-P02",
+    "theme": "B",
+    "topic": "B.4",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "HL",
+    "sections": [
+      "adiabatic",
+      "first",
+      "internal",
+      "processes",
+      "work"
+    ],
+    "stem": "<p>A helium liquefier cools helium gas by letting it expand and push a piston. Helium behaves as an ideal monatomic gas.</p><p>A cylinder holds a fixed mass of helium at a pressure of $1.0 \\times 10^{6}$ Pa and a temperature of 60 K, in a volume of $2.0 \\times 10^{-4}$ $\\text{m}^{3}$ (state X). The helium then expands adiabatically, pushing the piston outwards, until its volume is $5.0 \\times 10^{-4}$ $\\text{m}^{3}$ (state Y). The graph shows how the pressure $P$ of the helium varies with its volume $V$ during this expansion.</p>",
+    "diagram": "questions/diagrams/p2-b4-liquefier.svg",
+    "diagramAlt": "Graph of pressure in units of 10 to the power 5 pascal, from 0 to 12, against volume in units of 10 to the power minus 4 cubic metres, from 0 to 6. A curve falls steeply and then more gently from state X at volume 2.0 and pressure 10 to state Y at volume 5.0, where the pressure is a little above 2.",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "adiabatic"
+        ],
+        "question": "Show that the pressure of the helium in state Y is about $2.2 \\times 10^{5}$ Pa.",
+        "marks": 2,
+        "markscheme": [
+          "$P_{\\text{X}} V_{\\text{X}}^{5/3} = P_{\\text{Y}} V_{\\text{Y}}^{5/3}$ ✓",
+          "$P_{\\text{Y}} = 1.0 \\times 10^{6} \\times \\left(\\dfrac{2.0 \\times 10^{-4}}{5.0 \\times 10^{-4}}\\right)^{5/3} = 2.17 \\times 10^{5}\\ \\text{Pa}$ ✓",
+          "Do not accept a value read from the graph."
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "adiabatic"
+        ],
+        "question": "Determine the temperature of the helium in state Y.",
+        "marks": 2,
+        "markscheme": [
+          "$\\dfrac{PV}{T}$ is constant for a fixed mass of an ideal gas, so $T_{\\text{Y}} = T_{\\text{X}} \\times \\dfrac{P_{\\text{Y}} V_{\\text{Y}}}{P_{\\text{X}} V_{\\text{X}}}$ ✓",
+          "$T_{\\text{Y}} = 60 \\times \\dfrac{2.172 \\times 10^{5} \\times 5.0 \\times 10^{-4}}{1.0 \\times 10^{6} \\times 2.0 \\times 10^{-4}} = 32.6\\ \\text{K}$ ✓",
+          "Allow ECF from (a); accept 31.5 to 33.6 K",
+          "Accept the equivalent $T_{\\text{Y}} = T_{\\text{X}}\\left(\\dfrac{V_{\\text{X}}}{V_{\\text{Y}}}\\right)^{2/3}$."
+        ],
+        "numeric": {
+          "answer": 32.573,
+          "unit": "K",
+          "range": [
+            31.5,
+            33.6
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "first",
+          "internal"
+        ],
+        "question": "Determine the work done by the helium on the piston during the expansion.",
+        "marks": 2,
+        "markscheme": [
+          "$Q = 0$, so the work done by the gas equals the decrease in its internal energy, $W = \\tfrac{3}{2}(P_{\\text{X}}V_{\\text{X}} - P_{\\text{Y}}V_{\\text{Y}})$ (from $U = \\tfrac{3}{2}nRT$ and $PV = nRT$) ✓",
+          "$W = \\tfrac{3}{2}(1.0 \\times 10^{6} \\times 2.0 \\times 10^{-4} - 2.172 \\times 10^{5} \\times 5.0 \\times 10^{-4}) = 137\\ \\text{J}$ ✓",
+          "OR $W = \\tfrac{3}{2}nR(T_{\\text{X}} - T_{\\text{Y}})$, with the amount of gas from $PV = nRT$.",
+          "Allow ECF from (a) and (b); accept 131 to 143 J"
+        ],
+        "numeric": {
+          "answer": 137.135,
+          "unit": "J",
+          "range": [
+            131,
+            143
+          ],
+          "mistakes": [
+            {
+              "value": 300,
+              "feedback": "W = PΔV only works when the pressure stays constant, and here it falls. Use the first law instead: no thermal energy is transferred, so the work done equals the decrease in internal energy."
+            },
+            {
+              "value": 91.4233,
+              "feedback": "That is the change in PV. For a monatomic ideal gas the internal energy is 3/2 PV, so the work done is 3/2 of this."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "sections": [
+          "internal"
+        ],
+        "question": "Explain, in terms of the helium atoms that collide with the piston, why the temperature of the helium falls.",
+        "marks": 2,
+        "markscheme": [
+          "the piston is moving away, so atoms that collide with it rebound with a smaller speed than before: they do work on the piston and lose kinetic energy ✓",
+          "no thermal energy enters to replace it, so the average random kinetic energy of the atoms decreases, and temperature is a measure of this average kinetic energy ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "sections": [
+          "processes"
+        ],
+        "question": "Sketch, on a copy of the graph, a line to show how the pressure would vary with volume if the helium expanded from state X to the same final volume at constant temperature (isothermally).",
+        "marks": 2,
+        "markscheme": [
+          "a smooth curve from X whose steepness decreases (not a straight line) and which lies above the adiabatic curve at every volume after X ✓",
+          "it ends at the same final volume as Y, at a pressure of $4.0 \\times 10^{5}$ Pa (from $P_{\\text{X}}V_{\\text{X}} = PV$; allow an end point within a quarter of a grid square of this value) ✓",
+          "Note: the examiner's sketch is shown below.<figure><img src=\"questions/diagrams/p2-b4-liquefier-ms.svg\" alt=\"The same graph with a second, dashed curve from X, labelled isothermal. It falls less steeply than the adiabatic curve and ends at the same final volume as Y, at about twice the pressure.\"></figure>"
+        ]
+      },
+      {
+        "label": "f",
+        "sections": [
+          "work"
+        ],
+        "question": "Deduce, using your sketch, which of the two expansions does more work on the piston.",
+        "marks": 1,
+        "markscheme": [
+          "the isothermal expansion, because the work done is the area under the line on a pressure–volume graph and its line is higher throughout ✓",
+          "Accept: the pressure, and so the force on the piston, is larger at every volume for the same change in volume. Do not allow ECF from a line drawn below the adiabatic curve in (e)."
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
     "id": "B5-P01",
     "theme": "B",
     "topic": "B.5",
@@ -2148,6 +2276,133 @@
         "markscheme": [
           "benefit: smoke / soot / ash particles are attracted to the plate and removed from the gas before it leaves the chimney, so less particulate pollution reaches the air (fewer breathing problems, less soiling of the surroundings) ✓",
           "limitation: only charged particles are collected, so gases such as carbon dioxide or sulfur dioxide pass through unchanged OR a high-voltage supply (electrical energy) is needed to run it OR the collected ash must still be disposed of ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "D3-P02",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "sections": [
+      "parallel"
+    ],
+    "y2028": true,
+    "stem": "<p>A car with a flat battery is started using jump leads: two long flexible cables that join it to the battery of a second car. While the starter motor turns, each lead carries a current of 160 A. The current goes to the starter motor along the red lead and comes back along the black lead, so the currents in the two leads are in opposite directions.</p><p>Along a straight section of length 1.8 m the two leads lie parallel to each other, with their centres 2.5 cm apart, as shown. Along this section each lead can be treated as a very long straight wire.</p>",
+    "diagram": "questions/diagrams/p2-d3-jump-leads.svg",
+    "diagramAlt": "Two long parallel cables seen from above. The upper one, labelled red lead, carries 160 A to the right. The lower one, labelled black lead, carries 160 A to the left. Their centres are 2.5 cm apart and the straight section is 1.8 m long. Not to scale.",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "parallel"
+        ],
+        "question": "Calculate the magnetic field strength at the black lead due to the current in the red lead.",
+        "marks": 2,
+        "markscheme": [
+          "$B = \\dfrac{\\mu_0 I}{2\\pi r}$ with $r$ in metres ✓",
+          "$B = \\dfrac{4\\pi \\times 10^{-7} \\times 160}{2\\pi \\times 2.5 \\times 10^{-2}} = 1.3 \\times 10^{-3}\\ \\text{T}$ ✓"
+        ],
+        "numeric": {
+          "answer": 0.00128,
+          "unit": "T",
+          "range": [
+            0.00124,
+            0.00132
+          ],
+          "mistakes": [
+            {
+              "value": 0.0000128,
+              "feedback": "Convert the distance between the leads to metres before using it."
+            }
+          ]
+        }
+      },
+      {
+        "label": "b",
+        "sections": [
+          "parallel"
+        ],
+        "question": "Determine the magnetic force on the straight section of the black lead.",
+        "marks": 2,
+        "markscheme": [
+          "$F = BIL$, with the field from (a) at right angles to the lead (OR $\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1 I_2}{2\\pi r}$) ✓",
+          "$F = 1.3 \\times 10^{-3} \\times 160 \\times 1.8 = 0.37\\ \\text{N}$ ✓",
+          "Allow ECF from (a); accept 0.353 to 0.384 N"
+        ],
+        "numeric": {
+          "answer": 0.36864,
+          "unit": "N",
+          "range": [
+            0.353,
+            0.384
+          ],
+          "mistakes": [
+            {
+              "value": 0.2048,
+              "feedback": "That is the force on each metre of the lead. Multiply by the length of the straight section."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "parallel"
+        ],
+        "question": "Deduce, using the diagram, which way the magnetic force acts on the black lead.",
+        "marks": 2,
+        "markscheme": [
+          "the magnetic field of the red lead at the black lead is directed into the page (right-hand grip rule for a current to the right, at a point below the wire) ✓",
+          "the current in the black lead is to the left, so the force on it is towards the bottom of the diagram, away from the red lead (left-hand rule, or any equivalent rule) ✓",
+          "Accept \"away from the red lead\" or \"towards the bottom of the diagram\". Do not accept \"downwards\" unless it clearly means down the page: the diagram is a view from above.",
+          "Do not accept \"opposite currents repel\" on its own: the direction must be deduced from the field and the current."
+        ]
+      },
+      {
+        "label": "d",
+        "sections": [
+          "parallel"
+        ],
+        "question": "Determine the resultant magnetic field strength, due to the currents in the two leads, at a point midway between them.",
+        "marks": 2,
+        "markscheme": [
+          "midway between the leads the two fields are in the same direction (right-hand grip rule: the point is on opposite sides of two opposite currents), so they add ✓",
+          "$B = 2 \\times \\dfrac{4\\pi \\times 10^{-7} \\times 160}{2\\pi \\times \\tfrac{1}{2} \\times 2.5 \\times 10^{-2}} = 5.1 \\times 10^{-3}\\ \\text{T}$ ✓",
+          "Allow ECF from (a): the answer is 4 × the field in (a)."
+        ],
+        "numeric": {
+          "answer": 0.00512,
+          "unit": "T",
+          "range": [
+            0.00496,
+            0.00528
+          ],
+          "mistakes": [
+            {
+              "value": 0.00256,
+              "feedback": "The fields do add, but the midway point is only half the separation from each lead, so each field is larger than your answer to (a)."
+            }
+          ]
+        }
+      },
+      {
+        "label": "e",
+        "sections": [
+          "parallel"
+        ],
+        "question": "Predict, with a reason, how the force on the straight section of the black lead changes when the leads, still carrying the same currents, are moved so that their centres are twice as far apart.",
+        "marks": 2,
+        "markscheme": [
+          "the magnetic field of the red lead at the black lead is inversely proportional to the distance from it ($B \\propto \\dfrac{1}{r}$), so it halves ✓",
+          "the current and the length are unchanged, so the force ($F = BIL$) also halves ✓",
+          "OR from $\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1 I_2}{2\\pi r}$: the force is inversely proportional to the separation when the currents and the length are unchanged [1], so the force halves [1]."
         ]
       }
     ],
