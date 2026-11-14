@@ -255,7 +255,7 @@
         "explain": "Control rods absorb neutrons. Pushing them in a little further makes the rate fall; then they are set so that each fission causes, on average, exactly one more, and the fission rate stays steady."
       },
       "success": "<p>Kenji lowers the rods a few centimetres. The fission rate settles back to $4.7 \\times 10^{15}$ per second, and the core temperature steadies.</p>",
-      "failure": "<p>The fission rate kept climbing until the safety system dropped the control rods in automatically. The chain reaction is under control, but the core overheated on the way, and the coolant system has to be reset before the reactor can run normally again.</p>",
+      "failure": "<p>The reactor wasn't brought under control in time: the fission rate kept climbing until the safety system dropped the control rods in automatically. The chain reaction is under control, but the core overheated on the way, and the coolant system has to be reset before the reactor can run normally again.</p>",
       "next": "log1"
     },
     {
@@ -335,7 +335,7 @@
       "section": "em",
       "gauge": "fuel",
       "cost": 10,
-      "log": "<p><strong>Day 612.</strong> An alarm: a valve on one of the propellant tanks has stuck half open, and propellant is leaking into space. Kenji has a repair plan. It must start within <strong>90 minutes</strong>, or so much propellant will be lost that the trip home is at risk.</p><p>The mission rules say Mission Control on Earth must approve every repair, unless waiting would put the ship in danger. Messages travel by radio. Today Earth is almost on the opposite side of the Sun from Jupiter (but not hidden behind it), and the ship is <strong>6.3 AU</strong> from Earth.</p><ul><li>1 AU = $1.50 \\times 10^{11}$ m</li></ul>",
+      "log": "<p><strong>Day 612.</strong> An alarm: a valve on one of the propellant tanks has stuck half open, and propellant is leaking into space. Kenji has a repair plan. It must start within <strong>90 minutes</strong>, or so much propellant will be lost that the trip home is at risk.</p><p>The mission rules say Mission Control on Earth must approve every repair, unless waiting would put the ship in danger. Messages travel by radio. Today Earth is almost on the opposite side of the Sun from Jupiter (but not hidden behind it), Jupiter is a little further from the Sun than its average 5.2 AU, and the ship is <strong>6.3 AU</strong> from Earth.</p><ul><li>1 AU = $1.50 \\times 10^{11}$ m</li></ul>",
       "task": "<p><strong>Calculate</strong> how long a radio message takes to travel from the ship to Earth.</p>",
       "hint": "Radio waves are electromagnetic waves, so they travel at the speed of light, $c = 3.00 \\times 10^8$ $\\text{m s}^{-1}$. Change the distance into metres first.",
       "working": "<p>Distance: $6.3 \\times 1.50 \\times 10^{11} = 9.45 \\times 10^{11}$ m</p><p>Time: $t = \\dfrac{d}{c} = \\dfrac{9.45 \\times 10^{11}}{3.00 \\times 10^8} = 3150$ s, which is 52.5 minutes.</p><p>A reply would take another 52.5 minutes, so asking and hearing back takes 105 minutes.</p>",
@@ -378,7 +378,7 @@
         "explain": "A message there and an answer back take $2 \\times 52.5 = 105$ minutes, longer than the 90 minutes available. Every electromagnetic wave travels at $c$ in a vacuum, so no other channel would be faster. The crew must act on their own."
       },
       "success": "<p>Kenji closes the valve by hand and moves the propellant to a sound tank, all within the hour. Your report reaches Earth 52½ minutes later. The reply arrives 52½ minutes after that: \"Agreed. Good work.\"</p>",
-      "failure": "<p>The crew waited. When the reply came, 105 minutes after the question, the repair started at once, but a lot of propellant had leaked away in the meantime.</p>",
+      "failure": "<p>The repair didn't start in time. By the time Kenji reached the valve, more than 90 minutes had gone by, and a lot of propellant had leaked away.</p>",
       "next": "d5"
     },
     {
@@ -462,7 +462,7 @@
         }
       },
       "success": "<p>Lucía plots the parking orbit at twice Europa's distance from Jupiter. The radiation counters on board drop to a fraction of what they read near Europa.</p>",
-      "failure": "<p>The ship ended up waiting in a poor orbit, and Lucía had to spend days fixing it. Meanwhile the crew soaked up more radiation than planned, and the shielding took extra wear.</p>",
+      "failure": "<p>The parking orbit wasn't settled in time. The ship ended up waiting in a poor orbit, and Lucía had to spend days fixing it. Meanwhile the crew soaked up more radiation than planned, and the shielding took extra wear.</p>",
       "next": "d6"
     },
     {
@@ -524,7 +524,7 @@
         "explain": "The radius is inversely proportional to the field strength. At 0.50 T, $r = \\dfrac{1.673 \\times 10^{-27} \\times 2.0 \\times 10^7}{1.60 \\times 10^{-19} \\times 0.50} = 0.42$ m, less than the 0.50 m layer, so the protons turn round before they reach the wall."
       },
       "success": "<p>Kenji brings the coils up to 0.50 T with two minutes to spare. The storm sweeps past, and the protons are turned back 0.42 m into the layer, just short of the habitat wall. The crew's radiation badges barely change.</p>",
-      "failure": "<p>The storm hit the ship with the coils at the wrong setting. Many protons hit the habitat wall, damaging its skin. Kenji orders everyone into the storm shelter, the most heavily shielded room on board, until it passes, and then checks the skin for weak spots.</p>",
+      "failure": "<p>The coils weren't at full power in time, and the storm hit the ship. Many protons hit the habitat wall, damaging its skin. Kenji orders everyone into the storm shelter, the most heavily shielded room on board, until it passes, and then checks the skin for weak spots.</p>",
       "next": "log2"
     },
     {
@@ -571,7 +571,7 @@
       "type": "log",
       "chapter": 2,
       "title": "Captain's log: end of Chapter 2",
-      "prompt": "Write two sentences for Mission Control: why did you start the valve repair without waiting for their approval, and why did the magnetic shield need its full 0.50 T?",
+      "prompt": "Write two sentences for Mission Control: why was it right to start the valve repair without waiting for their approval, and why did the magnetic shield need its full 0.50 T?",
       "model": "<p>Radio waves travel at the speed of light, so a message to Earth takes 52.5 minutes and a reply takes another 52.5 minutes, and we couldn't wait 105 minutes when the repair had to start within 90. The radius of a proton's path in the shield is $r = \\dfrac{mv}{qB}$: at 0.30 T it is 0.70 m, more than the 0.50 m layer, but at 0.50 T it falls to 0.42 m, so the protons turn round before they reach the habitat.</p>",
       "checklist": [
         "I explained that the reply would take too long, because radio waves travel at the speed of light and the round trip takes 105 minutes (more than 90).",
@@ -593,7 +593,7 @@
       "type": "story",
       "chapter": 3,
       "title": "Chapter 3: Europa",
-      "html": "<p><strong>Mission log, day 660.</strong> The <em>Petrel</em> undocks. Kenji's voice crackles over the radio: \"Bring me back some ocean.\" Lucía flies, and Amara watches Europa grow in the window: a white ball criss-crossed with long brown cracks.</p><p>Europa has almost no atmosphere, so there is no air to slow the lander down: every metre per second of speed must be removed by the engine. The gravitational field strength at the surface is only <strong>1.3 $\\text{N kg}^{-1}$</strong>, less than a seventh of Earth's.</p>",
+      "html": "<p><strong>Mission log, day 662.</strong> The <em>Petrel</em> undocks. Kenji's voice crackles over the radio: \"Bring me back some ocean.\" Lucía flies, and Amara watches Europa grow in the window: a white ball criss-crossed with long brown cracks.</p><p>Europa has almost no atmosphere, so there is no air to slow the lander down: every metre per second of speed must be removed by the engine. The gravitational field strength at the surface is only <strong>1.3 $\\text{N kg}^{-1}$</strong>, less than a seventh of Earth's.</p>",
       "button": "Continue",
       "next": "fork1"
     },
@@ -639,7 +639,7 @@
       "gauge": "fuel",
       "cost": 15,
       "detour": "d7a-fix",
-      "log": "<p><strong>Day 661, above the plains.</strong> The descent is set up so that, whatever height the braking burn starts at, the <em>Petrel</em> is then moving straight down at 45 $\\text{m s}^{-1}$. The engine must slow it to rest just as it touches the ice, with a constant deceleration.</p><p>Lucía wants to start the braking burn at a height of 200 m: a shorter burn saves fuel. But the engine can give a thrust of at most <strong>40 kN</strong>.</p><ul><li>mass of the lander: 8000 kg</li><li>gravitational field strength on Europa: 1.3 $\\text{N kg}^{-1}$</li><li>ignore the change in the lander's mass as fuel is burned.</li></ul>",
+      "log": "<p><strong>Day 663, above the plains.</strong> The descent is set up so that, whatever height the braking burn starts at, the <em>Petrel</em> is then moving straight down at 45 $\\text{m s}^{-1}$. The engine must slow it to rest just as it touches the ice, with a constant deceleration.</p><p>Lucía wants to start the braking burn at a height of 200 m: a shorter burn saves fuel. But the engine can give a thrust of at most <strong>40 kN</strong>.</p><ul><li>mass of the lander: 8000 kg</li><li>gravitational field strength on Europa: 1.3 $\\text{N kg}^{-1}$</li><li>ignore the change in the lander's mass as fuel is burned.</li></ul>",
       "task": "<p><strong>Calculate</strong> the thrust needed if braking starts at 200 m.</p>",
       "hint": "Find the deceleration needed to stop from 45 $\\text{m s}^{-1}$ in 200 m, using $v^2 = u^2 + 2as$. Then draw a free-body diagram: the thrust must slow the lander <em>and</em> hold up its weight.",
       "working": "<p>Deceleration: $a = \\dfrac{u^2}{2s} = \\dfrac{45^2}{2 \\times 200} = 5.06$ $\\text{m s}^{-2}$</p><p>Weight: $mg = 8000 \\times 1.3 = 10\\,400$ N</p><p>Newton's second law (upwards positive): $F - mg = ma$, so $F = 8000 \\times (5.06 + 1.3) = 5.09 \\times 10^4$ N, about 51 kN.</p><p>That is more than the engine's 40 kN.</p>",
@@ -682,7 +682,7 @@
         "explain": "From 300 m: $a = \\dfrac{45^2}{2 \\times 300} = 3.4$ $\\text{m s}^{-2}$, so $F = 8000 \\times (3.375 + 1.3) = 3.7 \\times 10^4$ N, about 37 kN. That is inside the engine's 40 kN limit. (At full thrust the burn must start at least 274 m up, so 300 m leaves a margin.) A longer, gentler burn uses a little more fuel, but it is one the engine can actually do."
       },
       "success": "<p>The engine roars at 300 m. The lander slows smoothly and settles onto the plains with barely a bump. \"Welcome to Europa,\" says Lucía quietly.</p>",
-      "failure": "<p>The engine couldn't give enough thrust in time. Lucía fired the emergency thrusters at the last moment, but the <em>Petrel</em> still hit the ice at 3.0 $\\text{m s}^{-1}$, and the landing legs took a hard jolt.</p>",
+      "failure": "<p>The braking burn didn't go to plan. Lucía fired the emergency thrusters at the last moment, but the <em>Petrel</em> still hit the ice at 3.0 $\\text{m s}^{-1}$, and the landing legs took a hard jolt.</p>",
       "next": "d8"
     },
     {
@@ -735,7 +735,7 @@
       "gauge": "power",
       "cost": 15,
       "detour": "d7b-fix",
-      "log": "<p><strong>Day 662, the chaos terrain.</strong> Amara drives the rover towards the area where the ice may be thin. A crevasse blocks the way: it is <strong>18 m</strong> wide, and the far side is <strong>5.0 m</strong> lower than this one. The only way across is to drive off the edge horizontally and fly over it.</p><ul><li>gravitational field strength on Europa: 1.3 $\\text{N kg}^{-1}$</li><li>air resistance is negligible (Europa's atmosphere is extremely thin)</li><li>treat the rover as a point</li><li>the rover can drive at 5.0 $\\text{m s}^{-1}$ on its normal setting, or 7.0 $\\text{m s}^{-1}$ on its fast setting</li></ul>",
+      "log": "<p><strong>Day 663, the chaos terrain.</strong> Amara drives the rover towards the area where the ice may be thin. A crevasse blocks the way: it is <strong>18 m</strong> wide, and the far side is <strong>5.0 m</strong> lower than this one. The only way across is to drive off the edge horizontally and fly over it.</p><ul><li>gravitational field strength on Europa: 1.3 $\\text{N kg}^{-1}$</li><li>air resistance is negligible (Europa's atmosphere is extremely thin)</li><li>treat the rover as a point</li><li>the rover can drive at 5.0 $\\text{m s}^{-1}$ on its normal setting, or 7.0 $\\text{m s}^{-1}$ on its fast setting</li></ul>",
       "figure": {
         "svg": "diagrams/crevasse.svg",
         "alt": "The rover at the edge of a crevasse 18 m wide. The far side is 5.0 m lower than the near side.",
@@ -781,7 +781,7 @@
         "explain": "The rover needs at least 6.5 $\\text{m s}^{-1}$. At 7.0 $\\text{m s}^{-1}$ it covers $7.0 \\times 2.77 = 19.4$ m before it has fallen 5.0 m, so it clears the 18 m gap."
       },
       "success": "<p>The rover sails over the crevasse in a slow, silent arc and thumps down on the far side with more than a metre to spare. Amara lets out her breath.</p>",
-      "failure": "<p>The rover fell short. It hit the far wall of the crevasse and slid down onto a ledge, wedged and undamaged, but stuck.</p>",
+      "failure": "<p>The run-up went wrong: the rover left the edge too slowly and fell short. It hit the far wall of the crevasse and slid down onto a ledge, wedged and undamaged, but stuck.</p>",
       "next": "d8"
     },
     {
@@ -875,7 +875,7 @@
         "explain": "The thickness is proportional to the echo time. Site 2 has about 300 m of ice, within reach; site 1 has about 6 km, far too much. <em>Fact or fiction?</em> Ice this thin is invented for the story: real estimates of Europa's ice shell range from a few kilometres to about 30 km or more, and some models suggest pockets of water a few kilometres down beneath chaos terrain."
       },
       "success": "<p>Site 2 it is. The crew sets up camp at the edge of a smooth patch of ice, about 300 m above the ocean.</p>",
-      "failure": "<p>The crew set up at the wrong site and lost a day of drilling (and battery power) before the numbers were rechecked and they moved to site 2.</p>",
+      "failure": "<p>The echo readings were muddled, and the crew lost a day of drilling (and battery power) in the wrong place before the numbers were rechecked and they set up at site 2.</p>",
       "next": "d9"
     },
     {
@@ -929,7 +929,7 @@
         "explain": "In parallel the heaters get 327 W, enough. In series they would get only 92 W, and one heater alone 177 W. A smaller total resistance lets more current flow, and here that delivers more power to the heaters."
       },
       "success": "<p>The heaters keep the box warm all night. In the morning the seismometers are warm, and their readings are clean.</p>",
-      "failure": "<p>By morning two of the seismometers had frozen. Amara thawed them out and recalibrated them, but it cost a day of battery power.</p>",
+      "failure": "<p>The heating wasn't sorted out in time, and by morning two of the seismometers had frozen. Amara thawed them out and recalibrated them, but it cost a day of battery power.</p>",
       "next": "log3"
     },
     {
@@ -937,7 +937,7 @@
       "type": "log",
       "chapter": 3,
       "title": "Captain's log: end of Chapter 3",
-      "prompt": "Write two sentences for Mission Control: why did you choose site 2, and why did you wire the heaters in parallel?",
+      "prompt": "Write two sentences for Mission Control: why did you choose site 2, and why should the heaters be wired in parallel?",
       "model": "<p>The echo time is for the sound's journey down and back, so the ice at site 2 is $\\dfrac{3800 \\times 0.16}{2} \\approx 300$ m thick, compared with about 6 km at site 1, and only site 2 is within our reach. In parallel the two heaters have a smaller total resistance (6.0 Ω), so more current flows and they receive 327 W, compared with only 92 W in series.</p>",
       "checklist": [
         "I used thickness = speed × time ÷ 2, because the echo travels down and back up.",
@@ -1140,7 +1140,7 @@
         "explain": "At 5.5 km the grains are momentarily at rest, so they settle into the collector gently instead of smashing into it."
       },
       "success": "<p>Lucía holds the lander steady at 5.5 km. Grains drift up, slow, stop and settle into the collector like snow. Twenty minutes later Amara has a jar of melted plume: cold, salty water from the ocean below.</p>",
-      "failure": "<p>At the wrong height the collector caught almost nothing. As fuel runs down, Amara switches to the back-up: a pair of charged plates to pull passing grains in.</p>",
+      "failure": "<p>The hover height wasn't worked out properly, and on the first pass the collector caught almost nothing. As fuel runs down, Amara switches to the back-up: a pair of charged plates to pull passing grains in.</p>",
       "next": "d11"
     },
     {
@@ -1258,7 +1258,7 @@
         }
       },
       "success": "<p>The crew wait, checking the count rate every few hours. Sixty hours later it is down to 100 counts per minute from the sample, and Amara packs it into the cabin.</p>",
-      "failure": "<p>The order was wrong, and the crew took more radiation than they needed to while it was sorted out. In the end they waited the full 60 hours and packed the sample just in time.</p>",
+      "failure": "<p>The plan was muddled, and the crew took more radiation than they needed to while it was sorted out. In the end they waited the full 60 hours and packed the sample just in time.</p>",
       "next": "d12"
     },
     {
@@ -1337,7 +1337,7 @@
         }
       },
       "success": "<p>Lucía trims the speed to 0.50 $\\text{m s}^{-1}$. A soft clunk, a hiss of air, and the hatch opens. Kenji floats through with a grin: \"Welcome home. Did you bring me some ocean?\"</p>",
-      "failure": "<p>The latches locked with a bang that shook both craft. They held, but they are strained, and the joined craft is drifting off its planned orbit.</p>",
+      "failure": "<p>The approach wasn't slowed in time: the lander docked at 0.60 $\\text{m s}^{-1}$, and the latches locked with a bang that shook both craft. They held, but they are strained, and the joined craft is drifting off its planned orbit.</p>",
       "next": "log4"
     },
     {
