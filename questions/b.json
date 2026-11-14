@@ -67,7 +67,7 @@
     "difficulty": 2,
     "level": "SL",
     "sections": ["temperature"],
-    "stem": "<p>What is the average kinetic energy of a molecule in a gas at 127 °C?</p>",
+    "stem": "<p>What is the average translational kinetic energy of a molecule in a gas at 127 °C?</p>",
     "options": [
       "$2.6 \\times 10^{-21}$ J",
       "$5.5 \\times 10^{-21}$ J",
@@ -1399,9 +1399,9 @@
       {
         "label": "d",
         "sections": ["engines"],
-        "question": "Determine the efficiency of this cycle. Thermal energy is only taken in during A → B.",
+        "question": "Determine the efficiency of this cycle, as a decimal. Thermal energy is only taken in during A → B.",
         "marks": 2,
-        "numeric": { "answer": 0.1, "mistakes": [{ "value": 0.4, "feedback": "Use the <em>net</em> work done per cycle (the enclosed area, 100 J), not the work done from A to B." }] },
+        "numeric": { "answer": 0.1, "mistakes": [{ "value": 0.4, "feedback": "Use the <em>net</em> work done per cycle (the enclosed area, 100 J), not the work done from A to B." }, { "value": 10, "feedback": "That looks like the efficiency as a percentage. Type it as a decimal: 10% is 0.10." }] },
         "markscheme": [
           "Net work $= 400 - 300 = 100$ J (or the area enclosed) ✓",
           "$\\eta = \\dfrac{100}{1000} = 0.10$ ✓ (allow ECF)"
@@ -1661,7 +1661,7 @@
     "difficulty": 2,
     "level": "SL",
     "sections": ["divider"],
-    "stem": "<p>A thermistor and a fixed resistor are connected in series across a battery to make a potential divider. The output p.d. is taken across the fixed resistor. The temperature of the thermistor increases. What happens to the output p.d.?</p>",
+    "stem": "<p>An NTC thermistor and a fixed resistor are connected in series across a battery to make a potential divider. The output p.d. is taken across the fixed resistor. The temperature of the thermistor increases. What happens to the output p.d.?</p>",
     "options": [
       "It decreases, because the resistance of the thermistor increases.",
       "It decreases, because the resistance of the thermistor decreases.",
@@ -1960,6 +1960,7 @@
     "difficulty": 1,
     "level": "SL",
     "sections": ["luminosity"],
+    "y2028": true,
     "stem": "<p>Three statements about the radiation from stars are:</p><p>I. The luminosity of a star is the total power it radiates.<br>II. The apparent brightness of a star is the intensity of its radiation at the observer.<br>III. Two stars with the same luminosity always have the same apparent brightness.</p><p>Which statements are correct?</p>",
     "options": [
       "I and II only",
