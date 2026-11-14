@@ -8,6 +8,29 @@ window.MathJax = {
   output: { displayOverflow: 'linebreak', linebreaks: { inline: true } },
 };
 
+// Redraw the equations when the page's width changes: a phone turned sideways, a window resized, or a page first drawn
+// in a window with no width (a hidden pane or tab). MathJax wraps a displayed equation to the width it finds when it first
+// draws it and never re-wraps by itself, so a page drawn in a very narrow window would keep its equations stacked one
+// symbol per line (seen in the preview pane, November 2026).
+(function () {
+  // Nothing to do where there is no page to draw (the checker, tools/check.mjs, reads this file without a browser).
+  if (typeof document === 'undefined' || !document.documentElement || !window.addEventListener) return;
+  let lastWidth = document.documentElement.clientWidth, timer;
+  const redraw = () => {
+    const width = document.documentElement.clientWidth;
+    if (!width || Math.abs(width - lastWidth) < 8) return;
+    const startup = window.MathJax && MathJax.startup;
+    if (!startup || !startup.document || !startup.document.rerender) return; // MathJax isn't ready: try at the next change
+    lastWidth = width;
+    // 20 is MathJax's "compiled" state: measure the width again, then lay every equation out afresh.
+    startup.promise = (startup.promise || Promise.resolve()).then(() => startup.document.rerender(20)).catch(console.error);
+  };
+  const later = () => { clearTimeout(timer); timer = setTimeout(redraw, 250); };
+  window.addEventListener('resize', later);
+  window.addEventListener('pageshow', later);
+  document.addEventListener('visibilitychange', later);
+})();
+
 // The syllabus. Edit here to rename a topic; menus and topic lists update everywhere.
 // hl: true marks topics that are HL only (as in the IB guide's syllabus roadmap).
 // hlExtra: true marks topics for everyone that also have additional HL content.
