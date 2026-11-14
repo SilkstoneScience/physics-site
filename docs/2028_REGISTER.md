@@ -138,31 +138,31 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 - `js/questions.js` (1)
   - line 360: ${q.y2028 ? ' New for 2028 ' : ''}
 - `js/site.js` (25)
-  - line 58: // The annotated 2028 data booklet (first exams 2028), shared with school accounts. Used in the same places as DATA_BOOKLET_URL.
-  - line 59: window.DATA_BOOKLET_2028_URL = 'https://drive.google.com/file/d/1qBKKdonH8niolrCUezJUjftQBiIURMZ3/view';
-  - line 61: …a booklet on Google Drive (school accounts only): 2025 for exams 2025–2027, 2028 for exams from 2028.
-  - line 62: … and the two cards on the Resources page (data-exam-booklet="2025" / "2028").
-  - line 65: '2028': 'https://drive.google.com/file/d/1UMJv_T_bHSSDJqFKM_dzzD-zZcUjCZU2/view',
-  - line 69: …rom the 2025 IB Physics data booklet (same symbols), updated from the 2028 data booklet (first exams 2028);
-  - line 71: // Each equation is [label, TeX, HL?, '2028'?]: a third item 'true' marks it HL only; a fourth item '2028' marks it as new
-  - line 72: // in the 2028 data booklet (shown with a "New for 2028" tag). An equation the booklet merely rewrote is simply updated, with no tag.
-  - line 154: ['Intensity (power per unit area)', 'I = \\frac{P}{A}', false, '2028'],
-  - line 157: note: 'New for 2028: $\\overline{E}_k = \\tfrac{3}{2}k_BT$ is for an ideal monatomic gas; luminosity means radiated power; apparent brightness is the intensity of the lig…
-  - line 244: …th of a long straight wire', 'B = \\frac{\\mu_0 I}{2\\pi r}', false, '2028'],
-  - line 357: …inties" and opened by default on the Skills page. Checked against the 2028 booklet, pages 2–3.
-  - line 368: ['Surface area of a sphere', 'A = 4\\pi r^2', false, '2028'],
-  - line 372: …\text{initial value}}{\\text{initial value}} \\times 100\\%', false, '2028'],
-  - line 373: … value} + \\text{initial value}}{2}\\right)} \\times 100\\%', false, '2028'],
-  - line 374: … \\text{actual value}}{\\text{actual value}} \\times 100\\%', false, '2028'],
-  - line 375: …solute uncertainty}}{\\text{measured value}} \\times 100\\%', false, '2028'],
-  - line 380: note: 'The four percentage equations are new in the 2028 data booklet, so that every exam uses the same definitions. More on these: the Skills page .',
-  - line 517: ['Data booklet 2028 (exam copy)', EXAM_BOOKLETS['2028'], true],
-  - line 528: ['Annotated data booklet 2028', DATA_BOOKLET_2028_URL, true],
-  - line 749: const booklet2028Card = document.querySelector('#data-booklet-2028 a');
-  - line 750: if (booklet2028Card) booklet2028Card.href = DATA_BOOKLET_2028_URL;
-  - line 1091: const newTag = ' New for 2028 ';
-  - line 1115: ? 'Open the annotated data booklet: 2025 ↗ · 2028 ↗ '
-  - line 1134: ' ${label}${hl ? ' HL ' : ''}${mark === '2028' ? newTag : ''} $$${tex}$$ ').join('') +
+  - line 81: // The annotated 2028 data booklet (first exams 2028), shared with school accounts. Used in the same places as DATA_BOOKLET_URL.
+  - line 82: window.DATA_BOOKLET_2028_URL = 'https://drive.google.com/file/d/1qBKKdonH8niolrCUezJUjftQBiIURMZ3/view';
+  - line 84: …a booklet on Google Drive (school accounts only): 2025 for exams 2025–2027, 2028 for exams from 2028.
+  - line 85: … and the two cards on the Resources page (data-exam-booklet="2025" / "2028").
+  - line 88: '2028': 'https://drive.google.com/file/d/1UMJv_T_bHSSDJqFKM_dzzD-zZcUjCZU2/view',
+  - line 92: …rom the 2025 IB Physics data booklet (same symbols), updated from the 2028 data booklet (first exams 2028);
+  - line 94: // Each equation is [label, TeX, HL?, '2028'?]: a third item 'true' marks it HL only; a fourth item '2028' marks it as new
+  - line 95: // in the 2028 data booklet (shown with a "New for 2028" tag). An equation the booklet merely rewrote is simply updated, with no tag.
+  - line 177: ['Intensity (power per unit area)', 'I = \\frac{P}{A}', false, '2028'],
+  - line 180: note: 'New for 2028: $\\overline{E}_k = \\tfrac{3}{2}k_BT$ is for an ideal monatomic gas; luminosity means radiated power; apparent brightness is the intensity of the lig…
+  - line 267: …th of a long straight wire', 'B = \\frac{\\mu_0 I}{2\\pi r}', false, '2028'],
+  - line 380: …inties" and opened by default on the Skills page. Checked against the 2028 booklet, pages 2–3.
+  - line 391: ['Surface area of a sphere', 'A = 4\\pi r^2', false, '2028'],
+  - line 395: …\text{initial value}}{\\text{initial value}} \\times 100\\%', false, '2028'],
+  - line 396: … value} + \\text{initial value}}{2}\\right)} \\times 100\\%', false, '2028'],
+  - line 397: … \\text{actual value}}{\\text{actual value}} \\times 100\\%', false, '2028'],
+  - line 398: …solute uncertainty}}{\\text{measured value}} \\times 100\\%', false, '2028'],
+  - line 403: note: 'The four percentage equations are new in the 2028 data booklet, so that every exam uses the same definitions. More on these: the Skills page .',
+  - line 540: ['Data booklet 2028 (exam copy)', EXAM_BOOKLETS['2028'], true],
+  - line 551: ['Annotated data booklet 2028', DATA_BOOKLET_2028_URL, true],
+  - line 772: const booklet2028Card = document.querySelector('#data-booklet-2028 a');
+  - line 773: if (booklet2028Card) booklet2028Card.href = DATA_BOOKLET_2028_URL;
+  - line 1114: const newTag = ' New for 2028 ';
+  - line 1138: ? 'Open the annotated data booklet: 2025 ↗ · 2028 ↗ '
+  - line 1157: ' ${label}${hl ? ' HL ' : ''}${mark === '2028' ? newTag : ''} $$${tex}$$ ').join('') +
 - `js/slides.js` (1)
   - line 315: …classList?.contains('tag')) continue; // little tags such as "New for 2028" don't belong on a slide
 
