@@ -127,7 +127,7 @@
     </figure>
     <ul>
       <li>The torque is largest when the force is <strong>perpendicular</strong> to $r$ ($\theta = 90°$, so $\sin\theta = 1$). That's why you push a door at right angles to it.</li>
-      <li>A force whose line of action passes <strong>through the axis</strong> ($\theta = 0$) has no torque, however large it is. Pushing on the hinge side of a door doesn't open it.</li>
+      <li>A force whose line of action passes <strong>through the axis</strong> ($\theta = 0$ or $180°$, so $\sin\theta = 0$) has no torque, however large it is. Pushing on the hinge side of a door doesn't open it.</li>
       <li>A long spanner gives a larger torque for the same force, because $r$ is bigger.</li>
       <li>Torques have a <strong>sense</strong>: clockwise or anticlockwise. Choose one as positive, as you choose a positive direction for forces.</li>
     </ul>
@@ -215,7 +215,7 @@
       <p>$\Delta\theta = \omega_i t + \tfrac{1}{2}\alpha t^2 = \tfrac{1}{2} \times 3.0 \times 4.0^2 = 24$ rad. &nbsp; Revolutions: $\dfrac{24}{2\pi} = 3.8$.</p>
     </div>
     <aside class="maths-link">
-      <h3>Maths link: rates of change <span class="tag">AA SL 5.1, 5.9</span> <span class="tag">AI SL 5.1, 5.5</span></h3>
+      <h3>Maths link: rates of change <span class="tag">AA SL 5.1, 5.5, 5.7, 5.9</span> <span class="tag">AI SL 5.1, 5.5</span> <span class="tag">AI HL 5.10</span></h3>
       <p>With calculus, the angular quantities are derivatives, exactly like $v = \frac{ds}{dt}$ and $a = \frac{dv}{dt}$ in kinematics:</p>
       $$\omega = \frac{d\theta}{dt} \qquad \alpha = \frac{d\omega}{dt} = \frac{d^2\theta}{dt^2}$$
       <p>Areas under graphs are integrals: $\Delta\theta = \int \omega\,dt$, and later in this topic, angular impulse $= \int \tau\,dt$.</p>
@@ -321,14 +321,14 @@
     <div class="worked">
       <h3>Worked example: a spinning skater</h3>
       <p>A skater spins at 2.0 $\text{rad s}^{-1}$ with arms outstretched, where $I = 3.2\ \text{kg m}^2$. She pulls her arms in, reducing $I$ to 1.0 $\text{kg m}^2$. Find her new angular velocity, and compare the kinetic energies.</p>
-      <p class="hint"><strong>Hint:</strong> No external torque acts on the skater, so which quantity is conserved? For the energies, use $E_k = \tfrac{1}{2}I\omega^2$ before and after.</p>
+      <p class="hint"><strong>Hint:</strong> No external torque acts on the skater, so which quantity is conserved? For the energies, use the rotational kinetic energy $E_k = \tfrac{1}{2}I\omega^2$ (<a href="#energy">section 9</a>) before and after.</p>
       <p>$I_1\omega_1 = I_2\omega_2$: &nbsp; $3.2 \times 2.0 = 1.0\,\omega_2$, so $\omega_2 = 6.4\ \text{rad s}^{-1}$.</p>
       <p>$E_k$ before: $\tfrac{1}{2}(3.2)(2.0)^2 = 6.4$ J. &nbsp; After: $\tfrac{1}{2}(1.0)(6.4)^2 = 20$ J. The kinetic energy has <strong>increased</strong>: the extra energy comes from the work her muscles do pulling her arms inwards. Angular momentum is conserved; kinetic energy is not.</p>
     </div>
     <div class="worked">
       <h3>Worked example: coupled bodies</h3>
       <p>A turntable with $I = 0.12\ \text{kg m}^2$ spins freely at 3.0 $\text{rad s}^{-1}$. A disc with $I = 0.060\ \text{kg m}^2$, not rotating, is dropped onto it, centred on the axis, and they turn together. Find their final angular velocity and the kinetic energy lost.</p>
-      <p class="hint"><strong>Hint:</strong> This is the rotational version of two trolleys sticking together: angular momentum is conserved, and afterwards both bodies share one angular velocity. Work out the kinetic energy before and after separately.</p>
+      <p class="hint"><strong>Hint:</strong> This is the rotational version of two trolleys sticking together: angular momentum is conserved, and afterwards both bodies share one angular velocity. Work out the kinetic energy before and after separately, using $E_k = \tfrac{1}{2}I\omega^2$ (explained in <a href="#energy">section 9</a>).</p>
       <p>$0.12 \times 3.0 + 0 = (0.12 + 0.060)\,\omega$, so $\omega = \dfrac{0.36}{0.18} = 2.0\ \text{rad s}^{-1}$.</p>
       <p>$E_k$: before $\tfrac{1}{2}(0.12)(3.0)^2 = 0.54$ J; after $\tfrac{1}{2}(0.18)(2.0)^2 = 0.36$ J. So 0.18 J is lost as thermal energy while the surfaces slip against each other, just like a perfectly inelastic collision (A.2).</p>
     </div>
@@ -424,7 +424,7 @@
     </details>
     <details class="check">
       <summary>A force acts on a wheel, directed straight through its axle. What torque does it produce?</summary>
-      <p>Zero. The line of action passes through the axis, so the perpendicular distance is zero ($\theta = 0$, $\sin\theta = 0$).</p>
+      <p>Zero. The line of action passes through the axis, so the perpendicular distance is zero ($\theta = 0$ or $180°$, so $\sin\theta = 0$).</p>
     </details>
     <details class="check">
       <summary>A solid disc and a hoop have the same mass and radius. Which has the larger moment of inertia, and which would win a race rolling down a ramp?</summary>
