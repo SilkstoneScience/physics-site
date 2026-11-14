@@ -21,22 +21,22 @@
       },
       {
         "label": "b",
-        "question": "At 0 °C the resistance of the thermistor is 3.3 $\\mathrm{k\\Omega}$. Calculate, in mA, the current in the circuit at this temperature.",
+        "question": "At 0 °C the resistance of the thermistor is 4.7 $\\mathrm{k\\Omega}$. Calculate, in mA, the current in the circuit at this temperature.",
         "marks": 2,
         "markscheme": [
-          "total resistance $= 2.2 + 3.3 = 5.5\\ \\mathrm{k\\Omega}$ ✓",
-          "$I = \\dfrac{9.0}{5.5 \\times 10^{3}} = 1.64\\ \\text{mA}$ ✓"
+          "total resistance $= 2.2 + 4.7 = 6.9\\ \\mathrm{k\\Omega}$ ✓",
+          "$I = \\dfrac{9.0}{6.9 \\times 10^{3}} = 1.30\\ \\text{mA}$ ✓"
         ],
         "numeric": {
-          "answer": 1.63636,
+          "answer": 1.30435,
           "unit": "mA",
           "range": [
-            1.58,
-            1.69
+            1.26,
+            1.35
           ],
           "mistakes": [
             {
-              "value": 2.72727,
+              "value": 1.91489,
               "feedback": "The thermistor and the fixed resistor are in series: use the total resistance."
             }
           ]
@@ -44,10 +44,10 @@
       },
       {
         "label": "c",
-        "question": "Show that the potential difference across the thermistor at 0 °C is about 5.4 V.",
+        "question": "Show that the potential difference across the thermistor at 0 °C is about 6.1 V.",
         "marks": 1,
         "markscheme": [
-          "$V = IR_{\\text{T}}$ OR $V = \\dfrac{3.3}{5.5} \\times 9.0 = 5.40\\ \\text{V}$ ✓"
+          "$V = IR_{\\text{T}}$ OR $V = \\dfrac{4.7}{6.9} \\times 9.0 = 6.13\\ \\text{V}$ ✓"
         ]
       },
       {
@@ -55,20 +55,20 @@
         "question": "Calculate, in mW, the power dissipated in the fixed resistor at 0 °C.",
         "marks": 2,
         "markscheme": [
-          "$P = I^2 R = (1.64 \\times 10^{-3})^2 \\times 2.2 \\times 10^{3}$ ✓",
-          "$P = 5.89\\ \\text{mW}$ ✓",
-          "Allow ECF from (b); accept 5.59 to 6.13 mW"
+          "$P = I^2 R = (1.30 \\times 10^{-3})^2 \\times 2.2 \\times 10^{3}$ ✓",
+          "$P = 3.74\\ \\text{mW}$ ✓",
+          "Allow ECF from (b); accept 3.55 to 3.90 mW"
         ],
         "numeric": {
-          "answer": 5.89091,
+          "answer": 3.74291,
           "unit": "mW",
           "range": [
-            5.59,
-            6.13
+            3.55,
+            3.9
           ],
           "mistakes": [
             {
-              "value": 14.7273,
+              "value": 11.7391,
               "feedback": "That is the power in the whole circuit. Use the resistance of the fixed resistor only."
             }
           ]
@@ -76,12 +76,12 @@
       },
       {
         "label": "e",
-        "question": "The alarm sounds when the potential difference across the thermistor is greater than 5.4 V. Explain why the alarm sounds when the temperature falls below 0 °C.",
+        "question": "The alarm sounds when the potential difference across the thermistor is greater than 6.1 V. Explain why the alarm sounds when the temperature falls below 0 °C.",
         "marks": 3,
         "markscheme": [
           "As the temperature falls, the resistance of the thermistor increases (so the total resistance increases) ✓",
           "so the current decreases and the potential difference across the fixed resistor ($IR$) decreases ✓",
-          "the emf is shared between the two components, so the potential difference across the thermistor increases above 5.4 V ✓"
+          "the emf is shared between the two components, so the potential difference across the thermistor increases above 6.1 V ✓"
         ]
       }
     ]
@@ -112,7 +112,7 @@
       "what": "resistance of the fixed resistor"
     },
     "RT": {
-      "value": 3.3,
+      "value": 4.7,
       "sf": 2,
       "unit": "kΩ",
       "range": [
@@ -124,32 +124,32 @@
   },
   "results": {
     "Rtot": {
-      "value": 5.5,
+      "value": 6.9,
       "unit": "kΩ",
       "sf": 2
     },
     "I": {
-      "value": 1.6363636363636362,
+      "value": 1.3043478260869565,
       "unit": "mA",
       "sf": 3
     },
     "VT": {
-      "value": 5.3999999999999995,
+      "value": 6.130434782608696,
       "unit": "V",
       "sf": 3
     },
     "P": {
-      "value": 5.890909090909091,
+      "value": 3.7429111531190933,
       "unit": "mW",
       "sf": 3
     },
     "wrong_I": {
-      "value": 2.7272727272727275,
+      "value": 1.9148936170212765,
       "unit": "mA",
       "sf": 3
     },
     "wrong_P": {
-      "value": 14.727272727272727,
+      "value": 11.739130434782611,
       "unit": "mW",
       "sf": 3
     }
@@ -186,7 +186,7 @@
       "syllabus": [
         "B.5.9"
       ],
-      "examinerNote": "Any of the power equations for the fixed resistor (V across it = ε − 5.4 V also works).",
+      "examinerNote": "Any of the power equations for the fixed resistor (V across it = ε − 6.13 V also works).",
       "dependsOn": [
         "b"
       ]

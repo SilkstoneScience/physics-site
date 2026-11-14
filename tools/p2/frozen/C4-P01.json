@@ -7,14 +7,14 @@
     "difficulty": 2,
     "level": "SL",
     "y2028": true,
-    "stem": "<p>An organ pipe of length 0.85 m has one closed end; its other end is open. Sound travels through the air inside it at 340 $\\text{m s}^{-1}$.</p>",
+    "stem": "<p>An organ pipe of length 0.84 m has one closed end; its other end is open. Sound travels through the air inside it at 340 $\\text{m s}^{-1}$.</p>",
     "parts": [
       {
         "label": "a",
         "question": "Show that the wavelength of the first harmonic is about 3.4 m.",
         "marks": 1,
         "markscheme": [
-          "a quarter of a wavelength fits the pipe (node at the closed end, antinode at the open end), so $\\lambda = 4L = 4 \\times 0.85 = 3.4\\ \\text{m}$ ✓"
+          "a quarter of a wavelength fits the pipe (node at the closed end, antinode at the open end), so $\\lambda = 4L = 4 \\times 0.84 = 3.36\\ \\text{m}$ ✓"
         ]
       },
       {
@@ -22,18 +22,19 @@
         "question": "Calculate the frequency of the first harmonic.",
         "marks": 1,
         "markscheme": [
-          "$f = \\dfrac{v}{\\lambda} = \\dfrac{340}{3.4} = 100\\ \\text{Hz}$ ✓"
+          "$f = \\dfrac{v}{\\lambda} = \\dfrac{340}{3.36} = 101\\ \\text{Hz}$ ✓",
+          "Accept 98.1 to 105 Hz (using the rounded 3.4 m from (a) gives 100 Hz)."
         ],
         "numeric": {
-          "answer": 100,
+          "answer": 101.19,
           "unit": "Hz",
           "range": [
-            97,
-            103
+            98.1,
+            105
           ],
           "mistakes": [
             {
-              "value": 200,
+              "value": 202.381,
               "feedback": "That is the first harmonic of a pipe open at both ends (λ = 2L). For a pipe closed at one end, λ = 4L."
             }
           ]
@@ -45,7 +46,7 @@
         "marks": 3,
         "markscheme": [
           "next standing waves have $L = \\tfrac{3\\lambda}{4}$ and $L = \\tfrac{5\\lambda}{4}$ ✓",
-          "frequencies 300 Hz and 500 Hz ✓",
+          "frequencies 304 Hz and 506 Hz ✓",
           "these are the third and fifth harmonics (harmonic number = frequency ÷ first-harmonic frequency) ✓",
           "Allow ECF from (b)."
         ]
@@ -64,14 +65,14 @@
         "question": "The closed end is opened, so that the pipe is open at both ends. Calculate the new frequency of the first harmonic.",
         "marks": 1,
         "markscheme": [
-          "antinodes at both ends, so $\\lambda = 2L$ and $f = \\dfrac{340}{2 \\times 0.85} = 200\\ \\text{Hz}$ ✓"
+          "antinodes at both ends, so $\\lambda = 2L$ and $f = \\dfrac{340}{2 \\times 0.84} = 202\\ \\text{Hz}$ ✓"
         ],
         "numeric": {
-          "answer": 200,
+          "answer": 202.381,
           "unit": "Hz",
           "range": [
-            194,
-            206
+            196,
+            209
           ]
         }
       }
@@ -84,7 +85,7 @@
   ],
   "given": {
     "L": {
-      "value": 0.85,
+      "value": 0.84,
       "sf": 2,
       "unit": "m",
       "range": [
@@ -106,32 +107,37 @@
   },
   "results": {
     "lam1": {
-      "value": 3.4,
+      "value": 3.36,
       "unit": "m",
-      "sf": 2
+      "sf": 3
     },
     "f1": {
+      "value": 101.19047619047619,
+      "unit": "Hz",
+      "sf": 3
+    },
+    "f1r": {
       "value": 100,
       "unit": "Hz",
       "sf": 3
     },
     "f3": {
-      "value": 300,
+      "value": 303.57142857142856,
       "unit": "Hz",
       "sf": 3
     },
     "f5": {
-      "value": 500,
+      "value": 505.95238095238096,
       "unit": "Hz",
       "sf": 3
     },
     "fOpen": {
-      "value": 200,
+      "value": 202.38095238095238,
       "unit": "Hz",
       "sf": 3
     },
     "wrong_f1": {
-      "value": 200,
+      "value": 202.38095238095238,
       "unit": "Hz",
       "sf": 3
     }
@@ -153,7 +159,7 @@
         "C.2.2",
         "C.4.3"
       ],
-      "examinerNote": "The wave equation with the wavelength from (a)."
+      "examinerNote": "The wave equation with the wavelength from (a). Either the unrounded wavelength or the value given in (a) may be used: both answers are accepted."
     },
     {
       "label": "c",

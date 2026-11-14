@@ -139,7 +139,8 @@ export const INDEPENDENT = {
   // Closed pipe: allowed wavelengths 4L/n for odd n; open pipe 2L/n.
   'C4-P01': ({ L, v }) => {
     const closed = (n) => v.value / (4 * L.value / n);
-    return { lam1: 4 * L.value, f1: closed(1), f3: closed(3), f5: closed(5), fOpen: v.value / (2 * L.value) };
+    const shown = Number((4 * L.value).toPrecision(2)); // the wavelength as part (a) states it, to 2 significant figures
+    return { lam1: 4 * L.value, f1: closed(1), f1r: v.value / shown, f3: closed(3), f5: closed(5), fOpen: v.value / (2 * L.value) };
   },
   // Kepler: M from GM = ω²r³ with ω = 2π/T; Rhea's period from GM via T = 2π√(r³/GM).
   'D1-P02': ({ rT, TT, rR }) => {

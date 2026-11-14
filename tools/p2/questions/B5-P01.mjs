@@ -17,7 +17,11 @@ export default {
   given: {
     emf: { value: 9.0, sf: 2, unit: 'V', range: [1.5, 24], what: 'emf of the battery (negligible internal resistance)' },
     R: { value: 2.2, sf: 2, unit: 'kΩ', range: [0.1, 100], what: 'resistance of the fixed resistor' },
-    RT: { value: 3.3, sf: 2, unit: 'kΩ', range: [0.1, 100], what: 'resistance of the thermistor at 0 °C' },
+    // 4.7 kΩ, not 3.3 kΩ (teacher's rule, 14 November 2026): the p.d. across the thermistor is then 6.13 V, so a
+    // student can show "about 6.1 V" by giving one more figure. With 3.3 kΩ it was 5.40 V exactly. 4.7 kΩ was chosen
+    // because the current is then 1.304 mA, which rounds to 1.3 mA with almost no error, so a student who carries the
+    // rounded current from (b) into (d) still gets an accepted power (the audit's point T46).
+    RT: { value: 4.7, sf: 2, unit: 'kΩ', range: [0.1, 100], what: 'resistance of the thermistor at 0 °C' },
   },
   calc: (v) => {
     const I = v.emf / (v.R + v.RT);
@@ -68,7 +72,7 @@ export default {
         '$P = [[P:3u]]$ ✓',
         'Allow ECF from (b); accept [[P:lo]] to [[P:hi]] mW',
       ],
-      examinerNote: 'Any of the power equations for the fixed resistor (V across it = ε − 5.4 V also works).',
+      examinerNote: 'Any of the power equations for the fixed resistor (V across it = ε − 6.13 V also works).',
     },
     {
       label: 'e', sections: ['divider', 'resistance'], command: 'Explain', marks: 3, syllabus: ['B.5.12', 'B.5.10', 'B.5.6'],

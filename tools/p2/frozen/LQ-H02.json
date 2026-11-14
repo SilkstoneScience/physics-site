@@ -12,16 +12,16 @@
     "paper": "2L",
     "difficulty": 3,
     "level": "HL",
-    "stem": "<p>A tram stores energy in a flywheel, a uniform disc of mass 300 kg and radius 0.40 m that spins about its central axis. The moment of inertia of a uniform disc is $I = \\tfrac{1}{2}MR^2$. At full speed the flywheel rotates at 3000 $\\text{rev min}^{-1}$.</p>",
+    "stem": "<p>A tram stores energy in a flywheel, a uniform disc of mass 310 kg and radius 0.40 m that spins about its central axis. The moment of inertia of a uniform disc is $I = \\tfrac{1}{2}MR^2$. At full speed the flywheel rotates at 3000 $\\text{rev min}^{-1}$.</p>",
     "diagram": "questions/diagrams/p2-lqh02-flywheel.svg",
     "diagramAlt": "A uniform disc of mass M seen face on, with its radius R drawn from the centre to the edge and a curved arrow showing it spinning with angular speed omega about its centre.",
     "parts": [
       {
         "label": "a(i)",
-        "question": "Show that the moment of inertia of the flywheel is about 24 $\\text{kg m}^{2}$.",
+        "question": "Show that the moment of inertia of the flywheel is about 25 $\\text{kg m}^{2}$.",
         "marks": 1,
         "markscheme": [
-          "$I = \\tfrac{1}{2} \\times 300 \\times 0.40^2 = 24.0\\ \\text{kg m}^{2}$ ✓"
+          "$I = \\tfrac{1}{2} \\times 310 \\times 0.40^2 = 24.8\\ \\text{kg m}^{2}$ ✓"
         ]
       },
       {
@@ -30,18 +30,18 @@
         "marks": 2,
         "markscheme": [
           "$\\omega = \\dfrac{3000 \\times 2\\pi}{60} = 314\\ \\text{rad s}^{-1}$ ✓",
-          "$E_{\\text{k}} = \\tfrac{1}{2}I\\omega^2 = 1.18 \\times 10^{6}\\ \\text{J}$; allow ECF from (a)(i) ✓"
+          "$E_{\\text{k}} = \\tfrac{1}{2}I\\omega^2 = 1.22 \\times 10^{6}\\ \\text{J}$; allow ECF from (a)(i) ✓"
         ],
         "numeric": {
-          "answer": 1184350,
+          "answer": 1223830,
           "unit": "J",
           "range": [
-            1140000,
-            1220000
+            1180000,
+            1270000
           ],
           "mistakes": [
             {
-              "value": 30000,
+              "value": 31000,
               "feedback": "Convert the rotation rate to an angular speed in rad s⁻¹: multiply revolutions per second by 2π."
             }
           ]
@@ -52,15 +52,15 @@
         "question": "The tram is parked and the flywheel is left spinning freely from full speed. The only torque on it is a constant frictional torque of 0.80 $\\text{N m}$ in the bearings. Determine the time taken for the flywheel to stop.",
         "marks": 2,
         "markscheme": [
-          "$\\alpha = \\dfrac{\\tau}{I} = 0.0333\\ \\text{rad s}^{-2}$ ✓",
-          "$t = \\dfrac{\\omega}{\\alpha} = 9420\\ \\text{s}$; allow ECF from (a)(i) and (a)(ii) ✓"
+          "$\\alpha = \\dfrac{\\tau}{I} = 0.0323\\ \\text{rad s}^{-2}$ ✓",
+          "$t = \\dfrac{\\omega}{\\alpha} = 9740\\ \\text{s}$; allow ECF from (a)(i) and (a)(ii) ✓"
         ],
         "numeric": {
-          "answer": 9424.78,
+          "answer": 9738.94,
           "unit": "s",
           "range": [
-            9140,
-            9710
+            9440,
+            10100
           ]
         }
       },
@@ -70,13 +70,13 @@
         "marks": 2,
         "markscheme": [
           "$\\Delta\\theta = \\dfrac{\\omega_{\\text{i}} + \\omega_{\\text{f}}}{2}t$ (OR $\\omega_{\\text{i}}^2 = 2\\alpha\\Delta\\theta$) ✓",
-          "number of revolutions $= \\dfrac{\\Delta\\theta}{2\\pi} = 2.36 \\times 10^{5}$; allow ECF from (a)(iii) ✓"
+          "number of revolutions $= \\dfrac{\\Delta\\theta}{2\\pi} = 2.43 \\times 10^{5}$; allow ECF from (a)(iii) ✓"
         ],
         "numeric": {
-          "answer": 235619,
+          "answer": 243473,
           "range": [
-            228000,
-            243000
+            236000,
+            251000
           ]
         }
       },
@@ -85,19 +85,19 @@
         "question": "The flywheel is used to accelerate the tram, of mass $1.8 \\times 10^{4}$ kg, from rest to 6.0 $\\text{m s}^{-1}$ on level track. During this time the flywheel slows from 3000 $\\text{rev min}^{-1}$ to 2400 $\\text{rev min}^{-1}$. Determine the efficiency of this energy transfer.",
         "marks": 3,
         "markscheme": [
-          "energy given up by the flywheel $= \\tfrac{1}{2}I(\\omega_1^2 - \\omega_2^2) = 4.26 \\times 10^{5}\\ \\text{J}$ ✓",
+          "energy given up by the flywheel $= \\tfrac{1}{2}I(\\omega_1^2 - \\omega_2^2) = 4.41 \\times 10^{5}\\ \\text{J}$ ✓",
           "kinetic energy gained by the tram $= \\tfrac{1}{2}mv^2 = 3.24 \\times 10^{5}\\ \\text{J}$ ✓",
-          "$\\eta = \\dfrac{3.24 \\times 10^{5}}{4.26 \\times 10^{5}} = 0.76$; allow ECF from (a)(i) ✓"
+          "$\\eta = \\dfrac{3.24 \\times 10^{5}}{4.41 \\times 10^{5}} = 0.74$; allow ECF from (a)(i) ✓"
         ],
         "numeric": {
-          "answer": 0.759909,
+          "answer": 0.735396,
           "range": [
-            0.721,
-            0.798
+            0.698,
+            0.773
           ],
           "mistakes": [
             {
-              "value": 0.273567,
+              "value": 0.264742,
               "feedback": "Use the energy the flywheel actually gave up (from the change in its rotation rate), not all the energy it stored."
             }
           ]
@@ -153,14 +153,14 @@
         "marks": 2,
         "markscheme": [
           "$Q = mc\\Delta T$ with $Q$ = the energy stored at full speed ✓",
-          "$\\Delta T = 58.5\\ \\text{K}$; allow ECF from (a)(ii) ✓"
+          "$\\Delta T = 60.4\\ \\text{K}$; allow ECF from (a)(ii) ✓"
         ],
         "numeric": {
-          "answer": 58.4865,
+          "answer": 60.4361,
           "unit": "K",
           "range": [
-            56.1,
-            60.9
+            58,
+            62.9
           ]
         }
       }
@@ -175,7 +175,7 @@
   ],
   "given": {
     "M": {
-      "value": 300,
+      "value": 310,
       "sf": 2,
       "unit": "kg",
       "range": [
@@ -297,7 +297,7 @@
   },
   "results": {
     "I": {
-      "value": 24.000000000000004,
+      "value": 24.800000000000004,
       "unit": "kg m^2",
       "sf": 3
     },
@@ -307,27 +307,27 @@
       "sf": 3
     },
     "E1": {
-      "value": 1184352.5281307232,
+      "value": 1223830.9457350806,
       "unit": "J",
       "sf": 3
     },
     "alpha": {
-      "value": 0.03333333333333333,
+      "value": 0.03225806451612903,
       "unit": "rad s^-2",
       "sf": 3
     },
     "tstop": {
-      "value": 9424.77796076938,
+      "value": 9738.937226128359,
       "unit": "s",
       "sf": 3
     },
     "revs": {
-      "value": 235619.44901923448,
+      "value": 243473.430653209,
       "unit": "",
       "sf": 3
     },
     "dE": {
-      "value": 426366.91012706043,
+      "value": 440579.1404646291,
       "unit": "J",
       "sf": 3
     },
@@ -337,7 +337,7 @@
       "sf": 3
     },
     "eff": {
-      "value": 0.7599088773175331,
+      "value": 0.7353956877266449,
       "unit": "",
       "sf": 2
     },
@@ -352,17 +352,17 @@
       "sf": 3
     },
     "dT": {
-      "value": 58.48654459904806,
+      "value": 60.436096085683,
       "unit": "K",
       "sf": 3
     },
     "wrong_E1": {
-      "value": 30000.000000000004,
+      "value": 31000.000000000004,
       "unit": "J",
       "sf": 3
     },
     "wrong_eff": {
-      "value": 0.27356719583431194,
+      "value": 0.2647424475815922,
       "unit": "",
       "sf": 2
     }
