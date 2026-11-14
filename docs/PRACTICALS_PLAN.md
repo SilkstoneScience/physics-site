@@ -118,7 +118,7 @@ D.1 already has the Kepler database lab; a Cavendish experiment isn't possible w
 | Lab | Topic | Type | Key equipment | Idea source | Pri |
 |---|---|---|---|---|---|
 | Line spectra: wavelengths of hydrogen and helium lines | E.1 | Common | Spectrum tubes, diffraction grating, metre rule | general | 1 |
-| Planck's constant from LEDs (HL) | E.2 | Vernier | Voltage and Current Probes, 4–5 coloured LEDs | Vernier 22 | 2 (needs LEDs) |
+| Planck's constant from LEDs (HL) | E.2 | Vernier | Voltage and Current Probes, 4–5 coloured LEDs | Vernier 22 | 2 |
 | Dice decay: modelling half-life | E.3 | Common | 100 dice, tray | Cambridge E P1 (ideas) | 3 |
 | Binding energy per nucleon from nuclear data | E.3 | Database | Atomic Mass Evaluation data (open) | new | 3 |
 | An HR diagram from a star catalogue | E.5 | Database | Open star catalogue (e.g. Hipparcos/Gaia, checked for licence) | teacher's *Stellar database* idea | 2 |
@@ -129,7 +129,8 @@ E.3 radioactivity: no sealed sources, so the Pa-234m simulation stays the main h
 
 - **Has:** the main Vernier kit (LabQuest/Logger Pro 3, Motion Detector and Encoder, Dual-Range Force Sensor, Photogates, Dynamics Track and carts, Temperature Probe, Gas Pressure Sensor, Voltage and Current Probes, Optics Expansion Kit and Diffraction Apparatus), plus the Magnetic Field Sensor, Rotary Motion Sensor and Microphone; signal and vibration generators, a resonance tube or sonometer, ray boxes and blocks, a ripple tank, spectrum tubes and gratings, immersion heaters and metal blocks.
 - **Doesn't have:** Vernier Radiation Monitor, sealed radioactive sources, Pa-234m generator, oscilloscope, Planck's constant kit, e/m tube and Helmholtz coils, Cavendish balance.
-- **Still to confirm before building those labs:** coloured LEDs with known wavelengths (Planck), a small buzzer (Doppler), a high-current supply of about 5 A (wire field, force on a wire), U-shaped magnets, a small electric motor, a CO₂ source.
+- **Confirmed 14 November 2026:** coloured LEDs (Planck's constant) and a power supply for the wire labs. Before writing those pages, check the LEDs' wavelengths (from their data sheets or a spectrometer) and the supply's maximum current: the magnetic field of a wire needs several amps to give a field the sensor can read well; the force on a wire works with 2–3 A.
+- **Still to confirm before building those labs:** a small buzzer (Doppler), U-shaped magnets, a small electric motor, a CO₂ source.
 
 ## 6. Tools coverage check
 
