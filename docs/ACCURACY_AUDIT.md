@@ -4,10 +4,10 @@ A record of what has been checked for accuracy, so the next audit can skip pages
 
 ## Before starting another audit
 
-1. Run `node tools/audit-status.mjs`. It lists the audited pages as **unchanged** (skip them unless the teacher asks) or **changed since their audit**.
-2. For a changed page, run `node tools/audit-status.mjs --diff themes/a1.html` and check **only the changed parts** (and anything they affect, such as a number reused later on the page).
+1. Run `node tools/audit-status.mjs`. Its report has four parts, and together they are the whole job list for the next audit: **audited and unchanged** (a count: skip these unless the teacher asks; `--all` lists them); **changed since their audit** (for the question bank and the other lists of items it names the **new** and **edited** items by id, so only those are audited); **never audited** (every page, data file and diagram on the site with no record, so new work can't slip past); and **layout** (whether the stylesheets have changed, or pages have been added, since every page was last checked at phone width and in dark mode).
+2. For a changed page, run `node tools/audit-status.mjs --diff themes/a1.html` and check **only the changed parts** (and anything they affect, such as a number reused later on the page). For a changed list of items, audit only the ids the report names.
 3. Don't raise again the points the teacher has already decided (see "Decisions" below) or the optional points listed in `docs/audit-2026-11-fix-list.md`, Part 3, unless the page has changed there.
-4. When a page has been checked and its fixes applied, record it: `node tools/audit-status.mjs --record <audit-name> themes/a1.html` (or `topics` for all 24 topic pages). The record is `tools/audit/audited.json`.
+4. When a file has been checked and its fixes applied, record it: `node tools/audit-status.mjs --record <audit-name> themes/a1.html` (or `topics` for all 24 topic pages, or `layout` after re-checking every page at 375 px and in dark mode). Recording a list of items saves a fingerprint for each item. The record is `tools/audit/audited.json`; nothing in it is ever marked "changed" by hand, because the tool compares the files with their saved fingerprints every time it runs.
 
 ## Method (use the same one next time)
 
