@@ -71,6 +71,8 @@ export function buildAll(list, topics, { registry = loadRegistry(), independent 
     if (file && file !== `${id}.mjs`) add({ level: 'error', code: 'meta', message: `the file should be called ${id}.mjs` });
     if (ids.has(id)) { add({ level: 'error', code: 'duplicate-id', message: `id ${id} is used twice` }); continue; }
     ids.add(id);
+    // A withdrawn question's id is never used again: students' saved answers are keyed by id (review.mjs withdraw).
+    if ((registry.withdrawn || {})[id]) add({ level: 'error', code: 'withdrawn-id', message: `id ${id} belonged to a question that was withdrawn (${registry.withdrawn[id].date}): give the new question a new id` });
     let built;
     try {
       built = buildQuestion(def);

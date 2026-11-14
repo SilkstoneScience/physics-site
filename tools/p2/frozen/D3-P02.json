@@ -1,0 +1,230 @@
+{
+  "question": {
+    "id": "D3-P02",
+    "theme": "D",
+    "topic": "D.3",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "SL",
+    "y2028": true,
+    "stem": "<p>A car with a flat battery is started using jump leads: two long flexible cables that join it to the battery of a second car. While the starter motor turns, each lead carries a current of 160 A. The current goes to the starter motor along the red lead and comes back along the black lead, so the currents in the two leads are in opposite directions.</p><p>Along a straight section of length 1.8 m the two leads lie parallel to each other, with their centres 2.5 cm apart, as shown. Along this section each lead can be treated as a very long straight wire.</p>",
+    "diagram": "questions/diagrams/p2-d3-jump-leads.svg",
+    "diagramAlt": "Two long parallel cables seen from above. The upper one, labelled red lead, carries 160 A to the right. The lower one, labelled black lead, carries 160 A to the left. Their centres are 2.5 cm apart and the straight section is 1.8 m long. Not to scale.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Calculate the magnetic field strength at the black lead due to the current in the red lead.",
+        "marks": 2,
+        "markscheme": [
+          "$B = \\dfrac{\\mu_0 I}{2\\pi r}$ with $r$ in metres ✓",
+          "$B = \\dfrac{4\\pi \\times 10^{-7} \\times 160}{2\\pi \\times 2.5 \\times 10^{-2}} = 1.3 \\times 10^{-3}\\ \\text{T}$ ✓"
+        ],
+        "numeric": {
+          "answer": 0.00128,
+          "unit": "T",
+          "range": [
+            0.00124,
+            0.00132
+          ],
+          "mistakes": [
+            {
+              "value": 0.0000128,
+              "feedback": "Convert the distance between the leads to metres before using it."
+            }
+          ]
+        }
+      },
+      {
+        "label": "b",
+        "question": "Determine the magnetic force on the straight section of the black lead.",
+        "marks": 2,
+        "markscheme": [
+          "$F = BIL$, with the field from (a) at right angles to the lead (OR $\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1 I_2}{2\\pi r}$) ✓",
+          "$F = 1.3 \\times 10^{-3} \\times 160 \\times 1.8 = 0.37\\ \\text{N}$ ✓",
+          "Allow ECF from (a); accept 0.353 to 0.384 N"
+        ],
+        "numeric": {
+          "answer": 0.36864,
+          "unit": "N",
+          "range": [
+            0.353,
+            0.384
+          ],
+          "mistakes": [
+            {
+              "value": 0.2048,
+              "feedback": "That is the force on each metre of the lead. Multiply by the length of the straight section."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Deduce, using the diagram, which way the magnetic force acts on the black lead.",
+        "marks": 2,
+        "markscheme": [
+          "the magnetic field of the red lead at the black lead is directed into the page (right-hand grip rule for a current to the right, at a point below the wire) ✓",
+          "the current in the black lead is to the left, so the force on it is towards the bottom of the diagram, away from the red lead (left-hand rule, or any equivalent rule) ✓",
+          "Accept \"away from the red lead\" or \"towards the bottom of the diagram\". Do not accept \"downwards\" unless it clearly means down the page: the diagram is a view from above.",
+          "Do not accept \"opposite currents repel\" on its own: the direction must be deduced from the field and the current."
+        ]
+      },
+      {
+        "label": "d",
+        "question": "Determine the resultant magnetic field strength, due to the currents in the two leads, at a point midway between them.",
+        "marks": 2,
+        "markscheme": [
+          "midway between the leads the two fields are in the same direction (right-hand grip rule: the point is on opposite sides of two opposite currents), so they add ✓",
+          "$B = 2 \\times \\dfrac{4\\pi \\times 10^{-7} \\times 160}{2\\pi \\times \\tfrac{1}{2} \\times 2.5 \\times 10^{-2}} = 5.1 \\times 10^{-3}\\ \\text{T}$ ✓",
+          "Allow ECF from (a): the answer is 4 × the field in (a)."
+        ],
+        "numeric": {
+          "answer": 0.00512,
+          "unit": "T",
+          "range": [
+            0.00496,
+            0.00528
+          ],
+          "mistakes": [
+            {
+              "value": 0.00256,
+              "feedback": "The fields do add, but the midway point is only half the separation from each lead, so each field is larger than your answer to (a)."
+            }
+          ]
+        }
+      },
+      {
+        "label": "e",
+        "question": "Predict, with a reason, how the force on the straight section of the black lead changes when the leads, still carrying the same currents, are moved so that their centres are twice as far apart.",
+        "marks": 2,
+        "markscheme": [
+          "the magnetic field of the red lead at the black lead is inversely proportional to the distance from it ($B \\propto \\dfrac{1}{r}$), so it halves ✓",
+          "the current and the length are unchanged, so the force ($F = BIL$) also halves ✓",
+          "OR from $\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1 I_2}{2\\pi r}$: the force is inversely proportional to the separation when the currents and the length are unchanged [1], so the force halves [1]."
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "D.3"
+  ],
+  "given": {
+    "I": {
+      "value": 160,
+      "sf": 2,
+      "unit": "A",
+      "range": [
+        50,
+        400
+      ],
+      "what": "current in each lead while the starter motor turns"
+    },
+    "d": {
+      "value": 2.5,
+      "sf": 2,
+      "unit": "cm",
+      "range": [
+        1,
+        10
+      ],
+      "what": "distance between the centres of the two leads"
+    },
+    "L": {
+      "value": 1.8,
+      "sf": 2,
+      "unit": "m",
+      "range": [
+        0.5,
+        5
+      ],
+      "what": "length of the straight parallel section"
+    }
+  },
+  "results": {
+    "B": {
+      "value": 0.00128,
+      "unit": "T",
+      "sf": 2
+    },
+    "F": {
+      "value": 0.36864,
+      "unit": "N",
+      "sf": 2
+    },
+    "Bmid": {
+      "value": 0.00512,
+      "unit": "T",
+      "sf": 2
+    },
+    "wrong_B": {
+      "value": 0.000012800000000000001,
+      "unit": "T",
+      "sf": 2
+    },
+    "wrong_F": {
+      "value": 0.2048,
+      "unit": "N",
+      "sf": 2
+    },
+    "wrong_Bmid": {
+      "value": 0.00256,
+      "unit": "T",
+      "sf": 2
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Calculate",
+      "syllabus": [
+        "D.3.Y1"
+      ],
+      "examinerNote": "The new data-booklet equation for the field of a long straight wire."
+    },
+    {
+      "label": "b",
+      "command": "Determine",
+      "syllabus": [
+        "D.3.5",
+        "D.3.6"
+      ],
+      "examinerNote": "The field of the red lead is perpendicular to the black lead, so sin θ = 1. The force is small, a few tenths of a newton on nearly two metres of cable.",
+      "dependsOn": [
+        "a"
+      ]
+    },
+    {
+      "label": "c",
+      "command": "Deduce",
+      "syllabus": [
+        "D.3.5",
+        "D.3.Y1"
+      ],
+      "examinerNote": "Two steps: the direction of the field, then the direction of the force on a current in that field. The force on the red lead is equal and opposite (towards the top of the diagram), so the leads are pushed apart."
+    },
+    {
+      "label": "d",
+      "command": "Determine",
+      "syllabus": [
+        "D.3.Y1"
+      ],
+      "examinerNote": "With opposite currents the fields reinforce between the leads (and partly cancel outside them). The answer is four times the answer to (a): twice the field, at half the distance. With currents in the same direction the fields at the midpoint would cancel. The guide does not list the addition of magnetic fields separately, but no further equation is needed.",
+      "dependsOn": [
+        "a"
+      ]
+    },
+    {
+      "label": "e",
+      "command": "Predict",
+      "syllabus": [
+        "D.3.Y1",
+        "D.3.6"
+      ],
+      "examinerNote": "Proportional reasoning: the force is inversely proportional to the separation, not to its square."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-d3-jump-leads.svg": "a81b3c1c3aed4ae6f4530ae117f9ab7a515644b037ba362320e11addc73083ae"
+  }
+}

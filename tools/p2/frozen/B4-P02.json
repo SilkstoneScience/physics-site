@@ -1,0 +1,245 @@
+{
+  "question": {
+    "id": "B4-P02",
+    "theme": "B",
+    "topic": "B.4",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "HL",
+    "stem": "<p>A helium liquefier cools helium gas by letting it expand and push a piston. Helium behaves as an ideal monatomic gas.</p><p>A cylinder holds a fixed mass of helium at a pressure of $1.0 \\times 10^{6}$ Pa and a temperature of 60 K, in a volume of $2.0 \\times 10^{-4}$ $\\text{m}^{3}$ (state X). The helium then expands adiabatically, pushing the piston outwards, until its volume is $5.0 \\times 10^{-4}$ $\\text{m}^{3}$ (state Y). The graph shows how the pressure $P$ of the helium varies with its volume $V$ during this expansion.</p>",
+    "diagram": "questions/diagrams/p2-b4-liquefier.svg",
+    "diagramAlt": "Graph of pressure in units of 10 to the power 5 pascal, from 0 to 12, against volume in units of 10 to the power minus 4 cubic metres, from 0 to 6. A curve falls steeply and then more gently from state X at volume 2.0 and pressure 10 to state Y at volume 5.0, where the pressure is a little above 2.",
+    "parts": [
+      {
+        "label": "a",
+        "question": "Show that the pressure of the helium in state Y is about $2.2 \\times 10^{5}$ Pa.",
+        "marks": 2,
+        "markscheme": [
+          "$P_{\\text{X}} V_{\\text{X}}^{5/3} = P_{\\text{Y}} V_{\\text{Y}}^{5/3}$ ✓",
+          "$P_{\\text{Y}} = 1.0 \\times 10^{6} \\times \\left(\\dfrac{2.0 \\times 10^{-4}}{5.0 \\times 10^{-4}}\\right)^{5/3} = 2.17 \\times 10^{5}\\ \\text{Pa}$ ✓",
+          "Do not accept a value read from the graph."
+        ]
+      },
+      {
+        "label": "b",
+        "question": "Determine the temperature of the helium in state Y.",
+        "marks": 2,
+        "markscheme": [
+          "$\\dfrac{PV}{T}$ is constant for a fixed mass of an ideal gas, so $T_{\\text{Y}} = T_{\\text{X}} \\times \\dfrac{P_{\\text{Y}} V_{\\text{Y}}}{P_{\\text{X}} V_{\\text{X}}}$ ✓",
+          "$T_{\\text{Y}} = 60 \\times \\dfrac{2.172 \\times 10^{5} \\times 5.0 \\times 10^{-4}}{1.0 \\times 10^{6} \\times 2.0 \\times 10^{-4}} = 32.6\\ \\text{K}$ ✓",
+          "Allow ECF from (a); accept 31.5 to 33.6 K",
+          "Accept the equivalent $T_{\\text{Y}} = T_{\\text{X}}\\left(\\dfrac{V_{\\text{X}}}{V_{\\text{Y}}}\\right)^{2/3}$."
+        ],
+        "numeric": {
+          "answer": 32.573,
+          "unit": "K",
+          "range": [
+            31.5,
+            33.6
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Determine the work done by the helium on the piston during the expansion.",
+        "marks": 2,
+        "markscheme": [
+          "$Q = 0$, so the work done by the gas equals the decrease in its internal energy, $W = \\tfrac{3}{2}(P_{\\text{X}}V_{\\text{X}} - P_{\\text{Y}}V_{\\text{Y}})$ (from $U = \\tfrac{3}{2}nRT$ and $PV = nRT$) ✓",
+          "$W = \\tfrac{3}{2}(1.0 \\times 10^{6} \\times 2.0 \\times 10^{-4} - 2.172 \\times 10^{5} \\times 5.0 \\times 10^{-4}) = 137\\ \\text{J}$ ✓",
+          "OR $W = \\tfrac{3}{2}nR(T_{\\text{X}} - T_{\\text{Y}})$, with the amount of gas from $PV = nRT$.",
+          "Allow ECF from (a) and (b); accept 131 to 143 J"
+        ],
+        "numeric": {
+          "answer": 137.135,
+          "unit": "J",
+          "range": [
+            131,
+            143
+          ],
+          "mistakes": [
+            {
+              "value": 300,
+              "feedback": "W = PΔV only works when the pressure stays constant, and here it falls. Use the first law instead: no thermal energy is transferred, so the work done equals the decrease in internal energy."
+            },
+            {
+              "value": 91.4233,
+              "feedback": "That is the change in PV. For a monatomic ideal gas the internal energy is 3/2 PV, so the work done is 3/2 of this."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "Explain, in terms of the helium atoms that collide with the piston, why the temperature of the helium falls.",
+        "marks": 2,
+        "markscheme": [
+          "the piston is moving away, so atoms that collide with it rebound with a smaller speed than before: they do work on the piston and lose kinetic energy ✓",
+          "no thermal energy enters to replace it, so the average random kinetic energy of the atoms decreases, and temperature is a measure of this average kinetic energy ✓"
+        ]
+      },
+      {
+        "label": "e",
+        "question": "Sketch, on a copy of the graph, a line to show how the pressure would vary with volume if the helium expanded from state X to the same final volume at constant temperature (isothermally).",
+        "marks": 2,
+        "markscheme": [
+          "a smooth curve from X whose steepness decreases (not a straight line) and which lies above the adiabatic curve at every volume after X ✓",
+          "it ends at the same final volume as Y, at a pressure of $4.0 \\times 10^{5}$ Pa (from $P_{\\text{X}}V_{\\text{X}} = PV$; allow an end point within a quarter of a grid square of this value) ✓",
+          "Note: the examiner's sketch is shown below.<figure><img src=\"questions/diagrams/p2-b4-liquefier-ms.svg\" alt=\"The same graph with a second, dashed curve from X, labelled isothermal. It falls less steeply than the adiabatic curve and ends at the same final volume as Y, at about twice the pressure.\"></figure>"
+        ]
+      },
+      {
+        "label": "f",
+        "question": "Deduce, using your sketch, which of the two expansions does more work on the piston.",
+        "marks": 1,
+        "markscheme": [
+          "the isothermal expansion, because the work done is the area under the line on a pressure–volume graph and its line is higher throughout ✓",
+          "Accept: the pressure, and so the force on the piston, is larger at every volume for the same change in volume. Do not allow ECF from a line drawn below the adiabatic curve in (e)."
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "B.4",
+    "B.3"
+  ],
+  "given": {
+    "p1": {
+      "value": 1000000,
+      "sf": 2,
+      "unit": "Pa",
+      "range": [
+        100000,
+        3000000
+      ],
+      "what": "pressure of the helium before the expansion"
+    },
+    "T1": {
+      "value": 60,
+      "sf": 2,
+      "unit": "K",
+      "range": [
+        10,
+        300
+      ],
+      "what": "temperature of the helium before the expansion"
+    },
+    "V1": {
+      "value": 0.0002,
+      "sf": 2,
+      "unit": "m^3",
+      "range": [
+        0.00001,
+        0.01
+      ],
+      "what": "volume of the helium before the expansion"
+    },
+    "V2": {
+      "value": 0.0005,
+      "sf": 2,
+      "unit": "m^3",
+      "range": [
+        0.00001,
+        0.01
+      ],
+      "what": "volume of the helium after the expansion"
+    }
+  },
+  "results": {
+    "p2": {
+      "value": 217153.40932759253,
+      "unit": "Pa",
+      "sf": 3
+    },
+    "T2": {
+      "value": 32.57301139913888,
+      "unit": "K",
+      "sf": 3
+    },
+    "W": {
+      "value": 137.1349430043056,
+      "unit": "J",
+      "sf": 3
+    },
+    "p2iso": {
+      "value": 400000,
+      "unit": "Pa",
+      "sf": 2
+    },
+    "wrong_W": {
+      "value": 300,
+      "unit": "J",
+      "sf": 3
+    },
+    "wrong_W2": {
+      "value": 91.42329533620374,
+      "unit": "J",
+      "sf": 3
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Show that",
+      "syllabus": [
+        "B.4.H8"
+      ],
+      "examinerNote": "The adiabatic equation from the data booklet for a monatomic ideal gas."
+    },
+    {
+      "label": "b",
+      "command": "Determine",
+      "syllabus": [
+        "B.3.4",
+        "B.4.H7"
+      ],
+      "examinerNote": "The ideal gas law applied to the two states; the amount of gas is not needed. The working uses the unrounded pressure from (a); the rounded value gives a temperature about 1 % higher, inside the accepted range.",
+      "dependsOn": [
+        "a"
+      ]
+    },
+    {
+      "label": "c",
+      "command": "Determine",
+      "syllabus": [
+        "B.4.H1",
+        "B.4.H3",
+        "B.4.H7"
+      ],
+      "examinerNote": "Students cannot find the area under the curve exactly, but the first law with Q = 0 gives the work. The amount of gas is not needed because U = 3/2 PV for a monatomic ideal gas. The working uses the unrounded pressure from (a); the rounded value gives an answer about 2 % smaller, inside the accepted range.",
+      "dependsOn": [
+        "a"
+      ]
+    },
+    {
+      "label": "d",
+      "command": "Explain",
+      "syllabus": [
+        "B.3.8",
+        "B.4.H1"
+      ],
+      "examinerNote": "A particle explanation of the first law for this process. Do not credit \"the gas expands so it cools\" without a reason."
+    },
+    {
+      "label": "e",
+      "command": "Sketch",
+      "syllabus": [
+        "B.4.H7",
+        "B.3.4"
+      ],
+      "examinerNote": "At constant temperature PV is constant, so the pressure falls less quickly than on the adiabat, where the gas is also cooling. Students sketch on paper and compare with the examiner's sketch in the mark scheme."
+    },
+    {
+      "label": "f",
+      "command": "Deduce",
+      "syllabus": [
+        "B.4.H2"
+      ],
+      "examinerNote": "Work done by a gas = area under its P–V line. At constant temperature thermal energy enters the gas and keeps the pressure up."
+    }
+  ],
+  "diagrams": {
+    "questions/diagrams/p2-b4-liquefier.svg": "3e115dbaa0265e7437310a83c8bad2482f465fcbc5948999d2caf8e64f1999c0",
+    "questions/diagrams/p2-b4-liquefier-ms.svg": "2e79cc0fe9f38602dd532f46b01c4332c042d96b9ad8375c90556e41367c383e"
+  }
+}

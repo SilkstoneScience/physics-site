@@ -41,16 +41,16 @@ export const INDEPENDENT = {
     const total = (r) => 0.5 * m.value * speed(r) ** 2 - Gc * M.value * m.value / r;
     return { r1: ra, r2: rb, v1: speed(ra) / 1e3, T1: 2 * Math.PI * ra / speed(ra), E1: total(ra), E2: total(rb), dE: total(rb) - total(ra) };
   },
-  // Cycle worked with temperatures for a pretend 1 mol of gas (the amount cancels), U = 3/2 nRT.
-  'B4-P01': ({ pA, VA, VB }) => {
-    const n = 1, R = 8.31;
-    const pc = pA.value * Math.exp((5 / 3) * Math.log(VA.value / VB.value));
-    const TA = pA.value * VA.value / (n * R), TB = pA.value * VB.value / (n * R), TC = pc * VB.value / (n * R);
-    const U = (T) => 1.5 * n * R * T;
-    const wAB = pA.value * (VB.value - VA.value);
-    const qAB = U(TB) - U(TA) + wAB;
-    const wOnCA = U(TA) - U(TC);
-    return { pC: pc, W_AB: wAB, dU_AB: U(TB) - U(TA), Q_AB: qAB, W_onCA: wOnCA, Wnet: wAB - wOnCA, eff: (wAB - wOnCA) / qAB };
+  // Helium expanding adiabatically: the pressure through logarithms; the temperature from T V^(2/3) = constant (a
+  // different route from the question's pV/T); the work from the amount of gas, W = 3/2 nR(T_X − T_Y); and the end of
+  // the constant-temperature expansion from Boyle's law.
+  'B4-P02': ({ p1, T1, V1, V2 }) => {
+    const R = 8.31;
+    const squeeze = V1.value / V2.value;
+    const pY = p1.value * Math.exp((5 / 3) * Math.log(squeeze));
+    const TY = T1.value * Math.exp((2 / 3) * Math.log(squeeze));
+    const n = p1.value * V1.value / (R * T1.value);
+    return { p2: pY, T2: TY, W: 1.5 * n * R * (T1.value - TY), p2iso: p1.value * V1.value / V2.value };
   },
   // Stopping voltage line V = (h/e)(f − f0): gradient from two points on it; work function = e × (h/e) × f0, in eV.
   'E2-P01': ({ f0, hg }) => {
@@ -149,13 +149,12 @@ export const INDEPENDENT = {
     const GM = omega * omega * rT.value ** 3;
     return { TTs: TT.value * day, M: GM / Gc, TR: 2 * Math.PI * Math.sqrt(rR.value ** 3 / GM) / day };
   },
-  // Parallel wires: B = 2 × 10⁻⁷ I / r (μ0/2π); zero field where I_P/x = I_Q/(d − x), found by bisection.
-  'D3-P01': ({ IP, IQ, d }) => {
-    const r = d.value / 100;
-    const field = 2e-7 * IP.value / r;
-    let lo = 0.0001, hi = d.value - 0.0001;
-    for (let i = 0; i < 200; i++) { const mid = (lo + hi) / 2; if (IP.value / mid - IQ.value / (d.value - mid) > 0) lo = mid; else hi = mid; }
-    return { B: field, FL: field * IQ.value, x0: (lo + hi) / 2 };
+  // Jump leads: B = 2 × 10⁻⁷ I / r (μ0/2π) for a long straight wire; F = BIL on the other lead; midway between the
+  // leads each is half the separation away and, with opposite currents, the two fields point the same way and add.
+  'D3-P02': ({ I, d, L }) => {
+    const r = d.value / 100; // cm to m
+    const field = (dist) => 2e-7 * I.value / dist;
+    return { B: field(r), F: field(r) * I.value * L.value, Bmid: field(r / 2) + field(r / 2) };
   },
   // Bobbing float: ω from the period; v_max = ωx₀; kinetic energy as the difference between the total energy
   // ½mω²x₀² and the potential energy ½mω²x² at the displacement (cm → m, g → kg by hand).

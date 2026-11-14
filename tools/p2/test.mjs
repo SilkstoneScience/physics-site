@@ -185,6 +185,15 @@ export async function runTests() {
   check('a change to an APPROVED question fails the freeze', frozen.diags.some((x) => x.code === 'frozen-changed') && frozen.questions.length === 0);
   check('the fingerprint ignores nothing that students see', fingerprintOf(build([changed]).results[0].content) !== first.fingerprint);
   check('a review record without a question file is an error', build([], { registry: approved }).diags.some((x) => x.code === 'registry'));
+  // Withdrawn questions (review.mjs withdraw): the record moves to "withdrawn", and the id is never used again.
+  const gone = { questions: {}, withdrawn: { 'A1-P90': { date: '2026-11-14', by: 'Teacher', reason: 'test', record: approved.questions['A1-P90'] } } };
+  check('a withdrawn question\'s record needs no question file', !build([], { registry: gone }).diags.some((x) => x.code === 'registry'));
+  check('a withdrawn id is never reused', (() => { const r = build([GOOD_SHORT], { registry: gone }); return r.diags.some((x) => x.code === 'withdrawn-id' && x.level === 'error') && r.questions.length === 0 && r.preview.length === 0; })());
+  check('the real withdrawn questions are not built, and their ids are recorded', (() => {
+    const reg = JSON.parse(fs.readFileSync(new URL('./reviews.json', import.meta.url), 'utf8'));
+    const files = fs.existsSync(new URL('./withdrawn/', import.meta.url)) ? fs.readdirSync(new URL('./withdrawn/', import.meta.url)).map((f) => f.replace(/\.mjs$/, '')).sort() : [];
+    return JSON.stringify(Object.keys(reg.withdrawn || {}).sort()) === JSON.stringify(files) && files.every((id) => !fs.existsSync(new URL(`./questions/${id}.mjs`, import.meta.url)) && !(id in reg.questions));
+  })());
   check('an assistant can\'t record APPROVED', !!reviewProblem({ status: 'TEACHER-REVIEWED' }, 'APPROVED', 'Claude', {}));
   check('reviews can\'t skip a stage', !!reviewProblem({ status: 'AUTO-VALIDATED' }, 'APPROVED', 'Mr Silkstone', {}));
   check('the next stage in order is allowed', reviewProblem({ status: 'AUTO-VALIDATED' }, 'PHYSICS-REVIEWED', 'Mr Silkstone', {}) === null);

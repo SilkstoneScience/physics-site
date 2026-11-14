@@ -29,7 +29,15 @@ node tools/p2/review.mjs set A1-P01 TEACHER-REVIEWED --by "Mr Silkstone (teacher
 node tools/p2/review.mjs reset A1-P01 --by "…" --note "why it changed"
 node tools/p2/review.mjs batch batch-1
 node tools/p2/review.mjs accept-batch batch-1 --by "Mr Silkstone (teacher)" --note "…" [--waive <id> "<reason>"]
+node tools/p2/review.mjs withdraw D3-P01 --by "Mr Silkstone (teacher)" --note "why" [--replaced-by D3-P02]
 ```
+
+**Withdrawing a question** (November 2026): `review.mjs withdraw` takes a question out of the bank for good, on the
+teacher's decision. Its file moves to `tools/p2/withdrawn/` (never built, previewed or published) and its review record
+moves to `"withdrawn"` in `reviews.json`. **Its id is never used again** (the build fails with `withdrawn-id`), because
+students' saved answers are keyed by id: a question that needs a new situation is written as a new question with a new
+id, and the old one is withdrawn (D3-P01 → D3-P02, B4-P01 → B4-P02). Remove the old entry from `independent.mjs`
+(keep a copy in the withdrawn file's header) and repoint any page that links to the old id.
 
 ## Commands (from the physics-site folder)
 
