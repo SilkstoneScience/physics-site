@@ -14,7 +14,9 @@ export default {
     note: 'Written for this bank. Flywheel energy storage has been tested on trams and buses; the tram, the chain of parts (moment of inertia → stored energy → run-down → efficiency → generator → heating of the bearings) and all numbers are our own.',
   },
   given: {
-    M: { value: 300, sf: 2, unit: 'kg', range: [50, 1000], what: 'mass of the flywheel (a uniform disc)' },
+    // 310 kg, not 300 kg (teacher's rule, 14 November 2026): the moment of inertia is then 24.8 kg m², so a student can
+    // show "about 25 kg m²" by giving one more figure. With 300 kg it was 24.0 kg m² exactly.
+    M: { value: 310, sf: 2, unit: 'kg', range: [50, 1000], what: 'mass of the flywheel (a uniform disc)' },
     R: { value: 0.40, sf: 2, unit: 'm', range: [0.1, 1], what: 'radius of the flywheel' },
     w1: { value: 3000, sf: 2, unit: 'rev min^-1', range: [1000, 20000], what: 'full rotation rate of the flywheel' },
     tau: { value: 0.80, sf: 2, unit: 'N m', range: [0.1, 10], what: 'frictional torque in the bearings' },

@@ -7,13 +7,21 @@
 //   node tools/p2/review.mjs batch <batch>
 //       each question's risk class (RED / AMBER / GREEN) and reasons, and the GREEN sample needed
 //   node tools/p2/review.mjs accept-batch <batch> --by "<teacher>" --note "<what was reviewed>" [--waive <id> "<reason>"] … [--recorded-by "<name>"]
+//   node tools/p2/review.mjs withdraw <id> --by "<teacher>" --note "<why>" [--replaced-by <id>] [--recorded-by "<name>"]
+//       takes a question out of the bank for good: its file moves to tools/p2/withdrawn/ (never built or
+//       published) and its review record moves to "withdrawn" in reviews.json. Its id is never used again,
+//       because students' saved answers are keyed by id.
 //
 // A review can only be recorded while the question passes every check, is unchanged since its last review,
 // and its originality check has run (on a computer with the reference cache). TEACHER-REVIEWED and APPROVED
 // must name a person. Never record them without the teacher's explicit decision.
 import { loadQuestions, loadTopics, buildAll, printStatus } from './build.mjs';
 import { loadRegistry, saveRegistry, saveSnapshot, STATUSES, REVIEWED, reviewProblem, NOT_A_PERSON, classify, SAMPLE_FRACTION } from './registry.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
+const HERE = path.dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
 const opt = (name) => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : undefined; };
 const today = () => new Date().toISOString().slice(0, 10);
@@ -21,6 +29,31 @@ const die = (msg) => { console.log(`✗ ${msg}`); process.exit(1); };
 const [cmd = 'status', id, wanted] = args.filter((a, i) => !a.startsWith('--') && !(i > 0 && args[i - 1].startsWith('--')) && !(i > 1 && args[i - 2] === '--waive'));
 
 const registry = loadRegistry();
+
+// Withdrawing comes before the build: the question being withdrawn need not pass any check.
+if (cmd === 'withdraw') {
+  const by = opt('by');
+  if (!id) die('say which question, e.g. review.mjs withdraw D3-P01 --by "<teacher>" --note "<why>"');
+  if (!by || NOT_A_PERSON.test(by)) die('a question can only be withdrawn by a person (the teacher): --by "<name>"');
+  if (!opt('note')) die('say why it is withdrawn, with --note "<text>"');
+  const from = path.join(HERE, 'questions', `${id}.mjs`);
+  const to = path.join(HERE, 'withdrawn', `${id}.mjs`);
+  if (!fs.existsSync(from)) die(`there is no question file tools/p2/questions/${id}.mjs`);
+  if ((registry.withdrawn || {})[id] || fs.existsSync(to)) die(`${id} has already been withdrawn`);
+  fs.mkdirSync(path.dirname(to), { recursive: true });
+  fs.renameSync(from, to);
+  registry.withdrawn = registry.withdrawn || {};
+  registry.withdrawn[id] = {
+    date: opt('date') || today(), by, ...(opt('recorded-by') ? { recordedBy: opt('recorded-by') } : {}),
+    reason: opt('note'), ...(opt('replaced-by') ? { replacedBy: opt('replaced-by') } : {}),
+    record: registry.questions[id] || null,
+  };
+  delete registry.questions[id];
+  saveRegistry(registry);
+  console.log(`✓ ${id} is withdrawn (by ${by}). Its file is now tools/p2/withdrawn/${id}.mjs; its id must never be used again.`);
+  process.exit(0);
+}
+
 const { results, diags } = buildAll(await loadQuestions(), loadTopics(), { registry });
 
 if (cmd === 'status') { printStatus(results); process.exit(0); }

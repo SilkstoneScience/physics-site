@@ -925,122 +925,126 @@
     }
   },
   {
-    "id": "B4-P01",
+    "id": "B4-P02",
     "theme": "B",
     "topic": "B.4",
     "paper": "2",
     "difficulty": 3,
     "level": "HL",
     "sections": [
-      "engines",
       "adiabatic",
       "first",
-      "work",
-      "entropy"
+      "internal",
+      "processes",
+      "work"
     ],
-    "stem": "<p>A fixed mass of a monatomic ideal gas is taken round the cycle A → B → C → A shown on the graph.</p><ul><li>A → B: the gas expands at a constant pressure of $2.0 \\times 10^{5}$ Pa from $1.0 \\times 10^{-3}$ $\\text{m}^{3}$ to $2.0 \\times 10^{-3}$ $\\text{m}^{3}$.</li><li>B → C: the gas cools at constant volume.</li><li>C → A: the gas is compressed adiabatically back to A.</li></ul>",
-    "diagram": "questions/diagrams/p2-b4-cycle.svg",
-    "diagramAlt": "Graph of pressure in units of 10 to the power 5 pascal against volume in units of 10 to the power minus 3 cubic metres. A horizontal line from A at volume 1.0 to B at volume 2.0, both at pressure 2.0. A vertical line down from B to C at volume 2.0 and pressure about 0.63. A curve rising steeply from C back to A.",
+    "stem": "<p>A helium liquefier cools helium gas by letting it expand and push a piston. Helium behaves as an ideal monatomic gas.</p><p>A cylinder holds a fixed mass of helium at a pressure of $1.0 \\times 10^{6}$ Pa and a temperature of 60 K, in a volume of $2.0 \\times 10^{-4}$ $\\text{m}^{3}$ (state X). The helium then expands adiabatically, pushing the piston outwards, until its volume is $5.0 \\times 10^{-4}$ $\\text{m}^{3}$ (state Y). The graph shows how the pressure $P$ of the helium varies with its volume $V$ during this expansion.</p>",
+    "diagram": "questions/diagrams/p2-b4-liquefier.svg",
+    "diagramAlt": "Graph of pressure in units of 10 to the power 5 pascal, from 0 to 12, against volume in units of 10 to the power minus 4 cubic metres, from 0 to 6. A curve falls steeply and then more gently from state X at volume 2.0 and pressure 10 to state Y at volume 5.0, where the pressure is a little above 2.",
     "parts": [
       {
         "label": "a",
         "sections": [
           "adiabatic"
         ],
-        "question": "Show that the pressure at C is about $6.3 \\times 10^{4}$ Pa.",
+        "question": "Show that the pressure of the helium in state Y is about $2.2 \\times 10^{5}$ Pa.",
         "marks": 2,
         "markscheme": [
-          "$p_{\\text{C}} V_{\\text{C}}^{5/3} = p_{\\text{A}} V_{\\text{A}}^{5/3}$ ✓",
-          "$p_{\\text{C}} = 2.0 \\times 10^{5} \\times \\left(\\dfrac{1.0 \\times 10^{-3}}{2.0 \\times 10^{-3}}\\right)^{5/3} = 6.30 \\times 10^{4}\\ \\text{Pa}$ ✓"
+          "$P_{\\text{X}} V_{\\text{X}}^{5/3} = P_{\\text{Y}} V_{\\text{Y}}^{5/3}$ ✓",
+          "$P_{\\text{Y}} = 1.0 \\times 10^{6} \\times \\left(\\dfrac{2.0 \\times 10^{-4}}{5.0 \\times 10^{-4}}\\right)^{5/3} = 2.17 \\times 10^{5}\\ \\text{Pa}$ ✓",
+          "Do not accept a value read from the graph."
         ]
       },
       {
         "label": "b",
         "sections": [
-          "first",
-          "work"
+          "adiabatic"
         ],
-        "question": "Determine the thermal energy transferred to the gas during A → B.",
-        "marks": 3,
+        "question": "Determine the temperature of the helium in state Y.",
+        "marks": 2,
         "markscheme": [
-          "$W = p\\Delta V = 200\\ \\text{J}$ ✓",
-          "$\\Delta U = \\tfrac{3}{2}p\\Delta V$ (from $\\tfrac{3}{2}nR\\Delta T$ and $pV = nRT$) $= 300\\ \\text{J}$ ✓",
-          "$Q = \\Delta U + W = 500\\ \\text{J}$ ✓"
+          "$\\dfrac{PV}{T}$ is constant for a fixed mass of an ideal gas, so $T_{\\text{Y}} = T_{\\text{X}} \\times \\dfrac{P_{\\text{Y}} V_{\\text{Y}}}{P_{\\text{X}} V_{\\text{X}}}$ ✓",
+          "$T_{\\text{Y}} = 60 \\times \\dfrac{2.172 \\times 10^{5} \\times 5.0 \\times 10^{-4}}{1.0 \\times 10^{6} \\times 2.0 \\times 10^{-4}} = 32.6\\ \\text{K}$ ✓",
+          "Allow ECF from (a); accept 31.5 to 33.6 K",
+          "Accept the equivalent $T_{\\text{Y}} = T_{\\text{X}}\\left(\\dfrac{V_{\\text{X}}}{V_{\\text{Y}}}\\right)^{2/3}$."
         ],
         "numeric": {
-          "answer": 500,
-          "unit": "J",
+          "answer": 32.573,
+          "unit": "K",
           "range": [
-            485,
-            515
-          ],
-          "mistakes": [
-            {
-              "value": 200,
-              "feedback": "That is only the work done by the gas. The internal energy of the gas also increases: Q = ΔU + W."
-            }
+            31.5,
+            33.6
           ]
         }
       },
       {
         "label": "c",
         "sections": [
-          "adiabatic",
-          "first"
+          "first",
+          "internal"
         ],
-        "question": "Determine the work done on the gas during C → A.",
+        "question": "Determine the work done by the helium on the piston during the expansion.",
         "marks": 2,
         "markscheme": [
-          "$Q = 0$, so the work done on the gas equals the increase in internal energy ✓",
-          "$\\Delta U = \\tfrac{3}{2}(p_{\\text{A}}V_{\\text{A}} - p_{\\text{C}}V_{\\text{C}}) = 111\\ \\text{J}$ ✓",
-          "Allow ECF from (a); accept 106 to 116 J"
+          "$Q = 0$, so the work done by the gas equals the decrease in its internal energy, $W = \\tfrac{3}{2}(P_{\\text{X}}V_{\\text{X}} - P_{\\text{Y}}V_{\\text{Y}})$ (from $U = \\tfrac{3}{2}nRT$ and $PV = nRT$) ✓",
+          "$W = \\tfrac{3}{2}(1.0 \\times 10^{6} \\times 2.0 \\times 10^{-4} - 2.172 \\times 10^{5} \\times 5.0 \\times 10^{-4}) = 137\\ \\text{J}$ ✓",
+          "OR $W = \\tfrac{3}{2}nR(T_{\\text{X}} - T_{\\text{Y}})$, with the amount of gas from $PV = nRT$.",
+          "Allow ECF from (a) and (b); accept 131 to 143 J"
         ],
         "numeric": {
-          "answer": 111.012,
+          "answer": 137.135,
           "unit": "J",
           "range": [
-            106,
-            116
+            131,
+            143
+          ],
+          "mistakes": [
+            {
+              "value": 300,
+              "feedback": "W = PΔV only works when the pressure stays constant, and here it falls. Use the first law instead: no thermal energy is transferred, so the work done equals the decrease in internal energy."
+            },
+            {
+              "value": 91.4233,
+              "feedback": "That is the change in PV. For a monatomic ideal gas the internal energy is 3/2 PV, so the work done is 3/2 of this."
+            }
           ]
         }
       },
       {
         "label": "d",
         "sections": [
-          "engines"
+          "internal"
         ],
-        "question": "Calculate the efficiency of this cycle.",
+        "question": "Explain, in terms of the helium atoms that collide with the piston, why the temperature of the helium falls.",
         "marks": 2,
         "markscheme": [
-          "net work $= 200 - 111 = 89.0\\ \\text{J}$ (no work during B → C) ✓",
-          "$\\eta = \\dfrac{89.0}{500} = 0.18$ ✓",
-          "Allow ECF from (b) and (c); accept 0.167 to 0.189"
-        ],
-        "numeric": {
-          "answer": 0.177976,
-          "range": [
-            0.167,
-            0.189
-          ],
-          "mistakes": [
-            {
-              "value": 0.4,
-              "feedback": "Efficiency uses the NET work done by the gas over the whole cycle: subtract the work done on the gas during C → A."
-            }
-          ]
-        }
+          "the piston is moving away, so atoms that collide with it rebound with a smaller speed than before: they do work on the piston and lose kinetic energy ✓",
+          "no thermal energy enters to replace it, so the average random kinetic energy of the atoms decreases, and temperature is a measure of this average kinetic energy ✓"
+        ]
       },
       {
         "label": "e",
         "sections": [
-          "adiabatic",
-          "entropy"
+          "processes"
         ],
-        "question": "Explain why the entropy of the gas does not change during C → A.",
+        "question": "Sketch, on a copy of the graph, a line to show how the pressure would vary with volume if the helium expanded from state X to the same final volume at constant temperature (isothermally).",
         "marks": 2,
         "markscheme": [
-          "No thermal energy is transferred to or from the gas during an adiabatic change ($Q = 0$) ✓",
-          "so $\\Delta S = \\dfrac{\\Delta Q}{T} = 0$ (the change is treated as reversible) ✓"
+          "a smooth curve from X whose steepness decreases (not a straight line) and which lies above the adiabatic curve at every volume after X ✓",
+          "it ends at the same final volume as Y, at a pressure of $4.0 \\times 10^{5}$ Pa (from $P_{\\text{X}}V_{\\text{X}} = PV$; allow an end point within a quarter of a grid square of this value) ✓",
+          "Note: the examiner's sketch is shown below.<figure><img src=\"questions/diagrams/p2-b4-liquefier-ms.svg\" alt=\"The same graph with a second, dashed curve from X, labelled isothermal. It falls less steeply than the adiabatic curve and ends at the same final volume as Y, at about twice the pressure.\"></figure>"
+        ]
+      },
+      {
+        "label": "f",
+        "sections": [
+          "work"
+        ],
+        "question": "Deduce, using your sketch, which of the two expansions does more work on the piston.",
+        "marks": 1,
+        "markscheme": [
+          "the isothermal expansion, because the work done is the area under the line on a pressure–volume graph and its line is higher throughout ✓",
+          "Accept: the pressure, and so the force on the piston, is larger at every volume for the same change in volume. Do not allow ECF from a line drawn below the adiabatic curve in (e)."
         ]
       }
     ],
@@ -1083,22 +1087,22 @@
         "sections": [
           "combos"
         ],
-        "question": "At 0 °C the resistance of the thermistor is 3.3 $\\mathrm{k\\Omega}$. Calculate, in mA, the current in the circuit at this temperature.",
+        "question": "At 0 °C the resistance of the thermistor is 4.7 $\\mathrm{k\\Omega}$. Calculate, in mA, the current in the circuit at this temperature.",
         "marks": 2,
         "markscheme": [
-          "total resistance $= 2.2 + 3.3 = 5.5\\ \\mathrm{k\\Omega}$ ✓",
-          "$I = \\dfrac{9.0}{5.5 \\times 10^{3}} = 1.64\\ \\text{mA}$ ✓"
+          "total resistance $= 2.2 + 4.7 = 6.9\\ \\mathrm{k\\Omega}$ ✓",
+          "$I = \\dfrac{9.0}{6.9 \\times 10^{3}} = 1.30\\ \\text{mA}$ ✓"
         ],
         "numeric": {
-          "answer": 1.63636,
+          "answer": 1.30435,
           "unit": "mA",
           "range": [
-            1.58,
-            1.69
+            1.26,
+            1.35
           ],
           "mistakes": [
             {
-              "value": 2.72727,
+              "value": 1.91489,
               "feedback": "The thermistor and the fixed resistor are in series: use the total resistance."
             }
           ]
@@ -1109,10 +1113,10 @@
         "sections": [
           "divider"
         ],
-        "question": "Show that the potential difference across the thermistor at 0 °C is about 5.4 V.",
+        "question": "Show that the potential difference across the thermistor at 0 °C is about 6.1 V.",
         "marks": 1,
         "markscheme": [
-          "$V = IR_{\\text{T}}$ OR $V = \\dfrac{3.3}{5.5} \\times 9.0 = 5.40\\ \\text{V}$ ✓"
+          "$V = IR_{\\text{T}}$ OR $V = \\dfrac{4.7}{6.9} \\times 9.0 = 6.13\\ \\text{V}$ ✓"
         ]
       },
       {
@@ -1123,20 +1127,20 @@
         "question": "Calculate, in mW, the power dissipated in the fixed resistor at 0 °C.",
         "marks": 2,
         "markscheme": [
-          "$P = I^2 R = (1.64 \\times 10^{-3})^2 \\times 2.2 \\times 10^{3}$ ✓",
-          "$P = 5.89\\ \\text{mW}$ ✓",
-          "Allow ECF from (b); accept 5.59 to 6.13 mW"
+          "$P = I^2 R = (1.30 \\times 10^{-3})^2 \\times 2.2 \\times 10^{3}$ ✓",
+          "$P = 3.74\\ \\text{mW}$ ✓",
+          "Allow ECF from (b); accept 3.55 to 3.90 mW"
         ],
         "numeric": {
-          "answer": 5.89091,
+          "answer": 3.74291,
           "unit": "mW",
           "range": [
-            5.59,
-            6.13
+            3.55,
+            3.9
           ],
           "mistakes": [
             {
-              "value": 14.7273,
+              "value": 11.7391,
               "feedback": "That is the power in the whole circuit. Use the resistance of the fixed resistor only."
             }
           ]
@@ -1148,12 +1152,12 @@
           "divider",
           "resistance"
         ],
-        "question": "The alarm sounds when the potential difference across the thermistor is greater than 5.4 V. Explain why the alarm sounds when the temperature falls below 0 °C.",
+        "question": "The alarm sounds when the potential difference across the thermistor is greater than 6.1 V. Explain why the alarm sounds when the temperature falls below 0 °C.",
         "marks": 3,
         "markscheme": [
           "As the temperature falls, the resistance of the thermistor increases (so the total resistance increases) ✓",
           "so the current decreases and the potential difference across the fixed resistor ($IR$) decreases ✓",
-          "the emf is shared between the two components, so the potential difference across the thermistor increases above 5.4 V ✓"
+          "the emf is shared between the two components, so the potential difference across the thermistor increases above 6.1 V ✓"
         ]
       }
     ],
@@ -1754,7 +1758,7 @@
       "pipes"
     ],
     "y2028": true,
-    "stem": "<p>An organ pipe of length 0.85 m has one closed end; its other end is open. Sound travels through the air inside it at 340 $\\text{m s}^{-1}$.</p>",
+    "stem": "<p>An organ pipe of length 0.84 m has one closed end; its other end is open. Sound travels through the air inside it at 340 $\\text{m s}^{-1}$.</p>",
     "parts": [
       {
         "label": "a",
@@ -1764,7 +1768,7 @@
         "question": "Show that the wavelength of the first harmonic is about 3.4 m.",
         "marks": 1,
         "markscheme": [
-          "a quarter of a wavelength fits the pipe (node at the closed end, antinode at the open end), so $\\lambda = 4L = 4 \\times 0.85 = 3.4\\ \\text{m}$ ✓"
+          "a quarter of a wavelength fits the pipe (node at the closed end, antinode at the open end), so $\\lambda = 4L = 4 \\times 0.84 = 3.36\\ \\text{m}$ ✓"
         ]
       },
       {
@@ -1775,18 +1779,19 @@
         "question": "Calculate the frequency of the first harmonic.",
         "marks": 1,
         "markscheme": [
-          "$f = \\dfrac{v}{\\lambda} = \\dfrac{340}{3.4} = 100\\ \\text{Hz}$ ✓"
+          "$f = \\dfrac{v}{\\lambda} = \\dfrac{340}{3.36} = 101\\ \\text{Hz}$ ✓",
+          "Accept 98.1 to 105 Hz (using the rounded 3.4 m from (a) gives 100 Hz)."
         ],
         "numeric": {
-          "answer": 100,
+          "answer": 101.19,
           "unit": "Hz",
           "range": [
-            97,
-            103
+            98.1,
+            105
           ],
           "mistakes": [
             {
-              "value": 200,
+              "value": 202.381,
               "feedback": "That is the first harmonic of a pipe open at both ends (λ = 2L). For a pipe closed at one end, λ = 4L."
             }
           ]
@@ -1801,7 +1806,7 @@
         "marks": 3,
         "markscheme": [
           "next standing waves have $L = \\tfrac{3\\lambda}{4}$ and $L = \\tfrac{5\\lambda}{4}$ ✓",
-          "frequencies 300 Hz and 500 Hz ✓",
+          "frequencies 304 Hz and 506 Hz ✓",
           "these are the third and fifth harmonics (harmonic number = frequency ÷ first-harmonic frequency) ✓",
           "Allow ECF from (b)."
         ]
@@ -1826,14 +1831,14 @@
         "question": "The closed end is opened, so that the pipe is open at both ends. Calculate the new frequency of the first harmonic.",
         "marks": 1,
         "markscheme": [
-          "antinodes at both ends, so $\\lambda = 2L$ and $f = \\dfrac{340}{2 \\times 0.85} = 200\\ \\text{Hz}$ ✓"
+          "antinodes at both ends, so $\\lambda = 2L$ and $f = \\dfrac{340}{2 \\times 0.84} = 202\\ \\text{Hz}$ ✓"
         ],
         "numeric": {
-          "answer": 200,
+          "answer": 202.381,
           "unit": "Hz",
           "range": [
-            194,
-            206
+            196,
+            209
           ]
         }
       }
@@ -2279,7 +2284,7 @@
     }
   },
   {
-    "id": "D3-P01",
+    "id": "D3-P02",
     "theme": "D",
     "topic": "D.3",
     "paper": "2",
@@ -2289,32 +2294,32 @@
       "parallel"
     ],
     "y2028": true,
-    "stem": "<p>Two long straight parallel wires, P and Q, are 6.0 cm apart in air. P carries a current of 15 A and Q carries a current of 5.0 A in the same direction.</p>",
-    "diagram": "questions/diagrams/p2-d3-wires.svg",
-    "diagramAlt": "Two long vertical wires, P on the left and Q on the right, 6.0 cm apart. Arrows show that both currents flow upwards: 15 A in P and 5.0 A in Q.",
+    "stem": "<p>A car with a flat battery is started using jump leads: two long flexible cables that join it to the battery of a second car. While the starter motor turns, each lead carries a current of 160 A. The current goes to the starter motor along the red lead and comes back along the black lead, so the currents in the two leads are in opposite directions.</p><p>Along a straight section of length 1.8 m the two leads lie parallel to each other, with their centres 2.5 cm apart, as shown. Along this section each lead can be treated as a very long straight wire.</p>",
+    "diagram": "questions/diagrams/p2-d3-jump-leads.svg",
+    "diagramAlt": "Two long parallel cables seen from above. The upper one, labelled red lead, carries 160 A to the right. The lower one, labelled black lead, carries 160 A to the left. Their centres are 2.5 cm apart and the straight section is 1.8 m long. Not to scale.",
     "parts": [
       {
         "label": "a",
         "sections": [
           "parallel"
         ],
-        "question": "Calculate the magnetic field strength due to P at the position of Q.",
+        "question": "Calculate the magnetic field strength at the black lead due to the current in the red lead.",
         "marks": 2,
         "markscheme": [
           "$B = \\dfrac{\\mu_0 I}{2\\pi r}$ with $r$ in metres ✓",
-          "$B = \\dfrac{4\\pi \\times 10^{-7} \\times 15}{2\\pi \\times 6.0 \\times 10^{-2}} = 5.0 \\times 10^{-5}\\ \\text{T}$ ✓"
+          "$B = \\dfrac{4\\pi \\times 10^{-7} \\times 160}{2\\pi \\times 2.5 \\times 10^{-2}} = 1.3 \\times 10^{-3}\\ \\text{T}$ ✓"
         ],
         "numeric": {
-          "answer": 0.00005,
+          "answer": 0.00128,
           "unit": "T",
           "range": [
-            0.0000485,
-            0.0000516
+            0.00124,
+            0.00132
           ],
           "mistakes": [
             {
-              "value": 5e-7,
-              "feedback": "Convert the distance to metres: 6.0 cm = 0.060 m."
+              "value": 0.0000128,
+              "feedback": "Convert the distance between the leads to metres before using it."
             }
           ]
         }
@@ -2324,18 +2329,25 @@
         "sections": [
           "parallel"
         ],
-        "question": "Determine the force on each metre of wire Q.",
+        "question": "Determine the magnetic force on the straight section of the black lead.",
         "marks": 2,
         "markscheme": [
-          "$F = BIL$, so $\\dfrac{F}{L} = BI_{\\text{Q}}$ (OR $\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1 I_2}{2\\pi r}$) ✓",
-          "$\\dfrac{F}{L} = 5.0 \\times 10^{-5} \\times 5.0 = 2.5 \\times 10^{-4}\\ \\text{N m}^{-1}$; allow ECF from (a) ✓"
+          "$F = BIL$, with the field from (a) at right angles to the lead (OR $\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1 I_2}{2\\pi r}$) ✓",
+          "$F = 1.3 \\times 10^{-3} \\times 160 \\times 1.8 = 0.37\\ \\text{N}$ ✓",
+          "Allow ECF from (a); accept 0.353 to 0.384 N"
         ],
         "numeric": {
-          "answer": 0.00025,
-          "unit": "$\\text{N m}^{-1}$",
+          "answer": 0.36864,
+          "unit": "N",
           "range": [
-            0.000242,
-            0.000258
+            0.353,
+            0.384
+          ],
+          "mistakes": [
+            {
+              "value": 0.2048,
+              "feedback": "That is the force on each metre of the lead. Multiply by the length of the straight section."
+            }
           ]
         }
       },
@@ -2344,11 +2356,13 @@
         "sections": [
           "parallel"
         ],
-        "question": "Outline how the force on P compares with the force on Q, in both magnitude and direction.",
+        "question": "Deduce, using the diagram, which way the magnetic force acts on the black lead.",
         "marks": 2,
         "markscheme": [
-          "the forces are equal in magnitude, even though the currents are different (Newton's third law) ✓",
-          "they are in opposite directions: each wire is attracted towards the other, because the currents are in the same direction ✓"
+          "the magnetic field of the red lead at the black lead is directed into the page (right-hand grip rule for a current to the right, at a point below the wire) ✓",
+          "the current in the black lead is to the left, so the force on it is towards the bottom of the diagram, away from the red lead (left-hand rule, or any equivalent rule) ✓",
+          "Accept \"away from the red lead\" or \"towards the bottom of the diagram\". Do not accept \"downwards\" unless it clearly means down the page: the diagram is a view from above.",
+          "Do not accept \"opposite currents repel\" on its own: the direction must be deduced from the field and the current."
         ]
       },
       {
@@ -2356,20 +2370,40 @@
         "sections": [
           "parallel"
         ],
-        "question": "At one point on the line between P and Q, the resultant magnetic field due to the two wires is zero. Determine the distance of this point from P.",
+        "question": "Determine the resultant magnetic field strength, due to the currents in the two leads, at a point midway between them.",
         "marks": 2,
         "markscheme": [
-          "between the wires the two fields are in opposite directions, so $\\dfrac{\\mu_0 I_{\\text{P}}}{2\\pi x} = \\dfrac{\\mu_0 I_{\\text{Q}}}{2\\pi (d - x)}$ ✓",
-          "$\\dfrac{15}{x} = \\dfrac{5.0}{6.0 - x}$, so $x = 4.5\\ \\text{cm}$ from P ✓"
+          "midway between the leads the two fields are in the same direction (right-hand grip rule: the point is on opposite sides of two opposite currents), so they add ✓",
+          "$B = 2 \\times \\dfrac{4\\pi \\times 10^{-7} \\times 160}{2\\pi \\times \\tfrac{1}{2} \\times 2.5 \\times 10^{-2}} = 5.1 \\times 10^{-3}\\ \\text{T}$ ✓",
+          "Allow ECF from (a): the answer is 4 × the field in (a)."
         ],
         "numeric": {
-          "answer": 4.5,
-          "unit": "cm",
+          "answer": 0.00512,
+          "unit": "T",
           "range": [
-            4.36,
-            4.64
+            0.00496,
+            0.00528
+          ],
+          "mistakes": [
+            {
+              "value": 0.00256,
+              "feedback": "The fields do add, but the midway point is only half the separation from each lead, so each field is larger than your answer to (a)."
+            }
           ]
         }
+      },
+      {
+        "label": "e",
+        "sections": [
+          "parallel"
+        ],
+        "question": "Predict, with a reason, how the force on the straight section of the black lead changes when the leads, still carrying the same currents, are moved so that their centres are twice as far apart.",
+        "marks": 2,
+        "markscheme": [
+          "the magnetic field of the red lead at the black lead is inversely proportional to the distance from it ($B \\propto \\dfrac{1}{r}$), so it halves ✓",
+          "the current and the length are unchanged, so the force ($F = BIL$) also halves ✓",
+          "OR from $\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1 I_2}{2\\pi r}$: the force is inversely proportional to the separation when the currents and the length are unchanged [1], so the force halves [1]."
+        ]
       }
     ],
     "review": {
@@ -3086,16 +3120,16 @@
     "paper": "2L",
     "difficulty": 3,
     "level": "HL",
-    "stem": "<p>A tram stores energy in a flywheel, a uniform disc of mass 300 kg and radius 0.40 m that spins about its central axis. The moment of inertia of a uniform disc is $I = \\tfrac{1}{2}MR^2$. At full speed the flywheel rotates at 3000 $\\text{rev min}^{-1}$.</p>",
+    "stem": "<p>A tram stores energy in a flywheel, a uniform disc of mass 310 kg and radius 0.40 m that spins about its central axis. The moment of inertia of a uniform disc is $I = \\tfrac{1}{2}MR^2$. At full speed the flywheel rotates at 3000 $\\text{rev min}^{-1}$.</p>",
     "diagram": "questions/diagrams/p2-lqh02-flywheel.svg",
     "diagramAlt": "A uniform disc of mass M seen face on, with its radius R drawn from the centre to the edge and a curved arrow showing it spinning with angular speed omega about its centre.",
     "parts": [
       {
         "label": "a(i)",
-        "question": "Show that the moment of inertia of the flywheel is about 24 $\\text{kg m}^{2}$.",
+        "question": "Show that the moment of inertia of the flywheel is about 25 $\\text{kg m}^{2}$.",
         "marks": 1,
         "markscheme": [
-          "$I = \\tfrac{1}{2} \\times 300 \\times 0.40^2 = 24.0\\ \\text{kg m}^{2}$ ✓"
+          "$I = \\tfrac{1}{2} \\times 310 \\times 0.40^2 = 24.8\\ \\text{kg m}^{2}$ ✓"
         ]
       },
       {
@@ -3104,18 +3138,18 @@
         "marks": 2,
         "markscheme": [
           "$\\omega = \\dfrac{3000 \\times 2\\pi}{60} = 314\\ \\text{rad s}^{-1}$ ✓",
-          "$E_{\\text{k}} = \\tfrac{1}{2}I\\omega^2 = 1.18 \\times 10^{6}\\ \\text{J}$; allow ECF from (a)(i) ✓"
+          "$E_{\\text{k}} = \\tfrac{1}{2}I\\omega^2 = 1.22 \\times 10^{6}\\ \\text{J}$; allow ECF from (a)(i) ✓"
         ],
         "numeric": {
-          "answer": 1184350,
+          "answer": 1223830,
           "unit": "J",
           "range": [
-            1140000,
-            1220000
+            1180000,
+            1270000
           ],
           "mistakes": [
             {
-              "value": 30000,
+              "value": 31000,
               "feedback": "Convert the rotation rate to an angular speed in rad s⁻¹: multiply revolutions per second by 2π."
             }
           ]
@@ -3126,15 +3160,15 @@
         "question": "The tram is parked and the flywheel is left spinning freely from full speed. The only torque on it is a constant frictional torque of 0.80 $\\text{N m}$ in the bearings. Determine the time taken for the flywheel to stop.",
         "marks": 2,
         "markscheme": [
-          "$\\alpha = \\dfrac{\\tau}{I} = 0.0333\\ \\text{rad s}^{-2}$ ✓",
-          "$t = \\dfrac{\\omega}{\\alpha} = 9420\\ \\text{s}$; allow ECF from (a)(i) and (a)(ii) ✓"
+          "$\\alpha = \\dfrac{\\tau}{I} = 0.0323\\ \\text{rad s}^{-2}$ ✓",
+          "$t = \\dfrac{\\omega}{\\alpha} = 9740\\ \\text{s}$; allow ECF from (a)(i) and (a)(ii) ✓"
         ],
         "numeric": {
-          "answer": 9424.78,
+          "answer": 9738.94,
           "unit": "s",
           "range": [
-            9140,
-            9710
+            9440,
+            10100
           ]
         }
       },
@@ -3144,13 +3178,13 @@
         "marks": 2,
         "markscheme": [
           "$\\Delta\\theta = \\dfrac{\\omega_{\\text{i}} + \\omega_{\\text{f}}}{2}t$ (OR $\\omega_{\\text{i}}^2 = 2\\alpha\\Delta\\theta$) ✓",
-          "number of revolutions $= \\dfrac{\\Delta\\theta}{2\\pi} = 2.36 \\times 10^{5}$; allow ECF from (a)(iii) ✓"
+          "number of revolutions $= \\dfrac{\\Delta\\theta}{2\\pi} = 2.43 \\times 10^{5}$; allow ECF from (a)(iii) ✓"
         ],
         "numeric": {
-          "answer": 235619,
+          "answer": 243473,
           "range": [
-            228000,
-            243000
+            236000,
+            251000
           ]
         }
       },
@@ -3159,19 +3193,19 @@
         "question": "The flywheel is used to accelerate the tram, of mass $1.8 \\times 10^{4}$ kg, from rest to 6.0 $\\text{m s}^{-1}$ on level track. During this time the flywheel slows from 3000 $\\text{rev min}^{-1}$ to 2400 $\\text{rev min}^{-1}$. Determine the efficiency of this energy transfer.",
         "marks": 3,
         "markscheme": [
-          "energy given up by the flywheel $= \\tfrac{1}{2}I(\\omega_1^2 - \\omega_2^2) = 4.26 \\times 10^{5}\\ \\text{J}$ ✓",
+          "energy given up by the flywheel $= \\tfrac{1}{2}I(\\omega_1^2 - \\omega_2^2) = 4.41 \\times 10^{5}\\ \\text{J}$ ✓",
           "kinetic energy gained by the tram $= \\tfrac{1}{2}mv^2 = 3.24 \\times 10^{5}\\ \\text{J}$ ✓",
-          "$\\eta = \\dfrac{3.24 \\times 10^{5}}{4.26 \\times 10^{5}} = 0.76$; allow ECF from (a)(i) ✓"
+          "$\\eta = \\dfrac{3.24 \\times 10^{5}}{4.41 \\times 10^{5}} = 0.74$; allow ECF from (a)(i) ✓"
         ],
         "numeric": {
-          "answer": 0.759909,
+          "answer": 0.735396,
           "range": [
-            0.721,
-            0.798
+            0.698,
+            0.773
           ],
           "mistakes": [
             {
-              "value": 0.273567,
+              "value": 0.264742,
               "feedback": "Use the energy the flywheel actually gave up (from the change in its rotation rate), not all the energy it stored."
             }
           ]
@@ -3227,14 +3261,14 @@
         "marks": 2,
         "markscheme": [
           "$Q = mc\\Delta T$ with $Q$ = the energy stored at full speed ✓",
-          "$\\Delta T = 58.5\\ \\text{K}$; allow ECF from (a)(ii) ✓"
+          "$\\Delta T = 60.4\\ \\text{K}$; allow ECF from (a)(ii) ✓"
         ],
         "numeric": {
-          "answer": 58.4865,
+          "answer": 60.4361,
           "unit": "K",
           "range": [
-            56.1,
-            60.9
+            58,
+            62.9
           ]
         }
       }

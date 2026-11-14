@@ -1,3 +1,17 @@
+// WITHDRAWN on the teacher's decision (14 November 2026): its cycle (constant pressure, constant volume, then back to the start) and three of its parts repeated the hand-written B4-013. Replaced by B4-P02 (helium liquefier, one adiabatic expansion).
+// Kept here, outside tools/p2/questions, so it is never built, previewed or published, and its id is never used again
+// (students' saved answers are keyed by id). Its review record is under "withdrawn" in tools/p2/reviews.json.
+// Its independent check, removed from tools/p2/independent.mjs, was:
+//   'B4-P01': ({ pA, VA, VB }) => {
+//     const n = 1, R = 8.31;
+//     const pc = pA.value * Math.exp((5 / 3) * Math.log(VA.value / VB.value));
+//     const TA = pA.value * VA.value / (n * R), TB = pA.value * VB.value / (n * R), TC = pc * VB.value / (n * R);
+//     const U = (T) => 1.5 * n * R * T;
+//     const wAB = pA.value * (VB.value - VA.value);
+//     const qAB = U(TB) - U(TA) + wAB;
+//     const wOnCA = U(TA) - U(TC);
+//     return { pC: pc, W_AB: wAB, dU_AB: U(TB) - U(TA), Q_AB: qAB, W_onCA: wOnCA, Wnet: wAB - wOnCA, eff: (wAB - wOnCA) / qAB };
+//   },
 // B4-P01: a three-stage cycle with an adiabatic compression (first law, efficiency, entropy).
 export default {
   id: 'B4-P01',
@@ -15,7 +29,10 @@ export default {
     note: 'Written for this bank from the B.4 understandings. Deliberately different from the May 2025 TZ3 cycle: stages isobaric, isovolumetric and adiabatic (PV^(5/3) = constant), work on the adiabatic stage from the first law with Q = 0, and an entropy part; no amount of gas is given.',
   },
   given: {
-    pA: { value: 2.0e5, sf: 2, unit: 'Pa', range: [5e4, 1e6], what: 'pressure at A and B' },
+    // 2.5 × 10⁵ Pa, not 2.0 × 10⁵ Pa (teacher's rule, 14 November 2026): the pressure at C is then 7.87 × 10⁴ Pa, so a
+    // student can show "about 7.9 × 10⁴ Pa" by giving one more figure. With 2.0 × 10⁵ Pa it was 6.30 × 10⁴ Pa. 2.5 was
+    // chosen so that A and B stay on a gridline of the graph (questions/diagrams/p2-b4-cycle.svg, redrawn to match).
+    pA: { value: 2.5e5, sf: 2, unit: 'Pa', range: [5e4, 1e6], what: 'pressure at A and B' },
     VA: { value: 1.0e-3, sf: 2, unit: 'm^3', range: [1e-4, 1e-2], what: 'volume at A' },
     VB: { value: 2.0e-3, sf: 2, unit: 'm^3', range: [2e-4, 2e-2], what: 'volume at B and C' },
   },
@@ -40,7 +57,7 @@ export default {
     };
   },
   stem: '<p>A fixed mass of a monatomic ideal gas is taken round the cycle A → B → C → A shown on the graph.</p><ul><li>A → B: the gas expands at a constant pressure of [[pA]] from [[VA]] to [[VB]].</li><li>B → C: the gas cools at constant volume.</li><li>C → A: the gas is compressed adiabatically back to A.</li></ul>',
-  diagram: { file: 'questions/diagrams/p2-b4-cycle.svg', alt: 'Graph of pressure in units of 10 to the power 5 pascal against volume in units of 10 to the power minus 3 cubic metres. A horizontal line from A at volume 1.0 to B at volume 2.0, both at pressure 2.0. A vertical line down from B to C at volume 2.0 and pressure about 0.63. A curve rising steeply from C back to A.' },
+  diagram: { file: 'questions/diagrams/p2-b4-cycle.svg', alt: 'Graph of pressure in units of 10 to the power 5 pascal against volume in units of 10 to the power minus 3 cubic metres. A horizontal line from A at volume 1.0 to B at volume 2.0, both at pressure 2.5. A vertical line down from B to C at volume 2.0 and pressure about 0.8. A curve rising steeply from C back to A.' },
   parts: [
     {
       label: 'a', sections: ['adiabatic'], command: 'Show that', marks: 2, syllabus: ['B.4.H8'],
