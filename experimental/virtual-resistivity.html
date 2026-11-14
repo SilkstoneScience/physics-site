@@ -88,7 +88,7 @@
         <tbody>
           <tr><td><strong>Independent:</strong> length $L$</td><td>Read the metre rule at the sliding clip, to the nearest mm. The fixed clip is at the zero, so two readings are involved and the uncertainty is one full division, ±0.001 m.</td></tr>
           <tr><td><strong>Dependent:</strong> resistance $R$</td><td>Calculated from the voltmeter reading $V$ (0–2 V scale, divisions of 0.05 V, so ±0.025 V) and the ammeter reading $I$ (0–1 A scale, divisions of 0.02 A, so ±0.01 A).</td></tr>
-          <tr><td><strong>Measured once for the wire:</strong> diameter $d$</td><td>A digital micrometer that reads to 0.01 mm. The wire isn't perfectly uniform, so measure it at several points and use the mean, with half the range as the uncertainty.</td></tr>
+          <tr><td><strong>Measured once for the wire:</strong> diameter $d$</td><td>A digital micrometer that reads to 0.01 mm. The wire isn't perfectly uniform, so measure it at several points and use the mean, with half the range as the uncertainty (or ±0.01 mm, the micrometer's own uncertainty, if half the range is smaller).</td></tr>
           <tr><td><strong>Control:</strong> the wire and its temperature</td><td>The same wire throughout. Open the switch between readings so the current doesn't warm the wire, because resistance changes with temperature.</td></tr>
         </tbody>
       </table>
@@ -112,7 +112,7 @@
     <ol>
       <li>Correct each meter reading for any zero error: subtract the zero error from every reading.</li>
       <li>Calculate $R = V/I$ for each length. Its fractional uncertainty is the sum of the fractional uncertainties of $V$ and $I$ (see <a href="../skills.html#propagating">propagating uncertainties</a>).</li>
-      <li>Find the mean diameter and its uncertainty (half the range). Convert it to metres, then calculate $A = \pi d^2/4$. Because $d$ is squared, $\dfrac{\Delta A}{A} = 2\,\dfrac{\Delta d}{d}$.</li>
+      <li>Find the mean diameter and its uncertainty (half the range, or ±0.01 mm if that is larger). Convert it to metres, then calculate $A = \pi d^2/4$. Because $d$ is squared, $\dfrac{\Delta A}{A} = 2\,\dfrac{\Delta d}{d}$.</li>
       <li>Plot $R$ against $L$ with uncertainty bars, and draw the line of best fit (see <a href="../skills.html#graphs">graphs</a>).</li>
       <li>Find the gradient and its uncertainty from the steepest and shallowest lines (see <a href="../skills.html#gradient-uncertainty">uncertainty in the gradient</a>).</li>
       <li>Calculate $\rho = \text{gradient} \times A$. Add the fractional uncertainties of the gradient and of $A$.</li>
@@ -123,7 +123,7 @@
       <p>For a length of 0.452 m, a student reads 1.15 V on the voltmeter and 0.38 A on the ammeter (after correcting for its zero error). The meters can be read to ±0.025 V and ±0.01 A. Find the resistance with its uncertainty.</p>
       <p>$R = \dfrac{1.15}{0.38} = 3.03$ Ω.</p>
       <p>$\dfrac{\Delta R}{R} = \dfrac{0.025}{1.15} + \dfrac{0.01}{0.38} = 0.022 + 0.026 = 0.048$</p>
-      <p>$\Delta R = 0.048 \times 3.03 = 0.15$ Ω, so $R = (3.0 \pm 0.1)$ Ω. The ammeter gives the bigger share of the uncertainty, and it gets worse for longer wires, where the current is smaller.</p>
+      <p>$\Delta R = 0.048 \times 3.03 = 0.145$ Ω, so $R = (3.0 \pm 0.1)$ Ω. The ammeter gives the bigger share of the uncertainty, and it gets worse for longer wires, where the current is smaller.</p>
     </div>
 
     <div class="worked">

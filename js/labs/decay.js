@@ -25,7 +25,7 @@
         <div class="vlab-panel" style="margin-top:12px">
           <h4>The bottle</h4>
           <div class="vlab-buttons"><button type="button" class="button" data-k="shake">Shake the bottle</button></div>
-          <p class="vlab-small">Shaking moves the protactinium into the top layer, next to the tube. The stopwatch starts when the layers have separated.</p>
+          <p class="vlab-small">Shaking moves the protactinium into the top layer, next to the tube. The stopwatch starts when you shake the bottle.</p>
           <p class="vlab-watch"><output data-k="clock">–</output> s</p>
         </div>
       </div>
