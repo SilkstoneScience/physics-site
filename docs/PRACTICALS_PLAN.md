@@ -125,6 +125,11 @@ D.1 already has the Kepler database lab; a Cavendish experiment isn't possible w
 
 E.3 radioactivity: no sealed sources, so the Pa-234m simulation stays the main half-life lab. Photoelectric effect (E.2 HL) and e/m (D.3): simulations if wanted later.
 
+## 4a. Progress
+
+- **Theme B priority 1 handouts drafted (14 November 2026), waiting for the teacher's review:** specific heat capacity (B.1), Boyle's law and absolute zero (B.3), I–V characteristics and EMF and internal resistance (B.5), as Word files in `physics-source/experimental-programme/adapted-for-review` ("… - DP Lab (draft).docx"), in the layout of the teacher's DP Lab handouts. Ideas from the Vernier lab books, the Cambridge practical sheets and older school sheets; all wording, questions and numbers new. Independent physics review done and fixed. Diagrams are described in boxes, to be drawn as SVG for the web pages. The builder (`build.js`, needs the `docx` npm package) and each handout's text are kept outside the repository in `reference-cache/handout-builder`.
+- Next: the teacher's comments, then the web pages; A.1 free fall is the last priority 1 lab in Theme A.
+
 ## 5. Equipment (teacher's answers, 13 November 2026)
 
 - **Has:** the main Vernier kit (LabQuest/Logger Pro 3, Motion Detector and Encoder, Dual-Range Force Sensor, Photogates, Dynamics Track and carts, Temperature Probe, Gas Pressure Sensor, Voltage and Current Probes, Optics Expansion Kit and Diffraction Apparatus), plus the Magnetic Field Sensor, Rotary Motion Sensor and Microphone; signal and vibration generators, a resonance tube or sonometer, ray boxes and blocks, a ripple tank, spectrum tubes and gratings, immersion heaters and metal blocks.
