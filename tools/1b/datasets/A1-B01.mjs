@@ -163,7 +163,7 @@ export default {
         label: 'c', sections: ['projectiles'], marks: 1, ao: 'AO2',
         question: 'Determine the absolute uncertainty in this mean range.',
         numeric: d.num('dR'),
-        markscheme: [`Half the range of the readings: $\\dfrac{${Math.max(...rd).toFixed(3)} - ${Math.min(...rd).toFixed(3)}}{2} = ${d.dp(d.r.dR.value, 4)}\\ \\text{m}$ (accept ${d.sf(d.r.dR.value, 2)} m or ${d.sf(d.r.dR.value, 3)} m) ✓`],
+        markscheme: [`Half the range of the readings: $\\dfrac{${Math.max(...rd).toFixed(3)} - ${Math.min(...rd).toFixed(3)}}{2} = ${d.dp(d.r.dR.value, 3)}\\ \\text{m}$ (accept ${d.dp(d.r.dR.value, 4)} m) ✓`],
       },
       {
         label: 'd', sections: ['projectiles', 'suvat'], marks: 2, ao: { AO1: 1, AO2: 1 },

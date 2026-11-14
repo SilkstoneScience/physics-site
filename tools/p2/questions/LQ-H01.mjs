@@ -93,7 +93,7 @@ export default {
     {
       label: 'b(i)', command: 'Calculate', marks: 1, syllabus: ['A.5.H4'], dependsOn: ['a(i)'],
       question: 'Calculate the Lorentz factor $\\gamma$ for the protons when they leave the cyclotron.',
-      numeric: { result: 'gamma', tolerance: 0.002 },
+      numeric: { result: 'gamma', accept: 0.001 },
       markscheme: ['$\\dfrac{v}{c} = [[beta:2]]$, so $\\gamma = \\dfrac{1}{\\sqrt{1 - v^2/c^2}} = [[gamma:4]]$; allow ECF from (a)(i) ✓'],
       examinerNote: 'A value just above 1; the answer must be given to at least 3 significant figures to show the difference from 1.',
     },
@@ -109,7 +109,7 @@ export default {
     {
       label: 'c(i)', command: 'Calculate', marks: 1, syllabus: ['E.3.H9'],
       question: 'The half-life of fluorine-18 is [[Th]]. Calculate the decay constant of fluorine-18, in $\\text{s}^{-1}$.',
-      numeric: { result: 'lam', accept: 0.03, mistakes: [{ result: 'wrong_lam', feedback: 'Convert the half-life to seconds before using λ = ln 2 / T½.' }] },
+      numeric: { result: 'lam', accept: [0.03, 0.05], mistakes: [{ result: 'wrong_lam', feedback: 'Convert the half-life to seconds before using λ = ln 2 / T½.' }] },
       markscheme: ['$\\lambda = \\dfrac{\\ln 2}{[[Th:n]] \\times 60} = [[lam:3u]]$ ✓'],
       examinerNote: 'The half-life must be in seconds for λ in s⁻¹.',
     },
@@ -126,7 +126,7 @@ export default {
     {
       label: 'c(iii)', command: 'Calculate', marks: 2, syllabus: ['E.3.H8'], dependsOn: ['c(i)', 'c(ii)'],
       question: 'Calculate the number of fluorine-18 nuclei in the sample when it arrives.',
-      numeric: { result: 'N', accept: 0.04 },
+      numeric: { result: 'N', accept: [0.065, 0.04] },
       markscheme: [
         '$N = \\dfrac{A}{\\lambda}$ ✓',
         '$N = [[N:3]]$; allow ECF from (c)(i) and (c)(ii) ✓',

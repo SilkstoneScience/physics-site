@@ -33,7 +33,7 @@ export default {
       dTE: { value: v.TE - v.TEeq, unit: 'K', sf: 2 },
     };
   },
-  stem: '<p>Venus orbits closer to the Sun than Earth does. At the orbit of Venus, sunlight delivers [[Iv]] to a surface facing the Sun, and the thick clouds of Venus give it an albedo of [[alpha:n]]. Spacecraft have measured the temperature of the surface of Venus to be [[Tv]]. The atmosphere of Venus is almost entirely carbon dioxide, and the pressure at its surface is about [[pratio:n]] times the pressure at the surface of Earth.</p><p>For comparison, Earth would have an equilibrium temperature of about [[TEeq]] if it had no atmosphere; its actual surface temperature is [[TE]].</p>',
+  stem: '<p>Venus orbits closer to the Sun than Earth does. At the orbit of Venus, sunlight delivers [[Iv]] to a surface facing the Sun, and the thick clouds of Venus give it an albedo of [[alpha:n]]. Spacecraft have measured the temperature of the surface of Venus to be [[Tv]]. The atmosphere of Venus is almost entirely carbon dioxide, and the pressure at its surface is about [[pratio:n]] times the pressure at the surface of Earth.</p><p>For comparison, Earth would have an equilibrium temperature of about [[TEeq]] without the greenhouse gases in its atmosphere; its actual surface temperature is [[TE]].</p>',
   parts: [
     {
       label: 'a', sections: ['albedo'], command: 'State', marks: 1, syllabus: ['B.2.3'],
@@ -46,7 +46,7 @@ export default {
     },
     {
       label: 'b', sections: ['equilibrium', 'solar'], command: 'Show that', marks: 2, syllabus: ['B.2.9', 'B.2.4'],
-      question: 'Venus is modelled as a black body with no atmosphere. Show that its equilibrium temperature would then be about [[Teq:2u]].',
+      question: 'Venus is modelled as a black body with no greenhouse gases in its atmosphere. Show that its equilibrium temperature would then be about [[Teq:2u]].',
       showThat: { result: 'Teq', sf: 2 },
       markscheme: [
         'mean absorbed intensity $= \\dfrac{I(1 - \\alpha)}{4} = \\dfrac{[[Iv:n]] \\times (1 - [[alpha:n]])}{4} = [[Iabs:3u]]$ ✓',

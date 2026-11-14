@@ -128,7 +128,7 @@ export default {
     tPred: { value: T_PRED, dp: 0, unit: 'day', source: 'the day of the prediction (after the last observation)' },
   },
 
-  intro: (d) => '<p>Astronomers study a star in a binary system: the star moves in a circular orbit, so it moves alternately towards and away from Earth. '
+  intro: (d) => '<p>Astronomers study a star in a binary system: the star moves in a circular orbit that is seen edge-on (Earth is in the plane of the orbit), so it moves alternately towards and away from Earth. '
     + `They measure the wavelength $\\lambda$ of a hydrogen line in its spectrum. In the laboratory this line has a wavelength of $${d.stated('lambda0')}\\ \\text{nm}$.</p>`
     + `<p>The graph shows <strong>simulated observations</strong> on ${d.int(d.rows.length)} nights: values generated from a model of the orbit, with the scatter a `
     + `real spectrograph would give. Each wavelength has an uncertainty of $\\pm ${d.stated('dlam')}\\ \\text{nm}$. `

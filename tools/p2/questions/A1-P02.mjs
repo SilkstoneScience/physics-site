@@ -57,7 +57,7 @@ export default {
     {
       label: 'c', sections: ['graphs'], command: 'Calculate', marks: 1, syllabus: ['A.1.4'],
       question: 'Calculate the average acceleration of the scooter during the first [[t8:n]] s.',
-      numeric: { result: 'aAvg', accept: 0.05 },
+      numeric: { result: 'aAvg', accept: [0.05, 0.079] },
       markscheme: ['$a = \\dfrac{\\Delta v}{\\Delta t} = \\dfrac{[[v8:3]]}{[[t8:n]]} = [[aAvg:2u]]$; allow a velocity read from the graph between 10 and 11 $\\text{m s}^{-1}$ ✓'],
       examinerNote: 'Average acceleration uses the change in velocity over the whole interval (the chord), not the gradient at one point.',
     },

@@ -216,7 +216,7 @@
     "difficulty": 2,
     "level": "SL",
     "sections": ["drag", "projectiles"],
-    "stem": "<p>A golf ball is hit with the same initial velocity on two occasions: once in air, and once in a vacuum.</p><p>Compared with its flight in a vacuum, what happens to the maximum height and the horizontal range of the ball in air?</p>",
+    "stem": "<p>A stone is thrown with the same initial velocity on two occasions: once in air, and once in a vacuum.</p><p>Compared with its flight in a vacuum, what happens to the maximum height and the horizontal range of the stone in air?</p>",
     "options": [
       "Maximum height: lower &nbsp;·&nbsp; Range: shorter",
       "Maximum height: lower &nbsp;·&nbsp; Range: the same",
@@ -224,7 +224,7 @@
       "Maximum height: higher &nbsp;·&nbsp; Range: shorter"
     ],
     "answer": 0,
-    "explanation": "Air resistance acts against the velocity at all times. It reduces the vertical velocity on the way up, so the ball doesn't rise as high. It also reduces the horizontal velocity throughout the flight, so the range is shorter."
+    "explanation": "Air resistance acts against the velocity at all times. It reduces the vertical velocity on the way up, so the stone doesn't rise as high. It also reduces the horizontal velocity throughout the flight, so the range is shorter."
   },
   {
     "id": "A1-015",
@@ -494,7 +494,7 @@
     "diagramAlt": "Force–time graph shaped like a triangle: the force rises from 0 at t = 0 to 400 N at 20 ms, then falls to 0 at 50 ms.",
     "options": ["8.0 N s", "10 N s", "20 N s", "$1.0 \\times 10^{4}$ N s"],
     "answer": 1,
-    "explanation": "Impulse is the area under the force–time graph: $\\tfrac{1}{2} \\times 0.050 \\times 400 = 10$ N s. Option C forgets the $\\tfrac{1}{2}$ for a triangle. Option A uses only the time to reach the peak (20 ms). Option D leaves the time in milliseconds."
+    "explanation": "Impulse is the area under the force–time graph: $\\tfrac{1}{2} \\times 0.050 \\times 400 = 10$ N s. Option C forgets the $\\tfrac{1}{2}$ for a triangle. Option A multiplies the peak force by the time taken to reach it ($400 \\times 0.020$), with no $\\tfrac{1}{2}$. Option D leaves the time in milliseconds."
   },
   {
     "id": "A2-012",
@@ -686,7 +686,7 @@
         "sections": ["conservation"],
         "question": "Calculate the velocity of Q after the collision.",
         "marks": 2,
-        "numeric": { "answer": 2, "unit": "$\\text{m s}^{-1}$", "mistakes": [{ "value": 1.667, "feedback": "P moves backwards after the collision, so its final momentum is negative: $0.60 \\times (-0.50)$." }, { "value": 1.333, "feedback": "Check the signs: P's final velocity is $-0.50\\ \\text{m s}^{-1}$, so its final momentum must be subtracted from the total, not added." }] },
+        "numeric": { "answer": 2, "unit": "$\\text{m s}^{-1}$", "mistakes": [{ "value": 1.667, "feedback": "P still has momentum after the collision. It moves backwards, so include its final momentum, $0.60 \\times (-0.50)$." }, { "value": 1.333, "feedback": "Check the signs: P's final velocity is $-0.50\\ \\text{m s}^{-1}$, so its final momentum is $-0.30\\ \\text{kg m s}^{-1}$ and Q's momentum is $1.5 + 0.30$." }] },
         "markscheme": [
           "Conservation of momentum with correct signs: $0.60 \\times 2.5 = 0.60 \\times (-0.50) + 0.90\\,v$ ✓",
           "$v = 2.0\\ \\text{m s}^{-1}$ in the original direction of P ✓"
@@ -1112,10 +1112,10 @@
         "sections": ["work", "mechanical"],
         "question": "Determine the average resistive force on the skier between A and B.",
         "marks": 2,
-        "numeric": { "answer": 26, "range": [25, 27], "unit": "N", "mistakes": [{ "value": 95.5, "feedback": "The resistive force only accounts for the energy that did <em>not</em> become kinetic energy. Subtract $E_k$ from the $E_p$ lost first." }] },
+        "numeric": { "answer": 26, "range": [22, 27], "unit": "N", "mistakes": [{ "value": 95.5, "feedback": "The resistive force only accounts for the energy that did <em>not</em> become kinetic energy. Subtract $E_k$ from the $E_p$ lost first." }] },
         "markscheme": [
-          "Energy transferred by resistive forces $= 11\\,500 - 8300 \\approx 3.1 \\times 10^{3}$ J ✓ (allow ECF from (a) and (b))",
-          "$F = \\dfrac{3.1 \\times 10^{3}}{120} = 26$ N ✓ (accept 25–27 N)"
+          "Energy transferred by resistive forces $= 11\\,466 - 8320 \\approx 3.1 \\times 10^{3}$ J ✓ (allow ECF from (a) and (b))",
+          "$F = \\dfrac{3.1 \\times 10^{3}}{120} = 26$ N ✓ (accept 25–27 N; accept 22–23 N from $1.1 \\times 10^{4}$ J in (a))"
         ]
       },
       {
@@ -1164,10 +1164,10 @@
         "sections": ["work"],
         "question": "Determine the maximum distance the car can travel at this speed on one full charge.",
         "marks": 2,
-        "numeric": { "answer": 540000, "unit": "m", "mistakes": [{ "value": 600000, "feedback": "Only 90% of the battery's energy is useful, so the power drawn from the battery is 12 500 W, not 11 250 W." }] },
+        "numeric": { "answer": 540000, "range": [515000, 555000], "unit": "m", "mistakes": [{ "value": 600000, "feedback": "Only 90% of the battery's energy is useful, so the power drawn from the battery is 12 500 W, not 11 250 W." }] },
         "markscheme": [
           "Time $= \\dfrac{2.7 \\times 10^{8}}{12\\,500} = 2.16 \\times 10^{4}$ s ✓",
-          "Distance $= 25 \\times 2.16 \\times 10^{4} = 5.4 \\times 10^{5}$ m (540 km) ✓ (allow ECF from (b); accept a direct method using energy available × efficiency ÷ resistive force)"
+          "Distance $= 25 \\times 2.16 \\times 10^{4} = 5.4 \\times 10^{5}$ m (540 km) ✓ (accept $5.2 \\times 10^{5}$ m from 13 kW; allow ECF from (b); accept a direct method using energy available × efficiency ÷ resistive force)"
         ]
       },
       {
@@ -1766,7 +1766,7 @@
         "sections": ["lorentz"],
         "question": "Calculate the Lorentz factor $\\gamma$.",
         "marks": 1,
-        "numeric": { "answer": 1.667, "mistakes": [{ "value": 0.6, "feedback": "$\\sqrt{1 - v^2/c^2} = 0.60$, but $\\gamma$ is its reciprocal, so it is always at least 1." }] },
+        "numeric": { "answer": 1.6666667, "mistakes": [{ "value": 0.6, "feedback": "$\\sqrt{1 - v^2/c^2} = 0.60$, but $\\gamma$ is its reciprocal, so it is always at least 1." }] },
         "markscheme": [
           "$\\gamma = \\dfrac{1}{\\sqrt{1 - 0.80^2}} = 1.67$ ✓"
         ]
@@ -1938,7 +1938,7 @@
       "38 $\\text{m s}^{-1}$"
     ],
     "answer": 1,
-    "explanation": "The work done by the resultant force equals the change in kinetic energy: ½ × 2.0 × v² = ½ × 2.0 × 4.0² + 60, so v² = 76 and v = 8.7 $\\text{m s}^{-1}$. 7.7 ignores the kinetic energy the trolley already had; 12 adds the speeds instead of the energies; 38 forgets the square root."
+    "explanation": "The work done by the resultant force equals the change in kinetic energy: ½ × 2.0 × v² = ½ × 2.0 × 4.0² + 60, so v² = 76 and v = 8.7 $\\text{m s}^{-1}$. 7.7 ignores the kinetic energy the trolley already had; 12 adds the speeds instead of the energies; 38 divides the final kinetic energy (76 J) by the mass and stops there, leaving out the factor of 2 and the square root."
   },
   {
     "id": "A3-025",
@@ -1956,6 +1956,6 @@
       "$3.5 \\times 10^{13}$ $\\text{J m}^{-3}$"
     ],
     "answer": 2,
-    "explanation": "Energy density is energy per unit volume: 46 × 10⁶ J kg⁻¹ × 750 kg m⁻³ = 3.5 × 10¹⁰ J m⁻³. Dividing by the density instead gives 6.1 × 10⁴; 4.6 × 10⁷ is the energy per kilogram (the specific energy), not per cubic metre; 3.5 × 10¹³ leaves the energy in kJ."
+    "explanation": "Energy density is energy per unit volume: 46 × 10⁶ J kg⁻¹ × 750 kg m⁻³ = 3.5 × 10¹⁰ J m⁻³. Dividing by the density instead gives 6.1 × 10⁴; 4.6 × 10⁷ is the energy per kilogram (the specific energy), not per cubic metre; 3.5 × 10¹³ takes the prefix M (mega) as 10⁹ instead of 10⁶."
   }
 ]

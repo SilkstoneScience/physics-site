@@ -54,7 +54,7 @@ export default {
     },
     {
       label: 'c(i)', sections: ['graphs'], command: 'Determine', marks: 2, syllabus: ['C.2.2', 'T.4'],
-      question: 'The graph shows how the vertical displacement of the ground at the station varies with time as the S wave passes. <img src="questions/diagrams/p2-c2-swave.svg" alt="A sine-shaped graph of displacement in millimetres against time in seconds from 0 to 2.5 s. The displacement varies between plus and minus [[A]] and completes two full cycles in the time shown, so each cycle takes [[T]]."> Determine, in km, the wavelength of the S wave.',
+      question: 'The graph shows how the vertical displacement of the ground at the station varies with time as the S wave passes. <img src="questions/diagrams/p2-c2-swave.svg" alt="A sine-shaped graph of displacement in millimetres against time in seconds from 0 to 2.5 s. The displacement varies between plus and minus [[A]] and completes two full cycles in the time shown."> Determine, in km, the wavelength of the S wave.',
       numeric: { result: 'lambda', accept: 0.04, mistakes: [{ result: 'wrong_lambda', feedback: 'Wavelength = speed × period (or speed ÷ frequency), not speed ÷ period.' }] },
       markscheme: [
         'period read from the graph: $T = [[T:n]]$ s (or $f = 1/T$) ✓',

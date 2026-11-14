@@ -68,7 +68,7 @@
           "source": "dR"
         },
         "markscheme": [
-          "Half the range of the readings: $\\dfrac{0.925 - 0.909}{2} = 0.0080\\ \\text{m}$ (accept 0.0080 m or 0.00800 m) ✓"
+          "Half the range of the readings: $\\dfrac{0.925 - 0.909}{2} = 0.008\\ \\text{m}$ (accept 0.0080 m) ✓"
         ]
       },
       {
@@ -259,7 +259,7 @@
         },
         "markscheme": [
           "$v = \\dfrac{L}{\\bar{t}}$ with $L$ in metres ✓",
-          "$v = 0.489\\ \\text{m s}^{-1}$ (allow ECF from (c)) ✓"
+          "$v = 0.489\\ \\text{m s}^{-1}$ (0.488 if the rounded mean is used; allow ECF from (c)) ✓"
         ]
       },
       {
@@ -1242,7 +1242,7 @@
       "prediction"
     ],
     "context": "experimental",
-    "stem": "<p>A student investigates how the pressure $p$ of a fixed mass of air at constant volume depends on its temperature $T$. A sealed flask of air is held in a water bath and connected by a short tube to a Bourdon pressure gauge. The bath is heated in steps, and at each step the student waits until the reading is steady.</p>",
+    "stem": "<p>A student investigates how the pressure $p$ of a fixed mass of air at constant volume depends on its temperature $\\theta$. A sealed flask of air is held in a water bath and connected by a short tube to a Bourdon pressure gauge. The bath is heated in steps, and at each step the student waits until the reading is steady.</p>",
     "parts": [
       {
         "label": "a",
@@ -1250,10 +1250,10 @@
           "laws"
         ],
         "marks": 2,
-        "question": "Show, using two rows of the table, that $p$ is not proportional to $T$.",
+        "question": "Show, using two rows of the table, that $p$ is not proportional to $\\theta$.",
         "markscheme": [
-          "$\\dfrac{p}{T}$ is 8.17 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 12.0 °C but 1.54 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 78.5 °C (or any two non-adjacent rows) ✓",
-          "The ratio is not constant, so $p$ is not proportional to $T$ ✓"
+          "$\\dfrac{p}{\\theta}$ is 8.17 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 12.0 °C but 1.54 $\\text{kPa}\\,{}^{\\circ}\\text{C}^{-1}$ at 78.5 °C (or any two non-adjacent rows) ✓",
+          "The ratio is not constant, so $p$ is not proportional to $\\theta$ ✓"
         ]
       },
       {
@@ -1276,7 +1276,7 @@
             "max": 100,
             "step": 5,
             "major": 20,
-            "symbol": "T",
+            "symbol": "θ",
             "unit": "°C"
           },
           "y": {
@@ -1361,8 +1361,8 @@
           "source": "absZeroAnswer"
         },
         "markscheme": [
-          "At $p = 0$: $T = -\\dfrac{\\text{intercept}}{\\text{gradient}}$ (extrapolating the line) ✓",
-          "$T = −276\\ {}^{\\circ}\\text{C}$ (accept −302 to −253; allow ECF from (b)) ✓"
+          "At $p = 0$: $\\theta = -\\dfrac{\\text{intercept}}{\\text{gradient}}$ (extrapolating the line) ✓",
+          "$\\theta = −276\\ {}^{\\circ}\\text{C}$ (accept −302 to −253; allow ECF from (b)) ✓"
         ]
       },
       {
@@ -1386,7 +1386,7 @@
             "max": 100,
             "step": 5,
             "major": 20,
-            "symbol": "T",
+            "symbol": "θ",
             "unit": "°C"
           },
           "y": {
@@ -2115,7 +2115,7 @@
       "improve-the-method"
     ],
     "context": "observational",
-    "stem": "<p>Astronomers study a star in a binary system: the star moves in a circular orbit, so it moves alternately towards and away from Earth. They measure the wavelength $\\lambda$ of a hydrogen line in its spectrum. In the laboratory this line has a wavelength of $656.28\\ \\text{nm}$.</p><p>The graph shows <strong>simulated observations</strong> on 18 nights: values generated from a model of the orbit, with the scatter a real spectrograph would give. Each wavelength has an uncertainty of $\\pm 0.008\\ \\text{nm}$. The system as a whole is not moving towards or away from Earth.</p>",
+    "stem": "<p>Astronomers study a star in a binary system: the star moves in a circular orbit that is seen edge-on (Earth is in the plane of the orbit), so it moves alternately towards and away from Earth. They measure the wavelength $\\lambda$ of a hydrogen line in its spectrum. In the laboratory this line has a wavelength of $656.28\\ \\text{nm}$.</p><p>The graph shows <strong>simulated observations</strong> on 18 nights: values generated from a model of the orbit, with the scatter a real spectrograph would give. Each wavelength has an uncertainty of $\\pm 0.008\\ \\text{nm}$. The system as a whole is not moving towards or away from Earth.</p>",
     "parts": [
       {
         "label": "a",
@@ -2387,7 +2387,7 @@
         "marks": 1,
         "question": "The data come from a database, so the graph has no error bars. Suggest one reason why the gradient could still differ slightly from the value predicted by Kepler's third law.",
         "markscheme": [
-          "Any one of: the orbits are not perfect circles (Himalia's eccentricity is about 0.16) / the moons pull on each other / Jupiter is not a perfect sphere, so it does not act exactly as a point mass ✓"
+          "Any one of: the published values are rounded (Metis's period is given to only 3 significant figures) / the Sun and the other moons also pull on each moon / Jupiter is not a perfect sphere, so it does not act exactly as a point mass. Do not accept \"the orbits are not circles\": $a$ is the semi-major axis, and the law holds for an ellipse when $a$ is used ✓"
         ]
       }
     ],

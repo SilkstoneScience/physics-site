@@ -24,6 +24,8 @@ FORK 2: 10A* melt probe  \
 ```
 
 ## The decisions
+**These tables are the stage-1 draft. The final numbers are in `missions/europa.json` and the teacher notes (`teachers/mission-europa.html`).**
+
 g on Europa is 1.32 m s⁻², calculated with $g = GM/r^2$. All numbers below were calculated by script.
 
 | # | Topic | The situation | Calculation | The order to give | Gauge |

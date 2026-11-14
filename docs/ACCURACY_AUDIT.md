@@ -68,3 +68,47 @@ The reviewers' reports, with the exact old and new text, are on the teacher's ma
 | D28 | E.2 | The Σ panel's Compton entry matches the key box: Δλ = λf − λi = … |
 
 Done in the same session, outside the audit: **Theme B's own colour is raspberry** (`--theme-b-id`), so it no longer clashes with the HL orange.
+
+## Audit 2026-11b (13 November 2026): question bank, Skills page, review games, layout
+
+**Covered** (same two-pass method; recorded in `tools/audit/audited.json` as `2026-11b`):
+- **Question bank, hand-written:** every question in `questions/a.json` … `e.json` (about 450), one reviewer per topic: answers re-solved, one correct option only, explanations and mark schemes, typed-answer fields and ranges, diagrams, levels and `y2028` tags.
+- **Generated questions:** all 20 Paper 1B datasets and 31 Paper 2 questions, read as a student sees them. They are frozen after approval, so nothing was changed: every point is a teacher's decision that needs a recipe change and re-approval.
+- **Skills page** (`skills.html`), against its agreed conventions, the guide's Tool 3 and the data booklet.
+- **Review games:** the three mysteries and their teacher pages, the nine Newsroom articles, the Explanation builder, the estimation challenges, the word games and the Mission log (Mission to Europa) with its teacher page.
+- **Layout:** all 73 published pages at 375 px wide (anything wider than the screen) and in dark mode (text contrast below 3:1, hard-coded colours).
+
+**Not covered:** Think deeper (concept challenges and big questions: reviewed twice when written), the IA, EE, CSP, exam-technique and ToK pages, the practical and simulation pages' content, lesson-slide data, revision-sheet summaries, the escape room (it only reuses the question bank). Layout was checked by script, not by eye on every page; at the end of the session the preview pane stopped drawing, so two diagram fixes are waiting for a look (T56, T57).
+
+**Result**
+- **Question bank:** no wrong stored answer and no second correct option in any hand-written question. About 30 clear slips fixed: explanations that named the wrong slip (A2-011, A3-024, A3-025, B4-006, C2-002), working lines that didn't give their own result (A3-021, C3-022, E3-004), typed-answer ranges that rejected an answer the mark scheme accepts (A3-021, A3-022, C1-018, E4-012), stored answers that should be unrounded, the A4-013 dimension arrow, and "hotter and denser" for a massive star's core (E5-015 and `themes/e5.html`: the core is hotter but less dense).
+- **Skills page:** one working line fixed (2.56 × 10⁹ s). The orders-of-magnitude rule against its table, and the free-body diagram, are teacher's decisions.
+- **Games:** Meteorite kettle clue now gives the right feedback for 214 s; one Newsroom correction ("vertical velocity"); one Explanation builder order (EX-B4-01) and one decoy reason (EX-E2-01); teacher-page answer lists completed; Mission log docking feedback and marking description corrected.
+- **Layout:** one fault found and fixed. Hidden screen-reader text in a scrolling table made the virtual pendulum page 556 px wide on a phone; `.table-wrap` is now `position: relative`. No dark-mode contrast problems (dark text on coloured Sankey bars is deliberate and reads well; question-bank diagrams sit on a white card).
+- **Teacher's decisions:** 57 points, listed in `docs/audit-2026-11-part2-decisions.md` (T1–T57). Add each outcome here as it is decided, then record the changed files again with `node tools/audit-status.mjs --record 2026-11b <file>`.
+
+**Lessons for the next audit**
+- A reviewer that reports "all correct" must still write its report file: check the file exists (the first C.2 review was lost when a usage limit hit; the repeat found a point the first had missed).
+- Typed-answer ranges are the commonest fault in structured questions: test what a student gets by carrying rounded values forward, with `js/numeric.js`, not just the unrounded answer.
+- `position: absolute` hidden text inside an `overflow: auto` box can widen the page; the 375 px scan should measure `document.documentElement.scrollWidth`.
+
+### Decisions from audit 2026-11b (14 November 2026; keep following these)
+
+| No. | Where | Decision |
+|---|---|---|
+| T16–T18 | Skills page, orders of magnitude | The table stays; the rule says values with a between about 2 and 5 are borderline and either power of ten is accepted (speed of sound 10², visible light 10⁻⁷ m). |
+| T21, T22, T24, T25 | Skills page | Matches the data booklet: conversions sentence corrected, a note that the booklet writes A_H and A_V, hecto/deca/deci added, volume of a prism added. |
+| T23 | Skills page | The subtraction example gives (13 ± 1) °C: uncertainties from scale readings keep 1 s.f. |
+| T56, T57 | Skills page; A.2 | Free-body diagrams are drawn to scale: with a rope pulling partly upwards, the normal force arrow is shorter than the weight by the rope's vertical part. |
+| T39, T40 | Mission log | Failure texts and captain's-log prompts are worded to be true whether the number or the choice was wrong (data only; no code change). |
+| T41, T42 | Mission log | 6.3 AU stands ("Jupiter is a little further from the Sun than its average 5.2 AU"); the lander undocks on day 662 and lands on day 663, so it is away exactly 10 days. |
+| T36, T43 | Ravensby mystery | The investors' meeting is on Friday; the Carnot answer accepts 20 (range 19.3–20). |
+| T8, T5, T6, T3 | C4-013, B4-013 (d), B5-010, B1-002 | "two successive lengths"; efficiency "as a decimal" with feedback for 10; "An NTC thermistor"; "average translational kinetic energy". |
+| T4 | B1-020 | Tagged `y2028`, to match decision D9 for the B.1 page. |
+| T7 | D4-011 | Stays; its explanation says self-induction is needed only for exams up to 2027 (the 2028 guide deletes the one sentence that mentioned it). |
+| T1, T2, T14 | A1-014, A2-023, E2-009 | A stone, not a golf ball; clearer feedback; line spectra are evidence for energy levels. |
+| T26–T28, T33, T34, T44 | Newsroom, Explanation builder, Odd one out, Mission log teacher page | Applied as proposed (siren "sounds lower in pitch"; "intensity of the starlight"; L = Iω wording; "two or three" neutrons; an "also" line for OO-17; about 3,100 words per route). |
+| T9–T13, T15, T19, T20, T29–T32, T35, T37, T38 | various | **Left as they are** (teacher's decision): each is correct as it stands or follows the guide's or notes' wording. Don't raise them again. |
+| T45–T55 | Generated Paper 1B and Paper 2 questions | Recipes changed and the ten questions reset to drafts (A1-P02, B2-P01, B5-P01, C2-P01, LQ-H01; A1-B01, A1-B02, B3-B01, C5-B01, D1-B01). **Approved by the teacher on 14 November 2026** (recorded in the review files) and published again. LQ-H01 (b)(i) now accepts 1.01 to 1.02: the builder's ranges go to 3 significant figures, and that was judged better than accepting 1.0. |
+
+Also noted and left: four Paper 1B answers (A1-B01 (b), B3-B01 (f), B5-B01 (b), E1-B01 (c)) need 3 significant figures, as their mark schemes say.

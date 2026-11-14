@@ -62,7 +62,7 @@ export default {
     {
       label: 'd', sections: ['power'], command: 'Calculate', marks: 2, syllabus: ['B.5.9'], dependsOn: ['b'],
       question: 'Calculate, in mW, the power dissipated in the fixed resistor at 0 °C.',
-      numeric: { result: 'P', accept: 0.04, mistakes: [{ result: 'wrong_P', feedback: 'That is the power in the whole circuit. Use the resistance of the fixed resistor only.' }] },
+      numeric: { result: 'P', accept: [0.05, 0.04], mistakes: [{ result: 'wrong_P', feedback: 'That is the power in the whole circuit. Use the resistance of the fixed resistor only.' }] },
       markscheme: [
         '$P = I^2 R = ([[I:3]] \\times 10^{-3})^2 \\times [[R:n]] \\times 10^{3}$ ✓',
         '$P = [[P:3u]]$ ✓',
