@@ -188,7 +188,7 @@ window.DATA_BOOKLET = {
       ['Entropy change', '\\Delta S = \\frac{\\Delta Q}{T}', true],
       ['Entropy from microstates', 'S = k_B\\ln\\Omega', true],
       ['Adiabatic change (monatomic ideal gas)', 'PV^{\\frac{5}{3}} = \\text{constant}', true],
-      ['Efficiency', '\\eta = \\frac{\\text{useful work}}{\\text{energy input}}', true],
+      ['Efficiency', '\\eta = \\frac{\\text{useful work}}{\\text{input energy}}', true],
       ['Carnot efficiency', '\\eta_{\\text{Carnot}} = 1 - \\frac{T_c}{T_h}', true],
     ],
     note: 'All of B.4 is HL. $Q$ is energy supplied <em>to</em> the gas; $W$ is work done <em>by</em> the gas (negative for a compression). Work done is the area under a p–V graph; the net work in a cycle is the area enclosed. Temperatures in kelvin.',
@@ -263,7 +263,7 @@ window.DATA_BOOKLET = {
       ['Quantization of angular momentum', 'mvr = \\frac{nh}{2\\pi}', true],
     ],
     note: 'Also $c = f\\lambda$, so $E = \\frac{hc}{\\lambda}$. Photon energy equals the difference between two energy levels. $1\\ \\text{eV} = 1.60 \\times 10^{-19}$ J. HL closest approach (not in the booklet): $d = \\frac{k(2e)(Ze)}{E_k}$.',
-    constants: ['h', 'c', 'e', 'R0'],
+    constants: ['h', 'c', 'e', 'k', 'me', 'u', 'R0'],
   },
   'E.2': {
     equations: [
