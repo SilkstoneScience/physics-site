@@ -96,18 +96,18 @@ export default {
     ratioHigh: { unit: 'kPa Δ°C^-1', value: (d) => d.rows[5].p / d.rows[5].theta },
   },
 
-  // Part (e) has no verdict claim. With the first gauge (±0.5 kPa) −273 °C lay only about 1.5 % inside the
-  // steepest/shallowest-line range (the verdict rule needs 4 %), so students' own lines could give either conclusion, and
-  // the teacher decided (8 October 2026) to keep (e) and credit a conclusion consistent with the candidate's own
-  // uncertainty. With the ±1 kPa gauge (12 November 2026) −273 °C is about 6 % inside the range, so the verdict is no
-  // longer borderline; the wording of (e) and the review flag are kept until the teacher decides otherwise (the flag
-  // keeps the dataset AMBER, so it is always inspected rather than batch-approved unseen).
+  // Part (e): the verdict claim checks that −273 °C is clearly inside the steepest/shallowest-line range (the rule needs
+  // 4 % of the result; it is about 7 %), so students' own lines all give "consistent". History: with the first gauge
+  // (±0.5 kPa) it was only about 1.5 % inside, so there was no verdict claim and a "verdict-borderline" review flag,
+  // and the teacher decided (8 October 2026) to credit a conclusion consistent with the candidate's own uncertainty.
+  // After the change to the ±1 kPa gauge the teacher agreed (14 November 2026) to drop the flag and add this check.
+  // The wording of (e) is unchanged: its bracket still credits a consistent conclusion after a slip in (d), as ECF.
   claims: [
     { type: 'linear', minR2: 0.995 },
     { type: 'throughOrigin', expect: false },
     { type: 'trend', direction: 'increasing' },
+    { type: 'verdict', result: 'absZero', value: -273, expect: 'inside' },
   ],
-  reviewFlags: [{ flag: 'verdict-borderline', note: 'part (e): teacher decided (8 October 2026) to credit a conclusion consistent with the candidate\'s own uncertainty, when −273 °C was only about 1.5 % inside the max/min-line range; with the ±1 kPa gauge (12 November 2026) it is about 6 % inside, and the flag is kept until the teacher decides otherwise' }],
 
   stated: {
     accepted: { value: -273, dp: 0, unit: '°C', source: 'data booklet: absolute zero is 0 K = −273 °C' },

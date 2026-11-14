@@ -8,6 +8,29 @@ window.MathJax = {
   output: { displayOverflow: 'linebreak', linebreaks: { inline: true } },
 };
 
+// Redraw the equations when the page's width changes: a phone turned sideways, a window resized, or a page first drawn
+// in a window with no width (a hidden pane or tab). MathJax wraps a displayed equation to the width it finds when it first
+// draws it and never re-wraps by itself, so a page drawn in a very narrow window would keep its equations stacked one
+// symbol per line (seen in the preview pane, November 2026).
+(function () {
+  // Nothing to do where there is no page to draw (the checker, tools/check.mjs, reads this file without a browser).
+  if (typeof document === 'undefined' || !document.documentElement || !window.addEventListener) return;
+  let lastWidth = document.documentElement.clientWidth, timer;
+  const redraw = () => {
+    const width = document.documentElement.clientWidth;
+    if (!width || Math.abs(width - lastWidth) < 8) return;
+    const startup = window.MathJax && MathJax.startup;
+    if (!startup || !startup.document || !startup.document.rerender) return; // MathJax isn't ready: try at the next change
+    lastWidth = width;
+    // 20 is MathJax's "compiled" state: measure the width again, then lay every equation out afresh.
+    startup.promise = (startup.promise || Promise.resolve()).then(() => startup.document.rerender(20)).catch(console.error);
+  };
+  const later = () => { clearTimeout(timer); timer = setTimeout(redraw, 250); };
+  window.addEventListener('resize', later);
+  window.addEventListener('pageshow', later);
+  document.addEventListener('visibilitychange', later);
+})();
+
 // The syllabus. Edit here to rename a topic; menus and topic lists update everywhere.
 // hl: true marks topics that are HL only (as in the IB guide's syllabus roadmap).
 // hlExtra: true marks topics for everyone that also have additional HL content.
@@ -188,7 +211,7 @@ window.DATA_BOOKLET = {
       ['Entropy change', '\\Delta S = \\frac{\\Delta Q}{T}', true],
       ['Entropy from microstates', 'S = k_B\\ln\\Omega', true],
       ['Adiabatic change (monatomic ideal gas)', 'PV^{\\frac{5}{3}} = \\text{constant}', true],
-      ['Efficiency', '\\eta = \\frac{\\text{useful work}}{\\text{energy input}}', true],
+      ['Efficiency', '\\eta = \\frac{\\text{useful work}}{\\text{input energy}}', true],
       ['Carnot efficiency', '\\eta_{\\text{Carnot}} = 1 - \\frac{T_c}{T_h}', true],
     ],
     note: 'All of B.4 is HL. $Q$ is energy supplied <em>to</em> the gas; $W$ is work done <em>by</em> the gas (negative for a compression). Work done is the area under a p–V graph; the net work in a cycle is the area enclosed. Temperatures in kelvin.',
@@ -263,7 +286,7 @@ window.DATA_BOOKLET = {
       ['Quantization of angular momentum', 'mvr = \\frac{nh}{2\\pi}', true],
     ],
     note: 'Also $c = f\\lambda$, so $E = \\frac{hc}{\\lambda}$. Photon energy equals the difference between two energy levels. $1\\ \\text{eV} = 1.60 \\times 10^{-19}$ J. HL closest approach (not in the booklet): $d = \\frac{k(2e)(Ze)}{E_k}$.',
-    constants: ['h', 'c', 'e', 'R0'],
+    constants: ['h', 'c', 'e', 'k', 'me', 'u', 'R0'],
   },
   'E.2': {
     equations: [

@@ -16,6 +16,12 @@ the published website.
 > unchanged. −273 °C now lies about 7 % inside the range from the two lines, so the "verdict-borderline" review flag
 > could be dropped: that is the teacher's decision, and until then the flag and the wording of part (e) stay.
 >
+> **Decided by the teacher on 14 November 2026.** (1) Part (c) keeps its accepted range (any line through all the error
+> bars is accepted in (b), and those lines give −302 to −253 °C). (2) The "verdict-borderline" flag is dropped and a
+> verdict claim is added in its place, so the validator checks that −273 °C stays clearly inside the range. The wording
+> of part (e) is unchanged, so the fingerprint and the approval are unaffected. The batch report still lists B3-B01 as
+> AMBER, now automatically, because the verdict is within 8 % of the range edge (7.1 %).
+>
 > **The teacher tried the new B3-B01 in the preview and approved it on 12 November 2026** (individual approval, recorded in
 > `tools/1b/reviews.json`), so 20 approved datasets are in production again.
 >
