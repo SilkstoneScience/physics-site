@@ -140,6 +140,9 @@
         <tr><td>giga</td><td>G</td><td>$10^{9}$</td></tr>
         <tr><td>mega</td><td>M</td><td>$10^{6}$</td></tr>
         <tr><td>kilo</td><td>k</td><td>$10^{3}$</td></tr>
+        <tr><td>hecto</td><td>h</td><td>$10^{2}$</td></tr>
+        <tr><td>deca</td><td>da</td><td>$10^{1}$</td></tr>
+        <tr><td>deci</td><td>d</td><td>$10^{-1}$</td></tr>
         <tr><td>centi</td><td>c</td><td>$10^{-2}$</td></tr>
         <tr><td>milli</td><td>m</td><td>$10^{-3}$</td></tr>
         <tr><td>micro</td><td>µ</td><td>$10^{-6}$</td></tr>
@@ -150,7 +153,7 @@
     </div>
     <p><strong>Scientific notation</strong> writes a number as $a \times 10^{n}$ with $1 \le a &lt; 10$. For example, $0.000\,47 = 4.7\times10^{-4}$ and $93\,000\,000 = 9.3\times10^{7}$. It also makes the number of significant figures clear (section 5).</p>
     <h3>Useful non-SI units</h3>
-    <p>Some topics use units that aren't SI because the SI value would be awkwardly large or small. Convert them to SI before you substitute into an equation. The conversions are in the data booklet.</p>
+    <p>Some topics use units that aren't SI because the SI value would be awkwardly large or small. Convert them to SI before you substitute into an equation. Most of the conversions are in the data booklet (the electronvolt comes from the elementary charge, $e$); you need to know the hour, day and year yourself.</p>
     <div class="table-wrap">
       <table class="notes">
         <tr><th>Unit</th><th>Value in SI</th><th>Used for</th></tr>
@@ -238,6 +241,7 @@
         <tr><td>rectangle; triangle</td><td>area $= lw$; area $= \frac{1}{2}bh$</td></tr>
         <tr><td>circle of radius $r$</td><td>area $= \pi r^{2}$; circumference $= 2\pi r$</td></tr>
         <tr><td>cuboid</td><td>volume $= lwh$</td></tr>
+        <tr><td>prism of cross-section area $A$, length $h$</td><td>volume $= Ah$</td></tr>
         <tr><td>cylinder of radius $r$, height $h$</td><td>volume $= \pi r^{2}h$; curved surface area $= 2\pi rh$</td></tr>
         <tr><td>sphere of radius $r$</td><td>volume $= \frac{4}{3}\pi r^{3}$; surface area $= 4\pi r^{2}$ <span class="tag y2028">New for 2028</span> (in the data booklet from 2028)</td></tr>
       </table>
@@ -436,8 +440,8 @@
     </ul>
     <div class="worked">
       <h3>Worked example: a temperature rise (subtracting)</h3>
-      <p>Water starts at $(21.5 \pm 0.5)$ °C and ends at $(34.0 \pm 0.5)$ °C. Find the temperature rise.</p>
-      <p>$\Delta T = 34.0 - 21.5 = 12.5$ °C, with uncertainty $0.5 + 0.5 = 1.0$ °C. So the rise is $(12.5 \pm 1.0)$ °C, which is an 8% uncertainty, even though each reading was only about 2% uncertain.</p>
+      <p>Water starts at $(21.5 \pm 0.5)$ °C and ends at $(34.5 \pm 0.5)$ °C. Find the temperature rise.</p>
+      <p>$\Delta T = 34.5 - 21.5 = 13.0$ °C, with uncertainty $0.5 + 0.5 = 1$ °C. So the rise is $(13 \pm 1)$ °C, which is an 8% uncertainty, even though each reading was only about 2% uncertain.</p>
     </div>
     <div class="worked">
       <h3>Worked example: density (dividing)</h3>
@@ -724,6 +728,7 @@
     <p>Any vector can be split into two perpendicular <strong>components</strong>. For a vector $A$ at angle $\theta$ to the $x$-axis:</p>
     <div class="key">
       $$A_x = A\cos\theta \qquad A_y = A\sin\theta$$
+      <p style="margin:0">The data booklet calls these $A_H$ (horizontal) and $A_V$ (vertical).</p>
       <p style="margin:0">and to rebuild the vector from its components:</p>
       $$A = \sqrt{A_x^2 + A_y^2} \qquad \tan\theta = \frac{A_y}{A_x}$$
     </div>
@@ -769,8 +774,8 @@
         <circle class="f3" cx="180" cy="130" r="3"/>
         <line class="l3" x1="180" y1="130" x2="180" y2="214" marker-end="url(#ah3)"/>
         <text x="188" y="210" style="font-size:15px">W</text>
-        <line class="l1" x1="155" y1="160" x2="155" y2="62" marker-end="url(#ah1)"/>
-        <text class="t1" x="138" y="76" style="font-size:15px">N</text>
+        <line class="l1" x1="155" y1="160" x2="155" y2="118" marker-end="url(#ah1)"/>
+        <text class="t1" x="134" y="146" style="font-size:15px">N</text>
         <line class="l2" x1="130" y1="160" x2="68" y2="160" marker-end="url(#ah2)"/>
         <text class="t2" x="78" y="152" style="font-size:15px">F</text>
         <line class="l1" x1="230" y1="100" x2="302" y2="58" marker-end="url(#ah1)"/>
