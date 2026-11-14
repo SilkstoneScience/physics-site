@@ -91,3 +91,24 @@ Done in the same session, outside the audit: **Theme B's own colour is raspberry
 - A reviewer that reports "all correct" must still write its report file: check the file exists (the first C.2 review was lost when a usage limit hit; the repeat found a point the first had missed).
 - Typed-answer ranges are the commonest fault in structured questions: test what a student gets by carrying rounded values forward, with `js/numeric.js`, not just the unrounded answer.
 - `position: absolute` hidden text inside an `overflow: auto` box can widen the page; the 375 px scan should measure `document.documentElement.scrollWidth`.
+
+### Decisions from audit 2026-11b (14 November 2026; keep following these)
+
+| No. | Where | Decision |
+|---|---|---|
+| T16–T18 | Skills page, orders of magnitude | The table stays; the rule says values with a between about 2 and 5 are borderline and either power of ten is accepted (speed of sound 10², visible light 10⁻⁷ m). |
+| T21, T22, T24, T25 | Skills page | Matches the data booklet: conversions sentence corrected, a note that the booklet writes A_H and A_V, hecto/deca/deci added, volume of a prism added. |
+| T23 | Skills page | The subtraction example gives (13 ± 1) °C: uncertainties from scale readings keep 1 s.f. |
+| T56, T57 | Skills page; A.2 | Free-body diagrams are drawn to scale: with a rope pulling partly upwards, the normal force arrow is shorter than the weight by the rope's vertical part. |
+| T39, T40 | Mission log | Failure texts and captain's-log prompts are worded to be true whether the number or the choice was wrong (data only; no code change). |
+| T41, T42 | Mission log | 6.3 AU stands ("Jupiter is a little further from the Sun than its average 5.2 AU"); the lander undocks on day 662 and lands on day 663, so it is away exactly 10 days. |
+| T36, T43 | Ravensby mystery | The investors' meeting is on Friday; the Carnot answer accepts 20 (range 19.3–20). |
+| T8, T5, T6, T3 | C4-013, B4-013 (d), B5-010, B1-002 | "two successive lengths"; efficiency "as a decimal" with feedback for 10; "An NTC thermistor"; "average translational kinetic energy". |
+| T4 | B1-020 | Tagged `y2028`, to match decision D9 for the B.1 page. |
+| T7 | D4-011 | Stays; its explanation says self-induction is needed only for exams up to 2027 (the 2028 guide deletes the one sentence that mentioned it). |
+| T1, T2, T14 | A1-014, A2-023, E2-009 | A stone, not a golf ball; clearer feedback; line spectra are evidence for energy levels. |
+| T26–T28, T33, T34, T44 | Newsroom, Explanation builder, Odd one out, Mission log teacher page | Applied as proposed (siren "sounds lower in pitch"; "intensity of the starlight"; L = Iω wording; "two or three" neutrons; an "also" line for OO-17; about 3,100 words per route). |
+| T9–T13, T15, T19, T20, T29–T32, T35, T37, T38 | various | **Left as they are** (teacher's decision): each is correct as it stands or follows the guide's or notes' wording. Don't raise them again. |
+| T45–T55 | Generated Paper 1B and Paper 2 questions | Recipes changed and the ten questions reset to drafts (A1-P02, B2-P01, B5-P01, C2-P01, LQ-H01; A1-B01, A1-B02, B3-B01, C5-B01, D1-B01). **Waiting for the teacher's approval in the preview before they are published again.** Until then these changes are not committed. |
+
+Also noted and left: four Paper 1B answers (A1-B01 (b), B3-B01 (f), B5-B01 (b), E1-B01 (c)) need 3 significant figures, as their mark schemes say.
