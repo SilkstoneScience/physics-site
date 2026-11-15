@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics graph maker for IA data · Mr Silkstone's Physics</title>
+  <meta name="description" content="A free graph maker for IB DP Physics Internal Assessments: enter your own data with uncertainties, process it, fit a line, draw the steepest and shallowest lines, and download the graph and data table. Everything stays in your browser.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/graph-maker.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics graph maker for IA data · Mr Silkstone's Physics">
+  <meta property="og:description" content="A free graph maker for IB DP Physics Internal Assessments: enter your own data with uncertainties, process it, fit a line, draw the steepest and shallowest lines, and download the graph and data table. Everything stays in your browser.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/graph-maker.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/graph-maker.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/graph-maker-core.js"></script>
+  <script defer src="../js/graph-maker.js"></script>
+</head>
+<body data-root="../" data-section="experimental" class="gm-page">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="ia.html">Internal Assessment</a> › Graph maker</p>
+    <h1>Graph maker</h1>
+    <p class="lead">Make a graph of your own data that is good enough for your IA report: uncertainty bars, a line of best fit, and the steepest and shallowest lines for the uncertainty in the gradient.</p>
+    <p class="gm-privacy"><strong>Your data stays on this device.</strong> Nothing is sent anywhere: it is saved only in this browser. To move your work to another computer, use <em>Save progress</em> and open the file there.</p>
+    <noscript><p class="notice">The graph maker needs JavaScript. Please turn it on, or use a spreadsheet.</p></noscript>
+
+    <div id="graph-maker" class="gm" hidden>
+      <div class="gm-bar" role="toolbar" aria-label="Your work">
+        <button type="button" class="button secondary" data-act="example">Load an example</button>
+        <button type="button" class="button secondary" data-act="new">Start a new graph</button>
+        <button type="button" class="button secondary" data-act="undo" disabled>Undo</button>
+        <span class="gm-status" aria-live="polite"></span>
+        <span class="gm-saved"></span>
+      </div>
+
+      <div class="gm-layout">
+        <div class="gm-work">
+          <section class="gm-part" aria-labelledby="data">
+            <h2 id="data">1. Your data</h2>
+            <p class="gm-help">Type your readings, or paste them from Excel or Google Sheets (click a cell, then paste). Write each heading in IB style, <strong>quantity symbol / unit</strong>, for example <em>length L / m</em>, and give each column its uncertainty: a value such as <code>0.001</code>, or a percentage such as <code>2%</code>.</p>
+            <div class="gm-table-tools">
+              <label class="button secondary gm-file">Upload a CSV file<input type="file" accept=".csv,.txt,text/csv,text/plain" data-act="csv"></label>
+              <button type="button" class="button secondary" data-act="add-row">Add a row</button>
+              <button type="button" class="button secondary" data-act="add-col">Add a column</button>
+            </div>
+            <div class="table-wrap gm-table-wrap"></div>
+            <div class="gm-notes" aria-live="polite"></div>
+          </section>
+
+          <section class="gm-part" aria-labelledby="process">
+            <h2 id="process">2. Process your data</h2>
+            <p class="gm-soon">Coming in stage 3: repeated trials, calculated columns and uncertainty formulas.</p>
+          </section>
+        </div>
+
+        <div class="gm-side">
+          <section class="gm-part" aria-labelledby="graph">
+            <h2 id="graph">3. Your graph</h2>
+            <p class="gm-soon">Coming in stage 2: the graph, fits and data sets.</p>
+          </section>
+
+          <section class="gm-part" aria-labelledby="save">
+            <h2 id="save">4. Save and download</h2>
+            <p class="gm-soon">Coming in stage 5: PNG, Word table and save files. Your work is already saved in this browser automatically.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
