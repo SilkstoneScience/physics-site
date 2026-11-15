@@ -506,9 +506,11 @@
     const T = { ...blankColumn('period T / s'), kind: 'formula', formula: 't/10', uncFormula: 'Δt/10', radians: false };
     const T2 = { ...blankColumn('period squared T^2 / s^2'), kind: 'formula', formula: 'T^2', uncFormula: '2*(ΔT/T)*T2', radians: false };
     st.columns = [L, t, tm, T, T2];
+    // Hand timing: the trials spread by about 0.4 s (reaction time at the start and the stop, IA page section 8),
+    // so the uncertainty bars are big enough to see and to draw the steepest and shallowest lines through.
     const data = [
-      ['0.200', ['8.94', '9.02', '8.97']], ['0.300', ['11.05', '10.96', '10.99']], ['0.400', ['12.71', '12.63', '12.74']],
-      ['0.500', ['14.15', '14.24', '14.19']], ['0.600', ['15.49', '15.61', '15.55']], ['0.700', ['16.83', '16.74', '16.80']],
+      ['0.200', ['8.86', '9.29', '9.01']], ['0.300', ['11.15', '10.72', '10.92']], ['0.400', ['12.55', '12.98', '12.75']],
+      ['0.500', ['14.35', '13.90', '14.11']], ['0.600', ['15.38', '15.84', '15.55']], ['0.700', ['16.48', '16.95', '16.74']],
     ];
     st.sets[0].rows = data.map(([a, b]) => {
       const m = C.meanOf(b, C.readUnc(t.unc));
@@ -1096,25 +1098,34 @@
     }
     const points = [];
     const cap = 3.5;
+    const rad = S.graph.small ? 2.6 : 4; // marker size ("Smaller points")
+    // bars that are no longer than the point is wide are hidden behind it: counted, so the page can say so
+    const hidden = { y: 0, x: 0, withY: 0, withX: 0 };
     for (const s of shown) {
       const colour = pal.sets[s.i];
       g.strokeStyle = colour; g.lineWidth = 1.1; g.beginPath();
       for (const p of s.pts) {
         const x = X(p.x); const y = Y(p.y);
-        if (p.dy) { const a = Y(p.y - p.dy); const b = Y(p.y + p.dy); g.moveTo(x, a); g.lineTo(x, b); g.moveTo(x - cap, a); g.lineTo(x + cap, a); g.moveTo(x - cap, b); g.lineTo(x + cap, b); }
-        if (p.dx) { const a = X(p.x - p.dx); const b = X(p.x + p.dx); g.moveTo(a, y); g.lineTo(b, y); g.moveTo(a, y - cap); g.lineTo(a, y + cap); g.moveTo(b, y - cap); g.lineTo(b, y + cap); }
+        if (p.dy) {
+          const a = Y(p.y - p.dy); const b = Y(p.y + p.dy); g.moveTo(x, a); g.lineTo(x, b); g.moveTo(x - cap, a); g.lineTo(x + cap, a); g.moveTo(x - cap, b); g.lineTo(x + cap, b);
+          hidden.withY++; if (Math.abs(a - y) <= rad + 1) hidden.y++;
+        }
+        if (p.dx) {
+          const a = X(p.x - p.dx); const b = X(p.x + p.dx); g.moveTo(a, y); g.lineTo(b, y); g.moveTo(a, y - cap); g.lineTo(a, y + cap); g.moveTo(b, y - cap); g.lineTo(b, y + cap);
+          hidden.withX++; if (Math.abs(b - x) <= rad + 1) hidden.x++;
+        }
       }
       g.stroke();
     }
     for (const s of shown) {
       for (const p of s.pts) {
         const x = X(p.x); const y = Y(p.y);
-        marker(g, STYLES[s.i].marker, x, y, 4, p.use, pal.sets[s.i], pal.bg);
+        marker(g, STYLES[s.i].marker, x, y, rad, p.use, pal.sets[s.i], pal.bg);
         points.push({ set: s.i, row: p.row.id, n: p.n, x, y });
       }
     }
     g.restore();
-    return { points, box: { L, T, pw, ph }, range: { x0, x1, y0, y1 } };
+    return { points, hidden, box: { L, T, pw, ph }, range: { x0, x1, y0, y1 } };
   }
 
   // The screen graph: sharp on high-resolution screens, redrawn after every change (once per frame at most).
@@ -1133,7 +1144,7 @@
     canvas.style.height = H + 'px';
     const g = canvas.getContext('2d'); g.setTransform(d, 0, 0, d, 0, 0);
     geo = drawGraph(g, W, H, M, screenPalette(), { font: W < 420 ? 11 : 12 });
-    renderResults(M);
+    renderResults(M, geo);
   }
 
   // The controls above the graph
@@ -1151,12 +1162,13 @@
     ctl('fit').value = S.graph.fit;
     ctl('grid').checked = !!S.graph.grid;
     ctl('zero').checked = !!S.graph.zero;
+    ctl('small').checked = !!S.graph.small;
   }
   $('.gm-graph-controls').addEventListener('input', (e) => {
     const k = e.target.dataset.g;
     if (!k) return;
     if (k === 'title') S.title = e.target.value;
-    else if (k === 'grid' || k === 'zero') S.graph[k] = e.target.checked;
+    else if (k === 'grid' || k === 'zero' || k === 'small') S.graph[k] = e.target.checked;
     else S.graph[k] = e.target.value;
     changed();
   });
@@ -1184,7 +1196,7 @@
   // The fit equations under the graph
   const it = (s) => `<i>${esc(C.pretty(s))}</i>`;
   function signed(text) { return text.startsWith('−') ? ` − ${text.slice(1)}` : ` + ${text}`; }
-  function renderResults(M) {
+  function renderResults(M, drawn) {
     const xh = C.parseHeading(M.xLabel); const yh = C.parseHeading(M.yLabel);
     const xs = xh.sym || 'x'; const ys = yh.sym || 'y';
     const xu = xh.unit; const yu = yh.unit;
@@ -1229,6 +1241,17 @@
       else if (left === 1) notes.push(`${many ? esc(s.name) + ': one' : 'One'} point is left out of the fit (hollow). In your report, say which and give the cause you identified.`);
       const noBars = s.pts.length && s.pts.every((p) => !p.dy);
       if (noBars) notes.push(`${many ? esc(s.name) + ': no' : 'No'} uncertainty bars on the <i>y</i> values yet: give the <i>y</i> column an uncertainty in the table.`);
+    }
+    // Uncertainty bars too short to see past the points (common with precise data): say so, and how to report it.
+    const H = drawn && drawn.hidden;
+    if (H && (H.y || H.x)) {
+      const which = (n, all, dir) => `the ${dir} bars on ${n === all ? (all === 1 ? 'the point' : 'every point') : `${n} of the ${all} points`}`;
+      const parts = [H.y ? which(H.y, H.withY, 'vertical') : '', H.x ? which(H.x, H.withX, 'horizontal') : ''].filter(Boolean);
+      // a caption to suggest: "The horizontal uncertainty bars and some of the vertical ones are smaller than the points."
+      const subj = [H.x ? (H.x === H.withX ? 'the horizontal uncertainty bars' : 'some of the horizontal uncertainty bars') : '',
+        H.y ? (H.y === H.withY ? `the vertical ${H.x ? 'ones' : 'uncertainty bars'}` : `some of the vertical ${H.x ? 'ones' : 'uncertainty bars'}`) : ''].filter(Boolean).join(' and ');
+      const caption = subj[0].toUpperCase() + subj.slice(1) + ' are smaller than the points.';
+      notes.push(`Some uncertainty bars are hidden: ${parts.join(' and ')} are smaller than the points themselves. That's fine (it means those measurements are precise), but say so in your graph's caption, for example "${caption}"${S.graph.small ? '' : ' Ticking "Smaller points" may make them visible.'}`);
     }
     results.innerHTML = out.join('') + (notes.length ? `<ul class="gm-small gm-graph-notes">${notes.map((n) => `<li>${n}</li>`).join('')}</ul>` : '');
   }
