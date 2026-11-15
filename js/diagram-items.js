@@ -611,6 +611,211 @@
       rect(18, 3, 10, 3, 'o f') + line(44, 6, 44, 20, 'o h') + line(48, 6, 48, 20, 'o h')
   });
 
+  // A stand for optics: a post and a base under something 60 wide whose bottom is at y = top
+  const opticsStand = (top) => rect(27, top, 6, 30) + rect(12, top + 30, 36, 6, 'o f', 1.5);
+
+  add({
+    id: 'ray-box', name: 'Ray box (seen from above)', group: 'optics',
+    keywords: ['ray box', 'light box', 'lamp', 'ray', 'snell', 'refraction'],
+    w: 76, h: 40,
+    anchors: () => ({ beam: [76, 20] }),
+    draw: () => rect(0, 0, 70, 40, 'o f', 2) + circle(26, 20, 6, 'o h') + line(26, 14, 26, 26, 'o h') +
+      rect(70, 3, 6, 15, 'o k') + rect(70, 22, 6, 15, 'o k')
+  });
+
+  add({
+    id: 'lamp', name: 'Lamp (light source on a stand)', group: 'optics',
+    keywords: ['lamp', 'bulb', 'light source', 'light', 'filament lamp'],
+    w: 60, h: 96,
+    anchors: () => ({ light: [30, 16] }),
+    draw: () => opticsStand(60) + rect(22, 30, 16, 30, 'o m', 2) +
+      path('M22 30 C14 24 14 4 30 2 C46 4 46 24 38 30 Z', 'o g') + path('M26 28 L28 14 L32 18 L34 28', 'o h')
+  });
+
+  add({
+    id: 'convex-lens', name: 'Convex (converging) lens in a holder', group: 'optics',
+    keywords: ['convex lens', 'converging lens', 'lens', 'magnifying'],
+    w: 60, h: 116,
+    anchors: () => ({ centre: [30, 40] }),
+    draw: () => opticsStand(80) + path('M30 0 Q44 40 30 80 Q16 40 30 0 Z', 'o g')
+  });
+
+  add({
+    id: 'concave-lens', name: 'Concave (diverging) lens in a holder', group: 'optics',
+    keywords: ['concave lens', 'diverging lens', 'lens'],
+    w: 60, h: 116,
+    anchors: () => ({ centre: [30, 40] }),
+    draw: () => opticsStand(80) + path('M21 0 H39 Q29 40 39 80 H21 Q31 40 21 0 Z', 'o g')
+  });
+
+  add({
+    id: 'plane-mirror', name: 'Plane mirror in a holder', group: 'optics',
+    keywords: ['mirror', 'plane mirror', 'reflection'],
+    w: 60, h: 116,
+    anchors: () => ({ face: [33, 40] }),
+    draw: () => {
+      let s = opticsStand(80) + rect(29, 0, 4, 80, 'o f');
+      for (let y = 4; y <= 80; y += 6) s += line(29, y, 24, y + 5, 'o h');   // hatching on the back (silvered side faces right)
+      return s;
+    }
+  });
+
+  add({
+    id: 'glass-block', name: 'Rectangular glass block (seen from above)', group: 'optics',
+    keywords: ['glass block', 'perspex block', 'block', 'refraction', 'snell', 'refractive index'],
+    w: 120, h: 70,
+    draw: () => rect(0, 0, 120, 70, 'o g')
+  });
+
+  add({
+    id: 'semicircular-block', name: 'Semicircular glass block (seen from above)', group: 'optics',
+    keywords: ['semicircular block', 'semi-circular', 'half block', 'critical angle', 'total internal reflection'],
+    w: 120, h: 62,
+    anchors: () => ({ centre: [60, 60] }),
+    draw: () => path('M0 60 A60 60 0 0 1 120 60 Z', 'o g') + line(60, 55, 60, 60, 'o h')
+  });
+
+  add({
+    id: 'prism', name: 'Triangular prism (seen from above)', group: 'optics',
+    keywords: ['prism', 'triangular prism', 'dispersion', 'spectrum'],
+    w: 100, h: 87,
+    draw: () => path('M0 87 H100 L50 0 Z', 'o g')
+  });
+
+  add({
+    id: 'slit-slide', name: 'Slits or grating in a holder', group: 'optics',
+    keywords: ['slit', 'single slit', 'double slit', 'diffraction grating', 'grating', 'young'],
+    w: 60, h: 116,
+    options: [{ key: 'kind', label: 'Type', type: 'choice', values: [['single', 'Single slit'], ['double', 'Double slit'], ['grating', 'Diffraction grating']], def: 'single' }],
+    anchors: () => ({ centre: [30, 40] }),
+    draw: (w, h, opt) => {
+      // Seen from the side, a slit is a gap in a thin dark plate
+      const gaps = opt.kind === 'double' ? [[35, 37.5], [42.5, 45]] : opt.kind === 'single' ? [[38, 42]] : [];
+      let s = opticsStand(80);
+      if (opt.kind === 'grating') {
+        s += rect(28, 0, 4, 80, 'o f');
+        for (let y = 26; y < 54; y += 3) s += line(28, y, 32, y, 'o h');
+        return s;
+      }
+      let y0 = 0;
+      gaps.concat([[80, 80]]).forEach(([a, b]) => { if (a > y0) s += rect(28, y0, 4, a - y0, 'o k'); y0 = b; });
+      return s;
+    }
+  });
+
+  add({
+    id: 'screen', name: 'Screen on a stand', group: 'optics',
+    keywords: ['screen', 'white screen', 'card', 'wall'],
+    w: 60, h: 126,
+    draw: () => opticsStand(90) + rect(26, 0, 8, 90, 'o f', 1)
+  });
+
+  add({
+    id: 'signal-generator', name: 'Signal generator', group: 'optics',
+    keywords: ['signal generator', 'function generator', 'oscillator', 'frequency', 'ac supply'],
+    w: 110, h: 60,
+    anchors: () => ({ a: [75, 48], b: [95, 48] }),
+    draw: () => rect(0, 0, 110, 60, 'o f', 3) + rect(8, 10, 52, 18, 'o f', 2) + text(34, 19.5, '50.0 Hz', 9) +
+      circle(85, 22, 10) + line(85, 22, 85, 13) + path('M10 46 q4 -8 8 0 t8 0 t8 0', 'o h') +
+      circle(75, 48, 4) + circle(95, 48, 4, 'o k')
+  });
+
+  add({
+    id: 'loudspeaker', name: 'Loudspeaker', group: 'optics',
+    keywords: ['loudspeaker', 'speaker', 'sound', 'sound waves'],
+    w: 34, h: 60,
+    anchors: () => ({ a: [0, 25], b: [0, 35], front: [34, 30] }),
+    draw: () => path('M0 20 H14 L34 0 V60 L14 40 H0 Z')
+  });
+
+  add({
+    id: 'vibration-generator', name: 'Vibration generator', group: 'optics',
+    keywords: ['vibration generator', 'vibrator', 'mechanical oscillator', 'standing waves', 'string'],
+    w: 60, h: 70,
+    anchors: () => ({ top: [30, 1], a: [8, 62], b: [20, 62] }),
+    draw: () => rect(26, 6, 8, 16, 'o m') + circle(30, 4, 3) + rect(0, 20, 60, 50, 'o f', 3) +
+      circle(8, 62, 3.5) + circle(20, 62, 3.5, 'o k') + path('M34 46 q4 -8 8 0 t8 0', 'o h')
+  });
+
+  add({
+    id: 'tuning-fork', name: 'Tuning fork', group: 'optics',
+    keywords: ['tuning fork', 'fork', 'frequency', 'sound', 'resonance'],
+    w: 44, h: 110,
+    draw: () =>
+      rect(19, 76, 6, 34, 'o f', 2) +
+      path('M8 0 H14 V60 Q14 70 22 70 Q30 70 30 60 V0 H36 V60 Q36 78 22 78 Q8 78 8 60 Z')
+  });
+
+  add({
+    id: 'resonance-tube', name: 'Resonance tube in water', group: 'optics',
+    keywords: ['resonance tube', 'closed pipe', 'air column', 'speed of sound', 'standing wave', 'tube'],
+    w: 60, h: 220, stretch: 'h',
+    anchors: (w, h) => ({ top: [30, 0] }),
+    draw: (w, h) => {
+      const wl = h * 0.42;   // water level in the outer cylinder
+      return path(`M3 ${n(wl)} V${h - 6} Q3 ${h} 9 ${h} H51 Q57 ${h} 57 ${h - 6} V${n(wl)} Z`, 'w') + line(3, wl, 57, wl, 'o h') +
+        path(`M3 ${n(h * 0.3)} V${h - 6} Q3 ${h} 9 ${h} H51 Q57 ${h} 57 ${h - 6} V${n(h * 0.3)}`, 'o') +
+        rect(21, 0, 18, h * 0.85, 'o f') + rect(21, wl, 18, h * 0.85 - wl, 'w') + line(21, h * 0.85, 39, h * 0.85, 'o h') +
+        path(`M21 0 V${n(h * 0.85)} M39 0 V${n(h * 0.85)}`, 'o');
+    }
+  });
+
+  // =====================================================================
+  // Electricity and magnetism: apparatus
+  // =====================================================================
+  add({
+    id: 'power-supply', name: 'Power supply unit', group: 'electrical',
+    keywords: ['power supply', 'psu', 'low voltage supply', 'supply', 'dc supply', 'battery pack'],
+    w: 120, h: 70,
+    anchors: () => ({ pos: [85, 50], neg: [105, 50] }),
+    draw: () => rect(0, 0, 120, 70, 'o f', 3) + rect(10, 10, 46, 18, 'o f', 2) + text(33, 19.5, '6.0 V', 10) +
+      circle(30, 48, 11) + line(30, 48, 37, 40) + circle(85, 50, 5) + circle(105, 50, 5, 'o k') +
+      text(85, 37, '+', 10) + text(105, 37, '−', 10)
+  });
+
+  add({
+    id: 'multimeter', name: 'Digital multimeter', group: 'electrical',
+    keywords: ['multimeter', 'meter', 'voltmeter', 'ammeter', 'ohmmeter', 'digital meter'],
+    w: 60, h: 100,
+    anchors: () => ({ com: [30, 88], v: [46, 88], a: [14, 88] }),
+    draw: () => rect(0, 0, 60, 100, 'o f', 6) + rect(8, 8, 44, 22, 'o f', 2) + text(30, 19.5, '0.00', 11) +
+      circle(30, 56, 13) + line(30, 56, 38, 47) + circle(14, 88, 4) + circle(30, 88, 4, 'o k') + circle(46, 88, 4)
+  });
+
+  add({
+    id: 'coil', name: 'Coil (solenoid)', group: 'electrical',
+    keywords: ['coil', 'solenoid', 'electromagnet', 'inductor', 'turns'],
+    w: 140, h: 46, stretch: 'w',
+    anchors: (w) => ({ a: [0, 4], b: [w, 4] }),
+    draw: (w) => {
+      let s = rect(6, 8, w - 12, 30, 'o f', 2);
+      for (let x = 10; x < w - 12; x += 6) s += line(x, 6, x + 4, 40, 'o');
+      return s + path(`M0 4 H10 M${w - 8} 6 V4 H${w}`, 'o');
+    }
+  });
+
+  add({
+    id: 'bar-magnet', name: 'Bar magnet', group: 'electrical',
+    keywords: ['bar magnet', 'magnet', 'north', 'south', 'poles'],
+    w: 120, h: 24,
+    draw: () => rect(0, 0, 60, 24, 'o f') + rect(60, 0, 60, 24, 'o m') + text(30, 12.5, 'N', 14) + text(90, 12.5, 'S', 14)
+  });
+
+  add({
+    id: 'u-magnet', name: 'U-shaped magnet', group: 'electrical',
+    keywords: ['u magnet', 'horseshoe magnet', 'magnet', 'magnadur', 'poles'],
+    w: 80, h: 100,
+    draw: () => path('M0 0 H20 V60 Q20 80 40 80 Q60 80 60 60 V0 H80 V60 Q80 100 40 100 Q0 100 0 60 Z') +
+      rect(0, 0, 20, 20, 'o m') + rect(60, 0, 20, 20, 'o m') + text(10, 10.5, 'N', 12) + text(70, 10.5, 'S', 12)
+  });
+
+  add({
+    id: 'compass', name: 'Plotting compass', group: 'electrical',
+    keywords: ['compass', 'plotting compass', 'needle', 'magnetic field'],
+    w: 40, h: 40,
+    draw: () => circle(20, 20, 19) + path('M20 4 L25 20 L15 20 Z', 'o k') + path('M20 36 L25 20 L15 20 Z', 'o f') + circle(20, 20, 1.6, 'k')
+  });
+
   // =====================================================================
   // Circuit symbols (data booklet, page 5), all 80 × 40 with ends at (0, 20) and (80, 20)
   // =====================================================================
@@ -643,6 +848,269 @@
     keywords: ['resistor', 'resistance', 'symbol'],
     w: SYM_W, h: SYM_H, anchors: ends,
     draw: () => line(0, MID, 20, MID) + line(60, MID, 80, MID) + rect(20, 14, 40, 12)
+  });
+
+  // A small arrow from (x1, y1) to (x2, y2) with a solid head, for the symbols
+  function arrow(x1, y1, x2, y2, hl = 5) {
+    const L = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / L, uy = (y2 - y1) / L;
+    const bx = x2 - ux * hl, by = y2 - uy * hl, px = -uy * hl * 0.45, py = ux * hl * 0.45;
+    return line(x1, y1, bx, by, 'o h') + `<polygon class="k" points="${n(x2)},${n(y2)} ${n(bx + px)},${n(by + py)} ${n(bx - px)},${n(by - py)}"/>`;
+  }
+  const resistorBody = () => line(0, MID, 20, MID) + line(60, MID, 80, MID) + rect(20, 14, 40, 12);
+
+  add({
+    id: 'sym-battery', name: 'Battery', group: 'symbols',
+    keywords: ['battery', 'cells', 'emf', 'symbol'],
+    w: SYM_W, h: SYM_H, anchors: ends,
+    draw: () => line(0, MID, 26, MID) + line(26, 6, 26, 34) + line(32, 13, 32, 27) +
+      [35, 38, 41, 44].map((x) => circle(x, MID, 0.9, 'k')).join('') +   // the dotted line: more cells in between
+      line(48, 6, 48, 34) + line(54, 13, 54, 27) + line(54, MID, 80, MID)
+  });
+
+  add({
+    id: 'sym-voltmeter', name: 'Voltmeter', group: 'symbols',
+    keywords: ['voltmeter', 'potential difference', 'voltage', 'meter', 'symbol'],
+    w: SYM_W, h: SYM_H, anchors: ends,
+    draw: () => line(0, MID, 27, MID) + line(53, MID, 80, MID) + circle(40, MID, 13) + text(40, MID + 0.5, 'V', 14)
+  });
+
+  add({
+    id: 'sym-variable-resistor', name: 'Variable resistor', group: 'symbols',
+    keywords: ['variable resistor', 'rheostat', 'resistor', 'symbol'],
+    w: SYM_W, h: SYM_H, anchors: ends,
+    draw: () => resistorBody() + arrow(24, 36, 58, 3, 6)
+  });
+
+  add({
+    id: 'sym-ldr', name: 'Light-dependent resistor (LDR)', group: 'symbols',
+    keywords: ['ldr', 'light dependent resistor', 'light sensor', 'resistor', 'symbol'],
+    w: SYM_W, h: SYM_H, anchors: ends,
+    draw: () => resistorBody() + arrow(22, 0, 32, 10) + arrow(30, 0, 40, 10)
+  });
+
+  add({
+    id: 'sym-thermistor', name: 'Thermistor', group: 'symbols',
+    keywords: ['thermistor', 'temperature sensor', 'ntc', 'resistor', 'symbol'],
+    w: SYM_W, h: SYM_H, anchors: ends,
+    draw: () => resistorBody() + path('M22 36 L56 4 H64', 'o h')
+  });
+
+  add({
+    id: 'sym-potentiometer', name: 'Potentiometer', group: 'symbols',
+    keywords: ['potentiometer', 'potential divider', 'pot', 'slider', 'symbol'],
+    w: SYM_W, h: SYM_H,
+    anchors: () => ({ a: [0, MID], b: [SYM_W, MID], slider: [40, 0] }),
+    draw: () => resistorBody() + arrow(40, 0, 40, 14, 6)
+  });
+
+  add({
+    id: 'sym-lamp', name: 'Lamp', group: 'symbols',
+    keywords: ['lamp', 'bulb', 'filament lamp', 'light', 'symbol'],
+    w: SYM_W, h: SYM_H, anchors: ends,
+    draw: () => line(0, MID, 27, MID) + line(53, MID, 80, MID) + circle(40, MID, 13) +
+      line(30.8, 10.8, 49.2, 29.2) + line(49.2, 10.8, 30.8, 29.2)
+  });
+
+  add({
+    id: 'sym-led', name: 'Light-emitting diode (LED)', group: 'symbols',
+    keywords: ['led', 'light emitting diode', 'diode', 'light', 'symbol'],
+    w: SYM_W, h: SYM_H, anchors: ends,
+    draw: () => line(0, MID, 32, MID) + line(48, MID, 80, MID) + path('M32 10 V30 L48 20 Z') + line(48, 10, 48, 30) +
+      arrow(42, 8, 50, 0) + arrow(48, 10, 56, 2)
+  });
+
+  add({
+    id: 'sym-heater', name: 'Heating element', group: 'symbols',
+    keywords: ['heating element', 'heater', 'element', 'symbol'],
+    w: SYM_W, h: SYM_H, anchors: ends,
+    draw: () => line(0, MID, 18, MID) + line(62, MID, 80, MID) + rect(18, 14, 44, 12) + line(29, 14, 29, 26) + line(40, 14, 40, 26) + line(51, 14, 51, 26)
+  });
+
+  add({
+    id: 'sym-motor', name: 'Motor', group: 'symbols',
+    keywords: ['motor', 'electric motor', 'symbol'],
+    w: SYM_W, h: SYM_H, anchors: ends,
+    draw: () => line(0, MID, 27, MID) + line(53, MID, 80, MID) + circle(40, MID, 13) + text(40, MID + 0.5, 'M', 13)
+  });
+
+  add({
+    id: 'sym-earth', name: 'Earth (ground)', group: 'symbols',
+    keywords: ['earth', 'ground', 'symbol'],
+    w: 40, h: 40,
+    anchors: () => ({ a: [20, 0] }),
+    draw: () => line(20, 0, 20, 22) + line(8, 22, 32, 22) + line(13, 28, 27, 28) + line(17.5, 34, 22.5, 34)
+  });
+
+  // Common symbols that are not in the data booklet
+  const NOT_IN_BOOKLET = 'This symbol is not in the IB data booklet.';
+  add({
+    id: 'sym-diode', name: 'Diode', group: 'symbols', note: NOT_IN_BOOKLET,
+    keywords: ['diode', 'rectifier', 'symbol'],
+    w: SYM_W, h: SYM_H, anchors: ends,
+    draw: () => line(0, MID, 32, MID) + line(48, MID, 80, MID) + path('M32 10 V30 L48 20 Z') + line(48, 10, 48, 30)
+  });
+
+  add({
+    id: 'sym-dc-supply', name: 'd.c. power supply', group: 'symbols', note: NOT_IN_BOOKLET,
+    keywords: ['dc supply', 'd.c.', 'power supply', 'direct current', 'supply', 'symbol'],
+    w: SYM_W, h: SYM_H, anchors: ends,
+    draw: () => line(0, MID, 27, MID) + line(53, MID, 80, MID) + circle(40, MID, 13) + text(40, MID + 0.5, 'd.c.', 8) +
+      text(22, 10, '+', 10) + text(58, 10, '−', 10)
+  });
+
+  add({
+    id: 'sym-ac-supply', name: 'a.c. power supply', group: 'symbols', note: NOT_IN_BOOKLET,
+    keywords: ['ac supply', 'a.c.', 'alternating current', 'power supply', 'mains', 'supply', 'symbol'],
+    w: SYM_W, h: SYM_H, anchors: ends,
+    draw: () => line(0, MID, 27, MID) + line(53, MID, 80, MID) + circle(40, MID, 13) + path('M32 20 C35 12 37 12 40 20 C43 28 45 28 48 20', 'o h')
+  });
+
+  // =====================================================================
+  // Nuclear physics
+  // =====================================================================
+  add({
+    id: 'gm-tube', name: 'Geiger–Müller tube', group: 'nuclear',
+    keywords: ['gm tube', 'geiger', 'geiger-muller', 'detector', 'radiation', 'counter'],
+    w: 140, h: 42,
+    anchors: () => ({ window: [0, 18], cable: [140, 40] }),
+    draw: () => path('M110 18 C126 18 124 40 140 40', 'o') + rect(4, 6, 106, 24, 'o f', 4) + rect(0, 4, 6, 28, 'o m', 1) + line(14, 18, 96, 18, 'o h')
+  });
+
+  add({
+    id: 'counter', name: 'Counter (scaler)', group: 'nuclear',
+    keywords: ['counter', 'scaler', 'ratemeter', 'count', 'geiger counter'],
+    w: 120, h: 60,
+    anchors: () => ({ input: [105, 45] }),
+    draw: () => rect(0, 0, 120, 60, 'o f', 3) + rect(10, 10, 74, 22, 'o f', 2) + text(47, 21.5, '00000', 13) +
+      rect(10, 40, 14, 9, 'o f', 1.5) + rect(30, 40, 14, 9, 'o f', 1.5) + circle(105, 45, 5) + circle(105, 45, 1.6, 'k')
+  });
+
+  add({
+    id: 'sealed-source', name: 'Sealed source in a holder', group: 'nuclear',
+    keywords: ['source', 'radioactive source', 'sealed source', 'alpha', 'beta', 'gamma', 'radiation'],
+    w: 90, h: 32,
+    anchors: () => ({ window: [0, 16] }),
+    draw: () => rect(30, 13, 60, 6, 'o m', 2) + rect(0, 6, 30, 20, 'o f', 2) + circle(4, 16, 2.5, 'k')
+  });
+
+  add({
+    id: 'tongs', name: 'Tongs', group: 'nuclear',
+    keywords: ['tongs', 'forceps', 'handling tool'],
+    w: 120, h: 22,
+    anchors: () => ({ tip: [0, 11] }),
+    draw: () => path('M0 9 L60 11 L120 2 M0 13 L60 11 L120 20') + circle(60, 11, 2.5, 'o f')
+  });
+
+  add({
+    id: 'absorber', name: 'Absorber sheet in a holder', group: 'nuclear',
+    keywords: ['absorber', 'paper', 'aluminium', 'aluminum', 'lead', 'sheet', 'shielding', 'penetration'],
+    w: 60, h: 90,
+    options: [{ key: 'material', label: 'Material', type: 'choice', values: [['paper', 'Paper'], ['aluminium', 'Aluminium'], ['lead', 'Lead']], def: 'aluminium' }],
+    draw: (w, h, opt) => {
+      const t = opt.material === 'paper' ? 2 : opt.material === 'lead' ? 8 : 4;   // thicker for aluminium and lead
+      return rect(30 - t / 2, 0, t, 72, opt.material === 'lead' ? 'o k' : opt.material === 'aluminium' ? 'o m' : 'o f') +
+        rect(18, 70, 24, 14, 'o f', 1.5) + rect(10, 84, 40, 6, 'o f', 1.5);
+    }
+  });
+
+  add({
+    id: 'lead-block', name: 'Lead block (shielding)', group: 'nuclear',
+    keywords: ['lead block', 'lead', 'shield', 'shielding', 'castle', 'brick'],
+    w: 60, h: 40,
+    draw: () => rect(0, 0, 60, 40, 'o m', 1) + text(30, 20.5, 'Pb', 13)
+  });
+
+  // =====================================================================
+  // Sensors and dataloggers (generic look-alikes, no brand names)
+  // =====================================================================
+  add({
+    id: 'datalogger', name: 'Datalogger (interface)', group: 'sensors',
+    keywords: ['datalogger', 'data logger', 'interface', 'logger', 'labquest'],
+    w: 110, h: 60,
+    anchors: () => ({ in1: [20, 48], in2: [40, 48], in3: [60, 48], usb: [110, 48] }),
+    draw: () => rect(0, 0, 110, 60, 'o f', 6) + rect(10, 8, 56, 26, 'o f', 2) + path('M14 28 L24 20 L34 24 L46 14 L60 18', 'o h') +
+      circle(20, 48, 5) + circle(40, 48, 5) + circle(60, 48, 5) + rect(100, 44, 10, 8, 'o k')
+  });
+
+  add({
+    id: 'laptop', name: 'Laptop', group: 'sensors',
+    keywords: ['laptop', 'computer', 'pc', 'notebook'],
+    w: 140, h: 96,
+    anchors: () => ({ usb: [140, 90] }),
+    draw: () => rect(10, 0, 120, 82, 'o f', 4) + rect(18, 8, 104, 66, 'o h', 1) + path('M24 62 L44 44 L60 52 L80 30 L114 36', 'o h') +
+      path('M0 84 H140 L132 96 H8 Z')
+  });
+
+  add({
+    id: 'smartphone', name: 'Smartphone (camera or sensor app)', group: 'sensors',
+    keywords: ['phone', 'smartphone', 'mobile', 'camera', 'video', 'phyphox', 'app'],
+    w: 40, h: 76,
+    draw: () => rect(0, 0, 40, 76, 'o f', 6) + rect(4, 9, 32, 58, 'o h', 1) + circle(20, 4.5, 1.6, 'k') + rect(15, 70, 10, 2, 'o h', 1)
+  });
+
+  add({
+    id: 'camera-tripod', name: 'Tripod for a phone or camera', group: 'sensors',
+    keywords: ['tripod', 'camera tripod', 'phone holder', 'video'],
+    w: 60, h: 110,
+    anchors: () => ({ top: [30, 0] }),
+    draw: () => rect(18, 0, 24, 8, 'o f', 2) + rect(27, 8, 6, 40) + path('M30 46 L4 110 M30 46 L56 110 M30 46 L30 110', 'o b')
+  });
+
+  add({
+    id: 'light-gate', name: 'Light gate', group: 'sensors',
+    keywords: ['light gate', 'photogate', 'photo gate', 'timing gate', 'infrared'],
+    w: 50, h: 80,
+    anchors: () => ({ beam: [25, 30], cable: [25, 80] }),
+    draw: () => rect(0, 0, 10, 62) + rect(40, 0, 10, 62) + rect(0, 60, 50, 12, 'o f', 1.5) +
+      line(10, 30, 40, 30, 'o h') + circle(10, 30, 2, 'k') + circle(40, 30, 2, 'k') + line(25, 72, 25, 80)
+  });
+
+  add({
+    id: 'motion-sensor', name: 'Motion sensor (ultrasonic)', group: 'sensors',
+    keywords: ['motion sensor', 'motion detector', 'ultrasonic', 'distance sensor', 'position'],
+    w: 40, h: 50,
+    anchors: () => ({ face: [40, 25], cable: [0, 25] }),
+    draw: () => rect(0, 6, 30, 38, 'o f', 3) + rect(30, 0, 10, 50, 'o m', 2) + line(35, 8, 35, 42, 'o h')
+  });
+
+  add({
+    id: 'force-sensor', name: 'Force sensor', group: 'sensors',
+    keywords: ['force sensor', 'force probe', 'load cell', 'dual-range', 'force meter'],
+    w: 82, h: 40,
+    anchors: () => ({ hook: [82, 22], cable: [0, 22] }),
+    draw: () => rect(60, 20, 14, 4, 'o m') + circle(78, 22, 4) + rect(0, 8, 60, 28, 'o f', 3) + text(30, 22.5, 'F', 11)
+  });
+
+  add({
+    id: 'pressure-sensor', name: 'Gas pressure sensor', group: 'sensors',
+    keywords: ['pressure sensor', 'gas pressure sensor', 'pressure probe', 'barometer'],
+    w: 68, h: 30,
+    anchors: () => ({ nozzle: [68, 15], cable: [0, 15] }),
+    draw: () => rect(50, 11, 12, 8, 'o f') + rect(62, 13, 6, 4, 'o m') + rect(0, 0, 50, 30, 'o f', 3) + text(25, 15.5, 'kPa', 9)
+  });
+
+  add({
+    id: 'temperature-probe', name: 'Temperature probe', group: 'sensors',
+    keywords: ['temperature probe', 'temperature sensor', 'thermocouple', 'digital thermometer', 'thermometer'],
+    w: 160, h: 16,
+    anchors: () => ({ tip: [160, 8], cable: [0, 8] }),
+    draw: () => path('M30 6 H156 Q160 6 160 8 Q160 10 156 10 H30 Z', 'o m') + rect(0, 2, 32, 12, 'o f', 3)
+  });
+
+  add({
+    id: 'light-sensor', name: 'Light sensor', group: 'sensors',
+    keywords: ['light sensor', 'light probe', 'light meter', 'lux', 'intensity'],
+    w: 48, h: 24,
+    anchors: () => ({ window: [48, 12], cable: [0, 12] }),
+    draw: () => rect(0, 4, 44, 16, 'o f', 3) + rect(44, 2, 4, 20, 'o g', 1)
+  });
+
+  add({
+    id: 'sound-sensor', name: 'Sound sensor (microphone)', group: 'sensors',
+    keywords: ['microphone', 'sound sensor', 'mic', 'sound level', 'decibel'],
+    w: 68, h: 28,
+    anchors: () => ({ head: [68, 14], cable: [0, 14] }),
+    draw: () => rect(0, 8, 50, 12, 'o f', 3) + circle(58, 14, 9.5) + line(52, 9, 64, 9, 'o h') + line(50, 14, 67, 14, 'o h') + line(52, 19, 64, 19, 'o h')
   });
 
   // =====================================================================

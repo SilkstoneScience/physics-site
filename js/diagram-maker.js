@@ -900,7 +900,7 @@
     const t = D.thumbSize(it), pad = 4;
     // Pictures are shrunk to fit the tile (about 90 × 48 px); --k keeps their lines about 1.5 px thick
     const s = Math.min(90 / (t.w + 2 * pad), 48 / (t.h + 2 * pad));
-    return `<button type="button" class="dm-tile" data-item="${it.id}" title="${esc(it.name)}">` +
+    return `<button type="button" class="dm-tile" data-item="${it.id}" title="${esc(it.name + (it.note ? '. ' + it.note : ''))}">` +
       `<svg class="dm-art" style="--k:${r2(0.75 / s)}" viewBox="${-pad} ${-pad} ${t.w + 2 * pad} ${t.h + 2 * pad}" aria-hidden="true">${D.markup(it, t.w, t.h)}</svg>` +
       `<span>${esc(it.name)}</span></button>`;
   }
@@ -994,7 +994,7 @@
     if (o.type === 'line') { props.innerHTML = lineProps(o); return; }
     if (o.type === 'label') { props.innerHTML = labelProps(o); return; }
     const it = D.byId[o.item];
-    let s = `<h2>${esc(it ? it.name : o.item)}</h2>`;
+    let s = `<h2>${esc(it ? it.name : o.item)}</h2>` + (it && it.note ? `<p class="dm-tip">${esc(it.note)}</p>` : '');
     if (it && it.options) {
       it.options.forEach((op) => {
         const v = o.opt && o.opt[op.key] !== undefined ? o.opt[op.key] : op.def;

@@ -34,7 +34,8 @@ on main by then.
 (for example a metre rule keeps its tick marks the right size, and a stretched spring keeps its number of coils and
 spreads them out, as a real spring does; the number of coils is an option).
 Items marked **(options)** have a choice in the side panel. Items marked ● are in the **first batch** (17 items,
-drawn 15 November 2026), chosen to test every kind of drawing: tall, long, round, glass with water, stretchy, and
+drawn 15 November 2026; all 101 items were drawn the same day in two more batches, each checked full size and in
+dark mode), chosen to test every kind of drawing: tall, long, round, glass with water, stretchy, and
 circuit symbols. New batches are checked on `tools/diagram-items-preview.html` (not published): every item as a bank
 picture, at full size with its variants, and in a sample set-up on screen and as the PNG will look.
 
@@ -158,7 +159,8 @@ Generic look-alikes, no brand names or logos.
 
 91. Datalogger / interface box
 92. Laptop
-93. Smartphone (for video or a sensor app) **(options: on a tripod)**
+93. Smartphone (for video or a sensor app)
+93a. Tripod for a phone or camera (a separate item instead of a phone option, so the phone can be placed anywhere)
 94. Light gate
 95. Motion sensor (ultrasonic)
 96. Force sensor
