@@ -974,6 +974,93 @@ export async function runTests() {
     }
   }
 
+  // ===== 7. Challenge Mode: experimental/circuits/challenges.json =====
+  {
+    const fs = await import('node:fs');
+    const path = await import('node:path');
+    const M = require('../../js/circuits/model.js');
+    const K = require('../../js/circuits/marking.js');
+    const { checkNumeric } = require('../../js/numeric.js');
+    const root = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1')), '../..');
+    let list = [];
+    try { list = JSON.parse(fs.readFileSync(path.join(root, 'experimental/circuits/challenges.json'), 'utf8')); } catch (e) { check('challenges: the file is valid JSON', false, e.message); }
+    const b5 = fs.readFileSync(path.join(root, 'themes/b5.html'), 'utf8');
+    const ids = new Set();
+    // Values worked out by hand for the predict challenges (an independent check on the engine and the data).
+    const HAND = { 'CK-B5-08': [1.5, 0.5, 6], 'CK-B5-09': [1, 8, 1], 'CK-B5-10': [6 * 12.5 / 87.5] };
+    for (const ch of list) {
+      const n = `challenge ${ch.id}`;
+      check(`${n}: id is CK-B5-nn and unique`, /^CK-B5-\d\d$/.test(ch.id) && !ids.has(ch.id));
+      ids.add(ch.id);
+      check(`${n}: type`, ['target', 'measure', 'predict'].includes(ch.type));
+      check(`${n}: level SL or HL`, ch.level === 'SL' || ch.level === 'HL');
+      check(`${n}: title, summary, brief and explanation`, [ch.title, ch.summary, ch.brief, ch.explanation].every((s) => typeof s === 'string' && s.trim().length > 5));
+      check(`${n}: at least one hint`, Array.isArray(ch.hints) && ch.hints.length >= 1 && ch.hints.every((h) => typeof h === 'string' && h.length > 10));
+      check(`${n}: its sections exist on the B.5 page`, Array.isArray(ch.sections) && ch.sections.length > 0 && ch.sections.every((s) => b5.includes(`<h2 id="${s}"`)), JSON.stringify(ch.sections));
+      const start = M.normalise(ch.start);
+      check(`${n}: the start circuit is sound`, M.validate(start).length === 0 && start.components.length === (ch.start.components || []).length, M.validate(start).join('; '));
+      const shown = M.createStore(ch.start).drawing;
+      check(`${n}: the start circuit has no wires on top of each other or across components`, M.layoutProblems(shown).length === 0, JSON.stringify(M.layoutProblems(shown)));
+      if (ch.model) { const md = M.createStore(ch.model).drawing; check(`${n}: the model answer has no wires on top of each other or across components`, M.layoutProblems(md).length === 0, JSON.stringify(M.layoutProblems(md))); }
+      check(`${n}: locked and hidden parts exist (hidden ones locked too)`, (ch.locked || []).every((id) => start.components.some((c) => c.id === id)) && (ch.hidden || []).every((id) => (ch.locked || []).includes(id)));
+      if (ch.type === 'target') {
+        const types = new Set([...start.components.map((c) => c.type), ...Object.keys(ch.toolbox || {})]);
+        check(`${n}: has checks`, Array.isArray(ch.checks) && ch.checks.length >= 2);
+        const model = M.normalise(ch.model);
+        const good = K.markDrawing(ch, model);
+        check(`${n}: the model answer passes every check`, good.all, good.results.filter((r) => !r.pass).map((r) => r.text).join(' | '));
+        const bad = K.markDrawing(ch, M.normalise(ch.wrong));
+        check(`${n}: a wrong answer fails`, !bad.all);
+        // A spare part left hanging by one end (it carries no current) mustn't stop a correct circuit passing.
+        const spareType = Object.keys(ch.toolbox || {}).find((t) => C.TYPES[t].terminals.length === 2);
+        if (spareType) {
+          const spare = M.clone(model);
+          spare.components.push({ id: 'spare1', type: spareType, x: 40, y: 40, rot: 0, label: 'SPARE1', params: C.normalise(spareType, (ch.toolbox[spareType] || {}).params) });
+          const anchor = spare.components.find((c) => c.id === ch.locked[0]);
+          spare.wires.push({ id: 'wspare', from: { c: 'spare1', t: 0 }, to: { c: anchor.id, t: 1 }, via: [] });
+          const m2 = K.markDrawing(ch, spare);
+          check(`${n}: the model answer with a spare ${spareType} hanging by one end still passes`, m2.all, m2.results.filter((r) => !r.pass).map((r) => r.text).join(' | '));
+        }
+        for (const id of ch.locked || []) {
+          const a = start.components.find((c) => c.id === id);
+          const b = model.components.find((c) => c.id === id);
+          check(`${n}: locked ${id} is unchanged in the model answer`, b && JSON.stringify([a.type, a.x, a.y, a.rot, a.params]) === JSON.stringify([b.type, b.x, b.y, b.rot, b.params]));
+        }
+        const startIds = new Set(start.components.map((c) => c.id));
+        const added = model.components.filter((c) => !startIds.has(c.id));
+        check(`${n}: the model answer uses only parts the challenge offers`, added.every((c) => types.has(c.type) && (ch.toolbox || {})[c.type]));
+        for (const [type, t] of Object.entries(ch.toolbox || {})) {
+          const used = added.filter((c) => c.type === type);
+          check(`${n}: the model answer uses no more than ${t.count} × ${type}`, t.count === undefined || used.length <= t.count);
+          if (t.fixed) check(`${n}: fixed ${type} settings unchanged in the model answer`, used.every((c) => JSON.stringify(c.params) === JSON.stringify(C.normalise(type, t.params))));
+        }
+      }
+      if (ch.type === 'measure') {
+        check(`${n}: has answers`, Array.isArray(ch.answers) && ch.answers.length >= 1);
+        for (const a of ch.answers || []) {
+          const truth = start.components.find((c) => c.id === a.of).params[a.param];
+          check(`${n}: the answer for "${a.label}" is the hidden value`, near(truth, a.answer) && truth >= a.range[0] && truth <= a.range[1], `${truth}`);
+          check(`${n}: the hidden value typed in is marked right`, checkNumeric({ answer: a.answer, range: a.range }, String(a.answer)).status === 'right');
+          check(`${n}: a value outside the range is marked wrong`, checkNumeric({ answer: a.answer, range: a.range, anySign: !!a.anySign }, String(a.range[1] * 1.2)).status === 'wrong');
+          if (a.anySign) check(`${n}: "${a.label}" typed as a negative gradient is accepted`, checkNumeric({ answer: a.answer, range: a.range, anySign: true }, String(-a.answer)).status === 'right');
+        }
+      }
+      if (ch.type === 'predict') {
+        const sw = start.components.find((c) => c.id === ch.switch);
+        check(`${n}: its switch exists and starts open`, sw && sw.type === 'switch' && sw.params.closed === false);
+        const closed = M.clone(start);
+        closed.components.find((c) => c.id === ch.switch).params.closed = true;
+        const vals = K.predictedValues(ch, closed);
+        const hand = HAND[ch.id];
+        check(`${n}: the engine's values agree with the values worked out by hand`, hand && vals.length === hand.length && vals.every((v, i) => near(v, hand[i], 1e-9)), `${vals} vs ${hand}`);
+        const before = K.predictedValues(ch, start);
+        check(`${n}: closing the switch changes every prediction`, vals.every((v, i) => !near(v, before[i], 1e-6)), `${before} → ${vals}`);
+        check(`${n}: every part is locked`, start.components.every((c) => (ch.locked || []).includes(c.id)));
+      }
+    }
+    check('challenges: about 10 in the first batch', list.length >= 10, `${list.length}`);
+  }
+
   return { count, failures };
 }
 

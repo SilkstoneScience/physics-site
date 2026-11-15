@@ -32,6 +32,15 @@
     const show = { arrows: false, wireCurrent: false, potential: false, working: false };
     let highlight = new Set();
     const view = { x: -14, y: -9, z: 1.15 }; // top-left corner (grid squares) and CSS px per SVG unit
+    // Challenge constraints: locked parts can't be moved, turned, changed or deleted; fixed parts can't be changed;
+    // hidden parts show "?" instead of their values. toolbox: { type: { count, params, fixed } } or null (everything).
+    const locked = new Set(opts.locked || []);
+    const fixed = new Set([...(opts.fixed || []), ...(opts.locked || []), ...(opts.hidden || [])]);
+    const hidden = new Set(opts.hidden || []);
+    const toolbox = opts.toolbox || null;
+    const startIds = new Set(((opts.drawing && opts.drawing.components) || []).map((c) => c.id));
+    const listeners = []; // window and document listeners, removed by destroy()
+    const listen = (target, type, fn, o) => { target.addEventListener(type, fn, o); listeners.push([target, type, fn, o]); };
     let mode = { kind: 'select' }; // or { kind: 'place', type, rot } or { kind: 'wire', from, fromWire, via }
     let gesture = null;
     let toolGesture = null;
@@ -48,6 +57,7 @@
 
     // ---------------- the page structure ----------------
     host.classList.add('ck-app');
+    if (opts.readOnly) host.classList.add('ck-readonly'); // a predict challenge: look, select and pan only
     host.innerHTML = `
       <div class="ck-toolbar" role="toolbar" aria-label="Edit">
         <div class="ck-group">
@@ -56,7 +66,7 @@
           <button type="button" class="ck-btn ck-icon-btn" data-act="rotate-acw" aria-label="Rotate anticlockwise" title="Rotate anticlockwise (Shift+R)">⟲</button>
           <button type="button" class="ck-btn ck-icon-btn" data-act="rotate" aria-label="Rotate clockwise" title="Rotate clockwise (R)">⟳</button>
           <button type="button" class="ck-btn" data-act="delete" title="Delete (Delete key)">✕ Delete</button>
-          <button type="button" class="ck-btn" data-act="clear">Clear all</button>
+          <button type="button" class="ck-btn" data-act="clear">${opts.resetTo ? '↺ Start again' : 'Clear all'}</button>
         </div>
         <div class="ck-group">
           <button type="button" class="ck-btn ck-icon-btn" data-act="zoom-out" aria-label="Zoom out" title="Zoom out">−</button>
@@ -68,13 +78,14 @@
           <label class="ck-check"><input type="checkbox" data-show="arrows"> Current arrows</label>
           <label class="ck-check"><input type="checkbox" data-show="wireCurrent"> Current in wires</label>
           <label class="ck-check"><input type="checkbox" data-show="potential"> Potential colours</label>
-          <label class="ck-check"><input type="checkbox" data-show="working"> Show the working</label>
+          ${opts.noWorking ? '' : '<label class="ck-check"><input type="checkbox" data-show="working"> Show the working</label>'}
           <span class="ck-legend" hidden></span>
         </div>
       </div>
       <div class="ck-layout">
         <div class="ck-toolbox" role="group" aria-label="Components: drag one onto the grid, or tap it and then tap the grid">
-          ${ORDER.map((t) => `<button type="button" class="ck-tool" data-type="${t}" title="${esc(C.TYPES[t].name)}">${R.icon(t)}<span>${esc(C.TYPES[t].name)}</span></button>`).join('')}
+          ${ORDER.filter((t) => !opts.toolbox || opts.toolbox[t]).map((t) => `<button type="button" class="ck-tool" data-type="${t}" title="${esc(C.TYPES[t].name)}">${R.icon(t)}<span>${esc(C.TYPES[t].name)}${opts.toolbox && opts.toolbox[t].params ? `<br><small>${esc(R.valueText({ type: t, params: C.normalise(t, opts.toolbox[t].params) }))}</small>` : ''}</span>${opts.toolbox && opts.toolbox[t].count !== undefined ? '<span class="ck-left"></span>' : ''}</button>`).join('')}
+          ${opts.toolbox && !Object.keys(opts.toolbox).length ? '<p class="ck-small">No extra parts for this challenge: use the wires.</p>' : ''}
         </div>
         <div class="ck-stage">
           <svg class="ck-svg" role="application" aria-label="Circuit workspace" tabindex="0" preserveAspectRatio="xMinYMin meet">
@@ -197,27 +208,40 @@
     }
 
     // ---------------- committing changes ----------------
+    // In a challenge the toolbox may offer only some types, a limited number of each, with set (and fixed) values.
+    const preset = (type) => (toolbox && toolbox[type]) || {};
+    const left = (type) => {
+      if (!toolbox) return Infinity;
+      if (!toolbox[type]) return 0;
+      const extra = store.drawing.components.filter((c) => c.type === type && !startIds.has(c.id)).length;
+      return (toolbox[type].count ?? Infinity) - extra;
+    };
     function addAt(type, p, rot = 0) {
+      if (left(type) <= 0) return null;
       const id = store.change('add', (d) => {
-        const nid = M.ops.addComponent(d, type, p[0], p[1]);
+        const nid = M.ops.addComponent(d, type, p[0], p[1], preset(type).params);
         if (rot) M.ops.rotate(d, [nid], rot / 90);
         M.ops.joinAt(d, [nid]);
         return nid;
       });
+      if (preset(type).fixed) fixed.add(id);
       selectOnly({ components: [id] });
       return id;
     }
     // A new component put straight into a wire, in series.
     function addInto(type, ins) {
+      if (left(type) <= 0) return null;
       const id = store.change('insert', (d) => {
-        const nid = M.ops.addComponent(d, type, ins.x, ins.y);
+        const nid = M.ops.addComponent(d, type, ins.x, ins.y, preset(type).params);
         d.components.find((c) => c.id === nid).rot = ins.rot;
         M.ops.insertIntoWire(d, nid, ins.wire);
         return nid;
       });
+      if (preset(type).fixed) fixed.add(id);
       selectOnly({ components: [id] });
       return id;
     }
+    const movable = (ids) => ids.filter((id) => !locked.has(id));
     const wiredTo = (id) => store.drawing.wires.some((w) => endsOf(w).some((e) => e.c === id));
     function commitWire(m, target, via) {
       store.change('wire', (d) => {
@@ -240,19 +264,22 @@
       return out;
     }
     function deleteSelection() {
-      if (!sel.components.size && !sel.wires.size && !sel.junctions.size) return;
-      store.change('delete', (d) => M.ops.remove(d, { components: [...sel.components], wires: [...sel.wires], junctions: [...sel.junctions] }));
+      const comps = movable([...sel.components]);
+      if (!comps.length && !sel.wires.size && !sel.junctions.size) return;
+      store.change('delete', (d) => M.ops.remove(d, { components: comps, wires: [...sel.wires], junctions: [...sel.junctions] }));
       clearSelection();
     }
     // dir = 1: a quarter turn clockwise; dir = −1: anticlockwise.
     function rotateSelection(dir = 1) {
       if (mode.kind === 'place') { mode.rot = (((mode.rot || 0) + 90 * dir) % 360 + 360) % 360; if (ghost) ghost.rot = mode.rot; render(); return; }
-      if (!sel.components.size) return;
-      store.change('rotate', (d) => { M.ops.rotate(d, [...sel.components], dir); M.ops.joinAt(d, [...sel.components]); });
+      const ids = movable([...sel.components]);
+      if (!ids.length) return;
+      store.change('rotate', (d) => { M.ops.rotate(d, ids, dir); M.ops.joinAt(d, ids); });
     }
     function toggleSwitch(id) {
       const c = store.drawing.components.find((x) => x.id === id);
-      if (c) store.change('switch', (d) => M.ops.setParam(d, id, 'closed', !c.params.closed));
+      if (!c || locked.has(id)) return;
+      store.change('switch', (d) => M.ops.setParam(d, id, 'closed', !c.params.closed));
     }
 
     // ---------------- selection ----------------
@@ -284,7 +311,7 @@
       else if (mode.kind === 'place') gesture = { kind: 'place-tap', down, moved: false };
       else gesture = { kind: 'pending', down, hit: hitTest(p, radius(ev.pointerType)), moved: false };
     });
-    window.addEventListener('pointermove', (ev) => {
+    listen(window, 'pointermove', (ev) => {
       if (toolGesture && ev.pointerId === toolGesture.id) { toolMove(ev); return; }
       if (pointers.has(ev.pointerId)) pointers.set(ev.pointerId, [ev.clientX, ev.clientY]);
       if (pinch) { pinchMove(); return; }
@@ -294,7 +321,7 @@
       if (!gesture.moved && Math.hypot(ev.clientX - gesture.down.cx, ev.clientY - gesture.down.cy) > TAP) { gesture.moved = true; if (gesture.kind === 'pending') beginDrag(); }
       if (gesture.moved) dragMove(p, ev);
     });
-    window.addEventListener('pointerup', (ev) => {
+    listen(window, 'pointerup', (ev) => {
       if (toolGesture && ev.pointerId === toolGesture.id) { toolUp(ev); return; }
       const wasPinch = !!pinch;
       pointers.delete(ev.pointerId);
@@ -305,7 +332,7 @@
       gesture = null;
       finish(g, p, ev);
     });
-    window.addEventListener('pointercancel', (ev) => {
+    listen(window, 'pointercancel', (ev) => {
       pointers.delete(ev.pointerId);
       if (toolGesture && ev.pointerId === toolGesture.id) { toolGesture = null; ghost = null; }
       if (gesture && ev.pointerId === gesture.down.id) { gesture = null; preview = null; box = null; insertion = null; wirePreview = mode.kind === 'wire' ? wirePreview : null; }
@@ -332,6 +359,7 @@
     function beginDrag() {
       const g = gesture;
       const h = g.hit;
+      if (opts.readOnly) { g.kind = 'pan'; g.view = { ...view }; return; }
       const d = store.drawing;
       if (!h) { g.kind = g.down.type === 'mouse' && g.down.shift ? 'box' : 'pan'; g.view = { ...view }; return; }
       switch (h.kind) {
@@ -342,6 +370,8 @@
         case 'component':
           if (!sel.components.has(h.id)) { if (!g.down.add) clearSelection(); sel.components.add(h.id); }
           g.kind = 'move'; g.sel = selectionOf();
+          g.sel.components = movable(g.sel.components); // locked parts stay where they are
+          if (!g.sel.components.length && !g.sel.wires.length && !g.sel.junctions.length) { g.kind = 'pan'; g.view = { ...view }; break; }
           // One component with nothing attached can be dropped into a wire.
           g.single = g.sel.components.length === 1 && !g.sel.wires.length && !g.sel.junctions.length && !wiredTo(g.sel.components[0]) ? g.sel.components[0] : null;
           break;
@@ -509,14 +539,14 @@
       if (!h || h.kind !== 'component') lastTap = null;
       if (!h) { if (!g.down.add) clearSelection(); updateAll(); return; }
       switch (h.kind) {
-        case 'terminal': mode = { kind: 'wire', from: h.end, via: [] }; hoverMove(p, g.down.type); break;
+        case 'terminal': if (!opts.readOnly) { mode = { kind: 'wire', from: h.end, via: [] }; hoverMove(p, g.down.type); } break;
         case 'junction': toggleIn(sel.junctions, h.id, g.down.add); break;
         case 'component': {
           const c = store.drawing.components.find((x) => x.id === h.id);
           const double = lastTap && lastTap.id === h.id && now - lastTap.t < 400;
           toggleIn(sel.components, h.id, g.down.add);
           if (c.type === 'switch') toggleSwitch(h.id);
-          else if (double) { store.change('rotate', (d) => { M.ops.rotate(d, [h.id]); M.ops.joinAt(d, [h.id]); }); }
+          else if (double && !opts.readOnly && !locked.has(h.id)) { store.change('rotate', (d) => { M.ops.rotate(d, [h.id]); M.ops.joinAt(d, [h.id]); }); }
           lastTap = { id: h.id, t: double ? 0 : now };
           break;
         }
@@ -613,7 +643,7 @@
     }
 
     // ---------------- keyboard ----------------
-    document.addEventListener('keydown', (ev) => {
+    listen(document, 'keydown', (ev) => {
       const a = document.activeElement;
       const typing = a && (a.tagName === 'INPUT' || a.tagName === 'SELECT' || a.tagName === 'TEXTAREA');
       if (typing && ev.key !== 'Escape') return;
@@ -628,12 +658,15 @@
         cancelMode(); clearSelection(); updateAll(); return;
       }
       if (typing) return;
+      if (opts.readOnly && (k === 'Delete' || k === 'Backspace' || k === 'r' || k === 'R')) return;
       if (k === 'Delete' || k === 'Backspace') { ev.preventDefault(); deleteSelection(); updateAll(); return; }
       if (k === 'r' || k === 'R') { ev.preventDefault(); rotateSelection(ev.shiftKey ? -1 : 1); return; }
       const step = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[k];
       if (step && (sel.components.size || sel.junctions.size || sel.wires.size) && a !== document.body) {
         ev.preventDefault();
         const s = selectionOf();
+        s.components = movable(s.components);
+        if (opts.readOnly) return;
         store.change('move', (d) => { M.ops.moveItems(d, s, step[0], step[1]); M.ops.joinAt(d, s.components); });
       }
     });
@@ -649,7 +682,11 @@
       else if (act === 'rotate') rotateSelection(1);
       else if (act === 'rotate-acw') rotateSelection(-1);
       else if (act === 'delete') { deleteSelection(); updateAll(); }
-      else if (act === 'clear') {
+      else if (act === 'clear' && opts.resetTo) { // a challenge: back to how it started
+        if (!(opts.confirm || window.confirm)('Start this challenge again? (Undo can bring your circuit back.)')) return;
+        store.load(opts.resetTo);
+        clearSelection(); cancelMode(); updateAll(); fit();
+      } else if (act === 'clear') {
         if (store.drawing.components.length || store.drawing.wires.length) {
           if (!(opts.confirm || window.confirm)('Remove everything from the workspace? (Undo can bring it back.)')) return;
           store.change('clear', (d) => { d.components = []; d.wires = []; d.junctions = []; });
@@ -691,7 +728,7 @@
       } catch (e) { /* full screen isn't available: the page layout still fills the window */ }
       requestAnimationFrame(() => fit());
     }
-    document.addEventListener('fullscreenchange', () => { if (board && !document.fullscreenElement) setBoard(false); });
+    listen(document, 'fullscreenchange', () => { if (board && !document.fullscreenElement) setBoard(false); });
 
     // ---------------- the inspector: the selected component's settings and readings ----------------
     let inspectorKey = null;
@@ -721,6 +758,14 @@
       const p = c.params;
       const def = C.TYPES[c.type];
       const f = [];
+      if (fixed.has(c.id)) { // set by a challenge: shown, not changed
+        const val = R.valueText(c);
+        f.push(`<h3>${esc(def.name)} ${esc(c.label)}</h3>`);
+        f.push(`<p class="ck-small">${hidden.has(c.id) ? 'This is the part you are investigating: its values are hidden.' : `Set for this challenge${val ? ` (${esc(val)})` : ''}.`}${locked.has(c.id) ? " It can't be moved." : ''}</p>`);
+        if (!hidden.has(c.id)) f.push('<dl class="ck-readings"></dl>');
+        if (!locked.has(c.id)) f.push(`<div class="ck-buttons">${ROTATE_BUTTONS}<button type="button" class="ck-btn" data-do="delete">✕ Delete</button></div>`);
+        return f.join('');
+      }
       f.push(`<h3>${esc(def.name)} <input type="text" class="ck-labelin" data-label aria-label="Label" value="${esc(c.label)}" maxlength="12"></h3>`);
       switch (c.type) {
         case 'cell': case 'battery':
@@ -836,6 +881,8 @@
     function status() {
       const ds = (result && result.diagnostics) || [];
       const order = { error: 0, warning: 1, info: 2 };
+      // A challenge's hidden part: its warnings don't give its values away (e.g. the current a short circuit gives).
+      for (const x of ds) if (x.ids.some((id) => hidden.has(id))) x.message = x.message.replace(/ \(I = ε\/r = [^)]*\)/, '');
       const loose = ds.filter((x) => x.code === 'unconnected');
       const list = ds.filter((x) => x.code !== 'unconnected').sort((a, b) => order[a.level] - order[b.level]);
       // From the drawing (the engine never sees positions): things that look wrong on the page.
@@ -871,7 +918,7 @@
     }
 
     function updateHint() {
-      const t = insertion ? 'Let go to put it into this wire, in series.' : mode.kind === 'wire'
+      const t = opts.readOnly ? 'This circuit is set for the challenge: tap a part to see it, drag empty space to move around, and type your predictions above.' : insertion ? 'Let go to put it into this wire, in series.' : mode.kind === 'wire'
         ? 'Drawing a wire: tap a terminal, junction or wire to finish it. Tap the grid to add a bend; tap the same point twice to leave a loose end. Esc cancels.'
         : mode.kind === 'place'
           ? `Tap the grid to place the ${C.TYPES[mode.type].name.toLowerCase()}. R rotates it; Esc cancels.`
@@ -885,7 +932,7 @@
       const r = rect();
       if (r.width && r.height) svg.setAttribute('viewBox', `${view.x * G} ${view.y * G} ${r.width / view.z} ${r.height / view.z}`);
       content.innerHTML = R.drawing(current(), result, {
-        selected: sel, highlight, show, nl,
+        selected: sel, highlight, show, nl, hidden,
         ghost, preview: wirePreview, box, insertWire: insertion && insertion.wire,
       });
       if (show.potential && result && result.nets.length) {
@@ -898,7 +945,13 @@
       const any = sel.components.size + sel.wires.size + sel.junctions.size > 0;
       host.querySelector('[data-act="delete"]').disabled = !any;
       for (const act of ['rotate', 'rotate-acw']) host.querySelector(`[data-act="${act}"]`).disabled = !(sel.components.size || mode.kind === 'place');
-      for (const b of host.querySelectorAll('.ck-tool')) b.classList.toggle('ck-active', mode.kind === 'place' && mode.type === b.dataset.type);
+      for (const b of host.querySelectorAll('.ck-tool')) {
+        b.classList.toggle('ck-active', mode.kind === 'place' && mode.type === b.dataset.type);
+        const n = left(b.dataset.type);
+        b.disabled = n <= 0;
+        const badge = b.querySelector('.ck-left');
+        if (badge) badge.textContent = `${Math.max(0, n)} left`;
+      }
       updateHint();
     }
     function updateAll() { render(); inspector(); }
@@ -916,7 +969,8 @@
       lastTap = null; // any change in between means the next tap isn't a double-tap (tap() sets it again afterwards)
       solve(); highlight = new Set(); updateAll(); status(); describe(); working(); if (opts.onChange) opts.onChange(store.drawing, result);
     });
-    if (typeof ResizeObserver !== 'undefined') new ResizeObserver(() => render()).observe(svg);
+    const resizer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => render()) : null;
+    if (resizer) resizer.observe(svg);
     solve();
     updateAll();
     status();
@@ -940,6 +994,14 @@
       select(ids) { selectOnly({ components: ids }); updateAll(); },
       setView(x, y, z) { view.x = x; view.y = y; view.z = z; render(); },
       parseValue,
+      // Remove everything this editor added to the page (used when switching between Free Build and a challenge).
+      destroy() {
+        if (board) setBoard(false);
+        for (const [target, type, fn, o] of listeners) target.removeEventListener(type, fn, o);
+        if (resizer) resizer.disconnect();
+        host.innerHTML = '';
+        host.className = '';
+      },
     };
   }
 

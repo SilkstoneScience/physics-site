@@ -1,6 +1,6 @@
 # Circuit builder: plan and decisions
 
-Status: **plan approved by the teacher (15 November 2026). Stages 1–4 built (engine, tests, Free Build editor, then show the working, saving, share links and board view); stage 3 checked by the teacher, stage 4 waiting for the teacher's check. The page is `noindex` and not linked from anywhere until stage 6.**
+Status: **plan approved by the teacher (15 November 2026). Stages 1–5 built; stages 3 and 4 checked by the teacher. Stage 5 (Challenge Mode, 10 challenges, Playwright) has had its independent review (all 11 points acted on) and waits for the teacher's check. The page is `noindex` and not linked from anywhere until stage 6.**
 
 A circuit diagram editor with two modes, **Free Build** and **Challenge Mode**, that simulates DC circuits accurately: series and parallel networks, internal resistance, meters and variable resistors.
 
@@ -148,6 +148,16 @@ One direction only: student action → change to the drawing (an undoable comman
 
 Challenges live in `experimental/circuits/challenges.json` with permanent ids (`CK-B5-01`), fields as in the approved plan: `type` (target / measure / predict), `level`, `sections`, `title`, `brief`, `start` drawing with `locked` parts, a limited `toolbox`, `checks` (values from the engine within a tolerance; connection checks such as "a voltmeter across L1" or "an ammeter in series with R1" from the netlist), `hints`, a `model` answer and an `explanation`. "Measure it" hides a cell's emf and r; "predict then build" locks the switch until predictions are typed (marked by `js/numeric.js`). Progress is ticked per id in the browser. Every model answer must pass its checks and a deliberately wrong answer must fail (checked by `tools/check.mjs`).
 
+**As built (stage 5):**
+- **Tabs:** *Free Build* and *Challenges* above the builder. Links: `circuit-builder.html?mode=challenges` (the list) and `?challenge=CK-B5-03` (one challenge, for links from the notes). Free Build's own circuit is kept while challenges are open.
+- **Data:** `experimental/circuits/challenges.json`, one object per challenge: `id`, `type` (`target` / `measure` / `predict`), `level`, `sections` (B.5 section ids), `title`, `summary` (for the card), `brief`, `start` (a drawing), `locked` (can't be moved, changed or deleted), `hidden` (values shown as "?", the part drawn as a closed box), `toolbox` (`{ type: { count, params, fixed } }`; `{}` = wires only), `hints`, `explanation`; then by type: `checks` with a `model` answer and a `wrong` one (target); `answers` with `range`, `of` and `param` (measure); `switch` and `predict` entries `{ of, quantity, label, unit }` (predict).
+- **Marking** (`js/circuits/marking.js`, also used by the tests): checks `value` (size of V, I, P or a meter reading, ± tolerance), `across` (a meter on both terminals of a part), `series` (same branch: a chain of nets each joining exactly two current-carrying terminals; ideal voltmeters and open switches don't count), `count`, `noShort`. Components are picked by id or by type ("any voltmeter"). Measured and predicted values are marked by `js/numeric.js` (predictions: 2 %, or correctly rounded to 2+ s.f.).
+- **The editor in a challenge:** locked parts stay put; the toolbox shows only the challenge's parts with "n left"; fixed values can't be edited; *Start again* replaces *Clear all*; predict challenges are read-only (look, select, pan; the switch closes from the challenge panel); *Show the working* is offered only in build challenges (it would give away measured and predicted values).
+- **Done:** ticked in this browser when the checks pass (target), the answers are right (measure), or the predictions have been compared (predict, with "n of m right").
+- **Checked automatically** (`tools/circuits/test.mjs`): ids, fields, B.5 section ids, sound start circuits; every model answer passes and every wrong answer fails; locked parts unchanged and toolbox limits kept in model answers; measure answers equal the hidden values; predicted values agree with values worked out by hand and change when the switch closes. Interface tests build CK-B5-01 by hand, try CK-B5-02, 07 and 08.
+- **Independent review of the first batch** (15 November 2026): all physics and numbers correct; every model answer passes and every wrong one fails. Acted on: the `series` check now ignores parts with a dead end (a spare resistor hanging by one end had made a correct circuit fail); "the meters are ideal" in every build and measure brief, and CK-B5-02's ammeter fixed as ideal; hints that gave the answer away shortened (CK-B5-04, 05, 10); a misleading OL hint (CK-B5-07) and a wrong reason in an explanation (CK-B5-06) corrected; a negative internal resistance (from a gradient) accepted; a hidden cell's short-circuit warning no longer gives its current. Checked afterwards in the preview: CK-B5-08 and CK-B5-10 redrawn so nothing overlaps (meter displays and labels now choose a clear side, and keep clear of wires where they can).
+- **Playwright** (agreed for after stage 3): `.github/workflows/circuits-ui.yml` runs `tools/circuits/ui-test.html` in Chromium and WebKit on GitHub (`tools/circuits/playwright-run.mjs`) when the builder or the shared files it uses change. Playwright is installed on GitHub only.
+
 ## 8. Testing
 
 `tools/circuits/test.mjs` (run by `node tools/check.mjs`, and on GitHub after every push; also `node tools/circuits/test.mjs` on its own):
@@ -167,8 +177,8 @@ Challenges live in `experimental/circuits/challenges.json` with permanent ids (`
 1. Save this plan. **Done.**
 2. Engine and netlist with full Node tests. **Done** (report to the teacher).
 3. Free Build editor with interface tests; teacher checks in the preview. **Done** (teacher's changes made: rotation both ways, take out, drop into a wire, labels, what you see is what you get).
-4. Show the working, share links, board mode, saving. **Built; waiting for the teacher's check.**
-5. Challenge Mode and about 10 challenges; independent review; teacher's check. Playwright on GitHub.
+4. Show the working, share links, board mode, saving. **Done.**
+5. Challenge Mode and about 10 challenges; independent review; teacher's check. Playwright on GitHub. **Built and reviewed; waiting for the teacher's check. Playwright's first run happens on GitHub after the push.**
 6. Website links, then commit and push after the teacher has seen what's going up.
 
 ## 11. Risks and how they are handled

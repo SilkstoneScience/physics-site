@@ -96,6 +96,8 @@
     }
   }
 
+  const OPPOSITE = { above: 'below', below: 'above', left: 'right', right: 'left' };
+
   // Potential colouring: low potential blue, high red.
   function potentialColour(t) {
     const a = [42, 120, 214];
@@ -134,7 +136,8 @@
       const y0 = base === 'auto' ? y - h + 2 : base === 'hanging' ? y : y - h / 2;
       return { x0, y0, x1: x0 + w, y1: y0 + h };
     };
-    const overlaps = (r) => taken.some((q) => r.x0 < q.x1 && r.x1 > q.x0 && r.y0 < q.y1 && r.y1 > q.y0);
+    // An area overlapping anything already placed (except the areas of `own`, the component it belongs to).
+    const overlaps = (r, own, notWires) => taken.some((q) => (!own || q.owner !== own) && !(notWires && q.wire) && r.x0 < q.x1 && r.x1 > q.x0 && r.y0 < q.y1 && r.y1 > q.y0);
     const connections = new Map(); // point key -> number of wire ends there
     for (const w of d.wires) {
       const path = M.wirePath(d, w);
@@ -150,6 +153,10 @@
       out.wires.push(`<polyline class="${cls}" data-wire="${esc(w.id)}" points="${path.map(pt).join(' ')}"${style}/>`);
       // Current arrows and values are placed after the components, so they can keep clear of them.
       if (wr && (ui.show.arrows || ui.show.wireCurrent) && Math.abs(wr.I) > 1e-9) currents.push({ path, I: wr.I, inf });
+      for (let i = 0; i + 1 < path.length; i++) { // labels keep clear of wires where they can
+        const [a, b] = [path[i], path[i + 1]];
+        taken.push({ x0: Math.min(a[0], b[0]) * G - 3, x1: Math.max(a[0], b[0]) * G + 3, y0: Math.min(a[1], b[1]) * G - 3, y1: Math.max(a[1], b[1]) * G + 3, wire: true });
+      }
       if (ui.insertWire === w.id) out.over.push(`<polyline class="ck-insertw" points="${path.map(pt).join(' ')}"/>`);
       // Loose ends.
       for (const which of ['from', 'to']) if (w[which].free) out.dots.push(`<circle class="ck-loose" cx="${n(w[which].free[0] * G)}" cy="${n(w[which].free[1] * G)}" r="4.5"/>`);
@@ -165,7 +172,8 @@
       }
     }
 
-    // Components.
+    // Components. Every component's box is reserved first, so labels and displays keep clear of all of them.
+    for (const c of d.components) { const cb = M.componentBox(c); taken.push({ x0: cb.x0 * G - 4, y0: cb.y0 * G - 4, x1: cb.x1 * G + 4, y1: cb.y1 * G + 4, owner: c.id }); }
     for (const c of d.components) {
       const r = res[c.id] || {};
       const isSel = sel.components.has(c.id);
@@ -175,23 +183,39 @@
       out.comps.push(`<g class="${cls}" data-comp="${esc(c.id)}" transform="translate(${c.x * G} ${c.y * G}) rotate(${c.rot || 0})">${back}${symbol(c.type, c.params, { brightness: r.brightness })}</g>`);
       if (LETTER[c.type]) out.text.push(`<text class="ck-letter" x="${c.x * G}" y="${c.y * G}" text-anchor="middle" dominant-baseline="central">${LETTER[c.type]}</text>`);
       const s = sides(c);
-      const near = c.type === 'ldr' ? (s.label === 'above' || s.label === 'left' ? 42 : 28) : 22; // clear of the LDR's light arrows (upper left)
-      const lp = place(c, s.label, near);
-      const value = valueText(c);
-      const cb = M.componentBox(c);
-      taken.push({ x0: cb.x0 * G - 4, y0: cb.y0 * G - 4, x1: cb.x1 * G + 4, y1: cb.y1 * G + 4 });
-      taken.push(textBox(lp.x, lp.y, lp.anchor, lp.base, (c.label.length + (value ? value.length + 1 : 0)) * 6.4 + 4, 14));
-      out.text.push(`<text class="ck-label" x="${n(lp.x)}" y="${n(lp.y)}" text-anchor="${lp.anchor}" dominant-baseline="${lp.base}"><tspan class="ck-name">${esc(c.label)}</tspan>${value ? ` <tspan>${esc(value)}</tspan>` : ''}</text>`);
-      // Meter display.
+      const secret = ui.hidden && ui.hidden.has(c.id); // a challenge's mystery part: its values are hidden
+      const value = secret ? '?' : valueText(c);
+      if (secret) out.over.push(`<rect class="ck-mystery" x="${c.x * G - 30}" y="${c.y * G - 22}" width="60" height="44" rx="6"/><text class="ck-mysteryq" x="${c.x * G}" y="${c.y * G + 1}" text-anchor="middle" dominant-baseline="central">?</text>`);
+      // The label and meter display go on the preferred side, or the opposite one if that is clear of other
+      // components, labels and displays.
+      const tryPlace = (prefs, dist, boxOf) => {
+        for (const side of prefs) { const p = place(c, side, dist(side)); const b = boxOf(p); if (!overlaps(b, c.id)) return { p, b }; }
+        const p = place(c, prefs[0], dist(prefs[0]));
+        return { p, b: boxOf(p) };
+      };
+      // Meter display first (it matters more than the meter's short label).
       if (r.reading) {
-        const rp = place(c, s.reading, 20);
         const text = `${r.reading.text}${r.reading.ol ? '' : ` ${r.reading.unit}`}`;
         const w = 10 + text.length * 7.6;
-        const x = rp.anchor === 'middle' ? rp.x - w / 2 : rp.anchor === 'end' ? rp.x - w : rp.x;
-        const y = rp.base === 'hanging' ? rp.y : rp.base === 'auto' ? rp.y - 20 : rp.y - 10;
-        taken.push({ x0: x - 2, y0: y - 2, x1: x + w + 2, y1: y + 22 });
+        const rectOf = (rp) => {
+          const x = rp.anchor === 'middle' ? rp.x - w / 2 : rp.anchor === 'end' ? rp.x - w : rp.x;
+          const y = rp.base === 'hanging' ? rp.y : rp.base === 'auto' ? rp.y - 20 : rp.y - 10;
+          return { x0: x - 2, y0: y - 2, x1: x + w + 2, y1: y + 22 };
+        };
+        const RD = tryPlace([s.reading, OPPOSITE[s.reading]], () => 20, rectOf);
+        const x = RD.b.x0 + 2;
+        const y = RD.b.y0 + 2;
+        taken.push(RD.b);
         out.text.push(`<g class="ck-reading${r.reading.ol ? ' ck-ol' : ''}" data-reading-for="${esc(c.id)}"><rect x="${n(x)}" y="${n(y)}" width="${n(w)}" height="20" rx="4"/><text x="${n(x + w / 2)}" y="${n(y + 10.5)}" text-anchor="middle" dominant-baseline="central">${esc(text)}</text></g>`);
       }
+      // Then the label: its usual side, or any other side that is clear.
+      const labelW = (c.label.length + (value ? value.length + 1 : 0)) * 6.4 + 4;
+      const labelDist = (side) => (secret ? 30 : c.type === 'ldr' ? (side === 'above' || side === 'left' ? 42 : 28) : 22); // the LDR's light arrows are upper left
+      const labelSides = [s.label, OPPOSITE[s.label], ...(['above', 'below'].includes(s.label) ? ['right', 'left'] : ['above', 'below'])];
+      const L = tryPlace(labelSides, (side) => labelDist(side) + (['left', 'right'].includes(side) && ['above', 'below'].includes(s.label) ? 28 : 0), (p) => textBox(p.x, p.y, p.anchor, p.base, labelW, 14));
+      const lp = L.p;
+      taken.push(L.b); // no owner: the component's own display keeps clear of its label too
+      out.text.push(`<text class="ck-label" data-label-for="${esc(c.id)}" x="${n(lp.x)}" y="${n(lp.y)}" text-anchor="${lp.anchor}" dominant-baseline="${lp.base}"><tspan class="ck-name">${esc(c.label)}</tspan>${value ? ` <tspan>${esc(value)}</tspan>` : ''}</text>`);
       // Terminals: a hint circle where nothing is connected yet.
       for (let t = 0; t < C.TYPES[c.type].terminals.length; t++) {
         const p = C.terminalPosition(c, t);
@@ -220,7 +244,7 @@
           const mx = (a[0] + (b[0] - a[0]) * f) * G;
           const my = (a[1] + (b[1] - a[1]) * f) * G;
           const arrowBox = { x0: mx - 7, y0: my - 7, x1: mx + 7, y1: my + 7 };
-          if (overlaps(arrowBox)) continue;
+          if (overlaps(arrowBox, null, true)) continue; // an arrow sits on its wire, so wires don't block it
           if (!ui.show.wireCurrent) { placed = { a, b, mx, my, arrowBox }; break; }
           const horizontal = a[1] === b[1];
           const options = horizontal ? [[mx, my - 8, 'middle', 'auto'], [mx, my + 8, 'middle', 'hanging']] : [[mx + 9, my, 'start', 'middle'], [mx - 9, my, 'end', 'middle']];

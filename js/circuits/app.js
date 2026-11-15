@@ -69,22 +69,73 @@
       try { first = await decode(m[1]); opened = 'Opened a shared circuit.'; } catch (e) { opened = "That shared link couldn't be opened: it may have been cut short when it was copied."; }
       try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* ignore */ }
     }
-    if (!first) { const saved = store.get('autosave'); if (saved) { first = M.unpack(saved); if (!first.components.length) first = null; } }
-    let autosaveTimer = null;
-    const editor = window.Circuits.editor.create(host, {
-      drawing: first || EXAMPLE,
-      onChange(d) {
-        clearTimeout(autosaveTimer);
-        autosaveTimer = setTimeout(() => store.set('autosave', M.pack(d)), 300);
-      },
-    });
-    window.CircuitApp = editor;
     window.CircuitShare = { encode, decode, MAX_LINK };
-    fileBar(editor, opened);
+
+    // Two modes, as tabs: Free Build and Challenges. Each makes its own editor in the same place.
+    const tabs = document.createElement('div');
+    tabs.className = 'ck-tabs';
+    tabs.setAttribute('role', 'tablist');
+    tabs.innerHTML = '<button type="button" role="tab" data-mode="free">Free Build</button><button type="button" role="tab" data-mode="challenges">Challenges</button>';
+    host.parentNode.insertBefore(tabs, host);
+    const bar = fileBar(opened);
+    const chPanel = document.createElement('div');
+    chPanel.className = 'ck-challenge';
+    chPanel.hidden = true;
+    host.parentNode.insertBefore(chPanel, host);
+    const create = (o) => { if (window.CircuitApp && window.CircuitApp.destroy) window.CircuitApp.destroy(); window.CircuitApp = window.Circuits.editor.create(host, o); return window.CircuitApp; };
+    let challenges = null;
+    let data = null;
+    let autosaveTimer = null;
+    const setTab = (m) => tabs.querySelectorAll('[data-mode]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.mode === m)));
+    const setUrl = (key, value) => {
+      const q = new URLSearchParams(location.search);
+      ['mode', 'challenge'].forEach((k) => q.delete(k));
+      if (key) q.set(key, value);
+      try { history.replaceState(null, '', `${location.pathname}${q.toString() ? `?${q}` : ''}`); } catch (e) { /* ignore */ }
+    };
+    function startFree(drawing) {
+      if (challenges) { challenges.destroy(); challenges = null; }
+      chPanel.hidden = true;
+      bar.hidden = false;
+      setTab('free');
+      setUrl(null);
+      if (!drawing) { const saved = store.get('autosave'); drawing = saved ? M.unpack(saved) : null; if (drawing && !drawing.components.length) drawing = null; }
+      create({
+        drawing: drawing || EXAMPLE,
+        onChange(d) { clearTimeout(autosaveTimer); autosaveTimer = setTimeout(() => store.set('autosave', M.pack(d)), 300); },
+      });
+    }
+    async function startChallenges(id) {
+      if (window.CircuitApp && window.CircuitApp.destroy) window.CircuitApp.destroy();
+      window.CircuitApp = null;
+      bar.hidden = true;
+      bar.nextElementSibling.hidden = true; // the save/open panel
+      chPanel.hidden = false;
+      setTab('challenges');
+      if (!data) {
+        try { data = await (await fetch('circuits/challenges.json')).json(); } catch (e) { chPanel.innerHTML = '<p class="notice">The challenges could not be loaded. Check your connection and reload the page.</p>'; return; }
+      }
+      challenges = window.Circuits.challenges.mount({
+        panel: chPanel, data, storage: store, createEditor: create,
+        onChange(cid) { if (cid) setUrl('challenge', cid); else setUrl('mode', 'challenges'); },
+      });
+      if (id) challenges.open(id); else challenges.list();
+    }
+    tabs.addEventListener('click', (ev) => {
+      const b = ev.target.closest('[data-mode]');
+      if (!b) return;
+      if (b.dataset.mode === 'free' && challenges) startFree();
+      if (b.dataset.mode === 'challenges' && !challenges) startChallenges();
+    });
+    window.CircuitPage = { startFree, startChallenges, get challenges() { return challenges; } };
+    const wanted = params.get('challenge');
+    if (!first && (wanted || params.get('mode') === 'challenges')) await startChallenges(wanted);
+    else startFree(first);
   })();
 
   // ---------------- the bar: save, my circuits, share, example ----------------
-  function fileBar(editor, opened) {
+  function fileBar(opened) {
+    const cur = () => window.CircuitApp;
     const bar = document.createElement('div');
     bar.className = 'ck-filebar';
     bar.innerHTML = `
@@ -107,7 +158,7 @@
       const b = ev.target.closest('[data-file]');
       if (!b) return;
       const what = b.dataset.file;
-      if (what === 'example') { editor.store.load(EXAMPLE); editor.fit(); close(); note.textContent = 'The example circuit is open. Undo brings back what you had.'; return; }
+      if (what === 'example') { cur().store.load(EXAMPLE); cur().fit(); close(); note.textContent = 'The example circuit is open. Undo brings back what you had.'; return; }
       if (showing === what) { close(); return; }
       showing = what;
       panel.hidden = false;
@@ -119,7 +170,7 @@
         const doSave = () => {
           const name = input.value.trim() || `Circuit ${n}`;
           const items = list().filter((x) => x.name !== name);
-          items.unshift({ name, date: new Date().toISOString().slice(0, 16).replace('T', ' '), data: M.pack(editor.store.drawing) });
+          items.unshift({ name, date: new Date().toISOString().slice(0, 16).replace('T', ' '), data: M.pack(cur().store.drawing) });
           const ok = store.set('saved', items.slice(0, 50));
           note.textContent = ok ? `Saved as "${name}".` : "This browser isn't allowing the circuit to be saved (private browsing?). Use Share link instead.";
           close();
@@ -130,7 +181,7 @@
         renderList();
       } else if (what === 'share') {
         panel.innerHTML = '<h3>Share link</h3><p class="ck-small">Making the link…</p>';
-        const code = await encode(editor.store.drawing);
+        const code = await encode(cur().store.drawing);
         if (code.length > MAX_LINK) { panel.innerHTML = '<h3>Share link</h3><p>This circuit is too large to share as a link. Save it instead, or make it smaller.</p>'; return; }
         const url = `${location.origin}${location.pathname}#c=${code}`;
         let copied = false;
@@ -149,8 +200,8 @@
       panel.querySelectorAll('[data-open]').forEach((b) => b.addEventListener('click', () => {
         const x = list()[Number(b.dataset.open)];
         if (!x) return;
-        editor.store.load(M.unpack(x.data));
-        editor.fit();
+        cur().store.load(M.unpack(x.data));
+        cur().fit();
         note.textContent = `Opened "${x.name}".`;
         close();
       }));
@@ -163,6 +214,7 @@
         renderList();
       }));
     }
+    return bar;
   }
   function escapeHtml(s) { return String(s).replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]); }
 })();

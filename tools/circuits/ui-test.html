@@ -33,14 +33,15 @@
   // The builder runs with ?store=uitest, so its saved circuits are kept apart from a student's; they are
   // cleared before each load unless keep is set.
   const clearStore = () => { try { for (const k of Object.keys(localStorage)) if (k.startsWith('circuit-builder-uitest:')) localStorage.removeItem(k); } catch (e) { /* ignore */ } };
-  async function load(hash = '', keep = false) {
+  async function load(hash = '', keep = false, query = '') {
     if (!keep) clearStore();
-    frameEl.src = `../../experimental/circuit-builder.html?store=uitest&t=${Date.now()}${hash}`;
+    frameEl.src = `../../experimental/circuit-builder.html?store=uitest${query}&t=${Date.now()}${hash}`;
     await new Promise((r) => { frameEl.onload = r; });
-    for (let i = 0; i < 100 && !(frameEl.contentWindow.CircuitApp); i++) await tick();
+    for (let i = 0; i < 100 && !(frameEl.contentWindow.CircuitApp || (query && frameEl.contentWindow.CircuitPage)); i++) await tick();
     W = frameEl.contentWindow; D = frameEl.contentDocument; App = W.CircuitApp; CC = W.Circuits.components;
     W.confirm = () => true;
-    D.querySelector('.ck-svg').scrollIntoView({ block: 'center' });
+    const svg = D.querySelector('.ck-svg');
+    if (svg) svg.scrollIntoView({ block: 'center' });
     await tick();
   }
 
@@ -376,6 +377,95 @@
     check('the circuit in progress is still there after reopening the page', App.store.drawing.components.length === 6);
     D.querySelector('[data-file="example"]').click(); await tick();
     check('Example circuit starts again from the example', App.store.drawing.components.length === 5);
+  });
+
+  await scenario('Challenge Mode: build it, measure it, predict it', async () => {
+    await load('', false, '&mode=challenges');
+    for (let i = 0; i < 50 && !D.querySelector('.ck-ch-card'); i++) await tick();
+    check('the Challenges tab lists the challenges', D.querySelectorAll('.ck-ch-card').length >= 10);
+    D.querySelector('[data-open="CK-B5-01"]').click();
+    for (let i = 0; i < 50 && !W.CircuitApp; i++) await tick();
+    App = W.CircuitApp;
+    D.querySelector('.ck-svg').scrollIntoView({ block: 'center' });
+    App.setView(-12, -12, 1.1); await tick();
+    check('the challenge opens with its own circuit', App.store.drawing.components.length === 2);
+    check('the toolbox offers only the challenge\'s parts', D.querySelectorAll('.ck-tool').length === 2);
+    // Locked parts stay put.
+    const bx = comp('b1').x;
+    await drag(centre('b1'), at(comp('b1').x + 4, comp('b1').y + 3));
+    await tap(centre('l1')); await key('Delete');
+    check('locked parts can\'t be moved or deleted', comp('b1').x === bx && !!comp('l1'));
+    // Build the answer through the interface.
+    const r1 = await place('resistor', 6, -6);
+    const r2 = await place('resistor', 10, 0);
+    await tap(centre(r2)); await key('r');
+    check('placed resistors have the challenge\'s value (6 Ω) and can\'t be changed', comp(r1).params.R === 6 && !D.querySelector('.ck-inspector input[data-key="R"]'));
+    check('the toolbox runs out: no third resistor', App.toolButton('resistor').disabled);
+    const v = await place('voltmeter', 0, 10);
+    await tap(centre(v)); await key('r'); await key('r');
+    await wire('b1', 1, r1, 0); await wire(r1, 1, r2, 0); await wire(r2, 1, 'l1', 1); await wire('l1', 0, 'b1', 0);
+    await wire(v, 0, 'l1', 1); await wire(v, 1, 'l1', 0);
+    D.querySelector('[data-check]').click(); await tick();
+    check('Check my circuit: the built circuit passes', !!D.querySelector('.ck-ch-ok'), D.querySelector('.ck-ch-result').textContent.slice(0, 200));
+    check('… and the explanation appears', !!D.querySelector('.ck-ch-expl'));
+    D.querySelector('[data-hint]').click(); await tick();
+    check('hints appear one at a time', D.querySelectorAll('.ck-ch-hint').length === 1);
+    D.querySelector('[data-back]').click(); await tick();
+    check('back in the list, the challenge is ticked as done', !!D.querySelector('[data-open="CK-B5-01"] .ck-tick'));
+    // A target not met.
+    D.querySelector('[data-open="CK-B5-02"]').click(); await tick();
+    App = W.CircuitApp;
+    D.querySelector('[data-check]').click(); await tick();
+    check('an unfinished circuit gets "Not yet" with the points to fix', D.querySelector('.ck-ch-result').textContent.includes('Not yet') && D.querySelectorAll('.ck-ch-checks .ck-fail').length >= 1);
+    // Measure it.
+    D.querySelector('[data-back]').click(); await tick();
+    D.querySelector('[data-open="CK-B5-07"]').click(); await tick();
+    App = W.CircuitApp;
+    check('the mystery resistor is drawn as a closed box', !!D.querySelector('.ck-mystery'));
+    const ans = D.querySelector('[data-ans="0"]');
+    ans.value = '52'; D.querySelector('[data-check]').click(); await tick();
+    check('a wrong measured value: not yet', D.querySelector('.ck-ch-result').textContent.includes('Not yet'));
+    ans.value = '47.1'; D.querySelector('[data-check]').click(); await tick();
+    check('a measured value in the accepted range is marked right', !!D.querySelector('.ck-ch-ok'));
+    // Predict it.
+    D.querySelector('[data-back]').click(); await tick();
+    D.querySelector('[data-open="CK-B5-08"]').click(); await tick();
+    App = W.CircuitApp;
+    check('a predict challenge starts with the switch open', comp('s1').params.closed === false && reading('a1') === '0.000 A');
+    await tap(centre('s1'));
+    check('its switch can\'t be tapped closed', comp('s1').params.closed === false);
+    D.querySelector('[data-check]').click(); await tick();
+    check('predictions are needed first', D.querySelector('.ck-ch-result').textContent.includes('Type a prediction'));
+    ['1.5', '0.5', '4'].forEach((x, i) => { D.querySelector(`[data-pred="${i}"]`).value = x; });
+    D.querySelector('[data-check]').click(); await tick();
+    check('closing the switch shows the real readings', comp('s1').params.closed === true && reading('a1') === '1.500 A');
+    check('two of three predictions were right', D.querySelector('.ck-ch-ok').textContent.includes('2 of 3'));
+    // Back to Free Build keeps the student's own circuit.
+    D.querySelector('.ck-tabs [data-mode="free"]').click(); await tick();
+    App = W.CircuitApp;
+    check('the Free Build tab brings back the free-build workspace', App.store.drawing.components.length === 5 && !!D.querySelector('.ck-filebar:not([hidden])'));
+  });
+
+  await scenario('Every challenge is drawn clearly: no label or meter display overlaps another part', async () => {
+    await load('', false, '&mode=challenges');
+    for (let i = 0; i < 50 && !D.querySelector('.ck-ch-card'); i++) await tick();
+    const ids = [...D.querySelectorAll('[data-open]')].map((b) => b.dataset.open);
+    const hit = (p, q) => p.left < q.right - 1 && p.right > q.left + 1 && p.top < q.bottom - 1 && p.bottom > q.top + 1;
+    for (const id of ids) {
+      W.CircuitPage.challenges.open(id); await tick();
+      App = W.CircuitApp; App.fit(); await tick();
+      const items = [
+        ...[...D.querySelectorAll('.ck-label')].map((e) => ({ owner: e.dataset.labelFor, kind: 'label', r: e.getBoundingClientRect() })),
+        ...[...D.querySelectorAll('.ck-reading')].map((e) => ({ owner: e.dataset.readingFor, kind: 'display', r: e.getBoundingClientRect() })),
+      ];
+      const comps = [...D.querySelectorAll('.ck-comp')].map((e) => ({ owner: e.dataset.comp, r: e.getBoundingClientRect() }));
+      let clash = '';
+      for (const a of items) {
+        for (const c of comps) if (c.owner !== a.owner && hit(a.r, c.r)) clash = `${a.owner}'s ${a.kind} overlaps ${c.owner}`;
+        for (const b of items) if (b !== a && hit(a.r, b.r)) clash = `${a.owner}'s ${a.kind} overlaps ${b.owner}'s ${b.kind}`;
+      }
+      check(`${id}: labels and displays are clear`, !clash, clash);
+    }
   });
 
   await scenario('Current values keep clear of labels', async () => {
