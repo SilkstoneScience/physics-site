@@ -1,3 +1,15 @@
+// WITHDRAWN on the teacher's decision (15 November 2026): its experiment (stopping voltage against frequency) and three of its parts (h from the gradient, the work function in eV, why the wave model fails) repeated the hand-written E2-012. Replaced by E2-P02 (ultraviolet flame detector).
+// Kept here, outside tools/p2/questions, so it is never built, previewed or published, and its id is never used again
+// (students' saved answers are keyed by id). Its review record is under "withdrawn" in tools/p2/reviews.json.
+// Its independent check, removed from tools/p2/independent.mjs, was:
+//  // Stopping voltage line V = (h/e)(f − f0): gradient from two points on it; work function = e × (h/e) × f0, in eV.
+//  'E2-P01': ({ f0, hg }) => {
+//    const e = 1.60e-19;
+//    const line = (f) => hg.value * (f - f0.value) / e;
+//    const f1 = 7e14, f2 = 1.1e15;
+//    const gradient = (line(f2) - line(f1)) / (f2 - f1);
+//    return { f0_read: f0.value, grad: gradient, hexp: gradient * e, phi: gradient * f0.value };
+//  },
 // E2-P01: photoelectric effect, stopping voltage against frequency (threshold, h from the gradient, work function).
 export default {
   id: 'E2-P01',
