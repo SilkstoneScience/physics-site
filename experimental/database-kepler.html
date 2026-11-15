@@ -122,7 +122,7 @@
     </div>
 
     <h2 id="graph">Graphing tool</h2>
-    <p>Choose the variables to plot and how to plot them. Then add uncertainty bars to find the steepest and shallowest lines, and use <strong>Choose which data points to use</strong> to leave points out. The tool uses the units of the data, so convert the gradient to SI units yourself.</p>
+    <p>Choose the variables to plot and how to plot them. Then add uncertainty bars to find the steepest and shallowest lines, and use <strong>Choose which data points to use</strong> to leave points out. The tool uses the units of the data, so convert the gradient to SI units yourself. The uncertainty you type applies to the quantity plotted on that axis (for example $r^3$, not $r$), so work that out first.</p>
     <div class="dgraph" data-sets='[{"src":"data/planets.csv","name":"The planets (NASA Planetary Fact Sheet)"},{"src":"data/jupiter-moons.csv","name":"Jupiter&#39;s moons (NASA JPL)"}]' data-x="1" data-y="2">
       <noscript><p class="notice">The graphing tool needs JavaScript turned on in your browser.</p></noscript>
     </div>
@@ -146,7 +146,7 @@
     </details>
     <details class="check">
       <summary>What values should you get? (Open this after you have found your own.)</summary>
-      <p>The accepted values are about $1.99 \times 10^{30}$ kg for the Sun and $1.90 \times 10^{27}$ kg for Jupiter. How close are your values? If yours are out by a large power of ten, check your unit conversions.</p>
+      <p>The accepted values are about $1.99 \times 10^{30}$ kg for the Sun and $1.90 \times 10^{27}$ kg for Jupiter. How close are your values? If yours are out by a large power of ten, check your unit conversions. With all eight planets, the line of best fit gives about $2.04 \times 10^{30}$ kg: Neptune's point controls the gradient, and the fact sheet's period for Neptune is slightly low for its distance. Try leaving Neptune out.</p>
     </details>
   </main>
   <footer id="site-footer"></footer>

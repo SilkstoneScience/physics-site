@@ -53,7 +53,7 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 ## The list
 
 <!-- LIST:START (written by tools/list-2028.mjs --write; do not edit by hand) -->
-132 places in 46 files.
+134 places in 46 files.
 
 ### Topic pages
 
@@ -186,24 +186,26 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 28: "html": " Changed for 2028 Qualitative only for exams before 2028; the 2028 guide no longer mentions it (inductance and RL circuits are not required either way). A changi…
 - `teachers/e3.json` (1)
   - line 8: …ort range; it acts on protons and neutrons, not electrons. HL New for 2028 Its range is of order $10^{-15}$ m, about the size of a nucleon. "
-- `teachers/e5.json` (1)
+- `teachers/e5.json` (2)
   - line 28: …up and right to red giants → across and down to white dwarfs. New for 2028 The role of the limits (they apply to the mass of the core left behind, not the original star):…
+  - line 32: … fuel. Saying white dwarfs still fuse: they are just cooling. New for 2028 Applying the Chandrasekhar limit to the star's main-sequence mass instead of its remnant core. …
 
 ### Lesson slide data
 
-- `teachers/slides/b1.json` (2)
+- `teachers/slides/b1.json` (3)
+  - line 918: …what the body absorbs from its surroundings (B.2). New for exams from 2028: the guide states that luminosity is synonymous with radiated power."
   - line 1028: "notes": "New for exams from 2028. Intensity as I = P/A is in the 2028 data booklet."
   - line 1045: "notes": "New for exams from 2028. A tiny power gives an intensity comparable with direct sunlight at the Earth's surface. The eye then focuses the beam to a tiny spot, s…
 - `teachers/slides/b3.json` (2)
   - line 230: "notes": "New for exams from 2028. The guide asks for the difference between rms velocity and average velocity, and why rms is preferred in the gas laws. The rms velocity…
   - line 307: "notes": "New for exams from 2028. The list is only to show the idea: the guide does not ask students to calculate an rms speed from a list of speeds. The rms speed is la…
 - `teachers/slides/c2.json` (6)
-  - line 224: "notes": "New for exams from 2028. The guide states only the proportionality; the fixed frequency and medium are the conditions that make it true, because the energy of e…
-  - line 248: "notes": "New for exams from 2028. The guide asks only for the proportionality. This argument links it to the energy stored in a spring from A.3."
-  - line 272: "notes": "New for exams from 2028. Students meet the inverse-square law in B.1. The common slip is to say that the amplitude also follows an inverse-square law. Warn them…
-  - line 284: "notes": "New for exams from 2028. Ask what a graph of $I$ against $A^{2}$ would look like (a straight line through the origin)."
-  - line 305: "notes": "New for exams from 2028. The open field matters: indoors, reflections from the walls would stop the simple $1/r$ pattern from holding."
-  - line 326: "notes": "New for exams from 2028. The tone's frequency and the medium at the microphone do not change, so $I \\propto A^{2}$ applies. Point out the contrast: 96% of the …
+  - line 225: "notes": "New for exams from 2028. The guide states only the proportionality; the fixed frequency and medium are the conditions that make it true, because the energy of e…
+  - line 249: "notes": "New for exams from 2028. The guide asks only for the proportionality. This argument links it to the energy stored in a spring from A.3."
+  - line 273: "notes": "New for exams from 2028. Students meet the inverse-square law in B.1. The common slip is to say that the amplitude also follows an inverse-square law. Warn them…
+  - line 285: "notes": "New for exams from 2028. Ask what a graph of $I$ against $A^{2}$ would look like (a straight line through the origin)."
+  - line 306: "notes": "New for exams from 2028. The open field matters: indoors, reflections from the walls would stop the simple $1/r$ pattern from holding."
+  - line 327: "notes": "New for exams from 2028. The tone's frequency and the medium at the microphone do not change, so $I \\propto A^{2}$ applies. Point out the contrast: 96% of the …
 - `teachers/slides/c3.json` (1)
   - line 1517: "notes": "New for exams from 2028. The link $I \\propto A^2$ in the last bullet is from C.2. Two slits give a central peak 4 times as intense as one slit; three give 9 ti…
 - `teachers/slides/c4.json` (6)

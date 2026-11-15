@@ -53,7 +53,7 @@
         <div class="vlab-panel">
           <h4>Metre rule (magnified)</h4>
           <canvas class="vlab-zoom" role="img" aria-label="A magnified view of the metre rule beside the top of the bob, marked in centimetres and millimetres."></canvas>
-          <p class="vlab-small">The rule's zero is level with the pivot. Read it at the <strong>top</strong> of the bob. Bob diameter: (25.0 ± 0.1) mm, measured with vernier calipers.</p>
+          <p class="vlab-small">The rule's zero is level with the pivot. Read it level with the very <strong>top</strong> of the bob, not where the bob's edge meets the rule. Bob diameter: (25.0 ± 0.1) mm, measured with vernier calipers.</p>
         </div>
         <div class="vlab-panel">
           <h4>Stopwatch</h4>
