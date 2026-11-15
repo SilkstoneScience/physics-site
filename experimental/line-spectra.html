@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: line spectra and the wavelengths of hydrogen's light · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab: view a hydrogen spectrum tube through a diffraction grating, measure its red, blue-green and violet lines at six distances, find their wavelengths from gradients and match them to energy levels.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/line-spectra.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: line spectra and the wavelengths of hydrogen's light · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab: view a hydrogen spectrum tube through a diffraction grating, measure its red, blue-green and violet lines at six distances, find their wavelengths from gradients and match them to energy levels.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/line-spectra.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-line-spectra",
+    "title": "Line spectra: the wavelengths of hydrogen's light",
+    "file": "Line spectra lab",
+    "tables": {
+      "red": {
+        "note": "One row for each distance <i>D</i> (six, for example 0.40 m to 0.90 m), each with Δ<i>D</i> = ± 0.01 m. Read <i>x</i><sub>L</sub> and <i>x</i><sub>R</sub> from the rule in cm. Then <i>x</i> = (<i>x</i><sub>R</sub> − <i>x</i><sub>L</sub>)/2, converted to metres (divide by 100).",
+        "csvFile": "line-spectra-red.csv",
+        "x": 1, "y": 4,
+        "cols": [
+          { "html": "<i>D</i> / m", "csv": "grating-to-rule distance D / m", "aria": "grating-to-rule distance in metres" },
+          { "html": "Red <i>x</i><sub>L</sub> / cm", "csv": "red left reading xL / cm", "aria": "rule reading under the left red line in centimetres" },
+          { "html": "Red <i>x</i><sub>R</sub> / cm", "csv": "red right reading xR / cm", "aria": "rule reading under the right red line in centimetres" },
+          { "html": "<i>x</i> = (<i>x</i><sub>R</sub> − <i>x</i><sub>L</sub>)/2 / m", "csv": "red line position x / m", "aria": "position of the red line from the tube in metres" }
+        ]
+      },
+      "bluegreen": {
+        "note": "Use the same distances <i>D</i> as for the red line, each with Δ<i>D</i> = ± 0.01 m. <i>x</i> = (<i>x</i><sub>R</sub> − <i>x</i><sub>L</sub>)/2, converted to metres (divide by 100).",
+        "csvFile": "line-spectra-blue-green.csv",
+        "x": 1, "y": 4,
+        "cols": [
+          { "html": "<i>D</i> / m", "csv": "grating-to-rule distance D / m", "aria": "grating-to-rule distance in metres" },
+          { "html": "Blue-green <i>x</i><sub>L</sub> / cm", "csv": "blue-green left reading xL / cm", "aria": "rule reading under the left blue-green line in centimetres" },
+          { "html": "Blue-green <i>x</i><sub>R</sub> / cm", "csv": "blue-green right reading xR / cm", "aria": "rule reading under the right blue-green line in centimetres" },
+          { "html": "<i>x</i> = (<i>x</i><sub>R</sub> − <i>x</i><sub>L</sub>)/2 / m", "csv": "blue-green line position x / m", "aria": "position of the blue-green line from the tube in metres" }
+        ]
+      },
+      "violet": {
+        "note": "Use the same distances <i>D</i> as for the red line, each with Δ<i>D</i> = ± 0.01 m. <i>x</i> = (<i>x</i><sub>R</sub> − <i>x</i><sub>L</sub>)/2, converted to metres (divide by 100).",
+        "csvFile": "line-spectra-violet.csv",
+        "x": 1, "y": 4,
+        "cols": [
+          { "html": "<i>D</i> / m", "csv": "grating-to-rule distance D / m", "aria": "grating-to-rule distance in metres" },
+          { "html": "Violet <i>x</i><sub>L</sub> / cm", "csv": "violet left reading xL / cm", "aria": "rule reading under the left violet line in centimetres" },
+          { "html": "Violet <i>x</i><sub>R</sub> / cm", "csv": "violet right reading xR / cm", "aria": "rule reading under the right violet line in centimetres" },
+          { "html": "<i>x</i> = (<i>x</i><sub>R</sub> − <i>x</i><sub>L</sub>)/2 / m", "csv": "violet line position x / m", "aria": "position of the violet line from the tube in metres" }
+        ]
+      },
+      "results": {
+        "note": "One row for each line: 1 = red, 2 = blue-green, 3 = violet. Fill in the last column (the upper energy level <i>n</i> of the transition) in Analysis question 5.",
+        "csvFile": "line-spectra-results.csv",
+        "x": 9, "y": 5,
+        "cols": [
+          { "html": "Line (1 red, 2 blue-green, 3 violet)", "csv": "line number", "aria": "line number: 1 red, 2 blue-green, 3 violet" },
+          { "html": "Gradient <i>m</i> = tan <i>θ</i>", "csv": "gradient m", "aria": "gradient of the graph, equal to tan theta" },
+          { "html": "Δ<i>m</i>", "csv": "uncertainty in m", "aria": "uncertainty in the gradient" },
+          { "html": "<i>θ</i> / °", "csv": "angle θ / degrees", "aria": "angle theta in degrees" },
+          { "html": "<i>λ</i> / nm", "csv": "wavelength λ / nm", "aria": "wavelength in nanometres" },
+          { "html": "Δ<i>λ</i> / nm", "csv": "uncertainty in λ / nm", "aria": "uncertainty in the wavelength in nanometres" },
+          { "html": "<i>E</i> = <i>hc</i>/<i>λ</i> / eV", "csv": "photon energy E / eV", "aria": "photon energy in electronvolts" },
+          { "html": "Δ<i>E</i> / eV", "csv": "uncertainty in E / eV", "aria": "uncertainty in the photon energy in electronvolts" },
+          { "html": "Upper level <i>n</i>", "csv": "upper level n", "aria": "upper energy level n of the transition" }
+        ]
+      },
+      "unknown": {
+        "note": "One row for each line you can see clearly, numbered from the tube outwards (1 = closest to the tube). Write each line's colour and brightness in the panel above. <i>x</i> = (<i>x</i><sub>R</sub> − <i>x</i><sub>L</sub>)/2; tan <i>θ</i> = <i>x</i>/<i>D</i> (with <i>x</i> in metres); <i>λ</i> = <i>d</i> sin <i>θ</i>.",
+        "csvFile": "line-spectra-unknown-gas.csv",
+        "x": 1, "y": 6,
+        "cols": [
+          { "html": "Line (from the tube outwards)", "csv": "line number", "aria": "line number counted from the tube outwards" },
+          { "html": "<i>x</i><sub>L</sub> / cm", "csv": "left reading xL / cm", "aria": "rule reading under the left line in centimetres" },
+          { "html": "<i>x</i><sub>R</sub> / cm", "csv": "right reading xR / cm", "aria": "rule reading under the right line in centimetres" },
+          { "html": "<i>x</i> / cm", "csv": "line position x / cm", "aria": "position of the line from the tube in centimetres" },
+          { "html": "<i>θ</i> / °", "csv": "angle θ / degrees", "aria": "angle theta in degrees" },
+          { "html": "<i>λ</i> = <i>d</i> sin <i>θ</i> / nm", "csv": "wavelength λ / nm", "aria": "wavelength in nanometres" },
+          { "html": "Matching reference line / nm", "csv": "matching reference line / nm", "aria": "wavelength of the matching reference line in nanometres" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Line spectra</p>
+    <h1>Line spectra: the wavelengths of hydrogen's light</h1>
+    <p class="lead">A lab with spectrum tubes, a diffraction grating and a metre rule: a glowing gas gives out only a few sharp colours, and their wavelengths reveal the atom's energy levels. <span class="tag">E.1 Structure of the atom</span></p>
+    <p><strong>Aim:</strong> to measure the wavelengths of hydrogen's visible lines with a diffraction grating, link each line to a jump between energy levels, and identify a second gas from its lines.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#theory">Theory: line spectra and energy levels</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#part1">Part 1: continuous and line spectra</a></li>
+        <li><a href="#part2">Part 2: measuring hydrogen's lines</a></li>
+        <li><a href="#part3">Part 3: identifying a gas from its lines</a></li>
+        <li><a href="#graph">Your graphs and results</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Measuring an angle indirectly from two lengths, and reading positions on both sides of a centre to cancel a small misalignment.</li>
+      <li>Judging realistic uncertainties where human judgement (lining a pointer up with a dim, fuzzy coloured line in a darkened room) is much larger than the resolution of the rule.</li>
+      <li>Choosing a straight-line graph so that the gradient gives the quantity you want, and using the intercept to spot a systematic error in a distance.</li>
+      <li>Finding the uncertainty in a gradient with steepest and shallowest lines, and carrying it through a calculation that is not a simple product.</li>
+      <li>Using a measurement to identify an unknown substance by comparing it with reference data.</li>
+      <li>Working safely with high-voltage equipment.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring length, and working safely with high-voltage equipment (Tool 1); processing data with graphs (Tool 2); finding the uncertainty in a gradient and propagating uncertainties (Tool 3); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="theory">2. Theory: line spectra and energy levels</h2>
+    <p>A hot solid, such as the filament of an old-style light bulb, gives a <strong>continuous spectrum</strong>: seen through a diffraction grating, it spreads into an unbroken band of all the colours.</p>
+    <p>A gas at low pressure behaves very differently. When a high voltage makes it glow, it emits only a few sharp colours, each at its own wavelength. Seen through a grating, the light from the narrow tube appears as a set of separate coloured copies of the tube: an <strong>emission line spectrum</strong>. Every element has its own set of lines, like a fingerprint. (See <a href="../themes/e1.html#spectra">E.1: Emission and absorption spectra</a>.)</p>
+    <p>Line spectra are evidence that an atom can only have certain <strong>discrete energy levels</strong>. When an electron drops from a higher level to a lower one, the atom emits one <strong>photon</strong> carrying the energy difference. The data booklet (E.1) gives the photon energy as</p>
+    $$E = hf \quad\text{and, with } c = f\lambda,\quad E = \frac{hc}{\lambda}$$
+    <p>where $h$ is the Planck constant and $c$ is the speed of light. The data booklet gives $hc = 1.99 \times 10^{-25}$ J m $= 1.24 \times 10^{-6}$ eV m, so with $\lambda$ in metres, $E = \dfrac{1.24 \times 10^{-6}}{\lambda}$ gives the energy directly in electronvolts.</p>
+    <p>Only a few energy differences are possible, so only a few wavelengths are emitted. Hydrogen, the simplest atom, has three bright lines in the visible range: <strong>red, blue-green and violet</strong>. (See <a href="../themes/e1.html#hydrogen">E.1: The hydrogen spectrum</a>.)</p>
+    <p><strong>Hydrogen's energy levels (given as data):</strong></p>
+    <div class="table-wrap"><table class="notes">
+      <thead><tr><th>Level <i>n</i></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr></thead>
+      <tbody><tr><th>Energy / eV</th><td>−13.60</td><td>−3.40</td><td>−1.51</td><td>−0.85</td><td>−0.54</td><td>−0.38</td></tr></tbody>
+    </table></div>
+    <p class="vlab-small"><span class="tag hl">HL</span> These values come from the Bohr model, $E = -\dfrac{13.6}{n^2}$ eV, in the HL part of the data booklet (see <a href="../themes/e1.html#bohr">E.1: The Bohr model of hydrogen</a>). SL students simply use them as data.</p>
+
+    <h3>Measuring a wavelength with a diffraction grating</h3>
+    <p>A diffraction grating is a sheet with a very large number of equally spaced lines. Its label gives the number of lines per millimetre, $N$, so the <strong>grating spacing</strong> is $d = 1/N$. For example, 600 lines per mm gives $d = \frac{1}{600}$ mm $= 1.67 \times 10^{-6}$ m.</p>
+    <p>Light of wavelength $\lambda$ that passes through the grating at right angles leaves strongly only at certain angles $\theta$ to the straight-through direction, given in the data booklet (C.3) by</p>
+    $$n\lambda = d\sin\theta$$
+    <p>where $n$ is the order ($n = 0$ straight through, $n = 1$ the first set of lines on each side). In this lab you use only the <strong>first order</strong>, $n = 1$, so $\lambda = d\sin\theta$. (See <a href="../themes/c3.html#grating">C.3: Multiple slits and diffraction gratings</a>.)</p>
+    <aside class="key">
+      <p style="margin:0"><strong>SL and HL:</strong> the grating equation $n\lambda = d\sin\theta$ is in the <strong>HL</strong> part of C.3. SL students: you don't need to explain where it comes from. Treat it as a relation you are given, like a formula on a calibration sheet, and use it to turn your angles into wavelengths. Everything else in this lab is SL content from E.1.</p>
+    </aside>
+    <p>You will look at the tube through the grating with your eye close behind it. A metre rule is fixed horizontally just below the glowing part of the tube, at right angles to your line of sight, at a distance $D$ from the grating. A partner slides a pointer along the rule until it lines up with each coloured line that you see. If the line appears a distance $x$ from the tube (see the diagrams in <a href="#part2">Part 2</a>), then</p>
+    $$\tan\theta = \frac{x}{D}$$
+    <p>With a 600 lines per mm grating the angles are about 15–23°, too large for the small-angle approximation ($\sin\theta \approx \tan\theta$): $\sin\theta$ and $\tan\theta$ differ by up to about 9 %. With 300 lines per mm the angles are only about 7.5–11.4° and the difference is just 1–2 %, but it is still a systematic error. So in both cases, work out $\theta$ from $\tan\theta$ and then use $\sin\theta$.</p>
+    <p>If you measure $x$ at several values of $D$, a graph of $x$ against $D$ is a <strong>straight line through the origin with gradient $= \tan\theta$</strong>, one line for each colour.</p>
+
+    <h2 id="equipment">3. Equipment and safety</h2>
+    <ul>
+      <li>Spectrum tube power supply with tube holder (high voltage, a few kV): <strong>operated by the teacher</strong></li>
+      <li>Hydrogen spectrum tube; a helium tube (or another gas the school has), and one tube with its label covered for Part 3</li>
+      <li>Transmission diffraction grating in a slide mount; <strong>check its label</strong> for the number of lines per mm (for example 300 or 600 lines per mm; 600 is better if you have it). Stand and clamp to hold it at eye height</li>
+      <li>Two metre rules (one as the scale in front of the tube, one for measuring $D$), or a metre rule and a tape measure. The scale rule must be <strong>wooden or plastic with no metal end caps</strong></li>
+      <li>Stand and clamp (or two wooden blocks) to hold the scale rule horizontal just below the glowing capillary of the tube</li>
+      <li>Two pointers: narrow strips of white card folded over the rule so they slide along it</li>
+      <li>Masking tape and a calculator</li>
+      <li>Optional: a filament lamp (clear bulb) for comparison with a continuous spectrum</li>
+    </ul>
+    <div class="notice">
+      <p style="margin:0"><strong>Safety: high voltage, hot glass and a dim room</strong></p>
+      <ul style="margin-bottom:0">
+        <li>The power supply produces <strong>several thousand volts</strong> at the tube terminals. <strong>Never touch the tube, its metal ends or the holder's contacts while the supply is on.</strong> Only the teacher switches the supply on and off and changes tubes, after switching off and letting the tube cool.</li>
+        <li>Spectrum tubes become <strong>hot</strong> during use, especially near the ends: don't touch a tube even after it has been switched off until your teacher says it is cool. Tubes are thin glass: report a cracked or broken tube immediately and don't pick up the pieces.</li>
+        <li>Some tubes give out a small amount of <strong>ultraviolet</strong> as well as visible light. Don't stare at the tube from close up for long periods: look away between readings.</li>
+        <li><strong>Duty cycle:</strong> the tube is on only while readings are being taken, roughly 30 s on and 30 s off (follow the instructions for your tubes). Hydrogen tubes in particular degrade quickly if left on, so plan each reading before the teacher switches on.</li>
+        <li>The scale rule sits close to the high-voltage terminals: <strong>use a wooden or plastic rule with no metal end caps</strong>. Keep water bottles and metal objects (stands, clamps, metal rules) clear of the tube terminals. Keep the scale rule and pointers on the observer's side of the tube.</li>
+        <li>When the room is dimmed, keep enough light to see the floor and your notes. Keep bags and stools out of the walkway and move carefully. Handle the grating by its mount; don't touch its surface.</li>
+      </ul>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> Explain why a gas at low pressure gives a line spectrum, while a hot filament gives a continuous spectrum. Use the words "energy level" and "photon" in your answer.</label><textarea id="pre1" data-save="pre1" rows="3"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> Calculate the grating spacing <i>d</i>, in metres, for a grating with 300 lines per mm and for one with 600 lines per mm. Which grating spreads the colours through larger angles?</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> In a trial run, a student views a sodium lamp through a grating with 500 lines per mm. A bright yellow line appears 18.5 cm to the side of the lamp on a rule 0.600 m from the grating. Calculate the angle <i>θ</i>, then the wavelength of the yellow light (first order) and the energy of one of its photons in eV.</label><textarea id="pre3" data-save="pre3" rows="3"></textarea></div>
+      <div class="answer"><label for="pre4"><strong>P4.</strong> Use the energy-level data in the Theory section to calculate the wavelengths of the photons emitted in the transitions <i>n</i> = 3 → <i>n</i> = 1 and <i>n</i> = 4 → <i>n</i> = 3. Explain why you will not see either of these lines in this lab.</label><textarea id="pre4" data-save="pre4" rows="3"></textarea></div>
+      <div class="answer"><label for="pre5"><strong>P5.</strong> Through a glass prism, violet light is bent the most and red the least. Predict the order of the colours, from the tube outwards, when you look through a grating, and explain the difference.</label><textarea id="pre5" data-save="pre5" rows="3"></textarea></div>
+    </div>
+
+    <h3>Uncertainties</h3>
+    <p><strong>Line positions $x_\text{L}$ and $x_\text{R}$:</strong> the rule can be read to ± 0.05 cm, but this is not the limit. Each coloured line is a few millimetres wide, the violet line is dim, and the observer has to judge when the pointer lines up with its centre in a darkened room. A realistic uncertainty in each pointer position is about ± 0.3 cm (more for the violet line).</p>
+    <p>At one distance, both partners take a turn as observer: use the half range, $\frac{\text{max} - \text{min}}{2}$, of your two values if it is larger.</p>
+    <p><strong>Distance $x = (x_\text{R} - x_\text{L})/2$:</strong> the difference of two readings adds their uncertainties (± 0.6 cm), and halving it halves the uncertainty, so $\Delta x \approx$ ± 0.3 cm. Reading both sides and averaging also cancels most of the error if the grating is turned slightly away from facing the tube.</p>
+    <p><strong>Grating-to-rule distance $D$:</strong> measure from the grating surface to the front edge of the scale rule. The grating is inside a mount and the rules may not be exactly straight, so ± 1 cm is realistic: much larger than the rule's resolution.</p>
+    <p><strong>Grating spacing $d$:</strong> this comes from the label. Inexpensive replica gratings are not always exactly what the label says: use the tolerance your teacher gives you. Because $d$ is the same for every point, its uncertainty doesn't show up on the graph: you add its percentage uncertainty at the end.</p>
+    <p>Quote uncertainties to 1 significant figure (usual), or 2 if the uncertainty itself is known precisely, with each value rounded to the same decimal place. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <h2 id="part1">5. Part 1: continuous and line spectra</h2>
+    <ol>
+      <li>If a filament lamp is available, look at it through the grating, holding the grating by its mount close to your eye with its lines vertical. Describe the spectrum on each side.</li>
+      <li>Your teacher puts the hydrogen tube in the holder and switches the supply on. Dim the room lights. Look at the tube through the grating from 1–2 m away. Sketch what you see on each side of the tube: the colours, their order and their relative brightness. Note that further out there is a second, fainter set of colours (the second order).
+        <br>You may also see many faint lines and a faint glow between the bright lines: these come from hydrogen <strong>molecules</strong> in the tube. Measure only the three bright atomic lines.</li>
+    </ol>
+    <div data-report-section="Part 1: observations">
+      <div class="answer"><label for="o1"><strong>O1.</strong> Filament lamp (if available): describe the spectrum you see on each side of the lamp.</label><textarea id="o1" data-save="o1" rows="3"></textarea></div>
+      <div class="answer"><label for="o2"><strong>O2.</strong> Hydrogen tube: describe what you see on each side of the tube (the colours, their order from the tube outwards and their relative brightness), and the fainter second order further out. Sketch it on paper too.</label><textarea id="o2" data-save="o2" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="part2">6. Part 2: measuring hydrogen's lines</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 282" role="img" aria-labelledby="lsPlanT">
+        <title id="lsPlanT">Set-up seen from above. At the top, the spectrum tube stands upright, seen end-on as a small circle. Just in front of it, a metre rule runs from left to right, with the tube at its centre. At the bottom, the observer's eye is just behind a diffraction grating. A straight line runs from the grating to the tube; the distance D is from the grating to the front edge of the rule. Dashed lines of sight run from the grating to a card pointer on each side of the tube, at the angle theta to the straight-through line. The distance along the rule from the tube to the right-hand pointer is x.</title>
+        <text x="180" y="22" font-size="12" text-anchor="middle">spectrum tube</text>
+        <circle cx="180" cy="40" r="6" class="axis" style="fill:#c77dd6"/>
+        <text x="20" y="54" font-size="12">metre rule</text>
+        <line class="axis thin" x1="188" y1="56" x2="244" y2="56"/>
+        <path class="axis" d="M181 56 L189 52 L189 60 z" style="fill:var(--text)"/>
+        <path class="axis" d="M251 56 L243 52 L243 60 z" style="fill:var(--text)"/>
+        <text x="216" y="50" font-size="12" text-anchor="middle" font-style="italic">x</text>
+        <rect class="axis" x="20" y="62" width="320" height="8" style="fill:var(--surface)"/>
+        <rect class="l2" x="105" y="59" width="6" height="14" style="fill:var(--theme-b)"/>
+        <rect class="l2" x="249" y="59" width="6" height="14" style="fill:var(--theme-b)"/>
+        <line class="axis thin" x1="180" y1="238" x2="180" y2="46"/>
+        <line class="l2 dash" x1="180" y1="238" x2="108" y2="73"/>
+        <line class="l2 dash" x1="180" y1="238" x2="252" y2="73"/>
+        <path class="l2 thin" d="M180 168 A70 70 0 0 1 207.6 173.7" style="fill:none"/>
+        <text class="t2" x="197" y="160" font-size="12" text-anchor="middle">θ</text>
+        <line class="axis thin dash" x1="24" y1="238" x2="156" y2="238"/>
+        <line class="axis thin" x1="30" y1="79" x2="30" y2="229"/>
+        <path class="axis" d="M30 71 L26 80 L34 80 z" style="fill:var(--text)"/>
+        <path class="axis" d="M30 237 L26 228 L34 228 z" style="fill:var(--text)"/>
+        <text x="40" y="160" font-size="12" font-style="italic">D</text>
+        <line class="l1" x1="160" y1="238" x2="200" y2="238" style="stroke-width:3"/>
+        <text class="t1" x="212" y="242" font-size="12">grating</text>
+        <path class="axis" d="M166 258 Q180 248 194 258 Q180 268 166 258 z" style="fill:var(--surface)"/>
+        <circle cx="180" cy="258" r="3" style="fill:var(--text)"/>
+        <text x="212" y="272" font-size="12">eye</text>
+      </svg>
+      <figcaption>Seen from above (not to scale; the angle is drawn for the red line with a 600 lines per mm grating). The tube stands upright in its high-voltage holder, just behind the rule. The <span class="key-1">grating</span> is just in front of the observer's eye, with its lines vertical. The <span class="key-2">dashed lines of sight</span> run to the card pointers on each side. Measure <i>D</i> from the grating to the front edge of the rule.</figcaption>
+    </figure>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 192" role="img" aria-labelledby="lsViewT">
+        <title id="lsViewT">What the observer sees through the grating. The pink-purple glowing tube is in the middle. On each side are three coloured lines. Below them is the metre rule, marked 30 cm at the left end, 50 cm under the tube and 70 cm at the right end. A pointer sits under each red line, at the rule readings x L on the left and x R on the right.</title>
+        <text x="180" y="30" font-size="12" text-anchor="middle">tube</text>
+        <rect x="177" y="40" width="6" height="74" style="fill:#c77dd6;stroke:none"/>
+        <rect x="41" y="40" width="4" height="74" style="fill:#e53935;stroke:none"/>
+        <rect x="80" y="40" width="4" height="74" style="fill:#00a5a8;stroke:none"/>
+        <rect x="92" y="40" width="4" height="74" style="fill:#7c4dff;stroke:none;fill-opacity:0.75"/>
+        <rect x="264" y="40" width="4" height="74" style="fill:#7c4dff;stroke:none;fill-opacity:0.75"/>
+        <rect x="276" y="40" width="4" height="74" style="fill:#00a5a8;stroke:none"/>
+        <rect x="315" y="40" width="4" height="74" style="fill:#e53935;stroke:none"/>
+        <text x="258" y="80" font-size="12" text-anchor="end">violet</text>
+        <text x="292" y="30" font-size="12" text-anchor="middle">blue-green</text>
+        <line class="axis thin" x1="285" y1="33" x2="279" y2="39"/>
+        <text x="356" y="80" font-size="12" text-anchor="end">red</text>
+        <rect class="axis" x="20" y="120" width="320" height="14" style="fill:var(--surface)"/>
+        <line class="axis thin" x1="20" y1="120" x2="20" y2="127"/>
+        <line class="axis thin" x1="60" y1="120" x2="60" y2="127"/>
+        <line class="axis thin" x1="100" y1="120" x2="100" y2="127"/>
+        <line class="axis thin" x1="140" y1="120" x2="140" y2="127"/>
+        <line class="axis thin" x1="180" y1="120" x2="180" y2="127"/>
+        <line class="axis thin" x1="220" y1="120" x2="220" y2="127"/>
+        <line class="axis thin" x1="260" y1="120" x2="260" y2="127"/>
+        <line class="axis thin" x1="300" y1="120" x2="300" y2="127"/>
+        <line class="axis thin" x1="340" y1="120" x2="340" y2="127"/>
+        <path class="l2" d="M43 135 L38 145 L48 145 z" style="fill:var(--theme-b)"/>
+        <path class="l2" d="M317 135 L312 145 L322 145 z" style="fill:var(--theme-b)"/>
+        <text x="20" y="156" font-size="12" text-anchor="middle">30</text>
+        <text x="180" y="156" font-size="12" text-anchor="middle">50 cm</text>
+        <text x="340" y="156" font-size="12" text-anchor="middle">70</text>
+        <text class="t2" x="43" y="182" font-size="12" text-anchor="middle" font-style="italic">x<tspan dy="4" font-size="0.8em">L</tspan></text>
+        <text class="t2" x="317" y="182" font-size="12" text-anchor="middle" font-style="italic">x<tspan dy="4" font-size="0.8em">R</tspan></text>
+      </svg>
+      <figcaption>What the observer sees, drawn to scale for a 600 lines per mm grating at <i>D</i> = 0.40 m. On each side of the tube there are three coloured lines. The <span class="key-2">pointers</span> are under the red lines, at the rule readings <i>x</i><sub>L</sub> and <i>x</i><sub>R</sub>; then <i>x</i> = (<i>x</i><sub>R</sub> − <i>x</i><sub>L</sub>)/2.</figcaption>
+    </figure>
+    <ol start="3">
+      <li>Clamp the scale rule horizontally just below the glowing capillary of the tube and as close to the tube as the holder safely allows, with its 50 cm mark directly in front of the tube. Don't let the rule touch the tube or its terminals.</li>
+      <li>Clamp the grating at the height of the capillary, about 0.40 m from the rule (0.60 m if your grating has 300 lines per mm), with its lines vertical and its surface facing the tube squarely. Put a pointer on each side of the tube. Record the grating's lines per mm in the panel below.</li>
+      <li>Measure $D$ from the grating to the front edge of the rule, keeping the measuring rule level and to one side of the line of sight. Type $D$ in a new row of each colour's table.</li>
+      <li>The observer puts one eye close behind the grating and keeps their head still. The partner slides the right-hand pointer until the observer says it is directly below the <strong>centre</strong> of the red line, then does the same on the left. Leave the pointers where they are, switch a light on briefly (a desk lamp or the room lights; never touch the tube), and read $x_\text{L}$ and $x_\text{R}$ from the rule. Record them in the red table.</li>
+      <li>Repeat step 6 for the blue-green line and the violet line. (The violet line is the faintest: let your eyes adapt to the dark for a minute first.)</li>
+      <li>At $D$ = 0.80 m only, swap roles: the second partner takes a full set of readings without looking at the first set. Record both partners' values of $x$ in the repeat panel below.</li>
+      <li>Move the grating back by 0.10 m and repeat steps 5–7 until you have <strong>six</strong> distances (for example 0.40 m to 0.90 m). With a 300 lines per mm grating, use about 0.60 m to 1.10 m. Check each time that the grating still faces the tube squarely: $x_\text{R}$ − 50 cm and 50 cm − $x_\text{L}$ should be nearly equal.</li>
+      <li>Record the number of lines per mm printed on the grating's label, and the grating spacing $d$ with its uncertainty, in the panel below.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Grating</h3>
+      <label class="vlab-field">Number of lines per mm (from the label) <input data-save="lines-per-mm"></label>
+      <label class="vlab-field">Grating spacing <i>d</i> / m (with its uncertainty) <input data-save="d"></label>
+    </div>
+    <p>For each row, work out $x = (x_\text{R} - x_\text{L})/2$ and convert it to metres (divide by 100) for the last column.</p>
+    <div class="vlab-panel" data-lab-table="red" data-report-title="Red line positions"></div>
+    <div class="vlab-panel" data-lab-table="bluegreen" data-report-title="Blue-green line positions"></div>
+    <div class="vlab-panel" data-lab-table="violet" data-report-title="Violet line positions"></div>
+    <div class="vlab-panel measure-panel">
+      <h3>Repeat at D = 0.80 m (both partners)</h3>
+      <p class="vlab-small">Each <i>x</i> = (<i>x</i><sub>R</sub> − <i>x</i><sub>L</sub>)/2, in cm. Half range = (max − min)/2. Δ<i>x</i> used is the larger of your realistic estimate (about ± 0.3 cm) and the half range.</p>
+      <label class="vlab-field">Red: <i>x</i> (partner A) / cm <input data-save="rep-red-a"></label>
+      <label class="vlab-field">Red: <i>x</i> (partner B) / cm <input data-save="rep-red-b"></label>
+      <label class="vlab-field">Red: half range / cm <input data-save="rep-red-hr"></label>
+      <label class="vlab-field">Red: Δ<i>x</i> used / cm <input data-save="rep-red-dx"></label>
+      <label class="vlab-field">Blue-green: <i>x</i> (partner A) / cm <input data-save="rep-bg-a"></label>
+      <label class="vlab-field">Blue-green: <i>x</i> (partner B) / cm <input data-save="rep-bg-b"></label>
+      <label class="vlab-field">Blue-green: half range / cm <input data-save="rep-bg-hr"></label>
+      <label class="vlab-field">Blue-green: Δ<i>x</i> used / cm <input data-save="rep-bg-dx"></label>
+      <label class="vlab-field">Violet: <i>x</i> (partner A) / cm <input data-save="rep-v-a"></label>
+      <label class="vlab-field">Violet: <i>x</i> (partner B) / cm <input data-save="rep-v-b"></label>
+      <label class="vlab-field">Violet: half range / cm <input data-save="rep-v-hr"></label>
+      <label class="vlab-field">Violet: Δ<i>x</i> used / cm <input data-save="rep-v-dx"></label>
+    </div>
+
+    <h2 id="part3">7. Part 3: identifying a gas from its lines</h2>
+    <ol start="11">
+      <li>Your teacher switches off, lets the hydrogen tube cool and replaces it with the tube with its label covered. Choose one distance (0.80 m is a good choice) and record $D$ in the panel below.</li>
+      <li>Measure $x_\text{L}$ and $x_\text{R}$ for <strong>every</strong> line you can see clearly, from the tube outwards, as in step 6. Note the colour and brightness of each line in the panel.</li>
+      <li>Calculate each wavelength and compare the set with the reference wavelengths in the table below to identify the gas. Then check with your teacher.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Unknown gas</h3>
+      <label class="vlab-field">Grating-to-rule distance <i>D</i> / m (± 0.01 m) <input data-save="unk-D"></label>
+      <label class="vlab-field">Colour and brightness of each line, numbered as in the table (1 = closest to the tube) <input data-save="unk-colours"></label>
+    </div>
+    <div class="vlab-panel" data-lab-table="unknown" data-report-title="Unknown gas: line positions and wavelengths"></div>
+    <p><strong>Reference wavelengths of some bright visible lines</strong> (your teacher may give you a fuller chart for the tubes your school has):</p>
+    <div class="table-wrap"><table class="notes">
+      <thead><tr><th>Gas</th><th>Bright visible lines / nm</th></tr></thead>
+      <tbody>
+        <tr><td>Hydrogen</td><td>656.3 (red), 486.1 (blue-green), 434.0 (violet)</td></tr>
+        <tr><td>Helium</td><td>706.5 (deep red, faint), 667.8 (red), 587.6 (yellow, very bright), 501.6 (green), 492.2 (blue-green, faint), 471.3 (blue), 447.1 (violet-blue)</td></tr>
+        <tr><td>Mercury</td><td>579.1 and 577.0 (yellow pair), 546.1 (green, very bright), 435.8 (blue-violet), 404.7 (violet)</td></tr>
+        <tr><td>Neon</td><td>many orange and red lines between about 585 and 703, for example 585.2 (yellow-orange), 614.3 (orange), 640.2 (red); very few lines below 540</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="graph">8. Your graphs and results</h2>
+    <p>Each graph updates as you type. It starts with <strong>line position $x$</strong> on the vertical axis and <strong>grating-to-rule distance $D$</strong> on the horizontal axis. Both are in metres, so the gradient is a pure number: <strong>gradient $= \tan\theta$</strong>.</p>
+    <p class="vlab-small">The graph tool uses one uncertainty for every point on each axis. Type 0.01 (your Δ<i>D</i> in metres) in the horizontal axis's uncertainty box, and that colour's Δ<i>x</i> used, in metres, in the vertical axis's box (for example 0.003 for ± 0.3 cm; if your Δ<i>x</i> varied, type the largest). Then tick <strong>Steepest and shallowest lines</strong>: they pass through every uncertainty bar, and the tool gives the gradient ± its uncertainty and the y-intercept ± its uncertainty. Press <strong>Add this graph to my report</strong> to keep each graph.</p>
+    <h3>Graph 1: red line</h3>
+    <div class="dgraph" data-lab-graph="red"></div>
+    <h3>Graph 2: blue-green line</h3>
+    <div class="dgraph" data-lab-graph="bluegreen"></div>
+    <h3>Graph 3: violet line</h3>
+    <div class="dgraph" data-lab-graph="violet"></div>
+
+    <h3>From gradient to wavelength</h3>
+    <p>The gradient $m$ is $\tan\theta$, so $\theta = \tan^{-1} m$ and</p>
+    $$\lambda = d\sin\theta = \frac{d\,m}{\sqrt{1 + m^2}}$$
+    <p>For each colour, with $d$ in metres:</p>
+    <ol>
+      <li>Calculate $\theta$ and $\lambda$ from the best gradient $m$, and convert $\lambda$ to nm (multiply by $10^9$).</li>
+      <li>The results under the graph give the gradients of the <strong>steepest</strong> and <strong>shallowest</strong> lines. Calculate $\lambda_\text{max}$ from the steepest and $\lambda_\text{min}$ from the shallowest. Then $\Delta\lambda$ (from the graph) $= \dfrac{\lambda_\text{max} - \lambda_\text{min}}{2}$.</li>
+      <li>Add the percentage uncertainty of $d$ to the percentage uncertainty from the graph to get the total $\Delta\lambda$ (Analysis question 2).</li>
+      <li>Calculate the photon energy $E = \dfrac{hc}{\lambda}$ in eV and its uncertainty (Analysis question 4).</li>
+    </ol>
+    <p>Fill in the results table as you go: the line number, $m$, $\Delta m$, $\theta$, $\lambda$, $\Delta\lambda$, $E$ and $\Delta E$, and the upper level $n$ in Analysis question 5.</p>
+    <div class="vlab-panel" data-lab-table="results" data-report-title="Results for hydrogen's three lines"></div>
+
+    <h2 id="analysis">9. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Describe your three graphs. Are they straight lines, and do they pass through the origin within the error bars? Which colour has the steepest line, and why?</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> For each line, state the wavelength from the gradient. Add the percentage uncertainty of <i>d</i> to the percentage uncertainty from the graph, and quote <i>λ</i> ± Δ<i>λ</i> in nm to the correct significant figures.</label><textarea id="a2" data-save="a2" rows="4"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> Compare your three wavelengths with the accepted values (656.3, 486.1 and 434.0 nm). Does each accepted value lie within your range <i>λ</i> ± Δ<i>λ</i>? Calculate the percentage difference for each.</label><textarea id="a3" data-save="a3" rows="4"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> Use <i>E</i> = <i>hc</i>/<i>λ</i> with <i>hc</i> = 1.24 × 10<sup>−6</sup> eV m to calculate the energy of a photon of each line in eV, with its uncertainty (the same percentage as <i>λ</i>).</label><textarea id="a4" data-save="a4" rows="3"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Use the energy-level data in the Theory section to find the transition that matches each photon energy, and fill in the last column of the results table. Draw an energy-level diagram for <i>n</i> = 1 to 6 on paper and add an arrow for each of your three lines. What do the three transitions have in common?</label><textarea id="a5" data-save="a5" rows="4"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Predict the wavelength of the next line in the same series. Did anyone in the class see it? Suggest why it is so hard to see, even though the tube emits it.</label><textarea id="a6" data-save="a6" rows="3"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> Explain how your results support the idea that the electron in a hydrogen atom can only have certain energies. Why does a hydrogen tube not give out every colour, as the filament lamp does?</label><textarea id="a7" data-save="a7" rows="3"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> Your partner's readings at <i>D</i> = 0.80 m: was the half range larger or smaller than your estimate of ± 0.3 cm? Which line had the largest percentage uncertainty in <i>λ</i>, and why?</label><textarea id="a8" data-save="a8" rows="3"></textarea></div>
+      <div class="answer"><label for="a9"><strong>9.</strong> Small angles: for your red line at one distance, compare sin <i>θ</i> and tan <i>θ</i>. By what percentage would <i>λ</i> be wrong if you had used <i>λ</i> = <i>dx</i>/<i>D</i> (that is, sin <i>θ</i> ≈ tan <i>θ</i>)? Would the error be the same for the violet line?</label><textarea id="a9" data-save="a9" rows="4"></textarea></div>
+      <div class="answer"><label for="a10"><strong>10.</strong> Suppose every <i>D</i> had been measured to the clamp holding the grating, 2.0 cm behind the grating. Explain what this does to your graphs: does it change the gradients, the intercepts, or both? Why is finding tan <i>θ</i> from a gradient better than from a single pair of <i>x</i> and <i>D</i>?</label><textarea id="a10" data-save="a10" rows="4"></textarea></div>
+      <div class="answer"><label for="a11"><strong>11.</strong> Part 3: list your measured wavelengths for the unknown gas and the reference lines you matched them to. Which gas was it? Explain why a match of <strong>several</strong> lines is more convincing than a match of one, and which of your lines best told it apart from the other gases in the reference table.</label><textarea id="a11" data-save="a11" rows="4"></textarea></div>
+      <div class="answer"><label for="a12"><strong>12.</strong> The Sun's spectrum has dark absorption lines at some of the same wavelengths as the bright lines of gases in the lab. During the solar eclipse of 1868, astronomers looking at the glowing gas of the Sun's prominences saw a bright yellow <strong>emission</strong> line, at about 588 nm, that matched no element known on Earth; the element was named helium and was found on Earth only years later. Explain how line spectra, bright or dark, can tell us the chemical composition of a star we can never visit.</label><textarea id="a12" data-save="a12" rows="4"></textarea></div>
+      <div class="answer"><label for="a13"><strong>13.</strong> Suggest two realistic improvements to this experiment, and say which uncertainty or systematic error each one reduces.</label><textarea id="a13" data-save="a13" rows="4"></textarea></div>
+    </div>
+    <p class="vlab-small">For question 12, see <a href="../themes/e1.html#composition">E.1: Spectra and chemical composition</a>.</p>
+
+    <h2 id="extension">10. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> Second order: with a 300 lines per mm grating, the second-order lines are at larger angles. Measure the second-order positions of the red and violet lines at one distance and use <i>nλ</i> = <i>d</i> sin <i>θ</i> with <i>n</i> = 2. Do they give the same wavelengths as the first order, within uncertainty, and which order gives the smaller percentage uncertainty?</label><textarea id="e1" data-save="e1" rows="4"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Room lights: look at a fluorescent tube or a white LED through the grating (never at the Sun). Which one shows bright lines, and can you match any of them to the reference table? What does this suggest is inside a fluorescent tube?</label><textarea id="e2" data-save="e2" rows="4"></textarea></div>
+      <div class="answer"><label for="e3"><strong>E3.</strong> Checking the label: shine a Class 2 laser (wavelength on its label) through the same grating so that its first-order spots land on the rule, measure their positions, and use them to find <i>d</i>. <strong>Laser safety:</strong> the spots are projected onto the rule; never look through the grating, or back along the beam, while the laser is on. Does <i>d</i> agree with the label? Use your value of <i>d</i> to recalculate hydrogen's wavelengths: are they closer to the accepted values?</label><textarea id="e3" data-save="e3" rows="4"></textarea></div>
+      <div class="answer"><label for="e4"><span class="tag hl">HL</span> <strong>E4.</strong> Use the Bohr model, <i>E</i> = −13.6/<i>n</i><sup>2</sup> eV, to derive an expression for the wavelength of the photon emitted when an electron falls from level <i>n</i> to level 2. Plot 1/<i>λ</i> against 1/<i>n</i><sup>2</sup> for your three lines (<i>n</i> = 3, 4, 5). What gradient and intercept do you expect, and do your results agree?</label><textarea id="e4" data-save="e4" rows="4"></textarea></div>
+    </div>
+    <h3>Graph for E4 <span class="tag hl">HL</span></h3>
+    <p class="vlab-small">This graph uses your results table. It starts with the <strong>wavelength</strong> on the vertical axis and the <strong>upper level <i>n</i></strong> on the horizontal axis: choose <strong>Plot 1/x</strong> for the vertical axis and <strong>Plot 1/x²</strong> for the horizontal axis. <i>n</i> is a whole number, so leave the horizontal axis's uncertainty box empty. 1/<i>λ</i> has the same percentage uncertainty as <i>λ</i>: type your largest percentage uncertainty in <i>λ</i> in the vertical axis's box, with a % sign (for example 1%). With <i>λ</i> in nm, the gradient and intercept are in nm⁻¹ (multiply by 10<sup>9</sup> to get m⁻¹).</p>
+    <div class="dgraph" data-lab-graph="results"></div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your grating values, your tables, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

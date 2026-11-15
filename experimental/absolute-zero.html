@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: Pressure, temperature and absolute zero · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab with Vernier sensors: heat a sealed flask of air in a water bath, measure its pressure at several temperatures, and extrapolate the graph to estimate absolute zero with its uncertainty.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/absolute-zero.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: Pressure, temperature and absolute zero · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab with Vernier sensors: heat a sealed flask of air in a water bath, measure its pressure at several temperatures, and extrapolate the graph to estimate absolute zero with its uncertainty.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/absolute-zero.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-absolute-zero",
+    "title": "Pressure, temperature and absolute zero",
+    "file": "Absolute zero lab",
+    "tables": {
+      "baths": {
+        "note": "One row for each bath. Fill in T = θ + 273 for your graph of P against T. If you record cooling points (step 12), add them as extra rows.",
+        "csvFile": "absolute-zero.csv",
+        "x": 1, "y": 3,
+        "cols": [
+          { "html": "Temperature <i>θ</i> / °C", "csv": "temperature θ / °C", "aria": "temperature in degrees Celsius" },
+          { "html": "Δ<i>θ</i> / °C", "csv": "uncertainty in θ / °C", "aria": "uncertainty in the temperature in degrees Celsius" },
+          { "html": "Pressure <i>P</i> / kPa", "csv": "pressure P / kPa", "aria": "pressure in kilopascals" },
+          { "html": "Δ<i>P</i> / kPa", "csv": "uncertainty in P / kPa", "aria": "uncertainty in the pressure in kilopascals" },
+          { "html": "<i>T</i> = <i>θ</i> + 273 / K", "csv": "kelvin temperature T / K", "aria": "kelvin temperature in kelvin" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Pressure, temperature and absolute zero</p>
+    <h1>Pressure, temperature and absolute zero</h1>
+    <p class="lead">A lab with Vernier sensors: a sealed flask of air sits in a water bath at constant volume, a pressure sensor and a temperature probe record its pressure and temperature, and a long extrapolation of your graph estimates absolute zero. <span class="tag">B.3 Gas laws</span> <span class="tag vernier-tag">Vernier</span></p>
+    <p><strong>Aim:</strong> to measure how the pressure of a fixed volume of air changes with temperature, to estimate absolute zero (with its uncertainty) by extrapolating the graph, and to test whether pressure is directly proportional to kelvin temperature.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#theory">Theory: pressure, temperature and absolute zero</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#setup">Setting up</a></li>
+        <li><a href="#collect">Collecting data</a></li>
+        <li><a href="#graph">Your graphs</a></li>
+        <li><a href="#analysis">Analysis and evaluation</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Waiting for thermal equilibrium before recording a reading, and judging when a reading has settled.</li>
+      <li>Giving realistic uncertainties for sensor readings, not just the display's resolution.</li>
+      <li>Plotting a graph with uncertainty bars and a line of best fit.</li>
+      <li>Extrapolating a straight line far beyond the data, and finding the uncertainty in an intercept from the steepest and shallowest lines.</li>
+      <li>Testing a proportional relationship (a line through the origin), and linking a gradient to an equation of state.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring temperature and pressure, and working safely with hot water (Tool 1); collecting data with sensors, and processing it with graphs (Tool 2); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="theory">2. Theory: pressure, temperature and absolute zero</h2>
+    <p>Air trapped in a rigid, sealed flask can't expand, so its volume and the amount of gas inside stay fixed. If you warm it, the molecules move faster on average. They hit the walls more often, and with a larger change in momentum each time, so the force on each square metre of wall (the pressure) increases.</p>
+    <p>For an ideal gas the data booklet gives</p>
+    $$PV = nRT \qquad \text{and} \qquad \frac{PV}{T} = \text{constant}$$
+    <p>where $P$ is the pressure, $V$ the volume, $n$ the amount of gas in moles, $R = 8.31\ \text{J K}^{-1}\,\text{mol}^{-1}$ and $T$ the <strong>absolute (kelvin) temperature</strong> (see <a href="../themes/b3.html#laws">B.3 Gas laws</a>). With $V$ and $n$ constant,</p>
+    $$P = \frac{nR}{V}\,T$$
+    <p>so the pressure is directly proportional to the kelvin temperature, and the gradient of a graph of $P$ against $T$ is $nR/V$.</p>
+    <p>In the lab you measure temperature in degrees Celsius, $\theta$. Since $T/\text{K} = \theta/{}^\circ\text{C} + 273$, a graph of $P$ against $\theta$ should still be a straight line, but it will <strong>not</strong> pass through the origin.</p>
+    <p>If you extend (<strong>extrapolate</strong>) the line back to the temperature at which the pressure would fall to zero, you get an estimate of <strong>absolute zero</strong>: the lowest possible temperature, 0 K, which is −273 °C (more precisely −273.15 °C). Real gases condense into liquids long before this, so nobody can measure a gas there. The straight-line model lets you predict it from data taken between about 0 °C and 85 °C.</p>
+    <p>For a line $P = m\theta + c$, the pressure is zero when</p>
+    $$\theta_0 = -\frac{c}{m}$$
+    <p>This point lies about 270 °C beyond your nearest reading, so a small uncertainty in the gradient turns into a large uncertainty in the intercept. Finding out how large is a key part of this lab.</p>
+
+    <h2 id="equipment">3. Equipment and safety</h2>
+    <ul>
+      <li>Vernier interface and a laptop with Logger Pro 3</li>
+      <li>Vernier Gas Pressure Sensor (absolute pressure, 0–210 kPa) with its short plastic tubing and Luer-lock connectors</li>
+      <li>125 mL conical (Erlenmeyer) flask, clean and <strong>completely dry inside</strong>, with a rubber stopper fitted with a Luer-lock connector</li>
+      <li>Vernier Temperature Probe</li>
+      <li>1 L beaker (deep enough to cover the flask up to its stopper) as the water bath</li>
+      <li>Clamp stand, boss and clamp to hold the flask under water (a flask full of air floats)</li>
+      <li>Kettle or hot plate, crushed ice, cold tap water, a spare beaker for pouring, and heat-proof gloves or tongs</li>
+      <li>Stirring rod and paper towels</li>
+    </ul>
+    <div class="notice">
+      <p><strong>Safety</strong></p>
+      <ul style="margin-bottom:0">
+        <li><strong>Hot water:</strong> use heat-proof gloves or tongs when pouring water above about 50 °C. Pour slowly, and keep the bath on a stable, dry bench away from the edge. Report any scald to your teacher straight away and cool it under running water.</li>
+        <li><strong>Glassware:</strong> check the flask for cracks before you use it. Never put a cold flask straight into very hot water: warm it in steps, as the method does.</li>
+        <li><strong>Stopper:</strong> at 80 °C the pressure inside is about 20 kPa above atmospheric, enough to push out a loose stopper. Twist the stopper in firmly, and keep the clamp just below the neck so that the flask can't tip.</li>
+        <li><strong>Electrical:</strong> keep the interface, the pressure sensor and the computer well away from the water. Only the flask and the temperature probe go in the bath.</li>
+      </ul>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> Use the particle model of a gas to explain why the pressure of the trapped air rises when it is heated at constant volume. Refer to the speed of the molecules, how often they hit the walls, and the change in momentum in each collision.</label><textarea id="pre1" data-save="pre1" rows="4"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> Sketch the graph you expect of <i>P</i> against <i>θ</i> in °C, for <i>θ</i> from −300 °C to 100 °C. Then sketch <i>P</i> against <i>T</i> in K on a second set of axes. Mark absolute zero on each. (Sketch on paper, then describe your sketches here.)</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> A flask of air is sealed at 20 °C, when its pressure is 100.0 kPa. Predict its pressure in a bath at (a) 40 °C and (b) 80 °C. Why must you convert to kelvin before calculating?</label><textarea id="pre3" data-save="pre3" rows="3"></textarea></div>
+      <div class="answer"><label for="pre4"><strong>P4.</strong> Is the pressure of a gas proportional to its Celsius temperature? Use your answer to P3 to explain: does doubling <i>θ</i> from 40 °C to 80 °C double the pressure?</label><textarea id="pre4" data-save="pre4" rows="3"></textarea></div>
+      <div class="answer"><label for="pre5"><strong>P5.</strong> The temperature probe sits in the water, not in the air inside the flask. What must you do before each reading so that the probe's reading is also the temperature of the air?</label><textarea id="pre5" data-save="pre5" rows="3"></textarea></div>
+    </div>
+
+    <h3>Uncertainties</h3>
+    <ul>
+      <li><strong>Temperature $\theta$:</strong> the probe displays to 0.1 °C, but that isn't a realistic uncertainty. The bath is warmer at the top than at the bottom, and it cools while you read it. Stir, then watch the reading for about 20 s: half the range it wanders over is a sensible uncertainty, usually ±0.3 °C to ±0.5 °C, and larger for the hottest baths.</li>
+      <li><strong>Pressure $P$:</strong> the sensor displays to 0.1 kPa. Once the reading has settled, note how much it still fluctuates and use half of that range (often about ±0.2 kPa).</li>
+    </ul>
+    <p>Give each uncertainty to 1 significant figure, and round the value to the same decimal place, for example $\theta = (48.6 \pm 0.4)$ °C and $P = (112.3 \pm 0.2)$ kPa. Adding 273 to a temperature doesn't change its absolute uncertainty. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <div class="worked">
+      <h3>Worked example: how extrapolating magnifies uncertainty</h3>
+      <p>A group's data are centred on 45 °C and 109.6 kPa, and the gradient of their line is 0.344 $\text{kPa °C}^{-1}$. The steepest and shallowest lines have gradients about 3% larger and smaller: 0.354 and 0.334 $\text{kPa °C}^{-1}$. Estimate absolute zero and its uncertainty. (Example values, not real data.)</p>
+      <p>Every line passes through (or very close to) the centre of the data. From there, the pressure has to fall by 109.6 kPa to reach zero, so the line meets the temperature axis at $45 - 109.6 / m$.</p>
+      <p>Best-fit line: $45 - 109.6 / 0.344 \approx -274$ °C.</p>
+      <p>Steepest line: $45 - 109.6 / 0.354 \approx -265$ °C. Shallowest line: $45 - 109.6 / 0.334 \approx -283$ °C.</p>
+      <p>Uncertainty: $(283 - 265) / 2 = 9$ °C, so $\theta_0 = (-274 \pm 9)$ °C. A 3% uncertainty in the gradient has become about ±9 °C in absolute zero, because the intercept is so far from the data.</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 360 240" role="img" aria-labelledby="az2t">
+          <title id="az2t">Graph of pressure against Celsius temperature, from −300 °C to 100 °C. Six data points lie between 0 °C and 85 °C, in a shaded band. The best-fit line and the steepest and shallowest lines almost coincide over the data, but fan out as they are extended to the left, meeting the temperature axis at about −283 °C, −274 °C and −265 °C.</title>
+          <rect x="268" y="50" width="62.9" height="140" style="fill:currentColor;opacity:0.08"/>
+          <line class="axis" x1="46" y1="190" x2="346" y2="190"/>
+          <line class="axis" x1="46" y1="190" x2="46" y2="44"/>
+          <line class="axis thin" x1="120" y1="190" x2="120" y2="195"/>
+          <line class="axis thin" x1="194" y1="190" x2="194" y2="195"/>
+          <line class="axis thin" x1="268" y1="190" x2="268" y2="195"/>
+          <line class="axis thin" x1="342" y1="190" x2="342" y2="195"/>
+          <polyline class="l2 thin dash" points="72.2,190 342,60.9"/>
+          <polyline class="l2 thin dash" points="58.5,190 342,62.0"/>
+          <polyline class="l1 thin" points="65.5,190 342,61.5"/>
+          <g style="fill:currentColor">
+            <circle cx="268.0" cy="95.9" r="3"/><circle cx="280.6" cy="90.0" r="3"/><circle cx="293.2" cy="84.2" r="3"/>
+            <circle cx="305.7" cy="78.3" r="3"/><circle cx="318.3" cy="72.5" r="3"/><circle cx="330.9" cy="66.6" r="3"/>
+          </g>
+          <text x="52" y="34" font-size="12">P / kPa</text>
+          <text x="300" y="42" font-size="12" text-anchor="middle">your data</text>
+          <text x="52" y="118" font-size="12">θ₀ spread</text>
+          <line class="axis thin" x1="64" y1="124" x2="65" y2="182"/>
+          <text x="46" y="210" font-size="12" text-anchor="middle">−300</text>
+          <text x="120" y="210" font-size="12" text-anchor="middle">−200</text>
+          <text x="194" y="210" font-size="12" text-anchor="middle">−100</text>
+          <text x="268" y="210" font-size="12" text-anchor="middle">0</text>
+          <text x="342" y="210" font-size="12" text-anchor="middle">100</text>
+          <text x="194" y="234" font-size="12" text-anchor="middle">θ / °C</text>
+        </svg>
+        <figcaption>The worked example's values, drawn to scale (pressure axis from 0 to 140 kPa). The <span class="key-1">best-fit line</span> and the <span class="key-2">steepest and shallowest lines</span> (dashed) are almost on top of each other across the data, but fan out by about 18 °C by the time they reach the temperature axis.</figcaption>
+      </figure>
+    </div>
+
+    <h2 id="setup">5. Setting up</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 265" role="img" aria-labelledby="az1t">
+        <title id="az1t">Side view of the set-up. A 125 mL conical flask is clamped upright from a clamp stand inside a 1 litre beaker of water, under water up to the base of its rubber stopper. A short plastic tube runs from the stopper, out of the beaker, to the pressure sensor on the bench away from the water. The temperature probe dips into the water beside the flask, level with its middle, not touching the glass.</title>
+        <line class="axis" x1="10" y1="232" x2="350" y2="232"/>
+        <rect class="axis" x="14" y="225" width="52" height="7" style="fill:var(--surface)"/>
+        <line class="l3" x1="26" y1="36" x2="26" y2="225"/>
+        <polyline class="l3 thin" points="26,76 122,76 122,110"/>
+        <path class="axis" d="M90 92 V230 H200 V92"/>
+        <line class="l1 thin" x1="91" y1="106" x2="136" y2="106"/>
+        <line class="l1 thin" x1="144" y1="106" x2="199" y2="106"/>
+        <path class="axis" d="M136 100 V132 L108 212 Q106 220 114 220 H166 Q174 220 172 212 L144 132 V100 Z" style="fill:var(--surface)"/>
+        <rect class="axis" x="118" y="108" width="18" height="10" style="fill:var(--surface)"/>
+        <rect class="axis" x="132" y="86" width="16" height="14" rx="2" style="fill:var(--surface)"/>
+        <polyline class="l2 thin" points="140,86 140,40 338,40 338,196"/>
+        <rect class="axis" x="288" y="196" width="60" height="34" rx="3" style="fill:var(--surface)"/>
+        <rect class="axis" x="181" y="72" width="5" height="104" style="fill:var(--surface)"/>
+        <rect class="axis" x="178" y="52" width="11" height="22" rx="2" style="fill:var(--surface)"/>
+        <line class="axis thin" x1="205" y1="130" x2="189" y2="130"/>
+        <text x="70" y="68" font-size="12" text-anchor="middle">clamp</text>
+        <text class="t2" x="240" y="30" font-size="12" text-anchor="middle">short tube</text>
+        <text x="140" y="200" font-size="12" text-anchor="middle">air</text>
+        <text x="208" y="124" font-size="12">temperature</text>
+        <text x="208" y="146" font-size="12">probe</text>
+        <text class="t1" x="120" y="254" font-size="12" text-anchor="middle">water bath</text>
+        <text x="350" y="254" font-size="12" text-anchor="end">pressure sensor</text>
+      </svg>
+      <figcaption>The flask of <strong>air</strong> (fixed volume) is clamped in the <span class="key-1">water bath</span>, under water up to the base of its stopper. A <span class="key-2">short tube</span> joins the stopper to the pressure sensor, which stays on the bench away from the water. Cables to the interface and the stirring rod are not shown; not to scale.</figcaption>
+    </figure>
+    <ol>
+      <li>Make sure the inside of the flask is <strong>completely dry</strong>. (Water left inside evaporates when it is heated and adds its own vapour pressure, which spoils the results.)</li>
+      <li>Connect the Gas Pressure Sensor to <strong>CH 1</strong> and the Temperature Probe to <strong>CH 2</strong> of the interface, and open <strong>Logger Pro 3</strong>.</li>
+      <li>Choose <strong>Experiment ▸ Data Collection…</strong> and, on the <strong>Collection</strong> tab, set Mode to <strong>Selected Events</strong>. Each time you click <strong>Keep</strong>, Logger Pro will record one pressure and one temperature.</li>
+      <li>Click the horizontal axis label and choose <strong>Temperature</strong>; click the vertical axis label and choose <strong>Pressure</strong>.</li>
+      <li>Connect the tubing between the sensor and the stopper, keeping it as short as possible. With the flask still open to the room, check that the pressure reads atmospheric pressure (about 100 kPa) and record it below. Then twist the stopper firmly into the flask. Don't use <strong>Experiment ▸ Zero</strong>: you need the absolute pressure.</li>
+      <li>Clamp the flask upright in the empty 1 L beaker, with the clamp just below the neck. Put the Temperature Probe in the beaker beside the flask, level with its middle and not touching the glass.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Measurements</h3>
+      <label class="vlab-field">Atmospheric pressure in the room (open flask) / kPa <input data-save="Patm" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in the atmospheric pressure / kPa <input data-save="dPatm" inputmode="decimal"></label>
+      <label class="vlab-field">Optional: volume of the flask up to the bottom of the stopper <i>V</i> / mL (analysis question 7) <input data-save="V" inputmode="decimal"></label>
+      <label class="vlab-field">Optional: uncertainty in <i>V</i> / mL <input data-save="dV" inputmode="decimal"></label>
+    </div>
+
+    <h2 id="collect">6. Collecting data</h2>
+    <ol start="7">
+      <li>Fill the beaker with ice and a little cold water, so that the flask is covered up to the base of the stopper. Stir gently and wait until both readings have settled: no steady drift for about 30 s (this can take 2–3 minutes). Click <strong>▶ Collect</strong>, then <strong>Keep</strong>. Record <i>θ</i> and <i>P</i>, with their uncertainties, in the table.</li>
+      <li>Remove the ice and replace the water with room-temperature water. Stir, wait for equilibrium, click <strong>Keep</strong> and record.</li>
+      <li>Pour out some water and add hot water from the kettle to raise the bath by about 15 °C. Keep the flask covered up to the stopper. Stir, wait for equilibrium, click <strong>Keep</strong> and record.</li>
+      <li>Repeat step 9 until you reach about 80–85 °C, giving <strong>at least six</strong> temperatures in total, spread as evenly as you can. Click <strong>■ Stop</strong> when you have finished.</li>
+      <li>Choose <strong>Analyze ▸ Linear Fit</strong> to see a first estimate of the line on screen. Save your file.</li>
+      <li><strong>Optional check (equilibrium and leaks):</strong> let the bath cool, recording two or three more points on the way down. If they lie on the same line as your heating points, the readings were at equilibrium and the flask didn't leak.</li>
+    </ol>
+    <div class="vlab-panel" data-lab-table="baths" data-report-title="Readings"></div>
+    <div data-report-section="Notes on the readings">
+      <div class="answer"><label for="notes"><strong>Notes.</strong> For each bath, note anything useful: for example, how long the readings took to settle, how much they wandered, and which rows (if any) are cooling points.</label><textarea id="notes" data-save="notes" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="graph">7. Your graphs</h2>
+    <p>The graph updates as you type. The graph tool uses one uncertainty for every point on each axis: type your <strong>largest</strong> uncertainty for each quantity (a cautious choice). The "Start the axes at zero" box only changes what you see, not the numbers in the results. The tool doesn't extend the lines as far as the temperature axis, so you will find absolute zero from the numbers it gives you, as below. Make three graphs, and press <strong>Add this graph to my report</strong> after each one.</p>
+    <h3>Graph 1: pressure against Celsius temperature</h3>
+    <ol>
+      <li>The graph starts with <strong>pressure <i>P</i></strong> on the vertical axis and <strong>temperature <i>θ</i></strong> on the horizontal axis. Untick <strong>Start the axes at zero</strong>, so that your points spread across the graph and you can judge whether they lie on a straight line.</li>
+      <li>Type your largest Δ<i>P</i> in the vertical axis's uncertainty box and your largest Δ<i>θ</i> in the horizontal axis's box, then tick <strong>Steepest and shallowest lines</strong>.</li>
+      <li>The results give the gradient $m \pm \Delta m$ (the tool works out $\Delta m$ as half the difference between the steepest and shallowest gradients) and the y-intercept $c$, the pressure at 0 °C. Your best estimate of absolute zero is $\theta_0 = -c/m$.</li>
+    </ol>
+    <h3>Graph 2: temperature against pressure, for absolute zero and its uncertainty</h3>
+    <ol start="4">
+      <li>Swap the axes: choose <strong>temperature <i>θ</i></strong> for the vertical axis and <strong>pressure <i>P</i></strong> for the horizontal axis. Swap the uncertainties too (Δ<i>θ</i> now goes in the vertical box).</li>
+      <li>Now the <strong>y-intercept</strong> is the temperature at which the pressure is zero: your value of $\theta_0$. The tool gives it with an uncertainty, half the difference between the intercepts of the steepest and shallowest lines. That is your $\Delta\theta_0$.</li>
+    </ol>
+    <p class="vlab-small">Why this works: a line that passes through every uncertainty bar still does when you swap the axes, so the steepest and shallowest lines are the same lines as on graph 1, just drawn the other way round. Reading their intercepts here gives the same answer as calculating $-c/m$ for each of them. Graph 1's steepest line becomes this graph's shallowest line (its gradient is 1/<i>m</i>), so the labels swap, but the ± is unaffected. The best-fit value may differ very slightly from graph 1's $-c/m$ (usually by much less than a degree), because the computer's least-squares line is worked out slightly differently when the axes are swapped; quote this graph's value and uncertainty. <strong>Check:</strong> for the steepest and shallowest gradients from graph 1, work out $\bar\theta - \bar P / m$, where $\bar\theta$ and $\bar P$ are the means of your readings, as in the worked example. You should get close to the two ends of your range.</p>
+    <h3>Graph 3: pressure against kelvin temperature</h3>
+    <ol start="6">
+      <li>Fill in the <i>T</i> column of the table ($T = \theta + 273$). Choose <strong>pressure <i>P</i></strong> for the vertical axis and <strong>kelvin temperature <i>T</i></strong> for the horizontal axis, with Δ<i>P</i> and Δ<i>T</i> (the same as Δ<i>θ</i>) as the uncertainties.</li>
+      <li>Tick <strong>Start the axes at zero</strong>, so that you can see the origin, and tick <strong>Steepest and shallowest lines</strong>. Look at the y-intercept and its uncertainty: is zero inside that range?</li>
+    </ol>
+    <div class="dgraph" data-lab-graph="baths"></div>
+
+    <h2 id="analysis">8. Analysis and evaluation</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Is your graph of <i>P</i> against <i>θ</i> linear within the uncertainty bars? Does it pass through the origin? What does this tell you about whether <i>P</i> is proportional to <i>θ</i> in °C?</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> State the gradient <i>m</i> ± Δ<i>m</i> of the <i>P</i>–<i>θ</i> graph, with its units.</label><textarea id="a2" data-save="a2" rows="2"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> State your value of absolute zero, <i>θ</i><sub>0</sub> ± Δ<i>θ</i><sub>0</sub>, in °C, to the correct number of significant figures. Does −273 °C lie within your range?</label><textarea id="a3" data-save="a3" rows="3"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> Compare the percentage uncertainty in your gradient with the percentage uncertainty in <i>θ</i><sub>0</sub>. Use your graph to explain why extrapolating so far beyond the data magnifies the uncertainty.</label><textarea id="a4" data-save="a4" rows="4"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> On the <i>P</i>–<i>T</i> graph, does the line pass through the origin within its uncertainty? Write a statement relating the pressure of a fixed mass of gas at constant volume to its absolute temperature.</label><textarea id="a5" data-save="a5" rows="3"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Use <i>PV</i> = <i>nRT</i> to show that the gradient of the <i>P</i>–<i>T</i> graph is <i>nR</i> / <i>V</i>. Explain why the gradient of the <i>P</i>–<i>θ</i> graph has the same value.</label><textarea id="a6" data-save="a6" rows="3"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> Optional: find the volume <i>V</i> of the flask up to the bottom of the stopper by filling it with water and pouring the water into a measuring cylinder (record it in the measurements above). Use your gradient to calculate the amount of air, <i>n</i>, in moles. Check your answer with <i>n</i> = <i>PV</i> / <i>RT</i> for one of your readings.</label><textarea id="a7" data-save="a7" rows="4"></textarea></div>
+    </div>
+    <h3>Evaluation</h3>
+    <div data-report-section="Evaluation">
+      <div class="answer"><label for="v1"><strong>8.</strong> The air in the tubing and inside the sensor stays near room temperature, not bath temperature. Explain why this makes the pressure rise less than it should between the coldest and hottest baths, and predict whether it makes your value of absolute zero too high (closer to 0 °C) or too low (more negative).</label><textarea id="v1" data-save="v1" rows="4"></textarea></div>
+      <div class="answer"><label for="v2"><strong>9.</strong> A slow leak at the stopper or a connector would let air escape while the pressure inside is above atmospheric. In which part of the run would this happen, and how would it change the shape of your graph? How could you test for a leak?</label><textarea id="v2" data-save="v2" rows="4"></textarea></div>
+      <div class="answer"><label for="v3"><strong>10.</strong> Glass expands slightly when heated, so the flask's volume increases by roughly 0.1% between 0 °C and 85 °C. Compare this with the change in pressure you measured, and decide whether the flask's expansion is a significant source of error.</label><textarea id="v3" data-save="v3" rows="3"></textarea></div>
+      <div class="answer"><label for="v4"><strong>11.</strong> Your temperature probe measures the water, not the air. Explain how recording a reading before equilibrium is reached would affect the points at the hottest and coldest temperatures. What evidence in your data (for example, the optional cooling points) shows whether you waited long enough?</label><textarea id="v4" data-save="v4" rows="4"></textarea></div>
+      <div class="answer"><label for="v5"><strong>12.</strong> Suggest two changes to the method that would reduce the systematic errors you identified, and one change that would reduce the uncertainty in <i>θ</i><sub>0</sub>.</label><textarea id="v5" data-save="v5" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="extension">9. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> Repeat the experiment with the stopper put in while the flask sits in the ice bath, so that the flask holds more air. Stop at 60 °C: sealed at 0 °C, the pressure at 60 °C is already about 22 kPa above atmospheric (about 30 kPa above at 80 °C), enough to push out the stopper. Predict how the gradient of the <i>P</i>–<i>θ</i> line changes. Do the two lines meet the temperature axis at the same point? What does this suggest about absolute zero?</label><textarea id="e1" data-save="e1" rows="4"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Real gases condense before they reach absolute zero. Explain, using the ideal gas model, why a straight-line extrapolation of a gas law can still predict absolute zero correctly. At what conditions of temperature, pressure and density does air behave most like an ideal gas?</label><textarea id="e2" data-save="e2" rows="4"></textarea></div>
+      <div class="answer"><label for="e3"><strong>E3.</strong> Measure the volume of the tubing (from its length and inner diameter) and compare it with the volume of the flask. Estimate how far this "dead volume" shifts your value of <i>θ</i><sub>0</sub>.</label><textarea id="e3" data-save="e3" rows="3"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your measurements, your table, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: Specific heat capacity of a metal block · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab with a Vernier Temperature Probe: heat a metal block with an electric heater, plot the energy supplied against temperature, and find the metal's specific heat capacity from the gradient.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/specific-heat-capacity.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: Specific heat capacity of a metal block · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab with a Vernier Temperature Probe: heat a metal block with an electric heater, plot the energy supplied against temperature, and find the metal's specific heat capacity from the gradient.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/specific-heat-capacity.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-specific-heat-capacity",
+    "title": "Specific heat capacity of a metal block",
+    "file": "Specific heat capacity lab",
+    "tables": {
+      "meters": {
+        "note": "One row each time you read the meters (every 60 s), until you switch the heater off.",
+        "csvFile": "specific-heat-capacity-meters.csv",
+        "x": 1, "y": 2,
+        "cols": [
+          { "html": "Time <i>t</i> / s", "csv": "time t / s", "aria": "time in seconds" },
+          { "html": "Current <i>I</i> / A", "csv": "current I / A", "aria": "current in amperes" },
+          { "html": "pd <i>V</i> / V", "csv": "potential difference V / V", "aria": "potential difference in volts" }
+        ]
+      },
+      "energy": {
+        "note": "One row for each 60 s mark, from 0 s until you switched the heater off. Work out the last two columns with your mean power.",
+        "csvFile": "specific-heat-capacity-energy.csv",
+        "x": 2, "y": 3,
+        "cols": [
+          { "html": "Time <i>t</i> / s", "csv": "time t / s", "aria": "time in seconds" },
+          { "html": "Temperature <i>θ</i> / °C", "csv": "temperature θ / °C", "aria": "temperature in degrees Celsius" },
+          { "html": "Energy supplied <i>E</i> = <i>Pt</i> / J", "csv": "energy supplied E / J", "aria": "energy supplied in joules" },
+          { "html": "Δ<i>E</i> / J", "csv": "uncertainty in E / J", "aria": "uncertainty in the energy supplied in joules" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Specific heat capacity of a metal block</p>
+    <h1>Specific heat capacity of a metal block</h1>
+    <p class="lead">A lab with a Vernier Temperature Probe: an electric heater warms a metal block, two multimeters measure the heater's current and potential difference, and Logger Pro records how the block's temperature rises. <span class="tag">B.1 Thermal energy transfers</span> <span class="tag vernier-tag">Vernier</span></p>
+    <p><strong>Aim:</strong> to find the specific heat capacity of a metal (aluminium, steel or brass) from a graph of energy supplied against temperature, and to compare it with the accepted value.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#setup">Setting up</a></li>
+        <li><a href="#collect">Collecting data</a></li>
+        <li><a href="#graph">Your graph</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Reading digital meters that fluctuate, and using (max − min)/2 to give a realistic uncertainty.</li>
+      <li>Combining measurements ($P = IV$, then $E = Pt$) and propagating their uncertainties.</li>
+      <li>Choosing the straight part of a graph to analyse, and explaining why the rest is curved.</li>
+      <li>Finding a gradient and its uncertainty from the steepest and shallowest lines.</li>
+      <li>Comparing an experimental value with an accepted value, and identifying systematic errors.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring mass, temperature, current and potential difference (Tool 1); collecting data with sensors, and processing it with graphs (Tool 2); propagating uncertainties (Tool 3); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="background">2. Background</h2>
+    <p>Give 1 kg of water and 1 kg of aluminium exactly the same amount of energy, and the aluminium's temperature rises more than four times as much as the water's. Different materials need different amounts of energy to raise the temperature of each kilogram by one kelvin. This property is the <strong>specific heat capacity</strong>, $c$, of the material.</p>
+    <p>The energy $Q$ needed to change the temperature of a mass $m$ by $\Delta T$ is given in the data booklet as</p>
+    $$Q = mc\Delta T$$
+    <p>(see <a href="../themes/b1.html#shc">B.1 Thermal energy transfers</a>). In this lab you supply the energy electrically. An immersion heater sits in a hole in a metal block, and a Temperature Probe sits in a second hole. The power delivered to the heater is found from the potential difference across it and the current through it, $P = IV$ (data booklet, <a href="../themes/b5.html">B.5</a>), so the energy supplied after a time $t$ is</p>
+    $$E = Pt = IVt$$
+    <p>If all of this energy stayed in the block, then</p>
+    $$E = mc(\theta - \theta_0)$$
+    <p>where $\theta$ is the block's temperature and $\theta_0$ its starting temperature. A graph of energy supplied $E$ (vertical axis) against temperature $\theta$ (horizontal axis) should then be a straight line with</p>
+    $$\text{gradient} = mc$$
+    <p>so $c = \dfrac{\text{gradient}}{m}$. A change of 1 °C is the same as a change of 1 K, so you can find the gradient with temperatures in °C and quote it in $\text{J K}^{-1}$.</p>
+    <p>In a real lab, energy is also used to warm the heater itself, and some leaks out of the block into the air and the bench. You will look closely at where your graph is straight and where it isn't, and use that to judge how reliable your value of $c$ is.</p>
+
+    <h2 id="equipment">3. Equipment and safety</h2>
+    <ul>
+      <li>Vernier interface (or LabQuest) and a laptop with Logger Pro 3</li>
+      <li>Vernier Temperature Probe</li>
+      <li>Calorimetry block (about 1 kg) of aluminium, steel or brass, with holes for the heater and the probe</li>
+      <li>A 12 V immersion heater to fit the block, and a low-voltage power supply that can give about 5 A</li>
+      <li>Two digital multimeters (one used as an ammeter on its 10 A range, one as a voltmeter), or an ammeter and a voltmeter</li>
+      <li>Connecting leads</li>
+      <li>Top-pan balance</li>
+      <li>A few drops of oil (or water) for the probe hole, and a dropper</li>
+      <li>Insulation for the block (foam, felt or cloth) and a heat-proof mat</li>
+    </ul>
+    <div class="notice">
+      <p style="margin:0 0 6px"><strong>Safety:</strong></p>
+      <ul style="margin:0">
+        <li>Only switch the heater on when it is fully inside the block. A heater switched on in air overheats within seconds and can burn you or damage itself.</li>
+        <li>The block and heater become hot (up to about 50 °C, the heater much hotter). Let them cool, or handle them with care, at the end of the lab.</li>
+        <li>Never go above the heater's rated voltage. Connect the ammeter to its 10 A socket before switching on. The 0.6 A Vernier Current Probe must <strong>not</strong> be used in this circuit. Many multimeters allow 10 A for only 10–30 s at a time: check that your meter's continuous rating covers the heater current for the whole run, or use an analogue ammeter rated 5 A or more.</li>
+        <li>Wipe up any oil spills. Keep the leads away from the hot block, and keep water away from the power supply.</li>
+      </ul>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> A 0.800 kg block of copper (<i>c</i> = 385 J kg<sup>−1</sup> K<sup>−1</sup>) is heated by a 30 W heater. Assuming no energy is lost, calculate how long it takes for its temperature to rise by 15 K.</label><textarea id="pre1" data-save="pre1" rows="3"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> Explain why a few drops of oil in the probe hole give a more reliable temperature reading than leaving the hole dry.</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> Some of the energy supplied leaks out of the block into the surroundings. Will this make your measured value of <i>c</i> too large or too small? Explain.</label><textarea id="pre3" data-save="pre3" rows="3"></textarea></div>
+      <div class="answer"><label for="pre4"><strong>P4.</strong> Explain why the voltmeter is connected directly across the heater terminals, not across the terminals of the power supply.</label><textarea id="pre4" data-save="pre4" rows="3"></textarea></div>
+    </div>
+
+    <h3>Uncertainties</h3>
+    <ul>
+      <li><strong>Mass of the block, $m$:</strong> a digital balance reading has an uncertainty of ± the smallest division (for example ± 0.001 kg).</li>
+      <li><strong>Current $I$ and pd $V$:</strong> a steady digital reading is ± the last digit, but the readings drift a little as the heater warms up. You will read both meters every minute. These are repeated readings, so use the mean, with an uncertainty of half the range, (max − min)/2, or ± the last digit, whichever is larger (see <a href="../skills.html#recording">recording uncertainties</a>).</li>
+      <li><strong>Power $P = IV$:</strong> add the percentage uncertainties, $\dfrac{\Delta P}{P} = \dfrac{\Delta I}{I} + \dfrac{\Delta V}{V}$ (see <a href="../skills.html#propagating">propagating uncertainties</a>).</li>
+      <li><strong>Energy $E = Pt$:</strong> Logger Pro times to a small fraction of a second, so $\dfrac{\Delta E}{E} \approx \dfrac{\Delta P}{P}$. Each point on your graph has its own $\Delta E$.</li>
+      <li><strong>Temperature $\theta$:</strong> the probe displays to 0.1 °C or better, but while the block is heating, its temperature isn't the same everywhere. A realistic uncertainty is ± 0.2 °C, larger than the display's resolution.</li>
+    </ul>
+    <p>Quote each uncertainty to 1 significant figure, with the best estimate rounded to the same decimal place, for example $P = (47.6 \pm 0.9)$ W. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <h2 id="setup">5. Setting up</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 292" role="img" aria-labelledby="shc1t">
+        <title id="shc1t">Side view of the set-up. A metal block stands on a heat-proof mat, with insulation round its sides. There are two holes in the top of the block: the immersion heater is in one, and the Temperature Probe is in the other, with a few drops of oil at the bottom of the probe hole. The probe's lead goes to the Vernier interface. The circuit is a 12 V power supply, an ammeter and the heater in series, with a voltmeter connected directly across the two heater terminals.</title>
+        <line class="axis" x1="30" y1="30" x2="95" y2="30"/>
+        <line class="axis" x1="95" y1="16" x2="95" y2="44"/>
+        <line class="axis" x1="105" y1="22" x2="105" y2="38" style="stroke-width:4"/>
+        <line class="axis" x1="105" y1="30" x2="177" y2="30"/>
+        <circle class="axis" cx="190" cy="30" r="13" style="fill:var(--surface)"/>
+        <text x="190" y="35" font-size="12" text-anchor="middle">A</text>
+        <line class="axis" x1="203" y1="30" x2="230" y2="30"/>
+        <polyline class="axis" points="230,30 230,80 120,80 120,140"/>
+        <polyline class="axis" points="30,30 30,80 80,80 80,140"/>
+        <line class="axis" x1="80" y1="110" x2="88" y2="110"/>
+        <line class="axis" x1="112" y1="110" x2="120" y2="110"/>
+        <circle class="axis" cx="100" cy="110" r="12" style="fill:var(--surface)"/>
+        <text x="100" y="115" font-size="12" text-anchor="middle">V</text>
+        <circle class="f3" cx="80" cy="110" r="2.5"/>
+        <circle class="f3" cx="120" cy="110" r="2.5"/>
+        <text x="100" y="66" font-size="12" text-anchor="middle">12 V supply</text>
+        <rect class="axis" x="24" y="255" width="222" height="8" style="fill:var(--surface)"/>
+        <rect class="axis dash" x="36" y="165" width="14" height="90" style="fill:currentColor;fill-opacity:0.12"/>
+        <rect class="axis dash" x="220" y="165" width="14" height="90" style="fill:currentColor;fill-opacity:0.12"/>
+        <rect class="l1" x="50" y="165" width="170" height="90" style="fill:var(--surface)"/>
+        <rect class="axis" x="90" y="165" width="20" height="86" style="fill:var(--surface)"/>
+        <rect class="axis" x="166" y="165" width="16" height="86" style="fill:var(--surface)"/>
+        <rect x="167" y="236" width="14" height="14" style="fill:currentColor;opacity:0.35"/>
+        <rect class="l2" x="93" y="152" width="14" height="96" style="fill:var(--surface)"/>
+        <rect class="l2" x="72" y="140" width="56" height="12" rx="2" style="fill:var(--surface)"/>
+        <rect class="axis" x="171" y="118" width="6" height="128" style="fill:var(--surface)"/>
+        <rect class="l3" x="166" y="104" width="16" height="26" rx="3" style="fill:var(--surface)"/>
+        <polyline class="axis" points="174,104 174,100 352,100"/>
+        <text x="352" y="91" font-size="12" text-anchor="end">to interface</text>
+        <text x="190" y="128" font-size="12">probe</text>
+        <text class="t2" x="66" y="150" font-size="12" text-anchor="end">heater</text>
+        <line class="axis" x1="236" y1="200" x2="244" y2="200"/>
+        <text x="248" y="205" font-size="12">insulation</text>
+        <line class="axis" x1="182" y1="243" x2="258" y2="245"/>
+        <text x="262" y="250" font-size="12">oil</text>
+        <text class="t1" x="135" y="284" font-size="12" text-anchor="middle">metal block</text>
+      </svg>
+      <figcaption>The <span class="key-2">immersion heater</span> and the Vernier Temperature Probe sit in the two holes in the <span class="key-1">metal block</span>, which stands on a heat-proof mat with insulation round its sides. The ammeter (A) is in series with the heater; the voltmeter (V) is connected directly across the heater's terminals, not across the supply. Not to scale.</figcaption>
+    </figure>
+    <ol>
+      <li>Measure the mass of the block, $m$, on the balance. Record it below, with its uncertainty.</li>
+      <li>Put the block on the heat-proof mat. Place the heater in its hole. Put a few drops of oil into the probe hole, then insert the Temperature Probe.</li>
+      <li>Wrap insulation around the sides of the block, leaving the tops of the heater and the probe clear.</li>
+      <li>Build the circuit in the diagram: the power supply, the ammeter (on its 10 A range) and the heater in series, and the voltmeter across the heater terminals. Keep the power supply <strong>off</strong>.</li>
+      <li>Plug the Temperature Probe into the interface and open <strong>Logger Pro 3</strong>. Choose <strong>Experiment ▸ Data Collection</strong> and set the length to <strong>900 s</strong> at <strong>1 sample per second</strong>.</li>
+      <li>Wait until the probe reading is steady (the block is at room temperature). Record this starting temperature, $\theta_0$, below.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Measurements before heating</h3>
+      <label class="vlab-field">Metal of the block <input data-save="metal"></label>
+      <label class="vlab-field">Mass of the block <i>m</i> / kg <input data-save="m" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in <i>m</i> / kg <input data-save="dm" inputmode="decimal"></label>
+      <label class="vlab-field">Starting temperature <i>θ</i><sub>0</sub> / °C <input data-save="theta0" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in <i>θ</i><sub>0</sub> / °C <input data-save="dtheta0" inputmode="decimal"></label>
+    </div>
+
+    <h2 id="collect">6. Collecting data</h2>
+    <ol>
+      <li>Click <strong>Collect</strong>. As close as possible to $t = 0$, switch the power supply on at the voltage your teacher gives (about 12 V).</li>
+      <li>Every 60 s, read the ammeter and the voltmeter and record them in the table below. You can read the temperature off the graph afterwards.</li>
+      <li>After 600 s, or when the block is about 25 °C above $\theta_0$ (whichever comes first), switch the power supply off. Note the exact time you switched off. (With a 12 V heater of about 50 W, a 1 kg block usually reaches the 25 °C limit first: after about 8 minutes for aluminium, 4 for steel and 3 for brass.)</li>
+      <li>Let Logger Pro keep recording until 900 s. Watch what the temperature does after the heater is switched off.</li>
+    </ol>
+    <div class="vlab-panel" data-lab-table="meters" data-report-title="Meter readings"></div>
+    <p>Now find the mean current and the mean pd. Their uncertainties are half the range, (max − min)/2, or ± the last digit, whichever is larger. Then work out the mean power, $P = IV$, and its uncertainty from $\dfrac{\Delta P}{P} = \dfrac{\Delta I}{I} + \dfrac{\Delta V}{V}$.</p>
+    <div class="vlab-panel measure-panel">
+      <h3>Mean current, pd and power</h3>
+      <label class="vlab-field">Mean current <i>I</i> / A <input data-save="I" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in <i>I</i> / A <input data-save="dI" inputmode="decimal"></label>
+      <label class="vlab-field">Mean pd <i>V</i> / V <input data-save="V" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in <i>V</i> / V <input data-save="dV" inputmode="decimal"></label>
+      <label class="vlab-field">Mean power <i>P</i> = <i>IV</i> / W <input data-save="P" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in <i>P</i> / W <input data-save="dP" inputmode="decimal"></label>
+    </div>
+    <ol start="5">
+      <li>Use <strong>Analyze ▸ Examine</strong> to read the temperature $\theta$ at each 60 s mark, and the highest temperature reached after switch-off. Record them below and in the second table.</li>
+      <li>Select the straight part of the temperature–time graph and choose <strong>Analyze ▸ Linear Fit</strong>. Record the gradient (the rate of temperature rise, in $\text{K s}^{-1}$) below, as a quick check for Analysis question 6.</li>
+      <li>Save the Logger Pro file (<strong>File ▸ Save As</strong>). Let the block cool before you remove the heater and the probe.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Readings from Logger Pro</h3>
+      <label class="vlab-field">Time the heater was switched off / s <input data-save="toff" inputmode="decimal"></label>
+      <label class="vlab-field">Highest temperature after switch-off / °C <input data-save="thetamax" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in the highest temperature / °C <input data-save="dthetamax" inputmode="decimal"></label>
+      <label class="vlab-field">Rate of temperature rise (Linear Fit gradient) / K s<sup>−1</sup> <input data-save="rate" inputmode="decimal"></label>
+    </div>
+    <h3>Energy supplied</h3>
+    <p>Fill in one row for each 60 s mark, up to the time you switched off. Type the time and the temperature $\theta$ you read in Logger Pro. Then use your mean power to work out the last two columns: the energy supplied, $E = Pt$ (0 J at $t = 0$), and its uncertainty, $\Delta E = E \times \dfrac{\Delta P}{P}$.</p>
+    <div class="vlab-panel" data-lab-table="energy" data-report-title="Energy supplied and temperature"></div>
+
+    <h2 id="graph">7. Your graph</h2>
+    <p>The graph updates as you type. It starts with <strong>energy supplied</strong> on the vertical axis and <strong>temperature</strong> on the horizontal axis, so the gradient is $mc$. Untick <strong>Start the axes at zero</strong>, so that the graph shows just your temperature range.</p>
+    <ol>
+      <li>Look at the shape of the graph. Decide which points lie on the straight part (the first one or two minutes are often curved). Open <strong>Choose which data points to use</strong> and untick the others, so the line of best fit uses only the straight part.</li>
+      <li>Add uncertainty bars: every point gets them. The graph tool uses one uncertainty for each axis. For the energy, every point has the same <strong>percentage</strong> uncertainty, so type your percentage uncertainty in $P$ (for example <strong>2%</strong>) in the vertical axis's uncertainty box: each point then gets its own bar, matching your Δ<i>E</i> column. (Typing your largest Δ<i>E</i> instead is a cautious choice.) For the temperature, type <strong>0.2</strong> (or your own value) in the horizontal axis's box.</li>
+      <li>Tick <strong>Steepest and shallowest lines</strong>. They pass through every uncertainty bar of the points you use. The uncertainty in the gradient is half the difference between their gradients, $\Delta(\text{gradient}) = \dfrac{\text{max} - \text{min}}{2}$ (see <a href="../skills.html#gradient-uncertainty">uncertainty in the gradient</a>).</li>
+      <li>The tool writes the gradient's unit as J / °C. A change of 1 °C is the same as a change of 1 K, so this is the same as $\text{J K}^{-1}$.</li>
+      <li>Press <strong>Add this graph to my report</strong> to keep it. The axes are labelled with the quantities and units from your table's headings.</li>
+    </ol>
+    <div class="dgraph" data-lab-graph="energy"></div>
+
+    <h2 id="analysis">8. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Describe the shape of your graph. Over which range of temperatures is it straight? Suggest why it is curved during the first minute or two, before the energy has spread through the block.</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> State the gradient of the straight part, with its uncertainty and unit. Explain why the gradient represents <i>mc</i>.</label><textarea id="a2" data-save="a2" rows="3"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> Calculate the specific heat capacity <i>c</i> of the metal. Find its uncertainty using Δ<i>c</i>/<i>c</i> = Δgradient/gradient + Δ<i>m</i>/<i>m</i>, and quote <i>c</i> ± Δ<i>c</i> to the correct significant figures.</label><textarea id="a3" data-save="a3" rows="3"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> Accepted values (they vary a little with the alloy): aluminium about 900 J kg<sup>−1</sup> K<sup>−1</sup>, steel about 490 J kg<sup>−1</sup> K<sup>−1</sup>, brass about 380 J kg<sup>−1</sup> K<sup>−1</sup>. Calculate the percentage difference between your value and the accepted value. Does the accepted value lie within <i>c</i> ± Δ<i>c</i>?</label><textarea id="a4" data-save="a4" rows="3"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Is your value larger or smaller than the accepted value? Use the idea of energy lost to the surroundings to explain the direction of the difference. Does the graph give any evidence that the losses grow as the block gets hotter?</label><textarea id="a5" data-save="a5" rows="3"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Find <i>c</i> a second way, using the Logger Pro gradient of the temperature–time graph: <i>P</i> = <i>mc</i>(Δ<i>θ</i>/Δ<i>t</i>). Do the two values agree?</label><textarea id="a6" data-save="a6" rows="3"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> The temperature kept rising after you switched the heater off. Explain why. If you had calculated <i>c</i> from a single pair of readings, using <i>E</i> = <i>Pt</i> and the temperature at the moment of switch-off, how would this have affected your value?</label><textarea id="a7" data-save="a7" rows="3"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> The heater itself has to warm up, and it stores some of the energy supplied. Explain whether this affects the gradient of the straight part, its intercept, or both.</label><textarea id="a8" data-save="a8" rows="3"></textarea></div>
+      <div class="answer"><label for="a9"><strong>9.</strong> Identify the largest source of (random) uncertainty and the most important systematic error in your experiment. Suggest a specific improvement for each.</label><textarea id="a9" data-save="a9" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="extension">9. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> A better method: cool the block (for example in a sealed plastic bag in a fridge) until it is colder than you need. Keep it in the sealed bag until it has warmed to the starting temperature, about 10 °C <strong>below</strong> room temperature (otherwise water from the air keeps condensing on it). Then take it out, dry it, and heat it until it is about 10 °C <strong>above</strong> room temperature. Explain why the energy the block gains from the room in the first half should roughly cancel the energy it loses in the second half. If time allows, try it and compare your new value of <i>c</i> with the accepted value.</label><textarea id="e1" data-save="e1" rows="4"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Repeat the experiment without insulation and compare the graphs. What does this tell you about the size of the losses?</label><textarea id="e2" data-save="e2" rows="3"></textarea></div>
+      <div class="answer"><label for="e3"><strong>E3.</strong> After switch-off, keep recording for 10 minutes as the block cools. Use the cooling rate near the highest temperature to estimate the rate of energy loss, <i>mc</i> × (rate of cooling), and compare it with the heater power.</label><textarea id="e3" data-save="e3" rows="3"></textarea></div>
+      <div class="answer"><label for="e4"><strong>E4.</strong> Use the same method on a block of a different metal. Which metal heats up faster with the same heater, and why?</label><textarea id="e4" data-save="e4" rows="3"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your measurements, both tables, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

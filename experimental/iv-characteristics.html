@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: current–voltage characteristics · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab with Vernier sensors: measure the current and potential difference for a fixed resistor and a filament lamp in both directions, and use I–V graphs to decide which is ohmic.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/iv-characteristics.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: current–voltage characteristics · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab with Vernier sensors: measure the current and potential difference for a fixed resistor and a filament lamp in both directions, and use I–V graphs to decide which is ohmic.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/iv-characteristics.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-iv-characteristics",
+    "title": "Current–voltage characteristics",
+    "file": "IV characteristics lab",
+    "tables": {
+      "p1": {
+        "note": "One row for each reading: the forward run first, then the reversed run. In the reversed run both V and I are negative, so type the minus signs. Fill in R = V/I and ΔR for each reading (leave them blank for the 0 V row).",
+        "csvFile": "iv-resistor.csv",
+        "x": 2, "y": 1,
+        "cols": [
+          { "html": "<i>V</i> / V", "csv": "potential difference V / V", "aria": "potential difference in volts", "signed": true },
+          { "html": "<i>I</i> / A", "csv": "current I / A", "aria": "current in amps", "signed": true },
+          { "html": "<i>R</i> = <i>V</i>/<i>I</i> / Ω", "csv": "resistance R / Ω", "aria": "resistance, V divided by I, in ohms" },
+          { "html": "Δ<i>R</i> / Ω", "csv": "uncertainty in R / Ω", "aria": "uncertainty in the resistance in ohms" }
+        ]
+      },
+      "p2": {
+        "note": "One row for each reading: the forward run first, then the reversed run (negative V and I, with their minus signs). Fill in R = V/I, ΔR and P = IV for each reading (leave R and ΔR blank for the 0 V row).",
+        "csvFile": "iv-lamp.csv",
+        "x": 1, "y": 2,
+        "cols": [
+          { "html": "<i>V</i> / V", "csv": "potential difference V / V", "aria": "potential difference in volts", "signed": true },
+          { "html": "<i>I</i> / A", "csv": "current I / A", "aria": "current in amps", "signed": true },
+          { "html": "<i>R</i> = <i>V</i>/<i>I</i> / Ω", "csv": "resistance R / Ω", "aria": "resistance, V divided by I, in ohms" },
+          { "html": "Δ<i>R</i> / Ω", "csv": "uncertainty in R / Ω", "aria": "uncertainty in the resistance in ohms" },
+          { "html": "<i>P</i> = <i>IV</i> / W", "csv": "power P / W", "aria": "power, I times V, in watts" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Current–voltage characteristics</p>
+    <h1>Current–voltage characteristics</h1>
+    <p class="lead">A lab with Vernier sensors: measure the current through a fixed resistor and a filament lamp at different potential differences, in both directions, and use your graphs to decide which is ohmic. <span class="tag">B.5 Current and circuits</span> <span class="tag vernier-tag">Vernier</span></p>
+    <p><strong>Aim:</strong> to measure the I–V characteristics of a fixed resistor and a filament lamp, to test whether each is ohmic, and to find the resistor's resistance with its uncertainty.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#setup">Setting up</a></li>
+        <li><a href="#part1">Part 1: fixed resistor</a></li>
+        <li><a href="#part2">Part 2: filament lamp</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Connecting a current sensor in series and a voltage sensor in parallel, with the correct polarity.</li>
+      <li>Using a potential divider to vary the potential difference across a component from zero.</li>
+      <li>Estimating realistic uncertainties from fluctuating sensor readings, and propagating them through <i>R</i> = <i>V</i>/<i>I</i>.</li>
+      <li>Plotting graphs with uncertainty bars, and finding a gradient and its uncertainty from the steepest and shallowest lines.</li>
+      <li>Deciding from a graph whether a relationship is proportional, and explaining a curve with a physical model.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring current and potential difference with sensors, and resistance with a multimeter (Tool 1); collecting data with sensors, and processing it with graphs (Tool 2); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="background">2. Background</h2>
+    <p>The <strong>resistance</strong> of a component is defined as the potential difference across it divided by the current through it:</p>
+    $$R = \frac{V}{I}$$
+    <p>This definition works for any component at any instant. <strong>Ohm's law</strong> is a stronger claim: for some conductors the current is directly proportional to the potential difference, so $R$ stays the same whatever the p.d. A component that behaves like this is called <strong>ohmic</strong>. Its I–V graph is a straight line through the origin, for both directions of current.</p>
+    <p>A component whose resistance changes with the p.d. is <strong>non-ohmic</strong>: its I–V graph is not a straight line through the origin.</p>
+    <p>The power dissipated in a component is</p>
+    $$P = IV = I^2 R$$
+    <p>and this energy heats the component. The syllabus treats <em>a metal conductor at constant temperature</em> as ohmic. (Both equations are in the data booklet: see <a href="../themes/b5.html#ohm">B.5 Ohm's law: ohmic and non-ohmic conductors</a>.)</p>
+    <p>In this lab you will measure the I–V characteristic of a fixed resistor (Part 1) and of a filament lamp (Part 2), in both directions, and use your graphs to decide which is ohmic.</p>
+
+    <h2 id="equipment">3. Equipment and safety</h2>
+    <ul>
+      <li>Vernier interface (LabQuest or LabQuest Mini) and a laptop with Logger Pro 3</li>
+      <li>Vernier Current Probe (range ±0.6 A) and Vernier Voltage Probe (range ±10 V)</li>
+      <li>A variable d.c. power supply, set to 6 V</li>
+      <li>A rheostat, about 50–100 Ω (used as a potential divider)</li>
+      <li>A fixed resistor, 47 Ω (any value from 33 Ω to 50 Ω will do), with a power rating of 1 W or more</li>
+      <li>A 6 V filament lamp in a holder. Check the current rating on its base: use a lamp rated <strong>0.3 A or less</strong>, so that the current at 6 V is well below the Current Probe's 0.6 A. Always start at 0 V: a cold filament switched straight on draws a surge many times its rated current.</li>
+      <li>A multimeter (ohmmeter setting)</li>
+      <li>Connecting leads with crocodile clips</li>
+      <li><em>Extension only:</em> a coloured LED and a 220 Ω resistor</li>
+    </ul>
+    <div class="notice">
+      <p><strong>Safety:</strong></p>
+      <ul>
+        <li>The Current Probe must <strong>never</strong> carry more than 0.6 A. Always start each run with the potential divider at 0 V and increase the p.d. slowly. A cold filament has a much lower resistance than a hot one, so switching a lamp straight on at 6 V causes a brief surge of current.</li>
+        <li>The Current Probe goes <strong>in series</strong> with the component. Never connect it across the component or across the supply: it has almost no resistance, so it would short-circuit the supply.</li>
+        <li>Don't exceed 6 V across any component, or the lamp's rated voltage. The lamp, the resistor and the rheostat can become hot: switch off between runs, and let the lamp cool before you touch it.</li>
+        <li>Ask your teacher to check your circuit before you switch on the power supply.</li>
+      </ul>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> On paper, sketch on one set of axes (current <i>I</i> on the vertical axis, p.d. <i>V</i> on the horizontal axis, including negative values) the graph you expect for (a) a fixed resistor at constant temperature and (b) a filament lamp. Describe the shape of each graph here, and explain it using <i>R</i> = <i>V</i>/<i>I</i>.</label><textarea id="pre1" data-save="pre1" rows="4"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> A student measures a 6.0 V lamp. At 0.50 V the current is 0.025 A; at 6.0 V it is 0.060 A. Calculate the lamp's resistance and the power dissipated in it at each p.d., and explain why the two resistances differ.</label><textarea id="pre2" data-save="pre2" rows="4"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> You plan to use a 47 Ω resistor at p.d.s up to 6.0 V. Calculate the largest current and the largest power. Would a resistor rated at 0.25 W be suitable? What is the largest p.d. you could safely put across a 0.25 W, 47 Ω resistor?</label><textarea id="pre3" data-save="pre3" rows="4"></textarea></div>
+      <div class="answer"><label for="pre4"><strong>P4.</strong> Why is a potential divider better than a variable resistor in series for this experiment? (Think about which p.d.s each arrangement can reach.)</label><textarea id="pre4" data-save="pre4" rows="3"></textarea></div>
+    </div>
+    <h3>Uncertainties</h3>
+    <p>The sensors display many digits, but the last ones flicker. A realistic uncertainty comes from how much a reading fluctuates when nothing is being changed, not just from the resolution. You will measure this fluctuation once the circuit is built (see <a href="#uncertainties">Finding your uncertainties</a>).</p>
+    <p>For each calculated resistance, add the fractional uncertainties:</p>
+    $$\frac{\Delta R}{R} = \frac{\Delta V}{V} + \frac{\Delta I}{I}$$
+    <p>For example, $V = (3.50 \pm 0.01)$ V and $I = (0.0745 \pm 0.0006)$ A give $R = 46.98\ \Omega$ and $\dfrac{\Delta R}{R} = 0.0029 + 0.0081 = 0.0110$, so $R = (47.0 \pm 0.5)\ \Omega$. Notice that small readings have the largest fractional uncertainties.</p>
+    <p>Quote each uncertainty to 1 significant figure (2 when the uncertainty itself is known precisely), with the best estimate rounded to the same decimal place. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <h2 id="setup">5. Setting up</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 352" role="img" aria-labelledby="ivct">
+        <title id="ivct">Circuit diagram. A 6 volt d.c. supply is connected across the two fixed ends of a rheostat, drawn with the potentiometer symbol. The output is taken from the left fixed end, on the positive side, and the rheostat's sliding contact. This output goes through the Current Probe, drawn as an ammeter, and the component under test, a resistor or a lamp, in series. The Voltage Probe, drawn as a voltmeter, is connected across the component only. A plus sign marks the side of each probe nearer the positive terminal. An arrow beside the slider shows the direction that increases the p.d. from zero.</title>
+        <!-- supply -->
+        <line class="axis" x1="60" y1="36" x2="172" y2="36"/>
+        <line class="axis" x1="172" y1="22" x2="172" y2="50"/>
+        <line class="axis" x1="182" y1="29" x2="182" y2="43" style="stroke-width:4"/>
+        <line class="axis" x1="182" y1="36" x2="300" y2="36"/>
+        <text x="166" y="18" font-size="12" text-anchor="end">+</text>
+        <text x="188" y="18" font-size="12">−</text>
+        <text x="177" y="72" font-size="12" text-anchor="middle">6 V supply</text>
+        <!-- rheostat across the supply -->
+        <line class="axis" x1="60" y1="36" x2="60" y2="120"/>
+        <line class="axis" x1="300" y1="36" x2="300" y2="120"/>
+        <line class="axis" x1="60" y1="120" x2="140" y2="120"/>
+        <rect class="axis" x="140" y="112" width="80" height="16" style="fill:var(--surface)"/>
+        <line class="axis" x1="220" y1="120" x2="300" y2="120"/>
+        <text x="180" y="104" font-size="12" text-anchor="middle">rheostat</text>
+        <!-- slider -->
+        <line class="axis" x1="200" y1="168" x2="200" y2="139"/>
+        <path class="f3" d="M200 129 L195 140 L205 140 z"/>
+        <line class="axis thin" x1="214" y1="150" x2="244" y2="150"/>
+        <path class="f3" d="M252 150 L242 145 L242 155 z"/>
+        <text x="256" y="155" font-size="12">more p.d.</text>
+        <line class="axis" x1="200" y1="168" x2="320" y2="168"/>
+        <line class="axis" x1="320" y1="168" x2="320" y2="258"/>
+        <!-- output loop -->
+        <circle class="f3" cx="60" cy="120" r="3"/>
+        <line class="axis" x1="60" y1="120" x2="60" y2="258"/>
+        <line class="axis" x1="60" y1="258" x2="96" y2="258"/>
+        <circle class="l1" cx="110" cy="258" r="14" style="fill:var(--surface)"/>
+        <text class="t1" x="110" y="263" font-size="12" text-anchor="middle">A</text>
+        <text x="86" y="250" font-size="12" text-anchor="middle">+</text>
+        <text class="t1" x="110" y="292" font-size="12" text-anchor="middle">current probe</text>
+        <line class="axis" x1="124" y1="258" x2="210" y2="258"/>
+        <rect class="axis" x="210" y="251" width="40" height="14" style="fill:var(--surface)"/>
+        <line class="axis" x1="250" y1="258" x2="320" y2="258"/>
+        <text x="236" y="240" font-size="12" text-anchor="middle">resistor or lamp</text>
+        <!-- voltage probe across the component only -->
+        <circle class="f3" cx="190" cy="258" r="3"/>
+        <circle class="f3" cx="270" cy="258" r="3"/>
+        <line class="l2 thin" x1="190" y1="258" x2="190" y2="308"/>
+        <line class="l2 thin" x1="190" y1="308" x2="216" y2="308"/>
+        <circle class="l2" cx="230" cy="308" r="14" style="fill:var(--surface)"/>
+        <text class="t2" x="230" y="313" font-size="12" text-anchor="middle">V</text>
+        <line class="l2 thin" x1="244" y1="308" x2="270" y2="308"/>
+        <line class="l2 thin" x1="270" y1="308" x2="270" y2="258"/>
+        <text x="203" y="300" font-size="12" text-anchor="middle">+</text>
+        <text class="t2" x="230" y="342" font-size="12" text-anchor="middle">voltage probe</text>
+      </svg>
+      <figcaption>The rheostat is used as a potential divider: the output is taken between one fixed end and the sliding contact, so the p.d. can start from 0 V. The <span class="key-1">Current Probe</span> is in series with the component; the <span class="key-2">Voltage Probe</span> is across the component only. The + marks show where each probe's red terminal goes: on the side nearer the supply's positive terminal. In Part 2 the lamp takes the resistor's place.</figcaption>
+    </figure>
+    <div class="vlab-panel measure-panel">
+      <h3>Multimeter reading for the resistor</h3>
+      <label class="vlab-field">Resistance of the resistor <i>R</i> / Ω <input data-save="Rmm" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in <i>R</i> / Ω <input data-save="dRmm" inputmode="decimal"></label>
+    </div>
+    <ol>
+      <li>Before you build the circuit, measure the resistance of the resistor with the multimeter on its ohmmeter setting. Record it, with its uncertainty, above.</li>
+      <li>Connect the Current Probe to <strong>CH 1</strong> and the Voltage Probe to <strong>CH 2</strong> of the interface, and open a new file in <strong>Logger Pro 3</strong>.</li>
+      <li>Build the circuit in the diagram with the resistor as the component. Connect the red terminal of the Current Probe and the red lead of the Voltage Probe on the side nearer the positive terminal of the supply. Set the potential divider to 0 V.</li>
+      <li>Ask your teacher to check your circuit.</li>
+      <li>With the power supply switched off (no current, no p.d.), choose <strong>Experiment ▸ Zero</strong> and zero both sensors.</li>
+    </ol>
+
+    <h3 id="uncertainties">Finding your uncertainties</h3>
+    <ol>
+      <li>Switch on and set the potential divider to give about 3 V across the resistor.</li>
+      <li>Switch Logger Pro to time-based mode (<strong>Experiment ▸ Data Collection ▸ Mode: Time Based</strong>), click <strong>Collect</strong> and collect data for 10 s.</li>
+      <li>Select the whole run and choose <strong>Analyze ▸ Statistics</strong> for each sensor. Record the minimum and maximum of <i>V</i> and of <i>I</i> below.</li>
+      <li>Your uncertainties are half the range: $\Delta V = \dfrac{V_{\max} - V_{\min}}{2}$ and $\Delta I = \dfrac{I_{\max} - I_{\min}}{2}$. If half the range is smaller than the sensor's resolution (typically about 0.3 mA for the Current Probe and about 5 mV for the Voltage Probe on a LabQuest: check the values in each sensor's user manual), use the resolution instead. You will repeat this check for the lamp at a low p.d. in Part 2, where the currents are smallest.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Uncertainties for the resistor (at about 3 V)</h3>
+      <label class="vlab-field">Maximum <i>V</i> / V <input data-save="vmax" inputmode="decimal"></label>
+      <label class="vlab-field">Minimum <i>V</i> / V <input data-save="vmin" inputmode="decimal"></label>
+      <label class="vlab-field">Maximum <i>I</i> / A <input data-save="imax" inputmode="decimal"></label>
+      <label class="vlab-field">Minimum <i>I</i> / A <input data-save="imin" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty Δ<i>V</i> / V <input data-save="dV1" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty Δ<i>I</i> / A <input data-save="dI1" inputmode="decimal"></label>
+    </div>
+
+    <h3>Getting Logger Pro ready to record</h3>
+    <ol>
+      <li>Choose <strong>Experiment ▸ Data Collection</strong>, set <strong>Mode</strong> to <strong>Selected Events</strong>, and click <strong>Done</strong>. In this mode Logger Pro records one pair of readings each time you click <strong>Keep</strong>.</li>
+      <li>Click the vertical-axis label of the graph and choose <strong>Potential</strong>; click the horizontal-axis label and choose <strong>Current</strong>.</li>
+      <li>Set the potential divider back to 0 V.</li>
+    </ol>
+
+    <h2 id="part1">6. Part 1: fixed resistor</h2>
+    <ol>
+      <li>Click <strong>Collect</strong>. With the p.d. at 0 V, wait for the readings to settle and click <strong>Keep</strong>.</li>
+      <li>Increase the p.d. by about 0.5 V, wait for the readings to settle, and click <strong>Keep</strong>. Repeat up to about 6 V (about 12 readings). Click <strong>Stop</strong> and set the p.d. back to 0 V. Don't leave the resistor at the highest p.d. for longer than you need.</li>
+      <li>Choose <strong>Analyze ▸ Linear Fit</strong> and record the gradient and intercept below. Copy your readings into the table.</li>
+      <li>Switch off. Choose <strong>Experiment ▸ Store Latest Run</strong> first, so the next run doesn't overwrite this one. Swap the two leads at the power-supply terminals, so the current flows the other way through the whole circuit.</li>
+      <li>Repeat steps 1–3 from 0 V to about −6 V. Both readings should now be negative: record them in the table with their signs.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Logger Pro linear fits (V against I)</h3>
+      <label class="vlab-field">Gradient, forward run / Ω <input data-save="m1f" inputmode="decimal"></label>
+      <label class="vlab-field">Intercept, forward run / V <input data-save="c1f" inputmode="decimal"></label>
+      <label class="vlab-field">Gradient, reversed run / Ω <input data-save="m1r" inputmode="decimal"></label>
+      <label class="vlab-field">Intercept, reversed run / V <input data-save="c1r" inputmode="decimal"></label>
+    </div>
+    <div class="vlab-panel" data-lab-table="p1" data-report-title="Part 1 readings: fixed resistor"></div>
+    <h3>Your Part 1 graph</h3>
+    <p>The graph updates as you type. It starts with <strong>potential difference</strong> on the vertical axis and <strong>current</strong> on the horizontal axis, so the gradient is the resistance. Use the readings from both directions.</p>
+    <p class="vlab-small">The graph tool uses one uncertainty for every point on each axis. Type your Δ<i>V</i> in the vertical axis's uncertainty box and your Δ<i>I</i> in the horizontal axis's box (if they differ between readings, type the largest), then tick <strong>Steepest and shallowest lines</strong>. The uncertainty in the resistance is half the difference between their gradients, Δ<i>R</i> = (gradient<sub>max</sub> − gradient<sub>min</sub>) / 2, so quote <i>R</i> = (gradient ± Δ<i>R</i>) Ω. Check whether the intercept is zero within its uncertainty. Press <strong>Add this graph to my report</strong> to keep it.</p>
+    <div class="dgraph" data-lab-graph="p1"></div>
+
+    <h2 id="part2">7. Part 2: filament lamp</h2>
+    <ol>
+      <li>With the lamp cold and disconnected, measure its resistance with the multimeter on its ohmmeter setting. Record it below.</li>
+      <li>Replace the resistor with the lamp, with the leads back the right way round. Set the potential divider to 0 V before switching on.</li>
+      <li>First choose <strong>Experiment ▸ Store Latest Run</strong>, so that your Part 1 reversed run is kept. Then repeat the uncertainty check (<a href="#uncertainties">Finding your uncertainties</a>) at a low p.d., about 0.5 V, and record Δ<i>V</i> and Δ<i>I</i> for the lamp below. Then set <strong>Selected Events</strong> mode again and the p.d. back to 0 V.</li>
+      <li>Choose <strong>Experiment ▸ Store Latest Run</strong> again, so the uncertainty run is kept too. Click <strong>Collect</strong> and take readings as in Part 1, but in steps of about 0.1 V up to 1.0 V (the graph bends most here), then in steps of about 0.5 V up to 6 V. After each change, wait until the current stops drifting (the filament needs a few seconds to reach a steady temperature) before clicking <strong>Keep</strong>. Note the p.d. at which the filament first glows.</li>
+      <li>Click <strong>Stop</strong> and set the p.d. back to 0 V. Choose <strong>Data ▸ New Calculated Column</strong>, name it <strong>Resistance</strong> (unit Ω), and enter the expression <strong>"Potential"/"Current"</strong>. (Logger Pro may show an error for the 0 V row: leave that row out.) Copy your readings into the table.</li>
+      <li>Switch off. Choose <strong>Experiment ▸ Store Latest Run</strong> first. Swap the leads at the power-supply terminals and repeat steps 4–5 from 0 V to −6 V, using bigger steps (about 1 V). Let the lamp cool before you take it apart.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Lamp measurements</h3>
+      <label class="vlab-field">Resistance of the cold lamp (multimeter) / Ω <input data-save="Rcold" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in the cold resistance / Ω <input data-save="dRcold" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty Δ<i>V</i> at a low p.d. / V <input data-save="dV2" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty Δ<i>I</i> at a low p.d. / A <input data-save="dI2" inputmode="decimal"></label>
+      <label class="vlab-field">p.d. at which the filament first glows / V <input data-save="glow" inputmode="decimal"></label>
+    </div>
+    <div class="vlab-panel" data-lab-table="p2" data-report-title="Part 2 readings: filament lamp"></div>
+    <h3>Your Part 2 graphs</h3>
+    <p>The graph starts with <strong>current</strong> on the vertical axis and <strong>potential difference</strong> on the horizontal axis: the I–V characteristic.</p>
+    <p class="vlab-small">Type your Δ<i>I</i> and Δ<i>V</i> in the uncertainty boxes (every point gets uncertainty bars). The lamp's graph isn't a straight line, so untick <strong>Line of best fit</strong> and don't use the steepest and shallowest lines (ignore the straight-line numbers printed under the graph: they mean nothing for a curve). The tool doesn't draw curves: look at the shape the points make, and describe the smooth curve through them in your analysis. Press <strong>Add this graph to my report</strong>. Then make a second graph: choose <strong>resistance</strong> for the vertical axis and <strong>current</strong> for the horizontal axis, type your largest Δ<i>R</i> in the vertical axis's uncertainty box (or a percentage, such as 5%), and add this graph to your report too.</p>
+    <div class="dgraph" data-lab-graph="p2"></div>
+
+    <h2 id="analysis">8. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Does the V–I graph for the resistor show a proportional relationship in both directions? Use the intercept and the uncertainty bars to justify your answer. Is the resistor ohmic?</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> Give the resistor's resistance from the gradient, with its uncertainty. Compare it with the multimeter reading. Do the two values agree within their uncertainties?</label><textarea id="a2" data-save="a2" rows="3"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> Why is the gradient of the graph a better value for <i>R</i> than a single calculation of <i>V</i>/<i>I</i> at one point? Which of your readings have the largest fractional uncertainty, and why?</label><textarea id="a3" data-save="a3" rows="3"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> Calculate the largest power dissipated in the resistor. Would you expect its temperature, and so its resistance, to change noticeably during the run? Does your graph show any sign of this at the highest currents?</label><textarea id="a4" data-save="a4" rows="3"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Describe the shape of the lamp's I–V graph. In which region does the lamp behave almost ohmically?</label><textarea id="a5" data-save="a5" rows="3"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Describe how the lamp's resistance changes as the current increases. Using the heating effect of the current, <i>P</i> = <i>IV</i>, and a particle model of a metal, explain why.</label><textarea id="a6" data-save="a6" rows="4"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> Compare the lamp's resistance at your lowest non-zero reading with the multimeter reading for the cold lamp. Why might even your lowest reading not give the resistance of a cold filament?</label><textarea id="a7" data-save="a7" rows="3"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> Compare the forward and reversed graphs for each component. What does this tell you about whether the direction of the current matters?</label><textarea id="a8" data-save="a8" rows="3"></textarea></div>
+      <div class="answer"><label for="a9"><strong>9.</strong> The guide treats a metal conductor at constant temperature as ohmic. The filament is a metal. Use your results to explain why the lamp is still non-ohmic.</label><textarea id="a9" data-save="a9" rows="3"></textarea></div>
+      <div class="answer"><label for="a10"><strong>10.</strong> Identify two sources of systematic error in this experiment (think about zeroing the sensors, contact resistance at the crocodile clips, and the time you waited before clicking Keep), and say how each would affect your graphs.</label><textarea id="a10" data-save="a10" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="extension">9. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1. LED characteristic (beyond the B.5 syllabus).</strong> Replace the lamp with a coloured LED in series with a 220 Ω protective resistor, with the Voltage Probe across the LED only. Measure the forward characteristic in small steps (about 0.1 V near the point where the LED starts to light). Then reverse it, going no further than −4 V across the LED (many LEDs are damaged by more than about 5 V in reverse). Describe the characteristic and decide whether the LED is ohmic. Compare the p.d. at which different colours start to conduct.</label><textarea id="e1" data-save="e1" rows="4"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Seal the resistor (with its leads) in a thin plastic bag or test tube so it stays dry, stand it in a beaker of water, and repeat Part 1 with the water first cold and then hot (no hotter than 60 °C). Does the resistance change? What does this suggest about the material the resistor is made from, compared with tungsten?</label><textarea id="e2" data-save="e2" rows="3"></textarea></div>
+      <div class="answer"><label for="e3"><strong>E3.</strong> A rough model for a tungsten filament is that its resistance is approximately proportional to its kelvin temperature. Use your cold and hottest resistance values to estimate the filament temperature at 6 V. Why is this only an estimate?</label><textarea id="e3" data-save="e3" rows="3"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your measurements, both tables, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

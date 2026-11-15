@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: the speed of sound from an echo · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab with Vernier sensors: record a finger snap and its echo from the closed end of a long tube with a microphone, and find the speed of sound from the gradient of a graph.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/speed-of-sound.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: the speed of sound from an echo · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab with Vernier sensors: record a finger snap and its echo from the closed end of a long tube with a microphone, and find the speed of sound from the gradient of a graph.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/speed-of-sound.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-speed-of-sound",
+    "title": "The speed of sound from an echo",
+    "file": "Speed of sound lab",
+    "tables": {
+      "echo": {
+        "note": "One row for each tube length (at least five, from about 3.0 m down to 1.0 m). Fill in 2L, then the five echo times in ms. Work out the mean t, Δt = (max − min)/2 (use 0.2 ms if this comes out smaller) and v = 2L/t (with t in seconds) as you go.",
+        "csvFile": "speed-of-sound.csv",
+        "x": 2, "y": 8,
+        "cols": [
+          { "html": "Tube length <i>L</i> / m", "csv": "tube length L / m", "aria": "tube length in metres" },
+          { "html": "2<i>L</i> / m", "csv": "round-trip distance 2L / m", "aria": "round-trip distance, twice the tube length, in metres" },
+          { "html": "<i>t</i><sub>1</sub> / ms", "csv": "echo time t1 / ms", "aria": "echo time, trial 1, in milliseconds" },
+          { "html": "<i>t</i><sub>2</sub> / ms", "csv": "echo time t2 / ms", "aria": "echo time, trial 2, in milliseconds" },
+          { "html": "<i>t</i><sub>3</sub> / ms", "csv": "echo time t3 / ms", "aria": "echo time, trial 3, in milliseconds" },
+          { "html": "<i>t</i><sub>4</sub> / ms", "csv": "echo time t4 / ms", "aria": "echo time, trial 4, in milliseconds" },
+          { "html": "<i>t</i><sub>5</sub> / ms", "csv": "echo time t5 / ms", "aria": "echo time, trial 5, in milliseconds" },
+          { "html": "Mean <i>t</i> / ms", "csv": "mean echo time t / ms", "aria": "mean echo time in milliseconds" },
+          { "html": "Δ<i>t</i> / ms", "csv": "uncertainty in t / ms", "aria": "uncertainty in the mean echo time in milliseconds" },
+          { "html": "<i>v</i> = 2<i>L</i>/<i>t</i> / m s<sup>−1</sup>", "csv": "speed v = 2L/t / m s^-1", "aria": "speed of sound from this length alone, in metres per second" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › The speed of sound from an echo</p>
+    <h1>The speed of sound from an echo</h1>
+    <p class="lead">A lab with Vernier sensors: snap your fingers at the open end of a long tube, and a microphone records the snap and its echo from the closed far end, a few milliseconds later. <span class="tag">C.2 Wave model</span> <span class="tag vernier-tag">Vernier</span></p>
+    <p><strong>Aim:</strong> to measure the time between a snap and its echo for at least five tube lengths; to determine the speed of sound in air, with its uncertainty, from the gradient of a graph of echo time against round-trip distance; and to compare your value with the value expected at the room temperature, evaluating the random and systematic effects in the experiment.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#setup">Setting up</a></li>
+        <li><a href="#collect">Collecting data</a></li>
+        <li><a href="#graph">Your graph</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Using a sensor at a high sampling rate, with triggering, to time an event that lasts only a few milliseconds.</li>
+      <li>Reading times from a trace consistently, and judging a realistic uncertainty that is larger than the sampling interval.</li>
+      <li>Using repeated trials and the half-range method, (max − min)/2, to estimate uncertainty.</li>
+      <li>Plotting a graph with uncertainty bars, and using its gradient (with the steepest and shallowest lines) and its intercept to find a result and reveal a systematic offset.</li>
+      <li>Comparing an experimental result with an expected value, and evaluating the systematic effects that repeated trials cannot reveal.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring length, time and temperature (Tool 1); collecting data with sensors, and processing it with graphs (Tool 2); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="background">2. Background</h2>
+    <p>Sound is a <strong>longitudinal</strong> mechanical wave. A source pushes and pulls on the air next to it, making regions of higher pressure (<strong>compressions</strong>) and lower pressure (<strong>rarefactions</strong>) that travel outwards.</p>
+    <p>Each air molecule only oscillates back and forth about its average position, parallel to the direction the wave travels. So the wave transfers energy without carrying the air along with it. Sound needs a medium, so it cannot travel through a vacuum. (See <a href="../themes/c2.html">C.2 Wave model</a>.)</p>
+    <p>Sound travels at about $340\ \text{m s}^{-1}$ in air, so over a few metres the travel time is only a few thousandths of a second: far too short for a stopwatch. A microphone and a computer sampling ten thousand times a second can measure it.</p>
+    <p>In this lab you make a sharp sound (a snap of the fingers) at the open end of a long tube, a few centimetres wide, whose far end is closed. The microphone at the open end records the snap as it happens. The pulse then travels down the tube, reflects from the closed end and comes back as an <strong>echo</strong>.</p>
+    <p>In the time $t$ between the snap and its echo, the pulse travels to the end and back: a distance $2L$, where $L$ is the length of the tube. So</p>
+    $$v = \frac{2L}{t}$$
+    <p>which rearranges to</p>
+    $$t = \frac{1}{v} \times 2L$$
+    <p>A graph of echo time $t$ against the round-trip distance $2L$ should be a straight line through the origin with <strong>gradient = $1/v$</strong>. Using several tube lengths, rather than one, lets the graph separate the speed (the gradient) from any constant timing offset (the intercept).</p>
+    <p>A snap is a short pulse, not a single note, but it is made of many frequencies. Each of them obeys the data-booklet wave equation</p>
+    $$v = f\lambda$$
+    <p>and all frequencies of sound travel at the same speed in air.</p>
+    <p>The speed of sound in air depends on the temperature. A useful approximation is $v \approx 331 + 0.6\theta$, where $v$ is in $\text{m s}^{-1}$ and $\theta$ is the air temperature in °C. This is <strong>not</strong> in the syllabus or the data booklet: it is given here only so that you have an expected value. At 20 °C it gives about $343\ \text{m s}^{-1}$.</p>
+
+    <h2 id="equipment">3. Equipment and safety</h2>
+    <ul>
+      <li>Vernier interface (or LabQuest) and a laptop with Logger Pro 3</li>
+      <li>Vernier Microphone, on a small clamp or ring stand</li>
+      <li>A tube 3–10 cm wide and about 3 m long, closed at the far end: for example plastic drain or PVC pipe in 1 m sections with push-fit couplers, or cardboard postal tubes joined with tape</li>
+      <li>A close-fitting plug (a foam or rubber disc on a long dowel rod) or an end cap. To reach every length with the plug alone, the rod must be about 2.2 m long; a shorter rod (about 0.7 m) works if you also remove a section for each metre.</li>
+      <li>Scissors and tape</li>
+      <li>Tape measure or metre rules with millimetre divisions</li>
+      <li>Thermometer or Vernier Temperature Probe (for the room temperature)</li>
+    </ul>
+    <div class="notice">
+      <p style="margin:0"><strong>Safety:</strong></p>
+      <ul style="margin-bottom:0">
+        <li>Support the pipe sections on the bench so that they cannot roll off, and keep the open end of the pipe and the end of the dowel rod away from faces.</li>
+        <li>Join and separate the pipe sections gently: cut cardboard and plastic edges can be sharp.</li>
+        <li>A 3 m tube along the bench can catch on bags and sleeves. Keep it on the bench and away from walkways, and keep the microphone cable tidy.</li>
+        <li>Make the sound with a finger snap or a gentle click. Do not clap or bang objects right next to anyone's ear.</li>
+      </ul>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> Describe how the air molecules move when a sound wave travels along the tube. Explain how a sound wave transfers energy along the tube even though the air is not carried along it.</label><textarea id="pre1" data-save="pre1" rows="3"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> A group uses a tube 2.40 m long and measures an echo time of 14.0 ms. Calculate the speed of sound. Their length is uncertain by ± 0.5 cm and their time by ± 0.2 ms: find the uncertainty in their speed, and write the result to the correct significant figures.</label><textarea id="pre2" data-save="pre2" rows="4"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> The room is at 19 °C. Use the approximation in the Background, v ≈ 331 + 0.6θ, to estimate the speed of sound, then predict the echo time for a 1.00 m tube. At 10 000 samples per second, how many samples are recorded between the snap and the echo? Explain why a rate of 1000 samples per second would not be good enough.</label><textarea id="pre3" data-save="pre3" rows="4"></textarea></div>
+      <div class="answer"><label for="pre4"><strong>P4.</strong> Sketch (on paper) the graph you expect of echo time <i>t</i> against round-trip distance 2<i>L</i>, and describe it here. What would it mean if the line had a positive intercept on the time axis?</label><textarea id="pre4" data-save="pre4" rows="3"></textarea></div>
+      <div class="answer"><label for="pre5"><strong>P5.</strong> One frequency in the snap is 2.0 kHz. Use <i>v</i> = <i>f</i>λ, with <i>v</i> = 343 m s⁻¹, to calculate its wavelength. How does the wavelength compare with the length of your tube?</label><textarea id="pre5" data-save="pre5" rows="3"></textarea></div>
+    </div>
+
+    <h3>Uncertainties</h3>
+    <p><strong>Tube length $L$:</strong> a tape measure has millimetre divisions, but the tube may not be perfectly straight, and you must judge where the face of the plug is inside the tube (mark the dowel rod to help). A realistic uncertainty is ± 0.5 cm, so the round-trip distance $2L$ is uncertain by ± 1 cm. Measure $L$ for each set-up, rather than adding up the section lengths: couplers and overlaps change it.</p>
+    <p><strong>Echo time $t$:</strong> at 10 000 samples per second the points are 0.1 ms apart, so no time can be read better than ± 0.1 ms. In practice, deciding exactly where each pulse begins is harder than that, especially for the echo, which is smaller and more spread out than the snap. Repeat each length five times and use the half range, $\frac{\text{max} - \text{min}}{2}$, of the five echo times. If that comes out smaller than ± 0.2 ms, use ± 0.2 ms.</p>
+    <p><strong>Temperature $\theta$:</strong> read the room temperature at the start and the end of the lab. The expected value of $v$ changes by only $0.6\ \text{m s}^{-1}$ per °C, so a ± 0.5 °C uncertainty in $\theta$ hardly matters.</p>
+    <p>Quote each uncertainty to 1 significant figure (usual), or 2 when the uncertainty itself is known precisely, and round each value to the same decimal place. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <h2 id="setup">5. Setting up</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 185" role="img" aria-labelledby="sosSetT">
+        <title id="sosSetT">Set-up, side view: a long straight tube lies along the bench on three supports. It is made of pipe sections joined by couplers, and a break in the drawing shows that it is much longer than drawn. Inside the far end, a movable plug on a long dowel rod, which pokes out of the far end, closes the tube. At the open end, a microphone on a stand points at the opening from about 1 cm away, and fingers snap just beside the opening. A cable runs from the microphone to the interface. The length L is marked from the opening to the face of the plug.</title>
+        <line class="axis" x1="0" y1="150" x2="360" y2="150"/>
+        <rect x="68" y="72" width="108" height="24" style="fill:var(--surface)"/>
+        <rect x="192" y="72" width="148" height="24" style="fill:var(--surface)"/>
+        <line class="axis" x1="68" y1="72" x2="176" y2="72"/>
+        <line class="axis" x1="68" y1="96" x2="176" y2="96"/>
+        <line class="axis" x1="192" y1="72" x2="340" y2="72"/>
+        <line class="axis" x1="192" y1="96" x2="340" y2="96"/>
+        <line class="axis thin" x1="172" y1="102" x2="180" y2="66"/>
+        <line class="axis thin" x1="188" y1="102" x2="196" y2="66"/>
+        <rect class="axis" x="124" y="68" width="12" height="32" style="fill:var(--surface)"/>
+        <rect class="axis" x="250" y="68" width="12" height="32" style="fill:var(--surface)"/>
+        <rect class="axis" x="146" y="96" width="12" height="54" style="fill:var(--surface)"/>
+        <rect class="axis" x="216" y="96" width="12" height="54" style="fill:var(--surface)"/>
+        <rect class="axis" x="316" y="96" width="12" height="54" style="fill:var(--surface)"/>
+        <rect class="l2 f2" x="298" y="73" width="8" height="22"/>
+        <line class="l2" x1="306" y1="84" x2="358" y2="84"/>
+        <text class="t2" x="356" y="20" font-size="12" text-anchor="end">movable plug</text>
+        <line class="axis thin" x1="326" y1="26" x2="305" y2="72"/>
+        <line class="axis thin dash" x1="68" y1="48" x2="68" y2="70"/>
+        <line class="axis thin dash" x1="298" y1="48" x2="298" y2="70"/>
+        <line class="l1" x1="78" y1="58" x2="288" y2="58"/>
+        <path class="f1" d="M69 58 L79 53 L79 63 z"/>
+        <path class="f1" d="M297 58 L287 53 L287 63 z"/>
+        <text class="t1" x="183" y="48" font-size="12" text-anchor="middle">L</text>
+        <line class="axis" x1="36" y1="89" x2="36" y2="146"/>
+        <rect class="axis" x="22" y="146" width="28" height="4" style="fill:var(--surface)"/>
+        <rect class="axis" x="24" y="79" width="28" height="10" rx="3" style="fill:var(--surface)"/>
+        <rect class="axis" x="51" y="77" width="7" height="14" rx="2" style="fill:var(--surface)"/>
+        <text x="4" y="20" font-size="12">microphone</text>
+        <line class="axis thin" x1="40" y1="26" x2="42" y2="77"/>
+        <path class="axis thin" d="M24 84 C10 84 8 100 8 150 L8 160" style="fill:none"/>
+        <text x="4" y="176" font-size="12">to interface</text>
+        <path class="l2 thin" d="M62 102 L62 118 M54 110 L70 110 M56 104 L68 116 M68 104 L56 116"/>
+        <text class="t2" x="76" y="126" font-size="12">snap</text>
+      </svg>
+      <figcaption>The tube is drawn with a break: it is much longer than shown. The <span class="key-2">movable plug</span> on its dowel rod closes the far end, and you <span class="key-2">snap</span> your fingers just beside the opening. <span class="key-1"><i>L</i></span> is measured from the open end to the face of the plug (1.0 m to 3.0 m). The microphone, about 1 cm from the opening and pointing at it, is connected to CH 1 of the interface and the laptop. Not to scale.</figcaption>
+    </figure>
+
+    <h3>The tube</h3>
+    <ol>
+      <li>Join the pipe sections end to end to make a tube about 3 m long, pushing each joint fully home so that it is airtight (wrap cardboard joints with tape). Lay the tube straight along the bench on its supports (see the diagram).</li>
+      <li>Close the far end: push the plug on its dowel rod in from the far end until it is about 3.0 m from the open end (or fit an end cap). Mark the rod where it leaves the tube, so that you can set the plug at other lengths later.</li>
+      <li>Measure <i>L</i> from the open end to the face of the plug (or the inside of the end cap), and record it in the first column of the readings table (section 6). Record the room temperature below.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Before you start</h3>
+      <label class="vlab-field">Room temperature at the start θ / °C (thermometer, ± 0.5 °C) <input data-save="theta1" inputmode="decimal"></label>
+    </div>
+
+    <h3>Logger Pro 3</h3>
+    <ol start="4">
+      <li>Connect the Vernier Microphone to <strong>CH 1</strong> of the interface <strong>before</strong> you start <strong>Logger Pro 3</strong> (the sensor's settings only appear once it is connected). Logger Pro should show a graph of sound pressure (arbitrary units) against time.</li>
+      <li>Choose <strong>Experiment ▸ Data Collection</strong>. On the <strong>Collection</strong> tab set the Mode to <strong>Time Based</strong>, the <strong>Duration</strong> to <strong>0.05 s</strong> and the sampling rate to <strong>10 000 samples/second</strong>.</li>
+      <li>Click <strong>Collect</strong> without making a sound, to see the background noise. Note how far the trace wanders from zero.</li>
+      <li>Choose <strong>Experiment ▸ Data Collection</strong> again and open the <strong>Triggering</strong> tab. Tick the box to enable triggering, and set it to start collecting when the sound pressure is <strong>increasing across</strong> a level just above the background noise (for example 0.1, if the noise stays within ± 0.05). Set about <strong>20 points</strong> to be collected <strong>before</strong> the trigger, so that the very start of the snap is recorded.</li>
+      <li>Clamp the microphone so that its head is about 1 cm from the open end of the tube and points at the opening (see the diagram). Keep the microphone in this position for the whole experiment.</li>
+    </ol>
+
+    <h2 id="collect">6. Collecting data</h2>
+    <ol start="9">
+      <li>Click <strong>Collect</strong>. When Logger Pro shows it is waiting for the trigger, snap your fingers right beside the opening of the tube. The trace should show a large, short burst (the snap), then quiet, then a smaller burst (the echo), as in the sketch below. If you see no clear echo, check the joints and the plug for leaks, and snap closer to the opening.</li>
+      <li>Zoom in on the snap and the echo (drag a box around them and click the <strong>Zoom In</strong> button). Choose <strong>Analyze ▸ Examine</strong> and move the cursor to the point where the snap first rises clearly above the background noise; note that time. Do the same for the echo. The echo time is $t = t_\text{echo} - t_\text{snap}$: record it in the readings table, in ms. Use the same rule for both pulses every time.</li>
+      <li>Repeat steps 9–10 until you have <strong>five</strong> good trials for this length. Reject a trial only if there is a clear reason (another noise in the room, an echo you cannot pick out), and say so in your notes.</li>
+      <li>Move the plug about 50 cm closer to the open end by pulling the dowel rod back (or remove a pipe section and refit the end cap). Measure the new length <i>L</i>, and repeat steps 9–11. Continue until you have at least five lengths between about 3.0 m and 1.0 m. Do not move the microphone.</li>
+      <li>Record the room temperature again at the end, and save your Logger Pro file.</li>
+    </ol>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 234" role="img" aria-labelledby="sosTrT">
+        <title id="sosTrT">Sketch of a typical trace for a 2.0 m tube: sound pressure against time from 0 to 30 ms, with a flat, slightly noisy baseline. At 2 ms a tall, narrow burst, the snap, made of a few sharp oscillations that die away within about 2 ms. At about 13.7 ms a smaller, wider burst, the echo from the closed end, whose oscillations rise more gradually. A double-headed arrow between the points where each burst first rises from the baseline is labelled echo time t. Near 25.3 ms a much smaller third burst, the second echo.</title>
+        <line class="axis" x1="50" y1="40" x2="50" y2="175"/>
+        <line class="axis" x1="50" y1="175" x2="342" y2="175"/>
+        <line class="axis thin" x1="146" y1="175" x2="146" y2="181"/>
+        <line class="axis thin" x1="242" y1="175" x2="242" y2="181"/>
+        <line class="axis thin" x1="338" y1="175" x2="338" y2="181"/>
+        <text x="50" y="196" font-size="12" text-anchor="middle">0</text>
+        <text x="146" y="196" font-size="12" text-anchor="middle">10</text>
+        <text x="242" y="196" font-size="12" text-anchor="middle">20</text>
+        <text x="338" y="196" font-size="12" text-anchor="middle">30</text>
+        <text x="342" y="229" font-size="12" text-anchor="end">time / ms</text>
+        <text x="32" y="108" font-size="12" text-anchor="middle" transform="rotate(-90 32 108)">sound pressure</text>
+        <polyline class="l1" style="stroke-width:1.5" points="50.0,109.4 50.5,106.8 51.0,108.6 51.4,108.8 51.9,107.3 52.4,107.9 52.9,108.5 53.4,107.3 53.8,107.3 54.3,107.9 54.8,107.5 55.3,107.6 55.8,107.1 56.2,108.7 56.7,108.4 57.2,107.4 57.7,107.4 58.2,109.3 58.6,107.5 59.1,108.1 59.6,106.8 60.1,107.1 60.6,109.1 61.0,108.0 61.5,106.8 62.0,107.5 62.5,107.6 63.0,107.8 63.4,106.8 63.9,106.8 64.4,108.4 64.9,108.5 65.4,107.0 65.8,108.5 66.3,109.0 66.8,108.6 67.3,108.2 67.8,108.6 68.2,106.7 68.7,107.8 69.2,107.3 69.7,90.6 70.2,66.7 70.6,51.9 71.1,55.4 71.6,75.1 72.1,101.7 72.6,126.7 73.0,140.8 73.5,148.6 74.0,142.7 74.5,130.7 75.0,114.8 75.4,100.3 75.9,91.9 76.4,89.0 76.9,89.8 77.4,95.7 77.8,102.9 78.3,109.9 78.8,115.6 79.3,117.7 79.8,117.3 80.2,116.1 80.7,110.5 81.2,108.1 81.7,104.0 82.2,102.9 82.6,102.7 83.1,103.9 83.6,105.7 84.1,107.0 84.6,107.9 85.0,110.5 85.5,109.9 86.0,110.9 86.5,109.1 87.0,108.9 87.4,108.1 87.9,107.3 88.4,105.9 88.9,105.8 89.4,108.3 89.8,106.7 90.3,109.3 90.8,108.7 91.3,109.6 91.8,109.8 92.2,107.0 92.7,109.0 93.2,107.6 93.7,108.8 94.2,107.8 94.6,107.4 95.1,108.8 95.6,106.6 96.1,106.9 96.6,106.9 97.0,107.0 97.5,107.0 98.0,107.4 98.5,108.7 99.0,109.4 99.4,108.7 99.9,109.2 100.4,109.4 100.9,107.6 101.4,108.7 101.8,107.3 102.3,108.0 102.8,107.5 103.3,108.8 103.8,106.9 104.2,108.8 104.7,108.4 105.2,106.9 105.7,109.1 106.2,108.0 106.6,109.4 107.1,106.8 107.6,107.6 108.1,106.8 108.6,109.4 109.0,106.8 109.5,108.9 110.0,106.6 110.5,107.8 111.0,107.5 111.4,108.7 111.9,108.8 112.4,108.8 112.9,107.8 113.4,109.3 113.8,107.2 114.3,107.4 114.8,107.4 115.3,108.0 115.8,109.4 116.2,109.1 116.7,106.8 117.2,109.1 117.7,107.5 118.2,106.9 118.6,109.3 119.1,106.9 119.6,107.0 120.1,106.6 120.6,106.7 121.0,107.2 121.5,108.2 122.0,108.7 122.5,107.3 123.0,106.9 123.4,108.3 123.9,108.8 124.4,108.3 124.9,106.9 125.4,107.8 125.8,108.4 126.3,107.6 126.8,107.3 127.3,108.5 127.8,107.3 128.2,108.2 128.7,108.9 129.2,108.5 129.7,106.6 130.2,106.6 130.6,107.6 131.1,106.9 131.6,106.8 132.1,108.9 132.6,107.6 133.0,109.1 133.5,108.0 134.0,107.8 134.5,107.2 135.0,106.7 135.4,108.1 135.9,108.9 136.4,108.2 136.9,109.0 137.4,107.5 137.8,107.9 138.3,107.8 138.8,108.0 139.3,107.3 139.8,108.4 140.2,107.3 140.7,109.4 141.2,108.6 141.7,107.9 142.2,108.9 142.6,107.4 143.1,108.6 143.6,108.8 144.1,107.5 144.6,108.2 145.0,109.2 145.5,107.2 146.0,107.1 146.5,106.8 147.0,106.8 147.4,107.5 147.9,106.7 148.4,109.4 148.9,107.2 149.4,107.7 149.8,107.4 150.3,106.8 150.8,109.3 151.3,109.1 151.8,109.2 152.2,109.1 152.7,109.2 153.2,109.4 153.7,107.7 154.2,106.7 154.6,108.9 155.1,109.1 155.6,108.9 156.1,107.5 156.6,108.7 157.0,108.1 157.5,106.6 158.0,108.2 158.5,107.5 159.0,107.2 159.4,108.3 159.9,108.2 160.4,109.3 160.9,108.8 161.4,107.1 161.8,106.6 162.3,109.0 162.8,106.8 163.3,108.0 163.8,109.1 164.2,108.8 164.7,107.7 165.2,109.0 165.7,109.2 166.2,108.7 166.6,107.6 167.1,107.8 167.6,108.1 168.1,106.6 168.6,109.2 169.0,108.3 169.5,108.5 170.0,109.4 170.5,109.4 171.0,108.3 171.4,109.2 171.9,108.8 172.4,106.8 172.9,107.2 173.4,107.2 173.8,108.2 174.3,107.0 174.8,106.7 175.3,107.1 175.8,107.5 176.2,107.8 176.7,108.4 177.2,108.3 177.7,108.0 178.2,108.0 178.6,107.8 179.1,107.4 179.6,107.5 180.1,107.6 180.6,107.3 181.0,106.9 181.5,105.2 182.0,99.2 182.5,94.4 183.0,89.7 183.4,87.5 183.9,91.0 184.4,100.1 184.9,110.3 185.4,119.1 185.8,125.3 186.3,130.4 186.8,130.8 187.3,126.7 187.8,120.7 188.2,114.0 188.7,105.2 189.2,96.2 189.7,93.2 190.2,88.8 190.6,90.2 191.1,94.3 191.6,99.5 192.1,106.2 192.6,112.3 193.0,115.6 193.5,119.2 194.0,118.9 194.5,119.3 195.0,115.2 195.4,112.1 195.9,108.2 196.4,105.2 196.9,101.5 197.4,101.2 197.8,99.3 198.3,100.8 198.8,104.3 199.3,105.8 199.8,107.7 200.2,112.0 200.7,112.8 201.2,111.6 201.7,114.0 202.2,112.6 202.6,110.4 203.1,109.9 203.6,106.5 204.1,104.7 204.6,106.1 205.0,105.8 205.5,104.0 206.0,105.5 206.5,107.9 207.0,109.1 207.4,108.5 207.9,110.9 208.4,108.9 208.9,109.6 209.4,108.8 209.8,110.1 210.3,108.9 210.8,107.2 211.3,106.0 211.8,106.9 212.2,106.6 212.7,106.1 213.2,106.5 213.7,106.8 214.2,107.6 214.6,109.4 215.1,109.8 215.6,108.3 216.1,109.5 216.6,108.4 217.0,109.2 217.5,109.1 218.0,107.7 218.5,107.4 219.0,106.8 219.4,108.3 219.9,106.4 220.4,108.9 220.9,107.2 221.4,108.2 221.8,107.2 222.3,107.7 222.8,107.3 223.3,109.4 223.8,107.0 224.2,108.2 224.7,107.2 225.2,108.3 225.7,106.9 226.2,107.0 226.6,107.2 227.1,106.6 227.6,106.8 228.1,108.8 228.6,107.3 229.0,109.0 229.5,109.1 230.0,106.8 230.5,106.8 231.0,109.4 231.4,109.3 231.9,108.8 232.4,106.8 232.9,106.9 233.4,106.6 233.8,108.6 234.3,108.8 234.8,109.3 235.3,108.0 235.8,107.8 236.2,109.0 236.7,108.5 237.2,108.1 237.7,108.8 238.2,109.3 238.6,109.4 239.1,109.2 239.6,107.6 240.1,108.1 240.6,107.1 241.0,107.3 241.5,107.9 242.0,107.4 242.5,108.3 243.0,107.7 243.4,106.6 243.9,107.2 244.4,106.7 244.9,107.4 245.4,107.7 245.8,107.1 246.3,109.0 246.8,109.3 247.3,107.3 247.8,107.6 248.2,108.2 248.7,107.9 249.2,108.3 249.7,108.0 250.2,109.1 250.6,109.3 251.1,109.2 251.6,108.4 252.1,108.5 252.6,108.9 253.0,107.6 253.5,109.1 254.0,109.3 254.5,109.4 255.0,107.0 255.4,106.9 255.9,109.3 256.4,107.2 256.9,108.5 257.4,108.3 257.8,106.8 258.3,107.1 258.8,109.4 259.3,106.6 259.8,108.9 260.2,107.6 260.7,108.2 261.2,109.4 261.7,109.0 262.2,107.3 262.6,107.3 263.1,108.7 263.6,107.0 264.1,107.1 264.6,108.5 265.0,108.1 265.5,108.6 266.0,108.7 266.5,106.9 267.0,106.9 267.4,107.5 267.9,108.0 268.4,106.9 268.9,107.1 269.4,107.1 269.8,107.2 270.3,106.6 270.8,107.4 271.3,108.6 271.8,107.4 272.2,108.5 272.7,106.9 273.2,109.0 273.7,107.0 274.2,107.5 274.6,107.1 275.1,108.1 275.6,107.1 276.1,107.0 276.6,109.3 277.0,108.8 277.5,108.9 278.0,109.4 278.5,107.8 279.0,107.1 279.4,107.6 279.9,107.0 280.4,106.9 280.9,107.1 281.4,108.8 281.8,107.8 282.3,108.1 282.8,108.3 283.3,107.9 283.8,107.3 284.2,107.9 284.7,108.3 285.2,108.0 285.7,108.7 286.2,107.4 286.6,107.2 287.1,108.6 287.6,108.7 288.1,107.7 288.6,107.9 289.0,106.7 289.5,107.8 290.0,108.5 290.5,107.7 291.0,107.8 291.4,107.6 291.9,107.8 292.4,107.0 292.9,107.2 293.4,107.1 293.8,108.9 294.3,111.5 294.8,113.8 295.3,114.1 295.8,113.4 296.2,112.3 296.7,110.5 297.2,107.2 297.7,104.5 298.2,101.6 298.6,100.9 299.1,99.6 299.6,98.9 300.1,101.6 300.6,103.0 301.0,105.7 301.5,107.4 302.0,112.1 302.5,112.5 303.0,113.9 303.4,113.8 303.9,113.5 304.4,112.8 304.9,110.3 305.4,109.4 305.8,107.2 306.3,105.8 306.8,104.6 307.3,103.1 307.8,104.1 308.2,104.2 308.7,103.7 309.2,106.6 309.7,108.4 310.2,110.3 310.6,110.6 311.1,112.5 311.6,110.8 312.1,112.7 312.6,109.4 313.0,108.8 313.5,108.3 314.0,108.9 314.5,108.1 315.0,106.9 315.4,106.0 315.9,105.0 316.4,106.0 316.9,107.1 317.4,106.0 317.8,108.5 318.3,108.8 318.8,109.1 319.3,110.6 319.8,108.9 320.2,108.1 320.7,110.0 321.2,109.0 321.7,108.9 322.2,108.7 322.6,108.2 323.1,106.0 323.6,107.7 324.1,108.4 324.6,108.1 325.0,107.7 325.5,107.6 326.0,106.9 326.5,108.4 327.0,108.5 327.4,108.3 327.9,107.2 328.4,109.7 328.9,109.0 329.4,109.9 329.8,107.8 330.3,108.8 330.8,109.2 331.3,108.0 331.8,108.0 332.2,106.7 332.7,106.8 333.2,107.5 333.7,107.5 334.2,106.5 334.6,108.2 335.1,108.9 335.6,109.2 336.1,107.0 336.6,107.7 337.0,108.6 337.5,108.0 338.0,107.6"/>
+        <line class="axis thin dash" x1="69.2" y1="42" x2="69.2" y2="104"/>
+        <line class="axis thin dash" x1="181.1" y1="42" x2="181.1" y2="104"/>
+        <line class="l2 thin" x1="78" y1="40" x2="172" y2="40"/>
+        <path class="f2" d="M70 40 L79 35.5 L79 44.5 z"/>
+        <path class="f2" d="M180.3 40 L171.3 35.5 L171.3 44.5 z"/>
+        <text class="t2" x="125" y="28" font-size="12" text-anchor="middle">echo time t</text>
+        <text class="t1" x="100" y="64" font-size="12">snap</text>
+        <text class="t1" x="188" y="72" font-size="12">echo</text>
+        <text class="t1" x="296" y="86" font-size="12" text-anchor="middle">second echo</text>
+      </svg>
+      <figcaption>A sketch of a typical <span class="key-1">trace</span> for a 2.0 m tube, zoomed in on the first 30 ms. The round trip takes $2L/v$ = 4.0 m ÷ $343\ \text{m s}^{-1}$ ≈ 11.7 ms. The <span class="key-2">echo time <i>t</i></span> runs from the point where the snap first rises clearly from the baseline to the point where the echo does. The echo is smaller and its oscillations rise more gradually; a much smaller second echo follows.</figcaption>
+    </figure>
+    <div class="vlab-panel" data-lab-table="echo" data-report-title="Echo times"></div>
+    <div class="vlab-panel measure-panel">
+      <h3>At the end</h3>
+      <label class="vlab-field">Room temperature at the end θ / °C (thermometer, ± 0.5 °C) <input data-save="theta2" inputmode="decimal"></label>
+      <label class="vlab-field">Mean room temperature θ / °C <input data-save="theta" inputmode="decimal"></label>
+      <label class="vlab-field">Expected speed <i>v</i> ≈ 331 + 0.6θ / m s⁻¹ <input data-save="v-expected" inputmode="decimal"></label>
+    </div>
+
+    <h2 id="graph">7. Your graph</h2>
+    <p>The graph updates as you type. It starts with the <strong>mean echo time $t$</strong> on the vertical axis and the <strong>round-trip distance $2L$</strong> on the horizontal axis, so the gradient of the line of best fit is $1/v$. The tool does not force the line through the origin: the intercept is part of your result.</p>
+    <p class="vlab-small">The graph tool uses one uncertainty for every point on each axis. Type your <strong>largest</strong> Δ<i>t</i> in the vertical axis's uncertainty box (a cautious choice) and <strong>0.01</strong> (m) in the horizontal axis's box. The horizontal bars will be tiny: say so in your report rather than leaving them out. Then tick <strong>Steepest and shallowest lines</strong>: they pass through every uncertainty bar. The tool gives the gradient ± its uncertainty, which is half the difference between the gradients of the steepest and shallowest lines, and the y-intercept ± its uncertainty. Press <strong>Add this graph to my report</strong> to keep it.</p>
+    <div class="dgraph" data-lab-graph="echo"></div>
+    <p>The gradient is in ms m⁻¹. The speed is $v = 1/\text{gradient}$, so</p>
+    $$v\ (\text{in m s}^{-1}) = \frac{1000}{\text{gradient}}$$
+    <p>with the same percentage uncertainty: $\dfrac{\Delta v}{v} = \dfrac{\Delta\text{gradient}}{\text{gradient}}$. For example, a gradient of (2.95 ± 0.07) ms m⁻¹ gives $v = 339\ \text{m s}^{-1}$ with a 2.4 % uncertainty, so $v = (339 \pm 8)\ \text{m s}^{-1}$.</p>
+    <div class="vlab-panel measure-panel">
+      <h3>The speed of sound from the graph</h3>
+      <label class="vlab-field">Gradient / ms m⁻¹ <input data-save="grad" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in the gradient / ms m⁻¹ <input data-save="grad-unc" inputmode="decimal"></label>
+      <label class="vlab-field">y-intercept / ms <input data-save="icpt"></label>
+      <label class="vlab-field">Uncertainty in the y-intercept / ms <input data-save="icpt-unc" inputmode="decimal"></label>
+      <label class="vlab-field">Speed of sound <i>v</i> = 1000/gradient / m s⁻¹ <input data-save="v" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty Δ<i>v</i> / m s⁻¹ <input data-save="v-unc" inputmode="decimal"></label>
+    </div>
+
+    <h2 id="analysis">8. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Describe the echo on your traces. Suggest two reasons why the echo is smaller than the snap, and why the echo for the longest tube is smaller than for the shortest.</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> Look at the last column of the readings table. Does the speed you calculate from a single length depend on <i>L</i>? What does any pattern in this column tell you?</label><textarea id="a2" data-save="a2" rows="3"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> State your value of <i>v</i> ± Δ<i>v</i> from the gradient of your graph, with its percentage uncertainty.</label><textarea id="a3" data-save="a3" rows="2"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> State the intercept of your graph. Is it zero within your uncertainties? A positive intercept means every echo time includes the same extra time. Suggest two causes, thinking about where the microphone is and how you decided where each pulse starts. Why does the gradient method give a better value of <i>v</i> than averaging the single-length values in the readings table when there is such an offset?</label><textarea id="a4" data-save="a4" rows="4"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Compare your value of <i>v</i> with the value expected at your room temperature. Do they agree within your uncertainty? (Remember that v ≈ 331 + 0.6θ is an approximation given to you, not a data-booklet equation.)</label><textarea id="a5" data-save="a5" rows="3"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Choose one trace and read the times again using a different rule: from the first clear peak of the snap to the first clear peak of the echo. How much does the echo time change, and why? Which rule do you think gives the true travel time? Explain why it matters more that you use one rule consistently.</label><textarea id="a6" data-save="a6" rows="4"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> Explain how each of these would affect your value of <i>v</i>, and whether repeated trials would reveal it: (a) a leaky joint or a poorly sealed plug; (b) the plug being tilted rather than square to the tube; (c) the microphone being moved between lengths; (d) the air inside the tube being warmer than the room.</label><textarea id="a7" data-save="a7" rows="5"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> The time between the first echo and the much smaller second echo (see the trace sketch in section 6) should also be 2<i>L</i>/<i>v</i>. Explain why, and check it on one of your traces.</label><textarea id="a8" data-save="a8" rows="3"></textarea></div>
+      <div class="answer"><label for="a9"><strong>9.</strong> Suggest two realistic improvements to this experiment, and say which uncertainty or systematic effect each one reduces.</label><textarea id="a9" data-save="a9" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="extension">9. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> Open the far end: remove the plug from the tube and repeat one length. Compare the shape of the echo from an open end with the echo from a closed end. (Reflection from an open end inverts the pressure pulse, so a compression comes back as a rarefaction. Can you see this on the trace?)</label><textarea id="e1" data-save="e1" rows="3"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Narrow tube against wide tube: repeat one length with a much narrower tube, for example garden hose or plastic tubing about 1 cm wide. In very narrow tubes, friction between the moving air and the walls slows the sound measurably and weakens the echo; in your wide tube the effect is less than 0.1 %. (This is beyond the syllabus.) Can your experiment detect a difference?</label><textarea id="e2" data-save="e2" rows="3"></textarea></div>
+      <div class="answer"><label for="e3"><strong>E3.</strong> Compare with a method that uses <i>v</i> = <i>f</i>λ: for example, find the resonant lengths of a tube closed at one end with a tuning fork, or a signal generator and loudspeaker, of known frequency; or record a straw whistle and find its frequencies. Calculate <i>v</i> by this method and compare the precision and the systematic effects of the two methods.</label><textarea id="e3" data-save="e3" rows="4"></textarea></div>
+      <div class="answer"><label for="e4"><strong>E4.</strong> Without the Vernier Microphone: record the snap and echo on a laptop microphone with free audio software such as Audacity, which samples at 44 100 samples per second. How does the higher sampling rate change the uncertainty in <i>t</i>? What new problem might a laptop's built-in microphone bring?</label><textarea id="e4" data-save="e4" rows="3"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your temperatures, the readings table, your speed from the graph, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

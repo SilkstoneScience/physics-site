@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: EMF and internal resistance of a cell · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab with Vernier sensors: measure the terminal pd of a cell for a range of currents, and find its emf and internal resistance from a graph of pd against current.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/internal-resistance.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: EMF and internal resistance of a cell · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab with Vernier sensors: measure the terminal pd of a cell for a range of currents, and find its emf and internal resistance from a graph of pd against current.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/internal-resistance.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-internal-resistance",
+    "title": "EMF and internal resistance of a cell",
+    "file": "Internal resistance lab",
+    "tables": {
+      "readings": {
+        "note": "One row for each rheostat setting. Work out the means and their uncertainties (half the range) as you go.",
+        "csvFile": "internal-resistance.csv",
+        "x": 5, "y": 10,
+        "cols": [
+          { "html": "Setting", "csv": "setting", "aria": "rheostat setting number" },
+          { "html": "<i>I</i><sub>1</sub> / A", "csv": "current I1 / A", "aria": "current, reading 1, in amperes" },
+          { "html": "<i>I</i><sub>2</sub> / A", "csv": "current I2 / A", "aria": "current, reading 2, in amperes" },
+          { "html": "<i>I</i><sub>3</sub> / A", "csv": "current I3 / A", "aria": "current, reading 3, in amperes" },
+          { "html": "Mean <i>I</i> / A", "csv": "mean current I / A", "aria": "mean current in amperes" },
+          { "html": "Δ<i>I</i> / A", "csv": "uncertainty in I / A", "aria": "uncertainty in the mean current in amperes" },
+          { "html": "<i>V</i><sub>1</sub> / V", "csv": "terminal pd V1 / V", "aria": "terminal potential difference, reading 1, in volts" },
+          { "html": "<i>V</i><sub>2</sub> / V", "csv": "terminal pd V2 / V", "aria": "terminal potential difference, reading 2, in volts" },
+          { "html": "<i>V</i><sub>3</sub> / V", "csv": "terminal pd V3 / V", "aria": "terminal potential difference, reading 3, in volts" },
+          { "html": "Mean <i>V</i> / V", "csv": "mean terminal pd V / V", "aria": "mean terminal potential difference in volts" },
+          { "html": "Δ<i>V</i> / V", "csv": "uncertainty in V / V", "aria": "uncertainty in the mean terminal potential difference in volts" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › EMF and internal resistance</p>
+    <h1>EMF and internal resistance of a cell</h1>
+    <p class="lead">A lab with Vernier sensors: a cell drives a current through a rheostat, a current probe measures the current and a voltage probe measures the pd across the cell's terminals. Two multimeters work too. <span class="tag">B.5 Current and circuits</span> <span class="tag vernier-tag">Vernier</span></p>
+    <p><strong>Aim:</strong> to measure the terminal pd of a cell for a range of currents, to find the cell's emf and internal resistance (with their uncertainties) from a graph, to compare the emf with the open-circuit pd measured before and after the experiment, and to evaluate what the measured "internal resistance" really includes.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#theory">Emf and internal resistance</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#setup">Setting up</a></li>
+        <li><a href="#collect">Collecting data</a></li>
+        <li><a href="#graph">Your graph</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Recording readings from digital sensors with realistic uncertainties, not just the display's resolution.</li>
+      <li>Using repeated readings, with half the range, (max − min)/2, as the uncertainty.</li>
+      <li>Turning a theoretical equation into a straight-line graph, and explaining what both the gradient and the intercept mean.</li>
+      <li>Finding the uncertainty in a gradient and in an intercept from the steepest and shallowest lines.</li>
+      <li>Comparing a value from a graph with one measured directly, and spotting systematic effects.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring current and potential difference (Tool 1); collecting data with sensors, and processing it with graphs (Tool 2); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="theory">2. Emf and internal resistance</h2>
+    <p>A cell does work on the charges that pass through it. The work done per unit charge is the cell's <strong>electromotive force (emf)</strong>, $\varepsilon$.</p>
+    <p>Not all of this energy reaches the external circuit. The charges also have to pass through the materials inside the cell, which behave like a small resistor in series with it. This is the cell's <strong>internal resistance</strong>, $r$.</p>
+    <p>If the cell drives a current $I$ through an external circuit of total resistance $R$, the data booklet gives</p>
+    <div class="key">
+      $$\varepsilon = I(R + r)$$
+    </div>
+    <p>The pd across the cell's terminals (the <strong>terminal pd</strong>, $V$) is the pd across the external circuit, $V = IR$. Substituting gives</p>
+    <div class="key">
+      $$V = \varepsilon - Ir$$
+    </div>
+    <p>So the more current the cell supplies, the more of its emf is "used up" inside it, and the lower the terminal pd.</p>
+    <p>Compare this with the equation of a straight line, $y = mx + c$. A graph of $V$ (vertical) against $I$ (horizontal) should be a straight line with <strong>gradient $= -r$</strong> and <strong>vertical intercept $= \varepsilon$</strong>. The intercept is the terminal pd when no current flows, so you can also check it directly, by measuring the pd across the cell on open circuit.</p>
+    <p>For an AA cell, the internal resistance is small, typically a few tenths of an ohm. The terminal pd changes by only a tenth of a volt or so over the whole experiment, so careful, quick readings matter.</p>
+
+    <h2 id="equipment">3. Equipment and safety</h2>
+    <ul>
+      <li>Vernier interface (or LabQuest) and a laptop with Logger Pro 3</li>
+      <li>Vernier Voltage Probe (±10 V)</li>
+      <li>Vernier Current Probe (±0.6 A)</li>
+      <li>(Instead of the probes: two digital multimeters)</li>
+      <li>A 1.5 V AA cell (alkaline or zinc–carbon, not rechargeable) in a cell holder</li>
+      <li>A fixed protective resistor, 3.3 Ω, rated at least 1 W</li>
+      <li>A rheostat (variable resistor), about 20–50 Ω, rated for at least 0.5 A</li>
+      <li>A switch (push switch or knife switch)</li>
+      <li>Connecting leads with crocodile clips</li>
+    </ul>
+    <div class="notice">
+      <p><strong>Safety:</strong></p>
+      <ul style="margin:0">
+        <li><strong>Never connect the cell without the protective resistor in the circuit.</strong> With the rheostat at zero, a short circuit could drive several amperes: the wires and the cell get hot, the cell can leak, and the Current Probe (maximum 0.6 A) can be damaged.</li>
+        <li>Use ordinary alkaline or zinc–carbon cells only. Rechargeable and lithium cells can supply very large currents if they are short-circuited.</li>
+        <li>The protective resistor dissipates up to about 0.7 W and can become warm. Don't hold it, and open the switch between readings.</li>
+        <li>Ask your teacher to check the circuit before you close the switch for the first time.</li>
+      </ul>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> Starting from ε = <i>I</i>(<i>R</i> + <i>r</i>) and <i>V</i> = <i>IR</i>, show that <i>V</i> = ε − <i>Ir</i>. Which quantity goes on each axis of your graph, and what do the gradient and the vertical intercept represent?</label><textarea id="pre1" data-save="pre1" rows="3"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> A fresh AA cell may have an emf as large as 1.6 V and an internal resistance as small as 0.2 Ω. Calculate the largest current in the circuit when the rheostat is set to zero, with the 3.3 Ω protective resistor in place. Is the Current Probe (maximum 0.6 A) safe? What would the current be without the protective resistor, if the leads have a total resistance of about 0.1 Ω?</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> A student measures an open-circuit pd of 1.58 V for a cell. When the cell supplies 0.40 A, its terminal pd is 1.46 V. Calculate the internal resistance of the cell and the rate at which energy is dissipated inside it.</label><textarea id="pre3" data-save="pre3" rows="3"></textarea></div>
+      <div class="answer"><label for="pre4"><strong>P4.</strong> On one set of axes (on paper), sketch <i>V</i> against <i>I</i> for two cells with the same emf: one with a small internal resistance and one with a large internal resistance. Describe how the two lines differ.</label><textarea id="pre4" data-save="pre4" rows="3"></textarea></div>
+      <div class="answer"><label for="pre5"><strong>P5.</strong> Suggest why you should close the switch only for as long as it takes to record each reading.</label><textarea id="pre5" data-save="pre5" rows="2"></textarea></div>
+    </div>
+
+    <h3>Uncertainties</h3>
+    <p><strong>Terminal pd $V$ and current $I$:</strong> the sensors are very precise (Logger Pro shows several decimal places), but the readings drift and flicker by a few millivolts and milliamperes while the switch is closed. This is usually bigger than the display's resolution.</p>
+    <p>So take <strong>three readings</strong> at each rheostat setting, opening and closing the switch each time, and use <strong>half the range</strong>, $\frac{\text{max} - \text{min}}{2}$, as the uncertainty. If your three readings are identical, use the smallest change the display can show instead.</p>
+    <p><strong>Open-circuit pd:</strong> record the steady reading with the switch open, with the same uncertainty rule.</p>
+    <p><strong>Multimeters:</strong> if you use multimeters instead, a single reading is ± the smallest digit displayed. The ammeter must be on a range that can carry 0.5 A (often the 10 A or 2 A range), which may only show 0.01 A: note how this limits your precision.</p>
+    <p>Give each uncertainty to 1 significant figure (2 when the uncertainty itself is known precisely), and round the mean to the same decimal place, e.g. $(1.482 \pm 0.003)$ V. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <h2 id="setup">5. Setting up</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 310" role="img" aria-labelledby="irt">
+        <title id="irt">Circuit diagram. A single cell, with its emf and its internal resistance r drawn inside a dashed box, is in series with a switch, a current probe (an ammeter), a 3.3 ohm protective resistor and a rheostat. An arrow on the wire shows the conventional current leaving the positive terminal of the cell. A voltage probe (a voltmeter) is connected across the two terminals of the cell, outside the dashed box.</title>
+        <!-- top wire: current probe, current arrow, protective resistor -->
+        <line class="axis" x1="50" y1="60" x2="91" y2="60"/>
+        <circle class="axis" cx="105" cy="60" r="14" style="fill:var(--surface)"/>
+        <text x="105" y="65" font-size="12" text-anchor="middle">A</text>
+        <line class="axis" x1="119" y1="60" x2="230" y2="60"/>
+        <path class="f3" d="M 197 60 L 185 54 L 185 66 Z"/>
+        <text x="190" y="46" font-size="12" text-anchor="middle">I</text>
+        <rect class="axis" x="230" y="52" width="40" height="16" style="fill:var(--surface)"/>
+        <line class="axis" x1="270" y1="60" x2="320" y2="60"/>
+        <text x="105" y="32" font-size="12" text-anchor="middle">current probe</text>
+        <text x="250" y="38" font-size="12" text-anchor="middle">3.3 Ω</text>
+        <!-- left side: switch -->
+        <line class="axis" x1="50" y1="60" x2="50" y2="100"/>
+        <circle class="f3" cx="50" cy="100" r="3"/>
+        <circle class="f3" cx="50" cy="135" r="3"/>
+        <line class="axis" x1="50" y1="135" x2="66" y2="104"/>
+        <line class="axis" x1="50" y1="135" x2="50" y2="200"/>
+        <text x="74" y="125" font-size="12">switch</text>
+        <!-- right side: rheostat -->
+        <line class="axis" x1="320" y1="60" x2="320" y2="105"/>
+        <rect class="axis" x="312" y="105" width="16" height="40" style="fill:var(--surface)"/>
+        <line class="axis" x1="320" y1="145" x2="320" y2="200"/>
+        <line class="axis" x1="304" y1="151" x2="332" y2="102.7"/>
+        <path class="f3" d="M 337 94 L 335.5 104.7 L 328.5 100.7 Z"/>
+        <text x="296" y="130" font-size="12" text-anchor="end">rheostat</text>
+        <!-- bottom wire: the cell with its internal resistance, inside the dashed box -->
+        <line class="axis" x1="50" y1="200" x2="150" y2="200"/>
+        <line class="axis" x1="150" y1="184" x2="150" y2="216"/>
+        <line class="axis" style="stroke-width:4" x1="160" y1="191" x2="160" y2="209"/>
+        <line class="axis" x1="160" y1="200" x2="185" y2="200"/>
+        <rect class="l2" x="185" y="193" width="32" height="14" style="fill:var(--surface)"/>
+        <line class="axis" x1="217" y1="200" x2="320" y2="200"/>
+        <rect class="axis dash" x="120" y="160" width="120" height="72" style="stroke:var(--theme-b)"/>
+        <text x="155" y="178" font-size="12" text-anchor="middle">ε</text>
+        <text class="t2" x="201" y="186" font-size="12" text-anchor="middle">r</text>
+        <text x="145" y="226" font-size="12" text-anchor="end">+</text>
+        <text x="166" y="226" font-size="12">−</text>
+        <text x="180" y="152" font-size="12" text-anchor="middle">cell</text>
+        <!-- voltage probe across the cell's terminals, outside the box -->
+        <circle class="f3" cx="100" cy="200" r="3.5"/>
+        <circle class="f3" cx="260" cy="200" r="3.5"/>
+        <polyline class="l1 thin" points="100,200 100,262 170,262"/>
+        <polyline class="l1 thin" points="198,262 260,262 260,200"/>
+        <circle class="l1 thin" cx="184" cy="262" r="14" style="fill:var(--surface)"/>
+        <text class="t1" x="184" y="267" font-size="12" text-anchor="middle">V</text>
+        <text class="t1" x="184" y="298" font-size="12" text-anchor="middle">voltage probe</text>
+      </svg>
+      <figcaption>The cell's emf ε and its <span class="key-2">internal resistance r</span> are inside the dashed box: both are inside the cell, so you can't connect to the point between them. The <span class="key-1">voltage probe</span> connects to the cell's two terminals, outside the box, so it measures the terminal pd. The current probe (A) is in series, and the 3.3 Ω protective resistor limits the current.</figcaption>
+    </figure>
+    <ol>
+      <li>Build the circuit in the diagram, with the switch <strong>open</strong>. Clip the Voltage Probe leads directly to the two terminals of the cell holder (red to +). The Current Probe goes in series, with the current entering at its red terminal.</li>
+      <li>Plug the Voltage Probe into <strong>CH 1</strong> and the Current Probe into <strong>CH 2</strong> of the interface, and open <strong>Logger Pro 3</strong>. Both sensors should be identified automatically.</li>
+      <li>Zero the sensors: with the switch open, unclip the Voltage Probe leads from the cell and touch them together, then choose <strong>Experiment ▸ Zero</strong>. Clip the Voltage Probe back onto the cell's terminals. (Zeroing with the probe still on the cell would wrongly set the cell's emf to zero.)</li>
+      <li>Choose <strong>Experiment ▸ Data Collection</strong> and set the Mode to <strong>Events with Entry</strong>. Name the entry column "Setting" (no units). Each click of <strong>Keep</strong> will now store one pair of <i>V</i> and <i>I</i> readings.</li>
+      <li>Ask your teacher to check the circuit.</li>
+    </ol>
+    <p class="vlab-small"><strong>Using two multimeters instead:</strong> connect one, set to volts, across the cell holder's terminals in place of the Voltage Probe, and the other, set to a range that can carry 0.5 A, in series in place of the Current Probe. Skip the Logger Pro steps, and read both displays each time you close the switch.</p>
+
+    <h2 id="collect">6. Collecting data</h2>
+    <ol>
+      <li>With the switch open, record the <strong>open-circuit pd</strong> of the cell (the "before" value) in the Measurements box below.</li>
+      <li>Set the rheostat to its maximum resistance. Click <strong>Collect</strong>. Close the switch, wait about 2 s for the readings to settle, click <strong>Keep</strong>, enter the setting number, then open the switch.</li>
+      <li>Do this twice more at the same setting, so you have three pairs of readings. Let the cell rest for about 15 s with the switch open between readings.</li>
+      <li>Change the rheostat to give at least <strong>six</strong> different settings, spread fairly evenly across the current range, from about 0.05 A up to the largest current (rheostat at zero, about 0.4 A). Take the settings in a <strong>mixed order</strong> (not always increasing the current), so that any slow change in the cell doesn't quietly bend your line. Take three pairs of readings at each setting, as in steps 2 and 3.</li>
+      <li>Click <strong>Stop</strong>. With the switch open, record the open-circuit pd again (the "after" value) in the Measurements box.</li>
+      <li>Save your Logger Pro file. Copy your readings into the table below: one row for each setting, with its three currents and three pds.</li>
+      <li>For each row, fill in <strong>Mean <i>I</i></strong> and <strong>Mean <i>V</i></strong> (the mean of the three readings), and <strong>Δ<i>I</i></strong> and <strong>Δ<i>V</i></strong> (half the range, or the smallest change the display can show if the three readings are identical). Round each mean to the same decimal place as its uncertainty.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Measurements: open-circuit pd of the cell</h3>
+      <label class="vlab-field">Before the experiment / V <input data-save="ocBefore" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty before / V <input data-save="docBefore" inputmode="decimal"></label>
+      <label class="vlab-field">After the experiment / V <input data-save="ocAfter" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty after / V <input data-save="docAfter" inputmode="decimal"></label>
+    </div>
+    <div class="vlab-panel" data-lab-table="readings" data-report-title="Terminal pd and current"></div>
+
+    <h2 id="graph">7. Your graph</h2>
+    <p>The graph updates as you type. It starts with <strong>mean terminal pd</strong> on the vertical axis and <strong>mean current</strong> on the horizontal axis, so the gradient is −<i>r</i> and the vertical intercept is ε.</p>
+    <p>Untick <strong>Start the axes at zero</strong>: your pds only span about a tenth of a volt, so with the vertical axis starting at zero the line looks flat and the uncertainty bars are invisible. The results under the graph still give the intercept.</p>
+    <p class="vlab-small">The graph tool uses one uncertainty for every point on each axis. Type your largest Δ<i>V</i> in the vertical axis's uncertainty box and your largest Δ<i>I</i> in the horizontal axis's box (a cautious choice), then tick <strong>Steepest and shallowest lines</strong>. Press <strong>Add this graph to my report</strong> to keep it.</p>
+    <p>Each point has an uncertainty box (Δ<i>I</i> across, Δ<i>V</i> up and down). Because the gradient is <strong>negative</strong>, the steepest line runs from the <strong>top-right</strong> corner of the first (smallest-current) box, $(I + \Delta I,\ V + \Delta V)$, to the <strong>bottom-left</strong> corner of the last box, $(I - \Delta I,\ V - \Delta V)$: the biggest drop in $V$ over the smallest change in $I$. The shallowest line runs from the bottom-left corner of the first box to the top-right corner of the last. Both must pass through every uncertainty bar.</p>
+    <p>The uncertainty in $r$ is half the difference between the two lines' gradients, and the uncertainty in $\varepsilon$ is half the difference between their intercepts: the tool works out both.</p>
+    <div class="dgraph" data-lab-graph="readings"></div>
+
+    <h2 id="analysis">8. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Is your graph a straight line within its uncertainty bars? What does this tell you about whether the internal resistance stayed constant over your range of currents?</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> State the internal resistance <i>r</i> ± Δ<i>r</i> and the emf ε ± Δε of your cell, with units and to the correct number of significant figures.</label><textarea id="a2" data-save="a2" rows="2"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> Compare your emf from the graph with the open-circuit pd you measured before and after the experiment. Do they agree within your uncertainties? Explain why a voltmeter with a very high resistance, placed across a cell on open circuit, reads almost exactly its emf.</label><textarea id="a3" data-save="a3" rows="4"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> Compare the percentage uncertainty in <i>r</i> with the percentage uncertainty in ε. Explain why <i>r</i> is much harder to measure precisely with this method.</label><textarea id="a4" data-save="a4" rows="3"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> For your largest current, calculate the power dissipated inside the cell (<i>I</i><sup>2</sup><i>r</i>) and the total power supplied by the cell (ε<i>I</i>). What fraction of the cell's energy reaches the external circuit?</label><textarea id="a5" data-save="a5" rows="3"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Did the open-circuit pd change between the start and the end of the experiment? Explain how such a change during the experiment would affect your graph if you had taken the readings in order of increasing current.</label><textarea id="a6" data-save="a6" rows="3"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> Your Voltage Probe was clipped to the terminals of the cell holder. List everything between the two clips that contributes to your measured "internal resistance". Suggest how you could test whether the contacts in the holder make a significant contribution.</label><textarea id="a7" data-save="a7" rows="3"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> Suggest two realistic improvements to this experiment, and say which uncertainty or systematic effect each one reduces.</label><textarea id="a8" data-save="a8" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="extension">9. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> Two identical cells in series: predict the intercept and the gradient of the <i>V</i> against <i>I</i> graph for the pair. Then test your prediction, connecting the Voltage Probe across both cells and replacing the protective resistor with a 6.8 Ω resistor (rated at least 2 W). First check that the largest possible current stays below 0.5 A if each cell has ε = 1.6 V and <i>r</i> = 0.2 Ω.</label><textarea id="e1" data-save="e1" rows="4"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> A fruit or vegetable cell: push a copper strip and a zinc strip (or a galvanised nail) into a potato or lemon, about 2 cm apart, and repeat the experiment. Its emf is under 1 V, but its internal resistance is of the order of 10<sup>3</sup> Ω, so the currents are well below 1 mA. Use a digital multimeter on its 2 mA (or 200 μA) range instead of the Current Probe, and a resistance box or a set of resistors from about 100 Ω to 10 kΩ as the load. Why is no protective resistor needed here? Use your value of <i>r</i> to explain why a fruit cell can't light a torch bulb, even though its emf is similar to an AA cell's. (Wash your hands afterwards, and don't eat the fruit.)</label><textarea id="e2" data-save="e2" rows="4"></textarea></div>
+      <div class="answer"><label for="e3"><strong>E3.</strong> For the fruit cell, investigate how <i>r</i> depends on the distance between the electrodes, or on how deep they are pushed in. What does this suggest about where the internal resistance of a cell comes from?</label><textarea id="e3" data-save="e3" rows="3"></textarea></div>
+      <div class="answer"><label for="e4"><strong>E4.</strong> When a car's engine is started, its headlights dim briefly. The starter motor draws a very large current from the car battery. Use <i>V</i> = ε − <i>Ir</i> to explain the dimming.</label><textarea id="e4" data-save="e4" rows="3"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your measurements, your table, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

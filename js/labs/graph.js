@@ -78,7 +78,9 @@
       if (!hi || m > hi.m) hi = { m, c };
       if (!lo || m < lo.m) lo = { m, c };
     }
-    return hi && lo ? { hi, lo } : null;
+    if (!hi || !lo) return null;
+    // "Steepest" means the larger gradient in size, so a falling line's steepest line is its most negative one.
+    return Math.abs(hi.m) >= Math.abs(lo.m) ? { hi, lo } : { hi: lo, lo: hi };
   }
 
   function leastSquares(pts) {
@@ -211,7 +213,7 @@
         if (!$('dx').value.trim() && !$('dy').value.trim()) html += '<p class="vlab-small">Add uncertainty bars to find the steepest and shallowest lines.</p>';
         else if (!ext) html += '<p><strong>No straight line passes through every uncertainty bar.</strong> Are the uncertainties too small, is one point an outlier, or is the relationship not linear?</p>';
         else {
-          const dm = (ext.hi.m - ext.lo.m) / 2, dc = Math.abs(ext.hi.c - ext.lo.c) / 2;
+          const dm = Math.abs(ext.hi.m - ext.lo.m) / 2, dc = Math.abs(ext.hi.c - ext.lo.c) / 2;
           html += `<p><strong>Steepest line</strong> (dashed): gradient ${fmt(ext.hi.m, 4)}. <strong>Shallowest line</strong> (dotted): gradient ${fmt(ext.lo.m, 4)}.</p>
             <p>Gradient = ${fmt(best.m, 4)} ± ${fmt(dm, 2)} &nbsp;(${gradUnit}); &nbsp;y-intercept = ${fmt(best.c, 4)} ± ${fmt(dc, 2)}${Y.u ? ' ' + Y.u : ''}.</p>`;
         }

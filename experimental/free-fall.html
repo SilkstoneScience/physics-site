@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: free-fall acceleration with a picket fence · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab with Vernier sensors: drop a picket fence through a photogate, find the acceleration of free fall from the velocity–time graph, and check the software's velocities by hand.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/free-fall.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: free-fall acceleration with a picket fence · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab with Vernier sensors: drop a picket fence through a photogate, find the acceleration of free fall from the velocity–time graph, and check the software's velocities by hand.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/free-fall.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-free-fall",
+    "title": "Free-fall acceleration with a picket fence",
+    "file": "Free-fall lab",
+    "tables": {
+      "drops": {
+        "note": "One row for each good drop (at least six), all from the same release height. Work out 2A for each drop.",
+        "csvFile": "free-fall-drops.csv",
+        "x": 1, "y": 2,
+        "cols": [
+          { "html": "Drop", "csv": "drop", "aria": "drop number" },
+          { "html": "Gradient of <i>v</i>–<i>t</i> / m s<sup>−2</sup>", "csv": "gradient of v-t / m s^-2", "aria": "gradient of the velocity-time graph in metres per second squared" },
+          { "html": "Intercept of <i>v</i>–<i>t</i> / m s<sup>−1</sup>", "csv": "intercept of v-t / m s^-1", "aria": "intercept of the velocity-time graph in metres per second" },
+          { "html": "Mean of <i>a</i>–<i>t</i> / m s<sup>−2</sup>", "csv": "mean of a-t / m s^-2", "aria": "mean of the acceleration-time graph in metres per second squared" },
+          { "html": "Quadratic fit <i>A</i> / m s<sup>−2</sup>", "csv": "quadratic fit A / m s^-2", "aria": "quadratic fit coefficient A in metres per second squared" },
+          { "html": "2<i>A</i> / m s<sup>−2</sup>", "csv": "2A / m s^-2", "aria": "twice the quadratic fit coefficient A in metres per second squared" }
+        ]
+      },
+      "hand": {
+        "note": "One drop, one row for each of the seven gaps. Δt = end − start; mid-time = (start + end)/2; v = d/Δt with d in metres; Δv = v × Δd/d.",
+        "csvFile": "free-fall-hand-check.csv",
+        "x": 5, "y": 6,
+        "cols": [
+          { "html": "Gap", "csv": "gap", "aria": "gap number" },
+          { "html": "Block time at start of gap / s", "csv": "block time at start of gap / s", "aria": "block time at the start of the gap in seconds" },
+          { "html": "Block time at end of gap / s", "csv": "block time at end of gap / s", "aria": "block time at the end of the gap in seconds" },
+          { "html": "Δ<i>t</i> / s", "csv": "time for gap Δt / s", "aria": "time for the gap in seconds" },
+          { "html": "Mid-time / s", "csv": "mid-time t / s", "aria": "mid-time of the gap in seconds" },
+          { "html": "<i>v</i> = <i>d</i>/Δ<i>t</i> / m s<sup>−1</sup>", "csv": "velocity v / m s^-1", "aria": "velocity in metres per second" },
+          { "html": "Δ<i>v</i> / m s<sup>−1</sup>", "csv": "uncertainty in v / m s^-1", "aria": "uncertainty in the velocity in metres per second" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Free-fall acceleration with a picket fence</p>
+    <h1>Free-fall acceleration with a picket fence</h1>
+    <p class="lead">A lab with Vernier sensors: a striped plastic strip, the picket fence, falls through a photogate, which times each black band as it cuts the beam. <span class="tag">A.1 Kinematics</span> <span class="tag vernier-tag">Vernier</span></p>
+    <p><strong>Aim:</strong> to determine the acceleration of free fall, <i>g</i>, from the gradient of a velocity–time graph, with its uncertainty from repeated drops; to check the software's velocities for one drop by calculating them from the raw blocking times; and to compare your value with $9.8\ \text{m s}^{-2}$, evaluating the random and systematic effects in the experiment.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#setup">Setting up</a></li>
+        <li><a href="#collect">Collecting data</a></li>
+        <li><a href="#handcheck">Hand check of one drop</a></li>
+        <li><a href="#graph">Your graph</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Using a sensor (a photogate) to collect precise timing data, and checking what the software calculates by doing one calculation by hand.</li>
+      <li>Using repeated trials and the half-range method, (max − min)/2, to estimate uncertainty.</li>
+      <li>Measuring a length that needs two readings, and reducing its percentage uncertainty by measuring over several spacings.</li>
+      <li>Interpreting the gradient and the intercept of a velocity–time graph as physical quantities, with the uncertainty in the gradient from the steepest and shallowest lines.</li>
+      <li>Telling random uncertainty apart from systematic effects that repeated trials cannot reveal.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring length and time (Tool 1); collecting data with sensors, and processing it with graphs (Tool 2); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="background">2. Background</h2>
+    <p>An object is in <strong>free fall</strong> when the only force acting on it is its weight. Close to the Earth's surface the gravitational field is almost uniform, so a freely falling object has a constant downward acceleration, the <strong>acceleration of free fall</strong>, $g$.</p>
+    <p>In practice the air always pushes back a little (fluid resistance). For a thin, smooth object falling a short distance at a few metres per second, this effect is small.</p>
+    <p>For uniformly accelerated motion the data booklet gives, with $a = g$ and downwards taken as positive:</p>
+    $$v = u + at$$
+    $$s = ut + \tfrac{1}{2}at^2$$
+    <p>So a graph of velocity $v$ against time $t$ should be a straight line with <strong>gradient = $g$</strong> and <strong>vertical intercept = $u$</strong>, the velocity at the moment you chose as $t = 0$. A graph of displacement against time should be a parabola. (See <a href="../themes/a1.html">A.1 Kinematics</a>.)</p>
+    <p>The <strong>picket fence</strong> is a clear plastic strip with evenly spaced black bands. The photogate sends an infrared beam across its opening and records the time whenever the beam becomes blocked. As the fence falls, each black band blocks the beam in turn.</p>
+    <p>Between one band's leading (lower) edge and the next band's leading edge, the fence falls one <strong>band spacing</strong> $d$ (5.0 cm on the standard fence). The <strong>average velocity</strong> over that gap is $d/\Delta t$, where $\Delta t$ is the time between the two blocking events.</p>
+    <p>For uniform acceleration, the average velocity over an interval equals the <strong>instantaneous velocity</strong> at the middle of that interval (you will show this in P1). So in your hand check, each average velocity is plotted at the <strong>mid-time</strong> of its gap. Logger Pro calculates its own velocities from the band times; you will compare its results with your hand check of one drop.</p>
+
+    <h2 id="equipment">3. Equipment and safety</h2>
+    <ul>
+      <li>Vernier interface (or LabQuest) and a laptop with Logger Pro 3</li>
+      <li>Vernier Photogate and Vernier Picket Fence</li>
+      <li>Ring stand with a clamp for the photogate (and a G-clamp or heavy mass to steady the base)</li>
+      <li>Metre rule (or 50 cm rule) with millimetre divisions (the measurement across all seven gaps is about 35 cm)</li>
+      <li>Foam cushion or folded towel to land on</li>
+    </ul>
+    <div class="notice">
+      <p style="margin:0"><strong>Safety:</strong></p>
+      <ul style="margin-bottom:0">
+        <li>Clamp the ring stand firmly (G-clamp or a heavy mass on its base) so it cannot tip over the bench edge.</li>
+        <li>The fence falls onto a cushion on the floor: keep feet and bags out of the way, and pick the fence up only when no-one is about to drop it. Do not stand on stools or benches to drop it from higher up.</li>
+        <li>Hold the fence only by its top edge and keep fingers clear of the gate. The plastic scratches and cracks easily; a cracked fence has sharp edges.</li>
+      </ul>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> An object accelerates uniformly from velocity <i>u</i> to velocity <i>v</i> in time <i>t</i>. Use <i>s</i> = ((<i>u</i> + <i>v</i>)/2)<i>t</i> to show that its average velocity is (<i>u</i> + <i>v</i>)/2. Then use <i>v</i> = <i>u</i> + <i>at</i> to show that this equals its instantaneous velocity at time <i>t</i>/2. Why does Logger Pro plot each velocity at the middle of its gap?</label><textarea id="pre1" data-save="pre1" rows="4"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> Sketch (on paper) the displacement–time, velocity–time and acceleration–time graphs you expect for the falling fence, taking downwards as positive and t = 0 as the moment the first band blocks the beam. (The fence is already moving at t = 0.) Describe your sketches here.</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> In a trial drop, the leading edges of the eight bands (spacing 5.00 cm) blocked the beam at 0.0000, 0.0559, 0.0930, 0.1228, 0.1484, 0.1713, 0.1921 and 0.2114 s. Calculate the average velocity over the first gap and over the last gap, and the mid-time of each gap. Use these two points to estimate <i>g</i>. Then estimate how far above the beam the first band was when the fence was released.</label><textarea id="pre3" data-save="pre3" rows="4"></textarea></div>
+      <div class="answer"><label for="pre4"><strong>P4.</strong> Five drops gave gradients of 9.71, 9.78, 9.83, 9.76 and 9.80 m s⁻². Write the result as <i>g</i> ± Δ<i>g</i> with the correct significant figures, and give the percentage uncertainty. Does it agree with 9.8 m s⁻²?</label><textarea id="pre4" data-save="pre4" rows="3"></textarea></div>
+      <div class="answer"><label for="pre5"><strong>P5.</strong> Suppose the fence could be tossed gently upwards so that it passed through the gate on its way up. Taking upwards as positive, predict the sign and size of the gradient of its velocity–time graph while it is in the air. Explain your answer.</label><textarea id="pre5" data-save="pre5" rows="3"></textarea></div>
+    </div>
+
+    <h3>Uncertainties</h3>
+    <p><strong>Band spacing $d$:</strong> each measurement with a ruler needs two readings (one at each edge), so a single gap is known to ± 0.1 cm, which is ± 2 % of 5.0 cm. Measuring across all seven gaps at once (from the leading edge of the first band to the leading edge of the last) still gives ± 0.1 cm, but now on about 35 cm: under 0.3 %. Use this to check the 5.00 cm that Logger Pro assumes.</p>
+    <p><strong>Times:</strong> the photogate timer is far more precise than any other measurement here; the band edges and the beam width limit it more than the clock does. The timing uncertainty is much smaller than the uncertainty in $d$, so you may leave out horizontal uncertainty bars, but say why in your report.</p>
+    <p><strong>$g$ from repeated drops:</strong> the spread between drops shows the random uncertainty. Use half the range, $\frac{\text{max} - \text{min}}{2}$, quoted to 1 significant figure (usual) or 2 significant figures when the uncertainty itself is known precisely (for example from many readings), with the mean rounded to the same decimal place. See <a href="../skills.html">Physics skills</a>.</p>
+    <p>Remember that a small spread does not mean the result is accurate: an error in the band spacing, a tilted fence or air resistance shifts every drop in the same direction.</p>
+
+    <h2 id="setup">5. Setting up</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 300" role="img" aria-labelledby="ffSetT">
+        <title id="ffSetT">Set-up: a ring stand on the bench holds a photogate by a clamp, with the photogate beyond the edge of the bench. A picket fence with eight black bands is held vertically by its top edge just above the photogate's beam, centred in the opening. A dashed arrow shows it falling through the gate onto a cushion on the floor. A cable runs from the photogate to the interface on the bench.</title>
+        <rect class="axis" x="0" y="150" width="150" height="12" style="fill:var(--surface)"/>
+        <rect class="axis" x="8" y="162" width="10" height="128" style="fill:var(--surface)"/>
+        <line class="axis" x1="0" y1="290" x2="360" y2="290"/>
+        <rect class="axis" x="30" y="142" width="60" height="8" style="fill:var(--surface)"/>
+        <line class="axis" x1="50" y1="20" x2="50" y2="142"/>
+        <line class="axis" x1="50" y1="100" x2="172" y2="100" style="stroke-width:3"/>
+        <text x="58" y="34" font-size="12">ring stand</text>
+        <rect class="axis" x="100" y="128" width="40" height="22" rx="3" style="fill:var(--surface)"/>
+        <text x="120" y="122" font-size="12" text-anchor="middle">interface</text>
+        <path class="axis thin" d="M178 108 C178 132 160 139 140 139" style="fill:none"/>
+        <rect class="l1" x="192" y="14" width="16" height="74" style="fill:var(--surface)"/>
+        <rect x="192" y="18" width="16" height="4" style="fill:var(--text);stroke:var(--text);stroke-width:1"/>
+        <rect x="192" y="27" width="16" height="4" style="fill:var(--text);stroke:var(--text);stroke-width:1"/>
+        <rect x="192" y="36" width="16" height="4" style="fill:var(--text);stroke:var(--text);stroke-width:1"/>
+        <rect x="192" y="45" width="16" height="4" style="fill:var(--text);stroke:var(--text);stroke-width:1"/>
+        <rect x="192" y="54" width="16" height="4" style="fill:var(--text);stroke:var(--text);stroke-width:1"/>
+        <rect x="192" y="63" width="16" height="4" style="fill:var(--text);stroke:var(--text);stroke-width:1"/>
+        <rect x="192" y="72" width="16" height="4" style="fill:var(--text);stroke:var(--text);stroke-width:1"/>
+        <rect x="192" y="81" width="16" height="4" style="fill:var(--text);stroke:var(--text);stroke-width:1"/>
+        <rect class="l2" x="172" y="92" width="16" height="16" rx="2" style="fill:var(--surface)"/>
+        <rect class="l2" x="212" y="92" width="16" height="16" rx="2" style="fill:var(--surface)"/>
+        <line class="l2 dash" x1="188" y1="100" x2="212" y2="100"/>
+        <text class="t1" x="216" y="22" font-size="12">hold top edge</text>
+        <text class="t1" x="216" y="56" font-size="12">picket fence</text>
+        <text x="236" y="96" font-size="12">beam</text>
+        <text class="t2" x="236" y="126" font-size="12">photogate</text>
+        <line class="axis dash" x1="200" y1="116" x2="200" y2="258"/>
+        <path class="axis" d="M200 268 L195 258 L205 258 z" style="fill:var(--text)"/>
+        <text x="208" y="200" font-size="12">falls</text>
+        <rect class="axis" x="168" y="276" width="72" height="14" rx="4" style="fill:var(--surface)"/>
+        <text x="248" y="286" font-size="12">cushion</text>
+      </svg>
+      <figcaption>The <span class="key-1">picket fence</span> is held vertically by its top edge, its lowest band about 2 cm above the beam, centred in the opening of the <span class="key-2">photogate</span> (drawn as its two arms, with the dashed infrared beam between them). The plane of the fence must be perpendicular to the beam. Not to scale.</figcaption>
+    </figure>
+    <ol>
+      <li>Clamp the photogate to the ring stand with its arms horizontal and its opening beyond the edge of the bench (see the diagram). Place the cushion on the floor below. The gate must be high enough for the whole fence to pass through it before the fence lands.</li>
+      <li>Lay the fence flat and measure each of the seven band spacings, always from the lower edge of one band to the lower edge of the next (the edges that enter the beam first). Then measure across all seven gaps at once. Record them below.</li>
+      <li>Connect the photogate to <strong>DIG 1</strong> on the interface <strong>before</strong> you start <strong>Logger Pro 3</strong> (the photogate settings only appear once it is connected). The quickest set-up is Vernier's ready-made file: choose <strong>File ▸ Open</strong> and look in the <strong>Experiments</strong> folder for the <strong>Picket Fence Free Fall</strong> file (in the Physics with Vernier or Physics with Computers folder). To set it up by hand instead, choose <strong>Experiment ▸ Set Up Sensors ▸ Show All Interfaces</strong>, click the picture of the photogate, choose <strong>Set Distance or Length</strong>, and select the <strong>Picket Fence</strong> with a band spacing of 0.050 m. Either way, <strong>Experiment ▸ Data Collection…</strong> should now show a photogate timing mode rather than Time Based.</li>
+      <li>Block the beam with your hand: the gate state in the status bar should change to <strong>Blocked</strong>, and the gate's red LED should light. Unblock it again.</li>
+    </ol>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 175" role="img" aria-labelledby="ffBandT">
+        <title id="ffBandT">Close-up of three black bands on the picket fence, which is falling. The band spacing d is marked from the lower edge of one band to the lower edge of the next band.</title>
+        <rect class="l1" x="130" y="10" width="80" height="155" style="fill:var(--surface)"/>
+        <rect x="130" y="30" width="80" height="16" style="fill:var(--text);stroke:var(--text);stroke-width:1"/>
+        <rect x="130" y="80" width="80" height="16" style="fill:var(--text);stroke:var(--text);stroke-width:1"/>
+        <rect x="130" y="130" width="80" height="16" style="fill:var(--text);stroke:var(--text);stroke-width:1"/>
+        <text class="t1" x="118" y="42" font-size="12" text-anchor="end">black band</text>
+        <line class="axis thin dash" x1="210" y1="46" x2="240" y2="46"/>
+        <line class="axis thin dash" x1="210" y1="96" x2="240" y2="96"/>
+        <line class="l2" x1="232" y1="56" x2="232" y2="86"/>
+        <path class="l2" d="M232 47 L228 56 L236 56 z" style="fill:var(--theme-b)"/>
+        <path class="l2" d="M232 95 L228 86 L236 86 z" style="fill:var(--theme-b)"/>
+        <text class="t2" x="244" y="76" font-size="12">d</text>
+        <line class="axis thin dash" x1="210" y1="146" x2="238" y2="146"/>
+        <text x="244" y="150" font-size="12">lower edge</text>
+        <line class="axis" x1="60" y1="62" x2="60" y2="122"/>
+        <path class="axis" d="M60 132 L55 122 L65 122 z" style="fill:var(--text)"/>
+        <text x="60" y="156" font-size="12" text-anchor="middle">falling</text>
+      </svg>
+      <figcaption>Close-up of three bands. The <span class="key-2">band spacing <i>d</i></span> is measured from the lower (leading) edge of one band to the lower edge of the next: the edges that enter the beam first.</figcaption>
+    </figure>
+    <div class="vlab-panel measure-panel">
+      <h3>Band spacing (ruler, ± 0.1 cm per measurement)</h3>
+      <label class="vlab-field">Gap 1 <i>d</i> / cm <input data-save="d1" inputmode="decimal"></label>
+      <label class="vlab-field">Gap 2 <i>d</i> / cm <input data-save="d2" inputmode="decimal"></label>
+      <label class="vlab-field">Gap 3 <i>d</i> / cm <input data-save="d3" inputmode="decimal"></label>
+      <label class="vlab-field">Gap 4 <i>d</i> / cm <input data-save="d4" inputmode="decimal"></label>
+      <label class="vlab-field">Gap 5 <i>d</i> / cm <input data-save="d5" inputmode="decimal"></label>
+      <label class="vlab-field">Gap 6 <i>d</i> / cm <input data-save="d6" inputmode="decimal"></label>
+      <label class="vlab-field">Gap 7 <i>d</i> / cm <input data-save="d7" inputmode="decimal"></label>
+      <label class="vlab-field">All 7 gaps at once / cm <input data-save="d-all" inputmode="decimal"></label>
+      <label class="vlab-field">Mean band spacing from the "all 7 gaps" measurement <i>d</i> / cm <input data-save="d-mean" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in the mean band spacing / cm <input data-save="d-mean-unc" inputmode="decimal"></label>
+    </div>
+
+    <h2 id="collect">6. Collecting data</h2>
+    <ol start="5">
+      <li>Hold the fence by its top edge, vertical, with its lowest band about 2 cm above the beam and centred in the opening. A partner checks from the side that it is vertical and will not touch the arms.</li>
+      <li>Click <strong>Collect</strong>. Open your fingers to release the fence without pushing it, and let it fall onto the cushion. Click <strong>Stop</strong> if collection has not already stopped.</li>
+      <li>Check the run: there should be eight blocking times. Logger Pro calculates a velocity from the band times; note how many velocity points it gives. The points should lie close to a straight line. Reject any drop where the fence touched the gate or twisted (points well off the line), and repeat it.</li>
+      <li>On the velocity–time graph choose <strong>Analyze ▸ Linear Fit</strong>. Record the gradient and intercept in the table. On the acceleration–time graph choose <strong>Analyze ▸ Statistics</strong> and record the mean acceleration. On the distance–time graph choose <strong>Analyze ▸ Curve Fit</strong>, then <strong>Quadratic</strong> (<i>At</i>² + <i>Bt</i> + <i>C</i>) and record <i>A</i>. (If a graph isn't showing, click its y-axis label and choose Acceleration, or Distance.)</li>
+      <li>Choose <strong>Experiment ▸ Store Latest Run</strong>, so that the next drop does not overwrite this one. Repeat steps 5–9 (storing each run before the next drop) until you have at least <strong>six</strong> good drops, all from the same release height.</li>
+      <li>Choose one good drop for the hand check. Copy its eight blocking times from the Logger Pro data table into the hand-check table (section 7). Save your Logger Pro file.</li>
+    </ol>
+    <div class="vlab-panel" data-lab-table="drops" data-report-title="Results from Logger Pro"></div>
+    <div class="vlab-panel measure-panel">
+      <h3>g from the gradients</h3>
+      <label class="vlab-field">Smallest gradient / m s⁻² <input data-save="g-min" inputmode="decimal"></label>
+      <label class="vlab-field">Largest gradient / m s⁻² <input data-save="g-max" inputmode="decimal"></label>
+      <label class="vlab-field">Mean gradient <i>g</i> / m s⁻² <input data-save="g-mean" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty Δ<i>g</i> = (max − min)/2 / m s⁻² <input data-save="g-unc" inputmode="decimal"></label>
+    </div>
+
+    <h2 id="handcheck">7. Hand check of one drop</h2>
+    <p>Use the eight blocking times of the drop you chose. They give seven gaps: gap 1 runs from the 1st blocking time to the 2nd, gap 2 from the 2nd to the 3rd, and so on. For each gap, fill in:</p>
+    <ul>
+      <li>$\Delta t$ = (time at end of gap) − (time at start of gap);</li>
+      <li>the <strong>mid-time</strong>, the mean of the start and end times;</li>
+      <li>$v = d/\Delta t$, with $d$ your mean band spacing <strong>in metres</strong>;</li>
+      <li>$\Delta v = v \times \Delta d/d$.</li>
+    </ul>
+    <p>Each speed is calculated from <strong>one</strong> gap, so it has the same percentage uncertainty as one band spacing: $\Delta v/v = \Delta d/d$ = 0.1 cm / 5.0 cm, about 2 %. (The much smaller 0.3 % from measuring across all seven gaps tells you how well the <strong>average</strong> spacing is known, so it only checks Logger Pro's 5.00 cm; it is not the uncertainty of an individual gap.)</p>
+    <div class="vlab-panel" data-lab-table="hand" data-report-title="Hand check of one drop"></div>
+
+    <h2 id="graph">8. Your graph</h2>
+    <p>The graph updates as you type. It starts with <strong>velocity $v$</strong> on the vertical axis and <strong>mid-time</strong> on the horizontal axis, so the gradient of the line of best fit is your hand-check value of $g$ and the y-intercept is $u$.</p>
+    <p class="vlab-small">The graph tool uses one uncertainty for every point on each axis. Every speed has the same <strong>percentage</strong> uncertainty, so type it as a percentage in the vertical axis's uncertainty box (for example <strong>2%</strong>): each point then gets its own bar, Δ<i>v</i> = <i>v</i> × Δ<i>d</i>/<i>d</i>. (Typing your largest Δ<i>v</i> instead is a cautious choice.) Leave the horizontal axis's box empty, and say in your report why the time uncertainty bars are left out. Then tick <strong>Steepest and shallowest lines</strong>: they pass through every uncertainty bar, and Δ<i>g</i> = (<i>g</i><sub>max</sub> − <i>g</i><sub>min</sub>)/2 is half the difference between their gradients. Press <strong>Add this graph to my report</strong> to keep it.</p>
+    <div class="dgraph" data-lab-graph="hand"></div>
+
+    <h2 id="analysis">9. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Describe the shapes of your displacement–time and velocity–time graphs. Use the two data-booklet equations in the Background to explain why one is a parabola and the other a straight line. What does the acceleration–time graph show?</label><textarea id="a1" data-save="a1" rows="4"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> State your value of <i>g</i> ± Δ<i>g</i> from the six gradients, with its percentage uncertainty. Does it agree with 9.8 m s⁻² within your uncertainty?</label><textarea id="a2" data-save="a2" rows="3"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> Compare your hand-check value of <i>g</i> (with its uncertainty from the steepest and shallowest lines) with Logger Pro's gradient for the same drop. Do they agree? How many velocity points did Logger Pro give compared with your seven, and what does that suggest about how it calculates them? Explain what would go wrong in your hand check if you plotted each speed at the start of its gap instead of at the mid-time.</label><textarea id="a3" data-save="a3" rows="4"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> What does the intercept of your velocity–time graph represent? The fence starts at rest, so in <i>v</i>² = <i>u</i>² + 2<i>as</i> take <i>u</i> = 0 at release and <i>v</i> = your mean intercept (the speed when the first band reaches the beam). Estimate <i>s</i>, how far above the beam the first band was when you released the fence. Is this consistent with how you held it?</label><textarea id="a4" data-save="a4" rows="4"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Compare the mean of the acceleration–time graph with the gradient of the velocity–time graph for the same drop. Why are the acceleration points much more scattered than the velocity points?</label><textarea id="a5" data-save="a5" rows="3"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Use your band-spacing measurements: is the band spacing 5.00 cm within your uncertainty? Suppose the true spacing were 4.96 cm while Logger Pro used 5.00 cm. By what percentage, and in which direction, would every speed and your value of <i>g</i> be wrong? Why would repeating the drop never reveal this?</label><textarea id="a6" data-save="a6" rows="4"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> Suppose the fence leans 5° from the vertical, towards the side of the gate the beam comes from, as it falls. The band edges stay horizontal, so the vertical distance the fence falls between one band edge and the next is <i>d</i> cos 5°, but Logger Pro still uses <i>d</i>. Predict whether <i>g</i> comes out too high or too low, and estimate the percentage effect.</label><textarea id="a7" data-save="a7" rows="3"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> Explain how air resistance would affect your value of <i>g</i>, and how it would change the shape of the velocity–time graph. Why is its effect small in this experiment?</label><textarea id="a8" data-save="a8" rows="3"></textarea></div>
+      <div class="answer"><label for="a9"><strong>9.</strong> Suggest two realistic improvements to this experiment, and say which uncertainty or systematic effect each one reduces.</label><textarea id="a9" data-save="a9" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="extension">10. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> Air resistance: tape a small horizontal card "sail" to the top of the fence, above the last band, small enough to pass through the gate's opening with at least 1 cm to spare on each side. (At the bottom, the card would block the beam before the first band and spoil the first gap.) The card blocks the beam after the last band, so delete that extra point. Predict, then measure, how the gradient and the shape of the velocity–time graph change, and try a larger card. The A.1 guide asks only for the qualitative effect of fluid resistance (on velocity, acceleration and terminal speed), so describe and explain what you see; you are not expected to calculate the drag force.</label><textarea id="e1" data-save="e1" rows="4"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Release height: drop the fence with its first band about 2 cm, 10 cm, 20 cm and 30 cm above the beam (three drops each). Which changes, the gradient or the intercept? Plot the square of the intercept against the release height: what should the gradient of this graph be? Suggest why releasing from much higher makes the experiment harder.</label><textarea id="e2" data-save="e2" rows="4"></textarea></div>
+      <div class="answer"><label for="e3"><strong>E3.</strong> Video analysis (Tool 2): film a dense ball (for example a tennis or golf ball) falling about 1.5 m in front of a vertical metre rule, using a phone on a tripod at 60 frames per second or more (slow motion is better), level with the middle of the fall and at least 2 m away. In Logger Pro choose Insert ▸ Movie, then enable video analysis, set the scale using the metre rule, and mark the ball's position frame by frame. Fit the displacement–time data (Analyze ▸ Curve Fit ▸ Quadratic, g = 2A) and the velocity–time data (Linear Fit). Compare this independent value of <i>g</i> and its uncertainty with your picket-fence result, and explain which method is more precise and why. Why must the ruler be in the same plane as the ball?</label><textarea id="e3" data-save="e3" rows="4"></textarea></div>
+      <div class="answer"><label for="e4"><strong>E4.</strong> The value of <i>g</i> at sea level varies from about 9.78 m s⁻² at the equator to about 9.83 m s⁻² at the poles. Is your experiment precise enough to tell the difference? What percentage uncertainty would you need?</label><textarea id="e4" data-save="e4" rows="3"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your band spacings, both tables, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

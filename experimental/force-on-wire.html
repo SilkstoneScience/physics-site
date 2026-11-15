@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: the force on a current-carrying wire · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab with a current balance: measure the force on a current-carrying wire between the poles of a magnet on a top-pan balance, and find the magnetic field strength from a graph of force against current.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/force-on-wire.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: the force on a current-carrying wire · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab with a current balance: measure the force on a current-carrying wire between the poles of a magnet on a top-pan balance, and find the magnetic field strength from a graph of force against current.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/force-on-wire.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-force-on-wire",
+    "title": "The force on a current-carrying wire",
+    "file": "Force on a wire lab",
+    "tables": {
+      "readings": {
+        "note": "One row for each current (at least six). Record each Δm with its sign. Afterwards fill in the four sizes |Δm| (the same numbers without any minus signs), their mean, Δ(Δm) = (max − min)/2 of the sizes (at least 0.01 g), F = mean |Δm| × 9.8 and ΔF = Δ(Δm) × 9.8.",
+        "csvFile": "force-on-wire.csv",
+        "x": 1, "y": 13,
+        "cols": [
+          { "html": "<i>I</i> / A", "csv": "current I / A", "aria": "current in amperes", "signed": true },
+          { "html": "Δ<i>I</i> / A", "csv": "uncertainty in I / A", "aria": "uncertainty in the current in amperes" },
+          { "html": "Δ<i>m</i> forward 1 / g", "csv": "Δm forward 1 / g", "aria": "first forward change in balance reading, with its sign, in grams", "signed": true },
+          { "html": "Δ<i>m</i> forward 2 / g", "csv": "Δm forward 2 / g", "aria": "second forward change in balance reading, with its sign, in grams", "signed": true },
+          { "html": "Δ<i>m</i> reversed 1 / g", "csv": "Δm reversed 1 / g", "aria": "first reversed change in balance reading, with its sign, in grams", "signed": true },
+          { "html": "Δ<i>m</i> reversed 2 / g", "csv": "Δm reversed 2 / g", "aria": "second reversed change in balance reading, with its sign, in grams", "signed": true },
+          { "html": "|Δ<i>m</i>| forward 1 / g", "csv": "size |Δm| forward 1 / g", "aria": "size of the first forward change in grams" },
+          { "html": "|Δ<i>m</i>| forward 2 / g", "csv": "size |Δm| forward 2 / g", "aria": "size of the second forward change in grams" },
+          { "html": "|Δ<i>m</i>| reversed 1 / g", "csv": "size |Δm| reversed 1 / g", "aria": "size of the first reversed change in grams" },
+          { "html": "|Δ<i>m</i>| reversed 2 / g", "csv": "size |Δm| reversed 2 / g", "aria": "size of the second reversed change in grams" },
+          { "html": "Mean |Δ<i>m</i>| / g", "csv": "mean |Δm| / g", "aria": "mean of the four sizes in grams" },
+          { "html": "Δ(Δ<i>m</i>) / g", "csv": "uncertainty in mean |Δm| / g", "aria": "uncertainty in the mean size, half the range, in grams" },
+          { "html": "<i>F</i> / mN", "csv": "force F / mN", "aria": "force on the wire in millinewtons" },
+          { "html": "Δ<i>F</i> / mN", "csv": "uncertainty in F / mN", "aria": "uncertainty in the force in millinewtons" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › The force on a current-carrying wire</p>
+    <h1>The force on a current-carrying wire</h1>
+    <p class="lead">A lab with a current balance: a stiff wire is clamped between the poles of a magnet that stands on a top-pan balance, and the change in the balance reading measures the tiny magnetic force on the wire. <span class="tag">D.3 Motion in electromagnetic fields</span></p>
+    <p><strong>Aim:</strong> to measure the force on a current-carrying wire in a magnetic field for a range of currents, using a top-pan balance; to use a graph of force $F$ against current $I$ to test $F \propto I$ and to determine the magnetic field strength $B$ between the poles, with its uncertainty; to check that reversing the current reverses the force, using the left-hand rule to predict its direction; and to evaluate what the "length of wire in the field" really is, and how heating affects the readings.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#setup">Setting up</a></li>
+        <li><a href="#collect">Collecting data</a></li>
+        <li><a href="#graph">Your graph</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Measuring a very small force indirectly, as a change in a balance reading, and converting it with $F = \Delta m\, g$.</li>
+      <li>Using reversed readings to cancel a systematic effect (drift caused by heating).</li>
+      <li>Deciding a realistic uncertainty for a length that is not sharply defined (the length of wire that is really in the field).</li>
+      <li>Using a straight-line graph through the origin to find a physical quantity from its gradient.</li>
+      <li>Finding the uncertainty in a gradient with steepest and shallowest lines, and combining percentage uncertainties.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring mass, length and current (Tool 1); processing data with a graph (Tool 2); propagating uncertainties and finding the uncertainty in a gradient (Tool 3); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="background">2. Background</h2>
+    <p>A wire carrying a current in a magnetic field experiences a force. The data booklet gives its size as</p>
+    $$F = BIL\sin\theta$$
+    <p>where $B$ is the <strong>magnetic field strength</strong> (in tesla, T), $I$ is the current, $L$ is the length of wire inside the field and $\theta$ is the angle between the wire and the field. In this lab the wire is perpendicular to the field, so $\theta = 90°$, $\sin\theta = 1$ and</p>
+    $$F = BIL$$
+    <p>The force is perpendicular to both the wire and the field. Its direction is given by the left-hand rule: first finger along the field, second finger along the current, thumb along the force. Reversing the current reverses the force. (See <a href="../themes/d3.html#wire">D.3 The force on a current-carrying wire</a>.)</p>
+    <p>This force is far too small to see directly, so we use a <strong>current balance</strong>. The magnet sits on a top-pan balance, and the wire is clamped rigidly so that it passes between the poles <strong>without touching</strong> the magnet.</p>
+    <p>By <strong>Newton's third law</strong>, if the field pushes the wire with a force $F$, the wire pushes the magnet with an equal and opposite force. The clamp stops the wire from moving, but the magnet is free to press harder on (or lift off) the balance, so the balance reading changes by $\Delta m$. The force is</p>
+    $$F = \Delta m\, g$$
+    <p>with $\Delta m$ in kg and $g = 9.8\ \text{m s}^{-2}$.</p>
+    <p>If $B$ and $L$ stay constant, $F$ is directly proportional to $I$. A graph of $F$ (vertical) against $I$ (horizontal) should be a <strong>straight line through the origin</strong> with <strong>gradient = $BL$</strong>, so</p>
+    $$B = \frac{\text{gradient}}{L}$$
+    <p>The forces are tiny. A school magnet has a field of a few hundredths of a tesla between its poles, and its pole faces are a few centimetres long. With $B = 0.04$ T and $L = 0.05$ m, a current of 1 A gives $F = 2$ mN, which changes the balance reading by only about 0.2 g. A balance that reads to 0.01 g is essential.</p>
+
+    <h2 id="equipment">3. Equipment and safety</h2>
+    <ul>
+      <li>Top-pan digital balance reading to 0.01 g</li>
+      <li>U-shaped magnet: a horseshoe magnet, or a pair of Magnadur magnets on a steel yoke</li>
+      <li>Wooden block or upturned plastic beaker, to raise the magnet a few centimetres above the pan</li>
+      <li>Stiff straight copper wire or rigid copper rod (bare, about 1.5–3 mm diameter, about 30 cm long)</li>
+      <li>Clamp stand(s) with an insulated or wooden clamp; an aluminium stand is best (keep steel away from the magnet)</li>
+      <li>Low-voltage d.c. supply able to give at least 4 A (with a current limit if it has one)</li>
+      <li>Rheostat (variable resistor): check its rating before planning 4 A, since many school rheostats take only 1–2.5 A; if so, stop at its rated current</li>
+      <li>Ammeter, or a digital multimeter on its 10 A range (check the meter's time limit on this range: many allow only 10–30 s, then need a rest)</li>
+      <li>Switch (or a reversing switch, if available) and thick connecting leads with crocodile clips</li>
+      <li>Ruler or vernier calipers, to measure the pole faces</li>
+      <li>Optional (Extension): a second identical magnet; a compass; Vernier Magnetic Field Sensor with the interface and Logger Pro 3</li>
+    </ul>
+    <div class="notice">
+      <p style="margin:0"><strong>Safety:</strong></p>
+      <ul style="margin-bottom:0">
+        <li>The rod has a very small resistance, so the <strong>rheostat must always be in the circuit</strong> to limit the current. Without it the supply is almost short-circuited.</li>
+        <li>At several amperes the rod, the leads and especially the rheostat get <strong>hot</strong>. Close the switch only for the few seconds needed to take a reading, and do not touch the rod or the rheostat's coil straight after a reading. Keep the current below the largest value the rheostat is made for, and within the ammeter's range and time limit.</li>
+        <li>Strong magnets can pinch fingers and snap onto steel objects. Keep phones, bank cards and watches away from them. Anyone with a pacemaker or other medical implant must not handle the magnets.</li>
+        <li>Use only a low-voltage supply. Switch off before changing any connection.</li>
+      </ul>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> The balance reading decreases when the current is switched on. Is the force on the wire upwards or downwards? Explain your answer using Newton's third law.</label><textarea id="pre1" data-save="pre1" rows="3"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> In a trial run, a wire runs through a field region 4.0 cm long. With no current the balance reads 152.36 g; with a current of 3.2 A it reads 151.88 g. Calculate the force on the wire and the magnetic field strength between the poles.</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> A magnet has <i>B</i> = 0.04 T over a length of 5.0 cm. Calculate the change in balance reading at 0.5 A and at 4.0 A. For a balance that reads to 0.01 g, estimate the percentage uncertainty in each change. What does this tell you about the smallest current worth using?</label><textarea id="pre3" data-save="pre3" rows="4"></textarea></div>
+      <div class="answer"><label for="pre4"><strong>P4.</strong> A 6.0 V supply drives 3.0 A through the circuit, and almost all the resistance is in the rheostat. Calculate the resistance of the rheostat at this setting and the power it dissipates. Why must you keep each reading short?</label><textarea id="pre4" data-save="pre4" rows="3"></textarea></div>
+      <div class="answer"><label for="pre5"><strong>P5.</strong> Sketch (on paper) the graph of <i>F</i> against <i>I</i> that you expect, including currents in the reversed direction (shown as negative <i>I</i>). Describe your sketch here. What is the gradient equal to?</label><textarea id="pre5" data-save="pre5" rows="3"></textarea></div>
+    </div>
+
+    <h3 id="uncertainties">Uncertainties</h3>
+    <p><strong>Change in balance reading $\Delta m$:</strong> a single reading from the balance is ± 0.01 g (the smallest digit). But the reading also flickers and drifts, because the rod warms and heats the air around the magnet.</p>
+    <p>At each current you will take <strong>four</strong> readings (two with the current one way, two reversed). Use the half range of their sizes, $\frac{\text{max} - \text{min}}{2}$, as the uncertainty, and never less than 0.01 g. The uncertainty in the force is then $\Delta F = g \times \Delta(\Delta m)$; 0.01 g corresponds to about 0.1 mN.</p>
+    <p><strong>Current $I$:</strong> a digital ammeter is ± its smallest digit (often 0.01 A on the 10 A range). The current also falls slightly while the switch is closed, as the rod and rheostat heat up and their resistance rises. If the reading changes while you watch, use the half range of what you see as the uncertainty.</p>
+    <p><strong>Length $L$:</strong> measure the length of the pole faces <strong>along the direction of the wire</strong> with a ruler (± 0.1 cm for two readings, or better with calipers). But the field does not stop sharply at the edges of the poles: it spreads out a little beyond them, so the wire feels a force over a slightly longer length. This effect is much larger than the ruler's resolution.</p>
+    <p>A realistic uncertainty is about <strong>± 10 %</strong> of the pole length (for example $L = (5.0 \pm 0.5)$ cm). For a horseshoe magnet with narrow, rounded poles, the effective length is even less certain.</p>
+    <p>Quote each uncertainty to 1 significant figure (the usual choice), or to 2 significant figures when the uncertainty itself is known precisely, and round the value to the same decimal place. Every point on your graph gets uncertainty bars. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <h2 id="setup">5. Setting up</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 300" role="img" aria-labelledby="fowFrontT">
+        <title id="fowFrontT">Front view, looking along the rod. A top-pan balance stands on the bench. On its pan is a wooden block, and on the block a U-shaped steel yoke with its two arms pointing upwards. A flat magnet slab is fixed to the inside face of each arm: the north pole N on the left and the south pole S on the right. The magnetic field B points horizontally across the gap from N to S. The rod, seen end-on as a small circle, is in the middle of the gap and touches nothing.</title>
+        <line class="axis" x1="0" y1="294" x2="360" y2="294"/>
+        <rect class="axis" x="60" y="252" width="240" height="42" rx="4" style="fill:var(--surface)"/>
+        <rect class="axis thin" x="222" y="262" width="62" height="20" rx="2" style="fill:var(--surface)"/>
+        <text x="76" y="279" font-size="12">balance</text>
+        <rect class="axis" x="100" y="244" width="160" height="8" style="fill:var(--surface)"/>
+        <rect class="axis" x="130" y="214" width="100" height="30" style="fill:var(--surface)"/>
+        <text x="180" y="236" font-size="12" text-anchor="middle">block</text>
+        <path class="axis" d="M100 70 V214 H260 V70 H248 V202 H112 V70 Z" style="fill:var(--surface)"/>
+        <rect class="axis" x="112" y="84" width="20" height="100" style="fill:var(--surface)"/>
+        <rect class="axis" x="228" y="84" width="20" height="100" style="fill:var(--surface)"/>
+        <text x="122" y="140" font-size="12" text-anchor="middle" font-weight="600">N</text>
+        <text x="238" y="140" font-size="12" text-anchor="middle" font-weight="600">S</text>
+        <line class="l1 thin" x1="138" y1="102" x2="212" y2="102"/>
+        <path d="M222 102 L211 96 L211 108 z" style="fill:var(--accent)"/>
+        <text class="t1" x="180" y="94" font-size="12" text-anchor="middle" font-style="italic">B</text>
+        <circle class="l3" cx="180" cy="134" r="8" style="fill:var(--surface)"/>
+        <text x="180" y="172" font-size="12" text-anchor="middle">rod</text>
+        <text x="268" y="140" font-size="12">magnet</text>
+      </svg>
+      <figcaption>Front view, looking along the rod. The magnet (here a steel yoke with a magnet slab on each arm) stands on a block on the balance pan. The <span class="key-1">magnetic field <i>B</i></span> runs horizontally across the gap from N to S. The rod, seen end-on, passes through the middle of the gap, perpendicular to <i>B</i>, and touches nothing. Not to scale.</figcaption>
+    </figure>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 280" role="img" aria-labelledby="fowTopT">
+        <title id="fowTopT">Top view, looking down on the magnet. The N and S pole faces are on the left and right of the gap, and the field B points across the gap from N to S. The rod runs straight across the gap from the top of the picture to the bottom, perpendicular to the field, held by a clamp near each end. A double-headed arrow beside the pole faces marks L, the length of the pole faces along the rod. Leads from both ends of the rod run away to the right, to the circuit.</title>
+        <rect class="axis" x="106" y="90" width="148" height="100" style="fill:var(--surface)"/>
+        <rect class="axis" x="120" y="90" width="30" height="100" style="fill:var(--surface)"/>
+        <rect class="axis" x="210" y="90" width="30" height="100" style="fill:var(--surface)"/>
+        <text x="135" y="146" font-size="12" text-anchor="middle" font-weight="600">N</text>
+        <text x="225" y="146" font-size="12" text-anchor="middle" font-weight="600">S</text>
+        <line class="l1 thin" x1="154" y1="152" x2="198" y2="152"/>
+        <path d="M207 152 L197 146 L197 158 z" style="fill:var(--accent)"/>
+        <text class="t1" x="164" y="132" font-size="12" text-anchor="middle" font-style="italic">B</text>
+        <line class="l3" x1="180" y1="16" x2="180" y2="264"/>
+        <rect class="axis" x="170" y="44" width="20" height="14" style="fill:var(--surface)"/>
+        <rect class="axis" x="170" y="222" width="20" height="14" style="fill:var(--surface)"/>
+        <text x="162" y="56" font-size="12" text-anchor="end">clamp</text>
+        <text x="162" y="234" font-size="12" text-anchor="end">clamp</text>
+        <text x="190" y="82" font-size="12">rod</text>
+        <path class="axis thin" d="M180 16 H320 V104" style="fill:none"/>
+        <path class="axis thin" d="M180 264 H320 V176" style="fill:none"/>
+        <text x="354" y="146" font-size="12" text-anchor="end">circuit</text>
+        <line class="axis thin dash" x1="104" y1="90" x2="78" y2="90"/>
+        <line class="axis thin dash" x1="104" y1="190" x2="78" y2="190"/>
+        <line class="l2 thin" x1="88" y1="100" x2="88" y2="180"/>
+        <path d="M88 91 L83 101 L93 101 z" style="fill:var(--theme-b)"/>
+        <path d="M88 189 L83 179 L93 179 z" style="fill:var(--theme-b)"/>
+        <text class="t2" x="74" y="146" font-size="12" text-anchor="end" font-style="italic">L</text>
+      </svg>
+      <figcaption>Top view. The rod runs across the gap, perpendicular to the <span class="key-1">field <i>B</i></span>, held by a clamp stand near each end (the stands stand on the bench, not on the balance). The leads run straight away from the magnet to the circuit. <span class="key-2"><i>L</i></span> is the length of the pole faces along the rod. Not to scale.</figcaption>
+    </figure>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 206" role="img" aria-labelledby="fowCircT">
+        <title id="fowCircT">Circuit diagram: a d.c. supply, a switch, an ammeter, a rheostat and the rod in the magnetic field, all connected in series in one loop.</title>
+        <path class="axis" d="M96 40 H40 V160 H70" style="fill:none"/>
+        <path class="axis" d="M104 40 H205" style="fill:none"/>
+        <line class="axis" x1="96" y1="25" x2="96" y2="55" style="stroke-width:2.5"/>
+        <line class="axis" x1="104" y1="32" x2="104" y2="48" style="stroke-width:4"/>
+        <text x="100" y="18" font-size="12" text-anchor="middle">d.c. supply</text>
+        <circle cx="206" cy="40" r="3" style="fill:var(--text)"/>
+        <circle cx="236" cy="40" r="3" style="fill:var(--text)"/>
+        <line class="axis" x1="206" y1="40" x2="232" y2="26"/>
+        <text x="221" y="18" font-size="12" text-anchor="middle">switch</text>
+        <path class="axis" d="M236 40 H320 V86" style="fill:none"/>
+        <circle class="axis" cx="320" cy="100" r="14" style="fill:var(--surface)"/>
+        <text x="320" y="105" font-size="12" text-anchor="middle" font-weight="600">A</text>
+        <text x="298" y="105" font-size="12" text-anchor="end">ammeter</text>
+        <path class="axis" d="M320 114 V160 H280" style="fill:none"/>
+        <rect class="axis" x="220" y="152" width="60" height="16" style="fill:var(--surface)"/>
+        <line class="axis" x1="230" y1="170" x2="270" y2="144"/>
+        <path d="M276 139 L265 142 L271 150 z" style="fill:var(--text)"/>
+        <text x="250" y="200" font-size="12" text-anchor="middle">rheostat</text>
+        <path class="axis" d="M220 160 H150" style="fill:none"/>
+        <line class="l2" x1="70" y1="160" x2="150" y2="160" style="stroke-width:5"/>
+        <text class="t2" x="110" y="200" font-size="12" text-anchor="middle">rod in field</text>
+      </svg>
+      <figcaption>The circuit: supply, switch, ammeter (a multimeter on its 10 A range), rheostat and the <span class="key-2">rod in the field</span>, all in series. The rheostat must always be in the circuit.</figcaption>
+    </figure>
+    <ol>
+      <li>Place the wooden block on the balance pan and the magnet on top of it, poles upwards. (Raising the magnet stops its field from disturbing the balance's own mechanism.) Make sure the magnet is in the middle of the pan and cannot slide.</li>
+      <li>Measure the length <i>L</i> of the pole faces along the direction the wire will run, and the width of the gap between the poles. Record them below.</li>
+      <li>Clamp the rod horizontally so that it passes through the <strong>middle</strong> of the gap, <strong>perpendicular</strong> to the field (along the gap, parallel to the pole faces), with its middle section centred over the pole faces. It must not touch the magnet, the block or the balance at any point. Check by gently tapping the bench: the balance reading should settle back to the same value.</li>
+      <li>Connect the circuit in series: supply, switch, rheostat, ammeter and the rod. Run the leads straight away from the magnet so that they are not in its field. Set the rheostat to its <strong>maximum</strong> resistance and the supply to about 6 V. Ask your teacher to check the circuit.</li>
+      <li>With the switch open, press <strong>Tare</strong> (or Zero) so that the balance reads 0.00 g with the magnet and block on it.</li>
+      <li>Use the left-hand rule to predict whether the balance reading should go up or down for your current direction. Close the switch briefly at a small current and check your prediction. Record the direction of the current (for example "left to right") as the <strong>forward</strong> direction.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>The magnet and the balance (<i>g</i> = 9.8 m s⁻²)</h3>
+      <label class="vlab-field">Pole-face length along the wire <i>L</i> / cm <input data-save="L" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty Δ<i>L</i> / cm (about 10 % of <i>L</i>), and why you chose it <input data-save="dL"></label>
+      <label class="vlab-field">Gap between the poles / cm <input data-save="gap" inputmode="decimal"></label>
+      <label class="vlab-field">Resolution of the balance / g <input data-save="bal-res" inputmode="decimal"></label>
+      <label class="vlab-field">Forward current direction (for example "left to right") <input data-save="fwd-dir"></label>
+      <label class="vlab-field">Predicted change in the reading for the forward current (up or down), and what you saw <input data-save="predict"></label>
+    </div>
+
+    <h2 id="collect">6. Collecting data</h2>
+    <ol start="7">
+      <li>Adjust the rheostat to give a current of about 0.5 A. Close the switch, wait until the reading settles (a few seconds), then read the ammeter and the change in balance reading <strong>at the same moment</strong> (one partner reads each). Open the switch. Record both in the table, with the sign of Δ<i>m</i>.</li>
+      <li>Wait about 20 s with the switch open. Check that the balance has returned to 0.00 g; if it has not, Tare it again before the next reading. Repeat step 7 for a second forward reading.</li>
+      <li><strong>Reverse the current</strong>: switch off and swap the two leads at the supply terminals (or use the reversing switch). Take two readings in the reversed direction in the same way, adjusting the rheostat so that the ammeter shows the same current as before. Note that Δ<i>m</i> now changes the other way.</li>
+      <li>Repeat steps 7–9 for at least <strong>six</strong> currents spread evenly from about 0.5 A to about 4 A (or the largest current your rheostat and supply are rated for). Take the currents in a mixed order, not always increasing, so that the slow warming of the apparatus does not quietly bend your line.</li>
+      <li>At the end, switch off and leave everything to cool. Do not touch the rod or the rheostat until they have cooled.</li>
+    </ol>
+    <p>After the lab, fill in the rest of each row:</p>
+    <ul>
+      <li>the four <strong>sizes</strong> |Δ<i>m</i>|: the same four numbers without any minus signs (use only these from now on);</li>
+      <li>the <strong>mean</strong> |Δ<i>m</i>| of the four sizes, and its uncertainty Δ(Δ<i>m</i>) = (max − min)/2 of the sizes, but at least 0.01 g;</li>
+      <li>the force in mN: $F$ = mean |Δ<i>m</i>| (in g) × 9.8 gives mN directly, because $1\ \text{g} \times 9.8\ \text{m s}^{-2} = 9.8 \times 10^{-3}$ N;</li>
+      <li>in the same way, Δ<i>F</i> = Δ(Δ<i>m</i>) × 9.8.</li>
+    </ul>
+    <div class="vlab-panel" data-lab-table="readings" data-report-title="Change in balance reading and force"></div>
+
+    <h2 id="graph">7. Your graph</h2>
+    <p>The graph updates as you type. It starts with <strong>force <i>F</i></strong> on the vertical axis and <strong>current <i>I</i></strong> on the horizontal axis, so the gradient of the line is $BL$. Fill in the <i>F</i> column first: the graph uses your calculated forces, not the raw readings.</p>
+    <p class="vlab-small">The graph tool uses one uncertainty for every point on each axis, so type the <strong>largest</strong> value from your Δ<i>F</i> column in the vertical axis's uncertainty box and the largest from your Δ<i>I</i> column in the horizontal axis's box (a cautious choice). Keep <strong>Start the axes at zero</strong> ticked, so you can see whether the line passes through the origin. The line is not forced through the origin: whether the y-intercept is zero within its uncertainty is part of the test of $F \propto I$. Then tick <strong>Steepest and shallowest lines</strong>: they pass through every uncertainty bar, and the tool gives the gradient ± its uncertainty and the y-intercept ± its uncertainty. Press <strong>Add this graph to my report</strong> to keep it.</p>
+    <div class="dgraph" data-lab-graph="readings"></div>
+    <p>The tool gives the gradient in mN / A (the same as mN A⁻¹). Convert it to $\text{N A}^{-1}$ (divide by 1000), then calculate $B = \text{gradient}/L$ with $L$ in metres. The percentage uncertainty in $B$ is the percentage uncertainty in the gradient plus the percentage uncertainty in $L$.</p>
+    <div class="vlab-panel measure-panel">
+      <h3>Magnetic field strength</h3>
+      <label class="vlab-field">Gradient / mN A⁻¹ <input data-save="grad" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in the gradient / mN A⁻¹ <input data-save="dgrad" inputmode="decimal"></label>
+      <label class="vlab-field">y-intercept ± its uncertainty / mN <input data-save="intercept"></label>
+      <label class="vlab-field">Gradient / N A⁻¹ <input data-save="grad-si" inputmode="decimal"></label>
+      <label class="vlab-field">Pole-face length <i>L</i> / m <input data-save="L-m" inputmode="decimal"></label>
+      <label class="vlab-field">Percentage uncertainty in the gradient / % <input data-save="pc-grad" inputmode="decimal"></label>
+      <label class="vlab-field">Percentage uncertainty in <i>L</i> / % <input data-save="pc-L" inputmode="decimal"></label>
+      <label class="vlab-field">Magnetic field strength <i>B</i> = gradient/<i>L</i> / T <input data-save="B" inputmode="decimal"></label>
+      <label class="vlab-field">Percentage uncertainty in <i>B</i> / % <input data-save="pc-B" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty Δ<i>B</i> / T <input data-save="dB" inputmode="decimal"></label>
+    </div>
+
+    <h2 id="analysis">8. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Is your graph a straight line through the origin, within its uncertainty bars? (Is zero inside the range of the y-intercept?) What does this tell you about the relationship between <i>F</i> and <i>I</i>, and about whether <i>B</i> and <i>L</i> stayed constant?</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> State your magnetic field strength <i>B</i> ± Δ<i>B</i>, with its unit and to the correct significant figures. Which contributes more to its uncertainty: the gradient or the length <i>L</i>?</label><textarea id="a2" data-save="a2" rows="3"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> Show that the unit of the gradient, N A⁻¹, is equivalent to T m.</label><textarea id="a3" data-save="a3" rows="2"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> Compare the sizes of your forward and reversed readings at the largest current. Suppose heating adds the same small change δ to the balance reading whichever way the current flows. Show that averaging the sizes of a forward and a reversed reading removes δ, and explain why this is better than using forward readings only.</label><textarea id="a4" data-save="a4" rows="4"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> The field spreads beyond the edges of the pole faces. Explain whether dividing your gradient by the pole-face length gives a value of <i>B</i> that is too large or too small compared with the field in the middle of the gap.</label><textarea id="a5" data-save="a5" rows="3"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> The Earth's magnetic field is about 5 × 10⁻⁵ T. Compare it with your value of <i>B</i>. Explain also why the force of the Earth's field on the rod would not show up on the balance at all.</label><textarea id="a6" data-save="a6" rows="3"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> The leads connecting the rod also carry the current. Explain how they could affect your readings if they ran close to the magnet, and how you avoided this.</label><textarea id="a7" data-save="a7" rows="3"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> Suggest two realistic improvements to this experiment, and say which uncertainty or systematic effect each one reduces.</label><textarea id="a8" data-save="a8" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="extension">9. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> Changing <i>L</i>: place a second identical magnet beside the first on the block, touching it, with N poles on the same side, so that the field region along the wire is about twice as long. Predict how the gradient should change, then measure it. Does doubling the magnet exactly double the gradient? Why might it not?</label><textarea id="e1" data-save="e1" rows="4"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Direction of the force: use a compass to identify the N pole of your magnet. For your forward current direction, use the left-hand rule to predict whether the force on the wire is upwards or downwards, and so whether the balance reading should rise or fall. Did your result in step 6 agree?</label><textarea id="e2" data-save="e2" rows="3"></textarea></div>
+      <div class="answer"><label for="e3"><strong>E3.</strong> How quickly does the field die away? Connect the Vernier Magnetic Field Sensor to the interface and start Logger Pro 3. Once the sensor is detected, set the switch on the sensor to its higher range, hold it far from the magnet and choose Experiment ▸ Zero. The sensor saturates at a few millitesla, so it cannot read the field between the poles or within about 1–2 cm of their edges, which is exactly where the effective length is decided. Instead, starting where the reading first drops below the top of the range and moving away along the line of the wire, record the field every 0.5 cm, with the face of the sensor that has the white dot towards the magnet. Describe qualitatively how quickly the field dies away well outside the gap. (If the school has a teslameter or a high-range Hall probe, measure the field along the whole wire instead: that could properly test whether ± 10 % was a fair uncertainty for <i>L</i>.)</label><textarea id="e3" data-save="e3" rows="4"></textarea></div>
+      <div class="answer"><label for="e4"><strong>E4.</strong> Changing the gap: if your magnet is a Magnadur yoke, the slabs can be moved closer together or further apart. Predict how a narrower gap affects <i>B</i>, then measure the gradient for two or three gap widths.</label><textarea id="e4" data-save="e4" rows="4"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your magnet measurements, your readings table, the graph you added, your value of <i>B</i> and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
