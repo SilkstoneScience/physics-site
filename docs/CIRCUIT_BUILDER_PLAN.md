@@ -1,6 +1,6 @@
 # Circuit builder: plan and decisions
 
-Status: **plan approved by the teacher (15 November 2026). Stages 1–5 built; stages 3 and 4 checked by the teacher. Stage 5 (Challenge Mode, 10 challenges, Playwright) has had its independent review (all 11 points acted on) and waits for the teacher's check. The page is `noindex` and not linked from anywhere until stage 6.**
+Status: **all six stages built (15 November 2026); stages 3–5 checked by the teacher. The page is public and linked from the Practicals page and B.5.**
 
 A circuit diagram editor with two modes, **Free Build** and **Challenge Mode**, that simulates DC circuits accurately: series and parallel networks, internal resistance, meters and variable resistors.
 
@@ -178,8 +178,8 @@ Challenges live in `experimental/circuits/challenges.json` with permanent ids (`
 2. Engine and netlist with full Node tests. **Done** (report to the teacher).
 3. Free Build editor with interface tests; teacher checks in the preview. **Done** (teacher's changes made: rotation both ways, take out, drop into a wire, labels, what you see is what you get).
 4. Show the working, share links, board mode, saving. **Done.**
-5. Challenge Mode and about 10 challenges; independent review; teacher's check. Playwright on GitHub. **Built and reviewed; waiting for the teacher's check. Playwright's first run happens on GitHub after the push.**
-6. Website links, then commit and push after the teacher has seen what's going up.
+5. Challenge Mode and about 10 challenges; independent review; teacher's check. Playwright on GitHub. **Done.**
+6. Website links, then commit and push after the teacher has seen what's going up. **Done:** `noindex` removed; sitemap and site search updated; a Theme B card on the Practicals page; links from B.5 `symbols` (meters; CK-B5-07), `combos` (a box with CK-B5-02, 03, 08), `divider` (CK-B5-04, 10) and `internal` (CK-B5-05, 06, 09); `data-eq-topic="B.5"` gives the page the Σ panel with the B.5 equations.
 
 ## 11. Risks and how they are handled
 
