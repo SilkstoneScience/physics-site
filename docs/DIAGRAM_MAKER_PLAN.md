@@ -271,6 +271,16 @@ adding blocks to that file and nothing else:
   a name and a picture, attachment points inside the item, no `id` or `<defs>` in the drawings).
 
 ## 8. Save-file format
+
+*Built 15 November 2026 (stage 6).* A bar under the page has "Download picture (PNG)", "Save progress", "Open saved
+file", "New diagram" (asks first; Undo brings the old one back) and a status line. Files are named
+`diagram-YYYY-MM-DD.json` / `.png`. The PNG is drawn from the page's own drawing styles with the light colours
+written in, cropped to the drawing and its key with a 24-unit margin, at 3 pixels per unit (at most 6000 pixels
+across). Opening a file (at most 2 MB) checks every value and keeps only what the page understands (item choices of
+the right kind, numbers, text up to 60 characters, links only to things in the file), so a damaged or altered file
+can't break the page; text always shows as plain text. If the browser won't store anything (e.g. a private window)
+the status line says so and suggests "Save progress".
+
 "Save progress" downloads `my-diagram.json` (a plain text file). "Open saved file" reads it back. The same data is
 auto-saved in the browser (`localStorage`, key `diagram-maker-v1`) after every change, and restored when the page
 opens again. Format:

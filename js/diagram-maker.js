@@ -420,12 +420,14 @@
     if (history.length > 200) history.shift();
     hIndex = history.length - 1;
     updateUndo();
+    autosave();
   }
   function restore(i) {
     hIndex = i;
     doc = JSON.parse(history[i]);
     sel = new Set([...sel].filter((id) => byId(id)));
     syncPageButtons(); render(); renderProps(); updateUndo();
+    autosave();
   }
   const undo = () => { if (drawing) { cancelDrawing(); return; } if (hIndex > 0) restore(hIndex - 1); };
   const redo = () => { if (hIndex < history.length - 1) restore(hIndex + 1); };
@@ -1184,12 +1186,215 @@
     if (used) e.preventDefault();
   });
 
+  // ---------------------------------------------------------------- saving and opening
+  const STORE_KEY = 'diagram-maker-v1';
+  const statusEl = document.getElementById('dm-status');
+  let msgAt = 0;   // when the last message (not "Saved…") was shown: auto-saving doesn't cover it up for a while
+  function setStatus(text, bad, routine) {
+    if (routine && Date.now() - msgAt < 8000) return;
+    if (!routine) msgAt = Date.now();
+    statusEl.textContent = text; statusEl.classList.toggle('dm-bad', !!bad);
+  }
+  const timeNow = () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  // Auto-save in this browser a moment after every change (it may be switched off, e.g. in a private window)
+  let saveTimer = 0, storeOk = true;
+  function autosave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      try {
+        if (doc.objects.length) localStorage.setItem(STORE_KEY, JSON.stringify(doc));
+        else localStorage.removeItem(STORE_KEY);
+        storeOk = true;
+        setStatus(doc.objects.length ? `Saved in this browser at ${timeNow()}.` : '', false, true);
+      } catch (err) {
+        if (storeOk) setStatus('This browser isn\'t letting the page save your diagram. Use "Save progress" to keep it.', true);
+        storeOk = false;
+      }
+    }, 400);
+  }
+  function readAutosave() {
+    try { const s = localStorage.getItem(STORE_KEY); return s ? cleanDoc(JSON.parse(s)) : null; } catch (err) { return null; }
+  }
+
+  // Check a diagram read from a file (or the browser) and keep only what the page understands.
+  // Anything else is dropped, so a damaged or altered file can't break the page or put code on it.
+  function cleanDoc(d) {
+    if (!d || typeof d !== 'object' || d.format !== 'ib-physics-diagram' || !Array.isArray(d.objects)) return null;
+    const num = (v, def = 0) => (typeof v === 'number' && isFinite(v) ? r2(v) : def);
+    const str = (v, max) => (typeof v === 'string' ? v.slice(0, max) : '');
+    const pt = (p) => (Array.isArray(p) && p.length === 2 ? [num(p[0]), num(p[1])] : null);
+    const ids = new Set(), out = blankDoc();
+    const pg = d.page || {};
+    out.page.snap = pg.snap !== false; out.page.showGrid = pg.showGrid !== false; out.page.numbered = pg.numbered === true;
+    d.objects.slice(0, 2000).forEach((o) => {
+      if (!o || typeof o !== 'object') return;
+      let id = str(o.id, 12);
+      if (!/^o\d{1,9}$/.test(id) || ids.has(id)) id = '';
+      const base = { id };
+      if (o.type === 'item') {
+        const it = D.byId[o.item], opt = {};
+        if (it) (it.options || []).forEach((op) => {   // only the item's own choices, of the right kind
+          const v = o.opt && o.opt[op.key];
+          if (op.type === 'choice') opt[op.key] = op.values.some(([val]) => val === v) ? v : op.def;
+          else opt[op.key] = typeof v === 'number' && isFinite(v) ? Math.min(op.max, Math.max(op.min, v)) : op.def;
+        });
+        Object.assign(base, { type: 'item', item: str(o.item, 60), x: num(o.x), y: num(o.y), w: Math.max(4, num(o.w, 40)), h: Math.max(4, num(o.h, 40)), rot: normAngle(num(o.rot)), flip: o.flip === true, opt });
+      } else if (o.type === 'line' && KINDS[o.kind] && Array.isArray(o.points)) {
+        const points = o.points.slice(0, 500).map(pt).filter(Boolean);
+        if (points.length < 2) return;
+        const att = points.map((p, i) => {
+          const a = Array.isArray(o.att) ? o.att[i] : null;
+          return a && typeof a.obj === 'string' && typeof a.anchor === 'string' ? { obj: str(a.obj, 12), anchor: str(a.anchor, 30) } : null;
+        });
+        Object.assign(base, { type: 'line', kind: o.kind, points, att });
+        if (o.curved === true) base.curved = true;
+        if (KINDS[o.kind].label) base.text = str(o.text, 12);
+      } else if (o.type === 'label') {
+        let to = null;
+        if (o.to && typeof o.to.obj === 'string') {
+          to = 'u' in o.to ? { obj: str(o.to.obj, 12), u: num(o.to.u, 0.5), v: num(o.to.v, 0.5) } : { obj: str(o.to.obj, 12), i: Math.max(0, Math.round(num(o.to.i))), t: num(o.to.t) };
+        }
+        Object.assign(base, { type: 'label', text: str(o.text, 60), spec: str(o.spec, 60), x: num(o.x), y: num(o.y), to, tp: to ? null : pt(o.tp), n: num(o.n, 0) });
+        if (o.leader === false) base.leader = false;
+      } else return;
+      if (base.id) ids.add(base.id);
+      out.objects.push(base);
+    });
+    // Give new ids to anything without a usable one, then drop links to things that aren't there
+    let next = out.objects.reduce((m, o) => Math.max(m, o.id ? parseInt(o.id.slice(1), 10) : 0), 0);
+    out.objects.forEach((o) => { if (!o.id) o.id = 'o' + (++next); });
+    const have = new Set(out.objects.map((o) => o.id));
+    out.objects.forEach((o) => {
+      if (o.att) o.att = o.att.map((a) => (a && have.has(a.obj) ? a : null));
+      if (o.type === 'label' && o.to && !have.has(o.to.obj)) { o.to = null; o.tp = o.tp || [o.x - 40, o.y]; }
+    });
+    return out;
+  }
+
+  function loadDoc(d) {
+    doc = d;
+    sel = new Set();
+    setTool('select');
+    syncPageButtons(); render(); renderProps(); commit();
+  }
+
+  function download(blob, name) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  }
+  const today = () => new Date().toISOString().slice(0, 10);
+
+  function saveFile() {
+    if (!doc.objects.length) { setStatus('There is nothing on the page to save yet.', true); return; }
+    const data = Object.assign({}, doc, { saved: new Date().toISOString() });
+    download(new Blob([JSON.stringify(data, null, 1)], { type: 'application/json' }), `diagram-${today()}.json`);
+    setStatus(`Saved as diagram-${today()}.json (look in your Downloads folder). Open it later with "Open saved file".`);
+  }
+
+  const fileInput = document.getElementById('dm-open');
+  fileInput.addEventListener('change', () => {
+    const f = fileInput.files && fileInput.files[0];
+    fileInput.value = '';
+    if (!f) return;
+    if (f.size > 2e6) { setStatus('That file is too big to be a saved diagram.', true); return; }
+    const reader = new FileReader();
+    reader.onload = () => {
+      let d = null;
+      try { d = cleanDoc(JSON.parse(reader.result)); } catch (err) { d = null; }
+      if (!d) { setStatus('That file isn\'t a diagram saved from this page, so it can\'t be opened.', true); return; }
+      const unknown = d.objects.filter((o) => o.type === 'item' && !D.byId[o.item]).length;
+      loadDoc(d);
+      fit();
+      setStatus(`Opened ${f.name}.` + (unknown === 1 ? ' One piece of equipment this page doesn\'t have yet is shown as a grey box.'
+        : unknown ? ` ${unknown} pieces of equipment this page doesn't have yet are shown as grey boxes.` : '') + ' Undo brings back what was there before.');
+    };
+    reader.onerror = () => setStatus('That file couldn\'t be read.', true);
+    reader.readAsText(f);
+  });
+
+  function newDiagram() {
+    if (doc.objects.length && !window.confirm('Start a new, blank diagram? (Undo brings this one back.)')) return;
+    const page = doc.page;
+    loadDoc(Object.assign(blankDoc(), { page: Object.assign(blankDoc().page, { snap: page.snap, showGrid: page.showGrid }) }));
+    setStatus('New diagram started.');
+  }
+
+  // ---------------------------------------------------------------- the PNG picture
+  // The page's own drawing rules (only those for the drawings), with the light-mode colours written in,
+  // so the picture is black on white whatever mode the screen is in.
+  const LIGHT = { '--dm-ink': '#111111', '--dm-paper': '#ffffff', '--dm-metal': '#dfe3e8', '--dm-glass': 'rgba(140, 175, 210, 0.16)', '--dm-water': '#cfe5f6', '--dm-ray': '#d32f2f', '--dm-spec': '#555555' };
+  function exportCss() {
+    let css = '';
+    [...document.styleSheets].forEach((s) => {
+      if (!s.href || !s.href.includes('diagram-maker.css')) return;
+      try { [...s.cssRules].forEach((r) => { if (r.selectorText && r.selectorText.includes('.dm-art')) css += r.cssText + '\n'; }); } catch (err) { /* not readable */ }
+    });
+    css = css.replace(/var\((--dm-[a-z]+)\)/g, (m, v) => LIGHT[v] || m);
+    return css + '.dm-hit, .dm-boxhit, .dm-linehit { display: none; }\n';
+  }
+  // The area the drawing covers, with the key, plus a margin
+  function drawingBox() {
+    const b = bbox(doc.objects), k = keyLayout();
+    if (k) {
+      const w = Math.max(...k.rows.map((r) => 26 + textWidth(r.text, KEY_SIZE) + (r.spec ? textWidth(' (' + r.spec + ')', SPEC_SIZE + 0.5) : 0)));
+      b.x1 = Math.min(b.x1, k.x); b.x2 = Math.max(b.x2, k.x + w);
+      b.y1 = Math.min(b.y1, k.y - k.rowH / 2); b.y2 = Math.max(b.y2, k.y + k.rowH * (k.rows.length - 0.5));
+    }
+    const m = 24;
+    return { x: Math.floor(b.x1 - m), y: Math.floor(b.y1 - m), w: Math.ceil(b.x2 - b.x1 + 2 * m), h: Math.ceil(b.y2 - b.y1 + 2 * m) };
+  }
+  function downloadPng() {
+    if (!doc.objects.length) { setStatus('Add some equipment to the page first.', true); return; }
+    renderObjects();
+    const box = drawingBox();
+    const scale = Math.min(3, 6000 / Math.max(box.w, box.h));   // about 3 pixels per page unit: sharp when printed
+    const W = Math.round(box.w * scale), H = Math.round(box.h * scale);
+    const svgText = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="${box.x} ${box.y} ${box.w} ${box.h}">` +
+      `<style>${exportCss()}</style><rect x="${box.x}" y="${box.y}" width="${box.w}" height="${box.h}" fill="#ffffff"/>` +
+      `<g class="dm-art">${gObjs.innerHTML}</g></svg>`;
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = W; c.height = H;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, W, H);
+      ctx.drawImage(img, 0, 0, W, H);
+      c.toBlob((blob) => {
+        if (!blob) { setStatus('Sorry, the picture couldn\'t be made in this browser.', true); return; }
+        download(blob, `diagram-${today()}.png`);
+        setStatus(`Picture saved as diagram-${today()}.png (${W} × ${H} pixels). Look in your Downloads folder.`);
+      }, 'image/png');
+    };
+    img.onerror = () => setStatus('Sorry, the picture couldn\'t be made in this browser.', true);
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgText);
+  }
+
+  app.querySelector('.dm-files').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-file]');
+    if (!b) return;
+    const f = b.dataset.file;
+    if (f === 'png') downloadPng();
+    else if (f === 'save') saveFile();
+    else if (f === 'open') fileInput.click();
+    else if (f === 'new') newDiagram();
+  });
+
   // ---------------------------------------------------------------- start
   buildBank();
+  const restored = readAutosave();
+  if (restored && restored.objects.length) doc = restored;
   syncPageButtons();
   setTool('select');
   render(); renderProps(); commit();
   fit();
+  if (restored && restored.objects.length) setStatus('Your last diagram has been opened again. "New diagram" starts a blank one.');
   let resizeTimer = 0;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);

@@ -40,10 +40,11 @@
         <li><strong>Change a line:</strong> select it and drag its dots. Double-click it to add a bend, or a bend to remove it. The settings panel changes its type, adds a label to an arrow (for example <i>W</i>) or makes it a smooth curve.</li>
         <li><strong>Label it:</strong> choose Label, click the thing you want to name, then click where the words should go. Type the words in the settings panel (it starts with the equipment's name), and add its precision underneath if you like, for example "±0.01 g". Tick "Numbered labels" to show numbers on the diagram with a key underneath instead.</li>
         <li><strong>Line things up:</strong> "Snap" keeps everything on the grid, so pieces line up neatly. Turn it off for small adjustments.</li>
+        <li><strong>Finish:</strong> "Download picture (PNG)" saves a sharp picture on a white background, cropped to your drawing, ready to put in your report. "Save progress" saves a file you can open again with "Open saved file", to change the diagram later.</li>
         <li><strong>Keyboard:</strong> arrow keys nudge (with Shift for bigger steps), Delete removes, Ctrl+Z undoes, Ctrl+Y redoes, Ctrl+C and Ctrl+V copy and paste, Ctrl+D duplicates.</li>
       </ol>
     </details>
-    <p class="notice dm-privacy">Your diagram stays in this browser: nothing is sent anywhere.</p>
+    <p class="notice dm-privacy">Your diagram is saved automatically, but only in this browser on this device: nothing is sent anywhere. To keep a copy, or to carry on with it on another computer, press "Save progress" and open the file later with "Open saved file".</p>
     <p class="dm-phone-note">On a phone the page is small: pinch with two fingers to zoom in. A laptop or tablet is easier.</p>
 
     <div class="dm-app" id="dm-app">
@@ -91,6 +92,14 @@
           <svg id="dm-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Your diagram"></svg>
         </div>
         <aside class="dm-props" id="dm-props" aria-label="Settings" aria-live="polite"></aside>
+      </div>
+      <div class="dm-files">
+        <button type="button" class="button" data-file="png"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download picture (PNG)</button>
+        <button type="button" class="button secondary" data-file="save" title="Download a file of this diagram that you can open again later, on any computer">Save progress</button>
+        <button type="button" class="button secondary" data-file="open" title="Open a diagram saved with Save progress">Open saved file</button>
+        <button type="button" class="button secondary" data-file="new" title="Start again with a blank page">New diagram</button>
+        <input type="file" id="dm-open" accept=".json,application/json" hidden>
+        <p class="dm-status" id="dm-status" role="status"></p>
       </div>
     </div>
     <noscript><p class="notice">The diagram maker needs JavaScript switched on.</p></noscript>
