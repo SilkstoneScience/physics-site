@@ -55,7 +55,9 @@
     let dots = '';
     const a = D.anchors(it, w, h, opt);
     Object.keys(a).forEach((k) => { dots += `<circle class="anchor" cx="${a[k][0]}" cy="${a[k][1]}" r="2.5"><title>${k}</title></circle>`; });
-    const style = scale ? ` width="${W * scale}" height="${H * scale}"` : '';
+    // Tiles (no scale given) shrink the picture to about 84 × 64 px: --k keeps their lines about 1.5 px thick
+    const style = scale ? ` width="${W * scale}" height="${H * scale}" style="--k:${1 / scale}"`
+      : ` style="--k:${0.75 / Math.min(84 / W, 64 / H)}"`;
     return `<svg class="dm-art" viewBox="${-pad} ${-pad} ${W} ${H}"${style} xmlns="${NS}" aria-hidden="true">` +
       D.markup(it, w, h, opt) + `<g class="anchors" style="display:none">${dots}</g></svg>`;
   }

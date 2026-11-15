@@ -28,10 +28,12 @@
 }
 
 /* ----- Drawing classes used by js/diagram-items.js ----- */
-.dm-art { color: var(--dm-ink); }
-.dm-art .o { fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-.dm-art .h { stroke-width: 1; }
-.dm-art .b { stroke-width: 3; }
+/* --k undoes an item's resizing, so its lines stay the same thickness as the page's other lines
+   (set by DiagramItems.markup); lines still grow and shrink with the zoom, like everything else. */
+.dm-art { color: var(--dm-ink); --k: 1; }
+.dm-art .o { fill: none; stroke: currentColor; stroke-width: calc(2 * var(--k)); stroke-linejoin: round; stroke-linecap: round; }
+.dm-art .h { stroke-width: calc(1 * var(--k)); }
+.dm-art .b { stroke-width: calc(3 * var(--k)); }
 .dm-art .f { fill: var(--dm-paper); }
 .dm-art .m { fill: var(--dm-metal); }
 .dm-art .k { fill: currentColor; }
@@ -51,13 +53,13 @@ body[data-section] main.dm-main { max-width: 1440px; }   /* the editor gets the 
 @media (max-width: 600px) { .dm-phone-note { display: block; } }
 .dm-vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-.dm-app { scroll-margin-top: 90px; display: grid; grid-template-rows: auto minmax(0, 1fr); height: clamp(520px, calc(100vh - 110px), 960px); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+.dm-app { scroll-margin-top: 90px; display: grid; grid-template-rows: auto auto minmax(0, 1fr); height: clamp(520px, calc(100vh - 110px), 960px); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
 .dm-toolbar { display: flex; flex-wrap: wrap; gap: 4px; padding: 6px; border-bottom: 1px solid var(--border); align-items: center; }
-.dm-toolbar button { display: inline-flex; align-items: center; gap: 5px; min-width: 38px; height: 38px; padding: 0 9px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; font-size: 0.85rem; cursor: pointer; justify-content: center; }
-.dm-toolbar button:hover:not(:disabled) { border-color: var(--accent); }
-.dm-toolbar button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
-.dm-toolbar button .dm-ico-fill { fill: currentColor; }
-.dm-toolbar button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.dm-toolbar button, .dm-tools button { display: inline-flex; align-items: center; gap: 5px; min-width: 38px; height: 38px; padding: 0 9px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; font-size: 0.85rem; cursor: pointer; justify-content: center; }
+.dm-toolbar button:hover:not(:disabled), .dm-tools button:hover { border-color: var(--accent); }
+.dm-toolbar button svg, .dm-tools button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.dm-toolbar button .dm-ico-fill, .dm-tools button .dm-ico-fill { fill: currentColor; }
+.dm-toolbar button[aria-pressed="true"], .dm-tools button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
 .dm-toolbar button:disabled { opacity: 0.4; cursor: default; }
 .dm-sep { width: 1px; height: 26px; background: var(--border); margin: 0 3px; }
 .dm-narrow { display: none !important; }
@@ -111,6 +113,40 @@ body[data-section] main.dm-main { max-width: 1440px; }   /* the editor gets the 
 .dm-check input { width: auto; margin: 0; }
 .button.dm-small { padding: 5px 10px; font-size: 0.85rem; }
 
+/* Line tools (stage 4) */
+.dm-tools { display: flex; flex-wrap: wrap; gap: 4px; padding: 6px; border-bottom: 1px solid var(--border); align-items: center; background: var(--bg); }
+.dm-tools .dm-ico-ray { stroke: var(--dm-ray); }
+.dm-tools .dm-ico-rayfill { fill: var(--dm-ray); stroke: none; }
+.dm-tools .dm-finish { background: var(--good-soft); border-color: var(--good); color: var(--good); font-weight: 600; }
+.dm-tools .dm-finish[hidden] { display: none; }
+.dm-hint { flex: 1 1 260px; margin: 0 0 0 6px; font-size: 0.82rem; line-height: 1.35; color: var(--muted); }
+.dm-btnrow { display: flex; flex-wrap: wrap; gap: 6px; }
+.dm-drawmode #dm-svg, .dm-drawmode #dm-objs [data-id] { cursor: crosshair; }
+
+/* The lines themselves (inside .dm-art, so they turn black on white in the PNG) */
+.dm-art .ln-string, .dm-art .ln-wire, .dm-art .ln-motion, .dm-art .ln-force, .dm-art .ln-ray, .dm-art .ln-tube-o, .dm-art .ln-tube-i { fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.dm-art .ln-string { stroke: currentColor; stroke-width: 1.5; }
+.dm-art .ln-wire { stroke: currentColor; stroke-width: 2; }
+.dm-art .ln-tube-o { stroke: currentColor; stroke-width: 8; }
+.dm-art .ln-tube-i { stroke: var(--dm-paper); stroke-width: 4.5; }
+.dm-art .ln-ray { stroke: var(--dm-ray); stroke-width: 2; }
+.dm-art .ln-rayhead { fill: var(--dm-ray); }
+.dm-art .ln-motion { stroke: currentColor; stroke-width: 2; }
+.dm-art .ln-force { stroke: currentColor; stroke-width: 3.5; stroke-linecap: butt; }
+.dm-art .ln-forcehead, .dm-art .ln-dot { fill: currentColor; }
+.dm-art .ln-label { fill: currentColor; font-family: "Times New Roman", Times, serif; font-style: italic; }
+.dm-linehit { fill: none; stroke: transparent; stroke-width: 14px; stroke-linecap: round; stroke-linejoin: round; pointer-events: stroke; }
+
+/* Editing lines */
+.dm-selline { fill: none; stroke: var(--accent); stroke-width: 6; stroke-opacity: 0.25; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; pointer-events: none; }
+.dm-handle.dm-pt { cursor: move; }
+.dm-handle.dm-pt-on { fill: var(--good); stroke: var(--good); }
+.dm-anchor { fill: var(--surface); stroke: var(--theme-b); stroke-width: 1.5; vector-effect: non-scaling-stroke; pointer-events: none; }
+.dm-snap { fill: none; stroke: var(--accent); stroke-width: 1.5; vector-effect: non-scaling-stroke; pointer-events: none; }
+.dm-snap.dm-snap-on { stroke: var(--good); stroke-width: 2.5; }
+.dm-drawpt { fill: var(--accent); pointer-events: none; }
+.dm-preview { opacity: 0.6; pointer-events: none; }
+
 /* Narrow screens: the equipment list and the settings open as drawers over the page */
 @media (max-width: 960px) {
   .dm-narrow { display: inline-flex !important; }
@@ -120,8 +156,9 @@ body[data-section] main.dm-main { max-width: 1440px; }   /* the editor gets the 
   .dm-props { right: 0; }
   .dm-app.show-bank .dm-bank, .dm-app.show-props .dm-props { display: block; }
   .dm-app.dm-dragging .dm-bank { opacity: 0.15; }
-  .dm-toolbar button:not(.dm-narrow) span:not(.dm-vh) { display: none; }
-  .dm-toolbar button { padding: 0 8px; }
+  .dm-toolbar button:not(.dm-narrow) span:not(.dm-vh), .dm-tools button:not(.dm-finish) span { display: none; }
+  .dm-hint { flex-basis: 100%; }
+  .dm-toolbar button, .dm-tools button { padding: 0 8px; }
   .dm-sep { display: none; }
   .dm-app { height: clamp(460px, calc(100vh - 90px), 900px); }
 }

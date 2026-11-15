@@ -174,6 +174,13 @@ tank, current balance, protactinium generator, Vernier-style versions of the sen
 group (rectangle, circle, triangle) for anything the bank doesn't have.
 
 ## 4. Connecting lines
+*Built 15 November 2026 (stage 4).* A row of line tools sits under the toolbar, with a one-line hint for the chosen
+tool; while a tool is chosen every attachment point shows as a small orange circle. A double-click (or double-tap),
+Enter or the "Finish line" button ends a line; a wire or tubing ends by itself on a terminal or nozzle, and an arrow
+after two clicks. A point close to level with (or straight above) the last one is made exactly level (or upright).
+Two-point wires keep a square corner when a component moves. Line widths stay in proportion to the equipment's at
+every zoom (and in the PNG).
+
 Drawn by choosing a line tool, then clicking (or tapping) the start, any bends, and the end. Each end snaps to the
 nearest **attachment point** (a hook, a terminal, a tube nozzle) when it's close, and stays attached when the
 equipment is moved. Every line can be edited afterwards (drag its points, add or remove a bend).
@@ -276,7 +283,9 @@ opens again. Format:
       "x": 420, "y": 330, "w": 110, "h": 140, "rot": 0, "flip": false, "opt": { "water": 0.6 } },
     { "id": "o3", "type": "line", "kind": "string",
       "points": [[260, 160], [260, 300]],
-      "ends": [{ "obj": "o1", "anchor": "top" }, null] },
+      "att": [{ "obj": "o1", "anchor": "top" }, null] },
+    { "id": "o5", "type": "line", "kind": "force", "text": "W",
+      "points": [[450, 400], [450, 470]], "att": [null, null] },
     { "id": "o4", "type": "label", "text": "Beaker of water", "spec": "250 ml",
       "x": 600, "y": 300, "to": { "obj": "o2", "dx": 40, "dy": 60 }, "n": 1 }
   ]
@@ -285,6 +294,9 @@ opens again. Format:
 
 - `objects` are listed back to front (the last one is drawn on top), which is how "bring to front" and "send to
   back" work.
+- A line's `kind` is `string`, `wire`, `tube`, `ray`, `motion` or `force`. `att` has one entry per point: the
+  attachment point it is fixed to (the item's id and the anchor's name), or `null`. Attached points move with
+  their item. Optional: `curved` (a smooth curve, for string, wire and tubing) and `text` (an arrow's label).
 - `item` is the permanent item id from the equipment bank. If a file names an item the bank doesn't have (for
   example a newer file opened on an older page), it shows as a grey box with the id, rather than failing.
 - `version` lets later versions of the page read older files.

@@ -36,6 +36,8 @@
         <li><strong>Add equipment:</strong> drag a piece from the equipment list onto the page, or tap it to put it in the middle of the page. Use the search box to find it quickly (for example "stand" or "balance").</li>
         <li><strong>Move it:</strong> drag it. Drag on empty paper to select several things at once (on a touch screen, one finger on empty paper moves the view; pinch to zoom).</li>
         <li><strong>Change it:</strong> drag a corner square to resize it, the round handle to turn it, and the squares at the ends of a rule, spring or bench to make it longer. The settings panel has its exact size, angle, a flip switch and any choices (for example the water level in a beaker).</li>
+        <li><strong>Join things up:</strong> choose String, Wire, Tubing, Light ray or an arrow above the page. The dots show where lines can attach. Click (or tap) where the line starts, click at each bend, and finish with a double-click or "Finish line". A wire finishes by itself when it reaches a terminal, and an arrow after two clicks. Lines attached to equipment follow it when it moves. Press Esc or choose Select to go back to moving things.</li>
+        <li><strong>Change a line:</strong> select it and drag its dots. Double-click it to add a bend, or a bend to remove it. The settings panel changes its type, adds a label to an arrow (for example <i>W</i>) or makes it a smooth curve.</li>
         <li><strong>Line things up:</strong> "Snap" keeps everything on the grid, so pieces line up neatly. Turn it off for small adjustments.</li>
         <li><strong>Keyboard:</strong> arrow keys nudge (with Shift for bigger steps), Delete removes, Ctrl+Z undoes, Ctrl+Y redoes, Ctrl+C and Ctrl+V copy and paste, Ctrl+D duplicates.</li>
       </ol>
@@ -65,6 +67,17 @@
         <button type="button" data-act="fit" title="Fit the page in the window"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="dm-vh">Fit to window</span></button>
         <button type="button" data-act="zoomin" title="Zoom in"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M8 11h6M11 8v6"/></svg><span class="dm-vh">Zoom in</span></button>
         <button type="button" class="dm-narrow" data-act="props" aria-pressed="false" title="Show the settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg><span>Settings</span></button>
+      </div>
+      <div class="dm-tools" role="toolbar" aria-label="Line tools">
+        <button type="button" data-tool="select" aria-pressed="true" title="Select and move (Esc)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 7-6 2-2 6z"/></svg><span>Select</span></button>
+        <button type="button" data-tool="string" aria-pressed="false" title="Draw string"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20C7 6 15 20 20 4"/></svg><span>String</span></button>
+        <button type="button" data-tool="wire" aria-pressed="false" title="Draw a wire"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h7V7h11"/><circle class="dm-ico-fill" cx="10" cy="17" r="1.6"/></svg><span>Wire</span></button>
+        <button type="button" data-tool="tube" aria-pressed="false" title="Draw tubing"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h9a7 7 0 0 1 7 7v7M3 13h9a1 1 0 0 1 1 1v7"/></svg><span>Tubing</span></button>
+        <button type="button" data-tool="ray" aria-pressed="false" title="Draw a light ray"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="dm-ico-ray" d="M3 19 21 5"/><path class="dm-ico-rayfill" d="m15.5 9.3-5.2 1.3 2.6 3.3z"/></svg><span>Light ray</span></button>
+        <button type="button" data-tool="motion" aria-pressed="false" title="Draw a motion arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 6l6 6-6 6"/></svg><span>Motion</span></button>
+        <button type="button" data-tool="force" aria-pressed="false" title="Draw a force arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h12" stroke-width="3.5"/><path class="dm-ico-fill" d="m14 6 8 6-8 6z"/></svg><span>Force</span></button>
+        <button type="button" class="dm-finish" data-act="finish" hidden title="Finish this line (Enter, or double-click)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span>Finish line</span></button>
+        <p class="dm-hint" id="dm-hint" aria-live="polite"></p>
       </div>
       <div class="dm-body">
         <aside class="dm-bank" aria-label="Equipment">

@@ -307,7 +307,8 @@
     mirror = !!flipped;
     const inner = it.draw(f.dw, f.dh, o);
     mirror = false;
-    return Math.abs(f.s - 1) < 1e-6 ? inner : `<g transform="scale(${n(f.s)})">${inner}</g>`;
+    // --k keeps line thicknesses the same however big the item is drawn (see css/diagram-maker.css)
+    return Math.abs(f.s - 1) < 1e-6 ? inner : `<g transform="scale(${n(f.s)})" style="--k:${n(1 / f.s)}">${inner}</g>`;
   }
 
   // Attachment points in the same box.
