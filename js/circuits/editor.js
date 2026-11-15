@@ -376,9 +376,10 @@
           if (g.single) {
             const c = preview.components.find((x) => x.id === g.single);
             g.ins = M.findInsertion(d, c.type, [c.x, c.y], c.rot);
-            if (g.ins) { c.x = g.ins.x; c.y = g.ins.y; c.rot = g.ins.rot; }
+            if (g.ins) { c.x = g.ins.x; c.y = g.ins.y; c.rot = g.ins.rot; M.ops.insertIntoWire(preview, g.single, g.ins.wire); }
           }
           insertion = g.ins;
+          M.settle(preview); // show the joins that letting go would make
           break;
         }
         case 'wire-drag': {
@@ -394,6 +395,7 @@
           g.target = t;
           preview = M.clone(d);
           M.ops.moveWireEnd(preview, g.wire, g.which, { free: t ? t.pos : round(p) });
+          M.settle(preview);
           wirePreview = t ? { points: [], target: t.pos } : null;
           break;
         }
@@ -403,6 +405,7 @@
           const via = g.base ? g.base.map((q) => (q ? q : round(p))) : (w.via || []).map((q, i) => (i === g.index ? round(p) : q));
           w.via = via;
           g.via = via;
+          M.settle(preview);
           break;
         }
         case 'wire-tap': case 'place-tap': hoverMove(p, g.down.type); break;
@@ -796,13 +799,12 @@
       const order = { error: 0, warning: 1, info: 2 };
       const loose = ds.filter((x) => x.code === 'unconnected');
       const list = ds.filter((x) => x.code !== 'unconnected').sort((a, b) => order[a.level] - order[b.level]);
-      // From the drawing (the engine never sees positions): a component lying on a wire it isn't connected to.
+      // From the drawing (the engine never sees positions): things that look wrong on the page.
       const d = store.drawing;
-      for (const c of d.components) {
-        const b = M.componentBox(c);
-        const inner = { x0: b.x0 + 0.5, x1: b.x1 - 0.5, y0: b.y0 + 0.5, y1: b.y1 - 0.5 };
-        const lying = d.wires.some((w) => !endsOf(w).some((e) => e.c === c.id) && (() => { const path = M.wirePath(d, w); return path.some((p, i) => i + 1 < path.length && Math.max(p[0], path[i + 1][0]) >= inner.x0 && Math.min(p[0], path[i + 1][0]) <= inner.x1 && Math.max(p[1], path[i + 1][1]) >= inner.y0 && Math.min(p[1], path[i + 1][1]) <= inner.y1); })());
-        if (lying) list.unshift({ code: 'on-wire', level: 'warning', ids: [c.id], message: `${c.label} is lying on top of a wire but isn't connected to it. To put it into the wire, take it off the wire and drop it back on: the wire lights up when it will go in.` });
+      const name = (id) => (d.components.find((c) => c.id === id) || { label: id }).label;
+      for (const x of M.layoutProblems(d)) {
+        if (x.code === 'across') list.unshift({ code: 'across', level: 'warning', ids: [x.c, x.wire], message: `A wire runs across ${name(x.c)} without being connected to it, which is confusing to read. Move the wire or the component.` });
+        else list.unshift({ code: 'overlap', level: 'warning', ids: x.wires, message: 'Two wires lie on top of each other for part of their length, so they look like one wire. Move one of them (select it and drag a bend).' });
       }
       if (loose.length) list.push({ code: 'unconnected', level: 'info', ids: [...new Set(loose.flatMap((x) => x.ids))], message: loose.length === 1 ? loose[0].message : `Unconnected terminals: ${loose.map((x) => x.message.replace(/ isn't connected at its (.*) terminal\./, ' ($1)')).join(', ')}.` });
       if (!list.length) { diagsEl.innerHTML = `<li class="ck-diag ck-good">✓ ${store.drawing.components.length ? 'No problems found.' : 'Add components from the toolbox to start.'}</li>`; return; }

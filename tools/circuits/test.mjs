@@ -736,8 +736,10 @@ export async function runTests() {
     M.ops.rotate(d2, [v]);
     M.ops.joinAt(d2, [v]);
     const nl2 = N.build(d2);
-    check('model: a terminal dropped on the middle of a wire is NOT joined to it', nl2.pointNet[`c:${v}:1`] !== nl2.pointNet['c:r1:0'] && d2.junctions.length === 0);
-    check('model: both its terminals stay unconnected', nl2.unconnected.filter((u) => u.id === v).length === 2);
+    const onPath = (d, w, p) => { const path = M.wirePath(d, w); return path.some((q, i) => i + 1 < path.length && M.segDistance(p, q, path[i + 1]) < 1e-9); };
+    check('model: a component dropped on a wire\'s route: the wire goes around it, so nothing is joined', nl2.unconnected.filter((u) => u.id === v).length === 2 && d2.junctions.length === 0);
+    check('model: … and the wire no longer passes through its terminals', !d2.wires.some((w) => onPath(d2, w, M.terminalPos(d2, v, 0)) || onPath(d2, w, M.terminalPos(d2, v, 1))));
+    check('model: after settling, nothing touches without being joined', M.touches(d2).length === 0);
     const wl = M.ops.addWire(d2, { c: v, t: 0 }, { free: [10, -3] });
     const v2 = M.ops.addComponent(d2, 'resistor', 12, -3); // its terminal 0 is at (10, -3), on the loose end
     M.ops.joinAt(d2, [v2]);
@@ -789,6 +791,85 @@ export async function runTests() {
       check('take out leaving a gap: no current flows', res.components[r].I === 0);
       check('take out leaving a gap: two loose ends', d5.wires.flatMap((w) => [w.from, w.to]).filter((e) => e.free).length === 2);
       check('take out leaving a gap: the drawing is sound', M.validate(d5).length === 0, M.validate(d5).join('; '));
+    }
+
+    // What you see is what you get: each rule of reading a diagram.
+    {
+      const series = () => {
+        const s = M.createStore();
+        s.change('build', (d) => {
+          const c = M.ops.addComponent(d, 'cell', 0, 0, { emf: 6 });
+          const l = M.ops.addComponent(d, 'lamp', 10, 0, { R: 12 });
+          M.ops.addWire(d, { c, t: 1 }, { c: l, t: 0 });
+          M.ops.addWire(d, { c: l, t: 1 }, { c, t: 0 }, [[14, 0], [14, 6], [-4, 6], [-4, 0]]);
+        });
+        return s;
+      };
+      const I = (s) => Math.abs(E.simulate(s.drawing).components.l1.I);
+      // The teacher's picture: a lamp taken out leaving a gap, then put back exactly where it was.
+      const s1 = series();
+      check('wysiwyg: the series circuit carries 0.5 A', near(I(s1), 0.5));
+      const home = { ...s1.drawing.components.find((c) => c.id === 'l1') };
+      s1.change('take out', (d) => M.ops.takeOut(d, 'l1', false));
+      check('wysiwyg: taken out leaving a gap, no current', I(s1) === 0);
+      const away = s1.drawing.components.find((c) => c.id === 'l1');
+      s1.change('move back', (d) => M.ops.moveItems(d, { components: ['l1'] }, home.x - away.x, home.y - away.y));
+      check('wysiwyg: put back where it was, its terminals take the loose ends again (0.5 A)', near(I(s1), 0.5));
+      // A loose wire end dropped onto a terminal.
+      const s2 = M.createStore();
+      s2.change('build', (d) => { M.ops.addComponent(d, 'resistor', 0, 0); M.ops.addWire(d, { free: [8, 3] }, { free: [2, 0] }); });
+      check('wysiwyg: a loose end on a terminal is joined to it', s2.drawing.wires[0].to.c === 'r1' && s2.drawing.wires[0].to.t === 1);
+      // Two loose ends at the same point.
+      const s3 = M.createStore();
+      s3.change('build', (d) => { M.ops.addWire(d, { free: [0, 0] }, { free: [5, 0] }); M.ops.addWire(d, { free: [5, 0] }, { free: [5, 5] }); });
+      check('wysiwyg: two loose ends at the same point are joined by a junction', s3.drawing.junctions.length === 1 && s3.drawing.wires.every((w) => w.from.j || w.to.j));
+      // A wire ending on the middle of another wire: a T with a junction.
+      const s4 = M.createStore();
+      s4.change('build', (d) => { M.ops.addWire(d, { free: [0, 0] }, { free: [10, 0] }); M.ops.addWire(d, { free: [5, 8] }, { free: [5, 0] }); });
+      check('wysiwyg: a wire ending on another wire makes a T junction', s4.drawing.junctions.length === 1 && s4.drawing.wires.length === 3);
+      // Two wires crossing are not joined.
+      const s5 = M.createStore();
+      s5.change('build', (d) => { M.ops.addWire(d, { free: [0, 0] }, { free: [10, 0] }); M.ops.addWire(d, { free: [5, -5] }, { free: [5, 5] }); });
+      check('wysiwyg: wires that cross are not joined', s5.drawing.junctions.length === 0 && s5.drawing.wires.length === 2 && M.touches(s5.drawing).length === 0);
+      // A component put down on a wire's route (along it or across it): the wire goes around it. Only dropping it
+      // into the wire (findInsertion) puts it in.
+      const s6 = series();
+      s6.change('add', (d) => M.ops.addComponent(d, 'resistor', 14, 3, { R: 12 }));
+      s6.change('turn', (d) => M.ops.rotate(d, ['r1']));
+      check('wysiwyg: a component turned to lie along a wire\'s route: the wire goes around it (still 0.5 A)', near(I(s6), 0.5), `${I(s6)}`);
+      check('wysiwyg: … and no wire runs through it', !M.layoutProblems(s6.drawing).length && !s6.drawing.wires.some((w) => onPath(s6.drawing, w, [14, 3])));
+      const s7 = series();
+      s7.change('add', (d) => M.ops.addComponent(d, 'resistor', 14, 3)); // horizontal, centred on the vertical wire at x = 14
+      check('wysiwyg: a component across a wire\'s route is not joined (0.5 A)', near(I(s7), 0.5));
+      check('wysiwyg: … the wire goes around it', !M.layoutProblems(s7.drawing).length && !s7.drawing.wires.some((w) => onPath(s7.drawing, w, [14, 3])));
+      // Dropping it into the wire does put it in.
+      const s6b = series();
+      const ins = M.findInsertion(s6b.drawing, 'resistor', [14.2, 3], 0);
+      s6b.change('insert', (d) => { const id = M.ops.addComponent(d, 'resistor', ins.x, ins.y, { R: 12 }); d.components.find((c) => c.id === id).rot = ins.rot; M.ops.insertIntoWire(d, id, ins.wire); });
+      check('wysiwyg: dropped into the wire, it is in series (0.25 A)', near(I(s6b), 0.25), `${I(s6b)}`);
+      // Two wires on top of each other: a warning.
+      const s8 = M.createStore();
+      s8.change('build', (d) => { M.ops.addWire(d, { free: [0, 0] }, { free: [10, 0] }); M.ops.addWire(d, { free: [3, 4] }, { free: [7, 4] }, [[3, 0], [7, 0]]); });
+      check('wysiwyg: wires lying on top of each other get a warning', M.layoutProblems(s8.drawing).some((x) => x.code === 'overlap'));
+      check('wysiwyg: none of these leave a join that is shown but not made', [s1, s2, s3, s4, s5, s6, s6b, s7, s8].every((s) => M.touches(s.drawing).length === 0));
+      // Automatic routes never pass through a terminal they don't belong to, in random circuits.
+      let through = '';
+      for (let seed = 1; seed <= 60 && !through; seed++) {
+        const dr = draw(randomCircuit(seed).spec, seed);
+        const st = M.createStore(dr);
+        const d = st.drawing;
+        for (const w of d.wires) {
+          const own = [w.from, w.to].filter((e) => e.c !== undefined).map((e) => `${e.c}:${e.t}`);
+          for (const c of d.components) for (let t = 0; t < C.TYPES[c.type].terminals.length; t++) {
+            if (own.includes(`${c.id}:${t}`)) continue;
+            const p = C.terminalPosition(c, t);
+            const path = M.wirePath(d, w);
+            const placed = (w.via || []).some((q) => q[0] === p[0] && q[1] === p[1]); // a bend put there on purpose
+            if (!placed && path.slice(1, -1).some((q) => q[0] === p[0] && q[1] === p[1])) through = `seed ${seed}: wire ${w.id} turns a corner on ${c.id}:${t} (${JSON.stringify(path)})`;
+          }
+        }
+      }
+      check('routing: automatic corners never land on another component\'s terminal', !through, through);
     }
 
     // Drawings from outside (examples, saved circuits, share links) are made complete and safe.
@@ -844,19 +925,26 @@ export async function runTests() {
           if (pth.length > 1) st.change('split', (x) => M.ops.splitWire(x, wr.id, pth[intIn(rnd, 0, pth.length - 1)]));
         } else if (r < 0.62) {
           const sel = { components: ids.filter(() => rnd() < 0.3), junctions: dr.junctions.filter(() => rnd() < 0.3).map((j) => j.id) };
-          const before2 = JSON.stringify(N.partition(N.build(dr)));
-          st.change('move', (x) => M.ops.moveItems(x, sel, intIn(rnd, -3, 3), intIn(rnd, -3, 3)));
-          if (JSON.stringify(N.partition(N.build(st.drawing))) !== before2) problem = `step ${step}: moving changed the connections`;
+          // Moving by itself never changes the connections (only joins made where things then touch can).
+          const [dx, dy] = [intIn(rnd, -3, 3), intIn(rnd, -3, 3)];
+          const raw = M.clone(dr);
+          M.ops.moveItems(raw, sel, dx, dy);
+          if (JSON.stringify(N.partition(N.build(raw))) !== JSON.stringify(N.partition(N.build(dr)))) problem = `step ${step}: moving changed the connections`;
+          st.change('move', (x) => M.ops.moveItems(x, sel, dx, dy));
         } else if (r < 0.7) {
-          const before2 = JSON.stringify(N.partition(N.build(dr)));
-          st.change('rotate', (x) => M.ops.rotate(x, ids.filter(() => rnd() < 0.4)));
-          if (JSON.stringify(N.partition(N.build(st.drawing))) !== before2) problem = `step ${step}: rotating changed the connections`;
+          const which = ids.filter(() => rnd() < 0.4);
+          const raw = M.clone(dr);
+          M.ops.rotate(raw, which);
+          if (JSON.stringify(N.partition(N.build(raw))) !== JSON.stringify(N.partition(N.build(dr)))) problem = `step ${step}: rotating changed the connections`;
+          st.change('rotate', (x) => M.ops.rotate(x, which));
         } else if (r < 0.78) st.change('join', (x) => M.ops.joinAt(x, ids.filter(() => rnd() < 0.3)));
         else if (r < 0.88) st.change('remove', (x) => M.ops.remove(x, { components: ids.filter(() => rnd() < 0.2), wires: dr.wires.filter(() => rnd() < 0.2).map((q) => q.id), junctions: dr.junctions.filter(() => rnd() < 0.2).map((j) => j.id) }));
         else if (r < 0.94 && dr.wires.length) { const wr = pick(rnd, dr.wires); st.change('end', (x) => M.ops.moveWireEnd(x, wr.id, rnd() < 0.5 ? 'from' : 'to', anyEnd())); }
         else if (ids.length) { const cid = pick(rnd, ids); const type = dr.components.find((x) => x.id === cid).type; const key = pick(rnd, Object.keys(C.TYPES[type].params)); st.change('param', (x) => M.ops.setParam(x, cid, key, rnd() * 100)); }
         const bad = M.validate(st.drawing);
         if (bad.length && !problem) problem = `step ${step}: ${bad.join('; ')}`;
+        const shown = M.touches(st.drawing);
+        if (shown.length && !problem) problem = `step ${step}: the drawing shows a join the wires don't make (${JSON.stringify(shown[0])})`;
         const sim = E.simulate(st.drawing);
         if (!sim.ok && !problem) problem = `step ${step}: the engine failed (${sim.diagnostics.map((q) => q.message).join(' | ')})`;
       }

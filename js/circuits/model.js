@@ -28,32 +28,90 @@
     if (end.free) return [end.free[0], end.free[1]];
     return null;
   }
-  // The wire as drawn: its ends and bends joined by horizontal and vertical lines only.
+  // What a wire's automatic route keeps clear of: other components' terminals and bodies (its own ends excepted).
+  // Since touching means joined, passing through a terminal would make a join nobody asked for. Junctions and wire
+  // ends are not avoided: a wire end placed on a wire is meant to make a T.
+  function obstaclesFor(d, w) {
+    const own = new Set([w.from, w.to].map((e) => (e.c !== undefined ? `c:${e.c}:${e.t}` : '')));
+    const points = [];
+    for (const c of d.components) for (let t = 0; t < C.TYPES[c.type].terminals.length; t++) if (!own.has(`c:${c.id}:${t}`)) points.push(C.terminalPosition(c, t));
+    const boxes = d.components.map((c) => { const b = componentBox(c); return { x0: b.x0 + 0.5, x1: b.x1 - 0.5, y0: b.y0 + 0.5, y1: b.y1 - 0.5 }; });
+    return { points, boxes };
+  }
+  // The wire as drawn: its ends and bends joined by horizontal and vertical lines only. Where two points don't
+  // line up, the corner(s) are chosen automatically: an L either way round, or a Z, whichever keeps clear of
+  // obstacles, leaves and reaches terminals along the way they face, and is shortest. Straight pieces between
+  // points the student placed are kept exactly as they are.
   function wirePath(d, w) {
     const a = endPos(d, w.from);
     const b = endPos(d, w.to);
     if (!a || !b) return [];
     const pts = [a, ...(w.via || []).map((p) => [p[0], p[1]]), b];
+    let obs = null;
     const out = [pts[0]];
     for (let i = 1; i < pts.length; i++) {
       const p = out[out.length - 1];
       const q = pts[i];
-      if (p[0] !== q[0] && p[1] !== q[1]) {
-        // Leave a terminal (and arrive at one) along the way it faces, so the wire never doubles back over its
-        // component; between bends, go across first.
-        let vertical = false;
-        if (i === 1 && w.from.c !== undefined && comp(d, w.from.c)) {
-          const [dx, dy] = terminalDir(comp(d, w.from.c), w.from.t);
-          vertical = dx === 0 ? (q[1] - p[1]) * dy >= 0 : (q[0] - p[0]) * dx < 0;
-        } else if (i === pts.length - 1 && w.to.c !== undefined && comp(d, w.to.c)) {
-          const [dx, dy] = terminalDir(comp(d, w.to.c), w.to.t); // the wire arrives at q moving opposite to (dx, dy)
-          vertical = dx !== 0 ? (p[0] - q[0]) * dx >= 0 : (p[1] - q[1]) * dy < 0;
-        }
-        out.push(vertical ? [p[0], q[1]] : [q[0], p[1]]);
+      if (same(p, q)) continue;
+      obs = obs || obstaclesFor(d, w);
+      const aligned = p[0] === q[0] || p[1] === q[1];
+      if (!aligned || hits(obs, p, q)) {
+        const startDir = i === 1 && w.from.c !== undefined && comp(d, w.from.c) ? terminalDir(comp(d, w.from.c), w.from.t) : null;
+        const endDir = i === pts.length - 1 && w.to.c !== undefined && comp(d, w.to.c) ? terminalDir(comp(d, w.to.c), w.to.t) : null;
+        for (const c of bestCorners(p, q, obs, startDir, endDir)) if (!same(out[out.length - 1], c)) out.push(c);
       }
       if (!same(out[out.length - 1], q)) out.push(q);
     }
     return out;
+  }
+  // How many obstacles the straight line u–v touches.
+  function hits(obs, u, v) {
+    let n = 0;
+    for (const o of obs.points) if (segDistance(o, u, v) < 1e-9) n++;
+    for (const bx of obs.boxes) if (boxHitsSegment(bx, u, v)) n++;
+    return n;
+  }
+  function bestCorners(p, q, obs, startDir, endDir) {
+    const [x0, x1] = [Math.min(p[0], q[0]), Math.max(p[0], q[0])];
+    const [y0, y1] = [Math.min(p[1], q[1]), Math.max(p[1], q[1])];
+    const cands = [];
+    if (p[0] === q[0] || p[1] === q[1]) { // in line: straight, or a U-shaped detour to one side
+      cands.push([]);
+      for (const o of [1, -1, 2, -2, 3, -3, 4, -4]) cands.push(p[1] === q[1] ? [[p[0], p[1] + o], [q[0], q[1] + o]] : [[p[0] + o, p[1]], [q[0] + o, q[1]]]);
+    } else cands.push([[q[0], p[1]]], [[p[0], q[1]]]); // the two L shapes, across first preferred
+    const near = (lo, hi) => {
+      const mid = Math.round((lo + hi) / 2);
+      const ks = [];
+      for (let k = lo + 1; k < hi; k++) ks.push(k);
+      ks.sort((m, n) => Math.abs(m - mid) - Math.abs(n - mid));
+      for (let s = 1; s <= 3; s++) ks.push(lo - s, hi + s);
+      return ks;
+    };
+    if (p[0] !== q[0] && p[1] !== q[1]) {
+      for (const k of near(x0, x1)) cands.push([[k, p[1]], [k, q[1]]]); // Z: across, down, across
+      for (const k of near(y0, y1)) cands.push([[p[0], k], [q[0], k]]); // Z: down, across, down
+    }
+    const sign = (v) => (v > 0 ? 1 : v < 0 ? -1 : 0);
+    let best = null;
+    cands.forEach((corners, order) => {
+      const route = [p, ...corners, q];
+      let score = 0;
+      for (let s = 0; s + 1 < route.length; s++) {
+        const [u, v] = [route[s], route[s + 1]];
+        if (same(u, v)) continue;
+        for (const o of obs.points) if (segDistance(o, u, v) < 1e-9) score += 1000;
+        for (const bx of obs.boxes) if (boxHitsSegment(bx, u, v)) score += 1000;
+      }
+      const first = [sign(route[1][0] - p[0]), sign(route[1][1] - p[1])];
+      const last = [sign(q[0] - route[route.length - 2][0]), sign(q[1] - route[route.length - 2][1])];
+      if (startDir) { const dot = first[0] * startDir[0] + first[1] * startDir[1]; score += dot < 0 ? 1000 : dot === 0 ? 2 : 0; }
+      if (endDir) { const dot = last[0] * endDir[0] + last[1] * endDir[1]; score += dot > 0 ? 1000 : dot === 0 ? 2 : 0; }
+      let len = 0;
+      for (let s = 0; s + 1 < route.length; s++) len += Math.abs(route[s + 1][0] - route[s][0]) + Math.abs(route[s + 1][1] - route[s][1]);
+      score += (len - (x1 - x0) - (y1 - y0)) + 0.5 * corners.length + order * 1e-6;
+      if (!best || score < best.score) best = { score, corners };
+    });
+    return best.corners;
   }
   // Distance from point p to the segment a–b (grid squares).
   function segDistance(p, a, b) {
@@ -202,32 +260,8 @@
     const used = new Set(d.wires.flatMap((w) => ends(w).filter((e) => e.j !== undefined).map((e) => e.j)));
     d.junctions = d.junctions.filter((j) => used.has(j.id));
   }
-  // After components are dropped: a terminal that lands exactly on another terminal, a junction or a loose wire end
-  // is joined to it with an explicit wire (so the netlist sees it). Landing on the middle of a wire does NOT join:
-  // that happened by accident too easily when tidying a circuit (found by the interface tests). Returns the joins made.
-  function joinAt(d, ids) {
-    let joins = 0;
-    const joined = (a, b) => d.wires.some((w) => (endIs(w.from, a) && endIs(w.to, b)) || (endIs(w.from, b) && endIs(w.to, a)));
-    for (const id of ids) {
-      const c = comp(d, id);
-      if (!c) continue;
-      for (let t = 0; t < C.TYPES[c.type].terminals.length; t++) {
-        const me = { c: id, t };
-        const p = C.terminalPosition(c, t);
-        for (const o of d.components) {
-          if (o.id === id) continue;
-          for (let u = 0; u < C.TYPES[o.type].terminals.length; u++) {
-            const them = { c: o.id, t: u };
-            if (same(C.terminalPosition(o, u), p) && !joined(me, them)) { addWire(d, me, them); joins++; }
-          }
-        }
-        for (const j of d.junctions) if (same([j.x, j.y], p) && !joined(me, { j: j.id })) { addWire(d, me, { j: j.id }); joins++; }
-        for (const w of d.wires) for (const which of ['from', 'to']) if (w[which].free && same(w[which].free, p)) { w[which] = clone(me); joins++; }
-      }
-    }
-    tidy(d);
-    return joins;
-  }
+  // Kept for the editor's calls: joining things that touch is now done everywhere by settle() (below).
+  function joinAt(d) { return settle(d); }
 
   // ---------------- taking a component out, and putting one into a wire ----------------
 
@@ -304,7 +338,7 @@
     const c = comp(d, id);
     const w = d.wires.find((x) => x.id === wid);
     if (!c || !w) return false;
-    const path = wirePath(d, w);
+    const path = wirePath({ ...d, components: d.components.filter((x) => x.id !== id) }, w); // its route before the component arrived
     const P = [0, 1].map((t) => C.terminalPosition(c, t));
     let seg = -1;
     for (let i = 0; i + 1 < path.length; i++) if (P.every((q) => segDistance(q, path[i], path[i + 1]) < 1e-9)) { seg = i; break; }
@@ -319,6 +353,115 @@
     d.wires.push({ id: nextId(d, 'w', d.wires), from: { c: id, t: far }, to: clone(to), via: after });
     tidy(d);
     return true;
+  }
+
+  // ---------------- what you see is what you get ----------------
+  // The drawing must mean what a person reading it would see (teacher's requirement, 15 November 2026):
+  //   1. Things at the same grid point (terminals, junctions, loose wire ends) are joined.
+  //   2. A terminal, junction or loose end on the middle of a wire is joined to it (a T, drawn with a dot).
+  //   3. A component lying along a wire, terminal to terminal, is in that wire (the wire is cut).
+  //   4. Wires that cross are NOT joined (the IB convention: a join needs a dot).
+  // touches() lists every place where the drawing shows a join that the wires don't make; settle() makes them all.
+
+  function touches(d) {
+    // Which points are already joined by wires.
+    const parent = new Map();
+    const find = (k) => { while (parent.has(k) && parent.get(k) !== k) k = parent.get(k); return k; };
+    const union = (a, b) => { a = find(a); b = find(b); if (a !== b) parent.set(a, b); };
+    const keyOf = (w, which) => { const e = w[which]; return e.c !== undefined ? `c:${e.c}:${e.t}` : e.j !== undefined ? `j:${e.j}` : `f:${w.id}:${which}`; };
+    for (const w of d.wires) union(keyOf(w, 'from'), keyOf(w, 'to'));
+    const objects = [];
+    for (const c of d.components) for (let t = 0; t < C.TYPES[c.type].terminals.length; t++) objects.push({ kind: 'terminal', ref: { c: c.id, t }, key: `c:${c.id}:${t}`, p: C.terminalPosition(c, t) });
+    for (const j of d.junctions) objects.push({ kind: 'junction', ref: { j: j.id }, key: `j:${j.id}`, p: [j.x, j.y] });
+    for (const w of d.wires) for (const which of ['from', 'to']) if (w[which].free) objects.push({ kind: 'loose', wire: w.id, which, key: `f:${w.id}:${which}`, p: w[which].free });
+    const out = [];
+    // 3. Components lying along a wire.
+    for (const c of d.components) {
+      if (C.TYPES[c.type].terminals.length < 2) continue;
+      const P = [0, 1].map((t) => C.terminalPosition(c, t));
+      for (const w of d.wires) {
+        if (ends(w).some((e) => e.c === c.id)) continue;
+        const path = wirePath(d, w);
+        if (path.some((q, i) => i + 1 < path.length && P.every((x) => segDistance(x, q, path[i + 1]) < 1e-9))) out.push({ kind: 'along', c: c.id, wire: w.id });
+      }
+    }
+    // 1. The same point.
+    const byPoint = new Map();
+    for (const o of objects) { const k = `${o.p[0]},${o.p[1]}`; if (!byPoint.has(k)) byPoint.set(k, []); byPoint.get(k).push(o); }
+    for (const group of byPoint.values()) {
+      for (let i = 1; i < group.length; i++) if (find(group[0].key) !== find(group[i].key)) out.push({ kind: 'point', a: group[0], b: group[i] });
+    }
+    // 2. On the middle of a wire.
+    for (const o of objects) {
+      for (const w of d.wires) {
+        if (find(keyOf(w, 'from')) === find(o.key)) continue; // already joined to that wire
+        const path = wirePath(d, w);
+        if (path.length < 2 || same(o.p, path[0]) || same(o.p, path[path.length - 1])) continue;
+        if (path.some((q, i) => i + 1 < path.length && segDistance(o.p, q, path[i + 1]) < 1e-9)) out.push({ kind: 'tee', o, wire: w.id });
+      }
+    }
+    return out;
+  }
+
+  function settle(d) {
+    let made = 0;
+    for (let guard = 0; guard < 500; guard++) {
+      const list = touches(d);
+      const t = list.find((x) => x.kind === 'along') || list[0];
+      if (!t) break;
+      made++;
+      if (t.kind === 'along') { if (!insertIntoWire(d, t.c, t.wire)) break; continue; }
+      if (t.kind === 'point') {
+        const [a, b] = t.a.kind === 'loose' ? [t.a, t.b] : [t.b, t.a]; // a loose end, if there is one, goes onto the other
+        if (a.kind === 'loose') {
+          const w = d.wires.find((x) => x.id === a.wire);
+          if (b.kind === 'loose') { // two loose ends: a junction joins them
+            const jid = nextId(d, 'j', d.junctions);
+            d.junctions.push({ id: jid, x: a.p[0], y: a.p[1] });
+            w[a.which] = { j: jid };
+            d.wires.find((x) => x.id === b.wire)[b.which] = { j: jid };
+          } else w[a.which] = clone(b.ref);
+        } else addWire(d, a.ref, b.ref); // a wire with no length
+        continue;
+      }
+      // A T: put a junction on the wire there and join the object to it.
+      const end = splitWire(d, t.wire, t.o.p);
+      if (!end) break;
+      if (t.o.kind === 'loose') d.wires.find((x) => x.id === t.o.wire)[t.o.which] = end;
+      else addWire(d, t.o.ref, end);
+    }
+    tidy(d);
+    return made;
+  }
+
+  // Things that look wrong on the page but are not joins: a wire running across a component it isn't attached to,
+  // and two wires lying on top of each other (they would read as one wire). Shown as warnings by the editor.
+  function layoutProblems(d) {
+    const out = [];
+    for (const c of d.components) {
+      const b = componentBox(c);
+      const inner = { x0: b.x0 + 0.5, x1: b.x1 - 0.5, y0: b.y0 + 0.5, y1: b.y1 - 0.5 };
+      for (const w of d.wires) {
+        if (ends(w).some((e) => e.c === c.id)) continue;
+        const path = wirePath(d, w);
+        if (path.some((p, i) => i + 1 < path.length && boxHitsSegment(inner, p, path[i + 1]))) out.push({ code: 'across', c: c.id, wire: w.id });
+      }
+    }
+    const segs = [];
+    for (const w of d.wires) { const path = wirePath(d, w); for (let i = 0; i + 1 < path.length; i++) segs.push({ w: w.id, a: path[i], b: path[i + 1] }); }
+    const seen = new Set();
+    for (let i = 0; i < segs.length; i++) {
+      for (let k = i + 1; k < segs.length; k++) {
+        const [s, t] = [segs[i], segs[k]];
+        if (s.w === t.w) continue;
+        let overlap = 0;
+        if (s.a[1] === s.b[1] && t.a[1] === t.b[1] && s.a[1] === t.a[1]) overlap = Math.min(Math.max(s.a[0], s.b[0]), Math.max(t.a[0], t.b[0])) - Math.max(Math.min(s.a[0], s.b[0]), Math.min(t.a[0], t.b[0]));
+        else if (s.a[0] === s.b[0] && t.a[0] === t.b[0] && s.a[0] === t.a[0]) overlap = Math.min(Math.max(s.a[1], s.b[1]), Math.max(t.a[1], t.b[1])) - Math.max(Math.min(s.a[1], s.b[1]), Math.min(t.a[1], t.b[1]));
+        const key = [s.w, t.w].sort().join('|');
+        if (overlap > 0 && !seen.has(key)) { seen.add(key); out.push({ code: 'overlap', wires: [s.w, t.w] }); }
+      }
+    }
+    return out;
   }
 
   // Problems with a drawing's structure (the tests run this after every operation). Empty means sound.
@@ -364,8 +507,9 @@
 
   // ---------------- the store: one drawing, with undo and redo ----------------
 
+  const settled = (d) => { settle(d); return d; };
   function createStore(initial) {
-    let drawing = initial ? normalise(initial) : empty();
+    let drawing = initial ? settled(normalise(initial)) : empty();
     let undo = [];
     let redo = [];
     let coalesce = null;
@@ -382,6 +526,7 @@
         const before = JSON.stringify(drawing);
         const draft = JSON.parse(before);
         const out = fn(draft);
+        settle(draft); // what you see is what you get
         if (JSON.stringify(draft) === before) return out;
         if (!(key && key === coalesce)) { undo.push(before); if (undo.length > 100) undo.shift(); }
         redo = [];
@@ -393,12 +538,12 @@
       endCoalesce() { coalesce = null; },
       undo() { if (!undo.length) return false; redo.push(JSON.stringify(drawing)); drawing = JSON.parse(undo.pop()); coalesce = null; notify('undo'); return true; },
       redo() { if (!redo.length) return false; undo.push(JSON.stringify(drawing)); drawing = JSON.parse(redo.pop()); coalesce = null; notify('redo'); return true; },
-      load(d) { undo.push(JSON.stringify(drawing)); redo = []; coalesce = null; drawing = normalise(d); notify('load'); },
+      load(d) { undo.push(JSON.stringify(drawing)); redo = []; coalesce = null; drawing = settled(normalise(d)); notify('load'); },
     };
   }
 
-  const ops = { addComponent, moveItems, rotate, setParam, setLabel, addWire, moveWireEnd, setVia, splitWire, remove, tidy, joinAt, takeOut, insertIntoWire };
-  const api = { empty, clone, normalise, ops, findInsertion, createStore, validate, wirePath, endPos, terminalPos, terminalDir, nearestOnWire, segDistance, componentBox };
+  const ops = { addComponent, moveItems, rotate, setParam, setLabel, addWire, moveWireEnd, setVia, splitWire, remove, tidy, joinAt, takeOut, insertIntoWire, settle };
+  const api = { empty, clone, normalise, ops, findInsertion, touches, settle, layoutProblems, createStore, validate, wirePath, endPos, terminalPos, terminalDir, nearestOnWire, segDistance, componentBox };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else (root.Circuits = root.Circuits || {}).model = api;
 })(typeof window !== 'undefined' ? window : globalThis);
