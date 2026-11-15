@@ -31,7 +31,15 @@ lines, smooth camera moves and one caption at a time. Each one loops.
   set on the device, it shows a still frame (`poster`) and waits for Play.
 - Every page has a written description of the whole animation (for screen readers, and for students
   who prefer to read), and links back to the topic section.
-- Testing: `?t=12` on the page's address freezes the animation at 12 s, for checking single frames.
+- Testing: `?t=12` on the page's address freezes the animation at scene time 12 s, for checking single frames.
+- **Pacing** (teacher, 15 November 2026: "stay on the scene a little longer"): a scene can list `pauses: [[sceneTime, seconds], …]`
+  where the picture holds still (just before a caption fades) so it can be read; powers of ten holds 3.4 s on each object.
+- **Music** (teacher's request, 15 November 2026): gentle background music generated live by `js/anim/music.js` with the
+  browser's Web Audio API (a soft pad, a low drone, bell-like sparkles or plucked arpeggios, echo and reverb), so there
+  are no audio files to license. Each scene sets its own mood with `music: { chords, bar, cutoff, sparkle, arp }`.
+  Browsers only allow sound after a click, so it is off until the ♪ Music button is pressed; the choice is remembered on
+  that device, and the music fades out on Pause, when the animation scrolls out of view or the tab is hidden.
+  `AnimMusic.test(opts, seconds)` renders a piece offline and reports its peak and RMS level (checked: no clipping).
 - The stage is 16:9, and 4:5 on phones (under 600 px), so scenes lay themselves out for both.
 - File names in `animations/` are permanent once published (they may be linked from slides).
 

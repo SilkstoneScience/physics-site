@@ -95,6 +95,9 @@
   Anim.register('spacetime', {
     duration: DURATION,
     poster: 40,
+    // hold the picture still near the end of each step so the caption can be read (teacher's request)
+    pauses: [[8.1, 2.5], [12.7, 2.5], [18.1, 3], [23.9, 3], [27.9, 2.5], [32.5, 3], [37.1, 3], [41.9, 3], [46.4, 3]],
+    music: { chords: [[53, 57, 60, 64], [55, 59, 62, 64], [52, 55, 59, 62], [57, 60, 64, 71]], bar: 8, cutoff: 800, sparkle: 0.25 },
     resize,
     frame(s, t) {
       D.background(s, 0.28);

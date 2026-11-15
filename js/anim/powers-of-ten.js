@@ -225,7 +225,7 @@
         g.save(); g.globalAlpha = a; g.globalCompositeOperation = 'lighter';
         g.drawImage(soft(IMG.deep, 0.22, 0.5), x - w / 2, y - h / 2, w, h); g.restore();
       } },
-    { key: 'universe', hold: 4, logS: Math.log10(8.8e26), name: 'The observable universe', size: 'about 8.8 × 10²⁶ m across',
+    { key: 'universe', hold: 5.5, logS: Math.log10(8.8e26), name: 'The observable universe', size: 'about 8.8 × 10²⁶ m across',
       cap: 'The observable universe: the part we can see, centred on us. Space has expanded while the light travelled, so its edge is now about 46 billion light-years away.',
       draw(s, x, y, R, a, t) {
         const { g } = s;
@@ -247,7 +247,7 @@
   ];
 
   // ---------- the timeline: hold at each object, then zoom out to the next ----------
-  const START = 3.6, HOLD = 2.0, PER_DECADE = 0.6, BASE = 0.5, OFF = 0.3;   // OFF: object fills half the height
+  const START = 3.6, HOLD = 3.4, PER_DECADE = 0.65, BASE = 0.5, OFF = 0.3;   // OFF: object fills half the height
   const keys = []; let tt = START;
   O.forEach((o, i) => {
     const z = o.logS + (o.off ?? OFF);
@@ -286,6 +286,7 @@
   Anim.register('powers-of-ten', {
     duration: DURATION,
     poster: O.find((o) => o.key === 'earth').arrive + 0.5,
+    music: { chords: [[48, 55, 59, 62, 64], [50, 54, 57, 62], [52, 55, 59, 62], [45, 52, 57, 59, 64]], bar: 9, cutoff: 1000, sparkle: 0.6 },
     resize(s) { cx = s.W / 2; cy = s.H * 0.44; },
     frame(s, t) {
       const z = zAt(t), H = Math.min(s.H * 0.86, s.W), on = smooth((t - START + 1) / 0.8) * (1 - smooth((t - END_ZOOM - 0.6) / 1));

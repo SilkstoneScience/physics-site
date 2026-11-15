@@ -195,26 +195,78 @@
   const scenes = {};
   const register = (name, scene) => { scenes[name] = scene; };
   const qs = new URLSearchParams(location.search);
-  const hold = qs.has('t') ? +qs.get('t') : null;
+  const hold = qs.has('t') ? +qs.get('t') : null;      // a scene time, in seconds
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const MUSIC_SRC = (document.currentScript && document.currentScript.src || '').replace(/player\.js(\?.*)?$/, 'music.js');
+
+  // Pauses: a scene may list [sceneTime, seconds] moments where the picture holds still
+  // (so a caption can be read) before the story carries on.
+  const timing = (scene) => {
+    const pauses = (scene.pauses || []).slice().sort((a, b) => a[0] - b[0]);
+    const total = scene.duration + pauses.reduce((n, p) => n + p[1], 0);
+    const toScene = (real) => {
+      let acc = 0;
+      for (const [st, d] of pauses) {
+        if (real < st + acc) return real - acc;
+        if (real < st + acc + d) return st;
+        acc += d;
+      }
+      return Math.min(real - acc, scene.duration);
+    };
+    const toReal = (st) => st + pauses.filter((p) => p[0] < st).reduce((n, p) => n + p[1], 0);
+    return { total, toScene, toReal };
+  };
+
+  // ---------- music (generated in the browser by js/anim/music.js, loaded only when first switched on) ----------
+  const pref = { get() { try { return localStorage.getItem('anim-music') === 'on'; } catch { return false; } },
+    set(on) { try { localStorage.setItem('anim-music', on ? 'on' : 'off'); } catch { /* private mode */ } } };
+  let musicLib = null;
+  const loadMusic = () => musicLib || (musicLib = new Promise((res, rej) => {
+    if (window.AnimMusic) { res(window.AnimMusic); return; }
+    const sc = document.createElement('script'); sc.src = MUSIC_SRC;
+    sc.onload = () => res(window.AnimMusic); sc.onerror = rej; document.head.append(sc);
+  }));
+  let gestured = false;      // browsers only allow sound after the person has clicked or tapped
+  const gestureWaiters = new Set();
+  const onGesture = () => { gestured = true; gestureWaiters.forEach((f) => f()); };
+  document.addEventListener('pointerdown', onGesture, { capture: true });
+  document.addEventListener('keydown', onGesture, { capture: true });
 
   function mount(fig) {
     const scene = scenes[fig.dataset.anim];
     const cv = fig.querySelector('canvas');
     if (!scene || !cv) return;
-    const s = { g: cv.getContext('2d'), W: 0, H: 0, fig };
+    const tm = timing(scene);
+    const s = { g: cv.getContext('2d'), W: 0, H: 0, fig, clock: 0 };
     const bar = document.createElement('div'); bar.className = 'anim-progress'; bar.setAttribute('aria-hidden', 'true');
     const ctrl = document.createElement('div'); ctrl.className = 'anim-ctrl';
-    ctrl.innerHTML = '<button type="button" data-a="play">Pause</button><button type="button" data-a="replay">Replay</button><button type="button" data-a="full">Full screen</button>';
+    ctrl.innerHTML = '<button type="button" data-a="play">Pause</button><button type="button" data-a="replay">Replay</button>'
+      + '<button type="button" data-a="music" aria-pressed="false" title="Background music, made by the browser">♪ Music</button>'
+      + '<button type="button" data-a="full">Full screen</button>';
     fig.append(bar, ctrl);
-    const [bPlay, bReplay, bFull] = ctrl.querySelectorAll('button');
+    const [bPlay, bReplay, bMusic, bFull] = ctrl.querySelectorAll('button');
     if (!fig.requestFullscreen) bFull.hidden = true;
+    if (!(window.AudioContext || window.webkitAudioContext)) bMusic.hidden = true;
 
-    let paused = hold !== null || reduce, tHold = hold ?? (scene.poster ?? 0), t0 = performance.now();
+    let paused = hold !== null || reduce, tHold = hold !== null ? tm.toReal(hold) : tm.toReal(scene.poster ?? 0), t0 = performance.now();
     let visible = false, raf = 0;
-    const T = () => (paused ? tHold : ((performance.now() - t0) / 1000) % scene.duration);
+    const T = () => (paused ? tHold : ((performance.now() - t0) / 1000) % tm.total);
     const label = () => { bPlay.textContent = paused ? 'Play' : 'Pause'; };
     label();
+
+    // music for this stage
+    let musicOn = pref.get(), music = null;
+    const musicLabel = () => { bMusic.setAttribute('aria-pressed', String(musicOn)); bMusic.textContent = musicOn ? '♪ Music on' : '♪ Music'; };
+    musicLabel();
+    async function syncMusic() {
+      const want = musicOn && !paused && visible && gestured;
+      if (!want) { if (music) music.pause(); return; }
+      if (!music) {
+        try { const lib = await loadMusic(); music = music || lib.create(scene.music || {}); } catch { bMusic.hidden = true; return; }
+      }
+      if (musicOn && !paused && visible) music.play();
+    }
+    gestureWaiters.add(syncMusic);
 
     function resize() {
       const dpr = Math.min(2, window.devicePixelRatio || 1);
@@ -226,9 +278,10 @@
       if (scene.resize) scene.resize(s);
     }
     function draw() {
-      const t = T();
-      scene.frame(s, t);
-      bar.style.transform = `scaleX(${t / scene.duration})`;
+      const real = T();
+      s.clock = performance.now() / 1000;    // keeps gentle background motion going during a pause
+      scene.frame(s, tm.toScene(real));
+      bar.style.transform = `scaleX(${real / tm.total})`;
     }
     function loop() { draw(); raf = visible ? requestAnimationFrame(loop) : 0; }
     function start() { if (!raf && visible) raf = requestAnimationFrame(loop); }
@@ -236,9 +289,14 @@
     bPlay.addEventListener('click', () => {
       if (paused) { t0 = performance.now() - tHold * 1000; paused = false; }
       else { tHold = T(); paused = true; }
-      label(); start();
+      label(); start(); syncMusic();
     });
-    bReplay.addEventListener('click', () => { t0 = performance.now(); paused = false; label(); start(); });
+    bReplay.addEventListener('click', () => { t0 = performance.now(); paused = false; label(); start(); syncMusic(); });
+    bMusic.addEventListener('click', () => {
+      musicOn = !musicOn; pref.set(musicOn); musicLabel();
+      if (musicOn && paused && hold === null && !reduce) { t0 = performance.now() - tHold * 1000; paused = false; label(); start(); }
+      gestured = true; syncMusic();
+    });
     bFull.addEventListener('click', () => {
       if (document.fullscreenElement) document.exitFullscreen(); else fig.requestFullscreen().catch(() => {});
     });
@@ -246,10 +304,12 @@
       bFull.textContent = document.fullscreenElement === fig ? 'Exit full screen' : 'Full screen';
       requestAnimationFrame(() => { resize(); draw(); });
     });
+    document.addEventListener('visibilitychange', () => { if (document.hidden && music) music.pause(); else syncMusic(); });
     new ResizeObserver(() => { resize(); draw(); }).observe(cv);
     new IntersectionObserver((es) => {
       visible = es[0].isIntersecting;
       if (visible) start();
+      syncMusic();
     }, { threshold: 0.15 }).observe(fig);
     resize(); draw();
   }
@@ -261,10 +321,10 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => mountAll(name));
     else mountAll(name);
   };
-  // Draw one frame of a scene into a canvas (for tools/anim-sheet.html, the contact sheet used to check frames).
+  // Draw one frame of a scene into a canvas at scene time t (for tools/anim-sheet.html, the contact sheet used to check frames).
   const still = (name, cv, t) => {
     const scene = scenes[name]; if (!scene) return false;
-    const s = { g: cv.getContext('2d'), W: cv.width, H: cv.height, top: cv.width < 600 ? 44 : 0 };
+    const s = { g: cv.getContext('2d'), W: cv.width, H: cv.height, top: cv.width < 600 ? 44 : 0, clock: t };
     if (scene.resize) scene.resize(s);
     scene.frame(s, t); return true;
   };
