@@ -305,15 +305,22 @@
 
   function setStatus(text, bad) { status.textContent = text; status.classList.toggle('bad', !!bad); }
   const BLOCKED = 'This browser is blocking storage, so your work is NOT being saved. Use "Save progress" to keep a copy.';
+  // Every change is also copied straight away into localStorage (it saves instantly, even while the page is closing,
+  // which the browser database can't promise). start() uses that copy if it is newer than the database's.
+  const BACKUP = 'iab-backup';
+  function backup() { try { localStorage.setItem(BACKUP, JSON.stringify(ia)); } catch (e) { /* storage full or blocked: the database copy still saves */ } }
   function save(now) {
     ia.updated = new Date().toISOString();
+    backup();
     clearTimeout(saveTimer);
     setStatus('Saving…');
     const go = () => { saveTimer = null; store.put(ia).then(() => setStatus('Saved in this browser ✓'), () => setStatus(store.memoryOnly ? BLOCKED : 'Couldn\'t save in this browser. Use "Save progress" to keep a copy.', true)); };
     if (now) go(); else saveTimer = setTimeout(go, 300);
     refresh();
   }
-  addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && saveTimer) { clearTimeout(saveTimer); saveTimer = null; store.put(ia).catch(() => {}); } });
+  const saveNow = () => { if (!ia) return; flushAll(); if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; store.put(ia).catch(() => {}); } };
+  addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveNow(); });
+  addEventListener('pagehide', saveNow);
 
   // Update everything that depends on the whole report: word counts, ticks, figure/table/citation numbers.
   let refreshTimer = null;
@@ -1108,6 +1115,7 @@
   async function del() {
     if (!confirm(`Delete "${ia.name || 'Untitled IA'}" from this browser? This can't be undone. (A copy you downloaded with "Save progress" isn't affected.)`)) return;
     clearTimeout(saveTimer); saveTimer = null;
+    try { const b = JSON.parse(localStorage.getItem(BACKUP) || 'null'); if (b && b.id === ia.id) localStorage.removeItem(BACKUP); } catch (e) { /* ignore */ }
     await store.remove(ia.id).catch(() => {});
     for (const rec of (await store.allImages()).filter(r => r.ia === ia.id)) await store.removeImage(rec.id).catch(() => {});
     ias = ias.filter(x => x.id !== ia.id);
@@ -1185,9 +1193,79 @@
     return null;
   }
 
+  // ---------- the Word file ----------
+  // A "Before you download" panel (not exported), the wide-margin option, then js/ia/export.js builds the file.
+  function wordPanel() {
+    flushAll();
+    const back = document.activeElement;
+    const nums = numbering(ia), w = totalWords(ia);
+    const notes = [];
+    const code = ia.front.code.trim();
+    if (!ia.front.title.trim()) notes.push(['Your report has no title yet', 'rq']);
+    if (!code) notes.push(['Your candidate code isn\'t filled in yet', 'rq']);
+    else if (!/^[a-z]{3}\d{3}$/i.test(code)) notes.push(['Your candidate code doesn\'t look like one (three letters and three numbers)', 'rq']);
+    const entries = walk(ia);
+    const noCap = entries.filter(e => (e.kind === 'figure' && e.block.img && !plain(e.block.caption)) || (e.kind === 'table' && e.block.type === 'table' && !plain(e.block.caption)));
+    if (noCap.length) notes.push([`${noCap.length} figure${noCap.length > 1 ? 's or tables have' : ' or table has'} no caption`, null]);
+    const uncited = ia.refs.filter(r => plain(r.html) && !(r.id in nums.cite)).length;
+    if (uncited) notes.push([`${uncited} reference${uncited > 1 ? 's aren\'t' : ' isn\'t'} cited in your report`, 'references']);
+    const emptySecs = SECTIONS.filter(sec => sec.id !== 'references' && !sectionHasContent(sec)).map(sec => sec.kind === 'hypothesis' ? sec.versions[ia.settings.kind].heading : sec.title);
+    const wide = h('input', { type: 'checkbox', checked: ia.settings.wideMargins, onchange: e => { ia.settings.wideMargins = e.target.checked; save(); } });
+    const msg = h('p', { class: 'iab-eqmsg', role: 'alert' });
+    const dl = button('Download the Word file', async () => {
+      dl.disabled = true; msg.textContent = '';
+      try {
+        await MathJax.startup.promise;
+        const { bytes } = await window.IAExport.build({ ia, sections: SECTIONS, walk, numbering, orderedRefs, formatCell, totalWords, getImage: id => store.getImage(id) });
+        const day = new Date().toISOString().slice(0, 10);
+        window.Lab.download(bytes, `IA - ${(ia.name || 'report').replace(/[\\/:*?"<>|]+/g, '').trim() || 'report'} - ${day}.docx`);
+        close();
+      } catch (e) { console.error(e); msg.textContent = 'Sorry, the Word file couldn\'t be made. Please try again, and tell your teacher if it keeps happening.'; dl.disabled = false; }
+    }, 'button');
+    const close = () => { removeEventListener('keydown', onKey, true); panel.remove(); if (back && back.focus) back.focus(); };
+    const onKey = e => { if (e.key === 'Escape') { e.preventDefault(); close(); } };
+    const goTo = id => { close(); go(id); };
+    const panel = h('div', { class: 'iab-eqpanel', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'iab-wordtitle' },
+      h('div', { class: 'iab-eqbox iab-wordbox' },
+        h('h3', { id: 'iab-wordtitle' }, 'Download your report as a Word file'),
+        h('p', {}, `Your report has ${fmtNum(w)} words, as the IB counts them (the limit is 3,000).`),
+        h('h4', {}, 'Before you download'),
+        h('ul', { class: 'iab-wordchecks' },
+          h('li', {}, h('strong', {}, 'No names anywhere: '), 'not yours, and not anyone else\'s. Only candidate codes.'),
+          notes.map(([t, id]) => h('li', { class: 'warn' }, t, id ? [' (', linkButton('go there', () => goTo(id)), ')'] : null)),
+          emptySecs.length ? h('li', { class: 'warn' }, 'These sections are empty, so they won\'t be in the file: ' + emptySecs.join(', ') + '.') : null,
+          h('li', {}, 'Every table and figure is numbered for you; check that each one is referred to in your text.'),
+          h('li', {}, 'The checklists and guidance aren\'t in the file, and neither are any explanation boxes you hid.')),
+        h('label', { class: 'iab-check' }, wide, ' Wide right margin (6 cm) for my teacher\'s comments on my draft'),
+        msg,
+        h('div', { class: 'iab-eqactions' }, dl, button('Cancel', close)),
+        h('p', { class: 'iab-note' }, 'The file opens in Word, Google Docs or Pages. Equations are real Word equations you can still edit. ',
+          h('a', { href: 'ia.html#submit', target: '_blank', rel: 'noopener' }, 'Before you hand it in'), ' (IA page).')));
+    document.body.append(panel);
+    addEventListener('keydown', onKey, true);
+    dl.focus();
+  }
+  function sectionHasContent(sec) {
+    const d = ia.s[sec.id];
+    if (sec.kind === 'variables') return VAR_FIELDS.some(f => plain(d.iv[f]) || plain(d.dv[f])) || d.controls.length > 0 || Object.values(d.why).some(plain) || d.extra.some(b => b.type !== 'text' || plain(b.html));
+    return walk(ia).some(e => e.sec === sec.id && (e.kind === 'html' ? !!(plain(e.html) || /data-eq/.test(e.html || '')) : e.kind === 'figure' ? !!e.block.img : e.block.type === 'table' ? e.block.rows.some(r => r.some(c => String(c).trim())) : e.block.id === 'eval' ? d.rows.some(r => EVAL_COLS.some(([k]) => plain(r[k]))) : false));
+  }
+
   // ---------- start ----------
   async function start() {
     ias = (await store.all()).map(upgrade);
+    // A newer copy in localStorage means the last change didn't reach the database before the page closed
+    try {
+      const b = JSON.parse(localStorage.getItem(BACKUP) || 'null');
+      if (b && b.id && b.s) {
+        const i = ias.findIndex(x => x.id === b.id);
+        if (i < 0 || (b.updated || '') > (ias[i].updated || '')) {
+          const x = upgrade(b);
+          if (i < 0) ias.push(x); else ias[i] = x;
+          store.put(x).catch(() => {});
+        }
+      }
+    } catch (e) { /* no usable copy */ }
     if (!ias.length) ias.push(upgrade(newIA('My IA')));
     const want = lsGet('iab-current');
     ia = ias.find(x => x.id === want) || ias[0];
@@ -1195,7 +1273,8 @@
     const countInfo = h('details', { class: 'iab-countinfo' }, h('summary', {}, 'What\'s counted?'),
       h('p', {}, 'As the IB guide says, the count leaves out headings and the title, data tables and the variables tables, pictures and their captions, equations and calculations, citations and the references list. The limit is 3,000 words; strong reports are often around 2,200.'));
     root.append(
-      h('div', { class: 'iab-bar' }, iaMenu, h('div', { class: 'iab-bar-right' }, wordsEl, countInfo, status)),
+      h('div', { class: 'iab-bar' }, iaMenu, h('div', { class: 'iab-bar-right' }, wordsEl, countInfo, status),
+        h('div', { class: 'iab-bar-actions' }, button('Download Word file', wordPanel, 'button'))),
       h('div', { class: 'iab-layout' }, sidebar, h('div', { class: 'iab-main' }, h('label', { class: 'iab-pickerwrap' }, h('span', {}, 'Section'), picker), view)));
     switchTo(ia.id);
     headHeight(); setTimeout(headHeight, 500);   // the header is drawn by js/site.js

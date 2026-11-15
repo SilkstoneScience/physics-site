@@ -223,6 +223,18 @@ body.iab-page main { max-width: 1240px; }
 .iab-refs > li > .iab-linkbtn { padding-top: 44px; font-size: 0.9rem; }
 .iab-refwarn { margin: 4px 0 0; font-size: 0.88rem; color: var(--bad); }
 
+/* ===== Stage 4: the Word file ===== */
+.iab-bar-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.iab-bar-actions .button { padding: 7px 14px; font-size: 0.95rem; }
+.iab-wordbox h4 { margin: 12px 0 4px; }
+.iab-wordchecks { margin: 0 0 12px; padding-left: 1.2em; }
+.iab-wordchecks li { margin: 4px 0; }
+.iab-wordchecks li.warn { color: var(--bad); }
+.iab-wordchecks li.warn .iab-linkbtn { color: var(--accent); }
+.iab-wordbox .iab-check { align-items: flex-start; }
+.iab-wordbox .iab-check input { margin-top: 5px; }
+.iab-check input { width: auto; flex: none; }
+
 /* ===== Stage 3: equations ===== */
 body.iab-page { --keyboard-zindex: 1100; }   /* MathLive's on-screen keyboard shows above the equation editor */
 .iab-tool.eq { color: var(--accent); font-weight: 600; }
