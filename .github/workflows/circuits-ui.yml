@@ -37,9 +37,12 @@ jobs:
         run: npm install --no-save --no-audit --no-fund --prefix tools/circuits/.pw playwright@1.49.1
       - name: Install the browsers
         run: tools/circuits/.pw/node_modules/.bin/playwright install --with-deps chromium webkit
-      - name: Serve the site
-        run: python3 -m http.server 8044 > /dev/null 2>&1 &
-      - name: Run the interface tests
-        run: node tools/circuits/playwright-run.mjs
+      - name: Serve the site and run the interface tests
+        # The server is started in this same step, and the tests wait until it answers.
+        run: |
+          python3 -m http.server 8044 --bind 127.0.0.1 > /tmp/server.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf -o /dev/null http://127.0.0.1:8044/tools/circuits/ui-test.html && break; sleep 1; done
+          curl -sf -o /dev/null http://127.0.0.1:8044/tools/circuits/ui-test.html || { echo "::error title=Web server::The site could not be served"; cat /tmp/server.log; exit 1; }
+          node tools/circuits/playwright-run.mjs
         env:
-          PORT: 8044
+          BASE: http://127.0.0.1:8044
