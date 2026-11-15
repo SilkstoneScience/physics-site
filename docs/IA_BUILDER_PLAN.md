@@ -341,12 +341,15 @@ The Word file shows the count at the top of page one ("Word count: 2,184"), work
 - **Auto-save** in the browser as the student types (half a second after they stop). The text, tables and settings are small; images are big, so **everything is stored in IndexedDB** (the browser's database, which can hold far more than localStorage), with images as separate records. If the browser blocks storage (some private windows), the page says so clearly and suggests "Save progress" often.
 - **More than one IA:** a "My IAs" menu to create, rename, switch, duplicate and delete IAs (e.g. "Practice: pendulum" and "Real IA"). Delete asks first.
 - **"Save progress"** downloads one file holding the whole IA, images included. **"Open saved file"** loads one (as a new IA, or replacing the current one if it's the same IA: the page asks which).
-- **Reminder:** if the last "Save progress" download was more than 7 days ago (or never, once the IA has some content), a gentle notice at the top: "You last saved a copy on 3 November. Browser storage can be cleared, so save a copy now." With a "Save progress" button and "Remind me later" (hides it for a day).
+- **Reminder:** once the IA has some work in it, if the last "Save progress" download (or, if there has never been one, the day the IA was started) was more than 7 days ago, a gentle notice under the top bar: "You last saved a copy of this IA on 5 November 2026. Your work is kept only in this browser…". With a "Save progress" button and "Remind me later" (hides it for a day).
+- **Opening a file:** if this browser already has the same IA, the page says which is newer and asks: replace the one in this browser, keep both (the file opens as a copy), or cancel. Pictures always get new ids in this browser.
+- **Safety:** everything read from a file is rebuilt field by field and cleaned to the allowed formats; unknown parts are dropped, and pictures are kept only if they really open as PNG or JPEG. (Tested with a file containing scripts, event handlers, an iframe, odd ids and a fake picture: nothing ran.)
+- **Nothing lost on closing:** every change is also copied at once to localStorage (which saves instantly, even while the page closes); on opening, the newer of that copy and the database's is used.
 - The page explains plainly: work is saved **only in this browser on this device**; to move to another computer, use Save progress and Open saved file; clearing browser data deletes it.
 
 ### Save-file format
 
-One JSON file (plain text that the page reads back), file name like `IA - Real IA - 2026-11-15.ia.json`:
+One JSON file (plain text that the page reads back), file name like `IA builder - Real IA - 2026-11-15.json` (the Word file is `IA - Real IA - 2026-11-15.docx`):
 
 ```json
 {

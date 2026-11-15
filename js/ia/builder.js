@@ -1129,7 +1129,7 @@
     ia = ias.find(x => x.id === id);
     lsSet('iab-current', id);
     if (fresh) save(true);
-    buildMenu(); buildSidebar(); showSection(ia.ui.current);
+    buildMenu(); buildSidebar(); showSection(ia.ui.current); drawReminder();
   }
 
   function go(id) {
@@ -1251,6 +1251,175 @@
     return walk(ia).some(e => e.sec === sec.id && (e.kind === 'html' ? !!(plain(e.html) || /data-eq/.test(e.html || '')) : e.kind === 'figure' ? !!e.block.img : e.block.type === 'table' ? e.block.rows.some(r => r.some(c => String(c).trim())) : e.block.id === 'eval' ? d.rows.some(r => EVAL_COLS.some(([k]) => plain(r[k]))) : false));
   }
 
+  // ---------- Save progress / Open saved file (plan, section 6) ----------
+  // One JSON file holds the whole IA, its pictures included (as base64 text).
+  const FORMAT = 'ib-physics-ia-builder', VERSION = 1;
+  const blobToBase64 = blob => new Promise((resolve, reject) => { const r = new FileReader(); r.onload = () => resolve(String(r.result).split(',')[1] || ''); r.onerror = reject; r.readAsDataURL(blob); });
+  const imageIds = x => { const ids = new Set(); (function find(o) { for (const k in o) { if (k === 'img' && typeof o[k] === 'string') ids.add(o[k]); else if (o[k] && typeof o[k] === 'object') find(o[k]); } })(x.s); return ids; };
+  const fileName = (x, ext) => `IA builder - ${(x.name || 'IA').replace(/[\\/:*?"<>|]+/g, '').trim() || 'IA'} - ${new Date().toISOString().slice(0, 10)}.${ext}`;
+  const longDate = iso => new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  async function saveProgress() {
+    flushAll();
+    const images = {};
+    for (const id of imageIds(ia)) {
+      const rec = await store.getImage(id);
+      if (rec && rec.blob) images[id] = { type: rec.type, w: rec.w, h: rec.h, data: await blobToBase64(rec.blob) };
+    }
+    const now = new Date().toISOString();
+    ia.lastDownload = now;
+    delete ia.ui.snooze;
+    save(true);
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify({ format: FORMAT, version: VERSION, savedAt: now, ia, images })], { type: 'application/json' }));
+    a.download = fileName(ia, 'json');
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 20000);
+    drawReminder();
+    setTimeout(() => setStatus(`Copy saved (${a.download}) ✓`), 400);
+  }
+
+  // Everything read from a file is rebuilt field by field and cleaned, so a file can't put anything else into the page.
+  const safeId = v => String(v == null ? '' : v).replace(/[^\w-]/g, '').slice(0, 60);
+  const txt = (v, n = 300) => String(v == null ? '' : v).slice(0, n);
+  const rich = v => clean(txt(v, 200000)), inl = v => cleanInline(txt(v, 20000));
+  const iso = v => (typeof v === 'string' && !isNaN(Date.parse(v)) ? new Date(v).toISOString() : null);
+  const list = v => (Array.isArray(v) ? v.slice(0, 500) : []);
+  function fixBlock(b) {
+    if (!b || typeof b !== 'object') return null;
+    const id = safeId(b.id) || uid('b');
+    if (b.type === 'text') return { id, type: 'text', html: rich(b.html) };
+    if (b.type === 'image') return { id, type: 'image', img: safeId(b.img) || null, caption: inl(b.caption), w: +b.w || 0, h: +b.h || 0 };
+    if (b.type === 'table') {
+      const head = list(b.head).slice(0, 30).map(inl);
+      if (!head.length) head.push('');
+      const rows = list(b.rows).map(r => head.map((_, i) => txt(Array.isArray(r) ? r[i] : '', 200)));
+      const dp = head.map((_, i) => { const n = Array.isArray(b.dp) ? b.dp[i] : null; return Number.isInteger(n) && n >= 0 && n <= 6 ? n : null; });
+      return { id, type: 'table', caption: inl(b.caption), head, rows: rows.length ? rows : [head.map(() => '')], dp };
+    }
+    if (b.type === 'calc') return { id, type: 'calc', blocks: fixBlocks(b.blocks) };
+    return null;
+  }
+  const fixBlocks = v => list(v).map(fixBlock).filter(b => b && b.type !== 'calc');
+  function sanitizeIA(raw) {
+    const s = raw.s && typeof raw.s === 'object' ? raw.s : {}, out = {};
+    for (const sec of SECTIONS) {
+      const d = s[sec.id] && typeof s[sec.id] === 'object' ? s[sec.id] : {};
+      if (sec.kind === 'rq') out.rq = { text: rich(d.text) };
+      if (sec.kind === 'blocks' || sec.kind === 'hypothesis') out[sec.id] = { blocks: fixBlocks(d.blocks) };
+      if (sec.kind === 'variables') {
+        const v = k => Object.fromEntries(VAR_FIELDS.map(f => [f, inl((d[k] || {})[f])]));
+        const controls = list(d.controls).map(c => ({ id: safeId(c && c.id) || uid('cv'), name: inl(c && c.name), value: inl(c && c.value), instrument: inl(c && c.instrument), how: inl(c && c.how) }));
+        const wc = {};
+        for (const c of controls) wc[c.id] = rich(d.whyControls && d.whyControls[c.id]);
+        const why = d.why || {};
+        out.variables = { iv: v('iv'), dv: v('dv'), controls, whyControls: wc, why: { range: rich(why.range), interval: rich(why.interval), repeats: rich(why.repeats), precision: rich(why.precision) },
+          extra: fixBlocks(d.extra), captions: { main: inl((d.captions || {}).main), controls: inl((d.captions || {}).controls) } };
+      }
+      if (sec.kind === 'method') out.method = { top: fixBlocks(d.top), steps: list(d.steps).map(st => ({ id: safeId(st && st.id) || uid('st'), html: rich(st && st.html) })) };
+      if (sec.kind === 'story') out[sec.id] = { steps: list(d.steps).map(st => {
+        st = st || {};
+        const item = st.item ? fixBlock(st.item) : null;
+        return { id: safeId(st.id) || uid('s'), intro: rich(st.intro), item, explain: rich(st.explain), explainHidden: st.explainHidden === true };
+      }) };
+      if (sec.kind === 'evaluation') out.evaluation = { rows: list(d.rows).map(r => ({ id: safeId(r && r.id) || uid('ev'), weak: inl(r && r.weak), data: inl(r && r.data), concl: inl(r && r.concl), improve: inl(r && r.improve) })),
+        most: rich(d.most), caption: d.caption == null ? null : inl(d.caption) };
+    }
+    const st = raw.settings || {}, fr = raw.front || {}, ui = raw.ui || {};
+    const ticks = {};
+    for (const [k, v] of Object.entries(raw.ticks || {})) if (v === true && /^[a-z]{2}\.\d{1,2}$/.test(k)) ticks[k] = true;
+    return upgrade({
+      id: safeId(raw.id) || uid('ia-'), name: txt(raw.name, 60) || 'IA', created: iso(raw.created) || new Date().toISOString(), updated: iso(raw.updated) || new Date().toISOString(),
+      lastDownload: iso(raw.lastDownload),
+      settings: { rqPlace: ['before', 'after', 'inside'].includes(st.rqPlace) ? st.rqPlace : 'before', kind: st.kind === 'constant' ? 'constant' : 'relationship', wideMargins: st.wideMargins === true },
+      front: { title: txt(fr.title, 200), code: txt(fr.code, 12), group: txt(fr.group, 80) },
+      s: out, refs: list(raw.refs).map(r => ({ id: safeId(r && r.id) || uid('r'), html: rich(r && r.html) })), ticks,
+      ui: { current: SEC[ui.current] ? ui.current : 'rq', hideChecklists: ui.hideChecklists === true },
+    });
+  }
+  // Pictures from the file: only PNG or JPEG that really open as pictures
+  async function pictureFromFile(rec) {
+    if (!rec || !/^image\/(png|jpeg)$/.test(rec.type) || typeof rec.data !== 'string' || rec.data.length > 34e6) return null;
+    try {
+      const bin = atob(rec.data), bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      const blob = new Blob([bytes], { type: rec.type });
+      const bmp = await createImageBitmap(blob);
+      const out = { blob, type: rec.type, w: bmp.width, h: bmp.height };
+      bmp.close && bmp.close();
+      return out;
+    } catch (e) { return null; }
+  }
+  // Asks what to do when the file holds an IA that's already in this browser: 'replace', 'copy' or null (cancel)
+  function chooseImport(existing, fileIA, savedAt) {
+    return new Promise(resolve => {
+      const back = document.activeElement;
+      const done = v => { removeEventListener('keydown', onKey, true); panel.remove(); if (back && back.focus) back.focus(); resolve(v); };
+      const onKey = e => { if (e.key === 'Escape') { e.preventDefault(); done(null); } };
+      const gap = (Date.parse(fileIA.updated) || 0) - (Date.parse(existing.updated) || 0);
+      const newer = gap > 60e3, same = Math.abs(gap) <= 60e3;   // within a minute: the same version
+      const panel = h('div', { class: 'iab-eqpanel', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'iab-importtitle' },
+        h('div', { class: 'iab-eqbox iab-wordbox' },
+          h('h3', { id: 'iab-importtitle' }, 'This IA is already in this browser'),
+          h('p', {}, `"${existing.name || 'Untitled IA'}" in this browser was last changed on ${longDate(existing.updated)}. The file was saved on ${longDate(savedAt || fileIA.updated)}${same ? ', and the two are the same version' : newer ? ' and is newer' : ', and the copy in this browser is newer'}.`),
+          h('div', { class: 'iab-eqactions iab-stack' },
+            button('Replace the one in this browser with the file', () => done('replace'), newer ? 'button' : 'button secondary'),
+            button('Keep both (open the file as a copy)', () => done('copy'), newer ? 'button secondary' : 'button'),
+            button('Cancel', () => done(null)))));
+      document.body.append(panel);
+      addEventListener('keydown', onKey, true);
+      panel.querySelector('button').focus();
+    });
+  }
+  const fileIn = h('input', { type: 'file', accept: '.json,application/json', hidden: true, onchange: e => { const f = e.target.files[0]; e.target.value = ''; if (f) openSaved(f); } });
+  async function openSaved(file) {
+    flushAll();
+    let raw = null;
+    try { if (file.size > 60e6) throw new Error('big'); raw = JSON.parse(await file.text()); } catch (e) { /* not JSON */ }
+    if (!raw || raw.format !== FORMAT || !raw.ia || typeof raw.ia !== 'object') { alert('That file wasn\'t saved by the IA builder. Choose a file made with "Save progress".'); return; }
+    if (raw.version > VERSION) alert('This file was saved by a newer version of the IA builder. It will open, but anything new may be left out. Try reloading this page to get the newest version.');
+    const x = sanitizeIA(raw.ia);
+    const existing = ias.find(y => y.id === x.id);
+    let mode = existing ? await chooseImport(existing, x, iso(raw.savedAt)) : 'new';
+    if (!mode) return;
+    if (mode === 'copy') { x.id = uid('ia-'); x.name = (x.name + ' (from file)').slice(0, 60); }
+    // pictures get new ids in this browser
+    const map = {}, files = raw.images && typeof raw.images === 'object' ? raw.images : {};
+    for (const id of imageIds(x)) {
+      const pic = await pictureFromFile(files[id]);
+      if (!pic) continue;
+      map[id] = uid('img-');
+      await store.putImage({ id: map[id], ia: x.id, type: pic.type, w: pic.w, h: pic.h, blob: pic.blob });
+    }
+    (function swap(o) { for (const k in o) { if (k === 'img' && typeof o[k] === 'string') o[k] = map[o[k]] || o[k]; else if (o[k] && typeof o[k] === 'object') swap(o[k]); } })(x.s);
+    if (mode === 'replace') {
+      for (const rec of (await store.allImages()).filter(r => r.ia === x.id && !Object.values(map).includes(r.id))) await store.removeImage(rec.id).catch(() => {});
+      ias[ias.findIndex(y => y.id === x.id)] = x;
+    } else ias.push(x);
+    ia = null;
+    await store.put(x).catch(() => {});
+    switchTo(x.id, true);
+    const missing = imageIds(x).size - Object.keys(map).length;
+    setTimeout(() => setStatus(`Opened "${x.name}" from your file ✓${missing ? ` (${missing} picture${missing > 1 ? 's were' : ' was'} missing from the file)` : ''}`), 600);
+  }
+
+  // ---------- the reminder to save a copy ----------
+  // Shown when the IA has some work in it and its last copy (or, if none, its start) was more than a week ago.
+  const remind = h('div', { class: 'notice iab-remind', role: 'status', hidden: true });
+  const WEEK = 7 * 24 * 3600e3, DAY = 24 * 3600e3;
+  function drawReminder() {
+    const since = Date.parse(ia.lastDownload || ia.created) || Date.now();
+    const hasWork = totalWords(ia) > 0 || imageIds(ia).size > 0;
+    const show = hasWork && Date.now() - since > WEEK && !(ia.ui.snooze && Date.now() < ia.ui.snooze);
+    remind.hidden = !show;
+    remind.innerHTML = '';
+    if (!show) return;
+    remind.append(
+      h('p', {}, h('strong', {}, ia.lastDownload ? `You last saved a copy of this IA on ${longDate(ia.lastDownload)}. ` : 'You haven\'t saved a copy of this IA yet. '),
+        'Your work is kept only in this browser, and clearing your browsing data deletes it. Save a copy to your computer or cloud drive now and then.'),
+      h('p', { class: 'iab-remind-actions' }, button('Save progress', saveProgress, 'button'),
+        button('Remind me later', () => { ia.ui.snooze = Date.now() + DAY; save(); drawReminder(); })));
+  }
+
   // ---------- start ----------
   async function start() {
     ias = (await store.all()).map(upgrade);
@@ -1274,7 +1443,11 @@
       h('p', {}, 'As the IB guide says, the count leaves out headings and the title, data tables and the variables tables, pictures and their captions, equations and calculations, citations and the references list. The limit is 3,000 words; strong reports are often around 2,200.'));
     root.append(
       h('div', { class: 'iab-bar' }, iaMenu, h('div', { class: 'iab-bar-right' }, wordsEl, countInfo, status),
-        h('div', { class: 'iab-bar-actions' }, button('Download Word file', wordPanel, 'button'))),
+        h('div', { class: 'iab-bar-actions' },
+          button('Save progress', saveProgress, 'button secondary', { title: 'Download a copy of this IA (pictures included) to keep safe or move to another computer' }),
+          button('Open saved file', () => fileIn.click(), 'button secondary', { title: 'Open a copy you saved with "Save progress"' }),
+          button('Download Word file', wordPanel, 'button'), fileIn)),
+      remind,
       h('div', { class: 'iab-layout' }, sidebar, h('div', { class: 'iab-main' }, h('label', { class: 'iab-pickerwrap' }, h('span', {}, 'Section'), picker), view)));
     switchTo(ia.id);
     headHeight(); setTimeout(headHeight, 500);   // the header is drawn by js/site.js
