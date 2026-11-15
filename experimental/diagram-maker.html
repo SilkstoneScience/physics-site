@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics diagram maker: draw your experimental set-up · Mr Silkstone's Physics</title>
+  <meta name="description" content="Draw a clear, labelled diagram of your experimental set-up for the IB Physics IA: drag equipment onto the page, join it up, label it and download it as a picture.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/diagram-maker.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics diagram maker: draw your experimental set-up · Mr Silkstone's Physics">
+  <meta property="og:description" content="Draw a clear, labelled diagram of your experimental set-up for the IB Physics IA: drag equipment onto the page, join it up, label it and download it as a picture.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/diagram-maker.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/diagram-maker.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="../js/diagram-items.js"></script>
+  <script defer src="../js/diagram-maker.js"></script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main class="dm-main">
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › Diagram maker</p>
+    <h1>Diagram maker</h1>
+    <p class="lead">Draw a clear diagram of your experimental set-up for your IA or a practical: drag equipment onto the page, arrange it, then download it as a picture for your report.</p>
+
+    <details class="dm-help">
+      <summary>How to use it</summary>
+      <ol>
+        <li><strong>Add equipment:</strong> drag a piece from the equipment list onto the page, or tap it to put it in the middle of the page. Use the search box to find it quickly (for example "stand" or "balance").</li>
+        <li><strong>Move it:</strong> drag it. Drag on empty paper to select several things at once (on a touch screen, one finger on empty paper moves the view; pinch to zoom).</li>
+        <li><strong>Change it:</strong> drag a corner square to resize it, the round handle to turn it, and the squares at the ends of a rule, spring or bench to make it longer. The settings panel has its exact size, angle, a flip switch and any choices (for example the water level in a beaker).</li>
+        <li><strong>Join things up:</strong> choose String, Wire, Tubing, Light ray or an arrow above the page. The dots show where lines can attach. Click (or tap) where the line starts, click at each bend, and finish with a double-click or "Finish line". A wire finishes by itself when it reaches a terminal, and an arrow after two clicks. Lines attached to equipment follow it when it moves. Press Esc or choose Select to go back to moving things.</li>
+        <li><strong>Change a line:</strong> select it and drag its dots. Double-click it to add a bend, or a bend to remove it. The settings panel changes its type, adds a label to an arrow (for example <i>W</i>) or makes it a smooth curve.</li>
+        <li><strong>Label it:</strong> choose Label, click the thing you want to name, then click where the words should go. Type the words in the settings panel (it starts with the equipment's name), and add its precision underneath if you like, for example "±0.01 g". Tick "Numbered labels" to show numbers on the diagram with a key underneath instead.</li>
+        <li><strong>Line things up:</strong> "Snap" keeps everything on the grid, so pieces line up neatly. Turn it off for small adjustments.</li>
+        <li><strong>Finish:</strong> "Download picture (PNG)" saves a sharp picture on a white background, cropped to your drawing, ready to put in your report. "Save progress" saves a file you can open again with "Open saved file", to change the diagram later.</li>
+        <li><strong>Keyboard:</strong> arrow keys nudge (with Shift for bigger steps), Delete removes, Ctrl+Z undoes, Ctrl+Y redoes, Ctrl+C and Ctrl+V copy and paste, Ctrl+D duplicates.</li>
+      </ol>
+    </details>
+    <p class="notice dm-privacy">Your diagram is saved automatically, but only in this browser on this device: nothing is sent anywhere. To keep a copy, or to carry on with it on another computer, press "Save progress" and open the file later with "Open saved file".</p>
+    <p class="dm-phone-note">On a phone the page is small: pinch with two fingers to zoom in. A laptop or tablet is easier.</p>
+
+    <div class="dm-app" id="dm-app">
+      <div class="dm-toolbar" role="toolbar" aria-label="Diagram tools">
+        <button type="button" class="dm-narrow" data-act="bank" aria-pressed="false" title="Show the equipment list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Equipment</span></button>
+        <button type="button" data-act="undo" title="Undo (Ctrl+Z)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg><span>Undo</span></button>
+        <button type="button" data-act="redo" title="Redo (Ctrl+Y)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H9a5 5 0 0 0 0 10h3"/></svg><span>Redo</span></button>
+        <span class="dm-sep" aria-hidden="true"></span>
+        <button type="button" data-act="dup" data-needs="1" title="Duplicate (Ctrl+D)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg><span>Duplicate</span></button>
+        <button type="button" data-act="del" data-needs="1" title="Delete (Delete key)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg><span>Delete</span></button>
+        <span class="dm-sep" aria-hidden="true"></span>
+        <button type="button" data-act="rotl" data-needs="1" title="Turn 15° anticlockwise (Shift: 90°)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span class="dm-vh">Turn anticlockwise</span></button>
+        <button type="button" data-act="rotr" data-needs="1" title="Turn 15° clockwise (Shift: 90°)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg><span class="dm-vh">Turn clockwise</span></button>
+        <button type="button" data-act="flip" data-needs="1" title="Flip left to right"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M9 7 4 17h5zM15 7l5 10h-5z"/></svg><span>Flip</span></button>
+        <button type="button" data-act="front" data-needs="1" title="Bring to front"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="11" height="11" rx="1"/><rect class="dm-ico-fill" x="10" y="10" width="11" height="11" rx="1"/></svg><span>Front</span></button>
+        <button type="button" data-act="back" data-needs="1" title="Send to back"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="dm-ico-fill" x="3" y="3" width="11" height="11" rx="1"/><rect x="10" y="10" width="11" height="11" rx="1"/></svg><span>Back</span></button>
+        <span class="dm-sep" aria-hidden="true"></span>
+        <button type="button" data-act="grid" aria-pressed="true" title="Show or hide the grid"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18"/></svg><span>Grid</span></button>
+        <button type="button" data-act="snap" aria-pressed="true" title="Snap to the grid"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v8a6 6 0 0 0 12 0V3M6 7h4M14 7h4"/></svg><span>Snap</span></button>
+        <span class="dm-sep" aria-hidden="true"></span>
+        <button type="button" data-act="zoomout" title="Zoom out"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M8 11h6"/></svg><span class="dm-vh">Zoom out</span></button>
+        <button type="button" data-act="fit" title="Fit the page in the window"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="dm-vh">Fit to window</span></button>
+        <button type="button" data-act="zoomin" title="Zoom in"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M8 11h6M11 8v6"/></svg><span class="dm-vh">Zoom in</span></button>
+        <button type="button" class="dm-narrow" data-act="props" aria-pressed="false" title="Show the settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg><span>Settings</span></button>
+      </div>
+      <div class="dm-tools" role="toolbar" aria-label="Line tools">
+        <button type="button" data-tool="select" aria-pressed="true" title="Select and move (Esc)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 7-6 2-2 6z"/></svg><span>Select</span></button>
+        <button type="button" data-tool="string" aria-pressed="false" title="Draw string"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20C7 6 15 20 20 4"/></svg><span>String</span></button>
+        <button type="button" data-tool="wire" aria-pressed="false" title="Draw a wire"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h7V7h11"/><circle class="dm-ico-fill" cx="10" cy="17" r="1.6"/></svg><span>Wire</span></button>
+        <button type="button" data-tool="tube" aria-pressed="false" title="Draw tubing"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h9a7 7 0 0 1 7 7v7M3 13h9a1 1 0 0 1 1 1v7"/></svg><span>Tubing</span></button>
+        <button type="button" data-tool="ray" aria-pressed="false" title="Draw a light ray"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="dm-ico-ray" d="M3 19 21 5"/><path class="dm-ico-rayfill" d="m15.5 9.3-5.2 1.3 2.6 3.3z"/></svg><span>Light ray</span></button>
+        <button type="button" data-tool="motion" aria-pressed="false" title="Draw a motion arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h17M14 6l6 6-6 6"/></svg><span>Motion</span></button>
+        <button type="button" data-tool="force" aria-pressed="false" title="Draw a force arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h12" stroke-width="3.5"/><path class="dm-ico-fill" d="m14 6 8 6-8 6z"/></svg><span>Force</span></button>
+        <button type="button" data-tool="label" aria-pressed="false" title="Add a label with a leader line"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 19 6-6"/><circle class="dm-ico-fill" cx="4" cy="19" r="1.6"/><path d="M12 9h9M12 13h6" stroke-width="2.4"/></svg><span>Label</span></button>
+        <button type="button" class="dm-finish" data-act="finish" hidden title="Finish this line (Enter, or double-click)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span>Finish line</span></button>
+        <p class="dm-hint" id="dm-hint" aria-live="polite"></p>
+      </div>
+      <div class="dm-body">
+        <aside class="dm-bank" aria-label="Equipment">
+          <label class="dm-search"><span class="dm-vh">Search the equipment</span>
+            <input type="search" id="dm-search" placeholder="Search equipment…" autocomplete="off"></label>
+          <div id="dm-bank-list"></div>
+        </aside>
+        <div class="dm-stage" id="dm-stage">
+          <svg id="dm-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Your diagram"></svg>
+        </div>
+        <aside class="dm-props" id="dm-props" aria-label="Settings" aria-live="polite"></aside>
+      </div>
+      <div class="dm-files">
+        <button type="button" class="button" data-file="png"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download picture (PNG)</button>
+        <button type="button" class="button secondary" data-file="save" title="Download a file of this diagram that you can open again later, on any computer">Save progress</button>
+        <button type="button" class="button secondary" data-file="open" title="Open a diagram saved with Save progress">Open saved file</button>
+        <button type="button" class="button secondary" data-file="new" title="Start again with a blank page">New diagram</button>
+        <input type="file" id="dm-open" accept=".json,application/json" hidden>
+        <p class="dm-status" id="dm-status" role="status"></p>
+      </div>
+    </div>
+    <p class="dm-request">Is a piece of equipment missing? <a href="../about.html#contact">Let me know</a> and I'll add it.</p>
+    <noscript><p class="notice">The diagram maker needs JavaScript switched on.</p></noscript>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,469 @@
+[
+  {
+    "id": "CK-B5-01",
+    "type": "target",
+    "level": "SL",
+    "sections": ["combos"],
+    "title": "Three volts for the lamp",
+    "summary": "Give a 12 Ω lamp exactly half of a 6 V supply.",
+    "brief": "<p>The lamp has a resistance of 12 Ω and the battery an emf of 6.0 V, with no internal resistance. Using only the parts in the toolbox, make the p.d. across the lamp exactly <strong>3.0 V</strong>, and show it on a voltmeter connected across the lamp. The meters are ideal.</p>",
+    "start": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 6, "r": 0 } },
+        { "id": "l1", "type": "lamp", "x": 0, "y": 6, "params": { "model": "ohmic", "R": 12, "Prated": 3 } }
+      ],
+      "junctions": [], "wires": []
+    },
+    "locked": ["b1", "l1"],
+    "toolbox": { "resistor": { "count": 2, "params": { "R": 6 }, "fixed": true }, "voltmeter": { "count": 1 } },
+    "checks": [
+      { "kind": "value", "of": "l1", "quantity": "V", "target": 3, "tolerance": 0.05, "unit": "V", "text": "The lamp has a p.d. of 3.0 V across it." },
+      { "kind": "across", "meter": { "type": "voltmeter" }, "component": "l1", "text": "A voltmeter is connected across the lamp." },
+      { "kind": "value", "of": { "type": "voltmeter" }, "quantity": "reading", "target": 3, "tolerance": 0.05, "unit": "V", "text": "The voltmeter reads 3.0 V." },
+      { "kind": "noShort", "text": "There is no short circuit." }
+    ],
+    "hints": [
+      "In a series circuit the supply p.d. is shared between the components in proportion to their resistances.",
+      "For the lamp to get half of the 6.0 V, the rest of the circuit must have the same resistance as the lamp: 12 Ω. How can two 6 Ω resistors make 12 Ω?"
+    ],
+    "explanation": "<p>Two 6 Ω resistors in series make 12 Ω. In series with the 12 Ω lamp, the total resistance is 24 Ω, so the current is 6.0 ÷ 24 = 0.25 A and the lamp's p.d. is 0.25 × 12 = 3.0 V. The p.d. divides in proportion to resistance: the lamp has half of the total resistance, so it gets half of the 6.0 V. With only one 6 Ω resistor the lamp would get 4.0 V; with the two resistors in parallel (3 Ω) it would get 4.8 V.</p>",
+    "model": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 6, "r": 0 } },
+        { "id": "l1", "type": "lamp", "x": 0, "y": 6, "params": { "model": "ohmic", "R": 12, "Prated": 3 } },
+        { "id": "r1", "type": "resistor", "x": 6, "y": -6, "params": { "R": 6 } },
+        { "id": "r2", "type": "resistor", "x": 10, "y": 0, "rot": 90, "params": { "R": 6 } },
+        { "id": "v1", "type": "voltmeter", "x": 0, "y": 10, "rot": 180 }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "b1", "t": 1 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w2", "from": { "c": "r1", "t": 1 }, "to": { "c": "r2", "t": 0 } },
+        { "id": "w3", "from": { "c": "r2", "t": 1 }, "to": { "c": "l1", "t": 1 } },
+        { "id": "w4", "from": { "c": "l1", "t": 0 }, "to": { "c": "b1", "t": 0 } },
+        { "id": "w5", "from": { "c": "v1", "t": 0 }, "to": { "c": "l1", "t": 1 } },
+        { "id": "w6", "from": { "c": "v1", "t": 1 }, "to": { "c": "l1", "t": 0 } }
+      ]
+    },
+    "wrong": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 6, "r": 0 } },
+        { "id": "l1", "type": "lamp", "x": 0, "y": 6, "params": { "model": "ohmic", "R": 12, "Prated": 3 } },
+        { "id": "r1", "type": "resistor", "x": 6, "y": -6, "params": { "R": 6 } },
+        { "id": "v1", "type": "voltmeter", "x": 0, "y": 10, "rot": 180 }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "b1", "t": 1 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w2", "from": { "c": "r1", "t": 1 }, "to": { "c": "l1", "t": 1 } },
+        { "id": "w4", "from": { "c": "l1", "t": 0 }, "to": { "c": "b1", "t": 0 } },
+        { "id": "w5", "from": { "c": "v1", "t": 0 }, "to": { "c": "l1", "t": 1 } },
+        { "id": "w6", "from": { "c": "v1", "t": 1 }, "to": { "c": "l1", "t": 0 } }
+      ]
+    }
+  },
+  {
+    "id": "CK-B5-02",
+    "type": "target",
+    "level": "SL",
+    "sections": ["combos"],
+    "title": "Exactly one amp",
+    "summary": "Make 1.00 A flow from a 6 V battery using 12 Ω resistors.",
+    "brief": "<p>The battery has an emf of 6.0 V and no internal resistance. Using 12 Ω resistors from the toolbox, make a current of exactly <strong>1.00 A</strong> flow from the battery, and measure it with an ammeter in series with the battery. The ammeter is ideal.</p>",
+    "start": {
+      "components": [ { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 6, "r": 0 } } ],
+      "junctions": [], "wires": []
+    },
+    "locked": ["b1"],
+    "toolbox": { "resistor": { "count": 3, "params": { "R": 12 }, "fixed": true }, "ammeter": { "count": 1, "params": { "ideal": true, "range": "2A" }, "fixed": true } },
+    "checks": [
+      { "kind": "series", "meter": { "type": "ammeter" }, "component": "b1", "text": "An ammeter is in series with the battery." },
+      { "kind": "value", "of": { "type": "ammeter" }, "quantity": "reading", "target": 1, "tolerance": 0.005, "unit": "A", "text": "The ammeter reads 1.00 A." },
+      { "kind": "noShort", "text": "There is no short circuit." }
+    ],
+    "hints": [
+      "For 1.00 A from 6.0 V, the total resistance must be 6.0 ÷ 1.00 = 6 Ω.",
+      "Resistors in parallel have a smaller total resistance than either one alone. Two equal resistors in parallel give half the resistance of one."
+    ],
+    "explanation": "<p>The circuit needs a total resistance of 6.0 V ÷ 1.00 A = 6 Ω. Two 12 Ω resistors in parallel give $\\frac{1}{R} = \\frac{1}{12} + \\frac{1}{12}$, so $R$ = 6 Ω. All three in parallel would give 4 Ω (1.50 A); all three in series, 36 Ω (0.167 A).</p>",
+    "model": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 6, "r": 0 } },
+        { "id": "a1", "type": "ammeter", "x": 6, "y": -6 },
+        { "id": "r1", "type": "resistor", "x": 10, "y": 0, "rot": 90, "params": { "R": 12 } },
+        { "id": "r2", "type": "resistor", "x": 14, "y": 0, "rot": 90, "params": { "R": 12 } }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "b1", "t": 1 }, "to": { "c": "a1", "t": 0 } },
+        { "id": "w2", "from": { "c": "a1", "t": 1 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w3", "from": { "c": "r1", "t": 0 }, "to": { "c": "r2", "t": 0 } },
+        { "id": "w4", "from": { "c": "r1", "t": 1 }, "to": { "c": "r2", "t": 1 } },
+        { "id": "w5", "from": { "c": "r1", "t": 1 }, "to": { "c": "b1", "t": 0 } }
+      ]
+    },
+    "wrong": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 6, "r": 0 } },
+        { "id": "a1", "type": "ammeter", "x": 6, "y": -6 },
+        { "id": "r1", "type": "resistor", "x": 10, "y": 0, "rot": 90, "params": { "R": 12 } },
+        { "id": "r2", "type": "resistor", "x": 14, "y": 0, "rot": 90, "params": { "R": 12 } },
+        { "id": "r3", "type": "resistor", "x": 18, "y": 0, "rot": 90, "params": { "R": 12 } }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "b1", "t": 1 }, "to": { "c": "a1", "t": 0 } },
+        { "id": "w2", "from": { "c": "a1", "t": 1 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w3", "from": { "c": "r1", "t": 0 }, "to": { "c": "r2", "t": 0 } },
+        { "id": "w4", "from": { "c": "r1", "t": 1 }, "to": { "c": "r2", "t": 1 } },
+        { "id": "w6", "from": { "c": "r2", "t": 0 }, "to": { "c": "r3", "t": 0 } },
+        { "id": "w7", "from": { "c": "r2", "t": 1 }, "to": { "c": "r3", "t": 1 } },
+        { "id": "w5", "from": { "c": "r1", "t": 1 }, "to": { "c": "b1", "t": 0 } }
+      ]
+    }
+  },
+  {
+    "id": "CK-B5-03",
+    "type": "target",
+    "level": "SL",
+    "sections": ["combos", "power"],
+    "title": "Both lamps at full brightness",
+    "summary": "Run two 6 V, 3 W lamps from one 6 V battery.",
+    "brief": "<p>Each lamp is rated 6.0 V, 3.0 W, and the battery has an emf of 6.0 V with no internal resistance. Connect <strong>both</strong> lamps so that each works at its rated power. There are no extra parts: just wires.</p>",
+    "start": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 6, "r": 0 } },
+        { "id": "l1", "type": "lamp", "x": -4, "y": 4, "params": { "model": "ohmic", "R": 12, "Prated": 3 } },
+        { "id": "l2", "type": "lamp", "x": 6, "y": 4, "params": { "model": "ohmic", "R": 12, "Prated": 3 } }
+      ],
+      "junctions": [], "wires": []
+    },
+    "locked": ["b1", "l1", "l2"],
+    "toolbox": {},
+    "checks": [
+      { "kind": "value", "of": "l1", "quantity": "P", "target": 3, "tolerance": 0.1, "unit": "W", "text": "L1 works at its rated power, 3.0 W." },
+      { "kind": "value", "of": "l2", "quantity": "P", "target": 3, "tolerance": 0.1, "unit": "W", "text": "L2 works at its rated power, 3.0 W." },
+      { "kind": "noShort", "text": "There is no short circuit." }
+    ],
+    "hints": [
+      "A lamp gives its rated power when it has its rated p.d. across it: here, 6.0 V each.",
+      "Components connected in parallel each have the full supply p.d. across them."
+    ],
+    "explanation": "<p>Each lamp needs 6.0 V across it, the full emf of the battery, so the lamps go in parallel. Each lamp then takes $I = P/V$ = 3.0 ÷ 6.0 = 0.50 A, and the battery supplies 1.0 A. In series, the two 12 Ω lamps would share the 6.0 V: 3.0 V each, a current of 0.25 A, and only $P = VI$ = 0.75 W each, a quarter of the rated power.</p>",
+    "model": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 6, "r": 0 } },
+        { "id": "l1", "type": "lamp", "x": -4, "y": 4, "params": { "model": "ohmic", "R": 12, "Prated": 3 } },
+        { "id": "l2", "type": "lamp", "x": 6, "y": 4, "params": { "model": "ohmic", "R": 12, "Prated": 3 } }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "b1", "t": 1 }, "to": { "c": "l1", "t": 1 } },
+        { "id": "w2", "from": { "c": "b1", "t": 1 }, "to": { "c": "l2", "t": 1 } },
+        { "id": "w3", "from": { "c": "b1", "t": 0 }, "to": { "c": "l1", "t": 0 } },
+        { "id": "w4", "from": { "c": "b1", "t": 0 }, "to": { "c": "l2", "t": 0 } }
+      ]
+    },
+    "wrong": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 6, "r": 0 } },
+        { "id": "l1", "type": "lamp", "x": -4, "y": 4, "params": { "model": "ohmic", "R": 12, "Prated": 3 } },
+        { "id": "l2", "type": "lamp", "x": 6, "y": 4, "params": { "model": "ohmic", "R": 12, "Prated": 3 } }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "b1", "t": 1 }, "to": { "c": "l2", "t": 1 } },
+        { "id": "w2", "from": { "c": "l2", "t": 0 }, "to": { "c": "l1", "t": 1 } },
+        { "id": "w3", "from": { "c": "l1", "t": 0 }, "to": { "c": "b1", "t": 0 } }
+      ]
+    }
+  },
+  {
+    "id": "CK-B5-04",
+    "type": "target",
+    "level": "SL",
+    "sections": ["divider"],
+    "title": "Six volts from a thermistor divider",
+    "summary": "Set a potential divider so the output is 6.0 V at room temperature.",
+    "brief": "<p>The thermistor is at 25 °C, where its resistance is 10 kΩ. The battery has an emf of 9.0 V and no internal resistance. Build a potential divider from the thermistor and the variable resistor, then set the variable resistor so that a voltmeter across it reads <strong>6.0 V</strong>. The voltmeter is ideal.</p>",
+    "start": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 9, "r": 0 } },
+        { "id": "t1", "type": "thermistor", "x": -6, "y": 2, "rot": 90, "params": { "temp": 25 } }
+      ],
+      "junctions": [], "wires": []
+    },
+    "locked": ["b1", "t1"],
+    "toolbox": { "variable": { "count": 1, "params": { "R": 10000, "min": 0, "max": 50000 } }, "voltmeter": { "count": 1 } },
+    "checks": [
+      { "kind": "series", "meter": "t1", "component": { "type": "variable" }, "text": "The thermistor and the variable resistor are in series (a potential divider)." },
+      { "kind": "across", "meter": { "type": "voltmeter" }, "component": { "type": "variable" }, "text": "A voltmeter is connected across the variable resistor." },
+      { "kind": "value", "of": { "type": "voltmeter" }, "quantity": "reading", "target": 6, "tolerance": 0.05, "unit": "V", "text": "The voltmeter reads 6.0 V." },
+      { "kind": "noShort", "text": "There is no short circuit." }
+    ],
+    "hints": [
+      "In a potential divider, each resistor's share of the supply p.d. is in proportion to its resistance.",
+      "6.0 V is two thirds of 9.0 V, so the variable resistor needs two thirds of the total resistance."
+    ],
+    "explanation": "<p>The output across the variable resistor is $V_{\\text{out}} = V_{\\text{in}} \\times \\dfrac{R_{\\text{var}}}{R_{\\text{var}} + R_{\\text{th}}}$. For 6.0 V out of 9.0 V, $R_{\\text{var}}$ must be twice $R_{\\text{th}}$: 20 kΩ. If the thermistor warms up, its resistance falls and the output rises, which is how a fire alarm or a thermostat can use it.</p>",
+    "model": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 9, "r": 0 } },
+        { "id": "t1", "type": "thermistor", "x": -6, "y": 2, "rot": 90, "params": { "temp": 25 } },
+        { "id": "r1", "type": "variable", "x": 6, "y": 2, "rot": 90, "params": { "R": 20000, "min": 0, "max": 50000 } },
+        { "id": "v1", "type": "voltmeter", "x": 10, "y": 2, "rot": 90 }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "b1", "t": 1 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w2", "from": { "c": "r1", "t": 1 }, "to": { "c": "t1", "t": 1 } },
+        { "id": "w3", "from": { "c": "t1", "t": 0 }, "to": { "c": "b1", "t": 0 } },
+        { "id": "w4", "from": { "c": "v1", "t": 0 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w5", "from": { "c": "v1", "t": 1 }, "to": { "c": "r1", "t": 1 } }
+      ]
+    },
+    "wrong": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 9, "r": 0 } },
+        { "id": "t1", "type": "thermistor", "x": -6, "y": 2, "rot": 90, "params": { "temp": 25 } },
+        { "id": "r1", "type": "variable", "x": 6, "y": 2, "rot": 90, "params": { "R": 10000, "min": 0, "max": 50000 } },
+        { "id": "v1", "type": "voltmeter", "x": 10, "y": 2, "rot": 90 }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "b1", "t": 1 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w2", "from": { "c": "r1", "t": 1 }, "to": { "c": "t1", "t": 1 } },
+        { "id": "w3", "from": { "c": "t1", "t": 0 }, "to": { "c": "b1", "t": 0 } },
+        { "id": "w4", "from": { "c": "v1", "t": 0 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w5", "from": { "c": "v1", "t": 1 }, "to": { "c": "r1", "t": 1 } }
+      ]
+    }
+  },
+  {
+    "id": "CK-B5-05",
+    "type": "target",
+    "level": "SL",
+    "sections": ["internal"],
+    "title": "A terminal p.d. of 1.20 V",
+    "summary": "Load a real cell so its terminal p.d. drops to 1.20 V.",
+    "brief": "<p>The cell has an emf of 1.50 V and an internal resistance of 0.50 Ω. Using 1.0 Ω resistors from the toolbox, make the p.d. across the cell's terminals exactly <strong>1.20 V</strong>, and show it on a voltmeter connected across the cell. The voltmeter is ideal.</p>",
+    "start": {
+      "components": [ { "id": "c1", "type": "cell", "x": 0, "y": -6, "params": { "emf": 1.5, "r": 0.5 } } ],
+      "junctions": [], "wires": []
+    },
+    "locked": ["c1"],
+    "toolbox": { "resistor": { "count": 4, "params": { "R": 1 }, "fixed": true }, "voltmeter": { "count": 1, "params": { "range": "2V" } } },
+    "checks": [
+      { "kind": "across", "meter": { "type": "voltmeter" }, "component": "c1", "text": "A voltmeter is connected across the cell." },
+      { "kind": "value", "of": { "type": "voltmeter" }, "quantity": "reading", "target": 1.2, "tolerance": 0.005, "unit": "V", "text": "The voltmeter reads 1.20 V." },
+      { "kind": "noShort", "text": "There is no short circuit." }
+    ],
+    "hints": [
+      "The terminal p.d. is the emf minus the p.d. \"lost\" inside the cell: $V = \\varepsilon - Ir$.",
+      "1.20 V means 0.30 V is lost inside the cell, so $I$ = 0.30 ÷ 0.50 = 0.60 A."
+    ],
+    "explanation": "<p>For $V$ = 1.20 V, the p.d. across the internal resistance is 1.50 − 1.20 = 0.30 V, so $I$ = 0.30 ÷ 0.50 = 0.60 A. The external resistance is then 1.20 ÷ 0.60 = 2.0 Ω: two 1.0 Ω resistors in series. Check: $I = \\varepsilon / (R + r)$ = 1.50 ÷ 2.5 = 0.60 A. With no external resistor at all (open circuit) the voltmeter would read the full 1.50 V, and the more current the cell supplies, the lower its terminal p.d.</p>",
+    "model": {
+      "components": [
+        { "id": "c1", "type": "cell", "x": 0, "y": -6, "params": { "emf": 1.5, "r": 0.5 } },
+        { "id": "r1", "type": "resistor", "x": 6, "y": 0, "rot": 90, "params": { "R": 1 } },
+        { "id": "r2", "type": "resistor", "x": 6, "y": 6, "rot": 90, "params": { "R": 1 } },
+        { "id": "v1", "type": "voltmeter", "x": 0, "y": -10, "rot": 180, "params": { "range": "2V" } }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "c1", "t": 1 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w2", "from": { "c": "r1", "t": 1 }, "to": { "c": "r2", "t": 0 } },
+        { "id": "w3", "from": { "c": "r2", "t": 1 }, "to": { "c": "c1", "t": 0 } },
+        { "id": "w4", "from": { "c": "v1", "t": 0 }, "to": { "c": "c1", "t": 1 } },
+        { "id": "w5", "from": { "c": "v1", "t": 1 }, "to": { "c": "c1", "t": 0 } }
+      ]
+    },
+    "wrong": {
+      "components": [
+        { "id": "c1", "type": "cell", "x": 0, "y": -6, "params": { "emf": 1.5, "r": 0.5 } },
+        { "id": "r1", "type": "resistor", "x": 6, "y": 0, "rot": 90, "params": { "R": 1 } },
+        { "id": "v1", "type": "voltmeter", "x": 0, "y": -10, "rot": 180, "params": { "range": "2V" } }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "c1", "t": 1 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w3", "from": { "c": "r1", "t": 1 }, "to": { "c": "c1", "t": 0 } },
+        { "id": "w4", "from": { "c": "v1", "t": 0 }, "to": { "c": "c1", "t": 1 } },
+        { "id": "w5", "from": { "c": "v1", "t": 1 }, "to": { "c": "c1", "t": 0 } }
+      ]
+    }
+  },
+  {
+    "id": "CK-B5-06",
+    "type": "measure",
+    "level": "SL",
+    "sections": ["internal"],
+    "title": "The mystery cell",
+    "summary": "Find the emf and internal resistance of a cell you can't open.",
+    "brief": "<p>The cell is sealed in a box: you can't see its emf or its internal resistance. Build a circuit with the variable resistor, an ammeter and a voltmeter, take readings, and work out the cell's <strong>emf</strong> and <strong>internal resistance</strong>. The meters are ideal.</p>",
+    "start": {
+      "components": [ { "id": "c1", "type": "cell", "x": 0, "y": -6, "params": { "emf": 4.5, "r": 1.5 } } ],
+      "junctions": [], "wires": []
+    },
+    "locked": ["c1"],
+    "hidden": ["c1"],
+    "toolbox": { "variable": { "count": 1, "params": { "R": 10, "min": 0, "max": 50 } }, "ammeter": { "count": 1 }, "voltmeter": { "count": 1 }, "switch": { "count": 1 } },
+    "answers": [
+      { "label": "emf of the cell", "unit": "V", "answer": 4.5, "range": [4.35, 4.65], "of": "c1", "param": "emf" },
+      { "label": "internal resistance", "unit": "Ω", "answer": 1.5, "range": [1.3, 1.7], "anySign": true, "of": "c1", "param": "r" }
+    ],
+    "hints": [
+      "Put the ammeter in series with the cell and the variable resistor, and the voltmeter across the cell. Record pairs of readings for several settings of the variable resistor.",
+      "The terminal p.d. is $V = \\varepsilon - Ir$. Plot $V$ (y-axis) against $I$ (x-axis): the intercept on the $V$-axis is the emf and the gradient is $-r$. Or use two very different readings and solve two simultaneous equations."
+    ],
+    "explanation": "<p>The cell's emf is 4.5 V and its internal resistance is 1.5 Ω. Since $V = \\varepsilon - Ir$, a graph of terminal p.d. against current is a straight line with $V$-intercept $\\varepsilon$ and gradient $-r$. Readings far apart give the most reliable gradient. With the switch open (no current) the voltmeter reads the emf directly, but the graph uses many readings, which reduces the effect of random uncertainties, and it gives $r$ as well as $\\varepsilon$.</p>"
+  },
+  {
+    "id": "CK-B5-07",
+    "type": "measure",
+    "level": "SL",
+    "sections": ["resistance", "symbols"],
+    "title": "What's in the box?",
+    "summary": "Measure the resistance of a hidden resistor.",
+    "brief": "<p>The box hides a resistor whose value you can't see. Use the cell and the meters in the toolbox to find its <strong>resistance</strong>. Make sure each meter is connected the right way: the ammeter in series, the voltmeter in parallel. The meters are ideal.</p>",
+    "start": {
+      "components": [ { "id": "r1", "type": "resistor", "x": 0, "y": 4, "params": { "R": 47 } } ],
+      "junctions": [], "wires": []
+    },
+    "locked": ["r1"],
+    "hidden": ["r1"],
+    "toolbox": { "cell": { "count": 1, "params": { "emf": 6, "r": 0 }, "fixed": true }, "ammeter": { "count": 1, "params": { "range": "200mA" } }, "voltmeter": { "count": 1 } },
+    "answers": [
+      { "label": "resistance in the box", "unit": "Ω", "answer": 47, "range": [46, 48], "of": "r1", "param": "R" }
+    ],
+    "hints": [
+      "The resistance is $R = V/I$: you need the p.d. across the box and the current through it.",
+      "The ammeter goes in series with the box (the same current flows through both) and the voltmeter across the box. If the ammeter shows OL, check that it isn't connected across the box or the cell: an ammeter in parallel makes a short circuit."
+    ],
+    "explanation": "<p>The resistance is 47 Ω. With 6.0 V across it, the current is 6.0 ÷ 47 = 0.128 A (128 mA on the 200 mA range), and $R = V/I$ = 6.00 ÷ 0.1277 = 47 Ω. A voltmeter put in series instead would read about 6 V while almost no current flows; an ammeter put in parallel with the box would short-circuit it.</p>"
+  },
+  {
+    "id": "CK-B5-08",
+    "type": "predict",
+    "level": "SL",
+    "sections": ["combos"],
+    "title": "Predict: one in series, two in parallel",
+    "summary": "Predict three meter readings before switching on.",
+    "brief": "<p>The battery has an emf of 12.0 V and no internal resistance; the meters are ideal. R1 = 4.0 Ω, R2 = 6.0 Ω and R3 = 12 Ω. Predict what A1, A2 and V1 will read when the switch is closed. Then close it and compare.</p>",
+    "start": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -8, "params": { "emf": 12, "r": 0 } },
+        { "id": "a1", "type": "ammeter", "x": 6, "y": -8 },
+        { "id": "s1", "type": "switch", "x": 12, "y": -8, "params": { "closed": false } },
+        { "id": "r1", "type": "resistor", "x": 18, "y": -4, "rot": 90, "params": { "R": 4 } },
+        { "id": "r2", "type": "resistor", "x": 10, "y": 4, "rot": 90, "params": { "R": 6 } },
+        { "id": "r3", "type": "resistor", "x": 18, "y": 4, "rot": 90, "params": { "R": 12 } },
+        { "id": "a2", "type": "ammeter", "x": 18, "y": 10, "rot": 90 },
+        { "id": "v1", "type": "voltmeter", "x": 22, "y": -4, "rot": 90 }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "b1", "t": 1 }, "to": { "c": "a1", "t": 0 } },
+        { "id": "w2", "from": { "c": "a1", "t": 1 }, "to": { "c": "s1", "t": 0 } },
+        { "id": "w3", "from": { "c": "s1", "t": 1 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w4", "from": { "c": "r1", "t": 1 }, "to": { "c": "r3", "t": 0 } },
+        { "id": "w5", "from": { "c": "r3", "t": 0 }, "to": { "c": "r2", "t": 0 } },
+        { "id": "w6", "from": { "c": "r3", "t": 1 }, "to": { "c": "a2", "t": 0 } },
+        { "id": "w7", "from": { "c": "a2", "t": 1 }, "to": { "c": "r2", "t": 1 } },
+        { "id": "w8", "from": { "c": "r2", "t": 1 }, "to": { "c": "b1", "t": 0 } },
+        { "id": "w9", "from": { "c": "v1", "t": 0 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w10", "from": { "c": "v1", "t": 1 }, "to": { "c": "r1", "t": 1 } }
+      ]
+    },
+    "locked": ["b1", "a1", "s1", "r1", "r2", "r3", "a2", "v1"],
+    "switch": "s1",
+    "predict": [
+      { "of": "a1", "quantity": "reading", "label": "Ammeter A1", "unit": "A" },
+      { "of": "a2", "quantity": "reading", "label": "Ammeter A2", "unit": "A" },
+      { "of": "v1", "quantity": "reading", "label": "Voltmeter V1", "unit": "V" }
+    ],
+    "hints": [
+      "First find the resistance of R2 and R3 in parallel, then add R1, which is in series with them.",
+      "A1 measures the whole current. The p.d. left for the parallel part is 12.0 V minus the p.d. across R1, and A2 measures only R3's share."
+    ],
+    "explanation": "<p>R2 and R3 in parallel: $\\frac{1}{R} = \\frac{1}{6.0} + \\frac{1}{12}$, so $R$ = 4.0 Ω. Adding R1 gives 8.0 Ω in total, so A1 reads 12.0 ÷ 8.0 = 1.50 A. V1 reads 1.50 × 4.0 = 6.0 V across R1, which leaves 6.0 V across the parallel part. A2 reads 6.0 ÷ 12 = 0.50 A (and R2 takes the other 1.00 A). A common mistake is to share the 12.0 V equally between the three resistors, or to forget that the two branches share the current.</p>"
+  },
+  {
+    "id": "CK-B5-09",
+    "type": "predict",
+    "level": "SL",
+    "sections": ["internal", "power"],
+    "title": "Predict: where does the p.d. go?",
+    "summary": "Predict the readings for a battery with internal resistance.",
+    "brief": "<p>The battery has an emf of 9.0 V and an internal resistance of 1.0 Ω; R1 = 8.0 Ω and the meters are ideal. With the switch open, V1 reads the full 9.0 V. Predict the readings with the switch <strong>closed</strong>, and the power wasted inside the battery.</p>",
+    "start": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 0, "y": -6, "params": { "emf": 9, "r": 1 } },
+        { "id": "s1", "type": "switch", "x": 6, "y": -6, "params": { "closed": false } },
+        { "id": "a1", "type": "ammeter", "x": 12, "y": -6 },
+        { "id": "r1", "type": "resistor", "x": 16, "y": 0, "rot": 90, "params": { "R": 8 } },
+        { "id": "v1", "type": "voltmeter", "x": 0, "y": -10, "rot": 180 }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "b1", "t": 1 }, "to": { "c": "s1", "t": 0 } },
+        { "id": "w2", "from": { "c": "s1", "t": 1 }, "to": { "c": "a1", "t": 0 } },
+        { "id": "w3", "from": { "c": "a1", "t": 1 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w4", "from": { "c": "r1", "t": 1 }, "to": { "c": "b1", "t": 0 } },
+        { "id": "w5", "from": { "c": "v1", "t": 0 }, "to": { "c": "b1", "t": 1 } },
+        { "id": "w6", "from": { "c": "v1", "t": 1 }, "to": { "c": "b1", "t": 0 } }
+      ]
+    },
+    "locked": ["b1", "s1", "a1", "r1", "v1"],
+    "switch": "s1",
+    "predict": [
+      { "of": "a1", "quantity": "reading", "label": "Ammeter A1", "unit": "A" },
+      { "of": "v1", "quantity": "reading", "label": "Voltmeter V1 (terminal p.d.)", "unit": "V" },
+      { "of": "b1", "quantity": "Pint", "label": "Power wasted inside the battery", "unit": "W" }
+    ],
+    "hints": [
+      "The current is the emf divided by the total resistance, including the internal resistance: $I = \\varepsilon / (R + r)$.",
+      "The terminal p.d. is $V = \\varepsilon - Ir$, and the power wasted inside is $I^2 r$."
+    ],
+    "explanation": "<p>$I = \\varepsilon / (R + r)$ = 9.0 ÷ (8.0 + 1.0) = 1.0 A. The p.d. lost inside the battery is $Ir$ = 1.0 V, so V1 drops from 9.0 V to 8.0 V when the switch closes. The power wasted inside is $I^2 r$ = 1.0 W, out of the 9.0 W supplied by the emf ($\\varepsilon I$); the other 8.0 W goes to R1.</p>"
+  },
+  {
+    "id": "CK-B5-10",
+    "type": "predict",
+    "level": "SL",
+    "sections": ["divider", "combos"],
+    "title": "Predict: a loaded potentiometer",
+    "summary": "Predict the output of a potentiometer with a load connected.",
+    "brief": "<p>The 6.0 V battery (no internal resistance) is connected across the whole of a 100 Ω potentiometer. Its slider is set so that 25 Ω of the potentiometer lies between the slider and the right-hand end. A 25 Ω resistor R1 is connected between the slider and that right-hand end, and the ideal voltmeter V1 measures the p.d. across R1. Predict what V1 reads when the switch is closed.</p>",
+    "start": {
+      "components": [
+        { "id": "b1", "type": "battery", "x": 4, "y": -8, "rot": 180, "params": { "emf": 6, "r": 0 } },
+        { "id": "s1", "type": "switch", "x": -2, "y": -4, "rot": 90, "params": { "closed": false } },
+        { "id": "p1", "type": "potentiometer", "x": 4, "y": 0, "rot": 180, "params": { "R": 100, "pos": 0.25 } },
+        { "id": "r1", "type": "resistor", "x": 10, "y": 4, "rot": 90, "params": { "R": 25 } },
+        { "id": "v1", "type": "voltmeter", "x": 16, "y": 4, "rot": 270 }
+      ],
+      "junctions": [],
+      "wires": [
+        { "id": "w1", "from": { "c": "b1", "t": 1 }, "to": { "c": "s1", "t": 0 } },
+        { "id": "w2", "from": { "c": "s1", "t": 1 }, "to": { "c": "p1", "t": 1 } },
+        { "id": "w3", "from": { "c": "b1", "t": 0 }, "to": { "c": "p1", "t": 0 } },
+        { "id": "w4", "from": { "c": "p1", "t": 0 }, "to": { "c": "r1", "t": 0 } },
+        { "id": "w5", "from": { "c": "p1", "t": 2 }, "to": { "c": "r1", "t": 1 } },
+        { "id": "w6", "from": { "c": "v1", "t": 0 }, "to": { "c": "r1", "t": 1 } },
+        { "id": "w7", "from": { "c": "v1", "t": 1 }, "to": { "c": "r1", "t": 0 } }
+      ]
+    },
+    "locked": ["b1", "s1", "p1", "r1", "v1"],
+    "switch": "s1",
+    "predict": [
+      { "of": "v1", "quantity": "reading", "label": "Voltmeter V1", "unit": "V" }
+    ],
+    "hints": [
+      "Is R1 in series or in parallel with part of the potentiometer? Which part?",
+      "Without R1, the 25 Ω part would take a quarter of the 6.0 V: 1.5 V. But R1 is in parallel with that 25 Ω part of the potentiometer, which changes how the 6.0 V is shared."
+    ],
+    "explanation": "<p>The 25 Ω section of the potentiometer (between the slider and the right-hand end) and R1 (25 Ω) are in parallel: 12.5 Ω. In series with the other 75 Ω, the total is 87.5 Ω, so V1 reads 6.0 × 12.5 ÷ 87.5 = 0.86 V, not the 1.5 V you would get with nothing connected. Connecting a load to a potential divider lowers its output, because the load is in parallel with part of the divider. The effect is small only when the load's resistance is much larger than the divider's.</p>"
+  }
+]

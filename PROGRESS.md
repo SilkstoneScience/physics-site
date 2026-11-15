@@ -157,6 +157,36 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - **2028 register** (14 November 2026): `docs/2028_REGISTER.md` lists every "New for 2028" tag, note and mention on the site (written by `node tools/list-2028.mjs --write`; the checker warns when it is out of date) with the plan for removing them all after the May 2027 exams, when no student needs to know what changed.
 - **Theme B colour** (same session): Theme B's own colour is now raspberry (`--theme-b-id` in `css/style.css`, the print styles and the slide generator), so it no longer clashes with the HL orange; `--theme-b` remains the notes orange. Not yet checked: a newly generated Theme B lesson deck in PowerPoint.
 
+## Circuit builder (15 November 2026, all 6 stages)
+- Stage 6: the page is public (in the sitemap and site search), with a card in the Practicals page's Theme B section and links from B.5 (circuit diagrams and meters, series and parallel, potential dividers, internal resistance); the Σ panel shows the B.5 equations. It also appears on B.5 revision sheets (they list B.5 practical cards).
+- Stage 5: Challenge Mode with 10 B.5 challenges (5 build, 2 measure, 3 predict) in `experimental/circuits/challenges.json`, independently reviewed and checked by the teacher; Playwright interface tests on GitHub (`.github/workflows/circuits-ui.yml`).
+- Possible next steps: more challenges (HL topics are not needed: B.5 has no HL content), the guided internal-resistance investigation with a lab report, and SVG export of a circuit for worksheets (both deferred by the teacher).
+- Stage 4: show the working, automatic saving, named saves, share links and board view. Stage 3 checked by the teacher, with their changes made.
+- Plan approved by the teacher: `docs/CIRCUIT_BUILDER_PLAN.md` (decisions, data model, engine, tests, stages). Lamp, thermistor and LDR curves approved.
+- Done: the physics engine (`js/circuits/components.js`, `netlist.js`, `engine.js`, `steps.js`) and the Free Build editor (`model.js`, `render.js`, `editor.js`, `app.js`, `css/circuits.css`) at `experimental/circuit-builder.html` (`noindex`, not linked yet). Tests: `tools/circuits/test.mjs` (about 2370 checks, run by `tools/check.mjs`) and `tools/circuits/ui-test.html` (46 checks through the real interface, run in the preview).
+- Next: the teacher's check of the editor in the preview, then stage 4 (show the working, saving, share links, board mode).
+
+## IA builder (15 November 2026, all 6 stages)
+- `experimental/ia-builder.html`: students build their IA report section by section and download it as a Word document. Everything stays in the browser (IndexedDB, with an instant localStorage copy so nothing is lost when the page closes); no server, accounts or AI. Plan, prompts, checklists and the teacher's decisions: `docs/IA_BUILDER_PLAN.md`.
+- 12 sections (`js/ia/sections.js`), each with "What's expected", guiding questions and a hideable checklist (not exported); the teacher checked the wording. Research question placement chosen by the student; hypothesis or expected value; two tidy variables tables with "Why these choices?" paragraphs; method diagram and numbered steps; raw data, processing and graphs as stories (introduce, show, explain; explanation boxes can be hidden); four-column evaluation table; references with a Cite button ([1], numbered by first citation). Live word count following the guide's exclusions (captions left out; the evaluation table counted).
+- Equations: MathLive 0.111.4 (MIT, approved by the teacher, loaded only on this page when the editor opens), shown with MathJax, checked against `js/omml.js` so each becomes an editable Word equation.
+- Word export (`js/ia/export.js`) through `js/labs/report.js` (new optional report layout; the lab reports are byte-for-byte unchanged) and `js/omml.js` (new Word option; PowerPoint output unchanged). Opened and checked in Word. Optional 6 cm right margin for draft feedback.
+- Save progress (one .json file with the pictures), Open saved file (cleaned field by field; replace or keep both), several IAs per student, a reminder after a week without a saved copy.
+- Linked from the IA page (box under the lead and an IA documents card), the Experimental page and the Experimental menu.
+- Possible next steps: import from the graphing tool's save file once it exists (agreed for later); teacher feedback after students use it.
+
+## Diagram maker (15 November 2026, all stages)
+- `experimental/diagram-maker.html`: students draw the labelled diagram of their experimental set-up by dragging equipment onto a page, then download it as a PNG. Everything stays in the browser (auto-saved in localStorage); no server, accounts or libraries. Plan, equipment list, save-file format and the teacher's decisions: `docs/DIAGRAM_MAKER_PLAN.md`.
+- 101 pieces of equipment in ten groups (`js/diagram-items.js`, one block per item; ids are permanent), our own flat side-view drawings (optics blocks, prism and ray box from above), including all 15 data-booklet circuit symbols plus diode, d.c. and a.c. supply marked "not in the data booklet". Black and white, with blue water and red light rays; works in dark mode, exports black on white. New batches are checked on `tools/diagram-items-preview.html` (not published; `?ids=` shows chosen items).
+- Editor (`js/diagram-maker.js`, `css/diagram-maker.css`): drag or tap to add, move, resize (stretchy rules, springs, runways, tubes), turn, flip, copy, delete, undo/redo, grid and snap, zoom and pinch; drawers for the equipment and settings on tablets and phones.
+- Lines: string, wire (square corners, snaps to terminals, junction dots), tubing, light rays, motion and force arrows with labels; attached ends follow the equipment.
+- Labels with leader lines and an optional precision line; numbered labels with a key; one text size setting for all labels (teacher's request).
+- Download picture (PNG, about 3 pixels per unit, cropped), Save progress (.json), Open saved file (checked value by value), New diagram.
+- The checker draws every item in every size and choice and checks the drawings (section 2h of `tools/check.mjs`).
+- Linked from the IA page (box under the lead, the method advice and an IA documents card), the Experimental page and the Experimental menu, next to the IA builder.
+- A small line under the editor ("Is a piece of equipment missing? Let me know…") links to the Contact me form (`about.html#contact`), so students can ask for equipment to be added (teacher's request).
+- Not yet tested with a real finger on a tablet (touch was simulated). Later batches listed in the plan (set square, picket fence, Vernier-style sensors, basic shapes…).
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".
