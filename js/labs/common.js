@@ -21,6 +21,7 @@ window.Lab = (() => {
   const esc = v => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
   // cols: [{ html: 'Length <i>L</i> / m', csv: 'length L / m', aria: 'length in metres' }, ...]
+  // Add signed: true to a column that can hold negative numbers: phone number keypads (inputmode="decimal") have no minus key.
   function table(panel, { store, file, cols, note }) {
     const blank = () => cols.map(() => '');
     panel.innerHTML = `
@@ -45,7 +46,7 @@ window.Lab = (() => {
     };
     const render = () => {
       tbody.innerHTML = rows.map((r, i) => `<tr>${r.map((v, j) =>
-        `<td><input data-r="${i}" data-c="${j}" inputmode="decimal" value="${esc(v)}" aria-label="Row ${i + 1}: ${cols[j].aria}"></td>`).join('')}
+        `<td><input data-r="${i}" data-c="${j}" inputmode="${cols[j].signed ? 'text' : 'decimal'}" value="${esc(v)}" aria-label="Row ${i + 1}: ${cols[j].aria}"></td>`).join('')}
         <td><button type="button" class="vlab-del" data-del="${i}" aria-label="Remove row ${i + 1}">×</button></td></tr>`).join('');
     };
     tbody.addEventListener('input', (e) => {
