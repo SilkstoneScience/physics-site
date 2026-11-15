@@ -184,6 +184,7 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Download picture (PNG, about 3 pixels per unit, cropped), Save progress (.json), Open saved file (checked value by value), New diagram.
 - The checker draws every item in every size and choice and checks the drawings (section 2h of `tools/check.mjs`).
 - Linked from the IA page (box under the lead, the method advice and an IA documents card), the Experimental page and the Experimental menu, next to the IA builder.
+- A small line under the editor ("Is a piece of equipment missing? Let me know…") links to the Contact me form (`about.html#contact`), so students can ask for equipment to be added (teacher's request).
 - Not yet tested with a real finger on a tablet (touch was simulated). Later batches listed in the plan (set square, picket fence, Vernier-style sensors, basic shapes…).
 
 ## Still to do
