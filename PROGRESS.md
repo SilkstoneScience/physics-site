@@ -157,6 +157,15 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - **2028 register** (14 November 2026): `docs/2028_REGISTER.md` lists every "New for 2028" tag, note and mention on the site (written by `node tools/list-2028.mjs --write`; the checker warns when it is out of date) with the plan for removing them all after the May 2027 exams, when no student needs to know what changed.
 - **Theme B colour** (same session): Theme B's own colour is now raspberry (`--theme-b-id` in `css/style.css`, the print styles and the slide generator), so it no longer clashes with the HL orange; `--theme-b` remains the notes orange. Not yet checked: a newly generated Theme B lesson deck in PowerPoint.
 
+## Circuit builder (15 November 2026, all 6 stages)
+- Stage 6: the page is public (in the sitemap and site search), with a card in the Practicals page's Theme B section and links from B.5 (circuit diagrams and meters, series and parallel, potential dividers, internal resistance); the Σ panel shows the B.5 equations. It also appears on B.5 revision sheets (they list B.5 practical cards).
+- Stage 5: Challenge Mode with 10 B.5 challenges (5 build, 2 measure, 3 predict) in `experimental/circuits/challenges.json`, independently reviewed and checked by the teacher; Playwright interface tests on GitHub (`.github/workflows/circuits-ui.yml`).
+- Possible next steps: more challenges (HL topics are not needed: B.5 has no HL content), the guided internal-resistance investigation with a lab report, and SVG export of a circuit for worksheets (both deferred by the teacher).
+- Stage 4: show the working, automatic saving, named saves, share links and board view. Stage 3 checked by the teacher, with their changes made.
+- Plan approved by the teacher: `docs/CIRCUIT_BUILDER_PLAN.md` (decisions, data model, engine, tests, stages). Lamp, thermistor and LDR curves approved.
+- Done: the physics engine (`js/circuits/components.js`, `netlist.js`, `engine.js`, `steps.js`) and the Free Build editor (`model.js`, `render.js`, `editor.js`, `app.js`, `css/circuits.css`) at `experimental/circuit-builder.html` (`noindex`, not linked yet). Tests: `tools/circuits/test.mjs` (about 2370 checks, run by `tools/check.mjs`) and `tools/circuits/ui-test.html` (46 checks through the real interface, run in the preview).
+- Next: the teacher's check of the editor in the preview, then stage 4 (show the working, saving, share links, board mode).
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".
