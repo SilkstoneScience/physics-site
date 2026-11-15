@@ -12,7 +12,7 @@
     "evaluate-claim"
   ],
   "context": "experimental",
-  "seed": 5,
+  "seed": 176,
   "physics": {
     "scenario": "A spring launcher, clamped horizontally to a stand, fires a small steel ball horizontally from a height h above the floor. The ball lands on carbon paper. The horizontal distance R from the point below the launch point (found with a plumb line) to each mark is measured, five times at each of six heights.",
     "principles": [
@@ -94,7 +94,7 @@
       },
       "noise": {
         "type": "gauss-relative",
-        "sd": 0.012
+        "sd": 0.02
       },
       "resolution": 0.001,
       "trials": 5,
@@ -130,74 +130,74 @@
       {
         "h": 0.4,
         "R__trials": [
-          0.687,
-          0.675,
-          0.67,
-          0.679,
-          0.686
+          0.686,
+          0.711,
+          0.673,
+          0.671,
+          0.689
         ],
-        "R": 0.679,
-        "R2": 0.461
+        "R": 0.686,
+        "R2": 0.471
       },
       {
         "h": 0.55,
         "R__trials": [
           0.804,
-          0.813,
-          0.8,
-          0.803,
-          0.803
+          0.814,
+          0.794,
+          0.782,
+          0.786
         ],
-        "R": 0.805,
-        "R2": 0.648
+        "R": 0.796,
+        "R2": 0.634
       },
       {
         "h": 0.7,
         "R__trials": [
-          0.925,
-          0.909,
-          0.92,
-          0.92,
-          0.923
+          0.923,
+          0.866,
+          0.922,
+          0.914,
+          0.917
         ],
-        "R": 0.919,
-        "R2": 0.845
+        "R": 0.908,
+        "R2": 0.824
       },
       {
         "h": 0.85,
         "R__trials": [
-          0.997,
-          1.016,
-          0.985,
-          1.014,
-          1.007
+          1.008,
+          0.994,
+          0.944,
+          0.998,
+          1.03
         ],
-        "R": 1.004,
-        "R2": 1.008
+        "R": 0.995,
+        "R2": 0.99
       },
       {
         "h": 1,
         "R__trials": [
+          1.039,
+          1.097,
           1.089,
-          1.092,
-          1.073,
-          1.088,
-          1.097
+          1.117,
+          1.086
         ],
-        "R": 1.088,
-        "R2": 1.184
+        "R": 1.086,
+        "R2": 1.179
       },
       {
         "h": 1.15,
         "R__trials": [
-          1.16,
-          1.177,
-          1.173,
-          1.161,
-          1.163
+          1.184,
+          1.133,
+          1.136,
+          1.112,
+          1.153
         ],
-        "R": 1.167,
-        "R2": 1.362
+        "R": 1.144,
+        "R2": 1.309
       }
     ],
     "singles": {},
@@ -211,20 +211,20 @@
         0.005
       ],
       "R": [
-        0.009,
-        0.006,
-        0.008,
+        0.02,
         0.016,
-        0.012,
-        0.009
+        0.029,
+        0.043,
+        0.039,
+        0.036
       ],
       "R2": [
-        0.012,
-        0.01,
-        0.015,
-        0.032,
-        0.026,
-        0.021
+        0.027,
+        0.025,
+        0.053,
+        0.086,
+        0.085,
+        0.082
       ]
     }
   },
@@ -234,12 +234,12 @@
       {
         "figure": "table",
         "caption": "",
-        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"h\"><span class=\"h-name\">launch height</span>$h$ / m ± 0.005</th><th scope=\"col\" data-col=\"R\"><span class=\"h-name\">mean range</span>$R$ / m</th><th scope=\"col\" data-col=\"R\" data-unc=\"1\"><span class=\"h-name\">uncertainty</span>$\\Delta R$ / m</th><th scope=\"col\" data-col=\"R2\"><span class=\"h-name\">mean range squared</span>$R^2$ / m²</th><th scope=\"col\" data-col=\"R2\" data-unc=\"1\"><span class=\"h-name\">uncertainty</span>$\\Delta R^2$ / m²</th></tr></thead><tbody><tr><td data-col=\"h\" data-row=\"0\">0.400</td><td data-col=\"R\" data-row=\"0\">0.679</td><td data-col=\"R\" data-row=\"0\" data-unc=\"1\">0.009</td><td data-col=\"R2\" data-row=\"0\">0.461</td><td data-col=\"R2\" data-row=\"0\" data-unc=\"1\">0.012</td></tr><tr><td data-col=\"h\" data-row=\"1\">0.550</td><td data-col=\"R\" data-row=\"1\">0.805</td><td data-col=\"R\" data-row=\"1\" data-unc=\"1\">0.006</td><td data-col=\"R2\" data-row=\"1\">0.648</td><td data-col=\"R2\" data-row=\"1\" data-unc=\"1\">0.010</td></tr><tr><td data-col=\"h\" data-row=\"2\">0.700</td><td data-col=\"R\" data-row=\"2\" class=\"blank\">?</td><td data-col=\"R\" data-row=\"2\" data-unc=\"1\" class=\"blank\">?</td><td data-col=\"R2\" data-row=\"2\" class=\"blank\">?</td><td data-col=\"R2\" data-row=\"2\" data-unc=\"1\" class=\"blank\">?</td></tr><tr><td data-col=\"h\" data-row=\"3\">0.850</td><td data-col=\"R\" data-row=\"3\">1.004</td><td data-col=\"R\" data-row=\"3\" data-unc=\"1\">0.016</td><td data-col=\"R2\" data-row=\"3\">1.008</td><td data-col=\"R2\" data-row=\"3\" data-unc=\"1\">0.032</td></tr><tr><td data-col=\"h\" data-row=\"4\">1.000</td><td data-col=\"R\" data-row=\"4\">1.088</td><td data-col=\"R\" data-row=\"4\" data-unc=\"1\">0.012</td><td data-col=\"R2\" data-row=\"4\">1.184</td><td data-col=\"R2\" data-row=\"4\" data-unc=\"1\">0.026</td></tr><tr><td data-col=\"h\" data-row=\"5\">1.150</td><td data-col=\"R\" data-row=\"5\">1.167</td><td data-col=\"R\" data-row=\"5\" data-unc=\"1\">0.009</td><td data-col=\"R2\" data-row=\"5\">1.362</td><td data-col=\"R2\" data-row=\"5\" data-unc=\"1\">0.021</td></tr></tbody></table></div>"
+        "html": "<div class=\"table-wrap\"><table class=\"data-table\"><thead><tr><th scope=\"col\" data-col=\"h\"><span class=\"h-name\">launch height</span>$h$ / m ± 0.005</th><th scope=\"col\" data-col=\"R\"><span class=\"h-name\">mean range</span>$R$ / m</th><th scope=\"col\" data-col=\"R\" data-unc=\"1\"><span class=\"h-name\">uncertainty</span>$\\Delta R$ / m</th><th scope=\"col\" data-col=\"R2\"><span class=\"h-name\">mean range squared</span>$R^2$ / m²</th><th scope=\"col\" data-col=\"R2\" data-unc=\"1\"><span class=\"h-name\">uncertainty</span>$\\Delta R^2$ / m²</th></tr></thead><tbody><tr><td data-col=\"h\" data-row=\"0\">0.400</td><td data-col=\"R\" data-row=\"0\">0.686</td><td data-col=\"R\" data-row=\"0\" data-unc=\"1\">0.020</td><td data-col=\"R2\" data-row=\"0\">0.471</td><td data-col=\"R2\" data-row=\"0\" data-unc=\"1\">0.027</td></tr><tr><td data-col=\"h\" data-row=\"1\">0.550</td><td data-col=\"R\" data-row=\"1\">0.796</td><td data-col=\"R\" data-row=\"1\" data-unc=\"1\">0.016</td><td data-col=\"R2\" data-row=\"1\">0.634</td><td data-col=\"R2\" data-row=\"1\" data-unc=\"1\">0.025</td></tr><tr><td data-col=\"h\" data-row=\"2\">0.700</td><td data-col=\"R\" data-row=\"2\" class=\"blank\">?</td><td data-col=\"R\" data-row=\"2\" data-unc=\"1\" class=\"blank\">?</td><td data-col=\"R2\" data-row=\"2\" class=\"blank\">?</td><td data-col=\"R2\" data-row=\"2\" data-unc=\"1\" class=\"blank\">?</td></tr><tr><td data-col=\"h\" data-row=\"3\">0.850</td><td data-col=\"R\" data-row=\"3\">0.995</td><td data-col=\"R\" data-row=\"3\" data-unc=\"1\">0.043</td><td data-col=\"R2\" data-row=\"3\">0.990</td><td data-col=\"R2\" data-row=\"3\" data-unc=\"1\">0.086</td></tr><tr><td data-col=\"h\" data-row=\"4\">1.000</td><td data-col=\"R\" data-row=\"4\">1.086</td><td data-col=\"R\" data-row=\"4\" data-unc=\"1\">0.039</td><td data-col=\"R2\" data-row=\"4\">1.179</td><td data-col=\"R2\" data-row=\"4\" data-unc=\"1\">0.085</td></tr><tr><td data-col=\"h\" data-row=\"5\">1.150</td><td data-col=\"R\" data-row=\"5\">1.144</td><td data-col=\"R\" data-row=\"5\" data-unc=\"1\">0.036</td><td data-col=\"R2\" data-row=\"5\">1.309</td><td data-col=\"R2\" data-row=\"5\" data-unc=\"1\">0.082</td></tr></tbody></table></div>"
       },
       {
         "figure": "trials",
         "caption": "The five ranges for h = 0.700 m.",
-        "html": "<div class=\"table-wrap\"><table class=\"data-table trials\" data-col=\"R\" data-row=\"2\"><thead><tr><th scope=\"col\">trial</th><th scope=\"col\">$R$ / m</th></tr></thead><tbody><tr><td>1</td><td data-trial=\"0\">0.925</td></tr><tr><td>2</td><td data-trial=\"1\">0.909</td></tr><tr><td>3</td><td data-trial=\"2\">0.920</td></tr><tr><td>4</td><td data-trial=\"3\">0.920</td></tr><tr><td>5</td><td data-trial=\"4\">0.923</td></tr></tbody></table></div>"
+        "html": "<div class=\"table-wrap\"><table class=\"data-table trials\" data-col=\"R\" data-row=\"2\"><thead><tr><th scope=\"col\">trial</th><th scope=\"col\">$R$ / m</th></tr></thead><tbody><tr><td>1</td><td data-trial=\"0\">0.923</td></tr><tr><td>2</td><td data-trial=\"1\">0.866</td></tr><tr><td>3</td><td data-trial=\"2\">0.922</td></tr><tr><td>4</td><td data-trial=\"3\">0.914</td></tr><tr><td>5</td><td data-trial=\"4\">0.917</td></tr></tbody></table></div>"
       }
     ],
     "figures": {
@@ -271,13 +271,13 @@
       "question": "Calculate the mean range for $h = 0.700\\ \\text{m}$.",
       "marks": 1,
       "markscheme": [
-        "Mean $= \\dfrac{0.925 + 0.909 + 0.920 + 0.920 + 0.923}{5} = 0.919\\ \\text{m}$ ✓"
+        "Mean $= \\dfrac{0.923 + 0.866 + 0.922 + 0.914 + 0.917}{5} = 0.908\\ \\text{m}$ ✓"
       ],
       "numeric": {
-        "answer": 0.9193999999999999,
+        "answer": 0.9084000000000001,
         "range": [
-          0.9188999999999999,
-          0.9198999999999998
+          0.9079000000000002,
+          0.9089
         ],
         "unit": "$\\text{m}$",
         "source": "Rmean"
@@ -288,13 +288,13 @@
       "question": "Determine the absolute uncertainty in this mean range.",
       "marks": 1,
       "markscheme": [
-        "Half the range of the readings: $\\dfrac{0.925 - 0.909}{2} = 0.008\\ \\text{m}$ (accept 0.0080 m) ✓"
+        "Half the range of the readings: $\\dfrac{0.923 - 0.866}{2} = 0.029\\ \\text{m}$ (accept 0.0285 m) ✓"
       ],
       "numeric": {
-        "answer": 0.008000000000000007,
+        "answer": 0.028500000000000025,
         "range": [
-          0.007500000000000007,
-          0.008500000000000008
+          0.028000000000000025,
+          0.029000000000000026
         ],
         "unit": "$\\text{m}$",
         "source": "dR"
@@ -315,13 +315,13 @@
       "marks": 2,
       "markscheme": [
         "Draws a line of best fit and uses two well-separated points on it ✓",
-        "Gradient $= 1.20\\ \\text{m}$ (accept 1.15 to 1.26) ✓"
+        "Gradient $= 1.14\\ \\text{m}$ (accept 0.977 to 1.28) ✓"
       ],
       "numeric": {
-        "answer": 1.1954285714285715,
+        "answer": 1.1411428571428572,
         "range": [
-          1.1476114285714287,
-          1.2568181818181818
+          0.9770491803278691,
+          1.2797297297297299
         ],
         "unit": "$\\text{m}$",
         "source": "gradient"
@@ -346,23 +346,23 @@
       "marks": 2,
       "markscheme": [
         "Gradient $= \\dfrac{2u^2}{g}$, so $u = \\sqrt{\\dfrac{g \\times \\text{gradient}}{2}}$ ✓",
-        "$u = 2.42\\ \\text{m s}^{-1}$ (accept 2.37 to 2.48; allow ECF from (e)) ✓"
+        "$u = 2.36\\ \\text{m s}^{-1}$ (accept 2.19 to 2.50; allow ECF from (e)) ✓"
       ],
       "numeric": {
-        "answer": 2.4202479211849353,
+        "answer": 2.3646564232463034,
         "range": [
-          2.3713489831739234,
-          2.48161421073242
+          2.1880450140722787,
+          2.504131720911597
         ],
         "unit": "$\\text{m}\\,\\text{s}^{-1}$",
         "source": "u",
         "mistakes": [
           {
-            "value": 3.422747434445025,
+            "value": 3.344129184107576,
             "feedback": "Check the factor of 2: the gradient is $2u^2/g$."
           },
           {
-            "value": 5.857600000000001,
+            "value": 5.591600000000001,
             "feedback": "That is $u^2$: take the square root."
           }
         ]
@@ -373,7 +373,7 @@
       "question": "The manufacturer states that the launch speed is $2.60\\ \\text{m s}^{-1}$. Discuss whether the data support this statement.",
       "marks": 2,
       "markscheme": [
-        "Uses the steepest and shallowest lines through the error bars (their own lines, or the uncertainty in the gradient) to find a range for $u$: the lines shown give about 2.38 to 2.48 $\\text{m s}^{-1}$ ✓",
+        "Uses the steepest and shallowest lines through the error bars (their own lines, or the uncertainty in the gradient) to find a range for $u$: the lines shown give about 2.19 to 2.50 $\\text{m s}^{-1}$ ✓",
         "2.60 $\\text{m s}^{-1}$ is above this range, so the data do not support the statement (the launcher is slower than stated). Award this mark for a conclusion consistent with the candidate's own range ✓"
       ],
       "msFigure": "graph-ms",

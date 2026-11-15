@@ -22,7 +22,10 @@ export default {
   difficulty: 2,
   context: 'experimental',
   skills: ['repeated-readings', 'mean-and-uncertainty', 'linearisation', 'gradient', 'evaluate-claim'],
-  seed: 5,
+  // Seed changed from 5 to 176 (and the scatter from 1.2 % to 2 %) on the teacher's decision of 15 November 2026: with
+  // seed 5 the readings left only about a quarter of a small square between the line of best fit and the shallowest line,
+  // too little to draw on screen. Seed 176 leaves about 0.7–0.9 of a small square for both extreme lines.
+  seed: 176,
   batch: 'pilot',
   archetypes: ['N2', 'M1', 'V3'],
   apparatus: 'horizontal spring launcher',
@@ -70,10 +73,11 @@ export default {
       measurement: {
         instrument: 'metre rule, resolution 1 mm, from the plumb-line point to each carbon-paper mark',
         reading: 'five ranges at each height; the table gives their mean, with half their range as the uncertainty',
-        noise: 'the launch speed varies slightly from shot to shot (how the ball sits and how the spring releases), by about 1.2 %; '
-          + 'since R ∝ u, each range varies by the same fraction (normal scatter, standard deviation 1.2 % of R)',
+        noise: 'the launch speed varies slightly from shot to shot (how the ball sits and how the spring releases), by about 2 %; '
+          + 'since R ∝ u, each range varies by the same fraction (normal scatter, standard deviation 2 % of R: about ±2 cm at 1 m, '
+          + 'typical of a school spring launcher)',
       },
-      noise: { type: 'gauss-relative', sd: 0.012 }, resolution: 0.001, uncertainty: 'halfRange',
+      noise: { type: 'gauss-relative', sd: 0.02 }, resolution: 0.001, uncertainty: 'halfRange',
       hide: [ROW],
     },
     R2: {

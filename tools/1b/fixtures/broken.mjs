@@ -185,7 +185,9 @@ export default [
   { name: 'a verdict judged against an answer tolerance, not the max/min lines', expect: 'claim-verdict',
     def: setClaims(A1, [{ type: 'verdict', result: 'u', value: 2.6, expect: 'outside' }]) },
   { name: 'a widened gradient range said to come from the max/min lines', expect: 'claim-verdict',
-    def: { ...A1, results: { ...A1.results, gradient: { ...A1.results.gradient, basis: 'lines' } } } },
+    // Widened to ±25 % so it is wider than the max/min-line range whatever the data (A1-B01's own ±4 % no longer widens
+    // its range since its error bars grew on 15 November 2026).
+    def: { ...A1, results: { ...A1.results, gradient: { ...A1.results.gradient, basis: 'lines', range: (d, v) => d.widen(d.gradientRange(), v, 0.25) } } } },
   { name: '"inside" verdict for a value at the edge of the range', expect: 'claim-verdict',
     def: setClaims(A1, [{ type: 'verdict', result: 'uLines', value: 2.47, expect: 'inside' }]) },
   { name: 'a verdict margin below the minimum', expect: 'claim-verdict',
