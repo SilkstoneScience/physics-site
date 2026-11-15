@@ -1,7 +1,10 @@
 /* IA builder (experimental/ia-builder.html). Uses the site's colour tokens from style.css, so dark mode follows them. */
 body.iab-page main { max-width: 1240px; }
-.iab-page .lead { max-width: 50rem; }
-/* the notice spans the builder's full width (so its edges line up with the bar below); on wide screens its two paragraphs sit side by side */
+/* the site's header and footer are 960px wide elsewhere; on this wider page they match it, so the logo, the title and the builder share one left edge */
+body.iab-page .site-header .inner, body.iab-page .site-footer .inner { max-width: 1240px; }
+/* everything at the top spans the builder's full width, so all the edges line up with the builder below */
+.iab-page .lead { max-width: none; }
+/* on wide screens the notice's two paragraphs sit side by side */
 .iab-privacy p { margin: 0.3em 0; }
 @media (min-width: 900px) {
   .iab-privacy { display: grid; grid-template-columns: 3fr 2fr; gap: 0 32px; align-items: start; }
@@ -12,6 +15,12 @@ body.iab-page main { max-width: 1240px; }
 .iab-bar { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px 20px; padding: 10px 14px; margin: 18px 0 16px;
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
 .iab-bar-right { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+/* wide screens: the bar uses the same columns as the sidebar and the section below, so the word count sits exactly
+   above the section heading (the bar's border and padding are 15px, so its first column is 15px narrower than the sidebar) */
+@media (min-width: 901px) {
+  .iab-bar { display: grid; grid-template-columns: calc(250px - 15px) minmax(0, 1fr) auto; column-gap: 24px; align-items: center; }
+  .iab-menu[open] { grid-column: 1 / -1; }
+}
 .iab-words { font-size: 1.05rem; }
 .iab-status { color: var(--good); font-size: 0.9rem; }
 .iab-status.bad { color: var(--bad); font-weight: 600; }
