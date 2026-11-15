@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: Boyle's law · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab with a Vernier gas pressure sensor: squash a fixed amount of air in a syringe, test Boyle's law with a straight-line graph, and find and correct the hidden dead volume.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/boyles-law.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: Boyle's law · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab with a Vernier gas pressure sensor: squash a fixed amount of air in a syringe, test Boyle's law with a straight-line graph, and find and correct the hidden dead volume.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/boyles-law.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-boyles-law",
+    "title": "Boyle's law",
+    "file": "Boyle's law lab",
+    "tables": {
+      "pv": {
+        "note": "One row for each syringe volume: 10.0, 8.0, 7.0, 6.0, 5.0, 12.0, 14.0, 16.0, 18.0 and 20.0 mL. Write run 2's reading in the same row as run 1's reading at that volume. Work out the mean pressure and its uncertainty (half the range) as you go. Fill in the last column, V + V₀, after you have found V₀ from Graph 3.",
+        "csvFile": "boyles-law.csv",
+        "x": 1, "y": 4,
+        "cols": [
+          { "html": "Syringe volume <i>V</i> / mL", "csv": "syringe volume V / mL", "aria": "syringe volume in millilitres" },
+          { "html": "<i>P</i>, run 1 / kPa", "csv": "pressure P1 / kPa", "aria": "pressure, run 1, in kilopascals" },
+          { "html": "<i>P</i>, run 2 / kPa", "csv": "pressure P2 / kPa", "aria": "pressure, run 2, in kilopascals" },
+          { "html": "Mean <i>P</i> / kPa", "csv": "mean pressure P / kPa", "aria": "mean pressure in kilopascals" },
+          { "html": "Δ<i>P</i> / kPa", "csv": "uncertainty in P / kPa", "aria": "uncertainty in the mean pressure in kilopascals" },
+          { "html": "<i>V</i> + <i>V</i><sub>0</sub> / mL", "csv": "corrected volume (V+V₀) / mL", "aria": "corrected volume, syringe volume plus dead volume, in millilitres" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Boyle's law</p>
+    <h1>Boyle's law</h1>
+    <p class="lead">A lab with Vernier sensors: trap some air in a syringe connected to a gas pressure sensor, squash it and let it expand, and see how its pressure depends on its volume at constant temperature. <span class="tag">B.3 Gas laws</span> <span class="tag vernier-tag">Vernier</span></p>
+    <p><strong>Aim:</strong> to test Boyle's law for a fixed amount of air at constant temperature, to find and correct the hidden "dead volume" of the apparatus, and to estimate how much air was trapped.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#theory">Theory: Boyle's law and the dead volume</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#setup">Setting up</a></li>
+        <li><a href="#collect">Collecting data</a></li>
+        <li><a href="#graph">Your graphs</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Recording instrument uncertainties, and judging when a realistic uncertainty is larger than the resolution.</li>
+      <li>Using repeated readings, with half the range, (max − min)/2, as the uncertainty.</li>
+      <li>Linearising an inverse relationship, so that a straight-line graph can test a theory.</li>
+      <li>Explaining what a gradient and an intercept mean physically, and finding the gradient's uncertainty from the steepest and shallowest lines.</li>
+      <li>Finding and correcting a systematic error: the hidden "dead volume" of air.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring volume, pressure and temperature (Tool 1); collecting data with sensors, and processing it with graphs (Tool 2); linearising a relationship and propagating uncertainties (Tool 3); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="theory">2. Theory: Boyle's law and the dead volume</h2>
+    <p>Air is made of an enormous number of molecules moving randomly. Each time a molecule hits a wall, its momentum changes, so it pushes on the wall. The pressure of the gas is the total perpendicular force per unit area:</p>
+    $$P = \frac{F}{A}$$
+    <p>Squash the same air into a smaller volume at the same temperature, and the molecules move just as fast on average, but each one reaches the walls more often. So the pressure rises.</p>
+    <p>For a fixed amount of gas at constant temperature, this gives <strong>Boyle's law</strong>: the pressure is inversely proportional to the volume,</p>
+    <div class="key">$$P \propto \frac{1}{V} \qquad\text{or}\qquad PV = \text{constant}$$</div>
+    <p>Boyle's law is one of the empirical gas laws that combine into the ideal gas equation in the data booklet (see <a href="../themes/b3.html#laws">B.3 Gas laws</a>):</p>
+    <div class="key">$$PV = nRT \qquad\text{and}\qquad \frac{PV}{T} = \text{constant}$$</div>
+    <p>Here $n$ is the amount of gas in moles, $R = 8.31$ $\text{J K}^{-1}\,\text{mol}^{-1}$ and $T$ is the temperature in kelvin.</p>
+    <p>A graph of $P$ against $V$ is a curve, so it is hard to judge by eye whether it really is "inverse". A graph of $P$ against $1/V$ should be a <strong>straight line through the origin</strong>, with a gradient equal to $nRT$. If you measure $T$, the gradient tells you how much air you trapped.</p>
+    <p>There is a catch. The volume you read from the syringe scale is not the whole volume of the trapped air: a little extra air sits in the connector and inside the sensor, out of sight. This <strong>dead volume</strong> $V_0$ is always there, so the true volume is $V + V_0$. In this lab you will find $V_0$ from your own data and correct for it.</p>
+
+    <h2 id="equipment">3. Equipment and safety</h2>
+    <ul>
+      <li>Vernier interface and a laptop with Logger Pro 3</li>
+      <li>Vernier Gas Pressure Sensor (0–210 kPa) with its 20 mL plastic syringe</li>
+      <li>Vernier Temperature Probe, or a thermometer, for the room (air) temperature</li>
+    </ul>
+    <div class="notice">
+      <p><strong>Safety:</strong> the sensor is only rated to 210 kPa. <strong>Never push the plunger below the 5.0 mL mark</strong> when you start at 10.0 mL: at 5.0 mL the pressure is already close to 190 kPa. Push and pull slowly and steadily.</p>
+      <p style="margin:0">Hold the syringe by the plunger end and the finger flange only. At small volumes the plunger needs a firm push (over 20 N): keep the syringe pointing away from faces, and don't let the plunger spring back suddenly when you let go.</p>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> Which quantities must stay constant for this experiment to test Boyle's law? For each one, say how the method keeps it constant.</label><textarea id="pre1" data-save="pre1" rows="3"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> Describe the graphs you expect for (a) <i>P</i> against <i>V</i> and (b) <i>P</i> against 1/<i>V</i>, before you collect any data. Give the shape and the intercept you expect for each. (Sketch them on paper first if it helps.)</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> Pushing the plunger in quickly makes the air warm up slightly. Using the molecular model, explain why the pressure reading would then be too high, and why you should wait before recording.</label><textarea id="pre3" data-save="pre3" rows="3"></textarea></div>
+      <div class="answer"><label for="pre4"><strong>P4.</strong> Show that if the dead volume is <i>V</i><sub>0</sub>, Boyle's law becomes <i>V</i> = <i>k</i>(1/<i>P</i>) − <i>V</i><sub>0</sub>, where <i>V</i> is the syringe reading and <i>k</i> = <i>nRT</i>. What does this predict for a graph of <i>V</i> against 1/<i>P</i>?</label><textarea id="pre4" data-save="pre4" rows="4"></textarea></div>
+    </div>
+
+    <h3>Uncertainties</h3>
+    <ul>
+      <li><strong>Volume $V$:</strong> record the smallest division on your syringe. You need one reading of the plunger's ring, so the scale uncertainty is ± half a division. Judging the front edge of the ring may be harder than this: decide whether a larger value is more realistic, and say why.</li>
+      <li><strong>Pressure $P$:</strong> Logger Pro shows the pressure to 0.1 kPa, but the reading drifts a little as it settles. You will take each volume twice (in two runs), so use half the range of the two readings, or the flicker of the reading if that is larger.</li>
+      <li><strong>Temperature $T$:</strong> read the room (air) temperature with the Temperature Probe or thermometer at the start and at the end. Use the change, or the instrument uncertainty if that is larger. Convert to kelvin.</li>
+    </ul>
+    <p>Quote each uncertainty to 1 significant figure, with the value rounded to the same decimal place, for example $P = (124 \pm 2)$ kPa. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <h2 id="setup">5. Setting up</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 210" role="img" aria-labelledby="bl1t">
+        <title id="bl1t">Set-up: a 20 mL plastic syringe lies horizontally. Its plunger rod enters the barrel from the left and ends in a rubber ring inside the barrel; the barrel has a millilitre scale and a finger flange at its left end. The trapped air fills the barrel to the right of the ring. The barrel's nozzle is screwed by a short Luer-lock connector straight onto the Gas Pressure Sensor, whose cable goes to the interface. The dead volume is the extra air inside the nozzle, the connector and the sensor, which the scale does not show.</title>
+        <line class="l3" x1="8" y1="115" x2="100" y2="115"/>
+        <line class="l3" x1="8" y1="98" x2="8" y2="132"/>
+        <rect class="area" x="108" y="101" width="102" height="28"/>
+        <rect class="f3" x="100" y="101" width="8" height="28"/>
+        <rect class="l1" x="50" y="100" width="160" height="30"/>
+        <line class="l1" x1="50" y1="86" x2="50" y2="142"/>
+        <line class="axis" x1="120" y1="100" x2="120" y2="107"/>
+        <line class="axis" x1="135" y1="100" x2="135" y2="105"/>
+        <line class="axis" x1="150" y1="100" x2="150" y2="107"/>
+        <line class="axis" x1="165" y1="100" x2="165" y2="105"/>
+        <line class="axis" x1="180" y1="100" x2="180" y2="107"/>
+        <line class="axis" x1="195" y1="100" x2="195" y2="105"/>
+        <rect class="f2" x="210" y="111" width="52" height="8"/>
+        <rect class="l1 thin" x="210" y="109" width="12" height="12"/>
+        <rect class="axis" x="222" y="104" width="20" height="22"/>
+        <rect class="axis" x="242" y="92" width="68" height="46" rx="4"/>
+        <line class="l3 thin" x1="310" y1="115" x2="358" y2="115"/>
+        <line class="axis" x1="30" y1="36" x2="30" y2="111"/>
+        <line class="axis" x1="238" y1="68" x2="238" y2="104"/>
+        <line class="axis" x1="216" y1="180" x2="216" y2="121"/>
+        <text x="8" y="28" font-size="12">plunger</text>
+        <text class="t1" x="150" y="62" font-size="12" text-anchor="middle">trapped air</text>
+        <text x="262" y="62" font-size="12" text-anchor="middle">connector</text>
+        <text x="100" y="165" font-size="12" text-anchor="middle">rubber ring</text>
+        <text x="282" y="165" font-size="12" text-anchor="middle">sensor</text>
+        <text class="t2" x="232" y="200" font-size="12" text-anchor="middle">dead volume</text>
+      </svg>
+      <figcaption>The syringe screws straight onto the Gas Pressure Sensor. The scale shows the <span class="key-1">trapped air in the syringe</span>, but not the <span class="key-2">dead volume</span>: extra air hidden in the nozzle, the connector and the sensor. Read the front edge of the black rubber ring against the scale. Hold the syringe by the plunger end and the finger flange, never the barrel. The cable goes to the interface (not to scale).</figcaption>
+    </figure>
+    <ol>
+      <li>Connect the Gas Pressure Sensor to the interface and open <strong>Logger Pro 3</strong>. Check that the pressure units are kPa. With nothing attached, the sensor reads the atmospheric pressure (about 100 kPa): record it below.</li>
+      <li>Choose <strong>Experiment ▸ Data Collection</strong>, set the Mode to <strong>Events with Entry</strong>, and enter <strong>Volume</strong> as the column name and <strong>mL</strong> as the units.</li>
+      <li>With the syringe <strong>disconnected</strong>, set the front edge of the plunger's black ring to the 10.0 mL mark. Then screw the syringe firmly onto the sensor (finger-tight, a gentle twist). It now holds a fixed amount of air at atmospheric pressure.</li>
+      <li>Record the room temperature, the smallest division on the syringe and your uncertainty in each volume reading below.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Before you start</h3>
+      <label class="vlab-field">Atmospheric pressure / kPa (with its uncertainty) <input data-save="Patm"></label>
+      <label class="vlab-field">Room temperature at the start / °C (with its uncertainty) <input data-save="T1"></label>
+      <label class="vlab-field">Smallest division on the syringe / mL <input data-save="div" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty in each volume reading Δ<i>V</i> / mL, and why you chose it <input data-save="dV"></label>
+    </div>
+
+    <h2 id="collect">6. Collecting data</h2>
+    <h3>Run 1</h3>
+    <ol>
+      <li>Click <strong>Collect</strong>. Wait for the pressure to settle, then click <strong>Keep</strong> and type 10.0 for the volume.</li>
+      <li>Push the plunger slowly in to 8.0 mL. Hold it steady (at the plunger, not the barrel), wait about 15 s until the pressure stops changing, then click <strong>Keep</strong> and type the volume.</li>
+      <li>Repeat at 7.0, 6.0 and 5.0 mL. <strong>Don't go below 5.0 mL.</strong></li>
+      <li>Let the plunger out slowly, past 10 mL without recording, and record the pressure at 12.0, 14.0, 16.0, 18.0 and 20.0 mL, waiting for each reading to settle.</li>
+    </ol>
+    <h3>Run 2</h3>
+    <ol>
+      <li>Push the plunger in to about 17 mL, then let it back out and set it to 20.0 mL again, so that the repeat is a fresh setting. Wait about 15 s, then click <strong>Keep</strong> (your second reading at 20.0 mL).</li>
+      <li>Push the plunger slowly back in, recording at 18.0, 16.0, 14.0, 12.0, 10.0, 8.0, 7.0, 6.0 and 5.0 mL. Click <strong>Stop</strong>.</li>
+      <li><strong>Check for a leak:</strong> compare your two readings at 10.0 mL. They should agree within about 1 kPa. If the second is clearly lower, air has escaped: tighten the connector and repeat both runs.</li>
+      <li>Record the room temperature again below. Unscrew the syringe and save the file.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>At the end</h3>
+      <label class="vlab-field">Room temperature at the end / °C (with its uncertainty) <input data-save="T2"></label>
+      <label class="vlab-field">Mean temperature <i>T</i> / K (with its uncertainty) <input data-save="T"></label>
+    </div>
+    <h3>A first look in Logger Pro</h3>
+    <ol>
+      <li>Look at the graph of pressure against volume. Then choose <strong>Analyze ▸ Curve Fit</strong> and try the inverse fit, <i>P</i> = <i>A</i>/<i>V</i>. Note how well it fits the points at small volume.</li>
+      <li>Choose <strong>Data ▸ New Calculated Column</strong>, name it <strong>Inverse volume</strong> (units mL<sup>−1</sup>) with the equation <strong>1/"Volume"</strong>, and plot pressure against it. Use <strong>Analyze ▸ Linear Fit</strong> and note the intercept.</li>
+    </ol>
+    <p>Now copy both runs into the table: one row for each volume, with run 1 and run 2 side by side.</p>
+    <div class="vlab-panel" data-lab-table="pv" data-report-title="Readings"></div>
+
+    <h2 id="graph">7. Your graphs</h2>
+    <p>All four graphs come from the same table. The graph updates as you type, and starts with <strong>mean pressure</strong> on the vertical axis against <strong>syringe volume</strong> on the horizontal axis. For each graph, choose the <strong>Variable</strong> on each axis, and use <strong>Plot</strong> to plot 1/<i>x</i> where you need it.</p>
+    <p class="vlab-small">The graph tool uses one uncertainty for every point on each axis, so type the <strong>largest</strong> one (a cautious choice). For an axis that shows 1/<i>x</i>, the uncertainty is different for every point, but its percentage is the same as the quantity's: $\Delta(1/V) = \dfrac{\Delta V}{V} \times \dfrac{1}{V}$ and $\Delta(1/P) = \dfrac{\Delta P}{P} \times \dfrac{1}{P}$. So type the largest percentage uncertainty with a % sign, for example 2%. Press <strong>Add this graph to my report</strong> after each graph.</p>
+    <ul>
+      <li><strong>Graph 1, <i>P</i> against <i>V</i>:</strong> keep the starting choice. Type your largest Δ<i>P</i> as the vertical uncertainty and Δ<i>V</i> as the horizontal one. This graph should be a curve, so untick <strong>Line of best fit</strong> (the straight-line numbers printed under the graph mean nothing for a curve: ignore them).</li>
+      <li><strong>Graph 2, <i>P</i> against 1/<i>V</i>:</strong> on the horizontal axis, set <strong>Plot</strong> to 1/<i>x</i>, and type the largest percentage uncertainty in <i>V</i> (at 5.0 mL) as a percentage. Tick <strong>Line of best fit</strong> again. Look carefully: do the points lie on a straight line through the origin, or do they bend away from the line at the smallest volumes?</li>
+      <li><strong>Graph 3, <i>V</i> against 1/<i>P</i>:</strong> put <strong>syringe volume</strong> on the vertical axis (plot <i>x</i>, uncertainty Δ<i>V</i>) and <strong>mean pressure</strong> on the horizontal axis (plot 1/<i>x</i>, uncertainty = your largest percentage uncertainty in <i>P</i>). Tick <strong>Steepest and shallowest lines</strong>. By question P4, the gradient is <i>k</i> = <i>nRT</i> and the intercept is −<i>V</i><sub>0</sub>. The tool gives the gradient with its uncertainty, Δ<i>k</i> = (<i>k</i><sub>max</sub> − <i>k</i><sub>min</sub>)/2, and the intercept with its uncertainty, which is your Δ<i>V</i><sub>0</sub>. (Its unit for the gradient, mL / kPa<sup>−1</sup>, is the same as kPa mL.)</li>
+      <li><strong>Graph 4, <i>P</i> against 1/(<i>V</i> + <i>V</i><sub>0</sub>):</strong> first fill in the last column of the table, <i>V</i> + <i>V</i><sub>0</sub>, using your value of <i>V</i><sub>0</sub>. Then put <strong>mean pressure</strong> on the vertical axis and <strong>corrected volume</strong> on the horizontal axis with <strong>Plot</strong> set to 1/<i>x</i>. For the horizontal uncertainty use Δ<i>V</i> only (type the largest percentage, at 5.0 mL): Δ<i>V</i><sub>0</sub> shifts every point by the same amount, so it doesn't belong in each point's bar.</li>
+    </ul>
+    <div class="dgraph" data-lab-graph="pv"></div>
+
+    <h2 id="analysis">8. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Describe the shape of Graph 1. Why is it difficult to decide from this graph alone whether <i>P</i> is inversely proportional to <i>V</i>?</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> Describe Graph 2. Does the line pass through the origin within your uncertainty bars? Which points lie furthest from the straight line, and in which direction?</label><textarea id="a2" data-save="a2" rows="3"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> State the gradient <i>k</i> ± Δ<i>k</i> and the intercept of Graph 3, with units. What is the dead volume <i>V</i><sub>0</sub> ± Δ<i>V</i><sub>0</sub>? Vernier gives the dead volume of this sensor and syringe as about 0.8 mL. Does this value lie within your range <i>V</i><sub>0</sub> ± Δ<i>V</i><sub>0</sub>?</label><textarea id="a3" data-save="a3" rows="3"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> Explain, using <i>P</i>(<i>V</i> + <i>V</i><sub>0</sub>) = constant, why ignoring the dead volume affects the points at small syringe volumes most. Does Graph 4 now pass through the origin?</label><textarea id="a4" data-save="a4" rows="3"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Show that 1 kPa mL = 10<sup>−3</sup> J. Write your gradient <i>k</i> in joules.</label><textarea id="a5" data-save="a5" rows="2"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Use <i>k</i> = <i>nRT</i> and your mean temperature in kelvin to calculate the amount of air trapped, <i>n</i>. Propagate the uncertainty using Δ<i>n</i>/<i>n</i> = Δ<i>k</i>/<i>k</i> + Δ<i>T</i>/<i>T</i>, and quote <i>n</i> ± Δ<i>n</i>. (For example, <i>k</i> = 1.09 J at <i>T</i> = 295 K would give <i>n</i> = 4.4 × 10<sup>−4</sup> mol.)</label><textarea id="a6" data-save="a6" rows="4"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> Calculate the number of molecules, <i>N</i> = <i>nN</i><sub>A</sub>. As a check, estimate <i>n</i> a second way: the air started at atmospheric pressure in a volume of (10.0 mL + <i>V</i><sub>0</sub>). Do the two values agree within your uncertainties?</label><textarea id="a7" data-save="a7" rows="4"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> Compare your two readings at each volume. Is there a pattern (for example, run 2 always slightly lower)? Suggest a reason, such as a slow leak or air that had not returned to room temperature.</label><textarea id="a8" data-save="a8" rows="3"></textarea></div>
+      <div class="answer"><label for="a9"><strong>9.</strong> Air is a real gas. Using the molecular model, explain why it behaves almost exactly like an ideal gas at the pressures and temperature of this experiment.</label><textarea id="a9" data-save="a9" rows="3"></textarea></div>
+      <div class="answer"><label for="a10"><strong>10.</strong> Identify the largest source of uncertainty in <i>n</i>. Suggest one change to the method that would reduce it.</label><textarea id="a10" data-save="a10" rows="3"></textarea></div>
+    </div>
+
+    <h2 id="extension">9. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> Your results trace one line on a pressure–volume (<i>P</i>–<i>V</i>) diagram. Describe (or sketch on paper) the curves you would expect if the same air were kept at a higher temperature and at a lower temperature. Explain how the gradient of a <i>P</i> against 1/<i>V</i> graph would change.</label><textarea id="e1" data-save="e1" rows="3"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Switch Logger Pro to time-based mode (Experiment ▸ Data Collection ▸ Mode: Time Based) and push the plunger quickly from 10.0 mL to 6.0 mL, then hold it still. Describe the pressure–time graph and explain its shape in terms of the temperature of the air.</label><textarea id="e2" data-save="e2" rows="3"></textarea></div>
+      <div class="answer"><label for="e3"><span class="tag hl">HL</span> <strong>E3.</strong> The area under a <i>P</i>–<i>V</i> graph is the work done on the gas. Use the trapezium method on Graph 1 (from your table) to estimate the work done compressing the air from 10.0 mL to 5.0 mL (it should be roughly 0.7 J). Explain why the dead volume does not change your answer: adding the constant <i>V</i><sub>0</sub> to every volume does not change Δ<i>V</i>, and the pressures were measured directly rather than calculated from the volumes.</label><textarea id="e3" data-save="e3" rows="4"></textarea></div>
+    </div>
+    <p class="vlab-small">Work done by a gas is in <a href="../themes/b4.html#work">B.4 Thermodynamics</a> (HL).</p>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your measurements, your table, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
