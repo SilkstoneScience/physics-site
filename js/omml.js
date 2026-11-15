@@ -1,5 +1,6 @@
-// Turns equations into PowerPoint's own editable equations (OMML, Office Math Markup Language).
-// Used by the lesson slide generator (teachers/slides.html, js/slides.js). Plan: docs/SLIDES_PLAN.md.
+// Turns equations into PowerPoint's and Word's own editable equations (OMML, Office Math Markup Language).
+// Used by the lesson slide generator (teachers/slides.html, js/slides.js; plan: docs/SLIDES_PLAN.md)
+// and, with { word: true }, by the IA builder's Word export (js/ia/export.js; plan: docs/IA_BUILDER_PLAN.md).
 //
 // The route is LaTeX (as written on the site) -> MathML (made by MathJax in the browser) -> OMML (this file).
 // Omml.fromMathML(mathElement, { size, display }) returns the OMML text, plus a list of anything it couldn't convert.
@@ -41,18 +42,23 @@
   const ACCENTS = { '→': '⃗', '⃗': '⃗', '^': '̂', 'ˆ': '̂', '˙': '̇', '.': '̇', '¨': '̈', '~': '̃', '˜': '̃', '¯': '̅', '‾': '̅', '―': '̅', '_': '̅' };
   const SPACES = [[0.12, ''], [0.2, ' '], [0.25, ' '], [0.5, ' '], [1.5, ' '], [Infinity, '  ']];
 
-  function fromMathML(math, { size = 2400, display = false, color } = {}) {
+  // word: true writes Word's flavour (w:rPr run properties, for a .docx; used by the IA builder, js/ia/export.js);
+  // otherwise PowerPoint's (a:rPr). The maths itself is the same.
+  function fromMathML(math, { size = 2400, display = false, color, word = false } = {}) {
     const problems = [];
     const fill = color ? `<a:solidFill><a:srgbClr val="${color}"/></a:solidFill>` : '';
+    const WFONT = '<w:rFonts w:ascii="Cambria Math" w:hAnsi="Cambria Math"/>';
     const run = (text, style) => {
       // style: 'i' italic variable, 'p' plain (upright), 'b' bold upright, 'bi' bold italic, 'nor' ordinary text (keeps spaces)
       if (text === '') return '';
       const mr = style === 'nor' ? '<m:rPr><m:nor/></m:rPr>' : style === 'i' ? '' : `<m:rPr><m:sty m:val="${style}"/></m:rPr>`;
+      if (word) return `<m:r>${mr}<w:rPr>${style === 'nor' ? '' : WFONT}</w:rPr><m:t xml:space="preserve">${esc(text)}</m:t></m:r>`;
       const ital = style === 'i' || style === 'bi' ? ' i="1"' : ' i="0"';
       const bold = style === 'b' || style === 'bi' ? ' b="1"' : ' b="0"';
       return `<m:r>${mr}<a:rPr lang="en-GB" sz="${size}"${ital}${bold}>${fill}<a:latin typeface="Cambria Math" panose="02040503050406030204" pitchFamily="18" charset="0"/></a:rPr><m:t xml:space="preserve">${esc(text)}</m:t></m:r>`;
     };
-    const ctrl = `<m:ctrlPr><a:rPr lang="en-GB" sz="${size}" i="1">${fill}<a:latin typeface="Cambria Math" panose="02040503050406030204" pitchFamily="18" charset="0"/></a:rPr></m:ctrlPr>`;
+    const ctrl = word ? `<m:ctrlPr><w:rPr>${WFONT}<w:i/></w:rPr></m:ctrlPr>`
+      : `<m:ctrlPr><a:rPr lang="en-GB" sz="${size}" i="1">${fill}<a:latin typeface="Cambria Math" panose="02040503050406030204" pitchFamily="18" charset="0"/></a:rPr></m:ctrlPr>`;
     const kids = (el) => [...el.children];
     const tag = (el) => (el.localName || el.nodeName).replace(/^.*:/, '');
     const text = (el) => (el.textContent || '').replace(/⁡|⁢|⁣/g, '');
@@ -117,7 +123,7 @@
         case 'mo': {
           const s = text(el);
           // PowerPoint doesn't space × and ÷ between numbers by itself, so add medium maths spaces
-          if (s === '×' || s === '÷') return run(` ${s} `, 'p');
+          if (!word && (s === '×' || s === '÷')) return run(` ${s} `, 'p');
           return s ? run(s, style(el, 'p')) : '';
         }
         case 'mtext': return run(el.textContent.replace(/ /g, ' '), 'nor');
@@ -161,7 +167,7 @@
     }
     const body = conv(math);
     const omml = display
-      ? `<m:oMathPara><m:oMathParaPr><m:jc m:val="left"/></m:oMathParaPr><m:oMath>${body}</m:oMath></m:oMathPara>`
+      ? `<m:oMathPara><m:oMathParaPr><m:jc m:val="${word ? 'center' : 'left'}"/></m:oMathParaPr><m:oMath>${body}</m:oMath></m:oMathPara>`
       : `<m:oMath>${body}</m:oMath>`;
     return { omml, problems };
   }

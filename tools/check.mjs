@@ -206,6 +206,11 @@ if (!exists(p2.OUTPUT) || read(p2.OUTPUT).replace(/\r/g, '') !== built2.json) er
 const tests2 = await (await import('./p2/test.mjs')).runTests();
 for (const f of tests2.failures) err('tools/p2/test.mjs', f);
 
+// ---------- 2c+. Circuit builder physics (js/circuits; plan: docs/CIRCUIT_BUILDER_PLAN.md) ----------
+// Hand-calculated circuits, layout independence, random circuits against an independent solver, and "show the working".
+const testsCircuits = await (await import('./circuits/test.mjs')).runTests();
+for (const f of testsCircuits.failures) err('tools/circuits/test.mjs', f);
+
 // ---------- 2d. Science news (tools/news) ----------
 // Every stored story must be valid, and news.html / news/latest.json must match the stored stories.
 let newsCount = 0;

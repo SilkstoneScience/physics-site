@@ -1,0 +1,48 @@
+# Runs the circuit builder's interface tests (tools/circuits/ui-test.html: building circuits by dragging, wiring,
+# challenges, saving, share links...) in two real browsers, Chromium and WebKit (Safari's engine), with Playwright.
+# It runs when the circuit builder, or a shared file it depends on, changes. If a check fails, GitHub emails the
+# person who pushed and shows a red ✗ next to the commit. (It doesn't stop the site updating.)
+# Playwright is installed here on GitHub only, never in the website (teacher's decision, November 2026).
+name: Circuit builder interface tests
+on:
+  push:
+    paths:
+      - 'experimental/circuit-builder.html'
+      - 'experimental/circuits/**'
+      - 'js/circuits/**'
+      - 'css/circuits.css'
+      - 'js/numeric.js'
+      - 'js/site.js'
+      - 'css/style.css'
+      - 'tools/circuits/**'
+      - '.github/workflows/circuits-ui.yml'
+  pull_request:
+    paths:
+      - 'experimental/circuit-builder.html'
+      - 'experimental/circuits/**'
+      - 'js/circuits/**'
+      - 'css/circuits.css'
+      - 'tools/circuits/**'
+  workflow_dispatch:
+jobs:
+  interface:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Install Playwright (only for this check)
+        run: npm install --no-save --no-audit --no-fund --prefix tools/circuits/.pw playwright@1.49.1
+      - name: Install the browsers
+        run: tools/circuits/.pw/node_modules/.bin/playwright install --with-deps chromium webkit
+      - name: Serve the site and run the interface tests
+        # The server is started in this same step, and the tests wait until it answers.
+        run: |
+          python3 -m http.server 8044 --bind 127.0.0.1 > /tmp/server.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf -o /dev/null http://127.0.0.1:8044/tools/circuits/ui-test.html && break; sleep 1; done
+          curl -sf -o /dev/null http://127.0.0.1:8044/tools/circuits/ui-test.html || { echo "::error title=Web server::The site could not be served"; cat /tmp/server.log; exit 1; }
+          node tools/circuits/playwright-run.mjs
+        env:
+          BASE: http://127.0.0.1:8044

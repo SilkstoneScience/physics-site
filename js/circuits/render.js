@@ -1,0 +1,303 @@
+// Circuit builder: draws the drawing and the engine's results as SVG (plan: docs/CIRCUIT_BUILDER_PLAN.md, section 6).
+// Only drawing happens here: every number shown comes from js/circuits/engine.js (formatting only).
+// Symbols follow the data booklet, as on the B.5 page. One grid square is G = 20 SVG units; a two-terminal
+// component spans 4 squares, with its terminals at x = ±40 before rotation.
+(function (root) {
+  'use strict';
+  const { components: C, model: M, engine: E } = root.Circuits;
+  const G = 20;
+
+  const esc = (s) => String(s).replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]);
+  const n = (x) => Math.round(x * 100) / 100;
+
+  // A number with an SI prefix and 3 significant figures: 4700 → "4.7 k".
+  function si(v, unit) {
+    if (!Number.isFinite(v)) return `∞ ${unit}`;
+    const a = Math.abs(v);
+    const [d, p] = a >= 1e6 ? [1e6, 'M'] : a >= 1e3 ? [1e3, 'k'] : a >= 1 || a === 0 ? [1, ''] : a >= 1e-3 ? [1e-3, 'm'] : [1e-6, 'µ'];
+    return `${Number((v / d).toPrecision(3))} ${p}${unit}`;
+  }
+
+  // ---------------- symbols (local coordinates, terminals at x = ±40) ----------------
+  const line = (x1, y1, x2, y2, cls = '') => `<line class="ck-s${cls ? ` ${cls}` : ''}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+  const leads = (a, b) => line(-40, 0, a, 0) + line(b, 0, 40, 0);
+  const arrow = (x1, y1, x2, y2) => line(x1, y1, x2, y2, 'ck-arrow');
+  const box = (w = 32, h = 14) => `<rect class="ck-s ck-body" x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}"/>`;
+
+  function symbol(type, p, extra = {}) {
+    switch (type) {
+      case 'cell':
+        return leads(-5, 5) + line(-5, -7, -5, 7, 'ck-thick') + line(5, -14, 5, 14);
+      case 'battery':
+        return leads(-14, 14) + line(-14, -7, -14, 7, 'ck-thick') + line(-8, -14, -8, 14) + line(-8, 0, 8, 0, 'ck-dash') + line(8, -7, 8, 7, 'ck-thick') + line(14, -14, 14, 14);
+      case 'resistor':
+        return leads(-16, 16) + box();
+      case 'variable':
+        return leads(-16, 16) + box() + arrow(-14, 12, 13, -12);
+      case 'potentiometer':
+        return leads(-16, 16) + box() + arrow(0, -40, 0, -8);
+      case 'thermistor':
+        return leads(-16, 16) + box() + `<polyline class="ck-s" points="-16,11 12,-11 20,-11"/>`;
+      case 'ldr':
+        return leads(-19, 19) + `<circle class="ck-s ck-body" r="19"/>` + box(24, 12) + arrow(-30, -30, -17, -17) + arrow(-20, -34, -7, -21);
+      case 'switch': {
+        const lever = p && p.closed ? line(-12, 0, 12, 0, 'ck-lever') : line(-12, 0, 10, -13, 'ck-lever');
+        return leads(-12, 12) + lever + `<circle class="ck-contact" cx="-12" r="2.5"/><circle class="ck-contact" cx="12" r="2.5"/>`;
+      }
+      case 'lamp': {
+        const b = Math.max(0, Math.min(1, Math.sqrt(extra.brightness || 0)));
+        const halo = (extra.brightness || 0) > 1.5 ? `<circle class="ck-halo" r="17"/>` : '';
+        return halo + leads(-10, 10) + `<circle class="ck-s ck-body" r="10"/>` + (b > 0.01 ? `<circle class="ck-glow" r="9.2" style="opacity:${n(b)}"/>` : '') +
+          line(-7.07, -7.07, 7.07, 7.07) + line(-7.07, 7.07, 7.07, -7.07);
+      }
+      case 'ammeter':
+      case 'voltmeter':
+        return leads(-11, 11) + `<circle class="ck-s ck-body" r="11"/><circle class="ck-pos" cx="-40" r="3.2"/><circle class="ck-com" cx="40" r="3.2"/>`;
+      default:
+        return box();
+    }
+  }
+  // The letter inside a meter, drawn upright.
+  const LETTER = { ammeter: 'A', voltmeter: 'V' };
+
+  // The text beside a component: its label and its setting.
+  function valueText(c) {
+    const p = c.params;
+    switch (c.type) {
+      case 'cell': case 'battery': return `${si(p.emf, 'V')}${p.r > 0 ? `, r = ${si(p.r, 'Ω')}` : ''}`;
+      case 'resistor': case 'variable': return si(p.R, 'Ω');
+      case 'potentiometer': return si(p.R, 'Ω');
+      case 'lamp': return p.model === 'filament' ? `${si(p.Vrated, 'V')}, ${si(p.Prated, 'W')}` : si(p.R, 'Ω');
+      case 'thermistor': return `${Number(p.temp.toPrecision(3))} °C`;
+      case 'ldr': return `${Number(p.lux.toPrecision(3))} lx`;
+      case 'ammeter': return p.ideal ? '' : si(p.r, 'Ω');
+      case 'voltmeter': return p.ideal ? '' : si(p.R, 'Ω');
+      default: return '';
+    }
+  }
+
+  // Where text goes beside a component: away from its axis (and away from a potentiometer's slider).
+  function sides(c) {
+    const vertical = c.rot === 90 || c.rot === 270;
+    const wiperUp = c.type === 'potentiometer' && c.rot === 0;
+    const wiperRight = c.type === 'potentiometer' && c.rot === 90;
+    const wiperLeft = c.type === 'potentiometer' && c.rot === 270;
+    if (!vertical) return { label: wiperUp ? 'below' : 'above', reading: wiperUp ? 'above' : 'below' };
+    return { label: wiperRight ? 'left' : 'right', reading: wiperRight || wiperLeft ? (wiperRight ? 'right' : 'left') : 'left' };
+  }
+  function place(c, side, dist) {
+    const cx = c.x * G;
+    const cy = c.y * G;
+    switch (side) {
+      case 'above': return { x: cx, y: cy - dist, anchor: 'middle', base: 'auto' };
+      case 'below': return { x: cx, y: cy + dist, anchor: 'middle', base: 'hanging' };
+      case 'left': return { x: cx - dist, y: cy, anchor: 'end', base: 'middle' };
+      default: return { x: cx + dist, y: cy, anchor: 'start', base: 'middle' };
+    }
+  }
+
+  const OPPOSITE = { above: 'below', below: 'above', left: 'right', right: 'left' };
+
+  // Potential colouring: low potential blue, high red.
+  function potentialColour(t) {
+    const a = [42, 120, 214];
+    const b = [227, 73, 72];
+    const m = a.map((x, i) => Math.round(x + (b[i] - x) * Math.max(0, Math.min(1, t))));
+    return `rgb(${m.join(',')})`;
+  }
+
+  // ---------------- the whole drawing ----------------
+  // ui: { selected: {components, wires, junctions} (Sets), highlight (Set of ids), show: {arrows, wireCurrent, potential},
+  //       nl (netlist of the committed drawing), ghost: {type, x, y, rot}, preview: {points, target}, box: {x0,y0,x1,y1}, hover: [x, y] }
+  function drawing(d, result, ui) {
+    const sel = ui.selected;
+    const res = (result && result.components) || {};
+    const out = { wires: [], comps: [], text: [], dots: [], over: [] };
+    const pt = (p) => `${n(p[0] * G)},${n(p[1] * G)}`;
+
+    // Potentials for colouring, by net.
+    let vmin = 0;
+    let vmax = 0;
+    const netOf = ui.nl ? ui.nl.pointNet : {};
+    const keyOf = (w, which) => {
+      const e = w[which];
+      return e.c !== undefined ? `c:${e.c}:${e.t}` : e.j !== undefined ? `j:${e.j}` : `f:${w.id}:${which}`;
+    };
+    if (ui.show.potential && result && result.nets) {
+      const vs = result.nets.filter(Number.isFinite);
+      if (vs.length) { vmin = Math.min(...vs); vmax = Math.max(...vs); }
+    }
+
+    // Wires.
+    const currents = []; // wires whose current is shown
+    const taken = []; // rectangles (SVG units) already used by components, labels and meter displays
+    const textBox = (x, y, anchor, base, w, h) => {
+      const x0 = anchor === 'middle' ? x - w / 2 : anchor === 'end' ? x - w : x;
+      const y0 = base === 'auto' ? y - h + 2 : base === 'hanging' ? y : y - h / 2;
+      return { x0, y0, x1: x0 + w, y1: y0 + h };
+    };
+    // An area overlapping anything already placed (except the areas of `own`, the component it belongs to).
+    const overlaps = (r, own, notWires) => taken.some((q) => (!own || q.owner !== own) && !(notWires && q.wire) && r.x0 < q.x1 && r.x1 > q.x0 && r.y0 < q.y1 && r.y1 > q.y0);
+    const connections = new Map(); // point key -> number of wire ends there
+    for (const w of d.wires) {
+      const path = M.wirePath(d, w);
+      if (path.length < 2) continue;
+      for (const which of ['from', 'to']) { const k = keyOf(w, which); connections.set(k, (connections.get(k) || 0) + 1); }
+      const wr = result && result.wires && result.wires[w.id];
+      const inf = wr && !Number.isFinite(wr.I);
+      let style = '';
+      if (ui.show.potential && result && result.nets && netOf[keyOf(w, 'from')] !== undefined && vmax > vmin) {
+        style = ` style="stroke:${potentialColour((result.nets[netOf[keyOf(w, 'from')]] - vmin) / (vmax - vmin))}"`;
+      }
+      const cls = `ck-wire${sel.wires.has(w.id) ? ' ck-sel' : ''}${inf ? ' ck-inf' : ''}${ui.highlight.has(w.id) ? ' ck-hl' : ''}`;
+      out.wires.push(`<polyline class="${cls}" data-wire="${esc(w.id)}" points="${path.map(pt).join(' ')}"${style}/>`);
+      // Current arrows and values are placed after the components, so they can keep clear of them.
+      if (wr && (ui.show.arrows || ui.show.wireCurrent) && Math.abs(wr.I) > 1e-9) currents.push({ path, I: wr.I, inf });
+      for (let i = 0; i + 1 < path.length; i++) { // labels keep clear of wires where they can
+        const [a, b] = [path[i], path[i + 1]];
+        taken.push({ x0: Math.min(a[0], b[0]) * G - 3, x1: Math.max(a[0], b[0]) * G + 3, y0: Math.min(a[1], b[1]) * G - 3, y1: Math.max(a[1], b[1]) * G + 3, wire: true });
+      }
+      if (ui.insertWire === w.id) out.over.push(`<polyline class="ck-insertw" points="${path.map(pt).join(' ')}"/>`);
+      // Loose ends.
+      for (const which of ['from', 'to']) if (w[which].free) out.dots.push(`<circle class="ck-loose" cx="${n(w[which].free[0] * G)}" cy="${n(w[which].free[1] * G)}" r="4.5"/>`);
+      // Handles of a selected wire.
+      if (sel.wires.has(w.id) && sel.wires.size === 1) {
+        for (const p of w.via || []) out.over.push(`<rect class="ck-handle" x="${n(p[0] * G - 5)}" y="${n(p[1] * G - 5)}" width="10" height="10"/>`);
+        for (let i = 0; i + 1 < path.length; i++) {
+          const mx = (path[i][0] + path[i + 1][0]) / 2;
+          const my = (path[i][1] + path[i + 1][1]) / 2;
+          if (Math.abs(path[i + 1][0] - path[i][0]) + Math.abs(path[i + 1][1] - path[i][1]) >= 2) out.over.push(`<circle class="ck-handle ck-mid" cx="${n(mx * G)}" cy="${n(my * G)}" r="4.5"/>`);
+        }
+        for (const p of [path[0], path[path.length - 1]]) out.over.push(`<circle class="ck-handle ck-endh" cx="${n(p[0] * G)}" cy="${n(p[1] * G)}" r="6"/>`);
+      }
+    }
+
+    // Components. Every component's box is reserved first, so labels and displays keep clear of all of them.
+    for (const c of d.components) { const cb = M.componentBox(c); taken.push({ x0: cb.x0 * G - 4, y0: cb.y0 * G - 4, x1: cb.x1 * G + 4, y1: cb.y1 * G + 4, owner: c.id }); }
+    for (const c of d.components) {
+      const r = res[c.id] || {};
+      const isSel = sel.components.has(c.id);
+      const cls = `ck-comp${isSel ? ' ck-sel' : ''}${ui.highlight.has(c.id) ? ' ck-hl' : ''}`;
+      const tall = c.type === 'potentiometer' ? [46, 66] : c.type === 'ldr' ? [24, 46] : [17, 34]; // [top, height], clear of the label
+      const back = isSel || ui.highlight.has(c.id) ? `<rect class="ck-selbox" x="-46" y="-${tall[0]}" width="92" height="${tall[1]}" rx="6"/>` : '';
+      out.comps.push(`<g class="${cls}" data-comp="${esc(c.id)}" transform="translate(${c.x * G} ${c.y * G}) rotate(${c.rot || 0})">${back}${symbol(c.type, c.params, { brightness: r.brightness })}</g>`);
+      if (LETTER[c.type]) out.text.push(`<text class="ck-letter" x="${c.x * G}" y="${c.y * G}" text-anchor="middle" dominant-baseline="central">${LETTER[c.type]}</text>`);
+      const s = sides(c);
+      const secret = ui.hidden && ui.hidden.has(c.id); // a challenge's mystery part: its values are hidden
+      const value = secret ? '?' : valueText(c);
+      if (secret) out.over.push(`<rect class="ck-mystery" x="${c.x * G - 30}" y="${c.y * G - 22}" width="60" height="44" rx="6"/><text class="ck-mysteryq" x="${c.x * G}" y="${c.y * G + 1}" text-anchor="middle" dominant-baseline="central">?</text>`);
+      // The label and meter display go on the preferred side, or the opposite one if that is clear of other
+      // components, labels and displays.
+      const tryPlace = (prefs, dist, boxOf) => {
+        for (const side of prefs) { const p = place(c, side, dist(side)); const b = boxOf(p); if (!overlaps(b, c.id)) return { p, b }; }
+        const p = place(c, prefs[0], dist(prefs[0]));
+        return { p, b: boxOf(p) };
+      };
+      // Meter display first (it matters more than the meter's short label).
+      if (r.reading) {
+        const text = `${r.reading.text}${r.reading.ol ? '' : ` ${r.reading.unit}`}`;
+        const w = 10 + text.length * 7.6;
+        const rectOf = (rp) => {
+          const x = rp.anchor === 'middle' ? rp.x - w / 2 : rp.anchor === 'end' ? rp.x - w : rp.x;
+          const y = rp.base === 'hanging' ? rp.y : rp.base === 'auto' ? rp.y - 20 : rp.y - 10;
+          return { x0: x - 2, y0: y - 2, x1: x + w + 2, y1: y + 22 };
+        };
+        const RD = tryPlace([s.reading, OPPOSITE[s.reading]], () => 20, rectOf);
+        const x = RD.b.x0 + 2;
+        const y = RD.b.y0 + 2;
+        taken.push(RD.b);
+        out.text.push(`<g class="ck-reading${r.reading.ol ? ' ck-ol' : ''}" data-reading-for="${esc(c.id)}"><rect x="${n(x)}" y="${n(y)}" width="${n(w)}" height="20" rx="4"/><text x="${n(x + w / 2)}" y="${n(y + 10.5)}" text-anchor="middle" dominant-baseline="central">${esc(text)}</text></g>`);
+      }
+      // Then the label: its usual side, or any other side that is clear.
+      const labelW = (c.label.length + (value ? value.length + 1 : 0)) * 6.4 + 4;
+      const labelDist = (side) => (secret ? 30 : c.type === 'ldr' ? (side === 'above' || side === 'left' ? 42 : 28) : 22); // the LDR's light arrows are upper left
+      const labelSides = [s.label, OPPOSITE[s.label], ...(['above', 'below'].includes(s.label) ? ['right', 'left'] : ['above', 'below'])];
+      const L = tryPlace(labelSides, (side) => labelDist(side) + (['left', 'right'].includes(side) && ['above', 'below'].includes(s.label) ? 28 : 0), (p) => textBox(p.x, p.y, p.anchor, p.base, labelW, 14));
+      const lp = L.p;
+      taken.push(L.b); // no owner: the component's own display keeps clear of its label too
+      out.text.push(`<text class="ck-label" data-label-for="${esc(c.id)}" x="${n(lp.x)}" y="${n(lp.y)}" text-anchor="${lp.anchor}" dominant-baseline="${lp.base}"><tspan class="ck-name">${esc(c.label)}</tspan>${value ? ` <tspan>${esc(value)}</tspan>` : ''}</text>`);
+      // Terminals: a hint circle where nothing is connected yet.
+      for (let t = 0; t < C.TYPES[c.type].terminals.length; t++) {
+        const p = C.terminalPosition(c, t);
+        const k = `c:${c.id}:${t}`;
+        const count = connections.get(k) || 0;
+        if (count === 0) out.dots.push(`<circle class="ck-term" cx="${p[0] * G}" cy="${p[1] * G}" r="4"/>`);
+        else if (count >= 2) out.dots.push(`<circle class="ck-dot" cx="${p[0] * G}" cy="${p[1] * G}" r="3.6"/>`);
+      }
+    }
+    // Current arrows and values: on the longest segment that has room, at its middle or a quarter of the way along,
+    // with the value on whichever side is clear of components, labels, meter displays and other values.
+    for (const cur of currents) {
+      const label = cur.inf ? '∞ A' : si(Math.abs(cur.I), 'A');
+      const w = label.length * 6.3 + 4;
+      const segs = [];
+      for (let i = 0; i + 1 < cur.path.length; i++) {
+        const len = Math.abs(cur.path[i + 1][0] - cur.path[i][0]) + Math.abs(cur.path[i + 1][1] - cur.path[i][1]);
+        if (len >= 1) segs.push({ i, len });
+      }
+      segs.sort((p, q) => q.len - p.len);
+      let placed = null;
+      for (const sg of segs) {
+        for (const f of [0.5, 0.3, 0.7, 0.18, 0.82]) {
+          let [a, b] = [cur.path[sg.i], cur.path[sg.i + 1]];
+          if (cur.I < 0) [a, b] = [b, a];
+          const mx = (a[0] + (b[0] - a[0]) * f) * G;
+          const my = (a[1] + (b[1] - a[1]) * f) * G;
+          const arrowBox = { x0: mx - 7, y0: my - 7, x1: mx + 7, y1: my + 7 };
+          if (overlaps(arrowBox, null, true)) continue; // an arrow sits on its wire, so wires don't block it
+          if (!ui.show.wireCurrent) { placed = { a, b, mx, my, arrowBox }; break; }
+          const horizontal = a[1] === b[1];
+          const options = horizontal ? [[mx, my - 8, 'middle', 'auto'], [mx, my + 8, 'middle', 'hanging']] : [[mx + 9, my, 'start', 'middle'], [mx - 9, my, 'end', 'middle']];
+          for (const [x, y, anchor, base] of options) {
+            const box = textBox(x, y, anchor, base, w, 13);
+            if (!overlaps(box)) { placed = { a, b, mx, my, arrowBox, text: { x, y, anchor, base, box } }; break; }
+          }
+          if (placed) break;
+        }
+        if (placed) break;
+      }
+      if (!placed) continue; // no clear place: shown in the inspector instead
+      const ang = Math.atan2(placed.b[1] - placed.a[1], placed.b[0] - placed.a[0]) * 180 / Math.PI;
+      taken.push(placed.arrowBox);
+      if (ui.show.arrows) out.over.push(`<path class="ck-current${cur.inf ? ' ck-inf' : ''}" d="M -6 -5 L 5 0 L -6 5 z" transform="translate(${n(placed.mx)} ${n(placed.my)}) rotate(${n(ang)})"/>`);
+      if (placed.text) {
+        const t = placed.text;
+        taken.push(t.box);
+        out.text.push(`<text class="ck-wirei" x="${n(t.x)}" y="${n(t.y)}" text-anchor="${t.anchor}" dominant-baseline="${t.base}">${esc(label)}</text>`);
+      }
+    }
+
+    // Junction dots where three or more wires meet.
+    for (const j of d.junctions) {
+      const count = connections.get(`j:${j.id}`) || 0;
+      const isSel = sel.junctions.has(j.id);
+      if (count >= 3) out.dots.push(`<circle class="ck-dot" cx="${j.x * G}" cy="${j.y * G}" r="3.6"/>`);
+      else if (count <= 1) out.dots.push(`<circle class="ck-loose" cx="${j.x * G}" cy="${j.y * G}" r="4.5"/>`);
+      if (isSel) out.over.push(`<circle class="ck-selring" cx="${j.x * G}" cy="${j.y * G}" r="8"/>`);
+    }
+
+    // Overlays: a component being placed, a wire being drawn, the snap target, the selection box.
+    if (ui.ghost) {
+      const c = { ...ui.ghost, params: C.normalise(ui.ghost.type, {}) };
+      out.over.push(`<g class="ck-ghost" transform="translate(${c.x * G} ${c.y * G}) rotate(${c.rot || 0})">${symbol(c.type, c.params)}</g>`);
+    }
+    if (ui.preview && ui.preview.points.length > 1) out.over.push(`<polyline class="ck-preview" points="${ui.preview.points.map(pt).join(' ')}"/>`);
+    if (ui.preview && ui.preview.target) out.over.push(`<circle class="ck-target" cx="${n(ui.preview.target[0] * G)}" cy="${n(ui.preview.target[1] * G)}" r="9"/>`);
+    if (ui.box) {
+      const { x0, y0, x1, y1 } = ui.box;
+      out.over.push(`<rect class="ck-boxsel" x="${n(Math.min(x0, x1) * G)}" y="${n(Math.min(y0, y1) * G)}" width="${n(Math.abs(x1 - x0) * G)}" height="${n(Math.abs(y1 - y0) * G)}"/>`);
+    }
+    return `<g class="ck-l-wires">${out.wires.join('')}</g><g class="ck-l-comps">${out.comps.join('')}</g><g class="ck-l-dots">${out.dots.join('')}</g><g class="ck-l-text">${out.text.join('')}</g><g class="ck-l-over">${out.over.join('')}</g>`;
+  }
+
+  // A small picture of a component for the toolbox.
+  function icon(type) {
+    const p = C.normalise(type, {});
+    const tall = type === 'potentiometer' || type === 'ldr';
+    const letter = LETTER[type] ? `<text class="ck-letter" x="0" y="0" text-anchor="middle" dominant-baseline="central">${LETTER[type]}</text>` : '';
+    return `<svg class="ck-icon" viewBox="-44 ${tall ? -42 : -24} 88 ${tall ? 66 : 48}" aria-hidden="true" focusable="false"><g>${symbol(type, p, { brightness: 0 })}</g>${letter}</svg>`;
+  }
+
+  const api = { G, symbol, drawing, icon, si, valueText, potentialColour };
+  (root.Circuits = root.Circuits || {}).render = api;
+})(typeof window !== 'undefined' ? window : globalThis);

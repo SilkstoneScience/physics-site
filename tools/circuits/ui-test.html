@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Circuit builder interface tests</title>
+  <style>
+    body { font: 15px/1.45 system-ui, sans-serif; margin: 16px; background: #fff; color: #1c2430; }
+    #summary { font-size: 1.2rem; font-weight: 700; margin: 0 0 8px; }
+    #log { font: 13px/1.5 ui-monospace, Consolas, monospace; white-space: pre-wrap; margin: 0 0 12px; }
+    .ok { color: #1e7a46; } .bad { color: #b3261e; font-weight: 700; } .head { font-weight: 700; margin-top: 6px; }
+    iframe { width: 1280px; height: 1150px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <!-- Not published (tools/ is excluded in _config.yml). Open it through the preview server:
+       http://localhost:<port>/tools/circuits/ui-test.html . It loads the real circuit builder page in the frame below
+       and builds circuits with pointer and touch events, as a student would, then checks what the meters show. -->
+  <p id="summary">Running…</p>
+  <div id="log"></div>
+  <iframe id="frame" title="The circuit builder under test"></iframe>
+<script>
+(async () => {
+  const log = document.getElementById('log');
+  const results = [];
+  const out = (text, cls) => { const d = document.createElement('div'); d.className = cls || ''; d.textContent = text; log.appendChild(d); };
+  const check = (name, ok, detail = '') => { results.push({ name, ok, detail }); out(`${ok ? '✓' : '✗'} ${name}${ok || !detail ? '' : ` (${detail})`}`, ok ? 'ok' : 'bad'); };
+  const frameEl = document.getElementById('frame');
+  const tick = () => new Promise((r) => setTimeout(r, 30));
+  let W, D, App, CC;
+
+  // The builder runs with ?store=uitest, so its saved circuits are kept apart from a student's; they are
+  // cleared before each load unless keep is set.
+  const clearStore = () => { try { for (const k of Object.keys(localStorage)) if (k.startsWith('circuit-builder-uitest:')) localStorage.removeItem(k); } catch (e) { /* ignore */ } };
+  async function load(hash = '', keep = false, query = '') {
+    if (!keep) clearStore();
+    frameEl.src = `../../experimental/circuit-builder.html?store=uitest${query}&t=${Date.now()}${hash}`;
+    await new Promise((r) => { frameEl.onload = r; });
+    for (let i = 0; i < 100 && !(frameEl.contentWindow.CircuitApp || (query && frameEl.contentWindow.CircuitPage)); i++) await tick();
+    W = frameEl.contentWindow; D = frameEl.contentDocument; App = W.CircuitApp; CC = W.Circuits.components;
+    W.confirm = () => true;
+    const svg = D.querySelector('.ck-svg');
+    if (svg) svg.scrollIntoView({ block: 'center' });
+    await tick();
+  }
+
+  // ---- input, as a student makes it ----
+  let pid = 10;
+  function fire(type, x, y, o = {}) {
+    const target = o.target || D.elementFromPoint(x, y) || D.body;
+    target.dispatchEvent(new W.PointerEvent(type, { bubbles: true, cancelable: true, composed: true, clientX: x, clientY: y, pointerId: o.id, pointerType: o.ptype || 'mouse', isPrimary: true, button: 0, buttons: type === 'pointerup' ? 0 : 1, shiftKey: !!o.shift }));
+  }
+  async function drag(a, b, o = {}) {
+    const id = ++pid;
+    fire('pointerdown', a[0], a[1], { ...o, id, target: o.startTarget });
+    const steps = 8;
+    for (let i = 1; i <= steps; i++) fire('pointermove', a[0] + (b[0] - a[0]) * i / steps, a[1] + (b[1] - a[1]) * i / steps, { ...o, id });
+    fire('pointerup', b[0], b[1], { ...o, id });
+    await tick();
+  }
+  async function tap(p, o = {}) { const id = ++pid; fire('pointerdown', p[0], p[1], { ...o, id }); fire('pointerup', p[0], p[1], { ...o, id }); await tick(); }
+  async function key(k, o = {}) { D.dispatchEvent(new W.KeyboardEvent('keydown', { key: k, bubbles: true, cancelable: true, ctrlKey: !!o.ctrl, shiftKey: !!o.shift })); await tick(); }
+  const at = (gx, gy) => App.gridToClient(gx, gy);
+  const comp = (id) => App.store.drawing.components.find((c) => c.id === id);
+  const term = (id, t) => at(...CC.terminalPosition(comp(id), t));
+  const centre = (id) => at(comp(id).x, comp(id).y);
+  const reading = (id) => { const t = D.querySelector(`[data-reading-for="${id}"] text`); return t ? t.textContent : null; };
+  const net = (id, t) => App.netlist.pointNet[`c:${id}:${t}`];
+  const diag = (code) => App.result.diagnostics.some((d) => d.code === code);
+
+  async function place(type, gx, gy, o = {}) {
+    const before = new Set(App.store.drawing.components.map((c) => c.id));
+    const b = App.toolButton(type).getBoundingClientRect();
+    await drag([b.left + b.width / 2, b.top + b.height / 2], at(gx, gy), { ...o, startTarget: App.toolButton(type) });
+    const added = App.store.drawing.components.find((c) => !before.has(c.id));
+    if (!added) throw new Error(`placing a ${type} at (${gx}, ${gy}) added nothing`);
+    return added.id;
+  }
+  async function wire(a, ta, b, tb, o = {}) { await drag(term(a, ta), term(b, tb), o); }
+  async function setting(id, k, value, o = {}) {
+    await tap(centre(id), o);
+    if (comp(id).type === 'switch') return; // tapping a switch toggles it; switches have no number settings
+    const inp = D.querySelector(`.ck-inspector [data-key="${k}"]`);
+    if (!inp) throw new Error(`no setting ${k} for ${id}`);
+    if (inp.tagName === 'SELECT') { inp.value = value; inp.dispatchEvent(new W.Event('change', { bubbles: true })); }
+    else { inp.focus(); inp.value = String(value); inp.dispatchEvent(new W.Event('input', { bubbles: true })); inp.blur(); }
+    await tick();
+  }
+  async function fresh() {
+    await load();
+    D.querySelector('[data-act="clear"]').click();
+    App.setView(-12, -10, 1.2);
+    await tick();
+  }
+  async function scenario(name, fn) {
+    out(name, 'head');
+    try { await fn(); } catch (e) { check(`${name}: ran to the end`, false, e.message); }
+  }
+
+  // ---------------- scenarios ----------------
+  await scenario('Series circuit (mouse): cell, ammeter, 10 Ω + 20 Ω, voltmeter across 20 Ω with crossing wires', async () => {
+    await fresh();
+    const c = await place('cell', 0, -6);
+    const a = await place('ammeter', 6, -6);
+    const r1 = await place('resistor', 12, -6);
+    const r2 = await place('resistor', 8, 2);
+    const v = await place('voltmeter', 8, 8);
+    check('five components placed from the toolbox', App.store.drawing.components.length === 5);
+    await setting(c, 'emf', 6); await setting(r1, 'R', 10); await setting(r2, 'R', 20);
+    check('settings typed in the panel reach the drawing', comp(c).params.emf === 6 && comp(r1).params.R === 10 && comp(r2).params.R === 20);
+    await wire(c, 1, a, 0); await wire(a, 1, r1, 0); await wire(r1, 1, r2, 1); await wire(r2, 0, c, 0);
+    await wire(v, 0, r2, 1); await wire(v, 1, r2, 0); // these two wires cross
+    check('six wires drawn by dragging between terminals', App.store.drawing.wires.length === 6, `${App.store.drawing.wires.length} wires`);
+    check('ammeter shows 0.200 A', reading(a) === '0.200 A', reading(a));
+    check('voltmeter shows 4.00 V', reading(v) === '4.00 V', reading(v));
+    check('crossing wires are not joined', net(v, 0) !== net(v, 1));
+    check('no problems reported', !App.result.diagnostics.some((d) => d.level !== 'info'), App.result.diagnostics.map((d) => d.code).join(', '));
+
+    // Mixed: a third resistor across R2.
+    const r3 = await place('resistor', 8, -1);
+    await setting(r3, 'R', 20);
+    await wire(r3, 0, r2, 0); await wire(r3, 1, r2, 1);
+    check('mixed circuit: ammeter shows 0.300 A', reading(a) === '0.300 A', reading(a));
+    check('mixed circuit: voltmeter shows 3.00 V', reading(v) === '3.00 V', reading(v));
+    // Range: 200 mA is too small.
+    await setting(a, 'range', '200mA');
+    check('200 mA range shows OL', reading(a) === 'OL', reading(a));
+    await setting(a, 'range', '2A');
+    check('back on the 2 A range', reading(a) === '0.300 A', reading(a));
+
+    // Moving and rotating change nothing electrical.
+    const before = App.result.components[r3].I;
+    await drag(centre(r3), at(comp(r3).x - 6, comp(r3).y - 1));
+    check('dragging a component moved it', comp(r3).x === 2 && comp(r3).y === -2, `${comp(r3).x}, ${comp(r3).y}`);
+    check('wires follow a moved component (readings unchanged)', reading(a) === '0.300 A' && App.result.components[r3].I === before);
+    await tap(centre(r1)); await key('r');
+    check('R rotates the selected component', comp(r1).rot === 90);
+    check('readings unchanged after rotating', reading(a) === '0.300 A', reading(a));
+    await tap(centre(r2)); await tap(centre(r2));
+    check('double-tap rotates', comp(r2).rot === 90);
+    check('readings unchanged after double-tap rotating', reading(v) === '3.00 V', reading(v));
+
+    // Delete and undo.
+    await tap(centre(r1)); await key('Delete');
+    check('Delete removes the selected component', !comp(r1));
+    check('with R1 gone, no current flows', reading(a) === '0.000 A' && diag('open-circuit'), reading(a));
+    check('its wires are left with loose ends', diag('loose-end'));
+    await key('z', { ctrl: true });
+    check('Ctrl+Z brings it back', !!comp(r1) && reading(a) === '0.300 A', reading(a));
+    await key('y', { ctrl: true });
+    check('Ctrl+Y removes it again', !comp(r1));
+    D.querySelector('[data-act="undo"]').click(); await tick();
+    check('the Undo button works too', !!comp(r1) && reading(a) === '0.300 A');
+  });
+
+  await scenario('Parallel circuit (touch): 6 V across 6 Ω and 12 Ω', async () => {
+    await fresh();
+    const t = { ptype: 'touch' };
+    const c = await place('cell', 0, -6, t);
+    const a = await place('ammeter', 6, -6, t);
+    const r1 = await place('resistor', 4, 0, t);
+    const r2 = await place('resistor', 4, 5, t);
+    await setting(c, 'emf', 6, t); await setting(r1, 'R', 6, t); await setting(r2, 'R', 12, t);
+    await wire(c, 1, a, 0, t); await wire(a, 1, r1, 1, t); await wire(r1, 0, c, 0, t);
+    await wire(r2, 1, r1, 1, t); await wire(r2, 0, r1, 0, t);
+    check('touch: ammeter in the main branch shows 1.500 A', reading(a) === '1.500 A', reading(a));
+    check('touch: R2 carries 0.5 A', Math.abs(App.result.components[r2].I) === 0.5);
+    // A branch from a wire: drag from the middle of a wire to a new resistor.
+    const r3 = await place('resistor', 16, 0, t);
+    await setting(r3, 'R', 24, t);
+    const w = App.store.drawing.wires.find((x) => x.from.c === a && x.to.c === r1 || x.to.c === a && x.from.c === r1);
+    const mid = W.Circuits.model.wirePath(App.store.drawing, w);
+    const pm = mid.length > 2 ? mid[1] : [(mid[0][0] + mid[1][0]) / 2, (mid[0][1] + mid[1][1]) / 2];
+    await drag(at(...pm), term(r3, 1), t);
+    await wire(r3, 0, c, 0, t);
+    check('branching from a wire makes a junction', App.store.drawing.junctions.length >= 1);
+    check('touch: three branches (6, 12, 24 Ω) give 1.750 A', reading(a) === '1.750 A', `${reading(a)}; ${App.result.diagnostics.map((x) => x.code).join(', ')}`);
+    check('the new branch is joined to the wire it started from', net(r3, 1) === net(r1, 1));
+    await setting(r3, 'R', 12, t);
+    check('2.000 A is above the 2 A range: OL, like a real meter', reading(a) === 'OL', reading(a));
+    await setting(a, 'range', '10A', t);
+    check('on the 10 A range it shows 2.00 A', reading(a) === '2.00 A', reading(a));
+  });
+
+  await scenario('Switch and lamp (mouse): tapping the switch opens and closes it', async () => {
+    await fresh();
+    const c = await place('battery', 0, -6);
+    const s = await place('switch', 6, -6);
+    const l = await place('lamp', 4, 2);
+    const a = await place('ammeter', 12, -2);
+    await wire(c, 1, s, 0); await wire(s, 1, a, 0); await wire(a, 1, l, 1); await wire(l, 0, c, 0);
+    check('switch closed: 0.500 A (6 V, 12 Ω)', reading(a) === '0.500 A', reading(a));
+    await tap(centre(s));
+    check('tap opens the switch: 0.000 A', comp(s).params.closed === false && reading(a) === '0.000 A', reading(a));
+    check('the check says the circuit is open', diag('open-circuit'));
+    await tap(centre(s));
+    check('tap closes it again', comp(s).params.closed === true && reading(a) === '0.500 A');
+    // A wire straight across the battery: a short circuit.
+    await wire(c, 0, c, 1);
+    check('short circuit is reported', diag('short-ideal'));
+    check('the ammeter shows OL', reading(a) === 'OL' || reading(a) === '0.000 A', reading(a));
+    check('the short-circuit wire is drawn as a danger', !!D.querySelector('.ck-wire.ck-inf'));
+    await key('z', { ctrl: true });
+    check('undo removes the short', !diag('short-ideal') && reading(a) === '0.500 A');
+  });
+
+  await scenario('Joining and drawing in other ways (mouse)', async () => {
+    await fresh();
+    const r1 = await place('resistor', 0, 0);
+    const r2 = await place('resistor', 4, 0); // its terminal 0 lands on r1's terminal 1
+    check('dropping a terminal onto a terminal joins them', net(r1, 1) === net(r2, 0));
+    // Tap-tap wire with a bend.
+    await tap(term(r2, 1));
+    check('tapping a terminal starts a wire', App.mode === 'wire');
+    await tap(at(6, 6));
+    await tap(term(r1, 0));
+    check('tapping a terminal finishes it', App.mode === 'select' && net(r1, 0) === net(r2, 1));
+    const w = App.store.drawing.wires.find((x) => (x.via || []).length);
+    check('the tapped bend was kept', !!w);
+    // Escape cancels a wire.
+    const n0 = App.store.drawing.wires.length;
+    await tap(term(r1, 0)); await key('Escape');
+    check('Esc cancels a wire', App.mode === 'select' && App.store.drawing.wires.length === n0);
+    // Tap a toolbox button, then the grid.
+    await tap((() => { const b = App.toolButton('lamp').getBoundingClientRect(); return [b.left + 20, b.top + 20]; })(), { target: App.toolButton('lamp') });
+    const id = ++pid; const b = App.toolButton('lamp'); b.dispatchEvent(new W.PointerEvent('pointerdown', { bubbles: true, clientX: 0, clientY: 0, pointerId: id, pointerType: 'mouse', button: 0 }));
+    W.dispatchEvent(new W.PointerEvent('pointerup', { bubbles: true, clientX: 0, clientY: 0, pointerId: id, pointerType: 'mouse', button: 0 }));
+    await tick();
+    check('tapping a toolbox button starts placing', App.mode === 'place');
+    await tap(at(0, 8));
+    check('tapping the grid places it', App.store.drawing.components.some((c) => c.type === 'lamp' && c.x === 0 && c.y === 8));
+    // Box selection with Shift (Esc first, since Shift adds to what is already selected).
+    await key('Escape');
+    await drag(at(-4, -3), at(8, 3), { shift: true });
+    check('Shift-drag selects a box', App.selection.components.length === 2, JSON.stringify(App.selection));
+  });
+
+  await scenario('Into the wire and out again (mouse): drop onto a wire, rotate both ways, take out', async () => {
+    await fresh();
+    const c = await place('cell', 0, -6);
+    const r = await place('resistor', 0, 6);
+    await setting(c, 'emf', 6); await setting(r, 'R', 12);
+    await wire(c, 1, r, 1); await wire(c, 0, r, 0); // two long straight wires down the sides
+    check('a simple loop: no lamp yet', App.store.drawing.wires.length === 2);
+    // Drag a lamp from the toolbox onto the right-hand wire.
+    const b = App.toolButton('lamp').getBoundingClientRect();
+    const id1 = ++pid;
+    fire('pointerdown', b.left + 20, b.top + 20, { id: id1, target: App.toolButton('lamp') });
+    for (let i = 1; i <= 8; i++) { const q = at(2.3, 0.2); fire('pointermove', b.left + 20 + (q[0] - b.left - 20) * i / 8, b.top + 20 + (q[1] - b.top - 20) * i / 8, { id: id1 }); }
+    check('the wire lights up while a lamp is held over it', !!D.querySelector('.ck-insertw'));
+    check('the hint says it will go into the wire', D.querySelector('.ck-hint').textContent.includes('into this wire'));
+    fire('pointerup', ...at(2.3, 0.2), { id: id1 }); await tick();
+    const l = App.store.drawing.components.find((x) => x.type === 'lamp').id;
+    check('the lamp went into the wire, turned to lie along it', comp(l).x === 2 && comp(l).rot === 90, JSON.stringify(comp(l)));
+    const a = await place('ammeter', -2.2, 0.3);
+    check('an ammeter dropped onto the left wire goes in too', comp(a).x === -2 && (comp(a).rot === 90 || comp(a).rot === 270));
+    check('series: 6 V across 12 Ω + 12 Ω reads 0.250 A (or −0.250 A if the ammeter faces the other way)', /^-?0\.250 A$/.test(reading(a)), reading(a));
+    check('no warnings', !App.result.diagnostics.some((d) => d.level !== 'info'), App.result.diagnostics.map((d) => d.code).join(', '));
+    // Rotating both ways.
+    await tap(centre(r));
+    D.querySelector('[data-act="rotate-acw"]').click(); await tick();
+    check('the anticlockwise button turns it to 270°', comp(r).rot === 270);
+    await key('r');
+    check('R turns it clockwise, back to 0°', comp(r).rot === 0);
+    await key('R', { shift: true });
+    check('Shift+R turns it anticlockwise', comp(r).rot === 270);
+    D.querySelector('.ck-inspector [data-do="rotate"]').click(); await tick();
+    check('the panel\'s Clockwise button works', comp(r).rot === 0);
+    // Taking the lamp out without deleting it.
+    await tap(centre(l));
+    D.querySelector('.ck-inspector [data-do="takeout"]').click(); await tick();
+    check('Take out (leave a gap): the lamp is still there', !!comp(l));
+    check('… but the circuit has a gap: 0.000 A', reading(a) === '0.000 A', reading(a));
+    await key('z', { ctrl: true });
+    await tap(centre(l));
+    D.querySelector('.ck-inspector [data-do="takeout-join"]').click(); await tick();
+    check('Take out and join the wires: 6 V across 12 Ω reads 0.500 A', /^-?0\.500 A$/.test(reading(a)), reading(a));
+    check('the lamp is kept, with nothing attached', !!comp(l) && !App.store.drawing.wires.some((w) => w.from.c === l || w.to.c === l));
+    // Drag the free lamp back onto the wire.
+    const s = App.store.drawing.wires.map((w) => W.Circuits.model.wirePath(App.store.drawing, w)).find((p) => p.length === 2 && p[0][0] === 2 && p[1][0] === 2 && Math.abs(p[0][1] - p[1][1]) >= 4);
+    check('the joining wire is a straight piece where the lamp was', !!s);
+    if (s) {
+      await drag(centre(l), at(2.2, (s[0][1] + s[1][1]) / 2));
+      check('dragging the free lamp back onto the wire puts it in again: 0.250 A', /^-?0\.250 A$/.test(reading(a)), reading(a));
+    }
+    // A component lying on a wire without being in it gets a warning.
+    App.store.load({ components: [{ id: 'c1', type: 'cell', x: 0, y: 0, params: { emf: 6 } }, { id: 'r1', type: 'resistor', x: 6, y: 0 }], wires: [{ id: 'w1', from: { c: 'c1', t: 1 }, to: { c: 'c1', t: 0 }, via: [[10, 0], [10, 4], [-2, 4]] }] });
+    await tick();
+    const through = (id) => App.store.drawing.wires.some((w) => { const path = W.Circuits.model.wirePath(App.store.drawing, w); const c = comp(id); return path.some((q, i) => i + 1 < path.length && W.Circuits.model.segDistance([c.x, c.y], q, path[i + 1]) < 1e-9); });
+    check('a wire whose route runs along a component goes around it, and it is not joined', !through('r1') && !App.store.drawing.wires.some((w) => w.from.c === 'r1' || w.to.c === 'r1'));
+    App.store.load({ components: [{ id: 'c1', type: 'cell', x: 0, y: 0, params: { emf: 6 } }, { id: 'r1', type: 'resistor', x: 10, y: 2 }], wires: [{ id: 'w1', from: { c: 'c1', t: 1 }, to: { c: 'c1', t: 0 }, via: [[10, 0], [10, 4], [-2, 4]] }] });
+    await tick();
+    check('a wire whose route runs across a component goes around it too', !through('r1'));
+  });
+
+  await scenario('What you see is what you get (mouse): the teacher\'s picture', async () => {
+    await fresh();
+    const c = await place('cell', 0, -6);
+    const l = await place('lamp', 10, -6);
+    const a = await place('ammeter', 2, 4);
+    await setting(c, 'emf', 6); await setting(l, 'R', 12);
+    await wire(c, 1, l, 0); await wire(l, 1, a, 1); await wire(a, 0, c, 0);
+    check('a cell, a lamp and an ammeter in series: 0.500 A', /^-?0\.500 A$/.test(reading(a)), reading(a));
+    const home = [comp(l).x, comp(l).y];
+    await tap(centre(l));
+    D.querySelector('.ck-inspector [data-do="takeout"]').click(); await tick();
+    check('taken out: 0.000 A, with loose ends', reading(a) === '0.000 A' && diag('loose-end'));
+    // Drag it back by a different route: the preview shows the joins before letting go.
+    const id = ++pid;
+    const from = centre(l);
+    fire('pointerdown', from[0], from[1], { id });
+    const to = at(...home);
+    for (let i = 1; i <= 8; i++) fire('pointermove', from[0] + (to[0] - from[0]) * i / 8, from[1] + (to[1] - from[1]) * i / 8, { id });
+    check('while held in place, the loose ends are no longer drawn as loose', !D.querySelector('.ck-loose'));
+    fire('pointerup', to[0], to[1], { id }); await tick();
+    check('let go: the lamp is joined again (0.500 A)', /^-?0\.500 A$/.test(reading(a)), reading(a));
+    check('no loose ends and no unconnected terminals left', !diag('loose-end') && !diag('unconnected'));
+    // A wire dragged from a terminal to the middle of a wire makes a T with a dot.
+    const r = await place('resistor', 10, 10);
+    await setting(r, 'R', 12);
+    const w = App.store.drawing.wires.find((x) => (x.from.c === a && x.to.c === c) || (x.from.c === c && x.to.c === a));
+    const path = W.Circuits.model.wirePath(App.store.drawing, w);
+    const longest = path.slice(1).map((q, i) => [path[i], q]).sort((p, q) => (Math.abs(q[1][0] - q[0][0]) + Math.abs(q[1][1] - q[0][1])) - (Math.abs(p[1][0] - p[0][0]) + Math.abs(p[1][1] - p[0][1])))[0];
+    const midpt = [Math.round((longest[0][0] + longest[1][0]) / 2), Math.round((longest[0][1] + longest[1][1]) / 2)];
+    await drag(term(r, 0), at(...midpt));
+    const dots = D.querySelectorAll('.ck-dot').length;
+    check('a wire ending on the middle of a wire makes a T junction with a dot', App.store.drawing.junctions.length >= 1 && dots >= 1, `${dots} dots`);
+    check('the resistor is joined to that wire', net(r, 0) === net(c, 0) || net(r, 0) === net(a, 0));
+  });
+
+  await scenario('Stage 4: show the working, board view, share links, saving', async () => {
+    await load();
+    check('the example circuit opens first', App.store.drawing.components.length === 5 && reading('a1') === '0.500 A', reading('a1'));
+    App.setShow('working', true); await tick();
+    const wk = D.querySelector('.ck-working');
+    check('Show the working opens the panel', !wk.hidden);
+    check('the working gives the current from the cell (6 / 12 = 0.5 A)', wk.textContent.includes('I = ε / R = 6 / 12 = 0.5 A'), wk.textContent.slice(0, 300));
+    check('the working mentions that ideal meters are left out', wk.textContent.includes('Ideal meters are left out'));
+    await setting('l1', 'R', 24);
+    check('the working follows changes (6 / 24 = 0.25 A)', D.querySelector('.ck-working').textContent.includes('6 / 24 = 0.25 A'));
+    // Board view.
+    D.querySelector('[data-act="board"]').click(); await tick(); await tick();
+    const svgH = D.querySelector('.ck-svg').getBoundingClientRect().height;
+    check('Board fills the window', D.querySelector('.ck-app').classList.contains('ck-board') && svgH > 600, `${Math.round(svgH)} px`);
+    await key('Escape');
+    check('Esc leaves board view', !D.querySelector('.ck-app').classList.contains('ck-board'));
+    // Share links.
+    const S = W.CircuitShare;
+    const code = await S.encode(App.store.drawing);
+    const back = await S.decode(code);
+    check('a share link gives back exactly the same circuit', JSON.stringify(back) === JSON.stringify(App.store.drawing));
+    check('the example circuit\'s link is short', code.length < 600, `${code.length} characters`);
+    await load(`#c=${code}`);
+    check('opening a share link shows that circuit', comp('l1').params.R === 24 && reading('a1') === '0.250 A', reading('a1'));
+    check('… says so', D.querySelector('.ck-saved-note').textContent.includes('shared circuit'));
+    check('… and tidies the page address', !frameEl.contentWindow.location.hash);
+    await load('#c=zBROKEN');
+    check('a broken share link opens the example instead, with a message', reading('a1') === '0.500 A' && D.querySelector('.ck-saved-note').textContent.includes("couldn't be opened"));
+    // Saving and opening.
+    D.querySelector('[data-file="save"]').click(); await tick();
+    D.querySelector('.ck-filepanel input').value = 'My test circuit';
+    D.querySelector('.ck-filepanel [data-do="save"]').click(); await tick();
+    check('Save… keeps a named copy', D.querySelector('.ck-saved-note').textContent.includes('My test circuit'));
+    D.querySelector('[data-act="clear"]').click(); await tick();
+    check('cleared', App.store.drawing.components.length === 0);
+    D.querySelector('[data-file="open"]').click(); await tick();
+    const openBtn = D.querySelector('.ck-filepanel [data-open="0"]');
+    check('My circuits lists it', !!openBtn && D.querySelector('.ck-filepanel').textContent.includes('My test circuit'));
+    if (openBtn) { openBtn.click(); await tick(); }
+    check('Open brings it back', App.store.drawing.components.length === 5 && reading('a1') === '0.500 A');
+    // The circuit in progress is kept when the page is opened again.
+    App.setView(-12, -10, 1.2); await tick();
+    await place('resistor', -10, 8);
+    await new Promise((r) => setTimeout(r, 400)); // the automatic save waits 0.3 s after the last change
+    await load('', true);
+    check('the circuit in progress is still there after reopening the page', App.store.drawing.components.length === 6);
+    D.querySelector('[data-file="example"]').click(); await tick();
+    check('Example circuit starts again from the example', App.store.drawing.components.length === 5);
+  });
+
+  await scenario('Challenge Mode: build it, measure it, predict it', async () => {
+    await load('', false, '&mode=challenges');
+    for (let i = 0; i < 50 && !D.querySelector('.ck-ch-card'); i++) await tick();
+    check('the Challenges tab lists the challenges', D.querySelectorAll('.ck-ch-card').length >= 10);
+    D.querySelector('[data-open="CK-B5-01"]').click();
+    for (let i = 0; i < 50 && !W.CircuitApp; i++) await tick();
+    App = W.CircuitApp;
+    D.querySelector('.ck-svg').scrollIntoView({ block: 'center' });
+    App.setView(-12, -12, 1.1); await tick();
+    check('the challenge opens with its own circuit', App.store.drawing.components.length === 2);
+    check('the toolbox offers only the challenge\'s parts', D.querySelectorAll('.ck-tool').length === 2);
+    // Locked parts stay put.
+    const bx = comp('b1').x;
+    await drag(centre('b1'), at(comp('b1').x + 4, comp('b1').y + 3));
+    await tap(centre('l1')); await key('Delete');
+    check('locked parts can\'t be moved or deleted', comp('b1').x === bx && !!comp('l1'));
+    // Build the answer through the interface.
+    const r1 = await place('resistor', 6, -6);
+    const r2 = await place('resistor', 10, 0);
+    await tap(centre(r2)); await key('r');
+    check('placed resistors have the challenge\'s value (6 Ω) and can\'t be changed', comp(r1).params.R === 6 && !D.querySelector('.ck-inspector input[data-key="R"]'));
+    check('the toolbox runs out: no third resistor', App.toolButton('resistor').disabled);
+    const v = await place('voltmeter', 0, 10);
+    await tap(centre(v)); await key('r'); await key('r');
+    await wire('b1', 1, r1, 0); await wire(r1, 1, r2, 0); await wire(r2, 1, 'l1', 1); await wire('l1', 0, 'b1', 0);
+    await wire(v, 0, 'l1', 1); await wire(v, 1, 'l1', 0);
+    D.querySelector('[data-check]').click(); await tick();
+    check('Check my circuit: the built circuit passes', !!D.querySelector('.ck-ch-ok'), D.querySelector('.ck-ch-result').textContent.slice(0, 200));
+    check('… and the explanation appears', !!D.querySelector('.ck-ch-expl'));
+    D.querySelector('[data-hint]').click(); await tick();
+    check('hints appear one at a time', D.querySelectorAll('.ck-ch-hint').length === 1);
+    D.querySelector('[data-back]').click(); await tick();
+    check('back in the list, the challenge is ticked as done', !!D.querySelector('[data-open="CK-B5-01"] .ck-tick'));
+    // A target not met.
+    D.querySelector('[data-open="CK-B5-02"]').click(); await tick();
+    App = W.CircuitApp;
+    D.querySelector('[data-check]').click(); await tick();
+    check('an unfinished circuit gets "Not yet" with the points to fix', D.querySelector('.ck-ch-result').textContent.includes('Not yet') && D.querySelectorAll('.ck-ch-checks .ck-fail').length >= 1);
+    // Measure it.
+    D.querySelector('[data-back]').click(); await tick();
+    D.querySelector('[data-open="CK-B5-07"]').click(); await tick();
+    App = W.CircuitApp;
+    check('the mystery resistor is drawn as a closed box', !!D.querySelector('.ck-mystery'));
+    const ans = D.querySelector('[data-ans="0"]');
+    ans.value = '52'; D.querySelector('[data-check]').click(); await tick();
+    check('a wrong measured value: not yet', D.querySelector('.ck-ch-result').textContent.includes('Not yet'));
+    ans.value = '47.1'; D.querySelector('[data-check]').click(); await tick();
+    check('a measured value in the accepted range is marked right', !!D.querySelector('.ck-ch-ok'));
+    // Predict it.
+    D.querySelector('[data-back]').click(); await tick();
+    D.querySelector('[data-open="CK-B5-08"]').click(); await tick();
+    App = W.CircuitApp;
+    check('a predict challenge starts with the switch open', comp('s1').params.closed === false && reading('a1') === '0.000 A');
+    await tap(centre('s1'));
+    check('its switch can\'t be tapped closed', comp('s1').params.closed === false);
+    D.querySelector('[data-check]').click(); await tick();
+    check('predictions are needed first', D.querySelector('.ck-ch-result').textContent.includes('Type a prediction'));
+    ['1.5', '0.5', '4'].forEach((x, i) => { D.querySelector(`[data-pred="${i}"]`).value = x; });
+    D.querySelector('[data-check]').click(); await tick();
+    check('closing the switch shows the real readings', comp('s1').params.closed === true && reading('a1') === '1.500 A');
+    check('two of three predictions were right', D.querySelector('.ck-ch-ok').textContent.includes('2 of 3'));
+    // Back to Free Build keeps the student's own circuit.
+    D.querySelector('.ck-tabs [data-mode="free"]').click(); await tick();
+    App = W.CircuitApp;
+    check('the Free Build tab brings back the free-build workspace', App.store.drawing.components.length === 5 && !!D.querySelector('.ck-filebar:not([hidden])'));
+  });
+
+  await scenario('Every challenge is drawn clearly: no label or meter display overlaps another part', async () => {
+    await load('', false, '&mode=challenges');
+    for (let i = 0; i < 50 && !D.querySelector('.ck-ch-card'); i++) await tick();
+    const ids = [...D.querySelectorAll('[data-open]')].map((b) => b.dataset.open);
+    const hit = (p, q) => p.left < q.right - 1 && p.right > q.left + 1 && p.top < q.bottom - 1 && p.bottom > q.top + 1;
+    for (const id of ids) {
+      W.CircuitPage.challenges.open(id); await tick();
+      App = W.CircuitApp; App.fit(); await tick();
+      const items = [
+        ...[...D.querySelectorAll('.ck-label')].map((e) => ({ owner: e.dataset.labelFor, kind: 'label', r: e.getBoundingClientRect() })),
+        ...[...D.querySelectorAll('.ck-reading')].map((e) => ({ owner: e.dataset.readingFor, kind: 'display', r: e.getBoundingClientRect() })),
+      ];
+      const comps = [...D.querySelectorAll('.ck-comp')].map((e) => ({ owner: e.dataset.comp, r: e.getBoundingClientRect() }));
+      let clash = '';
+      for (const a of items) {
+        for (const c of comps) if (c.owner !== a.owner && hit(a.r, c.r)) clash = `${a.owner}'s ${a.kind} overlaps ${c.owner}`;
+        for (const b of items) if (b !== a && hit(a.r, b.r)) clash = `${a.owner}'s ${a.kind} overlaps ${b.owner}'s ${b.kind}`;
+      }
+      check(`${id}: labels and displays are clear`, !clash, clash);
+    }
+  });
+
+  await scenario('Current values keep clear of labels', async () => {
+    await load();
+    App.setShow('wireCurrent', true); App.setShow('arrows', true);
+    await tick();
+    const boxes = (sel) => Array.from(D.querySelectorAll(sel)).map((e) => e.getBoundingClientRect());
+    const hit = (p, q) => p.left < q.right && p.right > q.left && p.top < q.bottom && p.bottom > q.top;
+    const vals = boxes('.ck-wirei');
+    const others = [...boxes('.ck-label'), ...boxes('.ck-reading'), ...boxes('.ck-comp')];
+    check('current values are shown', vals.length >= 3, `${vals.length}`);
+    check('no current value overlaps a label, a meter display or a component', !vals.some((v) => others.some((o) => hit(v, o))));
+  });
+
+  const passed = results.filter((r) => r.ok).length;
+  const s = document.getElementById('summary');
+  s.textContent = `${passed} of ${results.length} interface checks passed.`;
+  s.className = passed === results.length ? 'ok' : 'bad';
+  window.uiTestResults = { passed, total: results.length, failures: results.filter((r) => !r.ok) };
+})();
+</script>
+</body>
+</html>
