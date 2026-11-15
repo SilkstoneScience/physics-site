@@ -1710,5 +1710,85 @@
     ],
     "answer": 3,
     "explanation": "The field lines are concentric circles around the wire (I), and $B = \\dfrac{\\mu_0 I}{2\\pi r}$, so B ∝ 1/r (II) and B ∝ I (III). A common mistake is to think the field follows an inverse-square law, which would make it a quarter, not half, at twice the distance."
+  },
+  {
+    "id": "D1-023",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "sections": [
+      "gradient"
+    ],
+    "stem": "<p>Two equipotential surfaces around a planet have gravitational potentials of $-6.20 \\times 10^{6}$ $\\text{J kg}^{-1}$ and $-6.05 \\times 10^{6}$ $\\text{J kg}^{-1}$. The second surface is 50 km further from the planet than the first.</p><p>What is the magnitude of the average gravitational field strength between the two surfaces?</p>",
+    "options": [
+      "0.33 $\\text{N kg}^{-1}$",
+      "3.0 $\\text{N kg}^{-1}$",
+      "120 $\\text{N kg}^{-1}$",
+      "3000 $\\text{N kg}^{-1}$"
+    ],
+    "answer": 1,
+    "explanation": "The field strength is the potential gradient: $g = -\\dfrac{\\Delta V_g}{\\Delta r}$. Here $\\Delta V_g = 0.15 \\times 10^{6}$ $\\text{J kg}^{-1}$ and $\\Delta r = 50$ km $= 5.0 \\times 10^{4}$ m, so the magnitude is $\\dfrac{1.5 \\times 10^{5}}{5.0 \\times 10^{4}} = 3.0$ $\\text{N kg}^{-1}$ (the minus sign only says the field points inwards, towards lower potential). 3000 comes from leaving the distance in km. 120 comes from dividing one potential by the distance instead of the <em>change</em> in potential. 0.33 comes from dividing the wrong way round, $\\dfrac{\\Delta r}{\\Delta V_g}$."
+  },
+  {
+    "id": "D1-024",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "1A",
+    "difficulty": 2,
+    "level": "HL",
+    "sections": [
+      "gpe"
+    ],
+    "stem": "<p>The gravitational potential energy of a satellite–planet system is $-8.0$ GJ when the satellite orbits at a distance $r$ from the planet's centre. The satellite is moved to an orbit at a distance $4r$.</p><p>What is the gravitational potential energy of the system now?</p>",
+    "options": [
+      "−32 GJ",
+      "−8.0 GJ",
+      "−2.0 GJ",
+      "−0.50 GJ"
+    ],
+    "answer": 2,
+    "explanation": "$E_p = -\\dfrac{GMm}{r}$, so $E_p \\propto \\dfrac{1}{r}$: four times the distance gives a quarter of the value, $-\\dfrac{8.0}{4} = -2.0$ GJ. The energy has <em>increased</em> (become less negative), because work had to be done to move the satellite away from the planet. −0.50 GJ comes from using $\\dfrac{1}{r^2}$, which is how the field strength (and the force) changes, not the potential energy. −32 GJ comes from multiplying by 4. −8.0 GJ assumes the potential energy doesn't depend on the distance."
+  },
+  {
+    "id": "D2-020",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "sections": [
+      "charge"
+    ],
+    "stem": "<p>X, Y and Z are three small charged spheres. X attracts Y, and Y repels Z. Z is negatively charged.</p><p>What are the charges on X and Y?</p>",
+    "options": [
+      "X and Y are both negative.",
+      "X is negative and Y is positive.",
+      "X is positive and Y is negative.",
+      "X and Y are both positive."
+    ],
+    "answer": 2,
+    "explanation": "Like charges repel, so Y has the same sign as Z: negative. Unlike charges attract, so X has the opposite sign to Y: positive. \"Both negative\" comes from working out Y correctly and then forgetting that attraction needs <em>opposite</em> charges. \"X is negative and Y is positive\" comes from treating repulsion as a sign of opposite charges. \"Both positive\" reverses both rules."
+  },
+  {
+    "id": "D2-021",
+    "theme": "D",
+    "topic": "D.2",
+    "paper": "1A",
+    "difficulty": 1,
+    "level": "SL",
+    "sections": [
+      "charge"
+    ],
+    "stem": "<p>Two identical small metal spheres carry charges of $+8.0$ nC and $-2.0$ nC. They are touched together and then separated.</p><p>What is the charge on each sphere now?</p>",
+    "options": [
+      "+3.0 nC",
+      "+4.0 nC",
+      "+5.0 nC",
+      "+6.0 nC"
+    ],
+    "answer": 0,
+    "explanation": "Charge is conserved, so the total stays $+8.0 + (-2.0) = +6.0$ nC. The spheres are identical, so the charge is shared equally: $+3.0$ nC each. +5.0 nC comes from adding the sizes of the charges and ignoring the minus sign. +6.0 nC is the total, not the share on each sphere. +4.0 nC comes from sharing only the positive charge."
   }
 ]
