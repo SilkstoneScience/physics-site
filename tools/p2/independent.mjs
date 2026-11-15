@@ -33,13 +33,18 @@ export const INDEPENDENT = {
     const vR = emf.value * r1 / (r1 + r2);
     return { Rtot: (r1 + r2) / 1000, I: amps * 1000, VT: emf.value - vR, P: vR * amps * 1000 };
   },
-  // Circular orbits: centripetal force = gravity; energies added term by term (not from E = −GMm/2r).
+  // Circular orbits: potential −GM/r; potential energy gained = −GMm/r2 − (−GMm/r1); total energy = kinetic energy from
+  // the orbital speed (centripetal force = gravity) plus potential energy, added term by term (not from E = −GMm/2r).
   'D1-P01': ({ M, RE, m, h1, h2 }) => {
     const Gc = 6.67e-11;
     const ra = RE.value + h1.value * 1e3, rb = RE.value + h2.value * 1e3;
+    const pe = (r) => -Gc * M.value * m.value / r;
     const speed = (r) => Math.sqrt(Gc * M.value / r);
-    const total = (r) => 0.5 * m.value * speed(r) ** 2 - Gc * M.value * m.value / r;
-    return { r1: ra, r2: rb, v1: speed(ra) / 1e3, T1: 2 * Math.PI * ra / speed(ra), E1: total(ra), E2: total(rb), dE: total(rb) - total(ra) };
+    const total = (r) => 0.5 * m.value * speed(r) ** 2 + pe(r);
+    return {
+      r1: ra, r2: rb, V1: pe(ra) / m.value, V2: pe(rb) / m.value, dEp: pe(rb) - pe(ra),
+      E1: total(ra), E2: total(rb), dE: total(rb) - total(ra),
+    };
   },
   // Helium expanding adiabatically: the pressure through logarithms; the temperature from T V^(2/3) = constant (a
   // different route from the question's pV/T); the work from the amount of gas, W = 3/2 nR(T_X − T_Y); and the end of
@@ -52,13 +57,19 @@ export const INDEPENDENT = {
     const n = p1.value * V1.value / (R * T1.value);
     return { p2: pY, T2: TY, W: 1.5 * n * R * (T1.value - TY), p2iso: p1.value * V1.value / V2.value };
   },
-  // Stopping voltage line V = (h/e)(f − f0): gradient from two points on it; work function = e × (h/e) × f0, in eV.
-  'E2-P01': ({ f0, hg }) => {
-    const e = 1.60e-19;
-    const line = (f) => hg.value * (f - f0.value) / e;
-    const f1 = 7e14, f2 = 1.1e15;
-    const gradient = (line(f2) - line(f1)) / (f2 - f1);
-    return { f0_read: f0.value, grad: gradient, hexp: gradient * e, phi: gradient * f0.value };
+  // Flame detector, worked in electronvolts: hc/e in eV m; threshold wavelength and photon energies from it; photons per
+  // second = power / photon energy; the speed from the kinetic energy in joules; de Broglie λ = h/(m v).
+  'E2-P02': ({ phi, sun, lam, P }) => {
+    const h = 6.63e-34, c = 3.00e8, e = 1.60e-19, me = 9.110e-31;
+    const hcEv = h * c / e; // eV m
+    const photonEv = hcEv / (lam.value * 1e-9);
+    const keEv = photonEv - phi.value;
+    const speed = Math.sqrt(2 * keEv * e / me);
+    return {
+      lam0: hcEv / phi.value * 1e9, Esun: hcEv / (sun.value * 1e-9),
+      Eph: photonEv * e, N: P.value / (photonEv * e),
+      Emax: keEv * e, EmaxeV: keEv, vmax: speed, ld: h / (me * speed) * 1e9,
+    };
   },
   // Weather balloon: forces from Newton's second law; amount of helium from pV = nRT, then the new volume;
   // radio wavelength and travel time with c; power from the loss of potential energy per second.

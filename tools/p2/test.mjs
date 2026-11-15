@@ -12,6 +12,7 @@ import { UNDERSTANDINGS, SYLLABUS_IDS, EXCLUDED, LIMITS, COMMAND_TERMS } from '.
 import { words, checkOriginality } from './originality.mjs';
 import { buildAll, loadTopics, fingerprintOf, ROOT } from './build.mjs';
 import { reviewProblem } from './registry.mjs';
+import { similarityDiagnostics, profilesOf, pairKey, wordsHash } from './similarity.mjs';
 import { GOOD_SHORT, GOOD_SHORT_INDEPENDENT, GOOD_LINKING, GOOD_LINKING_INDEPENDENT } from './fixtures/examples.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -193,6 +194,31 @@ export async function runTests() {
     const reg = JSON.parse(fs.readFileSync(new URL('./reviews.json', import.meta.url), 'utf8'));
     const files = fs.existsSync(new URL('./withdrawn/', import.meta.url)) ? fs.readdirSync(new URL('./withdrawn/', import.meta.url)).map((f) => f.replace(/\.mjs$/, '')).sort() : [];
     return JSON.stringify(Object.keys(reg.withdrawn || {}).sort()) === JSON.stringify(files) && files.every((id) => !fs.existsSync(new URL(`./questions/${id}.mjs`, import.meta.url)) && !(id in reg.questions));
+  })());
+  // Checked pairs (review.mjs similar-checked): the teacher's decision stops a similarity warning until either
+  // question changes. Thresholds are set so that any two questions warn, and no hand-written questions are loaded.
+  {
+    const noHand = fs.mkdtempSync(path.join(os.tmpdir(), 'p2-similar-'));
+    const allWarn = { warnJaccard: 0, errorJaccard: 2, warnRun: 99, errorRun: 99 };
+    const twin = clone(GOOD_SHORT); twin.id = 'A1-P91'; twin.situation = 'a different situation altogether';
+    const IND2 = { ...IND, 'A1-P91': GOOD_SHORT_INDEPENDENT };
+    const pairOf = (defs) => build(defs, { independent: IND2, similarity: false }).results;
+    const warns = (results, checked) => similarityDiagnostics(results, { root: noHand, thresholds: allWarn, checked }).filter((d) => d.code === 'similar' && d.level === 'warn');
+    const r = pairOf([GOOD_SHORT, twin]);
+    const p = profilesOf(r, noHand);
+    const record = { by: 'Teacher', date: '2026-11-15', note: 'test', words: { 'A1-P90': wordsHash(p.get('A1-P90')), 'A1-P91': wordsHash(p.get('A1-P91')) } };
+    check('similar: an unchecked pair warns', warns(r, {}).length === 1);
+    check('similar: a pair the teacher checked does not warn', warns(r, { [pairKey('A1-P91', 'A1-P90')]: record }).length === 0);
+    const edited = clone(twin); edited.stem = edited.stem.replace('</p>', ' A gusty crosswind blows across the courtyard.</p>');
+    const w = warns(pairOf([GOOD_SHORT, edited]), { [pairKey('A1-P90', 'A1-P91')]: record });
+    check('similar: the warning comes back when a checked question changes', w.length === 1 && /A1-P91 has changed since/.test(w[0].message), w.map((d) => d.message).join('; '));
+    check('similar: a record for another pair changes nothing', warns(r, { [pairKey('A1-P90', 'B3-017')]: record }).length === 1);
+    check('similar: a check never removes an error', similarityDiagnostics(r, { root: noHand, thresholds: { ...allWarn, errorJaccard: 0 }, checked: { [pairKey('A1-P90', 'A1-P91')]: record } }).some((d) => d.level === 'error'));
+    fs.rmSync(noHand, { recursive: true, force: true });
+  }
+  check('every checked pair in reviews.json names two questions and a person', (() => {
+    const reg = JSON.parse(fs.readFileSync(new URL('./reviews.json', import.meta.url), 'utf8'));
+    return Object.entries(reg.similarChecked || {}).every(([key, rec]) => key.split(' + ').length === 2 && rec.by && !/claude|assistant|ai\b/i.test(rec.by) && rec.note && Object.keys(rec.words || {}).length === 2);
   })());
   check('an assistant can\'t record APPROVED', !!reviewProblem({ status: 'TEACHER-REVIEWED' }, 'APPROVED', 'Claude', {}));
   check('reviews can\'t skip a stage', !!reviewProblem({ status: 'AUTO-VALIDATED' }, 'APPROVED', 'Mr Silkstone', {}));

@@ -1959,45 +1959,63 @@
     "level": "HL",
     "sections": [
       "energy",
-      "orbits"
+      "potential",
+      "gpe"
     ],
     "stem": "<p>A satellite of mass 850 kg is in a circular orbit 600 km above the surface of the Earth. Its engines are used to move it to a circular orbit 2400 km above the surface. The mass of the Earth is $5.97 \\times 10^{24}$ kg and its radius is $6.37 \\times 10^{6}$ m.</p>",
     "parts": [
       {
         "label": "a",
         "sections": [
-          "orbits"
+          "potential"
         ],
-        "question": "Show that, in the first orbit, the satellite moves at about 7.6 $\\text{km s}^{-1}$.",
+        "question": "Calculate the gravitational potential due to the Earth at the first orbit.",
         "marks": 2,
         "markscheme": [
-          "$r = 6.37 \\times 10^{6} + 600 \\times 10^{3} = 6.97 \\times 10^{6}\\ \\text{m}$ ✓",
-          "$v = \\sqrt{\\dfrac{GM}{r}} = 7.56\\ \\text{km s}^{-1}$ ✓"
-        ]
+          "$r_1 = 6.37 \\times 10^{6} + 600 \\times 10^{3} = 6.97 \\times 10^{6}\\ \\text{m}$ ✓",
+          "$V_{\\text{g}} = -\\dfrac{GM}{r_1} = -\\dfrac{6.67 \\times 10^{-11} \\times 5.97 \\times 10^{24}}{6.97 \\times 10^{6}} = -5.71 \\times 10^{7}\\ \\text{J kg}^{-1}$ ✓",
+          "Do not accept a positive value for the second mark."
+        ],
+        "numeric": {
+          "answer": -57130400,
+          "unit": "$\\text{J kg}^{-1}$",
+          "range": [
+            -58900000,
+            -55400000
+          ],
+          "mistakes": [
+            {
+              "value": 57130400,
+              "feedback": "Gravitational potential is negative: it is zero at infinity and lower closer to the Earth."
+            }
+          ]
+        }
       },
       {
         "label": "b",
         "sections": [
-          "orbits"
+          "gpe",
+          "potential"
         ],
-        "question": "Calculate the period of the satellite in the first orbit.",
+        "question": "Determine the increase in the gravitational potential energy of the satellite when it moves to the second orbit.",
         "marks": 2,
         "markscheme": [
-          "$T = \\dfrac{2\\pi r}{v}$ ✓",
-          "$T = 5790\\ \\text{s}$ ✓",
-          "Allow ECF from (a); accept 5620 to 5970 s"
+          "$r_2 = 8.77 \\times 10^{6}\\ \\text{m}$, so $V_2 = -\\dfrac{GM}{r_2} = -4.54 \\times 10^{7}\\ \\text{J kg}^{-1}$ ✓",
+          "$\\Delta E_{\\text{p}} = m\\Delta V_{\\text{g}} = 850 \\times (-4.54 \\times 10^{7} - (-5.71 \\times 10^{7})) = 9.97 \\times 10^{9}\\ \\text{J}$ ✓",
+          "OR $\\Delta E_{\\text{p}} = GMm\\left(\\dfrac{1}{r_1} - \\dfrac{1}{r_2}\\right)$",
+          "Allow ECF from (a); accept $9.56 \\times 10^{9}$ to $1.04 \\times 10^{10}$ J. Do not accept $mg\\Delta h$."
         ],
         "numeric": {
-          "answer": 5794.01,
-          "unit": "s",
+          "answer": 9966880000,
+          "unit": "J",
           "range": [
-            5620,
-            5970
+            9560000000,
+            10400000000
           ],
           "mistakes": [
             {
-              "value": 498.767,
-              "feedback": "The satellite goes round a circle whose radius is measured from the centre of the Earth, not from the surface."
+              "value": 14994000000,
+              "feedback": "mgΔh treats g as constant, but the field gets weaker with height. Use the change in gravitational potential between the two orbits."
             }
           ]
         }
@@ -2011,7 +2029,8 @@
         "marks": 2,
         "markscheme": [
           "$E_{\\text{k}} = \\tfrac{1}{2}mv^2 = \\dfrac{GMm}{2r}$ (using $v^2 = GM/r$) ✓",
-          "$E = E_{\\text{k}} + E_{\\text{p}} = \\dfrac{GMm}{2r} - \\dfrac{GMm}{r} = -\\dfrac{GMm}{2r}$ ✓"
+          "$E = E_{\\text{k}} + E_{\\text{p}} = \\dfrac{GMm}{2r} - \\dfrac{GMm}{r} = -\\dfrac{GMm}{2r}$ ✓",
+          "Accept a derivation that starts from $\\dfrac{GMm}{r^2} = \\dfrac{mv^2}{r}$."
         ]
       },
       {
@@ -2019,20 +2038,21 @@
         "sections": [
           "energy"
         ],
-        "question": "Determine the minimum energy that the engines must supply to move the satellite to the second orbit.",
+        "question": "Determine the minimum energy that must be transferred to the satellite to move it to the second orbit. Assume that the mass of the satellite does not change.",
         "marks": 3,
         "markscheme": [
-          "$r_2 = 8.77 \\times 10^{6}\\ \\text{m}$ ✓",
-          "$\\Delta E = \\dfrac{GMm}{2}\\left(\\dfrac{1}{r_1} - \\dfrac{1}{r_2}\\right)$ ✓",
-          "$\\Delta E = 4.98 \\times 10^{9}\\ \\text{J}$ ✓",
-          "Allow ECF from (a) and (c); accept $4.78 \\times 10^{9}$ to $5.19 \\times 10^{9}$ J. Award [2 max] for the change in potential energy only, $9.97 \\times 10^{9}$ J."
+          "$E = -\\dfrac{GMm}{2r}$ applied to each orbit, e.g. $E_1 = -2.43 \\times 10^{10}\\ \\text{J}$ and $E_2 = -1.93 \\times 10^{10}\\ \\text{J}$ ✓",
+          "minimum energy $= E_2 - E_1$ OR $\\dfrac{GMm}{2}\\left(\\dfrac{1}{r_1} - \\dfrac{1}{r_2}\\right)$ ✓",
+          "$= 4.98 \\times 10^{9}\\ \\text{J}$ ✓",
+          "OR since $E = \\tfrac{1}{2}E_{\\text{p}}$ in any circular orbit (from (c)), the change in total energy is half the gain in potential energy from (b) [2]: $\\tfrac{1}{2} \\times 9.97 \\times 10^{9} = 4.98 \\times 10^{9}\\ \\text{J}$ [1]. Award no marks for halving (b) without this reason.",
+          "Allow ECF from (b) and (c); accept $4.75 \\times 10^{9}$ to $5.21 \\times 10^{9}$ J. Award [1 max] for the gain in potential energy only, $9.97 \\times 10^{9}$ J."
         ],
         "numeric": {
           "answer": 4983440000,
           "unit": "J",
           "range": [
-            4780000000,
-            5190000000
+            4750000000,
+            5210000000
           ],
           "mistakes": [
             {
@@ -2050,7 +2070,7 @@
         "question": "The engines supply energy to the satellite, yet its kinetic energy is smaller in the second orbit. Explain this.",
         "marks": 2,
         "markscheme": [
-          "In a higher orbit the orbital speed is lower, so the kinetic energy ($GMm/2r$) decreases ✓",
+          "In a higher orbit the orbital speed is lower ($v = \\sqrt{GM/r}$), so the kinetic energy ($GMm/2r$) decreases ✓",
           "the gravitational potential energy ($-GMm/r$) increases by twice as much as the kinetic energy falls, so the total energy increases and the engines must supply the difference ✓"
         ]
       }
@@ -2617,82 +2637,82 @@
     }
   },
   {
-    "id": "E2-P01",
+    "id": "E2-P02",
     "theme": "E",
     "topic": "E.2",
     "paper": "2",
     "difficulty": 2,
     "level": "HL",
     "sections": [
-      "graph",
-      "classical",
       "einstein",
-      "stopping"
+      "debroglie",
+      "photoelectric"
     ],
-    "stem": "<p>In an experiment on the photoelectric effect, monochromatic light falls on a metal surface. For each frequency $f$ of the light, the stopping voltage $V_{\\text{s}}$ is measured: the smallest potential difference that stops all the emitted electrons from reaching the collecting electrode. The graph shows the results.</p>",
-    "diagram": "questions/diagrams/p2-e2-stopping.svg",
-    "diagramAlt": "Graph of stopping voltage in volts against frequency in units of 10 to the 14 hertz, from 4 to 11. Five measured points lie on a straight line that meets the frequency axis at 5.5 and rises to 2.0 volts at 10.5 and 2.2 volts at 11.",
-    "diagramLarge": true,
+    "stem": "<p>A flame detector warns of a fire by detecting the ultraviolet radiation that flames emit. Its sensor is a photocell: radiation falls on a metal cathode inside a vacuum tube, and electrons released from the cathode are collected by an anode, so that there is a current in the circuit. The work function of the cathode metal is 4.80 eV.</p><p>The detector must not be triggered by sunlight shining in through an open doorway.</p>",
     "parts": [
       {
         "label": "a",
         "sections": [
-          "classical"
+          "einstein"
         ],
-        "question": "Below a certain frequency, no electrons are emitted however bright the light is. Outline why this observation supports a particle model of light rather than a wave model.",
+        "question": "The shortest wavelength in sunlight at ground level is about 290 nm. Deduce whether sunlight can trigger the detector.",
         "marks": 2,
         "markscheme": [
-          "In the wave model, energy arrives continuously, so bright enough light of any frequency should eventually release electrons ✓",
-          "In the photon model, each electron absorbs the energy of one photon, $E = hf$; below the threshold frequency one photon has less energy than the work function, whatever the number of photons ✓"
+          "photon energy at 290 nm is $\\dfrac{hc}{\\lambda} = 4.29\\ \\text{eV}$ OR the longest wavelength that can release electrons is $\\lambda_0 = \\dfrac{hc}{\\Phi} = 259\\ \\text{nm}$ ✓",
+          "this is less than the work function (OR 290 nm is longer than the threshold wavelength), so no electrons are released and sunlight cannot trigger the detector, however bright it is ✓",
+          "Award the second mark only for a comparison based on a calculated value."
         ]
       },
       {
         "label": "b",
         "sections": [
-          "graph"
+          "einstein"
         ],
-        "question": "State the threshold frequency of the metal.",
-        "marks": 1,
+        "question": "In a test, ultraviolet of wavelength 210 nm from a flame falls on the cathode with a power of $1.5 \\times 10^{-9}$ W. Calculate the number of photons reaching the cathode per second.",
+        "marks": 2,
         "markscheme": [
-          "$f_0 = 5.5 \\times 10^{14}\\ \\text{Hz}$ (the intercept on the frequency axis) ✓"
+          "photon energy $E = \\dfrac{hc}{\\lambda} = \\dfrac{6.63 \\times 10^{-34} \\times 3.00 \\times 10^{8}}{210 \\times 10^{-9}} = 9.47 \\times 10^{-19}\\ \\text{J}$ ✓",
+          "number per second $= \\dfrac{P}{E} = \\dfrac{1.5 \\times 10^{-9}}{9.47 \\times 10^{-19}} = 1.6 \\times 10^{9}\\ \\text{s}^{-1}$ ✓"
         ],
         "numeric": {
-          "answer": 550000000000000,
-          "unit": "Hz",
+          "answer": 1583710000,
+          "unit": "$\\text{s}^{-1}$",
           "range": [
-            533000000000000,
-            567000000000000
+            1530000000,
+            1640000000
+          ],
+          "mistakes": [
+            {
+              "value": 1953130000,
+              "feedback": "You divided by the work function. Each photon carries the energy hc/λ of the ultraviolet: divide the power by that."
+            }
           ]
         }
       },
       {
         "label": "c",
         "sections": [
-          "graph"
+          "einstein"
         ],
-        "question": "Determine, using the graph, a value for the Planck constant.",
+        "question": "Determine the maximum speed of the electrons released by this ultraviolet.",
         "marks": 3,
         "markscheme": [
-          "$eV_{\\text{s}} = hf - \\Phi$, so the gradient of the graph is $\\dfrac{h}{e}$ ✓",
-          "gradient read from the line, e.g. $\\dfrac{2.0 - 0}{(10.5 - 5.5) \\times 10^{14}} = 4.0 \\times 10^{-15}\\ \\text{V s}$ ✓",
-          "$h = 4.0 \\times 10^{-15} \\times 1.60 \\times 10^{-19} = 6.4 \\times 10^{-34}\\ \\text{J s}$ ✓",
-          "Accept $6.20 \\times 10^{-34}$ to $6.60 \\times 10^{-34}$ J s. Do not accept the data booklet value without a gradient."
+          "$E_{\\max} = hf - \\Phi = 9.47 \\times 10^{-19} - 4.80 \\times 1.60 \\times 10^{-19} = 1.79 \\times 10^{-19}\\ \\text{J}$ (OR $1.12$ eV) ✓",
+          "$\\tfrac{1}{2}m_{\\text{e}}v^2 = E_{\\max}$ ✓",
+          "$v = \\sqrt{\\dfrac{2 \\times 1.79 \\times 10^{-19}}{9.110 \\times 10^{-31}}} = 6.27 \\times 10^{5}\\ \\text{m s}^{-1}$ ✓",
+          "Allow ECF from (b) for the photon energy; accept $6.08 \\times 10^{5}$ to $6.46 \\times 10^{5}$ $\\text{m s}^{-1}$"
         ],
         "numeric": {
-          "answer": 6.4e-34,
-          "unit": "$\\text{J s}$",
+          "answer": 627127,
+          "unit": "$\\text{m s}^{-1}$",
           "range": [
-            6.2e-34,
-            6.6e-34
+            608000,
+            646000
           ],
           "mistakes": [
             {
-              "value": 4e-15,
-              "feedback": "The gradient of the graph is h/e, not h: multiply it by the elementary charge."
-            },
-            {
-              "value": 6.63e-34,
-              "feedback": "That is the data booklet value. The question asks for the value this experiment gives: use the gradient of the graph."
+              "value": 1441990,
+              "feedback": "That gives the electron all of the photon's energy. Some of it is needed to escape from the metal: subtract the work function first."
             }
           ]
         }
@@ -2700,34 +2720,45 @@
       {
         "label": "d",
         "sections": [
-          "einstein"
+          "debroglie"
         ],
-        "question": "Calculate the minimum energy, in eV, needed to remove an electron from this surface.",
+        "question": "Calculate, in nm, the de Broglie wavelength of the fastest of these electrons.",
         "marks": 2,
         "markscheme": [
-          "$\\Phi = hf_0$ ✓",
-          "$\\Phi = 2.20\\ \\text{eV}$ ✓",
-          "Allow ECF from (b) and (c); allow the data booklet value of $h$ (giving about 2.3 eV); accept 2.08 to 2.32 eV"
+          "$\\lambda = \\dfrac{h}{p} = \\dfrac{h}{m_{\\text{e}}v}$ ✓",
+          "$\\lambda = \\dfrac{6.63 \\times 10^{-34}}{9.110 \\times 10^{-31} \\times 6.27 \\times 10^{5}} = 1.16\\ \\text{nm}$ ✓",
+          "Allow ECF from (c); accept 1.12 to 1.20 nm"
         ],
         "numeric": {
-          "answer": 2.2,
-          "unit": "eV",
+          "answer": 1.16049,
+          "unit": "nm",
           "range": [
-            2.08,
-            2.32
+            1.12,
+            1.2
+          ],
+          "mistakes": [
+            {
+              "value": 1110.29,
+              "feedback": "λ = hc/E is only for photons. For an electron, use the de Broglie equation λ = h/p, with p = mv."
+            },
+            {
+              "value": 210,
+              "feedback": "That is the wavelength of the ultraviolet. The question asks for the de Broglie wavelength of the electrons: λ = h/p."
+            }
           ]
         }
       },
       {
         "label": "e",
         "sections": [
-          "stopping"
+          "photoelectric",
+          "einstein"
         ],
-        "question": "The intensity of the light is doubled while its frequency stays the same. Explain the effect, if any, on the stopping voltage.",
+        "question": "The flame grows, so that more ultraviolet of the same wavelength reaches the cathode. Explain the effect on the current in the photocell and on the maximum speed of the electrons.",
         "marks": 2,
         "markscheme": [
-          "No change in the stopping voltage ✓",
-          "The maximum kinetic energy of the electrons depends only on the photon energy ($hf$) and the work function; more intense light means more photons per second, so more electrons per second, not more energetic electrons ✓"
+          "more photons arrive per second and each can release at most one electron, so more electrons are released per second and the current increases ✓",
+          "each photon still has the same energy ($hf$), and the work function is unchanged, so the maximum kinetic energy, and so the maximum speed, of the electrons stays the same ✓"
         ]
       }
     ],
