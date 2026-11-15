@@ -1,3 +1,14 @@
+// WITHDRAWN on the teacher's decision (14 November 2026): its situation (two parallel wires P and Q with currents in the same direction) and most of its parts repeated the hand-written D3-016. Replaced by D3-P02 (jump leads, opposite currents).
+// Kept here, outside tools/p2/questions, so it is never built, previewed or published, and its id is never used again
+// (students' saved answers are keyed by id). Its review record is under "withdrawn" in tools/p2/reviews.json.
+// Its independent check, removed from tools/p2/independent.mjs, was:
+//   'D3-P01': ({ IP, IQ, d }) => {
+//     const r = d.value / 100;
+//     const field = 2e-7 * IP.value / r;
+//     let lo = 0.0001, hi = d.value - 0.0001;
+//     for (let i = 0; i < 200; i++) { const mid = (lo + hi) / 2; if (IP.value / mid - IQ.value / (d.value - mid) > 0) lo = mid; else hi = mid; }
+//     return { B: field, FL: field * IQ.value, x0: (lo + hi) / 2 };
+//   },
 // D3-P01: two long parallel wires — B = μ0I/2πr (new booklet equation for 2028), force and the zero-field point.
 export default {
   id: 'D3-P01',

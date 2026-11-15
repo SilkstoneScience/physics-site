@@ -15,15 +15,18 @@ export default {
     note: 'Written for this bank for the 2028 C.4 guidance (harmonic numbers set by the wavelength–length relationship; a pipe closed at one end has only the 1st, 3rd, 5th… harmonics). The pipe and numbers are our own; the words "fundamental" and "overtone" are avoided as the guide requires.',
   },
   given: {
-    L: { value: 0.85, sf: 2, unit: 'm', range: [0.1, 5], what: 'length of the pipe' },
+    // 0.84 m, not 0.85 m (teacher's rule, 14 November 2026): the wavelength is then 3.36 m, so a student can show
+    // "about 3.4 m" by giving one more figure. With 0.85 m it was 3.40 m exactly.
+    L: { value: 0.84, sf: 2, unit: 'm', range: [0.1, 5], what: 'length of the pipe' },
     v: { value: 340, sf: 2, unit: 'm s^-1', range: [320, 350], what: 'speed of sound in the air in the pipe' },
   },
-  calc: (v) => {
+  calc: (v, K, h) => {
     const lam1 = 4 * v.L;
     const f1 = v.v / lam1;
     return {
-      lam1: { value: lam1, unit: 'm', sf: 2 },
+      lam1: { value: lam1, unit: 'm', sf: 3 },
       f1: { value: f1, unit: 'Hz', sf: 3, range: [20, 2000] },
+      f1r: { value: v.v / Number(h.sf(lam1, 2)), unit: 'Hz', sf: 3, noDimensionCheck: true }, // using the rounded wavelength given in (a) (rounding is not scale-invariant)
       f3: { value: 3 * f1, unit: 'Hz', sf: 3 },
       f5: { value: 5 * f1, unit: 'Hz', sf: 3 },
       fOpen: { value: v.v / (2 * v.L), unit: 'Hz', sf: 3 },
@@ -37,15 +40,18 @@ export default {
       label: 'a', sections: ['pipes'], command: 'Show that', marks: 1, syllabus: ['C.4.Y1', 'C.4.3'],
       question: 'Show that the wavelength of the first harmonic is about [[lam1:2u]].',
       showThat: { result: 'lam1', sf: 2 },
-      markscheme: ['a quarter of a wavelength fits the pipe (node at the closed end, antinode at the open end), so $\\lambda = 4L = 4 \\times [[L:n]] = [[lam1:2u]]$ ✓'],
+      markscheme: ['a quarter of a wavelength fits the pipe (node at the closed end, antinode at the open end), so $\\lambda = 4L = 4 \\times [[L:n]] = [[lam1:3u]]$ ✓'],
       examinerNote: 'The first harmonic has a displacement node at the closed end and an antinode at the open end: L = λ/4.',
     },
     {
       label: 'b', sections: ['pipes'], command: 'Calculate', marks: 1, syllabus: ['C.2.2', 'C.4.3'],
       question: 'Calculate the frequency of the first harmonic.',
       numeric: { result: 'f1', accept: 0.03, mistakes: [{ result: 'wrong_f1', feedback: 'That is the first harmonic of a pipe open at both ends (λ = 2L). For a pipe closed at one end, λ = 4L.' }] },
-      markscheme: ['$f = \\dfrac{v}{\\lambda} = \\dfrac{[[v:n]]}{[[lam1:2]]} = [[f1:3u]]$ ✓'],
-      examinerNote: 'The wave equation with the wavelength from (a).',
+      markscheme: [
+        '$f = \\dfrac{v}{\\lambda} = \\dfrac{[[v:n]]}{[[lam1:3]]} = [[f1:3u]]$ ✓',
+        'Accept [[f1:lo]] to [[f1:hi]] Hz (using the rounded [[lam1:2u]] from (a) gives [[f1r:3]] Hz).',
+      ],
+      examinerNote: 'The wave equation with the wavelength from (a). Either the unrounded wavelength or the value given in (a) may be used: both answers are accepted.',
     },
     {
       label: 'c', sections: ['pipes'], command: 'Determine', marks: 3, syllabus: ['C.4.Y1', 'C.4.3'], dependsOn: ['b'], noNumeric: true,
