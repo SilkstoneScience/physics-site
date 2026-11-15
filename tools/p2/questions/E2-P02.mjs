@@ -37,9 +37,11 @@ export default {
       ld: { value: K.h / (K.me * vmax), unit: 'nm', sf: 3, range: [0.1, 10] },
       wrong_N: { value: v.P / v.phi, unit: 's^-1', sf: 2 }, // divided by the work function instead of the photon energy
       wrong_v: { value: Math.sqrt(2 * Eph / K.me), unit: 'm s^-1', sf: 3 }, // gave the electron all of the photon's energy
+      wrong_ld: { value: K.h * K.c / Emax, unit: 'nm', sf: 3 }, // used the photon formula λ = hc/E for the electron
+      wrong_ld2: { value: v.lam, unit: 'nm', sf: 2 }, // gave the wavelength of the ultraviolet
     };
   },
-  stem: '<p>A flame detector warns of a fire by detecting the ultraviolet radiation that flames emit. Its sensor is a photocell: radiation falls on a metal cathode inside a vacuum tube, and electrons released from the cathode are collected by an anode, so that there is a current in the circuit. The work function of the cathode metal is [[phi]].</p><p>The detector must not be triggered by sunlight coming through a window.</p>',
+  stem: '<p>A flame detector warns of a fire by detecting the ultraviolet radiation that flames emit. Its sensor is a photocell: radiation falls on a metal cathode inside a vacuum tube, and electrons released from the cathode are collected by an anode, so that there is a current in the circuit. The work function of the cathode metal is [[phi]].</p><p>The detector must not be triggered by sunlight shining in through an open doorway.</p>',
   parts: [
     {
       label: 'a', sections: ['einstein'], command: 'Deduce', marks: 2, syllabus: ['E.2.H2', 'E.2.H3'],
@@ -76,7 +78,13 @@ export default {
     {
       label: 'd', sections: ['debroglie'], command: 'Calculate', marks: 2, syllabus: ['E.2.H6'], dependsOn: ['c'],
       question: 'Calculate, in nm, the de Broglie wavelength of the fastest of these electrons.',
-      numeric: { result: 'ld', accept: 0.03 },
+      numeric: {
+        result: 'ld', accept: 0.03,
+        mistakes: [
+          { result: 'wrong_ld', feedback: 'λ = hc/E is only for photons. For an electron, use the de Broglie equation λ = h/p, with p = mv.' },
+          { result: 'wrong_ld2', feedback: 'That is the wavelength of the ultraviolet. The question asks for the de Broglie wavelength of the electrons: λ = h/p.' },
+        ],
+      },
       markscheme: [
         '$\\lambda = \\dfrac{h}{p} = \\dfrac{h}{m_{\\text{e}}v}$ ✓',
         '$\\lambda = \\dfrac{[[K.h]]}{[[K.me]] \\times [[vmax:3]]} = [[ld:3u]]$ ✓',

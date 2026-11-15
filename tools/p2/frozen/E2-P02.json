@@ -1,0 +1,267 @@
+{
+  "question": {
+    "id": "E2-P02",
+    "theme": "E",
+    "topic": "E.2",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "HL",
+    "stem": "<p>A flame detector warns of a fire by detecting the ultraviolet radiation that flames emit. Its sensor is a photocell: radiation falls on a metal cathode inside a vacuum tube, and electrons released from the cathode are collected by an anode, so that there is a current in the circuit. The work function of the cathode metal is 4.80 eV.</p><p>The detector must not be triggered by sunlight shining in through an open doorway.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "question": "The shortest wavelength in sunlight at ground level is about 290 nm. Deduce whether sunlight can trigger the detector.",
+        "marks": 2,
+        "markscheme": [
+          "photon energy at 290 nm is $\\dfrac{hc}{\\lambda} = 4.29\\ \\text{eV}$ OR the longest wavelength that can release electrons is $\\lambda_0 = \\dfrac{hc}{\\Phi} = 259\\ \\text{nm}$ ✓",
+          "this is less than the work function (OR 290 nm is longer than the threshold wavelength), so no electrons are released and sunlight cannot trigger the detector, however bright it is ✓",
+          "Award the second mark only for a comparison based on a calculated value."
+        ]
+      },
+      {
+        "label": "b",
+        "question": "In a test, ultraviolet of wavelength 210 nm from a flame falls on the cathode with a power of $1.5 \\times 10^{-9}$ W. Calculate the number of photons reaching the cathode per second.",
+        "marks": 2,
+        "markscheme": [
+          "photon energy $E = \\dfrac{hc}{\\lambda} = \\dfrac{6.63 \\times 10^{-34} \\times 3.00 \\times 10^{8}}{210 \\times 10^{-9}} = 9.47 \\times 10^{-19}\\ \\text{J}$ ✓",
+          "number per second $= \\dfrac{P}{E} = \\dfrac{1.5 \\times 10^{-9}}{9.47 \\times 10^{-19}} = 1.6 \\times 10^{9}\\ \\text{s}^{-1}$ ✓"
+        ],
+        "numeric": {
+          "answer": 1583710000,
+          "unit": "$\\text{s}^{-1}$",
+          "range": [
+            1530000000,
+            1640000000
+          ],
+          "mistakes": [
+            {
+              "value": 1953130000,
+              "feedback": "You divided by the work function. Each photon carries the energy hc/λ of the ultraviolet: divide the power by that."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "question": "Determine the maximum speed of the electrons released by this ultraviolet.",
+        "marks": 3,
+        "markscheme": [
+          "$E_{\\max} = hf - \\Phi = 9.47 \\times 10^{-19} - 4.80 \\times 1.60 \\times 10^{-19} = 1.79 \\times 10^{-19}\\ \\text{J}$ (OR $1.12$ eV) ✓",
+          "$\\tfrac{1}{2}m_{\\text{e}}v^2 = E_{\\max}$ ✓",
+          "$v = \\sqrt{\\dfrac{2 \\times 1.79 \\times 10^{-19}}{9.110 \\times 10^{-31}}} = 6.27 \\times 10^{5}\\ \\text{m s}^{-1}$ ✓",
+          "Allow ECF from (b) for the photon energy; accept $6.08 \\times 10^{5}$ to $6.46 \\times 10^{5}$ $\\text{m s}^{-1}$"
+        ],
+        "numeric": {
+          "answer": 627127,
+          "unit": "$\\text{m s}^{-1}$",
+          "range": [
+            608000,
+            646000
+          ],
+          "mistakes": [
+            {
+              "value": 1441990,
+              "feedback": "That gives the electron all of the photon's energy. Some of it is needed to escape from the metal: subtract the work function first."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "question": "Calculate, in nm, the de Broglie wavelength of the fastest of these electrons.",
+        "marks": 2,
+        "markscheme": [
+          "$\\lambda = \\dfrac{h}{p} = \\dfrac{h}{m_{\\text{e}}v}$ ✓",
+          "$\\lambda = \\dfrac{6.63 \\times 10^{-34}}{9.110 \\times 10^{-31} \\times 6.27 \\times 10^{5}} = 1.16\\ \\text{nm}$ ✓",
+          "Allow ECF from (c); accept 1.12 to 1.20 nm"
+        ],
+        "numeric": {
+          "answer": 1.16049,
+          "unit": "nm",
+          "range": [
+            1.12,
+            1.2
+          ],
+          "mistakes": [
+            {
+              "value": 1110.29,
+              "feedback": "λ = hc/E is only for photons. For an electron, use the de Broglie equation λ = h/p, with p = mv."
+            },
+            {
+              "value": 210,
+              "feedback": "That is the wavelength of the ultraviolet. The question asks for the de Broglie wavelength of the electrons: λ = h/p."
+            }
+          ]
+        }
+      },
+      {
+        "label": "e",
+        "question": "The flame grows, so that more ultraviolet of the same wavelength reaches the cathode. Explain the effect on the current in the photocell and on the maximum speed of the electrons.",
+        "marks": 2,
+        "markscheme": [
+          "more photons arrive per second and each can release at most one electron, so more electrons are released per second and the current increases ✓",
+          "each photon still has the same energy ($hf$), and the work function is unchanged, so the maximum kinetic energy, and so the maximum speed, of the electrons stays the same ✓"
+        ]
+      }
+    ]
+  },
+  "type": "short",
+  "topics": [
+    "E.2"
+  ],
+  "given": {
+    "phi": {
+      "value": 4.8,
+      "sf": 3,
+      "unit": "eV",
+      "range": [
+        1.5,
+        6
+      ],
+      "what": "work function of the cathode metal"
+    },
+    "sun": {
+      "value": 290,
+      "sf": 2,
+      "unit": "nm",
+      "range": [
+        280,
+        320
+      ],
+      "what": "shortest wavelength in sunlight at ground level"
+    },
+    "lam": {
+      "value": 210,
+      "sf": 2,
+      "unit": "nm",
+      "range": [
+        150,
+        255
+      ],
+      "what": "wavelength of the ultraviolet from the flame in the test"
+    },
+    "P": {
+      "value": 1.5e-9,
+      "sf": 2,
+      "unit": "W",
+      "range": [
+        1e-12,
+        0.000001
+      ],
+      "what": "power of the ultraviolet reaching the cathode in the test"
+    }
+  },
+  "results": {
+    "lam0": {
+      "value": 258.984375,
+      "unit": "nm",
+      "sf": 3
+    },
+    "Esun": {
+      "value": 4.286637931034482,
+      "unit": "eV",
+      "sf": 3
+    },
+    "Eph": {
+      "value": 9.471428571428571e-19,
+      "unit": "J",
+      "sf": 3
+    },
+    "N": {
+      "value": 1583710407.239819,
+      "unit": "s^-1",
+      "sf": 2
+    },
+    "Emax": {
+      "value": 1.7914285714285713e-19,
+      "unit": "J",
+      "sf": 3
+    },
+    "EmaxeV": {
+      "value": 1.1196428571428572,
+      "unit": "eV",
+      "sf": 3
+    },
+    "vmax": {
+      "value": 627127.0845020505,
+      "unit": "m s^-1",
+      "sf": 3
+    },
+    "ld": {
+      "value": 1.1604851671347753,
+      "unit": "nm",
+      "sf": 3
+    },
+    "wrong_N": {
+      "value": 1953125000,
+      "unit": "s^-1",
+      "sf": 2
+    },
+    "wrong_v": {
+      "value": 1441994.332734164,
+      "unit": "m s^-1",
+      "sf": 3
+    },
+    "wrong_ld": {
+      "value": 1110.2870813397128,
+      "unit": "nm",
+      "sf": 3
+    },
+    "wrong_ld2": {
+      "value": 210,
+      "unit": "nm",
+      "sf": 2
+    }
+  },
+  "parts": [
+    {
+      "label": "a",
+      "command": "Deduce",
+      "syllabus": [
+        "E.2.H2",
+        "E.2.H3"
+      ],
+      "examinerNote": "One photon gives its energy to one electron, so what matters is the energy of each photon, not the brightness. Comparing the threshold frequency with the frequency of the sunlight is equally good."
+    },
+    {
+      "label": "b",
+      "command": "Calculate",
+      "syllabus": [
+        "E.2.H1"
+      ],
+      "examinerNote": "Power is energy per second, so dividing it by the energy of one photon gives the number of photons per second."
+    },
+    {
+      "label": "c",
+      "command": "Determine",
+      "syllabus": [
+        "E.2.H3"
+      ],
+      "examinerNote": "Einstein's equation with both energies in joules (or both in eV, then converted). The speed is small compared with c, so the non-relativistic kinetic energy is fine.",
+      "dependsOn": [
+        "b"
+      ]
+    },
+    {
+      "label": "d",
+      "command": "Calculate",
+      "syllabus": [
+        "E.2.H6"
+      ],
+      "examinerNote": "The electrons have a wavelength of about a nanometre, far shorter than the ultraviolet that released them.",
+      "dependsOn": [
+        "c"
+      ]
+    },
+    {
+      "label": "e",
+      "command": "Explain",
+      "syllabus": [
+        "E.2.H1",
+        "E.2.H3"
+      ],
+      "examinerNote": "Intensity changes the number of photons per second, not the energy of each photon. Award each mark only with its reason."
+    }
+  ],
+  "diagrams": {}
+}

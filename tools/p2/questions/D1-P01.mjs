@@ -73,18 +73,19 @@ export default {
       markscheme: [
         '$E_{\\text{k}} = \\tfrac{1}{2}mv^2 = \\dfrac{GMm}{2r}$ (using $v^2 = GM/r$) ✓',
         '$E = E_{\\text{k}} + E_{\\text{p}} = \\dfrac{GMm}{2r} - \\dfrac{GMm}{r} = -\\dfrac{GMm}{2r}$ ✓',
+        'Accept a derivation that starts from $\\dfrac{GMm}{r^2} = \\dfrac{mv^2}{r}$.',
       ],
       examinerNote: 'Both energies in terms of r, then add. The gravitational potential energy is negative (zero at infinity).',
     },
     {
       label: 'd', sections: ['energy'], command: 'Determine', marks: 3, syllabus: ['D.1.H5'], dependsOn: ['b', 'c'],
-      question: 'Determine the minimum energy that the engines must supply to move the satellite to the second orbit.',
-      numeric: { result: 'dE', accept: 0.04, mistakes: [{ result: 'wrong_dE', feedback: 'That is the gain in gravitational potential energy only. The satellite also loses kinetic energy: use the change in total energy.' }] },
+      question: 'Determine the minimum energy that must be transferred to the satellite to move it to the second orbit. Assume that the mass of the satellite does not change.',
+      numeric: { result: 'dE', accept: 0.045, mistakes: [{ result: 'wrong_dE', feedback: 'That is the gain in gravitational potential energy only. The satellite also loses kinetic energy: use the change in total energy.' }] },
       markscheme: [
-        '$E_1 = -\\dfrac{GMm}{2r_1} = [[E1:3u]]$ and $E_2 = -\\dfrac{GMm}{2r_2} = [[E2:3u]]$ ✓',
-        'minimum energy $= E_2 - E_1$ ✓',
+        '$E = -\\dfrac{GMm}{2r}$ applied to each orbit, e.g. $E_1 = [[E1:3u]]$ and $E_2 = [[E2:3u]]$ ✓',
+        'minimum energy $= E_2 - E_1$ OR $\\dfrac{GMm}{2}\\left(\\dfrac{1}{r_1} - \\dfrac{1}{r_2}\\right)$ ✓',
         '$= [[dE:3u]]$ ✓',
-        'OR the change in total energy is half the gain in potential energy from (b), $\\tfrac{1}{2} \\times [[dEp:3]]$ [2], $= [[dE:3u]]$ [1].',
+        'OR since $E = \\tfrac{1}{2}E_{\\text{p}}$ in any circular orbit (from (c)), the change in total energy is half the gain in potential energy from (b) [2]: $\\tfrac{1}{2} \\times [[dEp:3]] = [[dE:3u]]$ [1]. Award no marks for halving (b) without this reason.',
         'Allow ECF from (b) and (c); accept [[dE:lo]] to [[dE:hi]] J. Award [1 max] for the gain in potential energy only, [[wrong_dE:3]] J.',
       ],
       examinerNote: 'The minimum energy is the change in total orbital energy, E(r2) − E(r1), ignoring losses. Since E = Ep/2 in any circular orbit, it is half the gain in potential energy found in (b).',
@@ -93,7 +94,7 @@ export default {
       label: 'e', sections: ['energy'], command: 'Explain', marks: 2, syllabus: ['D.1.H5', 'D.1.H1'],
       question: 'The engines supply energy to the satellite, yet its kinetic energy is smaller in the second orbit. Explain this.',
       markscheme: [
-        'In a higher orbit the orbital speed is lower, so the kinetic energy ($GMm/2r$) decreases ✓',
+        'In a higher orbit the orbital speed is lower ($v = \\sqrt{GM/r}$), so the kinetic energy ($GMm/2r$) decreases ✓',
         'the gravitational potential energy ($-GMm/r$) increases by twice as much as the kinetic energy falls, so the total energy increases and the engines must supply the difference ✓',
       ],
       examinerNote: 'The key idea: ΔEp = −2ΔEk, so ΔE = −ΔEk > 0. Answers that only say "the potential energy increases" earn the second mark only if they say it increases by more than the kinetic energy decreases.',
