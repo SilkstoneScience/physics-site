@@ -1951,6 +1951,135 @@
     }
   },
   {
+    "id": "D1-P01",
+    "theme": "D",
+    "topic": "D.1",
+    "paper": "2",
+    "difficulty": 3,
+    "level": "HL",
+    "sections": [
+      "energy",
+      "potential",
+      "gpe"
+    ],
+    "stem": "<p>A satellite of mass 850 kg is in a circular orbit 600 km above the surface of the Earth. Its engines are used to move it to a circular orbit 2400 km above the surface. The mass of the Earth is $5.97 \\times 10^{24}$ kg and its radius is $6.37 \\times 10^{6}$ m.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "potential"
+        ],
+        "question": "Calculate the gravitational potential due to the Earth at the first orbit.",
+        "marks": 2,
+        "markscheme": [
+          "$r_1 = 6.37 \\times 10^{6} + 600 \\times 10^{3} = 6.97 \\times 10^{6}\\ \\text{m}$ ✓",
+          "$V_{\\text{g}} = -\\dfrac{GM}{r_1} = -\\dfrac{6.67 \\times 10^{-11} \\times 5.97 \\times 10^{24}}{6.97 \\times 10^{6}} = -5.71 \\times 10^{7}\\ \\text{J kg}^{-1}$ ✓",
+          "Do not accept a positive value for the second mark."
+        ],
+        "numeric": {
+          "answer": -57130400,
+          "unit": "$\\text{J kg}^{-1}$",
+          "range": [
+            -58900000,
+            -55400000
+          ],
+          "mistakes": [
+            {
+              "value": 57130400,
+              "feedback": "Gravitational potential is negative: it is zero at infinity and lower closer to the Earth."
+            }
+          ]
+        }
+      },
+      {
+        "label": "b",
+        "sections": [
+          "gpe",
+          "potential"
+        ],
+        "question": "Determine the increase in the gravitational potential energy of the satellite when it moves to the second orbit.",
+        "marks": 2,
+        "markscheme": [
+          "$r_2 = 8.77 \\times 10^{6}\\ \\text{m}$, so $V_2 = -\\dfrac{GM}{r_2} = -4.54 \\times 10^{7}\\ \\text{J kg}^{-1}$ ✓",
+          "$\\Delta E_{\\text{p}} = m\\Delta V_{\\text{g}} = 850 \\times (-4.54 \\times 10^{7} - (-5.71 \\times 10^{7})) = 9.97 \\times 10^{9}\\ \\text{J}$ ✓",
+          "OR $\\Delta E_{\\text{p}} = GMm\\left(\\dfrac{1}{r_1} - \\dfrac{1}{r_2}\\right)$",
+          "Allow ECF from (a); accept $9.56 \\times 10^{9}$ to $1.04 \\times 10^{10}$ J. Do not accept $mg\\Delta h$."
+        ],
+        "numeric": {
+          "answer": 9966880000,
+          "unit": "J",
+          "range": [
+            9560000000,
+            10400000000
+          ],
+          "mistakes": [
+            {
+              "value": 14994000000,
+              "feedback": "mgΔh treats g as constant, but the field gets weaker with height. Use the change in gravitational potential between the two orbits."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "energy"
+        ],
+        "question": "Deduce that the total energy of a satellite of mass $m$ in a circular orbit of radius $r$ is $E = -\\dfrac{GMm}{2r}$.",
+        "marks": 2,
+        "markscheme": [
+          "$E_{\\text{k}} = \\tfrac{1}{2}mv^2 = \\dfrac{GMm}{2r}$ (using $v^2 = GM/r$) ✓",
+          "$E = E_{\\text{k}} + E_{\\text{p}} = \\dfrac{GMm}{2r} - \\dfrac{GMm}{r} = -\\dfrac{GMm}{2r}$ ✓",
+          "Accept a derivation that starts from $\\dfrac{GMm}{r^2} = \\dfrac{mv^2}{r}$."
+        ]
+      },
+      {
+        "label": "d",
+        "sections": [
+          "energy"
+        ],
+        "question": "Determine the minimum energy that must be transferred to the satellite to move it to the second orbit. Assume that the mass of the satellite does not change.",
+        "marks": 3,
+        "markscheme": [
+          "$E = -\\dfrac{GMm}{2r}$ applied to each orbit, e.g. $E_1 = -2.43 \\times 10^{10}\\ \\text{J}$ and $E_2 = -1.93 \\times 10^{10}\\ \\text{J}$ ✓",
+          "minimum energy $= E_2 - E_1$ OR $\\dfrac{GMm}{2}\\left(\\dfrac{1}{r_1} - \\dfrac{1}{r_2}\\right)$ ✓",
+          "$= 4.98 \\times 10^{9}\\ \\text{J}$ ✓",
+          "OR since $E = \\tfrac{1}{2}E_{\\text{p}}$ in any circular orbit (from (c)), the change in total energy is half the gain in potential energy from (b) [2]: $\\tfrac{1}{2} \\times 9.97 \\times 10^{9} = 4.98 \\times 10^{9}\\ \\text{J}$ [1]. Award no marks for halving (b) without this reason.",
+          "Allow ECF from (b) and (c); accept $4.75 \\times 10^{9}$ to $5.21 \\times 10^{9}$ J. Award [1 max] for the gain in potential energy only, $9.97 \\times 10^{9}$ J."
+        ],
+        "numeric": {
+          "answer": 4983440000,
+          "unit": "J",
+          "range": [
+            4750000000,
+            5210000000
+          ],
+          "mistakes": [
+            {
+              "value": 9966880000,
+              "feedback": "That is the gain in gravitational potential energy only. The satellite also loses kinetic energy: use the change in total energy."
+            }
+          ]
+        }
+      },
+      {
+        "label": "e",
+        "sections": [
+          "energy"
+        ],
+        "question": "The engines supply energy to the satellite, yet its kinetic energy is smaller in the second orbit. Explain this.",
+        "marks": 2,
+        "markscheme": [
+          "In a higher orbit the orbital speed is lower ($v = \\sqrt{GM/r}$), so the kinetic energy ($GMm/2r$) decreases ✓",
+          "the gravitational potential energy ($-GMm/r$) increases by twice as much as the kinetic energy falls, so the total energy increases and the engines must supply the difference ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
     "id": "D1-P02",
     "theme": "D",
     "topic": "D.1",
@@ -2500,6 +2629,136 @@
         "marks": 1,
         "markscheme": [
           "sodium is present in the Sun (in its outer layers / atmosphere) ✓"
+        ]
+      }
+    ],
+    "review": {
+      "status": "APPROVED"
+    }
+  },
+  {
+    "id": "E2-P02",
+    "theme": "E",
+    "topic": "E.2",
+    "paper": "2",
+    "difficulty": 2,
+    "level": "HL",
+    "sections": [
+      "einstein",
+      "debroglie",
+      "photoelectric"
+    ],
+    "stem": "<p>A flame detector warns of a fire by detecting the ultraviolet radiation that flames emit. Its sensor is a photocell: radiation falls on a metal cathode inside a vacuum tube, and electrons released from the cathode are collected by an anode, so that there is a current in the circuit. The work function of the cathode metal is 4.80 eV.</p><p>The detector must not be triggered by sunlight shining in through an open doorway.</p>",
+    "parts": [
+      {
+        "label": "a",
+        "sections": [
+          "einstein"
+        ],
+        "question": "The shortest wavelength in sunlight at ground level is about 290 nm. Deduce whether sunlight can trigger the detector.",
+        "marks": 2,
+        "markscheme": [
+          "photon energy at 290 nm is $\\dfrac{hc}{\\lambda} = 4.29\\ \\text{eV}$ OR the longest wavelength that can release electrons is $\\lambda_0 = \\dfrac{hc}{\\Phi} = 259\\ \\text{nm}$ ✓",
+          "this is less than the work function (OR 290 nm is longer than the threshold wavelength), so no electrons are released and sunlight cannot trigger the detector, however bright it is ✓",
+          "Award the second mark only for a comparison based on a calculated value."
+        ]
+      },
+      {
+        "label": "b",
+        "sections": [
+          "einstein"
+        ],
+        "question": "In a test, ultraviolet of wavelength 210 nm from a flame falls on the cathode with a power of $1.5 \\times 10^{-9}$ W. Calculate the number of photons reaching the cathode per second.",
+        "marks": 2,
+        "markscheme": [
+          "photon energy $E = \\dfrac{hc}{\\lambda} = \\dfrac{6.63 \\times 10^{-34} \\times 3.00 \\times 10^{8}}{210 \\times 10^{-9}} = 9.47 \\times 10^{-19}\\ \\text{J}$ ✓",
+          "number per second $= \\dfrac{P}{E} = \\dfrac{1.5 \\times 10^{-9}}{9.47 \\times 10^{-19}} = 1.6 \\times 10^{9}\\ \\text{s}^{-1}$ ✓"
+        ],
+        "numeric": {
+          "answer": 1583710000,
+          "unit": "$\\text{s}^{-1}$",
+          "range": [
+            1530000000,
+            1640000000
+          ],
+          "mistakes": [
+            {
+              "value": 1953130000,
+              "feedback": "You divided by the work function. Each photon carries the energy hc/λ of the ultraviolet: divide the power by that."
+            }
+          ]
+        }
+      },
+      {
+        "label": "c",
+        "sections": [
+          "einstein"
+        ],
+        "question": "Determine the maximum speed of the electrons released by this ultraviolet.",
+        "marks": 3,
+        "markscheme": [
+          "$E_{\\max} = hf - \\Phi = 9.47 \\times 10^{-19} - 4.80 \\times 1.60 \\times 10^{-19} = 1.79 \\times 10^{-19}\\ \\text{J}$ (OR $1.12$ eV) ✓",
+          "$\\tfrac{1}{2}m_{\\text{e}}v^2 = E_{\\max}$ ✓",
+          "$v = \\sqrt{\\dfrac{2 \\times 1.79 \\times 10^{-19}}{9.110 \\times 10^{-31}}} = 6.27 \\times 10^{5}\\ \\text{m s}^{-1}$ ✓",
+          "Allow ECF from (b) for the photon energy; accept $6.08 \\times 10^{5}$ to $6.46 \\times 10^{5}$ $\\text{m s}^{-1}$"
+        ],
+        "numeric": {
+          "answer": 627127,
+          "unit": "$\\text{m s}^{-1}$",
+          "range": [
+            608000,
+            646000
+          ],
+          "mistakes": [
+            {
+              "value": 1441990,
+              "feedback": "That gives the electron all of the photon's energy. Some of it is needed to escape from the metal: subtract the work function first."
+            }
+          ]
+        }
+      },
+      {
+        "label": "d",
+        "sections": [
+          "debroglie"
+        ],
+        "question": "Calculate, in nm, the de Broglie wavelength of the fastest of these electrons.",
+        "marks": 2,
+        "markscheme": [
+          "$\\lambda = \\dfrac{h}{p} = \\dfrac{h}{m_{\\text{e}}v}$ ✓",
+          "$\\lambda = \\dfrac{6.63 \\times 10^{-34}}{9.110 \\times 10^{-31} \\times 6.27 \\times 10^{5}} = 1.16\\ \\text{nm}$ ✓",
+          "Allow ECF from (c); accept 1.12 to 1.20 nm"
+        ],
+        "numeric": {
+          "answer": 1.16049,
+          "unit": "nm",
+          "range": [
+            1.12,
+            1.2
+          ],
+          "mistakes": [
+            {
+              "value": 1110.29,
+              "feedback": "λ = hc/E is only for photons. For an electron, use the de Broglie equation λ = h/p, with p = mv."
+            },
+            {
+              "value": 210,
+              "feedback": "That is the wavelength of the ultraviolet. The question asks for the de Broglie wavelength of the electrons: λ = h/p."
+            }
+          ]
+        }
+      },
+      {
+        "label": "e",
+        "sections": [
+          "photoelectric",
+          "einstein"
+        ],
+        "question": "The flame grows, so that more ultraviolet of the same wavelength reaches the cathode. Explain the effect on the current in the photocell and on the maximum speed of the electrons.",
+        "marks": 2,
+        "markscheme": [
+          "more photons arrive per second and each can release at most one electron, so more electrons are released per second and the current increases ✓",
+          "each photon still has the same energy ($hf$), and the work function is unchanged, so the maximum kinetic energy, and so the maximum speed, of the electrons stays the same ✓"
         ]
       }
     ],

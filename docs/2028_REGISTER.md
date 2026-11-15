@@ -124,9 +124,9 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 - `questions/p2.json` (5)
   - line 844: question B3-P01: "New for 2028" tag
   - line 1760: question C4-P01: "New for 2028" tag
-  - line 1964: question D1-P02: "New for 2028" tag
-  - line 2187: question D3-P02: "New for 2028" tag
-  - line 2607: question E5-P01: "New for 2028" tag
+  - line 2093: question D1-P02: "New for 2028" tag
+  - line 2316: question D3-P02: "New for 2028" tag
+  - line 2866: question E5-P01: "New for 2028" tag
 
 ### Equations panel, menu and shared code
 
