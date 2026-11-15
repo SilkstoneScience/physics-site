@@ -166,6 +166,15 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Done: the physics engine (`js/circuits/components.js`, `netlist.js`, `engine.js`, `steps.js`) and the Free Build editor (`model.js`, `render.js`, `editor.js`, `app.js`, `css/circuits.css`) at `experimental/circuit-builder.html` (`noindex`, not linked yet). Tests: `tools/circuits/test.mjs` (about 2370 checks, run by `tools/check.mjs`) and `tools/circuits/ui-test.html` (46 checks through the real interface, run in the preview).
 - Next: the teacher's check of the editor in the preview, then stage 4 (show the working, saving, share links, board mode).
 
+## IA builder (15 November 2026, all 6 stages)
+- `experimental/ia-builder.html`: students build their IA report section by section and download it as a Word document. Everything stays in the browser (IndexedDB, with an instant localStorage copy so nothing is lost when the page closes); no server, accounts or AI. Plan, prompts, checklists and the teacher's decisions: `docs/IA_BUILDER_PLAN.md`.
+- 12 sections (`js/ia/sections.js`), each with "What's expected", guiding questions and a hideable checklist (not exported); the teacher checked the wording. Research question placement chosen by the student; hypothesis or expected value; two tidy variables tables with "Why these choices?" paragraphs; method diagram and numbered steps; raw data, processing and graphs as stories (introduce, show, explain; explanation boxes can be hidden); four-column evaluation table; references with a Cite button ([1], numbered by first citation). Live word count following the guide's exclusions (captions left out; the evaluation table counted).
+- Equations: MathLive 0.111.4 (MIT, approved by the teacher, loaded only on this page when the editor opens), shown with MathJax, checked against `js/omml.js` so each becomes an editable Word equation.
+- Word export (`js/ia/export.js`) through `js/labs/report.js` (new optional report layout; the lab reports are byte-for-byte unchanged) and `js/omml.js` (new Word option; PowerPoint output unchanged). Opened and checked in Word. Optional 6 cm right margin for draft feedback.
+- Save progress (one .json file with the pictures), Open saved file (cleaned field by field; replace or keep both), several IAs per student, a reminder after a week without a saved copy.
+- Linked from the IA page (box under the lead and an IA documents card), the Experimental page and the Experimental menu.
+- Possible next steps: import from the graphing tool's save file once it exists (agreed for later); teacher feedback after students use it.
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".
