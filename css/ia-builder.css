@@ -223,6 +223,40 @@ body.iab-page main { max-width: 1240px; }
 .iab-refs > li > .iab-linkbtn { padding-top: 44px; font-size: 0.9rem; }
 .iab-refwarn { margin: 4px 0 0; font-size: 0.88rem; color: var(--bad); }
 
+/* ===== Stage 3: equations ===== */
+body.iab-page { --keyboard-zindex: 1100; }   /* MathLive's on-screen keyboard shows above the equation editor */
+.iab-tool.eq { color: var(--accent); font-weight: 600; }
+.iab-tool.eq + .iab-tool.cite { margin-left: 4px; }
+.iab-toolbar .iab-tool.eq { margin-left: auto; }
+.iab-eq { padding: 0 2px; border-radius: 4px; cursor: pointer; }
+.iab-eq:hover, .iab-eq:focus { background: var(--accent-soft); outline: 1px dashed var(--accent); }
+.iab-eq[data-display="1"] { display: block; margin: 6px 0; padding: 4px; text-align: center; overflow-x: auto; }
+.iab-eq mjx-container[display="true"] { margin: 0 !important; }
+
+.iab-eqpanel { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: flex-start; justify-content: center; padding: 6vh 12px 12px; background: rgba(10, 14, 20, 0.55); overflow-y: auto; }
+.iab-eqbox { width: min(760px, 100%); padding: 16px 18px; border-radius: var(--radius); background: var(--surface); color: var(--text); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); }
+.iab-eqbox h3 { margin: 0 0 10px; }
+.iab-eqfield math-field { display: block; width: 100%; min-height: 3.2rem; padding: 8px 10px; font-size: 1.6rem; border: 2px solid var(--accent); border-radius: 8px; background: var(--bg); color: var(--text);
+  --caret-color: var(--accent); --selection-background-color: var(--accent-soft); --contains-highlight-background-color: transparent; }
+.iab-eqfield math-field:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.iab-eqtools { display: grid; gap: 6px; margin: 12px 0 4px; }
+.iab-eqgroup { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.iab-eqgroup-h { width: 5.2rem; font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+.iab-eqbtn { min-width: 38px; min-height: 36px; padding: 2px 8px; font: inherit; font-size: 1rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); cursor: pointer; }
+.iab-eqbtn:hover, .iab-eqbtn:focus { border-color: var(--accent); color: var(--accent); }
+.iab-eqdisplay { display: flex; flex-wrap: wrap; gap: 4px 18px; border: 0; padding: 0; margin: 10px 0 0; }
+.iab-eqdisplay legend { font-weight: 600; padding: 0; margin-bottom: 4px; }
+.iab-eqdisplay label { display: inline-flex; align-items: center; gap: 6px; }
+.iab-eqdisplay input { width: auto; margin: 0; }
+.iab-eqmsg { color: var(--bad); font-weight: 600; margin: 8px 0 0; min-height: 0; }
+.iab-eqmsg:empty { display: none; }
+.iab-eqactions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+@media (max-width: 520px) {
+  .iab-eqpanel { padding-top: 12px; }
+  .iab-eqgroup-h { width: 100%; }
+  .iab-eqfield math-field { font-size: 1.3rem; }
+}
+
 @media (max-width: 900px) {
   .iab-c4 { grid-template-columns: minmax(0, 1fr); }
   .iab-rowhead { display: none; }

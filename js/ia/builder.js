@@ -170,7 +170,7 @@
         if (n.nodeType !== 1 || DROP.has(n.nodeName)) continue;
         if (n.nodeName === 'BR') { s += '<br>'; continue; }
         if (n.nodeName === 'UL' || n.nodeName === 'OL') continue;   // a list inside a list item: collect() below handles it
-        if (n.nodeName === 'SPAN' && n.hasAttribute('data-eq')) { s += `<span data-eq="${esc(n.getAttribute('data-eq'))}"></span>`; continue; }
+        if (n.nodeName === 'SPAN' && n.hasAttribute('data-eq')) { s += `<span data-eq="${esc(n.getAttribute('data-eq'))}"${n.getAttribute('data-display') === '1' ? ' data-display="1"' : ''}></span>`; continue; }
         if (n.nodeName === 'SPAN' && n.hasAttribute('data-cite')) { s += `<span data-cite="${esc(n.getAttribute('data-cite'))}"></span>`; continue; }
         let inner = inline(n);
         if (!inner) continue;
@@ -358,8 +358,180 @@
     { cmd: 'h3', label: 'Heading', title: 'Sub-heading', full: true, block: true },
     { cmd: 'h4', label: 'Small heading', title: 'Smaller sub-heading', full: true, block: true },
   ];
+  // Put an equation or citation exactly where the cursor was (range), or at the end of the box, with the cursor after it.
+  function insertAt(box, range, html) {
+    const tpl = document.createElement('template');
+    tpl.innerHTML = html;
+    const nodes = [...tpl.content.childNodes];
+    let r = range && box.contains(range.startContainer) ? range : null;
+    if (!r) {
+      r = document.createRange();
+      const last = box.lastElementChild;
+      if (last && /^(P|H3|H4)$/.test(last.nodeName)) r.selectNodeContents(last); else if (last && /^(UL|OL)$/.test(last.nodeName) && last.lastElementChild) r.selectNodeContents(last.lastElementChild);
+      else { if (!box.firstChild) box.append(document.createElement('p')); r.selectNodeContents(box.lastElementChild || box); }
+      r.collapse(false);
+    }
+    if (r.startContainer === box) {                 // the cursor is between paragraphs: make a paragraph for it
+      const p = document.createElement('p');
+      r.insertNode(p); r.selectNodeContents(p);
+    }
+    r.deleteContents();
+    nodes.slice().reverse().forEach(n => r.insertNode(n));
+    const after = document.createRange();
+    after.setStartAfter(nodes[nodes.length - 1]); after.collapse(true);
+    box.focus();
+    const s = document.getSelection(); s.removeAllRanges(); s.addRange(after);
+  }
   function prepSpecial(box) {
     box.querySelectorAll('[data-cite]').forEach(s => { s.contentEditable = 'false'; s.className = 'iab-cite'; });
+    box.querySelectorAll('[data-eq]').forEach(s => {
+      if (s.dataset.drawn === s.dataset.eq + '|' + (s.dataset.display || '')) return;
+      s.contentEditable = 'false'; s.className = 'iab-eq'; s.tabIndex = 0; s.setAttribute('role', 'button');
+      s.setAttribute('aria-label', 'Equation: ' + s.dataset.eq + '. Press Enter to edit it.');
+      drawEquation(s);
+    });
+  }
+
+  // ---------- equations ----------
+  // Shown on the page with the site's MathJax; written and edited with MathLive (loaded only when the editor first opens).
+  // Each equation is stored as LaTeX in <span data-eq="…"> (data-display="1": on its own line) and must convert to a Word equation.
+  async function drawEquation(s) {
+    const latex = s.dataset.eq, display = s.dataset.display === '1';
+    s.dataset.drawn = latex + '|' + (s.dataset.display || '');
+    s.textContent = latex;                          // until MathJax has drawn it
+    try {
+      await MathJax.startup.promise;
+      const node = await MathJax.tex2chtmlPromise(latex, { display });
+      if (s.dataset.eq !== latex) return;           // changed while drawing
+      s.textContent = '';
+      s.append(node);
+      MathJax.startup.document.clear();
+      MathJax.startup.document.updateDocument();   // adds MathJax's styles for the new equation
+    } catch (e) { /* the LaTeX stays visible */ }
+  }
+  const MATHLIVE = 'https://cdn.jsdelivr.net/npm/mathlive@0.111.4/';   // version agreed with the teacher (plan, section 7)
+  let mathlive = null;
+  function loadMathLive() {
+    if (mathlive) return mathlive;
+    mathlive = new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = MATHLIVE + 'mathlive.min.js';
+      s.onload = () => {
+        const M = (window.MathLive && window.MathLive.MathfieldElement) || window.MathfieldElement;
+        if (!M) { mathlive = null; reject(new Error('MathLive')); return; }
+        M.fontsDirectory = MATHLIVE + 'fonts/';
+        M.soundsDirectory = null; M.keypressSound = null; M.plonkSound = null;
+        resolve(M);
+      };
+      s.onerror = () => { mathlive = null; s.remove(); reject(new Error('load')); };
+      document.head.append(s);
+    });
+    return mathlive;
+  }
+  // MathLive sometimes writes its own commands; turn them into ordinary LaTeX that MathJax and Word both understand.
+  function tidyLatex(t) {
+    return String(t || '')
+      .replace(/\\mleft/g, '\\left').replace(/\\mright/g, '\\right')
+      .replace(/\\exponentialE/g, 'e').replace(/\\differentialD/g, 'd').replace(/\\imaginaryI/g, 'i')
+      .replace(/\\lbrack\b/g, '[').replace(/\\rbrack\b/g, ']').replace(/\\lbrace\b/g, '\\{').replace(/\\rbrace\b/g, '\\}')
+      .replace(/\\[lr]?vert\b/g, '|').replace(/\\lparen\b/g, '(').replace(/\\rparen\b/g, ')')
+      .replace(/\\(enspace|enskip)\b/g, '\\;').replace(/\\degree\b/g, '^{\\circ}').replace(/\\differentialD/g, 'd')
+      .replace(/\\displaystyle\s*/g, '')
+      .trim();
+  }
+  // Problems that would stop the equation going into Word (or showing on the page)
+  function equationProblem(latex) {
+    if (!latex) return 'The equation is empty.';
+    if (/\\placeholder|\{\s*\}/.test(latex)) return 'Fill in (or delete) the empty boxes first.';
+    const bad = window.Omml ? window.Omml.unsupported(latex) : [];
+    if (bad.length) return `Word can't take ${bad.length === 1 ? 'this part' : 'these parts'} yet: ${bad.join(' ')}. Please write it another way, or ask your teacher.`;
+    try { if (/merror/.test(MathJax.tex2mml(latex))) return 'Part of this equation can\'t be read. Please check it.'; } catch (e) { /* MathJax not ready: skip this check */ }
+    return '';
+  }
+  // The click-to-build buttons. '#0' = what's selected (or an empty box if nothing is), '#?' = an empty box to fill in.
+  // A power or subscript attaches to whatever is just before the cursor.
+  const EQ_TOOLS = [
+    ['Build', [['a⁄b', '\\frac{#0}{#?}', 'Fraction'], ['xⁿ', '^{#?}', 'Power'], ['xₙ', '_{#?}', 'Subscript'], ['√x', '\\sqrt{#0}', 'Square root'], ['ⁿ√x', '\\sqrt[#?]{#0}', 'Root'],
+      ['( )', '\\left(#0\\right)', 'Brackets'], ['x̄', '\\overline{#0}', 'Bar (mean)'], ['eˣ', 'e^{#?}', 'e to a power'], ['unit', '\\mathrm{#?}', 'Unit: upright letters, e.g. m s'], ['words', '\\text{#?}', 'Words']]],
+    ['Symbols', [['×', '\\times'], ['÷', '\\div'], ['·', '\\cdot'], ['±', '\\pm'], ['≈', '\\approx'], ['∝', '\\propto'], ['≠', '\\neq'], ['≤', '\\le'], ['≥', '\\ge'],
+      ['→', '\\rightarrow'], ['°', '^{\\circ}', 'Degrees'], ['∞', '\\infty'], ['%', '\\%']]],
+    ['Greek', [['Δ', '\\Delta'], ['α', '\\alpha'], ['β', '\\beta'], ['γ', '\\gamma'], ['δ', '\\delta'], ['ε', '\\varepsilon'], ['η', '\\eta'], ['θ', '\\theta'], ['λ', '\\lambda'],
+      ['μ', '\\mu'], ['π', '\\pi'], ['ρ', '\\rho'], ['σ', '\\sigma'], ['τ', '\\tau'], ['φ', '\\varphi'], ['ω', '\\omega'], ['Ω', '\\Omega']]],
+    ['Functions', [['sin', '\\sin'], ['cos', '\\cos'], ['tan', '\\tan'], ['sin⁻¹', '\\sin^{-1}'], ['ln', '\\ln'], ['log', '\\log']]],
+  ];
+  const EQ_SHORTCUTS = Object.assign(
+    Object.fromEntries('alpha beta gamma delta Delta eta theta lambda mu pi rho sigma tau omega Omega Phi Theta Lambda Sigma'.split(' ').map(g => [g, '\\' + g])),
+    { epsilon: '\\varepsilon', phi: '\\varphi', sin: '\\sin', cos: '\\cos', tan: '\\tan', ln: '\\ln', log: '\\log', sqrt: '\\sqrt{#0}',
+      '+-': '\\pm', '<=': '\\le', '>=': '\\ge', '!=': '\\neq', '->': '\\rightarrow', infty: '\\infty' });
+  // Opens the editor. Resolves with { latex, display }, { remove: true }, or null (cancelled).
+  function equationEditor({ latex = '', display = true, editing = false } = {}) {
+    return new Promise(resolve => {
+      const back = document.activeElement;
+      const msg = h('p', { class: 'iab-eqmsg', role: 'alert' });
+      const holder = h('div', { class: 'iab-eqfield' }, h('p', { class: 'iab-note' }, 'Loading the equation editor…'));
+      const disp = h('fieldset', { class: 'iab-eqdisplay' }, h('legend', {}, 'Where does it go?'),
+        h('label', {}, h('input', { type: 'radio', name: 'eqdisp', value: '1', checked: display }), ' On its own line'),
+        h('label', {}, h('input', { type: 'radio', name: 'eqdisp', value: '0', checked: !display }), ' Inside the sentence'));
+      let mf = null;
+      // MathLive's on-screen keyboard sits at the bottom of the window (above this editor: --keyboard-zindex in the CSS);
+      // leave room for it so the buttons stay reachable.
+      const kbRoom = () => { const k = window.mathVirtualKeyboard; panel.style.paddingBottom = k && k.visible ? (k.boundingRect.height + 16) + 'px' : ''; };
+      const close = result => {
+        try { if (window.mathVirtualKeyboard) { window.mathVirtualKeyboard.hide(); window.mathVirtualKeyboard.removeEventListener('geometrychange', kbRoom); } } catch (e) { /* ignore */ }
+        removeEventListener('keydown', onKey, true);
+        panel.remove();
+        if (back && back.focus) back.focus();
+        resolve(result);
+      };
+      const onKey = e => { if (e.key === 'Escape' && !(window.mathVirtualKeyboard && window.mathVirtualKeyboard.visible)) { e.preventDefault(); close(null); } };
+      const done = () => {
+        if (!mf) return;
+        const t = tidyLatex(mf.getValue('latex-expanded'));
+        const p = equationProblem(t);
+        if (p) { msg.textContent = p; return; }
+        close({ latex: t, display: disp.querySelector('input:checked').value === '1' });
+      };
+      const palette = h('div', { class: 'iab-eqtools' }, EQ_TOOLS.map(([group, tools]) => h('div', { class: 'iab-eqgroup', role: 'group', 'aria-label': group },
+        h('span', { class: 'iab-eqgroup-h' }, group),
+        tools.map(([label, tex, title]) => h('button', { type: 'button', class: 'iab-eqbtn', title: title || label, 'aria-label': title || label, onmousedown: e => e.preventDefault(),
+          onclick: () => { if (!mf) return; mf.insert(tex, { format: 'latex', selectionMode: /#[?0]/.test(tex) ? 'placeholder' : 'after' }); mf.focus(); msg.textContent = ''; } }, label)))));
+      const kbBtn = button('On-screen keyboard', () => {
+        try {
+          const k = window.mathVirtualKeyboard;
+          k.removeEventListener('geometrychange', kbRoom); k.addEventListener('geometrychange', kbRoom);
+          if (k.visible) k.hide(); else { if (mf) mf.focus(); k.show(); }
+          setTimeout(kbRoom, 300);
+        } catch (e) { /* ignore */ }
+      }, 'iab-linkbtn');
+      const panel = h('div', { class: 'iab-eqpanel', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'iab-eqtitle' },
+        h('div', { class: 'iab-eqbox' },
+          h('h3', { id: 'iab-eqtitle' }, editing ? 'Edit the equation' : 'Insert an equation'),
+          holder, palette,
+          h('p', { class: 'iab-note' }, 'Click the buttons to build it, or type: / makes a fraction, ^ a power, _ a subscript; type a Greek letter\'s name (e.g. lambda). Use "unit" for units, so they are upright: m s', h('sup', {}, '−1'), '. ', kbBtn),
+          disp, msg,
+          h('div', { class: 'iab-eqactions' },
+            button(editing ? 'Save' : 'Insert', done, 'button'),
+            button('Cancel', () => close(null)),
+            editing ? button('Delete the equation', () => close({ remove: true }), 'button secondary danger') : null)));
+      document.body.append(panel);
+      addEventListener('keydown', onKey, true);
+      loadMathLive().then(() => {
+        mf = document.createElement('math-field');
+        mf.setAttribute('aria-label', 'Equation');
+        mf.addEventListener('input', () => { msg.textContent = ''; });
+        mf.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); done(); } });
+        holder.innerHTML = '';
+        holder.append(mf);                          // options can only be set once it's on the page
+        try {
+          mf.smartFence = true; mf.smartSuperscript = true;
+          // Only these typed shortcuts: MathLive's own list turns ordinary letter pairs into functions (e.g. "lg", "dt").
+          mf.inlineShortcuts = EQ_SHORTCUTS;
+          mf.menuItems = [];
+        } catch (e) { /* keep MathLive's defaults */ }
+        mf.value = latex;
+        setTimeout(() => mf.focus(), 30);
+      }, () => { holder.innerHTML = '<p class="iab-eqmsg">The equation editor couldn\'t load. It needs an internet connection: please check yours and try again.</p>'; });
+    });
   }
   function runCmd(t) {
     try { document.execCommand('styleWithCSS', false, false); } catch (e) { /* older browsers */ }
@@ -381,6 +553,26 @@
     }, t.label));
     const bar = h('div', { class: 'iab-toolbar', role: 'toolbar', 'aria-label': 'Formatting for ' + opts.label }, tools);
     const wrap = h('div', { class: 'iab-richwrap' }, bar, box);
+    if (opts.equations !== false) bar.append(h('button', { type: 'button', class: 'iab-tool eq', title: 'Insert an equation', onmousedown: e => e.preventDefault(), onclick: insertEquation }, 'Equation'));
+    async function insertEquation() {
+      const sel = document.getSelection();
+      const range = sel.rangeCount && box.contains(sel.anchorNode) ? sel.getRangeAt(0).cloneRange() : null;
+      const r = await equationEditor({ display: !opts.simple });
+      box.focus();
+      if (!r || r.remove) return;
+      insertAt(box, range, `<span data-eq="${esc(r.latex)}"${r.display ? ' data-display="1"' : ''}></span>${r.display ? '' : ' '}`);
+      prepSpecial(box); empty(); flush();
+    }
+    // Click (or Enter on) an equation to edit or delete it
+    async function editEquation(s) {
+      const r = await equationEditor({ latex: s.dataset.eq, display: s.dataset.display === '1', editing: true });
+      if (!r) { s.focus(); return; }
+      if (r.remove) s.remove();
+      else { s.dataset.eq = r.latex; if (r.display) s.dataset.display = '1'; else delete s.dataset.display; prepSpecial(box); }
+      empty(); flush();
+    }
+    box.addEventListener('click', e => { const s = e.target.closest && e.target.closest('[data-eq]'); if (s && box.contains(s)) { e.preventDefault(); editEquation(s); } });
+    box.addEventListener('keydown', e => { const s = e.target.closest && e.target.closest('[data-eq]'); if (s && box.contains(s) && e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); editEquation(s); } }, true);
     if (opts.cite !== false) bar.append(h('button', { type: 'button', class: 'iab-tool cite', title: 'Cite a reference', onmousedown: e => e.preventDefault(), onclick: () => citePicker(box, wrap, () => { empty(); flush(); }) }, 'Cite'));
     function state() {
       if (!box.contains(document.getSelection().anchorNode)) return;
@@ -422,11 +614,7 @@
     const nums = numbering(ia);
     function insert(refId) {
       pop.remove();
-      box.focus();
-      const s = document.getSelection();
-      s.removeAllRanges();
-      if (range) s.addRange(range); else { const r = document.createRange(); r.selectNodeContents(box); r.collapse(false); s.addRange(r); }
-      document.execCommand('insertHTML', false, `<span data-cite="${esc(refId)}"></span>&nbsp;`);
+      insertAt(box, range, `<span data-cite="${esc(refId)}"></span> `);
       prepSpecial(box); changed(); save(); refreshNow();
     }
     const input = h('input', { type: 'text', 'aria-label': 'A new reference', placeholder: 'Type the full reference…' });
@@ -628,7 +816,7 @@
         wrap.append(h('div', { class: 'iab-block iab-block-' + b.type }, tools, ed));
       });
       wrap.append(h('div', { class: 'iab-add' }, kinds.map(k => button(ADD[k][0], () => { list.push(ADD[k][1]()); save(); draw(); const last = wrap.querySelectorAll('.iab-block'); const f = last[last.length - 1] && last[last.length - 1].querySelector('.iab-rich, .iab-field-box, button'); if (f && k === 'text') f.focus(); })),
-        kinds.includes('text') ? h('span', { class: 'iab-note' }, ' Equations come in the next stage.') : null));
+        kinds.includes('text') ? h('span', { class: 'iab-note' }, ' For an equation, use the Equation button in a text box.') : null));
       refresh();
     }
     draw();
@@ -788,7 +976,7 @@
             richText(st.intro, { label: `Step ${i + 1}: introduction`, small: true, placeholder: 'What will this show, how was it obtained, and why is it the next step?', onInput: v => { st.intro = v; save(); } }),
             h('p', { class: 'iab-steplabel' }, 'Show it'),
             kind === 'table' ? tableEditor(st.item) : kind === 'image' ? pictureEditor(st.item, { choose: 'Choose a graph or picture (PNG or JPG)', hint: 'Export your graph from your graphing program as a picture first.' })
-              : h('div', { class: 'iab-calc' }, h('p', { class: 'iab-note' }, 'Write one example calculation with your own data: the equation, the values substituted and the result, with its uncertainty. The equation editor arrives in the next stage.'), blocksEditor(`Step ${i + 1} calculation`, st.item.blocks, { kinds: ['text'] })));
+              : h('div', { class: 'iab-calc' }, h('p', { class: 'iab-note' }, 'Write one example calculation with your own data: the equation, the values substituted and the result, with its uncertainty. Use the Equation button for each line.'), blocksEditor(`Step ${i + 1} calculation`, st.item.blocks, { kinds: ['text'] })));
           if (st.explainHidden) {
             card.append(h('p', { class: 'iab-explain-hidden' }, 'The explanation box is hidden, so it won\'t be in your report. ', linkButton('Show it', () => { st.explainHidden = false; save(); draw(); })));
           } else {
