@@ -32,6 +32,10 @@
     const show = { arrows: false, wireCurrent: false, potential: false, working: false };
     let highlight = new Set();
     const view = { x: -14, y: -9, z: 1.15 }; // top-left corner (grid squares) and CSS px per SVG unit
+    // Until the student (or a test) moves, zooms or sets the view, the circuit is kept fitted to the workspace,
+    // whenever the workspace changes size (the page laid out late, a tablet turned round, a window resized).
+    let viewTouched = false;
+    const viewChanged = () => { viewTouched = true; };
     // Challenge constraints: locked parts can't be moved, turned, changed or deleted; fixed parts can't be changed;
     // hidden parts show "?" instead of their values. toolbox: { type: { count, params, fixed } } or null (everything).
     const locked = new Set(opts.locked || []);
@@ -396,6 +400,7 @@
       const d = store.drawing;
       switch (g.kind) {
         case 'pan':
+          viewChanged();
           view.x = g.view.x - (ev.clientX - g.down.cx) / view.z / G;
           view.y = g.view.y - (ev.clientY - g.down.cy) / view.z / G;
           break;
@@ -558,6 +563,7 @@
 
     // Two fingers: zoom and pan.
     function startPinch() {
+      viewChanged();
       gesture = null; preview = null; box = null;
       const [a, b] = [...pointers.values()];
       pinch = { dist: Math.hypot(a[0] - b[0], a[1] - b[1]), mid: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], view: { ...view } };
@@ -578,6 +584,7 @@
       render();
     }
     function zoomAt(f, cx, cy) {
+      viewChanged();
       const r = rect();
       const [gx, gy] = clientToGrid(cx, cy);
       view.z = Math.min(3, Math.max(0.35, view.z * f));
@@ -969,13 +976,15 @@
       lastTap = null; // any change in between means the next tap isn't a double-tap (tap() sets it again afterwards)
       solve(); highlight = new Set(); updateAll(); status(); describe(); working(); if (opts.onChange) opts.onChange(store.drawing, result);
     });
-    const resizer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => render()) : null;
+    const resizer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => { if (viewTouched) render(); else fit(); }) : null;
     if (resizer) resizer.observe(svg);
     solve();
     updateAll();
     status();
     describe();
-    requestAnimationFrame(() => fit());
+    // Fit the circuit in view straight away (measuring the workspace makes the browser lay it out now). Waiting for
+    // the next frame instead let the fit arrive late and undo a view already set (found by the Playwright run).
+    fit();
 
     return {
       store,
@@ -992,7 +1001,7 @@
       setBoard,
       get board() { return board; },
       select(ids) { selectOnly({ components: ids }); updateAll(); },
-      setView(x, y, z) { view.x = x; view.y = y; view.z = z; render(); },
+      setView(x, y, z) { viewChanged(); view.x = x; view.y = y; view.z = z; render(); },
       parseValue,
       // Remove everything this editor added to the page (used when switching between Free Build and a challenge).
       destroy() {

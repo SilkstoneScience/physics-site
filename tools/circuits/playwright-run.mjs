@@ -11,12 +11,14 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const base = process.env.BASE || 'http://127.0.0.1:8044';
 const names = (process.env.BROWSERS || 'chromium,webkit').split(',');
-const clean = (s) => String(s).replace(/\r?\n/g, ' ').replace(/%/g, '%25').slice(0, 400);
+// GitHub's annotation syntax: % and line breaks escaped in both parts; a title also needs : and , escaped.
+const clean = (s) => String(s).replace(/%/g, '%25').replace(/\r?\n/g, ' ').slice(0, 400);
+const cleanTitle = (s) => clean(s).replace(/:/g, '%3A').replace(/,/g, '%2C');
 let failed = 0;
 const problem = (title, message) => {
   failed++;
   console.log(`✗ ${title}: ${message}`);
-  console.log(`::error title=${clean(title)}::${clean(message)}`);
+  console.log(`::error title=${cleanTitle(title)}::${clean(message)}`);
 };
 
 let playwright;
