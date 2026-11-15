@@ -86,9 +86,6 @@ export default {
   trialsTable: { column: 'R', row: ROW, caption: 'The five ranges for h = 0.700 m.' },
   present: ['diagram', 'table', 'trials', 'graph'],
   graph: { x: 'h', y: 'R2', fit: 'linear', band: true, xErrorBars: true, zero: { x: true, y: true } },
-  // No on-screen line drawing yet (teacher's rule of 12 November 2026 asks for it on straight-line graphs): this
-  // graph has x error bars, which the click-to-plot graph cannot show. Remove this line once it can.
-  noPlot: 'the graph has x error bars, which the on-screen graph cannot show yet',
 
   // ----- 3. Results -----
   results: {
@@ -175,6 +172,8 @@ export default {
       },
       {
         label: 'e', sections: ['projectiles'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        // Click-to-plot (question bank): the student draws the line of best fit through the error bars (both x and y).
+        plot: { lines: ['best'] },
         question: 'Determine the gradient of the graph of $R^2$ against $h$.',
         numeric: d.num('gradient'),
         markscheme: [
@@ -198,6 +197,8 @@ export default {
       },
       {
         label: 'g', sections: ['projectiles'], marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        // Click-to-plot: the steepest and shallowest lines through the error bars; the marks are for the range and the conclusion.
+        plot: { lines: ['steep', 'shallow'] },
         asks: { conclusion: ['do not support', 'not supported', 'is above this range'] },
         question: `The manufacturer states that the launch speed is $${d.stated('claimedU')}\\ \\text{m s}^{-1}$. Discuss whether the data support this statement.`,
         markscheme: [

@@ -344,6 +344,14 @@ export async function runTests() {
   // ----- Risk classes and batch acceptance (batch.mjs) -----
   {
     const reg0 = JSON.parse(JSON.stringify((await import('./registry.mjs')).loadRegistry()));
+    // The pilots were approved individually. One that is being reviewed again (for example after a click-to-plot graph
+    // was added) still counts here, so this test doesn't depend on where a re-review has got to.
+    for (const x of datasets) {
+      if (x.def.batch === 'pilot' && !individuallyApproved(reg0.datasets[x.def.id])) {
+        const fingerprint = fingerprintOf(canonicalContent(x.def, buildQuestion(x.def)));
+        reg0.datasets[x.def.id] = { status: 'APPROVED', fingerprint, history: [{ status: 'APPROVED', by: 'Teacher', basis: 'individual', fingerprint }] };
+      }
+    }
     const real = buildAll(datasets, topics, { registry: reg0 });
     const est = establishedSets(real.results, reg0);
     check('the approved pilots establish their archetypes and features',
@@ -796,7 +804,7 @@ export async function runTests() {
       fp(editPartLocal(b3, 'd', (pt) => ({ ...pt, plot: { ...pt.plot, worth: 0 } }))) !== fp(b3) && fp(editPartLocal(b3, 'b', (pt) => ({ ...pt, plot: undefined }))) !== fp(b3));
     // Lines of best fit before reading a gradient: without error bars (A2-B01, C4-B01, D1-B01) and with them (D3-B01).
     const withPlot = datasets.filter((x) => buildQuestion(x.def).question.parts.some((pt) => pt.plot)).map((x) => x.def.id).sort().join(' ');
-    check('Plot: the datasets with an on-screen graph are the ones the teacher asked for', withPlot === 'A2-B01 A2-B02 B3-B01 B5-B01 C1-B01 C4-B01 D1-B01 D3-B01', withPlot);
+    check('Plot: the datasets with an on-screen graph are the ones the teacher asked for', withPlot === 'A1-B01 A2-B01 A2-B02 A3-B01 B2-B01 B3-B01 B5-B01 C1-B01 C4-B01 D1-B01 D3-B01', withPlot);
     for (const [id, label] of [['A2-B01', 'b'], ['A2-B02', 'b'], ['C1-B01', 'd'], ['C4-B01', 'c'], ['D1-B01', 'c'], ['D3-B01', 'b']]) {
       const def = datasets.find((x) => x.def.id === id).def;
       const b = buildQuestion(def);
@@ -827,7 +835,7 @@ export async function runTests() {
 
     // Lines that leave out some of the points on the graph (graph.exclude): the curved region of A2-B02 and the
     // anomalous reading of B5-B01. Nothing on the screen says which points are left out.
-    const plotOf = (id, label) => { const b = buildQuestion(datasets.find((x) => x.def.id === id).def); const pt = b.question.parts.find((x) => x.label === label); return { b, pt, p: pt.plot, L: pt.plot.lines[0] }; };
+    const plotOf = (id, label) => { const b = buildQuestion(datasets.find((x) => x.def.id === id).def); const pt = b.question.parts.find((x) => x.label === label); return { b, pt, p: pt.plot, L: (pt.plot.lines || [])[0] }; };
     const judge = ({ p, pt }, s) => Plot.check(p, { points: [], line: null, lines: { best: s } }, pt.marks);
     const through = ({ p }, m, c, x1 = p.x.min, x2 = p.x.max) => [[x1, m * x1 + c], [x2, m * x2 + c]];
     const lsAll = ({ p }) => linearFit(p.given.map((g) => g[0]), p.given.map((g) => g[1]));
@@ -864,6 +872,60 @@ export async function runTests() {
     check('Plot rule: a straight-line graph with no on-screen plot gets a warning', warnsMissing(noPlots));
     check('Plot rule: a stated reason (noPlot) or a plot removes the warning', !warnsMissing({ ...noPlots, noPlot: 'a reason' }) && !warnsMissing(d3def));
     check('Plot rule: no published dataset is missing its plot without a reason', datasets.every((x) => !warnsMissing(x.def)));
+
+    // Plotting the point a graph leaves out (graph.omit): A3-B01 (c) and B2-B01 (b), November 2026.
+    for (const [id, label] of [['A3-B01', 'c'], ['B2-B01', 'b']]) {
+      const { b, pt, p } = plotOf(id, label);
+      const def = datasets.find((x) => x.def.id === id).def;
+      const row = def.graph.omit[0];
+      const want = [b.d.rows[row][def.graph.x], b.d.rows[row][def.graph.y]];
+      const marked = (pts) => Plot.check(p, { points: pts, line: null }, pt.marks);
+      check(`Plot: ${id} (${label}) passes the plot checks`, errs(def).length === 0, errs(def).join('; '));
+      check(`Plot: ${id} (${label}) asks for exactly the missing point, and all its marks are for it`, p.points.length === 1 && p.points[0][0] === want[0] && p.points[0][1] === want[1] && p.worth === pt.marks && !p.lines && p.given.length === b.d.rows.length - 1);
+      check(`Plot: ${id} (${label}): the right point earns the mark; one a small square too high does not`, marked([want]).score === pt.marks && marked([want]).right && marked([[want[0], want[1] + p.y.step]]).score === 0);
+      check(`Plot: ${id} (${label}): a point within half a small square is accepted`, marked([[want[0] + 0.4 * p.x.step, want[1] - 0.4 * p.y.step]]).right);
+      check(`Plot: ${id} (${label}): the feedback asks for the point, then says when it is misplaced`,
+        /Plot the missing point/.test(marked([]).feedback[0].text) && /Your point is not within half a small square/.test(marked([[want[0], want[1] + 2 * p.y.step]]).feedback[0].text));
+    }
+    check('Plot: B2-B01 shows the dashed observed = model line on the screen too', (() => { const r = plotOf('B2-B01', 'b').p.reference; return !!r && r.gradient === 1 && r.intercept === 0; })());
+    check('Plot: A3-B01 has no reference line', !plotOf('A3-B01', 'c').p.reference);
+    check('Plot: a "plot the point" part on a graph that leaves no point out is refused', refuses(editPartLocal(b3, 'b', (pt) => ({ ...pt, plot: { points: true } })), /graph\.omit/));
+    check('Plot: the validator refuses points that are not the left-out row', (() => {
+      const def = datasets.find((x) => x.def.id === 'A3-B01').def;
+      const q = JSON.parse(JSON.stringify(buildQuestion(def).question));
+      q.parts.find((x) => x.label === 'c').plot.points[0][1] += 5;
+      return validateDataset(def, q, { topics }).some((x) => x.code === 'plot' && /graph\.omit/.test(x.message));
+    })());
+    const a3def = datasets.find((x) => x.def.id === 'A3-B01').def;
+    const a3NoPlot = { ...a3def, parts: (d) => a3def.parts(d).map((pt) => ({ ...pt, plot: undefined })) };
+    check('Plot rule: a "Plot the point" part without an on-screen plot gets a warning, and a reason removes it', warnsMissing(a3NoPlot) && !warnsMissing({ ...a3NoPlot, noPlot: 'a reason' }));
+    check('Plot rule: a graph that hides a point only so as not to give away a calculated value gets no warning (D1-B01, E3-B01)',
+      ['D1-B01', 'E3-B01'].every((id) => !warnsMissing(datasets.find((x) => x.def.id === id).def)));
+
+    // x error bars (A1-B01): the screen shows them, and a line passes "through the bars" if it crosses the box they make.
+    {
+      const { b, p } = plotOf('A1-B01', 'e');
+      const g = plotOf('A1-B01', 'g');
+      const def = datasets.find((x) => x.def.id === 'A1-B01').def;
+      check('Plot: A1-B01 passes the plot checks (line of best fit in (e), steepest and shallowest in (g))', errs(def).length === 0, errs(def).join('; '));
+      check('Plot: A1-B01 shows both error bars for every point', p.given.every((k) => k.length === 4 && k[2] > 0 && k[3] > 0));
+      check('Plot: A1-B01 has no "can\'t plot yet" reason any more', !def.noPlot);
+      const lines = (L) => Plot.check(g.p, { points: [], line: null, lines: L }, g.pt.marks);
+      const s = (L) => Plot.ideal({ ...g.p, lines: [{ key: 'x', role: 'best', gradient: L.m, intercept: L.c }] }).lines.x;
+      check('Plot: A1-B01 accepts the steepest and shallowest lines through the boxes (which tilt further than the y bars alone allow)',
+        lines({ steep: s(b.d.band.steep), shallow: s(b.d.band.shallow) }).right);
+      check('Plot: the validator refuses an A1-B01 plot that leaves out the x error bars', (() => {
+        const q = JSON.parse(JSON.stringify(b.question));
+        for (const pt of q.parts) if (pt.plot) pt.plot.given = pt.plot.given.map((k) => k.slice(0, 3));
+        return validateDataset(def, q, { topics }).some((x) => x.code === 'plot' && /error bars/.test(x.message));
+      })());
+    }
+    check('Plot: a line crossing the box of an x and a y error bar passes it; one beside the box does not', (() => {
+      const p = { x: { min: 0, max: 4, step: 0.1, major: 1, symbol: 'x' }, y: { min: 0, max: 5, step: 0.1, major: 1, symbol: 'y' },
+        given: [[1, 1, 0.1, 0.5], [3, 3, 0.1, 0.5]], points: [], lines: [{ key: 'best', role: 'best', label: 'L', gradient: 1, intercept: 0, bars: true }], fit: { gradient: 1, intercept: 0 }, worth: 0 };
+      const ok = (c) => Plot.check(p, { points: [], line: null, lines: { best: [[0, c], [4, 4 + c]] } }, 1).right;
+      return ok(0.5) && ok(-0.5) && !ok(0.7) && !ok(-0.7);
+    })());
   }
   return { count, failures };
 }

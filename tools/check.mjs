@@ -132,8 +132,9 @@ function checkQuestion(q, file) {
 // The graph either has points for the student to plot, or already shows the data (given) and asks for lines.
 function checkPlotField(where, p, marks) {
   const axis = (a) => a && [a.min, a.max, a.step, a.major].every(Number.isFinite) && a.max > a.min && a.step > 0 && a.symbol;
-  const enough = Array.isArray(p.points) && (p.points.length >= 2 || (Array.isArray(p.given) && p.given.length >= 2 && Plot.linesOf(p).length > 0));
-  if (!axis(p.x) || !axis(p.y) || !enough) { err(where, 'plot needs x and y axes (min, max, step, major, symbol) and at least two points to plot, or given points and a line to draw'); return; }
+  const shown = Array.isArray(p.given) && p.given.length >= 2;
+  const enough = Array.isArray(p.points) && (p.points.length >= 2 || (shown && (Plot.linesOf(p).length > 0 || p.points.length >= 1)));
+  if (!axis(p.x) || !axis(p.y) || !enough) { err(where, 'plot needs x and y axes (min, max, step, major, symbol) and at least two points to plot, or given points and a missing point to plot or a line to draw'); return; }
   const worth = Plot.worthOf(p, marks);
   if (!Number.isInteger(worth) || worth < 0 || worth > marks) { err(where, `plot: worth must be a whole number from 0 to the part's ${marks} marks`); return; }
   const full = Plot.check(p, Plot.ideal(p), marks);

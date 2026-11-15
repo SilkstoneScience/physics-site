@@ -13,8 +13,10 @@
 //
 // Graphs that already show the data (Paper 1B, built by tools/1b/generate.mjs) add:
 //     "height": 343,                                               the picture's height (default 270; the width is 400)
-//     "given": [[12, 97.5, 0.5], …],                               points already plotted: x, y, half the y error bar (0: none)
-//     "points": [],                                                nothing to plot (or the missing points)
+//     "given": [[12, 97.5, 0.5], …],                               points already plotted: x, y, half the y error bar (0: none),
+//                                                                  and optionally half the x error bar: [x, y, ey, ex]
+//     "points": [],                                                nothing to plot (or the missing points, e.g. [[4, 18.3]])
+//     "reference": { "gradient": 1, "intercept": 0 },              optional dashed reference line (e.g. observed = model)
 //     "lines": [{ "key": "best", "role": "best", "label": "Line of best fit", "gradient": …, "intercept": …,
 //                 "bars": true, "toYAxis": true }, …],             the lines to draw; role "best", "steep" or "shallow"
 //     "fit": { "gradient": …, "intercept": … },                    the line of best fit (steep and shallow are judged against it)
@@ -22,7 +24,9 @@
 //     "on": "graph"                                                the figure of the question that the student draws on
 // With error bars ("bars": true) a line of best fit must pass through every bar; the steepest and shallowest
 // lines must pass through every bar and be at least half-way from the best fit to the true extreme line.
+// With x error bars too, "through the bar" means through the box the two bars make (as tools/1b/lib.mjs gradientBand).
 // A line may miss a bar by a tenth of a small square ("slack").
+// A graph that shows data and asks only for missing points (no "lines") is marked on the points alone.
 // A line of best fit can also carry:
 //     "tolerance": 0.5,          without error bars: how far the line may be from the expected line at each end of the data
 //     "gradients": [0.31, 0.34], the gradients the mark scheme accepts: a line outside them is "tilted too far"
@@ -109,17 +113,26 @@
     return out;
   }
 
-  // The points the graph already shows: a dot for each, with its error bar drawn on top.
+  // The points the graph already shows: a dot for each, with its error bars drawn on top, and any reference line.
+  const hasBar = (p) => p[2] > 0 || (p[3] || 0) > 0;
   function givenLayer(plot) {
     const given = plot.given || [];
     if (!given.length) return [];
     const s = scale(plot);
+    const out = [];
+    const ref = plot.reference ? clip(plot, plot.reference) : null;
+    if (ref) out.push(segment(s, ref, { stroke: '#5b6675', width: 1.2, dash: '6 4' }));
     const dots = given.map(([x, y]) => `<circle cx="${px(s.X(x))}" cy="${px(s.Y(y))}" r="2.3"/>`).join('');
-    const bars = given.filter((p) => p[2] > 0).map(([x, y, e]) => {
-      const cx = s.X(x); const y1 = s.Y(y + e); const y2 = s.Y(y - e);
-      return `<path d="M${px(cx)} ${px(y1)}V${px(y2)}M${px(cx - 3.5)} ${px(y1)}H${px(cx + 3.5)}M${px(cx - 3.5)} ${px(y2)}H${px(cx + 3.5)}"/>`;
+    const bars = given.filter(hasBar).map(([x, y, e, ex]) => {
+      const cx = s.X(x); const cy = s.Y(y);
+      let d = '';
+      if (e > 0) { const y1 = s.Y(y + e); const y2 = s.Y(y - e); d += `M${px(cx)} ${px(y1)}V${px(y2)}M${px(cx - 3.5)} ${px(y1)}H${px(cx + 3.5)}M${px(cx - 3.5)} ${px(y2)}H${px(cx + 3.5)}`; }
+      if (ex > 0) { const x1 = s.X(x - ex); const x2 = s.X(x + ex); d += `M${px(x1)} ${px(cy)}H${px(x2)}M${px(x1)} ${px(cy - 3.5)}V${px(cy + 3.5)}M${px(x2)} ${px(cy - 3.5)}V${px(cy + 3.5)}`; }
+      return `<path d="${d}"/>`;
     }).join('');
-    return [`<g fill="${INK}">${dots}</g>`, ...(bars ? [`<g stroke="${INK}" stroke-width="1.1" fill="none">${bars}</g>`] : [])];
+    out.push(`<g fill="${INK}">${dots}</g>`);
+    if (bars) out.push(`<g stroke="${INK}" stroke-width="1.1" fill="none">${bars}</g>`);
+    return out;
   }
 
   function segment(s, seg, style, extra = '') {
@@ -219,9 +232,10 @@
     const lo = Math.min(seg[0][0], seg[1][0]); const hi = Math.max(seg[0][0], seg[1][0]);
     const covers = lo <= xa + tolX && hi >= xb - tolX;
     const reaches = !L.toYAxis || lo <= plot.x.min + tolX;
-    const bars = L.bars ? followed.filter((p) => p[2] > 0) : [];
+    const bars = L.bars ? followed.filter(hasBar) : [];
     const slack = (typeof plot.slack === 'number' ? plot.slack : plot.y.step / 10) + EPS;
-    const misses = bars.filter(([x, y, e]) => Math.abs(at(x) - y) > e + slack).length;
+    // Through the box made by the bars: somewhere across the x bar, the line is within the y bar.
+    const misses = bars.filter(([x, y, e, ex]) => Math.abs(at(x) - y) > e + Math.abs(g) * (ex || 0) + slack).length;
     const missText = `${mine} misses ${misses} of the ${bars.length} error bars`;
 
     if (L.role === 'steep' || L.role === 'shallow') {
@@ -283,7 +297,11 @@
     if (total || drawn.length) {
       if (points.ok) feedback.push({ ok: true, text: total === 1 ? 'The point is plotted correctly.' : `All ${total} points are plotted correctly.` });
       else if (!drawn.length) feedback.push({ ok: false, text: total === 1 ? 'Plot the missing point.' : `Plot the ${total} points from the table.` });
-      else {
+      else if (total === 1) {
+        const where = 'within half a small square of where it should be: check the values in the table and the scale of each axis.';
+        feedback.push({ ok: false, text: matched ? `Your point is in the right place, but there ${extra === 1 ? 'is' : 'are'} ${plural(extra, 'extra point')}: remove ${extra === 1 ? 'it' : 'them'}.`
+          : drawn.length === 1 ? `Your point is not ${where}` : `None of your points is ${where}` });
+      } else {
         const others = drawn.length - matched;
         const tail = drawn.length === total ? `: check the other ${others === 1 ? 'one' : others}.` : ` (the table has ${total} readings).`;
         let text = matched === total ? `All ${total} points are in the right place,` : `${matched} of your ${plural(drawn.length, 'point')} ${matched === 1 ? 'is' : 'are'} within half a small square of where ${matched === 1 ? 'it' : 'they'} should be${tail}`;
@@ -341,8 +359,8 @@
 
     const nLines = Object.values(lines).filter(Boolean).length;
     const count = [wantsPoints ? plural(points.length, 'point') + ' plotted' : '', nLines ? plural(nLines, 'line') + ' drawn' : ''].filter(Boolean).join(' and ') || 'nothing drawn yet';
-    const given = (plot.given || []).length ? ` The graph shows ${plural(plot.given.length, 'point')}${plot.given.some((p) => p[2] > 0) ? ' with error bars' : ''}.` : '';
-    const keys = wantsPoints ? 'Enter plots or removes a point, or sets an end of the line.' : 'Enter sets an end of the line.';
+    const given = (plot.given || []).length ? ` The graph shows ${plural(plot.given.length, 'point')}${plot.given.some(hasBar) ? ' with error bars' : ''}.` : '';
+    const keys = wantsPoints ? (specs.length ? 'Enter plots or removes a point, or sets an end of the line.' : 'Enter plots or removes a point.') : 'Enter sets an end of the line.';
     const hasData = (plot.given || []).length > 0;
     container.innerHTML = `
       <div class="plot${locked ? ' is-locked' : ''}${hasData ? ' has-data' : ''}">

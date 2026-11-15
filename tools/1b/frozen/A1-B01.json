@@ -326,7 +326,19 @@
         "unit": "$\\text{m}$",
         "source": "gradient"
       },
-      "msFigure": "graph-ms"
+      "msFigure": "graph-ms",
+      "plot": {
+        "worth": 0,
+        "points": 0,
+        "lines": [
+          {
+            "key": "best",
+            "role": "best",
+            "bars": true,
+            "toYAxis": false
+          }
+        ]
+      }
     },
     {
       "label": "f",
@@ -364,7 +376,25 @@
         "Uses the steepest and shallowest lines through the error bars (their own lines, or the uncertainty in the gradient) to find a range for $u$: the lines shown give about 2.38 to 2.48 $\\text{m s}^{-1}$ ✓",
         "2.60 $\\text{m s}^{-1}$ is above this range, so the data do not support the statement (the launcher is slower than stated). Award this mark for a conclusion consistent with the candidate's own range ✓"
       ],
-      "msFigure": "graph-ms"
+      "msFigure": "graph-ms",
+      "plot": {
+        "worth": 0,
+        "points": 0,
+        "lines": [
+          {
+            "key": "steep",
+            "role": "steep",
+            "bars": true,
+            "toYAxis": false
+          },
+          {
+            "key": "shallow",
+            "role": "shallow",
+            "bars": true,
+            "toYAxis": false
+          }
+        ]
+      }
     }
   ]
 }
