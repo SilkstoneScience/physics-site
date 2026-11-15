@@ -145,7 +145,7 @@ The AA guide's text is now in the reference cache as `Maths AA Guide.txt` (extra
 
 ### Still to do after audit 2026-11d
 - **New Paper 1A questions for slide quick checks:** done 15 November 2026. D1-023 (potential gradient, HL), D1-024 (gravitational potential energy, HL), D2-020 (forces between charges), D2-021 (conservation of charge), E1-019 (identifying elements from spectra), E3-025 (constancy of binding energy per nucleon, HL), independently reviewed and listed as `checks` in `teachers/slides/d1.json`, `d2.json`, `e1.json` and `e3.json`.
-- **D.4 revision sheet, video 3** (Veritasium, "World's First Electric Generator"): the teacher to watch it; the note probably needs rewording (a magnet in a copper pipe and an LED, not a meter).
+- **D.4 revision sheet, video 3** (Veritasium, "World's First Electric Generator"): done 15 November 2026. The note was reworded from the video's transcript (a magnet slowed by a copper pipe and an LED, not a meter), at the teacher's request, without the teacher watching it.
 
 ## Audit 2026-11e (15 November 2026): the new and edited Explanation builder items
 
