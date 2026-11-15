@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics circuit builder: build and test DC circuits · Mr Silkstone's Physics</title>
+  <meta name="description" content="Build DC circuits from data-booklet symbols and see what really happens: currents, p.d.s, meter readings, internal resistance, short circuits and variable resistors, for IB DP Physics B.5.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/circuit-builder.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics circuit builder: build and test DC circuits · Mr Silkstone's Physics">
+  <meta property="og:description" content="Build DC circuits from data-booklet symbols and see what really happens: currents, p.d.s, meter readings, internal resistance, short circuits and variable resistors, for IB DP Physics B.5.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/circuit-builder.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/circuits.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/circuits/components.js"></script>
+  <script defer src="../js/circuits/netlist.js"></script>
+  <script defer src="../js/circuits/engine.js"></script>
+  <script defer src="../js/circuits/model.js"></script>
+  <script defer src="../js/circuits/render.js"></script>
+  <script defer src="../js/circuits/editor.js"></script>
+  <script defer src="../js/circuits/app.js"></script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main class="ck-main">
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Circuit builder</p>
+    <h1>Circuit builder <span class="tag sim-tag">Simulation</span></h1>
+    <p class="lead">Build a circuit from the data booklet's symbols and see what really happens: every current, p.d. and meter reading is worked out as you build. <span class="tag">B.5 Current and circuits</span></p>
+    <p class="notice ck-phone">The circuit builder works best on a tablet or a laptop. On a phone, turn it sideways and use two fingers to zoom.</p>
+
+    <div id="circuit-builder">
+      <noscript><p class="notice">The circuit builder needs JavaScript turned on in your browser.</p></noscript>
+    </div>
+
+    <details class="ck-help">
+      <summary>How to use the circuit builder</summary>
+      <ul>
+        <li><strong>Add a component:</strong> drag it from the toolbox onto the grid, or tap it in the toolbox and then tap the grid.</li>
+        <li><strong>Draw a wire:</strong> drag from one terminal (a small circle at the end of a component) to another terminal, a junction or a wire. Or tap a terminal, tap the grid to add bends, and tap where the wire should end. Wires only join where they end: wires that cross don't connect.</li>
+        <li><strong>Join components end to end:</strong> drop a component so that its terminal sits exactly on another terminal (or on a loose wire end).</li>
+        <li><strong>Change a component:</strong> tap it, then use the panel beside the workspace. Tap a switch to open or close it.</li>
+        <li><strong>Rotate:</strong> select it and press R, the Rotate button, or double-tap it.</li>
+        <li><strong>Move around:</strong> drag empty space; zoom with the + and − buttons, two fingers, or Ctrl and the mouse wheel. Fit shows the whole circuit.</li>
+        <li><strong>Delete:</strong> select it and press Delete or the Delete button. Undo (Ctrl+Z) puts it back.</li>
+        <li><strong>Meters</strong> are ideal unless you untick "ideal meter". The red terminal is +. A reading above the range shows OL, as on a real multimeter: choose a higher range.</li>
+      </ul>
+    </details>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

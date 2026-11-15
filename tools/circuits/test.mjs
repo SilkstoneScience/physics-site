@@ -684,6 +684,141 @@ export async function runTests() {
     check('steps: a loaded potentiometer is explained', potSteps.ok && near(potSteps.elements['p1:a'].V, 300 / 121, 1e-9), JSON.stringify(potSteps.elements));
   }
 
+  // ===== 6. The drawing model (js/circuits/model.js): operations, undo and redo =====
+  {
+    const M = require('../../js/circuits/model.js');
+    const part = (d) => JSON.stringify(N.partition(N.build(d)));
+    const d = M.empty();
+    const c1 = M.ops.addComponent(d, 'cell', 0, 0, { emf: 6 });
+    const r1 = M.ops.addComponent(d, 'resistor', 6, 0, { R: 10 });
+    const r2 = M.ops.addComponent(d, 'resistor', 6, 6, { R: 20 });
+    const r3 = M.ops.addComponent(d, 'resistor', 12, 0);
+    check('model: ids and labels follow the type (C1, R1, R2, R3)', c1 === 'c1' && r1 === 'r1' && r2 === 'r2' && r3 === 'r3' && d.components[1].label === 'R1');
+    check('model: settings are completed when a component is added', d.components[3].params.R === 10 && d.components[0].params.r === 0);
+    M.ops.addWire(d, { c: c1, t: 1 }, { c: r1, t: 0 });
+    const w = M.ops.addWire(d, { c: r1, t: 1 }, { c: r2, t: 1 }, [[10, 3]]);
+    check('model: a new drawing is sound', M.validate(d).length === 0, M.validate(d).join('; '));
+    const path = M.wirePath(d, d.wires.find((x) => x.id === w));
+    check('model: wire paths are horizontal and vertical only', path.every((p, i) => i === 0 || p[0] === path[i - 1][0] || p[1] === path[i - 1][1]), JSON.stringify(path));
+    check('model: wire paths start and end at the terminals', JSON.stringify(path[0]) === JSON.stringify(M.terminalPos(d, r1, 1)) && JSON.stringify(path[path.length - 1]) === JSON.stringify(M.terminalPos(d, r2, 1)));
+    // Splitting a wire with a junction doesn't change the connections.
+    const before = part(d);
+    const mid = path[1];
+    const end = M.ops.splitWire(d, w, mid);
+    check('model: splitting a wire gives a junction', end && end.j && d.junctions.length === 1 && d.wires.length === 3, JSON.stringify(end));
+    check('model: splitting a wire keeps the same connections', part(d) === before);
+    check('model: after splitting, the drawing is sound', M.validate(d).length === 0, M.validate(d).join('; '));
+    // Branching from the junction joins r3.
+    M.ops.addWire(d, end, { c: r3, t: 0 });
+    check('model: a wire from the junction joins r3 to r1 and r2', N.build(d).pointNet['c:r3:0'] === N.build(d).pointNet['c:r1:1']);
+    // Moving and rotating never change the connections.
+    const p0 = part(d);
+    M.ops.moveItems(d, { components: [r1, r2], junctions: [end.j] }, 3, -2);
+    M.ops.rotate(d, [r3, c1]);
+    M.ops.rotate(d, [r3], 3);
+    check('model: moving and rotating keep the connections', part(d) === p0);
+    check('model: rotation stays in 0, 90, 180, 270', d.components.every((c) => [0, 90, 180, 270].includes(c.rot)));
+    // Removing a component leaves loose ends where its terminals were.
+    const at = M.terminalPos(d, r1, 0);
+    M.ops.remove(d, { components: [r1] });
+    const loose = d.wires.flatMap((x) => [x.from, x.to]).filter((e) => e.free);
+    check('model: removing a component leaves loose wire ends at its terminals', loose.length === 2 && loose.some((e) => e.free[0] === at[0] && e.free[1] === at[1]), JSON.stringify(loose));
+    check('model: after removing, the drawing is sound', M.validate(d).length === 0, M.validate(d).join('; '));
+    // Dropping a component onto a loose end, a terminal or a wire joins it.
+    const d2 = M.empty();
+    const a = M.ops.addComponent(d2, 'resistor', 0, 0);
+    const b = M.ops.addComponent(d2, 'resistor', 4, 0); // its terminal 0 is at (2, 0), on a's terminal 1
+    M.ops.joinAt(d2, [b]);
+    check('model: terminals dropped on each other are joined', N.build(d2).pointNet['c:r1:1'] === N.build(d2).pointNet['c:r2:0']);
+    const c = M.ops.addComponent(d2, 'resistor', 20, 0);
+    M.ops.addWire(d2, { c: a, t: 0 }, { c, t: 1 }, [[-2, 6], [22, 6]]); // a U-shaped wire under everything
+    const v = M.ops.addComponent(d2, 'resistor', 10, 4); // vertical when rotated: terminals at (10, 2) and (10, 6)
+    M.ops.rotate(d2, [v]);
+    M.ops.joinAt(d2, [v]);
+    const nl2 = N.build(d2);
+    check('model: a terminal dropped on the middle of a wire is NOT joined to it', nl2.pointNet[`c:${v}:1`] !== nl2.pointNet['c:r1:0'] && d2.junctions.length === 0);
+    check('model: both its terminals stay unconnected', nl2.unconnected.filter((u) => u.id === v).length === 2);
+    const wl = M.ops.addWire(d2, { c: v, t: 0 }, { free: [10, -3] });
+    const v2 = M.ops.addComponent(d2, 'resistor', 12, -3); // its terminal 0 is at (10, -3), on the loose end
+    M.ops.joinAt(d2, [v2]);
+    check('model: a terminal dropped on a loose wire end takes it', d2.wires.find((x) => x.id === wl).to.c === v2);
+    check('model: after joining, the drawing is sound', M.validate(d2).length === 0, M.validate(d2).join('; '));
+
+    // Drawings from outside (examples, saved circuits, share links) are made complete and safe.
+    const loaded = M.createStore({ components: [{ id: 'q', type: 'lamp', x: 1.4, y: 2, rot: 45 }, { id: 'q', type: 'cell' }, { id: 'z', type: 'flux' }, null], wires: [{ id: 'w', from: { c: 'q', t: 0 }, to: { c: 'gone', t: 1 } }, { id: 'w2' }], junctions: 'no' }).drawing;
+    check('model: a loaded drawing gets complete settings', loaded.components.length === 1 && loaded.components[0].params.R === 12 && loaded.components[0].params.model === 'ohmic');
+    check('model: a loaded drawing is put on the grid with a valid rotation', loaded.components[0].x === 1 && loaded.components[0].rot === 0);
+    check('model: wires to missing parts become loose ends; broken wires are dropped', loaded.wires.length === 1 && !!loaded.wires[0].to.free);
+    check('model: a loaded drawing is sound', M.validate(loaded).length === 0, M.validate(loaded).join('; '));
+    check('model: rubbish loads as an empty drawing', M.validate(M.normalise('rubbish')).length === 0 && M.normalise(42).components.length === 0);
+
+    // The store: undo and redo, and joining a slider drag into one step.
+    const s = M.createStore();
+    const states = [JSON.stringify(s.drawing)];
+    const id = s.change('add', (x) => M.ops.addComponent(x, 'cell', 0, 0));
+    states.push(JSON.stringify(s.drawing));
+    s.change('add', (x) => M.ops.addComponent(x, 'lamp', 5, 0));
+    states.push(JSON.stringify(s.drawing));
+    for (const val of [2, 3, 4, 5]) s.change('emf', (x) => M.ops.setParam(x, id, 'emf', val), `param:${id}:emf`);
+    states.push(JSON.stringify(s.drawing));
+    s.endCoalesce();
+    s.change('rotate', (x) => M.ops.rotate(x, [id]));
+    states.push(JSON.stringify(s.drawing));
+    check('store: a change that changes nothing makes no undo step', (() => { const n0 = JSON.stringify(s.drawing); s.change('nothing', () => {}); s.undo(); const ok = JSON.stringify(s.drawing) === states[3]; s.redo(); return ok && JSON.stringify(s.drawing) === n0; })());
+    let ok = true;
+    for (let k = states.length - 2; k >= 0; k--) { s.undo(); if (JSON.stringify(s.drawing) !== states[k]) ok = false; }
+    check('store: undo goes back one step at a time (a slider drag is one step)', ok && !s.canUndo);
+    ok = true;
+    for (let k = 1; k < states.length; k++) { s.redo(); if (JSON.stringify(s.drawing) !== states[k]) ok = false; }
+    check('store: redo goes forward again', ok && !s.canRedo);
+
+    // Random edits: the drawing stays sound after every one, connections never depend on positions, and undoing
+    // everything returns to the start.
+    for (let seed = 1; seed <= 20; seed++) {
+      const rnd = rng(7000 + seed);
+      const st = M.createStore();
+      const start = JSON.stringify(st.drawing);
+      let problem = '';
+      for (let step = 0; step < 90 && !problem; step++) { // fewer than the 100 undo steps kept
+        const dr = st.drawing;
+        const ids = dr.components.map((x) => x.id);
+        const r = rnd();
+        const anyEnd = () => {
+          const k = rnd();
+          if (k < 0.6 && ids.length) { const cid = pick(rnd, ids); return { c: cid, t: intIn(rnd, 0, C.TYPES[dr.components.find((x) => x.id === cid).type].terminals.length - 1) }; }
+          if (k < 0.8 && dr.junctions.length) return { j: pick(rnd, dr.junctions).id };
+          return { free: [intIn(rnd, -10, 10), intIn(rnd, -10, 10)] };
+        };
+        if (r < 0.2 || ids.length < 2) st.change('add', (x) => M.ops.addComponent(x, pick(rnd, Object.keys(C.TYPES)), intIn(rnd, -10, 10), intIn(rnd, -10, 10)));
+        else if (r < 0.4) st.change('wire', (x) => M.ops.addWire(x, anyEnd(), anyEnd(), rnd() < 0.5 ? [] : [[intIn(rnd, -10, 10), intIn(rnd, -10, 10)]]));
+        else if (r < 0.5 && dr.wires.length) {
+          const wr = pick(rnd, dr.wires);
+          const pth = M.wirePath(dr, wr);
+          if (pth.length > 1) st.change('split', (x) => M.ops.splitWire(x, wr.id, pth[intIn(rnd, 0, pth.length - 1)]));
+        } else if (r < 0.62) {
+          const sel = { components: ids.filter(() => rnd() < 0.3), junctions: dr.junctions.filter(() => rnd() < 0.3).map((j) => j.id) };
+          const before2 = JSON.stringify(N.partition(N.build(dr)));
+          st.change('move', (x) => M.ops.moveItems(x, sel, intIn(rnd, -3, 3), intIn(rnd, -3, 3)));
+          if (JSON.stringify(N.partition(N.build(st.drawing))) !== before2) problem = `step ${step}: moving changed the connections`;
+        } else if (r < 0.7) {
+          const before2 = JSON.stringify(N.partition(N.build(dr)));
+          st.change('rotate', (x) => M.ops.rotate(x, ids.filter(() => rnd() < 0.4)));
+          if (JSON.stringify(N.partition(N.build(st.drawing))) !== before2) problem = `step ${step}: rotating changed the connections`;
+        } else if (r < 0.78) st.change('join', (x) => M.ops.joinAt(x, ids.filter(() => rnd() < 0.3)));
+        else if (r < 0.88) st.change('remove', (x) => M.ops.remove(x, { components: ids.filter(() => rnd() < 0.2), wires: dr.wires.filter(() => rnd() < 0.2).map((q) => q.id), junctions: dr.junctions.filter(() => rnd() < 0.2).map((j) => j.id) }));
+        else if (r < 0.94 && dr.wires.length) { const wr = pick(rnd, dr.wires); st.change('end', (x) => M.ops.moveWireEnd(x, wr.id, rnd() < 0.5 ? 'from' : 'to', anyEnd())); }
+        else if (ids.length) { const cid = pick(rnd, ids); const type = dr.components.find((x) => x.id === cid).type; const key = pick(rnd, Object.keys(C.TYPES[type].params)); st.change('param', (x) => M.ops.setParam(x, cid, key, rnd() * 100)); }
+        const bad = M.validate(st.drawing);
+        if (bad.length && !problem) problem = `step ${step}: ${bad.join('; ')}`;
+        const sim = E.simulate(st.drawing);
+        if (!sim.ok && !problem) problem = `step ${step}: the engine failed (${sim.diagnostics.map((q) => q.message).join(' | ')})`;
+      }
+      check(`model: 90 random edits (seed ${seed}) keep the drawing sound`, !problem, problem);
+      while (st.undo());
+      check(`model: undoing every random edit (seed ${seed}) returns to the start`, JSON.stringify(st.drawing) === start);
+    }
+  }
+
   return { count, failures };
 }
 

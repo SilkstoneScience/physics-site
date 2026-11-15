@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Circuit builder interface tests</title>
+  <style>
+    body { font: 15px/1.45 system-ui, sans-serif; margin: 16px; background: #fff; color: #1c2430; }
+    #summary { font-size: 1.2rem; font-weight: 700; margin: 0 0 8px; }
+    #log { font: 13px/1.5 ui-monospace, Consolas, monospace; white-space: pre-wrap; margin: 0 0 12px; }
+    .ok { color: #1e7a46; } .bad { color: #b3261e; font-weight: 700; } .head { font-weight: 700; margin-top: 6px; }
+    iframe { width: 1280px; height: 1150px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <!-- Not published (tools/ is excluded in _config.yml). Open it through the preview server:
+       http://localhost:<port>/tools/circuits/ui-test.html . It loads the real circuit builder page in the frame below
+       and builds circuits with pointer and touch events, as a student would, then checks what the meters show. -->
+  <p id="summary">Running…</p>
+  <div id="log"></div>
+  <iframe id="frame" title="The circuit builder under test"></iframe>
+<script>
+(async () => {
+  const log = document.getElementById('log');
+  const results = [];
+  const out = (text, cls) => { const d = document.createElement('div'); d.className = cls || ''; d.textContent = text; log.appendChild(d); };
+  const check = (name, ok, detail = '') => { results.push({ name, ok, detail }); out(`${ok ? '✓' : '✗'} ${name}${ok || !detail ? '' : ` (${detail})`}`, ok ? 'ok' : 'bad'); };
+  const frameEl = document.getElementById('frame');
+  const tick = () => new Promise((r) => setTimeout(r, 30));
+  let W, D, App, CC;
+
+  async function load() {
+    frameEl.src = `../../experimental/circuit-builder.html?t=${Date.now()}`;
+    await new Promise((r) => { frameEl.onload = r; });
+    for (let i = 0; i < 100 && !(frameEl.contentWindow.CircuitApp); i++) await tick();
+    W = frameEl.contentWindow; D = frameEl.contentDocument; App = W.CircuitApp; CC = W.Circuits.components;
+    W.confirm = () => true;
+    D.querySelector('.ck-svg').scrollIntoView({ block: 'center' });
+    await tick();
+  }
+
+  // ---- input, as a student makes it ----
+  let pid = 10;
+  function fire(type, x, y, o = {}) {
+    const target = o.target || D.elementFromPoint(x, y) || D.body;
+    target.dispatchEvent(new W.PointerEvent(type, { bubbles: true, cancelable: true, composed: true, clientX: x, clientY: y, pointerId: o.id, pointerType: o.ptype || 'mouse', isPrimary: true, button: 0, buttons: type === 'pointerup' ? 0 : 1, shiftKey: !!o.shift }));
+  }
+  async function drag(a, b, o = {}) {
+    const id = ++pid;
+    fire('pointerdown', a[0], a[1], { ...o, id, target: o.startTarget });
+    const steps = 8;
+    for (let i = 1; i <= steps; i++) fire('pointermove', a[0] + (b[0] - a[0]) * i / steps, a[1] + (b[1] - a[1]) * i / steps, { ...o, id });
+    fire('pointerup', b[0], b[1], { ...o, id });
+    await tick();
+  }
+  async function tap(p, o = {}) { const id = ++pid; fire('pointerdown', p[0], p[1], { ...o, id }); fire('pointerup', p[0], p[1], { ...o, id }); await tick(); }
+  async function key(k, o = {}) { D.dispatchEvent(new W.KeyboardEvent('keydown', { key: k, bubbles: true, cancelable: true, ctrlKey: !!o.ctrl, shiftKey: !!o.shift })); await tick(); }
+  const at = (gx, gy) => App.gridToClient(gx, gy);
+  const comp = (id) => App.store.drawing.components.find((c) => c.id === id);
+  const term = (id, t) => at(...CC.terminalPosition(comp(id), t));
+  const centre = (id) => at(comp(id).x, comp(id).y);
+  const reading = (id) => { const t = D.querySelector(`[data-reading-for="${id}"] text`); return t ? t.textContent : null; };
+  const net = (id, t) => App.netlist.pointNet[`c:${id}:${t}`];
+  const diag = (code) => App.result.diagnostics.some((d) => d.code === code);
+
+  async function place(type, gx, gy, o = {}) {
+    const before = new Set(App.store.drawing.components.map((c) => c.id));
+    const b = App.toolButton(type).getBoundingClientRect();
+    await drag([b.left + b.width / 2, b.top + b.height / 2], at(gx, gy), { ...o, startTarget: App.toolButton(type) });
+    const added = App.store.drawing.components.find((c) => !before.has(c.id));
+    if (!added) throw new Error(`placing a ${type} at (${gx}, ${gy}) added nothing`);
+    return added.id;
+  }
+  async function wire(a, ta, b, tb, o = {}) { await drag(term(a, ta), term(b, tb), o); }
+  async function setting(id, k, value, o = {}) {
+    await tap(centre(id), o);
+    if (comp(id).type === 'switch') return; // tapping a switch toggles it; switches have no number settings
+    const inp = D.querySelector(`.ck-inspector [data-key="${k}"]`);
+    if (!inp) throw new Error(`no setting ${k} for ${id}`);
+    if (inp.tagName === 'SELECT') { inp.value = value; inp.dispatchEvent(new W.Event('change', { bubbles: true })); }
+    else { inp.focus(); inp.value = String(value); inp.dispatchEvent(new W.Event('input', { bubbles: true })); inp.blur(); }
+    await tick();
+  }
+  async function fresh() {
+    await load();
+    D.querySelector('[data-act="clear"]').click();
+    App.setView(-12, -10, 1.2);
+    await tick();
+  }
+  async function scenario(name, fn) {
+    out(name, 'head');
+    try { await fn(); } catch (e) { check(`${name}: ran to the end`, false, e.message); }
+  }
+
+  // ---------------- scenarios ----------------
+  await scenario('Series circuit (mouse): cell, ammeter, 10 Ω + 20 Ω, voltmeter across 20 Ω with crossing wires', async () => {
+    await fresh();
+    const c = await place('cell', 0, -6);
+    const a = await place('ammeter', 6, -6);
+    const r1 = await place('resistor', 12, -6);
+    const r2 = await place('resistor', 8, 2);
+    const v = await place('voltmeter', 8, 8);
+    check('five components placed from the toolbox', App.store.drawing.components.length === 5);
+    await setting(c, 'emf', 6); await setting(r1, 'R', 10); await setting(r2, 'R', 20);
+    check('settings typed in the panel reach the drawing', comp(c).params.emf === 6 && comp(r1).params.R === 10 && comp(r2).params.R === 20);
+    await wire(c, 1, a, 0); await wire(a, 1, r1, 0); await wire(r1, 1, r2, 1); await wire(r2, 0, c, 0);
+    await wire(v, 0, r2, 1); await wire(v, 1, r2, 0); // these two wires cross
+    check('six wires drawn by dragging between terminals', App.store.drawing.wires.length === 6, `${App.store.drawing.wires.length} wires`);
+    check('ammeter shows 0.200 A', reading(a) === '0.200 A', reading(a));
+    check('voltmeter shows 4.00 V', reading(v) === '4.00 V', reading(v));
+    check('crossing wires are not joined', net(v, 0) !== net(v, 1));
+    check('no problems reported', !App.result.diagnostics.some((d) => d.level !== 'info'), App.result.diagnostics.map((d) => d.code).join(', '));
+
+    // Mixed: a third resistor across R2.
+    const r3 = await place('resistor', 8, -1);
+    await setting(r3, 'R', 20);
+    await wire(r3, 0, r2, 0); await wire(r3, 1, r2, 1);
+    check('mixed circuit: ammeter shows 0.300 A', reading(a) === '0.300 A', reading(a));
+    check('mixed circuit: voltmeter shows 3.00 V', reading(v) === '3.00 V', reading(v));
+    // Range: 200 mA is too small.
+    await setting(a, 'range', '200mA');
+    check('200 mA range shows OL', reading(a) === 'OL', reading(a));
+    await setting(a, 'range', '2A');
+    check('back on the 2 A range', reading(a) === '0.300 A', reading(a));
+
+    // Moving and rotating change nothing electrical.
+    const before = App.result.components[r3].I;
+    await drag(centre(r3), at(comp(r3).x - 6, comp(r3).y - 1));
+    check('dragging a component moved it', comp(r3).x === 2 && comp(r3).y === -2, `${comp(r3).x}, ${comp(r3).y}`);
+    check('wires follow a moved component (readings unchanged)', reading(a) === '0.300 A' && App.result.components[r3].I === before);
+    await tap(centre(r1)); await key('r');
+    check('R rotates the selected component', comp(r1).rot === 90);
+    check('readings unchanged after rotating', reading(a) === '0.300 A', reading(a));
+    await tap(centre(r2)); await tap(centre(r2));
+    check('double-tap rotates', comp(r2).rot === 90);
+    check('readings unchanged after double-tap rotating', reading(v) === '3.00 V', reading(v));
+
+    // Delete and undo.
+    await tap(centre(r1)); await key('Delete');
+    check('Delete removes the selected component', !comp(r1));
+    check('with R1 gone, no current flows', reading(a) === '0.000 A' && diag('open-circuit'), reading(a));
+    check('its wires are left with loose ends', diag('loose-end'));
+    await key('z', { ctrl: true });
+    check('Ctrl+Z brings it back', !!comp(r1) && reading(a) === '0.300 A', reading(a));
+    await key('y', { ctrl: true });
+    check('Ctrl+Y removes it again', !comp(r1));
+    D.querySelector('[data-act="undo"]').click(); await tick();
+    check('the Undo button works too', !!comp(r1) && reading(a) === '0.300 A');
+  });
+
+  await scenario('Parallel circuit (touch): 6 V across 6 Ω and 12 Ω', async () => {
+    await fresh();
+    const t = { ptype: 'touch' };
+    const c = await place('cell', 0, -6, t);
+    const a = await place('ammeter', 6, -6, t);
+    const r1 = await place('resistor', 4, 0, t);
+    const r2 = await place('resistor', 4, 5, t);
+    await setting(c, 'emf', 6, t); await setting(r1, 'R', 6, t); await setting(r2, 'R', 12, t);
+    await wire(c, 1, a, 0, t); await wire(a, 1, r1, 1, t); await wire(r1, 0, c, 0, t);
+    await wire(r2, 1, r1, 1, t); await wire(r2, 0, r1, 0, t);
+    check('touch: ammeter in the main branch shows 1.500 A', reading(a) === '1.500 A', reading(a));
+    check('touch: R2 carries 0.5 A', Math.abs(App.result.components[r2].I) === 0.5);
+    // A branch from a wire: drag from the middle of a wire to a new resistor.
+    const r3 = await place('resistor', 16, 0, t);
+    await setting(r3, 'R', 24, t);
+    const w = App.store.drawing.wires.find((x) => x.from.c === a && x.to.c === r1 || x.to.c === a && x.from.c === r1);
+    const mid = W.Circuits.model.wirePath(App.store.drawing, w);
+    const pm = mid.length > 2 ? mid[1] : [(mid[0][0] + mid[1][0]) / 2, (mid[0][1] + mid[1][1]) / 2];
+    await drag(at(...pm), term(r3, 1), t);
+    await wire(r3, 0, c, 0, t);
+    check('branching from a wire makes a junction', App.store.drawing.junctions.length >= 1);
+    check('touch: three branches (6, 12, 24 Ω) give 1.750 A', reading(a) === '1.750 A', reading(a));
+    check('the new branch is joined to the wire it started from', net(r3, 1) === net(r1, 1));
+    await setting(r3, 'R', 12, t);
+    check('2.000 A is above the 2 A range: OL, like a real meter', reading(a) === 'OL', reading(a));
+    await setting(a, 'range', '10A', t);
+    check('on the 10 A range it shows 2.00 A', reading(a) === '2.00 A', reading(a));
+  });
+
+  await scenario('Switch and lamp (mouse): tapping the switch opens and closes it', async () => {
+    await fresh();
+    const c = await place('battery', 0, -6);
+    const s = await place('switch', 6, -6);
+    const l = await place('lamp', 4, 2);
+    const a = await place('ammeter', 12, -2);
+    await wire(c, 1, s, 0); await wire(s, 1, a, 0); await wire(a, 1, l, 1); await wire(l, 0, c, 0);
+    check('switch closed: 0.500 A (6 V, 12 Ω)', reading(a) === '0.500 A', reading(a));
+    await tap(centre(s));
+    check('tap opens the switch: 0.000 A', comp(s).params.closed === false && reading(a) === '0.000 A', reading(a));
+    check('the check says the circuit is open', diag('open-circuit'));
+    await tap(centre(s));
+    check('tap closes it again', comp(s).params.closed === true && reading(a) === '0.500 A');
+    // A wire straight across the battery: a short circuit.
+    await wire(c, 0, c, 1);
+    check('short circuit is reported', diag('short-ideal'));
+    check('the ammeter shows OL', reading(a) === 'OL' || reading(a) === '0.000 A', reading(a));
+    check('the short-circuit wire is drawn as a danger', !!D.querySelector('.ck-wire.ck-inf'));
+    await key('z', { ctrl: true });
+    check('undo removes the short', !diag('short-ideal') && reading(a) === '0.500 A');
+  });
+
+  await scenario('Joining and drawing in other ways (mouse)', async () => {
+    await fresh();
+    const r1 = await place('resistor', 0, 0);
+    const r2 = await place('resistor', 4, 0); // its terminal 0 lands on r1's terminal 1
+    check('dropping a terminal onto a terminal joins them', net(r1, 1) === net(r2, 0));
+    // Tap-tap wire with a bend.
+    await tap(term(r2, 1));
+    check('tapping a terminal starts a wire', App.mode === 'wire');
+    await tap(at(6, 6));
+    await tap(term(r1, 0));
+    check('tapping a terminal finishes it', App.mode === 'select' && net(r1, 0) === net(r2, 1));
+    const w = App.store.drawing.wires.find((x) => (x.via || []).length);
+    check('the tapped bend was kept', !!w);
+    // Escape cancels a wire.
+    const n0 = App.store.drawing.wires.length;
+    await tap(term(r1, 0)); await key('Escape');
+    check('Esc cancels a wire', App.mode === 'select' && App.store.drawing.wires.length === n0);
+    // Tap a toolbox button, then the grid.
+    await tap((() => { const b = App.toolButton('lamp').getBoundingClientRect(); return [b.left + 20, b.top + 20]; })(), { target: App.toolButton('lamp') });
+    const id = ++pid; const b = App.toolButton('lamp'); b.dispatchEvent(new W.PointerEvent('pointerdown', { bubbles: true, clientX: 0, clientY: 0, pointerId: id, pointerType: 'mouse', button: 0 }));
+    W.dispatchEvent(new W.PointerEvent('pointerup', { bubbles: true, clientX: 0, clientY: 0, pointerId: id, pointerType: 'mouse', button: 0 }));
+    await tick();
+    check('tapping a toolbox button starts placing', App.mode === 'place');
+    await tap(at(0, 8));
+    check('tapping the grid places it', App.store.drawing.components.some((c) => c.type === 'lamp' && c.x === 0 && c.y === 8));
+    // Box selection with Shift (Esc first, since Shift adds to what is already selected).
+    await key('Escape');
+    await drag(at(-4, -3), at(8, 3), { shift: true });
+    check('Shift-drag selects a box', App.selection.components.length === 2, JSON.stringify(App.selection));
+  });
+
+  const passed = results.filter((r) => r.ok).length;
+  const s = document.getElementById('summary');
+  s.textContent = `${passed} of ${results.length} interface checks passed.`;
+  s.className = passed === results.length ? 'ok' : 'bad';
+  window.uiTestResults = { passed, total: results.length, failures: results.filter((r) => !r.ok) };
+})();
+</script>
+</body>
+</html>

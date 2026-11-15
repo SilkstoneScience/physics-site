@@ -1,6 +1,6 @@
 # Circuit builder: plan and decisions
 
-Status: **plan approved by the teacher (15 November 2026). Stages 1–2 (this plan; the engine and its tests) done; stage 3 (the Free Build editor) next.**
+Status: **plan approved by the teacher (15 November 2026). Stages 1–3 built (the engine, its tests and the Free Build editor); stage 3 is waiting for the teacher's check in the preview. The page is `noindex` and not linked from anywhere until stage 6.**
 
 A circuit diagram editor with two modes, **Free Build** and **Challenge Mode**, that simulates DC circuits accurately: series and parallel networks, internal resistance, meters and variable resistors.
 
@@ -24,27 +24,27 @@ A circuit diagram editor with two modes, **Free Build** and **Challenge Mode**, 
 | Show the working | Yes, step by step wherever series and parallel rules are enough. |
 | Free Build extras | Component toolbox; drag and drop; grid workspace; rotation; terminals; wire drawing; selection and editing; deletion and reset; circuit validation; live simulation; undo/redo; saving in the browser; share links; board mode. SVG export later. Guided lab-report investigation later. |
 | Architecture | The editor talks only to the physics engine and never calculates anything electrical itself. Reliable connections come before visual decoration. |
-| Lamp, thermistor and LDR curves | Fitted models (section 5); each curve is shown to the teacher before the editor uses it. |
+| Lamp, thermistor and LDR curves | Fitted models (section 5), shown to the teacher as graphs and **approved on 15 November 2026**. |
 | Interface tests | Run through the real interface in the preview from stage 3. **Playwright** (a browser-automation tool, run only on GitHub) is added after stage 3, once the editor's design has settled. |
 | Technology | Plain JavaScript, no libraries, no build step, nothing outside the site. |
 
 ## 2. Files
 
 ```
-experimental/circuit-builder.html      the page (Free Build and Challenge Mode tabs)        stage 3
+experimental/circuit-builder.html      the page (Free Build; Challenge Mode added in stage 5) done (noindex)
 experimental/circuits/challenges.json  challenge data (permanent ids, e.g. CK-B5-01)       stage 5
-css/circuits.css                       editor styles                                        stage 3
+css/circuits.css                       editor styles                                        done
 js/circuits/components.js   component catalogue: terminals, settings, ranges, meter display   done
 js/circuits/netlist.js      works out the connections from the drawing                        done
 js/circuits/engine.js       the physics                                                       done
 js/circuits/steps.js        "show the working" for series–parallel circuits                    done
-js/circuits/model.js        drawing operations (add, move, rotate, connect, delete), undo       stage 3
-js/circuits/render.js       draws the drawing and the engine's results as SVG                  stage 3
-js/circuits/editor.js       toolbox, drag and drop, wires, selection, keyboard, touch          stage 3
+js/circuits/model.js        drawing operations (add, move, rotate, connect, delete), undo       done
+js/circuits/render.js       draws the drawing and the engine's results as SVG                  done
+js/circuits/editor.js       toolbox, drag and drop, wires, selection, keyboard, touch          done
 js/circuits/challenges.js   Challenge Mode                                                     stage 5
-js/circuits/app.js          page start-up, saving, share links, board mode                     stage 3–4
+js/circuits/app.js          page start-up (example circuit); saving, share links, board mode   start-up done; rest stage 4
 tools/circuits/test.mjs     automatic tests (run by tools/check.mjs)                           done
-tools/circuits/ui-test.html tests through the real interface (not published)                   stage 3
+tools/circuits/ui-test.html tests through the real interface (not published)                   done (46 checks)
 ```
 
 The physics files work in the browser and in Node (like `js/numeric.js`), so the checker tests the exact code students run. In the browser they hang off `window.Circuits` (`Circuits.components`, `.netlist`, `.engine`, `.steps`); load them in that order.
@@ -126,6 +126,13 @@ The netlist also keeps the wires themselves (between points), so the engine can 
 
 One direction only: student action → change to the drawing (an undoable command) → netlist → engine → render. SVG workspace on a grid with data-booklet symbols matching the B.5 page; pointer events (mouse, pen and touch) for dragging, since HTML drag-and-drop doesn't work on tablets; touch targets of at least 44 px; snap highlighting; zoom and pan; rotation (R key, button, double-tap); wire drawing from terminals with bends or automatic L-shaped routes; dragging wire ends and segments; an inspector panel for settings (sliders for variable parts, meter ranges and ideal/real); delete, clear (asks first), undo/redo; a status panel listing the engine's diagnostics; live re-solving (at most once per frame while a slider moves); display tick boxes; saving (every storage call wrapped, so private browsing still works), share links (circuit in the page address) and board mode; keyboard shortcuts and a text summary of the circuit for screen readers.
 
+**As built (stage 3):**
+- Drag on a terminal draws a wire; tap a terminal for tap-by-tap drawing (tap the grid for bends, the same point twice for a loose end, Esc cancels). Dragging from the middle of a wire branches from it (a junction is made). Drag on empty space pans; Shift-drag selects a box; Ctrl + wheel or two fingers zoom.
+- A component dropped with a terminal exactly on another terminal, a junction or a loose wire end is joined to it by an explicit wire. **Dropping onto the middle of a wire does not join** (the interface tests showed it joined things by accident when tidying a circuit).
+- Wires leave and reach terminals along the way the terminal faces, so they never double back over their own component.
+- Every drawing loaded from outside (the example, and later saved circuits and share links) is completed and checked first (`model.normalise`).
+- To preview from a worktree when the preview servers are all in use, the main folder's server also serves `/.claude/worktrees/<name>/…`.
+
 ## 7. Challenge Mode (stage 5)
 
 Challenges live in `experimental/circuits/challenges.json` with permanent ids (`CK-B5-01`), fields as in the approved plan: `type` (target / measure / predict), `level`, `sections`, `title`, `brief`, `start` drawing with `locked` parts, a limited `toolbox`, `checks` (values from the engine within a tolerance; connection checks such as "a voltmeter across L1" or "an ammeter in series with R1" from the netlist), `hints`, a `model` answer and an `explanation`. "Measure it" hides a cell's emf and r; "predict then build" locks the switch until predictions are typed (marked by `js/numeric.js`). Progress is ticked per id in the browser. Every model answer must pass its checks and a deliberately wrong answer must fail (checked by `tools/check.mjs`).
@@ -148,7 +155,7 @@ Challenges live in `experimental/circuits/challenges.json` with permanent ids (`
 
 1. Save this plan. **Done.**
 2. Engine and netlist with full Node tests. **Done** (report to the teacher).
-3. Free Build editor with interface tests; teacher checks in the preview.
+3. Free Build editor with interface tests; teacher checks in the preview. **Built; waiting for the teacher's check.**
 4. Show the working, share links, board mode, saving.
 5. Challenge Mode and about 10 challenges; independent review; teacher's check. Playwright on GitHub.
 6. Website links, then commit and push after the teacher has seen what's going up.

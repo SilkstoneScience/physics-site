@@ -251,10 +251,13 @@
       const J = Array.from({ length: m }, () => new Array(m).fill(0));
       let scale = 0;
       for (const e of between) {
-        const { I, g } = elementCurrent(e, potentialOf(phi, e.a, s) - potentialOf(phi, e.b, s), s);
+        const v = potentialOf(phi, e.a, s) - potentialOf(phi, e.b, s);
+        const { I, g } = elementCurrent(e, v, s);
         const ia = at(cl[e.a]);
         const ib = at(cl[e.b]);
-        scale += Math.abs(I);
+        // The size of the terms in the equations (not just the net current, which can be zero at the solution,
+        // e.g. a real cell with nothing connected: G V and the cell's own term cancel).
+        scale += Math.abs(I) + Math.abs(g * v) + (e.S ? Math.abs(e.S * s) : 0);
         if (ia >= 0) { F[ia] += I; J[ia][ia] += g; }
         if (ib >= 0) { F[ib] -= I; J[ib][ib] += g; }
         if (ia >= 0 && ib >= 0) { J[ia][ib] -= g; J[ib][ia] -= g; }
@@ -262,30 +265,31 @@
       return { F, J, scale };
     }
     let iterations = 0;
+    // Newton's method with a line search. It stops only when "current in = current out" holds to rounding error:
+    // at 1e-14 of the size of the terms, or when no step can improve it any more and it is within 1e-10 of them.
+    const FLOOR = 1e-10;
     function newton(s, start) {
       let phi = start.slice();
       let cur = assemble(phi, s);
       for (let iter = 0; iter < 100; iter++) {
         iterations++;
-        if (maxAbs(cur.F) <= 1e-13 * cur.scale || cur.scale === 0) return phi;
+        const norm0 = maxAbs(cur.F);
+        if (cur.scale === 0 || norm0 <= 1e-14 * cur.scale) return phi;
         const d = gauss(cur.J, cur.F.map((x) => -x));
         if (!d) return null;
         let lambda = 1;
         let accepted = null;
-        const norm0 = maxAbs(cur.F);
         for (let k = 0; k < 40; k++) {
           const cand = phi.map((x, i) => x + lambda * d[i]);
           const next = assemble(cand, s);
-          if (maxAbs(next.F) < norm0 || maxAbs(next.F) <= 1e-13 * next.scale) { accepted = { cand, next }; break; }
+          if (maxAbs(next.F) < norm0) { accepted = { cand, next }; break; }
           lambda /= 2;
         }
-        if (!accepted) return norm0 <= 1e-9 * cur.scale ? phi : null; // at the round-off floor: done
-        const step = lambda * maxAbs(d);
+        if (!accepted) return norm0 <= FLOOR * cur.scale ? phi : null; // no step helps: at the rounding floor, or stuck
         phi = accepted.cand;
         cur = accepted.next;
-        if (step <= 1e-14 * (1 + maxAbs(phi)) && maxAbs(cur.F) <= 1e-9 * cur.scale) return phi;
       }
-      return maxAbs(cur.F) <= 1e-9 * cur.scale ? phi : null;
+      return maxAbs(cur.F) <= FLOOR * cur.scale ? phi : null;
     }
     let phi = m ? newton(1, new Array(m).fill(0)) : [];
     if (!phi && conductive.some((e) => e.kind === 'lamp')) {
@@ -308,7 +312,12 @@
     for (let x = 0; x < n; x++) V[x] -= zeroAt.get(isl.find(cl[x])) || 0;
     const I = new Map();
     const Vel = (e) => V[e.a] - V[e.b];
-    for (const e of conductive) I.set(e.id, elementCurrent(e, Vel(e), 1).I);
+    for (const e of conductive) {
+      // A current that is only rounding left over from two equal terms cancelling (G V = −S) is exactly zero.
+      let i = elementCurrent(e, Vel(e), 1).I;
+      if (e.kind === 'linear' && Math.abs(i) <= 1e-12 * (Math.abs(e.G * Vel(e)) + Math.abs(e.S))) i = 0;
+      I.set(e.id, i);
+    }
     for (const e of els) if (e.kind === 'open') I.set(e.id, 0);
 
     // Currents in ideal ammeters, 0 Ω parts and ideal cells, between wire groups.
