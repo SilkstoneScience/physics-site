@@ -35,7 +35,9 @@ for (const name of playwright ? names : []) {
     const page = await browser.newPage({ viewport: { width: 1400, height: 1000 } });
     const pageErrors = [];
     page.on('pageerror', (e) => pageErrors.push(e.message));
-    page.on('console', (m) => { if (m.type() === 'error') pageErrors.push(m.text()); });
+    // Console errors count only when they come from the site's own files: other sites' scripts (MathJax fetching
+    // its speech data from the CDN in WebKit) are not the builder's problem. Uncaught errors always count.
+    page.on('console', (m) => { if (m.type() === 'error' && (m.location().url || '').startsWith(base)) pageErrors.push(m.text()); });
     const response = await page.goto(`${base}/tools/circuits/ui-test.html`, { timeout: 30000 });
     if (!response || !response.ok()) { problem(`${name}: test page`, `could not open it (HTTP ${response ? response.status() : 'no response'})`); continue; }
     await page.waitForFunction(() => window.uiTestResults, null, { timeout: 240000 });
