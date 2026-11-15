@@ -145,10 +145,12 @@ The AA guide's text is now in the reference cache as `Maths AA Guide.txt` (extra
 
 ### Still to do after audit 2026-11d
 - **New Paper 1A questions for slide quick checks:** done 15 November 2026. D1-023 (potential gradient, HL), D1-024 (gravitational potential energy, HL), D2-020 (forces between charges), D2-021 (conservation of charge), E1-019 (identifying elements from spectra), E3-025 (constancy of binding energy per nucleon, HL), independently reviewed and listed as `checks` in `teachers/slides/d1.json`, `d2.json`, `e1.json` and `e3.json`.
-- **D.4 revision sheet, video 3** (Veritasium, "World's First Electric Generator"): the teacher to watch it; the note probably needs rewording (a magnet in a copper pipe and an LED, not a meter).
+- **D.4 revision sheet, video 3** (Veritasium, "World's First Electric Generator"): done 15 November 2026. The note was reworded from the video's transcript (a magnet slowed by a copper pipe and an LED, not a meter), at the teacher's request, without the teacher watching it.
 
 ## Audit 2026-11e (15 November 2026): the new and edited Explanation builder items
 
 **Covered:** the 25 new and 30 edited items in `explain/items.json` (all 56 now recorded). Same two-pass method, one reviewer per theme. **Result:** no physics errors. Clear slips fixed: EX-A1-03 (the "motions are independent" card may come first, so it is now step 1), EX-C3-01 (the loudspeakers emit the note "in phase").
 
 **Decisions (keep following these):** EX-A5-01 says "lifetime" throughout, as the A.5 page does; EX-B2-01 card 3 carries the "more gas absorbs and re-emits more infrared" link; EX-B1-02 states the equal-mass assumption; EX-D4-01 card 4 includes the counter-case (if the current attracted the magnet, energy would appear from nothing).
+
+**Paper 2 (15 November 2026, same audit):** B4-P02 and D3-P02 (new) and B5-P01, C4-P01 and LQ-H02 (new show-that values) audited with their diagrams: no physics errors. Fixed with the teacher's agreement and approved again the same day: LQ-H02 (b) efficiency shown as 0.735; B5-P01 (e) alarm threshold given as "its value at 0 °C" (the new 6.13 V is above the old 6.1 V threshold); D3-P02 (d) feedback covers both routes to 2.56 × 10⁻³ T. The unused `questions/diagrams/p2-b4-cycle.svg` (only the withdrawn B4-P01 used it) was deleted.
