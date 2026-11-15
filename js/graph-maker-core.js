@@ -184,16 +184,18 @@
     parts.sort((a, b) => (b[1] > 0) - (a[1] > 0));
     return parts.map(([b, p]) => (p === 1 ? b : b + sup(p))).join(' ');
   }
-  // The unit of a gradient (y unit ÷ x unit), e.g. ("s^2", "m") -> "s² m⁻¹"
-  function divideUnits(yu, xu) {
+  // The unit of a gradient (y unit ÷ x unit), e.g. ("s^2", "m") -> "s² m⁻¹". With n: y unit ÷ (x unit)ⁿ.
+  function divideUnits(yu, xu, n = 1) {
     const a = readUnit(yu); const b = readUnit(xu);
     if (!yu && !xu) return '';
+    if (!xu || !n) return pretty(yu);
     if (a && b) {
       const out = { ...a };
-      for (const [k, p] of Object.entries(b)) out[k] = (out[k] || 0) - p;
+      for (const [k, p] of Object.entries(b)) out[k] = (out[k] || 0) - p * n;
       return writeUnit(out);
     }
-    return `${pretty(yu || '1')} / ${/\s/.test(xu) ? '(' + pretty(xu) + ')' : pretty(xu)}`;
+    const xs = /\s/.test(xu) || n !== 1 ? '(' + pretty(xu) + ')' + (n !== 1 ? sup(n) : '') : pretty(xu);
+    return `${pretty(yu || '1')} / ${xs}`;
   }
 
   // ----- Formulas -----

@@ -52,6 +52,7 @@
               <button type="button" class="button secondary" data-act="add-row">Add a row</button>
               <button type="button" class="button secondary" data-act="add-col">Add a column</button>
             </div>
+            <div class="gm-sets"></div>
             <div class="table-wrap gm-table-wrap"></div>
             <div class="gm-notes" aria-live="polite"></div>
           </section>
@@ -65,7 +66,33 @@
         <div class="gm-side">
           <section class="gm-part" aria-labelledby="graph">
             <h2 id="graph">3. Your graph</h2>
-            <p class="gm-soon">Coming in stage 2: the graph, fits and data sets.</p>
+            <div class="gm-graph-controls">
+              <label class="gm-wide">Title <input data-g="title" placeholder="e.g. Figure 1: Period squared against length" autocomplete="off"></label>
+              <fieldset><legend>Vertical axis (<em>y</em>)</legend>
+                <label>Column <select data-g="y"></select></label>
+                <label>Label <input data-g="yLabel" autocomplete="off"></label>
+              </fieldset>
+              <fieldset><legend>Horizontal axis (<em>x</em>)</legend>
+                <label>Column <select data-g="x"></select></label>
+                <label>Label <input data-g="xLabel" autocomplete="off"></label>
+              </fieldset>
+              <label>Fit <select data-g="fit">
+                <option value="none">No fit</option>
+                <option value="linear">Straight line: y = mx + c</option>
+                <option value="quadratic">Quadratic: y = ax² + bx + c</option>
+                <option value="power">Power: y = axⁿ</option>
+                <option value="exponential">Exponential: y = ae^(bx)</option>
+              </select></label>
+              <div class="gm-checks">
+                <label class="vlab-check"><input type="checkbox" data-g="grid"> Gridlines</label>
+                <label class="vlab-check"><input type="checkbox" data-g="zero"> Start the axes at zero</label>
+              </div>
+            </div>
+            <div class="gm-canvas-box">
+              <canvas class="gm-canvas" role="img" aria-label="The graph of your data. Its fit is described below it."></canvas>
+            </div>
+            <p class="gm-small">Tap or click a point to leave it out of the fit (it turns hollow); tap it again to put it back. Or untick its row in the table.</p>
+            <div class="gm-results" aria-live="polite"></div>
           </section>
 
           <section class="gm-part" aria-labelledby="save">

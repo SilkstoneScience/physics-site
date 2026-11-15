@@ -68,6 +68,9 @@ export function runTests() {
   eq('divideUnits(V, A)', G.divideUnits('V', 'A'), 'V A⁻¹');
   eq('divideUnits(m, m)', G.divideUnits('m', 'm'), '');
   eq('divideUnits(N, m s^-1)', G.divideUnits('N', 'm s^-1'), 'N s m⁻¹');
+  eq('divideUnits(m, s, 2)', G.divideUnits('m', 's', 2), 'm s⁻²');
+  eq('divideUnits(J, , 1)', G.divideUnits('J', ''), 'J');
+  eq('divideUnits(, s)', G.divideUnits('', 's'), 's⁻¹');
 
   // Formulas: values
   const syms = ['L', 't', 'T', 'T2', 'V', 'θ', 'tm'];
