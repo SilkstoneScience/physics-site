@@ -23,6 +23,12 @@
     { marker: 'down', dash: [16, 6] },
   ];
 
+  // The student's steepest and shallowest lines: S.graph.lines[setId] = { steep: [[x1, y1], [x2, y2]], shallow: … },
+  // in the graph's own units. Drawn thin and dashed in the set's colour.
+  const LINE_DASH = [6, 4];
+  const okSeg = (seg) => Array.isArray(seg) && seg.length === 2 && seg.every((e) => Array.isArray(e) && isFinite(e[0]) && isFinite(e[1])) && Math.abs(seg[1][0] - seg[0][0]) > 0;
+  const segLine = (seg) => { const m = (seg[1][1] - seg[0][1]) / (seg[1][0] - seg[0][0]); return { m, c: seg[0][1] - m * seg[0][0] }; };
+
   // ----- The state (saved in localStorage and in the save file) -----
   // Column kinds: 'raw' (typed values), 'trials' (repeated readings: cells are lists, `trials` long),
   // 'mean' (the mean of the trials column `of`, stored in each row's `mean` only when the student presses the button),
@@ -926,7 +932,7 @@
   function screenPalette() {
     const cs = getComputedStyle(root);
     const v = (n) => cs.getPropertyValue(n).trim();
-    return { bg: v('--surface'), ink: v('--text'), muted: v('--muted'), grid: v('--gm-grid'), minor: v('--gm-grid-minor'), sets: [1, 2, 3, 4, 5].map((k) => v(`--gm-set${k}`)) };
+    return { bg: v('--surface'), ink: v('--text'), muted: v('--muted'), bad: v('--bad'), grid: v('--gm-grid'), minor: v('--gm-grid-minor'), sets: [1, 2, 3, 4, 5].map((k) => v(`--gm-set${k}`)) };
   }
 
   // A label such as "length L / m" in pieces: the symbol in italics and powers as superscripts ("s^2" -> "s²").
@@ -1004,21 +1010,34 @@
     let top = 10;
     g.fillStyle = pal.ink;
     if (S.title.trim()) { drawRuns(g, [{ t: C.pretty(S.title.trim()) }], W / 2, top + fs + 4, fs + 3, 'center', true); top += fs + 14; }
-    const legend = shown.length > 1;
-    if (legend) {
+    // the steepest and shallowest lines to draw: shown when the student wants them, or while drawing
+    const drawnLines = shown.flatMap((s) => {
+      if (S.graph.fit !== 'linear') return [];
+      const L = S.graph.lines[s.set.id] || {};
+      const on = S.graph.showLines || (o.drawing && o.drawing.set === s.i);
+      return on ? ['steep', 'shallow'].filter((k) => okSeg(L[k])).map((k) => ({ s, kind: k, seg: L[k] })) : [];
+    });
+    const legendItems = (shown.length > 1 ? shown.map((s) => ({ s, name: s.name })) : [])
+      .concat(drawnLines.length ? [{ lines: true, name: 'steepest and shallowest lines' }] : []);
+    if (legendItems.length) {
       g.font = font(fs);
-      const items = shown.map((s) => ({ s, w: 30 + g.measureText(s.name).width + 18 }));
+      const items = legendItems.map((it) => ({ ...it, w: 30 + g.measureText(it.name).width + 18 }));
       let line = []; const lines = []; let lw = 0;
       for (const it of items) { if (lw + it.w > W - 20 && line.length) { lines.push({ line, lw }); line = []; lw = 0; } line.push(it); lw += it.w; }
       lines.push({ line, lw });
       for (const L of lines) {
         let x = (W - L.lw) / 2; const y = top + fs;
         for (const it of L.line) {
-          const st = STYLES[it.s.i]; const colour = pal.sets[it.s.i];
-          g.strokeStyle = colour; g.lineWidth = 1.8; g.setLineDash(st.dash);
-          g.beginPath(); g.moveTo(x, y - fs * 0.35); g.lineTo(x + 24, y - fs * 0.35); g.stroke(); g.setLineDash([]);
-          marker(g, st.marker, x + 12, y - fs * 0.35, 4, true, colour, pal.bg);
-          g.fillStyle = pal.ink; g.font = font(fs); g.textAlign = 'left'; g.fillText(it.s.name, x + 30, y);
+          if (it.lines) { // thin dashed lines, as on the graph
+            g.strokeStyle = pal.ink; g.lineWidth = 1.3; g.setLineDash(LINE_DASH);
+            g.beginPath(); g.moveTo(x, y - fs * 0.35); g.lineTo(x + 24, y - fs * 0.35); g.stroke(); g.setLineDash([]);
+          } else {
+            const st = STYLES[it.s.i]; const colour = pal.sets[it.s.i];
+            g.strokeStyle = colour; g.lineWidth = 1.8; g.setLineDash(st.dash);
+            g.beginPath(); g.moveTo(x, y - fs * 0.35); g.lineTo(x + 24, y - fs * 0.35); g.stroke(); g.setLineDash([]);
+            marker(g, st.marker, x + 12, y - fs * 0.35, 4, true, colour, pal.bg);
+          }
+          g.fillStyle = pal.ink; g.font = font(fs); g.textAlign = 'left'; g.fillText(it.name, x + 30, y);
           x += it.w;
         }
         top += fs + 8;
@@ -1096,6 +1115,12 @@
       }
       g.stroke(); g.setLineDash([]); g.lineCap = 'butt';
     }
+    // the student's steepest and shallowest lines: thin and dashed, across the whole graph so the intercept shows
+    for (const d of drawnLines) {
+      const { m, c } = segLine(d.seg);
+      g.strokeStyle = pal.sets[d.s.i]; g.lineWidth = 1.4; g.setLineDash(LINE_DASH);
+      g.beginPath(); g.moveTo(X(x0), Y(m * x0 + c)); g.lineTo(X(x1), Y(m * x1 + c)); g.stroke(); g.setLineDash([]);
+    }
     const points = [];
     const cap = 3.5;
     const rad = S.graph.small ? 2.6 : 4; // marker size ("Smaller points")
@@ -1124,8 +1149,27 @@
         points.push({ set: s.i, row: p.row.id, n: p.n, x, y });
       }
     }
+    // on screen only: rings round the points a drawn line misses ("Check my lines"), and the handles of the line being drawn
+    if (o.rings) {
+      g.strokeStyle = pal.bad; g.lineWidth = 2;
+      for (const p of points) if (o.rings.has(p.row)) { g.beginPath(); g.arc(p.x, p.y, rad + 6, 0, 2 * Math.PI); g.stroke(); }
+    }
+    if (o.drawing && o.drawing.kind) {
+      const s = shown.find((x) => x.i === o.drawing.set);
+      const seg = s && (S.graph.lines[s.set.id] || {})[o.drawing.kind];
+      if (okSeg(seg)) {
+        // a ring with a dot in the middle, so a handle never looks like a hollow (left-out) point
+        seg.forEach((e, k) => {
+          g.beginPath(); g.arc(X(e[0]), Y(e[1]), k === o.drawing.end ? 8 : 7, 0, 2 * Math.PI);
+          g.fillStyle = pal.bg; g.globalAlpha = 0.75; g.fill(); g.globalAlpha = 1;
+          g.strokeStyle = pal.sets[s.i]; g.lineWidth = k === o.drawing.end ? 3 : 2; g.stroke();
+          g.beginPath(); g.arc(X(e[0]), Y(e[1]), 2.2, 0, 2 * Math.PI); g.fillStyle = pal.sets[s.i]; g.fill();
+        });
+      }
+    }
     g.restore();
-    return { points, hidden, box: { L, T, pw, ph }, range: { x0, x1, y0, y1 } };
+    const toX = (px) => x0 + (px - L) / pw * (x1 - x0); const toY = (py) => y0 + (T + ph - py) / ph * (y1 - y0);
+    return { points, hidden, box: { L, T, pw, ph }, range: { x0, x1, y0, y1 }, X, Y, toX, toY };
   }
 
   // The screen graph: sharp on high-resolution screens, redrawn after every change (once per frame at most).
@@ -1143,8 +1187,12 @@
     if (canvas.width !== Math.round(W * d) || canvas.height !== Math.round(H * d)) { canvas.width = Math.round(W * d); canvas.height = Math.round(H * d); }
     canvas.style.height = H + 'px';
     const g = canvas.getContext('2d'); g.setTransform(d, 0, 0, d, 0, 0);
-    geo = drawGraph(g, W, H, M, screenPalette(), { font: W < 420 ? 11 : 12 });
+    const fb = checking ? linesFeedback(M) : null;
+    geo = drawGraph(g, W, H, M, screenPalette(), { font: W < 420 ? 11 : 12, drawing: draw.kind ? { set: linesSetIndex(), kind: draw.kind, end: draw.end } : null, rings: fb && fb.rings });
+    canvas.tabIndex = draw.kind ? 0 : -1;
+    canvas.style.touchAction = draw.kind ? 'none' : '';
     renderResults(M, geo);
+    renderLines(M, fb);
   }
 
   // The controls above the graph
@@ -1182,6 +1230,7 @@
     return best;
   }
   canvas.addEventListener('click', (e) => {
+    if (draw.kind) return; // drawing a line, not choosing points
     const p = pointAt(e);
     if (!p) return;
     const s = S.sets[p.set]; const r = s.rows.find((x) => x.id === p.row);
@@ -1191,7 +1240,201 @@
     say(`${S.sets.length > 1 ? s.name + ', row' : 'Row'} ${p.n}: ${r.use ? 'back in the fit' : 'left out of the fit (hollow point)'}.`);
     changed();
   });
-  canvas.addEventListener('pointermove', (e) => { canvas.style.cursor = pointAt(e) ? 'pointer' : ''; });
+  canvas.addEventListener('pointermove', (e) => { if (!draw.kind) canvas.style.cursor = pointAt(e) ? 'pointer' : ''; });
+
+  // ----- The steepest and shallowest lines (stage 4) -----
+  // The student draws them by eye: press a button, then press and drag across the graph; drag either end to adjust.
+  // Keyboard: arrow keys move the chosen end (Shift: further), Enter swaps ends (or starts a line), Escape stops drawing.
+  const draw = { kind: null, end: 1, drag: null };
+  let checking = false; // "Check my lines" feedback is showing
+  let linesSet = 0;
+  const linesPanel = $('.gm-lines');
+  const linesSetIndex = () => Math.min(linesSet, S.sets.length - 1);
+  const linesOf = (i) => { const id = S.sets[i].id; S.graph.lines[id] = S.graph.lines[id] || {}; return S.graph.lines[id]; };
+  const KIND = { steep: 'steepest', shallow: 'shallowest' };
+  function stopDrawing() { draw.kind = null; draw.drag = null; canvas.style.cursor = ''; scheduleGraph(); }
+  // Gradient and intercept uncertainties from a set's two lines (Skills page, section 12): half the differences.
+  function gradUnc(setObj) {
+    const L = S.graph.lines[setObj.id] || {};
+    if (!okSeg(L.steep) || !okSeg(L.shallow)) return null;
+    const a = segLine(L.steep); const b = segLine(L.shallow);
+    const hi = a.m >= b.m ? a : b; const lo = a.m >= b.m ? b : a;
+    return { steep: a, shallow: b, swapped: a.m < b.m, dm: (hi.m - lo.m) / 2, dc: Math.abs(hi.c - lo.c) / 2, hi, lo };
+  }
+  function eventData(e) {
+    const r = canvas.getBoundingClientRect();
+    const px = Math.max(geo.box.L, Math.min(geo.box.L + geo.box.pw, e.clientX - r.left));
+    const py = Math.max(geo.box.T, Math.min(geo.box.T + geo.box.ph, e.clientY - r.top));
+    return [geo.toX(px), geo.toY(py)];
+  }
+  canvas.addEventListener('pointerdown', (e) => {
+    if (!draw.kind || e.button || !geo.toX) return;
+    e.preventDefault();
+    try { canvas.setPointerCapture(e.pointerId); } catch (err) { /* older browsers */ }
+    const L = linesOf(linesSetIndex());
+    const seg = L[draw.kind];
+    const r = canvas.getBoundingClientRect(); const x = e.clientX - r.left; const y = e.clientY - r.top;
+    const near = okSeg(seg) ? seg.findIndex((p) => Math.hypot(geo.X(p[0]) - x, geo.Y(p[1]) - y) <= (e.pointerType === 'touch' ? 22 : 14)) : -1;
+    if (near >= 0) { draw.end = near; draw.drag = { fresh: false }; }
+    else { const p = eventData(e); L[draw.kind] = [p, [p[0], p[1]]]; draw.end = 1; draw.drag = { fresh: true }; }
+    scheduleGraph();
+  });
+  canvas.addEventListener('pointermove', (e) => {
+    if (!draw.kind || !draw.drag) return;
+    linesOf(linesSetIndex())[draw.kind][draw.end] = eventData(e);
+    scheduleGraph();
+  });
+  const endDrag = () => {
+    if (!draw.drag) return;
+    draw.drag = null;
+    const L = linesOf(linesSetIndex());
+    const seg = L[draw.kind];
+    if (seg && Math.hypot(geo.X(seg[0][0]) - geo.X(seg[1][0]), geo.Y(seg[0][1]) - geo.Y(seg[1][1])) < 8) L[draw.kind] = null; // a tap, not a drag
+    S.graph.showLines = true;
+    changed();
+  };
+  canvas.addEventListener('pointerup', endDrag);
+  canvas.addEventListener('pointercancel', endDrag);
+  canvas.addEventListener('keydown', (e) => {
+    if (!draw.kind) return;
+    if (e.key === 'Escape') { e.preventDefault(); stopDrawing(); renderLines(model(), null, true); return; }
+    const L = linesOf(linesSetIndex());
+    const moves = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, 1], ArrowDown: [0, -1] };
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (okSeg(L[draw.kind])) draw.end = 1 - draw.end;
+      else { // start from the line of best fit across the points, ready to tilt
+        const s = model().sets[linesSetIndex()];
+        const xs = s.used.map((p) => p.x);
+        if (!s.fit || !s.fit.ok || xs.length < 2) return;
+        const a = Math.min(...xs); const b = Math.max(...xs);
+        L[draw.kind] = [[a, s.fit.f(a)], [b, s.fit.f(b)]]; draw.end = 1; S.graph.showLines = true;
+      }
+      changed();
+    } else if (moves[e.key] && okSeg(L[draw.kind])) {
+      e.preventDefault();
+      const k = e.shiftKey ? 10 : 1; const R = geo.range;
+      const p = L[draw.kind][draw.end];
+      p[0] = Math.max(R.x0, Math.min(R.x1, p[0] + moves[e.key][0] * k * (R.x1 - R.x0) / 200));
+      p[1] = Math.max(R.y0, Math.min(R.y1, p[1] + moves[e.key][1] * k * (R.y1 - R.y0) / 200));
+      if (!okSeg(L[draw.kind])) p[0] += (R.x1 - R.x0) / 200;
+      changed();
+    }
+  });
+
+  // The feedback ("Check my lines"): which uncertainty bars each line misses, whether it is tilted the right way,
+  // and whether a steeper (shallower) line would still fit. It never draws the lines for the student.
+  function linesFeedback(M) {
+    const i = linesSetIndex(); const s = M.sets[i];
+    const L = S.graph.lines[S.sets[i].id] || {};
+    const out = { items: [], rings: new Set() };
+    if (!s || !s.fit || !s.fit.ok || s.fit.type !== 'linear') return out;
+    const pts = s.used.filter((p) => p.dy || p.dx);
+    if (!pts.length) { out.items.push({ ok: false, text: 'Your points have no uncertainty bars, so there is nothing to draw these lines through: give the y column an uncertainty in the table first.' }); return out; }
+    // a line drawn by eye may miss a bar by about a pixel
+    const slack = geo.box ? 1.5 * (geo.range.y1 - geo.range.y0) / geo.box.ph : 0;
+    const best = s.fit.params.m;
+    const ext = C.extremes(s.used.map((p) => ({ x: p.x, y: p.y, dx: p.dx, dy: p.dy })));
+    for (const kind of ['steep', 'shallow']) {
+      const name = KIND[kind];
+      if (!okSeg(L[kind])) { out.items.push({ ok: false, text: `Draw your ${name} line: press "Draw ${name} line", then press and drag across the graph.` }); continue; }
+      const { m, c } = segLine(L[kind]);
+      const missed = s.used.filter((p) => !C.throughBar(m, c, p, slack));
+      missed.forEach((p) => out.rings.add(p.row.id));
+      const tilted = kind === 'steep' ? m > best : m < best;
+      let text; let ok = false;
+      const list = (a) => (a.length > 1 ? `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}` : String(a[0]));
+      if (missed.length) text = `Your ${name} line misses the uncertainty bar${missed.length === 1 ? '' : 's'} of point${missed.length === 1 ? '' : 's'} ${list(missed.map((p) => p.n))} (ringed on the graph). It must pass through every bar.`;
+      else if (!tilted) text = `Your ${name} line passes through every bar, but it is not ${kind === 'steep' ? 'steeper' : 'shallower'} than the line of best fit.`;
+      else if (ext) {
+        const target = kind === 'steep' ? ext.hi.m : ext.lo.m;
+        const far = Math.abs(target - best) < 1e-12 * (1 + Math.abs(best)) ? 1 : (m - best) / (target - best);
+        if (far < 0.5) text = `Your ${name} line passes through every bar, but a ${kind === 'steep' ? 'steeper' : 'shallower'} line still would: tilt it further.`;
+        else { ok = true; text = `Your ${name} line is good: it passes through every bar.`; }
+      } else { ok = true; text = `Your ${name} line passes through every bar.`; }
+      out.items.push({ ok, text });
+    }
+    if (!ext) out.items.push({ ok: false, text: 'No single straight line passes through every uncertainty bar here. Are the uncertainties too small, is one point anomalous, or is the relationship not really linear?' });
+    return out;
+  }
+
+  // The panel under the graph: buttons (redrawn only when they change, so a click is never lost) and the readings.
+  let linesKey = '';
+  function renderLines(M, fb, force) {
+    const linear = S.graph.fit === 'linear';
+    if (!linear && draw.kind) draw.kind = null;
+    const i = linesSetIndex();
+    const key = JSON.stringify([linear, S.sets.map((s) => s.name), i, draw.kind, checking, !!S.graph.showLines]);
+    if (key !== linesKey || force) {
+      linesKey = key;
+      linesPanel.innerHTML = !linear ? `<h3>Uncertainty in the gradient</h3><p class="gm-small">Choose the straight-line fit to draw the steepest and shallowest lines. (For a curved relationship, linearise it first in part 2.)</p>`
+        : `<h3>Uncertainty in the gradient and intercept</h3>
+        <p class="gm-help">Draw the <strong>steepest</strong> and the <strong>shallowest</strong> straight lines that still pass through <strong>every</strong> uncertainty bar (hollow points don't count). Press a button, then press and drag across the graph; drag either end to adjust it. The tool reads off their gradients and intercepts.</p>
+        ${S.sets.length > 1 ? `<div class="gm-tabs gm-lines-sets" role="group" aria-label="Lines for which data set">${S.sets.map((s, k) => `<button type="button" class="gm-tab" data-lset="${k}" aria-pressed="${k === i}">${markerSvg(k)} ${esc(s.name)}</button>`).join('')}</div>` : ''}
+        <div class="gm-line-btns">
+          <button type="button" class="button secondary" data-draw="steep" aria-pressed="${draw.kind === 'steep'}">${draw.kind === 'steep' ? 'Drawing the steepest line…' : 'Draw steepest line'}</button>
+          <button type="button" class="button secondary" data-draw="shallow" aria-pressed="${draw.kind === 'shallow'}">${draw.kind === 'shallow' ? 'Drawing the shallowest line…' : 'Draw shallowest line'}</button>
+          ${draw.kind ? '<button type="button" class="button" data-act="lines-done">Done</button>' : ''}
+          <button type="button" class="button secondary" data-act="lines-check" aria-pressed="${checking}">${checking ? 'Hide the feedback' : 'Check my lines'}</button>
+          <button type="button" class="link-btn" data-act="lines-clear">Clear my lines</button>
+        </div>
+        <label class="vlab-check gm-small"><input type="checkbox" data-act="lines-show" ${S.graph.showLines ? 'checked' : ''}> Show these lines on the graph (and in the downloaded picture)</label>
+        <p class="gm-draw-hint" aria-live="polite">${draw.kind ? `Press and drag across the graph to draw your ${KIND[draw.kind]} line, or drag an end of it. Keyboard: click the graph, then arrow keys move an end and Enter swaps ends. Press <em>Done</em> when you have finished.` : ''}</p>
+        <div class="gm-lines-out" aria-live="polite"></div>`;
+    }
+    if (!linear) return;
+    const out = $('.gm-lines-out', linesPanel);
+    if (!out) return;
+    const s = M.sets[i];
+    const xh = C.parseHeading(M.xLabel); const yh = C.parseHeading(M.yLabel);
+    const gu = C.pretty(C.divideUnits(yh.unit, xh.unit)); const yu = C.pretty(yh.unit);
+    const un = (u) => (u ? ' ' + esc(u) : '');
+    const L = S.graph.lines[S.sets[i].id] || {};
+    const rows = ['steep', 'shallow'].map((k) => {
+      if (!okSeg(L[k])) return `<tr><th>${KIND[k][0].toUpperCase() + KIND[k].slice(1)} line</th><td colspan="2" class="gm-small">not drawn yet</td></tr>`;
+      const { m, c } = segLine(L[k]);
+      return `<tr><th>${KIND[k][0].toUpperCase() + KIND[k].slice(1)} line</th><td>gradient ${C.sig(m, 3)}${un(gu)}</td><td>intercept ${C.sig(c, 3)}${un(yu)}</td></tr>`;
+    }).join('');
+    let work = '';
+    const U = gradUnc(S.sets[i]);
+    if (U && s && s.fit && s.fit.ok) {
+      const P = s.fit.params;
+      const pct = Math.abs(P.m) ? `, ${C.sig(100 * U.dm / Math.abs(P.m), 2)}%` : '';
+      const txt = [
+        `Δm = (m_max − m_min) / 2 = (${C.sig(U.hi.m, 3)} − ${C.sig(U.lo.m, 3)}) / 2 = ${C.sig(U.dm, 2)}${un(gu)}`,
+        `Gradient = ${C.pairText(P.m, U.dm, gu)} (best-fit gradient ± Δm${pct})`,
+        `Δc = (c_max − c_min) / 2 = (${C.sig(Math.max(U.hi.c, U.lo.c), 3)} − ${Math.min(U.hi.c, U.lo.c) < 0 ? '(' + C.sig(Math.min(U.hi.c, U.lo.c), 3) + ')' : C.sig(Math.min(U.hi.c, U.lo.c), 3)}) / 2 = ${C.sig(U.dc, 2)}${un(yu)}`,
+        `Intercept = ${C.pairText(P.c, U.dc, yu)}`,
+      ];
+      work = `<div class="gm-work">${txt.map((t) => `<p>${esc(t)}</p>`).join('')}</div>
+        ${U.swapped ? '<p class="gm-warn gm-small">Your "steepest" line is the shallower of the two: the tool has used them the right way round, but check them.</p>' : ''}
+        <p class="gm-small">The gradient and intercept are the line of best fit's, and their uncertainties are half the difference between the steepest and shallowest lines (Physics skills page, section 12). They are rounded to 1 significant figure in the uncertainty.</p>`;
+    }
+    const feedback = fb && fb.items.length ? `<ul class="gm-feedback">${fb.items.map((f) => `<li class="${f.ok ? 'gm-ok' : 'gm-todo'}">${esc(f.text)}</li>`).join('')}</ul>` : '';
+    out.innerHTML = `<table class="gm-mini gm-lines-table"><tbody>${rows}</tbody></table>${work}${feedback}`;
+  }
+  linesPanel.addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.lset !== undefined) { linesSet = Number(b.dataset.lset); draw.kind = null; scheduleGraph(); }
+    else if (b.dataset.draw) {
+      if (draw.kind === b.dataset.draw) { stopDrawing(); return; }
+      draw.kind = b.dataset.draw; draw.end = 1;
+      if (okSeg(linesOf(linesSetIndex())[draw.kind])) say(`Drag an end of your ${KIND[draw.kind]} line to adjust it, or draw it again.`);
+      scheduleGraph();
+      canvas.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    } else if (b.dataset.act === 'lines-done') stopDrawing();
+    else if (b.dataset.act === 'lines-check') { checking = !checking; scheduleGraph(); }
+    else if (b.dataset.act === 'lines-clear') {
+      const L = linesOf(linesSetIndex());
+      if (!okSeg(L.steep) && !okSeg(L.shallow)) return;
+      remember('clearing the lines');
+      L.steep = null; L.shallow = null; changed();
+    }
+  });
+  linesPanel.addEventListener('change', (e) => {
+    if (e.target.dataset.act === 'lines-show') { S.graph.showLines = e.target.checked; changed(); }
+  });
 
   // The fit equations under the graph
   const it = (s) => `<i>${esc(C.pretty(s))}</i>`;
@@ -1217,9 +1460,17 @@
       const P = f.params;
       let eqn = ''; let more = '';
       if (f.type === 'linear') {
-        const m = C.sig(P.m, 3); const c = C.toPlace(P.c, place);
-        eqn = `${it(ys)} = ${m} ${it(xs)}${signed(c)}`;
-        more = `gradient = ${m}${unit(C.divideUnits(yu, xu))}, &nbsp;<i>y</i>-intercept = ${c}${unit(yu)}`;
+        const U = gradUnc(s.set);
+        if (U && U.dm > 0) { // rounded to match the uncertainties from the steepest and shallowest lines
+          const rv = (v, u) => { const r = C.roundPair(v, u, 1); return r.v + (r.exp ? ` × 10${C.sup(r.exp)}` : ''); };
+          const pct = Math.abs(P.m) ? ` (${C.sig(100 * U.dm / Math.abs(P.m), 2)}%)` : '';
+          eqn = `${it(ys)} = ${rv(P.m, U.dm)} ${it(xs)}${signed(U.dc > 0 ? rv(P.c, U.dc) : C.toPlace(P.c, place))}`;
+          more = `gradient = ${esc(C.pairText(P.m, U.dm, C.pretty(C.divideUnits(yu, xu))))}${pct}, &nbsp;<i>y</i>-intercept = ${esc(U.dc > 0 ? C.pairText(P.c, U.dc, C.pretty(yu)) : C.toPlace(P.c, place) + unit(yu))}`;
+        } else {
+          const m = C.sig(P.m, 3); const c = C.toPlace(P.c, place);
+          eqn = `${it(ys)} = ${m} ${it(xs)}${signed(c)}`;
+          more = `gradient = ${m}${unit(C.divideUnits(yu, xu))}, &nbsp;<i>y</i>-intercept = ${c}${unit(yu)}`;
+        }
       } else if (f.type === 'quadratic') {
         eqn = `${it(ys)} = ${C.sig(P.a, 3)} ${it(xs)}²${signed(C.sig(P.b, 3))} ${it(xs)}${signed(C.sig(P.c, 3))}`;
         more = `<i>a</i> = ${C.sig(P.a, 3)}${unit(C.divideUnits(yu, xu, 2))}, <i>b</i> = ${C.sig(P.b, 3)}${unit(C.divideUnits(yu, xu))}, <i>c</i> = ${C.sig(P.c, 3)}${unit(yu)}`;
@@ -1234,7 +1485,7 @@
     }
     const notes = [];
     if (S.graph.fit !== 'none' && S.graph.fit !== 'linear') notes.push('A curved fit gives its constants to 3 significant figures. The steepest and shallowest lines (for the uncertainty) work for straight lines only, so linearise first if you need the uncertainty in a constant.');
-    if (S.graph.fit === 'linear') notes.push('Values to 3 significant figures for now. Once you draw the steepest and shallowest lines (stage 4), they will be rounded to match their uncertainties.');
+    if (S.graph.fit === 'linear' && M.sets.some((s) => s.pts.length && !gradUnc(s.set))) notes.push('Values to 3 significant figures for now. Draw the steepest and shallowest lines (below) to find their uncertainties; the values are then rounded to match.');
     for (const s of M.sets) {
       const left = s.pts.length - s.used.length;
       if (left > 1) notes.push(`${many ? esc(s.name) + ': ' : ''}${left} points are left out of the fit. Leave out at most one, and only if you can give a cause for it ("the graph looks better without it" is not a reason). Better still, measure that point again.`);
@@ -1270,5 +1521,5 @@
   renderAll();
 
   // For other pages (the IA builder) and for testing
-  window.GraphMaker = { state: () => JSON.parse(JSON.stringify(S)), FORMAT, redraw: renderGraph, points: () => geo.points };
+  window.GraphMaker = { state: () => JSON.parse(JSON.stringify(S)), FORMAT, redraw: renderGraph, points: () => geo.points, geometry: () => geo };
 })();
