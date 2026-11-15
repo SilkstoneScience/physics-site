@@ -198,6 +198,13 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Linked from the IA page (box under the lead, the graphs section and an IA documents card), the Experimental page and the Experimental menu, next to the IA builder and the diagram maker.
 - Not yet tested on a real tablet or phone with a finger (touch was simulated), or by students. Possible next steps: the IA builder importing a graph-maker file (format in the plan).
 
+## Animations (15 November 2026, batch 1 waiting for the teacher's check)
+- Short animations that play by themselves (Play/Pause, Replay, Full screen only), asked for by the teacher; different from simulations, which stay PhET where PhET exists. Plan, decisions and the list for themes B–E: `docs/ANIMATIONS_PLAN.md`.
+- Hub `animations/index.html` (Resources menu and a Resources card); one page per animation with a written description of every step; topic pages link to them with an `aside.sim.anim` box.
+- Batch 1: powers of ten (Skills page; public-domain NASA/Hubble photos credited on the page and on About), A.1 motion graphs, A.5 space–time diagrams (HL), D.3 a charge in a magnetic field (the demo).
+- Code: shared player `js/anim/player.js`, one scene per file in `js/anim/`, styles `css/animations.css`. `tools/anim-sheet.html?anim=<name>` (not published) draws many frames on one page for checking; `?t=12` on an animation page freezes it at 12 s.
+- Next: the teacher's check of batch 1, then theme B.
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".

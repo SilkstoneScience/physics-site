@@ -82,10 +82,10 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 320: New for 2028 The size of the field around a long straight wire, $B = \dfrac{\mu_0 I}{2\pi r}$, is now in the data booklet. It is used in D.3: see D.3 The field of a long …
 - `themes/d3.html` (5)
   - line 38: New for 2028 For exams from 2028 the guide and data booklet add the magnetic field strength of an infinitely long straight wire, $B = \frac{\mu_0 I}{2\pi r}$ , for SL and…
-  - line 261: the box drawn round a "New for 2028" block (class new2028)
-  - line 262: The field of a long straight wire New for 2028
-  - line 263: …wire are circles centred on the wire (D.2, right-hand grip rule). The 2028 data booklet adds the size of this field at a distance $r$ from an infinitely long wire carryin…
-  - line 269: Worked example: a compass near a cable New for 2028
+  - line 267: the box drawn round a "New for 2028" block (class new2028)
+  - line 268: The field of a long straight wire New for 2028
+  - line 269: …wire are circles centred on the wire (D.2, right-hand grip rule). The 2028 data booklet adds the size of this field at a distance $r$ from an infinitely long wire carryin…
+  - line 275: Worked example: a compass near a cable New for 2028
 - `themes/d4.html` (2)
   - line 38: Changed for 2028 For exams from 2028 the guide no longer mentions self-induction ; everything else in D.4 is unchanged.
   - line 309: Changed for 2028 For exams before 2028, only a qualitative understanding of self-induction is needed. The 2028 guide removes self-induction from the guidance altogether (…
@@ -158,11 +158,11 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 403: note: 'The four percentage equations are new in the 2028 data booklet, so that every exam uses the same definitions. More on these: the Skills page .',
   - line 540: ['Data booklet 2028 (exam copy)', EXAM_BOOKLETS['2028'], true],
   - line 554: ['Annotated data booklet 2028', DATA_BOOKLET_2028_URL, true],
-  - line 775: const booklet2028Card = document.querySelector('#data-booklet-2028 a');
-  - line 776: if (booklet2028Card) booklet2028Card.href = DATA_BOOKLET_2028_URL;
-  - line 1117: const newTag = ' New for 2028 ';
-  - line 1141: ? 'Open the annotated data booklet: 2025 ↗ · 2028 ↗ '
-  - line 1160: ' ${label}${hl ? ' HL ' : ''}${mark === '2028' ? newTag : ''} $$${tex}$$ ').join('') +
+  - line 776: const booklet2028Card = document.querySelector('#data-booklet-2028 a');
+  - line 777: if (booklet2028Card) booklet2028Card.href = DATA_BOOKLET_2028_URL;
+  - line 1118: const newTag = ' New for 2028 ';
+  - line 1142: ? 'Open the annotated data booklet: 2025 ↗ · 2028 ↗ '
+  - line 1161: ' ${label}${hl ? ' HL ' : ''}${mark === '2028' ? newTag : ''} $$${tex}$$ ').join('') +
 - `js/slides.js` (1)
   - line 315: …classList?.contains('tag')) continue; // little tags such as "New for 2028" don't belong on a slide
 
@@ -244,17 +244,17 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 - `experimental/straw-resonance.html` (1)
   - line 321: …bout half its open–open value. Then look at the higher peaks. New for 2028 A pipe with one closed end has only odd harmonics, named by their relationship to L : the 1st, …
 - `resources.html` (5)
-  - line 47: …ata booklet with notes explaining the equations, for exams in 2025 to 2027. Opens in Google Drive. The equations for each topic are also in the Σ Equations button on ever…
-  - line 48: the box drawn round a "New for 2028" block (class new2028)
-  - line 49: Annotated data booklet 2028 The new IB physics data booklet for exams from 2028, with notes explaining the equations. Opens in Google Drive (school account).
-  - line 52: …data booklet, exactly as you get it in the exam, for exams in 2025 to 2027. Opens in Google Drive (school account).
-  - line 53: Data booklet 2028 (exam copy) The new clean IB physics data booklet for exams from 2028. Opens in Google Drive (school account).
+  - line 48: …ata booklet with notes explaining the equations, for exams in 2025 to 2027. Opens in Google Drive. The equations for each topic are also in the Σ Equations button on ever…
+  - line 49: the box drawn round a "New for 2028" block (class new2028)
+  - line 50: Annotated data booklet 2028 The new IB physics data booklet for exams from 2028, with notes explaining the equations. Opens in Google Drive (school account).
+  - line 53: …data booklet, exactly as you get it in the exam, for exams in 2025 to 2027. Opens in Google Drive (school account).
+  - line 54: Data booklet 2028 (exam copy) The new clean IB physics data booklet for exams from 2028. Opens in Google Drive (school account).
 - `scientists.json` (1)
   - line 813: …her. This is the Chandrasekhar limit (new in the guide for exams from 2028), and he won the 1983 Nobel Prize in Physics. ",
 - `skills.html` (3)
-  - line 246: … volume $= \frac{4}{3}\pi r^{3}$; surface area $= 4\pi r^{2}$ New for 2028 (in the data booklet from 2028)
-  - line 262: the box drawn round a "New for 2028" block (class new2028)
-  - line 263: New for 2028 From the 2028 exams, all four are printed in the data booklet, so every exam uses the same definitions. The booklet writes them in words:
+  - line 252: … volume $= \frac{4}{3}\pi r^{3}$; surface area $= 4\pi r^{2}$ New for 2028 (in the data booklet from 2028)
+  - line 268: the box drawn round a "New for 2028" block (class new2028)
+  - line 269: New for 2028 From the 2028 exams, all four are printed in the data booklet, so every exam uses the same definitions. The booklet writes them in words:
 - `think/concepts.json` (1)
   - line 1350: …\"intensity ∝ amplitude²\" in so many words; the guide for exams from 2028 does.) Cover one slit and the amplitude at the centre drops from $2A$ to $A$, so the intensity …
 <!-- LIST:END -->
