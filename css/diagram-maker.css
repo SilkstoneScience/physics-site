@@ -1,0 +1,40 @@
+/* Experimental diagram maker (experimental/diagram-maker.html). Plan: docs/DIAGRAM_MAKER_PLAN.md */
+
+/* ----- Colours of the drawings (light mode, then dark mode). The PNG is always drawn with the light ones. ----- */
+:root {
+  --dm-ink: #111111;
+  --dm-paper: #ffffff;
+  --dm-metal: #dfe3e8;
+  --dm-glass: rgba(140, 175, 210, 0.16);
+  --dm-water: #cfe5f6;
+  --dm-ray: #d32f2f;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dm-ink: #e6eaf0;
+    --dm-paper: #1b2129;
+    --dm-metal: #3a434f;
+    --dm-glass: rgba(140, 175, 210, 0.12);
+    --dm-water: #1f3d56;
+    --dm-ray: #ff6b6b;
+  }
+}
+
+/* How the PNG will look: always black on white, even in dark mode */
+.dm-light {
+  --dm-ink: #111111; --dm-paper: #ffffff; --dm-metal: #dfe3e8;
+  --dm-glass: rgba(140, 175, 210, 0.16); --dm-water: #cfe5f6; --dm-ray: #d32f2f;
+  background: #ffffff;
+}
+
+/* ----- Drawing classes used by js/diagram-items.js ----- */
+.dm-art { color: var(--dm-ink); }
+.dm-art .o { fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.dm-art .h { stroke-width: 1; }
+.dm-art .b { stroke-width: 3; }
+.dm-art .f { fill: var(--dm-paper); }
+.dm-art .m { fill: var(--dm-metal); }
+.dm-art .k { fill: currentColor; }
+.dm-art .g { fill: var(--dm-glass); }
+.dm-art .w { fill: var(--dm-water); }
+.dm-art .t { fill: currentColor; stroke: none; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }

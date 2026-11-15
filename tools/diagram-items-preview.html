@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Diagram maker: equipment preview (not published)</title>
+  <!-- A checking page for new batches of equipment (tools/ is not published). Open it through the preview server. -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/diagram-maker.css">
+  <script src="../js/diagram-items.js"></script>
+  <style>
+    .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; padding: 0; list-style: none; }
+    .tiles li { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 6px; text-align: center; font-size: 0.75rem; line-height: 1.25; }
+    .tiles svg { display: block; width: 100%; height: 64px; margin-bottom: 4px; }
+    .full { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end; }
+    .full figure { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
+    .full figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 6px; max-width: 260px; }
+    .anchor { fill: #e0761b; }
+    .scene { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+    .scene svg { display: block; width: 100%; height: auto; }
+    .scene.dm-light { border-color: #ccc; background: #fff; }
+    label.toggle { font-size: 0.9rem; display: inline-flex; gap: 6px; align-items: center; }
+    label.toggle input { width: auto; margin: 0; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Diagram maker: equipment preview</h1>
+  <p class="lead">Every item in <code>js/diagram-items.js</code>: as it will look in the equipment bank, at full size with its variants, and together in a sample set-up. Not published.</p>
+  <p><label class="toggle"><input type="checkbox" id="show-anchors"> Show attachment points (orange dots)</label></p>
+
+  <h2>1. In the equipment bank</h2>
+  <ul class="tiles" id="tiles"></ul>
+
+  <h2>2. Full size (×1.5), with variants</h2>
+  <div class="full" id="full"></div>
+
+  <h2>3. Together in a set-up (on screen)</h2>
+  <p>Items placed by hand to show their sizes next to each other (strings and wires come in a later stage).</p>
+  <div class="scene" id="scene"></div>
+
+  <h2>4. The same set-up as it will be exported (PNG: always black on white)</h2>
+  <div class="scene dm-light" id="scene-png"></div>
+</main>
+<script>
+(function () {
+  const D = window.DiagramItems;
+  const NS = 'http://www.w3.org/2000/svg';
+  const groupName = {}; D.groups.forEach((g) => { groupName[g.id] = g.name; });
+
+  function svgFor(it, w, h, opt, scale, pad) {
+    pad = pad || 6;
+    const W = w + 2 * pad, H = h + 2 * pad;
+    let dots = '';
+    const a = D.anchors(it, w, h, opt);
+    Object.keys(a).forEach((k) => { dots += `<circle class="anchor" cx="${a[k][0]}" cy="${a[k][1]}" r="2.5"><title>${k}</title></circle>`; });
+    const style = scale ? ` width="${W * scale}" height="${H * scale}"` : '';
+    return `<svg class="dm-art" viewBox="${-pad} ${-pad} ${W} ${H}"${style} xmlns="${NS}" aria-hidden="true">` +
+      D.markup(it, w, h, opt) + `<g class="anchors" style="display:none">${dots}</g></svg>`;
+  }
+
+  // 1. Tiles
+  document.getElementById('tiles').innerHTML = D.items.map((it) => {
+    const t = D.thumbSize(it);
+    return `<li title="${groupName[it.group]}">${svgFor(it, t.w, t.h)}${it.name}</li>`;
+  }).join('');
+
+  // 2. Full size with variants
+  const variants = {
+    'retort-stand': [[{}, 120, 330, 'natural'], [{}, 120, 220, 'shorter rod']],
+    'bench': [[{}, 300, 18, '300 long']],
+    'metre-rule': [[{}, 500, 18, '1 m'], [{}, 150, 18, 'stretched to 30 cm']],
+    'slotted-masses': [[{ n: 0 }, 36, 92, 'no masses'], [{ n: 2 }, 36, 92, '2 masses'], [{ n: 5 }, 36, 92, '5 masses']],
+    'spring': [[{}, 22, 120, 'natural'], [{}, 22, 200, 'stretched'], [{}, 22, 90, 'compressed'], [{ coils: 20 }, 22, 160, '20 coils']],
+    'beaker': [[{ water: 0 }, 60, 72, 'empty'], [{ water: 0.6 }, 60, 72, 'water 0.6'], [{ water: 0.3 }, 90, 108, 'resized ×1.5, water 0.3']],
+    'sym-switch': [[{ state: 'open' }, 80, 40, 'open'], [{ state: 'closed' }, 80, 40, 'closed']]
+  };
+  let full = '';
+  D.items.forEach((it) => {
+    const list = variants[it.id] || [[{}, it.w, it.h, '']];
+    list.forEach(([opt, w, h, note]) => {
+      const sc = w > 400 ? 1.2 : 1.5;
+      full += `<figure>${svgFor(it, w, h, opt, sc)}<figcaption><strong>${it.name}</strong>${note ? ': ' + note : ''}<br><code>${it.id}</code></figcaption></figure>`;
+    });
+  });
+  document.getElementById('full').innerHTML = full;
+
+  // 3 and 4. A sample set-up: [id, x, y, w, h, opt, rotate]
+  const place = [
+    ['bench', 0, 360, 760, 18],
+    ['retort-stand', 40, 32, 120, 330],
+    ['boss', 50, 60, 44, 30],
+    ['clamp', 74, 53, 150, 44],
+    ['spring', 203, 74, 22, 120],
+    ['slotted-masses', 191, 194, 36, 92, { n: 3 }],
+    ['metre-rule', 250, 360, 330, 18, {}, -90],
+    ['top-pan-balance', 330, 304, 120, 56],
+    ['beaker', 360, 240, 60, 72],
+    ['thermometer', 384, 130, 14, 164],
+    ['bench-pulley', 728, 314, 70, 84],
+    ['pendulum-bob', 470, 220, 24, 30],
+    ['laser', 520, 302, 72, 58],
+    ['sym-cell', 560, 40, 80, 40],
+    ['sym-switch', 640, 40, 80, 40],
+    ['sym-ammeter', 560, 100, 80, 40],
+    ['sym-resistor', 640, 100, 80, 40]
+  ];
+  let g = '';
+  place.forEach(([id, x, y, w, h, opt, rot]) => {
+    const it = D.byId[id];
+    const r = rot ? ` rotate(${rot} 0 0)` : '';
+    g += `<g transform="translate(${x} ${y})${r}">${D.markup(it, w, h, opt)}</g>`;
+  });
+  const scene = `<svg class="dm-art" viewBox="-10 0 820 410" xmlns="${NS}" role="img" aria-label="Sample set-up">${g}</svg>`;
+  document.getElementById('scene').innerHTML = scene;
+  document.getElementById('scene-png').innerHTML = scene;
+
+  document.getElementById('show-anchors').addEventListener('change', (e) => {
+    document.querySelectorAll('g.anchors').forEach((el) => { el.style.display = e.target.checked ? '' : 'none'; });
+  });
+})();
+</script>
+</body>
+</html>
