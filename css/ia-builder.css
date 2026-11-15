@@ -1,8 +1,11 @@
 /* IA builder (experimental/ia-builder.html). Uses the site's colour tokens from style.css, so dark mode follows them. */
 body.iab-page main { max-width: 1240px; }
 .iab-page .lead { max-width: 50rem; }
-.iab-privacy { max-width: 50rem; }
+/* the notice spans the builder's full width (so its edges line up with the bar below); on wide screens its two paragraphs sit side by side */
 .iab-privacy p { margin: 0.3em 0; }
+@media (min-width: 900px) {
+  .iab-privacy { display: grid; grid-template-columns: 3fr 2fr; gap: 0 32px; align-items: start; }
+}
 .iab-help { color: var(--muted); font-size: 0.95rem; }
 
 /* top bar: My IAs, word count, save status */
