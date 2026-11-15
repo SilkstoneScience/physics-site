@@ -374,8 +374,8 @@
         `<line class="dm-selbox" x1="0" y1="${r2(-h / 2)}" x2="0" y2="${r2(-h / 2 - 26 * k)}"/>` +
         `<circle class="dm-handle dm-rot" data-h="rot" cx="0" cy="${r2(-h / 2 - 26 * k)}" r="${r2(7 * k)}"/>` +
         hd(-w / 2, -h / 2, 'nw') + hd(w / 2, -h / 2, 'ne') + hd(w / 2, h / 2, 'se') + hd(-w / 2, h / 2, 'sw') +
-        (it.stretch === 'w' ? hd(-w / 2, 0, 'w') + hd(w / 2, 0, 'e') : '') +
-        (it.stretch === 'h' ? hd(0, -h / 2, 'n') + hd(0, h / 2, 's') : '') + '</g>';
+        (it.stretch === 'w' || it.stretch === 'both' ? hd(-w / 2, 0, 'w') + hd(w / 2, 0, 'e') : '') +
+        (it.stretch === 'h' || it.stretch === 'both' ? hd(0, -h / 2, 'n') + hd(0, h / 2, 's') : '') + '</g>';
     } else if (list.length === 1 && list[0].type === 'line' && tool === 'select') {
       const l = list[0];
       s += `<path class="dm-selline" d="${pathD(l.points, l.curved && KINDS[l.kind].curve)}"/>`;
@@ -856,7 +856,10 @@
     const [lx, ly] = rotPt([p[0] - A[0], p[1] - A[1]], -rot);   // pointer, measured from the fixed point along the item's own sides
     let w = s.w, h = s.h;
     const min = 8;
-    if (sx && sy) {
+    if (sx && sy && (D.byId[o.item] || {}).stretch === 'both') {   // corners change width and height separately
+      w = Math.max(min, lx * sx); h = Math.max(min, ly * sy);
+      if (snapOn()) { w = Math.max(GRID, snapv(w)); h = Math.max(GRID, snapv(h)); }
+    } else if (sx && sy) {
       const k = Math.max(min / Math.min(s.w, s.h), Math.max((lx * sx) / s.w, (ly * sy) / s.h));
       w = s.w * k; h = s.h * k;
       if (snapOn()) { const k2 = Math.max(GRID, snapv(w)) / w; w *= k2; h *= k2; }
@@ -1004,7 +1007,8 @@
         }
       });
     }
-    const lenNote = it && it.stretch ? `<p class="dm-tip">${it.stretch === 'w' ? 'Width' : 'Height'} changes its length only.</p>` : '<p class="dm-tip">Width and height keep its shape.</p>';
+    const lenNote = it && it.stretch === 'both' ? '<p class="dm-tip">Width and height change separately.</p>'
+      : it && it.stretch ? `<p class="dm-tip">${it.stretch === 'w' ? 'Width' : 'Height'} changes its length only.</p>` : '<p class="dm-tip">Width and height keep its shape.</p>';
     s += `<div class="dm-pair"><label class="dm-field">Width<input type="number" data-k="w" min="8" step="1" value="${Math.round(o.w)}"></label>` +
       `<label class="dm-field">Height<input type="number" data-k="h" min="8" step="1" value="${Math.round(o.h)}"></label></div>` + lenNote +
       `<label class="dm-field">Angle (degrees, clockwise)<input type="number" data-k="rot" min="-180" max="180" step="1" value="${Math.round(o.rot || 0)}"></label>` +
@@ -1089,8 +1093,9 @@
     else if (el.dataset.k === 'w' || el.dataset.k === 'h') {
       if (!done) return;
       const v = Math.max(8, Number(el.value) || 0), [cx, cy] = centre(o);
-      if (el.dataset.k === 'w') { if (it && it.stretch !== 'w') o.h = r2(o.h * v / o.w); o.w = v; }
-      else { if (it && it.stretch !== 'h') o.w = r2(o.w * v / o.h); o.h = v; }
+      const free = it && it.stretch === 'both';
+      if (el.dataset.k === 'w') { if (it && it.stretch !== 'w' && !free) o.h = r2(o.h * v / o.w); o.w = v; }
+      else { if (it && it.stretch !== 'h' && !free) o.w = r2(o.w * v / o.h); o.h = v; }
       o.x = r2(cx - o.w / 2); o.y = r2(cy - o.h / 2);
       renderProps();
     }

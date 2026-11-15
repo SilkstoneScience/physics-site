@@ -6,7 +6,8 @@
    - name, group, keywords (other names the search box should find).
    - w, h:     natural size in page units (about 1 unit = 2 mm; small things drawn a little larger).
    - stretch:  'w' or 'h' if the item can be made longer that way without squashing it (the drawing
-               is redrawn at the new length, e.g. more coils on a spring); leave out otherwise.
+               is redrawn at the new length, e.g. a longer rule); 'both' if its width and height change
+               separately (e.g. lagging to fit round something); leave out otherwise.
    - anchors:  (w, h, opt) => ({ name: [x, y] }) attachment points for strings, wires and tubes.
    - options:  choices shown in the side panel, e.g. { key: 'water', label: 'Water level', type: 'range', min: 0, max: 0.9, step: 0.05, def: 0.6 }
                (type 'range', 'int' or 'choice' with values: [[value, label], ...]).
@@ -98,6 +99,46 @@
     }
   });
 
+  add({
+    id: 'g-clamp', name: 'G-clamp', group: 'stands',
+    keywords: ['g clamp', 'c clamp', 'bench clamp'],
+    w: 50, h: 78,
+    anchors: () => ({ grip: [34, 20] }),
+    draw: () =>
+      rect(32.5, 30, 3, 44, 'o m') + rect(26, 72, 16, 4, 'o f', 1.5) + rect(28, 27, 12, 4, 'o f', 1) +   // screw, handle, pad
+      path('M42 4 H9 Q2 4 2 11 V59 Q2 66 9 66 H42 V58 H10 V12 H42 Z')                                    // frame
+  });
+
+  add({
+    id: 'tripod', name: 'Tripod', group: 'stands',
+    keywords: ['tripod', 'stand for heating'],
+    w: 90, h: 100,
+    anchors: () => ({ top: [45, 0] }),
+    draw: () =>
+      path('M42 6 L43 100 M48 6 L47 100', 'o h') +                      // the leg at the back
+      path('M8 6 L1 100 M14 6 L7 100 M76 6 L83 100 M82 6 L89 100') +   // the two legs at the front
+      rect(0, 0, 90, 6, 'o f', 1.5)
+  });
+
+  add({
+    id: 'gauze', name: 'Gauze', group: 'stands',
+    keywords: ['gauze', 'wire gauze', 'mesh', 'heatproof'],
+    w: 100, h: 8,
+    anchors: () => ({ top: [50, 1] }),
+    draw: () => rect(0, 2, 100, 4, 'o f') + rect(30, 1, 40, 6, 'o m', 1)
+  });
+
+  add({
+    id: 'lab-jack', name: 'Lab jack (scissor lift)', group: 'stands',
+    keywords: ['lab jack', 'scissor jack', 'lift', 'laboratory jack', 'platform'],
+    w: 100, h: 60, stretch: 'h',
+    anchors: () => ({ top: [45, 0] }),
+    draw: (w, h) =>
+      path(`M10 6 L80 ${h - 6} M80 6 L10 ${h - 6}`, 'o b') +
+      line(45, h / 2, 96, h / 2) + circle(96, h / 2, 4) + circle(45, h / 2, 3, 'o f') +
+      rect(0, 0, 90, 6, 'o f', 1.5) + rect(0, h - 6, 90, 6, 'o f', 1.5)
+  });
+
   // =====================================================================
   // Measuring instruments
   // =====================================================================
@@ -129,6 +170,86 @@
       path('M4 56 L10 22 H110 L116 56 Z') +                            // body
       rect(28, 31, 46, 16, 'o f', 2) + text(51, 39.5, '0.00 g', 10) +  // display
       circle(87, 39, 3, 'o f') + circle(99, 39, 3, 'o f')              // buttons
+  });
+
+  add({
+    id: 'vernier-calipers', name: 'Vernier calipers', group: 'measuring',
+    keywords: ['calipers', 'callipers', 'vernier', 'diameter'],
+    w: 150, h: 48,
+    anchors: () => ({ jaws: [20, 40] }),
+    draw: () => {
+      let s = rect(0, 10, 150, 10, 'o f') + rect(0, 10, 10, 36, 'o f') + rect(2, 0, 6, 10, 'o f');   // beam and fixed jaws
+      for (let x = 66; x < 148; x += 4) s += line(x, 10, x, x % 20 === 6 ? 16 : 13.5, 'o h');
+      s += rect(30, 6, 32, 18, 'o f', 1.5) + rect(30, 18, 10, 28, 'o f') + rect(32, 0, 6, 6, 'o f') +   // sliding jaw
+        rect(48, 2, 8, 4, 'o m');                                                                        // thumb grip
+      for (let x = 42; x < 61; x += 3) s += line(x, 24, x, 20.5, 'o h');
+      return s;
+    }
+  });
+
+  add({
+    id: 'micrometer', name: 'Micrometer screw gauge', group: 'measuring',
+    keywords: ['micrometer', 'screw gauge', 'wire diameter', 'thickness'],
+    w: 120, h: 54,
+    anchors: () => ({ jaws: [18, 14] }),
+    draw: () => {
+      let s = path('M4 10 V30 Q4 52 30 52 H52 Q62 52 62 40 V20 H54 V38 Q54 44 48 44 H30 Q12 44 12 30 V10 Z') +   // frame
+        rect(6, 9, 8, 10, 'o m') + rect(22, 11, 40, 6, 'o m') +                                                   // anvil and spindle
+        rect(62, 8, 30, 12, 'o f') + line(62, 14, 92, 14, 'o h');                                                   // sleeve
+      for (let x = 65; x < 92; x += 3) s += line(x, 14, x, x % 6 === 5 ? 10 : 12, 'o h');
+      s += rect(92, 5, 20, 18, 'o f', 2);
+      for (let x = 96; x < 112; x += 4) s += line(x, 5, x, 23, 'o h');
+      return s + rect(112, 9, 8, 10, 'o f', 1.5);
+    }
+  });
+
+  add({
+    id: 'protractor', name: 'Protractor', group: 'measuring',
+    keywords: ['protractor', 'angle', 'degrees'],
+    w: 120, h: 62,
+    anchors: () => ({ centre: [60, 60] }),
+    draw: () => {
+      let s = path('M0 60 A60 60 0 0 1 120 60 Z') + path('M15 60 A45 45 0 0 1 105 60', 'o h');
+      for (let a = 10; a < 180; a += 10) {
+        const c = Math.cos(a * Math.PI / 180), sn = Math.sin(a * Math.PI / 180), r1 = a % 30 === 0 ? 48 : 53;
+        s += line(60 + r1 * c, 60 - r1 * sn, 60 + 59 * c, 60 - 59 * sn, 'o h');
+      }
+      return s + line(60, 55, 60, 60, 'o h');
+    }
+  });
+
+  add({
+    id: 'stopwatch', name: 'Digital stopwatch', group: 'measuring',
+    keywords: ['stopwatch', 'stop clock', 'timer', 'time', 'stopclock'],
+    w: 60, h: 80,
+    draw: () =>
+      rect(25, 2, 10, 8, 'o f', 1.5) + rect(0, 10, 60, 70, 'o f', 14) +
+      rect(9, 28, 42, 20, 'o f', 2) + text(30, 38.5, '0:00.0', 10) +
+      circle(18, 62, 5) + circle(42, 62, 5)
+  });
+
+  add({
+    id: 'newtonmeter', name: 'Newtonmeter (spring balance)', group: 'measuring',
+    keywords: ['newtonmeter', 'newton meter', 'spring balance', 'force meter', 'forcemeter'],
+    w: 24, h: 150,
+    options: [{ key: 'range', label: 'Scale', type: 'choice', values: [['10', '0–10 N'], ['100', '0–100 N']], def: '10' }],
+    anchors: () => ({ top: [12, 2], hook: [12, 148] }),
+    draw: (w, h, opt) => {
+      let s = circle(12, 6, 4, 'o') + rect(4, 12, 16, 114, 'o f', 3);
+      for (let i = 0; i <= 10; i++) { const y = 30 + i * 8.6; s += line(i % 5 ? 16.5 : 14, y, 20, y, 'o h'); }
+      return s + path('M4 52 L10 55 L4 58 Z', 'o k') + text(12, 20, opt.range + ' N', 5) +
+        line(12, 126, 12, 140) + path('M12 140 V144 A4 4 0 1 1 7 141', 'o');
+    }
+  });
+
+  add({
+    id: 'fiducial-marker', name: 'Pointer (fiducial marker)', group: 'measuring',
+    keywords: ['pointer', 'fiducial', 'marker', 'pin', 'reference mark'],
+    w: 50, h: 72,
+    anchors: () => ({ tip: [49, 10] }),
+    draw: () =>
+      rect(18, 12, 4, 54) + rect(0, 66, 40, 6, 'o f', 1.5) +
+      path('M18 8 H40 L49 10 L40 12 H18 Z')
   });
 
   // =====================================================================
@@ -192,6 +313,78 @@
     draw: () => line(12, 0, 12, 7) + circle(12, 18.5, 11, 'o m')
   });
 
+  add({
+    id: 'hooked-mass', name: 'Hooked mass', group: 'mechanics',
+    keywords: ['hooked mass', 'mass', 'weight', 'load', 'slotted'],
+    w: 34, h: 50,
+    anchors: () => ({ hook: [17, 2] }),
+    draw: () =>
+      path('M17 16 V8 A4 4 0 1 1 22 5', 'o b') +
+      rect(4, 14, 26, 36, 'o m', 3) + line(4, 20, 30, 20, 'o h')
+  });
+
+  add({
+    id: 'trolley', name: 'Trolley (dynamics cart)', group: 'mechanics',
+    keywords: ['trolley', 'cart', 'dynamics cart', 'car', 'glider'],
+    w: 132, h: 50,
+    anchors: () => ({ front: [132, 19], back: [0, 20], top: [60, 8] }),
+    draw: () =>
+      rect(120, 16, 12, 6, 'o m', 1) + rect(0, 8, 120, 26, 'o f', 3) + line(6, 14, 114, 14, 'o h') +
+      circle(24, 41, 9) + circle(24, 41, 2.2, 'k') + circle(96, 41, 9) + circle(96, 41, 2.2, 'k')
+  });
+
+  add({
+    id: 'runway', name: 'Runway (track)', group: 'mechanics',
+    keywords: ['runway', 'track', 'ramp', 'plank', 'inclined plane', 'slope', 'dynamics track'],
+    w: 400, h: 10, stretch: 'w',
+    anchors: (w) => ({ left: [0, 0], right: [w, 0] }),
+    draw: (w) => rect(0, 0, w, 10, 'o f', 1.5) + line(4, 3.5, w - 4, 3.5, 'o h')
+  });
+
+  add({
+    id: 'wedge', name: 'Wedge (block to raise a runway)', group: 'mechanics',
+    keywords: ['wedge', 'block', 'raise', 'incline', 'ramp support'],
+    w: 60, h: 24,
+    draw: () => path('M0 24 H60 V0 Z')
+  });
+
+  add({
+    id: 'wooden-block', name: 'Wooden block', group: 'mechanics',
+    keywords: ['block', 'wooden block', 'friction', 'sledge'],
+    w: 90, h: 40,
+    anchors: () => ({ hook: [90, 20], top: [40, 0] }),
+    draw: () =>
+      rect(80, 19, 4, 2, 'o m') + circle(86.5, 20, 3.5, 'o') + rect(0, 0, 80, 40, 'o f', 1.5) +
+      path('M8 12 Q30 8 50 13 T74 12 M10 26 Q34 22 52 28 T72 26', 'o h')
+  });
+
+  add({
+    id: 'ball', name: 'Ball', group: 'mechanics',
+    keywords: ['ball', 'sphere', 'ball bearing', 'marble', 'steel ball'],
+    w: 24, h: 24,
+    options: [{ key: 'look', label: 'Look', type: 'choice', values: [['plain', 'Plain'], ['steel', 'Steel (ball bearing)']], def: 'plain' }],
+    anchors: () => ({ top: [12, 0], centre: [12, 12] }),
+    draw: (w, h, opt) => opt.look === 'steel'
+      ? circle(12, 12, 11, 'o m') + circle(8, 8, 3, 'f')
+      : circle(12, 12, 11)
+  });
+
+  add({
+    id: 'pivot', name: 'Pivot (knife edge)', group: 'mechanics',
+    keywords: ['pivot', 'knife edge', 'fulcrum', 'balance point', 'moments'],
+    w: 40, h: 40,
+    anchors: () => ({ top: [20, 0] }),
+    draw: () => path('M0 40 H40 L20 0 Z')
+  });
+
+  add({
+    id: 'interrupt-card', name: 'Interrupt card (flag)', group: 'mechanics',
+    keywords: ['card', 'flag', 'interrupt card', 'light gate', 'mask'],
+    w: 40, h: 28,
+    anchors: () => ({ bottom: [20, 28] }),
+    draw: () => rect(14, 20, 12, 8, 'o f', 1) + rect(2, 0, 36, 22, 'o k', 1)
+  });
+
   // =====================================================================
   // Thermal physics and gases
   // =====================================================================
@@ -206,6 +399,112 @@
       for (let y = 20; y <= 140; y += 10) s += line(9, y, 11, y, 'o h');
       return s;
     }
+  });
+
+  add({
+    id: 'bunsen-burner', name: 'Bunsen burner', group: 'thermal',
+    keywords: ['bunsen', 'burner', 'flame', 'gas', 'heat'],
+    w: 56, h: 100,
+    options: [{ key: 'flame', label: 'Flame', type: 'choice', values: [['on', 'Lit'], ['off', 'Not lit']], def: 'on' }],
+    anchors: () => ({ top: [28, 22], gas: [54, 84] }),
+    draw: (w, h, opt) =>
+      (opt.flame === 'on' ? path('M28 0 C37 9 36 20 28 21 C20 20 19 9 28 0 Z', 'o') + path('M28 8 C32 12 31 18 28 19 C25 18 24 12 28 8 Z', 'o h') : '') +
+      rect(36, 81, 18, 6, 'o f', 1) + rect(22, 22, 12, 68) + rect(20, 70, 16, 8, 'o m', 1) +
+      path('M2 100 H54 L48 90 H8 Z')
+  });
+
+  add({
+    id: 'hot-plate', name: 'Electric hot plate', group: 'thermal',
+    keywords: ['hot plate', 'hotplate', 'heater', 'heat'],
+    w: 100, h: 40,
+    anchors: () => ({ top: [50, 4] }),
+    draw: () => rect(10, 4, 80, 6, 'o m', 1) + rect(0, 10, 100, 30, 'o f', 3) + circle(80, 25, 5) + line(80, 25, 80, 21) + circle(20, 25, 2, 'k')
+  });
+
+  add({
+    id: 'immersion-heater', name: 'Immersion heater', group: 'thermal',
+    keywords: ['immersion heater', 'heater', 'heating element', 'electrical heater'],
+    w: 30, h: 130,
+    anchors: () => ({ a: [2, 0], b: [28, 0] }),
+    draw: () =>
+      path('M11 24 C11 12 2 12 2 0 M19 24 C19 12 28 12 28 0', 'o') +   // its two leads
+      path('M11 40 V122 Q11 128 15 128 Q19 128 19 122 V40 Z', 'o m') + rect(6, 24, 18, 16, 'o f', 2)
+  });
+
+  add({
+    id: 'metal-block', name: 'Metal block (two holes)', group: 'thermal',
+    keywords: ['metal block', 'aluminium block', 'block', 'specific heat capacity', 'cylinder'],
+    w: 80, h: 90,
+    anchors: () => ({ hole1: [24, 0], hole2: [55, 0] }),
+    draw: () => rect(0, 0, 80, 90, 'o m', 2) + rect(17, 0, 14, 62, 'o f') + rect(49, 0, 12, 50, 'o f')
+  });
+
+  add({
+    id: 'polystyrene-cup', name: 'Polystyrene cup with lid', group: 'thermal',
+    keywords: ['polystyrene cup', 'cup', 'calorimeter', 'insulated cup', 'lid'],
+    w: 66, h: 76,
+    anchors: () => ({ top: [33, 0] }),
+    draw: () => path('M3 6 H63 L55 76 H11 Z') + rect(0, 0, 66, 6, 'o f', 2) + rect(30, 0, 6, 6, 'o k')
+  });
+
+  add({
+    id: 'lagging', name: 'Insulation (lagging)', group: 'thermal',
+    keywords: ['insulation', 'lagging', 'insulating', 'cotton wool', 'jacket'],
+    w: 100, h: 100, stretch: 'both',
+    draw: (w, h) => {
+      // Seen in section: two hatched walls, 10 thick, either side of whatever it wraps
+      let s = rect(0, 0, 10, h, 'o f') + rect(w - 10, 0, 10, h, 'o f');
+      for (let y = 6; y < h; y += 7) s += line(0, y, 10, y - 6, 'o h') + line(w - 10, y, w, y - 6, 'o h');
+      return s;
+    }
+  });
+
+  add({
+    id: 'ice', name: 'Ice', group: 'thermal',
+    keywords: ['ice', 'ice cubes', 'crushed ice', 'melting'],
+    w: 60, h: 34,
+    draw: () =>
+      path('M2 14 L20 10 L24 30 L5 33 Z', 'o g') + path('M22 6 L40 2 L43 20 L25 24 Z', 'o g') + path('M38 16 L56 14 L58 32 L40 33 Z', 'o g')
+  });
+
+  add({
+    id: 'gas-syringe', name: 'Gas syringe', group: 'thermal',
+    keywords: ['syringe', 'gas syringe', 'boyle', 'volume', 'plunger', 'piston'],
+    w: 136, h: 24,
+    options: [{ key: 'pos', label: 'Plunger position', type: 'range', min: 0.05, max: 0.95, step: 0.05, def: 0.5 }],
+    anchors: () => ({ nozzle: [4, 12] }),
+    draw: (w, h, opt) => {
+      const px = 20 + 100 * opt.pos;
+      let s = rect(4, 9.5, 6, 5, 'o f') + rect(10, 7, 10, 10, 'o f') + rect(20, 2, 100, 20, 'o g');
+      for (let x = 30; x < 120; x += 10) s += line(x, 2, x, x % 50 === 20 ? 9 : 6, 'o h');
+      return s + rect(px + 6, 10.5, 130 - px - 6, 3, 'o m') + rect(px, 3, 6, 18, 'o k') + rect(130, 0, 5, 24, 'o f', 1);
+    }
+  });
+
+  add({
+    id: 'pressure-gauge', name: 'Pressure gauge (dial)', group: 'thermal',
+    keywords: ['pressure gauge', 'bourdon gauge', 'gauge', 'manometer', 'dial', 'pressure'],
+    w: 60, h: 72,
+    anchors: () => ({ bottom: [30, 72] }),
+    draw: () => {
+      let s = rect(25, 56, 10, 16, 'o m') + circle(30, 30, 28) + circle(30, 30, 24, 'o h');
+      for (let a = -225; a <= 45; a += 27) {
+        const c = Math.cos(a * Math.PI / 180), sn = Math.sin(a * Math.PI / 180);
+        s += line(30 + 19 * c, 30 + 19 * sn, 30 + 23 * c, 30 + 23 * sn, 'o h');
+      }
+      return s + line(30, 30, 18, 18) + circle(30, 30, 2.5, 'k') + text(30, 44, 'kPa', 7);
+    }
+  });
+
+  add({
+    id: 'viscosity-tube', name: 'Tall tube of liquid (falling ball)', group: 'thermal',
+    keywords: ['viscosity', 'tube', 'glycerol', 'oil', 'falling ball', 'terminal velocity', 'stokes', 'measuring tube'],
+    w: 46, h: 260, stretch: 'h',
+    anchors: (w, h) => ({ top: [23, 0] }),
+    draw: (w, h) =>
+      path(`M3 14 V${h - 6} Q3 ${h} 9 ${h} H37 Q43 ${h} 43 ${h - 6} V14 Z`, 'w') + line(3, 14, 43, 14, 'o h') +
+      path(`M3 0 V${h - 6} Q3 ${h} 9 ${h} H37 Q43 ${h} 43 ${h - 6} V0`, 'o') +
+      rect(0, h * 0.28, 46, 3, 'o k') + rect(0, h * 0.78, 46, 3, 'o k')
   });
 
   // =====================================================================
@@ -228,6 +527,73 @@
       }
       for (let i = 1; i <= 4; i++) { const y = B - i * (B - T) / 5; s += line(L, y, L + (i % 2 ? 6 : 10), y, 'o h'); }
       return s + path(`M${L - 3} 0 L${L} ${T} ${inside.slice(inside.indexOf('V'))} L${R + 3} 0`, 'o');
+    }
+  });
+
+  add({
+    id: 'conical-flask', name: 'Conical flask', group: 'glassware',
+    keywords: ['conical flask', 'erlenmeyer', 'flask'],
+    w: 60, h: 70,
+    options: [{ key: 'water', label: 'Water level', type: 'range', min: 0, max: 0.9, step: 0.05, def: 0.4 }],
+    anchors: () => ({ top: [30, 0], bottom: [30, 69] }),
+    draw: (w, h, opt) => {
+      // The sloping side runs from (22, 22) to (2, 64); water fills up to yw
+      const xl = (y) => (y <= 22 ? 22 : 22 - (y - 22) * 20 / 42);
+      let s = '';
+      if (opt.water > 0) {
+        const yw = 69 - opt.water * 47;
+        s += path(`M${n(xl(yw))} ${n(yw)} ${yw < 64 ? 'L2 64 ' : ''}Q1 69 7 69 H53 Q59 69 58 64 L${n(60 - xl(yw))} ${n(yw)} Z`, 'w') +
+          line(xl(yw), yw, 60 - xl(yw), yw, 'o h');
+      }
+      return s + path('M20 0 L22 3 V22 L2 64 Q0 70 7 70 H53 Q60 70 58 64 L38 22 V3 L40 0', 'o');
+    }
+  });
+
+  add({
+    id: 'round-flask', name: 'Round-bottom flask with bung and tube', group: 'glassware',
+    keywords: ['round-bottom flask', 'round flask', 'flask', 'bung', 'stopper', 'air in a flask', 'gas'],
+    w: 70, h: 90,
+    options: [{ key: 'water', label: 'Water level', type: 'range', min: 0, max: 0.9, step: 0.05, def: 0 }],
+    anchors: () => ({ tube: [35, 0] }),
+    draw: (w, h, opt) => {
+      const cx = 35, cy = 58, r = 30;
+      let s = '';
+      if (opt.water > 0) {
+        const yw = cy + r - opt.water * 2 * r * 0.9, hw = Math.sqrt(Math.max(0, r * r - (yw - cy) * (yw - cy)));
+        s += path(`M${n(cx - hw)} ${n(yw)} A${r} ${r} 0 ${yw < cy ? 1 : 0} 0 ${n(cx + hw)} ${n(yw)} Z`, 'w') + line(cx - hw, yw, cx + hw, yw, 'o h');
+      }
+      return s + path(`M29 12 V${n(cy - Math.sqrt(r * r - 36))} A${r} ${r} 0 1 0 41 ${n(cy - Math.sqrt(r * r - 36))} V12`, 'o') +
+        rect(33, 0, 4, 40, 'o g') + path('M27 22 H43 L41 8 H29 Z', 'o m');
+    }
+  });
+
+  add({
+    id: 'measuring-cylinder', name: 'Measuring cylinder', group: 'glassware',
+    keywords: ['measuring cylinder', 'graduated cylinder', 'volume', 'cylinder'],
+    w: 40, h: 150,
+    options: [{ key: 'water', label: 'Water level', type: 'range', min: 0, max: 0.95, step: 0.05, def: 0.5 }],
+    anchors: () => ({ top: [20, 0] }),
+    draw: (w, h, opt) => {
+      let s = '';
+      if (opt.water > 0) { const yw = 143 - opt.water * 133; s += rect(8, yw, 24, 143 - yw, 'w') + line(8, yw, 32, yw, 'o h'); }
+      for (let i = 1; i <= 12; i++) { const y = 143 - i * 10.5; s += line(32, y, i % 5 ? 27 : 23, y, 'o h'); }
+      return s + path('M5 0 L8 4 V143 M32 143 V4 L35 0', 'o') + path('M0 150 H40 L35 143 H5 Z');
+    }
+  });
+
+  add({
+    id: 'boiling-tube', name: 'Boiling tube', group: 'glassware',
+    keywords: ['boiling tube', 'test tube', 'tube'],
+    w: 22, h: 120,
+    options: [{ key: 'water', label: 'Water level', type: 'range', min: 0, max: 0.9, step: 0.05, def: 0.4 }],
+    anchors: () => ({ top: [11, 0], bottom: [11, 119] }),
+    draw: (w, h, opt) => {
+      let s = '';
+      if (opt.water > 0) {
+        const yw = 119 - opt.water * 112;
+        s += path(`M1 ${n(Math.min(yw, 108))} V108 A10 10 0 0 0 21 108 V${n(Math.min(yw, 108))} Z`, 'w') + line(1, yw, 21, yw, 'o h');
+      }
+      return s + path('M0 0 L1 3 V108 A10 10 0 0 0 21 108 V3 L22 0', 'o');
     }
   });
 
@@ -294,6 +660,7 @@
   // How an item of natural size it.w × it.h is fitted into a box w × h:
   // the drawing is scaled by s, and a stretchy item is redrawn longer or shorter (dw × dh before scaling).
   function fit(it, w, h) {
+    if (it.stretch === 'both') return { s: 1, dw: w, dh: h };
     if (it.stretch === 'w') { const s = h / it.h; return { s, dw: w / s, dh: it.h }; }
     if (it.stretch === 'h') { const s = w / it.w; return { s, dw: it.w, dh: h / s }; }
     return { s: w / it.w, dw: it.w, dh: it.h };

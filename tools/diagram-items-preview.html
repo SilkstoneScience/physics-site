@@ -68,6 +68,14 @@
     return `<li title="${groupName[it.group]}">${svgFor(it, t.w, t.h)}${it.name}</li>`;
   }).join('');
 
+  // ?ids=a,b,c shows only those items (full size), e.g. to check a new batch
+  const only = new URLSearchParams(location.search).get('ids');
+  if (only) {
+    const keep = new Set(only.split(','));
+    D.items.splice(0, D.items.length, ...D.items.filter((it) => keep.has(it.id)));
+    ['scene', 'scene-png'].forEach((id) => { document.getElementById(id).previousElementSibling.hidden = true; document.getElementById(id).hidden = true; });
+  }
+
   // 2. Full size with variants
   const variants = {
     'retort-stand': [[{}, 120, 330, 'natural'], [{}, 120, 220, 'shorter rod']],
@@ -76,7 +84,15 @@
     'slotted-masses': [[{ n: 0 }, 36, 92, 'no masses'], [{ n: 2 }, 36, 92, '2 masses'], [{ n: 5 }, 36, 92, '5 masses']],
     'spring': [[{}, 22, 120, 'natural'], [{}, 22, 200, 'stretched'], [{}, 22, 90, 'compressed'], [{ coils: 20 }, 22, 160, '20 coils']],
     'beaker': [[{ water: 0 }, 60, 72, 'empty'], [{ water: 0.6 }, 60, 72, 'water 0.6'], [{ water: 0.3 }, 90, 108, 'resized ×1.5, water 0.3']],
-    'sym-switch': [[{ state: 'open' }, 80, 40, 'open'], [{ state: 'closed' }, 80, 40, 'closed']]
+    'sym-switch': [[{ state: 'open' }, 80, 40, 'open'], [{ state: 'closed' }, 80, 40, 'closed']],
+    'lab-jack': [[{}, 100, 60, 'natural'], [{}, 100, 110, 'raised']],
+    'ball': [[{ look: 'plain' }, 24, 24, 'plain'], [{ look: 'steel' }, 24, 24, 'steel']],
+    'bunsen-burner': [[{ flame: 'on' }, 56, 100, 'lit'], [{ flame: 'off' }, 56, 100, 'not lit']],
+    'lagging': [[{}, 100, 100, 'natural'], [{}, 140, 80, 'wider and lower']],
+    'gas-syringe': [[{ pos: 0.2 }, 136, 24, 'plunger in'], [{ pos: 0.8 }, 136, 24, 'plunger out']],
+    'round-flask': [[{ water: 0 }, 70, 90, 'empty'], [{ water: 0.5 }, 70, 90, 'half full']],
+    'conical-flask': [[{ water: 0 }, 60, 70, 'empty'], [{ water: 0.8 }, 60, 70, 'water 0.8']],
+    'newtonmeter': [[{ range: '10' }, 24, 150, '10 N'], [{ range: '100' }, 24, 150, '100 N']]
   };
   let full = '';
   D.items.forEach((it) => {
