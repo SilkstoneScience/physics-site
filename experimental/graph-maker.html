@@ -99,7 +99,29 @@
 
           <section class="gm-part" aria-labelledby="save">
             <h2 id="save">4. Save and download</h2>
-            <p class="gm-soon">Coming in stage 5: PNG, Word table and save files. Your work is already saved in this browser automatically.</p>
+            <div class="gm-card">
+              <h3>The graph as a picture</h3>
+              <p class="gm-small">A PNG picture 2400 pixels wide, always on a white background (even in dark mode), ready to paste into your report. It shows what is on the graph now, including your steepest and shallowest lines if they are shown.</p>
+              <button type="button" class="button secondary" data-act="png">Download the graph (PNG)</button>
+            </div>
+            <div class="gm-card">
+              <h3>The data table in Word</h3>
+              <p class="gm-small">Your table, formatted IB-style: headings with symbols and units, uncertainties, and worked-out values rounded to match. One table per data set. You can edit it in Word or Google Docs.</p>
+              <div class="gm-doc-opts">
+                <label class="vlab-check"><input type="checkbox" data-doc="graph"> Add the graph</label>
+                <label class="vlab-check"><input type="checkbox" data-doc="results"> Add the fit results</label>
+                <label class="vlab-check"><input type="checkbox" data-doc="worked"> Add the worked examples</label>
+              </div>
+              <button type="button" class="button secondary" data-act="docx">Download the table (Word)</button>
+            </div>
+            <div class="gm-card">
+              <h3>Save your work</h3>
+              <p class="gm-small">Your work is saved automatically in this browser only. To keep a copy, or to carry on on another computer, save a file and open it there.</p>
+              <div class="gm-line-btns">
+                <button type="button" class="button secondary" data-act="save">Save progress (file)</button>
+                <label class="button secondary gm-file">Open saved file<input type="file" accept=".json,application/json" data-act="open"></label>
+              </div>
+            </div>
           </section>
         </div>
       </div>

@@ -1397,21 +1397,31 @@
     }).join('');
     let work = '';
     const U = gradUnc(S.sets[i]);
-    if (U && s && s.fit && s.fit.ok) {
-      const P = s.fit.params;
-      const pct = Math.abs(P.m) ? `, ${C.sig(100 * U.dm / Math.abs(P.m), 2)}%` : '';
-      const txt = [
-        `Δm = (m_max − m_min) / 2 = (${C.sig(U.hi.m, 3)} − ${C.sig(U.lo.m, 3)}) / 2 = ${C.sig(U.dm, 2)}${un(gu)}`,
-        `Gradient = ${C.pairText(P.m, U.dm, gu)} (best-fit gradient ± Δm${pct})`,
-        `Δc = (c_max − c_min) / 2 = (${C.sig(Math.max(U.hi.c, U.lo.c), 3)} − ${Math.min(U.hi.c, U.lo.c) < 0 ? '(' + C.sig(Math.min(U.hi.c, U.lo.c), 3) + ')' : C.sig(Math.min(U.hi.c, U.lo.c), 3)}) / 2 = ${C.sig(U.dc, 2)}${un(yu)}`,
-        `Intercept = ${C.pairText(P.c, U.dc, yu)}`,
-      ];
+    const txt = uncWorking(M, i);
+    if (txt) {
       work = `<div class="gm-work">${txt.map((t) => `<p>${esc(t)}</p>`).join('')}</div>
         ${U.swapped ? '<p class="gm-warn gm-small">Your "steepest" line is the shallower of the two: the tool has used them the right way round, but check them.</p>' : ''}
         <p class="gm-small">The gradient and intercept are the line of best fit's, and their uncertainties are half the difference between the steepest and shallowest lines (Physics skills page, section 12). They are rounded to 1 significant figure in the uncertainty.</p>`;
     }
     const feedback = fb && fb.items.length ? `<ul class="gm-feedback">${fb.items.map((f) => `<li class="${f.ok ? 'gm-ok' : 'gm-todo'}">${esc(f.text)}</li>`).join('')}</ul>` : '';
     out.innerHTML = `<table class="gm-mini gm-lines-table"><tbody>${rows}</tbody></table>${work}${feedback}`;
+  }
+  // The working for one set's gradient and intercept uncertainties, as lines of plain text (null until both lines are drawn)
+  function uncWorking(M, i) {
+    const s = M.sets[i]; const U = gradUnc(S.sets[i]);
+    if (!U || !s || !s.fit || !s.fit.ok || s.fit.type !== 'linear') return null;
+    const xh = C.parseHeading(M.xLabel); const yh = C.parseHeading(M.yLabel);
+    const gu = C.pretty(C.divideUnits(yh.unit, xh.unit)); const yu = C.pretty(yh.unit);
+    const un = (u) => (u ? ' ' + u : '');
+    const P = s.fit.params;
+    const pct = Math.abs(P.m) ? `, ${C.sig(100 * U.dm / Math.abs(P.m), 2)}%` : '';
+    const lo = Math.min(U.hi.c, U.lo.c);
+    return [
+      `Δm = (m_max − m_min) / 2 = (${C.sig(U.hi.m, 3)} − ${C.sig(U.lo.m, 3)}) / 2 = ${C.sig(U.dm, 2)}${un(gu)}`,
+      `Gradient = ${C.pairText(P.m, U.dm, gu)} (best-fit gradient ± Δm${pct})`,
+      `Δc = (c_max − c_min) / 2 = (${C.sig(Math.max(U.hi.c, U.lo.c), 3)} − ${lo < 0 ? '(' + C.sig(lo, 3) + ')' : C.sig(lo, 3)}) / 2 = ${C.sig(U.dc, 2)}${un(yu)}`,
+      `Intercept = ${C.pairText(P.c, U.dc, yu)}`,
+    ];
   }
   linesPanel.addEventListener('click', (e) => {
     const b = e.target.closest('button');
@@ -1509,6 +1519,191 @@
   new ResizeObserver(() => scheduleGraph()).observe(canvas.parentElement);
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTimeout(scheduleGraph, 50));
 
+  // ----- Part 4: downloads and save files -----
+  // The downloaded picture is always light (white background, dark ink), whatever the screen's colour scheme.
+  const LIGHT = { bg: '#ffffff', ink: '#1c2430', muted: '#5b6676', bad: '#b3261e', grid: '#b9c3d0', minor: '#e4e8ee', sets: ['#1f5fbf', '#c2561a', '#2e7d32', '#7b3fbf', '#a3213a'] };
+  const PNG = { w: 800, h: 560, scale: 3 }; // drawn at 800 × 560 and scaled 3 times: 2400 × 1680 pixels
+  function graphCanvas() {
+    const c = document.createElement('canvas');
+    c.width = PNG.w * PNG.scale; c.height = PNG.h * PNG.scale;
+    const g = c.getContext('2d'); g.scale(PNG.scale, PNG.scale);
+    drawGraph(g, PNG.w, PNG.h, model(), LIGHT, { font: 13 });
+    return c;
+  }
+  const pngBytes = () => new Promise((ok) => graphCanvas().toBlob((b) => b.arrayBuffer().then((a) => ok(new Uint8Array(a))), 'image/png'));
+  const fileName = (ext) => `${(S.title || 'graph').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 50) || 'graph'}.${ext}`;
+  function saveBlob(blob, name) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  }
+  const hasData = () => model().sets.some((s) => s.pts.length);
+  $('[data-act="png"]').addEventListener('click', () => {
+    if (!hasData()) { say('Type some readings first: there is no graph to download yet.'); return; }
+    graphCanvas().toBlob((b) => { saveBlob(b, fileName('png')); say(`Downloaded ${fileName('png')} (2400 pixels wide).`); }, 'image/png');
+  });
+
+  // The table of one data set, IB-style: two heading rows when there are repeated trials; the uncertainty in the
+  // heading when it is the same for every row, otherwise in its own Δ column; worked-out values rounded to it.
+  function tableModel(si) {
+    const s = S.sets[si];
+    const rows = s.rows.filter((r) => S.columns.some((c) => (c.kind === 'raw' && String(r.cells[c.id] || '').trim()) || (c.kind === 'trials' && trialsOf(r, c).some((v) => v.trim()))));
+    const groups = [];
+    // "ΔL / m", or "Δ(T²) / s²" when the symbol has a power
+    const symRuns = (c) => {
+      const h = C.parseHeading(c.heading); const sym = C.pretty(h.sym || c.sym || ''); const br = /[^A-Za-zα-ωΑ-Ω]/.test(sym);
+      return [{ t: br ? 'Δ(' : 'Δ' }, { t: sym, i: true }, ...(br ? [{ t: ')' }] : []), ...(h.hasUnit ? [{ t: ' / ' + C.pretty(h.unit) }] : [])];
+    };
+    const head = (c) => labelRuns(c.heading.trim() || 'column').map((r) => ({ t: r.t, i: r.i }));
+    const fmtU = (spec) => (spec.pct !== undefined ? `±${C.sig(spec.pct, 2)}%` : `±${String(spec.raw).trim().replace(/^±\s*/, '')}`);
+    for (const c of S.columns) {
+      if (c.kind === 'trials') {
+        const u = C.readUnc(c.unc);
+        groups.push({ c, head: head(c), unc: u && !u.bad ? fmtU({ ...u, raw: c.unc }) : '', sub: Array.from({ length: c.trials }, (_, k) => `trial ${k + 1}`), cells: rows.map((r) => trialsOf(r, c).map((v) => v.trim())) });
+      } else if (c.kind === 'raw') {
+        const colU = C.readUnc(c.unc);
+        const own = c.rowUnc && rows.some((r) => String(r.unc[c.id] || '').trim());
+        if (!own) groups.push({ c, head: head(c), unc: colU && !colU.bad ? fmtU({ ...colU, raw: c.unc }) : '', cells: rows.map((r) => [String(r.cells[c.id] || '').trim()]) });
+        else {
+          groups.push({ c, head: head(c), unc: '', cells: rows.map((r) => [String(r.cells[c.id] || '').trim()]) });
+          groups.push({ c, head: symRuns(c), unc: '', cells: rows.map((r) => { const R = valueOf(r, c); return [R.u > 0 ? C.sig(R.u, c.uncSf) : '']; }) });
+        }
+      } else { // mean and formula columns: rounded to their own uncertainty
+        const pairs = rows.map((r) => { const R = valueOf(r, c); return isFinite(R.v) ? (R.u > 0 ? C.roundPair(R.v, R.u, c.uncSf) : { v: C.sig(R.v, 4), u: '', exp: 0 }) : null; });
+        const ex = (p) => (p && p.exp ? ` × 10${C.sup(p.exp)}` : '');
+        const us = [...new Set(pairs.filter(Boolean).map((p) => p.u + ex(p)))];
+        if (us.length === 1 && us[0]) groups.push({ c, head: head(c), unc: `±${us[0]}`, cells: pairs.map((p) => [p ? p.v + ex(p) : '']) });
+        else {
+          groups.push({ c, head: head(c), unc: '', cells: pairs.map((p) => [p ? p.v + ex(p) : '']) });
+          if (us.some(Boolean)) groups.push({ c, head: symRuns(c), unc: '', cells: pairs.map((p) => [p && p.u ? p.u + ex(p) : '']) });
+        }
+      }
+    }
+    return { set: s, groups, rows };
+  }
+  // As Word table rows (js/labs/report.js "grid" cells)
+  function tableGrid(T) {
+    const two = T.groups.some((g) => g.sub);
+    const top = []; const second = [];
+    for (const g of T.groups) {
+      const paras = [g.head]; if (g.unc) paras.push([{ t: g.unc }]);
+      if (g.sub) { top.push({ paras, span: g.sub.length, align: 'center' }); g.sub.forEach((t) => second.push({ runs: [{ t }], align: 'center' })); }
+      else if (two) { top.push({ paras, vMerge: 'restart', align: 'center' }); second.push({ runs: [], vMerge: true }); }
+      else top.push({ paras, align: 'center' });
+    }
+    const body = T.rows.map((r, k) => T.groups.flatMap((g) => g.cells[k].map((t) => ({ runs: [{ t }], align: 'center' }))));
+    return { rows: two ? [top, second, ...body] : [top, ...body], header: two ? 2 : 1 };
+  }
+  // As plain text (for the save file's summary)
+  function tablePlain(T) {
+    const head = T.groups.flatMap((g) => { const h = g.head.map((r) => r.t).join('') + (g.unc ? ' ' + g.unc : ''); return g.sub ? g.sub.map((t) => `${h} (${t})`) : [h]; });
+    return { set: T.set.name, head, rows: T.rows.map((r, k) => T.groups.flatMap((g) => g.cells[k])) };
+  }
+
+  // The Word file: one table per data set, then (if ticked) the graph, the fit results and the worked examples.
+  const docOpts = () => { S.ui.doc = S.ui.doc || {}; return S.ui.doc; };
+  $$('[data-doc]').forEach((b) => {
+    b.checked = !!docOpts()[b.dataset.doc];
+    b.addEventListener('change', () => { docOpts()[b.dataset.doc] = b.checked; changed(); });
+  });
+  function workedTexts() {
+    return S.columns.filter((c) => c.kind === 'formula').map((c) => {
+      const div = document.createElement('div');
+      renderWorked(c, div);
+      const pre = $('.gm-copytext', div);
+      return pre ? { c, lines: pre.textContent.split('\n') } : null;
+    }).filter(Boolean);
+  }
+  // The fit lines under the graph as plain text, one line per <br> (equation, then gradient and intercept)
+  const equationTexts = () => $$('p', results).flatMap((p) => p.innerHTML.split(/<br\s*\/?>/i).map((h) => { const d = document.createElement('div'); d.innerHTML = h; return d.textContent.replace(/\s+/g, ' ').trim(); })).filter(Boolean);
+  function fitTexts(M) {
+    return equationTexts()
+      .concat(M.sets.flatMap((s, i) => { const w = uncWorking(M, i); return w ? [M.sets.filter((x) => x.pts.length).length > 1 ? `${s.name}:` : '', ...w].filter(Boolean) : []; }));
+  }
+  $('[data-act="docx"]').addEventListener('click', async () => {
+    if (!window.Lab || !Lab.docx) { say('The Word writer did not load: reload the page and try again.'); return; }
+    if (!hasData()) { say('Type some readings first: there is no table to download yet.'); return; }
+    const o = docOpts(); const M = model();
+    const blocks = [];
+    if (S.title.trim()) blocks.push({ para: { style: 'Title', runs: [{ t: C.pretty(S.title.trim()) }] } });
+    let n = 0;
+    S.sets.forEach((s, si) => {
+      const T = tableModel(si);
+      if (!T.rows.length) return;
+      n++;
+      blocks.push({ para: { style: 'Caption', keepNext: true, runs: [{ t: `Table ${n}: `, b: true }, { t: S.sets.length > 1 ? `readings for ${s.name}` : 'raw and processed data' }] } });
+      blocks.push({ grid: tableGrid(T) });
+    });
+    if (o.graph) {
+      blocks.push({ image: { data: await pngBytes(), ext: 'png', w: PNG.w, h: PNG.h, align: 'center' } });
+      blocks.push({ para: { style: 'Caption', align: 'center', runs: [{ t: 'Figure 1: ', b: true }, { t: C.pretty(S.title.trim()) || 'graph of the data' }] } });
+    }
+    if (o.results) {
+      blocks.push({ para: { style: 'Heading2', runs: [{ t: 'Fit results' }] } });
+      fitTexts(M).forEach((t) => blocks.push({ para: { runs: [{ t }] } }));
+    }
+    if (o.worked) {
+      const W = workedTexts();
+      if (W.length) {
+        blocks.push({ para: { style: 'Heading2', runs: [{ t: 'Worked examples' }] } });
+        W.forEach((w) => { blocks.push({ para: { style: 'Heading3', runs: [{ t: C.pretty(w.c.heading.trim() || w.c.sym) }] } }); w.lines.forEach((t) => blocks.push({ para: { runs: [{ t }] } })); });
+      }
+    }
+    blocks.push({ para: { style: 'Caption', runs: [{ t: 'Made with the graph maker on Mr Silkstone\'s Physics. Edit the captions and add your own explanations.', i: true }] } });
+    Lab.download(Lab.docx(blocks, { report: true, pageNumbers: false }), fileName('docx'));
+    say(`Downloaded ${fileName('docx')}.`);
+  });
+
+  // Save progress: the whole state, plus a summary other tools (the IA builder) can read without this code.
+  // Format: docs/GRAPH_MAKER_PLAN.md, section 4.
+  function summary() {
+    const M = model();
+    const xh = C.parseHeading(M.xLabel); const yh = C.parseHeading(M.yLabel);
+    const gu = C.pretty(C.divideUnits(yh.unit, xh.unit)); const yu = C.pretty(yh.unit);
+    const fits = M.sets.filter((s) => s.pts.length && s.fit && s.fit.ok).map((s) => {
+      const U = s.fit.type === 'linear' ? gradUnc(s.set) : null;
+      const out = { set: s.name, type: s.fit.type, params: s.fit.params, excluded: s.pts.length - s.used.length };
+      if (s.fit.type === 'linear') {
+        out.gradient = { value: s.fit.params.m, unc: U ? U.dm : null, unit: gu, text: U ? C.pairText(s.fit.params.m, U.dm, gu) : `${C.sig(s.fit.params.m, 3)}${gu ? ' ' + gu : ''}` };
+        out.intercept = { value: s.fit.params.c, unc: U ? U.dc : null, unit: yu, text: U ? C.pairText(s.fit.params.c, U.dc, yu) : `${C.sig(s.fit.params.c, 3)}${yu ? ' ' + yu : ''}` };
+      }
+      return out;
+    });
+    return {
+      title: S.title, x: M.xLabel, y: M.yLabel,
+      tables: S.sets.map((s, i) => tablePlain(tableModel(i))).filter((t) => t.rows.length),
+      fits,
+      equations: equationTexts(),
+      workedExamples: workedTexts().map((w) => ({ column: w.c.id, heading: w.c.heading, text: w.lines.join('\n') })),
+    };
+  }
+  $('[data-act="save"]').addEventListener('click', () => {
+    const file = { format: FORMAT, version: 1, saved: new Date().toISOString(), state: S, summary: summary() };
+    const name = fileName('graph.json');
+    saveBlob(new Blob([JSON.stringify(file, null, 1)], { type: 'application/json' }), name);
+    say(`Saved ${name}. Keep it somewhere safe; open it here with "Open saved file".`);
+  });
+  $('[data-act="open"]').addEventListener('change', async (e) => {
+    const f = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if (!f) return;
+    if (f.size > 5e6) { say('That file is too big to be a graph maker file.'); return; }
+    let data = null;
+    try { data = JSON.parse(await f.text()); } catch (err) { data = null; }
+    if (!data || data.format !== FORMAT) { say(`${f.name} isn't a graph maker file. Choose a file saved with "Save progress".`); return; }
+    if (Number(data.version) > 1) { say('That file was saved by a newer version of the graph maker: reload the page and try again.'); return; }
+    const st = tidyState(data.state);
+    if (!st) { say(`${f.name} is damaged: it has no table in it.`); return; }
+    const hasWork = S.sets.some((s) => s.rows.some((r) => Object.values(r.cells).some((v) => String(v).trim())));
+    if (hasWork && !confirm(`Replace what is on the page with ${f.name}? (Undo can bring it back while this page is open.)`)) return;
+    remember('opening a file');
+    S = st; draw.kind = null; checking = false;
+    renderAll(); changed();
+    $$('[data-doc]').forEach((b) => { b.checked = !!docOpts()[b.dataset.doc]; });
+    say(`Opened ${f.name}.`);
+  });
+
   // ----- Messages -----
   let sayTimer = null;
   function say(text) {
@@ -1517,7 +1712,10 @@
     sayTimer = setTimeout(() => { if (status.textContent === text) status.textContent = ''; }, 8000);
   }
 
-  function renderAll() { renderTable(); renderProcess(); renderNotes(); scheduleGraph(); }
+  function renderAll() {
+    renderTable(); renderProcess(); renderNotes(); scheduleGraph();
+    $$('[data-doc]').forEach((b) => { b.checked = !!(S.ui.doc && S.ui.doc[b.dataset.doc]); });
+  }
   renderAll();
 
   // For other pages (the IA builder) and for testing

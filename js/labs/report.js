@@ -63,8 +63,10 @@
       + (p.align ? `<w:jc w:val="${p.align}"/>` : '');
     return `<w:p>${pPr ? `<w:pPr>${pPr}</w:pPr>` : ''}${runs(p.runs)}</w:p>`;
   }
+  // A cell may also have span: n (across n columns) and vMerge: 'restart' | true (one cell down two rows; used by the
+  // graph maker's two-row headings, js/graph-maker.js). Without them a table is exactly as before.
   function grid({ rows, widths, header = 1, size = 20 }, contentWidth) {
-    const cols = Math.max(...rows.map(r => r.length));
+    const cols = Math.max(...rows.map(r => r.reduce((n, c) => n + (c.span || 1), 0)));
     const pct = widths && widths.length === cols ? widths : Array(cols).fill(100 / cols);
     const tw = pct.map(p => Math.round(contentWidth * p / 100));
     const border = ['top', 'left', 'bottom', 'right', 'insideH', 'insideV'].map(s => `<w:${s} w:val="single" w:sz="4" w:color="808080"/>`).join('');
@@ -72,14 +74,16 @@
     const cell = (c, i, isHead) => {
       const paras = c.paras || [c.runs || []];
       const shade = c.shade || (isHead ? 'E8EDF4' : null);
-      return `<w:tc><w:tcPr><w:tcW w:w="${tw[i]}" w:type="dxa"/>${shade ? `<w:shd w:val="clear" w:color="auto" w:fill="${shade}"/>` : ''}</w:tcPr>`
+      const span = c.span || 1;
+      const w = tw.slice(i, i + span).reduce((a, b) => a + b, 0);
+      return `<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/>${span > 1 ? `<w:gridSpan w:val="${span}"/>` : ''}${c.vMerge ? `<w:vMerge${c.vMerge === 'restart' ? ' w:val="restart"' : ''}/>` : ''}${shade ? `<w:shd w:val="clear" w:color="auto" w:fill="${shade}"/>` : ''}</w:tcPr>`
         + paras.map(ps => `<w:p><w:pPr><w:spacing w:before="40" w:after="40"/>${c.align ? `<w:jc w:val="${c.align}"/>` : ''}</w:pPr>${runs(sized(isHead ? ps.map(r => (r.math || r.br ? r : Object.assign({ b: true }, r))) : ps))}</w:p>`).join('')
         + '</w:tc>';
     };
     return `<w:tbl><w:tblPr><w:tblW w:w="${tw.reduce((a, b) => a + b, 0)}" w:type="dxa"/><w:jc w:val="center"/><w:tblBorders>${border}</w:tblBorders><w:tblLayout w:type="fixed"/>`
       + '<w:tblCellMar><w:left w:w="80" w:type="dxa"/><w:right w:w="80" w:type="dxa"/></w:tblCellMar></w:tblPr>'
       + `<w:tblGrid>${tw.map(w => `<w:gridCol w:w="${w}"/>`).join('')}</w:tblGrid>`
-      + rows.map((r, ri) => `<w:tr>${ri < header ? '<w:trPr><w:tblHeader/><w:cantSplit/></w:trPr>' : '<w:trPr><w:cantSplit/></w:trPr>'}${r.map((c, i) => cell(c, i, ri < header)).join('')}</w:tr>`).join('')
+      + rows.map((r, ri) => `<w:tr>${ri < header ? '<w:trPr><w:tblHeader/><w:cantSplit/></w:trPr>' : '<w:trPr><w:cantSplit/></w:trPr>'}${(() => { let at = 0; return r.map((c) => { const out = cell(c, at, ri < header); at += c.span || 1; return out; }).join(''); })()}</w:tr>`).join('')
       + '</w:tbl>' + para('', 200);
   }
 

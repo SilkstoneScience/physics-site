@@ -207,12 +207,16 @@ the graph with `GraphMaker.render`, or simply use the ready-made `summary`).
     }
   },
   "summary": {
-    "tables": [ { "set": "Set 1", "head": ["length L / m ±0.001", "…"], "rows": [["0.400", "…"]] } ],
-    "fits": [ { "set": "Set 1", "type": "linear", "equation": "T² = 4.04 L + 0.012",
-                "gradient": { "value": 4.04, "unc": 0.4, "unit": "s² m⁻¹", "text": "(4.0 ± 0.4) s² m⁻¹" },
-                "intercept": { "value": 0.012, "unc": 0.05, "unit": "s²", "text": "(0.01 ± 0.05) s²" },
-                "excluded": 0 } ],
-    "workedExamples": [ { "column": "c4", "row": "r1", "text": "T² = (12.70/10)² = 1.613 s² …" } ]
+    "title": "Period squared against length", "x": "length L / m", "y": "period squared T^2 / s^2",
+    "tables": [ { "set": "Set 1",
+                  "head": ["length L / m ±0.002", "time for 10 swings t / s ±0.01 (trial 1)", "…", "period squared T² / s²", "Δ(T²) / s²"],
+                  "rows": [["0.200", "8.86", "…", "0.82", "0.04"]] } ],
+    "fits": [ { "set": "Set 1", "type": "linear", "params": { "m": 3.99, "c": 0.02 }, "excluded": 0,
+                "gradient": { "value": 3.99, "unc": 0.23, "unit": "s² m⁻¹", "text": "(4.0 ± 0.2) s² m⁻¹" },
+                "intercept": { "value": 0.02, "unc": 0.087, "unit": "s²", "text": "(0.02 ± 0.09) s²" } } ],
+    "equations": ["T² = 4.0 L + 0.02", "gradient = (4.0 ± 0.2) s² m⁻¹ (5.9%), y-intercept = (0.02 ± 0.09) s²"],
+    "workedExamples": [ { "column": "c4", "heading": "period squared T^2 / s^2",
+                          "text": "T² = 1.276² = 1.628 s²\nΔ(T²) = 2 × (ΔT / T) × T² = … = 0.055 s²\nSo T² = (1.63 ± 0.05) s²" } ]
   }
 }
 ```
@@ -227,6 +231,9 @@ Notes on the format:
   is "out of date".
 - `formula` columns are recalculated from the formula whenever the page loads (the student has said how).
 - `lines`: the drawn steepest and shallowest lines as two end points each, in graph units.
+- `gradient.unc` and `intercept.unc` are `null` until the student has drawn both the steepest and shallowest lines;
+  `text` then gives the value to 3 s.f. with its unit. Curved fits have `params` only (a, b, c / a, n / a, b).
+- `state.ui` holds page settings (the data set being edited, the Word download's tick boxes).
 - `summary` is written at every save so another tool can show the results without any of this code.
   It is ignored when the file is opened again (the state is the source).
 - `version` goes up only if the format changes in a way older files can't be read; the page will convert
