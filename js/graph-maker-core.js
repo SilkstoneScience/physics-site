@@ -136,7 +136,7 @@
     if (!(u > 0) || !isFinite(u)) return null;
     let e = Math.floor(Math.log10(u));
     // 0.096 to 1 s.f. is 0.1: the place moves up one
-    const r = Math.round(u / Math.pow(10, e - sf + 1));
+    const r = Math.round(tidy(u / Math.pow(10, e - sf + 1)));
     if (r >= Math.pow(10, sf)) e += 1;
     return sf - 1 - e;
   }
@@ -154,7 +154,9 @@
     }
     return { v: fixed(roundTo(v, dp), Math.max(0, dp)), u: fixed(roundTo(u, dp), Math.max(0, dp)), dp, exp: 0 };
   }
-  const roundTo = (v, dp) => { const f = Math.pow(10, dp); const r = Math.round(Math.abs(v) * f) / f; return v < 0 ? -r : r; };
+  // Rounding halves upwards, after removing the computer's tiny binary errors (0.055 is stored as 0.05499999…)
+  const tidy = (x) => +x.toPrecision(12);
+  const roundTo = (v, dp) => { const f = Math.pow(10, dp); const r = Math.round(tidy(Math.abs(v) * f)) / f; return v < 0 ? -r : r; };
   // A value rounded to a number of decimal places (for table cells whose uncertainty sets the place).
   const toPlace = (v, dp) => (isFinite(v) ? fixed(roundTo(v, dp), Math.max(0, dp)) : '–');
   // "(1.62 ± 0.03) s²", "(1.62 ± 0.03) × 10⁻³ s²", or "1.62 s²" when there's no uncertainty.

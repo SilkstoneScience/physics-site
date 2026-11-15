@@ -58,6 +58,8 @@ export function runTests() {
   eq('roundPair(1234, 34)', G.roundPair(1234, 34), { v: '1230', u: '30', dp: -1, exp: 0 });
   eq('roundPair(6.1e-7, 3e-8)', G.roundPair(6.12e-7, 3.1e-8), { v: '6.1', u: '0.3', dp: 1, exp: -7 });
   eq('pairText', G.pairText(1.6129, 0.026, 's²'), '(1.61 ± 0.03) s²');
+  eq('half range 0.055 rounds up to 0.06', G.roundPair(12.693333, (12.74 - 12.63) / 2), { v: '12.69', u: '0.06', dp: 2, exp: 0 });
+  eq('0.25 rounds up to 0.3', G.roundPair(3.125, 0.25), { v: '3.1', u: '0.3', dp: 1, exp: 0 });
   eq('sig(4.0412, 3)', G.sig(4.0412, 3), '4.04');
   eq('sig(0.000123456, 3)', G.sig(0.000123456, 3), '0.000123');
   eq('sig(-2, 3)', G.sig(-2, 3), '−2.00');

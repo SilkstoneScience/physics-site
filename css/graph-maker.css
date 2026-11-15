@@ -98,3 +98,43 @@ body.gm-page main { max-width: 1320px; }
 .gm-warn { color: var(--bad); }
 .gm-graph-notes { margin: 8px 0; padding-left: 1.2em; }
 .gm-graph-notes li + li { margin-top: 4px; }
+
+/* ----- Worked-out columns in the table (means and formulas) ----- */
+.gm-table thead th.gm-th-calc { background: var(--good-soft); }
+.gm-kind { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+a.gm-kind { color: var(--accent); }
+.gm-table td.gm-calc { padding: 4px 8px; white-space: nowrap; font-variant-numeric: tabular-nums; background: var(--bg); }
+.gm-pm { display: block; font-size: 0.78rem; color: var(--muted); }
+.gm-table td.gm-stale { background: var(--warn-soft); }
+.gm-menu-num { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.gm-menu-num input { width: 4em; font: inherit; padding: 2px 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); }
+.gm-menu-list > .link-btn { display: block; margin: 6px 0; text-align: left; }
+
+/* ----- Part 2: processing ----- */
+.gm-proc h3 { font-size: 1.02rem; margin: 18px 0 6px; }
+.gm-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 14px 12px; margin: 10px 0; }
+.gm-card p { margin: 6px 0; }
+.gm-stale-note { background: var(--warn-soft); border-radius: 6px; padding: 6px 10px; }
+.gm-calc-card { border-left: 4px solid var(--good); }
+.gm-calc-grid { display: grid; grid-template-columns: 1fr; gap: 4px 14px; font-size: 0.92rem; }
+.gm-calc-grid label { display: block; }
+.gm-calc-grid input { display: block; width: 100%; box-sizing: border-box; margin-top: 2px; font: inherit; padding: 5px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); }
+.gm-calc-grid input.gm-formula { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 0.95rem; }
+.gm-lhs { font-weight: 600; }
+.gm-ferr { margin: 0 0 4px !important; font-size: 0.85rem; color: var(--muted); min-height: 1.1em; }
+.gm-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 6px 0; }
+.gm-chip { font: inherit; font-size: 0.9rem; min-width: 2.2em; padding: 2px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); cursor: pointer; }
+.gm-chip:hover { border-color: var(--accent); }
+.gm-card-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 10px; }
+.gm-card-btns .button { padding: 6px 12px; font-size: 0.9rem; }
+.gm-card-btns .button[aria-expanded="true"] { background: var(--accent-soft); }
+.gm-panel { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--border); }
+.gm-panel select { font: inherit; padding: 3px 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); margin-left: 4px; }
+.gm-mini { border-collapse: collapse; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+.gm-mini th, .gm-mini td { border-bottom: 1px solid var(--border); padding: 3px 10px; text-align: right; }
+.gm-mini th:first-child, .gm-mini td:first-child { text-align: left; }
+.gm-mini tr.gm-off td { background: var(--warn-soft); }
+.gm-mini tr.gm-off td:last-child { color: var(--bad); font-weight: 600; }
+.gm-worked-lines { overflow-x: auto; }
+.gm-worked-lines p { margin: 8px 0; }
+.gm-copytext { white-space: pre-wrap; font-size: 0.85rem; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; }
