@@ -39,16 +39,16 @@
         "marks": 1,
         "question": "Calculate the mean range for $h = 0.700\\ \\text{m}$.",
         "numeric": {
-          "answer": 0.9193999999999999,
+          "answer": 0.9084000000000001,
           "range": [
-            0.9188999999999999,
-            0.9198999999999998
+            0.9079000000000002,
+            0.9089
           ],
           "unit": "$\\text{m}$",
           "source": "Rmean"
         },
         "markscheme": [
-          "Mean $= \\dfrac{0.925 + 0.909 + 0.920 + 0.920 + 0.923}{5} = 0.919\\ \\text{m}$ ✓"
+          "Mean $= \\dfrac{0.923 + 0.866 + 0.922 + 0.914 + 0.917}{5} = 0.908\\ \\text{m}$ ✓"
         ]
       },
       {
@@ -59,16 +59,16 @@
         "marks": 1,
         "question": "Determine the absolute uncertainty in this mean range.",
         "numeric": {
-          "answer": 0.008000000000000007,
+          "answer": 0.028500000000000025,
           "range": [
-            0.007500000000000007,
-            0.008500000000000008
+            0.028000000000000025,
+            0.029000000000000026
           ],
           "unit": "$\\text{m}$",
           "source": "dR"
         },
         "markscheme": [
-          "Half the range of the readings: $\\dfrac{0.925 - 0.909}{2} = 0.008\\ \\text{m}$ (accept 0.0080 m) ✓"
+          "Half the range of the readings: $\\dfrac{0.923 - 0.866}{2} = 0.029\\ \\text{m}$ (accept 0.0285 m) ✓"
         ]
       },
       {
@@ -92,19 +92,99 @@
         "marks": 2,
         "question": "Determine the gradient of the graph of $R^2$ against $h$.",
         "numeric": {
-          "answer": 1.1954285714285715,
+          "answer": 1.1411428571428572,
           "range": [
-            1.1476114285714287,
-            1.2568181818181818
+            0.9770491803278691,
+            1.2797297297297299
           ],
           "unit": "$\\text{m}$",
           "source": "gradient"
         },
         "markscheme": [
           "Draws a line of best fit and uses two well-separated points on it ✓",
-          "Gradient $= 1.20\\ \\text{m}$ (accept 1.15 to 1.26) ✓"
+          "Gradient $= 1.14\\ \\text{m}$ (accept 0.977 to 1.28) ✓"
         ],
-        "msFigure": "graph-ms"
+        "msFigure": "graph-ms",
+        "plot": {
+          "title": "Graph of mean range squared against launch height, with 6 plotted points and error bars, to draw on",
+          "height": 286,
+          "x": {
+            "min": 0,
+            "max": 1.2,
+            "step": 0.05,
+            "major": 0.2,
+            "symbol": "h",
+            "unit": "m"
+          },
+          "y": {
+            "min": 0,
+            "max": 1.5,
+            "step": 0.1,
+            "major": 0.5,
+            "symbol": "R²",
+            "unit": "m²",
+            "snap": 0.005
+          },
+          "given": [
+            [
+              0.4,
+              0.471,
+              0.027,
+              0.005
+            ],
+            [
+              0.55,
+              0.634,
+              0.025,
+              0.005
+            ],
+            [
+              0.7,
+              0.824,
+              0.053,
+              0.005
+            ],
+            [
+              0.85,
+              0.99,
+              0.086,
+              0.005
+            ],
+            [
+              1,
+              1.179,
+              0.085,
+              0.005
+            ],
+            [
+              1.15,
+              1.309,
+              0.082,
+              0.005
+            ]
+          ],
+          "points": [],
+          "lines": [
+            {
+              "key": "best",
+              "role": "best",
+              "label": "Line of best fit",
+              "gradient": 1.141142857,
+              "intercept": 0.01678095238,
+              "bars": true,
+              "gradients": [
+                0.9770491803,
+                1.27972973
+              ]
+            }
+          ],
+          "fit": {
+            "gradient": 1.141142857,
+            "intercept": 0.01678095238
+          },
+          "worth": 0,
+          "on": "graph"
+        }
       },
       {
         "label": "f",
@@ -114,27 +194,27 @@
         "marks": 2,
         "question": "Determine the launch speed $u$.",
         "numeric": {
-          "answer": 2.4202479211849353,
+          "answer": 2.3646564232463034,
           "range": [
-            2.3713489831739234,
-            2.48161421073242
+            2.1880450140722787,
+            2.504131720911597
           ],
           "unit": "$\\text{m}\\,\\text{s}^{-1}$",
           "source": "u",
           "mistakes": [
             {
-              "value": 3.422747434445025,
+              "value": 3.344129184107576,
               "feedback": "Check the factor of 2: the gradient is $2u^2/g$."
             },
             {
-              "value": 5.857600000000001,
+              "value": 5.591600000000001,
               "feedback": "That is $u^2$: take the square root."
             }
           ]
         },
         "markscheme": [
           "Gradient $= \\dfrac{2u^2}{g}$, so $u = \\sqrt{\\dfrac{g \\times \\text{gradient}}{2}}$ ✓",
-          "$u = 2.42\\ \\text{m s}^{-1}$ (accept 2.37 to 2.48; allow ECF from (e)) ✓"
+          "$u = 2.36\\ \\text{m s}^{-1}$ (accept 2.19 to 2.50; allow ECF from (e)) ✓"
         ]
       },
       {
@@ -145,15 +225,99 @@
         "marks": 2,
         "question": "The manufacturer states that the launch speed is $2.60\\ \\text{m s}^{-1}$. Discuss whether the data support this statement.",
         "markscheme": [
-          "Uses the steepest and shallowest lines through the error bars (their own lines, or the uncertainty in the gradient) to find a range for $u$: the lines shown give about 2.38 to 2.48 $\\text{m s}^{-1}$ ✓",
+          "Uses the steepest and shallowest lines through the error bars (their own lines, or the uncertainty in the gradient) to find a range for $u$: the lines shown give about 2.19 to 2.50 $\\text{m s}^{-1}$ ✓",
           "2.60 $\\text{m s}^{-1}$ is above this range, so the data do not support the statement (the launcher is slower than stated). Award this mark for a conclusion consistent with the candidate's own range ✓"
         ],
-        "msFigure": "graph-ms"
+        "msFigure": "graph-ms",
+        "plot": {
+          "title": "Graph of mean range squared against launch height, with 6 plotted points and error bars, to draw on",
+          "height": 286,
+          "x": {
+            "min": 0,
+            "max": 1.2,
+            "step": 0.05,
+            "major": 0.2,
+            "symbol": "h",
+            "unit": "m"
+          },
+          "y": {
+            "min": 0,
+            "max": 1.5,
+            "step": 0.1,
+            "major": 0.5,
+            "symbol": "R²",
+            "unit": "m²",
+            "snap": 0.005
+          },
+          "given": [
+            [
+              0.4,
+              0.471,
+              0.027,
+              0.005
+            ],
+            [
+              0.55,
+              0.634,
+              0.025,
+              0.005
+            ],
+            [
+              0.7,
+              0.824,
+              0.053,
+              0.005
+            ],
+            [
+              0.85,
+              0.99,
+              0.086,
+              0.005
+            ],
+            [
+              1,
+              1.179,
+              0.085,
+              0.005
+            ],
+            [
+              1.15,
+              1.309,
+              0.082,
+              0.005
+            ]
+          ],
+          "points": [],
+          "lines": [
+            {
+              "key": "steep",
+              "role": "steep",
+              "label": "Steepest line",
+              "gradient": 1.27972973,
+              "intercept": -0.07429054054,
+              "bars": true
+            },
+            {
+              "key": "shallow",
+              "role": "shallow",
+              "label": "Shallowest line",
+              "gradient": 0.9770491803,
+              "intercept": 0.1120655738,
+              "bars": true
+            }
+          ],
+          "fit": {
+            "gradient": 1.141142857,
+            "intercept": 0.01678095238
+          },
+          "worth": 0,
+          "on": "graph"
+        }
       }
     ],
     "generated": {
       "version": 2,
-      "seed": 5
+      "seed": 176
     },
     "review": {
       "status": "APPROVED"
@@ -837,7 +1001,67 @@
         "markscheme": [
           "Point plotted at $n = 4$, $h = 18.5\\ \\text{cm}$, to within half a small square ✓"
         ],
-        "msFigure": "graph-ms"
+        "msFigure": "graph-ms",
+        "plot": {
+          "title": "Graph of peak height against bounce number, with 6 plotted points, to plot the missing point on",
+          "height": 286,
+          "x": {
+            "min": 0,
+            "max": 6,
+            "step": 0.2,
+            "major": 1,
+            "symbol": "n",
+            "unit": ""
+          },
+          "y": {
+            "min": 0,
+            "max": 250,
+            "step": 10,
+            "major": 50,
+            "symbol": "h",
+            "unit": "cm"
+          },
+          "given": [
+            [
+              0,
+              200,
+              0
+            ],
+            [
+              1,
+              110.5,
+              0
+            ],
+            [
+              2,
+              60.5,
+              0
+            ],
+            [
+              3,
+              34,
+              0
+            ],
+            [
+              5,
+              10,
+              0
+            ],
+            [
+              6,
+              6.5,
+              0
+            ]
+          ],
+          "points": [
+            [
+              4,
+              18.5
+            ]
+          ],
+          "worth": 1,
+          "on": "graph"
+        }
       },
       {
         "label": "d",
@@ -1177,7 +1401,61 @@
         "markscheme": [
           "Point at $T_\\text{model} = 210\\ \\text{K}$, $T_\\text{obs} = 208\\ \\text{K}$ (close to the dashed line), to within half a small square ✓"
         ],
-        "msFigure": "graph-ms"
+        "msFigure": "graph-ms",
+        "plot": {
+          "title": "Graph of observed mean temperature against model temperature, with 4 plotted points, to plot the missing point on",
+          "height": 400,
+          "x": {
+            "min": 200,
+            "max": 450,
+            "step": 10,
+            "major": 50,
+            "symbol": "T(model)",
+            "unit": "K"
+          },
+          "y": {
+            "min": 200,
+            "max": 800,
+            "step": 20,
+            "major": 100,
+            "symbol": "T(observed)",
+            "unit": "K"
+          },
+          "given": [
+            [
+              440,
+              440,
+              0
+            ],
+            [
+              227,
+              737,
+              0
+            ],
+            [
+              255,
+              288,
+              0
+            ],
+            [
+              270,
+              253,
+              0
+            ]
+          ],
+          "points": [
+            [
+              210,
+              208
+            ]
+          ],
+          "reference": {
+            "gradient": 1,
+            "intercept": 0
+          },
+          "worth": 1,
+          "on": "graph"
+        }
       },
       {
         "label": "c",
