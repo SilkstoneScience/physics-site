@@ -47,7 +47,7 @@ Each teacher file stores a **fingerprint** of its topic page's text (a short cod
 ## 6. Other decisions
 
 - **Shareable links:** the page address stores the choices (topic, parts, chosen question ids), so a teacher can bookmark or share an exact sheet. If a saved link names a question that no longer exists, the page picks a replacement.
-- **Copyright footer** on both documents: © Mark Silkstone, may be copied for classroom use, with a link to the site. Add a matching line to `about.html#copyright`.
+- **Copyright footer** on both documents: © Mr Silkstone's Physics, may be copied for classroom use, with a link to the site. Add a matching line to `about.html#copyright`.
 - **The teacher key is public** (a static site can't hide it). Accepted: the mark schemes are already visible in the question bank.
 - **Extended Essay:** removed from the main menu, added as a card on the Experimental Programme landing page (`experimental/index.html`); the home-page card stays. `ee/index.html` keeps its name.
 - **Still to decide:** whether "For teachers" goes in the main menu or is only a home-page card.

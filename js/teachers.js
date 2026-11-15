@@ -248,7 +248,7 @@
     return out.join('');
   }
   function sheetFooter(d) {
-    return `<footer class="sheet-foot">© 2026 Mark Silkstone, Mr Silkstone's Physics (<a href="${SITE}">physics.silkstone.xyz</a>). May be copied for classroom use, not for sale.
+    return `<footer class="sheet-foot">© 2026 Mr Silkstone's Physics (<a href="${SITE}">physics.silkstone.xyz</a>). May be copied for classroom use, not for sale.
       Full notes: <a href="${d.liveUrl}">${d.topic} ${esc(d.title)}</a>. Not produced or endorsed by the International Baccalaureate Organization.</footer>`;
   }
 
