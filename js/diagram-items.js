@@ -39,8 +39,11 @@
   const rect = (x, y, w, h, cls = 'o f', rx = 0) => `<rect class="${cls}" x="${n(x)}" y="${n(y)}" width="${n(w)}" height="${n(h)}"${rx ? ` rx="${rx}"` : ''}/>`;
   const circle = (cx, cy, r, cls = 'o f') => `<circle class="${cls}" cx="${n(cx)}" cy="${n(cy)}" r="${n(r)}"/>`;
   const path = (d, cls = 'o f') => `<path class="${cls}" d="${d}"/>`;
+  // Text inside a drawing. When the item is flipped, the text is flipped back so it still reads normally.
+  let mirror = false;
   const text = (x, y, s, size = 12, anchor = 'middle') =>
-    `<text class="t" x="${n(x)}" y="${n(y)}" font-size="${size}" text-anchor="${anchor}" dominant-baseline="central">${s}</text>`;
+    `<text class="t" x="${n(x)}" y="${n(y)}" font-size="${size}" text-anchor="${anchor}" dominant-baseline="central"` +
+    (mirror ? ` transform="matrix(-1 0 0 1 ${n(2 * x)} 0)"` : '') + `>${s}</text>`;
 
   // Circuit symbols share one size, with terminals at the middle of each end.
   const SYM_W = 80, SYM_H = 40, MID = 20;
@@ -297,10 +300,13 @@
   }
 
   // SVG markup for an item in the box 0..w × 0..h (default: natural size).
-  function markup(it, w = it.w, h = it.h, opt) {
+  // `flipped` tells it the item will be shown mirrored, so its text is mirrored back.
+  function markup(it, w = it.w, h = it.h, opt, flipped) {
     const o = Object.assign(defaults(it), opt || {});
     const f = fit(it, w, h);
+    mirror = !!flipped;
     const inner = it.draw(f.dw, f.dh, o);
+    mirror = false;
     return Math.abs(f.s - 1) < 1e-6 ? inner : `<g transform="scale(${n(f.s)})">${inner}</g>`;
   }
 

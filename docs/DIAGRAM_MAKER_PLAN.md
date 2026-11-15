@@ -300,7 +300,8 @@ opens again. Format:
 5. **Labels:** leader lines, spec line, numbered labels and key.
 6. **Saving:** PNG export, Save progress, Open saved file, auto-save.
 7. **The rest of the equipment**, in batches by group, each shown in the preview.
-8. **Finishing:** "How to use" text, links from the IA page and the Experimental menu, the checker,
+8. **Finishing:** remove the temporary `noindex` line from the page's head (it keeps the unfinished page out of the
+   sitemap and site search while it's being built), "How to use" text, links from the IA page and the Experimental menu, the checker,
    `node tools/check.mjs --sitemap`, PROGRESS.md, CLAUDE.md, then merge and push after the teacher's yes.
 
 ## 10. Teacher's answers (15 November 2026)
