@@ -31,7 +31,18 @@
     motion: { name: 'Motion arrow', label: true, two: true, hint: 'Motion arrow: click where it starts, then where it points.' },
     force: { name: 'Force arrow', label: true, two: true, hint: 'Force arrow: click where the force acts, then where it points.' }
   };
-  const SELECT_HINT = 'Drag equipment onto the page, then choose a line tool above to join things up.';
+  const SELECT_HINT = 'Drag equipment onto the page, then choose a line tool above to join things up, and Label to name the parts.';
+  const LABEL_HINT = 'Label: click the thing you want to label, then click where the words should go. Then type the label (and, if you like, its precision) in the settings.';
+  const hintFor = (t) => (t === 'select' ? SELECT_HINT : t === 'label' ? LABEL_HINT : KINDS[t].hint);
+
+  // Labels: text sizes, and a measure of how wide a piece of text is (for the leader line and the selection box)
+  const LB_SIZE = 16, SPEC_SIZE = 12.5, NUM_R = 11, KEY_SIZE = 15;
+  const FONT = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+  const measureCtx = document.createElement('canvas').getContext('2d');
+  function textWidth(s, size, bold) {
+    measureCtx.font = `${bold ? '600 ' : ''}${size}px ${FONT}`;
+    return measureCtx.measureText(String(s || '')).width;
+  }
 
   // ---------------------------------------------------------------- state
   let doc = blankDoc();
@@ -42,6 +53,8 @@
   let tool = 'select';          // or a line kind
   let drawing = null;           // the line being drawn: { points, att }
   let hover = null;             // { p, att } where the next point would go
+  let labelDraft = null;        // a label being placed: { p, to, tp, name } after the first click
+  let labelHover = null;        // where its words would go
 
   function blankDoc() {
     return { format: 'ib-physics-diagram', version: 1, page: { w: PAGE_W, h: PAGE_H, grid: GRID, snap: true, showGrid: true }, objects: [] };
@@ -68,7 +81,11 @@
       return [cx + x, cy + y];
     });
   }
-  const shapePts = (o) => (o.type === 'line' ? o.points : corners(o));
+  function shapePts(o) {
+    if (o.type === 'line') return o.points;
+    if (o.type === 'label') { const b = labelBox(o); return [targetPt(o), [b.x1, b.y1], [b.x2, b.y2]]; }
+    return corners(o);
+  }
   function bbox(list) {
     let x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity;
     list.forEach((o) => shapePts(o).forEach(([x, y]) => { x1 = Math.min(x1, x); y1 = Math.min(y1, y); x2 = Math.max(x2, x); y2 = Math.max(y2, y); }));
@@ -94,6 +111,51 @@
       out[k] = [r2(cx + rx), r2(cy + ry)];
     });
     return out;
+  }
+
+  // ----- Labels. A label's (x, y) is where its leader line meets it; `to` fixes the other end of the
+  // leader to a piece of equipment ({ obj, u, v }: fractions across and down the item) or a line
+  // ({ obj, i, t }: piece i, fraction t along it); without `to`, the end is the free point `tp`.
+  function targetPt(l) {
+    const o = l.to && byId(l.to.obj);
+    if (o && o.type === 'item') {
+      let x = (l.to.u - 0.5) * o.w; const y = (l.to.v - 0.5) * o.h;
+      if (o.flip) x = -x;
+      const [rx, ry] = rotPt([x, y], o.rot || 0), [cx, cy] = centre(o);
+      return [r2(cx + rx), r2(cy + ry)];
+    }
+    if (o && o.type === 'line') {
+      const a = o.points[Math.min(l.to.i, o.points.length - 2)], b = o.points[Math.min(l.to.i, o.points.length - 2) + 1];
+      return [r2(a[0] + (b[0] - a[0]) * l.to.t), r2(a[1] + (b[1] - a[1]) * l.to.t)];
+    }
+    return l.tp ? l.tp.slice() : [l.x - 40, l.y];
+  }
+  // What a label at page point p would be fixed to, given the thing under it
+  function attachTo(p, o) {
+    if (!o || o.type === 'label') return { to: null, tp: p.map(r2) };
+    if (o.type === 'item') {
+      const [cx, cy] = centre(o);
+      let [x, y] = rotPt([p[0] - cx, p[1] - cy], -(o.rot || 0));
+      if (o.flip) x = -x;
+      return { to: { obj: o.id, u: r2(x / o.w + 0.5), v: r2(y / o.h + 0.5) }, tp: null };
+    }
+    let best = { d: Infinity };
+    for (let i = 0; i < o.points.length - 1; i++) {
+      const { q, t } = nearestOnSeg(p, o.points[i], o.points[i + 1]), d = dist(p, q);
+      if (d < best.d) best = { d, i, t };
+    }
+    return { to: { obj: o.id, i: best.i, t: r2(best.t) }, tp: null };
+  }
+  const numbered = () => !!doc.page.numbered;
+  const labelsInOrder = () => doc.objects.filter((o) => o.type === 'label').sort((a, b) => (a.n || 0) - (b.n || 0));
+  // Is the label's text to the left of its leader (so it ends at x), or to the right (starts at x)?
+  const onLeft = (l) => l.x < targetPt(l)[0] - 2;
+  function labelBox(l) {
+    if (numbered()) return { x1: l.x - NUM_R, y1: l.y - NUM_R, x2: l.x + NUM_R, y2: l.y + NUM_R };
+    const w = Math.max(textWidth(l.text || ' ', LB_SIZE), l.spec ? textWidth(l.spec, SPEC_SIZE) : 0) + 6;
+    const h = l.spec ? LB_SIZE + SPEC_SIZE + 6 : LB_SIZE + 4;
+    const x1 = onLeft(l) ? l.x - w - 2 : l.x;
+    return { x1, y1: l.y - LB_SIZE / 2 - 3, x2: x1 + w + 2, y2: l.y - LB_SIZE / 2 - 3 + h };
   }
 
   // Keep lines attached to equipment that has moved. A wire with corners keeps its corners square.
@@ -233,8 +295,47 @@
     return s;
   }
 
+  // A label: its leader line (with a small dot on the thing it points to), then its words or its number
+  function labelMarkup(l, num) {
+    const T = targetPt(l), P = [l.x, l.y], left = onLeft(l), leader = l.leader !== false;
+    let s = '';
+    const lead = (from) => `<line class="lb-leader" x1="${r2(T[0])}" y1="${r2(T[1])}" x2="${r2(from[0])}" y2="${r2(from[1])}"/><circle class="lb-dot" cx="${r2(T[0])}" cy="${r2(T[1])}" r="2.2"/>`;
+    if (numbered()) {
+      if (leader && dist(T, P) > NUM_R + 3) { const u = unit(P, T); s += lead([P[0] + u[0] * NUM_R, P[1] + u[1] * NUM_R]); }
+      return s + `<circle class="lb-num" cx="${r2(l.x)}" cy="${r2(l.y)}" r="${NUM_R}"/>` +
+        `<text class="lb-numt" x="${r2(l.x)}" y="${r2(l.y + 0.5)}" font-size="13" text-anchor="middle" dominant-baseline="central">${num}</text>`;
+    }
+    if (leader && dist(T, P) > 6) s += lead([l.x + (left ? 3 : -3), l.y]);
+    const tx = r2(l.x + (left ? -4 : 4)), anchor = left ? 'end' : 'start';
+    s += `<text class="lb-text" x="${tx}" y="${r2(l.y)}" font-size="${LB_SIZE}" text-anchor="${anchor}" dominant-baseline="central">${esc(l.text || '')}</text>`;
+    if (l.spec) s += `<text class="lb-spec" x="${tx}" y="${r2(l.y + LB_SIZE / 2 + SPEC_SIZE / 2 + 4)}" font-size="${SPEC_SIZE}" text-anchor="${anchor}" dominant-baseline="central">${esc(l.spec)}</text>`;
+    return s;
+  }
+  // The key under the diagram when labels are numbered (beside it if there's no room underneath)
+  function keyLayout() {
+    const labels = labelsInOrder();
+    if (!numbered() || !labels.length) return null;
+    const rest = doc.objects;
+    const b = bbox(rest), rowH = KEY_SIZE + 9;
+    const rows = labels.map((l, i) => ({ n: i + 1, text: l.text || '', spec: l.spec || '' }));
+    let x = b.x1, y = b.y2 + 34;
+    if (y + rowH * rows.length > PAGE_H - 8) { x = b.x2 + 40; y = b.y1 + 10; }
+    return { x: r2(x), y: r2(y), rowH, rows };
+  }
+  function keyMarkup() {
+    const k = keyLayout();
+    if (!k) return '';
+    return '<g class="lb-key">' + k.rows.map((r, i) => {
+      const y = r2(k.y + i * k.rowH);
+      return `<text class="lb-text" x="${k.x}" y="${y}" font-size="${KEY_SIZE}" dominant-baseline="central"><tspan class="lb-keyn">${r.n}</tspan>` +
+        `<tspan x="${r2(k.x + 26)}">${esc(r.text)}</tspan>${r.spec ? `<tspan class="lb-spec" font-size="${SPEC_SIZE + 0.5}"> (${esc(r.spec)})</tspan>` : ''}</text>`;
+    }).join('') + '</g>';
+  }
+
   function renderObjects() {
     followAttachments();
+    const nums = {};
+    labelsInOrder().forEach((l, i) => { nums[l.id] = i + 1; });
     gObjs.innerHTML = doc.objects.map((o) => {
       if (o.type === 'item') {
         const m = itemMarkup(o);
@@ -243,8 +344,14 @@
       if (o.type === 'line') {
         return `<g data-id="${esc(o.id)}">${lineMarkup(o)}<path class="dm-linehit" d="${pathD(o.points, o.curved && KINDS[o.kind].curve)}"/></g>`;
       }
+      if (o.type === 'label') {
+        // Only the words select a label: its leader line lets clicks through to the equipment underneath
+        const b = labelBox(o);
+        return `<g data-id="${esc(o.id)}"><g class="dm-nohit">${labelMarkup(o, nums[o.id])}</g>` +
+          `<rect class="dm-boxhit" x="${r2(b.x1)}" y="${r2(b.y1)}" width="${r2(b.x2 - b.x1)}" height="${r2(b.y2 - b.y1)}"/></g>`;
+      }
       return '';
-    }).join('') + junctionDots();
+    }).join('') + junctionDots() + keyMarkup();
   }
 
   let marquee = null;   // { x1, y1, x2, y2 } while dragging a selection box
@@ -269,11 +376,20 @@
       l.points.forEach((p, i) => {
         s += `<circle class="dm-handle dm-pt${l.att && l.att[i] ? ' dm-pt-on' : ''}" data-pt="${i}" cx="${r2(p[0])}" cy="${r2(p[1])}" r="${r2(6 * k)}"/>`;
       });
+    } else if (list.length === 1 && list[0].type === 'label' && tool === 'select') {
+      const l = list[0], b = labelBox(l), T = targetPt(l);
+      s += `<rect class="dm-selbox" x="${r2(b.x1 - 3)}" y="${r2(b.y1 - 3)}" width="${r2(b.x2 - b.x1 + 6)}" height="${r2(b.y2 - b.y1 + 6)}"/>` +
+        `<circle class="dm-handle dm-pt${l.to ? ' dm-pt-on' : ''}" data-lt="1" cx="${T[0]}" cy="${T[1]}" r="${r2(6 * k)}"/>`;
     } else if (list.length > 1) {
       const b = bbox(list);
       s += `<rect class="dm-selbox" x="${r2(b.x1 - 4)}" y="${r2(b.y1 - 4)}" width="${r2(b.x2 - b.x1 + 8)}" height="${r2(b.y2 - b.y1 + 8)}"/>`;
     }
-    if (tool !== 'select') {
+    if (tool === 'label') {
+      if (labelDraft) {
+        const T = labelDraft.p, P = labelHover || T;
+        s += `<g class="dm-art dm-preview"><line class="lb-leader" x1="${T[0]}" y1="${T[1]}" x2="${r2(P[0])}" y2="${r2(P[1])}"/><circle class="lb-dot" cx="${T[0]}" cy="${T[1]}" r="2.2"/></g>`;
+      }
+    } else if (tool !== 'select') {
       // Show every attachment point while a line tool is chosen
       doc.objects.forEach((o) => {
         if (o.type !== 'item') return;
@@ -354,9 +470,11 @@
   }
 
   // ---------------------------------------------------------------- moving whole objects
-  function shift(o, dx, dy) {
+  // `group`: moving with other things, so a label's free leader end moves too (alone, it stays put)
+  function shift(o, dx, dy, group) {
     if (o.type === 'line') o.points = o.points.map(([x, y]) => [r2(x + dx), r2(y + dy)]);
     else { o.x = r2(o.x + dx); o.y = r2(o.y + dy); }
+    if (o.type === 'label' && group && !o.to && o.tp) o.tp = [r2(o.tp[0] + dx), r2(o.tp[1] + dy)];
   }
   // A selected line that moves without the item it's attached to comes away from it
   function detachFromUnselected(list) {
@@ -385,14 +503,18 @@
     sel = new Set();
     list.forEach((o) => { ids[o.id] = newId(); o.id = ids[o.id]; doc.objects.push(o); sel.add(o.id); });
     list.forEach((o) => {
-      shift(o, 20 * pasteCount, 20 * pasteCount);
+      shift(o, 20 * pasteCount, 20 * pasteCount, true);
       if (o.att) o.att = o.att.map((a) => (a && ids[a.obj] ? { obj: ids[a.obj], anchor: a.anchor } : null));   // stays attached only to copies
+      if (o.to && ids[o.to.obj]) o.to = Object.assign({}, o.to, { obj: ids[o.to.obj] });                      // a copied label points at the copy
+      if (o.type === 'label') o.n = nextLabelN();
     });
     render(); renderProps(); commit();
   }
   function duplicate() { copySel(); paste(); }
   function del() {
     if (!sel.size) return;
+    // Labels pointing at something being deleted keep their leader where it was
+    doc.objects.forEach((l) => { if (l.type === 'label' && l.to && sel.has(l.to.obj)) { l.tp = targetPt(l); l.to = null; } });
     doc.objects = doc.objects.filter((o) => !sel.has(o.id));
     doc.objects.forEach((l) => { if (l.att) l.att = l.att.map((a) => (a && byId(a.obj) ? a : null)); });
     sel = new Set(); render(); renderProps(); commit();
@@ -411,6 +533,10 @@
     const turn = ([x, y]) => { const [dx, dy] = rotPt([x - gx, y - gy], deg); return [r2(gx + dx), r2(gy + dy)]; };
     list.forEach((o) => {
       if (o.type === 'line') { o.points = o.points.map(turn); return; }
+      if (o.type === 'label') {   // words stay upright; only their place turns
+        if (list.length > 1) { [o.x, o.y] = turn([o.x, o.y]); if (!o.to && o.tp) o.tp = turn(o.tp); }
+        return;
+      }
       if (list.length > 1) { const [cx, cy] = turn(centre(o)); o.x = r2(cx - o.w / 2); o.y = r2(cy - o.h / 2); }
       o.rot = normAngle((o.rot || 0) + deg);
     });
@@ -423,6 +549,10 @@
     const b = bbox(list), gx = (b.x1 + b.x2) / 2;
     list.forEach((o) => {
       if (o.type === 'line') { o.points = o.points.map(([x, y]) => [r2(2 * gx - x), y]); return; }
+      if (o.type === 'label') {
+        if (list.length > 1) { o.x = r2(2 * gx - o.x); if (!o.to && o.tp) o.tp = [r2(2 * gx - o.tp[0]), o.tp[1]]; }
+        return;
+      }
       if (list.length > 1) { const [cx] = centre(o); o.x = r2(2 * gx - cx - o.w / 2); }
       o.flip = !o.flip; o.rot = normAngle(-(o.rot || 0));
     });
@@ -431,7 +561,7 @@
   function nudge(dx, dy) {
     const list = selected();
     detachFromUnselected(list);
-    list.forEach((o) => shift(o, dx, dy));
+    list.forEach((o) => shift(o, dx, dy, list.length > 1));
     render(); renderProps(); commit();
   }
 
@@ -484,15 +614,15 @@
   function setTool(t) {
     if (drawing) cancelDrawing();
     tool = t;
-    hover = null;
+    hover = null; labelDraft = null; labelHover = null;
     app.querySelectorAll('[data-tool]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tool === t)));
     app.classList.toggle('dm-drawmode', t !== 'select');
-    setHint(t === 'select' ? SELECT_HINT : KINDS[t].hint);
+    setHint(hintFor(t));
     if (t !== 'select') sel = new Set();
     renderOverlay(); renderProps(); updateFinish();
   }
   function updateFinish() {
-    $('[data-act="finish"]').hidden = !(drawing && drawing.points.length > 1 && !KINDS[tool].two);
+    $('[data-act="finish"]').hidden = !(drawing && KINDS[tool] && drawing.points.length > 1 && !KINDS[tool].two);
     updateUndo();
   }
   let lastDown = { t: 0, c: [0, 0] };
@@ -534,6 +664,45 @@
   }
   function cancelDrawing() { drawing = null; hover = null; renderOverlay(); updateFinish(); }
 
+  // ---------------------------------------------------------------- placing labels
+  const nextLabelN = () => doc.objects.reduce((m, o) => (o.type === 'label' ? Math.max(m, o.n || 0) : m), 0) + 1;
+  // The thing under a point on the screen (not the label being placed, not the handles)
+  function thingAt(clientX, clientY, skipId) {
+    for (const el of document.elementsFromPoint(clientX, clientY)) {
+      const g = el.closest && el.closest('#dm-objs [data-id]');
+      if (g && g.dataset.id !== skipId) { const o = byId(g.dataset.id); if (o && o.type !== 'label') return o; }
+    }
+    return null;
+  }
+  // First click: what the label points at. Second click: where its words go.
+  function labelClick(e) {
+    const p = toPage(e.clientX, e.clientY);
+    if (!labelDraft) {
+      const o = thingAt(e.clientX, e.clientY);
+      const it = o && o.type === 'item' ? D.byId[o.item] : null;
+      const name = it ? it.name.replace(/ \((?:on a stand|seen from above)\)$/, '').replace(/ \(.*\)$/, '') : o && o.type === 'line' ? KINDS[o.kind].name : '';
+      labelDraft = Object.assign({ p: p.map(r2), name }, attachTo(p, o));
+      setHint('Now click where the words should go.');
+      renderOverlay();
+      return;
+    }
+    const d = labelDraft;
+    labelDraft = null; labelHover = null;
+    const P = [snapv(p[0]), snapv(p[1])];
+    const l = { id: newId(), type: 'label', text: d.name || 'Label', spec: '', x: P[0], y: P[1], to: d.to, tp: d.tp, n: nextLabelN() };
+    doc.objects.push(l);
+    setTool('select');
+    sel = new Set([l.id]);
+    render(); renderProps(); commit();
+    focusLabelText();
+  }
+  // Put the cursor in the label's text box, ready to type (opening the settings drawer on a small screen)
+  function focusLabelText() {
+    if (narrow()) setDrawer('props');
+    const input = props.querySelector('input[data-b="text"]');
+    if (input) { input.focus(); input.select(); }
+  }
+
   // ---------------------------------------------------------------- pointer: move, resize, turn, select, pan, pinch
   const pointers = new Map();
   let drag = null;
@@ -545,10 +714,13 @@
     if (pointers.size === 2) { startPinch(); return; }
     if (pointers.size > 2) return;
     e.preventDefault();
+    if (tool === 'label') { labelClick(e); drag = { mode: 'drawing' }; return; }
     if (tool !== 'select') { drawClick(e); drag = { mode: 'drawing' }; return; }
     const p = toPage(e.clientX, e.clientY);
     const h = e.target.closest('[data-h]'), pt = e.target.closest('[data-pt]'), g = e.target.closest('[data-id]');
-    if (pt && sel.size === 1) {
+    if (e.target.closest('[data-lt]') && sel.size === 1) {
+      drag = { mode: 'lt', l: selected()[0], changed: false, p0: p };
+    } else if (pt && sel.size === 1) {
       const l = selected()[0];
       drag = { mode: 'pt', l, i: Number(pt.dataset.pt), changed: false, p0: p };
     } else if (h && sel.size === 1) {
@@ -571,7 +743,9 @@
   });
 
   svg.addEventListener('pointermove', (e) => {
-    if (tool !== 'select' && pointers.size < 2) {   // show where the next point of a line would go
+    if (tool === 'label') {   // show the leader line of the label being placed
+      if (labelDraft && pointers.size < 2) { labelHover = toPage(e.clientX, e.clientY); renderOverlay(); }
+    } else if (tool !== 'select' && pointers.size < 2) {   // show where the next point of a line would go
       hover = levelUp(snapPoint(toPage(e.clientX, e.clientY), e.altKey));
       if (drawing) drawing.slant = e.shiftKey;
       renderOverlay();
@@ -601,13 +775,19 @@
     drag.changed = true;
     if (drag.mode === 'move') {
       if (snapOn() && drag.box) {   // keep the selection's top-left corner on the grid
-        dx = snapv(drag.box.x1 + dx) - drag.box.x1;
-        dy = snapv(drag.box.y1 + dy) - drag.box.y1;
+        const one = drag.starts.length === 1 && drag.starts[0][1].type === 'label' ? drag.starts[0][1] : null;
+        const ref = one ? [one.x, one.y] : [drag.box.x1, drag.box.y1];   // a lone label snaps where its leader meets it
+        dx = snapv(ref[0] + dx) - ref[0];
+        dy = snapv(ref[1] + dy) - ref[1];
       }
+      const group = drag.starts.length > 1;
       drag.starts.forEach(([o, s]) => {
         if (o.type === 'line') o.points = s.points.map(([x, y]) => [r2(x + dx), r2(y + dy)]);
         else { o.x = r2(s.x + dx); o.y = r2(s.y + dy); }
+        if (o.type === 'label' && group && !o.to && s.tp) o.tp = [r2(s.tp[0] + dx), r2(s.tp[1] + dy)];
       });
+    } else if (drag.mode === 'lt') {   // move the end of a label's leader line, fixing it to whatever is under it
+      Object.assign(drag.l, attachTo(p, thingAt(e.clientX, e.clientY, drag.l.id)));
     } else if (drag.mode === 'pt') {
       const s = snapPoint(p, e.altKey);
       drag.l.points[drag.i] = s.p;
@@ -640,6 +820,7 @@
   svg.addEventListener('dblclick', (e) => {
     if (tool !== 'select' || sel.size !== 1) return;
     const l = selected()[0];
+    if (l.type === 'label') { focusLabelText(); return; }   // double-click a label to change its words
     if (l.type !== 'line') return;
     const pt = e.target.closest('[data-pt]');
     if (pt) {
@@ -788,9 +969,10 @@
     const list = selected();
     if (!list.length) {
       props.innerHTML = '<h2>Settings</h2>' + (tool !== 'select'
-        ? `<p class="dm-tip">${esc(KINDS[tool].hint)}</p><p class="dm-tip">Press Esc, or the Select tool, when you have finished drawing lines.</p>`
+        ? `<p class="dm-tip">${esc(hintFor(tool))}</p><p class="dm-tip">Press Esc, or the Select tool, when you have finished.</p>`
         : '<p class="dm-tip">Nothing is selected. Click (or tap) something on the page to change it, or drag on empty paper to select several things.</p>' +
-          '<p class="dm-tip">Add equipment from the list on the left' + (narrow() ? ' (the Equipment button)' : '') + ', and join it up with the line tools above the page.</p>');
+          '<p class="dm-tip">Add equipment from the list on the left' + (narrow() ? ' (the Equipment button)' : '') + ', join it up with the line tools above the page, and name the parts with Label.</p>') +
+        numberedSwitch();
       return;
     }
     if (list.length > 1) {
@@ -799,6 +981,7 @@
     }
     const o = list[0];
     if (o.type === 'line') { props.innerHTML = lineProps(o); return; }
+    if (o.type === 'label') { props.innerHTML = labelProps(o); return; }
     const it = D.byId[o.item];
     let s = `<h2>${esc(it ? it.name : o.item)}</h2>`;
     if (it && it.options) {
@@ -835,9 +1018,41 @@
     return s;
   }
 
+  // The switch between labels with words and numbered labels with a key (for the whole diagram)
+  function numberedSwitch() {
+    return `<label class="dm-check dm-numsw"><input type="checkbox" data-b="numbered"${numbered() ? ' checked' : ''}> Numbered labels, with a key under the diagram</label>`;
+  }
+  function labelProps(l) {
+    const list = labelsInOrder(), i = list.indexOf(l);
+    let s = `<h2>Label${numbered() ? ' ' + (i + 1) : ''}</h2>` +
+      `<label class="dm-field">Words<input type="text" data-b="text" maxlength="60" value="${esc(l.text || '')}"></label>` +
+      `<label class="dm-field">Precision or detail <span class="dm-opt">(optional, smaller, underneath)</span><input type="text" data-b="spec" maxlength="60" placeholder="for example ±0.01 g" value="${esc(l.spec || '')}"></label>` +
+      `<label class="dm-check"><input type="checkbox" data-b="leader"${l.leader !== false ? ' checked' : ''}> Leader line</label>` + numberedSwitch();
+    if (numbered() && list.length > 1) {
+      s += '<p class="dm-btnrow">' +
+        `<button type="button" class="button secondary dm-small" data-b="up"${i === 0 ? ' disabled' : ''}>Earlier in the key</button>` +
+        `<button type="button" class="button secondary dm-small" data-b="down"${i === list.length - 1 ? ' disabled' : ''}>Later in the key</button></p>`;
+    }
+    return s + '<p class="dm-tip">Drag the words to move them, and the dot at the other end of the leader to point at something else (it turns green when it is fixed to a piece of equipment and follows it).</p>';
+  }
+
   function propInput(e, done) {
     const el = e.target, o = selected()[0];
+    if (el.dataset.b === 'numbered') {   // works with or without a label selected
+      if (!done) return;
+      doc.page.numbered = el.checked;
+      render(); renderProps(); commit();
+      return;
+    }
     if (!o || sel.size !== 1) return;
+    if (o.type === 'label') {
+      if (el.dataset.b === 'text') o.text = el.value;
+      else if (el.dataset.b === 'spec') o.spec = el.value;
+      else if (el.dataset.b === 'leader') o.leader = el.checked;
+      render();
+      if (done) commit();
+      return;
+    }
     if (o.type === 'line') {
       if (el.dataset.l === 'kind') {
         o.kind = el.value;
@@ -873,7 +1088,15 @@
   props.addEventListener('input', (e) => propInput(e, e.target.type === 'checkbox' || e.target.tagName === 'SELECT'));
   props.addEventListener('change', (e) => propInput(e, true));
   props.addEventListener('click', (e) => {
-    const k = e.target.dataset.k, lk = e.target.dataset.l, o = selected()[0];
+    const k = e.target.dataset.k, lk = e.target.dataset.l, bk = e.target.dataset.b, o = selected()[0];
+    if (o && (bk === 'up' || bk === 'down')) {   // swap places in the key with the label before or after
+      const list = labelsInOrder(), i = list.indexOf(o), j = bk === 'up' ? i - 1 : i + 1;
+      if (j < 0 || j >= list.length) return;
+      list.forEach((l, m) => { l.n = m + 1; });
+      [o.n, list[j].n] = [list[j].n, o.n];
+      render(); renderProps(); commit();
+      return;
+    }
     if (!o || (!k && !['reverse', 'bend', 'straight'].includes(lk))) return;
     if (k === 'natural') {
       const it = D.byId[o.item];

@@ -195,6 +195,11 @@ equipment is moved. Every line can be edited afterwards (drag its points, add or
 | Force arrow | thick arrow with a filled head, optional label (e.g. *W*) | the centre or edge of an object | for forces |
 
 ## 5. Labels
+*Built 15 November 2026 (stage 5).* A label starts with the name of the equipment it points at (without the
+bracketed part, e.g. "Laser"), and the settings open with the words selected, ready to type over. Its words stay
+upright when a group is turned. Only the words select a label, so clicks on its leader line reach the equipment
+underneath. Deleting the equipment keeps the label, with its leader ending where it was.
+
 - **Label tool:** click an object to start a leader line there, then click where the text goes. Type the label (for
   example "Top-pan balance"); an optional second line underneath, in smaller grey text, gives the specification
   (for example "±0.01 g"). Drag either end afterwards; the leader end stays attached to its object.
@@ -287,7 +292,7 @@ opens again. Format:
     { "id": "o5", "type": "line", "kind": "force", "text": "W",
       "points": [[450, 400], [450, 470]], "att": [null, null] },
     { "id": "o4", "type": "label", "text": "Beaker of water", "spec": "250 ml",
-      "x": 600, "y": 300, "to": { "obj": "o2", "dx": 40, "dy": 60 }, "n": 1 }
+      "x": 600, "y": 300, "to": { "obj": "o2", "u": 0.5, "v": 0.8 }, "tp": null, "n": 1 }
   ]
 }
 ```
@@ -297,6 +302,10 @@ opens again. Format:
 - A line's `kind` is `string`, `wire`, `tube`, `ray`, `motion` or `force`. `att` has one entry per point: the
   attachment point it is fixed to (the item's id and the anchor's name), or `null`. Attached points move with
   their item. Optional: `curved` (a smooth curve, for string, wire and tubing) and `text` (an arrow's label).
+- A label's `x`, `y` is where its leader meets the words (or the centre of its number). `to` fixes the leader's other
+  end to a piece of equipment (`u`, `v`: fractions across and down it, so it follows when the item moves, turns or is
+  resized) or to a line (`i`: which piece, `t`: how far along it); without `to`, the end is the free point `tp`.
+  `n` sets the order in the key; `leader: false` hides the leader. `page.numbered` switches numbered labels on.
 - `item` is the permanent item id from the equipment bank. If a file names an item the bank doesn't have (for
   example a newer file opened on an older page), it shows as a grey box with the id, rather than failing.
 - `version` lets later versions of the page read older files.

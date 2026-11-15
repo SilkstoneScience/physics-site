@@ -8,6 +8,7 @@
   --dm-glass: rgba(140, 175, 210, 0.16);
   --dm-water: #cfe5f6;
   --dm-ray: #d32f2f;
+  --dm-spec: #555555;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -17,13 +18,14 @@
     --dm-glass: rgba(140, 175, 210, 0.12);
     --dm-water: #1f3d56;
     --dm-ray: #ff6b6b;
+    --dm-spec: #b3bccb;
   }
 }
 
 /* How the PNG will look: always black on white, even in dark mode */
 .dm-light {
   --dm-ink: #111111; --dm-paper: #ffffff; --dm-metal: #dfe3e8;
-  --dm-glass: rgba(140, 175, 210, 0.16); --dm-water: #cfe5f6; --dm-ray: #d32f2f;
+  --dm-glass: rgba(140, 175, 210, 0.16); --dm-water: #cfe5f6; --dm-ray: #d32f2f; --dm-spec: #555555;
   background: #ffffff;
 }
 
@@ -136,6 +138,20 @@ body[data-section] main.dm-main { max-width: 1440px; }   /* the editor gets the 
 .dm-art .ln-forcehead, .dm-art .ln-dot { fill: currentColor; }
 .dm-art .ln-label { fill: currentColor; font-family: "Times New Roman", Times, serif; font-style: italic; }
 .dm-linehit { fill: none; stroke: transparent; stroke-width: 14px; stroke-linecap: round; stroke-linejoin: round; pointer-events: stroke; }
+
+/* Labels (stage 5) */
+.dm-art .lb-leader { stroke: currentColor; stroke-width: 1.2; }
+.dm-art .lb-dot { fill: currentColor; }
+.dm-art .lb-text, .dm-art .lb-numt { fill: currentColor; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.dm-art .lb-spec { fill: var(--dm-spec); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.dm-art .lb-num { fill: var(--dm-paper); stroke: currentColor; stroke-width: 1.5; }
+.dm-art .lb-numt { font-weight: 600; }
+.dm-art .lb-keyn { font-weight: 700; }
+.lb-key { pointer-events: none; }
+.dm-boxhit { fill: transparent; stroke: none; }
+.dm-nohit { pointer-events: none; }
+.dm-opt { font-weight: 400; color: var(--muted); }
+.dm-numsw { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border); }
 
 /* Editing lines */
 .dm-selline { fill: none; stroke: var(--accent); stroke-width: 6; stroke-opacity: 0.25; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; pointer-events: none; }
