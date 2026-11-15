@@ -30,8 +30,12 @@
   const tick = () => new Promise((r) => setTimeout(r, 30));
   let W, D, App, CC;
 
-  async function load() {
-    frameEl.src = `../../experimental/circuit-builder.html?t=${Date.now()}`;
+  // The builder runs with ?store=uitest, so its saved circuits are kept apart from a student's; they are
+  // cleared before each load unless keep is set.
+  const clearStore = () => { try { for (const k of Object.keys(localStorage)) if (k.startsWith('circuit-builder-uitest:')) localStorage.removeItem(k); } catch (e) { /* ignore */ } };
+  async function load(hash = '', keep = false) {
+    if (!keep) clearStore();
+    frameEl.src = `../../experimental/circuit-builder.html?store=uitest&t=${Date.now()}${hash}`;
     await new Promise((r) => { frameEl.onload = r; });
     for (let i = 0; i < 100 && !(frameEl.contentWindow.CircuitApp); i++) await tick();
     W = frameEl.contentWindow; D = frameEl.contentDocument; App = W.CircuitApp; CC = W.Circuits.components;
@@ -322,6 +326,56 @@
     const dots = D.querySelectorAll('.ck-dot').length;
     check('a wire ending on the middle of a wire makes a T junction with a dot', App.store.drawing.junctions.length >= 1 && dots >= 1, `${dots} dots`);
     check('the resistor is joined to that wire', net(r, 0) === net(c, 0) || net(r, 0) === net(a, 0));
+  });
+
+  await scenario('Stage 4: show the working, board view, share links, saving', async () => {
+    await load();
+    check('the example circuit opens first', App.store.drawing.components.length === 5 && reading('a1') === '0.500 A', reading('a1'));
+    App.setShow('working', true); await tick();
+    const wk = D.querySelector('.ck-working');
+    check('Show the working opens the panel', !wk.hidden);
+    check('the working gives the current from the cell (6 / 12 = 0.5 A)', wk.textContent.includes('I = ε / R = 6 / 12 = 0.5 A'), wk.textContent.slice(0, 300));
+    check('the working mentions that ideal meters are left out', wk.textContent.includes('Ideal meters are left out'));
+    await setting('l1', 'R', 24);
+    check('the working follows changes (6 / 24 = 0.25 A)', D.querySelector('.ck-working').textContent.includes('6 / 24 = 0.25 A'));
+    // Board view.
+    D.querySelector('[data-act="board"]').click(); await tick(); await tick();
+    const svgH = D.querySelector('.ck-svg').getBoundingClientRect().height;
+    check('Board fills the window', D.querySelector('.ck-app').classList.contains('ck-board') && svgH > 600, `${Math.round(svgH)} px`);
+    await key('Escape');
+    check('Esc leaves board view', !D.querySelector('.ck-app').classList.contains('ck-board'));
+    // Share links.
+    const S = W.CircuitShare;
+    const code = await S.encode(App.store.drawing);
+    const back = await S.decode(code);
+    check('a share link gives back exactly the same circuit', JSON.stringify(back) === JSON.stringify(App.store.drawing));
+    check('the example circuit\'s link is short', code.length < 600, `${code.length} characters`);
+    await load(`#c=${code}`);
+    check('opening a share link shows that circuit', comp('l1').params.R === 24 && reading('a1') === '0.250 A', reading('a1'));
+    check('… says so', D.querySelector('.ck-saved-note').textContent.includes('shared circuit'));
+    check('… and tidies the page address', !frameEl.contentWindow.location.hash);
+    await load('#c=zBROKEN');
+    check('a broken share link opens the example instead, with a message', reading('a1') === '0.500 A' && D.querySelector('.ck-saved-note').textContent.includes("couldn't be opened"));
+    // Saving and opening.
+    D.querySelector('[data-file="save"]').click(); await tick();
+    D.querySelector('.ck-filepanel input').value = 'My test circuit';
+    D.querySelector('.ck-filepanel [data-do="save"]').click(); await tick();
+    check('Save… keeps a named copy', D.querySelector('.ck-saved-note').textContent.includes('My test circuit'));
+    D.querySelector('[data-act="clear"]').click(); await tick();
+    check('cleared', App.store.drawing.components.length === 0);
+    D.querySelector('[data-file="open"]').click(); await tick();
+    const openBtn = D.querySelector('.ck-filepanel [data-open="0"]');
+    check('My circuits lists it', !!openBtn && D.querySelector('.ck-filepanel').textContent.includes('My test circuit'));
+    if (openBtn) { openBtn.click(); await tick(); }
+    check('Open brings it back', App.store.drawing.components.length === 5 && reading('a1') === '0.500 A');
+    // The circuit in progress is kept when the page is opened again.
+    App.setView(-12, -10, 1.2); await tick();
+    await place('resistor', -10, 8);
+    await new Promise((r) => setTimeout(r, 400)); // the automatic save waits 0.3 s after the last change
+    await load('', true);
+    check('the circuit in progress is still there after reopening the page', App.store.drawing.components.length === 6);
+    D.querySelector('[data-file="example"]').click(); await tick();
+    check('Example circuit starts again from the example', App.store.drawing.components.length === 5);
   });
 
   await scenario('Current values keep clear of labels', async () => {

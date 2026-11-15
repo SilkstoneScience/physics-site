@@ -157,7 +157,8 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - **2028 register** (14 November 2026): `docs/2028_REGISTER.md` lists every "New for 2028" tag, note and mention on the site (written by `node tools/list-2028.mjs --write`; the checker warns when it is out of date) with the plan for removing them all after the May 2027 exams, when no student needs to know what changed.
 - **Theme B colour** (same session): Theme B's own colour is now raspberry (`--theme-b-id` in `css/style.css`, the print styles and the slide generator), so it no longer clashes with the HL orange; `--theme-b` remains the notes orange. Not yet checked: a newly generated Theme B lesson deck in PowerPoint.
 
-## Circuit builder (15 November 2026, stages 1–3 of 6)
+## Circuit builder (15 November 2026, stages 1–4 of 6)
+- Stage 4 built: show the working, automatic saving, named saves, share links and board view (waiting for the teacher's check). Stage 3 checked by the teacher, with their changes made.
 - Plan approved by the teacher: `docs/CIRCUIT_BUILDER_PLAN.md` (decisions, data model, engine, tests, stages). Lamp, thermistor and LDR curves approved.
 - Done: the physics engine (`js/circuits/components.js`, `netlist.js`, `engine.js`, `steps.js`) and the Free Build editor (`model.js`, `render.js`, `editor.js`, `app.js`, `css/circuits.css`) at `experimental/circuit-builder.html` (`noindex`, not linked yet). Tests: `tools/circuits/test.mjs` (about 2370 checks, run by `tools/check.mjs`) and `tools/circuits/ui-test.html` (46 checks through the real interface, run in the preview).
 - Next: the teacher's check of the editor in the preview, then stage 4 (show the working, saving, share links, board mode).

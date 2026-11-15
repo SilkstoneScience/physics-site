@@ -1,6 +1,6 @@
 # Circuit builder: plan and decisions
 
-Status: **plan approved by the teacher (15 November 2026). Stages 1–3 built (the engine, its tests and the Free Build editor); stage 3 is waiting for the teacher's check in the preview. The page is `noindex` and not linked from anywhere until stage 6.**
+Status: **plan approved by the teacher (15 November 2026). Stages 1–4 built (engine, tests, Free Build editor, then show the working, saving, share links and board view); stage 3 checked by the teacher, stage 4 waiting for the teacher's check. The page is `noindex` and not linked from anywhere until stage 6.**
 
 A circuit diagram editor with two modes, **Free Build** and **Challenge Mode**, that simulates DC circuits accurately: series and parallel networks, internal resistance, meters and variable resistors.
 
@@ -138,6 +138,12 @@ One direction only: student action → change to the drawing (an undoable comman
 - Every drawing loaded from outside (the example, and later saved circuits and share links) is completed and checked first (`model.normalise`).
 - To preview from a worktree when the preview servers are all in use, the main folder's server also serves `/.claude/worktrees/<name>/…`.
 
+**As built (stage 4):**
+- **Show the working:** a tick box in the toolbar opens a panel with `steps.js`'s explanation (plain text, 3 s.f.), updated after every change; otherwise it says why there is none (several cells, a bridge, a short circuit).
+- **Saving** (`app.js`): the circuit in progress is saved automatically (0.3 s after each change) and reopened next time; *Save…* keeps named copies (up to 50) and *My circuits* opens or deletes them; *Example circuit* starts again (undoable). All in localStorage under `circuit-builder:` (the interface tests use `?store=uitest`, which changes the prefix), every call wrapped in try/catch.
+- **Share links:** *Share link* packs the circuit (`model.pack`, defaults left out), compresses it (`CompressionStream('deflate-raw')` where the browser has it, prefix `z`; otherwise plain, prefix `j`), and puts it in the address after `#c=` (the part after # is never sent to a server). Opening such a link loads the circuit, then removes it from the address. Links over 6000 characters are refused with a message; a broken link opens the example with a message.
+- **Board view:** fills the screen (real full screen where the browser allows it, otherwise a fixed layer), larger text, and Fit zooms further in; Esc or the button leaves it.
+
 ## 7. Challenge Mode (stage 5)
 
 Challenges live in `experimental/circuits/challenges.json` with permanent ids (`CK-B5-01`), fields as in the approved plan: `type` (target / measure / predict), `level`, `sections`, `title`, `brief`, `start` drawing with `locked` parts, a limited `toolbox`, `checks` (values from the engine within a tolerance; connection checks such as "a voltmeter across L1" or "an ammeter in series with R1" from the netlist), `hints`, a `model` answer and an `explanation`. "Measure it" hides a cell's emf and r; "predict then build" locks the switch until predictions are typed (marked by `js/numeric.js`). Progress is ticked per id in the browser. Every model answer must pass its checks and a deliberately wrong answer must fail (checked by `tools/check.mjs`).
@@ -160,8 +166,8 @@ Challenges live in `experimental/circuits/challenges.json` with permanent ids (`
 
 1. Save this plan. **Done.**
 2. Engine and netlist with full Node tests. **Done** (report to the teacher).
-3. Free Build editor with interface tests; teacher checks in the preview. **Built; waiting for the teacher's check.**
-4. Show the working, share links, board mode, saving.
+3. Free Build editor with interface tests; teacher checks in the preview. **Done** (teacher's changes made: rotation both ways, take out, drop into a wire, labels, what you see is what you get).
+4. Show the working, share links, board mode, saving. **Built; waiting for the teacher's check.**
 5. Challenge Mode and about 10 challenges; independent review; teacher's check. Playwright on GitHub.
 6. Website links, then commit and push after the teacher has seen what's going up.
 

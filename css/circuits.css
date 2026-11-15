@@ -116,6 +116,30 @@ body[data-section] main.ck-main { max-width: 1400px; } /* wider than the reading
 .ck-warning { background: var(--warn-soft); }
 .ck-info { background: var(--bg); }
 .ck-good { color: var(--good); padding: 7px 10px; }
+/* Show the working. */
+.ck-steps { margin: 4px 0 8px; padding-left: 1.4em; font-size: 0.92rem; display: grid; gap: 6px; font-variant-numeric: tabular-nums; }
+
+/* Board mode: the builder fills the screen (full screen where the browser allows it). */
+html.ck-board-open { overflow: hidden; }
+.ck-app.ck-board { position: fixed; inset: 0; z-index: 2000; margin: 0; padding: 12px 14px; background: var(--bg); overflow: auto; font-size: 1.12rem; }
+.ck-app.ck-board .ck-svg { height: calc(100vh - 150px); min-height: 360px; }
+.ck-app.ck-board .ck-describe { display: none; }
+.ck-app.ck-board .ck-btn { font-size: 1.05rem; }
+@media (min-width: 1150px) { .ck-app.ck-board .ck-layout { grid-template-columns: 120px minmax(0, 1fr) 320px; } }
+.ck-app.ck-board .ck-label { font-size: 13px; }
+.ck-app.ck-board .ck-reading text { font-size: 14px; }
+
+/* Saving, opening and sharing. */
+.ck-filebar { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; margin: 12px 0 0; }
+.ck-filebar .ck-saved-note { font-size: 0.85rem; color: var(--muted); }
+.ck-filepanel { margin: 8px 0 0; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.ck-filepanel[hidden] { display: none; }
+.ck-filepanel h3 { margin: 4px 0 8px; font-size: 1.02rem; }
+.ck-filepanel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ck-filepanel li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ck-filepanel li .ck-fname { flex: 1 1 12em; }
+.ck-filepanel input[type="text"] { min-height: 38px; font: inherit; padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); flex: 1 1 14em; }
+.ck-filepanel textarea { width: 100%; min-height: 4.5em; font: 0.85rem ui-monospace, Consolas, monospace; padding: 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); }
 .ck-describe, .ck-help { margin: 12px 0; }
 .ck-describe summary, .ck-help summary { cursor: pointer; font-weight: 600; }
 .ck-describe ul { margin: 4px 0 8px; }

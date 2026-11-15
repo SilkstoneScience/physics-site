@@ -375,13 +375,14 @@
     for (const j of d.junctions) objects.push({ kind: 'junction', ref: { j: j.id }, key: `j:${j.id}`, p: [j.x, j.y] });
     for (const w of d.wires) for (const which of ['from', 'to']) if (w[which].free) objects.push({ kind: 'loose', wire: w.id, which, key: `f:${w.id}:${which}`, p: w[which].free });
     const out = [];
+    const paths = new Map(d.wires.map((w) => [w.id, wirePath(d, w)])); // each route worked out once
     // 3. Components lying along a wire.
     for (const c of d.components) {
       if (C.TYPES[c.type].terminals.length < 2) continue;
       const P = [0, 1].map((t) => C.terminalPosition(c, t));
       for (const w of d.wires) {
         if (ends(w).some((e) => e.c === c.id)) continue;
-        const path = wirePath(d, w);
+        const path = paths.get(w.id);
         if (path.some((q, i) => i + 1 < path.length && P.every((x) => segDistance(x, q, path[i + 1]) < 1e-9))) out.push({ kind: 'along', c: c.id, wire: w.id });
       }
     }
@@ -395,7 +396,7 @@
     for (const o of objects) {
       for (const w of d.wires) {
         if (find(keyOf(w, 'from')) === find(o.key)) continue; // already joined to that wire
-        const path = wirePath(d, w);
+        const path = paths.get(w.id);
         if (path.length < 2 || same(o.p, path[0]) || same(o.p, path[path.length - 1])) continue;
         if (path.some((q, i) => i + 1 < path.length && segDistance(o.p, q, path[i + 1]) < 1e-9)) out.push({ kind: 'tee', o, wire: w.id });
       }
@@ -405,12 +406,13 @@
 
   function settle(d) {
     let made = 0;
+    const failed = new Set(); // components that couldn't be put into a wire (left as they are)
     for (let guard = 0; guard < 500; guard++) {
-      const list = touches(d);
+      const list = touches(d).filter((x) => !(x.kind === 'along' && failed.has(`${x.c}|${x.wire}`)));
       const t = list.find((x) => x.kind === 'along') || list[0];
       if (!t) break;
       made++;
-      if (t.kind === 'along') { if (!insertIntoWire(d, t.c, t.wire)) break; continue; }
+      if (t.kind === 'along') { if (!insertIntoWire(d, t.c, t.wire)) failed.add(`${t.c}|${t.wire}`); continue; }
       if (t.kind === 'point') {
         const [a, b] = t.a.kind === 'loose' ? [t.a, t.b] : [t.b, t.a]; // a loose end, if there is one, goes onto the other
         if (a.kind === 'loose') {
@@ -505,6 +507,43 @@
     return out;
   }
 
+  // ---------------- a compact form, for saving and share links ----------------
+  // Settings equal to their defaults, rotation 0, labels equal to the id and empty bend lists are left out;
+  // unpack() puts them back (through normalise). Wire ends: "c1.0" a terminal, "j:j1" a junction, "f:3,-2" a loose end.
+  function pack(d) {
+    const end = (e) => (e.c !== undefined ? `${e.c}.${e.t}` : e.j !== undefined ? `j:${e.j}` : `f:${e.free[0]},${e.free[1]}`);
+    const out = { v: 1, c: [], j: [], w: [] };
+    for (const c of d.components) {
+      const def = C.TYPES[c.type];
+      const p = {};
+      for (const [k, spec] of Object.entries(def.params)) if (c.params[k] !== spec.default) p[k] = c.params[k];
+      const row = [c.type, c.id, c.x, c.y];
+      const label = c.label === c.id.toUpperCase() ? 0 : c.label;
+      if (c.rot || label || Object.keys(p).length) row.push(c.rot / 90 || 0);
+      if (label || Object.keys(p).length) row.push(label);
+      if (Object.keys(p).length) row.push(p);
+      out.c.push(row);
+    }
+    for (const j of d.junctions) out.j.push([j.id, j.x, j.y]);
+    for (const w of d.wires) out.w.push(w.via && w.via.length ? [w.id, end(w.from), end(w.to), w.via] : [w.id, end(w.from), end(w.to)]);
+    return out;
+  }
+  function unpack(o) {
+    if (!o || o.v !== 1) return empty();
+    const end = (s) => {
+      if (typeof s !== 'string') return { free: [0, 0] };
+      if (s.startsWith('j:')) return { j: s.slice(2) };
+      if (s.startsWith('f:')) { const [x, y] = s.slice(2).split(',').map(Number); return { free: [x, y] }; }
+      const k = s.lastIndexOf('.');
+      return { c: s.slice(0, k), t: Number(s.slice(k + 1)) };
+    };
+    return normalise({
+      components: (o.c || []).map(([type, id, x, y, r, label, p]) => ({ type, id, x, y, rot: (r || 0) * 90, label: label || undefined, params: p || {} })),
+      junctions: (o.j || []).map(([id, x, y]) => ({ id, x, y })),
+      wires: (o.w || []).map(([id, a, b, via]) => ({ id, from: end(a), to: end(b), via: via || [] })),
+    });
+  }
+
   // ---------------- the store: one drawing, with undo and redo ----------------
 
   const settled = (d) => { settle(d); return d; };
@@ -543,7 +582,7 @@
   }
 
   const ops = { addComponent, moveItems, rotate, setParam, setLabel, addWire, moveWireEnd, setVia, splitWire, remove, tidy, joinAt, takeOut, insertIntoWire, settle };
-  const api = { empty, clone, normalise, ops, findInsertion, touches, settle, layoutProblems, createStore, validate, wirePath, endPos, terminalPos, terminalDir, nearestOnWire, segDistance, componentBox };
+  const api = { empty, clone, normalise, pack, unpack, ops, findInsertion, touches, settle, layoutProblems, createStore, validate, wirePath, endPos, terminalPos, terminalDir, nearestOnWire, segDistance, componentBox };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else (root.Circuits = root.Circuits || {}).model = api;
 })(typeof window !== 'undefined' ? window : globalThis);

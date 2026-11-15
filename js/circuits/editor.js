@@ -29,7 +29,7 @@
   function create(host, opts = {}) {
     const store = M.createStore(opts.drawing);
     const sel = { components: new Set(), wires: new Set(), junctions: new Set() };
-    const show = { arrows: false, wireCurrent: false, potential: false };
+    const show = { arrows: false, wireCurrent: false, potential: false, working: false };
     let highlight = new Set();
     const view = { x: -14, y: -9, z: 1.15 }; // top-left corner (grid squares) and CSS px per SVG unit
     let mode = { kind: 'select' }; // or { kind: 'place', type, rot } or { kind: 'wire', from, fromWire, via }
@@ -62,11 +62,13 @@
           <button type="button" class="ck-btn ck-icon-btn" data-act="zoom-out" aria-label="Zoom out" title="Zoom out">−</button>
           <button type="button" class="ck-btn ck-icon-btn" data-act="zoom-in" aria-label="Zoom in" title="Zoom in">+</button>
           <button type="button" class="ck-btn" data-act="fit" title="Fit the circuit in view">Fit</button>
+          <button type="button" class="ck-btn" data-act="board" aria-pressed="false" title="Show on the board: the builder fills the screen">⛶ Board</button>
         </div>
         <div class="ck-group ck-shows">
           <label class="ck-check"><input type="checkbox" data-show="arrows"> Current arrows</label>
           <label class="ck-check"><input type="checkbox" data-show="wireCurrent"> Current in wires</label>
           <label class="ck-check"><input type="checkbox" data-show="potential"> Potential colours</label>
+          <label class="ck-check"><input type="checkbox" data-show="working"> Show the working</label>
           <span class="ck-legend" hidden></span>
         </div>
       </div>
@@ -84,6 +86,7 @@
         </div>
         <div class="ck-side">
           <section class="ck-panel ck-inspector" aria-label="Selected component"></section>
+          <section class="ck-panel ck-working" aria-label="How the readings are worked out" aria-live="polite" hidden></section>
           <section class="ck-panel ck-status" aria-label="Circuit check"><h3>Circuit check</h3><ul class="ck-diags"></ul></section>
         </div>
       </div>
@@ -562,7 +565,7 @@
       const xs = pts.map((q) => q[0]);
       const ys = pts.map((q) => q[1]);
       const [x0, x1, y0, y1] = [Math.min(...xs) - 3, Math.max(...xs) + 3, Math.min(...ys) - 3, Math.max(...ys) + 3];
-      view.z = Math.min(1.6, Math.max(0.35, Math.min(r.width / ((x1 - x0) * G), r.height / ((y1 - y0) * G))));
+      view.z = Math.min(board ? 2.6 : 1.6, Math.max(0.35, Math.min(r.width / ((x1 - x0) * G), r.height / ((y1 - y0) * G)))); // larger on the board
       view.x = (x0 + x1) / 2 - r.width / view.z / G / 2;
       view.y = (y0 + y1) / 2 - r.height / view.z / G / 2;
       render();
@@ -620,7 +623,10 @@
       if (mod && (k === 'z' || k === 'Z')) { ev.preventDefault(); if (ev.shiftKey) store.redo(); else store.undo(); return; }
       if (mod && (k === 'y' || k === 'Y')) { ev.preventDefault(); store.redo(); return; }
       if (mod) return;
-      if (k === 'Escape') { cancelMode(); clearSelection(); updateAll(); return; }
+      if (k === 'Escape') {
+        if (board && mode.kind === 'select') { clearSelection(); updateAll(); setBoard(false); return; } // drawing a wire or placing: Esc cancels that first
+        cancelMode(); clearSelection(); updateAll(); return;
+      }
       if (typing) return;
       if (k === 'Delete' || k === 'Backspace') { ev.preventDefault(); deleteSelection(); updateAll(); return; }
       if (k === 'r' || k === 'R') { ev.preventDefault(); rotateSelection(ev.shiftKey ? -1 : 1); return; }
@@ -651,8 +657,41 @@
         }
       } else if (act === 'zoom-in' || act === 'zoom-out') { const r = rect(); zoomAt(act === 'zoom-in' ? 1.25 : 0.8, r.left + r.width / 2, r.top + r.height / 2); }
       else if (act === 'fit') fit();
+      else if (act === 'board') setBoard(!board);
     });
-    for (const box2 of host.querySelectorAll('[data-show]')) box2.addEventListener('change', () => { show[box2.dataset.show] = box2.checked; render(); });
+    for (const box2 of host.querySelectorAll('[data-show]')) box2.addEventListener('change', () => { show[box2.dataset.show] = box2.checked; render(); working(); });
+
+    // ---------------- show the working (js/circuits/steps.js) ----------------
+    const workingEl = host.querySelector('.ck-working');
+    function working() {
+      workingEl.hidden = !show.working;
+      if (!show.working) return;
+      const S = root.Circuits.steps;
+      const head = '<h3>How the readings are worked out</h3>';
+      if (!S || !nl || !store.drawing.components.length) { workingEl.innerHTML = `${head}<p class="ck-small">Build a circuit with a cell or battery to see the working.</p>`; return; }
+      const ex = S.explain(nl, result);
+      if (!ex.ok) { workingEl.innerHTML = `${head}<p class="ck-small">${esc(ex.message)}</p>`; return; }
+      const notes = ex.steps.filter((x) => x.op === 'note').map((x) => `<p class="ck-small">${esc(S.text(x))}</p>`).join('');
+      const items = ex.steps.filter((x) => x.op !== 'note').map((x) => `<li>${esc(S.text(x))}</li>`).join('');
+      workingEl.innerHTML = `${head}${notes}<ol class="ck-steps">${items}</ol><p class="ck-small">Values are given to 3 significant figures.</p>`;
+    }
+
+    // ---------------- board mode: the builder fills the screen ----------------
+    let board = false;
+    function setBoard(on) {
+      board = on;
+      host.classList.toggle('ck-board', on);
+      document.documentElement.classList.toggle('ck-board-open', on);
+      const b = host.querySelector('[data-act="board"]');
+      b.setAttribute('aria-pressed', String(on));
+      b.textContent = on ? '✕ Leave board view' : '⛶ Board';
+      try {
+        if (on && host.requestFullscreen && !document.fullscreenElement) host.requestFullscreen().catch(() => {});
+        if (!on && document.fullscreenElement) document.exitFullscreen().catch(() => {});
+      } catch (e) { /* full screen isn't available: the page layout still fills the window */ }
+      requestAnimationFrame(() => fit());
+    }
+    document.addEventListener('fullscreenchange', () => { if (board && !document.fullscreenElement) setBoard(false); });
 
     // ---------------- the inspector: the selected component's settings and readings ----------------
     let inspectorKey = null;
@@ -875,7 +914,7 @@
     }
     store.subscribe((d, why) => {
       lastTap = null; // any change in between means the next tap isn't a double-tap (tap() sets it again afterwards)
-      solve(); highlight = new Set(); updateAll(); status(); describe(); if (opts.onChange) opts.onChange(store.drawing, result);
+      solve(); highlight = new Set(); updateAll(); status(); describe(); working(); if (opts.onChange) opts.onChange(store.drawing, result);
     });
     if (typeof ResizeObserver !== 'undefined') new ResizeObserver(() => render()).observe(svg);
     solve();
@@ -895,7 +934,9 @@
       clientToGrid,
       fit,
       toolButton: (type) => host.querySelector(`.ck-tool[data-type="${type}"]`),
-      setShow(key, on) { show[key] = on; const cb = host.querySelector(`[data-show="${key}"]`); if (cb) cb.checked = on; render(); },
+      setShow(key, on) { show[key] = on; const cb = host.querySelector(`[data-show="${key}"]`); if (cb) cb.checked = on; render(); working(); },
+      setBoard,
+      get board() { return board; },
       select(ids) { selectOnly({ components: ids }); updateAll(); },
       setView(x, y, z) { view.x = x; view.y = y; view.z = z; render(); },
       parseValue,

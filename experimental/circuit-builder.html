@@ -24,6 +24,7 @@
   <script defer src="../js/circuits/components.js"></script>
   <script defer src="../js/circuits/netlist.js"></script>
   <script defer src="../js/circuits/engine.js"></script>
+  <script defer src="../js/circuits/steps.js"></script>
   <script defer src="../js/circuits/model.js"></script>
   <script defer src="../js/circuits/render.js"></script>
   <script defer src="../js/circuits/editor.js"></script>
@@ -54,6 +55,9 @@
         <li><strong>Rotate:</strong> select it, then use ⟳ (clockwise) or ⟲ (anticlockwise), or press R (clockwise) or Shift+R (anticlockwise). Double-tapping turns it clockwise.</li>
         <li><strong>Move around:</strong> drag empty space; zoom with the + and − buttons, two fingers, or Ctrl and the mouse wheel. Fit shows the whole circuit.</li>
         <li><strong>Delete:</strong> select it and press Delete or the Delete button. Undo (Ctrl+Z) puts it back.</li>
+        <li><strong>Show the working:</strong> tick it to see how the readings follow from the series and parallel rules, step by step (for circuits with one cell or battery that those rules can solve).</li>
+        <li><strong>Saving:</strong> your circuit is kept in this browser as you work. Save… keeps a named copy, and My circuits opens one again. Share link makes a web address with the circuit inside it, to send to someone or open on another device.</li>
+        <li><strong>Board:</strong> fills the screen, for showing a circuit to the class. Esc or the button leaves board view.</li>
         <li><strong>Meters</strong> are ideal unless you untick "ideal meter". The red terminal is +. A reading above the range shows OL, as on a real multimeter: choose a higher range.</li>
       </ul>
     </details>

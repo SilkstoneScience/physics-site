@@ -872,6 +872,26 @@ export async function runTests() {
       check('routing: automatic corners never land on another component\'s terminal', !through, through);
     }
 
+    // The compact form for saving and share links gives back exactly the same drawing.
+    {
+      let bad = '';
+      let biggest = 0;
+      for (let seed = 1; seed <= 80 && !bad; seed++) {
+        const st = M.createStore(draw(randomCircuit(seed).spec, seed));
+        st.change('extras', (d) => { if (d.components[0]) { d.components[0].label = 'Mine'; d.components[0].rot = 270; } M.ops.addWire(d, { free: [-3, 4] }, { free: [9, -7] }, [[2, 2]]); });
+        const d = st.drawing;
+        const packed = JSON.stringify(M.pack(d));
+        biggest = Math.max(biggest, packed.length);
+        const back = M.unpack(JSON.parse(packed));
+        if (JSON.stringify(back) !== JSON.stringify(d)) bad = `seed ${seed}: ${JSON.stringify(d).slice(0, 200)} came back as ${JSON.stringify(back).slice(0, 200)}`;
+      }
+      check('pack: the compact form gives back exactly the same drawing (80 random circuits)', !bad, bad);
+      const ex = M.createStore({ components: [{ id: 'c1', type: 'cell', x: 0, y: 0 }, { id: 'r1', type: 'resistor', x: 6, y: 0 }], wires: [{ id: 'w1', from: { c: 'c1', t: 1 }, to: { c: 'r1', t: 0 } }] }).drawing;
+      check('pack: default settings are left out', JSON.stringify(M.pack(ex)) === '{"v":1,"c":[["cell","c1",0,0],["resistor","r1",6,0]],"j":[],"w":[["w1","c1.1","r1.0"]]}', JSON.stringify(M.pack(ex)));
+      check('pack: rubbish unpacks to an empty drawing', M.unpack({ v: 9 }).components.length === 0 && M.unpack(null).wires.length === 0);
+      check('pack: even a random circuit with many bends packs into under 4000 characters', biggest < 4000, `${biggest}`);
+    }
+
     // Drawings from outside (examples, saved circuits, share links) are made complete and safe.
     const loaded = M.createStore({ components: [{ id: 'q', type: 'lamp', x: 1.4, y: 2, rot: 45 }, { id: 'q', type: 'cell' }, { id: 'z', type: 'flux' }, null], wires: [{ id: 'w', from: { c: 'q', t: 0 }, to: { c: 'gone', t: 1 } }, { id: 'w2' }], junctions: 'no' }).drawing;
     check('model: a loaded drawing gets complete settings', loaded.components.length === 1 && loaded.components[0].params.R === 12 && loaded.components[0].params.model === 'ohmic');
