@@ -199,6 +199,9 @@ equipment is moved. Every line can be edited afterwards (drag its points, add or
 bracketed part, e.g. "Laser"), and the settings open with the words selected, ready to type over. Its words stay
 upright when a group is turned. Only the words select a label, so clicks on its leader line reach the equipment
 underneath. Deleting the equipment keeps the label, with its leader ending where it was.
+Text size (teacher's request, 15 November 2026): one setting for the whole diagram, "Text size of all the
+labels" (Small 13, Medium 16 (default), Large 20, Extra large 25), in the label settings and the empty-page
+settings; the precision line, numbers, their circles and the key keep their proportions to it (`page.labelSize`).
 
 - **Label tool:** click an object to start a leader line there, then click where the text goes. Type the label (for
   example "Top-pan balance"); an optional second line underneath, in smaller grey text, gives the specification

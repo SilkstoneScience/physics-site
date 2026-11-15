@@ -35,8 +35,14 @@
   const LABEL_HINT = 'Label: click the thing you want to label, then click where the words should go. Then type the label (and, if you like, its precision) in the settings.';
   const hintFor = (t) => (t === 'select' ? SELECT_HINT : t === 'label' ? LABEL_HINT : KINDS[t].hint);
 
-  // Labels: text sizes, and a measure of how wide a piece of text is (for the leader line and the selection box)
-  const LB_SIZE = 16, SPEC_SIZE = 12.5, NUM_R = 11, KEY_SIZE = 15;
+  // Labels: text sizes, and a measure of how wide a piece of text is (for the leader line and the selection box).
+  // One size setting for the whole diagram (page.labelSize) sets the words; the precision line, the numbers,
+  // their circles and the key keep the same proportions to it.
+  const LABEL_SIZES = [[13, 'Small'], [16, 'Medium'], [20, 'Large'], [25, 'Extra large']];
+  function sz() {
+    const lb = LABEL_SIZES.some(([v]) => v === doc.page.labelSize) ? doc.page.labelSize : 16, k = lb / 16;
+    return { lb, spec: r2(12.5 * k), r: r2(11 * k), num: 13 * k, key: r2(15 * k), indent: r2(26 * k) };
+  }
   const FONT = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
   const measureCtx = document.createElement('canvas').getContext('2d');
   function textWidth(s, size, bold) {
@@ -151,11 +157,11 @@
   // Is the label's text to the left of its leader (so it ends at x), or to the right (starts at x)?
   const onLeft = (l) => l.x < targetPt(l)[0] - 2;
   function labelBox(l) {
-    if (numbered()) return { x1: l.x - NUM_R, y1: l.y - NUM_R, x2: l.x + NUM_R, y2: l.y + NUM_R };
-    const w = Math.max(textWidth(l.text || ' ', LB_SIZE), l.spec ? textWidth(l.spec, SPEC_SIZE) : 0) + 6;
-    const h = l.spec ? LB_SIZE + SPEC_SIZE + 6 : LB_SIZE + 4;
+    if (numbered()) return { x1: l.x - sz().r, y1: l.y - sz().r, x2: l.x + sz().r, y2: l.y + sz().r };
+    const w = Math.max(textWidth(l.text || ' ', sz().lb), l.spec ? textWidth(l.spec, sz().spec) : 0) + 6;
+    const h = l.spec ? sz().lb + sz().spec + 6 : sz().lb + 4;
     const x1 = onLeft(l) ? l.x - w - 2 : l.x;
-    return { x1, y1: l.y - LB_SIZE / 2 - 3, x2: x1 + w + 2, y2: l.y - LB_SIZE / 2 - 3 + h };
+    return { x1, y1: l.y - sz().lb / 2 - 3, x2: x1 + w + 2, y2: l.y - sz().lb / 2 - 3 + h };
   }
 
   // Keep lines attached to equipment that has moved. A wire with corners keeps its corners square.
@@ -301,14 +307,14 @@
     let s = '';
     const lead = (from) => `<line class="lb-leader" x1="${r2(T[0])}" y1="${r2(T[1])}" x2="${r2(from[0])}" y2="${r2(from[1])}"/><circle class="lb-dot" cx="${r2(T[0])}" cy="${r2(T[1])}" r="2.2"/>`;
     if (numbered()) {
-      if (leader && dist(T, P) > NUM_R + 3) { const u = unit(P, T); s += lead([P[0] + u[0] * NUM_R, P[1] + u[1] * NUM_R]); }
-      return s + `<circle class="lb-num" cx="${r2(l.x)}" cy="${r2(l.y)}" r="${NUM_R}"/>` +
-        `<text class="lb-numt" x="${r2(l.x)}" y="${r2(l.y + 0.5)}" font-size="13" text-anchor="middle" dominant-baseline="central">${num}</text>`;
+      if (leader && dist(T, P) > sz().r + 3) { const u = unit(P, T); s += lead([P[0] + u[0] * sz().r, P[1] + u[1] * sz().r]); }
+      return s + `<circle class="lb-num" cx="${r2(l.x)}" cy="${r2(l.y)}" r="${sz().r}"/>` +
+        `<text class="lb-numt" x="${r2(l.x)}" y="${r2(l.y + 0.5)}" font-size="${r2(sz().num)}" text-anchor="middle" dominant-baseline="central">${num}</text>`;
     }
     if (leader && dist(T, P) > 6) s += lead([l.x + (left ? 3 : -3), l.y]);
     const tx = r2(l.x + (left ? -4 : 4)), anchor = left ? 'end' : 'start';
-    s += `<text class="lb-text" x="${tx}" y="${r2(l.y)}" font-size="${LB_SIZE}" text-anchor="${anchor}" dominant-baseline="central">${esc(l.text || '')}</text>`;
-    if (l.spec) s += `<text class="lb-spec" x="${tx}" y="${r2(l.y + LB_SIZE / 2 + SPEC_SIZE / 2 + 4)}" font-size="${SPEC_SIZE}" text-anchor="${anchor}" dominant-baseline="central">${esc(l.spec)}</text>`;
+    s += `<text class="lb-text" x="${tx}" y="${r2(l.y)}" font-size="${sz().lb}" text-anchor="${anchor}" dominant-baseline="central">${esc(l.text || '')}</text>`;
+    if (l.spec) s += `<text class="lb-spec" x="${tx}" y="${r2(l.y + sz().lb / 2 + sz().spec / 2 + 4)}" font-size="${sz().spec}" text-anchor="${anchor}" dominant-baseline="central">${esc(l.spec)}</text>`;
     return s;
   }
   // The key under the diagram when labels are numbered (beside it if there's no room underneath)
@@ -316,7 +322,7 @@
     const labels = labelsInOrder();
     if (!numbered() || !labels.length) return null;
     const rest = doc.objects;
-    const b = bbox(rest), rowH = KEY_SIZE + 9;
+    const b = bbox(rest), rowH = sz().key + 9;
     const rows = labels.map((l, i) => ({ n: i + 1, text: l.text || '', spec: l.spec || '' }));
     let x = b.x1, y = b.y2 + 34;
     if (y + rowH * rows.length > PAGE_H - 8) { x = b.x2 + 40; y = b.y1 + 10; }
@@ -327,8 +333,8 @@
     if (!k) return '';
     return '<g class="lb-key">' + k.rows.map((r, i) => {
       const y = r2(k.y + i * k.rowH);
-      return `<text class="lb-text" x="${k.x}" y="${y}" font-size="${KEY_SIZE}" dominant-baseline="central"><tspan class="lb-keyn">${r.n}</tspan>` +
-        `<tspan x="${r2(k.x + 26)}">${esc(r.text)}</tspan>${r.spec ? `<tspan class="lb-spec" font-size="${SPEC_SIZE + 0.5}"> (${esc(r.spec)})</tspan>` : ''}</text>`;
+      return `<text class="lb-text" x="${k.x}" y="${y}" font-size="${sz().key}" dominant-baseline="central"><tspan class="lb-keyn">${r.n}</tspan>` +
+        `<tspan x="${r2(k.x + sz().indent)}">${esc(r.text)}</tspan>${r.spec ? `<tspan class="lb-spec" font-size="${sz().spec + 0.5}"> (${esc(r.spec)})</tspan>` : ''}</text>`;
     }).join('') + '</g>';
   }
 
@@ -1022,7 +1028,10 @@
 
   // The switch between labels with words and numbered labels with a key (for the whole diagram)
   function numberedSwitch() {
-    return `<label class="dm-check dm-numsw"><input type="checkbox" data-b="numbered"${numbered() ? ' checked' : ''}> Numbered labels, with a key under the diagram</label>`;
+    const size = sz().lb;
+    return `<div class="dm-numsw"><label class="dm-field">Text size of all the labels<select data-b="size">` +
+      LABEL_SIZES.map(([v, name]) => `<option value="${v}"${v === size ? ' selected' : ''}>${name}</option>`).join('') + '</select></label>' +
+      `<label class="dm-check"><input type="checkbox" data-b="numbered"${numbered() ? ' checked' : ''}> Numbered labels, with a key under the diagram</label></div>`;
   }
   function labelProps(l) {
     const list = labelsInOrder(), i = list.indexOf(l);
@@ -1040,9 +1049,10 @@
 
   function propInput(e, done) {
     const el = e.target, o = selected()[0];
-    if (el.dataset.b === 'numbered') {   // works with or without a label selected
+    if (el.dataset.b === 'numbered' || el.dataset.b === 'size') {   // the whole diagram: works with or without a label selected
       if (!done) return;
-      doc.page.numbered = el.checked;
+      if (el.dataset.b === 'numbered') doc.page.numbered = el.checked;
+      else doc.page.labelSize = Number(el.value);
       render(); renderProps(); commit();
       return;
     }
@@ -1227,6 +1237,7 @@
     const ids = new Set(), out = blankDoc();
     const pg = d.page || {};
     out.page.snap = pg.snap !== false; out.page.showGrid = pg.showGrid !== false; out.page.numbered = pg.numbered === true;
+    if (LABEL_SIZES.some(([v]) => v === pg.labelSize)) out.page.labelSize = pg.labelSize;
     d.objects.slice(0, 2000).forEach((o) => {
       if (!o || typeof o !== 'object') return;
       let id = str(o.id, 12);
@@ -1342,7 +1353,7 @@
   function drawingBox() {
     const b = bbox(doc.objects), k = keyLayout();
     if (k) {
-      const w = Math.max(...k.rows.map((r) => 26 + textWidth(r.text, KEY_SIZE) + (r.spec ? textWidth(' (' + r.spec + ')', SPEC_SIZE + 0.5) : 0)));
+      const w = Math.max(...k.rows.map((r) => sz().indent + textWidth(r.text, sz().key) + (r.spec ? textWidth(' (' + r.spec + ')', sz().spec + 0.5) : 0)));
       b.x1 = Math.min(b.x1, k.x); b.x2 = Math.max(b.x2, k.x + w);
       b.y1 = Math.min(b.y1, k.y - k.rowH / 2); b.y2 = Math.max(b.y2, k.y + k.rowH * (k.rows.length - 0.5));
     }
