@@ -11,11 +11,15 @@
 //       takes a question out of the bank for good: its file moves to tools/p2/withdrawn/ (never built or
 //       published) and its review record moves to "withdrawn" in reviews.json. Its id is never used again,
 //       because students' saved answers are keyed by id.
+//   node tools/p2/review.mjs similar-checked <id> <other id> --by "<teacher>" --note "<why the situations differ>" [--recorded-by "<name>"]
+//       records that the teacher compared a pair the similarity check warns about and decided the situations really
+//       differ: the warning stops until either question's content words change.
 //
 // A review can only be recorded while the question passes every check, is unchanged since its last review,
 // and its originality check has run (on a computer with the reference cache). TEACHER-REVIEWED and APPROVED
 // must name a person. Never record them without the teacher's explicit decision.
 import { loadQuestions, loadTopics, buildAll, printStatus } from './build.mjs';
+import { profilesOf, compare, pairKey, wordsHash, THRESHOLDS } from './similarity.mjs';
 import { loadRegistry, saveRegistry, saveSnapshot, STATUSES, REVIEWED, reviewProblem, NOT_A_PERSON, classify, SAMPLE_FRACTION } from './registry.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -57,6 +61,29 @@ if (cmd === 'withdraw') {
 const { results, diags } = buildAll(await loadQuestions(), loadTopics(), { registry });
 
 if (cmd === 'status') { printStatus(results); process.exit(0); }
+
+if (cmd === 'similar-checked') {
+  const other = wanted;
+  const by = opt('by');
+  if (!id || !other) die('name the two questions, e.g. review.mjs similar-checked B3-P01 B3-017 --by "<teacher>" --note "<why>"');
+  if (!by || NOT_A_PERSON.test(by)) die('only a person (the teacher) can decide that two questions are different enough: --by "<name>"');
+  if (!opt('note')) die('say why the situations differ, with --note "<text>"');
+  const all = profilesOf(results);
+  const a = all.get(id), b = all.get(other);
+  if (!a || !b) die(`no Paper 2 question called ${!a ? id : other}`);
+  if (a.source !== 'generated' && b.source !== 'generated') die('at least one of the two must be a generated question');
+  const c = compare(a, b);
+  if (c.jaccard >= THRESHOLDS.errorJaccard) die(`${id} and ${other} share ${(100 * c.jaccard).toFixed(0)} % of their content words, which is an error, not a warning: change one of them`);
+  if (c.jaccard < THRESHOLDS.warnJaccard) die(`${id} and ${other} don't get a similarity warning, so there is nothing to record`);
+  registry.similarChecked = registry.similarChecked || {};
+  registry.similarChecked[pairKey(id, other)] = {
+    by, date: opt('date') || today(), ...(opt('recorded-by') ? { recordedBy: opt('recorded-by') } : {}),
+    note: opt('note'), share: Number(c.jaccard.toFixed(2)), words: { [a.id]: wordsHash(a), [b.id]: wordsHash(b) },
+  };
+  saveRegistry(registry);
+  console.log(`✓ ${id} and ${other}: recorded as checked by ${by}. The warning stops until either question's content words change.`);
+  process.exit(0);
+}
 
 if (cmd === 'batch' || cmd === 'accept-batch') {
   if (!id) die(`say which batch, e.g. review.mjs ${cmd} batch-1`);
@@ -133,7 +160,7 @@ if (cmd === 'reset') {
   console.log(`✓ ${id} reset to AUTO-VALIDATED. Its reviews must now be recorded again.`);
   process.exit(0);
 }
-if (cmd !== 'set') die(`unknown command "${cmd}" (use status, set, reset, batch or accept-batch)`);
+if (cmd !== 'set') die(`unknown command "${cmd}" (use status, set, reset, batch, accept-batch, withdraw or similar-checked)`);
 if (!STATUSES.includes(wanted) || wanted === 'AUTO-VALIDATED') die(`status must be one of DRAFT, ${REVIEWED.join(', ')}`);
 if (wanted === 'DRAFT') {
   rec.history.push({ status: 'DRAFT', ...entry });

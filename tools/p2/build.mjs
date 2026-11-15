@@ -95,7 +95,7 @@ export function buildAll(list, topics, { registry = loadRegistry(), independent 
   // Similarity needs every question built first (tools/p2/similarity.mjs): a question too close to another
   // (generated or hand-written) fails like any other error and is left out of the outputs.
   if (similarity) {
-    for (const d of similarityDiagnostics(results, { root })) {
+    for (const d of similarityDiagnostics(results, { root, checked: registry.similarChecked || {} })) {
       diags.push({ ...d, where: `${d.question}.mjs` });
       const r = results.find((x) => x.id === d.question);
       if (d.level === 'error' && r && r.valid) { r.valid = false; r.state = stateFor(r.id, false, r.fingerprint, registry); }

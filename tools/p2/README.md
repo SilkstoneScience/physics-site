@@ -30,7 +30,14 @@ node tools/p2/review.mjs reset A1-P01 --by "…" --note "why it changed"
 node tools/p2/review.mjs batch batch-1
 node tools/p2/review.mjs accept-batch batch-1 --by "Mr Silkstone (teacher)" --note "…" [--waive <id> "<reason>"]
 node tools/p2/review.mjs withdraw D3-P01 --by "Mr Silkstone (teacher)" --note "why" [--replaced-by D3-P02]
+node tools/p2/review.mjs similar-checked B3-P01 B3-017 --by "Mr Silkstone (teacher)" --note "why the situations differ"
 ```
+
+**Checked similarity warnings** (November 2026): when the teacher has compared a pair that the similarity check warns
+about and decided the situations really differ, `review.mjs similar-checked` records it under `"similarChecked"` in
+`reviews.json`, with a fingerprint of each question's content words. The warning then stops, and comes back
+("checked by … on …, but … has changed since") as soon as either question's content words change. Only a person can
+record it, only for a pair that currently warns (an error can never be checked off).
 
 **Withdrawing a question** (November 2026): `review.mjs withdraw` takes a question out of the bank for good, on the
 teacher's decision. Its file moves to `tools/p2/withdrawn/` (never built, previewed or published) and its review record
@@ -129,7 +136,7 @@ temperature change. The list is in `units.mjs`.
 | Diagrams | file exists, alt text, `<title>`, font sizes on `<text>` not `<g>` |
 | Originality | no 8-word run shared with an IB Paper 2 or mark scheme (2016–2025; runs in 5+ papers are stock phrasing and ignored); no 6-word run shared with the transcript of the Daily Question that inspired it. Needs the reference cache (found from `CLAUDE.local.md`) |
 | Click-to-plot graphs | axes a whole number of small squares; every point on the axes and in the axis's unit; the named gradient and intercept agree with the least-squares line through the points; the correct graph earns full marks, and an empty graph, a point one small square out and a line two small squares out do not; the axes and examiner's-graph pictures match the settings exactly; the mark scheme shows the examiner's graph |
-| Similarity | against every other Paper 2 question, generated or hand-written (`similarity.mjs`): a warning when the two share 20 % or more of their content words (same situation described twice?), an error at 40 % or when two generated questions declare the same `situation`; a warning when 3, and an error when 4, consecutive parts have the same command term and syllabus id as another generated question (vary the sequence of parts). Teacher's rule of 7 November 2026: the same concepts may be tested, but in a different situation and with a different sequence of parts |
+| Similarity | against every other Paper 2 question, generated or hand-written (`similarity.mjs`): a warning when the two share 20 % or more of their content words (same situation described twice?), an error at 40 % or when two generated questions declare the same `situation`; a warning when 3, and an error when 4, consecutive parts have the same command term and syllabus id as another generated question (vary the sequence of parts). Teacher's rule of 7 November 2026: the same concepts may be tested, but in a different situation and with a different sequence of parts. A warning the teacher has checked (`review.mjs similar-checked`) stops until either question changes |
 | Show that (next figure) | a warning when the true value's next significant figure is 0 ("about 5.4" with 5.40): a student shows the value by giving one more figure, so change a given value |
 | Determinism | building twice gives the same question |
 

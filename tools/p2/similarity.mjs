@@ -14,6 +14,12 @@
 // (B4-P01 / B4-013 pV cycles, E2-P01 / E2-012 photoelectric graphs, D1-P01 / D1-019 satellite energies,
 // D3-P01 / D3-016 parallel wires); unrelated questions in the same topic score under 20 %. So a new question
 // above WARN needs a different situation (none in a new batch should warn), and above ERROR it fails the build.
+//
+// Checked pairs (teacher's decision, 15 November 2026): once the teacher has compared a warned pair and decided the
+// situations really differ, `node tools/p2/review.mjs similar-checked <id> <other id>` records it in reviews.json
+// ("similarChecked"), with a fingerprint of each question's content words. The warning then stops, and comes back
+// ("checked on …, but … has changed since") if either question's content words change. Errors can't be checked off.
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -114,6 +120,16 @@ export function loadHandWritten(root = ROOT) {
   return out;
 }
 
+// The key a checked pair is stored under, and the fingerprint of one question's content words.
+export const pairKey = (a, b) => [a, b].sort().join(' + ');
+export const wordsHash = (p) => crypto.createHash('sha256').update([...p.words].sort().join(' ')).digest('hex').slice(0, 16);
+
+// Every question the comparison uses (generated and hand-written), by id.
+export function profilesOf(generated, root = ROOT) {
+  const gen = generated.filter((r) => r.built).map((r) => profile(r.built.question, r.def));
+  return new Map([...gen, ...loadHandWritten(root)].map((p) => [p.id, p]));
+}
+
 export function compare(a, b) {
   const sameTopic = a.topics.some((t) => b.topics.includes(t));
   const run = longestRun(a.structure, b.structure);
@@ -123,7 +139,8 @@ export function compare(a, b) {
 
 // Diagnostics for every generated question against every other question (generated or hand-written).
 // `generated` is [{ id, def, built }] from the build; returns [{ level, code, question, where, message }].
-export function similarityDiagnostics(generated, { root = ROOT, thresholds = THRESHOLDS } = {}) {
+// `checked` is reviews.json's "similarChecked": { "<id> + <id>": { by, date, note, words: { <id>: hash, … } } }.
+export function similarityDiagnostics(generated, { root = ROOT, thresholds = THRESHOLDS, checked = {} } = {}) {
   const gen = generated.filter((r) => r.built).map((r) => profile(r.built.question, r.def));
   const all = [...gen, ...loadHandWritten(root)];
   const diags = [];
@@ -136,7 +153,13 @@ export function similarityDiagnostics(generated, { root = ROOT, thresholds = THR
       if (c.jaccard >= thresholds.errorJaccard || (c.situation >= 0.5 && b.source === 'generated')) {
         diags.push({ level: 'error', code: 'similar', question: a.id, message: `${pair} ${c.situation >= 0.5 ? 'declare the same situation' : wordy}: use a different situation` });
       } else if (c.jaccard >= thresholds.warnJaccard) {
-        diags.push({ level: 'warn', code: 'similar', question: a.id, message: `${pair} ${wordy}${c.sameTopic ? ' in the same topic' : ''}: check the situation really differs` });
+        const rec = checked[pairKey(a.id, b.id)];
+        const changed = rec ? [a, b].filter((p) => !rec.words || rec.words[p.id] !== wordsHash(p)).map((p) => p.id) : [];
+        // A pair the teacher checked gives no warning while neither question has changed (the part checks below still run).
+        if (!rec || changed.length) {
+          const why = rec ? `: checked by ${rec.by} on ${rec.date}, but ${changed.join(' and ')} ${changed.length > 1 ? 'have' : 'has'} changed since, so check it again` : ': check the situation really differs';
+          diags.push({ level: 'warn', code: 'similar', question: a.id, message: `${pair} ${wordy}${c.sameTopic ? ' in the same topic' : ''}${why}` });
+        }
       }
       if (b.source === 'generated' && c.run >= thresholds.errorRun) {
         diags.push({ level: 'error', code: 'similar-parts', question: a.id, message: `${pair} have ${c.run} consecutive parts with the same command term and syllabus id: vary the sequence of parts` });
