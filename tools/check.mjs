@@ -644,6 +644,58 @@ for (const name of exists('missions') ? fs.readdirSync(path.join(ROOT, 'missions
   for (const sid of scenes.keys()) if (!seen.has(sid)) err(`${rel} scene ${sid}`, 'can never be reached from the start');
 }
 
+// ---------- 2h. Diagram maker equipment (js/diagram-items.js; plan: docs/DIAGRAM_MAKER_PLAN.md) ----------
+// Every item is drawn at its normal size, stretched, and with each of its choices, and the drawings are checked.
+{
+  const rel = 'js/diagram-items.js';
+  const box = { console };
+  box.window = box;
+  let D = null;
+  try { vm.createContext(box); vm.runInContext(read(rel), box, { filename: rel }); D = box.DiagramItems; } catch (e) { err(rel, `doesn't run: ${e.message}`); }
+  if (D) {
+    const groupIds = new Set(D.groups.map((g) => g.id));
+    if (groupIds.size !== D.groups.length) err(rel, 'two groups have the same id');
+    const ids = new Set();
+    for (const it of D.items) {
+      const where = `${rel} ${it.id}`;
+      if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(it.id || '')) err(where, 'the id must be lower-case words joined by hyphens');
+      if (ids.has(it.id)) err(where, 'two items have this id (ids are permanent: saved diagrams refer to them)');
+      ids.add(it.id);
+      if (!groupIds.has(it.group)) err(where, `unknown group "${it.group}"`);
+      if (typeof it.name !== 'string' || !it.name.trim()) err(where, 'needs a name');
+      if (!(it.w > 0 && it.h > 0)) err(where, 'needs a positive width and height (w, h)');
+      if (![undefined, 'w', 'h', 'both'].includes(it.stretch)) err(where, `stretch must be 'w', 'h' or 'both', not "${it.stretch}"`);
+      if (typeof it.draw !== 'function') { err(where, 'needs a draw function'); continue; }
+      // Every way it can be drawn: normal, stretched, and each choice
+      const sizes = [[it.w, it.h]];
+      if (it.stretch === 'w' || it.stretch === 'both') sizes.push([it.w * 2, it.h]);
+      if (it.stretch === 'h' || it.stretch === 'both') sizes.push([it.w, it.h * 2]);
+      const opts = [{}];
+      for (const op of it.options || []) {
+        if (!['range', 'int', 'choice'].includes(op.type)) { err(where, `option "${op.key}" has an unknown type "${op.type}"`); continue; }
+        if (op.type === 'choice') {
+          if (!Array.isArray(op.values) || !op.values.some(([v]) => v === op.def)) err(where, `option "${op.key}": its default must be one of its values`);
+          for (const [v] of op.values || []) opts.push({ [op.key]: v });
+        } else {
+          if (!(op.min <= op.def && op.def <= op.max)) err(where, `option "${op.key}": its default must be between min and max`);
+          opts.push({ [op.key]: op.min }, { [op.key]: op.max });
+        }
+      }
+      for (const [w, h] of sizes) for (const opt of opts) {
+        let m = '';
+        try { m = D.markup(it, w, h, opt) + D.markup(it, w, h, opt, true); } catch (e) { err(where, `can't be drawn (${w} × ${h}, ${JSON.stringify(opt)}): ${e.message}`); continue; }
+        if (/\sid=|<defs|<script|url\(|\son[a-z]+=/i.test(m)) err(where, 'drawings may not contain ids, <defs>, scripts or url(): each picture appears more than once on the page');
+        if (/NaN|undefined|Infinity/.test(m)) err(where, `a number in the drawing is broken (NaN or undefined) at ${w} × ${h}, ${JSON.stringify(opt)}`);
+        const a = D.anchors(it, w, h, opt);
+        for (const [k, [x, y]] of Object.entries(a)) {
+          if (!(x >= -2 && x <= w + 2 && y >= -2 && y <= h + 2)) err(where, `attachment point "${k}" (${x}, ${y}) is outside the item's ${w} × ${h} box`);
+        }
+      }
+    }
+    for (const g of D.groups) if (!D.items.some((it) => it.group === g.id)) warn(rel, `the group "${g.name}" has no equipment yet`);
+  }
+}
+
 // ---------- 3. Pages: set-up and links ----------
 function htmlFiles(dir = '') {
   return fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true }).flatMap((d) => {

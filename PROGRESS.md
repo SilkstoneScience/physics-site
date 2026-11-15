@@ -175,6 +175,17 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Linked from the IA page (box under the lead and an IA documents card), the Experimental page and the Experimental menu.
 - Possible next steps: import from the graphing tool's save file once it exists (agreed for later); teacher feedback after students use it.
 
+## Diagram maker (15 November 2026, all stages)
+- `experimental/diagram-maker.html`: students draw the labelled diagram of their experimental set-up by dragging equipment onto a page, then download it as a PNG. Everything stays in the browser (auto-saved in localStorage); no server, accounts or libraries. Plan, equipment list, save-file format and the teacher's decisions: `docs/DIAGRAM_MAKER_PLAN.md`.
+- 101 pieces of equipment in ten groups (`js/diagram-items.js`, one block per item; ids are permanent), our own flat side-view drawings (optics blocks, prism and ray box from above), including all 15 data-booklet circuit symbols plus diode, d.c. and a.c. supply marked "not in the data booklet". Black and white, with blue water and red light rays; works in dark mode, exports black on white. New batches are checked on `tools/diagram-items-preview.html` (not published; `?ids=` shows chosen items).
+- Editor (`js/diagram-maker.js`, `css/diagram-maker.css`): drag or tap to add, move, resize (stretchy rules, springs, runways, tubes), turn, flip, copy, delete, undo/redo, grid and snap, zoom and pinch; drawers for the equipment and settings on tablets and phones.
+- Lines: string, wire (square corners, snaps to terminals, junction dots), tubing, light rays, motion and force arrows with labels; attached ends follow the equipment.
+- Labels with leader lines and an optional precision line; numbered labels with a key; one text size setting for all labels (teacher's request).
+- Download picture (PNG, about 3 pixels per unit, cropped), Save progress (.json), Open saved file (checked value by value), New diagram.
+- The checker draws every item in every size and choice and checks the drawings (section 2h of `tools/check.mjs`).
+- Linked from the IA page (box under the lead, the method advice and an IA documents card), the Experimental page and the Experimental menu, next to the IA builder.
+- Not yet tested with a real finger on a tablet (touch was simulated). Later batches listed in the plan (set square, picket fence, Vernier-style sensors, basic shapes…).
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".
