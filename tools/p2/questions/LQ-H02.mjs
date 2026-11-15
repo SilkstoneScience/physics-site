@@ -102,7 +102,7 @@ export default {
       markscheme: [
         'energy given up by the flywheel $= \\tfrac{1}{2}I(\\omega_1^2 - \\omega_2^2) = [[dE:3u]]$ ✓',
         'kinetic energy gained by the tram $= \\tfrac{1}{2}mv^2 = [[Etram:3u]]$ ✓',
-        '$\\eta = \\dfrac{[[Etram:3]]}{[[dE:3]]} = [[eff:2]]$; allow ECF from (a)(i) ✓',
+        '$\\eta = \\dfrac{[[Etram:3]]}{[[dE:3]]} = [[eff:3]]$; allow ECF from (a)(i) ✓',
       ],
       examinerNote: 'Efficiency = useful energy out / energy in. The flywheel does not stop, so only the change in its energy counts.',
     },

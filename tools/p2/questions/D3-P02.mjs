@@ -72,7 +72,7 @@ export default {
     {
       label: 'd', sections: ['parallel'], command: 'Determine', marks: 2, syllabus: ['D.3.Y1'], dependsOn: ['a'],
       question: 'Determine the resultant magnetic field strength, due to the currents in the two leads, at a point midway between them.',
-      numeric: { result: 'Bmid', accept: 0.03, mistakes: [{ result: 'wrong_Bmid', feedback: 'The fields do add, but the midway point is only half the separation from each lead, so each field is larger than your answer to (a).' }] },
+      numeric: { result: 'Bmid', accept: 0.03, mistakes: [{ result: 'wrong_Bmid', feedback: 'Check two things: the midway point is only half the separation from each lead, and both leads produce fields in the same direction there, so add the two fields.' }] },
       markscheme: [
         'midway between the leads the two fields are in the same direction (right-hand grip rule: the point is on opposite sides of two opposite currents), so they add ✓',
         '$B = 2 \\times \\dfrac{[[K.mu0]] \\times [[I:n]]}{2\\pi \\times \\tfrac{1}{2} \\times [[d:n]] \\times 10^{-2}} = [[Bmid:2u]]$ ✓',

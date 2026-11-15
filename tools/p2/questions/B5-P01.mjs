@@ -76,11 +76,11 @@ export default {
     },
     {
       label: 'e', sections: ['divider', 'resistance'], command: 'Explain', marks: 3, syllabus: ['B.5.12', 'B.5.10', 'B.5.6'],
-      question: 'The alarm sounds when the potential difference across the thermistor is greater than [[VT:2u]]. Explain why the alarm sounds when the temperature falls below 0 °C.',
+      question: 'The alarm sounds when the potential difference across the thermistor is greater than its value at 0 °C. Explain why the alarm sounds when the temperature falls below 0 °C.',
       markscheme: [
         'As the temperature falls, the resistance of the thermistor increases (so the total resistance increases) ✓',
         'so the current decreases and the potential difference across the fixed resistor ($IR$) decreases ✓',
-        'the emf is shared between the two components, so the potential difference across the thermistor increases above [[VT:2u]] ✓',
+        'the emf is shared between the two components, so the potential difference across the thermistor increases above its value at 0 °C ([[VT:3u]]) ✓',
       ],
       examinerNote: 'A chain of reasoning: thermistor resistance up, current down, pd across R down, so pd across thermistor up (or: the thermistor gets a larger share of the emf because its share of the total resistance increases).',
     },
