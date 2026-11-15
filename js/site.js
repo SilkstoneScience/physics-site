@@ -545,6 +545,7 @@ window.glueUnits = (function () {
       ['Internal assessment', 'experimental/ia.html'],
       ['IA builder', 'experimental/ia-builder.html'],
       ['Diagram maker', 'experimental/diagram-maker.html'],
+      ['Graph maker', 'experimental/graph-maker.html'],
       ['Extended essay', 'ee/index.html'],
     ] },
     { key: 'resources', label: 'Resources', href: 'resources.html', sections: ['resources', 'news'], items: [

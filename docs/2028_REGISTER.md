@@ -157,12 +157,12 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 398: …solute uncertainty}}{\\text{measured value}} \\times 100\\%', false, '2028'],
   - line 403: note: 'The four percentage equations are new in the 2028 data booklet, so that every exam uses the same definitions. More on these: the Skills page .',
   - line 540: ['Data booklet 2028 (exam copy)', EXAM_BOOKLETS['2028'], true],
-  - line 551: ['Annotated data booklet 2028', DATA_BOOKLET_2028_URL, true],
-  - line 772: const booklet2028Card = document.querySelector('#data-booklet-2028 a');
-  - line 773: if (booklet2028Card) booklet2028Card.href = DATA_BOOKLET_2028_URL;
-  - line 1114: const newTag = ' New for 2028 ';
-  - line 1138: ? 'Open the annotated data booklet: 2025 ↗ · 2028 ↗ '
-  - line 1157: ' ${label}${hl ? ' HL ' : ''}${mark === '2028' ? newTag : ''} $$${tex}$$ ').join('') +
+  - line 554: ['Annotated data booklet 2028', DATA_BOOKLET_2028_URL, true],
+  - line 775: const booklet2028Card = document.querySelector('#data-booklet-2028 a');
+  - line 776: if (booklet2028Card) booklet2028Card.href = DATA_BOOKLET_2028_URL;
+  - line 1117: const newTag = ' New for 2028 ';
+  - line 1141: ? 'Open the annotated data booklet: 2025 ↗ · 2028 ↗ '
+  - line 1160: ' ${label}${hl ? ' HL ' : ''}${mark === '2028' ? newTag : ''} $$${tex}$$ ').join('') +
 - `js/slides.js` (1)
   - line 315: …classList?.contains('tag')) continue; // little tags such as "New for 2028" don't belong on a slide
 
@@ -219,7 +219,7 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 484: "notes": "New for exams from 2028. The derivation on the next slide is now expected of all students, SL and HL."
   - line 512: "notes": "New for exams from 2028. The 2028 guide says all students should be able to deduce Kepler's third law from the centripetal and gravitational force relationships…
 - `teachers/slides/d2.json` (1)
-  - line 1018: "notes": "New for exams from 2028. $B = \\mu_0 I/2\\pi r$ is now in the data booklet; the guide lists it under D.3, where students calculate with it, so here it only expl…
+  - line 1024: "notes": "New for exams from 2028. $B = \\mu_0 I/2\\pi r$ is now in the data booklet; the guide lists it under D.3, where students calculate with it, so here it only expl…
 - `teachers/slides/d3.json` (4)
   - line 56: "notes": "New for exams from 2028. The 2028 data booklet adds this equation. Point out that $\\dfrac{\\mu_0}{2\\pi} = 2 \\times 10^{-7}$ $\\text{T m A}^{-1}$, which makes…
   - line 80: "notes": "New for exams from 2028. Lightning currents are typically tens of kiloamperes, so even 100 m away the brief magnetic pulse is as strong as the Earth's field."

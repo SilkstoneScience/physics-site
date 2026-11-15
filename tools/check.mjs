@@ -211,6 +211,11 @@ for (const f of tests2.failures) err('tools/p2/test.mjs', f);
 const testsCircuits = await (await import('./circuits/test.mjs')).runTests();
 for (const f of testsCircuits.failures) err('tools/circuits/test.mjs', f);
 
+// ---------- 2c++. Graph maker maths (js/graph-maker-core.js; plan: docs/GRAPH_MAKER_PLAN.md) ----------
+// Headings, numbers, uncertainties, the formula reader, the max–min method, fits and rounding.
+const testsGraphMaker = (await import('./check-graph-maker.mjs')).runTests();
+for (const f of testsGraphMaker.failures) err('tools/check-graph-maker.mjs', f);
+
 // ---------- 2d. Science news (tools/news) ----------
 // Every stored story must be valid, and news.html / news/latest.json must match the stored stories.
 let newsCount = 0;

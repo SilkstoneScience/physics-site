@@ -187,6 +187,17 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - A small line under the editor ("Is a piece of equipment missing? Let me know…") links to the Contact me form (`about.html#contact`), so students can ask for equipment to be added (teacher's request).
 - Not yet tested with a real finger on a tablet (touch was simulated). Later batches listed in the plan (set square, picket fence, Vernier-style sensors, basic shapes…).
 
+## Graph maker (15 November 2026, all stages)
+- `experimental/graph-maker.html`: students enter their own IA data and make a graph good enough for their report. Everything stays in the browser (auto-saved in localStorage); no server, accounts or libraries. Plan, save-file format (for the IA builder to import later) and the teacher's decisions: `docs/GRAPH_MAKER_PLAN.md`.
+- Data: type, paste from Excel/Sheets or upload a CSV; IB-style headings ("length L / m") with a symbol for formulas; one uncertainty per column (value or %), overridable row by row; gentle "Things to check" notes (units, IB heading style, decimal places matching the uncertainty).
+- Processing (never automatic): repeated-trials columns with a "Calculate the mean and uncertainty" button (half the range, or the reading uncertainty if larger; marked out of date when the trials change); calculated columns where the student types the formula and the uncertainty formula (own formula reader, never run as code; degrees unless "radians" is ticked); a max–min check and a worked example for one row (MathJax, plus text to copy).
+- Graph: up to 5 data sets (same columns, own rows; colour + marker + line style each, so greyscale works); title, axis labels, gridlines, start at zero, smaller points; uncertainty bars on every point, with a note when they hide behind the points; fits: straight line, quadratic, power, exponential (no proportional fit, teacher's decision); tap a point to leave it out (hollow).
+- Steepest and shallowest lines drawn by dragging (keyboard too); gradient and intercept uncertainties as half the differences (Skills page, section 12), with the working; values rounded to match; optional "Check my lines" feedback.
+- Downloads: PNG 2400 × 1680 (always light), a Word table per data set (trials under a spanning heading; optional graph, fit results, worked examples), Save progress / Open saved file.
+- Maths in `js/graph-maker-core.js`, tested by `tools/check-graph-maker.mjs` (run by the checker). `js/labs/report.js` grid cells can now span columns and rows; lab reports and the IA builder's files are unchanged.
+- Linked from the IA page (box under the lead, the graphs section and an IA documents card), the Experimental page and the Experimental menu, next to the IA builder and the diagram maker.
+- Not yet tested on a real tablet or phone with a finger (touch was simulated), or by students. Possible next steps: the IA builder importing a graph-maker file (format in the plan).
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".
