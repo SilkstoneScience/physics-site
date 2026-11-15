@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: the speed of sound from drinking straws · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab: record the note from drinking straws of different lengths, find each straw's first harmonic in Audacity, and get the speed of sound and the end correction from a straight-line graph.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/straw-resonance.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: the speed of sound from drinking straws · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab: record the note from drinking straws of different lengths, find each straw's first harmonic in Audacity, and get the speed of sound and the end correction from a straight-line graph.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/straw-resonance.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-straw-resonance",
+    "title": "The speed of sound from drinking straws",
+    "file": "Straw resonance lab",
+    "tables": {
+      "check": {
+        "note": "One row for each straw, longest first. Fill in L and the predicted f₁ = 340/2L before you record anything. Fill in f₂ as you record each straw, then f₂/f₁ and v = 2Lf₁ using the mean f₁ from the readings table.",
+        "csvFile": "straw-resonance-checks.csv",
+        "cols": [
+          { "html": "<i>L</i> / m", "csv": "straw length L / m", "aria": "straw length in metres" },
+          { "html": "Predicted <i>f</i><sub>1</sub> / Hz", "csv": "predicted f₁ / Hz", "aria": "predicted first-harmonic frequency in hertz" },
+          { "html": "2nd harmonic <i>f</i><sub>2</sub> / Hz", "csv": "2nd harmonic f₂ / Hz", "aria": "second-harmonic frequency in hertz" },
+          { "html": "<i>f</i><sub>2</sub>/<i>f</i><sub>1</sub>", "csv": "ratio f₂/f₁", "aria": "ratio of the second-harmonic frequency to the first-harmonic frequency" },
+          { "html": "<i>v</i> = 2<i>Lf</i><sub>1</sub> (ignoring <i>e</i>) / m s<sup>−1</sup>", "csv": "v = 2Lf₁ / m s^-1", "aria": "speed of sound from 2 L f1, ignoring the end correction, in metres per second" }
+        ]
+      },
+      "straws": {
+        "note": "One row for each straw, longest first. Mean f₁ = the mean of your three trials. Δf₁ = (max − min)/2, or the bin width if that is larger. 1/f₁ in seconds (for example 0.000714, or 7.14e-4). Δ(1/f₁) = (Δf₁/f₁) × (1/f₁).",
+        "csvFile": "straw-resonance.csv",
+        "x": 8, "y": 1,
+        "cols": [
+          { "html": "<i>L</i> / m", "csv": "straw length L / m", "aria": "straw length in metres" },
+          { "html": "Δ<i>L</i> / m", "csv": "uncertainty in L / m", "aria": "uncertainty in the straw length in metres" },
+          { "html": "<i>f</i><sub>1</sub>, trial 1 / Hz", "csv": "f₁ trial 1 / Hz", "aria": "first-harmonic frequency, trial 1, in hertz" },
+          { "html": "<i>f</i><sub>1</sub>, trial 2 / Hz", "csv": "f₁ trial 2 / Hz", "aria": "first-harmonic frequency, trial 2, in hertz" },
+          { "html": "<i>f</i><sub>1</sub>, trial 3 / Hz", "csv": "f₁ trial 3 / Hz", "aria": "first-harmonic frequency, trial 3, in hertz" },
+          { "html": "Mean <i>f</i><sub>1</sub> / Hz", "csv": "mean frequency f₁ / Hz", "aria": "mean first-harmonic frequency in hertz" },
+          { "html": "Δ<i>f</i><sub>1</sub> / Hz", "csv": "uncertainty in f₁ / Hz", "aria": "uncertainty in the mean frequency in hertz" },
+          { "html": "1/<i>f</i><sub>1</sub> / s", "csv": "inverse frequency 1/f₁ / s", "aria": "one over the mean frequency, in seconds" },
+          { "html": "Δ(1/<i>f</i><sub>1</sub>) / s", "csv": "uncertainty in 1/f₁ / s", "aria": "uncertainty in one over the frequency, in seconds" }
+        ]
+      },
+      "closed": {
+        "note": "Extension E1: the same straws with the bottom end closed. Copy the open–open mean f₁ from the readings table.",
+        "csvFile": "straw-resonance-closed.csv",
+        "x": 3, "y": 1,
+        "cols": [
+          { "html": "<i>L</i> / m", "csv": "straw length L / m", "aria": "straw length in metres" },
+          { "html": "Open–open <i>f</i><sub>1</sub> / Hz", "csv": "open-open f₁ / Hz", "aria": "first-harmonic frequency with both ends open, in hertz" },
+          { "html": "Closed <i>f</i><sub>1</sub> / Hz", "csv": "closed f₁ / Hz", "aria": "first-harmonic frequency with one end closed, in hertz" },
+          { "html": "Closed <i>f</i><sub>1</sub> ÷ open <i>f</i><sub>1</sub>", "csv": "ratio closed f₁ ÷ open f₁", "aria": "ratio of the closed first-harmonic frequency to the open first-harmonic frequency" },
+          { "html": "Next peak / Hz", "csv": "next peak / Hz", "aria": "frequency of the next peak in hertz" },
+          { "html": "Next peak ÷ closed <i>f</i><sub>1</sub>", "csv": "ratio next peak to closed f₁", "aria": "ratio of the next peak to the closed first-harmonic frequency" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › The speed of sound from drinking straws</p>
+    <h1>The speed of sound from drinking straws</h1>
+    <p class="lead">A lab with drinking straws and a microphone: blow gently across the end of a straw, record its faint whistle, and find the frequencies in the sound with Audacity, free sound-editing software. <span class="tag">C.4 Standing waves and resonance</span></p>
+    <p><strong>Aim:</strong> to find the first-harmonic frequency of straws (open at both ends) of at least six lengths, checking each against a prediction and against its 2nd harmonic; to determine the speed of sound in air, with its uncertainty, from the gradient of a graph of <i>L</i> against 1/<i>f</i><sub>1</sub>, and estimate the end correction from its intercept; and to compare your value with the value expected at room temperature, evaluating the experiment.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#theory">Theory: resonance in a straw</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#setup">Setting up</a></li>
+        <li><a href="#collect">Collecting data</a></li>
+        <li><a href="#graph">Your graph</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Recording a sound with a microphone and finding its frequencies from a spectrum (Audacity: <strong>Analyze ▸ Plot Spectrum</strong>).</li>
+      <li>Deciding which peak in a spectrum is the one you want, and checking that choice against a prediction before trusting it.</li>
+      <li>Judging a realistic frequency uncertainty from the spectrum's resolution and from repeated trials (half the range).</li>
+      <li>Plotting a graph with uncertainty bars in both directions and using its gradient and intercept, with the steepest and shallowest lines.</li>
+      <li>Comparing a result with an expected value, and evaluating the systematic effects that repeats cannot reveal.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring length and temperature (Tool 1); recording sound with a microphone and finding frequencies with software (Tool 2); linearising a relationship and propagating uncertainties (Tool 3); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="theory">2. Theory: resonance in a straw</h2>
+    <p>Blow gently across the end of a drinking straw and you hear a faint, whistle-like note. The jet of air hitting the edge of the opening makes a noisy mixture of many frequencies.</p>
+    <p>Inside the straw, sound waves travel to the far end, reflect, and travel back through the oncoming waves. At certain frequencies the two waves superpose to give a <strong>standing wave</strong> in the air column, and the air resonates. Those frequencies are much louder than the rest, so you hear a clear note.</p>
+    <p>In air, the standing wave is described by the <strong>displacement</strong> of the air. At an <strong>open end</strong> the air is free to move, so there is a displacement <strong>antinode</strong>. At a <strong>closed end</strong> the air cannot move, so there is a <strong>node</strong>. (See <a href="../themes/c4.html#pipes">C.4 Standing waves in pipes</a>.)</p>
+    <p>In the main part of this lab the straw is <strong>open at both ends</strong>, so there is an antinode at each end. The simplest pattern, the <strong>first harmonic</strong>, has one node in the middle, so the length of the straw is half a wavelength:</p>
+    <div class="key">$$L = \frac{\lambda_1}{2} \qquad\text{so}\qquad \lambda_1 = 2L$$</div>
+    <p>More generally, an open–open pipe fits $n$ half-wavelengths: $\lambda_n = \dfrac{2L}{n}$, with $n = 1, 2, 3, \ldots$ (every harmonic is possible). Using the data-booklet wave equation $v = f\lambda$, the first harmonic and the $n$th harmonic have</p>
+    <div class="key">$$f_1 = \frac{v}{2L} \qquad\text{and}\qquad f_n = n f_1$$</div>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 210" role="img" aria-labelledby="sr1t">
+        <title id="sr1t">The first harmonic in a straw of length L, open at both ends, drawn horizontally. Inside the straw, two mirror-image curves show the displacement amplitude of the air: widest at both ends and meeting at a point in the middle. A displacement antinode, labelled A, sits a short distance e just outside each end of the straw, where the curves are widest (the parts outside the straw are dashed). The node, labelled N, is in the middle.</title>
+        <line class="l3" x1="60" y1="70" x2="300" y2="70"/>
+        <line class="l3" x1="60" y1="130" x2="300" y2="130"/>
+        <polyline class="l1 thin" points="60,74.7 65,75 70,75.5 75,76 80,76.6 85,77.2 90,78 95,78.8 100,79.7 105,80.6 110,81.6 115,82.7 120,83.8 125,85 130,86.2 135,87.4 140,88.7 145,90.1 150,91.4 155,92.8 160,94.2 165,95.6 170,97.1 175,98.5 180,100 185,101.5 190,102.9 195,104.4 200,105.8 205,107.2 210,108.6 215,109.9 220,111.3 225,112.6 230,113.8 235,115 240,116.2 245,117.3 250,118.4 255,119.4 260,120.3 265,121.2 270,122 275,122.8 280,123.4 285,124 290,124.5 295,125 300,125.3"/>
+        <polyline class="l1 thin" points="60,125.3 65,125 70,124.5 75,124 80,123.4 85,122.8 90,122 95,121.2 100,120.3 105,119.4 110,118.4 115,117.3 120,116.2 125,115 130,113.8 135,112.6 140,111.3 145,109.9 150,108.6 155,107.2 160,105.8 165,104.4 170,102.9 175,101.5 180,100 185,98.5 190,97.1 195,95.6 200,94.2 205,92.8 210,91.4 215,90.1 220,88.7 225,87.4 230,86.2 235,85 240,83.8 245,82.7 250,81.6 255,80.6 260,79.7 265,78.8 270,78 275,77.2 280,76.6 285,76 290,75.5 295,75 300,74.7"/>
+        <polyline class="l1 thin dash" points="40,74 45,74 50,74.2 55,74.4 60,74.7"/>
+        <polyline class="l1 thin dash" points="40,126 45,126 50,125.8 55,125.6 60,125.3"/>
+        <polyline class="l1 thin dash" points="300,125.3 305,125.6 310,125.8 315,126 320,126"/>
+        <polyline class="l1 thin dash" points="300,74.7 305,74.4 310,74.2 315,74 320,74"/>
+        <circle class="f3" cx="180" cy="100" r="3"/>
+        <text x="40" y="54" font-size="12" text-anchor="middle">A</text>
+        <text x="180" y="54" font-size="12" text-anchor="middle">N</text>
+        <text x="320" y="54" font-size="12" text-anchor="middle">A</text>
+        <line class="axis thin" x1="60" y1="138" x2="60" y2="166"/>
+        <line class="axis thin" x1="300" y1="138" x2="300" y2="166"/>
+        <line class="axis thin" x1="70" y1="156" x2="290" y2="156"/>
+        <path d="M61 156 L71 151 L71 161 z" style="fill:var(--text)"/>
+        <path d="M299 156 L289 151 L289 161 z" style="fill:var(--text)"/>
+        <text x="180" y="180" font-size="12" text-anchor="middle">L</text>
+        <line class="l2 thin" x1="40" y1="182" x2="60" y2="182"/>
+        <line class="l2 thin" x1="40" y1="176" x2="40" y2="188"/>
+        <line class="l2 thin" x1="60" y1="176" x2="60" y2="188"/>
+        <line class="l2 thin" x1="300" y1="182" x2="320" y2="182"/>
+        <line class="l2 thin" x1="300" y1="176" x2="300" y2="188"/>
+        <line class="l2 thin" x1="320" y1="176" x2="320" y2="188"/>
+        <text class="t2" x="50" y="206" font-size="12" text-anchor="middle">e</text>
+        <text class="t2" x="310" y="206" font-size="12" text-anchor="middle">e</text>
+      </svg>
+      <figcaption>The first harmonic in a straw <span class="key-1">open at both ends</span>. The curves show how far the air moves back and forth along the straw (the displacement amplitude), not the shape of anything: a displacement antinode (A) at each open end and a node (N) in the middle. Beyond the syllabus: each antinode sits a small distance <span class="key-2"><i>e</i></span> outside the end (the end correction). It is exaggerated here: for a straw it is only about 2 mm.</figcaption>
+    </figure>
+    <p><strong>End correction (beyond the syllabus).</strong> The antinode is not exactly at the open end: it sits a short distance $e$ just outside it. The guide says end corrections are not required, so you will not be examined on this. For a narrow pipe, $e$ is roughly 0.6 × the radius, about 2 mm for a straw.</p>
+    <p>With an antinode just beyond each end, the air column behaves as if it were $2e$ longer than the straw, so</p>
+    $$f_1 = \frac{v}{2(L + 2e)}$$
+    <p>Rearranging,</p>
+    <div class="key">$$L = \frac{v}{2} \times \frac{1}{f_1} - 2e$$</div>
+    <p>So a graph of <strong>$L$ against $1/f_1$</strong> should be a straight line with <strong>gradient = $v/2$</strong> and a small <strong>negative intercept, $-2e$</strong>. The graph separates the speed of sound (the gradient) from the end effect (the intercept), so you do not need to know $e$ in advance.</p>
+    <p>The speed of sound depends on the air temperature. The approximation $v \approx 331 + 0.6\,\theta$ ($v$ in $\text{m s}^{-1}$, $\theta$ in °C) is <strong>not</strong> in the syllabus or the data booklet: it is given only so you have an expected value. At 20 °C it gives about $343\ \text{m s}^{-1}$.</p>
+
+    <h2 id="equipment">3. Equipment and safety</h2>
+    <ul>
+      <li>Straight drinking straws without a bendy section (plastic, or good-quality paper straws), at least 25 cm long: your own set, not shared</li>
+      <li>Sharp scissors and a ruler with millimetre divisions (a metre rule or a 30 cm ruler)</li>
+      <li>Laptop with a built-in or plug-in microphone and <strong>Audacity</strong> installed (free), or a phone with a recording app (then copy the file to a laptop)</li>
+      <li>Thermometer for the room temperature</li>
+      <li>Optional: Vernier Microphone with an interface and Logger Pro 3 (see the alternative in section 6)</li>
+      <li>Optional (Extension E1): a small piece of Blu-Tack, or your own fingertip, to close one end</li>
+    </ul>
+    <div class="notice">
+      <p style="margin:0"><strong>Safety:</strong></p>
+      <ul style="margin-bottom:0">
+        <li><strong>Hygiene:</strong> use only your own straws. Never share, swap or reuse another person's straw. Write your initials near one end of each straw, and throw them away (or into recycling) at the end of the lesson.</li>
+        <li>Blow gently. Blowing hard for a long time can make you light-headed: stop and breathe normally between recordings, and sit down if you feel dizzy.</li>
+        <li>Take care with scissors: cut straws on the bench, not in your hand towards your body.</li>
+        <li>Keep the volume of any playback low, and keep drinks away from the laptop.</li>
+      </ul>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> Sketch (on paper) the displacement standing-wave patterns for the 1st, 2nd and 3rd harmonics in a pipe open at both ends. Label each node N and antinode A, and write the wavelength of each in terms of <i>L</i>. Describe your sketches here.</label><textarea id="pre1" data-save="pre1" rows="3"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> A straw open at both ends is 0.150 m long. Taking <i>v</i> = 340 m s⁻¹ and ignoring end corrections, calculate the frequencies of its 1st, 2nd and 3rd harmonics.</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> Before measuring, predict the first-harmonic frequencies of straws of length 0.12 m and 0.24 m (<i>v</i> = 340 m s⁻¹, ignore end corrections). If you halve the length of a straw, what should happen to <i>f</i><sub>1</sub>? Explain how this prediction lets you check that the peak you choose in the spectrum really belongs to the straw.</label><textarea id="pre3" data-save="pre3" rows="4"></textarea></div>
+      <div class="answer"><label for="pre4"><strong>P4.</strong> A student finds <i>f</i><sub>1</sub> = (1128 ± 6) Hz for a straw of length (0.150 ± 0.001) m. Calculate <i>v</i> = 2<i>Lf</i><sub>1</sub>, ignoring end corrections, and its absolute uncertainty by adding percentage uncertainties.</label><textarea id="pre4" data-save="pre4" rows="3"></textarea></div>
+      <div class="answer"><label for="pre5"><strong>P5.</strong> Explain why the graph method (<i>L</i> against 1/<i>f</i><sub>1</sub> for several straws) gives a better value of <i>v</i> than <i>v</i> = 2<i>Lf</i><sub>1</sub> for a single straw, even though each straw is measured just as carefully.</label><textarea id="pre5" data-save="pre5" rows="3"></textarea></div>
+    </div>
+
+    <h3 id="uncertainties">Uncertainties</h3>
+    <ul>
+      <li><strong>Straw length $L$:</strong> measured with a millimetre ruler, which needs two readings (one at each end), so ± 0.5 mm + 0.5 mm = <strong>± 1 mm</strong>. Check that the cut is square: if one side of the cut end is longer than the other, measure the average length and use a larger uncertainty.</li>
+      <li><strong>Frequency resolution of the spectrum:</strong> Audacity splits the frequency range into narrow "bins". The bin width is the sample rate divided by the <strong>Size</strong> chosen in the Plot Spectrum window, for example 44 100 Hz ÷ 8192 ≈ 5.4 Hz, or 44 100 Hz ÷ 16 384 ≈ 2.7 Hz. The peak frequency cannot be read more precisely than about one bin width. A larger Size gives finer bins but needs a longer steady recording (Size 16 384 needs at least 0.37 s of sound at 44 100 Hz).</li>
+      <li><strong>Repeated trials:</strong> your note will not be identical each time (how hard you blow and where your lip is can shift the peak slightly). Record each straw <strong>three times</strong> and use the mean, with $\Delta f = \dfrac{\text{max} - \text{min}}{2}$. For example, 1115 Hz, 1124 Hz and 1120 Hz give $f_1 = (1120 \pm 5)$ Hz. If the half range is smaller than the bin width, use the bin width instead: the realistic uncertainty is the larger of the two.</li>
+      <li><strong>$1/f_1$:</strong> for the graph you need $1/f_1$ and its uncertainty. The percentage uncertainty is the same as for $f_1$: $\Delta(1/f) = \dfrac{\Delta f}{f} \times \dfrac{1}{f}$.</li>
+    </ul>
+    <p>Quote each uncertainty to 1 significant figure (usual), or 2 when the uncertainty itself is known precisely, with the value rounded to the same decimal place. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <h2 id="setup">5. Setting up</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 215" role="img" aria-labelledby="sr2t">
+        <title id="sr2t">Set-up, side view: a straight drinking straw is held upright above the bench. The student's lower lip touches the straw just below its top end, and an arrow shows the air jet blowing across the top opening, away from the laptop. The bottom end of the straw is open. A laptop on the bench, about 10 to 20 cm from the straw, has its microphone at the top of the screen and runs Audacity.</title>
+        <line class="axis" x1="0" y1="205" x2="360" y2="205"/>
+        <rect class="l1" x="90" y="40" width="12" height="140" style="fill:var(--surface)"/>
+        <path class="axis" d="M102 46 Q116 42 124 50 Q116 58 102 54 z" style="fill:var(--surface)"/>
+        <line class="l2" x1="104" y1="33" x2="54" y2="33"/>
+        <path d="M44 33 L55 27 L55 39 z" style="fill:var(--theme-b)"/>
+        <text class="t2" x="74" y="18" font-size="12" text-anchor="middle">air jet</text>
+        <text x="132" y="56" font-size="12">lip</text>
+        <text class="t1" x="112" y="98" font-size="12">straw</text>
+        <text x="84" y="184" font-size="12" text-anchor="end">open</text>
+        <rect class="axis" x="236" y="120" width="96" height="74" rx="3" style="fill:var(--surface)"/>
+        <rect class="axis" x="222" y="196" width="124" height="9" rx="2" style="fill:var(--surface)"/>
+        <circle class="f3" cx="284" cy="127" r="2.5"/>
+        <text x="284" y="106" font-size="12" text-anchor="middle">microphone</text>
+        <text x="284" y="164" font-size="12" text-anchor="middle">Audacity</text>
+        <line class="axis thin" x1="112" y1="150" x2="224" y2="150"/>
+        <path d="M102 150 L113 145 L113 155 z" style="fill:var(--text)"/>
+        <path d="M234 150 L223 145 L223 155 z" style="fill:var(--text)"/>
+        <text x="168" y="140" font-size="12" text-anchor="middle">10–20 cm</text>
+      </svg>
+      <figcaption>Hold the <span class="key-1">straw</span> upright with your lower lip just below its top end, and blow a gentle, steady <span class="key-2">air jet</span> across (not into) the top opening, pointing away from the microphone. Both ends of the straw are open. Not to scale.</figcaption>
+    </figure>
+    <ol>
+      <li>Measure and record the room temperature below. Use it to work out the expected speed of sound from $v \approx 331 + 0.6\,\theta$.</li>
+      <li>Cut your straws to seven lengths between about 0.08 m and 0.24 m, for example 0.08, 0.10, 0.12, 0.15, 0.18, 0.21 and 0.24 m. Cut off any bendy section first. Cut slowly, with the scissors at right angles to the straw, so the ends are square. Measure each straw's length <i>L</i> after cutting and record it in Table 1.</li>
+      <li><strong>Predict before you measure.</strong> For each straw, calculate the expected first-harmonic frequency, $f_1 \approx 340/2L$, and write it in Table 1. (For example, a 0.10 m straw should give about 1.7 kHz, and a 0.24 m straw about 0.7 kHz.)</li>
+      <li>Open <strong>Audacity</strong>. Check that the project sample rate is 44 100 Hz (Audacity 3.2 and later: <strong>Audio Setup ▸ Audio Settings ▸ Project Rate</strong>; in older versions, at the bottom left of the window). Choose the laptop's microphone as the recording device, and set recording to mono (<strong>Audio Setup ▸ Recording Channels ▸ 1 (Mono)</strong>; in older versions, in the device toolbar).</li>
+      <li>Work in the quietest place you can: fans, talking and other groups' straws all show up in the spectrum.</li>
+      <li>Practise making a note. Hold the straw upright, rest your lower lip against the straw just below the top end, and blow a gentle, steady stream of air <strong>across</strong> the opening (as you would to make a bottle hum), not down into it. Keep the straw about 10–20 cm from the microphone, and point the air jet away from it so that the jet does not hit the microphone. It may take a few tries to get a clear, steady note: change the angle of the straw and how hard you blow until it sounds clean.</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Before you start</h3>
+      <label class="vlab-field">Room temperature <i>θ</i> / °C (with its uncertainty) <input data-save="theta"></label>
+      <label class="vlab-field">Expected speed of sound <i>v</i> ≈ 331 + 0.6<i>θ</i> / m s⁻¹ <input data-save="v-exp" inputmode="decimal"></label>
+      <label class="vlab-field">Spectrum Size you will use (8192 or 16 384) <input data-save="size" inputmode="decimal"></label>
+      <label class="vlab-field">Bin width = 44 100 Hz ÷ Size / Hz <input data-save="bin" inputmode="decimal"></label>
+    </div>
+    <p><strong>Table 1: predictions and checks.</strong> Fill in <i>L</i> and the predicted <i>f</i><sub>1</sub> now. Add <i>f</i><sub>2</sub> as you record each straw, and the last two columns at the end.</p>
+    <div class="vlab-panel" data-lab-table="check" data-report-title="Table 1: predictions and checks"></div>
+
+    <h2 id="collect">6. Collecting data</h2>
+    <h3>Recording and finding the first harmonic</h3>
+    <ol>
+      <li>Press <strong>Record</strong>, blow a steady note for about 2 s with the longest straw, then press <strong>Stop</strong>. The waveform should show a steady band, not just a burst of noise.</li>
+      <li>With the mouse, select about 1 s from the steadiest middle part of the recording (avoid the start and end of the note).</li>
+      <li>Choose <strong>Analyze ▸ Plot Spectrum</strong>. Set <strong>Algorithm</strong> to Spectrum, <strong>Function</strong> to Hann window, <strong>Size</strong> to 8192 (or 16 384 if your selection is long enough) and <strong>Axis</strong> to Linear frequency. Move the cursor onto the tallest sharp peak and read its frequency from the <strong>Peak</strong> box at the bottom of the window.</li>
+      <li>Compare this peak with your prediction in Table 1. The straw's first harmonic should be <strong>close to your prediction (within about 10 %)</strong>. If the tallest peak is far from the prediction, look for a smaller peak near the predicted value: the tallest one may be noise, a hum in the room, or a higher harmonic.</li>
+      <li>Look for the <strong>2nd harmonic</strong>: a smaller peak at about twice the first-harmonic frequency. Record its frequency in Table 1. Finding it close to 2<i>f</i><sub>1</sub> is good evidence that you have chosen the straw's own note.</li>
+      <li>Repeat the recording twice more for the same straw (three trials in total), and record all three values of <i>f</i><sub>1</sub> in Table 2.</li>
+      <li>Repeat for every straw, going from the longest to the shortest. <strong>Check that the peak moves the expected way:</strong> each shorter straw must give a clearly higher frequency, roughly in inverse proportion to <i>L</i>. A peak that barely moves when <i>L</i> changes a lot is not the straw's note. If that happens, change how you blow (more gently, or with your lip in a slightly different place) and record again.</li>
+      <li>Optional: in the Plot Spectrum window, choose <strong>Export…</strong> to save the spectrum as a text file, which you can open in a spreadsheet to look at the peak and its width more closely.</li>
+    </ol>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 195" role="img" aria-labelledby="sr3t">
+        <title id="sr3t">Sketch of a typical spectrum from Audacity's Plot Spectrum window: sound level against frequency. A jagged, noisy background runs across the whole range. There is one tall, sharp peak labelled f1, a smaller sharp peak at twice its frequency labelled f2, and an even smaller one at three times its frequency labelled f3.</title>
+        <line class="axis" x1="40" y1="160" x2="348" y2="160"/>
+        <line class="axis" x1="40" y1="160" x2="40" y2="20"/>
+        <polyline class="l1 thin" points="42,136.5 44,129 46,135.4 48,136.7 50,132.7 52,135 54,137.3 56,134 58,134.4 60,136.7 62,135.8 64,136.6 66,135.3 68,140.8 70,139.9 72,137.1 74,137.4 76,143.4 78,138 80,140.1 82,136.2 84,137.4 86,143.7 88,140.3 90,136.7 92,139 94,139.5 96,140.1 98,137.2 100,137.3 102,142.2 104,142.6 106,138.2 108,142.8 110,144.5 112,143 114,139 116,121.5 118,67.2 120,37 122,69.2 124,116.4 126,142.5 128,143.5 130,141.2 132,141.6 134,142.5 136,144.5 138,138.1 140,145.8 142,143 144,143.2 146,140.4 148,138 150,141.7 152,144.9 154,142.7 156,143.8 158,143.1 160,142.6 162,143.4 164,141.6 166,140.9 168,144.3 170,138.3 172,142.3 174,138.7 176,140.7 178,140.7 180,141.8 182,141.9 184,140.3 186,138 188,142.9 190,140.1 192,144.1 194,139.5 196,131.2 198,104.3 200,85 202,100.1 204,126.4 206,143.8 208,139 210,145.8 212,142.8 214,145.1 216,145.8 218,137.5 220,144.5 222,140.8 224,145.2 226,142.4 228,141.2 230,145.3 232,138.2 234,138.5 236,138.5 238,138.5 240,138.3 242,139.6 244,144 246,146.4 248,144.3 250,145.8 252,146.5 254,140.9 256,144.4 258,139.8 260,142.1 262,140.3 264,144.4 266,138.6 268,144.4 270,143.1 272,138.4 274,144.5 276,135.8 278,126.2 280,108.3 282,120.5 284,131.9 286,145.4 288,138.3 290,144.8 292,137.8 294,141.4 296,140.4 298,144.1 300,144.5 302,144.6 304,141.4 306,146 308,139.6 310,140.2 312,140.1 314,142 316,146.2 318,145.5 320,138.2 322,145.3 324,140.3 326,138.5 328,146.2 330,138.6 332,138.7 334,137.6 336,137.9 338,139.6 340,142.7 342,144.3 344,140"/>
+        <text x="48" y="30" font-size="12">level</text>
+        <text class="t1" x="128" y="44" font-size="12">f₁</text>
+        <text x="208" y="92" font-size="12">f₂</text>
+        <text x="288" y="114" font-size="12">f₃</text>
+        <text x="40" y="180" font-size="12" text-anchor="middle">0</text>
+        <text x="348" y="182" font-size="12" text-anchor="end">frequency</text>
+      </svg>
+      <figcaption>A sketch of a typical spectrum (<strong>Analyze ▸ Plot Spectrum</strong>): a noisy background with sharp peaks. Here the tallest is the <span class="key-1">first harmonic, <i>f</i><sub>1</sub></span>, with smaller peaks near 2<i>f</i><sub>1</sub> and 3<i>f</i><sub>1</sub>. In a real spectrum the tallest peak is not always the straw's note, so always check it against your prediction.</figcaption>
+    </figure>
+    <p><strong>Table 2: readings.</strong> Fill in the mean, Δ<i>f</i><sub>1</sub>, 1/<i>f</i><sub>1</sub> and Δ(1/<i>f</i><sub>1</sub>) for each straw as you go (see <a href="#uncertainties">Uncertainties</a>). Then go back to Table 1 and fill in <i>f</i><sub>2</sub>/<i>f</i><sub>1</sub> and <i>v</i> = 2<i>Lf</i><sub>1</sub>, using the mean <i>f</i><sub>1</sub>.</p>
+    <div class="vlab-panel" data-lab-table="straws" data-report-title="Table 2: readings for the graph"></div>
+
+    <h3>Alternative: Vernier Microphone and Logger Pro 3</h3>
+    <ol>
+      <li>Connect the Vernier Microphone to <strong>CH 1</strong> of the interface and open <strong>Logger Pro 3</strong>. In <strong>Experiment ▸ Data Collection</strong>, set a sampling rate of 20 000 samples/s and a duration of about 0.2 s. The sampling rate must be more than twice the highest frequency in the sound: at 10 000 samples/s, the 3rd harmonic of the shortest straw (about 6.4 kHz) would appear at a false, lower frequency (aliasing).</li>
+      <li>Collect while blowing a steady note, then choose <strong>Insert ▸ FFT Graph</strong> to show the spectrum, and read the peak frequency (<strong>Analyze ▸ Examine</strong> helps). The frequency resolution is about 1/duration, so 0.2 s of data gives about 5 Hz.</li>
+    </ol>
+
+    <h2 id="graph">7. Your graph</h2>
+    <p>The graph updates as you type. It starts with <strong>straw length $L$</strong> on the vertical axis and <strong>$1/f_1$</strong> on the horizontal axis. By the Theory, its gradient is $v/2$ and its y-intercept is $-2e$.</p>
+    <p class="vlab-small">The graph tool uses one uncertainty for every point on each axis, so type the <strong>largest</strong> one (a cautious choice). Type your Δ<i>L</i> (0.001 m) in the vertical axis's uncertainty box. For the horizontal axis, Δ(1/<i>f</i><sub>1</sub>) has the same percentage as Δ<i>f</i><sub>1</sub>, so type your largest percentage uncertainty in <i>f</i><sub>1</sub> with a % sign (for example 0.8%), or your largest Δ(1/<i>f</i><sub>1</sub>). Then tick <strong>Steepest and shallowest lines</strong>: they pass through every uncertainty bar. Press <strong>Add this graph to my report</strong> to keep it.</p>
+    <p>The tool gives the gradient with its uncertainty, half the difference between the steepest and shallowest gradients, and the y-intercept with its uncertainty. It does not force the line through the origin, which matters here: the intercept is what tells you about the end correction. Then work out:</p>
+    <ul>
+      <li>$v = 2 \times \text{gradient}$ and $\Delta v = 2 \times \Delta\text{gradient}$ (the gradient's unit, m / s, is the same as $\text{m s}^{-1}$);</li>
+      <li>$e = -\text{intercept}/2$, with $\Delta e = \Delta\text{intercept}/2$ as a rough uncertainty (beyond the syllabus).</li>
+    </ul>
+    <div class="dgraph" data-lab-graph="straws"></div>
+    <div class="vlab-panel measure-panel">
+      <h3>Results from your graph</h3>
+      <label class="vlab-field">Gradient ± uncertainty / m s⁻¹ <input data-save="grad"></label>
+      <label class="vlab-field">Speed of sound <i>v</i> = 2 × gradient, ± Δ<i>v</i> / m s⁻¹ <input data-save="v"></label>
+      <label class="vlab-field">Percentage uncertainty in <i>v</i> / % <input data-save="v-pc" inputmode="decimal"></label>
+      <label class="vlab-field">y-intercept ± uncertainty / m <input data-save="int"></label>
+      <label class="vlab-field">End correction <i>e</i> = −intercept/2, ± Δ<i>e</i> / m (beyond the syllabus) <input data-save="e"></label>
+    </div>
+
+    <h2 id="analysis">8. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Describe your graph of <i>L</i> against 1/<i>f</i><sub>1</sub>. Is it a straight line within the uncertainty bars? What does this tell you about the relationship between <i>f</i><sub>1</sub> and <i>L</i>?</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> State your value of the speed of sound, <i>v</i> ± Δ<i>v</i>, from the gradient, with its percentage uncertainty. Compare it with the expected value at your room temperature. Do they agree within your uncertainty?</label><textarea id="a2" data-save="a2" rows="3"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> State the intercept and the end correction <i>e</i> it gives. Is the intercept negative, as the model predicts? Measure the inner diameter of a straw and compare <i>e</i> with 0.6 × the radius (beyond the syllabus). The blown end is partly covered by your lip, so its end correction can be larger than at a free open end. Explain any difference between your <i>e</i> and 0.6 × the radius, and comment on how precisely your graph can determine such a small length.</label><textarea id="a3" data-save="a3" rows="4"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> Look at the values of <i>v</i> = 2<i>Lf</i><sub>1</sub> in Table 1, which ignore the end correction. Are they all a little too large or a little too small compared with your graph value? Explain why, and why the effect is largest for the shortest straws.</label><textarea id="a4" data-save="a4" rows="3"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Use your values of <i>f</i><sub>2</sub>/<i>f</i><sub>1</sub> from Table 1. Do they support the model that every harmonic of an open–open pipe is a whole-number multiple of <i>f</i><sub>1</sub>? Why are they useful evidence that you identified the correct peak?</label><textarea id="a5" data-save="a5" rows="3"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Imagine a student's spectra show the tallest peak at 1210 Hz for a 0.10 m straw and at 1160 Hz for a 0.20 m straw. Use the model to predict what <i>f</i><sub>1</sub> should have been for each straw. Explain why the student's peak cannot be the first harmonic of the straw, suggest what it might be, and describe how predicting <i>f</i><sub>1</sub> before measuring would have caught the problem.</label><textarea id="a6" data-save="a6" rows="4"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> Which uncertainty contributes more to Δ(1/<i>f</i><sub>1</sub>) in your data: the bin width of the spectrum or the spread of your three trials? What does this suggest about how steady your blowing was?</label><textarea id="a7" data-save="a7" rows="3"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> The air inside the straw may be slightly warmer and more humid than the room, because of your breath. In which direction would this change the measured value of <i>v</i>? Is this a random or a systematic effect?</label><textarea id="a8" data-save="a8" rows="3"></textarea></div>
+      <div class="answer"><label for="a9"><strong>9.</strong> Suggest two realistic improvements to this experiment, and say which uncertainty or systematic effect each one reduces.</label><textarea id="a9" data-save="a9" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="extension">9. Extension</h2>
+    <p>For E1 and E2, close the bottom end of at least four of your straws in turn and record each note again, as in section 6. Record your results in Table 3. Its graph starts with the closed <i>f</i><sub>1</sub> on the horizontal axis: set <strong>Plot</strong> to 1/<i>x</i> on that axis to plot <i>L</i> against 1/<i>f</i><sub>1</sub>, and type the largest percentage uncertainty in <i>f</i><sub>1</sub> as before.</p>
+    <div class="vlab-panel" data-lab-table="closed" data-report-title="Table 3: the same straws with one end closed"></div>
+    <div class="dgraph" data-lab-graph="closed"></div>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1. A closed pipe.</strong> Close the bottom end of a straw by pressing a fingertip or a small piece of Blu-Tack firmly over it, and record the note again. The closed end is now a node, so the first harmonic has a quarter-wavelength in the straw: λ = 4<i>L</i> and <i>f</i><sub>1</sub> = <i>v</i>/4<i>L</i>. (Beyond the syllabus: with the end correction at the open end, λ = 4(<i>L</i> + <i>e</i>).) Predict, then check, that <i>f</i><sub>1</sub> falls to about half its open–open value. Then look at the higher peaks. <span class="tag y2028">New for 2028</span> A pipe with one closed end has only odd harmonics, named by their relationship to <i>L</i>: the 1st, 3rd, 5th … harmonics, at about <i>f</i><sub>1</sub>, 3<i>f</i><sub>1</sub>, 5<i>f</i><sub>1</sub> …, with no 2nd harmonic. Record the next peak in Table 3 and test whether it is near 3<i>f</i><sub>1</sub> rather than 2<i>f</i><sub>1</sub>. Explain why this open/closed comparison is a strong check that your peaks really are the straw's own resonances. Why might a fingertip or Blu-Tack make the straw slightly shorter than you measured?</label><textarea id="e1" data-save="e1" rows="5"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Plot the closed-pipe results as <i>L</i> against 1/<i>f</i><sub>1</sub> as well (the graph under Table 3). What gradient and intercept does the model predict now? Do your two graphs give the same speed of sound within their uncertainties?</label><textarea id="e2" data-save="e2" rows="3"></textarea></div>
+      <div class="answer"><label for="e3"><strong>E3.</strong> Repeat one straw with Size 2048, 8192 and 32 768 in the Plot Spectrum window. How do the peak's shape and its reading change? Size 32 768 needs at least 0.74 s of sound at 44 100 Hz, and the whole selection must be steady, so make a longer recording first. Explain the trade-off between frequency resolution and the length of steady recording you need.</label><textarea id="e3" data-save="e3" rows="4"></textarea></div>
+      <div class="answer"><label for="e4"><strong>E4.</strong> Make a pan pipe: using your results, work out the lengths of open–open straws that would play two notes an octave apart (one frequency twice the other). Cut them and test your prediction with Audacity.</label><textarea id="e4" data-save="e4" rows="3"></textarea></div>
+    </div>
+    <p class="vlab-small">Standing waves in pipes, and why a pipe closed at one end has only odd harmonics, are in <a href="../themes/c4.html#pipes">C.4 Standing waves and resonance</a>.</p>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your measurements, all three tables, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: Snell's law and the critical angle · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab with a ray box: trace rays through a glass or Perspex block to test Snell's law, find the refractive index from a straight-line graph, and check it by measuring the critical angle.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/snells-law.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: Snell's law and the critical angle · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab with a ray box: trace rays through a glass or Perspex block to test Snell's law, find the refractive index from a straight-line graph, and check it by measuring the critical angle.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/snells-law.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-snells-law",
+    "title": "Snell's law and the critical angle",
+    "file": "Snell's law lab",
+    "tables": {
+      "p1": {
+        "note": "One row for each angle of incidence: 10°, 20°, 30°, 40°, 50°, 60° and 70°. Fill in the two angles in the lab. Afterwards, work out the sines, their uncertainties and n for each row (calculator in degrees).",
+        "csvFile": "snells-law-part1.csv",
+        "x": 5, "y": 3,
+        "cols": [
+          { "html": "θ<sub>air</sub> / °", "csv": "angle in air θair / °", "aria": "angle between the ray in air and the normal, in degrees" },
+          { "html": "θ<sub>block</sub> / °", "csv": "angle in block θblock / °", "aria": "angle between the ray in the block and the normal, in degrees" },
+          { "html": "sin θ<sub>air</sub>", "csv": "sin θair", "aria": "sine of the angle in air" },
+          { "html": "Δ(sin θ<sub>air</sub>)", "csv": "uncertainty in sin θair", "aria": "uncertainty in the sine of the angle in air" },
+          { "html": "sin θ<sub>block</sub>", "csv": "sin θblock", "aria": "sine of the angle in the block" },
+          { "html": "Δ(sin θ<sub>block</sub>)", "csv": "uncertainty in sin θblock", "aria": "uncertainty in the sine of the angle in the block" },
+          { "html": "<i>n</i> = sin θ<sub>air</sub> / sin θ<sub>block</sub>", "csv": "refractive index n", "aria": "refractive index from this row, the sine of the angle in air divided by the sine of the angle in the block" }
+        ]
+      },
+      "p2": {
+        "note": "One row for each trial (three trials). θc is half the angle between the L and R lines.",
+        "csvFile": "snells-law-part2.csv",
+        "cols": [
+          { "html": "Trial", "csv": "trial", "aria": "trial number" },
+          { "html": "L angle to normal / °", "csv": "L angle to normal / °", "aria": "angle between the left-hand ray and the normal, in degrees" },
+          { "html": "R angle to normal / °", "csv": "R angle to normal / °", "aria": "angle between the right-hand ray and the normal, in degrees" },
+          { "html": "Angle between L and R (2θ<sub>c</sub>) / °", "csv": "angle between L and R (2θc) / °", "aria": "angle between the left and right rays, equal to twice the critical angle, in degrees" },
+          { "html": "θ<sub>c</sub> / °", "csv": "critical angle θc / °", "aria": "critical angle in degrees" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Snell's law and the critical angle</p>
+    <h1>Snell's law and the critical angle</h1>
+    <p class="lead">A lab with a ray box: trace a narrow ray of light through a rectangular glass or Perspex block to test Snell's law, then find the critical angle of a semicircular block. <span class="tag">C.3 Wave phenomena</span></p>
+    <p><strong>Aim:</strong> to test Snell's law and determine the refractive index $n$ of a block, with its uncertainty, from a graph of $\sin\theta_{\text{air}}$ against $\sin\theta_{\text{block}}$; to measure the critical angle $\theta_c$ of a semicircular block and use $\sin\theta_c = 1/n$ to find $n$ a second, independent way; and to compare the two values and evaluate the main sources of uncertainty in each method.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#theory">Theory: Snell's law and the critical angle</a></li>
+        <li><a href="#equipment">Equipment and safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#part1">Part 1: refraction through a rectangular block</a></li>
+        <li><a href="#part2">Part 2: critical angle with a semicircular block</a></li>
+        <li><a href="#graph">Your graph</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Tracing rays and measuring angles from a normal, and judging a realistic angle uncertainty that is larger than the protractor's resolution.</li>
+      <li>Propagating an uncertainty through a sine function, and seeing why some readings are far more useful than others.</li>
+      <li>Linearising a relationship (plotting sin θ against sin θ), so that a straight-line graph can test a law.</li>
+      <li>Finding the uncertainty in a gradient from the steepest and shallowest lines.</li>
+      <li>Comparing two independent methods for the same quantity, and reducing a systematic error by measuring on both sides of the normal.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring angles (Tool 1); processing data with a graph (Tool 2); linearising a relationship and propagating uncertainties (Tool 3); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="theory">2. Theory: Snell's law and the critical angle</h2>
+    <p>When light reaches the boundary between two transparent media, part of it is reflected and the rest is <strong>transmitted</strong>. If it meets the boundary at an angle, the transmitted ray changes direction: this is <strong>refraction</strong>. It happens because light travels at a different speed in each medium.</p>
+    <p>All angles are measured between the ray and the <strong>normal</strong>, the line at 90° to the boundary.</p>
+    <p>The data booklet gives <strong>Snell's law</strong> as</p>
+    <div class="key">$$\frac{n_1}{n_2} = \frac{\sin\theta_2}{\sin\theta_1} = \frac{v_2}{v_1}$$</div>
+    <p>where $n$ is the refractive index of each medium, $\theta$ is the angle between the ray and the normal in that medium, and $v$ is the speed of light in it. The same law, written without fractions, is $n_1 \sin\theta_1 = n_2 \sin\theta_2$. (See <a href="../themes/c3.html#refraction">C.3 Refraction and Snell's law</a>.)</p>
+    <p>In this lab one medium is air ($n = 1.00$) and the other is a block of refractive index $n$. Calling the angle in air $\theta_{\text{air}}$ and the angle in the block $\theta_{\text{block}}$, Snell's law becomes</p>
+    <div class="key">$$\sin\theta_{\text{air}} = n \sin\theta_{\text{block}}$$</div>
+    <p>This is true whichever way the light travels. So a graph of $\sin\theta_{\text{air}}$ (vertical) against $\sin\theta_{\text{block}}$ (horizontal) should be a <strong>straight line through the origin with gradient $n$</strong>.</p>
+    <p>When light travels from the block towards air, it bends <strong>away</strong> from the normal. As the angle in the block increases, the ray in air gets closer and closer to the boundary. At the <strong>critical angle</strong> $\theta_c$, the angle in air reaches 90° and the ray just skims along the surface.</p>
+    <p>At any larger angle no light leaves: all of it is reflected back into the block. This is <strong>total internal reflection</strong>. Putting $\theta_{\text{block}} = \theta_c$ and $\theta_{\text{air}} = 90°$ into Snell's law ($\sin 90° = 1$) gives</p>
+    <div class="key">$$\sin\theta_c = \frac{1}{n}$$</div>
+    <p>In Part 1 you will find $n$ from a graph. In Part 2 you will measure $\theta_c$ and use it to find $n$ a second, independent way. (See <a href="../themes/c3.html#tir">C.3 Critical angle and total internal reflection</a>.)</p>
+
+    <h2 id="equipment">3. Equipment and safety</h2>
+    <ul>
+      <li>Ray box with a single-slit plate (to make one narrow ray), and its power supply (usually 12 V: check the label on the ray box)</li>
+      <li>Rectangular glass or Perspex block (Part 1)</li>
+      <li>Semicircular glass or Perspex block (Part 2; it can also be used for Part 1, see the note in Part 1)</li>
+      <li>180° or 360° protractor, 30 cm ruler, sharp pencil, set square</li>
+      <li>Several sheets of white A4 paper</li>
+    </ul>
+    <div class="notice">
+      <p style="margin:0"><strong>Safety:</strong></p>
+      <ul style="margin-bottom:0">
+        <li>The ray box lamp and its casing get <strong>hot</strong> after a few minutes. Hold the box by its base, and switch it off between parts. Let it cool before packing away.</li>
+        <li>Glass blocks are heavy and their corners chip easily; a chipped edge is sharp. Keep the block in the middle of the bench, and don't slide it over other blocks. Perspex scratches: don't put it face down on a dirty bench.</li>
+        <li>Keep the power supply and cables away from any water (Extension E1).</li>
+      </ul>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> Starting from the data-booklet form of Snell's law, show that sin θ<sub>air</sub> = <i>n</i> sin θ<sub>block</sub> when one medium is air (<i>n</i> = 1.00). Explain why the graph in this lab should pass through the origin.</label><textarea id="pre1" data-save="pre1" rows="3"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> A ray in air meets a block at 50° to the normal and is refracted at 31° to the normal. Calculate <i>n</i>. The angle in air is known to ±1° and the angle in the block to ±2°. Find the largest and smallest values of <i>n</i> these angles allow, and hence <i>n</i> ± Δ<i>n</i>. Why is a graph of many readings better than one reading?</label><textarea id="pre2" data-save="pre2" rows="4"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> Show that a refracted angle of (7 ± 2)° gives a percentage uncertainty in sin θ<sub>block</sub> of about 30 %, and that (39 ± 2)° gives about 4 %. What does this tell you about the smallest angles of incidence?</label><textarea id="pre3" data-save="pre3" rows="3"></textarea></div>
+      <div class="answer"><label for="pre4"><strong>P4.</strong> Derive sin θ<sub>c</sub> = 1/<i>n</i> from Snell's law. Calculate the critical angle for Perspex (<i>n</i> = 1.49) and for water (<i>n</i> = 1.33). Calculate the speed of light in the Perspex (<i>c</i> = 3.00 × 10<sup>8</sup> m s⁻¹).</label><textarea id="pre4" data-save="pre4" rows="4"></textarea></div>
+      <div class="answer"><label for="pre5"><strong>P5.</strong> Explain why total internal reflection can only happen when light travels from the block towards the air, and never from the air into the block.</label><textarea id="pre5" data-save="pre5" rows="3"></textarea></div>
+    </div>
+
+    <h3 id="uncertainties">Uncertainties</h3>
+    <p><strong>Protractor:</strong> a protractor with 1° divisions read once gives ± 0.5°. But that is not the real limit here. The ray is 1–2 mm wide, so you must judge where its centre is; the normal you drew may be slightly off 90°; and you mark the ray with pencil crosses. A realistic uncertainty for an angle you <strong>set</strong> by lining the ray up with a drawn line is about <strong>± 1°</strong>.</p>
+    <p><strong>Refracted angle in the rectangular block:</strong> you can't see this ray clearly enough to measure it directly. You find it by joining the entry point A to the exit point B, and each of these is only known to about ± 1 mm (the width of the ray). Over a path of about 6 cm, an error of 1 mm at each end in opposite directions turns the line by about 2° (2 mm across 60 mm). So <strong>± 2°</strong> is realistic for $\theta_{\text{block}}$. Decide whether your own tracing deserves a smaller or larger value, and say why.</p>
+    <p><strong>Uncertainty in a sine:</strong> $\sin\theta$ does not change evenly with $\theta$, so find $\Delta(\sin\theta)$ as half the difference between the sines of the largest and smallest angles:</p>
+    $$\Delta(\sin\theta) = \frac{\sin(\theta + \Delta\theta) - \sin(\theta - \Delta\theta)}{2}$$
+    <p>Use a calculator in degree mode. For example, $\theta = (30 \pm 2)°$ gives $\Delta(\sin\theta) = (\sin 32° - \sin 28°)/2 = 0.03$, so $\sin\theta = 0.50 \pm 0.03$.</p>
+    <p><strong>Critical angle:</strong> the refracted ray does not vanish suddenly; it fades and turns into colours. Your repeated readings will show how well you can judge it. Use half the range, $\frac{\text{max} - \text{min}}{2}$, or ± 1° if that is larger.</p>
+    <p>Quote each uncertainty to 1 significant figure (2 if the uncertainty itself is known precisely), with the value rounded to the same decimal place. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <h2 id="part1">5. Part 1: refraction through a rectangular block</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 310" role="img" aria-labelledby="snl1t">
+        <title id="snl1t">Part 1 set-up, seen from above: a rectangular block lies on paper with its outline drawn. A dashed normal crosses the upper face at point A, about 3 cm from the left end, and continues through the block. A narrow ray from a ray box at the top left arrives at A at angle theta air to the normal, and a faint reflected ray leaves A. Inside the block the ray is drawn dashed from A to point B on the lower face, at the smaller angle theta block to the normal. The ray leaves the block at B parallel to the incident ray, and two crosses are marked on it, well apart.</title>
+        <rect class="area" x="70" y="120" width="220" height="90"/>
+        <rect class="l1 thin" x="70" y="120" width="220" height="90"/>
+        <line class="axis thin dash" x1="110" y1="40" x2="110" y2="300"/>
+        <g transform="translate(39.3 49.3) rotate(45)"><rect class="axis" x="-20" y="-9" width="40" height="18" rx="2" style="fill:var(--surface)"/></g>
+        <line class="l2" x1="53.4" y1="63.4" x2="110" y2="120"/>
+        <line class="l2 thin" x1="110" y1="120" x2="148.9" y2="81.1" style="opacity:0.4"/>
+        <line class="l2 dash" x1="110" y1="120" x2="158.1" y2="210"/>
+        <line class="l2" x1="158.1" y1="210" x2="241" y2="292.9"/>
+        <path d="M248.1 300 L238.2 295.7 L243.9 290.1 z" style="fill:var(--theme-b)"/>
+        <path class="axis thin" d="M110 90 A30 30 0 0 0 88.8 98.8"/>
+        <path class="axis thin" d="M110 154 A34 34 0 0 0 126 150"/>
+        <path class="l3 thin" d="M184.1 236 l8 8 M192.1 236 l-8 8"/>
+        <path class="l3 thin" d="M224.1 276 l8 8 M232.1 276 l-8 8"/>
+        <text x="8" y="18" font-size="12">ray box</text>
+        <text x="116" y="46" font-size="12">normal</text>
+        <text class="t2" x="84" y="73" font-size="12" text-anchor="middle">θ<tspan dy="4" font-size="0.8em">air</tspan></text>
+        <text class="t2" x="146" y="172" font-size="12">θ<tspan dy="4" font-size="0.8em">block</tspan></text>
+        <text x="104" y="140" font-size="12" text-anchor="end">A</text>
+        <text x="152" y="230" font-size="12" text-anchor="end">B</text>
+        <text class="t1" x="282" y="140" font-size="12" text-anchor="end">block</text>
+        <text x="240" y="258" font-size="12">mark here</text>
+      </svg>
+      <figcaption>The <span class="key-2">ray</span> enters the <span class="key-1">block</span> at A and bends towards the normal; it leaves at B parallel to the incident ray. You can't trace the ray inside the block directly: after removing the block, join the two crosses back to B, then draw the dashed line from A to B. Both angles are measured from the normal. A faint reflected ray also leaves A. Angles drawn true for <i>n</i> = 1.5; not to scale.</figcaption>
+    </figure>
+    <ol>
+      <li>Place the rectangular block in the middle of a sheet of paper and draw round it with a sharp pencil. Mark a point A on one long side, about 3 cm from the left end.</li>
+      <li>Remove the block. Using the protractor (or set square), draw the normal through A at 90° to the side, long enough to cross the whole outline and extend 5 cm outside it.</li>
+      <li>With the protractor centred on A, draw lines from A outside the block at 10°, 20°, 30°, 40°, 50°, 60° and 70° to the normal, all on the same side. Label each with its angle. These are the incident rays.</li>
+      <li>Put the block back exactly on its outline. Connect the ray box to the power supply and darken the room if you can. Set up a single narrow ray.</li>
+      <li>Aim the ray along the 10° line so that it hits the block exactly at A. Look at the ray on the far side of the block: mark two crosses on its centre, at least 5 cm apart, and mark the exit point B where it leaves the block. Label them with the angle.</li>
+      <li>Repeat for each of the other incident lines. Watch the reflected ray at A and the faint reflections inside the block: note how their brightness changes as the angle increases.</li>
+      <li>Switch off the ray box and remove the block. For each angle, join the two crosses and extend the line back to the block outline to find B accurately. Then draw the straight line from A to B: this is the refracted ray inside the block.</li>
+      <li>Measure θ<sub>block</sub>, the angle between AB and the normal at A, for each angle of incidence. Record both angles in the table. <strong>Check:</strong> each emerging ray should be parallel to its incident ray. If one is clearly not, repeat that angle.</li>
+    </ol>
+    <aside class="key">
+      <p style="margin:0"><strong>Only a semicircular block for Part 1?</strong> Use the set-up of Part 2 (light enters the curved face aimed at the centre O, so it doesn't bend there). Set θ<sub>block</sub> to 5°, 10°, 15° … 40° and measure the angle at which the ray leaves the flat face into the air. Both angles are then measured directly, but keep θ<sub>block</sub> below about 40°, or the ray won't leave the flat face at all.</p>
+    </aside>
+    <div class="vlab-panel measure-panel">
+      <h3>Part 1 uncertainties</h3>
+      <label class="vlab-field">Uncertainty in each angle in air Δθ<sub>air</sub> / °, and why you chose it <input data-save="dth-air"></label>
+      <label class="vlab-field">Uncertainty in each angle in the block Δθ<sub>block</sub> / °, and why you chose it <input data-save="dth-block"></label>
+    </div>
+    <p>After the lab, fill in the rest of the table for each row, with your calculator in degree mode:</p>
+    <ul>
+      <li>sin θ<sub>air</sub> and sin θ<sub>block</sub>;</li>
+      <li>Δ(sin θ<sub>air</sub>) and Δ(sin θ<sub>block</sub>), using the formula in <a href="#uncertainties">Uncertainties</a> with your Δθ values;</li>
+      <li><i>n</i> = sin θ<sub>air</sub> / sin θ<sub>block</sub>, the refractive index from that row alone.</li>
+    </ul>
+    <div class="vlab-panel" data-lab-table="p1" data-report-title="Part 1 readings"></div>
+
+    <h2 id="part2">6. Part 2: critical angle with a semicircular block</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 290" role="img" aria-labelledby="snl2t">
+        <title id="snl2t">Part 2 set-up, seen from above: a semicircular block with its flat face at the top and its curved face below. O is the centre of the flat face, and a dashed normal through O extends above and below the block. A ray from a ray box at the lower left enters the curved face along a radius, so it doesn't bend there, and reaches O at the critical angle theta c to the normal. At O a bright reflected ray goes back into the block towards the lower right, and a faint refracted ray just skims along the flat face. A dotted ray box at the lower right shows the matching position on the other side of the normal; the angle between the two positions is 2 theta c.</title>
+        <path class="area" d="M60 80 H300 A120 120 0 0 1 60 80 Z"/>
+        <path class="l1 thin" d="M60 80 H300 A120 120 0 0 1 60 80 Z"/>
+        <line class="axis thin dash" x1="180" y1="20" x2="180" y2="280"/>
+        <g transform="translate(53.3 221.6) rotate(-48.2)"><rect class="axis" x="-20" y="-9" width="40" height="18" rx="2" style="fill:var(--surface)"/></g>
+        <g transform="translate(306.7 221.6) rotate(-131.8)"><rect class="axis" x="-20" y="-9" width="40" height="18" rx="2" style="fill:var(--surface);stroke-dasharray:2 3"/></g>
+        <line class="l2" x1="66.7" y1="206.7" x2="180" y2="80"/>
+        <line class="l2" x1="180" y1="80" x2="260" y2="169.4"/>
+        <line class="l2 thin" x1="260" y1="169.4" x2="293.3" y2="206.7" style="stroke-dasharray:2 4"/>
+        <line class="l2 thin" x1="180" y1="75" x2="338" y2="75" style="opacity:0.5"/>
+        <path d="M346 75 L337 71 L337 79 z" style="fill:var(--theme-b);opacity:0.5"/>
+        <path class="axis thin" d="M180 116 A36 36 0 0 1 156 106.8"/>
+        <path class="axis thin" d="M233.3 139.6 A80 80 0 0 1 126.7 139.6"/>
+        <text x="174" y="34" font-size="12" text-anchor="end">normal</text>
+        <text x="340" y="62" font-size="12" text-anchor="end">skims the surface</text>
+        <text x="172" y="70" font-size="12" text-anchor="end">O</text>
+        <text class="t2" x="162" y="140" font-size="12" text-anchor="middle">θ<tspan dy="4" font-size="0.8em">c</tspan></text>
+        <text class="t2" x="198" y="180" font-size="12" text-anchor="middle">2θ<tspan dy="4" font-size="0.8em">c</tspan></text>
+        <text class="t1" x="96" y="104" font-size="12" text-anchor="middle">block</text>
+        <text x="8" y="272" font-size="12">ray box</text>
+        <text x="352" y="272" font-size="12" text-anchor="end">other side</text>
+      </svg>
+      <figcaption>The <span class="key-2">ray</span> travels along a radius, so it enters the curved face of the <span class="key-1">block</span> without bending and reaches the centre O of the flat face. At the critical angle θ<sub>c</sub> the faint refracted ray just skims the surface, and the reflected ray inside the block becomes bright. The dotted ray box shows the matching position on the other side of the normal: the angle between the two positions is 2θ<sub>c</sub>. Angles drawn true for <i>n</i> = 1.5; not to scale.</figcaption>
+    </figure>
+    <ol>
+      <li>On a fresh sheet, place the semicircular block with its flat face along a straight line. Draw round it and mark the centre O of the flat face. Remove the block and draw the normal through O, extended well beyond the curved side. Replace the block.</li>
+      <li>Shine the ray at the curved face so that it travels along a radius and reaches the flat face exactly at O. <strong>Check:</strong> with the ray along the normal it should pass straight through without bending. (If the ray doesn't hit O, it bends at the curved face and the method fails.)</li>
+      <li>Slowly move the ray box round the curved side, keeping the ray aimed at O, so that the angle with the normal increases. Watch the ray leaving the flat face: it bends further from the normal, grows fainter and breaks into colours, while the reflected ray inside the block gets brighter.</li>
+      <li>Stop when the last of the refracted light just disappears (the reflected ray suddenly becomes much brighter). Mark two crosses on the incident ray, well apart, outside the curved face, between the ray box and the block, and label them L1.</li>
+      <li>Repeat on the <strong>other</strong> side of the normal, approaching the critical angle from the opposite direction, and label the crosses R1.</li>
+      <li>Repeat steps 3–5 twice more (L2, R2, L3, R3). Each time, move the ray box away first and approach the critical angle again from smaller angles.</li>
+      <li>Remove the block. Join each set of crosses to O. For each trial, measure the angle between the L and R lines (this is 2θ<sub>c</sub>) and also each angle to the normal. Record them in the table, and halve the angle between L and R to get θ<sub>c</sub>.</li>
+    </ol>
+    <div class="vlab-panel" data-lab-table="p2" data-report-title="Part 2 readings"></div>
+    <div class="vlab-panel measure-panel">
+      <h3>Critical angle and refractive index</h3>
+      <label class="vlab-field">Mean critical angle θ<sub>c</sub> / ° <input data-save="thc" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty Δθ<sub>c</sub> = (max − min)/2, or ± 1° if larger / ° <input data-save="dthc" inputmode="decimal"></label>
+      <label class="vlab-field">Refractive index <i>n</i> = 1/sin θ<sub>c</sub> <input data-save="n-c" inputmode="decimal"></label>
+      <label class="vlab-field">Uncertainty Δ<i>n</i> (see Analysis question 3) <input data-save="dn-c" inputmode="decimal"></label>
+    </div>
+
+    <h2 id="graph">7. Your graph</h2>
+    <p>The graph uses your Part 1 table and updates as you type. It starts with <strong>sin θ<sub>air</sub></strong> on the vertical axis against <strong>sin θ<sub>block</sub></strong> on the horizontal axis, so the gradient of the line is the refractive index <i>n</i>. Fill in the sine columns first: the graph tool can't take the sine of an angle for you.</p>
+    <p class="vlab-small">The graph tool uses one uncertainty for every point on each axis, so type the <strong>largest</strong> value from your Δ(sin θ<sub>air</sub>) column in the vertical axis's uncertainty box and the largest from your Δ(sin θ<sub>block</sub>) column in the horizontal axis's box (a cautious choice). Keep <strong>Start the axes at zero</strong> ticked, so you can see whether the line passes through the origin. Then tick <strong>Steepest and shallowest lines</strong>: they pass through every uncertainty bar, and the tool gives the gradient with its uncertainty, Δ<i>n</i> = (<i>n</i><sub>max</sub> − <i>n</i><sub>min</sub>)/2, and the y-intercept with its uncertainty. Press <strong>Add this graph to my report</strong> to keep it.</p>
+    <div class="dgraph" data-lab-graph="p1"></div>
+
+    <h2 id="analysis">8. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Is your graph a straight line through the origin within the uncertainty bars? (Is zero inside the range of the y-intercept?) Explain how this supports Snell's law. State <i>n</i> ± Δ<i>n</i> from the gradient.</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> Look at the last column of your Part 1 table. Which values of <i>n</i> are furthest from your gradient, and are they at small or large angles? Use your answer to P3 to explain why.</label><textarea id="a2" data-save="a2" rows="3"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> State θ<sub>c</sub> ± Δθ<sub>c</sub> from Part 2 and calculate <i>n</i> = 1/sin θ<sub>c</sub>. Find its uncertainty by working out 1/sin(θ<sub>c</sub> + Δθ<sub>c</sub>) and 1/sin(θ<sub>c</sub> − Δθ<sub>c</sub>). (For example, θ<sub>c</sub> = (42 ± 1)° gives <i>n</i> = 1.49 ± 0.03.)</label><textarea id="a3" data-save="a3" rows="3"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> Do your two values of <i>n</i> agree within their uncertainties? Which method gives the more precise value? Suggest why.</label><textarea id="a4" data-save="a4" rows="3"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Compare the L and R angles in your Part 2 table. If they differ by the same amount in every trial, what does this tell you about your normal? Explain why measuring the angle between L and R and halving it removes this systematic error.</label><textarea id="a5" data-save="a5" rows="3"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Calculate the speed of light in your block from your best value of <i>n</i>.</label><textarea id="a6" data-save="a6" rows="2"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> Near the critical angle the refracted ray was faint while the reflected ray was bright, and the change happened gradually. Explain why this makes θ<sub>c</sub> hard to judge, and whether your readings are more likely to be too small or too large.</label><textarea id="a7" data-save="a7" rows="3"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> The ray box gives white light. Near the critical angle the emerging light split into colours. The refractive index for blue light is slightly larger than for red. Which colour disappeared first as you increased the angle? Explain using sin θ<sub>c</sub> = 1/<i>n</i>, and say how this affects your value of θ<sub>c</sub>.</label><textarea id="a8" data-save="a8" rows="3"></textarea></div>
+      <div class="answer"><label for="a9"><strong>9.</strong> Identify the largest source of uncertainty in each part (consider the ray width, how points were marked, how accurately the normal was drawn, and partial reflection). Suggest one realistic improvement for each part.</label><textarea id="a9" data-save="a9" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="extension">9. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> <strong>Refractive index of water:</strong> fill a thin-walled transparent semicircular dish with water and repeat Part 2. Explain why the thin flat plastic wall does not change the angle at which light finally leaves into the air. Compare your result with <i>n</i> = 1.33 (θ<sub>c</sub> ≈ 49°). Keep the power supply away from the water.</label><textarea id="e1" data-save="e1" rows="4"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> <strong>Colour:</strong> if your ray box has red and blue filters, repeat Part 2 with each. Do the two critical angles differ by more than your uncertainty? (For Perspex they are expected to differ by well under 1°.)</label><textarea id="e2" data-save="e2" rows="3"></textarea></div>
+      <div class="answer"><label for="e3"><strong>E3.</strong> Plot θ<sub>air</sub> against θ<sub>block</sub> (the angles themselves, not their sines: choose the two angle columns in the graph tool). Describe the shape and explain why it is not a straight line. Over what range of angles is θ<sub>air</sub>/θ<sub>block</sub> close to <i>n</i>, and why?</label><textarea id="e3" data-save="e3" rows="3"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your uncertainties, both tables, your critical-angle result, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

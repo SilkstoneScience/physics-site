@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics practical: Young's double slit and the wavelength of a laser · Mr Silkstone's Physics</title>
+  <meta name="description" content="An IB DP Physics lab: shine a Class 2 laser through a double slit, measure the fringe separation at six distances and find the laser's wavelength from the gradient of a graph.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/experimental/double-slit.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics practical: Young's double slit and the wavelength of a laser · Mr Silkstone's Physics">
+  <meta property="og:description" content="An IB DP Physics lab: shine a Class 2 laser through a double slit, measure the fringe separation at six distances and find the laser's wavelength from the gradient of a graph.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/experimental/double-slit.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/labs/common.js"></script>
+  <script defer src="../js/labs/graph.js"></script>
+  <script defer src="../js/labs/report.js"></script>
+  <script defer src="../js/labs/handout.js"></script>
+  <script defer src="../js/labs/mathbar.js"></script>
+  <script type="application/json" id="lab-config">
+  {
+    "key": "lab-double-slit",
+    "title": "Young's double slit: the wavelength of a laser",
+    "file": "Double-slit lab",
+    "tables": {
+      "fringes": {
+        "note": "One row for each distance D (six, from 1.0 m to 3.0 m), each with ΔD = ± 0.01 m. Mean W = (A + B)/2. ΔW is the larger of your realistic estimate (about ± 2 mm) and the half range, (max − min)/2, of the two partners' values. s = mean W / N and Δs = ΔW / N.",
+        "csvFile": "double-slit.csv",
+        "x": 1, "y": 7,
+        "cols": [
+          { "html": "<i>D</i> / m", "csv": "slit-to-screen distance D / m", "aria": "slit-to-screen distance in metres" },
+          { "html": "<i>N</i> (number of spacings)", "csv": "number of spacings N", "aria": "number of fringe spacings measured across" },
+          { "html": "<i>W</i> (partner A) / mm", "csv": "width W partner A / mm", "aria": "width across the fringes measured by partner A in millimetres" },
+          { "html": "<i>W</i> (partner B) / mm", "csv": "width W partner B / mm", "aria": "width across the fringes measured by partner B in millimetres" },
+          { "html": "Mean <i>W</i> / mm", "csv": "mean width W / mm", "aria": "mean width in millimetres" },
+          { "html": "Δ<i>W</i> / mm", "csv": "uncertainty in W / mm", "aria": "uncertainty in the width in millimetres" },
+          { "html": "<i>s</i> = <i>W</i>/<i>N</i> / mm", "csv": "fringe separation s / mm", "aria": "fringe separation in millimetres" },
+          { "html": "Δ<i>s</i> / mm", "csv": "uncertainty in s / mm", "aria": "uncertainty in the fringe separation in millimetres" }
+        ]
+      }
+    }
+  }
+  </script>
+</head>
+<body data-root="../" data-section="experimental">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Experimental programme</a> › <a href="practicals.html">Practicals</a> › Young's double slit</p>
+    <h1>Young's double slit: the wavelength of a laser</h1>
+    <p class="lead">A laser shines through two narrow slits very close together, and the row of bright and dark fringes on a screen tells you the wavelength of its light. <span class="tag">C.3 Wave phenomena</span></p>
+    <p><strong>Aim:</strong> to observe the double-slit interference pattern of a laser and relate it to coherence and path difference; to measure the fringe separation $s$ at six or more slit-to-screen distances $D$ between 1 m and 3 m; to find the wavelength of the laser light, with its uncertainty, from the gradient of a graph of $s$ against $D$; and to compare it with the wavelength printed on the laser, evaluating the main sources of uncertainty and systematic error.</p>
+
+    <section class="report-box" aria-labelledby="report-title">
+      <h2 id="report-title">Your lab report</h2>
+      <p>Record your measurements, readings and answers on this page as you go. At the end, press <strong>Download my lab report</strong> to save everything in one Word file, then hand it in.</p>
+      <label class="vlab-field">Your name <input data-save="name" autocomplete="name"></label>
+      <label class="vlab-field">Your partner(s) <input data-save="partners"></label>
+      <p class="vlab-small"><strong>Important:</strong> your work is saved only in this browser, on this device. Don't clear your browsing data or switch devices before you download your report. Download it now and then as a backup.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+    </section>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#skills">Skills you will practise</a></li>
+        <li><a href="#theory">Theory: why fringes?</a></li>
+        <li><a href="#equipment">Equipment and laser safety</a></li>
+        <li><a href="#prelab">Before the lab</a></li>
+        <li><a href="#part1">Part 1: setting up and observing the pattern</a></li>
+        <li><a href="#part2">Part 2: measuring s at different distances</a></li>
+        <li><a href="#graph">Your graph</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#extension">Extension</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="skills">1. Skills you will practise</h2>
+    <ul>
+      <li>Measuring a very small length (the fringe separation) precisely, by measuring across many fringes and dividing.</li>
+      <li>Judging realistic uncertainties where human judgement (finding the centre of a fuzzy fringe, or where a slit sits inside its holder) matters more than the resolution of the ruler.</li>
+      <li>Choosing a straight-line graph so that the gradient gives the quantity you want, and using the intercept to spot a systematic error.</li>
+      <li>Finding the uncertainty in a gradient from the steepest and shallowest lines, and combining it with the uncertainty in a manufacturer's value.</li>
+      <li>Working safely with a laser.</li>
+    </ul>
+    <aside class="key">
+      <p style="margin:0"><strong>Tools and inquiry:</strong> measuring length, and working safely with a laser (Tool 1); processing data with graphs (Tool 2); collecting and processing data, and concluding and evaluating (Inquiry 2 and 3).</p>
+    </aside>
+
+    <h2 id="theory">2. Theory: why fringes?</h2>
+    <p>In 1801 Thomas Young shone light through two narrow slits very close together and saw a row of bright and dark bands, or <strong>fringes</strong>, on a screen. Particles of light going straight through two slits would give just two bright lines. A set of evenly spaced fringes is what <strong>waves</strong> do when they overlap, so the experiment became one of the strongest pieces of evidence for the wave model of light.</p>
+    <p>Each slit diffracts the light, so the waves from the two slits spread out and overlap. Both slits are lit by the same laser beam, so the two sources are <strong>coherent</strong>: they have the same frequency and a constant phase difference.</p>
+    <p>At a point on the screen, the waves from the two slits have travelled different distances. Where the <strong>path difference</strong> is a whole number of wavelengths, $n\lambda$, they arrive in phase and interfere <strong>constructively</strong>: a bright fringe. Where it is $(n + \tfrac{1}{2})\lambda$, they arrive in antiphase and interfere <strong>destructively</strong>: a dark fringe. (See <a href="../themes/c3.html#young">C.3: Young's double-slit experiment</a>.)</p>
+    <p>When the screen is far from the slits compared with the slit separation, the bright fringes are equally spaced. The data booklet gives the <strong>fringe separation</strong> $s$ (from the centre of one bright fringe to the centre of the next) as</p>
+    $$s = \frac{\lambda D}{d}$$
+    <p>where $\lambda$ is the wavelength, $D$ is the distance from the slits to the screen and $d$ is the separation of the slits (centre to centre). So $s$ is directly proportional to $D$: a graph of $s$ against $D$ should be a <strong>straight line through the origin</strong> with <strong>gradient = $\lambda/d$</strong>. If $d$ is known, then</p>
+    $$\lambda = d \times \text{gradient}$$
+    <p>The fringes are only a few millimetres apart, so a single spacing can't be measured precisely with a ruler. Instead you will measure across many fringes, for example from the 5th bright fringe on the left of the centre to the 5th on the right, and divide by the number of spacings.</p>
+
+    <h2 id="equipment">3. Equipment and laser safety</h2>
+    <ul>
+      <li>Class 2 laser (red; its label states the wavelength) with its power supply</li>
+      <li>Double-slit plate (or slide) in its holder, for example the slit plate of the Vernier Diffraction Apparatus. Use a double slit of known separation, ideally $d$ = 0.25 mm with slit width $b$ = 0.04 mm.</li>
+      <li>Ring stands and clamps (or the optics bench) to hold the laser and the slit plate steady</li>
+      <li>White screen on a stand (or a smooth wall), several sheets of plain white paper, masking tape and a sharp pencil</li>
+      <li>Three metre rules (or a tape measure) for $D$</li>
+      <li>30 cm ruler with millimetre divisions for the fringes</li>
+      <li>Calculator</li>
+    </ul>
+    <div class="notice">
+      <p style="margin:0"><strong>Laser safety:</strong></p>
+      <ul style="margin-bottom:0">
+        <li>Class 2 lasers are low-power, but the beam can still damage the eye. <strong>Never look into the beam or at its reflection, and never point the laser at anyone.</strong> Your blink reflex is your only protection, so don't stare at the beam.</li>
+        <li>When you look at or mark the pattern, <strong>look at the screen from the side, never back along the beam</strong> towards the slits and the laser.</li>
+        <li>Keep the beam horizontal and <strong>below eye level</strong>: clamp the laser low on the bench and stay standing. Don't sit or bend down so that your eyes are at beam height. Switch the laser off whenever you move it or change slits.</li>
+        <li>Watch for <strong>reflections</strong>: remove watches, rings and bracelets, and keep shiny objects (phone screens, the metal of the slit holder, glassware) out of the beam. The beam must end on the screen, and never pass through a doorway or out of a window.</li>
+        <li>When the room is dimmed, keep enough light to see the floor and your notes. Keep bags and stools out of the walkway, and don't move around quickly.</li>
+      </ul>
+    </div>
+
+    <h2 id="prelab">4. Before the lab</h2>
+    <div data-report-section="Before the lab">
+      <div class="answer"><label for="pre1"><strong>P1.</strong> Explain why the two slits must be lit by the same laser beam rather than by two separate lasers. Use the word coherent in your answer.</label><textarea id="pre1" data-save="pre1" rows="3"></textarea></div>
+      <div class="answer"><label for="pre2"><strong>P2.</strong> A student marks the centres of the bright fringes from the 5th on the left of the central fringe to the 5th on the right. How many bright fringes are marked, and how many spacings <i>s</i> lie between the two end marks? Explain why dividing by the number of fringes would give the wrong value of <i>s</i>.</label><textarea id="pre2" data-save="pre2" rows="3"></textarea></div>
+      <div class="answer"><label for="pre3"><strong>P3.</strong> In a trial run with a double slit of separation <i>d</i> = 0.500 mm and <i>D</i> = 2.40 m, the distance from the centre of the 4th bright fringe on one side to the centre of the 4th on the other was 25.0 mm. Calculate <i>s</i> and the wavelength of the light.</label><textarea id="pre3" data-save="pre3" rows="3"></textarea></div>
+      <div class="answer"><label for="pre4"><strong>P4.</strong> A red laser (<i>λ</i> = 650 nm) shines through a double slit with <i>d</i> = 0.25 mm. Calculate <i>s</i> when <i>D</i> = 1.00 m and when <i>D</i> = 3.00 m. Hence suggest why you will measure across ten spacings, not one, at every distance.</label><textarea id="pre4" data-save="pre4" rows="3"></textarea></div>
+      <div class="answer"><label for="pre5"><strong>P5.</strong> Predict, with a reason, how the fringe pattern would change if (a) the screen were moved closer to the slits, (b) a slit plate with a larger slit separation were used, (c) a green laser were used instead of a red one.</label><textarea id="pre5" data-save="pre5" rows="4"></textarea></div>
+    </div>
+
+    <h3>Uncertainties</h3>
+    <p><strong>Width $W$ across the fringes:</strong> the ruler alone gives ± 1 mm, because a length needs two readings of ± 0.5 mm each. But the fringes have fuzzy edges, so judging where the <strong>centre</strong> of each end fringe lies adds roughly another ± 0.5 mm at each end. A realistic uncertainty is about ± 2 mm, which is larger than the ruler's resolution.</p>
+    <p>Two partners marking the same pattern independently gives a check: use the half range, $\frac{\text{max} - \text{min}}{2}$, of their two values of $W$ if it is larger.</p>
+    <p><strong>Fringe separation $s = W/N$:</strong> $N$, the number of spacings, is an exact count, so $\Delta s = \Delta W/N$. Measuring across ten spacings makes $\Delta s$ ten times smaller than measuring one spacing with the same $\Delta W$.</p>
+    <p><strong>Slit-to-screen distance $D$:</strong> the slits are inside a holder, so you can't put the end of the rule exactly on them, and joining metre rules end to end and keeping them straight adds more. ± 1 cm is realistic: much larger than the rule's ± 0.5 mm.</p>
+    <p><strong>Slit separation $d$:</strong> this comes from the manufacturer, so use the tolerance your teacher gives you. Because $d$ is the same for every point, its uncertainty doesn't show up as scatter on the graph: you add its percentage uncertainty to the gradient's at the end.</p>
+    <p>Quote uncertainties to 1 significant figure (usual), or 2 if the uncertainty itself is known precisely, with each value rounded to the same decimal place. See <a href="../skills.html">Physics skills</a>.</p>
+
+    <h2 id="part1">5. Part 1: setting up and observing the pattern</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 165" role="img" aria-labelledby="dsSetT">
+        <title id="dsSetT">Set-up seen from above. On the left, a laser sends a horizontal beam to a slit plate a few centimetres in front of it. A dashed line continues from the slits to a white screen on the right, perpendicular to the beam. The distance D, 1 to 3 metres, is marked from the slits themselves to the screen.</title>
+        <rect class="axis" x="10" y="60" width="50" height="20" rx="3" style="fill:var(--surface)"/>
+        <text x="35" y="100" font-size="12" text-anchor="middle">laser</text>
+        <line class="l2" x1="60" y1="70" x2="90" y2="70"/>
+        <rect class="l1" x="90" y="48" width="6" height="44" style="fill:var(--surface)"/>
+        <text class="t1" x="93" y="38" font-size="12" text-anchor="middle">slit plate</text>
+        <line class="l2 dash" x1="96" y1="70" x2="326" y2="70"/>
+        <rect class="axis" x="326" y="24" width="6" height="92" style="fill:var(--surface)"/>
+        <text x="350" y="16" font-size="12" text-anchor="end">screen</text>
+        <line class="axis thin dash" x1="93" y1="94" x2="93" y2="142"/>
+        <line class="axis thin dash" x1="326" y1="118" x2="326" y2="142"/>
+        <line class="axis thin" x1="103" y1="136" x2="316" y2="136"/>
+        <path class="axis" d="M94 136 L103 132 L103 140 z" style="fill:var(--text)"/>
+        <path class="axis" d="M325 136 L316 132 L316 140 z" style="fill:var(--text)"/>
+        <text x="210" y="158" font-size="12" text-anchor="middle">D = 1 to 3 m</text>
+      </svg>
+      <figcaption>Seen from above (not to scale). The <span class="key-2">laser beam</span> passes through the <span class="key-1">slit plate</span>, about 5–10 cm in front of the laser, and lands on the screen. Measure <i>D</i> from the slits themselves, not from the front of the holder.</figcaption>
+    </figure>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 158" role="img" aria-labelledby="dsSlitT">
+        <title id="dsSlitT">Close-up of the double slit, seen face-on. An opaque plate has two narrow vertical slits. Each slit has width b, and d is the distance between the centres of the two slits.</title>
+        <rect x="70" y="20" width="220" height="100" style="fill:var(--text);stroke:var(--text);stroke-width:1"/>
+        <rect x="144" y="30" width="10" height="80" style="fill:var(--surface);stroke:none"/>
+        <rect x="206" y="30" width="10" height="80" style="fill:var(--surface);stroke:none"/>
+        <text x="62" y="74" font-size="12" text-anchor="end">plate</text>
+        <line class="l2 thin" x1="144" y1="6" x2="144" y2="18"/>
+        <line class="l2 thin" x1="154" y1="6" x2="154" y2="18"/>
+        <line class="l2" x1="144" y1="12" x2="154" y2="12"/>
+        <text class="t2" x="136" y="16" font-size="12" text-anchor="end">b</text>
+        <line class="l1 thin dash" x1="149" y1="122" x2="149" y2="142"/>
+        <line class="l1 thin dash" x1="211" y1="122" x2="211" y2="142"/>
+        <line class="l1" x1="158" y1="134" x2="202" y2="134"/>
+        <path class="l1" d="M150 134 L158 130 L158 138 z" style="fill:var(--accent)"/>
+        <path class="l1" d="M210 134 L202 130 L202 138 z" style="fill:var(--accent)"/>
+        <text class="t1" x="180" y="154" font-size="12" text-anchor="middle">d</text>
+      </svg>
+      <figcaption>The double slit seen face-on, as the laser sees it: <span class="key-2">slit width <i>b</i></span> and <span class="key-1">slit separation <i>d</i></span>, centre to centre. Drawn to scale for <i>b</i> = 0.04 mm and <i>d</i> = 0.25 mm; the slits are really much taller than this.</figcaption>
+    </figure>
+    <ol>
+      <li>Clamp the laser low on the bench, pointing along the bench towards the screen, with the beam horizontal. Place the screen about 2 m away, perpendicular to the beam. Tape a fresh sheet of white paper to the screen where the beam lands.</li>
+      <li>With the laser <strong>off</strong>, fix the slit plate in its holder about 5–10 cm in front of the laser, with the plate perpendicular to the beam. Select the double slit your teacher tells you (ideally $d$ = 0.25 mm, $b$ = 0.04 mm). Record $d$ and $b$ below.</li>
+      <li>Switch the laser on. Slide or turn the slit plate until the spot falls centrally across <strong>both</strong> slits: the pattern on the screen becomes a row of evenly spaced, equally sharp fringes. Dim the room lights (safely: see the safety box).</li>
+      <li>Look carefully at the pattern. Sketch it on paper, numbering the bright fringes 0 (the central fringe), 1, 2, 3… on each side. Note any fringes that are dimmer than their neighbours, or seem to be missing, and how the brightness changes as you move away from the centre. (You will describe this in Analysis question 8.)</li>
+    </ol>
+    <div class="vlab-panel measure-panel">
+      <h3>Slit plate and laser</h3>
+      <label class="vlab-field">Slit separation <i>d</i> / mm (with its uncertainty) <input data-save="d"></label>
+      <label class="vlab-field">Slit width <i>b</i> / mm <input data-save="a"></label>
+      <label class="vlab-field">Wavelength on the laser label <i>λ</i> / nm (with its tolerance) <input data-save="lambda"></label>
+    </div>
+
+    <h2 id="part2">6. Part 2: measuring s at different distances</h2>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 228" role="img" aria-labelledby="dsPatT">
+        <title id="dsPatT">The calculated double-slit pattern for slit separation 0.25 mm and slit width 0.04 mm. At the top, a graph of intensity against position across the screen shows equally spaced peaks, tallest at the centre and getting smaller towards each side. Below it, the bright fringes are drawn as a row of bars, numbered 0 at the centre and 1 to 5 on each side. The fringe separation s is marked between two neighbouring peaks, and an arrow labelled W, across 10 spacings, runs from the 5th fringe on the left to the 5th fringe on the right.</title>
+        <line class="axis" x1="10" y1="130" x2="350" y2="130"/>
+        <text x="14" y="30" font-size="12">intensity</text>
+        <polyline class="l1" style="fill:none" points="12,129.9 13,129.9 14,130.0 15,130.0 16,130.0 17,129.9 18,129.8 19,129.6 20,129.4 21,129.1 22,128.7 23,128.3 24,127.8 25,127.3 26,126.8 27,126.3 28,125.8 29,125.4 30,125.1 31,124.8 32,124.7 33,124.7 34,124.8 35,125.1 36,125.5 37,126.0 38,126.6 39,127.2 40,127.9 41,128.6 42,129.1 43,129.6 44,129.9 45,130.0 46,129.9 47,129.5 48,128.9 49,128.0 50,126.8 51,125.4 52,123.8 53,122.1 54,120.3 55,118.5 56,116.7 57,115.1 58,113.7 59,112.6 60,111.8 61,111.4 62,111.4 63,111.9 64,112.8 65,114.0 66,115.6 67,117.5 68,119.6 69,121.7 70,123.9 71,125.8 72,127.5 73,128.8 74,129.7 75,130.0 76,129.7 77,128.7 78,127.1 79,124.9 80,122.1 81,118.8 82,115.1 83,111.2 84,107.3 85,103.4 86,99.7 87,96.5 88,93.8 89,91.8 90,90.6 91,90.2 92,90.8 93,92.2 94,94.4 95,97.4 96,101.0 97,105.1 98,109.5 99,113.9 100,118.1 101,122.0 102,125.3 103,127.8 104,129.4 105,130.0 106,129.4 107,127.7 108,124.8 109,120.9 110,116.1 111,110.5 112,104.4 113,98.0 114,91.5 115,85.3 116,79.6 117,74.7 118,70.7 119,68.0 120,66.5 121,66.5 122,67.8 123,70.5 124,74.5 125,79.6 126,85.5 127,92.1 128,98.9 129,105.8 130,112.3 131,118.2 132,123.1 133,126.9 134,129.2 135,130.0 136,129.2 137,126.7 138,122.7 139,117.3 140,110.7 141,103.1 142,94.9 143,86.3 144,77.9 145,69.9 146,62.7 147,56.6 148,51.8 149,48.7 150,47.3 151,47.8 152,50.0 153,54.0 154,59.5 155,66.4 156,74.2 157,82.7 158,91.5 159,100.2 160,108.3 161,115.6 162,121.7 163,126.2 164,129.0 165,130.0 166,129.0 167,126.2 168,121.5 169,115.3 170,107.7 171,99.1 172,89.9 173,80.5 174,71.3 175,62.7 176,55.0 177,48.7 178,43.9 179,41.0 180,40.0 181,41.0 182,43.9 183,48.7 184,55.0 185,62.7 186,71.3 187,80.5 188,89.9 189,99.1 190,107.7 191,115.3 192,121.5 193,126.2 194,129.0 195,130.0 196,129.0 197,126.2 198,121.7 199,115.6 200,108.3 201,100.2 202,91.5 203,82.7 204,74.2 205,66.4 206,59.5 207,54.0 208,50.0 209,47.8 210,47.3 211,48.7 212,51.8 213,56.6 214,62.7 215,69.9 216,77.9 217,86.3 218,94.9 219,103.1 220,110.7 221,117.3 222,122.7 223,126.7 224,129.2 225,130.0 226,129.2 227,126.9 228,123.1 229,118.2 230,112.3 231,105.8 232,98.9 233,92.1 234,85.5 235,79.6 236,74.5 237,70.5 238,67.8 239,66.5 240,66.5 241,68.0 242,70.7 243,74.7 244,79.6 245,85.3 246,91.5 247,98.0 248,104.4 249,110.5 250,116.1 251,120.9 252,124.8 253,127.7 254,129.4 255,130.0 256,129.4 257,127.8 258,125.3 259,122.0 260,118.1 261,113.9 262,109.5 263,105.1 264,101.0 265,97.4 266,94.4 267,92.2 268,90.8 269,90.2 270,90.6 271,91.8 272,93.8 273,96.5 274,99.7 275,103.4 276,107.3 277,111.2 278,115.1 279,118.8 280,122.1 281,124.9 282,127.1 283,128.7 284,129.7 285,130.0 286,129.7 287,128.8 288,127.5 289,125.8 290,123.9 291,121.7 292,119.6 293,117.5 294,115.6 295,114.0 296,112.8 297,111.9 298,111.4 299,111.4 300,111.8 301,112.6 302,113.7 303,115.1 304,116.7 305,118.5 306,120.3 307,122.1 308,123.8 309,125.4 310,126.8 311,128.0 312,128.9 313,129.5 314,129.9 315,130.0 316,129.9 317,129.6 318,129.1 319,128.6 320,127.9 321,127.2 322,126.6 323,126.0 324,125.5 325,125.1 326,124.8 327,124.7 328,124.7 329,124.8 330,125.1 331,125.4 332,125.8 333,126.3 334,126.8 335,127.3 336,127.8 337,128.3 338,128.7 339,129.1 340,129.4 341,129.6 342,129.8 343,129.9 344,130.0 345,130.0 346,130.0 347,129.9 348,129.9"/>
+        <line class="axis thin" x1="180" y1="18" x2="180" y2="34"/>
+        <line class="axis thin" x1="210" y1="18" x2="210" y2="34"/>
+        <line class="l2" x1="187" y1="26" x2="203" y2="26"/>
+        <path class="l2" d="M181 26 L188 22 L188 30 z" style="fill:var(--theme-b)"/>
+        <path class="l2" d="M209 26 L202 22 L202 30 z" style="fill:var(--theme-b)"/>
+        <text class="t2" x="218" y="30" font-size="12">s</text>
+        <g style="fill:var(--theme-b);stroke:none">
+          <rect x="24" y="144" width="12" height="20" fill-opacity="0.20"/>
+          <rect x="54" y="144" width="12" height="20" fill-opacity="0.32"/>
+          <rect x="84" y="144" width="12" height="20" fill-opacity="0.52"/>
+          <rect x="114" y="144" width="12" height="20" fill-opacity="0.75"/>
+          <rect x="144" y="144" width="12" height="20" fill-opacity="0.93"/>
+          <rect x="174" y="144" width="12" height="20" fill-opacity="1"/>
+          <rect x="204" y="144" width="12" height="20" fill-opacity="0.93"/>
+          <rect x="234" y="144" width="12" height="20" fill-opacity="0.75"/>
+          <rect x="264" y="144" width="12" height="20" fill-opacity="0.52"/>
+          <rect x="294" y="144" width="12" height="20" fill-opacity="0.32"/>
+          <rect x="324" y="144" width="12" height="20" fill-opacity="0.20"/>
+        </g>
+        <text x="30" y="182" font-size="12" text-anchor="middle">5</text>
+        <text x="60" y="182" font-size="12" text-anchor="middle">4</text>
+        <text x="90" y="182" font-size="12" text-anchor="middle">3</text>
+        <text x="120" y="182" font-size="12" text-anchor="middle">2</text>
+        <text x="150" y="182" font-size="12" text-anchor="middle">1</text>
+        <text x="180" y="182" font-size="12" text-anchor="middle">0</text>
+        <text x="210" y="182" font-size="12" text-anchor="middle">1</text>
+        <text x="240" y="182" font-size="12" text-anchor="middle">2</text>
+        <text x="270" y="182" font-size="12" text-anchor="middle">3</text>
+        <text x="300" y="182" font-size="12" text-anchor="middle">4</text>
+        <text x="330" y="182" font-size="12" text-anchor="middle">5</text>
+        <line class="axis thin" x1="30" y1="192" x2="30" y2="206"/>
+        <line class="axis thin" x1="330" y1="192" x2="330" y2="206"/>
+        <line class="axis thin" x1="39" y1="199" x2="321" y2="199"/>
+        <path class="axis" d="M31 199 L40 195 L40 203 z" style="fill:var(--text)"/>
+        <path class="axis" d="M329 199 L320 195 L320 203 z" style="fill:var(--text)"/>
+        <text x="180" y="222" font-size="12" text-anchor="middle">W, across 10 spacings</text>
+      </svg>
+      <figcaption>The pattern, calculated for <i>d</i> = 0.25 mm and <i>b</i> = 0.04 mm. The <span class="key-1">blue curve</span> is the intensity across the screen; the <span class="key-2">orange bars</span> are the bright fringes as you see them, numbered from the central fringe 0 and shaded by their calculated brightness (the faintest are drawn a little stronger so that they show). Mark the centre of each bright fringe from the 5th on one side to the 5th on the other: <i>W</i> covers <i>N</i> = 10 spacings.</figcaption>
+    </figure>
+    <ol start="5">
+      <li>Measure $D$ from the plane of the slits to the surface of the screen, keeping the metre rules straight and level beside the beam (not in it). Record $D$ in the table.</li>
+      <li>Partner A marks the <strong>centre</strong> of each bright fringe from the 5th on the left to the 5th on the right with a short, sharp pencil line on the paper. (Mark from the side, so that your hand and head stay out of the beam.) If the 5th fringes are too faint to see clearly, use the 4th on each side and record $N$ = 8. If a fringe is missing, still count its place.</li>
+      <li>Switch the laser off, remove the paper, label it with $D$, and tape on a fresh sheet. Partner B repeats step 6 on the new sheet without looking at A's marks.</li>
+      <li>With the room lights on, measure the width $W$ between the two end marks on each sheet with the 30 cm ruler. Record both values of $W$ and the number of spacings $N$ in the table.</li>
+      <li>Move the screen so that $D$ changes by about 0.4 m, keeping the screen perpendicular to the beam and the beam still centred on the slits. Repeat steps 5–8 until you have <strong>six</strong> distances between 1.0 m and 3.0 m. (If the screen is a fixed wall, move the laser and slit plate together along the bench instead, and recheck the alignment each time.)</li>
+      <li>Switch the laser off. Read its label, and record the stated wavelength and, if given, its tolerance in the panel in Part 1.</li>
+    </ol>
+    <p>For each row, work out the mean of the two values of $W$, then $\Delta W$: the larger of your realistic estimate (about ± 2 mm) and the half range of the two partners' values. Then fill in $s = W/N$ (using the mean $W$) and $\Delta s = \Delta W/N$.</p>
+    <div class="vlab-panel" data-lab-table="fringes" data-report-title="Fringe measurements"></div>
+
+    <h2 id="graph">7. Your graph</h2>
+    <p>The graph updates as you type. It starts with <strong>fringe separation $s$</strong> on the vertical axis and <strong>slit-to-screen distance $D$</strong> on the horizontal axis, so its gradient is $\lambda/d$.</p>
+    <p class="vlab-small">The graph tool uses one uncertainty for every point on each axis. Type 0.01 (your Δ<i>D</i> in metres) in the horizontal axis's uncertainty box, and your largest Δ<i>s</i> in the vertical axis's box. Then tick <strong>Steepest and shallowest lines</strong>: they pass through every uncertainty bar, and the tool gives the gradient ± its uncertainty (half the difference between the gradients of the steepest and shallowest lines) and the y-intercept ± its uncertainty. Press <strong>Add this graph to my report</strong> to keep it.</p>
+    <div class="dgraph" data-lab-graph="fringes"></div>
+    <p><strong>Units:</strong> with $s$ in mm and $D$ in m, the gradient is in $\text{mm m}^{-1}$. Multiply it (and its uncertainty) by $10^{-3}$ to make it a pure number (metres per metre) before using $\lambda = d \times \text{gradient}$ with $d$ in metres.</p>
+
+    <h2 id="analysis">8. Analysis</h2>
+    <div data-report-section="Analysis">
+      <div class="answer"><label for="a1"><strong>1.</strong> Describe your graph of <i>s</i> against <i>D</i>. Is it a straight line, and does it pass through the origin within the uncertainty bars? What does this tell you about the relationship between <i>s</i> and <i>D</i>?</label><textarea id="a1" data-save="a1" rows="3"></textarea></div>
+      <div class="answer"><label for="a2"><strong>2.</strong> State the gradient ± its uncertainty, as a pure number. Use <i>λ</i> = <i>d</i> × gradient to calculate the wavelength. Find the percentage uncertainty in <i>λ</i> by adding the percentage uncertainties of the gradient and of <i>d</i>, and quote <i>λ</i> ± Δ<i>λ</i> in nm to the correct significant figures.</label><textarea id="a2" data-save="a2" rows="4"></textarea></div>
+      <div class="answer"><label for="a3"><strong>3.</strong> Does the wavelength on the laser label lie within your range <i>λ</i> ± Δ<i>λ</i>? Calculate the percentage difference between the two values.</label><textarea id="a3" data-save="a3" rows="3"></textarea></div>
+      <div class="answer"><label for="a4"><strong>4.</strong> Which contributes more to the uncertainty in <i>λ</i>: the gradient or <i>d</i>? Suggest how the larger one could be reduced.</label><textarea id="a4" data-save="a4" rows="3"></textarea></div>
+      <div class="answer"><label for="a5"><strong>5.</strong> Explain why measuring across ten spacings and dividing by 10 gives a smaller percentage uncertainty in <i>s</i> than measuring one spacing. Why are the points at small <i>D</i> the least precise?</label><textarea id="a5" data-save="a5" rows="3"></textarea></div>
+      <div class="answer"><label for="a6"><strong>6.</strong> Suppose you had measured every <i>D</i> to the front edge of the slit holder, which is 1.5 cm closer to the screen than the slits. Explain what this does to your graph: does it change the gradient, the intercept, or both? Why is finding <i>λ</i> from the gradient better than calculating it from a single measurement of <i>s</i> and <i>D</i>?</label><textarea id="a6" data-save="a6" rows="4"></textarea></div>
+      <div class="answer"><label for="a7"><strong>7.</strong> The equation <i>s</i> = <i>λD</i> / <i>d</i> uses the small-angle approximation (sin <i>θ</i> ≈ tan <i>θ</i> ≈ <i>θ</i>). For your 5th bright fringe, calculate the angle <i>θ</i> from tan <i>θ</i> = <i>y</i> / <i>D</i>, where <i>y</i> = 5<i>s</i> is its distance from the centre. Compare sin <i>θ</i> and tan <i>θ</i>: is the approximation justified? (Hint: does <i>θ</i> depend on <i>D</i>?)</label><textarea id="a7" data-save="a7" rows="4"></textarea></div>
+      <div class="answer"><label for="a8"><strong>8.</strong> In Part 1 you may have seen that the fringes are not all equally bright, and that some are very dim or seem to be missing. Describe what you saw. Explain how a dim or missing fringe could make you count the wrong number of spacings <i>N</i>, what this would do to <i>s</i>, and how you would avoid the mistake.</label><textarea id="a8" data-save="a8" rows="4"></textarea></div>
+      <p class="vlab-small">Question 9 uses single-slit diffraction, which is HL content: see <a href="../themes/c3.html#modulation">C.3: the double-slit pattern revisited</a> and the <a href="single-slit.html">single-slit diffraction lab</a>.</p>
+      <div class="answer"><label for="a9"><span class="tag hl">HL</span> <strong>9.</strong> Explain the dim or missing fringes. Each slit has a width <i>b</i> and diffracts the light into its own broad single-slit pattern. The single-slit pattern modulates the double-slit fringes, so it sets how bright each one is. Use your values of <i>b</i> and <i>d</i> to predict which fringe order is closest to a single-slit minimum, and compare with what you saw.</label><textarea id="a9" data-save="a9" rows="4"></textarea></div>
+      <div class="answer"><label for="a10"><strong>10.</strong> Suggest two realistic improvements to this experiment, and say which uncertainty or systematic error each one reduces.</label><textarea id="a10" data-save="a10" rows="4"></textarea></div>
+    </div>
+
+    <h2 id="extension">9. Extension</h2>
+    <div data-report-section="Extension">
+      <div class="answer"><label for="e1"><strong>E1.</strong> Different slit separation: repeat the measurements with a double slit of larger separation (for example <i>d</i> = 0.50 mm). Plot both sets of data on the same axes. Predict the ratio of the two gradients before you calculate it, and check whether your two values of <i>λ</i> agree within their uncertainties.</label><textarea id="e1" data-save="e1" rows="4"></textarea></div>
+      <div class="answer"><label for="e2"><strong>E2.</strong> Green laser: if a green laser is available, predict the fringe separation at <i>D</i> = 2.00 m, then measure <i>λ</i> for green light with the same slit. Is the ratio of the two wavelengths consistent with the ratio of the fringe separations?</label><textarea id="e2" data-save="e2" rows="4"></textarea></div>
+      <p class="vlab-small">For E3, the light-sensor set-up and the Logger Pro steps are in the <a href="single-slit.html">single-slit diffraction lab</a>.</p>
+      <div class="answer"><label for="e3"><strong>E3.</strong> Light-sensor scan: use the Vernier High Sensitivity Light Sensor on the Linear Position Sensor (as in the single-slit lab) to record the intensity across the pattern at one distance. Find <i>s</i> from the positions of several intensity peaks and compare it with your ruler value. What does the scan show about the brightness of the fringes that your eye could not judge?</label><textarea id="e3" data-save="e3" rows="4"></textarea></div>
+      <div class="answer"><label for="e4"><strong>E4.</strong> Fixed distance, changing slit: keep <i>D</i> fixed and use every double slit on the plate. What graph of <i>s</i> against a function of <i>d</i> should be a straight line through the origin, and what would its gradient be?</label><textarea id="e4" data-save="e4" rows="3"></textarea></div>
+    </div>
+
+    <section class="report-box">
+      <h2 id="download">Download your report</h2>
+      <p>Your report will contain your slit and laser values, your table, the graphs you added and all your answers. Open it in Word to check it, then hand it in.</p>
+      <div class="vlab-buttons"><button type="button" class="button" data-report="download">Download my lab report</button></div>
+      <p class="vlab-small" data-report="msg" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

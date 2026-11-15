@@ -53,7 +53,7 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 ## The list
 
 <!-- LIST:START (written by tools/list-2028.mjs --write; do not edit by hand) -->
-134 places in 46 files.
+135 places in 47 files.
 
 ### Topic pages
 
@@ -241,6 +241,8 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 27: …om first idea to final submission. It is for essays first assessed in 2027.
 - `experimental/database-kepler.html` (1)
   - line 37: This is Kepler's third law . Deducing it is New for 2028 in the syllabus. You can test it in two ways:
+- `experimental/straw-resonance.html` (1)
+  - line 321: …bout half its open–open value. Then look at the higher peaks. New for 2028 A pipe with one closed end has only odd harmonics, named by their relationship to L : the 1st, …
 - `resources.html` (5)
   - line 47: …ata booklet with notes explaining the equations, for exams in 2025 to 2027. Opens in Google Drive. The equations for each topic are also in the Σ Equations button on ever…
   - line 48: the box drawn round a "New for 2028" block (class new2028)
