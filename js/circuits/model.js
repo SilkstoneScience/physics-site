@@ -229,6 +229,98 @@
     return joins;
   }
 
+  // ---------------- taking a component out, and putting one into a wire ----------------
+
+  // Does an axis-aligned box (grid squares) touch a horizontal or vertical segment?
+  const boxHitsSegment = (b, p, q) => Math.max(p[0], q[0]) >= b.x0 && Math.min(p[0], q[0]) <= b.x1 && Math.max(p[1], q[1]) >= b.y0 && Math.min(p[1], q[1]) <= b.y1;
+
+  // Takes component id out of the circuit without deleting it. The wires that were attached keep their places:
+  // with join = false they are left with loose ends (a gap in the circuit); with join = true (two-terminal
+  // components) a wire takes the component's place. The component is moved a little way aside, to a clear spot.
+  function takeOut(d, id, join = false) {
+    const c = comp(d, id);
+    if (!c) return false;
+    const n = C.TYPES[c.type].terminals.length;
+    const pos = Array.from({ length: n }, (_, t) => C.terminalPosition(c, t));
+    const at = (t) => d.wires.some((w) => ends(w).some((e) => e.c === id && e.t === t));
+    if (join && n === 2 && at(0) && at(1)) {
+      const ja = nextId(d, 'j', d.junctions);
+      d.junctions.push({ id: ja, x: pos[0][0], y: pos[0][1] });
+      const jb = nextId(d, 'j', d.junctions);
+      d.junctions.push({ id: jb, x: pos[1][0], y: pos[1][1] });
+      for (const w of d.wires) for (const which of ['from', 'to']) if (w[which].c === id) w[which] = { j: w[which].t === 0 ? ja : jb };
+      addWire(d, { j: ja }, { j: jb });
+    } else {
+      for (const w of d.wires) for (const which of ['from', 'to']) if (w[which].c === id) w[which] = { free: pos[w[which].t] };
+    }
+    // Move it aside: try steps away from its axis, then along it, until nothing is in the way.
+    const across = c.rot === 90 || c.rot === 270 ? [[1, 0], [-1, 0]] : [[0, 1], [0, -1]];
+    const along = across.map(([x, y]) => [y, x]);
+    const clear = (x, y) => {
+      const b = componentBox({ ...c, x, y });
+      const bb = { x0: b.x0 - 0.5, x1: b.x1 + 0.5, y0: b.y0 - 0.5, y1: b.y1 + 0.5 };
+      if (d.components.some((o) => o.id !== id && (() => { const ob = componentBox(o); return ob.x0 <= bb.x1 && ob.x1 >= bb.x0 && ob.y0 <= bb.y1 && ob.y1 >= bb.y0; })())) return false;
+      return !d.wires.some((w) => { const path = wirePath(d, w); return path.some((p, i) => i + 1 < path.length && boxHitsSegment(bb, p, path[i + 1])); });
+    };
+    let moved = false;
+    for (let k = 3; k <= 12 && !moved; k++) {
+      for (const [dx, dy] of [...across, ...along]) if (!moved && clear(c.x + dx * k, c.y + dy * k)) { c.x += dx * k; c.y += dy * k; moved = true; }
+    }
+    if (!moved) { c.x += across[0][0] * 4; c.y += across[0][1] * 4; }
+    tidy(d);
+    return true;
+  }
+
+  // Where a component of this type, held at grid point p with rotation rot, would go into a wire: the nearest
+  // straight wire segment (within maxDist squares) long enough to hold it. Returns { wire, x, y, rot } or null.
+  // The component is turned to lie along the segment (keeping its rotation if it already does).
+  function findInsertion(d, type, p, rot = 0, maxDist = 0.75) {
+    const def = C.TYPES[type];
+    if (!def || def.terminals.length < 2) return null;
+    let best = null;
+    for (const w of d.wires) {
+      const path = wirePath(d, w);
+      for (let i = 0; i + 1 < path.length; i++) {
+        const [a, b] = [path[i], path[i + 1]];
+        const horizontal = a[1] === b[1];
+        const lo = horizontal ? Math.min(a[0], b[0]) : Math.min(a[1], b[1]);
+        const hi = horizontal ? Math.max(a[0], b[0]) : Math.max(a[1], b[1]);
+        if (hi - lo < 4) continue;
+        const dist = segDistance(p, a, b);
+        if (dist > maxDist || (best && dist >= best.dist)) continue;
+        const along = Math.min(hi - 2, Math.max(lo + 2, Math.round(horizontal ? p[0] : p[1])));
+        const r = horizontal ? (rot === 0 || rot === 180 ? rot : 0) : (rot === 90 || rot === 270 ? rot : 90);
+        best = { wire: w.id, x: horizontal ? along : a[0], y: horizontal ? a[1] : along, rot: r, dist };
+      }
+    }
+    if (!best) return null;
+    delete best.dist;
+    return best;
+  }
+
+  // Puts component id into wire wid in series: the wire must have a straight segment through both of the
+  // component's terminals 0 and 1 (findInsertion places it so). The wire is cut there and joined to the terminals.
+  function insertIntoWire(d, id, wid) {
+    const c = comp(d, id);
+    const w = d.wires.find((x) => x.id === wid);
+    if (!c || !w) return false;
+    const path = wirePath(d, w);
+    const P = [0, 1].map((t) => C.terminalPosition(c, t));
+    let seg = -1;
+    for (let i = 0; i + 1 < path.length; i++) if (P.every((q) => segDistance(q, path[i], path[i + 1]) < 1e-9)) { seg = i; break; }
+    if (seg < 0) return false;
+    const s = (q) => Math.abs(q[0] - path[seg][0]) + Math.abs(q[1] - path[seg][1]);
+    const near = s(P[0]) <= s(P[1]) ? 0 : 1;
+    const far = 1 - near;
+    const to = w.to;
+    const after = path.slice(seg + 1, path.length - 1).map((q) => [q[0], q[1]]);
+    w.via = path.slice(1, seg + 1).map((q) => [q[0], q[1]]);
+    w.to = { c: id, t: near };
+    d.wires.push({ id: nextId(d, 'w', d.wires), from: { c: id, t: far }, to: clone(to), via: after });
+    tidy(d);
+    return true;
+  }
+
   // Problems with a drawing's structure (the tests run this after every operation). Empty means sound.
   function validate(d) {
     const out = [];
@@ -305,8 +397,8 @@
     };
   }
 
-  const ops = { addComponent, moveItems, rotate, setParam, setLabel, addWire, moveWireEnd, setVia, splitWire, remove, tidy, joinAt };
-  const api = { empty, clone, normalise, ops, createStore, validate, wirePath, endPos, terminalPos, terminalDir, nearestOnWire, segDistance, componentBox };
+  const ops = { addComponent, moveItems, rotate, setParam, setLabel, addWire, moveWireEnd, setVia, splitWire, remove, tidy, joinAt, takeOut, insertIntoWire };
+  const api = { empty, clone, normalise, ops, findInsertion, createStore, validate, wirePath, endPos, terminalPos, terminalDir, nearestOnWire, segDistance, componentBox };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else (root.Circuits = root.Circuits || {}).model = api;
 })(typeof window !== 'undefined' ? window : globalThis);

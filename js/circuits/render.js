@@ -127,6 +127,14 @@
     }
 
     // Wires.
+    const currents = []; // wires whose current is shown
+    const taken = []; // rectangles (SVG units) already used by components, labels and meter displays
+    const textBox = (x, y, anchor, base, w, h) => {
+      const x0 = anchor === 'middle' ? x - w / 2 : anchor === 'end' ? x - w : x;
+      const y0 = base === 'auto' ? y - h + 2 : base === 'hanging' ? y : y - h / 2;
+      return { x0, y0, x1: x0 + w, y1: y0 + h };
+    };
+    const overlaps = (r) => taken.some((q) => r.x0 < q.x1 && r.x1 > q.x0 && r.y0 < q.y1 && r.y1 > q.y0);
     const connections = new Map(); // point key -> number of wire ends there
     for (const w of d.wires) {
       const path = M.wirePath(d, w);
@@ -140,24 +148,9 @@
       }
       const cls = `ck-wire${sel.wires.has(w.id) ? ' ck-sel' : ''}${inf ? ' ck-inf' : ''}${ui.highlight.has(w.id) ? ' ck-hl' : ''}`;
       out.wires.push(`<polyline class="${cls}" data-wire="${esc(w.id)}" points="${path.map(pt).join(' ')}"${style}/>`);
-      // Current: an arrow on the longest segment, and the value.
-      if (wr && (ui.show.arrows || ui.show.wireCurrent) && Math.abs(wr.I) > 1e-9) {
-        let best = 0;
-        let len = -1;
-        for (let i = 0; i + 1 < path.length; i++) { const l = Math.abs(path[i + 1][0] - path[i][0]) + Math.abs(path[i + 1][1] - path[i][1]); if (l > len) { len = l; best = i; } }
-        if (len >= 1) {
-          let [a, b] = [path[best], path[best + 1]];
-          if (wr.I < 0) [a, b] = [b, a];
-          const mx = (a[0] + b[0]) / 2 * G;
-          const my = (a[1] + b[1]) / 2 * G;
-          const ang = Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI;
-          if (ui.show.arrows) out.over.push(`<path class="ck-current${inf ? ' ck-inf' : ''}" d="M -6 -5 L 5 0 L -6 5 z" transform="translate(${n(mx)} ${n(my)}) rotate(${n(ang)})"/>`);
-          if (ui.show.wireCurrent) {
-            const horizontal = a[1] === b[1];
-            out.text.push(`<text class="ck-wirei" x="${n(mx + (horizontal ? 0 : 8))}" y="${n(my + (horizontal ? -8 : 4))}" text-anchor="${horizontal ? 'middle' : 'start'}">${inf ? '∞ A' : esc(si(Math.abs(wr.I), 'A'))}</text>`);
-          }
-        }
-      }
+      // Current arrows and values are placed after the components, so they can keep clear of them.
+      if (wr && (ui.show.arrows || ui.show.wireCurrent) && Math.abs(wr.I) > 1e-9) currents.push({ path, I: wr.I, inf });
+      if (ui.insertWire === w.id) out.over.push(`<polyline class="ck-insertw" points="${path.map(pt).join(' ')}"/>`);
       // Loose ends.
       for (const which of ['from', 'to']) if (w[which].free) out.dots.push(`<circle class="ck-loose" cx="${n(w[which].free[0] * G)}" cy="${n(w[which].free[1] * G)}" r="4.5"/>`);
       // Handles of a selected wire.
@@ -185,6 +178,9 @@
       const near = c.type === 'ldr' ? (s.label === 'above' || s.label === 'left' ? 42 : 28) : 22; // clear of the LDR's light arrows (upper left)
       const lp = place(c, s.label, near);
       const value = valueText(c);
+      const cb = M.componentBox(c);
+      taken.push({ x0: cb.x0 * G - 4, y0: cb.y0 * G - 4, x1: cb.x1 * G + 4, y1: cb.y1 * G + 4 });
+      taken.push(textBox(lp.x, lp.y, lp.anchor, lp.base, (c.label.length + (value ? value.length + 1 : 0)) * 6.4 + 4, 14));
       out.text.push(`<text class="ck-label" x="${n(lp.x)}" y="${n(lp.y)}" text-anchor="${lp.anchor}" dominant-baseline="${lp.base}"><tspan class="ck-name">${esc(c.label)}</tspan>${value ? ` <tspan>${esc(value)}</tspan>` : ''}</text>`);
       // Meter display.
       if (r.reading) {
@@ -193,6 +189,7 @@
         const w = 10 + text.length * 7.6;
         const x = rp.anchor === 'middle' ? rp.x - w / 2 : rp.anchor === 'end' ? rp.x - w : rp.x;
         const y = rp.base === 'hanging' ? rp.y : rp.base === 'auto' ? rp.y - 20 : rp.y - 10;
+        taken.push({ x0: x - 2, y0: y - 2, x1: x + w + 2, y1: y + 22 });
         out.text.push(`<g class="ck-reading${r.reading.ol ? ' ck-ol' : ''}" data-reading-for="${esc(c.id)}"><rect x="${n(x)}" y="${n(y)}" width="${n(w)}" height="20" rx="4"/><text x="${n(x + w / 2)}" y="${n(y + 10.5)}" text-anchor="middle" dominant-baseline="central">${esc(text)}</text></g>`);
       }
       // Terminals: a hint circle where nothing is connected yet.
@@ -204,6 +201,48 @@
         else if (count >= 2) out.dots.push(`<circle class="ck-dot" cx="${p[0] * G}" cy="${p[1] * G}" r="3.6"/>`);
       }
     }
+    // Current arrows and values: on the longest segment that has room, at its middle or a quarter of the way along,
+    // with the value on whichever side is clear of components, labels, meter displays and other values.
+    for (const cur of currents) {
+      const label = cur.inf ? '∞ A' : si(Math.abs(cur.I), 'A');
+      const w = label.length * 6.3 + 4;
+      const segs = [];
+      for (let i = 0; i + 1 < cur.path.length; i++) {
+        const len = Math.abs(cur.path[i + 1][0] - cur.path[i][0]) + Math.abs(cur.path[i + 1][1] - cur.path[i][1]);
+        if (len >= 1) segs.push({ i, len });
+      }
+      segs.sort((p, q) => q.len - p.len);
+      let placed = null;
+      for (const sg of segs) {
+        for (const f of [0.5, 0.3, 0.7, 0.18, 0.82]) {
+          let [a, b] = [cur.path[sg.i], cur.path[sg.i + 1]];
+          if (cur.I < 0) [a, b] = [b, a];
+          const mx = (a[0] + (b[0] - a[0]) * f) * G;
+          const my = (a[1] + (b[1] - a[1]) * f) * G;
+          const arrowBox = { x0: mx - 7, y0: my - 7, x1: mx + 7, y1: my + 7 };
+          if (overlaps(arrowBox)) continue;
+          if (!ui.show.wireCurrent) { placed = { a, b, mx, my, arrowBox }; break; }
+          const horizontal = a[1] === b[1];
+          const options = horizontal ? [[mx, my - 8, 'middle', 'auto'], [mx, my + 8, 'middle', 'hanging']] : [[mx + 9, my, 'start', 'middle'], [mx - 9, my, 'end', 'middle']];
+          for (const [x, y, anchor, base] of options) {
+            const box = textBox(x, y, anchor, base, w, 13);
+            if (!overlaps(box)) { placed = { a, b, mx, my, arrowBox, text: { x, y, anchor, base, box } }; break; }
+          }
+          if (placed) break;
+        }
+        if (placed) break;
+      }
+      if (!placed) continue; // no clear place: shown in the inspector instead
+      const ang = Math.atan2(placed.b[1] - placed.a[1], placed.b[0] - placed.a[0]) * 180 / Math.PI;
+      taken.push(placed.arrowBox);
+      if (ui.show.arrows) out.over.push(`<path class="ck-current${cur.inf ? ' ck-inf' : ''}" d="M -6 -5 L 5 0 L -6 5 z" transform="translate(${n(placed.mx)} ${n(placed.my)}) rotate(${n(ang)})"/>`);
+      if (placed.text) {
+        const t = placed.text;
+        taken.push(t.box);
+        out.text.push(`<text class="ck-wirei" x="${n(t.x)}" y="${n(t.y)}" text-anchor="${t.anchor}" dominant-baseline="${t.base}">${esc(label)}</text>`);
+      }
+    }
+
     // Junction dots where three or more wires meet.
     for (const j of d.junctions) {
       const count = connections.get(`j:${j.id}`) || 0;

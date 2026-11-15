@@ -744,6 +744,53 @@ export async function runTests() {
     check('model: a terminal dropped on a loose wire end takes it', d2.wires.find((x) => x.id === wl).to.c === v2);
     check('model: after joining, the drawing is sound', M.validate(d2).length === 0, M.validate(d2).join('; '));
 
+    // Putting a component into a wire, and taking it out again.
+    {
+      const d3 = M.empty();
+      const c = M.ops.addComponent(d3, 'cell', 0, 0, { emf: 6 });
+      const r = M.ops.addComponent(d3, 'resistor', 0, 8, { R: 12 });
+      M.ops.addWire(d3, { c, t: 1 }, { c: r, t: 1 }, [[10, 0], [10, 8]]); // across the top, down the right side
+      M.ops.addWire(d3, { c: r, t: 0 }, { c, t: 0 }, [[-6, 8], [-6, 0]]);
+      check('insert: nothing found far from any wire', M.findInsertion(d3, 'lamp', [4, 4]) === null);
+      const fit4 = M.findInsertion(d3, 'lamp', [-3, 0]);
+      check('insert: a segment exactly 4 squares long just holds a component', fit4 && fit4.x === -4 && fit4.y === 0, JSON.stringify(fit4));
+      const dShort = M.empty();
+      const ra = M.ops.addComponent(dShort, 'resistor', 0, 0);
+      const rb = M.ops.addComponent(dShort, 'resistor', 7, 0);
+      M.ops.addWire(dShort, { c: ra, t: 1 }, { c: rb, t: 0 }); // 3 squares long
+      check('insert: a segment too short is not used', M.findInsertion(dShort, 'lamp', [3.5, 0]) === null);
+      const ins = M.findInsertion(d3, 'lamp', [10.3, 4.2], 0);
+      check('insert: a lamp held near the right-hand wire lines up with it', ins && ins.x === 10 && ins.y === 4 && ins.rot === 90, JSON.stringify(ins));
+      const ins2 = M.findInsertion(d3, 'ammeter', [5.2, 0.4], 180);
+      check('insert: on a horizontal wire a rotation of 180° is kept', ins2 && ins2.y === 0 && ins2.x === 5 && ins2.rot === 180, JSON.stringify(ins2));
+      const ins3 = M.findInsertion(d3, 'lamp', [10.5, 12], 0, 6);
+      check('insert: the component is kept inside the segment', ins3 && ins3.x === 10 && ins3.y === 6, JSON.stringify(ins3));
+      const l = M.ops.addComponent(d3, 'lamp', ins.x, ins.y, { R: 12 });
+      d3.components.find((x) => x.id === l).rot = ins.rot;
+      check('insert: insertIntoWire succeeds', M.ops.insertIntoWire(d3, l, ins.wire));
+      check('insert: the drawing is sound', M.validate(d3).length === 0, M.validate(d3).join('; '));
+      let res = E.simulate(d3);
+      check('insert: the lamp is now in series (6 V across 12 + 12 Ω gives 0.25 A)', near(res.components[l].I, 0.25) || near(res.components[l].I, -0.25), JSON.stringify(res.components[l]));
+      const nl3 = N.build(d3);
+      check('insert: the lamp joins the cell to the resistor', [nl3.pointNet[`c:${l}:0`], nl3.pointNet[`c:${l}:1`]].sort().join() === [nl3.pointNet[`c:${c}:1`], nl3.pointNet[`c:${r}:1`]].sort().join());
+      check('insert: no wire runs under the lamp', !d3.wires.some((w) => { const path = M.wirePath(d3, w); return path.some((p, i) => i + 1 < path.length && M.segDistance([10, 4], p, path[i + 1]) < 1e-9); }));
+      // Take it out and join the wires: back to 0.5 A, and the lamp is free.
+      const d4 = M.clone(d3);
+      M.ops.takeOut(d4, l, true);
+      res = E.simulate(d4);
+      check('take out and join: the circuit is closed again (0.5 A)', near(Math.abs(res.components[r].I), 0.5), JSON.stringify(res.components[r]));
+      check('take out and join: the lamp has nothing attached', !d4.wires.some((w) => w.from.c === l || w.to.c === l));
+      check('take out and join: the lamp was moved clear of the wires', !d4.wires.some((w) => { const path = M.wirePath(d4, w); const lc = d4.components.find((x) => x.id === l); return path.some((p, i) => i + 1 < path.length && M.segDistance([lc.x, lc.y], p, path[i + 1]) < 1.5); }));
+      check('take out and join: the drawing is sound', M.validate(d4).length === 0, M.validate(d4).join('; '));
+      // Take it out leaving a gap: no current, two loose ends.
+      const d5 = M.clone(d3);
+      M.ops.takeOut(d5, l, false);
+      res = E.simulate(d5);
+      check('take out leaving a gap: no current flows', res.components[r].I === 0);
+      check('take out leaving a gap: two loose ends', d5.wires.flatMap((w) => [w.from, w.to]).filter((e) => e.free).length === 2);
+      check('take out leaving a gap: the drawing is sound', M.validate(d5).length === 0, M.validate(d5).join('; '));
+    }
+
     // Drawings from outside (examples, saved circuits, share links) are made complete and safe.
     const loaded = M.createStore({ components: [{ id: 'q', type: 'lamp', x: 1.4, y: 2, rot: 45 }, { id: 'q', type: 'cell' }, { id: 'z', type: 'flux' }, null], wires: [{ id: 'w', from: { c: 'q', t: 0 }, to: { c: 'gone', t: 1 } }, { id: 'w2' }], junctions: 'no' }).drawing;
     check('model: a loaded drawing gets complete settings', loaded.components.length === 1 && loaded.components[0].params.R === 12 && loaded.components[0].params.model === 'ohmic');

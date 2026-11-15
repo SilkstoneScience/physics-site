@@ -128,7 +128,11 @@ One direction only: student action → change to the drawing (an undoable comman
 
 **As built (stage 3):**
 - Drag on a terminal draws a wire; tap a terminal for tap-by-tap drawing (tap the grid for bends, the same point twice for a loose end, Esc cancels). Dragging from the middle of a wire branches from it (a junction is made). Drag on empty space pans; Shift-drag selects a box; Ctrl + wheel or two fingers zoom.
-- A component dropped with a terminal exactly on another terminal, a junction or a loose wire end is joined to it by an explicit wire. **Dropping onto the middle of a wire does not join** (the interface tests showed it joined things by accident when tidying a circuit).
+- A component dropped with a terminal exactly on another terminal, a junction or a loose wire end is joined to it by an explicit wire. A terminal that merely lands on the middle of a wire is **not** joined (the interface tests showed that joined things by accident when tidying a circuit).
+- **Putting a component into a wire** (teacher's request, 15 November 2026): while a new component, or one with nothing attached, is held over a straight piece of wire at least 4 squares long, the wire lights up and the component turns to lie along it; letting go cuts the wire and puts the component in series (`model.findInsertion`, `ops.insertIntoWire`). Components already wired in are never inserted by moving them.
+- **Taking a component out without deleting it** (teacher's request): *Take out (leave a gap)* leaves the wires with loose ends; *Take out and join the wires* (two-terminal components with wires at both ends) puts a wire in its place. Either way the component is moved aside to a clear spot (`ops.takeOut`).
+- **Rotation both ways** (teacher's request): ⟳ / R clockwise, ⟲ / Shift+R anticlockwise; double-tap turns clockwise. A double-tap only counts when nothing else happened between the two taps.
+- Current arrows and values are placed where they touch no component, label, meter display or other value (on the longest segment with room); the circuit check warns when a component lies on a wire it isn't connected to.
 - Wires leave and reach terminals along the way the terminal faces, so they never double back over their own component.
 - Every drawing loaded from outside (the example, and later saved circuits and share links) is completed and checked first (`model.normalise`).
 - To preview from a worktree when the preview servers are all in use, the main folder's server also serves `/.claude/worktrees/<name>/…`.

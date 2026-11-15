@@ -231,6 +231,72 @@
     check('Shift-drag selects a box', App.selection.components.length === 2, JSON.stringify(App.selection));
   });
 
+  await scenario('Into the wire and out again (mouse): drop onto a wire, rotate both ways, take out', async () => {
+    await fresh();
+    const c = await place('cell', 0, -6);
+    const r = await place('resistor', 0, 6);
+    await setting(c, 'emf', 6); await setting(r, 'R', 12);
+    await wire(c, 1, r, 1); await wire(c, 0, r, 0); // two long straight wires down the sides
+    check('a simple loop: no lamp yet', App.store.drawing.wires.length === 2);
+    // Drag a lamp from the toolbox onto the right-hand wire.
+    const b = App.toolButton('lamp').getBoundingClientRect();
+    const id1 = ++pid;
+    fire('pointerdown', b.left + 20, b.top + 20, { id: id1, target: App.toolButton('lamp') });
+    for (let i = 1; i <= 8; i++) { const q = at(2.3, 0.2); fire('pointermove', b.left + 20 + (q[0] - b.left - 20) * i / 8, b.top + 20 + (q[1] - b.top - 20) * i / 8, { id: id1 }); }
+    check('the wire lights up while a lamp is held over it', !!D.querySelector('.ck-insertw'));
+    check('the hint says it will go into the wire', D.querySelector('.ck-hint').textContent.includes('into this wire'));
+    fire('pointerup', ...at(2.3, 0.2), { id: id1 }); await tick();
+    const l = App.store.drawing.components.find((x) => x.type === 'lamp').id;
+    check('the lamp went into the wire, turned to lie along it', comp(l).x === 2 && comp(l).rot === 90, JSON.stringify(comp(l)));
+    const a = await place('ammeter', -2.2, 0.3);
+    check('an ammeter dropped onto the left wire goes in too', comp(a).x === -2 && (comp(a).rot === 90 || comp(a).rot === 270));
+    check('series: 6 V across 12 Ω + 12 Ω reads 0.250 A (or −0.250 A if the ammeter faces the other way)', /^-?0\.250 A$/.test(reading(a)), reading(a));
+    check('no warnings', !App.result.diagnostics.some((d) => d.level !== 'info'), App.result.diagnostics.map((d) => d.code).join(', '));
+    // Rotating both ways.
+    await tap(centre(r));
+    D.querySelector('[data-act="rotate-acw"]').click(); await tick();
+    check('the anticlockwise button turns it to 270°', comp(r).rot === 270);
+    await key('r');
+    check('R turns it clockwise, back to 0°', comp(r).rot === 0);
+    await key('R', { shift: true });
+    check('Shift+R turns it anticlockwise', comp(r).rot === 270);
+    D.querySelector('.ck-inspector [data-do="rotate"]').click(); await tick();
+    check('the panel\'s Clockwise button works', comp(r).rot === 0);
+    // Taking the lamp out without deleting it.
+    await tap(centre(l));
+    D.querySelector('.ck-inspector [data-do="takeout"]').click(); await tick();
+    check('Take out (leave a gap): the lamp is still there', !!comp(l));
+    check('… but the circuit has a gap: 0.000 A', reading(a) === '0.000 A', reading(a));
+    await key('z', { ctrl: true });
+    await tap(centre(l));
+    D.querySelector('.ck-inspector [data-do="takeout-join"]').click(); await tick();
+    check('Take out and join the wires: 6 V across 12 Ω reads 0.500 A', /^-?0\.500 A$/.test(reading(a)), reading(a));
+    check('the lamp is kept, with nothing attached', !!comp(l) && !App.store.drawing.wires.some((w) => w.from.c === l || w.to.c === l));
+    // Drag the free lamp back onto the wire.
+    const s = App.store.drawing.wires.map((w) => W.Circuits.model.wirePath(App.store.drawing, w)).find((p) => p.length === 2 && p[0][0] === 2 && p[1][0] === 2 && Math.abs(p[0][1] - p[1][1]) >= 4);
+    check('the joining wire is a straight piece where the lamp was', !!s);
+    if (s) {
+      await drag(centre(l), at(2.2, (s[0][1] + s[1][1]) / 2));
+      check('dragging the free lamp back onto the wire puts it in again: 0.250 A', /^-?0\.250 A$/.test(reading(a)), reading(a));
+    }
+    // A component lying on a wire without being in it gets a warning.
+    App.store.load({ components: [{ id: 'c1', type: 'cell', x: 0, y: 0, params: { emf: 6 } }, { id: 'r1', type: 'resistor', x: 6, y: 0 }], wires: [{ id: 'w1', from: { c: 'c1', t: 1 }, to: { c: 'c1', t: 0 }, via: [[10, 0], [10, 4], [-2, 4]] }] });
+    await tick();
+    check('a component lying on a wire it isn\'t in gets a warning', !!Array.from(D.querySelectorAll('.ck-diag')).find((x) => x.textContent.includes('lying on top of a wire')));
+  });
+
+  await scenario('Current values keep clear of labels', async () => {
+    await load();
+    App.setShow('wireCurrent', true); App.setShow('arrows', true);
+    await tick();
+    const boxes = (sel) => Array.from(D.querySelectorAll(sel)).map((e) => e.getBoundingClientRect());
+    const hit = (p, q) => p.left < q.right && p.right > q.left && p.top < q.bottom && p.bottom > q.top;
+    const vals = boxes('.ck-wirei');
+    const others = [...boxes('.ck-label'), ...boxes('.ck-reading'), ...boxes('.ck-comp')];
+    check('current values are shown', vals.length >= 3, `${vals.length}`);
+    check('no current value overlaps a label, a meter display or a component', !vals.some((v) => others.some((o) => hit(v, o))));
+  });
+
   const passed = results.filter((r) => r.ok).length;
   const s = document.getElementById('summary');
   s.textContent = `${passed} of ${results.length} interface checks passed.`;

@@ -9,6 +9,7 @@
   const G = R.G;
   const ORDER = ['cell', 'battery', 'resistor', 'variable', 'potentiometer', 'lamp', 'thermistor', 'ldr', 'switch', 'ammeter', 'voltmeter'];
   const TAP = 6; // pointer movement (CSS px) that still counts as a tap
+  const ROTATE_BUTTONS = '<button type="button" class="ck-btn" data-do="rotate-acw" title="Rotate anticlockwise (Shift+R)">⟲ Anticlockwise</button><button type="button" class="ck-btn" data-do="rotate" title="Rotate clockwise (R)">⟳ Clockwise</button>';
   const same = (p, q) => p && q && p[0] === q[0] && p[1] === q[1];
   const round = (p) => [Math.round(p[0]), Math.round(p[1])];
   const esc = (s) => String(s).replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]);
@@ -36,6 +37,7 @@
     let toolGesture = null;
     let preview = null; // the drawing shown during a drag, before it is committed
     let ghost = null;
+    let insertion = null; // { wire, x, y, rot }: where a held component would go into a wire
     let wirePreview = null;
     let box = null;
     let lastTap = null;
@@ -51,7 +53,8 @@
         <div class="ck-group">
           <button type="button" class="ck-btn" data-act="undo" title="Undo (Ctrl+Z)">↶ Undo</button>
           <button type="button" class="ck-btn" data-act="redo" title="Redo (Ctrl+Y)">↷ Redo</button>
-          <button type="button" class="ck-btn" data-act="rotate" title="Rotate (R)">⟳ Rotate</button>
+          <button type="button" class="ck-btn ck-icon-btn" data-act="rotate-acw" aria-label="Rotate anticlockwise" title="Rotate anticlockwise (Shift+R)">⟲</button>
+          <button type="button" class="ck-btn ck-icon-btn" data-act="rotate" aria-label="Rotate clockwise" title="Rotate clockwise (R)">⟳</button>
           <button type="button" class="ck-btn" data-act="delete" title="Delete (Delete key)">✕ Delete</button>
           <button type="button" class="ck-btn" data-act="clear">Clear all</button>
         </div>
@@ -201,6 +204,18 @@
       selectOnly({ components: [id] });
       return id;
     }
+    // A new component put straight into a wire, in series.
+    function addInto(type, ins) {
+      const id = store.change('insert', (d) => {
+        const nid = M.ops.addComponent(d, type, ins.x, ins.y);
+        d.components.find((c) => c.id === nid).rot = ins.rot;
+        M.ops.insertIntoWire(d, nid, ins.wire);
+        return nid;
+      });
+      selectOnly({ components: [id] });
+      return id;
+    }
+    const wiredTo = (id) => store.drawing.wires.some((w) => endsOf(w).some((e) => e.c === id));
     function commitWire(m, target, via) {
       store.change('wire', (d) => {
         const a = m.fromWire ? attach(d, { wire: m.fromWire.id, point: m.fromWire.point }) : m.from;
@@ -226,10 +241,11 @@
       store.change('delete', (d) => M.ops.remove(d, { components: [...sel.components], wires: [...sel.wires], junctions: [...sel.junctions] }));
       clearSelection();
     }
-    function rotateSelection() {
-      if (mode.kind === 'place') { mode.rot = ((mode.rot || 0) + 90) % 360; if (ghost) ghost.rot = mode.rot; render(); return; }
+    // dir = 1: a quarter turn clockwise; dir = −1: anticlockwise.
+    function rotateSelection(dir = 1) {
+      if (mode.kind === 'place') { mode.rot = (((mode.rot || 0) + 90 * dir) % 360 + 360) % 360; if (ghost) ghost.rot = mode.rot; render(); return; }
       if (!sel.components.size) return;
-      store.change('rotate', (d) => { M.ops.rotate(d, [...sel.components]); M.ops.joinAt(d, [...sel.components]); });
+      store.change('rotate', (d) => { M.ops.rotate(d, [...sel.components], dir); M.ops.joinAt(d, [...sel.components]); });
     }
     function toggleSwitch(id) {
       const c = store.drawing.components.find((x) => x.id === id);
@@ -289,7 +305,7 @@
     window.addEventListener('pointercancel', (ev) => {
       pointers.delete(ev.pointerId);
       if (toolGesture && ev.pointerId === toolGesture.id) { toolGesture = null; ghost = null; }
-      if (gesture && ev.pointerId === gesture.down.id) { gesture = null; preview = null; box = null; wirePreview = mode.kind === 'wire' ? wirePreview : null; }
+      if (gesture && ev.pointerId === gesture.down.id) { gesture = null; preview = null; box = null; insertion = null; wirePreview = mode.kind === 'wire' ? wirePreview : null; }
       render();
     });
     svg.addEventListener('wheel', (ev) => { // Ctrl + wheel, or a trackpad pinch, zooms; a plain wheel scrolls the page
@@ -305,7 +321,8 @@
         wirePreview = { points: orth([startPos(mode), ...mode.via, end]), target: t ? t.pos : null };
         render();
       } else if (mode.kind === 'place') {
-        ghost = { type: mode.type, x: Math.round(p[0]), y: Math.round(p[1]), rot: mode.rot || 0 };
+        insertion = M.findInsertion(store.drawing, mode.type, p, mode.rot || 0);
+        ghost = insertion ? { type: mode.type, x: insertion.x, y: insertion.y, rot: insertion.rot } : { type: mode.type, x: Math.round(p[0]), y: Math.round(p[1]), rot: mode.rot || 0 };
         render();
       }
     }
@@ -322,6 +339,8 @@
         case 'component':
           if (!sel.components.has(h.id)) { if (!g.down.add) clearSelection(); sel.components.add(h.id); }
           g.kind = 'move'; g.sel = selectionOf();
+          // One component with nothing attached can be dropped into a wire.
+          g.single = g.sel.components.length === 1 && !g.sel.wires.length && !g.sel.junctions.length && !wiredTo(g.sel.components[0]) ? g.sel.components[0] : null;
           break;
         case 'wireEnd': g.kind = 'end-drag'; g.wire = h.wire; g.which = h.which; break;
         case 'via': g.kind = 'via-drag'; g.wire = h.wire; g.index = h.index; break;
@@ -353,6 +372,13 @@
           g.dy = Math.round(p[1] - g.down.p[1]);
           preview = M.clone(d);
           M.ops.moveItems(preview, g.sel, g.dx, g.dy);
+          g.ins = null;
+          if (g.single) {
+            const c = preview.components.find((x) => x.id === g.single);
+            g.ins = M.findInsertion(d, c.type, [c.x, c.y], c.rot);
+            if (g.ins) { c.x = g.ins.x; c.y = g.ins.y; c.rot = g.ins.rot; }
+          }
+          insertion = g.ins;
           break;
         }
         case 'wire-drag': {
@@ -387,11 +413,19 @@
     function finish(g, p, ev) {
       const rg = radius(g.down.type);
       if (!g.moved) { tap(g, p); return; }
+      lastTap = null; // a double-tap is two taps with nothing in between
       const d = store.drawing;
       switch (g.kind) {
         case 'move':
           preview = null;
-          if (g.dx || g.dy) store.change('move', (x) => { M.ops.moveItems(x, g.sel, g.dx, g.dy); M.ops.joinAt(x, g.sel.components); });
+          insertion = null;
+          if (g.ins) {
+            store.change('insert', (x) => {
+              const c = x.components.find((q) => q.id === g.single);
+              c.x = g.ins.x; c.y = g.ins.y; c.rot = g.ins.rot;
+              M.ops.insertIntoWire(x, g.single, g.ins.wire);
+            });
+          } else if (g.dx || g.dy) store.change('move', (x) => { M.ops.moveItems(x, g.sel, g.dx, g.dy); M.ops.joinAt(x, g.sel.components); });
           break;
         case 'wire-drag': {
           const m = { from: g.from, fromWire: g.fromWire, via: [] };
@@ -444,7 +478,9 @@
         const m = mode;
         mode = { kind: 'select' };
         ghost = null;
-        addAt(m.type, round(p), m.rot || 0);
+        const ins = M.findInsertion(store.drawing, m.type, p, m.rot || 0);
+        insertion = null;
+        if (ins) addInto(m.type, ins); else addAt(m.type, round(p), m.rot || 0);
         updateAll();
         return;
       }
@@ -464,6 +500,7 @@
       }
       const h = g.hit;
       const now = Date.now();
+      if (!h || h.kind !== 'component') lastTap = null;
       if (!h) { if (!g.down.add) clearSelection(); updateAll(); return; }
       switch (h.kind) {
         case 'terminal': mode = { kind: 'wire', from: h.end, via: [] }; hoverMove(p, g.down.type); break;
@@ -547,16 +584,21 @@
       const g = toolGesture;
       if (!g.moved && Math.hypot(ev.clientX - g.cx, ev.clientY - g.cy) > TAP) g.moved = true;
       if (!g.moved) return;
-      if (overSvg(ev.clientX, ev.clientY)) { const p = clientToGrid(ev.clientX, ev.clientY); ghost = { type: g.type, x: Math.round(p[0]), y: Math.round(p[1]), rot: 0 }; }
-      else ghost = null;
+      if (overSvg(ev.clientX, ev.clientY)) {
+        const p = clientToGrid(ev.clientX, ev.clientY);
+        insertion = M.findInsertion(store.drawing, g.type, p, 0);
+        ghost = insertion ? { type: g.type, x: insertion.x, y: insertion.y, rot: insertion.rot } : { type: g.type, x: Math.round(p[0]), y: Math.round(p[1]), rot: 0 };
+      } else { ghost = null; insertion = null; }
       render();
     }
     function toolUp(ev) {
       const g = toolGesture;
       toolGesture = null;
       ghost = null;
+      const ins = insertion;
+      insertion = null;
       if (g.moved) {
-        if (overSvg(ev.clientX, ev.clientY)) addAt(g.type, round(clientToGrid(ev.clientX, ev.clientY)));
+        if (overSvg(ev.clientX, ev.clientY)) { if (ins) addInto(g.type, ins); else addAt(g.type, round(clientToGrid(ev.clientX, ev.clientY))); }
       } else {
         mode = { kind: 'place', type: g.type, rot: 0 };
         wirePreview = null;
@@ -578,7 +620,7 @@
       if (k === 'Escape') { cancelMode(); clearSelection(); updateAll(); return; }
       if (typing) return;
       if (k === 'Delete' || k === 'Backspace') { ev.preventDefault(); deleteSelection(); updateAll(); return; }
-      if (k === 'r' || k === 'R') { ev.preventDefault(); rotateSelection(); return; }
+      if (k === 'r' || k === 'R') { ev.preventDefault(); rotateSelection(ev.shiftKey ? -1 : 1); return; }
       const step = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[k];
       if (step && (sel.components.size || sel.junctions.size || sel.wires.size) && a !== document.body) {
         ev.preventDefault();
@@ -586,7 +628,7 @@
         store.change('move', (d) => { M.ops.moveItems(d, s, step[0], step[1]); M.ops.joinAt(d, s.components); });
       }
     });
-    function cancelMode() { mode = { kind: 'select' }; ghost = null; wirePreview = null; preview = null; gesture = null; }
+    function cancelMode() { mode = { kind: 'select' }; ghost = null; insertion = null; wirePreview = null; preview = null; gesture = null; }
 
     // ---------------- toolbar ----------------
     host.querySelector('.ck-toolbar').addEventListener('click', (ev) => {
@@ -595,7 +637,8 @@
       const act = b.dataset.act;
       if (act === 'undo') store.undo();
       else if (act === 'redo') store.redo();
-      else if (act === 'rotate') rotateSelection();
+      else if (act === 'rotate') rotateSelection(1);
+      else if (act === 'rotate-acw') rotateSelection(-1);
       else if (act === 'delete') { deleteSelection(); updateAll(); }
       else if (act === 'clear') {
         if (store.drawing.components.length || store.drawing.wires.length) {
@@ -613,7 +656,8 @@
     function inspector() {
       const d = store.drawing;
       const one = sel.components.size === 1 && !sel.wires.size && !sel.junctions.size ? d.components.find((c) => sel.components.has(c.id)) : null;
-      const key = one ? `c:${one.id}:${one.type}:${one.params.model || ''}:${one.params.ideal}` : `n:${sel.components.size}:${sel.wires.size}:${sel.junctions.size}`;
+      const wired = one ? d.wires.flatMap((w) => endsOf(w)).filter((e) => e.c === one.id).map((e) => e.t).sort().join('') : '';
+      const key = one ? `c:${one.id}:${one.type}:${one.params.model || ''}:${one.params.ideal}:${wired}` : `n:${sel.components.size}:${sel.wires.size}:${sel.junctions.size}`;
       if (key !== inspectorKey) { inspectorKey = key; inspectorEl.innerHTML = one ? componentForm(one) : otherForm(); bindInspector(one); }
       if (one) refreshInspector(one);
     }
@@ -621,7 +665,7 @@
       const n = sel.components.size + sel.wires.size + sel.junctions.size;
       if (!n) return `<h3>Nothing selected</h3><p class="ck-small">Tap a component to change its settings and see its readings. Shift-click (or drag a box with Shift held) to select several.</p>`;
       if (sel.wires.size === 1 && n === 1) return `<h3>Wire</h3><p class="ck-small">Drag its ends to reconnect it, the squares to move a bend, or the circles to add one.</p><div class="ck-buttons"><button type="button" class="ck-btn" data-do="delete">✕ Delete wire</button></div>`;
-      return `<h3>${n} items selected</h3><div class="ck-buttons"><button type="button" class="ck-btn" data-do="rotate">⟳ Rotate</button><button type="button" class="ck-btn" data-do="delete">✕ Delete</button></div>`;
+      return `<h3>${n} items selected</h3><div class="ck-buttons">${ROTATE_BUTTONS}<button type="button" class="ck-btn" data-do="delete">✕ Delete</button></div>`;
     }
     const num = (key, label, unit, value, extra = '') => `<label class="ck-field"><span class="ck-flabel">${label}</span><span class="ck-fin"><input type="text" inputmode="decimal" autocomplete="off" spellcheck="false" data-key="${key}" value="${esc(show3(value))}"${extra}><span class="ck-unit">${unit}</span></span></label>`;
     function slider(key, c) {
@@ -661,15 +705,23 @@
         default: break;
       }
       f.push(`<dl class="ck-readings"></dl>`);
-      f.push(`<div class="ck-buttons"><button type="button" class="ck-btn" data-do="rotate">⟳ Rotate</button><button type="button" class="ck-btn" data-do="delete">✕ Delete</button></div>`);
+      f.push(`<div class="ck-buttons">${ROTATE_BUTTONS}<button type="button" class="ck-btn" data-do="delete">✕ Delete</button></div>`);
+      // Taking it out of the circuit without deleting it.
+      const attached = store.drawing.wires.flatMap((w) => endsOf(w)).filter((e) => e.c === c.id);
+      if (attached.length) {
+        const both = C.TYPES[c.type].terminals.length === 2 && [0, 1].every((t) => attached.some((e) => e.t === t));
+        f.push(`<div class="ck-buttons"><button type="button" class="ck-btn" data-do="takeout" title="The wires are left with loose ends, so the circuit has a gap">Take out (leave a gap)</button>${both ? '<button type="button" class="ck-btn" data-do="takeout-join" title="A wire takes its place">Take out and join the wires</button>' : ''}</div>`);
+      }
       return f.join('');
     }
     function bindInspector(c) {
       inspectorEl.querySelectorAll('[data-do]').forEach((b) => b.addEventListener('click', () => {
         const act = b.dataset.do;
         if (act === 'delete') { deleteSelection(); updateAll(); }
-        else if (act === 'rotate') rotateSelection();
+        else if (act === 'rotate') rotateSelection(1);
+        else if (act === 'rotate-acw') rotateSelection(-1);
         else if (act === 'switch') toggleSwitch(c.id);
+        else if (act === 'takeout' || act === 'takeout-join') store.change('take out', (d) => M.ops.takeOut(d, c.id, act === 'takeout-join'));
       }));
       if (!c) return;
       const set = (key, value, coalesce = true) => store.change('setting', (d) => M.ops.setParam(d, c.id, key, value), coalesce ? `param:${c.id}:${key}` : null);
@@ -744,6 +796,14 @@
       const order = { error: 0, warning: 1, info: 2 };
       const loose = ds.filter((x) => x.code === 'unconnected');
       const list = ds.filter((x) => x.code !== 'unconnected').sort((a, b) => order[a.level] - order[b.level]);
+      // From the drawing (the engine never sees positions): a component lying on a wire it isn't connected to.
+      const d = store.drawing;
+      for (const c of d.components) {
+        const b = M.componentBox(c);
+        const inner = { x0: b.x0 + 0.5, x1: b.x1 - 0.5, y0: b.y0 + 0.5, y1: b.y1 - 0.5 };
+        const lying = d.wires.some((w) => !endsOf(w).some((e) => e.c === c.id) && (() => { const path = M.wirePath(d, w); return path.some((p, i) => i + 1 < path.length && Math.max(p[0], path[i + 1][0]) >= inner.x0 && Math.min(p[0], path[i + 1][0]) <= inner.x1 && Math.max(p[1], path[i + 1][1]) >= inner.y0 && Math.min(p[1], path[i + 1][1]) <= inner.y1); })());
+        if (lying) list.unshift({ code: 'on-wire', level: 'warning', ids: [c.id], message: `${c.label} is lying on top of a wire but isn't connected to it. To put it into the wire, take it off the wire and drop it back on: the wire lights up when it will go in.` });
+      }
       if (loose.length) list.push({ code: 'unconnected', level: 'info', ids: [...new Set(loose.flatMap((x) => x.ids))], message: loose.length === 1 ? loose[0].message : `Unconnected terminals: ${loose.map((x) => x.message.replace(/ isn't connected at its (.*) terminal\./, ' ($1)')).join(', ')}.` });
       if (!list.length) { diagsEl.innerHTML = `<li class="ck-diag ck-good">✓ ${store.drawing.components.length ? 'No problems found.' : 'Add components from the toolbox to start.'}</li>`; return; }
       const icon = { error: '⛔', warning: '⚠', info: 'ℹ' };
@@ -770,7 +830,7 @@
     }
 
     function updateHint() {
-      const t = mode.kind === 'wire'
+      const t = insertion ? 'Let go to put it into this wire, in series.' : mode.kind === 'wire'
         ? 'Drawing a wire: tap a terminal, junction or wire to finish it. Tap the grid to add a bend; tap the same point twice to leave a loose end. Esc cancels.'
         : mode.kind === 'place'
           ? `Tap the grid to place the ${C.TYPES[mode.type].name.toLowerCase()}. R rotates it; Esc cancels.`
@@ -785,7 +845,7 @@
       if (r.width && r.height) svg.setAttribute('viewBox', `${view.x * G} ${view.y * G} ${r.width / view.z} ${r.height / view.z}`);
       content.innerHTML = R.drawing(current(), result, {
         selected: sel, highlight, show, nl,
-        ghost, preview: wirePreview, box,
+        ghost, preview: wirePreview, box, insertWire: insertion && insertion.wire,
       });
       if (show.potential && result && result.nets.length) {
         const vs = result.nets.filter(Number.isFinite);
@@ -796,7 +856,7 @@
       host.querySelector('[data-act="redo"]').disabled = !store.canRedo;
       const any = sel.components.size + sel.wires.size + sel.junctions.size > 0;
       host.querySelector('[data-act="delete"]').disabled = !any;
-      host.querySelector('[data-act="rotate"]').disabled = !(sel.components.size || mode.kind === 'place');
+      for (const act of ['rotate', 'rotate-acw']) host.querySelector(`[data-act="${act}"]`).disabled = !(sel.components.size || mode.kind === 'place');
       for (const b of host.querySelectorAll('.ck-tool')) b.classList.toggle('ck-active', mode.kind === 'place' && mode.type === b.dataset.type);
       updateHint();
     }
@@ -811,7 +871,10 @@
       for (const id of [...sel.wires]) if (!d.wires.some((w) => w.id === id)) sel.wires.delete(id);
       for (const id of [...sel.junctions]) if (!d.junctions.some((j) => j.id === id)) sel.junctions.delete(id);
     }
-    store.subscribe(() => { solve(); highlight = new Set(); updateAll(); status(); describe(); if (opts.onChange) opts.onChange(store.drawing, result); });
+    store.subscribe((d, why) => {
+      lastTap = null; // any change in between means the next tap isn't a double-tap (tap() sets it again afterwards)
+      solve(); highlight = new Set(); updateAll(); status(); describe(); if (opts.onChange) opts.onChange(store.drawing, result);
+    });
     if (typeof ResizeObserver !== 'undefined') new ResizeObserver(() => render()).observe(svg);
     solve();
     updateAll();
