@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: what is a chemical reaction? A physics view · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics: a chemical reaction seen as physics. Bonds are electric potential-energy wells; burning hydrogen releases 5.0 eV for every two water molecules, which becomes kinetic energy, and the mass changes by only 10⁻¹⁰.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/chemical-reaction.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: what is a chemical reaction? A physics view · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics: a chemical reaction seen as physics. Bonds are electric potential-energy wells; burning hydrogen releases 5.0 eV for every two water molecules, which becomes kinetic energy, and the mass changes by only 10⁻¹⁰.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/chemical-reaction.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/reaction.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › What is a chemical reaction?</p>
+    <h1>What is a chemical reaction?</h1>
+    <p class="lead">Hydrogen burning in oxygen, seen as physics: the electric forces that make a bond, the energy needed to break bonds and released when new ones form, where that energy goes, and why the mass hardly changes. It links <a class="tag" href="../themes/b1.html#internal">B.1 Internal energy</a> <a class="tag" href="../themes/d2.html#epe">D.2 Electric potential energy (HL)</a> <a class="tag" href="../themes/e3.html#binding">E.3 Binding energy</a>; some parts go beyond the IB syllabus, and they are labelled.</p>
+
+    <figure class="anim-stage" data-anim="reaction">
+      <canvas role="img" aria-label="Animation of hydrogen and oxygen molecules in a box, a close-up of a hydrogen molecule beside a graph of its electric potential energy against separation, an energy-level diagram for 2H2 + O2 forming 2H2O, one reaction with energy bars, and a log-scale chart comparing the fraction of mass released in burning and in fission. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The reaction is hydrogen burning in oxygen: $2\text{H}_2 + \text{O}_2 \rightarrow 2\text{H}_2\text{O}$ (water vapour). The bond energies are typical textbook values (average values for the energy needed to break one mole of each bond): H–H 436 $\text{kJ mol}^{-1}$, O=O 498 $\text{kJ mol}^{-1}$ and O–H 463 $\text{kJ mol}^{-1}$. Constants are from the data booklet. Atoms and molecules are drawn hugely enlarged and slowed down; in the gas they are drawn passing through each other.</p>
+      <ol>
+        <li>A mixture of hydrogen and oxygen gas at room temperature. Its molecules, H₂ and O₂, move about at random. Each molecule is two atoms held together by a <strong>chemical bond</strong>.</li>
+        <li>Close up, a hydrogen molecule is two protons sharing two electrons. The electrons attract both nuclei, and the two nuclei repel each other. These <strong>electric</strong> forces balance at the bond length, 74 pm ($7.4 \times 10^{-11}$ m).</li>
+        <li>The graph shows the potential energy of the molecule against the separation of the nuclei. The bond sits at the bottom of a <strong>potential-energy well</strong>: push the atoms closer and the repulsion wins; pull them apart and the attraction pulls them back, so they vibrate about the bottom. The force arrows show this: at the bond length the push of the other nucleus and the pull of the electrons on each nucleus are equal; closer in, the push is bigger; further apart, the pull is. (The shape of the curve comes from a standard model and goes beyond the IB syllabus; only its main features matter here. Strictly, the curve also includes the electrons' kinetic energy, a quantum effect; the energy is still electrical in origin.)</li>
+        <li>Pulling the atoms right apart takes about 4.5 eV: $436\,000 \div (6.02 \times 10^{23}) = 7.2 \times 10^{-19}$ J per molecule, and $7.24 \times 10^{-19} \div (1.60 \times 10^{-19}) = 4.5$ eV. In the same way O=O needs 5.2 eV and O–H 4.8 eV.</li>
+        <li>At room temperature, a molecule's average kinetic energy is $\tfrac{3}{2}k_BT = 1.5 \times 1.38 \times 10^{-23} \times 293 = 6.1 \times 10^{-21}$ J, only about 0.04 eV, far too little to break bonds. So the mixture doesn't react.</li>
+        <li>A spark gives a few molecules much more energy, so that they collide hard enough to start breaking bonds. The energy needed to start a reaction is called the <strong>activation energy</strong> (beyond the IB syllabus). The energy released then keeps the reaction going.</li>
+        <li>The energy bookkeeping: breaking two H–H bonds and one O=O bond takes $2 \times 4.5 + 5.2 = 14.2$ eV; forming four O–H bonds releases $4 \times 4.8 = 19.2$ eV. So $19.2 - 14.2 = 5.0$ eV is released for every two water molecules made (482 kJ for every two moles of water). Really, bonds break and form at the same time, so colliding molecules only need to get over a much smaller hump than 14.2 eV; the hump on the diagram is schematic.</li>
+        <li>The overall reaction (really it takes several steps): two H₂ molecules and one O₂ molecule rearrange into two water molecules. The products sit in deeper wells, so their potential energy is 5.0 eV lower. Energy is conserved: the 5.0 eV becomes <strong>kinetic energy</strong> of the new molecules (moving, spinning and vibrating), which fly apart fast.</li>
+        <li>Faster molecules mean a higher temperature. The internal energy has changed from potential to random kinetic: this is an <strong>exothermic</strong> reaction. In an <strong>endothermic</strong> reaction it's the other way round: the products have more potential energy, the molecules slow down, and the mixture cools (unless energy flows in from outside).</li>
+        <li><strong>Predict:</strong> does the water made have less mass than the hydrogen and oxygen it came from?</li>
+        <li>Yes, but only just. Energy has mass, $E = mc^2$. Two moles of H₂ and one mole of O₂ have a mass of $2 \times 2.016 + 32.00 = 36.03$ g and release 482 kJ, so every kilogram of the mixture releases $482\,000 \div 0.03603 = 1.34 \times 10^{7}$ J. Once that energy has left, the mass has fallen by $\Delta m = E \div c^2 = 1.34 \times 10^{7} \div (3.0 \times 10^{8})^2 = 1.5 \times 10^{-10}$ kg for each kilogram: 1 kg becomes 0.99999999985 kg, far too little to detect by weighing in practice.</li>
+        <li>In fission, about $10^{-3}$ of the mass is released ($200 \text{ MeV} \div (236 \times 931.5 \text{ MeV}) = 9 \times 10^{-4}$): about six million times the fraction for burning. Nuclear binding energies are measured in MeV (about 8 MeV per nucleon), chemical bond energies in eV (about 4.5 eV per bond), millions of times smaller.</li>
+      </ol>
+      <p>Beyond the IB syllabus: the idea of activation energy, the shape of the bond-energy curve and the bond energies themselves. Everything else uses ideas from B.1 (internal energy, temperature), D.2 (electric forces and, for HL, electric potential energy) and E.3 ($E = mc^2$ and binding energy). Chemistry goes much further: molecules really have more than two atoms vibrating and rotating in many ways, and electrons are better described by quantum physics than by dots in a cloud.</p>
+      <p>SL students: you only need the idea of potential energy here (as in B.1, where pulling attracting particles apart increases their potential energy); the formula for electric potential energy is HL.</p>
+      <p>Read more in <a href="../themes/b1.html#internal">B.1 section 4: internal energy</a>, <a href="../themes/d2.html#coulomb">D.2 section 3: Coulomb's law</a>, <a href="../themes/d2.html#epe">D.2 section 10: electric potential energy (HL)</a> and <a href="../themes/e3.html#binding">E.3 section 2: mass defect and binding energy</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
