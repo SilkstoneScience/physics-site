@@ -208,7 +208,8 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - 16 November 2026 (teacher's request): A.4 "Why the sin θ in torque?" (`torque.html`, scene `js/anim/torque.js`, linked from A.4 section 2), waiting for the teacher's check.
 - 16 November 2026 (teacher's request): every animation has a speed button (1×, 1.5×, 2×), a draggable scrubber and ← / → keys; on phones the buttons are in a row below the picture.
 - Theme B (16 November 2026): B.1 heating ice to steam, B.3 where gas pressure comes from, B.5 inside a wire; linked from B.1, B.3 and B.5.
-- Next: the teacher's check of the A.4 torque animation and theme B, then theme C.
+- Theme C (16 November 2026): C.1 simple harmonic motion, C.2 transverse and longitudinal waves, C.3 wavefronts and rays (a ripple tank computed from the wave equations), C.4 standing waves, C.5 the Doppler effect; linked from C.1 to C.5. Theme B is live.
+- Next: the teacher's check of theme C (and of the A.4 torque animation), then theme D.
 
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).

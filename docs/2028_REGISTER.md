@@ -53,7 +53,7 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 ## The list
 
 <!-- LIST:START (written by tools/list-2028.mjs --write; do not edit by hand) -->
-135 places in 47 files.
+136 places in 48 files.
 
 ### Topic pages
 
@@ -70,11 +70,11 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 260: Root-mean-square speed New for 2028
 - `themes/c2.html` (3)
   - line 38: New for 2028 For exams from 2028 the guide adds that the intensity of a wave is proportional to the square of its amplitude, $I \propto A^2$ .
-  - line 274: the box drawn round a "New for 2028" block (class new2028)
-  - line 275: Intensity and amplitude New for 2028
+  - line 280: the box drawn round a "New for 2028" block (class new2028)
+  - line 281: Intensity and amplitude New for 2028
 - `themes/c4.html` (2)
   - line 38: New for 2028 For exams from 2028 the guide adds that you should derive the wavelength–length relationship for the $n$th harmonic and see how it sets the harmonic names , …
-  - line 203: New for 2028 The 2028 guide asks you to work this out yourself: find the relationship between the wavelength and the length for the $n$th harmonic ($L = \frac{n\lambda}{2…
+  - line 209: New for 2028 The 2028 guide asks you to work this out yourself: find the relationship between the wavelength and the length for the $n$th harmonic ($L = \frac{n\lambda}{2…
 - `themes/d1.html` (2)
   - line 38: New for 2028 For exams from 2028 the guide says that all students should be able to deduce Kepler's third law for circular orbits , from the centripetal and gravitational…
   - line 212: New for 2028 From the 2028 exams, the guide says that all students (SL and HL) should be able to deduce Kepler's third law from the centripetal force and gravitational fo…
@@ -237,6 +237,8 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 
 ### Other pages and data
 
+- `animations/standing-waves.html` (1)
+  - line 59: New for 2028 For exams from 2028, the guide asks you to work out the relationship between the wavelength and the length for the $n$th harmonic yourself, and to see that t…
 - `ee/index.html` (1)
   - line 27: …om first idea to final submission. It is for essays first assessed in 2027.
 - `experimental/database-kepler.html` (1)

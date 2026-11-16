@@ -73,9 +73,20 @@ Theme B (agreed 16 November 2026)
 - [x] B.5 Inside a wire (free electrons, drift, resistance, why the lamp lights at once): `inside-a-wire.html`
 - Ideas for later: B.2 the greenhouse effect (photons in, infrared out, absorbed and re-emitted); B.4 (HL) a heat engine cycle on a P–V diagram.
 
-Theme C (batch 3): C.1 SHM and the reference circle; C.2 transverse and longitudinal waves; C.3 wavefronts
-and rays (refraction, diffraction, two-source interference); C.4 standing waves on strings and in pipes;
-C.5 Doppler wavefronts.
+Theme C (built 16 November 2026; waiting for the teacher's check)
+- [x] C.1 Simple harmonic motion: `shm.html` (glider between two springs, m = 0.50 kg, k = 4.9 N m⁻¹, T = 2.0 s; live x–t, v–t, a–t
+  graphs; energy bars without numbers at SL; the reference circle and the energy values labelled HL, as on `themes/c1.html`
+  section 6. The guide's SL linking question "How can circular motion be used to visualize SHM?" means the teacher may prefer
+  the circle without the HL label: ask.)
+- [x] C.2 Transverse and longitudinal waves: `waves.html` (λ = 1.6 m, T = 2.0 s, v = 0.80 m s⁻¹ for both waves; the
+  displacement–distance graph made from the particles' displacements turned through 90°; one period timed against one wavelength)
+- [x] C.3 Wavefronts and rays: `wavefronts.html` (ripple tank; the water surface is computed from complex wave amplitudes on a
+  grid, Huygens sums for the gaps; f = 8.0 Hz, 0.24 → 0.16 m s⁻¹, 50° → 31°; gaps 15 cm and 2.0 cm; sources 4λ apart, P at 2λ, Q at 1.5λ)
+- [x] C.4 Standing waves: `standing-waves.html` (string 0.80 m, 192 m s⁻¹, 120/240/360 Hz; pipes 0.68 m with 340 m s⁻¹:
+  open 250 and 500 Hz, closed 125, 375 and 625 Hz; the page's harmonic-names sentence is tagged New for 2028)
+- [x] C.5 The Doppler effect: `doppler.html` (500 Hz, 340 m s⁻¹, source or observer at 85 m s⁻¹: 667, 400 and 625 Hz, the
+  HL equations labelled; each wavefront centred where the source was when it was sent out; Hα 656.3 → 669.4 nm at 2% of c;
+  the picture is frozen, and says so, while a wavelength is measured)
 
 Theme D (batch 4)
 - [x] D.3 Charges in a magnetic field: `charge-in-b-field.html` (built first, as the demo)

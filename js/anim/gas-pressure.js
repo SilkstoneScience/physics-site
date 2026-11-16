@@ -170,7 +170,7 @@
   // ---------- layout ----------
   let L = null;
   function layout(s) {
-    const W = s.W, H = s.H, phone = W < 600, top = s.top || 0;
+    const W = s.W, H = s.H, phone = H > W, top = s.top || 0;
     const pad = clamp(W * 0.035, 12, 34), fs = Math.round(clamp(W / 60, 12, 20)), cap = Math.round(clamp(W / 44, 15, 25));
     const secY = Math.max(top + 14, Math.min(58, H * 0.12));
     let u, bx, by;
