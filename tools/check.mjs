@@ -714,7 +714,13 @@ const pages = htmlFiles();
 const mathjaxVersions = new Map(); // version -> pages using it
 const idsCache = new Map();
 function idsIn(rel) {
-  if (!idsCache.has(rel)) idsCache.set(rel, new Set([...read(rel).matchAll(/\sid="([^"]+)"/g)].map((m) => m[1])));
+  if (!idsCache.has(rel)) {
+    const ids = new Set([...read(rel).matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
+    // js/think.js gives each Think deeper card its item id, so #BQ-01 links to a big question work.
+    const thinkData = { 'think/big-questions.html': 'think/big-questions.json', 'think/concepts.html': 'think/concepts.json' }[rel];
+    if (thinkData) for (const it of readThink(thinkData)) ids.add(it.id);
+    idsCache.set(rel, ids);
+  }
   return idsCache.get(rel);
 }
 
