@@ -53,7 +53,7 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 ## The list
 
 <!-- LIST:START (written by tools/list-2028.mjs --write; do not edit by hand) -->
-135 places in 47 files.
+139 places in 50 files.
 
 ### Topic pages
 
@@ -257,4 +257,11 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 269: New for 2028 From the 2028 exams, all four are printed in the data booklet, so every exam uses the same definitions. The booklet writes them in words:
 - `think/concepts.json` (1)
   - line 1350: …\"intensity ∝ amplitude²\" in so many words; the guide for exams from 2028 does.) Cover one slit and the amplitude at the centre drops from $2A$ to $A$, so the intensity …
+- `universe/css/universe.css` (2)
+  - line 4: …; --warm: #ffd9a0; --hl: #ffb86b; --good: #8fe3b0; --bad: #ff9a8f; --v2028: #c9a6ff;
+  - line 27: .tag.y2028 { color: var(--v2028); }
+- `universe/js/solar.js` (1)
+  - line 35: ['Jupiter', 'gas', 'gas', 1898, 69911, 9.925, 5.20288700, 0.04838624, 1.30439695, 34.39644051, 14.72847983, 100.47390909, 268.06, 64.50, [0.1, 0.85, 0.6, 0.55, 0.75, 0]],
+- `universe/js/ui.js` (1)
+  - line 303: …al force equal to the centripetal force for a circular orbit. New for 2028 Deducing it yourself is required for exams from 2028.',
 <!-- LIST:END -->
