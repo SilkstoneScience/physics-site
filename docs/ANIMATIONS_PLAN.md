@@ -89,7 +89,16 @@ Theme B (agreed 16 November 2026)
   exactly with Q, ΔU and W to scale; a Carnot cycle between 500 K and 300 K, η = 0.40)
 - [x] B.4 Entropy and the second law (HL): `entropy.html` (a gas spreading; microstates 1, 4, 6, 4, 1; S = k_B ln Ω; ΔS = Q/T for
   heat flowing hot to cold; the second law; a freezer as a local decrease)
-- Ideas for later: B.2 the greenhouse effect (photons in, infrared out, absorbed and re-emitted).
+- [x] B.2 The greenhouse effect: `greenhouse.html` (teacher's request, 16 November 2026; the notes' energy-balance model
+  (1 − α)S/4 = eσT⁴: 255 K without greenhouse gases, 288 K with e = 0.61; resonance in a CO₂ molecule; no pauses)
+
+Requested 16 November 2026 (the teacher also asked for ideas only on superposition and music, "What is…?", big conceptual,
+"What would happen if…?" and "How does… work?" animations; nothing built from those yet):
+- [x] A.2 A rocket launch: `rocket-launch.html` (simplified single stage, 50 t with 30 t of fuel; thrust from F = vΔm/Δt;
+  free-body diagram to scale; drag model labelled beyond the syllabus; coasts to about 98 km; no pauses)
+- [x] D.2 Millikan's oil-drop experiment: `millikan.html` (qE = mg with 294 V across 6.0 mm, q = 4e; simulated dot plot of 40 drops)
+- [x] What is a chemical reaction? `chemical-reaction.html` (hub section "What is…?"; bonds as potential-energy wells, the
+  bookkeeping for hydrogen burning, Δm/m ≈ 1.5 × 10⁻¹⁰; partly beyond the syllabus, labelled)
 
 Theme C (built 16 November 2026; waiting for the teacher's check)
 - [x] C.1 Simple harmonic motion: `shm.html` (glider between two springs, m = 0.50 kg, k = 4.9 N m⁻¹, T = 2.0 s; live x–t, v–t, a–t
@@ -122,7 +131,8 @@ Theme D (batch 4)
   (Theme D built 16 November 2026; waiting for the teacher's check.)
 
 Theme E (built 16 November 2026; waiting for the teacher's check)
-- [x] E.1 Rutherford scattering: `rutherford.html` (the apparatus and what was seen; exact Coulomb paths past one gold nucleus,
+- [x] E.1 Rutherford scattering: `rutherford.html` (no pauses: teacher, 16 November 2026, "shouldn't have any pauses", so it is
+  re-timed to keep moving while each caption is read; the apparatus and what was seen; exact Coulomb paths past one gold nucleus,
   tan(θ/2) = d/2b; (HL) 5.0 MeV head-on: d = 4.5 × 10⁻¹⁴ m, R = 7.0 × 10⁻¹⁵ m, about 33 MeV to reach the surface)
 - [x] E.1 Energy levels and spectra: `energy-levels.html` (hydrogen levels to scale; Balmer lines from hc/ΔE, drawn at the
   measured wavelengths; absorption by gas with some atoms in n = 2; the Bohr formula only on the HL end-card row)

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: a rocket launch, the physics of getting off the ground · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics A.2 and A.3: a simplified rocket lifts off when the thrust beats the weight, with its free-body diagram to scale, thrust from F = vΔm/Δt, live graphs of mass, acceleration and velocity, power, and its energy as it coasts to the top.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/rocket-launch.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: a rocket launch, the physics of getting off the ground · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics A.2 and A.3: a simplified rocket lifts off when the thrust beats the weight, with its free-body diagram to scale, thrust from F = vΔm/Δt, live graphs of mass, acceleration and velocity, power, and its energy as it coasts to the top.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/rocket-launch.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/launch.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › A rocket launch</p>
+    <h1>A rocket launch</h1>
+    <p class="lead">A simplified rocket stands on the launch pad, lights its engine, lifts off and climbs for two minutes, then coasts to the edge of space and falls back. Watch its free-body diagram (drawn to scale), where the thrust comes from, why it speeds up faster and faster, and where the energy goes. <a class="tag" href="../themes/a2.html#third">A.2 Forces and momentum</a> <a class="tag" href="../themes/a3.html#power">A.3 Work, energy and power</a></p>
+
+    <figure class="anim-stage" data-anim="launch">
+      <canvas role="img" aria-label="Animation of a rocket on a launch pad lifting off and climbing to about 98 km, with force arrows for thrust, weight, the normal force and drag drawn to scale, live readouts, and graphs of mass, acceleration and velocity against time. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The rocket is simplified, with round numbers: its total mass is 50 000 kg, of which 30 000 kg is propellant (fuel and the oxygen to burn it), so it is 20 000 kg when empty. Its engine throws out 250 kg of gas every second at 2500 $\text{m s}^{-1}$ relative to the rocket. It flies straight up. The arrows are drawn to the same scale: the thrust arrow (orange) is the longest, the weight is lilac, the normal force green and the drag red. The graphs on the right show the mass, the acceleration and the velocity against time since the engine started.</p>
+      <ol>
+        <li>On the pad, the rocket's weight is $mg = 50\,000 \times 9.8 = 4.9 \times 10^5$ N. The pad pushes up with an equal normal force, so the resultant force is zero and the rocket stays put.</li>
+        <li>The engine starts and the thrust grows over one second (shown in slow motion). <strong>Predict:</strong> at what moment will the rocket leave the pad?</li>
+        <li>While the thrust is smaller than the weight, the pad's push shrinks to make up the difference: thrust + normal force = weight. The rocket lifts off as soon as the thrust is bigger than the weight, about 0.78 s after the engine starts. Then the resultant force points up.</li>
+        <li>Just after lift-off, at full thrust, the resultant force is $6.25 \times 10^5 - 4.9 \times 10^5 = 1.35 \times 10^5$ N, so $a = \dfrac{F}{m} = \dfrac{1.35 \times 10^5}{50\,000} \approx 2.7$ $\text{m s}^{-2}$. (It has used 125 kg of propellant by then, which hardly changes this.) From then on propellant keeps being used, so the acceleration creeps up: watch the readout.</li>
+        <li>Where the thrust comes from: every second the engine pushes 250 kg of gas down out of the nozzle at 2500 $\text{m s}^{-1}$. By Newton's third law, the gas pushes the rocket up with an equal force. That force is the thrust, the rate of change of the gas's momentum:</li>
+      </ol>
+      <p style="text-align:center">$F = v\dfrac{\Delta m}{\Delta t} = 2500 \times 250 = 6.25 \times 10^5$ N</p>
+      <ol start="6">
+        <li>The rocket doesn't need the ground or the air to push against: it pushes on its own exhaust. (How a rocket moves by throwing gas backwards is shown step by step in <a href="momentum.html">Collisions, explosions and rockets</a>.)</li>
+        <li>From here the animation runs 3 times faster than real time. Every second 250 kg of propellant is used, so the mass falls steadily. The thrust stays the same, so the acceleration grows: the same force on less mass.</li>
+        <li>The drag force grows with speed, but the air gets thinner as the rocket climbs. In this simple model the drag is largest about 73 s after launch (about 36 kN, at about 11 km up), and then it shrinks. Even at its largest it is less than a tenth of the thrust.</li>
+        <li>Power: the thrust does work on the rocket at a rate $P = Fv$. At 500 $\text{m s}^{-1}$ that is $6.25 \times 10^5 \times 500 \approx 3.1 \times 10^8$ W, and it keeps growing as the rocket speeds up.</li>
+        <li>By the end of the burn, 120.5 s after the engine starts, the mass is down to 20 000 kg (weight $1.96 \times 10^5$ N). The same thrust then gives $a \approx \dfrac{6.25 \times 10^5 - 1.96 \times 10^5}{20\,000} \approx 21$ $\text{m s}^{-2}$, nearly eight times the acceleration at full thrust just after lift-off. The drag is small by then (under 7 kN). The rocket is about 43 km up, moving at about 1040 $\text{m s}^{-1}$.</li>
+        <li>The engine stops. <strong>Predict:</strong> which way does the rocket accelerate now?</li>
+        <li>Downward. Only its weight acts (the air is so thin that the drag is tiny), so the acceleration is 9.8 $\text{m s}^{-2}$ downward (just after cut-off the remaining drag adds a little: about 10.1 $\text{m s}^{-2}$ for a few seconds). The rocket still moves up, but it loses 9.8 $\text{m s}^{-1}$ of speed every second.</li>
+        <li>As it coasts up, its kinetic energy turns into gravitational potential energy and the total stays the same (the bars on the right, measured from the ground).</li>
+        <li>At the top, about 98 km up and 226 s after the engine started, it stops for an instant. Its acceleration is still 9.8 $\text{m s}^{-2}$ downward: being momentarily at rest doesn't mean there is no force.</li>
+        <li>To go into orbit at that height it would need to move sideways at about $\sqrt{\dfrac{GM}{r}} = 7.8$ $\text{km s}^{-1}$ (D.1, HL), more than seven times its top speed. This rocket only goes up, so it falls back down.</li>
+        <li>Energy: fuel and oxygen release roughly 10 MJ per kilogram (a typical value), so the 30 000 kg of propellant releases about $3 \times 10^{11}$ J. At the top, the rocket's gravitational potential energy is $mgh = 20\,000 \times 9.8 \times 97\,700 \approx 1.9 \times 10^{10}$ J, only about 6% of it. Most of the energy goes into the hot, fast-moving exhaust, and a little into heating the air through drag.</li>
+      </ol>
+      <p><strong>How it is worked out, and what is simplified.</strong> The flight is calculated once when the page loads, in steps of a thousandth of a second, from Newton's second law with the thrust, the weight $mg$ and the drag. The drag uses a simple model that is not part of the course ($F_d = \tfrac{1}{2}\rho C A v^2$, with $CA = 1.57$ $\text{m}^2$ and the air thinning with height); it is there only to show that drag first grows and then shrinks. Gravity is taken as constant at 9.8 $\text{m s}^{-2}$, although at 98 km it is about 3% weaker. The thrust is taken as constant at full power (a real engine gives a little more in thin air), and there is no wind. The scenery is not to scale: the rocket is drawn far larger than the height ruler would make it, and real rockets are taller, have several stages and turn sideways to reach orbit.</p>
+      <p>Read more in <a href="../themes/a2.html#forces">A.2 section 1: forces and free-body diagrams</a>, <a href="../themes/a2.html#second">section 3: Newton's second law</a>, <a href="../themes/a2.html#third">section 6: Newton's third law</a>, <a href="../themes/a2.html#momentum">section 7: momentum and impulse</a> (rockets and jet engines), and <a href="../themes/a3.html#kinetic">A.3 section 3: kinetic energy</a>, <a href="../themes/a3.html#potential">section 4: gravitational potential energy</a> and <a href="../themes/a3.html#power">section 6: power</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

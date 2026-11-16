@@ -83,7 +83,7 @@
   }
 
   // ---------- timeline (scene seconds) ----------
-  const P1 = [4.4, 49.4], P2 = [49.0, 67.6], P3 = [67.0, 145.4], END = 145.0, DURATION = 158;
+  const P1 = [4.4, 49.4], P2 = [49.0, 67.6], P3 = [67.0, 145.4], END = 145.0, STORY = 158;          // story time (the physics and captions run on it)
   const V3 = 62, V4 = 46;                                   // fm per scene second, far from the nucleus
   const BS = [-105, 52, -26, 12, -5, 1.5];
   const L3 = BS.map((_, i) => 68.2 + 2.0 * i);             // launch times (at x = −430 fm)
@@ -118,21 +118,33 @@
     [91.2, 96.6, 'Conclusions: most of the atom is empty space, and its positive charge is concentrated in a tiny nucleus.'],
     [96.8, 101.8, 'Bouncing back also shows that the nucleus holds almost all of the atom\'s mass.'],
     [103.6, 109.2, '(HL) Fired straight at the nucleus, an alpha particle slows down, stops for an instant at a distance d, then comes back.'],
-    [109.4, 115.0, `(HL) At the turning point all its kinetic energy has become electric potential energy: Eₖ${NB}=${NB}k(2e)(79e)${NB}÷${NB}d.`, T_TURNS[1]],
+    [109.4, 115.0, `(HL) At the turning point all its kinetic energy has become electric potential energy: Eₖ${NB}=${NB}k(2e)(79e)${NB}÷${NB}d.`],
     [115.2, 121.4, `(HL) So d${NB}=${NB}k(2e)(79e)${NB}÷${NB}Eₖ = ${sci(KQQ, 2)}${NB}÷${NB}(${sci(EK0)}) = ${sci(D0)}${NB}m.`],
     [121.6, 127.6, `(HL) The gold nucleus has R${NB}=${NB}R₀∛A = 1.20${NB}×${NB}10⁻¹⁵${NB}×${NB}∛197 = ${sci(RN)}${NB}m. The alpha particle stops ${(D0 / RN).toFixed(1)} times as far from the centre as the surface is.`],
     [127.8, 132.8, '(HL) So the distance of closest approach is only an upper limit for the radius of the nucleus.'],
     [133.0, 138.6, `(HL) Faster alpha particles get closer. At about ${Math.round(E_TOUCH)}${NB}MeV they would just reach the surface of the gold nucleus.`],
     [138.8, 144.8, '(HL) Then the short-range strong nuclear force acts too, and fewer are scattered at large angles than Rutherford\'s formula predicts.'],
   ];
-  // holds: long enough to read each caption at no more than 16 characters a second; 6 s more on the prediction
-  const PAUSES = [];
-  for (const [a, b, txt, at] of CAPS) {
-    const need = txt.length / 16 - (b - a - 0.6);
-    let hold = Math.max(0, need);
-    if (txt.startsWith('Predict')) hold = Math.max(hold, 6);
-    if (hold > 0.05) PAUSES.push([+(at ?? b - 0.8).toFixed(2), +hold.toFixed(1)]);
-  }
+  // No pauses (teacher's decision): instead, while each caption is up the story runs more slowly, just enough for the
+  // caption to be read at no more than 16 characters a second (the fades count as unreadable), and the prediction gets
+  // at least 6 s more. The picture never stops: it just moves more slowly. rate = story seconds per real second.
+  const SEGS = CAPS.map(([a, b, txt]) => {
+    let r = Math.min(1, (b - a - 0.6) / (txt.length / 16));
+    if (txt.startsWith('Predict')) r = Math.min(r, (b - a) / (b - a + 6));
+    return [a, b, r];
+  });
+  const realOf = (tau) => SEGS.reduce((n, [a, b, r]) => n + Math.max(0, Math.min(tau, b) - a) * (1 / r - 1), tau);
+  const tauOf = (tr) => {
+    let shift = 0;                                           // extra real time used by the slowed captions before this one
+    for (const [a, b, r] of SEGS) {
+      const ra = a + shift, rb = ra + (b - a) / r;
+      if (tr < ra) return tr - shift;
+      if (tr < rb) return a + (tr - ra) * r;
+      shift += (b - a) * (1 / r - 1);
+    }
+    return Math.min(tr - shift, STORY);
+  };
+  const DURATION = realOf(STORY);
 
   // ---------- colours ----------
   const ALPHA = C.pos, GOLD = '255,196,80', FOIL = '240,190,90', SCREEN = C.good, EL = C.neg, WALL = '150,165,230';
@@ -502,7 +514,7 @@
 
   // ---------- end card ----------
   function endCard(s, t) {
-    const a = fade(t, END, DURATION - 0.6, 0.9, 0.8); if (a <= 0) return;
+    const a = fade(t, END, STORY - 0.6, 0.9, 0.8); if (a <= 0) return;
     const { g } = s, { W, H, phone } = L;
     g.globalCompositeOperation = 'source-over';
     g.fillStyle = `rgba(4,6,13,${0.92 * a})`; g.fillRect(0, 0, W, H);
@@ -538,27 +550,25 @@
 
   Anim.register('rutherford', {
     duration: DURATION,
-    poster: 84,
-    pauses: PAUSES,
+    poster: realOf(84),
     // score: a discovery (C-sharp minor, a triangle pad, a low drone, a little wind)
     music: { chords: [[49, 56, 61, 64], [45, 52, 57, 61], [47, 54, 59, 63], [44, 51, 56, 60]], bar: 8, pad: 'triangle', cutoff: 900, drone: 0.09, wind: 0.3, volume: 0.45 },
     resize: layout,
     info: {
-      KQQ, D0, RN, E_TOUCH, EK0, PATHS, HEAD, CAPS, PAUSES, DEF, thetaOf, traj,
+      KQQ, D0, RN, E_TOUCH, EK0, PATHS, HEAD, CAPS, SEGS, realOf, tauOf, DEF, thetaOf, traj, DURATION,
       check() {
         const out = { KQQ, EK0, D0, RN, ratio: D0 / RN, E_TOUCH };
         out.paths = PATHS.map((p) => ({ b: p.bF, sim: +deg(Math.acos(Math.cos(p.theta))).toFixed(3), exact: +deg(thetaOf(p.bF)).toFixed(3),
           rMin: +p.rMin.toFixed(3), rMinExact: +(D0F / 2 + Math.hypot(D0F / 2, p.bF)).toFixed(3) }));
         out.head = { rMin: HEAD.rMin, d0fm: D0F };
-        out.reading = CAPS.map(([a, b, txt]) => {
-          const hold = PAUSES.filter((p) => p[0] >= a && p[0] <= b).reduce((n, p) => n + p[1], 0);
-          return +(txt.length / (b - a - 0.6 + hold)).toFixed(1);
-        });
+        // characters per real second while the caption is fully shown (its fades not counted)
+        out.reading = SEGS.map(([a, b, r], i) => +(CAPS[i][2].length / ((b - a - 0.6) / r)).toFixed(1));
         return out;
       },
     },
-    frame(s, t) {
+    frame(s, tr) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
+      const t = tauOf(tr);                                   // story time
       D.background(s, 0.2);
       drawPart1(s, t, fade(t, P1[0], P1[1], 0.6, 0.8));
       drawPudding(s, t, fade(t, 16.6, 27.6, 0.6, 0.6));
@@ -573,7 +583,7 @@
       if (t < 4.6) { s.g.fillStyle = `rgba(4,6,13,${0.8 * fade(t, 0, 4.4, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 4.4, 'Rutherford scattering', 'How alpha particles revealed the nucleus');
       endCard(s, t);
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tr, DURATION);
     },
   });
 })();
