@@ -135,9 +135,9 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Case 2, "The crime scene at Fenwick Hall" (SL; A.2, C.1, C.3, E.3), waiting for the teacher's check: a tappable crime-scene picture (the optional `scene` in the case file) and a tampered pendulum clock. Teacher notes: `teachers/mystery-fenwick.html`.
 - Next: more cases (e.g. themes D and E, or an HL case), once the teacher has tried these.
 
-## The Universe Engine (November 2026, on the Review games page "for now")
+## The Universe Engine (November 2026, on the Resources page "for now")
 - `universe/index.html`: a 3D star system students fly through (invented from a seed, or the real Solar System from NASA/JPL data), with live D.1, A.2 and A.3 numbers. Phases 1 and 2 approved by the teacher. Plan, decisions, approximations and test results: `docs/UNIVERSE_PLAN.md`.
-- Linked only from `games.html` (teacher's choice); no home-page card, menu entry or D.1 link yet.
+- Linked only from the "Just for fun" section of `resources.html` (`#fun`, teacher's choice), beside the Moon walk (`moonwalk.html`); no home-page card, menu entry, Review games card or D.1 link yet.
 - Still to do: check the frames per second on a school laptop (only a desktop graphics card has been measured).
 
 ## Newsroom, Explanation builder and word games (November 2026, waiting for the teacher's check)
