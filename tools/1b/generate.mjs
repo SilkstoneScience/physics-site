@@ -300,15 +300,45 @@ const axisSpec = (c, zero, range) => ({ symbol: c.symbolText || c.symbol, unit: 
 // question bank (js/plot.js): the same axes and grid as the picture, the points and error bars already shown, and
 // the lines the student must draw, taken from the fit and the steepest and shallowest lines. `worth` is how many of
 // the part's marks are for the drawing itself (default 0: the marks are for the values read from the lines).
+// A part that asks for the point(s) the graph leaves out (graph.omit) uses  plot: { points: true }: the student plots
+// them on the graph that shows the others, and the part's marks are all for the plotting.
 const PLOT_LINES = { best: 'Line of best fit', steep: 'Steepest line', shallow: 'Shallowest line' };
-export function plotFor(def, d, want, label) {
+export function plotFor(def, d, want, label, marks) {
   const g = def.graph;
   const stop = (msg) => { throw new Error(`${def.id} part (${label}): ${msg}`); };
-  if (!g || g.fit !== 'linear' || g.style === 'trace') stop('a plot needs a graph of points with a straight-line fit');
+  if (!g || g.style === 'trace') stop('a plot needs a graph of points');
+  const points = graphPoints(d, g, 'student');
+  // Half the x error bar goes fourth in "given" only when the graph draws x error bars.
+  const given = points.map((p) => (points.some((k) => k.ex) ? [p.x, p.y, p.ey, p.ex] : [p.x, p.y, p.ey]));
+  const refLine = g.referenceLine ? (typeof g.referenceLine === 'function' ? g.referenceLine(d) : g.referenceLine) : null;
+  const reference = refLine ? { reference: { gradient: refLine.m, intercept: refLine.c } } : {};
+  const [px, py] = [def.columns[g.x], def.columns[g.y]];
+  const axesOf = () => {
+    const { xs, ys } = graphScales({ x: axisSpec(px, g.zero && g.zero.x, g.xRange), y: axisSpec(py, g.zero && g.zero.y, g.yRange), points });
+    return {
+      height: Math.round((400 * (g.height || BOX.H)) / BOX.W),
+      x: { min: xs.min, max: xs.max, step: xs.minor, major: xs.step, symbol: stripMath(px.symbolText || px.symbol), unit: parseUnit(px.unit || '').text },
+      y: { min: ys.min, max: ys.max, step: ys.minor, major: ys.step, symbol: stripMath(py.symbolText || py.symbol), unit: parseUnit(py.unit || '').text },
+    };
+  };
+  if (want.points) {
+    if (want.lines) stop('a plot asks either for the missing points or for lines, not both');
+    const missing = g.omit || [];
+    if (!missing.length) stop('plot: { points: true } needs graph.omit: the rows the student plots');
+    const what = g.what || `${py.name} against ${px.name}`;
+    return {
+      title: `Graph of ${what}, with ${points.length} plotted points, to plot the missing ${missing.length === 1 ? 'point' : 'points'} on`,
+      ...axesOf(),
+      given,
+      points: missing.map((i) => [d.rows[i][g.x], d.rows[i][g.y]]),
+      ...reference,
+      worth: marks,
+      on: 'graph',
+    };
+  }
+  if (g.fit !== 'linear') stop('drawing lines needs a graph with a straight-line fit');
   const keys = want.lines || [];
   if (!keys.length || keys.some((k) => !PLOT_LINES[k]) || new Set(keys).size !== keys.length) stop(`plot.lines must list some of ${Object.keys(PLOT_LINES).join(', ')}, each once`);
-  const points = graphPoints(d, g, 'student');
-  // x error bars can't be shown on screen yet: the validator reports a plot on a graph that draws them.
   const bars = points.some((p) => p.ey) && !!d.band;
   if (keys.some((k) => k !== 'best') && !bars) stop('the steepest and shallowest lines need visible error bars and graph.band');
   const [cx, cy] = [def.columns[g.x], def.columns[g.y]];
@@ -347,8 +377,9 @@ export function plotFor(def, d, want, label) {
     height: Math.round((400 * (g.height || BOX.H)) / BOX.W),
     x: { min: xs.min, max: xs.max, step: xs.minor, major: xs.step, symbol: stripMath(cx.symbolText || cx.symbol), unit: parseUnit(cx.unit || '').text },
     y: { min: ys.min, max: ys.max, step: ys.minor, major: ys.step, symbol: stripMath(cy.symbolText || cy.symbol), unit: parseUnit(cy.unit || '').text, snap: num(snapY) },
-    given: points.map((p) => [p.x, p.y, p.ey]),
+    given,
     points: [],
+    ...reference,
     lines: keys.map((k) => ({
       key: k, role: k, label: PLOT_LINES[k], gradient: num(from[k].m), intercept: num(from[k].c),
       ...(bars ? { bars: true } : {}), ...(k === 'best' && tolerance !== null ? { tolerance: num(tolerance) } : {}),
@@ -440,7 +471,7 @@ export function buildQuestion(def) {
     // figure: shown with the part's question (data revealed by the part, as in a printed paper).
     if (figure && !figures[figure]) throw new Error(`${def.id} part (${pt.label}): no figure called "${figure}"`);
     // plot: the student draws on the graph (click-to-plot in the question bank; the printed graph is unchanged).
-    return { ...rest, ...(figure ? { figure: figures[figure] } : {}), ...(msFigure ? { msFigure: figures[msFigure] } : {}), ...(plot ? { plot: plotFor(def, d, plot, pt.label) } : {}) };
+    return { ...rest, ...(figure ? { figure: figures[figure] } : {}), ...(msFigure ? { msFigure: figures[msFigure] } : {}), ...(plot ? { plot: plotFor(def, d, plot, pt.label, pt.marks) } : {}) };
   });
   const question = {
     id: def.id,

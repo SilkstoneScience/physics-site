@@ -123,6 +123,8 @@ export default {
       },
       {
         label: 'c', sections: ['mechanical'], marks: 1, ao: 'AO2', msFigure: 'graph-ms',
+        // Click-to-plot (question bank): the student plots the point on the graph and it is marked on screen.
+        plot: { points: true },
         question: 'Plot the point for bounce 4 on the graph.',
         markscheme: [`Point plotted at $n = ${d.int(OMIT)}$, $h = ${d.text('h', OMIT)}\\ \\text{cm}$, to within half a small square ✓`],
       },

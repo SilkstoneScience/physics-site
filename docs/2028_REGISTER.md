@@ -101,9 +101,9 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 ### Question bank (hand-written)
 
 - `questions/b.json` (3)
-  - line 1926: question B1-018: "New for 2028" tag
-  - line 1963: question B1-020: "New for 2028" tag
-  - line 1982: question B3-020: "New for 2028" tag
+  - line 1927: question B1-018: "New for 2028" tag
+  - line 1964: question B1-020: "New for 2028" tag
+  - line 1983: question B3-020: "New for 2028" tag
 - `questions/c.json` (3)
   - line 1617: question C2-015: "New for 2028" tag
   - line 1636: question C2-016: "New for 2028" tag

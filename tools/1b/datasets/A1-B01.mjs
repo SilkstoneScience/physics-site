@@ -22,7 +22,10 @@ export default {
   difficulty: 2,
   context: 'experimental',
   skills: ['repeated-readings', 'mean-and-uncertainty', 'linearisation', 'gradient', 'evaluate-claim'],
-  seed: 5,
+  // Seed changed from 5 to 176 (and the scatter from 1.2 % to 2 %) on the teacher's decision of 15 November 2026: with
+  // seed 5 the readings left only about a quarter of a small square between the line of best fit and the shallowest line,
+  // too little to draw on screen. Seed 176 leaves about 0.7–0.9 of a small square for both extreme lines.
+  seed: 176,
   batch: 'pilot',
   archetypes: ['N2', 'M1', 'V3'],
   apparatus: 'horizontal spring launcher',
@@ -70,10 +73,11 @@ export default {
       measurement: {
         instrument: 'metre rule, resolution 1 mm, from the plumb-line point to each carbon-paper mark',
         reading: 'five ranges at each height; the table gives their mean, with half their range as the uncertainty',
-        noise: 'the launch speed varies slightly from shot to shot (how the ball sits and how the spring releases), by about 1.2 %; '
-          + 'since R ∝ u, each range varies by the same fraction (normal scatter, standard deviation 1.2 % of R)',
+        noise: 'the launch speed varies slightly from shot to shot (how the ball sits and how the spring releases), by about 2 %; '
+          + 'since R ∝ u, each range varies by the same fraction (normal scatter, standard deviation 2 % of R: about ±2 cm at 1 m, '
+          + 'typical of a school spring launcher)',
       },
-      noise: { type: 'gauss-relative', sd: 0.012 }, resolution: 0.001, uncertainty: 'halfRange',
+      noise: { type: 'gauss-relative', sd: 0.02 }, resolution: 0.001, uncertainty: 'halfRange',
       hide: [ROW],
     },
     R2: {
@@ -86,9 +90,6 @@ export default {
   trialsTable: { column: 'R', row: ROW, caption: 'The five ranges for h = 0.700 m.' },
   present: ['diagram', 'table', 'trials', 'graph'],
   graph: { x: 'h', y: 'R2', fit: 'linear', band: true, xErrorBars: true, zero: { x: true, y: true } },
-  // No on-screen line drawing yet (teacher's rule of 12 November 2026 asks for it on straight-line graphs): this
-  // graph has x error bars, which the click-to-plot graph cannot show. Remove this line once it can.
-  noPlot: 'the graph has x error bars, which the on-screen graph cannot show yet',
 
   // ----- 3. Results -----
   results: {
@@ -175,6 +176,8 @@ export default {
       },
       {
         label: 'e', sections: ['projectiles'], marks: 2, ao: 'AO2', msFigure: 'graph-ms',
+        // Click-to-plot (question bank): the student draws the line of best fit through the error bars (both x and y).
+        plot: { lines: ['best'] },
         question: 'Determine the gradient of the graph of $R^2$ against $h$.',
         numeric: d.num('gradient'),
         markscheme: [
@@ -198,6 +201,8 @@ export default {
       },
       {
         label: 'g', sections: ['projectiles'], marks: 2, ao: 'AO3', msFigure: 'graph-ms',
+        // Click-to-plot: the steepest and shallowest lines through the error bars; the marks are for the range and the conclusion.
+        plot: { lines: ['steep', 'shallow'] },
         asks: { conclusion: ['do not support', 'not supported', 'is above this range'] },
         question: `The manufacturer states that the launch speed is $${d.stated('claimedU')}\\ \\text{m s}^{-1}$. Discuss whether the data support this statement.`,
         markscheme: [

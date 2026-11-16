@@ -126,6 +126,8 @@ export default {
       },
       {
         label: 'b', sections: ['equilibrium'], marks: 1, ao: 'AO2', msFigure: 'graph-ms',
+        // Click-to-plot (question bank): the student plots the point on the graph and it is marked on screen.
+        plot: { points: true },
         question: 'Plot the point for Mars on the graph.',
         markscheme: [`Point at $T_\\text{model} = ${d.int(d.r.TMars.value)}\\ \\text{K}$, $T_\\text{obs} = ${d.text('Tobs', MARS)}\\ \\text{K}$ (close to the dashed line), to within half a small square ✓`],
       },

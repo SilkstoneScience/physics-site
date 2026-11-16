@@ -211,8 +211,15 @@ Copy the closest existing dataset and change it. The parts, in order:
      (`figure: 'graph'` on the part), the plot goes on that part or a later one, and the question bank then shows only
      the drawable graph in that part. **Rule (teacher, 12 November 2026): every new dataset with a straight-line graph has
      a plot on the part that first needs the line.** The validator warns (`plot-missing`) otherwise; a dataset that can't
-     use it yet gives the reason in a top-level `noPlot: '<reason>'`. Not yet supported: x error bars, plotting a
-     missing point, curves.
+     use it yet gives the reason in a top-level `noPlot: '<reason>'`. **x error bars** (since 15 November 2026, first
+     used in A1-B01) are shown on screen too, and a line passes a point when it crosses the box the two bars make (the
+     rule `gradientBand` uses for the steepest and shallowest lines). **Plotting a missing point** (A3-B01, B2-B01): a
+     "Plot the point for …" part gets `plot: { points: true }`; the student plots the row(s) that `graph.omit` leaves
+     out, on a graph showing the others (and any `referenceLine`), and all the part's marks are for it (a point within
+     half a small square earns them). The validator checks that the points are exactly the omitted rows and tries the
+     marking (one small square out, an extra point or an empty graph fail), and warns (`plot-missing`) when a part says
+     "Plot" but has no on-screen plot (a graph that hides a point only to avoid giving away a calculated value, like
+     D1-B01, is not warned about). Not yet supported: curves.
    - **Claims**: `constantValue` and `constantRatio` (`{ column, rows?, expect }`), `integerMultiples` (`{ column, factor, expect: true }`).
    - **Area**: a result with `check: 'area'`, `area: { from, to, baseline }`, `dims: { of: 'xy' }` and a range (policy:
      covers ±5 % and the count-the-squares estimate; no wider than ±20 %).

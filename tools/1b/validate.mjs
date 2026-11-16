@@ -523,6 +523,12 @@ function run(def, q, topics, fail, warn) {
   if (g && g.fit === 'linear' && g.style !== 'trace' && !(q.parts || []).some((pt) => pt.plot) && !(typeof def.noPlot === 'string' && def.noPlot.trim())) {
     warn('plot-missing', 'graph', 'the graph has a straight-line fit, but no part lets the student draw the line on screen: add plot: { lines: [\'best\'] } to the part that first needs the line (tools/1b/README.md, "Click-to-plot"), or give the reason in noPlot');
   }
+  // The same rule for a part that asks the student to plot a point the graph leaves out (November 2026). (A graph may
+  // also leave a point out only so as not to give away a value the student calculates: no warning then.)
+  const asksToPlot = (q.parts || []).some((pt) => /^\s*(<[^>]+>\s*)*Plot\b/.test(String(pt.question || '')));
+  if (g && (g.omit || []).length && asksToPlot && !(q.parts || []).some((pt) => pt.plot && (pt.plot.points || []).length) && !(typeof def.noPlot === 'string' && def.noPlot.trim())) {
+    warn('plot-missing', 'graph', 'the graph leaves out a point for the student to plot, but no part lets them plot it on screen: add plot: { points: true } to that part (tools/1b/README.md, "Click-to-plot"), or give the reason in noPlot');
+  }
 
   // ---------- 7. Diagrams and all SVG ----------
   for (const fig of figures) checkSvg(fig, def, fail);
@@ -1323,7 +1329,9 @@ function checkPlot(def, q, pt, d, rows, failTo) {
   const inData = (q.data || []).find((x) => x.kind === 'figure' && x.figure === 'graph');
   const revealedBy = (q.parts || []).findIndex((x) => x.figure && typeof x.figure === 'object' && x.figure.figure === 'graph');
   const student = inData || (revealedBy >= 0 ? q.parts[revealedBy].figure : null);
-  if (!g || g.fit !== 'linear' || !student) { fail('plot', where, 'a click-to-plot part needs the dataset\'s graph (points with a straight-line fit), shown in the question'); return; }
+  // Two kinds: plotting the point(s) the graph leaves out (plot: { points: true }), or drawing lines on it.
+  const pointsOnly = !p.lines && (p.points || []).length > 0;
+  if (!g || (!pointsOnly && g.fit !== 'linear') || !student) { fail('plot', where, pointsOnly ? 'plotting a missing point needs the dataset\'s graph, shown in the question' : 'a click-to-plot part needs the dataset\'s graph (points with a straight-line fit), shown in the question'); return; }
   if (!inData && (q.parts || []).indexOf(pt) < revealedBy) fail('plot', where, 'the graph is only shown in a later part, so this part can\'t draw on it');
   if (p.on !== 'graph') fail('plot', where, 'the plot must be drawn on the figure "graph"');
   if (!pt.msFigure) fail('plot', where, 'the part needs msFigure: \'graph-ms\', so the mark scheme shows the examiner\'s lines');
@@ -1344,15 +1352,40 @@ function checkPlot(def, q, pt, d, rows, failTo) {
   // 2. The points already on the graph: the rows the picture shows, with the error bars it draws.
   const shownRows = rows.map((_, i) => i).filter((i) => !(g.omit || []).includes(i));
   const barred = new Set(G.ebars.filter((b) => b.axis === 'y').map((b) => b.row));
-  if (G.ebars.some((b) => b.axis === 'x')) fail('plot', where, 'click-to-plot graphs can\'t show x error bars yet');
-  const want = shownRows.map((i) => [rows[i][g.x], rows[i][g.y], barred.has(i) ? d.unc(g.y, i) : 0]);
-  if ((p.given || []).length !== want.length || want.some((w, j) => w.some((v, k) => Math.abs(v - p.given[j][k]) > 1e-9))) fail('plot', where, 'the points on the on-screen graph are not the points (and error bars) of the picture');
-  if ((p.points || []).length) fail('plot', where, 'plotting missing points on screen is not set up for Paper 1B yet');
+  const barredX = new Set(G.ebars.filter((b) => b.axis === 'x').map((b) => b.row));
+  const exOf = (i) => (barredX.has(i) ? d.unc(g.x, i) : 0);
+  const want = shownRows.map((i) => [rows[i][g.x], rows[i][g.y], barred.has(i) ? d.unc(g.y, i) : 0, ...(barredX.size ? [exOf(i)] : [])]);
+  if ((p.given || []).length !== want.length || want.some((w, j) => w.length !== p.given[j].length || w.some((v, k) => Math.abs(v - p.given[j][k]) > 1e-9))) fail('plot', where, 'the points on the on-screen graph are not the points (and error bars) of the picture');
+  // A dashed reference line on the picture (graph.referenceLine) is on the screen too.
+  const ref = g.referenceLine ? (typeof g.referenceLine === 'function' ? g.referenceLine(d) : g.referenceLine) : null;
+  if (ref ? !(p.reference && close(p.reference.gradient, ref.m) && Math.abs(p.reference.intercept - ref.c) <= 1e-9 * (1 + Math.abs(ref.c))) : p.reference) fail('plot', where, 'the reference line on the screen is not the one on the picture');
+
+  if (pointsOnly) {
+    // The missing points: exactly the rows the picture leaves out, and every mark is for plotting them.
+    const missing = (g.omit || []).map((i) => [rows[i][g.x], rows[i][g.y]]);
+    if (!missing.length || p.points.length !== missing.length || missing.some((m, j) => m.some((v, k) => Math.abs(v - p.points[j][k]) > 1e-9))) fail('plot', where, 'the points to plot are not the rows the graph leaves out (graph.omit)');
+    if (p.worth !== pt.marks) fail('plot', where, `every mark of a "plot the point" part is for the plotting: worth must be ${pt.marks}`);
+    if (p.fit) fail('plot', where, 'a "plot the point" graph has no line');
+    if (bad) return;
+    const marked = (pts) => Plot.check(p, { points: pts, line: null }, pt.marks);
+    const ideal = Plot.ideal(p).points;
+    const full = marked(ideal);
+    if (!full.right || full.score !== pt.marks) fail('plot', where, `the correct point is not accepted (${full.feedback.filter((f) => !f.ok).map((f) => f.text).join(' ')})`);
+    if (marked([]).score !== 0) fail('plot', where, 'an empty graph is accepted');
+    const moved = (dx, dy) => ideal.map(([x, y], j) => (j ? [x, y] : [x + dx, y + dy]));
+    if (marked(moved(0, p.y.step)).right) fail('plot', where, 'a point one small square too high is accepted');
+    if (marked(moved(p.x.step, 0)).right) fail('plot', where, 'a point one small square to the right is accepted');
+    if (marked([...ideal, [p.x.min, p.y.min]]).right) fail('plot', where, 'an extra point is accepted');
+    // The point must not already be on the picture students see.
+    if (missing.some(([x, y]) => (p.given || []).some((k) => Math.abs(k[0] - x) < 1e-9 && Math.abs(k[1] - y) < 1e-9))) fail('plot', where, 'the point to plot is already on the graph');
+    return;
+  }
+  if ((p.points || []).length) fail('plot', where, 'a graph that asks for lines can\'t also ask for points');
 
   // 3. The lines, recalculated from the table.
   const wantSkip = shownRows.map((row, j) => ((g.exclude || []).includes(row) ? j : -1)).filter((j) => j >= 0);
   const followedRows = shownRows.filter((row) => !(g.exclude || []).includes(row));
-  const pts = d.fitRows.map((i) => ({ x: rows[i][g.x], y: rows[i][g.y], ex: 0, ey: d.unc(g.y, i) || 0 }));
+  const pts = d.fitRows.map((i) => ({ x: rows[i][g.x], y: rows[i][g.y], ex: exOf(i), ey: d.unc(g.y, i) || 0 }));
   const fit = linearFit(pts.map((k) => k.x), pts.map((k) => k.y));
   const band = g.band ? gradientBand(pts) : null;
   const own = { best: fit, steep: band && band.steep, shallow: band && band.shallow };
