@@ -206,6 +206,7 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Code: shared player `js/anim/player.js`, one scene per file in `js/anim/`, styles `css/animations.css`. `tools/anim-sheet.html?anim=<name>` (not published) draws many frames on one page for checking; `?t=12` on an animation page freezes it at 12 s.
 - 16 November 2026 (teacher's requests): longer holds; background music generated in the browser (`js/anim/music.js`), on by default with its own score per animation; click or tap the picture to pause; powers of ten with better DNA, virus, blood cells and a travelling light pulse, and captions giving "how many times bigger" in ordinary numbers. New: A.2 what friction is, A.2 collisions, explosions and rockets (the rocket equation labelled beyond the syllabus), A.3 a bungee jump (energy), A.4 the rolling race (HL).
 - 16 November 2026 (teacher's request): A.4 "Why the sin θ in torque?" (`torque.html`, scene `js/anim/torque.js`, linked from A.4 section 2), waiting for the teacher's check.
+- 16 November 2026 (teacher's request): every animation has a speed button (1×, 1.5×, 2×), a draggable scrubber and ← / → keys; on phones the buttons are in a row below the picture.
 - Next: the teacher's check of these, then theme B.
 
 ## Still to do
