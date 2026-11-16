@@ -53,7 +53,7 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 ## The list
 
 <!-- LIST:START (written by tools/list-2028.mjs --write; do not edit by hand) -->
-136 places in 48 files.
+141 places in 50 files.
 
 ### Topic pages
 
@@ -135,6 +135,10 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 178: .tag.y2028 { background: var(--surface); border: 1px solid var(--theme-d); color: var(--theme-d); }
   - line 179: .new2028 { border-left: 4px solid var(--theme-d); padding-left: 12px; margin: 14px 0; }
   - line 180: .new2028-note { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--theme-d); border-radius: var(--radius); padding: 8px 14px; margi…
+- `js/anim/stars.js` (3)
+  - line 24: 2028: the Chandrasekhar (about 1.4 M☉) and Oppenheimer–Volkoff (about 2–3 M☉) limits, as on themes/e5.html. */
+  - line 129: [145.2, 151.4, '(Exams from 2028) A core below about 1.4 solar masses becomes a white dwarf; up to about 2–3 solar masses, a neutron star; above that, a black hole.'],
+  - line 389: const n1 = D.wrap(s, '(Exams from 2028) Chandrasekhar limit ≈ 1.4 M☉; Oppenheimer–Volkoff limit ≈ 2–3 M☉.', Math.min(W - 40, 760));
 - `js/questions.js` (1)
   - line 360: ${q.y2028 ? ' New for 2028 ' : ''}
 - `js/site.js` (25)
@@ -237,6 +241,9 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 
 ### Other pages and data
 
+- `animations/hr-diagram.html` (2)
+  - line 32: New for 2028 For exams from 2028 the guide adds the role of the Chandrasekhar and Oppenheimer–Volkoff limits: see step 14.
+  - line 55: New for 2028 For exams from 2028: what the core becomes depends on its mass. Below about 1.4 solar masses (the Chandrasekhar limit ), electron degeneracy pressure holds i…
 - `animations/standing-waves.html` (1)
   - line 59: New for 2028 For exams from 2028, the guide asks you to work out the relationship between the wavelength and the length for the $n$th harmonic yourself, and to see that t…
 - `ee/index.html` (1)

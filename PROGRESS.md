@@ -210,7 +210,8 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Theme B (16 November 2026): B.1 heating ice to steam, B.3 where gas pressure comes from, B.5 inside a wire; linked from B.1, B.3 and B.5.
 - Theme C (16 November 2026): C.1 simple harmonic motion, C.2 transverse and longitudinal waves, C.3 wavefronts and rays (a ripple tank computed from the wave equations), C.4 standing waves, C.5 the Doppler effect; linked from C.1 to C.5. Theme B is live.
 - Theme D (16 November 2026): D.1 gravitational field lines, D.1 the potential well (HL, labelled as a model of potential), D.2 electric field lines and equipotentials, D.3 charges in electric and crossed fields, D.4 induction (HL); linked from D.1 to D.4. Themes B and C are live.
-- Next: the teacher's check of theme D, then theme E (Rutherford scattering, energy levels and spectra, a star's path on the HR diagram) and the Think deeper big question on curved spacetime.
+- Theme E (16 November 2026): E.1 Rutherford scattering, E.1 energy levels and spectra, E.5 the HR diagram and how stars evolve (approximate paths, labelled; the mass limits tagged New for 2028); linked from E.1 and E.5. Themes B, C and D are live.
+- Next: the teacher's check of theme E, then the Think deeper big question on curved spacetime; ideas for later in `docs/ANIMATIONS_PLAN.md`.
 
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).

@@ -103,7 +103,13 @@ Theme D (batch 4)
   Lenz's law; a falling magnet; an ac generator)
   (Theme D built 16 November 2026; waiting for the teacher's check.)
 
-Theme E (batch 5): E.1 Rutherford scattering; E.1 energy levels and spectra; E.5 a star's path on the
-HR diagram.
+Theme E (built 16 November 2026; waiting for the teacher's check)
+- [x] E.1 Rutherford scattering: `rutherford.html` (the apparatus and what was seen; exact Coulomb paths past one gold nucleus,
+  tan(θ/2) = d/2b; (HL) 5.0 MeV head-on: d = 4.5 × 10⁻¹⁴ m, R = 7.0 × 10⁻¹⁵ m, about 33 MeV to reach the surface)
+- [x] E.1 Energy levels and spectra: `energy-levels.html` (hydrogen levels to scale; Balmer lines from hc/ΔE, drawn at the
+  measured wavelengths; absorption by gas with some atoms in n = 2; the Bohr formula only on the HL end-card row)
+- [x] E.5 The HR diagram: `hr-diagram.html` (real stars at approximate real positions; radii from L = 4πR²σT⁴; approximate paths,
+  labelled as such, of a Sun-like star and a 25 M☉ star; the Chandrasekhar and Oppenheimer–Volkoff limits tagged New for 2028)
+- Ideas for later: E.3 random decay and half-life; E.4 a fission chain reaction.
 
 Think deeper: a big question on curved spacetime, with an animation.
