@@ -2,6 +2,8 @@
 import { generate, SHOWCASE_SEED, GEN_VERSION, makeRng } from './generator.js';
 import { Sim } from './sim.js';
 import * as P from './physics.js';
+import { buildSector, systemSeed, starDistance, apparentBrightness } from './sector.js';
+import { solarSystem, isSol } from './solar.js';
 
 const $ = (id) => document.getElementById(id);
 const params = new URLSearchParams(location.search);
@@ -32,9 +34,10 @@ const saveSettings = () => { try { localStorage.setItem('universe-settings', JSO
 // ---------- State ----------
 const state = {
   selected: -1, infoOpen: false, paused: false, stepped: false, warp: 5, quality: 'normal', qualityNote: '',
-  layers: { orbits: true, labels: true, vectors: false, areas: false, field: false, equi: false, well: false, graph: false, truescale: false }, settings,
+  layers: { orbits: true, labels: true, vectors: false, areas: false, field: false, equi: false, well: false, graph: false, truescale: false, stars: false }, settings,
+  place: { seed: SHOWCASE_SEED, star: 0 }, starSel: -1,      // which neighbourhood (seed) and which of its stars we are at
 };
-const app = { state, sim: null, scene: null, rig: null, viz: null, ui: null, actions: null };
+const app = { state, sim: null, scene: null, rig: null, viz: null, ui: null, actions: null, sector: null };
 let M = null;                               // the modules that need Three.js, loaded after the gate
 let raf = 0, last = 0, pendingStep = 0, introDone = false, arrivalEnd = 0;
 const perf = { n: 0, frame: new Float32Array(4096), cpu: new Float32Array(4096), gpu: new Float32Array(4096), gpuN: 0, calls: 0, tris: 0, fps: 60, acc: 0, cnt: 0, on: false };
@@ -43,9 +46,23 @@ const fpsInfo = { fps: 60, calls: 0, tris: 0 };
 function seedFromUrl() {
   const s = params.get('seed');
   const v = Number(params.get('v') || GEN_VERSION);
-  return { seed: s && s.trim() ? s.trim().slice(0, 40) : SHOWCASE_SEED, version: v === 1 ? 1 : GEN_VERSION, unknown: v !== 1 };
+  const star = Math.max(0, Math.floor(Number(params.get('star')) || 0));
+  return { seed: s && s.trim() ? s.trim().slice(0, 40) : SHOWCASE_SEED, star, version: v === 1 ? 1 : GEN_VERSION, unknown: v !== 1 };
 }
-function linkFor(seed) { return `${location.origin}${location.pathname}?seed=${encodeURIComponent(seed)}&v=${GEN_VERSION}`; }
+const query = (place) => (place.seed === SHOWCASE_SEED && !place.star ? '' : `?seed=${encodeURIComponent(place.seed)}${place.star ? `&star=${place.star}` : ''}&v=${GEN_VERSION}`);
+function linkFor(place) { return `${location.origin}${location.pathname}${query(place) || `?seed=${SHOWCASE_SEED}&v=${GEN_VERSION}`}`; }
+// The system at a place, and the list of other stars as seen from it.
+function systemAt(place) {
+  if (isSol(place.seed)) { app.sector = null; place.seed = 'sol'; place.star = 0; return { sys: solarSystem(), neighbours: [] }; }
+  if (!app.sector || app.sector.seed !== place.seed) app.sector = buildSector(place.seed);
+  let here = app.sector.stars.find((s) => s.index === place.star);
+  if (!here) { place.star = 0; here = app.sector.stars[0]; }
+  const neighbours = app.sector.stars.filter((s) => s !== here).map((s) => {
+    const d = starDistance(s, here);
+    return { index: s.index, name: s.name, dist: d, dir: [0, 1, 2].map((k) => (s.pos[k] - here.pos[k]) / d), b: apparentBrightness(s.luminosity, d), color: s.color };
+  });
+  return { sys: generate(systemSeed(place.seed, place.star)), neighbours };
+}
 
 // ---------- Building a system ----------
 function showcaseBody(sim) {
@@ -53,19 +70,22 @@ function showcaseBody(sim) {
   const ps = sim.sys.planets;
   return (ps.find((p) => p.rings && p.type === 'gas' && p.moons.length) || ps.find((p) => p.rings) || ps.find((p) => p.type === 'gas') || ps.find((p) => p.type === 'ocean') || ps[Math.min(2, ps.length - 1)]).id;
 }
-function build(seed, quality) {
+function build(place, quality) {
+  state.place = place; state.starSel = -1;
+  const { sys, neighbours } = systemAt(place);
   if (app.scene) { app.scene.renderer.forceContextLoss(); app.scene.dispose(); }
   const stage = $('stage'); stage.textContent = '';
   const canvas = document.createElement('canvas');
   canvas.tabIndex = 0;
   canvas.setAttribute('aria-label', '3D view of the star system. Drag to look around, scroll to zoom. Every body is also in the Bodies list, and every control has a button; press ? for the keyboard shortcuts.');
   stage.appendChild(canvas);
-  const sim = app.sim = new Sim(generate(seed));
+  const sim = app.sim = new Sim(sys);
   state.quality = quality;
-  const scene = app.scene = new M.Scene(canvas, sim, quality, reduced);
+  const scene = app.scene = new M.Scene(canvas, sim, quality, reduced, neighbours);
+  scene.showStars = state.layers.stars;
   const rig = app.rig = new M.CameraRig(sim, reduced);
   rig.attach(canvas);
-  rig.onClick = (x, y) => { const id = scene.pick(x, y); if (id >= 0) actions.select(id, true, settings.clickFly); };
+  rig.onClick = (x, y) => { const id = scene.pick(x, y); if (id >= 0) actions.select(id, true, settings.clickFly); else { const k = scene.pickStar(x, y); if (k >= 0) actions.selectStar(scene.neighbours[k].index, true); } };
   rig.onDouble = (x, y) => { const id = scene.pick(x, y); if (id >= 0) { actions.select(id, true); actions.fly(id); } };
   rig.onUser = () => app.ui.syncCamera();
   app.viz = new M.Viz(scene, sim);
@@ -108,6 +128,7 @@ const actions = app.actions = {
     state.layers[name] = on;
     if (name === 'orbits' || name === 'labels') app.scene.show[name] = on;
     else if (name === 'truescale') app.scene.trueScaleTarget = on ? 1 : 0;
+    else if (name === 'stars') app.scene.showStars = on;
     else if (name in app.viz.on) app.viz.on[name] = on;
     if (on && (name === 'field' || name === 'equi' || name === 'well') && app.rig.mode !== 'free' && app.rig.dist < app.sim.sys.planets[0].el.a * 0.5) app.ui.toast('Zoom out (press 0) to see this across the whole system.');
     app.ui.syncLayers();
@@ -172,28 +193,52 @@ const actions = app.actions = {
     if (q === state.quality) return;
     settings.quality = q; saveSettings();
     state.qualityNote = 'You chose this setting. It is remembered on this computer.';
-    rebuildKeeping(app.sim.sys.seed, q);
+    rebuildKeeping({ ...state.place }, q);
+  },
+  // choose one of the neighbouring stars (by its number in the neighbourhood); open: also show the Stars panel
+  selectStar(index, open) {
+    state.starSel = index;
+    app.scene.starSel = app.scene.neighbours.findIndex((s) => s.index === index);
+    if (index >= 0 && !state.layers.stars) actions.layer('stars', true);
+    if (open && $('p-stars').hidden) document.querySelector('.tb[data-panel="p-stars"]').click();
+    app.ui.showStar(index);
+  },
+  // go to another star of this neighbourhood: the journey itself is skipped
+  async travel(index) {
+    if (!app.sector) return;
+    const from = app.sector.stars.find((s) => s.index === state.place.star), to = app.sector.stars.find((s) => s.index === index);
+    if (!to || to === from) return;
+    const d = starDistance(from, to), intro = $('intro');
+    $('intro-status').textContent = `Travelling ${(d / 9.46e15).toFixed(1)} light years to ${to.name}. Light itself takes ${(d / 9.46e15).toFixed(1)} years.`;
+    $('intro-fill').style.width = '0%'; $('intro-skip').hidden = true;
+    intro.hidden = false; void intro.offsetWidth; intro.classList.remove('gone');
+    await new Promise((r) => setTimeout(r, reduced ? 0 : 1300));
+    const place = { seed: state.place.seed, star: index };
+    history.replaceState(null, '', query(place) || location.pathname);
+    await rebuildKeeping(place, state.quality, true, [from.pos[0] - to.pos[0], from.pos[1] - to.pos[1], from.pos[2] - to.pos[2]]);
+    intro.classList.add('gone'); setTimeout(() => { intro.hidden = true; }, reduced ? 0 : 1500);
+    app.ui.toast(`Arrived at ${to.name}, ${(d / 9.46e15).toFixed(1)} light years from ${from.name}. Look for ${from.name} in the sky: open Stars.`, 8000);
   },
   setting(k, v) { settings[k] = v; saveSettings(); },
   seed(s) {
-    const seed = s === null ? SHOWCASE_SEED : s;
-    history.replaceState(null, '', seed === SHOWCASE_SEED ? location.pathname : `?seed=${encodeURIComponent(seed)}&v=${GEN_VERSION}`);
-    rebuildKeeping(seed, state.quality, true);
+    const place = { seed: s === null ? SHOWCASE_SEED : isSol(s) ? 'sol' : s, star: 0 };
+    history.replaceState(null, '', query(place) || location.pathname);
+    rebuildKeeping(place, state.quality, true);
   },
   newSystem() {
     // the next seed comes from the present one, so nothing depends on the clock or on Math.random
-    const r = makeRng('next/' + app.sim.sys.seed), words = ['amber', 'basalt', 'cinder', 'drift', 'ember', 'fathom', 'glacier', 'harbour', 'indigo', 'juniper', 'kestrel', 'lantern', 'meridian', 'nimbus', 'onyx', 'pilot', 'quartz', 'russet', 'solstice', 'tundra', 'umber', 'vesper', 'willow', 'zenith'];
+    const r = makeRng('next/' + state.place.seed), words = ['amber', 'basalt', 'cinder', 'drift', 'ember', 'fathom', 'glacier', 'harbour', 'indigo', 'juniper', 'kestrel', 'lantern', 'meridian', 'nimbus', 'onyx', 'pilot', 'quartz', 'russet', 'solstice', 'tundra', 'umber', 'vesper', 'willow', 'zenith'];
     actions.seed(`${r.pick(words)}-${r.pick(words)}-${r.int(10, 99)}`);
   },
   copyLink() {
-    const url = linkFor(app.sim.sys.seed);
+    const url = linkFor(state.place);
     $('link-out').textContent = url;
     if (navigator.clipboard) navigator.clipboard.writeText(url).then(() => app.ui.toast('Link copied. Anyone who opens it gets this same system.'), () => app.ui.toast('The link is shown in the System panel: select and copy it.'));
   },
   skipIntro() { if (app.rig.tr.active) { app.rig.tr.t = 1; } endIntro(); },
 };
 
-async function rebuildKeeping(seed, quality, fresh) {
+async function rebuildKeeping(seed, quality, fresh, cameFrom) {
   const keep = fresh ? null : { t: app.sim.t, sel: state.selected, open: state.infoOpen, target: app.rig.target, yaw: app.rig.yawT, pitch: app.rig.pitchT, dist: app.rig.distT, mode: app.rig.mode };
   cancelAnimationFrame(raf); running = false;
   build(seed, quality);
@@ -205,10 +250,10 @@ async function rebuildKeeping(seed, quality, fresh) {
     if (keep.sel >= 0) actions.select(keep.sel, keep.open);
   } else {
     const id = showcaseBody(app.sim);
-    placeForArrival(id);
+    placeForArrival(id, cameFrom);
     rig.flyTo(id, { dur: 4.5, pitch: 0.42, yaw: sunYaw(id) - 1.2 });
     actions.select(id, false);
-    app.ui.toast(`Arrived at the ${app.sim.sys.star.name} system.`);
+    if (!cameFrom) app.ui.toast(app.sim.sys.real ? 'The Solar System, with real masses, sizes and orbits. The clock starts on 1 January 2000.' : `Arrived at the ${app.sim.sys.star.name} system.`, 7000);
   }
   app.ui.syncCamera();
   setRunning(true);
@@ -234,10 +279,10 @@ async function prepare() {
 // (the timer covers a tab that is in the background, where animation frames do not arrive)
 const nextFrame = () => new Promise((r) => { let done = false; const go = () => { if (!done) { done = true; r(); } }; requestAnimationFrame(go); setTimeout(go, 80); });
 const sunYaw = (id) => { const p = app.sim.pos; return Math.atan2(p[1] - p[3 * id + 1], p[0] - p[3 * id]); };
-function placeForArrival(id) {
-  // start far outside the system, above its plane
+function placeForArrival(id, cameFrom) {
+  // start far outside the system, above its plane (after a journey: on the side we came from)
   const sys = app.sim.sys, a = sys.planets[sys.planets.length - 1].el.a, rig = app.rig, p = app.sim.pos;
-  const yaw = sunYaw(id) + 2.9, d = a * 2.2;
+  const yaw = cameFrom ? Math.atan2(cameFrom[1], cameFrom[0]) : sunYaw(id) + 2.9, d = a * 2.2;
   rig.pos[0] = p[3 * id] + Math.cos(yaw) * d * 0.8; rig.pos[1] = p[3 * id + 1] + Math.sin(yaw) * d * 0.8; rig.pos[2] = d * 0.6;
   rig.lookQuat(p[0] - rig.pos[0], p[1] - rig.pos[1], p[2] - rig.pos[2], rig.quat);
 }
@@ -269,15 +314,15 @@ async function boot() {
   $('intro-status').textContent = 'Loading…';
   const [sc, cam, viz, ui] = await Promise.all([import('./scene.js'), import('./camera.js'), import('./viz.js'), import('./ui.js')]);
   M = { Scene: sc.Scene, PRESETS: sc.PRESETS, U: sc.U, CameraRig: cam.CameraRig, Viz: viz.Viz, UI: ui.UI, WARPS: ui.WARPS };
-  const { seed, unknown } = seedFromUrl();
+  const { seed, star, unknown } = seedFromUrl(), place = { seed, star };
   app.ui = new M.UI(app);
   // first guess from the name of the graphics chip, then measure
   let quality = settings.quality || params.get('quality') || 'normal';
-  build(seed, quality);
+  build(place, quality);
   const gpu = app.scene.gpuName;
   if (!settings.quality && !params.get('quality')) {
     const guess = guessQuality(gpu);
-    if (guess !== quality) { quality = guess; build(seed, quality); }
+    if (guess !== quality) { quality = guess; build(place, quality); }
   }
   await prepare();
   if (!settings.quality && !params.get('quality') && !TEST) {
@@ -286,14 +331,14 @@ async function boot() {
     if (ms > 24 && quality !== 'low') want = quality === 'high' ? 'normal' : 'low';
     else if (ms < 5 && quality === 'normal') want = 'high';
     state.qualityNote = `Chosen automatically: a test frame took ${ms.toFixed(1)} ms on “${gpu}”. You can change it here.`;
-    if (want !== quality) { quality = want; build(seed, quality); await prepare(); }
+    if (want !== quality) { quality = want; build(place, quality); await prepare(); }
   } else state.qualityNote = settings.quality ? 'You chose this setting. It is remembered on this computer.' : '';
   app.ui.rebuild();
   wireKeys();
   // the arrival
   const id = showcaseBody(app.sim), rig = app.rig;
   if (reduced || TEST) { rig.flyTo(id, { instant: true, pitch: 0.42, yaw: sunYaw(id) - 1.2 }); }
-  else { placeForArrival(id); rig.flyTo(id, { dur: 9, pitch: 0.2, yaw: sunYaw(id) - 0.95 }); $('intro-skip').hidden = false; }
+  else { placeForArrival(id); rig.flyTo(id, { dur: 9, pitch: 0.42, yaw: sunYaw(id) - 1.2 }); $('intro-skip').hidden = false; }
   actions.select(id, false);
   app.ui.syncCamera();
   arrivalEnd = performance.now() + (reduced || TEST ? 0 : 9000);
@@ -396,7 +441,7 @@ function gpuEnd() {
 // ---------- Keyboard ----------
 function wireKeys() {
   const typing = (e) => /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) && e.target.type !== 'checkbox' && e.target.type !== 'range';
-  const layerKeys = { KeyO: 'orbits', KeyL: 'labels', KeyV: 'vectors', KeyK: 'areas', KeyG: 'field', KeyP: 'equi', KeyM: 'well', KeyT: 'graph', KeyX: 'truescale' };
+  const layerKeys = { KeyO: 'orbits', KeyL: 'labels', KeyV: 'vectors', KeyK: 'areas', KeyG: 'field', KeyP: 'equi', KeyM: 'well', KeyT: 'graph', KeyX: 'truescale', KeyJ: 'stars' };
   window.addEventListener('keydown', (e) => {
     if (typing(e) || e.ctrlKey || e.metaKey || e.altKey) return;
     if ($('help').open) { if (e.key === 'Escape' || e.key === '?') { app.ui.help(false); e.preventDefault(); } return; }
@@ -437,7 +482,7 @@ function debugApi() {
     pose(name) {
       const { sim, rig, scene } = app, sys = sim.sys;
       actions.mode('kepler'); sim.t = 0; sim.computeKepler(); actions.pause(true);
-      for (const k of ['vectors', 'field', 'equi', 'well', 'areas', 'graph', 'truescale']) if (state.layers[k]) actions.layer(k, false);
+      for (const k of ['vectors', 'field', 'equi', 'well', 'areas', 'graph', 'truescale', 'stars']) if (state.layers[k]) actions.layer(k, false);
       scene.trueScale = 0; introDone || endIntro();
       const giant = sim.bodies[showcaseBody(sim)], ocean = sys.planets.find((p) => p.type === 'ocean') || sys.planets.find((p) => p.atmosphere) || sys.planets[0];
       actions.select(-1);

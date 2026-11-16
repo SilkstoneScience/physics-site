@@ -30,7 +30,7 @@ const hsl = (h, s, l) => new THREE.Color().setHSL(((h % 1) + 1) % 1, s, l, THREE
 function palette(b) {
   const v = b.vis, lerp = (a, c, t) => a + (c - a) * t;
   const o = { A: hsl(0, 0, 0.4), B: hsl(0, 0, 0.6), C: hsl(0, 0, 0.2), D: hsl(0, 0, 0.5), P: new THREE.Vector4(1, 0.9, 0.1, 0.5), atm: hsl(0.6, 0.6, 0.6), atmK: 0, H: 0.02, ringA: hsl(0.1, 0.25, 0.7), ringB: hsl(0.08, 0.2, 0.45) };
-  switch (b.type) {
+  switch (b.shade || b.type) {
     case 'rocky': o.A = hsl(lerp(0.04, 0.1, v[0]), lerp(0.1, 0.3, v[1]), 0.2); o.B = hsl(lerp(0.05, 0.11, v[2]), lerp(0.1, 0.25, v[1]), 0.5); o.C = hsl(0.06, 0.1, 0.11); o.P.set(b.atmosphere ? 0.35 : 1, 0, 0, 0); o.atm = hsl(0.08, 0.3, 0.6); o.atmK = b.atmosphere ? 0.3 : 0; break;
     case 'moonrock': o.A = hsl(lerp(0.05, 0.1, v[0]), lerp(0.02, 0.14, v[1]), 0.22); o.B = hsl(0.08, lerp(0.02, 0.1, v[2]), 0.52); o.C = hsl(0.07, 0.05, 0.1); o.P.set(1, 0, 0, 0); break;
     case 'ocean': o.A = hsl(lerp(0.24, 0.38, v[0]), 0.5, 0.2); o.B = hsl(lerp(0.08, 0.13, v[1]), 0.45, 0.42); o.C = hsl(0.07, 0.15, 0.3); o.D = hsl(lerp(0.56, 0.63, v[2]), 0.75, 0.2);
@@ -48,12 +48,19 @@ function palette(b) {
     case 'icegiant': o.A = hsl(lerp(0.5, 0.6, v[0]), 0.5, 0.5); o.B = hsl(lerp(0.5, 0.6, v[0]) + 0.02, 0.45, 0.62); o.C = hsl(0.52, 0.2, 0.85); o.D = hsl(0.62, 0.5, 0.3);
       o.P.set(lerp(3, 5.5, v[1]), 0.12, lerp(-0.5, 0.5, v[3]), 0.25); o.atm = hsl(lerp(0.5, 0.58, v[0]), 0.7, 0.68); o.atmK = 0.9; o.H = 0.018; break;
   }
+  if (b.look) {
+    const c = (a) => new THREE.Color().setRGB(a[0], a[1], a[2], THREE.SRGBColorSpace);
+    for (const k of ['A', 'B', 'C', 'D', 'atm']) if (b.look[k]) o[k] = c(b.look[k]);
+    if (b.look.atmK !== undefined) o.atmK = b.look.atmK;
+  }
   if (b.rings) { const t = b.rings.tint; o.ringA = hsl(lerp(0.07, 0.13, t), lerp(0.12, 0.4, t), 0.72); o.ringB = hsl(lerp(0.05, 0.1, t), 0.25, 0.42); }
   return o;
 }
 
 export class Scene {
-  constructor(canvas, sim, quality, reducedMotion) {
+  // neighbours: the other stars of this neighbourhood, each { index, name, dir: [x, y, z] (unit), dist (m), b (W m^-2), color }
+  constructor(canvas, sim, quality, reducedMotion, neighbours = []) {
+    this.neighbours = neighbours; this.showStars = false; this.starSel = -1;
     this.canvas = canvas; this.sim = sim; this.q = PRESETS[quality]; this.quality = quality; this.reduced = reducedMotion;
     const r = this.renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, stencil: false, powerPreference: 'high-performance' });
     r.outputColorSpace = THREE.LinearSRGBColorSpace;
@@ -73,6 +80,7 @@ export class Scene {
     this.tmpV = new THREE.Vector3(); this.tmpQ = new THREE.Quaternion(); this.labelBox = new Float32Array(256);
     this.buildComposer();
     this.buildSky();
+    this.buildNeighbourStars();
     this.buildSystem();
     this.buildMarkers();
     this.buildSegments();
@@ -159,6 +167,27 @@ export class Scene {
     const sm = new THREE.ShaderMaterial({ vertexShader: SH.STARS_VERT, fragmentShader: SH.STARS_FRAG, uniforms: { uPx: this.shared.uPx }, depthTest: false, depthWrite: false, blending: THREE.AdditiveBlending, transparent: false });
     const pts = new THREE.Points(sg, sm); pts.frustumCulled = false; pts.matrixAutoUpdate = false; pts.renderOrder = -99; this.scene.add(pts);
   }
+  buildNeighbourStars() {
+    const n = this.neighbours.length; if (!n) return;
+    const pos = new Float32Array(3 * n), col = new Float32Array(4 * n);
+    this.neighbours.forEach((s, i) => {
+      pos.set(s.dir, 3 * i);
+      // brightness on screen follows the logarithm of the real apparent brightness, as the eye does
+      col.set([s.color[0], s.color[1], s.color[2], Math.min(1, Math.max(0.3, 0.55 + 0.22 * Math.log10(s.b / 1e-8)))], 4 * i);
+    });
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('aStar', new THREE.BufferAttribute(col, 4));
+    const m = new THREE.ShaderMaterial({ vertexShader: SH.STARS_VERT, fragmentShader: SH.STARS_FRAG, uniforms: { uPx: { value: 1 } }, depthTest: false, depthWrite: false, blending: THREE.AdditiveBlending, transparent: false });
+    this.nbrMat = m;
+    const pts = new THREE.Points(g, m); pts.frustumCulled = false; pts.matrixAutoUpdate = false; pts.renderOrder = -98; this.scene.add(pts);
+  }
+  // Which neighbouring star is under this point of the screen (only while their markers are shown)? Index in the list, or -1.
+  pickStar(x, y) {
+    if (!this.showStars) return -1;
+    let best = -1, bestD = 16;
+    this.neighbours.forEach((s, i) => { if (s.front) { const d = Math.hypot(s.sx - x, s.sy - y); if (d < bestD) { bestD = d; best = i; } } });
+    return best;
+  }
   // Paint one face of the nebula cube map. Returns true while there is more to do.
   bakeSkyStep() {
     if (this.skyFace >= 6) return false;
@@ -196,7 +225,7 @@ export class Scene {
         const light = { uSun: { value: new THREE.Vector3(1, 0, 0) }, uSunCol: { value: this.sunCol } };
         if (b.rings) { shadow.uRing.value.set(b.rings.inner / b.radius, b.rings.outer / b.radius, b.rings.seed, 0.9); shadow.uRingN.value.set(b.axis[0], b.axis[1], b.axis[2]); }
         v.mat = this.material(SH.PLANET_VERT, SH.PLANET_FRAG, {
-          ...base, ...shadow, ...light, uType: { value: TYPE_ID[b.type] }, uP: { value: pal.P }, uColA: { value: pal.A }, uColB: { value: pal.B }, uColC: { value: pal.C }, uColD: { value: pal.D },
+          ...base, ...shadow, ...light, uType: { value: TYPE_ID[b.shade || b.type] }, uP: { value: pal.P }, uColA: { value: pal.A }, uColB: { value: pal.B }, uColC: { value: pal.C }, uColD: { value: pal.D },
           uAtmCol: { value: pal.atm }, uAtm: { value: pal.atmK }, uCloudRot: { value: new THREE.Vector2(1, 0) },
         });
         v.mesh = this.mesh(sphere, v.mat);
@@ -297,7 +326,7 @@ export class Scene {
   // ---------- Names and markers ----------
   buildMarkers() {
     const bodies = this.sim.bodies, cv = document.createElement('canvas');
-    cv.width = 1024; cv.height = 512;
+    cv.width = 1024; cv.height = 1024;
     const ctx = cv.getContext('2d');
     ctx.font = '500 26px system-ui, "Segoe UI", sans-serif'; ctx.textBaseline = 'middle';
     // red channel: the letters; green channel: a fat blurred copy, used as a dark halo
@@ -308,21 +337,28 @@ export class Scene {
       const w = Math.ceil(ctx.measureText(b.name).width) + 4;
       if (x + w > 1000) { x = 4; y += 38; }
       put(b.name, x + 6, y);
-      const rect = [x / 1024, 1 - (y - 18) / 512, (x + w + 8) / 1024, 1 - (y + 18) / 512, (w + 8) / 2, 18];
+      const rect = [x / 1024, 1 - (y - 18) / 1024, (x + w + 8) / 1024, 1 - (y + 18) / 1024, (w + 8) / 2, 18];
       x += w + 16;
       return rect;
     });
+    for (const s of this.neighbours) {
+      const w = Math.ceil(ctx.measureText(s.name).width) + 4;
+      if (x + w > 1000) { x = 4; y += 38; }
+      put(s.name, x + 6, y);
+      s.rect = [x / 1024, 1 - (y - 18) / 1024, (x + w + 8) / 1024, 1 - (y + 18) / 1024, (w + 8) / 2, 18];
+      x += w + 16; s.sx = 0; s.sy = 0; s.front = false;
+    }
     this.glyph = {};
     ctx.font = 'italic 600 28px Georgia, serif';
     for (const ch of ['v', 'F']) {
       const w = Math.ceil(ctx.measureText(ch).width) + 6;
       if (x + w > 1000) { x = 4; y += 38; }
       put(ch, x + 7, y);
-      this.glyph[ch] = [x / 1024, 1 - (y - 18) / 512, (x + w + 8) / 1024, 1 - (y + 18) / 512, (w + 8) / 2, 18];
+      this.glyph[ch] = [x / 1024, 1 - (y - 18) / 1024, (x + w + 8) / 1024, 1 - (y + 18) / 1024, (w + 8) / 2, 18];
       x += w + 16;
     }
     const tex = new THREE.CanvasTexture(cv); tex.minFilter = THREE.LinearFilter; tex.generateMipmaps = false;
-    const max = this.markMax = bodies.length * 3 + 48;
+    const max = this.markMax = bodies.length * 3 + 48 + this.neighbours.length * 2;
     const g = new THREE.InstancedBufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(new Float32Array([-1, -1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0]), 3));
     const mk = (n, size) => { const a = new THREE.InstancedBufferAttribute(new Float32Array(max * size), size); a.setUsage(THREE.DynamicDrawUsage); g.setAttribute(n, a); return a; };
@@ -449,6 +485,19 @@ export class Scene {
         if (v.px < 3.5 && (b.kind !== 'moon' || la > 0.01)) mark(v, 1, 13, 13, null, 0.7, 0.8, 0.95, 0.55 * (1 - v.px / 3.5) * (b.kind === 'moon' ? la : 1));
         if (sel) mark(v, 2, Math.max(30, v.px * 2 + 18), 0, null, 1, 0.88, 0.6, v.px > 400 ? 0 : 0.75);
       } else v.la = 0;
+    }
+    // neighbouring stars: always a point of light; with "Neighbouring stars" on, also a ring and a name
+    if (this.nbrMat) this.nbrMat.uniforms.uPx.value = this.shared.uPx.value * 1.9;
+    for (let i = 0; i < this.neighbours.length; i++) {
+      const s = this.neighbours[i];
+      tv.set(s.dir[0], s.dir[1], s.dir[2]).applyQuaternion(qi);
+      s.front = tv.z < -0.05;
+      if (!s.front) continue;
+      s.sx = hw + tv.x / -tv.z * focal; s.sy = hh - tv.y / -tv.z * focal;
+      if (!this.showStars) continue;
+      const K = 4e10, sel = this.starSel === i;
+      this.addMark(s.dir[0] * K, s.dir[1] * K, s.dir[2] * K, sel ? 2 : 1, sel ? 30 : 15, 15, null, sel ? 1 : 0.75, sel ? 0.88 : 0.85, sel ? 0.6 : 1, sel ? 0.9 : 0.7, 0);
+      this.addMark(s.dir[0] * K, s.dir[1] * K, s.dir[2] * K, 0, s.rect[4], s.rect[5], s.rect, sel ? 1 : 0.8, sel ? 0.93 : 0.88, sel ? 0.75 : 1, sel ? 0.95 : 0.7, 6);
     }
     let placed = 0; const box = this.labelBox;
     for (let pass = 0; pass < 3; pass++) {

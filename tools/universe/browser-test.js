@@ -128,3 +128,48 @@ export async function run() {
   const failed = results.filter((r) => r.startsWith('✗'));
   return { passed: results.length - failed.length, failed: failed.length, failures: failed, all: results };
 }
+
+// Phase 2: neighbouring stars, travel, and the real Solar System. Run after run():
+//   (await import('/tools/universe/browser-test.js')).runPhase2()
+export async function runPhase2() {
+  const UE = window.UE, { app, actions: A, state } = UE, results = [];
+  const ok = (cond, name, detail = '') => results.push(`${cond ? '✓' : '✗'} ${name}${cond ? '' : ' — ' + detail}`);
+  const $ = (id) => document.getElementById(id), settle = () => new Promise((r) => setTimeout(r, 2500));
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  if (state.place.seed !== 'starfall' || state.place.star !== 0) { A.seed(null); await settle(); }
+  const home = app.sim.sys.star.name, homeSeed = app.sim.sys.seed, nbrs = app.scene.neighbours;
+  ok(nbrs.length >= 19 && document.querySelectorAll('#star-list button').length === nbrs.length, 'the Stars panel lists every neighbouring star', `${nbrs.length}`);
+  const target = nbrs.slice().sort((a, b) => a.dist - b.dist)[0];
+  A.selectStar(target.index, true); UE.advance(0.02);
+  ok(!$('p-stars').hidden && $('star-detail').textContent.includes(target.name) && state.layers.stars, 'choosing a star opens its details and marks the stars in the sky');
+  ok($('star-detail').textContent.includes((target.dist / 9.46e15).toPrecision(3)), 'its distance is shown in light years');
+  // clicking its marker in the sky selects it too
+  A.selectStar(-1); app.rig.setMode('free'); app.rig.fyaw = Math.atan2(target.dir[1], target.dir[0]); app.rig.fpitch = Math.asin(target.dir[2]); UE.advance(0.02); UE.advance(0.02);
+  const k = nbrs.indexOf(target), cv = app.scene.canvas; cv.setPointerCapture = () => {};
+  for (const type of ['pointerdown', 'pointerup']) cv.dispatchEvent(new PointerEvent(type, { clientX: nbrs[k].sx, clientY: nbrs[k].sy, button: 0, pointerId: 1, bubbles: true }));
+  ok(state.starSel === target.index, 'clicking a star in the sky selects it', `${state.starSel}`);
+  const outward = target.dir.slice();
+  await A.travel(target.index); await settle();
+  ok(app.sim.sys.star.name === target.name && state.place.star === target.index, 'travelling there builds that star\'s system', app.sim.sys.star.name);
+  ok(new URLSearchParams(location.search).get('star') === String(target.index) && new URLSearchParams(location.search).get('seed') === 'starfall', 'the address records the seed and the star', location.search);
+  const back = app.scene.neighbours.find((s) => s.index === 0);
+  ok(back && back.name === home && dot(back.dir, outward) < -0.999999, 'from there, the home star is in exactly the opposite direction, at the same distance', back && `${dot(back.dir, outward)}`);
+  ok(back && Math.abs(back.dist / target.dist - 1) < 1e-12, 'and the same distance away');
+  ok($('intro').classList.contains('gone'), 'the travel screen has cleared');
+  await A.travel(0); await settle();
+  ok(app.sim.sys.seed === homeSeed && app.sim.sys.star.name === home && !new URLSearchParams(location.search).get('star'), 'travelling back gives the same home system');
+  // the real Solar System
+  A.seed('sol'); await settle();
+  const sim = app.sim;
+  ok(sim.sys.real && sim.bodies.map((b) => b.name).join().startsWith('Sun,Mercury,Venus,Earth,Moon,Mars,Jupiter'), 'the seed "sol" loads the real Solar System');
+  ok($('sys-line').textContent.includes('Solar System') && new URLSearchParams(location.search).get('seed') === 'sol', 'it is named in the corner and in the address');
+  A.pause(true); UE.advance(0.02); app.ui.last = 0; app.ui.tick(performance.now() + 1e6, null);
+  ok(/^\d+ January 2000/.test($('t-date').textContent), 'its clock shows a real date', $('t-date').textContent);
+  ok($('star-list').hidden && app.scene.neighbours.length === 0, 'it has no invented neighbours');
+  const earth = sim.bodies.find((b) => b.name === 'Earth'); A.select(earth.id, true); UE.advance(0.02); app.ui.last = 0; app.ui.tick(performance.now() + 2e6, null);
+  ok($('pane-data').textContent.includes('9.81 N kg') || $('pane-data').textContent.includes('9.8'), "Earth's surface field strength reads 9.8 N/kg", $('pane-data').textContent.slice(0, 200));
+  A.seed(null); await settle();
+  ok(app.sim.sys.seed === homeSeed, '"Starting system" returns to the invented universe');
+  const failed = results.filter((r) => r.startsWith('✗'));
+  return { passed: results.length - failed.length, failed: failed.length, failures: failed, all: results };
+}

@@ -55,6 +55,7 @@
 
     <nav class="hud toolbar" aria-label="Tools">
       <button type="button" class="tb" data-panel="p-bodies" aria-expanded="false" aria-controls="p-bodies">Bodies</button>
+      <button type="button" class="tb" data-panel="p-stars" aria-expanded="false" aria-controls="p-stars">Stars</button>
       <button type="button" class="tb" data-panel="p-view" aria-expanded="false" aria-controls="p-view">Show</button>
       <button type="button" class="tb" data-panel="p-camera" aria-expanded="false" aria-controls="p-camera">Camera</button>
       <button type="button" class="tb" data-panel="p-system" aria-expanded="false" aria-controls="p-system">System</button>
@@ -65,6 +66,14 @@
     <section id="p-bodies" class="hud pop" hidden aria-label="Bodies in this system">
       <h2>Bodies</h2>
       <ul id="body-list" class="body-list"></ul>
+    </section>
+
+    <section id="p-stars" class="hud pop wide" hidden aria-label="Neighbouring stars">
+      <h2>Neighbouring stars</h2>
+      <p id="stars-intro" class="small"></p>
+      <label id="stars-toggle"><input type="checkbox" data-layer="stars"> Mark them in the sky <kbd>J</kbd></label>
+      <ul id="star-list" class="body-list"></ul>
+      <div id="star-detail" aria-live="polite"></div>
     </section>
 
     <section id="p-view" class="hud pop" hidden aria-label="What to show">
@@ -100,6 +109,8 @@
       <p class="small">Every system is built from a seed: a word or number. The same seed always builds the same system, on any computer.</p>
       <form id="seed-form"><label for="seed-input">Seed</label> <input id="seed-input" type="text" maxlength="40" autocomplete="off" spellcheck="false"> <button class="btn" type="submit">Go</button></form>
       <p><button type="button" class="btn" id="new-system">New system</button> <button type="button" class="btn" id="copy-link">Copy link</button> <button type="button" class="btn" id="showcase">Starting system</button></p>
+      <p><button type="button" class="btn" id="go-sol">The real Solar System</button></p>
+      <p class="small">The Solar System uses real masses, sizes and orbits from NASA. Its planets' surfaces are still drawn by the engine, so Earth's continents are invented.</p>
       <p id="link-out" class="small mono" aria-live="polite"></p>
     </section>
 
@@ -197,7 +208,7 @@
           <table class="keys">
             <tr><th scope="row"><kbd>O</kbd> <kbd>L</kbd> <kbd>V</kbd> <kbd>K</kbd></th><td>Orbits, names, arrows, swept areas</td></tr>
             <tr><th scope="row"><kbd>G</kbd> <kbd>P</kbd> <kbd>M</kbd> <kbd>T</kbd></th><td>Field map, equipotentials, potential well, T²–r³ graph</td></tr>
-            <tr><th scope="row"><kbd>X</kbd></th><td>True scale</td></tr>
+            <tr><th scope="row"><kbd>X</kbd> <kbd>J</kbd></th><td>True scale; mark the neighbouring stars</td></tr>
             <tr><th scope="row"><kbd>Esc</kbd></th><td>Close panels</td></tr>
           </table>
         </div>
@@ -210,6 +221,8 @@
             <li><strong>Brightness.</strong> Outer planets are shown brighter than they would look: the exposure is adjusted, as a camera would.</li>
             <li><strong>Test mass.</strong> Only the planet's gravity acts on it: no air, no spin, no star.</li>
             <li><strong>Potential well.</strong> A model: height stands for gravitational potential. Space is not really shaped like this.</li>
+            <li><strong>Other stars.</strong> Each system has 20 to 28 invented neighbours within 12 light years, about as crowded as the Sun's real neighbourhood. Travelling to one skips the journey: even light would take years.</li>
+            <li><strong>The real Solar System.</strong> Masses, sizes, tilts and orbits are NASA's (planetary fact sheets, and JPL's orbital elements for 1 January 2000). Only seven large moons are included, starting at arbitrary points of their real orbits.</li>
           </ul>
           <h3>In your notes</h3>
           <ul class="links">
@@ -219,6 +232,7 @@
             <li><a href="../themes/d1.html#potential">D.1 Gravitational potential</a>, <a href="../themes/d1.html#escape">escape speed</a> and <a href="../themes/d1.html#energy">orbital energy</a> <span class="tag hl">HL</span></li>
             <li><a href="../themes/a2.html#circular">A.2 Circular motion</a></li>
             <li><a href="../themes/a3.html#mechanical">A.3 Mechanical energy</a></li>
+            <li><a href="../themes/b1.html#luminosity">B.1 Luminosity and apparent brightness</a> and <a href="../themes/e5.html#units">E.5 Astronomical distances</a></li>
           </ul>
         </div>
       </div>

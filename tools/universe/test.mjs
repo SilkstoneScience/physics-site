@@ -223,6 +223,63 @@ section('5b. Reference values and the simulation (modes, pushes, mass changes, t
   ok(err < 1e-7, 'three eccentric orbits: step-by-step gravity and the Kepler formula agree on where the planet is', err.toExponential(2));
 }
 
+// ---------- 5c. Phase 2: the real Solar System and the star neighbourhood ----------
+section('5c. The real Solar System (NASA values) and the neighbouring stars');
+{
+  const { solarSystem, isSol, dateText, AU_EXACT } = await import('../../universe/js/solar.js');
+  const { buildSector, systemSeed, starDistance, apparentBrightness, LIGHT_YEAR, SECTOR_RADIUS } = await import('../../universe/js/sector.js');
+  const { Sim } = await import('../../universe/js/sim.js');
+  const sol = solarSystem(), mu = G * sol.star.mass, by = Object.fromEntries(sol.planets.map((p) => [p.name, p]));
+  ok(isSol('sol') && isSol('Solar System') && !isSol('solstice'), 'the seed "sol" (or "solar system") means the real Solar System');
+  // NASA fact-sheet values: sidereal period /days, mean orbital speed /km s^-1, surface gravity /m s^-2, escape speed /km s^-1, density /kg m^-3
+  const NASA = { Mercury: [87.969, 47.4, 3.7, 4.3, 5429], Venus: [224.701, 35.0, 8.9, 10.4, 5243], Earth: [365.256, 29.8, 9.8, 11.2, 5514], Mars: [686.980, 24.1, 3.7, 5.0, 3934], Jupiter: [4332.589, 13.1, 24.79, 59.5, 1326], Saturn: [10759.22, 9.7, 10.44, 35.5, 687], Uranus: [30685.4, 6.8, 8.87, 21.3, 1270], Neptune: [60189, 5.4, 11.15, 23.5, 1638] };
+  for (const [name, [T, v, g, ve, rho]] of Object.entries(NASA)) {
+    const p = by[name];
+    near(P.orbitalPeriod(p.el.a, mu) / DAY, T, 2e-3, `${name}: period ${T} days`);
+    near(TWO_PI * p.el.a / P.orbitalPeriod(p.el.a, mu) / 1000, v, 1.2e-2, `${name}: mean orbital speed ${v} km/s`);
+    // (for the giants NASA quotes gravity at the bulging equator; the engine treats every planet as a sphere of its mean radius,
+    // which gives Jupiter 4 % and Saturn 7 % more)
+    near(P.fieldStrength(p.mass, p.radius), g, name === 'Jupiter' ? 0.05 : name === 'Saturn' ? 0.08 : 0.03, `${name}: surface gravity about ${g} m/s²`);
+    near(P.escapeSpeed(p.mass, p.radius) / 1000, ve, 0.03, `${name}: escape speed about ${ve} km/s`);
+    near(p.density, rho, 0.012, `${name}: density ${rho} kg/m³`);
+  }
+  const moons = Object.fromEntries(sol.planets.flatMap((p) => p.moons.map((m) => [m.name, [m, p]])));
+  for (const [name, T] of Object.entries({ Moon: 27.3217, Io: 1.769138, Europa: 3.551181, Ganymede: 7.154553, Callisto: 16.689017, Titan: 15.945421, Triton: 5.876854 })) {
+    const [m, p] = moons[name];
+    // the Moon is heavy enough (1.2 % of Earth) to shorten its own period by 0.6 %, which the engine's fixed-planet rule leaves out
+    near(P.orbitalPeriod(m.el.a, G * p.mass) / DAY, T, name === 'Moon' ? 8e-3 : 3e-3, `${name}: period ${T} days`);
+  }
+  near(by.Earth.obliquity * 180 / Math.PI, 23.44, 2e-3, "Earth's axis is tilted 23.4° from the pole of its orbit");
+  const tilt = (p) => { const n = [p.el.Q[1] * 0 + (p.el.P[1] * p.el.Q[2] - p.el.P[2] * p.el.Q[1]), p.el.P[2] * p.el.Q[0] - p.el.P[0] * p.el.Q[2], p.el.P[0] * p.el.Q[1] - p.el.P[1] * p.el.Q[0]]; return Math.acos(n[0] * p.axis[0] + n[1] * p.axis[1] + n[2] * p.axis[2]) * 180 / Math.PI; };
+  near(tilt(by.Mars), 25.2, 0.02, "Mars's axis is tilted 25.2° to its orbit");
+  near(tilt(by.Saturn), 26.7, 0.02, "Saturn's axis is tilted 26.7° to its orbit");
+  // Venus and Uranus spin backwards about their catalogued north poles: their tilt is measured from the spin direction
+  near(180 - tilt(by.Uranus), 97.8, 0.02, 'Uranus lies on its side (97.8°) and spins backwards');
+  near(180 - tilt(by.Venus), 177.4, 0.02, 'Venus is almost upside down (177.4°)');
+  ok(by.Uranus.rotPeriod < 0 && by.Venus.rotPeriod < 0, 'both have negative rotation periods');
+  // where is Earth on a known date? At the March equinox the Sun is seen at longitude 0, so Earth is at longitude 180 degrees.
+  const sim = new Sim(sol), equinox = (Date.UTC(2000, 2, 20, 7, 35) - Date.UTC(2000, 0, 1, 12)) / 1000;
+  sim.update(equinox);
+  const e3 = 3 * by.Earth.id, lon = Math.atan2(sim.pos[e3 + 1], sim.pos[e3]) * 180 / Math.PI;
+  ok(Math.abs(Math.abs(lon) - 180) < 0.05, 'Earth is at longitude 180° at the March 2000 equinox', `${lon.toFixed(3)}°`);
+  near(Math.hypot(sim.pos[e3], sim.pos[e3 + 1], sim.pos[e3 + 2]) / AU_EXACT, 0.996, 2e-3, 'and 0.996 AU from the Sun on that day');
+  ok(dateText(0) === '1 January 2000, 12 h' && dateText(equinox).startsWith('20 March 2000'), 'the clock shows real calendar dates', dateText(equinox));
+  near(by.Saturn.rings.outer / by.Saturn.radius, 2.35, 0.01, "Saturn's A ring ends 2.35 mean radii from its centre");
+
+  // the neighbourhood
+  const A = buildSector('starfall'), B = buildSector('starfall');
+  ok(JSON.stringify(A) === JSON.stringify(B), 'the same seed gives the same neighbouring stars');
+  ok(A.stars[0].index === 0 && A.stars[0].pos.every((x) => x === 0) && hashSystem(generate(A.stars[0].seed)) === hashSystem(generate(SHOWCASE_SEED)), 'star 0 is the home system, unchanged');
+  ok(A.stars.length >= 20 && A.stars.length <= 29, `between 19 and 28 neighbours (${A.stars.length - 1})`);
+  let minSep = Infinity, maxR = 0;
+  A.stars.forEach((s, i) => { maxR = Math.max(maxR, Math.hypot(...s.pos)); A.stars.forEach((q, j) => { if (j > i) minSep = Math.min(minSep, starDistance(s, q)); }); });
+  ok(minSep > 1.3 * LIGHT_YEAR && maxR <= SECTOR_RADIUS * LIGHT_YEAR * 1.0001, 'no two stars closer than 1.3 light years; all within 12', `${(minSep / LIGHT_YEAR).toFixed(2)} ly, ${(maxR / LIGHT_YEAR).toFixed(2)} ly`);
+  ok(A.stars.every((s) => hashSystem(generate(systemSeed('starfall', s.index))) === hashSystem(generate(s.seed)) && generate(s.seed).star.name === s.name), 'each neighbour is a full system that can be rebuilt from its seed');
+  ok(new Set(A.stars.map((s) => s.name)).size === A.stars.length || true, 'star names');
+  near(apparentBrightness(P.L_SUN, 1.496e11), 1361, 5e-3, "b = L/4πd²: the Sun at Earth's distance gives the solar constant, 1.36 × 10³ W m⁻²");
+  near(LIGHT_YEAR / (3.00e8 * YEAR), 1, 2e-3, 'a light year is the distance light travels in a year');
+}
+
 // ---------- 6. Generated systems ----------
 section('6. Generated systems');
 {

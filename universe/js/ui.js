@@ -2,6 +2,8 @@
 // Values refresh a few times a second, not every frame.
 import * as P from './physics.js';
 import { FIELD_STOPS, FIELD_RANGE, ARROW_PX, displayColour } from './viz.js';
+import { LIGHT_YEAR, C_LIGHT, apparentBrightness, starDistance } from './sector.js';
+import { dateText, AU_EXACT } from './solar.js';
 
 const { G, AU, M_SUN, R_SUN, L_SUN, M_EARTH, R_EARTH, DAY, YEAR } = P;
 const $ = (id) => document.getElementById(id);
@@ -34,7 +36,7 @@ export function duration(s) {
   if (s < 2 * YEAR) return `${num(s / DAY)} days`;
   return `${num(s / YEAR)} years`;
 }
-const dist = (m) => (m > 0.01 * AU ? `${num(m / AU)} AU` : `${num(m / 1000)} km`);
+const dist = (m) => (m > 0.01 * AU_EXACT ? `${num(m / AU_EXACT)} AU` : `${num(m / 1000)} km`);   // 1 AU = 1.496e11 m (the booklet rounds it to 1.50e11)
 const massAlt = (m) => (m > 0.05 * M_SUN ? `${num(m / M_SUN)} solar masses` : m > 0.001 * M_EARTH ? `${num(m / M_EARTH)} Earth masses` : `${num(m / 7.35e22)} Moon masses`);
 const HL = ' <span class="tag hl">HL</span>';
 const U = { kg: 'kg', m: 'm', ms: 'm s⁻¹', ms2: 'm s⁻²', Nkg: 'N kg⁻¹', N: 'N', J: 'J', Jkg: 'J kg⁻¹', s: 's', W: 'W', K: 'K' };
@@ -74,6 +76,7 @@ export class UI {
     $('seed-form').addEventListener('submit', (e) => { e.preventDefault(); const s = $('seed-input').value.trim(); if (s) A.seed(s); });
     $('new-system').addEventListener('click', () => A.newSystem());
     $('showcase').addEventListener('click', () => A.seed(null));
+    $('go-sol').addEventListener('click', () => A.seed('sol'));
     $('copy-link').addEventListener('click', () => A.copyLink());
     $('scale-toggle').addEventListener('click', () => A.layer('truescale', !app.state.layers.truescale));
     $('t-pause').addEventListener('click', () => A.pause());
@@ -103,13 +106,15 @@ export class UI {
   // ---------- When a new system (or quality) is built ----------
   rebuild() {
     const { sim, state } = this.app, sys = sim.sys;
-    $('sys-line').textContent = `${sys.star.name} system · seed “${sys.seed}”`;
-    $('seed-input').value = sys.seed;
+    const place = state.place;
+    $('sys-line').textContent = sys.real ? 'The Solar System · real data from NASA' : `${sys.star.name} system · seed “${place.seed}”${place.star ? ` · neighbour ${place.star}` : ''}`;
+    this.buildStars();
+    $('seed-input').value = state.place.seed;
     const ul = $('body-list'); ul.textContent = '';
     for (const b of sim.bodies) {
       const li = document.createElement('li'), bt = document.createElement('button');
       li.className = b.kind; bt.type = 'button'; bt.dataset.id = b.id;
-      bt.innerHTML = `<span>${b.name}</span><span class="kind">${KIND[b.kind === 'star' ? 'star' : b.type]}</span>`;
+      bt.innerHTML = `<span>${b.name}</span><span class="kind">${b.kind === 'star' ? 'Star' : b.label || KIND[b.type]}</span>`;
       bt.addEventListener('click', () => this.app.actions.select(b.id, true));
       li.appendChild(bt); ul.appendChild(li);
     }
@@ -117,6 +122,43 @@ export class UI {
     $('quality-note').textContent = state.qualityNote || '';
     this.syncLayers(); this.syncMode(); this.syncCamera(); this.syncTime();
     this.select(state.selected, state.infoOpen);
+  }
+  // ---------- Neighbouring stars ----------
+  buildStars() {
+    const { state, sim } = this.app, sec = this.app.sector, ul = $('star-list');
+    ul.textContent = ''; $('star-detail').textContent = '';
+    $('stars-toggle').hidden = ul.hidden = !sec;
+    if (!sec) { $('stars-intro').textContent = 'The real Solar System stands on its own here: its real neighbours are not included. Use “Starting system” or “New system” in the System panel to go back to the invented stars, where you can travel between systems.'; return; }
+    const here = sec.stars.find((s) => s.index === state.place.star);
+    $('stars-intro').textContent = `${sec.stars.length - 1} other systems lie within 12 light years of ${sec.stars[0].name}. Each is a full system that you can travel to. You are at ${here.name}.`;
+    const others = sec.stars.filter((s) => s !== here).map((s) => ({ s, d: starDistance(s, here) })).sort((a, b) => a.d - b.d);
+    for (const { s, d } of others) {
+      const li = document.createElement('li'), bt = document.createElement('button');
+      bt.type = 'button'; bt.dataset.star = s.index;
+      const c = s.color.map((x) => Math.round(255 * Math.pow(x, 1 / 2.2)));
+      bt.innerHTML = `<span><i class="dot" style="color:rgb(${c})"></i>${s.name}${s.index === 0 ? ' (home)' : ''}</span><span class="kind">${num(d / LIGHT_YEAR)} ly</span>`;
+      bt.addEventListener('click', () => this.app.actions.selectStar(s.index));
+      li.appendChild(bt); ul.appendChild(li);
+    }
+  }
+  showStar(index) {
+    const { state, sim } = this.app, sec = this.app.sector, box = $('star-detail');
+    document.querySelectorAll('#star-list button').forEach((b) => { if (Number(b.dataset.star) === index) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+    if (!sec || index < 0) { box.textContent = ''; return; }
+    const here = sec.stars.find((s) => s.index === state.place.star), s = sec.stars.find((q) => q.index === index), d = starDistance(s, here);
+    const b = apparentBrightness(s.luminosity, d), home = sim.bodies[0], p1 = sim.sys.planets[Math.min(2, sim.sys.planets.length - 1)], bHome = apparentBrightness(home.luminosity, p1.el.a);
+    box.innerHTML = `<h3>${s.name}</h3>
+      <div class="row"><span class="k">Distance from ${here.name}, <i>d</i></span><span class="v">${num(d / LIGHT_YEAR)} ly</span><span class="alt" style="grid-column:1/3">${num(d)} m · ${num(d / AU_EXACT)} AU</span></div>
+      <div class="row"><span class="k">Time for its light to reach you</span><span class="v">${num(d / LIGHT_YEAR)} years</span></div>
+      <div class="row"><span class="k">Mass</span><span class="v">${num(s.mass / M_SUN)} solar masses</span></div>
+      <div class="row"><span class="k">Luminosity, <i>L</i></span><span class="v">${num(s.luminosity)} W</span><span class="alt" style="grid-column:1/3">${num(s.luminosity / L_SUN)} × the Sun · surface at ${num(s.temp)} K</span></div>
+      <div class="row"><span class="k">Planets</span><span class="v">${s.planets}</span></div>
+      <div class="row"><span class="k">Apparent brightness from here, <i>b</i></span><span class="v">${num(b)} W m⁻²</span>
+        <div class="work"><p>Its light spreads over a sphere of area $4\\pi d^2$:</p>$$b = \\dfrac{L}{4\\pi d^2} = \\dfrac{${tex(s.luminosity)}}{4\\pi\\,(${tex(d)})^2}$$$$b = ${tex(b)}\\text{ W m}^{-2}$$<p>For comparison, ${home.name} gives ${num(bHome)} W m⁻² at ${p1.name}: ${num(bHome / b, 2)} times as much. That is why other stars are points of light.</p></div></div>
+      <p class="btn-row"><button type="button" class="btn" id="star-go">Travel to ${s.name}</button></p>
+      <p class="small">The trip is skipped: at the speed of light it would take ${num(d / LIGHT_YEAR)} years, and nothing with mass can travel that fast. Notes: <a href="../themes/b1.html#luminosity">B.1 apparent brightness</a> · <a href="../themes/e5.html#units">E.5 astronomical distances</a></p>`;
+    $('star-go').addEventListener('click', () => this.app.actions.travel(index));
+    this.typeset(box);
   }
   syncLayers() {
     const L = this.app.state.layers;
@@ -180,7 +222,7 @@ export class UI {
     const b = sim.bodies[id];
     info.hidden = false;
     $('info-name').textContent = b.name;
-    $('info-kind').textContent = b.kind === 'star' ? `Star · ${num(b.mass / M_SUN)} solar masses` : `${KIND[b.type]} · orbits ${sim.bodies[b.pid].name}`;
+    $('info-kind').textContent = b.kind === 'star' ? `Star · ${num(b.mass / M_SUN)} solar masses` : `${b.label || KIND[b.type]} · orbits ${sim.bodies[b.pid].name}`;
     this.openWork.clear();
     this.buildPanes(b);
     this.showTab(this.tab);
@@ -390,7 +432,7 @@ export class UI {
     this.last = now;
     // time bar
     const t = sim.t, y = Math.floor(t / YEAR), d = Math.floor((t - y * YEAR) / DAY), h = Math.floor((t - y * YEAR - d * DAY) / 3600);
-    $('t-date').textContent = `Year ${y + 1}, day ${d + 1}, ${String(h).padStart(2, '0')} h`;
+    $('t-date').textContent = sim.sys.real ? dateText(t) : `Year ${y + 1}, day ${d + 1}, ${String(h).padStart(2, '0')} h`;
     if (sim.mode === 'nbody') {
       const dr = $('drift'); dr.textContent = `Energy drift ${sim.drift >= 0 ? '+' : '−'}${num(Math.abs(sim.drift), 2)}${sim.limited ? ' · time slowed to keep steps small' : ''}`;
       dr.classList.toggle('warn', Math.abs(sim.drift) > 1e-4 || sim.limited);

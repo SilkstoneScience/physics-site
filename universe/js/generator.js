@@ -200,7 +200,7 @@ export function generate(seedText, version = GEN_VERSION) {
 export function finish(sys) {
   for (const p of sys.planets) {
     prepareOrbit(p.el); p.parent = sys.star;
-    for (const m of p.moons) { prepareOrbit(m.el, p.basis); m.parent = p; }
+    for (const m of p.moons) { prepareOrbit(m.el, m.orbitBasis || p.basis); m.parent = p; }
   }
   return sys;
 }
