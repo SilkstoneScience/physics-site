@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: the rolling race · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics A.4 (HL): a hoop, a solid disc and a solid ball race down a slope, rolling without slipping, and energy bars show why the ball wins.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/rolling-race.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: the rolling race · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics A.4 (HL): a hoop, a solid disc and a solid ball race down a slope, rolling without slipping, and energy bars show why the ball wins.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/rolling-race.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/rolling.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › The rolling race</p>
+    <h1>The rolling race <span class="tag hl">HL</span></h1>
+    <p class="lead">A hoop, a solid disc and a solid ball roll without slipping down the same slope. Which wins, and why does the shape matter but not the mass or the size? <a class="tag" href="../themes/a4.html#energy">A.4 Rigid body mechanics</a></p>
+
+    <figure class="anim-stage" data-anim="rolling">
+      <canvas role="img" aria-label="Animation of a hoop, a solid disc and a solid ball racing down identical slopes, with energy bars showing how their kinetic energy is shared between moving along and spinning. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <ol>
+        <li>A hoop ($I = mr^2$), a solid disc ($I = \tfrac{1}{2}mr^2$) and a solid ball ($I = \tfrac{2}{5}mr^2$), all with the same mass and radius, start from rest at the top of identical slopes, 0.50 m high at 20° (so each slope is $L = h/\sin\theta = 1.46$ m long). You are asked to predict which reaches the bottom first.</li>
+        <li>They are released together and roll without slipping, shown four times slower than real life. The marks on each object turn as it rolls: its centre moves at $v = \omega r$.</li>
+        <li>The ball wins in 1.11 s. The disc is close behind at 1.14 s, and the hoop is last at 1.32 s.</li>
+        <li>Why: each object loses the same gravitational potential energy, $mgh$. At the bottom it is shared between moving along, $\tfrac{1}{2}mv^2$ (blue bars), and spinning, $\tfrac{1}{2}I\omega^2$ (gold bars), so $mgh = \tfrac{1}{2}mv^2 + \tfrac{1}{2}I\omega^2$. The race runs again with live energy bars.</li>
+        <li>The hoop has all its mass at the rim, so half of its energy goes into spinning: $v^2 = gh$, so $v = 2.21\ \text{m s}^{-1}$.</li>
+        <li>The disc keeps two-thirds of its energy for moving along and spins with one-third: $v^2 = \tfrac{4}{3}gh$, so $v = 2.56\ \text{m s}^{-1}$.</li>
+        <li>The ball spins with only $\tfrac{2}{7}$ of its energy (71% moving along, 29% spinning): $v^2 = \tfrac{10}{7}gh$, so $v = 2.65\ \text{m s}^{-1}$. Its mass is closest to the centre, so it has the smallest $I$ for its mass and radius, and wins.</li>
+        <li>A surprise: a big hoop with 4 times the mass and 3 times the radius races a small, light hoop. The small hoop spins 3 times as fast ($\omega = v/r$), but they stay side by side, and they tie at 1.32 s. In $mgh = \tfrac{1}{2}mv^2 + \tfrac{1}{2}(mr^2)(v/r)^2$ the mass and the radius cancel, so $v^2 = gh$ for every hoop.</li>
+        <li>So only the shape matters: how the mass is spread out around the axis. The animation ends with $E_k = \tfrac{1}{2}mv^2 + \tfrac{1}{2}I\omega^2$ and $v = \omega r$: the more of the mass is far from the axis, the larger $I$ is compared with $mr^2$, and the slower the object rolls.</li>
+      </ol>
+      <p>The times come from the acceleration down the slope, $a = \dfrac{g\sin\theta}{1 + I/(mr^2)}$, with $g = 9.8\ \text{m s}^{-2}$, and $t = 2L/v$ for a start from rest. Read more in <a href="../themes/a4.html#energy">A.4 section 9: rotational kinetic energy and rolling</a> and <a href="../themes/a4.html#inertia">section 5: moment of inertia</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

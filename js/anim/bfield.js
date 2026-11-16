@@ -132,7 +132,8 @@
   Anim.register('bfield', {
     duration: DURATION,
     poster: 30,
-    music: { chords: [[50, 57, 62, 64], [46, 53, 57, 62], [45, 53, 57, 60], [48, 55, 62, 64]], bar: 8, cutoff: 750, sparkle: 0.3 },
+    // score: dark and electric (D minor, a wobbling pad, glassy bells)
+    music: { chords: [[50, 57, 62, 65], [46, 53, 58, 62], [48, 55, 60, 64], [45, 52, 57, 61]], bar: 8, pad: 'saw', cutoff: 650, tremolo: 5, drone: 0.11, bells: 0.3, bellType: 'glass', bellOct: 1, echo: 0.5, volume: 0.75 },
     resize(s) { unit = Math.min(s.W / (s.W < 520 ? 10.5 : 13.5), (s.H * 0.78) / 8.8); cx = s.W / 2; cy = s.H * 0.45; },
     frame(s, t) {
       const c = cam(t);

@@ -37,8 +37,13 @@ lines, smooth camera moves and one caption at a time. Each one loops.
 - **Music** (teacher's request, 15 November 2026): gentle background music generated live by `js/anim/music.js` with the
   browser's Web Audio API (a soft pad, a low drone, bell-like sparkles or plucked arpeggios, echo and reverb), so there
   are no audio files to license. Each scene sets its own mood with `music: { chords, bar, cutoff, sparkle, arp }`.
-  Browsers only allow sound after a click, so it is off until the ♪ Music button is pressed; the choice is remembered on
-  that device, and the music fades out on Pause, when the animation scrolls out of view or the tab is hidden.
+  **On by default** (teacher, 16 November 2026), with a **different score for each animation** (the score options are
+  listed at the top of music.js: pad sound, drone, bells, arpeggio, space wind, shimmer, clock tick, heartbeat pulse,
+  tremolo). Browsers only allow sound after a click or tap, so until then a "♪ Tap the animation to hear the music" note
+  shows, and the first tap on the picture starts the music without pausing. The ♪ Music button turns it off (remembered
+  on that device); the music fades out on Pause, when the animation scrolls out of view or the tab is hidden.
+  Each score's `volume` is set so that all scores have about the same loudness (RMS about 0.055 in `AnimMusic.test`).
+- **Click or tap the picture to pause or play** (teacher, 16 November 2026).
   `AnimMusic.test(opts, seconds)` renders a piece offline and reports its peak and RMS level (checked: no clipping).
 - The stage is 16:9, and 4:5 on phones (under 600 px), so scenes lay themselves out for both.
 - File names in `animations/` are permanent once published (they may be linked from slides).
@@ -48,6 +53,10 @@ Theme A (batch 1)
 - [x] Powers of ten zoom: `powers-of-ten.html` (Skills: orders of magnitude)
 - [x] A.1 Motion graphs drawn live: `motion-graphs.html`
 - [x] A.5 Space–time diagrams (HL): `spacetime.html`
+- [x] A.2 What exactly is friction? `friction.html` (teacher's request, 16 November 2026)
+- [x] A.2 Collisions, explosions and rockets: `momentum.html` (the rocket equation shown as "beyond the IB syllabus")
+- [x] A.3 A bungee jump (conservation of energy): `energy.html`
+- [x] A.4 The rolling race (HL): `rolling-race.html`. Another A.4 idea for later: a diver or skater changing their moment of inertia.
 
 Theme B (batch 2, to be agreed): e.g. B.1 particles in solids, liquids and gases; B.3 molecules hitting a
 wall make pressure; B.5 electron drift in a wire.

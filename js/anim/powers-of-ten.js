@@ -68,37 +68,112 @@
         g.globalCompositeOperation = 'source-over';
       } },
     { key: 'dna', logS: Math.log10(2e-9), name: 'DNA', size: 'about 2 × 10⁻⁹ m wide',
-      cap: 'A strand of DNA is only about ten to twenty atoms wide.',
+      cap: '',
+      // A turning double helix: two backbones a third of a turn apart (the major and minor grooves),
+      // one base pair every 0.34 nm (about ten per turn of 3.4 nm). Parts at the back are dimmer and thinner.
       draw(s, x, y, R, a, t) {
-        const L = R * 9, A = [], B = [], ph = t * 1.2;
-        for (let u = -L; u <= L; u += R * 0.1) {
-          const k = u / (R * 0.54) + ph;           // one turn every 3.4 nm (R = 1 nm)
-          A.push([x + u, y + Math.sin(k) * R]); B.push([x + u, y + Math.sin(k + Math.PI) * R]);
+        const { g } = s, L = R * 10, ph = t * 0.9, kOf = (u) => u / (R * 0.54) + ph, OFFSET = 2.3;
+        const PAIRS = [['92,170,255', '255,214,102'], ['255,214,102', '92,170,255'], ['111,211,154', '255,110,120'], ['255,110,120', '111,211,154']];
+        const STRAND = ['150,200,255', '200,170,255'];          // the two backbones: pale blue and pale violet
+        const segs = [];
+        STRAND.forEach((rgb, si) => {
+          let prev = null;
+          for (let u = -L; u <= L + 1e-9; u += R * 0.08) {
+            const k = kOf(u) + si * OFFSET, p = [x + u, y + Math.sin(k) * R];
+            if (prev) segs.push({ p0: prev, p1: p, z: Math.cos(k), rgb });
+            prev = p;
+          }
+        });
+        const drawSeg = (sg) => {
+          const depth = (sg.z + 1) / 2, w = Math.max(1, R * (0.1 + 0.14 * depth)), al = a * (0.3 + 0.7 * depth);
+          g.strokeStyle = 'rgba(' + sg.rgb + ',' + (al * 0.18) + ')'; g.lineWidth = w * 2.6;
+          g.beginPath(); g.moveTo(sg.p0[0], sg.p0[1]); g.lineTo(sg.p1[0], sg.p1[1]); g.stroke();
+          g.strokeStyle = 'rgba(' + sg.rgb + ',' + al + ')'; g.lineWidth = w;
+          g.beginPath(); g.moveTo(sg.p0[0], sg.p0[1]); g.lineTo(sg.p1[0], sg.p1[1]); g.stroke();
+        };
+        g.save(); g.lineCap = 'round';
+        segs.filter((sg) => sg.z < 0).forEach(drawSeg);               // the far side of the helix
+        let n = 0;
+        for (let u = -L; u <= L; u += R * 0.34, n++) {                  // base pairs, one every 0.34 nm
+          const k = kOf(u), y1 = y + Math.sin(k) * R, y2 = y + Math.sin(k + OFFSET) * R, z = (Math.cos(k) + Math.cos(k + OFFSET)) / 2;
+          const al = a * (0.45 + 0.4 * (z + 1) / 2), mid = (y1 + y2) / 2, [c1, c2] = PAIRS[(n * 7 + 3) % 4];
+          g.lineWidth = Math.max(1.2, R * 0.1);
+          g.strokeStyle = 'rgba(' + c1 + ',' + al + ')'; g.beginPath(); g.moveTo(x + u, y1); g.lineTo(x + u, mid); g.stroke();
+          g.strokeStyle = 'rgba(' + c2 + ',' + al + ')'; g.beginPath(); g.moveTo(x + u, mid); g.lineTo(x + u, y2); g.stroke();
         }
-        for (let i = 0; i < A.length; i += 4) D.line(s, A[i][0], A[i][1], B[i][0], B[i][1], '200,210,255', 0.35 * a, Math.max(1, R * 0.08));
-        D.glowLine(s, A, C.neg, a, Math.max(1.2, R * 0.1)); D.glowLine(s, B, C.pos, a, Math.max(1.2, R * 0.1));
+        segs.filter((sg) => sg.z >= 0).forEach(drawSeg);              // the near side, on top
+        g.restore();
       } },
     { key: 'virus', logS: -7, name: 'A virus', size: 'about 10⁻⁷ m across',
-      cap: 'A virus: about a thousand times smaller than the width of a hair.',
+      cap: '',
+      // A shaded sphere covered in club-shaped spike proteins: those round the edge stick out sideways,
+      // those on the near side point at us (seen end-on as small bulbs). Positions on a Fibonacci sphere.
       draw(s, x, y, R, a, t) {
-        const { g } = s;
-        for (let k = 0; k < 22; k++) {
-          const ang = k * TAU / 22 + t * 0.15, c = Math.cos(ang), sn = Math.sin(ang);
-          D.line(s, x + c * R * 0.78, y + sn * R * 0.78, x + c * R, y + sn * R, C.good, 0.8 * a, Math.max(1, R * 0.04));
-          D.glowDot(s, x + c * R, y + sn * R, R * 0.09, C.good, a * 0.8);
+        const { g } = s, r = R * 0.76, rot = t * 0.12, N = 44, spikes = [];
+        for (let i = 0; i < N; i++) {
+          const zz = 1 - 2 * (i + 0.5) / N, rr = Math.sqrt(1 - zz * zz), th = i * 2.39996 + rot;
+          spikes.push([Math.cos(th) * rr, zz, Math.sin(th) * rr]);      // [x, y, z]; z > 0 faces us
         }
-        g.fillStyle = `rgba(20,50,40,${0.7 * a})`; g.beginPath(); g.arc(x, y, R * 0.78, 0, TAU); g.fill();
-        D.glowLine(s, Array.from({ length: 61 }, (_, i) => [x + Math.cos(i * TAU / 60) * R * 0.78, y + Math.sin(i * TAU / 60) * R * 0.78]), C.good, a, 1.6);
+        const spike = (v, al) => {
+          const bx = x + v[0] * r, by = y + v[1] * r, tx = x + v[0] * R, ty = y + v[1] * R;
+          g.strokeStyle = 'rgba(150,230,190,' + al + ')'; g.lineWidth = Math.max(1, R * 0.035); g.lineCap = 'round';
+          g.beginPath(); g.moveTo(bx, by); g.lineTo(tx, ty); g.stroke();
+          const rg = g.createRadialGradient(tx, ty, 0, tx, ty, R * 0.085);
+          rg.addColorStop(0, 'rgba(255,236,170,' + al + ')'); rg.addColorStop(0.6, 'rgba(240,170,90,' + al + ')'); rg.addColorStop(1, 'rgba(240,170,90,0)');
+          g.fillStyle = rg; g.beginPath(); g.arc(tx, ty, R * 0.085, 0, TAU); g.fill();
+        };
+        g.save();
+        spikes.filter((v) => v[2] <= 0.15).forEach((v) => spike(v, a * (0.45 + 0.5 * (1 - Math.abs(v[2])))));   // behind and round the edge
+        const body = g.createRadialGradient(x - r * 0.35, y - r * 0.4, r * 0.05, x, y, r);
+        body.addColorStop(0, 'rgba(170,240,210,' + a + ')'); body.addColorStop(0.45, 'rgba(60,160,130,' + a + ')');
+        body.addColorStop(1, 'rgba(14,52,48,' + a + ')');
+        g.fillStyle = body; g.beginPath(); g.arc(x, y, r, 0, TAU); g.fill();
+        g.globalCompositeOperation = 'lighter';
+        for (let k = 0; k < 18; k++) {                // a faint texture on the membrane
+          const v = spikes[(k * 5) % N]; if (v[2] < 0) continue;
+          g.fillStyle = 'rgba(200,255,230,' + (0.06 * a) + ')'; g.beginPath(); g.arc(x + v[0] * r * 0.8, y + v[1] * r * 0.8, r * 0.12, 0, TAU); g.fill();
+        }
+        g.globalCompositeOperation = 'source-over';
+        spikes.filter((v) => v[2] > 0.15).forEach((v) => {            // facing us: short stalk, bulb on the surface
+          const px = x + v[0] * r, py = y + v[1] * r, ex = x + v[0] * (r + (R - r) * Math.hypot(v[0], v[1])), ey = y + v[1] * (r + (R - r) * Math.hypot(v[0], v[1]));
+          g.strokeStyle = 'rgba(150,230,190,' + (0.8 * a) + ')'; g.lineWidth = Math.max(1, R * 0.03);
+          g.beginPath(); g.moveTo(px, py); g.lineTo(ex, ey); g.stroke();
+          const rg = g.createRadialGradient(ex, ey, 0, ex, ey, R * 0.075);
+          rg.addColorStop(0, 'rgba(255,240,180,' + a + ')'); rg.addColorStop(0.7, 'rgba(240,170,90,' + (0.9 * a) + ')'); rg.addColorStop(1, 'rgba(240,170,90,0)');
+          g.fillStyle = rg; g.beginPath(); g.arc(ex, ey, R * 0.075, 0, TAU); g.fill();
+        });
+        D.glowDot(s, x, y, R * 1.25, '110,220,170', a * 0.18);
+        g.restore();
       } },
     { key: 'cell', logS: Math.log10(8e-6), name: 'A red blood cell', size: 'about 8 × 10⁻⁶ m across',
-      cap: 'A red blood cell: you have about 25 trillion of them.',
-      draw(s, x, y, R, a) {
+      cap: '',
+      // Biconcave discs (thick rim, thin dimpled centre) at different tilts, as in a drop of blood.
+      // The front cell is at the true size for the view; the others, the same size, are further back.
+      draw(s, x, y, R, a, t) {
         const { g } = s;
-        const rg = g.createRadialGradient(x, y, 0, x, y, R);
-        rg.addColorStop(0, `rgba(150,20,40,${a})`); rg.addColorStop(0.45, `rgba(190,35,55,${a})`);
-        rg.addColorStop(0.8, `rgba(235,70,85,${a})`); rg.addColorStop(1, `rgba(120,20,35,${a})`);
-        g.fillStyle = rg; g.beginPath(); g.ellipse(x, y, R, R * 0.92, 0.3, 0, TAU); g.fill();
-        D.glowDot(s, x, y, R * 1.3, '255,80,100', a * 0.25);
+        const cell = (cx, cy, rx, tilt, rotA, dim) => {
+          const ry = rx * tilt;
+          g.save(); g.translate(cx, cy); g.rotate(rotA);
+          const body = g.createRadialGradient(0, 0, 0, 0, 0, rx);
+          body.addColorStop(0, 'rgba(' + Math.round(120 * dim) + ',' + Math.round(14 * dim) + ',' + Math.round(28 * dim) + ',' + a + ')');
+          body.addColorStop(0.42, 'rgba(' + Math.round(165 * dim) + ',' + Math.round(26 * dim) + ',' + Math.round(42 * dim) + ',' + a + ')');
+          body.addColorStop(0.78, 'rgba(' + Math.round(232 * dim) + ',' + Math.round(70 * dim) + ',' + Math.round(80 * dim) + ',' + a + ')');
+          body.addColorStop(0.93, 'rgba(' + Math.round(205 * dim) + ',' + Math.round(45 * dim) + ',' + Math.round(60 * dim) + ',' + a + ')');
+          body.addColorStop(1, 'rgba(' + Math.round(110 * dim) + ',' + Math.round(14 * dim) + ',' + Math.round(26 * dim) + ',' + a + ')');
+          g.scale(1, tilt); g.fillStyle = body; g.beginPath(); g.arc(0, 0, rx, 0, TAU); g.fill();
+          // light catching the upper rim
+          g.strokeStyle = 'rgba(255,170,170,' + (0.35 * a * dim) + ')'; g.lineWidth = rx * 0.07;
+          g.beginPath(); g.arc(0, 0, rx * 0.86, Math.PI * 1.1, Math.PI * 1.75); g.stroke();
+          g.restore();
+          if (ry < 0) return;
+        };
+        const drift = Math.sin(t * 0.3) * R * 0.03;
+        cell(x - R * 1.55, y - R * 0.95 + drift, R * 0.82, 0.35, -0.3, 0.45);
+        cell(x + R * 1.65, y - R * 0.55 - drift, R * 0.82, 0.8, 0.5, 0.5);
+        cell(x + R * 1.25, y + R * 1.15 + drift, R * 0.82, 0.25, 0.1, 0.42);
+        cell(x - R * 1.35, y + R * 1.05, R * 0.82, 0.7, -0.6, 0.5);
+        D.glowDot(s, x, y, R * 1.35, '255,80,100', a * 0.22);
+        cell(x, y, R, 0.88, 0.25, 1);
       } },
     { key: 'hair', logS: Math.log10(8e-5), name: 'A human hair', size: 'about 8 × 10⁻⁵ m wide',
       cap: 'A human hair: you could fit about ten red blood cells across it.',
@@ -183,17 +258,44 @@
           D.glowDot(s, x + Math.cos(ang) * rr, y + Math.sin(ang) * rr, i === 2 ? 6 : 4, i === 2 ? '140,190,255' : '230,230,255', a);
         });
       } },
-    { key: 'proxima', logS: Math.log10(4.0e16), name: 'The nearest star', size: '4.0 × 10¹⁶ m away: 4.2 light-years',
-      cap: 'Light from Proxima Centauri, the nearest star after the Sun, takes 4.2 years to reach us.',
+    { key: 'proxima', logS: Math.log10(4.0e16), name: 'The nearest star beyond the Sun', size: '4.0 × 10¹⁶ m away: 4.2 light-years',
+      cap: '',
+      // Two stars with soft spikes; a pulse of light leaves Proxima Centauri and crosses to the Sun while a
+      // counter shows the years it has been travelling (4.2 years for the whole way).
       draw(s, x, y, R, a, t) {
-        D.glowDot(s, x - R, y, 14, '255,200,110', a); D.glowDot(s, x + R, y, 11, '255,120,90', a);
-        D.line(s, x - R + 16, y + 22, x + R - 16, y + 22, C.muted, 0.6 * a, 1, [4, 5]);
-        const fs = Math.round(clamp(s.W / 75, 11, 15));
-        D.text(s, 'Sun', x - R, y - 24, fs, a, D.sans(fs, 600), '255,214,150');
-        D.text(s, 'Proxima Centauri', x + R, y - 24, fs, a, D.sans(fs, 600), '255,170,140');
+        const { g } = s, fs = Math.round(clamp(s.W / 75, 11, 15)), xs = x - R, xp = x + R;
+        const star = (sx, rgb, size) => {
+          D.glowDot(s, sx, y, size * 2.4, rgb, a * 0.55); D.glowDot(s, sx, y, size, '255,255,255', a);
+          g.save(); g.globalCompositeOperation = 'lighter';
+          for (const [dx, dy] of [[1, 0], [0, 1]]) {
+            const lg = g.createLinearGradient(sx - dx * size * 3, y - dy * size * 3, sx + dx * size * 3, y + dy * size * 3);
+            lg.addColorStop(0, 'rgba(' + rgb + ',0)'); lg.addColorStop(0.5, 'rgba(' + rgb + ',' + (0.7 * a) + ')'); lg.addColorStop(1, 'rgba(' + rgb + ',0)');
+            g.strokeStyle = lg; g.lineWidth = 1.4; g.beginPath(); g.moveTo(sx - dx * size * 3, y - dy * size * 3); g.lineTo(sx + dx * size * 3, y + dy * size * 3); g.stroke();
+          }
+          g.restore();
+        };
+        // the path of the light: a faint glowing line
+        D.glowLine(s, [[xp, y], [xs, y]], '255,214,150', a * 0.18, 1);
+        star(xs, '255,210,130', 9); star(xp, '255,120,90', 7);
+        D.text(s, 'Sun', xs, y - 30, fs, a, D.sans(fs, 600), '255,214,150');
+        D.text(s, 'Proxima Centauri', xp, y - 30, fs, a, D.sans(fs, 600), '255,170,140');
+        // the travelling light: a bright pulse with a fading tail
+        const o = this, span = Math.max(1, (o.leave || 0) - (o.arrive || 0) - 0.6);
+        const p = clamp((t - (o.arrive || 0) + 0.2) / span, 0, 1), px = xp + (xs - xp) * p;
+        if (p > 0 && p < 1) {
+          const tail = Math.min(R * 0.6, (xp - px));
+          const lg = g.createLinearGradient(px, y, px + tail, y);
+          lg.addColorStop(0, 'rgba(255,240,200,' + (0.9 * a) + ')'); lg.addColorStop(1, 'rgba(255,240,200,0)');
+          g.save(); g.globalCompositeOperation = 'lighter'; g.strokeStyle = lg; g.lineWidth = 3; g.lineCap = 'round';
+          g.beginPath(); g.moveTo(px, y); g.lineTo(px + tail, y); g.stroke(); g.restore();
+          D.glowDot(s, px, y, 12, '255,240,200', a);
+        }
+        if (p >= 1) D.glowDot(s, xs, y, 26, '255,240,200', a * fade(t, (o.arrive || 0) + span - 0.2, (o.arrive || 0) + span + 1.2, 0.1, 0.8) * 0.8);
+        const years = (4.2 * p).toFixed(1);
+        D.text(s, 'light travelling for ' + years + ' years', x, y + 34, fs, a * (p > 0 ? 1 : 0.5), D.sans(fs), '255,230,190');
       } },
     { key: 'milkyway', logS: 21, name: 'Our galaxy, the Milky Way', size: 'about 10²¹ m across: 100 000 light-years', photo: 'milkyway',
-      cap: 'Our galaxy holds a few hundred billion stars. (An artist’s impression: we can’t photograph it from outside.)',
+      cap: '',
       draw(s, x, y, R, a, t) {
         if (!ready(IMG.milkyway)) return;
         const { g } = s, w = 2 * R / 0.9;
@@ -225,7 +327,7 @@
         g.save(); g.globalAlpha = a; g.globalCompositeOperation = 'lighter';
         g.drawImage(soft(IMG.deep, 0.22, 0.5), x - w / 2, y - h / 2, w, h); g.restore();
       } },
-    { key: 'universe', hold: 5.5, logS: Math.log10(8.8e26), name: 'The observable universe', size: 'about 8.8 × 10²⁶ m across',
+    { key: 'universe', hold: 8, logS: Math.log10(8.8e26), name: 'The observable universe', size: 'about 8.8 × 10²⁶ m across',
       cap: 'The observable universe: the part we can see, centred on us. Space has expanded while the light travelled, so its edge is now about 46 billion light-years away.',
       draw(s, x, y, R, a, t) {
         const { g } = s;
@@ -247,7 +349,7 @@
   ];
 
   // ---------- the timeline: hold at each object, then zoom out to the next ----------
-  const START = 3.6, HOLD = 3.4, PER_DECADE = 0.65, BASE = 0.5, OFF = 0.3;   // OFF: object fills half the height
+  const START = 3.6, HOLD = 6.2, PER_DECADE = 0.65, BASE = 0.5, OFF = 0.3;   // OFF: object fills half the height
   const keys = []; let tt = START;
   O.forEach((o, i) => {
     const z = o.logS + (o.off ?? OFF);
@@ -280,13 +382,44 @@
     D.glowDot(s, x, Y(clamp(z - OFF, -15, 27)), 10, C.light, a);
   }
 
-  const CAPS = O.map((o, i) => [o.arrive - (i === 1 ? 0 : 0.6), o.leave + (i === 0 ? 0.8 : 0.5), o.cap]);
+  // Two captions per object (teacher, 16 November 2026): how many times bigger it is than the one before,
+  // in ordinary numbers (no scientific notation), then a fact. Ratios checked: 1e-10/1.7e-15 = 59 000;
+  // 2e-9/1e-10 = 20; 1e-7/2e-9 = 50; 8e-6/1e-7 = 80; 8e-5/8e-6 = 10; 2e-3/8e-5 = 25; 1.7/2e-3 = 850;
+  // 8.8e3/1.7 = 5200; 1.27e7/8.8e3 = 1440; 1.39e9/1.27e7 = 109; 9.0e12/1.39e9 = 6500; 4.0e16/9.0e12 = 4400;
+  // 1e21/4.0e16 = 25 000; 2.4e22/1e21 = 24; 8.8e26/2.4e22 = 37 000; Sun's volume 109³ = 1.3 million Earths.
+  const WORDS = {
+    proton: ['A proton: one of the particles in the nucleus of every atom.', 'It is made of three quarks, held together by the strong force.'],
+    atom: ['An atom is about 60 000 times wider than a proton.', 'Almost all of an atom is empty space: its nucleus is 10 000 to 100 000 times smaller than the atom.'],
+    dna: ['DNA is about 20 times wider than an atom.', 'Its two strands twist round each other in a double helix, joined by pairs of bases.'],
+    virus: ['A virus is about 50 times wider than a strand of DNA.', 'Many viruses have spike proteins on their surface that let them latch on to the cells they infect.'],
+    cell: ['A red blood cell is about 80 times wider than a virus.', 'You have about 25 trillion of them, carrying oxygen round your body.'],
+    hair: ['A human hair is about 10 times wider than a red blood cell.', 'Its surface is covered in tiny overlapping scales.'],
+    drop: ['A raindrop is about 25 times wider than a hair.', 'Small raindrops are almost perfect spheres.'],
+    person: ['You are about 850 times taller than a raindrop is wide.', 'A proton is about a million billion times smaller than you.'],
+    everest: ['Mount Everest is about 5000 times taller than you.', 'Its summit is 8.8 km above sea level.'],
+    earth: ['Earth is about 1400 times wider than Everest is high.', 'Earth, photographed by the crew of Apollo 17 in 1972.'],
+    sun: ['The Sun is 109 times wider than Earth (the small dot beside it).', 'About 1.3 million Earths would fit inside it.'],
+    solar: ['The planets’ orbits span about 6500 times the width of the Sun.', 'The orbits are drawn to scale; the planets themselves would be far too small to see.'],
+    proxima: ['The nearest star beyond the Sun is about 4400 times farther away than Neptune’s orbit is wide.', 'Its light takes 4.2 years to reach us, travelling at 300 000 km every second.'],
+    milkyway: ['Our galaxy is about 25 000 times wider than the distance to the nearest star.', 'It holds a few hundred billion stars, and the Sun is just one of them.'],
+    andromeda: ['The Andromeda galaxy is about 24 times as far away as our galaxy is wide.', 'The light we see from it set off 2.5 million years ago.'],
+    deep: ['Almost every speck in this Hubble photo of a tiny patch of sky is a galaxy.', 'There are hundreds of billions of galaxies we could, in principle, see.'],
+    universe: ['The observable universe is about 37 000 times wider than the distance to Andromeda.', 'It is the part we can see, centred on us. Space has expanded while the light travelled, so its edge is now about 46 billion light-years away.'],
+  };
+  const CAPS = [];
+  O.forEach((o, i) => {
+    const [first, second] = WORDS[o.key], mid = o.arrive + (o.leave - o.arrive) * 0.45;
+    CAPS.push([o.arrive - (i === 1 ? 0 : 0.5), mid, first]);
+    CAPS.push([mid + 0.15, o.leave + (i === 0 ? 0.8 : 0.5), second]);
+  });
   CAPS.push([O[0].leave + 0.9, O[1].arrive - 0.1, 'Zooming out through the inside of an atom: almost all of it is empty space.']);
 
   Anim.register('powers-of-ten', {
     duration: DURATION,
     poster: O.find((o) => o.key === 'earth').arrive + 0.5,
-    music: { chords: [[48, 55, 59, 62, 64], [50, 54, 57, 62], [52, 55, 59, 62], [45, 52, 57, 59, 64]], bar: 9, cutoff: 1000, sparkle: 0.6 },
+    marks: Object.fromEntries(O.map((o) => [o.key, [+o.arrive.toFixed(1), +o.leave.toFixed(1)]])),   // when each object is held (for checking)
+    // score: vast and cosmic (C lydian, space wind, shimmer, glassy bells)
+    music: { chords: [[48, 55, 59, 62, 66], [50, 57, 62, 66], [52, 59, 64, 66], [45, 52, 59, 64]], bar: 10, pad: 'saw', cutoff: 900, drone: 0.08, bells: 0.4, bellType: 'glass', bellOct: 2, wind: 0.8, shimmer: 0.8, echo: 0.6, volume: 0.82 },
     resize(s) { cx = s.W / 2; cy = s.H * 0.44; },
     frame(s, t) {
       const z = zAt(t), H = Math.min(s.H * 0.86, s.W), on = smooth((t - START + 1) / 0.8) * (1 - smooth((t - END_ZOOM - 0.6) / 1));

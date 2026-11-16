@@ -203,7 +203,8 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Hub `animations/index.html` (Resources menu and a Resources card); one page per animation with a written description of every step; topic pages link to them with an `aside.sim.anim` box.
 - Batch 1: powers of ten (Skills page; public-domain NASA/Hubble photos credited on the page and on About), A.1 motion graphs, A.5 space–time diagrams (HL), D.3 a charge in a magnetic field (the demo).
 - Code: shared player `js/anim/player.js`, one scene per file in `js/anim/`, styles `css/animations.css`. `tools/anim-sheet.html?anim=<name>` (not published) draws many frames on one page for checking; `?t=12` on an animation page freezes it at 12 s.
-- Next: the teacher's check of batch 1, then theme B.
+- 16 November 2026 (teacher's requests): longer holds; background music generated in the browser (`js/anim/music.js`), on by default with its own score per animation; click or tap the picture to pause; powers of ten with better DNA, virus, blood cells and a travelling light pulse, and captions giving "how many times bigger" in ordinary numbers. New: A.2 what friction is, A.2 collisions, explosions and rockets (the rocket equation labelled beyond the syllabus), A.3 a bungee jump (energy), A.4 the rolling race (HL).
+- Next: the teacher's check of these, then theme B.
 
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).

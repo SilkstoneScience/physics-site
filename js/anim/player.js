@@ -218,7 +218,7 @@
   };
 
   // ---------- music (generated in the browser by js/anim/music.js, loaded only when first switched on) ----------
-  const pref = { get() { try { return localStorage.getItem('anim-music') === 'on'; } catch { return false; } },
+  const pref = { get() { try { return localStorage.getItem('anim-music') !== 'off'; } catch { return true; } },
     set(on) { try { localStorage.setItem('anim-music', on ? 'on' : 'off'); } catch { /* private mode */ } } };
   let musicLib = null;
   const loadMusic = () => musicLib || (musicLib = new Promise((res, rej) => {
@@ -243,10 +243,13 @@
     ctrl.innerHTML = '<button type="button" data-a="play">Pause</button><button type="button" data-a="replay">Replay</button>'
       + '<button type="button" data-a="music" aria-pressed="false" title="Background music, made by the browser">♪ Music</button>'
       + '<button type="button" data-a="full">Full screen</button>';
-    fig.append(bar, ctrl);
+    const hint = document.createElement('div'); hint.className = 'anim-hint'; hint.hidden = true;
+    hint.textContent = '♪ Tap the animation to hear the music';
+    fig.append(bar, ctrl, hint);
     const [bPlay, bReplay, bMusic, bFull] = ctrl.querySelectorAll('button');
     if (!fig.requestFullscreen) bFull.hidden = true;
-    if (!(window.AudioContext || window.webkitAudioContext)) bMusic.hidden = true;
+    const canSound = !!(window.AudioContext || window.webkitAudioContext);
+    if (!canSound) bMusic.hidden = true;
 
     let paused = hold !== null || reduce, tHold = hold !== null ? tm.toReal(hold) : tm.toReal(scene.poster ?? 0), t0 = performance.now();
     let visible = false, raf = 0;
@@ -255,16 +258,17 @@
     label();
 
     // music for this stage
-    let musicOn = pref.get(), music = null;
-    const musicLabel = () => { bMusic.setAttribute('aria-pressed', String(musicOn)); bMusic.textContent = musicOn ? '♪ Music on' : '♪ Music'; };
+    let musicOn = canSound && pref.get(), music = null, musicStarted = false;
+    const showHint = () => { hint.hidden = !(musicOn && !musicStarted && !paused); };
+    const musicLabel = () => { bMusic.setAttribute('aria-pressed', String(musicOn)); bMusic.textContent = musicOn ? '♪ Music on' : '♪ Music off'; showHint(); };
     musicLabel();
     async function syncMusic() {
       const want = musicOn && !paused && visible && gestured;
       if (!want) { if (music) music.pause(); return; }
       if (!music) {
-        try { const lib = await loadMusic(); music = music || lib.create(scene.music || {}); } catch { bMusic.hidden = true; return; }
+        try { const lib = await loadMusic(); music = music || lib.create(scene.music || {}); } catch { bMusic.hidden = true; musicOn = false; showHint(); return; }
       }
-      if (musicOn && !paused && visible) music.play();
+      if (musicOn && !paused && visible) { music.play(); musicStarted = true; showHint(); }
     }
     gestureWaiters.add(syncMusic);
 
@@ -286,10 +290,16 @@
     function loop() { draw(); raf = visible ? requestAnimationFrame(loop) : 0; }
     function start() { if (!raf && visible) raf = requestAnimationFrame(loop); }
 
-    bPlay.addEventListener('click', () => {
+    function togglePlay() {
       if (paused) { t0 = performance.now() - tHold * 1000; paused = false; }
       else { tHold = T(); paused = true; }
-      label(); start(); syncMusic();
+      label(); start(); syncMusic(); showHint();
+    }
+    bPlay.addEventListener('click', togglePlay);
+    // click or tap anywhere on the picture to pause or play (the first tap only starts the music, if it is waiting)
+    cv.addEventListener('click', () => {
+      if (musicOn && !musicStarted && !paused) { gestured = true; syncMusic(); return; }
+      togglePlay();
     });
     bReplay.addEventListener('click', () => { t0 = performance.now(); paused = false; label(); start(); syncMusic(); });
     bMusic.addEventListener('click', () => {
@@ -329,5 +339,6 @@
     scene.frame(s, t); return true;
   };
   const durationOf = (name) => scenes[name] && scenes[name].duration;
-  window.Anim = { register: registerAndMount, still, durationOf, V, D, C, clamp, smooth, lerp, fade, camera, project };
+  const sceneOf = (name) => scenes[name];        // for checking tools (e.g. a scene's marks)
+  window.Anim = { register: registerAndMount, still, durationOf, sceneOf, V, D, C, clamp, smooth, lerp, fade, camera, project };
 })();
