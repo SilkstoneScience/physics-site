@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: electric field lines and equipotentials · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics D.2: calculated electric field lines around point charges, a dipole, two like charges and parallel plates, the force on a test charge, and (HL) equipotentials.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/electric-fields.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: electric field lines and equipotentials · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics D.2: calculated electric field lines around point charges, a dipole, two like charges and parallel plates, the force on a test charge, and (HL) equipotentials.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/electric-fields.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/efield.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Electric field lines</p>
+    <h1>Electric field lines and equipotentials <span class="tag hl">+ HL extra</span></h1>
+    <p class="lead">Field lines grow out of a positive charge, into a negative one, between two opposite charges, between two like charges and between parallel plates, while a small test charge shows the force the field exerts. Every line is calculated, not sketched. The last part, on equipotentials, is HL. <a class="tag" href="../themes/d2.html#elines">D.2 Electric field lines</a></p>
+
+    <figure class="anim-stage" data-anim="efield">
+      <canvas role="img" aria-label="Animation of calculated electric field lines: radial lines around a positive and then a negative point charge with a test charge and its force arrow, the lines between two opposite charges, two like charges with a point of zero field between them, the uniform field between parallel plates with curved lines at the edges, then (HL) green equipotentials crossing the field lines at right angles. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The violet lines are electric field lines, with arrows showing the direction of the force on a small positive test charge. Positive charges are pink-red and negative charges are cyan; force arrows are orange. Every line is calculated: starting from points spaced evenly round a charge, the line follows the direction of the field in tiny steps. The charges are in a vacuum (or air), $k = 8.99 \times 10^9$ $\text{N m}^2\,\text{C}^{-2}$, and the lines are drawn in one flat slice through the charges.</p>
+      <ol>
+        <li>A point charge $Q = +2.0$ nC. Its field lines point radially outwards, and they are closer together where the field is stronger.</li>
+        <li>A test charge $q = +1.0$ nC (the small dot) is placed $r = 0.10$ m away: $E = \dfrac{kQ}{r^2} = \dfrac{8.99 \times 10^9 \times 2.0 \times 10^{-9}}{0.10^2} = 1.8 \times 10^3$ $\text{N C}^{-1}$.</li>
+        <li>The force on it is $F = qE = 1.0 \times 10^{-9} \times 1.8 \times 10^3 = 1.8 \times 10^{-6}$ N, along the field line and away from $Q$.</li>
+        <li>At $r = 0.20$ m the field is $1.8 \times 10^3 \div 4 = 450$ $\text{N C}^{-1}$: twice the distance gives a quarter of the field (an inverse-square law). The force arrow shrinks to a quarter of its length.</li>
+        <li>A negative charge, $-2.0$ nC: the lines point inwards, and a positive test charge is pulled towards it.</li>
+        <li>Two equal and opposite charges, $0.20$ m apart. The lines start on the positive charge and end on the negative one. They never cross, because the field has only one direction at each point, and they are most crowded between and close to the charges, where the field is strongest.</li>
+        <li>Two equal positive charges, $0.20$ m apart: the lines bend away from each other. <strong>Predict:</strong> is there a point near them where the field is zero?</li>
+        <li>Yes: the midpoint. There the two fields are equal in size and opposite in direction, so they cancel and $E = 0$. A test charge placed exactly there would feel no force. Everywhere else the two fields add as vectors.</li>
+        <li>Two parallel plates, seen edge-on and long out of the screen, $d = 4.0$ cm apart, with a potential difference of $120$ V. Between the plates the lines are parallel and equally spaced: the field is uniform, $E = \dfrac{V}{d} = \dfrac{120}{0.040} = 3.0 \times 10^3$ $\text{V m}^{-1}$ (the same unit as $\text{N C}^{-1}$), from the positive plate to the negative plate.</li>
+        <li>So a test charge feels the same force anywhere between the plates (the two arrows inside are equal). Beyond the ends of the plates the lines bulge outwards and the field is weaker (the third arrow, at the end of the plates, is shorter and slants outwards). These are the edge effects.</li>
+        <li><span class="tag hl">HL</span> Equipotentials (green) join points at the same electric potential. For a point charge, $V_e = \dfrac{kQ}{r}$, so they are circles (spheres in three dimensions). Drawn every 30 V, from $180$ V at $r = 0.10$ m ($17.98 \div 0.10 = 179.8$ V) to $60$ V at $r = 0.30$ m, they spread out as the field gets weaker.</li>
+        <li><span class="tag hl">HL</span> They cross every field line at right angles. A charge moving along an equipotential has the force at right angles to its motion, so no work is done ($W = q\Delta V_e = 0$).</li>
+        <li><span class="tag hl">HL</span> For two opposite charges the equipotentials loop round each charge, and the line midway between them is the 0 V equipotential (these are not drawn at equal steps of potential).</li>
+        <li><span class="tag hl">HL</span> Between the plates the equipotentials are flat and equally spaced away from the edges: 120, 90, 60, 30 and 0 V, one every $1.0$ cm. Near the ends they curve round the plates.</li>
+        <li><span class="tag hl">HL</span> $E = -\dfrac{\Delta V_e}{\Delta r}$: the potential falls by 30 V for every $0.010$ m downwards, so $E = \dfrac{30}{0.010} = 3.0 \times 10^3$ $\text{V m}^{-1}$ downwards, the same as $\dfrac{V}{d}$. The field points from high potential to low potential.</li>
+      </ol>
+      <p>How the plates are worked out: seen edge-on, each plate is split into 60 narrow strips, and the charge on each strip is chosen so that the whole plate is at one potential (120 V and 0 V), with equal and opposite charges on the two plates. The field of each strip then comes from an exact formula. This puts more charge near the ends of the plates, as on real metal plates, and gives the edge effects. In the middle the calculated field is $3.0 \times 10^3$ $\text{V m}^{-1}$, as $\dfrac{V}{d}$ says. The plate lines are spaced so that each carries the same share of the field, so a few also leave the outside faces and curve round to the outside of the other plate.</p>
+      <p>Field lines are a model: the field exists everywhere between the lines, not only on them, and how many lines we draw is our choice. In a flat drawing of a three-dimensional field, the spacing of the lines only roughly shows the field strength.</p>
+      <p>Read more in <a href="../themes/d2.html#coulomb">D.2 section 3: Coulomb's law</a>, <a href="../themes/d2.html#efield">section 4: electric field strength</a>, <a href="../themes/d2.html#elines">section 5: electric field lines</a>, <a href="../themes/d2.html#plates">section 6: the uniform field between parallel plates</a>, and (HL) <a href="../themes/d2.html#potential">section 11: electric potential</a>, <a href="../themes/d2.html#gradient">section 12: potential gradient</a> and <a href="../themes/d2.html#equip">section 13: equipotential surfaces</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

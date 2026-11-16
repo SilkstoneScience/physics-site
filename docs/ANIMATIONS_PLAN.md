@@ -90,8 +90,18 @@ Theme C (built 16 November 2026; waiting for the teacher's check)
 
 Theme D (batch 4)
 - [x] D.3 Charges in a magnetic field: `charge-in-b-field.html` (built first, as the demo)
-- D.1 Field lines and equipotentials; D.1 potential well (model of potential); D.2 electric field lines and
-  equipotentials; D.3 velocity selector and mass spectrometer; D.4 magnet through a coil.
+- [x] D.1 Gravitational field lines: `gravitational-fields.html` (the Earth's field to 3R, the near-uniform field at the surface,
+  the Earth–Moon field traced from the exact combined field with the cancelling point at 0.90d; (HL) equipotentials at equal steps of V)
+- [x] D.1 The gravitational potential well (HL): `potential-well.html` (V_g = −GM/r spun into a surface, labelled on screen and on
+  the page as a graph of potential, a model, not a picture of space; a 500 kg satellite at 2R, a transfer to 4R and escape, with
+  the orbit calculated from Newton's law and drawn at the depth V(r); the page says course calculations use circular orbits only)
+- [x] D.2 Electric field lines and equipotentials: `electric-fields.html` (lines traced from the exact field; plates modelled as
+  charged strips solved to be equipotentials, so the edge effects are real; (HL) equipotentials)
+- [x] D.3 Charges in electric and crossed fields: `crossed-fields.html` (an electron between plates; a velocity selector with exact
+  cycloid paths; neon-20 and neon-22 sorted by charge-to-mass ratio, "the idea of a mass spectrometer", as in the notes)
+- [x] D.4 Induction (HL): `induction.html` (a two-pole model of the magnet gives the flux linkage, and ε = −N ΔΦ/Δt is its gradient;
+  Lenz's law; a falling magnet; an ac generator)
+  (Theme D built 16 November 2026; waiting for the teacher's check.)
 
 Theme E (batch 5): E.1 Rutherford scattering; E.1 energy levels and spectra; E.5 a star's path on the
 HR diagram.
