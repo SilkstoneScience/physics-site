@@ -2,7 +2,7 @@
 import { generate, SHOWCASE_SEED, GEN_VERSION, makeRng } from './generator.js';
 import { Sim } from './sim.js';
 import * as P from './physics.js';
-import { buildSector, systemSeed, starDistance, apparentBrightness } from './sector.js';
+import { buildSector, systemSeed, starDistance, apparentBrightness, LIGHT_YEAR } from './sector.js';
 import { solarSystem, isSol } from './solar.js';
 
 const $ = (id) => document.getElementById(id);
@@ -209,7 +209,7 @@ const actions = app.actions = {
     const from = app.sector.stars.find((s) => s.index === state.place.star), to = app.sector.stars.find((s) => s.index === index);
     if (!to || to === from) return;
     const d = starDistance(from, to), intro = $('intro');
-    $('intro-status').textContent = `Travelling ${(d / 9.46e15).toFixed(1)} light years to ${to.name}. Light itself takes ${(d / 9.46e15).toFixed(1)} years.`;
+    $('intro-status').textContent = `Travelling ${(d / LIGHT_YEAR).toPrecision(3)} light years to ${to.name}. Light itself takes ${(d / LIGHT_YEAR).toPrecision(3)} years.`;
     $('intro-fill').style.width = '0%'; $('intro-skip').hidden = true;
     intro.hidden = false; void intro.offsetWidth; intro.classList.remove('gone');
     await new Promise((r) => setTimeout(r, reduced ? 0 : 1300));
@@ -217,7 +217,7 @@ const actions = app.actions = {
     history.replaceState(null, '', query(place) || location.pathname);
     await rebuildKeeping(place, state.quality, true, [from.pos[0] - to.pos[0], from.pos[1] - to.pos[1], from.pos[2] - to.pos[2]]);
     intro.classList.add('gone'); setTimeout(() => { intro.hidden = true; }, reduced ? 0 : 1500);
-    app.ui.toast(`Arrived at ${to.name}, ${(d / 9.46e15).toFixed(1)} light years from ${from.name}. Look for ${from.name} in the sky: open Stars.`, 8000);
+    app.ui.toast(`Arrived at ${to.name}, ${(d / LIGHT_YEAR).toPrecision(3)} light years from ${from.name}. Look for ${from.name} in the sky: open Stars.`, 8000);
   },
   setting(k, v) { settings[k] = v; saveSettings(); },
   seed(s) {

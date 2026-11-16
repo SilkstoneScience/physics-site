@@ -8,8 +8,13 @@
 //   Spin-axis directions: IAU Working Group on Cartographic Coordinates and Rotational Elements (right ascension
 //     and declination of each north pole).
 //
-// What is real: masses, sizes, orbits, tilts, spin rates, and where each planet is on a given date (to a small
-// fraction of a degree for some decades either side of 2000; the slow drift of the orbits is left out).
+// What is real: masses, sizes, orbits, tilts, spin rates, and where each planet is on a given date: within about
+// half a degree, as seen from the Sun, from roughly 1975 to 2050 (the orbits keep their shapes of the year 2000,
+// and their slow drift is left out). "Earth" follows JPL's row for the centre of mass of Earth and Moon, which is
+// inside the Earth. The Sun's own 7 degree tilt is not modelled.
+// The Sun's mass is set to NASA's GM (1.32712e20 m^3 s^-2) divided by the data booklet's G, 1.98969e30 kg, rather
+// than the fact sheet's 1.9884e30 kg: the engine works with the booklet's G, which is 0.065 % below the value NASA
+// used, and only the product GM sets how fast the planets go round. Both masses are 1.99e30 kg to 3 figures.
 // What is not: the surfaces are drawn by the same procedural shaders as invented planets (Earth's continents here
 // are made up); only seven large moons are included, and they start at arbitrary points of their real orbits.
 import { G, prepareOrbit, density, orbitalPeriod, blackbodyRGB } from './physics.js';
@@ -30,7 +35,7 @@ const PLANETS = [
   ['Jupiter', 'gas', 'gas', 1898, 69911, 9.925, 5.20288700, 0.04838624, 1.30439695, 34.39644051, 14.72847983, 100.47390909, 268.06, 64.50, [0.1, 0.85, 0.6, 0.55, 0.75, 0]],
   ['Saturn', 'gas', 'gas', 568, 58232, 10.656, 9.53667594, 0.05386179, 2.48599187, 49.95424423, 92.59887831, 113.66242448, 40.59, 83.54, [0.5, 0.6, 0.2, 0.2, 0.35, 0]],
   ['Uranus', 'icegiant', 'icegiant', 86.8, 25362, -17.24, 19.18916464, 0.04725744, 0.77263783, 313.23810451, 170.95427630, 74.01692503, 257.31, -15.18, [0.1, 0.1, 0, 0.5, 0, 0]],
-  ['Neptune', 'icegiant', 'icegiant', 102, 24622, 16.11, 30.06992276, 0.00859048, 1.77004347, -55.12002969, 44.96476227, 131.78422574, 299.36, 43.46, [1, 0.6, 0, 0.3, 0, 0]],
+  ['Neptune', 'icegiant', 'icegiant', 102, 24622, 16.11, 30.06992276, 0.00859048, 1.77004347, -55.12002969, 44.96476227, 131.78422574, 299.33, 42.95, [1, 0.6, 0, 0.3, 0, 0]],   // (Neptune's pole includes the IAU's periodic term at J2000)
 ];
 // parent, name, type, mass /10^20 kg, radius /km, a /10^3 km, e, inclination /deg (to the planet's equator; the Moon's is to the ecliptic)
 const MOONS = [
@@ -53,7 +58,7 @@ const wrap = (x) => ((x % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
 
 export function solarSystem() {
   const star = {
-    kind: 'star', name: 'Sun', mass: 1.9884e30, radius: 6.957e8, luminosity: 3.828e26, temp: 5772,
+    kind: 'star', name: 'Sun', mass: 1.32712e20 / G, radius: 6.957e8, luminosity: 3.828e26, temp: 5772,
     color: blackbodyRGB(5772, [0, 0, 0]), rotPeriod: 609.12 * 3600, vis: [0.31, 0.62, 0.17, 0.5],
   };
   const planets = PLANETS.map(([name, type, shade, m, r, rot, a, e, inc, L, peri, node, ra, dec, vis]) => {
@@ -71,6 +76,9 @@ export function solarSystem() {
     return p;
   });
   const by = Object.fromEntries(planets.map((p) => [p.name, p]));
+  // Mars: matt rust and ochre with soft darker regions, a small polar cap, no canyon lines, only a thin haze
+  by.Mars.look = { A: [0.5, 0.25, 0.14], B: [0.76, 0.47, 0.28], C: [0.3, 0.17, 0.12], P: [1, 0.94, 0, 0], atm: [0.85, 0.6, 0.45], atmK: 0.18 };
+  by.Mercury.look = { A: [0.3, 0.28, 0.26], B: [0.55, 0.52, 0.48], C: [0.22, 0.2, 0.19] };
   by.Venus.label = 'Rocky planet under thick cloud';
   by.Venus.look = { A: [0.86, 0.78, 0.55], B: [0.93, 0.88, 0.7], C: [0.98, 0.95, 0.85], D: [0.8, 0.7, 0.45], atm: [0.95, 0.85, 0.6], atmK: 0.9 };
   // Saturn's main rings: from the inner edge of the C ring to the outer edge of the A ring
@@ -82,9 +90,11 @@ export function solarSystem() {
       el: { a: a * 1e6, e, i: inc * DEG, O: wrap(1.7 * (k + 1)), w: wrap(2.9 * (k + 1)), M0: wrap(4.1 * (k + 1)), t0: 0 },
       vis: [0.3 + 0.1 * k, 0.2 + 0.1 * (k % 4), 0.5, 0.6, 0.4, 0.3], atmosphere: 0, rings: null, moons: [], axis: p.axis, basis: p.basis,
     };
-    if (name === 'Moon') moon.orbitBasis = [1, 0, 0, 0, 1, 0, 0, 0, 1];      // the Moon's orbit is tilted to Earth's orbit, not its equator
+    // the Moon's orbit is tilted to Earth's orbit, not to Earth's equator, and it spins about (nearly) the pole of that orbit
+    if (name === 'Moon') { moon.orbitBasis = moon.basis = [1, 0, 0, 0, 1, 0, 0, 0, 1]; moon.axis = [0, 0, 1]; moon.look = { A: [0.42, 0.42, 0.42], B: [0.7, 0.7, 0.69], C: [0.26, 0.26, 0.27] }; }
     moon.density = density(moon.mass, moon.radius);
-    moon.rotPeriod = orbitalPeriod(moon.el.a, G * p.mass);                  // all seven keep one face to their planet
+    // all seven keep one face to their planet; Triton orbits backwards, so it spins backwards too
+    moon.rotPeriod = orbitalPeriod(moon.el.a, G * p.mass) * (inc > 90 ? -1 : 1);
     p.moons.push(moon);
   });
   const sys = { seed: 'sol', version: 1, real: true, star, planets, belt: { inner: 2.1 * AU_EXACT, outer: 3.3 * AU_EXACT, seed: 0.5 }, zone: AU_EXACT };

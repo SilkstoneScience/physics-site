@@ -31,8 +31,8 @@ function palette(b) {
   const v = b.vis, lerp = (a, c, t) => a + (c - a) * t;
   const o = { A: hsl(0, 0, 0.4), B: hsl(0, 0, 0.6), C: hsl(0, 0, 0.2), D: hsl(0, 0, 0.5), P: new THREE.Vector4(1, 0.9, 0.1, 0.5), atm: hsl(0.6, 0.6, 0.6), atmK: 0, H: 0.02, ringA: hsl(0.1, 0.25, 0.7), ringB: hsl(0.08, 0.2, 0.45) };
   switch (b.shade || b.type) {
-    case 'rocky': o.A = hsl(lerp(0.04, 0.1, v[0]), lerp(0.1, 0.3, v[1]), 0.2); o.B = hsl(lerp(0.05, 0.11, v[2]), lerp(0.1, 0.25, v[1]), 0.5); o.C = hsl(0.06, 0.1, 0.11); o.P.set(b.atmosphere ? 0.35 : 1, 0, 0, 0); o.atm = hsl(0.08, 0.3, 0.6); o.atmK = b.atmosphere ? 0.3 : 0; break;
-    case 'moonrock': o.A = hsl(lerp(0.05, 0.1, v[0]), lerp(0.02, 0.14, v[1]), 0.22); o.B = hsl(0.08, lerp(0.02, 0.1, v[2]), 0.52); o.C = hsl(0.07, 0.05, 0.1); o.P.set(1, 0, 0, 0); break;
+    case 'rocky': o.A = hsl(lerp(0.04, 0.1, v[0]), lerp(0.1, 0.3, v[1]), 0.2); o.B = hsl(lerp(0.05, 0.11, v[2]), lerp(0.1, 0.25, v[1]), 0.5); o.C = hsl(0.06, 0.1, 0.16); o.P.set(b.atmosphere ? 0.35 : 1, 0, 0, 0); o.atm = hsl(0.08, 0.3, 0.6); o.atmK = b.atmosphere ? 0.3 : 0; break;
+    case 'moonrock': o.A = hsl(lerp(0.05, 0.1, v[0]), lerp(0.02, 0.14, v[1]), 0.22); o.B = hsl(0.08, lerp(0.02, 0.1, v[2]), 0.52); o.C = hsl(0.07, 0.05, 0.16); o.P.set(1, 0, 0, 0); break;
     case 'ocean': o.A = hsl(lerp(0.24, 0.38, v[0]), 0.5, 0.2); o.B = hsl(lerp(0.08, 0.13, v[1]), 0.45, 0.42); o.C = hsl(0.07, 0.15, 0.3); o.D = hsl(lerp(0.56, 0.63, v[2]), 0.75, 0.2);
       o.P.set(lerp(-0.02, 0.2, v[3]), lerp(0.76, 0.92, v[4]), lerp(-0.05, 0.15, v[5]), 0); o.atm = hsl(0.6, 0.85, 0.62); o.atmK = 1; o.H = 0.022; break;
     case 'desert': o.A = hsl(lerp(0.03, 0.08, v[0]), 0.6, 0.3); o.B = hsl(lerp(0.07, 0.12, v[1]), 0.55, 0.55); o.C = hsl(0.03, 0.3, 0.1);
@@ -52,6 +52,7 @@ function palette(b) {
     const c = (a) => new THREE.Color().setRGB(a[0], a[1], a[2], THREE.SRGBColorSpace);
     for (const k of ['A', 'B', 'C', 'D', 'atm']) if (b.look[k]) o[k] = c(b.look[k]);
     if (b.look.atmK !== undefined) o.atmK = b.look.atmK;
+    if (b.look.P) o.P.set(b.look.P[0], b.look.P[1], b.look.P[2], b.look.P[3]);
   }
   if (b.rings) { const t = b.rings.tint; o.ringA = hsl(lerp(0.07, 0.13, t), lerp(0.12, 0.4, t), 0.72); o.ringB = hsl(lerp(0.05, 0.1, t), 0.25, 0.42); }
   return o;
@@ -172,7 +173,7 @@ export class Scene {
     const pos = new Float32Array(3 * n), col = new Float32Array(4 * n);
     this.neighbours.forEach((s, i) => {
       pos.set(s.dir, 3 * i);
-      // brightness on screen follows the logarithm of the real apparent brightness, as the eye does
+      // brightness on screen roughly follows the logarithm of the calculated apparent brightness (the faintest are all drawn the same)
       col.set([s.color[0], s.color[1], s.color[2], Math.min(1, Math.max(0.3, 0.55 + 0.22 * Math.log10(s.b / 1e-8)))], 4 * i);
     });
     const g = new THREE.BufferGeometry();

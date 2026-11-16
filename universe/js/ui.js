@@ -36,7 +36,9 @@ export function duration(s) {
   if (s < 2 * YEAR) return `${num(s / DAY)} days`;
   return `${num(s / YEAR)} years`;
 }
-const dist = (m) => (m > 0.01 * AU_EXACT ? `${num(m / AU_EXACT)} AU` : `${num(m / 1000)} km`);   // 1 AU = 1.496e11 m (the booklet rounds it to 1.50e11)
+// 1 AU: the booklet's 1.50e11 m for invented systems; 1.496e11 m for the real Solar System, so that Earth reads 1.00 AU
+let AUd = AU;
+const dist = (m) => (m > 0.01 * AUd ? `${num(m / AUd)} AU` : `${num(m / 1000)} km`);
 const massAlt = (m) => (m > 0.05 * M_SUN ? `${num(m / M_SUN)} solar masses` : m > 0.001 * M_EARTH ? `${num(m / M_EARTH)} Earth masses` : `${num(m / 7.35e22)} Moon masses`);
 const HL = ' <span class="tag hl">HL</span>';
 const U = { kg: 'kg', m: 'm', ms: 'm s⁻¹', ms2: 'm s⁻²', Nkg: 'N kg⁻¹', N: 'N', J: 'J', Jkg: 'J kg⁻¹', s: 's', W: 'W', K: 'K' };
@@ -107,6 +109,7 @@ export class UI {
   rebuild() {
     const { sim, state } = this.app, sys = sim.sys;
     const place = state.place;
+    AUd = sys.real ? AU_EXACT : AU;
     $('sys-line').textContent = sys.real ? 'The Solar System · real data from NASA' : `${sys.star.name} system · seed “${place.seed}”${place.star ? ` · neighbour ${place.star}` : ''}`;
     this.buildStars();
     $('seed-input').value = state.place.seed;
@@ -130,7 +133,7 @@ export class UI {
     $('stars-toggle').hidden = ul.hidden = !sec;
     if (!sec) { $('stars-intro').textContent = 'The real Solar System stands on its own here: its real neighbours are not included. Use “Starting system” or “New system” in the System panel to go back to the invented stars, where you can travel between systems.'; return; }
     const here = sec.stars.find((s) => s.index === state.place.star);
-    $('stars-intro').textContent = `${sec.stars.length - 1} other systems lie within 12 light years of ${sec.stars[0].name}. Each is a full system that you can travel to. You are at ${here.name}.`;
+    $('stars-intro').textContent = `${sec.stars.length - 1} other systems lie within 12 light years of ${sec.stars[0].name}. Each is a full, invented system that you can travel to. You are at ${here.name}.`;
     const others = sec.stars.filter((s) => s !== here).map((s) => ({ s, d: starDistance(s, here) })).sort((a, b) => a.d - b.d);
     for (const { s, d } of others) {
       const li = document.createElement('li'), bt = document.createElement('button');
@@ -148,13 +151,13 @@ export class UI {
     const here = sec.stars.find((s) => s.index === state.place.star), s = sec.stars.find((q) => q.index === index), d = starDistance(s, here);
     const b = apparentBrightness(s.luminosity, d), home = sim.bodies[0], p1 = sim.sys.planets[Math.min(2, sim.sys.planets.length - 1)], bHome = apparentBrightness(home.luminosity, p1.el.a);
     box.innerHTML = `<h3>${s.name}</h3>
-      <div class="row"><span class="k">Distance from ${here.name}, <i>d</i></span><span class="v">${num(d / LIGHT_YEAR)} ly</span><span class="alt" style="grid-column:1/3">${num(d)} m · ${num(d / AU_EXACT)} AU</span></div>
+      <div class="row"><span class="k">Distance from ${here.name}, <i>d</i></span><span class="v">${num(d / LIGHT_YEAR)} ly</span><span class="alt" style="grid-column:1/3">${num(d)} m · ${num(d / AU)} AU</span></div>
       <div class="row"><span class="k">Time for its light to reach you</span><span class="v">${num(d / LIGHT_YEAR)} years</span></div>
       <div class="row"><span class="k">Mass</span><span class="v">${num(s.mass / M_SUN)} solar masses</span></div>
       <div class="row"><span class="k">Luminosity, <i>L</i></span><span class="v">${num(s.luminosity)} W</span><span class="alt" style="grid-column:1/3">${num(s.luminosity / L_SUN)} × the Sun · surface at ${num(s.temp)} K</span></div>
       <div class="row"><span class="k">Planets</span><span class="v">${s.planets}</span></div>
       <div class="row"><span class="k">Apparent brightness from here, <i>b</i></span><span class="v">${num(b)} W m⁻²</span>
-        <div class="work"><p>Its light spreads over a sphere of area $4\\pi d^2$:</p>$$b = \\dfrac{L}{4\\pi d^2} = \\dfrac{${tex(s.luminosity)}}{4\\pi\\,(${tex(d)})^2}$$$$b = ${tex(b)}\\text{ W m}^{-2}$$<p>For comparison, ${home.name} gives ${num(bHome)} W m⁻² at ${p1.name}: ${num(bHome / b, 2)} times as much. That is why other stars are points of light.</p></div></div>
+        <div class="work"><p>Its light spreads over a sphere of area $4\\pi d^2$:</p>$$b = \\dfrac{L}{4\\pi d^2} = \\dfrac{${tex(s.luminosity)}}{4\\pi\\,(${tex(d)})^2}$$$$b = ${tex(b)}\\text{ W m}^{-2}$$<p>For comparison, ${home.name} gives ${num(bHome)} W m⁻² at ${p1.name}: ${num(bHome / b, 2)} times as much. That is why other stars look so faint, even one as luminous as this.</p></div></div>
       <p class="btn-row"><button type="button" class="btn" id="star-go">Travel to ${s.name}</button></p>
       <p class="small">The trip is skipped: at the speed of light it would take ${num(d / LIGHT_YEAR)} years, and nothing with mass can travel that fast. Notes: <a href="../themes/b1.html#luminosity">B.1 apparent brightness</a> · <a href="../themes/e5.html#units">E.5 astronomical distances</a></p>`;
     $('star-go').addEventListener('click', () => this.app.actions.travel(index));

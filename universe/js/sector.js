@@ -7,7 +7,7 @@ import { generate, makeRng } from './generator.js';
 export const LIGHT_YEAR = 9.46e15;      // m (data booklet)
 export const C_LIGHT = 3.00e8;          // m s^-1 (data booklet)
 export const SECTOR_RADIUS = 12;        // light years
-// About one star per 250 cubic light years, as near the Sun: roughly 20 to 30 neighbours within 12 light years.
+// About one star per 290 cubic light years, close to the density near the Sun: 20 to 28 neighbours within 12 light years.
 const round = (x) => Number(x.toPrecision(7));
 
 export const systemSeed = (sectorSeed, index) => (index ? `${sectorSeed}~${index}` : String(sectorSeed));

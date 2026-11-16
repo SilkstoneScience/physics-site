@@ -80,6 +80,29 @@ Size of the page's own files: about 243 KB uncompressed (limit agreed: 400 KB). 
 - About page: nothing to credit (no images; Three.js is MIT-licensed and loaded from the CDN), unless the teacher wants it mentioned.
 - GitHub: decide whether `tools/universe/test.mjs` should run in `.github/workflows/check.yml`.
 
-## Phase 2 (only after the teacher approves Phase 1)
+## Phase 2 (teacher approved Phase 1 and asked for Phase 2 on 16 November 2026)
 
-More systems and travel between stars; a "real Solar System" preset from public-domain NASA data.
+Built on the same branch. Decisions taken by default, for the teacher to confirm:
+
+1. **Neighbouring stars are invented**, like the planets. Each seed now defines a neighbourhood: star 0 is the system the seed always gave (unchanged, so old links and the snapshot test still hold), and 20 to 28 more stars lie within 12 light years, no two closer than 1.3 light years. That is about the real density of stars near the Sun. Each neighbour is a full system with the seed `<seed>~<number>`. Links record the place: `?seed=starfall&star=5&v=1`.
+2. **Travel skips the journey.** The Stars panel gives each star's distance (light years, metres, AU), light-travel time, mass, luminosity, number of planets and apparent brightness from where you are, b = L/4πd², with the working. "Travel" fades out, builds that system and arrives from the direction you came from; the star you left is then in the sky in exactly the opposite direction. The screen says how long light itself would take.
+3. **The real Solar System is a separate preset**, not a star on the invented map: seed `sol`, or the button in the System panel. It has no neighbours, because mixing real stars with invented planets would mislead.
+
+New files: `universe/js/solar.js` (the data, with its sources at the top) and `universe/js/sector.js` (the neighbourhood). Both are plain modules that Node tests.
+
+### The real Solar System: what is and is not real
+
+- Real: masses, mean radii, rotation periods, the Sun's values, Saturn's main rings, and seven large moons (Moon, Io, Europa, Ganymede, Callisto, Titan, Triton), from the NASA NSSDCA planetary fact sheets (public domain, read 16 November 2026). Orbits from NASA JPL's "Approximate Positions of the Planets", Table 1, for 1 January 2000. Spin axes from the IAU pole directions. The clock shows real calendar dates.
+- Tested against NASA: all eight periods, mean speeds, densities, escape speeds, surface gravity, seven moon periods, seven axial tilts, Triton's backward orbit, and every planet's position against JPL's own formula (which includes the slow drift of the orbits): identical on 1 January 2000, within 0.35° in November 2026 and 0.51° in 2040 (Jupiter is the worst, because its own mass is left out of its period).
+- The Sun's mass is set to NASA's GM divided by the booklet's G (1.98969 × 10³⁰ kg, not the fact sheet's 1.9884 × 10³⁰ kg). Only the product GM sets how fast planets go round, and the booklet's G is 0.065 % below the value NASA used; without this, Earth was 3° from its true place by 2026. Both masses read 1.99 × 10³⁰ kg.
+- Not real: surfaces are drawn by the same shaders as invented planets (Earth's continents are made up; Venus is drawn as a cloud deck). Moons start at arbitrary points of their real orbits. The planets' orbits are fixed as they were in 2000, so positions drift from the real ones over centuries. Mars's two tiny moons, the other giants' faint rings and all dwarf planets are left out.
+- Small differences from NASA's quoted figures, by design: every planet is a sphere of its mean radius, so Jupiter's and Saturn's surface field strengths come out 4 % and 7 % above NASA's equatorial values; the Moon's period is 0.6 % long because its own mass is left out, as for every body in Orbits mode.
+- In the Solar System, distances in AU use 1 AU = 1.496 × 10¹¹ m so that Earth reads 1.00 AU; invented systems keep the booklet's 1.50 × 10¹¹ m.
+- Mars, Mercury, Venus and the Moon have hand-chosen colours so that each is recognisable; everything else about their surfaces is procedural.
+
+### Phase 2 tests
+
+- Node: 341 tests pass (76 new).
+- Independent physics review of Phase 2: every number in the tables matched the saved NASA and JPL pages. Fixed: the planets running 0.03 % slow (above); a sentence that said low brightness is why stars look like points (it is why they look faint); Triton's spin direction; Neptune's tilt (28.3°, was 27.9°); loose or empty tests. Left: the invented neighbours are 0.5 to 2 solar masses, while most real neighbours are dim red dwarfs (now said in the help).
+- Independent picture review of Phase 2: Saturn, Jupiter, Venus, Neptune and Earth read as themselves; Mars looked molten and was redone; the Moon and Mercury were too dark and too alike and were given their own greys. Remaining minor points: Earth's clouds are blobby and its sun glint hard; labels crowd near the Sun in the widest view.
+- Browser: the 56 earlier tests still pass; 16 new ones cover the Stars panel, clicking a star in the sky, travelling there and back (same home system, opposite direction, same distance, address updated) and the Solar System preset.

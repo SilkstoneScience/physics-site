@@ -250,6 +250,7 @@ section('5c. The real Solar System (NASA values) and the neighbouring stars');
     near(P.orbitalPeriod(m.el.a, G * p.mass) / DAY, T, name === 'Moon' ? 8e-3 : 3e-3, `${name}: period ${T} days`);
   }
   near(by.Earth.obliquity * 180 / Math.PI, 23.44, 2e-3, "Earth's axis is tilted 23.4° from the pole of its orbit");
+  near(Math.atan2(by.Earth.axis[1], by.Earth.axis[0]) * 180 / Math.PI, 90, 1e-6, "Earth's north pole leans towards longitude 90°, so the north has summer when Earth is at longitude 270° (June)");
   const tilt = (p) => { const n = [p.el.Q[1] * 0 + (p.el.P[1] * p.el.Q[2] - p.el.P[2] * p.el.Q[1]), p.el.P[2] * p.el.Q[0] - p.el.P[0] * p.el.Q[2], p.el.P[0] * p.el.Q[1] - p.el.P[1] * p.el.Q[0]]; return Math.acos(n[0] * p.axis[0] + n[1] * p.axis[1] + n[2] * p.axis[2]) * 180 / Math.PI; };
   near(tilt(by.Mars), 25.2, 0.02, "Mars's axis is tilted 25.2° to its orbit");
   near(tilt(by.Saturn), 26.7, 0.02, "Saturn's axis is tilted 26.7° to its orbit");
@@ -257,6 +258,34 @@ section('5c. The real Solar System (NASA values) and the neighbouring stars');
   near(180 - tilt(by.Uranus), 97.8, 0.02, 'Uranus lies on its side (97.8°) and spins backwards');
   near(180 - tilt(by.Venus), 177.4, 0.02, 'Venus is almost upside down (177.4°)');
   ok(by.Uranus.rotPeriod < 0 && by.Venus.rotPeriod < 0, 'both have negative rotation periods');
+  near(tilt(by.Neptune), 28.3, 0.01, "Neptune's axis is tilted 28.3° to its orbit");
+  near(tilt(by.Jupiter), 3.1, 0.03, "Jupiter's axis is tilted 3.1° to its orbit");
+  ok(tilt(by.Mercury) < 0.1, "Mercury's axis is almost exactly upright (0.03°)", String(tilt(by.Mercury)));
+  // moons
+  const [triton, nep] = moons.Triton, [luna] = moons.Moon;
+  const normal = (el) => [el.P[1] * el.Q[2] - el.P[2] * el.Q[1], el.P[2] * el.Q[0] - el.P[0] * el.Q[2], el.P[0] * el.Q[1] - el.P[1] * el.Q[0]];
+  const ang = (a, b) => Math.acos(a[0] * b[0] + a[1] * b[1] + a[2] * b[2]) * 180 / Math.PI;
+  near(ang(normal(triton.el), nep.axis), 157.345, 1e-3, "Triton orbits backwards: its orbit is tilted 157.3° to Neptune's equator");
+  ok(triton.rotPeriod < 0 && luna.rotPeriod > 0, 'and it spins backwards, keeping one face to Neptune');
+  near(ang(normal(luna.el), [0, 0, 1]), 5.145, 1e-3, "the Moon's orbit is tilted 5.1° to the plane of Earth's orbit");
+  // Where are the planets on later dates? Compared with JPL's own formula, which includes the slow drift of each orbit
+  // (Table 1 with its rates per century). Angle between the two directions, seen from the Sun.
+  const RATES = { Mercury: [0.00000037, 0.00001906, -0.00594749, 149472.67411175, 0.16047689, -0.12534081], Venus: [0.00000390, -0.00004107, -0.00078890, 58517.81538729, 0.00268329, -0.27769418], Earth: [0.00000562, -0.00004392, -0.01294668, 35999.37244981, 0.32327364, 0], Mars: [0.00001847, 0.00007882, -0.00813131, 19140.30268499, 0.44441088, -0.29257343], Jupiter: [-0.00011607, -0.00013253, -0.00183714, 3034.74612775, 0.21252668, 0.20469106], Saturn: [-0.00125060, -0.00050991, 0.00193609, 1222.49362201, -0.41897216, -0.28867794], Uranus: [-0.00196176, -0.00004397, -0.00242939, 428.48202785, 0.40805281, 0.04240589], Neptune: [0.00026291, 0.00005105, 0.00035372, 218.45945325, -0.32241464, -0.00508664] };
+  const EL0 = { Mercury: [0.38709927, 0.20563593, 7.00497902, 252.25032350, 77.45779628, 48.33076593], Venus: [0.72333566, 0.00677672, 3.39467605, 181.97909950, 131.60246718, 76.67984255], Earth: [1.00000261, 0.01671123, -0.00001531, 100.46457166, 102.93768193, 0], Mars: [1.52371034, 0.09339410, 1.84969142, -4.55343205, -23.94362959, 49.55953891], Jupiter: [5.20288700, 0.04838624, 1.30439695, 34.39644051, 14.72847983, 100.47390909], Saturn: [9.53667594, 0.05386179, 2.48599187, 49.95424423, 92.59887831, 113.66242448], Uranus: [19.18916464, 0.04725744, 0.77263783, 313.23810451, 170.95427630, 74.01692503], Neptune: [30.06992276, 0.00859048, 1.77004347, -55.12002969, 44.96476227, 131.78422574] };
+  const jplDir = (name, T) => {
+    const [a, e, I, L, peri, node] = EL0[name].map((x, k) => x + RATES[name][k] * T), D = Math.PI / 180;
+    const w = (peri - node) * D, M = (L - peri) * D, E = P.solveKepler(M, e), x = a * (Math.cos(E) - e), y = a * Math.sqrt(1 - e * e) * Math.sin(E);
+    const cw = Math.cos(w), sw = Math.sin(w), cO = Math.cos(node * D), sO = Math.sin(node * D), ci = Math.cos(I * D), si = Math.sin(I * D);
+    const v = [(cw * cO - sw * sO * ci) * x + (-sw * cO - cw * sO * ci) * y, (cw * sO + sw * cO * ci) * x + (-sw * sO + cw * cO * ci) * y, sw * si * x + cw * si * y], n = Math.hypot(...v);
+    return v.map((c) => c / n);
+  };
+  for (const [label, T, tol] of [['1 January 2000', 0, 1e-3], ['November 2026', 0.2687, 0.5], ['2040', 0.40, 0.75]]) {
+    const s2 = new Sim(solarSystem()); s2.update(T * 36525 * DAY);
+    let worst = 0, who = '';
+    for (const p of s2.sys.planets) { const k = 3 * p.id, r = Math.hypot(s2.pos[k], s2.pos[k + 1], s2.pos[k + 2]), d = ang([s2.pos[k] / r, s2.pos[k + 1] / r, s2.pos[k + 2] / r], jplDir(p.name, T)); if (d > worst) { worst = d; who = p.name; } }
+    ok(worst < tol, `${label}: every planet within ${tol}° of JPL's position`, `${who} is ${worst.toFixed(3)}° out`);
+    if (T) console.log(`  (${label}: the largest difference is ${who}, ${worst.toFixed(2)}°)`);
+  }
   // where is Earth on a known date? At the March equinox the Sun is seen at longitude 0, so Earth is at longitude 180 degrees.
   const sim = new Sim(sol), equinox = (Date.UTC(2000, 2, 20, 7, 35) - Date.UTC(2000, 0, 1, 12)) / 1000;
   sim.update(equinox);
@@ -270,12 +299,12 @@ section('5c. The real Solar System (NASA values) and the neighbouring stars');
   const A = buildSector('starfall'), B = buildSector('starfall');
   ok(JSON.stringify(A) === JSON.stringify(B), 'the same seed gives the same neighbouring stars');
   ok(A.stars[0].index === 0 && A.stars[0].pos.every((x) => x === 0) && hashSystem(generate(A.stars[0].seed)) === hashSystem(generate(SHOWCASE_SEED)), 'star 0 is the home system, unchanged');
-  ok(A.stars.length >= 20 && A.stars.length <= 29, `between 19 and 28 neighbours (${A.stars.length - 1})`);
+  ok(A.stars.length >= 21 && A.stars.length <= 29, `between 20 and 28 neighbours (${A.stars.length - 1})`);
   let minSep = Infinity, maxR = 0;
   A.stars.forEach((s, i) => { maxR = Math.max(maxR, Math.hypot(...s.pos)); A.stars.forEach((q, j) => { if (j > i) minSep = Math.min(minSep, starDistance(s, q)); }); });
   ok(minSep > 1.3 * LIGHT_YEAR && maxR <= SECTOR_RADIUS * LIGHT_YEAR * 1.0001, 'no two stars closer than 1.3 light years; all within 12', `${(minSep / LIGHT_YEAR).toFixed(2)} ly, ${(maxR / LIGHT_YEAR).toFixed(2)} ly`);
   ok(A.stars.every((s) => hashSystem(generate(systemSeed('starfall', s.index))) === hashSystem(generate(s.seed)) && generate(s.seed).star.name === s.name), 'each neighbour is a full system that can be rebuilt from its seed');
-  ok(new Set(A.stars.map((s) => s.name)).size === A.stars.length || true, 'star names');
+  ok(new Set(A.stars.map((s) => s.name)).size === A.stars.length, 'no two stars share a name');
   near(apparentBrightness(P.L_SUN, 1.496e11), 1361, 5e-3, "b = L/4πd²: the Sun at Earth's distance gives the solar constant, 1.36 × 10³ W m⁻²");
   near(LIGHT_YEAR / (3.00e8 * YEAR), 1, 2e-3, 'a light year is the distance light travels in a year');
 }

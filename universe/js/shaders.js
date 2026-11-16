@@ -182,9 +182,9 @@ void main() {
     col = mix(uColA, uColB, smoothstep(-0.4, 0.45, n.x + 0.25 * dune));
     col = mix(col, uColC, smoothstep(0.1, 0.42, m) * 0.7);
     float canyon = 1.0 - smoothstep(0.0, 0.03 + fp * 3.0, abs(fbm(p * 2.6 + so.yzx, 5, fp * 2.6)));
-    col *= 1.0 - 0.45 * canyon * smoothstep(0.0, 0.3, m + 0.2);
+    col *= 1.0 - 0.45 * (1.0 - uP.x) * canyon * smoothstep(0.0, 0.3, m + 0.2);   // uP.x = 1 switches the canyon lines off
     col = mix(col, vec3(0.88, 0.86, 0.84), smoothstep(uP.y, uP.y + 0.03, alat + 0.03 * n.x));
-    g = n.yzw * 2.0 + dn.yzw * 0.05 * dune; bump = 0.4;
+    g = n.yzw * 2.0 + dn.yzw * 0.05 * dune; bump = 0.4 * (1.0 - 0.65 * uP.x);
     cloud = uAtm * 0.35 * smoothstep(0.25, 0.7, fbm(p * 3.0 + so * 1.7, 4, fp * 3.0)) * uP.z;
   } else if (uType == 3 || uType == 7) {                // ice: bright plains, long dark cracks
     vec4 n = fbmd(p * 1.6 + so, OCT, fp * 1.6);
