@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: why the sin θ in torque? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics A.4 (HL): where the sin θ in τ = Fr sin θ comes from, seen two ways (the perpendicular component of the force, and the perpendicular distance to its line of action), then used on a ladder leaning on a frictionless wall.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/torque.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: why the sin θ in torque? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics A.4 (HL): where the sin θ in τ = Fr sin θ comes from, seen two ways (the perpendicular component of the force, and the perpendicular distance to its line of action), then used on a ladder leaning on a frictionless wall.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/torque.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/torque.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Why the sin θ in torque?</p>
+    <h1>Why the sin θ in torque? <span class="tag hl">HL</span></h1>
+    <p class="lead">Where the $\sin\theta$ in $\tau = Fr\sin\theta$ comes from, seen two ways: the part of the force at right angles to $r$, or the perpendicular distance to the force's line of action. Then both ways are used on a ladder leaning on a wall. <a class="tag" href="../themes/a4.html#torque">A.4 Rigid body mechanics</a></p>
+
+    <figure class="anim-stage" data-anim="torque">
+      <canvas role="img" aria-label="Animation of a force turning a spanner, showing the force's components and its line of action, then the forces and torques on a ladder leaning against a wall. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>Forces are orange. The part of a force that turns things is gold, and the part that can't turn anything is grey. Perpendicular distances are green, and the torque is pink. The force arrows on the ladder are not drawn to scale.</p>
+      <ol>
+        <li>A force $F = 20$ N pulls on the end of a spanner, $r = 0.30$ m from the bolt. A pink turning arrow round the bolt shows the torque. At right angles to the spanner, the torque is largest: $20 \times 0.30 = 6.0$ N m.</li>
+        <li>The force turns towards the spanner and the torque shrinks. Pulled straight along the spanner ($\theta = 0$), its torque is zero: its line of action passes through the bolt. The force then settles at $\theta = 40°$.</li>
+        <li><strong>Way 1, components.</strong> $F$ is split into $F\cos\theta$ along the spanner and $F\sin\theta$ at right angles to it. The line of action of $F\cos\theta$ passes through the bolt, so it has no turning effect. Only $F\sin\theta$ turns the bolt, a distance $r$ away: $\tau = (F\sin\theta) \times r = 12.86 \times 0.30 = 3.86$ N m.</li>
+        <li><strong>Way 2, perpendicular distance.</strong> The force is extended into a dashed line, its <strong>line of action</strong>. The force slides along this line to the point closest to the bolt, and the torque stays at 3.86 N m all the way: the torque depends only on the line of action, not on where along it the force acts, even if that point is beyond the end of the object (imagine the spanner extended).</li>
+        <li>At that point the force is at right angles to the line from the bolt, so $\tau = F \times d$, where $d$ is the <strong>perpendicular distance</strong> from the bolt to the line of action (also called the moment arm). The spanner, the line of action and $d$ make a right-angled triangle with $r$ as its hypotenuse and $\theta$ opposite $d$, so $d = r\sin\theta = 0.193$ m and $\tau = 20 \times 0.193 = 3.86$ N m.</li>
+        <li>Both ways give the same product: $(F\sin\theta) \times r = F \times (r\sin\theta)$. The $\sin\theta$ can go with the force or with the distance.</li>
+        <li><strong>The ladder.</strong> A uniform ladder 5.0 m long, weighing 350 N, leans at 60° to the floor against a frictionless wall. The forces on it are its weight $W$ at the middle, the wall's push $N$ (horizontal, because the wall is frictionless), and the floor's normal force $R$ and friction $f$ at the foot.</li>
+        <li>Torques are taken about the foot. $R$ and $f$ act at the foot, so their torques are zero and they drop out of the equation.</li>
+        <li>$N$ acts at the top, 5.0 m from the foot. The angle between $N$ and the ladder is 60°: $N$'s line is parallel to the floor, so this is an alternate angle to the 60° at the floor. Way 1: only $N\sin 60°$, the component at right angles to the ladder, turns it, so the torque of $N$ is $(N\sin 60°) \times 5.0$. The other component, $N\cos 60°$, points along the ladder, so its line of action passes through the foot.</li>
+        <li>Way 2: $N$'s line of action is horizontal. $N$ slides along it until it is directly above the foot. The perpendicular distance from the foot to this line is the height of the top of the ladder, $b = 5.0\sin 60° = 4.33$ m, so the torque of $N$ is $N \times b$. This is where the $b$ in the solution comes from.</li>
+        <li>$W$ acts at the middle, 2.5 m from the foot along the ladder. Its line of action is vertical, so its perpendicular distance from the foot is horizontal: $a = 2.5\cos 60° = 1.25$ m, and its torque is $350 \times 1.25 = 437.5$ N m. (The angle between $W$ and the ladder is 30°, and $2.5\sin 30° = 2.5\cos 60°$: the same answer by way 1.)</li>
+        <li>The torques balance: about the foot, the torque of $N$ is clockwise and the torque of $W$ is anticlockwise, so $N \times 4.33 = 437.5$ and $N = 101$ N. The forces balance too: horizontally $f = N = 101$ N, and vertically $R = W = 350$ N.</li>
+        <li>The ladder doesn't slip as long as $f \le \mu R$, so $\mu \ge 101 / 350 = 0.29$. The minimum coefficient of static friction is 0.29.</li>
+        <li>Summary: $\tau = Fr\sin\theta$ is the perpendicular component times the distance, $(F\sin\theta) \times r$, or the force times the perpendicular distance, $F \times (r\sin\theta)$. A force whose line of action passes through the pivot has no torque.</li>
+      </ol>
+      <p>Read more in <a href="../themes/a4.html#torque">A.4 section 2: torque</a> and <a href="../themes/a4.html#equilibrium">section 3: rotational equilibrium</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

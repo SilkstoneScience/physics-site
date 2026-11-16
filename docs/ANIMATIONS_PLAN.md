@@ -56,6 +56,7 @@ Theme A (batch 1)
 - [x] A.2 What exactly is friction? `friction.html` (teacher's request, 16 November 2026)
 - [x] A.2 Collisions, explosions and rockets: `momentum.html` (the rocket equation shown as "beyond the IB syllabus")
 - [x] A.3 A bungee jump (conservation of energy): `energy.html`
+- [x] A.4 Why the sin θ in torque? (HL): `torque.html` (teacher's request, 16 November 2026, after students found the N × b step of the ladder problem confusing): a spanner seen two ways (perpendicular component; perpendicular distance to the line of action, with the force sliding along that line), then the ladder against a frictionless wall (5.0 m, 350 N, 60°), ending at μ = 0.29.
 - [x] A.4 The rolling race (HL): `rolling-race.html`. Another A.4 idea for later: a diver or skater changing their moment of inertia.
 
 Theme B (batch 2, to be agreed): e.g. B.1 particles in solids, liquids and gases; B.3 molecules hitting a
