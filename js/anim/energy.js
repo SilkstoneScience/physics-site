@@ -385,8 +385,8 @@
   Anim.register('energy', {
     duration: DURATION,
     poster: T_FAST,
-    // score: night-time suspense (E minor, a dark pad, a slow heartbeat, a little wind)
-    music: { chords: [[52, 59, 64, 67], [48, 55, 64, 67], [43, 50, 59, 62], [50, 57, 62, 66]], bar: 8, pad: 'saw', cutoff: 600, drone: 0.12, bells: 0.15, pulse: 1.6, wind: 0.4, volume: 0.52 },
+    // score: night-time suspense (E minor, a dark pad, a low drone, a little wind)
+    music: { chords: [[52, 59, 64, 67], [48, 55, 64, 67], [43, 50, 59, 62], [50, 57, 62, 66]], bar: 8, pad: 'saw', cutoff: 600, drone: 0.12, wind: 0.4, volume: 0.56 },
     pauses: PAUSES,
     resize: layout,
     // for checking the numbers (not used by the player)

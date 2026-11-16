@@ -572,8 +572,8 @@
   Anim.register('gas-pressure', {
     duration: DURATION,
     poster: 58.5,
-    // score: light and airy (E flat, soft sine pad, quick high pings like molecules hitting the walls)
-    music: { chords: [[51, 58, 62, 67], [48, 55, 62, 63], [56, 60, 63, 67], [53, 58, 62, 65]], bar: 7, pad: 'sine', cutoff: 1500, drone: 0.06, bells: 1.4, bellOct: 2, echo: 0.21, wind: 0.2, volume: 0.3 },
+    // score: light and airy (E flat, a soft sine pad, a breath of wind, a faint shimmer)
+    music: { chords: [[51, 58, 62, 67], [48, 55, 62, 63], [56, 60, 63, 67], [53, 58, 62, 65]], bar: 7, pad: 'sine', cutoff: 900, drone: 0.09, wind: 0.5, shimmer: 0.2, volume: 0.29 },
     pauses: [[89.6, 1.2], [95.4, 1.6], [101.8, 1.5]],
     numbers: {
       P0: M0.P, P0theory: (N * 0.5 * VR0 * VR0) / (L0 * HB), pairHits,

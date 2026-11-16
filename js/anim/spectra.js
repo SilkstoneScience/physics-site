@@ -510,9 +510,9 @@
     duration: DURATION,
     poster: 80.5,
     pauses: PAUSES,
-    // score: luminous (E lydian, soft sine pad, frequent high glassy bells, shimmer)
-    music: { chords: [[52, 59, 63, 68], [57, 61, 64, 68, 71], [49, 56, 61, 64], [54, 58, 61, 66]], bar: 8, pad: 'sine', cutoff: 1500, drone: 0.06,
-      bells: 0.8, bellType: 'glass', bellOct: 3, shimmer: 0.6, echo: 0.4, volume: 0.32 },
+    // score: luminous (E lydian, a soft sine pad, a soft shimmer, a breath of wind)
+    music: { chords: [[52, 59, 63, 68], [57, 61, 64, 68, 71], [49, 56, 61, 64], [54, 58, 61, 66]], bar: 8, pad: 'sine', cutoff: 900, drone: 0.09,
+      shimmer: 0.3, wind: 0.2, volume: 0.3 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: {

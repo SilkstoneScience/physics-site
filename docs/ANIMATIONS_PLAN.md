@@ -35,14 +35,18 @@ lines, smooth camera moves and one caption at a time. Each one loops.
 - **Pacing** (teacher, 15 November 2026: "stay on the scene a little longer"): a scene can list `pauses: [[sceneTime, seconds], …]`
   where the picture holds still (just before a caption fades) so it can be read; powers of ten holds 3.4 s on each object.
 - **Music** (teacher's request, 15 November 2026): gentle background music generated live by `js/anim/music.js` with the
-  browser's Web Audio API (a soft pad, a low drone, bell-like sparkles or plucked arpeggios, echo and reverb), so there
-  are no audio files to license. Each scene sets its own mood with `music: { chords, bar, cutoff, sparkle, arp }`.
+  browser's Web Audio API (a soft pad, a low drone, wind and reverb), so there
+  are no audio files to license. Each scene sets its own mood with `music: { chords, bar, pad, cutoff, drone, … }`.
   **On by default** (teacher, 16 November 2026), with a **different score for each animation** (the score options are
   listed at the top of music.js: pad sound, drone, bells, arpeggio, space wind, shimmer, clock tick, heartbeat pulse,
   tremolo). Browsers only allow sound after a click or tap, so until then a "♪ Tap the animation to hear the music" note
   shows, and the first tap on the picture starts the music without pausing. The ♪ Music button turns it off (remembered
   on that device); the music fades out on Pause, when the animation scrolls out of view or the tab is hidden.
   Each score's `volume` is set so that all scores have about the same loudness (RMS about 0.055 in `AnimMusic.test`).
+  **Low and atmospheric only** (teacher, 16 November 2026: "too much pinging … I just want a low atmospheric type of music"):
+  scores use only the pad, the low drone, space wind, a soft shimmer and slow swells (tremolo). No bells, plucked arpeggios,
+  clock ticks or heartbeat pulses (music.js can still make them, but no score may use them), and pad cutoffs stay at
+  900 Hz or below. Each score stays different through its key and chords, pad sound, drone, wind, shimmer and swell.
 - **Click or tap the picture to pause or play** (teacher, 16 November 2026).
 - **Speed and seeking** (teacher, 16 November 2026; built the same day in the shared player, so every animation has them):
   a speed button (1× → 1.5× → 2×, not remembered between visits) where the `pauses` holds speed up with everything

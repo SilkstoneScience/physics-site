@@ -536,8 +536,8 @@
   Anim.register('momentum', {
     duration: DURATION,
     poster: 32,
-    // score: bright and bouncy (G mixolydian, triangle pad, a steady plucked pattern, glassy bells)
-    music: { chords: [[55, 59, 62, 65], [53, 57, 60, 64], [48, 55, 60, 64], [50, 55, 59, 62]], bar: 6, pad: 'triangle', cutoff: 1200, drone: 0.07, bells: 0.15, bellType: 'glass', arp: 0.375, echo: 0.375, volume: 0.42 },
+    // score: bright and open (G mixolydian, a triangle pad that gently swells, a little wind)
+    music: { chords: [[55, 59, 62, 65], [53, 57, 60, 64], [48, 55, 60, 64], [50, 55, 59, 62]], bar: 6, pad: 'triangle', cutoff: 900, drone: 0.09, wind: 0.2, tremolo: 0.4, volume: 0.5 },
     // hold the picture so each caption can be read (predictions get the longest holds)
     pauses: [[12.0, 3.0], [22.5, 0.8], [34.7, 0.8], [39.9, 1.0], [49.2, 3.0], [54.6, 0.8], [81.7, 1.2], [86.7, 1.2],
       [92.4, 1.5], [97.6, 1.2], [102.8, 1.0], [107.0, 1.5]],

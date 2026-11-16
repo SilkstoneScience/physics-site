@@ -530,8 +530,8 @@
     duration: DURATION,
     poster: 54,
     pauses: PAUSES,
-    // score: crackling static (F-sharp minor, a square-wave pad with a fast tremolo, glassy bells, a faint hiss)
-    music: { chords: [[54, 61, 66, 69], [50, 57, 62, 66], [52, 59, 64, 68], [49, 56, 61, 64]], bar: 6, pad: 'square', cutoff: 1100, tremolo: 6, drone: 0.08, bells: 0.4, bellType: 'glass', bellOct: 2, wind: 0.2, echo: 0.33, volume: 0.74 },
+    // score: crackling static (F-sharp minor, a square-wave pad with a tremolo, a faint hiss, a low drone)
+    music: { chords: [[54, 61, 66, 69], [50, 57, 62, 66], [52, 59, 64, 68], [49, 56, 61, 64]], bar: 6, pad: 'square', cutoff: 900, tremolo: 3, drone: 0.09, wind: 0.2, volume: 0.71 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: {

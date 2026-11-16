@@ -396,9 +396,9 @@
     poster: 104,
     pauses: [[10.0, 1.0], [15.8, 0.8], [46.2, 1.4], [57.6, 1.0], [70.2, 2.0], [77.2, 2.0], [82.8, 6.0], [89.4, 1.4], [97.6, 2.5],
       [101.0, 2.3], [106.6, 1.6], [113.4, 3.0], [126.0, 1.2], [132.0, 1.2], [137.6, 1.6], [150.0, 3.4]],
-    // score: vast and slow (A-flat major, a dark saw pad, long bars, space wind, rare high bells, long echo)
+    // score: vast and slow (A-flat major, a dark saw pad, long bars, space wind)
     music: { chords: [[44, 51, 56, 60], [49, 56, 60, 65], [41, 48, 53, 56], [46, 53, 58, 63]], bar: 12, pad: 'saw', cutoff: 600,
-      drone: 0.1, wind: 0.6, bells: 0.15, bellType: 'sine', bellOct: 2, echo: 0.8, volume: 0.76 },
+      drone: 0.1, wind: 0.6, volume: 0.77 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { STARS, CAPS, radius, lumOf, msL, pathAt, SUNP, BIGP, wdAt, WD_R,

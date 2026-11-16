@@ -422,8 +422,8 @@
   Anim.register('torque', {
     duration: DURATION,
     poster: 56,
-    // score: calm and thoughtful (A minor, a triangle pad, a slow up-and-down arpeggio, high soft bells)
-    music: { chords: [[45, 52, 57, 60, 64], [41, 48, 53, 57, 64], [43, 50, 55, 59, 62], [40, 47, 52, 55, 59]], bar: 7, pad: 'triangle', cutoff: 1100, drone: 0.08, bells: 0.25, bellType: 'sine', bellOct: 2, arp: 0.5, arpMode: 'updown', echo: 0.45, volume: 0.45 },
+    // score: calm and thoughtful (A minor, a triangle pad that slowly swells, a low drone)
+    music: { chords: [[45, 52, 57, 60, 64], [41, 48, 53, 57, 64], [43, 50, 55, 59, 62], [40, 47, 52, 55, 59]], bar: 7, pad: 'triangle', cutoff: 900, drone: 0.09, tremolo: 0.25, volume: 0.55 },
     // hold the picture still so each caption can be read
     pauses: [[9.2, 1], [17.0, 1.5], [22.6, 1.5], [28.4, 1], [34.4, 1.5], [40.6, 2], [46.8, 1], [53.0, 1.5], [59.0, 2.5], [65.0, 2.5],
       [72.0, 1], [78.0, 1.5], [84.0, 1.5], [90.0, 1.5], [96.4, 1], [102.8, 2.5], [108.8, 2], [115.0, 2.5], [121.0, 3], [129.6, 4]],

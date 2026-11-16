@@ -555,8 +555,8 @@
     duration: DURATION,
     poster: 122,
     pauses: [[20.5, 1.2], [37.6, 2.0], [59.4, 1.5], [82.4, 2.0], [100.6, 1.2], [130.0, 2.0], [141.3, 1.5], [146.8, 1.5]],
-    // score: ripples on water (B major, soft sine pad, glassy bells, a long echo, a soft shimmer)
-    music: { chords: [[47, 54, 59, 63], [44, 51, 56, 63], [52, 56, 59, 63], [54, 58, 61, 64]], bar: 9, pad: 'sine', cutoff: 1300, drone: 0.06, bells: 0.6, bellType: 'glass', bellOct: 1, echo: 0.6, shimmer: 0.3, volume: 0.32 },
+    // score: ripples on water (B major, a soft sine pad that rises and falls like waves, a soft shimmer)
+    music: { chords: [[47, 54, 59, 63], [44, 51, 56, 63], [52, 56, 59, 63], [54, 58, 61, 64]], bar: 9, pad: 'sine', cutoff: 900, drone: 0.09, shimmer: 0.3, tremolo: 0.3, volume: 0.38 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { LAM, LAM2, TH2: TH2 / DEG, CAPS, partAt, pointAt: (r) => pointAt(r), layout: () => L, dispTwo },

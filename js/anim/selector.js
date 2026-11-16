@@ -518,9 +518,9 @@
     pauses: [[11.0, 1.5], [16.2, 1.5], [18.3, 3.0], [28.2, 3.0], [33.4, 1.4], [47.2, 1.0], [58.8, 6.0], [66.2, 0.6],
       [74.2, 2.2], [81.2, 3.0], [88.0, 1.5], [91.2, 1.2], [96.6, 6.0], [102.4, 1.0], [115.2, 1.2], [121.6, 1.0], [127.8, 1.0],
       [134.8, 1.4], [140.6, 0.8], [146.8, 1.0], [150.0, 1.5], [153.0, 0.8], [158.8, 1.6]],
-    // score: precise machinery (D dorian, a triangle pad, a soft tick twice a second, a light pulse, glassy bells)
-    music: { chords: [[50, 57, 60, 65], [55, 59, 62, 67], [45, 52, 57, 60], [48, 55, 60, 64]], bar: 6, pad: 'triangle', cutoff: 1300,
-      drone: 0.07, bells: 0.3, bellType: 'glass', bellOct: 2, tick: 0.5, pulse: 2, echo: 0.25, volume: 0.43 },
+    // score: precise machinery (D dorian, a triangle pad with a slow, even swell, a low drone)
+    music: { chords: [[50, 57, 60, 65], [55, 59, 62, 67], [45, 52, 57, 60], [48, 55, 60, 64]], bar: 6, pad: 'triangle', cutoff: 900,
+      drone: 0.09, tremolo: 0.8, volume: 0.54 },
     resize: layout,
     info: { check, ion, ionAt, ionDone, CAPS, PART2, H20, H22, STREAM, e1Y },
     frame(s, t) {

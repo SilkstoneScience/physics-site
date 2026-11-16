@@ -373,8 +373,8 @@
     // holds at chosen points of the motion, and reading holds near the ends of the longer captions (about 17 characters per second)
     pauses: [[P_X0, 3.0], [P_ZERO, 2.5], [P_MX0, 2.5], [P_ZERO2, 2.5], [P_HALF1, 3.0], [P_HALF2, 3.0],
       [8.4, 1.5], [11.5, 2.2], [34.5, 2.4], [40.0, 1.4], [68.0, 4.2], [95.0, 1.6], [99.4, 1.2], [106.0, 1.9], [116.6, 1.7]],
-    // score: steady and swaying (D-flat lydian, a soft sine pad that swells once per period of the glider, glassy bells)
-    music: { chords: [[49, 56, 60, 63, 67], [51, 58, 61, 65], [53, 60, 63, 68], [46, 53, 56, 61]], bar: 8, pad: 'sine', cutoff: 1300, tremolo: 1 / T, drone: 0.1, bells: 0.35, bellType: 'glass', bellOct: 2, echo: 0.5, volume: 0.39 },
+    // score: steady and swaying (D-flat lydian, a soft sine pad that swells once per period of the glider, a low drone)
+    music: { chords: [[49, 56, 60, 63, 67], [51, 58, 61, 65], [53, 60, 63, 68], [46, 53, 56, 61]], bar: 8, pad: 'sine', cutoff: 900, tremolo: 1 / T, drone: 0.1, volume: 0.38 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { M, K, X0, OM, T, VMAX, AMAX, ET, xAt, vAt, aAt, CAPS, P_X0, P_ZERO, P_MX0, P_ZERO2, P_HALF1, P_HALF2, P_CYCLE },

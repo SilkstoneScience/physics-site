@@ -540,8 +540,8 @@
     duration: DURATION,
     poster: 84,
     pauses: PAUSES,
-    // score: a discovery (C-sharp minor, triangle pad, a soft clock tick, glassy bells, a little wind)
-    music: { chords: [[49, 56, 61, 64], [45, 52, 57, 61], [47, 54, 59, 63], [44, 51, 56, 60]], bar: 8, pad: 'triangle', cutoff: 1100, drone: 0.08, bells: 0.3, bellType: 'glass', bellOct: 1, tick: 0.75, wind: 0.15, echo: 0.5, volume: 0.46 },
+    // score: a discovery (C-sharp minor, a triangle pad, a low drone, a little wind)
+    music: { chords: [[49, 56, 61, 64], [45, 52, 57, 61], [47, 54, 59, 63], [44, 51, 56, 60]], bar: 8, pad: 'triangle', cutoff: 900, drone: 0.09, wind: 0.3, volume: 0.45 },
     resize: layout,
     info: {
       KQQ, D0, RN, E_TOUCH, EK0, PATHS, HEAD, CAPS, PAUSES, DEF, thetaOf, traj,

@@ -355,8 +355,8 @@
     // it at about 16 characters a second (at least 1.2 s); 6 s for "Predict"
     pauses: CAPS.filter(([a, b, txt]) => txt.length >= 85 || /\d\s*Hz/.test(txt) || txt.length / 16 > b - a - 0.6)
       .map(([a, b, txt]) => [b - 0.7, txt.startsWith('Predict') ? 6.0 : Math.max(1.2, +(txt.length / 16 - (b - a - 0.6)).toFixed(1))]),
-    // score: resonant and organ-like (C minor, a soft square-wave pad, a strong low drone, rare high bells)
-    music: { chords: [[48, 55, 60, 63], [44, 51, 56, 60], [41, 48, 53, 56], [43, 50, 55, 59]], bar: 9, pad: 'square', cutoff: 700, drone: 0.12, bells: 0.2, bellType: 'sine', bellOct: 3, arp: 0, echo: 0.55, volume: 0.56 },
+    // score: resonant and organ-like (C minor, a soft square-wave pad, a strong low drone)
+    music: { chords: [[48, 55, 60, 63], [44, 51, 56, 60], [41, 48, 53, 56], [43, 50, 55, 59]], bar: 9, pad: 'square', cutoff: 700, drone: 0.12, volume: 0.57 },
     resize: layout,
     info: { check, CAPS, modeAt, OPEN_MODES, CLOSED_MODES, shapeS, shapeO, shapeC },
     frame(s, t) {

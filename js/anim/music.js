@@ -8,12 +8,14 @@
    - arp: seconds between plucked arpeggio notes (0 = none); arpMode: 'up' | 'updown' | 'random'
    - wind: level of a slowly swelling filtered-noise "space wind"; shimmer: level of a high glistening layer
    - tick: seconds between soft clock ticks; pulse: seconds between soft low heartbeat-like pulses
-   - tremolo: speed (Hz) of a gentle wobble in the pad's volume; echo: delay time (s); volume: overall level */
+   - tremolo: speed (Hz) of a gentle wobble in the pad's volume; echo: delay time (s); volume: overall level
+   Teacher's decision (16 November 2026): the music is low and atmospheric only, so no score uses bells, arp, tick or
+   pulse (no "pinging"), and pad cutoffs stay at 900 Hz or below. See docs/ANIMATIONS_PLAN.md. */
 (() => {
   'use strict';
   const hz = (n) => 440 * Math.pow(2, (n - 69) / 12);
   const DEFAULT = { chords: [[57, 64, 67, 71], [53, 60, 64, 69], [48, 55, 60, 64], [55, 59, 62, 67]], bar: 8, pad: 'saw',
-    cutoff: 900, drone: 0.09, bells: 0.35, bellType: 'sine', bellOct: 1, arp: 0, arpMode: 'up', wind: 0, shimmer: 0,
+    cutoff: 900, drone: 0.09, bells: 0, bellType: 'sine', bellOct: 1, arp: 0, arpMode: 'up', wind: 0, shimmer: 0,
     tick: 0, pulse: 0, tremolo: 0, echo: 0.43, volume: 0.6 };
   const PAD_LEVEL = { saw: 1, square: 0.75, triangle: 2.2, sine: 2.8 };
   const OSC = { saw: 'sawtooth', square: 'square', triangle: 'triangle', sine: 'sine' };

@@ -462,8 +462,8 @@
     // hold the picture still where a caption needs reading (or a prediction needs thinking about)
     pauses: [[9.0, 1.0], [14.0, 1.2], [19.0, 2.5], [24.2, 1.2], [29.4, 1.0], [34.6, 1.4], [41.0, 0.8], [46.2, 1.2], [51.2, 2.5], [56.4, 1.2],
       [61.6, 1.4], [66.8, 1.6], [72.0, 1.5], [77.2, 1.5], [82.2, 1.5], [87.4, 1.8], [98.6, 1.5], [104.2, 1.6], [109.8, 2.0], [115.4, 1.5]],
-    // score: rolling sea (A-flat major, a soft sawtooth pad, a gentle up-and-down plucked pattern, a little wind)
-    music: { chords: [[56, 60, 63, 67], [49, 56, 60, 65], [53, 60, 63, 68], [51, 58, 63, 67]], bar: 8, pad: 'saw', cutoff: 700, drone: 0.09, bells: 0.12, arp: 0.333, arpMode: 'updown', echo: 0.333, wind: 0.3, volume: 0.73 },
+    // score: rolling sea (A-flat major, a soft sawtooth pad, sea-like wind)
+    music: { chords: [[56, 60, 63, 67], [49, 56, 60, 65], [53, 60, 63, 68], [51, 58, 63, 67]], bar: 8, pad: 'saw', cutoff: 700, drone: 0.09, wind: 0.5, volume: 0.77 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { LAM, TP, F, V, K, OM, AT, AL, XG, yRope, sL, densL, tauL, tauT, tauD0, tE1, tauE1, crest0, CAPS },

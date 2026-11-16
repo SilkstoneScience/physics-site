@@ -452,9 +452,9 @@
     duration: DURATION,
     poster: 33,
     pauses: PAUSES,
-    // score: a humming generator (A major, a saw pad with a slow wobble, a low drone, a steady pulse, soft bells)
+    // score: a humming generator (A major, a saw pad with a slow wobble, a low drone)
     music: { chords: [[57, 61, 64, 69], [54, 61, 64, 66], [50, 57, 62, 66], [52, 59, 64, 68]], bar: 6, pad: 'saw', cutoff: 750,
-      tremolo: 2, drone: 0.13, bells: 0.2, bellType: 'sine', bellOct: 2, pulse: 1.0, arp: 0, echo: 0.4, volume: 0.56 },
+      tremolo: 2, drone: 0.13, volume: 0.62 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { LAM, dLAM, LMAX, mag1, mag2, e1, e2, l1, l2, E1MAX, E2MAX, T_STEEP, T_MID2, T_10, theta, l3, e3, CAPS, PAUSES, FL },

@@ -547,8 +547,8 @@
     pauses: [[9.2, 2.5], [14.4, 4.0], [19.6, 1.0], [25.8, 1.0], [31.0, 1.2], [36.2, 2.5], [41.4, 2.5], [46.6, 1.5], [51.8, 1.5],
       [57.0, 1.5], [62.2, 2.0], [67.4, 3.5], [73.6, 3.0], [80.0, 2.0], [85.2, 2.5], [90.4, 2.0], [96.6, 2.5], [102.8, 5.5],
       [108.6, 2.0], [113.8, 2.0], [119.0, 1.5], [124.2, 2.5], [129.4, 2.5], [134.6, 5.5], [139.8, 3.5]],
-    // score: passing by (E major, a saw pad, a quick upward plucked pattern, a light pulse, a touch of shimmer)
-    music: { chords: [[52, 59, 64, 68], [49, 56, 61, 64], [45, 52, 57, 61], [47, 54, 59, 63]], bar: 6, pad: 'saw', cutoff: 1000, drone: 0.08, bells: 0, arp: 0.25, arpMode: 'up', pulse: 1.2, shimmer: 0.2, echo: 0.375, volume: 0.67 },
+    // score: passing by (E major, a warm saw pad, a low drone, a little wind and shimmer)
+    music: { chords: [[52, 59, 64, 68], [49, 56, 61, 64], [45, 52, 57, 61], [47, 54, 59, 63]], bar: 6, pad: 'saw', cutoff: 900, drone: 0.09, shimmer: 0.2, wind: 0.3, volume: 0.71 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { P, V, U, F_AHEAD, F_BEHIND, F_OBS, XA, XB, xsB, xcC, tauA, tauB, tauC, zAt, CAPS, frontsOf, lastArrivalB },

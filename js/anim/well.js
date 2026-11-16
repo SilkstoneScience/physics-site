@@ -436,9 +436,9 @@
     duration: DURATION,
     poster: 80,
     pauses: PAUSES,
-    // score: orbiting (E-flat lydian, soft sine pad, a slow upward arpeggio, shimmer and a long echo)
-    music: { chords: [[51, 58, 62, 67], [53, 57, 60, 65], [48, 55, 58, 62], [46, 53, 57, 62]], bar: 10, pad: 'sine', cutoff: 1400, drone: 0.07,
-      bells: 0.2, bellType: 'sine', bellOct: 2, arp: 0.6, arpMode: 'up', shimmer: 0.5, echo: 0.7, volume: 0.3 },
+    // score: orbiting (E-flat lydian, a soft sine pad, a soft shimmer, a little space wind)
+    music: { chords: [[51, 58, 62, 67], [53, 57, 60, 65], [48, 55, 58, 62], [46, 53, 57, 62]], bar: 10, pad: 'sine', cutoff: 900, drone: 0.09,
+      shimmer: 0.3, wind: 0.3, volume: 0.29 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { GM, RE, MS, sat, energy, CAPS, PAUSES, T_B1, T_B2, T_B3, P1, P2, PT },

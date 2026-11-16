@@ -449,8 +449,8 @@
   Anim.register('drift', {
     duration: DURATION,
     poster: 50,
-    // score: electric flow (B minor, a buzzing pad with tremolo, a steady upward plucked pattern)
-    music: { chords: [[47, 54, 59, 62], [43, 50, 55, 59], [50, 57, 62, 66], [45, 52, 57, 61]], bar: 6, pad: 'saw', cutoff: 800, tremolo: 3, drone: 0.09, bells: 0, arp: 0.3, arpMode: 'up', echo: 0.3, volume: 0.76 },
+    // score: electric flow (B minor, a low buzzing pad with tremolo, a low drone)
+    music: { chords: [[47, 54, 59, 62], [43, 50, 55, 59], [50, 57, 62, 66], [45, 52, 57, 61]], bar: 6, pad: 'saw', cutoff: 800, tremolo: 3, drone: 0.09, volume: 0.79 },
     // hold the picture still while the prediction is thought about, and at the end
     pauses: [[84.2, 2.6], [103.4, 2.6]],
     resize: layout,
