@@ -58,8 +58,11 @@ Theme A (batch 1)
 - [x] A.3 A bungee jump (conservation of energy): `energy.html`
 - [x] A.4 The rolling race (HL): `rolling-race.html`. Another A.4 idea for later: a diver or skater changing their moment of inertia.
 
-Theme B (batch 2, to be agreed): e.g. B.1 particles in solids, liquids and gases; B.3 molecules hitting a
-wall make pressure; B.5 electron drift in a wire.
+Theme B (agreed 16 November 2026)
+- [x] B.1 Heating ice to steam (particles, heating curve to scale, internal energy): `heating-curve.html`
+- [x] B.3 Where gas pressure comes from (2D simulation; pressure measured from the momentum at the walls): `gas-pressure.html`
+- [x] B.5 Inside a wire (free electrons, drift, resistance, why the lamp lights at once): `inside-a-wire.html`
+- Ideas for later: B.2 the greenhouse effect (photons in, infrared out, absorbed and re-emitted); B.4 (HL) a heat engine cycle on a P–V diagram.
 
 Theme C (batch 3): C.1 SHM and the reference circle; C.2 transverse and longitudinal waves; C.3 wavefronts
 and rays (refraction, diffraction, two-source interference); C.4 standing waves on strings and in pipes;

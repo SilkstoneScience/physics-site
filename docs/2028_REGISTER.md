@@ -59,11 +59,11 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 
 - `themes/b1.html` (6)
   - line 41: New for 2028 For exams from 2028: luminosity means radiated power; intensity $I = \frac{P}{A}$ is new (and in the data booklet); and apparent brightness is the intensity …
-  - line 453: New for 2028 The 2028 guide states that luminosity is synonymous with radiated power : the luminosity of any body (a star, a lamp filament, a planet) is the total power i…
-  - line 474: the box drawn round a "New for 2028" block (class new2028)
-  - line 475: Intensity New for 2028
-  - line 479: …2$, so intensity is in $\text{W m}^{-2}$. This equation is new in the 2028 data booklet.
-  - line 492: New for 2028 The 2028 guide states that apparent brightness is synonymous with intensity : $b$ is simply the intensity $I = \frac{P}{A}$ of a star's light where it is rec…
+  - line 459: New for 2028 The 2028 guide states that luminosity is synonymous with radiated power : the luminosity of any body (a star, a lamp filament, a planet) is the total power i…
+  - line 480: the box drawn round a "New for 2028" block (class new2028)
+  - line 481: Intensity New for 2028
+  - line 485: …2$, so intensity is in $\text{W m}^{-2}$. This equation is new in the 2028 data booklet.
+  - line 498: New for 2028 The 2028 guide states that apparent brightness is synonymous with intensity : $b$ is simply the intensity $I = \frac{P}{A}$ of a star's light where it is rec…
 - `themes/b3.html` (3)
   - line 38: New for 2028 For exams from 2028 the guide adds the difference between rms speed and average speed, and why rms is used .
   - line 259: the box drawn round a "New for 2028" block (class new2028)

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: inside a wire, how current flows · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics B.5: inside a copper wire, free electrons move randomly among the positive ions, drift slowly when a p.d. is applied, and collide with the ions, which is where resistance and heating come from.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/inside-a-wire.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: inside a wire, how current flows · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics B.5: inside a copper wire, free electrons move randomly among the positive ions, drift slowly when a p.d. is applied, and collide with the ions, which is where resistance and heating come from.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/inside-a-wire.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/drift.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Inside a wire</p>
+    <h1>Inside a wire: how current flows</h1>
+    <p class="lead">Zoom into the copper wire of a simple circuit to see the free electrons that carry the current: how they move with no p.d., how they drift when the switch is closed, why collisions with the ions cause resistance and heating, and why the lamp lights at once. <a class="tag" href="../themes/b5.html#current">B.5 Current and circuits</a></p>
+
+    <figure class="anim-stage" data-anim="drift">
+      <canvas role="img" aria-label="Animation of a simple circuit, zooming into the copper wire to show free electrons moving among the positive ions, drifting when the switch is closed, and colliding with the ions. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>Positive ions are pink, free electrons cyan, the electric field violet and the conventional current white. The picture is a simple flat model of the metal, and the drift is drawn much faster than it really is, relative to the random motion of the electrons.</p>
+      <ol>
+        <li>A circuit with a cell, a switch and a lamp, drawn with the data booklet's symbols and joined by copper wire. The switch is open, so there is no current. The view zooms into the wire, down to the size of atoms.</li>
+        <li>Inside the copper: a regular lattice of positive ions, each vibrating slightly about a fixed position, and a "sea" of free electrons, one for each ion, so the metal as a whole is neutral. The ions are about a quarter of a nanometre apart.</li>
+        <li>The free electrons are the charge carriers. They move at random, very fast (more than 100 kilometres per second), bouncing off the ions in every direction. One electron is highlighted, with its recent path.</li>
+        <li>The electrons crossing a dashed line are counted each way. About as many cross to the left as to the right, so the net flow of charge is zero: there is no current.</li>
+        <li>For comparison, an insulator such as plastic: its electrons are bound to their own atoms. There are almost no free (mobile) charge carriers, so there is almost no current.</li>
+        <li>Back in the copper, the switch is closed. The potential difference of the cell sets up an electric field $E$ along the wire almost at once.</li>
+        <li>The electrons still move at random, but the field pushes each one towards the positive terminal of the cell, so their paths curve and they also drift slowly, in the direction opposite to the field.</li>
+        <li>Conventional current $I$ is the direction in which positive charge would flow, so it is opposite to the drift of the electrons.</li>
+        <li>Now more electrons cross the dashed line one way than the other: there is a net flow of charge through the wire. The current is the rate of flow of charge, $I = \dfrac{\Delta q}{\Delta t}$.</li>
+        <li>In a real copper wire the drift is very slow. For a current of 1 A in a wire of cross-sectional area 1 mm², the drift speed is only about 0.07 mm per second, more than a billion times slower than the random motion.</li>
+        <li>Between collisions the field speeds the electrons up. When an electron hits an ion, it passes on some of this extra kinetic energy (the collisions flash orange).</li>
+        <li>The ions vibrate more, so the internal energy of the wire rises and it warms up (the warming is shown exaggerated). These collisions between the charge carriers and the ions are the origin of electrical resistance, and of the heating effect of a current.</li>
+        <li>The view zooms back out to the whole circuit, and the switch is opened again. Predict: if the drift is so slow, why does the lamp light the moment the switch is closed?</li>
+        <li>The answer: the wire is already full of free electrons. When the switch is closed, the field spreads round the circuit almost at once, so the electrons everywhere in the circuit, including those in the lamp, start drifting together. The lamp lights straight away, even though each electron moves only slowly.</li>
+        <li>It is like a bicycle chain: turn the pedals and every link starts to move at the same moment, all the way round.</li>
+        <li>Summary: $I = \dfrac{\Delta q}{\Delta t}$. Outside the cell, conventional current flows from + to −, and in a metal the free electrons drift the other way. Collisions between the drifting electrons and the vibrating ions transfer energy to the metal: this is the origin of resistance, and it heats the wire.</li>
+      </ol>
+      <p>Read more in B.5: <a href="../themes/b5.html#charge">section 1, charge, conductors and insulators</a>, <a href="../themes/b5.html#current">section 2, electric current</a> and <a href="../themes/b5.html#resistance">section 5, resistance and resistivity</a> ("where resistance comes from").</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
