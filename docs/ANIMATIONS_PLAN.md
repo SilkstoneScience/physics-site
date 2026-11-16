@@ -60,6 +60,15 @@ lines, smooth camera moves and one caption at a time. Each one loops.
 - The stage is 16:9, and 4:5 on phones (under 600 px), so scenes lay themselves out for both.
 - File names in `animations/` are permanent once published (they may be linked from slides).
 
+## Waiting for the teacher (raise these later; the teacher said "not yet", 16 November 2026)
+- **E.1 notes, section 2** (`themes/e1.html`, about line 114): says a gold atom is "about 100 000 times wider than the nucleus".
+  For gold it is about 20 000 times (atom about 3 × 10⁻¹⁰ m, nucleus about 1.4 × 10⁻¹⁴ m); 100 000 is the usual rough figure
+  for atoms in general. The Rutherford animation says "tens of thousands of times".
+- **E.5 notes, section 9** (`themes/e5.html`, about lines 269 and 276): two bullet points name the Chandrasekhar and
+  Oppenheimer–Volkoff limits without the "New for 2028" tag, unlike the tagged `#limits` block on the same page.
+- **C.1 animation:** the reference circle is labelled HL (as in `themes/c1.html` section 6), but the guide's SL linking
+  question asks how circular motion can be used to visualize SHM; the first circle caption needs no HL maths and could be unlabelled.
+
 ## The list
 Theme A (batch 1)
 - [x] Powers of ten zoom: `powers-of-ten.html` (Skills: orders of magnitude)
@@ -75,7 +84,12 @@ Theme B (agreed 16 November 2026)
 - [x] B.1 Heating ice to steam (particles, heating curve to scale, internal energy): `heating-curve.html`
 - [x] B.3 Where gas pressure comes from (2D simulation; pressure measured from the momentum at the walls): `gas-pressure.html`
 - [x] B.5 Inside a wire (free electrons, drift, resistance, why the lamp lights at once): `inside-a-wire.html`
-- Ideas for later: B.2 the greenhouse effect (photons in, infrared out, absorbed and re-emitted); B.4 (HL) a heat engine cycle on a P–V diagram.
+- [x] B.4 The first law and heat engines (HL): `heat-engine.html` (teacher's request, 16 November 2026: "an entropy and
+  thermodynamics animation", built as two linked animations; the notes' sign convention Q = ΔU + W; the four processes drawn
+  exactly with Q, ΔU and W to scale; a Carnot cycle between 500 K and 300 K, η = 0.40)
+- [x] B.4 Entropy and the second law (HL): `entropy.html` (a gas spreading; microstates 1, 4, 6, 4, 1; S = k_B ln Ω; ΔS = Q/T for
+  heat flowing hot to cold; the second law; a freezer as a local decrease)
+- Ideas for later: B.2 the greenhouse effect (photons in, infrared out, absorbed and re-emitted).
 
 Theme C (built 16 November 2026; waiting for the teacher's check)
 - [x] C.1 Simple harmonic motion: `shm.html` (glider between two springs, m = 0.50 kg, k = 4.9 N m⁻¹, T = 2.0 s; live x–t, v–t, a–t
@@ -114,6 +128,11 @@ Theme E (built 16 November 2026; waiting for the teacher's check)
   measured wavelengths; absorption by gas with some atoms in n = 2; the Bohr formula only on the HL end-card row)
 - [x] E.5 The HR diagram: `hr-diagram.html` (real stars at approximate real positions; radii from L = 4πR²σT⁴; approximate paths,
   labelled as such, of a Sun-like star and a 25 M☉ star; the Chandrasekhar and Oppenheimer–Volkoff limits tagged New for 2028)
-- Ideas for later: E.3 random decay and half-life; E.4 a fission chain reaction.
+- [x] E.2 The photoelectric effect (HL): `photoelectric.html` (teacher: "work on topic E", 16 November 2026; sodium, Φ = 2.28 eV;
+  red, violet and 300 nm ultraviolet; the stopping voltage; the Eₘₐₓ–f graph)
+- [x] E.3 Random decay and half-life: `half-life.html` (1000 nuclei of a made-up nuclide, T½ = 10 s, seeded so the run repeats;
+  a sample of 20; count rate and background; (HL) the decay law)
+- [x] E.4 Fission and the chain reaction: `chain-reaction.html` (the notes' Ba-141 + Kr-92 + 3n split; a seeded chain; critical
+  mass; a schematic reactor with moderator and control rods)
 
 Think deeper: a big question on curved spacetime, with an animation.

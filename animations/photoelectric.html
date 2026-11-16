@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: the photoelectric effect, photon by photon · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics E.2 (HL): red, violet and ultraviolet light on a sodium photocell, the work function, Eₘₐₓ = hf − Φ, the stopping voltage and the graph of maximum kinetic energy against frequency.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/photoelectric.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: the photoelectric effect, photon by photon · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics E.2 (HL): red, violet and ultraviolet light on a sodium photocell, the work function, Eₘₐₓ = hf − Φ, the stopping voltage and the graph of maximum kinetic energy against frequency.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/photoelectric.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/photo.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › The photoelectric effect</p>
+    <h1>The photoelectric effect <span class="tag hl">HL</span></h1>
+    <p class="lead">Red, violet and ultraviolet light fall on a sodium surface in a photocell. Watch which light frees electrons and which doesn't, how the stopping voltage measures their maximum kinetic energy, and how a graph of $E_{\max}$ against frequency gives the Planck constant and the work function. <a class="tag" href="../themes/e2.html#einstein">E.2 Einstein's photon explanation</a></p>
+
+    <figure class="anim-stage" data-anim="photo">
+      <canvas role="img" aria-label="Animation of a photocell with a sodium cathode lit by red, violet and ultraviolet light, beside a panel showing one photon's energy against the work function, then a graph of current against p.d., then a graph of maximum kinetic energy against frequency. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The photocell has a clean sodium cathode and an anode in a vacuum, a meter for the photocurrent and a supply whose p.d. can be changed and reversed. Sodium's work function is $\Phi = 2.28$ eV, as in the notes. Photon energies use $E = hf = \dfrac{hc}{\lambda}$ with $h = 6.63 \times 10^{-34}$ J s, $c = 3.00 \times 10^{8}$ $\text{m s}^{-1}$ and $1\ \text{eV} = 1.60 \times 10^{-19}$ J. Photons are drawn as small wave packets in the colour of their light (ultraviolet in pale violet) and electrons as blue dots. Everything is hugely slowed down.</p>
+      <ol>
+        <li>Red light of wavelength 650 nm: $f = \dfrac{3.00 \times 10^{8}}{650 \times 10^{-9}} = 4.62 \times 10^{14}$ Hz and $hf = 3.06 \times 10^{-19}$ J $= 1.91$ eV. No electrons come out, and the current is zero.</li>
+        <li><strong>Predict:</strong> what happens if the red light is made much brighter?</li>
+        <li>Still nothing, however bright. Brighter light means more photons each second, but each photon still has only 1.91 eV, less than the work function, 2.28 eV, the least energy needed to free an electron. A red photon is absorbed and only warms the metal.</li>
+        <li>Very dim violet light, 400 nm: electrons come out straight away, with no delay. Each photon has $hf = 4.97 \times 10^{-19}$ J $= 3.11$ eV and gives all of it to one electron. Escaping takes 2.28 eV, so the electron leaves with up to $E_{\max} = 3.11 - 2.28 = 0.83$ eV. Electrons from deeper in the metal lose more energy on the way out, so they are slower.</li>
+        <li>Brighter violet light: more photons each second, so more electrons each second and a bigger current, but not faster electrons. $E_{\max}$ is still 0.83 eV.</li>
+        <li>The p.d. across the tube is changed while the current is plotted against it. With the anode positive, every electron that leaves is collected. With the anode negative, it pushes the electrons back, so only the faster ones reach it and the current falls. At the stopping voltage even the fastest are turned back: $V_s = 0.83$ V, because $eV_s = E_{\max}$.</li>
+        <li>Ultraviolet light, 300 nm: $f = 1.00 \times 10^{15}$ Hz, $hf = 6.63 \times 10^{-19}$ J $= 4.14$ eV, so $E_{\max} = 4.14 - 2.28 = 1.86$ eV. The lamp gives the same number of photons each second as the bright violet light, so with the anode positive the current is the same. The faster electrons need a bigger stopping voltage, $V_s = 1.86$ V.</li>
+        <li>A graph of $E_{\max}$ against $f$, with points for 400 nm, 350 nm ($f = 8.57 \times 10^{14}$ Hz, $E_{\max} = 1.27$ eV) and 300 nm, is a straight line, $E_{\max} = hf - \Phi$.</li>
+        <li>It crosses the $f$ axis at the threshold frequency $f_0 = \dfrac{\Phi}{h} = \dfrac{2.28 \times 1.60 \times 10^{-19}}{6.63 \times 10^{-34}} = 5.50 \times 10^{14}$ Hz, a wavelength of 545 nm (green). Red light, at $4.62 \times 10^{14}$ Hz, is below it.</li>
+        <li>The gradient is the Planck constant: $\dfrac{(1.86 - 0.83) \times 1.60 \times 10^{-19}\ \text{J}}{(10.0 - 7.5) \times 10^{14}\ \text{Hz}} = 6.6 \times 10^{-34}$ J s.</li>
+        <li>Extended back, the line meets the $E_{\max}$ axis at $-\Phi = -2.28$ eV. The dashed part can't be measured: below $f_0$ there are no photoelectrons.</li>
+        <li>The wave model predicted that light of any frequency would free electrons if it were bright enough, that dim light would need time to build up enough energy, and that brighter light would give faster electrons. The experiment shows that all three are wrong. Only "brighter light gives more electrons" fits the wave model.</li>
+        <li>Summary: $E = hf$; $E_{\max} = hf - \Phi$; $eV_s = E_{\max}$; $f_0 = \dfrac{\Phi}{h}$.</li>
+      </ol>
+      <p>How it is drawn: each photon above the threshold frees one electron (in a real photocell only a small fraction of photons do). Each electron leaves with a random kinetic energy up to $E_{\max}$ (the model uses $E_{\max}\sqrt{u}$ with $u$ random between 0 and 1, so more of them are near the top; the real spread depends on the metal), and its motion across the tube is worked out step by step from the p.d., so the plotted current is the fraction of electrons that reach the anode: all of them when the anode is positive, fewer and fewer as the reverse p.d. grows, and none beyond $V_s$. Real photocells give a current that rises more gradually at small positive p.d. before it levels off. Ultraviolet light needs a quartz window, because ordinary glass absorbs it.</p>
+      <p>Read more in <a href="../themes/e2.html#photoelectric">E.2 section 1: the photoelectric effect</a>, <a href="../themes/e2.html#classical">section 2: why the wave model fails</a>, <a href="../themes/e2.html#einstein">section 3: Einstein's photon explanation</a>, <a href="../themes/e2.html#stopping">section 4: measuring the maximum kinetic energy</a> and <a href="../themes/e2.html#graph">section 5: the $E_{\max}$ against $f$ graph</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
