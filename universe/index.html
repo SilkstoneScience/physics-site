@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics Universe Engine: explore gravity and orbits · Mr Silkstone's Physics</title>
+  <meta name="description" content="Fly through a procedurally generated star system where every number is real physics: gravitational fields, circular motion, orbits, energy and escape speed for IB Physics.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/universe/">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics Universe Engine: explore gravity and orbits · Mr Silkstone's Physics">
+  <meta property="og:description" content="Fly through a procedurally generated star system where every number is real physics: gravitational fields, circular motion, orbits, energy and escape speed for IB Physics.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/universe/">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="css/universe.css">
+  <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/" } }</script>
+  <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }, startup: { typeset: false }, options: { enableMenu: false } };</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body data-root="../">
+  <!-- Shown instead of the 3D scene on phones and narrow windows -->
+  <main id="gate" class="gate" hidden>
+    <div class="gate-box">
+      <p class="eyebrow">Universe Engine</p>
+      <h1>The Universe Engine needs a laptop or desktop computer</h1>
+      <p>It draws a whole star system in 3D and is flown with a keyboard and a mouse or trackpad. On a computer, make this window wider (about 900 pixels or more).</p>
+      <p><a class="btn" href="../index.html">← Back to the site</a> <a class="btn ghost" href="../themes/d1.html">Read the notes on gravitational fields</a></p>
+    </div>
+  </main>
+
+  <div id="app" class="app" hidden>
+    <div id="stage" class="stage"></div>
+
+    <div id="intro" class="intro" aria-live="polite">
+      <div class="intro-in">
+        <p class="eyebrow">Mr Silkstone's Physics</p>
+        <p class="intro-title">Universe Engine</p>
+        <p id="intro-status" class="intro-status">Charting a new system…</p>
+        <div class="intro-bar"><span id="intro-fill"></span></div>
+        <button id="intro-skip" class="btn ghost" type="button" hidden>Skip the arrival</button>
+      </div>
+    </div>
+
+    <header class="hud top-left">
+      <a class="back" href="../index.html">← Back to the site</a>
+      <h1 class="brand">Universe Engine</h1>
+      <p id="sys-line" class="sys-line"></p>
+    </header>
+
+    <nav class="hud toolbar" aria-label="Tools">
+      <button type="button" class="tb" data-panel="p-bodies" aria-expanded="false" aria-controls="p-bodies">Bodies</button>
+      <button type="button" class="tb" data-panel="p-stars" aria-expanded="false" aria-controls="p-stars">Stars</button>
+      <button type="button" class="tb" data-panel="p-view" aria-expanded="false" aria-controls="p-view">Show</button>
+      <button type="button" class="tb" data-panel="p-camera" aria-expanded="false" aria-controls="p-camera">Camera</button>
+      <button type="button" class="tb" data-panel="p-system" aria-expanded="false" aria-controls="p-system">System</button>
+      <button type="button" class="tb" data-panel="p-quality" aria-expanded="false" aria-controls="p-quality">Quality</button>
+      <button type="button" class="tb" id="help-btn" aria-haspopup="dialog">Help <kbd>?</kbd></button>
+    </nav>
+
+    <section id="p-bodies" class="hud pop" hidden aria-label="Bodies in this system">
+      <h2>Bodies</h2>
+      <ul id="body-list" class="body-list"></ul>
+    </section>
+
+    <section id="p-stars" class="hud pop wide" hidden aria-label="Neighbouring stars">
+      <h2>Neighbouring stars</h2>
+      <p id="stars-intro" class="small"></p>
+      <label id="stars-toggle"><input type="checkbox" data-layer="stars"> Mark them in the sky <kbd>J</kbd></label>
+      <ul id="star-list" class="body-list"></ul>
+      <div id="star-detail" aria-live="polite"></div>
+    </section>
+
+    <section id="p-view" class="hud pop" hidden aria-label="What to show">
+      <h2>Show</h2>
+      <label><input type="checkbox" data-layer="orbits" checked> Orbit paths <kbd>O</kbd></label>
+      <label><input type="checkbox" data-layer="labels" checked> Names <kbd>L</kbd></label>
+      <label><input type="checkbox" data-layer="vectors"> Velocity and force arrows <kbd>V</kbd></label>
+      <label><input type="checkbox" data-layer="areas"> Swept areas (Kepler's second law) <kbd>K</kbd></label>
+      <label><input type="checkbox" data-layer="field"> Field strength map <kbd>G</kbd></label>
+      <label><input type="checkbox" data-layer="equi"> Equipotentials <span class="tag hl">HL</span> <kbd>P</kbd></label>
+      <label><input type="checkbox" data-layer="well"> Potential well model <span class="tag hl">HL</span> <kbd>M</kbd></label>
+      <label><input type="checkbox" data-layer="graph"> T² against r³ graph <kbd>T</kbd></label>
+      <hr>
+      <label><input type="checkbox" data-layer="truescale"> True scale <kbd>X</kbd></label>
+      <p class="small">Real systems are almost empty. The normal view draws far-away bodies larger so that you can see them; distances are always to scale, and the physics always uses the true sizes.</p>
+    </section>
+
+    <section id="p-camera" class="hud pop" hidden aria-label="Camera">
+      <h2>Camera</h2>
+      <div class="seg" role="group" aria-label="Camera mode">
+        <button type="button" data-cam="follow" aria-pressed="true">Follow <kbd>1</kbd></button>
+        <button type="button" data-cam="chase" aria-pressed="false">Chase <kbd>2</kbd></button>
+        <button type="button" data-cam="top" aria-pressed="false">Top-down <kbd>3</kbd></button>
+        <button type="button" data-cam="free" aria-pressed="false">Free flight <kbd>4</kbd></button>
+      </div>
+      <p><button type="button" class="btn" id="cam-overview">Whole system <kbd>0</kbd></button> <button type="button" class="btn" id="cam-zoom-in" aria-label="Zoom in">+</button> <button type="button" class="btn" id="cam-zoom-out" aria-label="Zoom out">−</button></p>
+      <label><input type="checkbox" id="opt-clickfly" checked> Clicking a body flies to it</label>
+      <p class="small">Drag to look around. Scroll or pinch to zoom. In free flight use <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>, with <kbd>Q</kbd> and <kbd>E</kbd> for down and up.</p>
+    </section>
+
+    <section id="p-system" class="hud pop" hidden aria-label="System and seed">
+      <h2>System</h2>
+      <p class="small">Every system is built from a seed: a word or number. The same seed always builds the same system, on any computer.</p>
+      <form id="seed-form"><label for="seed-input">Seed</label> <input id="seed-input" type="text" maxlength="40" autocomplete="off" spellcheck="false"> <button class="btn" type="submit">Go</button></form>
+      <p><button type="button" class="btn" id="new-system">New system</button> <button type="button" class="btn" id="copy-link">Copy link</button> <button type="button" class="btn" id="showcase">Starting system</button></p>
+      <p><button type="button" class="btn" id="go-sol">The real Solar System</button></p>
+      <p class="small">The Solar System uses real masses, sizes and orbits from NASA. Its planets' surfaces are still drawn by the engine, so Earth's continents are invented.</p>
+      <p id="link-out" class="small mono" aria-live="polite"></p>
+    </section>
+
+    <section id="p-quality" class="hud pop" hidden aria-label="Graphics quality">
+      <h2>Quality</h2>
+      <div class="seg" role="group" aria-label="Graphics quality">
+        <button type="button" data-quality="low" aria-pressed="false">Low effects</button>
+        <button type="button" data-quality="normal" aria-pressed="false">Normal</button>
+        <button type="button" data-quality="high" aria-pressed="false">High</button>
+      </div>
+      <p id="fps-line" class="small mono"></p>
+      <p id="quality-note" class="small"></p>
+    </section>
+
+    <aside id="info" class="hud info" hidden aria-label="Selected body">
+      <div class="info-head">
+        <div><p id="info-kind" class="eyebrow"></p><h2 id="info-name"></h2></div>
+        <button type="button" class="icon" id="info-close" aria-label="Close the information panel">×</button>
+      </div>
+      <p class="info-actions"><button type="button" class="btn" id="info-fly">Fly to <kbd>F</kbd></button> <button type="button" class="btn" id="info-prev" aria-label="Previous body">‹</button> <button type="button" class="btn" id="info-next" aria-label="Next body">›</button></p>
+      <div class="tabs" role="tablist" aria-label="Information">
+        <button type="button" role="tab" id="tab-data" aria-controls="pane-data" aria-selected="true">Orbit</button>
+        <button type="button" role="tab" id="tab-energy" aria-controls="pane-energy" aria-selected="false" tabindex="-1">Energy</button>
+        <button type="button" role="tab" id="tab-change" aria-controls="pane-change" aria-selected="false" tabindex="-1">Change</button>
+        <button type="button" role="tab" id="tab-launch" aria-controls="pane-launch" aria-selected="false" tabindex="-1">Launch</button>
+      </div>
+      <div id="pane-data" class="pane" role="tabpanel" aria-labelledby="tab-data"></div>
+      <div id="pane-energy" class="pane" role="tabpanel" aria-labelledby="tab-energy" hidden></div>
+      <div id="pane-change" class="pane" role="tabpanel" aria-labelledby="tab-change" hidden></div>
+      <div id="pane-launch" class="pane" role="tabpanel" aria-labelledby="tab-launch" hidden></div>
+    </aside>
+
+    <section id="graph" class="hud graph" hidden aria-label="Kepler's third law graph">
+      <div class="info-head"><h2>Kepler's third law: T² against r³</h2><button type="button" class="icon" id="graph-close" aria-label="Close the graph">×</button></div>
+      <canvas id="graph-canvas" width="720" height="440" role="img" aria-label="Graph of orbital period squared against orbital radius cubed for this system's planets. The values are in the table below."></canvas>
+      <p id="graph-note" class="small"></p>
+      <details><summary>Values as a table</summary><div id="graph-table"></div></details>
+    </section>
+
+    <div id="legend" class="hud legend" hidden></div>
+
+    <div class="hud scale-line">
+      <span id="scale-text"></span>
+      <button type="button" class="btn tiny" id="scale-toggle" aria-pressed="false">True scale</button>
+    </div>
+
+    <div class="hud timebar" role="group" aria-label="Time">
+      <button type="button" class="icon big" id="t-pause" aria-pressed="false" aria-label="Pause">❚❚</button>
+      <button type="button" class="icon" id="t-step" aria-label="Step forward a little">▶❘</button>
+      <button type="button" class="icon" id="t-slower" aria-label="Slower">«</button>
+      <span id="t-warp" class="warp" aria-live="polite"></span>
+      <button type="button" class="icon" id="t-faster" aria-label="Faster">»</button>
+      <span id="t-date" class="date"></span>
+      <span class="sep"></span>
+      <div class="seg" role="group" aria-label="Physics mode">
+        <button type="button" data-mode="kepler" aria-pressed="true">Orbits</button>
+        <button type="button" data-mode="nbody" aria-pressed="false">Full gravity</button>
+      </div>
+      <button type="button" class="icon" id="mode-info" aria-expanded="false" aria-controls="mode-pop" aria-label="About the two physics modes">i</button>
+      <span id="drift" class="drift" hidden></span>
+    </div>
+    <section id="mode-pop" class="hud pop mode-pop" hidden aria-label="About the physics modes">
+      <h2>Two ways to calculate</h2>
+      <p><strong>Orbits.</strong> Each planet follows the exact ellipse that the star's gravity alone gives it, and each moon the exact ellipse around its planet. This is always stable, however fast time runs. What it leaves out: the planets do not pull on each other.</p>
+      <p><strong>Full gravity.</strong> Every planet and the star pull on every other with $F = G\dfrac{m_1 m_2}{r^2}$, and the motion is worked out step by step. Orbits slowly change, as real ones do. Moons still follow exact ellipses around their moving planet. Step-by-step calculation is never perfect, so the total energy is checked live: the "energy drift" should stay tiny.</p>
+      <p>Changing a mass or giving a planet a push switches to Full gravity, starting from wherever everything is at that moment, because the old ellipses no longer apply.</p>
+    </section>
+
+    <div id="toast" class="hud toast" role="status" aria-live="polite" hidden></div>
+    <p class="hud notice">© 2026 Mr Silkstone. All rights reserved. <a href="../about.html#copyright">More</a></p>
+
+    <dialog id="help" class="help" aria-labelledby="help-title">
+      <div class="info-head"><h2 id="help-title">Universe Engine: how it works</h2><button type="button" class="icon" id="help-close" aria-label="Close help">×</button></div>
+      <div class="help-cols">
+        <div>
+          <h3>Getting around</h3>
+          <table class="keys">
+            <tr><th scope="row">Drag</th><td>Look around the body you are following</td></tr>
+            <tr><th scope="row">Scroll, pinch, <kbd>+</kbd> <kbd>−</kbd></th><td>Zoom</td></tr>
+            <tr><th scope="row">Click a body</th><td>Select it (and fly to it)</td></tr>
+            <tr><th scope="row"><kbd>N</kbd> <kbd>B</kbd></th><td>Next and previous body</td></tr>
+            <tr><th scope="row"><kbd>F</kbd></th><td>Fly to the selected body</td></tr>
+            <tr><th scope="row"><kbd>0</kbd></th><td>See the whole system</td></tr>
+            <tr><th scope="row"><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd></th><td>Camera: follow, chase, top-down, free flight</td></tr>
+            <tr><th scope="row"><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>Q</kbd> <kbd>E</kbd></th><td>Free flight (hold <kbd>Shift</kbd> to go faster)</td></tr>
+            <tr><th scope="row">Arrow keys</th><td>Turn the view</td></tr>
+          </table>
+          <h3>Time</h3>
+          <table class="keys">
+            <tr><th scope="row"><kbd>Space</kbd></th><td>Pause and resume</td></tr>
+            <tr><th scope="row"><kbd>.</kbd></th><td>Step forward while paused</td></tr>
+            <tr><th scope="row"><kbd>[</kbd> <kbd>]</kbd></th><td>Slower and faster</td></tr>
+          </table>
+          <h3>Show</h3>
+          <table class="keys">
+            <tr><th scope="row"><kbd>O</kbd> <kbd>L</kbd> <kbd>V</kbd> <kbd>K</kbd></th><td>Orbits, names, arrows, swept areas</td></tr>
+            <tr><th scope="row"><kbd>G</kbd> <kbd>P</kbd> <kbd>M</kbd> <kbd>T</kbd></th><td>Field map, equipotentials, potential well, T²–r³ graph</td></tr>
+            <tr><th scope="row"><kbd>X</kbd> <kbd>J</kbd></th><td>True scale; mark the neighbouring stars</td></tr>
+            <tr><th scope="row"><kbd>Esc</kbd></th><td>Close panels</td></tr>
+          </table>
+        </div>
+        <div>
+          <h3>What is real here</h3>
+          <p>Every number comes from the physics, in SI units, calculated as you watch. The constants are the data booklet's: $G = 6.67 \times 10^{-11}\ \text{N m}^2\,\text{kg}^{-2}$.</p>
+          <ul>
+            <li><strong>Sizes.</strong> Far-away bodies are drawn enlarged so you can see them. The label at the bottom left always says by how much. Distances between bodies are to scale. Asteroids are drawn about 2500 times too big.</li>
+            <li><strong>Stars.</strong> Brightness, size and colour come from the star's mass using simple rules for ordinary stars ($L \propto M^4$, then $L = \sigma A T^4$ for the temperature).</li>
+            <li><strong>Brightness.</strong> Outer planets are shown brighter than they would look: the exposure is adjusted, as a camera would.</li>
+            <li><strong>Test mass.</strong> Only the planet's gravity acts on it: no air, no spin, no star.</li>
+            <li><strong>Potential well.</strong> A model: height stands for gravitational potential. Space is not really shaped like this.</li>
+            <li><strong>Other stars.</strong> Each system has 20 to 28 invented neighbours within 12 light years, about as crowded as the Sun's real neighbourhood, though most of the Sun's real neighbours are much dimmer red dwarfs. Travelling to one skips the journey: even light would take years.</li>
+            <li><strong>The real Solar System.</strong> Masses, sizes and spin rates are from NASA's planetary fact sheets, orbits from NASA JPL's elements for 1 January 2000, and tilts from the IAU's pole directions. The orbits keep their year-2000 shapes, so each planet is within about half a degree of its true place from roughly 1975 to 2050, and less exact further away. Only seven large moons are included, starting at arbitrary points of their real orbits.</li>
+          </ul>
+          <h3>In your notes</h3>
+          <ul class="links">
+            <li><a href="../themes/d1.html#newton">D.1 Newton's law of gravitation</a></li>
+            <li><a href="../themes/d1.html#strength">D.1 Gravitational field strength</a></li>
+            <li><a href="../themes/d1.html#orbits">D.1 Orbits</a> and <a href="../themes/d1.html#kepler">Kepler's laws</a></li>
+            <li><a href="../themes/d1.html#potential">D.1 Gravitational potential</a>, <a href="../themes/d1.html#escape">escape speed</a> and <a href="../themes/d1.html#energy">orbital energy</a> <span class="tag hl">HL</span></li>
+            <li><a href="../themes/a2.html#circular">A.2 Circular motion</a></li>
+            <li><a href="../themes/a3.html#mechanical">A.3 Mechanical energy</a></li>
+            <li><a href="../themes/b1.html#luminosity">B.1 Luminosity and apparent brightness</a> and <a href="../themes/e5.html#units">E.5 Astronomical distances</a></li>
+          </ul>
+        </div>
+      </div>
+    </dialog>
+  </div>
+  <noscript><p style="padding:2rem;color:#fff;background:#000">The Universe Engine needs JavaScript. <a href="../index.html" style="color:#9cf">Back to the site</a></p></noscript>
+</body>
+</html>
