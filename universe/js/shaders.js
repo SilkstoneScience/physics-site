@@ -214,6 +214,8 @@ void main() {
   vec3 gw = g * uSpin;                                   // planet-fixed gradient -> world
   vec3 Nn = normalize(N - bump * (gw - dot(gw, N) * N));
   float ndl = dot(N, L), dif = max(dot(Nn, L), 0.0) * smoothstep(-0.02, 0.06, ndl);
+  if (uType == 4 || uType == 5) dif = pow(smoothstep(-0.12, 1.0, ndl), 1.35);      // deep atmospheres scatter light past the edge
+  if (uType == 4 || uType == 5) dif = pow(smoothstep(-0.12, 1.0, ndl), 1.35);      // deep atmospheres scatter light past the edge
   vec3 Pp = N;                                           // surface point in planet radii
   float sh = ringShadow(Pp, L) * sphereShadow(Pp, L);
   float cshade = 1.0;
@@ -225,7 +227,7 @@ void main() {
   vec3 lit = col * uSunCol * dif * sh;
   vec3 H = normalize(L + V);
   lit += uSunCol * spec * sh * pow(max(dot(Nn, H), 0.0), rough) * min(rough * 0.012, 6.0) * smoothstep(0.0, 0.1, ndl);
-  if (uType >= 4 && uType <= 5) lit *= 0.75 + 0.25 * pow(max(dot(N, V), 0.0), 0.5);   // gas limb darkening
+  if (uType >= 4 && uType <= 5) lit *= 0.5 + 0.5 * pow(max(dot(N, V), 0.0), 0.6);   // gas limb darkening
   // Atmosphere over the disc: a rim that glows on the day side and reddens at the day/night edge
   if (uAtm > 0.0) {
     float rim = pow(1.0 - max(dot(N, V), 0.0), 3.0);
@@ -364,7 +366,7 @@ void main() {
   float outer = 0.13 / (d * d + 0.3);
   float corona = (inner + outer * max(streamers, 0.1)) * outside;
   // a point-like glare that keeps a distant star visible; it fades out as the disc itself grows on screen
-  float glare = 0.0035 / (q * q + 0.0004) * smoothstep(0.1, 0.02, uDisc);
+  float glare = (0.007 / (q * q + 0.0005) + 0.035 / (q + 0.06)) * smoothstep(0.1, 0.02, uDisc);
   float fade = smoothstep(1.0, 0.5, q);
   vec3 c = uColor * (corona * 0.5 + glare) * fade * uGain;
   gl_FragColor = vec4(c, 1.0);
@@ -459,7 +461,8 @@ void main() {
   vec3 q = d * (1.0 + rockH(d, iScaleTint.z)) * stretch;
   vec3 r = q * c + cross(ax, q) * s + ax * dot(ax, q) * (1.0 - c);
   float dist = length(iOffset);
-  float rad = max(iScaleTint.x * uEnlarge, dist * uMinPx);     // never smaller than about a pixel
+  // enlarged near the camera; from far outside the belt the enlargement fades, or the rocks would merge into a solid ring
+  float rad = max(iScaleTint.x * (1.0 + (uEnlarge - 1.0) * min(1.0, 2.5e5 / dist)), dist * uMinPx);
   vDir = d; vAx = ax; vCS = vec2(c, s); vStretch = stretch; vTint = iScaleTint.yz;
   vWorld = iOffset + r * rad;
   setPos(vWorld);
@@ -474,7 +477,7 @@ void main() {
   vec3 d = normalize(vDir); float fp = length(fwidth(vDir)) + 1e-6, sd = vTint.y;
   vec4 a = fbmd(d * 1.3 + sd * 50.0, 3, fp * 1.3), b = fbmd(d * 3.1 + sd * 20.0, 2, fp * 3.1), f = fbmd(d * 9.0 + sd * 70.0, OCT - 2, fp * 9.0);
   float h = a.x * 0.42 + b.x * 0.14;
-  vec3 g = a.yzw * (0.42 * 1.3) + b.yzw * (0.14 * 3.1) + f.yzw * 0.5;
+  vec3 g = a.yzw * (0.42 * 1.3) + b.yzw * (0.14 * 3.1) + f.yzw * 1.1;
   vec3 n = normalize(d * (1.0 + h) - (g - dot(g, d) * d)) / vStretch;
   vec3 ax = normalize(vAx);
   vec3 N = normalize(n * vCS.x + cross(ax, n) * vCS.y + ax * dot(ax, n) * (1.0 - vCS.x));
@@ -502,11 +505,11 @@ void main() {
 `;
 export const DUST_FRAG = /* glsl */`
 ${FRAG_COMMON}
-uniform vec3 uSunCol; varying float vA;
+uniform vec3 uSunCol; uniform float uFade; varying float vA;
 void main() {
   vec2 c = gl_PointCoord * 2.0 - 1.0; float d2 = dot(c, c);
   if (d2 > 1.0) discard;
-  gl_FragColor = vec4(vec3(0.6, 0.52, 0.44) * uSunCol * vA * (1.0 - d2) * 0.2, 1.0);
+  gl_FragColor = vec4(vec3(0.6, 0.52, 0.44) * uSunCol * vA * (1.0 - d2) * 0.2 * uFade, 1.0);
   LOGDEPTH
 }
 `;
@@ -550,7 +553,7 @@ varying float vS; varying float vSide; varying float vNear;
 void main() {
   float edge = 1.0 - smoothstep(0.35, 1.0, abs(vSide));
   float trail = vS < 0.0 ? mix(1.0, 0.32, smoothstep(0.0, 1.0, -vS)) : mix(0.55, 0.32, smoothstep(0.0, 0.25, vS));
-  trail *= smoothstep(1.25, 2.4, vNear);
+  trail *= smoothstep(1.3, 4.5, vNear);
   float dash = uDash > 0.0 ? step(0.5, fract(vS * uDash)) : 1.0;
   float a = edge * trail * uAlpha * dash;
   if (a < 0.004) discard;
@@ -610,7 +613,12 @@ void main() {
   float a;
   if (vParam.z < 0.5) {                      // a name
     vec2 uv = mix(vRect.xy, vRect.zw, vec2(vUv.x * 0.5 + 0.5, 0.5 - vUv.y * 0.5));
-    a = texture(uAtlas, uv).r;
+    vec4 tx = texture(uAtlas, uv);
+    float halo = tx.g * 0.75 * vCol.a;
+    a = tx.r * vCol.a;
+    gl_FragColor = vec4(vCol.rgb * a, max(a, halo));
+    if (gl_FragColor.a < 0.01) discard;
+    return;
   } else {
     float r = length(vUv), px = 2.0 / vParam.x;
     if (vParam.z < 1.5) a = (1.0 - smoothstep(px * 0.6, px * 1.6, abs(r - 0.8)));          // a thin ring: "a body is here"

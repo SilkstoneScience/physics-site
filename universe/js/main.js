@@ -101,7 +101,7 @@ const actions = app.actions = {
   },
   overview() {
     const sys = app.sim.sys, a = sys.planets[sys.planets.length - 1].el.a;
-    app.rig.flyTo(0, { mode: 'follow', dist: a * 2.7, pitch: 0.62 }); app.ui.syncCamera();
+    app.rig.flyTo(0, { mode: 'follow', dist: a * 2.5, pitch: 1.3 }); app.ui.syncCamera();
   },
   camera(mode) { app.rig.setMode(mode); app.ui.syncCamera(); if (mode === 'free') app.ui.toast('Free flight: W A S D to move, Q and E for down and up, drag to look. Hold Shift to go faster.', 6000); },
   layer(name, on) {
@@ -206,7 +206,7 @@ async function rebuildKeeping(seed, quality, fresh) {
   } else {
     const id = showcaseBody(app.sim);
     placeForArrival(id);
-    rig.flyTo(id, { dur: 4.5, pitch: 0.2, yaw: sunYaw(id) - 0.95 });
+    rig.flyTo(id, { dur: 4.5, pitch: 0.2, yaw: sunYaw(id) - 1.2 });
     actions.select(id, false);
     app.ui.toast(`Arrived at the ${app.sim.sys.star.name} system.`);
   }
@@ -246,7 +246,7 @@ function placeForArrival(id) {
 function benchmark() {
   const scene = app.scene, gl = scene.renderer.getContext(), px = new Uint8Array(4);
   const id = showcaseBody(app.sim), b = app.sim.bodies[id];
-  app.rig.flyTo(id, { instant: true, dist: b.radius * 4, pitch: 0.2, yaw: sunYaw(id) - 0.95 });
+  app.rig.flyTo(id, { instant: true, dist: b.radius * 4, pitch: 0.2, yaw: sunYaw(id) - 1.2 });
   app.rig.update(0);
   let total = 0;
   for (let i = 0; i < 7; i++) {
@@ -292,7 +292,7 @@ async function boot() {
   wireKeys();
   // the arrival
   const id = showcaseBody(app.sim), rig = app.rig;
-  if (reduced || TEST) { rig.flyTo(id, { instant: true, pitch: 0.2, yaw: sunYaw(id) - 0.95 }); }
+  if (reduced || TEST) { rig.flyTo(id, { instant: true, pitch: 0.2, yaw: sunYaw(id) - 1.2 }); }
   else { placeForArrival(id); rig.flyTo(id, { dur: 9, pitch: 0.2, yaw: sunYaw(id) - 0.95 }); $('intro-skip').hidden = false; }
   actions.select(id, false);
   app.ui.syncCamera();
@@ -313,11 +313,22 @@ function setRunning(on) {
   if (on && !running && app.scene && !tooSmall()) { running = true; last = performance.now(); raf = requestAnimationFrame(frame); }
   else if (!on && running) { running = false; cancelAnimationFrame(raf); }
 }
-document.addEventListener('visibilitychange', () => { if (started) setRunning(!document.hidden); });
+// (a hidden tab needs no special handling: the browser stops sending animation frames by itself)
 
+const flight = { on: false, t: 0 };           // the scripted test flight (see debugApi)
 function step(dt, now) {
   const { sim, scene, rig, viz, ui } = app;
-  let simDt = state.paused ? 0 : dt * M.WARPS[state.warp][0];
+  if (flight.on) { const t0 = flight.t; flight.t += dt; flightEvents(t0, flight.t, dt); }
+  // Close to a moon, a fast clock would make it jump round its orbit between frames: cap the rate there.
+  let rate = M.WARPS[state.warp][0], cap = Infinity;
+  const tb = sim.bodies[rig.target], flying = sim.probe.active && sim.probe.status === 'flight';
+  if (rig.mode !== 'free' && !flying && !tb.dead) {
+    if (tb.kind === 'moon') cap = P.orbitalPeriod(tb.el.a, P.G * sim.bodies[tb.pid].mass) / 40;
+    else if (tb.kind === 'planet' && tb.moons.length && rig.dist < tb.moons[0].el.a * 3) cap = P.orbitalPeriod(tb.moons[0].el.a, P.G * tb.mass) / 16;
+  }
+  state.slowed = !state.paused && rate > cap;
+  scene.closeUp = rig.mode !== 'free' && rig.dist < tb.radius * 60;
+  let simDt = state.paused ? 0 : dt * Math.min(rate, cap);
   if (pendingStep) { simDt += pendingStep; pendingStep = 0; }
   sim.update(simDt);
   if (sim.events.length) {
@@ -347,6 +358,18 @@ function frame(now) {
   if (perf.on && perf.n < perf.frame.length) { perf.frame[perf.n] = ms; perf.cpu[perf.n] = cpu; perf.calls = info.calls; perf.tris = info.triangles; perf.n++; }
   app.ui.tick(now, fpsInfo);
   state.stepped = false;
+}
+
+// The scripted flight: overview, an ocean planet, the ringed giant (with a slow turn around it), a moon, the star.
+function flightEvents(t0, t1, dt) {
+  const { sim, rig } = app, sys = sim.sys;
+  const giant = sim.bodies[showcaseBody(sim)], ocean = sys.planets.find((p) => p.type === 'ocean') || sys.planets[1];
+  const at = (s) => t0 < s && t1 >= s;
+  if (at(4)) rig.flyTo(ocean.id, {});
+  if (at(10)) rig.flyTo(giant.id, { pitch: 0.25 });
+  if (t1 > 15 && t1 < 21) rig.rotate(0.36 * dt, 0.06 * dt);
+  if (at(21) && giant.moons[0]) rig.flyTo(giant.moons[0].id, {});
+  if (at(25)) rig.flyTo(0, { dist: sys.star.radius * 9 });
 }
 
 // ---------- GPU timing (where the browser allows it) ----------
@@ -418,7 +441,7 @@ function debugApi() {
       scene.trueScale = 0; introDone || endIntro();
       const giant = sim.bodies[showcaseBody(sim)], ocean = sys.planets.find((p) => p.type === 'ocean') || sys.planets.find((p) => p.atmosphere) || sys.planets[0];
       actions.select(-1);
-      if (name === 'arrival') { rig.flyTo(giant.id, { instant: true, pitch: 0.2, yaw: sunYaw(giant.id) - 0.95, mode: 'follow' }); actions.select(giant.id, false); }
+      if (name === 'arrival') { rig.flyTo(giant.id, { instant: true, pitch: 0.2, yaw: sunYaw(giant.id) - 1.2, mode: 'follow' }); actions.select(giant.id, false); }
       else if (name === 'star') rig.flyTo(0, { instant: true, dist: sys.star.radius * 4.6, pitch: 0.12, yaw: 0.4, mode: 'follow' });
       else if (name === 'giant') {
         // a ringed giant from above its ring plane, at a moment when its innermost moon is on the near side
@@ -478,17 +501,29 @@ function debugApi() {
     },
     // advance exactly dt seconds of real time (for scripted, repeatable flights)
     advance(dt) { step(dt, performance.now()); },
-    flightStep(i, dt = 1 / 30) {
-      const { sim, rig } = app, sys = sim.sys, t = i * dt;
-      const giant = sim.bodies[showcaseBody(sim)], ocean = sys.planets.find((p) => p.type === 'ocean') || sys.planets[1];
-      const at = (s) => Math.abs(t - s) < dt / 2;
-      if (i === 0) { api.pose('arrival'); actions.pause(false); actions.setWarp(5); actions.overview(); rig.tr.active = false; rig.update(0); }
-      if (at(4)) rig.flyTo(ocean.id, {});
-      if (at(10)) rig.flyTo(giant.id, { pitch: 0.25 });
-      if (t > 15 && t < 21) rig.rotate(0.012 * dt * 30, 0.002 * dt * 30);
-      if (at(21) && giant.moons[0]) rig.flyTo(giant.moons[0].id, {});
-      if (at(25)) rig.flyTo(0, { dist: sys.star.radius * 9 });
-      step(dt, performance.now());
+    flightStart() { api.pose('arrival'); actions.pause(false); actions.setWarp(5); actions.overview(); app.rig.tr.active = false; app.rig.update(0); flight.t = 0; },
+    flightStep(i, dt = 1 / 30) { if (i === 0) api.flightStart(); flight.on = true; step(dt, performance.now()); flight.on = false; },
+    // the same flight in real time, with the frame times recorded
+    perfFlight(seconds = 30) {
+      api.flightStart(); flight.on = true; api.perfStart();
+      return new Promise((res) => setTimeout(() => { flight.on = false; res(api.perfStop()); }, seconds * 1000));
+    },
+    // The flight again, one frame after another as fast as they can be drawn, waiting for the graphics chip to
+    // finish each one. Gives the true cost of a frame (it works in a background tab, where frames are not paced).
+    async costFlight(seconds = 30, fps = 30) {
+      const gl = app.scene.renderer.getContext(), px = new Uint8Array(4), n = seconds * fps;
+      const total = new Float32Array(n), cpu = new Float32Array(n);
+      for (let i = 0; i < n; i++) {
+        const t0 = performance.now();
+        api.flightStep(i, 1 / fps);
+        const t1 = performance.now();
+        gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
+        total[i] = performance.now() - t0; cpu[i] = t1 - t0;
+        if (i % 20 === 19) await new Promise((r) => setTimeout(r, 0));
+      }
+      const stats = (a) => { const s = Array.from(a).sort((x, y) => x - y); return { mean: +(s.reduce((p, c) => p + c, 0) / n).toFixed(2), p50: +s[n >> 1].toFixed(2), p99: +s[Math.floor(n * 0.99)].toFixed(2), max: +s[n - 1].toFixed(2) }; };
+      const info = app.scene.renderer.info.render;
+      return { frames: n, total: stats(total), cpu: stats(cpu), calls: info.calls, triangles: info.triangles, quality: state.quality, gpuName: app.scene.gpuName, pixels: [app.scene.canvas.width, app.scene.canvas.height] };
     },
     perfStart() { perf.n = 0; perf.gpuN = 0; perf.on = true; },
     perfStop() {

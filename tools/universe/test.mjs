@@ -126,6 +126,7 @@ section('4. Full gravity (N-body)');
   ok(y.dE < 1e-6, 'Yoshida, 1000 circular orbits: relative energy drift below 1e-6', y.dE.toExponential(2));
   ok(y.dR < 1e-3, 'Yoshida, 1000 circular orbits: radius within 0.1 %', y.dR.toExponential(2));
   ok(y.dL < 1e-9, 'Yoshida, 1000 circular orbits: angular momentum conserved', y.dL.toExponential(2));
+  ok(Math.abs(y.phase) < 0.02, 'Yoshida, 1000 circular orbits: the planet is back where it started (period correct to 3 parts in a million)', y.phase.toExponential(2));
   console.log(`  (Yoshida, 200 steps per orbit: energy ${y.dE.toExponential(1)}, radius ${y.dR.toExponential(1)}, angular momentum ${y.dL.toExponential(1)}, phase error after 1000 orbits ${y.phase.toExponential(1)} rad)`);
   const l = run(P.stepLeapfrog, 200, 1000);
   ok(l.dE < 1e-6 && l.dR < 1e-3 && l.dL < 1e-9, 'leapfrog passes the same three tests', `${l.dE.toExponential(2)} ${l.dR.toExponential(2)} ${l.dL.toExponential(2)}`);
@@ -167,6 +168,59 @@ section('5. Test mass and escape speed');
   const half = launch(0.5, 1e4 * R);
   near(half.rMax, R / 0.75, 1e-4, 'launched at 0.5 v_esc, it reaches 4R/3');
   ok(P.maxRadius(R, 1) === Infinity, 'at exactly the escape speed there is no greatest distance');
+}
+
+// ---------- 5b. Reference values, and the simulation state (added after the independent physics review) ----------
+section('5b. Reference values and the simulation (modes, pushes, mass changes, test mass)');
+{
+  near(P.hillRadius(1.496e11, 0, M_EARTH, M_SUN), 1.50e9, 5e-3, "Earth's Hill radius ≈ 1.50 × 10⁹ m");
+  near(P.rocheLimit(R_EARTH, 5510, 3340), 1.84e7, 1e-2, "fluid Roche limit for the Moon around Earth ≈ 1.84 × 10⁷ m");
+  // a body that passes right through another during one step is still caught
+  const c = P.createSystem(2); c.m.set([1, 1]); c.x.set([0, 0, 0, 10, 0.5, 0]); c.v.set([0, 0, 0, 20, 0, 0]);
+  ok(P.findCollision(c, [1, 1]) === -1 && P.findCollision(c, [1, 1], 1) === 1, 'a pass-through within one step counts as a collision');
+
+  const { Sim } = await import('../../universe/js/sim.js');
+  const sim = new Sim(generate(SHOWCASE_SEED));
+  sim.update(3.01e8);
+  const giant = sim.sys.planets.find((p) => p.moons.length && p.type === 'gas') || sim.sys.planets.find((p) => p.moons.length), moon = giant.moons[0];
+  const snap = () => Array.from(sim.pos), rel = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+  const moonRel = () => [0, 1, 2].map((k) => sim.pos[3 * moon.id + k] - sim.pos[3 * giant.id + k]);
+  // Orbits -> Full gravity -> Orbits leaves everything where it was
+  const before = snap(); sim.toNbody(); sim.toKepler(); const after = snap();
+  let worst = 0; for (const id of sim.planetIds) worst = Math.max(worst, rel(before.slice(3 * id), after.slice(3 * id)) / sim.bodies[id].el.a);
+  ok(worst < 1e-9, 'switching to Full gravity and back leaves every planet in place', worst.toExponential(2));
+  // changing a planet's mass must not move its moons
+  const m0 = moonRel(); sim.setMass(giant.id, giant.mass * 2); const m1 = moonRel();
+  ok(rel(m0, m1) < 1e-6 * moon.el.a, 'a moon stays where it is when its planet is made heavier', `${(rel(m0, m1) / moon.el.a).toExponential(2)} of its orbit radius`);
+  sim.reset();
+  // "make it circular", then check the period by timing one orbit in Full gravity
+  const p = sim.sys.planets[2];
+  sim.toNbody(); const t6 = new Float64Array(6), j = sim.nbIndex(p.id), nb = sim.nb;
+  const r = sim.relState(p.id, t6), v = Math.hypot(t6[3], t6[4], t6[5]), vr = (t6[0] * t6[3] + t6[1] * t6[4] + t6[2] * t6[5]) / r, vt = Math.sqrt(v * v - vr * vr), vc = Math.sqrt(G * (nb.m[0] + nb.m[j]) / r);
+  for (let k = 0; k < 3; k++) nb.v[3 * j + k] = nb.v[k] + (t6[3 + k] - vr * t6[k] / r) / vt * vc;
+  sim.rebase();
+  ok(p.el.e < 1e-6, 'a planet given the circular speed at right angles to the star has e ≈ 0', p.el.e.toExponential(2));
+  sim.kick(p.id, 0.2 * vc, 0, 0);
+  near(p.el.e, 1.2 ** 2 - 1, 1e-6, 'pushed to 1.2 × the circular speed, its eccentricity is 1.2² − 1 = 0.44');
+  sim.kick(p.id, (Math.SQRT2 * 1.001 - 1.2) * vc, 0, 0);
+  ok(p.el.e > 1 && p.escaping, 'pushed past √2 × the circular speed, it is on an escape path');
+  sim.reset();
+  // the test mass in the page's own stepper
+  const body = sim.sys.planets[1], run = (f) => { sim.launch(body.id, f); const tau = Math.sqrt(body.radius ** 3 / (G * body.mass)); let n = 0; while (sim.probe.status === 'flight' && n++ < 4e5) sim.updateProbe(tau / 20); return sim.probe; };
+  let pr = run(0.99); ok(pr.status === 'landed', 'page stepper: 0.99 v_esc comes back'); near(pr.rMax, P.maxRadius(body.radius, 0.99), 5e-4, 'page stepper: greatest distance matches R/(1 − f²)');
+  pr = run(1.01); ok(pr.status === 'escaped' && pr.v > 0, 'page stepper: 1.01 v_esc escapes');
+  pr = run(0.5); near(pr.rMax, body.radius / 0.75, 1e-4, 'page stepper: 0.5 v_esc reaches 4R/3');
+
+  // an independent check of the Kepler code: integrate an eccentric orbit step by step and compare
+  const s = P.createSystem(2), el = P.prepareOrbit({ a: 1.5e11, e: 0.3, i: 0.2, O: 1, w: 2, M0: 0.4, t0: 0 }), out = new Float64Array(6), mu = G * (M_SUN + M_EARTH);
+  s.m[0] = M_SUN; s.m[1] = M_EARTH; P.keplerState(el, mu, 0, out, 0);
+  for (let k = 0; k < 3; k++) { s.x[3 + k] = out[k]; s.v[3 + k] = out[3 + k]; }
+  P.accelerations(s);
+  const T = P.orbitalPeriod(el.a, mu), N = 20000;
+  for (let k = 0; k < 3 * N; k++) P.stepYoshida(s, T / N);
+  P.keplerState(el, mu, 3 * T, out, 0);
+  const err = Math.hypot(s.x[3] - s.x[0] - out[0], s.x[4] - s.x[1] - out[1], s.x[5] - s.x[2] - out[2]) / el.a;
+  ok(err < 1e-7, 'three eccentric orbits: step-by-step gravity and the Kepler formula agree on where the planet is', err.toExponential(2));
 }
 
 // ---------- 6. Generated systems ----------

@@ -105,7 +105,7 @@ export function stateToElements(rx, ry, rz, vx, vy, vz, mu, t, el) {
   let ex = ((v2 - mu / r) * rx - rv * vx) / mu, ey = ((v2 - mu / r) * ry - rv * vy) / mu, ez = ((v2 - mu / r) * rz - rv * vz) / mu;
   let e = Math.hypot(ex, ey, ez);
   const energy = v2 / 2 - mu / r;
-  if (Math.abs(e - 1) < 1e-9) e = energy < 0 ? 1 - 1e-9 : 1 + 1e-9;   // a parabola is treated as its nearest neighbour
+  if (Math.abs(e - 1) < 1e-6) e = energy < 0 ? 1 - 1e-6 : 1 + 1e-6;   // a parabola is treated as its nearest neighbour
   const a = -mu / (2 * energy);
   const P = el.P || (el.P = [0, 0, 0]), Q = el.Q || (el.Q = [0, 0, 0]);
   const wx = hx / h, wy = hy / h, wz = hz / h;                          // orbit normal
@@ -224,13 +224,20 @@ export function toBarycentre(s) {
   }
 }
 // First pair of live bodies whose surfaces touch: returns i * n + j (i < j), or -1.
-export function findCollision(s, radii) {
+// With dt given, it also catches two bodies that passed through each other during the step just taken
+// (it works out their closest approach, treating their relative motion as a straight line for that step).
+export function findCollision(s, radii, dt = 0) {
   for (let i = 0; i < s.n; i++) {
     if (s.dead[i]) continue;
     for (let j = i + 1; j < s.n; j++) {
       if (s.dead[j]) continue;
-      const d = Math.hypot(s.x[3 * j] - s.x[3 * i], s.x[3 * j + 1] - s.x[3 * i + 1], s.x[3 * j + 2] - s.x[3 * i + 2]);
-      if (d < radii[i] + radii[j]) return i * s.n + j;
+      let dx = s.x[3 * j] - s.x[3 * i], dy = s.x[3 * j + 1] - s.x[3 * i + 1], dz = s.x[3 * j + 2] - s.x[3 * i + 2];
+      if (dt > 0) {
+        const wx = s.v[3 * j] - s.v[3 * i], wy = s.v[3 * j + 1] - s.v[3 * i + 1], wz = s.v[3 * j + 2] - s.v[3 * i + 2];
+        const back = Math.min(dt, Math.max(0, (dx * wx + dy * wy + dz * wz) / (wx * wx + wy * wy + wz * wz || 1)));
+        dx -= wx * back; dy -= wy * back; dz -= wz * back;
+      }
+      if (Math.hypot(dx, dy, dz) < radii[i] + radii[j]) return i * s.n + j;
     }
   }
   return -1;

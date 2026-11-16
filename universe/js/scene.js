@@ -227,6 +227,13 @@ export class Scene {
       }
       this.vis.push(v);
     }
+    const ps = sim.sys.planets;
+    this.vis[0].cap = 0.3 * ps[0].el.a * (1 - ps[0].el.e);
+    ps.forEach((p, k) => {
+      const inner = k ? p.el.a - ps[k - 1].el.a : p.el.a * (1 - p.el.e) - this.vis[0].cap, outer = k < ps.length - 1 ? ps[k + 1].el.a - p.el.a : Infinity;
+      this.vis[p.id].cap = 0.28 * Math.min(inner, outer);
+      for (const m of p.moons) this.vis[m.id].cap = Infinity;
+    });
     this.buildBelt();
   }
   orbitGeometry(k) {
@@ -282,7 +289,7 @@ export class Scene {
     const dg = new THREE.BufferGeometry();
     dg.setAttribute('position', new THREE.BufferAttribute(dp, 3));
     const orbAttr = new THREE.BufferAttribute(orb, 4); dg.setAttribute('aOrb', orbAttr);
-    const dmat = this.material(SH.DUST_VERT, SH.DUST_FRAG, { uStar: { value: new THREE.Vector3() }, uT: { value: 0 }, uMu: { value: 1 }, uPx: this.shared.uPx, uSunCol: { value: this.sunCol } }, { transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+    const dmat = this.material(SH.DUST_VERT, SH.DUST_FRAG, { uStar: { value: new THREE.Vector3() }, uT: { value: 0 }, uMu: { value: 1 }, uFade: { value: 1 }, uPx: this.shared.uPx, uSunCol: { value: this.sunCol } }, { transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
     const dust = new THREE.Points(dg, dmat); dust.frustumCulled = false; dust.matrixAutoUpdate = false; dust.renderOrder = 3; this.scene.add(dust);
     this.belt = { n, el, off, offAttr, mat, mesh, near, dust, dmat, orb, orbAttr, ang0, nd, tBase: 0 };
   }
@@ -292,24 +299,27 @@ export class Scene {
     const bodies = this.sim.bodies, cv = document.createElement('canvas');
     cv.width = 1024; cv.height = 512;
     const ctx = cv.getContext('2d');
-    ctx.font = '500 26px system-ui, "Segoe UI", sans-serif'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#fff';
+    ctx.font = '500 26px system-ui, "Segoe UI", sans-serif'; ctx.textBaseline = 'middle';
+    // red channel: the letters; green channel: a fat blurred copy, used as a dark halo
+    ctx.globalCompositeOperation = 'lighter'; ctx.lineJoin = 'round';
+    const put = (text, px, py) => { ctx.shadowColor = '#00ff00'; ctx.shadowBlur = 5; ctx.strokeStyle = '#00ff00'; ctx.lineWidth = 7; ctx.strokeText(text, px, py); ctx.shadowBlur = 0; ctx.fillStyle = '#ff0000'; ctx.fillText(text, px, py); };
     let x = 4, y = 20;
     this.labelRect = bodies.map((b) => {
       const w = Math.ceil(ctx.measureText(b.name).width) + 4;
-      if (x + w > 1020) { x = 4; y += 36; }
-      ctx.fillText(b.name, x + 2, y);
-      const rect = [x / 1024, 1 - (y - 18) / 512, (x + w) / 1024, 1 - (y + 18) / 512, w / 2, 18];
-      x += w + 6;
+      if (x + w > 1000) { x = 4; y += 38; }
+      put(b.name, x + 6, y);
+      const rect = [x / 1024, 1 - (y - 18) / 512, (x + w + 8) / 1024, 1 - (y + 18) / 512, (w + 8) / 2, 18];
+      x += w + 16;
       return rect;
     });
     this.glyph = {};
     ctx.font = 'italic 600 28px Georgia, serif';
     for (const ch of ['v', 'F']) {
       const w = Math.ceil(ctx.measureText(ch).width) + 6;
-      if (x + w > 1020) { x = 4; y += 36; }
-      ctx.fillText(ch, x + 3, y);
-      this.glyph[ch] = [x / 1024, 1 - (y - 18) / 512, (x + w) / 1024, 1 - (y + 18) / 512, w / 2, 18];
-      x += w + 6;
+      if (x + w > 1000) { x = 4; y += 38; }
+      put(ch, x + 7, y);
+      this.glyph[ch] = [x / 1024, 1 - (y - 18) / 512, (x + w + 8) / 1024, 1 - (y + 18) / 512, (w + 8) / 2, 18];
+      x += w + 16;
     }
     const tex = new THREE.CanvasTexture(cv); tex.minFilter = THREE.LinearFilter; tex.generateMipmaps = false;
     const max = this.markMax = bodies.length * 3 + 48;
@@ -350,6 +360,7 @@ export class Scene {
     const qi = this.tmpQ.copy(quat).invert(), tv = this.tmpV, focal = this.focal, hw = this.cssW / 2, hh = this.cssH / 2;
     const sx0 = pos[0], sy0 = pos[1], sz0 = pos[2];
     this.markN = 0;
+    this.orbitDim = this.closeUp ? 0.45 : 1;       // other planets' orbits are dimmed in a close-up
     const mark = (v, kind, w, h, rect, r, g, b, a) => this.addMark(v.rel[0] * U, v.rel[1] * U, v.rel[2] * U, kind, w, h, rect, r, g, b, a, v.px);
     for (let i = 0; i < vis.length; i++) {
       const v = vis[i], b = v.b, k = 3 * i;
@@ -363,7 +374,7 @@ export class Scene {
         const pv = vis[b.pid], sep = Math.hypot(pos[k] - pos[3 * b.pid], pos[k + 1] - pos[3 * b.pid + 1], pos[k + 2] - pos[3 * b.pid + 2]);
         const x = (sep / (pv.rd / U) - 1.4) / 1.2; v.grow = x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x);
       }
-      const rdM = Math.max(b.radius, minAngle(b) * d * enlarge) * (b.kind === 'moon' ? Math.max(v.grow, 1e-4) : 1);
+      const rdM = Math.max(b.radius, Math.min(minAngle(b) * d * enlarge, v.cap)) * (b.kind === 'moon' ? Math.max(v.grow, 1e-4) : 1);
       v.enl = rdM / b.radius; v.rd = rdM * U; v.px = rdM / d * focal;
       const un = v.mat.uniforms;
       un.uCenter.value.set(rx * U, ry * U, rz * U); un.uRadius.value = v.rd;
@@ -375,7 +386,7 @@ export class Scene {
         un.uTime.value = this.time;
         const ang = TWO_PI * ((t / b.rotPeriod) % 1), c = Math.cos(ang), s = Math.sin(ang);
         un.uSpin.value.set(c, s, 0, -s, c, 0, 0, 0, 1);
-        const size = Math.max(v.rd * 9, d * U * 0.03);
+        const size = Math.max(v.rd * 9, d * U * 0.05);
         v.coronaMat.uniforms.uSize.value = size; v.coronaMat.uniforms.uDisc.value = v.rd / size;
       } else {
         const L = un.uSun.value.set(sx0 - pos[k], sy0 - pos[k + 1], sz0 - pos[k + 2]).normalize();
@@ -393,12 +404,13 @@ export class Scene {
           occ[n++].set((pos[q] - pos[k]) / rdM, (pos[q + 1] - pos[k + 1]) / rdM, (pos[q + 2] - pos[k + 2]) / rdM, prd / rdM);
         }
         un.uOccN.value = n;
+        if (v.atmoMat) v.atmoMat.uniforms.uAtm.value = v.pal.atmK * Math.min(1, Math.max(0.25, (v.px - 6) / 30));   // a small disc gets only a faint halo
         if (v.orbit && v.orbit.visible) {
           const ou = v.orbitMat.uniforms, el = b.el, hyp = el.e >= 1;
           ou.uPv.value.set(el.P[0], el.P[1], el.P[2]); ou.uQv.value.set(el.Q[0], el.Q[1], el.Q[2]);
           ou.uEl.value.set(Math.abs(el.a) * U, el.e, el.anom, hyp ? 1 : 0); ou.uLimit.value = hyp ? 2.2 : Math.PI;
           const sel = this.selected === i;
-          let alpha = sel ? 0.85 : b.kind === 'moon' ? 0.3 : 0.34;
+          let alpha = sel ? 0.85 : b.kind === 'moon' ? 0.3 : 0.34 * this.orbitDim;
           if (b.kind === 'moon') { const pv = vis[b.pid]; alpha *= Math.min(1, Math.max(0, (el.a / pv.dist * focal - 30) / 60)) * v.grow; }
           ou.uAlpha.value = alpha; ou.uWidth.value = sel ? 1.8 : 1.2; ou.uBodyR.value = v.rd;
           if (alpha <= 0.004) v.orbit.visible = false;
@@ -481,7 +493,7 @@ export class Scene {
       B.offAttr.needsUpdate = true;
       const bu = B.mat.uniforms;
       bu.uTime.value = this.time; bu.uSunPos.value.set(cx * U, cy * U, cz * U);
-      bu.uEnlarge.value = 1 + (ROCK_ENLARGE - 1) * enlarge; bu.uMinPx.value = 0.55 / focal;
+      bu.uEnlarge.value = 1 + (ROCK_ENLARGE - 1) * enlarge; bu.uMinPx.value = 0.2 / focal;
       // dust: angles are re-based now and then so the graphics chip's 32-bit time stays precise
       if (Math.abs(t - B.tBase) > 2e9 || B.muUsed !== mu) {
         for (let i = 0; i < B.nd; i++) { const a = B.orb[4 * i] / U; B.ang0[i] = (B.ang0[i] + Math.sqrt((B.muUsed || mu) / (a * a * a)) * (t - B.tBase)) % TWO_PI; B.orb[4 * i + 1] = B.ang0[i]; }
@@ -489,6 +501,7 @@ export class Scene {
       }
       const du = B.dmat.uniforms;
       du.uStar.value.set(cx * U, cy * U, cz * U); du.uT.value = t - B.tBase; du.uMu.value = mu * U * U * U;
+      const far = sim.sys.belt.outer * 4 / Math.max(vis[0].dist, 1); du.uFade.value = Math.min(1, far * far);   // thousands of points would pile up when the belt is small on screen
     }
   }
   // Add a name (kind 0), a small ring (1) or a selection mark (2) for this frame, at a point relative to the camera.

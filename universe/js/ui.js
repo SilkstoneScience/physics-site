@@ -10,7 +10,7 @@ const SUP = { '-': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵
 // ---------- Number formatting ----------
 // 3 significant figures; standard form outside 0.01 to 10000.
 export function num(x, sf = 3) {
-  if (!isFinite(x)) return x > 0 ? '∞' : x < 0 ? '−∞' : '?';
+  if (!isFinite(x)) return x > 0 ? '∞' : x < 0 ? '−∞' : '–';
   if (x === 0) return '0';
   const neg = x < 0 ? '−' : ''; x = Math.abs(x);
   let ex = Math.floor(Math.log10(x)), m = x / Math.pow(10, ex);
@@ -140,6 +140,7 @@ export class UI {
     const { state } = this.app, p = $('t-pause');
     p.setAttribute('aria-pressed', String(state.paused)); p.textContent = state.paused ? '▶' : '❚❚'; p.setAttribute('aria-label', state.paused ? 'Resume' : 'Pause');
     $('t-warp').textContent = WARPS[state.warp][1];
+    $('t-warp').title = '';
   }
   toast(msg, ms = 5000) {
     const t = $('toast'); t.textContent = msg; t.hidden = false;
@@ -153,14 +154,14 @@ export class UI {
     if (L.vectors) {
       h += `<h3>Arrows</h3>
         <div class="arrow" style="color:rgb(140,240,215)"><svg width="52" height="12" viewBox="0 0 52 12" aria-hidden="true"><path d="M1 6H42" stroke="currentColor" stroke-width="2.4"/><path d="M40 1L51 6L40 11Z" fill="currentColor"/></svg><span><b><i>v</i></b> velocity (solid). Longest: <span id="lg-v"></span></span></div>
-        <div class="arrow" style="color:rgb(255,190,110)"><svg width="52" height="12" viewBox="0 0 52 12" aria-hidden="true"><path d="M1 6H42" stroke="currentColor" stroke-width="2.4" stroke-dasharray="5 4"/><path d="M40 1L51 6L40 11Z" fill="currentColor"/></svg><span><b><i>F</i></b> force from the star (dashed). Longest: <span id="lg-f"></span></span></div>
-        <p>Lengths are proportional to size, measured on the screen. An arrow that would be shorter than 7 pixels is drawn 7 pixels long.</p>`;
+        <div class="arrow" style="color:rgb(255,190,110)"><svg width="52" height="12" viewBox="0 0 52 12" aria-hidden="true"><path d="M1 6H42" stroke="currentColor" stroke-width="2.4" stroke-dasharray="5 4"/><path d="M40 1L51 6L40 11Z" fill="currentColor"/></svg><span><b><i>F</i></b> gravitational force from the body it orbits (dashed). Longest: <span id="lg-f"></span></span></div>
+        <p>Lengths are proportional to size, measured on the screen. An arrow that would be shorter than 7 pixels is drawn 7 pixels long. The selected body's arrows carry the letters; arrows of planets crowded against the star are hidden until you zoom in.</p>`;
     }
     if (L.field) {
       const stops = FIELD_STOPS.map((c, i) => `${displayColour(c.map((x) => Math.pow(x, 2.2) * 0.8))} ${i * 25}%`).join(',');
       h += `<h3>Field strength <i>g</i> / N kg⁻¹</h3><div class="bar" style="background:linear-gradient(90deg,${stops})"></div>
         <div class="ticks"><span>10⁻⁶</span><span>10⁻⁴</span><span>10⁻²</span><span>1</span><span>10²</span></div>
-        <p>Each colour step and each white line is a factor of 10. Because $g = \\dfrac{GM}{r^2}$, a line 10 times weaker is √10 ≈ 3.2 times further out.</p>`;
+        <p>The colour scale is logarithmic, and each white line marks a factor of 10. Because $g = \\dfrac{GM}{r^2}$, a line 10 times weaker is √10 ≈ 3.2 times further out.</p>`;
     }
     if (L.equi) h += `<h3>Equipotentials${HL}</h3><p>Every point on a ring has the same potential $V_g$. Neighbouring rings differ by $\\Delta V_g$ = <span id="lg-dv"></span>. They crowd together near the star, where the field is strong ($g = -\\dfrac{\\Delta V_g}{\\Delta r}$).</p>`;
     if (L.well) h += `<h3>Potential well${HL}</h3><p><strong>A model, not a real shape.</strong> Depth below the plane stands for gravitational potential, $V_g = -\\dfrac{GM}{r}$. Each ring is one equal step in $V_g$. Dashed lines show how deep in the star's well each planet sits. The planets' own wells are too narrow to show at this scale.</p>`;
@@ -239,28 +240,28 @@ export class UI {
     } else {
       this.head(pd, `Its orbit around ${pn}`);
       this.row(pd, 'r', `Distance from ${pn}, <i>r</i>`, U.m, () => c.r, () => dist(c.r));
-      this.row(pd, 'a', 'Mean orbital radius (semi-major axis)', U.m, () => c.a, () => dist(c.a));
+      this.row(pd, 'a', 'Mean orbital radius (semi-major axis, <i>a</i>)', U.m, () => (c.e < 1 ? c.a : NaN), () => (c.e < 1 ? dist(c.a) : 'none: this is not a closed orbit'));
       this.row(pd, 'e', 'Eccentricity', '', () => c.e, () => (c.e < 0.02 ? 'almost a perfect circle' : c.e < 1 ? `an ellipse: ${num(c.rp / c.a * 100)} % to ${num(c.ra / c.a * 100)} % of the mean radius` : 'not a closed orbit: it is escaping'));
       this.row(pd, 'v', 'Speed, <i>v</i>', U.ms, () => c.v, () => `${num(c.v / 1000)} km s⁻¹`, () => {
         const vc = P.circularSpeed(par.mass, c.r);
         const L = [`For a <strong>circular</strong> orbit of this radius, gravity provides exactly the centripetal force:`,
           `$$v_\\text{orbital} = \\sqrt{\\dfrac{GM}{r}} = \\sqrt{\\dfrac{(${tex(G)})(${tex(par.mass)})}{${tex(c.r)}}}$$`, `$$v_\\text{orbital} = ${tex(vc)}${TU.ms}$$`];
-        if (c.e < 0.01) L.push(`This orbit is almost circular (e = ${num(c.e, 2)}), so its actual speed, ${num(c.v)} m s⁻¹, agrees.`);
+        if (c.e < 0.01) L.push(`This orbit is almost circular (e = ${num(c.e, 2)}), so its actual speed, ${num(c.v)} m s⁻¹, agrees to within about 1 %.`);
         else if (c.e < 1) L.push(`This orbit is an ellipse (e = ${num(c.e, 2)}), so that equation does not apply to it: the actual speed, ${num(c.v)} m s⁻¹, is ${c.v > vc ? 'higher' : 'lower'}. It is fastest when closest to ${pn}. The exact speed comes from energy conservation <span class="tag beyond">beyond the IB course</span>:`,
           `$$v = \\sqrt{GM\\left(\\dfrac{2}{r} - \\dfrac{1}{a}\\right)} = ${tex(c.v)}${TU.ms}$$`);
         else L.push(`${b.name} is not on a closed orbit: it is moving faster than the escape speed at this distance.`);
         return L;
       });
-      this.row(pd, 'T', 'Orbital period, <i>T</i>', U.s, () => c.T, () => (isFinite(c.T) ? duration(c.T) : 'no period: it will not return'), () => [
-        `Kepler's third law, with $r$ the mean orbital radius:`,
+      this.row(pd, 'T', 'Orbital period, <i>T</i>', U.s, () => (c.e < 1 ? c.T : NaN), () => (c.e < 1 ? duration(c.T) : 'no period: it will not return'), () => (c.e >= 1 ? [`${b.name} is on an escape path, not a closed orbit, so it has no period.`] : [
+        `Kepler's third law, with $r$ the mean orbital radius (the semi-major axis $a$: half the sum of the closest and furthest distances):`,
         `$$T^2 = \\dfrac{4\\pi^2 r^3}{GM} = \\dfrac{4\\pi^2 (${tex(c.a)})^3}{(${tex(G)})(${tex(par.mass)})}$$`, `$$T = ${tex(c.T)}${TU.s}$$`,
         `It follows from setting the gravitational force equal to the centripetal force for a circular orbit. <span class="tag y2028">New for 2028</span> Deducing it yourself is required for exams from 2028.`,
-        sim.mode === 'nbody' ? `In Full gravity the other planets keep nudging this orbit, so $r$ and $T$ here describe the orbit it is on at this instant.` : `The planet's own mass is left out, as in the IB course (it is tiny compared with the star's).`]);
+        sim.mode === 'nbody' ? `In Full gravity the other planets keep nudging this orbit, so $r$ and $T$ here describe the orbit it is on at this instant.` : `${b.name}'s own mass is left out, as in the IB course (it is tiny compared with ${pn}'s).`]));
       this.head(pd, 'Circular motion and gravity');
       this.row(pd, 'ac', `Acceleration towards ${pn}`, U.ms2, () => c.g, null, () => {
-        const L = [`The only force is gravity, so the acceleration is $\\dfrac{F}{m}$, towards ${pn}:`, `$$a = \\dfrac{GM}{r^2} = \\dfrac{(${tex(G)})(${tex(par.mass)})}{(${tex(c.r)})^2} = ${tex(c.g)}${TU.ms2}$$`,
+        const L = [b.kind === 'moon' ? `Counting only ${pn}'s gravity (this model leaves out the star's pull on a moon), the acceleration relative to ${pn} is $\\dfrac{F}{m}$, towards ${pn}:` : `The only force is gravity, so the acceleration is $\\dfrac{F}{m}$, towards ${pn}:`, `$$a = \\dfrac{GM}{r^2} = \\dfrac{(${tex(G)})(${tex(par.mass)})}{(${tex(c.r)})^2} = ${tex(c.g)}${TU.ms2}$$`,
           `For circular motion the centripetal acceleration is $a = \\dfrac{v^2}{r}$:`, `$$\\dfrac{v^2}{r} = \\dfrac{(${tex(c.v)})^2}{${tex(c.r)}} = ${tex(c.v * c.v / c.r)}${TU.ms2}$$`];
-        L.push(c.e < 0.01 ? `The two agree: this orbit is almost a circle.` : `They differ because this orbit is an ellipse (e = ${num(c.e, 2)}): the path is not a circle centred on ${pn}, and part of the acceleration changes the speed. $a = \\dfrac{v^2}{r}$ applies only to circular orbits.`);
+        L.push(c.e >= 1 ? `They differ because ${b.name} is on an escape path, not a circle. $a = \\dfrac{v^2}{r}$ applies only to circular orbits.` : c.e < 0.01 ? `The two agree to within about 1 %: this orbit is almost a circle.` : `They differ because this orbit is an ellipse (e = ${num(c.e, 2)}): the path is not a circle centred on ${pn}, and part of the acceleration changes the speed. $a = \\dfrac{v^2}{r}$ applies only to circular orbits.`);
         return L;
       });
       this.row(pd, 'F', `Gravitational force from ${pn}`, U.N, () => c.F, null, () => [
@@ -286,7 +287,7 @@ export class UI {
         `It is negative because zero is defined as infinitely far apart, and work would have to be done to pull the two bodies apart.`]);
       this.row(pe, 'Et', `Total energy${HL}`, U.J, () => c.Ek + c.Ep, () => (c.Ek + c.Ep < 0 ? `negative: bound to ${pn}` : `positive: escaping from ${pn}`), () => {
         const L = [`$$E_\\text{total} = E_\\text{k} + E_\\text{p} = ${tex(c.Ek)} + (${tex(c.Ep)})$$`, `$$E_\\text{total} = ${tex(c.Ek + c.Ep)}${TU.J}$$`];
-        L.push(c.e < 0.01 ? `For a circular orbit, $E_\\text{k} = \\dfrac{GMm}{2r}$, so the total is $-\\dfrac{GMm}{2r}$: equal to $-E_\\text{k}$ and to half of $E_\\text{p}$. Check the three values.`
+        L.push(c.e >= 1 ? `The total is positive: ${b.name} has more than enough kinetic energy to climb out of ${pn}'s potential well, so it escapes.` : c.e < 0.01 ? `For a circular orbit, $E_\\text{k} = \\dfrac{GMm}{2r}$, so the total is $-\\dfrac{GMm}{2r}$: equal to $-E_\\text{k}$ and to half of $E_\\text{p}$. Check the three values.`
           : `On this ellipse $E_\\text{k}$ and $E_\\text{p}$ both change all the time, but their total stays constant${sim.mode === 'nbody' ? ' (apart from small exchanges with the other planets)' : ''}. Watch the bars.`);
         return L;
       });
@@ -307,7 +308,9 @@ export class UI {
     if (b.kind === 'moon') this.para(pc, `Moons keep to fixed ellipses around their planet in this version. Choose a planet or the star to change something.`, 'note');
     else {
       this.para(pc, `Changing anything switches to <strong>Full gravity</strong> from the present positions, because the old ellipses no longer apply. Watch the orbit path and the Orbit tab.`, 'note');
-      const lo = star ? 0.25 : 0.01, hi = star ? 4 : Math.min(1000, 0.2 * sim.bodies[0].mass / b.mass), m0 = sim.orig[b.id].mass;
+      // a planet may be made up to 1 % of the star's mass: beyond that the star itself would move noticeably,
+      // and the panel's equations (which treat the star as fixed, as the IB course does) would no longer be good
+      const m0 = sim.orig[b.id].mass, lo = star ? 0.25 : 0.01, hi = star ? 4 : Math.max(1, Math.min(1000, 0.01 * sim.orig[0].mass / m0));
       const mc = document.createElement('div'); mc.className = 'ctrl';
       mc.innerHTML = `<label for="mass-range"><span>Mass of ${b.name}</span><output id="mass-out"></output></label><input id="mass-range" type="range" min="${Math.log10(lo)}" max="${Math.log10(hi)}" step="0.01" value="${Math.log10(b.mass / m0)}"><div class="btn-row"><button type="button" class="btn" id="mass-apply">Set the mass</button></div>`;
       pc.appendChild(mc);
@@ -317,10 +320,10 @@ export class UI {
       mc.querySelector('#mass-apply').addEventListener('click', () => A.setMass(b.id, m0 * Math.pow(10, Number(mr.value))));
       if (star) this.para(pc, `Only the star's mass changes here. A real star of a different mass would also have a different brightness, size and colour.`, 'small');
       else {
-        this.para(pc, `Only the mass changes; the planet is drawn the same size.`, 'small');
+        this.para(pc, `Only the mass changes; the planet is drawn the same size. Its moons carry on from where they are, on new orbits. The mass stops at 1 % of the star's: the equations in this panel treat the star as fixed, which is only good while the planet is much lighter than the star.`, 'small');
         const kc = document.createElement('div'); kc.className = 'ctrl';
         kc.innerHTML = `<label for="kick-range"><span>Push along its motion</span><output id="kick-out"></output></label><input id="kick-range" type="range" min="-60" max="60" step="1" value="10">
-          <div class="btn-row"><button type="button" class="btn" id="kick-apply">Push</button><button type="button" class="btn" id="kick-circ">Make it circular</button><button type="button" class="btn" id="kick-esc">Give it escape speed</button></div>`;
+          <div class="btn-row"><button type="button" class="btn" id="kick-apply">Push</button><button type="button" class="btn" id="kick-circ">Make it circular</button><button type="button" class="btn" id="kick-esc">Give it escape speed <span class="tag hl">HL</span></button></div>`;
         pc.appendChild(kc);
         const kr = kc.querySelector('#kick-range'), ko = kc.querySelector('#kick-out');
         const showK = () => { const k = Number(kr.value); ko.textContent = `${k > 0 ? '+' : k < 0 ? '−' : ''}${Math.abs(k)} % of its speed (${k >= 0 ? '+' : '−'}${num(Math.abs(k) / 100 * this.c.v / 1000)} km s⁻¹)`; };
@@ -338,7 +341,7 @@ export class UI {
     if (star) this.para(pl, `Choose a planet or moon to launch a test mass from its surface.`, 'note');
     else {
       const vEsc = P.escapeSpeed(b.mass, b.radius);
-      this.para(pl, `Launch a 1 kg test mass straight up from ${b.name}'s surface${b.type === 'gas' || b.type === 'icegiant' ? ' (the top of its clouds)' : ''}. Below the escape speed it falls back; at or above it, it never returns.`);
+      this.para(pl, `Launch a 1 kg test mass straight up from ${b.name}'s surface${b.type === 'gas' || b.type === 'icegiant' ? ' (the top of its clouds)' : ''}. Below the escape speed it falls back; at or above it, it never returns.${HL}`);
       const lc = document.createElement('div'); lc.className = 'ctrl';
       lc.innerHTML = `<label for="launch-range"><span>Launch speed</span><output id="launch-out"></output></label><input id="launch-range" type="range" min="0.1" max="1.5" step="0.01" value="0.8">
         <div class="btn-row"><button type="button" class="btn" id="launch-go">Launch</button><button type="button" class="btn" id="launch-99">0.99 v<sub>esc</sub></button><button type="button" class="btn" id="launch-101">1.01 v<sub>esc</sub></button></div>`;
@@ -355,7 +358,7 @@ export class UI {
       this.row(pl, 'pv', 'Speed', U.ms, () => (mine() ? Math.abs(pr.v) : 0), () => (mine() ? (pr.v >= 0 ? 'moving up' : 'falling') : ''));
       this.row(pl, 'pk', 'Kinetic energy', U.J, () => (mine() ? 0.5 * pr.v * pr.v : 0));
       this.row(pl, 'pp', `Potential energy${HL}`, U.J, () => (mine() ? -pr.GM / pr.r : -G * b.mass / b.radius));
-      this.row(pl, 'pt', `Total energy${HL}`, U.J, () => (mine() ? 0.5 * pr.v * pr.v - pr.GM / pr.r : 0), () => (mine() ? (0.5 * pr.v * pr.v - pr.GM / pr.r < 0 ? 'negative: it must come back' : 'zero or positive: it can reach infinity') : ''), () => {
+      this.row(pl, 'pt', `Total energy${HL}`, U.J, () => (mine() ? 0.5 * pr.v * pr.v - pr.GM / pr.r : -G * b.mass / b.radius), () => (mine() ? (0.5 * pr.v * pr.v - pr.GM / pr.r < 0 ? 'negative: it must come back' : 'zero or positive: it can reach infinity') : ''), () => {
         const f = mine() ? pr.f : Number(lr.value), v0 = f * vEsc;
         const L = [`Energy is conserved, so the total at launch decides everything:`, `$$E = \\tfrac{1}{2}mv^2 - \\dfrac{GMm}{r} = \\tfrac{1}{2}(1)(${tex(v0)})^2 - \\dfrac{(${tex(G)})(${tex(b.mass)})(1)}{${tex(b.radius)}}$$`, `$$E = ${tex(0.5 * v0 * v0 - G * b.mass / b.radius)}${TU.J}$$`];
         if (f < 1) L.push(`At its highest point $v = 0$, so $E = -\\dfrac{GMm}{r_\\text{max}}$:`, `$$r_\\text{max} = \\dfrac{r}{1 - (v/v_\\text{esc})^2} = ${tex(P.maxRadius(b.radius, f))}${TU.m}$$`, `That is ${num((P.maxRadius(b.radius, f) - b.radius) / 1000)} km above the surface.`);
@@ -392,6 +395,8 @@ export class UI {
       const dr = $('drift'); dr.textContent = `Energy drift ${sim.drift >= 0 ? '+' : '−'}${num(Math.abs(sim.drift), 2)}${sim.limited ? ' · time slowed to keep steps small' : ''}`;
       dr.classList.toggle('warn', Math.abs(sim.drift) > 1e-4 || sim.limited);
     }
+    const wt = state.slowed ? 'slowed here' : WARPS[state.warp][1];
+    if ($('t-warp').textContent !== wt) { $('t-warp').textContent = wt; $('t-warp').title = state.slowed ? 'Time is slowed while you are close to a fast-moving moon, so that its motion stays smooth. Zoom out to speed up.' : ''; }
     // scale label
     const sv = scene.vis[state.selected >= 0 ? state.selected : rig.target], st = $('scale-text');
     let s;
@@ -455,7 +460,7 @@ export class UI {
     const { sim } = this.app, cv = $('graph-canvas'), g = cv.getContext('2d'), W = cv.width, H = cv.height;
     this.graphStamp = performance.now();
     const M = sim.bodies[0].mass, grad = 4 * Math.PI * Math.PI / (G * M);
-    let pts = sim.planetIds.map((id) => sim.bodies[id]).filter((b) => !b.dead && b.el.e < 1).map((b) => ({ name: b.name, r: b.el.a, T: P.orbitalPeriod(b.el.a, G * (sim.mode === 'nbody' ? M + b.mass : M)) }));
+    let pts = sim.planetIds.map((id) => sim.bodies[id]).filter((b) => !b.dead && b.el.e < 1).map((b) => ({ name: b.name, r: b.el.a, T: P.orbitalPeriod(b.el.a, G * M) }));
     const all = pts;
     if (this.graphInner) pts = pts.slice(0, Math.max(3, Math.ceil(pts.length / 2)));
     const xm = Math.max(...pts.map((p) => p.r ** 3)) * 1.12, ym = grad * xm;
@@ -477,9 +482,7 @@ export class UI {
       g.beginPath(); g.moveTo(x - 7, y - 7); g.lineTo(x + 7, y + 7); g.moveTo(x + 7, y - 7); g.lineTo(x - 7, y + 7); g.lineWidth = 3; g.strokeStyle = '#ffd9a0'; g.stroke();
       g.fillStyle = '#e9eef7'; g.textAlign = x > R - 120 ? 'right' : 'left'; g.fillText(p.name, x + (x > R - 120 ? -12 : 12), y + 14);
     }
-    // gradient of the best straight line through the origin
-    const fit = all.reduce((s, p) => s + p.r ** 3 * p.T ** 2, 0) / all.reduce((s, p) => s + p.r ** 6, 0);
-    const note = `The line is $T^2 = \\dfrac{4\\pi^2}{GM} r^3$, with gradient $\\dfrac{4\\pi^2}{GM}$ = ${num(grad)} s² m⁻³ for this star. The planets' points give ${num(fit, 4)} s² m⁻³. Here <i>r</i> is each orbit's mean radius. Click the graph to switch between all the planets and the inner ones.`;
+    const note = `The line is $T^2 = \\dfrac{4\\pi^2}{GM} r^3$, with gradient $\\dfrac{4\\pi^2}{GM}$ = ${num(grad)} s² m⁻³ for this star. Each period here is calculated from the planet's orbit with Kepler's third law, so the points lie exactly on the line: the graph shows the law for this system rather than testing it. Here <i>r</i> is each orbit's mean radius. Try changing the star's mass and watch the gradient. Click the graph to switch between all the planets and the inner ones.`;
     if (note !== this.graphNote) { this.graphNote = note; $('graph-note').innerHTML = note; this.typeset($('graph-note')); }
     $('graph-table').innerHTML = `<table><tr><th>Planet</th><th>r / m</th><th>T / s</th><th>r³ / m³</th><th>T² / s²</th></tr>${all.map((p) => `<tr><td>${p.name}</td><td>${num(p.r)}</td><td>${num(p.T)}</td><td>${num(p.r ** 3)}</td><td>${num(p.T ** 2)}</td></tr>`).join('')}</table>`;
   }

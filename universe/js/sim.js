@@ -129,10 +129,21 @@ export class Sim {
     nb.v[q + 2] += dvPro * vz / v + dvRad * rz / r + dvNorm * hz / h;
     this.changed = true; this.rebase();
   }
+  // When a planet's mass changes, each moon carries on from where it is, on the new orbit that its present
+  // position and velocity give it around the heavier or lighter planet.
+  rebaseMoons(planet, newMass) {
+    const t = this.tmp;
+    for (const m of planet.moons || []) {
+      if (m.dead) continue;
+      this.relState(m.id, t);
+      P.stateToElements(t[0], t[1], t[2], t[3], t[4], t[5], G * newMass, this.t, m.el);
+    }
+  }
   setMass(id, mass) {
     this.toNbody();
     const j = this.nbIndex(id);
     if (j < 0 || this.nb.dead[j]) return;
+    this.rebaseMoons(this.bodies[id], mass);
     this.nb.m[j] = mass; this.bodies[id].mass = mass;
     this.changed = true; this.rebase();
   }
@@ -160,12 +171,12 @@ export class Sim {
     if (this.bodies[p.id].dead) { p.active = false; p.status = 'idle'; return; }
     st[0] = p.r; st[1] = p.v;
     let rem = dt, steps = 0;
-    while (rem > 0 && steps < 20000) {
-      const h = Math.min(rem, 0.004 * Math.sqrt(st[0] * st[0] * st[0] / p.GM));
+    while (rem > 0 && steps < 60000) {
+      const h = Math.min(rem, 0.001 * Math.sqrt(st[0] * st[0] * st[0] / p.GM));
       P.radialStep(st, p.GM, h); rem -= h; steps++; p.t += h;
       if (st[0] > p.rMax) p.rMax = st[0];
       if (st[0] <= p.R && st[1] < 0) { st[0] = p.R; st[1] = 0; p.status = 'landed'; break; }
-      if (st[0] > 60 * p.R) { p.status = 'escaped'; break; }      // far enough to call it: its energy is positive
+      if (st[0] > 60 * p.R && st[1] * st[1] / 2 - p.GM / st[0] >= 0) { p.status = 'escaped'; break; }   // far away with positive energy
     }
     p.slow = rem > 0 && p.status === 'flight';
     p.r = st[0]; p.v = st[1];
@@ -184,7 +195,7 @@ export class Sim {
         this.steps = n;
         for (let k = 0; k < n; k++) {
           P.stepYoshida(nb, this.dt); this.t += this.dt;
-          const hit = P.findCollision(nb, this.radii);
+          const hit = P.findCollision(nb, this.radii, this.dt);
           if (hit >= 0) this.collide(Math.floor(hit / nb.n), hit % nb.n);
         }
         if (n) { this.syncFromNb(); this.drift = (P.totalEnergy(nb) - this.E0) / Math.abs(this.E0); }
@@ -198,6 +209,7 @@ export class Sim {
     const keep = P.merge(nb, i, j), lose = keep === i ? j : i;
     const kb = bodies[idOf(keep)], lb = bodies[idOf(lose)];
     lb.dead = true; for (const m of lb.moons) m.dead = true;
+    this.rebaseMoons(kb, nb.m[keep]);
     kb.mass = nb.m[keep];
     this.events.push({ type: 'collision', keep: kb.id, lose: lb.id });
     P.accelerations(nb);

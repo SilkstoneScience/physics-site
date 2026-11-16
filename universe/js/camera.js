@@ -61,8 +61,14 @@ export class CameraRig {
     else if (Math.abs(this.pitchT) > 1.2) this.pitchT = 0.35;
     if (opts.yaw !== undefined) this.yawT = opts.yaw;
     else {
-      // arrive on the side we are coming from, turned a little so the lit side shows
-      this.yawT = Math.atan2(tr.from[1], tr.from[0]) - (this.mode === 'chase' ? this.chaseHeading() : 0);
+      // arrive on the sunlit side: about 50 degrees round from the star, on whichever side we are coming from
+      const approach = Math.atan2(tr.from[1], tr.from[0]);
+      if (id === 0 || this.mode === 'chase' || this.mode === 'top') this.yawT = approach - (this.mode === 'chase' ? this.chaseHeading() : 0);
+      else {
+        const p = this.sim.pos, sun = Math.atan2(p[1] - p[3 * id + 1], p[0] - p[3 * id]);
+        let d = approach - sun; d = Math.atan2(Math.sin(d), Math.cos(d));
+        this.yawT = sun + (d >= 0 ? 0.9 : -0.9);
+      }
     }
     // carry on smoothly from where we are
     this.yaw = this.yawT; this.pitch = this.pitchT; this.dist = this.distT;

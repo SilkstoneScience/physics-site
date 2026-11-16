@@ -211,16 +211,18 @@ export class Viz {
       this.vMax = vMax; this.fMax = fMax;
       each((id) => {
         const b = bodies[id], v = vis[id], r = sim.relState(id, t);
-        if (!v.front) return;
+        // arrows of bodies crowded against the star are left out (unless that body is selected)
+        if (!v.front || (id !== selected && Math.hypot(v.sx - vis[0].sx, v.sy - vis[0].sy) < 46)) return;
+        const lab = id === selected ? 0.95 : 0;
         const perPx = v.dist * U / scene.focal, x = v.rel[0] * U, y = v.rel[1] * U, z = v.rel[2] * U;
         const lv = Math.min(ARROW_PX * 1.6, Math.max(7, ARROW_PX * b._v / vMax)) * perPx / b._v;
         const vx = x + t[3] * lv, vy = y + t[4] * lv, vz = z + t[5] * lv;
         scene.addSegment(x, y, z, vx, vy, vz, 0.45, 0.95, 0.85, 0.95, 1.6, 0);
-        scene.addMark(vx, vy, vz, 0, scene.glyph.v[4], scene.glyph.v[5], scene.glyph.v, 0.45, 0.95, 0.85, 0.95, 0);
+        scene.addMark(vx, vy, vz, 0, scene.glyph.v[4], scene.glyph.v[5], scene.glyph.v, 0.45, 0.95, 0.85, lab, 0);
         const lf = Math.min(ARROW_PX * 1.6, Math.max(7, ARROW_PX * b._f / fMax)) * perPx / r;
         const fx = x - t[0] * lf, fy = y - t[1] * lf, fz = z - t[2] * lf;
         scene.addSegment(x, y, z, fx, fy, fz, 1, 0.72, 0.35, 0.95, 1.6, 7);
-        scene.addMark(fx, fy, fz, 0, scene.glyph.F[4], scene.glyph.F[5], scene.glyph.F, 1, 0.72, 0.35, 0.95, 0);
+        scene.addMark(fx, fy, fz, 0, scene.glyph.F[4], scene.glyph.F[5], scene.glyph.F, 1, 0.72, 0.35, lab, 0);
       });
     }
     // ----- test mass -----

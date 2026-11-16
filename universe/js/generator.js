@@ -2,7 +2,7 @@
 // The same seed text always gives the same system. Never uses Math.random or the clock.
 // GEN_VERSION goes into shared links (?seed=...&v=1): if the recipe below ever changes, add a new version
 // and keep this one, so old links still open the same system.
-import { G, AU, M_SUN, R_SUN, M_EARTH, R_EARTH, DAY, starFromMass, blackbodyRGB, hillRadius, rocheLimit, density, prepareOrbit, orbitalPeriod } from './physics.js';
+import { G, AU, M_SUN, R_SUN, L_SUN, M_EARTH, R_EARTH, DAY, starFromMass, blackbodyRGB, hillRadius, rocheLimit, density, prepareOrbit, orbitalPeriod } from './physics.js';
 
 export const GEN_VERSION = 1;
 export const SHOWCASE_SEED = 'starfall';
@@ -112,7 +112,7 @@ export function generate(seedText, version = GEN_VERSION) {
     color: blackbodyRGB(st.temp, [0, 0, 0]).map(sig), rotPeriod: sig(rs.range(18, 40) * DAY), vis: [rs.f(), rs.f(), rs.f(), rs.f()].map(sig),
   };
   const M = star.mass;
-  const zone = Math.sqrt(star.luminosity / 3.83e26) * AU;   // distance receiving the same light as 1 AU from the Sun
+  const zone = Math.sqrt(star.luminosity / L_SUN) * AU;   // distance receiving the same light as 1 AU from the Sun
 
   // Planets, from the inside out.
   const n = rs.int(4, 9);
