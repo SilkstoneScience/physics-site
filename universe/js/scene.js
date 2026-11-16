@@ -412,7 +412,9 @@ export class Scene {
           const sel = this.selected === i;
           let alpha = sel ? 0.85 : b.kind === 'moon' ? 0.3 : 0.34 * this.orbitDim;
           if (b.kind === 'moon') { const pv = vis[b.pid]; alpha *= Math.min(1, Math.max(0, (el.a / pv.dist * focal - 30) / 60)) * v.grow; }
-          ou.uAlpha.value = alpha; ou.uWidth.value = sel ? 1.8 : 1.2; ou.uBodyR.value = v.rd;
+          ou.uAlpha.value = alpha; ou.uWidth.value = sel ? 1.8 : 1.2; // In a close-up the path fades out well before it reaches the body: a line running straight through the
+          // planet and on past the camera reads as a broken line, though the geometry is right.
+          ou.uBodyR.value = Math.max(v.rd, 2.5 * d * U * Math.min(1, Math.max(0, (v.px - 25) / 55)));
           if (alpha <= 0.004) v.orbit.visible = false;
           else if (!hyp) {
             // which point of the ellipse is nearest the camera? The ribbon puts most of its corners there.

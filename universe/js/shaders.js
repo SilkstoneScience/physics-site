@@ -475,15 +475,14 @@ uniform vec3 uSunPos; uniform vec3 uSunCol;
 varying vec3 vWorld; varying vec3 vDir; varying vec3 vAx; varying vec2 vCS; varying vec3 vStretch; varying vec2 vTint;
 void main() {
   vec3 d = normalize(vDir); float fp = length(fwidth(vDir)) + 1e-6, sd = vTint.y;
-  vec4 a = fbmd(d * 1.3 + sd * 50.0, 3, fp * 1.3), b = fbmd(d * 3.1 + sd * 20.0, 2, fp * 3.1), f = fbmd(d * 9.0 + sd * 70.0, OCT - 2, fp * 9.0);
+  vec4 a = fbmd(d * 1.3 + sd * 50.0, 3, fp * 1.3), b = fbmd(d * 3.1 + sd * 20.0, 2, fp * 3.1), f = fbmd(d * vStretch * 7.0 + sd * 70.0, OCT - 1, fp * 7.0);
   float h = a.x * 0.42 + b.x * 0.14;
-  vec3 g = a.yzw * (0.42 * 1.3) + b.yzw * (0.14 * 3.1) + f.yzw * 1.1;
+  vec3 g = a.yzw * (0.42 * 1.3) + b.yzw * (0.14 * 3.1) + f.yzw * vStretch * 0.38;   // large shape first, fine relief second
   vec3 n = normalize(d * (1.0 + h) - (g - dot(g, d) * d)) / vStretch;
   vec3 ax = normalize(vAx);
   vec3 N = normalize(n * vCS.x + cross(ax, n) * vCS.y + ax * dot(ax, n) * (1.0 - vCS.x));
   vec3 L = normalize(uSunPos - vWorld);
-  vec3 col = mix(vec3(0.3, 0.27, 0.24), vec3(0.52, 0.44, 0.36), vTint.x) * (0.75 + 0.35 * f.x + 0.25 * a.x);
-  col = mix(col, col * 0.55, smoothstep(0.1, 0.5, b.x));
+  vec3 col = mix(vec3(0.3, 0.27, 0.24), vec3(0.52, 0.44, 0.36), vTint.x) * (0.92 + 0.14 * f.x);          // nearly uniform rock: the light and shade come from its shape
   float dif = max(dot(N, L), 0.0);
   gl_FragColor = vec4(col * uSunCol * dif * 1.15 + col * 0.004, 1.0);
   LOGDEPTH

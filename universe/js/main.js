@@ -206,7 +206,7 @@ async function rebuildKeeping(seed, quality, fresh) {
   } else {
     const id = showcaseBody(app.sim);
     placeForArrival(id);
-    rig.flyTo(id, { dur: 4.5, pitch: 0.2, yaw: sunYaw(id) - 1.2 });
+    rig.flyTo(id, { dur: 4.5, pitch: 0.42, yaw: sunYaw(id) - 1.2 });
     actions.select(id, false);
     app.ui.toast(`Arrived at the ${app.sim.sys.star.name} system.`);
   }
@@ -246,7 +246,7 @@ function placeForArrival(id) {
 function benchmark() {
   const scene = app.scene, gl = scene.renderer.getContext(), px = new Uint8Array(4);
   const id = showcaseBody(app.sim), b = app.sim.bodies[id];
-  app.rig.flyTo(id, { instant: true, dist: b.radius * 4, pitch: 0.2, yaw: sunYaw(id) - 1.2 });
+  app.rig.flyTo(id, { instant: true, dist: b.radius * 4, pitch: 0.42, yaw: sunYaw(id) - 1.2 });
   app.rig.update(0);
   let total = 0;
   for (let i = 0; i < 7; i++) {
@@ -292,7 +292,7 @@ async function boot() {
   wireKeys();
   // the arrival
   const id = showcaseBody(app.sim), rig = app.rig;
-  if (reduced || TEST) { rig.flyTo(id, { instant: true, pitch: 0.2, yaw: sunYaw(id) - 1.2 }); }
+  if (reduced || TEST) { rig.flyTo(id, { instant: true, pitch: 0.42, yaw: sunYaw(id) - 1.2 }); }
   else { placeForArrival(id); rig.flyTo(id, { dur: 9, pitch: 0.2, yaw: sunYaw(id) - 0.95 }); $('intro-skip').hidden = false; }
   actions.select(id, false);
   app.ui.syncCamera();
@@ -366,7 +366,7 @@ function flightEvents(t0, t1, dt) {
   const giant = sim.bodies[showcaseBody(sim)], ocean = sys.planets.find((p) => p.type === 'ocean') || sys.planets[1];
   const at = (s) => t0 < s && t1 >= s;
   if (at(4)) rig.flyTo(ocean.id, {});
-  if (at(10)) rig.flyTo(giant.id, { pitch: 0.25 });
+  if (at(10)) rig.flyTo(giant.id, { pitch: 0.42 });
   if (t1 > 15 && t1 < 21) rig.rotate(0.36 * dt, 0.06 * dt);
   if (at(21) && giant.moons[0]) rig.flyTo(giant.moons[0].id, {});
   if (at(25)) rig.flyTo(0, { dist: sys.star.radius * 9 });
@@ -441,7 +441,7 @@ function debugApi() {
       scene.trueScale = 0; introDone || endIntro();
       const giant = sim.bodies[showcaseBody(sim)], ocean = sys.planets.find((p) => p.type === 'ocean') || sys.planets.find((p) => p.atmosphere) || sys.planets[0];
       actions.select(-1);
-      if (name === 'arrival') { rig.flyTo(giant.id, { instant: true, pitch: 0.2, yaw: sunYaw(giant.id) - 1.2, mode: 'follow' }); actions.select(giant.id, false); }
+      if (name === 'arrival') { rig.flyTo(giant.id, { instant: true, pitch: 0.42, yaw: sunYaw(giant.id) - 1.2, mode: 'follow' }); actions.select(giant.id, false); }
       else if (name === 'star') rig.flyTo(0, { instant: true, dist: sys.star.radius * 4.6, pitch: 0.12, yaw: 0.4, mode: 'follow' });
       else if (name === 'giant') {
         // a ringed giant from above its ring plane, at a moment when its innermost moon is on the near side
