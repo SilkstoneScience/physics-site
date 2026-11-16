@@ -218,7 +218,8 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Theme E (16 November 2026): E.1 Rutherford scattering, E.1 energy levels and spectra, E.5 the HR diagram and how stars evolve (approximate paths, labelled; the mass limits tagged New for 2028); linked from E.1 and E.5. Themes B, C and D are live.
 - 16 November 2026 (teacher's requests): all music made low and atmospheric (no bells, plucks, ticks or pulses); five more: B.4 the first law and heat engines (HL), B.4 entropy and the second law (HL), E.2 the photoelectric effect (HL), E.3 random decay and half-life, E.4 fission and the chain reaction. Theme E (E.1, E.5) is live.
 - 16 November 2026 (teacher's requests): Rutherford re-timed with no pauses; four more: A.2 a rocket launch, B.2 the greenhouse effect, D.2 Millikan's experiment, and "What is a chemical reaction?" (a new "What is…?" hub section). The B.4/E.2–E.4 five are live.
-- Next: the teacher's check of these, then the Think deeper big question on curved spacetime and any of the suggested ideas the teacher picks. Points waiting for the teacher are listed in `docs/ANIMATIONS_PLAN.md` ("Waiting for the teacher").
+- 16 November 2026 ("make the next ones"): C.3 superposition and music (with "Hear it" buttons), E.2 wave–particle duality (HL), "What if you jumped into a tunnel through the Earth?" and "How do the Northern Lights work?" (two new hub sections). The previous batch is live.
+- Next: the teacher's check of these four, then the Think deeper big question on curved spacetime; the remaining ideas are listed in `docs/ANIMATIONS_PLAN.md`. Points waiting for the teacher are listed in `docs/ANIMATIONS_PLAN.md` ("Waiting for the teacher").
 
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).

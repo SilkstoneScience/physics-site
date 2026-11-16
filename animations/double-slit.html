@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: wave–particle duality, one electron at a time · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics E.2 (HL): light, then single photons, then single electrons pass through two slits. Each lands as a dot, but the dots build up an interference pattern whose spacing fits the de Broglie wavelength.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/double-slit.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: wave–particle duality, one electron at a time · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics E.2 (HL): light, then single photons, then single electrons pass through two slits. Each lands as a dot, but the dots build up an interference pattern whose spacing fits the de Broglie wavelength.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/double-slit.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/duality.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Wave–particle duality</p>
+    <h1>Wave–particle duality <span class="tag hl">HL</span></h1>
+    <p class="lead">Light passes through two slits and makes interference fringes. Then the light is made so dim that photons arrive one at a time, and then electrons are sent through two slits one at a time. Each one lands as a single dot, but the dots build up the same kind of fringes. <a class="tag" href="../themes/e2.html#duality">E.2 Wave–particle duality (HL)</a></p>
+
+    <figure class="anim-stage" data-anim="duality">
+      <canvas role="img" aria-label="Animation of a double-slit experiment seen from the side, beside a face-on view of the screen and a histogram. First a green laser makes bright and dark fringes; then single photons, then single electrons, land one dot at a time and build up the same fringes. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>On the left is a side view of each experiment (not to scale: the screen is really much further away than drawn, and the slits much closer together). On the right is the screen seen face-on, with a histogram beside it showing how many dots have landed at each height, and, in gold, the pattern a wave passing through both slits predicts. The dots are simulated: each landing position is chosen at random from that predicted pattern.</p>
+      <ol>
+        <li>A green laser ($\lambda = 532$ nm) shines on two narrow slits $d = 0.40$ mm apart. On a screen $D = 1.5$ m away there are bright and dark fringes: the waves from the two slits interfere (<a href="../themes/c3.html#young">C.3 Young's double-slit experiment</a>).</li>
+        <li>The fringe spacing is $s = \dfrac{\lambda D}{d} = \dfrac{532 \times 10^{-9} \times 1.5}{0.40 \times 10^{-3}} = 2.0 \times 10^{-3}$ m $= 2.0$ mm. Bright and dark fringes are evidence that light behaves as a wave.</li>
+        <li>The light is made extremely dim. Each photon still has energy $hf$: only the number arriving each second falls, until they arrive one at a time. From here on the screen is a detector (a very sensitive camera).</li>
+        <li>Each photon arrives at the detector as a single dot, at one place: it behaves as a particle.</li>
+        <li>Where each photon lands looks random, but as the dots build up the same fringes appear. Light arrives as particles, but where they arrive follows the wave pattern.</li>
+        <li>Now electrons. An electron gun accelerates them from rest through a p.d. of 600 V, so each gains $E_k = eV = 1.60 \times 10^{-19} \times 600 = 9.6 \times 10^{-17}$ J.</li>
+        <li>Their momentum is $p = \sqrt{2mE_k} = \sqrt{2 \times 9.11 \times 10^{-31} \times 9.6 \times 10^{-17}} = 1.32 \times 10^{-23}\ \text{kg m s}^{-1}$, so their speed is $v = p/m = 1.45 \times 10^7\ \text{m s}^{-1}$ (about 5% of the speed of light).</li>
+        <li>Their de Broglie wavelength is $\lambda = \dfrac{h}{p} = \dfrac{6.63 \times 10^{-34}}{1.32 \times 10^{-23}} = 5.0 \times 10^{-11}$ m.</li>
+        <li>The two slits are $0.25\ \mu$m apart, cut in a thin membrane, and the detector is 0.50 m away. Only about 1000 electrons are sent each second. At $1.45 \times 10^7\ \text{m s}^{-1}$ they are on average $1.45 \times 10^7 \times 1.0 \times 10^{-3} \approx 15$ km apart, so only one is in the apparatus at a time.</li>
+        <li><strong>Predict:</strong> if electrons were just tiny particles, would they make two stripes behind the slits, or fringes?</li>
+        <li>Each electron lands as a single dot, and at first the dots look scattered at random. As hundreds arrive, bright and dark fringes appear: an interference pattern. The electrons arrive one at a time, so the fringes can't come from electrons interfering with each other. This run uses 2500 electrons (slowed down).</li>
+        <li>The fringe spacing is $s = \dfrac{\lambda D}{d} = \dfrac{5.0 \times 10^{-11} \times 0.50}{0.25 \times 10^{-6}} = 1.0 \times 10^{-4}$ m $= 0.10$ mm. That fits the de Broglie wavelength $\lambda = h/p$: the pattern is predicted by a wave passing through both slits. (Real experiments often magnify the pattern with electron lenses before the detector; this simplified set-up leaves the lens out.)</li>
+        <li>The experiment is run again with one slit closed: the fringes disappear, and the electrons spread out into the broad pattern from a single slit. Its first minimum is at $\dfrac{\lambda D}{b}$ $= \dfrac{5.0 \times 10^{-11} \times 0.50}{0.0625 \times 10^{-6}}$ $= 4.0 \times 10^{-4}$ m $= 0.40$ mm from the centre, where $b$ is the slit width (from $\theta = \lambda / b$, C.3 HL). The fourth bright fringe on each side is missing in the two-slit pattern too, because each slit here is a quarter of the slit separation wide (<a href="../themes/c3.html#modulation">C.3 the double-slit pattern revisited, HL</a>).</li>
+        <li>Each electron arrives as a particle, at one point; where it is likely to land follows a wave. As the notes put it, waves describe how light and matter travel (and where they are likely to be found), and particles describe how they interact, in single, indivisible events. This is wave–particle duality.</li>
+      </ol>
+      <p>Experiments like this have really been done with electrons, building the pattern up one electron at a time. The numbers here are chosen to be realistic, but the pictures are not to scale and the dots are simulated.</p>
+      <p>Read more in <a href="../themes/e2.html#debroglie">E.2 section 6: matter waves, the de Broglie wavelength</a>, <a href="../themes/e2.html#diffraction">section 7: electron diffraction</a> and <a href="../themes/e2.html#duality">section 9: wave–particle duality</a>, and in <a href="../themes/c3.html#young">C.3 section 8: Young's double-slit experiment</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

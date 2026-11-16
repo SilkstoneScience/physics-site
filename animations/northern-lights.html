@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: how do the Northern Lights work? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics D.3 and E.1: charged particles from the Sun spiral along the Earth's magnetic field to the poles, then excite oxygen and nitrogen, which emit green, red and violet light.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/northern-lights.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: how do the Northern Lights work? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics D.3 and E.1: charged particles from the Sun spiral along the Earth's magnetic field to the poles, then excite oxygen and nitrogen, which emit green, red and violet light.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/northern-lights.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/aurora.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › How do the Northern Lights work?</p>
+    <h1>How do the Northern Lights work?</h1>
+    <p class="lead">Charged particles from the Sun are steered by the Earth's magnetic field, spiral down along its field lines near the poles, and make the thin upper air glow green, red and violet. Two parts of the course meet here: the magnetic force on a moving charge, and energy levels and photons. <a class="tag" href="../themes/d3.html#circle">D.3 Motion in electromagnetic fields</a> <a class="tag" href="../themes/e1.html#levels">E.1 Energy levels and photons</a></p>
+
+    <figure class="anim-stage" data-anim="aurora">
+      <canvas role="img" aria-label="Animation: the solar wind streams from the Sun and flows round the Earth's magnetic field; a few charged particles are guided down near the poles. A zoomed-in view shows an electron spiralling along a field line. Then electrons hit oxygen atoms and nitrogen molecules high in the air, which give out green, red and violet photons, shown with an energy-level diagram. The animation ends with the auroral oval seen from space and glowing curtains seen from the ground. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>Constants from the data booklet: $h = 6.63 \times 10^{-34}$ J s, $c = 3.00 \times 10^8\ \text{m s}^{-1}$, $e = 1.60 \times 10^{-19}$ C, $m_e = 9.11 \times 10^{-31}$ kg and $m_p = 1.67 \times 10^{-27}$ kg. The Sun, the Earth and the distances between them are not drawn to scale, and the field lines are drawn like those of a bar magnet (a dipole), which is a good picture close to the Earth.</p>
+      <ol>
+        <li>The Sun blows out the <strong>solar wind</strong>: a thin, fast stream of charged particles, mostly protons and electrons. At about $400\ \text{km s}^{-1}$ they take $1.5 \times 10^{11} \div 4.0 \times 10^5 = 3.8 \times 10^5$ s, about 4 days, to reach the Earth.</li>
+        <li>The Earth's magnetic field reaches far out into space. A magnetic field pushes on moving charges: $F = qvB\sin\theta$, always at right angles to the velocity, so it never changes the speed (or the kinetic energy): the magnetic force does no work.</li>
+        <li>So most of the solar wind is steered round the Earth's field. (The real flow is complicated, because the solar wind is a mixture of charges that also carries its own field; the flow drawn here is schematic.)</li>
+        <li><strong>Predict:</strong> where could some of the charged particles get down into the atmosphere?</li>
+        <li>Near the magnetic poles, where the field lines dip steeply down into the atmosphere.</li>
+        <li>Zooming in near the north pole: the field points down into the Earth, and $B$ is about $5 \times 10^{-5}$ T. An electron moving along the field lines feels no force ($\theta = 0$); one moving across them is pushed round in a circle; one moving at an angle does both, and spirals in a <strong>helix</strong>. In a uniform field like this, the part of its velocity along the field never changes. (In fact the field gets a little stronger on the way down; see the note on the magnetic mirror below.) (For more on this, see <a href="charge-in-b-field.html">the animation of a charge in a magnetic field</a>.)</li>
+        <li>The electrons that make the aurora have about 1 keV of energy (most are first sped up in the Earth's magnetic tail: beyond the course; the solar wind's own electrons have only about 10 eV). A 1 keV electron has $E = 1000 \times 1.60 \times 10^{-19} = 1.60 \times 10^{-16}$ J, so $v = \sqrt{2E/m} = 1.87 \times 10^7\ \text{m s}^{-1}$. Moving straight across the field it would circle with
+          $$r = \frac{mv}{qB} = \frac{9.11 \times 10^{-31} \times 1.87 \times 10^7}{1.60 \times 10^{-19} \times 5 \times 10^{-5}}$$
+          which is 2.1 m. The helix drawn moves at 70° to the field, so its radius is $2.1 \times \sin 70° = 2.0$ m.</li>
+        <li>A proton with the same energy moves at $4.38 \times 10^5\ \text{m s}^{-1}$, slower but 1800 times heavier: $r = 91$ m. With the field pointing down, a proton circles anticlockwise seen from above and an electron clockwise.</li>
+        <li>A few metres, or even 91 m, is tiny next to the Earth (radius $6.4 \times 10^6$ m), so the particles follow the field lines closely, down towards the poles.</li>
+        <li>About 100 to 300 km up, they hit atoms and molecules of oxygen and nitrogen. Each collision gives an electron in the atom energy, and it jumps to a higher energy level (an excited state).</li>
+        <li>When it drops back, the atom emits a photon with exactly the energy difference, $E = hf = \dfrac{hc}{\lambda}$. Oxygen's green light, 557.7 nm, has
+          $$E = \frac{6.63 \times 10^{-34} \times 3.00 \times 10^8}{5.577 \times 10^{-7}}$$
+          which is $3.57 \times 10^{-19}$ J, or 2.23 eV. Oxygen's red light, 630.0 nm, is a drop of 1.97 eV, and ionised nitrogen ($\text{N}_2^{\,+}$) gives violet light at 427.8 nm, 2.91 eV. (In the diagram, oxygen's levels are shown as energies above its ground state, 1.97 eV and $1.97 + 2.23 = 4.20$ eV, so the green light comes from the drop from 4.20 eV to 1.97 eV, and the red light from 1.97 eV to the ground state.)</li>
+        <li>Red glows highest (above about 200 km), green lower down, and violet along the bottom edge, near 100 km. (Beyond the course: the red light comes from a state that lasts nearly two minutes, so lower down, where collisions are more frequent, the atom loses its energy in a collision before it can emit the photon.)</li>
+        <li>One 1 keV electron carries $1000 \div 2.23 \approx 450$ times the energy of a green photon, so it can excite many atoms, one after another, before it stops.</li>
+        <li>Seen from space, the light forms a ring around each magnetic pole: the auroral oval. From the ground it looks like curtains of light that ripple as the solar wind gusts and the Earth's field shifts.</li>
+      </ol>
+      <p>How it is drawn: the field lines follow the formula for a dipole field line ($r = L\,R\sin^2\theta$). The solar wind's flow round the field is a simple model (a uniform stream round a rounded body) and is only schematic. The spiralling electron is drawn exactly, slowed down enormously: it really goes round about 1.4 million times a second. The collisions and photons in the air are a random picture, and the colours of the light come from the real wavelengths. Simplified: in reality most of the electrons that light the aurora are first sped up in the Earth's magnetic tail, on the night side, rather than coming straight from the Sun (beyond the course); the magnetic "mirror" that sends many particles back up where the field gets stronger is also beyond the course.</p>
+      <p>Read more in <a href="../themes/d3.html#force">D.3 section 2: the magnetic force on a moving charge</a>, <a href="../themes/d3.html#circle">section 3: circular motion in a magnetic field</a> (including the helix), <a href="../themes/e1.html#spectra">E.1 section 4: emission and absorption spectra</a> and <a href="../themes/e1.html#levels">section 5: energy levels and photons</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

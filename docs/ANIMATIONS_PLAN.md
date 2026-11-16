@@ -100,6 +100,20 @@ Requested 16 November 2026 (the teacher also asked for ideas only on superpositi
 - [x] What is a chemical reaction? `chemical-reaction.html` (hub section "What is…?"; bonds as potential-energy wells, the
   bookkeeping for hydrogen burning, Δm/m ≈ 1.5 × 10⁻¹⁰; partly beyond the syllabus, labelled)
 
+From the idea lists (teacher: "make the next ones", 16 November 2026; the four first picks; no pauses in any of them):
+- [x] C.3 Superposition and music: `superposition.html` (pulses, beats 440/444 Hz, harmonics and timbre; "Hear it" buttons on the
+  page from `js/anim/superpose-sounds.js`, separate from the background music)
+- [x] E.2 Wave–particle duality (HL): `double-slit.html` (light, single photons, then 600 eV electrons one at a time; λ = h/p;
+  fringes s = λD/d; one slit closed)
+- [x] What if you jumped into a tunnel through the Earth? `tunnel-through-earth.html` (hub section "What would happen if…?";
+  uniform Earth, SHM, T ≈ 84 min; a surface-skimming satellite in step; the shell result labelled beyond the syllabus)
+- [x] How do the Northern Lights work? `northern-lights.html` (hub section "How does… work?"; dipole field, helix r = mv/qB,
+  oxygen 557.7 and 630.0 nm, N₂⁺ 427.8 nm)
+- Still on the idea lists (not built): What is temperature / voltage / light / a field / sound / colour / a black hole; powers of
+  ten for time; where your atoms came from; why everything falls at the same rate; entropy and the arrow of time; E = mc² and the
+  Sun; what if the Sun vanished / no greenhouse gases / a neutron star / jumping on other planets / light at 30 km/h; how does a
+  microwave oven / rainbow / optical fibre / motor or loudspeaker / fridge / GPS / phone accelerometer work.
+
 Theme C (built 16 November 2026; waiting for the teacher's check)
 - [x] C.1 Simple harmonic motion: `shm.html` (glider between two springs, m = 0.50 kg, k = 4.9 N m⁻¹, T = 2.0 s; live x–t, v–t, a–t
   graphs; energy bars without numbers at SL; the reference circle and the energy values labelled HL, as on `themes/c1.html`

@@ -19,8 +19,8 @@
   'use strict';
   const { D, C, clamp, smooth, lerp, fade } = Anim;
 
-  const DURATION = 187;
-  const T1 = 4.6, T2 = 19.5, T3 = 60.7, T4 = 106.1, T5 = 135.9, TEND = 172.7;
+  const DURATION = 193;
+  const T1 = 4.6, T2 = 19.5, T3 = 60.7, T4 = 111.7, T5 = 141.5, TEND = 178.3;
   const CAPS = [
     [4.8, 11.9, 'A mixture of hydrogen and oxygen gas at room temperature. Its molecules, H₂ and O₂, move about at random.'],
     [12.1, 19.3, 'Each molecule is two atoms joined by a chemical bond. But what is a bond, and what happens when bonds change?'],
@@ -30,19 +30,20 @@
     [44.2, 52.8, 'The atoms vibrate about the bottom. Push them closer and the repulsion wins; pull them apart and the attraction pulls them back.'],
     [53.0, 60.5, 'Pulling the atoms right apart takes about 4.5 eV: 436 000 J per mole ÷ (6.02 × 10²³) = 7.2 × 10⁻¹⁹ J per molecule.'],
     [60.9, 68.9, 'At room temperature a molecule’s average kinetic energy is only about 0.04 eV (³⁄₂kT at 293 K): far too little to break bonds.'],
-    [69.1, 78.4, 'A spark gives a few molecules much more energy, so they collide hard enough to start breaking bonds (activation energy: beyond the IB syllabus).'],
-    [78.6, 85.1, 'Bookkeeping: breaking two H–H bonds and one O=O bond takes 2 × 4.5 + 5.2 = 14.2 eV.'],
-    [85.3, 90.3, 'Forming four O–H bonds releases 4 × 4.8 = 19.2 eV.'],
-    [90.5, 98.0, 'So 19.2 − 14.2 = 5.0 eV is released for every two water molecules made: the products sit lower, in deeper wells.'],
-    [98.2, 105.9, '(Really, bonds break and form at the same time, so colliding molecules only need to get over a small hump, not 14.2 eV.)'],
-    [106.3, 112.8, 'The overall reaction (really several steps): two H₂ and one O₂ rearrange into two water molecules, H₂O.'],
-    [113.0, 119.5, 'The 5.0 eV of potential energy released becomes kinetic energy: the new molecules fly apart fast.'],
-    [119.7, 127.8, 'Faster molecules mean a higher temperature: internal energy has changed from potential to kinetic. This is an exothermic reaction.'],
-    [127.9, 135.9, 'In an endothermic reaction (not shown) it’s the other way round: the products have more potential energy, so it cools.'],
-    [136.1, 148.7, 'Predict: does the water made have less mass than the hydrogen and oxygen it came from?'],
-    [148.9, 155.9, 'Yes, but only just. Energy has mass (E = mc²), and 1.34 × 10⁷ J leaves for every kilogram of the gas mixture burned.'],
-    [156.1, 163.6, 'Δm = E ÷ c² = 1.34 × 10⁷ ÷ (3.0 × 10⁸)² = 1.5 × 10⁻¹⁰ kg for each kilogram: too little to detect by weighing.'],
-    [163.8, 172.5, 'In fission, about 10⁻³ of the mass is released: nuclear binding energies (MeV) are millions of times bigger than bond energies (eV).'],
+    [69.1, 77.0, 'A spark gives nearby molecules much more energy (activation energy, beyond the IB syllabus), so they collide hard enough to react.'],
+    [77.2, 84.0, 'Each reaction releases energy that speeds up its neighbours, so the reaction spreads out from the spark: a flame.'],
+    [84.2, 90.7, 'Bookkeeping: breaking two H–H bonds and one O=O bond takes 2 × 4.5 + 5.2 = 14.2 eV.'],
+    [90.9, 95.9, 'Forming four O–H bonds releases 4 × 4.8 = 19.2 eV.'],
+    [96.1, 103.6, 'So 19.2 − 14.2 = 5.0 eV is released for every two water molecules made: the products sit lower, in deeper wells.'],
+    [103.8, 111.5, '(Really, bonds break and form at the same time, so colliding molecules only need to get over a small hump, not 14.2 eV.)'],
+    [111.9, 118.4, 'The overall reaction (really several steps): two H₂ and one O₂ rearrange into two water molecules, H₂O.'],
+    [118.6, 125.1, 'The 5.0 eV of potential energy released becomes kinetic energy: the new molecules fly apart fast.'],
+    [125.3, 133.4, 'Faster molecules mean a higher temperature: internal energy has changed from potential to kinetic. This is an exothermic reaction.'],
+    [133.5, 141.5, 'In an endothermic reaction (not shown) it’s the other way round: the products have more potential energy, so it cools.'],
+    [141.7, 154.3, 'Predict: does the water made have less mass than the hydrogen and oxygen it came from?'],
+    [154.5, 161.5, 'Yes, but only just. Energy has mass (E = mc²), and 1.34 × 10⁷ J leaves for every kilogram of the gas mixture burned.'],
+    [161.7, 169.2, 'Δm = E ÷ c² = 1.34 × 10⁷ ÷ (3.0 × 10⁸)² = 1.5 × 10⁻¹⁰ kg for each kilogram: too little to detect by weighing.'],
+    [169.4, 178.1, 'In fission, about 10⁻³ of the mass is released: nuclear binding energies (MeV) are millions of times bigger than bond energies (eV).'],
   ];
 
   // ---------- physics ----------
@@ -61,12 +62,65 @@
   const rnd = () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let x = Math.imul(seed ^ (seed >>> 15), 1 | seed);
     x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
   const GAS = [];
-  for (let i = 0; i < 14; i++) {
-    // same temperature, same average kinetic energy: H₂ (2 u) moves √(32 ÷ 2) = 4 times as fast as O₂ (32 u) on average
-    const a = rnd() * Math.PI * 2, sp = (0.05 + 0.04 * rnd()) * (i < 9 ? 2.0 : 0.5);
-    GAS.push({ type: i < 9 ? 'H2' : 'O2', x0: rnd() * 2, y0: rnd() * 2, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, th0: rnd() * 6.28, om: (rnd() - 0.5) * 1.6 });
+  for (let i = 0; i < 15; i++) {
+    // 10 H₂ and 5 O₂: exactly enough for 10 H₂O. Same temperature, same average kinetic energy: H₂ (2 u) moves
+    // √(32 ÷ 2) = 4 times as fast as O₂ (32 u) on average
+    const a = rnd() * Math.PI * 2, sp = (0.05 + 0.04 * rnd()) * (i < 10 ? 2.0 : 0.5);
+    GAS.push({ type: i < 10 ? 'H2' : 'O2', x0: rnd() * 2, y0: rnd() * 2, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, th0: rnd() * 6.28, om: (rnd() - 0.5) * 1.6 });
   }
   const tri = (p) => { const m = ((p % 2) + 2) % 2; return m < 1 ? m : 2 - m; };   // bounces between 0 and 1
+
+  // ---------- the flame (part 3): the reaction spreads out from the spark ----------
+  // Each O₂ reacts with the two nearest free H₂ (2H₂ + O₂ → 2H₂O), in order of distance from the spark, one group every
+  // 2.2 s from T_IGN. Before reacting, the molecules near the flame speed up sharply (up to 4 times: energy from the
+  // reactions nearby), then the three meet, flash, and two fast water molecules fly outwards, bouncing off the walls.
+  const T_IGN = 70.0, MEET = 1.0, RAMP = 1.4, BOOST = 3, V_PROD = 0.3;
+  let SPARK = [0.5, 1.0];                                            // set below: where the first group meets
+  const basePos = (m, tau) => [tri(m.x0 + m.vx * tau), tri(m.y0 + m.vy * tau)];
+  const dist = (p, q) => Math.hypot(p[0] - q[0], p[1] - q[1]);
+  // extra "time" a molecule gains from speeding up in the RAMP + MEET seconds before it reacts
+  const extra = (m, t) => {
+    if (!(m.tr < Infinity)) return 0;
+    const a = m.tr - MEET - RAMP, x = (Math.min(t, m.tr) - a) / RAMP;
+    if (x <= 0) return 0;
+    return BOOST * (x <= 1 ? RAMP * (x * x * x - x * x * x * x / 2) : RAMP * 0.5 + (Math.min(t, m.tr) - a - RAMP));
+  };
+  const accPos = (m, t) => basePos(m, t + extra(m, t));
+  const GROUPS = (() => {
+    // the spark goes off right beside the O₂ nearest the bottom middle of the box; the others react in order of distance from it
+    const tr0 = T_IGN + 0.4, bottom = [0.5, 1.0];
+    const o2 = GAS.filter((m) => m.type === 'O2').sort((p, q) => dist(basePos(p, tr0 - MEET), bottom) - dist(basePos(q, tr0 - MEET), bottom));
+    SPARK = basePos(o2[0], tr0 - MEET);
+    const rest = o2.slice(1).sort((p, q) => dist(basePos(p, T_IGN), SPARK) - dist(basePos(q, T_IGN), SPARK));
+    o2.splice(1, o2.length - 1, ...rest);
+    const free = GAS.filter((m) => m.type === 'H2'), out = [];
+    o2.forEach((o, k) => {
+      // the meeting point is where this O₂ is when the meeting starts; its partners are the two free H₂ closest to it then
+      const tr = T_IGN + 0.4 + 2.2 * k; o.tr = tr;
+      const M = accPos(o, tr - MEET);
+      const gap = (h) => { h.tr = tr; const d = dist(accPos(h, tr - MEET), M); h.tr = undefined; return d; };
+      free.sort((p, q) => gap(p) - gap(q));
+      const hs = free.splice(0, 2);
+      for (const m of hs) m.tr = tr;
+      // each molecule gets long enough to reach the meeting point at no more than 0.35 box-widths a second (hot, but not a dash)
+      o.meet = MEET;
+      for (const m of hs) m.meet = clamp(dist(accPos(m, tr - MEET), M) / 0.35, MEET, 3.0);
+      const ang = Math.atan2(M[1] - SPARK[1], M[0] - SPARK[0]);
+      out.push({ tr, M, members: [o, ...hs], d: dist(M, SPARK), prod: [ang - 0.55, ang + 0.55].map((f, j) => ({ f, th0: 1.3 * j + k, om: (j ? 1 : -1) * (2.4 + 0.3 * k) })) });
+    });
+    return out;
+  })();
+  // where a gas molecule is at time t (before it reacts): free flight, sped up near the flame, then meeting its partners
+  const gasPos = (m, t) => {
+    const p = accPos(m, t);
+    if (!(m.tr < Infinity) || t < m.tr - m.meet) return p;
+    const g = GROUPS.find((q) => q.members.includes(m)), k = smooth((t - (m.tr - m.meet)) / m.meet);
+    return [lerp(p[0], g.M[0], k), lerp(p[1], g.M[1], k)];
+  };
+  const prodPos = (g, j, t) => {
+    const f = g.prod[j].f, dt = t - g.tr;
+    return [tri(g.M[0] + V_PROD * Math.cos(f) * dt), tri(g.M[1] + V_PROD * Math.sin(f) * dt)];
+  };
 
   // ---------- layout ----------
   let L = null;
@@ -133,15 +187,51 @@
     const { view: v, fs } = L, u = Math.min(v.x1 - v.x0, v.y1 - v.y0) * 0.075;
     D.line(s, v.x0, v.y0, v.x1, v.y0, '150,165,230', 0.45 * a, 1.2); D.line(s, v.x0, v.y1, v.x1, v.y1, '150,165,230', 0.45 * a, 1.2);
     D.line(s, v.x0, v.y0, v.x0, v.y1, '150,165,230', 0.45 * a, 1.2); D.line(s, v.x1, v.y0, v.x1, v.y1, '150,165,230', 0.45 * a, 1.2);
-    const pad = u * 1.1;
+    const pad = u * 1.1, PX = (q) => [lerp(v.x0 + pad, v.x1 - pad, q[0]), lerp(v.y0 + pad, v.y1 - pad, q[1])];
+    const { g } = s;
+    // the flame: a warm haze spreading out from the spark as the groups react
+    const fa = a * fade(t, T_IGN - 0.5, 92, 0.8, 5);
+    if (fa > 0) {
+      let rf = 0; for (const q of GROUPS) rf = Math.max(rf, (q.d + 0.12) * smooth((t - q.tr + 0.9) / 0.9));
+      if (rf > 0.01) {
+        const [sx, sy] = PX(SPARK), R = rf * Math.max(v.x1 - v.x0, v.y1 - v.y0);
+        const hz = g.createRadialGradient(sx, sy, 0, sx, sy, R);
+        hz.addColorStop(0, `rgba(${HEAT},${0.16 * fa})`); hz.addColorStop(0.75, `rgba(${HEAT},${0.08 * fa})`); hz.addColorStop(1, `rgba(${HEAT},0)`);
+        g.save(); g.beginPath(); g.rect(v.x0, v.y0, v.x1 - v.x0, v.y1 - v.y0); g.clip();
+        g.globalCompositeOperation = 'lighter'; g.fillStyle = hz; g.beginPath(); g.arc(sx, sy, R, 0, 7); g.fill(); g.restore();
+        g.globalCompositeOperation = 'source-over';
+      }
+    }
+    const streak = (p0, p1, al) => {                                 // a short trail behind a fast molecule
+      const [x0, y0] = PX(p0), [x1, y1] = PX(p1), d = Math.hypot(x1 - x0, y1 - y0);
+      if (d < 2 || d > u * 6) return;                                 // too slow to show, or a bounce in between
+      D.line(s, x0, y0, x1, y1, HEAT, 0.45 * al, Math.max(1.5, u * 0.18));
+    };
+    // the reactants (until each group reacts)
     for (const m of GAS) {
-      const x = lerp(v.x0 + pad, v.x1 - pad, tri(m.x0 + m.vx * t)), y = lerp(v.y0 + pad, v.y1 - pad, tri(m.y0 + m.vy * t));
-      molecule(s, m.type, x, y, u, m.th0 + m.om * t, a);
+      if (t >= m.tr) continue;
+      const p = gasPos(m, t), [x, y] = PX(p), hot = m.tr < Infinity ? smooth((t - (m.tr - Math.max(m.meet, MEET) - RAMP)) / RAMP) : 0;
+      if (hot > 0.05) streak(gasPos(m, t - 0.18), p, a * hot);
+      molecule(s, m.type, x, y, u, m.th0 + m.om * (t + extra(m, t)), a);
+    }
+    // each reaction: a flash where the three meet, then two fast water molecules
+    for (const q of GROUPS) {
+      const [mx, my] = PX(q.M), fl = t > q.tr - 0.25 ? Math.exp(-Math.max(0, t - q.tr) / 0.35) * smooth((t - q.tr + 0.25) / 0.25) : 0;
+      if (fl > 0.02) D.glowDot(s, mx, my, u * 3.2, HEAT, a * fl);
+      if (t < q.tr) continue;
+      q.prod.forEach((pr, j) => {
+        const p = prodPos(q, j, t), [x, y] = PX(p);
+        streak(prodPos(q, j, Math.max(q.tr, t - 0.18)), p, a);
+        molecule(s, 'H2O', x, y, u, pr.th0 + pr.om * (t - q.tr), a);
+      });
     }
     if (spark > 0) {                                                // a spark at the bottom of the box
-      const sx = (v.x0 + v.x1) / 2, sy = v.y1 - pad * 0.8, flick = 0.6 + 0.4 * Math.sin(s.clock * 37) * Math.sin(s.clock * 23);
+      const [sx, sy0] = PX(SPARK), sy = sy0 + pad * 0.2, flick = 0.6 + 0.4 * Math.sin(s.clock * 37) * Math.sin(s.clock * 23);
       D.glowDot(s, sx, sy, u * 2.4 * flick, HEAT, spark);
       D.text(s, 'spark', sx, sy - u * 1.8, fs, 0.9 * spark, D.sans(fs, 600), HEAT);
+    }
+    if (t > T_IGN + 6 && t < T4) {                                 // after the flame has passed: label the products
+      D.text(s, 'water molecules, moving fast (hot)', (v.x0 + v.x1) / 2, v.y0 + fs * 0.9, fs, a * fade(t, T_IGN + 10.5, T4, 1, 1), D.sans(fs, 600), HEAT);
     }
   }
 
@@ -240,11 +330,11 @@
       const pts = []; for (let k = 0; k <= 40; k++) { const q = k / 40, e = lerp(0, -RELEASE, smooth(q)) + 2.2 * Math.sin(Math.PI * q); pts.push([lerp(lx1, rx0, q), Y(e)]); }
       D.glowLine(s, pts, HEAT, 0.8 * ha, 1.6);
       // its label only until the bookkeeping arrows arrive (they need the space)
-      D.text(s, 'activation energy', mx, Y(2.4) - fs * 0.8, fs - 1, 0.9 * ha * (1 - smooth((t - 78.2) / 0.6)), D.sans(fs - 1), HEAT);
+      D.text(s, 'activation energy', mx, Y(2.4) - fs * 0.8, fs - 1, 0.9 * ha * (1 - smooth((t - 83.8) / 0.6)), D.sans(fs - 1), HEAT);
       D.text(s, '(schematic)', mx, Y(2.4) + fs * 0.4, fs - 2, 0.7 * ha, D.sans(fs - 2), C.muted);   // stays while the hump does
     }
     // bookkeeping: all bonds broken, then made
-    const ba = a * smooth((t - 78.8) / 1), ma = a * smooth((t - 85.5) / 1), ra = a * smooth((t - 90.7) / 1);
+    const ba = a * smooth((t - 84.4) / 1), ma = a * smooth((t - 91.1) / 1), ra = a * smooth((t - 96.3) / 1);
     lvl(mx - (rx0 - lx1) * 0.3, mx + (rx0 - lx1) * 0.3, BREAK, C.muted, phone ? 'separate atoms' : 'separate atoms: 4H + 2O', ba);
     if (ba > 0) {
       D.arrow(s, lx1 - fs * 1.2, Y(0) - 2, lx1 - fs * 1.2, Y(BREAK) + 2, C.force, ba, '', { head: 8, width: 2 });
@@ -403,11 +493,11 @@
 
   Anim.register('reaction', {
     duration: DURATION,
-    poster: 94,
+    poster: 99.6,
     // score: curious chemistry (G major, a soft sine pad, a low drone, a soft shimmer, a slow swell)
     music: { chords: [[55, 59, 62, 67], [52, 55, 59, 64], [48, 55, 60, 64], [50, 57, 62, 66]], bar: 9, pad: 'sine', cutoff: 800, drone: 0.09, shimmer: 0.2, tremolo: 0.25, volume: 0.35 },
     resize: layout,
-    info: { morse, BREAK, MAKE, RELEASE, KT, PER_KG, DMFRAC, FISSION, CAPS,
+    info: { morse, BREAK, MAKE, RELEASE, KT, PER_KG, DMFRAC, FISSION, CAPS, GROUPS, GAS, gasPos,
       check() {
         const eV = (kj) => kj * 1e3 / 6.02e23 / 1.60e-19;
         return { HH: eV(436), OO: eV(498), OH: eV(463), J_HH: 436e3 / 6.02e23, BREAK, MAKE, RELEASE, KT, PER_KG, DMFRAC, FISSION,
@@ -418,7 +508,7 @@
       D.background(s, 0.22);
       const p1 = fade(t, T1, T2 + 0.6, 0.8, 0.9), p2 = fade(t, T2 + 0.4, T3 + 0.2, 1.0, 0.8);
       const p3 = fade(t, T3, T4 + 0.2, 0.8, 0.8), p4 = fade(t, T4, T5 + 0.2, 0.8, 0.8), p5 = fade(t, T5, TEND + 0.4, 0.8, 0.8);
-      drawGas(s, t, Math.max(p1, p3), p3 * fade(t, 69, 106, 0.6, 0.8));
+      drawGas(s, t, Math.max(p1, p3), p3 * fade(t, 69, 73.5, 0.6, 1.2));
       if (p1 > 0) {                                                  // a key in the panel
         const { panel: p, fs } = L; panelBox(s, p, p1 * 0.8);
         head(s, 'key', p.x0, p.y0 + fs * 0.4, p1);
