@@ -44,6 +44,14 @@ lines, smooth camera moves and one caption at a time. Each one loops.
   on that device); the music fades out on Pause, when the animation scrolls out of view or the tab is hidden.
   Each score's `volume` is set so that all scores have about the same loudness (RMS about 0.055 in `AnimMusic.test`).
 - **Click or tap the picture to pause or play** (teacher, 16 November 2026).
+- **Speed and seeking** (teacher, 16 November 2026; built the same day in the shared player, so every animation has them):
+  a speed button (1× → 1.5× → 2×, not remembered between visits) where the `pauses` holds speed up with everything
+  else and the music is unchanged (it runs on its own clock); the progress bar is a draggable scrubber (an
+  `input.anim-scrub` over it; dragging pauses, letting go carries on if it was playing); ← / → anywhere on the page
+  step 5 s back or forward while the animation is on screen (not while typing in a box). No chapter markers and no
+  previous/next-caption buttons (teacher's decision). This works because every scene draws each frame from the
+  scene time alone. On phones (under 600 px) the buttons sit in a row **below** the picture, so `s.top` is now 0
+  everywhere (scenes no longer need to leave room for the buttons at the top).
   `AnimMusic.test(opts, seconds)` renders a piece offline and reports its peak and RMS level (checked: no clipping).
 - The stage is 16:9, and 4:5 on phones (under 600 px), so scenes lay themselves out for both.
 - File names in `animations/` are permanent once published (they may be linked from slides).
@@ -56,6 +64,7 @@ Theme A (batch 1)
 - [x] A.2 What exactly is friction? `friction.html` (teacher's request, 16 November 2026)
 - [x] A.2 Collisions, explosions and rockets: `momentum.html` (the rocket equation shown as "beyond the IB syllabus")
 - [x] A.3 A bungee jump (conservation of energy): `energy.html`
+- [x] A.4 Why the sin θ in torque? (HL): `torque.html` (teacher's request, 16 November 2026, after students found the N × b step of the ladder problem confusing): a spanner seen two ways (perpendicular component; perpendicular distance to the line of action, with the force sliding along that line), then the ladder against a frictionless wall (5.0 m, 350 N, 60°), ending at μ = 0.29.
 - [x] A.4 The rolling race (HL): `rolling-race.html`. Another A.4 idea for later: a diver or skater changing their moment of inertia.
 
 Theme B (agreed 16 November 2026)

@@ -56,7 +56,7 @@
     if (black > 0) { g.fillStyle = `rgba(4,6,13,${black})`; g.fillRect(0, 0, W, H); }
   };
   D.glowDot = (s, x, y, R, rgb, a) => {
-    const { g } = s; if (a <= 0) return;
+    const { g } = s; if (a <= 0 || !(R > 0)) return;          // nothing to draw (e.g. while the page is still laying out)
     g.globalCompositeOperation = 'lighter';
     const rg = g.createRadialGradient(x, y, 0, x, y, R);
     rg.addColorStop(0, `rgba(255,255,255,${0.9 * a})`);
@@ -238,22 +238,38 @@
     if (!scene || !cv) return;
     const tm = timing(scene);
     const s = { g: cv.getContext('2d'), W: 0, H: 0, fig, clock: 0 };
+    // the picture (canvas, progress bar, scrubber, music hint) sits in .anim-view; the buttons follow it
+    // (over the picture on wide screens, in a row below it on phones: css/animations.css)
+    const view = document.createElement('div'); view.className = 'anim-view';
+    cv.before(view); view.append(cv);
     const bar = document.createElement('div'); bar.className = 'anim-progress'; bar.setAttribute('aria-hidden', 'true');
+    const scrub = document.createElement('input');
+    Object.assign(scrub, { type: 'range', min: 0, max: 1000, step: 'any', value: 0, className: 'anim-scrub' });
+    scrub.setAttribute('aria-label', 'Position in the animation (← and → step back and forward)');
     const ctrl = document.createElement('div'); ctrl.className = 'anim-ctrl';
     ctrl.innerHTML = '<button type="button" data-a="play">Pause</button><button type="button" data-a="replay">Replay</button>'
+      + '<button type="button" data-a="speed" title="Playback speed" aria-label="Playback speed: normal">1×</button>'
       + '<button type="button" data-a="music" aria-pressed="false" title="Background music, made by the browser">♪ Music</button>'
       + '<button type="button" data-a="full">Full screen</button>';
     const hint = document.createElement('div'); hint.className = 'anim-hint'; hint.hidden = true;
     hint.textContent = '♪ Tap the animation to hear the music';
-    fig.append(bar, ctrl, hint);
-    const [bPlay, bReplay, bMusic, bFull] = ctrl.querySelectorAll('button');
+    view.append(bar, scrub, hint);
+    fig.append(ctrl);
+    const [bPlay, bReplay, bSpeed, bMusic, bFull] = ctrl.querySelectorAll('button');
     if (!fig.requestFullscreen) bFull.hidden = true;
     const canSound = !!(window.AudioContext || window.webkitAudioContext);
     if (!canSound) bMusic.hidden = true;
 
     let paused = hold !== null || reduce, tHold = hold !== null ? tm.toReal(hold) : tm.toReal(scene.poster ?? 0), t0 = performance.now();
     let visible = false, raf = 0;
-    const T = () => (paused ? tHold : ((performance.now() - t0) / 1000) % tm.total);
+    // rate = playback speed. Everything speeds up together (the holds too); the music keeps its own tempo.
+    let rate = 1;
+    const T = () => (paused ? tHold : ((performance.now() - t0) / 1000 * rate) % tm.total);
+    // jump to real time x (seconds along the whole timeline, holds included)
+    const seek = (x) => {
+      x = clamp(x, 0, tm.total - 0.001);
+      if (paused) tHold = x; else t0 = performance.now() - x * 1000 / rate;
+    };
     const label = () => { bPlay.textContent = paused ? 'Play' : 'Pause'; };
     label();
 
@@ -276,26 +292,67 @@
       const dpr = Math.min(2, window.devicePixelRatio || 1);
       const r = cv.getBoundingClientRect();
       s.W = Math.max(1, r.width); s.H = Math.max(1, r.height);
-      s.top = s.W < 600 ? 44 : 0;      // on phones, overlays start below the buttons
+      // space the scene leaves free at the top: the buttons are over the picture only on wide screens (never at the top on phones)
+      s.top = 0;
       cv.width = Math.round(s.W * dpr); cv.height = Math.round(s.H * dpr);
       s.g.setTransform(dpr, 0, 0, dpr, 0, 0);
-      if (scene.resize) scene.resize(s);
+      if (scene.resize && !tiny()) scene.resize(s);
     }
+    // too small to draw (the page is still laying out): wait for the next resize
+    const tiny = () => s.W < 40 || s.H < 40;
     function draw() {
       const real = T();
       s.clock = performance.now() / 1000;    // keeps gentle background motion going during a pause
-      scene.frame(s, tm.toScene(real));
+      if (!tiny()) scene.frame(s, tm.toScene(real));
       bar.style.transform = `scaleX(${real / tm.total})`;
+      if (!dragging) scrub.value = real / tm.total * 1000;
+      const sec = Math.floor(real), all = Math.floor(tm.total);
+      if (sec !== shownSec) { shownSec = sec; scrub.setAttribute('aria-valuetext', `${mmss(sec)} of ${mmss(all)}`); }
     }
+    let shownSec = -1;
+    const mmss = (x) => `${Math.floor(x / 60)}:${String(x % 60).padStart(2, '0')}`;
     function loop() { draw(); raf = visible ? requestAnimationFrame(loop) : 0; }
     function start() { if (!raf && visible) raf = requestAnimationFrame(loop); }
 
     function togglePlay() {
-      if (paused) { t0 = performance.now() - tHold * 1000; paused = false; }
+      if (paused) { t0 = performance.now() - tHold * 1000 / rate; paused = false; }
       else { tHold = T(); paused = true; }
       label(); start(); syncMusic(); showHint();
     }
     bPlay.addEventListener('click', togglePlay);
+
+    // speed: 1× → 1.5× → 2× → 1×, keeping the current moment
+    const SPEEDS = [1, 1.5, 2];
+    bSpeed.addEventListener('click', () => {
+      const now = T();
+      rate = SPEEDS[(SPEEDS.indexOf(rate) + 1) % SPEEDS.length];
+      seek(now);
+      bSpeed.textContent = `${rate}×`;
+      bSpeed.setAttribute('aria-label', `Playback speed: ${rate === 1 ? 'normal' : `${rate} times`}`);
+    });
+
+    // the scrubber: dragging (or its own arrow keys) pauses; letting go carries on if it was playing
+    let dragging = false, wasPlaying = false;
+    scrub.addEventListener('input', () => {
+      if (!dragging) { dragging = true; wasPlaying = !paused; if (!paused) { tHold = T(); paused = true; label(); syncMusic(); } }
+      seek(scrub.value / 1000 * tm.total); start();
+    });
+    scrub.addEventListener('change', () => {
+      dragging = false;
+      if (wasPlaying) { wasPlaying = false; togglePlay(); }
+    });
+
+    // ← and → anywhere on the page step back and forward (when this animation is on screen)
+    const STEP = 5;
+    document.addEventListener('keydown', (e) => {
+      if ((e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      const el = e.target;
+      if (el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))) return;
+      if (!visible) return;
+      e.preventDefault();
+      seek(T() + (e.key === 'ArrowRight' ? STEP : -STEP));
+      start();
+    });
     // click or tap anywhere on the picture to pause or play (the first tap only starts the music, if it is waiting)
     cv.addEventListener('click', () => {
       if (musicOn && !musicStarted && !paused) { gestured = true; syncMusic(); return; }
@@ -304,7 +361,7 @@
     bReplay.addEventListener('click', () => { t0 = performance.now(); paused = false; label(); start(); syncMusic(); });
     bMusic.addEventListener('click', () => {
       musicOn = !musicOn; pref.set(musicOn); musicLabel();
-      if (musicOn && paused && hold === null && !reduce) { t0 = performance.now() - tHold * 1000; paused = false; label(); start(); }
+      if (musicOn && paused && hold === null && !reduce) { t0 = performance.now() - tHold * 1000 / rate; paused = false; label(); start(); }
       gestured = true; syncMusic();
     });
     bFull.addEventListener('click', () => {
@@ -333,8 +390,8 @@
   };
   // Draw one frame of a scene into a canvas at scene time t (for tools/anim-sheet.html, the contact sheet used to check frames).
   const still = (name, cv, t) => {
-    const scene = scenes[name]; if (!scene) return false;
-    const s = { g: cv.getContext('2d'), W: cv.width, H: cv.height, top: cv.width < 600 ? 44 : 0, clock: t };
+    const scene = scenes[name]; if (!scene || cv.width < 40 || cv.height < 40) return false;
+    const s = { g: cv.getContext('2d'), W: cv.width, H: cv.height, top: 0, clock: t };
     if (scene.resize) scene.resize(s);
     scene.frame(s, t); return true;
   };
