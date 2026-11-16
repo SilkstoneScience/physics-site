@@ -97,8 +97,8 @@
     poster: 40,
     // hold the picture still near the end of each step so the caption can be read (teacher's request)
     pauses: [[8.1, 2.5], [12.7, 2.5], [18.1, 3], [23.9, 3], [27.9, 2.5], [32.5, 3], [37.1, 3], [41.9, 3], [46.4, 3]],
-    // score: calm and precise (pure tones, a soft clock ticking once a second)
-    music: { chords: [[53, 57, 60, 64, 67], [50, 57, 60, 64, 65], [46, 53, 57, 62, 64], [48, 55, 57, 62, 64]], bar: 8, pad: 'sine', cutoff: 1400, drone: 0.07, bells: 0.15, bellOct: 2, tick: 1, echo: 0.5, volume: 0.33 },
+    // score: calm and precise (pure tones, a low drone, a soft shimmer)
+    music: { chords: [[53, 57, 60, 64, 67], [50, 57, 60, 64, 65], [46, 53, 57, 62, 64], [48, 55, 57, 62, 64]], bar: 8, pad: 'sine', cutoff: 900, drone: 0.09, shimmer: 0.3, volume: 0.31 },
     resize,
     frame(s, t) {
       D.background(s, 0.28);

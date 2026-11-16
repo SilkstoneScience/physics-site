@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: charges in electric and crossed fields · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics D.3: an electron bent into a parabola between charged plates, a velocity selector with crossed electric and magnetic fields, and neon ions sorted by charge-to-mass ratio.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/crossed-fields.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: charges in electric and crossed fields · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics D.3: an electron bent into a parabola between charged plates, a velocity selector with crossed electric and magnetic fields, and neon ions sorted by charge-to-mass ratio.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/crossed-fields.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/selector.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Charges in electric and crossed fields</p>
+    <h1>Charges in electric and crossed fields</h1>
+    <p class="lead">An electron is bent into a parabola by the uniform field between two charged plates. Then crossed electric and magnetic fields let through only ions of one speed, and a magnetic field on its own sorts those ions by their charge-to-mass ratio. <a class="tag" href="../themes/d3.html#crossed">D.3 Motion in electromagnetic fields</a></p>
+
+    <figure class="anim-stage" data-anim="selector">
+      <canvas role="img" aria-label="Animation in three parts: an electron curving towards the positive plate between two parallel plates; positive neon ions in a velocity selector with crossed electric and magnetic fields, where only ions of one speed go straight through; and those ions travelling round semicircles in a magnetic field, landing on a detector at distances that depend on their mass. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>Everything happens in a vacuum, the fields are uniform with no edge effects, and the particles' weight is negligible (for the electron, its weight is less than $10^{-14}$ times the electric force). Every path is worked out exactly from the forces $F = qE$ and $F = qvB$. The motion is slowed down hugely: $10^9$ times for the electron, and $4.0 \times 10^6$ times for the ions. Constants from the data booklet: $e = 1.60 \times 10^{-19}$ C, $m_e = 9.110 \times 10^{-31}$ kg and $1\ \text{u} = 1.661 \times 10^{-27}$ kg.</p>
+      <ol>
+        <li><strong>An electron between parallel plates.</strong> The plates are 2.5 cm apart with 300 V between them, so the field between them is uniform: $E = \dfrac{V}{d} = \dfrac{300}{0.025} = 1.2 \times 10^4$ $\text{V m}^{-1}$, pointing from the positive plate to the negative one.</li>
+        <li>An electron enters at right angles to the field at $2.0 \times 10^7$ $\text{m s}^{-1}$. The force on it, $F = eE$, is constant and points towards the positive plate: opposite to the field, because the electron is negative.</li>
+        <li>Along the plates there is no force, so that part of the velocity stays the same. The dots, one every 0.5 ns, are evenly spaced along the plates. Across the plates the acceleration is constant, so the path is a parabola, just like a ball thrown horizontally in a gravitational field (A.1).</li>
+        <li>The numbers: $a = \dfrac{eE}{m} = \dfrac{1.60 \times 10^{-19} \times 1.2 \times 10^4}{9.11 \times 10^{-31}} = 2.1 \times 10^{15}$ $\text{m s}^{-2}$. The plates are 6.0 cm long, so the time between them is $t = \dfrac{0.060}{2.0 \times 10^7} = 3.0 \times 10^{-9}$ s, and the deflection is $y = \tfrac{1}{2}at^2 = 0.5 \times 2.1 \times 10^{15} \times (3.0 \times 10^{-9})^2 = 9.5$ mm.</li>
+        <li>Beyond the plates there is no force, so the electron carries on in a straight line to the screen.</li>
+        <li><strong>Predict:</strong> a second electron enters twice as fast, at $4.0 \times 10^7$ $\text{m s}^{-1}$. It spends half as long between the plates, and the deflection depends on $t^2$, so it is deflected a quarter as much: 2.4 mm.</li>
+        <li><strong>A velocity selector.</strong> New plates, 2.0 cm apart and 12 cm long, with 800 V between them: $E = \dfrac{800}{0.020} = 4.0 \times 10^4$ $\text{V m}^{-1}$, pointing down. A magnetic field $B = 0.25$ T points into the page (the crosses). The fields are crossed: $E$, $B$ and the ions' velocity are all at right angles to each other.</li>
+        <li>On a positive neon ion, the electric force $qE$ points down, and the magnetic force $qvB$ points up (Fleming's left-hand rule). At one particular speed the two forces are equal: $qE = qvB$, so $v = \dfrac{E}{B} = \dfrac{4.0 \times 10^4}{0.25} = 1.6 \times 10^5$ $\text{m s}^{-1}$. An ion at this speed goes straight through and out of the slit.</li>
+        <li><strong>Predict:</strong> what happens to faster and slower ions? A faster ion (1.5 times this speed) feels a bigger magnetic force than electric force, so it bends up, towards the magnetic force, and hits the top plate. A slower ion (half this speed) feels a smaller magnetic force, so the electric force wins: it bends down and hits the bottom plate. As an ion bends, its velocity changes direction, and the magnetic force (always at right angles to the velocity) turns with it.</li>
+        <li>A heavier ion, neon-22, at $1.6 \times 10^5$ $\text{m s}^{-1}$ also goes straight through: the charge cancels in $qE = qvB$, and the mass doesn't appear at all, so the selected speed $v = E/B$ is the same for every particle. With these plates and a 2 mm slit, only ions within about 2% of this speed get out.</li>
+        <li><strong>Sorting by charge-to-mass ratio.</strong> Beyond the slit there is only a magnetic field, $B = 0.50$ T into the page, and no electric field. The magnetic force is always at right angles to the velocity, so it does no work: each ion moves at a steady speed round a semicircle and lands on a detector.</li>
+        <li>Neon-20 (mass 20 u $= 3.32 \times 10^{-26}$ kg, charge $+e$): $r = \dfrac{mv}{qB} = \dfrac{3.32 \times 10^{-26} \times 1.6 \times 10^5}{1.60 \times 10^{-19} \times 0.50} = 0.0664$ m (6.64 cm), so it lands $2r = 13.3$ cm from the slit. Neon-22 is 10% heavier, so its radius is 10% bigger: $r = 0.0731$ m (7.31 cm), landing $2r = 14.6$ cm from the slit.</li>
+        <li>All these ions have the same speed and the same charge, so $r$ is proportional to $m$: the field sorts them by charge-to-mass ratio, $\dfrac{q}{m} = \dfrac{v}{Br}$. Ions with other speeds are stopped by the selector, so only ions very close to one speed (within about 2%) reach the magnetic field.</li>
+        <li>This is the idea of a mass spectrometer. The neon-20 spot on the detector is brighter because about 9 in 10 neon atoms are neon-20 (natural neon is about 90.5% neon-20, 9.3% neon-22 and 0.3% neon-21, which is too rare to show here).</li>
+      </ol>
+      <p>For how a charge goes round in a circle in a magnetic field, why opposite charges curve opposite ways and when the path becomes a helix, see the animation <a href="charge-in-b-field.html">A charge in a magnetic field</a>.</p>
+      <p>Read more in <a href="../themes/d3.html#efield">D.3 section 1: charged particles in a uniform electric field</a>, <a href="../themes/d3.html#force">section 2: the magnetic force on a moving charge</a>, <a href="../themes/d3.html#circle">section 3: circular motion in a magnetic field</a>, <a href="../themes/d3.html#qm">section 4: measuring the charge-to-mass ratio</a> and <a href="../themes/d3.html#crossed">section 5: crossed electric and magnetic fields</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

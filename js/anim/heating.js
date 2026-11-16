@@ -420,8 +420,8 @@
   Anim.register('heating', {
     duration: DURATION,
     poster: 66,
-    // score: warm and rising (F major, triangle pad, soft shimmer and bells)
-    music: { chords: [[53, 57, 60, 64], [50, 57, 62, 65], [46, 53, 58, 62], [48, 55, 60, 64]], bar: 8, pad: 'triangle', cutoff: 1100, drone: 0.08, bells: 0.3, shimmer: 0.4, volume: 0.42 },
+    // score: warm and rising (F major, a triangle pad, a soft shimmer)
+    music: { chords: [[53, 57, 60, 64], [50, 57, 62, 65], [46, 53, 58, 62], [48, 55, 60, 64]], bar: 8, pad: 'triangle', cutoff: 900, drone: 0.09, shimmer: 0.3, volume: 0.41 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { Q1, Q2, Q3, Q4, Q5, B5, theta, kinetic, potential, Qat, SIM, CAPS, LIDMAX, WB, LID0, kT, pos, at, stateOf },

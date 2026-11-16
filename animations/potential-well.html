@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: the gravitational potential well (HL) · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics D.1 (HL): the graph of gravitational potential around the Earth spun into a surface, a satellite moved to a higher orbit, and the energy it needs to escape.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/potential-well.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: the gravitational potential well (HL) · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics D.1 (HL): the graph of gravitational potential around the Earth spun into a surface, a satellite moved to a higher orbit, and the energy it needs to escape.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/potential-well.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/well.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › The gravitational potential well</p>
+    <h1>The gravitational potential well <span class="tag hl">HL</span></h1>
+    <p class="lead">The graph of gravitational potential around the Earth is spun round into a surface: a "potential well". A satellite circles in it, is raised to a higher orbit, and finally escapes, while bars show its kinetic, potential and total energy. <a class="tag" href="../themes/d1.html#potential">D.1 Gravitational potential</a></p>
+
+    <figure class="anim-stage" data-anim="well">
+      <canvas role="img" aria-label="Animation of a graph of gravitational potential against distance from the Earth, spun round into a funnel-shaped surface with the Earth at the bottom. A satellite is drawn on the surface at the depth of its potential: it circles at two radii and then escapes, beside bars showing its kinetic, potential and total energy. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The values used: $G = 6.67 \times 10^{-11}$ $\text{N m}^2\,\text{kg}^{-2}$, the Earth's mass $M = 5.97 \times 10^{24}$ kg (so $GM = 3.98 \times 10^{14}$ $\text{N m}^2\,\text{kg}^{-1}$) and radius $R = 6.37 \times 10^6$ m, and a satellite of mass $m = 500$ kg. The Earth is treated as a uniform sphere, it isn't rotating, there is no air resistance, only the Earth's gravity acts on the satellite, and the satellite's mass stays at 500 kg (the mass of the fuel it burns is ignored). The captions write $V$ for the gravitational potential $V_g$. The violet surface is a graph of $V_g$: its depth below the dashed ring (where $V_g = 0$) is drawn to scale. The drawing stops at $8R$ (its edge is one of the equal-step rings) and is extended to $16R$ while the satellite escapes. The satellite is drawn on the surface at the depth of its potential; its path is calculated from Newton's law of gravitation. The bars show its kinetic energy (orange), gravitational potential energy (blue) and total energy (white) in units of $10^9$ J.</p>
+      <ol>
+        <li>The graph of $V_g = -\dfrac{GM}{r}$ draws itself from the Earth's surface outwards. The potential is zero far away (at infinity) and negative everywhere else.</li>
+        <li>At the surface, $V_g = -\dfrac{GM}{R} = -\dfrac{3.98 \times 10^{14}}{6.37 \times 10^6} = -6.25 \times 10^7$ $\text{J kg}^{-1}$.</li>
+        <li>The field strength is minus the gradient of the graph: $g = -\dfrac{\Delta V_g}{\Delta r}$. Its size is large close to the Earth, where the graph is steep. At the surface, $g = \dfrac{GM}{R^2} = 9.81$ $\text{N kg}^{-1}$; at $2R$ the graph is a quarter as steep, so $g = 9.81 \div 4 = 2.45$ $\text{N kg}^{-1}$.</li>
+        <li>The graph is spun round the Earth's centre, sweeping out a surface: the potential well. Its depth at each point shows the potential there. Each level ring joins points at the same potential, so it is an equipotential, and moving along it needs no work. The rings are drawn at equal steps of potential, so they spread out where the field is weaker.</li>
+        <li>A 500 kg satellite moves in a circular orbit at $r = 2R = 1.274 \times 10^7$ m. It stays at the same depth, $V_g = -3.13 \times 10^7$ $\text{J kg}^{-1}$, all the way round. Its speed is $v = \sqrt{\dfrac{GM}{r}} = \sqrt{\dfrac{3.98 \times 10^{14}}{1.274 \times 10^7}} = 5.59$ $\text{km s}^{-1}$, and one orbit takes $\dfrac{2\pi r}{v} = 14\,300$ s, about 4.0 hours (sped up about 1800 times in the animation).</li>
+        <li>Its energies: $E_k = \dfrac{GMm}{2r} = 7.8 \times 10^9$ J, $E_p = -\dfrac{GMm}{r} = -1.56 \times 10^{10}$ J, and the total $E = -\dfrac{GMm}{2r} = -7.8 \times 10^9$ J. The total is negative: the satellite is bound to the Earth.</li>
+        <li>To move it up to $r = 4R$, a short rocket burst speeds it up (to 6.46 $\text{km s}^{-1}$) and it coasts out along half an ellipse. While it coasts outwards, the gravitational force slows it down: kinetic energy becomes potential energy, and the total stays at $-5.2 \times 10^9$ J. (Calculations in the course use circular orbits only; the coasting path is shown for completeness.)</li>
+        <li>A second burst at $4R$ puts it in the higher circular orbit, where it moves more slowly: $v = \sqrt{\dfrac{GM}{4R}} = 3.95$ $\text{km s}^{-1}$. Yet its total energy is higher (less negative), $E = -3.9 \times 10^9$ J. The two bursts did $\Delta E = \dfrac{GMm}{2}\left(\dfrac{1}{r_1} - \dfrac{1}{r_2}\right) = 3.9 \times 10^9$ J of work on the satellite (ignoring the fuel's mass).</li>
+        <li><strong>Predict:</strong> what total energy does the satellite need to escape from the Earth completely?</li>
+        <li>At least zero. At infinity $E_p = 0$, and $E_k$ can't be negative, so it needs $E = E_k + E_p \ge 0$ (exactly zero if it only just gets there). One more burst adds $3.9 \times 10^9$ J, so $E = 0$: its speed rises by a factor of $\sqrt{2}$, from 3.95 to 5.59 $\text{km s}^{-1}$ ($= \sqrt{\dfrac{2GM}{4R}}$), and it escapes. As it moves away, the gravitational force slows it down: $E_k$ falls towards zero while $E_p$ rises towards zero, and (with only the Earth's gravity acting) it never comes back. The camera pulls back and the drawing is extended so that you can follow it.</li>
+        <li>From the Earth's surface, the escape speed is $v_{\text{esc}} = \sqrt{\dfrac{2GM}{R}} = \sqrt{\dfrac{2 \times 3.98 \times 10^{14}}{6.37 \times 10^6}} = 1.12 \times 10^4$ $\text{m s}^{-1}$, or 11.2 $\text{km s}^{-1}$ (ignoring air resistance). It doesn't depend on the mass of the object.</li>
+        <li>Summary: $V_g = -\dfrac{GM}{r}$; $g = -\dfrac{\Delta V_g}{\Delta r}$; $E_p = -\dfrac{GMm}{r}$; in a circular orbit $E = -\dfrac{GMm}{2r}$; escape needs $E \ge 0$, so $v_{\text{esc}} = \sqrt{\dfrac{2GM}{r}}$.</li>
+      </ol>
+      <h3>A model, not a picture of space</h3>
+      <p>The well is a <strong>graph</strong>: the depth stands for the potential, not for any real shape. The surface isn't the shape of space, and nothing slides down it: the satellite moves the way it does because of the gravitational force on it, and the surface only shows how much potential energy it has at each point. Rolling a marble on a curved sheet looks similar but follows different rules, which is why the satellite here is calculated from Newton's law instead. Which features of a model carry over to the real thing, and which don't, is a question worth asking of every model in physics. (In Einstein's general relativity gravity is described by curved spacetime, which is a different idea and not part of the course.)</p>
+      <p>Read more in <a href="../themes/d1.html#gpe">D.1 section 8: gravitational potential energy</a>, <a href="../themes/d1.html#potential">section 9: gravitational potential</a>, <a href="../themes/d1.html#gradient">section 10: potential gradient and equipotential surfaces</a>, <a href="../themes/d1.html#escape">section 11: escape speed</a> and <a href="../themes/d1.html#energy">section 12: orbital speed and orbital energy</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

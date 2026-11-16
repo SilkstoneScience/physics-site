@@ -478,8 +478,8 @@
   Anim.register('friction', {
     duration: DURATION,
     poster: 45,
-    // score: curious and microscopic (A dorian, soft sine pad, sparkling glassy bells)
-    music: { chords: [[57, 60, 64, 66], [55, 59, 62, 66], [53, 57, 62, 64], [52, 55, 59, 62]], bar: 7, pad: 'sine', cutoff: 1600, drone: 0.06, bells: 0.9, bellType: 'glass', bellOct: 2, echo: 0.29, volume: 0.3 },
+    // score: curious and microscopic (A dorian, a soft sine pad that slowly swells, a little wind)
+    music: { chords: [[57, 60, 64, 66], [55, 59, 62, 66], [53, 57, 62, 64], [52, 55, 59, 62]], bar: 7, pad: 'sine', cutoff: 900, drone: 0.09, wind: 0.25, tremolo: 0.2, volume: 0.37 },
     // hold the picture still near the end of each step so the caption can be read
     pauses: [[7.0, 1.2], [11.2, 1.2], [15.4, 1.5], [17.1, 4.0], [29.0, 1.5], [42.6, 1.2], [61.6, 1.2], [72.6, 1.5], [81.4, 1.2], [87.4, 1.5], [94.6, 3.0]],
     resize: layout,

@@ -332,8 +332,8 @@
   Anim.register('rolling', {
     duration: DURATION,
     poster: 21,
-    // score: race-day tension (D major, a square-wave pad, quick random plucks, a light pulse)
-    music: { chords: [[50, 57, 62, 66], [47, 54, 59, 62], [43, 50, 55, 59], [45, 52, 57, 61]], bar: 5, pad: 'square', cutoff: 900, drone: 0.08, bells: 0, arp: 0.2, arpMode: 'random', pulse: 2.5, volume: 0.64 },
+    // score: race-day tension (D major, a square-wave pad with a steady flutter, a low drone)
+    music: { chords: [[50, 57, 62, 66], [47, 54, 59, 62], [43, 50, 55, 59], [45, 52, 57, 61]], bar: 5, pad: 'square', cutoff: 900, drone: 0.09, tremolo: 1.5, volume: 0.73 },
     // hold the picture still so each caption can be read (teacher's request); longest at the predictions
     pauses: [[12.6, 4], [23.6, 1.5], [30.2, 1.5], [41.6, 1.5], [47.2, 1], [53.0, 1.5], [60.0, 4], [71.4, 2], [76.8, 1], [84.0, 4.5]],
     resize: layout,

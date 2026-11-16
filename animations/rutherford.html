@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: Rutherford scattering and the discovery of the nucleus · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics E.1: the Geiger–Marsden–Rutherford experiment, calculated alpha-particle paths past a gold nucleus, and (HL) the distance of closest approach and deviations at high energy.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/rutherford.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: Rutherford scattering and the discovery of the nucleus · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics E.1: the Geiger–Marsden–Rutherford experiment, calculated alpha-particle paths past a gold nucleus, and (HL) the distance of closest approach and deviations at high energy.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/rutherford.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/rutherford.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Rutherford scattering</p>
+    <h1>Rutherford scattering <span class="tag hl">+ HL extra</span></h1>
+    <p class="lead">Alpha particles are fired at a thin sheet of gold foil. Most go straight through, a few are turned through large angles and a very few bounce back. Then zoom in to the gold atoms and to a single nucleus, where the paths are calculated from the electric force, to see why only a tiny, dense, positive nucleus can explain the results. The last part, on the distance of closest approach, is HL. <a class="tag" href="../themes/e1.html#gmr">E.1 Structure of the atom</a></p>
+
+    <figure class="anim-stage" data-anim="rutherford">
+      <canvas role="img" aria-label="Animation of the Geiger–Marsden–Rutherford experiment: alpha particles from a source hit a thin gold foil in a vacuum chamber and land on a zinc sulfide screen; a zoom into the gold atoms; calculated paths of alpha particles curving away from a single gold nucleus; and (HL) an alpha particle fired straight at the nucleus, stopping at the distance of closest approach. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The alpha particles are pink, the gold nuclei gold and the electrons cyan. The alpha particles have $5.0$ MeV of kinetic energy. Only the electric force between an alpha particle and a nucleus is included, and the gold nucleus is assumed not to recoil: it is $197 \div 4 \approx 49$ times as massive as the alpha particle. Everything is slowed down enormously.</p>
+      <ol>
+        <li>Alpha particles (helium nuclei, charge $+2e$) from a radioactive source in a lead block are fired at a very thin sheet of gold foil. Everything is in a vacuum, so the alpha particles aren't stopped by air.</li>
+        <li>A zinc sulfide screen gives a tiny flash of light wherever an alpha particle hits it. The flashes were counted through a microscope, which was moved round to different angles. (In the animation the screen is drawn as a ring all the way round the foil; in the experiment one small screen moved with the microscope.)</li>
+        <li><strong>Predict:</strong> in the plum pudding model, an atom's positive charge is spread through the whole atom, with the electrons dotted through it. What should happen to the alpha particles?</li>
+        <li>A spread-out charge is never concentrated enough to make a strong electric field, so it could only nudge the alpha particles. They should all pass through, turned by tiny angles.</li>
+        <li>What was seen: <strong>most</strong> alpha particles went straight through, or were turned by only small angles. <strong>A few</strong> were deflected through large angles, and <strong>a very small number</strong> (about 1 in 8000) bounced back, turned through more than 90°. The large deflections are shown far more often in the animation than they really happen, so that you can see some.</li>
+        <li>A spread-out charge could never turn an alpha particle round. Only a tiny, concentrated charge could.</li>
+        <li>Zooming in, the foil is a sheet of gold atoms. Each atom is mostly empty space, with a tiny nucleus at its centre and electrons around it. The picture is not to scale: a gold atom is about $3 \times 10^{-10}$ m across and its nucleus about $1.4 \times 10^{-14}$ m, roughly 20 000 times smaller. So most alpha particles pass far from every nucleus and go straight on. The electrons hardly affect them, because an alpha particle is over 7000 times as massive as an electron. Only one that happens to pass very close to a nucleus is turned through a large angle.</li>
+        <li>One gold nucleus (charge $+79e$), drawn to scale with the paths, and six alpha particles aimed at different distances from its centre (the dashed lines show where each was aimed). The electric force pushes each one away. It grows as the alpha particle gets closer (it is proportional to $1/r^2$), so each path is a smooth curve, not a sharp bounce. The orange arrow shows the force on each alpha particle as it passes.</li>
+        <li>The closer an alpha particle is aimed to the nucleus, the more it is turned: aimed $1.05 \times 10^{-13}$ m, $5.2 \times 10^{-14}$ m, $2.6 \times 10^{-14}$ m, $1.2 \times 10^{-14}$ m, $5 \times 10^{-15}$ m and $1.5 \times 10^{-15}$ m from the centre, they are turned through 24°, 47°, 82°, 124°, 155° and 172°. Only those aimed within about $2 \times 10^{-14}$ m of the centre (half the distance of closest approach, $2.3 \times 10^{-14}$ m) are turned through more than 90°, and because the nucleus is so tiny, very few alpha particles are aimed that close. (The paths are worked out step by step from the electric force; you don't need to calculate them.)</li>
+        <li>Rutherford's conclusions: most of the atom is empty space; its positive charge is concentrated in a tiny nucleus; and, because some alpha particles bounce back, the nucleus holds almost all of the atom's mass.</li>
+        <li><strong>(HL)</strong> An alpha particle fired straight at the nucleus slows down, stops for an instant at the distance of closest approach $d$, and comes back. While it is in the picture, the bars show its kinetic energy turning into electric potential energy and back, with the total staying 5.0 MeV. The picture holds still at the turning point of the second run.</li>
+        <li><strong>(HL)</strong> At the turning point all the kinetic energy has become electric potential energy, so $E_k = \dfrac{k(2e)(79e)}{d}$. With $E_k = 5.0 \times 10^6 \times 1.60 \times 10^{-19} = 8.0 \times 10^{-13}$ J and $k(2e)(79e) = 8.99 \times 10^{9} \times (2 \times 1.60 \times 10^{-19}) \times (79 \times 1.60 \times 10^{-19}) = 3.64 \times 10^{-26}$ J m:
+          $$d = \frac{3.64 \times 10^{-26}}{8.0 \times 10^{-13}} = 4.5 \times 10^{-14}\ \text{m}$$</li>
+        <li><strong>(HL)</strong> The radius of the gold nucleus is $R = R_0A^{1/3} = 1.20 \times 10^{-15} \times 197^{1/3} = 7.0 \times 10^{-15}$ m. The alpha particle stops $4.5 \times 10^{-14} \div 7.0 \times 10^{-15} \approx 6.5$ times as far from the centre as the surface of the nucleus, so the distance of closest approach is only an upper limit for the radius of the nucleus. In this part the nucleus and $d$ are drawn to scale.</li>
+        <li><strong>(HL)</strong> Faster alpha particles get closer: $d$ is inversely proportional to $E_k$. The dashed circle shows $d$ shrinking as the energy rises. At $E_k = \dfrac{3.64 \times 10^{-26}}{7.0 \times 10^{-15}} = 5.2 \times 10^{-12}$ J, about 33 MeV, they would just reach the surface of the gold nucleus. (This is a rough estimate: it treats the alpha particle as a point.)</li>
+        <li><strong>(HL)</strong> Then the short-range strong nuclear force acts as well as the electric force, and fewer alpha particles are scattered at large angles than Rutherford's formula predicts. This deviation is evidence for the strong force, and the energy at which it starts gives the size of the nucleus. In exam questions the energies are low enough for only the electric force to matter.</li>
+        <li>Summary: most alpha particles go straight through, so most of the atom is empty space; a few are deflected through large angles, so the positive charge is concentrated in a tiny nucleus; very few bounce back, so the nucleus holds almost all of the mass.</li>
+      </ol>
+      <p>How the paths are drawn: each path past the single nucleus is calculated in small time steps from the inverse-square electric force, starting on the exact path far from the nucleus. The angles they are turned through agree with the exact result to within a few hundredths of a degree. In the first part, the paths are drawn as straight lines from the foil, because on that scale the turning happens in a region far too small to see.</p>
+      <p>Read more in <a href="../themes/e1.html#gmr">E.1 section 1: the Geiger–Marsden–Rutherford experiment</a>, <a href="../themes/e1.html#model">section 2: the nuclear model of the atom</a>, and (HL) <a href="../themes/e1.html#radius">section 8: nuclear radius and density</a>, <a href="../themes/e1.html#approach">section 9: distance of closest approach</a> and <a href="../themes/e1.html#deviations">section 10: deviations from Rutherford scattering</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

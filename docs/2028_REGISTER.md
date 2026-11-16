@@ -53,7 +53,7 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 ## The list
 
 <!-- LIST:START (written by tools/list-2028.mjs --write; do not edit by hand) -->
-139 places in 50 files.
+145 places in 53 files.
 
 ### Topic pages
 
@@ -70,25 +70,25 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 260: Root-mean-square speed New for 2028
 - `themes/c2.html` (3)
   - line 38: New for 2028 For exams from 2028 the guide adds that the intensity of a wave is proportional to the square of its amplitude, $I \propto A^2$ .
-  - line 274: the box drawn round a "New for 2028" block (class new2028)
-  - line 275: Intensity and amplitude New for 2028
+  - line 280: the box drawn round a "New for 2028" block (class new2028)
+  - line 281: Intensity and amplitude New for 2028
 - `themes/c4.html` (2)
   - line 38: New for 2028 For exams from 2028 the guide adds that you should derive the wavelength–length relationship for the $n$th harmonic and see how it sets the harmonic names , …
-  - line 203: New for 2028 The 2028 guide asks you to work this out yourself: find the relationship between the wavelength and the length for the $n$th harmonic ($L = \frac{n\lambda}{2…
+  - line 209: New for 2028 The 2028 guide asks you to work this out yourself: find the relationship between the wavelength and the length for the $n$th harmonic ($L = \frac{n\lambda}{2…
 - `themes/d1.html` (2)
   - line 38: New for 2028 For exams from 2028 the guide says that all students should be able to deduce Kepler's third law for circular orbits , from the centripetal and gravitational…
-  - line 212: New for 2028 From the 2028 exams, the guide says that all students (SL and HL) should be able to deduce Kepler's third law from the centripetal force and gravitational fo…
+  - line 218: New for 2028 From the 2028 exams, the guide says that all students (SL and HL) should be able to deduce Kepler's third law from the centripetal force and gravitational fo…
 - `themes/d2.html` (1)
-  - line 320: New for 2028 The size of the field around a long straight wire, $B = \dfrac{\mu_0 I}{2\pi r}$, is now in the data booklet. It is used in D.3: see D.3 The field of a long …
+  - line 326: New for 2028 The size of the field around a long straight wire, $B = \dfrac{\mu_0 I}{2\pi r}$, is now in the data booklet. It is used in D.3: see D.3 The field of a long …
 - `themes/d3.html` (5)
   - line 38: New for 2028 For exams from 2028 the guide and data booklet add the magnetic field strength of an infinitely long straight wire, $B = \frac{\mu_0 I}{2\pi r}$ , for SL and…
-  - line 267: the box drawn round a "New for 2028" block (class new2028)
-  - line 268: The field of a long straight wire New for 2028
-  - line 269: …wire are circles centred on the wire (D.2, right-hand grip rule). The 2028 data booklet adds the size of this field at a distance $r$ from an infinitely long wire carryin…
-  - line 275: Worked example: a compass near a cable New for 2028
+  - line 273: the box drawn round a "New for 2028" block (class new2028)
+  - line 274: The field of a long straight wire New for 2028
+  - line 275: …wire are circles centred on the wire (D.2, right-hand grip rule). The 2028 data booklet adds the size of this field at a distance $r$ from an infinitely long wire carryin…
+  - line 281: Worked example: a compass near a cable New for 2028
 - `themes/d4.html` (2)
   - line 38: Changed for 2028 For exams from 2028 the guide no longer mentions self-induction ; everything else in D.4 is unchanged.
-  - line 309: Changed for 2028 For exams before 2028, only a qualitative understanding of self-induction is needed. The 2028 guide removes self-induction from the guidance altogether (…
+  - line 315: Changed for 2028 For exams before 2028, only a qualitative understanding of self-induction is needed. The 2028 guide removes self-induction from the guidance altogether (…
 - `themes/e3.html` (3)
   - line 38: New for 2028 For exams from 2028, HL students should know that the strong nuclear force's range is of order $10^{-15}$ m. This page already covers it.
   - line 116: the box drawn round a "New for 2028" block (class new2028)
@@ -135,6 +135,10 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 178: .tag.y2028 { background: var(--surface); border: 1px solid var(--theme-d); color: var(--theme-d); }
   - line 179: .new2028 { border-left: 4px solid var(--theme-d); padding-left: 12px; margin: 14px 0; }
   - line 180: .new2028-note { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--theme-d); border-radius: var(--radius); padding: 8px 14px; margi…
+- `js/anim/stars.js` (3)
+  - line 24: 2028: the Chandrasekhar (about 1.4 M☉) and Oppenheimer–Volkoff (about 2–3 M☉) limits, as on themes/e5.html. */
+  - line 129: [145.2, 151.4, '(Exams from 2028) A core below about 1.4 solar masses becomes a white dwarf; up to about 2–3 solar masses, a neutron star; above that, a black hole.'],
+  - line 389: const n1 = D.wrap(s, '(Exams from 2028) Chandrasekhar limit ≈ 1.4 M☉; Oppenheimer–Volkoff limit ≈ 2–3 M☉.', Math.min(W - 40, 760));
 - `js/questions.js` (1)
   - line 360: ${q.y2028 ? ' New for 2028 ' : ''}
 - `js/site.js` (25)
@@ -237,6 +241,11 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 
 ### Other pages and data
 
+- `animations/hr-diagram.html` (2)
+  - line 32: New for 2028 For exams from 2028 the guide adds the role of the Chandrasekhar and Oppenheimer–Volkoff limits: see step 14.
+  - line 55: New for 2028 For exams from 2028: what the core becomes depends on its mass. Below about 1.4 solar masses (the Chandrasekhar limit ), electron degeneracy pressure holds i…
+- `animations/standing-waves.html` (1)
+  - line 59: New for 2028 For exams from 2028, the guide asks you to work out the relationship between the wavelength and the length for the $n$th harmonic yourself, and to see that t…
 - `ee/index.html` (1)
   - line 27: …om first idea to final submission. It is for essays first assessed in 2027.
 - `experimental/database-kepler.html` (1)

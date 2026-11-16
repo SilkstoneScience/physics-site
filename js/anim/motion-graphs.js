@@ -247,8 +247,8 @@
   Anim.register('motion-graphs', {
     duration: DURATION,
     poster: 36,
-    // score: bright and moving (C major, a quick plucked up-and-down pattern, a light beat)
-    music: { chords: [[48, 55, 60, 64], [47, 55, 59, 62], [45, 52, 57, 60], [41, 48, 57, 60]], bar: 4, pad: 'triangle', cutoff: 1500, drone: 0.06, bells: 0, arp: 0.25, arpMode: 'updown', pulse: 2, echo: 0.375, volume: 0.44 },
+    // score: bright and moving (C major, a triangle pad, a soft shimmer)
+    music: { chords: [[48, 55, 60, 64], [47, 55, 59, 62], [45, 52, 57, 60], [41, 48, 57, 60]], bar: 4, pad: 'triangle', cutoff: 900, drone: 0.09, shimmer: 0.2, volume: 0.43 },
     resize: layout,
     frame(s, t) {
       D.background(s, 0.25);

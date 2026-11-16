@@ -35,14 +35,18 @@ lines, smooth camera moves and one caption at a time. Each one loops.
 - **Pacing** (teacher, 15 November 2026: "stay on the scene a little longer"): a scene can list `pauses: [[sceneTime, seconds], …]`
   where the picture holds still (just before a caption fades) so it can be read; powers of ten holds 3.4 s on each object.
 - **Music** (teacher's request, 15 November 2026): gentle background music generated live by `js/anim/music.js` with the
-  browser's Web Audio API (a soft pad, a low drone, bell-like sparkles or plucked arpeggios, echo and reverb), so there
-  are no audio files to license. Each scene sets its own mood with `music: { chords, bar, cutoff, sparkle, arp }`.
+  browser's Web Audio API (a soft pad, a low drone, wind and reverb), so there
+  are no audio files to license. Each scene sets its own mood with `music: { chords, bar, pad, cutoff, drone, … }`.
   **On by default** (teacher, 16 November 2026), with a **different score for each animation** (the score options are
   listed at the top of music.js: pad sound, drone, bells, arpeggio, space wind, shimmer, clock tick, heartbeat pulse,
   tremolo). Browsers only allow sound after a click or tap, so until then a "♪ Tap the animation to hear the music" note
   shows, and the first tap on the picture starts the music without pausing. The ♪ Music button turns it off (remembered
   on that device); the music fades out on Pause, when the animation scrolls out of view or the tab is hidden.
   Each score's `volume` is set so that all scores have about the same loudness (RMS about 0.055 in `AnimMusic.test`).
+  **Low and atmospheric only** (teacher, 16 November 2026: "too much pinging … I just want a low atmospheric type of music"):
+  scores use only the pad, the low drone, space wind, a soft shimmer and slow swells (tremolo). No bells, plucked arpeggios,
+  clock ticks or heartbeat pulses (music.js can still make them, but no score may use them), and pad cutoffs stay at
+  900 Hz or below. Each score stays different through its key and chords, pad sound, drone, wind, shimmer and swell.
 - **Click or tap the picture to pause or play** (teacher, 16 November 2026).
 - **Speed and seeking** (teacher, 16 November 2026; built the same day in the shared player, so every animation has them):
   a speed button (1× → 1.5× → 2×, not remembered between visits) where the `pauses` holds speed up with everything
@@ -55,6 +59,15 @@ lines, smooth camera moves and one caption at a time. Each one loops.
   `AnimMusic.test(opts, seconds)` renders a piece offline and reports its peak and RMS level (checked: no clipping).
 - The stage is 16:9, and 4:5 on phones (under 600 px), so scenes lay themselves out for both.
 - File names in `animations/` are permanent once published (they may be linked from slides).
+
+## Waiting for the teacher (raise these later; the teacher said "not yet", 16 November 2026)
+- **E.1 notes, section 2** (`themes/e1.html`, about line 114): says a gold atom is "about 100 000 times wider than the nucleus".
+  For gold it is about 20 000 times (atom about 3 × 10⁻¹⁰ m, nucleus about 1.4 × 10⁻¹⁴ m); 100 000 is the usual rough figure
+  for atoms in general. The Rutherford animation says "tens of thousands of times".
+- **E.5 notes, section 9** (`themes/e5.html`, about lines 269 and 276): two bullet points name the Chandrasekhar and
+  Oppenheimer–Volkoff limits without the "New for 2028" tag, unlike the tagged `#limits` block on the same page.
+- **C.1 animation:** the reference circle is labelled HL (as in `themes/c1.html` section 6), but the guide's SL linking
+  question asks how circular motion can be used to visualize SHM; the first circle caption needs no HL maths and could be unlabelled.
 
 ## The list
 Theme A (batch 1)
@@ -71,18 +84,55 @@ Theme B (agreed 16 November 2026)
 - [x] B.1 Heating ice to steam (particles, heating curve to scale, internal energy): `heating-curve.html`
 - [x] B.3 Where gas pressure comes from (2D simulation; pressure measured from the momentum at the walls): `gas-pressure.html`
 - [x] B.5 Inside a wire (free electrons, drift, resistance, why the lamp lights at once): `inside-a-wire.html`
-- Ideas for later: B.2 the greenhouse effect (photons in, infrared out, absorbed and re-emitted); B.4 (HL) a heat engine cycle on a P–V diagram.
+- [x] B.4 The first law and heat engines (HL): `heat-engine.html` (teacher's request, 16 November 2026: "an entropy and
+  thermodynamics animation", built as two linked animations; the notes' sign convention Q = ΔU + W; the four processes drawn
+  exactly with Q, ΔU and W to scale; a Carnot cycle between 500 K and 300 K, η = 0.40)
+- [x] B.4 Entropy and the second law (HL): `entropy.html` (a gas spreading; microstates 1, 4, 6, 4, 1; S = k_B ln Ω; ΔS = Q/T for
+  heat flowing hot to cold; the second law; a freezer as a local decrease)
+- Ideas for later: B.2 the greenhouse effect (photons in, infrared out, absorbed and re-emitted).
 
-Theme C (batch 3): C.1 SHM and the reference circle; C.2 transverse and longitudinal waves; C.3 wavefronts
-and rays (refraction, diffraction, two-source interference); C.4 standing waves on strings and in pipes;
-C.5 Doppler wavefronts.
+Theme C (built 16 November 2026; waiting for the teacher's check)
+- [x] C.1 Simple harmonic motion: `shm.html` (glider between two springs, m = 0.50 kg, k = 4.9 N m⁻¹, T = 2.0 s; live x–t, v–t, a–t
+  graphs; energy bars without numbers at SL; the reference circle and the energy values labelled HL, as on `themes/c1.html`
+  section 6. The guide's SL linking question "How can circular motion be used to visualize SHM?" means the teacher may prefer
+  the circle without the HL label: ask.)
+- [x] C.2 Transverse and longitudinal waves: `waves.html` (λ = 1.6 m, T = 2.0 s, v = 0.80 m s⁻¹ for both waves; the
+  displacement–distance graph made from the particles' displacements turned through 90°; one period timed against one wavelength)
+- [x] C.3 Wavefronts and rays: `wavefronts.html` (ripple tank; the water surface is computed from complex wave amplitudes on a
+  grid, Huygens sums for the gaps; f = 8.0 Hz, 0.24 → 0.16 m s⁻¹, 50° → 31°; gaps 15 cm and 2.0 cm; sources 4λ apart, P at 2λ, Q at 1.5λ)
+- [x] C.4 Standing waves: `standing-waves.html` (string 0.80 m, 192 m s⁻¹, 120/240/360 Hz; pipes 0.68 m with 340 m s⁻¹:
+  open 250 and 500 Hz, closed 125, 375 and 625 Hz; the page's harmonic-names sentence is tagged New for 2028)
+- [x] C.5 The Doppler effect: `doppler.html` (500 Hz, 340 m s⁻¹, source or observer at 85 m s⁻¹: 667, 400 and 625 Hz, the
+  HL equations labelled; each wavefront centred where the source was when it was sent out; Hα 656.3 → 669.4 nm at 2% of c;
+  the picture is frozen, and says so, while a wavelength is measured)
 
 Theme D (batch 4)
 - [x] D.3 Charges in a magnetic field: `charge-in-b-field.html` (built first, as the demo)
-- D.1 Field lines and equipotentials; D.1 potential well (model of potential); D.2 electric field lines and
-  equipotentials; D.3 velocity selector and mass spectrometer; D.4 magnet through a coil.
+- [x] D.1 Gravitational field lines: `gravitational-fields.html` (the Earth's field to 3R, the near-uniform field at the surface,
+  the Earth–Moon field traced from the exact combined field with the cancelling point at 0.90d; (HL) equipotentials at equal steps of V)
+- [x] D.1 The gravitational potential well (HL): `potential-well.html` (V_g = −GM/r spun into a surface, labelled on screen and on
+  the page as a graph of potential, a model, not a picture of space; a 500 kg satellite at 2R, a transfer to 4R and escape, with
+  the orbit calculated from Newton's law and drawn at the depth V(r); the page says course calculations use circular orbits only)
+- [x] D.2 Electric field lines and equipotentials: `electric-fields.html` (lines traced from the exact field; plates modelled as
+  charged strips solved to be equipotentials, so the edge effects are real; (HL) equipotentials)
+- [x] D.3 Charges in electric and crossed fields: `crossed-fields.html` (an electron between plates; a velocity selector with exact
+  cycloid paths; neon-20 and neon-22 sorted by charge-to-mass ratio, "the idea of a mass spectrometer", as in the notes)
+- [x] D.4 Induction (HL): `induction.html` (a two-pole model of the magnet gives the flux linkage, and ε = −N ΔΦ/Δt is its gradient;
+  Lenz's law; a falling magnet; an ac generator)
+  (Theme D built 16 November 2026; waiting for the teacher's check.)
 
-Theme E (batch 5): E.1 Rutherford scattering; E.1 energy levels and spectra; E.5 a star's path on the
-HR diagram.
+Theme E (built 16 November 2026; waiting for the teacher's check)
+- [x] E.1 Rutherford scattering: `rutherford.html` (the apparatus and what was seen; exact Coulomb paths past one gold nucleus,
+  tan(θ/2) = d/2b; (HL) 5.0 MeV head-on: d = 4.5 × 10⁻¹⁴ m, R = 7.0 × 10⁻¹⁵ m, about 33 MeV to reach the surface)
+- [x] E.1 Energy levels and spectra: `energy-levels.html` (hydrogen levels to scale; Balmer lines from hc/ΔE, drawn at the
+  measured wavelengths; absorption by gas with some atoms in n = 2; the Bohr formula only on the HL end-card row)
+- [x] E.5 The HR diagram: `hr-diagram.html` (real stars at approximate real positions; radii from L = 4πR²σT⁴; approximate paths,
+  labelled as such, of a Sun-like star and a 25 M☉ star; the Chandrasekhar and Oppenheimer–Volkoff limits tagged New for 2028)
+- [x] E.2 The photoelectric effect (HL): `photoelectric.html` (teacher: "work on topic E", 16 November 2026; sodium, Φ = 2.28 eV;
+  red, violet and 300 nm ultraviolet; the stopping voltage; the Eₘₐₓ–f graph)
+- [x] E.3 Random decay and half-life: `half-life.html` (1000 nuclei of a made-up nuclide, T½ = 10 s, seeded so the run repeats;
+  a sample of 20; count rate and background; (HL) the decay law)
+- [x] E.4 Fission and the chain reaction: `chain-reaction.html` (the notes' Ba-141 + Kr-92 + 3n split; a seeded chain; critical
+  mass; a schematic reactor with moderator and control rods)
 
 Think deeper: a big question on curved spacetime, with an animation.

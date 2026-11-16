@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: induction, a magnet, a coil and a generator · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics D.4 (HL): a magnet pushed into and pulled out of a coil and dropped through it, with live graphs of flux linkage and induced emf, Lenz's law, and an ac generator.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/induction.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: induction, a magnet, a coil and a generator · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics D.4 (HL): a magnet pushed into and pulled out of a coil and dropped through it, with live graphs of flux linkage and induced emf, Lenz's law, and an ac generator.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/induction.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/induction.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Induction</p>
+    <h1>Induction: a magnet, a coil and a generator <span class="tag hl">HL</span></h1>
+    <p class="lead">A magnet is pushed into a coil, held still, pulled out and then dropped through a coil, while graphs of the flux linkage and the induced emf draw themselves. Watch when an emf appears, which way the current flows (Lenz's law), and how an ac generator works. All of D.4 is HL only. <a class="tag" href="../themes/d4.html#lenz">D.4 Induction</a></p>
+
+    <figure class="anim-stage" data-anim="induction">
+      <canvas role="img" aria-label="Animation of a bar magnet moving into and out of a coil connected to a centre-zero meter, with graphs of flux linkage and induced emf against time, then a magnet falling through a vertical coil, then a coil rotating between the poles of a magnet. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The violet lines are the magnet's field lines, the green arrows on the front of the coil show the induced current, and the green N and S at the ends of the coil show the poles that the current makes. The graphs are the flux linkage $N\Phi$ (violet) and the induced emf $\varepsilon$ (green) against time. In the first two parts the field lines and the graphs are calculated from a simple model of the bar magnet: two point poles, one at each end. The graphs have no numbers on their axes, because the guide only asks for a qualitative treatment of a magnet and a coil; the sign of the emf is shown for one choice of direction.</p>
+      <ol>
+        <li>A bar magnet and a coil of many turns are joined to a centre-zero meter. Some of the magnet's field lines pass through the coil.</li>
+        <li>The flux linkage $N\Phi$ counts the flux through every turn of the coil. While the magnet is still, the flux linkage is steady, so there is no emf: $\varepsilon = -N\dfrac{\Delta\Phi}{\Delta t} = 0$.</li>
+        <li><strong>Predict:</strong> the N pole is pushed into the coil. Which end of the coil will the induced current make a N pole?</li>
+        <li>The magnet is pushed in slowly. The flux linkage increases, so an emf is induced and a current flows through the meter.</li>
+        <li>Lenz's law: the induced current makes the near end of the coil a N pole, which repels the approaching magnet. So you have to do work to push the magnet in, and that work becomes the electrical energy in the circuit. If the current helped the magnet in instead, energy would appear from nothing: Lenz's law follows from the conservation of energy.</li>
+        <li>The magnet stops inside the coil. The flux linkage is now large, but it is not changing, so there is no emf.</li>
+        <li>The emf is minus the gradient of the $N\Phi$–$t$ graph. It was biggest where the flux linkage was changing fastest (the yellow tangent and dot).</li>
+        <li>The magnet is pulled out four times as fast. The flux linkage falls, so the emf reverses: the near end of the coil becomes a S pole, which attracts the magnet back. The emf is four times as big but lasts a quarter of the time.</li>
+        <li>The area under each pulse of the $\varepsilon$–$t$ graph equals the change in flux linkage, which is the same both times, so the two shaded areas are equal.</li>
+        <li>A magnet is dropped from rest through a vertical coil (slowed down 40 times). The meter's high resistance keeps the induced current small, so its braking force is small too and is ignored. As the N pole falls in, the flux linkage rises: the first pulse.</li>
+        <li>The magnet keeps speeding up, so it leaves the coil faster than it entered: about $\sqrt{2 \times 9.8 \times 0.13} = 1.6$ $\text{m s}^{-1}$ compared with $\sqrt{2 \times 9.8 \times 0.07} = 1.2$ $\text{m s}^{-1}$ when it was the same distance (3 cm) above the coil's centre. So the second pulse is bigger and shorter, and in the opposite direction.</li>
+        <li>The two shaded areas are still equal: by the time the magnet is as far below the coil as it started above it, the flux linkage has risen and fallen by the same amount.</li>
+        <li>An ac generator: a coil of $N$ turns turns steadily in a uniform magnetic field, so the angle between the field and the normal to the coil is $\theta = \omega t$ and $N\Phi = NBA\cos\omega t$. The animation is slowed down 200 times.</li>
+        <li>When the coil faces the field ($\theta = 0$), the flux is greatest but, for an instant, not changing: $\varepsilon = 0$. When the plane of the coil is parallel to the field, the flux is zero but changing fastest: $\varepsilon$ is greatest in size (positive or negative, depending on which way the coil is passing through that position). The emf is a quarter of a cycle out of step with the flux linkage.</li>
+        <li>With $N = 100$, $A = 4.0 \times 10^{-3}$ $\text{m}^2$ and $B = 0.20$ T, the greatest flux linkage is $NBA = 100 \times 4.0 \times 10^{-3} \times 0.20 = 0.080$ Wb. At 50 Hz one turn takes $\frac{1}{50} = 0.020$ s, so a quarter turn takes 0.0050 s and the average emf over that quarter turn is $\varepsilon = \frac{0.080}{0.0050} = 16$ V. The graph's peak, 25 V, is bigger than this average because the emf rises and falls during the quarter turn; the maths link in <a href="../themes/d4.html#generator">D.4 section 6</a> shows where the peak value comes from.</li>
+        <li>The coil now turns twice as fast (100 Hz). The flux changes twice as fast, so the peak emf doubles (to 50 V) and the period halves (from 0.020 s to 0.010 s).</li>
+        <li>More turns, a bigger coil, a stronger field or faster turning all give a bigger emf.</li>
+      </ol>
+      <p>How the first two parts are modelled: the flux through one turn of the coil is the share of the pole's field that passes through it (worked out from the angle the turn covers as seen from each pole), plus the flux inside the magnet when the turn surrounds it. A real magnet's poles are spread out a little, so real graphs are slightly smoother, but their shapes are the same.</p>
+      <p>Read more in <a href="../themes/d4.html#flux">D.4 section 1: magnetic flux and flux linkage</a>, <a href="../themes/d4.html#faraday">section 2: Faraday's law</a>, <a href="../themes/d4.html#lenz">section 4: Lenz's law and energy</a> and <a href="../themes/d4.html#generator">section 6: the ac generator</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
