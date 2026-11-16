@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: motion graphs · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics A.1: a car moves along a track while its displacement–time, velocity–time and acceleration–time graphs draw themselves, then areas and gradients.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/motion-graphs.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: motion graphs · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics A.1: a car moves along a track while its displacement–time, velocity–time and acceleration–time graphs draw themselves, then areas and gradients.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/motion-graphs.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/motion-graphs.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Motion graphs</p>
+    <h1>Motion graphs</h1>
+    <p class="lead">A car speeds up, cruises, stops, reverses and stops again, while its three motion graphs draw themselves. Then the areas and gradients that link the graphs. <a class="tag" href="../themes/a1.html#graphs">A.1 Kinematics</a></p>
+
+    <figure class="anim-stage" data-anim="motion-graphs">
+      <canvas role="img" aria-label="Animation of a car moving along a track with its displacement–time, velocity–time and acceleration–time graphs. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The car starts at rest at $s = 0$. To the right is positive. The green dots on the road show where the car was at each whole second: far apart means fast. Its brake lights glow whenever it slows down, and its white reversing lights when it moves backwards. (The car is drawn larger than the road's scale so it is easy to see.)</p>
+      <ol>
+        <li>0–4 s: it speeds up at $1.5$ $\text{m s}^{-2}$ to $6$ $\text{m s}^{-1}$. The s–t graph curves upwards and the v–t graph is a straight line sloping up.</li>
+        <li>4–8 s: constant velocity, $6$ $\text{m s}^{-1}$. The s–t graph is straight and the acceleration is zero.</li>
+        <li>8–11 s: it slows down at $2$ $\text{m s}^{-2}$ and stops at $s = 45$ m. The acceleration is negative.</li>
+        <li>11–13 s: at rest. The s–t graph is flat and the velocity is zero.</li>
+        <li>13–16 s: it speeds up backwards to $-3$ $\text{m s}^{-1}$. The velocity is negative, so the displacement decreases.</li>
+        <li>16–19 s: constant velocity backwards.</li>
+        <li>19–20.5 s: it slows down while moving backwards, so its acceleration is <strong>positive</strong> ($+2$ $\text{m s}^{-2}$).</li>
+        <li>The area under the v–t graph is the displacement: $45$ m forwards (above the axis) and $15.75$ m back (below it), so it ends at $45 - 15.75 = 29.25$ m.</li>
+        <li>The gradient of the s–t graph is the velocity (at 9.5 s it is $3$ $\text{m s}^{-1}$). The gradient of the v–t graph is the acceleration ($6 \div 4 = 1.5$ $\text{m s}^{-2}$ in the first 4 s).</li>
+      </ol>
+      <p>Read more in <a href="../themes/a1.html#graphs">A.1 section 4: motion graphs</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

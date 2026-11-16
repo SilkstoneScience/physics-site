@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: space–time diagrams · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics A.5 (HL): world lines, light at 45°, the tilted axes of a moving frame, the relativity of simultaneity and time dilation on a space–time diagram.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/spacetime.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: space–time diagrams · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics A.5 (HL): world lines, light at 45°, the tilted axes of a moving frame, the relativity of simultaneity and time dilation on a space–time diagram.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/spacetime.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/spacetime.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Space–time diagrams</p>
+    <h1>Space–time diagrams <span class="tag hl">HL</span></h1>
+    <p class="lead">How a space–time diagram shows the same events for the ground and for a rocket moving at $0.60c$: world lines, tilted axes, simultaneity and time dilation. <a class="tag" href="../themes/a5.html#diagrams">A.5 Galilean and special relativity</a></p>
+
+    <figure class="anim-stage" data-anim="spacetime">
+      <canvas role="img" aria-label="Animation of a space–time diagram for the ground frame and a rocket frame moving at 0.60c. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <ol>
+        <li>The axes are $x$ across and $ct$ up, both in metres. Each point is an event. An object at rest has a vertical world line.</li>
+        <li>Light has a world line at 45°.</li>
+        <li>A rocket moving at $0.60c$ has a world line tilted by $\theta$ from the $ct$ axis, where $\tan\theta = v/c = 0.60$, so $\theta = 31°$.</li>
+        <li>The rocket's frame S′ has its own axes: $ct'$ along the rocket's world line and $x'$ tilted up from the $x$ axis by the same angle. The light line is still halfway between them, so light has speed $c$ in both frames.</li>
+        <li>Events A and B are on a line parallel to the $x$ axis, so they are simultaneous for the ground. Lines through them parallel to the $x'$ axis meet the $ct'$ axis at different heights: for the rocket, B happens first ($ct'_B = 1.6$ m, $ct'_A = 3.4$ m).</li>
+        <li>Curves of equal space–time interval, $(ct)^2 - x^2$, cross the $ct$ axis at 1 m, 2 m, 3 m… and the $ct'$ axis at $ct' =$ 1 m, 2 m, 3 m…, so they show the scale on both time axes.</li>
+        <li>The rocket's clock reads $ct' = 2$ m at the event where the ground's clock reads $ct = 2.5$ m: the moving clock runs slow by the factor $\gamma = 1.25$.</li>
+      </ol>
+      <p>Read more in <a href="../themes/a5.html#diagrams">A.5 section 11: space-time diagrams</a>, <a href="../themes/a5.html#simultaneity">section 10: simultaneity</a> and <a href="../themes/a5.html#interval">section 7: the space-time interval</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

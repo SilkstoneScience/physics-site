@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: heating ice to steam, particle by particle · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics B.1: water molecules in ice, water and steam beside a heating curve drawn to scale, showing why the temperature stays constant while ice melts and water boils.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/heating-curve.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: heating ice to steam, particle by particle · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics B.1: water molecules in ice, water and steam beside a heating curve drawn to scale, showing why the temperature stays constant while ice melts and water boils.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/heating-curve.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/heating.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Heating ice to steam</p>
+    <h1>Heating ice to steam</h1>
+    <p class="lead">A box of water molecules is heated from ice at −20 °C to steam at 120 °C, while the heating curve draws itself beside it. Watch what the molecules do on the slopes, where the temperature rises, and on the flat parts, where the ice melts and the water boils at a constant temperature. <a class="tag" href="../themes/b1.html#phase">B.1 Thermal energy transfers</a></p>
+
+    <figure class="anim-stage" data-anim="heating">
+      <canvas role="img" aria-label="Animation of water molecules in a box heated from below, changing from ice to water to steam, beside a heating curve of temperature against energy supplied and a bar showing the gain in internal energy. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The sample is 1.0 kg of water, heated by a 2.0 kW heater, and no energy is lost to the surroundings. The values used are typical ones (they are not in the data booklet): specific heat capacities $c = 2100$ $\text{J kg}^{-1}\,\text{K}^{-1}$ for ice, $4200$ for water and $2000$ for steam; specific latent heats $L_f = 3.34 \times 10^5$ $\text{J kg}^{-1}$ for melting and $L_v = 2.26 \times 10^6$ $\text{J kg}^{-1}$ for boiling. The graph shows the temperature (in °C on the left and in K on the right, $T/\text{K} = \theta/{}^\circ\text{C} + 273$) against the energy supplied, $Q$, drawn to scale. Its slopes are blue and its flat parts violet. The bar below it shows the gain in internal energy on the same scale, split into random kinetic energy (blue) and intermolecular potential energy (violet). The violet lines between the molecules stand for the attractions between them.</p>
+      <ol>
+        <li>At the start the ice is at −20 °C (253 K). In a solid, each molecule vibrates about a fixed place in a regular pattern, held there by the attractions to its neighbours.</li>
+        <li>The heater is switched on. The molecules vibrate faster, so their random kinetic energy and the temperature rise. Warming the ice to 0 °C needs $Q = mc\Delta T = 1.0 \times 2100 \times 20 = 42$ kJ, which takes 21 s at 2.0 kW.</li>
+        <li><strong>Predict:</strong> what happens to the temperature while the ice melts? (The heater is switched off for a moment while you think.)</li>
+        <li>It stays at 0 °C. The energy supplied breaks up the regular pattern instead of making the molecules move faster: the potential energy part of the internal energy rises, and the kinetic part stays the same. Melting all the ice needs $Q = mL_f = 1.0 \times 3.34 \times 10^5 = 334$ kJ (167 s). The number of molecules that have left the regular pattern grows in proportion to the energy supplied. In the liquid, the molecules slide past each other but stay close together.</li>
+        <li>The water warms from 0 °C to 100 °C: the molecules move faster and the temperature rises again. This needs $Q = 1.0 \times 4200 \times 100 = 420$ kJ (210 s). On the graph this slope is half as steep as the ice's, because water's specific heat capacity is twice as big.</li>
+        <li><strong>Predict:</strong> will boiling need more energy than melting, or less?</li>
+        <li>Far more: $Q = mL_v = 1.0 \times 2.26 \times 10^6 = 2260$ kJ, almost 7 times the 334 kJ needed for melting, and nearly three-quarters of all the energy in the animation. The molecules are pulled right away from each other, against their attractions, while the temperature stays at 100 °C (373 K). Boiling takes 1130 s (almost 19 minutes) at 2.0 kW; melting took 167 s.</li>
+        <li>The molecules in the steam move no faster than those in the boiling water, because they are at the same temperature: they are simply far apart and almost free of each other. The steam pushes the lid up (the lid is free to move, so the pressure stays the same). In the box the steam takes up only a few times the space of the water; really, 1.0 kg of steam at 100 °C takes up about 1600 times the volume of the boiling water.</li>
+        <li>The steam warms quickly to 120 °C (393 K): $Q = 1.0 \times 2000 \times 20 = 40$ kJ (20 s). Altogether: 3096 kJ in 1548 s (25 minutes 48 s). Of this, 502 kJ went into random kinetic energy and 2594 kJ into intermolecular potential energy.</li>
+        <li>Summary: internal energy = total random kinetic energy + total intermolecular potential energy. When the temperature changes, $Q = mc\Delta T$ and the kinetic energy changes. During a phase change the temperature stays constant, $Q = mL$, and the potential energy changes. The kelvin temperature is a measure of the average kinetic energy of the particles ($\overline{E}_k = \tfrac{3}{2}k_BT$ exactly, for an ideal monatomic gas).</li>
+      </ol>
+      <p>How the molecules move: they are drawn hugely enlarged, in two dimensions, and slowed down roughly $10^{12}$ times. Their motion is worked out step by step from simple forces (repulsion when they touch, attraction in the solid and the liquid, none in the gas), and their average kinetic energy is kept proportional to the kelvin temperature, so their speeds are proportional to $\sqrt{T}$, as for real molecules. From 253 K to 393 K the average kinetic energy rises by a factor of $393 \div 253 = 1.55$, but the average speed only by $\sqrt{1.55} = 1.25$. The bar follows the simple model used in B.1: while the temperature rises, all the energy supplied is shown as random kinetic energy, and during a phase change, as intermolecular potential energy. (Strictly, about 7% of the energy for boiling does work pushing back the air above the steam as it expands, here the lid, so it does not all become internal energy.)</p>
+      <p>Read more in <a href="../themes/b1.html#model">B.1 section 1: the molecular model of solids, liquids and gases</a>, <a href="../themes/b1.html#internal">section 4: internal energy</a>, <a href="../themes/b1.html#shc">section 5: specific heat capacity</a> and <a href="../themes/b1.html#phase">section 6: phase changes and latent heat</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

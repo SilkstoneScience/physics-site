@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: conservation of momentum and rockets · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics A.2: elastic and inelastic collisions and an explosion on an air track, with the total momentum shown throughout, then how a rocket works and the thrust F = Δp/Δt.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/momentum.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: conservation of momentum and rockets · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics A.2: elastic and inelastic collisions and an explosion on an air track, with the total momentum shown throughout, then how a rocket works and the thrust F = Δp/Δt.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/momentum.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/momentum.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Conservation of momentum and rockets</p>
+    <h1>Conservation of momentum and rockets</h1>
+    <p class="lead">Three collisions on an air track, with the momentum of each glider and the total shown as arrows, then a rocket in deep space that moves by throwing gas backwards. <a class="tag" href="../themes/a2.html#conservation">A.2 Forces and momentum</a></p>
+
+    <figure class="anim-stage" data-anim="momentum">
+      <canvas role="img" aria-label="Animation of collisions between two gliders on an air track and of a rocket firing its engine in space, with the momentum shown as arrows. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>Momentum is $p = mv$, a vector: to the right is positive. Below the air track, an arrow for each glider shows its momentum, and the white arrow shows the total. The collisions are shown in slow motion, and they are calculated in small time steps: at every step the two gliders push on each other with equal and opposite forces, so the total momentum never changes.</p>
+      <ol>
+        <li><strong>Elastic collision.</strong> A 2.0 kg glider moving at $3.0$ $\text{m s}^{-1}$ hits a 1.0 kg glider at rest. The total momentum is $2.0 \times 3.0 = 6.0$ $\text{kg m s}^{-1}$.</li>
+        <li>Predict: what will the total momentum be after the collision? During the collision a spring bumper squashes, and the momentum one glider loses is exactly the momentum the other gains.</li>
+        <li>Afterwards the 2.0 kg glider moves at $1.0$ $\text{m s}^{-1}$ and the 1.0 kg glider at $4.0$ $\text{m s}^{-1}$: $2.0 \times 1.0 + 1.0 \times 4.0 = 6.0$ $\text{kg m s}^{-1}$, the same as before. The kinetic energy is $\tfrac{1}{2}(2.0)(3.0)^2 = 9.0$ J before and $\tfrac{1}{2}(2.0)(1.0)^2 + \tfrac{1}{2}(1.0)(4.0)^2 = 1.0 + 8.0 = 9.0$ J after, so the collision is elastic.</li>
+        <li><strong>Inelastic collision.</strong> The same gliders, now with sticky pads, so they join together. The momentum is still $6.0$ $\text{kg m s}^{-1}$, so the joined 3.0 kg moves at $6.0 \div 3.0 = 2.0$ $\text{m s}^{-1}$.</li>
+        <li>The kinetic energy falls from 9.0 J to $\tfrac{1}{2}(3.0)(2.0)^2 = 6.0$ J. The missing 3.0 J becomes thermal energy (the glow where the pads meet) and sound.</li>
+        <li><strong>Explosion.</strong> Both gliders start at rest, held together by a thread with a squashed spring between them, so the total momentum is zero. Predict: what will it be after they fly apart?</li>
+        <li>The thread breaks. The 2.0 kg glider moves left at $1.5$ $\text{m s}^{-1}$ and the 1.0 kg glider right at $3.0$ $\text{m s}^{-1}$: $2.0 \times (-1.5) + 1.0 \times 3.0 = 0$. The total is still zero, because the two momenta are equal and opposite.</li>
+        <li>The kinetic energy rises from 0 to $\tfrac{1}{2}(2.0)(1.5)^2 + \tfrac{1}{2}(1.0)(3.0)^2 = 2.25 + 4.5 = 6.75$ J, which was stored as elastic potential energy in the spring. The lighter glider gets more of it.</li>
+        <li><strong>How a rocket works.</strong> A rocket doesn't need anything to push against: it pushes gas backwards, and the gas pushes it forwards. Here, in deep space, a 50 000 kg rocket throws out puffs of gas backwards, 25 kg at a time, each leaving at $3000$ $\text{m s}^{-1}$ relative to the rocket. Each puff gets a momentum of $25 \times 3000 = 75\,000$ $\text{kg m s}^{-1}$ backwards, and (for these first puffs, starting from rest) the rocket gets the same momentum forwards, so the total momentum of the rocket and its gas stays zero.</li>
+        <li>Firing continuously, the engine throws out 250 kg of gas per second (a 25 kg puff every 0.1 s). The thrust is the rate of change of momentum: $F = \dfrac{\Delta p}{\Delta t} = v_e\dfrac{\Delta m}{\Delta t} = 3000 \times 250 = 7.5 \times 10^{5}$ N, where $v_e$ is the speed of the gas relative to the rocket. The thrust comes from the gas's rate of change of momentum; $a = F/m$ then gives the rocket's acceleration at each moment, using its mass at that moment.</li>
+        <li>The burn is speeded up. As the rocket gets lighter, the same thrust gives a larger acceleration: $a = F/m$ rises from $7.5 \times 10^{5} \div 50\,000 = 15$ $\text{m s}^{-2}$ to $7.5 \times 10^{5} \div 20\,000 = 37.5$ $\text{m s}^{-2}$. After 120 s it has used 30 000 kg of propellant, its mass is 20 000 kg, and adding up the effect of every puff gives a speed of $2750$ $\text{m s}^{-1}$.</li>
+        <li><strong>Going further (beyond the IB syllabus).</strong> Adding up the tiny steps gives the rocket equation, $\Delta v = v_e \ln\left(\dfrac{m_0}{m_f}\right)$, where $v_e$ is the exhaust speed and $m_0$ and $m_f$ are the starting and final masses. Check: $3000 \ln\left(\dfrac{50\,000}{20\,000}\right) = 2750$ $\text{m s}^{-1}$, the same as the step-by-step calculation.</li>
+        <li>Reaching low Earth orbit needs a $\Delta v$ of about $9.4$ $\text{km s}^{-1}$, including the losses to gravity and air resistance on the way up. With $v_e = 3.0$ $\text{km s}^{-1}$, $\dfrac{m_0}{m_f} = e^{9.4/3.0} \approx 23$. The fuel gauge drains as the speed builds up: by half-way to 9.4 $\text{km s}^{-1}$ almost four-fifths of the launch mass has already gone, because the early fuel also has to speed up all the fuel still on board.</li>
+        <li>So for a single-stage rocket about $1 - \dfrac{1}{23} \approx 96\%$ of the launch mass is propellant, and only about 4% (the rocket's structure, engines and payload) reaches orbit. Real rockets drop empty stages on the way up, which does much better.</li>
+        <li>Total momentum is conserved when no resultant external force acts on the system. $p = mv$ and $F = \dfrac{\Delta p}{\Delta t}$.</li>
+      </ol>
+      <p>Read more in <a href="../themes/a2.html#momentum">A.2 section 7: momentum and impulse</a> (including rockets) and <a href="../themes/a2.html#conservation">section 8: conservation of momentum, collisions and explosions</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

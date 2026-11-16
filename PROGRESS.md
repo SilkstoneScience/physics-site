@@ -199,6 +199,17 @@ After a design review, the teacher chose these changes (all in `js/site.js` and 
 - Linked from the IA page (box under the lead, the graphs section and an IA documents card), the Experimental page and the Experimental menu, next to the IA builder and the diagram maker.
 - Not yet tested on a real tablet or phone with a finger (touch was simulated), or by students. Possible next steps: the IA builder importing a graph-maker file (format in the plan).
 
+## Animations (15 November 2026, batch 1 waiting for the teacher's check)
+- Short animations that play by themselves (Play/Pause, Replay, Full screen only), asked for by the teacher; different from simulations, which stay PhET where PhET exists. Plan, decisions and the list for themes B–E: `docs/ANIMATIONS_PLAN.md`.
+- Hub `animations/index.html` (Resources menu and a Resources card); one page per animation with a written description of every step; topic pages link to them with an `aside.sim.anim` box.
+- Batch 1: powers of ten (Skills page; public-domain NASA/Hubble photos credited on the page and on About), A.1 motion graphs, A.5 space–time diagrams (HL), D.3 a charge in a magnetic field (the demo).
+- Code: shared player `js/anim/player.js`, one scene per file in `js/anim/`, styles `css/animations.css`. `tools/anim-sheet.html?anim=<name>` (not published) draws many frames on one page for checking; `?t=12` on an animation page freezes it at 12 s.
+- 16 November 2026 (teacher's requests): longer holds; background music generated in the browser (`js/anim/music.js`), on by default with its own score per animation; click or tap the picture to pause; powers of ten with better DNA, virus, blood cells and a travelling light pulse, and captions giving "how many times bigger" in ordinary numbers. New: A.2 what friction is, A.2 collisions, explosions and rockets (the rocket equation labelled beyond the syllabus), A.3 a bungee jump (energy), A.4 the rolling race (HL).
+- 16 November 2026 (teacher's request): A.4 "Why the sin θ in torque?" (`torque.html`, scene `js/anim/torque.js`, linked from A.4 section 2), waiting for the teacher's check.
+- 16 November 2026 (teacher's request): every animation has a speed button (1×, 1.5×, 2×), a draggable scrubber and ← / → keys; on phones the buttons are in a row below the picture.
+- Theme B (16 November 2026): B.1 heating ice to steam, B.3 where gas pressure comes from, B.5 inside a wire; linked from B.1, B.3 and B.5.
+- Next: the teacher's check of the A.4 torque animation and theme B, then theme C.
+
 ## Still to do
 From the October 2026 site audit, in priority order (P1 = high value, P2 = useful, P3 = future/optional).
 Ask the user before starting any item marked "decide".

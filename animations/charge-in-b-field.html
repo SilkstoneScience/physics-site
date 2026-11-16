@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: a charge in a magnetic field · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics D.3: why a charge moving in a uniform magnetic field follows a circle, why opposite charges curve opposite ways, and when the path becomes a helix.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/charge-in-b-field.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: a charge in a magnetic field · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics D.3: why a charge moving in a uniform magnetic field follows a circle, why opposite charges curve opposite ways, and when the path becomes a helix.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/charge-in-b-field.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/bfield.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › A charge in a magnetic field</p>
+    <h1>A charge in a magnetic field</h1>
+    <p class="lead">Why a charged particle moving across a uniform magnetic field goes round in a circle, and when its path becomes a helix. <a class="tag" href="../themes/d3.html#circle">D.3 Motion in electromagnetic fields</a></p>
+
+    <figure class="anim-stage" data-anim="bfield">
+      <canvas role="img" aria-label="Animation of charges moving in a uniform magnetic field. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <ol>
+        <li>A uniform magnetic field points into the page (the crosses). A positive charge moves to the right.</li>
+        <li>The magnetic force (orange) is always at right angles to the velocity (blue). It changes the direction of motion but never the speed, so the charge moves in a circle, anticlockwise for this field.</li>
+        <li>A negative charge with the same mass and speed, launched the same way, feels a force in the opposite direction and curves the other way.</li>
+        <li>The view turns so the field lines are seen from the side.</li>
+        <li>A charge that also has some velocity along the field feels no force from that part of its motion, so it keeps drifting along the field while it circles: its path is a helix.</li>
+        <li>The size of the force is $F = qvB\sin\theta$, where $\theta$ is the angle between the velocity and the field.</li>
+      </ol>
+      <p>The paths are calculated from the force on the charge, not drawn by hand. Read more in <a href="../themes/d3.html#force">D.3 section 2: the magnetic force on a moving charge</a> and <a href="../themes/d3.html#circle">section 3: circular motion in a magnetic field</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

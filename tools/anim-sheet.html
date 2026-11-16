@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Animation contact sheet (not published)</title>
+<style>
+  body { margin: 12px; background: #222; color: #ddd; font: 13px system-ui, sans-serif; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--w, 420px), 1fr)); gap: 10px; }
+  figure { margin: 0; } canvas { width: 100%; display: block; border-radius: 6px; }
+  figcaption { padding: 2px 0; }
+</style>
+</head>
+<body>
+<p>Contact sheet: <code>?anim=powers-of-ten&amp;n=16&amp;w=640&amp;h=360</code> draws n frames spread over the animation (or <code>&amp;times=4,9.5,20</code>). Use <code>w=320&amp;h=400</code> for the phone shape. Images load late: reload once if a photo is missing.</p>
+<div class="grid" id="grid"></div>
+<script src="../js/anim/player.js"></script>
+<script>
+  const q = new URLSearchParams(location.search), name = q.get('anim') || 'bfield';
+  const s = document.createElement('script'); s.src = `../js/anim/${name}.js`;
+  s.onload = () => setTimeout(() => {
+    const dur = Anim.durationOf(name), n = +(q.get('n') || 12), w = +(q.get('w') || 640), h = +(q.get('h') || 360);
+    document.getElementById('grid').style.setProperty('--w', Math.min(w, 640) * 0.66 + 'px');
+    const times = q.get('times') ? q.get('times').split(',').map(Number) : Array.from({ length: n }, (_, i) => +(dur * (i + 0.5) / n).toFixed(1));
+    for (const t of times) {
+      const f = document.createElement('figure'), c = document.createElement('canvas'), cap = document.createElement('figcaption');
+      c.width = w; c.height = h; cap.textContent = `t = ${t} s`;
+      f.append(c, cap); document.getElementById('grid').append(f);
+      Anim.still(name, c, t);
+    }
+  }, 600);
+  document.head.append(s);
+</script>
+</body>
+</html>

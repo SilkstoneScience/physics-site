@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: what exactly is friction? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics A.2: a block is pushed until it slides, then a zoom to the microscopic bumps and the atoms where two surfaces touch, showing where static and dynamic friction come from.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/friction.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: what exactly is friction? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics A.2: a block is pushed until it slides, then a zoom to the microscopic bumps and the atoms where two surfaces touch, showing where static and dynamic friction come from.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/friction.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/friction.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › What exactly is friction?</p>
+    <h1>What exactly is friction?</h1>
+    <p class="lead">A block is pushed until it slips. Then a continuous zoom down to the tiny bumps on the two surfaces, and on to the atoms where they touch, to see where static and dynamic friction come from. <a class="tag" href="../themes/a2.html#contact">A.2 Forces and momentum</a></p>
+
+    <figure class="anim-stage" data-anim="friction">
+      <canvas role="img" aria-label="Animation of a block pushed along a table, then zooming in to the rough surfaces and the atoms where they touch. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The block has a mass of 2.0 kg, so its weight is $mg = 2.0 \times 9.8 = 19.6$ N, and the normal force is $F_N = 19.6$ N. The coefficients of friction are $\mu_s = 0.50$ and $\mu_d = 0.40$. Push is orange, friction red, the normal force and weight white, velocity blue.</p>
+      <ol>
+        <li>A gentle push of 5.0 N: static friction pushes back with 5.0 N, so the block stays still.</li>
+        <li>The push grows. Static friction grows with it, but only up to a maximum of $\mu_s F_N = 0.50 \times 19.6 = 9.8$ N. On wider screens, a graph shows the friction against time.</li>
+        <li>Just past 9.8 N the block slips. Friction drops to the dynamic value $\mu_d F_N = 0.40 \times 19.6 = 7.8$ N, so a push of only 7.8 N keeps it sliding at constant velocity. When the push stops, friction brings it to rest.</li>
+        <li>The view zooms in, about twenty thousand times, to where the block meets the table. Even surfaces that feel smooth are rough on this scale, with hills and valleys (asperities) a few micrometres high. The two surfaces touch only at the tips of a few bumps, so the real area of contact is tiny: for a light block it can be far less than 1% of the area you see (the picture shows the contacts much larger than that, so they can be seen).</li>
+        <li>As the block slides (slowed right down), the bumps deform, contacts break and new ones form.</li>
+        <li>The view zooms in again, to a single contact spot more than ten thousand times closer still. The atoms (about $10^{-10}$ m across) on the two sides are so close that they attract each other (adhesion), like weak bonds across the join. The atoms are drawn as neat rows to keep the picture simple: real wood is not that orderly.</li>
+        <li>To slide, these bonds must be stretched and broken, and new ones form and break in turn. Each time a bond snaps, the atoms are left vibrating more: the work done against friction becomes thermal energy, so the surfaces warm up.</li>
+        <li>Back at the bumps, with the block at rest: the contact spots slowly creep and grow, and their bonds get stronger. Once the block slides, each contact lasts only a moment and never has time to grow. This is one reason it takes more force to start sliding than to keep sliding: $\mu_s$ is larger than $\mu_d$.</li>
+        <li>A second block on top doubles the normal force to 39.2 N. The bumps squash more, so the real contact area roughly doubles, and the dynamic friction doubles too, to $0.40 \times 39.2 = 15.7$ N. This is why friction is proportional to the normal force.</li>
+        <li>The same block stood on its narrow face (a third of the area) has the same friction, 7.8 N. The pressure is three times higher, so each bump that touches squashes more: the total real contact area is the same. Friction depends on the normal force and the materials, and hardly at all on the apparent area of contact. (The contact spots in this picture are drawn much larger than real ones.)</li>
+        <li>Summary: $F_f \le \mu_s F_N$ for static friction and $F_f = \mu_d F_N$ for dynamic friction. Friction opposes the relative motion of the surfaces, or their tendency to move, and the work done against it becomes thermal energy.</li>
+      </ol>
+      <p>Read more in <a href="../themes/a2.html#contact">A.2 section 4: contact forces</a> (friction is near the end of the section).</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

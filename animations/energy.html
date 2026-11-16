@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: energy in a bungee jump · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics A.3: live energy bars follow a bungee jump, as gravitational potential energy becomes kinetic and elastic energy, then thermal energy when there is air resistance.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/energy.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: energy in a bungee jump · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics A.3: live energy bars follow a bungee jump, as gravitational potential energy becomes kinetic and elastic energy, then thermal energy when there is air resistance.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/energy.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/energy.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Energy in a bungee jump</p>
+    <h1>Energy in a bungee jump</h1>
+    <p class="lead">Live energy bars follow a bungee jumper as gravitational potential energy becomes kinetic energy, then elastic potential energy in the rope. Then the same jump with air resistance, where energy is dissipated as thermal energy but the total never changes. <a class="tag" href="../themes/a3.html#mechanical">A.3 Work, energy and power</a></p>
+
+    <figure class="anim-stage" data-anim="energy">
+      <canvas role="img" aria-label="Animation of a bungee jump from a bridge with live bar charts of the energy stores. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The jumper has mass $m = 60$ kg. The bungee rope has natural length $25$ m and spring constant $k = 120$ $\text{N m}^{-1}$, and the bridge is $80$ m above a river. The jumper is treated as a point at the end of the rope and is drawn larger than the scale, so the figure is easy to see. Gravitational potential energy is measured from the lowest point of the jump, and $g = 9.8$ $\text{m s}^{-2}$. The bars show gravitational potential energy (green), kinetic energy (blue), elastic potential energy (violet), thermal energy (red) and their total, which is a stack of all four. The motion is calculated in small time steps from the forces, and shown in slow motion in the first part.</p>
+      <ol>
+        <li>Before the jump, all the energy is gravitational potential energy: $\Delta E_p = mg\Delta h = 60 \times 9.8 \times 46.3 = 27.2$ kJ.</li>
+        <li>For the first $25$ m the rope is slack (it hangs in a loop), so the jumper is in free fall: gravitational potential energy becomes kinetic energy. The only force is the weight, $mg = 588$ N.</li>
+        <li>When the rope goes taut, the jumper's speed is $v = \sqrt{2 \times 9.8 \times 25} = 22.1$ $\text{m s}^{-1}$, so $E_k = 14.7$ kJ and $E_p = 12.5$ kJ.</li>
+        <li><strong>Predict:</strong> is the jumper fastest when the rope starts to stretch, or lower down? Lower down. While the rope's pull $k\Delta x$ is smaller than the weight, the jumper still speeds up. The speed is greatest where $k\Delta x = mg$, at $\Delta x = 588 \div 120 = 4.9$ m (29.9 m below the bridge), where $v = 23.2$ $\text{m s}^{-1}$: $E_k = 16.1$ kJ, $E_p = 9.64$ kJ and $E_H = \tfrac{1}{2}k(\Delta x)^2 = 1.44$ kJ.</li>
+        <li>At the lowest point the jumper is momentarily at rest. From $mg(25 + \Delta x) = \tfrac{1}{2}k(\Delta x)^2$, the rope is stretched $\Delta x = 21.3$ m, $46.3$ m below the bridge and still $33.7$ m above the river. All $27.2$ kJ is now elastic potential energy. The rope then pulls with $k\Delta x = 2560$ N, more than four times the weight.</li>
+        <li>With no air resistance, the jumper bounces back up to the bridge, and the total stays $27.2$ kJ the whole time.</li>
+        <li><strong>Predict:</strong> with air resistance (and friction inside the stretching rope), will the total energy go down? No. Mechanical energy is transferred to thermal energy in the air and the rope, so the thermal bar grows and the total stays $27.2$ kJ.</li>
+        <li>Each bounce is lower. The first fall now reaches $43.8$ m below the bridge, and the first bounce rises only to $13.1$ m below it. There, $E_p = 19.5$ kJ is left in the mechanical stores: $72\%$ of the total ($7.7$ kJ has become thermal energy).</li>
+        <li>In fast forward the bounces die away, and the jumper ends up hanging at rest $29.9$ m below the bridge, where $k\Delta x = mg$ again. The energy is then $9.64$ kJ gravitational + $1.44$ kJ elastic + $16.1$ kJ thermal = $27.2$ kJ.</li>
+        <li>Energy is never lost, only transferred: $\Delta E_p = mg\Delta h$, $E_k = \tfrac{1}{2}mv^2$, $E_H = \tfrac{1}{2}k(\Delta x)^2$.</li>
+      </ol>
+      <p>In the second part, the air resistance is taken as $0.15v^2$ newtons and the friction in the stretched rope as $8v$ newtons. Read more in <a href="../themes/a3.html#potential">A.3 section 4: gravitational and elastic potential energy</a>, <a href="../themes/a3.html#mechanical">section 5: conservation of mechanical energy</a> and <a href="../themes/a3.html#conservation">section 1: energy and its conservation</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
