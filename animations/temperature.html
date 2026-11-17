@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: what is temperature? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics B.1 and B.3: gas particles speed up as the gas is heated, temperature as a measure of their average kinetic energy, a thermometer reaching thermal equilibrium, temperature compared with internal energy, and absolute zero.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/temperature.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: what is temperature? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics B.1 and B.3: gas particles speed up as the gas is heated, temperature as a measure of their average kinetic energy, a thermometer reaching thermal equilibrium, temperature compared with internal energy, and absolute zero.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/temperature.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/temperature.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › What is temperature?</p>
+    <h1>What is temperature?</h1>
+    <p class="lead">Zoom in on a gas and temperature turns out to be about motion: the more kinetic energy its particles have on average, the higher its temperature. Watch a gas being heated, a thermometer catching up with it, a spark compared with a bath, and the gas cooled towards absolute zero. <a class="tag" href="../themes/b1.html#temperature">B.1 Temperature</a> <a class="tag" href="../themes/b3.html#energy">B.3 Temperature and internal energy</a></p>
+
+    <figure class="anim-stage" data-anim="temperature">
+      <canvas role="img" aria-label="Animation of a box of gas particles coloured by their kinetic energy, with a thermometer probe in the box, a hot plate underneath and a bar chart of the particles' kinetic energies. The gas is heated and the thermometer catches up; then a spark and a bath of water are compared; then the walls are cooled and the temperature falls towards absolute zero on a Kelvin and Celsius scale. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The gas is a two-dimensional model: 90 particles that bounce off each other and off the walls without losing energy. The particles are drawn far bigger, and move far more slowly, than real gas particles. Their colours show their kinetic energy (blue slow, white in between, orange fast). The temperatures and energies on screen are those for an ideal monatomic gas at the temperature shown. (In a two-dimensional model the average kinetic energy would be $k_\text{B}T$; the screen shows the three-dimensional value, $\frac{3}{2}k_\text{B}T$.)</p>
+      <ol>
+        <li>A gas is made of particles moving in random directions, at many different speeds. They collide with each other and with the walls, so each particle's speed keeps changing.</li>
+        <li>The bar chart counts how many particles have each kinetic energy, $\frac{1}{2}mv^2$. The energies are spread out; the yellow line marks the average.</li>
+        <li><strong>Temperature is a measure of the average random kinetic energy of the particles.</strong> The kelvin temperature $T$ is proportional to it (for an ideal monatomic gas): $E_\text{k} = \frac{3}{2}k_\text{B}T$, where $E_\text{k}$ is the average kinetic energy of a particle and $k_\text{B}$ is the Boltzmann constant.</li>
+        <li>At 300 K (27 °C): $E_\text{k} = \frac{3}{2} \times 1.38 \times 10^{-23} \times 300 = 6.2 \times 10^{-21}$ J. The thermometer probe is at the same temperature as the gas, so it reads 300 K.</li>
+        <li><strong>Predict:</strong> the gas is heated quickly. Will the thermometer show the new temperature straight away?</li>
+        <li>A hot plate heats the gas: particles that hit it bounce off faster, so the average kinetic energy, and the temperature, rise. The thermometer lags behind: gas particles hit it (yellow flashes) and give energy to its own particles, which vibrate more, so it warms and the gas cools a little.</li>
+        <li>Energy flows from the hotter gas to the colder thermometer until both are at the same temperature. Then there is no more net energy flow: <strong>thermal equilibrium</strong>. Only then does the thermometer read the temperature of the gas.</li>
+        <li>The gas is now at 600 K. Doubling the kelvin temperature doubles the average kinetic energy: $\frac{3}{2} \times 1.38 \times 10^{-23} \times 600 = 1.2 \times 10^{-20}$ J.</li>
+        <li><strong>Temperature is not the same as energy.</strong> A spark from a sparkler (1.0 mg of iron at 1500 °C) is far hotter than bath water at 40 °C: the average kinetic energy of its particles is $\frac{1773}{313} \approx 5.7$ times as large. (They move only about 1.35 times as fast, because iron atoms are about three times as heavy as water molecules: at the same temperature, heavier particles move more slowly.)</li>
+        <li>But the bath (150 kg of water) has vastly more particles. Cooling to 20 °C, using $Q = mc\Delta T$: the spark gives out $1.0 \times 10^{-6} \times 450 \times 1480 \approx 0.7$ J, and the bath $150 \times 4200 \times 20 = 1.3 \times 10^7$ J, about twenty million times as much.</li>
+        <li>The <strong>internal energy</strong> of an object is the total random kinetic energy and intermolecular potential energy of all its particles, so it depends on how many particles there are, not just on how fast they move.</li>
+        <li>The walls are cooled. Gas particles that hit them bounce off slower, so the average kinetic energy and the temperature fall, and the thermometer follows.</li>
+        <li><strong>Absolute zero</strong>, 0 K, is the lowest temperature there can be: the particles would have the least energy possible. The kelvin scale starts there: $T/\text{K} = \theta/^\circ\text{C} + 273$, so $0\ \text{K} = -273\ ^\circ\text{C}$. A change of 1 K is the same as a change of 1 °C.</li>
+      </ol>
+      <p>How it is modelled: every collision is calculated, step by step, from a fixed starting arrangement, so the animation is the same every time. The hot plate and the cooled walls send particles back with the speeds they would have at the plate's or the walls' temperature. The yellow flashes mark gas particles hitting the thermometer; the energy exchange is averaged over these collisions, so the thermometer warms at a rate proportional to the temperature difference, and the energy it gains is taken from the gas, so energy is conserved. At equilibrium the hits carry on, but with no net transfer of energy. Real gases other than helium would condense into liquids long before they reached 15 K; the model gas does not. For the spark, $c$ for iron (450 $\text{J kg}^{-1}\ \text{K}^{-1}$) is treated as constant; iron's real specific heat capacity is larger at high temperatures, so a real spark like this would give out roughly 1 J, still about ten million times less than the bath.</p>
+      <p>Read more in <a href="../themes/b1.html#temperature">B.1 section 3: temperature and the Kelvin scale</a>, <a href="../themes/b1.html#internal">section 4: internal energy and thermal equilibrium</a>, <a href="../themes/b1.html#shc">section 5: specific heat capacity</a>, <a href="../themes/b3.html#kinetic">B.3 section 3: the kinetic model of an ideal gas</a> and <a href="../themes/b3.html#energy">section 7: temperature, speed and internal energy</a>. The animation <a href="gas-pressure.html">Where gas pressure comes from</a> uses the same kind of model gas.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

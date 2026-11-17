@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: what if you jumped on other planets? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics A.1 and D.1: the same 3.0 m/s jump on the Moon, Mars, the Earth and Jupiter, with heights and times in the air from the equations of motion and g = GM/r², and (HL) a jump faster than an asteroid's escape speed.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/jump-planets.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: what if you jumped on other planets? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics A.1 and D.1: the same 3.0 m/s jump on the Moon, Mars, the Earth and Jupiter, with heights and times in the air from the equations of motion and g = GM/r², and (HL) a jump faster than an asteroid's escape speed.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/jump-planets.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/jumps.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Jumping on other worlds</p>
+    <h1>What would happen if you jumped on other planets?</h1>
+    <p class="lead">The same jump, with the same legs, on the Moon, Mars, the Earth and Jupiter, side by side and in real time. How high you go and how long you stay in the air both depend on the gravitational field strength $g$, and the equations of motion work them out exactly. Then, for HL, a world so small that one jump would carry you away for ever. <a class="tag" href="../themes/a1.html#suvat">A.1 Equations of motion</a> <a class="tag" href="../themes/d1.html#strength">D.1 Gravitational field strength</a></p>
+
+    <figure class="anim-stage" data-anim="jumps">
+      <canvas role="img" aria-label="Animation of four figures jumping straight up at the same time on the Moon, Mars, the Earth and Jupiter, drawn side by side against a shared height scale in metres, with each world's field strength, a dashed line at each jump's highest point and a timer for the time in the air. Then, for HL, a figure jumps off the asteroid Bennu and keeps rising, with readouts of height, speed and escape speed. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p><strong>The assumptions:</strong> you leave the ground at $u = 3.0$ $\text{m s}^{-1}$ straight up on every world (the same legs, so the same take-off speed; on a real low-gravity world you would also have to push off differently, so this is a simplification). Once your feet leave the ground, the only force on you is gravity: there is no air resistance, and each world's spin is ignored. The figures and their heights are drawn to the same scale, and the jumps play in real time.</p>
+      <ol>
+        <li>Four figures stand on the Moon, Mars, the Earth and Jupiter.</li>
+        <li><strong>Predict:</strong> on which world do you jump highest, and how many times higher than on the Earth?</li>
+        <li>All four jump together, every 5.0 s. Once in the air, the only force is your weight, so you slow down at a constant rate $g$, stop for an instant at the top, and speed up on the way down. The blue arrows show your velocity.</li>
+        <li>Each world has its own field strength, $g = \dfrac{GM}{r^2}$ (D.1). With $G = 6.67 \times 10^{-11}$ $\text{N m}^2\,\text{kg}^{-2}$: the Moon ($M = 7.35 \times 10^{22}$ kg, $r = 1.74 \times 10^{6}$ m) has $g = 1.62$ $\text{m s}^{-2}$; Mars ($6.42 \times 10^{23}$ kg, $3.39 \times 10^{6}$ m) has $3.73$ $\text{m s}^{-2}$; for the Earth the calculation gives 9.81, and we use the data booklet's $9.8$ $\text{m s}^{-2}$; Jupiter ($1.90 \times 10^{27}$ kg, $7.15 \times 10^{7}$ m at its equator) has $24.8$ $\text{m s}^{-2}$ at its cloud tops. Jupiter has no solid surface, so imagine standing on a platform there.</li>
+        <li>At the top, $v = 0$. With $a = -g$, $v^2 = u^2 + 2as$ gives $0 = u^2 - 2gs$, so the height is $s = \dfrac{u^2}{2g}$ (A.1).</li>
+        <li>On the Earth, $s = \dfrac{3.0^2}{2 \times 9.8} = 0.46$ m. On the Moon, $s = \dfrac{3.0^2}{2 \times 1.62} = 2.8$ m: about six times higher, because $g$ is about six times smaller ($9.8 \div 1.62 = 6.05$). On Mars, $1.2$ m; on Jupiter, only $0.18$ m. A dashed line marks each highest point.</li>
+        <li>Energy gives the same answer (A.3): the kinetic energy at take-off becomes gravitational potential energy at the top, $\frac{1}{2}mu^2 = mgh$, so $h = \dfrac{u^2}{2g}$. Your mass cancels.</li>
+        <li>Time in the air: you land at $3.0$ $\text{m s}^{-1}$ downwards, so $v = u + at$ gives $-u = u - gt$ and $t = \dfrac{2u}{g}$. That is $0.61$ s on the Earth, $3.7$ s on the Moon, $1.6$ s on Mars and $0.24$ s on Jupiter, shown by the timers.</li>
+        <li>With the same take-off speed, the height and the time in the air are both inversely proportional to $g$.</li>
+        <li><span class="tag hl">HL</span> Now a tiny world: the asteroid Bennu, about 490 m across, which NASA's OSIRIS-REx spacecraft visited. Treated as a sphere ($M = 7.33 \times 10^{10}$ kg, $r = 245$ m), its surface field is $g = \dfrac{6.67 \times 10^{-11} \times 7.33 \times 10^{10}}{245^2} = 8.1 \times 10^{-5}$ $\text{m s}^{-2}$.</li>
+        <li><span class="tag hl">HL</span> Its escape speed is $v_{esc} = \sqrt{\dfrac{2GM}{r}} = \sqrt{\dfrac{2 \times 6.67 \times 10^{-11} \times 7.33 \times 10^{10}}{245}} = 0.20$ $\text{m s}^{-1}$. Your $3.0$ $\text{m s}^{-1}$ jump is 15 times faster, so you never come back down.</li>
+        <li><span class="tag hl">HL</span> Here $g$ gets weaker as you rise, so $s = \dfrac{u^2}{2g}$ no longer applies (it would give 55 km). By energy, far away you would still be moving at $\sqrt{u^2 - v_{esc}^2} = \sqrt{3.0^2 - 0.20^2} = 2.99$ $\text{m s}^{-1}$. The readouts show your height and speed, worked out step by step from the changing field.</li>
+      </ol>
+      <p>The jumps on the four worlds are calculated from $y = ut - \frac{1}{2}gt^2$, which assumes $g$ is constant: true to far better than 1% over a few metres on these worlds. On Bennu the jump is calculated from Newton's law of gravitation at every step. Bennu is really shaped like a spinning top, and it spins once every 4.3 hours: at its equator the spin cancels about half of $g$ ($\omega^2 r \approx 4.0 \times 10^{-5}$ $\text{m s}^{-2}$), so picture yourself at one of its poles. The calculation treats Bennu as a non-spinning sphere.</p>
+      <p>Read more in <a href="../themes/a1.html#suvat">A.1 section 5: equations of motion for uniform acceleration</a>, <a href="../themes/a1.html#freefall">section 6: free fall</a>, <a href="../themes/a3.html#mechanical">A.3 section 5: conservation of mechanical energy</a>, <a href="../themes/d1.html#strength">D.1 section 2: gravitational field strength</a> and, for HL, <a href="../themes/d1.html#escape">section 11: escape speed</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

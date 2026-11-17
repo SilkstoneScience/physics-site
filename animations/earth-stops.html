@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: what if the Earth stopped spinning? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics A.2: if the solid Earth suddenly stopped turning, everything loose on it would carry on east at up to 465 m/s. Inertia, friction, circular motion, and a day that lasts a year.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/earth-stops.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: what if the Earth stopped spinning? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics A.2: if the solid Earth suddenly stopped turning, everything loose on it would carry on east at up to 465 m/s. Inertia, friction, circular motion, and a day that lasts a year.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/earth-stops.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/earthstop.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › If the Earth stopped spinning</p>
+    <h1>What would happen if the Earth stopped spinning?</h1>
+    <p class="lead">A thought experiment: the solid Earth suddenly stops turning, but nothing loose on it does. The air, the sea and anything resting on the ground carry on east at the speed they had, up to 465 m/s at the equator: inertia. Afterwards, a day would last a whole year. <a class="tag" href="../themes/a2.html#first">A.2 Newton's first law</a> <a class="tag" href="../themes/a2.html#circular">A.2 Circular motion</a></p>
+
+    <figure class="anim-stage" data-anim="earthstop">
+      <canvas role="img" aria-label="Animation of the Earth seen from above the North Pole, turning, with arrows showing the speeds of points at the equator, 30 degrees and 60 degrees. A side view at the equator shows a house, a crate and a cloud moving together. The Earth stops: the ground's arrows vanish but the air keeps moving and the crate slides away, then a meter shows it sliding 22 kilometres before friction stops it. Finally the Earth goes round the Sun without turning, so a place has day for half a year, and a free-body diagram compares a person's scale reading before and after. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p><strong>The assumptions:</strong> this is a thought experiment, since nothing could really stop the Earth: the forces needed would be enormous. Only the solid Earth stops; everything loose keeps its velocity. Speeds are measured from space, relative to the Earth's axis, and the Earth's radius is $R = 6.37 \times 10^6$ m. The playback speed changes, and it is always shown on screen: one turn every 12 s at first (about 7200 times faster than real life), then 100 times <em>slower</em> than real life around the moment the Earth stops, 5 times faster while the crate slides, then a year every 24 s. The crate and the house are drawn bigger than to scale.</p>
+      <ol>
+        <li>Seen from above the North Pole, the Earth turns anticlockwise, once every 23 h 56 min relative to the stars. (A day from noon to noon is 4 minutes longer, because the Earth also moves round the Sun.)</li>
+        <li>Everything on it moves in a circle. At the equator, $v = \dfrac{2\pi R}{T} = \dfrac{2\pi \times 6.37 \times 10^6}{86\,164} = 465\ \text{m s}^{-1}$.</li>
+        <li>Nearer the poles the circle is smaller, with radius $R\cos(\text{latitude})$, so the speed is less: $465 \cos 30° = 402\ \text{m s}^{-1}$ at latitude 30°, $232\ \text{m s}^{-1}$ at 60°, and zero at the poles. (At London's latitude, 51.5°, it is about $290\ \text{m s}^{-1}$.)</li>
+        <li>You don't notice this speed, because the ground, the air and you all move together. In the side view at the equator, the house, the crate and the cloud have the same velocity (the blue arrows).</li>
+        <li><strong>Predict:</strong> suppose the solid Earth suddenly stopped turning, but nothing loose on it did. What would happen to the air, the sea, and a crate resting on the ground at the equator?</li>
+        <li>The ground stops, but everything loose carries on east at the speed it had: Newton's first law. At the equator that is $465\ \text{m s}^{-1}$, faster than sound in air (about $340\ \text{m s}^{-1}$), so the air becomes a wind far stronger than any hurricane.</li>
+        <li>Gravity still holds things down: staying in orbit just above the surface would need $\sqrt{gR} = 7.9\ \text{km s}^{-1}$ (D.1). So the crate slides along the ground.</li>
+        <li>Leave out the air for a moment (in reality the wind, still moving at hundreds of metres per second, would push the crate along with a force far bigger than friction). With a coefficient of dynamic friction $\mu_d = 0.50$, the friction force alone is $\mu_d mg$, so the crate decelerates at $a = \mu_d g = 4.9\ \text{m s}^{-2}$. It takes $\dfrac{v}{a} = \dfrac{465}{4.9} = 95$ s to stop, and slides $\dfrac{v^2}{2a} = \dfrac{465^2}{9.8} = 2.2 \times 10^4$ m: 22 km.</li>
+        <li>The air and the oceans would rush east too, slowing down only gradually.</li>
+        <li>Now the Earth no longer turns, but it still goes round the Sun once a year. Each place faces the Sun for half a year and away from it for half a year: one day lasts a year.</li>
+        <li>The Sun would also cross the sky the opposite way from today, rising in the west and setting in the east. Today the Earth turns the same way as it goes round the Sun, and much faster, so the Sun seems to move from east to west. Without the spin, only the slow yearly turn of the Sun's direction is left, and that goes the other way.</li>
+        <li>Once everything has come to rest, your scale reading at the equator would be slightly higher than before. While the Earth turns, the resultant force on you must provide the centripetal force $m\omega^2 R$, where $\omega = \dfrac{2\pi}{T} = 7.29 \times 10^{-5}$ $\text{rad s}^{-1}$ and $\omega^2 R = 0.034\ \text{m s}^{-2}$. So the normal force is $m(g - \omega^2 R)$: 586 N for a 60 kg person, rather than $mg = 588$ N. Once the Earth stops, no centripetal force is needed and the reading is 588 N, 0.35% more.</li>
+      </ol>
+      <p>Here $g = 9.8\ \text{N kg}^{-1}$ is taken as the gravitational field strength at the equator. The Earth's shape would also change slowly over time, since its spin makes it bulge at the equator; the animation leaves this out.</p>
+      <p>Read more in <a href="../themes/a2.html#first">A.2 section 2: Newton's first law</a>, <a href="../themes/a2.html#contact">section 4: contact forces (friction)</a>, <a href="../themes/a2.html#circular">section 9: circular motion</a> and <a href="../themes/a1.html#suvat">A.1 section 5: the equations of motion</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

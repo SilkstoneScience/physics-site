@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: what is voltage? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics B.5: a series circuit with a cell, a lamp and a resistor. Potential difference as energy transferred per unit charge, emf, the same current all round the loop, a graph of potential and P = IV.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/voltage.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: what is voltage? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics B.5: a series circuit with a cell, a lamp and a resistor. Potential difference as energy transferred per unit charge, emf, the same current all round the loop, a graph of potential and P = IV.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/voltage.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/voltage.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › What is voltage?</p>
+    <h1>What is voltage?</h1>
+    <p class="lead">"Voltage" is the everyday word for potential difference. It isn't something that flows, and nothing is used up: it is the energy transferred for every coulomb of charge that passes. Watch a series circuit with a cell, a lamp and a resistor, measured with ammeters and voltmeters, and see the potential round the circuit as a graph. <a class="tag" href="../themes/b5.html#pd">B.5 Potential difference</a> <a class="tag" href="../themes/b5.html#emf">B.5 Cells and emf</a></p>
+
+    <figure class="anim-stage" data-anim="voltage">
+      <canvas role="img" aria-label="Animation of a series circuit: a cell, a lamp, a resistor and a switch, with positive charges moving all round the loop once the switch is closed. Two ammeters read 0.50 amps, voltmeters across the lamp, the resistor and the cell read 4.0, 2.0 and 6.0 volts, and a graph below shows the potential rising by 6.0 volts in the cell and falling by 4.0 volts in the lamp and 2.0 volts in the resistor. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The circuit: an ideal cell with emf $\varepsilon = 6.0$ V (its internal resistance is taken as negligible), a lamp of resistance 8.0 Ω and a resistor of 4.0 Ω in series, a switch and two ammeters. The pink dots are positive charges: the conventional current. Their motion is speeded up enormously.</p>
+      <ol>
+        <li>With the switch open there is no current. The charges are already there, all round the wires.</li>
+        <li>The switch is closed. Charges all round the circuit start moving at once, and the lamp lights straight away.</li>
+        <li>We follow positive charge, the conventional current. In metal wires it is really free electrons that move, drifting the other way.</li>
+        <li>The two ammeters read the same: $I = \dfrac{\varepsilon}{R} = \dfrac{6.0}{8.0 + 4.0} = 0.50$ A. Each second, 0.50 C of charge passes every point in the loop.</li>
+        <li><strong>Predict:</strong> is any of the charge used up in the lamp?</li>
+        <li>No. Every coulomb that goes into the lamp comes out again and carries on round the circuit. What the lamp takes is energy, not charge.</li>
+        <li><strong>Voltage, or potential difference</strong> (p.d.), is the energy transferred per unit charge between two points: $V = \dfrac{W}{q}$. So 1 V = 1 $\text{J C}^{-1}$. A voltmeter is connected in parallel: across a component, to the two points either side of it.</li>
+        <li>Across the lamp the voltmeter reads 4.0 V: each coulomb passing through transfers 4.0 J to the lamp, as light and thermal energy. Across the resistor it reads 2.0 V: each coulomb transfers 2.0 J, heating it.</li>
+        <li>Across this ideal cell it reads 6.0 V, its <strong>emf</strong> (a real cell's terminal p.d. equals its emf only when no current flows; here its internal resistance is taken as negligible): the cell does 6.0 J of work on each coulomb, converting chemical energy into electrical energy.</li>
+        <li>The graph shows the potential round the circuit, taking the cell's negative terminal as 0 V: it rises by 6.0 V in the cell, falls by 4.0 V in the lamp and by 2.0 V in the resistor, and hardly changes along the connecting wires. The yellow dot follows one charge round. It is a graph of potential, not a real hill.</li>
+        <li>Energy is conserved: $6.0\ \text{J} = 4.0\ \text{J} + 2.0\ \text{J}$ for every coulomb. So in a series circuit the p.d.s add up to the emf: $\varepsilon = V_1 + V_2$.</li>
+        <li>Each second 0.50 C passes through the lamp, so it transfers $0.50 \times 4.0 = 2.0$ J every second: $P = IV = 2.0$ W. (The resistor transfers 1.0 W, and the cell supplies $\varepsilon I = 3.0$ W.)</li>
+        <li>Each charge drifts slowly: much less than a millimetre a second. (Beyond the syllabus: in a copper wire 0.50 mm² across carrying 0.50 A, about 0.07 mm s⁻¹.) Yet the lamp lights at once, because the energy reaches it through the electromagnetic field, which is set up all round the circuit almost instantly (also beyond the syllabus). All the dots move at the same speed here; in the thin lamp filament the real drift is faster, because the same current flows through a smaller cross-section.</li>
+        <li>Remember: current flows <em>through</em> a component; potential difference is <em>across</em> it, between two points.</li>
+      </ol>
+      <p>The B.5 notes describe charge carrying energy from the cell to the components, which is the picture used for the sums. Beyond the syllabus: the energy is actually transferred by the electromagnetic field around the circuit; the charges are not used up. See also the animation <a href="inside-a-wire.html">Inside a wire</a>, which shows the slow drift of the electrons and why the lamp still lights at once.</p>
+      <p>Read more in <a href="../themes/b5.html#current">B.5 section 2: electric current</a>, <a href="../themes/b5.html#pd">section 3: potential difference</a>, <a href="../themes/b5.html#symbols">section 4: circuit diagrams and meters</a>, <a href="../themes/b5.html#power">section 7: electrical power</a>, <a href="../themes/b5.html#combos">section 8: series and parallel circuits</a> and <a href="../themes/b5.html#emf">section 10: cells and emf</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

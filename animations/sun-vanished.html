@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: what if the Sun vanished? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics A.2 and D.1: if the Sun suddenly vanished, the Earth would carry on orbiting for 8 minutes 20 seconds, then move off in a straight line at about 30 km/s.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/sun-vanished.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: what if the Sun vanished? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics A.2 and D.1: if the Sun suddenly vanished, the Earth would carry on orbiting for 8 minutes 20 seconds, then move off in a straight line at about 30 km/s.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/sun-vanished.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/sunvanish.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › If the Sun vanished</p>
+    <h1>What would happen if the Sun vanished?</h1>
+    <p class="lead">A thought experiment: the Sun suddenly disappears. For 8 minutes 20 seconds nothing at all changes on Earth: we still see the Sun and the Earth still follows its orbit. Then the sky goes dark, and at the same moment the Earth sets off in a straight line at about 30 km/s. <a class="tag" href="../themes/a2.html#circular">A.2 Circular motion</a> <a class="tag" href="../themes/d1.html#orbits">D.1 Circular orbits</a></p>
+
+    <figure class="anim-stage" data-anim="sunvanish">
+      <canvas role="img" aria-label="Animation of the planets orbiting the Sun, seen from above. The Sun vanishes, and a yellow ring spreads out from where it was at the speed of light. Each planet keeps orbiting until the ring reaches it, then moves off in a straight line along the tangent to its orbit. An inset shows the sky seen from Earth, which stays bright until the ring arrives. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p><strong>The assumptions:</strong> this is a thought experiment, since the Sun can't really vanish (its mass and energy can't simply disappear). The orbits are treated as circles, and the planets' pulls on each other are left out. The Sun, the planets and the Moon's distance from the Earth are drawn far bigger than to scale. The playback speed changes, and it is always shown on screen: a year every 30 s while the orbits are explained, 20 times faster than real life while the news of the Sun's disappearance travels to the Earth, about 650 times faster while it crosses the outer Solar System, then a year every 30 s again.</p>
+      <ol>
+        <li>The Earth goes round the Sun once a year, in an orbit that is very nearly a circle of radius $r = 1.50 \times 10^{11}$ m (1 au).</li>
+        <li>Its speed is $v = \dfrac{2\pi r}{T} = \dfrac{2\pi \times 1.50 \times 10^{11}}{3.16 \times 10^{7}} = 2.98 \times 10^4\ \text{m s}^{-1}$: about 30 km every second, in the direction of the tangent to the orbit (the blue arrow).</li>
+        <li>The Sun's gravitational pull (the orange arrow) provides the centripetal force, always towards the centre of the circle. You can check this with D.1: $\dfrac{GM}{r^2} = \dfrac{6.67 \times 10^{-11} \times 1.99 \times 10^{30}}{(1.50 \times 10^{11})^2} = 5.9 \times 10^{-3}$ $\text{N kg}^{-1}$, and $\dfrac{v^2}{r} = 5.9 \times 10^{-3}$ $\text{m s}^{-2}$ too.</li>
+        <li><strong>Predict:</strong> suppose the Sun suddenly vanished. What would happen to the Earth, and how soon would we notice?</li>
+        <li>The Sun is gone, but on Earth nothing changes yet: we still see the Sun, its pull still acts on the Earth, and the Earth still follows its orbit. The yellow ring is the news that the Sun has gone, spreading outwards at the speed of light, $c$: its last light, and the change in its gravity.</li>
+        <li>Changes in gravity also travel at $c$. This is beyond the syllabus: Einstein's general relativity predicts it, and in 2017 gravitational waves and gamma rays (a form of light) from two colliding neutron stars, about 130 million light-years away, arrived within two seconds of each other.</li>
+        <li>The news reaches the Earth after $\dfrac{r}{c} = \dfrac{1.50 \times 10^{11}}{3.00 \times 10^{8}} = 500$ s: 8 minutes 20 seconds. Only then does the Sun disappear from our sky (the inset), and at the same moment its pull is gone.</li>
+        <li>The planets further out keep orbiting for longer: Mars for 13 minutes, Jupiter (5.2 au) for $5.2 \times 500 = 2600$ s, about 43 minutes, and Neptune (30.1 au) for about 15 000 s, a little over 4 hours. Mercury lost the Sun after only 3 minutes.</li>
+        <li>Speeded up to a year every 30 s again, each planet now moves at a constant speed in a straight line. With no resultant force there is no acceleration: Newton's first law. A flash marks the moment the news reaches each planet. The Moon goes with the Earth, because the Earth's gravity still holds it: the Earth and the Moon keep orbiting each other, and their centre of mass (just inside the Earth) moves in a straight line.</li>
+        <li>Each planet sets off along the tangent to its old orbit, in the direction it was moving at the moment the pull vanished, at its orbital speed: about 30 km/s for the Earth, 48 km/s for Mercury and 13 km/s for Jupiter.</li>
+      </ol>
+      <p>The planets' speeds come from Kepler's third law for circular orbits ($T^2 \propto r^3$, so $T$ in years is $r^{1.5}$ with $r$ in au) and $v = \dfrac{2\pi r}{T}$. Without sunlight the Earth would slowly cool, and the planets would no longer shine in our sky, since they only reflect sunlight; the animation leaves these out.</p>
+      <p>Read more in <a href="../themes/a2.html#first">A.2 section 2: Newton's first law</a>, <a href="../themes/a2.html#circular">section 9: circular motion</a>, <a href="../themes/d1.html#orbits">D.1 section 5: circular orbits</a> and <a href="../themes/d1.html#kepler">section 6: Kepler's three laws</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

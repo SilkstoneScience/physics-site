@@ -115,10 +115,31 @@ From the idea lists (teacher: "make the next ones", 16 November 2026; the four f
   uniform Earth, SHM, T ≈ 84 min; a surface-skimming satellite in step; the shell result labelled beyond the syllabus)
 - [x] How do the Northern Lights work? `northern-lights.html` (hub section "How does… work?"; dipole field, helix r = mv/qB,
   oxygen 557.7 and 630.0 nm, N₂⁺ 427.8 nm)
-- Still on the idea lists (not built): What is temperature / voltage / light / a field / sound / colour / a black hole; powers of
-  ten for time; where your atoms came from; why everything falls at the same rate; entropy and the arrow of time; E = mc² and the
-  Sun; what if the Sun vanished / no greenhouse gases / a neutron star / jumping on other planets / light at 30 km/h; how does a
-  microwave oven / rainbow / optical fibre / motor or loudspeaker / fridge / GPS / phone accelerometer work.
+
+Ten more (teacher chose them from a plan of options, 17 November 2026: "Build these 10"; no pauses; each pair independently reviewed):
+- [x] What is temperature? `temperature.html` (a seeded 2D gas; Eₖ = (3/2)k_B T, 6.21 × 10⁻²¹ J at 300 K; a thermometer reaching
+  thermal equilibrium at 600 K; a spark (about 0.7 J) against a bath (1.26 × 10⁷ J); absolute zero). Linked from B.1 `#temperature`.
+- [x] What is voltage? `voltage.html` (6.0 V cell, 8.0 Ω lamp and 4.0 Ω resistor, 0.50 A, 4.0 V and 2.0 V; J per C; a graph of
+  potential round the circuit, labelled a graph; energy carried by the field labelled beyond the syllabus). Linked from B.5 `#pd`.
+- [x] What is gravity, really? `what-is-gravity.html` (partner of the big question BQ-18; beyond the course after D.1: falling alike,
+  free fall as no force, meridians meeting at the pole, slower clocks lower down (exaggerated), GPS 38.5 μs a day). Linked from D.1 `#weightless`.
+- [x] What is a black hole? `black-hole.html` (escape speed (HL) as the Sun is squeezed: 618 km/s, then c at 2.95 km; the Earth
+  would have a radius of 8.9 mm; formation; light bending exaggerated; M87 128 au). Linked from D.1 `#escape` (HL).
+- [x] What if the Sun vanished? `sun-vanished.html` (29.8 km/s orbit; nothing changes for 500 s (1 au = 1.50 × 10¹¹ m), then the
+  tangent; outer planets later, Neptune after about 4 h 11 min; speed of gravity and GW170817 labelled beyond the syllabus). Linked from A.2 `#circular`.
+- [x] What if the Earth stopped spinning? `earth-stops.html` (465 m/s at the equator, 465 cos φ elsewhere; a crate slowed by friction,
+  air left out and said so; a day lasts a year; ω²R = 0.034 m s⁻²). Linked from A.2 `#first`.
+- [x] What if you jumped on other planets? `jump-planets.html` (3.0 m/s on the Moon, Mars, the Earth and Jupiter: 2.78, 1.21, 0.46
+  and 0.18 m; (HL) the asteroid Bennu, escape speed 0.20 m/s). Linked from D.1 `#strength`.
+- [x] How does GPS work? `gps.html` (20 200 km, 67 ms; three distance circles, why a fourth satellite; 1 μs = 300 m; (HL) time
+  dilation −7.2 μs a day and, beyond the course, +45.7 from height). Linked from C.2 `#em`.
+- [x] How does a microwave oven work? `microwave.html` (2.45 GHz, λ = 12.2 cm; standing waves, hot spots 6.1 cm apart; c from
+  melted chocolate; not a resonance of water; the door mesh). Linked from C.4 `#nodes`.
+- [x] How does a rainbow work? `rainbow.html` (rays traced with Snell's law; partial, not total, internal reflection; 42.4° red,
+  40.6° violet; secondary bow 50.4°–53.5°, colours reversed; dispersion labelled beyond the syllabus). Linked from C.3 `#refraction`.
+- Still on the idea lists (not built): What is light / a field / sound / colour; powers of ten for time; where your atoms came
+  from; why everything falls at the same rate; entropy and the arrow of time; E = mc² and the Sun; what if a neutron star / light
+  at 30 km/h; how does an optical fibre / motor or loudspeaker / fridge / phone accelerometer work.
 
 Theme C (built 16 November 2026; waiting for the teacher's check)
 - [x] C.1 Simple harmonic motion: `shm.html` (glider between two springs, m = 0.50 kg, k = 4.9 N m⁻¹, T = 2.0 s; live x–t, v–t, a–t

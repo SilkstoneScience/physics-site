@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: how does a microwave oven work? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics C.2, C.4 and B.1: microwaves of wavelength 12.2 cm form standing waves in a metal box, with hot spots 6.1 cm apart, and twist polar water molecules to raise the internal energy.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/microwave.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: how does a microwave oven work? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics C.2, C.4 and B.1: microwaves of wavelength 12.2 cm form standing waves in a metal box, with hot spots 6.1 cm apart, and twist polar water molecules to raise the internal energy.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/microwave.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/microwave.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › How does a microwave oven work?</p>
+    <h1>How does a microwave oven work?</h1>
+    <p class="lead">Microwaves bounce around inside a metal box and form standing waves, with hot spots at the antinodes. The oscillating electric field twists water molecules back and forth, and the food's internal energy rises. Melted chocolate can even measure the speed of light. <a class="tag" href="../themes/c4.html#formation">C.4 Standing waves</a> <a class="tag" href="../themes/c2.html#em">C.2 Electromagnetic waves</a> <a class="tag" href="../themes/b1.html#internal">B.1 Internal energy</a></p>
+
+    <figure class="anim-stage" data-anim="microwave">
+      <canvas role="img" aria-label="Animation: a cut-away microwave oven with its magnetron, waveguide, metal walls, turntable and mesh door. Then a wave crosses a metal box drawn to scale, reflects and forms a standing wave, with nodes at the walls and antinodes 6.1 centimetres apart where the heating is greatest. A bar of chocolate melts in spots at the antinodes, which are measured to find the speed of light. Water molecules twist back and forth in the oscillating electric field as a thermometer rises. Seen from above, food that stays still heats in patches while food on a turntable heats more evenly. Finally the door's metal mesh reflects the microwaves but lets light through. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The speed of light from the data booklet, $c = 3.00 \times 10^8\ \text{m s}^{-1}$, and the specific heat capacity of water used in the notes, $4200\ \text{J kg}^{-1}\,\text{K}^{-1}$.</p>
+      <ol>
+        <li>A microwave oven is a metal box. A <strong>magnetron</strong> makes the microwaves (how it works is beyond the course), and a metal tube called a <strong>waveguide</strong> carries them into the box. The door is glass with a metal mesh in it, and the food sits on a turntable.</li>
+        <li>Microwaves are electromagnetic waves, like light and radio waves. Their wavelengths are roughly $10^{-3}$ to $10^{-1}$ m.</li>
+        <li>An oven uses a frequency of $f = 2.45$ GHz, so
+          $$\lambda = \frac{c}{f} = \frac{3.00 \times 10^8}{2.45 \times 10^9}$$
+          which is 0.122 m, about 12 cm.</li>
+        <li>Simplified: the animation follows the wave in one direction only, across a box 30.6 cm wide (exactly five half-wavelengths), drawn to scale. One oscillation really takes $1 \div (2.45 \times 10^9) = 4.08 \times 10^{-10}$ s; on screen it takes 1.6 s, so the wave is slowed down about $4 \times 10^9$ times.</li>
+        <li>The metal wall reflects the wave. The reflected wave superposes with the wave arriving, and together they form a <strong>standing wave</strong>.</li>
+        <li>At a metal wall the electric field (along the wall) is always zero, like the fixed end of a string, so there is a <strong>node</strong> at each wall. (At first the left end is where the microwaves come in from the waveguide; it acts as a wall once the reflected wave has come back.)</li>
+        <li>Between the nodes are <strong>antinodes</strong>, where the field oscillates most strongly. Neighbouring antinodes are half a wavelength apart: $12.2 \div 2 = 6.1$ cm.</li>
+        <li>Food heats fastest at the antinodes: the <strong>hot spots</strong>. At the nodes it hardly heats at all.</li>
+        <li><strong>Predict:</strong> take out the turntable and heat a bar of chocolate for 20 seconds. Where will it melt?</li>
+        <li>It melts in spots at the antinodes, 6.1 cm apart, while the chocolate between them stays solid.</li>
+        <li>So you can measure the speed of light. The spots are half a wavelength apart, so $c = f\lambda = 2 \times \text{spacing} \times f$. The frequency is printed on a label on the oven.</li>
+        <li>Measuring across four gaps is more precise than measuring one: the spots span 24.5 cm, so the spacing is $24.5 \div 4 = 6.12$ cm and
+          $$c = 2 \times 0.0612 \times 2.45 \times 10^9$$
+          which is $3.0 \times 10^8\ \text{m s}^{-1}$. This is exact only in the simple one-direction model: in a real oven, where the pattern is 3D, the answer usually comes out within about 10% of the true value.</li>
+        <li>Why does the food get hot? A water molecule is <strong>polar</strong>: its oxygen end is slightly negative ($\delta-$) and its hydrogen end slightly positive ($\delta+$).</li>
+        <li>The electric field pushes the two ends in opposite directions, so it turns the molecule. The field oscillates $2.45 \times 10^9$ times a second, twisting the molecules back and forth.</li>
+        <li>The twisting molecules jostle their neighbours, so the random motion of the particles increases: the internal energy, and so the temperature, rise.</li>
+        <li>A common myth: the oven is <em>not</em> tuned to a natural frequency of water, and this is not resonance. Water absorbs microwaves over a wide range of frequencies.</li>
+        <li>2.45 GHz is a frequency set aside for ovens (and Wi-Fi). It reaches a centimetre or two into food, and the middle heats up by conduction (beyond the course: higher frequencies would be absorbed in a thinner layer at the surface).</li>
+        <li>In a real oven the standing waves form a 3D pattern of hot spots. The animation shows a simplified pattern seen from above.</li>
+        <li>Food that stays still heats in patches. A turntable, turning about once every 10 s, carries most of the food through hot and cool places (the very centre stays in one place), so it heats more evenly.</li>
+        <li>An energy check: 800 W for 60 s gives $Q = 800 \times 60 = 48\,000$ J. Into 250 g of water,
+          $$\Delta T = \frac{Q}{mc} = \frac{48\,000}{0.25 \times 4200}$$
+          which is 46 K at most. In practice it is a little less, because not all of the energy ends up in the water.</li>
+        <li>The door's metal mesh has holes about 2 mm across, far smaller than the 12 cm wavelength.</li>
+        <li>So the mesh reflects the microwaves like a solid metal wall. Light, with a wavelength under a micrometre, passes through the holes, so you can watch your food.</li>
+      </ol>
+      <p>How it is drawn: the standing wave is the exact sum of the wave arriving and the wave reflected (inverted) at the far wall, $-2A\cos\omega t\,\sin kx$, so the nodes and antinodes are where the formula puts them; the heating is proportional to the square of the field, averaged over time. The chocolate is drawn melting where the heating is within 75% of its peak, which gives spots about 2 cm wide. The pattern seen from above is a simplified product of two standing waves, and the food's heating on the turntable is added up point by point as it turns. Simplified: a real oven is a 3D box whose pattern depends on its exact size and on the food inside it; many ovens also have a "stirrer" fan that moves the pattern around. The molecules are drawn enlarged and their motion slowed down, and how they twist in a liquid is shown only schematically.</p>
+      <p>Read more in <a href="../themes/c2.html#em">C.2 section 6: electromagnetic waves</a>, <a href="../themes/c4.html#formation">C.4 section 1: how standing waves form</a>, <a href="../themes/c4.html#nodes">section 2: nodes, antinodes, amplitude and phase</a>, <a href="../themes/b1.html#internal">B.1 section 4: internal energy and thermal equilibrium</a> and <a href="../themes/b1.html#shc">section 5: specific heat capacity</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
