@@ -90,17 +90,44 @@
     [33.6, 38.0, 'These curves join events with the same space–time interval. They mark 1 m, 2 m, 3 m… of ct in every frame.'],
     [38.2, 42.8, 'At this event the rocket\'s clock reads ct′ = 2 m, but the ground\'s clocks read ct = 2.5 m. Measured from the ground, the moving clock runs slow: time dilation.'],
   ];
-  const DURATION = 48;
+  // No pauses (teacher, 17 November 2026): the animation plays at one constant speed. Two clocks:
+  // the story clock (captions, drawing the diagram) waits at these moments so each caption can be read, while the
+  // real clock keeps light pulses and "now" dots moving along the world lines at a constant rate.
+  const WAITS = [[8.4, 3.9], [12.7, 2.5], [18.1, 3], [23.9, 4.8], [27.9, 2.5], [32.5, 3], [37.1, 3], [41.9, 5.0], [46.4, 3]];
+  const STORY = 48, DURATION = STORY + WAITS.reduce((n, w) => n + w[1], 0);       // 78.7 s
+  const story = (t) => {                     // real time → story time
+    let acc = 0;
+    for (const [st, d] of WAITS) { if (t < st + acc) return t - acc; if (t < st + acc + d) return st; acc += d; }
+    return Math.min(t - acc, STORY);
+  };
+  const realOf = (st) => st + WAITS.filter((w) => w[0] < st).reduce((n, w) => n + w[1], 0);
+  // moving dots: every 6.5 s a light pulse and the "now" points of the clocks leave the origin together,
+  // rising 1 m of ct each second (light at 45°, the rocket 0.60 m across for each 1 m up)
+  const RISE = 1.0, CYCLE = 6.5;
+  function moving(s, t, tr, on) {
+    const ct = ((tr * RISE) % CYCLE), fadeIn = smooth(ct / 0.4) * (1 - smooth((ct - CTMAX + 0.4) / 0.4));
+    if (ct > CTMAX || fadeIn <= 0) return;
+    clip(s, () => {
+      const la = fade(t, 11.5, 47.2, 0.6, 0.7) * on * fadeIn;                 // light, once its lines are drawn
+      if (la > 0) { D.glowDot(s, X(ct), Y(ct), 12, C.light, 0.8 * la); D.glowDot(s, X(-ct), Y(ct), 12, C.light, 0.8 * la); }
+      const ra = fade(t, 8.3, 24.6, 0.1, 0.8) * on * fadeIn;                  // the object at rest (its line is complete at 8.3)
+      if (ra > 0) D.glowDot(s, X(-3), Y(ct), 10, C.good, 0.8 * ra);
+      const pa = fade(t, 17.2, 47.2, 0.6, 0.7) * on * fadeIn;                 // the rocket (its world line is the ct′ axis)
+      if (pa > 0) D.glowDot(s, X(BETA * ct), Y(ct), 10, P_COL, 0.85 * pa);
+      const ga = fade(t, 33.7, 47.2, 0.6, 0.7) * on * fadeIn;                 // a ground clock at x = 0
+      if (ga > 0) D.glowDot(s, X(0), Y(ct), 10, S_COL, 0.85 * ga);
+    });
+  }
 
   Anim.register('spacetime', {
     duration: DURATION,
-    poster: 40,
-    // hold the picture still near the end of each step so the caption can be read (teacher's request)
-    pauses: [[8.1, 2.5], [12.7, 2.5], [18.1, 3], [23.9, 3], [27.9, 2.5], [32.5, 3], [37.1, 3], [41.9, 3], [46.4, 3]],
+    poster: realOf(40),
     // score: calm and precise (pure tones, a low drone, a soft shimmer)
     music: { chords: [[53, 57, 60, 64, 67], [50, 57, 60, 64, 65], [46, 53, 57, 62, 64], [48, 55, 57, 62, 64]], bar: 8, pad: 'sine', cutoff: 900, drone: 0.09, shimmer: 0.3, volume: 0.31 },
     resize,
-    frame(s, t) {
+    info: { story, realOf, WAITS, CAPS, STORY },
+    frame(s, tr) {
+      const t = story(tr);
       D.background(s, 0.28);
       const on = smooth((t - 3.6) / 1) * (1 - smooth((t - 47.2) / 0.7));
       axesS(s, on);
@@ -161,6 +188,7 @@
           D.text(s, 'ct′ = 2 m', X(xm) + fs * 0.9, Y(cm) + fs * 0.2, fs, td, D.sans(fs, 600), P_COL, 'left');
         }
       }
+      moving(s, t, tr, on);
       D.captions(s, t, CAPS);
       const ea = fade(t, 43.0, 47.6, 0.9, 0.8);
       if (ea > 0) {
@@ -172,7 +200,7 @@
         s.g.font = D.sans(s2); D.text(s, D.wrap(s, 'The space–time interval is the same in every frame', s.W - 40), s.W / 2, s.H * 0.36 + s1 * 3.3, s2, ea * 0.85, D.sans(s2));
       }
       D.title(s, t, 0.4, 3.8, 'Space–time diagrams', 'How two observers see the same events (HL)');
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tr, DURATION);
     },
   });
 })();

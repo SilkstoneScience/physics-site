@@ -34,8 +34,14 @@
   // The first burst is at 110° (back left), so the transfer swings round the left to the front, and the escape burst
   // comes at 10° (right): the escape path then curves round to the back left (about 120° by 12R), rising up the screen
   // towards the V = 0 level while the camera pulls back and the surface is extended under it.
-  const T_SPIN0 = 26.8, T_SPIN1 = 33.0, T_S = 44.6, T_B1 = 68.6, T_B2 = T_B1 + PT / 2, T_B3 = 103.6;
-  const END_CARD = 121.6, DURATION = 136;
+  // No pauses (teacher, 17 November 2026): one second on screen is one second of the animation throughout. While a
+  // caption is read the satellite simply keeps orbiting (it does 5 laps at 2R and 2.2 at 4R), and the graph-building
+  // steps (drawing, spinning) take as long as their captions. The coast between the first two bursts is exactly half the
+  // transfer ellipse's period (7.35 s), and the escape burst comes one lap later than before, so at the same angle.
+  const T_SPIN0 = 33.2, T_SPIN1 = 40.1, SPIN_END = 39.1, YAW_END = 50.8, T_S = 57.2, T_B1 = 97.1, T_B2 = T_B1 + PT / 2;
+  const T_B3 = T_B2 + (103.6 - (68.6 + PT / 2)) + P2;                  // 154.73 s
+  const T_SLIDE = 73.9, T_PANEL = 74.4;
+  const END_CARD = 178.0, DURATION = 192.4;
   const TH_B1 = 110 * Math.PI / 180;
   const TH0 = TH_B1 - W1 * (T_B1 - T_S);
   const TH_B2 = TH_B1 + Math.PI;
@@ -68,35 +74,29 @@
   }
 
   // ---------- captions ----------
+  // each on screen long enough to read at no more than about 16 characters a second (the Predict one has 6 s more)
   const CAPS = [
-    [4.8, 10.0, 'Around the Earth the gravitational potential is V = −GM/r: zero far away (at infinity), negative everywhere else.'],
-    [10.2, 15.4, 'At the surface: V = −GM/R = −(3.98 × 10¹⁴) ÷ (6.37 × 10⁶) = −6.25 × 10⁷ J kg⁻¹.'],
-    [15.6, 20.8, 'The field strength is minus the gradient of this graph: g = −ΔV/Δr. Its size is large close to the Earth, where the graph is steep.'],
-    [21.0, 26.4, 'At 2R the graph is a quarter as steep: g = 9.81 ÷ 4 = 2.45 N kg⁻¹.'],
-    [26.8, 32.2, 'Spin the graph round the Earth\'s centre and it sweeps out a surface: a "potential well".'],
-    [32.4, 37.8, 'Its depth at each point shows the potential there. Each level ring joins points at the same potential: an equipotential.'],
-    [38.0, 44.2, 'This is a model: a graph of potential, not a picture of space. Nothing slides down it; objects move because of the gravitational force.'],
-    [44.6, 49.8, 'A 500 kg satellite in a circular orbit at r = 2R. Its path is worked out from Newton\'s law of gravitation.'],
-    [50.0, 55.2, 'It is drawn at the depth of its potential, so it circles at a constant depth: V = −3.13 × 10⁷ J kg⁻¹ all the way round.'],
-    [55.4, 60.6, 'Its speed: v = √(GM/r) = 5.59 km s⁻¹. One orbit takes 4.0 hours (here sped up about 1800 times).'],
-    [60.8, 66.4, 'Eₖ = GMm/2r = 7.8 × 10⁹ J and Eₚ = −GMm/r = −15.6 × 10⁹ J. The total, E = −GMm/2r = −7.8 × 10⁹ J, is negative: it is bound.'],
-    [66.6, 71.6, 'To move it up to r = 4R, a short rocket burst speeds it up, and it coasts out along half an ellipse. (You only calculate the circular orbits.)'],
-    [71.8, 75.7, 'Coasting outwards, the gravitational force slows it: kinetic energy becomes potential energy, and the total stays the same.'],
-    [75.9, 82.0, 'A second burst at 4R puts it in the higher circular orbit. It now moves more slowly: v = 3.95 km s⁻¹.'],
-    [82.2, 88.4, 'But its total energy is higher: E = −3.9 × 10⁹ J. The bursts did ΔE = GMm/2 × (1/r₁ − 1/r₂) = 3.9 × 10⁹ J of work on it (ignoring the fuel\'s mass).'],
-    [88.6, 95.0, 'Predict: what total energy does the satellite need to escape from the Earth completely?'],
-    [95.2, 103.4, 'At least zero. At infinity Eₚ = 0 and Eₖ can\'t be negative, so it needs E = Eₖ + Eₚ ≥ 0 (exactly 0 if it only just gets there).'],
-    [103.6, 109.0, 'One more burst adds 3.9 × 10⁹ J, so E = 0. Its speed rises by a factor of √2, to 5.59 km s⁻¹, and it escapes.'],
-    [109.2, 114.2, 'As it moves away, the gravitational force slows it: Eₖ falls towards zero as Eₚ rises towards zero. It never comes back.'],
-    [114.4, 121.2, 'From the Earth\'s surface the escape speed is v_esc = √(2GM/R) = 11.2 km s⁻¹ (ignoring air resistance), whatever the mass.'],
+    [4.8, 12.5, 'Around the Earth the gravitational potential is V = −GM/r: zero far away (at infinity), negative everywhere else.'],
+    [12.7, 18.2, 'At the surface: V = −GM/R = −(3.98 × 10¹⁴) ÷ (6.37 × 10⁶) = −6.25 × 10⁷ J kg⁻¹.'],
+    [18.4, 27.2, 'The field strength is minus the gradient of this graph: g = −ΔV/Δr. Its size is large close to the Earth, where the graph is steep.'],
+    [27.4, 32.8, 'At 2R the graph is a quarter as steep: g = 9.81 ÷ 4 = 2.45 N kg⁻¹.'],
+    [33.2, 39.3, 'Spin the graph round the Earth\'s centre and it sweeps out a surface: a "potential well".'],
+    [39.5, 47.6, 'Its depth at each point shows the potential there. Each level ring joins points at the same potential: an equipotential.'],
+    [47.8, 56.8, 'This is a model: a graph of potential, not a picture of space. Nothing slides down it; objects move because of the gravitational force.'],
+    [57.2, 64.4, 'A 500 kg satellite in a circular orbit at r = 2R. Its path is worked out from Newton\'s law of gravitation.'],
+    [64.6, 72.6, 'It is drawn at the depth of its potential, so it circles at a constant depth: V = −3.13 × 10⁷ J kg⁻¹ all the way round.'],
+    [72.8, 79.4, 'Its speed: v = √(GM/r) = 5.59 km s⁻¹. One orbit takes 4.0 hours (here sped up about 1800 times).'],
+    [79.6, 87.9, 'Eₖ = GMm/2r = 7.8 × 10⁹ J and Eₚ = −GMm/r = −15.6 × 10⁹ J. The total, E = −GMm/2r = −7.8 × 10⁹ J, is negative: it is bound.'],
+    [88.1, 97.3, 'To move it up to r = 4R, a short rocket burst speeds it up, and it coasts out along half an ellipse. (You only calculate the circular orbits.)'],
+    [97.5, 104.2, 'Coasting out, the gravitational force slows it: Eₖ becomes Eₚ, and the total stays the same.'],
+    [104.4, 113.4, 'A second burst at 4R puts it in the higher circular orbit. It now moves more slowly: v = 3.95 km s⁻¹.'],
+    [113.6, 125.0, 'But its total energy is higher: E = −3.9 × 10⁹ J. The bursts did ΔE = GMm/2 × (1/r₁ − 1/r₂) = 3.9 × 10⁹ J of work on it (ignoring the fuel\'s mass).'],
+    [125.2, 138.0, 'Predict: what total energy does the satellite need to escape from the Earth completely?'],
+    [138.2, 151.0, 'At least zero. At infinity Eₚ = 0 and Eₖ can\'t be negative, so it needs E = Eₖ + Eₚ ≥ 0 (exactly 0 if it only just gets there).'],
+    [151.2, 160.0, 'One more burst adds 3.9 × 10⁹ J, so E = 0. Its speed rises by a factor of √2, to 5.59 km s⁻¹, and it escapes.'],
+    [160.2, 168.8, 'As it moves away, the gravitational force slows it: Eₖ falls towards zero as Eₚ rises towards zero. It never comes back.'],
+    [169.0, 177.6, 'From the Earth\'s surface the escape speed is v_esc = √(2GM/R) = 11.2 km s⁻¹ (ignoring air resistance), whatever the mass.'],
   ];
-  const PREDICT = 88.6;
-  // holds: long enough to read every caption at about 16 characters a second, and 6 s to think after "Predict"
-  const PAUSES = CAPS.map(([a, b, txt]) => {
-    if (a === PREDICT) return [b - 1.0, 6];
-    const need = txt.length / 16 - (b - a - 0.6);
-    return need > 0.05 ? [b - 1.0, +need.toFixed(1)] : null;
-  }).filter(Boolean);
 
   // ---------- colours ----------
   const MESH = C.field, SAT = C.light, KE = C.force, PE = C.vel, TOT = C.white, BURST = '255,140,80';
@@ -124,8 +124,8 @@
   // camera and projection for the scene time (a pure function of t)
   const PITCH = 0.44;
   function view(t) {
-    const spin = smooth((t - T_SPIN0) / (T_SPIN1 - T_SPIN0 - 1));
-    const slide = L.phone ? 1 : smooth((t - 56.5) / 2.5);
+    const spin = smooth((t - T_SPIN0) / (SPIN_END - T_SPIN0));
+    const slide = L.phone ? 1 : smooth((t - T_SLIDE) / 2.5);
     const V = slide >= 1 ? L.view : {
       x0: lerp(L.viewWide.x0, L.view.x0, slide), x1: lerp(L.viewWide.x1, L.view.x1, slide),
       y0: lerp(L.viewWide.y0, L.view.y0, slide), y1: lerp(L.viewWide.y1, L.view.y1, slide) };
@@ -134,7 +134,7 @@
     const uB = Math.min(vw / 13.8, vh / 6.2), cxB = mx - 2.2 * uB, cyB = my - 2.15 * uB;
     // the well from above: x from −8.6 to 8.6; up from −4.7 to 3.6 at the pitch used
     const z = zoomAt(t), uW = Math.min(vw / 17.6, vh / 8.6) * z, cxW = mx, cyW = my - 0.55 * uW / z;
-    const yawDrift = t > T_SPIN1 ? -0.18 * smooth((t - T_SPIN1) / 8) : 0;
+    const yawDrift = t > T_SPIN1 ? -0.18 * smooth((t - T_SPIN1) / (YAW_END - T_SPIN1)) : 0;
     const cam = Anim.camera(yawDrift, PITCH * spin, 60);
     return { cam, unit: lerp(uB, uW, spin), cx: lerp(cxB, cxW, spin), cy: lerp(cyB, cyW, spin), spin };
   }
@@ -210,7 +210,7 @@
     g.globalCompositeOperation = 'source-over'; g.setLineDash([5, 6]); g.lineWidth = 1;
     g.strokeStyle = `rgba(${C.muted},${a})`; g.beginPath(); pts.forEach((p, i) => (i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1]))); g.stroke(); g.setLineDash([]);
     // labelled above the far side of the ring while it is introduced (later the legend names it, on wide screens)
-    const al = fade(t, T_SPIN1, 38.0, 0.8, 0.6);
+    const al = fade(t, T_SPIN1, 47.8, 0.8, 0.6);
     const lp = P(vw, [0, 0, -RZ]);
     rich(s, [['V', 'i'], ['g', 's'], [' = 0 far away (at infinity)', 'sans']], lp[0], lp[1] - L.fs * 0.9, L.fs, al, C.muted);
   }
@@ -262,7 +262,7 @@
     for (let i = 0; i <= 120; i++) { const r = 1 + (RMAX - 1) * grow * i / 120; const q = P(vw, [r, ySurf(r), 0]); pts.push([q[0], q[1]]); }
     D.glowLine(s, pts, MESH, a * fade(t, 4.8, T_SPIN1, 0.4, 1.5), 2.2);
     // the value at the surface
-    const aS = fade(t, 10.2, T_SPIN0 + 1.6, 0.6, 1.0);
+    const aS = fade(t, 12.7, T_SPIN0 + 1.6, 0.6, 1.0);
     if (aS > 0) {
       const p = P(vw, [1, ySurf(1), 0]);
       D.glowDot(s, p[0], p[1], 11, C.light, aS);
@@ -277,10 +277,10 @@
       D.glowDot(s, pc[0], pc[1], 9, KE, al);
       return pc;
     };
-    const aT = fade(t, 15.8, T_SPIN0 + 0.8, 0.6, 0.8);
+    const aT = fade(t, 18.6, T_SPIN0 + 0.8, 0.6, 0.8);
     const pR = tang(1, 0.9, aT);
     if (pR) rich(s, [['g', 'i'], [' = 9.81 N kg⁻¹ at the surface', 'sans']], pR[0] + fs * 1.3, pR[1] + fs * 2.0, fs + 1, aT, KE, 'left');
-    const a2 = fade(t, 21.0, T_SPIN0 + 0.8, 0.6, 0.8);
+    const a2 = fade(t, 27.4, T_SPIN0 + 0.8, 0.6, 0.8);
     const p2 = tang(2, 1.2, a2);
     if (p2) rich(s, [['g', 'i'], [' = 2.45 N kg⁻¹ (a quarter)', 'sans']], p2[0] + fs * 0.8, p2[1] + fs * 1.6, fs + 1, a2, KE, 'left');
   }
@@ -350,7 +350,7 @@
     const { fs } = L;
     const aE = fade(t, 6.0, T_SPIN0 + 2.5, 1.0, 1.0);
     if (aE > 0) D.text(s, L.phone ? 'Earth' : 'Earth (radius R)', earth.c[0] - earth.rr - fs * 0.6, earth.c[1] + earth.rr * 0.2, fs, 0.85 * aE, D.sans(fs), '170,205,255', 'right');
-    const aR = fade(t, 32.4, 38.6, 0.8, 1.0);
+    const aR = fade(t, 39.5, 48.4, 0.8, 1.0);
     if (aR > 0) {
       // one equipotential picked out in green, labelled on a dark patch beside its right-hand end
       const pts = []; for (let i = 0; i <= 96; i++) { const q = P(vw, onWell(2.6667, 2 * Math.PI * i / 96)); pts.push([q[0], q[1]]); }
@@ -371,7 +371,7 @@
     if (a2 > 0) patch('r = 2R', 2, 0.95 * a2);
     const a4 = fade(t, T_B2, T_B3 + 2, 0.8, 0.8);
     if (a4 > 0) patch('r = 4R', 4, 0.95 * a4);
-    const aM = fade(t, 38.0, 44.2, 0.8, 0.8);
+    const aM = fade(t, 47.8, 56.8, 0.8, 0.8);
     if (aM > 0) {
       const c = L.phone ? L.view : L.viewWide;
       D.text(s, 'a graph of potential: a model, not a picture of space', (c.x0 + c.x1) / 2, c.y0 + fs * 0.6, fs + 1, aM, D.sans(fs + 1, 600), C.light);
@@ -434,14 +434,13 @@
 
   Anim.register('well', {
     duration: DURATION,
-    poster: 80,
-    pauses: PAUSES,
+    poster: 108.5,
     // score: orbiting (E-flat lydian, a soft sine pad, a soft shimmer, a little space wind)
     music: { chords: [[51, 58, 62, 67], [53, 57, 60, 65], [48, 55, 58, 62], [46, 53, 57, 62]], bar: 10, pad: 'sine', cutoff: 900, drone: 0.09,
       shimmer: 0.3, wind: 0.3, volume: 0.29 },
     resize: layout,
     // for checking the numbers (not used by the player)
-    info: { GM, RE, MS, sat, energy, CAPS, PAUSES, T_B1, T_B2, T_B3, P1, P2, PT },
+    info: { GM, RE, MS, sat, energy, CAPS, T_S, T_B1, T_B2, T_B3, END_CARD, P1, P2, PT },
     frame(s, t) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
       D.background(s, 0.2);
@@ -454,7 +453,7 @@
       drawGraphParts(s, t, vw);
       const st = drawSat(s, t, vw);
       wellLabels(s, t, vw, earth);
-      const pa = fade(t, 57.0, END_CARD + 0.6, 1.2, 0.6);
+      const pa = fade(t, T_PANEL, END_CARD + 0.6, 1.2, 0.6);
       drawPanel(s, t, st ? st.p : sat(t), pa);
       if (!L.phone) legend(s, fade(t, T_S, END_CARD + 0.6, 1, 0.6));
       D.captions(s, t, CAPS);

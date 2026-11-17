@@ -129,6 +129,25 @@
     [145.2, 151.4, '(Exams from 2028) A core below about 1.4 solar masses becomes a white dwarf; up to about 2–3 solar masses, a neutron star; above that, a black hole.'],
   ];
   const END_CARD = 151.6, DURATION = 166;
+  // No pauses (teacher, 17 November 2026: "extend the animation instead of creating a pause, so that it plays at the
+  // same speed"). The reading time each caption needs is added to the STORY (captions, fades and which part is shown:
+  // the times written in this file), while the picture keeps changing on the REAL clock: the axes build up label by
+  // label, the region labels and the lines of constant radius appear one after another, the stars move along their
+  // paths (which have no natural speed: billions of years squeezed into seconds), Betelgeuse and the supergiant pulsate
+  // (red supergiants really do vary), and after the supernova its remnant keeps expanding.
+  const EXTRA = [[10.0, 1.0], [15.8, 0.8], [46.2, 1.4], [57.6, 1.0], [70.2, 2.0], [77.2, 2.0], [82.8, 6.0], [89.4, 1.4], [97.6, 2.5],
+    [101.0, 2.3], [106.6, 1.6], [113.4, 3.0], [126.0, 1.2], [132.0, 1.2], [137.6, 1.6], [150.0, 3.4]];
+  const storyAt = (u) => {                                             // real scene time → story time
+    let acc = 0;
+    for (const [p, e] of EXTRA) { if (u < p + acc) return u - acc; if (u < p + acc + e) return p; acc += e; }
+    return u - acc;
+  };
+  const realAt = (st) => st + EXTRA.filter((x) => x[0] < st).reduce((n, x) => n + x[1], 0);   // story time → real time
+  const DURATION_U = realAt(DURATION);
+  // the paths and moments on the real clock (a key stretch that contains extra time simply takes longer)
+  const SUNP_R = SUNP.map(([k, T, Lm]) => [realAt(k), T, Lm]), BIGP_R = BIGP.map(([k, T, Lm]) => [realAt(k), T, Lm]);
+  const WD0_R = realAt(WD0), WD1_R = realAt(WD1), SN_R = realAt(SN);
+  const wdAtR = (u) => { const T = 10 ** lerp(lg(50000), lg(8000), smooth((u - WD0_R) / (WD1_R - WD0_R))); return [T, lumOf(WD_R, T)]; };
 
   // ---------- layout ----------
   let L = null;
@@ -152,28 +171,31 @@
   const fmtR = (R) => R >= 10 ? String(Number(R.toPrecision(2))) : R >= 1 ? R.toFixed(1) : String(Number(R.toPrecision(2)));
 
   // ---------- drawing ----------
-  function axes(s, a) {
+  function axes(s, a, u) {
     if (a <= 0) return;
     const { g } = s, { fs, x0, x1, y0, y1, phone } = L;
+    // luminosity labels appear from the bottom up while the first caption is read, then the temperatures from the
+    // right (cool) to the left (hot) during the second
+    const lumA = (k) => smooth((u - (5.2 + k * 1.2)) / 0.6), tA = (j) => smooth((u - (realAt(11.2) + 0.4 + j * 1.2)) / 0.6);
     g.globalCompositeOperation = 'source-over';
     g.fillStyle = `rgba(14,20,44,${0.55 * a})`; g.fillRect(x0, y0, x1 - x0, y1 - y0);
     for (let k = 0; k < 6; k++) {                                      // luminosity: 10⁻⁴ … 10⁶
-      const y = Y(10 ** (LGMIN + 2 * k));
-      D.line(s, x0, y, x1, y, C.muted, 0.1 * a, 1, [3, 5]);
-      D.text(s, k === 2 ? '1' : '10' + SUP[k], x0 - 5, y, fs, 0.8 * a, D.sans(fs), C.muted, 'right');
+      const y = Y(10 ** (LGMIN + 2 * k)), ak = a * lumA(k);
+      D.line(s, x0, y, x1, y, C.muted, 0.1 * ak, 1, [3, 5]);
+      D.text(s, k === 2 ? '1' : '10' + SUP[k], x0 - 5, y, fs, 0.8 * ak, D.sans(fs), C.muted, 'right');
     }
-    for (const T of [40000, 20000, 10000, 5000, 2500]) {
-      const x = X(T);
-      D.line(s, x, y1, x, y1 + 4, C.muted, 0.6 * a, 1);
-      D.line(s, x, y0, x, y1, C.muted, 0.08 * a, 1, [3, 5]);
-      D.text(s, T >= 10000 ? `${T / 1000} 000` : String(T), x, y1 + fs * 1.0, fs, 0.8 * a, D.sans(fs), C.muted);
-    }
+    [2500, 5000, 10000, 20000, 40000].forEach((T, j) => {
+      const x = X(T), aj = a * tA(j);
+      D.line(s, x, y1, x, y1 + 4, C.muted, 0.6 * aj, 1);
+      D.line(s, x, y0, x, y1, C.muted, 0.08 * aj, 1, [3, 5]);
+      D.text(s, T >= 10000 ? `${T / 1000} 000` : String(T), x, y1 + fs * 1.0, fs, 0.8 * aj, D.sans(fs), C.muted);
+    });
     D.line(s, x0, y1, x1, y1, C.muted, 0.7 * a, 1.2); D.line(s, x0, y0, x0, y1, C.muted, 0.7 * a, 1.2);
     D.text(s, 'luminosity / L☉', x0, y0 - fs * 1.1, fs, 0.9 * a, D.sans(fs, 600), C.muted, phone ? 'left' : 'left');
-    D.text(s, '← hotter        surface temperature / K        cooler →', (x0 + x1) / 2, y1 + fs * 2.2, fs, 0.9 * a, D.sans(fs, 600), C.muted);
+    D.text(s, '← hotter        surface temperature / K        cooler →', (x0 + x1) / 2, y1 + fs * 2.2, fs, 0.9 * a * tA(0), D.sans(fs, 600), C.muted);
   }
 
-  function bands(s, t, dim) {
+  function bands(s, t, dim, u) {
     const { g } = s, { fs, phone } = L;
     // the main-sequence band
     const aMS = fade(t, 29.4, END_CARD + 0.4, 1.2, 0.8) * dim;
@@ -200,19 +222,21 @@
     // region labels
     const aR = fade(t, 41.8, END_CARD + 0.4, 1.0, 0.8) * dim;
     if (aR > 0) {
-      D.text(s, 'red giants', X(4400), Y(phone ? 12 : 15), fs + 1, 0.95 * aR, D.sans(fs + 1, 600), '255,170,120');
-      D.text(s, 'supergiants', X(phone ? 9000 : 9000), Y(phone ? 6e5 : 5e5), fs + 1, 0.95 * aR, D.sans(fs + 1, 600), '255,214,170');
-      D.text(s, 'white dwarfs', X(phone ? 17000 : 15000), Y(phone ? 3.5e-4 : 2.5e-4), fs + 1, 0.95 * aR, D.sans(fs + 1, 600), '200,220,255');
+      const r0 = realAt(41.8), seq = (k) => smooth((u - r0 - k * 1.9) / 0.8);   // in the caption's order, one after another
+      D.text(s, 'red giants', X(4400), Y(phone ? 12 : 15), fs + 1, 0.95 * aR * seq(0), D.sans(fs + 1, 600), '255,170,120');
+      D.text(s, 'supergiants', X(phone ? 9000 : 9000), Y(phone ? 6e5 : 5e5), fs + 1, 0.95 * aR * seq(1), D.sans(fs + 1, 600), '255,214,170');
+      D.text(s, 'white dwarfs', X(phone ? 17000 : 15000), Y(phone ? 3.5e-4 : 2.5e-4), fs + 1, 0.95 * aR * seq(2), D.sans(fs + 1, 600), '200,220,255');
     }
   }
 
-  function radiusLines(s, t) {
+  function radiusLines(s, t, u) {
+    const r0 = realAt(52.8), gap = (realAt(58.6) - r0 - 1.4) / 6;     // the six lines share the caption's time
     const a = fade(t, 52.8, END_CARD + 0.4, 1.4, 0.8); if (a <= 0) return;
     const { fs, phone } = L;
     clip(s);
     const lines = [0.01, 0.1, 1, 10, 100, 1000];
     lines.forEach((R, i) => {
-      const grow = smooth((t - 52.8 - i * 0.35) / 1.2);
+      const grow = smooth((u - r0 - i * gap) / 1.4);
       const pts = []; for (let T = TMAX; T >= TMIN * 0.999; T /= 1.03) pts.push([X(T), Y(lumOf(R, T))]);
       const n = Math.max(2, Math.round(pts.length * grow));
       D.glowLine(s, pts.slice(0, n), '120,220,190', 0.5 * a, 1.0);
@@ -221,7 +245,7 @@
     // labels just inside the right-hand edge (or the bottom, for the smallest)
     lines.forEach((R, i) => {
       // dimmed while the Sun's path climbs past them, so its radius readout stays clear
-      const al = a * smooth((t - 53.6 - i * 0.35) / 0.8) * (1 - 0.65 * fade(t, 83.8, 115, 0.6, 0.8)); if (al <= 0) return;
+      const al = a * smooth((u - r0 - 0.8 - i * gap) / 0.8) * (1 - 0.65 * fade(t, 83.8, 115, 0.6, 0.8)); if (al <= 0) return;
       const txt = `${R} R☉`;
       let x = L.x1 - fs * 0.3, y = Y(lumOf(R, TMIN)) - fs * 0.8, align = 'right';
       if (y > L.y1 - fs * 0.5) {                               // the line leaves through the bottom: label it there
@@ -246,7 +270,7 @@
     g.globalCompositeOperation = 'source-over';
   }
 
-  function realStars(s, t, dim) {
+  function realStars(s, t, dim, u) {
     const { fs, phone } = L;
     for (const st of STARS) {
       const a = smooth((t - st.at) / 0.8) * (1 - smooth((t - END_CARD) / 0.8)); if (a <= 0) continue;
@@ -254,11 +278,14 @@
       const base = phone ? 9 : 13, r = base * (1 + 0.14 * clamp(lg(st.R), -2.5, 3));
       const focus = st.name === 'Betelgeuse' ? fade(t, 64.6, 71.4, 0.5, 0.5) : st.name === 'Sirius B' ? fade(t, 71.6, 78.4, 0.5, 0.5) : 0;
       const da = st.name === 'Sun' ? Math.max(dim, 0.6) : dim;
-      D.glowDot(s, x, y, Math.max(4, r * (1 + 0.5 * focus)), st.rgb, a * (0.6 + 0.4 * da));
-      if (focus > 0) {
+      // Betelgeuse varies in brightness (a pulsating red supergiant): a slow swell while it is in focus
+      const puls = st.name === 'Betelgeuse' ? 1 + 0.18 * focus * Math.sin(u * 1.6) : 1;
+      D.glowDot(s, x, y, Math.max(4, r * (1 + 0.5 * focus) * puls), st.rgb, a * (0.6 + 0.4 * da));
+      const ring = Math.max(focus, st.name === 'Sun' ? fade(t, 78.6, 83.6, 0.5, 0.5) : 0);   // the Sun, while you predict
+      if (ring > 0) {
         s.g.globalCompositeOperation = 'source-over';
-        s.g.strokeStyle = `rgba(120,220,190,${0.8 * focus})`; s.g.lineWidth = 1.5;
-        s.g.beginPath(); s.g.arc(x, y, r * 1.6 + 6, 0, 7); s.g.stroke();
+        s.g.strokeStyle = `rgba(${st.name === 'Sun' && !focus ? C.light : '120,220,190'},${0.8 * ring})`; s.g.lineWidth = 1.5;
+        s.g.beginPath(); s.g.arc(x, y, (r * 1.6 + 6) * (1 + 0.12 * Math.sin(u * 2.2)), 0, 7); s.g.stroke();
       }
       const [dx, dy, al] = st.lab;
       const isSun = st.name === 'Sun', later = t > 83.4;
@@ -283,7 +310,7 @@
     return { T, Lm, x: X(T), y: Y(Lm) };
   }
 
-  function evolution(s, t) {
+  function evolution(s, t, u) {
     const { fs, phone } = L, endA = 1 - smooth((t - END_CARD) / 0.8);
     if (endA <= 0) return;
     // a reminder that the paths are not calculated
@@ -294,8 +321,8 @@
     const sunOn = t >= SUNP[0][0];
     if (sunOn) {
       const later = 1 - 0.6 * smooth((t - (BIGP[0][0] - 0.5)) / 1.5);
-      const m = mover(s, t, SUNP, 0, 0, 'Sun', later * endA);
-      if (t < SUNP[SUNP.length - 1][0] + 0.01 && m && inChart(m.x, m.y)) {
+      const m = mover(s, u, SUNP_R, 0, 0, 'Sun', later * endA);
+      if (u < SUNP_R[SUNP_R.length - 1][0] + 0.01 && m && inChart(m.x, m.y)) {
         D.glowDot(s, m.x, m.y, (phone ? 12 : 17) * (1 + 0.15 * clamp(lg(radius(m.Lm, m.T)), -2, 3)), tempRGB(m.T), endA);
         // its radius, worked out from L and T (shown until the outer layers start to drift away)
         const ra = (1 - smooth((t - SUNP[9][0]) / 0.6)) * endA * later;
@@ -312,12 +339,16 @@
       const oa = fade(t, SUNP[11][0] - 0.2, WD0 + 0.6, 0.4, 0.5) * endA;
       if (oa > 0) {
         D.arrow(s, L.x0 + fs * 3.2, Y(5000) + fs * 1.6, L.x0 + fs * 0.6, Y(5000) + fs * 1.6, C.light, oa, '', { head: 7, width: 1.6, blur: 6 });
+        for (let k = 0; k < 3; k++) {                                  // dots drifting off to the left: the core keeps going
+          const ph = ((u * 0.7 + k / 3) % 1);
+          D.glowDot(s, L.x0 + fs * (6.5 - 6 * ph), Y(5000) + fs * 0.1, fs * 0.45, C.light, oa * Math.sin(Math.PI * ph) * 0.8);
+        }
         D.text(s, phone ? 'off the chart' : 'off the chart: over 100 000 K', L.x0 + fs * 0.6, Y(5000) + fs * 2.9, fs, oa, D.sans(fs), C.light, 'left');
       }
       // the white dwarf, cooling along R = 0.013 R☉
-      if (t >= WD0) {
-        const pts = []; for (let tt = WD0; tt <= Math.min(t, WD1) + 1e-6; tt += 0.06) { const [T, Lm] = wdAt(tt); pts.push([X(T), Y(Lm)]); }
-        const [T, Lm] = wdAt(Math.min(t, WD1)); pts.push([X(T), Y(Lm)]);
+      if (u >= WD0_R) {
+        const pts = []; for (let tt = WD0_R; tt <= Math.min(u, WD1_R) + 1e-6; tt += 0.06) { const [T, Lm] = wdAtR(tt); pts.push([X(T), Y(Lm)]); }
+        const [T, Lm] = wdAtR(Math.min(u, WD1_R)); pts.push([X(T), Y(Lm)]);
         clip(s); D.glowLine(s, pts, C.light, 0.75 * later * endA, 1.6); s.g.restore();
         const x = X(T), y = Y(Lm);
         if (inChart(x, y)) {
@@ -328,11 +359,13 @@
       }
     }
     // ----- the 25-solar-mass star -----
-    if (t >= BIGP[0][0]) {
-      const before = t < SN - 0.4;
-      const m = mover(s, t, BIGP, 0, 0, '', endA * (before ? 1 : 1 - 0.5 * smooth((t - SN) / 3)));
+    if (u >= BIGP_R[0][0]) {
+      const before = u < SN_R - 0.4;
+      const m = mover(s, u, BIGP_R, 0, 0, '', endA * (before ? 1 : 1 - 0.5 * smooth((u - SN_R) / 3)));
       if (before && m) {
-        D.glowDot(s, m.x, m.y, (phone ? 13 : 19) * (1 + 0.15 * clamp(lg(radius(m.Lm, m.T)), -2, 3)), tempRGB(m.T), endA);
+        // once it is a red supergiant it pulsates, as real ones do
+        const puls = 1 + 0.16 * smooth((u - BIGP_R[BIGP_R.length - 1][0]) / 0.6) * Math.sin(u * 1.7);
+        D.glowDot(s, m.x, m.y, (phone ? 13 : 19) * (1 + 0.15 * clamp(lg(radius(m.Lm, m.T)), -2, 3)) * puls, tempRGB(m.T), endA);
         const left = m.x > (L.x0 + L.x1) / 2;
         D.text(s, `25 M☉ star · R ≈ ${fmtR(radius(m.Lm, m.T))} R☉`, m.x + (left ? -1 : 1) * fs * 1.4, m.y + fs * 1.6, fs, 0.95 * endA, D.sans(fs, 600), C.light, left ? 'right' : 'left');
       }
@@ -341,11 +374,20 @@
         if (a > 0) D.text(s, 'red supergiant', X(3600) - fs * 1.6, Y(1.5e5) - fs * 1.4, fs, a, D.sans(fs, 600), C.light, 'right');
       }
       // the supernova: a flash at the supergiant's place (really far above the top of this chart)
-      const fl = t >= SN - 0.5 ? Math.exp(-Math.max(0, t - SN) / 1.6) * smooth((t - SN + 0.5) / 0.5) : 0;
+      const fl = u >= SN_R - 0.5 ? Math.exp(-Math.max(0, u - SN_R) / 1.6) * smooth((u - SN_R + 0.5) / 0.5) : 0;
       if (fl > 0.01) {
-        const x = X(3600), y = Y(1.5e5), R0 = (L.y1 - L.y0) * (0.12 + 0.35 * smooth((t - SN + 0.5) / 2.5));
+        const x = X(3600), y = Y(1.5e5), R0 = (L.y1 - L.y0) * (0.12 + 0.35 * smooth((u - SN_R + 0.5) / 2.5));
         D.glowDot(s, x, y, R0, '255,240,220', fl * endA);
         D.glowDot(s, x, y, R0 * 0.4, '255,255,255', fl * endA);
+      }
+      // the remnant: a faint shell that keeps expanding after the flash
+      const dr = u - SN_R;
+      if (dr > 0.3) {
+        const ra = endA * smooth((dr - 0.3) / 1.2) * (1 - smooth((dr - 6) / 26)) * 0.55, rr = (L.y1 - L.y0) * (0.1 + 0.022 * dr);
+        if (ra > 0.005) {
+          const { g } = s; clip(s); g.globalCompositeOperation = 'lighter'; g.strokeStyle = `rgba(255,190,150,${ra})`; g.lineWidth = 2;
+          g.beginPath(); g.arc(X(3600), Y(1.5e5), rr, 0, 7); g.stroke(); g.globalCompositeOperation = 'source-over'; g.restore();
+        }
       }
       const sa = fade(t, SN - 0.3, SN + 9, 0.4, 0.8) * endA;
       if (sa > 0) D.text(s, phone ? 'supernova' : 'supernova (far above the top of this chart)', X(3600) - fs * 1.6, Y(1.5e5) + fs * 1.6, fs, sa, D.sans(fs, 600), '255,230,200', 'right');
@@ -392,16 +434,15 @@
   }
 
   Anim.register('stars', {
-    duration: DURATION,
-    poster: 104,
-    pauses: [[10.0, 1.0], [15.8, 0.8], [46.2, 1.4], [57.6, 1.0], [70.2, 2.0], [77.2, 2.0], [82.8, 6.0], [89.4, 1.4], [97.6, 2.5],
-      [101.0, 2.3], [106.6, 1.6], [113.4, 3.0], [126.0, 1.2], [132.0, 1.2], [137.6, 1.6], [150.0, 3.4]],
+    duration: DURATION_U,
+    poster: realAt(104),
+    // no pauses: see EXTRA (the story waits while the picture keeps changing)
     // score: vast and slow (A-flat major, a dark saw pad, long bars, space wind)
     music: { chords: [[44, 51, 56, 60], [49, 56, 60, 65], [41, 48, 53, 56], [46, 53, 58, 63]], bar: 12, pad: 'saw', cutoff: 600,
       drone: 0.1, wind: 0.6, volume: 0.77 },
     resize: layout,
     // for checking the numbers (not used by the player)
-    info: { STARS, CAPS, radius, lumOf, msL, pathAt, SUNP, BIGP, wdAt, WD_R,
+    info: { STARS, CAPS, radius, lumOf, msL, pathAt, SUNP, BIGP, wdAt, WD_R, EXTRA, storyAt, realAt, SUNP_R, BIGP_R, WD0_R, WD1_R, SN_R,
       check() {
         const out = {};
         for (const st of STARS) out[st.name] = +st.R.toPrecision(3);
@@ -410,17 +451,18 @@
         out.earth = +(6.37e6 / 6.96e8).toFixed(4); out.lifeRatio = Math.round(10e9 / 7e6);
         return out;
       } },
-    frame(s, t) {
+    frame(s, u) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
+      const t = storyAt(u);
       D.background(s, 0.2);
       const chartA = smooth((t - 4.4) / 1.0) * (1 - smooth((t - END_CARD) / 0.8));
       const dim = 1 - 0.55 * smooth((t - (SUNP[0][0] - 1)) / 1.5);
-      axes(s, chartA);
-      bands(s, t, dim);
-      radiusLines(s, t);
+      axes(s, chartA, u);
+      bands(s, t, dim, u);
+      radiusLines(s, t, u);
       field(s, t, dim);
-      realStars(s, t, dim);
-      evolution(s, t);
+      realStars(s, t, dim, u);
+      evolution(s, t, u);
       D.captions(s, t, CAPS);
       if (t < 4.6) { s.g.fillStyle = `rgba(4,6,13,${0.8 * fade(t, 0, 4.4, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 4.4, 'The Hertzsprung–Russell diagram', 'How stars are sorted, and how they change');

@@ -77,6 +77,20 @@
     [136.6, 141.6, 'Closing one end halves the lowest frequency: 125 Hz instead of 250 Hz. (The pipes are slowed down 600 times.)'],
   ];
 
+  // ---------- no pauses (teacher, 17 November 2026): one constant speed throughout ----------
+  // The story clock (captions, labels, which harmonic is shown) waits at the end of each long or number-heavy caption,
+  // long enough to read it at about 16 characters a second (at least 1.2 s; 6 s for "Predict"). Every oscillation runs
+  // on the real clock, so the waves, strings and air layers keep moving at the same speed throughout.
+  const WAITS = CAPS.filter(([a, b, txt]) => txt.length >= 85 || /\d\s*Hz/.test(txt) || txt.length / 16 > b - a - 0.6)
+    .map(([a, b, txt]) => [b - 0.7, txt.startsWith('Predict') ? 6.0 : Math.max(1.2, +(txt.length / 16 - (b - a - 0.6)).toFixed(1))]);
+  const REAL_DURATION = DURATION + WAITS.reduce((n, w) => n + w[1], 0);
+  const story = (t) => {                     // real time → story time
+    let acc = 0;
+    for (const [st, d] of WAITS) { if (t < st + acc) return t - acc; if (t < st + acc + d) return st; acc += d; }
+    return Math.min(t - acc, DURATION);
+  };
+  const realOf = (st) => st + WAITS.filter((w) => w[0] < st).reduce((n, w) => n + w[1], 0);
+
   // ---------- colours ----------
   const R_RGB = C.vel, L_RGB = C.force, SUM = C.light, ENV = C.field, WALL = '150,165,230', AIR = '175,195,240', MOVE = C.good;
 
@@ -132,9 +146,9 @@
   const curve = (f, xa, xb, steps = 160) => { const pts = []; for (let i = 0; i <= steps; i++) { const x = lerp(xa, xb, i / steps); pts.push([x, f(x)]); } return pts; };
 
   // ---------- part 1: two travelling waves make a standing wave ----------
-  function part1(s, t) {
+  function part1(s, t, tr) {
     const a = fade(t, 4.6, P1_END, 0.9, 0.8); if (a <= 0) return;
-    const { x0, x1, half, yc, A1, fs, phone } = L, k = Math.PI / half, w = W1 * t, cw = Math.cos(w);
+    const { x0, x1, half, yc, A1, fs, phone } = L, k = Math.PI / half, w = W1 * tr, cw = Math.cos(w);
     const aR = smooth((t - 4.8) / 1.2), aL = smooth((t - 7.2) / 1.2), aS = smooth((t - 10.0) / 1.2);
     const dim = lerp(1, 0.4, smooth((t - 15.0) / 2.0));
     // the axis (where the string is at rest)
@@ -197,7 +211,7 @@
   }
 
   // ---------- part 2: a string fixed at both ends ----------
-  function part2(s, t) {
+  function part2(s, t, tr) {
     const a = fade(t, P2_A, P2_END, 0.8, 0.8); if (a <= 0) return;
     const { sx0, sx1, sAmp, fs, phone } = L, len = sx1 - sx0;
     // the header
@@ -208,7 +222,7 @@
       const show = r === 0 ? smooth((t - P2_A - 0.2) / 0.8) : smooth((t - STRING_ON[r] + 0.6) / 0.8);
       const al = show * a; if (al <= 0) continue;
       const grow = smooth((t - STRING_ON[r]) / 1.2);
-      const om = 2 * Math.PI * fS(n) / SLOW_S, c = Math.cos(om * (t - STRING_ON[r]));
+      const om = 2 * Math.PI * fS(n) / SLOW_S, c = Math.cos(om * (tr - realOf(STRING_ON[r])));
       // the clamps at the two ends
       for (const xe of [sx0, sx1]) {
         s.g.fillStyle = `rgba(${WALL},${0.85 * al})`;
@@ -252,11 +266,11 @@
   const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
   const DOTS = Array.from({ length: NL_DESK }, () => Array.from({ length: PER_LAYER }, (_, j) => [(j + 0.15 + 0.7 * rnd()) / PER_LAYER, rnd() - 0.5]));
 
-  function pipe(s, t, r, closed, a) {
+  function pipe(s, t, tr, r, closed, a) {
     if (a <= 0) return;
     const { g } = s, { px0, px1, hp, fs, phone } = L, len = px1 - px0, yc = L.pY(r), y0 = yc - hp / 2, y1 = yc + hp / 2;
     const { n, amp, since } = modeAt(closed ? CLOSED_MODES : OPEN_MODES, t);
-    const f = closed ? fC(n) : fO(n), om = 2 * Math.PI * f / SLOW_P, c = Math.cos(om * (t - since));
+    const f = closed ? fC(n) : fO(n), om = 2 * Math.PI * f / SLOW_P, c = Math.cos(om * (tr - realOf(since)));
     const shape = (u) => (closed ? shapeC(n, u) : shapeO(n, u));
     const xiMax = len * (phone ? 0.035 : 0.028);
     // the walls (a closed end is a thick wall on the left)
@@ -296,13 +310,13 @@
       else rich(s, parts, px1, ty, fs + 4, ml, SUM, 'right');
     }
   }
-  function part3(s, t) {
+  function part3(s, t, tr) {
     const a = fade(t, P3_A, END_CARD + 0.4, 0.8, 0.9); if (a <= 0) return;
     const { fs, phone } = L;
     const hdr = phone ? 'L = 0.68 m, v = 340 m s⁻¹, slowed down 600 times' : 'Pipes 0.68 m long; speed of sound 340 m s⁻¹ (slowed down 600 times)';
     D.text(s, hdr, phone ? L.W / 2 : 16, phone ? L.top + fs * 0.6 : 22, fs + (phone ? 0 : 1), 0.75 * a, D.sans(fs + (phone ? 0 : 1)), C.muted, phone ? 'center' : 'left');
-    pipe(s, t, 0, false, a);
-    pipe(s, t, 1, true, a * smooth((t - CLOSED_ON) / 0.9));
+    pipe(s, t, tr, 0, false, a);
+    pipe(s, t, tr, 1, true, a * smooth((t - CLOSED_ON) / 0.9));
   }
 
   // ---------- end card ----------
@@ -349,27 +363,24 @@
   });
 
   Anim.register('standing', {
-    duration: DURATION,
-    poster: 72,
-    // hold the picture (caption still fully shown) at the end of each long or number-heavy caption, long enough to read
-    // it at about 16 characters a second (at least 1.2 s); 6 s for "Predict"
-    pauses: CAPS.filter(([a, b, txt]) => txt.length >= 85 || /\d\s*Hz/.test(txt) || txt.length / 16 > b - a - 0.6)
-      .map(([a, b, txt]) => [b - 0.7, txt.startsWith('Predict') ? 6.0 : Math.max(1.2, +(txt.length / 16 - (b - a - 0.6)).toFixed(1))]),
+    duration: REAL_DURATION,
+    poster: realOf(72),
     // score: resonant and organ-like (C minor, a soft square-wave pad, a strong low drone)
     music: { chords: [[48, 55, 60, 63], [44, 51, 56, 60], [41, 48, 53, 56], [43, 50, 55, 59]], bar: 9, pad: 'square', cutoff: 700, drone: 0.12, volume: 0.57 },
     resize: layout,
-    info: { check, CAPS, modeAt, OPEN_MODES, CLOSED_MODES, shapeS, shapeO, shapeC },
-    frame(s, t) {
+    info: { check, CAPS, modeAt, OPEN_MODES, CLOSED_MODES, shapeS, shapeO, shapeC, story, realOf, WAITS, STORY: DURATION },
+    frame(s, tr) {
+      const t = story(tr);
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
       D.background(s, 0.22);
-      part1(s, t);
-      part2(s, t);
-      part3(s, t);
+      part1(s, t, tr);
+      part2(s, t, tr);
+      part3(s, t, tr);
       D.captions(s, t, CAPS);
       if (t < 4.6) { s.g.fillStyle = `rgba(4,6,13,${0.8 * fade(t, 0, 4.4, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 4.4, 'Standing waves', 'On strings and in pipes');
       endCard(s, t);
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tr, REAL_DURATION);
     },
   });
 })();

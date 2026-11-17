@@ -32,8 +32,14 @@ lines, smooth camera moves and one caption at a time. Each one loops.
 - Every page has a written description of the whole animation (for screen readers, and for students
   who prefer to read), and links back to the topic section.
 - Testing: `?t=12` on the page's address freezes the animation at scene time 12 s, for checking single frames.
-- **Pacing** (teacher, 15 November 2026: "stay on the scene a little longer"): a scene can list `pauses: [[sceneTime, seconds], …]`
-  where the picture holds still (just before a caption fades) so it can be read; powers of ten holds 3.4 s on each object.
+- **Pacing** (teacher, 15 November 2026: "stay on the scene a little longer"): each step stays on screen long enough to read
+  (captions at most about 17 characters a second; "Predict:" captions about 6 s longer).
+  **No pauses** (teacher, 17 November 2026: "extend the animation instead of creating a pause, so that it plays at the same
+  speed, but there is no pause"): no scene uses the player's `pauses` (the player still supports them, but they freeze the
+  picture). Reading time is scene time at the normal speed: things that move anyway carry on; a process with no natural speed
+  (a graph drawing itself, a quasi-static change, a path being traced) may take longer; where a caption describes an exact
+  moment, a faint marker or label stays pinned at that moment while the motion continues (or the event happens again).
+  Rutherford was converted earlier by slowing the story during captions (16 November); the rest play at a constant speed.
 - **Music** (teacher's request, 15 November 2026): gentle background music generated live by `js/anim/music.js` with the
   browser's Web Audio API (a soft pad, a low drone, wind and reverb), so there
   are no audio files to license. Each scene sets its own mood with `music: { chords, bar, pad, cutoff, drone, … }`.

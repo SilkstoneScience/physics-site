@@ -95,15 +95,33 @@
 
   // ---------- timeline (scene seconds) ----------
   const T_E1 = 15.6, T_E2 = 59.6, P1_END = 67.6;
-  const P2_ON = 68.6, B_ON = 70.4, P3_CAM = 116.6, END = 160.0, DURATION = 172;
+  const P2_ON = 68.6, B_ON = 70.4, P3_CAM = 116.6, END = 160.0, STORY = 172;
+  // No pauses (teacher, 17 November 2026): where a caption needs extra reading time the story (captions, labels, camera)
+  // waits for these seconds, while every charge keeps moving at its normal speed. Times are story times.
+  const HOLDS = [[11.0, 1.5], [16.2, 1.5], [18.3, 3.0], [28.2, 3.0], [33.4, 1.4], [47.2, 1.0], [58.8, 6.0], [66.2, 0.6],
+    [74.2, 2.2], [81.2, 3.0], [88.0, 1.5], [91.2, 1.2], [96.6, 6.0], [102.4, 1.0], [115.2, 1.2], [121.6, 1.0], [127.8, 1.0],
+    [134.8, 1.4], [140.6, 0.8], [146.8, 1.0], [150.0, 1.5], [153.0, 0.8], [158.8, 1.6]];
+  const DURATION = STORY + HOLDS.reduce((n, h) => n + h[1], 0);
+  const story = (t) => { let acc = 0; for (const [st, d] of HOLDS) { if (t < st + acc) return t - acc; if (t < st + acc + d) return st; acc += d; } return Math.min(t - acc, STORY); };
+  const real = (x) => x + HOLDS.filter((h) => h[0] < x).reduce((n, h) => n + h[1], 0);
+  let RT = 0;                                                               // scene time: every charge moves on this clock
+  // Each ion leaves at scene time tr. A key ion is timed so that its key moment (hitting a plate, leaving the selector,
+  // landing) falls at the same story time as before.
+  const keyed = (it) => Object.assign(it, { tr: real(it.t + ionDone(it.o) * K2) - ionDone(it.o) * K2 });
   const PART2 = [
-    { t: 79.0, o: ion(VD, M20, false), hl: true, name: 'A' },
-    { t: 86.0, o: ion(VD, M20, false), hl: true, name: 'A2' },
-    { t: 97.4, o: ion(1.5 * VD, M20, false), hl: true, name: 'B' },
-    { t: 103.4, o: ion(0.5 * VD, M20, false), hl: true, name: 'C' },
-    { t: 109.0, o: ion(VD, M22, false), hl: true, name: 'D', heavy: true },
+    keyed({ t: 97.4, o: ion(1.5 * VD, M20, false), hl: true, name: 'B' }),
+    keyed({ t: 103.4, o: ion(0.5 * VD, M20, false), hl: true, name: 'C' }),
+    keyed({ t: 109.0, o: ion(VD, M22, false), hl: true, name: 'D', heavy: true }),
   ];
-  const H20 = { t: 121.0, o: ion(VD, M20, true), hl: true }, H22 = { t: 130.0, o: ion(VD, M22, true), hl: true, heavy: true };
+  // ions at v = E/B, one after another (each crossing takes 3.0 s), so one is always in the selector while the forces
+  // are explained: from story 79.0 until just before the faster ion; then neon-22 ions at the same speed
+  const SERIES = [];
+  for (let tr = real(79.0); tr < real(97.0) - 0.5; tr += 3.0) SERIES.push({ tr, o: ion(VD, M20, false), hl: true, name: 'A' });
+  for (let tr = PART2[2].tr + 3.0; tr < real(116.0); tr += 3.0) SERIES.push({ tr, o: ion(VD, M22, false), hl: true, name: 'D', heavy: true });
+  const H20 = keyed({ t: 121.0, o: ion(VD, M20, true), hl: true }), H22 = keyed({ t: 130.0, o: ion(VD, M22, true), hl: true, heavy: true });
+  // part 1: the electron is sent again and again along the same path (one in flight at a time) while it is explained,
+  // then the faster electron likewise; first launches at the old story times
+  const E1_EVERY = 3.2, E2_EVERY = 3.6;
   // the stream in part 3: a spread of speeds (about 1 in 3 blocked), neon-22 about one in ten (as in natural neon)
   let seed = 31; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
   const STREAM = [];
@@ -111,9 +129,9 @@
     const heavy = i % 10 === 6;                                           // 1 in 10
     const passes = i % 3 !== 1;                                           // most of these make it (chosen to show the spots)
     const f = passes ? 1 + (rnd() - 0.5) * 0.016 : (rnd() < 0.5 ? 0.55 + 0.35 * rnd() : 1.07 + 0.45 * rnd());
-    STREAM.push({ t, o: ion(f * VD, heavy ? M22 : M20, true), heavy });
+    STREAM.push({ t, tr: real(t), o: ion(f * VD, heavy ? M22 : M20, true), heavy });
   }
-  const sceneTau = (it, t) => (t - it.t) / K2;
+  const sceneTau = (it, tr) => (tr - it.tr) / K2;                         // tr: scene time
 
   // ---------- captions ----------
   const CAPS = [
@@ -222,9 +240,10 @@
     g.globalCompositeOperation = 'source-over'; g.lineCap = 'round';
     for (let i = 0; i < n; i++) {
       const x = c.X(x0 + step * (i + 0.5)), ya = c.Y(half) + 6, yb = c.Y(-half) - 6, h = Math.min(7, (yb - ya) * 0.25);
-      g.strokeStyle = `rgba(${EF},${0.32 * a})`; g.lineWidth = 1.3;
+      const sh = 0.8 + 0.2 * Math.sin(RT * 2.2 - i * 0.7);                   // a gentle shimmer, so the picture never stands still
+      g.strokeStyle = `rgba(${EF},${0.32 * a * sh})`; g.lineWidth = 1.3;
       g.beginPath(); g.moveTo(x, ya); g.lineTo(x, yb - h * 0.6); g.stroke();
-      g.fillStyle = `rgba(${EF},${0.45 * a})`;
+      g.fillStyle = `rgba(${EF},${0.45 * a * sh})`;
       g.beginPath(); g.moveTo(x, yb); g.lineTo(x - h * 0.55, yb - h); g.lineTo(x + h * 0.55, yb - h); g.closePath(); g.fill();
     }
   }
@@ -232,9 +251,10 @@
   function bField(s, c, xs, ys, a, size) {
     if (a <= 0) return;
     const { g } = s, r = size;
-    g.globalCompositeOperation = 'source-over'; g.strokeStyle = `rgba(${BF},${0.5 * a})`; g.lineWidth = 1.2;
+    g.globalCompositeOperation = 'source-over'; g.lineWidth = 1.2;
     for (const x of xs) for (const y of ys) {
       const px = c.X(x), py = c.Y(y), q = r * 0.62;
+      g.strokeStyle = `rgba(${BF},${0.5 * a * (0.8 + 0.2 * Math.sin(RT * 1.8 + (x + y) * 0.6))})`;
       g.beginPath(); g.arc(px, py, r, 0, Math.PI * 2); g.stroke();
       g.beginPath(); g.moveTo(px - q, py - q); g.lineTo(px + q, py + q); g.moveTo(px + q, py - q); g.lineTo(px - q, py + q); g.stroke();
     }
@@ -262,41 +282,47 @@
     plate(s, c, 0, L1 * 100, -half, -1, A);
     eField(s, c, 0, L1 * 100, half, 1.0, A);
     D.text(s, 'E', c.X(L1 * 100) + fs * 0.9, c.Y(-0.75), fs + 3, 0.85 * A, D.serif(fs + 3), EF, 'left');
-    // the two electrons
-    for (const [te, u, main] of [[T_E1, U1, true], [T_E2, U2, false]]) {
+    // the two kinds of electron: each is sent again and again along its path, one in flight at a time (the first at the
+    // old story time; the slow ones stop being sent when the fast one starts), so one is always moving while it is explained
+    let cur = null;
+    for (const [te, u, main, every, stopR] of [[T_E1, U1, true, E1_EVERY, real(T_E2)], [T_E2, U2, false, E2_EVERY, Infinity]]) {
       if (t < te) continue;
-      const tau = (t - te) / K1, x = e1X(tau, u), y = e1Y(x, u), dimA = main ? (t > T_E2 ? 0.55 : 1) : 1;
+      const t0 = real(te), el = Math.max(0, RT - t0), nMax = Math.max(0, Math.ceil((stopR - t0) / every) - 1);
+      const n = Math.min(Math.floor(el / every), nMax);
+      const tau1 = el / K1, x1 = e1X(tau1, u);                        // the first one draws the path and the dots
+      const dimA = main ? (t > T_E2 ? 0.55 : 1) : 1;
+      if (main ? t < T_E2 : true) cur = [t0 + n * every, u, t0];
       // trail
       const pts = [];
-      for (let k = 0; k <= 80; k++) { const xx = GUN + (x - GUN) * k / 80; pts.push([c.X(xx * 100), c.Y(e1Y(xx, u) * 100)]); }
+      for (let k = 0; k <= 80; k++) { const xx = GUN + (x1 - GUN) * k / 80; pts.push([c.X(xx * 100), c.Y(e1Y(xx, u) * 100)]); }
       D.glowLine(s, pts, C.neg, 0.75 * A * dimA, phone ? 1.4 : 1.8);
       // dots every 0.5 ns between the plates (first electron)
       if (main) {
-        const da = A * smooth((t - T_E1 - 2.0) / 1.0) * dimA;
+        const da = A * smooth((el - 2.0) / 1.0) * dimA;
         for (let k = 0; k <= 6; k++) {
-          const xk = (k * 0.5e-9) * u; if (GUN + u * tau < xk) break;
+          const xk = (k * 0.5e-9) * u; if (GUN + u * tau1 < xk) break;
           const px = c.X(xk * 100), py = c.Y(e1Y(xk, u) * 100);
           D.glowDot(s, px, py, phone ? 6 : 9, C.neg, 0.9 * da);
           D.line(s, px, c.Y(-half) + 3, px, c.Y(-half) + 3 + Math.max(4, c.sc * 0.18), C.neg, 0.6 * da, 1.2);   // equal steps along
         }
       }
-      // the electron with its velocity and force
-      if (x < SCREEN) {
+      // the electrons in flight (at most two), each with its velocity and force
+      for (let k = Math.max(0, n - 2); k <= n; k++) {
+        const x = e1X((el - k * every) / K1, u), y = e1Y(x, u);
+        if (x >= SCREEN) continue;
         const px = c.X(x * 100), py = c.Y(y * 100);
         particle(s, px, py, C.neg, true, A, phone ? 4 : Math.max(4.5, c.sc * 0.16));
         const inField = x > 0 && x < L1, la = A * (main ? 1 : 0.9);
         if (inField) D.arrow(s, px, py - 6, px, py - Math.max(26, c.sc * 1.1), C.force, la, 'F', { width: 2.2, head: 9, labelOff: 12 });
         const sl = e1Slope(x, u), len = Math.max(24, c.sc * 1.05), ang = Math.atan(sl);
         D.arrow(s, px + 6, py, px + len * Math.cos(ang), py - len * Math.sin(ang), C.vel, la, 'v', { width: 2.2, head: 9, labelOff: 12 });
-      } else {
-        D.glowDot(s, c.X(SCREEN * 100), c.Y(y * 100), phone ? 10 : 14, SCR, A * (main ? (t > T_E2 ? 0.6 : 1) : 1));
       }
+      if (x1 >= SCREEN) D.glowDot(s, c.X(SCREEN * 100), c.Y(e1Y(SCREEN, u) * 100), phone ? 10 : 14, SCR, A * (main ? (t > T_E2 ? 0.6 : 1) : 1));
     }
-    // live readout: time in the field and deflection so far (first electron, then the second)
-    const cur = t >= T_E2 ? [T_E2, U2] : [T_E1, U1];
-    if (t >= cur[0]) {
-      const tau = (t - cur[0]) / K1, x = e1X(tau, cur[1]), tin = clamp(x, 0, L1) / cur[1], yin = e1Y(clamp(x, 0, L1), cur[1]);
-      const ra = A * smooth((t - cur[0] - 0.6) / 0.5), t1 = `time between the plates: ${(tin * 1e9).toFixed(2)} ns`, t2 = `deflection so far: ${(yin * 1000).toFixed(1)} mm`;
+    // live readout: time in the field and deflection so far (the electron in flight)
+    if (cur) {
+      const tau = Math.max(0, RT - cur[0]) / K1, x = e1X(tau, cur[1]), tin = clamp(x, 0, L1) / cur[1], yin = e1Y(clamp(x, 0, L1), cur[1]);
+      const ra = A * smooth((RT - cur[2] - 0.6) / 0.5), t1 = `time between the plates: ${(tin * 1e9).toFixed(2)} ns`, t2 = `deflection so far: ${(yin * 1000).toFixed(1)} mm`;
       if (phone) {                                                   // above the plates
         const rx = L.area.x0 + 4, ry = c.Y(3.4) - fs * 2.4;
         D.text(s, t1, rx, ry, fs + 1, ra, D.sans(fs + 1), C.text, 'left');
@@ -366,8 +392,8 @@
   }
   // one ion: trail, body, arrows
   function drawIon(s, t, c, it, A, opts = {}) {
-    if (t < it.t || A <= 0) return null;
-    const o = it.o, tau = sceneTau(it, t), p = ionAt(o, tau), rgb = it.heavy ? ION22 : ION20, { phone } = L;
+    if (RT < it.tr || A <= 0) return null;
+    const o = it.o, tau = sceneTau(it, RT), p = ionAt(o, tau), rgb = it.heavy ? ION22 : ION20, { phone } = L;
     const R = phone ? 3.5 : Math.max(4, Math.min(7, c.sc * 0.16));
     let a = A;
     if (p.st === 'out') a *= 1 - smooth(p.since * K2 / 0.6);
@@ -413,16 +439,16 @@
     apparatus(s, t, c, A);
     // part 2 ions (trails of the deflected ones stay faintly, to compare)
     const p2A = A * (1 - k3);
-    for (const it of PART2) {
-      const keep = it.name === 'B' || it.name === 'C' ? (t < it.t + 1 ? 1 : 0.5) : 1;
-      drawIon(s, t, c, it, p2A * (1 - smooth((t - it.t - 13.4) / 0.6)), { arrows: true, trailA: 0.75 * keep });
+    for (const it of [...SERIES, ...PART2]) {
+      const keep = it.name === 'B' || it.name === 'C' ? (RT < it.tr + 1 ? 1 : 0.5) : 1;
+      drawIon(s, t, c, it, p2A * (1 - smooth((RT - it.tr - 13.4) / 0.6)), { arrows: true, trailA: 0.75 * keep });
     }
-    // labels for the deflected ions
-    const lab = (txt, x, y, at, rgb, align, until = 1e9) => D.text(s, txt, x, y, fs, 0.85 * A * (1 - k3) * smooth((t - at) / 0.6) * (1 - smooth((t - until) / 0.6)), D.sans(fs, 600), rgb, align);
+    // labels for the deflected ions (on the story clock; they go when the ion's trail goes)
+    const lab = (txt, x, y, at, rgb, align, untilR = 1e9) => D.text(s, txt, x, y, fs, 0.85 * A * (1 - k3) * smooth((t - at) / 0.6) * (1 - smooth((RT - untilR) / 0.6)), D.sans(fs, 600), rgb, align);
     if (t < P3_CAM + 3.4) {
-      const hb = PART2[2].o, hc = PART2[3].o;
-      lab('faster', c.X(hb.sx(hb.tEnd) * 100), c.Y(D2 * 50) - fs * 2.7, 99.6, ION20, 'center', PART2[2].t + 13.4);
-      lab('slower', c.X(hc.sx(hc.tEnd) * 100) - 4, c.Y(-D2 * 50) + fs * 2.6, 106.1, ION20, 'right', PART2[3].t + 13.4);
+      const hb = PART2[0].o, hc = PART2[1].o;
+      lab('faster', c.X(hb.sx(hb.tEnd) * 100), c.Y(D2 * 50) - fs * 2.7, 99.6, ION20, 'center', PART2[0].tr + 13.4);
+      lab('slower', c.X(hc.sx(hc.tEnd) * 100) - 4, c.Y(-D2 * 50) + fs * 2.6, 106.1, ION20, 'right', PART2[1].tr + 13.4);
       lab('v = E/B', c.X(LS * 100) + fs * 0.9, c.Y(0) + fs * 1.3, 83.0, ION20, 'left');
     }
     // part 3: the two highlighted ions, then the stream
@@ -438,7 +464,7 @@
           const mx = (c.X(o.c[0] * 100) + c.X(p.x * 100)) / 2, my = (c.Y(o.c[1] * 100) + c.Y(p.y * 100)) / 2;
           rich(s, [['r', 'i'], [` = ${(o.r * 100).toFixed(2)} cm`, 'sans']], mx - Math.sin(p.f) * fs * 1.1, my - Math.cos(p.f) * fs * 1.1, fs + 1, A, rgb);
         }
-        const landA = A * smooth((t - (it.t + ionDone(o) * K2)) / 0.6);
+        const landA = A * smooth((RT - (it.tr + ionDone(o) * K2)) / 0.6);
         if (landA > 0) {
           const bx = c.X(LS * 100 - (it.heavy ? 2.6 : 1.2)), y0 = c.Y(0), y1 = c.Y(o.land * 100);
           D.line(s, bx, y0, bx, y1, rgb, 0.7 * landA, 1.3);
@@ -449,7 +475,7 @@
       }
       for (const it of STREAM) drawIon(s, t, c, it, A * 0.85, { trailA: 0.22 });
       // the detector: every ion that has landed leaves a mark
-      const marks = [H20, H22, ...STREAM].filter((it) => it.o.pass && t > it.t + ionDone(it.o) * K2);
+      const marks = [H20, H22, ...STREAM].filter((it) => it.o.pass && RT > it.tr + ionDone(it.o) * K2);
       for (const it of marks) {
         const y = c.Y(it.o.land * 100), x = c.X(LS * 100) + Math.max(2, c.sc * 0.06);
         D.glowDot(s, x, y, phone ? 7 : 10, it.heavy ? ION22 : ION20, 0.35 * A);
@@ -462,7 +488,7 @@
   const LEG2 = [['dot', ION20, 'positive neon-20 ion'], ['dot', ION22, 'positive neon-22 ion'],
     ['line', EF, 'electric field, E (down)'], ['line', BF, 'magnetic field, B (× into the page)']];
   function endCard(s, t) {
-    const a = fade(t, END, DURATION - 0.6, 0.9, 0.8); if (a <= 0) return;
+    const a = fade(t, END, STORY - 0.6, 0.9, 0.8); if (a <= 0) return;
     const { g } = s, { W, H, phone } = L;
     g.fillStyle = `rgba(4,6,13,${0.9 * a})`; g.fillRect(0, 0, W, H);
     const s1 = Math.round(clamp(W / 30, 18, 38)), s2 = Math.round(clamp(W / 46, 14, 24)), s3 = Math.round(clamp(W / 66, 11, 16));
@@ -497,9 +523,9 @@
     out.E1 = E1; out.a = A1; out.t = L1 / U1; out.y = 0.5 * A1 * (L1 / U1) ** 2; out.y2 = 0.5 * A1 * (L1 / U2) ** 2;
     out.weightRatio = ME * 9.8 / (QE * E1);
     out.E2 = E2; out.vd = VD; out.w20 = QE * B2 / M20;
-    out.fastHit = [PART2[2].o.end, PART2[2].o.sx(PART2[2].o.tEnd) * 100];
-    out.slowHit = [PART2[3].o.end, PART2[3].o.sx(PART2[3].o.tEnd) * 100];
-    out.straight = [PART2[0].o.end, PART2[1].o.end, PART2[4].o.end];
+    out.fastHit = [PART2[0].o.end, PART2[0].o.sx(PART2[0].o.tEnd) * 100];
+    out.slowHit = [PART2[1].o.end, PART2[1].o.sx(PART2[1].o.tEnd) * 100];
+    out.straight = [SERIES[0].o.end, PART2[2].o.end];
     out.r20 = M20 * VD / (QE * B3); out.r22 = M22 * VD / (QE * B3);
     out.land20 = H20.o.land; out.land22 = H22.o.land;
     out.arcTime20 = H20.o.tArc * K2; out.arcTime22 = H22.o.tArc * K2; out.selTime = LS / VD * K2;
@@ -514,17 +540,17 @@
 
   Anim.register('selector', {
     duration: DURATION,
-    poster: 134,
-    pauses: [[11.0, 1.5], [16.2, 1.5], [18.3, 3.0], [28.2, 3.0], [33.4, 1.4], [47.2, 1.0], [58.8, 6.0], [66.2, 0.6],
-      [74.2, 2.2], [81.2, 3.0], [88.0, 1.5], [91.2, 1.2], [96.6, 6.0], [102.4, 1.0], [115.2, 1.2], [121.6, 1.0], [127.8, 1.0],
-      [134.8, 1.4], [140.6, 0.8], [146.8, 1.0], [150.0, 1.5], [153.0, 0.8], [158.8, 1.6]],
+    poster: real(134),
     // score: precise machinery (D dorian, a triangle pad with a slow, even swell, a low drone)
     music: { chords: [[50, 57, 60, 65], [55, 59, 62, 67], [45, 52, 57, 60], [48, 55, 60, 64]], bar: 6, pad: 'triangle', cutoff: 900,
       drone: 0.09, tremolo: 0.8, volume: 0.54 },
     resize: layout,
-    info: { check, ion, ionAt, ionDone, CAPS, PART2, H20, H22, STREAM, e1Y },
-    frame(s, t) {
+    info: { check, ion, ionAt, ionDone, CAPS, PART2, SERIES, H20, H22, STREAM, e1Y, HOLDS, story, real, DURATION, K2, E1_EVERY, E2_EVERY, T_E1, T_E2 },
+    frame(s, tScene) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
+      // the charges move in scene time; captions, labels and the camera follow the story time
+      const t = story(tScene);
+      RT = tScene;
       D.background(s, 0.22);
       const a1 = smooth((t - 4.4) / 0.8) * (1 - smooth((t - P1_END) / 0.8));
       const a2 = smooth((t - P2_ON) / 0.9) * (1 - smooth((t - END) / 0.8));
@@ -538,7 +564,7 @@
       if (t < 4.6) { s.g.fillStyle = `rgba(4,6,13,${0.8 * fade(t, 0, 4.4, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 4.4, 'Charges in electric and crossed fields', 'A beam bent by a field, a velocity selector, and ions sorted by charge-to-mass ratio');
       endCard(s, t);
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tScene, DURATION);
     },
   });
 })();

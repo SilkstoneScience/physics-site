@@ -36,7 +36,7 @@
 
     <section class="anim-shows">
       <h2 id="shows">What the animation shows</h2>
-      <p>The nuclei belong to a made-up nuclide, X, with a half-life of $T_{1/2} = 10$ s, so that several half-lives fit into a minute; between the holds, the clock runs at real speed (it waits briefly at exactly 10, 20 and 30 s so the numbers can be read). Each nucleus was given its own random decay moment once, so the run is random but the same every time you watch it. The numbers below are the counts from this run.</p>
+      <p>The nuclei belong to a made-up nuclide, X, with a half-life of $T_{1/2} = 10$ s, so that several half-lives fit into a minute or two. The clock runs at real speed and never stops; the numbers left at exactly 10, 20 and 30 s stay marked on the graph while the decays carry on. Each nucleus was given its own random decay moment once, so the run is random but the same every time you watch it. The numbers below are the counts from this run.</p>
       <ol>
         <li>1000 unstable nuclei of X (orange). Each will decay, giving out radiation, and become a daughter nucleus (grey-blue).</li>
         <li>Before the clock starts, the detector already counts now and then, at about 0.5 counts per second: this is <strong>background radiation</strong>, from rocks, radon gas, cosmic rays and other sources.</li>
@@ -50,7 +50,7 @@
         <li>After 30 s, 117 are left: about an eighth of 1000, which is 125. After $n$ half-lives, the fraction left is $\left(\tfrac{1}{2}\right)^n$.</li>
         <li>The smooth white curve is the expected number, which halves every 10 s. With 1000 nuclei, the random run follows it closely.</li>
         <li>A separate sample of only 20 nuclei decays just as randomly. After 10 s it still had 15, not 10, and after 20 s it had 8, not 5: a small sample is much less predictable. (On the graph its count is multiplied by 50, so that both samples share one scale; it is drawn from this step on.)</li>
-        <li>To measure the source alone, subtract the background count rate from every reading. Here the background was measured before the clock started: 13 counts in 31 s, about 0.4 counts per second. The screen shows the count rate with this subtracted.</li>
+        <li>To measure the source alone, subtract the background count rate from every reading. Here the background was measured before the clock started: 23 counts in 46.6 s, about 0.5 counts per second. The screen shows the count rate with this subtracted.</li>
         <li>(HL) The decay constant is $\lambda = \dfrac{\ln 2}{T_{1/2}} = \dfrac{0.693}{10} = 0.0693\ \text{s}^{-1}$.</li>
         <li>(HL) The activity is $A = \lambda N$. At the start, $A = 0.0693 \times 1000 = 69$ Bq. The activity falls as the nuclei decay, so over the first 5 s the expected average is $\dfrac{1000\,(1 - e^{-0.0693 \times 5})}{5} = 59$ decays per second; this run had 285 decays in the first 5 s, 57 per second. The rest of the difference is random variation.</li>
         <li>(HL) The decay law $N = N_0e^{-\lambda t}$ works at any time, not only after whole half-lives. At $t = 25$ s: $N = 1000 \times e^{-0.0693 \times 25} = 1000 \times e^{-1.73} = 177$ expected. This run had 162.</li>

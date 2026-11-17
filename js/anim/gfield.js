@@ -56,9 +56,29 @@
     [130.2, 137.6, '(HL) The field strength is minus the potential gradient, g = −ΔV/Δr. Surface to first equipotential: 1.25 × 10⁷ ÷ 1.6 × 10⁶ = 7.8 N kg⁻¹.'],
     [137.8, 145.2, '(HL) That is an average: g falls from 9.8 to 6.3 N kg⁻¹ across the gap. The minus sign: g points to lower potential, inwards.'],
   ];
-  const PAUSES = [[8.6, 0.8], [14.8, 0.4], [21.0, 0.6], [27.8, 1.2], [33.4, 0.8], [39.4, 6.0], [45.6, 0.4], [51.6, 0.8],
+  // No pauses (teacher, 17 November 2026). The old holds, [story time, seconds], are now spread over the caption on
+  // screen at that moment: the story (a probe moved by hand, a zoom, lines appearing: nothing with a natural speed)
+  // runs a little more slowly there instead of stopping, and the field arrows keep flowing at a steady speed.
+  const OLD_HOLDS = [[8.6, 0.8], [14.8, 0.4], [21.0, 0.6], [27.8, 1.2], [33.4, 0.8], [39.4, 6.0], [45.6, 0.4], [51.6, 0.8],
     [58.6, 0.6], [64.6, 0.4], [70.6, 0.6], [76.8, 6.0], [84.2, 0.8], [91.2, 1.8], [97.2, 1.8], [103.2, 2.6],
     [110.4, 3.0], [117.6, 1.8], [129.0, 0.8], [136.6, 2.4], [144.2, 2.6], [153.0, 2.0]];
+  const KNOTS = (() => {                                // [story time, scene time] pairs
+    const win = new Map();
+    for (const [st, d] of OLD_HOLDS) {
+      const c = CAPS.find(([a, b]) => st >= a - 0.05 && st <= b + 0.05), key = c ? `${c[0]},${c[1]}` : `${st - 1.5},${st + 1.5}`;
+      win.set(key, (win.get(key) || 0) + d);
+    }
+    const ws = [...win].map(([k, d]) => [...k.split(",").map(Number), d]).sort((p, q) => p[0] - q[0]);
+    const k = [[0, 0]]; let acc = 0;
+    for (const [a, b, d] of ws) { k.push([a, a + acc]); acc += d; k.push([b, b + acc]); }
+    k.push([DURATION, DURATION + acc]);
+    return k;
+  })();
+  const SCENE_END = KNOTS[KNOTS.length - 1][1];
+  const map = (x, from, to) => { for (let i = 1; i < KNOTS.length; i++) { const p = KNOTS[i - 1], q = KNOTS[i]; if (x <= q[from]) return q[from] === p[from] ? p[to] : p[to] + (q[to] - p[to]) * (x - p[from]) / (q[from] - p[from]); } return KNOTS[KNOTS.length - 1][to]; };
+  const storyOf = (t) => map(t, 1, 0), sceneOf = (x) => map(x, 0, 1);
+  const CAPS_SCENE = CAPS.map(([a, b, txt]) => [+sceneOf(a).toFixed(2), +sceneOf(b).toFixed(2), txt]);
+  let REAL = 0;                                        // scene time, for the steady flow of the field arrows
 
   // ---------- colours ----------
   const FL = C.field, EQ = C.good, GE = '170,160,255', GM = C.light, TEST = '236,240,255';
@@ -225,11 +245,11 @@
       if (!seg) continue;
       D.glowLine(s, [[seg[0], seg[1]], [seg[2], seg[3]]], FL, 0.55 * a * al, 1.3);
       const ux = -c, uy = sn;                                  // inwards, on screen
-      if (aArrowsGlobal > 0 && al === 1) for (const r of [1.75, 3.3, 5.2]) {
+      if (aArrowsGlobal > 0 && al === 1) for (const r of [0, 1, 2].map((j) => 1.25 + ((j * 1.9 + 5.7 - (0.3 * REAL) % 5.7) % 5.7))) {
         const x = cm.X(c * r), y = cm.Y(sn * r);
         if (x > 0 && x < W && y > 0 && y < H) head(s, x, y, ux, uy, 9, FL, 0.85 * a * aArrowsGlobal);
       }
-      if (aArrowsZoom > 0) headsAlong(s, [[seg[0], seg[1]], [seg[2], seg[3]]], 110, 60, 10, FL, 0.85 * a * aArrowsZoom * al);
+      if (aArrowsZoom > 0) headsAlong(s, [[seg[0], seg[1]], [seg[2], seg[3]]], 110, (60 + 40 * REAL) % 110, 10, FL, 0.85 * a * aArrowsZoom * al);
     }
     return { cx, cy };
   }
@@ -327,7 +347,7 @@
       for (const ln of MOONLINES) {
         const pts = ln.map(([x, y]) => [cm.X(x), cm.Y(y)]);
         D.glowLine(s, pts, FL, 0.55 * fA, 1.2);
-        headsAlong(s, pts, 120, 50, 9, FL, 0.85 * fA * smooth((t - Y1) / 0.6));
+        headsAlong(s, pts, 120, (50 + 30 * REAL) % 120, 9, FL, 0.85 * fA * smooth((t - Y1) / 0.6));
       }
     }
     drawEarth(s, cm.X(0), cm.Y(0), cm.sc, a);
@@ -399,7 +419,7 @@
       const seg = clipSeg(cm.X(c * 9), cm.Y(sn * 9), cm.X(c), cm.Y(sn), -30, -30, L.W + 30, L.H + 30);
       if (!seg) continue;
       D.glowLine(s, [[seg[0], seg[1]], [seg[2], seg[3]]], FL, 0.4 * a, 1.2);
-      for (const r of [2.1, 3.6]) { const x = cm.X(c * r), y = cm.Y(sn * r); head(s, x, y, -c, sn, 8, FL, 0.7 * a); }
+      for (const r of [0, 1].map((j) => 1.3 + ((j * 2.6 + 5.2 - (0.3 * REAL) % 5.2) % 5.2))) { const x = cm.X(c * r), y = cm.Y(sn * r); head(s, x, y, -c, sn, 8, FL, 0.7 * a * smooth((r - 1.05) / 0.4)); }
     }
     // equipotentials, appearing one by one
     RINGS.forEach((r, i) => {
@@ -518,30 +538,30 @@
   }
 
   Anim.register('gfield', {
-    duration: DURATION,
-    poster: 99,
-    pauses: PAUSES,
+    duration: SCENE_END,
+    poster: +sceneOf(99).toFixed(1),
     // score: deep and slow (G minor, a dark saw pad, a strong low drone, a little wind)
     music: { chords: [[43, 50, 55, 58], [39, 46, 55, 58], [36, 43, 51, 55], [38, 45, 50, 54]], bar: 10, pad: 'saw', cutoff: 500,
       drone: 0.14, wind: 0.3, volume: 0.54 },
     resize: layout,
     info: {
-      CAPS, PAUSES, RINGS, MOONLINES,
+      CAPS: CAPS_SCENE, STORY_CAPS: CAPS, KNOTS, RINGS, MOONLINES,
       check: () => ({ GME, g0: G0, g2R: G0 / 4, g3R: G0 / 9, ratio: RATIO, sqrtRatio: KR, xOverD: KR / (KR + 1), XP, gP: GP,
         dInR: DW, moonInR: RMW, V0, rings: RINGS, gap1m: (RINGS[0] - 1) * RE, gAvg: VSTEP / ((RINGS[0] - 1) * RE), gAt125: G0 / (RINGS[0] ** 2),
         patchKm: 0.05 * RE / 1000 }),
     },
-    frame(s, t) {
+    frame(s, tScene) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
+      REAL = tScene; const t = storyOf(tScene);
       D.background(s, 0.18);
       part1(s, t);
       part2(s, t);
       part3(s, t);
-      D.captions(s, t, CAPS);
+      D.captions(s, tScene, CAPS_SCENE);
       if (t < 4.6) { s.g.fillStyle = `rgba(4,6,13,${0.8 * fade(t, 0, 4.4, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 4.4, 'Gravitational fields', 'Field lines and equipotentials');
       endCard(s, t);
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tScene, SCENE_END);
     },
   });
 })();

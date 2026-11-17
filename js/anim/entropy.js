@@ -55,14 +55,34 @@
     [144.2, 150.6, nb('That energy, plus 2.0~×~10⁴~J of work done by the motor, goes into the kitchen at 293~K: ΔS~=~+296~J~K⁻¹.')],
     [150.8, 156.6, nb('Total: +52~J~K⁻¹. Living things lower their own entropy the same way, by raising it around them.')],
   ];
-  // holds: each caption gets enough time to read at about 16 characters a second (0.6 s of fades not counted);
-  // the Predict caption also gets 6 s to think
-  const PAUSES = [];
+  // No pauses (teacher, 17 November 2026). Each caption still gets enough time to read at about 16 characters a
+  // second (the Predict caption 6 s more): the extra time is spread over the caption itself, so the story (tiles
+  // appearing, bars, energy flowing, labels) runs a little more slowly there instead of stopping. The gas particles
+  // are driven by the scene time itself, so they always move at their own steady speed.
+  const OLD_HOLDS = [];
   for (const [a, b, txt] of CAPS) {
     const need = txt.length / 16 - (b - a - 0.6);
-    if (need > 0.05) PAUSES.push([b - 0.8, Math.max(0.8, +need.toFixed(1))]);
+    if (need > 0.05) OLD_HOLDS.push([b - 0.8, Math.max(0.8, +need.toFixed(1))]);
   }
-  PAUSES.push([27.0, 6.0]);
+  OLD_HOLDS.push([27.0, 6.0]);
+  const KNOTS = (() => {                                // [story time, scene time] pairs
+    const win = new Map();
+    for (const [st, d] of OLD_HOLDS) {
+      const c = CAPS.find(([a, b]) => st >= a - 0.05 && st <= b + 0.05), key = c ? `${c[0]},${c[1]}` : `${st - 1.5},${st + 1.5}`;
+      win.set(key, (win.get(key) || 0) + d);
+    }
+    const ws = [...win].map(([k, d]) => [...k.split(",").map(Number), d]).sort((p, q) => p[0] - q[0]);
+    const k = [[0, 0]]; let acc = 0;
+    for (const [a, b, d] of ws) { k.push([a, a + acc]); acc += d; k.push([b, b + acc]); }
+    k.push([DURATION, DURATION + acc]);
+    return k;
+  })();
+  const SCENE_END = KNOTS[KNOTS.length - 1][1];
+  const map = (x, from, to) => { for (let i = 1; i < KNOTS.length; i++) { const p = KNOTS[i - 1], q = KNOTS[i]; if (x <= q[from]) return q[from] === p[from] ? p[to] : p[to] + (q[to] - p[to]) * (x - p[from]) / (q[from] - p[from]); } return KNOTS[KNOTS.length - 1][to]; };
+  const storyOf = (t) => map(t, 1, 0), sceneOf = (x) => map(x, 0, 1);
+  const CAPS_SCENE = CAPS.map(([a, b, txt]) => [+sceneOf(a).toFixed(2), +sceneOf(b).toFixed(2), txt]);
+  const T_REL_S = sceneOf(T_REL);                    // the partition goes, in scene time
+  let REAL = 0;                                        // scene time: the particles move with it
 
   // ---------- random numbers (fixed seed) ----------
   let seed = 20261116 + 7;
@@ -90,11 +110,11 @@
     const r = deg * Math.PI / 180;
     return { x0: RAD + rnd() * (2 - 2 * RAD), y0: RAD + rnd() * (1 - 2 * RAD), vx: v * Math.cos(r), vy: v * Math.sin(r) };
   });
-  function bigPos(p, t) {
+  function bigPos(p, t) {                              // t: scene time
     const [y] = fold(p.y0 + p.vy * t, RAD, 1 - RAD);
-    if (t < T_REL) return [fold(p.x0 + p.vx * t, RAD, 1 - RAD)[0], y];
-    const [xr, dir] = fold(p.x0 + p.vx * T_REL, RAD, 1 - RAD);
-    return [fold(xr + dir * Math.abs(p.vx) * (t - T_REL), RAD, 2 - RAD)[0], y];
+    if (t < T_REL_S) return [fold(p.x0 + p.vx * t, RAD, 1 - RAD)[0], y];
+    const [xr, dir] = fold(p.x0 + p.vx * T_REL_S, RAD, 1 - RAD);
+    return [fold(xr + dir * Math.abs(p.vx) * (t - T_REL_S), RAD, 2 - RAD)[0], y];
   }
   const fewAt = (p, u) => [fold(p.x0 + p.vx * u, RAD, 2 - RAD)[0], fold(p.y0 + p.vy * u, RAD, 1 - RAD)[0]];
   const leftCount = (t) => BIG.reduce((n, p) => n + (bigPos(p, t)[0] < 1 ? 1 : 0), 0);
@@ -102,10 +122,13 @@
   // is on screen (the page says so); over a long run it happens 1/16 of the time (checked in info.check())
   const FEW_OFF = (() => {
     const allLeft = (u) => FEW.every((p) => fewAt(p, u)[0] < 1);
+    const w0 = sceneOf(SMALL[0]), w1 = sceneOf(SMALL[1]);                // the small box is on screen (scene time)
+    const cap = CAPS_SCENE.find(([, , txt]) => txt.startsWith('With only 4 particles'));
     for (let off = 0; off < 600; off += 0.25) {
-      let n = 0, was = false, longest = 0, run = 0;
-      for (let t = 35.4; t <= 40.8; t += 0.01) { const now = allLeft(t + off); if (now && !was) n++; run = now ? run + 0.01 : 0; longest = Math.max(longest, run); was = now; }
-      if (n === 1 && longest > 0.3 && !allLeft(SMALL[0] + off)) return off;
+      let n = 0, was = allLeft(w0 + off), at = -1, run = 0, longest = 0;
+      if (was) continue;
+      for (let t = w0; t <= w1; t += 0.01) { const now = allLeft(t + off); if (now && !was) { n++; at = t; } run = now ? run + 0.01 : 0; longest = Math.max(longest, run); was = now; }
+      if (n === 1 && longest > 0.3 && at > cap[0] + 1.5 && at < cap[1] - 1.5) return off;
     }
     return 0;
   })();
@@ -114,7 +137,7 @@
   // the moments (in the small box's window) when all four arrive on the left together
   const FEW_EVENTS = (() => {
     const ev = []; let was = false;
-    for (let t = SMALL[0]; t <= SMALL[1]; t += 0.005) { const now = fewAllLeft(t); if (now && !was) ev.push(t); was = now; }
+    for (let t = sceneOf(SMALL[0]); t <= sceneOf(SMALL[1]); t += 0.005) { const now = fewAllLeft(t); if (now && !was) ev.push(t); was = now; }
     return ev;
   })();
 
@@ -195,7 +218,7 @@
     // particles with short trails
     const r = Math.max(2.2, sc * RAD);
     for (const p of BIG) {
-      const [x, y] = bigPos(p, t), [xb, yb] = bigPos(p, t - 0.12);
+      const [x, y] = bigPos(p, REAL), [xb, yb] = bigPos(p, REAL - 0.12);
       if (Math.abs(x - xb) < 0.3) D.line(s, X(xb), Y(yb), X(x), Y(y), GAS, 0.25 * a, Math.max(1, r * 0.6));
       D.glowDot(s, X(x), Y(y), r * 3, GAS, 0.9 * a);
     }
@@ -204,7 +227,7 @@
   }
   function drawCounts(s, t, a) {
     if (a <= 0) return;
-    const { g } = s, p = L.panel, fs = L.fs, n = leftCount(t);
+    const { g } = s, p = L.panel, fs = L.fs, n = leftCount(REAL);
     const x0 = p.x0, w = p.x1 - p.x0, bh = Math.max(8, fs * 0.9);
     label(s, 'number of particles on each side', x0, p.y0 + fs * 0.4, 0.8 * a, C.muted, 'left');
     [['left', n], ['right', 60 - n]].forEach(([nm, v], i) => {
@@ -223,13 +246,13 @@
     label(s, 'only 4 particles', (X(0) + X(2)) / 2, Y(1) - fs * 0.9, 0.85 * sa);
     D.glowLine(s, [[X(0), Y(0)], [X(2), Y(0)], [X(2), Y(1)], [X(0), Y(1)], [X(0), Y(0)]], WALL, 0.55 * sa, 1.2);
     D.line(s, X(1), Y(0), X(1), Y(1), WALL, 0.3 * sa, 1, [4, 5]);
-    const last = FEW_EVENTS.filter((e) => e <= t).pop();
-    const flash = last !== undefined && fewAllLeft(t) ? 1 : last !== undefined ? 1 - smooth((t - last - 0.6) / 0.6) : 0;
+    const last = FEW_EVENTS.filter((e) => e <= REAL).pop();
+    const flash = last !== undefined && fewAllLeft(REAL) ? 1 : last !== undefined ? 1 - smooth((REAL - last - 0.6) / 0.6) : 0;
     if (flash > 0) {
       g.fillStyle = `rgba(${C.light},${0.12 * flash * sa})`; g.fillRect(X(0), Y(1), sc, sc);
       label(s, 'all 4 on the left!', (X(0) + X(2)) / 2, Y(0) + fs * 1.1, flash * sa, C.light, 'center', fs, 600);
     }
-    FEW.forEach((q, i) => { const [x, y] = fewPos(q, t); D.glowDot(s, X(x), Y(y), Math.max(7, sc * 0.08), PCOL[i], sa); });
+    FEW.forEach((q, i) => { const [x, y] = fewPos(q, REAL); D.glowDot(s, X(x), Y(y), Math.max(7, sc * 0.08), PCOL[i], sa); });
   }
 
   // ---------- part 2–3: tiles of microstates, the bar chart, Boltzmann's equation ----------
@@ -475,15 +498,14 @@
   }
 
   Anim.register('entropy', {
-    duration: DURATION,
-    poster: 20,
-    pauses: PAUSES,
+    duration: SCENE_END,
+    poster: +sceneOf(20).toFixed(1),
     // score: spreading out (F-sharp lydian, a triangle pad that very slowly swells, space wind, a soft shimmer, long bars)
     music: { chords: [[54, 61, 65, 68], [56, 63, 66, 70], [51, 58, 63, 66], [49, 56, 61, 65]], bar: 10, pad: 'triangle', cutoff: 800,
       drone: 0.09, wind: 0.6, shimmer: 0.15, tremolo: 0.15, volume: 0.51 },
     resize: layout,
     info: {
-      CAPS, PAUSES, FEW_EVENTS, leftCount, choose, KB,
+      CAPS: CAPS_SCENE, STORY_CAPS: CAPS, KNOTS, FEW_EVENTS, leftCount, choose, KB,
       check() {
         const out = {};
         out.p60 = Math.pow(0.5, 60); out.p100 = Math.pow(0.5, 100);
@@ -491,17 +513,18 @@
         out.S6 = KB * Math.log(6); out.S4 = KB * Math.log(4);
         out.heat = { hot: -720 / 360, cold: 720 / 240, total: -720 / 360 + 720 / 240 };
         const Qf = 0.2 * 3.34e5, Wm = 2.0e4; out.freezer = { Q: Qf, dSwater: -Qf / 273, dSkitchen: (Qf + Wm) / 293, total: -Qf / 273 + (Qf + Wm) / 293 };
-        let mn = 60, mx = 0; for (let t = 20; t <= 42; t += 0.05) { const n = leftCount(t); mn = Math.min(mn, n); mx = Math.max(mx, n); }
-        out.leftRange20to42 = [mn, mx]; out.leftAt0 = leftCount(0); out.leftAt11 = leftCount(11.9);
+        let mn = 60, mx = 0; for (let t = sceneOf(20); t <= sceneOf(42); t += 0.05) { const n = leftCount(t); mn = Math.min(mn, n); mx = Math.max(mx, n); }
+        out.leftRange20to42 = [mn, mx]; out.leftAt0 = leftCount(0); out.leftAt11 = leftCount(T_REL_S - 0.1); out.window20to42 = [sceneOf(20), sceneOf(42)];
         out.FEW_OFF = FEW_OFF;
         let all = 0, tot = 0; for (let t = 0; t < 2000; t += 0.01) { tot++; if (fewAllLeft(t)) all++; }
         out.fewAllLeftFraction = all / tot; out.fewEventsInWindow = FEW_EVENTS.length;
-        out.maxCharsPerSec = Math.max(...CAPS.map(([a, b, txt]) => { const hold = PAUSES.filter(([p]) => p >= a && p <= b).reduce((n, p) => n + p[1], 0); return txt.length / (b - a - 0.6 + hold); }));
+        out.maxCharsPerSec = Math.max(...CAPS_SCENE.map(([a, b, txt]) => txt.length / (b - a - 0.6)));
         return out;
       },
     },
-    frame(s, t) {
+    frame(s, tScene) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
+      REAL = tScene; const t = storyOf(tScene);
       D.background(s, 0.2);
       const a1 = fade(t, P1[0], P1[1], 0.8, 0.7);
       drawBox(s, t, a1);
@@ -513,11 +536,11 @@
       drawBlocks(s, t, fade(t, P4[0], P4[1], 0.8, 0.7));
       drawLaws(s, t, fade(t, P5[0], FREEZE - 0.2, 0.6, 0.6));
       drawFreezer(s, t, fade(t, FREEZE, END_CARD + 0.4, 0.8, 0.7));
-      D.captions(s, t, CAPS);
+      D.captions(s, tScene, CAPS_SCENE);
       if (t < 4.6) { s.g.fillStyle = `rgba(4,6,13,${0.8 * fade(t, 0, 4.4, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 4.4, 'Entropy and the second law', 'Why things spread out, and never spread back (HL)');
       endCard(s, t);
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tScene, SCENE_END);
     },
   });
 })();

@@ -23,7 +23,7 @@
   // ---------- timeline (scene seconds) ----------
   const T_ZIN = 8.8, T_ZIN2 = 12.4, T_ONE = 23.4, T_ONE2 = 28.8, T_INS = 28.8, T_INS2 = 34.6;
   const T_ON = 35.6, T_TWO = 40.8, T_TWO2 = 57.8, T_HEAT = 63.8, T_ZOUT = 75.4, T_ZOUT2 = 78.2;
-  const T_OPEN = 78.6, T_CLOSE = 85.0, DURATION = 104.4, FRONT = 0.32;   // FRONT: the time for the field to spread half-way round the loop (drawn far slower than real)
+  const T_OPEN = 78.6, T_CLOSE = 87.6, DURATION = 109.6, FRONT = 0.32;   // FRONT: the time for the field to spread half-way round the loop (drawn far slower than real)
 
   // ---------- the simulation (lattice spacing = 1 unit; periodic box LX × LY) ----------
   const LX = 20, LY = 6, VR = 3.0, RC = 0.3, TMAX = 1.4, N = 120, DT = 1 / 200, EVERY = 5, FPS = 1 / (DT * EVERY), TEND = T_ZOUT2;
@@ -414,7 +414,7 @@
 
   // ---------- closing ----------
   function closing(s, t) {
-    const ea = fade(t, 96.6, DURATION, 0.9, 0.8); if (ea <= 0) return;
+    const ea = fade(t, 99.2, DURATION, 0.9, 0.8); if (ea <= 0) return;
     const { W, H } = s;
     s.g.fillStyle = `rgba(4,6,13,${0.8 * ea})`; s.g.fillRect(0, 0, W, H);
     const s1 = Math.round(clamp(W / 20, 26, 52)), s2 = Math.round(clamp(W / 50, 13, 21)), y = H * (L.phone ? 0.2 : 0.2) + (s.top || 0);
@@ -441,9 +441,9 @@
     [58.0, 63.6, 'In a real copper wire carrying 1 A through 1 mm², the drift is only about 0.07 mm per second. It is drawn far faster here.'],
     [63.8, 69.2, 'Between collisions the field speeds the electrons up. When an electron hits an ion, it hands on some of this energy.'],
     [69.4, 75.2, 'The ions vibrate more, so the internal energy of the wire rises: it warms up. These collisions are the origin of resistance.'],
-    [78.4, 84.8, 'Open the switch again. Predict: if the drift is so slow, why does the lamp light the moment the switch is closed?'],
-    [85.2, 91.0, 'The wire is already full of free electrons. The field reaches them all almost at once, so they all start to drift together.'],
-    [91.2, 96.4, 'Like a bicycle chain: turn the pedals and every link starts to move at the same moment, all the way round.'],
+    [78.4, 87.4, 'Open the switch again. Predict: if the drift is so slow, why does the lamp light the moment the switch is closed?'],
+    [87.8, 93.6, 'The wire is already full of free electrons. The field reaches them all almost at once, so they all start to drift together.'],
+    [93.8, 99.0, 'Like a bicycle chain: turn the pedals and every link starts to move at the same moment, all the way round.'],
   ];
 
   Anim.register('drift', {
@@ -451,8 +451,7 @@
     poster: 50,
     // score: electric flow (B minor, a low buzzing pad with tremolo, a low drone)
     music: { chords: [[47, 54, 59, 62], [43, 50, 55, 59], [50, 57, 62, 66], [45, 52, 57, 61]], bar: 6, pad: 'saw', cutoff: 800, tremolo: 3, drone: 0.09, volume: 0.79 },
-    // hold the picture still while the prediction is thought about, and at the end
-    pauses: [[84.2, 2.6], [103.4, 2.6]],
+    // no pauses (teacher, 17 November 2026): the Predict caption and the end card simply stay longer while the electrons keep moving
     resize: layout,
     frame(s, t) {
       D.background(s, 0.2);
@@ -463,14 +462,14 @@
         g.save(); g.translate(z.ox, z.oy); g.scale(z.Z, z.Z);
         const lampCl = t >= T_CLOSE ? smooth((t - T_CLOSE - 2 * FRONT * Math.min(L.path.lampD, L.path.len - L.path.lampD) / L.path.len) / 0.15) : t < T_OPEN ? smooth((t - T_ON - 0.15) / 0.2) : 1 - smooth((t - T_OPEN) / 0.2);
         const frontA = t > T_CLOSE ? fade(t, T_CLOSE, T_CLOSE + 1.4, 0.15, 1.0) : 0;
-        circuit(s, L.G, { a: smooth((t - 2.6) / 1.0) * (1 - 0.92 * smooth((t - 96.4) / 1.0)), sw: switchAt(t), lamp: lampCl, front: frontA > 0 ? 1 : null, frontA });
-        loopDots(s, t, smooth((t - T_OPEN - 0.3) / 0.8) * (1 - 0.92 * smooth((t - 96.4) / 1.0)));
+        circuit(s, L.G, { a: smooth((t - 2.6) / 1.0) * (1 - 0.92 * smooth((t - 99.0) / 1.0)), sw: switchAt(t), lamp: lampCl, front: frontA > 0 ? 1 : null, frontA });
+        loopDots(s, t, smooth((t - T_OPEN - 0.3) / 0.8) * (1 - 0.92 * smooth((t - 99.0) / 1.0)));
         g.restore();
-        circuitLabels(s, t, Math.max(fade(t, 3.2, T_ZIN + 0.6, 0.8, 0.6), fade(t, T_ZOUT2 + 0.2, 85.2, 0.7, 0.6)));
+        circuitLabels(s, t, Math.max(fade(t, 3.2, T_ZIN + 0.6, 0.8, 0.6), fade(t, T_ZOUT2 + 0.2, 87.8, 0.7, 0.6)));
         // the spot we zoom into
         const ma = fade(t, 6.6, T_ZIN + 0.9, 0.6, 0.6);
         if (ma > 0) { const [x, y] = [z.ox + L.P[0] * z.Z, z.oy + L.P[1] * z.Z]; s.g.strokeStyle = `rgba(255,255,255,${0.8 * ma})`; s.g.lineWidth = 1.6; s.g.beginPath(); s.g.arc(x, y, L.G.u * 9 * z.Z, 0, TAU); s.g.stroke(); }
-        loopArrows(s, t, fade(t, 86.4, 97.0, 0.8, 0.6));
+        loopArrows(s, t, fade(t, 89.0, 99.6, 0.8, 0.6));
       }
       // inside the wire
       if (inA > 0) {

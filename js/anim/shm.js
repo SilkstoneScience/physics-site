@@ -18,15 +18,39 @@
   // ---------- the physics ----------
   const M = 0.50, K = 4.9, X0 = 0.10;
   const OM = Math.sqrt(K / M), T = 2 * Math.PI / OM, VMAX = OM * X0, AMAX = OM * OM * X0, ET = 0.5 * K * X0 * X0;
-  const T_PULL0 = 8.6, T_PULL1 = 11.0, T_REL = 12.0;
-  const xAt = (t) => t < T_PULL0 ? 0 : t < T_PULL1 ? X0 * smooth((t - T_PULL0) / (T_PULL1 - T_PULL0)) : t < T_REL ? X0 : X0 * Math.cos(OM * (t - T_REL));
-  const vAt = (t) => t < T_REL ? 0 : -OM * X0 * Math.sin(OM * (t - T_REL));
-  const aAt = (t) => t < T_REL ? 0 : -OM * OM * xAt(t);
-  // the scene time nearest `near` at a given fraction of a cycle after the release
-  const phaseTime = (near, frac) => T_REL + (Math.round((near - T_REL) / T - frac) + frac) * T;
+  // No pauses (teacher, 17 November 2026: "extend the animation instead of creating a pause, so that it plays at the
+  // same speed"). Two clocks: the STORY clock (captions, fades, which part is shown: the times written in this file)
+  // and the MOTION clock, which is the real scene time u and never stops. Where the story used to hold still, it now
+  // waits while the glider keeps oscillating at its real speed; after the release every such wait is a whole number
+  // of periods, so the glider is back at exactly the same point of its motion when the story carries on, and a faint
+  // marker stays at the moment the caption describes. Before the release the extra time makes the pull slower.
+  const TS_REL = 12.0;                                                 // the release, on the story clock
+  // [story time, extra seconds]: the glider keeps moving through each extra stretch
+  const phaseTime = (near, frac) => TS_REL + (Math.round((near - TS_REL) / T - frac) + frac) * T;   // story time at a fraction of a cycle
   const P_X0 = phaseTime(42.1, 0), P_ZERO = phaseTime(54.7, 0.25), P_MX0 = phaseTime(60.6, 0.5);
   const P_ZERO2 = phaseTime(119.8, 0.75), P_HALF1 = phaseTime(124.9, 1 / 6), P_HALF2 = phaseTime(136.9, 1 / 6);
-  const P_CYCLE = phaseTime(20, 0);                                    // the oscillation that is timed
+  // (extra periods also go inside captions that would otherwise be read faster than about 17 characters a second)
+  const PRE1 = 1.9, PRE2 = 2.2;
+  const EXTRA = [[8.4, PRE1], [11.5, PRE2], [18.4, T], [24.0, T], [29.2, T], [34.5, 2 * T], [40.0, T], [P_X0, T], [52.0, 3 * T], [P_ZERO, T], [P_MX0, T],
+    [68.0, 3 * T], [73.2, T], [84.0, T], [89.2, T], [95.0, T], [99.4, T], [106.0, T], [111.2, T], [116.6, T], [P_ZERO2, T], [P_HALF1, T],
+    [P_HALF2, T]].sort((a, b) => a[0] - b[0]);
+  const storyAt = (u) => {                                             // real scene time → story time
+    let acc = 0;
+    for (const [p, e] of EXTRA) { if (u < p + acc) return u - acc; if (u < p + acc + e) return p; acc += e; }
+    return u - acc;
+  };
+  const realAt = (st) => st + EXTRA.filter((x) => x[0] < st).reduce((n, x) => n + x[1], 0);   // story time → real time
+  const PRE = PRE1 + PRE2;                                             // extra time before the release
+  // the motion, on the real clock: at rest, a slow pull to +x₀, held for 1 s, then released
+  const T_REL = TS_REL + PRE, T_PULL0 = 8.6 + PRE1, T_PULL1 = T_REL - 1.0;
+  const xAt = (u) => u < T_PULL0 ? 0 : u < T_PULL1 ? X0 * smooth((u - T_PULL0) / (T_PULL1 - T_PULL0)) : u < T_REL ? X0 : X0 * Math.cos(OM * (u - T_REL));
+  const vAt = (u) => u < T_REL ? 0 : -OM * X0 * Math.sin(OM * (u - T_REL));
+  const aAt = (u) => u < T_REL ? 0 : -OM * OM * xAt(u);
+  const P_CYCLE = realAt(phaseTime(20, 0));                            // the oscillation that is timed (real clock)
+  // the moments the captions describe, with a faint marker left there while the glider moves on
+  const MOMENTS = [[P_X0, 'x = +0.10 m', 'a = −0.98'], [P_ZERO, 'x = 0', 'a = 0'], [P_MX0, 'x = −0.10 m', 'a = +0.98'],
+    [P_ZERO2, '', ''], [P_HALF1, '', ''], [P_HALF2, '', '']].map(([p, lx, la]) => ({ p, u: realAt(p), e: T, lx, la }));
+  const DURATION_U = 152 + EXTRA.reduce((n, x) => n + x[1], 0);
 
   const T_HL = 100.6, END = 140.0, DURATION = 152;
   const CAPS = [
@@ -100,9 +124,9 @@
   const sgn = (v, dp) => (v < -0.5 * Math.pow(10, -dp) ? '−' : '+') + Math.abs(v).toFixed(dp);
 
   // ---------- the air track, springs and glider ----------
-  function drawTrack(s, t, A) {
+  function drawTrack(s, t, A, u) {
     if (A <= 0) return;
-    const { g } = s, { lx0, lx1, cx, gwid, gh, beam, fs, R, ppm } = L, ty = trackY(t), x = xAt(t), gxc = cx + x * ppm;
+    const { g } = s, { lx0, lx1, cx, gwid, gh, beam, fs, R, ppm } = L, ty = trackY(t), x = xAt(u), gxc = cx + x * ppm;
     const top = ty - gh;
     g.globalAlpha = A;
     // the beam, with its rows of air holes
@@ -162,7 +186,7 @@
     D.line(s, gxc - hw + 2, ty - 1, gxc + hw - 2, ty - 1, '180,210,255', 0.35 * A, 1);
     // arrows above the glider: velocity (blue) and the restoring force / acceleration (orange)
     const vA = A * smooth((t - 14.0) / 0.8), aA = A * smooth((t - 24.8) / 0.8);
-    const yv = top - fs * 1.05, ya = top - fs * 2.35, v = vAt(t), ac = aAt(t);
+    const yv = top - fs * 1.05, ya = top - fs * 2.35, v = vAt(u), ac = aAt(u);
     const arrowLab = (x1, y, len, rgb, al, parts) => {
       if (Math.abs(len) < 5 || al <= 0) return;
       D.arrow(s, x1, y, x1 + len, y, rgb, al, '', { width: 2.4, head: Math.min(11, fs * 0.8), blur: 8 });
@@ -175,11 +199,27 @@
     return { gxc, top };
   }
 
+  // a faint glider left at the moment a caption describes, while the real one carries on oscillating
+  const momentA = (m, u) => fade(u, m.u - 0.15, m.u + m.e + 0.6, 0.3, 0.6);
+  function drawGhosts(s, t, A, u) {
+    if (A <= 0) return;
+    const { g } = s, { cx, gwid, gh, ppm } = L, ty = trackY(t);
+    for (const m of MOMENTS) {
+      const a = A * momentA(m, u); if (a <= 0) continue;
+      const gx = cx + xAt(m.u) * ppm, b0 = ty - 2, b1 = ty - gh * 0.72, hw = gwid / 2, tw = gwid * 0.39;
+      g.globalCompositeOperation = 'source-over';
+      g.setLineDash([4, 4]); g.strokeStyle = `rgba(${C.light},${0.75 * a})`; g.lineWidth = 1.4;
+      g.beginPath(); g.moveTo(gx - hw, b0); g.lineTo(gx - tw, b1); g.lineTo(gx + tw, b1); g.lineTo(gx + hw, b0); g.closePath(); g.stroke();
+      g.setLineDash([]);
+      g.fillStyle = `rgba(${C.light},${0.12 * a})`; g.fill();
+    }
+  }
+
   // the timed oscillation: a stopwatch at the top of the track area
-  function drawTimer(s, t, A) {
+  function drawTimer(s, t, A, u) {
     const a = A * fade(t, 19.2, 24.6, 0.6, 0.6); if (a <= 0) return;
-    const { fs, lx1, gh } = L, el = clamp(t - P_CYCLE, 0, T);
-    const done = t >= P_CYCLE + T;
+    const { fs, lx1, gh } = L, el = clamp(u - P_CYCLE, 0, T);
+    const done = u >= P_CYCLE + T;
     // tenths while it runs, then the period to 2 s.f., as in the caption
     D.text(s, done ? 'one oscillation: T = 2.0 s' : `one oscillation: ${el.toFixed(1)} s`, lx1 - fs * 0.6, trackY(t) - gh - fs * 3.6, fs + 1, a, D.sans(fs + 1, done ? 600 : 400), done ? C.light : C.text, 'right');
   }
@@ -191,11 +231,11 @@
     { f: aAt, max: AMAX, rgb: AC, sym: 'a', unit: ' / m s⁻²', dp: 2, tick: '0.98', from: T_REL },
   ];
   const WIN = 5.0;                                                     // seconds of trace left of the pen
-  function drawGraphs(s, t, A) {
+  function drawGraphs(s, t, A, u) {
     if (A <= 0) return;
     const { g } = s, { gx0, gx1, gy0, gy1, fs, phone } = L;
     const hh = (gy1 - gy0) / 3, penX = gx0 + 0.86 * (gx1 - gx0), kt = (penX - gx0) / WIN;
-    const X = (tt) => penX - (t - tt) * kt;
+    const X = (tt) => penX - (u - tt) * kt;
     const boxes = [];
     GR.forEach((gr, i) => {
       const y0 = gy0 + i * hh, py0 = y0 + fs * 1.5, py1 = y0 + hh - fs * 0.5, mid = (py0 + py1) / 2, ky = (py1 - py0) / 2 / (gr.max * 1.18);
@@ -203,7 +243,7 @@
       boxes.push({ y0, py0, py1, Y, ky });
       // header: the quantity and its live value
       rich(s, [[gr.sym, 'i'], [gr.unit, 'sans']], gx0, y0 + fs * 0.65, fs + 1, 0.9 * A, gr.rgb, 'left');
-      const val = gr.f(t);
+      const val = gr.f(u);
       rich(s, [[gr.sym, 'i'], [` = ${sgn(val, gr.dp)}`, 'sans']], gx1, y0 + fs * 0.65, fs + 1, 0.9 * A, gr.rgb, 'right');
       // axes
       D.line(s, gx0, py0, gx0, py1, C.muted, 0.55 * A, 1.1);
@@ -213,16 +253,16 @@
         D.text(s, (sg > 0 ? '' : '−') + gr.tick, gx0 - 4, Y(sg * gr.max), fs - (phone ? 0 : 1), 0.7 * A, D.sans(fs - (phone ? 0 : 1)), C.muted, 'right');
       }
       // time ticks: seconds since the release
-      for (let k = Math.max(0, Math.ceil(t - WIN - T_REL)); T_REL + k <= t + (gx1 - penX) / kt; k++) {
+      for (let k = Math.max(0, Math.ceil(u - WIN - T_REL)); T_REL + k <= u + (gx1 - penX) / kt; k++) {
         const xx = X(T_REL + k); if (xx < gx0 + 1 || xx > gx1) continue;
         D.line(s, xx, mid - 3, xx, mid + 3, C.muted, 0.5 * A, 1);
         if (i === 2 && xx < gx1 - fs * 3.6) D.text(s, String(k), xx, py1 + fs * 0.75, fs - (phone ? 0 : 1), 0.65 * A, D.sans(fs - (phone ? 0 : 1)), C.muted);
       }
       // the trace up to the pen
-      const t0 = Math.max(gr.from, t - WIN);
-      if (t > t0) {
+      const t0 = Math.max(gr.from, u - WIN);
+      if (u > t0) {
         const pts = [], n = 220;
-        for (let j = 0; j <= n; j++) { const tt = lerp(t0, t, j / n); pts.push([X(tt), Y(gr.f(tt))]); }
+        for (let j = 0; j <= n; j++) { const tt = lerp(t0, u, j / n); pts.push([X(tt), Y(gr.f(tt))]); }
         D.glowLine(s, pts, gr.rgb, A, phone ? 1.5 : 1.9);
         D.glowDot(s, penX, Y(val), phone ? 9 : 12, gr.rgb, A);
       }
@@ -231,12 +271,22 @@
       D.text(s, 't / s', gx1, boxes[2].py1 + fs * 0.75, fs - (phone ? 0 : 1), 0.7 * A, D.sans(fs - (phone ? 0 : 1)), C.muted, 'right');
       D.line(s, penX, boxes[0].py0, penX, boxes[2].py1, C.white, 0.18 * A, 1, [2, 4]);
     }
+    // the moment a caption describes: a ring on each trace, which scrolls away with the trace
+    for (const m of MOMENTS) {
+      const a = A * momentA(m, u), xx = X(m.u); if (a <= 0 || xx < gx0 + 2) continue;
+      GR.forEach((gr, i) => {
+        const yy = boxes[i].Y(gr.f(m.u));
+        g.strokeStyle = `rgba(${C.light},${0.9 * a})`; g.lineWidth = 1.6; g.beginPath(); g.arc(xx, yy, phone ? 5 : 7, 0, 7); g.stroke();
+        const lab = i === 0 ? m.lx : i === 2 ? m.la : '';
+        if (lab) D.text(s, lab, xx - (phone ? 7 : 10), yy + (gr.f(m.u) >= 0 ? fs * 0.9 : -fs * 0.9), fs - (phone ? 1 : 0), a, D.sans(fs - (phone ? 1 : 0), 600), C.light, 'right');
+      });
+    }
     // tangents: gradient of x–t is v, gradient of v–t is a
     const tg = A * fade(t, 68.6, 73.8, 0.6, 0.6);
     if (tg > 0) {
-      [[0, vAt(t), VC, 'gradient = v'], [1, aAt(t), AC, 'gradient = a']].forEach(([i, slope, rgb, lab]) => {
+      [[0, vAt(u), VC, 'gradient = v'], [1, aAt(u), AC, 'gradient = a']].forEach(([i, slope, rgb, lab]) => {
         const b = boxes[i], dx = kt, dy = -slope * b.ky, len = Math.hypot(dx, dy), half = (gx1 - gx0) * 0.1;
-        const ux = dx / len * half, uy = dy / len * half, y = b.Y(GR[i].f(t));
+        const ux = dx / len * half, uy = dy / len * half, y = b.Y(GR[i].f(u));
         // kept inside its own graph (clipped), with its label in the middle of the graph's header line,
         // between the quantity on the left and the live value on the right
         g.save(); g.beginPath(); g.rect(gx0, b.py0, gx1 - gx0, b.py1 - b.py0); g.clip();
@@ -248,22 +298,22 @@
     // half the amplitude: the same period
     const ha = A * fade(t, 79.2, 84.6, 0.6, 0.6);
     if (ha > 0) {
-      const b = boxes[0], t0 = Math.max(T_REL, t - WIN);
+      const b = boxes[0], t0 = Math.max(T_REL, u - WIN);
       g.save(); g.setLineDash([5, 5]); g.strokeStyle = `rgba(${XC},${0.85 * ha})`; g.lineWidth = 1.6; g.beginPath();
-      for (let j = 0; j <= 160; j++) { const tt = lerp(t0, t, j / 160), xx = X(tt), yy = b.Y(0.5 * X0 * Math.cos(OM * (tt - T_REL))); j ? g.lineTo(xx, yy) : g.moveTo(xx, yy); }
+      for (let j = 0; j <= 160; j++) { const tt = lerp(t0, u, j / 160), xx = X(tt), yy = b.Y(0.5 * X0 * Math.cos(OM * (tt - T_REL))); j ? g.lineTo(xx, yy) : g.moveTo(xx, yy); }
       g.stroke(); g.restore();
     }
   }
 
   // ---------- energy bars ----------
-  function drawEnergy(s, t, A) {
+  function drawEnergy(s, t, A, u) {
     if (A <= 0) return;
     const { g } = s, { fs, phone, lx0, lx1, beam, capTop } = L;
     const ey0 = trackY(t) + beam + fs * 2.6 + (phone ? fs * 0.6 : 0), ey1 = capTop - fs * 0.4;
     const rowH = (ey1 - ey0) / 3, bh = Math.max(5, Math.min(rowH * 0.55, fs * 1.15));
     const numA = A * smooth((t - 128.6) / 0.8), compact = phone || rowH < fs * 1.6;   // short rows: short labels
     const lw = compact ? fs * 3.6 : fs * 6.2, nw = fs * 5.4, bx = lx0 + fs * 0.4 + lw, bw = lx1 - fs * 0.4 - nw - bx;
-    const v = vAt(t), x = xAt(t), ek = 0.5 * M * v * v, ep = 0.5 * K * x * x;
+    const v = vAt(u), x = xAt(u), ek = 0.5 * M * v * v, ep = 0.5 * K * x * x;
     const rows = [
       [[['E', 'i'], ['k', 's'], compact ? ['', 'sans'] : ['  kinetic', 'sans']], [[ek, EK]], ek],
       [[['E', 'i'], ['p', 's'], compact ? ['', 'sans'] : ['  potential', 'sans']], [[ep, EP]], ep],
@@ -286,9 +336,9 @@
   }
 
   // ---------- (HL) the reference circle ----------
-  function drawCircle(s, t, A, top) {
+  function drawCircle(s, t, A, top, u) {
     if (A <= 0) return;
-    const { g } = s, { cx, R, fs, ppm } = L, cy = top - fs * 3.2 - R, th = OM * Math.max(0, t - T_REL);
+    const { g } = s, { cx, R, fs, ppm } = L, cy = top - fs * 3.2 - R, th = OM * Math.max(0, u - T_REL);
     const ring = []; for (let i = 0; i <= 120; i++) { const u = i / 120 * Math.PI * 2; ring.push([cx + R * Math.cos(u), cy - R * Math.sin(u)]); }
     D.glowLine(s, ring, '190,200,255', 0.5 * A, 1.2);
     D.line(s, cx - R - fs * 0.6, cy, cx + R + fs * 0.6, cy, C.muted, 0.35 * A, 1, [4, 5]);
@@ -311,7 +361,7 @@
     // the point's velocity, and its horizontal part (the glider's velocity)
     // The full velocity (tangent, length ωx₀ on the glider's scale) shows only around the hold at x = 0, while the point
     // is in the lower half of the circle, so it never runs off the top of the picture; the horizontal part stays on.
-    const va = A * fade(t, 117.2, 128.4, 0.6, 0.6), ta = A * fade(t, P_ZERO2 - 0.5, P_ZERO2 + 0.5, 0.4, 0.4);
+    const va = A * fade(t, 117.2, 128.4, 0.6, 0.6), ta = A * fade(t, P_ZERO2 - 0.5, P_ZERO2 + 0.5, 0.4, 0.4) * smooth((-Math.sin(th) - 0.7) / 0.25);   // near the bottom only, where it stays in the picture
     if (va > 0) {
       const len = R * 0.95, ux = -Math.sin(th), uy = -Math.cos(th);
       if (ta > 0) {
@@ -323,6 +373,18 @@
       if (Math.abs(ux * len) > fs * 1.2) rich(s, [['v', 'i']], px + ux * len + Math.sign(ux) * fs * 0.8, py - (ta > 0.5 ? fs * 0.9 : 0), fs + 2, va, VC);
     }
     return ppm;
+  }
+
+  // (HL) the point on the circle left at the moment a caption describes, while the real point carries on round
+  function drawCircleGhosts(s, t, A, top, u) {
+    if (A <= 0) return;
+    const { cx, R, fs } = L, cy = top - fs * 3.2 - R;
+    for (const m of MOMENTS) {
+      const a = A * momentA(m, u); if (a <= 0 || m.p < T_HL) continue;
+      const th = OM * (m.u - T_REL), px = cx + R * Math.cos(th), py = cy - R * Math.sin(th);
+      D.line(s, cx, cy, px, py, C.light, 0.45 * a, 1.2, [3, 4]);
+      s.g.strokeStyle = `rgba(${C.light},${0.85 * a})`; s.g.lineWidth = 1.6; s.g.beginPath(); s.g.arc(px, py, fs * 0.75, 0, 7); s.g.stroke();
+    }
   }
 
   // ---------- end card ----------
@@ -368,28 +430,28 @@
   }
 
   Anim.register('shm', {
-    duration: DURATION,
-    poster: 70,
-    // holds at chosen points of the motion, and reading holds near the ends of the longer captions (about 17 characters per second)
-    pauses: [[P_X0, 3.0], [P_ZERO, 2.5], [P_MX0, 2.5], [P_ZERO2, 2.5], [P_HALF1, 3.0], [P_HALF2, 3.0],
-      [8.4, 1.5], [11.5, 2.2], [34.5, 2.4], [40.0, 1.4], [68.0, 4.2], [95.0, 1.6], [99.4, 1.2], [106.0, 1.9], [116.6, 1.7]],
+    duration: DURATION_U,
+    poster: realAt(70),
+    // no pauses: see EXTRA near the top (the story waits while the glider keeps moving)
     // score: steady and swaying (D-flat lydian, a soft sine pad that swells once per period of the glider, a low drone)
     music: { chords: [[49, 56, 60, 63, 67], [51, 58, 61, 65], [53, 60, 63, 68], [46, 53, 56, 61]], bar: 8, pad: 'sine', cutoff: 900, tremolo: 1 / T, drone: 0.1, volume: 0.38 },
     resize: layout,
     // for checking the numbers (not used by the player)
-    info: { M, K, X0, OM, T, VMAX, AMAX, ET, xAt, vAt, aAt, CAPS, P_X0, P_ZERO, P_MX0, P_ZERO2, P_HALF1, P_HALF2, P_CYCLE },
-    frame(s, t) {
+    info: { M, K, X0, OM, T, VMAX, AMAX, ET, xAt, vAt, aAt, CAPS, EXTRA, storyAt, realAt, MOMENTS, T_REL, TS_REL, DURATION_U, P_X0, P_ZERO, P_MX0, P_ZERO2, P_HALF1, P_HALF2, P_CYCLE },
+    frame(s, u) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
+      const t = storyAt(u);
       const A = sceneA(t);
       D.background(s, 0.22);
       const hlA = A * smooth((t - T_HL) / 1.4);
       const gA = A * smooth((t - 11.6) / 0.9) * (L.phone ? 1 - smooth((t - 84.0) / 1.2) : 1);
       const eA = A * smooth((t - 84.8) / 1.0);
-      drawGraphs(s, t, gA);
-      drawEnergy(s, t, eA);
-      const gl = drawTrack(s, t, A);
-      if (gl) drawCircle(s, t, hlA, gl.top);
-      drawTimer(s, t, A);
+      drawGraphs(s, t, gA, u);
+      drawEnergy(s, t, eA, u);
+      drawGhosts(s, t, A, u);
+      const gl = drawTrack(s, t, A, u);
+      if (gl) { drawCircle(s, t, hlA, gl.top, u); drawCircleGhosts(s, t, hlA, gl.top, u); }
+      drawTimer(s, t, A, u);
       const leg = [['arrow', VC, 'velocity v'], ['arrow', AC, 'restoring force F, acceleration a'], ['line', XC, 'displacement x']];
       D.legend(s, t < 24.8 ? leg.filter((_, i) => i !== 1) : leg, A * fade(t, 14.0, 99.8, 0.8, 0.8));
       D.captions(s, t, CAPS);

@@ -43,32 +43,48 @@
   const X0 = -10, T_REC = 14.8, T_PUSH = 26.0, D_PUSH = 16, T_PULL = 52.6, D_PULL = 4, P1_END = 64.4;
   const S0 = -10, T_DROP = 71.2, SLOW2 = 40, G = 980, P2_G0 = 69.6, P2_G1 = 81.4;
   const T3 = 87.6, T2X = 111.6, NBA = 0.080, WIN3 = 12;
-  const END_CARD = 123.0, DURATION = 136;
+  const END_CARD = 123.0, STORY = 136;
+  // No pauses (teacher, 17 November 2026). Where a caption needs extra reading time the story (captions, labels) waits for
+  // these seconds (story times) while everything keeps moving at its normal speed: the graph pens keep drawing, the magnet
+  // keeps moving or stays at rest, the coil keeps turning. Holds during the slow push add 4.9 s to it and the hold during the
+  // quick pull adds 4.9 ÷ 4 = 1.225 s, so the push still takes exactly 4 times as long as the pull (20.9 s and 5.225 s).
+  // The generator gets 8.0 s before the switch to 100 Hz, so the switch still comes after a whole number of half-turns
+  // (32 s = 8 turns at 50 Hz, θ = 16π) and the emf stays continuous.
+  const HOLDS = [[9.0, 1.4], [14.0, 1.4], [18.4, 2.6], [24.6, 6.0], [30.4, 1.7], [35.0, 1.0], [41.2, 2.2], [46.4, 1.6], [51.8, 1.4],
+    [54.6, 1.225], [57.2, 1.2], [63.2, 2.4], [70.2, 5.0], [80.6, 1.6], [86.0, 1.0], [92.8, 1.8], [95.6, 2.2], [100.6, 1.8], [110.8, 2.2],
+    [116.8, 1.8], [122.0, 0.8]];
+  const DURATION = STORY + HOLDS.reduce((n, h) => n + h[1], 0);
+  const story = (t) => { let acc = 0; for (const [st, d] of HOLDS) { if (t < st + acc) return t - acc; if (t < st + acc + d) return st; acc += d; } return Math.min(t - acc, STORY); };
+  const real = (x) => x + HOLDS.filter((h) => h[0] < x).reduce((n, h) => n + h[1], 0);
+  let RT = 0;                                                         // scene time: the motion and the graphs run on it
+  // the motion, in scene time
+  const TP = real(T_PUSH), DP = real(T_PUSH + D_PUSH) - TP, TQ = real(T_PULL), DQ = real(T_PULL + D_PULL) - TQ;
+  const TD = real(T_DROP), T3R = real(T3), T2XR = real(T2X);
   const ease = (u) => u - Math.sin(2 * Math.PI * u) / (2 * Math.PI), easeV = (u) => 1 - Math.cos(2 * Math.PI * u);
   // part 1: magnet centre (cm) and velocity (cm per scene second)
   function mag1(t) {
-    if (t <= T_PUSH) return [X0, 0];
-    if (t < T_PUSH + D_PUSH) { const u = (t - T_PUSH) / D_PUSH; return [X0 * (1 - ease(u)), -X0 / D_PUSH * easeV(u)]; }
-    if (t <= T_PULL) return [0, 0];
-    if (t < T_PULL + D_PULL) { const u = (t - T_PULL) / D_PULL; return [X0 * ease(u), X0 / D_PULL * easeV(u)]; }
+    if (t <= TP) return [X0, 0];
+    if (t < TP + DP) { const u = (t - TP) / DP; return [X0 * (1 - ease(u)), -X0 / DP * easeV(u)]; }
+    if (t <= TQ) return [0, 0];
+    if (t < TQ + DQ) { const u = (t - TQ) / DQ; return [X0 * ease(u), X0 / DQ * easeV(u)]; }
     return [X0, 0];
   }
   // part 2: distance fallen, measured downwards along the coil's axis (cm), and velocity (cm per scene second)
   function mag2(t) {
-    if (t <= T_DROP) return [S0, 0];
-    const tau = (t - T_DROP) / SLOW2;
+    if (t <= TD) return [S0, 0];
+    const tau = (t - TD) / SLOW2;
     return [S0 + 0.5 * G * tau * tau, G * tau / SLOW2];
   }
   const e1 = (t) => { const [x, v] = mag1(t); return -dLAM(x) * v; };
   const e2 = (t) => { const [x, v] = mag2(t); return -dLAM(x) * v; };
   const l1 = (t) => LAM(mag1(t)[0]), l2 = (t) => LAM(mag2(t)[0]);
   const maxAbs = (fn, a, b) => { let m = 0; for (let i = 0; i <= 2000; i++) m = Math.max(m, Math.abs(fn(a + (b - a) * i / 2000))); return m; };
-  const E1MAX = maxAbs(e1, T_PULL, T_PULL + D_PULL), E2MAX = maxAbs(e2, T_DROP, P2_G1);
-  const T_STEEP = (() => { let best = T_PUSH, m = 0; for (let i = 0; i <= 2000; i++) { const tt = T_PUSH + D_PUSH * i / 2000, v = Math.abs(e1(tt)); if (v > m) { m = v; best = tt; } } return best; })();
-  const T_MID2 = T_DROP + SLOW2 * Math.sqrt(2 * -S0 / G), T_10 = T_DROP + SLOW2 * Math.sqrt(2 * (10 - S0) / G);
+  const E1MAX = maxAbs(e1, TQ, TQ + DQ), E2MAX = maxAbs(e2, TD, real(P2_G1));
+  const T_STEEP = (() => { let best = TP, m = 0; for (let i = 0; i <= 2000; i++) { const tt = TP + DP * i / 2000, v = Math.abs(e1(tt)); if (v > m) { m = v; best = tt; } } return best; })();
+  const T_MID2 = TD + SLOW2 * Math.sqrt(2 * -S0 / G), T_10 = TD + SLOW2 * Math.sqrt(2 * (10 - S0) / G);
   // part 3: the generator
-  const theta = (t) => (t <= T2X ? 2 * Math.PI * (t - T3) / 4 : 2 * Math.PI * (T2X - T3) / 4 + 2 * Math.PI * (t - T2X) / 2);
-  const omegaReal = (t) => 2 * Math.PI * (t <= T2X ? 50 : 100);
+  const theta = (t) => (t <= T2XR ? 2 * Math.PI * (t - T3R) / 4 : 2 * Math.PI * (T2XR - T3R) / 4 + 2 * Math.PI * (t - T2XR) / 2);
+  const omegaReal = (t) => 2 * Math.PI * (t <= T2XR ? 50 : 100);
   const l3 = (t) => NBA * Math.cos(theta(t)), e3 = (t) => NBA * omegaReal(t) * Math.sin(theta(t));
 
   // ---------- captions ----------
@@ -95,9 +111,6 @@
     [111.8, 117.4, 'Now it turns twice as fast (100 Hz): the flux changes twice as fast, so the peak emf doubles and the period halves.'],
     [117.6, 122.6, 'More turns, a bigger area, a stronger field or faster turning: each gives a bigger emf.'],
   ];
-  const PAUSES = [[9.0, 1.4], [14.0, 1.4], [18.4, 2.6], [24.6, 6.0], [30.4, 1.8], [35.0, 1.4], [41.2, 2.6], [46.4, 1.6], [51.8, 1.4],
-    [54.6, 2.8], [63.2, 2.4], [70.2, 5.0], [80.6, 1.6], [86.0, 1.0], [92.8, 2.0], [95.6, 2.5], [100.6, 2.0], [110.8, 2.4],
-    [116.8, 1.8], [122.0, 0.8]];
 
   // ---------- colours ----------
   const N_RGB = '235,84,96', S_RGB = '80,130,240', COIL = '214,168,120', CUR = C.good, FLUX = C.field, EMF = C.good;
@@ -229,9 +242,9 @@
     const P = (x, r) => { const [dx, dy] = Q(x * k, -r * k); return [cx + dx, cy + dy]; };
     g.save(); g.beginPath(); g.rect(R.x0, R.y0, Rw, Rh); g.clip();
     // field lines of the magnet (they move with it)
-    for (const { pts, arrow } of FL) {
+    FL.forEach(({ pts, arrow }, li) => {
       const sc = pts.map(([x, y]) => P(x + xm, y));
-      D.glowLine(s, sc, FLUX, 0.42 * a, L.phone ? 0.8 : 1.1);
+      D.glowLine(s, sc, FLUX, 0.42 * a * (0.88 + 0.12 * Math.sin(RT * 1.4 - li * 0.9)), L.phone ? 0.8 : 1.1);   // a gentle shimmer
       if (arrow > 0 && arrow < sc.length - 1) {
         const [x1, y1] = sc[arrow - 1], [x2, y2] = sc[arrow + 1], ang = Math.atan2(y2 - y1, x2 - x1), [hx, hy] = sc[arrow], hs = Math.max(4, k * 0.3);
         g.fillStyle = `rgba(${FLUX},${0.75 * a})`; g.beginPath();
@@ -239,7 +252,7 @@
         g.lineTo(hx + Math.cos(ang + 2.5) * hs, hy + Math.sin(ang + 2.5) * hs);
         g.lineTo(hx + Math.cos(ang - 2.5) * hs, hy + Math.sin(ang - 2.5) * hs); g.closePath(); g.fill();
       }
-    }
+    });
     const rot = vertical ? Math.PI / 2 : 0, TURNS = 12, ex = CA * 0.24 * k, ey = CA * k;
     const turnX = (i) => -CL / 2 + CL * (i + 0.5) / TURNS;
     // back halves of the turns
@@ -353,7 +366,13 @@
     rich(s, [['B', 'i'], [' = 0.20 T', 'sans']], bx, by, fs + 2, 0.9 * a, FLUX);
     const deg = ((th * 180 / Math.PI) % 360 + 360) % 360;
     const [tx, ty] = P(0, -h / 2 - 2.6, 0);
-    rich(s, [['θ', 'i'], [` = ${Math.round(deg)}°`, 'sans'], [`   ${t <= T2X ? 50 : 100} Hz`, 'sans']], tx, ty, fs + 2, 0.9 * a, C.text);
+    rich(s, [['θ', 'i'], [` = ${Math.round(deg)}°`, 'sans'], [`   ${t <= T2XR ? 50 : 100} Hz`, 'sans']], tx, ty, fs + 2, 0.9 * a, C.text);
+    // the moments the captions describe come round every turn: label each one as it passes
+    const m0 = fade(t, real(93.8), real(99.6), 0.6, 0.6) * smooth((0.12 - Math.abs(Math.sin(th))) / 0.06);
+    const m1 = fade(t, real(99.8), real(105.0), 0.6, 0.6) * smooth((0.12 - Math.abs(Math.cos(th))) / 0.06);
+    const [qx, qy] = P(0, h / 2 + 1.2, 0);
+    if (m0 > 0) rich(s, [['θ', 'i'], [' = 0 or 180°: facing the field, ', 'sans'], ['ε', 'i'], [' = 0', 'sans']], qx, qy, fs + 1, m0 * a, C.light);
+    if (m1 > 0) rich(s, [['plane parallel to the field: ', 'sans'], ['ε', 'i'], [' greatest', 'sans']], qx, qy, fs + 1, m1 * a, C.light);
   }
 
   // ---------- the three parts ----------
@@ -362,15 +381,17 @@
   const LEG3 = [['line', FLUX, 'uniform magnetic field'], ['line', COIL, 'coil of N turns, turning steadily']];
   const titleL = [['flux linkage ', 'sans'], ['N', 'i'], ['Φ', 'i']], titleE = [['induced emf ', 'sans'], ['ε', 'i']];
 
+  // t: story time (captions, labels); the magnet and the graphs use the scene time RT
+  const glow = () => 0.85 + 0.15 * Math.sin(RT * 2.4);               // the shaded areas breathe gently while they are discussed
   function part1(s, t, a) {
-    const [xm, v] = mag1(t), e = e1(t);
+    const [xm, v] = mag1(RT), e = e1(RT);
     D.legend(s, LEG1, a);
     apparatus(s, L.app, false, xm, v, e, E1MAX, { force: true }, a);
     const ga = a * smooth((t - T_REC + 0.2) / 0.8);
-    const shadeA = smooth((t - 58.0) / 0.8);
-    const gl = graph(s, L.gA, { t0: T_REC, t1: P1_END, tn: t, fn: l1, ymax: 1.15, rgb: FLUX, title: titleL, pos: true }, ga);
-    const ge = graph(s, L.gB, { t0: T_REC, t1: P1_END, tn: t, fn: e1, ymax: E1MAX * 1.12, rgb: EMF, title: titleE,
-      shade: [[T_PUSH, T_PUSH + D_PUSH], [T_PULL, T_PULL + D_PULL]], shadeA }, ga);
+    const shadeA = smooth((t - 58.0) / 0.8) * glow();
+    const gl = graph(s, L.gA, { t0: real(T_REC), t1: real(P1_END), tn: RT, fn: l1, ymax: 1.15, rgb: FLUX, title: titleL, pos: true }, ga);
+    const ge = graph(s, L.gB, { t0: real(T_REC), t1: real(P1_END), tn: RT, fn: e1, ymax: E1MAX * 1.12, rgb: EMF, title: titleE,
+      shade: [[TP, TP + DP], [TQ, TQ + DQ]], shadeA }, ga);
     // the gradient of the flux graph where it is steepest
     const ta = fade(t, 47.2, 52.4, 0.6, 0.6) * ga;
     if (ta > 0 && gl && ge) {
@@ -388,25 +409,25 @@
   }
 
   function part2(s, t, a) {
-    const [sm, v] = mag2(t), e = e2(t);
+    const [sm, v] = mag2(RT), e = e2(RT);
     // (no legend here: the colours were introduced in part 1, and the vertical coil needs the full height)
-    const rel = fade(t, T_DROP - 0.6, T_DROP + 1.6, 0.3, 0.6);
+    const rel = fade(RT, TD - 0.6, TD + 1.6, 0.3, 0.6);
     apparatus(s, L.app2, true, sm, v, e, E2MAX, { force: false, label: 'released', labelA: rel }, a);
-    const ga = a * smooth((t - 66.2) / 0.8), shadeA = smooth((t - 81.4) / 0.8);
-    graph(s, L.g2A, { t0: P2_G0, t1: P2_G1, tn: t, fn: l2, ymax: 1.15, rgb: FLUX, title: titleL, pos: true }, ga);
-    graph(s, L.g2B, { t0: P2_G0, t1: P2_G1, tn: t, fn: e2, ymax: E2MAX * 1.12, rgb: EMF, title: titleE,
-      shade: [[T_DROP, T_MID2], [T_MID2, T_10]], shadeA }, ga);
+    const ga = a * smooth((t - 66.2) / 0.8), shadeA = smooth((t - 81.4) / 0.8) * glow();
+    graph(s, L.g2A, { t0: real(P2_G0), t1: real(P2_G1), tn: RT, fn: l2, ymax: 1.15, rgb: FLUX, title: titleL, pos: true }, ga);
+    graph(s, L.g2B, { t0: real(P2_G0), t1: real(P2_G1), tn: RT, fn: e2, ymax: E2MAX * 1.12, rgb: EMF, title: titleE,
+      shade: [[TD, T_MID2], [T_MID2, T_10]], shadeA }, ga);
   }
 
   function part3(s, t, a) {
-    const th = theta(t);
+    const th = theta(RT);
     D.legend(s, LEG3, a);
-    generator(s, L.app, th, t, a);
-    const t0 = Math.max(T3, t - WIN3);
+    generator(s, L.app, th, RT, a);
+    const t0 = Math.max(T3R, RT - WIN3);
     const ga = a * smooth((t - 88.0) / 0.8);
-    graph(s, L.gA, { t0, t1: t0 + WIN3, tn: t, fn: l3, ymax: 0.1, rgb: FLUX, title: [...titleL, [' / Wb', 'sans']],
+    graph(s, L.gA, { t0, t1: t0 + WIN3, tn: RT, fn: l3, ymax: 0.1, rgb: FLUX, title: [...titleL, [' / Wb', 'sans']],
       ticks: [[0.08, '0.080'], [-0.08, '−0.080']] }, ga);
-    const ge = graph(s, L.gB, { t0, t1: t0 + WIN3, tn: t, fn: e3, ymax: 60, rgb: EMF, title: [...titleE, [' / V', 'sans']],
+    const ge = graph(s, L.gB, { t0, t1: t0 + WIN3, tn: RT, fn: e3, ymax: 60, rgb: EMF, title: [...titleE, [' / V', 'sans']],
       ticks: L.phone ? [[50, '50'], [-50, '−50']] : [[50, '50'], [25, '25'], [-25, '−25'], [-50, '−50']] }, ga);
     // the average emf over a quarter turn at 50 Hz
     const qa = fade(t, 105.2, 111.4, 0.6, 0.6) * ga;
@@ -418,7 +439,7 @@
   }
 
   function endCard(s, t) {
-    const a = fade(t, END_CARD, DURATION - 0.6, 0.9, 0.8); if (a <= 0) return;
+    const a = fade(t, END_CARD, STORY - 0.6, 0.9, 0.8); if (a <= 0) return;
     const { g } = s, { W, H, phone } = L;
     g.fillStyle = `rgba(4,6,13,${0.9 * a})`; g.fillRect(0, 0, W, H);
     const s1 = Math.round(clamp(W / 30, 18, 38)), s2 = Math.round(clamp(W / 46, 13, 24)), s3 = Math.round(clamp(W / 64, 11, 17));
@@ -450,16 +471,18 @@
 
   Anim.register('induction', {
     duration: DURATION,
-    poster: 33,
-    pauses: PAUSES,
+    poster: real(33),
     // score: a humming generator (A major, a saw pad with a slow wobble, a low drone)
     music: { chords: [[57, 61, 64, 69], [54, 61, 64, 66], [50, 57, 62, 66], [52, 59, 64, 68]], bar: 6, pad: 'saw', cutoff: 750,
       tremolo: 2, drone: 0.13, volume: 0.62 },
     resize: layout,
     // for checking the numbers (not used by the player)
-    info: { LAM, dLAM, LMAX, mag1, mag2, e1, e2, l1, l2, E1MAX, E2MAX, T_STEEP, T_MID2, T_10, theta, l3, e3, CAPS, PAUSES, FL },
-    frame(s, t) {
+    info: { LAM, dLAM, LMAX, mag1, mag2, e1, e2, l1, l2, E1MAX, E2MAX, T_STEEP, T_MID2, T_10, theta, l3, e3, CAPS, HOLDS, story, real,
+      DURATION, TP, DP, TQ, DQ, TD, T3R, T2XR, FL },
+    frame(s, tScene) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
+      const t = story(tScene);                                        // captions and labels: story time
+      RT = tScene;                                                    // the magnet, the coil and the graphs: scene time
       D.background(s, 0.22);
       const a1 = fade(t, 4.4, 65.0, 0.8, 0.6), a2 = fade(t, 65.4, 87.2, 0.6, 0.6), a3 = fade(t, 87.4, END_CARD + 0.8, 0.6, 0.8);
       if (a1 > 0) part1(s, t, a1);
@@ -469,7 +492,7 @@
       if (t < 4.6) { s.g.fillStyle = `rgba(4,6,13,${0.8 * fade(t, 0, 4.4, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 4.4, 'Induction', 'A magnet, a coil and a generator (HL)');
       endCard(s, t);
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tScene, DURATION);
     },
   });
 })();

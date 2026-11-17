@@ -65,13 +65,27 @@
     [130.6, 135.6, "The fragments' kinetic energy heats the fuel. The coolant (here, the same water) carries the thermal energy away."],
     [135.8, 140.2, `A reactor giving 3.0${NB}GW of heat needs (3.0${NB}×${NB}10⁹)${NB}÷${NB}(3.2${NB}×${NB}10⁻¹¹) = 9.4${NB}×${NB}10¹⁹ fissions every second.`],
   ];
-  // holds: every caption gets enough time to read at 16 characters a second (the picture holds just before it fades);
-  // the Predict caption gets 6 s to think
-  const PAUSES = CAPS.map(([a, b, txt]) => {
+  // No pauses (teacher, 17 November 2026: "extend the animation instead of creating a pause, so that it plays at the
+  // same speed"). Every caption still gets enough time to read at 16 characters a second, and the Predict caption 6 s
+  // to think, but the extra time is added to the STORY (the times written in this file: captions, fades, which part is
+  // shown) while everything that moves runs on the REAL clock and never stops: the neutron approaches, the nucleus
+  // stretches, the fragments and neutrons fly apart, the chains spread and the reactor keeps running.
+  const EXTRA = CAPS.map(([a, b, txt]) => {
     const need = txt.length / 16 - (b - a - 0.6);
     return need > 0.05 ? [+(b - 0.8).toFixed(2), +need.toFixed(1)] : null;
   }).filter(Boolean);
-  PAUSES.push([39.0, 6.0]);
+  EXTRA.push([39.0, 6.0]);
+  EXTRA.sort((a, b) => a[0] - b[0]);
+  const storyAt = (u) => {                                             // real scene time → story time
+    let acc = 0;
+    for (const [p, e] of EXTRA) { if (u < p + acc) return u - acc; if (u < p + acc + e) return p; acc += e; }
+    return u - acc;
+  };
+  const realAt = (st) => st + EXTRA.filter((x) => x[0] < st).reduce((n, x) => n + x[1], 0);   // story time → real time
+  const DURATION_U = realAt(DURATION);
+  // the motion's own times, on the real clock
+  const M_N0 = realAt(T_N0), M_ABS = realAt(T_ABS), M_STRETCH = realAt(T_STRETCH), M_SPLIT = realAt(T_SPLIT);
+  const M2_GO = realAt(T2_GO), M3_GO = realAt(T3_GO), M4_F0 = realAt(T4_F0), M_RATE = realAt(T_RATE), M_END = realAt(END_CARD);
 
   // ---------- part 1: the nucleus (units: ball radius) ----------
   const NUC = (() => {
@@ -104,7 +118,7 @@
   const VMAX = 1.37, V_N = 1.2, SEP = (() => {
     const D0 = NUC.cen[1][0] - NUC.cen[0][0] + 2.4, out = [];
     let Dd = D0 * 1.03;
-    for (let k = 0; k <= 3000; k++) { out.push(Dd - D0); for (let j = 0; j < 10; j++) Dd += VMAX * Math.sqrt(1 - D0 / Dd) * 0.001; }
+    for (let k = 0; k <= 6000; k++) { out.push(Dd - D0); for (let j = 0; j < 10; j++) Dd += VMAX * Math.sqrt(1 - D0 / Dd) * 0.001; }
     return out;                                                        // every 0.01 s
   })();
   const sepAt = (dt) => { const f = clamp(dt / 0.01, 0, SEP.length - 1.001), k = Math.floor(f); return lerp(SEP[k], SEP[k + 1], f - k); };
@@ -163,21 +177,22 @@
   const RX = [-3, -1, 1, 3], RHW = 0.32, RTOP = 4, CX = [-2, 2], CHW = 0.22, TIP0 = 1.0;
   const tipAt = (t) => {                                               // control-rod tips: raised by 1, set back (the rate holds), lowered by 1, set back
     const ramp = (a, b) => smooth((t - a) / (b - a));
-    return TIP0 + (ramp(119.0, 119.8) - ramp(121.6, 122.4)) - (ramp(124.5, 125.3) - ramp(127.1, 127.9));
+    const R = (a, b) => ramp(realAt(a), realAt(b));                   // the story's moments, on the real clock
+    return TIP0 + (R(119.0, 119.8) - R(121.6, 122.4)) - (R(124.5, 125.3) - R(127.1, 127.9));
   };
   const RATE = (() => {                                                // dR/dt = (k − 1) R / τ, k − 1 = 0.06 × (tip − TIP0)
     const out = []; let R = 1;
-    for (let t = T_RATE; t <= END_CARD + 0.05; t += 0.02) { out.push(R); R *= Math.exp(0.06 * (tipAt(t) - TIP0) / 0.6 * 0.02); }
+    for (let t = M_RATE; t <= M_END + 0.05; t += 0.02) { out.push(R); R *= Math.exp(0.06 * (tipAt(t) - TIP0) / 0.6 * 0.02); }
     return out;
   })();
-  const rateAt = (t) => { const f = clamp((t - T_RATE) / 0.02, 0, RATE.length - 1.001), k = Math.floor(f); return lerp(RATE[k], RATE[k + 1], f - k); };
+  const rateAt = (t) => { const f = clamp((t - M_RATE) / 0.02, 0, RATE.length - 1.001), k = Math.floor(f); return lerp(RATE[k], RATE[k + 1], f - k); };
   const REACT = (() => {
     const rnd = rngOf(4242), fis = [], paths = [], hits = [];
     const SPEED = [6.0, 4.0, 2.7, 1.8, 1.25].map((v) => v / 1.6);      // fast → slow (shown slowed for clarity)
-    let rod = 1, y = -1.0, t = T4_F0, k = 0;
+    let rod = 1, y = -1.0, t = M4_F0, k = 0;
     const gapX = (a, b) => [Math.min(RX[a], RX[b]) + RHW + 0.12, Math.max(RX[a], RX[b]) - RHW - 0.12];
     const segs = (pts, speeds, t0) => { const out = []; let tt = t0; for (let i = 0; i < pts.length - 1; i++) { const L = Math.hypot(pts[i + 1][0] - pts[i][0], pts[i + 1][1] - pts[i][1]), v = speeds[Math.min(i, speeds.length - 1)]; out.push({ a: pts[i], b: pts[i + 1], t0: tt, t1: tt + L / v, v }); tt += L / v; } return out; };
-    while (t < END_CARD - 0.5 && k < 40) {
+    while (t < M_END - 0.5 && k < 60) {
       fis.push({ x: RX[rod], y, t, rod });
       // the next rod: a neighbour; crossing a gap with a control rod only below its lowest tip
       const opts = [rod - 1, rod + 1].filter((r) => r >= 0 && r <= 3);
@@ -289,16 +304,16 @@
   }
 
   // ---------- part 1: one fission ----------
-  function part1(s, t, a) {
+  function part1(s, t, a, u0) {
     if (a <= 0) return;
     const { g } = s, { cx, cy, u } = L.p1, { P, n, slot, group, type, cen } = NUC;
     // the wobble and stretch of uranium-236, then the split
-    const wob = t > T_ABS && t < T_SPLIT ? 0.12 * Math.sin(2 * Math.PI * 1.3 * (t - T_ABS)) * smooth((t - T_ABS) / 1.2) * (1 - smooth((t - T_STRETCH) / 1.5)) : 0;
-    const str = smooth((t - T_STRETCH) / (T_SPLIT - T_STRETCH)), neck = 2.4 * str;
-    const dt = t - T_SPLIT, sep = dt > 0 ? sepAt(dt) : 0;
+    const wob = u0 > M_ABS && u0 < M_SPLIT ? 0.12 * Math.sin(2 * Math.PI * 1.3 * (u0 - M_ABS)) * smooth((u0 - M_ABS) / 1.2) * (1 - smooth((u0 - M_STRETCH) / 1.5)) : 0;
+    const str = smooth((u0 - M_STRETCH) / (M_SPLIT - M_STRETCH)), neck = 2.4 * str;
+    const dt = u0 - M_SPLIT, sep = dt > 0 ? sepAt(dt) : 0;
     const list = [];
     for (let i = 0; i < n; i++) {
-      if (i === slot && t < T_ABS) continue;
+      if (i === slot && u0 < M_ABS) continue;
       const gr = group[i];
       if (gr === 1 && dt > 0) continue;                                // emitted neutrons are drawn separately
       let [x, y, z] = P[i];
@@ -336,8 +351,8 @@
       ball(g, X(x), Y(y), uz * 0.98 * shade, p ? PROT : NEUT, p ? PROT_HI : NEUT_HI, a);
     }
     // the incoming slow neutron
-    if (t >= T_N0 && t < T_ABS) {
-      const f = (t - T_N0) / (T_ABS - T_N0), sx = -(L.W / 2 / u) - 2, ex = P[slot][0], ey = P[slot][1];
+    if (u0 >= M_N0 && u0 < M_ABS) {
+      const f = (u0 - M_N0) / (M_ABS - M_N0), sx = -(L.W / 2 / u) - 2, ex = P[slot][0], ey = P[slot][1];
       const x = cx + lerp(sx, ex, f) * u, y = cy - ey * u;
       ball(g, x, y, u * 0.98, NEUT, NEUT_HI, a);
       label(s, 'slow neutron', clamp(x, L.fs * 4, L.W - L.fs * 4), y - u * 2.2, a * fade(t, T_N0 + 0.5, T_ABS - 0.3), C.text);
@@ -435,17 +450,17 @@
   }
 
   // ---------- part 4: the reactor ----------
-  function part4(s, t, a) {
+  function part4(s, t, a, ur) {
     if (a <= 0) return;
     const { g } = s, { u, cx, cy } = L.p4, X = (x) => cx + x * u, Y = (y) => cy - y * u;
-    const fs = L.fs, tip = tipAt(t);
+    const fs = L.fs, tip = tipAt(ur);
     // water (moderator and coolant)
     g.fillStyle = `rgba(${WATER},${0.28 * a})`; g.fillRect(X(-4.6), Y(4.6), 9.2 * u, 9.2 * u);
     g.strokeStyle = `rgba(150,170,230,${0.5 * a})`; g.lineWidth = 1.3; g.strokeRect(X(-4.6), Y(4.6), 9.2 * u, 9.2 * u);
     for (const [x, y] of deco.Hn) D.glowDot(s, X(x), Y(y), Math.max(3, u * 0.12), H_RGB, 0.35 * a);
     // fuel rods, warmer as fissions heat them
     RX.forEach((rx, ri) => {
-      let heat = 0; for (const f of REACT.fis) if (f.rod === ri && t >= f.t) heat += Math.exp(-(t - f.t) / 3);
+      let heat = 0; for (const f of REACT.fis) if (f.rod === ri && ur >= f.t) heat += Math.exp(-(ur - f.t) / 3);
       heat = clamp(heat, 0, 1.4) / 1.4 + (t > T_COOL ? 0.25 : 0);
       g.fillStyle = `rgba(${FUEL},${(0.55 + 0.25 * heat) * a})`; g.beginPath(); g.roundRect(X(rx - RHW), Y(RTOP), 2 * RHW * u, 2 * RTOP * u, 4); g.fill();
       if (heat > 0.05) { g.shadowColor = `rgba(${HOT},${0.8 * heat * a})`; g.shadowBlur = 18 * heat; g.strokeStyle = `rgba(${HOT},${0.7 * heat * a})`; g.lineWidth = 1.5; g.stroke(); g.shadowBlur = 0; }
@@ -470,11 +485,11 @@
       label(s, L.phone ? 'hot out' : 'hot coolant out', X(4.6) + 4, Y(4.0) - fs * 1.3, ca, HOT, 'left');
     }
     // light nuclei hit by neutrons flash briefly
-    for (const h of REACT.hits) if (t >= h.t && t < h.t + 0.6) D.glowDot(s, X(h.x), Y(h.y), Math.max(6, u * 0.4), H_RGB, a * (1 - (t - h.t) / 0.6));
+    for (const h of REACT.hits) if (ur >= h.t && ur < h.t + 0.6) D.glowDot(s, X(h.x), Y(h.y), Math.max(6, u * 0.4), H_RGB, a * (1 - (ur - h.t) / 0.6));
     // fissions: the target nucleus waits, flashes and splits
     REACT.fis.forEach((f) => {
-      if (t > f.t - 2.5 && t < f.t) ball(g, X(f.x), Y(f.y), Math.max(3.5, u * 0.18), '220,170,50', '255,240,170', a * smooth((t - f.t + 2.5) / 0.5));
-      const d = t - f.t;
+      if (ur > f.t - 2.5 && ur < f.t) ball(g, X(f.x), Y(f.y), Math.max(3.5, u * 0.18), '220,170,50', '255,240,170', a * smooth((ur - f.t + 2.5) / 0.5));
+      const d = ur - f.t;
       if (d >= 0 && d < 1.2) {
         D.glowDot(s, X(f.x), Y(f.y), u * (0.6 + 1.6 * (1 - d / 1.2)), '255,235,190', a * (1 - d / 1.2));
         const sp = u * 0.4 * smooth(d / 0.6);
@@ -484,9 +499,9 @@
     });
     // neutrons along their paths; fast ones with a long streak
     for (const p of REACT.paths) {
-      const sg = p.segs.find((q) => t >= q.t0 && t < q.t1);
-      if (!sg) { const last = p.segs[p.segs.length - 1]; if (p.kind === 'absorb' && t >= last.t1 && t < last.t1 + 0.5) D.glowDot(s, X(last.b[0]), Y(last.b[1]), u * 0.5, '200,200,220', a * (1 - (t - last.t1) / 0.5)); continue; }
-      const f = (t - sg.t0) / (sg.t1 - sg.t0), x = lerp(sg.a[0], sg.b[0], f), y = lerp(sg.a[1], sg.b[1], f);
+      const sg = p.segs.find((q) => ur >= q.t0 && ur < q.t1);
+      if (!sg) { const last = p.segs[p.segs.length - 1]; if (p.kind === 'absorb' && ur >= last.t1 && ur < last.t1 + 0.5) D.glowDot(s, X(last.b[0]), Y(last.b[1]), u * 0.5, '200,200,220', a * (1 - (ur - last.t1) / 0.5)); continue; }
+      const f = (ur - sg.t0) / (sg.t1 - sg.t0), x = lerp(sg.a[0], sg.b[0], f), y = lerp(sg.a[1], sg.b[1], f);
       const L0 = Math.hypot(sg.b[0] - sg.a[0], sg.b[1] - sg.a[1]) || 1, vx = (sg.b[0] - sg.a[0]) / L0 * sg.v, vy = (sg.b[1] - sg.a[1]) / L0 * sg.v;
       const back = Math.min(0.12, f * (sg.t1 - sg.t0));
       if (y < -4.7 && p.kind === 'lost') { const la = a * (1 - smooth((-y - 4.7) / 1.2)); neutronDot(s, X(x), Y(y), vx * u, -vy * u, la, back); continue; }
@@ -504,11 +519,11 @@
       const { x0, x1, y0, y1 } = L.p4.chart;
       g.fillStyle = `rgba(14,20,44,${0.7 * ga})`; g.beginPath(); g.roundRect(x0 - 10, y0 - fs * 2.8, x1 - x0 + 20, y1 - y0 + fs * 5, 10); g.fill();
       label(s, 'rate of fission (schematic)', x0, y0 - fs * 1.4, ga, U_RGB, 'left', fs, 600);
-      const XR = (tt) => x0 + (tt - T_RATE) / (END_CARD - T_RATE) * (x1 - x0), YR = (r) => y1 - (r - 0.9) / 0.5 * (y1 - y0);
+      const XR = (tt) => x0 + (tt - M_RATE) / (M_END - M_RATE) * (x1 - x0), YR = (r) => y1 - (r - 0.9) / 0.5 * (y1 - y0);
       D.line(s, x0, y1, x1, y1, C.muted, 0.6 * ga); D.line(s, x0, y1, x0, y0, C.muted, 0.6 * ga);
       D.line(s, x0, YR(1), x1, YR(1), C.muted, 0.35 * ga, 1, [4, 4]);
       label(s, 'time', x1, y1 + fs * 1.0, ga * 0.8, C.muted, 'right', fs - 1);
-      const pts = []; for (let tt = T_RATE; tt <= Math.min(t, END_CARD); tt += 0.1) pts.push([XR(tt), YR(rateAt(tt))]);
+      const pts = []; for (let tt = M_RATE; tt <= Math.min(ur, M_END); tt += 0.1) pts.push([XR(tt), YR(rateAt(tt))]);
       D.glowLine(s, pts, U_RGB, ga, 2);
       const st = tip > TIP0 + 0.05 ? 'control rods raised' : tip < TIP0 - 0.05 ? 'control rods lowered' : 'control rods set';
       label(s, st, x0, y1 + fs * 1.0, ga * 0.9, '200,205,225', 'left', fs - 1);
@@ -550,15 +565,15 @@
   }
 
   Anim.register('fission', {
-    duration: DURATION,
-    poster: 18.5,
-    pauses: PAUSES,
+    duration: DURATION_U,
+    poster: realAt(18.5),
+    // no pauses: see EXTRA near the top (the story waits while everything keeps moving)
     // score: building power (G-sharp minor, a dark saw pad that swells slowly, a low drone, a little wind)
     music: { chords: [[44, 51, 56, 59], [40, 47, 52, 56], [42, 49, 54, 57], [39, 46, 51, 54]], bar: 9, pad: 'saw', cutoff: 650, drone: 0.13, tremolo: 0.6, wind: 0.3, volume: 0.53 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: {
-      CAPS, PAUSES, NUC, BIG, SMALL, REACT, rateAt, tipAt,
+      CAPS, EXTRA, storyAt, realAt, NUC, BIG, SMALL, REACT, rateAt, tipAt, M_SPLIT, M_ABS, M2_GO, M3_GO, M_END,
       check() {
         const n = NUC.group.filter((x) => x === 1).length, ba = NUC.group.filter((x) => x === 0).length, kr = NUC.group.filter((x) => x === 2).length;
         const pBa = NUC.group.filter((x, i) => x === 0 && NUC.type[i] === 1).length, pKr = NUC.group.filter((x, i) => x === 2 && NUC.type[i] === 1).length;
@@ -566,23 +581,24 @@
           nucleons: [1 + 235, 141 + 92 + 3], protons: [92, 56 + 36], balls: { ba, kr, n, pBa, pKr },
           joules: 200e6 * 1.60e-19, fissionsPerSecond: 3.0e9 / (200e6 * 1.60e-19), massMeV: 0.186033 * 931.5,
           big: { total: BIG.total, by14: fissionsBy(BIG, 14), gens: genCounts(BIG, 99) }, small: { total: SMALL.total, nuclei: SMALL.N.length },
-          rateEnd: rateAt(END_CARD - 0.1), ratePeak: Math.max(...RATE), reactorFissions: REACT.fis.length,
+          rateEnd: rateAt(M_END - 0.1), ratePeak: Math.max(...RATE), reactorFissions: REACT.fis.length,
         };
       },
     },
-    frame(s, t) {
+    frame(s, u) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
+      const t = storyAt(u);
       D.background(s, 0.2);
       const a1 = fade(t, 4.4, P1_END, 0.6, 0.6), a2 = fade(t, T2, P2_END, 0.8, 0.6), a3 = fade(t, T3, P3_END, 0.8, 0.6), a4 = fade(t, T4, END_CARD + 0.6, 0.8, 0.6);
-      part1(s, t, a1);
-      if (a2 > 0) { const { cx, cy, u, chart } = L.p2; drawLump(s, BIG, t - T2_GO, cx, cy, u, a2); genChart(s, BIG, t - T2_GO, chart, a2 * smooth((t - 50.8) / 0.8)); }
+      part1(s, t, a1, u);
+      if (a2 > 0) { const { cx, cy, u: k, chart } = L.p2; drawLump(s, BIG, u - M2_GO, cx, cy, k, a2); genChart(s, BIG, u - M2_GO, chart, a2 * smooth((t - 50.8) / 0.8)); }
       if (a3 > 0) {
-        const { u, small, big } = L.p3, tt = t - T3_GO, fs = L.fs;
-        drawLump(s, SMALL, tt, small[0], small[1], u, a3);
-        drawLump(s, BIG, tt, big[0], big[1], u, a3);
+        const { u: k, small, big } = L.p3, tt = u - M3_GO, fs = L.fs;
+        drawLump(s, SMALL, tt, small[0], small[1], k, a3);
+        drawLump(s, BIG, tt, big[0], big[1], k, a3);
         const ns = fissionsBy(SMALL, tt), nb = fissionsBy(BIG, tt);
         const lastS = Math.max(...SMALL.tf.filter(Number.isFinite)), recentB = nb - fissionsBy(BIG, tt - 1.5);
-        const ys = L.phone ? small[1] + 1.6 * u + fs * 1.5 : small[1] + 8 * u + fs * 1.6, yb = big[1] + 8 * u + fs * 1.6;
+        const ys = L.phone ? small[1] + 1.6 * k + fs * 1.5 : small[1] + 8 * k + fs * 1.6, yb = big[1] + 8 * k + fs * 1.6;
         const pill = (x, y, lines) => {                                   // a dark backing, so escaping neutrons can't hide the labels
           const { g } = s; g.font = D.sans(fs, 600);
           const w = Math.max(...lines.map((q) => g.measureText(q).width)) + fs * 1.2;
@@ -596,7 +612,7 @@
         label(s, 'the chain died out', small[0], ys + fs * 1.3, a3 * smooth((tt - lastS - 2) / 0.6), BA_RGB, 'center', fs);
         label(s, recentB > 0 ? 'the chain keeps going' : 'nearly every nucleus has split', big[0], yb + fs * 1.3, a3 * smooth((tt - 6) / 0.6), U_RGB, 'center', fs);
       }
-      part4(s, t, a4);
+      part4(s, t, a4, u);
       const leg = t < P1_END ? [['dot', PROT, 'proton'], ['dot', NEUT_HI, 'neutron']]
         : t < T4 ? [['dot', '230,180,60', 'uranium-235 nucleus'], ['dot', N_RGB, 'neutron'], ['dot', BA_RGB, 'fission fragments']]
           : [['dot', '230,180,60', 'uranium-235 (uranium-238 not drawn)'], ['dot', N_RGB, 'neutron (streak: fast)'], ['dot', H_RGB, 'light nucleus (hydrogen)']];

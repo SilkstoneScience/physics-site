@@ -44,11 +44,21 @@
     [42.6, 48.0, `The disc (${u('I = ½mr²')}) spins with a third of its energy: ${u('v² = 4gh/3')}, ${u('v = ')}${V('disc')}.`],
     [48.2, 53.8, `The ball (${u('I = ⅖mr²')}) spins with only 2/7 of it: ${u('v² = 10gh/7')}, ${u('v = ')}${V('ball')}. Its mass is closest to the centre.`],
     [55.0, 60.8, 'A surprise: a big hoop, with 4 times the mass and 3 times the radius, against a small, light hoop. Predict: which wins?'],
-    [61.1, 66.4, `Slow motion. The small hoop spins 3 times as fast (${u('ω = v/r')}), but the two stay side by side.`],
-    [66.6, 72.2, `A tie: ${T('hoop')} each. In ${u('mgh = ½mv² + ½(mr²)(v/r)²,')} m and r cancel, so ${u('v² = gh')} for every hoop.`],
+    [61.1, 66.6, `Slow motion. The small hoop spins 3 times as fast (${u('ω = v/r')}), but the two stay side by side.`],
+    [66.8, 72.2, `A tie: ${T('hoop')} each. In ${u('mgh = ½mv² + ½(mr²)(v/r)²,')} m and r cancel, so ${u('v² = gh')} for every hoop.`],
     [72.4, 77.6, 'Only the shape matters: how the mass is spread out around the axis.'],
   ];
-  const DURATION = 86;
+  // No pauses (teacher, 17 November 2026): one constant speed throughout. The story clock waits at these moments so
+  // each caption can be read; every wait falls while the objects are at rest (before a release or after they stop),
+  // so nothing that moves is ever frozen.
+  const WAITS = [[9.1, 2.6], [12.6, 4], [23.6, 1.5], [30.2, 1.5], [41.6, 1.5], [47.2, 1], [53.0, 1.5], [60.0, 4], [71.4, 2], [76.8, 1], [84.0, 4.5]];
+  const STORY = 86, DURATION = STORY + WAITS.reduce((n, w) => n + w[1], 0);       // 108.5 s
+  const story = (t) => {                     // real time → story time
+    let acc = 0;
+    for (const [st, d] of WAITS) { if (t < st + acc) return t - acc; if (t < st + acc + d) return st; acc += d; }
+    return Math.min(t - acc, STORY);
+  };
+  const realOf = (st) => st + WAITS.filter((w) => w[0] < st).reduce((n, w) => n + w[1], 0);
 
   // Which objects are on the slope in each part. lane 0 = front, 2 = back; size = radius in units of R.
   const PHASES = [
@@ -331,15 +341,22 @@
 
   Anim.register('rolling', {
     duration: DURATION,
-    poster: 21,
+    poster: realOf(21),
     // score: race-day tension (D major, a square-wave pad with a steady flutter, a low drone)
     music: { chords: [[50, 57, 62, 66], [47, 54, 59, 62], [43, 50, 55, 59], [45, 52, 57, 61]], bar: 5, pad: 'square', cutoff: 900, drone: 0.09, tremolo: 1.5, volume: 0.73 },
-    // hold the picture still so each caption can be read (teacher's request); longest at the predictions
-    pauses: [[12.6, 4], [23.6, 1.5], [30.2, 1.5], [41.6, 1.5], [47.2, 1], [53.0, 1.5], [60.0, 4], [71.4, 2], [76.8, 1], [84.0, 4.5]],
     resize: layout,
-    frame(s, t) {
+    info: { story, realOf, WAITS, CAPS, PHASES, SHAPES, SLOW },
+    frame(s, tr) {
+      const t = story(tr);
       D.background(s, 0.26);
       const on = smooth((t - 3.6) / 1) * (1 - smooth((t - 85.2) / 0.7));
+      // a slow, continuous camera drift (on the real clock) over the slope and the objects, so the picture is never
+      // still, even while the objects wait at rest behind the gate; slope and objects move together, so the physics
+      // is unchanged. The panel and the captions stay put.
+      const g = s.g, fx = (L.sx0 + L.sx1) / 2, fy = (L.sy0 + L.yF) / 2;
+      const zoom = 1 + 0.06 * (0.5 - 0.5 * Math.cos(2 * Math.PI * tr / 13));
+      const panX = 0.02 * L.W * Math.sin(2 * Math.PI * tr / 17), panY = 0.012 * L.H * Math.sin(2 * Math.PI * tr / 21 + 1);
+      g.save(); g.translate(fx + panX, fy + panY); g.scale(zoom, zoom); g.translate(-fx, -fy);
       ramp(s, on);
       dims(s, fade(t, 4.2, 24.4, 0.8, 0.8) * on);
       for (const ph of PHASES) {
@@ -352,7 +369,6 @@
           const la = pa * (1 - smooth((t - ph.race) / 0.6));
           if (la > 0) D.text(s, o.label, m.x - m.r - L.fs * 0.4, m.y, L.fs, la, D.sans(L.fs, 600), sh.rgb, 'right');
         }
-        panel(s, t, ph, pa);
       }
       // the start gate lifts as each race begins
       for (const ph of PHASES) {
@@ -361,11 +377,15 @@
         const p1 = profile(-0.6, d), p2 = profile(2.6, d);
         D.glowLine(s, [[p1[0], p1[1] - L.R * 0.5 - lift], [p2[0], p2[1] - L.R * 0.5 - lift]], C.white, ga * 0.8, 1.3);
       }
+      g.restore();
+      for (const ph of PHASES) {                     // the panel stays still (outside the camera drift)
+        const pa = fade(t, ph.a, ph.b, 0.5, 0.5) * on; if (pa > 0) panel(s, t, ph, pa);
+      }
       D.captions(s, t, CAPS);
       closing(s, t);
       if (t < 3.8) { s.g.fillStyle = `rgba(4,6,13,${0.75 * fade(t, 0, 3.6, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 3.6, 'The rolling race', 'Why does a ball beat a hoop? (HL)');
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tr, DURATION);
     },
   });
 })();

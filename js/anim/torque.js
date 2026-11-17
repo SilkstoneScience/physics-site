@@ -51,7 +51,33 @@
     [109.6, 115.6, `Balance the torques: clockwise ${u(`N × ${f2(B_M)}`)} = anticlockwise ${u(`350 × ${f2(A_M)},`)} so ${u(`N = ${N_F.toFixed(0)} N.`)} The forces balance too, so ${u(`f = N = ${N_F.toFixed(0)} N`)} and ${u('R = W = 350 N.')}`],
     [115.8, 121.6, `The ladder does not slip if ${u('f ≤ μR,')} so ${u(`μ ≥ ${N_F.toFixed(0)} / 350 = ${MU.toFixed(2)}.`)} The minimum coefficient of static friction is ${MU.toFixed(2)}.`],
   ];
-  const DURATION = 131;
+  const STORY_END = 131;
+
+  // No pauses (teacher, 17 November 2026): one second on screen is one second of the animation, with no hold. Each step
+  // (from one caption to the next) is given the reading time its old hold used to add, and its drawing (the force
+  // turning, sliding along its line of action, lines and components growing) simply takes that much longer: none of it
+  // has a natural speed. The story below is written in story seconds; story(t) turns screen seconds into story seconds.
+  // extra seconds for each step: enough to read its caption at no more than 16 characters a second (at least the reading
+  // time the step had before), and 4 s more for the closing summary
+  const OLD = [[9.2, 1], [17.0, 1.5], [22.6, 1.5], [28.4, 1], [34.4, 1.5], [40.6, 2], [46.8, 1], [53.0, 1.5], [59.0, 2.5], [65.0, 2.5],
+    [72.0, 1], [78.0, 1.5], [84.0, 1.5], [90.0, 1.5], [96.4, 1], [102.8, 2.5], [108.8, 2], [115.0, 2.5], [121.0, 3]];
+  const READ = CAPS.map(([a, b, txt]) => {
+    const before = OLD.filter((h) => h[0] >= a && h[0] < b + 0.6).reduce((n, h) => n + h[1], 0);
+    return [b - 0.5, +Math.max(before, txt.length / 16 + 0.6 - (b - a)).toFixed(1)];
+  }).concat([[129.6, 4]]);
+  const onScreen = (u) => u + READ.filter((h) => h[0] < u).reduce((n, h) => n + h[1], 0);
+  const KNOTS = [[0, 0], ...CAPS.map((c) => [onScreen(c[0]), c[0]]), [onScreen(STORY_END), STORY_END]];
+  function story(t) {
+    if (t <= 0) return t;
+    for (let i = 1; i < KNOTS.length; i++) {
+      const [t0, u0] = KNOTS[i - 1], [t1, u1] = KNOTS[i];
+      if (t <= t1) return u0 + (u1 - u0) * (t - t0) / (t1 - t0);
+    }
+    return STORY_END;
+  }
+  // the captions in screen seconds: each stays up as long as it did before
+  const CAPS_SCREEN = CAPS.map(([a, b, txt]) => [onScreen(a), onScreen(b), txt]);
+  const DURATION = onScreen(STORY_END);
 
   // θ of the spanner force (degrees) at scene time t
   function theta(t) {
@@ -421,20 +447,19 @@
 
   Anim.register('torque', {
     duration: DURATION,
-    poster: 56,
+    poster: onScreen(56),
     // score: calm and thoughtful (A minor, a triangle pad that slowly swells, a low drone)
     music: { chords: [[45, 52, 57, 60, 64], [41, 48, 53, 57, 64], [43, 50, 55, 59, 62], [40, 47, 52, 55, 59]], bar: 7, pad: 'triangle', cutoff: 900, drone: 0.09, tremolo: 0.25, volume: 0.55 },
-    // hold the picture still so each caption can be read
-    pauses: [[9.2, 1], [17.0, 1.5], [22.6, 1.5], [28.4, 1], [34.4, 1.5], [40.6, 2], [46.8, 1], [53.0, 1.5], [59.0, 2.5], [65.0, 2.5],
-      [72.0, 1], [78.0, 1.5], [84.0, 1.5], [90.0, 1.5], [96.4, 1], [102.8, 2.5], [108.8, 2], [115.0, 2.5], [121.0, 3], [129.6, 4]],
     resize: layout,
+    info: { CAPS: CAPS_SCREEN, story, onScreen, DURATION },
     frame(s, t) {
+      const u = story(t);                                          // story seconds: every drawing step below uses these
       D.background(s, 0.26);
-      spanner(s, t, fade(t, 3.6, 66.2, 0.8, 0.7));
-      ladder(s, t, fade(t, 66.4, 122.6, 0.9, 0.8));
-      panel(s, t);
-      D.captions(s, t, CAPS);
-      closing(s, t);
+      spanner(s, u, fade(u, 3.6, 66.2, 0.8, 0.7));
+      ladder(s, u, fade(u, 66.4, 122.6, 0.9, 0.8));
+      panel(s, u);
+      D.captions(s, t, CAPS_SCREEN);
+      closing(s, u);
       if (t < 3.8) { s.g.fillStyle = `rgba(4,6,13,${0.75 * fade(t, 0, 3.6, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 3.6, 'Why the sin θ in torque?', 'τ = Fr sin θ, then a ladder leaning on a wall (HL)');
       D.vignette(s, t, DURATION);

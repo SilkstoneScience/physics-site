@@ -26,20 +26,33 @@
   const XS_C = -5.0, XP_C = -7.6;                // part C: the siren and the pedestrian
   const BALMER = [410.2, 434.0, 486.1, 656.3], Z_GAL = 6.0e6 / 3.00e8;
 
-  // the picture can be "frozen" inside the story (to measure wavelengths): tau = the wave time
-  const clock = (freezes) => (t) => { let tau = t; for (const [a, b] of freezes) { if (t >= b) tau -= b - a; else if (t > a) tau -= t - a; } return tau; };
-  const tauA = clock([[11.0, 15.0]]), tauB = clock([[47.6, 58.0]]), tauC = clock([[76.6, 80.6]]);
-  const frozen = (t) => (t > 11.0 && t < 15.0) || (t > 47.6 && t < 58.0) || (t > 76.6 && t < 80.6);
+  // timeline of the four parts, in story time (the captions and the steps of the story)
+  const A_IN = 4.4, A_OUT = 20.8, B_IN = 21.0, B_SPLIT = 47.5, B_OUT = 74.8, C_IN = 75.0, C_OUT = 104.0, D_IN = 104.2, END_CARD = 140.8, DURATION = 154;
 
-  // part B: the car passes A at t = 69.2 (wave time 58.8)
-  const T_PASS_TAU = 58.8;
-  const xsB = (tau) => XA + U * (tau - T_PASS_TAU);
-  // part C: the driver starts just off the right edge
-  const C_X0 = 8.6, C_T0 = 75.0;
+  // ---------- no pauses (teacher, 17 November 2026) ----------
+  // Real time t → story time. Where a caption needs more time, the story waits ('rest'), but the waves, the cars and
+  // the light never stop: they all run on real time, at one constant rate. Nothing is ever frozen; the wavelengths are
+  // measured with arrows that ride along with a pair of moving wavefronts.
+  const REST = [[9.2, 2.5], [14.4, 4.0], [19.6, 1.0], [25.8, 1.0], [31.0, 1.2], [36.2, 2.5], [41.4, 2.5], [46.6, 1.5], [51.8, 1.5],
+    [57.0, 1.5], [62.2, 2.0], [67.4, 3.5], [73.6, 3.0], [80.0, 2.0], [85.2, 2.5], [90.4, 2.0], [96.6, 2.5], [102.8, 5.5],
+    [108.6, 2.0], [113.8, 2.0], [119.0, 1.5], [124.2, 2.5], [129.4, 2.5], [134.6, 5.5], [139.8, 3.5]];
+  const DUR_R = DURATION + REST.reduce((n, r) => n + r[1], 0);
+  const realOf = (ts, late = false) => ts + REST.reduce((n, [p, d]) => n + (ts > p || (late && ts === p) ? d : 0), 0);
+  const storyOf = (t) => {                                // inverse of realOf: constant while the story rests
+    let acc = 0;
+    for (const [p, d] of REST) { if (t < p + acc) return t - acc; if (t < p + acc + d) return p; acc += d; }
+    return Math.min(t - acc, DURATION);
+  };
+
+  // part B is shown as two passes of the car (a cut between them), so that it stays in view at a constant speed:
+  // pass 1 (the idea), then pass 2 (the numbers, and the car passing A)
+  const XB1_0 = -7.0, TB1_0 = realOf(B_IN);
+  const xsB1 = (te) => XB1_0 + U * (te - TB1_0);
+  const T_PASS_R = realOf(68.4) + 0.8;                    // pass 2: the car reaches A just after "It drops suddenly" starts
+  const xsB2 = (te) => XA + U * (te - T_PASS_R);
+  // part C: the driver drives in from the right when the driver's caption starts
+  const C_X0 = 9.6, C_T0 = realOf(81.0);
   const xcC = (tau) => C_X0 - U * (tau - C_T0);
-
-  // timeline of the four parts
-  const A_IN = 4.4, A_OUT = 20.8, B_IN = 21.0, B_OUT = 74.8, C_IN = 75.0, C_OUT = 104.0, D_IN = 104.2, END_CARD = 140.8, DURATION = 154;
 
   // ---------- captions ----------
   const CAPS = [
@@ -69,6 +82,8 @@
     [130.4, 135.4, 'A galaxy moving towards us, such as the nearby Andromeda galaxy, gives a blueshift instead: its lines move to shorter wavelengths. (Shown here at the same speed, to compare.)'],
     [135.6, 140.6, 'Almost every distant galaxy is redshifted, and the more distant the galaxy, the bigger the redshift: evidence that the universe is expanding.'],
   ];
+
+  const CAPS_R = CAPS.map(([a, b, txt]) => [realOf(a), realOf(b, true), txt]);
 
   // ---------- colours ----------
   const WAVE = C.vel, SRC = C.force, OBS = C.good, HLC = '255,150,70';
@@ -257,26 +272,28 @@
     g.shadowBlur = 0;
     D.text(s, label, (x1 + x2) / 2, y - L.fs * 1.5, L.fs + 1, a, D.sans(L.fs + 1, 600), C.light);
   }
-  // the pair of neighbouring wavefronts on one side of the axis whose middle is closest to a target point
-  function pairNear(fronts, side, target, minX, maxX) {
-    const pos = fronts.map((f) => [f[3], f[0] + side * f[1]]).filter(([, x]) => x > minX && x < maxX).sort((p, q) => p[0] - q[0]);
-    let best = null;
-    for (let i = 0; i + 1 < pos.length; i++) {
-      if (Math.abs(pos[i + 1][0] - pos[i][0] - P) > 1e-6) continue;
-      const m = (pos[i][1] + pos[i + 1][1]) / 2;
-      if (!best || Math.abs(m - target) < Math.abs(best[2] - target)) best = [pos[i][1], pos[i + 1][1], m];
-    }
-    return best;
-  }
   function velArrow(s, xpx, dir, label, a) {
     if (a <= 0) return;
     const y = L.axisY - L.carL * 0.32 - L.fs * 0.4, len = Math.max(L.carL * 0.55, 36);
     D.arrow(s, xpx - dir * len * 0.3, y, xpx + dir * len * 0.7, y, C.white, 0.85 * a, '', { width: 2, head: 9, blur: 6 });
     D.text(s, label, xpx + dir * len * 0.2, y - L.fs * 1.1, L.fs, 0.85 * a, D.sans(L.fs), C.white);
   }
-  function frozenTag(s, t, a) {
-    if (!frozen(t) || a <= 0) return;
-    D.text(s, 'picture frozen for measuring',L.W / 2, L.top + L.fs * 0.6, L.fs, 0.75 * a, D.sans(L.fs, 600), C.light);
+  // A measuring arrow that rides along with one pair of neighbouring wavefronts (it never freezes the picture).
+  // Every RIDE seconds it fades out and picks a new pair near the start point. xs(te) = where the source was;
+  // side +1 measures fronts travelling to the right of their centres, −1 to the left.
+  const RIDE = 2.25;
+  function ridingBracket(s, tau, w0, xs, side, startAt, t0, label, a) {
+    if (a <= 0 || tau < w0) return;
+    const seg = Math.floor((tau - w0) / RIDE), tj = w0 + seg * RIDE, u = tau - tj;
+    const fx = (k, tt) => { const te = t0 + k * P; return xs(te) + side * V * (tt - te); };
+    let best = null;
+    for (let k = Math.floor((tj - t0) / P) - 1; k > Math.floor((tj - t0) / P) - 30; k--) {
+      const m = (fx(k, tj) + fx(k + 1, tj)) / 2, target = startAt(tj);
+      if (!best || Math.abs(m - target) < Math.abs(best[1] - target)) best = [k, m];
+    }
+    if (!best) return;
+    const fa = smooth(u / 0.3) * smooth((RIDE - u) / 0.4);
+    bracket(s, fx(best[0], tau), fx(best[0] + 1, tau), label, a * fa);
   }
   // an equation panel (HL) at the top centre
   function panel(s, title, rows, a) {
@@ -307,8 +324,8 @@
   const fmtHz = (f) => `${Math.round(f)} Hz`;
 
   // ---------- part A: the car stands still ----------
-  function partA(s, t, a) {
-    const tau = tauA(t), { axisY, carL, pH, road: ry, fs } = L;
+  function partA(s, t, a, tr) {
+    const tau = tr, { axisY, carL, pH, road: ry, fs } = L;          // t: story time; tau: the wave time (real)
     const fronts = frontsOf(tau, () => 0, 5.0, 0);
     drawFronts(s, fronts);
     road(s, a);
@@ -325,15 +342,13 @@
       if (last) flash(s, X(xo), hy, (last[1] - Math.abs(xo)) / V, a);
       readout(s, X(xo), L.readY, `${nm} hears`, fmtHz(F), OBS, a * hear);
     }
-    const br = fade(t, 10.6, 15.2, 0.6, 0.5);                      // only while the picture is frozen
-    if (br > 0) { const p = pairNear(fronts, 1, 3.6, 1.2, XA - 0.4); if (p) bracket(s, p[0], p[1], 'λ = 0.68 m', a * br); }
-    frozenTag(s, t, a);
+    ridingBracket(s, tau, realOf(10.6), () => 0, 1, () => 1.9, 5.0, 'λ = 0.68 m', a * fade(t, 10.6, 15.2, 0.6, 0.5));
     legend(s, [['line', WAVE, 'wavefront'], ['dot', SRC, 'source (the car)'], ['dot', OBS, 'observer']], a);
   }
 
   // ---------- part B: the car moves to the right ----------
   // the latest wavefront to reach a still observer at xo: [time since it arrived, was the source approaching?]
-  function lastArrivalB(tau, xo) {
+  function lastArrivalB(tau, xo, xsB) {
     const kMax = Math.floor(tau / P);
     for (let k = kMax; k > kMax - 200; k--) {
       const te = k * P, xs = xsB(te), ta = te + Math.abs(xo - xs) / V;
@@ -341,8 +356,8 @@
     }
     return [99, false];
   }
-  function partB(s, t, a) {
-    const tau = tauB(t), { axisY, carL, pH, road: ry, fs, sc } = L, xs = xsB(tau);
+  function partB(s, t, a, tr, xsB) {
+    const tau = tr, { axisY, carL, pH, road: ry, fs, sc } = L, xs = xsB(tau);   // t: story time; tau: the wave time (real)
     const fronts = frontsOf(tau, xsB);
     drawFronts(s, fronts);
     road(s, a);
@@ -358,19 +373,17 @@
     for (const [xo, nm] of [[XA, 'A'], [XB, 'B']]) {
       const hy = person(s, X(xo), ry, pH, OBS, a);
       label(s, nm, X(xo), ry + fs * 1.2, a, OBS, 700);
-      const [age, approaching] = lastArrivalB(tau, xo);
+      const [age, approaching] = lastArrivalB(tau, xo, xsB);
       flash(s, X(xo), hy, age, a);
       let txt = '?';
       if (nm === 'A') txt = t < 42.4 ? '?' : t < 47.6 ? 'higher than 500 Hz' : fmtHz(approaching ? F_AHEAD : F_BEHIND);
       else txt = t < 42.4 ? '?' : t < 52.8 ? 'lower than 500 Hz' : fmtHz(F_BEHIND);
       readout(s, X(xo), L.readY, `${nm} hears`, txt, OBS, a * smooth((t - 32.0) / 0.6));
     }
-    // measuring the wavelengths while the picture is frozen
+    // measuring the wavelengths ahead of and behind the moving car, with arrows riding along with the wavefronts
     const half = carL / sc / 2;
-    const bA = fade(t, 47.8, 58.0, 0.6, 0.5), bB = fade(t, 53.0, 58.0, 0.6, 0.5);
-    if (bA > 0) { const p = pairNear(fronts, 1, (xs + half + XA) / 2, xs + half + 0.2, XA - 0.3); if (p) bracket(s, p[0], p[1], '0.51 m', a * bA); }
-    if (bB > 0) { const p = pairNear(fronts, -1, (xs - half + XB) / 2, XB + 0.3, xs - half - 0.2); if (p) bracket(s, p[0], p[1], '0.85 m', a * bB); }
-    frozenTag(s, t, a);
+    ridingBracket(s, tau, realOf(47.8), xsB, 1, (tt) => xsB(tt) + half + 0.7, 0, '0.51 m', a * fade(t, 47.8, 52.6, 0.6, 0.5));
+    ridingBracket(s, tau, realOf(53.0), xsB, -1, (tt) => xsB(tt) - half - 0.8, 0, '0.85 m', a * fade(t, 53.0, 57.8, 0.6, 0.5));
     legend(s, [['line', WAVE, 'wavefront'], ['dot', SRC, 'source, and where it was when it sent each wavefront'], ['dot', OBS, 'observer']], a);
     const pa = fade(t, 58.0, 63.2, 0.6, 0.6);
     panel(s, 'moving source', [
@@ -381,8 +394,8 @@
   }
 
   // ---------- part C: the source is still and the driver moves ----------
-  function partC(s, t, a) {
-    const tau = tauC(t), { axisY, carL, pH, road: ry, fs } = L, xc = xcC(tau);
+  function partC(s, t, a, tr) {
+    const tau = tr, { axisY, carL, pH, road: ry, fs } = L, xc = xcC(tau);   // t: story time; tau: the wave time (real)
     const fronts = frontsOf(tau, () => XS_C);
     drawFronts(s, fronts);
     road(s, a);
@@ -409,9 +422,7 @@
     velArrow(s, X(xc), -1, '85 m s⁻¹', a * fade(t, 81.0, 103.8) * (1 - fade(t, 97.6, 103.8, 0.6, 0.6)));
     // the driver's readout goes under the car, clear of the HL panel at the top
     readout(s, X(xc), ry + fs * 2.6, 'driver hears', t < 91.4 ? '?' : fmtHz(F_OBS), OBS, a * smooth((t - 86.2) / 0.6));
-    const br = fade(t, 76.2, 80.8, 0.6, 0.5);
-    if (br > 0) { const p = pairNear(fronts, 1, 0.5, XS_C + 1.0, xc - carL / L.sc / 2 - 0.3); if (p) bracket(s, p[0], p[1], 'λ = 0.68 m', a * br); }
-    frozenTag(s, t, a);
+    ridingBracket(s, tau, realOf(76.2), () => XS_C, 1, () => XS_C + 1.9, 0, 'λ = 0.68 m', a * fade(t, 76.2, 80.8, 0.6, 0.5));
     legend(s, [['line', WAVE, 'wavefront'], ['dot', SRC, 'source (a still siren)'], ['dot', OBS, 'observers']], a);
     panel(s, 'moving observer', [
       EQ_OBS,
@@ -439,7 +450,7 @@
     const k = w < 420 ? 0.35 + 0.65 * (w - 380) / 40 : w > 680 ? 0.35 + 0.65 * (720 - w) / 40 : 1;
     return [Math.round(255 * r * k), Math.round(255 * g * k), Math.round(255 * b * k)];
   }
-  function partD(s, t, a) {
+  function partD(s, t, a, tr) {
     const { g } = s, { W, phone, fs, top, capTop } = L, z = zAt(t), outer = g.globalAlpha;
     const barH = clamp(L.H * 0.06, 16, 40);
     // phones: room for captions of up to five lines below the spectra
@@ -448,7 +459,8 @@
     const gy = (top + specTop) / 2 + fs * 0.3, gx = W * (phone ? 0.6 : 0.66), gR = Math.min(W * 0.14, (specTop - top) * 0.36);
     const ex = W * (phone ? 0.09 : 0.12);
     g.globalAlpha = outer * a;
-    D.line(s, gx - gR * 1.05, gy, ex + 16, gy, '255,214,102', 0.45, 1.2, [5, 6]);
+    g.save(); g.strokeStyle = 'rgba(255,214,102,0.45)'; g.lineWidth = 1.2; g.setLineDash([5, 6]); g.lineDashOffset = -tr * 22;   // the light travels to us
+    g.beginPath(); g.moveTo(gx - gR * 1.05, gy); g.lineTo(ex + 16, gy); g.stroke(); g.restore();
     D.arrow(s, ex + 60, gy, ex + 18, gy, C.light, 0.6, '', { width: 1.4, head: 8, blur: 4 });
     label(s, 'light', (ex + gx - gR) / 2, gy - fs * 0.9, 0.8 * a, C.light);
     D.glowDot(s, ex, gy, Math.max(14, fs * 1.6), '90,150,255', a);
@@ -541,32 +553,30 @@
   }
 
   Anim.register('doppler', {
-    duration: DURATION,
-    poster: 50,
-    // holds just before each caption fades, so that every caption can be read at about 17 characters a second
-    pauses: [[9.2, 2.5], [14.4, 4.0], [19.6, 1.0], [25.8, 1.0], [31.0, 1.2], [36.2, 2.5], [41.4, 2.5], [46.6, 1.5], [51.8, 1.5],
-      [57.0, 1.5], [62.2, 2.0], [67.4, 3.5], [73.6, 3.0], [80.0, 2.0], [85.2, 2.5], [90.4, 2.0], [96.6, 2.5], [102.8, 5.5],
-      [108.6, 2.0], [113.8, 2.0], [119.0, 1.5], [124.2, 2.5], [129.4, 2.5], [134.6, 5.5], [139.8, 3.5]],
+    duration: DUR_R,
+    poster: realOf(50) + 1.5,
     // score: passing by (E major, a warm saw pad, a low drone, a little wind and shimmer)
     music: { chords: [[52, 59, 64, 68], [49, 56, 61, 64], [45, 52, 57, 61], [47, 54, 59, 63]], bar: 6, pad: 'saw', cutoff: 900, drone: 0.09, shimmer: 0.2, wind: 0.3, volume: 0.71 },
     resize: layout,
     // for checking the numbers (not used by the player)
-    info: { P, V, U, F_AHEAD, F_BEHIND, F_OBS, XA, XB, xsB, xcC, tauA, tauB, tauC, zAt, CAPS, frontsOf, lastArrivalB },
-    frame(s, t) {
+    info: { P, V, U, F_AHEAD, F_BEHIND, F_OBS, XA, XB, xsB1, xsB2, xcC, T_PASS_R, C_T0, zAt, CAPS: CAPS_R, frontsOf, lastArrivalB, realOf, storyOf, DUR_R },
+    frame(s, tr) {
+      const t = storyOf(tr);                                // story time
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
       D.background(s, 0.22);
       const { g } = s;
-      const aA = fade(t, A_IN, A_OUT, 0.6, 0.5), aB = fade(t, B_IN, B_OUT, 0.6, 0.5), aC = fade(t, C_IN, C_OUT, 0.6, 0.5);
+      const aA = fade(t, A_IN, A_OUT, 0.6, 0.5), aC = fade(t, C_IN, C_OUT, 0.6, 0.5);
+      const aB1 = fade(t, B_IN, B_SPLIT, 0.6, 0.45), aB2 = fade(t, B_SPLIT, B_OUT, 0.45, 0.5);   // a cut between the two passes
       const aD = fade(t, D_IN, END_CARD + 0.8, 0.6, 0.8);
-      for (const [al, fn] of [[aA, partA], [aB, partB], [aC, partC], [aD, partD]]) {
+      for (const [al, fn, path] of [[aA, partA], [aB1, partB, xsB1], [aB2, partB, xsB2], [aC, partC], [aD, partD]]) {
         if (al <= 0) continue;
-        g.globalAlpha = al; fn(s, t, 1); g.globalAlpha = 1;
+        g.globalAlpha = al; fn(s, t, 1, tr, path); g.globalAlpha = 1;
       }
-      D.captions(s, t, CAPS);
+      D.captions(s, tr, CAPS_R);
       if (t < 4.6) { g.fillStyle = `rgba(4,6,13,${0.8 * fade(t, 0, 4.4, 0.1, 0.8)})`; g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 4.4, 'The Doppler effect', 'Why does a passing car\'s note drop?');
       endCard(s, t);
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tr, DUR_R);
     },
   });
 })();

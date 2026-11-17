@@ -313,7 +313,7 @@
   function graph(s, t, a) {
     if (a <= 0 || L.phone) return;
     const { W, H } = s, fs = Math.round(clamp(W / 80, 10, 22));
-    const l = W * 0.69, r = W * 0.965, top = Math.max(64, H * 0.15), bot = H * 0.4, t0 = 7.0, t1 = 19.4;
+    const l = W * 0.69, r = W * 0.965, top = Math.max(64, H * 0.15), bot = H * 0.4, t0 = G0, t1 = G1;   // real seconds
     const X = (tt) => l + (tt - t0) / (t1 - t0) * (r - l), Y = (F) => bot - F / 12 * (bot - top);
     s.g.fillStyle = `rgba(20,26,52,${0.45 * a})`; s.g.fillRect(l - fs * 2.6, top - fs * 2.2, r - l + fs * 3.2, bot - top + fs * 3.6);
     D.line(s, l, bot, r, bot, C.muted, 0.6 * a, 1.2); D.line(s, l, top, l, bot, C.muted, 0.6 * a, 1.2);
@@ -324,9 +324,10 @@
     rich(s, 'friction *F*_f_ / N', l - fs * 2.2, top - fs * 1.2, fs, a, FRIC, 'left', 600);
     D.text(s, 'time', r, bot + fs * 0.9, fs, 0.7 * a, D.sans(fs), C.muted, 'right');
     const te = Math.min(t, t1), pts = [];
-    for (let tt = t0; tt <= te; tt += 0.02) { if (tt > T_SLIP - 0.01 && tt < T_SLIP + 0.02) pts.push([X(T_SLIP), Y(FMAX)]); pts.push([X(tt), Y(fric(tt))]); }
+    const RS = realOf(T_SLIP);
+    for (let tt = t0; tt <= te; tt += 0.02) { if (tt > RS - 0.01 && tt < RS + 0.02) pts.push([X(RS), Y(FMAX)]); pts.push([X(tt), Y(fric(tauOf(tt)))]); }
     if (pts.length > 1) D.glowLine(s, pts, FRIC, a, 1.6);
-    if (t > t0 && t < t1) D.glowDot(s, X(te), Y(fric(te)), 9, FRIC, a);
+    if (t > t0 && t < t1) D.glowDot(s, X(te), Y(fric(tauOf(te))), 9, FRIC, a);
   }
 
   // ---------- labels in the zoomed views ----------
@@ -459,7 +460,8 @@
     [3.6, 7.6, 'A 2.0 kg block rests on a table. Its weight, 19.6 N, is balanced by the normal force from the table.'],
     [7.8, 11.8, 'Push gently with 5.0 N: static friction pushes back with 5.0 N, so the block stays still.'],
     [12.0, 16.0, 'Static friction matches the push, but only up to a maximum: 0.50 × 19.6 N = 9.8 N.'],
-    [16.1, 18.6, 'Push past 9.8 N and it slips. Dynamic friction is smaller, 0.40 × 19.6 N = 7.8 N, so a 7.8 N push keeps it sliding at constant velocity.'],
+    [16.1, 18.3, 'Push past 9.8 N and it slips.'],
+    [18.45, 18.7, 'Dynamic friction is smaller, 0.40 × 19.6 N = 7.8 N, so a 7.8 N push kept it sliding at constant velocity (the flat part of the graph).'],
     [18.8, 22.8, 'So what is friction? Zoom in to where the block touches the table.'],
     [24.0, 29.6, 'Even a surface that feels smooth is rough at this scale. The two touch only at the tips of a few bumps: the real area of contact is tiny.'],
     [29.8, 34.4, 'As the block slides (slowed right down), the bumps deform, contacts break and new ones form.'],
@@ -475,15 +477,46 @@
   ];
   const DURATION = 96.6;
 
+  // ---------- no pauses (teacher, 17 November 2026) ----------
+  // Real time t → story time τ. 'rest' adds seconds at a moment when nothing in the story moves (the block at rest,
+  // a still diagram); the atoms keep vibrating and the force–time graph keeps drawing in real time. 'longer' lets a
+  // slow process with no natural speed (the contacts creeping, the bumps squashing) take a little longer.
+  const WARP = [
+    ['rest', 7.0, 1.9], ['rest', 11.2, 1.2], ['rest', 15.4, 1.5],
+    ['rest', 18.6, 7.6],                                    // after the block has stopped: the dynamic-friction caption
+    ['rest', 29.0, 2.5], ['rest', 34.4, 0.8],               // the bumps before and after the slow-motion slide
+    ['rest', 42.6, 1.6], ['rest', 43.5, 0.5], ['rest', 53.9, 1.9],   // atoms at the join, still vibrating
+    ['longer', 58.0, 61.6, 1.2], ['rest', 67.4, 2.2], ['longer', 68.6, 70.4, 1.5],
+    ['rest', 81.4, 1.2], ['rest', 87.4, 1.8], ['rest', 94.6, 3.0],
+  ];
+  const extra = WARP.reduce((n, w) => n + w[w.length - 1], 0), DUR_R = DURATION + extra;
+  // real time of story time τ (late: at a 'rest' point, the end of the added seconds)
+  const realOf = (tau, late = false) => {
+    let r = tau;
+    for (const w of WARP) {
+      if (w[0] === 'rest') { if (tau > w[1] || (late && tau === w[1])) r += w[2]; }
+      else { const [, a, b, d] = w; if (tau > a) r += d * clamp((tau - a) / (b - a), 0, 1); }
+    }
+    return r;
+  };
+  const tauOf = (t) => {                                  // inverse of realOf
+    let lo = 0, hi = DURATION;
+    if (t >= realOf(DURATION)) return DURATION;
+    for (let k = 0; k < 40; k++) { const m = (lo + hi) / 2; if (realOf(m) <= t) lo = m; else hi = m; }
+    return lo;
+  };
+  const CAPS_R = CAPS.map(([a, b, txt]) => [realOf(a), realOf(b, true), txt]);
+  const G0 = 7.0, G1 = realOf(19.4);                      // the force–time graph's time axis, in real seconds
+
   Anim.register('friction', {
-    duration: DURATION,
-    poster: 45,
+    duration: DUR_R,
+    poster: realOf(45),
     // score: curious and microscopic (A dorian, a soft sine pad that slowly swells, a little wind)
     music: { chords: [[57, 60, 64, 66], [55, 59, 62, 66], [53, 57, 62, 64], [52, 55, 59, 62]], bar: 7, pad: 'sine', cutoff: 900, drone: 0.09, wind: 0.25, tremolo: 0.2, volume: 0.37 },
-    // hold the picture still near the end of each step so the caption can be read
-    pauses: [[7.0, 1.2], [11.2, 1.2], [15.4, 1.5], [17.1, 4.0], [29.0, 1.5], [42.6, 1.2], [61.6, 1.2], [72.6, 1.5], [81.4, 1.2], [87.4, 1.5], [94.6, 3.0]],
     resize: layout,
-    frame(s, t) {
+    info: { CAPS: CAPS_R, realOf, tauOf, DUR_R },
+    frame(s, tr) {
+      const t = tauOf(tr);                                 // story time
       D.background(s, 0.22);
       const c = cam(t), cmp = smooth((t - 76.6) / 0.8);
       const wa = 1 - cmp;
@@ -496,7 +529,7 @@
         const on = smooth((t - 3.0) / 0.8);
         forces(s, t, w, on * w.macroA * (1 - smooth((t - 19.0) / 0.6)) * wa);
         readouts(s, t, on * (1 - smooth((t - 18.9) / 0.6)));
-        graph(s, t, on * smooth((t - 7.4) / 0.6) * (1 - smooth((t - 18.9) / 0.6)));
+        graph(s, tr, on * smooth((t - 7.4) / 0.6) * (1 - smooth((t - 18.9) / 0.6)));
         microLabels(s, t, w);
         atomLabels(s, t, w, at);
         scaleBar(s, c.ppm, fade(t, 19.8, 76.4, 0.6, 0.6));
@@ -505,11 +538,11 @@
         if (wa < 1) { s.g.fillStyle = `rgba(4,6,13,${cmp})`; s.g.fillRect(0, 0, s.W, s.H); }
       }
       compare(s, t, cmp * (1 - smooth((t - 88.6) / 0.6) * 0.9));
-      D.captions(s, t, CAPS);
+      D.captions(s, tr, CAPS_R);
       closing(s, t);
       if (t < 3.6) { s.g.fillStyle = `rgba(4,6,13,${0.75 * fade(t, 0, 3.4, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.3, 3.4, 'What exactly is friction?', 'From a sliding block down to its atoms');
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tr, DUR_R);
     },
   });
 })();

@@ -134,8 +134,8 @@
   const lowerBound = (arr, v) => { let lo = 0, hi = arr.length; while (lo < hi) { const m = (lo + hi) >> 1; if (arr[m] < v) lo = m + 1; else hi = m; } return lo; };
 
   // ---------- timeline ----------
-  const DURATION = 103;
-  const A0 = 3.6, B0 = 14.6, C0 = 36.4, D0 = 63.0, E0 = 85.2, F0T = 96.2;
+  const DURATION = 107.3;
+  const A0 = 3.6, B0 = 14.6, C0 = 36.4, D0 = 63.0, E0 = 85.2, F0T = 99.0;
   const ZOOM_HITS = [17.4, 22.6, 27.8, 32.8];
   const CAPS = [
     [3.9, 9.1, 'A sealed cylinder of gas. Each dot is a molecule, moving at random with a range of speeds.'],
@@ -153,8 +153,8 @@
     [68.6, 73.8, 'Heat the gas: the molecules speed up. At double the kelvin temperature they move √2 ≈ 1.41 times as fast.'],
     [74.0, 79.2, 'Faster molecules hit the walls more often, and harder each time.'],
     [79.6, 84.8, 'About 1.41 times as often × 1.41 times as hard = 2: the pressure doubles. P ∝ T, with T in kelvin.'],
-    [85.4, 90.6, 'This is the kinetic model of an ideal gas. At low pressure, real gases behave almost like this.'],
-    [90.8, 96.0, 'Worked through in three dimensions, the same idea gives these results.'],
+    [85.4, 91.8, 'This is the kinetic model of an ideal gas. At low pressure, real gases behave almost like this.'],
+    [92.0, 98.8, 'Worked through in three dimensions, the same idea gives these results.'],
   ];
 
   // ---------- colours ----------
@@ -543,12 +543,12 @@
       y += ph ? iz * 2.6 : iz * 2.9;
     });
     // results (three dimensions)
-    const ra = a * smooth((t - 90.8) / 0.7), ex = ph ? W / 2 : W * 0.75;
+    const ra = a * smooth((t - 92.0) / 0.7), ex = ph ? W / 2 : W * 0.75;
     let ey = ph ? y + z * 0.6 : H * 0.28;
     const gap = ph ? z * 1.55 : z * 1.9;
     rich(s, 'P = #{1/3}ρv~{2|rms}', ex, ey, z, ra, serifF); ey += gap;
-    rich(s, 'PV = Nk_{B}T = nRT', ex, ey, z, a * smooth((t - 91.6) / 0.7), serifF); ey += gap;
-    const ka = a * smooth((t - 92.4) / 0.7);
+    rich(s, 'PV = Nk_{B}T = nRT', ex, ey, z, a * smooth((t - 92.8) / 0.7), serifF); ey += gap;
+    const ka = a * smooth((t - 93.6) / 0.7);
     rich(s, '!{average }E_{k}!{ = }#{3/2}k_{B}T', ex, ey, Math.round(z * 0.9), ka, serifF);
     if (!ph) D.text(s, 'for each molecule', ex, ey + z * 1.05, Math.round(fs * 0.85), 0.7 * ka, D.sans(Math.round(fs * 0.85)), C.muted);
   }
@@ -574,7 +574,6 @@
     poster: 58.5,
     // score: light and airy (E flat, a soft sine pad, a breath of wind, a faint shimmer)
     music: { chords: [[51, 58, 62, 67], [48, 55, 62, 63], [56, 60, 63, 67], [53, 58, 62, 65]], bar: 7, pad: 'sine', cutoff: 900, drone: 0.09, wind: 0.5, shimmer: 0.2, volume: 0.29 },
-    pauses: [[89.6, 1.2], [95.4, 1.6], [101.8, 1.5]],
     numbers: {
       P0: M0.P, P0theory: (N * 0.5 * VR0 * VR0) / (L0 * HB), pairHits,
       pv: PV_PTS.map(([v, p]) => [+v.toFixed(3), +p.toFixed(3)]), pt: PT_PTS.map(([T, p]) => [T, +p.toFixed(3)]),
@@ -590,7 +589,10 @@
       drawHits(s, t, boxA, fade(t, 25.3, 36.4, 0.6, 0.6));
       drawMolecules(s, t, boxA);
       // the closing card replays a calm stretch of the gas behind its text
-      if (t > F0T) { const ga = fade(t, F0T + 0.2, DURATION, 1.2, 0.8); drawCylinder(s, t, 0.35 * ga); drawMolecules(s, t, 0.45 * ga); }
+      if (t > E0) {
+        const ga = Math.max(0.4 * fade(t, E0 + 0.6, F0T + 0.6, 1.0, 0.6), fade(t, F0T + 0.2, DURATION, 1.2, 0.8));
+        drawCylinder(s, t, 0.35 * ga); drawMolecules(s, t, 0.45 * ga);
+      }
       // labels above the box
       const fs = L.fs, ly = L.by - fs * 0.95, lx = WX(L0 + 0.14);
       const va = fade(t, C0, 63.0, 0.6, 0.6);

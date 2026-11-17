@@ -138,7 +138,7 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 - `js/anim/stars.js` (3)
   - line 24: 2028: the Chandrasekhar (about 1.4 M☉) and Oppenheimer–Volkoff (about 2–3 M☉) limits, as on themes/e5.html. */
   - line 129: [145.2, 151.4, '(Exams from 2028) A core below about 1.4 solar masses becomes a white dwarf; up to about 2–3 solar masses, a neutron star; above that, a black hole.'],
-  - line 389: const n1 = D.wrap(s, '(Exams from 2028) Chandrasekhar limit ≈ 1.4 M☉; Oppenheimer–Volkoff limit ≈ 2–3 M☉.', Math.min(W - 40, 760));
+  - line 431: const n1 = D.wrap(s, '(Exams from 2028) Chandrasekhar limit ≈ 1.4 M☉; Oppenheimer–Volkoff limit ≈ 2–3 M☉.', Math.min(W - 40, 760));
 - `js/questions.js` (1)
   - line 360: ${q.y2028 ? ' New for 2028 ' : ''}
 - `js/site.js` (25)

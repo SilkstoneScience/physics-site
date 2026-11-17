@@ -50,7 +50,7 @@
     { t0: 114.6, t1: 119.6, type: 'adiabatic', P0: ST[4].P, V0: ST[4].V, V1: ST[1].V, heat: 'insulated', name: '4 → 1', cyc: 4 },
   ];
   const LOOP0 = 125.8, LOOP_A = SEG[4].t0, LOOP_P = SEG[7].t1 - SEG[4].t0 + 0.2;   // the cycle repeats from 125.8 s
-  const END_CARD = 155.6, DURATION = 170;
+  const END_CARD = 155.6, STORY_END = 170;            // story seconds (see story() below)
   const cycleTime = (t) => (t >= LOOP0 ? LOOP_A + ((t - LOOP0) % LOOP_P) : t);
 
   function along(sg, s) {                             // state at fraction s of a segment
@@ -86,21 +86,24 @@
   }
 
   // ---------- particles: speeds ∝ √T, from two precomputed "clocks" (so every frame depends on t alone) ----------
-  const NP = 40, DT = 0.02, NS = Math.ceil(DURATION / DT) + 2;
+  // The particles run on screen seconds (they never slow down); the gas's state comes from story seconds.
+  const DT = 0.02, NP = 40;
   let seed = 4142;
   const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
   const PART = Array.from({ length: NP }, () => ({ ax: rnd(), ay: rnd(), vx: 0.25 + 0.5 * rnd(), vy: 0.25 + 0.5 * rnd(), sx: rnd() < 0.5 ? -1 : 1, sy: rnd() < 0.5 ? -1 : 1 }));
-  const CLK = (() => {
+  let CLK = null, NS = 0;
+  const clocks = () => {
+    if (CLK) return CLK;
+    NS = Math.ceil(DURATION / DT) + 2;
     const tx = new Float64Array(NS), ty = new Float64Array(NS);
     for (let k = 1; k < NS; k++) {
-      const st = stateAt((k - 0.5) * DT), sp = Math.sqrt(st.T / 300);
+      const st = stateAt(story((k - 0.5) * DT)), sp = Math.sqrt(st.T / 300);
       tx[k] = tx[k - 1] + sp * DT * 2.0 / st.V;        // crossing the box takes longer when the box is wider
       ty[k] = ty[k - 1] + sp * DT;
     }
-    return { tx, ty };
-  })();
-  const clock = (arr, t) => { const f = clamp(t / DT, 0, NS - 1.001), k = Math.floor(f); return lerp(arr[k], arr[k + 1], f - k); };
-  const tri = (u) => { const w = ((u % 2) + 2) % 2; return w < 1 ? w : 2 - w; };
+    return (CLK = { tx, ty });
+  };
+  const tri =(u) => { const w = ((u % 2) + 2) % 2; return w < 1 ? w : 2 - w; };
 
   // ---------- captions (holds worked out from their length: no faster than about 16 characters a second) ----------
   const CAPS = [
@@ -130,12 +133,28 @@
     [143.0, 149.0, 'This Carnot engine is the best possible: η = 1~−~300~÷~500 = 0.40. No engine between these two temperatures can do better.'],
     [149.2, 155.2, 'Real engines do less well, because of friction, turbulence and heat leaks. Why there is a limit at all: entropy.'],
   ].map(([a, b, s]) => [a, b, nb(s)]);
-  const PAUSES = [];
-  for (const [a, b, s] of CAPS) {
-    if (s.startsWith('Predict')) { PAUSES.push([b - 0.8, 6.0]); continue; }
-    const need = s.length / 16 - (b - a);
-    if (need > 0.05) PAUSES.push([b - 0.8, +need.toFixed(1)]);
+
+  // No pauses (teacher, 17 November 2026): one second on screen is one second of the animation, with no hold. Each step
+  // (from one caption to the next) gets enough extra time to read its caption at no more than 16 characters a second
+  // (and 6 s more to think after "Predict"), and its process on the p–V diagram simply runs that much longer: a slow,
+  // quasi-static change has no natural speed. The particles keep moving at their own speed all the time.
+  const READ = CAPS.map(([a, b, s]) => {
+    const need = Math.max(0, s.length / 16 + 0.6 - (b - a));
+    return [b - 0.8, +(s.startsWith('Predict') ? 6 + need : need).toFixed(1)];
+  }).filter((h) => h[1] > 0.05);
+  const onScreen = (u) => u + READ.filter((h) => h[0] < u).reduce((n, h) => n + h[1], 0);
+  const KNOTS = [[0, 0], ...CAPS.map((c) => [onScreen(c[0]), c[0]]), [onScreen(STORY_END), STORY_END]];
+  function story(t) {                                 // screen seconds → story seconds
+    if (t <= 0) return t;
+    for (let i = 1; i < KNOTS.length; i++) {
+      const [t0, u0] = KNOTS[i - 1], [t1, u1] = KNOTS[i];
+      if (t <= t1) return u0 + (u1 - u0) * (t - t0) / (t1 - t0);
+    }
+    return STORY_END;
   }
+  const CAPS_SCREEN = CAPS.map(([a, b, s]) => [onScreen(a), onScreen(b), s]);
+  const DURATION = onScreen(STORY_END);
+  const clock = (arr, t) => { const f = clamp(t / DT, 0, NS - 1.001), k = Math.floor(f); return lerp(arr[k], arr[k + 1], f - k); };
 
   // ---------- colours ----------
   const HEAT = '255,140,80', COLD = C.neg, DU = C.field, WK = C.good, PATH = '200,215,255', ISO_T = '90,215,200', ADIA = '190,150,255';
@@ -222,7 +241,7 @@
     D.line(s, wx, cy1, cx1, cy1, '170,182,230', 0.8, 2);
     D.line(s, wx, cy0, wx, cy1, '170,182,230', 0.8, 3);
     // particles
-    const tx = clock(CLK.tx, t), ty = clock(CLK.ty, t), r = Math.max(2, ch * 0.035);
+    const K = clocks(), tx = clock(K.tx, t), ty = clock(K.ty, t), r = Math.max(2, ch * 0.035);   // t: screen seconds
     for (const p of PART) {
       const x = wx + r + (px - wx - 2 * r) * tri(p.ax * 2 + p.sx * p.vx * tx);
       const y = cy0 + r + (ch - 2 * r) * tri(p.ay * 2 + p.sy * p.vy * ty * 1.6);
@@ -395,7 +414,7 @@
   }
 
   function endCard(s, t) {
-    const a = fade(t, END_CARD, DURATION - 0.6, 0.9, 0.8); if (a <= 0) return;
+    const a = fade(t, END_CARD, STORY_END - 0.6, 0.9, 0.8); if (a <= 0) return;
     const { g } = s, { W, H, phone } = L;
     g.fillStyle = `rgba(4,6,13,${0.9 * a})`; g.fillRect(0, 0, W, H);
     const s1 = Math.round(clamp(W / 32, 18, 34)), s2 = Math.round(clamp(W / 36, 15, 28)), s3 = Math.round(clamp(W / 60, 11, 16));
@@ -430,13 +449,12 @@
 
   Anim.register('engine', {
     duration: DURATION,
-    poster: 133,
-    pauses: PAUSES,
+    poster: onScreen(133),
     // score: a steady machine (E-flat minor, a triangle pad that swells slowly, like an engine turning over, a low drone, a breath of wind)
     music: { chords: [[51, 58, 63, 66], [47, 54, 59, 63], [44, 51, 56, 59], [46, 53, 58, 61]], bar: 9, pad: 'triangle', cutoff: 750, drone: 0.12, tremolo: 0.5, wind: 0.15, volume: 0.46 },
     resize: layout,
     // for checking the numbers (not used by the player)
-    info: { SEG, ST, nR, energy, along, stateAt, CAPS, PAUSES, TofPV,
+    info: { SEG, ST, nR, energy, along, stateAt, CAPS: CAPS_SCREEN, story, onScreen, TofPV,
       check() {
         const out = {};
         const last = (i) => energy(SEG[i], along(SEG[i], 1));
@@ -447,21 +465,21 @@
       } },
     frame(s, t) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
-      const st = stateAt(t);
+      const u = story(t), st = stateAt(u);               // u: story seconds, for the processes and the diagrams
       D.background(s, 0.2);
-      const show = smooth((t - 4.4) / 0.8) * (1 - smooth((t - END_CARD) / 0.8));
+      const show = smooth((u - 4.4) / 0.8) * (1 - smooth((u - END_CARD) / 0.8));
       if (show > 0) {
         s.g.globalAlpha = 1;
-        drawCylinder(s, t, st);
-        drawGraph(s, t, st);
-        drawEnergy(s, t, st);
-        const dip = dipAt(t);
+        drawCylinder(s, t, st);                          // its particles move in screen seconds
+        drawGraph(s, u, st);
+        drawEnergy(s, u, st);
+        const dip = dipAt(u);
         if (dip > 0) { s.g.fillStyle = `rgba(4,6,13,${0.85 * dip})`; s.g.fillRect(0, 0, s.W, L.capTop); }
       }
       if (t < 4.6) { s.g.fillStyle = `rgba(4,6,13,${0.8 * fade(t, 0, 4.4, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
-      D.captions(s, t, CAPS);
+      D.captions(s, t, CAPS_SCREEN);
       D.title(s, t, 0.4, 4.4, 'The first law and heat engines (HL)', 'A gas, a piston and the p–V diagram');
-      endCard(s, t);
+      endCard(s, u);
       D.vignette(s, t, DURATION);
     },
   });

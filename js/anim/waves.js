@@ -31,17 +31,27 @@
   const T0 = 6.0, T1 = 37.0;                                          // the transverse and longitudinal sources start
   const FZ0 = 62.5, FZ1 = 87.8, RAMP = 0.6;                            // the longitudinal snapshot (frozen) between these
   const tD0 = 88.6, TG = 8;                                           // the displacement–time graph starts; its time axis (s)
-  const END_CARD = 116.4, DURATION = 130;
-  const tauT = (t) => Math.max(0, t - T0);
-  // the longitudinal clock: rate 1, slowing smoothly to 0 for the snapshot and back again (worked out once, then looked up)
+  const END_CARD = 116.4, STORY = 130;
+  // No pauses (teacher, 17 November 2026): where a caption needs extra reading time, the story (captions, labels,
+  // graphs appearing) waits for these seconds while the waves keep moving at their normal speed. Times are story times.
+  const HOLDS = [[9.0, 1.0], [14.0, 1.2], [19.0, 2.5], [24.2, 1.2], [29.4, 1.0], [34.6, 1.4], [41.0, 0.8], [46.2, 1.2],
+    [51.2, 2.5], [56.4, 1.2], [60.6, 1.4], [66.8, 1.6], [72.0, 1.5], [77.2, 1.5], [82.2, 1.5], [87.4, 1.8], [98.6, 1.5],
+    [104.2, 1.6], [109.8, 2.0], [115.4, 1.5]];
+  const DURATION = STORY + HOLDS.reduce((n, h) => n + h[1], 0);
+  // story time at scene time t (it waits during each hold), and the scene time at which a story time is reached
+  const story = (t) => { let acc = 0; for (const [st, d] of HOLDS) { if (t < st + acc) return t - acc; if (t < st + acc + d) return st; acc += d; } return Math.min(t - acc, STORY); };
+  const real = (x) => x + HOLDS.filter((h) => h[0] < x).reduce((n, h) => n + h[1], 0);
+  const tauT = (t) => Math.max(0, t - real(T0));                      // the rope's clock runs in scene time
+  // the longitudinal clock (scene time): rate 1, slowing smoothly to 0 for the snapshot and back again (worked out once)
   const STEP = 0.01, NT = Math.ceil(DURATION / STEP) + 2, TAU = new Float64Array(NT);
-  const rate = (t) => (t < T1 ? 0 : t < FZ0 ? 1 : t < FZ1 ? 1 - smooth((t - FZ0) / RAMP) : smooth((t - FZ1) / RAMP));
-  for (let i = 1; i < NT; i++) TAU[i] = TAU[i - 1] + STEP * 0.5 * (rate((i - 1) * STEP) + rate(i * STEP));
+  const rate = (u) => (u < T1 ? 0 : u < FZ0 ? 1 : u < FZ1 ? 1 - smooth((u - FZ0) / RAMP) : smooth((u - FZ1) / RAMP));
+  for (let i = 1; i < NT; i++) TAU[i] = TAU[i - 1] + STEP * 0.5 * (rate(story((i - 1) * STEP)) + rate(story(i * STEP)));
   const tauL = (t) => { const f = clamp(t / STEP, 0, NT - 1.001), i = Math.floor(f); return lerp(TAU[i], TAU[i + 1], f - i); };
-  const tauD0 = tauL(tD0);
-  // the period timed at the end starts when a compression is at x = 0.80 m (between 100.8 s and 102.8 s)
-  const XS = 0.80, tE = 100.8;
-  const nE = Math.ceil((tauL(tE) * V - XS) / LAM), tauE1 = (XS + nE * LAM) / V, tE1 = tE + (tauE1 - tauL(tE));
+  const tauD0 = tauL(real(tD0));
+  // the period timed at the end starts when a compression is at x = 0.80 m (within 2 s after story time 100.8 s)
+  const XS = 0.80, tE = 100.8, tEr = real(tE);
+  const nE = Math.ceil((tauL(tEr) * V - XS) / LAM), tauE1 = (XS + nE * LAM) / V, tE1r = tEr + (tauE1 - tauL(tEr)), tE1 = story(tE1r);
+  let RT = 0;                                                         // scene time, for a gentle pulse while the snapshot is still
   // the gold particle's crests on its displacement–time graph (ωτ − kx = π/2 mod 2π), in graph time τ − τD0
   const crest0 = (() => { let tc = (Math.PI / 2 + K * XG) / OM; while (tc < tauD0 + 0.2) tc += TP; return tc - tauD0; })();
 
@@ -343,7 +353,7 @@
       D.glowLine(s, pts, DISP, a, L.small ? 1.6 : 2.2);
     }
     // the gold particle on the graph
-    if (draw >= 1) { const xg = iG * DXL; D.glowDot(s, GX(xg), GY(sL(xg, tau)), fs * 1.4, GOLD, a); }
+    if (draw >= 1) { const xg = iG * DXL; D.glowDot(s, GX(xg), GY(sL(xg, tau)), fs * 1.4 * (1 + 0.15 * Math.sin(RT * 2.6 + 1.5)), GOLD, a); }
     // compressions (C3) and rarefactions (C4): linked to the row by dashed lines while the graph is under the row
     const link = (1 - u) * (1 - smooth((t - 83.0) / 0.6));
     const aC = a * smooth((t - 72.8) / 0.8), aR = a * smooth((t - 78.0) / 0.8);
@@ -352,7 +362,7 @@
       for (const x of list) {
         const e2 = al * edge(x);
         if (link > 0) D.line(s, X(x), L.yA + L.band + 4, GX(x), ym, rgb, 0.5 * e2 * link, 1.2, [4, 4]);
-        D.glowDot(s, GX(x), ym, fs * 1.2, rgb, e2);
+        D.glowDot(s, GX(x), ym, fs * 1.2 * (1 + 0.15 * Math.sin(RT * 2.6)), rgb, e2);
         D.text(s, lab, GX(x) + fs * 0.7, lab === 'C' ? ym - fs * 1.0 : ym + fs * 1.0, fs, e2, D.sans(fs, 700), rgb, 'left');
       }
     }
@@ -427,7 +437,7 @@
 
   // ---------- end card ----------
   function endCard(s, t) {
-    const a = fade(t, END_CARD, DURATION - 0.6, 0.9, 0.8); if (a <= 0) return;
+    const a = fade(t, END_CARD, STORY - 0.6, 0.9, 0.8); if (a <= 0) return;
     const { g } = s, { W, H, tall } = L;
     g.fillStyle = `rgba(4,6,13,${0.9 * a})`; g.fillRect(0, 0, W, H);
     const s1 = Math.round(clamp(W / 30, 18, 38)), s2 = Math.round(clamp(W / 46, 14, 24)), s3 = Math.round(clamp(W / 58, 12, 18));
@@ -458,18 +468,17 @@
 
   Anim.register('waves', {
     duration: DURATION,
-    poster: 76,
-    // hold the picture still where a caption needs reading (or a prediction needs thinking about)
-    pauses: [[9.0, 1.0], [14.0, 1.2], [19.0, 2.5], [24.2, 1.2], [29.4, 1.0], [34.6, 1.4], [41.0, 0.8], [46.2, 1.2], [51.2, 2.5], [56.4, 1.2],
-      [61.6, 1.4], [66.8, 1.6], [72.0, 1.5], [77.2, 1.5], [82.2, 1.5], [87.4, 1.8], [98.6, 1.5], [104.2, 1.6], [109.8, 2.0], [115.4, 1.5]],
+    poster: real(76),
     // score: rolling sea (A-flat major, a soft sawtooth pad, sea-like wind)
     music: { chords: [[56, 60, 63, 67], [49, 56, 60, 65], [53, 60, 63, 68], [51, 58, 63, 67]], bar: 8, pad: 'saw', cutoff: 700, drone: 0.09, wind: 0.5, volume: 0.77 },
     resize: layout,
     // for checking the numbers (not used by the player)
-    info: { LAM, TP, F, V, K, OM, AT, AL, XG, yRope, sL, densL, tauL, tauT, tauD0, tE1, tauE1, crest0, CAPS },
-    frame(s, t) {
+    info: { LAM, TP, F, V, K, OM, AT, AL, XG, yRope, sL, densL, tauL, tauT, tauD0, tE1, tE1r, tauE1, crest0, CAPS, HOLDS, story, real, DURATION },
+    frame(s, tScene) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
-      const tT = tauT(t), tL = tauL(t);
+      // the waves move in scene time; everything else (captions, labels, graphs) follows the story time
+      const tT = tauT(tScene), tL = tauL(tScene), t = story(tScene);
+      RT = tScene;
       D.background(s, 0.22);
       // A: the rope
       const aA = fade(t, 4.6, 36.2, 0.9, 0.9);
@@ -493,7 +502,7 @@
       if (t < 4.6) { s.g.fillStyle = `rgba(4,6,13,${0.8 * fade(t, 0, 4.4, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 4.4, 'Transverse and longitudinal waves', 'What travels along, and what stays put?');
       endCard(s, t);
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tScene, DURATION);
     },
   });
 })();

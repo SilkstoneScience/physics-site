@@ -62,14 +62,19 @@
   const MECH1 = (UP2.Ep + UP2.Ek + UP2.EH) / ETOT;                    // fraction still mechanical after one bounce
 
   // ---------- timeline (scene seconds) ----------
-  const J1 = 14, SLOW = 2.5;                                          // part 1 shown 2.5× slower (6.5× just after the rope goes taut)
-  const T_TAUT = J1 + tTaut * SLOW, T_FAST = T_TAUT + 1.4, T_BOT = T_FAST + (tBot - tFast) * SLOW, T_TOP = T_BOT + (tTop - tBot) * SLOW;
-  const KEYS1 = [[J1, 0], [T_TAUT, tTaut], [T_FAST, tFast], [T_BOT, tBot], [T_TOP, tTop]];
-  const SWITCH = T_TOP + 0.25;                                        // the scene resets for part 2 behind the dark card
-  const J2 = 41.6;
-  const KEYS2 = [[J2, 0], [J2 + 13, 13], [J2 + 19, 43], [J2 + 23, 103]];   // real speed, then fast forward ×5 and ×15
-  const T_UP2 = J2 + tUp2;
-  const END_CARD = 70.8, DURATION = 79;
+  // No pauses (teacher, 17 November 2026): the picture never freezes. With no air resistance the jumper bounces
+  // back to the bridge every time, so part 1 shows two full bounces: the first sets up the prediction, the second
+  // answers it, with markers left at the key points.
+  const J1 = 16, SLOW = 2.5;                                          // part 1 shown 2.5× slower (6.5× just after the rope goes taut)
+  const C_TAUT = tTaut * SLOW, C_FAST = C_TAUT + 1.4, C_BOT = C_FAST + (tBot - tFast) * SLOW, CYC = C_BOT + (tTop - tBot) * SLOW;
+  const CYC_KEYS = [[0, 0], [C_TAUT, tTaut], [C_FAST, tFast], [C_BOT, tBot], [CYC, tTop]];   // one bounce: scene s → simulated s
+  const T_TAUT1 = J1 + C_TAUT, T_BOT1 = J1 + C_BOT;                  // first bounce
+  const T_TAUT = J1 + CYC + C_TAUT, T_FAST = J1 + CYC + C_FAST, T_BOT = J1 + CYC + C_BOT, T_TOP = J1 + 2 * CYC;   // second bounce
+  const CARD = 56.6, SWITCH = CARD + 0.8;                             // the scene resets for part 2 behind the dark card
+  const J2 = 69.3;
+  const KEYS2 = [[J2, 0], [J2 + 15.5, 15.5], [J2 + 21.5, 43], [J2 + 25.5, 103]];   // real speed, then fast forward ×5 and ×15
+  const T_UP2 = J2 + tUp2, T_REST = J2 + 21;
+  const END_CARD = J2 + 32.4, DURATION = J2 + 40.6;
   const mapKeys = (keys, t) => {
     if (t <= keys[0][0]) return { tau: keys[0][1], rate: 0 };
     for (let i = 1; i < keys.length; i++) {
@@ -80,8 +85,9 @@
   };
   function stateAt(t) {
     if (t < SWITCH) {
-      const { tau, rate } = mapKeys(KEYS1, t);
-      return { part: 1, jumped: t >= J1, rate, tau, ...at(S1, tau), Q: 0, P: 0 };
+      if (t < J1) return { part: 1, jumped: false, rate: 0, tau: 0, ...at(S1, 0), Q: 0, P: 0 };
+      const n = Math.floor((t - J1) / CYC), { tau, rate } = mapKeys(CYC_KEYS, t - J1 - n * CYC);
+      return { part: 1, jumped: true, rate, tau, ...at(S1, tau), Q: 0, P: 0 };
     }
     const { tau, rate } = mapKeys(KEYS2, t);
     return { part: 2, jumped: t >= J2, rate, tau, ...at(S2, tau) };
@@ -90,20 +96,20 @@
   const kJ = (E) => { const v = E / 1000; return v < 0.005 ? '0' : v < 9.995 ? v.toFixed(2) : v.toFixed(1); };
   const pct = Math.round(MECH1 * 100);
   const CAPS = [
-    [4.4, 9.4, 'A 60 kg jumper, a 25 m bungee rope with k = 120 N m⁻¹, and a bridge 80 m above a river.'],
-    [9.6, 13.7, `Before the jump, all ${kJ(ETOT)} kJ is gravitational potential energy (measured from the lowest point).`],
-    [13.8, T_TAUT - 0.65, 'Falling freely: gravitational potential energy becomes kinetic energy. The rope is still slack.'],
-    [T_TAUT - 0.6, T_TAUT + 0.6, 'Predict: is the jumper fastest now, just as the rope starts to stretch, or lower down?'],
-    [T_FAST - 0.62, T_FAST + 0.6, `Lower down. The jumper speeds up until the rope's pull equals the weight: kΔx = mg, so Δx = ${XF.toFixed(1)} m.`],
-    [T_BOT - 0.7, T_BOT + 0.6, `Lowest point: the rope is stretched ${XMAX.toFixed(1)} m and stores all ${kJ(ETOT)} kJ as elastic potential energy.`],
-    [T_BOT + 1.0, T_TOP - 0.3, `With no air resistance, the jumper would bounce back up to the bridge every time. The total stays ${kJ(ETOT)} kJ.`],
-    [36.8, 41.4, 'Predict: with air resistance, will the total energy go down?'],
-    [41.6, 47.2, `No. Mechanical energy is transferred to thermal energy in the air and the rope. The total stays ${kJ(ETOT)} kJ.`],
-    [47.4, T_UP2 + 1.0, `Each bounce is lower. At the top of the first bounce, ${pct}% of the energy is still mechanical.`],
-    [J2 + 13, 60.4, 'Fast forward: the bounces die away until the jumper hangs at rest, where kΔx = mg again.'],
-    [64.8, 70.6, `At rest, ${(L0 + XF).toFixed(1)} m down: ${kJ(FINAL.Ep)} kJ gravitational + ${kJ(FINAL.EH)} kJ elastic + ${kJ(FINAL.Q)} kJ thermal = ${kJ(ETOT)} kJ.`],
+    [4.4, 9.7, 'A 60 kg jumper, a 25 m bungee rope with k = 120 N m⁻¹, and a bridge 80 m above a river.'],
+    [9.9, 15.7, `Before the jump, all ${kJ(ETOT)} kJ is gravitational potential energy (measured from the lowest point).`],
+    [15.9, T_TAUT1 - 0.05, 'Falling freely: gravitational potential energy becomes kinetic energy. The rope is still slack.'],
+    [T_TAUT1 + 0.05, 27.0, 'The rope stretches. The jumper slows down, stops at the lowest point and bounces back up.'],
+    [27.2, 38.4, 'Predict: on the way down, is the jumper fastest just as the rope starts to stretch, or lower down?'],
+    [38.6, 44.5, `Lower down. The jumper speeds up until the rope's pull equals the weight: kΔx = mg, so Δx = ${XF.toFixed(1)} m.`],
+    [44.7, 50.4, `Lowest point: the rope is stretched ${XMAX.toFixed(1)} m and stores all ${kJ(ETOT)} kJ as elastic potential energy.`],
+    [50.6, 56.8, `With no air resistance, the jumper would bounce back up to the bridge every time. The total stays ${kJ(ETOT)} kJ.`],
+    [61.1, 69.1, 'Predict: with air resistance, will the total energy go down?'],
+    [J2, J2 + 6.2, `No. Mechanical energy is transferred to thermal energy in the air and the rope. The total stays ${kJ(ETOT)} kJ.`],
+    [J2 + 6.4, J2 + 12.0, `Each bounce is lower. At the top of the first bounce, ${pct}% of the energy is still mechanical.`],
+    [J2 + 15.6, J2 + 21.2, 'Fast forward: the bounces die away until the jumper hangs at rest, where kΔx = mg again.'],
+    [J2 + 25.7, J2 + 32.2, `At rest, ${(L0 + XF).toFixed(1)} m down: ${kJ(FINAL.Ep)} kJ gravitational + ${kJ(FINAL.EH)} kJ elastic + ${kJ(FINAL.Q)} kJ thermal = ${kJ(ETOT)} kJ.`],
   ];
-  const PAUSES = [[13.0, 2], [T_TAUT, 5.5], [T_FAST, 6], [T_BOT, 5], [40.7, 1.5], [T_UP2, 2.5], [69.8, 1.5]];
 
   // ---------- colours ----------
   const COL = { Ep: C.good, Ek: C.vel, EH: C.field, Q: '255,112,92', total: C.white };
@@ -387,10 +393,9 @@
     poster: T_FAST,
     // score: night-time suspense (E minor, a dark pad, a low drone, a little wind)
     music: { chords: [[52, 59, 64, 67], [48, 55, 64, 67], [43, 50, 59, 62], [50, 57, 62, 66]], bar: 8, pad: 'saw', cutoff: 600, drone: 0.12, wind: 0.4, volume: 0.56 },
-    pauses: PAUSES,
     resize: layout,
     // for checking the numbers (not used by the player)
-    info: { XMAX, DROP, ETOT, XF, VTAUT, VFAST, tTaut, tFast, tBot, tTop, tBot2, tUp2, UP2, FINAL, MECH1, T_TAUT, T_FAST, T_BOT, T_TOP, T_UP2, CAPS, at: (p, tau) => at(p === 1 ? S1 : S2, tau) },
+    info: { CYC, T_TAUT1, T_BOT1, J2, XMAX, DROP, ETOT, XF, VTAUT, VFAST, tTaut, tFast, tBot, tTop, tBot2, tUp2, UP2, FINAL, MECH1, T_TAUT, T_FAST, T_BOT, T_TOP, T_UP2, CAPS, at: (p, tau) => at(p === 1 ? S1 : S2, tau) },
     frame(s, t) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
       const st = stateAt(t);
@@ -404,11 +409,17 @@
       depthLine(s, L0, f ? 'taut 25 m' : 'rope goes taut · 25 m', show * (p1 ? 1 : 0.6),
         t > T_TAUT - 0.6 && p1 ? C.light : C.muted, p1 && t > T_FAST - 0.6 && t < T_BOT - 0.7 ? `${VTAUT.toFixed(1)} m s⁻¹` : '');
       depthLine(s, L0 + XF, f ? (p1 ? 'fastest 29.9 m' : 'at rest 29.9 m') : (p1 ? 'fastest · 29.9 m' : 'at rest · 29.9 m'),
-        p1 ? smooth((t - T_FAST + 0.6) / 0.6) : smooth((t - 60) / 1), C.vel, p1 && t > T_FAST - 0.6 && t < T_BOT - 0.7 ? `${VFAST.toFixed(1)} m s⁻¹` : '');
+        p1 ? smooth((t - T_FAST + 0.6) / 0.6) : smooth((t - T_REST) / 1), C.vel, p1 && t > T_FAST - 0.6 && t < T_BOT - 0.7 ? `${VFAST.toFixed(1)} m s⁻¹` : '');
       depthLine(s, DROP, f ? 'lowest 46.3 m' : 'lowest point · 46.3 m', show * (p1 ? 1 : 0.6), C.muted, f ? '' : 'Eₚ = 0');
-      if (!p1) depthLine(s, UP2.y, f ? `bounce ${UP2.y.toFixed(1)} m` : `top of first bounce · ${UP2.y.toFixed(1)} m`, fade(t, T_UP2 - 0.4, 60, 0.4, 1), COL.Q);
+      if (!p1) depthLine(s, UP2.y, f ? `bounce ${UP2.y.toFixed(1)} m` : `top of first bounce · ${UP2.y.toFixed(1)} m`, fade(t, T_UP2 - 0.4, T_REST, 0.4, 1), COL.Q);
       D.text(s, f ? 'river 80 m' : 'river · 80 m below the bridge', L.xj, L.yWater - L.fs * 0.9, L.fs, 0.7 * show, D.sans(L.fs), C.muted);
-      if (p1 && t > T_FAST - 0.6 && t < T_TOP) D.glowDot(s, L.xj, L.Y(L0 + XF), 16, C.vel, 0.8 * smooth((t - T_FAST + 0.6) / 0.6));
+      if (p1 && t > T_FAST - 0.6 && t < CARD + 0.8) D.glowDot(s, L.xj, L.Y(L0 + XF), 16, C.vel, 0.8 * smooth((t - T_FAST + 0.6) / 0.6));
+      // a marker left at the lowest point of the second bounce while its caption is read
+      if (p1 && t > T_BOT - 0.1 && t < 50.6) {
+        const am = fade(t, T_BOT - 0.1, 50.6, 0.3, 0.6), ym = L.Y(DROP);
+        D.glowDot(s, L.xj, ym, 14, C.field, 0.75 * am);
+        if (!f) D.text(s, `lowest: Δx = ${XMAX.toFixed(1)} m, all elastic`, L.xj + L.figH * 0.9 + 6, ym - L.fs * 1.3, L.fs, am, D.sans(L.fs, 600), C.field, 'left');
+      }
       // rope, jumper, forces
       drawRope(s, st);
       drawThermal(s, t, st);
@@ -422,9 +433,9 @@
       // title, part 2 card, end card
       if (t < 4.4) { s.g.fillStyle = `rgba(4,6,13,${0.78 * fade(t, 0, 4.2, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 4.2, 'Energy in a bungee jump', 'Where does the energy go as the rope stretches?');
-      const card = fade(t, T_TOP - 0.3, 36.7, 0.7, 0.8);
+      const card = fade(t, CARD, 61.0, 0.7, 0.8);
       if (card > 0) { s.g.fillStyle = `rgba(4,6,13,${0.82 * card})`; s.g.fillRect(0, 0, s.W, s.H); }
-      D.title(s, t, T_TOP + 0.2, 36.6, 'Now add air resistance', 'and friction inside the stretching rope');
+      D.title(s, t, CARD + 0.4, 60.9, 'Now add air resistance', 'and friction inside the stretching rope');
       endCard(s, t);
       D.vignette(s, t, DURATION);
     },

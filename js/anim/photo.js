@@ -27,14 +27,15 @@
   const nb = (s) => s.replace(/~/g, ' ');
 
   // ---------- timeline ----------
-  const LAMP = [                                                         // [on, off, wavelength (nm), photons per second]
+  const LAMP_S = [                                                       // [on, off, wavelength (nm), photons per second], story time
     [10.0, 20.2, 650, 2.5], [20.2, 30.6, 650, 16],
     [31.4, 47.8, 400, 2.5], [47.8, 80.8, 400, 14],
     [85.2, 100.0, 300, 14], [104.4, 136.0, 300, 5],
   ];
   // the reverse p.d. is held after each lamp goes off, until the electrons still in flight have been turned back
-  const V_KEYS = [[0, 1.0], [61.0, 1.0], [74.4, -0.83], [77.4, -0.83], [79.0, -1.2], [84.0, -1.2], [85.0, 1.0],
+  const V_KEYS_S = [[0, 1.0], [61.0, 1.0], [68.1, 0.0], [74.4, -0.83], [77.4, -0.83], [79.0, -1.2], [84.0, -1.2], [85.0, 1.0],
     [87.6, 1.0], [96.6, -1.86], [99.2, -1.86], [100.0, -2.1], [103.4, -2.1], [104.2, 1.0], [300, 1.0]];
+  let LAMP = LAMP_S, V_KEYS = V_KEYS_S;                                 // replaced below by the player-clock versions
   const Vat = (t) => { for (let i = 1; i < V_KEYS.length; i++) { const [ta, va] = V_KEYS[i - 1], [tb, vb] = V_KEYS[i]; if (t <= tb) return va + (vb - va) * smooth((t - ta) / (tb - ta)); } return 1; };
   const lampAt = (t) => { for (const L of LAMP) if (t >= L[0] - 0.3 && t < L[1] + 0.3) return L; return null; };
   const lampLevel = (t) => {                                             // 0 (off) to 1 (bright), for the glow
@@ -76,16 +77,26 @@
     [129.8, 136.0, 'The wave model predicted that any frequency would work if bright enough, that dim light would need time to start, and that brighter light would give faster electrons. All three are wrong.'],
   ].map(([a, b, s]) => [a, b, nb(s)]);
   const T_PREDICT = 19.4;
-  // holds: each caption gets enough time to read at about 16 characters a second (plus its fades)
-  const PAUSES = (() => {
+  // No pauses (teacher, 17 November 2026). Each caption still gets enough time to read at about 16 characters a second:
+  // the extra time is added to the story (the story clock waits) while the lamp, the p.d. and the particles carry on.
+  const INSERTS = (() => {
     const p = [];
     for (const [a, b, s] of CAPS) {
       const short = s.length / 16 + 1.2 - (b - a);
       if (short > 0.2) p.push([+(b - 0.75).toFixed(2), +short.toFixed(1)]);
     }
     p.push([T_PREDICT, 6.0]);
-    return p;
+    return p.sort((x, y) => x[0] - y[0]);
   })();
+  const EXTRA = INSERTS.reduce((n, p) => n + p[1], 0), RUN = DURATION + EXTRA;     // the running time on the player's clock
+  const R = (st) => st + INSERTS.filter((p) => p[0] < st).reduce((n, p) => n + p[1], 0);          // story time → player time
+  const story = (tn) => {                                                // player time → story time (waits at each insert)
+    let acc = 0;
+    for (const [st, d] of INSERTS) { if (tn < st + acc) return tn - acc; if (tn < st + acc + d) return st; acc += d; }
+    return Math.min(tn - acc, DURATION);
+  };
+  LAMP = LAMP_S.map(([a, b, lam, r]) => [R(a), R(b), lam, r]);
+  V_KEYS = V_KEYS_S.map(([tk, v]) => [tk >= 300 ? 1e4 : R(tk), v]);
 
   // ---------- photons and electrons (made once, from a fixed seed) ----------
   let seed = 20261116;
@@ -187,7 +198,7 @@
   }
 
   // ---------- the photocell ----------
-  function drawCell(s, t, a) {
+  function drawCell(s, t, ts, a) {
     const { g } = s, { fs, tx0, tx1, ty, th, cc, R, ax, cy, phone, lamp } = L;
     if (a <= 0) return;
     g.globalAlpha = a;
@@ -232,7 +243,7 @@
     label(s, rev ? '−' : '+', ax + fs * 0.9, ty - th * 0.45, 0.9 * a, rev ? PHI_RGB : C.text, 'center', fs + 2, 700);
     label(s, rev ? '+' : '−', cc - R - fs * 0.9, ty - th * 0.2, 0.9 * a, C.text, 'center', fs + 2, 700);
     // labels
-    const la = 0.85 * a * fade(t, 4.6, 58.6, 0.8, 1.0);
+    const la = 0.85 * a * fade(ts, 4.6, 58.6, 0.8, 1.0);
     label(s, phone ? 'cathode (sodium)' : 'cathode (sodium)', cc - R * 0.5, ty + th + fs * (phone ? 0.9 : 1.0), la, METAL, 'center', fs);
     label(s, 'anode', ax, ty + th + fs * (phone ? 0.9 : 1.0), la, METAL, 'center', fs);
     label(s, 'vacuum', (cc + ax) / 2 + fs, ty - th * 0.62, la * 0.8, C.muted, 'center', fs);
@@ -332,7 +343,7 @@
       D.glowLine(s, pts, nmRGB(lam), a, 1.8);
       if (t <= tB) { const V = Vat(t); D.glowDot(s, X(V), Y(0.98 * fracReach(V, Em)), fs * 1.1, nmRGB(lam), a); }
     };
-    trace(400, 61.0, 84.0); trace(300, 87.6, 100.2);
+    trace(400, R(61.0), R(84.0)); trace(300, R(87.6), R(100.2));
     // the stopping voltages: a dashed line up from the axis to a label near the top, clear of the curves
     const vs = (Em, tOn, rgb, row, align) => {
       const al = a * smooth((t - tOn) / 0.6); if (al <= 0) return;
@@ -340,7 +351,7 @@
       D.line(s, X(-Em), gy1, X(-Em), yl + fs * 0.6, rgb, 0.7 * al, 1.2, [3, 3]);
       rich(s, [['V', 'i'], ['s', 's'], [` = ${Em.toFixed(2)} V`, 'sans']], align === 'left' ? X(-Em) - fs * 0.3 : X(-Em), yl, fs - 1, al, rgb, align);
     };
-    vs(emax(400), 74.4, txtRGB(400), 0, 'center'); vs(emax(300), 96.6, txtRGB(300), 1, 'left');
+    vs(emax(400), R(74.4), txtRGB(400), 0, 'center'); vs(emax(300), R(96.6), txtRGB(300), 1, 'left');
     const V = Vat(t);
     label(s, `p.d. = ${V >= 0 ? '+' : '−'}${Math.abs(V).toFixed(2)} V`, p.x1 - fs * 0.4, p.y0 + fs * 0.4, 0.9 * a, V < 0 ? PHI_RGB : C.text, 'right', fs, 600);
   }
@@ -438,15 +449,14 @@
   }
 
   Anim.register('photo', {
-    duration: DURATION,
-    poster: 50,
-    pauses: PAUSES,
+    duration: RUN,
+    poster: R(50),
     // score: a quiet laboratory (F minor, a soft sine pad that slowly swells, a low drone, a breath of wind)
     music: { chords: [[41, 48, 53, 56], [44, 49, 53, 56], [39, 46, 51, 55], [43, 48, 51, 55]], bar: 9, pad: 'sine', cutoff: 800, drone: 0.1, wind: 0.25, tremolo: 0.2, volume: 0.39 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: {
-      hfEV, freq, emax, F0, CAPS, PAUSES, PHOTONS, ELECTRONS, fracReach, Vat,
+      hfEV, freq, emax, F0, CAPS, INSERTS, R, story, RUN, PHOTONS, ELECTRONS, fracReach, Vat, LAMP,
       check() {
         const r = (x, d) => +x.toFixed(d);
         return {
@@ -454,25 +464,26 @@
           uv350: [r(freq(350) / 1e14, 2), r(emax(350), 2)], uv300: [r(freq(300) / 1e14, 2), r(hfEV(300), 2), r(emax(300), 2)],
           f0: r(F0 / 1e14, 2), lam0: r(C_L / F0 * 1e9, 0), gradient: (1.03 * E_CH / 2.5e14).toExponential(2),
           reached: ['anode', 'back', 'lost'].map((k) => ELECTRONS.filter((e) => e.fate === k).length),
-          fastest: Math.max(...CAPS.map(([a, b, s2]) => { const hold = PAUSES.filter((p) => p[0] >= a && p[0] <= b).reduce((n, p) => n + p[1], 0); return s2.length / (b - a + hold); })).toFixed(1),
+          fastest: Math.max(...CAPS.map(([a, b, s2]) => { const hold = INSERTS.filter((p) => p[0] >= a && p[0] <= b).reduce((n, p) => n + p[1], 0); return s2.length / (b - a + hold); })).toFixed(1),
         };
       },
     },
-    frame(s, t) {
+    frame(s, tn) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
+      const t = story(tn);                                               // story clock (captions, panels); tn: the player's clock (physics)
       D.background(s, 0.22);
       const cellA = smooth((t - 4.4) / 0.8) * (1 - smooth((t - T_END) / 0.8));
-      drawCell(s, t, cellA);
-      drawParticles(s, t, cellA);
-      drawEnergy(s, t, fade(t, 9.8, T_IV + 0.4, 0.8, 0.8));
-      drawIV(s, t, fade(t, T_IV + 0.2, T_GRAPH + 0.4, 0.8, 0.8));
+      drawCell(s, tn, t, cellA);
+      drawParticles(s, tn, cellA);
+      drawEnergy(s, tn, fade(t, 9.8, T_IV + 0.4, 0.8, 0.8));
+      drawIV(s, tn, fade(t, T_IV + 0.2, T_GRAPH + 0.4, 0.8, 0.8));
       drawEf(s, t, fade(t, T_GRAPH, T_END + 0.6, 0.8, 0.8));
       D.legend(s, [['dot', C.neg, 'electron'], ['line', nmRGB(400), 'photon']], fade(t, 5, T_END, 0.6, 0.6));
       D.captions(s, t, CAPS);
       if (t < 4.6) { s.g.fillStyle = `rgba(4,6,13,${0.8 * fade(t, 0, 4.4, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 4.4, 'The photoelectric effect (HL)', 'Light that frees electrons, one photon at a time');
       endCard(s, t);
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tn, RUN);
     },
   });
 })();

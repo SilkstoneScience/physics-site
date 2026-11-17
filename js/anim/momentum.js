@@ -15,6 +15,7 @@
   'use strict';
   const { D, C, clamp, smooth, lerp, fade } = Anim;
 
+  let LIVE = 0;                                                       // real (playing) time
   const COL_A = C.good, COL_B = C.light, HEAT = '255,120,60', GAS = '255,196,110', ROCK = C.good, THRUST = C.force;
   const MINUS = '−';
   const fmt1 = (x) => (Math.abs(x) < 0.05 ? '0' : (x < 0 ? MINUS : '') + Math.abs(x).toFixed(1));
@@ -110,9 +111,11 @@
     const SLOW = phone ? 7.5 : 4.5;                       // shown in slow motion: SLOW seconds on screen per real second
     let span = 0;
     for (const P of PARTS) {
-      P.tmin = (P.t0 - P.tc) / SLOW; P.tmax = (P.th - P.tc) / SLOW;
+      P.tmin = (P.rt0 - P.rtc) / SLOW; P.tmax = (P.th - P.tc) / SLOW;
+      // each replay starts where the moving glider has come into view (for the explosion: shortly before the spring is released)
+      P.tauR0 = P.mode === 'spring' ? -0.3 : (P.t0 + 3 - P.tc) / SLOW;
       // the moving glider may start off the screen (the track carries on): frame it from 3 s after it starts
-      const KV = phone ? 0.32 : 0.42, a = stateAt(P, Math.max(P.tmin, (P.t0 + (phone ? 4 : 3) - P.tc) / SLOW)), b = stateAt(P, P.tmax);
+      const KV = phone ? 0.32 : 0.42, a = stateAt(P, Math.max(P.tmin, (P.rt0 + (phone ? 4 : 3) - P.rtc) / SLOW)), b = stateAt(P, P.tmax);
       const left = Math.min(a.xA, b.xA) - P.wA / 2, right = Math.max(a.xB + P.wB / 2, b.xB + Math.max(P.wB / 2, KV * b.vB + 0.15));
       P.centre = (left + right) / 2; span = Math.max(span, right - left);
     }
@@ -225,9 +228,21 @@
   }
 
   // ---------- one air-track scene ----------
-  function drawPart(s, t, P, a) {
-    if (a <= 0) return;
-    const tau = clamp((t - P.tc) / L.SLOW, P.tmin, P.tmax), st = stateAt(P, tau), u = L.unit;
+  function drawPart(s, t, P, aPart) {
+    if (aPart <= 0) return;
+    // the gliders move in real time (slowed down SLOW times). After the collision they glide on, fade out and the
+    // collision is shown again, so the picture keeps moving while the result is explained (no freeze).
+    const rc = LIVE - P.rtc;                                           // real seconds since the first collision
+    let tau = Math.max(P.tmin, rc / L.SLOW), ga = 1;
+    const endR = P.tmax * L.SLOW;                                      // real seconds from meeting to the end of the framed run
+    if (rc > endR) {
+      const OUT = 0.4, DARK = 0.2, IN = 0.4, lenR = OUT + DARK + (P.tmax - P.tauR0) * L.SLOW, c = (rc - endR) % lenR;
+      if (c < OUT) { tau = P.tmax + c / L.SLOW; ga = 1 - smooth(c / OUT); }
+      else if (c < OUT + DARK) { tau = P.tauR0; ga = 0; }
+      else { tau = P.tauR0 + (c - OUT - DARK) / L.SLOW; ga = smooth((c - OUT - DARK) / IN); }
+    }
+    const a = aPart * ga, st = stateAt(P, tau), u = L.unit;
+    const firstDone = rc / L.SLOW >= P.sim.done;                       // the first collision has finished
     const X = (x) => s.W / 2 + (x - P.centre) * u;
     const xa = X(st.xA), xb = X(st.xB), wa = P.wA * u, wb = P.wB * u, faceA = xa + wa / 2, faceB = xb - wb / 2;
     const gap = gapOf(P, st), ymid = L.trackY - L.air - L.gh * 0.5, amp = L.gh * 0.16;
@@ -243,8 +258,8 @@
     }
     if (P.mode === 'spring') {
       coil(s, faceA, faceA + Math.min(SPR_L0, gap) * u, ymid, amp * 1.2, 6, a);
-      if (t < P.tc) D.line(s, xa, L.trackY - L.air - L.gh - 3, xb, L.trackY - L.air - L.gh - 3, '235,235,255', 0.75 * a, 1.2);  // the thread
-      const sp = fade(t, P.tc - 0.05, P.tc + 0.7, 0.05, 0.6);
+      if (tau < 0) D.line(s, xa, L.trackY - L.air - L.gh - 3, xb, L.trackY - L.air - L.gh - 3, '235,235,255', 0.75 * a, 1.2);  // the thread
+      const sp = fade(tau * L.SLOW, -0.05, 0.7, 0.05, 0.6);
       D.glowDot(s, (xa + xb) / 2, L.trackY - L.air - L.gh - 3, L.gh * 0.9, C.light, sp * a);
     }
     drawGlider(s, xa, wa, COL_A, '2.0 kg', a);
@@ -268,7 +283,7 @@
     }
     // the momentum panel
     const pA = P.mA * st.vA, pB = P.mB * st.vB, tot = pA + pB;
-    const yEnd = panel(s, a, 'momentum, p = mv / kg m s⁻¹', [
+    const yEnd = panel(s, aPart, 'momentum, p = mv / kg m s⁻¹', [
       { label: '2.0 kg', rgb: COL_A, val: pA, txt: fmt1(pA) },
       { label: '1.0 kg', rgb: COL_B, val: pB, txt: fmt1(pB) },
       { label: 'total', rgb: C.white, val: tot, txt: fmt1(tot), total: true },
@@ -277,16 +292,16 @@
     const yE = yEnd + fs * 1.3, r = P.sim;
     if (P.predict && t >= P.predict[0] - 0.3 && t < P.tc) {
       const pa = fade(t, P.predict[0], P.tc, 0.5, 0.4) * (0.75 + 0.25 * Math.sin(s.clock * 4));
-      D.text(s, 'Total momentum afterwards = ?', L.px0, yE, fs, pa * a, D.sans(fs, 600), C.light, 'left');
+      D.text(s, 'Total momentum afterwards = ?', L.px0, yE, fs, pa * aPart, D.sans(fs, 600), C.light, 'left');
     } else if (t >= P.tc - 0.2 || !P.predict) {
-      const done = tau >= r.done, ea = fade(t, P.t0 + 0.6, P.fout, 0.6, 0.7);
+      const done = firstDone, ea = fade(t, P.t0 + 0.6, P.fout, 0.6, 0.7), a = aPart;
       const fE = (x) => (Math.abs(x) < 0.005 ? '0' : x.toFixed(P.ekd));
       const txt = `Kinetic energy: ${fE(r.ekBefore)} J before` + (done ? `  →  ${fE(r.ekAfter)} J after` : '');
       s.g.font = D.sans(fs);
       const lines = s.g.measureText(txt).width > L.px1 - L.px0 && done ? [`Kinetic energy: ${fE(r.ekBefore)} J before`, `→ ${fE(r.ekAfter)} J after`] : [txt];
       D.text(s, lines, L.px0, yE, fs, 0.85 * ea * a, D.sans(fs), C.text, 'left');
       if (P.mode === 'sticky' && done) {
-        D.text(s, `${(r.ekBefore - r.ekAfter).toFixed(1)} J → thermal energy and sound`, L.px0, yE + fs * 1.3 * lines.length, fs, 0.9 * a * smooth((tau - r.done) / 0.1), D.sans(fs, 600), HEAT, 'left');
+        D.text(s, `${(r.ekBefore - r.ekAfter).toFixed(1)} J → thermal energy and sound`, L.px0, yE + fs * 1.3 * lines.length, fs, 0.9 * a * smooth((rc / L.SLOW - r.done) / 0.1), D.sans(fs, 600), HEAT, 'left');
       }
     }
   }
@@ -387,7 +402,7 @@
     // continuous exhaust (time-lapse)
     const flame = fade(t, R2_T0 - 0.1, R2_T1 + 0.1, 0.3, 0.25) * a;
     if (flame > 0) {
-      const pc = s.clock, ug2 = s.W * 0.55, life = 0.9, EM = 0.008;
+      const pc = LIVE, ug2 = s.W * 0.55, life = 0.9, EM = 0.008;
       for (let e = Math.floor((pc - life) / EM); e <= Math.floor(pc / EM); e++) {
         const age = pc - e * EM; if (age < 0 || age > life) continue;
         const r1 = hash(e), r2 = hash(e + 0.5), d = age * ug2 * (0.8 + 0.4 * r1);
@@ -533,20 +548,42 @@
   ];
   const DURATION = 110.8;
 
+  // No pauses (teacher, 17 November 2026). The gliders, the gas and the exhaust move in real time (LIVE); the story
+  // (captions, panels, the burn's time-lapse) runs on its own clock, and the time a caption needs beyond its slot is added
+  // to that caption's stretch of the story instead of freezing the picture. spans: [storyStart, storyEnd, extra s].
+  const makeWarp = (spans) => {
+    const seg = spans.slice().sort((p, q) => p[0] - q[0]);
+    const toReal = (st) => { let acc = 0; for (const [a, b, d] of seg) { if (st <= a) break; if (st < b) return st + acc + d * (st - a) / (b - a); acc += d; } return st + acc; };
+    const toStory = (rt) => { let acc = 0; for (const [a, b, d] of seg) { const ra = a + acc, rb = b + acc + d; if (rt <= ra) break; if (rt < rb) return a + (rt - ra) * (b - a) / (b - a + d); acc += d; } return rt - acc; };
+    return { toReal, toStory, extra: seg.reduce((n, p) => n + p[2], 0) };
+  };
+  const HOLDS = [[12.0, 3.0], [22.5, 0.8], [34.7, 0.8], [39.9, 1.0], [49.2, 3.0], [54.6, 0.8], [81.7, 1.2], [86.7, 1.2],
+    [92.4, 1.5], [97.6, 1.2], [102.8, 1.0], [107.0, 1.5]];
+  // each caption gets enough time to read (about 17 characters a second, 6 s more to predict), and at least its old hold;
+  // the end card keeps its old 1.5 s, spread over its own stretch
+  const SPANS = CAPS.map(([a, b, txt]) => {
+    const h = HOLDS.find(([st]) => st >= a && st <= b);
+    let extra = Math.max(0, txt.length / 17 + 0.6 - (b - a)) + (txt.startsWith('Predict') ? 6 : 0);
+    extra = Math.max(extra, h ? h[1] : 0);
+    return extra > 0.05 ? [a, b, Math.round(extra * 10) / 10] : null;
+  }).filter(Boolean).concat([[104.5, 109.5, 1.5]]);
+  const WARP = makeWarp(SPANS), R = WARP.toReal;
+  for (const P of PARTS) { P.rt0 = R(P.t0); P.rtc = R(P.tc); }       // when each part starts, and when its gliders first meet (real time)
+
   Anim.register('momentum', {
-    duration: DURATION,
-    poster: 32,
+    duration: DURATION + WARP.extra,
+    poster: R(32),
     // score: bright and open (G mixolydian, a triangle pad that gently swells, a little wind)
     music: { chords: [[55, 59, 62, 65], [53, 57, 60, 64], [48, 55, 60, 64], [50, 55, 59, 62]], bar: 6, pad: 'triangle', cutoff: 900, drone: 0.09, wind: 0.2, tremolo: 0.4, volume: 0.5 },
-    // hold the picture so each caption can be read (predictions get the longest holds)
-    pauses: [[12.0, 3.0], [22.5, 0.8], [34.7, 0.8], [39.9, 1.0], [49.2, 3.0], [54.6, 0.8], [81.7, 1.2], [86.7, 1.2],
-      [92.4, 1.5], [97.6, 1.2], [102.8, 1.0], [107.0, 1.5]],
     numbers: { parts: PARTS.map((P) => ({ key: P.key, pBefore: P.sim.pBefore, pAfter: P.sim.pAfter, vA: P.sim.vA[P.sim.n], vB: P.sim.vB[P.sim.n],
       ekBefore: P.sim.ekBefore, ekAfter: P.sim.ekAfter, heat: P.sim.heat, done: P.sim.done })),
     rocket: { thrust: THRUST_N, mEnd: RM[NPUFF], vEnd: RV[NPUFF], rocketEq: VE * Math.log(M0 / RM[NPUFF]), totalEnd: RM[NPUFF] * RV[NPUFF] + GAS_P[NPUFF],
       p1: RM[1] * RV[1], aStart: THRUST_N / RM[4], aEnd: THRUST_N / RM[NPUFF] }, orbit: { ratio: RATIO, propellant: 1 - MF } },
     resize: layout,
-    frame(s, t) {
+    // for checking the timing (not used by the player)
+    info: { CAPS, SPANS, WARP, PARTS },
+    frame(s, rt) {
+      const t = WARP.toStory(rt); LIVE = rt;
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
       D.background(s, t < 61 ? 0.3 : 0.18);
       drawStars(s, t, fade(t, 60.6, 110.8, 1.2, 0.6) * (1 - 0.5 * smooth((t - 87.6) / 1)));

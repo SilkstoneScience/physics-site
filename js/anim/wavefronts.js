@@ -68,6 +68,27 @@
     [142.2, 147.4, 'For sources in phase: constructive where the path difference = nλ, destructive where it is (n + ½)λ, with n = 0, 1, 2, …'],
   ];
 
+
+  // No pauses (teacher, 17 November 2026). The water always moves in real time (LIVE); the story (captions, labels,
+  // brackets fading in and out) runs on its own clock, and the time a caption needs beyond its slot is added to that
+  // caption's stretch of the story instead of freezing the picture. spans: [storyStart, storyEnd, extra s].
+  const makeWarp = (spans) => {
+    const seg = spans.slice().sort((p, q) => p[0] - q[0]);
+    const toReal = (st) => { let acc = 0; for (const [a, b, d] of seg) { if (st <= a) break; if (st < b) return st + acc + d * (st - a) / (b - a); acc += d; } return st + acc; };
+    const toStory = (rt) => { let acc = 0; for (const [a, b, d] of seg) { const ra = a + acc, rb = b + acc + d; if (rt <= ra) break; if (rt < rb) return a + (rt - ra) * (b - a) / (b - a + d); acc += d; } return rt - acc; };
+    return { toReal, toStory, extra: seg.reduce((n, p) => n + p[2], 0) };
+  };
+  const HOLDS = [[20.5, 1.2], [37.6, 2.0], [59.4, 1.5], [82.4, 2.0], [100.6, 1.2], [130.0, 2.0], [141.3, 1.5], [146.8, 1.5]];
+  // each caption gets enough time to read (about 17 characters a second, 6 s more to predict), and at least its old hold
+  const SPANS = CAPS.map(([a, b, txt]) => {
+    const h = HOLDS.find(([st]) => st >= a && st <= b);
+    let extra = Math.max(0, txt.length / 17 + 0.6 - (b - a)) + (txt.startsWith('Predict') ? 6 : 0);
+    extra = Math.max(extra, h ? h[1] : 0);
+    return extra > 0.05 ? [a, b, Math.round(extra * 10) / 10] : null;
+  }).filter(Boolean);
+  const WARP = makeWarp(SPANS), R = WARP.toReal;
+  let LIVE = 0;                                                       // real (playing) time: the waves' own clock
+
   // ---------- colours ----------
   const RAY = C.light, CONS = C.good, DEST = '255,120,190', CREST = '190,240,255';
   const DEEP = [[2, 14, 32], [10, 46, 76], [178, 236, 255]];          // trough, still water, crest
@@ -205,7 +226,7 @@
     return u <= 0 ? 0 : u >= 1 ? 1 : u * u * (3 - 2 * u);
   };
   function drawWater(s, t) {
-    const F = L.F, part = partAt(t), c = Math.cos(OM * t), sn = Math.sin(OM * t);
+    const F = L.F, part = partAt(t), c = Math.cos(OM * LIVE), sn = Math.sin(OM * LIVE);
     const px = F.img.data, n = F.n;
     const put = (q, v, tab) => {
       let k = ((v + 2) * 127.75 + 0.5) | 0;
@@ -214,19 +235,19 @@
       px[o] = tab[k]; px[o + 1] = tab[k + 1]; px[o + 2] = tab[k + 2]; px[o + 3] = 255;
     };
     if (part === 1) {
-      const front = L.X0 + C1 * (t - T.F1);
+      const front = L.X0 + C1 * (LIVE - R(T.F1));
       for (let q = 0; q < n; q++) put(q, (F.p1.r[q] * c + F.p1.i[q] * sn) * ramp(front, F.X[q]), LUT_D);
     } else if (part === 2) {
       for (let q = 0; q < n; q++) put(q, F.p2.r[q] * c + F.p2.i[q] * sn, F.p2.reg[q] ? LUT_S : LUT_D);
     } else if (part === 3 || part === 4) {
-      const f = part === 3 ? F.p3 : F.p4, front = C1 * (t - (part === 3 ? T.F3a : T.F3b));
+      const f = part === 3 ? F.p3 : F.p4, front = C1 * (LIVE - R(part === 3 ? T.F3a : T.F3b));
       for (let q = 0; q < n; q++) {
         if (f.wall[q]) { put(q, 0, LUT_D); continue; }
         const m = f.d[q] < 0 ? 1 : ramp(front, f.d[q]);
         put(q, (f.r[q] * c + f.i[q] * sn) * m, LUT_D);
       }
     } else {
-      const front = C1 * (t - T.F4), a = F.s1, b = F.s2;
+      const front = C1 * (LIVE - R(T.F4)), a = F.s1, b = F.s2;
       for (let q = 0; q < n; q++) {
         put(q, (a.r[q] * c + a.i[q] * sn) * ramp(front, a.d[q]) + (b.r[q] * c + b.i[q] * sn) * ramp(front, b.d[q]), LUT_D);
       }
@@ -318,7 +339,7 @@
   function drawBar(s, t, a) {
     if (a <= 0) return;
     const { g } = s, x0 = PX(0.15), x1 = PX(L.X0), y0 = PY(0.3), y1 = PY(L.TH - 0.3);
-    const glow = 0.5 + 0.5 * Math.cos(OM * t);
+    const glow = 0.5 + 0.5 * Math.cos(OM * LIVE);
     g.globalCompositeOperation = 'source-over';
     const gr = g.createLinearGradient(x0, 0, x1, 0);
     gr.addColorStop(0, `rgba(120,130,150,${a})`); gr.addColorStop(0.5, `rgba(${Math.round(200 + 40 * glow)},${Math.round(208 + 36 * glow)},230,${a})`); gr.addColorStop(1, `rgba(110,120,140,${a})`);
@@ -328,20 +349,20 @@
     const a1 = fade(t, 5.0, T.X1 - 0.4, 0.8, 0.6);
     drawBar(s, t, a1);
     label(s, 'dipping bar', PX(L.X0) + L.fs * 0.8, PY(L.TH) - L.fs * 1.3, fade(t, 5.2, 10.2, 0.6, 0.6), C.text, 'left');
-    const front = L.X0 + C1 * (t - T.F1);
+    const front = L.X0 + C1 * (LIVE - R(T.F1));
     // wavefronts drawn along the crests
     const aW = fade(t, 11.0, 15.8, 0.7, 0.6);
     if (aW > 0) {
-      for (let x = crestX(t, 1.2); x < Math.min(front - 1.0, L.TW - 0.3); x += LAM) {
+      for (let x = crestX(LIVE, 1.2); x < Math.min(front - 1.0, L.TW - 0.3); x += LAM) {
         D.glowLine(s, [[PX(x), PY(0.4)], [PX(x), PY(L.TH - 0.4)]], CREST, 0.55 * aW, 1.3);
       }
-      const xl = crestX(t, Math.min(front, L.TW) * 0.45);
+      const xl = crestX(LIVE, Math.min(front, L.TW) * 0.45);
       if (xl < front - 1) label(s, 'wavefront', PX(xl), PY(0) + L.fs * 1.4, aW, CREST);
     }
     // λ, riding along with the crests
     const aL = fade(t, 16.2, 21.2, 0.6, 0.6);
     if (aL > 0) {
-      const x = L.X0 + C1 * t + LAM * Math.ceil((L.TW * 0.12 - L.X0 - C1 * 16.2) / LAM), y = L.TH * 0.3;
+      const x = L.X0 + C1 * LIVE + LAM * Math.ceil((L.TW * 0.12 - L.X0 - C1 * R(16.2)) / LAM), y = L.TH * 0.3;
       if (x + LAM < L.TW - 0.5) bracket(s, [x, y], [x + LAM, y], 'λ = 3.0 cm', aL, C.text, 1);
     }
     // rays, with right-angle marks riding on one crest
@@ -349,7 +370,7 @@
     if (aR > 0) {
       const ys = [0.22, 0.5, 0.78].map((f) => f * L.TH);
       for (const y of ys) arrowCm(s, [1.6, y], [L.TW - 1.2, y], aR);
-      const xm = L.X0 + C1 * t + LAM * Math.ceil((L.TW * 0.3 - L.X0 - C1 * 21.6) / LAM);
+      const xm = L.X0 + C1 * LIVE + LAM * Math.ceil((L.TW * 0.3 - L.X0 - C1 * R(21.6)) / LAM);
       if (xm < L.TW - 1.5) for (const y of ys) rightAngle(s, xm, y, [1, 0], aR);
       D.glowLine(s, [[PX(xm), PY(0.4)], [PX(xm), PY(L.TH - 0.4)]], CREST, 0.45 * aR, 1.2);
       label(s, 'ray', PX(3.2), PY(ys[0]) - L.fs * 1.2, aR, RAY);
@@ -370,11 +391,11 @@
     // the wavelengths, riding with the crests
     const aL = fade(t, 38.6, 43.6, 0.6, 0.6);
     if (aL > 0) {
-      const y = Math.max(3.4, B0[1] - 5), t0 = 38.6;
-      const x = B0[0] + C1 * t + LAM * Math.ceil((1.5 - B0[0] - C1 * t0) / LAM);
+      const y = Math.max(3.4, B0[1] - 5), t0 = R(38.6);
+      const x = B0[0] + C1 * LIVE + LAM * Math.ceil((1.5 - B0[0] - C1 * t0) / LAM);
       if (sN(x + LAM, y) < 0) bracket(s, [x, y], [x + LAM, y], 'λ = 3.0 cm', aL, C.text, 1);
       const S = [B0[0] + 3 * TAN[0], B0[1] + 3 * TAN[1]], off = KT[0] * (S[0] - B0[0]) + KT[1] * (S[1] - B0[1]);
-      const sv = C2 * t + LAM2 * Math.ceil((0.4 + off - C2 * t0) / LAM2) - off;
+      const sv = C2 * LIVE + LAM2 * Math.ceil((0.4 + off - C2 * t0) / LAM2) - off;
       const p = [S[0] + sv * KT[0], S[1] + sv * KT[1]], q = [p[0] + LAM2 * KT[0], p[1] + LAM2 * KT[1]];
       if (inTank(q[0], q[1])) bracket(s, p, q, 'λ = 2.0 cm', aL, C.text, -1);
     }
@@ -382,8 +403,8 @@
     const aW = fade(t, 44.0, 49.0, 0.7, 0.6);
     if (aW > 0) {
       let uMax = 0; for (let u = 0; u < 80; u += 0.25) { if (inTank(B0[0] + u * TAN[0], B0[1] + u * TAN[1])) uMax = u; }
-      const m = Math.round((-(uMax - 1.5) * Math.sin(TH1) - C1 * 44.0) / LAM);
-      const d1 = C1 * t + m * LAM, d2 = C2 * t + m * LAM2;
+      const m = Math.round((-(uMax - 1.5) * Math.sin(TH1) - C1 * R(44.0)) / LAM);
+      const d1 = C1 * LIVE + m * LAM, d2 = C2 * LIVE + m * LAM2;
       const l1 = []; for (let y = 0; y <= L.TH; y += 0.25) l1.push([B0[0] + d1, y]);
       const base = [B0[0] + d2 * KT[0], B0[1] + d2 * KT[1]], l2 = [];
       for (let w = -80; w <= 80; w += 0.25) l2.push([base[0] - w * KT[1], base[1] + w * KT[0]]);
@@ -441,7 +462,7 @@
     } else {
       label(s, 'gap 2.0 cm', PX(L.XB) - L.fs * 0.8, PY(L.YC - w / 2) - L.fs * 1.3, fade(t, 84.6, 95.4, 0.7, 0.6), C.text, 'right');
       // rays spreading from the gap, at right angles to the curved wavefronts
-      const aR = fade(t, 85.0, T.X4 - 0.4, 0.8, 0.6), front = C1 * (t - T.F3b);
+      const aR = fade(t, 85.0, T.X4 - 0.4, 0.8, 0.6), front = C1 * (LIVE - R(T.F3b));
       if (aR > 0) for (const ang of [-60, -30, 0, 30, 60]) {
         const u = [Math.cos(ang * DEG), Math.sin(ang * DEG)], p = [L.XB + 1.6 * u[0], L.YC + 1.6 * u[1]];
         const lr = Math.min(Math.max(0, front - 2.5), reach(p, u) * 0.9, 13);
@@ -450,7 +471,7 @@
       // Huygens: wavelets from points across the gap
       const aH = fade(t, 95.8, 101.2, 0.6, 0.6);
       if (aH > 0) {
-        const { g } = s, base = (C1 * t) % LAM;
+        const { g } = s, base = (C1 * LIVE) % LAM;
         for (let k = 0; k < 3; k++) {                                // three of the points across the gap, each sending out a wavelet
           const y = L.YC - w / 2 + (k + 0.5) * w / 3, cx = PX(L.XB + BAR_T / 2), cy = PY(y), rr = base * L.ppc;
           D.glowDot(s, cx, cy, Math.max(4, L.ppc * 0.3), C.white, aH);
@@ -472,7 +493,7 @@
   function gauge(s, p, t, a, name) {
     if (a <= 0) return;
     const cx = PX(p[0]), cy = PY(p[1]), hh = Math.max(12, L.ppc * 1.1), gx = cx + Math.max(14, L.fs * 1.3);
-    const v = clamp(dispTwo(p, t) / 0.9, -1, 1);
+    const v = clamp(dispTwo(p, LIVE) / 0.9, -1, 1);
     D.glowDot(s, cx, cy, Math.max(7, L.fs * 0.6), C.white, a);
     label(s, name, cx - L.fs * 1.0, cy - L.fs * 1.1, a, C.white, 'right', L.fs + 1);
     D.line(s, gx, cy - hh, gx, cy + hh, C.text, 0.5 * a, 1.2);
@@ -482,7 +503,7 @@
   function part5(s, t) {
     const a = fade(t, T.X4 + 0.3, DURATION, 0.8, 0.6); if (a <= 0) return;
     for (const [S, nm] of [[L.S1, 'S₁'], [L.S2, 'S₂']]) {
-      const dip = 0.6 + 0.4 * Math.cos(OM * t);
+      const dip = 0.6 + 0.4 * Math.cos(OM * LIVE);
       D.glowDot(s, PX(S[0]), PY(S[1]), Math.max(10, L.ppc * 0.9), '230,236,255', a * dip);
       label(s, nm, PX(S[0]) - L.fs * 1.4, PY(S[1]), a, C.text, 'right');
     }
@@ -552,15 +573,15 @@
   }
 
   Anim.register('wavefronts', {
-    duration: DURATION,
-    poster: 122,
-    pauses: [[20.5, 1.2], [37.6, 2.0], [59.4, 1.5], [82.4, 2.0], [100.6, 1.2], [130.0, 2.0], [141.3, 1.5], [146.8, 1.5]],
+    duration: DURATION + WARP.extra,
+    poster: R(122),
     // score: ripples on water (B major, a soft sine pad that rises and falls like waves, a soft shimmer)
     music: { chords: [[47, 54, 59, 63], [44, 51, 56, 63], [52, 56, 59, 63], [54, 58, 61, 64]], bar: 9, pad: 'sine', cutoff: 900, drone: 0.09, shimmer: 0.3, tremolo: 0.3, volume: 0.38 },
     resize: layout,
     // for checking the numbers (not used by the player)
-    info: { LAM, LAM2, TH2: TH2 / DEG, CAPS, partAt, pointAt: (r) => pointAt(r), layout: () => L, dispTwo },
-    frame(s, t) {
+    info: { LAM, LAM2, TH2: TH2 / DEG, CAPS, SPANS, WARP, partAt, pointAt: (r) => pointAt(r), layout: () => L, dispTwo },
+    frame(s, rt) {
+      const t = WARP.toStory(rt); LIVE = rt;
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
       D.background(s, 0.18);
       drawWater(s, t);

@@ -30,21 +30,12 @@
   const Nat = (r) => N0 - countBelow(sorted, r), Sat = (r) => NS - countBelow(sortedS, r);
 
   // ---------- timeline (scene seconds) ----------
-  // The run's clock r: real speed from T0, but it waits HD seconds of scene time at exactly 10, 20 and 30 s, so each
-  // "After … s" caption can fade in while the clock shows that time. tOfR is the scene time at which the clock shows r.
-  const T0 = 31.0, RMAX = 60, HOLDS = [10, 20, 30], HD = 0.7;
-  const rOf = (t) => {
-    const u = t - T0; if (u <= 0) return 0;
-    let shift = 0;
-    for (const h of HOLDS) { const st = h + shift; if (u < st) break; if (u < st + HD) return h; shift += HD; }
-    return clamp(u - shift, 0, RMAX);
-  };
-  const tOfR = (r) => T0 + r + HD * HOLDS.filter((h) => r > h).length;
-  const T_STOP = tOfR(RMAX);                                          // the clock stops at 60 s
-  const END_CARD = T0 + 72.8, DURATION = T0 + 86;
-  // background counts: random arrival times, at about 0.5 per second, while the clock is running or waiting to start
-  const bg = []; for (let t = r3() * 2; t < T_STOP; t += -Math.log(1 - r3()) / BG_RATE) bg.push([t, r3() * Math.PI * 2]);
-  const BG_MEASURED = bg.filter(([tb]) => tb < T0).length / T0;      // counted before the clock started
+  // No pauses (teacher, 17 November 2026): the picture never freezes and the run's clock r runs at real speed from T0
+  // to the end, with no waits. The readings at exactly 10, 20 and 30 s stay pinned on the graph as markers, so each
+  // "After … s" caption refers to a marker that is still visible while the decays carry on.
+  const T0 = 46.6, RMAX = 100;                                       // the clock starts after the last caption before it
+  const rOf = (t) => clamp(t - T0, 0, RMAX);
+  const tOfR = (r) => T0 + r;
 
   // the highlighted nucleus: one near the middle of the grid that decays a few seconds after the clock starts
   const GC = 40, GR = 25;
@@ -56,31 +47,51 @@
   const tauHi = tau[HI];
 
   const RUN = { N10: Nat(10), N20: Nat(20), N30: Nat(30), N25: Nat(25), D5: N0 - Nat(5), S10: Sat(10), S20: Sat(20), tauHi,
-    BG: BG_MEASURED, BINS: Array.from({ length: 12 }, (_, k) => (Nat(5 * k) - Nat(5 * k + 5)) / 5) };
+    BG: 0, BINS: Array.from({ length: RMAX / 5 }, (_, k) => (Nat(5 * k) - Nat(5 * k + 5)) / 5) };
   const fmt = (v, dp) => v.toFixed(dp);
 
   // ---------- captions ----------
-  const CAPS = [
-    [4.8, 10.8, '1000 unstable nuclei of a made-up nuclide, X. Each will decay, giving out radiation, and become a daughter nucleus.'],
-    [11.0, 17.0, 'Before the clock starts, the detector already counts now and then: background radiation from rocks, radon gas and cosmic rays.'],
-    [17.2, 21.0, 'Predict: when will this nucleus decay?'],
-    [21.2, 26.2, 'No one can say. Decay is random: every nucleus of X has the same chance of decaying in each second.'],
-    [26.4, 30.6, 'It is also spontaneous: heating, squeezing or chemical reactions make no difference.'],
-    [T0 + 0.2, T0 + 4.8, 'The clock starts. Each nucleus decays at a random moment: it flashes and becomes a daughter nucleus.'],
-    [T0 + 5.0, T0 + 9.7, 'The graph shows the number of undecayed nuclei, N. Each decay is a tiny step down.'],
-    [tOfR(10), T0 + 14.8, `After 10 s, ${RUN.N10} are left: about half. The half-life of X is T½ = 10 s.`],
-    [T0 + 15.0, T0 + 19.9, 'The activity (decays per second) falls too: fewer nuclei are left to decay.'],
-    [tOfR(20), T0 + 25.4, `After 20 s, ${RUN.N20} are left: about a quarter. Each half-life halves what is left, not the starting number.`],
-    [T0 + 25.6, T0 + 30.9, 'Radiation goes off in all directions and only some reaches the detector, so the count rate is less than the activity.'],
-    [tOfR(30), T0 + 35.8, `After 30 s, ${RUN.N30} are left: about an eighth of 1000 (125).`],
-    [T0 + 36.0, T0 + 41.2, 'The smooth curve (the expected number) halves every 10 s. With 1000 nuclei, the random run follows it closely.'],
-    [T0 + 41.4, T0 + 47.2, `The sample of 20 decays just as randomly. After 10 s, ${RUN.S10} were left, not 10: a small sample is much less predictable.`],
-    [T0 + 47.4, T0 + 51.8, 'To measure the source alone, subtract the background count rate from every reading.'],
-    [T0 + 52.2, T0 + 57.8, '(HL) The decay constant: λ = ln 2 ÷ T½ = 0.693 ÷ 10 = 0.0693 s⁻¹.'],
-    [T0 + 58.0, T0 + 65.4, `(HL) Activity A = λN = 0.0693 × 1000 = 69 Bq at the start. As it falls, about 59 per second is expected over the first 5 s; this run had ${Math.round(RUN.D5 / 5)}.`],
-    [T0 + 65.6, T0 + 72.2, `(HL) The decay law (in the panel) at 25 s: λt = 0.0693 × 25 = 1.73, so N = 1000 × 0.177 = 177 expected. This run had ${RUN.N25}.`],
+  // Laid out one after another from their lengths (at most CPS characters per second on screen, a Predict caption
+  // 6 s more), each starting no earlier than the moment it describes. Nothing ever waits: the run carries on.
+  const CPS = 15;
+  const SPEC = [
+    // [text, earliest start (scene s), id]
+    ['1000 unstable nuclei of a made-up nuclide, X. Each will decay, giving out radiation, and become a daughter nucleus.', 4.8],
+    ['Before the clock starts, the detector already counts now and then: background radiation from rocks, radon gas and cosmic rays.', 0, 'bg'],
+    ['Predict: when will this nucleus decay?', 0, 'predict'],
+    ['No one can say. Decay is random: every nucleus of X has the same chance of decaying in each second.', 0],
+    ['It is also spontaneous: heating, squeezing or chemical reactions make no difference.', 0],
+    ['The clock starts. Each nucleus decays at a random moment: it flashes and becomes a daughter nucleus.', T0 + 0.2],
+    ['The graph shows the number of undecayed nuclei, N. Each decay is a tiny step down.', 0, 'graph'],
+    [`After 10 s, ${RUN.N10} were left (the marker at 10 s): about half. The half-life of X is T½ = 10 s.`, T0 + 10.2],
+    ['The activity (decays per second) falls too: fewer nuclei are left to decay.', 0, 'act'],
+    [`After 20 s, ${RUN.N20} were left: about a quarter. Each half-life halves what is left, not the starting number.`, T0 + 20.2],
+    [`After 30 s, ${RUN.N30} were left: about an eighth of 1000 (125).`, T0 + 30.2],
+    ['Radiation goes off in all directions and only some reaches the detector, so the count rate is less than the activity.', 0, 'rate'],
+    ['The smooth curve (the expected number) halves every 10 s. With 1000 nuclei, the random run follows it closely.', 0, 'curve'],
+    [`The sample of 20 decays just as randomly. After 10 s, ${RUN.S10} were left, not 10: a small sample is much less predictable.`, 0, 'sample'],
+    ['To measure the source alone, subtract the background count rate from every reading.', 0, 'bgsub'],
+    ['(HL) The decay constant: λ = ln 2 ÷ T½ = 0.693 ÷ 10 = 0.0693 s⁻¹.', 0, 'hl'],
+    [`(HL) Activity A = λN = 0.0693 × 1000 = 69 Bq at the start. As it falls, about 59 per second is expected over the first 5 s; this run had ${Math.round(RUN.D5 / 5)}.`, 0],
+    [`(HL) The decay law (in the panel) at 25 s: λt = 0.0693 × 25 = 1.73, so N = 1000 × 0.177 = 177 expected. This run had ${RUN.N25}.`, 0, 'law'],
   ];
-  const HL_FROM = T0 + 52.0, T_SAMPLE = T0 + 41.4, T_BGSUB = T0 + 47.4;
+  const CAPS = [], AT = {};
+  {
+    let end = 4.4;
+    for (const [txt, earliest, id] of SPEC) {
+      const st = Math.max(end + 0.3, earliest);
+      const dur = Math.max(3.6, txt.length / CPS + 0.6) + (txt.startsWith('Predict') ? 6 : 0);
+      CAPS.push([+st.toFixed(2), +(st + dur).toFixed(2), txt]);
+      if (id) AT[id] = [st, st + dur];
+      end = st + dur;
+    }
+  }
+  const END_CARD = CAPS[CAPS.length - 1][1] + 0.6, DURATION = END_CARD + 13.2;
+  const T_SAMPLE = AT.sample[0], T_BGSUB = AT.bgsub[0], HL_FROM = AT.hl[0] - 0.2;
+  // background counts: random arrival times, at about 0.5 per second, from the start to the end
+  const bg = []; for (let t = r3() * 2; t < DURATION; t += -Math.log(1 - r3()) / BG_RATE) bg.push([t, r3() * Math.PI * 2]);
+  const BG_N = bg.filter(([tb]) => tb < T0).length, BG_MEASURED = BG_N / T0;   // counted before the clock started
+  RUN.BG = BG_MEASURED; RUN.BG_N = BG_N;
 
   // ---------- colours ----------
   const PAR = '255,150,110', DAU = '86,104,150', SMALL = C.light, ACT = C.field, CNT = C.good, BGC = '200,205,230';
@@ -133,7 +144,7 @@
     for (let i = 0; i < N0; i++) if (tau[i] > r) { const [x, y] = cellXY(i); g.moveTo(x + rad, y); g.arc(x, y, rad, 0, 7); }
     g.fill();
     // flashes and the radiation from recent decays (shown for 0.6 s of clock time)
-    if (t > T0 && t < T_STOP) for (let i = 0; i < N0; i++) {
+    if (t > T0 && t < END_CARD) for (let i = 0; i < N0; i++) {
       const age = r - tau[i]; if (age < 0 || age > 0.6) continue;
       const [x, y] = cellXY(i), k = age / 0.6;
       D.glowDot(s, x, y, L.cell * 2.2 * (1 - k * 0.5), '255,230,170', (1 - k) * 0.9);
@@ -146,7 +157,7 @@
       }
     }
     // the highlighted nucleus
-    const ha = fade(t, 17.2, T0 + 24, 0.6, 1.0);
+    const ha = fade(t, AT.predict[0], T0 + 24, 0.6, 1.0);
     if (ha > 0) {
       const [x, y] = cellXY(HI), decayed = r >= tauHi;
       g.strokeStyle = `rgba(${C.light},${ha})`; g.lineWidth = 2; g.beginPath(); g.arc(x, y, Math.max(6, L.cell * 1.2), 0, 7); g.stroke();
@@ -167,7 +178,7 @@
 
   function drawSmall(s, t) {
     const a = smooth((t - 4.8) / 0.8); if (a <= 0) return;
-    const { g } = s, r = rOf(t), emph = 0.55 + 0.45 * fade(t, T0 + 40.2, T0 + 46, 0.5, 0.6);
+    const { g } = s, r = rOf(t), emph = 0.55 + 0.45 * fade(t, T_SAMPLE - 0.4, AT.sample[1], 0.5, 0.6);
     const y = L.sy + L.scell / 2, rad = L.scell * 0.34;
     for (let i = 0; i < NS; i++) {
       const x = L.sx + (i + 0.5) * L.scell, done = tauS[i] <= r;
@@ -185,7 +196,7 @@
     g.strokeStyle = `rgba(${CNT},${0.6 * a})`; g.lineWidth = 1.2; g.stroke();
     // a click: a flash on each count (detected decays arrive 0.35 s after decaying; background from outside)
     let flash = 0; const r = rOf(t);
-    if (t > T0 && t < T_STOP) for (let i = 0; i < N0; i++) if (det[i]) { const dt = r - tau[i] - 0.35; if (dt >= 0 && dt < 0.25) flash = Math.max(flash, 1 - dt / 0.25); }
+    if (t > T0 && t < END_CARD) for (let i = 0; i < N0; i++) if (det[i]) { const dt = r - tau[i] - 0.35; if (dt >= 0 && dt < 0.25) flash = Math.max(flash, 1 - dt / 0.25); }
     for (const [tb, an] of bg) {
       const dt = t - tb; if (dt < -0.35 || dt > 0.25) continue;
       if (dt < 0) { const u = (dt + 0.35) / 0.35, rr = (1 - u) * (L.phone ? 40 : 70); D.glowDot(s, x + w / 2 + Math.cos(an) * rr, y + Math.sin(an) * rr, 3, BGC, 0.8 * a); }
@@ -206,18 +217,18 @@
     const fs = L.fs;
     D.line(s, p.x0, p.y1, p.x1, p.y1, C.muted, 0.6 * a, 1.2); D.line(s, p.x0, p.y1, p.x0, p.y0 - fs * 0.3, C.muted, 0.6 * a, 1.2);
     for (const [v, lab] of yt) { const y = p.y1 - (v / ymax) * (p.y1 - p.y0); D.line(s, p.x0, y, p.x1, y, C.muted, 0.12 * a, 1, [3, 4]); D.text(s, lab, p.x0 - 4, y, fs - 1, 0.75 * a, D.sans(fs - 1), C.muted, 'right'); }
-    for (let x = 0; x <= RMAX; x += 10) { const X = p.x0 + (x / RMAX) * (p.x1 - p.x0); D.line(s, X, p.y1, X, p.y1 + 4, C.muted, 0.6 * a, 1); D.text(s, String(x), X, p.y1 + fs * 0.9, fs - 1, 0.75 * a, D.sans(fs - 1), C.muted); }
+    for (let x = 0; x <= RMAX; x += (L.phone ? 30 : 10)) { const X = p.x0 + (x / RMAX) * (p.x1 - p.x0); D.line(s, X, p.y1, X, p.y1 + 4, C.muted, 0.6 * a, 1); D.text(s, String(x), X, p.y1 + fs * 0.9, fs - 1, 0.75 * a, D.sans(fs - 1), C.muted); }
     D.text(s, ylab, p.x0, p.y0 - fs * 0.95, fs, 0.85 * a, D.sans(fs, 600), C.muted, 'left');
     if (xlab) D.text(s, xlab, p.x1 + 5, p.y1, fs - 1, 0.75 * a, D.sans(fs - 1), C.muted, 'left');   // beyond the end of the axis, off the curve
   }
   function drawGraphs(s, t) {
-    const a = smooth((t - (T0 + 4.6)) / 0.8) * (1 - smooth((t - END_CARD) / 0.8)); if (a <= 0) return;
+    const a = smooth((t - (AT.graph[0] - 0.4)) / 0.8) * (1 - smooth((t - END_CARD) / 0.8)); if (a <= 0) return;
     const { g } = s, r = rOf(t), p = L.gN, fs = L.fs;
     g.fillStyle = `rgba(14,20,44,${0.6 * a})`; g.beginPath(); g.roundRect(p.x0 - fs * 3.2, p.y0 - fs * 1.7, p.x1 - p.x0 + fs * 3.6, L.gA.y1 - p.y0 + fs * 3.4, 10); g.fill();
     const X = (x) => p.x0 + (x / RMAX) * (p.x1 - p.x0), Y = (n) => p.y1 - (n / N0) * (p.y1 - p.y0);
     axes(s, p, a, 'N, undecayed nuclei', 't / s', L.phone ? [[1000, '1000'], [500, '500'], [250, '250']] : [[1000, '1000'], [500, '500'], [250, '250'], [125, '125']], N0);
     // the smooth curve N0 (1/2)^(t / T½)
-    const ca = smooth((t - (T0 + 34.8)) / 1.0) * a;
+    const ca = smooth((t - (AT.curve[0] - 0.4)) / 1.0) * a;
     if (ca > 0) { const pts = []; for (let k = 0; k <= 120; k++) { const x = RMAX * k / 120; pts.push([X(x), Y(N0 * Math.pow(0.5, x / TH))]); } D.glowLine(s, pts, C.white, 0.55 * ca, 1.2); }
     // the run so far: one step per decay
     const pts = [[X(0), Y(N0)]]; let n = N0;
@@ -225,7 +236,7 @@
     pts.push([X(r), Y(n)]);
     D.glowLine(s, pts, PAR, a, L.phone ? 1.4 : 1.8);
     // the sample of 20, as N × 50 (same fraction scale): appears with its caption, then stays, dimmer, and labelled
-    const emS = fade(t, T_SAMPLE, T_SAMPLE + 5.8 + 2.6, 0.5, 0.6), sa = a * smooth((t - T_SAMPLE) / 0.6) * (0.45 + 0.55 * emS);
+    const emS = fade(t, T_SAMPLE, AT.sample[1] + 2.0, 0.5, 0.6), sa = a * smooth((t - T_SAMPLE) / 0.6) * (0.45 + 0.55 * emS);
     if (sa > 0) {
       const q = [[X(0), Y(N0)]]; let m = NS;
       for (let k = 0; k < sortedS.length && sortedS[k] <= r; k++) { q.push([X(sortedS[k]), Y(m * 50)]); m--; q.push([X(sortedS[k]), Y(m * 50)]); }
@@ -242,13 +253,13 @@
     }
     // half-life markers with the run's counts
     [[10, RUN.N10, 500], [20, RUN.N20, 250], [30, RUN.N30, 125]].forEach(([x, nv], j) => {
-      const ma = smooth((r - x) / 0.3) * a * (1 - 0.85 * fade(t, T0 + 65.6, T0 + 72.2, 0.5, 0.6));   // dimmed while the 25 s markers show if (ma <= 0) return;
+      const ma = smooth((r - x) / 0.3) * a * (1 - 0.85 * fade(t, AT.law[0], AT.law[1], 0.5, 0.6));   // dimmed while the 25 s markers show if (ma <= 0) return;
       D.line(s, X(x), Y(nv), X(x), p.y1, C.light, 0.5 * ma, 1, [3, 3]);
       g.fillStyle = `rgba(${C.light},${ma})`; g.beginPath(); g.arc(X(x), Y(nv), 3.5, 0, 7); g.fill();
       D.text(s, String(nv), X(x) + 5, Y(nv) - fs * 0.8, fs - 1, ma, D.sans(fs - 1, 600), C.light, 'left');
     });
     // (HL) the point at 25 s
-    const h3 = fade(t, T0 + 65.6, T0 + 72.2, 0.5, 0.6) * a;
+    const h3 = fade(t, AT.law[0], AT.law[1], 0.5, 0.6) * a;
     if (h3 > 0) {
       D.line(s, X(25), Y(177), X(25), p.y1, C.force, 0.7 * h3, 1, [2, 3]);
       D.glowDot(s, X(25), Y(177), 10, C.force, h3); D.glowDot(s, X(25), Y(RUN.N25), 8, PAR, h3);
@@ -260,7 +271,7 @@
     D.text(s, `t = ${fmt(r, 1)} s   N = ${n}`, p.x1 + fs * 2.4, ry, fs, a, D.sans(fs, 600), PAR, 'right');
 
     // activity: decays per second, averaged over each 5-second interval, as each interval is completed
-    const q = L.gA, ya = (v) => q.y1 - (v / 80) * (q.y1 - q.y0), aa = smooth((t - (T0 + 15.0)) / 0.8) * a;
+    const q = L.gA, ya = (v) => q.y1 - (v / 80) * (q.y1 - q.y0), aa = smooth((t - (AT.act[0] - 0.2)) / 0.8) * a;
     if (aa > 0) {
       axes(s, q, aa, 'activity / Bq', 't / s', L.phone ? [[80, '80'], [40, '40']] : [[80, '80'], [40, '40'], [20, '20']], 80);
       const bw = (q.x1 - q.x0) * 5 / RMAX;
@@ -269,10 +280,10 @@
         g.fillStyle = `rgba(${ACT},${0.8 * aa})`; g.fillRect(x + 0.5, ya(v), bw - 1, q.y1 - ya(v));
       }
       // the count rate the detector shows (counts in the last 4 s ÷ 4), shown while the clock runs
-      const cr = countRate(t), cra = smooth((t - (T0 + 25.6)) / 0.8) * (1 - smooth((t - T_STOP) / 0.6)) * aa;
+      const cr = countRate(t), cra = smooth((t - AT.rate[0]) / 0.8) * (1 - smooth((t - END_CARD) / 0.6)) * aa;
       D.text(s, `count rate ≈ ${cr.toFixed(1)} s⁻¹`, q.x1 + fs * 2.4, q.y0 - fs * 0.95, fs - 1, cra, D.sans(fs - 1, 600), CNT, 'right');
       // subtracting the background (measured before the clock started)
-      const ba = smooth((t - T_BGSUB) / 0.6) * (1 - smooth((t - T_STOP) / 0.6)) * aa;
+      const ba = smooth((t - T_BGSUB) / 0.6) * (1 - smooth((t - END_CARD) / 0.6)) * aa;
       if (ba > 0) {
         const corr = Math.max(0, cr - RUN.BG);
         D.text(s, `background ≈ ${RUN.BG.toFixed(1)} s⁻¹ → corrected ≈ ${corr.toFixed(1)} s⁻¹`, q.x1 + fs * 2.4, q.y0 + fs * 0.7, fs - 1, ba, D.sans(fs - 1, 600), CNT, 'right');
@@ -341,9 +352,7 @@
   Anim.register('decay', {
     duration: DURATION,
     poster: T0 + 22,
-    pauses: [[9.6, 1.8], [16.0, 2.4], [19.0, 6.0], [25.2, 1.8], [29.2, 2.0], [T0 + 4.0, 2.4], [T0 + 8.0, 1.6], [T0 + 10.6, 3.0],
-      [T0 + 18.4, 1.0], [T0 + 21.3, 3.0], [T0 + 29.0, 2.8], [T0 + 32.0, 2.4], [T0 + 39.8, 2.0], [T0 + 45.8, 2.6], [T0 + 50.4, 1.2],
-      [T0 + 56.4, 0.8], [T0 + 63.4, 3.6], [T0 + 70.8, 1.6]],
+    // no pauses (teacher, 17 November 2026): the run never stops while a caption is read
     // score: slow fading (B-flat minor, a triangle pad with a very slow swell, a low drone, a faint shimmer)
     music: { chords: [[46, 53, 58, 61], [42, 49, 54, 58], [44, 51, 56, 60], [41, 48, 53, 56]], bar: 11, pad: 'triangle', cutoff: 800, drone: 0.11, shimmer: 0.15, tremolo: 0.15, volume: 0.49 },
     resize: layout,

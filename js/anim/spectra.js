@@ -82,14 +82,23 @@
     [139.6, 145.6, 'Every element has its own pattern of lines, like a fingerprint.'],
     [145.8, 152.4, 'Dark lines in the Sun\'s spectrum match the lines of hydrogen and sodium: both are in its outer layers.'],
   ].map(([a, b, txt]) => [a, b, NB(txt)]);
-  // holds: every caption gets enough time to read at 16 characters a second (the picture holds still just before
-  // it fades); the calculation of the red line gets 1.2 s more, and the Predict caption 6 s more to think
+  // No pauses (teacher, 17 November 2026). Every caption still gets enough time to read at 16 characters a second
+  // (the calculation of the red line 1.2 s more, the Predict caption 6 s more): that time is added to the story, whose
+  // clock waits, while photons in flight, the lines they light and the light streaming through the gas carry on.
   const EXTRA = { 48.0: 1.2 };
-  const PAUSES = CAPS.map(([a, b, txt]) => {
+  const INSERTS = CAPS.map(([a, b, txt]) => {
     const need = txt.length / 16 - (b - a - 0.6) + (EXTRA[a] || 0);
     return need > 0.05 ? [+(b - 0.8).toFixed(2), +need.toFixed(1)] : null;
   }).filter(Boolean);
-  PAUSES.push([113.2, 6.0]);
+  INSERTS.push([113.2, 6.0]);
+  INSERTS.sort((x, y) => x[0] - y[0]);
+  const RUN = DURATION + INSERTS.reduce((n, p) => n + p[1], 0);       // the running time on the player's clock
+  const R = (st) => st + INSERTS.filter((p) => p[0] < st).reduce((n, p) => n + p[1], 0);     // story time → player time
+  const story = (tn) => {                                                // player time → story time (waits at each insert)
+    let acc = 0;
+    for (const [st, d] of INSERTS) { if (tn < st + acc) return tn - acc; if (tn < st + acc + d) return st; acc += d; }
+    return Math.min(tn - acc, DURATION);
+  };
 
   // ---------- colours ----------
   const LEVEL_RGB = '170,182,220', UV_RGB = '196,170,255', IR_RGB = '255,110,80', ELEC = C.neg, COLL = '150,230,255';
@@ -220,6 +229,17 @@
       });
     }
   }
+  // the tube keeps glowing: faint photons keep coming down through the grating to the four lines (player's clock)
+  function tubeTrickle(s, t, tn) {
+    const a = fade(t, 12.0, T_B + 0.4, 0.8, 0.8); if (a <= 0) return;
+    const { fs, cx, gy, tubeX: tx, srcY } = L, top = [cx, srcY + fs * 1.4 + fs * 0.85], fly = 1.3, gap = 0.45;
+    for (let k = Math.floor((tn - fly) / gap); k * gap <= tn; k++) {
+      const f = (tn - k * gap) / fly; if (f < 0 || f > 1) continue;
+      const i = Math.abs((k * 2654435761) >>> 0) % 4, l = BALMER[i];
+      const q = along([top, [cx, gy], [L.X(l), L.sy0 - 2]], f);
+      packet(s, q.x, q.y, q.ux, q.uy, l, nmRGB(l), 0.4 * a * Math.sin(Math.PI * f));
+    }
+  }
   // the grating lies flat (the light comes down onto it); its label sits to its left, clear of the lines
   function drawGrating(s, a) {
     if (a <= 0) return;
@@ -230,7 +250,13 @@
   }
 
   // ---------- the energy-level diagram ----------
-  function drawDiagram(s, t, a) {
+  // during the extra reading time (the story clock waiting), u = how far through it we are (0 to 1), else null
+  const insertAt = (tn) => {
+    let acc = 0;
+    for (const [st, d] of INSERTS) { const s0 = st + acc; if (tn >= s0 && tn < s0 + d) return (tn - s0) / d; acc += d; }
+    return null;
+  };
+  function drawDiagram(s, t, a, tn = t) {
     if (a <= 0) return;
     const { g } = s, { fs, dx0, dx1, dy0, dy1, phone } = L, z = zoomAt(t);
     // clip to the diagram so levels below the zoomed view vanish
@@ -292,9 +318,14 @@
     // the electron
     const el = electron(t);
     if (el) {
-      const x = xOf(el.xf), y = lerp(yOf(LEVEL[el.from], z), yOf(LEVEL[el.n], z), el.k), ea = el.a * a;
+      // while a caption is being read (part B), the dot drifts slowly sideways along its level and back: horizontal
+      // only, because the dot shows the electron's energy, which does not change; its glow pulses softly
+      const u = t > T_B && t < T_C ? insertAt(tn) : null;
+      const drift = u === null ? 0 : (el.xf > 0.65 ? -1 : 1) * (dx1 - dx0) * 0.07 * 0.5 * (1 - Math.cos(2 * Math.PI * u));
+      const x = xOf(el.xf) + drift, y = lerp(yOf(LEVEL[el.from], z), yOf(LEVEL[el.n], z), el.k), ea = el.a * a;
+      const pulse = t > T_B && t < T_C ? 1 + 0.12 * Math.sin(tn * 2.6) : 1;
       g.save(); g.beginPath(); g.rect(0, dy0 - fs * 1.4, L.W, dy1 - dy0 + fs * 2.0); g.clip();
-      D.glowDot(s, x, y, fs * 1.5, ELEC, ea);
+      D.glowDot(s, x, y, fs * 1.5 * pulse, ELEC, ea);
       g.restore();
       const la = fade(t, 30.4, 36.2, 0.6, 0.5) * ea;
       if (la > 0) label(s, phone ? 'electron' : 'electron (the dot shows its energy)', x + fs * 1.1, y - fs * 1.1, la, ELEC, 'left');
@@ -317,11 +348,12 @@
   }
 
   // ---------- part B: photons going to their place in the spectrum ----------
-  function photonPaths(s, t) {
+  function photonPaths(s, tn) {
     const { fs, sx0, sx1, sy0, sh } = L;
-    for (const e of EVENTS) {
+    for (const e0 of EVENTS) {
+      const e = { ...e0, t: R(e0.t) }, t = tn;                          // the photon flies on the player's clock
       if (e.kind !== 'emit' || t < e.t || t > e.t + TRAVEL + 4.5) continue;
-      const z = zoomAt(e.t), x = xOf(e.xf), y = (yOf(LEVEL[e.from], z) + yOf(LEVEL[e.to], z)) / 2;
+      const z = zoomAt(e0.t), x = xOf(e.xf), y = (yOf(LEVEL[e.from], z) + yOf(LEVEL[e.to], z)) / 2;
       const uv = e.lam < 380, ir = e.lam > 780;
       const end = uv ? [sx0 - fs * 1.4, sy0 + sh / 2] : ir ? [sx1 + fs * 1.4, sy0 + sh / 2] : [L.X(e.lam), sy0 - 2];
       const f = (t - e.t) / TRAVEL, rgb = nmRGB(e.lam);
@@ -335,7 +367,7 @@
 
   // ---------- part C: white light through cooler gas, then down into the grating ----------
   const STREAM = (() => { let sd = 7; const r = () => (sd = (sd * 16807) % 2147483647) / 2147483647; return Array.from({ length: 22 }, (_, k) => ({ lam: 405 + 290 * r(), ph: k / 22 + 0.03 * r() })); })();
-  function drawAbsorption(s, t) {
+  function drawAbsorption(s, t, tn) {
     const a = fade(t, T_C + 0.4, T_D + 0.6, 1.0, 1.0); if (a <= 0) return;
     const { fs, cx, gy, srcY, gasY, phone, W, H } = L;
     const src = [cx, srcY], gas = [cx, gasY], grat = [cx, gy];
@@ -355,7 +387,7 @@
     // a stream of photons of all wavelengths (dimmed once the dark lines are there, so the spectrum is clear)
     const sa = fade(t, T_C + 1.4, T_D, 1.0, 0.6) * a * (1 - 0.7 * smooth((t - (T_C + 24.6)) / 1.0));
     if (sa > 0) for (const p of STREAM) {
-      const f = ((t - T_C) * 0.32 + p.ph) % 1;
+      const f = (((tn - R(T_C)) * 0.32 + p.ph) % 1 + 1) % 1;
       const q = along([src, gas, grat, [L.X(p.lam), L.sy0 - 2]], f);
       packet(s, q.x, q.y, q.ux, q.uy, p.lam, nmRGB(p.lam), 0.55 * sa * Math.sin(Math.PI * f));
     }
@@ -397,7 +429,7 @@
       label(s, l === 700 ? '700 nm' : String(l), l === 700 ? x + fs * 0.9 : x, y + fs * 0.95, 0.75 * a, C.muted, l === 700 ? 'right' : 'center', fs - 1);
     }
   }
-  function drawStrip(s, t) {
+  function drawStrip(s, t, tn) {
     const a = smooth((t - 4.6) / 0.8) * (1 - smooth((t - T_D) / 0.8));
     if (a <= 0) return;
     const { g } = s, { sx0, sx1, sy0, sh, fs } = L, w = Math.max(2, (sx1 - sx0) * 0.006);
@@ -411,10 +443,11 @@
     BALMER.forEach((l, i) => {
       const x = L.X(l), ev = EVENTS.find((e) => e.kind === 'emit' && e.lam === l);
       const pa = smooth((t - 11.4 - i * 0.5) / 0.6) * (1 - smooth((t - T_B) / 0.8));
-      const tArr = ev.t + TRAVEL, pb = t < T_C ? smooth((t - tArr) / 0.3) : 0;
-      const flash = t > tArr && t < tArr + 1.2 ? Math.exp(-(t - tArr) * 3) : 0;
+      const tArr = R(ev.t) + TRAVEL, pb = t < T_C ? smooth((tn - tArr) / 0.3) : 0;
+      const flash = tn > tArr && tn < tArr + 1.2 ? Math.exp(-(tn - tArr) * 3) : 0;
       const on = Math.max(pa, pb) * (1 - smooth((t - T_C) / 1.2));
-      lineAt(s, x, sy0, sh, nmRGB(l), Math.min(1, (BAL_I[i] + 0.2) * on + flash) * a, w * (1 + flash));
+      const shimmer = t > T_B && t < T_C ? 0.88 + 0.12 * Math.sin(tn * 2.1 + i * 1.7) : 1;    // lit lines shimmer gently (part B)
+      lineAt(s, x, sy0, sh, nmRGB(l), Math.min(1, (BAL_I[i] + 0.2) * on * shimmer + flash) * a, w * (1 + flash));
       const la = (t < T_B ? pa : pb * (t < T_C ? 1 : 0)) * a;
       // on phones 410 and 434 are close: their labels lean away from each other
       const lx = L.phone && i === 3 ? x + 3 : L.phone && i === 2 ? x - 3 : x, al = L.phone && i === 3 ? 'right' : L.phone && i === 2 ? 'left' : 'center';
@@ -507,40 +540,41 @@
   }
 
   Anim.register('spectra', {
-    duration: DURATION,
-    poster: 80.5,
-    pauses: PAUSES,
+    duration: RUN,
+    poster: R(80.5),
     // score: luminous (E lydian, a soft sine pad, a soft shimmer, a breath of wind)
     music: { chords: [[52, 59, 63, 68], [57, 61, 64, 68, 71], [49, 56, 61, 64], [54, 58, 61, 66]], bar: 8, pad: 'sine', cutoff: 900, drone: 0.09,
       shimmer: 0.3, wind: 0.2, volume: 0.3 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: {
-      CAPS, PAUSES, EVENTS, LEVEL, lamNm,
+      CAPS, INSERTS, R, story, RUN, EVENTS, LEVEL, lamNm,
       check() {
         const out = {};
         for (const [f, t] of [[3, 2], [2, 1], [4, 2], [5, 2], [6, 2], [4, 3], [3, 1]]) out[`${f}->${t}`] = { dE: +(LEVEL[f] - LEVEL[t]).toFixed(2), J: (LEVEL[f] - LEVEL[t]) * EV, nm: +lamNm(f, t).toFixed(1) };
-        const rates = CAPS.map(([a, b, txt]) => { const hold = PAUSES.filter((p) => p[0] > a && p[0] < b).reduce((n, p) => n + p[1], 0); return +(txt.length / (b - a - 0.6 + hold)).toFixed(1); });
+        const rates = CAPS.map(([a, b, txt]) => { const hold = INSERTS.filter((p) => p[0] > a && p[0] < b).reduce((n, p) => n + p[1], 0); return +(txt.length / (b - a - 0.6 + hold)).toFixed(1); });
         // the grating: deviation from the straight-down beam, for each line (must grow with wavelength)
         const dev = L ? BALMER.map((l) => [l, +(Math.atan2(L.X(l) - L.cx, L.hg) * 180 / Math.PI).toFixed(1)]) : null;
-        return { out, maxRate: Math.max(...rates), rates, total: DURATION + PAUSES.reduce((n, p) => n + p[1], 0), dev };
+        return { out, maxRate: Math.max(...rates), rates, total: DURATION + INSERTS.reduce((n, p) => n + p[1], 0), dev };
       },
     },
-    frame(s, t) {
+    frame(s, tn) {
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
+      const t = story(tn);                                               // story clock; tn: the player's clock
       D.background(s, 0.2);
       drawTube(s, t);
-      drawDiagram(s, t, fade(t, T_B, T_D + 0.6, 1.0, 0.8));
+      tubeTrickle(s, t, tn);
+      drawDiagram(s, t, fade(t, T_B, T_D + 0.6, 1.0, 0.8), tn);
       drawGrating(s, Math.max(fade(t, 6.0, T_B + 0.8, 0.8, 0.8), fade(t, T_C + 0.4, T_D + 0.6, 1.0, 0.8)));
-      drawAbsorption(s, t);
-      photonPaths(s, t);
-      drawStrip(s, t);
+      drawAbsorption(s, t, tn);
+      photonPaths(s, tn);
+      drawStrip(s, t, tn);
       drawElements(s, t);
       D.captions(s, t, CAPS);
       if (t < 4.6) { s.g.fillStyle = `rgba(4,6,13,${0.8 * fade(t, 0, 4.4, 0.1, 0.8)})`; s.g.fillRect(0, 0, s.W, s.H); }
       D.title(s, t, 0.4, 4.4, 'Energy levels and spectra', 'Where the lines in a spectrum come from');
       endCard(s, t);
-      D.vignette(s, t, DURATION);
+      D.vignette(s, tn, RUN);
     },
   });
 })();

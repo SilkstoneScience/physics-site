@@ -248,11 +248,22 @@
     [127.0, 132.4, '(HL) Between the plates the equipotentials are flat and equally spaced away from the edges: 120, 90, 60, 30 and 0 V.'],
     [132.6, 138.2, '(HL) E = −ΔVₑ/Δr: Vₑ falls by 30 V for every 0.010 m downwards, so E = 30 ÷ 0.010 = 3.0 × 10³ V m⁻¹, as V/d gave.'],
   ];
-  const PAUSES = CAPS.map(([a, b, txt]) => {
+  // No pauses (teacher, 17 November 2026): the time a caption needs beyond its slot is added to that caption's stretch of
+  // the story instead, so the lines are drawn and the charges moved a little more slowly there, and the picture never
+  // freezes (the arrowheads also drift steadily along the field lines in real time). spans: [storyStart, storyEnd, extra s].
+  const makeWarp = (spans) => {
+    const seg = spans.slice().sort((p, q) => p[0] - q[0]);
+    const toReal = (st) => { let acc = 0; for (const [a, b, d] of seg) { if (st <= a) break; if (st < b) return st + acc + d * (st - a) / (b - a); acc += d; } return st + acc; };
+    const toStory = (rt) => { let acc = 0; for (const [a, b, d] of seg) { const ra = a + acc, rb = b + acc + d; if (rt <= ra) break; if (rt < rb) return a + (rt - ra) * (b - a) / (b - a + d); acc += d; } return rt - acc; };
+    return { toReal, toStory, extra: seg.reduce((n, p) => n + p[2], 0) };
+  };
+  const SPANS = CAPS.map(([a, b, txt]) => {
     let extra = txt.length / 16 + 1.0 - (b - a);
     if (txt.startsWith('Predict')) extra = Math.max(extra, 0) + 6;
-    return extra > 0.05 ? [b - 0.75, Math.round(extra * 10) / 10] : null;
+    return extra > 0.05 ? [a, b, Math.round(extra * 10) / 10] : null;
   }).filter(Boolean);
+  const WARP = makeWarp(SPANS);
+  let LIVE = 0;                                                       // real (playing) time, for the drifting arrowheads
   const T_END = 138.6, DURATION = 151;
 
   // ---------- the parts ----------
@@ -300,7 +311,10 @@
     D.glowLine(s, pts, rgb, a, width);
     // arrowheads at fixed distances along the line (from the charge where it starts)
     const head = Math.max(5, Math.min(9, V.sc * 0.012));
-    for (let d = arrowEvery * 0.5; d < Math.min(upto, ln.len) - 0.004; d += arrowEvery) {
+    const lim = Math.min(upto, ln.len) - 0.004, edge = arrowEvery * 0.35;
+    const d0 = arrowEvery * 0.5 + (ln.rev ? -1 : 1) * LIVE * arrowEvery / 3;   // one spacing every 3 s, along the field
+    for (let d = ((d0 % arrowEvery) + arrowEvery) % arrowEvery; d < lim; d += arrowEvery) {
+      const ha = smooth(d / edge) * smooth((lim - d) / edge); if (ha <= 0.01) continue;
       let i = 1; while (i < n - 1 && ln.cum[i] < d) i++;
       const u = (d - ln.cum[i - 1]) / Math.max(1e-9, ln.cum[i] - ln.cum[i - 1]);
       const wx = lerp(P[i - 1][0], P[i][0], u), wy = lerp(P[i - 1][1], P[i][1], u);
@@ -308,7 +322,7 @@
       if (x < -10 || x > L.W + 10 || y < -10 || y > L.H + 10) continue;
       let dx = V.X(P[i][0]) - V.X(P[i - 1][0]), dy = V.Y(P[i][1]) - V.Y(P[i - 1][1]);
       const m = Math.hypot(dx, dy) || 1; dx /= m; dy /= m; if (ln.rev) { dx = -dx; dy = -dy; }
-      g.globalCompositeOperation = 'source-over'; g.fillStyle = `rgba(${rgb},${0.95 * a})`;
+      g.globalCompositeOperation = 'source-over'; g.fillStyle = `rgba(${rgb},${0.95 * a * ha})`;
       g.beginPath(); g.moveTo(x + dx * head * 0.6, y + dy * head * 0.6);
       g.lineTo(x - dx * head * 0.6 - dy * head * 0.5, y - dy * head * 0.6 + dx * head * 0.5);
       g.lineTo(x - dx * head * 0.6 + dy * head * 0.5, y - dy * head * 0.6 - dx * head * 0.5); g.closePath(); g.fill();
@@ -527,23 +541,23 @@
   }
 
   Anim.register('efield', {
-    duration: DURATION,
-    poster: 54,
-    pauses: PAUSES,
+    duration: DURATION + WARP.extra,
+    poster: WARP.toReal(54),
     // score: crackling static (F-sharp minor, a square-wave pad with a tremolo, a faint hiss, a low drone)
     music: { chords: [[54, 61, 66, 69], [50, 57, 62, 66], [52, 59, 64, 68], [49, 56, 61, 64]], bar: 6, pad: 'square', cutoff: 900, tremolo: 3, drone: 0.09, wind: 0.2, volume: 0.71 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: {
-      KQ, E10, E20, F10, EP, CAPS, PAUSES, LINES, PLINES, PLATE, plateE, plateV, levelY, Y90, Y60,
+      KQ, E10, E20, F10, EP, CAPS, SPANS, WARP, LINES, PLINES, PLATE, plateE, plateV, levelY, Y90, Y60,
       check() {
         const [, ey] = plateE(0, 0);
         return { E10, E20, F10, radii: VLEV.map((v) => KQ / v), plateCentreE: -ey, Y90, Y60, spacing: Y90 - Y60,
           plateTop: plateV(0, PY), plateBottom: plateV(0, -PY), plateEdge: plateV(PH - 0.001, PY), vInf: PLATE.vInf,
-          maxCharsPerSec: Math.max(...CAPS.map(([a, b, txt]) => { const p = PAUSES.find((q) => q[0] > a && q[0] < b); return txt.length / (b - a - 1.0 + (p ? p[1] : 0)); })) };
+          maxCharsPerSec: Math.max(...CAPS.map(([a, b, txt]) => txt.length / (WARP.toReal(b) - WARP.toReal(a) - 1.0))) };
       },
     },
-    frame(s, t) {
+    frame(s, rt) {
+      const t = WARP.toStory(rt); LIVE = rt;
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
       D.background(s, 0.2);
       for (const part of PARTS) {
