@@ -1,27 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 220">
-  <!-- a flat metal washer lies on a tripod over a Bunsen flame; the flame has real colours, so they are hard-coded -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 226">
+  <!-- a flat metal washer lies on a gauze on a tripod over a Bunsen flame; the flame has real colours, so they are hard-coded -->
   <!-- bench -->
-  <line class="axis" x1="40" y1="204" x2="360" y2="204"/>
+  <line class="axis" x1="20" y1="214" x2="400" y2="214"/>
+  <!-- tripod: back leg first, then the two front legs -->
+  <line class="axis" x1="226" y1="84" x2="236" y2="206"/>
+  <line class="axis" x1="136" y1="84" x2="116" y2="214"/>
+  <line class="axis" x1="264" y1="84" x2="284" y2="214"/>
   <!-- Bunsen burner: base, barrel, collar -->
-  <path class="axis" d="M168 204 L178 184 H222 L232 204 Z" style="fill:var(--surface)"/>
-  <rect class="axis" x="192" y="118" width="16" height="66" style="fill:var(--surface)"/>
-  <rect class="axis" x="188" y="166" width="24" height="10" style="fill:var(--surface)"/>
-  <!-- flame: blue cone with a paler inner cone -->
-  <path d="M200 60 C214 84 216 104 200 118 C184 104 186 84 200 60 Z" style="fill:#4a86e8;stroke:none"/>
-  <path d="M200 86 C207 98 208 108 200 116 C192 108 193 98 200 86 Z" style="fill:#9fc5ff;stroke:none"/>
-  <!-- tripod: ring seen edge-on, three legs (one behind) -->
-  <line class="axis" x1="130" y1="62" x2="270" y2="62"/>
-  <line class="axis" x1="138" y1="62" x2="118" y2="204"/>
-  <line class="axis" x1="262" y1="62" x2="282" y2="204"/>
-  <line class="axis thin" x1="200" y1="62" x2="200" y2="40"/>
-  <!-- the washer: shown in perspective lying on the tripod, as a flat ring (ellipses) -->
-  <ellipse class="axis" cx="200" cy="56" rx="60" ry="14" style="fill:var(--surface)"/>
-  <ellipse class="axis" cx="200" cy="56" rx="26" ry="6" style="fill:var(--surface)"/>
+  <path class="axis" d="M172 214 L180 196 H220 L228 214 Z" style="fill:var(--surface)"/>
+  <rect class="axis" x="193" y="122" width="14" height="74" style="fill:var(--surface)"/>
+  <rect class="axis" x="189" y="176" width="22" height="10" style="fill:var(--surface)"/>
+  <!-- flame: blue cone with a paler inner cone, reaching up to the gauze -->
+  <path d="M200 86 C214 100 215 112 200 122 C185 112 186 100 200 86 Z" style="fill:#4a86e8;stroke:none"/>
+  <path d="M200 102 C206 109 207 115 200 121 C193 115 194 109 200 102 Z" style="fill:#9fc5ff;stroke:none"/>
+  <!-- wire gauze on top of the tripod, seen at a slant -->
+  <path class="axis" d="M146 62 H254 L280 84 H120 Z" style="fill:var(--surface)"/>
+  <path class="grid" d="M140.1 67 H259.9 M134.2 72 H265.8 M128.3 77 H271.7 M160 62 L140.7 84 M174 62 L161.5 84 M188 62 L182.2 84 M200 62 V84 M212 62 L217.8 84 M226 62 L238.5 84 M240 62 L259.3 84"/>
+  <!-- the washer lying on the gauze: rim, then top face with a see-through hole -->
+  <ellipse class="axis" cx="200" cy="75" rx="44" ry="9" style="fill:var(--surface)"/>
+  <path class="axis" d="M156 71 A44 9 0 1 0 244 71 A44 9 0 1 0 156 71 Z M182 71 A18 4 0 1 0 218 71 A18 4 0 1 0 182 71 Z" style="fill:var(--surface);fill-rule:evenodd"/>
+  <path class="axis thin" d="M182 74 A18 4 0 0 1 218 74"/>
   <!-- the same washer seen from above, at the left, so the hole is clear -->
-  <circle class="axis" cx="60" cy="56" r="38" style="fill:var(--surface)"/>
-  <circle class="axis" cx="60" cy="56" r="16" style="fill:var(--surface)"/>
-  <text x="60" y="118" text-anchor="middle">from above</text>
-  <!-- labels -->
-  <text x="412" y="46" text-anchor="end">metal washer</text>
-  <text x="412" y="150" text-anchor="end">heated evenly</text>
+  <circle class="axis" cx="56" cy="70" r="38" style="fill:var(--surface)"/>
+  <circle class="axis" cx="56" cy="70" r="16"/>
+  <text x="56" y="134" text-anchor="middle">from above</text>
+  <!-- labels with leader lines -->
+  <text x="312" y="40">washer</text>
+  <line class="axis" x1="308" y1="40" x2="238" y2="66" style="stroke-width:1"/>
+  <text x="312" y="108">gauze</text>
+  <line class="axis" x1="308" y1="103" x2="272" y2="80" style="stroke-width:1"/>
 </svg>

@@ -1,34 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230">
-  <!-- an open insulated box (thick double wall) holding ice cubes; a jug of steaming hot water is tipped above it, pouring in -->
-  <!-- insulated box: outer wall, inner wall -->
-  <path class="axis" d="M110 96 V194 H330 V96" style="fill:var(--surface)"/>
-  <path class="axis thin" d="M124 108 V182 H316 V108"/>
-  <line class="axis" x1="110" y1="96" x2="124" y2="96"/>
-  <line class="axis" x1="316" y1="96" x2="330" y2="96"/>
-  <!-- ice cubes inside (pale blue, slightly tilted blocks) -->
-  <rect class="area" x="138" y="150" width="34" height="30" rx="3"/>
-  <rect class="l1 thin" x="138" y="150" width="34" height="30" rx="3"/>
-  <rect class="area" x="178" y="154" width="34" height="26" rx="3"/>
-  <rect class="l1 thin" x="178" y="154" width="34" height="26" rx="3"/>
-  <rect class="area" x="226" y="152" width="36" height="28" rx="3"/>
-  <rect class="l1 thin" x="226" y="152" width="36" height="28" rx="3"/>
-  <rect class="area" x="268" y="156" width="32" height="24" rx="3"/>
-  <rect class="l1 thin" x="268" y="156" width="32" height="24" rx="3"/>
-  <rect class="area" x="158" y="124" width="34" height="28" rx="3"/>
-  <rect class="l1 thin" x="158" y="124" width="34" height="28" rx="3"/>
-  <rect class="area" x="242" y="126" width="34" height="28" rx="3"/>
-  <rect class="l1 thin" x="242" y="126" width="34" height="28" rx="3"/>
-  <!-- jug, tilted, above the box -->
-  <path class="axis" d="M226 22 L262 14 L296 58 L262 84 Z" style="fill:var(--surface)"/>
-  <path class="axis thin" d="M296 58 Q318 50 314 30 Q310 14 290 20"/>
-  <!-- stream of water from the spout into the box -->
-  <path class="l2" d="M228 24 Q218 60 214 104"/>
-  <!-- steam from the jug -->
-  <path class="l3 thin" d="M252 8 q6 -10 0 -18 M268 6 q6 -10 0 -18"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 254">
+  <!-- an open insulated box (thick walls) holding ice cubes; a jug of steaming hot water is tipped above it, pouring in -->
+  <!-- insulated box: thick shaded walls, open at the top -->
+  <path class="axis" d="M100 136 L114 122 M286 136 L300 122 M100 146 L114 132 M286 146 L300 132 M100 156 L114 142 M286 156 L300 142 M100 166 L114 152 M286 166 L300 152 M100 176 L114 162 M286 176 L300 162 M100 186 L114 172 M286 186 L300 172 M100 196 L114 182 M286 196 L300 182 M100 206 L114 192 M286 206 L300 192 M104 226 L116 214 M114 226 L126 214 M124 226 L136 214 M134 226 L146 214 M144 226 L156 214 M154 226 L166 214 M164 226 L176 214 M174 226 L186 214 M184 226 L196 214 M194 226 L206 214 M204 226 L216 214 M214 226 L226 214 M224 226 L236 214 M234 226 L246 214 M244 226 L256 214 M254 226 L266 214 M264 226 L276 214 M274 226 L286 214 M284 226 L296 214" style="stroke-width:1;opacity:0.55"/>
+  <path class="axis" d="M100 120 V226 H300 V120 H284 V212 H116 V120 Z"/>
+  <!-- ice cubes inside -->
+  <rect class="area" x="122" y="180" width="34" height="30" rx="3"/><rect class="l1 thin" x="122" y="180" width="34" height="30" rx="3"/>
+  <rect class="area" x="160" y="182" width="34" height="28" rx="3"/><rect class="l1 thin" x="160" y="182" width="34" height="28" rx="3"/>
+  <rect class="area" x="204" y="181" width="34" height="29" rx="3"/><rect class="l1 thin" x="204" y="181" width="34" height="29" rx="3"/>
+  <rect class="area" x="242" y="183" width="34" height="27" rx="3"/><rect class="l1 thin" x="242" y="183" width="34" height="27" rx="3"/>
+  <rect class="area" x="141" y="153" width="34" height="28" rx="3"/><rect class="l1 thin" x="141" y="153" width="34" height="28" rx="3"/>
+  <rect class="area" x="222" y="154" width="34" height="28" rx="3"/><rect class="l1 thin" x="222" y="154" width="34" height="28" rx="3"/>
+  <!-- stream of hot water from the spout down into the box -->
+  <path class="l2" d="M251 59 Q245 90 240 152"/>
+  <!-- jug, drawn upright about its centre, then tipped 50 degrees so the spout points down to the left -->
+  <g transform="translate(310 64) rotate(-50)">
+    <path class="axis" d="M-22 -40 L-34 -48 L-24 -30 L-26 34 Q-26 40 -20 40 H20 Q26 40 26 34 L22 -40 Z" style="fill:var(--surface)"/>
+    <path class="axis" d="M24 -26 C48 -26 48 16 25 16" style="stroke-width:4"/>
+    <line class="axis" x1="-22" y1="-40" x2="22" y2="-40"/>
+  </g>
+  <!-- steam rising from the jug -->
+  <path class="l3 thin" d="M262 38 q-6 -8 0 -16 q6 -8 0 -16 M280 22 q-6 -7 0 -12 q6 -6 0 -10"/>
   <!-- labels -->
-  <text x="20" y="44">1 kg water</text>
-  <text x="20" y="64">at 100 °C</text>
-  <text x="20" y="150">1 kg ice</text>
-  <text x="20" y="170">at 0 °C</text>
-  <text x="220" y="222" text-anchor="middle">insulated box</text>
+  <text x="20" y="56">1 kg water</text>
+  <text x="20" y="76">at 100 °C</text>
+  <line class="axis" x1="112" y1="66" x2="243" y2="96" style="stroke-width:1"/>
+  <text x="20" y="160">1 kg ice</text>
+  <text x="20" y="180">at 0 °C</text>
+  <line class="axis" x1="92" y1="168" x2="146" y2="168" style="stroke-width:1"/>
+  <text x="200" y="246" text-anchor="middle">insulated box</text>
 </svg>
