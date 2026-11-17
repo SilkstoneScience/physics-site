@@ -92,7 +92,6 @@
   const DEF = BS.map((b) => Math.round(deg(thetaOf(b))));
   const HEAD = traj(0, V4, -140);                          // starts just outside the view (its energy is still 5.0 MeV in all)
   const T_TURNS = [106.6, 112.6, 124.4], T_TURN1 = T_TURNS[0];
-  const L4 = T_TURNS.map((tt) => tt - HEAD.tTurn);
   const T_RAMP = [133.4, 138.4];
   const eAt = (t) => lerp(5.0, E_TOUCH, smooth((t - T_RAMP[0]) / (T_RAMP[1] - T_RAMP[0])));
 
@@ -125,9 +124,12 @@
     [133.0, 138.6, `(HL) Faster alpha particles get closer. At about ${Math.round(E_TOUCH)}${NB}MeV they would just reach the surface of the gold nucleus.`],
     [138.8, 144.8, '(HL) Then the short-range strong nuclear force acts too, and fewer are scattered at large angles than Rutherford\'s formula predicts.'],
   ];
-  // No pauses (teacher's decision): instead, while each caption is up the story runs more slowly, just enough for the
-  // caption to be read at no more than 16 characters a second (the fades count as unreadable), and the prediction gets
-  // at least 6 s more. The picture never stops: it just moves more slowly. rate = story seconds per real second.
+  // No pauses (teacher's decisions, 16 and 17 November 2026): while each caption is up the story clock runs more slowly,
+  // just enough for the caption to be read at no more than 16 characters a second (the fades count as unreadable), and
+  // the prediction gets at least 6 s more. Everything that MOVES (every alpha particle, the plum-pudding inset) runs on
+  // the real clock, so the motion always plays at the same speed; only the captions, fades and camera moves use the
+  // story clock. Each moving thing's start is converted with realOf, so it still arrives when its caption says.
+  // rate = story seconds per real second.
   const SEGS = CAPS.map(([a, b, txt]) => {
     let r = Math.min(1, (b - a - 0.6) / (txt.length / 16));
     if (txt.startsWith('Predict')) r = Math.min(r, (b - a) / (b - a + 6));
@@ -154,10 +156,12 @@
   const rnd = () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let x = Math.imul(seed ^ (seed >>> 15), 1 | seed);
     x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; };
   const RARE = [[33.2, 28], [34.0, -46], [34.9, 63], [35.8, -24], [36.6, 79], [38.3, 132], [40.1, -157], [41.9, 114]];
-  const STREAM = [];
-  for (let te = 6.0; te < 46.5; te += 0.13) STREAM.push({ te, th: ((rnd() - 0.5) * 6 + (rnd() - 0.5) * 3) * Math.PI / 180, dy: rnd() - 0.5 });
-  for (const [te, d] of RARE) STREAM.push({ te: te - 0.62, th: d * Math.PI / 180, dy: rnd() - 0.5, rare: true });
   const T_SRC = 0.62, T_RING = 0.5;                       // seconds from source to foil, and from foil to the screen
+  // te = when each one leaves the source, in REAL seconds: a steady stream, one every 0.13 s; the rare ones reach the foil
+  // at the story moments listed in RARE
+  const STREAM = [];
+  for (let te = realOf(6.0); te < realOf(46.5); te += 0.13) STREAM.push({ te, th: ((rnd() - 0.5) * 6 + (rnd() - 0.5) * 3) * Math.PI / 180, dy: rnd() - 0.5 });
+  for (const [te, d] of RARE) STREAM.push({ te: realOf(te) - T_SRC, th: d * Math.PI / 180, dy: rnd() - 0.5, rare: true });
 
   // ---------- layout ----------
   let L = null;
@@ -204,7 +208,7 @@
   };
 
   // ---------- part 1: the apparatus ----------
-  function drawPart1(s, t, a) {
+  function drawPart1(s, t, tr, a) {
     if (a <= 0) return;
     const { g } = s, { cx, cy, cR, ringR, fs, phone } = L;
     // the vacuum chamber
@@ -241,7 +245,7 @@
     // the alpha particles
     const ex = sx + bw * 0.82;
     for (const p of STREAM) {
-      const tt = t - p.te; if (tt < 0 || tt > T_SRC + T_RING + 1.6) continue;
+      const tt = tr - p.te; if (tt < 0 || tt > T_SRC + T_RING + 1.6) continue;
       if (p.rare && t < 32.8 - 0.62) continue;
       const fy = cy + p.dy * fh * 0.25;
       let x, y, hx, hy;
@@ -266,7 +270,7 @@
     // marks left on the screen (the record of where the alpha particles landed)
     g.globalCompositeOperation = 'lighter';
     for (const p of STREAM) {
-      if (t < p.te + T_SRC + T_RING || (p.rare && t < 32.8)) continue;
+      if (tr < p.te + T_SRC + T_RING || (p.rare && t < 32.8)) continue;
       const fy = cy + p.dy * fh * 0.25;
       g.fillStyle = `rgba(${SCREEN},${(p.rare ? 0.9 : 0.25) * a})`;
       g.beginPath(); g.arc(cx + ringR * Math.cos(p.th), fy - ringR * Math.sin(p.th), p.rare ? 2.6 : 1.6, 0, 7); g.fill();
@@ -283,7 +287,8 @@
   }
 
   // the plum pudding prediction, in an inset
-  function drawPudding(s, t, a) {
+  const PUD0 = realOf(16.6);
+  function drawPudding(s, t, tr, a) {
     if (a <= 0) return;
     const { g } = s, { inset: b, fs } = L;
     g.globalCompositeOperation = 'source-over';
@@ -303,7 +308,7 @@
     // alpha particles crossing it, turned by angles far too small to see
     const span = b.x1 - b.x0 - 16;
     for (let i = 0; i < 7; i++) {
-      const u = (((t - 16.6) * 0.45 + i / 7) % 1 + 1) % 1, x = b.x0 + 8 + span * u, y = cyp + (i - 3) * rp * 0.27;
+      const u = (((tr - PUD0) * 0.45 + i / 7) % 1 + 1) % 1, x = b.x0 + 8 + span * u, y = cyp + (i - 3) * rp * 0.27;
       D.glowLine(s, [[Math.max(b.x0 + 8, x - span * 0.12), y], [x, y]], ALPHA, 0.7 * a, 1.2);
       dot(s, x, y, 2, ALPHA, a, 2);
     }
@@ -311,14 +316,15 @@
   }
 
   // ---------- part 2: inside the foil ----------
-  const P2A = (() => {                                     // alpha particles crossing the atoms: [start time, row offset]
+  const P2A = (() => {                                     // alpha particles crossing the atoms: [start time (real s), row offset]
     const out = []; let sd = 7;
-    for (let i = 0; i < 18; i++) { sd = (sd * 16807) % 2147483647; out.push([49.4 + i * 0.9, (sd / 2147483647)]); }
+    for (let te = realOf(49.4); te < realOf(49.4 + 17 * 0.9) + 0.01; te += 0.9) { sd = (sd * 16807) % 2147483647; out.push([te, (sd / 2147483647)]); }
     return out;
   })();
   const DEFL = traj(-12, 1, -430, 440, 0.5);
   const TILT = 12 * Math.PI / 180;                                // the one close pass in part 2 (shape only; scaled)
-  function drawPart2(s, t, a) {
+  const TC2 = realOf(62.6);                                // when the close one is closest (real s)
+  function drawPart2(s, t, tr, a) {
     if (a <= 0) return;
     const { g } = s, { W, capTop, ra, fs } = L;
     const zoom = lerp(0.55, 1, smooth((t - 49.0) / 1.6));
@@ -345,7 +351,7 @@
     // the alpha particles: straight lines, rows chosen to miss the nuclei (as nearly all do)
     const speed = W * 0.32;
     for (const [ts, u] of P2A) {
-      const tt = t - ts; if (tt < 0) continue;
+      const tt = tr - ts; if (tt < 0) continue;
       const row = Math.floor(u * 5) - 2, y = cy0 + row * dy + (u * 5 % 1 > 0.5 ? 0.5 : -0.5) * dy * 0.9 * (0.4 + 0.6 * (u * 37 % 1));
       const x = -20 + speed * tt; if (x > W + 60) continue;
       D.glowLine(s, [[Math.max(-20, x - speed * 0.35), y], [x, y]], ALPHA, 0.6 * a, 1.2);
@@ -356,11 +362,10 @@
     // nucleus by at least 0.19 atom radii (as a real alpha particle would, it goes straight past them).
     const nxA = cx0, nyA = cy0;
     const sc = (R * 0.3) / D0F, TS = speed / sc;             // pixels per fm, and fm per scene second
-    const tc = 62.6;                                         // when it is closest
     const ca = Math.cos(TILT), sa = Math.sin(TILT);
     const toScr = ([px, py]) => [nxA + (px * ca - py * sa) * sc, nyA - (px * sa + py * ca) * sc];
-    if (t > tc - 3.4 && t < tc + 4.5) {
-      const tt = (t - tc) * TS + DEFL.tTurn, t0 = tt - 0.9 * TS;  // a tail, like the others, up to the head only
+    if (tr > TC2 - 3.4 && tr < TC2 + 4.5) {
+      const tt = (tr - TC2) * TS + DEFL.tTurn, t0 = tt - 0.9 * TS;  // a tail, like the others, up to the head only
       const pts = [];
       for (let k = 0; k <= 60; k++) pts.push(toScr(DEFL.at(lerp(t0, tt, k / 60))));
       D.glowLine(s, pts, ALPHA, 0.8 * a, 1.4);
@@ -382,14 +387,15 @@
     gr.addColorStop(0, `rgba(255,240,190,${a})`); gr.addColorStop(1, `rgba(${GOLD},${a})`);
     g.globalCompositeOperation = 'source-over'; g.fillStyle = gr; g.beginPath(); g.arc(v.nx, v.ny, Math.max(1, rpx), 0, 7); g.fill();
   }
-  function drawPart3(s, t, a) {
+  const L3R = L3.map(realOf);                              // launch times in real seconds
+  function drawPart3(s, t, tr, a) {
     if (a <= 0) return;
     const { g } = s, { W, capTop, fs, phone } = L, v = view(t);
     const X = (x) => v.nx + x * v.sc, Y = (y) => v.ny - y * v.sc;
     const pa = a * (1 - smooth((t - 101.6) / 1.4));          // the six paths fade before part 4
     if (pa > 0) {
       PATHS.forEach((p, i) => {
-        const tt = t - L3[i]; if (tt < 0) return;
+        const tt = tr - L3R[i]; if (tt < 0) return;
         // where it was aimed (dashed)
         D.line(s, X(-500), Y(p.bF), X(500), Y(p.bF), C.muted, 0.16 * pa, 1, [4, 6]);
         const n = Math.min(p.T.length - 1, Math.floor(tt / p.dtS));
@@ -438,7 +444,8 @@
     }
   }
 
-  function drawPart4(s, t, a) {
+  const L4R = T_TURNS.map((tt) => realOf(tt) - HEAD.tTurn); // launch times in real seconds: each turns at its caption's moment
+  function drawPart4(s, t, tr, a) {
     if (a <= 0) return;
     const { g } = s, { fs, phone, W } = L, v = view(t);
     const X = (x) => v.nx + x * v.sc, Y = (y) => v.ny - y * v.sc;
@@ -448,8 +455,8 @@
     // the head-on alpha particle (three runs)
     let cur = null;
     const xEdge = -v.nx / v.sc;                              // the left edge of the picture, in fm
-    for (const L0 of L4) {
-      const tt = t - L0; if (tt < 0 || tt > HEAD.tEnd + 1) continue;
+    for (const L0 of L4R) {
+      const tt = tr - L0; if (tt < 0 || tt > HEAD.tEnd + 1) continue;
       const [hx] = HEAD.at(tt);
       const pts = [];
       const n = Math.min(HEAD.T.length - 1, Math.floor(tt / HEAD.dtS));
@@ -570,11 +577,11 @@
       if (!L || L.W !== s.W || L.H !== s.H) layout(s);
       const t = tauOf(tr);                                   // story time
       D.background(s, 0.2);
-      drawPart1(s, t, fade(t, P1[0], P1[1], 0.6, 0.8));
-      drawPudding(s, t, fade(t, 16.6, 27.6, 0.6, 0.6));
-      drawPart2(s, t, fade(t, P2[0], P2[1], 0.8, 0.8));
-      drawPart3(s, t, fade(t, P3[0], P3[1], 0.8, 0.6));
-      drawPart4(s, t, fade(t, 102.8, P3[1], 0.8, 0.6));
+      drawPart1(s, t, tr, fade(t, P1[0], P1[1], 0.6, 0.8));
+      drawPudding(s, t, tr, fade(t, 16.6, 27.6, 0.6, 0.6));
+      drawPart2(s, t, tr, fade(t, P2[0], P2[1], 0.8, 0.8));
+      drawPart3(s, t, tr, fade(t, P3[0], P3[1], 0.8, 0.6));
+      drawPart4(s, t, tr, fade(t, 102.8, P3[1], 0.8, 0.6));
       if (t > P2[0] && t < P3[1]) {
         D.legend(s, t > 102.6 ? [] : [['dot', ALPHA, 'alpha particle (+2e)'], ['dot', GOLD, 'gold nucleus (+79e)'], ...(t < 67.6 ? [['dot', EL, 'electron']] : []), ...(t > 73 && t < 88.6 ? [['arrow', C.force, 'electric force on it']] : [])],
           fade(t, P2[0] + 0.4, 102.6, 0.6, 0.6));

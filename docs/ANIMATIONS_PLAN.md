@@ -39,7 +39,7 @@ lines, smooth camera moves and one caption at a time. Each one loops.
   picture). Reading time is scene time at the normal speed: things that move anyway carry on; a process with no natural speed
   (a graph drawing itself, a quasi-static change, a path being traced) may take longer; where a caption describes an exact
   moment, a faint marker or label stays pinned at that moment while the motion continues (or the event happens again).
-  Rutherford was converted earlier by slowing the story during captions (16 November); the rest play at a constant speed.
+  Every animation, Rutherford included (17 November 2026), keeps its motion on the real clock, so it always plays at the same speed.
 - **Music** (teacher's request, 15 November 2026): gentle background music generated live by `js/anim/music.js` with the
   browser's Web Audio API (a soft pad, a low drone, wind and reverb), so there
   are no audio files to license. Each scene sets its own mood with `music: { chords, bar, pad, cutoff, drone, … }`.
@@ -152,7 +152,7 @@ Theme D (batch 4)
 
 Theme E (built 16 November 2026; waiting for the teacher's check)
 - [x] E.1 Rutherford scattering: `rutherford.html` (no pauses: teacher, 16 November 2026, "shouldn't have any pauses", so it is
-  re-timed to keep moving while each caption is read; the apparatus and what was seen; exact Coulomb paths past one gold nucleus,
+  re-timed to keep moving while each caption is read, and since 17 November 2026 every alpha particle moves on the real clock, at a constant speed; the apparatus and what was seen; exact Coulomb paths past one gold nucleus,
   tan(θ/2) = d/2b; (HL) 5.0 MeV head-on: d = 4.5 × 10⁻¹⁴ m, R = 7.0 × 10⁻¹⁵ m, about 33 MeV to reach the surface)
 - [x] E.1 Energy levels and spectra: `energy-levels.html` (hydrogen levels to scale; Balmer lines from hc/ΔE, drawn at the
   measured wavelengths; absorption by gas with some atoms in n = 2; the Bohr formula only on the HL end-card row)
