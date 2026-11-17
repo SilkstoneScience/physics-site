@@ -295,8 +295,28 @@
   Anim.register('superpose', {
     duration: DURATION,
     poster: 70,
-    // score: a quiet concert hall (A major, a triangle pad, a low drone, a soft shimmer, a slow swell)
-    music: { chords: [[45, 52, 57, 61], [42, 49, 54, 57], [38, 45, 50, 54], [40, 47, 52, 56]], bar: 9, pad: 'triangle', cutoff: 800, drone: 0.09, shimmer: 0.2, tremolo: 0.2, volume: 0.57 },
+    // score: a quiet concert hall (A major, a triangle pad, a low drone, a soft shimmer, a slow swell) that follows the
+    // story (teacher's request, 17 November 2026: suggest what is on screen, pleasant first, not exact): calm pulses, a
+    // swell where crest meets crest and a hush where crest meets trough; then a soft A (220 Hz) beating 3 times a second
+    // against a twin, the beats slowing to nothing as the string is tuned; then the A gaining the harmonics drawn on
+    // screen (AMP_A), and the other instrument's mix (AMP_B) for timbre. Chords here all contain A, so the tone fits.
+    music: (() => {
+      const ACH = [[45, 52, 57, 61], [42, 49, 54, 57], [38, 45, 50, 54], [47, 50, 54, 57]];
+      const A = (more) => ({ note: 57, level: 0.045, ...more });
+      return { chords: [[45, 52, 57, 61], [42, 49, 54, 57], [38, 45, 50, 54], [40, 47, 52, 56]], bar: 9, chordBeats: 4,
+        pad: 'triangle', cutoff: 800, drone: 0.09, shimmer: 0.2, tremolo: 0.2, volume: 0.57,
+        sections: [
+          [0, { groove: 0, cutoff: 650 }],
+          [P2, { groove: 0.35, chords: ACH, tone: A({ beat: 3 }) }],
+          [TUNE0, { groove: 0.35, chords: ACH, tone: A({ beat: 3, beatTo: 0 }) }],
+          [TUNE1, { groove: 0.35, chords: ACH, tone: A({}) }],
+          [99.2, { groove: 0.5, chords: ACH, tone: A({ harmonics: [1, 0.5] }) }],
+          [105.2, { groove: 0.5, chords: ACH, tone: A({ harmonics: AMP_A }) }],
+          [MIXB, { groove: 0.5, chords: ACH, tone: A({ harmonics: AMP_B }) }],
+          [END_CARD, { groove: 1, tone: null }],
+        ],
+        events: [[meet1, 'swell', 1], [meet2, 'dip', 1]] };
+    })(),
     resize: layout,
     info: {
       CAPS, meet1, meet2, BEAT, PERIOD_MS, AMP_A, AMP_B,

@@ -59,6 +59,15 @@ lines, smooth camera moves and one caption at a time. Each one loops.
   5–6 s, set from each score's `bar`) and quicker fades. The first chord of each piece has no groove, so it starts gently.
   `groove: 0` brings back the old sound. `tools/music-test.html` (not published) plays any score before and after, at the
   same loudness, with a slider for the groove level. Volumes were rebalanced to RMS about 0.055 again.
+  **A score can follow the animation** (teacher, 17 November 2026, for superposition and music: "can the music change to
+  represent what's being displayed? … the importance is pleasant audio"): the player tells the music the scene time every
+  frame, and a score may have `sections` (from a scene time on, different chords, groove, cutoff or a soft sustained `tone`
+  with chosen `harmonics` and an optional `beat` that can slide to 0) and `events` (a brief 'swell' or 'dip' at a moment).
+  Changes land at the next chord, so they suggest the picture rather than match it exactly. First used in
+  `superpose.js`: calm pulses, a swell where crest meets crest and a hush where crest meets trough, a soft A beating 3 times
+  a second that slows to nothing as the string is tuned, then the A gaining the harmonics drawn on screen and, for timbre,
+  the other instrument's mix. `AnimMusic.test(opts, seconds, from)` renders a score as if the animation started at `from`,
+  and `trace` gives its loudness over time; `tools/music-test.html` has a "Start at" box for such scores.
 - **Click or tap the picture to pause or play** (teacher, 16 November 2026).
 - **Speed and seeking** (teacher, 16 November 2026; built the same day in the shared player, so every animation has them):
   a speed button (1× → 1.5× → 2×, not remembered between visits) where the `pauses` holds speed up with everything

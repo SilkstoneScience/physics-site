@@ -304,6 +304,7 @@
       const real = T();
       s.clock = performance.now() / 1000;    // keeps gentle background motion going during a pause
       if (!tiny()) scene.frame(s, tm.toScene(real));
+      if (music && music.follow) music.follow(tm.toScene(real));   // scores with sections follow the animation
       bar.style.transform = `scaleX(${real / tm.total})`;
       if (!dragging) scrub.value = real / tm.total * 1000;
       const sec = Math.floor(real), all = Math.floor(tm.total);
