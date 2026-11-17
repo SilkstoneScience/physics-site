@@ -1,21 +1,38 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
   <!-- ground -->
-  <line class="axis" x1="10" y1="180" x2="390" y2="180"/>
-  <!-- pylon 1: lattice tower with two cross-arms -->
-  <path class="axis thin" d="M60 180 L74 50 H86 L100 180 M66 130 H94 M70 95 H90 M62 150 L92 130 M68 130 L92 110 M70 110 L90 95 M72 95 L88 70"/>
-  <path class="axis" d="M50 78 H110 M56 100 H104"/>
-  <!-- pylon 2 -->
-  <path class="axis thin" d="M230 180 L244 50 H256 L270 180 M236 130 H264 M240 95 H260 M232 150 L262 130 M238 130 L262 110 M240 110 L260 95 M242 95 L258 70"/>
-  <path class="axis" d="M220 78 H280 M226 100 H274"/>
-  <!-- sagging cables between the arms, and on to the left and right -->
-  <path class="l1" d="M50 78 Q140 108 220 78 M110 78 Q165 108 220 78 M56 100 Q140 128 226 100 M104 100 Q165 128 226 100"/>
-  <path class="l1" d="M0 70 Q25 84 50 78 M280 78 Q310 92 340 84 M274 100 Q310 114 340 108"/>
-  <!-- small transformer/house at the right -->
-  <path class="axis" d="M335 180 V140 L360 118 L385 140 V180 Z" style="fill:var(--surface)"/>
-  <rect class="axis thin" x="352" y="156" width="16" height="24" style="fill:var(--surface)"/>
-  <line class="l1 thin" x1="340" y1="84" x2="340" y2="140"/>
+  <line class="axis" x1="0" y1="184" x2="400" y2="184"/>
+  <!-- two transmission lines (conductors), seen from the side: they sag between the pylons -->
+  <path class="l1" d="M0 80 Q16 87 32 70 M0 128 Q17 135 34 118"/>
+  <path class="l1" d="M88 70 Q132.5 110 177 70 M86 118 Q132.5 158 179 118"/>
+  <path class="l1" d="M233 70 Q247.5 121 262 148 M231 118 Q246.5 150 262 166"/>
+  <path class="axis" d="M44 184 L55 40 H65 L76 184 M55 40 L60 30 L65 40"/>
+  <path class="axis thin" d="M55 40 L66.7 62 M53.3 62 H66.7 M66.7 62 L51.5 86 M51.5 86 H68.5 M51.5 86 L70.3 110 M49.7 110 H70.3 M70.3 110 L48.1 130 M48.1 130 H71.9 M48.1 130 L73.9 156 M46.1 156 H73.9 M73.9 156 L44 184 M44 184 H76"/>
+  <path class="axis" d="M32 62 H88 M32 62 L52.7 70 M88 62 L67.3 70"/>
+  <path class="axis thin" d="M32 62 V70 M29.5 65 H34.5 M29.5 68 H34.5"/>
+  <path class="axis thin" d="M88 62 V70 M85.5 65 H90.5 M85.5 68 H90.5"/>
+  <path class="axis" d="M34 110 H86 M34 110 L49 118 M86 110 L71 118"/>
+  <path class="axis thin" d="M34 110 V118 M31.5 113 H36.5 M31.5 116 H36.5"/>
+  <path class="axis thin" d="M86 110 V118 M83.5 113 H88.5 M83.5 116 H88.5"/>
+  <path class="axis" d="M189 184 L200 40 H210 L221 184 M200 40 L205 30 L210 40"/>
+  <path class="axis thin" d="M200 40 L211.7 62 M198.3 62 H211.7 M211.7 62 L196.5 86 M196.5 86 H213.5 M196.5 86 L215.3 110 M194.7 110 H215.3 M215.3 110 L193.1 130 M193.1 130 H216.9 M193.1 130 L218.9 156 M191.1 156 H218.9 M218.9 156 L189 184 M189 184 H221"/>
+  <path class="axis" d="M177 62 H233 M177 62 L197.7 70 M233 62 L212.3 70"/>
+  <path class="axis thin" d="M177 62 V70 M174.5 65 H179.5 M174.5 68 H179.5"/>
+  <path class="axis thin" d="M233 62 V70 M230.5 65 H235.5 M230.5 68 H235.5"/>
+  <path class="axis" d="M179 110 H231 M179 110 L194 118 M231 110 L216 118"/>
+  <path class="axis thin" d="M179 110 V118 M176.5 113 H181.5 M176.5 116 H181.5"/>
+  <path class="axis thin" d="M231 110 V118 M228.5 113 H233.5 M228.5 116 H233.5"/>
+  <!-- the 400 kV is between the two lines -->
+  <line class="l1 thin" x1="132.5" y1="102" x2="132.5" y2="93" marker-end="url(#ah1)"/>
+  <line class="l1 thin" x1="132.5" y1="125" x2="132.5" y2="135" marker-end="url(#ah1)"/>
+  <text class="t1" x="132.5" y="119" text-anchor="middle" style="font-size:14px">400 kV</text>
+  <!-- substation, with a transformer symbol, then a low-voltage line to a house -->
+  <rect class="axis" x="262" y="138" width="44" height="46" style="fill:var(--surface)"/>
+  <circle class="axis thin" cx="279" cy="160" r="8" style="fill:none"/>
+  <circle class="axis thin" cx="289" cy="160" r="8" style="fill:none"/>
+  <path class="axis thin" d="M306 158 Q323 166 342 160"/>
+  <path class="axis" d="M342 184 V150 L364 130 L386 150 V184 Z" style="fill:var(--surface)"/>
+  <rect class="axis thin" x="358" y="164" width="12" height="20" style="fill:var(--surface)"/>
   <!-- labels -->
-  <text class="t1" x="165" y="44" text-anchor="middle">400 kV</text>
-  <text class="t1" x="165" y="62" text-anchor="middle" style="font-size:14px">between lines</text>
-  <text x="360" y="198" text-anchor="middle" style="font-size:14px">to users</text>
+  <text x="284" y="198" text-anchor="middle" style="font-size:13px">substation</text>
+  <text x="400" y="198" text-anchor="end" style="font-size:13px">to users</text>
 </svg>
