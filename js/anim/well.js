@@ -437,7 +437,7 @@
     poster: 108.5,
     // score: orbiting (E-flat lydian, a soft sine pad, a soft shimmer, a little space wind)
     music: { chords: [[51, 58, 62, 67], [53, 57, 60, 65], [48, 55, 58, 62], [46, 53, 57, 62]], bar: 10, pad: 'sine', cutoff: 900, drone: 0.09,
-      shimmer: 0.3, wind: 0.3, volume: 0.29 },
+      shimmer: 0.3, wind: 0.3, volume: 0.27 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { GM, RE, MS, sat, energy, CAPS, T_S, T_B1, T_B2, T_B3, END_CARD, P1, P2, PT },

@@ -392,7 +392,7 @@
     duration: DURATION,
     poster: cap(9)[0] + 2,
     // score: the dark (B-flat minor, a low triangle pad, a deep drone, wind, a faint shimmer)
-    music: { chords: [[34, 41, 46, 49], [30, 37, 42, 46], [32, 39, 44, 47], [29, 36, 41, 44]], bar: 11, pad: 'triangle', cutoff: 620, drone: 0.15, wind: 0.4, shimmer: 0.12, tremolo: 0.1, volume: 0.46 },
+    music: { chords: [[34, 41, 46, 49], [30, 37, 42, 46], [32, 39, 44, 47], [29, 36, 41, 44]], bar: 11, pad: 'triangle', cutoff: 620, drone: 0.15, wind: 0.4, shimmer: 0.12, tremolo: 0.1, volume: 0.52 },
     resize: layout,
     info: {
       CAPS, SEC, END, squeeze,

@@ -248,7 +248,7 @@
     duration: DURATION,
     poster: 36,
     // score: bright and moving (C major, a triangle pad, a soft shimmer)
-    music: { chords: [[48, 55, 60, 64], [47, 55, 59, 62], [45, 52, 57, 60], [41, 48, 57, 60]], bar: 4, pad: 'triangle', cutoff: 900, drone: 0.09, shimmer: 0.2, volume: 0.43 },
+    music: { chords: [[48, 55, 60, 64], [47, 55, 59, 62], [45, 52, 57, 60], [41, 48, 57, 60]], bar: 4, pad: 'triangle', cutoff: 900, drone: 0.09, shimmer: 0.2, volume: 0.41 },
     resize: layout,
     frame(s, t) {
       D.background(s, 0.25);

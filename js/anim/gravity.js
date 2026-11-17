@@ -488,7 +488,7 @@
     duration: DURATION,
     poster: cap('meet')[0] + 4,
     // score: a quiet wonder (A-flat major / F minor, a soft sine pad, a light drone, a little wind, a slow shimmer)
-    music: { chords: [[40, 47, 52, 56], [37, 44, 49, 53], [39, 46, 51, 55], [44, 51, 56, 60]], bar: 9, pad: 'sine', cutoff: 760, drone: 0.08, wind: 0.25, shimmer: 0.2, tremolo: 0.08, volume: 0.4 },
+    music: { chords: [[40, 47, 52, 56], [37, 44, 49, 53], [39, 46, 51, 55], [44, 51, 56, 60]], bar: 9, pad: 'sine', cutoff: 760, drone: 0.08, wind: 0.25, shimmer: 0.2, tremolo: 0.08, volume: 0.38 },
     resize: layout,
     info: {
       CAPS, SEC, END,

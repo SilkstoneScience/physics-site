@@ -380,7 +380,7 @@
     duration: DURATION,
     poster: S_LIFT + 8,
     // score: lift-off (B-flat major, a warm saw pad, a low drone, a deep rumble of wind, a slow swell)
-    music: { chords: [[46, 53, 58, 62], [43, 50, 55, 58], [39, 46, 51, 55], [41, 48, 53, 57]], bar: 9, pad: 'saw', cutoff: 800, drone: 0.12, wind: 0.5, tremolo: 0.3, volume: 0.65 },
+    music: { chords: [[46, 53, 58, 62], [43, 50, 55, 58], [39, 46, 51, 55], [41, 48, 53, 57]], bar: 9, pad: 'saw', cutoff: 800, drone: 0.12, wind: 0.5, tremolo: 0.3, volume: 0.78 },
     resize: layout,
     info: { SIM, st, tauOf, sceneOf, CAPS, S_LIFT, S_FULL, S_OFF, S_TOP, S_DRAG, S_500, TAU_500, check() {
       const s0 = st(0), sF = st(RAMP), sE = st(SIM.tOff - 0.5), sT = st(SIM.tauTop);

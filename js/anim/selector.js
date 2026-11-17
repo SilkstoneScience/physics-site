@@ -543,7 +543,7 @@
     poster: real(134),
     // score: precise machinery (D dorian, a triangle pad with a slow, even swell, a low drone)
     music: { chords: [[50, 57, 60, 65], [55, 59, 62, 67], [45, 52, 57, 60], [48, 55, 60, 64]], bar: 6, pad: 'triangle', cutoff: 900,
-      drone: 0.09, tremolo: 0.8, volume: 0.54 },
+      drone: 0.09, tremolo: 0.8, volume: 0.52 },
     resize: layout,
     info: { check, ion, ionAt, ionDone, CAPS, PART2, SERIES, H20, H22, STREAM, e1Y, HOLDS, story, real, DURATION, K2, E1_EVERY, E2_EVERY, T_E1, T_E2 },
     frame(s, tScene) {

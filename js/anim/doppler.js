@@ -556,7 +556,7 @@
     duration: DUR_R,
     poster: realOf(50) + 1.5,
     // score: passing by (E major, a warm saw pad, a low drone, a little wind and shimmer)
-    music: { chords: [[52, 59, 64, 68], [49, 56, 61, 64], [45, 52, 57, 61], [47, 54, 59, 63]], bar: 6, pad: 'saw', cutoff: 900, drone: 0.09, shimmer: 0.2, wind: 0.3, volume: 0.71 },
+    music: { chords: [[52, 59, 64, 68], [49, 56, 61, 64], [45, 52, 57, 61], [47, 54, 59, 63]], bar: 6, pad: 'saw', cutoff: 900, drone: 0.09, shimmer: 0.2, wind: 0.3, volume: 0.77 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { P, V, U, F_AHEAD, F_BEHIND, F_OBS, XA, XB, xsB1, xsB2, xcC, T_PASS_R, C_T0, zAt, CAPS: CAPS_R, frontsOf, lastArrivalB, realOf, storyOf, DUR_R },

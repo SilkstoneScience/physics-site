@@ -450,7 +450,7 @@
     duration: DURATION,
     poster: 50,
     // score: electric flow (B minor, a low buzzing pad with tremolo, a low drone)
-    music: { chords: [[47, 54, 59, 62], [43, 50, 55, 59], [50, 57, 62, 66], [45, 52, 57, 61]], bar: 6, pad: 'saw', cutoff: 800, tremolo: 3, drone: 0.09, volume: 0.79 },
+    music: { chords: [[47, 54, 59, 62], [43, 50, 55, 59], [50, 57, 62, 66], [45, 52, 57, 61]], bar: 6, pad: 'saw', cutoff: 800, tremolo: 3, drone: 0.09, volume: 0.86 },
     // no pauses (teacher, 17 November 2026): the Predict caption and the end card simply stay longer while the electrons keep moving
     resize: layout,
     frame(s, t) {

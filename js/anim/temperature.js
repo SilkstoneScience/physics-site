@@ -497,7 +497,7 @@
     duration: DURATION,
     poster: at(K_TEMP) + 2,
     // score: warmth (E-flat, a soft triangle pad, a low drone, a little wind and shimmer)
-    music: { chords: [[39, 46, 51, 55], [44, 51, 55, 58], [41, 48, 51, 56], [46, 53, 56, 60]], bar: 10, pad: 'triangle', cutoff: 850, drone: 0.1, wind: 0.35, shimmer: 0.2, tremolo: 0.15, volume: 0.52 },
+    music: { chords: [[39, 46, 51, 55], [44, 51, 55, 58], [41, 48, 51, 56], [46, 53, 56, 60]], bar: 10, pad: 'triangle', cutoff: 850, drone: 0.1, wind: 0.35, shimmer: 0.2, tremolo: 0.15, volume: 0.53 },
     resize: layout,
     info: {
       CAPS, tGas, tTh, get tPlateOff() { return tPlateOff; }, DURATION,

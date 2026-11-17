@@ -343,7 +343,7 @@
     duration: DURATION,
     poster: realOf(21),
     // score: race-day tension (D major, a square-wave pad with a steady flutter, a low drone)
-    music: { chords: [[50, 57, 62, 66], [47, 54, 59, 62], [43, 50, 55, 59], [45, 52, 57, 61]], bar: 5, pad: 'square', cutoff: 900, drone: 0.09, tremolo: 1.5, volume: 0.73 },
+    music: { chords: [[50, 57, 62, 66], [47, 54, 59, 62], [43, 50, 55, 59], [45, 52, 57, 61]], bar: 5, pad: 'square', cutoff: 900, drone: 0.09, tremolo: 1.5, volume: 0.77 },
     resize: layout,
     info: { story, realOf, WAITS, CAPS, PHASES, SHAPES, SLOW },
     frame(s, tr) {

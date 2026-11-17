@@ -123,7 +123,7 @@
     duration: DURATION,
     poster: realOf(40),
     // score: calm and precise (pure tones, a low drone, a soft shimmer)
-    music: { chords: [[53, 57, 60, 64, 67], [50, 57, 60, 64, 65], [46, 53, 57, 62, 64], [48, 55, 57, 62, 64]], bar: 8, pad: 'sine', cutoff: 900, drone: 0.09, shimmer: 0.3, volume: 0.31 },
+    music: { chords: [[53, 57, 60, 64, 67], [50, 57, 60, 64, 65], [46, 53, 57, 62, 64], [48, 55, 57, 62, 64]], bar: 8, pad: 'sine', cutoff: 900, drone: 0.09, shimmer: 0.3, volume: 0.29 },
     resize,
     info: { story, realOf, WAITS, CAPS, STORY },
     frame(s, tr) {

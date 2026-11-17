@@ -9,14 +9,19 @@
    - wind: level of a slowly swelling filtered-noise "space wind"; shimmer: level of a high glistening layer
    - tick: seconds between soft clock ticks; pulse: seconds between soft low heartbeat-like pulses
    - tremolo: speed (Hz) of a gentle wobble in the pad's volume; echo: delay time (s); volume: overall level
-   Teacher's decision (16 November 2026): the music is low and atmospheric only, so no score uses bells, arp, tick or
-   pulse (no "pinging"), and pad cutoffs stay at 900 Hz or below. See docs/ANIMATIONS_PLAN.md. */
+   - groove: level of a soft rhythm under the pad (a warm low bass line, a muted kick on the main beats and a very quiet
+     brushed off-beat); 0 = none, which also brings back the old slow timing (one chord every `bar` seconds).
+     bpm: its tempo (0 = from `bar`: 92 for bar 8 down to 80 for bar 12); with a groove each chord lasts 8 beats.
+   Teacher's decisions: the music is low and atmospheric, with no "pinging" (16 November 2026), so no score uses bells,
+   arp, tick or pulse, and pad cutoffs stay at 900 Hz or below; but "a little more upbeat, still lowkey" (17 November
+   2026), so every score has the soft groove, quicker chord changes and quicker fades. The first chord of each piece has
+   no groove, so the music still starts gently. See docs/ANIMATIONS_PLAN.md. */
 (() => {
   'use strict';
   const hz = (n) => 440 * Math.pow(2, (n - 69) / 12);
   const DEFAULT = { chords: [[57, 64, 67, 71], [53, 60, 64, 69], [48, 55, 60, 64], [55, 59, 62, 67]], bar: 8, pad: 'saw',
     cutoff: 900, drone: 0.09, bells: 0, bellType: 'sine', bellOct: 1, arp: 0, arpMode: 'up', wind: 0, shimmer: 0,
-    tick: 0, pulse: 0, tremolo: 0, echo: 0.43, volume: 0.6 };
+    tick: 0, pulse: 0, tremolo: 0, echo: 0.43, groove: 1, bpm: 0, volume: 0.6 };
   const PAD_LEVEL = { saw: 1, square: 0.75, triangle: 2.2, sine: 2.8 };
   const OSC = { saw: 'sawtooth', square: 'square', triangle: 'triangle', sine: 'sine' };
 
@@ -73,6 +78,18 @@
       src.connect(bp).connect(wg).connect(vol); src.start();
     }
 
+    // the groove: tempo, chord length and a low-pass for the bass line
+    const lift = o.groove > 0;
+    const bpm = o.bpm || Math.max(80, Math.min(92, Math.round(92 - (o.bar - 8) * 3)));
+    const beat = 60 / bpm, len = lift ? 8 * beat : o.bar;   // seconds per chord
+    const bassF = ac.createBiquadFilter(); bassF.type = 'lowpass'; bassF.frequency.value = 420; bassF.Q.value = 0.7; bassF.connect(vol);
+    const brushF = ac.createBiquadFilter(); brushF.type = 'bandpass'; brushF.frequency.value = 3200; brushF.Q.value = 0.8; brushF.connect(vol);
+    const nBuf = (() => {                          // a short burst of noise for the brushed off-beat
+      const n = Math.floor(ac.sampleRate * 0.2), b = ac.createBuffer(1, n, ac.sampleRate), d = b.getChannelData(0);
+      let sd = 11; for (let i = 0; i < n; i++) d[i] = ((sd = (sd * 16807) % 2147483647) / 2147483647) * 2 - 1;
+      return b;
+    })();
+
     let seed = 17; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
     const chordAt = (k) => o.chords[((k % o.chords.length) + o.chords.length) % o.chords.length];
 
@@ -87,14 +104,14 @@
       for (const n of notes) for (const det of [-7, 6]) {
         const osc = ac.createOscillator(), g = ac.createGain();
         osc.type = OSC[o.pad] || 'sawtooth'; osc.frequency.value = hz(n); osc.detune.value = det;
-        env(g, t, peak, len * 0.45, len, len * 0.6);
+        env(g, t, peak, len * (lift ? 0.3 : 0.45), len, len * 0.6);
         osc.connect(g).connect(filt); osc.start(t); osc.stop(t + len * 1.65);
       }
       if (o.drone > 0) {
         let low = Math.min(...notes); while (low > 45) low -= 12;
         const osc = ac.createOscillator(), g = ac.createGain();
         osc.type = 'sine'; osc.frequency.value = hz(low);
-        env(g, t, o.drone, len * 0.5, len, len * 0.6);
+        env(g, t, o.drone * (lift ? 0.6 : 1), len * 0.5, len, len * 0.6);
         osc.connect(g).connect(vol); osc.start(t); osc.stop(t + len * 1.65);
       }
       if (o.shimmer > 0) {                         // two very high, slightly detuned voices: a glistening halo
@@ -130,6 +147,35 @@
       g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.05, t + 0.003); g.gain.exponentialRampToValueAtTime(0.0005, t + 0.07);
       osc.connect(bp).connect(g).connect(bells); osc.start(t); osc.stop(t + 0.1);
     }
+    // the groove, one chord (8 beats = 16 half-beat steps) at a time: [step, interval above the root, level]
+    const BASS = [[0, 0, 1], [3, 0, 0.55], [6, 7, 0.7], [8, 0, 0.9], [11, 0, 0.55], [14, 7, 0.65]];
+    const KICK = [[0, 1], [4, 0.6], [8, 0.85], [12, 0.6]];
+    const BRUSH = [[2, 1], [6, 0.8], [10, 1], [14, 0.8]];
+    function groove(t, notes) {
+      const step = beat / 2, lv = o.groove;
+      let root = Math.min(...notes); while (root > 47) root -= 12; while (root < 36) root += 12;
+      for (const [s, iv, a] of BASS) {               // a warm, rounded bass note
+        const tt = t + s * step, osc = ac.createOscillator(), g = ac.createGain();
+        osc.type = 'triangle'; osc.frequency.value = hz(root + iv);
+        g.gain.setValueAtTime(0, tt); g.gain.linearRampToValueAtTime(0.24 * lv * a, tt + 0.015);
+        g.gain.exponentialRampToValueAtTime(0.0005, tt + Math.min(0.9, step * 2.6));
+        osc.connect(g).connect(bassF); osc.start(tt); osc.stop(tt + 1);
+      }
+      for (const [s, a] of KICK) {                   // a muted kick: a low sine that drops in pitch
+        const tt = t + s * step, osc = ac.createOscillator(), g = ac.createGain();
+        osc.type = 'sine'; osc.frequency.setValueAtTime(95, tt); osc.frequency.exponentialRampToValueAtTime(48, tt + 0.16);
+        g.gain.setValueAtTime(0, tt); g.gain.linearRampToValueAtTime(0.3 * lv * a, tt + 0.006);
+        g.gain.exponentialRampToValueAtTime(0.0005, tt + 0.32);
+        osc.connect(g).connect(vol); osc.start(tt); osc.stop(tt + 0.35);
+      }
+      for (const [s, a] of BRUSH) {                  // a very quiet brushed off-beat (filtered noise, no pitch)
+        const tt = t + s * step, src = ac.createBufferSource(), g = ac.createGain();
+        src.buffer = nBuf;
+        g.gain.setValueAtTime(0, tt); g.gain.linearRampToValueAtTime(0.075 * lv * a, tt + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0005, tt + 0.16);
+        src.connect(g).connect(brushF); src.start(tt); src.stop(tt + 0.2);
+      }
+    }
     function thump(t) {                            // a soft low pulse, like a slow heartbeat
       const osc = ac.createOscillator(), g = ac.createGain();
       osc.type = 'sine'; osc.frequency.setValueAtTime(70, t); osc.frequency.exponentialRampToValueAtTime(42, t + 0.3);
@@ -140,7 +186,11 @@
     let nextChord = 0, chordIdx = 0, nextBell = 0, nextArp = 0, arpIdx = 0, nextTick = 0, tickIdx = 0, nextPulse = 0;
     function reset(t) { nextChord = t; nextBell = t + 1.5; nextArp = t + 0.6; nextTick = t + 0.5; nextPulse = t + 0.3; }
     function schedule(to) {
-      while (nextChord < to) { pad(nextChord, chordAt(chordIdx), o.bar); nextChord += o.bar; chordIdx++; }
+      while (nextChord < to) {
+        pad(nextChord, chordAt(chordIdx), len);
+        if (lift && chordIdx > 0) groove(nextChord, chordAt(chordIdx));   // the first chord starts gently, with no groove
+        nextChord += len; chordIdx++;
+      }
       const current = () => chordAt(chordIdx - 1);
       if (o.bells > 0) while (nextBell < to) {
         const ch = current(), n = ch[Math.floor(rnd() * ch.length)] + 12 * (o.bellOct + Math.floor(rnd() * 2));

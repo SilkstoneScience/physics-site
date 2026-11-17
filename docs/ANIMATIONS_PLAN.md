@@ -53,6 +53,12 @@ lines, smooth camera moves and one caption at a time. Each one loops.
   scores use only the pad, the low drone, space wind, a soft shimmer and slow swells (tremolo). No bells, plucked arpeggios,
   clock ticks or heartbeat pulses (music.js can still make them, but no score may use them), and pad cutoffs stay at
   900 Hz or below. Each score stays different through its key and chords, pad sound, drone, wind, shimmer and swell.
+  **A little more upbeat, still lowkey** (teacher, 17 November 2026: "it's a little sleepy"): every score now has a soft
+  groove under the pad (`groove`, default 1: a warm low bass line, a muted kick on the main beats and a very quiet
+  brushed off-beat, nothing high or pitched like a bell), chords that change every 8 beats (80–92 beats a minute, about
+  5–6 s, set from each score's `bar`) and quicker fades. The first chord of each piece has no groove, so it starts gently.
+  `groove: 0` brings back the old sound. `tools/music-test.html` (not published) plays any score before and after, at the
+  same loudness, with a slider for the groove level. Volumes were rebalanced to RMS about 0.055 again.
 - **Click or tap the picture to pause or play** (teacher, 16 November 2026).
 - **Speed and seeking** (teacher, 16 November 2026; built the same day in the shared player, so every animation has them):
   a speed button (1× → 1.5× → 2×, not remembered between visits) where the `pauses` holds speed up with everything

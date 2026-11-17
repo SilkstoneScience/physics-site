@@ -480,7 +480,7 @@
     duration: DURATION,
     poster: at(9) + 3,
     // score: a warm kitchen hum (D-flat major, a soft triangle pad, a low drone, a little wind)
-    music: { chords: [[35, 42, 47, 51], [40, 47, 52, 55], [38, 45, 50, 54], [33, 40, 45, 48]], bar: 9, pad: 'triangle', cutoff: 700, drone: 0.12, wind: 0.15, shimmer: 0.12, tremolo: 0.06, volume: 0.44 },
+    music: { chords: [[35, 42, 47, 51], [40, 47, 52, 55], [38, 45, 50, 54], [33, 40, 45, 48]], bar: 9, pad: 'triangle', cutoff: 700, drone: 0.12, wind: 0.15, shimmer: 0.12, tremolo: 0.06, volume: 0.49 },
     resize: layout,
     info: {
       CAPS, DURATION, LAM, BOX, NODES, ANTI, SPAN, SPACING, C_MEAS, DT, SLOW,

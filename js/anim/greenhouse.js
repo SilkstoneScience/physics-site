@@ -503,7 +503,7 @@
     duration: DURATION,
     poster: 125,
     // score: a warm blanket (D-flat major, a triangle pad, a low drone, wind and a faint shimmer)
-    music: { chords: [[49, 56, 61, 65], [46, 53, 58, 61], [42, 49, 54, 58], [44, 51, 56, 60]], bar: 10, pad: 'triangle', cutoff: 800, drone: 0.1, wind: 0.4, shimmer: 0.15, volume: 0.43 },
+    music: { chords: [[49, 56, 61, 65], [46, 53, 58, 61], [42, 49, 54, 58], [44, 51, 56, 60]], bar: 10, pad: 'triangle', cutoff: 800, drone: 0.1, wind: 0.4, shimmer: 0.15, volume: 0.42 },
     resize: layout,
     info: { IN, REFL, ABS, T0, E1, T2, Tsurf, eff, CAPS, PH, FLASH, MOL,
       check() {

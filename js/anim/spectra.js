@@ -544,7 +544,7 @@
     poster: R(80.5),
     // score: luminous (E lydian, a soft sine pad, a soft shimmer, a breath of wind)
     music: { chords: [[52, 59, 63, 68], [57, 61, 64, 68, 71], [49, 56, 61, 64], [54, 58, 61, 66]], bar: 8, pad: 'sine', cutoff: 900, drone: 0.09,
-      shimmer: 0.3, wind: 0.2, volume: 0.3 },
+      shimmer: 0.3, wind: 0.2, volume: 0.28 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: {

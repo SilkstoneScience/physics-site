@@ -452,7 +452,7 @@
     duration: RUN,
     poster: R(50),
     // score: a quiet laboratory (F minor, a soft sine pad that slowly swells, a low drone, a breath of wind)
-    music: { chords: [[41, 48, 53, 56], [44, 49, 53, 56], [39, 46, 51, 55], [43, 48, 51, 55]], bar: 9, pad: 'sine', cutoff: 800, drone: 0.1, wind: 0.25, tremolo: 0.2, volume: 0.39 },
+    music: { chords: [[41, 48, 53, 56], [44, 49, 53, 56], [39, 46, 51, 55], [43, 48, 51, 55]], bar: 9, pad: 'sine', cutoff: 800, drone: 0.1, wind: 0.25, tremolo: 0.2, volume: 0.38 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: {

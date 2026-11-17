@@ -314,7 +314,7 @@
     duration: DURATION,
     poster: at(K_GRAPH) + 4,
     // score: a steady current (G, a soft sine pad, a low drone, a gentle tremolo, a breath of wind)
-    music: { chords: [[43, 50, 55, 59, 62], [40, 47, 52, 55, 59], [45, 52, 57, 60, 64], [38, 45, 50, 54, 57]], bar: 8, pad: 'sine', cutoff: 850, drone: 0.1, tremolo: 0.18, wind: 0.2, shimmer: 0.15, volume: 0.41 },
+    music: { chords: [[43, 50, 55, 59, 62], [40, 47, 52, 55, 59], [45, 52, 57, 60, 64], [38, 45, 50, 54, 57]], bar: 8, pad: 'sine', cutoff: 850, drone: 0.1, tremolo: 0.18, wind: 0.2, shimmer: 0.15, volume: 0.38 },
     resize: layout,
     info: {
       CAPS, DURATION,

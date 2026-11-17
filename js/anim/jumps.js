@@ -282,7 +282,7 @@
     duration: DURATION,
     poster: CA(8) + 1.5,
     // score: light gravity (E-flat major, low and soft: a triangle pad, a gentle drone, a little wind and shimmer)
-    music: { chords: [[36, 43, 48, 51], [41, 48, 53, 56], [34, 41, 46, 50], [39, 46, 51, 55]], bar: 9, pad: 'triangle', cutoff: 800, drone: 0.1, wind: 0.25, shimmer: 0.15, tremolo: 0.15, volume: 0.54 },
+    music: { chords: [[36, 43, 48, 51], [41, 48, 53, 56], [34, 41, 46, 50], [39, 46, 51, 55]], bar: 9, pad: 'triangle', cutoff: 800, drone: 0.1, wind: 0.25, shimmer: 0.15, tremolo: 0.15, volume: 0.53 },
     resize: layout,
     info: {
       CAPS, WORLDS, BENNU, jumpState, T_JUMP0, CYCLE, T_BJUMP, DURATION,

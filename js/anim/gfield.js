@@ -542,7 +542,7 @@
     poster: +sceneOf(99).toFixed(1),
     // score: deep and slow (G minor, a dark saw pad, a strong low drone, a little wind)
     music: { chords: [[43, 50, 55, 58], [39, 46, 55, 58], [36, 43, 51, 55], [38, 45, 50, 54]], bar: 10, pad: 'saw', cutoff: 500,
-      drone: 0.14, wind: 0.3, volume: 0.54 },
+      drone: 0.14, wind: 0.3, volume: 0.68 },
     resize: layout,
     info: {
       CAPS: CAPS_SCENE, STORY_CAPS: CAPS, KNOTS, RINGS, MOONLINES,

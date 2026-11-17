@@ -697,7 +697,7 @@
     poster: 66,
     // score: slow and spacious (D minor, a soft triangle pad, long bars, space wind and a little shimmer)
     music: { chords: [[38, 45, 50, 53, 57], [34, 41, 46, 50, 53], [36, 43, 48, 52, 55], [33, 40, 45, 49, 52]], bar: 12, pad: 'triangle', cutoff: 700,
-      drone: 0.11, wind: 0.5, shimmer: 0.15, tremolo: 0.08, volume: 0.58 },
+      drone: 0.11, wind: 0.5, shimmer: 0.15, tremolo: 0.08, volume: 0.56 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { CAPS, radius, key, SUN_R, SUN_T, M15_R, M15_T, M25_R, M25_T,

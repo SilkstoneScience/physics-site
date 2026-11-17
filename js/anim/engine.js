@@ -451,7 +451,7 @@
     duration: DURATION,
     poster: onScreen(133),
     // score: a steady machine (E-flat minor, a triangle pad that swells slowly, like an engine turning over, a low drone, a breath of wind)
-    music: { chords: [[51, 58, 63, 66], [47, 54, 59, 63], [44, 51, 56, 59], [46, 53, 58, 61]], bar: 9, pad: 'triangle', cutoff: 750, drone: 0.12, tremolo: 0.5, wind: 0.15, volume: 0.46 },
+    music: { chords: [[51, 58, 63, 66], [47, 54, 59, 63], [44, 51, 56, 59], [46, 53, 58, 61]], bar: 9, pad: 'triangle', cutoff: 750, drone: 0.12, tremolo: 0.5, wind: 0.15, volume: 0.49 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { SEG, ST, nR, energy, along, stateAt, CAPS: CAPS_SCREEN, story, onScreen, TofPV,

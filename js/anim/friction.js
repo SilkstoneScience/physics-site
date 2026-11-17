@@ -512,7 +512,7 @@
     duration: DUR_R,
     poster: realOf(45),
     // score: curious and microscopic (A dorian, a soft sine pad that slowly swells, a little wind)
-    music: { chords: [[57, 60, 64, 66], [55, 59, 62, 66], [53, 57, 62, 64], [52, 55, 59, 62]], bar: 7, pad: 'sine', cutoff: 900, drone: 0.09, wind: 0.25, tremolo: 0.2, volume: 0.37 },
+    music: { chords: [[57, 60, 64, 66], [55, 59, 62, 66], [53, 57, 62, 64], [52, 55, 59, 62]], bar: 7, pad: 'sine', cutoff: 900, drone: 0.09, wind: 0.25, tremolo: 0.2, volume: 0.35 },
     resize: layout,
     info: { CAPS: CAPS_R, realOf, tauOf, DUR_R },
     frame(s, tr) {

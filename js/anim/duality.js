@@ -352,7 +352,7 @@
     duration: DURATION,
     poster: Math.round(ST[18] + 2),
     // score: mystery (C-sharp minor, a soft sine pad, long bars, a low drone, a soft shimmer, a very slow swell)
-    music: { chords: [[49, 56, 61, 64, 68], [52, 59, 64, 68], [45, 52, 57, 64], [47, 54, 59, 66]], bar: 11, pad: 'sine', cutoff: 800, drone: 0.11, shimmer: 0.25, tremolo: 0.1, volume: 0.4 },
+    music: { chords: [[49, 56, 61, 64, 68], [52, 59, 64, 68], [45, 52, 57, 64], [47, 54, 59, 66]], bar: 11, pad: 'sine', cutoff: 800, drone: 0.11, shimmer: 0.25, tremolo: 0.1, volume: 0.38 },
     resize: layout,
     info: { EK, P_E, LAM_E, V_E, S_E, S_L, CAPS, ST, EN, DURATION, PHOT, ELEC, SING, P2, P1,
       check() {

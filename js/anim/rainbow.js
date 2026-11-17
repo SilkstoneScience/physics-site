@@ -531,7 +531,7 @@
     duration: DURATION,
     poster: PF2 + 3,
     // score: after the rain (E major with an added sixth, a soft sine pad, a light shimmer, a breath of wind)
-    music: { chords: [[40, 47, 54, 56], [45, 52, 57, 61], [37, 44, 52, 56], [42, 49, 54, 61]], bar: 10, pad: 'sine', cutoff: 850, drone: 0.08, wind: 0.25, shimmer: 0.3, tremolo: 0.05, volume: 0.42 },
+    music: { chords: [[40, 47, 54, 56], [45, 52, 57, 61], [37, 44, 52, 56], [42, 49, 54, 61]], bar: 10, pad: 'sine', cutoff: 850, drone: 0.08, wind: 0.25, shimmer: 0.3, tremolo: 0.05, volume: 0.36 },
     resize: layout,
     info: {
       CAPS, DURATION, TH1R, TH1V, TH2R, TH2V, CRIT, R_EX, EX, FR, trace, nOf,

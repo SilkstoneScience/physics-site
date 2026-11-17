@@ -559,7 +559,7 @@
     duration: DURATION,
     poster: realOf(84),
     // score: a discovery (C-sharp minor, a triangle pad, a low drone, a little wind)
-    music: { chords: [[49, 56, 61, 64], [45, 52, 57, 61], [47, 54, 59, 63], [44, 51, 56, 60]], bar: 8, pad: 'triangle', cutoff: 900, drone: 0.09, wind: 0.3, volume: 0.45 },
+    music: { chords: [[49, 56, 61, 64], [45, 52, 57, 61], [47, 54, 59, 63], [44, 51, 56, 60]], bar: 8, pad: 'triangle', cutoff: 900, drone: 0.09, wind: 0.3, volume: 0.43 },
     resize: layout,
     info: {
       KQQ, D0, RN, E_TOUCH, EK0, PATHS, HEAD, CAPS, SEGS, realOf, tauOf, DEF, thetaOf, traj, DURATION,

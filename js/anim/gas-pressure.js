@@ -573,7 +573,7 @@
     duration: DURATION,
     poster: 58.5,
     // score: light and airy (E flat, a soft sine pad, a breath of wind, a faint shimmer)
-    music: { chords: [[51, 58, 62, 67], [48, 55, 62, 63], [56, 60, 63, 67], [53, 58, 62, 65]], bar: 7, pad: 'sine', cutoff: 900, drone: 0.09, wind: 0.5, shimmer: 0.2, volume: 0.29 },
+    music: { chords: [[51, 58, 62, 67], [48, 55, 62, 63], [56, 60, 63, 67], [53, 58, 62, 65]], bar: 7, pad: 'sine', cutoff: 900, drone: 0.09, wind: 0.5, shimmer: 0.2, volume: 0.27 },
     numbers: {
       P0: M0.P, P0theory: (N * 0.5 * VR0 * VR0) / (L0 * HB), pairHits,
       pv: PV_PTS.map(([v, p]) => [+v.toFixed(3), +p.toFixed(3)]), pt: PT_PTS.map(([T, p]) => [T, +p.toFixed(3)]),

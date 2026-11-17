@@ -604,7 +604,7 @@
     duration: DURATION,
     poster: P5 + 4,
     // score: polar night (F-sharp minor, a soft sine pad, a low drone, polar wind, a faint shimmer, a very slow swell)
-    music: { chords: [[42, 49, 54, 57], [38, 45, 50, 57], [40, 47, 52, 56], [37, 44, 49, 56]], bar: 12, pad: 'sine', cutoff: 800, drone: 0.1, wind: 0.45, shimmer: 0.3, tremolo: 0.08, volume: 0.4 },
+    music: { chords: [[42, 49, 54, 57], [38, 45, 50, 57], [40, 47, 52, 56], [37, 44, 49, 56]], bar: 12, pad: 'sine', cutoff: 800, drone: 0.1, wind: 0.45, shimmer: 0.3, tremolo: 0.08, volume: 0.37 },
     resize: layout,
     info: {
       CAPS, P2, P3, P4, P5, END_CARD, DURATION, re, rp, ve, vp, EG, ER, EVI, LEV, DAYS, RH, PITCH,

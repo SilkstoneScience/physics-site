@@ -392,7 +392,7 @@
     duration: DURATION,
     poster: T_FAST,
     // score: night-time suspense (E minor, a dark pad, a low drone, a little wind)
-    music: { chords: [[52, 59, 64, 67], [48, 55, 64, 67], [43, 50, 59, 62], [50, 57, 62, 66]], bar: 8, pad: 'saw', cutoff: 600, drone: 0.12, wind: 0.4, volume: 0.56 },
+    music: { chords: [[52, 59, 64, 67], [48, 55, 64, 67], [43, 50, 59, 62], [50, 57, 62, 66]], bar: 8, pad: 'saw', cutoff: 600, drone: 0.12, wind: 0.4, volume: 0.69 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { CYC, T_TAUT1, T_BOT1, J2, XMAX, DROP, ETOT, XF, VTAUT, VFAST, tTaut, tFast, tBot, tTop, tBot2, tUp2, UP2, FINAL, MECH1, T_TAUT, T_FAST, T_BOT, T_TOP, T_UP2, CAPS, at: (p, tau) => at(p === 1 ? S1 : S2, tau) },

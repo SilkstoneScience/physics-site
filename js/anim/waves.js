@@ -470,7 +470,7 @@
     duration: DURATION,
     poster: real(76),
     // score: rolling sea (A-flat major, a soft sawtooth pad, sea-like wind)
-    music: { chords: [[56, 60, 63, 67], [49, 56, 60, 65], [53, 60, 63, 68], [51, 58, 63, 67]], bar: 8, pad: 'saw', cutoff: 700, drone: 0.09, wind: 0.5, volume: 0.77 },
+    music: { chords: [[56, 60, 63, 67], [49, 56, 60, 65], [53, 60, 63, 68], [51, 58, 63, 67]], bar: 8, pad: 'saw', cutoff: 700, drone: 0.09, wind: 0.5, volume: 0.78 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { LAM, TP, F, V, K, OM, AT, AL, XG, yRope, sL, densL, tauL, tauT, tauD0, tE1, tE1r, tauE1, crest0, CAPS, HOLDS, story, real, DURATION },

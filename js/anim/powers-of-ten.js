@@ -419,7 +419,7 @@
     poster: O.find((o) => o.key === 'earth').arrive + 0.5,
     marks: Object.fromEntries(O.map((o) => [o.key, [+o.arrive.toFixed(1), +o.leave.toFixed(1)]])),   // when each object is held (for checking)
     // score: vast and cosmic (C lydian, a saw pad, space wind, a soft shimmer)
-    music: { chords: [[48, 55, 59, 62, 66], [50, 57, 62, 66], [52, 59, 64, 66], [45, 52, 59, 64]], bar: 10, pad: 'saw', cutoff: 900, drone: 0.09, wind: 0.8, shimmer: 0.3, volume: 0.74 },
+    music: { chords: [[48, 55, 59, 62, 66], [50, 57, 62, 66], [52, 59, 64, 66], [45, 52, 59, 64]], bar: 10, pad: 'saw', cutoff: 900, drone: 0.09, wind: 0.8, shimmer: 0.3, volume: 0.81 },
     resize(s) { cx = s.W / 2; cy = s.H * 0.44; },
     frame(s, t) {
       const z = zAt(t), H = Math.min(s.H * 0.86, s.W), on = smooth((t - START + 1) / 0.8) * (1 - smooth((t - END_ZOOM - 0.6) / 1));

@@ -449,7 +449,7 @@
     duration: DURATION,
     poster: onScreen(56),
     // score: calm and thoughtful (A minor, a triangle pad that slowly swells, a low drone)
-    music: { chords: [[45, 52, 57, 60, 64], [41, 48, 53, 57, 64], [43, 50, 55, 59, 62], [40, 47, 52, 55, 59]], bar: 7, pad: 'triangle', cutoff: 900, drone: 0.09, tremolo: 0.25, volume: 0.55 },
+    music: { chords: [[45, 52, 57, 60, 64], [41, 48, 53, 57, 64], [43, 50, 55, 59, 62], [40, 47, 52, 55, 59]], bar: 7, pad: 'triangle', cutoff: 900, drone: 0.09, tremolo: 0.25, volume: 0.57 },
     resize: layout,
     info: { CAPS: CAPS_SCREEN, story, onScreen, DURATION },
     frame(s, t) {

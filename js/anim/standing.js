@@ -366,7 +366,7 @@
     duration: REAL_DURATION,
     poster: realOf(72),
     // score: resonant and organ-like (C minor, a soft square-wave pad, a strong low drone)
-    music: { chords: [[48, 55, 60, 63], [44, 51, 56, 60], [41, 48, 53, 56], [43, 50, 55, 59]], bar: 9, pad: 'square', cutoff: 700, drone: 0.12, volume: 0.57 },
+    music: { chords: [[48, 55, 60, 63], [44, 51, 56, 60], [41, 48, 53, 56], [43, 50, 55, 59]], bar: 9, pad: 'square', cutoff: 700, drone: 0.12, volume: 0.62 },
     resize: layout,
     info: { check, CAPS, modeAt, OPEN_MODES, CLOSED_MODES, shapeS, shapeO, shapeC, story, realOf, WAITS, STORY: DURATION },
     frame(s, tr) {

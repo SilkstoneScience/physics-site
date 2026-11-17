@@ -348,7 +348,7 @@
     duration: DURATION,
     poster: 62,
     // score: a held breath (G, E-flat, F, D minor: a warm low triangle pad, a gentle tremolo, some wind)
-    music: { chords: [[43, 50, 55, 59], [39, 46, 51, 55], [41, 48, 53, 57], [38, 45, 50, 53]], bar: 10, pad: 'triangle', cutoff: 750, drone: 0.11, wind: 0.35, tremolo: 0.18, volume: 0.48 },
+    music: { chords: [[43, 50, 55, 59], [39, 46, 51, 55], [41, 48, 53, 57], [38, 45, 50, 53]], bar: 10, pad: 'triangle', cutoff: 750, drone: 0.11, wind: 0.35, tremolo: 0.18, volume: 0.49 },
     resize: layout,
     info: {
       CAPS, tauAt, tOfTau, rate, crate, TAU_STOP,

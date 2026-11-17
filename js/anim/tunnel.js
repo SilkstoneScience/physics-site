@@ -299,7 +299,7 @@
     duration: DURATION,
     poster: 108,
     // score: falling through (E minor, a deep soft sine pad, a strong low drone, wind, a slow swell)
-    music: { chords: [[40, 47, 52, 59], [36, 43, 48, 55], [38, 45, 50, 57], [35, 42, 47, 54]], bar: 10, pad: 'sine', cutoff: 700, drone: 0.14, wind: 0.5, tremolo: 0.12, volume: 0.34 },
+    music: { chords: [[40, 47, 52, 59], [36, 43, 48, 55], [38, 45, 50, 57], [35, 42, 47, 54]], bar: 10, pad: 'sine', cutoff: 700, drone: 0.14, wind: 0.5, tremolo: 0.12, volume: 0.35 },
     resize: layout,
     info: {
       CAPS, PER, OM, VMAX, tauAt, xAt, vAt, rate,

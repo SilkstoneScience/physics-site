@@ -439,7 +439,7 @@
     // no pauses: see EXTRA (the story waits while the picture keeps changing)
     // score: vast and slow (A-flat major, a dark saw pad, long bars, space wind)
     music: { chords: [[44, 51, 56, 60], [49, 56, 60, 65], [41, 48, 53, 56], [46, 53, 58, 63]], bar: 12, pad: 'saw', cutoff: 600,
-      drone: 0.1, wind: 0.6, volume: 0.77 },
+      drone: 0.1, wind: 0.6, volume: 0.79 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { STARS, CAPS, radius, lumOf, msL, pathAt, SUNP, BIGP, wdAt, WD_R, EXTRA, storyAt, realAt, SUNP_R, BIGP_R, WD0_R, WD1_R, SN_R,

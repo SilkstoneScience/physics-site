@@ -296,7 +296,7 @@
     duration: DURATION,
     poster: 70,
     // score: a quiet concert hall (A major, a triangle pad, a low drone, a soft shimmer, a slow swell)
-    music: { chords: [[45, 52, 57, 61], [42, 49, 54, 57], [38, 45, 50, 54], [40, 47, 52, 56]], bar: 9, pad: 'triangle', cutoff: 800, drone: 0.09, shimmer: 0.2, tremolo: 0.2, volume: 0.58 },
+    music: { chords: [[45, 52, 57, 61], [42, 49, 54, 57], [38, 45, 50, 54], [40, 47, 52, 56]], bar: 9, pad: 'triangle', cutoff: 800, drone: 0.09, shimmer: 0.2, tremolo: 0.2, volume: 0.57 },
     resize: layout,
     info: {
       CAPS, meet1, meet2, BEAT, PERIOD_MS, AMP_A, AMP_B,

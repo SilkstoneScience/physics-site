@@ -318,7 +318,7 @@
     duration: DURATION,
     poster: 62,
     // score: patient measurement (B-flat major, a soft sine pad, a low drone, a slow swell, a breath of wind)
-    music: { chords: [[46, 53, 57, 62], [48, 55, 60, 64], [43, 50, 55, 58], [41, 48, 53, 57]], bar: 9, pad: 'sine', cutoff: 800, drone: 0.1, tremolo: 0.12, wind: 0.2, volume: 0.36 },
+    music: { chords: [[46, 53, 57, 62], [48, 55, 60, 64], [43, 50, 55, 58], [41, 48, 53, 57]], bar: 9, pad: 'sine', cutoff: 800, drone: 0.1, tremolo: 0.12, wind: 0.2, volume: 0.35 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: {

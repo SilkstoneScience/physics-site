@@ -438,7 +438,7 @@
     poster: realAt(70),
     // no pauses: see EXTRA near the top (the story waits while the glider keeps moving)
     // score: steady and swaying (D-flat lydian, a soft sine pad that swells once per period of the glider, a low drone)
-    music: { chords: [[49, 56, 60, 63, 67], [51, 58, 61, 65], [53, 60, 63, 68], [46, 53, 56, 61]], bar: 8, pad: 'sine', cutoff: 900, tremolo: 1 / T, drone: 0.1, volume: 0.38 },
+    music: { chords: [[49, 56, 60, 63, 67], [51, 58, 61, 65], [53, 60, 63, 68], [46, 53, 56, 61]], bar: 8, pad: 'sine', cutoff: 900, tremolo: 1 / T, drone: 0.1, volume: 0.37 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: { M, K, X0, OM, T, VMAX, AMAX, ET, xAt, vAt, aAt, CAPS, EXTRA, storyAt, realAt, MOMENTS, T_REL, TS_REL, DURATION_U, P_X0, P_ZERO, P_MX0, P_ZERO2, P_HALF1, P_HALF2, P_CYCLE },

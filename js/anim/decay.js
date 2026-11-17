@@ -354,7 +354,7 @@
     poster: T0 + 22,
     // no pauses (teacher, 17 November 2026): the run never stops while a caption is read
     // score: slow fading (B-flat minor, a triangle pad with a very slow swell, a low drone, a faint shimmer)
-    music: { chords: [[46, 53, 58, 61], [42, 49, 54, 58], [44, 51, 56, 60], [41, 48, 53, 56]], bar: 11, pad: 'triangle', cutoff: 800, drone: 0.11, shimmer: 0.15, tremolo: 0.15, volume: 0.49 },
+    music: { chords: [[46, 53, 58, 61], [42, 49, 54, 58], [44, 51, 56, 60], [41, 48, 53, 56]], bar: 11, pad: 'triangle', cutoff: 800, drone: 0.11, shimmer: 0.15, tremolo: 0.15, volume: 0.51 },
     resize: layout,
     info: { RUN, tau, tauS, sorted, Nat, Sat, CAPS, LAM, countRate },
     frame(s, t) {

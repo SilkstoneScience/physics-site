@@ -569,7 +569,7 @@
     poster: realAt(18.5),
     // no pauses: see EXTRA near the top (the story waits while everything keeps moving)
     // score: building power (G-sharp minor, a dark saw pad that swells slowly, a low drone, a little wind)
-    music: { chords: [[44, 51, 56, 59], [40, 47, 52, 56], [42, 49, 54, 57], [39, 46, 51, 54]], bar: 9, pad: 'saw', cutoff: 650, drone: 0.13, tremolo: 0.6, wind: 0.3, volume: 0.53 },
+    music: { chords: [[44, 51, 56, 59], [40, 47, 52, 56], [42, 49, 54, 57], [39, 46, 51, 54]], bar: 9, pad: 'saw', cutoff: 650, drone: 0.13, tremolo: 0.6, wind: 0.3, volume: 0.71 },
     resize: layout,
     // for checking the numbers (not used by the player)
     info: {

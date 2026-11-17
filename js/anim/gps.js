@@ -315,7 +315,7 @@
     duration: DURATION,
     poster: CA(11) + 2,
     // score: signals from orbit (C-sharp minor, low: a soft sine pad, a deep drone, wind and a faint shimmer)
-    music: { chords: [[37, 44, 49, 53], [42, 49, 54, 58], [39, 46, 51, 54], [44, 51, 56, 60]], bar: 10, pad: 'sine', cutoff: 650, drone: 0.12, wind: 0.35, shimmer: 0.2, tremolo: 0.1, volume: 0.39 },
+    music: { chords: [[37, 44, 49, 53], [42, 49, 54, 58], [39, 46, 51, 54], [44, 51, 56, 60]], bar: 10, pad: 'sine', cutoff: 650, drone: 0.12, wind: 0.35, shimmer: 0.2, tremolo: 0.1, volume: 0.37 },
     resize: layout,
     info: {
       CAPS, SATS, FAR, errAt, cross,
