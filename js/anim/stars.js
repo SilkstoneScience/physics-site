@@ -123,8 +123,8 @@
     [108.0, 114.6, 'Off the chart, the hot core fades. What is left is a white dwarf. With no fusion it slowly cools over billions of years, along a line of constant radius.'],
     [114.8, 120.6, 'Now a star of 25 solar masses. It starts at the top left: hot, large and enormously luminous.'],
     [120.8, 127.2, 'It uses its fuel far faster: about 7 million years on the main sequence, against about 10 billion for the Sun.'],
-    [127.4, 133.2, 'It swells into a red supergiant, about 1000 times the Sun\'s radius, fusing heavier elements up to iron.'],
-    [133.4, 139.0, 'The iron core collapses, and the outer layers are blasted away in a supernova, which can briefly outshine a whole galaxy.'],
+    [127.4, 133.2, 'It swells into a red supergiant, about 1000 times the Sun\'s radius, fusing heavier elements until its core is iron.'],
+    [133.4, 139.0, 'The iron core collapses, and the outer layers are blasted away in a supernova, which can briefly shine as brightly as a whole galaxy.'],
     [139.2, 145.0, 'The core left becomes a neutron star or a black hole. Neither can be shown on this chart.'],
     [145.2, 151.4, '(Exams from 2028) A core below about 1.4 solar masses becomes a white dwarf; up to about 2–3 solar masses, a neutron star; above that, a black hole.'],
   ];
