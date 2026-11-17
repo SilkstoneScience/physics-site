@@ -158,6 +158,11 @@ Theme E (built 16 November 2026; waiting for the teacher's check)
   measured wavelengths; absorption by gas with some atoms in n = 2; the Bohr formula only on the HL end-card row)
 - [x] E.5 The HR diagram: `hr-diagram.html` (real stars at approximate real positions; radii from L = 4πR²σT⁴; approximate paths,
   labelled as such, of a Sun-like star and a 25 M☉ star; the Chandrasekhar and Oppenheimer–Volkoff limits tagged New for 2028)
+- [x] E.5 The life of a star: `star-life.html` (teacher's request, 17 November 2026; the teacher chose the three stars: the
+  Sun, 15 M☉ and 25 M☉, ending as a white dwarf, a neutron star and a black hole). Sizes to scale behind a live scale bar
+  (zooming out as each star swells and in to its remnant) except the nebula, the enlarged onion-layer core and the black hole;
+  model values rounded and recalculated in the scene's comment; starlight bent round the black hole with the point-lens
+  formula (exaggerated, no numbers); the mass limits only on the page and the end card, tagged for 2028.
 - [x] E.2 The photoelectric effect (HL): `photoelectric.html` (teacher: "work on topic E", 16 November 2026; sodium, Φ = 2.28 eV;
   red, violet and 300 nm ultraviolet; the stopping voltage; the Eₘₐₓ–f graph)
 - [x] E.3 Random decay and half-life: `half-life.html` (1000 nuclei of a made-up nuclide, T½ = 10 s, seeded so the run repeats;

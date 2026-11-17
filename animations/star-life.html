@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: the life of a star · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics E.5: a star is born in a nebula, then the Sun, a 15-solar-mass star and a 25-solar-mass star are followed to their ends as a white dwarf, a neutron star and a black hole, with sizes to scale.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/star-life.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: the life of a star · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics E.5: a star is born in a nebula, then the Sun, a 15-solar-mass star and a 25-solar-mass star are followed to their ends as a white dwarf, a neutron star and a black hole, with sizes to scale.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/star-life.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/star-life.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › The life of a star</p>
+    <h1>The life of a star</h1>
+    <p class="lead">A star is born when a cloud of gas collapses, and then its mass decides everything. Follow the Sun, a star of 15 solar masses and a star of 25 solar masses from the main sequence to their ends: a white dwarf, a neutron star and a black hole. <a class="tag" href="../themes/e5.html#evolution">E.5 Fusion and stars</a></p>
+    <p class="new2028-note"><span class="tag y2028">New for 2028</span> For exams from 2028 the guide adds the role of the Chandrasekhar and Oppenheimer–Volkoff limits: see the last step.</p>
+
+    <figure class="anim-stage" data-anim="star-life">
+      <canvas role="img" aria-label="Animation of the life of a star: a nebula collapses into a protostar and a main-sequence star, then the Sun becomes a red giant, a planetary nebula and a white dwarf beside the Earth; a 15-solar-mass star becomes a red supergiant, explodes as a supernova and leaves a neutron star; a 25-solar-mass star does the same but leaves a black hole that bends the light of the stars behind it. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>Sizes are drawn <strong>to scale</strong> whenever a scale bar is shown at the bottom left (the camera zooms out as a star swells, and in again to its remnant). The nebula, the enlarged core of the supergiant and the black hole are not to scale. The top left shows the stage the star is in, its radius and surface temperature, and a bar for its time on the main sequence.</p>
+      <ol>
+        <li><strong>A nebula</strong>: a vast, cold cloud of gas (mostly hydrogen) and dust. Gravity pulls it together, and as it collapses gravitational potential energy becomes thermal energy, so it heats up. It spins faster as it shrinks.</li>
+        <li>The hot, shrinking ball is a <strong>protostar</strong>. It glows from the energy of its contraction, but it is not yet hot enough for hydrogen fusion.</li>
+        <li>When the core reaches about $10^7$ K, hydrogen nuclei fuse into helium and the star joins the <strong>main sequence</strong>. Gravity pulling inwards is balanced by gas and radiation pressure pushing outwards.</li>
+        <li>Three main-sequence stars side by side, to scale: the Sun (1 $R_\odot$), a 15 $M_\odot$ star (about 5 $R_\odot$) and a 25 $M_\odot$ star (about 7 $R_\odot$).</li>
+        <li><strong>The Sun</strong> is about 4.6 billion years old, roughly halfway through its 10 billion years on the main sequence. Every second about 600 million tonnes of hydrogen fuse into helium in its core: from $L = 3.83 \times 10^{26}$ W and 0.71% of the mass becoming energy, $3.83 \times 10^{26} \div (0.0071 \times (3.00 \times 10^8)^2) \approx 6.0 \times 10^{11}$ kg each second.</li>
+        <li>When the core's hydrogen runs out, the core contracts and heats up, and hydrogen fuses in a shell around it. The outer layers swell and cool: the Sun becomes a <strong>red giant</strong> of about 180 $R_\odot$ (at about 3100 K and 2500 $L_\odot$, $R = \sqrt{2500} \times (5800 \div 3100)^2\ R_\odot \approx 180\ R_\odot$). The Earth's orbit, 215 $R_\odot$ from the Sun, is drawn for comparison.</li>
+        <li>The core, now about $10^8$ K, fuses helium into carbon and oxygen, and for a while the star shrinks (to about 11 $R_\odot$). When that helium runs out it swells again, even larger (about 260 $R_\odot$), and its outer layers drift away as a glowing <strong>planetary nebula</strong>.</li>
+        <li>The carbon–oxygen core is left as a <strong>white dwarf</strong>: about half the Sun's mass in a radius of about 0.013 $R_\odot$ (9000 km), drawn beside the Earth (6400 km) to scale. No fusion happens in it; electron degeneracy pressure holds it up while it slowly cools and fades. Its density is about $3.5 \times 10^8$ kg m⁻³, so a 5 cm³ teaspoonful would have a mass of nearly 2 tonnes.</li>
+        <li><strong>A star of 15 solar masses</strong>, beside the Sun to scale: about 31 000 K, 5 $R_\odot$ and 20 000 $L_\odot$. Its core is hotter, so it fuses far faster, and it leaves the main sequence after only about 12 million years: the Sun's main-sequence life of 10 billion years is about 800 times longer.</li>
+        <li>It swells into a <strong>red supergiant</strong> of about 800 $R_\odot$ (at about 3700 K and $1 \times 10^5\ L_\odot$), wider than the orbit of Mars (328 $R_\odot$): the orbits of the Earth and Mars are drawn inside it.</li>
+        <li>Its core, enlarged and not to scale, fuses heavier and heavier elements in layers like an onion: helium, carbon, neon, oxygen and silicon, until silicon fusion leaves a core of iron. Fusing iron releases no energy, so when the iron core grows too massive for electron degeneracy pressure to hold it up, it collapses in less than a second.</li>
+        <li>The outer layers rebound in a <strong>supernova</strong>, which can briefly shine as brightly as a whole galaxy. Some elements heavier than iron are made, and everything is scattered into space.</li>
+        <li>The core is left as a <strong>neutron star</strong>: about 1.5 $M_\odot$ in a radius of about 12 km (about 25 km across) (the scale bar is now in kilometres). Neutron degeneracy pressure holds it up, at about the density of an atomic nucleus, about $4 \times 10^{17}$ kg m⁻³: a teaspoonful would have a mass of about 2 billion tonnes. Its sweeping beams show that many neutron stars spin rapidly and are seen as pulsars.</li>
+        <li><strong>A star of 25 solar masses</strong>: about 37 000 K, 7 $R_\odot$ and 80 000 $L_\odot$. It spends only about 7 million years on the main sequence, then becomes a red supergiant of about 1000 $R_\odot$, its iron core collapses, and the star explodes.</li>
+        <li>For a star this massive, the core left is likely to be too massive for neutron degeneracy pressure (models disagree: some stars of about this mass may leave neutron stars). Nothing can stop the collapse, and it becomes a <strong>black hole</strong> (not to scale). Not even light can escape from it, but its gravity bends the light of stars behind it, so they appear shifted outwards and, when almost exactly behind it, are stretched into arcs.</li>
+        <li>A flow chart sums up the three lives, with their times on the main sequence and their remnants: the more massive the star, the shorter its life and the denser its remnant. Apart from hydrogen, almost every atom in your body was made in stars: much of the carbon in giants like the Sun, oxygen and the elements up to iron in supergiants, and heavier elements in supernovae, in collisions between neutron stars and in giant stars.</li>
+        <li class="new2028"><span class="tag y2028">New for 2028</span> For exams from 2028: what the core becomes depends on its mass. Below about 1.4 solar masses (the <strong>Chandrasekhar limit</strong>), electron degeneracy pressure holds it up as a white dwarf. Between that and about 2–3 solar masses (the <strong>Oppenheimer–Volkoff limit</strong>), neutron degeneracy pressure holds it up as a neutron star. Above that, it becomes a black hole. The limits apply to the mass of the core that is left, not to the star's mass on the main sequence.</li>
+      </ol>
+      <p><strong>Where the numbers come from.</strong> Radii come from the luminosities and temperatures with $L = 4\pi R^2\sigma T^4$, comparing with the Sun at 5800 K. The temperatures, luminosities, lifetimes and remnant masses can't be worked out with the physics in the course: they are rounded values from computer models of stars, and different models give somewhat different values. Real stars are also less tidy than the three shown: how much mass a massive star loses, and whether it leaves a neutron star or a black hole, are still being researched, and some very massive stars may collapse into a black hole with only a weak explosion or none. Whether the Earth will be swallowed by the red giant Sun is uncertain too, because the Sun loses mass and the planets' orbits widen. The bending of starlight round the black hole is drawn with the formula for a point-like lens, exaggerated so that it can be seen.</p>
+      <p>Read more in <a href="../themes/e5.html#equilibrium">E.5 section 3: the equilibrium of a star</a>, <a href="../themes/e5.html#radius">section 7: finding the radius of a star</a> and <a href="../themes/e5.html#evolution">section 9: how stars evolve</a> (including <a href="../themes/e5.html#limits">the Chandrasekhar and Oppenheimer–Volkoff limits</a>). The same stars' paths on an HR diagram are in the animation <a href="hr-diagram.html">The HR diagram and how stars evolve</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>
