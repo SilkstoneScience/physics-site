@@ -66,14 +66,14 @@ lines, smooth camera moves and one caption at a time. Each one loops.
 - The stage is 16:9, and 4:5 on phones (under 600 px), so scenes lay themselves out for both.
 - File names in `animations/` are permanent once published (they may be linked from slides).
 
-## Waiting for the teacher (raise these later; the teacher said "not yet", 16 November 2026)
-- **E.1 notes, section 2** (`themes/e1.html`, about line 114): says a gold atom is "about 100 000 times wider than the nucleus".
-  For gold it is about 20 000 times (atom about 3 × 10⁻¹⁰ m, nucleus about 1.4 × 10⁻¹⁴ m); 100 000 is the usual rough figure
-  for atoms in general. The Rutherford animation says "tens of thousands of times".
-- **E.5 notes, section 9** (`themes/e5.html`, about lines 269 and 276): two bullet points name the Chandrasekhar and
-  Oppenheimer–Volkoff limits without the "New for 2028" tag, unlike the tagged `#limits` block on the same page.
-- **C.1 animation:** the reference circle is labelled HL (as in `themes/c1.html` section 6), but the guide's SL linking
-  question asks how circular motion can be used to visualize SHM; the first circle caption needs no HL maths and could be unlabelled.
+## Points raised with the teacher (16–17 November 2026)
+- **C.1 animation (done, 17 November 2026):** the reference circle is no longer labelled HL, because the guide's SL linking
+  question asks how circular motion can be used to visualize SHM. The HL tag appears from the second circle caption, where
+  the HL maths ($x = x_0\cos\omega t$ and after) starts; the page, the hub card and the C.1 box say the same.
+- **Already decided in the accuracy audit, so left as they are:** the E.1 caption's "about 100 000 times wider" for the gold atom
+  (`docs/ACCURACY_AUDIT.md` D26: the usual order-of-magnitude pair, 10⁻¹⁵ m and 10⁻¹⁰ m; for gold alone it is about 20 000, and
+  the Rutherford animation says "tens of thousands of times") and the untagged Chandrasekhar and Oppenheimer–Volkoff limits in
+  the E.5 evolution lists (D33).
 
 ## The list
 Theme A (batch 1)

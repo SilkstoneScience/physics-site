@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>IB Physics animation: simple harmonic motion and the reference circle · Mr Silkstone's Physics</title>
-  <meta name="description" content="An animation for IB DP Physics C.1: a glider oscillating between two springs, with its displacement, velocity and acceleration graphs drawing themselves, the energy changing between kinetic and potential, and (HL) the reference circle.">
+  <meta name="description" content="An animation for IB DP Physics C.1: a glider oscillating between two springs, with its displacement, velocity and acceleration graphs drawing themselves, the energy changing between kinetic and potential, and the reference circle (its equations are HL).">
   <link rel="canonical" href="https://physics.silkstone.xyz/animations/shm.html">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Mr Silkstone's Physics">
   <meta property="og:title" content="IB Physics animation: simple harmonic motion and the reference circle · Mr Silkstone's Physics">
-  <meta property="og:description" content="An animation for IB DP Physics C.1: a glider oscillating between two springs, with its displacement, velocity and acceleration graphs drawing themselves, the energy changing between kinetic and potential, and (HL) the reference circle.">
+  <meta property="og:description" content="An animation for IB DP Physics C.1: a glider oscillating between two springs, with its displacement, velocity and acceleration graphs drawing themselves, the energy changing between kinetic and potential, and the reference circle (its equations are HL).">
   <meta property="og:url" content="https://physics.silkstone.xyz/animations/shm.html">
   <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -28,10 +28,10 @@
   <main>
     <p class="crumbs"><a href="index.html">Animations</a> › Simple harmonic motion</p>
     <h1>Simple harmonic motion</h1>
-    <p class="lead">A glider oscillates on an air track between two springs, while its displacement, velocity and acceleration graphs draw themselves beside it. See why the acceleration always points back to equilibrium, where the glider is fastest, how the energy changes, and (HL) how a point moving round a circle gives exactly the same motion. <a class="tag" href="../themes/c1.html#shm">C.1 Simple harmonic motion</a></p>
+    <p class="lead">A glider oscillates on an air track between two springs, while its displacement, velocity and acceleration graphs draw themselves beside it. See why the acceleration always points back to equilibrium, where the glider is fastest, how the energy changes, and how a point moving round a circle gives exactly the same motion (the equations that follow are HL). <a class="tag" href="../themes/c1.html#shm">C.1 Simple harmonic motion</a></p>
 
     <figure class="anim-stage" data-anim="shm">
-      <canvas role="img" aria-label="Animation of a glider oscillating between two springs on an air track, with arrows for its velocity and acceleration, live graphs of displacement, velocity and acceleration against time, energy bars, and for HL a reference circle whose shadow moves with the glider. The steps are described in words below the animation."></canvas>
+      <canvas role="img" aria-label="Animation of a glider oscillating between two springs on an air track, with arrows for its velocity and acceleration, live graphs of displacement, velocity and acceleration against time, energy bars, and a reference circle whose shadow moves with the glider. The steps are described in words below the animation."></canvas>
     </figure>
 
     <section class="anim-shows">
@@ -49,7 +49,7 @@
         <li>The graphs: $x$, $v$ and $a$ vary sinusoidally with the same period. Each is a quarter of a cycle out of step with the next, so $a$ and $x$ are half a cycle apart. The velocity is the gradient of the $x$–$t$ graph and the acceleration is the gradient of the $v$–$t$ graph (the tangents are drawn for a few seconds). The $a$–$t$ graph is the $x$–$t$ graph turned upside down: the minus sign in $a = -\omega^2 x$ again.</li>
         <li>$T = 2\pi\sqrt{m/k} = 2\pi\sqrt{0.50/4.9} = 2.0$ s. A dashed curve shows the motion with half the amplitude: it has the same period, because the period of SHM doesn't depend on the amplitude.</li>
         <li>Energy is transferred back and forth between the glider's kinetic energy and the elastic potential energy stored in the springs. The potential energy bar is measured from the equilibrium position, where it is taken as zero. Kinetic energy is greatest at equilibrium and potential energy at the ends; with no friction (no damping), the total stays constant. Each reaches its maximum twice in every oscillation, so the energies change at twice the frequency of the motion.</li>
-        <li><span class="tag hl">HL</span> A point moves round a circle of radius $x_0$ at a constant angular velocity $\omega$, directly above the glider. Its shadow on the track moves exactly like the glider.</li>
+        <li>A point moves round a circle of radius $x_0$ at a constant angular velocity $\omega$, directly above the glider. Its shadow on the track moves exactly like the glider.</li>
         <li><span class="tag hl">HL</span> Timing from the release, the radius turns through an angle $\omega t$ from the horizontal, so the displacement is $x = x_0\cos\omega t$. The data booklet writes $x = x_0\sin(\omega t + \phi)$: here the phase angle is $\phi = \frac{\pi}{2}$, since $\sin(\omega t + \frac{\pi}{2}) = \cos\omega t$.</li>
         <li><span class="tag hl">HL</span> The point's speed round the circle is $\omega x_0 = 3.13 \times 0.10 = 0.31\ \text{m s}^{-1}$. The horizontal part of its velocity is the glider's velocity, so this is the glider's top speed, reached at $x = 0$.</li>
         <li><span class="tag hl">HL</span> At $x = 0.050$ m (marked while the glider moves on): $v = \pm\omega\sqrt{x_0^2 - x^2} = \pm 3.13 \times \sqrt{0.10^2 - 0.050^2} = \pm 0.27\ \text{m s}^{-1}$.</li>

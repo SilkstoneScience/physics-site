@@ -1,6 +1,7 @@
 /* C.1 Simple harmonic motion: a glider on a frictionless air track between two springs, with its x–t, v–t and
-   a–t graphs drawing themselves, the energy changing between kinetic and elastic potential, and (HL) the
-   reference circle whose shadow moves exactly like the glider.
+   a–t graphs drawing themselves, the energy changing between kinetic and elastic potential, and the
+   reference circle whose shadow moves exactly like the glider (the circle itself is unlabelled, since the guide's SL linking
+   question asks how circular motion can visualize SHM; the maths that follows it is HL).
    Numbers (checked): m = 0.50 kg; the two springs together act like one spring with k = 4.9 N m⁻¹.
    ω² = k/m = 4.9 / 0.50 = 9.8 s⁻², ω = √9.8 = 3.1305 rad s⁻¹ (3.1, or 3.13 to 3 s.f.).
    T = 2π/ω = 2π√(m/k) = 2π√(0.50/4.9) = 2.0071 s (2.0 s); f = 1/T = 0.498 Hz (0.50 Hz).
@@ -52,7 +53,7 @@
     [P_ZERO2, '', ''], [P_HALF1, '', ''], [P_HALF2, '', '']].map(([p, lx, la]) => ({ p, u: realAt(p), e: T, lx, la }));
   const DURATION_U = 152 + EXTRA.reduce((n, x) => n + x[1], 0);
 
-  const T_HL = 100.6, END = 140.0, DURATION = 152;
+  const T_HL = 100.6, T_HL_MATHS = 106.6, END = 140.0, DURATION = 152;
   const CAPS = [
     [4.6, 9.4, 'A 0.50 kg glider on a frictionless air track, between two springs. At rest, it sits at the equilibrium position.'],
     [9.6, 13.8, 'Pull it 0.10 m to the right and let go. There is no friction, and air resistance is negligible (no damping).'],
@@ -72,7 +73,7 @@
     [84.8, 89.8, 'Energy is transferred back and forth between kinetic energy and elastic potential energy in the springs.'],
     [90.0, 95.4, 'Kinetic energy is greatest at equilibrium, potential energy at the ends. With no friction, the total stays constant.'],
     [95.6, 100.8, 'Each reaches its maximum twice in every oscillation: the energies change at twice the frequency of the motion.'],
-    [101.0, 106.4, '(HL) A point moves round a circle of radius x₀ at a constant angular velocity ω. Its shadow moves exactly like the glider.'],
+    [101.0, 106.4, 'A point moves round a circle of radius x₀ at a constant angular velocity ω. Its shadow moves exactly like the glider.'],
     [106.6, 111.8, '(HL) Timing from the release, the radius turns through an angle ωt, so the displacement is x = x₀ cos ωt.'],
     [112.0, 117.0, '(HL) The data booklet writes x = x₀ sin(ωt + φ). Here the phase angle φ = π/2, since sin(ωt + π/2) = cos ωt.'],
     [117.2, 122.6, '(HL) The point\'s speed round the circle, ωx₀ = 3.13 × 0.10 = 0.31 m s⁻¹, is the glider\'s top speed, at x = 0.'],
@@ -353,11 +354,14 @@
     D.glowDot(s, px, py, fs * 1.5, C.light, A);
     D.glowDot(s, px, top, fs * 0.9, C.light, 0.8 * A);
     rich(s, [['x', 'i'], ['0', 's']], cx + R * 0.5, cy + fs * 0.85, fs + 1, 0.8 * A, C.muted);
-    // the HL label
-    const tx = cx + R + fs * 1.4, ty = cy - R + fs * 0.6;
-    g.font = D.sans(fs, 700); const w = g.measureText('HL').width + fs;
-    g.fillStyle = `rgba(${HLC},${0.85 * A})`; g.beginPath(); g.roundRect(tx - w / 2, ty - fs * 0.75, w, fs * 1.5, fs * 0.4); g.fill();
-    D.text(s, 'HL', tx, ty, fs, A, D.sans(fs, 700), '30,18,6');
+    // the HL label: only from the second circle caption, when the HL maths starts. The circle itself is not labelled HL,
+    // because the guide's SL linking question asks how circular motion can be used to visualize SHM (teacher, 17 November 2026).
+    const tx = cx + R + fs * 1.4, ty = cy - R + fs * 0.6, hA = A * smooth((t - T_HL_MATHS) / 0.8);
+    if (hA > 0) {
+      g.font = D.sans(fs, 700); const w = g.measureText('HL').width + fs;
+      g.fillStyle = `rgba(${HLC},${0.85 * hA})`; g.beginPath(); g.roundRect(tx - w / 2, ty - fs * 0.75, w, fs * 1.5, fs * 0.4); g.fill();
+      D.text(s, 'HL', tx, ty, fs, hA, D.sans(fs, 700), '30,18,6');
+    }
     // the point's velocity, and its horizontal part (the glider's velocity)
     // The full velocity (tangent, length ωx₀ on the glider's scale) shows only around the hold at x = 0, while the point
     // is in the lower half of the circle, so it never runs off the top of the picture; the horizontal part stays on.
