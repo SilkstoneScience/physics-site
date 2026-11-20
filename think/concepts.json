@@ -588,6 +588,33 @@
     "tempting": "<p>\"Longer\" and \"shorter\" both come from following the lane argument carefully (eastbound traffic a few metres nearer the equator) without noticing that it only describes cars <em>while they move</em>. The moment a car stops, the Earth has its angular momentum back, so nothing is left once the traffic has parked. (While traffic flows both ways, the eastward and westward amounts cancel almost exactly: the lane difference leaves about a millionth of one car's effect.)</p><p>\"Too small to affect the Earth at all\" confuses <em>immeasurably small</em> with <em>zero</em>. Conservation of angular momentum applies to every interaction: the Earth really does slow by about $10^{-18}$ s per day while a car drives east. Physics does not have a size limit below which conservation laws switch off.</p>"
   },
   {
+    "id": "CC-A4-05",
+    "topic": "A.4",
+    "level": "HL",
+    "type": "choice",
+    "title": "Over the hill",
+    "figure": {
+      "svg": "diagrams/cc-a4-05-hill.svg",
+      "alt": "Two identical lanes, each with level ground and then the same gentle hill, 0.67 m high. On the upper lane a hollow ball, drawn cut in half to show a thin shell, rolls towards the hill at 3.0 m s⁻¹. On the lower lane a solid ball, also drawn cut in half, rolls towards its hill at 3.0 m s⁻¹.",
+      "caption": "Each ball is drawn cut in half to show the inside. Both roll at 3.0 $\\text{m s}^{-1}$ towards identical hills 0.67 m high. Not to scale."
+    },
+    "question": "<p>Two balls have the same mass and the same radius. One is a thin hollow shell, with moment of inertia $\\tfrac{2}{3}mR^2$, and the other is solid, with moment of inertia $\\tfrac{2}{5}mR^2$. They roll without slipping along level ground, side by side, at 3.0 $\\text{m s}^{-1}$, towards two identical hills whose tops are 0.67 m above the level ground. The hills are gentle enough that neither ball leaves the surface. Both balls keep rolling without slipping all the way up, and air resistance and rolling resistance are negligible. Which ball or balls get over the hill?</p>",
+    "options": [
+      "Only the solid ball",
+      "Only the hollow ball",
+      "Both balls",
+      "Neither ball"
+    ],
+    "answer": 1,
+    "reveal": "<p><strong>Only the hollow ball.</strong> It carries more kinetic energy, so it can climb higher.</p><p>A rolling ball has two kinds of kinetic energy: translational, $\\tfrac{1}{2}mv^2$, from moving along, and rotational, $\\tfrac{1}{2}I\\omega^2$, from spinning. The two balls have the same mass and speed, so the same translational kinetic energy. Rolling without slipping, $\\omega = \\dfrac{v}{R}$, so they also spin at the same rate. But the hollow ball has all its mass far from the axis, so it has the larger moment of inertia: $\\tfrac{2}{3}mR^2$ for a thin shell, compared with $\\tfrac{2}{5}mR^2$ for a solid ball. So the hollow ball has more rotational kinetic energy.</p><p>With $I = kmR^2$, the total kinetic energy is $\\tfrac{1}{2}mv^2(1 + k)$. As a ball climbs, gravity slows it down. Friction from the hill acts <em>up</em> the slope: its torque slows the spin to match, so the ball keeps rolling without slipping, while its push helps the ball climb. The point touching the hill doesn't slide, so this friction does no work overall and no energy is lost: it passes the rotational kinetic energy on into climbing. So <em>all</em> the kinetic energy becomes gravitational potential energy. The ball stops when $mgh = \\tfrac{1}{2}mv^2(1 + k)$, so $h = \\dfrac{v^2(1 + k)}{2g}$. At 3.0 $\\text{m s}^{-1}$, the solid ball's centre rises 0.64 m and the hollow ball's 0.77 m. The hills are 0.67 m high: the solid ball falls about 3 cm short and rolls back, while the hollow ball clears the top with about 10 cm to spare. (The solid ball would need about 3.06 $\\text{m s}^{-1}$ to get over.) The mass and the radius cancel, so this is true for balls of any size.</p><p>This is the opposite of the race down a slope in \"Hollow or solid?\": there the hollow ball loses, because more of its energy goes into spinning. Here the same thing helps it, because the energy stored in its spin is extra energy for climbing.</p><p>If the hill were frictionless ice, nothing could slow the balls' spin. Each would keep spinning at the same rate and rise only $\\dfrac{v^2}{2g} = 0.46$ m, the same height for both, and neither would get over.</p>",
+    "revealFigure": {
+      "svg": "diagrams/cc-a4-05-energy.svg",
+      "alt": "Bar chart of each ball's kinetic energy on the level ground. Both bars have the same blue part for moving along. The solid ball's orange part for spinning is 0.4 times as long as its blue part; the hollow ball's is two thirds as long. The solid ball has enough energy to rise 0.64 m, the hollow ball 0.77 m.",
+      "caption": "Kinetic energy at 3.0 $\\text{m s}^{-1}$, to scale: <span class=\"key-1\">translational</span> (the same for both) and <span class=\"key-2\">rotational</span>. The hollow ball has 19% more kinetic energy in total, so it climbs higher."
+    },
+    "tempting": "<p>\"Only the solid ball\" is tempting if you remember that a solid ball wins a race down a slope, or feel that a solid ball is somehow \"stronger\" or has more momentum. But the balls have the same mass and speed, so they have the same momentum and the same translational kinetic energy. The only difference is in the spinning, and there the hollow ball has more energy, not less.</p><p>\"Neither ball\" comes from writing $\\tfrac{1}{2}mv^2 = mgh$ and leaving out the rotational kinetic energy, one of the most common mistakes with rolling objects. That gives a rise of only 0.46 m, well short of 0.67 m. It would be true for objects that slide without spinning, or for balls on a frictionless hill, where nothing can slow their spin.</p><p>\"Both balls\" is tempting if you include the rotational kinetic energy but give both balls the same amount, or round the solid ball's 0.643 m up. The solid ball's moment of inertia is smaller, so it has less spin energy and falls just short.</p><p>You may have met the idea that a spinning ball is like a flywheel that \"keeps it going\". In the race down a slope that idea misleads, but here it is right: the energy stored in the spin really does carry the hollow ball higher.</p>"
+  },
+  {
     "id": "CC-A5-01",
     "topic": "A.5",
     "level": "HL",
