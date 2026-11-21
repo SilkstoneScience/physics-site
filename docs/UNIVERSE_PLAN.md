@@ -1,0 +1,108 @@
+# Universe Engine: plan, decisions and state
+
+Started 16 November 2026 on the branch `worktree-universe-engine`. Phase 1 only: one polished system (the showcase seed plus "New system"). Not linked from the site yet; the page is `noindex`.
+
+## What it is
+
+`universe/index.html`: a procedurally generated star system that students fly through, for D.1 gravitational fields, A.2 circular motion and A.3 energy. Every number shown is calculated live in SI units from the data booklet's constants.
+
+## Files
+
+| File | What it holds |
+|---|---|
+| `universe/index.html`, `universe/css/universe.css` | The page and its overlay panels |
+| `universe/js/physics.js` | Constants, Kepler's equation, orbits ↔ position and velocity, full-gravity integrators, test mass, star model. No Three.js: Node tests it |
+| `universe/js/generator.js` | Seeded generator (version 1), plausibility rules, `validate`, `hashSystem`. No Three.js |
+| `universe/js/sim.js` | The simulation state: Orbits and Full gravity modes, pushes, mass changes, collisions, test mass. No Three.js |
+| `universe/js/shaders.js`, `scene.js`, `viz.js`, `camera.js` | Everything drawn (Three.js 0.187.0, WebGL2) |
+| `universe/js/ui.js`, `main.js` | Panels, equations, start-up, frame loop, test hooks (`window.UE`) |
+| `tools/universe/test.mjs` | Node tests (`--stability` for the slow one, `--find` to look for seeds) |
+| `tools/universe/browser-test.js` | Browser tests, run from the console (see the top of the file) |
+| `tools/universe/dev-server.mjs` | Preview server that can also save test pictures outside the site |
+
+Size of the page's own files: about 243 KB uncompressed (limit agreed: 400 KB). Three.js and MathJax come from jsDelivr, pinned (`three@0.187.0`, `mathjax@4.1.3`).
+
+## Teacher's decisions (16 November 2026)
+
+1. **Moons in Full gravity** keep exact ellipses around their moving planet; the star and planets all pull on each other.
+2. **Test mass**: straight up only, from a non-rotating, airless body, counting only that body's gravity.
+3. **HL tags** follow the site's D.1 page: orbital speed has no tag; potential energy, potential, equipotentials, the potential well, total energy and escape speed are tagged HL.
+4. **Names** are invented from the seed (same seed, same names), with a block list.
+5. Desktop and laptop only: touch-only devices and windows under 900 px get a message and a link back, and Three.js is never loaded there.
+
+## How the physics is done
+
+- **Orbits mode** (default): each planet follows its exact two-body ellipse around a fixed star (Kepler's equation by Newton–Raphson), with μ = GM, the star's mass only, as in the IB course. Moons do the same around their planet.
+- **Full gravity**: star and planets as point masses, Yoshida 4th-order symplectic steps, fixed step = shortest "periapsis period" ÷ 300, at most 400 steps per frame (the clock slows rather than the step growing). No softening: bodies that touch merge (momentum conserved), including bodies that pass through each other within one step. The live "energy drift" is (E − E₀)/|E₀|, reset whenever the student changes something or bodies merge.
+- **Changing things** (a mass, a push) switches to Full gravity from the present state and re-centres on the centre of mass. A planet's mass is capped at 1 % of the star's, because the panel's equations treat the star as fixed. Moons carry on from where they are on a new ellipse.
+- **Test mass**: velocity Verlet in one dimension with a step of 0.001 √(r³/GM).
+- **Generator**: `sfc32` seeded from a hash of the seed text; every generated number is rounded to 7 significant figures so that browsers that differ in the last binary digit of `pow` or `sin` still agree.
+
+## Every approximation, in plain language
+
+1. In Orbits mode the planets do not pull on each other, and each planet's own mass is left out of its period (T² = 4π²r³/GM).
+2. In Full gravity the moons still follow fixed ellipses around their planet, and the star does not pull on moons directly.
+3. Bodies are point masses for gravity; a collision is a perfectly inelastic merge. The merged body keeps the larger one's radius.
+4. Asteroids and belt dust are decoration: fixed ellipses around the star, pulled by nothing else and pulling on nothing.
+5. Stars: L ∝ M⁴; R ∝ M^0.8 below one solar mass and M^0.57 above; temperature from L = σAT⁴; colour from a black body at that temperature. Changing the star's mass in the Change tab changes only its mass.
+6. Planet radii come from mass with one rule per type (rock: R ∝ M^0.27; ice worlds: a density of 1500–2600 kg m⁻³; giants: fitted to Solar System values). Moons are spaced inside 0.33 of the Hill radius and outside 1.2 of the fluid Roche limit; rings lie inside 0.95 of the Roche limit for ice; neighbouring planets are at least 9 mutual Hill radii apart.
+7. Solar and Earth reference values (not in the booklet) are standard values to 3 significant figures. 1 AU = 1.50 × 10¹¹ m, the booklet's value.
+8. **Sizes**: a far-away body is drawn at a minimum apparent size, so it is enlarged by a factor that the label at the bottom left always states; close up it is at true size. Asteroids are drawn 2500 times too large. "True scale" removes all of this. Distances are always to scale, and the physics never uses the drawn sizes.
+9. **Brightness**: all planets are lit at the same exposure, so outer planets look brighter than they would. Shadows have a soft edge of fixed width, not one worked out from the star's size. Atmosphere haloes are drawn thicker than real ones.
+10. The field map, equipotentials and potential well are drawn in the plane through the star; planets tilted slightly out of that plane are treated as if in it. The well shows only the star's potential.
+11. Time is slowed automatically while the camera is close to a moon, so that the moon does not jump round its orbit between frames. The time bar says "slowed here".
+12. Velocity and force arrows: length is proportional to size on the screen, with a 7-pixel minimum, and arrows of planets crowded against the star are hidden until the student zooms in.
+
+## Tests and gates (state on 16 November 2026)
+
+- `node tools/universe/test.mjs`: 265 tests pass (determinism for seeds 1–200 and a snapshot; Kepler period to 1e-9; Earth–Sun; 1000 orbits in full gravity; escape at 0.99 and 1.01 of escape speed; mode switching, pushes, mass changes and the test mass in the page's own stepper).
+- `--stability`: 99 of 100 generated systems kept every planet's semi-major axis within 10 % for 10,000 simulated years (leapfrog, 60 steps per shortest orbit; 269 s to run). The one failure was a small planet's orbit shifting 12 % in 42 years.
+- Browser tests: 56 pass at 1280×720 on Normal; 58 on Low with reduced motion and a seed from the link; the narrow-window message was checked at 800×700.
+- `node tools/check.mjs`: no errors. One new warning: the 2028 register is out of date (see "Integration").
+- Independent physics review: no errors in the untouched system. Confirmed problems after a student's change (moons jumping when a planet's mass changed; a planet allowed to reach 20 % of the star's mass, where the panel's fixed-star equations were up to 20 % out; wording on escape paths; a launch-tab total of 0 J before launch; planets passing through each other; a graph note that read like a verification) were all fixed, and tests added. Left as they are: an "ice world" can be generated a little inside the frost line; an icy moon can have a rocky density; a merged body keeps its old radius.
+- Visual review: five rounds by reviewers who saw only pictures (six fixed views at 1920×1080, a 1280×720 window with panels, 25 frames of a scripted 30-second flight and three bursts of consecutive frames). Fixed along the way: moons strobing at fast time rates, arrivals on the night side, overview clutter, enlarged bodies overlapping the star, the selected orbit path spearing through the planet, and the asteroid's surface. No jitter, z-fighting, popping or banding was found in any round. Remaining points, all rated minor: small arrows and some dropped labels in wide views; the star's surface is low in contrast; flat cloud shapes and a hard sun glint on the ocean planet; a dotted look to the thin ring shadow on the gas giant.
+- Performance (scripted 30-second flight at 1920×1080, on a desktop NVIDIA RTX 3080, Chromium): processor time per frame, mean / 99th percentile / worst: Low 1.0 / 3.0 / 10.6 ms (64 draw calls, 0.23 million triangles, drawn at 1440×810); Normal 1.6 / 5.7 / 10.5 ms (63 calls, 0.83 million); High 2.8 / 10.1 / 13.4 ms (63 calls, 2.5 million). Multiplying by 4 to stand in for a slow laptop processor gives 4, 6 and 11 ms means. **Not measured:** time on the graphics chip (the preview pane was in the background, where the browser neither paces frames nor returns timings promptly), real frame pacing, and anything on integrated graphics. The fps line in the Quality panel shows the real figure on any machine.
+
+## Known limitations
+
+- Not tested on Intel UHD or Iris Xe graphics, on a Mac, or in Firefox or Safari. Only Chromium on a desktop NVIDIA card.
+- The automatic choice of quality uses the graphics chip's name plus one timed frame; it has only been exercised on one machine.
+- Moons cannot be pushed or have their mass changed. A planet that escapes is flagged but stays in the system.
+- Labels that would overlap are dropped rather than moved, so in a wide view some planets have no name until the student zooms in or opens the Bodies list.
+- MathJax is loaded with the page (about 1 MB from the CDN) although equations appear only when asked for.
+
+## Integration (not done; each needs the teacher's yes)
+
+- A home-page card and/or a menu entry (`js/site.js`, `index.html`), and a link from D.1 and the Practicals or Review games page.
+- Remove `noindex`, then `node tools/check.mjs --sitemap`.
+- `PROGRESS.md`, and a short section in `CLAUDE.md` describing these files.
+- `docs/2028_REGISTER.md`: the page has one "New for 2028" tag (deducing Kepler's third law, in `universe/js/ui.js`), so run `node tools/list-2028.mjs --write`.
+- About page: nothing to credit (no images; Three.js is MIT-licensed and loaded from the CDN), unless the teacher wants it mentioned.
+- GitHub: decide whether `tools/universe/test.mjs` should run in `.github/workflows/check.yml`.
+
+## Phase 2 (teacher approved Phase 1 and asked for Phase 2 on 16 November 2026)
+
+Built on the same branch. Decisions taken by default, for the teacher to confirm:
+
+1. **Neighbouring stars are invented**, like the planets. Each seed now defines a neighbourhood: star 0 is the system the seed always gave (unchanged, so old links and the snapshot test still hold), and 20 to 28 more stars lie within 12 light years, no two closer than 1.3 light years. That is about the real density of stars near the Sun. Each neighbour is a full system with the seed `<seed>~<number>`. Links record the place: `?seed=starfall&star=5&v=1`.
+2. **Travel skips the journey.** The Stars panel gives each star's distance (light years, metres, AU), light-travel time, mass, luminosity, number of planets and apparent brightness from where you are, b = L/4πd², with the working. "Travel" fades out, builds that system and arrives from the direction you came from; the star you left is then in the sky in exactly the opposite direction. The screen says how long light itself would take.
+3. **The real Solar System is a separate preset**, not a star on the invented map: seed `sol`, or the button in the System panel. It has no neighbours, because mixing real stars with invented planets would mislead.
+
+New files: `universe/js/solar.js` (the data, with its sources at the top) and `universe/js/sector.js` (the neighbourhood). Both are plain modules that Node tests.
+
+### The real Solar System: what is and is not real
+
+- Real: masses, mean radii, rotation periods, the Sun's values, Saturn's main rings, and seven large moons (Moon, Io, Europa, Ganymede, Callisto, Titan, Triton), from the NASA NSSDCA planetary fact sheets (public domain, read 16 November 2026). Orbits from NASA JPL's "Approximate Positions of the Planets", Table 1, for 1 January 2000. Spin axes from the IAU pole directions. The clock shows real calendar dates.
+- Tested against NASA: all eight periods, mean speeds, densities, escape speeds, surface gravity, seven moon periods, seven axial tilts, Triton's backward orbit, and every planet's position against JPL's own formula (which includes the slow drift of the orbits): identical on 1 January 2000, within 0.35° in November 2026 and 0.51° in 2040 (Jupiter is the worst, because its own mass is left out of its period).
+- The Sun's mass is set to NASA's GM divided by the booklet's G (1.98969 × 10³⁰ kg, not the fact sheet's 1.9884 × 10³⁰ kg). Only the product GM sets how fast planets go round, and the booklet's G is 0.065 % below the value NASA used; without this, Earth was 3° from its true place by 2026. Both masses read 1.99 × 10³⁰ kg.
+- Not real: surfaces are drawn by the same shaders as invented planets (Earth's continents are made up; Venus is drawn as a cloud deck). Moons start at arbitrary points of their real orbits. The planets' orbits are fixed as they were in 2000, so positions drift from the real ones over centuries. Mars's two tiny moons, the other giants' faint rings and all dwarf planets are left out.
+- Small differences from NASA's quoted figures, by design: every planet is a sphere of its mean radius, so Jupiter's and Saturn's surface field strengths come out 4 % and 7 % above NASA's equatorial values; the Moon's period is 0.6 % long because its own mass is left out, as for every body in Orbits mode.
+- In the Solar System, distances in AU use 1 AU = 1.496 × 10¹¹ m so that Earth reads 1.00 AU; invented systems keep the booklet's 1.50 × 10¹¹ m.
+- Mars, Mercury, Venus and the Moon have hand-chosen colours so that each is recognisable; everything else about their surfaces is procedural.
+
+### Phase 2 tests
+
+- Node: 341 tests pass (76 new).
+- Independent physics review of Phase 2: every number in the tables matched the saved NASA and JPL pages. Fixed: the planets running 0.03 % slow (above); a sentence that said low brightness is why stars look like points (it is why they look faint); Triton's spin direction; Neptune's tilt (28.3°, was 27.9°); loose or empty tests. Left: the invented neighbours are 0.5 to 2 solar masses, while most real neighbours are dim red dwarfs (now said in the help).
+- Independent picture review of Phase 2: Saturn, Jupiter, Venus, Neptune and Earth read as themselves; Mars looked molten and was redone; the Moon and Mercury were too dark and too alike and were given their own greys. Remaining minor points: Earth's clouds are blobby and its sun glint hard; labels crowd near the Sun in the widest view.
+- Browser: the 56 earlier tests still pass; 16 new ones cover the Stars panel, clicking a star in the sky, travelling there and back (same home system, opposite direction, same distance, address updated) and the Solar System preset.

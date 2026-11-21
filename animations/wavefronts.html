@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: wavefronts, refraction, diffraction and interference · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics C.3: a ripple tank seen from above, showing wavefronts and rays, refraction into shallow water with Snell's law, diffraction through a wide and a narrow gap, and two-source interference.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/wavefronts.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: wavefronts, refraction, diffraction and interference · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics C.3: a ripple tank seen from above, showing wavefronts and rays, refraction into shallow water with Snell's law, diffraction through a wide and a narrow gap, and two-source interference.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/wavefronts.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/wavefronts.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Wavefronts and rays</p>
+    <h1>Wavefronts and rays</h1>
+    <p class="lead">A ripple tank seen from above. Plane waves meet shallower water and refract, pass through a wide and then a narrow gap, and finally spread from two coherent sources and interfere. The water's surface in every part is calculated from simple wave models, not drawn by hand. <a class="tag" href="../themes/c3.html#wavefronts">C.3 Wave phenomena</a></p>
+
+    <figure class="anim-stage" data-anim="wavefronts">
+      <canvas role="img" aria-label="Animation of water waves in a ripple tank seen from above: plane waves with rays, waves refracting into shallower water, waves diffracting through a wide and a narrow gap, and the interference pattern of two sources with lines of constructive and destructive interference. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The tank is seen from above. Bright bands are crests and dark bands are troughs. The waves are typical ripple-tank waves: frequency $f = 8.0$ Hz, speed $0.24$ $\text{m s}^{-1}$ in the deep water and $0.16$ $\text{m s}^{-1}$ in the shallow water. On screen they are slowed down 8 times, to one wave per second. Rays are gold arrows.</p>
+      <ol>
+        <li><strong>Plane waves.</strong> A bar dips in and out of the water 8.0 times a second and sends out straight (plane) waves. A wavefront joins neighbouring points that are in phase, such as a line along a crest. Neighbouring wavefronts are one wavelength apart: $\lambda = 3.0$ cm, so $v = f\lambda = 8.0 \times 0.030 = 0.24$ $\text{m s}^{-1}$.</li>
+        <li><strong>Rays.</strong> A ray shows the direction the wave travels, carrying its energy. Rays are always at right angles to the wavefronts.</li>
+        <li><strong>Refraction.</strong> Beyond a boundary the water is shallower (a glass plate lies under it), and the waves travel more slowly, at $0.16$ $\text{m s}^{-1}$. <strong>Predict:</strong> the bar still sets the frequency, so what happens to the wavelength? It gets shorter: $\lambda = v/f = 0.16 / 8.0 = 0.020$ m $= 2.0$ cm.</li>
+        <li>One end of each wavefront reaches the shallow water first and slows down, so the wavefront bends. The angle of incidence (between the ray and the normal) is $\theta_1 = 50°$. The ray bends towards the normal, because the wave slows down. Snell's law gives $\dfrac{\sin\theta_2}{\sin\theta_1} = \dfrac{v_2}{v_1}$, so $\sin\theta_2 = \dfrac{0.16}{0.24} \times \sin 50° = 0.51$ and $\theta_2 = 31°$.</li>
+        <li>A little of the wave is also reflected at the boundary, with the angle of reflection equal to the angle of incidence (50°). Most is transmitted. (The weak reflected wave crosses the incoming one, which gives the faint pattern in the deep water near the boundary, where the reflected rays reach.)</li>
+        <li><strong>Diffraction through a wide gap.</strong> A barrier has a gap 15 cm wide, five wavelengths. The waves carry on almost straight through it, spreading out only a little at the edges.</li>
+        <li><strong>Predict:</strong> what happens if the gap is only 2.0 cm wide, less than one wavelength (two-thirds of it)? The waves spread out widely, with curved wavefronts. Diffraction is most noticeable when the gap is similar in size to the wavelength. The wavelength, frequency and speed don't change; the wavefronts change shape, and the waves get weaker as they spread out. The waves beyond the narrow gap are weaker anyway, because less of the wave gets through.</li>
+        <li><strong>Huygens' principle:</strong> every point on a wavefront acts as a source of circular wavelets. A narrow gap lets through only a small part of the wavefront, which acts like a point source.</li>
+        <li><strong>Two coherent sources.</strong> Two dippers moved by the same motor, 12 cm ($4\lambda$) apart, make circular waves with the same frequency and a constant phase difference (here they are in phase). Where the waves overlap, the displacements add: superposition.</li>
+        <li>Along the pink lines the water hardly moves, because a crest from one source always arrives with a trough from the other: destructive interference. Along the green lines, crests arrive with crests and troughs with troughs, so the water moves most: constructive interference.</li>
+        <li><strong>Predict:</strong> point P is 15.0 cm from one source and 21.0 cm from the other. The path difference is $21.0 - 15.0 = 6.0$ cm $= 2\lambda$, a whole number of wavelengths, so the waves arrive in phase and the water at P moves a lot (the gauge beside P).</li>
+        <li>Point Q is 19.5 cm and 24.0 cm from the sources: the path difference is $4.5$ cm $= 1.5\lambda$. The waves arrive half a cycle out of step, so Q hardly moves. (Not quite still: the wave from the nearer source is a little stronger, because the ripples weaken as they spread out.)</li>
+        <li>Summary: for two sources in phase, constructive interference where the path difference $= n\lambda$, and destructive where it is $\left(n + \tfrac{1}{2}\right)\lambda$, with $n = 0, 1, 2, \ldots$</li>
+      </ol>
+      <p>How the water is drawn: for each part the wave's amplitude and phase are worked out across the whole tank from simple models (plane waves on each side of the boundary, with the phase matching along it; Huygens wavelets from points across each gap; circular waves from the two sources, weakening with distance as $1/\sqrt{r}$), and the surface is then shaded as the waves move. The tank's edges and the barrier are taken not to reflect any waves.</p>
+      <p>Read more in <a href="../themes/c3.html#wavefronts">C.3 section 1: wavefronts and rays</a>, <a href="../themes/c3.html#reflection">section 2: reflection and transmission</a>, <a href="../themes/c3.html#refraction">section 3: refraction and Snell's law</a>, <a href="../themes/c3.html#diffraction">section 5: diffraction</a>, <a href="../themes/c3.html#superposition">section 6: superposition</a> and <a href="../themes/c3.html#interference">section 7: two-source interference</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

@@ -1,22 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220">
-  <!-- floor -->
-  <line class="axis" x1="20" y1="200" x2="380" y2="200"/>
-  <!-- upright freezer cabinet -->
-  <rect class="axis" x="110" y="30" width="110" height="170" style="fill:var(--surface)"/>
-  <rect class="area" x="116" y="36" width="98" height="158"/>
-  <line class="axis thin" x1="116" y1="90" x2="214" y2="90"/><line class="axis thin" x1="116" y1="142" x2="214" y2="142"/>
-  <!-- door, just closed (drawn a little ajar), hinged on the left -->
-  <path class="axis" d="M110 30 L236 46 V210 L110 200 Z" style="fill:var(--surface)"/>
-  <rect class="axis thin" x="222" y="110" width="7" height="34" style="fill:var(--surface)"/>
-  <!-- hand pulling the handle -->
-  <line class="l3" x1="248" y1="118" x2="330" y2="104"/>
-  <line class="l3" x1="248" y1="134" x2="330" y2="122"/>
-  <ellipse class="l3" cx="236" cy="127" rx="13" ry="11" style="fill:var(--surface)"/>
-  <path class="l3 thin" d="M226 122 q4 -6 10 -4 M226 130 q4 -6 10 -4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -3 400 233">
+  <!-- side view: floor -->
+  <line class="axis" x1="20" y1="206" x2="380" y2="206"/>
+  <!-- freezer cabinet (side section), open towards the door on the right -->
+  <path class="axis" d="M220 30 H70 V196 H220" style="fill:var(--surface)"/>
+  <rect class="area" x="80" y="40" width="140" height="146"/>
+  <path class="axis thin" d="M220 40 H80 V186 H220"/>
+  <line class="grid" x1="80" y1="88" x2="214" y2="88"/>
+  <line class="grid" x1="80" y1="138" x2="214" y2="138"/>
+  <rect class="f3" x="80" y="196" width="12" height="10"/>
+  <rect class="f3" x="200" y="196" width="12" height="10"/>
+  <!-- rubber seal between cabinet and door -->
+  <rect class="f3" x="220" y="30" width="5" height="10"/>
+  <rect class="f3" x="220" y="186" width="5" height="10"/>
+  <!-- door, shut -->
+  <rect class="axis" x="225" y="28" width="12" height="170" style="fill:var(--surface)"/>
+  <!-- handle -->
+  <path class="l3" d="M237 98 H253 V148 H237"/>
+  <!-- forearm and fist gripping the handle -->
+  <path class="axis" d="M266 110 L352 98 M268 136 L352 126" style="stroke-width:2"/>
+  <line class="axis" x1="340" y1="98" x2="344" y2="128" style="stroke-width:2"/>
+  <rect class="axis" x="246" y="106" width="24" height="34" rx="10" style="fill:var(--surface);stroke-width:2"/>
+  <path class="axis" d="M247 114 H258 M247 122 H258 M247 130 H258" style="stroke-width:1.5"/>
+  <!-- pull arrow, label clear of it -->
+  <line class="l2" x1="282" y1="164" x2="342" y2="164" marker-end="url(#ah2)"/>
+  <text x="352" y="169">pull</text>
   <!-- labels -->
-  <text x="165" y="22" text-anchor="middle">freezer</text>
-  <text class="t1" x="165" y="124" text-anchor="middle">−18 °C</text>
-  <text x="320" y="60" text-anchor="middle">room 20 °C</text>
-  <text x="300" y="160" text-anchor="middle">pull</text>
-  <line class="l2" x1="282" y1="150" x2="320" y2="150" marker-end="url(#ah2)"/>
+  <text x="150" y="20" text-anchor="middle">freezer (side view)</text>
+  <text class="t1" x="150" y="118" text-anchor="middle">−18 °C</text>
+  <text x="318" y="66" text-anchor="middle">room 20 °C</text>
+  <line class="axis" x1="227" y1="200" x2="246" y2="216" style="stroke-width:1"/>
+  <text x="250" y="222">seal</text>
 </svg>

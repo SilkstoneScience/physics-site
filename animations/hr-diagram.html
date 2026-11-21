@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: the HR diagram and how stars evolve · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics E.5: real stars placed on a Hertzsprung–Russell diagram, lines of constant radius from L = 4πR²σT⁴, and the approximate paths of a Sun-like star and a 25-solar-mass star as they evolve.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/hr-diagram.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: the HR diagram and how stars evolve · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics E.5: real stars placed on a Hertzsprung–Russell diagram, lines of constant radius from L = 4πR²σT⁴, and the approximate paths of a Sun-like star and a 25-solar-mass star as they evolve.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/hr-diagram.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/stars.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › The HR diagram</p>
+    <h1>The HR diagram and how stars evolve</h1>
+    <p class="lead">Real stars appear on a Hertzsprung–Russell diagram at their measured luminosity and temperature. Lines of constant radius show why giants are huge and white dwarfs tiny, and then a Sun-like star and a much more massive star move along their approximate paths as they age. <a class="tag" href="../themes/e5.html#hr">E.5 Fusion and stars</a></p>
+    <p class="new2028-note"><span class="tag y2028">New for 2028</span> For exams from 2028 the guide adds the role of the Chandrasekhar and Oppenheimer–Volkoff limits: see step 14.</p>
+
+    <figure class="anim-stage" data-anim="stars">
+      <canvas role="img" aria-label="Animation of a Hertzsprung–Russell diagram: luminosity against surface temperature, with real stars as coloured dots, the main sequence, red giants, supergiants, white dwarfs, the instability strip and lines of constant radius, then the approximate evolutionary paths of a Sun-like star and of a 25-solar-mass star. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>Luminosity is given compared with the Sun's, $L_\odot$, on a logarithmic scale from $10^{-4}$ to $10^{6}$. Surface temperature runs along the bottom on a logarithmic scale from 50 000 K to 2500 K, increasing to the <strong>left</strong>, as on every HR diagram. The bright, labelled dots are real stars; the faint dots fill in where most stars lie. Dot sizes hint at which stars are bigger, but are not to scale.</p>
+      <ol>
+        <li>The axes are drawn: luminosity up the side, surface temperature along the bottom, both logarithmic, with hot stars on the left.</li>
+        <li>The Sun appears at about 5800 K and, by definition, 1 $L_\odot$.</li>
+        <li>Other real stars appear at their measured values (approximate): Sirius A (9900 K, 25 $L_\odot$), Spica (25 000 K, $2.0 \times 10^4\ L_\odot$), Rigel (12 000 K, $1.2 \times 10^5\ L_\odot$), Betelgeuse (3600 K, $1.0 \times 10^5\ L_\odot$), Aldebaran (3900 K, 440 $L_\odot$), Proxima Centauri (3000 K, 0.0017 $L_\odot$) and the white dwarf Sirius B (25 000 K, 0.025 $L_\odot$).</li>
+        <li>The <strong>main sequence</strong> lights up: about 90% of stars, fusing hydrogen into helium in their cores. In these stars, gravity pulling inwards is balanced by radiation pressure and gas pressure pushing outwards.</li>
+        <li>The other regions are labelled: <strong>red giants</strong> are cool but luminous; <strong>supergiants</strong> are extremely luminous and can be hot (blue, like Rigel) or cool (red, like Betelgeuse); <strong>white dwarfs</strong> are hot but very dim. A narrow band, the <strong>instability strip</strong>, holds stars that pulsate, so their brightness varies (its edges are drawn approximately).</li>
+        <li><strong>Lines of constant radius.</strong> From $L = 4\pi R^2\sigma T^4$, comparing a star with the Sun gives $\dfrac{R}{R_\odot} = \sqrt{\dfrac{L}{L_\odot}} \times \left(\dfrac{T_\odot}{T}\right)^2$, because $4\pi$ and $\sigma$ cancel. Stars with the same radius lie on a straight line on these logarithmic axes. The lines drawn are for 0.01, 0.1, 1, 10, 100 and 1000 $R_\odot$: the further up and to the right, the bigger the star.</li>
+        <li>Betelgeuse: $\sqrt{1.0 \times 10^5} \times (5800 \div 3600)^2 = 316 \times 2.60 \approx 820$, so its radius is about 820 $R_\odot$.</li>
+        <li>Sirius B: $\sqrt{0.025} \times (5800 \div 25\,000)^2 = 0.158 \times 0.0538 \approx 0.0085$, so its radius is about 0.0085 $R_\odot$. The Earth's radius is $6.37 \times 10^6 \div 6.96 \times 10^8 = 0.0092\ R_\odot$, so Sirius B is about the size of the Earth.</li>
+        <li><strong>Predict:</strong> when the Sun runs out of hydrogen in its core, which way will it move on the diagram?</li>
+        <li>The core contracts and heats up, hydrogen fuses in a shell around it, and the outer layers swell and cool. The Sun moves up and to the right and becomes a <strong>red giant</strong>. Near the top of that climb, at about 3100 K and 2500 $L_\odot$, its radius is $\sqrt{2500} \times (5800 \div 3100)^2 = 175$, about 180 $R_\odot$.</li>
+        <li>Its core then fuses helium into carbon and oxygen: for a while the star shrinks and heats up (to roughly 4700 K and 50 $L_\odot$, about 11 $R_\odot$). When that helium runs out, it swells again, to roughly 3000 K and 5000 $L_\odot$ (about 260 $R_\odot$).</li>
+        <li>The outer layers drift away as a <strong>planetary nebula</strong>. The exposed core is briefly hotter than 100 000 K, off the left of the chart, and then fades. What is left is a <strong>white dwarf</strong> of about 0.013 $R_\odot$. With no fusion it slowly cools over billions of years, moving down and to the right along its line of constant radius: $L = 0.013^2 \times (T \div 5800)^4\ L_\odot$, which is 0.93 $L_\odot$ at 50 000 K and $6.1 \times 10^{-4}\ L_\odot$ at 8000 K.</li>
+        <li>A star of 25 solar masses starts on the main sequence at the top left (about 37 000 K and $8 \times 10^4\ L_\odot$). It has more fuel, but it uses it far faster: about 7 million years on the main sequence, against about 10 billion years for the Sun (about 1/1400 as long). It swells into a <strong>red supergiant</strong> of about 1000 $R_\odot$ ($\sqrt{1.5 \times 10^5} \times (5800 \div 3600)^2 \approx 1000$), fusing heavier elements until its core is iron. Its iron core collapses, and the outer layers are blasted away in a <strong>supernova</strong>, which can briefly shine as brightly as a whole galaxy (far above the top of this chart). The core left becomes a <strong>neutron star</strong> or a <strong>black hole</strong>, neither of which can be shown on this chart.</li>
+        <li class="new2028"><span class="tag y2028">New for 2028</span> For exams from 2028: what the core becomes depends on its mass. Below about 1.4 solar masses (the <strong>Chandrasekhar limit</strong>), electron degeneracy pressure holds it up as a white dwarf. Between that and about 2–3 solar masses (the <strong>Oppenheimer–Volkoff limit</strong>), neutron degeneracy pressure holds it up as a neutron star. Above that, nothing known can stop the collapse, and it becomes a black hole. The limits apply to the mass of the core that is left, not to the star's mass on the main sequence.</li>
+      </ol>
+      <p><strong>Where the numbers come from.</strong> The stars' luminosities and temperatures are rounded published values; different sources give slightly different values, especially for Betelgeuse, whose brightness varies. The radii are calculated from them with $L = 4\pi R^2\sigma T^4$. The evolutionary paths can't be worked out with the physics in the course: their shapes and positions are approximate, taken from the general results of computer models of stars, and they are labelled as approximate in the animation. The Sun's surface temperature is taken as 5800 K, as in the notes.</p>
+      <p>Read more in <a href="../themes/e5.html#equilibrium">E.5 section 3: the equilibrium of a star</a>, <a href="../themes/e5.html#radius">section 7: finding the radius of a star</a>, <a href="../themes/e5.html#hr">section 8: the Hertzsprung–Russell diagram</a> and <a href="../themes/e5.html#evolution">section 9: how stars evolve</a> (including <a href="../themes/e5.html#limits">the Chandrasekhar and Oppenheimer–Volkoff limits</a>).</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

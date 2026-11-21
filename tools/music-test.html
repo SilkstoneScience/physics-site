@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Animation music test (not published)</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.5 system-ui, sans-serif; max-width: 720px; margin: 24px auto; padding: 0 16px; }
+  h1 { font-size: 1.4rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 14px 0; }
+  button, select { font: inherit; padding: 8px 14px; border-radius: 8px; border: 1px solid #888; cursor: pointer; }
+  button.on { background: #2f6fd6; color: #fff; border-color: #2f6fd6; }
+  #status { color: #888; min-height: 1.5em; }
+  label { display: flex; gap: 8px; align-items: center; }
+</style>
+</head>
+<body>
+<h1>Animation music: before and after</h1>
+<p>For checking by ear, not published. Pick an animation, then press <strong>Before</strong> (the old, slower music) or
+<strong>After</strong> (quicker chord changes and a soft groove). The two are played at the same loudness. The groove
+slider changes how strong the bass, kick and brush are in "After" (1 = the level now used).</p>
+
+<div class="row">
+  <select id="scene" aria-label="Animation"></select>
+</div>
+<div class="row">
+  <button type="button" id="before">▶ Before</button>
+  <button type="button" id="after">▶ After</button>
+  <button type="button" id="stop">■ Stop</button>
+</div>
+<div class="row">
+  <label>Groove <input type="range" id="groove" min="0" max="2" step="0.25" value="1"> <span id="gv">1</span></label>
+  <label>Start at <input type="number" id="from" min="0" step="1" value="0" style="width:5em"> s into the animation</label>
+</div>
+<p id="status"></p>
+
+<script src="../js/anim/player.js"></script>
+<script src="../js/anim/music.js"></script>
+<script>
+(() => {
+  const NAMES = 'aurora bfield blackhole decay doppler drift duality earthstop efield energy engine entropy fission friction gas-pressure gfield gps gravity greenhouse heating induction jumps launch microwave millikan momentum motion-graphs photo powers-of-ten rainbow reaction rolling rutherford selector shm spacetime spectra standing star-life stars sunvanish superpose temperature torque tunnel voltage wavefronts waves well'.split(' ');
+  const sel = document.getElementById('scene'), status = document.getElementById('status');
+  for (const n of NAMES) sel.add(new Option(n, n));
+  sel.value = 'rainbow';
+  const gr = document.getElementById('groove'), gv = document.getElementById('gv');
+  gr.oninput = () => { gv.textContent = gr.value; };
+  let current = null;
+  // load the animation's own script, so the score (including one that follows the animation) is exactly the real one
+  const loaded = {};
+  async function scoreOf(name) {
+    if (!loaded[name]) loaded[name] = new Promise((res, rej) => { const sc = document.createElement('script'); sc.src = `../js/anim/${name}.js`; sc.onload = res; sc.onerror = rej; document.head.append(sc); });
+    await loaded[name];
+    return Anim.sceneOf(name).music || {};
+  }
+  // a stand-in for the animation's clock, so a score with sections changes as if the animation were playing
+  let clock = 0;
+  function stop() { clearInterval(clock); if (current) current.pause(); current = null; for (const b of document.querySelectorAll('button')) b.classList.remove('on'); }
+  async function play(which, btn) {
+    stop(); status.textContent = 'Preparing…';
+    const o = await scoreOf(sel.value);
+    const after = { ...o, groove: (o.groove ?? 1) * +gr.value };
+    let opts = after;
+    if (which === 'before') {                           // match the loudness of "after"
+      const old = { ...o, groove: 0, chordBeats: 8, sections: null, events: null };
+      const [a, b] = await Promise.all([AnimMusic.test(after, 12), AnimMusic.test(old, 12)]);
+      opts = { ...old, volume: (o.volume ?? 0.6) * (a.rms / b.rms) };
+    }
+    const from = +document.getElementById('from').value || 0, t0 = performance.now();
+    current = AnimMusic.create(opts); current.follow(from); current.play(); btn.classList.add('on');
+    clock = setInterval(() => { if (current) current.follow(from + (performance.now() - t0) / 1000); }, 100);
+    status.textContent = `${which === 'before' ? 'Before' : 'After'}: ${sel.value}` + (which === 'after' ? ` (groove ${gr.value})` : '');
+  }
+  document.getElementById('before').onclick = (e) => play('before', e.currentTarget);
+  document.getElementById('after').onclick = (e) => play('after', e.currentTarget);
+  document.getElementById('stop').onclick = () => { stop(); status.textContent = ''; };
+})();
+</script>
+</body>
+</html>

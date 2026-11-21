@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: what is gravity, really? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics D.1 and beyond: why everything falls alike, why free fall feels like no force, straight paths on a curved surface, clocks running slower lower down, and GPS. Einstein's curved spacetime without new equations.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/what-is-gravity.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: what is gravity, really? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics D.1 and beyond: why everything falls alike, why free fall feels like no force, straight paths on a curved surface, clocks running slower lower down, and GPS. Einstein's curved spacetime without new equations.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/what-is-gravity.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/gravity.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › What is gravity, really?</p>
+    <h1>What is gravity, really?</h1>
+    <p class="lead">In D.1, gravity is a force. In Einstein's general relativity it is not a force at all: mass curves space and time, and a falling apple simply follows the straightest path it can. This animation builds up the idea step by step, with no new equations. Apart from the D.1 starting point, everything here is <strong>beyond the IB course</strong>. <a class="tag" href="../themes/d1.html#newton">D.1 Gravitational fields</a></p>
+
+    <figure class="anim-stage" data-anim="gravity">
+      <canvas role="img" aria-label="Animation in eight scenes: an apple and a heavier ball falling together from a tree with force arrows; a hammer and a feather landing together on the Moon; two lifts, one standing still and one falling freely, with an apple let go inside each, and an inset of the space station orbiting the Earth; two walkers heading due north from the equator of a globe and meeting at the North Pole; two clocks on a tower, the lower one running slower; a GPS satellite orbiting the Earth with its clock corrections; a ball rolling round a dip in a rubber sheet; and starlight bent as it passes the Sun. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>This is the animation partner of the Think deeper big question <a href="../think/big-questions.html#BQ-18">Is gravity a force at all?</a>, which explains the same ideas in more detail. Air resistance is ignored throughout. Pictures labelled "exaggerated" are not to scale.</p>
+      <ol>
+        <li>In D.1, gravity is a force: the Earth pulls an apple down with a force $F = \dfrac{GMm}{r^2}$, so it accelerates towards the ground.</li>
+        <li>Every object in free fall at the same place has the same acceleration, whatever its mass. An apple of 0.20 kg and a ball of 0.60 kg fall 2.0 m together: the ball's force is three times bigger (5.88 N against 1.96 N), but so is its mass, so both accelerate at $9.8\ \text{m s}^{-2}$ and land after $\sqrt{2 \times 2.0 \div 9.8} = 0.64$ s.</li>
+        <li>On the Moon in 1971, an astronaut dropped a hammer and a feather together. With no air there, they landed at the same moment. (In the animation they are let go 1.2 m up, with $g = 1.6\ \text{N kg}^{-1}$, and land after about 1.2 s.)</li>
+        <li>In Newton's picture the mass cancels: $\dfrac{GMm}{r^2} = ma$, so $a = \dfrac{GM}{r^2}$. But why should the mass that gravity pulls on be exactly the same as the mass that resists being accelerated? Einstein took it as a clue. His general relativity (1915) is <strong>beyond the IB course</strong>, but its central ideas need no new equations.</li>
+        <li><strong>Predict:</strong> a lift is falling freely (a thought experiment), and you let go of an apple inside it. What does the apple do?</li>
+        <li>It floats beside your hand: you, the apple and the lift all fall together, with the same acceleration. In the lift standing still, the apple falls to the floor. Free fall feels like no force at all.</li>
+        <li>Astronauts on the space station float for the same reason (<a href="../themes/d1.html#weightless">D.1 section 7</a>). The station is about 400 km up, where gravity is still about 90% as strong as on the ground ($9.8 \times (6370 \div 6780)^2 = 8.7\ \text{N kg}^{-1}$); they and the station fall together. The inset draws the station's orbit to scale; one orbit takes 92.6 minutes, shown in 11 s (about 500 times faster).</li>
+        <li>What you feel when you stand still is the floor pushing up on you. A phone's accelerometer lying on the floor reads about $9.8\ \text{m s}^{-2}$ upwards; in free fall it reads about zero.</li>
+        <li>Einstein's view: the floor's push is the only real force on you. It keeps pushing you off the free-fall path you would otherwise follow.</li>
+        <li>Straight lines on a curved surface: two people start on the equator, 30° of longitude apart (about 3300 km), and both walk due north. Neither ever turns, yet the distance between them shrinks ($3336\cos\phi$ km at latitude $\phi$, measured along the line of latitude) and they meet at the North Pole. Nothing pulled them together: the surface of the Earth is curved.</li>
+        <li>General relativity says the same about spacetime. Mass curves it, and anything with no force on it follows the straightest possible path through it, so free paths that start out parallel bend towards each other. An apple falls because it follows its free path, while the ground, pushed up by the Earth beneath it, does not.</li>
+        <li>The surprise: for everyday falling, what matters most is the warping of <em>time</em>. (Space is warped too: that is why starlight bends twice as much as a Newton-style calculation gives.) Near the Earth, time runs slightly more slowly the lower down you are. Compared with a clock on the floor, a clock 1 m higher gains about $\dfrac{9.8 \times 1}{(3.00 \times 10^{8})^2} = 1.1 \times 10^{-16}$ of a second every second. The two clocks on the tower show the idea, but with the difference hugely exaggerated (the lower one runs at 80% of the rate of the upper one).</li>
+        <li>It is tiny, but real: in 2010, atomic clocks detected the difference when one was raised by just 33 cm. Even an apple at rest is moving through time, and where time is warped its straightest path curves downwards: for slow-moving things like an apple, that is almost all of the falling.</li>
+        <li>GPS satellites orbit about 20 000 km up (orbit drawn to scale; the motion is speeded up about 1800 times). Higher in the Earth's gravitational field, their clocks run about 45 microseconds a day faster than clocks on the ground. Their speed, about 3.9 km s⁻¹, makes them run about 7 microseconds a day slower (the time dilation of A.5, HL). Overall they run about 38 microseconds a day fast. Without correcting this, timing errors worth more than 10 km of distance would build up every day ($38 \times 10^{-6}\ \text{s} \times 3.00 \times 10^8\ \text{m s}^{-1} \approx 11$ km).</li>
+        <li>A famous picture: a ball rolling round a dip in a stretched rubber sheet. Its flaw: the ball only rolls in because gravity pulls it down, so it uses gravity to explain gravity. Treat it as a rough model only. The surface in our <a href="potential-well.html">potential well animation</a> looks similar, but it is a graph of gravitational potential, not a picture of spacetime.</li>
+        <li>The evidence: starlight passing the Sun is bent by 1.75 arcseconds, twice as much as a Newton-style calculation gives; this was first measured during the solar eclipse of 1919 (the bending in the picture is hugely exaggerated). Mercury's orbit slowly turns, by an extra 43 arcseconds per century that Newton's law could not explain. In 2015, gravitational waves (ripples in spacetime from two black holes merging) were detected.</li>
+        <li>Where gravity is weak and speeds are much less than the speed of light, general relativity gives the same answers as Newton's law, so the calculations in D.1 stay correct.</li>
+      </ol>
+      <p><strong>What is modelled.</strong> The falls are calculated from constant accelerations ($9.8$ and $1.6\ \text{m s}^{-2}$) with no air resistance, and run at their real speed. The globe is an exact sphere seen from 25° above the equator. The space station's and the GPS satellite's orbits are drawn to scale, with their motion speeded up. The clock-rate difference and the bending of light are exaggerated so that they can be seen. The GPS figures come from the satellites' height and speed, and are rounded.</p>
+      <p>Read more in <a href="../themes/d1.html#newton">D.1 section 1: Newton's universal law of gravitation</a>, <a href="../themes/d1.html#strength">section 2: gravitational field strength</a>, <a href="../themes/d1.html#weightless">section 7: weightlessness in orbit</a> and, for HL, <a href="../themes/a5.html">A.5 Galilean and special relativity</a>. The Think deeper big question <a href="../think/big-questions.html#BQ-18">Is gravity a force at all?</a> goes further.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

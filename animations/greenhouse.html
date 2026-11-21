@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: the greenhouse effect, photon by photon · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics B.2: sunlight in, albedo, infrared out, the 255 K energy balance without greenhouse gases, absorption and re-emission by greenhouse gas molecules (resonance), the 288 K balance and the enhanced greenhouse effect.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/greenhouse.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: the greenhouse effect, photon by photon · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics B.2: sunlight in, albedo, infrared out, the 255 K energy balance without greenhouse gases, absorption and re-emission by greenhouse gas molecules (resonance), the 288 K balance and the enhanced greenhouse effect.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/greenhouse.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/greenhouse.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › The greenhouse effect</p>
+    <h1>The greenhouse effect</h1>
+    <p class="lead">Sunlight, mostly visible, comes in; some is reflected and the rest warms the surface, which radiates infrared. Watch what the surface temperature would be if every infrared photon escaped, then add greenhouse gases that absorb infrared and re-emit it in all directions, some back down, until the surface settles at a higher temperature. <a class="tag" href="../themes/b2.html#greenhouse">B.2 Greenhouse effect</a></p>
+
+    <figure class="anim-stage" data-anim="greenhouse">
+      <canvas role="img" aria-label="Animation of a slice of sky above the Earth's surface: the Sun sends visible light, some of which reflects from a cloud and snow; the rest warms the ground, which sends out infrared. Greenhouse gas molecules appear, absorb infrared and re-emit it in random directions. A panel shows the average energy flows per square metre and a thermometer for the surface temperature. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The model is the simple energy balance from the notes, for the whole Earth averaged over day and night, with $\sigma = 5.67 \times 10^{-8}$ $\text{W m}^{-2}\,\text{K}^{-4}$ and Wien's constant $2.9 \times 10^{-3}$ m K from the data booklet. Visible light is drawn as short blue, green and yellow waves, infrared as longer orange waves. The waves are not to scale: infrared is drawn only 3 times longer than visible light, though really it is about 20 times longer. Each wave stands for a huge number of photons, and the molecules are hugely enlarged.</p>
+      <ol>
+        <li>The Sun's surface is about 5800 K, so by Wien's law its radiation peaks at $\lambda_{\max} = \dfrac{2.9 \times 10^{-3}}{5800} = 5.0 \times 10^{-7}$ m $= 500$ nm: sunlight is mostly visible light.</li>
+        <li>Above the atmosphere the intensity of sunlight is the solar constant, $S = 1360$ $\text{W m}^{-2}$. The Earth catches it over a disc but spreads it over a sphere four times larger, so the average is $S/4 = 340$ $\text{W m}^{-2}$.</li>
+        <li>About 30% is reflected or scattered back to space by clouds, the air, ice and the ground (in the animation, by the cloud and the snow): the Earth's albedo is about 0.30, so $0.30 \times 340 = 102$, about 100 $\text{W m}^{-2}$, is reflected.</li>
+        <li>The rest, $(1 - 0.30) \times 340 = 238$ $\text{W m}^{-2}$, is absorbed and warms the surface.</li>
+        <li>The warm surface radiates infrared. For the real surface, about 288 K, Wien's law gives a peak at $\dfrac{2.9 \times 10^{-3}}{288} = 1.0 \times 10^{-5}$ m $= 10$ µm, 20 times longer than the 500 nm peak of sunlight.</li>
+        <li><strong>Predict:</strong> if the air had no greenhouse gases, what would the average surface temperature be?</li>
+        <li>Treating the surface as a black body ($e = 1$), in balance the power absorbed equals the power emitted: $\sigma T^4 = 238$, so $T^4 = \dfrac{238}{5.67 \times 10^{-8}} = 4.20 \times 10^9$ $\text{K}^4$ and $T = 255$ K, about −18 °C. Here every infrared photon escapes to space.</li>
+        <li>The real average surface temperature is about 288 K (15 °C), 33 K warmer. The difference is the greenhouse effect. The greenhouse gases appear: water vapour, carbon dioxide, methane and nitrous oxide.</li>
+        <li>Nitrogen and oxygen, 99% of dry air, hardly absorb infrared, and visible light passes through all of these gases.</li>
+        <li>In the close-up, an infrared wave reaches a CO<sub>2</sub> molecule. Its frequency matches a natural frequency of the molecule's vibrations, so the vibration grows: resonance, and the energy is absorbed. CO<sub>2</sub>'s bending vibration has a natural frequency of about $2 \times 10^{13}$ Hz, which matches infrared of wavelength $\dfrac{c}{f} = \dfrac{3.0 \times 10^8}{2 \times 10^{13}} = 1.5 \times 10^{-5}$ m $= 15$ µm. A visible wave matches no vibration and passes straight through. (In the energy-level model, the photon's energy $hf$ matches the gap between two vibrational energy levels.) The vibrations in the close-up are shown hugely slowed down.</li>
+        <li>The molecule then re-emits infrared in a random direction, or shares the energy with other molecules in collisions, warming the air. Some infrared escapes to space, but much is sent back down, so the surface now gains energy from the Sun and from the atmosphere.</li>
+        <li>The panel shows the infrared escaping to space falling below the 238 $\text{W m}^{-2}$ absorbed, so the surface warms until the balance is restored, at about 288 K. It then radiates $\sigma T^4 = 5.67 \times 10^{-8} \times 288^4 = 390$ $\text{W m}^{-2}$, but only 238 $\text{W m}^{-2}$ escapes to space: in balance again. As an effective emissivity, $238 \div 390 = 0.61$.</li>
+        <li>Burning fossil fuels has raised the CO<sub>2</sub> in the atmosphere from about 280 ppm before the industrial revolution to over 420 ppm. In the animation the three CO<sub>2</sub> molecules become five, roughly that rise. More infrared is absorbed and sent back down, so less escapes directly.</li>
+        <li>In this simple model, an effective emissivity of 0.60 instead of 0.61 gives a new balance at $T = \sqrt[4]{\dfrac{238}{0.60 \times 5.67 \times 10^{-8}}} = 289$ K: the enhanced greenhouse effect. (The average surface temperature has risen by more than 1 °C since the late 1800s.)</li>
+        <li>A real greenhouse works mostly by stopping warm air rising away (convection). The atmosphere's effect is about absorbing and re-emitting radiation.</li>
+      </ol>
+      <p>How it is drawn: the photons' paths are worked out once (with a fixed random seed, so they are the same every time): 15% of the visible photons reflect from the cloud and 15% from the snow (the albedo of 0.30), and the rest are absorbed by the ground. Infrared leaves the ground at a rate proportional to $T^4$; the infrared that escapes is drawn missing the cloud, because real clouds absorb infrared too. Once the greenhouse gases are there, most infrared photons are absorbed by a molecule, which glows while it is excited, then re-emits one in a random direction. The surface temperature, the effective emissivity (1.00 with no greenhouse gases) and the "escaping to space" value in the panel follow the effective-emissivity model from the notes ($e\sigma T^4$ escapes; the surface warms while this is less than the 238 $\text{W m}^{-2}$ absorbed). The warming is shown speeded up: the real Earth takes many years to respond. The notes give a fuller model with separate surface and atmosphere, in which the surface receives 335 $\text{W m}^{-2}$ back from the atmosphere, more than the 165 $\text{W m}^{-2}$ it absorbs directly from the Sun.</p>
+      <p>Read more in <a href="../themes/b2.html#solar">B.2 section 4: the solar constant and the S/4 rule</a>, <a href="../themes/b2.html#equilibrium">section 5: equilibrium temperature of a planet</a>, <a href="../themes/b2.html#greenhouse">section 6: the greenhouse effect</a>, <a href="../themes/b2.html#models">section 8: why greenhouse gases absorb infrared</a>, <a href="../themes/b2.html#flows">section 9: energy flows</a> and <a href="../themes/b2.html#enhanced">section 10: the enhanced greenhouse effect</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

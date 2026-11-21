@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 272">
+  <!-- Two panels showing the same falling apple. Left: Newton's picture (a force pulls it down). Right: Einstein's (no force). -->
+  <line class="grid dash" x1="200" y1="10" x2="200" y2="262"/>
+  <text x="100" y="24" text-anchor="middle" style="font-size:17px;font-weight:600">Newton</text>
+  <text x="300" y="24" text-anchor="middle" style="font-size:17px;font-weight:600">Einstein</text>
+
+  <!-- left panel -->
+  <path class="area" d="M8 236 H192 V256 H8 Z"/>
+  <line class="axis" x1="8" y1="236" x2="192" y2="236"/>
+  <!-- a tree: trunk and a rounded crown -->
+  <path class="axis" d="M50 236 Q58 222 57 172 L57 114 L71 114 L71 172 Q70 222 78 236 Z" style="fill:var(--surface)"/>
+  <path class="axis" d="M18 102 Q4 82 22 68 Q24 44 50 46 Q66 30 86 44 Q112 40 116 66 Q132 84 118 104 Q112 124 88 120 Q66 132 46 120 Q20 122 18 102 Z" style="fill:var(--surface)"/>
+  <!-- where the apple hung (dashed), and the falling apple with its stalk -->
+  <circle class="axis dash" cx="108" cy="128" r="9"/>
+  <circle class="l3 thin" cx="108" cy="172" r="9" style="fill:var(--surface)"/>
+  <path class="l3 thin" d="M108 163 Q109 158 112 156"/>
+  <!-- the force on it -->
+  <line class="l2" x1="108" y1="186" x2="108" y2="226" marker-end="url(#ah2)"/>
+  <text x="118" y="214" class="t2" style="font-size:15px">force</text>
+
+  <!-- right panel: the same, with no force -->
+  <path class="area" d="M208 236 H392 V256 H208 Z"/>
+  <line class="axis" x1="208" y1="236" x2="392" y2="236"/>
+  <path class="axis" d="M250 236 Q258 222 257 172 L257 114 L271 114 L271 172 Q270 222 278 236 Z" style="fill:var(--surface)"/>
+  <path class="axis" d="M218 102 Q204 82 222 68 Q224 44 250 46 Q266 30 286 44 Q312 40 316 66 Q332 84 318 104 Q312 124 288 120 Q266 132 246 120 Q220 122 218 102 Z" style="fill:var(--surface)"/>
+  <circle class="axis dash" cx="308" cy="128" r="9"/>
+  <circle class="l3 thin" cx="308" cy="172" r="9" style="fill:var(--surface)"/>
+  <path class="l3 thin" d="M308 163 Q309 158 312 156"/>
+  <text x="308" y="214" text-anchor="middle" style="font-size:15px">no force</text>
+</svg>

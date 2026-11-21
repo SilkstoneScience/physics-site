@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: the Doppler effect, wavefront by wavefront · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics C.5: wavefronts from a moving racing car bunch up ahead and spread out behind, a moving observer meets the wavefronts more often, and a galaxy's spectral lines are redshifted.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/doppler.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: the Doppler effect, wavefront by wavefront · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics C.5: wavefronts from a moving racing car bunch up ahead and spread out behind, a moving observer meets the wavefronts more often, and a galaxy's spectral lines are redshifted.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/doppler.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/doppler.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › The Doppler effect</p>
+    <h1>The Doppler effect <span class="tag hl">+ HL extra</span></h1>
+    <p class="lead">A racing car sends out wavefronts as it drives past two listeners, then a driver races towards a still siren, and finally the light from a distant galaxy is redshifted. Watch where each wavefront is centred and how often each observer meets them. The two equations for sound are HL only and are labelled. <a class="tag" href="../themes/c5.html#source">C.5 Doppler effect</a></p>
+
+    <figure class="anim-stage" data-anim="doppler">
+      <canvas role="img" aria-label="Animation of circular sound wavefronts from a racing car, first standing still and then moving, with an observer on each side; then a driver moving towards a still siren; then a galaxy and two spectra showing hydrogen's lines shifted towards the red. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The speed of sound is $v = 340$ $\text{m s}^{-1}$ and the car's engine gives out a steady note of $f = 500$ Hz, so the period is $\frac{1}{500}$ s $= 2.0$ ms. In the animation one wavefront leaves every 0.75 s, so time is slowed down $0.75 \div 0.002 = 375$ times. Each blue circle is a wavefront, centred on the point where the source was when it sent that wavefront out. The car and the people are drawn much smaller than to scale compared with the 0.68 m wavelength, and the observers are shown as people on the line the car drives along. The picture never stops: the wavelengths are measured with arrows that ride along with a pair of moving wavefronts. The moving car is shown in two passes, with a cut between them, so that it stays in view.</p>
+      <ol>
+        <li>The car stands still. Sound travels through the still air at 340 $\text{m s}^{-1}$, so its wavefronts are circles with the same centre, evenly spaced in every direction: $\lambda = \frac{v}{f} = \frac{340}{500} = 0.68$ m.</li>
+        <li>Observers A (on the right) and B (on the left) each meet one wavefront every period, so both hear the true note, 500 Hz.</li>
+        <li>The car drives to the right at $u_s = 85$ $\text{m s}^{-1}$ (306 km/h), a quarter of the speed of sound. Each wavefront is now centred where the car was when it sent it out (orange dots), because the car has moved on before it sends the next one.</li>
+        <li><strong>Predict:</strong> who hears the higher note, A (ahead of the car) or B (behind it)?</li>
+        <li>Ahead of the car the wavefronts are squashed together: a shorter wavelength. They still travel at 340 $\text{m s}^{-1}$, so more of them reach A each second, and A hears a higher note. Behind the car they are spread out, so B hears a lower note. The wave speed doesn't change, and neither does the note the car gives out.</li>
+        <li><span class="tag hl">HL</span> Ahead: $\lambda' = \frac{v - u_s}{f} = \frac{340 - 85}{500} = 0.51$ m, so A hears $f' = \frac{v}{\lambda'} = \frac{340}{0.51} = 667$ Hz. Behind: $\lambda' = \frac{340 + 85}{500} = 0.85$ m, so B hears $f' = \frac{340}{0.85} = 400$ Hz.</li>
+        <li><span class="tag hl">HL</span> The moving-source equation gives the same answers in one step: $f' = f\,\frac{v}{v \pm u_s}$, using $-$ when the source approaches and $+$ when it moves away. Ahead: $500 \times \frac{340}{340 - 85} = 667$ Hz. Behind: $500 \times \frac{340}{340 + 85} = 400$ Hz.</li>
+        <li>While the car approaches at a steady speed, A hears a steady 667 Hz: the note doesn't keep rising. <strong>Predict:</strong> what will A hear as the car goes past? The note drops suddenly to 400 Hz as A ends up behind the car. (It is this sudden only for an observer right on the car's path; someone standing beside the road hears a quick slide down instead.) The car's own note never changes.</li>
+        <li>Now the source stays still: a siren sounding 500 Hz, with evenly spaced wavefronts 0.68 m apart. The racing driver is the observer, driving towards the siren at $u_o = 85$ $\text{m s}^{-1}$, and a pedestrian stands still on the other side.</li>
+        <li><strong>Predict:</strong> who meets the wavefronts more often? The driver. The wavelength in the air is unchanged, but the waves pass the driver faster, so more of them reach the driver each second and the driver hears a higher note. The pedestrian hears 500 Hz.</li>
+        <li><span class="tag hl">HL</span> Relative to the driver, the waves move at $340 + 85 = 425$ $\text{m s}^{-1}$, so the driver hears $f' = \frac{425}{0.68} = 625$ Hz. The moving-observer equation agrees: $f' = f\,\frac{v \pm u_o}{v} = 500 \times \frac{340 + 85}{340} = 625$ Hz (moving away it would be $500 \times \frac{255}{340} = 375$ Hz). This is not the 667 Hz heard from a source moving at the same speed: for sound, it matters whether the source or the observer moves through the air.</li>
+        <li>Light shows the Doppler effect too. A galaxy is moving away from us at 6000 $\text{km s}^{-1}$, which is 2% of the speed of light. Hydrogen gives out and absorbs light only at exact wavelengths; measured in the laboratory, its red line is at 656.3 nm. In the galaxy's light the whole pattern of lines is shifted towards the red end of the spectrum: a <strong>redshift</strong>. The light still travels at $c$; only its wavelength and frequency change.</li>
+        <li>$\frac{\Delta\lambda}{\lambda} \approx \frac{v}{c} = \frac{6.0 \times 10^6}{3.00 \times 10^8} = 0.020$, so the red line moves $0.020 \times 656.3 = 13.1$ nm, to $656.3 + 13.1 = 669.4$ nm. Every line moves by the same <em>fraction</em> of its wavelength, so the blue lines move less (the 410.2 nm line moves 8.2 nm). The formula works because $v$ is much less than $c$.</li>
+        <li>A galaxy moving towards us, such as the nearby Andromeda galaxy, gives a <strong>blueshift</strong> instead: its lines move to shorter wavelengths. The animation shows another galaxy doing this at the same speed, to compare: the red line would move to $656.3 \times 0.980 = 643.2$ nm. (Andromeda itself approaches much more slowly, so its shift is far smaller.) Almost every distant galaxy is redshifted, and the more distant the galaxy, the bigger the redshift: this is evidence that the universe is expanding.</li>
+        <li>Summary: the source's frequency never changes, only what the observer receives. A moving source changes the wavelength in the medium; a moving observer meets the wavefronts more or less often. For light, $\frac{\Delta f}{f} = \frac{\Delta\lambda}{\lambda} \approx \frac{v}{c}$ when $v \ll c$.</li>
+      </ol>
+      <p>Read more in <a href="../themes/c5.html#what">C.5 section 1: what is the Doppler effect?</a>, <a href="../themes/c5.html#source">section 2: a moving source</a>, <a href="../themes/c5.html#observer">section 3: a moving observer</a>, <a href="../themes/c5.html#light">section 4: the Doppler effect for light</a> and <a href="../themes/c5.html#space">section 5: redshift, blueshift and astronomy</a>. HL: <a href="../themes/c5.html#moving-source">section 7: the equation for a moving source</a> and <a href="../themes/c5.html#moving-observer">section 8: the equation for a moving observer</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

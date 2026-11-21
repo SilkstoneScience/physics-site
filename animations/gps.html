@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: how does GPS work? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics: how GPS finds you from the travel times of radio signals at the speed of light, why it needs four satellites, and why relativity makes the satellite clocks gain 38 microseconds a day (HL time dilation, plus a gravitational effect beyond the course).">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/gps.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: how does GPS work? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics: how GPS finds you from the travel times of radio signals at the speed of light, why it needs four satellites, and why relativity makes the satellite clocks gain 38 microseconds a day (HL time dilation, plus a gravitational effect beyond the course).">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/gps.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/gps.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › How does GPS work?</p>
+    <h1>How does GPS work?</h1>
+    <p class="lead">Your phone finds where you are by timing radio signals from satellites 20&nbsp;200 km up. Distance = speed × time does most of the work; a fourth satellite fixes your phone's inaccurate clock; and the satellites' own clocks have to be corrected for relativity. <a class="tag" href="../themes/a1.html#velocity">A.1 Speed</a> <a class="tag" href="../themes/c2.html#em">C.2 Electromagnetic waves</a> <a class="tag" href="../themes/a5.html#dilation">A.5 Time dilation (HL)</a></p>
+
+    <figure class="anim-stage" data-anim="gps">
+      <canvas role="img" aria-label="Animation: three GPS satellites above the Earth send radio signals to a phone on the surface. Circles drawn round each satellite, with radius equal to its distance, cross at the phone's position. When the phone's clock is wrong, the circles grow and no longer meet at one point, then shrink together until they do. Finally, bars compare a satellite clock with a clock on the ground: it loses a little time because of its speed and gains more because it is higher in the Earth's gravitational field. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>Constants from the data booklet: $c = 3.00 \times 10^8\ \text{m s}^{-1}$, $G = 6.67 \times 10^{-11}$ $\text{N m}^2\,\text{kg}^{-2}$, the Earth's mass $M = 5.97 \times 10^{24}$ kg and radius $R = 6.37 \times 10^6$ m. The picture is a flat slice through a 3D system: the Earth and the orbit are to scale, the satellites and the phone are not, and the signals are shown 100 times slower than real.</p>
+      <ol>
+        <li>About 30 GPS satellites orbit the Earth, 20&nbsp;200 km above the surface. Each one carries an extremely accurate atomic clock.</li>
+        <li>Each satellite keeps sending out radio signals that say which satellite it is, where it is, and the time the signal was sent.</li>
+        <li>Radio waves are electromagnetic waves, so they travel at the speed of light, $c = 3.00 \times 10^8\ \text{m s}^{-1}$ (C.2).</li>
+        <li>From the satellite directly overhead (satellite 2), a signal takes $\dfrac{2.02 \times 10^7}{3.00 \times 10^8} = 0.0673$ s, or 67.3 ms, to arrive. From a satellite near the horizon it takes up to about 86 ms.</li>
+        <li>Your phone notes when each signal arrives and works out the travel time. Distance = speed × time, so you are 20&nbsp;200 km from satellite 2: somewhere on a circle round it (in 3D, on a sphere).</li>
+        <li>The signal from satellite 1 takes 74.2 ms, so you are $0.07416 \times 3.00 \times 10^8 = 2.22 \times 10^7$ m (22&nbsp;200 km) from it. The two circles cross at two points. One is far out in space (about 43&nbsp;700 km from the Earth's centre), so you must be at the other. In 3D, it takes three satellites (three spheres) to do this.</li>
+        <li><strong>Predict:</strong> your phone has a cheap quartz clock, not an atomic clock. What happens if it is slightly wrong?</li>
+        <li>Suppose it is 10 ms fast. Every signal seems to take 10 ms longer, so every distance comes out $0.010 \times 3.00 \times 10^8 = 3.0 \times 10^6$ m (3000 km) too big. The circles still cross, but in the wrong place: about 2600 km underground, so obviously wrong. Each microsecond of clock error is $1 \times 10^{-6} \times 3.00 \times 10^8 = 300$ m of distance.</li>
+        <li>A third satellite gives the error away: its circle does not pass through the same point.</li>
+        <li>So the receiver adjusts its own clock, shrinking all the circles together, until all three meet at one point. That point is where you are, and the receiver now knows the exact time too. In 3D there are four unknowns (three for the position, one for the clock), so GPS needs at least four satellites.</li>
+        <li>One more correction: relativity. Gravity provides the centripetal force on each satellite (D.1), $\dfrac{GMm}{r^2} = \dfrac{mv^2}{r}$, so $v = \sqrt{\dfrac{GM}{r}} = \sqrt{\dfrac{6.67 \times 10^{-11} \times 5.97 \times 10^{24}}{2.657 \times 10^{7}}} = 3.87 \times 10^3$ $\text{m s}^{-1}$, going round about every 12 hours.</li>
+        <li><span class="tag hl">HL</span> Moving clocks run slow (time dilation, A.5): with $v = 3.87\ \text{km s}^{-1}$, $\gamma - 1 = 8.3 \times 10^{-11}$, so a satellite clock loses $86\,400 \times 8.3 \times 10^{-11}$ s, about 7.2 μs, every day.</li>
+        <li>(Beyond the course) Clocks higher up in the Earth's gravitational field run faster: general relativity says the satellite clocks gain about 45.6 μs a day for this reason. See the big question <a href="../think/big-questions.html#BQ-18">Is gravity a force at all?</a></li>
+        <li>Overall a satellite clock gains $45.6 - 7.2 = 38.4$ μs a day. Left alone, the satellite clocks would drift out of step with time on the ground by 38.4 μs every day: the time light takes to travel $38.4 \times 10^{-6} \times 3.00 \times 10^{8} \approx 1.15 \times 10^4$ m (11.5 km).</li>
+        <li>So the satellite clocks are set to tick slow before launch, by $\dfrac{38.4 \times 10^{-6}}{86\,400} \approx 4.4 \times 10^{-10}$. (With the more precise 38.5 μs a day, the real setting is $4.465 \times 10^{-10}$: about 4.5 parts in $10^{10}$.) Then GPS can find you to within a few metres.</li>
+      </ol>
+      <p>How it is drawn: the circles are exact (radius = $c$ × measured travel time) and their crossing points are calculated, but a real receiver solves the same problem in three dimensions with spheres, using at least four satellites, and also allows for the slowing of the signals in the upper atmosphere. The relativity figures are worked out from the data booklet's constants; with more precise values they come to 45.7, 7.2 and 38.5 μs a day. Because every satellite clock would drift by about the same amount, the effect would not simply be an 11 km error in your position: the system keeps the satellite clocks in step with time on the ground, so their rate is corrected before launch. Calculating $\gamma - 1$ for such a small speed needs more digits than most calculators show; the approximation $\gamma - 1 \approx \dfrac{v^2}{2c^2}$ (beyond the course) gives the same $8.3 \times 10^{-11}$.</p>
+      <p>Read more in <a href="../themes/a1.html#velocity">A.1 section 2: speed and velocity</a>, <a href="../themes/c2.html#em">C.2 section 6: electromagnetic waves</a>, <a href="../themes/d1.html#orbits">D.1 section 5: circular orbits</a> and, for HL, <a href="../themes/a5.html#dilation">A.5 section 8: proper time and time dilation</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

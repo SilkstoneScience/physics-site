@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: energy levels, photons and spectra · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics E.1: hydrogen's emission line spectrum built up photon by photon from jumps between energy levels drawn to scale, then an absorption spectrum and the spectra of other elements.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/energy-levels.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: energy levels, photons and spectra · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics E.1: hydrogen's emission line spectrum built up photon by photon from jumps between energy levels drawn to scale, then an absorption spectrum and the spectra of other elements.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/energy-levels.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/spectra.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Energy levels and spectra</p>
+    <h1>Energy levels and spectra</h1>
+    <p class="lead">Why does hydrogen give out light at only a few exact wavelengths? Watch an electron jump between energy levels drawn to scale, each drop sending out one photon that lands as a line in the spectrum. Then white light shines through the gas and dark lines appear at the same wavelengths. <a class="tag" href="../themes/e1.html#levels">E.1 Energy levels and photons</a></p>
+
+    <figure class="anim-stage" data-anim="spectra">
+      <canvas role="img" aria-label="Animation of a glowing hydrogen tube and its line spectrum, then an energy level diagram for hydrogen in which an electron jumps between levels and gives out photons that make the lines of the spectrum, then white light passing through cooler gas to give dark absorption lines, and finally the line patterns of hydrogen, helium, sodium and the Sun. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The calculations use the data-booklet constants, $h = 6.63 \times 10^{-34}$ J s, $c = 3.00 \times 10^{8}$ $\text{m s}^{-1}$ and $1\ \text{eV} = 1.60 \times 10^{-19}$ J, and hydrogen's energy levels: $-13.6$, $-3.40$, $-1.51$, $-0.85$ and $-0.54$ eV for $n = 1$ to $5$, as in the notes, and $-0.38$ eV for $n = 6$ (see the last step). The energy level diagram is drawn to scale. The lines in the spectrum are drawn at their measured wavelengths; the calculated values differ by a nanometre or two because the constants and levels are rounded.</p>
+      <ol>
+        <li>Hydrogen gas at low pressure glows when a high voltage is put across a discharge tube. A diffraction grating spreads its light out by wavelength, and instead of a rainbow there are only a few bright lines: an <strong>emission line spectrum</strong>. Its four brightest visible lines are at 656, 486, 434 and 410 nm.</li>
+        <li>The electron in a hydrogen atom can only have certain energies, the <strong>energy levels</strong>. They are negative because zero is the energy of an electron that has just escaped from the atom. The lowest level, $n = 1$, is the <strong>ground state</strong>. The dot on the diagram shows the electron's energy, not where it is in the atom.</li>
+        <li>In the tube, a collision with a fast-moving electron gives the atom's electron energy, and it jumps up to an excited level, $n = 3$.</li>
+        <li>It soon drops back. Dropping from $n = 3$ to $n = 2$ it gives out one photon carrying the difference in energy: $\Delta E = -1.51 - (-3.40) = 1.89$ eV $= 3.024 \times 10^{-19}$ J, so $\lambda = \dfrac{hc}{\Delta E} = \dfrac{6.63 \times 10^{-34} \times 3.00 \times 10^{8}}{3.024 \times 10^{-19}} = 658$ nm, the red line (measured: 656 nm).</li>
+        <li>Then from $n = 2$ to $n = 1$: a much bigger drop, $\Delta E = 13.6 - 3.40 = 10.2$ eV, so $\lambda = 122$ nm. This photon is ultraviolet and not visible.</li>
+        <li>The view zooms in on the levels above $n = 2$, still to scale, and another collision lifts the electron to $n = 4$.</li>
+        <li>Dropping from $n = 4$ to $n = 2$: $\Delta E = 2.55$ eV $= 4.08 \times 10^{-19}$ J, so $\lambda = 488$ nm, the blue-green line (measured: 486 nm).</li>
+        <li>From $n = 5$ to $n = 2$: $\Delta E = 2.86$ eV and $\lambda = 435$ nm, blue (measured: 434 nm). From $n = 6$ to $n = 2$: $\Delta E = 3.02$ eV and $\lambda = 412$ nm, violet (measured: 410 nm).</li>
+        <li>A bigger drop gives a photon with more energy, so a higher frequency ($E = hf$) and a shorter wavelength ($\lambda = \dfrac{hc}{E}$).</li>
+        <li>Drops that end on $n = 3$ give infrared photons (for example $4 \to 3$: 0.66 eV, 1880 nm). Zooming out again, drops that end on $n = 1$ give ultraviolet photons (for example $3 \to 1$: 12.09 eV, 103 nm). Only drops that end on $n = 2$ can give visible light, and each line comes from one size of drop.</li>
+        <li>Now white light from a hot, dense source, containing every wavelength, shines down through cooler hydrogen gas and into the grating. Some atoms of the gas are already in the $n = 2$ level. <strong>Predict:</strong> what will the gas do to the spectrum?</li>
+        <li>Only photons with exactly the right energy are absorbed: a blue-green photon lifts an electron from $n = 2$ to $n = 4$. Other photons pass straight through. The absorbed energy is soon given out again, but in any direction, so fewer photons of that wavelength carry on towards the grating.</li>
+        <li>So the continuous spectrum has dark lines at exactly the wavelengths of the bright emission lines: an <strong>absorption line spectrum</strong>. For hydrogen's visible dark lines, some atoms must already be in the $n = 2$ level, so the gas, though cooler than the source, must still be hot, like a star's outer layers. Hydrogen with all its atoms in the ground state absorbs only ultraviolet.</li>
+        <li>Every element has its own pattern of lines, like a fingerprint: shown here are the strongest visible lines of hydrogen, helium and sodium. Dark lines in the Sun's spectrum match the lines of hydrogen and sodium, so both are in the Sun's outer layers. (The Sun's spectrum is simplified: only these dark lines are drawn; it has many more.)</li>
+        <li>Summary: each spectral line is one jump between energy levels, and the photon's energy equals the difference between the levels, $E = hf = \dfrac{hc}{\lambda}$. <span class="tag hl">HL</span> In the Bohr model, hydrogen's levels are $E = -\dfrac{13.6}{n^2}$ eV, which gives the values used here ($-\dfrac{13.6}{36} = -0.38$ eV for $n = 6$).</li>
+      </ol>
+      <p>How it is drawn: the photons are drawn as short glowing wave packets in their own colour, with their wavelength drawn roughly in proportion to the real one (ultraviolet ones very short, the infrared one long); ultraviolet photons are shown in a pale violet and infrared in a dull red, although neither can be seen. The light comes straight down into the grating, so, as for a real grating ($\sin\theta = \dfrac{n\lambda}{d}$, C.3), violet light is turned least and red light most; the angles are exaggerated so that the lines spread across the picture. While the electron jumps between levels, each photon is drawn going straight to its place in the spectrum (in a real spectroscope, the grating sends it there). The tube, the grating and the gas are not to scale, and everything is slowed down enormously: a real atom gives out its photon within about $10^{-8}$ s.</p>
+      <p>Read more in <a href="../themes/e1.html#spectra">E.1 section 4: emission and absorption spectra</a>, <a href="../themes/e1.html#levels">section 5: energy levels and photons</a>, <a href="../themes/e1.html#hydrogen">section 6: the hydrogen spectrum</a>, <a href="../themes/e1.html#composition">section 7: spectra and chemical composition</a> and (HL) <a href="../themes/e1.html#bohr">section 11: the Bohr model of hydrogen</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

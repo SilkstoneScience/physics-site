@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: simple harmonic motion and the reference circle · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics C.1: a glider oscillating between two springs, with its displacement, velocity and acceleration graphs drawing themselves, the energy changing between kinetic and potential, and the reference circle (its equations are HL).">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/shm.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: simple harmonic motion and the reference circle · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics C.1: a glider oscillating between two springs, with its displacement, velocity and acceleration graphs drawing themselves, the energy changing between kinetic and potential, and the reference circle (its equations are HL).">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/shm.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/shm.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Simple harmonic motion</p>
+    <h1>Simple harmonic motion</h1>
+    <p class="lead">A glider oscillates on an air track between two springs, while its displacement, velocity and acceleration graphs draw themselves beside it. See why the acceleration always points back to equilibrium, where the glider is fastest, how the energy changes, and how a point moving round a circle gives exactly the same motion (the equations that follow are HL). <a class="tag" href="../themes/c1.html#shm">C.1 Simple harmonic motion</a></p>
+
+    <figure class="anim-stage" data-anim="shm">
+      <canvas role="img" aria-label="Animation of a glider oscillating between two springs on an air track, with arrows for its velocity and acceleration, live graphs of displacement, velocity and acceleration against time, energy bars, and a reference circle whose shadow moves with the glider. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The glider has mass $m = 0.50$ kg and rides on a cushion of air, so there is no friction. The two springs together act like a single spring with spring constant $k = 4.9\ \text{N m}^{-1}$. The arrows above the glider show its velocity $v$ (blue) and the restoring force $F$ and acceleration $a$ (orange); the green arrow under the track shows its displacement $x$ from the equilibrium position. On the right, the graphs of $x$, $v$ and $a$ against time draw themselves as it moves (on a phone they appear under the track).</p>
+      <ol>
+        <li>At rest, the glider sits at the equilibrium position, where the two springs' forces balance.</li>
+        <li>It is pulled 0.10 m to the right and released from rest. There is no friction, and air resistance is negligible (no damping).</li>
+        <li>It oscillates about the equilibrium position. Its amplitude, the maximum displacement, is $x_0 = 0.10$ m (half the distance between the two ends, not the whole distance).</li>
+        <li>One complete oscillation, there and back, takes one time period, timed on screen: $T = 2.0$ s, so the frequency is $f = 1/T = 0.50$ Hz.</li>
+        <li>The springs pull the glider back towards equilibrium: a restoring force, proportional to the displacement. So the acceleration is proportional to the displacement and opposite to it: $a = -\omega^2 x$. The minus sign shows that $a$ always points back towards equilibrium.</li>
+        <li>Here $\omega^2 = k/m = 4.9 \div 0.50 = 9.8\ \text{s}^{-2}$, so $\omega = 3.1\ \text{rad s}^{-1}$. A faint marker stays at $x = +0.10$ m while the glider moves on, where $a = -9.8 \times 0.10 = -0.98\ \text{m s}^{-2}$: the largest acceleration, pointing left.</li>
+        <li><strong>Predict:</strong> where is the glider moving fastest, and where is its acceleration greatest?</li>
+        <li>It is fastest as it passes through equilibrium. There $x = 0$, so $a = 0$: there is no resultant force. At each end it stops for an instant, and its acceleration is greatest: at $x = -0.10$ m, $a = +0.98\ \text{m s}^{-2}$.</li>
+        <li>The graphs: $x$, $v$ and $a$ vary sinusoidally with the same period. Each is a quarter of a cycle out of step with the next, so $a$ and $x$ are half a cycle apart. The velocity is the gradient of the $x$–$t$ graph and the acceleration is the gradient of the $v$–$t$ graph (the tangents are drawn for a few seconds). The $a$–$t$ graph is the $x$–$t$ graph turned upside down: the minus sign in $a = -\omega^2 x$ again.</li>
+        <li>$T = 2\pi\sqrt{m/k} = 2\pi\sqrt{0.50/4.9} = 2.0$ s. A dashed curve shows the motion with half the amplitude: it has the same period, because the period of SHM doesn't depend on the amplitude.</li>
+        <li>Energy is transferred back and forth between the glider's kinetic energy and the elastic potential energy stored in the springs. The potential energy bar is measured from the equilibrium position, where it is taken as zero. Kinetic energy is greatest at equilibrium and potential energy at the ends; with no friction (no damping), the total stays constant. Each reaches its maximum twice in every oscillation, so the energies change at twice the frequency of the motion.</li>
+        <li>A point moves round a circle of radius $x_0$ at a constant angular velocity $\omega$, directly above the glider. Its shadow on the track moves exactly like the glider.</li>
+        <li><span class="tag hl">HL</span> Timing from the release, the radius turns through an angle $\omega t$ from the horizontal, so the displacement is $x = x_0\cos\omega t$. The data booklet writes $x = x_0\sin(\omega t + \phi)$: here the phase angle is $\phi = \frac{\pi}{2}$, since $\sin(\omega t + \frac{\pi}{2}) = \cos\omega t$.</li>
+        <li><span class="tag hl">HL</span> The point's speed round the circle is $\omega x_0 = 3.13 \times 0.10 = 0.31\ \text{m s}^{-1}$. The horizontal part of its velocity is the glider's velocity, so this is the glider's top speed, reached at $x = 0$.</li>
+        <li><span class="tag hl">HL</span> At $x = 0.050$ m (marked while the glider moves on): $v = \pm\omega\sqrt{x_0^2 - x^2} = \pm 3.13 \times \sqrt{0.10^2 - 0.050^2} = \pm 0.27\ \text{m s}^{-1}$.</li>
+        <li><span class="tag hl">HL</span> The energy bars now show values. The total energy is $E_T = \frac{1}{2}m\omega^2 x_0^2 = \frac{1}{2} \times 0.50 \times 9.8 \times 0.10^2 = 0.0245$ J. At $x = 0.050$ m, $E_p = \frac{1}{2}m\omega^2 x^2 = 0.0061$ J: only a quarter of the total, because $E_p$ is proportional to $x^2$. The other three-quarters, 0.0184 J, is kinetic energy.</li>
+        <li>Summary: the defining equation $a = -\omega^2 x$; $T = \frac{1}{f} = \frac{2\pi}{\omega}$; $T = 2\pi\sqrt{m/k}$ for a mass–spring system and $T = 2\pi\sqrt{l/g}$ for a simple pendulum (small swings only); and for HL, $x = x_0\sin(\omega t + \phi)$, $v = \pm\omega\sqrt{x_0^2 - x^2}$ and $E_T = \frac{1}{2}m\omega^2 x_0^2$.</li>
+      </ol>
+      <p>The motion is calculated from $x = x_0\cos\omega t$ and runs at its real speed: one oscillation really takes 2.0 s. At SL, the energy changes only need to be described; calculating them is HL.</p>
+      <p>Read more in <a href="../themes/c1.html#describing">C.1 section 1: describing oscillations</a>, <a href="../themes/c1.html#shm">section 2: the conditions for SHM</a>, <a href="../themes/c1.html#graphs">section 3: graphs of SHM</a>, <a href="../themes/c1.html#systems">section 4: the mass–spring system and the simple pendulum</a>, <a href="../themes/c1.html#energy">section 5: energy in SHM</a> and, for HL, <a href="../themes/c1.html#phase">section 6: phase and the equations of SHM</a> and <a href="../themes/c1.html#energy-hl">section 7: energy calculations</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

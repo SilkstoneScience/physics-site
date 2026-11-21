@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: what if you jumped into a tunnel through the Earth? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics C.1 and D.1: jump into a tunnel through a uniform Earth and you oscillate in simple harmonic motion, reaching the far side in about 42 minutes, in step with a satellite skimming the surface.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/tunnel-through-earth.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: what if you jumped into a tunnel through the Earth? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics C.1 and D.1: jump into a tunnel through a uniform Earth and you oscillate in simple harmonic motion, reaching the far side in about 42 minutes, in step with a satellite skimming the surface.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/tunnel-through-earth.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/tunnel.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › A tunnel through the Earth</p>
+    <h1>What would happen if you jumped into a tunnel through the Earth?</h1>
+    <p class="lead">A thought experiment: a straight tunnel runs through the centre of the Earth to the other side, and you jump in. You fall, speed up, shoot through the centre, slow down and just reach the far side, then fall back again: simple harmonic motion, with a period of about 84 minutes. <a class="tag" href="../themes/c1.html#shm">C.1 Simple harmonic motion</a> <a class="tag" href="../themes/d1.html#orbits">D.1 Circular orbits</a></p>
+
+    <figure class="anim-stage" data-anim="tunnel">
+      <canvas role="img" aria-label="Animation of a capsule falling through a straight tunnel through the centre of a cut-away Earth and oscillating from side to side, with readouts of time, distance, speed and field strength, a graph of displacement against time, a graph of field strength against distance from the centre, and later a satellite orbiting just above the surface whose shadow moves with the capsule. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p><strong>The assumptions</strong> (this is a thought experiment, not something anyone could build): the Earth is a ball of uniform density, radius $R = 6.37 \times 10^6$ m, that doesn't spin; there is no air, no friction and no heat; the field at the surface is $g_0 = 9.8$ $\text{N kg}^{-1}$. The motion runs 100 times faster than real life for the first trip, slows to 12 times while the force is explained, then runs 200 times faster; the capsule is drawn far bigger than to scale.</p>
+      <ol>
+        <li>A straight tunnel runs from one side of the Earth, through the centre, to the other.</li>
+        <li><strong>Predict:</strong> you jump in at one end. What happens next?</li>
+        <li>You fall towards the centre, speeding up all the way. The orange arrow (acceleration) points towards the centre, and it gets shorter as you get closer.</li>
+        <li>You pass the centre at top speed. There the gravitational field is zero, because the Earth pulls equally in every direction around you.</li>
+        <li>Past the centre, gravity pulls you back towards the centre, so you slow down. You just reach the far side, about 42 minutes after jumping, stop for an instant, and fall back. With nothing to take energy away, you would go to and fro for ever: an oscillation.</li>
+        <li><strong>Why?</strong> Inside a uniform Earth, only the mass closer to the centre than you pulls you overall; the pulls of the shell outside you cancel. (This result is beyond the syllabus.) The mass inside radius $r$ is proportional to $r^3$, and $g = \dfrac{GM}{r^2}$, where $M$ is the mass inside radius $r$, so $g \propto \dfrac{r^3}{r^2} = r$. Inside, then, $g = g_0\dfrac{r}{R}$: zero at the centre and $g_0$ at the surface. Outside the Earth, $g \propto \dfrac{1}{r^2}$, as in D.1.</li>
+        <li>So along the tunnel the acceleration is $a = -\dfrac{g_0}{R}x$, where $x$ is the displacement from the centre. It is proportional to the displacement and directed towards the centre: the condition for simple harmonic motion.</li>
+        <li>Comparing with $a = -\omega^2 x$: $\omega^2 = \dfrac{g_0}{R} = \dfrac{9.8}{6.37 \times 10^6} = 1.54 \times 10^{-6}\ \text{s}^{-2}$, so $\omega = 1.24 \times 10^{-3}$ $\text{rad s}^{-1}$.</li>
+        <li>The period is $T = \dfrac{2\pi}{\omega} = 5.07 \times 10^3$ s, about 84 minutes. The trip to the far side is half a period, about 42 minutes, and the trip to the centre a quarter, about 21 minutes. The green graph shows the displacement against time: a cosine curve, with one period marked.</li>
+        <li>(HL) The top speed, at the centre, is $v = \omega x_0 = 1.24 \times 10^{-3} \times 6.37 \times 10^6 = 7.9 \times 10^3$ $\text{m s}^{-1}$. Halfway down, $g = 4.9$ $\text{N kg}^{-1}$ and you are already going at about $6.8$ $\text{km s}^{-1}$.</li>
+        <li>A satellite in a circular orbit just above the surface (D.1): gravity provides the centripetal force, $\dfrac{GMm}{R^2} = \dfrac{mv^2}{R}$, so $v^2 = \dfrac{GM}{R} = g_0R$ and $v = \sqrt{9.8 \times 6.37 \times 10^6} = 7.9 \times 10^3$ $\text{m s}^{-1}$: the same as your top speed. Its period $\dfrac{2\pi R}{v} = 5.07 \times 10^3$ s is also 84 minutes.</li>
+        <li>The satellite's shadow on the tunnel moves exactly with you: simple harmonic motion is uniform circular motion seen side-on (the reference circle, C.1 HL).</li>
+        <li>(Beyond the syllabus) A straight tunnel that misses the centre, here $0.60R$ from it, also takes 42 minutes: the part of the field along that tunnel is still proportional to the distance from the tunnel's middle, with the same $\omega$. Its half-length is $0.80R$, so its top speed is lower: $0.80 \times 7.9 = 6.3$ $\text{km s}^{-1}$.</li>
+        <li>The real Earth isn't uniform: its dense core makes the field stronger deep down than this model says, so a real trip would be a little shorter (published estimates are about 38 minutes). The heat, the pressure and the Earth's spin would make it impossible in practice.</li>
+      </ol>
+      <p>Read more in <a href="../themes/c1.html#shm">C.1 section 2: the conditions for SHM</a>, <a href="../themes/c1.html#systems">section 4: the mass–spring system and the pendulum</a>, <a href="../themes/c1.html#phase">section 6 (HL): phase and the equations of SHM</a>, <a href="../themes/d1.html#strength">D.1 section 2: gravitational field strength</a> and <a href="../themes/d1.html#orbits">section 5: circular orbits</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

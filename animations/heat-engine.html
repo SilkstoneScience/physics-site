@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: the first law and heat engines (HL) · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics B.4 (HL): a gas in a cylinder beside a live p–V diagram, showing the first law, work as the area under the graph, the four kinds of process and a Carnot cycle between 500 K and 300 K.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/heat-engine.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: the first law and heat engines (HL) · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics B.4 (HL): a gas in a cylinder beside a live p–V diagram, showing the first law, work as the area under the graph, the four kinds of process and a Carnot cycle between 500 K and 300 K.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/heat-engine.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/engine.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › The first law and heat engines</p>
+    <h1>The first law and heat engines <span class="tag hl">HL</span></h1>
+    <p class="lead">A gas in a cylinder is heated, cooled, squeezed and allowed to expand while its p–V diagram draws itself beside it. Watch where the energy goes in each kind of process, why the work done is an area on the graph, and how a Carnot engine turns heat into work. <a class="tag" href="../themes/b4.html#first">B.4 Thermodynamics</a></p>
+
+    <figure class="anim-stage" data-anim="engine">
+      <canvas role="img" aria-label="Animation of a gas in a horizontal cylinder with a piston, beside a pressure–volume graph and bars for the heat supplied, the change in internal energy and the work done. The gas goes through an isobaric, an isovolumetric, an isothermal and an adiabatic change, then a Carnot cycle. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The gas is 0.080 mol of an ideal monatomic gas (more exactly 0.0802 mol, chosen so that $nR = \tfrac{2}{3}$ $\text{J K}^{-1}$), using $R = 8.31$ $\text{J K}^{-1}\,\text{mol}^{-1}$. The piston is frictionless, and every change is slow, so the gas always has a definite pressure and temperature (the Carnot cycle is fully reversible). The signs follow the notes: $Q$ is the thermal energy supplied to the gas and $W$ is the work done <em>by</em> the gas, so $Q = \Delta U + W$. For a monatomic ideal gas $\Delta U = \tfrac{3}{2}nR\Delta T = \tfrac{3}{2}\Delta(PV)$. The bars under the cylinder show $Q$, $\Delta U$ and $W$ for the process that is running, all to the same scale. The particles are drawn hugely enlarged, and their speeds are proportional to $\sqrt{T}$, as for a real gas.</p>
+      <ol>
+        <li>State A: $P = 1.0 \times 10^5$ Pa and $V = 2.0 \times 10^{-3}$ $\text{m}^3$, so $PV = 200$ J and $T = \dfrac{PV}{nR} = 300$ K.</li>
+        <li><strong>Isobaric expansion</strong> (constant pressure) from A to B, at $V = 5.0 \times 10^{-3}$ $\text{m}^3$. The work done by the gas is the shaded area under the graph: $W = P\Delta V = 1.0 \times 10^5 \times 3.0 \times 10^{-3} = 300$ J. The gas is now at 750 K, so $\Delta U = \tfrac{3}{2}\Delta(PV) = 1.5 \times (500 - 200) = 450$ J. The heat supplied was $Q = \Delta U + W = 450 + 300 = 750$ J.</li>
+        <li><strong>Isovolumetric heating</strong> from A: the piston is locked, so $W = 0$ and $Q = \Delta U = 1.5 \times (400 - 200) = 300$ J. The pressure doubles to $2.0 \times 10^5$ Pa and the temperature doubles to 600 K.</li>
+        <li><strong>Isothermal expansion</strong> from A to $V = 4.0 \times 10^{-3}$ $\text{m}^3$, slowly, in a water bath at 300 K: the temperature stays the same, so $\Delta U = 0$ and $Q = W$. The pressure halves, to $0.50 \times 10^5$ Pa. The area under the curve, the work done, is 139 J, so 139 J of heat flows in from the bath. (The area can be found as $nRT\ln\frac{V_2}{V_1} = 200 \ln 2 = 138.6$ J, but you won't be asked to use this formula.)</li>
+        <li><strong>Adiabatic expansion</strong> from A to $V = 4.0 \times 10^{-3}$ $\text{m}^3$, slowly, with the cylinder insulated: $Q = 0$, so the gas does work using its own internal energy and cools. With $PV^{5/3}$ constant, $P = 1.0 \times 10^5 \times 0.5^{5/3} = 0.315 \times 10^5$ Pa, so $PV = 126$ J, $T = 189$ K and $\Delta U = 1.5 \times (126 - 200) = -111$ J, so $W = 111$ J.</li>
+        <li>Through the same point A, the adiabat ($PV^{5/3}$ = constant) is steeper than the isotherm ($PV$ = constant): in an adiabatic expansion the gas also cools, so its pressure falls faster.</li>
+        <li>A <strong>Carnot cycle</strong> between a hot reservoir at 500 K and a cold one at 300 K. State 1: $V = 2.0 \times 10^{-3}$ $\text{m}^3$, $P = 1.67 \times 10^5$ Pa.
+          <ul>
+            <li>1 → 2, isothermal expansion at 500 K to $4.0 \times 10^{-3}$ $\text{m}^3$: $\Delta U = 0$, and the gas takes in $Q_h = 231$ J from the hot reservoir and does 231 J of work.</li>
+            <li>2 → 3, adiabatic expansion to $8.6 \times 10^{-3}$ $\text{m}^3$: $Q = 0$; the gas does 200 J of work ($\Delta U = \tfrac{3}{2}nR\Delta T = 1.5 \times \tfrac{2}{3} \times (-200) = -200$ J) and cools to 300 K.</li>
+            <li>3 → 4, isothermal compression at 300 K to $4.3 \times 10^{-3}$ $\text{m}^3$: 139 J of work is done on the gas, and it gives out $Q_c = 139$ J to the cold reservoir.</li>
+            <li>4 → 1, adiabatic compression: 200 J of work done on the gas warms it back to 500 K.</li>
+          </ul>
+        </li>
+        <li><strong>Predict:</strong> over one whole cycle, what is the change in internal energy? It is zero, because the gas is back at the same temperature. So the net work done equals the net heat taken in: $W = Q_h - Q_c = 231 - 139 = 92$ J. On the graph this is the area enclosed by the loop; going round clockwise, the gas does more work than is done on it. The flow diagram (to scale) shows 231 J in, 92 J of work and 139 J out.</li>
+        <li>Efficiency: $\eta = \dfrac{W}{Q_h} = \dfrac{92}{231} = 0.40$. For a Carnot engine $\eta_{\text{Carnot}} = 1 - \dfrac{T_c}{T_h} = 1 - \dfrac{300}{500} = 0.40$, the same, as it must be. No engine working between these two temperatures can do better. Real engines do less well, because of friction, turbulence and heat leaks.</li>
+      </ol>
+      <p>The cycle then repeats. Why can no engine turn all its heat into work? See the second law and entropy: <a href="entropy.html">Entropy and the second law</a>.</p>
+      <p>Read more in <a href="../themes/b4.html#systems">B.4 section 1: systems and the sign convention</a>, <a href="../themes/b4.html#first">section 2: the first law</a>, <a href="../themes/b4.html#work">section 3: work done by a gas</a>, <a href="../themes/b4.html#internal">section 4: change in internal energy</a>, <a href="../themes/b4.html#processes">section 5: four types of process</a>, <a href="../themes/b4.html#adiabatic">section 6: adiabatic processes</a>, <a href="../themes/b4.html#engines">section 7: cycles and heat engines</a> and <a href="../themes/b4.html#carnot">section 8: the Carnot cycle</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

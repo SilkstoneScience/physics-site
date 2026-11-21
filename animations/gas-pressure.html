@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: where gas pressure comes from · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics B.3: gas molecules hitting the walls of a cylinder, how their changes of momentum give the pressure, and why halving the volume or doubling the kelvin temperature doubles the pressure.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/gas-pressure.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: where gas pressure comes from · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics B.3: gas molecules hitting the walls of a cylinder, how their changes of momentum give the pressure, and why halving the volume or doubling the kelvin temperature doubles the pressure.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/gas-pressure.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/gas-pressure.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Where gas pressure comes from</p>
+    <h1>Where gas pressure comes from</h1>
+    <p class="lead">Molecules in a cylinder hit the walls and bounce back. Each hit changes a molecule's momentum, and together the hits make the pressure. Then the gas is squashed to half its volume, and heated to double its kelvin temperature, and the pressure is measured each time. <a class="tag" href="../themes/b3.html#molecular">B.3 Gas laws</a></p>
+
+    <figure class="anim-stage" data-anim="gas-pressure">
+      <canvas role="img" aria-label="Animation of gas molecules moving at random in a cylinder with a piston, hitting the walls. It shows one molecule bouncing off the piston, the flickering force on the piston, a pressure–volume graph as the gas is squashed and a pressure–temperature graph as it is heated. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>This is a simplified two-dimensional simulation of 120 molecules, worked out step by step: every collision, with the walls and between molecules, is elastic. The colour of each molecule shows its speed (blue slower, gold faster). The pressure is measured from the momentum the molecules actually give to the walls, so the results shown are measured in the simulation, not typed in.</p>
+      <ol>
+        <li><strong>Molecules in a gas.</strong> A sealed cylinder with a piston holds a gas. The molecules move at random, in straight lines between collisions, with a range of speeds. They bounce off the walls and off each other, and no kinetic energy is lost in the collisions.</li>
+        <li><strong>One hit.</strong> A close-up of one molecule hitting the piston. Only the part of its velocity perpendicular to the wall, $u$, reverses; the part parallel to the wall doesn't change. Its momentum perpendicular to the wall changes from $+mu$ to $-mu$, a change of $-2mu$. By Newton's third law the molecule gives the wall an equal and opposite impulse, $+2mu$.</li>
+        <li><strong>Many hits.</strong> Each hit on the piston flashes. The graph underneath shows the force on the piston: it flickers, because each hit is a separate tiny push, but its average stays steady. In a real gas there are vast numbers of hits every second, so the force is steady. The pressure is the force perpendicular to a surface per unit area, $P = \dfrac{F}{A}$.</li>
+        <li><strong>Predict:</strong> the piston is pushed in to halve the volume, keeping the temperature the same. What happens to the pressure?</li>
+        <li><strong>Halving the volume.</strong> The piston moves in slowly, in four steps. A moving piston would speed up the molecules that hit it and warm the gas, so the simulation scales their speeds back each moment, as if heat flowed out to the surroundings: the temperature stays the same. After each step the pressure is measured and plotted on a graph of $P$ against $V$.</li>
+        <li>At half the volume, the simulation measures that each part of the wall is hit 2.0 times as often, but the momentum change per hit is the same (×1.0). So the pressure is 2.0 times as large. The points lie on the curve $PV = \text{constant}$: Boyle's law.</li>
+        <li><strong>Predict:</strong> the piston is locked, so the volume stays the same. If the kelvin temperature doubles, what happens to the pressure?</li>
+        <li><strong>Heating at constant volume.</strong> The gas is heated in steps from 300 K to 600 K, shown on the thermometer. The average kinetic energy of the molecules is proportional to the kelvin temperature, so doubling $T$ makes the molecules move $\sqrt{2} \approx 1.41$ times as fast (in the simulation every speed is scaled by $\sqrt{2}$).</li>
+        <li>The simulation measures that the molecules hit the walls 1.4 times as often and give 1.4 times as much momentum per hit, so the pressure is $1.41 \times 1.41 = 2.0$ times as large. The points on the graph of $P$ against $T$ lie on a straight line through the origin: $P \propto T$, with $T$ in kelvin (the pressure law).</li>
+        <li><strong>The kinetic model of an ideal gas.</strong> Its main assumptions: the molecules are tiny compared with the gaps between them, there are no forces between molecules except during collisions, all collisions are elastic and take negligible time, and the molecules move at random with a range of speeds. At low pressure, real gases behave almost like this.</li>
+        <li>Worked through in three dimensions, adding up the momentum changes gives $P = \tfrac{1}{3}\rho v_{\text{rms}}^2$, where $\rho$ is the density of the gas. With the ideal gas equation, $PV = Nk_BT = nRT$, this shows that the average kinetic energy of a molecule is $\tfrac{3}{2}k_BT$.</li>
+        <li>Gas pressure comes from molecules changing momentum at the walls: $P = \dfrac{F}{A}$.</li>
+      </ol>
+      <p>Read more in B.3: <a href="../themes/b3.html#pressure">section 1, pressure</a>, <a href="../themes/b3.html#kinetic">section 3, the kinetic model of an ideal gas</a>, <a href="../themes/b3.html#laws">section 4, the empirical gas laws</a>, <a href="../themes/b3.html#molecular">section 6, pressure from molecular collisions</a> and <a href="../themes/b3.html#energy">section 7, temperature, speed and internal energy</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

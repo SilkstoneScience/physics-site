@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: what is a black hole? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics D.1 and E.5: squeeze the Sun smaller and smaller and watch its escape speed rise until, at a radius of 2.95 km, not even light could escape. Then how real black holes form, how they bend starlight and why they don't suck things in.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/black-hole.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: what is a black hole? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics D.1 and E.5: squeeze the Sun smaller and smaller and watch its escape speed rise until, at a radius of 2.95 km, not even light could escape. Then how real black holes form, how they bend starlight and why they don't suck things in.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/black-hole.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/blackhole.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › What is a black hole?</p>
+    <h1>What is a black hole?</h1>
+    <p class="lead">Imagine squeezing the Sun into a smaller and smaller ball. The escape speed from its surface rises, and if the Sun were squeezed to a radius of under 3 km, not even light could get out: a black hole. Then see how real black holes form, how they bend starlight, and why they don't suck things in. The escape speed equation is HL; the event horizon and general relativity are beyond the IB course. <a class="tag" href="../themes/d1.html#escape">D.1 Escape speed (HL)</a> <a class="tag" href="../themes/e5.html#evolution">E.5 How stars evolve</a></p>
+
+    <figure class="anim-stage" data-anim="blackhole">
+      <canvas role="img" aria-label="Animation in six scenes: balls thrown upwards from the Earth at 50%, 80% and 100% of the escape speed, the last never returning; the Sun squeezed step by step to the size of the Earth, of a neutron star and finally of a black hole of radius 2.95 km, with a scale bar and readouts of its radius and escape speed; the Earth squeezed to a black hole the size of a marble beside a ruler; a black hole in front of a field of stars whose light it bends into arcs; a massive star's core collapsing in a supernova and leaving a black hole; and the Earth orbiting the Sun, then a black hole of the same mass, in the same orbit, followed by the event horizon of the black hole in the galaxy M87 drawn to scale with Neptune's orbit. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>Values used: $G = 6.67 \times 10^{-11}\ \text{N m}^2\,\text{kg}^{-2}$, $c = 3.00 \times 10^8\ \text{m s}^{-1}$, the Sun's mass $1.99 \times 10^{30}$ kg and radius $6.96 \times 10^8$ m, the Earth's mass $5.97 \times 10^{24}$ kg and radius $6.37 \times 10^6$ m.</p>
+      <ol>
+        <li>Balls are thrown straight upwards from the Earth (no air) at 50%, 80% and 100% of the escape speed. The slower two rise to $\dfrac{4}{3}R$ and $2.8R$ from the Earth's centre and fall back; the third keeps going. Gravity keeps slowing it, but never stops it. The motion is calculated step by step from $a = -\dfrac{GM}{r^2}$ and speeded up about 1100 times. The heights are drawn to their own scale, not to scale with the drawn Earth.</li>
+        <li><span class="tag hl">HL</span> The escape speed from the surface of a body of mass $M$ and radius $r$ is $v_{\text{esc}} = \sqrt{\dfrac{2GM}{r}}$. For the Earth it is $11.2\ \text{km s}^{-1}$.</li>
+        <li>Now the Sun is imagined squeezed into a smaller and smaller ball, keeping all of its mass. A scale bar shows the changing scale: the picture shrinks the star, then zooms in.</li>
+        <li><span class="tag hl">HL</span> At its real radius the escape speed is $\sqrt{\dfrac{2 \times 6.67 \times 10^{-11} \times 1.99 \times 10^{30}}{6.96 \times 10^8}} = 618\ \text{km s}^{-1}$, 0.2% of the speed of light.</li>
+        <li><span class="tag hl">HL</span> Squeezed to the size of the Earth (about the size of a white dwarf), the escape speed would be about $6500\ \text{km s}^{-1}$: 2% of the speed of light. Squeezed to a radius of 12 km (the size of a neutron star), it would be about $1.5 \times 10^8\ \text{m s}^{-1}$, half the speed of light.</li>
+        <li><strong>Predict:</strong> how small would the Sun have to be for the escape speed to reach the speed of light?</li>
+        <li><span class="tag hl">HL</span> Setting $v_{\text{esc}} = c$ gives $r = \dfrac{2GM}{c^2} = \dfrac{2 \times 6.67 \times 10^{-11} \times 1.99 \times 10^{30}}{(3.00 \times 10^8)^2} = 2.95 \times 10^3$ m: under 3 km.</li>
+        <li>Squeezed inside that radius, not even light could get out: a <strong>black hole</strong>. Its boundary is called the <strong>event horizon</strong>. This Newton-style argument happens to give the right radius (called the Schwarzschild radius), but the proper theory of black holes is Einstein's general relativity, which is beyond the IB course. The two pictures differ in an important way: in Newton's "dark star", light could rise a little way and fall back, but inside a real event horizon nothing can even move outwards. While the star shrinks, the picture says "being squeezed…"; it turns black only when its radius reaches 2.95 km.</li>
+        <li>To become a black hole, the Earth would have to be squeezed to a radius of $\dfrac{2 \times 6.67 \times 10^{-11} \times 5.97 \times 10^{24}}{(3.00 \times 10^8)^2} = 8.8 \times 10^{-3}$ m, about 9 mm: about the size of a marble, drawn beside a ruler to the same scale.</li>
+        <li>Nothing comes out of a black hole, so it looks black. But its gravity bends the light of the stars behind it: each star appears shifted outwards, and a star almost exactly behind it is stretched into arcs. (The bending is drawn with the formula for a point-like mass, hugely exaggerated so that it can be seen.) In 2019 astronomers released the first image of a black hole's shadow, in the galaxy M87, and in 2022 an image of the black hole at the centre of our own galaxy.</li>
+        <li>Real black holes don't form by squeezing the Sun: the Sun isn't massive enough, and will end as a white dwarf. A black hole forms when the core of a very massive star collapses in a supernova and is too massive for anything to hold it up (drawn not to scale). The animation <a href="star-life.html">The life of a star</a> follows a 25-solar-mass star to this end.</li>
+        <li>A black hole doesn't suck things in. Far away, its gravity is just like that of any other mass: $g = \dfrac{GM}{r^2}$. If the Sun were replaced by a black hole of the same mass, the Earth would carry on in exactly the same orbit, because the field at its distance would be unchanged (but it would be dark and cold). The sizes in this scene are not to scale.</li>
+        <li>Black holes at the centres of galaxies are far bigger. The one in M87 has about 6.5 billion solar masses, so its event horizon has a radius of about $6.5 \times 10^9 \times 2.95$ km $= 1.9 \times 10^{10}$ km, about 128 au: wider than the orbit of Neptune (30 au), drawn to the same scale. (The bright ring in the 2019 image is bigger still, about 2.5 times the horizon's radius, because light passing close to the black hole is bent round it.)</li>
+      </ol>
+      <p><strong>What is modelled.</strong> The thrown balls are calculated from Newton's law of gravitation, with no air and no spin of the Earth. The escape speeds use $v_{\text{esc}} = \sqrt{2GM/r}$ (HL). The squeezed Sun's colours are only a picture: a real star couldn't be squeezed like this. The event horizon, the Schwarzschild radius and the bending of light belong to general relativity, beyond the IB course.</p>
+      <p>Read more in <a href="../themes/d1.html#escape">D.1 section 11: escape speed (HL)</a>, <a href="../themes/d1.html#strength">section 2: gravitational field strength</a> and <a href="../themes/e5.html#evolution">E.5 section 9: how stars evolve</a>. For what gravity is in general relativity, see <a href="what-is-gravity.html">What is gravity, really?</a> and the Think deeper big questions <a href="../think/big-questions.html#BQ-18">Is gravity a force at all?</a> and <a href="../think/big-questions.html#BQ-16">Can a black hole be less dense than water?</a></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

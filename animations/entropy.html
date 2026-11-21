@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: entropy and the second law (HL) · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics B.4 (HL): a gas spreading out, counting microstates, Boltzmann's equation S = k ln Ω, entropy changes when heat flows from hot to cold, the second law and local decreases in entropy.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/entropy.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: entropy and the second law (HL) · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics B.4 (HL): a gas spreading out, counting microstates, Boltzmann's equation S = k ln Ω, entropy changes when heat flows from hot to cold, the second law and local decreases in entropy.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/entropy.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/entropy.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Entropy and the second law</p>
+    <h1>Entropy and the second law <span class="tag hl">HL</span></h1>
+    <p class="lead">A gas spreads out when a partition is removed, and never gathers back on its own. Counting the ways the particles can be arranged shows why, and Boltzmann's equation turns that count into entropy. Then heat flowing from hot to cold, the second law in its three forms, and how a freezer can lower the entropy of the water inside it. <a class="tag" href="../themes/b4.html#microstates">B.4 Entropy and microstates</a></p>
+
+    <figure class="anim-stage" data-anim="entropy">
+      <canvas role="img" aria-label="Animation: gas particles spreading through a box after a partition is removed; tiles showing the 16 microstates of 4 particles; a bar chart of microstates for 10 particles; Boltzmann's equation; two blocks exchanging heat with bars for their entropy changes; the three forms of the second law; and a freezer in a kitchen. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>All of B.4 is HL. The particles are drawn hugely enlarged, slowed down and in two dimensions. They move in straight lines and bounce off the walls without hitting each other (an ideal gas); their motion is worked out from the time alone, with a fixed set of random starting speeds, so every replay is the same.</p>
+      <ol>
+        <li>A box has a partition across the middle. 60 gas particles are on the left and there is a vacuum on the right.</li>
+        <li>The partition is removed. Nothing pushes the particles to the right: they simply keep moving, and some cross into the empty half.</li>
+        <li>Soon the particles fill the whole box. The numbers on the two sides go up and down a little but stay near 30 and 30 (in this run, between 24 and 37).</li>
+        <li><strong>Predict:</strong> will all 60 ever be back on the left at the same moment?</li>
+        <li>It isn't impossible, but each particle is equally likely to be on either side, so the chance that all 60 are on the left at a given moment is $\left(\tfrac{1}{2}\right)^{60} \approx 9 \times 10^{-19}$. It is never seen.</li>
+        <li>With only 4 particles it happens often: on average all four are on the left $\left(\tfrac{1}{2}\right)^{4} = \tfrac{1}{16}$ of the time. The few seconds of the small box shown on screen were chosen so that you can see it happen once.</li>
+        <li>A <strong>microstate</strong> says exactly which particle is where; a <strong>macrostate</strong> says only how many are on each side. All microstates are equally likely.</li>
+        <li>4 particles, each on one of 2 sides: $2^4 = 16$ microstates. The macrostates "4 left, 0 right", "3–1", "2–2", "1–3" and "0–4" have $\Omega = 1, 4, 6, 4$ and $1$ microstates.</li>
+        <li>The even split has the most microstates (6); all four on the left has only 1.</li>
+        <li>With 10 particles there are $2^{10} = 1024$ microstates: 252 for the even split (5–5) and 1 for all on the left.</li>
+        <li>With 100 particles, the chance that all are on the left is $\left(\tfrac{1}{2}\right)^{100} \approx 8 \times 10^{-31}$. A few litres of real gas contain about $10^{23}$ particles, so the spread-out macrostate is overwhelmingly likely.</li>
+        <li>Boltzmann's equation turns the count into entropy: $S = k_B \ln \Omega$, with $k_B = 1.38 \times 10^{-23}\ \text{J K}^{-1}$.</li>
+        <li>For the 2–2 split, $S = 1.38 \times 10^{-23} \times \ln 6 = 2.5 \times 10^{-23}\ \text{J K}^{-1}$; for 3–1, $S = 1.38 \times 10^{-23} \times \ln 4 = 1.9 \times 10^{-23}\ \text{J K}^{-1}$; with only one microstate, $\ln 1 = 0$, so $S = 0$ (counting only the particles' positions, as here).</li>
+        <li>Spreading out takes the gas from a macrostate with few microstates to one with very many, so its entropy increases. It never goes back on its own.</li>
+        <li>Two large blocks at 360 K and 240 K touch, and $Q = 720$ J of thermal energy flows from the hot one to the cold one. The blocks are large, so their temperatures hardly change.</li>
+        <li>Using $\Delta S = \dfrac{\Delta Q}{T}$: hot block $\Delta S = -\dfrac{720}{360} = -2.00\ \text{J K}^{-1}$; cold block $\Delta S = +\dfrac{720}{240} = +3.00\ \text{J K}^{-1}$.</li>
+        <li>Total: $\Delta S = +1.00\ \text{J K}^{-1}$. The same energy is worth more entropy at the lower temperature, so the cold block gains more than the hot block loses.</li>
+        <li>Energy flowing the other way, from cold to hot, would give a total of $-1.00\ \text{J K}^{-1}$, even though energy would still be conserved, so it never happens on its own.</li>
+        <li>The second law: the total entropy of an isolated system never decreases (it stays the same in a reversible process and increases in an irreversible one; real processes are irreversible).</li>
+        <li>Clausius form: thermal energy never flows spontaneously from a colder body to a hotter one.</li>
+        <li>Kelvin form: no engine working in a cycle can take thermal energy from a hot reservoir and turn it completely into work. See <a href="heat-engine.html">The first law and heat engines</a>.</li>
+        <li>Entropy can fall locally. 0.20 kg of water freezing at 0 °C (273 K) in a freezer gives out $Q = mL_f = 0.20 \times 3.34 \times 10^5 = 6.68 \times 10^4$ J, so its entropy changes by $\Delta S = -\dfrac{6.68 \times 10^4}{273} = -245\ \text{J K}^{-1}$.</li>
+        <li>That energy, plus $2.0 \times 10^4$ J of work done by the freezer's motor, ends up in the kitchen at 293 K: $\Delta S = +\dfrac{8.68 \times 10^4}{293} = +296\ \text{J K}^{-1}$. (Only the freezing water is counted, and the kitchen is taken to stay at 293 K.)</li>
+        <li>Total: $-244.7 + 296.2 = +51.6 \approx +52\ \text{J K}^{-1}$. Living things lower their own entropy in the same way, by using energy and raising the entropy around them by more.</li>
+        <li>Summary: $S = k_B \ln \Omega$ (more microstates, more entropy); $\Delta S = \dfrac{\Delta Q}{T}$; the total entropy of an isolated system never decreases.</li>
+      </ol>
+      <p>Read more in <a href="../themes/b4.html#second">B.4 section 9: the second law of thermodynamics</a>, <a href="../themes/b4.html#entropy">section 10: entropy from heat and temperature</a>, <a href="../themes/b4.html#microstates">section 11: entropy and microstates</a> and <a href="../themes/b4.html#local">section 12: local decreases in entropy</a>. For engines, cycles and the Kelvin form in action, watch <a href="heat-engine.html">The first law and heat engines</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

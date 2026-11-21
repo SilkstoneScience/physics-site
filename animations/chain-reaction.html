@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: fission and the chain reaction · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics E.4: a uranium-235 nucleus absorbs a neutron and splits, a chain reaction grows in a lump of uranium, a small lump shows why there is a critical mass, and a reactor controls the chain with a moderator and control rods.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/chain-reaction.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: fission and the chain reaction · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics E.4: a uranium-235 nucleus absorbs a neutron and splits, a chain reaction grows in a lump of uranium, a small lump shows why there is a critical mass, and a reactor controls the chain with a moderator and control rods.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/chain-reaction.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/fission.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Fission and the chain reaction</p>
+    <h1>Fission and the chain reaction</h1>
+    <p class="lead">A uranium-235 nucleus absorbs a slow neutron and splits. Its neutrons split more nuclei in a chain reaction, which dies out in a small lump but keeps going in a big one. Inside a reactor, a moderator and control rods keep the chain reaction steady. <a class="tag" href="../themes/e4.html#chain">E.4 Fission</a></p>
+
+    <figure class="anim-stage" data-anim="fission">
+      <canvas role="img" aria-label="Animation of a uranium nucleus absorbing a neutron and splitting into two fragments and three neutrons, then a chain reaction spreading through a lump of uranium, a small and a big lump compared, and the fuel rods, moderator and control rods of a reactor. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>Nothing is drawn to scale: a nucleus is about $10^{-14}$ m across, and everything is slowed down enormously. The nucleus is drawn with 47 balls instead of 235 (with about the same share of protons), and the chain reactions are worked out in two dimensions, with the nuclei far larger and further apart than real ones.</p>
+      <ol>
+        <li>A uranium-235 nucleus has 92 protons and $235 - 92 = 143$ neutrons. A slow ("thermal") neutron, with a kinetic energy of about 0.025 eV, drifts towards it.</li>
+        <li>The nucleus absorbs the neutron and becomes uranium-236, which is unstable. It wobbles, stretches into two lobes and splits.</li>
+        <li>It splits into two smaller nuclei, the fission fragments (here barium-141 and krypton-92), and releases fast neutrons: two or three in each fission, three in this one. The two fragments fly apart with equal and opposite momentum, so the lighter krypton nucleus moves $141 \div 92 = 1.5$ times as fast as the barium. The fission neutrons are faster still (about $2 \times 10^7$ $\text{m s}^{-1}$, against about $1.4 \times 10^7$ $\text{m s}^{-1}$ for the krypton), and everything keeps moving at a steady speed, so the view zooms out to keep them in sight.</li>
+        <li>The equation: $^{1}_{0}\text{n} + {}^{235}_{\;92}\text{U} \rightarrow {}^{236}_{\;92}\text{U}^{*} \rightarrow {}^{141}_{\;56}\text{Ba} + {}^{92}_{36}\text{Kr} + 3\,{}^{1}_{0}\text{n}$. Nucleon number is conserved, $1 + 235 = 141 + 92 + 3 = 236$, and so is charge, $92 = 56 + 36$.</li>
+        <li>Each fission releases about 200 MeV ($200 \times 10^6 \times 1.60 \times 10^{-19} = 3.2 \times 10^{-11}$ J). For this particular split the masses give 173 MeV. Most of it is kinetic energy of the fragments, which repel each other.</li>
+        <li><strong>Predict:</strong> what could the three new neutrons do?</li>
+        <li>A lump of pure uranium-235. One neutron starts a fission, and each fission's 2 or 3 neutrons can split further nuclei. The bars count the fissions in each generation: here 1, 2, 5, 7, 13, 20 and so on, because on average each fission causes more than one more. (A pale bar is a generation that is still filling.) This is an uncontrolled chain reaction. In this small model the lump soon runs out of unsplit nuclei, and the chain stops.</li>
+        <li>Fast neutrons can split uranium-235 too, though much less readily than slow ones, so in this lump of pure uranium-235 no moderator is needed. Reactor fuel is mostly uranium-238, so a reactor slows its neutrons down with a moderator (below).</li>
+        <li>Some neutrons escape through the surface without hitting a nucleus.</li>
+        <li>A small lump and a big lump of the same uranium-235, each started by one neutron. In the small lump most neutrons escape through the surface before they hit a nucleus, so the chain dies out after 3 fissions. In the big lump enough neutrons hit nuclei, so the chain keeps itself going. A small lump has a large surface compared with its volume.</li>
+        <li>The <strong>critical mass</strong> is the minimum mass of fuel needed for a self-sustaining chain reaction.</li>
+        <li>Inside a reactor: fuel rods of enriched uranium (3–5% uranium-235; natural uranium is only 0.7% uranium-235) stand in water, which is the moderator.</li>
+        <li>The neutrons from fission are fast, about 2 MeV, and uranium-235 is far more likely to absorb slow ones. In the moderator they collide with light nuclei (hydrogen in the water) and lose energy in each collision, until they are slow enough to split another uranium-235 nucleus. (Only a few collisions are shown; it takes about 18 collisions with hydrogen nuclei to slow a neutron from 2 MeV to 0.025 eV.)</li>
+        <li>Control rods (containing boron or cadmium) absorb neutrons. They are set so that on average exactly one neutron from each fission causes another fission. In the animation, each fission's neutrons go three ways: one is slowed and splits a nucleus in another fuel rod, one is absorbed by a control rod, and sometimes one is lost through the bottom of the core.</li>
+        <li>Raising the control rods lets more neutrons cause fissions, so the rate of fission rises. When they are set back, exactly one neutron from each fission again causes another, so the rate stays at its new, higher level. Lowering them makes the rate fall, and setting them back holds it steady again. So the position of the rods decides whether the rate grows, falls or stays the same: a controlled chain reaction. (The graph is schematic.) In the animation only the uranium-235 nuclei are drawn in the fuel, not the uranium-238.</li>
+        <li>The fragments' kinetic energy heats the fuel. The coolant, here the same water, carries the thermal energy away to a heat exchanger, where it makes steam for the turbine.</li>
+        <li>A reactor giving $3.0$ GW of thermal power needs $\dfrac{3.0 \times 10^9}{3.2 \times 10^{-11}} = 9.4 \times 10^{19}$ fissions every second.</li>
+      </ol>
+      <p>How the chain reactions are worked out: the nuclei are scattered at random in a disc, at least 0.85 units apart. Each fission sends out 2 or 3 neutrons (equally likely) in random directions; a neutron splits the first unsplit nucleus it passes close enough to, or escapes through the surface. The random numbers come from a fixed seed, so the animation is the same every time. The reactor part is a schematic picture, not a simulation.</p>
+      <p>Read more in <a href="../themes/e4.html#fission">E.4 section 1: what is fission?</a>, <a href="../themes/e4.html#energy">section 2: the energy released</a>, <a href="../themes/e4.html#chain">section 3: chain reactions and critical mass</a>, <a href="../themes/e4.html#reactor">section 4: inside a nuclear power station</a> and <a href="../themes/e4.html#calc">section 5: power station calculations</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

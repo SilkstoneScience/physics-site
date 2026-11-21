@@ -555,6 +555,7 @@ window.glueUnits = (function () {
       ['Videos', 'resources/youtube.html'],
       ['Software and tools', 'resources/apps.html'],
       ['Simulations', 'resources/simulations.html'],
+      ['Animations', 'animations/index.html'],
       ['Science news', 'news.html'],
     ] },
     { key: 'teachers', label: 'For teachers', href: 'teachers/index.html', sections: ['teachers'], items: [

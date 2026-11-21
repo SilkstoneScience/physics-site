@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: transverse and longitudinal waves · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics C.2: what moves in transverse and longitudinal waves, compressions and rarefactions, the two kinds of wave graph, and why v = fλ.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/waves.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: transverse and longitudinal waves · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics C.2: what moves in transverse and longitudinal waves, compressions and rarefactions, the two kinds of wave graph, and why v = fλ.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/waves.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/waves.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Transverse and longitudinal waves</p>
+    <h1>Transverse and longitudinal waves</h1>
+    <p class="lead">A wave travels along a rope, then along a row of particles. Follow one gold particle each time: the wave moves on, but the particle stays where it was. Then see how a longitudinal wave becomes a displacement–distance graph, how that differs from a displacement–time graph, and why $v = f\lambda$. <a class="tag" href="../themes/c2.html#types">C.2 Wave model</a></p>
+
+    <figure class="anim-stage" data-anim="waves">
+      <canvas role="img" aria-label="Animation of a transverse wave on a rope of beads and a longitudinal wave in a row of particles, with one gold particle followed in each, then a displacement–distance graph made from the longitudinal wave, the gold particle's displacement–time graph, and both waves moving one wavelength in one period. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>Both waves have wavelength $\lambda = 1.6$ m and period $T = 2.0$ s, and they travel to the right. The rope's amplitude is 0.25 m; the longitudinal wave's is 0.14 m. Every particle moves exactly as a sine wave predicts: each one oscillates in SHM with the source's frequency, starting a little later than the particle before it. Blue arrows show displacement; the gold particle is the one to watch.</p>
+      <ol>
+        <li>A rope, drawn as a row of beads. Its left end is moved up and down in simple harmonic motion, and each bead copies the motion of the bead before it, a little later. A wave travels along the rope.</li>
+        <li><strong>Predict:</strong> does the gold bead travel along the rope with the wave?</li>
+        <li>No. It only moves up and down about its equilibrium position, while the crests move along. This is a <strong>transverse</strong> wave: the particles oscillate perpendicular to the direction the wave travels.</li>
+        <li>The wave transfers energy along the rope (the orange glow travels with the wave), but there is no overall transfer of matter: every bead stays in its place.</li>
+        <li>Now the end of a row of particles is moved back and forth, along the row. The particles bunch up in <strong>compressions</strong> (C) and spread out in <strong>rarefactions</strong> (R), and these travel along. This is a <strong>longitudinal</strong> wave.</li>
+        <li><strong>Predict:</strong> does the gold particle travel along with the compressions? No: it oscillates back and forth about its equilibrium position, parallel to the direction of travel.</li>
+        <li>Sound is a longitudinal wave. Compressions are regions of higher pressure and rarefactions of lower pressure (the violet tint is brightest where the particles are closest together). Here the centre of a compression has $1/(1 - 0.55) = 2.2$ times as many particles per metre as on average, and the centre of a rarefaction $1/(1 + 0.55) = 0.65$ times as many.</li>
+        <li>The wave is frozen for a snapshot. Each arrow shows a particle's displacement from its equilibrium position, with displacement to the right counted as positive.</li>
+        <li>Each arrow is turned through 90° and plotted above its equilibrium position: a <strong>displacement–distance graph</strong>, the same sine shape as for a transverse wave.</li>
+        <li>A compression is centred where the particles on both sides are displaced <em>towards</em> it, which is where the graph crosses zero going down. A rarefaction is centred where they are displaced <em>away</em> from it, where the graph crosses zero going up. At the crests and troughs of the graph the particles are displaced most, and they are spaced evenly.</li>
+        <li>The wavelength, $\lambda = 1.6$ m, is the distance from one compression to the next, or from crest to crest on the graph. The amplitude is the maximum displacement, 0.14 m.</li>
+        <li>The wave moves again, and the gold particle's displacement is plotted against time: a <strong>displacement–time graph</strong>. Its repeat is the period, $T = 2.0$ s, not the wavelength. Always read the horizontal axis first.</li>
+        <li>In one period, every particle makes one full oscillation and the wave moves on exactly one wavelength. This is shown on both waves at once: the rope now has exactly the shape of the displacement–distance graph, and the marked point on the rope is at the same stage of its oscillation (moving through equilibrium) as the particle at the centre of the marked compression. So $v = \dfrac{\lambda}{T} = \dfrac{1.6}{2.0} = 0.80\ \text{m s}^{-1}$. With $f = \dfrac{1}{T} = 0.50$ Hz, that is $v = f\lambda = 0.50 \times 1.6 = 0.80\ \text{m s}^{-1}$.</li>
+        <li>The source sets the frequency and the medium sets the speed. For sound in air ($v = 340\ \text{m s}^{-1}$), a 170 Hz note has $\lambda = \dfrac{v}{f} = \dfrac{340}{170} = 2.0$ m.</li>
+        <li>Summary: waves transfer energy, not matter. In transverse waves (strings, all electromagnetic waves) the oscillations, of particles or, in EM waves, of the electric and magnetic fields, are perpendicular to the direction of travel; in longitudinal waves (sound) the particles oscillate parallel to it. For every wave, $v = f\lambda = \dfrac{\lambda}{T}$.</li>
+      </ol>
+      <p>How the waves are drawn: the displacement of every particle is $s = A\sin\left(2\pi\left(\dfrac{t}{T} - \dfrac{x}{\lambda}\right)\right)$, where $t$ is the time since the source started and $x$ is the particle's distance from the source, for the part of the medium the wave has reached. The longitudinal amplitude is small enough ($2\pi A/\lambda = 0.55$, less than 1) that neighbouring particles never pass each other. The particles are shown far larger and fewer than in any real medium, and a real sound wave in air has a much higher frequency and speed.</p>
+      <p>Read more in <a href="../themes/c2.html#what">C.2 section 1: what is a wave?</a>, <a href="../themes/c2.html#types">section 2: transverse and longitudinal waves</a>, <a href="../themes/c2.html#describing">section 3: wavelength, frequency and wave speed</a>, <a href="../themes/c2.html#graphs">section 4: two kinds of wave graph</a> and <a href="../themes/c2.html#sound">section 5: sound waves</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

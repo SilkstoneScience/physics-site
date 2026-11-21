@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: standing waves on strings and in pipes · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics C.4: two identical waves travelling in opposite directions make a standing wave, then the harmonics of a string fixed at both ends and of pipes open at both ends or closed at one end.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/standing-waves.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: standing waves on strings and in pipes · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics C.4: two identical waves travelling in opposite directions make a standing wave, then the harmonics of a string fixed at both ends and of pipes open at both ends or closed at one end.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/standing-waves.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/standing.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Standing waves</p>
+    <h1>Standing waves on strings and in pipes</h1>
+    <p class="lead">Two identical waves travel in opposite directions and add up to a standing wave that stays in one place. Then a string fixed at both ends shows its first three harmonics, and two pipes of the same length, one open at both ends and one closed at one end, show why the closed pipe has only odd harmonics. <a class="tag" href="../themes/c4.html#formation">C.4 Standing waves and resonance</a></p>
+
+    <figure class="anim-stage" data-anim="standing">
+      <canvas role="img" aria-label="Animation of two waves travelling in opposite directions adding to a standing wave with nodes and antinodes, then a string fixed at both ends vibrating in its first three harmonics, then layers of air moving back and forth in a pipe open at both ends and a pipe closed at one end, with graphs of displacement amplitude drawn over them. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The string is slowed down 240 times and the pipes 600 times, so that you can see them move. In the first part the two travelling waves are blue (moving right) and orange (moving left), their sum is gold, and the violet curves are its envelope: they show the amplitude at each point. In the pipes, the dots are layers of air, and the violet curves are graphs of displacement amplitude.</p>
+      <ol>
+        <li>A wave travels to the right and an identical wave, with the same frequency, wavelength and amplitude, travels to the left. Where they meet they superpose: at every point the two displacements add. If one wave is $y_1 = A\sin(kx - \omega t)$ and the other $y_2 = A\sin(kx + \omega t)$, their sum is $y = 2A\sin(kx)\cos(\omega t)$. (You don't need these equations: they are only how the animation is calculated.)</li>
+        <li>The sum doesn't travel. It grows, shrinks and flips over in the same place: a <strong>standing wave</strong>.</li>
+        <li><strong>Nodes</strong> (N) never move, because the two waves always cancel there. <strong>Antinodes</strong> (A) oscillate with the largest amplitude. Neighbouring nodes are half a wavelength apart, and a node is a quarter of a wavelength from the next antinode.</li>
+        <li>Points P and Q are in the same loop. Their amplitudes are different, but they move up and down together: they are <strong>in phase</strong>. Point R is in the next loop, on the other side of a node, and it always moves the opposite way to P: it is in <strong>antiphase</strong>, with a phase difference of $\pi$ (180°). The green arrows show which way each point is moving.</li>
+        <li>No net energy is transferred along a standing wave: the two waves carry equal amounts of energy in opposite directions.</li>
+        <li>A string 0.80 m long is fixed at both ends, and waves travel along it at 192 $\text{m s}^{-1}$. A fixed end can't move, so it must be a node. The simplest pattern has one loop, so $L = \frac{\lambda}{2}$. This is the <strong>first harmonic</strong>: $\lambda_1 = 2L = 1.60$ m and $f_1 = \frac{v}{\lambda_1} = \frac{192}{1.60} = 120$ Hz.</li>
+        <li>The same string is then drawn again below, once for each new harmonic. Second harmonic: two loops, so $L = \lambda$: $\lambda_2 = 0.80$ m and $f_2 = \frac{192}{0.80} = 240$ Hz.</li>
+        <li>Third harmonic: three loops, so $L = \frac{3\lambda}{2}$: $\lambda_3 = \frac{2 \times 0.80}{3} = 0.533$ m and $f_3 = \frac{192}{0.533} = 360$ Hz, three times the first harmonic's frequency.</li>
+        <li>A whole number of half-wavelengths fits between the fixed ends, so $\lambda_n = \frac{2L}{n}$ and $f_n = nf_1$, and all harmonics are possible. The real string vibrates 120 times a second in its first harmonic.</li>
+        <li>Sound in a pipe is a longitudinal wave: layers of air move back and forth <em>along</em> the pipe. At an open end the air moves in and out freely, so an open end is a <strong>displacement antinode</strong>. The violet curves are a graph of the displacement amplitude: how far the air at each point moves from its rest position, drawn across the pipe. They are not the shape of the air or of anything else.</li>
+        <li>The pipe is open at both ends and 0.68 m long, and sound travels at 340 $\text{m s}^{-1}$. First harmonic: antinodes at both ends and a node in the middle, so $L = \frac{\lambda}{2}$: $\lambda_1 = 2L = 1.36$ m and $f_1 = \frac{340}{1.36} = 250$ Hz. Second harmonic: $L = \lambda$, so $\lambda_2 = 0.68$ m and $f_2 = 500$ Hz. As on the string, all harmonics are possible.</li>
+        <li>A second pipe of the same length is closed at one end. The air at a closed end can't move, so a closed end is a <strong>displacement node</strong>. With a node at the closed end and an antinode at the open end, the first harmonic has $L = \frac{\lambda}{4}$: $\lambda_1 = 4L = 2.72$ m and $f_1 = \frac{340}{2.72} = 125$ Hz.</li>
+        <li><strong>Predict:</strong> what is the next pattern that fits? What is its frequency, and which harmonic is it?</li>
+        <li>The next pattern has $L = \frac{3\lambda}{4}$: $\lambda = \frac{4 \times 0.68}{3} = 0.907$ m and $f = \frac{340}{0.907} = 375$ Hz. That is $3 \times 125$ Hz, so it is the <strong>third</strong> harmonic. There is no second harmonic: the harmonic number says how many times the first harmonic's frequency it is.</li>
+        <li>Next comes $L = \frac{5\lambda}{4}$: $\lambda = 0.544$ m and $f = 625$ Hz, the fifth harmonic. An odd number of quarter-wavelengths must fit, so only odd harmonics are possible.</li>
+        <li>Both pipes go back to their first harmonic. Closing one end halves the lowest frequency: 125 Hz instead of 250 Hz.</li>
+        <li>Summary: when both ends are the same (node–node or antinode–antinode), $\lambda_n = \frac{2L}{n}$ with all harmonics, $n = 1, 2, 3, \ldots$; with a node at one end and an antinode at the other, $\lambda_n = \frac{4L}{n}$ with odd harmonics only, $n = 1, 3, 5, \ldots$. In every case $f_n = \frac{v}{\lambda_n}$.</li>
+      </ol>
+      <p class="new2028"><span class="tag y2028">New for 2028</span> For exams from 2028, the guide asks you to work out the relationship between the wavelength and the length for the $n$th harmonic yourself, and to see that these relationships set the harmonic names: that is why the patterns in a pipe closed at one end are the 1st, 3rd and 5th harmonics, as in steps 12 to 15.</p>
+      <p>The animation ignores the small "end correction" at an open end (the antinode really sits a little beyond the end of the pipe), as the IB does. The layers of air are drawn moving much further than real air does: even in a loud note they typically move much less than a millimetre.</p>
+      <p>Read more in <a href="../themes/c4.html#formation">C.4 section 1: how standing waves form</a>, <a href="../themes/c4.html#nodes">section 2: nodes, antinodes, amplitude and phase</a>, <a href="../themes/c4.html#strings">section 3: standing waves on strings</a>, <a href="../themes/c4.html#pipes">section 4: standing waves in pipes</a> and <a href="../themes/c4.html#summary">section 5: summary of boundary conditions</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

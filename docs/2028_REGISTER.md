@@ -53,42 +53,42 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 ## The list
 
 <!-- LIST:START (written by tools/list-2028.mjs --write; do not edit by hand) -->
-135 places in 47 files.
+149 places in 55 files.
 
 ### Topic pages
 
 - `themes/b1.html` (6)
   - line 41: New for 2028 For exams from 2028: luminosity means radiated power; intensity $I = \frac{P}{A}$ is new (and in the data booklet); and apparent brightness is the intensity …
-  - line 453: New for 2028 The 2028 guide states that luminosity is synonymous with radiated power : the luminosity of any body (a star, a lamp filament, a planet) is the total power i…
-  - line 474: the box drawn round a "New for 2028" block (class new2028)
-  - line 475: Intensity New for 2028
-  - line 479: …2$, so intensity is in $\text{W m}^{-2}$. This equation is new in the 2028 data booklet.
-  - line 492: New for 2028 The 2028 guide states that apparent brightness is synonymous with intensity : $b$ is simply the intensity $I = \frac{P}{A}$ of a star's light where it is rec…
+  - line 471: New for 2028 The 2028 guide states that luminosity is synonymous with radiated power : the luminosity of any body (a star, a lamp filament, a planet) is the total power i…
+  - line 492: the box drawn round a "New for 2028" block (class new2028)
+  - line 493: Intensity New for 2028
+  - line 497: …2$, so intensity is in $\text{W m}^{-2}$. This equation is new in the 2028 data booklet.
+  - line 510: New for 2028 The 2028 guide states that apparent brightness is synonymous with intensity : $b$ is simply the intensity $I = \frac{P}{A}$ of a star's light where it is rec…
 - `themes/b3.html` (3)
   - line 38: New for 2028 For exams from 2028 the guide adds the difference between rms speed and average speed, and why rms is used .
   - line 259: the box drawn round a "New for 2028" block (class new2028)
   - line 260: Root-mean-square speed New for 2028
 - `themes/c2.html` (3)
   - line 38: New for 2028 For exams from 2028 the guide adds that the intensity of a wave is proportional to the square of its amplitude, $I \propto A^2$ .
-  - line 274: the box drawn round a "New for 2028" block (class new2028)
-  - line 275: Intensity and amplitude New for 2028
+  - line 286: the box drawn round a "New for 2028" block (class new2028)
+  - line 287: Intensity and amplitude New for 2028
 - `themes/c4.html` (2)
   - line 38: New for 2028 For exams from 2028 the guide adds that you should derive the wavelength–length relationship for the $n$th harmonic and see how it sets the harmonic names , …
-  - line 203: New for 2028 The 2028 guide asks you to work this out yourself: find the relationship between the wavelength and the length for the $n$th harmonic ($L = \frac{n\lambda}{2…
+  - line 215: New for 2028 The 2028 guide asks you to work this out yourself: find the relationship between the wavelength and the length for the $n$th harmonic ($L = \frac{n\lambda}{2…
 - `themes/d1.html` (2)
   - line 38: New for 2028 For exams from 2028 the guide says that all students should be able to deduce Kepler's third law for circular orbits , from the centripetal and gravitational…
-  - line 212: New for 2028 From the 2028 exams, the guide says that all students (SL and HL) should be able to deduce Kepler's third law from the centripetal force and gravitational fo…
+  - line 224: New for 2028 From the 2028 exams, the guide says that all students (SL and HL) should be able to deduce Kepler's third law from the centripetal force and gravitational fo…
 - `themes/d2.html` (1)
-  - line 320: New for 2028 The size of the field around a long straight wire, $B = \dfrac{\mu_0 I}{2\pi r}$, is now in the data booklet. It is used in D.3: see D.3 The field of a long …
+  - line 332: New for 2028 The size of the field around a long straight wire, $B = \dfrac{\mu_0 I}{2\pi r}$, is now in the data booklet. It is used in D.3: see D.3 The field of a long …
 - `themes/d3.html` (5)
   - line 38: New for 2028 For exams from 2028 the guide and data booklet add the magnetic field strength of an infinitely long straight wire, $B = \frac{\mu_0 I}{2\pi r}$ , for SL and…
-  - line 261: the box drawn round a "New for 2028" block (class new2028)
-  - line 262: The field of a long straight wire New for 2028
-  - line 263: …wire are circles centred on the wire (D.2, right-hand grip rule). The 2028 data booklet adds the size of this field at a distance $r$ from an infinitely long wire carryin…
-  - line 269: Worked example: a compass near a cable New for 2028
+  - line 279: the box drawn round a "New for 2028" block (class new2028)
+  - line 280: The field of a long straight wire New for 2028
+  - line 281: …wire are circles centred on the wire (D.2, right-hand grip rule). The 2028 data booklet adds the size of this field at a distance $r$ from an infinitely long wire carryin…
+  - line 287: Worked example: a compass near a cable New for 2028
 - `themes/d4.html` (2)
   - line 38: Changed for 2028 For exams from 2028 the guide no longer mentions self-induction ; everything else in D.4 is unchanged.
-  - line 309: Changed for 2028 For exams before 2028, only a qualitative understanding of self-induction is needed. The 2028 guide removes self-induction from the guidance altogether (…
+  - line 315: Changed for 2028 For exams before 2028, only a qualitative understanding of self-induction is needed. The 2028 guide removes self-induction from the guidance altogether (…
 - `themes/e3.html` (3)
   - line 38: New for 2028 For exams from 2028, HL students should know that the strong nuclear force's range is of order $10^{-15}$ m. This page already covers it.
   - line 116: the box drawn round a "New for 2028" block (class new2028)
@@ -135,6 +135,13 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 178: .tag.y2028 { background: var(--surface); border: 1px solid var(--theme-d); color: var(--theme-d); }
   - line 179: .new2028 { border-left: 4px solid var(--theme-d); padding-left: 12px; margin: 14px 0; }
   - line 180: .new2028-note { background: var(--surface); border: 1px solid var(--border); border-left: 5px solid var(--theme-d); border-radius: var(--radius); padding: 8px 14px; margi…
+- `js/anim/star-life.js` (2)
+  - line 32: 2028: the Chandrasekhar (about 1.4 M☉) and Oppenheimer–Volkoff (about 2–3 M☉) limits, on the end card only. */
+  - line 687: const n1 = D.wrap(s, '(Exams from 2028) A remnant core below about 1.4 M☉ (the Chandrasekhar limit) is a white dwarf; up to about 2–3 M☉ (the Oppenheimer–Volkoff limit), …
+- `js/anim/stars.js` (3)
+  - line 24: 2028: the Chandrasekhar (about 1.4 M☉) and Oppenheimer–Volkoff (about 2–3 M☉) limits, as on themes/e5.html. */
+  - line 129: [145.2, 151.4, '(Exams from 2028) A core below about 1.4 solar masses becomes a white dwarf; up to about 2–3 solar masses, a neutron star; above that, a black hole.'],
+  - line 431: const n1 = D.wrap(s, '(Exams from 2028) Chandrasekhar limit ≈ 1.4 M☉; Oppenheimer–Volkoff limit ≈ 2–3 M☉.', Math.min(W - 40, 760));
 - `js/questions.js` (1)
   - line 360: ${q.y2028 ? ' New for 2028 ' : ''}
 - `js/site.js` (25)
@@ -158,11 +165,11 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
   - line 403: note: 'The four percentage equations are new in the 2028 data booklet, so that every exam uses the same definitions. More on these: the Skills page .',
   - line 540: ['Data booklet 2028 (exam copy)', EXAM_BOOKLETS['2028'], true],
   - line 554: ['Annotated data booklet 2028', DATA_BOOKLET_2028_URL, true],
-  - line 775: const booklet2028Card = document.querySelector('#data-booklet-2028 a');
-  - line 776: if (booklet2028Card) booklet2028Card.href = DATA_BOOKLET_2028_URL;
-  - line 1117: const newTag = ' New for 2028 ';
-  - line 1141: ? 'Open the annotated data booklet: 2025 ↗ · 2028 ↗ '
-  - line 1160: ' ${label}${hl ? ' HL ' : ''}${mark === '2028' ? newTag : ''} $$${tex}$$ ').join('') +
+  - line 776: const booklet2028Card = document.querySelector('#data-booklet-2028 a');
+  - line 777: if (booklet2028Card) booklet2028Card.href = DATA_BOOKLET_2028_URL;
+  - line 1118: const newTag = ' New for 2028 ';
+  - line 1142: ? 'Open the annotated data booklet: 2025 ↗ · 2028 ↗ '
+  - line 1161: ' ${label}${hl ? ' HL ' : ''}${mark === '2028' ? newTag : ''} $$${tex}$$ ').join('') +
 - `js/slides.js` (1)
   - line 315: …classList?.contains('tag')) continue; // little tags such as "New for 2028" don't belong on a slide
 
@@ -237,6 +244,14 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 
 ### Other pages and data
 
+- `animations/hr-diagram.html` (2)
+  - line 32: New for 2028 For exams from 2028 the guide adds the role of the Chandrasekhar and Oppenheimer–Volkoff limits: see step 14.
+  - line 55: New for 2028 For exams from 2028: what the core becomes depends on its mass. Below about 1.4 solar masses (the Chandrasekhar limit ), electron degeneracy pressure holds i…
+- `animations/standing-waves.html` (1)
+  - line 59: New for 2028 For exams from 2028, the guide asks you to work out the relationship between the wavelength and the length for the $n$th harmonic yourself, and to see that t…
+- `animations/star-life.html` (2)
+  - line 32: New for 2028 For exams from 2028 the guide adds the role of the Chandrasekhar and Oppenheimer–Volkoff limits: see the last step.
+  - line 58: New for 2028 For exams from 2028: what the core becomes depends on its mass. Below about 1.4 solar masses (the Chandrasekhar limit ), electron degeneracy pressure holds i…
 - `ee/index.html` (1)
   - line 27: …om first idea to final submission. It is for essays first assessed in 2027.
 - `experimental/database-kepler.html` (1)
@@ -244,17 +259,24 @@ Do it as one piece of work, in a worktree, and check each step in the preview.
 - `experimental/straw-resonance.html` (1)
   - line 321: …bout half its open–open value. Then look at the higher peaks. New for 2028 A pipe with one closed end has only odd harmonics, named by their relationship to L : the 1st, …
 - `resources.html` (5)
-  - line 47: …ata booklet with notes explaining the equations, for exams in 2025 to 2027. Opens in Google Drive. The equations for each topic are also in the Σ Equations button on ever…
-  - line 48: the box drawn round a "New for 2028" block (class new2028)
-  - line 49: Annotated data booklet 2028 The new IB physics data booklet for exams from 2028, with notes explaining the equations. Opens in Google Drive (school account).
-  - line 52: …data booklet, exactly as you get it in the exam, for exams in 2025 to 2027. Opens in Google Drive (school account).
-  - line 53: Data booklet 2028 (exam copy) The new clean IB physics data booklet for exams from 2028. Opens in Google Drive (school account).
+  - line 48: …ata booklet with notes explaining the equations, for exams in 2025 to 2027. Opens in Google Drive. The equations for each topic are also in the Σ Equations button on ever…
+  - line 49: the box drawn round a "New for 2028" block (class new2028)
+  - line 50: Annotated data booklet 2028 The new IB physics data booklet for exams from 2028, with notes explaining the equations. Opens in Google Drive (school account).
+  - line 53: …data booklet, exactly as you get it in the exam, for exams in 2025 to 2027. Opens in Google Drive (school account).
+  - line 54: Data booklet 2028 (exam copy) The new clean IB physics data booklet for exams from 2028. Opens in Google Drive (school account).
 - `scientists.json` (1)
   - line 813: …her. This is the Chandrasekhar limit (new in the guide for exams from 2028), and he won the 1983 Nobel Prize in Physics. ",
 - `skills.html` (3)
-  - line 246: … volume $= \frac{4}{3}\pi r^{3}$; surface area $= 4\pi r^{2}$ New for 2028 (in the data booklet from 2028)
-  - line 262: the box drawn round a "New for 2028" block (class new2028)
-  - line 263: New for 2028 From the 2028 exams, all four are printed in the data booklet, so every exam uses the same definitions. The booklet writes them in words:
+  - line 252: … volume $= \frac{4}{3}\pi r^{3}$; surface area $= 4\pi r^{2}$ New for 2028 (in the data booklet from 2028)
+  - line 268: the box drawn round a "New for 2028" block (class new2028)
+  - line 269: New for 2028 From the 2028 exams, all four are printed in the data booklet, so every exam uses the same definitions. The booklet writes them in words:
 - `think/concepts.json` (1)
   - line 1350: …\"intensity ∝ amplitude²\" in so many words; the guide for exams from 2028 does.) Cover one slit and the amplitude at the centre drops from $2A$ to $A$, so the intensity …
+- `universe/css/universe.css` (2)
+  - line 4: …; --warm: #ffd9a0; --hl: #ffb86b; --good: #8fe3b0; --bad: #ff9a8f; --v2028: #c9a6ff;
+  - line 27: .tag.y2028 { color: var(--v2028); }
+- `universe/js/solar.js` (1)
+  - line 35: ['Jupiter', 'gas', 'gas', 1898, 69911, 9.925, 5.20288700, 0.04838624, 1.30439695, 34.39644051, 14.72847983, 100.47390909, 268.06, 64.50, [0.1, 0.85, 0.6, 0.55, 0.75, 0]],
+- `universe/js/ui.js` (1)
+  - line 303: …al force equal to the centripetal force for a circular orbit. New for 2028 Deducing it yourself is required for exams from 2028.',
 <!-- LIST:END -->

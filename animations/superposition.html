@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: superposition and music · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics C.3 and C.4: pulses passing through each other, two notes adding to give beats, and the harmonics of a string adding to give a note its sound, with buttons to hear each one.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/superposition.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: superposition and music · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics C.3 and C.4: pulses passing through each other, two notes adding to give beats, and the harmonics of a string adding to give a note its sound, with buttons to hear each one.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/superposition.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/superpose.js"></script>
+  <script defer src="../js/anim/superpose-sounds.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Superposition and music</p>
+    <h1>Superposition and music</h1>
+    <p class="lead">Waves that meet simply add up. Watch two pulses pass through each other on a rope, two notes of nearly the same pitch make the loudness swell and fade, and the harmonics of a string add up to the sound of an instrument. <a class="tag" href="../themes/c3.html#superposition">C.3 Superposition</a> <a class="tag" href="../themes/c4.html#strings">C.4 Harmonics</a></p>
+
+    <figure class="anim-stage" data-anim="superpose">
+      <canvas role="img" aria-label="Animation: two pulses on a rope meet, add and pass through each other; then two waves of 440 and 444 hertz add to give beats, which stop when the second is tuned to 440 hertz; then the first four harmonics of a string add to give its real shape and the waveform of its sound, for two different mixes of harmonics. The steps are described in words below."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="hear">Hear it</h2>
+      <p>These buttons play the sounds in the animation, made by your browser. Start with a low volume, especially on headphones. Turn the animation's ♪ Music off first to hear the beats clearly. On an iPhone, turn off silent mode.</p>
+      <div class="sim-actions">
+        <button type="button" class="button" data-sound="two-notes">Two notes</button>
+        <button type="button" class="button" data-sound="beats">Beats</button>
+        <button type="button" class="button" data-sound="first">First harmonic only</button>
+        <button type="button" class="button" data-sound="harmonics">Add harmonics</button>
+        <button type="button" class="button" data-sound="other-mix">A different mix</button>
+      </div>
+      <p><strong>Two notes:</strong> 440 Hz, then 444 Hz. They sound almost the same. <strong>Beats:</strong> both together, so the loudness swells and fades 4 times a second. <strong>First harmonic only:</strong> a pure 220 Hz note. <strong>Add harmonics:</strong> the same note with its 2nd, 3rd and 4th harmonics added (amplitudes 1, 0.50, 0.33 and 0.25). <strong>A different mix:</strong> the same four harmonics with amplitudes 1, 0.15, 0.45 and 0.10. The pitch is the same; the sound is different.</p>
+    </section>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <ol>
+        <li>Two pulses travel along a rope towards each other, one from each end. Thin coloured lines show each pulse on its own; the bright line is the rope itself.</li>
+        <li>Where they overlap, the displacement of the rope at every point is the sum of the two displacements: the <strong>principle of superposition</strong>. When the two crests are exactly on top of each other, the rope is twice as high (<strong>constructive interference</strong>).</li>
+        <li>Then each pulse carries on unchanged, as if the other had never been there.</li>
+        <li><strong>Predict:</strong> what happens when a crest meets an equal trough?</li>
+        <li>For an instant the two cancel and the rope is completely flat (<strong>destructive interference</strong>). The energy hasn't gone: the rope is still moving at that instant (the small arrows), up on one side and down on the other, and both pulses reappear.</li>
+        <li>Two continuous waves: notes of $f_1 = 440$ Hz and $f_2 = 444$ Hz, as a microphone would record them. They are drawn slowed down and with far fewer waves (20 and 21 across the picture, really 110 and 111 cycles in each quarter-second beat) so that you can see each one.</li>
+        <li>Adding them point by point: where the two waves are in step, the sum is large; where they are out of step, it almost vanishes. So the loudness swells and fades. These are <strong>beats</strong> (beyond the IB syllabus). The number of beats each second is $f_2 - f_1 = 444 - 440 = 4$.</li>
+        <li>A musician tuning a string listens to it with a reference note and adjusts the string until the beats slow down and stop. When both are exactly 440 Hz, the sum is one steady wave.</li>
+        <li>A plucked string vibrates in its first harmonic and in higher harmonics at the same time. The animation shows the first four, at $f_n = n \times 220$ Hz: 220, 440, 660 and 880 Hz, with example amplitudes 1, 0.50, 0.33 and 0.25. They are drawn slowed down.</li>
+        <li>The string's real shape is the sum of the four at every point. It keeps changing shape, but the whole pattern repeats 220 times a second, the frequency of the first harmonic.</li>
+        <li>So the sound wave also repeats every $\frac{1}{220}$ s $= 4.5$ ms, and we hear the pitch of the first harmonic. Its shape is not a simple sine curve: the shape comes from the mix of harmonics. (The harmonics' starting points, their phases, are chosen to make a clear drawing. Changing the phases would change the drawn shape, but the ear hardly notices: what you hear depends mainly on the amplitudes of the harmonics.)</li>
+        <li>Another instrument playing the same note has a different mix of harmonics (here 1, 0.15, 0.45 and 0.10), so its waveform has a different shape and it sounds different. This quality is called <strong>timbre</strong> (beyond the IB syllabus). Both waveforms repeat 220 times a second, so both play the same note.</li>
+      </ol>
+      <p>Read more in <a href="../themes/c3.html#superposition">C.3 section 6: superposition</a>, <a href="../themes/c4.html#formation">C.4 section 1: how standing waves form</a>, <a href="../themes/c4.html#strings">C.4 section 3: standing waves on strings</a> and <a href="../themes/c4.html#pipes">C.4 section 4: standing waves in pipes</a>, where closing one end of a pipe also changes a note's character.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

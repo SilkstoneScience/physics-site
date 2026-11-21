@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: how does a rainbow work? · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics C.3: rays traced through a raindrop with Snell's law show why a rainbow is a bright cone at about 42°, why red is on the outside, and where the fainter secondary bow comes from.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/rainbow.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: how does a rainbow work? · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics C.3: rays traced through a raindrop with Snell's law show why a rainbow is a bright cone at about 42°, why red is on the outside, and where the fainter secondary bow comes from.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/rainbow.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/rainbow.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › How does a rainbow work?</p>
+    <h1>How does a rainbow work?</h1>
+    <p class="lead">Sunlight refracts into a raindrop, is partly reflected at the back and refracts out again. Rays traced exactly with Snell's law show why the light comes back brightest at about 42°, why red is on the outside of the bow, and why a fainter second bow sometimes appears outside it. <a class="tag" href="../themes/c3.html#refraction">C.3 Refraction and Snell's law</a></p>
+
+    <figure class="anim-stage" data-anim="rainbow">
+      <canvas role="img" aria-label="Animation: a rainbow over hills in the rain. Then one enlarged raindrop: a ray of sunlight refracts in, is partly reflected at the back and refracts out, turned back at 42.4 degrees. Many parallel rays come out at different angles, and a graph shows them bunching up just below 42.4 degrees. White light splits into colours, with violet bunching at 40.6 degrees. A side view shows the observer with the Sun behind them, and drops at 42.4 and 40.6 degrees sending red and violet light to the eye. The rainbow is part of a circle round the antisolar point, a full circle from an aeroplane. Finally light reflected twice in a drop makes a fainter secondary bow with reversed colours, and the sky between the two bows is darker. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The refractive index of water is about 1.33. It changes slightly with the colour of the light (dispersion, beyond the course): about 1.331 for red light and 1.343 for violet. The raindrop is drawn hugely enlarged, and the light is slowed down enormously.</p>
+      <ol>
+        <li>A rainbow appears when the Sun is behind you, fairly low in the sky (lower than 42°), and rain is falling in front of you.</li>
+        <li>Each raindrop is a tiny sphere of water. To see what a drop does to sunlight, the animation zooms in on one.</li>
+        <li>Sunlight <strong>refracts</strong> as it enters the drop, bending towards the normal (Snell's law, $n_1 \sin\theta_1 = n_2 \sin\theta_2$).</li>
+        <li>The ray drawn meets the drop at $i = 59.5°$. Inside,
+          $$\sin r = \frac{\sin 59.5°}{1.331} = 0.647$$
+          so $r = 40.3°$.</li>
+        <li>At the back of the drop most of the light refracts out through the back, but a little (about 6%) is <strong>reflected</strong>.</li>
+        <li>This is <em>not</em> total internal reflection. The ray meets the back of the drop at $40.3°$ to the normal (the triangle inside the drop is isosceles, so this equals $r$), which is less than the critical angle of water: $\sin c = \dfrac{1}{1.331}$, so $c = 48.7°$.</li>
+        <li>The reflected light refracts again as it leaves, heading back towards the side the sunlight came from.</li>
+        <li>It comes out turned back through 137.6°: 42.4° away from heading straight back towards the Sun.</li>
+        <li><strong>Predict:</strong> sunlight falls on the whole drop. Do all the rays come back out at 42°?</li>
+        <li>No: each ray comes out at a different angle, depending on where it hits the drop.</li>
+        <li>For red light ($n = 1.331$), none comes out at more than 42.4°, and near that angle many rays come out almost together, so the light is brightest there. The graph counts rays equally spaced across one slice of the drop, for each quarter of a degree.</li>
+        <li>Rays that hit the lower half of the drop do the same, mirrored. So each drop sends a bright cone of light back at about 42°.</li>
+        <li>The refractive index of water depends slightly on the colour of the light: this is <strong>dispersion</strong> (beyond the course).</li>
+        <li>Red light ($n = 1.331$) comes out brightest at 42.4°. Violet light ($n = 1.343$) is bent a little more and comes out brightest at 40.6°.</li>
+        <li>The view from the side: sunlight arrives in parallel rays from behind you.</li>
+        <li>The point directly opposite the Sun, where the shadow of your head falls, is the <strong>antisolar point</strong>.</li>
+        <li>Drops 42.4° from that direction send red light to your eye; drops 40.6° from it send violet. The other colours from each drop miss your eye.</li>
+        <li>So red is on the outside of the bow and violet on the inside. Each drop sends you one bright colour (and weaker light of other colours), and millions of drops make the bow.</li>
+        <li>All the drops at about 42° round the antisolar point form a circle. The ground hides the lower part, so you see an arc; from an aeroplane you can see a full circle, with the plane's shadow at its centre.</li>
+        <li>Some light is reflected twice inside a drop before it leaves. Those rays bunch at 50.4° (red) to 53.5° (violet).</li>
+        <li>They make a fainter <strong>secondary bow</strong> outside the main one, with its colours reversed: red inside, violet outside.</li>
+        <li>Inside the main bow the sky is brighter, because drops there send you once-reflected light at smaller angles.</li>
+        <li>Between the two bows the sky is darker (Alexander's band): no once-reflected light comes from more than 42.4°, and no twice-reflected light from less than 50.4°.</li>
+      </ol>
+      <p>How it is drawn: every ray is traced exactly through a sphere with Snell's law, so each angle comes from the calculation. The largest angle for once-reflected light is 42.37° for red and 40.65° for violet; the smallest for twice-reflected light is 50.37° for red and 53.48° for violet. The colours in between use refractive indices from a standard formula through the red and violet values. In the sky, the Sun is 15° above the horizon behind you, so the top of the main bow is $42.4° - 15° = 27.4°$ up, and each bow is drawn as the exact cone of directions at its angle round the antisolar point. Simplified: the graphs count rays without including how much of the light is reflected (about 6% at the back of the drop for the main bow, less again after two reflections), and real raindrops are not quite spherical. Beyond the course: dispersion, the 6% (from Fresnel's equations), and the fact that rainbow light is polarised.</p>
+      <p>Read more in <a href="../themes/c3.html#reflection">C.3 section 2: reflection and transmission</a>, <a href="../themes/c3.html#refraction">section 3: refraction and Snell's law</a> and <a href="../themes/c3.html#tir">section 4: critical angle and total internal reflection</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

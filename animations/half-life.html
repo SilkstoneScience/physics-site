@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Physics animation: random decay and half-life · Mr Silkstone's Physics</title>
+  <meta name="description" content="An animation for IB DP Physics E.3: 1000 nuclei decay at random while the number left is plotted, showing half-life, activity, count rate, background radiation and why small samples are less predictable, with the decay law for HL.">
+  <link rel="canonical" href="https://physics.silkstone.xyz/animations/half-life.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mr Silkstone's Physics">
+  <meta property="og:title" content="IB Physics animation: random decay and half-life · Mr Silkstone's Physics">
+  <meta property="og:description" content="An animation for IB DP Physics E.3: 1000 nuclei decay at random while the number left is plotted, showing half-life, activity, count rate, background radiation and why small samples are less predictable, with the decay law for HL.">
+  <meta property="og:url" content="https://physics.silkstone.xyz/animations/half-life.html">
+  <meta property="og:image" content="https://physics.silkstone.xyz/images/social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <script defer src="../js/site.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>
+  <script defer src="../js/anim/player.js"></script>
+  <script defer src="../js/anim/decay.js"></script>
+</head>
+<body data-root="../" data-section="resources">
+  <header id="site-header"></header>
+  <main>
+    <p class="crumbs"><a href="index.html">Animations</a> › Random decay and half-life</p>
+    <h1>Random decay and half-life <span class="tag hl">+ HL extra</span></h1>
+    <p class="lead">A thousand unstable nuclei decay one by one, at random moments, while a graph counts how many are left. No one can say when a single nucleus will decay, yet the whole sample halves in a fixed time: the half-life. The last part, on the decay constant and the decay law, is HL. <a class="tag" href="../themes/e3.html#halflife">E.3 Radioactive decay</a></p>
+
+    <figure class="anim-stage" data-anim="decay">
+      <canvas role="img" aria-label="Animation of a grid of 1000 nuclei decaying at random, with a detector, a small sample of 20 nuclei, a graph of the number of undecayed nuclei against time with half-life markers, and a bar chart of the activity. The steps are described in words below the animation."></canvas>
+    </figure>
+
+    <section class="anim-shows">
+      <h2 id="shows">What the animation shows</h2>
+      <p>The nuclei belong to a made-up nuclide, X, with a half-life of $T_{1/2} = 10$ s, so that several half-lives fit into a minute or two. The clock runs at real speed and never stops; the numbers left at exactly 10, 20 and 30 s stay marked on the graph while the decays carry on. Each nucleus was given its own random decay moment once, so the run is random but the same every time you watch it. The numbers below are the counts from this run.</p>
+      <ol>
+        <li>1000 unstable nuclei of X (orange). Each will decay, giving out radiation, and become a daughter nucleus (grey-blue).</li>
+        <li>Before the clock starts, the detector already counts now and then, at about 0.5 counts per second: this is <strong>background radiation</strong>, from rocks, radon gas, cosmic rays and other sources.</li>
+        <li><strong>Predict:</strong> when will the highlighted nucleus decay?</li>
+        <li>No one can say. Decay is <strong>random</strong>: every nucleus of X has the same chance of decaying in each second, and nothing tells you which will go next. It is also <strong>spontaneous</strong>: heating, squeezing or chemical reactions make no difference. (In this run, the highlighted nucleus happened to decay after 6.2 s. Others in the same sample last over a minute.)</li>
+        <li>The clock starts. Each nucleus decays at a random moment: it flashes and turns into a daughter nucleus. The graph shows the number of undecayed nuclei, $N$; each decay is one small step down.</li>
+        <li>After 10 s, 493 nuclei are left: about half. This time is the <strong>half-life</strong> of X, $T_{1/2} = 10$ s.</li>
+        <li>The <strong>activity</strong>, the number of decays per second (measured in becquerels, Bq), falls too, because fewer nuclei are left to decay. Each bar is the average over a 5-second interval: in this run 57, 44.4, 32.6, 16.8, 16.8, 9.0 … decays per second, against 58.6, 41.4, 29.3, 20.7, 14.6, 10.4 expected.</li>
+        <li>After 20 s, 246 are left: about a quarter. Each half-life halves the number that is <em>left</em>, not the starting number.</li>
+        <li>The radiation goes off in all directions, and only some of it reaches the detector (here about a quarter), so the <strong>count rate</strong> is less than the activity. The count rate shown is the number of counts in the last 4 s, divided by 4, and includes the background.</li>
+        <li>After 30 s, 117 are left: about an eighth of 1000, which is 125. After $n$ half-lives, the fraction left is $\left(\tfrac{1}{2}\right)^n$.</li>
+        <li>The smooth white curve is the expected number, which halves every 10 s. With 1000 nuclei, the random run follows it closely.</li>
+        <li>A separate sample of only 20 nuclei decays just as randomly. After 10 s it still had 15, not 10, and after 20 s it had 8, not 5: a small sample is much less predictable. (On the graph its count is multiplied by 50, so that both samples share one scale; it is drawn from this step on.)</li>
+        <li>To measure the source alone, subtract the background count rate from every reading. Here the background was measured before the clock started: 23 counts in 46.6 s, about 0.5 counts per second. The screen shows the count rate with this subtracted.</li>
+        <li>(HL) The decay constant is $\lambda = \dfrac{\ln 2}{T_{1/2}} = \dfrac{0.693}{10} = 0.0693\ \text{s}^{-1}$.</li>
+        <li>(HL) The activity is $A = \lambda N$. At the start, $A = 0.0693 \times 1000 = 69$ Bq. The activity falls as the nuclei decay, so over the first 5 s the expected average is $\dfrac{1000\,(1 - e^{-0.0693 \times 5})}{5} = 59$ decays per second; this run had 285 decays in the first 5 s, 57 per second. The rest of the difference is random variation.</li>
+        <li>(HL) The decay law $N = N_0e^{-\lambda t}$ works at any time, not only after whole half-lives. At $t = 25$ s: $N = 1000 \times e^{-0.0693 \times 25} = 1000 \times e^{-1.73} = 177$ expected. This run had 162.</li>
+        <li>Summary: one nucleus is unpredictable, but a large sample halves in a fixed time. The count rate is less than the activity, and the background must be subtracted. HL: $N = N_0e^{-\lambda t}$, $A = \lambda N$ and $T_{1/2} = \dfrac{\ln 2}{\lambda}$.</li>
+      </ol>
+      <p>How it is made: each nucleus's decay moment is a random waiting time from the exponential distribution, $t = -\dfrac{\ln(1 - u)}{\lambda}$ with $u$ a random number between 0 and 1. That is exactly what "the same chance of decaying in each second" leads to. Whether each decay's radiation reaches the detector, and the arrival times of the background counts, are also random. Real samples contain far more nuclei (a microgram of a radioactive substance has about $10^{15}$), so their decay curves are even smoother.</p>
+      <p>Read more in <a href="../themes/e3.html#random">E.3 section 4: random and spontaneous decay</a>, <a href="../themes/e3.html#halflife">section 8: activity, count rate and half-life</a>, <a href="../themes/e3.html#background">section 9: background radiation</a> and, for HL, <a href="../themes/e3.html#law">section 15: the decay constant and the decay law</a> and <a href="../themes/e3.html#activity">section 16: activity and half-life</a>.</p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

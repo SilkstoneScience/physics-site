@@ -1,17 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
   <!-- a dark room with a poker, a person and a block of ice. The background must really be dark, so its colour is fixed, and the outlines are fixed light grey so they show on it in both light and dark mode. Nothing shows any radiation. -->
   <rect x="0" y="0" width="400" height="200" fill="#161a2b"/>
+  <!-- floor and the left-hand wall -->
   <line x1="0" y1="168" x2="400" y2="168" stroke="#c8ccd8" stroke-width="1.5"/>
-  <!-- poker leaning against the left wall: a rod with a ring handle and a thicker tip -->
-  <line x1="52" y1="166" x2="92" y2="58" stroke="#c8ccd8" stroke-width="2"/>
-  <line x1="52" y1="166" x2="60" y2="144" stroke="#c8ccd8" stroke-width="5" stroke-linecap="round"/>
-  <circle cx="94" cy="52" r="6" fill="none" stroke="#c8ccd8" stroke-width="2"/>
+  <line x1="22" y1="0" x2="22" y2="168" stroke="#c8ccd8" stroke-width="1.5"/>
+  <!-- poker leaning against the wall: loop handle, long rod, pointed tip with a side hook -->
+  <ellipse cx="32" cy="44" rx="7" ry="10" transform="rotate(-27 32 44)" fill="none" stroke="#c8ccd8" stroke-width="2.5"/>
+  <line x1="37" y1="53" x2="44" y2="66" stroke="#c8ccd8" stroke-width="4" stroke-linecap="round"/>
+  <line x1="44" y1="66" x2="94" y2="162" stroke="#c8ccd8" stroke-width="2.5"/>
+  <path d="M86 147 L78 152 L76 160" fill="none" stroke="#c8ccd8" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M91 156 L97 167 L95 158" fill="none" stroke="#c8ccd8" stroke-width="2" stroke-linejoin="round"/>
   <text x="72" y="190" text-anchor="middle" style="fill:#c8ccd8">poker</text>
-  <!-- person -->
-  <circle cx="200" cy="60" r="12" fill="#161a2b" stroke="#c8ccd8" stroke-width="2"/>
-  <path d="M200 72 V122 M200 84 L178 110 M200 84 L222 110 M200 122 L188 168 M200 122 L212 168" fill="none" stroke="#c8ccd8" stroke-width="2"/>
+  <!-- person, in outline -->
+  <circle cx="200" cy="54" r="11" fill="#161a2b" stroke="#c8ccd8" stroke-width="2"/>
+  <path d="M194 66 H206 Q218 68 220 74 L226 116 Q226 120 222 120 H219 L215 86 L213 118 L212 166 H203 L200 124 L197 166 H188 L187 118 L185 86 L181 120 H178 Q174 120 174 116 L180 74 Q182 68 194 66 Z" fill="#161a2b" stroke="#c8ccd8" stroke-width="2" stroke-linejoin="round"/>
   <text x="200" y="190" text-anchor="middle" style="fill:#c8ccd8">person</text>
-  <!-- block of ice drawn as a cube -->
-  <path d="M300 118 H350 V168 H300 Z M300 118 L318 102 H368 L350 118 M368 102 V152 L350 168" fill="none" stroke="#c8ccd8" stroke-width="2" stroke-linejoin="round"/>
+  <!-- block of ice drawn as a cube, with a couple of faint cracks -->
+  <path d="M300 112 H352 V166 H300 Z M300 112 L320 96 H372 L352 112 M372 96 V150 L352 166" fill="none" stroke="#c8ccd8" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M312 124 L322 138 L318 150 M338 120 L344 130" fill="none" stroke="#c8ccd8" stroke-width="1" opacity="0.6"/>
   <text x="332" y="190" text-anchor="middle" style="fill:#c8ccd8">ice</text>
 </svg>
