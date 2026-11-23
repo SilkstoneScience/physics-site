@@ -1,4 +1,7 @@
 /**
+ * @OnlyCurrentDoc
+ * (This line limits the script's permission to this one spreadsheet, instead of all your Google Sheets.)
+ *
  * Lightspeed leaderboard: a Google Apps Script web app that stores scores in this Google Sheet.
  * Setup (click by click): docs/LIGHTSPEED_SETUP.md in the physics-site repository.
  *

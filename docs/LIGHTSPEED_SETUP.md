@@ -13,7 +13,8 @@ Lightspeed (`lightspeed.html`) works without any of this. Each student's best sc
 3. Delete everything in the editor. Then open `tools/lightspeed/leaderboard.gs` from the physics-site folder, copy all of it, and paste it into the editor.
 4. Click the **Save** icon (the disk).
 5. In the bar above the code, choose **setup** from the list of functions, then click **Run**.
-6. Google asks for permission. Click **Review permissions**, choose your account, then **Advanced → Go to (project name) (unsafe)**, then **Allow**. The warning appears because you wrote the script yourself; it only gets access to this one spreadsheet.
+6. Google asks for permission. Click **Review permissions**, choose your account, then **Advanced → Go to (project name) (unsafe)**, then **Allow**. The warning appears because you wrote the script yourself. Google should ask only to "view and manage spreadsheets that this application has been installed in": the `@OnlyCurrentDoc` line at the top of the script limits it to this one spreadsheet. If it asks for **all** your spreadsheets, that line is missing; cancel and paste the script again.
+8. Keep the Sheet unshared (or share it view-only): anyone who can edit the Sheet can also edit the script, which runs as you.
 7. Go back to the Sheet tab. It now has a tab called **Scores** with the column headings.
 
 ## 2. Publish it as a web app
