@@ -4,7 +4,7 @@
 // docs/LIGHTSPEED_SETUP.md). Put the web app's address in LEADERBOARD_URL below. While it is empty, the game still
 // works and keeps each player's best scores in their own browser only.
 (function () {
-  const LEADERBOARD_URL = '';
+  const LEADERBOARD_URL = 'https://script.google.com/macros/s/AKfycbxloCpx0C5eKLZy3xyXqTXAqggqg4PPKXMgsa5bFnvk0eW6dH75VvE7StSCe5tKMxSvSQ/exec';
 
   const app = document.getElementById('ls-app');
   if (!app) return;
