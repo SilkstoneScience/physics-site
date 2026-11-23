@@ -1,0 +1,392 @@
+[
+  {
+    "id": "LS-D1-01",
+    "topic": "D.1",
+    "level": "SL",
+    "type": "choice",
+    "q": "The distance between two point masses is tripled. The gravitational force between them was $F$. What is it now?",
+    "options": [
+      "$F/9$",
+      "$F/3$",
+      "$3F$",
+      "$9F$"
+    ],
+    "answer": 0,
+    "why": "Newton's law is an inverse-square law: tripling $r$ divides $F$ by $3^2 = 9$. $F/3$ forgets to square."
+  },
+  {
+    "id": "LS-D1-02",
+    "topic": "D.1",
+    "level": "SL",
+    "type": "number",
+    "q": "A planet has twice the mass and twice the radius of the Earth. Its surface gravitational field strength is how many times the Earth's?",
+    "numeric": {
+      "answer": 0.5,
+      "unit": ""
+    },
+    "why": "$g = \\frac{GM}{r^2}$, so $g$ changes by a factor of $\\frac{2}{2^2} = 0.5$."
+  },
+  {
+    "id": "LS-D1-03",
+    "topic": "D.1",
+    "level": "SL",
+    "type": "choice",
+    "q": "Gravitational field strength at a point is defined as…",
+    "options": [
+      "the work done per unit mass bringing a mass from infinity",
+      "the force per unit mass on a small point mass placed there",
+      "the total force on any mass placed there",
+      "the energy per unit mass of a body there"
+    ],
+    "answer": 1,
+    "why": "$g = F/m$ for a small test mass, in $\\text{N kg}^{-1}$. Work per unit mass from infinity is the gravitational potential."
+  },
+  {
+    "id": "LS-D1-04",
+    "topic": "D.1",
+    "level": "SL",
+    "type": "choice",
+    "q": "Planet B orbits a star at 4 times the orbital radius of planet A. Its orbital period is how many times A's?",
+    "options": [
+      "2",
+      "4",
+      "8",
+      "16"
+    ],
+    "answer": 2,
+    "why": "Kepler's third law: $T^2 \\propto r^3$, so $T \\propto r^{3/2}$ and $4^{3/2} = 8$."
+  },
+  {
+    "id": "LS-D1-05",
+    "topic": "D.1",
+    "level": "SL",
+    "type": "choice",
+    "q": "On the line joining the centres of the Earth and the Moon, where is the point at which the resultant gravitational field is zero?",
+    "options": [
+      "Closer to the Earth",
+      "Exactly halfway between them",
+      "On the far side of the Moon",
+      "Closer to the Moon"
+    ],
+    "answer": 3,
+    "why": "The two fields cancel only between the bodies, and the Moon's much smaller mass means you must be nearer to it for its field to match the Earth's."
+  },
+  {
+    "id": "LS-D1-06",
+    "topic": "D.1",
+    "level": "HL",
+    "type": "number",
+    "q": "The gravitational potential at a planet's surface is $-60\\ \\text{MJ kg}^{-1}$. What is it, in $\\text{MJ kg}^{-1}$, at a height of one planet radius above the surface?",
+    "numeric": {
+      "answer": -30,
+      "unit": "$\\text{MJ kg}^{-1}$"
+    },
+    "why": "$V_g = -\\frac{GM}{r}$ and the distance from the centre doubles ($r = 2R$), so $V_g$ halves to $-30\\ \\text{MJ kg}^{-1}$. It stays negative."
+  },
+  {
+    "id": "LS-D1-07",
+    "topic": "D.1",
+    "level": "HL",
+    "type": "choice",
+    "q": "A satellite in a low circular orbit is slowed by a small atmospheric drag force. What happens to its orbital radius and speed?",
+    "options": [
+      "Radius increases, speed decreases",
+      "Radius decreases, speed increases",
+      "Radius decreases, speed decreases",
+      "Radius increases, speed increases"
+    ],
+    "answer": 1,
+    "why": "Drag removes energy, so the satellite drops to a lower orbit, where $v = \\sqrt{GM/r}$ is larger: it speeds up, losing more potential energy than it gains in kinetic energy."
+  },
+  {
+    "id": "LS-D2-01",
+    "topic": "D.2",
+    "level": "SL",
+    "type": "choice",
+    "q": "Both point charges are doubled and their separation is doubled. The force between them was $F$. What is it now?",
+    "options": [
+      "$F/4$",
+      "$F/2$",
+      "$F$",
+      "$2F$"
+    ],
+    "answer": 2,
+    "why": "$F = \\frac{kq_1q_2}{r^2}$: the charges give $\\times 4$ and the distance gives $\\div 4$, so the force is unchanged."
+  },
+  {
+    "id": "LS-D2-02",
+    "topic": "D.2",
+    "level": "SL",
+    "type": "number",
+    "q": "Two parallel plates 2.0 cm apart have a potential difference of 500 V. What is the electric field strength between them?",
+    "numeric": {
+      "answer": 25000,
+      "unit": "$\\text{V m}^{-1}$"
+    },
+    "why": "$E = \\frac{V}{d} = \\frac{500}{0.020} = 2.5 \\times 10^4\\ \\text{V m}^{-1}$. Remember to change cm to m."
+  },
+  {
+    "id": "LS-D2-03",
+    "topic": "D.2",
+    "level": "SL",
+    "type": "choice",
+    "q": "What did Millikan's oil-drop experiment show?",
+    "options": [
+      "The electron is much lighter than an atom",
+      "Charge is spread continuously through matter",
+      "The charge-to-mass ratio of the electron",
+      "Every drop's charge was a whole-number multiple of one smallest charge"
+    ],
+    "answer": 3,
+    "why": "The drops' charges always came in whole-number multiples of $e$: evidence that charge is quantized."
+  },
+  {
+    "id": "LS-D2-04",
+    "topic": "D.2",
+    "level": "SL",
+    "type": "choice",
+    "q": "A negative rod is held near an uncharged metal sphere. The sphere is earthed briefly, then the earth and then the rod are removed. The sphere is now…",
+    "options": [
+      "positive",
+      "negative",
+      "neutral",
+      "positive only while the rod is near"
+    ],
+    "answer": 0,
+    "why": "The rod repels electrons from the sphere to earth. With the earth link broken first, the sphere is left short of electrons: positive, by electrostatic induction."
+  },
+  {
+    "id": "LS-D2-05",
+    "topic": "D.2",
+    "level": "SL",
+    "type": "choice",
+    "q": "A hollow metal sphere carries a positive charge. What is the electric field strength inside it?",
+    "options": [
+      "Largest at the centre",
+      "Zero everywhere inside",
+      "The same as just outside the surface",
+      "Directed inwards, towards the centre"
+    ],
+    "answer": 1,
+    "why": "The charge sits on the outer surface of a conductor, and the field inside is zero. Outside, it is the same as for a point charge at the centre."
+  },
+  {
+    "id": "LS-D2-06",
+    "topic": "D.2",
+    "level": "HL",
+    "type": "number",
+    "q": "A $+3.0\\ \\mu\\text{C}$ charge moves from a point at $+40$ V to a point at $+10$ V. How much work, in µJ, does the field do on it?",
+    "numeric": {
+      "answer": 90,
+      "unit": "$\\mu\\text{J}$"
+    },
+    "why": "$W = q\\Delta V_e = 3.0\\ \\mu\\text{C} \\times 30\\ \\text{V} = 90\\ \\mu\\text{J}$. The field does positive work on a positive charge moving to a lower potential."
+  },
+  {
+    "id": "LS-D2-07",
+    "topic": "D.2",
+    "level": "HL",
+    "type": "choice",
+    "q": "At the midpoint between point charges $+Q$ and $-Q$, which is correct about the electric field strength $E$ and the potential $V_e$?",
+    "options": [
+      "$E = 0$ and $V_e = 0$",
+      "$E = 0$ and $V_e \\neq 0$",
+      "$E \\neq 0$ and $V_e \\neq 0$",
+      "$E \\neq 0$ and $V_e = 0$"
+    ],
+    "answer": 3,
+    "why": "Potential is a scalar: $+kQ/r$ and $-kQ/r$ add to zero. Field is a vector: both fields point towards $-Q$, so they add."
+  },
+  {
+    "id": "LS-D3-01",
+    "topic": "D.3",
+    "level": "SL",
+    "type": "choice",
+    "q": "A charged particle moves at right angles to a uniform magnetic field. What happens to its kinetic energy?",
+    "options": [
+      "It increases steadily",
+      "It decreases steadily",
+      "It stays constant",
+      "It increases, then decreases"
+    ],
+    "answer": 2,
+    "why": "The magnetic force is always perpendicular to the velocity, so it does no work: the speed stays constant and the path is a circle."
+  },
+  {
+    "id": "LS-D3-02",
+    "topic": "D.3",
+    "level": "SL",
+    "type": "number",
+    "q": "An alpha particle and a proton enter the same magnetic field at the same speed, at right angles to it. Taking $m_\\alpha = 4m_p$, what is $r_\\alpha / r_p$?",
+    "numeric": {
+      "answer": 2,
+      "unit": ""
+    },
+    "why": "$r = \\frac{mv}{qB}$, so $r \\propto \\frac{m}{q}$: the alpha particle has 4 times the mass and 2 times the charge, giving a ratio of 2."
+  },
+  {
+    "id": "LS-D3-03",
+    "topic": "D.3",
+    "level": "SL",
+    "type": "number",
+    "q": "A 0.50 m wire carrying 4.0 A lies at 30° to a uniform 0.20 T magnetic field. What is the force on it?",
+    "numeric": {
+      "answer": 0.2,
+      "unit": "N"
+    },
+    "why": "$F = BIL\\sin\\theta = 0.20 \\times 4.0 \\times 0.50 \\times 0.5 = 0.20$ N."
+  },
+  {
+    "id": "LS-D3-04",
+    "topic": "D.3",
+    "level": "SL",
+    "type": "choice",
+    "q": "Two long parallel wires carry currents in opposite directions. What happens?",
+    "options": [
+      "They attract",
+      "They repel",
+      "Nothing: their fields cancel",
+      "Each wire turns to line up with the other's field"
+    ],
+    "answer": 1,
+    "why": "Each wire feels a force from the other's field: currents in the same direction attract, in opposite directions they repel."
+  },
+  {
+    "id": "LS-D3-05",
+    "topic": "D.3",
+    "level": "SL",
+    "type": "number",
+    "q": "Perpendicular uniform fields $E = 3.0 \\times 10^4\\ \\text{V m}^{-1}$ and $B = 0.015$ T let a charged particle pass straight through. What is its speed, in units of $10^6\\ \\text{m s}^{-1}$?",
+    "numeric": {
+      "answer": 2,
+      "unit": "$\\times 10^{6}\\ \\text{m s}^{-1}$"
+    },
+    "why": "Undeflected means $qE = qvB$, so $v = \\frac{E}{B} = 2.0 \\times 10^6\\ \\text{m s}^{-1}$, whatever the charge or mass."
+  },
+  {
+    "id": "LS-D3-06",
+    "topic": "D.3",
+    "level": "SL",
+    "type": "choice",
+    "q": "An electron enters the uniform field between two charged parallel plates, moving parallel to the plates. Ignoring gravity, what shape is its path between the plates?",
+    "options": [
+      "A straight line",
+      "An arc of a circle",
+      "A spiral",
+      "A parabola"
+    ],
+    "answer": 3,
+    "why": "A constant force at right angles to the initial velocity gives a projectile-like path. A circular arc needs a magnetic field."
+  },
+  {
+    "id": "LS-D3-07",
+    "topic": "D.3",
+    "level": "SL",
+    "type": "choice",
+    "q": "A positive ion moves east through a magnetic field that points vertically downwards. Which way is the magnetic force on it?",
+    "options": [
+      "North",
+      "South",
+      "Up",
+      "Down"
+    ],
+    "answer": 0,
+    "why": "Fleming's left-hand rule: first finger down (field), second finger east (current), thumb north. The force is never along the field, so it can't be down."
+  },
+  {
+    "id": "LS-D4-01",
+    "topic": "D.4",
+    "level": "HL",
+    "type": "number",
+    "q": "A $0.020\\ \\text{m}^2$ loop is in a uniform 0.50 T field that makes 60° with the normal to the loop. What is the flux through it, in mWb?",
+    "numeric": {
+      "answer": 5,
+      "unit": "mWb"
+    },
+    "why": "$\\Phi = BA\\cos\\theta = 0.50 \\times 0.020 \\times 0.5 = 5.0 \\times 10^{-3}$ Wb $= 5.0$ mWb. The angle is from the normal, so use cos."
+  },
+  {
+    "id": "LS-D4-02",
+    "topic": "D.4",
+    "level": "HL",
+    "type": "number",
+    "q": "The flux through each turn of a 200-turn coil changes by 0.030 Wb in 0.10 s. What is the size of the average induced emf?",
+    "numeric": {
+      "answer": 60,
+      "unit": "V"
+    },
+    "why": "$\\varepsilon = N\\frac{\\Delta\\Phi}{\\Delta t} = 200 \\times \\frac{0.030}{0.10} = 60$ V. Don't forget the number of turns."
+  },
+  {
+    "id": "LS-D4-03",
+    "topic": "D.4",
+    "level": "HL",
+    "type": "number",
+    "q": "A 0.25 m rod moves at $4.0\\ \\text{m s}^{-1}$ at right angles to a uniform 0.30 T field. What emf is induced across it?",
+    "numeric": {
+      "answer": 0.3,
+      "unit": "V"
+    },
+    "why": "$\\varepsilon = BvL = 0.30 \\times 4.0 \\times 0.25 = 0.30$ V."
+  },
+  {
+    "id": "LS-D4-04",
+    "topic": "D.4",
+    "level": "HL",
+    "type": "choice",
+    "q": "The north pole of a magnet is pushed into a coil that is part of a closed circuit. The end of the coil nearest the magnet becomes…",
+    "options": [
+      "a north pole, which repels the magnet",
+      "a south pole, which attracts the magnet",
+      "no pole until the magnet stops moving",
+      "a pole that depends on the number of turns"
+    ],
+    "answer": 0,
+    "why": "Lenz's law: the induced current opposes the change causing it, so the coil pushes back on the approaching north pole. Attracting it would create energy from nothing."
+  },
+  {
+    "id": "LS-D4-05",
+    "topic": "D.4",
+    "level": "HL",
+    "type": "choice",
+    "q": "A generator coil's rotation frequency is doubled. What happens to the peak emf and to the frequency of the emf?",
+    "options": [
+      "Peak emf doubles, frequency unchanged",
+      "Peak emf unchanged, frequency doubles",
+      "Both double",
+      "Peak emf quadruples, frequency doubles"
+    ],
+    "answer": 2,
+    "why": "The flux changes twice as fast, so the peak emf doubles, and each cycle takes half the time, so the frequency of the emf doubles too."
+  },
+  {
+    "id": "LS-D4-06",
+    "topic": "D.4",
+    "level": "HL",
+    "type": "choice",
+    "q": "Lenz's law is a consequence of the conservation of…",
+    "options": [
+      "charge",
+      "momentum",
+      "magnetic flux",
+      "energy"
+    ],
+    "answer": 3,
+    "why": "If the induced current helped the change, it would make energy from nothing. Because it opposes the change, work must be done to produce the electrical energy."
+  },
+  {
+    "id": "LS-D4-07",
+    "topic": "D.4",
+    "level": "HL",
+    "type": "choice",
+    "q": "A rectangular coil moves at constant speed through a uniform field region wider than the coil. While the coil is completely inside the field, the induced emf is…",
+    "options": [
+      "the largest it gets",
+      "zero",
+      "constant and non-zero",
+      "increasing steadily"
+    ],
+    "answer": 1,
+    "why": "Fully inside a uniform field, the flux through the coil is not changing, so no emf is induced. An emf appears only while the coil is entering or leaving."
+  }
+]

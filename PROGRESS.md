@@ -261,3 +261,8 @@ Ask the user before starting any item marked "decide".
 ### Not planned (agreed in the audit)
 - No framework, build step, backend, accounts or student analytics without a concrete teaching need and school approval.
 - No student-facing AI chatbot. No custom-built physics simulations where PhET exists.
+
+## Lightspeed (November 2026, waiting for the teacher's check)
+- `lightspeed.html`: 10 quick-fire questions per round, 15 seconds each, speed bonus, streak multiplier, medals, personal bests; card on `games.html`.
+- 148 questions in `lightspeed/a.json` … `e.json` (about 6 per subtopic), written in our own words and independently reviewed (no physics errors found; 9 clarity fixes). Still to do: the teacher's check, and decisions on LS-A5-05 (a faster-than-light distractor), LS-E4-06 (SL or HL), LS-D1-06 (say "include the sign"?), LS-E3-03 (Fe-56 vs Ni-62), LS-A5-06, LS-D2-02 (ask in kV m⁻¹?) and two weak distractors (LS-E3-06, LS-B1-06).
+- Leaderboard: the Google Sheet and Apps Script still need setting up (`docs/LIGHTSPEED_SETUP.md`); until `LEADERBOARD_URL` in `js/lightspeed.js` is filled in, best scores are kept in each browser only.

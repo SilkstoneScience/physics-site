@@ -1014,6 +1014,8 @@ if (checkNumeric({ answer: 10, mistakes: [{ value: 20, feedback: 'x' }] }, '20')
 // Lesson slide generator: slide files (teachers/slides/*.json; the checks are in tools/check-slides.mjs)
 (await import('./check-slides.mjs')).checkSlides({ err, warn, TOPICS });
 (await import('./check-sections.mjs')).checkSections({ err, warn });
+// Lightspeed quick-fire questions (lightspeed/*.json; the checks are in tools/check-lightspeed.mjs)
+(await import('./check-lightspeed.mjs')).checkLightspeed({ err, warn, TOPICS });
 // The register of every "New for 2028" note (docs/2028_REGISTER.md), for the clean-up after the May 2027 exams
 (await import('./list-2028.mjs')).check2028Register({ warn });
 
